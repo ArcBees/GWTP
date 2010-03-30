@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.philbeaudoin.gwtp.testing.InjectingMockitoJUnitRunner;
@@ -16,10 +15,10 @@ import com.philbeaudoin.gwtp.testing.InjectingMockitoJUnitRunner;
 public class HandlerContainerImplTest {
 
   // A subclass of HandlerContainerImpl that does not use autobinding
-  // and checks ist contract-method invocations
+  // and counts its inherited method invocations
   static class NonAutoboundHandlerContainer extends HandlerContainerImpl {
-    public boolean onBindMethodCalled = false;
-    public boolean onUnbindMethodCalled = false;
+    public int onBindMethodCalled = 0;
+    public int onUnbindMethodCalled = 0;
 
     @Inject 
     NonAutoboundHandlerContainer() { 
@@ -29,25 +28,24 @@ public class HandlerContainerImplTest {
     @Override
     protected void onBind() { 
       super.onBind(); 
-      onBindMethodCalled = true; 
+      onBindMethodCalled++; 
     }
 
     @Override
     protected void onUnbind() { 
       super.onUnbind(); 
-      onUnbindMethodCalled = true; 
+      onUnbindMethodCalled++; 
     }  
   }
 
   // Providers for injection
-  @Inject HandlerContainer defaultHandlerContainer;
-  @Inject Provider<HandlerContainer> defaultHandlerContainerProvider;
+  @Inject Provider<HandlerContainerImpl> defaultHandlerContainerProvider;
   @Inject Provider<NonAutoboundHandlerContainer> nonAutoboundHandlerContainerProvider;
 
   @Test
   public void shouldBindDefaultHandlerContainerOnInjection() {
     // Set-up
-    HandlerContainer handlerContainer = defaultHandlerContainer; //defaultHandlerContainerProvider.get();
+    HandlerContainer handlerContainer = defaultHandlerContainerProvider.get();
 
     // Given
     // HandlerContainerImpl is injected
@@ -81,7 +79,7 @@ public class HandlerContainerImplTest {
     handlerContainer.bind();
 
     // When, Then
-    assertTrue(handlerContainer.onBindMethodCalled);
+    assertEquals(1, handlerContainer.onBindMethodCalled);
   }
 
   @Test
@@ -90,32 +88,53 @@ public class HandlerContainerImplTest {
     NonAutoboundHandlerContainer handlerContainer = nonAutoboundHandlerContainerProvider.get();
 
     // Given
+    handlerContainer.bind();
     handlerContainer.unbind();
 
     // When, Then
-    assertTrue(handlerContainer.onUnbindMethodCalled);
+    assertEquals(1, handlerContainer.onUnbindMethodCalled);
+  }
+
+  @Test
+  public void callingUnbindWhenUnboundShouldNotInvokeOnUnbind() {
+    // Setup
+    NonAutoboundHandlerContainer handlerContainer = nonAutoboundHandlerContainerProvider.get();
+
+    // Given
+    handlerContainer.bind();
+    handlerContainer.unbind();
+    handlerContainer.unbind();
+    handlerContainer.bind();
+    handlerContainer.unbind();
+    handlerContainer.unbind();
+    
+    // When, Then
+    assertEquals(2, handlerContainer.onUnbindMethodCalled);
   }
   
   @Test
   public void unbindingRemoveHandlers() {
     // Setup
-    HandlerContainerImpl handlerContainer = (HandlerContainerImpl) defaultHandlerContainerProvider.get();
-    HandlerRegistration mockHandlerRegistration = mock(HandlerRegistration.class);
+    HandlerContainerImpl handlerContainer = defaultHandlerContainerProvider.get();
+    HandlerRegistration mockHandlerRegistration1 = mock(HandlerRegistration.class);
+    HandlerRegistration mockHandlerRegistration2 = mock(HandlerRegistration.class);
 
     // Given
-    handlerContainer.registerHandler(mockHandlerRegistration);
+    handlerContainer.registerHandler(mockHandlerRegistration1);
+    handlerContainer.registerHandler(mockHandlerRegistration2);
 
     // When
     handlerContainer.unbind();
     
     // Then
-    verify(mockHandlerRegistration).removeHandler();
+    verify(mockHandlerRegistration1).removeHandler();
+    verify(mockHandlerRegistration2).removeHandler();
   }
 
   @Test
   public void unbindingMultipleTimesRemoveHandlersOnlyOnce() {
     // Setup
-    HandlerContainerImpl handlerContainer = (HandlerContainerImpl) defaultHandlerContainerProvider.get();
+    HandlerContainerImpl handlerContainer = defaultHandlerContainerProvider.get();
     HandlerRegistration mockHandlerRegistration = mock(HandlerRegistration.class);
 
     // Given
@@ -131,10 +150,4 @@ public class HandlerContainerImplTest {
     verify(mockHandlerRegistration).removeHandler();
   }
 
-  public static class MyModule extends AbstractModule {
-    protected void configure() {
-      bind(HandlerContainer.class).to(HandlerContainerImpl.class);
-      bind(NonAutoboundHandlerContainer.class);
-    }
-  }
 }
