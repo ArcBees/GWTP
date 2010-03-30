@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
-public abstract class HandlerContainerImpl implements HandlerContainer {
+public class HandlerContainerImpl implements HandlerContainer {
 
   private final List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
   private final boolean autoBind;
@@ -17,6 +17,7 @@ public abstract class HandlerContainerImpl implements HandlerContainer {
    * 
    * @see #HandlerContainer( boolean autoBind )
    */
+  @Inject
   public HandlerContainerImpl() {
     this(true);
   }
@@ -53,17 +54,6 @@ public abstract class HandlerContainerImpl implements HandlerContainer {
     }
   }
 
-  /**
-   * Any {@link HandlerRegistration}s added will be removed when
-   * {@link #unbind()} is called. This provides a handy way to track event
-   * handler registrations when binding and unbinding.
-   *
-   * @param handlerRegistration The registration.
-   */
-  protected void registerHandler(HandlerRegistration handlerRegistration) {
-    handlerRegistrations.add( handlerRegistration );
-  }
-
   @Override
   public final void unbind() {
     if ( bound ) {
@@ -76,6 +66,17 @@ public abstract class HandlerContainerImpl implements HandlerContainer {
 
       onUnbind();
     }  
+  }
+
+  /**
+   * Any {@link HandlerRegistration}s added will be removed when
+   * {@link #unbind()} is called. This provides a handy way to track event
+   * handler registrations when binding and unbinding.
+   *
+   * @param handlerRegistration The registration.
+   */
+  protected void registerHandler(HandlerRegistration handlerRegistration) {
+    handlerRegistrations.add( handlerRegistration );
   }
 
   /**
