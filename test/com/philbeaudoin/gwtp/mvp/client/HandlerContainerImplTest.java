@@ -9,9 +9,14 @@ import org.junit.runner.RunWith;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.philbeaudoin.gwtp.testing.InjectingMockitoJUnitRunner;
+import com.philbeaudoin.gwtp.testing.GuiceMockitoJUnitRunner;
 
-@RunWith(InjectingMockitoJUnitRunner.class)
+/**
+ * Unit tests for {@link HandlerContainerImpl}.
+ * 
+ * @author Philippe Beaudoin
+ */
+@RunWith(GuiceMockitoJUnitRunner.class)
 public class HandlerContainerImplTest {
 
   // A subclass of HandlerContainerImpl that does not use autobinding
@@ -38,7 +43,7 @@ public class HandlerContainerImplTest {
     }  
   }
 
-  // Providers for injection
+  // Providers to use Guice injection
   @Inject Provider<HandlerContainerImpl> defaultHandlerContainerProvider;
   @Inject Provider<NonAutoboundHandlerContainer> nonAutoboundHandlerContainerProvider;
 
