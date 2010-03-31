@@ -5,9 +5,18 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * and {@link ProxyPlaceAbstract}s. It sets up event listener relationships to synchronize them.
  *
  * @author David Peterson
+ * @author Philippe Beaudoin
  */
 public interface PlaceManager {
 
+  /**
+   * Programatically reveals the specified place. 
+   * This will result in a {@link PlaceRequestEvent} being fired.
+   *
+   * @param request The {@link PlaceRequest} corresponding to the place to reveal. 
+   */
+  void revealPlace(PlaceRequest request);
+  
   /**
    * Reveals the place corresponding to the current value of the history token
    * in the URL bar. This will result in a {@link PlaceRequestEvent} being fired.
@@ -48,7 +57,7 @@ public interface PlaceManager {
   public void setOnLeaveConfirmation( String question );
   
   /**
-   * <b>Important:</b> Do not call directly from outside the presenter package.
+   * <b>Important:</b> Do not call directly from outside the gwtp.mvp package.
    * 
    * If a confirmation question is set (see {@link #setOnLeaveConfirmation()}), this asks
    * the user if he wants to leave the current page.
@@ -76,5 +85,6 @@ public interface PlaceManager {
    * Navigate back to last visited history token.
    */
   public void navigateBack();
+
   
 }

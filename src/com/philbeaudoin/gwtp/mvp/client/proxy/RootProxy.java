@@ -55,6 +55,8 @@ public class RootProxy extends HandlerContainerImpl implements ResetPresentersHa
         RootPanel.get().clear();
         RootPanel.get().add(activePresenter.getWidget());
         activePresenter.onReveal();
+        // And to reset everything
+        ResetPresentersEvent.fire( eventBus );
       }
     } ) );    
 
@@ -71,6 +73,8 @@ public class RootProxy extends HandlerContainerImpl implements ResetPresentersHa
         RootPanel.get().add( RootLayoutPanel.get() );
         RootLayoutPanel.get().add(activePresenter.getWidget());
         activePresenter.onReveal();
+        // And to reset everything
+        ResetPresentersEvent.fire( eventBus );
       }
     } ) );  
 

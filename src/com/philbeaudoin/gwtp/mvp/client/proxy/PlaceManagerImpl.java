@@ -79,6 +79,13 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     updateHistory( placeRequest );
   }
 
+  @Override
+  public final void revealPlace( PlaceRequest request ) {
+    if( !doRevealPlace(request) )
+        revealErrorPlace( request.toString() );
+  }
+
+
   /**
    * Handles change events from {@link History}.
    */
@@ -86,11 +93,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   public final void onValueChange( ValueChangeEvent<String> event ) {
     String historyToken = event.getValue();
     try {
-      PlaceRequestEvent requestEvent = 
-        new PlaceRequestEvent( tokenFormatter.toPlaceRequest( historyToken ) );
-      eventBus.fireEvent(requestEvent);
-      if( !requestEvent.isHandled() ) {
-        
+      if( !doRevealPlace( tokenFormatter.toPlaceRequest( historyToken ) ) ) {
         if ( historyToken.trim() == "" )
           revealDefaultPlace();
         else
@@ -101,6 +104,18 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
   }
 
+  /**
+   * Fires the {@link PlaceRequestEvent} for the given {@link PlaceRequest}. 
+   * 
+   * @param request The {@link PlaceRequest} to fire.
+   * @return {@code true} if the request has been handled, {@code false} otherwise.
+   */
+  private final boolean doRevealPlace( PlaceRequest request ) {
+    PlaceRequestEvent requestEvent = new PlaceRequestEvent( request );
+    eventBus.fireEvent(requestEvent);
+    return requestEvent.isHandled();
+  }
+  
   @Override
   public final void setOnLeaveConfirmation( String question ) {
     if( question == null && onLeaveQuestion  == null ) return;
