@@ -37,20 +37,48 @@ public class PresenterWidgetImplTest {
   interface ViewB extends View {}
   interface ViewC extends View {}
   
-  // Two simple subclasses of PresenterWidgetImpl
-  static class PresenterWidgetA extends PresenterWidgetImpl<ViewA> {
+  // Simple subclasses of PresenterWidgetImpl
+  static abstract class PresenterWidgetSpy<V extends View> extends PresenterWidgetImpl<V> {
+    public int onRevealMethodCalled = 0;
+    public int onHideMethodCalled = 0;
+    public int onResetMethodCalled = 0;
+
+    PresenterWidgetSpy(EventBus eventBus, V view) {
+      super(eventBus, view);
+    }
+
+    @Override
+    public void onReveal() { 
+      super.onReveal(); 
+      onRevealMethodCalled++; 
+    }
+
+    @Override
+    public void onHide() { 
+      super.onHide(); 
+      onHideMethodCalled++; 
+    }  
+    
+    @Override
+    public void onReset() { 
+      super.onReset(); 
+      onResetMethodCalled++; 
+    }  
+  }
+  
+  static class PresenterWidgetA extends PresenterWidgetSpy<ViewA> {
     @Inject
     public PresenterWidgetA(EventBus eventBus, ViewA view) {
       super(eventBus, view);
     }
   }
-  static class PresenterWidgetB extends PresenterWidgetImpl<ViewB> {
+  static class PresenterWidgetB extends PresenterWidgetSpy<ViewB> {
     @Inject
     public PresenterWidgetB(EventBus eventBus, ViewB view) {
       super(eventBus, view);
     }
   }
-  static class PresenterWidgetC extends PresenterWidgetImpl<ViewC> {
+  static class PresenterWidgetC extends PresenterWidgetSpy<ViewC> {
     @Inject
     public PresenterWidgetC(EventBus eventBus, ViewC view) {
       super(eventBus, view);
@@ -69,9 +97,11 @@ public class PresenterWidgetImplTest {
   @Test
   public void presenterWidgetIsInitiallyNotVisible() {
     // Set-up
-    PresenterWidget presenterWidget = presenterWidgetAProvider.get();
+    PresenterWidgetA presenterWidget = presenterWidgetAProvider.get();
     
     // Given, When, Then
+    assertEquals( 0, presenterWidget.onRevealMethodCalled );
+    assertEquals( 0, presenterWidget.onHideMethodCalled );
     assertFalse( presenterWidget.isVisible() );    
   }
 
@@ -88,13 +118,13 @@ public class PresenterWidgetImplTest {
   }
     
   @Test
-  public void testSetContentInEmptySlotWhenNotVisible() {
+  public void testSetContentInEmptySlotOnInitiallyInvisiblePresenter() {
     // Set-up
     PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
     Object slotB = new Object();
     Object slotC = new Object();
-    PresenterWidget contentB = presenterWidgetBProvider.get();
-    PresenterWidget contentC = presenterWidgetCProvider.get();
+    PresenterWidgetB contentB = presenterWidgetBProvider.get();
+    PresenterWidgetC contentC = presenterWidgetCProvider.get();
     
     // Given
     // slot is empty in presenterWidget, and it is NOT visible
@@ -108,8 +138,178 @@ public class PresenterWidgetImplTest {
     verify(viewAProvider.get()).setContent( slotB, null );
     verify(viewAProvider.get()).setContent( slotC, null );
     
+    assertEquals( 0, contentB.onRevealMethodCalled );
+    assertEquals( 0, contentC.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onReveal();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentC.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onHide();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentC.onRevealMethodCalled );
+    assertEquals( 1, contentB.onHideMethodCalled );
+    assertEquals( 1, contentC.onHideMethodCalled );
+  }
+  
+  @Test
+  public void testSetContentInEmptySlotOnInitiallyVisiblePresenter() {
+    // Set-up
+    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    Object slotB = new Object();
+    Object slotC = new Object();
+    PresenterWidgetB contentB = presenterWidgetBProvider.get();
+    PresenterWidgetC contentC = presenterWidgetCProvider.get();
+    
+    // Given
+    presenterWidgetA.onReveal();
+    
+    // When
+    presenterWidgetA.setContent(slotB, contentB);
+    presenterWidgetA.setContent(slotC, contentC);
+
+    // Then
+    verify(viewAProvider.get()).setContent( slotB, null );
+    verify(viewAProvider.get()).setContent( slotC, null );
+    
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentC.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onHide();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentC.onRevealMethodCalled );
+    assertEquals( 1, contentB.onHideMethodCalled );
+    assertEquals( 1, contentC.onHideMethodCalled );
+  }
+  
+  @Test
+  public void testSetContentHierarchyInEmptySlotOnInitiallyInvisiblePresenter1() {
+    // Set-up
+    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    Object slotB = new Object();
+    Object slotC = new Object();
+    PresenterWidgetB contentB = presenterWidgetBProvider.get();
+    PresenterWidgetC contentCinB = presenterWidgetCProvider.get();
+    
+    // Given
+    // slot is empty in presenterWidgets, and it is NOT visible
+    assertFalse( presenterWidgetA.isVisible() );
+    assertFalse( contentB.isVisible() );
+    
+    // When
+    presenterWidgetA.setContent(slotB, contentB);
+    contentB.setContent(slotC, contentCinB);
+
+    // Then
+    verify(viewAProvider.get()).setContent( slotB, null );
+    verify(viewBProvider.get()).setContent( slotC, null );
+    
+    assertEquals( 0, contentB.onRevealMethodCalled );
+    assertEquals( 0, contentCinB.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onReveal();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentCinB.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onHide();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentCinB.onRevealMethodCalled );
+    assertEquals( 1, contentB.onHideMethodCalled );
+    assertEquals( 1, contentCinB.onHideMethodCalled );
   }
 
-  // TODO Many more tests
+  @Test
+  public void testSetContentHierarchyInEmptySlotOnInitiallyInvisiblePresenter2() {
+    // Set-up
+    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    Object slotB = new Object();
+    Object slotC = new Object();
+    PresenterWidgetB contentB = presenterWidgetBProvider.get();
+    PresenterWidgetC contentCinB = presenterWidgetCProvider.get();
+    
+    // Given
+    // slot is empty in presenterWidgets, and it is NOT visible
+    assertFalse( presenterWidgetA.isVisible() );
+    assertFalse( contentB.isVisible() );
+    
+    // When
+    contentB.setContent(slotC, contentCinB);
+
+    // Then
+    verify(viewBProvider.get()).setContent( slotC, null );    
+    assertEquals( 0, contentCinB.onRevealMethodCalled );
+
+    // and then When
+    presenterWidgetA.setContent(slotB, contentB);
+
+    // Then
+    verify(viewAProvider.get()).setContent( slotB, null );
+    assertEquals( 0, contentB.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onReveal();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentCinB.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onHide();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentCinB.onRevealMethodCalled );
+    assertEquals( 1, contentB.onHideMethodCalled );
+    assertEquals( 1, contentCinB.onHideMethodCalled );
+  }
+  
+  @Test
+  public void testSetContentHierarchyInEmptySlotOnInitiallyVisiblePresenter() {
+    // Set-up
+    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    Object slotB = new Object();
+    Object slotC = new Object();
+    PresenterWidgetB contentB = presenterWidgetBProvider.get();
+    PresenterWidgetC contentCinB = presenterWidgetCProvider.get();
+    
+    // Given
+    presenterWidgetA.onReveal();
+    
+    // When
+    presenterWidgetA.setContent(slotB, contentB);
+    contentB.setContent(slotC, contentCinB);
+
+    // Then
+    verify(viewAProvider.get()).setContent( slotB, null );
+    verify(viewBProvider.get()).setContent( slotC, null );
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentCinB.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.onHide();
+    
+    // Then
+    assertEquals( 1, contentB.onRevealMethodCalled );
+    assertEquals( 1, contentCinB.onRevealMethodCalled );
+    assertEquals( 1, contentB.onHideMethodCalled );
+    assertEquals( 1, contentCinB.onHideMethodCalled );
+  }
 
 }
