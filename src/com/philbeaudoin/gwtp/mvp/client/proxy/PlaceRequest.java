@@ -72,6 +72,11 @@ public class PlaceRequest {
     return nameToken;
   }
 
+  /**
+   * Retrieves all the parameters available with the request.
+   * 
+   * @return A {@link Set} containing all the parameter names.
+   */
   public Set<String> getParameterNames() {
     if ( params != null ) {
       return params.keySet();
@@ -80,6 +85,13 @@ public class PlaceRequest {
     }
   }
 
+  /**
+   * Extracts a given parameter from the {@link PlaceRequest}.
+   * 
+   * @param key The name of the parameter.
+   * @param defaultValue The value returned if the parameter is not found.
+   * @return The value of the parameter if found, the {@code defaultValue} otherwise.
+   */
   public String getParameter( String key, String defaultValue ) {
     String value = null;
 
