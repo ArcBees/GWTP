@@ -2,8 +2,8 @@ package com.philbeaudoin.gwtp.mvp.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplit;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Proxy;
-import com.philbeaudoin.gwtp.mvp.rebind.ProxyCodeSplit;
 
 /**
  * Integration test for {@link PresenterImpl} and 

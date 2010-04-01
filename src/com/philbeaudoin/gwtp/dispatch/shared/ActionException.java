@@ -1,9 +1,7 @@
 package com.philbeaudoin.gwtp.dispatch.shared;
 
-import com.philbeaudoin.gwtp.dispatch.server.Dispatch;
-
 /**
- * These are thrown by {@link Dispatch#execute(Action)} if there is a
+ * These are thrown by {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch#execute(Action)} if there is a
  * problem executing a particular {@link Action}.
  * 
  * @author David Peterson

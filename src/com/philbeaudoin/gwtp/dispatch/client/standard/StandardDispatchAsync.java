@@ -5,13 +5,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.philbeaudoin.gwtp.dispatch.client.AbstractDispatchAsync;
 import com.philbeaudoin.gwtp.dispatch.client.DispatchAsync;
 import com.philbeaudoin.gwtp.dispatch.client.ExceptionHandler;
-import com.philbeaudoin.gwtp.dispatch.server.Dispatch;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
  * This class is the default implementation of {@link DispatchAsync}, which is
- * essentially the client-side access to the {@link Dispatch} class on the
+ * essentially the client-side access to the {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch} class on the
  * server-side.
  *
  * @author David Peterson
