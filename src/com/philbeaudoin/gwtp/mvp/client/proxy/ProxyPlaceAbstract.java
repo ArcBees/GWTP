@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 import com.philbeaudoin.gwtp.mvp.client.Presenter;
+import com.philbeaudoin.gwtp.mvp.client.PresenterImpl;
 
 /**
  * A useful mixing class to define a {@link Proxy} that is also
@@ -84,13 +85,13 @@ implements Proxy<P>, Place {
   @Override
   public void onPresenterChanged( Presenter presenter ) {
     proxy.onPresenterChanged( presenter );
-    placeManager.onPlaceChanged( presenter.prepareRequest( new PlaceRequest(getNameToken())) );  
+    placeManager.onPlaceChanged( ((PresenterImpl<?,?>)presenter).prepareRequest( new PlaceRequest(getNameToken())) );  
   }
 
   @Override
   public void onPresenterRevealed( Presenter presenter ) {
     proxy.onPresenterRevealed( presenter );    
-    placeManager.onPlaceRevealed( presenter.prepareRequest( new PlaceRequest(getNameToken())) );  
+    placeManager.onPlaceRevealed( ((PresenterImpl<?,?>)presenter).prepareRequest( new PlaceRequest(getNameToken())) );  
   }
 
 
@@ -151,10 +152,11 @@ implements Proxy<P>, Place {
 
       @Override
       public void onSuccess(P presenter) {
+        PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
         if( request != null )
-          presenter.prepareFromRequest( request );
+          presenterImpl.prepareFromRequest( request );
         if( !presenter.isVisible() )
-          presenter.forceReveal();  // This will trigger a reset in due time
+          presenterImpl.forceReveal();  // This will trigger a reset in due time
         else
           ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves
       }

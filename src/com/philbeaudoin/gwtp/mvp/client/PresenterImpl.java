@@ -1,5 +1,6 @@
 package com.philbeaudoin.gwtp.mvp.client;
 
+import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceManager;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceRequest;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Proxy;
 import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentEvent;
@@ -36,7 +37,18 @@ extends PresenterWidgetImpl<V> implements Presenter {
     getProxy().reveal();
   }
   
-  @Override
+
+  /**
+   * <b>Important:</b> If you want to reveal a presenter from within
+   * your application, you should call {@link #reveal()}
+   * instead. This way you can make sure you don't inadvertently reveal a 
+   * non-leaf Presenter. Also, you will benefit from the change confirmation
+   * mechanism. (See {@link PlaceManager#setOnLeaveConfirmation(String)}).
+   * <p />
+   * Forces the presenter to reveal itself on screen.
+   * 
+   * @see #reveal()
+   */  
   public final void forceReveal() {
     if( isVisible() )
       return;
@@ -44,7 +56,7 @@ extends PresenterWidgetImpl<V> implements Presenter {
   }
   
   @Override
-  public void onReset() {
+  protected void onReset() {
     super.onReset();
     getProxy().onPresenterRevealed( this );
   }
@@ -65,13 +77,42 @@ extends PresenterWidgetImpl<V> implements Presenter {
     getProxy().onPresenterChanged( this );
   }
   
-  @Override
-  public void prepareFromRequest(PlaceRequest request) {
+
+  /**
+   * This method is called when a {@link Presenter} should prepare itself
+   * based on a {@link PlaceRequest}. The presenter should extract
+   * any parameters it needs from the request. A presenter should override
+   * this method if it handles custom parameters, but it should call
+   * the parent's {@code prepareFromRequest} method.
+   *
+   * @param request   The request.
+   */
+  public void prepareFromRequest( PlaceRequest request ) {
     // By default, no parameter to extract from request.
   }
 
-  @Override
-  public PlaceRequest prepareRequest(PlaceRequest request) {
+  
+  /**
+   * This method is called when creating a {@link PlaceRequest} for this
+   * {@link Presenter}. The presenter should add all the required parameters to the 
+   * request.
+   * <p/>
+   * <p/>
+   * If nothing is to be done, simply return the {@code request}
+   * unchanged. Otherwise, call {@link PlaceRequest#with(String, String)} to
+   * add parameters. Eg:
+   * <p/>
+   * <pre>
+   * return request.with( &quot;id&quot;, getId() );
+   * </pre>
+   * <p/>
+   * A presenter should override this method if it handles custom parameters, but
+   * it should call the parent's {@code prepareRequest} method.
+   * 
+   * @param request   The current request.
+   * @return The prepared place request.
+   */
+  public PlaceRequest prepareRequest( PlaceRequest request ) {
     // By default, no parameter to add to request
     return request;
   }
