@@ -21,8 +21,8 @@ extends HandlerContainerImpl implements PresenterWidget {
    * in every slot managed by this PresenterWidget. A slot is identified by an opaque
    * object. A single slot can have many children.
    */
-  private final Map< Object, List<PresenterWidget> > activeChildren =
-    new HashMap< Object, List<PresenterWidget> >();
+  private final Map< Object, List<PresenterWidgetImpl<?>> > activeChildren =
+    new HashMap< Object, List<PresenterWidgetImpl<?>> >();
 
   protected boolean visible = false;
 
@@ -50,79 +50,106 @@ extends HandlerContainerImpl implements PresenterWidget {
     return visible;
   }
 
-  @Override
+  /**
+   * This method sets some content in a specific slot of the {@link Presenter}.
+   * 
+   * @param slot An opaque object identifying
+   *             which slot this content is being set into. The attached view should know
+   *             what to do with this slot.
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
+   */
   public void setContent( Object slot, PresenterWidget content ) {
     if( content == null ) {
       // Assumes the user wants to clear the slot content.
       clearContent( slot );
       return;
     }
-    List<PresenterWidget> slotChildren = activeChildren.get( slot );
+    
+    PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
+
+    List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
 
     if( slotChildren != null ) {
-      if( slotChildren.size() == 1 && slotChildren.get(0) == content )
+      if( slotChildren.size() == 1 && slotChildren.get(0) == contentImpl )
         // The slot contains the right content, nothing to do
         return;
 
       if( isVisible() ) {
         // We are visible, make sure the content that we're removing
         // is being notified as hidden
-        for( PresenterWidget activeChild : slotChildren )
-          activeChild.onHide();
+        for( PresenterWidgetImpl<?> activeChild : slotChildren )
+          activeChild.notifyHide();
       }
       slotChildren.clear();
-      slotChildren.add( content );
+      slotChildren.add( contentImpl );
     }
     else {
-      slotChildren = new ArrayList<PresenterWidget>(1);
-      slotChildren.add( content );
+      slotChildren = new ArrayList<PresenterWidgetImpl<?>>(1);
+      slotChildren.add( contentImpl );
       activeChildren.put( slot, slotChildren );
     }
 
     // Set the content in the view
-    getView().setContent( slot, content.getWidget() );
+    getView().setContent( slot, contentImpl.getWidget() );
     if( isVisible() ) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      content.onReveal();
+      contentImpl.notifyReveal();
       // And to reset everything
       ResetPresentersEvent.fire( eventBus );
     }
   }
 
-  @Override
+
+  /**
+   * This method adds some content in a specific slot of the {@link Presenter}.
+   * 
+   * @param slot An opaque object identifying
+   *             which slot this content is being added into. The attached view should know
+   *             what to do with this slot.
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will not do anything.
+   */
   public void addContent( Object slot, PresenterWidget content ) {
     if( content == null ) {
       return;
     }
-    List<PresenterWidget> slotChildren = activeChildren.get( slot );
+    
+    PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
+
+    List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
     if( slotChildren != null ) {
-      slotChildren.add( content );
+      slotChildren.add( contentImpl );
     }
     else {
-      slotChildren = new ArrayList<PresenterWidget>(1);
-      slotChildren.add( content );
+      slotChildren = new ArrayList<PresenterWidgetImpl<?>>(1);
+      slotChildren.add( contentImpl );
       activeChildren.put( slot, slotChildren );
     }
-    getView().addContent( slot, content.getWidget() );
+    getView().addContent( slot, contentImpl.getWidget() );
     if( isVisible() ) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      content.onReveal();
+      contentImpl.notifyReveal();
       // And to reset everything
       ResetPresentersEvent.fire( eventBus );
     }
   }
 
-  @Override
+  /**
+   * This method clears the content in a specific slot.
+   * 
+   * @param slot An opaque object of type identifying
+   *             which slot to clear. The attached view should know
+   *             what to do with this slot.
+   */
   public void clearContent( Object slot ) {
     if( isVisible() ) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      List<PresenterWidget> slotChildren = activeChildren.get( slot );
+      List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
       if( slotChildren != null ) {
-        for( PresenterWidget activeChild : slotChildren )
-          activeChild.onHide();
+        for( PresenterWidgetImpl<?> activeChild : slotChildren )
+          activeChild.notifyHide();
         slotChildren.clear();
       }
     }
@@ -133,34 +160,74 @@ extends HandlerContainerImpl implements PresenterWidget {
   public Widget getWidget() {
     return getView().asWidget();
   }
-
-  @Override
-  public void onReveal() {
-    assert !isVisible() : "onReveal() called on a visible presenter! Did somebody forget to call super.onReveal()?";
+  
+  /**
+   * Called right after the widget has been made revealed on screen.
+   * You should not call this. Fire a 
+   * {@link ResetPresentersEvent} instead.
+   */
+  final void notifyReveal() {
+    assert !isVisible() : "notifyReveal() called on a visible presenter!";
+    onReveal();
     visible = true;
-    for (List<PresenterWidget> slotChildren : activeChildren.values())
-      for( PresenterWidget activeChild : slotChildren )
-        activeChild.onReveal();
+    for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
+      for( PresenterWidgetImpl<?> activeChild : slotChildren )
+        activeChild.notifyReveal();
   }
 
-  @Override
-  public void onHide() {
-    assert isVisible() : "onHide() called on a hidden presenter! Did somebody forget to call super.onHide()?";
-    for (List<PresenterWidget> slotChildren : activeChildren.values())
-      for( PresenterWidget activeChild : slotChildren )
-        activeChild.onHide();    
+  /**
+   * Called right after the widget has been made revealed on screen.
+   * You should not call this, fire a 
+   * {@link ResetPresentersEvent} instead.
+   */
+  final void notifyHide() {
+    assert isVisible() : "notifyHide() called on a hidden presenter!";
+    for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
+      for( PresenterWidgetImpl<?> activeChild : slotChildren )
+        activeChild.notifyHide();
     visible = false;
+    onHide();
   }  
 
-  @Override
-  public final void reset() {
+  /**
+   * Called whenever the presenters need to be reset. You should not 
+   * call this, fire a {@link ResetPresentersEvent} instead.
+   */
+  final void reset() {
     onReset();
-    for (List<PresenterWidget> slotChildren : activeChildren.values())
-      for( PresenterWidget activeChild : slotChildren )
+    for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
+      for( PresenterWidgetImpl<?> activeChild : slotChildren )
         activeChild.reset();    
   }
 
-  @Override
-  public void onReset() {}
+  /**
+   * <b>Important:</b> Make sure you call your superclass {@link #onReveal()}
+   * if you override.
+   * <p />
+   * This method will be called whenever the presenter is revealed. Override
+   * it to perform any action (such as refreshing content) that needs
+   * to be done when the presenter is revealed.
+   */
+  protected void onReveal() {}
+
+  /**
+   * <b>Important:</b> Make sure you call your superclass {@link #onHide()}
+   * if you override.
+   * <p />
+   * Override this method to perform any clean-up operations. For example,
+   * objects created directly or indirectly during the call to
+   * {@link #onReveal()} should be disposed of in this methods.
+   */
+  protected void onHide() {}
+  
+  /**
+   * <b>Important:</b> Make sure you call your superclass {@link #onReset()}
+   * if you override.
+   * <p />
+   * This method is called whenever a new presenter is requested, even if 
+   * the presenter was already visible. It is called on every visible presenter,
+   * starting from the top-level presenter and going to the leaves.
+   */
+  protected void onReset() {}
 
 }

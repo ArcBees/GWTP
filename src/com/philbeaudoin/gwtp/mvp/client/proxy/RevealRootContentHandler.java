@@ -1,10 +1,11 @@
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
 import com.google.gwt.event.shared.EventHandler;
+import com.philbeaudoin.gwtp.mvp.client.RootPresenter;
 
 /**
  * This is the handler interface for {@link RevealRootContentEvent}. 
- * It is used solely by {@link RootProxy}.
+ * It is used solely by {@link RootPresenter}.
  * 
  * @author Philippe Beaudoin
  */

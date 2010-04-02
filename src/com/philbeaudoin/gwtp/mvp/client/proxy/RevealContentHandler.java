@@ -5,6 +5,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.philbeaudoin.gwtp.mvp.client.Presenter;
+import com.philbeaudoin.gwtp.mvp.client.PresenterImpl;
 
 /**
  * This is the handler class for {@link RevealContentEvent}. It should be used by any
@@ -37,7 +38,7 @@ public class RevealContentHandler<P extends Presenter> implements EventHandler {
       }
       @Override
       public void onSuccess(final P presenter) {
-        // Deferring is needed because the event bus enques and delays handler 
+        // Deferring is needed because the event bus enqueues and delays handler 
         // registration when events are currently being processed. 
         // (see {@link com.google.gwt.event.shared.HandlerManager@addHandler()})         
         // So if a presenter registers a handler in its onBind() method and a 
@@ -46,8 +47,9 @@ public class RevealContentHandler<P extends Presenter> implements EventHandler {
         DeferredCommand.addCommand( new Command(){
           @Override
           public void execute() {
-            presenter.setContent( revealContentEvent.getAssociatedType(), revealContentEvent.getContent() );
-            presenter.forceReveal();
+            PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
+            presenterImpl.setContent( revealContentEvent.getAssociatedType(), revealContentEvent.getContent() );
+            presenterImpl.forceReveal();
           }
         } );
       } 

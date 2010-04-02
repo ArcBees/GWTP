@@ -48,21 +48,21 @@ public class PresenterWidgetImplTest {
     }
 
     @Override
-    public void onReveal() { 
+    protected void onReveal() { 
       super.onReveal(); 
-      onRevealMethodCalled++; 
+      onRevealMethodCalled++;
     }
 
     @Override
-    public void onHide() { 
+    protected void onHide() { 
       super.onHide(); 
-      onHideMethodCalled++; 
+      onHideMethodCalled++;
     }  
     
     @Override
-    public void onReset() { 
+    protected void onReset() { 
       super.onReset(); 
-      onResetMethodCalled++; 
+      onResetMethodCalled++;
     }  
   }
   
@@ -111,7 +111,7 @@ public class PresenterWidgetImplTest {
     PresenterWidget presenterWidget = presenterWidgetAProvider.get();
     
     // Given, When
-    presenterWidget.onReveal();
+    presenterWidget.notifyReveal();
     
     // Then
     assertTrue( presenterWidget.isVisible() );    
@@ -142,14 +142,14 @@ public class PresenterWidgetImplTest {
     assertEquals( 0, contentC.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onReveal();
+    presenterWidgetA.notifyReveal();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
     assertEquals( 1, contentC.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onHide();
+    presenterWidgetA.notifyHide();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
@@ -168,7 +168,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentC = presenterWidgetCProvider.get();
     
     // Given
-    presenterWidgetA.onReveal();
+    presenterWidgetA.notifyReveal();
     
     // When
     presenterWidgetA.setContent(slotB, contentB);
@@ -182,7 +182,7 @@ public class PresenterWidgetImplTest {
     assertEquals( 1, contentC.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onHide();
+    presenterWidgetA.notifyHide();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
@@ -190,6 +190,10 @@ public class PresenterWidgetImplTest {
     assertEquals( 1, contentB.onHideMethodCalled );
     assertEquals( 1, contentC.onHideMethodCalled );
   }
+  
+  // TODO  Make sure the calls happen in the right order
+  //       parent then child for onReveal and onReset
+  //       child then parent for onHide
   
   @Test
   public void testSetContentHierarchyInEmptySlotOnInitiallyInvisiblePresenter1() {
@@ -217,14 +221,14 @@ public class PresenterWidgetImplTest {
     assertEquals( 0, contentCinB.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onReveal();
+    presenterWidgetA.notifyReveal();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
     assertEquals( 1, contentCinB.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onHide();
+    presenterWidgetA.notifyHide();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
@@ -262,14 +266,14 @@ public class PresenterWidgetImplTest {
     assertEquals( 0, contentB.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onReveal();
+    presenterWidgetA.notifyReveal();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
     assertEquals( 1, contentCinB.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onHide();
+    presenterWidgetA.notifyHide();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
@@ -288,7 +292,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentCinB = presenterWidgetCProvider.get();
     
     // Given
-    presenterWidgetA.onReveal();
+    presenterWidgetA.notifyReveal();
     
     // When
     presenterWidgetA.setContent(slotB, contentB);
@@ -303,7 +307,7 @@ public class PresenterWidgetImplTest {
     assertEquals( 1, contentCinB.onRevealMethodCalled );
     
     // and then When
-    presenterWidgetA.onHide();
+    presenterWidgetA.notifyHide();
     
     // Then
     assertEquals( 1, contentB.onRevealMethodCalled );
