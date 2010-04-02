@@ -31,42 +31,42 @@ public class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> i
 
   private final static Object rootSlot = new Object();
   private PresenterWidgetImpl<?> activePresenter = null;
-  
+
   public final static class RootView extends ViewImpl {
-    
-    private Widget contentToSet = null;
-    
+
+    private boolean usingRootLayoutPanel = false;
+
     @Override
     public void setContent(Object slot, Widget content) {
       assert slot == rootSlot : "Unknown slot used in the root proxy.";
-      contentToSet = content;
+
+      if( usingRootLayoutPanel ){
+        // TODO Next 2 lines are a dirty workaround for http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
+        RootPanel.get().clear();
+        RootLayoutPanel.get().clear();
+        RootPanel.get().add( RootLayoutPanel.get() );
+        RootLayoutPanel.get().add(content);
+      }
+      else {
+        // TODO Next 2 lines are a dirty workaround for http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
+        RootLayoutPanel.get().clear();
+        RootPanel.get().clear();
+        RootPanel.get().add(content);
+      } 
     }
-    
-    private void setContentInRootPanel() {
-      assert contentToSet != null : "Trying to set null content in root presenter.";
-      // TODO Next 2 lines are a dirty workaround for http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
-      RootLayoutPanel.get().clear();
-      RootPanel.get().clear();
-      RootPanel.get().add(contentToSet);
-    } 
-    
-    private void setContentInRootLayoutPanel() {
-      assert contentToSet != null : "Trying to set null content in root presenter.";
-      // TODO Next 2 lines are a dirty workaround for http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
-      RootPanel.get().clear();
-      RootLayoutPanel.get().clear();
-      RootPanel.get().add( RootLayoutPanel.get() );
-      RootLayoutPanel.get().add(contentToSet);
-    }       
+
+    private void setUsingRootLayoutPanel( boolean usingRootLayoutPanel ) {
+      this.usingRootLayoutPanel  = usingRootLayoutPanel;
+    }
 
     @Override
     public Widget asWidget() {
       assert false : "Root view has no widget, you should never call asWidget()";
-      return null;
+    return null;
     }
   }
-  
-  
+
+
   /**
    * Creates a proxy class for a presenter that can contain tabs.
    * 
@@ -88,8 +88,8 @@ public class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> i
       @Override
       public void onRevealContent(final RevealRootContentEvent revealContentEvent) {
         activePresenter = (PresenterWidgetImpl<?>)revealContentEvent.getContent();
+        getView().setUsingRootLayoutPanel(false);
         setContent( rootSlot, activePresenter );
-        getView().setContentInRootPanel();
       }
     } ) );    
 
@@ -97,8 +97,8 @@ public class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> i
       @Override
       public void onRevealContent(final RevealRootLayoutContentEvent revealContentEvent) {
         activePresenter = (PresenterWidgetImpl<?>)revealContentEvent.getContent();
+        getView().setUsingRootLayoutPanel(true);
         setContent( rootSlot, activePresenter );
-        getView().setContentInRootLayoutPanel();
       }
     } ) );  
 
