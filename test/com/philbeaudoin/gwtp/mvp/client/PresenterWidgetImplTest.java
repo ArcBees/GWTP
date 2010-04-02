@@ -108,7 +108,7 @@ public class PresenterWidgetImplTest {
   @Test
   public void onRevealMakesPresenterWidgetVisible() {
     // Set-up
-    PresenterWidget presenterWidget = presenterWidgetAProvider.get();
+    PresenterWidgetA presenterWidget = presenterWidgetAProvider.get();
     
     // Given, When
     presenterWidget.notifyReveal();
@@ -120,7 +120,7 @@ public class PresenterWidgetImplTest {
   @Test
   public void testSetContentInEmptySlotOnInitiallyInvisiblePresenter() {
     // Set-up
-    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
     Object slotB = new Object();
     Object slotC = new Object();
     PresenterWidgetB contentB = presenterWidgetBProvider.get();
@@ -161,7 +161,7 @@ public class PresenterWidgetImplTest {
   @Test
   public void testSetContentInEmptySlotOnInitiallyVisiblePresenter() {
     // Set-up
-    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
     Object slotB = new Object();
     Object slotC = new Object();
     PresenterWidgetB contentB = presenterWidgetBProvider.get();
@@ -198,7 +198,7 @@ public class PresenterWidgetImplTest {
   @Test
   public void testSetContentHierarchyInEmptySlotOnInitiallyInvisiblePresenter1() {
     // Set-up
-    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
     Object slotB = new Object();
     Object slotC = new Object();
     PresenterWidgetB contentB = presenterWidgetBProvider.get();
@@ -240,7 +240,7 @@ public class PresenterWidgetImplTest {
   @Test
   public void testSetContentHierarchyInEmptySlotOnInitiallyInvisiblePresenter2() {
     // Set-up
-    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
     Object slotB = new Object();
     Object slotC = new Object();
     PresenterWidgetB contentB = presenterWidgetBProvider.get();
@@ -285,7 +285,7 @@ public class PresenterWidgetImplTest {
   @Test
   public void testSetContentHierarchyInEmptySlotOnInitiallyVisiblePresenter() {
     // Set-up
-    PresenterWidget presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
     Object slotB = new Object();
     Object slotC = new Object();
     PresenterWidgetB contentB = presenterWidgetBProvider.get();
