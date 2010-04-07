@@ -215,11 +215,11 @@ public class ProxyGenerator extends Generator {
             "' in the proxy annotation for '" + presenterClassName + "' was not found.", null);
         throw new UnableToCompleteException();
       }
-      tabContainerClassName = tabContainerClass.getName();
+      tabContainerClassName = tabContainerClass.getParameterizedQualifiedSourceName();
       tabPriority = tabInfoAnnotation.priority();
-      if( tabInfoAnnotation.label().length() > 0 )
+      if( tabInfoAnnotation.label().length() > 0 )    // label is a string that contains the label
         tabLabel = tabInfoAnnotation.label();
-      if( tabInfoAnnotation.getLabel().length() > 0 )
+      if( tabInfoAnnotation.getLabel().length() > 0 ) // getLabel is a method to call to get the label
         tabGetLabel = tabInfoAnnotation.getLabel();
       if( tabLabel == null && tabGetLabel == null ) {
         logger.log(TreeLogger.ERROR, "The @' +" +
