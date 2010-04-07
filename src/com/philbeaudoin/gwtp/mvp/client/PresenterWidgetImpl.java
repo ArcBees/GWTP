@@ -50,10 +50,33 @@ extends HandlerContainerImpl implements PresenterWidget {
   protected final V view;
 
 
+  /**
+   * Creates a {@link PresenterWidgetImpl}.
+   * 
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   */
   public PresenterWidgetImpl(
       EventBus eventBus, 
       V view) {
     super();
+    this.view = view;
+    this.eventBus = eventBus;
+  }
+
+  /**
+   * Creates a {@link PresenterWidgetImpl} that is not necessarily using automatic
+   * binding (see {@link HandlerContainerImpl(boolean)}).
+   * 
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   * @param autoBind {@code true} to request automatic binding, {@code false} otherwise.
+   */
+  public PresenterWidgetImpl( 
+      boolean autoBind,
+      EventBus eventBus, 
+      V view) { 
+    super(autoBind);
     this.view = view;
     this.eventBus = eventBus;
   }
@@ -82,7 +105,7 @@ extends HandlerContainerImpl implements PresenterWidget {
       clearContent( slot );
       return;
     }
-    
+
     PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
 
     List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
@@ -131,7 +154,7 @@ extends HandlerContainerImpl implements PresenterWidget {
     if( content == null ) {
       return;
     }
-    
+
     PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
 
     List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
@@ -178,7 +201,7 @@ extends HandlerContainerImpl implements PresenterWidget {
   public Widget getWidget() {
     return getView().asWidget();
   }
-  
+
   /**
    * Called right after the widget has been made revealed on screen.
    * You should not call this. Fire a 
@@ -237,7 +260,7 @@ extends HandlerContainerImpl implements PresenterWidget {
    * {@link #onReveal()} should be disposed of in this methods.
    */
   protected void onHide() {}
-  
+
   /**
    * <b>Important:</b> Make sure you call your superclass {@link #onReset()}
    * if you override.
