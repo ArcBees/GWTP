@@ -32,7 +32,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
   }
 
   /**
-   * Convenience method for binding a non-singleton presenter with its view.
+   * Convenience method for binding a non-singleton {@link PresenterWidget} with its {@link View}.
    *
    * @param <P>         The {@link PresenterWidget} type.
    * @param <V>         The {@link View} type.
@@ -45,10 +45,30 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
       Class<V> view,
       Class<? extends V> viewImpl ) {
     bind( presenter );
-    bind( viewImpl );
     bind( view ).to( viewImpl );
   }
 
+  /**
+   * Convenience method for binding a non-singleton {@link PresenterWidget} that
+   * is created via a factory to its {@link View}, which is also created via
+   * a factory.
+   *
+   * @param <P> The type of the {@link PresenterWidget} factory.
+   * @param <V>  The type of the {@link View} factory.
+   * @param presenterFactory The interface to the {@link PresenterWidget} factory.
+   * @param presenterFactoryImpl The implementation of the {@link PresenterWidget} factory.
+   * @param viewFactory The interface to the {@link View} factory.
+   * @param viewFactoryImpl The implementation of the {@link View} factory.
+   */
+  protected <P, V> void bindPresenterWidgetFactory(
+      Class<P> presenterFactory,
+      Class<? extends P> presenterFactoryImpl,
+      Class<V> viewFactory,
+      Class<? extends V> viewFactoryImpl ) {
+    bind(presenterFactory).to(presenterFactoryImpl).in(Singleton.class);
+    bind(viewFactory).to(viewFactoryImpl).in(Singleton.class);
+  }
+  
   /**
    * Convenience method for binding a singleton presenter with its view and 
    * its proxy, when using automatically generated proxy classes.
