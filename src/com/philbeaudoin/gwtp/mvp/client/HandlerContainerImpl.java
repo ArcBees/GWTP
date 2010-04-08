@@ -25,10 +25,10 @@ import com.google.inject.Inject;
 
 public class HandlerContainerImpl implements HandlerContainer {
 
-  private final List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
-  private final boolean autoBind;
+  private transient final List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
+  private transient final boolean autoBind;
   
-  private boolean bound = false;
+  private transient boolean bound = false;
 
   /**
    * Creates a handler container class with automatic binding.
