@@ -50,6 +50,8 @@ public class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> i
   private final static Object rootSlot = new Object();
   private PresenterWidgetImpl<?> activePresenter = null;
 
+  private boolean isResetting = false;
+
   public final static class RootView extends ViewImpl {
 
     private boolean usingRootLayoutPanel = false;
@@ -126,7 +128,10 @@ public class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> i
 
   @Override
   public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
-    if( activePresenter != null )
-      activePresenter.reset();    
+    if( !isResetting && activePresenter != null ) {
+      isResetting  = true;
+      activePresenter.reset();
+      isResetting = false;
+    }
   }
 }
