@@ -32,9 +32,6 @@ public abstract class ViewImpl implements View {
   public void addContent(Object slot, Widget content) {
   }
   @Override
-  public void clearContent(Object slot) {
-  }
-  @Override
   public void setContent(Object slot, Widget content) {
   }
 

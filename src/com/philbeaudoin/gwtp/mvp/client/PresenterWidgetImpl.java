@@ -92,7 +92,9 @@ extends HandlerContainerImpl implements PresenterWidget {
   }
 
   /**
-   * This method sets some content in a specific slot of the {@link Presenter}.
+   * This method sets some content in a specific slot of the {@link Presenter}. A 
+   * {@link ResetPresentersEvent} will be fired after the top-most visible presenter is
+   * revealed. 
    * 
    * @param slot An opaque object identifying
    *             which slot this content is being set into. The attached view should know
@@ -100,6 +102,21 @@ extends HandlerContainerImpl implements PresenterWidget {
    * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
    */
   public void setContent( Object slot, PresenterWidget content ) {
+    setContent(slot, content, true);
+  }
+  
+  /**
+   * This method sets some content in a specific slot of the {@link Presenter}.
+   * 
+   * @param slot An opaque object identifying
+   *             which slot this content is being set into. The attached view should know
+   *             what to do with this slot.
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
+   * @param performReset Pass {@code true} if you want a {@link ResetPresentersEvent} to be fired
+   *                     after the content has been added and this presenter is visible, pass 
+   *                     {@code false} otherwise.
+   */
+  protected void setContent( Object slot, PresenterWidget content, boolean performReset ) {
     if( content == null ) {
       // Assumes the user wants to clear the slot content.
       clearContent( slot );
@@ -136,14 +153,17 @@ extends HandlerContainerImpl implements PresenterWidget {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
       contentImpl.notifyReveal();
-      // And to reset everything
-      ResetPresentersEvent.fire( eventBus );
+      if( performReset ) {
+        // And to reset everything if needed
+        ResetPresentersEvent.fire( eventBus );
+      }
     }
   }
 
 
   /**
-   * This method adds some content in a specific slot of the {@link Presenter}.
+   * This method adds some content in a specific slot of the {@link Presenter}. No
+   * {@link ResetPresentersEvent} is fired.
    * 
    * @param slot An opaque object identifying
    *             which slot this content is being added into. The attached view should know
@@ -167,17 +187,15 @@ extends HandlerContainerImpl implements PresenterWidget {
       activeChildren.put( slot, slotChildren );
     }
     getView().addContent( slot, contentImpl.getWidget() );
-    if( isVisible() ) {
+    if( isVisible() )
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
       contentImpl.notifyReveal();
-      // And to reset everything
-      ResetPresentersEvent.fire( eventBus );
-    }
   }
 
   /**
-   * This method clears the content in a specific slot.
+   * This method clears the content in a specific slot. No
+   * {@link ResetPresentersEvent} is fired.
    * 
    * @param slot An opaque object of type identifying
    *             which slot to clear. The attached view should know
@@ -194,7 +212,7 @@ extends HandlerContainerImpl implements PresenterWidget {
         slotChildren.clear();
       }
     }
-    getView().clearContent( slot );
+    getView().setContent( slot, null );
   }
 
   @Override
