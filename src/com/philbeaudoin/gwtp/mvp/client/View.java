@@ -35,7 +35,7 @@ public interface View {
    * ignore the request.
    * 
    * @param slot An opaque object indicating the slot to add into.
-   * @param content The content to add, a {@link Widget}.
+   * @param content The content to add, a {@link Widget}. Pass {@code null} to clear the slot entirely.
    */
   public void setContent( Object slot, Widget content );
   
@@ -48,16 +48,6 @@ public interface View {
    * @param content The content to add, a {@link Widget}.
    */
   public void addContent( Object slot, Widget content );
-  
-  /**
-   * Requests the view to clear the content of a specific slot.
-   * If the view doesn't know about this slot, it can silently 
-   * ignore the request.
-   * 
-   * @param slot An opaque object indicating the slot to add into.
-   * @param content The content to add, a {@link Presenter}.
-   */
-  public void clearContent( Object slot );
   
   /**
    * Retrieves this view as a {@link Widget} so that it can be inserted within the DOM.

@@ -65,13 +65,15 @@ public class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> i
         RootPanel.get().clear();
         RootLayoutPanel.get().clear();
         RootPanel.get().add( RootLayoutPanel.get() );
-        RootLayoutPanel.get().add(content);
+        if( content != null )
+          RootLayoutPanel.get().add(content);
       }
       else {
         // TODO Next 2 lines are a dirty workaround for http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
         RootLayoutPanel.get().clear();
         RootPanel.get().clear();
-        RootPanel.get().add(content);
+        if( content != null )
+          RootPanel.get().add(content);
       } 
     }
 
