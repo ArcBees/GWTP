@@ -16,12 +16,10 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
-public class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
+public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
 
 	private final Type<RequestTabsHandler> type;
 	private final TabContainerPresenter tabContainer;

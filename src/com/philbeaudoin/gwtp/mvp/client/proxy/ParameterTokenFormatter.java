@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
-
 import java.util.Set;
 
 /**
@@ -26,7 +24,7 @@ import java.util.Set;
  *
  * <pre>[name](;param=value)*</pre>
  */
-public class ParameterTokenFormatter implements TokenFormatter {
+public final class ParameterTokenFormatter implements TokenFormatter {
 
   private static final String PARAM_SEPARATOR = ";";
 

@@ -16,8 +16,7 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
-public class TokenFormatException extends RuntimeException {
+public final class TokenFormatException extends RuntimeException {
 
   /**
    * 

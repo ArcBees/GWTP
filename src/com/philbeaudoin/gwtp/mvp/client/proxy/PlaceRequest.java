@@ -16,7 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -45,7 +44,7 @@ import java.util.Set;
  * @author David Peterson
  * @author Philippe Beaudoin
  */
-public class PlaceRequest {
+public final class PlaceRequest {
 
   private final String nameToken;
 

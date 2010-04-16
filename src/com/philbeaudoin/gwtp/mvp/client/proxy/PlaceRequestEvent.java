@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.event.shared.GwtEvent;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 

@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -45,7 +43,7 @@ import com.philbeaudoin.gwtp.mvp.client.proxy.RevealRootLayoutContentHandler;
  * 
  * @author Philippe Beaudoin
  */
-public class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> implements ResetPresentersHandler {
+public final class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootView> implements ResetPresentersHandler {
 
   private final static Object rootSlot = new Object();
   private PresenterWidgetImpl<?> activePresenter = null;

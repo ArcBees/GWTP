@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.event.shared.GwtEvent;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 import com.philbeaudoin.gwtp.mvp.client.Presenter;
@@ -30,7 +28,7 @@ import com.philbeaudoin.gwtp.mvp.client.Presenter;
  * 
  * @author Philippe Beaudoin
  */
-public class RevealRootContentEvent extends GwtEvent<RevealRootContentHandler> {
+public final class RevealRootContentEvent extends GwtEvent<RevealRootContentHandler> {
 
   private static final Type<RevealRootContentHandler> TYPE = new Type<RevealRootContentHandler>();
 

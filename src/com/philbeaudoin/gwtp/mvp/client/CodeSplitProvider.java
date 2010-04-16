@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -33,7 +31,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * 
  * @author Philippe Beaudoin
  */
-public class CodeSplitProvider<T> implements IndirectProvider<T> {
+public final class CodeSplitProvider<T> implements IndirectProvider<T> {
 
   private final AsyncProvider<T> provider;
 

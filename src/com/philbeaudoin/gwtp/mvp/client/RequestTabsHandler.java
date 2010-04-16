@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.event.shared.EventHandler;
 
 public interface RequestTabsHandler extends EventHandler {
