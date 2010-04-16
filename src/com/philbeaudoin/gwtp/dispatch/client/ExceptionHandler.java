@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.client;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -15,6 +13,8 @@ package com.philbeaudoin.gwtp.dispatch.client;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.philbeaudoin.gwtp.dispatch.client;
 
 /**
  * Implementations of this interface can be added to a {@link DispatchAsync} implementation

@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.mvp.client.proxy;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -15,6 +13,8 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.philbeaudoin.gwtp.mvp.client.proxy;
 
 /**
  * Place managers work as an intermediary between the GWT {@link com.google.gwt.user.client.History} API

@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.server.appengine;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.server.appengine;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.dispatch.server.appengine;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

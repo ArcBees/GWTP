@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.mvp.client.proxy;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.mvp.client.proxy;
 
 import com.google.gwt.event.shared.EventHandler;
 

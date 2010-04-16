@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.server.standard;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,6 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.server.standard;
  * limitations under the License.
  */
 
+package com.philbeaudoin.gwtp.dispatch.server.standard;
 
 import com.philbeaudoin.gwtp.dispatch.client.standard.StandardDispatchService;
 import com.philbeaudoin.gwtp.dispatch.server.Dispatch;

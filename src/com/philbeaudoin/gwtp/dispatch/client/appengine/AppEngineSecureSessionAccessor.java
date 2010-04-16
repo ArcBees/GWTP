@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.client.appengine;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.client.appengine;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.dispatch.client.appengine;
 
 import com.philbeaudoin.gwtp.dispatch.client.secure.CookieSecureSessionAccessor;
 import com.philbeaudoin.gwtp.dispatch.client.secure.SecureSessionAccessor;

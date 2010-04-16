@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.shared.secure;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.shared.secure;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.dispatch.shared.secure;
 
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
 

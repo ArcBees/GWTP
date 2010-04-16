@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.mvp.client;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,6 +14,7 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
+package com.philbeaudoin.gwtp.mvp.client;
 
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;

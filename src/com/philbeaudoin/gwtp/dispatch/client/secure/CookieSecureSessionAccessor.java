@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.client.secure;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.client.secure;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.dispatch.client.secure;
 
 import com.google.gwt.user.client.Cookies;
 

@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.server.guice;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,6 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.server.guice;
  * limitations under the License.
  */
 
+package com.philbeaudoin.gwtp.dispatch.server.guice;
 
 import com.philbeaudoin.gwtp.dispatch.server.Dispatch;
 import com.philbeaudoin.gwtp.dispatch.server.standard.AbstractStandardDispatchServlet;

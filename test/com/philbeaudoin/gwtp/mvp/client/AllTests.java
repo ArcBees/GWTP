@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.mvp.client;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.mvp.client;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

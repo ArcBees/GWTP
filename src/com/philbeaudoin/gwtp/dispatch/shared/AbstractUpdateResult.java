@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.shared;
-
 /**
  * Provides support for simple update response which contain both the old value
  * and new value.
@@ -9,6 +7,9 @@ package com.philbeaudoin.gwtp.dispatch.shared;
  * @param <T>
  *            The value type.
  */
+
+package com.philbeaudoin.gwtp.dispatch.shared;
+
 public abstract class AbstractUpdateResult<T> implements Result {
 
   private static final long serialVersionUID = -4309684381516006671L;

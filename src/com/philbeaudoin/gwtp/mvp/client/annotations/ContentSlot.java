@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.mvp.client.annotations;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.mvp.client.annotations;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.mvp.client.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

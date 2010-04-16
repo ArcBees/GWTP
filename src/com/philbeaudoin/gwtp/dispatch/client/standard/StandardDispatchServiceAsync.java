@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.client.standard;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -15,6 +13,8 @@ package com.philbeaudoin.gwtp.dispatch.client.standard;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.philbeaudoin.gwtp.dispatch.client.standard;
 
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;

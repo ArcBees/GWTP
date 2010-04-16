@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.mvp.rebind;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.mvp.rebind;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.mvp.rebind;
 
 import java.io.PrintWriter;
 
