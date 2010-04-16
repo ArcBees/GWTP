@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client.gin;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ParameterTokenFormatter;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceManager;
@@ -26,7 +24,7 @@ import com.philbeaudoin.gwtp.mvp.client.proxy.TokenFormatter;
 /**
  * Configures the basic classes for presenter.
  */
-public class PresenterSetupModule extends AbstractGinModule {
+public final class PresenterSetupModule extends AbstractGinModule {
 
   private final Class<? extends PlaceManager> placeManagerClass;
 

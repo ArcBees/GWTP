@@ -16,13 +16,11 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyFailureHandler;
 
-public class DefaultProxyFailureHandler implements ProxyFailureHandler {
+public final class DefaultProxyFailureHandler implements ProxyFailureHandler {
 
   @Inject
   public DefaultProxyFailureHandler() {

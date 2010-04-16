@@ -16,11 +16,10 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
 import com.google.gwt.event.shared.GwtEvent;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
-public class ResetPresentersEvent extends GwtEvent<ResetPresentersHandler> {
+public final class ResetPresentersEvent extends GwtEvent<ResetPresentersHandler> {
 
   private static final Type<ResetPresentersHandler> type = new Type<ResetPresentersHandler>();
 

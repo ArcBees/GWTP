@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +30,7 @@ import com.google.gwt.inject.client.Ginjector;
  * 
  * @author Philippe Beaudoin
  */
-public class DelayedBindRegistry {
+public final class DelayedBindRegistry {
 
   private static List<DelayedBind> delayedBindObjects = new ArrayList<DelayedBind>();
   

@@ -22,7 +22,7 @@ package com.philbeaudoin.gwtp.dispatch.client;
  *
  * @author David Peterson
  */
-public class DefaultExceptionHandler implements ExceptionHandler {
+public final class DefaultExceptionHandler implements ExceptionHandler {
 
     public DefaultExceptionHandler() {
     }

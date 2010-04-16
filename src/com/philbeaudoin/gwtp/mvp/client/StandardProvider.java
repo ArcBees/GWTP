@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
 
@@ -31,7 +29,7 @@ import com.google.inject.Provider;
  * 
  * @author Philippe Beaudoin
  */
-public class StandardProvider<T> implements IndirectProvider<T> {
+public final class StandardProvider<T> implements IndirectProvider<T> {
 
   private final Provider<T> provider;
 

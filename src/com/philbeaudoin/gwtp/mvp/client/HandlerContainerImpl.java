@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client;
  * limitations under the License.
  */
 
-
-
 import java.util.List;
 
 import com.google.gwt.event.shared.HandlerRegistration;

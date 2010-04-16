@@ -16,8 +16,6 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * limitations under the License.
  */
 
-
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.philbeaudoin.gwtp.mvp.client.Presenter;
 
