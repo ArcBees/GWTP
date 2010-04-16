@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.mvp.client.gin;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -15,6 +13,8 @@ package com.philbeaudoin.gwtp.mvp.client.gin;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.philbeaudoin.gwtp.mvp.client.gin;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ParameterTokenFormatter;

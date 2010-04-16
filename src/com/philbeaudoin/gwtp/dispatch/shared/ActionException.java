@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.shared;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,6 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.shared;
  * limitations under the License.
  */
 
+package com.philbeaudoin.gwtp.dispatch.shared;
 
 /**
  * These are thrown by {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch#execute(Action)} if there is a

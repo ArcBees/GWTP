@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.testing;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.testing;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.testing;
 
 import com.google.inject.Provider;
 import static org.mockito.Mockito.*;

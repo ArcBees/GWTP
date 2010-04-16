@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.client.gin;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.client.gin;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.dispatch.client.gin;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.philbeaudoin.gwtp.dispatch.client.AbstractDispatchAsync;

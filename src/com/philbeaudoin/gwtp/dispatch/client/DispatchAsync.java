@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.client;
-
 /**
  * Copyright 2010 Philippe Beaudoin
  *
@@ -16,7 +14,7 @@ package com.philbeaudoin.gwtp.dispatch.client;
  * limitations under the License.
  */
 
-
+package com.philbeaudoin.gwtp.dispatch.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

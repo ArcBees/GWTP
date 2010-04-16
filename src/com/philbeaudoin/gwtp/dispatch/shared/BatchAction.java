@@ -1,5 +1,3 @@
-package com.philbeaudoin.gwtp.dispatch.shared;
-
 /**
  * This provides a simple way to send multiple actions to be executed in
  * sequence. If any fail, the rules for the {@link OnException} value provided
@@ -7,6 +5,9 @@ package com.philbeaudoin.gwtp.dispatch.shared;
  * 
  * @author David Peterson
  */
+
+package com.philbeaudoin.gwtp.dispatch.shared;
+
 public class BatchAction implements Action<BatchResult> {
 
   private static final long serialVersionUID = 9035469137825018000L;
