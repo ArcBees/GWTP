@@ -89,6 +89,11 @@ implements Proxy<P>, Place {
   }
 
   @Override
+  public final void reveal(PlaceRequest request) {
+    handleRequest(request);
+  }
+
+  @Override
   public void getRawPresenter(AsyncCallback<Presenter> callback) {
     proxy.getRawPresenter(callback);
   }
