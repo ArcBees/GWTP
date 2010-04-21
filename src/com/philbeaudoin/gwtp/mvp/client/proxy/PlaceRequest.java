@@ -51,8 +51,33 @@ public final class PlaceRequest {
   private final Map<String, String> params;
 
   /**
+   * Builds a request without any name token and without parameters.
+   * You should typically use {@link #PlaceRequest(String)} and specify
+   * the name token. However, this version is acceptable when calling
+   * {@link Proxy#reveal(PlaceRequest)}. You can later add parameters by doing:
+   * <pre>
+   *   PlaceRequest request = newRequest.with(key1, param1)
+   *                                    .with(key2, param2);
+   * </pre>
+   */
+  public PlaceRequest() {
+    this.nameToken = null;
+    // Note: No parameter map attached.
+    //       Calling PlaceRequest#with(String, String) will
+    //       invoke the other constructor and instantiate a map.
+    //       This choice makes it efficient to instantiate
+    //       parameter-less PlaceRequest and slightly more
+    //       costly to instantiate PlaceRequest with parameters.    
+    this.params = null;
+  }
+  
+  /**
    * Builds a request with the specified name token and
-   * without parameters.
+   * without parameters. You can later add parameters by doing:
+   * <pre>
+   *   PlaceRequest request = newRequest.with(key1, param1)
+   *                                    .with(key2, param2);
+   * </pre>
    * 
    * @param nameToken The name token for the request.
    */
