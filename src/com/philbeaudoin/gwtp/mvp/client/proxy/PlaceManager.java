@@ -26,7 +26,7 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
 public interface PlaceManager {
 
   /**
-   * Programatically reveals the specified place. 
+   * Programmatically reveals the specified place. 
    * This will result in a {@link PlaceRequestEvent} being fired.
    *
    * @param request The {@link PlaceRequest} corresponding to the place to reveal. 
