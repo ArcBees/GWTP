@@ -97,6 +97,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public final void revealPlace( PlaceRequest request ) {
+    if( !confirmLeaveState() )
+      return;
     if( !doRevealPlace(request) )
         revealErrorPlace( request.toString() );
   }
@@ -107,6 +109,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
    */
   @Override
   public final void onValueChange( ValueChangeEvent<String> event ) {
+    if( !confirmLeaveState() )
+      return;
     String historyToken = event.getValue();
     try {
       if( !doRevealPlace( tokenFormatter.toPlaceRequest( historyToken ) ) ) {
@@ -153,8 +157,14 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     });
   }
 
-  @Override
-  public final boolean confirmLeaveState() {
+
+  /**
+   * If a confirmation question is set (see {@link #setOnLeaveConfirmation()}), this asks
+   * the user if he wants to leave the current page.
+   * 
+   * @return true if the user accepts to leave. false if he refuses.
+   */
+  final private boolean confirmLeaveState() {
     if( onLeaveQuestion == null ) return true;
     boolean confirmed =  Window.confirm( onLeaveQuestion );
     if( confirmed ) {

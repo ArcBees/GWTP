@@ -162,8 +162,6 @@ implements Proxy<P>, Place {
    *                be directly revealed. 
    */
   private final void handleRequest( final PlaceRequest request ) {
-    if( !canReveal() || !placeManager.confirmLeaveState() )
-      return;
     proxy.getPresenter( new AsyncCallback<P>() {
 
       @Override
