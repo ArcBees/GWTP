@@ -151,6 +151,8 @@ public final class PlaceRequest {
    * @return <code>true</code> if both requests share the same name token. <code>false</code> otherwise.
    */
   public boolean hasSameNameToken(PlaceRequest other) {
+    if( nameToken == null || other.nameToken == null )
+      return false;
     return nameToken.equals(other.nameToken);
   }
 
@@ -161,6 +163,8 @@ public final class PlaceRequest {
    * @return <code>true</code> if the request matches. <code>false</code> otherwise.
    */
   public boolean matchesNameToken(String nameToken) {
+    if( this.nameToken == null || nameToken == null )
+      return false;
     return this.nameToken.equals(nameToken);
   }
   
@@ -186,6 +190,8 @@ public final class PlaceRequest {
   public boolean equals( Object obj ) {
     if ( obj instanceof PlaceRequest ) {
       PlaceRequest req = (PlaceRequest) obj;
+      if( nameToken == null || req.nameToken == null )
+        return false;
       if ( !nameToken.equals( req.nameToken ) )
         return false;
 
@@ -199,13 +205,19 @@ public final class PlaceRequest {
 
   @Override
   public int hashCode() {
+    if( nameToken == null )
+      throw new RuntimeException( "Cannot compute hashcode of PlaceRequest with a null nameToken" );
     return 11 * ( nameToken.hashCode() + ( params == null ? 0 : params.hashCode() ) );
   }
 
   @Override
   public String toString() {
     StringBuilder out = new StringBuilder();
-    out.append( "{" ).append( nameToken );
+    out.append( "{" );
+    if( nameToken == null )
+      out.append( "__nullNameToken__" );
+    else
+      out.append( nameToken );
     if ( params != null && params.size() > 0 ) {
       out.append( ": " );
       for ( Map.Entry<String, String> entry : params.entrySet() ) {

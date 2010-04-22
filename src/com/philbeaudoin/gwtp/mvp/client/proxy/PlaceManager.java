@@ -67,20 +67,10 @@ public interface PlaceManager {
    * If the user indicates that he doesn't accept the navigation, then the
    * navigation will be cancelled and the current page will remain. 
    * <p />
-   * @param question The question to display. Pass null to accept navigation 
+   * @param question The question to display. Pass {@code null} to accept navigation 
    *                 directly, without asking a question.
    */
   public void setOnLeaveConfirmation( String question );
-  
-  /**
-   * <b>Important:</b> Do not call directly from outside the gwtp.mvp package.
-   * 
-   * If a confirmation question is set (see {@link #setOnLeaveConfirmation()}), this asks
-   * the user if he wants to leave the current page.
-   * 
-   * @return true if the user accepts to leave. false if he refuses.
-   */
-  public boolean confirmLeaveState();
   
   /**
    * Called whenever the current place has changed in a way that requires history parameters to be 
