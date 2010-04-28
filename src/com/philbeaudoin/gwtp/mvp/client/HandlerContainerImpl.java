@@ -18,15 +18,18 @@ package com.philbeaudoin.gwtp.mvp.client;
 
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
 public class HandlerContainerImpl implements HandlerContainer {
 
-  private transient final List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
-  private transient final boolean autoBind;
+  private transient @Transient final List<HandlerRegistration> handlerRegistrations = 
+    new java.util.ArrayList<HandlerRegistration>();
+  private transient @Transient final boolean autoBind;
   
-  private transient boolean bound = false;
+  private transient @Transient boolean bound = false;
 
   /**
    * Creates a handler container class with automatic binding.

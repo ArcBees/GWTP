@@ -23,7 +23,8 @@ public interface TabPanel {
    * 
    * @param text The text to display on the tab.
    * @param historyToken The history token the tab points to.
-   * @param priority The priority of the {@link Tab} to add.
+   * @param priority The priority of the {@link Tab} to add, implementations of this interface should ensure
+   *                 that lower priority tabs are displayed before higher priority ones. 
    * @return The newly added {@link Tab}.
    */
   public Tab addTab( String text, String historyToken, float priority );

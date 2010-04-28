@@ -121,7 +121,12 @@ public abstract class AbstractDispatch implements Dispatch {
       throw e;
     }
     catch( Exception e ) {
-      throw new ServiceException( e );
+      String newMessage = "Service exception executing action \"" + action.getClass().getSimpleName() + "\"";
+      if( e.getMessage() != null )
+        newMessage += ": " + e.getMessage();
+      ServiceException rethrown = new ServiceException( newMessage ); 
+      rethrown.initCause(e);
+      throw rethrown;
     }
   }
 
