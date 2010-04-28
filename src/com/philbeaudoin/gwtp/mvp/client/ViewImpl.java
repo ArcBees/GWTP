@@ -22,6 +22,10 @@ import com.google.gwt.user.client.ui.Widget;
  * A simple implementation of view that simply disregards every call to
  * {@link #setContent(Object, Widget)}, {@link #addContent(Object, Widget)},
  * and {@link #clearContent(Object)}.
+ * <p />
+ * Feel free not to inherit from this if you need another base class (such as
+ * {@link com.google.gwt.user.client.ui.Composite}), but you will have to
+ * define the above methods.
  * 
  * @author Philippe Beaudoin
  */
