@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.sessionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,34 +23,34 @@ import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
- * The default {@link InstanceSessionValidatorRegistry} implementation.
+ * The default {@link InstanceActionValidatorRegistry} implementation.
  * 
  * @author Christian Goudreau
  */
-public class DefaultSessionValidatorRegistry implements InstanceSessionValidatorRegistry {
+public class DefaultActionValidatorRegistry implements InstanceActionValidatorRegistry {
     private final Map<Class<? extends Action<? extends Result>>, ActionValidator> validators;
 
-    public DefaultSessionValidatorRegistry() {
+    public DefaultActionValidatorRegistry() {
         validators = new HashMap<Class<? extends Action<? extends Result>>, ActionValidator>(100);
     }
 
     @Override
-    public <A extends Action<R>, R extends Result> void addSecureSessionValidator(Class<A> actionClass, ActionValidator secureSessionValidator) {
-        validators.put(actionClass, secureSessionValidator);
+    public <A extends Action<R>, R extends Result> void addActionValidator(Class<A> actionClass, ActionValidator actionValidator) {
+        validators.put(actionClass, actionValidator);
     }
 
     @Override
-    public <A extends Action<R>, R extends Result> boolean removeSecureSessionValidator(Class<A> actionClass) {
+    public <A extends Action<R>, R extends Result> boolean removeActionValidator(Class<A> actionClass) {
         return validators.remove(actionClass) != null;
     }
 
     @Override
-    public void clearSecureSessionValidators() {
+    public void clearActionValidators() {
         validators.clear();
     }
 
     @Override
-    public <A extends Action<R>, R extends Result> ActionValidator findSecureSessionValidator(A action) {
+    public <A extends Action<R>, R extends Result> ActionValidator findActionValidator(A action) {
         return validators.get(action.getClass());
     }
 
