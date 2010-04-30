@@ -18,18 +18,32 @@ package com.philbeaudoin.gwtp.mvp.client;
 
 import java.util.List;
 
-import javax.persistence.Transient;
-
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
+/**
+ * The implementation of {@link HandlerContainer}. Inherit from this
+ * class if you want subclasses that can contain handlers.
+ * 
+ * @author Philippe Beaudoin
+ */
 public class HandlerContainerImpl implements HandlerContainer {
 
-  private transient @Transient final List<HandlerRegistration> handlerRegistrations = 
-    new java.util.ArrayList<HandlerRegistration>();
-  private transient @Transient final boolean autoBind;
+  /**
+   * We use this static class instead of a boolean to make the
+   * {@code bound} field final. This is done in order for it to
+   * not be persisted by objectify, since objectify persists field
+   * maked as {@code transient}.
+   */
+  private static class BindMonitor {
+    public boolean value = false;
+  }
   
-  private transient @Transient boolean bound = false;
+  private transient final List<HandlerRegistration> handlerRegistrations = 
+    new java.util.ArrayList<HandlerRegistration>();
+  private transient final boolean autoBind;
+  
+  private transient final BindMonitor bound = new BindMonitor();
 
   /**
    * Creates a handler container class with automatic binding.
@@ -67,16 +81,16 @@ public class HandlerContainerImpl implements HandlerContainer {
 
   @Override
   public final void bind() {
-    if ( !bound ) {
+    if ( !bound.value ) {
       onBind();
-      bound = true;
+      bound.value = true;
     }
   }
 
   @Override
   public final void unbind() {
-    if ( bound ) {
-      bound = false;
+    if ( bound.value ) {
+      bound.value = false;
 
       for ( HandlerRegistration reg : handlerRegistrations ) {
         reg.removeHandler();
@@ -136,7 +150,7 @@ public class HandlerContainerImpl implements HandlerContainer {
 
   @Override
   public final boolean isBound() {
-    return bound;
+    return bound.value;
   }
 
 }
