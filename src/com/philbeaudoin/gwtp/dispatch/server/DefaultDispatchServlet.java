@@ -16,13 +16,12 @@
 
 package com.philbeaudoin.gwtp.dispatch.server;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.philbeaudoin.gwtp.dispatch.client.SecurityCookieAccessorImpl;
 import com.philbeaudoin.gwtp.dispatch.client.DispatchService;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.ActionException;
