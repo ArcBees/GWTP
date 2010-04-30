@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.sessionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
@@ -29,7 +29,7 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
  * 
  * @author Christian Goudreau
  */
-public interface SessionValidatorMap<A extends Action<R>, R extends Result> {
+public interface ActionValidatorMap<A extends Action<R>, R extends Result> {
     /**
      * @return the {@link Action} class associated
      */
@@ -38,5 +38,5 @@ public interface SessionValidatorMap<A extends Action<R>, R extends Result> {
     /**
      * @return the {@link ActionValidator} class associated
      */
-    public Class<? extends ActionValidator> getSecureSessionValidatorClass();
+    public Class<? extends ActionValidator> getActionValidatorClass();
 }

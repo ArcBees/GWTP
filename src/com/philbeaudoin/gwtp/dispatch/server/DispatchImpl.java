@@ -23,8 +23,8 @@ import com.google.inject.Singleton;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionResult;
-import com.philbeaudoin.gwtp.dispatch.server.sessionValidator.ActionValidator;
-import com.philbeaudoin.gwtp.dispatch.server.sessionValidator.SessionValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
+import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.ActionException;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
@@ -92,12 +92,12 @@ public class DispatchImpl implements Dispatch {
   };
 
   private final ActionHandlerRegistry handlerRegistry;
-  private final SessionValidatorRegistry sessionValidatorRegistry;
+  private final ActionValidatorRegistry actionValidatorRegistry;
 
   @Inject
-  public DispatchImpl(ActionHandlerRegistry handlerRegistry, SessionValidatorRegistry secureSessionValidatorRegistry) {
+  public DispatchImpl(ActionHandlerRegistry handlerRegistry, ActionValidatorRegistry actionValidatorRegistry) {
     this.handlerRegistry = handlerRegistry;
-    this.sessionValidatorRegistry = secureSessionValidatorRegistry;
+    this.actionValidatorRegistry = actionValidatorRegistry;
   }
 
   @Override
@@ -172,11 +172,11 @@ public class DispatchImpl implements Dispatch {
   private <A extends Action<R>, R extends Result> void doUndo(A action,
       R result, ExecutionContext ctx) throws ActionException, ServiceException {
 
-    ActionValidator secureSessionValidator = findActionValidator(action);
+    ActionValidator actionValidator = findActionValidator(action);
 
     ActionHandler<A, R> handler = findHandler(action);
     try {
-      if (secureSessionValidator.isValid())
+      if (actionValidator.isValid())
         handler.undo(action, result, ctx);
       else
         throw new ActionException("Insufficient rights"); // TODO This should be a more specific exception
@@ -198,11 +198,11 @@ public class DispatchImpl implements Dispatch {
 
   private <A extends Action<R>, R extends Result> ActionValidator findActionValidator(
       A action) throws UnsupportedActionException {
-    ActionValidator secureSessionValidator = sessionValidatorRegistry.findSecureSessionValidator(action);
+    ActionValidator actionValidator = actionValidatorRegistry.findActionValidator(action);
 
-    if (secureSessionValidator == null)
+    if (actionValidator == null)
       throw new UnsupportedActionException(action);
 
-    return secureSessionValidator;
+    return actionValidator;
   }
 }
