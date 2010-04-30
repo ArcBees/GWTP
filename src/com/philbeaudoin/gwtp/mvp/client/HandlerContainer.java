@@ -17,8 +17,10 @@
 package com.philbeaudoin.gwtp.mvp.client;
 
 /**
- * <b>Important:</b> This class participates in dependency injection
- * and should be injected, never instantiated with <code>new</code>.
+ * <b>Important:</b> For autobinding to work, this class must participate in 
+ * dependency injection and must be injected, not instantiated with {@code new}.
+ * If you plan on instantiating {@link HandlerContrainerImpl} with {@code new}, make sure it doesn't use
+ * autobinding by passing {@code false} to the constructor.
  * <p />
  * A class that can contain handlers. These handlers are registered
  * when the class is bound and unregistered when the class is 
