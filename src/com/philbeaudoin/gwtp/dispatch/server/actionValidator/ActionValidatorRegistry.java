@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.sessionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
@@ -24,7 +24,7 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
  * 
  * @author Christian Goudreau
  */
-public interface SessionValidatorRegistry {
+public interface ActionValidatorRegistry {
     /**
      * Searches the registry and returns the first
      * {@link ActionValidator} wich supports the specified {@link Action}
@@ -38,10 +38,10 @@ public interface SessionValidatorRegistry {
      *            The {@link Action}
      * @return The {@link ActionValidator}
      */
-    public <A extends Action<R>, R extends Result> ActionValidator findSecureSessionValidator(A action);
+    public <A extends Action<R>, R extends Result> ActionValidator findActionValidator(A action);
 
     /**
      * Clears all registered {@link ActionValidator} from the registry
      */
-    public void clearSecureSessionValidators();
+    public void clearActionValidators();
 }

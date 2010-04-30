@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.sessionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import java.util.Map;
 
@@ -31,28 +31,28 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
  * 
  * @author Christian Goudreau
  */
-public class LazySessionValidatorRegistry implements ClassSessionValidatorRegistry {
+public class LazyActionValidatorRegistry implements ClassActionValidatorRegistry {
   private final Injector injector;
   private final Map<Class<? extends Action<?>>, Class<? extends ActionValidator>> validatorClasses;
   private final Map<Class<? extends Action<?>>, ActionValidator> validators;
 
   @Inject
-  public LazySessionValidatorRegistry(Injector injector) {
+  public LazyActionValidatorRegistry(Injector injector) {
     this.injector = injector;
     validatorClasses = new java.util.HashMap<Class<? extends Action<?>>, Class<? extends ActionValidator>>(100);
     validators = new java.util.HashMap<Class<? extends Action<?>>, ActionValidator>(100);
   }
 
   @Override
-  public <A extends Action<R>, R extends Result> void addSecureSessionValidatorClass(Class<A> actionClass, Class<? extends ActionValidator> secureSessionValidatorClass) {
-    validatorClasses.put(actionClass, secureSessionValidatorClass);
+  public <A extends Action<R>, R extends Result> void addActionValidatorClass(Class<A> actionClass, Class<? extends ActionValidator> actionValidatorClass) {
+    validatorClasses.put(actionClass, actionValidatorClass);
   }
 
   @Override
-  public <A extends Action<R>, R extends Result> void removeSecureSessionValidatorClass(Class<A> actionClass, Class<? extends ActionValidator> secureSessionValidatorClass) {
+  public <A extends Action<R>, R extends Result> void removeActionValidatorClass(Class<A> actionClass, Class<? extends ActionValidator> actionValidatorClass) {
     Class<? extends ActionValidator> oldValidatorClass = validatorClasses.get(actionClass);
 
-    if (oldValidatorClass == secureSessionValidatorClass) {
+    if (oldValidatorClass == actionValidatorClass) {
       validatorClasses.remove(actionClass);
       validators.remove(actionClass);
     }
@@ -70,13 +70,13 @@ public class LazySessionValidatorRegistry implements ClassSessionValidatorRegist
   }
 
   @Override
-  public void clearSecureSessionValidators() {
+  public void clearActionValidators() {
     validators.clear();
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public <A extends Action<R>, R extends Result> ActionValidator findSecureSessionValidator(A action) {
+  public <A extends Action<R>, R extends Result> ActionValidator findActionValidator(A action) {
     ActionValidator validator = validators.get(action.getClass());
 
     if (validator == null) {

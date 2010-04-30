@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.sessionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 /**
  * The default {@link ActionValidator} implementation.

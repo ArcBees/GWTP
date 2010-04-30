@@ -14,39 +14,39 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.sessionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
- * This is a subclass of {@link SessionValidatorRegistry} wich allows
+ * This is a subclass of {@link ActionValidatorRegistry} wich allows
  * registration of validators by passing in the handler instance directly.
  * 
  * @author Christian Goudreau
  */
-public interface InstanceSessionValidatorRegistry extends SessionValidatorRegistry {
+public interface InstanceActionValidatorRegistry extends ActionValidatorRegistry {
     /**
      * @param <A>
      *            Type of associated {@link Action}
      * @param <R>
      *            Type of associated {@link Result}
-     * @param action
-     *            The {@link Action}
-     * @param secureSessionValidator
+     * @param actionClass
+     *            The {@link Action} class
+     * @param actionValidator
      *            The {@link ActionValidator}
      */
-    public <A extends Action<R>, R extends Result> void addSecureSessionValidator(Class<A> actionClass, ActionValidator secureSessionValidator);
+    public <A extends Action<R>, R extends Result> void addActionValidator(Class<A> actionClass, ActionValidator actionValidator);
 
     /**
      * @param <A>
      *            Type of associated {@link Action}
      * @param <R>
      *            Type of associated {@link Result}
-     * @param action
-     *            The {@link Action}
+     * @param actionClass
+     *            The {@link Action} class
      * @return <code>true</code> if the handler was previously registered and
      *         was successfully removed.
      */
-    public <A extends Action<R>, R extends Result> boolean removeSecureSessionValidator(Class<A> actionClass);
+    public <A extends Action<R>, R extends Result> boolean removeActionValidator(Class<A> actionClass);
 }
