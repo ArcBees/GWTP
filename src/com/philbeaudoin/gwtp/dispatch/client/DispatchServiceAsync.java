@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.shared;
+package com.philbeaudoin.gwtp.dispatch.client;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-/**
- * An action represents a command sent to the {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch}. It has a
- * specific result type which is returned if the action is successful.
- *
- * @author David Peterson
- * @param <R>
- * The {@link Result} type.
- */
-public interface Action<R extends Result> extends Serializable {
-    public abstract String getServiceName();
+import com.philbeaudoin.gwtp.dispatch.shared.Action;
+import com.philbeaudoin.gwtp.dispatch.shared.Result;
+
+public interface DispatchServiceAsync {
+    void execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
 }

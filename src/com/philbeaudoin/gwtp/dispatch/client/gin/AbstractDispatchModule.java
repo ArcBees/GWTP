@@ -17,24 +17,28 @@
 package com.philbeaudoin.gwtp.dispatch.client.gin;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.philbeaudoin.gwtp.dispatch.client.AbstractDispatchAsync;
 import com.philbeaudoin.gwtp.dispatch.client.ExceptionHandler;
+import com.philbeaudoin.gwtp.dispatch.client.SecurityCookieAccessor;
 
 /**
  * Abstract base class that binds an instance of {@link ExceptionHandler} for use
- * by {@link AbstractDispatchAsync} implementations.
+ * by {@link com.philbeaudoin.gwtp.dispatch.client.DispatchAsync} implementations.
  *
  * @author David Peterson
  */
 public class AbstractDispatchModule extends AbstractGinModule {
-    protected final Class<? extends ExceptionHandler> exceptionHandlerType;
+  protected final Class<? extends ExceptionHandler> exceptionHandlerType;
+  protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
 
-    public AbstractDispatchModule( Class<? extends ExceptionHandler> exceptionHandlerType ) {
-        this.exceptionHandlerType = exceptionHandlerType;
-    }
+  public AbstractDispatchModule( Class<? extends ExceptionHandler> exceptionHandlerType,
+      Class<? extends SecurityCookieAccessor> sessionAccessorType ) {
+    this.exceptionHandlerType = exceptionHandlerType;
+    this.sessionAccessorType = sessionAccessorType;
+  }
 
-    @Override
-    protected void configure() {
-        bind( ExceptionHandler.class ).to( exceptionHandlerType );
-    }
+  @Override
+  protected void configure() {
+    bind( ExceptionHandler.class ).to( exceptionHandlerType );
+    bind( SecurityCookieAccessor.class ).to( sessionAccessorType );
+  }
 }
