@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.sessionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.philbeaudoin.gwtp.dispatch.client.DispatchService;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
