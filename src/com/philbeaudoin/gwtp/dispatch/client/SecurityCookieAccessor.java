@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.shared;
-
-import java.io.Serializable;
+package com.philbeaudoin.gwtp.dispatch.client;
 
 /**
- * An action represents a command sent to the {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch}. It has a
- * specific result type which is returned if the action is successful.
- *
+ * Provides access to the security cookie stored on the client.
+ * The goal of this security cookie is to prevent XSRF attack.
+ * For more details see:
+ * http://groups.google.com/group/Google-Web-Toolkit/web/security-for-gwt-applications
+ * Under XSRF and GWT
+ * 
  * @author David Peterson
- * @param <R>
- * The {@link Result} type.
+ * @author Philippe Beaudoin
  */
-public interface Action<R extends Result> extends Serializable {
-    public abstract String getServiceName();
+public interface SecurityCookieAccessor {
+    /**
+     * Gets the current content of the security cookie, using javascript. 
+     * 
+     * @return The current content of the security cookie.
+     */
+    String getCookieContent();
 }

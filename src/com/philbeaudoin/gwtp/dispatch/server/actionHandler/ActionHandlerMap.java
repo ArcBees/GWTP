@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.shared;
+package com.philbeaudoin.gwtp.dispatch.server.actionHandler;
 
-import java.io.Serializable;
+import com.philbeaudoin.gwtp.dispatch.shared.Action;
+import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
-/**
- * An action represents a command sent to the {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch}. It has a
- * specific result type which is returned if the action is successful.
- *
- * @author David Peterson
- * @param <R>
- * The {@link Result} type.
- */
-public interface Action<R extends Result> extends Serializable {
-    public abstract String getServiceName();
+public interface ActionHandlerMap<A extends Action<R>, R extends Result> {
+    public Class<A> getActionClass();
+
+    public Class<? extends ActionHandler<A, R>> getActionHandlerClass();
 }

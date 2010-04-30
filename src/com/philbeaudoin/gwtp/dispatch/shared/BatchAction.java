@@ -8,7 +8,7 @@
 
 package com.philbeaudoin.gwtp.dispatch.shared;
 
-public class BatchAction implements Action<BatchResult> {
+public abstract class BatchAction implements Action<BatchResult> {
 
   private static final long serialVersionUID = 9035469137825018000L;
 

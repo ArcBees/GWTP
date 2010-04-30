@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.shared;
+package com.philbeaudoin.gwtp.dispatch.client;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.Cookies;
 
 /**
- * An action represents a command sent to the {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch}. It has a
- * specific result type which is returned if the action is successful.
- *
- * @author David Peterson
- * @param <R>
- * The {@link Result} type.
+ * This class provides access to the session id client side
+ * by looking into a cookie on the browser.
+ * 
+ * @author Philippe Beaudoin
  */
-public interface Action<R extends Result> extends Serializable {
-    public abstract String getServiceName();
+public class SecurityCookieAccessorImpl implements SecurityCookieAccessor {
+
+  // TODO This should be changed to our own cookie
+  public final static String COOKIE_NAME = "ACSID";
+
+  public String getCookieContent() {
+    return Cookies.getCookie( COOKIE_NAME );
+  }
 }
