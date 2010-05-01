@@ -29,8 +29,7 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
 import com.philbeaudoin.gwtp.dispatch.shared.ServiceException;
 
 /**
- * Use this servlet to build your own servlet implementation. In any other
- * cases, {@link GuiceDispatchServlet} should be used.
+ * Use this servlet to build your own servlet implementation.
  * 
  * @author Christian Goudreau
  * @author David Peterson
