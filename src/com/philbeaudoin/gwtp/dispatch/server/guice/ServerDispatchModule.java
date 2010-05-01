@@ -33,11 +33,11 @@ import com.philbeaudoin.gwtp.dispatch.server.actionValidator.InstanceActionValid
 /**
  * This module will configure the implementation for the {@link Dispatch},
  * {@link ActionHandlerRegistry} interfaces and {@link ActionValidatorRegistry}
- * interfaces. If you want to override the defaults ({@link GuiceDispatch},
+ * interfaces. If you want to override the defaults ({@link DispatchImpl},
  * {@link DefaultActionHandlerRegistry} and
  * {@link DefaultActionValidatorRegistry}, respectively), pass the override
  * values into the constructor for this module and ensure it is installed
- * <b>before</b> any {@link DispatchModule}. instances.
+ * <b>before</b> any {@link DispatchModule} instances.
  * 
  * @author Christian Goudreau
  * @author David Peterson
@@ -80,7 +80,7 @@ public class ServerDispatchModule extends AbstractModule {
   /**
    * The class returned by this method is bound to the {@link Dispatch}
    * service. Subclasses may override this method to provide custom
-   * implementations. Defaults to {@link GuiceDispatch}.
+   * implementations. Defaults to {@link DispatchImpl}.
    * 
    * @return The {@link Dispatch} implementation class.
    */
