@@ -16,7 +16,7 @@
 
 package com.philbeaudoin.gwtp.dispatch.shared;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * An action represents a command sent to the {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch}. It has a
@@ -26,6 +26,6 @@ import java.io.Serializable;
  * @param <R>
  * The {@link Result} type.
  */
-public interface Action<R extends Result> extends Serializable {
+public interface Action<R extends Result> extends IsSerializable {
     public abstract String getServiceName();
 }

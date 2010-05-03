@@ -10,7 +10,6 @@ package com.philbeaudoin.gwtp.dispatch.shared;
  */
 public class ActionImpl<R extends Result> implements Action<R> {
 
-  private static final long serialVersionUID = -6235632606539498934L;
   public static final String DEFAULT_SERVICE_NAME = "dispatch/";
 
   @Override
