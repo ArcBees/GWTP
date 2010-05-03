@@ -12,8 +12,6 @@ package com.philbeaudoin.gwtp.dispatch.shared;
 
 public abstract class AbstractUpdateResult<T> implements Result {
 
-  private static final long serialVersionUID = -4309684381516006671L;
-
   private T oldValue;
 
   private T newValue;

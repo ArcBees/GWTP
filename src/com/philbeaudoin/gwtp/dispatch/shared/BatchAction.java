@@ -10,8 +10,6 @@ package com.philbeaudoin.gwtp.dispatch.shared;
 
 public abstract class BatchAction implements Action<BatchResult> {
 
-  private static final long serialVersionUID = 9035469137825018000L;
-
   public enum OnException {
     /**
      * If specified, the batch will continue if an action fails. The

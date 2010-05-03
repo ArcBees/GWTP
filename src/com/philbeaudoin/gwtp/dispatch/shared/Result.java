@@ -16,12 +16,12 @@
 
 package com.philbeaudoin.gwtp.dispatch.shared;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * A marker interface for {@link Action} results.
  * 
  * @author David Peterson
  */
-public interface Result extends Serializable {
+public interface Result extends IsSerializable {
 }
