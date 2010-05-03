@@ -57,12 +57,12 @@ import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyFailureHandler;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyImpl;
-import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyPlace;
+import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyPlaceImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentEvent;
 import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentHandler;
 import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxy;
 import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxyImpl;
-import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxyPlace;
+import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxyPlaceImpl;
 
 public class ProxyGenerator extends Generator {
 
@@ -87,9 +87,9 @@ public class ProxyGenerator extends Generator {
   private static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
   private static final String delayedBindClassName = DelayedBind.class.getCanonicalName();
   private static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
-  private static final String proxyPlaceClassName = ProxyPlace.class.getCanonicalName();
+  private static final String proxyPlaceImplClassName = ProxyPlaceImpl.class.getCanonicalName();
   private static final String tabContentProxyImplClassName = TabContentProxyImpl.class.getCanonicalName();
-  private static final String tabContentProxyPlaceClassName = TabContentProxyPlace.class.getCanonicalName();
+  private static final String tabContentProxyPlaceImplClassName = TabContentProxyPlaceImpl.class.getCanonicalName();
 
   @Override
   public String generate(TreeLogger logger, GeneratorContext ctx, String requestedClass)
@@ -249,9 +249,10 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImport(CodeSplitBundleProvider.class.getCanonicalName());
     composerFactory.addImport(ProxyFailureHandler.class.getCanonicalName());
     composerFactory.addImport(proxyImplClassName);
-    composerFactory.addImport(proxyPlaceClassName);
+    composerFactory.addImport(proxyPlaceImplClassName);
     composerFactory.addImport(RevealContentHandler.class.getCanonicalName());
     composerFactory.addImport(delayedBindClassName);
+    composerFactory.addImport(tabContentProxyPlaceImplClassName);
     composerFactory.addImport(DelayedBindRegistry.class.getCanonicalName());
     composerFactory.addImport(Ginjector.class.getCanonicalName());
     composerFactory.addImport(RevealContentEvent.class.getCanonicalName());  // Obsolete?
@@ -274,10 +275,10 @@ public class ProxyGenerator extends Generator {
       // A place
       if( tabContainerClass == null )
         // Place (but not a TabContentProxy)
-        composerFactory.setSuperclass(proxyPlaceClassName+"<"+presenterClassName+">" );
+        composerFactory.setSuperclass(proxyPlaceImplClassName+"<"+presenterClassName+">" );
       else
         // Place and TabContentProxy
-        composerFactory.setSuperclass(tabContentProxyPlaceClassName+"<"+presenterClassName+">" );
+        composerFactory.setSuperclass(tabContentProxyPlaceImplClassName+"<"+presenterClassName+">" );
     }
 
     // Get a source writer

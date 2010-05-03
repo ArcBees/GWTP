@@ -34,7 +34,7 @@ import com.philbeaudoin.gwtp.mvp.client.PresenterImpl;
  * @author Philippe Beaudoin
  */
 public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
-implements Proxy<P>, Place {
+implements ProxyPlace<P> {
 
   protected ProxyFailureHandler failureHandler;
   protected EventBus eventBus;
