@@ -34,8 +34,6 @@ import java.util.List;
  */
 public class BatchResult implements Result {
 
-  private static final long serialVersionUID = -7169695166206704296L;
-
   private List<Result> results;
 
   /**

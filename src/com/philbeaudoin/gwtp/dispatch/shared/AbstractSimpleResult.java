@@ -31,9 +31,6 @@ package com.philbeaudoin.gwtp.dispatch.shared;
  *            The value type.
  */
 public abstract class AbstractSimpleResult<T> implements Result {
-
-  private static final long serialVersionUID = -6313803312919462642L;
-
   private T value;
 
   protected AbstractSimpleResult() {
