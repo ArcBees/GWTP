@@ -21,18 +21,18 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.philbeaudoin.gwtp.dispatch.client.DefaultDispatchAsync;
 import com.philbeaudoin.gwtp.dispatch.client.DefaultExceptionHandler;
+import com.philbeaudoin.gwtp.dispatch.client.DefaultSecurityCookieAccessor;
 import com.philbeaudoin.gwtp.dispatch.client.DispatchAsync;
-import com.philbeaudoin.gwtp.dispatch.client.EmptySecurityCookieAccessor;
 import com.philbeaudoin.gwtp.dispatch.client.ExceptionHandler;
 import com.philbeaudoin.gwtp.dispatch.client.SecurityCookieAccessor;
 
 /**
  * This gin module provides provides access to the {@link DispatchAsync} singleton, which is
- * used to make remote procedure calls to the server. This module requires a {@link ExceptionHandler}
+ * used to make remote procedure calls to the server. This module requires an {@link ExceptionHandler}
  * and a {@link SecurityCookieAccessor}. By default, these will be bound to {@link DefaultExceptionHandler}
- * and {@link EmptySecurityCookieAccessor} respectively. 
+ * and {@link DefaultSecurityCookieAccessor} respectively. 
  * <p />
- * Using the default {@link EmptySecurityCookieAccessor} could leave your application vulnerable
+ * If you want to prevent XSRF attack (you use secured {@link com.philbeaudoin.gwtp.dispatch.shared.Action}s) the default {@link EmptySecurityCookieAccessor} could leave your application vulnerable
  * to XSRF attacks. For more details see <a href="http://code.google.com/intl/fr/webtoolkit/articles/security_for_gwt_applications.html">
  * this document</a>. For more security use {@link DispatchAsyncSecureModule}.
  * <p />  
@@ -74,7 +74,7 @@ public class DispatchAsyncModule extends AbstractGinModule {
       bind( ExceptionHandler.class ).to( exceptionHandlerType );
 
     if( sessionAccessorType == null )
-      bind( SecurityCookieAccessor.class ).to( EmptySecurityCookieAccessor.class );
+      bind( SecurityCookieAccessor.class ).to( DefaultSecurityCookieAccessor.class );
     else
       bind( SecurityCookieAccessor.class ).to( sessionAccessorType );
   }
