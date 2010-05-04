@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.client;
-
-import com.google.gwt.user.client.Cookies;
+package com.philbeaudoin.gwtp.dispatch.shared;
 
 /**
- * This does not prevent against XSRF security attacks.
+ * An {@link Action} that uses the standard service name {@code "dispatch"}.
+ * Actions inheriting from this are <b>not</b> secured against XSRF attacks,
+ * and they will work even if you do not configure a {@link SecurityCookie}.
  * 
  * @author Philippe Beaudoin
+ *
+ * @param <R> The {@link Result} type.
  */
-public class EmptySecurityCookieAccessor implements SecurityCookieAccessor {
+public class UnsecuredActionImpl<R extends Result> implements Action<R> {
 
-  public String getCookieContent() {
-    return Cookies.getCookie( null );
+  @Override
+  public String getServiceName() {
+    return DEFAULT_SERVICE_NAME;
   }
+  
+  @Override
+  public boolean isSecured() {
+    return false;
+  }  
 }

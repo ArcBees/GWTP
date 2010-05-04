@@ -18,6 +18,7 @@ package com.philbeaudoin.gwtp.dispatch.client;
 
 import com.google.gwt.user.client.Cookies;
 import com.google.inject.Inject;
+import com.philbeaudoin.gwtp.dispatch.shared.SecurityCookie;
 
 /**
  * This class provides access to the session id client side
@@ -31,14 +32,12 @@ import com.google.inject.Inject;
  */
 public class DefaultSecurityCookieAccessor implements SecurityCookieAccessor {
 
-  public final String cookieName;
-
-  @Inject
-  DefaultSecurityCookieAccessor( @SecurityCookie String cookieName ) {
-    this.cookieName = cookieName;
-  }
+  @Inject(optional=true)
+  public @SecurityCookie String cookieName = null;
 
   public String getCookieContent() {
+    if( cookieName == null )
+      return null;
     return Cookies.getCookie( cookieName );
   }
 }

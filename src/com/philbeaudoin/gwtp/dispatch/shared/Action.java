@@ -20,12 +20,37 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * An action represents a command sent to the {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch}. It has a
- * specific result type which is returned if the action is successful.
+ * specific result type which is returned if the action is successful. 
+ * Your implementation should override {@link #getServiceName} to return a default service url.
+ * If you use a {@link SecurityCookie} to prevent XSRF attacks and you want this action
+ * to be secured against such attacks (i.e. it's not meant to be an anonymous action) then you
+ * should override {@link #isSecured()} to return {@code true}.
+ * <p />
+ * You can usually inherit from {@link ActionImpl} or {@link UnsecuredActionImpl} instead. 
  *
  * @author David Peterson
  * @param <R>
  * The {@link Result} type.
  */
-public interface Action<R extends Result> extends IsSerializable {
-    public abstract String getServiceName();
+public interface Action<R extends Result> extends IsSerializable {  
+
+  /**
+   * The URL of the service used by default.
+   */
+  public static final String DEFAULT_SERVICE_NAME = "dispatch/";
+
+  /**
+   * Access the name of the service, which will be used as the URL path to access the action.
+   * 
+   * @return The service name.
+   */
+  public abstract String getServiceName();
+
+  /**
+   * Verifies if the action is secured. Secured actions perform a number of extra
+   * security checks, such as validating the {@link SecurityCookie} to foil XSRF attacks. 
+   * 
+   * @return {@code true} if the action should be secured against XSRF attacks, {@code false} otherwise.
+   */
+  public abstract boolean isSecured();
 }
