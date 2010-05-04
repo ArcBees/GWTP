@@ -26,6 +26,9 @@ import com.philbeaudoin.gwtp.dispatch.shared.Action;
  * session information, which can be done by injecting a {@code Provider<HttpSession>}
  * into the validator and calling {@code httpSessionProvider.get()} within
  * the {@link #isValid} method.
+ * <p />
+ * You should think of annotating your validators with {@code @RequestScoped} or
+ * {@code @Singleton}.
  * 
  * @author David Peterson
  * @author Christian Goudreau

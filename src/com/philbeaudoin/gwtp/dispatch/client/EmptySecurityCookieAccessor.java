@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
+package com.philbeaudoin.gwtp.dispatch.client;
 
-import com.google.inject.Singleton;
+import com.google.gwt.user.client.Cookies;
 
 /**
- * The default {@link ActionValidator} implementation.
- * It'll accept every action.
+ * This does not prevent against XSRF security attacks.
  * 
- * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
-@Singleton
-public class DefaultActionValidator implements ActionValidator {
-    @Override
-    public boolean isValid() {
-        return true;
-    }
+public class EmptySecurityCookieAccessor implements SecurityCookieAccessor {
+
+  public String getCookieContent() {
+    return Cookies.getCookie( null );
+  }
 }

@@ -17,19 +17,28 @@
 package com.philbeaudoin.gwtp.dispatch.client;
 
 import com.google.gwt.user.client.Cookies;
+import com.google.inject.Inject;
 
 /**
  * This class provides access to the session id client side
- * by looking into a cookie on the browser.
+ * by looking into a cookie on the browser. This will work
+ * to prevent XSRF attack.
+ * <p />
+ * To use this class you have to bind a constant string annotated
+ * with {@code @}{@link SecurityCookie} to your desired cookie name.
  * 
  * @author Philippe Beaudoin
  */
-public class SecurityCookieAccessorImpl implements SecurityCookieAccessor {
+public class DefaultSecurityCookieAccessor implements SecurityCookieAccessor {
 
-  // TODO This should be changed to our own cookie
-  public final static String COOKIE_NAME = "ACSID";
+  public final String cookieName;
+
+  @Inject
+  DefaultSecurityCookieAccessor( @SecurityCookie String cookieName ) {
+    this.cookieName = cookieName;
+  }
 
   public String getCookieContent() {
-    return Cookies.getCookie( COOKIE_NAME );
+    return Cookies.getCookie( cookieName );
   }
 }

@@ -21,6 +21,21 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
+/**
+ * The asynchronous client-side dispatcher service. The server-side implementation is {@link com.philbeaudoin.gwtp.dispatch.server.DispatchServiceImpl}.
+ * <p />
+ * This class is closely related to {@link DispatchAsync}, in theory the latter wouldn't
+ * be needed, but we use it to workaround a GWT limitation described in {@link com.philbeaudoin.gwtp.dispatch.client.DispatchAsync}.
+ * 
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.Dispatch
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchImpl
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchService
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchServiceAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchServiceImpl
+ * 
+ * @author Philippe Beaudoin
+ */
 public interface DispatchServiceAsync {
     void execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
 }
