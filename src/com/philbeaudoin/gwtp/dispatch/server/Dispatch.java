@@ -22,7 +22,13 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
 import com.philbeaudoin.gwtp.dispatch.shared.ServiceException;
 
 /**
- * The dispatch class
+ * The base class of the synchronous dispatcher service with an arbitrary action type. 
+ * The server-side implementation is {@link com.philbeaudoin.gwtp.dispatch.server.DispatchImpl}
+ * and the async client-side version is {@link DispatchAsync}.
+ * <p />
+ * This class is closely related to {@link com.philbeaudoin.gwtp.dispatch.server.DispatchService}.
+ * In fact, this class wouldn't be needed, but we use it to workaround a GWT 
+ * limitation described in {@link com.philbeaudoin.gwtp.dispatch.client.DispatchAsync}.
  * 
  * @author Christian Goudreau
  * @author David Peterson

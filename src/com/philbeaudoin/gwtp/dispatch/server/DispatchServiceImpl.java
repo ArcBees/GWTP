@@ -29,25 +29,36 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
 import com.philbeaudoin.gwtp.dispatch.shared.ServiceException;
 
 /**
- * Use this servlet to build your own servlet implementation.
+ * This is the server-side implementation of the {@link DispatchService}, for
+ * which the client-side async service is {@link com.philbeaudoin.gwtp.dispatch.client.DispatchServiceAsync}.
+ * <p />
+ * This class is closely related to {@link DispatchImpl}, in theory the latter wouldn't
+ * be needed, but we use it to workaround a GWT limitation described in {@link com.philbeaudoin.gwtp.dispatch.client.DispatchAsync}.
+ * 
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.Dispatch
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchImpl
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchService
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchServiceAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchServiceImpl
  * 
  * @author Christian Goudreau
  * @author David Peterson
  * 
  */
 @Singleton
-public class DefaultDispatchServlet extends RemoteServiceServlet implements DispatchService {
+public class DispatchServiceImpl extends RemoteServiceServlet implements DispatchService {
 
   private static final long serialVersionUID = -4753225025940949024L;
 
   private final static String xsrfAttackMessage =  "Cookie provided by RPC doesn't match request cookie. Possible XSRF attack?";
 
 
-  private final Dispatch dispatch;
-  private Provider<HttpServletRequest> requestProvider;
+  protected final Dispatch dispatch;
+  protected Provider<HttpServletRequest> requestProvider;
 
   @Inject
-  public DefaultDispatchServlet(
+  public DispatchServiceImpl(
       final Dispatch dispatch,
       Provider<HttpServletRequest> requestProvider ) {
     this.dispatch = dispatch;

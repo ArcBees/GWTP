@@ -32,8 +32,18 @@ import com.philbeaudoin.gwtp.dispatch.shared.ServiceException;
 import com.philbeaudoin.gwtp.dispatch.shared.UnsupportedActionException;
 
 /**
- * Implementation of {@link Dispatch} interface. This is the core of
- * {@link Dispatch} server implementation.
+ * This is the server-side implementation of the {@link Dispatch} service with an arbitrary action type, for
+ * which the client-side async service is {@link com.philbeaudoin.gwtp.dispatch.client.DispatchAsync}.
+ * <p />
+ * This class is closely related to {@link DispatchServiceImpl}. In fact, this class wouldn't
+ * be needed, but we use it to workaround a GWT limitation described in {@link com.philbeaudoin.gwtp.dispatch.client.DispatchAsync}.
+ * 
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.Dispatch
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchImpl
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchService
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchServiceAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchServiceImpl
  * 
  * @author Christian Goudreau
  * @author David Peterson
