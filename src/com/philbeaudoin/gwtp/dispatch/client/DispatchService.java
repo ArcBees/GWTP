@@ -16,20 +16,35 @@
 
 package com.philbeaudoin.gwtp.dispatch.client;
 
+import com.google.gwt.user.client.rpc.RemoteService;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.ActionException;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
 import com.philbeaudoin.gwtp.dispatch.shared.ServiceException;
 
-import com.google.gwt.user.client.rpc.RemoteService;
-
+/**
+ * The base class of the synchronous dispatcher service. The server-side implementation is {@link com.philbeaudoin.gwtp.dispatch.server.DispatchServiceImpl}
+ * and the async client-side version is {@link DispatchServiceAsync}.
+ * <p />
+ * This class is closely related to {@link com.philbeaudoin.gwtp.dispatch.server.Dispatch}, in theory the latter wouldn't
+ * be needed, but we use it to workaround a GWT limitation described in {@link com.philbeaudoin.gwtp.dispatch.client.DispatchAsync}.
+ * 
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.Dispatch
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchImpl
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchService
+ * @see com.philbeaudoin.gwtp.dispatch.client.DispatchServiceAsync
+ * @see com.philbeaudoin.gwtp.dispatch.server.DispatchServiceImpl
+ * 
+ * @author Philippe Beaudoin
+ */
 public interface DispatchService extends RemoteService {
     /**
      * This method is called server-side whenever a new action is dispatched.
      * 
      * @param cookieSentByRPC This is the content of the security cookie accessed on the client (in javascript),
      *                        its goal is to prevent XSRF attacks.
-     *                        See {@link com.philbeaudoin.gwtp.dispatch.client.SecurityCookieAccessor} for more details.
+     *                        See {@link SecurityCookieAccessor} for more details.
      * @param action The {@link Action} to execute.
      * @return The {@link Result} of the action.
      * @throws ActionException Thrown if the action could not be executed, for example, because of lacks of detected 
