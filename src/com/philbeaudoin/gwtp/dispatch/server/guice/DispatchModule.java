@@ -17,132 +17,82 @@
 package com.philbeaudoin.gwtp.dispatch.server.guice;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.internal.UniqueAnnotations;
-import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
-import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerMap;
-import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
-import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorMap;
-import com.philbeaudoin.gwtp.dispatch.server.actionValidator.DefaultActionValidator;
-import com.philbeaudoin.gwtp.dispatch.shared.Action;
-import com.philbeaudoin.gwtp.dispatch.shared.Result;
+import com.google.inject.Injector;
+import com.google.inject.Singleton;
+import com.philbeaudoin.gwtp.dispatch.server.DispatchImpl;
+import com.philbeaudoin.gwtp.dispatch.server.Dispatch;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerLinker;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandler.DefaultActionHandlerRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandler.InstanceActionHandlerRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorLinker;
+import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionValidator.DefaultActionValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionValidator.InstanceActionValidatorRegistry;
 
 /**
- * Base Dispatch module that will bind {@link Action}s to {@link ActionHandler}s
- * and {@link ActionValidator}. Your own Guice modules should extend this
- * class.
+ * This module will configure the implementation for the {@link Dispatch},
+ * {@link ActionHandlerRegistry} interfaces and {@link ActionValidatorRegistry}
+ * interfaces. If you want to override the defaults ({@link DispatchImpl},
+ * {@link DefaultActionHandlerRegistry} and
+ * {@link DefaultActionValidatorRegistry}, respectively), pass the override
+ * values into the constructor for this module and ensure it is installed
+ * <b>before</b> any {@link HandlerModule} instances.
  * 
  * @author Christian Goudreau
  * @author David Peterson
  */
-public abstract class DispatchModule extends AbstractModule {
-    /**
-     * Implementation of {@link ActionValidatorMap} that links
-     * {@link Action}s to {@link ActionValidator}s
-     * 
-     * @param <A>
-     *            Type of {@link Action}
-     * @param <R>
-     *            Type of {@link Result}
-     * 
-     * @author Christian Goudreau
-     */
-    private static class ActionValidatorMapImpl<A extends Action<R>, R extends Result> implements ActionValidatorMap<A, R> {
-        private final Class<A> actionClass;
-        private final Class<? extends ActionValidator> actionValidator;
+public class DispatchModule extends AbstractModule {
+  private Class<? extends Dispatch> dispatchClass;
+  private Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass;
+  private Class<? extends ActionValidatorRegistry> actionValidatorRegistryClass;
 
-        public ActionValidatorMapImpl(Class<A> actionClass, Class<? extends ActionValidator> actionValidator) {
-            this.actionClass = actionClass;
-            this.actionValidator = actionValidator;
-        }
+  public DispatchModule() {
+    this(DispatchImpl.class, DefaultActionHandlerRegistry.class, DefaultActionValidatorRegistry.class);
+  }
 
-        @Override
-        public Class<A> getActionClass() {
-            return actionClass;
-        }
+  public DispatchModule(Class<? extends Dispatch> dispatchClass) {
+    this(dispatchClass, DefaultActionHandlerRegistry.class, DefaultActionValidatorRegistry.class);
+  }
 
-        @Override
-        public Class<? extends ActionValidator> getActionValidatorClass() {
-            return actionValidator;
-        }
-    }
+  public DispatchModule(Class<? extends Dispatch> dispatchClass, Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass,
+      Class<? extends ActionValidatorRegistry> actionValidatorRegistryClass) {
+    this.dispatchClass = dispatchClass;
+    this.actionHandlerRegistryClass = actionHandlerRegistryClass;
+    this.actionValidatorRegistryClass = actionValidatorRegistryClass;
+  }
 
-    /**
-     * Implementation of {@link ActionHandlerMap} that links {@link Action}s to
-     * {@link ActionHandler}s
-     * 
-     * @param <A>
-     *            Type of {@link Action}
-     * @param <R>
-     *            Type of {@link Result}
-     * 
-     * @author David Paterson
-     */
-    private static class ActionHandlerMapImpl<A extends Action<R>, R extends Result> implements ActionHandlerMap<A, R> {
+  @Override
+  protected final void configure() {
+    bind(ActionHandlerRegistry.class).to(actionHandlerRegistryClass).in(Singleton.class);
+    bind(ActionValidatorRegistry.class).to(actionValidatorRegistryClass).in(Singleton.class);
+    bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
 
-        private final Class<A> actionClass;
-        private final Class<? extends ActionHandler<A, R>> handlerClass;
+    // This will bind registered handlers to the registry.
+    if (InstanceActionHandlerRegistry.class.isAssignableFrom(actionHandlerRegistryClass))
+      requestStaticInjection(ActionHandlerLinker.class);
 
-        public ActionHandlerMapImpl(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
-            this.actionClass = actionClass;
-            this.handlerClass = handlerClass;
-        }
+    // This will bind registered validators to the registry.
+    if (InstanceActionValidatorRegistry.class.isAssignableFrom(actionValidatorRegistryClass))
+      requestStaticInjection(ActionValidatorLinker.class);
+  }
 
-        public Class<A> getActionClass() {
-            return actionClass;
-        }
+  /**
+   * Override so that only one instance of this class will ever be installed
+   * in an {@link Injector}.
+   */
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof DispatchModule;
+  }
 
-        public Class<? extends ActionHandler<A, R>> getActionHandlerClass() {
-            return handlerClass;
-        }
-    }
+  /**
+   * Override so that only one instance of this class will ever be installed
+   * in an {@link Injector}.
+   */
+  @Override
+  public int hashCode() {
+    return DispatchModule.class.hashCode();
+  }
 
-    @Override
-    protected final void configure() {
-        install(new ServerDispatchModule());
-
-        configureHandlers();
-    }
-
-    /**
-     * Override this method to configure your handlers. Use
-     * calls to {@link #bindHandler()} to register actions that
-     * do not need any specific security validation. Use calls to
-     * {@link #bindSecureHandler()} if you need a specific type
-     * validation.
-     */
-    protected abstract void configureHandlers();
-
-    /**
-     * @param <A>
-     *            Type of {@link Action}
-     * @param <R>
-     *            Type of {@link Result}
-     * @param actionClass
-     *            Implementation of {@link Action} to link and bind
-     * @param handlerClass
-     *            Implementation of {@link ActionHandler} to link and bind
-     */
-    protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
-        bind(ActionHandlerMap.class).annotatedWith(UniqueAnnotations.create()).toInstance(new ActionHandlerMapImpl<A, R>(actionClass, handlerClass));
-        bind(ActionValidatorMap.class).annotatedWith(UniqueAnnotations.create()).toInstance(new ActionValidatorMapImpl<A, R>(actionClass, DefaultActionValidator.class));
-    }
-    
-    /**
-     * @param <A>
-     *            Type of {@link Action}
-     * @param <R>
-     *            Type of {@link Result}
-     * @param actionClass
-     *            Implementation of {@link Action} to link and bind
-     * @param handlerClass
-     *            Implementation of {@link ActionHandler} to link and bind
-     * @param actionValidator
-     *            Implementation of {@link ActionValidator} to link and
-     *            bind
-     */
-    protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass,
-            Class<? extends ActionValidator> actionValidator) {
-        bind(ActionValidatorMap.class).annotatedWith(UniqueAnnotations.create()).toInstance(new ActionValidatorMapImpl<A, R>(actionClass, actionValidator));
-        bind(ActionHandlerMap.class).annotatedWith(UniqueAnnotations.create()).toInstance(new ActionHandlerMapImpl<A, R>(actionClass, handlerClass));
-    }    
 }
