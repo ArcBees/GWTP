@@ -55,7 +55,7 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
 
   private static final long serialVersionUID = -4753225025940949024L;
 
-  private final static String xsrfAttackMessage =  "Cookie provided by RPC doesn't match request cookie. Possible XSRF attack?";
+  private final static String xsrfAttackMessage =  "Cookie provided by RPC doesn't match request cookie, aborting action, possible XSRF attack.";
   private final static String noSecurityCookieMessage = "You have to define a security cookie in order to use secured actions. See com.philbeaudoin.gwtp.dispatch.shared.SecurityCookie for details.";
   
   protected final Logger logger;
@@ -100,7 +100,7 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
    * Checks that the cookie in the RPC matches the one in the http request header.
    * 
    * @param cookieSentByRPC The content of the security cookie sent by RPC.
-   * @return {@code true} if the cookies matche, {@code false} otherwise.
+   * @return {@code true} if the cookies match, {@code false} otherwise.
    * @throws ServiceException If you forgot to bind a {@link SecurityCookie}.
    */
   private boolean cookieMatch(String cookieSentByRPC) throws ServiceException {
