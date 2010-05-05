@@ -55,7 +55,7 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
 
   private static final long serialVersionUID = -4753225025940949024L;
 
-  private final static String xsrfAttackMessage =  "Cookie provided by RPC doesn't match request cookie, aborting action, possible XSRF attack.";
+  private final static String xsrfAttackMessage =  "Cookie provided by RPC doesn't match request cookie, aborting action, possible XSRF attack. (Maybe you forgot to set the security cookie?)";
   private final static String noSecurityCookieMessage = "You have to define a security cookie in order to use secured actions. See com.philbeaudoin.gwtp.dispatch.shared.SecurityCookie for details.";
   
   protected final Logger logger;
