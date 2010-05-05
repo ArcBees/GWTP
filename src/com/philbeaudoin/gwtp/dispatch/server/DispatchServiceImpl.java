@@ -104,12 +104,18 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
    * @throws ServiceException If you forgot to bind a {@link SecurityCookie}.
    */
   private boolean cookieMatch(String cookieSentByRPC) throws ServiceException {
+    
     // Make sure the specified cookie matches the
     HttpServletRequest request = requestProvider.get();
 
     if( securityCookieName == null ) {
       logger.severe( noSecurityCookieMessage );
       throw new ServiceException( noSecurityCookieMessage );    
+    }
+
+    if( cookieSentByRPC == null ) {
+      logger.warning( "No cookie sent by client in RPC. (Did you forget to bind the security cookie client-side? Or it could be an attack.)" );
+      return false;
     }
     
     // Try to match session tokens to prevent XSRF
