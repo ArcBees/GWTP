@@ -200,6 +200,7 @@ public class ProxyGenerator extends Generator {
     int tabPriority = 0;
     String tabLabel = null;
     String tabGetLabel = null;
+    String tabNameToken = null;
     if( proxyInterface.isAssignableTo( tabContentProxyClass ) ) {
       TabInfo tabInfoAnnotation = proxyInterface.getAnnotation( TabInfo.class );
       if( tabInfoAnnotation == null ) {
@@ -230,7 +231,9 @@ public class ProxyGenerator extends Generator {
             TabInfo.class.getSimpleName() + " annotation of the proxy for '" + presenterClassName + 
             "' defines both 'label' and 'getLabel'. Ignoring 'getLabel'.", null);
         tabGetLabel = null;
-      }
+      }      
+      if( tabInfoAnnotation.nameToken().length() > 0 ) // nameToken is the name token to use when the tab is clicked
+        tabNameToken = tabInfoAnnotation.nameToken();
     }
 
     // Start composing the class
@@ -264,21 +267,31 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImplementedInterface(delayedBindClassName);
     if( nameToken == null ) {
       // Not a place
-      if( tabContainerClass == null )
+      if( tabContainerClass == null ) {
         // Standard proxy (not a Place, not a TabContentProxy)
         composerFactory.setSuperclass(proxyImplClassName+"<"+presenterClassName+">" );
-      else
+      } else {
+        if( tabNameToken == null ) {
+          logger.log(TreeLogger.ERROR, "Class '" + presenterClassName + "' is not a Place, its @TabInfo needs to define nameToken.", null);
+          throw new UnableToCompleteException();
+        }         
         // TabContentProxy (not a Place, but a TabContentProxy)
         composerFactory.setSuperclass(tabContentProxyImplClassName+"<"+presenterClassName+">" );
+      }
     }
     else {
       // A place
-      if( tabContainerClass == null )
+      if( tabContainerClass == null ) {
         // Place (but not a TabContentProxy)
         composerFactory.setSuperclass(proxyPlaceImplClassName+"<"+presenterClassName+">" );
-      else
+      } else {
+        if( tabNameToken != null ) {
+          logger.log(TreeLogger.ERROR, "Class '" + presenterClassName + "' has a @NameToken and its @TabInfo has a nameToken, unsupported.", null);
+          throw new UnableToCompleteException();
+        }      
         // Place and TabContentProxy
         composerFactory.setSuperclass(tabContentProxyPlaceImplClassName+"<"+presenterClassName+">" );
+      }
     }
 
     // Get a source writer
@@ -308,40 +321,9 @@ public class ProxyGenerator extends Generator {
       writer.println( "bind( ginjector.getProxyFailureHandler() );" );
       writer.println( "EventBus eventBus = ginjector.getEventBus();"  );
       if( tabContainerClass != null ) {
-        boolean foundRequestTabsEventType = false;
-        for( JField field : tabContainerClass.getFields() ) {
-          RequestTabs annotation = field.getAnnotation( RequestTabs.class );
-          JParameterizedType parameterizedType = field.getType().isParameterized();
-          if( annotation != null ) {
-            if( !field.isStatic() || 
-                parameterizedType == null || 
-                !parameterizedType.isAssignableTo( typeClass ) ||
-                !parameterizedType.getTypeArgs()[0].isAssignableTo(requestTabsHandlerClass) ) {
-              logger.log(TreeLogger.ERROR, "Found the annotation @" + RequestTabs.class.getSimpleName() + 
-                  " on the invalid field '"+tabContainerClassName+"."+field.getName()+
-                  "'. Field must be static and its type must be Type<RequestTabsHandler<?>>.", null);
-              throw new UnableToCompleteException();
-            }
-            foundRequestTabsEventType = true;
-            writer.println( "requestTabsEventType = " + tabContainerClassName + "." + field.getName() + ";" );
-            break;
-          }
-        }
-        if( !foundRequestTabsEventType ) {
-          logger.log(TreeLogger.ERROR, "Did not find any field annotated with @" + RequestTabs.class.getSimpleName() + 
-              " on the container '"+tabContainerClassName+"' while building proxy for presenter '"+
-              presenterClassName + "'.", null);
-          throw new UnableToCompleteException();
-        }
-        writer.println( "priority = " + tabPriority + ";" );
-        if(  tabLabel != null )
-          writer.println( "label = \"" + tabLabel + "\";" );
-        else
-          writer.println( "label = " + tabGetLabel + ";" );
-        writer.println( "historyToken = \"" + nameToken + "\";" );
-        // Call TabContentProxyImpl bind method.
-        writer.println( "bind( eventBus );" );
-
+        writeRequestTabHandler(logger, presenterClassName, nameToken,
+            tabContainerClass, tabContainerClassName, tabPriority, tabLabel,
+            tabGetLabel, writer);
       }
       writePresenterProvider(logger, ctx, writer, proxyCodeSplitAnnotation, 
           proxyCodeSplitBundleAnnotation, ginjectorClass, ginjectorClassName, 
@@ -377,12 +359,13 @@ public class ProxyGenerator extends Generator {
       writeGinjector(writer, ginjectorClassName);
       // Call ProxyImpl bind method.
       writer.println( "bind( ginjector.getProxyFailureHandler() );" );
-      if( tabContainerClass != null ) {
-        // TODO
-        assert false : "Automatic proxys for non-place TabContentProxy not yet supported!";
-      }
-      
+
       writer.println( "EventBus eventBus = ginjector.getEventBus();"  );
+      if( tabContainerClass != null ) {
+        writeRequestTabHandler(logger, presenterClassName, tabNameToken,
+            tabContainerClass, tabContainerClassName, tabPriority, tabLabel,
+            tabGetLabel, writer);
+      }
       writePresenterProvider(logger, ctx, writer, proxyCodeSplitAnnotation, 
           proxyCodeSplitBundleAnnotation, ginjectorClass, ginjectorClassName, 
           presenterClass, presenterClassName);
@@ -409,7 +392,7 @@ public class ProxyGenerator extends Generator {
       else
         writer.println( "place = " + newPlaceCode + ";" );
     }
-    
+
     // END Bind method
     writer.outdent();
     writer.println( "}" );
@@ -419,12 +402,53 @@ public class ProxyGenerator extends Generator {
     return generatedClassName;    
   }
 
+  private void writeRequestTabHandler(TreeLogger logger,
+      String presenterClassName, String nameToken,
+      JClassType tabContainerClass, String tabContainerClassName,
+      int tabPriority, String tabLabel, String tabGetLabel, SourceWriter writer)
+  throws UnableToCompleteException {
+    boolean foundRequestTabsEventType = false;
+    for( JField field : tabContainerClass.getFields() ) {
+      RequestTabs annotation = field.getAnnotation( RequestTabs.class );
+      JParameterizedType parameterizedType = field.getType().isParameterized();
+      if( annotation != null ) {
+        if( !field.isStatic() || 
+            parameterizedType == null || 
+            !parameterizedType.isAssignableTo( typeClass ) ||
+            !parameterizedType.getTypeArgs()[0].isAssignableTo(requestTabsHandlerClass) ) {
+          logger.log(TreeLogger.ERROR, "Found the annotation @" + RequestTabs.class.getSimpleName() + 
+              " on the invalid field '"+tabContainerClassName+"."+field.getName()+
+              "'. Field must be static and its type must be Type<RequestTabsHandler<?>>.", null);
+          throw new UnableToCompleteException();
+        }
+        foundRequestTabsEventType = true;
+        writer.println( "requestTabsEventType = " + tabContainerClassName + "." + field.getName() + ";" );
+        break;
+      }
+    }
+    if( !foundRequestTabsEventType ) {
+      logger.log(TreeLogger.ERROR, "Did not find any field annotated with @" + RequestTabs.class.getSimpleName() + 
+          " on the container '"+tabContainerClassName+"' while building proxy for presenter '"+
+          presenterClassName + "'.", null);
+      throw new UnableToCompleteException();
+    }
+    writer.println( "priority = " + tabPriority + ";" );
+    if(  tabLabel != null )
+      writer.println( "label = \"" + tabLabel + "\";" );
+    else
+      writer.println( "label = " + tabGetLabel + ";" );
+    writer.println( "historyToken = \"" + nameToken + "\";" );
+    // Call TabContentProxyImpl bind method.
+    writer.println( "bind( eventBus );" );
+  }
+
+
   private void writeSlotHandlers(TreeLogger logger, GeneratorContext ctx,
       ProxyCodeSplit proxyCodeSplitAnnotation,
       ProxyCodeSplitBundle proxyCodeSplitBundleAnnotation,
       JClassType presenterClass, String presenterClassName,
       String ginjectorClassName, JClassType ginjectorClass, SourceWriter writer)
-      throws UnableToCompleteException {
+  throws UnableToCompleteException {
     // Register all RevealContentHandler for the @ContentSlot defined in the presenter
     writer.println();
     boolean noContentSlotFound = true;
@@ -447,7 +471,7 @@ public class ProxyGenerator extends Generator {
             writer.println();
             writer.println( "RevealContentHandler<"+presenterClassName+"> revealContentHandler = new RevealContentHandler<" + presenterClassName + ">( failureHandler, this );" );                  
           }
-          
+
           writer.println( "eventBus.addHandler( " + presenterClassName + "." + field.getName() + 
           ", revealContentHandler );" );
         }
