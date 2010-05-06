@@ -47,4 +47,5 @@ public @interface TabInfo {
   int priority();
   String label() default "";
   String getLabel() default "";
+  String nameToken() default "";
 }
