@@ -219,7 +219,7 @@ extends HandlerContainerImpl implements PresenterWidget {
   }
 
   /**
-   * Called right after the widget has been made revealed on screen.
+   * Called right after the widget has been revealed on screen.
    * You should not call this. Fire a 
    * {@link ResetPresentersEvent} instead.
    */
