@@ -74,6 +74,7 @@ public class HttpSessionSecurityCookieFilter implements Filter {
       HttpServletResponse httpResponse = (HttpServletResponse) response;
       Cookie securityCookie = new Cookie(securityCookieName, session.get().getId());
       securityCookie.setMaxAge(-1);
+      securityCookie.setPath("/");
       httpResponse.addCookie( securityCookie );
     }
     chain.doFilter(request, response);
