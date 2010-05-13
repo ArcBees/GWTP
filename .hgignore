@@ -1,2 +1,15 @@
 glob:war/WEB-INF/classes/**
-glob:war/WEB-INF/lib/*.jar
+glob:war/WEB-INF/lib/appengine-api-*-sdk-*.jar
+glob:war/WEB-INF/lib/appengine-api-labs-*.jar
+glob:war/WEB-INF/lib/appengine-jsr107cache-*.jar
+glob:war/WEB-INF/lib/datanucleus-appengine-*.final.jar
+glob:war/WEB-INF/lib/datanucleus-core-*.jar
+glob:war/WEB-INF/lib/datanucleus-jpa-*.jar
+glob:war/WEB-INF/lib/geronimo-jpa_*_spec-*.jar
+glob:war/WEB-INF/lib/geronimo-jta_*_spec-*.jar
+glob:war/WEB-INF/lib/gwt-servlet.jar
+glob:war/WEB-INF/lib/jdo2-api-*-eb.jar
+glob:war/WEB-INF/lib/jsr107cache-*.jar
+glob:war/WEB-INF/lib/commons-logging-1.1.1.jar
+glob:war/WEB-INF/lib/log4j-1.2.15.jar
+glob:war/WEB-INF/lib/objectify-2.0.jar
