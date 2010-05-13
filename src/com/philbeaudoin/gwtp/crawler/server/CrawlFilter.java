@@ -16,7 +16,6 @@
 
 package com.philbeaudoin.gwtp.crawler.server;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.inject.Inject;
@@ -56,8 +55,6 @@ public final class CrawlFilter implements Filter {
   private static final String ESCAPED_FRAGMENT_FORMAT2 = "&"+ESCAPED_FRAGMENT_FORMAT1;
   private static final int ESCAPED_FRAGMENT_LENGTH2 = ESCAPED_FRAGMENT_FORMAT2.length();
 
-  private static ThreadLocal<WebClient> webClient = new ThreadLocal<WebClient>() {};
-  
   private final Provider<WebClient> webClientProvider;
 
   @Inject
@@ -105,17 +102,13 @@ public final class CrawlFilter implements Filter {
       queryString = rewriteQueryString(queryString);
       pageNameSb.append(queryString);
 
-      WebClient currentWebClient = webClient.get(); 
-      if( currentWebClient == null ) {
-        currentWebClient = webClientProvider.get();
-        webClient.set( currentWebClient );
-      }
+      WebClient webClient = webClientProvider.get();
       
-      currentWebClient.setThrowExceptionOnScriptError(false);
-      currentWebClient.setJavaScriptEnabled(true);
+      webClient.setThrowExceptionOnScriptError(false);
+      webClient.setJavaScriptEnabled(true);
       String pageName = pageNameSb.toString();
-      HtmlPage page = currentWebClient.getPage(pageName);
-      currentWebClient.pumpEventLoop( timeoutMillis );
+      HtmlPage page = webClient.getPage(pageName);
+      webClient.pumpEventLoop( timeoutMillis );
 
       res.setContentType("text/html;charset=UTF-8");
       PrintWriter out = res.getWriter();
@@ -128,7 +121,7 @@ public final class CrawlFilter implements Filter {
       out.println("<hr>");
 
       out.println(page.asXml());
-      currentWebClient.closeAllWindows();
+      webClient.closeAllWindows();
       out.close();
     } else {
       // No escaped fragment, chain other filters.

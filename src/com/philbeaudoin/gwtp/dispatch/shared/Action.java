@@ -48,7 +48,13 @@ public interface Action<R extends Result> extends IsSerializable {
 
   /**
    * Verifies if the action is secured. Secured actions perform a number of extra
-   * security checks, such as validating the {@link SecurityCookie} to foil XSRF attacks. 
+   * security checks, such as validating the {@link SecurityCookie} to foil XSRF attacks.
+   * <p />
+   * <b>Important!</b> Make sure your method returns a value that does not depend on client-side
+   * information, otherwise it could be tampered with to turn a secure action into an insecure one.
+   * An example of a bad practice would be to store a {@code boolean secured} member and return
+   * that. Since this field is serialized, the user could change it on his side. A simple and good
+   * practice is simply to {@code return true;} or {@code return false;}.  
    * 
    * @return {@code true} if the action should be secured against XSRF attacks, {@code false} otherwise.
    */
