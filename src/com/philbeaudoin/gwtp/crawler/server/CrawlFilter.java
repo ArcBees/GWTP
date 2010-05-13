@@ -19,6 +19,8 @@ package com.philbeaudoin.gwtp.crawler.server;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 import java.io.IOException;
@@ -54,39 +56,18 @@ public final class CrawlFilter implements Filter {
   private static final String ESCAPED_FRAGMENT_FORMAT2 = "&"+ESCAPED_FRAGMENT_FORMAT1;
   private static final int ESCAPED_FRAGMENT_LENGTH2 = ESCAPED_FRAGMENT_FORMAT2.length();
 
-  /**
-   * Maps from the query string that contains _escaped_fragment_ to one that
-   * doesn't, but is instead followed by a hash fragment. It also unescapes any
-   * characters that were escaped by the crawler. If the query string does not
-   * contain _escaped_fragment_, it is not modified.
-   * 
-   * @param queryString
-   * @return A modified query string followed by a hash fragment if applicable.
-   *         The non-modified query string otherwise.
-   * @throws UnsupportedEncodingException
-   */
-  private static String rewriteQueryString(String queryString)
-  throws UnsupportedEncodingException {
-    int index = queryString.indexOf(ESCAPED_FRAGMENT_FORMAT2);
-    int length = ESCAPED_FRAGMENT_LENGTH2;
-    if (index == -1) {
-      index = queryString.indexOf(ESCAPED_FRAGMENT_FORMAT1);
-      length = ESCAPED_FRAGMENT_LENGTH1;
-    }
-    if (index != -1) {
-      StringBuilder queryStringSb = new StringBuilder();
-      if (index > 0) {
-        queryStringSb.append("?");
-        queryStringSb.append(queryString.substring(0, index));
-      }
-      queryStringSb.append("#!");
-      queryStringSb.append(URLDecoder.decode(queryString.substring(index
-          + length, queryString.length()), "UTF-8"));
-      return queryStringSb.toString();
-    }
-    return queryString;
-  }
+  private static ThreadLocal<WebClient> webClient = new ThreadLocal<WebClient>() {};
+  
+  private final Provider<WebClient> webClientProvider;
 
+  @Inject
+  private @HtmlUnitTimeout long timeoutMillis;
+  
+  @Inject
+  public CrawlFilter( Provider<WebClient> webClientProvider ) {
+    this.webClientProvider = webClientProvider;
+  }
+  
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {    
   }
@@ -124,12 +105,17 @@ public final class CrawlFilter implements Filter {
       queryString = rewriteQueryString(queryString);
       pageNameSb.append(queryString);
 
-      final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_3);
-      webClient.setThrowExceptionOnScriptError(false);
-      webClient.setJavaScriptEnabled(true);
+      WebClient currentWebClient = webClient.get(); 
+      if( currentWebClient == null ) {
+        currentWebClient = webClientProvider.get();
+        webClient.set( currentWebClient );
+      }
+      
+      currentWebClient.setThrowExceptionOnScriptError(false);
+      currentWebClient.setJavaScriptEnabled(true);
       String pageName = pageNameSb.toString();
-      HtmlPage page = webClient.getPage(pageName);
-      webClient.pumpEventLoop(10000);
+      HtmlPage page = currentWebClient.getPage(pageName);
+      currentWebClient.pumpEventLoop( timeoutMillis );
 
       res.setContentType("text/html;charset=UTF-8");
       PrintWriter out = res.getWriter();
@@ -142,7 +128,7 @@ public final class CrawlFilter implements Filter {
       out.println("<hr>");
 
       out.println(page.asXml());
-      webClient.closeAllWindows();
+      currentWebClient.closeAllWindows();
       out.close();
     } else {
       // No escaped fragment, chain other filters.
@@ -151,4 +137,37 @@ public final class CrawlFilter implements Filter {
   }
 
 
+  /**
+   * Maps from the query string that contains _escaped_fragment_ to one that
+   * doesn't, but is instead followed by a hash fragment. It also unescapes any
+   * characters that were escaped by the crawler. If the query string does not
+   * contain _escaped_fragment_, it is not modified.
+   * 
+   * @param queryString
+   * @return A modified query string followed by a hash fragment if applicable.
+   *         The non-modified query string otherwise.
+   * @throws UnsupportedEncodingException
+   */
+  private static String rewriteQueryString(String queryString)
+  throws UnsupportedEncodingException {
+    int index = queryString.indexOf(ESCAPED_FRAGMENT_FORMAT2);
+    int length = ESCAPED_FRAGMENT_LENGTH2;
+    if (index == -1) {
+      index = queryString.indexOf(ESCAPED_FRAGMENT_FORMAT1);
+      length = ESCAPED_FRAGMENT_LENGTH1;
+    }
+    if (index != -1) {
+      StringBuilder queryStringSb = new StringBuilder();
+      if (index > 0) {
+        queryStringSb.append("?");
+        queryStringSb.append(queryString.substring(0, index));
+      }
+      queryStringSb.append("#!");
+      queryStringSb.append(URLDecoder.decode(queryString.substring(index
+          + length, queryString.length()), "UTF-8"));
+      return queryStringSb.toString();
+    }
+    return queryString;
+  }
+  
 }
