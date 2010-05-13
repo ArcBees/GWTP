@@ -114,7 +114,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     String historyToken = event.getValue();
     try {
       if( !doRevealPlace( tokenFormatter.toPlaceRequest( historyToken ) ) ) {
-        if ( historyToken.trim() == "" )
+        if ( historyToken.trim().equals("") )
           revealDefaultPlace();
         else
           revealErrorPlace( historyToken );
