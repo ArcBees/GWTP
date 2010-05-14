@@ -50,6 +50,8 @@ import com.philbeaudoin.gwtp.dispatch.shared.UnsupportedActionException;
  */
 @Singleton
 public class DispatchImpl implements Dispatch {
+  private final static String actionValidatorMessage = " couldn't allow access to action : ";
+  
   private static class DefaultExecutionContext implements ExecutionContext {
     private final DispatchImpl dispatch;
     private final List<ActionResult<?, ?>> actionResults;
@@ -166,7 +168,7 @@ public class DispatchImpl implements Dispatch {
       if (actionValidator.isValid())
         return handler.execute(action, ctx);
       else
-        throw new ActionException("Insufficient rights"); // TODO This should be a more specific exception
+        throw new ServiceException( actionValidator.getClass().getName() + actionValidatorMessage + action.getClass().getName() );
     } catch (ActionException e) {
       throw e;
     } catch( Exception e ) {
@@ -189,7 +191,7 @@ public class DispatchImpl implements Dispatch {
       if (actionValidator.isValid())
         handler.undo(action, result, ctx);
       else
-        throw new ActionException("Insufficient rights"); // TODO This should be a more specific exception
+        throw new ServiceException( actionValidator.getClass().getName() + actionValidatorMessage + action.getClass().getName() );
     } catch (ActionException e) {
       throw e;
     } catch (Exception cause) {

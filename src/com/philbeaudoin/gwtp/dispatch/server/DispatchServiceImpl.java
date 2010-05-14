@@ -79,7 +79,7 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
     
     if( action.isSecured() && !cookieMatch(cookieSentByRPC) ) {
       logger.warning( xsrfAttackMessage + " During action: " + action.getClass().getName() );
-      throw new ServiceException( "" );
+      throw new ServiceException( xsrfAttackMessage + " During action: " + action.getClass().getName() );
     }
 
     try {
