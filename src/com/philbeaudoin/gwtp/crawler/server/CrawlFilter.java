@@ -16,6 +16,7 @@
 
 package com.philbeaudoin.gwtp.crawler.server;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.inject.Inject;
@@ -57,8 +58,8 @@ public final class CrawlFilter implements Filter {
 
   private final Provider<WebClient> webClientProvider;
 
-  @Inject
-  private @HtmlUnitTimeout long timeoutMillis;
+  @Inject(optional = true)
+  private @HtmlUnitTimeout long timeoutMillis = 10000;
   
   @Inject
   public CrawlFilter( Provider<WebClient> webClientProvider ) {
@@ -102,13 +103,13 @@ public final class CrawlFilter implements Filter {
       queryString = rewriteQueryString(queryString);
       pageNameSb.append(queryString);
 
-      WebClient webClient = webClientProvider.get();
+      WebClient webClient = new WebClient(BrowserVersion.FIREFOX_3); //webClientProvider.get();
       
       webClient.setThrowExceptionOnScriptError(false);
       webClient.setJavaScriptEnabled(true);
       String pageName = pageNameSb.toString();
-      HtmlPage page = webClient.getPage(pageName);
-      webClient.pumpEventLoop( timeoutMillis );
+      HtmlPage page = webClient.getPage("http://puzzlebazaar.appspot.com:80/Puzzlebazar.jsp#!main"); // pageName);
+      webClient.pumpEventLoop( 20000 );
 
       res.setContentType("text/html;charset=UTF-8");
       PrintWriter out = res.getWriter();
