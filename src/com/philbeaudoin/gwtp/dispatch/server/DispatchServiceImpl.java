@@ -78,9 +78,9 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
   public Result execute(String cookieSentByRPC, Action<?> action) throws ActionException, ServiceException {
     
     if( action.isSecured() && !cookieMatch(cookieSentByRPC) ) {
-      String message = xsrfAttackMessage + " During action: " + action.getClass().getName();
+      String message = xsrfAttackMessage + " While executing action: " + action.getClass().getName();
       
-      logger.warning( message );
+      logger.severe( message );
       throw new ServiceException( message );
     }
 
@@ -98,6 +98,31 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
     }
   }
 
+  @Override
+  public void undo(String cookieSentByRPC, Action<Result> action, Result result) throws ActionException, ServiceException {
+
+    if( action.isSecured() && !cookieMatch(cookieSentByRPC) ) {
+      String message = xsrfAttackMessage + " While undoing action: " + action.getClass().getName();
+      
+      logger.severe( message );
+      throw new ServiceException( message );
+    }
+
+    try {
+      dispatch.undo( action, result);
+    } catch (ActionException e) {
+      logger.warning("Action exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+      throw e;
+    } catch (ServiceException e) {
+      logger.warning("Service exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+      throw e;
+    } catch (RuntimeException e) {
+      logger.warning("Unexpected exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+      throw new ServiceException(e);
+    }
+  }
+  
+  
   /**
    * Checks that the cookie in the RPC matches the one in the http request header.
    * 
@@ -111,12 +136,12 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
     HttpServletRequest request = requestProvider.get();
 
     if( securityCookieName == null ) {
-      logger.severe( noSecurityCookieMessage );
-      throw new ServiceException( noSecurityCookieMessage );    
+      logger.info( noSecurityCookieMessage );
+      return false;
     }
 
     if( cookieSentByRPC == null ) {
-      logger.warning( "No cookie sent by client in RPC. (Did you forget to bind the security cookie client-side? Or it could be an attack.)" );
+      logger.info( "No cookie sent by client in RPC. (Did you forget to bind the security cookie client-side? Or it could be an attack.)" );
       return false;
     }
     
@@ -131,7 +156,7 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements Dispatc
     }
     
     if( cookieInRequest == null ) {
-      logger.warning( "Cookie \"" + securityCookieName + "\" not found in HttpServletRequest!" );
+      logger.info( "Cookie \"" + securityCookieName + "\" not found in HttpServletRequest!" );
       return false;
     }
     
