@@ -41,4 +41,5 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
  */
 public interface DispatchAsync {
     <A extends Action<R>, R extends Result> void execute( A action, AsyncCallback<R> callback );
+    <A extends Action<R>, R extends Result> void undo( A action, R result, AsyncCallback<Void> callback );
 }

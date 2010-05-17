@@ -54,23 +54,53 @@ public class DefaultDispatchAsync implements DispatchAsync {
 
     realService.execute(securityCookie, action, new AsyncCallback<Result>() {
       public void onFailure(Throwable caught) {
-        DefaultDispatchAsync.this.onFailure(action, caught, callback);
+        DefaultDispatchAsync.this.onExecuteFailure(action, caught, callback);
       }
 
       @SuppressWarnings("unchecked")
       public void onSuccess(Result result) {
         // Note: This cast is a dodgy hack to get around a GWT 1.6 async
         // compiler issue
-        DefaultDispatchAsync.this.onSuccess(action, (R) result, callback);
+        DefaultDispatchAsync.this.onExecuteSuccess(action, (R) result, callback);
       }
     });
   }
-  
-  protected <A extends Action<R>, R extends Result> void onSuccess(A action, R result, final AsyncCallback<R> callback) {
+
+  @Override
+  public <A extends Action<R>, R extends Result> void undo(final A action, final R result,
+      final AsyncCallback<Void> callback) {
+    ((ServiceDefTarget) realService).setServiceEntryPoint(baseUrl + action.getServiceName());
+
+    String securityCookie = securityCookieAccessor.getCookieContent();
+
+    realService.undo(securityCookie, action, result, new AsyncCallback<Void>() {
+      public void onFailure(Throwable caught) {
+        DefaultDispatchAsync.this.onUndoFailure(action, caught, callback);
+      }
+
+      public void onSuccess(Void voidResult) {
+        DefaultDispatchAsync.this.onUndoSuccess(action, voidResult, callback);
+      }
+    });
+  }
+
+  protected <A extends Action<R>, R extends Result> void onExecuteSuccess(A action, R result, final AsyncCallback<R> callback) {
     callback.onSuccess(result);
   }
 
-  protected <A extends Action<R>, R extends Result> void onFailure(A action, Throwable caught, final AsyncCallback<R> callback) {
+  protected <A extends Action<R>, R extends Result> void onExecuteFailure(A action, Throwable caught, final AsyncCallback<R> callback) {
+    if (exceptionHandler != null && exceptionHandler.onFailure(caught) == ExceptionHandler.Status.STOP) {
+      return;
+    }
+
+    callback.onFailure(caught);
+  }
+
+  protected <A extends Action<R>, R extends Result> void onUndoSuccess(A action, Void voidResult, final AsyncCallback<Void> callback) {
+    callback.onSuccess(voidResult);
+  }
+
+  protected <A extends Action<R>, R extends Result> void onUndoFailure(A action, Throwable caught, final AsyncCallback<Void> callback) {
     if (exceptionHandler != null && exceptionHandler.onFailure(caught) == ExceptionHandler.Status.STOP) {
       return;
     }
