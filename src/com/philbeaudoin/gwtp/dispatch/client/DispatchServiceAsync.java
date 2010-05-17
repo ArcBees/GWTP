@@ -37,5 +37,17 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
  * @author Philippe Beaudoin
  */
 public interface DispatchServiceAsync {
-    void execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
+  /**
+   * This method is called client-side whenever a new action is executed.
+   *
+   * @see DispatchService#execute
+   */
+  void execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
+
+  /**
+   * This method is called client-side whenever a previous executed action need to be undone.
+   *
+   * @see DispatchService#undo
+   */
+  void undo( String cookieSentByRPC, Action<?> action, Result result, AsyncCallback<Void> callback );
 }
