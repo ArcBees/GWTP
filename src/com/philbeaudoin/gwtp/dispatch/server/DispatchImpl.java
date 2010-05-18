@@ -21,11 +21,9 @@ import java.util.List;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
-import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionResult;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
-import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.ActionException;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
@@ -104,14 +102,10 @@ public class DispatchImpl implements Dispatch {
     }
   };
 
-  private final ActionHandlerRegistry handlerRegistry;
-  private final ActionValidatorRegistry actionValidatorRegistry;
   private final ActionHandlerValidatorRegistry actionHandlerValidatorRegistry;
 
   @Inject
-  DispatchImpl(ActionHandlerRegistry handlerRegistry, ActionValidatorRegistry actionValidatorRegistry, ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
-    this.handlerRegistry = handlerRegistry;
-    this.actionValidatorRegistry = actionValidatorRegistry;
+  DispatchImpl(ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
     this.actionHandlerValidatorRegistry = actionHandlerValidatorRegistry;
   }
 
@@ -205,26 +199,21 @@ public class DispatchImpl implements Dispatch {
   @SuppressWarnings("unchecked")
   private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(
       A action) throws UnsupportedActionException {
-    ActionHandler<A, R> handler = handlerRegistry.findHandler(action);
+    ActionHandler<A, R> handler = (ActionHandler<A, R>) actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionHandler();
     if (handler == null) {
-      handler = (ActionHandler<A, R>) actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionHandler();
-      if (handler == null) {
-        throw new UnsupportedActionException(action);
-      }
+      throw new UnsupportedActionException(action);
     }
+    
     return handler;
   }
 
   private <A extends Action<R>, R extends Result> ActionValidator findActionValidator(
       A action) throws UnsupportedActionException {
-    ActionValidator actionValidator = actionValidatorRegistry.findActionValidator(action);
-
+    ActionValidator actionValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionValidator();
     if (actionValidator == null) {
-      actionValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionValidator();
-      if (actionValidator == null) {
-        throw new UnsupportedActionException(action);
-      }
+      throw new UnsupportedActionException(action);
     }
+      
     return actionValidator;
   }
 }
