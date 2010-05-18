@@ -24,48 +24,47 @@ import com.philbeaudoin.gwtp.dispatch.server.DispatchImpl;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorLinker;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
-import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ClassActionHandlerValidatorRegistry;
-import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.EagerActionHandlerValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.InstanceActionHandlerValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
 
 /**
  * This module will configure the implementation for the {@link Dispatch} and
  * {@link ActionHandlerValidatorRegistry} interfaces. Also every
- * {@link ActionHandler} and {@link ActionValidator} will be loaded lazily.
+ * {@link ActionHandler} and {@link ActionValidator} will be loaded eagerly.
  * 
  * 
  * If you want to override the defaults ({@link DispatchImpl},
- * {@link LazyActionHandlerValidatorRegistry} pass the override values into
+ * {@link EagerActionHandlerValidatorRegistry} pass the override values into
  * the constructor for this module and ensure it is installed <b>before</b> any
  * {@link HandlerModule} instances.
  * 
  * @author Christian Goudreau
- * @author David Peterson
  */
-public class DispatchModule extends AbstractModule {
+public class EagerDispatchModule extends AbstractModule {
   private Class<? extends Dispatch> dispatchClass;
-  private Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass;
+  private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
 
-  public DispatchModule() {
-    this(DispatchImpl.class, LazyActionHandlerValidatorRegistry.class);
+  public EagerDispatchModule() {
+    this(DispatchImpl.class, EagerActionHandlerValidatorRegistry.class);
   }
 
-  public DispatchModule(Class<? extends Dispatch> dispatchClass) {
-    this(dispatchClass, LazyActionHandlerValidatorRegistry.class);
+  public EagerDispatchModule(Class<? extends Dispatch> dispatchClass) {
+    this(dispatchClass, EagerActionHandlerValidatorRegistry.class);
   }
 
-  public DispatchModule(Class<? extends Dispatch> dispatchClass, Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
+  public EagerDispatchModule(Class<? extends Dispatch> dispatchClass, Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass) {
     this.dispatchClass = dispatchClass;
-    this.lazyActionHandlerValidatorRegistryClass = lazyActionHandlerValidatorRegistryClass;
+    this.actionHandlerValidatorRegistryClass = actionHandlerValidatorRegistryClass;
   }
 
   @Override
   protected final void configure() {
-    bind(ActionHandlerValidatorRegistry.class).to(lazyActionHandlerValidatorRegistryClass).in(Singleton.class);
+    bind(ActionHandlerValidatorRegistry.class).to(actionHandlerValidatorRegistryClass).in(Singleton.class);
     bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
 
-    // This will bind registered validators and handlers to the registry lazily.
-    if (ClassActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass))
+    // This will bind registered validators and handlers to the registry eagerly.
+    if (InstanceActionHandlerValidatorRegistry.class.isAssignableFrom(actionHandlerValidatorRegistryClass))
       requestStaticInjection(ActionHandlerValidatorLinker.class);
   }
 
@@ -86,5 +85,4 @@ public class DispatchModule extends AbstractModule {
   public int hashCode() {
     return DispatchModule.class.hashCode();
   }
-
 }

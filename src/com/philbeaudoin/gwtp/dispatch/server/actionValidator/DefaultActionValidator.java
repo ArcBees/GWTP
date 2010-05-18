@@ -30,6 +30,6 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
 public class DefaultActionValidator implements ActionValidator {
     @Override
     public boolean isValid(Action<? extends Result> action) {
-      return false;
+      return true;
     }
 }
