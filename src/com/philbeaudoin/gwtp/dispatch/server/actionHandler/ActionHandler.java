@@ -24,6 +24,11 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
 /**
  * Instances of this interface will handle specific types of {@link Action}
  * classes.
+ * <p />
+ * <b>Important!</b> Your action handlers must be thread safe since they 
+ * will be bound as singletons. For details, see
+ * <a href="http://code.google.com/p/google-guice/wiki/Scopes#Scopes_and_Concurrency">
+ * http://code.google.com/p/google-guice/wiki/Scopes#Scopes_and_Concurrency</a>.
  * 
  * @author David Peterson
  */
