@@ -20,6 +20,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.internal.UniqueAnnotations;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerMap;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorClass;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorMap;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorMap;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.DefaultActionValidator;
@@ -95,6 +97,26 @@ public abstract class HandlerModule extends AbstractModule {
       return handlerClass;
     }
   }
+  
+  private static class ActionHandlerValidatorMapImpl<A extends Action<R>, R extends Result> implements ActionHandlerValidatorMap<A, R> {
+    private final Class<A> actionClass;
+    private final ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass;
+    
+    public ActionHandlerValidatorMapImpl(final Class<A> actionClass, final ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
+      this.actionClass = actionClass;
+      this.actionHandlerValidatorClass = actionHandlerValidatorClass;
+    }
+    
+    @Override
+    public Class<A> getActionClass() {
+      return actionClass;
+    }
+
+    @Override
+    public ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass() {
+      return actionHandlerValidatorClass;
+    }
+  }
 
   @Override
   protected final void configure() {
@@ -111,7 +133,49 @@ public abstract class HandlerModule extends AbstractModule {
    * validation.
    */
   protected abstract void configureHandlers();
-
+  /**
+   * @param <A>
+   *            Type of {@link Action}
+   * @param <R>
+   *            Type of {@link Result}
+   * @param actionClass
+   *            Implementation of {@link Action} to link and bind
+   * @param handlerClass
+   *            Implementation of {@link ActionHandler} to link and bind
+   */
+  protected <A extends Action<R>, R extends Result> void bindAction(
+      Class<A> actionClass, 
+      Class<? extends ActionHandler<A, R>> handlerClass) {
+    bind(ActionHandlerValidatorMap.class).annotatedWith(UniqueAnnotations.create()).toInstance(
+        new ActionHandlerValidatorMapImpl<A, R>(
+            actionClass, 
+            new ActionHandlerValidatorClass<A, R>(handlerClass, DefaultActionValidator.class)));
+  }
+  
+  
+  /**
+   * @param <A>
+   *            Type of {@link Action}
+   * @param <R>
+   *            Type of {@link Result}
+   * @param actionClass
+   *            Implementation of {@link Action} to link and bind
+   * @param handlerClass
+   *            Implementation of {@link ActionHandler} to link and bind
+   * @param actionValidator
+   *            Implementation of {@link ActionValidator} to link and
+   *            bind
+   */
+  protected <A extends Action<R>, R extends Result> void bindAction(
+      Class<A> actionClass, 
+      Class<? extends ActionHandler<A, R>> handlerClass,
+      Class<? extends ActionValidator> actionValidator) {
+    bind(ActionHandlerValidatorMap.class).annotatedWith(UniqueAnnotations.create()).toInstance(
+        new ActionHandlerValidatorMapImpl<A, R>(
+            actionClass, 
+            new ActionHandlerValidatorClass<A, R>(handlerClass, actionValidator)));
+  }   
+  
   /**
    * @param <A>
    *            Type of {@link Action}
