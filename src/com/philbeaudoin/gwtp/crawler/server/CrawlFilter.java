@@ -16,16 +16,19 @@
 
 package com.philbeaudoin.gwtp.crawler.server;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.philbeaudoin.gwtp.dispatch.server.Utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -55,20 +58,23 @@ public final class CrawlFilter implements Filter {
   private static final String ESCAPED_FRAGMENT_FORMAT2 = "&"+ESCAPED_FRAGMENT_FORMAT1;
   private static final int ESCAPED_FRAGMENT_LENGTH2 = ESCAPED_FRAGMENT_FORMAT2.length();
 
-  private final Provider<WebClient> webClientProvider;
+  @Inject(optional = true)
+  private final Provider<WebClient> webClientProvider = null;
 
-  @Inject
-  private @HtmlUnitTimeout long timeoutMillis;
+  @Inject(optional = true)
+  private @HtmlUnitTimeout long timeoutMillis = 10000;
+
+  private final Logger log;
   
   @Inject
-  public CrawlFilter( Provider<WebClient> webClientProvider ) {
-    this.webClientProvider = webClientProvider;
+  public CrawlFilter( Logger log ) {
+    this.log = log;
   }
-  
+
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {    
   }
-  
+
   /**
    * Destroys the filter configuration.
    */
@@ -92,39 +98,55 @@ public final class CrawlFilter implements Filter {
 
     // Does this request contain an _escaped_fragment_?
     if ((queryString != null) && (queryString.contains(ESCAPED_FRAGMENT_FORMAT1))) {
-      StringBuilder pageNameSb = new StringBuilder("http://");
-      pageNameSb.append(req.getServerName());
-      if (req.getServerPort() != 0) {
-        pageNameSb.append(":");
-        pageNameSb.append(req.getServerPort());
+      try {
+        StringBuilder pageNameSb = new StringBuilder("http://");
+        pageNameSb.append(req.getServerName());
+        if (req.getServerPort() != 0) {
+          pageNameSb.append(":");
+          pageNameSb.append(req.getServerPort());
+        }
+        pageNameSb.append(requestURI);
+        queryString = rewriteQueryString(queryString);
+        pageNameSb.append(queryString);
+        String pageName = pageNameSb.toString();
+  
+        log.info( "Crawl filter encountered escaped fragment, will open: " + pageName );
+  
+        WebClient webClient;
+        if( webClientProvider == null )
+          webClient = new WebClient(BrowserVersion.FIREFOX_3);
+        else
+          webClient = webClientProvider.get();
+  
+        webClient.setThrowExceptionOnScriptError(false);
+        webClient.setJavaScriptEnabled(true);
+        HtmlPage page = webClient.getPage( pageName );
+        webClient.pumpEventLoop( timeoutMillis );
+  
+        res.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = res.getWriter();
+        out.println("<hr />");
+        out.println("<center><h3>You are viewing a non-interactive page that is intended for the crawler.  "
+            + "You probably want to see this page: <a href=\""
+            + pageName
+            + "\">"
+            + pageName + "</a></h3></center>");
+        out.println("<hr />");
+        
+        out.println(page.asXml());
+        webClient.closeAllWindows();
+  
+        out.println("");
+        out.close();
       }
-      pageNameSb.append(requestURI);
-      queryString = rewriteQueryString(queryString);
-      pageNameSb.append(queryString);
-
-      WebClient webClient = webClientProvider.get();
+      catch( Exception e ) {
+        log.severe( "Crawl filter encountered an exception." );
+        Utils.logStackTrace(log, e);
+      }
       
-      webClient.setThrowExceptionOnScriptError(false);
-      webClient.setJavaScriptEnabled(true);
-      String pageName = pageNameSb.toString();
-      HtmlPage page = webClient.getPage(pageName);
-      webClient.pumpEventLoop( timeoutMillis );
-
-      res.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = res.getWriter();
-      out.println("<hr>");
-      out.println("<center><h3>You are viewing a non-interactive page that is intended for the crawler.  "
-          + "You probably want to see this page: <a href=\""
-          + pageName
-          + "\">"
-          + pageName + "</a></h3></center>");
-      out.println("<hr>");
-
-      out.println(page.asXml());
-      webClient.closeAllWindows();
-      out.close();
+      
+      log.info( "Crawl filter exiting, no chaining." );
     } else {
-      // No escaped fragment, chain other filters.
       chain.doFilter(request, response);
     }
   }
@@ -162,5 +184,5 @@ public final class CrawlFilter implements Filter {
     }
     return queryString;
   }
-  
+
 }
