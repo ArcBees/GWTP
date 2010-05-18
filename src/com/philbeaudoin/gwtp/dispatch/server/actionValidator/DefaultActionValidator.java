@@ -17,6 +17,8 @@
 package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.google.inject.Singleton;
+import com.philbeaudoin.gwtp.dispatch.shared.Action;
+import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
  * The default {@link ActionValidator} implementation.
@@ -27,7 +29,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class DefaultActionValidator implements ActionValidator {
     @Override
-    public boolean isValid() {
-        return true;
+    public boolean isValid(Action<? extends Result> action) {
+      return false;
     }
 }
