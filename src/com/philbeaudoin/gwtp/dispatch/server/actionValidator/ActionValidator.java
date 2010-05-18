@@ -18,6 +18,7 @@ package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.philbeaudoin.gwtp.dispatch.client.DispatchService;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
+import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
  * Implementors must provide an implementation of this interface and provide it
@@ -39,5 +40,5 @@ public interface ActionValidator {
      * 
      * @return {@code true} if the action can be executed, {@code false} otherwise.
      */
-    public boolean isValid();
+    public boolean isValid(Action<? extends Result> action);
 }
