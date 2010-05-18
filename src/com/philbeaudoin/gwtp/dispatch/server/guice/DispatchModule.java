@@ -25,6 +25,10 @@ import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerLinker;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.DefaultActionHandlerRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.InstanceActionHandlerRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorLinker;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.DefaultActionHandlerValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.InstanceActionHandlerValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorLinker;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.DefaultActionValidatorRegistry;
@@ -46,26 +50,29 @@ public class DispatchModule extends AbstractModule {
   private Class<? extends Dispatch> dispatchClass;
   private Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass;
   private Class<? extends ActionValidatorRegistry> actionValidatorRegistryClass;
+  private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
 
   public DispatchModule() {
-    this(DispatchImpl.class, DefaultActionHandlerRegistry.class, DefaultActionValidatorRegistry.class);
+    this(DispatchImpl.class, DefaultActionHandlerRegistry.class, DefaultActionValidatorRegistry.class, DefaultActionHandlerValidatorRegistry.class);
   }
 
   public DispatchModule(Class<? extends Dispatch> dispatchClass) {
-    this(dispatchClass, DefaultActionHandlerRegistry.class, DefaultActionValidatorRegistry.class);
+    this(dispatchClass, DefaultActionHandlerRegistry.class, DefaultActionValidatorRegistry.class, DefaultActionHandlerValidatorRegistry.class);
   }
 
   public DispatchModule(Class<? extends Dispatch> dispatchClass, Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass,
-      Class<? extends ActionValidatorRegistry> actionValidatorRegistryClass) {
+      Class<? extends ActionValidatorRegistry> actionValidatorRegistryClass, Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass) {
     this.dispatchClass = dispatchClass;
     this.actionHandlerRegistryClass = actionHandlerRegistryClass;
     this.actionValidatorRegistryClass = actionValidatorRegistryClass;
+    this.actionHandlerValidatorRegistryClass = actionHandlerValidatorRegistryClass;
   }
 
   @Override
   protected final void configure() {
     bind(ActionHandlerRegistry.class).to(actionHandlerRegistryClass).in(Singleton.class);
     bind(ActionValidatorRegistry.class).to(actionValidatorRegistryClass).in(Singleton.class);
+    bind(ActionHandlerValidatorRegistry.class).to(actionHandlerValidatorRegistryClass).in(Singleton.class);
     bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
 
     // This will bind registered handlers to the registry.
@@ -75,6 +82,10 @@ public class DispatchModule extends AbstractModule {
     // This will bind registered validators to the registry.
     if (InstanceActionValidatorRegistry.class.isAssignableFrom(actionValidatorRegistryClass))
       requestStaticInjection(ActionValidatorLinker.class);
+    
+    // This will bind registered validators and handlers to the registry.
+    if (InstanceActionHandlerValidatorRegistry.class.isAssignableFrom(actionHandlerValidatorRegistryClass))
+      requestStaticInjection(ActionHandlerValidatorLinker.class);
   }
 
   /**

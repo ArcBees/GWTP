@@ -23,6 +23,7 @@ import com.google.inject.Singleton;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandlerRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionResult;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
@@ -105,11 +106,13 @@ public class DispatchImpl implements Dispatch {
 
   private final ActionHandlerRegistry handlerRegistry;
   private final ActionValidatorRegistry actionValidatorRegistry;
+  private final ActionHandlerValidatorRegistry actionHandlerValidatorRegistry;
 
   @Inject
-  public DispatchImpl(ActionHandlerRegistry handlerRegistry, ActionValidatorRegistry actionValidatorRegistry) {
+  DispatchImpl(ActionHandlerRegistry handlerRegistry, ActionValidatorRegistry actionValidatorRegistry, ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
     this.handlerRegistry = handlerRegistry;
     this.actionValidatorRegistry = actionValidatorRegistry;
+    this.actionHandlerValidatorRegistry = actionHandlerValidatorRegistry;
   }
 
   @Override
@@ -165,7 +168,7 @@ public class DispatchImpl implements Dispatch {
     ActionValidator actionValidator = findActionValidator(action);
 
     try {
-      if (actionValidator.isValid())
+      if (actionValidator.isValid(action))
         return handler.execute(action, ctx);
       else
         throw new ServiceException( actionValidator.getClass().getName() + actionValidatorMessage + action.getClass().getName() );
@@ -188,7 +191,7 @@ public class DispatchImpl implements Dispatch {
 
     ActionHandler<A, R> handler = findHandler(action);
     try {
-      if (actionValidator.isValid())
+      if (actionValidator.isValid(action))
         handler.undo(action, result, ctx);
       else
         throw new ServiceException( actionValidator.getClass().getName() + actionValidatorMessage + action.getClass().getName() );
@@ -199,12 +202,16 @@ public class DispatchImpl implements Dispatch {
     }
   }
 
+  @SuppressWarnings("unchecked")
   private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(
       A action) throws UnsupportedActionException {
     ActionHandler<A, R> handler = handlerRegistry.findHandler(action);
-    if (handler == null)
-      throw new UnsupportedActionException(action);
-
+    if (handler == null) {
+      handler = (ActionHandler<A, R>) actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionHandler();
+      if (handler == null) {
+        throw new UnsupportedActionException(action);
+      }
+    }
     return handler;
   }
 
@@ -212,9 +219,12 @@ public class DispatchImpl implements Dispatch {
       A action) throws UnsupportedActionException {
     ActionValidator actionValidator = actionValidatorRegistry.findActionValidator(action);
 
-    if (actionValidator == null)
-      throw new UnsupportedActionException(action);
-
+    if (actionValidator == null) {
+      actionValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionValidator();
+      if (actionValidator == null) {
+        throw new UnsupportedActionException(action);
+      }
+    }
     return actionValidator;
   }
 }
