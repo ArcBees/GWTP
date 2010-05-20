@@ -85,7 +85,7 @@ implements ProxyPlace<P> {
   
   @Override
   public final void reveal() {
-    handleRequest(null);
+    handleRequest( new PlaceRequest(getNameToken()) );
   }
 
   @Override
@@ -172,8 +172,7 @@ implements ProxyPlace<P> {
       @Override
       public void onSuccess(P presenter) {
         PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
-        if( request != null )
-          presenterImpl.prepareFromRequest( request );
+        presenterImpl.prepareFromRequest( request );
         if( !presenter.isVisible() )
           presenterImpl.forceReveal();  // This will trigger a reset in due time
         else
