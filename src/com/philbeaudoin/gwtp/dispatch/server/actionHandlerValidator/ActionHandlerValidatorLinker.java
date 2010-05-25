@@ -41,8 +41,8 @@ public class ActionHandlerValidatorLinker {
   public static void linkValidators(Injector injector, ActionHandlerValidatorRegistry registry) {
       List<Binding<ActionHandlerValidatorMap>> bindings = injector.findBindingsByType(TypeLiteral.get(ActionHandlerValidatorMap.class));
 
-      if (registry instanceof InstanceActionHandlerValidatorRegistry) {
-        InstanceActionHandlerValidatorRegistry instanceRegistry = (InstanceActionHandlerValidatorRegistry) registry;
+      if (registry instanceof EagerActionHandlerValidatorRegistry) {
+        EagerActionHandlerValidatorRegistry instanceRegistry = (EagerActionHandlerValidatorRegistry) registry;
 
           for (Binding<ActionHandlerValidatorMap> binding : bindings) {
               Class<? extends ActionValidator> actionValidatorClass = binding.getProvider().get().getActionHandlerValidatorClass().getActionValidatorClass();
@@ -53,18 +53,14 @@ public class ActionHandlerValidatorLinker {
               
               if (actionValidator == null) {
                 actionValidator =  injector.getInstance(actionValidatorClass);
-                
-                actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(
-                    actionValidator, injector.getInstance(handlerClass));   
-              } else {
-                actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(
-                    actionValidator, injector.getInstance(handlerClass));       
               }
+              
+              actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(actionValidator, injector.getInstance(handlerClass));   
               
               instanceRegistry.addActionHandlerValidator(binding.getProvider().get().getActionClass(), actionHandlerValidatorInstance);
           }
-      } else if (registry instanceof ClassActionHandlerValidatorRegistry) {
-        ClassActionHandlerValidatorRegistry classRegistry = (ClassActionHandlerValidatorRegistry) registry;
+      } else if (registry instanceof LazyActionHandlerValidatorRegistry) {
+        LazyActionHandlerValidatorRegistry classRegistry = (LazyActionHandlerValidatorRegistry) registry;
 
           for (Binding<ActionHandlerValidatorMap> binding : bindings) {
             ActionHandlerValidatorMap map = binding.getProvider().get();
