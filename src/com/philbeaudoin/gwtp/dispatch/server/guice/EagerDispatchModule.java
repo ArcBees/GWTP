@@ -24,8 +24,8 @@ import com.philbeaudoin.gwtp.dispatch.server.DispatchImpl;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorLinker;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.EagerActionHandlerValidatorRegistryImpl;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.EagerActionHandlerValidatorRegistry;
-import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.InstanceActionHandlerValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
 
 /**
@@ -35,7 +35,7 @@ import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
  * 
  * 
  * If you want to override the defaults ({@link DispatchImpl},
- * {@link EagerActionHandlerValidatorRegistry} pass the override values into
+ * {@link EagerActionHandlerValidatorRegistryImpl} pass the override values into
  * the constructor for this module and ensure it is installed <b>before</b> any
  * {@link HandlerModule} instances.
  * 
@@ -46,11 +46,11 @@ public class EagerDispatchModule extends AbstractModule {
   private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
 
   public EagerDispatchModule() {
-    this(DispatchImpl.class, EagerActionHandlerValidatorRegistry.class);
+    this(DispatchImpl.class, EagerActionHandlerValidatorRegistryImpl.class);
   }
 
   public EagerDispatchModule(Class<? extends Dispatch> dispatchClass) {
-    this(dispatchClass, EagerActionHandlerValidatorRegistry.class);
+    this(dispatchClass, EagerActionHandlerValidatorRegistryImpl.class);
   }
 
   public EagerDispatchModule(Class<? extends Dispatch> dispatchClass, Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass) {
@@ -64,7 +64,7 @@ public class EagerDispatchModule extends AbstractModule {
     bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
 
     // This will bind registered validators and handlers to the registry eagerly.
-    if (InstanceActionHandlerValidatorRegistry.class.isAssignableFrom(actionHandlerValidatorRegistryClass))
+    if (EagerActionHandlerValidatorRegistry.class.isAssignableFrom(actionHandlerValidatorRegistryClass))
       requestStaticInjection(ActionHandlerValidatorLinker.class);
   }
 
