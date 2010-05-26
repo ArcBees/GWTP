@@ -22,6 +22,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionResult;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorInstance;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
@@ -199,21 +200,22 @@ public class DispatchImpl implements Dispatch {
   @SuppressWarnings("unchecked")
   private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(
       A action) throws UnsupportedActionException {
-    ActionHandler<A, R> handler = (ActionHandler<A, R>) actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionHandler();
-    if (handler == null) {
-      throw new UnsupportedActionException(action);
-    }
+    ActionHandlerValidatorInstance handlerValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action);
     
-    return handler;
+    if (handlerValidator == null) {
+      throw new UnsupportedActionException(action);
+    } 
+    
+    return (ActionHandler<A, R>) handlerValidator.getActionHandler();
   }
 
   private <A extends Action<R>, R extends Result> ActionValidator findActionValidator(
       A action) throws UnsupportedActionException {
-    ActionValidator actionValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action).getActionValidator();
-    if (actionValidator == null) {
+    ActionHandlerValidatorInstance handlerValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action);
+    if (handlerValidator == null) {
       throw new UnsupportedActionException(action);
-    }
+    } 
       
-    return actionValidator;
+    return handlerValidator.getActionValidator();
   }
 }
