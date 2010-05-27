@@ -20,19 +20,20 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
 /**
- * Event fired when a user refuse to leave a page.
+ * Event fired when a user refuse to leave a page. See
+ * {@link PlaceManager#setOnLeaveConfirmation}
  * 
  * @author Christian Goudreau
  */
-public final class NavigationRefusedEvent extends GwtEvent<NavigationRefusedhandler> {
-  private static final Type<NavigationRefusedhandler> TYPE = new Type<NavigationRefusedhandler>();
+public final class NavigationRefusedEvent extends GwtEvent<NavigationRefusedHandler> {
+  private static final Type<NavigationRefusedHandler> TYPE = new Type<NavigationRefusedHandler>();
   
-  public static Type<NavigationRefusedhandler> getType() {
+  public static Type<NavigationRefusedHandler> getType() {
     return TYPE;
   }
   
   @Override
-  protected void dispatch(NavigationRefusedhandler handler) {
+  protected void dispatch(NavigationRefusedHandler handler) {
     handler.onNavigationRefused(this);
   }
 
@@ -41,7 +42,7 @@ public final class NavigationRefusedEvent extends GwtEvent<NavigationRefusedhand
   }
   
   @Override
-  public Type<NavigationRefusedhandler> getAssociatedType() {
+  public Type<NavigationRefusedHandler> getAssociatedType() {
     return getType();
   }
 }
