@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  *
  * @author David Peterson
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public interface PlaceManager {
 
@@ -45,6 +46,18 @@ public interface PlaceManager {
    * {@link PlaceRequestEvent} corresponding to their default place.
    */
   public void revealDefaultPlace();
+  
+  
+  /**
+   * Reveals an unauthorized place. This is invoked when canReveal returned
+   * false instead of returning an error place. Application-specific place
+   * managers should fire the {@link PlaceRequestEvent} corresponding to a place
+   * that displays an unauthorized place. The default implementation is simply
+   * to call {@link #revealDefaultPlace()}.
+   * 
+   * @param unauthorizedHistoryToken The history token that was not authorized.
+   */
+  public void revealUnauthorizedPlace( String unauthorizedHistoryToken );
   
   /**
    * Reveals an error place. This is invoked when the history token was not

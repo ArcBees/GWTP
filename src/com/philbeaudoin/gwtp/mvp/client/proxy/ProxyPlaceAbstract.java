@@ -62,7 +62,7 @@ implements ProxyPlace<P> {
    * @param eventBus The {@link EventBus}.
    */
   @Inject
-  protected void bind( ProxyFailureHandler failureHandler, PlaceManager placeManager, EventBus eventBus ) {
+  protected void bind( ProxyFailureHandler failureHandler, final PlaceManager placeManager, EventBus eventBus ) {
     this.failureHandler = failureHandler;
     this.eventBus = eventBus;
     this.placeManager = placeManager;
@@ -74,6 +74,9 @@ implements ProxyPlace<P> {
         if ( matchesRequest( request ) && canReveal() ) {
           event.setHandled();
           handleRequest( request );
+        } else if ( matchesRequest( request ) && !canReveal() ) {
+          event.setHandled();
+          placeManager.revealUnauthorizedPlace( request.getNameToken() );
         }
       }
     } );
