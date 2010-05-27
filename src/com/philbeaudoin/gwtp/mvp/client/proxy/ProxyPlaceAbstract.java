@@ -72,12 +72,14 @@ implements ProxyPlace<P> {
         if( event.isHandled() )
           return;
         PlaceRequest request = event.getRequest();
-        if ( matchesRequest( request ) && canReveal() ) {
-          event.setHandled();
-          handleRequest( request );
-        } else if ( matchesRequest( request ) && !canReveal() ) {
-          event.setHandled();
-          placeManager.revealUnauthorizedPlace( request.getNameToken() );
+        if ( matchesRequest( request ) ) {
+          if (canReveal() ) {
+            event.setHandled();
+            handleRequest( request );
+          } else {
+            event.setHandled();
+            placeManager.revealUnauthorizedPlace( request.getNameToken() );
+          }
         }
       }
     } );
