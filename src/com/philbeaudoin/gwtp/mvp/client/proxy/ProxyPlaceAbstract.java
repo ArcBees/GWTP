@@ -16,6 +16,8 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
@@ -170,13 +172,20 @@ implements ProxyPlace<P> {
       }
 
       @Override
-      public void onSuccess(P presenter) {
-        PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
-        presenterImpl.prepareFromRequest( request );
-        if( !presenter.isVisible() )
-          presenterImpl.forceReveal();  // This will trigger a reset in due time
-        else
-          ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves
+      public void onSuccess(final P presenter) {
+        // Everything should be bound before we prepare the presenter from the request,
+        // in case it wants to fire some events. That's why we will do this in a 
+        // deferred command.
+        DeferredCommand.addCommand( new Command() {
+          @Override
+          public void execute() {
+            PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
+            presenterImpl.prepareFromRequest( request );
+            if( !presenter.isVisible() )
+              presenterImpl.forceReveal();  // This will trigger a reset in due time
+            else
+              ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves                
+          } } );
       }
     } );
 
