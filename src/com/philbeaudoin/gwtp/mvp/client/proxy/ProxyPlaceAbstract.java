@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 GWT-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import com.philbeaudoin.gwtp.mvp.client.PresenterImpl;
  *
  * @author David Peterson
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 implements ProxyPlace<P> {

@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Gwt-Presenter
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,11 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
 import com.google.gwt.event.shared.GwtEvent;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
+/**
+ * Event fired when a user refuse to leave a page.
+ * 
+ * @author Christian Goudreau
+ */
 public final class NavigationRefusedEvent extends GwtEvent<NavigationRefusedhandler> {
   private static final Type<NavigationRefusedhandler> TYPE = new Type<NavigationRefusedhandler>();
   
