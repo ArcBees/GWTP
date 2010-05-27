@@ -18,8 +18,9 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
 
 import com.google.gwt.event.shared.EventHandler;
 
-public interface ResetPresentersHandler extends EventHandler {
-
-  public void onResetPresenters(final ResetPresentersEvent resetPresentersEvent);
-  
+/**
+ * @author Christian Goudreau
+ */
+public interface NavigationRefusedHandler extends EventHandler {
+  public void onNavigationRefused(final NavigationRefusedEvent navigationRefusedEvent);
 }
