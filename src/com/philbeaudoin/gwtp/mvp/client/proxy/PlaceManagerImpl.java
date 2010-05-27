@@ -78,7 +78,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
-    revealDefaultPlace();
+    revealErrorPlace(unauthorizedHistoryToken);
   }  
   
   @Override
