@@ -180,6 +180,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       // User has confirmed, don't ask any more question.
       setOnLeaveConfirmation( null );
     } else {
+      NavigationRefusedEvent.fire( eventBus );
       History.newItem(currentHistoryToken, false);
     }
     return confirmed;
