@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 GWT-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
@@ -32,6 +34,7 @@ import com.philbeaudoin.gwtp.mvp.client.PresenterImpl;
  *
  * @author David Peterson
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 implements ProxyPlace<P> {
@@ -62,7 +65,7 @@ implements ProxyPlace<P> {
    * @param eventBus The {@link EventBus}.
    */
   @Inject
-  protected void bind( ProxyFailureHandler failureHandler, PlaceManager placeManager, EventBus eventBus ) {
+  protected void bind( ProxyFailureHandler failureHandler, final PlaceManager placeManager, EventBus eventBus ) {
     this.failureHandler = failureHandler;
     this.eventBus = eventBus;
     this.placeManager = placeManager;
@@ -71,9 +74,14 @@ implements ProxyPlace<P> {
         if( event.isHandled() )
           return;
         PlaceRequest request = event.getRequest();
-        if ( matchesRequest( request ) && canReveal() ) {
-          event.setHandled();
-          handleRequest( request );
+        if ( matchesRequest( request ) ) {
+          if (canReveal() ) {
+            event.setHandled();
+            handleRequest( request );
+          } else {
+            event.setHandled();
+            placeManager.revealUnauthorizedPlace( request.getNameToken() );
+          }
         }
       }
     } );
@@ -85,7 +93,7 @@ implements ProxyPlace<P> {
   
   @Override
   public final void reveal() {
-    handleRequest(null);
+    handleRequest( new PlaceRequest(getNameToken()) );
   }
 
   @Override
@@ -170,14 +178,20 @@ implements ProxyPlace<P> {
       }
 
       @Override
-      public void onSuccess(P presenter) {
-        PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
-        if( request != null )
-          presenterImpl.prepareFromRequest( request );
-        if( !presenter.isVisible() )
-          presenterImpl.forceReveal();  // This will trigger a reset in due time
-        else
-          ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves
+      public void onSuccess(final P presenter) {
+        // Everything should be bound before we prepare the presenter from the request,
+        // in case it wants to fire some events. That's why we will do this in a 
+        // deferred command.
+        DeferredCommand.addCommand( new Command() {
+          @Override
+          public void execute() {
+            PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
+            presenterImpl.prepareFromRequest( request );
+            if( !presenter.isVisible() )
+              presenterImpl.forceReveal();  // This will trigger a reset in due time
+            else
+              ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves                
+          } } );
       }
     } );
 
