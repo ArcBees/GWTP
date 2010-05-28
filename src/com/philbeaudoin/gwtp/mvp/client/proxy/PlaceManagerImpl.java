@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
+/**
+* @author Philippe Beaudoin
+* @author Christian Goudreau
+*/
 public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandler<String>, ClosingHandler {
 
   private final EventBus eventBus;
@@ -72,6 +76,11 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     History.fireCurrentHistoryState();
   }
 
+  @Override
+  public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
+    revealErrorPlace(unauthorizedHistoryToken);
+  }  
+  
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
     revealDefaultPlace();
@@ -171,6 +180,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       // User has confirmed, don't ask any more question.
       setOnLeaveConfirmation( null );
     } else {
+      NavigationRefusedEvent.fire( eventBus );
       History.newItem(currentHistoryToken, false);
     }
     return confirmed;

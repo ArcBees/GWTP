@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  *
  * @author David Peterson
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public interface PlaceManager {
 
@@ -45,6 +46,19 @@ public interface PlaceManager {
    * {@link PlaceRequestEvent} corresponding to their default place.
    */
   public void revealDefaultPlace();
+
+  /**
+   * Reveals an unauthorized place. This is invoked when
+   * {@link Place#canReveal()} returned {@code false} and history token was
+   * valid. Application-specific place managers should fire the
+   * {@link PlaceRequestEvent} corresponding to a place that displays an
+   * unauthorized place. The default implementation is simply to call
+   * {@link #revealErrorPlace()}.
+   * 
+   * @param unauthorizedHistoryToken
+   *          The history token that was not authorized.
+   */
+  public void revealUnauthorizedPlace( String unauthorizedHistoryToken );
   
   /**
    * Reveals an error place. This is invoked when the history token was not
@@ -59,16 +73,18 @@ public interface PlaceManager {
 
   /**
    * Sets the question that will be displayed whenever the user tries to
-   * navigate away from the current page. Navigating away can happen
-   * either occur by changing the program state (the history token),
-   * by entering an external URL or by closing the window. All cases will 
-   * be handled.
-   * <p /> 
-   * If the user indicates that he doesn't accept the navigation, then the
-   * navigation will be cancelled and the current page will remain. 
+   * navigate away from the current page. Navigating away can happen either
+   * occur by changing the program state (the history token), by entering an
+   * external URL or by closing the window. All cases will be handled.
    * <p />
-   * @param question The question to display. Pass {@code null} to accept navigation 
-   *                 directly, without asking a question.
+   * If the user indicates that he doesn't accept the navigation, then the
+   * navigation will be cancelled, {@link NavigationRefusedEvent} will be
+   * triggered and the current page will remain.
+   * <p />
+   * 
+   * @param question
+   *          The question to display. Pass {@code null} to accept navigation
+   *          directly, without asking a question.
    */
   public void setOnLeaveConfirmation( String question );
   
