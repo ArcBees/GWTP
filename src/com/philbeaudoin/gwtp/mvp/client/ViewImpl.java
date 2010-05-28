@@ -19,7 +19,7 @@ package com.philbeaudoin.gwtp.mvp.client;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A simple implementation of view that simply disregards every call to
+ * A simple implementation of {@link View} that simply disregards every call to
  * {@link #setContent(Object, Widget)}, {@link #addContent(Object, Widget)},
  * and {@link #clearContent(Object)}.
  * <p />
