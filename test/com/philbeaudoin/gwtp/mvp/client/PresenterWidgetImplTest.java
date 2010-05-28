@@ -27,6 +27,8 @@ public class PresenterWidgetImplTest {
       bindMock(ViewA.class).in(TestScope.SINGLETON);
       bindMock(ViewB.class).in(TestScope.SINGLETON);
       bindMock(ViewC.class).in(TestScope.SINGLETON);
+      bindMock(PopupViewB.class).in(TestScope.SINGLETON);
+      bindMock(PopupViewC.class).in(TestScope.SINGLETON);
       bind(PresenterWidgetA.class).in(TestScope.SINGLETON);
       bind(PresenterWidgetB.class).in(TestScope.SINGLETON);
       bind(PresenterWidgetC.class).in(TestScope.SINGLETON);
@@ -36,6 +38,8 @@ public class PresenterWidgetImplTest {
   interface ViewA extends View {}
   interface ViewB extends View {}
   interface ViewC extends View {}
+  interface PopupViewB extends PopupView {}
+  interface PopupViewC extends PopupView {}
   
   // Simple subclasses of PresenterWidgetImpl
   static abstract class PresenterWidgetSpy<V extends View> extends PresenterWidgetImpl<V> {
@@ -84,6 +88,18 @@ public class PresenterWidgetImplTest {
       super(eventBus, view);
     }
   }
+  static class PopupPresenterWidgetB extends PresenterWidgetSpy<PopupViewB> {
+    @Inject
+    public PopupPresenterWidgetB(EventBus eventBus, PopupViewB view) {
+      super(eventBus, view);
+    }
+  }
+  static class PopupPresenterWidgetC extends PresenterWidgetSpy<PopupViewC> {
+    @Inject
+    public PopupPresenterWidgetC(EventBus eventBus, PopupViewC view) {
+      super(eventBus, view);
+    }
+  }
   
   // Providers to use Guice injection
   @Inject Provider<EventBus> EventBusProvider;
@@ -93,6 +109,8 @@ public class PresenterWidgetImplTest {
   @Inject Provider<PresenterWidgetA> presenterWidgetAProvider;
   @Inject Provider<PresenterWidgetB> presenterWidgetBProvider;
   @Inject Provider<PresenterWidgetC> presenterWidgetCProvider;
+  @Inject Provider<PopupPresenterWidgetB> popupPresenterWidgetBProvider;
+  @Inject Provider<PopupPresenterWidgetC> popupPresenterWidgetCProvider;
 
   @Test
   public void presenterWidgetIsInitiallyNotVisible() {
@@ -157,7 +175,7 @@ public class PresenterWidgetImplTest {
     assertEquals( 1, contentB.onHideMethodCalled );
     assertEquals( 1, contentC.onHideMethodCalled );
   }
-  
+
   @Test
   public void testSetContentInEmptySlotOnInitiallyVisiblePresenter() {
     // Set-up
@@ -316,4 +334,139 @@ public class PresenterWidgetImplTest {
     assertEquals( 1, contentCinB.onHideMethodCalled );
   }
 
+  @Test
+  public void testAddCenteredPopupContentOnInitiallyInvisiblePresenter() {
+    // Set-up
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
+    PopupPresenterWidgetB popupContentB = popupPresenterWidgetBProvider.get();
+    PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
+    
+    // Given
+    // presenterWidget is NOT visible
+    assertFalse( presenterWidgetA.isVisible() );
+    
+    // When
+    presenterWidgetA.addPopupContent(popupContentB);
+    presenterWidgetA.addPopupContent(popupContentC);
+
+    // Then
+    verify( popupContentB.getView(), times(0) ).show();
+    verify( popupContentC.getView(), times(0) ).show();
+    verify( popupContentB.getView(), times(0) ).hide();
+    verify( popupContentC.getView(), times(0) ).hide();
+    verify( popupContentB.getView() ).center();
+    verify( popupContentC.getView() ).center();
+    
+    assertEquals( 0, popupContentB.onRevealMethodCalled );
+    assertEquals( 0, popupContentC.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.notifyReveal();
+    
+    // Then
+    assertEquals( 1, popupContentB.onRevealMethodCalled );
+    assertEquals( 1, popupContentC.onRevealMethodCalled );
+    verify( popupContentB.getView() ).show();
+    verify( popupContentC.getView() ).show();
+    
+    // and then When
+    presenterWidgetA.notifyHide();
+    
+    // Then
+    assertEquals( 1, popupContentB.onRevealMethodCalled );
+    assertEquals( 1, popupContentC.onRevealMethodCalled );
+    assertEquals( 1, popupContentB.onHideMethodCalled );
+    assertEquals( 1, popupContentC.onHideMethodCalled );
+    verify( popupContentB.getView() ).show();
+    verify( popupContentC.getView() ).show();
+    verify( popupContentB.getView() ).hide();
+    verify( popupContentC.getView() ).hide();
+  }
+
+  @Test
+  public void testAddUncenteredPopupContentOnInitiallyInvisiblePresenter() {
+    // Set-up
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
+    PopupPresenterWidgetB popupContentB = popupPresenterWidgetBProvider.get();
+    PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
+    
+    // Given
+    // presenterWidget is NOT visible
+    assertFalse( presenterWidgetA.isVisible() );
+    
+    // When
+    presenterWidgetA.addPopupContent(popupContentB, false);
+    presenterWidgetA.addPopupContent(popupContentC, false);
+
+    // Then
+    verify( popupContentB.getView(), times(0) ).show();
+    verify( popupContentC.getView(), times(0) ).show();
+    verify( popupContentB.getView(), times(0) ).hide();
+    verify( popupContentC.getView(), times(0) ).hide();
+    
+    assertEquals( 0, popupContentB.onRevealMethodCalled );
+    assertEquals( 0, popupContentC.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.notifyReveal();
+    
+    // Then
+    assertEquals( 1, popupContentB.onRevealMethodCalled );
+    assertEquals( 1, popupContentC.onRevealMethodCalled );
+    verify( popupContentB.getView() ).show();
+    verify( popupContentC.getView() ).show();
+    
+    // and then When
+    presenterWidgetA.notifyHide();
+    
+    // Then
+    assertEquals( 1, popupContentB.onRevealMethodCalled );
+    assertEquals( 1, popupContentC.onRevealMethodCalled );
+    assertEquals( 1, popupContentB.onHideMethodCalled );
+    assertEquals( 1, popupContentC.onHideMethodCalled );
+    verify( popupContentB.getView() ).show();
+    verify( popupContentC.getView() ).show();
+    verify( popupContentB.getView() ).hide();
+    verify( popupContentC.getView() ).hide();
+        
+    verify( popupContentB.getView(), times(0) ).center();
+    verify( popupContentC.getView(), times(0) ).center();
+  }
+
+  @Test
+  public void testAddCenteredPopupContentOnInitiallyVisiblePresenter() {
+    // Set-up
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
+    PopupPresenterWidgetB popupContentB = popupPresenterWidgetBProvider.get();
+    PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
+    
+    // Given
+    presenterWidgetA.notifyReveal();
+    
+    // When
+    presenterWidgetA.addPopupContent(popupContentB);
+    presenterWidgetA.addPopupContent(popupContentC);
+
+    // Then
+    verify( popupContentB.getView() ).show();
+    verify( popupContentC.getView() ).show();
+    verify( popupContentB.getView() ).center();
+    verify( popupContentC.getView() ).center();
+    
+    assertEquals( 1, popupContentB.onRevealMethodCalled );
+    assertEquals( 1, popupContentC.onRevealMethodCalled );
+    
+    // and then When
+    presenterWidgetA.notifyHide();
+    
+    // Then
+    assertEquals( 1, popupContentB.onRevealMethodCalled );
+    assertEquals( 1, popupContentC.onRevealMethodCalled );
+    assertEquals( 1, popupContentB.onHideMethodCalled );
+    assertEquals( 1, popupContentC.onHideMethodCalled );
+    verify( popupContentB.getView() ).show();
+    verify( popupContentC.getView() ).show();
+    verify( popupContentB.getView() ).hide();
+    verify( popupContentC.getView() ).hide();
+  }
 }

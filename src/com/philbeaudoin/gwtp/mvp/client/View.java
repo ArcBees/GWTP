@@ -19,7 +19,7 @@ package com.philbeaudoin.gwtp.mvp.client;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The interface for singleton view classes that handles all
+ * The interface for view classes that handles all
  * the UI-related code for a {@link Presenter}.
  * 
  * @author Philippe Beaudoin
