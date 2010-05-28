@@ -21,6 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ResetPresentersEvent;
 
@@ -39,6 +43,16 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   private final Map< Object, List<PresenterWidgetImpl<?>> > activeChildren =
     new HashMap< Object, List<PresenterWidgetImpl<?>> >();
+
+  private static class PopupPresenterInfo {
+    PopupPresenterInfo(PresenterWidgetImpl<?> presenter) {
+      this.presenter = presenter;
+    }
+    final PresenterWidgetImpl<?> presenter;
+    HandlerRegistration    closeHandlerRegistration = null;
+  }
+  
+  private final List<PopupPresenterInfo> popupChildren = new ArrayList<PopupPresenterInfo>();
 
   protected boolean visible = false;
 
@@ -102,7 +116,110 @@ extends HandlerContainerImpl implements PresenterWidget {
   public void setContent( Object slot, PresenterWidget content ) {
     setContent(slot, content, true);
   }
+
+  /**
+   * This method sets some popup content within the {@link Presenter} and centers it. The widget returned by 
+   * the {@code content}'s {@link View#asWidget()} method view must inherit from 
+   * {@link PopupPanel}. The popup will be visible and the corresponding presenter will receive
+   * the lifecycle events as needed.
+   * <p />
+   * Contrary to the {@link setContent()} method, no {@link ResetPresentersEvent} is fired.
+   * 
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
+   * 
+   * @see #addPopupContent(PresenterWidget, boolean)
+   */
+  protected void addPopupContent( final PresenterWidget content ) {
+    addPopupContent( content, true );
+  }
   
+  /**
+   * This method sets some popup content within the {@link Presenter}. The widget returned by 
+   * the {@code content}'s {@link View#asWidget()} method view must inherit from 
+   * {@link PopupPanel}. The popup will be visible and the corresponding presenter will receive
+   * the lifecycle events as needed.
+   * <p />
+   * Contrary to the {@link setContent()} method, no {@link ResetPresentersEvent} is fired.
+   * 
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
+   * @param center Pass {@code true} to center the popup, otherwise its position will not be adjusted.
+   * 
+   * @see #addPopupContent(PresenterWidget)
+   */
+  protected void addPopupContent( final PresenterWidget content, boolean center ) {
+    final PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
+
+    // Do nothing if the content is already added
+    for( PopupPresenterInfo popupInfo : popupChildren ) {
+      if( popupInfo.presenter == contentImpl )
+        return;
+    }
+    
+    PopupPanel popupPanel = (PopupPanel)contentImpl.getWidget();
+    PopupPresenterInfo popupInfo = new PopupPresenterInfo( contentImpl );
+
+    popupChildren.add( popupInfo );
+    
+    // Center if desired
+    if( center ) {
+      popupPanel.center();
+      // Centering shows the popup. Hides it back if needed.
+      if( !isVisible() )
+        popupPanel.hide();
+    }
+    
+    // Display the popup content
+    if( isVisible() ) {
+      popupPanel.show();
+      // This presenter is visible, its time to call onReveal
+      // on the newly added child (and recursively on this child children)
+      monitorCloseEvent( popupInfo );
+      contentImpl.notifyReveal();
+    }
+    
+  }
+
+  /**
+   * Makes sure we monitor the specified popup presenter so that we know when
+   * it is closing. This way we can make sure it doesn't receive future messages.
+   * 
+   * @param popupInfo The {@link PopupPresenterInfo} to monitor.
+   */
+  private void monitorCloseEvent(final PopupPresenterInfo popupInfo) {
+    assert( popupInfo.closeHandlerRegistration == null );
+
+    PopupPanel popupPanel = (PopupPanel)popupInfo.presenter.getWidget();    
+
+    popupInfo.closeHandlerRegistration = 
+      popupPanel.addCloseHandler( new CloseHandler<PopupPanel>() {      
+        @Override
+        public void onClose(CloseEvent<PopupPanel> event) {
+          if( isVisible() )
+            popupInfo.presenter.notifyHide();
+          removePopupChildren( popupInfo.presenter );
+        }
+      } );
+   }
+
+  /**
+   * Go through the popup children and remove the specified one.
+   * 
+   * @param content The {@link PresenterWidget} added as a popup which we now remove.
+   */
+  private void removePopupChildren(PresenterWidgetImpl<?> content) {
+    int i;
+    for( i=0; i < popupChildren.size(); ++i ) {
+      PopupPresenterInfo popupInfo = popupChildren.get(i);
+      if( popupInfo.presenter == content ) {
+        if( popupInfo.closeHandlerRegistration != null )
+          popupInfo.closeHandlerRegistration.removeHandler();
+        break;
+      }
+    }
+    if( i < popupChildren.size() )
+      popupChildren.remove(i);
+  }      
+
   /**
    * This method sets some content in a specific slot of the {@link Presenter}.
    * 
@@ -230,6 +347,13 @@ extends HandlerContainerImpl implements PresenterWidget {
     for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
       for( PresenterWidgetImpl<?> activeChild : slotChildren )
         activeChild.notifyReveal();
+    for( PopupPresenterInfo popupInfo : popupChildren ) {
+      // This presenter is visible, its time to call onReveal
+      // on the newly added child (and recursively on this child children)
+      ((PopupPanel)popupInfo.presenter.getWidget()).show();
+      monitorCloseEvent( popupInfo );
+      popupInfo.presenter.notifyReveal();
+    }
   }
 
   /**
@@ -242,6 +366,12 @@ extends HandlerContainerImpl implements PresenterWidget {
     for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
       for( PresenterWidgetImpl<?> activeChild : slotChildren )
         activeChild.notifyHide();
+    for( PopupPresenterInfo popupInfo : popupChildren ) {
+      popupInfo.closeHandlerRegistration.removeHandler();
+      popupInfo.closeHandlerRegistration = null;
+      popupInfo.presenter.notifyHide();
+      ((PopupPanel)popupInfo.presenter.getWidget()).hide();
+    }
     visible = false;
     onHide();
   }  
@@ -255,6 +385,8 @@ extends HandlerContainerImpl implements PresenterWidget {
     for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
       for( PresenterWidgetImpl<?> activeChild : slotChildren )
         activeChild.reset();    
+    for( PopupPresenterInfo popupInfo : popupChildren )
+      popupInfo.presenter.reset();
   }
 
   /**
