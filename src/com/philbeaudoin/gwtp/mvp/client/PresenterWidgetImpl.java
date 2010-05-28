@@ -23,11 +23,17 @@ import java.util.Map;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ResetPresentersEvent;
 
+/**
+* @author Philippe Beaudoin
+* @author Christian Goudreau
+*/
 public abstract class PresenterWidgetImpl<V extends View>
 extends HandlerContainerImpl implements PresenterWidget {
 
@@ -419,4 +425,20 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   protected void onReset() {}
 
+  /**
+   * Convenience method to register an event handler to the {@link EventBus}.
+   * The handler will be automatically unregistered when
+   * {@link HandlerContainer#unbind()} is called.
+   * 
+   * @param <H>
+   *          The handler type
+   * @param type
+   *          See {@link Type}
+   * @param handler
+   *          The handler to register
+   */
+  protected final <H extends EventHandler> void addRegisteredHandler(Type<H> type,
+      H handler) {
+    registerHandler(eventBus.addHandler(type, handler));
+  }
 }
