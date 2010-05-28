@@ -27,9 +27,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ResetPresentersEvent;
 
 /**
-* @author Philippe Beaudoin
-* @author Christian Goudreau
-*/
+ * @author Philippe Beaudoin
+ * @author Christian Goudreau
+ */
 public abstract class PresenterWidgetImpl<V extends View>
 extends HandlerContainerImpl implements PresenterWidget {
 
@@ -305,15 +305,16 @@ extends HandlerContainerImpl implements PresenterWidget {
    *             what to do with this slot.
    */
   public void clearContent( Object slot ) {
-    if( isVisible() ) {
-      // This presenter is visible, its time to call onReveal
+    List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
+    if( slotChildren != null ) {
+      // This presenter is visible, its time to call onHide
       // on the newly added child (and recursively on this child children)
-      List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
-      if( slotChildren != null ) {
-        for( PresenterWidgetImpl<?> activeChild : slotChildren )
+      if( isVisible() ) {
+        for( PresenterWidgetImpl<?> activeChild : slotChildren ) {
           activeChild.notifyHide();
-        slotChildren.clear();
+        }
       }
+      slotChildren.clear();
     }
     getView().setContent( slot, null );
   }
