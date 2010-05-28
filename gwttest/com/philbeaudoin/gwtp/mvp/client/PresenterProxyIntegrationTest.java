@@ -16,6 +16,8 @@
 
 package com.philbeaudoin.gwtp.mvp.client;
 
+import org.junit.Ignore;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplit;
@@ -29,6 +31,7 @@ import com.philbeaudoin.gwtp.mvp.client.proxy.Proxy;
  * 
  * @author Philippe Beaudoin
  */
+@Ignore
 public class PresenterProxyIntegrationTest extends GWTTestCase {
 
   public static class MyPresenter extends PresenterImpl<View, MyPresenter.MyProxy> {
