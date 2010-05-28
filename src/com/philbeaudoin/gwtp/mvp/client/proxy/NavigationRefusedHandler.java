@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.actionHandler;
+package com.philbeaudoin.gwtp.mvp.client.proxy;
 
-import com.philbeaudoin.gwtp.dispatch.shared.Action;
-import com.philbeaudoin.gwtp.dispatch.shared.Result;
+import com.google.gwt.event.shared.EventHandler;
 
-public interface ActionHandlerMap<A extends Action<R>, R extends Result> {
-    public Class<A> getActionClass();
-
-    public Class<? extends ActionHandler<A, R>> getActionHandlerClass();
+/**
+ * @author Christian Goudreau
+ */
+public interface NavigationRefusedHandler extends EventHandler {
+  public void onNavigationRefused(final NavigationRefusedEvent navigationRefusedEvent);
 }
