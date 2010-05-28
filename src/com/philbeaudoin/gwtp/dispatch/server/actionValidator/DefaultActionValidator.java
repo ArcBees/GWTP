@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@
 package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.google.inject.Singleton;
+import com.philbeaudoin.gwtp.dispatch.shared.Action;
+import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
  * The default {@link ActionValidator} implementation.
@@ -27,7 +29,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class DefaultActionValidator implements ActionValidator {
     @Override
-    public boolean isValid() {
-        return true;
+    public boolean isValid(Action<? extends Result> action) {
+      return true;
     }
 }

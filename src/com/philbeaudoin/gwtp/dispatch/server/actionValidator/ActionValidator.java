@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
 
 import com.philbeaudoin.gwtp.dispatch.client.DispatchService;
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
+import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
  * Implementors must provide an implementation of this interface and provide it
@@ -34,10 +35,14 @@ import com.philbeaudoin.gwtp.dispatch.shared.Action;
  * @author Christian Goudreau
  */
 public interface ActionValidator {
-    /**
-     * Validate whether or not that {@link Action} can be executed at this time.
-     * 
-     * @return {@code true} if the action can be executed, {@code false} otherwise.
-     */
-    public boolean isValid();
+  /**
+   * Validate whether or not that {@link Action} can be executed at this time.
+   * 
+   * @param action
+   *          The action that called this validator.
+   * 
+   * @return {@code true} if the action can be executed, {@code false}
+   *         otherwise.
+   */
+    public boolean isValid(Action<? extends Result> action);
 }

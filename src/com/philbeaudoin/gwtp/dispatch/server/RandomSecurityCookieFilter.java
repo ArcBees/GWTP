@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,10 +70,11 @@ public class RandomSecurityCookieFilter implements Filter {
   public void doFilter(ServletRequest request,
       ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-    if( request instanceof HttpServletRequest ) {
+    if( request instanceof HttpServletRequest) {
       HttpServletResponse httpResponse = (HttpServletResponse) response;
       Cookie securityCookie = new Cookie(securityCookieName, new BigInteger(130, random).toString(32) );
       securityCookie.setMaxAge(-1);
+      securityCookie.setPath("/");
       httpResponse.addCookie( securityCookie );
     }
     chain.doFilter(request, response);

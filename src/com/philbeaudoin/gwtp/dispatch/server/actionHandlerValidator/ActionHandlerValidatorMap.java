@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,30 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.dispatch.server.actionValidator;
+package com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator;
 
 import com.philbeaudoin.gwtp.dispatch.shared.Action;
 import com.philbeaudoin.gwtp.dispatch.shared.Result;
 
 /**
- * This is the interface that define the map of {@link ActionValidator}.
+ * This is the interface that define the map of
+ * {@link ActionHandlerValidatorInstance}.
  * 
  * @param <A>
- *            Type of the associated {@link Action}
+ *          Type of the associated {@link Action}
  * @param <R>
- *            Type of the associated {@link Result}
+ *          Type of the associated {@link Result}
  * 
  * @author Christian Goudreau
  */
-public interface ActionValidatorMap<A extends Action<R>, R extends Result> {
-    /**
-     * @return the {@link Action} class associated
-     */
-    public Class<A> getActionClass();
+public interface ActionHandlerValidatorMap<A extends Action<R>, R extends Result> {
+  /**
+   * @return the {@link Action} class associated
+   */
+  public Class<A> getActionClass();
 
-    /**
-     * @return the {@link ActionValidator} class associated
-     */
-    public Class<? extends ActionValidator> getActionValidatorClass();
+  /**
+   * @return the {@link ActionHandlerValidatorClass} class associated
+   */
+  public ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass();
 }
