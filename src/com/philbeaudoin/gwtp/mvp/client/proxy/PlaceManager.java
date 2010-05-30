@@ -29,11 +29,73 @@ public interface PlaceManager {
   /**
    * Programmatically reveals the specified place. 
    * This will result in a {@link PlaceRequestEvent} being fired.
+   * <p />
+   * This discards all the place hierarchy, effectively revealing the
+   * request as a root place. To keep the place hierarchy, see 
+   * {@link #revealRelativePlace(PlaceRequest)},
+   * {@link #revealRelativePlace(PlaceRequest, int)} or 
+   * {@link #revealRelativePlace(int)}.
    *
    * @param request The {@link PlaceRequest} corresponding to the place to reveal. 
    */
   void revealPlace(PlaceRequest request);
+
+  /**
+   * Programmatically reveals the specified place as a child of the current place hierarchy. 
+   * Identical to calling {@link #revealRelativePlace(PlaceRequest, int)} with a level of {@code 0}.
+   * This will result in a {@link PlaceRequestEvent} being fired.
+   * <p />
+   * To reveal as a root place, see {@link #revealPlace}. To navigate back to a specific place
+   * in the hierarchy, see {@link #revealRelativePlace(int)}.
+   *
+   * @param request The {@link PlaceRequest} corresponding to the place to reveal.
+   */
+  void revealRelativePlace(PlaceRequest request);
   
+  /**
+   * Programmatically reveals the specified place relative to the other places in
+   * the current place hierarchy. This will result in a {@link PlaceRequestEvent} being fired.
+   * <p />
+   * To reveal as a root place, see {@link #revealPlace}. To navigate back to a specific place
+   * in the hierarchy, see {@link #revealRelativePlace(int)}.
+   * <p />
+   * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
+   * <ul>
+   * <li> Calling {@code revealRelativePlace(requestD, 0)} makes it {@code requestA > requestB > requestC > requestD}</li>
+   * <li> Calling {@code revealRelativePlace(requestD, -1)} makes it {@code requestA > requestB > requestD}</li>
+   * <li> Calling {@code revealRelativePlace(requestD, 1)} makes it {@code requestA > requestD}</li>
+   * <li> Calling {@code revealRelativePlace(requestD, -3)} or less makes it {@code requestD}</li>
+   * <li> Calling {@code revealRelativePlace(requestD, 3)} or more makes it {@code requestA > requestB > requestC > requestD}</li>
+   * </ul>
+   * @param request The {@link PlaceRequest} corresponding to the place to reveal.
+   * @param level If {@code 0}, then simply appends the {@code request} to the current page hierarchy.
+   *              If negative, take back that many elements from the tail of the hierarchy
+   *              before appending the {@code request}. If positive, keep only that many elements from
+   *              the head of the hierarchy before appending the {@code request}.
+   */
+  void revealRelativePlace(PlaceRequest request, int level);
+
+  /**
+   * Programmatically reveals the specified place from the current place hierarchy. 
+   * This will result in a {@link PlaceRequestEvent} being fired.
+   * <p />
+   * To reveal as a root place, see {@link #revealPlace}. To navigate back to a specific place
+   * in the hierarchy, see {@link #revealRelativePlace(int)}.
+   * <p />
+   * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
+   * <ul>
+   * <li> Calling {@code revealRelativePlace(-1)} makes it {@code requestA > requestB}</li>
+   * <li> Calling {@code revealRelativePlace(1)} makes it {@code requestA}</li>
+   * <li> Calling {@code revealRelativePlace(0)} makes it {@code requestA > requestB > requestC}</li>
+   * <li> Calling {@code revealRelativePlace(-3)} or less calls {@link #revealDefaultPlace()}</li>
+   * <li> Calling {@code revealRelativePlace(3)} or more makes it {@code requestA > requestB > requestC}</li>
+   * </ul>
+   * @param level If negative, take back that many elements from the tail of the hierarchy. 
+   *              If positive, keep only that many elements from the head of the hierarchy.
+   *              Passing {@code 0} reveals the current place.
+   */
+  void revealRelativePlace(int level);
+
   /**
    * Reveals the place corresponding to the current value of the history token
    * in the URL bar. This will result in a {@link PlaceRequestEvent} being fired.
