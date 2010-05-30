@@ -75,11 +75,10 @@ implements ProxyPlace<P> {
           return;
         PlaceRequest request = event.getRequest();
         if ( matchesRequest( request ) ) {
+          event.setHandled();
           if (canReveal() ) {
-            event.setHandled();
             handleRequest( request );
           } else {
-            event.setHandled();
             placeManager.revealUnauthorizedPlace( request.getNameToken() );
           }
         }
