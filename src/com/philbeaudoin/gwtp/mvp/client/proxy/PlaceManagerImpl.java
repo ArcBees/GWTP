@@ -16,6 +16,9 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -38,9 +41,10 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   private String onLeaveQuestion = null;
   private HandlerRegistration windowClosingHandlerRegistration = null;
   private String currentHistoryToken = "";
-  private String currentLocation = "";
+  private String currentHRef = "";
   private String previousHistoryToken = null;
-
+  
+  private final List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
   public PlaceManagerImpl( EventBus eventBus, TokenFormatter tokenFormatter ) {
     this.eventBus = eventBus;
@@ -65,7 +69,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       }
       previousHistoryToken = currentHistoryToken;
       currentHistoryToken = requestToken;
-      currentLocation = Window.Location.getHref();
+      currentHRef = Window.Location.getHref();
     } catch ( TokenFormatException e ) {
       // Do nothing.
     }
@@ -161,7 +165,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     DeferredCommand.addCommand( new Command() {
       @Override
       public void execute() {
-        Window.Location.replace(currentLocation);
+        Window.Location.replace(currentHRef);
       }
     });
   }
@@ -192,5 +196,23 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       History.newItem( previousHistoryToken );
     else
       revealDefaultPlace();
+  }
+
+  @Override
+  public void revealRelativePlace(PlaceRequest request) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void revealRelativePlace(PlaceRequest request, int level) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void revealRelativePlace(int level) {
+    // TODO Auto-generated method stub
+    
   }
 }
