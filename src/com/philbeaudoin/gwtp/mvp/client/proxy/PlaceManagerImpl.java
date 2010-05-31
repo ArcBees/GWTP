@@ -30,9 +30,9 @@ import com.google.gwt.user.client.Window.ClosingHandler;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
 /**
-* @author Philippe Beaudoin
-* @author Christian Goudreau
-*/
+ * @author Philippe Beaudoin
+ * @author Christian Goudreau
+ */
 public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandler<String>, ClosingHandler {
 
   private final EventBus eventBus;
@@ -43,7 +43,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   private String currentHistoryToken = "";
   private String currentHRef = "";
   private String previousHistoryToken = null;
-  
+
   private final List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
   public PlaceManagerImpl( EventBus eventBus, TokenFormatter tokenFormatter ) {
@@ -84,12 +84,12 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
     revealErrorPlace(unauthorizedHistoryToken);
   }  
-  
+
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
     revealDefaultPlace();
   }
-  
+
   @Override
   public final void onPlaceChanged( PlaceRequest placeRequest ) {
     try {
@@ -112,10 +112,71 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   public final void revealPlace( PlaceRequest request ) {
     if( !confirmLeaveState() )
       return;
+    clearPlaceHierarchy();
     if( !doRevealPlace(request) )
-        revealErrorPlace( request.toString() );
+      revealErrorPlace( request.toString() );
   }
 
+  @Override
+  public void revealRelativePlace(PlaceRequest request) {
+    if( !confirmLeaveState() )
+      return;
+    if( !doRevealPlace(request) )
+      revealErrorPlace( request.toString() );
+  }
+
+  @Override
+  public void revealRelativePlace(PlaceRequest request, int level) {
+    if( !confirmLeaveState() )
+      return;
+    updatePlaceHierarchy(level);
+    if( !doRevealPlace(request) )
+      revealErrorPlace( request.toString() );
+  }
+
+  @Override
+  public void revealRelativePlace(int level) {
+    if( !confirmLeaveState() )
+      return;
+    updatePlaceHierarchy(level);
+    int hierarchySize = placeHierarchy.size();
+    if( hierarchySize == 0 )
+      revealDefaultPlace();
+    else {
+      PlaceRequest request = placeHierarchy.get(hierarchySize-1); 
+      if( !doRevealPlace( request ) )
+        revealErrorPlace( request.toString() );
+    }
+  }
+
+  /**
+   * Get rid of anything left on the place hierarchy
+   */
+  private void clearPlaceHierarchy() {
+    placeHierarchy.clear();
+  }
+
+  /**
+   * Modifies the place hierarchy based on the specified {@code level}.
+   * 
+   * @param level If negative, take back that many elements from the tail of the hierarchy. 
+   *              If positive, keep only that many elements from the head of the hierarchy.
+   *              Passing {@code 0} leaves the hierarchy untouched.
+   */
+  private void updatePlaceHierarchy(int level) {
+    int size = placeHierarchy.size();
+    if( level < 0 ) {
+      if( -level >= size )
+        placeHierarchy.clear();
+      else
+        placeHierarchy.subList(size+level, size).clear();
+    } else {
+      if( level >= size )
+        placeHierarchy.clear();
+      else
+        placeHierarchy.subList(level, size).clear();      
+    }
+  }
 
   /**
    * Handles change events from {@link History}.
@@ -148,7 +209,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     eventBus.fireEvent(requestEvent);
     return requestEvent.isHandled();
   }
-  
+
   @Override
   public final void setOnLeaveConfirmation( String question ) {
     if( question == null && onLeaveQuestion  == null ) return;
@@ -198,21 +259,4 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       revealDefaultPlace();
   }
 
-  @Override
-  public void revealRelativePlace(PlaceRequest request) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void revealRelativePlace(PlaceRequest request, int level) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void revealRelativePlace(int level) {
-    // TODO Auto-generated method stub
-    
-  }
 }
