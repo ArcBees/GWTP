@@ -44,7 +44,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   private String currentHRef = "";
   private String previousHistoryToken = null;
 
-  private final List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
+  private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
   public PlaceManagerImpl( EventBus eventBus, TokenFormatter tokenFormatter ) {
     this.eventBus = eventBus;
@@ -62,13 +62,17 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
    */
   private void updateHistory( PlaceRequest request ) {
     try {
-      String requestToken = tokenFormatter.toHistoryToken( request );
-      String historyToken = History.getToken();
-      if ( historyToken == null || !historyToken.equals( requestToken ) ) {
-        History.newItem( requestToken, false );
+      // Make sure the request match
+      assert request.hasSameNameToken( getCurrentPlaceRequest() ) : 
+          "Internal error, PlaceRequest passed to updateHistory doesn't match the tail of the place hierarchy.";
+      placeHierarchy.set( placeHierarchy.size()-1, request );      
+      String historyToken = tokenFormatter.toHistoryToken( placeHierarchy );
+      String browserHistoryToken = History.getToken();
+      if ( browserHistoryToken == null || !browserHistoryToken.equals( historyToken ) ) {
+        History.newItem( historyToken, false );
       }
       previousHistoryToken = currentHistoryToken;
-      currentHistoryToken = requestToken;
+      currentHistoryToken = historyToken;
       currentHRef = Window.Location.getHref();
     } catch ( TokenFormatException e ) {
       // Do nothing.
@@ -93,7 +97,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   @Override
   public final void onPlaceChanged( PlaceRequest placeRequest ) {
     try {
-      if ( placeRequest.hasSameNameToken( tokenFormatter.toPlaceRequest( History.getToken() ) ) ) {
+      if ( placeRequest.hasSameNameToken( getCurrentPlaceRequest() ) ) {
         // Only update if the change comes from a place that matches
         // the current location.
         updateHistory( placeRequest );
@@ -102,6 +106,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       // Do nothing...
     }
   }
+
 
   @Override
   public final void onPlaceRevealed( PlaceRequest placeRequest) {
@@ -112,24 +117,23 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   public final void revealPlace( PlaceRequest request ) {
     if( !confirmLeaveState() )
       return;
-    clearPlaceHierarchy();
+    placeHierarchy.clear();
+    placeHierarchy.add( request );
     if( !doRevealPlace(request) )
       revealErrorPlace( request.toString() );
   }
 
   @Override
   public void revealRelativePlace(PlaceRequest request) {
-    if( !confirmLeaveState() )
-      return;
-    if( !doRevealPlace(request) )
-      revealErrorPlace( request.toString() );
+    revealRelativePlace( request, 0 );
   }
 
   @Override
   public void revealRelativePlace(PlaceRequest request, int level) {
     if( !confirmLeaveState() )
       return;
-    updatePlaceHierarchy(level);
+    placeHierarchy = updatePlaceHierarchy(level);
+    placeHierarchy.add( request );
     if( !doRevealPlace(request) )
       revealErrorPlace( request.toString() );
   }
@@ -138,7 +142,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   public void revealRelativePlace(int level) {
     if( !confirmLeaveState() )
       return;
-    updatePlaceHierarchy(level);
+    placeHierarchy = updatePlaceHierarchy(level);
     int hierarchySize = placeHierarchy.size();
     if( hierarchySize == 0 )
       revealDefaultPlace();
@@ -150,32 +154,26 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   }
 
   /**
-   * Get rid of anything left on the place hierarchy
-   */
-  private void clearPlaceHierarchy() {
-    placeHierarchy.clear();
-  }
-
-  /**
-   * Modifies the place hierarchy based on the specified {@code level}.
+   * Returns a modified copy of the place hierarchy based on the specified {@code level}.
    * 
    * @param level If negative, take back that many elements from the tail of the hierarchy. 
    *              If positive, keep only that many elements from the head of the hierarchy.
    *              Passing {@code 0} leaves the hierarchy untouched.
    */
-  private void updatePlaceHierarchy(int level) {
+  private List<PlaceRequest> updatePlaceHierarchy(int level) {
     int size = placeHierarchy.size();
     if( level < 0 ) {
       if( -level >= size )
-        placeHierarchy.clear();
+        return new ArrayList<PlaceRequest>();
       else
-        placeHierarchy.subList(size+level, size).clear();
-    } else {
+        return new ArrayList<PlaceRequest>( placeHierarchy.subList(0, size+level) );
+    } else if( level > 0 ) {
       if( level >= size )
-        placeHierarchy.clear();
+        return new ArrayList<PlaceRequest>();
       else
-        placeHierarchy.subList(level, size).clear();      
+        return new ArrayList<PlaceRequest>( placeHierarchy.subList(0, level) );
     }
+    return new ArrayList<PlaceRequest>( placeHierarchy );
   }
 
   /**
@@ -187,7 +185,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       return;
     String historyToken = event.getValue();
     try {
-      if( !doRevealPlace( tokenFormatter.toPlaceRequest( historyToken ) ) ) {
+      placeHierarchy = tokenFormatter.toPlaceRequestHierarchy( historyToken );
+      if( !doRevealPlace( getCurrentPlaceRequest() ) ) {
         if ( historyToken.trim().equals("") )
           revealDefaultPlace();
         else
@@ -210,6 +209,15 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     return requestEvent.isHandled();
   }
 
+  /**
+   * Access the current place request, that is, the tail of the place request hierarchy.
+   * 
+   * @return The current {@link PlaceRequest}.
+   */
+  private PlaceRequest getCurrentPlaceRequest() {
+    return placeHierarchy.get( placeHierarchy.size()-1 );
+  }
+  
   @Override
   public final void setOnLeaveConfirmation( String question ) {
     if( question == null && onLeaveQuestion  == null ) return;
@@ -259,4 +267,29 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       revealDefaultPlace();
   }
 
+  @Override
+  public String buildHistoryToken( PlaceRequest request ) {
+    return tokenFormatter.toPlaceToken( request );
+  }
+
+  @Override
+  public String buildRelativeHistoryToken( PlaceRequest request ) {
+    return buildRelativeHistoryToken( request, 0 );
+  }
+  
+  @Override
+  public String buildRelativeHistoryToken( PlaceRequest request, int level ) {
+    List<PlaceRequest> placeHierarchyCopy = updatePlaceHierarchy(level);
+    placeHierarchyCopy.add( request );
+    return tokenFormatter.toHistoryToken(placeHierarchyCopy);    
+  }
+
+  @Override
+  public String buildRelativeHistoryToken( int level ) {
+    List<PlaceRequest> placeHierarchyCopy = updatePlaceHierarchy(level);
+    if( placeHierarchyCopy.size() == 0 )
+      return "";
+    return tokenFormatter.toHistoryToken(placeHierarchyCopy);    
+  }
+  
 }

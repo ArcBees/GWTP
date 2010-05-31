@@ -31,10 +31,12 @@ public interface PlaceManager {
    * This will result in a {@link PlaceRequestEvent} being fired.
    * <p />
    * This discards all the place hierarchy, effectively revealing the
-   * request as a root place. To keep the place hierarchy, see 
+   * request as a top-level place. To keep the place hierarchy, see 
    * {@link #revealRelativePlace(PlaceRequest)},
    * {@link #revealRelativePlace(PlaceRequest, int)} or 
    * {@link #revealRelativePlace(int)}.
+   *
+   * @see #buildHistoryToken(PlaceRequest)
    *
    * @param request The {@link PlaceRequest} corresponding to the place to reveal. 
    */
@@ -45,8 +47,10 @@ public interface PlaceManager {
    * Identical to calling {@link #revealRelativePlace(PlaceRequest, int)} with a level of {@code 0}.
    * This will result in a {@link PlaceRequestEvent} being fired.
    * <p />
-   * To reveal as a root place, see {@link #revealPlace}. To navigate back to a specific place
+   * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
    * in the hierarchy, see {@link #revealRelativePlace(int)}.
+   *
+   * @see #buildRelativeHistoryToken(PlaceRequest)
    *
    * @param request The {@link PlaceRequest} corresponding to the place to reveal.
    */
@@ -56,7 +60,7 @@ public interface PlaceManager {
    * Programmatically reveals the specified place relative to the other places in
    * the current place hierarchy. This will result in a {@link PlaceRequestEvent} being fired.
    * <p />
-   * To reveal as a root place, see {@link #revealPlace}. To navigate back to a specific place
+   * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
    * in the hierarchy, see {@link #revealRelativePlace(int)}.
    * <p />
    * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
@@ -67,6 +71,8 @@ public interface PlaceManager {
    * <li> Calling {@code revealRelativePlace(requestD, -3)} or less makes it {@code requestD}</li>
    * <li> Calling {@code revealRelativePlace(requestD, 3)} or more makes it {@code requestA > requestB > requestC > requestD}</li>
    * </ul>
+   * @see #buildRelativeHistoryToken(PlaceRequest, int)
+   *
    * @param request The {@link PlaceRequest} corresponding to the place to reveal.
    * @param level If {@code 0}, then simply appends the {@code request} to the current page hierarchy.
    *              If negative, take back that many elements from the tail of the hierarchy
@@ -79,9 +85,6 @@ public interface PlaceManager {
    * Programmatically reveals the specified place from the current place hierarchy. 
    * This will result in a {@link PlaceRequestEvent} being fired.
    * <p />
-   * To reveal as a root place, see {@link #revealPlace}. To navigate back to a specific place
-   * in the hierarchy, see {@link #revealRelativePlace(int)}.
-   * <p />
    * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
    * <ul>
    * <li> Calling {@code revealRelativePlace(-1)} makes it {@code requestA > requestB}</li>
@@ -90,6 +93,8 @@ public interface PlaceManager {
    * <li> Calling {@code revealRelativePlace(-3)} or less calls {@link #revealDefaultPlace()}</li>
    * <li> Calling {@code revealRelativePlace(3)} or more makes it {@code requestA > requestB > requestC}</li>
    * </ul>
+   * @see #buildRelativeHistoryToken(int)
+   * 
    * @param level If negative, take back that many elements from the tail of the hierarchy. 
    *              If positive, keep only that many elements from the head of the hierarchy.
    *              Passing {@code 0} reveals the current place.
@@ -182,6 +187,88 @@ public interface PlaceManager {
    * Navigate back to last visited history token.
    */
   public void navigateBack();
+  
+  /**
+   * Builds a string corresponding to the history token to reveal
+   * the specified {@link PlaceRequest}. This can be used with a
+   * {@link com.google.gwt.user.client.ui.Hyperlink}.
+   * <p />
+   * Invoking this history token will discard all the place hierarchy, 
+   * effectively revealing the request as a top-level place. 
+   * To keep the place hierarchy, see 
+   * {@link #buildRelativeHistoryToken(PlaceRequest)},
+   * {@link #buildRelativeHistoryToken(PlaceRequest, int)} or 
+   * {@link #buildRelativeHistoryToken(int)}.
+   *
+   * @see #revealPlace(PlaceRequest)
+   *
+   * @param request The {@link PlaceRequest} corresponding to the place for which to build a history token.
+   * @return The history token.
+   */
+  public String buildHistoryToken( PlaceRequest request );
 
+  /**
+   * Builds a string corresponding to the history token to reveal
+   * the specified {@link PlaceRequest} as a child of the current place hierarchy. 
+   * Identical to calling {@link #buildRelativeHistoryToken(PlaceRequest, int)} with a level of {@code 0}.
+   * <p />
+   * To get the history token for revealing as a top-level place, see {@link #buildHistoryToken}. 
+   * To navigate back to a specific place in the hierarchy, see {@link #buildRelativeHistoryToken(int)}.
+   * 
+   * @see #revealRelativePlace(PlaceRequest)
+   *
+   * @param request The {@link PlaceRequest} corresponding to the place for which to build a history token.
+   * @return The history token.
+   */
+  public String buildRelativeHistoryToken( PlaceRequest request );
+  
+
+  /**
+   * Builds a string corresponding to the history token to reveal
+   * the specified {@link PlaceRequest} relative to the other places in
+   * the current place hierarchy.
+   * <p />
+   * To get the history token for revealing as a top-level place, see {@link #buildHistoryToken}. 
+   * To navigate back to a specific place in the hierarchy, see {@link #buildRelativeHistoryToken(int)}.
+   * <p />
+   * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
+   * <ul>
+   * <li> Calling {@code buildRelativeHistoryToken(requestD, 0)} will make a link to {@code requestA > requestB > requestC > requestD}</li>
+   * <li> Calling {@code buildRelativeHistoryToken(requestD, -1)} will make a link to {@code requestA > requestB > requestD}</li>
+   * <li> Calling {@code buildRelativeHistoryToken(requestD, 1)} will make a link to {@code requestA > requestD}</li>
+   * <li> Calling {@code buildRelativeHistoryToken(requestD, -3)} will make a link to {@code requestD}</li>
+   * <li> Calling {@code buildRelativeHistoryToken(requestD, 3)} will make a link to {@code requestA > requestB > requestC > requestD}</li>
+   * </ul>
+   * @see #revealRelativePlace(PlaceRequest, int)
+   *
+   * @param request The {@link PlaceRequest} corresponding to the place for which to build a history token.
+   * @param level If {@code 0}, then simply appends the {@code request} to the current page hierarchy.
+   *              If negative, take back that many elements from the tail of the hierarchy
+   *              before appending the {@code request}. If positive, keep only that many elements from
+   *              the head of the hierarchy before appending the {@code request}.
+   * @return The history token.
+   */
+  public String buildRelativeHistoryToken( PlaceRequest request, int level );  
+
+
+  /**
+   * Builds a string corresponding to the history token to reveal
+   * the specified place from the current place hierarchy. 
+   * <p />
+   * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
+   * <ul>
+   * <li> Calling {@code revealRelativePlace(-1)} will make a link to {@code requestA > requestB}</li>
+   * <li> Calling {@code revealRelativePlace(1)} will make a link to {@code requestA}</li>
+   * <li> Calling {@code revealRelativePlace(0)} will make a link to {@code requestA > requestB > requestC}</li>
+   * <li> Calling {@code revealRelativePlace(-3)} or less will make a link to {@code ""}</li>
+   * <li> Calling {@code revealRelativePlace(3)} or more will make a link to {@code requestA > requestB > requestC}</li>
+   * </ul>
+   * @see #revealRelativePlace(int)
+   * 
+   * @param level If negative, take back that many elements from the tail of the hierarchy. 
+   *              If positive, keep only that many elements from the head of the hierarchy.
+   *              Passing {@code 0} makes a link to the current place.
+   */
+  public String buildRelativeHistoryToken( int level );  
   
 }
