@@ -104,18 +104,27 @@ public interface PlaceManager {
 
   /**
    * Reveals the default place. This is invoked when the history token is empty
-   * and no places handled it. Application-specific place managers should fire the 
-   * {@link PlaceRequestEvent} corresponding to their default place.
+   * and no places handled it. Application-specific place managers should build
+   * a {@link PlaceRequest} corresponding to their default presenter and call 
+   * {@link #revealPlace(PlaceRequest)} with it. 
+   * <p />
+   * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and
+   * that the user has access to it, otherwise you might create an infinite loop.
    */
   public void revealDefaultPlace();
 
   /**
-   * Reveals an unauthorized place. This is invoked when
-   * {@link Place#canReveal()} returned {@code false} and history token was
-   * valid. Application-specific place managers should fire the
-   * {@link PlaceRequestEvent} corresponding to a place that displays an
-   * unauthorized place. The default implementation is simply to call
+   * Reveals the place to display when a user has been refused the access
+   * to a specific place. This is invoked when the history token is valid but
+   * the corresponding place's {@link Place#canReveal()} returned {@code false}.
+   * Application-specific place managers should build
+   * a {@link PlaceRequest} corresponding to the desired presenter and call 
+   * {@link #revealPlace(PlaceRequest)} with it. 
+   * The default implementation is simply to call
    * {@link #revealErrorPlace()}.
+   * <p />
+   * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and
+   * that the user has access to it, otherwise you might create an infinite loop.
    * 
    * @param unauthorizedHistoryToken
    *          The history token that was not authorized.
@@ -123,11 +132,15 @@ public interface PlaceManager {
   public void revealUnauthorizedPlace( String unauthorizedHistoryToken );
   
   /**
-   * Reveals an error place. This is invoked when the history token was not
-   * handled by any place within the application. Application-specific place
-   * managers should fire the {@link PlaceRequestEvent} corresponding to a 
-   * place that displays an error. The default implementation is simply to
-   * call {@link #revealDefaultPlace()}.
+   * Reveals the place to display when a user tries to access an invalid place. 
+   * This is invoked when the history token was not handled by any place within 
+   * the application. Application-specific place
+   * managers should build a {@link PlaceRequest} corresponding to the desired 
+   * presenter and call {@link #revealPlace(PlaceRequest)} with it. The default 
+   * implementation is simply to call {@link #revealDefaultPlace()}.
+   * <p />
+   * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and
+   * that the user has access to it, otherwise you might create an infinite loop.
    * 
    * @param invalidHistoryToken The history token that was not recognised.
    */

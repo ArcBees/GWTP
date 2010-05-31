@@ -22,7 +22,15 @@ import com.philbeaudoin.gwtp.mvp.client.EventBus;
 /**
  * 
  * This event is fired whenever a  new place is requested, either by 
- * history navigation or directly 
+ * history navigation or directly.
+ * <p />
+ * <b>Important!</b> You should never fire that event directly. Instead,
+ * build a {@link PlaceRequest} and pass it to one of the following methods:
+ * <ul>
+ * <li>{@link PlaceManager#revealPlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest, int)}</li>
+ * </ul>
  * 
  * @author David Peterson
  * @author Philippe Beaudoin
