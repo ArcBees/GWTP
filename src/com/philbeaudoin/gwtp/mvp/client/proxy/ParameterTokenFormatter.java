@@ -16,6 +16,8 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,6 +27,13 @@ import java.util.Set;
  * <pre>[name](;param=value)*</pre>
  */
 public final class ParameterTokenFormatter implements TokenFormatter {
+
+
+  private static final String HIERARCHY_SEPARATOR = "/";
+
+  private static final String HIERARCHY_PATTERN = HIERARCHY_SEPARATOR + "(?!" + HIERARCHY_SEPARATOR + ")";
+
+  private static final String HIERARCHY_ESCAPE = HIERARCHY_SEPARATOR + HIERARCHY_SEPARATOR;
 
   private static final String PARAM_SEPARATOR = ";";
 
@@ -40,7 +49,35 @@ public final class ParameterTokenFormatter implements TokenFormatter {
 
   public ParameterTokenFormatter() {}
 
-  public String toHistoryToken( PlaceRequest placeRequest ) {
+
+  @Override
+  public String toHistoryToken(List<PlaceRequest> placeRequestHierarchy)
+      throws TokenFormatException {
+    StringBuilder out = new StringBuilder();
+    for ( int i=0; i < placeRequestHierarchy.size(); ++i ) {
+      if( i != 0 )
+        out.append( HIERARCHY_SEPARATOR );
+      out.append( toPlaceToken(placeRequestHierarchy.get(i)) );
+    }
+    return out.toString();
+  }
+
+  @Override
+  public List<PlaceRequest> toPlaceRequestHierarchy(String historyToken)
+      throws TokenFormatException {
+    
+    List<String> placeTokens = toPlaceTokenList( historyToken );
+ 
+    List<PlaceRequest> result = new ArrayList<PlaceRequest>();
+    
+    for( String placeToken : placeTokens ) 
+      result.add( toPlaceRequest( placeToken ) );
+ 
+    return result;
+  }
+  
+  @Override
+  public String toPlaceToken( PlaceRequest placeRequest ) {
     StringBuilder out = new StringBuilder();
     out.append( placeRequest.getNameToken() );
 
@@ -55,17 +92,35 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     return out.toString();
   }
 
-  public PlaceRequest toPlaceRequest( String token ) throws TokenFormatException {
+  private List<String> toPlaceTokenList( String historyToken ) throws TokenFormatException {
+    String[] placeTokens = historyToken.split( HIERARCHY_PATTERN );
+    List<String> result = new ArrayList<String>();
+    String completePlaceToken = "";
+    for( String placeToken : placeTokens ) {
+      completePlaceToken = completePlaceToken + placeToken;
+      
+      // Will end with a separator if we had an escaped separator
+      if( completePlaceToken.endsWith(HIERARCHY_SEPARATOR) ) 
+        continue;
+      
+      result.add( completePlaceToken );      
+      completePlaceToken = "";
+    }
+    return result;
+  }
+
+  @Override
+  public PlaceRequest toPlaceRequest( String placeToken ) throws TokenFormatException {
     PlaceRequest req = null;
 
-    int split = token.indexOf( PARAM_SEPARATOR );
+    int split = placeToken.indexOf( PARAM_SEPARATOR );
     if ( split == 0 ) {
       throw new TokenFormatException( "Place history token is missing." );
     } else if ( split == -1 ) {
-      req = new PlaceRequest( token );
+      req = new PlaceRequest( placeToken );
     } else if ( split >= 0 ) {
-      req = new PlaceRequest( token.substring( 0, split ) );
-      String paramsChunk = token.substring( split + 1 );
+      req = new PlaceRequest( placeToken.substring( 0, split ) );
+      String paramsChunk = placeToken.substring( split + 1 );
       String[] paramTokens = paramsChunk.split( PARAM_PATTERN );
       String completeParamToken = "";
       for ( String paramToken : paramTokens ) {
@@ -109,6 +164,8 @@ public final class ParameterTokenFormatter implements TokenFormatter {
   }
 
   private static String escape( String value ) {
-    return value.replaceAll( PARAM_SEPARATOR, PARAM_ESCAPE ).replaceAll( VALUE_SEPARATOR, VALUE_ESCAPE );
+    return value.replaceAll( HIERARCHY_SEPARATOR, HIERARCHY_ESCAPE )
+    .replaceAll( PARAM_SEPARATOR, PARAM_ESCAPE )
+    .replaceAll( VALUE_SEPARATOR, VALUE_ESCAPE );
   }
 }
