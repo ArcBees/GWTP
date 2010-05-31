@@ -56,24 +56,6 @@ implements Proxy<P> {
   public void getPresenter( AsyncCallback<P> callback ) {
     presenter.get(callback);
   }
-
-  /**
-   * By default, proxys can't reveal their presenter. Only place
-   * proxies, such as {@link ProxyPlaceAbstract} can. 
-   */
-  @Override
-  public void reveal() {
-    assert false : "Unrevealable proxy.";
-  }
-
-  /**
-   * By default, proxys can't reveal their presenter. Only place
-   * proxies, such as {@link ProxyPlaceAbstract} can. 
-   */
-  @Override
-  public void reveal(PlaceRequest request) {
-    assert false : "Unrevealable proxy.";
-  }
   
   @Override
   public void onPresenterChanged( Presenter presenter ) {
