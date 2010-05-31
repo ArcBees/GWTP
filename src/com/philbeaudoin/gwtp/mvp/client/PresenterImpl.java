@@ -47,12 +47,6 @@ extends PresenterWidgetImpl<V> implements Presenter {
   public final Proxy_ getProxy() {
     return proxy;
   }
-  
-  @Override
-  public void reveal() {
-    getProxy().reveal();
-  }
-  
 
   /**
    * <b>Important:</b> If you want to reveal a presenter from within

@@ -17,7 +17,8 @@
 package com.philbeaudoin.gwtp.mvp.client;
 
 import com.google.gwt.user.client.ui.Widget;
-import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
+import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceManager;
+import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceRequest;
 import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentEvent;
 
 /**
@@ -30,9 +31,14 @@ import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentEvent;
  * <p />
  * {@link PresenterWidget}s and {@link Presenter}s are organized in a
  * hierarchy. Parent presenters have links to their child presenters.
- * To reveal a presenter, you call its {@link Presenter#reveal()} method,
- * or you invoke its corresponding {@link Place}. The presenter's 
- * {@link Proxy} then asks the presenter to reveal itself by calling
+ * To reveal a presenter you should build a {@link PlaceRequest} and
+ * call one of the following method:
+ * <ul>
+ * <li>{@link PlaceManager#revealPlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest, int)}</li>
+ * </ul>
+ * The presenter's {@link Proxy} then asks the presenter to reveal itself by calling
  * {@link Presenter#forceReveal()}, triggering the following sequence 
  * of operations:
  * <ul>

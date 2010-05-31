@@ -17,9 +17,7 @@
 package com.philbeaudoin.gwtp.mvp.client;
 
 import com.google.inject.Singleton;
-import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Proxy;
-import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentEvent;
 
 /**
  * A singleton presenter, one of the basic building block of
@@ -33,18 +31,6 @@ import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentEvent;
  */
 @Singleton
 public interface Presenter extends PresenterWidget {
-
-  /**
-   * Requests the presenter to reveal itself on screen. This call will
-   * fail on presenters for which the {@link Proxy} is not a {@link Place},
-   * since such presenters are not expected to be revealable.
-   * Nothing happens if the presenter is currently visible (see 
-   * {@link #isVisible()}). Upon being revealed, the presenter will ask to 
-   * be inserted within its parent presenter by firing a {@link 
-   * RevealContentEvent}. This will cause the parent to be revealed 
-   * too, if necessary.
-   */
-  public void reveal();
   
   /**
    * Returns the {@link Proxy} for the current presenter.

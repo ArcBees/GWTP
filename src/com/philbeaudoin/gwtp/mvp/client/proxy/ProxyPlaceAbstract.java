@@ -89,16 +89,6 @@ implements ProxyPlace<P> {
 
   ///////////////////////
   // Inherited from Proxy
-  
-  @Override
-  public final void reveal() {
-    handleRequest( new PlaceRequest(getNameToken()) );
-  }
-
-  @Override
-  public final void reveal(PlaceRequest request) {
-    handleRequest(request);
-  }
 
   @Override
   public void getRawPresenter(AsyncCallback<Presenter> callback) {
