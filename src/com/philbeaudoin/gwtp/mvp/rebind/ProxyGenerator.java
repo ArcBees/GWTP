@@ -47,12 +47,14 @@ import com.philbeaudoin.gwtp.mvp.client.RequestTabsHandler;
 import com.philbeaudoin.gwtp.mvp.client.StandardProvider;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ContentSlot;
 import com.philbeaudoin.gwtp.mvp.client.annotations.NameToken;
+import com.philbeaudoin.gwtp.mvp.client.annotations.Title;
 import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceInstance;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplit;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyStandard;
 import com.philbeaudoin.gwtp.mvp.client.annotations.RequestTabs;
 import com.philbeaudoin.gwtp.mvp.client.annotations.TabInfo;
+import com.philbeaudoin.gwtp.mvp.client.proxy.GetPlaceTitleEvent;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyFailureHandler;
@@ -180,6 +182,7 @@ public class ProxyGenerator extends Generator {
     // Check if this proxy is also a place.
     String nameToken = null;
     String newPlaceCode = null;
+    String title = null;
     if( proxyInterface.isAssignableTo( basePlaceClass ) ) {
       NameToken nameTokenAnnotation = proxyInterface.getAnnotation( NameToken.class );
       if( nameTokenAnnotation == null ) {
@@ -191,6 +194,11 @@ public class ProxyGenerator extends Generator {
       PlaceInstance newPlaceCodeAnnotation =  proxyInterface.getAnnotation( PlaceInstance.class );
       if( newPlaceCodeAnnotation != null )
         newPlaceCode = newPlaceCodeAnnotation.value();
+
+      Title titleAnnotation = proxyInterface.getAnnotation( Title.class );
+      if( titleAnnotation != null ) {
+        title = titleAnnotation.value();
+      }
     }
 
 
@@ -259,7 +267,8 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImport(DelayedBindRegistry.class.getCanonicalName());
     composerFactory.addImport(Ginjector.class.getCanonicalName());
     composerFactory.addImport(RevealContentEvent.class.getCanonicalName());  // Obsolete?
-
+    if( title != null )
+      composerFactory.addImport(GetPlaceTitleEvent.class.getCanonicalName());
 
     // Sets interfaces and superclass
     composerFactory.addImplementedInterface(
@@ -337,6 +346,17 @@ public class ProxyGenerator extends Generator {
       // END Enclosed proxy class
       writer.outdent();
       writer.println( "}" );
+      
+      // Title override if needed
+      if( title != null ) {
+        writer.println();
+        writer.println( "protected void getPlaceTitle(GetPlaceTitleEvent event) {");
+        writer.indent();
+        writer.println( "event.getHandler().onSetPlaceTitle( \"" + title + "\" );" );
+        writer.outdent();
+        writer.println( "}" );
+      }
+      
     }
 
     // Constructor
