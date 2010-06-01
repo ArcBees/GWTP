@@ -169,7 +169,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         return new ArrayList<PlaceRequest>( placeHierarchy.subList(0, size+level) );
     } else if( level > 0 ) {
       if( level >= size )
-        return new ArrayList<PlaceRequest>();
+        return new ArrayList<PlaceRequest>(placeHierarchy);
       else
         return new ArrayList<PlaceRequest>( placeHierarchy.subList(0, level) );
     }
@@ -291,5 +291,23 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       return "";
     return tokenFormatter.toHistoryToken(placeHierarchyCopy);    
   }
+
+  @Override
+  public int getHierarchyDepth() {
+    return placeHierarchy.size();
+  }
   
+  @Override
+  public void getCurrentTitle( SetPlaceTitleHandler handler ) {
+    getCurrentTitle(0, handler);
+  }
+
+  @Override
+  public void getCurrentTitle( int index, SetPlaceTitleHandler handler ) throws IndexOutOfBoundsException {
+    GetPlaceTitleEvent event = new GetPlaceTitleEvent( placeHierarchy.get(index), handler );
+    eventBus.fireEvent( event );
+    // If nobody took care of the title, indicate it's null
+    if( !event.isHandled() )
+      handler.onSetPlaceTitle(null);
+  }
 }

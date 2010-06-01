@@ -52,7 +52,7 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
    * The handled flag can let others know when the event has been handled.
    * Handlers should call {@link setHandled()} as soon as they figure they
    * are be responsible for this event. Handlers should not process
-   * this event if {@link isHandled()} return <code>true</code>. 
+   * this event if {@link isHandled()} return {@code true}. 
    */
   private boolean handled = false;
 
@@ -86,7 +86,7 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
    * Checks if the event was handled. If it was, then it should not
    * be processed further.
    * 
-   * @return <code>true</code> if the event was handled. <code>false</code> otherwise.
+   * @return {@code true} if the event was handled. {@code false} otherwise.
    */
   public boolean isHandled() {
     return handled;

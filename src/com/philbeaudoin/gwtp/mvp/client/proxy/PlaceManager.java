@@ -271,4 +271,45 @@ public interface PlaceManager {
    */
   public String buildRelativeHistoryToken( int level );  
   
+  
+  /**
+   * Retrieves the number of elements in the place hierarchy. The title
+   * of each of these elements can be obtained through {@link #getCurrentTitle(int)}. 
+   * 
+   * @return The depth of the place hierarchy.
+   */
+  public int getHierarchyDepth();
+  
+  /**
+   * Retrieves the title of the currently displayed place, or {@code null} if it doesn't have a
+   * title. Same as calling {@link #getCurrentTitle(int)} with a {@code level} of 0.
+   * <p />
+   * Instead of returning the title directly, this method accepts a callback and will call
+   * {@link SetPlaceTitleHandler#onSetPlaceTitle} as soon as the title is available. This makes
+   * it possible for the user to query the title from the server based on the {@link PlaceRequest}
+   * parameters, for example. 
+   * 
+   * @param handler The {@link SetPlaceTitleHandler} to invoke when the place title is available.
+   *                This will be invoked with {@code null} if the place doesn't have a title.
+   */
+  public void getCurrentTitle( SetPlaceTitleHandler handler );
+
+  /**
+   * Retrieves the title of the a specific place within the place hierarchy.
+   * <p />
+   * Instead of returning the title directly, this method accepts a callback and will call
+   * {@link SetPlaceTitleHandler#onSetPlaceTitle} as soon as the title is available. This makes
+   * it possible for the user to query the title from the server based on the {@link PlaceRequest}
+   * parameters, for example. 
+   * 
+   * @see #getCurrentTitle(SetPlaceTitleHandler)
+   * 
+   * @param index The index of the place to reveal within the hierarchy.
+   * @param handler The {@link SetPlaceTitleHandler} to invoke when the place title is available.
+   *                This will be invoked with {@code null} if the place doesn't have a title.
+   * @throws IndexOutOfBoundsException If the index is less than {@code 0} or greater or equal to
+   *                                   {@link #getHierarchyDepth()}. 
+   */
+  public void getCurrentTitle( int index, SetPlaceTitleHandler handler ) throws IndexOutOfBoundsException;
+  
 }
