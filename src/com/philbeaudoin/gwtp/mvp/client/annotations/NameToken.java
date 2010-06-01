@@ -19,6 +19,12 @@ package com.philbeaudoin.gwtp.mvp.client.annotations;
 import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
 
+/**
+ * This annotation is used to specify the name token to 
+ * use to access this presenter.
+ * 
+ * @author Philippe Beaudoin
+ */
 @Target(ElementType.TYPE)
 public @interface NameToken {
   String value();
