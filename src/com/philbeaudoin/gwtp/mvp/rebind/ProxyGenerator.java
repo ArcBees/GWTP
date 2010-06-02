@@ -28,7 +28,9 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JPackage;
+import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
+import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.inject.client.AsyncProvider;
@@ -47,26 +49,31 @@ import com.philbeaudoin.gwtp.mvp.client.RequestTabsHandler;
 import com.philbeaudoin.gwtp.mvp.client.StandardProvider;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ContentSlot;
 import com.philbeaudoin.gwtp.mvp.client.annotations.NameToken;
-import com.philbeaudoin.gwtp.mvp.client.annotations.Title;
 import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceInstance;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplit;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyStandard;
 import com.philbeaudoin.gwtp.mvp.client.annotations.RequestTabs;
 import com.philbeaudoin.gwtp.mvp.client.annotations.TabInfo;
+import com.philbeaudoin.gwtp.mvp.client.annotations.Title;
+import com.philbeaudoin.gwtp.mvp.client.annotations.TitleFunction;
 import com.philbeaudoin.gwtp.mvp.client.proxy.GetPlaceTitleEvent;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceImpl;
+import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceRequest;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyFailureHandler;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyPlaceImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentEvent;
 import com.philbeaudoin.gwtp.mvp.client.proxy.RevealContentHandler;
+import com.philbeaudoin.gwtp.mvp.client.proxy.SetPlaceTitleHandler;
 import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxy;
 import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxyImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxyPlaceImpl;
 
 public class ProxyGenerator extends Generator {
+
+  private JClassType stringClass = null;
 
   private static final String basePresenterClassName = Presenter.class.getCanonicalName();
   private JClassType basePresenterClass = null;
@@ -86,6 +93,10 @@ public class ProxyGenerator extends Generator {
   private JClassType basePlaceClass = null;
   private static final String tabContentProxyClassName = TabContentProxy.class.getCanonicalName();
   private JClassType tabContentProxyClass = null;
+  private static final String placeRequestClassName = PlaceRequest.class.getCanonicalName();
+  private JClassType placeRequestClass = null;
+  private static final String setPlaceTitleHandlerClassName = SetPlaceTitleHandler.class.getCanonicalName();
+  private JClassType setPlaceTitleHandlerClass = null;
   private static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
   private static final String delayedBindClassName = DelayedBind.class.getCanonicalName();
   private static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
@@ -100,7 +111,6 @@ public class ProxyGenerator extends Generator {
     findBaseTypes(ctx);
 
     TypeOracle oracle = ctx.getTypeOracle();
-
 
     // Find the requested class
     JClassType proxyInterface = oracle.findType(requestedClass);
@@ -200,6 +210,14 @@ public class ProxyGenerator extends Generator {
         title = titleAnnotation.value();
       }
     }
+    TitleFunctionDescription titleFunctionDescription = findTitleFunction(logger, 
+        presenterClass, presenterClassName, ginjectorClassName, ginjectorClass);
+    if( titleFunctionDescription != null && title != null ) {
+      logger.log(TreeLogger.ERROR, "The proxy for '" + presenterClassName + "' is annotated with @' +" +
+          Title.class.getSimpleName() + " and its presenter has a method annotated with @" + 
+          TitleFunction.class.getSimpleName() + " this is not supported.", null);      
+      throw new UnableToCompleteException();
+    }
 
 
     // Check if this proxy is also a TabContentProxy.
@@ -267,8 +285,9 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImport(DelayedBindRegistry.class.getCanonicalName());
     composerFactory.addImport(Ginjector.class.getCanonicalName());
     composerFactory.addImport(RevealContentEvent.class.getCanonicalName());  // Obsolete?
-    if( title != null )
+    if( title != null || titleFunctionDescription != null ) {
       composerFactory.addImport(GetPlaceTitleEvent.class.getCanonicalName());
+    }
 
     // Sets interfaces and superclass
     composerFactory.addImplementedInterface(
@@ -306,6 +325,10 @@ public class ProxyGenerator extends Generator {
     // Get a source writer
     SourceWriter writer = composerFactory.createSourceWriter(ctx, printWriter);
 
+    // Private variable to store the gingector
+    writer.println();
+    writer.println( "private " + ginjectorClassName + " ginjector;" );
+    
     if( nameToken != null ) {
       // Place proxy
 
@@ -346,8 +369,10 @@ public class ProxyGenerator extends Generator {
       // END Enclosed proxy class
       writer.outdent();
       writer.println( "}" );
-      
-      // Title override if needed
+
+      // Check if title override if needed
+
+      // Simple string title
       if( title != null ) {
         writer.println();
         writer.println( "protected void getPlaceTitle(GetPlaceTitleEvent event) {");
@@ -356,7 +381,30 @@ public class ProxyGenerator extends Generator {
         writer.outdent();
         writer.println( "}" );
       }
-      
+
+      // Presenter static method returning string
+      if( titleFunctionDescription != null && titleFunctionDescription.isStatic && titleFunctionDescription.returnString ) {
+        writer.println();
+        writer.println( "protected void getPlaceTitle(GetPlaceTitleEvent event) {");
+        writer.indent();
+        writer.print( "String title = " + presenterClassName + "." + titleFunctionDescription.functionName + "( " );
+        for( int i = 0; i<3 ; ++i ) {
+          if( titleFunctionDescription.gingectorParamIndex == i ) {
+            if( i > 0 ) writer.print(", ");
+            writer.print( "ginjector" );
+          }
+          else if( titleFunctionDescription.placeRequestParamIndex == i ) {
+            if( i > 0 ) writer.print(", ");
+            writer.print( "event.getRequest()" );
+          }
+        }
+        writer.println( ");" );
+        writer.println( "event.getHandler().onSetPlaceTitle( title );" );
+        writer.outdent();
+        writer.println( "}" );
+      }
+
+
     }
 
     // Constructor
@@ -372,11 +420,10 @@ public class ProxyGenerator extends Generator {
     writer.println( "@Override");
     writer.println( "public void delayedBind( Ginjector baseGinjector ) {");
     writer.indent();
-
+    writeGinjector(writer, ginjectorClassName);
     if( nameToken == null ) {
       // Standard proxy (not a Place)      
 
-      writeGinjector(writer, ginjectorClassName);
       // Call ProxyImpl bind method.
       writer.println( "bind( ginjector.getProxyFailureHandler() );" );
 
@@ -398,7 +445,6 @@ public class ProxyGenerator extends Generator {
 
       // Place proxy
 
-      writeGinjector(writer, ginjectorClassName);
       // Call ProxyPlaceAbstract bind method.
       writer.println( "bind(  ginjector.getProxyFailureHandler(), " );
       writer.println( "    ginjector.getPlaceManager()," );
@@ -503,7 +549,7 @@ public class ProxyGenerator extends Generator {
    * Writes a local ginjector variable to the source writer.
    */
   private void writeGinjector(SourceWriter writer, String ginjectorClassName) {
-    writer.println( ginjectorClassName + " ginjector = (" + ginjectorClassName + ")baseGinjector;"  );
+    writer.println( "ginjector = (" + ginjectorClassName + ")baseGinjector;"  );
   }
 
   /**
@@ -611,6 +657,91 @@ public class ProxyGenerator extends Generator {
     }
   }
 
+  private static class TitleFunctionDescription {
+    public String functionName;
+    public boolean isStatic;
+    public boolean returnString;
+    public int placeRequestParamIndex = -1;
+    public int gingectorParamIndex = -1;
+    public int setPlaceTitleHandlerParamIndex = -1;
+  }
+
+  private TitleFunctionDescription findTitleFunction(TreeLogger logger, 
+      JClassType presenterClass, String presenterClassName,
+      String ginjectorClassName, JClassType ginjectorClass)
+  throws UnableToCompleteException {
+    // Look for the title function in the parent presenter
+    TitleFunctionDescription result = null;
+    for( JMethod method : presenterClass.getMethods() ) {
+      TitleFunction annotation = method.getAnnotation( TitleFunction.class );
+      if( annotation != null ) {
+        if( result != null ) {
+          logger.log(TreeLogger.ERROR, "At least two methods in presenter " + presenterClassName +
+              "are annotated with @" + TitleFunction.class.getSimpleName() + ", this is illegal." );
+          throw new UnableToCompleteException();
+        }
+        result = new TitleFunctionDescription();
+        result.functionName = method.getName();
+        result.isStatic = method.isStatic();
+
+        JClassType classReturnType = method.getReturnType().isClassOrInterface();
+        if( classReturnType != null && classReturnType == stringClass ) {
+          result.returnString = true;
+        }
+        else {
+          result.returnString = false;
+
+          JPrimitiveType primitiveReturnType = method.getReturnType().isPrimitive();
+          if( primitiveReturnType == null || primitiveReturnType != JPrimitiveType.VOID ) {
+            logger.log(TreeLogger.WARN, "In presenter " + presenterClassName + ", method " +
+                result.functionName + " annotated with @" + TitleFunction.class.getSimpleName() +
+            " returns something else than void or String. Return value will be ignored and void will be assumed." );
+          }
+        }
+
+        int i = 0;
+        for( JParameter parameter : method.getParameters() ) {
+          JClassType parameterType = parameter.getType().isClassOrInterface();
+          if( parameterType.isAssignableFrom( ginjectorClass ) && result.gingectorParamIndex == -1 )
+            result.gingectorParamIndex = i;
+          else if( parameterType.isAssignableFrom( placeRequestClass ) && result.placeRequestParamIndex == -1 )
+            result.placeRequestParamIndex = i;
+          else if( parameterType.isAssignableFrom( setPlaceTitleHandlerClass ) && result.setPlaceTitleHandlerParamIndex == -1 )
+            result.setPlaceTitleHandlerParamIndex = i;
+          else {
+            logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", in method " +
+                result.functionName + " annotated with @" + TitleFunction.class.getSimpleName() +
+                " parameter " + i + " is invalid. Method can have at most one parameter of type " +
+                ginjectorClassName + ", " + placeRequestClass.getName() + " or " +
+                setPlaceTitleHandlerClass.getName() );
+            throw new UnableToCompleteException();
+          }
+          i++;
+        }
+
+        if( result.returnString && result.setPlaceTitleHandlerParamIndex != -1 ) {
+          logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", the method " +
+              result.functionName + " annotated with @" + TitleFunction.class.getSimpleName() +
+              " returns a string and accepts a " + setPlaceTitleHandlerClass.getName() + " parameter. " +
+          "This is not supported, you can have only one or the other.");
+          throw new UnableToCompleteException();
+        }
+
+        if( !result.returnString && result.setPlaceTitleHandlerParamIndex == -1 ) {
+          logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", the method " +
+              result.functionName + " annotated with @" + TitleFunction.class.getSimpleName() +
+              " doesn't return a string and doesn't accept a " + setPlaceTitleHandlerClass.getName() + " parameter. " +
+          "You need one or the other.");
+          throw new UnableToCompleteException();
+        }
+      }
+    }
+
+    return result;
+  }
+
+
+
 
   /**
    * Make sure all the required base type information is known.
@@ -620,7 +751,8 @@ public class ProxyGenerator extends Generator {
   private void findBaseTypes( GeneratorContext ctx ) {
     TypeOracle oracle = ctx.getTypeOracle();
 
-    // Find the required base types
+    // Find the required base types   
+    stringClass = oracle.findType( "java.lang.String" );
     basePresenterClass = oracle.findType( basePresenterClassName );
     baseGinjectorClass = oracle.findType( baseGinjectorClassName );
     typeClass = oracle.findType( typeClassName );
@@ -630,6 +762,8 @@ public class ProxyGenerator extends Generator {
     asyncProviderClass = oracle.findType( asyncProviderClassName );
     basePlaceClass = oracle.findType( basePlaceClassName );
     tabContentProxyClass = oracle.findType( tabContentProxyClassName );
+    placeRequestClass = oracle.findType( placeRequestClassName );
+    setPlaceTitleHandlerClass = oracle.findType( setPlaceTitleHandlerClassName );
   }
 
 }
