@@ -398,7 +398,7 @@ public class ProxyGenerator extends Generator {
         writer.println( "}" );
       }
 
-      // Presenter static method returning string
+      // Presenter static method taking a handler (not returning a string)
       if( titleFunctionDescription != null && titleFunctionDescription.isStatic && !titleFunctionDescription.returnString ) {
         writer.println();
         writer.println( "protected void getPlaceTitle(GetPlaceTitleEvent event) {");
@@ -409,7 +409,30 @@ public class ProxyGenerator extends Generator {
         writer.println( "}" );
       }
 
-      // Presenter non-static method taking a handler
+      // Presenter non-static method returning a string
+      if( titleFunctionDescription != null && !titleFunctionDescription.isStatic && titleFunctionDescription.returnString ) {
+        writer.println();
+        writer.println( "protected void getPlaceTitle(final GetPlaceTitleEvent event) {");
+        writer.indent();
+        writer.println( "getPresenter( new AsyncCallback<" + presenterClassName +  ">(){" );
+        writer.indent();
+        writer.indent();
+        writer.println( "public void onSuccess(" + presenterClassName + " p ) {" );
+        writer.indent();
+        writer.print( "String title = p." );
+        writeTitleFunction(titleFunctionDescription, writer);
+        writer.println();
+        writer.println( "event.getHandler().onSetPlaceTitle( title );" );
+        writer.outdent();
+        writer.println( " }" );
+        writer.println( "public void onFailure(Throwable t) { event.getHandler().onSetPlaceTitle(null); }" );
+        writer.outdent();
+        writer.println( "} );" );
+        writer.outdent();
+        writer.println( "}" );
+      }
+
+      // Presenter non-static method taking a handler (not returning a string)
       if( titleFunctionDescription != null && !titleFunctionDescription.isStatic && !titleFunctionDescription.returnString ) {
         writer.println();
         writer.println( "protected void getPlaceTitle(final GetPlaceTitleEvent event) {");
