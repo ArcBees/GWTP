@@ -398,6 +398,17 @@ public class ProxyGenerator extends Generator {
         writer.println( "}" );
       }
 
+      // Presenter static method returning string
+      if( titleFunctionDescription != null && titleFunctionDescription.isStatic && !titleFunctionDescription.returnString ) {
+        writer.println();
+        writer.println( "protected void getPlaceTitle(GetPlaceTitleEvent event) {");
+        writer.indent();
+        writer.print( presenterClassName + "." );             
+        writeTitleFunction(titleFunctionDescription, writer);
+        writer.println();
+        writer.println( "}" );
+      }
+
       // Presenter non-static method taking a handler
       if( titleFunctionDescription != null && !titleFunctionDescription.isStatic && !titleFunctionDescription.returnString ) {
         writer.println();
