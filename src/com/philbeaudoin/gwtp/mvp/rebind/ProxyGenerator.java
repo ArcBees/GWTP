@@ -35,6 +35,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Inject;
@@ -215,7 +216,7 @@ public class ProxyGenerator extends Generator {
     if( titleFunctionDescription != null && title != null ) {
       logger.log(TreeLogger.ERROR, "The proxy for '" + presenterClassName + "' is annotated with @' +" +
           Title.class.getSimpleName() + " and its presenter has a method annotated with @" + 
-          TitleFunction.class.getSimpleName() + " this is not supported.", null);      
+          TitleFunction.class.getSimpleName() + ". This is not supported.", null);      
       throw new UnableToCompleteException();
     }
 
@@ -287,6 +288,8 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImport(RevealContentEvent.class.getCanonicalName());  // Obsolete?
     if( title != null || titleFunctionDescription != null ) {
       composerFactory.addImport(GetPlaceTitleEvent.class.getCanonicalName());
+      composerFactory.addImport(AsyncCallback.class.getCanonicalName());
+      composerFactory.addImport(Throwable.class.getCanonicalName());
     }
 
     // Sets interfaces and superclass
@@ -387,19 +390,28 @@ public class ProxyGenerator extends Generator {
         writer.println();
         writer.println( "protected void getPlaceTitle(GetPlaceTitleEvent event) {");
         writer.indent();
-        writer.print( "String title = " + presenterClassName + "." + titleFunctionDescription.functionName + "( " );
-        for( int i = 0; i<3 ; ++i ) {
-          if( titleFunctionDescription.gingectorParamIndex == i ) {
-            if( i > 0 ) writer.print(", ");
-            writer.print( "ginjector" );
-          }
-          else if( titleFunctionDescription.placeRequestParamIndex == i ) {
-            if( i > 0 ) writer.print(", ");
-            writer.print( "event.getRequest()" );
-          }
-        }
-        writer.println( ");" );
+        writer.print( "String title = " + presenterClassName + "." );             
+        writeTitleFunction(titleFunctionDescription, writer);
+        writer.println();
         writer.println( "event.getHandler().onSetPlaceTitle( title );" );
+        writer.outdent();
+        writer.println( "}" );
+      }
+
+      // Presenter non-static method taking a handler
+      if( titleFunctionDescription != null && !titleFunctionDescription.isStatic && !titleFunctionDescription.returnString ) {
+        writer.println();
+        writer.println( "protected void getPlaceTitle(final GetPlaceTitleEvent event) {");
+        writer.indent();
+        writer.println( "getPresenter( new AsyncCallback<" + presenterClassName +  ">(){" );
+        writer.indent();
+        writer.indent();
+        writer.print( "public void onSuccess(" + presenterClassName + " p ) { p." );
+        writeTitleFunction(titleFunctionDescription, writer);
+        writer.println( " }" );
+        writer.println( "public void onFailure(Throwable t) { event.getHandler().onSetPlaceTitle(null); }" );
+        writer.outdent();
+        writer.println( "} );" );
         writer.outdent();
         writer.println( "}" );
       }
@@ -466,6 +478,26 @@ public class ProxyGenerator extends Generator {
     writer.commit(logger);
 
     return generatedClassName;    
+  }
+
+  private void writeTitleFunction(
+      TitleFunctionDescription titleFunctionDescription, SourceWriter writer) {
+    writer.print( titleFunctionDescription.functionName + "( " );
+    for( int i = 0; i<3 ; ++i ) {
+      if( titleFunctionDescription.gingectorParamIndex == i ) {
+        if( i > 0 ) writer.print(", ");
+        writer.print( "ginjector" );
+      }
+      else if( titleFunctionDescription.placeRequestParamIndex == i ) {
+        if( i > 0 ) writer.print(", ");
+        writer.print( "event.getRequest()" );
+      }
+      else if( titleFunctionDescription.setPlaceTitleHandlerParamIndex == i ) {
+        if( i > 0 ) writer.print(", ");
+        writer.print( "event.getHandler()" );
+      }
+    }
+    writer.print( ");" );
   }
 
   private void writeRequestTabHandler(TreeLogger logger,
@@ -677,7 +709,7 @@ public class ProxyGenerator extends Generator {
       if( annotation != null ) {
         if( result != null ) {
           logger.log(TreeLogger.ERROR, "At least two methods in presenter " + presenterClassName +
-              "are annotated with @" + TitleFunction.class.getSimpleName() + ", this is illegal." );
+              "are annotated with @" + TitleFunction.class.getSimpleName() + ". This is illegal." );
           throw new UnableToCompleteException();
         }
         result = new TitleFunctionDescription();
