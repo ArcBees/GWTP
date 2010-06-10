@@ -88,8 +88,10 @@ extends HandlerContainerImpl implements PresenterWidget {
     this.eventBus = eventBus;
   }
 
+  // TODO This should be final. Can't be now because it makes testing injected 
+  //      PresenterWidgets impossible. Make final once http://code.google.com/p/gwt-platform/issues/detail?id=111 is solved.
   @Override
-  public final V getView() {
+  public V getView() {
     return view;
   }
 
@@ -329,7 +331,10 @@ extends HandlerContainerImpl implements PresenterWidget {
    * You should not call this. Fire a 
    * {@link ResetPresentersEvent} instead.
    */
-  final void notifyReveal() {
+  // TODO This was private. Can't be now because it makes testing injected 
+  //      PresenterWidgets impossible. Should move to base class
+  //      once http://code.google.com/p/gwt-platform/issues/detail?id=111 is solved.
+  public void notifyReveal() {
     assert !isVisible() : "notifyReveal() called on a visible presenter!";
     onReveal();
     visible = true;
