@@ -5,17 +5,17 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  * Inherit from this class to define a factory for creating your
  * custom {@link Place}. For example:
  * <pre>
- * class AdminSecurePlaceFactory implements PlaceFactory {
+ * public class AdminSecurePlaceFactory implements PlaceFactory {
  *   
  *   private final CurrentUser currentUser;
  *   
  *  {@code @}Inject
- *   AdminSecurePlaceFactory( CurrentUser currentUser } {
+ *   public AdminSecurePlaceFactory( CurrentUser currentUser ) {
  *     this.currentUser = currentUser;
  *   }
  *   
  *  {@code @}Override
- *   Place create(String nameToken) {
+ *   public Place create(String nameToken) {
  *     return new AdminSecurePlace( nameToken, currentUser );
  *   }
  * 
