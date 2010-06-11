@@ -47,13 +47,14 @@ import com.philbeaudoin.gwtp.mvp.client.RequestTabsHandler;
 import com.philbeaudoin.gwtp.mvp.client.StandardProvider;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ContentSlot;
 import com.philbeaudoin.gwtp.mvp.client.annotations.NameToken;
-import com.philbeaudoin.gwtp.mvp.client.annotations.Title;
 import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceInstance;
+import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceProvider;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplit;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyStandard;
 import com.philbeaudoin.gwtp.mvp.client.annotations.RequestTabs;
 import com.philbeaudoin.gwtp.mvp.client.annotations.TabInfo;
+import com.philbeaudoin.gwtp.mvp.client.annotations.Title;
 import com.philbeaudoin.gwtp.mvp.client.proxy.GetPlaceTitleEvent;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceImpl;
@@ -191,10 +192,42 @@ public class ProxyGenerator extends Generator {
         throw new UnableToCompleteException();
       }
       nameToken = nameTokenAnnotation.value();
-      PlaceInstance newPlaceCodeAnnotation =  proxyInterface.getAnnotation( PlaceInstance.class );
-      if( newPlaceCodeAnnotation != null )
-        newPlaceCode = newPlaceCodeAnnotation.value();
-
+      PlaceProvider placeProviderAnnotation = proxyInterface.getAnnotation( PlaceProvider.class );
+      if (placeProviderAnnotation != null) {
+        String placeProviderName = placeProviderAnnotation.value().getCanonicalName();
+        JClassType placeProviderClass = oracle.findType(placeProviderName);
+        if (placeProviderClass == null) {
+          logger.log(TreeLogger.ERROR, "The class '" + placeProviderName + "' can be found.", null);
+          throw new UnableToCompleteException();
+        }
+        // Find the appropriate get method in the Ginjector
+        String methodName = null;
+        for( JMethod method : ginjectorClass.getMethods() ) {
+          JClassType returnType = method.getReturnType().isClassOrInterface();
+          if( method.getParameters().length == 0 &&
+              returnType != null && 
+              returnType.isAssignableTo( placeProviderClass )) {
+            methodName = method.getName();
+            break;
+          }
+        }
+        if( methodName == null ) {
+          logger.log(TreeLogger.ERROR, "The Ginjector '"+ ginjectorClassName + 
+              "' does not have a get() method returning '"+placeProviderName+
+              ">'. This is required when using @" + PlaceProvider.class.getSimpleName() + ".", null);      
+          throw new UnableToCompleteException();
+        }
+        newPlaceCode = "ginjector." + methodName + "().create(nameToken)";
+      }
+      else {
+        PlaceInstance newPlaceCodeAnnotation =  proxyInterface.getAnnotation( PlaceInstance.class );
+        if( newPlaceCodeAnnotation != null )
+          logger.log(TreeLogger.WARN, "The @"+ PlaceInstance.class.getCanonicalName()
+              + " annotation is deprecated. Please use the @" + PlaceProvider.class.getCanonicalName()
+              + " annotation instead.", null);      
+          newPlaceCode = newPlaceCodeAnnotation.value();
+      }
+      
       Title titleAnnotation = proxyInterface.getAnnotation( Title.class );
       if( titleAnnotation != null ) {
         title = titleAnnotation.value();
