@@ -53,7 +53,7 @@ import java.lang.annotation.Target;
  * parameter and your custom ginjector. Example of use:
  * <pre>
  * {@code @}TitleFunction
- *  public String getTitle( PlaceRequest placeRequest, final SetPlaceTitleHandler handler ) {
+ *  public void getTitle( PlaceRequest placeRequest, final SetPlaceTitleHandler handler ) {
  *    prepareFromRequest( placeRequest );
  *    dispatcher.execute( new GetUserNameAction( getUserId(), new AsyncCallback<GetUserNameResult>(){
  *      public void onSuccess(GetUserNameResult result) {
