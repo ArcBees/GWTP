@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
  * Annotation used to specify the title of a place as a string.
  * This title is used when retrieving a place title through
  * {@link com.philbeaudoin.gwtp.mvp.client.proxy.PlaceManager#getCurrentTitle}.
- * For more control see {@link TitleFunc} and {@link TitleFromPresenter}.
+ * For more control see {@link TitleFunction}.
  * 
  * @author Philippe Beaudoin
  */
