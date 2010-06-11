@@ -170,9 +170,7 @@ public class DispatchImpl implements Dispatch {
     } catch (ActionException e) {
       throw e;
     } catch( Exception e ) {
-      String newMessage = "Service exception executing action \"" + action.getClass().getSimpleName() + "\"";
-      if( e.getMessage() != null )
-        newMessage += ": " + e.getMessage();
+      String newMessage = "Service exception executing action \"" + action.getClass().getSimpleName() + "\", " + e.toString( );
       ServiceException rethrown = new ServiceException( newMessage ); 
       rethrown.initCause(e);
       throw rethrown;
