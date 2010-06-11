@@ -45,7 +45,6 @@ public class PresenterProxyIntegrationTest extends GWTTestCase {
 
     @Override
     protected void revealInParent() {
-      // TODO Auto-generated method stubs
     }
     
   }
