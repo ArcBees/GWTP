@@ -46,6 +46,7 @@ import com.philbeaudoin.gwtp.mvp.client.Presenter;
 import com.philbeaudoin.gwtp.mvp.client.RequestTabsHandler;
 import com.philbeaudoin.gwtp.mvp.client.StandardProvider;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ContentSlot;
+import com.philbeaudoin.gwtp.mvp.client.annotations.DefaultPlaceProvider;
 import com.philbeaudoin.gwtp.mvp.client.annotations.NameToken;
 import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceInstance;
 import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceProvider;
@@ -57,6 +58,7 @@ import com.philbeaudoin.gwtp.mvp.client.annotations.TabInfo;
 import com.philbeaudoin.gwtp.mvp.client.annotations.Title;
 import com.philbeaudoin.gwtp.mvp.client.proxy.GetPlaceTitleEvent;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
+import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceFactory;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyFailureHandler;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyImpl;
@@ -67,6 +69,11 @@ import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxy;
 import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxyImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.TabContentProxyPlaceImpl;
 
+/**
+ * @author Philippe Beaudoin
+ * @author Olivier Monaco
+ */
+@SuppressWarnings("deprecation")
 public class ProxyGenerator extends Generator {
 
   private static final String basePresenterClassName = Presenter.class.getCanonicalName();
@@ -87,6 +94,8 @@ public class ProxyGenerator extends Generator {
   private JClassType basePlaceClass = null;
   private static final String tabContentProxyClassName = TabContentProxy.class.getCanonicalName();
   private JClassType tabContentProxyClass = null;
+  private static final String placeFactoryClassName = PlaceFactory.class.getCanonicalName();
+  private JClassType placeFactoryClass = null;
   private static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
   private static final String delayedBindClassName = DelayedBind.class.getCanonicalName();
   private static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
@@ -192,12 +201,20 @@ public class ProxyGenerator extends Generator {
         throw new UnableToCompleteException();
       }
       nameToken = nameTokenAnnotation.value();
+
       PlaceProvider placeProviderAnnotation = proxyInterface.getAnnotation( PlaceProvider.class );
       if (placeProviderAnnotation != null) {
         String placeProviderName = placeProviderAnnotation.value().getCanonicalName();
         JClassType placeProviderClass = oracle.findType(placeProviderName);
         if (placeProviderClass == null) {
-          logger.log(TreeLogger.ERROR, "The class '" + placeProviderName + "' can be found.", null);
+          logger.log(TreeLogger.ERROR, "The class '" + placeProviderName + "' provided to @" + 
+              PlaceProvider.class.getSimpleName()+ " can't be found.", null);
+          throw new UnableToCompleteException();
+        }
+        if ( !placeProviderClass.isAssignableTo( placeFactoryClass ) ) {
+          logger.log(TreeLogger.ERROR, "The class '" + placeProviderName + "' provided to @" + 
+              PlaceProvider.class.getSimpleName()+ " can't be found does not inherit from '" +
+              placeFactoryClassName + "'.", null);
           throw new UnableToCompleteException();
         }
         // Find the appropriate get method in the Ginjector
@@ -208,25 +225,55 @@ public class ProxyGenerator extends Generator {
               returnType != null && 
               returnType.isAssignableTo( placeProviderClass )) {
             methodName = method.getName();
+            newPlaceCode = "ginjector." + methodName + "().create(nameToken)";
             break;
           }
         }
         if( methodName == null ) {
           logger.log(TreeLogger.ERROR, "The Ginjector '"+ ginjectorClassName + 
               "' does not have a get() method returning '"+placeProviderName+
-              ">'. This is required when using @" + PlaceProvider.class.getSimpleName() + ".", null);      
+              "'. This is required when using @" + PlaceProvider.class.getSimpleName() + ".", null);      
           throw new UnableToCompleteException();
         }
-        newPlaceCode = "ginjector." + methodName + "().create(nameToken)";
       }
       else {
         PlaceInstance newPlaceCodeAnnotation =  proxyInterface.getAnnotation( PlaceInstance.class );
-        if( newPlaceCodeAnnotation != null )
+        if( newPlaceCodeAnnotation != null ) {
           logger.log(TreeLogger.WARN, "The @"+ PlaceInstance.class.getCanonicalName()
               + " annotation is deprecated. Please use the @" + PlaceProvider.class.getCanonicalName()
               + " annotation instead.", null);      
           newPlaceCode = newPlaceCodeAnnotation.value();
+        }
       }
+      if( newPlaceCode == null ) {
+        // No PlaceFactory specified, see if there is a DefaultPlaceFactory defined in the ginjector
+        String methodName = null;
+        for( JMethod method : ginjectorClass.getMethods() ) {
+          if( method.getAnnotation( DefaultPlaceProvider.class ) != null ) {
+            JClassType returnType = method.getReturnType().isClassOrInterface();
+            if( methodName != null ) {
+              logger.log(TreeLogger.ERROR, "The Ginjector '"+ ginjectorClassName + 
+                  "' has more than one method annotated with @" + DefaultPlaceProvider.class.getSimpleName() + 
+                  ". This is not allowed.", null);      
+              throw new UnableToCompleteException();              
+            }
+            
+            if( method.getParameters().length != 0 ||
+                returnType == null || 
+                !returnType.isAssignableTo( placeFactoryClass )) {
+              logger.log(TreeLogger.ERROR, "The method '" + method.getName() + "' in the Ginjector '"+ ginjectorClassName + 
+                  "' is annotated with @" + DefaultPlaceProvider.class.getSimpleName() + 
+                  " but has an invalid signature. It must not take any parameter and must return a class derived from '" +
+                  placeFactoryClassName + "'.", null);      
+              throw new UnableToCompleteException();              
+            }
+            
+            methodName = method.getName();
+            newPlaceCode = "ginjector." + methodName + "().create(nameToken)";
+          }
+        }
+      }
+      
       
       Title titleAnnotation = proxyInterface.getAnnotation( Title.class );
       if( titleAnnotation != null ) {
@@ -379,7 +426,7 @@ public class ProxyGenerator extends Generator {
       // END Enclosed proxy class
       writer.outdent();
       writer.println( "}" );
-      
+
       // Title override if needed
       if( title != null ) {
         writer.println();
@@ -389,7 +436,7 @@ public class ProxyGenerator extends Generator {
         writer.outdent();
         writer.println( "}" );
       }
-      
+
     }
 
     // Constructor
@@ -663,6 +710,7 @@ public class ProxyGenerator extends Generator {
     asyncProviderClass = oracle.findType( asyncProviderClassName );
     basePlaceClass = oracle.findType( basePlaceClassName );
     tabContentProxyClass = oracle.findType( tabContentProxyClassName );
+    placeFactoryClass = oracle.findType( placeFactoryClassName );
   }
 
 }
