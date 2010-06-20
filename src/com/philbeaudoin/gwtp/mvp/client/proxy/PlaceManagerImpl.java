@@ -198,13 +198,13 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   }
 
   /**
-   * Fires the {@link PlaceRequestEvent} for the given {@link PlaceRequest}. 
+   * Fires the {@link PlaceRequestInternalEvent} for the given {@link PlaceRequest}. 
    * 
    * @param request The {@link PlaceRequest} to fire.
    * @return {@code true} if the request has been handled, {@code false} otherwise.
    */
   private final boolean doRevealPlace( PlaceRequest request ) {
-    PlaceRequestEvent requestEvent = new PlaceRequestEvent( request );
+    PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent( request );
     eventBus.fireEvent(requestEvent);
     return requestEvent.isHandled();
   }
