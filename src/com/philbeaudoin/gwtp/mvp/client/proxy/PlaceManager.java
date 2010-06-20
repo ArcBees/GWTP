@@ -28,7 +28,7 @@ public interface PlaceManager {
 
   /**
    * Programmatically reveals the specified place. 
-   * This will result in a {@link PlaceRequestEvent} being fired.
+   * This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * This discards all the place hierarchy, effectively revealing the
    * request as a top-level place. To keep the place hierarchy, see 
@@ -45,7 +45,7 @@ public interface PlaceManager {
   /**
    * Programmatically reveals the specified place as a child of the current place hierarchy. 
    * Identical to calling {@link #revealRelativePlace(PlaceRequest, int)} with a level of {@code 0}.
-   * This will result in a {@link PlaceRequestEvent} being fired.
+   * This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
    * in the hierarchy, see {@link #revealRelativePlace(int)}.
@@ -58,7 +58,7 @@ public interface PlaceManager {
   
   /**
    * Programmatically reveals the specified place relative to the other places in
-   * the current place hierarchy. This will result in a {@link PlaceRequestEvent} being fired.
+   * the current place hierarchy. This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
    * in the hierarchy, see {@link #revealRelativePlace(int)}.
@@ -83,7 +83,7 @@ public interface PlaceManager {
 
   /**
    * Programmatically reveals the specified place from the current place hierarchy. 
-   * This will result in a {@link PlaceRequestEvent} being fired.
+   * This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
    * <ul>
@@ -103,7 +103,7 @@ public interface PlaceManager {
 
   /**
    * Reveals the place corresponding to the current value of the history token
-   * in the URL bar. This will result in a {@link PlaceRequestEvent} being fired.
+   * in the URL bar. This will result in a {@link PlaceRequestInternalEvent} being fired.
    */
   public void revealCurrentPlace();
 

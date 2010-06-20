@@ -21,8 +21,8 @@ import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
 /**
  * 
- * This event is fired whenever a  new place is requested, either by 
- * history navigation or directly.
+ * This event is fired by the {@link PlaceManager} whenever a new place 
+ * is requested, either by history navigation or directly.
  * <p />
  * <b>Important!</b> You should never fire that event directly. Instead,
  * build a {@link PlaceRequest} and pass it to one of the following methods:
@@ -36,13 +36,13 @@ import com.philbeaudoin.gwtp.mvp.client.EventBus;
  * @author Philippe Beaudoin
  *
  */
-public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
+class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
-  private static Type<PlaceRequestHandler> TYPE;
+  private static Type<PlaceRequestInternalHandler> TYPE;
 
-  public static Type<PlaceRequestHandler> getType() {
+  public static Type<PlaceRequestInternalHandler> getType() {
     if ( TYPE == null )
-      TYPE = new Type<PlaceRequestHandler>();
+      TYPE = new Type<PlaceRequestInternalHandler>();
     return TYPE;
   }
 
@@ -56,17 +56,17 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
    */
   private boolean handled = false;
 
-  public PlaceRequestEvent( PlaceRequest request ) {
+  public PlaceRequestInternalEvent( PlaceRequest request ) {
     this.request = request;
   }
 
   @Override
-  protected void dispatch( PlaceRequestHandler handler ) {
+  protected void dispatch( PlaceRequestInternalHandler handler ) {
     handler.onPlaceRequest( this );
   }
 
   @Override
-  public Type<PlaceRequestHandler> getAssociatedType() {
+  public Type<PlaceRequestInternalHandler> getAssociatedType() {
     return getType();
   }
 
@@ -93,13 +93,13 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
   }
   
   /**
-   * Fires a {@link PlaceRequestEvent} into the {@link EventBus}, specifying that it
+   * Fires a {@link PlaceRequestInternalEvent} into the {@link EventBus}, specifying that it
    * does not come from a modification in the History.
    *
    * @param eventBus  The event bus.
    * @param request   The request.
    */
   public static void fire( EventBus eventBus, PlaceRequest request ) {
-    eventBus.fireEvent( new PlaceRequestEvent( request ) );
+    eventBus.fireEvent( new PlaceRequestInternalEvent( request ) );
   }
 }
