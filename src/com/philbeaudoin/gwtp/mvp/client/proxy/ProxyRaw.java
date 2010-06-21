@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,33 +39,6 @@ public interface ProxyRaw {
    * @param callback The callback in which the {@link Presenter} will be passed as a parameter.
    */
   public void getRawPresenter( AsyncCallback<Presenter> callback );
-  
-  /**
-   * Requests the presenter to reveal itself on screen.
-   * Upon being revealed presenters will ask to be inserted within 
-   * their parent presenters by firing a {@link RevealContentEvent}
-   * which will cause the parent to be revealed too.
-   * <p />
-   * This call will fail for any non-leaf proxy. Usually only
-   * works for proxy that also have a {@link Place} (see
-   * {@link ProxyPlace}.
-   */
-  public abstract void reveal();
-
-  /**
-   * Requests the presenter to reveal itself on screen.
-   * Upon being revealed presenters will ask to be inserted within 
-   * their parent presenters by firing a {@link RevealContentEvent}
-   * which will cause the parent to be revealed too.
-   * <p />
-   * This call will fail for any non-leaf proxy. Usually only
-   * works for proxy that also have a {@link Place} (see
-   * {@link ProxyPlace}.
-   * <p />
-   *
-   * @param request The {@link PlaceRequest} to use with the new presenter.
-   */
-  public abstract void reveal( PlaceRequest request);
   
   /**
    * Called by this proxy's presenter whenever it has changed in a way that would require 

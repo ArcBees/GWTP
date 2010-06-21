@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.philbeaudoin.gwtp.mvp.client;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The interface for singleton view classes that handles all
+ * The interface for view classes that handles all
  * the UI-related code for a {@link Presenter}.
  * 
  * @author Philippe Beaudoin

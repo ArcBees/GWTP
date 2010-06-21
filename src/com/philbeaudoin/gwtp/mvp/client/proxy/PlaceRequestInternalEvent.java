@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,28 @@ import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
 /**
  * 
- * This event is fired whenever a  new place is requested, either by 
- * history navigation or directly 
+ * This event is fired by the {@link PlaceManager} whenever a new place 
+ * is requested, either by history navigation or directly.
+ * <p />
+ * <b>Important!</b> You should never fire that event directly. Instead,
+ * build a {@link PlaceRequest} and pass it to one of the following methods:
+ * <ul>
+ * <li>{@link PlaceManager#revealPlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest, int)}</li>
+ * </ul>
  * 
  * @author David Peterson
  * @author Philippe Beaudoin
  *
  */
-public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
+class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
-  private static Type<PlaceRequestHandler> TYPE;
+  private static Type<PlaceRequestInternalHandler> TYPE;
 
-  public static Type<PlaceRequestHandler> getType() {
+  public static Type<PlaceRequestInternalHandler> getType() {
     if ( TYPE == null )
-      TYPE = new Type<PlaceRequestHandler>();
+      TYPE = new Type<PlaceRequestInternalHandler>();
     return TYPE;
   }
 
@@ -44,21 +52,21 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
    * The handled flag can let others know when the event has been handled.
    * Handlers should call {@link setHandled()} as soon as they figure they
    * are be responsible for this event. Handlers should not process
-   * this event if {@link isHandled()} return <code>true</code>. 
+   * this event if {@link isHandled()} return {@code true}. 
    */
   private boolean handled = false;
 
-  public PlaceRequestEvent( PlaceRequest request ) {
+  public PlaceRequestInternalEvent( PlaceRequest request ) {
     this.request = request;
   }
 
   @Override
-  protected void dispatch( PlaceRequestHandler handler ) {
+  protected void dispatch( PlaceRequestInternalHandler handler ) {
     handler.onPlaceRequest( this );
   }
 
   @Override
-  public Type<PlaceRequestHandler> getAssociatedType() {
+  public Type<PlaceRequestInternalHandler> getAssociatedType() {
     return getType();
   }
 
@@ -78,20 +86,20 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
    * Checks if the event was handled. If it was, then it should not
    * be processed further.
    * 
-   * @return <code>true</code> if the event was handled. <code>false</code> otherwise.
+   * @return {@code true} if the event was handled. {@code false} otherwise.
    */
   public boolean isHandled() {
     return handled;
   }
   
   /**
-   * Fires a {@link PlaceRequestEvent} into the {@link EventBus}, specifying that it
+   * Fires a {@link PlaceRequestInternalEvent} into the {@link EventBus}, specifying that it
    * does not come from a modification in the History.
    *
    * @param eventBus  The event bus.
    * @param request   The request.
    */
   public static void fire( EventBus eventBus, PlaceRequest request ) {
-    eventBus.fireEvent( new PlaceRequestEvent( request ) );
+    eventBus.fireEvent( new PlaceRequestInternalEvent( request ) );
   }
 }
