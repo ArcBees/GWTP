@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.philbeaudoin.gwtp.mvp.client.TabContainerPresenter;
 
 /**
  * Annotation used to specify the priority and name to display
- * on a tab. Specify either {@link #label()} or {@link #getLabel}.
+ * on a tab. Specify either {@link #label} or {@link #getLabel}.
  * The latter let you specify the code to call to obtain the name
  * of the tab. Make sure class names are fully qualified. Also, you have access
  * to the variable {@code ginjector} (your specific {@link Ginjector}-derived

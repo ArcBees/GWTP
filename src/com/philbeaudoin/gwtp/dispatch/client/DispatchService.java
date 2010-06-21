@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,14 +42,32 @@ public interface DispatchService extends RemoteService {
     /**
      * This method is called server-side whenever a new action is dispatched.
      * 
+     * @see DispatchServiceAsync#execute
+     * 
      * @param cookieSentByRPC This is the content of the security cookie accessed on the client (in javascript),
      *                        its goal is to prevent XSRF attacks.
      *                        See {@link SecurityCookieAccessor} for more details.
      * @param action The {@link Action} to execute.
      * @return The {@link Result} of the action.
-     * @throws ActionException Thrown if the action could not be executed, for example, because of lacks of detected 
-     *                         while executing it.
+     * @throws ActionException Thrown if the action could not be executed for application-specific reasons.
+     *                         User handlers should always throw {@link ActionException} or derived classes.
      * @throws ServiceException Thrown if the action could not be executed because of a service error.
      */
     Result execute( String cookieSentByRPC, Action<?> action ) throws ActionException, ServiceException;
+
+    /**
+     * This method is called server-side whenever a previously executed action needs to be undone.
+     * 
+     * @see DispatchServiceAsync#undo
+     * 
+     * @param cookieSentByRPC This is the content of the security cookie accessed on the client (in javascript),
+     *                        its goal is to prevent XSRF attacks.
+     *                        See {@link SecurityCookieAccessor} for more details.
+     * @param action The {@link Action} to execute.
+     * @param result The {@link Result} of this action when it was executed.
+     * @throws ActionException Thrown if the action could not be undone for application-specific reasons.
+     *                         User handlers should always throw {@link ActionException} or derived classes.
+     * @throws ServiceException Thrown if the action could not be undone because of a service error.
+     */
+    void undo( String cookieSentByRPC, Action<Result> action, Result result) throws ActionException, ServiceException;
 }

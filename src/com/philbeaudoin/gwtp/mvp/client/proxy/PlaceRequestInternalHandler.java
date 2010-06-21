@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package com.philbeaudoin.gwtp.mvp.client;
+package com.philbeaudoin.gwtp.mvp.client.proxy;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import com.google.gwt.event.shared.EventHandler;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-  HandlerContainerImplTest.class,
-  PresenterWidgetImplTest.class
-})
-public class AllTests {
+/**
+ * Proxy should implement this class.
+ * 
+ * @author Philippe Beaudoin
+ */
+interface PlaceRequestInternalHandler extends EventHandler {
+  /**
+   * Called when something has requested a new place. Should be implemented by
+   * instances which can show the place.
+   * 
+   * @param event
+   *            The event.
+   */
+  void onPlaceRequest( PlaceRequestInternalEvent event );
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,24 +55,6 @@ implements Proxy<P> {
   @Override
   public void getPresenter( AsyncCallback<P> callback ) {
     presenter.get(callback);
-  }
-
-  /**
-   * By default, proxys can't reveal their presenter. Only place
-   * proxies, such as {@link ProxyPlaceAbstract} can. 
-   */
-  @Override
-  public void reveal() {
-    assert false : "Unrevealable proxy.";
-  }
-
-  /**
-   * By default, proxys can't reveal their presenter. Only place
-   * proxies, such as {@link ProxyPlaceAbstract} can. 
-   */
-  @Override
-  public void reveal(PlaceRequest request) {
-    assert false : "Unrevealable proxy.";
   }
   
   @Override

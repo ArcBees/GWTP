@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,4 +41,5 @@ import com.philbeaudoin.gwtp.dispatch.shared.Result;
  */
 public interface DispatchAsync {
     <A extends Action<R>, R extends Result> void execute( A action, AsyncCallback<R> callback );
+    <A extends Action<R>, R extends Result> void undo( A action, R result, AsyncCallback<Void> callback );
 }

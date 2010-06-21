@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -26,6 +29,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
 
+/**
+ * @author Philippe Beaudoin
+ * @author Christian Goudreau
+ */
 public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandler<String>, ClosingHandler {
 
   private final EventBus eventBus;
@@ -34,9 +41,10 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   private String onLeaveQuestion = null;
   private HandlerRegistration windowClosingHandlerRegistration = null;
   private String currentHistoryToken = "";
-  private String currentLocation = "";
+  private String currentHRef = "";
   private String previousHistoryToken = null;
 
+  private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
   public PlaceManagerImpl( EventBus eventBus, TokenFormatter tokenFormatter ) {
     this.eventBus = eventBus;
@@ -54,14 +62,18 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
    */
   private void updateHistory( PlaceRequest request ) {
     try {
-      String requestToken = tokenFormatter.toHistoryToken( request );
-      String historyToken = History.getToken();
-      if ( historyToken == null || !historyToken.equals( requestToken ) ) {
-        History.newItem( requestToken, false );
+      // Make sure the request match
+      assert request.hasSameNameToken( getCurrentPlaceRequest() ) : 
+          "Internal error, PlaceRequest passed to updateHistory doesn't match the tail of the place hierarchy.";
+      placeHierarchy.set( placeHierarchy.size()-1, request );      
+      String historyToken = tokenFormatter.toHistoryToken( placeHierarchy );
+      String browserHistoryToken = History.getToken();
+      if ( browserHistoryToken == null || !browserHistoryToken.equals( historyToken ) ) {
+        History.newItem( historyToken, false );
       }
       previousHistoryToken = currentHistoryToken;
-      currentHistoryToken = requestToken;
-      currentLocation = Window.Location.getHref();
+      currentHistoryToken = historyToken;
+      currentHRef = Window.Location.getHref();
     } catch ( TokenFormatException e ) {
       // Do nothing.
     }
@@ -73,14 +85,19 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   }
 
   @Override
+  public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
+    revealErrorPlace(unauthorizedHistoryToken);
+  }  
+
+  @Override
   public void revealErrorPlace(String invalidHistoryToken) {
     revealDefaultPlace();
   }
-  
+
   @Override
   public final void onPlaceChanged( PlaceRequest placeRequest ) {
     try {
-      if ( placeRequest.hasSameNameToken( tokenFormatter.toPlaceRequest( History.getToken() ) ) ) {
+      if ( placeRequest.hasSameNameToken( getCurrentPlaceRequest() ) ) {
         // Only update if the change comes from a place that matches
         // the current location.
         updateHistory( placeRequest );
@@ -89,6 +106,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       // Do nothing...
     }
   }
+
 
   @Override
   public final void onPlaceRevealed( PlaceRequest placeRequest) {
@@ -99,10 +117,64 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   public final void revealPlace( PlaceRequest request ) {
     if( !confirmLeaveState() )
       return;
+    placeHierarchy.clear();
+    placeHierarchy.add( request );
     if( !doRevealPlace(request) )
-        revealErrorPlace( request.toString() );
+      revealErrorPlace( request.toString() );
   }
 
+  @Override
+  public void revealRelativePlace(PlaceRequest request) {
+    revealRelativePlace( request, 0 );
+  }
+
+  @Override
+  public void revealRelativePlace(PlaceRequest request, int level) {
+    if( !confirmLeaveState() )
+      return;
+    placeHierarchy = updatePlaceHierarchy(level);
+    placeHierarchy.add( request );
+    if( !doRevealPlace(request) )
+      revealErrorPlace( request.toString() );
+  }
+
+  @Override
+  public void revealRelativePlace(int level) {
+    if( !confirmLeaveState() )
+      return;
+    placeHierarchy = updatePlaceHierarchy(level);
+    int hierarchySize = placeHierarchy.size();
+    if( hierarchySize == 0 )
+      revealDefaultPlace();
+    else {
+      PlaceRequest request = placeHierarchy.get(hierarchySize-1); 
+      if( !doRevealPlace( request ) )
+        revealErrorPlace( request.toString() );
+    }
+  }
+
+  /**
+   * Returns a modified copy of the place hierarchy based on the specified {@code level}.
+   * 
+   * @param level If negative, take back that many elements from the tail of the hierarchy. 
+   *              If positive, keep only that many elements from the head of the hierarchy.
+   *              Passing {@code 0} leaves the hierarchy untouched.
+   */
+  private List<PlaceRequest> updatePlaceHierarchy(int level) {
+    int size = placeHierarchy.size();
+    if( level < 0 ) {
+      if( -level >= size )
+        return new ArrayList<PlaceRequest>();
+      else
+        return new ArrayList<PlaceRequest>( placeHierarchy.subList(0, size+level) );
+    } else if( level > 0 ) {
+      if( level >= size )
+        return new ArrayList<PlaceRequest>(placeHierarchy);
+      else
+        return new ArrayList<PlaceRequest>( placeHierarchy.subList(0, level) );
+    }
+    return new ArrayList<PlaceRequest>( placeHierarchy );
+  }
 
   /**
    * Handles change events from {@link History}.
@@ -113,7 +185,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       return;
     String historyToken = event.getValue();
     try {
-      if( !doRevealPlace( tokenFormatter.toPlaceRequest( historyToken ) ) ) {
+      placeHierarchy = tokenFormatter.toPlaceRequestHierarchy( historyToken );
+      if( !doRevealPlace( getCurrentPlaceRequest() ) ) {
         if ( historyToken.trim().equals("") )
           revealDefaultPlace();
         else
@@ -125,15 +198,24 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   }
 
   /**
-   * Fires the {@link PlaceRequestEvent} for the given {@link PlaceRequest}. 
+   * Fires the {@link PlaceRequestInternalEvent} for the given {@link PlaceRequest}. 
    * 
    * @param request The {@link PlaceRequest} to fire.
    * @return {@code true} if the request has been handled, {@code false} otherwise.
    */
   private final boolean doRevealPlace( PlaceRequest request ) {
-    PlaceRequestEvent requestEvent = new PlaceRequestEvent( request );
+    PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent( request );
     eventBus.fireEvent(requestEvent);
     return requestEvent.isHandled();
+  }
+
+  /**
+   * Access the current place request, that is, the tail of the place request hierarchy.
+   * 
+   * @return The current {@link PlaceRequest}.
+   */
+  private PlaceRequest getCurrentPlaceRequest() {
+    return placeHierarchy.get( placeHierarchy.size()-1 );
   }
   
   @Override
@@ -152,7 +234,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     DeferredCommand.addCommand( new Command() {
       @Override
       public void execute() {
-        Window.Location.replace(currentLocation);
+        Window.Location.replace(currentHRef);
       }
     });
   }
@@ -171,6 +253,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       // User has confirmed, don't ask any more question.
       setOnLeaveConfirmation( null );
     } else {
+      NavigationRefusedEvent.fire( eventBus );
       History.newItem(currentHistoryToken, false);
     }
     return confirmed;
@@ -182,5 +265,49 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       History.newItem( previousHistoryToken );
     else
       revealDefaultPlace();
+  }
+
+  @Override
+  public String buildHistoryToken( PlaceRequest request ) {
+    return tokenFormatter.toPlaceToken( request );
+  }
+
+  @Override
+  public String buildRelativeHistoryToken( PlaceRequest request ) {
+    return buildRelativeHistoryToken( request, 0 );
+  }
+  
+  @Override
+  public String buildRelativeHistoryToken( PlaceRequest request, int level ) {
+    List<PlaceRequest> placeHierarchyCopy = updatePlaceHierarchy(level);
+    placeHierarchyCopy.add( request );
+    return tokenFormatter.toHistoryToken(placeHierarchyCopy);    
+  }
+
+  @Override
+  public String buildRelativeHistoryToken( int level ) {
+    List<PlaceRequest> placeHierarchyCopy = updatePlaceHierarchy(level);
+    if( placeHierarchyCopy.size() == 0 )
+      return "";
+    return tokenFormatter.toHistoryToken(placeHierarchyCopy);    
+  }
+
+  @Override
+  public int getHierarchyDepth() {
+    return placeHierarchy.size();
+  }
+  
+  @Override
+  public void getCurrentTitle( SetPlaceTitleHandler handler ) {
+    getCurrentTitle(0, handler);
+  }
+
+  @Override
+  public void getCurrentTitle( int index, SetPlaceTitleHandler handler ) throws IndexOutOfBoundsException {
+    GetPlaceTitleEvent event = new GetPlaceTitleEvent( placeHierarchy.get(index), handler );
+    eventBus.fireEvent( event );
+    // If nobody took care of the title, indicate it's null
+    if( !event.isHandled() )
+      handler.onSetPlaceTitle(null);
   }
 }

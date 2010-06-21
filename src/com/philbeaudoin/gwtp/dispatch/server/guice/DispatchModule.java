@@ -24,8 +24,8 @@ import com.philbeaudoin.gwtp.dispatch.server.DispatchImpl;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandler.ActionHandler;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorLinker;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
-import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.ClassActionHandlerValidatorRegistry;
 import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistry;
+import com.philbeaudoin.gwtp.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistryImpl;
 import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
 
 /**
@@ -35,7 +35,7 @@ import com.philbeaudoin.gwtp.dispatch.server.actionValidator.ActionValidator;
  * 
  * 
  * If you want to override the defaults ({@link DispatchImpl},
- * {@link LazyActionHandlerValidatorRegistry} pass the override values into
+ * {@link LazyActionHandlerValidatorRegistryImpl} pass the override values into
  * the constructor for this module and ensure it is installed <b>before</b> any
  * {@link HandlerModule} instances.
  * 
@@ -47,11 +47,11 @@ public class DispatchModule extends AbstractModule {
   private Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass;
 
   public DispatchModule() {
-    this(DispatchImpl.class, LazyActionHandlerValidatorRegistry.class);
+    this(DispatchImpl.class, LazyActionHandlerValidatorRegistryImpl.class);
   }
 
   public DispatchModule(Class<? extends Dispatch> dispatchClass) {
-    this(dispatchClass, LazyActionHandlerValidatorRegistry.class);
+    this(dispatchClass, LazyActionHandlerValidatorRegistryImpl.class);
   }
 
   public DispatchModule(Class<? extends Dispatch> dispatchClass, Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
@@ -65,7 +65,7 @@ public class DispatchModule extends AbstractModule {
     bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
 
     // This will bind registered validators and handlers to the registry lazily.
-    if (ClassActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass))
+    if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass))
       requestStaticInjection(ActionHandlerValidatorLinker.class);
   }
 
