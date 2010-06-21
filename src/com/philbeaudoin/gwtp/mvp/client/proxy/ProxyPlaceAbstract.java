@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 GWT-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.philbeaudoin.gwtp.mvp.client.EventBus;
@@ -32,6 +34,7 @@ import com.philbeaudoin.gwtp.mvp.client.PresenterImpl;
  *
  * @author David Peterson
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 implements ProxyPlace<P> {
@@ -62,36 +65,44 @@ implements ProxyPlace<P> {
    * @param eventBus The {@link EventBus}.
    */
   @Inject
-  protected void bind( ProxyFailureHandler failureHandler, PlaceManager placeManager, EventBus eventBus ) {
+  protected void bind( ProxyFailureHandler failureHandler, final PlaceManager placeManager, EventBus eventBus ) {
     this.failureHandler = failureHandler;
     this.eventBus = eventBus;
     this.placeManager = placeManager;
-    eventBus.addHandler( PlaceRequestEvent.getType(), new PlaceRequestHandler() {
-      public void onPlaceRequest( PlaceRequestEvent event ) {
+    eventBus.addHandler( PlaceRequestInternalEvent.getType(), new PlaceRequestInternalHandler() {
+      @Override
+      public void onPlaceRequest( PlaceRequestInternalEvent event ) {
         if( event.isHandled() )
           return;
         PlaceRequest request = event.getRequest();
-        if ( matchesRequest( request ) && canReveal() ) {
+        if ( matchesRequest( request ) ) {
           event.setHandled();
-          handleRequest( request );
+          if (canReveal() ) {
+            handleRequest( request );
+          } else {
+            placeManager.revealUnauthorizedPlace( request.getNameToken() );
+          }
+        }
+      }
+    } );
+    eventBus.addHandler( GetPlaceTitleEvent.getType(), new GetPlaceTitleHandler() {
+      @Override
+      public void onGetPlaceTitle(GetPlaceTitleEvent event) {
+        if( event.isHandled() )
+          return;
+        PlaceRequest request = event.getRequest();
+        if ( matchesRequest( request ) ) {
+          if( canReveal() ) {
+            event.setHandled();
+            getPlaceTitle( event );
+          }
         }
       }
     } );
   }
 
-
   ///////////////////////
   // Inherited from Proxy
-  
-  @Override
-  public final void reveal() {
-    handleRequest( new PlaceRequest(getNameToken()) );
-  }
-
-  @Override
-  public final void reveal(PlaceRequest request) {
-    handleRequest(request);
-  }
 
   @Override
   public void getRawPresenter(AsyncCallback<Presenter> callback) {
@@ -150,6 +161,22 @@ implements ProxyPlace<P> {
   }
 
   ///////////////////////
+  // Protected methods that can be overridden
+
+  /**
+   * Obtains the title for this place and invoke
+   * the passed handler when the title is available. 
+   * By default, places don't have a title and will invoke the
+   * hanler with {@code null}, but override this method to provide 
+   * your own title.
+   * 
+   * @param event The {@link GetPlaceTitleEvent} to invoke once the title is available.
+   */
+  protected void getPlaceTitle(GetPlaceTitleEvent event) {
+    event.getHandler().onSetPlaceTitle(null);
+  }
+
+  ///////////////////////
   // Private methods
 
   /**
@@ -170,13 +197,20 @@ implements ProxyPlace<P> {
       }
 
       @Override
-      public void onSuccess(P presenter) {
-        PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
-        presenterImpl.prepareFromRequest( request );
-        if( !presenter.isVisible() )
-          presenterImpl.forceReveal();  // This will trigger a reset in due time
-        else
-          ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves
+      public void onSuccess(final P presenter) {
+        // Everything should be bound before we prepare the presenter from the request,
+        // in case it wants to fire some events. That's why we will do this in a 
+        // deferred command.
+        DeferredCommand.addCommand( new Command() {
+          @Override
+          public void execute() {
+            PresenterImpl<?,?> presenterImpl = (PresenterImpl<?,?>)presenter;
+            presenterImpl.prepareFromRequest( request );
+            if( !presenter.isVisible() )
+              presenterImpl.forceReveal();  // This will trigger a reset in due time
+            else
+              ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves                
+          } } );
       }
     } );
 

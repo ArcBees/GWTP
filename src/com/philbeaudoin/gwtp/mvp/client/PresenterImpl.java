@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,12 +47,6 @@ extends PresenterWidgetImpl<V> implements Presenter {
   public final Proxy_ getProxy() {
     return proxy;
   }
-  
-  @Override
-  public void reveal() {
-    getProxy().reveal();
-  }
-  
 
   /**
    * <b>Important:</b> If you want to reveal a presenter from within

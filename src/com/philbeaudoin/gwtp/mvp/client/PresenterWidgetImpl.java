@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.Widget;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ResetPresentersEvent;
 
+/**
+ * @author Philippe Beaudoin
+ * @author Christian Goudreau
+ */
 public abstract class PresenterWidgetImpl<V extends View>
 extends HandlerContainerImpl implements PresenterWidget {
 
@@ -39,6 +45,9 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   private final Map< Object, List<PresenterWidgetImpl<?>> > activeChildren =
     new HashMap< Object, List<PresenterWidgetImpl<?>> >();
+
+  private final List<PresenterWidgetImpl<? extends PopupView>> popupChildren = 
+    new ArrayList<PresenterWidgetImpl<? extends PopupView>>();
 
   protected boolean visible = false;
 
@@ -79,8 +88,10 @@ extends HandlerContainerImpl implements PresenterWidget {
     this.eventBus = eventBus;
   }
 
+  // TODO This should be final. Can't be now because it makes testing injected 
+  //      PresenterWidgets impossible. Make final once http://code.google.com/p/gwt-platform/issues/detail?id=111 is solved.
   @Override
-  public final V getView() {
+  public V getView() {
     return view;
   }
 
@@ -102,7 +113,103 @@ extends HandlerContainerImpl implements PresenterWidget {
   public void setContent( Object slot, PresenterWidget content ) {
     setContent(slot, content, true);
   }
-  
+
+  /**
+   * This method sets some popup content within the {@link Presenter} and centers it.  
+   * The view associated with the {@code content}'s presenter must inherit from 
+   * {@link PopupView}. The popup will be visible and the corresponding presenter 
+   * will receive the lifecycle events as needed.
+   * <p />
+   * Contrary to the {@link setContent()} method, no {@link ResetPresentersEvent} is fired.
+   * 
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
+   * @param center Pass {@code true} to center the popup, otherwise its position will not be adjusted.
+   * 
+   * @see #addPopupContent(PresenterWidget)
+   */
+  protected void addPopupContent( final PresenterWidget content ) {
+    addPopupContent( content, true );
+  }
+
+  /**
+   * This method sets some popup content within the {@link Presenter}. 
+   * The view associated with the {@code content}'s presenter must inherit from 
+   * {@link PopupView}. The popup will be visible and the corresponding presenter 
+   * will receive the lifecycle events as needed.
+   * <p />
+   * Contrary to the {@link setContent()} method, no {@link ResetPresentersEvent} is fired.
+   * 
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
+   * @param center Pass {@code true} to center the popup, otherwise its position will not be adjusted.
+   * 
+   * @see #addPopupContent(PresenterWidget)
+   */
+  @SuppressWarnings("unchecked")
+  protected void addPopupContent( final PresenterWidget content, boolean center ) {
+    final PresenterWidgetImpl<? extends PopupView> contentImpl = 
+      (PresenterWidgetImpl<? extends PopupView>) content;
+
+    // Do nothing if the content is already added
+    for( PresenterWidgetImpl<? extends PopupView> popupPresenter : popupChildren ) {
+      if( popupPresenter == contentImpl )
+        return;
+    }
+
+    PopupView popupView = contentImpl.getView();
+    popupChildren.add( contentImpl );
+
+    // Center if desired
+    if( center )
+      popupView.center();
+
+    // Display the popup content
+    if( isVisible() ) {
+      popupView.show();
+      // This presenter is visible, its time to call onReveal
+      // on the newly added child (and recursively on this child children)
+      monitorCloseEvent( contentImpl );
+      contentImpl.notifyReveal();
+    }
+
+  }
+
+  /**
+   * Makes sure we monitor the specified popup presenter so that we know when
+   * it is closing. This way we can make sure it doesn't receive future messages.
+   * 
+   * @param popupPresenter The {@link PresenterWidgetImpl} to monitor.
+   */
+  private void monitorCloseEvent(final PresenterWidgetImpl<? extends PopupView> popupPresenter) {
+    PopupView popupView = popupPresenter.getView();    
+
+    popupView.setCloseHandler( new PopupViewCloseHandler() {      
+      @Override
+      public void onClose() {
+        if( isVisible() )
+          popupPresenter.notifyHide();
+        removePopupChildren( popupPresenter );
+      }
+    } );
+  }
+
+  /**
+   * Go through the popup children and remove the specified one.
+   * 
+   * @param content The {@link PresenterWidget} added as a popup which we now remove.
+   */
+  private void removePopupChildren(PresenterWidgetImpl<?> content) {
+    int i;
+    for( i=0; i < popupChildren.size(); ++i ) {
+      PresenterWidgetImpl<? extends PopupView> popupPresenter = popupChildren.get(i);
+      if( popupPresenter == content ) {
+        (popupPresenter.getView()).setCloseHandler(null);
+        break;
+      }
+    }
+    if( i < popupChildren.size() )
+      popupChildren.remove(i);
+  }      
+
   /**
    * This method sets some content in a specific slot of the {@link Presenter}.
    * 
@@ -200,15 +307,16 @@ extends HandlerContainerImpl implements PresenterWidget {
    *             what to do with this slot.
    */
   public void clearContent( Object slot ) {
-    if( isVisible() ) {
-      // This presenter is visible, its time to call onReveal
+    List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
+    if( slotChildren != null ) {
+      // This presenter is visible, its time to call onHide
       // on the newly added child (and recursively on this child children)
-      List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
-      if( slotChildren != null ) {
-        for( PresenterWidgetImpl<?> activeChild : slotChildren )
+      if( isVisible() ) {
+        for( PresenterWidgetImpl<?> activeChild : slotChildren ) {
           activeChild.notifyHide();
-        slotChildren.clear();
+        }
       }
+      slotChildren.clear();
     }
     getView().setContent( slot, null );
   }
@@ -223,13 +331,23 @@ extends HandlerContainerImpl implements PresenterWidget {
    * You should not call this. Fire a 
    * {@link ResetPresentersEvent} instead.
    */
-  final void notifyReveal() {
+  // TODO This was private. Can't be now because it makes testing injected 
+  //      PresenterWidgets impossible. Should move to base class
+  //      once http://code.google.com/p/gwt-platform/issues/detail?id=111 is solved.
+  public void notifyReveal() {
     assert !isVisible() : "notifyReveal() called on a visible presenter!";
     onReveal();
     visible = true;
     for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
       for( PresenterWidgetImpl<?> activeChild : slotChildren )
         activeChild.notifyReveal();
+    for( PresenterWidgetImpl<? extends PopupView> popupPresenter : popupChildren ) {
+      // This presenter is visible, its time to call onReveal
+      // on the newly added child (and recursively on this child children)
+      popupPresenter.getView().show();
+      monitorCloseEvent( popupPresenter );
+      popupPresenter.notifyReveal();
+    }
   }
 
   /**
@@ -242,6 +360,11 @@ extends HandlerContainerImpl implements PresenterWidget {
     for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
       for( PresenterWidgetImpl<?> activeChild : slotChildren )
         activeChild.notifyHide();
+    for( PresenterWidgetImpl<? extends PopupView> popupPresenter : popupChildren ) {
+      popupPresenter.getView().setCloseHandler(null);
+      popupPresenter.notifyHide();
+      popupPresenter.getView().hide();
+    }
     visible = false;
     onHide();
   }  
@@ -255,6 +378,8 @@ extends HandlerContainerImpl implements PresenterWidget {
     for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
       for( PresenterWidgetImpl<?> activeChild : slotChildren )
         activeChild.reset();    
+    for( PresenterWidgetImpl<? extends PopupView> popupPresenter : popupChildren )
+      popupPresenter.reset();
   }
 
   /**
@@ -287,4 +412,20 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   protected void onReset() {}
 
+  /**
+   * Convenience method to register an event handler to the {@link EventBus}.
+   * The handler will be automatically unregistered when
+   * {@link HandlerContainer#unbind()} is called.
+   * 
+   * @param <H>
+   *          The handler type
+   * @param type
+   *          See {@link Type}
+   * @param handler
+   *          The handler to register
+   */
+  protected final <H extends EventHandler> void addRegisteredHandler(Type<H> type,
+      H handler) {
+    registerHandler(eventBus.addHandler(type, handler));
+  }
 }

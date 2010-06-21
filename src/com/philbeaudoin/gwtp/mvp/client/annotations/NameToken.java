@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,12 @@ package com.philbeaudoin.gwtp.mvp.client.annotations;
 import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
 
+/**
+ * This annotation is used to specify the name token to 
+ * use to access this presenter.
+ * 
+ * @author Philippe Beaudoin
+ */
 @Target(ElementType.TYPE)
 public @interface NameToken {
   String value();
