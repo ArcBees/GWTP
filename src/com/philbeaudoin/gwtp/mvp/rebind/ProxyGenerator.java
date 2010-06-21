@@ -57,10 +57,11 @@ import com.philbeaudoin.gwtp.mvp.client.Presenter;
 import com.philbeaudoin.gwtp.mvp.client.RequestTabsHandler;
 import com.philbeaudoin.gwtp.mvp.client.StandardProvider;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ContentSlot;
-import com.philbeaudoin.gwtp.mvp.client.annotations.DefaultPlaceProvider;
+import com.philbeaudoin.gwtp.mvp.client.annotations.DefaultGatekeeper;
 import com.philbeaudoin.gwtp.mvp.client.annotations.NameToken;
+import com.philbeaudoin.gwtp.mvp.client.annotations.NoGatekeeper;
 import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceInstance;
-import com.philbeaudoin.gwtp.mvp.client.annotations.PlaceProvider;
+import com.philbeaudoin.gwtp.mvp.client.annotations.UseGatekeeper;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplit;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.philbeaudoin.gwtp.mvp.client.annotations.ProxyEvent;
@@ -71,9 +72,10 @@ import com.philbeaudoin.gwtp.mvp.client.annotations.Title;
 import com.philbeaudoin.gwtp.mvp.client.annotations.TitleFunction;
 import com.philbeaudoin.gwtp.mvp.client.proxy.GetPlaceTitleEvent;
 import com.philbeaudoin.gwtp.mvp.client.proxy.Place;
-import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceFactory;
+import com.philbeaudoin.gwtp.mvp.client.proxy.Gatekeeper;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceRequest;
+import com.philbeaudoin.gwtp.mvp.client.proxy.PlaceWithGatekeeper;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyFailureHandler;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyImpl;
 import com.philbeaudoin.gwtp.mvp.client.proxy.ProxyPlaceImpl;
@@ -111,8 +113,8 @@ public class ProxyGenerator extends Generator {
   private JClassType basePlaceClass = null;
   private static final String tabContentProxyClassName = TabContentProxy.class.getCanonicalName();
   private JClassType tabContentProxyClass = null;
-  private static final String placeFactoryClassName = PlaceFactory.class.getCanonicalName();
-  private JClassType placeFactoryClass = null;
+  private static final String gatekeeperClassName = Gatekeeper.class.getCanonicalName();
+  private JClassType gatekeeperClass = null;
   private static final String placeRequestClassName = PlaceRequest.class.getCanonicalName();
   private JClassType placeRequestClass = null;
   private static final String gwtEventClassName = GwtEvent.class.getCanonicalName();
@@ -124,6 +126,7 @@ public class ProxyGenerator extends Generator {
   private static final String setPlaceTitleHandlerClassName = SetPlaceTitleHandler.class.getCanonicalName();
   private JClassType setPlaceTitleHandlerClass = null;
   private static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
+  private static final String placeWithGatekeeperClassName = PlaceWithGatekeeper.class.getCanonicalName();
   private static final String delayedBindClassName = DelayedBind.class.getCanonicalName();
   private static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
   private static final String proxyPlaceImplClassName = ProxyPlaceImpl.class.getCanonicalName();
@@ -217,7 +220,8 @@ public class ProxyGenerator extends Generator {
 
     // Check if this proxy is also a place.
     String nameToken = null;
-    String newPlaceCode = null;
+    String newPlaceCode = null;  // TODO Get rid of this when we remove @PlaceInstance
+    String getGatekeeperMethod = null;
     String title = null;
     if( proxyInterface.isAssignableTo( basePlaceClass ) ) {
       NameToken nameTokenAnnotation = proxyInterface.getAnnotation( NameToken.class );
@@ -228,37 +232,35 @@ public class ProxyGenerator extends Generator {
       }
       nameToken = nameTokenAnnotation.value();
 
-      PlaceProvider placeProviderAnnotation = proxyInterface.getAnnotation( PlaceProvider.class );
-      if (placeProviderAnnotation != null) {
-        String placeProviderName = placeProviderAnnotation.value().getCanonicalName();
-        JClassType placeProviderClass = oracle.findType(placeProviderName);
-        if (placeProviderClass == null) {
-          logger.log(TreeLogger.ERROR, "The class '" + placeProviderName + "' provided to @" + 
-              PlaceProvider.class.getSimpleName()+ " can't be found.", null);
+      UseGatekeeper gatekeeperAnnotation = proxyInterface.getAnnotation( UseGatekeeper.class );
+      if (gatekeeperAnnotation != null) {
+        String gatekeeperName = gatekeeperAnnotation.value().getCanonicalName();
+        JClassType customGatekeeperClass = oracle.findType(gatekeeperName);
+        if (customGatekeeperClass == null) {
+          logger.log(TreeLogger.ERROR, "The class '" + gatekeeperName + "' provided to @" + 
+              UseGatekeeper.class.getSimpleName()+ " can't be found.", null);
           throw new UnableToCompleteException();
         }
-        if ( !placeProviderClass.isAssignableTo( placeFactoryClass ) ) {
-          logger.log(TreeLogger.ERROR, "The class '" + placeProviderName + "' provided to @" + 
-              PlaceProvider.class.getSimpleName()+ " can't be found does not inherit from '" +
-              placeFactoryClassName + "'.", null);
+        if ( !customGatekeeperClass.isAssignableTo( gatekeeperClass ) ) {
+          logger.log(TreeLogger.ERROR, "The class '" + gatekeeperName + "' provided to @" + 
+              UseGatekeeper.class.getSimpleName()+ " does not inherit from '" +
+              gatekeeperClassName + "'.", null);
           throw new UnableToCompleteException();
         }
         // Find the appropriate get method in the Ginjector
-        String methodName = null;
         for( JMethod method : ginjectorClass.getMethods() ) {
           JClassType returnType = method.getReturnType().isClassOrInterface();
           if( method.getParameters().length == 0 &&
               returnType != null && 
-              returnType.isAssignableTo( placeProviderClass )) {
-            methodName = method.getName();
-            newPlaceCode = "ginjector." + methodName + "().create(nameToken)";
+              returnType.isAssignableTo( customGatekeeperClass )) {
+            getGatekeeperMethod = method.getName();
             break;
           }
         }
-        if( methodName == null ) {
+        if( getGatekeeperMethod == null ) {
           logger.log(TreeLogger.ERROR, "The Ginjector '"+ ginjectorClassName + 
-              "' does not have a get() method returning '"+placeProviderName+
-              "'. This is required when using @" + PlaceProvider.class.getSimpleName() + ".", null);      
+              "' does not have a get() method returning '"+gatekeeperName+
+              "'. This is required when using @" + UseGatekeeper.class.getSimpleName() + ".", null);      
           throw new UnableToCompleteException();
         }
       }
@@ -266,36 +268,35 @@ public class ProxyGenerator extends Generator {
         PlaceInstance newPlaceCodeAnnotation =  proxyInterface.getAnnotation( PlaceInstance.class );
         if( newPlaceCodeAnnotation != null ) {
           logger.log(TreeLogger.WARN, "The @"+ PlaceInstance.class.getCanonicalName()
-              + " annotation is deprecated. Please use the @" + PlaceProvider.class.getCanonicalName()
+              + " annotation is deprecated. Please use the @" + UseGatekeeper.class.getCanonicalName()
               + " annotation instead.", null);      
           newPlaceCode = newPlaceCodeAnnotation.value();
         }
       }
-      if( newPlaceCode == null ) {
-        // No PlaceFactory specified, see if there is a DefaultPlaceFactory defined in the ginjector
-        String methodName = null;
+      if( getGatekeeperMethod == null && newPlaceCode == null && 
+          proxyInterface.getAnnotation( NoGatekeeper.class ) == null ) {
+        // No Gatekeeper specified, see if there is a DefaultGatekeeper defined in the ginjector
         for( JMethod method : ginjectorClass.getMethods() ) {
-          if( method.getAnnotation( DefaultPlaceProvider.class ) != null ) {
+          if( method.getAnnotation( DefaultGatekeeper.class ) != null ) {
             JClassType returnType = method.getReturnType().isClassOrInterface();
-            if( methodName != null ) {
+            if( getGatekeeperMethod != null ) {
               logger.log(TreeLogger.ERROR, "The Ginjector '"+ ginjectorClassName + 
-                  "' has more than one method annotated with @" + DefaultPlaceProvider.class.getSimpleName() + 
+                  "' has more than one method annotated with @" + DefaultGatekeeper.class.getSimpleName() + 
                   ". This is not allowed.", null);      
               throw new UnableToCompleteException();              
             }
 
             if( method.getParameters().length != 0 ||
                 returnType == null || 
-                !returnType.isAssignableTo( placeFactoryClass )) {
+                !returnType.isAssignableTo( gatekeeperClass )) {
               logger.log(TreeLogger.ERROR, "The method '" + method.getName() + "' in the Ginjector '"+ ginjectorClassName + 
-                  "' is annotated with @" + DefaultPlaceProvider.class.getSimpleName() + 
+                  "' is annotated with @" + DefaultGatekeeper.class.getSimpleName() + 
                   " but has an invalid signature. It must not take any parameter and must return a class derived from '" +
-                  placeFactoryClassName + "'.", null);      
+                  gatekeeperClassName + "'.", null);      
               throw new UnableToCompleteException();              
             }
 
-            methodName = method.getName();
-            newPlaceCode = "ginjector." + methodName + "().create(nameToken)";
+            getGatekeeperMethod = method.getName();
           }
         }
       }
@@ -604,8 +605,12 @@ public class ProxyGenerator extends Generator {
       writer.println( "wrappedProxy.delayedBind( ginjector ); " );
       writer.println( "proxy = wrappedProxy; " );
       writer.println( "String nameToken = \""+nameToken+"\"; " );
-      if( newPlaceCode == null )
-        writer.println( "place = new " + placeImplClassName + "( nameToken );" );
+      if( newPlaceCode == null ) {
+        if( getGatekeeperMethod == null )
+          writer.println( "place = new " + placeImplClassName + "( nameToken );" );
+        else
+          writer.println( "place = new " + placeWithGatekeeperClassName + "( nameToken, ginjector." + getGatekeeperMethod + "() );" );
+      }
       else
         writer.println( "place = " + newPlaceCode + ";" );
     }
@@ -1108,7 +1113,7 @@ public class ProxyGenerator extends Generator {
     asyncProviderClass = oracle.findType( asyncProviderClassName );
     basePlaceClass = oracle.findType( basePlaceClassName );
     tabContentProxyClass = oracle.findType( tabContentProxyClassName );
-    placeFactoryClass = oracle.findType( placeFactoryClassName );
+    gatekeeperClass = oracle.findType( gatekeeperClassName );
     placeRequestClass = oracle.findType( placeRequestClassName );
     gwtEventClass = oracle.findType( gwtEventClassName ).isGenericType();
     gwtEventTypeClass = oracle.findType( gwtEventTypeClassName ).isGenericType();
