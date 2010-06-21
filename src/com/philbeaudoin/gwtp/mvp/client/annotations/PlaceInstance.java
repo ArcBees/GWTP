@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Philippe Beaudoin
+ * Copyright 2010 Gwt-Platform
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,15 @@ package com.philbeaudoin.gwtp.mvp.client.annotations;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-import com.google.gwt.inject.client.Ginjector;
 
 /**
+ * <b>Note:</b> This annotation has been deprecated. Use {@link UseGatekeeper} instead.
+ * <p />
  * Annotation used to specify the code to call when creating a 
  * new place. Usually a simple call to {@code new}. Make sure
  * class names are fully qualified. Also, you have access
  * to the variable {@code nameToken} (a String) and 
- * {@code ginjector} (your specific {@link Ginjector}-derived
+ * {@code ginjector} (your specific {@link com.google.gwt.inject.client.Ginjector}-derived
  * class). For example:
  * <pre>
  * {@code @}NewPlaceCode( "new com.project.client.AdminSecurePlace(nameToken, ginjector.getCurrentUser())" )
@@ -34,6 +35,7 @@ import com.google.gwt.inject.client.Ginjector;
  * 
  * @author Philippe Beaudoin
  */
+@Deprecated
 @Target(ElementType.TYPE)
 public @interface PlaceInstance {
   String value();
