@@ -34,6 +34,7 @@ import com.google.gwt.core.ext.typeinfo.JPackage;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
+import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -385,6 +386,7 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImport(RevealContentEvent.class.getCanonicalName());  // Obsolete?
     composerFactory.addImport(DeferredCommand.class.getCanonicalName());
     composerFactory.addImport(Command.class.getCanonicalName());
+    composerFactory.addImport(AsyncCallback.class.getCanonicalName());
     if( title != null || titleFunctionDescription != null ) {
       composerFactory.addImport(GetPlaceTitleEvent.class.getCanonicalName());
       composerFactory.addImport(AsyncCallback.class.getCanonicalName());
@@ -727,7 +729,7 @@ public class ProxyGenerator extends Generator {
   private void writeHandlerMethod(
       String presenterClassName, ProxyEventDescription desc, SourceWriter writer) {
     writer.println( "@Override" );
-    writer.println( "private final void " + desc.handlerMethodName + "( final " + desc.eventFullName + " event ) {" );
+    writer.println( "public final void " + desc.handlerMethodName + "( final " + desc.eventFullName + " event ) {" );
     writer.indent();
     writer.println( "getPresenter( new AsyncCallback<"+presenterClassName+">() {" );
     writer.indent();
@@ -908,7 +910,7 @@ public class ProxyGenerator extends Generator {
           if( primitiveReturnType == null || primitiveReturnType != JPrimitiveType.VOID ) {
             logger.log(TreeLogger.WARN, "In presenter " + presenterClassName + ", method " +
                 result.functionName + " annotated with @" + TitleFunction.class.getSimpleName() +
-            " returns something else than void or String. Return value will be ignored and void will be assumed." );
+                " returns something else than void or String. Return value will be ignored and void will be assumed." );
           }
         }
 
@@ -936,7 +938,7 @@ public class ProxyGenerator extends Generator {
           logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", the method " +
               result.functionName + " annotated with @" + TitleFunction.class.getSimpleName() +
               " returns a string and accepts a " + setPlaceTitleHandlerClass.getName() + " parameter. " +
-          "This is not supported, you can have only one or the other.");
+              "This is not supported, you can have only one or the other.");
           throw new UnableToCompleteException();
         }
 
@@ -944,7 +946,7 @@ public class ProxyGenerator extends Generator {
           logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", the method " +
               result.functionName + " annotated with @" + TitleFunction.class.getSimpleName() +
               " doesn't return a string and doesn't accept a " + setPlaceTitleHandlerClass.getName() + " parameter. " +
-          "You need one or the other.");
+              "You need one or the other.");
           throw new UnableToCompleteException();
         }
       }
@@ -977,7 +979,7 @@ public class ProxyGenerator extends Generator {
         if( methodReturnType != null || method.getReturnType().isPrimitive() != JPrimitiveType.VOID ) {
           logger.log(TreeLogger.WARN, "In presenter " + presenterClassName + ", method " +
               desc.functionName + " annotated with @" + ProxyEvent.class.getSimpleName() +
-          " returns something else than void. Return value will be ignored." );
+              " returns something else than void. Return value will be ignored." );
         }
 
         if( method.getParameters().length != 1 ) {
@@ -994,10 +996,10 @@ public class ProxyGenerator extends Generator {
               ", the parameter must be derived from GwtEvent." );
           throw new UnableToCompleteException();
         }
-        desc.eventFullName = eventType.getClass().getCanonicalName();
+        desc.eventFullName = eventType.getQualifiedSourceName();
 
         // Make sure the eventType has a static getType method
-        JMethod getTypeMethod = eventType.findMethod("getType", null);
+        JMethod getTypeMethod = eventType.findMethod("getType", new JType[0]);
         if( getTypeMethod == null || !getTypeMethod.isStatic() || getTypeMethod.getParameters().length != 0 ) {
           logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", method " +
               desc.functionName + " annotated with @" + ProxyEvent.class.getSimpleName() +
@@ -1015,13 +1017,13 @@ public class ProxyGenerator extends Generator {
         // Find the handler class via the dispatch method
         JClassType handlerType = null;
         for( JMethod eventMethod : eventType.getMethods() ) {
-          if( eventType.getName() == "dispatch" && eventMethod.getParameters().length == 1 ) {
+          if( eventMethod.getName().equals( "dispatch" ) && eventMethod.getParameters().length == 1 ) {
             JClassType maybeHandlerType = eventMethod.getParameters()[0].getType().isClassOrInterface();
             if( maybeHandlerType != null && maybeHandlerType.isAssignableTo(eventHandlerClass) ) {
               if( handlerType != null ) {
                 logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", method " +
                     desc.functionName + " annotated with @" + ProxyEvent.class.getSimpleName() +
-                    ". The event class " + eventType.getName() + " has more than one potential dispatch method." );
+                    ". The event class " + eventType.getName() + " has more than one potential 'dispatch' method." );
                 throw new UnableToCompleteException();
               }
               handlerType = maybeHandlerType;
@@ -1032,10 +1034,10 @@ public class ProxyGenerator extends Generator {
         if( handlerType == null ) {
           logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName + ", method " +
               desc.functionName + " annotated with @" + ProxyEvent.class.getSimpleName() +
-              ". The event class " + eventType.getName() + " has no valid dispatch method." );
+              ". The event class " + eventType.getName() + " has no valid 'dispatch' method." );
           throw new UnableToCompleteException();
         }
-        desc.handlerFullName = handlerType.getClass().getCanonicalName();
+        desc.handlerFullName = handlerType.getQualifiedSourceName();
 
         // Find the handler method
         if( handlerType.getMethods().length != 1 ) {
