@@ -16,6 +16,8 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import java.util.List;
+
 /**
  * Place managers work as an intermediary between the GWT {@link com.google.gwt.user.client.History} API
  * and {@link ProxyPlaceAbstract}s. It sets up event listener relationships to synchronize them.
@@ -26,6 +28,22 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  */
 public interface PlaceManager {
 
+    
+    /**
+     * Programmatically reveals the specified hierarchy of places place. 
+     * This will result in a {@link PlaceRequestInternalEvent} being fired.
+     * <p />
+     * This discards all the place hierarchy, replacing it with the specified
+     * place hierarchy. To keep the place hierarchy, see 
+     * {@link #revealRelativePlace(PlaceRequest)},
+     * {@link #revealRelativePlace(PlaceRequest, int)} or 
+     * {@link #revealRelativePlace(int)}.
+     * To reveal a single {@link Place} instead of a hierarchy, see {@link #revealPlace}.
+     *
+     * @param request A list of {@link PlaceRequest} corresponding to the place hierarchy to reveal. 
+     */
+  void revealPlaceHierarchy( List<PlaceRequest> placeRequestHierarchy );
+  
   /**
    * Programmatically reveals the specified place. 
    * This will result in a {@link PlaceRequestInternalEvent} being fired.
@@ -35,6 +53,7 @@ public interface PlaceManager {
    * {@link #revealRelativePlace(PlaceRequest)},
    * {@link #revealRelativePlace(PlaceRequest, int)} or 
    * {@link #revealRelativePlace(int)}.
+     * To reveal an entire place hierarchy, see {@link #revealPlaceHierarchy}.
    *
    * @see #buildHistoryToken(PlaceRequest)
    *
@@ -311,5 +330,6 @@ public interface PlaceManager {
    *                                   {@link #getHierarchyDepth()}. 
    */
   public void getCurrentTitle( int index, SetPlaceTitleHandler handler ) throws IndexOutOfBoundsException;
+
   
 }
