@@ -87,7 +87,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   @Override
   public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
     revealErrorPlace(unauthorizedHistoryToken);
-  }  
+  }
 
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
@@ -202,6 +202,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       }
     } catch ( TokenFormatException e ) {
       revealErrorPlace( historyToken );
+      NavigationEvent.fire( eventBus );
     }
   }
 
@@ -217,6 +218,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         revealErrorPlace( tokenFormatter.toHistoryToken( placeHierarchy ) );
     else if( !requestEvent.isAuthorized() )
         revealUnauthorizedPlace( tokenFormatter.toHistoryToken( placeHierarchy ) );
+    NavigationEvent.fire( eventBus );    
   }
 
   /**
