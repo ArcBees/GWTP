@@ -202,7 +202,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       }
     } catch ( TokenFormatException e ) {
       revealErrorPlace( historyToken );
-      NavigationEvent.fire( eventBus );
+      NavigationEvent.fire( eventBus, null );
     }
   }
 
@@ -218,7 +218,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         revealErrorPlace( tokenFormatter.toHistoryToken( placeHierarchy ) );
     else if( !requestEvent.isAuthorized() )
         revealUnauthorizedPlace( tokenFormatter.toHistoryToken( placeHierarchy ) );
-    NavigationEvent.fire( eventBus );    
+    NavigationEvent.fire( eventBus, request );    
   }
 
   /**
