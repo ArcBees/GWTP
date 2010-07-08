@@ -27,7 +27,20 @@ import com.philbeaudoin.gwtp.mvp.client.EventBus;
  */
 public final class NavigationEvent extends GwtEvent<NavigationHandler> {
   private static final Type<NavigationHandler> TYPE = new Type<NavigationHandler>();
+
+  private final PlaceRequest request;
   
+  /**
+   * Create a navigation event and attach it to a place request. You can
+   * pass {@code null} as a request if it's unknown, for example when revealing
+   * a default place or an error place.
+   * 
+   * @param request The {@link PlaceRequest}.
+   */
+  public NavigationEvent( PlaceRequest request ) {
+    this.request = request;
+  }
+
   public static Type<NavigationHandler> getType() {
     return TYPE;
   }
@@ -37,12 +50,21 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
     handler.onNavigation(this);
   }
 
-  public static void fire(final EventBus eventBus) {
-    eventBus.fireEvent(new NavigationEvent());
+  public static void fire(final EventBus eventBus, PlaceRequest request) {
+    eventBus.fireEvent(new NavigationEvent(request));
   }
   
   @Override
   public Type<NavigationHandler> getAssociatedType() {
     return getType();
+  }
+    
+  /**
+   * Access the {@link PlaceRequest} that triggered that navigation event.
+   * 
+   * @return The {@link PlaceRequest} or {@code null} if no place request is known.
+   */
+  public PlaceRequest getRequest( ) {
+    return request;
   }
 }
