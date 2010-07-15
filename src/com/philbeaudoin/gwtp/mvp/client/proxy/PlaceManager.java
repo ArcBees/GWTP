@@ -331,5 +331,24 @@ public interface PlaceManager {
    */
   public void getCurrentTitle( int index, SetPlaceTitleHandler handler ) throws IndexOutOfBoundsException;
 
+  /**
+   * Access the current place hierarchy, with the current {@link PlaceRequest} being the
+   * last element of this list.
+   * 
+   * @return The current {@link PlaceRequest}.
+   * 
+   * @see {@link #getCurrentPlaceRequest()}
+   */
+  public List<PlaceRequest> getCurrentPlaceHierarchy();
+
+  /**
+   * Access the current place request, that is, the tail of the place request hierarchy.
+   * 
+   * @return The current {@link PlaceRequest}.
+   * 
+   * @see {@link #getCurrentPlaceHierarchy()}
+   */
+  public PlaceRequest getCurrentPlaceRequest();
+
   
 }
