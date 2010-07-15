@@ -221,12 +221,13 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     NavigationEvent.fire( eventBus, request );    
   }
 
-  /**
-   * Access the current place request, that is, the tail of the place request hierarchy.
-   * 
-   * @return The current {@link PlaceRequest}.
-   */
-  private PlaceRequest getCurrentPlaceRequest() {
+  @Override
+  public List<PlaceRequest> getCurrentPlaceHierarchy() {
+    return placeHierarchy;
+  }
+  
+  @Override
+  public PlaceRequest getCurrentPlaceRequest() {
     return placeHierarchy.get( placeHierarchy.size()-1 );
   }
   

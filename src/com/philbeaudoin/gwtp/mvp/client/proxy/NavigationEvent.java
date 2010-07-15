@@ -22,6 +22,11 @@ import com.philbeaudoin.gwtp.mvp.client.EventBus;
 /**
  * Event fired after navigation has occured. Will not be fired if navigation is refused
  * through {@link PlaceManager#setOnLeaveConfirmation}.
+ * <p />
+ * Instead of registering your presenter towards this event, consider overriding
+ * {@link com.philbeaudoin.gwtp.mvp.client.PresenterWidgetImpl#onReset()}. From there
+ * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the 
+ * {@link PlaceRequest}.
  * 
  * @author Philippe Beaudoin
  */
