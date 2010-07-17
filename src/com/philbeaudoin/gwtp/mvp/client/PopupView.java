@@ -1,5 +1,6 @@
 package com.philbeaudoin.gwtp.mvp.client;
 
+
 /**
  * The interface for {@link View} classes that is meant to be displayed as a popup, 
  * like a GWT {@link com.google.gwt.user.client.ui.PopupPanel} or a 
@@ -45,5 +46,14 @@ public interface PopupView extends View {
    */
   public void setCloseHandler(
       PopupViewCloseHandler popupViewCloseHandler);
+  
+  /**
+   * Indicates that the view should automatically hide when a GWTP
+   * {@link com.philbeaudoin.gwtp.mvp.client.proxy.NavigationEvent} is fired.
+   * This is better than using GWT's {@link com.google.gwt.user.client.ui.PopupPanel#setAutoHideOnHistoryEventsEnabled(boolean)}
+   * since the latter will automatically hide the dialog even if navigation is refused through
+   * {@link com.philbeaudoin.gwtp.mvp.client.proxy.PlaceManager#setOnLeaveConfirmation(String)}.
+   */
+  public void setAutoHideOnNavigationEventEnabled( boolean autoHide );  
   
 }

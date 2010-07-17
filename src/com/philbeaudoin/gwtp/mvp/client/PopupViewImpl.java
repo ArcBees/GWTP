@@ -5,6 +5,8 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.philbeaudoin.gwtp.mvp.client.proxy.NavigationEvent;
+import com.philbeaudoin.gwtp.mvp.client.proxy.NavigationHandler;
 
 /**
  * A simple implementation of {@link PopupView} that can be used when the
@@ -18,8 +20,23 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class PopupViewImpl extends ViewImpl implements PopupView {  
 
-  private HandlerRegistration closeHandlerRegistration;
+  private final EventBus eventBus;
+  
+  private HandlerRegistration closeHandlerRegistration = null;
+  private HandlerRegistration autoHideHandler = null;
 
+  /**
+   * The {@link PopupViewImpl} class uses the {@link EventBus} to listen to
+   * {@link NavigationEvent} in order to automatically close when this event
+   * is fired, if desired. See {@link #setAutoHideOnNavigationEventEnabled(boolean)}
+   * for details.
+   * 
+   * @param eventBus The {@link EventBus}.
+   */
+  protected PopupViewImpl( EventBus eventBus ) {
+      this.eventBus = eventBus;
+  }
+  
   @Override
   public void show() {
     asPopupPanel().show();
@@ -59,6 +76,24 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
           }
         } );
     }
+  }
+
+  @Override
+  public void setAutoHideOnNavigationEventEnabled( boolean autoHide ) {
+      if( autoHide ) {      
+          if( autoHideHandler != null ) 
+              return;
+          autoHideHandler = eventBus.addHandler( NavigationEvent.getType(), new NavigationHandler(){
+            @Override
+            public void onNavigation( NavigationEvent navigationEvent ) {
+                hide();
+            }
+          } );
+      }
+      else {
+          if( autoHideHandler != null )
+              autoHideHandler.removeHandler( );
+      }
   }
 
   /**

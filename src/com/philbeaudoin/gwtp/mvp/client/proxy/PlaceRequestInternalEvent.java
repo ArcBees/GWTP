@@ -55,6 +55,8 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
    * this event if {@link isHandled()} return {@code true}. 
    */
   private boolean handled = false;
+  
+  private boolean authorized = true;
 
   public PlaceRequestInternalEvent( PlaceRequest request ) {
     this.request = request;
@@ -91,7 +93,24 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
   public boolean isHandled() {
     return handled;
   }
-  
+
+  /**
+   * Indicates that the event was handled but that the user was not authorized
+   * to view the request page.
+   */
+  public void setUnauthorized( ) {
+    authorized = false;
+  }
+
+  /**
+   * Checks if the user was authorized to see the page.
+   * 
+   * @return {@code true} if the user was authorized. {@code false} otherwise.
+   */
+  public boolean isAuthorized() {
+    return authorized;
+  }
+
   /**
    * Fires a {@link PlaceRequestInternalEvent} into the {@link EventBus}, specifying that it
    * does not come from a modification in the History.
@@ -102,4 +121,5 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
   public static void fire( EventBus eventBus, PlaceRequest request ) {
     eventBus.fireEvent( new PlaceRequestInternalEvent( request ) );
   }
+
 }
