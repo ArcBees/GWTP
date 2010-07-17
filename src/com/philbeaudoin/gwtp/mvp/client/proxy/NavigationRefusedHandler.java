@@ -19,6 +19,8 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
+ * Handler for {@link NavigationRefusedEvent}.
+ * 
  * @author Christian Goudreau
  */
 public interface NavigationRefusedHandler extends EventHandler {
