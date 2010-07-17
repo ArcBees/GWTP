@@ -80,7 +80,7 @@ implements ProxyPlace<P> {
           if (canReveal() ) {
             handleRequest( request );
           } else {
-            placeManager.revealUnauthorizedPlace( request.getNameToken() );
+            event.setUnauthorized();
           }
         }
       }

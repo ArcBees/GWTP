@@ -210,21 +210,4 @@ public final class PlaceRequest {
     return 11 * ( nameToken.hashCode() + ( params == null ? 0 : params.hashCode() ) );
   }
 
-  @Override
-  public String toString() {
-    StringBuilder out = new StringBuilder();
-    out.append( "{" );
-    if( nameToken == null )
-      out.append( "__nullNameToken__" );
-    else
-      out.append( nameToken );
-    if ( params != null && params.size() > 0 ) {
-      out.append( ": " );
-      for ( Map.Entry<String, String> entry : params.entrySet() ) {
-        out.append( entry.getKey() ).append( " = " ).append( entry.getValue() ).append( ";" );
-      }
-    }
-    out.append( "}" );
-    return out.toString();
-  }
 }
