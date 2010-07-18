@@ -16,6 +16,8 @@
 
 package com.philbeaudoin.gwtp.mvp.client.proxy;
 
+import java.util.List;
+
 /**
  * Place managers work as an intermediary between the GWT {@link com.google.gwt.user.client.History} API
  * and {@link ProxyPlaceAbstract}s. It sets up event listener relationships to synchronize them.
@@ -26,15 +28,32 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
  */
 public interface PlaceManager {
 
+    
+    /**
+     * Programmatically reveals the specified hierarchy of places place. 
+     * This will result in a {@link PlaceRequestInternalEvent} being fired.
+     * <p />
+     * This discards all the place hierarchy, replacing it with the specified
+     * place hierarchy. To keep the place hierarchy, see 
+     * {@link #revealRelativePlace(PlaceRequest)},
+     * {@link #revealRelativePlace(PlaceRequest, int)} or 
+     * {@link #revealRelativePlace(int)}.
+     * To reveal a single {@link Place} instead of a hierarchy, see {@link #revealPlace}.
+     *
+     * @param request A list of {@link PlaceRequest} corresponding to the place hierarchy to reveal. 
+     */
+  void revealPlaceHierarchy( List<PlaceRequest> placeRequestHierarchy );
+  
   /**
    * Programmatically reveals the specified place. 
-   * This will result in a {@link PlaceRequestEvent} being fired.
+   * This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * This discards all the place hierarchy, effectively revealing the
    * request as a top-level place. To keep the place hierarchy, see 
    * {@link #revealRelativePlace(PlaceRequest)},
    * {@link #revealRelativePlace(PlaceRequest, int)} or 
    * {@link #revealRelativePlace(int)}.
+     * To reveal an entire place hierarchy, see {@link #revealPlaceHierarchy}.
    *
    * @see #buildHistoryToken(PlaceRequest)
    *
@@ -45,7 +64,7 @@ public interface PlaceManager {
   /**
    * Programmatically reveals the specified place as a child of the current place hierarchy. 
    * Identical to calling {@link #revealRelativePlace(PlaceRequest, int)} with a level of {@code 0}.
-   * This will result in a {@link PlaceRequestEvent} being fired.
+   * This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
    * in the hierarchy, see {@link #revealRelativePlace(int)}.
@@ -58,7 +77,7 @@ public interface PlaceManager {
   
   /**
    * Programmatically reveals the specified place relative to the other places in
-   * the current place hierarchy. This will result in a {@link PlaceRequestEvent} being fired.
+   * the current place hierarchy. This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
    * in the hierarchy, see {@link #revealRelativePlace(int)}.
@@ -83,7 +102,7 @@ public interface PlaceManager {
 
   /**
    * Programmatically reveals the specified place from the current place hierarchy. 
-   * This will result in a {@link PlaceRequestEvent} being fired.
+   * This will result in a {@link PlaceRequestInternalEvent} being fired.
    * <p />
    * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
    * <ul>
@@ -103,7 +122,7 @@ public interface PlaceManager {
 
   /**
    * Reveals the place corresponding to the current value of the history token
-   * in the URL bar. This will result in a {@link PlaceRequestEvent} being fired.
+   * in the URL bar. This will result in a {@link PlaceRequestInternalEvent} being fired.
    */
   public void revealCurrentPlace();
 
@@ -311,5 +330,25 @@ public interface PlaceManager {
    *                                   {@link #getHierarchyDepth()}. 
    */
   public void getCurrentTitle( int index, SetPlaceTitleHandler handler ) throws IndexOutOfBoundsException;
+
+  /**
+   * Access the current place hierarchy, with the current {@link PlaceRequest} being the
+   * last element of this list.
+   * 
+   * @return The current {@link PlaceRequest}.
+   * 
+   * @see {@link #getCurrentPlaceRequest()}
+   */
+  public List<PlaceRequest> getCurrentPlaceHierarchy();
+
+  /**
+   * Access the current place request, that is, the tail of the place request hierarchy.
+   * 
+   * @return The current {@link PlaceRequest}.
+   * 
+   * @see {@link #getCurrentPlaceHierarchy()}
+   */
+  public PlaceRequest getCurrentPlaceRequest();
+
   
 }

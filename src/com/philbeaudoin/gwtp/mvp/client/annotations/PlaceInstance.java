@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * <b>Note:</b> This annotation has been deprecated. Use {@link PlaceProvider} instead.
+ * <b>Note:</b> This annotation has been deprecated. Use {@link UseGatekeeper} instead.
  * <p />
  * Annotation used to specify the code to call when creating a 
  * new place. Usually a simple call to {@code new}. Make sure
