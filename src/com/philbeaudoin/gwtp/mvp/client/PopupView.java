@@ -11,12 +11,16 @@ package com.philbeaudoin.gwtp.mvp.client;
 public interface PopupView extends View {
 
   /**
-   * Make sure the {@link PopupView} is visible.
+   * <b>Important!</b> Do not call this directly, instead use
+   * {@link PresenterWidgetImpl#addPopupContent(PresenterWidget)} passing this view's
+   * {@link PresenterWidget}.
+   * <p/>
+   * Make sure the {@link PopupView} is visible. 
    */
   public void show();
   
   /**
-   * Make sure the {@link PopupView} is hidden.
+   * Make sure the {@link PopupView} is hidden. You can call this method directly.
    */
   public void hide();
   
