@@ -345,7 +345,7 @@ extends HandlerContainerImpl implements PresenterWidget {
   // TODO This was private. Can't be now because it makes testing injected 
   //      PresenterWidgets impossible. Should move to base class
   //      once http://code.google.com/p/gwt-platform/issues/detail?id=111 is solved.
-  void notifyReveal() {
+  public void notifyReveal() {
     assert !isVisible() : "notifyReveal() called on a visible presenter!";
     onReveal();
     visible = true;
