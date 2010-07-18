@@ -19,7 +19,10 @@ package com.philbeaudoin.gwtp.mvp.client.proxy;
 import java.util.List;
 
 /**
- * Provides services to convert a  {@link PlaceRequest} to and from a History token value.
+ * Formats tokens from {@code String} values to {@link PlaceRequest} and 
+ * {@link PlaceRequest} hierarchies and vice-versa. An implementation is
+ * provided in {@link ParameterTokenFormatter}, see the documentation of this
+ * class for details.
  */
 public interface TokenFormatter {
 
