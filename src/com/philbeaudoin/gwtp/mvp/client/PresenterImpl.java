@@ -49,15 +49,13 @@ extends PresenterWidgetImpl<V> implements Presenter {
   }
 
   /**
-   * <b>Important:</b> If you want to reveal a presenter from within
-   * your application, you should call {@link #reveal()}
-   * instead. This way you can make sure you don't inadvertently reveal a 
-   * non-leaf Presenter. Also, you will benefit from the change confirmation
+   * <b>Important:</b> This method is only meant to be used internally by GWTP.
+   * If you wish to reveal a presenter, call {@link PlaceManager#revealPlace(PlaceRequest)} 
+   * or a related method. This will ensure you don't inadvertently reveal a 
+   * non-leaf presenter. Also, you will benefit from the change confirmation
    * mechanism. (See {@link PlaceManager#setOnLeaveConfirmation(String)}).
    * <p />
    * Forces the presenter to reveal itself on screen.
-   * 
-   * @see #reveal()
    */  
   public final void forceReveal() {
     if( isVisible() )
@@ -73,16 +71,22 @@ extends PresenterWidgetImpl<V> implements Presenter {
   
   /**
    * Called whenever the presenter needs to set its content in 
-   * a parent. Should usually fire a {@link RevealContentEvent}.
+   * a parent. You need to override this method. You should 
+   * usually fire a {@link RevealContentEvent}.
    */
   protected abstract void revealInParent();
 
   /**
+   * <b>Deprecated!</b> This method will soon be removed from the API. For more
+   * information see
+   * <a href="http://code.google.com/p/gwt-platform/issues/detail?id=136">Issue 136</a>.
+   * <p />
    * Notify others that this presenter has been changed. This is especially
    * useful for stateful presenters that store parameters within the
    * history token. Calling this will make sure the history token is
    * updated with the right parameters.
    */
+  @Deprecated
   protected final void notifyChange() {
     getProxy().onPresenterChanged( this );
   }
