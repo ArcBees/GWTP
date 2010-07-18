@@ -455,8 +455,8 @@ public class PresenterWidgetImplTest {
     
     assertEquals( 1, popupContentB.onRevealMethodCalled );
     assertEquals( 1, popupContentC.onRevealMethodCalled );
-    assertEquals( true, popupContentB.isVisible() );
-    assertEquals( true, popupContentC.isVisible() );
+    assertTrue( popupContentB.isVisible() );
+    assertTrue( popupContentC.isVisible() );
     
     // and then When
     presenterWidgetA.notifyHide();
@@ -500,7 +500,7 @@ public class PresenterWidgetImplTest {
     presenterWidgetB.notifyHide();
     
     // Then
-    assertEquals( false, popupContentC.isVisible() );
+    assertFalse( popupContentC.isVisible() );
   }  
   
   @Test
@@ -521,7 +521,7 @@ public class PresenterWidgetImplTest {
     presenterWidgetA.addPopupContent(popupContentC);
     
     // Then
-    assertEquals( true, popupContentC.isVisible() );
+    assertTrue( popupContentC.isVisible() );
   }  
 
   @Test
@@ -543,7 +543,7 @@ public class PresenterWidgetImplTest {
     presenterWidgetB.notifyHide();
     
     // Then
-    assertEquals( false, contentC.isVisible() );  
+    assertFalse( contentC.isVisible() );  
   }  
 
   @Test
@@ -566,7 +566,7 @@ public class PresenterWidgetImplTest {
     presenterWidgetA.setContent(slotCinA, contentC);
     
     // Then
-    assertEquals( true, contentC.isVisible() );  
+    assertTrue( contentC.isVisible() );  
   }  
 
 }
