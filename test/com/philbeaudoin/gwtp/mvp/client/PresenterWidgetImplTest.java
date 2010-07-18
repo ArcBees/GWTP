@@ -455,6 +455,8 @@ public class PresenterWidgetImplTest {
     
     assertEquals( 1, popupContentB.onRevealMethodCalled );
     assertEquals( 1, popupContentC.onRevealMethodCalled );
+    assertEquals( true, popupContentB.isVisible() );
+    assertEquals( true, popupContentC.isVisible() );
     
     // and then When
     presenterWidgetA.notifyHide();
@@ -467,6 +469,104 @@ public class PresenterWidgetImplTest {
     verify( popupContentB.getView() ).show();
     verify( popupContentC.getView() ).show();
     verify( popupContentB.getView() ).hide();
-    verify( popupContentC.getView() ).hide();
+    verify( popupContentC.getView() ).hide();    
+
+    // and then When
+    presenterWidgetA.notifyReveal();
+    
+    // Then
+    assertEquals( 2, popupContentB.onRevealMethodCalled );
+    assertEquals( 2, popupContentC.onRevealMethodCalled );
+    assertEquals( 1, popupContentB.onHideMethodCalled );
+    assertEquals( 1, popupContentC.onHideMethodCalled );
+    verify( popupContentB.getView(), times(2) ).show();
+    verify( popupContentC.getView(), times(2) ).show();    
   }
+  
+  @Test
+  public void testSwitchPopupToAnotherPresenter1() {
+    // Set-up
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetB presenterWidgetB = presenterWidgetBProvider.get();
+    PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
+    
+    // Given
+    presenterWidgetA.notifyReveal();
+    presenterWidgetB.notifyReveal();
+    presenterWidgetA.addPopupContent(popupContentC);
+    
+    // When
+    presenterWidgetB.addPopupContent(popupContentC);
+    presenterWidgetB.notifyHide();
+    
+    // Then
+    assertEquals( false, popupContentC.isVisible() );
+  }  
+  
+  @Test
+  public void testSwitchPopupToAnotherPresenter2() {
+    // Set-up
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetB presenterWidgetB = presenterWidgetBProvider.get();
+    PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
+    
+    // Given
+    presenterWidgetA.notifyReveal();
+    presenterWidgetB.notifyReveal();
+    presenterWidgetA.addPopupContent(popupContentC);
+    
+    // When
+    presenterWidgetB.addPopupContent(popupContentC);
+    presenterWidgetB.notifyHide();
+    presenterWidgetA.addPopupContent(popupContentC);
+    
+    // Then
+    assertEquals( true, popupContentC.isVisible() );
+  }  
+
+  @Test
+  public void testSwitchPresenterWidgetToAnotherPresenter1() {
+    // Set-up
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetB presenterWidgetB = presenterWidgetBProvider.get();
+    Object slotCinA = new Object();
+    Object slotCinB = new Object();
+    PresenterWidgetC contentC = presenterWidgetCProvider.get();
+    
+    // Given
+    presenterWidgetA.notifyReveal();
+    presenterWidgetB.notifyReveal();
+    
+    // When
+    presenterWidgetA.setContent(slotCinA, contentC);
+    presenterWidgetB.setContent(slotCinB, contentC);
+    presenterWidgetB.notifyHide();
+    
+    // Then
+    assertEquals( false, contentC.isVisible() );  
+  }  
+
+  @Test
+  public void testSwitchPresenterWidgetToAnotherPresenter2() {
+    // Set-up
+    PresenterWidgetA presenterWidgetA = presenterWidgetAProvider.get();
+    PresenterWidgetB presenterWidgetB = presenterWidgetBProvider.get();
+    Object slotCinA = new Object();
+    Object slotCinB = new Object();
+    PresenterWidgetC contentC = presenterWidgetCProvider.get();
+    
+    // Given
+    presenterWidgetA.notifyReveal();
+    presenterWidgetB.notifyReveal();
+    
+    // When
+    presenterWidgetA.setContent(slotCinA, contentC);
+    presenterWidgetB.setContent(slotCinB, contentC);
+    presenterWidgetB.notifyHide();
+    presenterWidgetA.setContent(slotCinA, contentC);
+    
+    // Then
+    assertEquals( true, contentC.isVisible() );  
+  }  
+
 }

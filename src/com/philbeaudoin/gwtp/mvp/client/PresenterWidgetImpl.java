@@ -56,6 +56,11 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   protected final V view;
 
+  /**
+   * The parent presenter, in order to make sure this widget is only ever in one parent.
+   */
+  PresenterWidgetImpl<? extends View> currentParentPresenter = null;
+  
 
   /**
    * Creates a {@link PresenterWidgetImpl}.
@@ -146,8 +151,12 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   @SuppressWarnings("unchecked")
   protected void addPopupContent( final PresenterWidget content, boolean center ) {
+    if( content == null )
+      return;
+    
     final PresenterWidgetImpl<? extends PopupView> contentImpl = 
       (PresenterWidgetImpl<? extends PopupView>) content;
+    contentImpl.reparent( this );
 
     // Do nothing if the content is already added
     for( PresenterWidgetImpl<? extends PopupView> popupPresenter : popupChildren ) {
@@ -229,6 +238,7 @@ extends HandlerContainerImpl implements PresenterWidget {
     }
 
     PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
+    contentImpl.reparent( this );
 
     List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
 
@@ -281,6 +291,7 @@ extends HandlerContainerImpl implements PresenterWidget {
     }
 
     PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
+    contentImpl.reparent( this );
 
     List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
     if( slotChildren != null ) {
@@ -334,7 +345,7 @@ extends HandlerContainerImpl implements PresenterWidget {
   // TODO This was private. Can't be now because it makes testing injected 
   //      PresenterWidgets impossible. Should move to base class
   //      once http://code.google.com/p/gwt-platform/issues/detail?id=111 is solved.
-  public void notifyReveal() {
+  void notifyReveal() {
     assert !isVisible() : "notifyReveal() called on a visible presenter!";
     onReveal();
     visible = true;
@@ -355,7 +366,7 @@ extends HandlerContainerImpl implements PresenterWidget {
    * You should not call this, fire a 
    * {@link ResetPresentersEvent} instead.
    */
-  final void notifyHide() {
+  void notifyHide() {
     assert isVisible() : "notifyHide() called on a hidden presenter!";
     for (List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values())
       for( PresenterWidgetImpl<?> activeChild : slotChildren )
@@ -428,4 +439,34 @@ extends HandlerContainerImpl implements PresenterWidget {
       H handler) {
     registerHandler(eventBus.addHandler(type, handler));
   }
+  
+
+  /**
+   * Called by a child {@link PresenterWidget} when it wants to detach itself
+   * from this parent.  
+   * 
+   * @param childPresenter The {@link PresenterWidgetImpl} that is a child of this presenter. 
+   */
+  private void detach( PresenterWidgetImpl<? extends View> childPresenter ) {
+    for( List<PresenterWidgetImpl<?>> slotChildren : activeChildren.values() )    
+      slotChildren.remove( childPresenter );
+    popupChildren.remove( childPresenter );
+  }
+  
+  
+
+  /**
+   * <b>Important!</b> Do not call directly, this is meant to be called only internally
+   * by GWTP.
+   * <p/>
+   * This methods attaches this presenter to its parent.  
+   * 
+   * @param newParent The {@link PresenterWidgetImpl} that will be this presenter's new parent. 
+   */
+  private void reparent( PresenterWidgetImpl<? extends View> newParent ) {
+    if( currentParentPresenter != null && currentParentPresenter != newParent )
+      currentParentPresenter.detach( this );
+    currentParentPresenter = newParent;
+  }
+  
 }
