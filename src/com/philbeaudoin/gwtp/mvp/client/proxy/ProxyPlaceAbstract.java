@@ -69,9 +69,9 @@ implements ProxyPlace<P> {
     this.failureHandler = failureHandler;
     this.eventBus = eventBus;
     this.placeManager = placeManager;
-    eventBus.addHandler( PlaceRequestEvent.getType(), new PlaceRequestHandler() {
+    eventBus.addHandler( PlaceRequestInternalEvent.getType(), new PlaceRequestInternalHandler() {
       @Override
-      public void onPlaceRequest( PlaceRequestEvent event ) {
+      public void onPlaceRequest( PlaceRequestInternalEvent event ) {
         if( event.isHandled() )
           return;
         PlaceRequest request = event.getRequest();
@@ -80,7 +80,7 @@ implements ProxyPlace<P> {
           if (canReveal() ) {
             handleRequest( request );
           } else {
-            placeManager.revealUnauthorizedPlace( request.getNameToken() );
+            event.setUnauthorized();
           }
         }
       }
