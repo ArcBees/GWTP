@@ -30,28 +30,30 @@ public final class PresenterSetupModule extends AbstractGinModule {
 
   private final Class<? extends TokenFormatter> tokenFormatterClass;
 
-  public PresenterSetupModule( Class<? extends PlaceManager> placeManagerClass ) {
-    this( placeManagerClass, ParameterTokenFormatter.class );
+  public PresenterSetupModule(Class<? extends PlaceManager> placeManagerClass) {
+    this(placeManagerClass, ParameterTokenFormatter.class);
   }
 
-  public PresenterSetupModule( Class<? extends PlaceManager> placeManagerClass, Class<? extends TokenFormatter> tokenFormatterClass ) {
+  public PresenterSetupModule(Class<? extends PlaceManager> placeManagerClass,
+      Class<? extends TokenFormatter> tokenFormatterClass) {
     this.placeManagerClass = placeManagerClass;
     this.tokenFormatterClass = tokenFormatterClass;
   }
 
   @Override
   protected void configure() {
-    bind( TokenFormatter.class).to( tokenFormatterClass );
+    bind(TokenFormatter.class).to(tokenFormatterClass);
 
-    bind( PlaceManager.class ).to( placeManagerClass );
-    bind( placeManagerClass ).asEagerSingleton();
+    bind(PlaceManager.class).to(placeManagerClass);
+    bind(placeManagerClass).asEagerSingleton();
   }
 
   @Override
-  public boolean equals( Object object ) {
+  public boolean equals(Object object) {
     return object instanceof PresenterSetupModule;
   }
 
+  @Override
   public int hashCode() {
     return 19;
   }
