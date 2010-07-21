@@ -32,10 +32,12 @@ import com.google.gwt.user.client.ui.Widget;
 public abstract class ViewImpl implements View {
 
   @Override
+  public void setContent(Object slot, Widget content) {
+  }
+  @Override
   public void addContent(Object slot, Widget content) {
   }
   @Override
-  public void setContent(Object slot, Widget content) {
+  public void removeContent(Object slot, Widget content) {
   }
-
 }
