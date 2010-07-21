@@ -1,1 +1,2 @@
 com.gwtplatform.annotation.processor.GenEventAptFactory
+com.gwtplatform.annotation.processor.GenDispatchAptFactory
