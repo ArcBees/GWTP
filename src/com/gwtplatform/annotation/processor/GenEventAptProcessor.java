@@ -29,330 +29,165 @@ import com.sun.mirror.declaration.AnnotationTypeDeclaration;
 import com.sun.mirror.declaration.ClassDeclaration;
 import com.sun.mirror.declaration.Declaration;
 import com.sun.mirror.declaration.FieldDeclaration;
-import com.sun.mirror.type.ArrayType;
-import com.sun.mirror.type.TypeMirror;
 
 /**
- *  If you type:
- * <pre><code> 
+ * If you type:
+ * 
+ * <pre>
+ * <code> 
  * {@literal}@GenEvent
  * public class FooChanged {
  *   Foo foo;
  *   boolean originator;
  * }
- * </code></pre>
+ * </code>
+ * </pre>
  * 
- * gwt-platform will generate two classes, FooChangedEvent and FooChangedHandler.
- * <p/> 
- * FooChangedEvent will have fields, getters, and a constructor for foo and originator, 
- * plus static getType(), instance dispatch, etc., for it to function correctly as a GwtEvent. 
+ * gwt-platform will generate two classes, FooChangedEvent and
+ * FooChangedHandler.
  * <p/>
- * FooChangedHandler will be an interface with a onFooChanged method that takes a FooChangedEvent parameter.
+ * FooChangedEvent will have fields, getters, and a constructor for foo and
+ * originator, plus static getType(), instance dispatch, etc., for it to
+ * function correctly as a GwtEvent.
+ * <p/>
+ * FooChangedHandler will be an interface with a onFooChanged method that takes
+ * a FooChangedEvent parameter.
  * 
  * Notes:
- *
- * There is no naming requirement for your class name.  It will be appended with Event and Handler.
  * 
- * @author Brendan Doherty 
- * (All original code, concept attributed to Stephen Haberman)
+ * There is no naming requirement for your class name. It will be appended with
+ * Event and Handler.
+ * 
+ * @author Brendan Doherty (All original code, concept attributed to Stephen
+ *         Haberman)
  */
-
 
 public class GenEventAptProcessor implements AnnotationProcessor {
 
-	private AnnotationProcessorEnvironment env;
-	private final AnnotationTypeDeclaration genEventDecl;
+  private AnnotationProcessorEnvironment env;
+  private final AnnotationTypeDeclaration genEventDecl;
 
-	public GenEventAptProcessor(AnnotationProcessorEnvironment env) {
-		this.env = env;
-		this.genEventDecl = (AnnotationTypeDeclaration) env
-				.getTypeDeclaration(GenEvent.class.getName());
-	}
-
-	@Override
-	public void process() {
-		PrintWriter out = null;
-		try {
-
-			for (Declaration decl : env
-					.getDeclarationsAnnotatedWith(genEventDecl)) {
-
-				ClassDeclaration classDecl = (ClassDeclaration) decl;
-												
-				out = env.getFiler().createSourceFile(
-						classDecl.getQualifiedName() + "Event");
-				String name = classDecl.getSimpleName(); 
-				
-				int maxOrderNum = -1;
-				for(FieldDeclaration fieldDecl : classDecl.getFields()) {
-                  Order order = fieldDecl.getAnnotation(Order.class);
-                  if(order != null) {
-                    maxOrderNum = Math.max(maxOrderNum, order.value());
-                  }
-				}
-				
-				SortedMap<Integer, FieldDeclaration> fieldsMap = new TreeMap<Integer, FieldDeclaration>();
-				for(FieldDeclaration fieldDecl : classDecl.getFields()) {
-	                  Order order = fieldDecl.getAnnotation(Order.class);
-	                  if(order != null) {
-	                    maxOrderNum = Math.max(maxOrderNum, order.value());
-	                    fieldsMap.put(order.value(), fieldDecl);
-	                  } else {
-	                	  fieldsMap.put(++maxOrderNum, fieldDecl);
-	                  }
-		        }
-		        
-		        
-				out.println("package " + classDecl.getPackage() + ";");
-				out.println();
- 				out.println("import com.google.gwt.event.shared.EventHandler;");
- 				out.println("import com.google.gwt.event.shared.GwtEvent;");
- 				out.println("import com.google.gwt.event.shared.HandlerRegistration;");
- 				out.println();
- 				out.println("import javax.annotation.Generated;");
- 				out.println("import com.gwtplatform.mvp.client.EventBus;");
- 				out.println("import com.google.gwt.event.shared.HasHandlers;");
-				out.println();
-				out.println("@Generated(value = \"com.gwtplatform.annotation.processor.GenEventAptProcessor\", date = \"" + (new Date()).toString() + "\")");
-				out.println("class " + name + "Event extends GwtEvent<" + name + "Event." + name + "Handler> { " );
-				out.println();
-				out.println("public static final Type<" + name + "Handler> TYPE = new Type<" + name + "Handler>();");
-				
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-					
-					out.print("  private ");
-					out.print(fieldDecl.getType().toString());
-					out.print(" ");
-					out.print(fieldDecl.getSimpleName());
-					out.println(";");
-				}
-				
-				out.println();
-				out.print("  public " + name + "Event(");
-				int i = 0;
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-					if(i++ > 0) {
-						out.print(", ");						
-					}
-					out.print(fieldDecl.getType().toString());
-					out.print(" ");
-					out.print(fieldDecl.getSimpleName());
-				}
-				out.println(") {");
-				out.println("  }");
-				out.println();
-				out.println("  public static Type<" + name + "Handler> getType() {");
-				out.println("    return TYPE;");
-				out.println("  }");
-				out.println();
-				
-				out.print("  public static void fire(EventBus eventBus");
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-					out.print(", ");
-					out.print(fieldDecl.getType().toString());
-					out.print(" ");
-					out.print(fieldDecl.getSimpleName());
-				}
-				out.println(") {");
-				out.print("    eventBus.fireEvent(new " + name + "Event(");
-				i = 0;
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-					if(i++ > 0) {
-						out.print(", ");            
-					}
-					out.print(fieldDecl.getSimpleName());
-				}
-				out.println("));");
-				out.println("  }");
-				out.println();
-        
-				out.println("  @Override");
-				out.println("  public Type<" + name + "Handler> getAssociatedType() {");
-				out.println("    return TYPE;");
-				out.println("  }");
-				out.println();
-				out.println("  @Override");
-				out.println("  protected void dispatch(" + name + "Handler handler) {");
-				out.println("    handler.on" + name + "(this);");
-				out.println("  }");
-				out.println("");
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-					out.print("  public ");
-					out.print(fieldDecl.getType().toString());
-					out.print(" ");
-					out.print(accessorName(fieldDecl));
-					out.println("() {");
-					out.print("    return ");
-					out.print(fieldDecl.getSimpleName());
-					out.println(";");
-					out.println("  }");
-				}
-				
-				out.println("");
-				out.println("  @Override");
-				out.println("  public boolean equals(Object other) {");
-				out.println("    if (other != null && other.getClass().equals(this.getClass())) {");
-				out.println("          " + name + "Event o = (" + name + "Event) other;");
-				out.println("      return true");
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-				    
-					TypeMirror type = fieldDecl.getType();
-					if(type instanceof ArrayType) {
-						// && java.util.Arrays.deepEquals(o.banana, this.banana)
-						out.print("          && java.util.Arrays.deepEquals(o.");
-						out.print(fieldDecl.getSimpleName());
-						out.print(", this.");
-						out.print(fieldDecl.getSimpleName());
-						out.println(")");
-						
-					} else if(isPrimative(type.toString())) {
-		                // && o.blah == this.blah
-						out.print("          && o.");
-						out.print(fieldDecl.getSimpleName());
-						out.print(" == this.");
-						out.println(fieldDecl.getSimpleName());
-					} else {
-			               // && ((o.blah == null && this.blah == null) || (o.blah != null && o.blah.equals(this.blah)))
-						out.print("          && ((o.");
-						out.print(fieldDecl.getSimpleName());
-						out.print(" == null && this.");
-						out.print(fieldDecl.getSimpleName());
-						out.print(" == null) || (o.");
-						out.print(fieldDecl.getSimpleName());
-						out.print(" != null && o.");
-						out.print(fieldDecl.getSimpleName());
-						out.print(".equals(this.");
-						out.print(fieldDecl.getSimpleName());
-						out.println(")))");
-					}					
-				}
-				out.println("        ;");
-				out.println("    }");
-				out.println("    return false;");
-				out.println("  }");
-				out.println("");
-				out.println("  @Override");
-				out.println("  public int hashCode() {");
-				out.println("    int hashCode = 23;");
-				out.println("    hashCode = (hashCode * 37) + getClass().hashCode();");
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-					out.print("    hashCode = (hashCode * 37) + ");
-					TypeMirror type = fieldDecl.getType();
-					if(type instanceof ArrayType) {
-						// hashCode = (hashCode * 37) + java.util.Arrays.deepHashCode(banana);
-						out.print("java.util.Arrays.deepHashCode(");
-						out.print(fieldDecl.getSimpleName());
-						out.println(");");
-					} else if(isPrimative(fieldDecl.getType().toString())) {
-						// hashCode = (hashCode * 37) + new Integer(height).hashCode();
-						out.print("new ");
-						out.print(getWrapperClass(fieldDecl.getType().toString()));
-						out.print("(");
-						out.print(fieldDecl.getSimpleName());
-						out.println(").hashCode();");
-						
-					} else {
-						// hashCode = (hashCode * 37) + (blah == null ? 1 : blah.hashCode());
-						out.print("(");
-						out.print(fieldDecl.getSimpleName());
-						out.print(" == null ? 1 : ");
-						out.print(fieldDecl.getSimpleName());
-						out.println(".hashCode());");						
-					}
-
-				}
-				out.println("    return hashCode;");
-				out.println("  }");
-				out.println("");
-				out.println("  @Override");
-				out.println("  public String toString() {");
-				out.println("    return \"" + name + "Event[\"");
-				for(FieldDeclaration fieldDecl : fieldsMap.values()) {
-					out.println("			            + " + fieldDecl.getSimpleName());
-				}
-				out.println("    + \"]\";");
-				out.println("  }");
-				out.println("");
-				out.println("  public static interface " + name + "Handler extends EventHandler {");
-				out.println("    public void on" + name + "(" + name + "Event event);");
-				out.println("  }");
-				out.println();
-				out.println("  public interface Has" + name + "Handlers extends HasHandlers {");
-				out.println("    HandlerRegistration add" + name + "Handler(" + name + "Handler handler);");
-				out.println("  }");
-				
-			  out.println("}");
-				
-				
-
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (out != null) {
-				out.close();
-			}
-		}
-
-	}
-
-	private String accessorName(FieldDeclaration fieldDecl) {
-    String name;
-    if(fieldDecl.getType().toString().equals("boolean")) {
-      name = "is";
-    } else {
-      name = "get";
-    }
-    name += fieldDecl.getSimpleName().substring(0, 1).toUpperCase();
-    name += fieldDecl.getSimpleName().substring(1);
-
-    return name;
+  public GenEventAptProcessor(AnnotationProcessorEnvironment env) {
+    this.env = env;
+    this.genEventDecl = (AnnotationTypeDeclaration) env
+        .getTypeDeclaration(GenEvent.class.getName());
   }
 
-  // returns the name of the wrapper class for primitive classes
-	private boolean isPrimative(String typeString) {
-		if(typeString.equals("byte")) {
-			return true;
-		} if(typeString.equals("short")) {
-			return true;
-		} if(typeString.equals("int")) {
-			return true;
-		} if(typeString.equals("long")) {
-			return true;
-		} if(typeString.equals("float")) {
-			return true;
-		} if(typeString.equals("double")) {
-			return true;
-		} if(typeString.equals("char")) {
-			return true;
-		} if(typeString.equals("boolean")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	// returns the name of the wrapper class for primitive classes
-	private String getWrapperClass(String typeString) {
-		if(typeString.equals("byte")) {
-			return java.lang.Byte.class.getSimpleName();
-		} if(typeString.equals("short")) {
-			return java.lang.Short.class.getSimpleName();
-		} if(typeString.equals("int")) {
-			return java.lang.Integer.class.getSimpleName();
-		} if(typeString.equals("long")) {
-			return java.lang.Long.class.getSimpleName();
-		} if(typeString.equals("float")) {
-			return java.lang.Float.class.getSimpleName();
-		} if(typeString.equals("double")) {
-			return java.lang.Double.class.getSimpleName();
-		} if(typeString.equals("char")) {
-			return java.lang.Character.class.getSimpleName();
-		} if(typeString.equals("boolean")) {
-			return java.lang.Boolean.class.getSimpleName();
-		} else {
-			return null;
-		}
-	}
-	
+  @Override
+  public void process() {
+    PrintWriter out = null;
+    try {
+
+      for (Declaration decl : env.getDeclarationsAnnotatedWith(genEventDecl)) {
+
+        ClassDeclaration classDecl = (ClassDeclaration) decl;
+
+        out = env.getFiler().createSourceFile(
+            classDecl.getQualifiedName() + "Event");
+        AnnotationHelper helper = new AnnotationHelper(out);
+        String name = classDecl.getSimpleName();
+
+        int maxOrderNum = -1;
+        for (FieldDeclaration fieldDecl : classDecl.getFields()) {
+          Order order = fieldDecl.getAnnotation(Order.class);
+          if (order != null) {
+            maxOrderNum = Math.max(maxOrderNum, order.value());
+          }
+        }
+
+        SortedMap<Integer, FieldDeclaration> fieldsMap = new TreeMap<Integer, FieldDeclaration>();
+        for (FieldDeclaration fieldDecl : classDecl.getFields()) {
+          Order order = fieldDecl.getAnnotation(Order.class);
+          if (order != null) {
+            maxOrderNum = Math.max(maxOrderNum, order.value());
+            fieldsMap.put(order.value(), fieldDecl);
+          } else {
+            fieldsMap.put(++maxOrderNum, fieldDecl);
+          }
+        }
+
+        out.println("package " + classDecl.getPackage() + ";");
+        out.println();
+        out.println("import com.google.gwt.event.shared.EventHandler;");
+        out.println("import com.google.gwt.event.shared.GwtEvent;");
+        out.println("import com.google.gwt.event.shared.HandlerRegistration;");
+        out.println();
+        out.println("import javax.annotation.Generated;");
+        out.println("import com.gwtplatform.mvp.client.EventBus;");
+        out.println("import com.google.gwt.event.shared.HasHandlers;");
+        out.println();
+        out
+            .println("@Generated(value = \"com.gwtplatform.annotation.processor.GenEventAptProcessor\", date = \""
+                + (new Date()).toString() + "\")");
+        out.println("class " + name + "Event extends GwtEvent<" + name
+            + "Event." + name + "Handler> { ");
+        out.println();
+        out.println("  public static final Type<" + name
+            + "Handler> TYPE = new Type<" + name + "Handler>();");
+        out.println();
+
+        helper.generateFields(fieldsMap.values());
+
+        out.print("  public " + name + "Event(");
+        helper.generateFieldList(fieldsMap.values(), true, false);
+        out.println(") {");
+        out.println("  }");
+        out.println();
+        out.println("  public static Type<" + name + "Handler> getType() {");
+        out.println("    return TYPE;");
+        out.println("  }");
+        out.println();
+
+        out.print("  public static void fire(EventBus eventBus");
+        helper.generateFieldList(fieldsMap.values(), true, true);
+        out.println(") {");
+        out.print("    eventBus.fireEvent(new " + name + "Event(");
+        helper.generateFieldList(fieldsMap.values(), false, false);
+        out.println("));");
+        out.println("  }");
+        out.println();
+
+        out.println("  @Override");
+        out.println("  public Type<" + name + "Handler> getAssociatedType() {");
+        out.println("    return TYPE;");
+        out.println("  }");
+        out.println();
+        out.println("  @Override");
+        out.println("  protected void dispatch(" + name + "Handler handler) {");
+        out.println("    handler.on" + name + "(this);");
+        out.println("  }");
+        out.println("");
+
+        helper.generateAccessors(fieldsMap.values());
+
+        helper.generateEquals(name + "Event", fieldsMap.values());
+
+        helper.generateHashCode(fieldsMap.values());
+
+        helper.generateToString(name + "Event", fieldsMap.values());
+
+        out.println("  public static interface " + name
+            + "Handler extends EventHandler {");
+        out.println("    public void on" + name + "(" + name + "Event event);");
+        out.println("  }");
+        out.println();
+        out.println("  public interface Has" + name
+            + "Handlers extends HasHandlers {");
+        out.println("    HandlerRegistration add" + name + "Handler(" + name
+            + "Handler handler);");
+        out.println("  }");
+
+        out.println("}");
+
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } finally {
+      if (out != null) {
+        out.close();
+      }
+    }
+
+  }
+
 }
