@@ -220,11 +220,12 @@ extends HandlerContainerImpl implements PresenterWidget {
   }      
 
   /**
-   * This method sets some content in a specific slot of the {@link Presenter}.
+   * This method sets some content in a specific slot of the {@link Presenter}. The attached 
+   * {@link View} should manage this slot when its {@link View#setContent(Object, Widget)} is called.
+   * It should also clear the slot when the {@code setContent} method is called with {@code null} as
+   * a parameter.
    * 
-   * @param slot An opaque object identifying
-   *             which slot this content is being set into. The attached view should know
-   *             what to do with this slot.
+   * @param slot An opaque object identifying which slot this content is being set into.
    * @param content The content, a {@link PresenterWidget}. Passing {@code null} will clear the slot.
    * @param performReset Pass {@code true} if you want a {@link ResetPresentersEvent} to be fired
    *                     after the content has been added and this presenter is visible, pass 
@@ -278,12 +279,11 @@ extends HandlerContainerImpl implements PresenterWidget {
 
   /**
    * This method adds some content in a specific slot of the {@link Presenter}. No
-   * {@link ResetPresentersEvent} is fired.
+   * {@link ResetPresentersEvent} is fired. The attached {@link View} should manage
+   * this slot when its {@link View#addContent(Object, Widget)} is called.
    * 
-   * @param slot An opaque object identifying
-   *             which slot this content is being added into. The attached view should know
-   *             what to do with this slot.
-   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will not do anything.
+   * @param slot An opaque object identifying which slot this content is being added into.
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will not add anything.
    */
   public void addContent( Object slot, PresenterWidget content ) {
     if( content == null ) {
@@ -309,19 +309,49 @@ extends HandlerContainerImpl implements PresenterWidget {
       contentImpl.notifyReveal();
   }
 
+
   /**
-   * This method clears the content in a specific slot. No
-   * {@link ResetPresentersEvent} is fired.
+   * This method removes some content in a specific slot of the {@link Presenter}. No
+   * {@link ResetPresentersEvent} is fired. The attached {@link View} should manage
+   * this slot when its {@link View#removeContent(Object, Widget)} is called.
    * 
-   * @param slot An opaque object of type identifying
-   *             which slot to clear. The attached view should know
-   *             what to do with this slot.
+   * @param slot An opaque object identifying which slot this content is being removed from. 
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null} will not remove anything.
+   */
+  public void removeContent( Object slot, PresenterWidget content ) {
+    if( content == null ) {
+      return;
+    }
+
+    PresenterWidgetImpl<?> contentImpl = (PresenterWidgetImpl<?>) content;
+    contentImpl.reparent( null );
+
+    List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
+    if( slotChildren != null ) {
+      // This presenter is visible, its time to call onHide
+      // on the child to be removed (and recursively on itschildren)
+      if( isVisible() ) {
+        contentImpl.notifyHide();
+      }
+      slotChildren.remove( contentImpl );
+    }
+    getView().removeContent( slot, contentImpl.getWidget() );
+  }
+  
+  
+  /**
+   * This method clears the content in a specific slot. No {@link ResetPresentersEvent} is fired. 
+   * The attached {@link View} should manage this slot when its {@link View#setContent(Object, Widget)} 
+   * is called. It should also clear the slot when the {@code setContent} method is called with 
+   * {@code null} as a parameter.
+   * 
+   * @param slot An opaque object identifying which slot to clear.
    */
   public void clearContent( Object slot ) {
     List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get( slot );
     if( slotChildren != null ) {
       // This presenter is visible, its time to call onHide
-      // on the newly added child (and recursively on this child children)
+      // on the children to be removed (and recursively on their children)
       if( isVisible() ) {
         for( PresenterWidgetImpl<?> activeChild : slotChildren ) {
           activeChild.notifyHide();
@@ -461,7 +491,8 @@ extends HandlerContainerImpl implements PresenterWidget {
    * <p/>
    * This methods attaches this presenter to its parent.  
    * 
-   * @param newParent The {@link PresenterWidgetImpl} that will be this presenter's new parent. 
+   * @param newParent The {@link PresenterWidgetImpl} that will be this presenter's new parent, 
+   *                  or {@code null} to detach from all parents.
    */
   private void reparent( PresenterWidgetImpl<? extends View> newParent ) {
     if( currentParentPresenter != null && currentParentPresenter != newParent )

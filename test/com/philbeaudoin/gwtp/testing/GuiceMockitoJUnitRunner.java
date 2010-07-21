@@ -17,7 +17,7 @@ import com.google.inject.Module;
 /**
  * This class implements the mockito runner but allows Guice dependency injection.
  * To setup the guice environment, the test class can have an inner static class 
- * deriving from {@link AbstractModule} or, more commonly, from {@link ModuleWithTestSingletons}. 
+ * deriving from {@link AbstractModule} or, more commonly, from {@link TestModule}. 
  * This last class will let you bind {@link TestSingletonMockProvider} and the runner will make sure
  * these singletons are reset at every invocation of a test case.
  * <p />
