@@ -1,0 +1,125 @@
+/**
+ * Copyright 2010 Gwt-Platform
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.gwtplatform.mvp.client.proxy;
+
+import com.google.gwt.event.shared.GwtEvent;
+import com.gwtplatform.mvp.client.EventBus;
+
+/**
+ * 
+ * This event is fired by the {@link PlaceManager} whenever a new place 
+ * is requested, either by history navigation or directly.
+ * <p />
+ * <b>Important!</b> You should never fire that event directly. Instead,
+ * build a {@link PlaceRequest} and pass it to one of the following methods:
+ * <ul>
+ * <li>{@link PlaceManager#revealPlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest, int)}</li>
+ * </ul>
+ * 
+ * @author David Peterson
+ * @author Philippe Beaudoin
+ *
+ */
+class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
+
+  private static Type<PlaceRequestInternalHandler> TYPE;
+
+  public static Type<PlaceRequestInternalHandler> getType() {
+    if ( TYPE == null )
+      TYPE = new Type<PlaceRequestInternalHandler>();
+    return TYPE;
+  }
+
+  private final PlaceRequest request;
+  
+  /**
+   * The handled flag can let others know when the event has been handled.
+   * Handlers should call {@link setHandled()} as soon as they figure they
+   * are be responsible for this event. Handlers should not process
+   * this event if {@link isHandled()} return {@code true}. 
+   */
+  private boolean handled = false;
+  
+  private boolean authorized = true;
+
+  public PlaceRequestInternalEvent( PlaceRequest request ) {
+    this.request = request;
+  }
+
+  @Override
+  protected void dispatch( PlaceRequestInternalHandler handler ) {
+    handler.onPlaceRequest( this );
+  }
+
+  @Override
+  public Type<PlaceRequestInternalHandler> getAssociatedType() {
+    return getType();
+  }
+
+  public PlaceRequest getRequest() {
+    return request;
+  }
+
+  /**
+   * Indicates that the event was handled and that other handlers
+   * should not process it.
+   */
+  public void setHandled() {
+    handled = true;
+  }
+
+  /**
+   * Checks if the event was handled. If it was, then it should not
+   * be processed further.
+   * 
+   * @return {@code true} if the event was handled. {@code false} otherwise.
+   */
+  public boolean isHandled() {
+    return handled;
+  }
+
+  /**
+   * Indicates that the event was handled but that the user was not authorized
+   * to view the request page.
+   */
+  public void setUnauthorized( ) {
+    authorized = false;
+  }
+
+  /**
+   * Checks if the user was authorized to see the page.
+   * 
+   * @return {@code true} if the user was authorized. {@code false} otherwise.
+   */
+  public boolean isAuthorized() {
+    return authorized;
+  }
+
+  /**
+   * Fires a {@link PlaceRequestInternalEvent} into the {@link EventBus}, specifying that it
+   * does not come from a modification in the History.
+   *
+   * @param eventBus  The event bus.
+   * @param request   The request.
+   */
+  public static void fire( EventBus eventBus, PlaceRequest request ) {
+    eventBus.fireEvent( new PlaceRequestInternalEvent( request ) );
+  }
+
+}
