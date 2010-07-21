@@ -110,10 +110,10 @@ public class GenEventAptProcessor implements AnnotationProcessor {
  				out.println("import com.google.gwt.event.shared.HandlerRegistration;");
  				out.println();
  				out.println("import javax.annotation.Generated;");
- 				out.println("import com.philbeaudoin.gwtp.mvp.client.EventBus;");
+ 				out.println("import com.gwtplatform.mvp.client.EventBus;");
  				out.println("import com.google.gwt.event.shared.HasHandlers;");
 				out.println();
-				out.println("@Generated(value = \"com.philbeaudoin.gwtp.annotation.processor.GenEventAptProcessor\", date = \"" + (new Date()).toString() + "\")");
+				out.println("@Generated(value = \"com.gwtplatform.annotation.processor.GenEventAptProcessor\", date = \"" + (new Date()).toString() + "\")");
 				out.println("class " + name + "Event extends GwtEvent<" + name + "Event." + name + "Handler> { " );
 				out.println();
 				out.println("public static final Type<" + name + "Handler> TYPE = new Type<" + name + "Handler>();");
