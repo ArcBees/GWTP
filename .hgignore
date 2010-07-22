@@ -15,3 +15,4 @@ glob:war/WEB-INF/lib/log4j-1.2.15.jar
 glob:war/WEB-INF/lib/objectify-2.0.jar
 glob:tomcat/**
 glob:war/com.gwtplatform**
+glob:target/*
