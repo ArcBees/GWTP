@@ -119,7 +119,7 @@ public class GenEventAptProcessor implements AnnotationProcessor {
         out
             .println("@Generated(value = \"com.gwtplatform.annotation.processor.GenEventAptProcessor\", date = \""
                 + (new Date()).toString() + "\")");
-        out.println("class " + name + "Event extends GwtEvent<" + name
+        out.println("public class " + name + "Event extends GwtEvent<" + name
             + "Event." + name + "Handler> { ");
         out.println();
         out.println("  public static final Type<" + name
