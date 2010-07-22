@@ -23,7 +23,18 @@
 	<repositories>
 		<repository>
 			<id>Platform related releases</id>
-			<url>https://nejakyusername-maven.googlecode.com/hg/repository-releases
+			<url>http://nejakyusername-maven.googlecode.com/hg/repository-releases
+			</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>Google guice repository</id>
+			<url>http://guice-maven.googlecode.com/svn/trunk
 			</url>
 			<snapshots>
 				<enabled>false</enabled>
