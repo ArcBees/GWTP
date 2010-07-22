@@ -19,6 +19,21 @@
 		<htmlunit.version>r5662-gae</htmlunit.version>
 	</properties>
 
+
+	<repositories>
+		<repository>
+			<id>Platform related releases</id>
+			<url>https://nejakyusername-maven.googlecode.com/hg/repository-releases
+			</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
 	<build>
 		<sourceDirectory>${basedir}/src</sourceDirectory>
 		<testSourceDirectory>${basedir}/test</testSourceDirectory>
