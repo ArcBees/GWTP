@@ -1,6 +1,7 @@
 package com.gwtplatform.annotation.processor;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.sun.mirror.declaration.FieldDeclaration;
@@ -133,7 +134,11 @@ class AnnotationHelper {
     out.println("  @Override");
     out.println("  public String toString() {");
     out.println("    return \"" + className + "[\"");
+    int i = 0;
     for(FieldDeclaration fieldDecl : fields) {
+      if(i++ > 0) {
+        out.println("                 + \",\"");
+      }
       out.println("                 + " + fieldDecl.getSimpleName());
     }
     out.println("    + \"]\";");
@@ -154,8 +159,8 @@ class AnnotationHelper {
       }
       out.print(fieldDecl.getSimpleName());
     }
-
   }
+  
 
   
   private String accessorName(FieldDeclaration fieldDecl) {
