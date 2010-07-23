@@ -23,7 +23,7 @@
 	<repositories>
 		<repository>
 			<id>Platform related releases</id>
-			<url>http://nejakyusername-maven.googlecode.com/hg/repository-releases
+			<url>https://dep.gwt-platform.googlecode.com/hg
 			</url>
 			<snapshots>
 				<enabled>false</enabled>
