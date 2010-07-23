@@ -23,7 +23,7 @@
 	<repositories>
 		<repository>
 			<id>Platform related releases</id>
-			<url>http://dep.gwt-platform.googlecode.com/hg
+			<url>http://dep.gwt-platform.googlecode.com/hg/release-repository
 			</url>
 			<snapshots>
 				<enabled>false</enabled>
