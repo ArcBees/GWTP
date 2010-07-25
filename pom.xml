@@ -73,14 +73,6 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>DTASnapshots</id>
-			<name>DTASnapshots</name>
-			<url>http://galileo/nexus/content/repositories/DTASnapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<dependencies>
 		<!-- HTMLUnit custom build -->
 		<!-- http://jira.codehaus.org/browse/MECLIPSE-388 
