@@ -70,7 +70,7 @@ import com.sun.mirror.declaration.FieldDeclaration;
  *         Haberman)
  */
 
-public class GenDispatchAptProcessor implements AnnotationProcessor {
+class GenDispatchAptProcessor implements AnnotationProcessor {
 
   private AnnotationProcessorEnvironment env;
   private final AnnotationTypeDeclaration genDispatchDecl;
@@ -117,10 +117,11 @@ public class GenDispatchAptProcessor implements AnnotationProcessor {
       out.println();
       out.println("import javax.annotation.Generated;");
       out.println();
+      /*
       out
           .println("@Generated(value = \"com.gwtplatform.annotation.processor.GenDispatchAptProcessor\", date = \""
               + (new Date()).toString() + "\")");
-
+*/
       out.print("public class ");
       out.print(name);
       out.print("Action implements Action<");

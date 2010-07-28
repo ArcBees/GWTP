@@ -17,12 +17,9 @@ package com.gwtplatform.annotation.processor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 import com.gwtplatform.annotation.GenEvent;
-import com.gwtplatform.annotation.Order;
 import com.sun.mirror.apt.AnnotationProcessor;
 import com.sun.mirror.apt.AnnotationProcessorEnvironment;
 import com.sun.mirror.declaration.AnnotationTypeDeclaration;
@@ -62,7 +59,7 @@ import com.sun.mirror.declaration.FieldDeclaration;
  *         Haberman)
  */
 
-public class GenEventAptProcessor implements AnnotationProcessor {
+class GenEventAptProcessor implements AnnotationProcessor {
 
   private AnnotationProcessorEnvironment env;
   private final AnnotationTypeDeclaration genEventDecl;
@@ -87,24 +84,8 @@ public class GenEventAptProcessor implements AnnotationProcessor {
         AnnotationHelper helper = new AnnotationHelper(out);
         String name = classDecl.getSimpleName();
 
-        int maxOrderNum = -1;
-        for (FieldDeclaration fieldDecl : classDecl.getFields()) {
-          Order order = fieldDecl.getAnnotation(Order.class);
-          if (order != null) {
-            maxOrderNum = Math.max(maxOrderNum, order.value());
-          }
-        }
-
-        SortedMap<Integer, FieldDeclaration> fieldsMap = new TreeMap<Integer, FieldDeclaration>();
-        for (FieldDeclaration fieldDecl : classDecl.getFields()) {
-          Order order = fieldDecl.getAnnotation(Order.class);
-          if (order != null) {
-            maxOrderNum = Math.max(maxOrderNum, order.value());
-            fieldsMap.put(order.value(), fieldDecl);
-          } else {
-            fieldsMap.put(++maxOrderNum, fieldDecl);
-          }
-        }
+        SortedMap<Integer, FieldDeclaration> fieldsMap = helper
+            .getOrderedFields(classDecl);
 
         out.println("package " + classDecl.getPackage() + ";");
         out.println();
@@ -116,9 +97,11 @@ public class GenEventAptProcessor implements AnnotationProcessor {
         out.println("import com.gwtplatform.mvp.client.EventBus;");
         out.println("import com.google.gwt.event.shared.HasHandlers;");
         out.println();
-        out
-            .println("@Generated(value = \"com.gwtplatform.annotation.processor.GenEventAptProcessor\", date = \""
-                + (new Date()).toString() + "\")");
+        /*
+         * out.println(
+         * "@Generated(value = \"com.gwtplatform.annotation.processor.GenEventAptProcessor\", date = \""
+         * + (new Date()).toString() + "\")");
+         */
         out.println("public class " + name + "Event extends GwtEvent<" + name
             + "Event." + name + "Handler> { ");
         out.println();
