@@ -1,9 +1,12 @@
 package com.gwtplatform.annotation.processor;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
+import com.gwtplatform.annotation.Order;
+import com.sun.mirror.declaration.ClassDeclaration;
 import com.sun.mirror.declaration.FieldDeclaration;
 import com.sun.mirror.type.ArrayType;
 import com.sun.mirror.type.TypeMirror;
@@ -130,13 +133,13 @@ class AnnotationHelper {
 
   public void generateToString(String className,
       Collection<FieldDeclaration> fields) {
-  
+
     out.println("  @Override");
     out.println("  public String toString() {");
     out.println("    return \"" + className + "[\"");
     int i = 0;
-    for(FieldDeclaration fieldDecl : fields) {
-      if(i++ > 0) {
+    for (FieldDeclaration fieldDecl : fields) {
+      if (i++ > 0) {
         out.println("                 + \",\"");
       }
       out.println("                 + " + fieldDecl.getSimpleName());
@@ -144,25 +147,47 @@ class AnnotationHelper {
     out.println("    + \"]\";");
     out.println("  }");
     out.println("");
-    
+
   }
-  
-  public void generateFieldList(Collection<FieldDeclaration> fields, boolean withType, boolean leadingComma) {
+
+  public void generateFieldList(Collection<FieldDeclaration> fields,
+      boolean withType, boolean leadingComma) {
     int i = 0;
-    for(FieldDeclaration fieldDecl : fields) {
-      if(leadingComma || i++ > 0) {
-        out.print(", ");            
+    for (FieldDeclaration fieldDecl : fields) {
+      if (leadingComma || i++ > 0) {
+        out.print(", ");
       }
-      if(withType) {
+      if (withType) {
         out.print(fieldDecl.getType().toString());
         out.print(" ");
       }
       out.print(fieldDecl.getSimpleName());
     }
   }
-  
 
-  
+  SortedMap<Integer, FieldDeclaration> getOrderedFields(
+      ClassDeclaration classDecl) {
+    int maxOrderNum = -1;
+    for (FieldDeclaration fieldDecl : classDecl.getFields()) {
+      Order order = fieldDecl.getAnnotation(Order.class);
+      if (order != null) {
+        maxOrderNum = Math.max(maxOrderNum, order.value());
+      }
+    }
+
+    SortedMap<Integer, FieldDeclaration> fieldsMap = new TreeMap<Integer, FieldDeclaration>();
+    for (FieldDeclaration fieldDecl : classDecl.getFields()) {
+      Order order = fieldDecl.getAnnotation(Order.class);
+      if (order != null) {
+        maxOrderNum = Math.max(maxOrderNum, order.value());
+        fieldsMap.put(order.value(), fieldDecl);
+      } else {
+        fieldsMap.put(++maxOrderNum, fieldDecl);
+      }
+    }
+    return fieldsMap;
+  }
+
   private String accessorName(FieldDeclaration fieldDecl) {
     String name;
     if (fieldDecl.getType().toString().equals("boolean")) {
