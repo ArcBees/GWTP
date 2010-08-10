@@ -45,6 +45,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   private String previousHistoryToken = null;
 
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
+  
+  private int errorPlaceAttempts = 0;
 
   public PlaceManagerImpl( EventBus eventBus, TokenFormatter tokenFormatter ) {
     this.eventBus = eventBus;
@@ -91,7 +93,12 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
-    revealDefaultPlace();
+	errorPlaceAttempts++;
+	if(errorPlaceAttempts<=1){  
+		revealDefaultPlace();
+	}else{
+		throw new RuntimeException("revealErrorPlace is set to revealDefaultPlace.  However revealDefaultPlace is causing an error which if left to continue will result in an infinite loop.");
+	}
   }
 
   @Override
@@ -115,6 +122,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public final void revealPlaceHierarchy( List<PlaceRequest> placeRequestHierarchy ) {
+	errorPlaceAttempts = 0;
     if( !confirmLeaveState() )
       return;
     if( placeRequestHierarchy.size() == 0 )
@@ -127,6 +135,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   
   @Override
   public final void revealPlace( PlaceRequest request ) {
+	errorPlaceAttempts = 0;
     if( !confirmLeaveState() )
       return;
     placeHierarchy.clear();
