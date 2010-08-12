@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.HasEventBus;
 
 /**
  * Event fired after navigation has occured. Will not be fired if navigation is refused
@@ -55,8 +55,8 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
     handler.onNavigation(this);
   }
 
-  public static void fire(final EventBus eventBus, PlaceRequest request) {
-    eventBus.fireEvent(new NavigationEvent(request));
+  public static void fire(final HasEventBus source, PlaceRequest request) {
+    source.fireEvent(new NavigationEvent(request));
   }
   
   @Override

@@ -27,6 +27,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * @param <Proxy_> The specific type of the proxy, must be a {@link TabContainerProxy}. 
  * 
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy_ extends Proxy<?>> 
 extends PresenterImpl<V, Proxy_> implements TabContainerPresenter  {
@@ -74,7 +75,7 @@ extends PresenterImpl<V, Proxy_> implements TabContainerPresenter  {
 
     // The following call will trigger a series of call to addTab, so
     // we should make sure we clear all the tabs when unbinding.
-    eventBus.fireEvent( new RequestTabsEvent(requestTabsEventType, this) );
+    RequestTabsEvent.fire(this, requestTabsEventType, this);
   }
 
   @Override
