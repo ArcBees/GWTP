@@ -165,12 +165,8 @@ extends HandlerContainerImpl implements PresenterWidget {
         return;
     }
 
-    PopupView popupView = contentImpl.getView();
+    final PopupView popupView = contentImpl.getView();
     popupChildren.add( contentImpl );
-
-    // Center if desired
-    if( center )
-      popupView.center();
 
     // Display the popup content
     if( isVisible() ) {
@@ -179,8 +175,11 @@ extends HandlerContainerImpl implements PresenterWidget {
       // on the newly added child (and recursively on this child children)
       monitorCloseEvent( contentImpl );
       contentImpl.notifyReveal();
+    } 
+    // Center if desired
+    if( center ) {
+      popupView.center();
     }
-
   }
 
   /**
@@ -468,7 +467,7 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   protected final <H extends EventHandler> void addRegisteredHandler(Type<H> type,
       H handler) {
-    registerHandler(eventBus.addHandler(type, handler));
+    registerHandler(addHandler(type, handler));
   }
   
 
@@ -511,5 +510,19 @@ extends HandlerContainerImpl implements PresenterWidget {
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);
   }
-  
+
+  @Override
+  public <H extends EventHandler> H getHandler( Type<H> type, int index ) {
+      return eventBus.getHandler( type, index );
+  }
+
+  @Override
+  public int getHandlerCount( Type<?> type ) {
+      return eventBus.getHandlerCount( type );
+  }
+
+  @Override
+  public boolean isEventHandled( Type<?> e ) {
+      return eventBus.isEventHandled( e );
+  }  
 }
