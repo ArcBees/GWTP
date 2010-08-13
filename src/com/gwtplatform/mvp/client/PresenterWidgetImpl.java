@@ -168,6 +168,11 @@ extends HandlerContainerImpl implements PresenterWidget {
     final PopupView popupView = contentImpl.getView();
     popupChildren.add( contentImpl );
 
+    // Center if desired
+    if( center ) {
+      popupView.center();
+    }
+
     // Display the popup content
     if( isVisible() ) {
       popupView.show();
@@ -175,10 +180,6 @@ extends HandlerContainerImpl implements PresenterWidget {
       // on the newly added child (and recursively on this child children)
       monitorCloseEvent( contentImpl );
       contentImpl.notifyReveal();
-    } 
-    // Center if desired
-    if( center ) {
-      popupView.center();
     }
   }
 
