@@ -230,6 +230,21 @@ implements ProxyPlace<P> {
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);  	
   }
+  
+  @Override
+  public <H extends EventHandler> H getHandler( Type<H> type, int index ) {
+    return eventBus.getHandler( type, index );
+  }
+  
+  @Override
+  public int getHandlerCount( Type<?> type ) {
+    return eventBus.getHandlerCount( type );
+  }
+  
+  @Override
+  public boolean isEventHandled( Type<?> e ) {
+    return eventBus.isEventHandled(e);
+  }
 
 }
 
