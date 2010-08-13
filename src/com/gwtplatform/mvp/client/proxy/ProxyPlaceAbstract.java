@@ -16,10 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -40,11 +37,19 @@ import com.gwtplatform.mvp.client.PresenterImpl;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
+@SuppressWarnings("deprecation") // TODO: Remove after making members private
 public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 implements ProxyPlace<P> {
 
   protected ProxyFailureHandler failureHandler;
-  protected EventBus eventBus;
+  
+  /**
+   * The {@link EventBus} for the application.
+   * 
+   * Deprecated to use directly, use {@link #getEventBus()} instead.
+   */
+  @Deprecated
+  protected EventBus eventBus; // TODO: Make private.
   protected PlaceManager placeManager;
   protected Proxy_ proxy;
   protected Place place;
@@ -221,30 +226,14 @@ implements ProxyPlace<P> {
   }
 
   @Override
-  public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type,
-	  H handler) {
-	return eventBus.addHandler(type, handler);
-  }
-    
-  @Override
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);  	
   }
-  
-  @Override
-  public <H extends EventHandler> H getHandler( Type<H> type, int index ) {
-    return eventBus.getHandler( type, index );
-  }
-  
-  @Override
-  public int getHandlerCount( Type<?> type ) {
-    return eventBus.getHandlerCount( type );
-  }
-  
-  @Override
-  public boolean isEventHandled( Type<?> e ) {
-    return eventBus.isEventHandled(e);
-  }
 
+  @Override
+  public final EventBus getEventBus() {
+    return eventBus;
+  }
+  
 }
 
