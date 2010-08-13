@@ -31,6 +31,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
+@SuppressWarnings("deprecation") // TODO: Remove after making members private
 public abstract class PresenterWidgetImpl<V extends View>
 extends HandlerContainerImpl implements PresenterWidget {
   boolean visible = false;
