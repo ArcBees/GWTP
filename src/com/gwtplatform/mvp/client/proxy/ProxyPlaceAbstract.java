@@ -16,6 +16,10 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -209,11 +213,22 @@ implements ProxyPlace<P> {
             if( !presenter.isVisible() )
               presenterImpl.forceReveal();  // This will trigger a reset in due time
             else
-              ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves                
+              ResetPresentersEvent.fire( ProxyPlaceAbstract.this ); // We have to do the reset ourselves                
           } } );
       }
     } );
 
+  }
+
+  @Override
+  public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type,
+	  H handler) {
+	return eventBus.addHandler(type, handler);
+  }
+    
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    eventBus.fireEvent(event);  	
   }
 
 }
