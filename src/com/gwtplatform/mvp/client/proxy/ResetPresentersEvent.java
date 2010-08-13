@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.gwtplatform.mvp.client.EventBus;
 
 public final class ResetPresentersEvent extends GwtEvent<ResetPresentersHandler> {
 
@@ -27,7 +27,7 @@ public final class ResetPresentersEvent extends GwtEvent<ResetPresentersHandler>
     return type;    
   }
   
-  public static void fire( final HasEventBus source ) {
+  public static void fire( final EventBus source ) {
     source.fireEvent( new ResetPresentersEvent() );
   }
 
