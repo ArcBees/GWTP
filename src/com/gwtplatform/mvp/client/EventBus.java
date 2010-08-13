@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
@@ -29,9 +30,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * 
  * @author David Peterson
  */
-public interface EventBus {
+public interface EventBus extends HasHandlers {
   <H extends EventHandler> HandlerRegistration addHandler( Type<H> type, H handler );
 
+  @Override
   void fireEvent( GwtEvent<?> event );
 
   <H extends EventHandler> H getHandler( Type<H> type, int index );
