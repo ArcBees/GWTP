@@ -37,6 +37,7 @@ import com.gwtplatform.mvp.client.PresenterImpl;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
+@SuppressWarnings("deprecation") // TODO: Remove after making members private
 public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 implements ProxyPlace<P> {
 
