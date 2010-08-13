@@ -16,8 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -134,4 +134,5 @@ public final class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootV
       isResetting = false;
     }
   }
+
 }

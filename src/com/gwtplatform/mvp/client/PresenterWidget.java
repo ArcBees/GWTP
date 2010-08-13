@@ -60,7 +60,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
  * 
  * @author Philippe Beaudoin
  */
-public interface PresenterWidget extends HandlerContainer, HasEventBus {
+public interface PresenterWidget extends HandlerContainer, EventBus {
 
   /**
    * Returns the {@link View} for the current presenter.

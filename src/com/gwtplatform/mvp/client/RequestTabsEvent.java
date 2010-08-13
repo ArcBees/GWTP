@@ -22,7 +22,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
 
   public static void fire(
-      final HasEventBus source, 
+      final EventBus source, 
       final Type<RequestTabsHandler> type, 
       TabContainerPresenter tabContainer) {
     
