@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.HasEventBus;
 
 /**
  * 
@@ -99,7 +100,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
    * @param request   The {@link PlaceRequest} for which to obtain the title.
    * @param handler   The {@link SetPlaceTitleHandler} that will be invoked when the title is obtained.
    */
-  public static void fire( EventBus source, PlaceRequest request, SetPlaceTitleHandler handler ) {
+  public static void fire( HasEventBus source, PlaceRequest request, SetPlaceTitleHandler handler ) {
     source.fireEvent( new GetPlaceTitleEvent( request, handler ) );
   }
 }

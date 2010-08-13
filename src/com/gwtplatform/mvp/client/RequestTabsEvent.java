@@ -17,12 +17,11 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
 
   public static void fire(
-      final EventBus source, 
+      final HasEventBus source, 
       final Type<RequestTabsHandler> type, 
       TabContainerPresenter tabContainer) {
     
