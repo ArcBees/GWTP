@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -39,7 +39,7 @@ public final class RevealRootContentEvent extends GwtEvent<RevealRootContentHand
   private final Presenter content;
 
   public static void fire(
-      final HasEventBus source,
+      final EventBus source,
       final Presenter content ) {
     source.fireEvent( new RevealRootContentEvent(content) );
   }

@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -26,5 +26,5 @@ import com.gwtplatform.mvp.client.Presenter;
  *
  * @param <P> The type of the {@link Presenter} attached to this {@link Proxy}.
  */
-public interface ProxyPlace<P extends Presenter> extends Proxy<P>, Place, HasEventBus {
+public interface ProxyPlace<P extends Presenter> extends Proxy<P>, Place, EventBus {
 }
