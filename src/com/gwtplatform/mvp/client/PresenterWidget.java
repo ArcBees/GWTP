@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 /**
@@ -60,7 +61,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
  * 
  * @author Philippe Beaudoin
  */
-public interface PresenterWidget extends HandlerContainer, EventBus {
+public interface PresenterWidget extends HandlerContainer, HasEventBus {
 
   /**
    * Returns the {@link View} for the current presenter.
@@ -84,4 +85,11 @@ public interface PresenterWidget extends HandlerContainer, EventBus {
    * @return The Widget associated with that presenter.
    */
   public Widget getWidget();
+  
+  /**
+   * Makes it possible to access the {@link EventBus} object associated with that presenter.
+   * 
+   * @return The EventBus associated with that presenter.
+   */
+  public EventBus getEventBus();
 }
