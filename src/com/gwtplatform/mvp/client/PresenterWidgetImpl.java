@@ -41,7 +41,7 @@ extends HandlerContainerImpl implements PresenterWidget {
    * Deprecated to use directly, use {@link #getEventBus()} instead.
    */
   @Deprecated
-  protected final EventBus eventBus;
+  protected final EventBus eventBus; // TODO: Make private.
 
   /**
    * This map makes it possible to keep a list of all the active children

@@ -41,7 +41,14 @@ public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 implements ProxyPlace<P> {
 
   protected ProxyFailureHandler failureHandler;
-  protected EventBus eventBus;
+  
+  /**
+   * The {@link EventBus} for the application.
+   * 
+   * Deprecated to use directly, use {@link #getEventBus()} instead.
+   */
+  @Deprecated
+  protected EventBus eventBus; // TODO: Make private.
   protected PlaceManager placeManager;
   protected Proxy_ proxy;
   protected Place place;
@@ -222,5 +229,10 @@ implements ProxyPlace<P> {
     eventBus.fireEvent(event);  	
   }
 
+  @Override
+  public final EventBus getEventBus() {
+    return eventBus;
+  }
+  
 }
 
