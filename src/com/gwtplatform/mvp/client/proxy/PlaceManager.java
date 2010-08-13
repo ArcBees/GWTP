@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import java.util.List;
 
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.gwtplatform.mvp.client.EventBus;
 
 /**
  * Place managers work as an intermediary between the GWT {@link com.google.gwt.user.client.History} API
@@ -28,8 +28,7 @@ import com.gwtplatform.mvp.client.HasEventBus;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public interface PlaceManager extends HasEventBus {
-
+public interface PlaceManager extends EventBus {
     
     /**
      * Programmatically reveals the specified hierarchy of places place. 
