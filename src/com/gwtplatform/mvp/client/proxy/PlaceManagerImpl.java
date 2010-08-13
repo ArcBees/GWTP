@@ -346,4 +346,20 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
       H handler) {
     return eventBus.addHandler(type, handler);
   }
+
+
+  @Override
+  public <H extends EventHandler> H getHandler( Type<H> type, int index ) {
+      return eventBus.getHandler(  type, index );
+  }
+
+  @Override
+  public int getHandlerCount( Type<?> type ) {
+      return eventBus.getHandlerCount( type );
+  }
+
+  @Override
+  public boolean isEventHandled( Type<?> e ) {
+      return eventBus.isEventHandled( e );
+  }
 }

@@ -483,7 +483,7 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   protected final <H extends EventHandler> void addRegisteredHandler(Type<H> type,
       H handler) {
-    registerHandler(eventBus.addHandler(type, handler));
+    registerHandler(addHandler(type, handler));
   }
   
 
@@ -526,5 +526,19 @@ extends HandlerContainerImpl implements PresenterWidget {
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);
   }
-  
+
+  @Override
+  public <H extends EventHandler> H getHandler( Type<H> type, int index ) {
+      return eventBus.getHandler( type, index );
+  }
+
+  @Override
+  public int getHandlerCount( Type<?> type ) {
+      return eventBus.getHandlerCount( type );
+  }
+
+  @Override
+  public boolean isEventHandled( Type<?> e ) {
+      return eventBus.isEventHandled( e );
+  }  
 }
