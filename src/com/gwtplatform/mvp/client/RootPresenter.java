@@ -104,25 +104,25 @@ public final class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootV
   protected void onBind() {
     super.onBind();
 
-    registerHandler( addHandler( RevealRootContentEvent.getType(), new RevealRootContentHandler(){
+    addRegisteredHandler( RevealRootContentEvent.getType(), new RevealRootContentHandler(){
       @Override
       public void onRevealContent(final RevealRootContentEvent revealContentEvent) {
         activePresenter = (PresenterWidgetImpl<?>)revealContentEvent.getContent();
         getView().setUsingRootLayoutPanel(false);
         setContent( rootSlot, activePresenter );
       }
-    } ) );    
+    } );    
 
-    registerHandler( addHandler( RevealRootLayoutContentEvent.getType(), new RevealRootLayoutContentHandler(){
+    addRegisteredHandler( RevealRootLayoutContentEvent.getType(), new RevealRootLayoutContentHandler(){
       @Override
       public void onRevealContent(final RevealRootLayoutContentEvent revealContentEvent) {
         activePresenter = (PresenterWidgetImpl<?>)revealContentEvent.getContent();
         getView().setUsingRootLayoutPanel(true);
         setContent( rootSlot, activePresenter );
       }
-    } ) );  
+    } );  
 
-    registerHandler( addHandler( ResetPresentersEvent.getType(), this ) );    
+    addRegisteredHandler( ResetPresentersEvent.getType(), this );    
 
   }
 
