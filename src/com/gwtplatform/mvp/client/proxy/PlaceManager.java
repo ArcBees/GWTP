@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import java.util.List;
 
+import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.HasEventBus;
 
 /**
@@ -352,5 +353,11 @@ public interface PlaceManager extends HasEventBus {
    */
   public PlaceRequest getCurrentPlaceRequest();
 
+  /**
+   * Makes it possible to access the {@link EventBus} object associated with that presenter.
+   * 
+   * @return The EventBus associated with that presenter.
+   */
+  public EventBus getEventBus();
   
 }

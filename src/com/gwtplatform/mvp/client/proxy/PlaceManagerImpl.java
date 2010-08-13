@@ -36,7 +36,13 @@ import com.gwtplatform.mvp.client.EventBus;
  */
 public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandler<String>, ClosingHandler {
 
-  private final EventBus eventBus;
+  /**
+   * The {@link EventBus} for the application.
+   * 
+   * Deprecated to use directly, use {@link #getEventBus()} instead.
+   */
+  @Deprecated
+  protected final EventBus eventBus; // TODO: Make private.
   private final TokenFormatter tokenFormatter;
 
   private String onLeaveQuestion = null;
@@ -328,5 +334,10 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   @Override
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);
+  }
+
+  @Override
+  public EventBus getEventBus() {
+    return eventBus;
   }
 }
