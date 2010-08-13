@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -34,11 +36,12 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  */
 public abstract class PresenterWidgetImpl<V extends View>
 extends HandlerContainerImpl implements PresenterWidget {
-
+  boolean visible = false;
+  
   /**
    * The {@link EventBus} for the application.
    */
-  protected final EventBus eventBus;
+  private final EventBus eventBus;
 
   /**
    * This map makes it possible to keep a list of all the active children
@@ -51,12 +54,10 @@ extends HandlerContainerImpl implements PresenterWidget {
   private final List<PresenterWidgetImpl<? extends PopupView>> popupChildren = 
     new ArrayList<PresenterWidgetImpl<? extends PopupView>>();
 
-  protected boolean visible = false;
-
   /**
    * The view for the presenter.
    */
-  protected final V view;
+  private final V view;
 
   /**
    * The parent presenter, in order to make sure this widget is only ever in one parent.
@@ -286,7 +287,7 @@ extends HandlerContainerImpl implements PresenterWidget {
       contentImpl.notifyReveal();
       if( performReset ) {
         // And to reset everything if needed
-        ResetPresentersEvent.fire( eventBus );
+        ResetPresentersEvent.fire( this );
       }
     }
   }
@@ -513,6 +514,17 @@ extends HandlerContainerImpl implements PresenterWidget {
     if( currentParentPresenter != null && currentParentPresenter != newParent )
       currentParentPresenter.detach( this );
     currentParentPresenter = newParent;
+  }
+
+  @Override
+  public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type,
+      H handler) {
+    return eventBus.addHandler(type, handler);
+  }
+
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    eventBus.fireEvent(event);
   }
   
 }

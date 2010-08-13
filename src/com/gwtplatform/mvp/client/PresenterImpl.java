@@ -27,7 +27,7 @@ extends PresenterWidgetImpl<V> implements Presenter {
   /**
    * The light-weight {@PresenterProxy} around this presenter.
    */
-  protected final Proxy_ proxy;
+  private final Proxy_ proxy;
   
   /**
    * Creates a basic {@link Presenter}.
