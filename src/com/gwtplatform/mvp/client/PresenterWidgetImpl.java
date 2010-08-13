@@ -23,6 +23,8 @@ import java.util.Map;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
@@ -164,22 +166,35 @@ extends HandlerContainerImpl implements PresenterWidget {
         return;
     }
 
-    PopupView popupView = contentImpl.getView();
+    final PopupView popupView = contentImpl.getView();
     popupChildren.add( contentImpl );
-
-    // Center if desired
-    if( center )
-      popupView.center();
 
     // Display the popup content
     if( isVisible() ) {
-      popupView.show();
-      // This presenter is visible, its time to call onReveal
-      // on the newly added child (and recursively on this child children)
-      monitorCloseEvent( contentImpl );
-      contentImpl.notifyReveal();
+      // Do this in a deferred command, if the dialog was just created, the
+      // creation is being deferred and the current size might be wrong.
+      DeferredCommand.addCommand( new Command(){
+        @Override
+        public void execute() {
+          popupView.show();
+          // This presenter is visible, its time to call onReveal
+          // on the newly added child (and recursively on this child children)
+          monitorCloseEvent( contentImpl );
+          contentImpl.notifyReveal();
+        }
+      } );
+    } 
+    // Center if desired
+    if( center ) {
+      // Do this in a deferred command, if the dialog was just created, the
+      // creation is being deferred and the current size might be wrong.
+      DeferredCommand.addCommand( new Command(){
+        @Override
+        public void execute() {
+          popupView.center();        
+        }
+      } );
     }
-
   }
 
   /**
