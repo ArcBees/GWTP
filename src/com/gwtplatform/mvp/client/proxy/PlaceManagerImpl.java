@@ -21,10 +21,8 @@ import java.util.List;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
@@ -48,8 +46,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   private String previousHistoryToken = null;
 
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
-  
-  private int errorPlaceAttempts = 0;
 
   public PlaceManagerImpl( EventBus eventBus, TokenFormatter tokenFormatter ) {
     this.eventBus = eventBus;
@@ -96,12 +92,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
-	errorPlaceAttempts++;
-	if(errorPlaceAttempts<=1){  
-		revealDefaultPlace();
-	}else{
-		throw new RuntimeException("revealErrorPlace is set to revealDefaultPlace.  However revealDefaultPlace is causing an error which if left to continue will result in an infinite loop.");
-	}
+    revealDefaultPlace();
   }
 
   @Override
@@ -125,7 +116,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public final void revealPlaceHierarchy( List<PlaceRequest> placeRequestHierarchy ) {
-	errorPlaceAttempts = 0;
     if( !confirmLeaveState() )
       return;
     if( placeRequestHierarchy.size() == 0 )
@@ -138,7 +128,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   
   @Override
   public final void revealPlace( PlaceRequest request ) {
-	errorPlaceAttempts = 0;
     if( !confirmLeaveState() )
       return;
     placeHierarchy.clear();
@@ -339,27 +328,5 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   @Override
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);
-  }
-
-  @Override
-  public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type,
-      H handler) {
-    return eventBus.addHandler(type, handler);
-  }
-
-
-  @Override
-  public <H extends EventHandler> H getHandler( Type<H> type, int index ) {
-      return eventBus.getHandler(  type, index );
-  }
-
-  @Override
-  public int getHandlerCount( Type<?> type ) {
-      return eventBus.getHandlerCount( type );
-  }
-
-  @Override
-  public boolean isEventHandled( Type<?> e ) {
-      return eventBus.isEventHandled( e );
   }
 }

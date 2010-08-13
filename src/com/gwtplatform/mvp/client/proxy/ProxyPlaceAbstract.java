@@ -16,10 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -221,29 +218,8 @@ implements ProxyPlace<P> {
   }
 
   @Override
-  public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type,
-	  H handler) {
-	return eventBus.addHandler(type, handler);
-  }
-    
-  @Override
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);  	
-  }
-  
-  @Override
-  public <H extends EventHandler> H getHandler( Type<H> type, int index ) {
-    return eventBus.getHandler( type, index );
-  }
-  
-  @Override
-  public int getHandlerCount( Type<?> type ) {
-    return eventBus.getHandlerCount( type );
-  }
-  
-  @Override
-  public boolean isEventHandled( Type<?> e ) {
-    return eventBus.isEventHandled(e);
   }
 
 }

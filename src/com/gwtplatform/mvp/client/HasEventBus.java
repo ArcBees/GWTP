@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.client;
 
-import com.gwtplatform.mvp.client.HasEventBus;
-import com.gwtplatform.mvp.client.Presenter;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
- * The interface of a {@link Proxy} that is also a {@link Place}.
+ * Marker interface that tell that an object is bound to an {@link EventBus}.
  * 
- * @author Philippe Beaudoin
- *
- * @param <P> The type of the {@link Presenter} attached to this {@link Proxy}.
+ * @author Christian Goudreau
  */
-public interface ProxyPlace<P extends Presenter> extends Proxy<P>, Place, HasEventBus {
+public interface HasEventBus extends HasHandlers {
 }
