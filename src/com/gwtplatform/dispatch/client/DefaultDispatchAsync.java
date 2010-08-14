@@ -47,12 +47,12 @@ public class DefaultDispatchAsync implements DispatchAsync {
       this.baseUrl = entryPointUrl;
   }
 
-  public <A extends Action<R>, R extends Result> void execute(final A action, final AsyncCallback<R> callback) {
+  public <A extends Action<R>, R extends Result> DispatchRequest execute(final A action, final AsyncCallback<R> callback) {
     ((ServiceDefTarget) realService).setServiceEntryPoint(baseUrl + action.getServiceName());
 
     String securityCookie = securityCookieAccessor.getCookieContent();
-
-    realService.execute(securityCookie, action, new AsyncCallback<Result>() {
+    
+    return DispatchRequestFactory.createRequest(realService.execute(securityCookie, action, new AsyncCallback<Result>() {
       public void onFailure(Throwable caught) {
         DefaultDispatchAsync.this.onExecuteFailure(action, caught, callback);
       }
@@ -63,17 +63,17 @@ public class DefaultDispatchAsync implements DispatchAsync {
         // compiler issue
         DefaultDispatchAsync.this.onExecuteSuccess(action, (R) result, callback);
       }
-    });
+    }));
   }
 
   @Override
-  public <A extends Action<R>, R extends Result> void undo(final A action, final R result,
+  public <A extends Action<R>, R extends Result> DispatchRequest undo(final A action, final R result,
       final AsyncCallback<Void> callback) {
     ((ServiceDefTarget) realService).setServiceEntryPoint(baseUrl + action.getServiceName());
 
     String securityCookie = securityCookieAccessor.getCookieContent();
 
-    realService.undo(securityCookie, action, result, new AsyncCallback<Void>() {
+    return DispatchRequestFactory.createRequest(realService.undo(securityCookie, action, result, new AsyncCallback<Void>() {
       public void onFailure(Throwable caught) {
         DefaultDispatchAsync.this.onUndoFailure(action, caught, callback);
       }
@@ -81,7 +81,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
       public void onSuccess(Void voidResult) {
         DefaultDispatchAsync.this.onUndoSuccess(action, voidResult, callback);
       }
-    });
+    }));
   }
 
   protected <A extends Action<R>, R extends Result> void onExecuteSuccess(A action, R result, final AsyncCallback<R> callback) {

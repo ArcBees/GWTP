@@ -42,12 +42,12 @@ public interface DispatchServiceAsync {
    *
    * @see DispatchService#execute
    */
-  void execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
+  com.google.gwt.http.client.Request execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
 
   /**
    * This method is called client-side whenever a previous executed action need to be undone.
    *
    * @see DispatchService#undo
    */
-  void undo( String cookieSentByRPC, Action<?> action, Result result, AsyncCallback<Void> callback );
+  com.google.gwt.http.client.Request undo( String cookieSentByRPC, Action<?> action, Result result, AsyncCallback<Void> callback );
 }
