@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.client;
 
 /**
- * This interface provide a common base to give the ability to the client to
+ * This interface provides a common base to give the ability to the client to
  * cancel a request or see if a request is still pending.
  * 
  * @author Christian Goudreau
