@@ -185,6 +185,10 @@
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
   </module>
+  <module name="FileTabCharacter">
+    <property name="severity" value="error"/>
+    <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="no tabs"/>
+  </module>  
   <module name="RegexpSingleline">
     <property name="severity" value="error"/>
     <property name="format" value="  [/][/][A-z]"/>
