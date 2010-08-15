@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.client;
 import com.google.gwt.http.client.Request;
 
 /**
- * This is a common factory class that provide {@link DispatchRequest}.
+ * This is a common factory class that provides {@link DispatchRequest}.
  * 
  * @author Christian Goudreau
  */

@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.client;
 
+import com.google.gwt.http.client.Request;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.gwtplatform.dispatch.shared.Action;
@@ -42,12 +43,12 @@ public interface DispatchServiceAsync {
    *
    * @see DispatchService#execute
    */
-  com.google.gwt.http.client.Request execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
+  Request execute( String cookieSentByRPC, Action<?> action, AsyncCallback<Result> callback );
 
   /**
    * This method is called client-side whenever a previous executed action need to be undone.
    *
    * @see DispatchService#undo
    */
-  com.google.gwt.http.client.Request undo( String cookieSentByRPC, Action<?> action, Result result, AsyncCallback<Void> callback );
+  Request undo( String cookieSentByRPC, Action<?> action, Result result, AsyncCallback<Void> callback );
 }
