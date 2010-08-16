@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionhandlerr;
+package com.gwtplatform.dispatch.server.actionhandler;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.Action;

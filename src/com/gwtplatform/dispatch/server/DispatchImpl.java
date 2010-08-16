@@ -19,11 +19,11 @@ package com.gwtplatform.dispatch.server;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import com.gwtplatform.dispatch.server.actionhandlerr.ActionHandler;
-import com.gwtplatform.dispatch.server.actionhandlerr.ActionResult;
-import com.gwtplatform.dispatch.server.actionhandlervalidatorr.ActionHandlerValidatorInstance;
-import com.gwtplatform.dispatch.server.actionhandlervalidatorr.ActionHandlerValidatorRegistry;
-import com.gwtplatform.dispatch.server.actionvalidatorr.ActionValidator;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
+import com.gwtplatform.dispatch.server.actionhandler.ActionResult;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.Result;

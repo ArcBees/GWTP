@@ -14,15 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionhandlervalidatorr;
+package com.gwtplatform.dispatch.server.actionhandlervalidator;
 
 import com.google.inject.Binding;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
 
-import com.gwtplatform.dispatch.server.actionhandlerr.ActionHandler;
-import com.gwtplatform.dispatch.server.actionvalidatorr.ActionValidator;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 
 import java.util.List;
 
