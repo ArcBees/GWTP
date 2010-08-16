@@ -222,7 +222,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       }
     } catch (TokenFormatException e) {
       revealErrorPlace(historyToken);
-      NavigationEvent.fire(eventBus, null);
+      NavigationEvent.fire(this, null);
     }
   }
 
@@ -242,7 +242,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     else if (!requestEvent.isAuthorized())
       revealUnauthorizedPlace(tokenFormatter.toHistoryToken(placeHierarchy));
     this.errorReveal = false;
-    NavigationEvent.fire(eventBus, request);
+    NavigationEvent.fire(this, request);
   }
 
   @Override
