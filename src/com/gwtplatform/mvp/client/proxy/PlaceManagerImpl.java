@@ -235,8 +235,8 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       revealErrorPlace(tokenFormatter.toHistoryToken(placeHierarchy));
     else if (!requestEvent.isAuthorized())
       revealUnauthorizedPlace(tokenFormatter.toHistoryToken(placeHierarchy));
-    NavigationEvent.fire(eventBus, request);
     this.errorReveal = false;
+    NavigationEvent.fire(eventBus, request);
   }
 
   @Override
