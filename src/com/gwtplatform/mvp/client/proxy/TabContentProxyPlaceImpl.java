@@ -1,17 +1,17 @@
 /**
- * Copyright 2010 Gwt-Platform
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Copyright 2010 ArcBees Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.gwtplatform.mvp.client.proxy;
@@ -20,26 +20,23 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.Tab;
 
 /**
- * A useful mixing class to define a {@link TabContentProxy} that is also
- * a {@link Place}.
+ * A useful mixing class to define a {@link TabContentProxy} that is also a
+ * {@link Place}.
+ * 
+ * @param <P> {@link Presenter}'s type.
  * 
  * @author Philippe Beaudoin
  */
-public class TabContentProxyPlaceImpl<P extends Presenter> 
-extends ProxyPlaceAbstract<P, TabContentProxy<P>>
-implements TabContentProxyPlace<P> {
+public class TabContentProxyPlaceImpl<P extends Presenter> extends
+    ProxyPlaceAbstract<P, TabContentProxy<P>> implements
+    TabContentProxyPlace<P> {
 
   public TabContentProxyPlaceImpl() {
   }
-  
-  @Override
-  public float getPriority() {
-    return proxy.getPriority();
-  }
 
   @Override
-  public Tab getTab() {
-    return proxy.getTab();
+  public String getHistoryToken() {
+    return getNameToken();
   }
 
   @Override
@@ -48,8 +45,13 @@ implements TabContentProxyPlace<P> {
   }
 
   @Override
-  public String getHistoryToken() {
-    return getNameToken();
+  public float getPriority() {
+    return proxy.getPriority();
+  }
+
+  @Override
+  public Tab getTab() {
+    return proxy.getTab();
   }
 
 }

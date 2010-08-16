@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 ArcBees.Inc
+ * Copyright 2010 ArcBees Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,7 @@ package com.gwtplatform.dispatch.client;
  * @author Christian Goudreau
  */
 public interface DispatchRequest {
-  public boolean isPending();
+  void cancel();
 
-  public void cancel();
+  boolean isPending();
 }
