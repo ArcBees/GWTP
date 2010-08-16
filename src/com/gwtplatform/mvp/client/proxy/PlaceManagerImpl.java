@@ -46,7 +46,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
   
-  private int errorPlaceAttempts = 0;
+  private boolean errorReveal = false;
 
   public PlaceManagerImpl( EventBus eventBus, TokenFormatter tokenFormatter ) {
     this.eventBus = eventBus;
@@ -93,12 +93,12 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
-	errorPlaceAttempts++;
-	if(errorPlaceAttempts<=1){  
-		revealDefaultPlace();
-	}else{
-		throw new RuntimeException("revealErrorPlace is set to revealDefaultPlace.  However revealDefaultPlace is causing an error which if left to continue will result in an infinite loop.");
-	}
+    if (this.errorReveal == false) {
+      this.errorReveal = true;
+      revealDefaultPlace();
+    }else{
+      throw new RuntimeException("revealErrorPlace is set to revealDefaultPlace.  However revealDefaultPlace is causing an error which if left to continue will result in an infinite loop.");
+    }
   }
 
   @Override
@@ -122,7 +122,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
   @Override
   public final void revealPlaceHierarchy( List<PlaceRequest> placeRequestHierarchy ) {
-	errorPlaceAttempts = 0;
     if( !confirmLeaveState() )
       return;
     if( placeRequestHierarchy.size() == 0 )
@@ -135,7 +134,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
   
   @Override
   public final void revealPlace( PlaceRequest request ) {
-	errorPlaceAttempts = 0;
     if( !confirmLeaveState() )
       return;
     placeHierarchy.clear();
@@ -228,6 +226,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     else if( !requestEvent.isAuthorized() )
         revealUnauthorizedPlace( tokenFormatter.toHistoryToken( placeHierarchy ) );
     NavigationEvent.fire( eventBus, request );    
+    this.errorReveal = false;
   }
 
   @Override
