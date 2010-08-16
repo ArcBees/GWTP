@@ -19,11 +19,11 @@ package com.gwtplatform.dispatch.server.guice;
 import com.google.inject.AbstractModule;
 import com.google.inject.internal.UniqueAnnotations;
 
-import com.gwtplatform.dispatch.server.actionhandlerr.ActionHandler;
-import com.gwtplatform.dispatch.server.actionhandlervalidatorr.ActionHandlerValidatorClass;
-import com.gwtplatform.dispatch.server.actionhandlervalidatorr.ActionHandlerValidatorMap;
-import com.gwtplatform.dispatch.server.actionvalidatorr.ActionValidator;
-import com.gwtplatform.dispatch.server.actionvalidatorr.DefaultActionValidator;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
+import com.gwtplatform.dispatch.server.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 

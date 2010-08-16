@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionhandlervalidatorr;
+package com.gwtplatform.dispatch.server.actionhandlervalidator;
 
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
