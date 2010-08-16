@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 ArcBees.Inc
+ * Copyright 2010 ArcBees Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,10 +24,6 @@ import com.google.gwt.http.client.Request;
  * @author Christian Goudreau
  */
 public class DispatchRequestFactory {
-  public static DispatchRequest createRequest(Request request) {
-    return new RequestImpl(request);
-  }
-
   private static class RequestImpl implements DispatchRequest {
     Request request;
 
@@ -44,5 +40,9 @@ public class DispatchRequestFactory {
     public boolean isPending() {
       return request.isPending();
     }
+  }
+
+  public static DispatchRequest createRequest(Request request) {
+    return new RequestImpl(request);
   }
 }
