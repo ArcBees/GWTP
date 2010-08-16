@@ -3,6 +3,8 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
@@ -49,10 +51,25 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
   @Override
   public void center() {
+      doCenter();
+      // We center again in a deferred command to solve a bug in IE where newly
+      // created window are sometimes not centered.
+      DeferredCommand.addCommand( new Command() {
+        @Override
+        public void execute( ) {
+            doCenter();
+        }
+      } );
+  }
+  
+  /**
+   * This method centers the popup panel, temporarily making it visible if needed.
+   */
+  private void doCenter() {
     boolean wasVisible = asPopupPanel().isVisible();
     asPopupPanel().center();
     if( !wasVisible )
-      asPopupPanel().hide();
+      asPopupPanel().hide();      
   }
 
   @Override

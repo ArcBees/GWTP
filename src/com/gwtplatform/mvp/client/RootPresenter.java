@@ -16,8 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -104,25 +104,25 @@ public final class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootV
   protected void onBind() {
     super.onBind();
 
-    registerHandler( eventBus.addHandler( RevealRootContentEvent.getType(), new RevealRootContentHandler(){
+    addRegisteredHandler( RevealRootContentEvent.getType(), new RevealRootContentHandler(){
       @Override
       public void onRevealContent(final RevealRootContentEvent revealContentEvent) {
         activePresenter = (PresenterWidgetImpl<?>)revealContentEvent.getContent();
         getView().setUsingRootLayoutPanel(false);
         setContent( rootSlot, activePresenter );
       }
-    } ) );    
+    } );    
 
-    registerHandler( eventBus.addHandler( RevealRootLayoutContentEvent.getType(), new RevealRootLayoutContentHandler(){
+    addRegisteredHandler( RevealRootLayoutContentEvent.getType(), new RevealRootLayoutContentHandler(){
       @Override
       public void onRevealContent(final RevealRootLayoutContentEvent revealContentEvent) {
         activePresenter = (PresenterWidgetImpl<?>)revealContentEvent.getContent();
         getView().setUsingRootLayoutPanel(true);
         setContent( rootSlot, activePresenter );
       }
-    } ) );  
+    } );  
 
-    registerHandler( eventBus.addHandler( ResetPresentersEvent.getType(), this ) );    
+    addRegisteredHandler( ResetPresentersEvent.getType(), this );    
 
   }
 
@@ -134,4 +134,5 @@ public final class RootPresenter extends PresenterWidgetImpl<RootPresenter.RootV
       isResetting = false;
     }
   }
+
 }

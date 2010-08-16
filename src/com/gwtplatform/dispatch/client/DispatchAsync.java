@@ -40,6 +40,6 @@ import com.gwtplatform.dispatch.shared.Result;
  * @author Philippe Beaudoin
  */
 public interface DispatchAsync {
-    <A extends Action<R>, R extends Result> void execute( A action, AsyncCallback<R> callback );
-    <A extends Action<R>, R extends Result> void undo( A action, R result, AsyncCallback<Void> callback );
+    <A extends Action<R>, R extends Result> DispatchRequest execute( A action, AsyncCallback<R> callback );
+    <A extends Action<R>, R extends Result> DispatchRequest undo( A action, R result, AsyncCallback<Void> callback );
 }
