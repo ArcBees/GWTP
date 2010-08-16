@@ -1,25 +1,24 @@
 /**
- * Copyright 2010 Gwt-Platform
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Copyright 2010 ArcBees Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.gwtplatform.dispatch.server;
 
-import java.util.List;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
 import com.gwtplatform.dispatch.server.actionHandler.ActionHandler;
 import com.gwtplatform.dispatch.server.actionHandler.ActionResult;
 import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorInstance;
@@ -31,12 +30,16 @@ import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.ServiceException;
 import com.gwtplatform.dispatch.shared.UnsupportedActionException;
 
+import java.util.List;
+
 /**
- * This is the server-side implementation of the {@link Dispatch} service with an arbitrary action type, for
- * which the client-side async service is {@link com.gwtplatform.dispatch.client.DispatchAsync}.
+ * This is the server-side implementation of the {@link Dispatch} service with
+ * an arbitrary action type, for which the client-side async service is
+ * {@link com.gwtplatform.dispatch.client.DispatchAsync}.
  * <p />
- * This class is closely related to {@link DispatchServiceImpl}. In fact, this class wouldn't
- * be needed, but we use it to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.client.DispatchAsync}.
+ * This class is closely related to {@link DispatchServiceImpl}. In fact, this
+ * class wouldn't be needed, but we use it to workaround a GWT limitation
+ * described in {@link com.gwtplatform.dispatch.client.DispatchAsync}.
  * 
  * @see com.gwtplatform.dispatch.client.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
@@ -50,11 +53,9 @@ import com.gwtplatform.dispatch.shared.UnsupportedActionException;
  */
 @Singleton
 public class DispatchImpl implements Dispatch {
-  private final static String actionValidatorMessage = " couldn't allow access to action : ";
-  
   private static class DefaultExecutionContext implements ExecutionContext {
-    private final DispatchImpl dispatch;
     private final List<ActionResult<?, ?>> actionResults;
+    private final DispatchImpl dispatch;
 
     private DefaultExecutionContext(DispatchImpl dispatch) {
       this.dispatch = dispatch;
@@ -63,7 +64,7 @@ public class DispatchImpl implements Dispatch {
 
     @Override
     public <A extends Action<R>, R extends Result> R execute(A action)
-    throws ActionException, ServiceException {
+        throws ActionException, ServiceException {
       R result = dispatch.doExecute(action, this);
       actionResults.add(new ActionResult<A, R>(action, result, true));
       return result;
@@ -71,7 +72,7 @@ public class DispatchImpl implements Dispatch {
 
     @Override
     public <A extends Action<R>, R extends Result> void undo(A action, R result)
-    throws ActionException, ServiceException {
+        throws ActionException, ServiceException {
       dispatch.doExecute(action, this);
       actionResults.add(new ActionResult<A, R>(action, result, false));
     }
@@ -79,10 +80,10 @@ public class DispatchImpl implements Dispatch {
     /**
      * Rolls back all logged executed actions.
      * 
-     * @throws ActionException
-     *           If there is an action exception while rolling back.
-     * @throws ServiceException
-     *           If there is a low level problem while rolling back.
+     * @throws ActionException If there is an action exception while rolling
+     *           back.
+     * @throws ServiceException If there is a low level problem while rolling
+     *           back.
      */
     private void rollback() throws ActionException, ServiceException {
       DefaultExecutionContext ctx = new DefaultExecutionContext(dispatch);
@@ -94,14 +95,16 @@ public class DispatchImpl implements Dispatch {
 
     private <A extends Action<R>, R extends Result> void rollback(
         ActionResult<A, R> actionResult, ExecutionContext ctx)
-    throws ActionException, ServiceException {
-      if (actionResult.isExecuted())
-        dispatch
-        .doUndo(actionResult.getAction(), actionResult.getResult(), ctx);
-      else
+        throws ActionException, ServiceException {
+      if (actionResult.isExecuted()) {
+        dispatch.doUndo(actionResult.getAction(), actionResult.getResult(), ctx);
+      } else {
         dispatch.doExecute(actionResult.getAction(), ctx);
+      }
     }
-  };
+  }
+
+  private static final String actionValidatorMessage = " couldn't allow access to action : ";;
 
   private final ActionHandlerValidatorRegistry actionHandlerValidatorRegistry;
 
@@ -112,7 +115,7 @@ public class DispatchImpl implements Dispatch {
 
   @Override
   public <A extends Action<R>, R extends Result> R execute(A action)
-  throws ActionException, ServiceException {
+      throws ActionException, ServiceException {
     DefaultExecutionContext ctx = new DefaultExecutionContext(this);
     try {
       return doExecute(action, ctx);
@@ -127,7 +130,7 @@ public class DispatchImpl implements Dispatch {
 
   @Override
   public <A extends Action<R>, R extends Result> void undo(A action, R result)
-  throws ActionException, ServiceException {
+      throws ActionException, ServiceException {
     DefaultExecutionContext ctx = new DefaultExecutionContext(this);
     try {
       doUndo(action, result, ctx);
@@ -144,14 +147,10 @@ public class DispatchImpl implements Dispatch {
    * Every single action will be executed by this function and validated by the
    * {@link ActionValidator}.
    * 
-   * @param <A>
-   *          Type of associated {@link Action} type.
-   * @param <R>
-   *          Type of associated {@link Result} type.
-   * @param action
-   *          The {@link Action} to execute
-   * @param ctx
-   *          The {@link ExecutionContext} associated with the {@link Action}
+   * @param <A> Type of associated {@link Action} type.
+   * @param <R> Type of associated {@link Result} type.
+   * @param action The {@link Action} to execute
+   * @param ctx The {@link ExecutionContext} associated with the {@link Action}
    * @return The {@link Result} to the client
    * @throws ActionException
    * @throws ServiceException
@@ -163,15 +162,18 @@ public class DispatchImpl implements Dispatch {
     ActionValidator actionValidator = findActionValidator(action);
 
     try {
-      if (actionValidator.isValid(action))
+      if (actionValidator.isValid(action)) {
         return handler.execute(action, ctx);
-      else
-        throw new ServiceException( actionValidator.getClass().getName() + actionValidatorMessage + action.getClass().getName() );
+      } else {
+        throw new ServiceException(actionValidator.getClass().getName()
+            + actionValidatorMessage + action.getClass().getName());
+      }
     } catch (ActionException e) {
       throw e;
-    } catch( Exception e ) {
-      String newMessage = "Service exception executing action \"" + action.getClass().getSimpleName() + "\", " + e.toString( );
-      ServiceException rethrown = new ServiceException( newMessage ); 
+    } catch (Exception e) {
+      String newMessage = "Service exception executing action \""
+          + action.getClass().getSimpleName() + "\", " + e.toString();
+      ServiceException rethrown = new ServiceException(newMessage);
       rethrown.initCause(e);
       throw rethrown;
     }
@@ -184,10 +186,12 @@ public class DispatchImpl implements Dispatch {
 
     ActionHandler<A, R> handler = findHandler(action);
     try {
-      if (actionValidator.isValid(action))
+      if (actionValidator.isValid(action)) {
         handler.undo(action, result, ctx);
-      else
-        throw new ServiceException( actionValidator.getClass().getName() + actionValidatorMessage + action.getClass().getName() );
+      } else {
+        throw new ServiceException(actionValidator.getClass().getName()
+            + actionValidatorMessage + action.getClass().getName());
+      }
     } catch (ActionException e) {
       throw e;
     } catch (Exception cause) {
@@ -195,25 +199,25 @@ public class DispatchImpl implements Dispatch {
     }
   }
 
-  @SuppressWarnings("unchecked")
-  private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(
-      A action) throws UnsupportedActionException {
-    ActionHandlerValidatorInstance handlerValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action);
-    
-    if (handlerValidator == null) {
-      throw new UnsupportedActionException(action);
-    } 
-    
-    return (ActionHandler<A, R>) handlerValidator.getActionHandler();
-  }
-
   private <A extends Action<R>, R extends Result> ActionValidator findActionValidator(
       A action) throws UnsupportedActionException {
     ActionHandlerValidatorInstance handlerValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action);
     if (handlerValidator == null) {
       throw new UnsupportedActionException(action);
-    } 
-      
+    }
+
     return handlerValidator.getActionValidator();
+  }
+
+  @SuppressWarnings("unchecked")
+  private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(
+      A action) throws UnsupportedActionException {
+    ActionHandlerValidatorInstance handlerValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action);
+
+    if (handlerValidator == null) {
+      throw new UnsupportedActionException(action);
+    }
+
+    return (ActionHandler<A, R>) handlerValidator.getActionHandler();
   }
 }
