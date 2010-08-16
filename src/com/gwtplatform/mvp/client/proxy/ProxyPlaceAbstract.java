@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -36,11 +37,19 @@ import com.gwtplatform.mvp.client.PresenterImpl;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
+@SuppressWarnings("deprecation") // TODO: Remove after making members private
 public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 implements ProxyPlace<P> {
 
   protected ProxyFailureHandler failureHandler;
-  protected EventBus eventBus;
+  
+  /**
+   * The {@link EventBus} for the application.
+   * 
+   * Deprecated to use directly, use {@link #getEventBus()} instead.
+   */
+  @Deprecated
+  protected EventBus eventBus; // TODO: Make private.
   protected PlaceManager placeManager;
   protected Proxy_ proxy;
   protected Place place;
@@ -209,12 +218,22 @@ implements ProxyPlace<P> {
             if( !presenter.isVisible() )
               presenterImpl.forceReveal();  // This will trigger a reset in due time
             else
-              ResetPresentersEvent.fire( eventBus ); // We have to do the reset ourselves                
+              ResetPresentersEvent.fire( ProxyPlaceAbstract.this ); // We have to do the reset ourselves                
           } } );
       }
     } );
 
   }
 
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    eventBus.fireEvent(event);  	
+  }
+
+  @Override
+  public final EventBus getEventBus() {
+    return eventBus;
+  }
+  
 }
 

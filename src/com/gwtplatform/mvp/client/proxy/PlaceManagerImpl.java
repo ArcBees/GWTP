@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -36,7 +37,13 @@ import com.gwtplatform.mvp.client.EventBus;
 public abstract class PlaceManagerImpl implements PlaceManager,
     ValueChangeHandler<String>, ClosingHandler {
 
-  private final EventBus eventBus;
+  /**
+   * The {@link EventBus} for the application.
+   * 
+   * Deprecated to use directly, use {@link #getEventBus()} instead.
+   */
+  @Deprecated
+  protected final EventBus eventBus; // TODO: Make private.
   private final TokenFormatter tokenFormatter;
 
   private String onLeaveQuestion = null;
@@ -48,7 +55,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
   private boolean errorReveal = false;
-
   public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
     this.eventBus = eventBus;
     this.tokenFormatter = tokenFormatter;
@@ -230,7 +236,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private final void doRevealPlace(PlaceRequest request) {
     PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent(
         request);
-    eventBus.fireEvent(requestEvent);
+    fireEvent(requestEvent);
     if (!requestEvent.isHandled())
       revealErrorPlace(tokenFormatter.toHistoryToken(placeHierarchy));
     else if (!requestEvent.isAuthorized())
@@ -285,7 +291,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       // User has confirmed, don't ask any more question.
       setOnLeaveConfirmation(null);
     } else {
-      NavigationRefusedEvent.fire(eventBus);
+      NavigationRefusedEvent.fire( this );
       History.newItem(currentHistoryToken, false);
     }
     return confirmed;
@@ -339,9 +345,19 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       throws IndexOutOfBoundsException {
     GetPlaceTitleEvent event = new GetPlaceTitleEvent(
         placeHierarchy.get(index), handler);
-    eventBus.fireEvent(event);
+    fireEvent( event );
     // If nobody took care of the title, indicate it's null
     if (!event.isHandled())
       handler.onSetPlaceTitle(null);
+  }
+
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    eventBus.fireEvent(event);
+  }
+
+  @Override
+  public EventBus getEventBus() {
+    return eventBus;
   }
 }
