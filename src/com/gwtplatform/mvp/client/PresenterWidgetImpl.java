@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -30,13 +31,18 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
+@SuppressWarnings("deprecation") // TODO: Remove after making members private
 public abstract class PresenterWidgetImpl<V extends View>
 extends HandlerContainerImpl implements PresenterWidget {
-
+  boolean visible = false;
+  
   /**
    * The {@link EventBus} for the application.
+   * 
+   * Deprecated to use directly, use {@link #getEventBus()} instead.
    */
-  protected final EventBus eventBus;
+  @Deprecated
+  protected final EventBus eventBus; // TODO: Make private.
 
   /**
    * This map makes it possible to keep a list of all the active children
@@ -49,11 +55,12 @@ extends HandlerContainerImpl implements PresenterWidget {
   private final List<PresenterWidgetImpl<? extends PopupView>> popupChildren = 
     new ArrayList<PresenterWidgetImpl<? extends PopupView>>();
 
-  protected boolean visible = false;
-
   /**
    * The view for the presenter.
+   * 
+   * Deprecated to use directly, use {@link #getView()} instead.
    */
+  @Deprecated
   protected final V view;
 
   /**
@@ -164,12 +171,13 @@ extends HandlerContainerImpl implements PresenterWidget {
         return;
     }
 
-    PopupView popupView = contentImpl.getView();
+    final PopupView popupView = contentImpl.getView();
     popupChildren.add( contentImpl );
 
     // Center if desired
-    if( center )
+    if( center ) {
       popupView.center();
+    }
 
     // Display the popup content
     if( isVisible() ) {
@@ -179,7 +187,6 @@ extends HandlerContainerImpl implements PresenterWidget {
       monitorCloseEvent( contentImpl );
       contentImpl.notifyReveal();
     }
-
   }
 
   /**
@@ -271,7 +278,7 @@ extends HandlerContainerImpl implements PresenterWidget {
       contentImpl.notifyReveal();
       if( performReset ) {
         // And to reset everything if needed
-        ResetPresentersEvent.fire( eventBus );
+        ResetPresentersEvent.fire( this );
       }
     }
   }
@@ -467,7 +474,7 @@ extends HandlerContainerImpl implements PresenterWidget {
    */
   protected final <H extends EventHandler> void addRegisteredHandler(Type<H> type,
       H handler) {
-    registerHandler(eventBus.addHandler(type, handler));
+    registerHandler(getEventBus().addHandler(type, handler));
   }
   
 
@@ -499,5 +506,14 @@ extends HandlerContainerImpl implements PresenterWidget {
       currentParentPresenter.detach( this );
     currentParentPresenter = newParent;
   }
-  
+
+  @Override
+  public final EventBus getEventBus() {
+    return eventBus;
+  }
+
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    getEventBus().fireEvent(event);
+  }  
 }
