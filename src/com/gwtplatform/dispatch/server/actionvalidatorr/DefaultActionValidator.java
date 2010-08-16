@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionValidator;
+package com.gwtplatform.dispatch.server.actionvalidatorr;
 
 import com.google.inject.Singleton;
 
