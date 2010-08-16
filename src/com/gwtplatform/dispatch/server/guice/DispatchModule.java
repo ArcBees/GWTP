@@ -1,32 +1,30 @@
 /**
- * Copyright 2010 Gwt-Platform
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Copyright 2010 ArcBees Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.gwtplatform.dispatch.server.guice;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Injector;
 import com.google.inject.Singleton;
+
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.DispatchImpl;
-import com.gwtplatform.dispatch.server.actionHandler.ActionHandler;
 import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorLinker;
 import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistryImpl;
-import com.gwtplatform.dispatch.server.actionValidator.ActionValidator;
 
 /**
  * This module will configure the implementation for the {@link Dispatch} and
@@ -54,24 +52,16 @@ public class DispatchModule extends AbstractModule {
     this(dispatchClass, LazyActionHandlerValidatorRegistryImpl.class);
   }
 
-  public DispatchModule(Class<? extends Dispatch> dispatchClass, Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
+  public DispatchModule(
+      Class<? extends Dispatch> dispatchClass,
+      Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
     this.dispatchClass = dispatchClass;
     this.lazyActionHandlerValidatorRegistryClass = lazyActionHandlerValidatorRegistryClass;
   }
 
-  @Override
-  protected final void configure() {
-    bind(ActionHandlerValidatorRegistry.class).to(lazyActionHandlerValidatorRegistryClass).in(Singleton.class);
-    bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
-
-    // This will bind registered validators and handlers to the registry lazily.
-    if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass))
-      requestStaticInjection(ActionHandlerValidatorLinker.class);
-  }
-
   /**
-   * Override so that only one instance of this class will ever be installed
-   * in an {@link Injector}.
+   * Override so that only one instance of this class will ever be installed in
+   * an {@link Injector}.
    */
   @Override
   public boolean equals(Object obj) {
@@ -79,12 +69,24 @@ public class DispatchModule extends AbstractModule {
   }
 
   /**
-   * Override so that only one instance of this class will ever be installed
-   * in an {@link Injector}.
+   * Override so that only one instance of this class will ever be installed in
+   * an {@link Injector}.
    */
   @Override
   public int hashCode() {
     return DispatchModule.class.hashCode();
+  }
+
+  @Override
+  protected final void configure() {
+    bind(ActionHandlerValidatorRegistry.class).to(
+        lazyActionHandlerValidatorRegistryClass).in(Singleton.class);
+    bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
+
+    // This will bind registered validators and handlers to the registry lazily.
+    if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass)) {
+      requestStaticInjection(ActionHandlerValidatorLinker.class);
+    }
   }
 
 }

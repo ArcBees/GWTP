@@ -1,6 +1,25 @@
+/**
+ * Copyright 2010 ArcBees Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package com.gwtplatform.testing;
 
-import java.lang.reflect.InvocationTargetException;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -9,45 +28,48 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.mockito.internal.runners.util.FrameworkUsageValidator;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
+import java.lang.reflect.InvocationTargetException;
 
 /**
- * This class implements the mockito runner but allows Guice dependency injection.
- * To setup the guice environment, the test class can have an inner static class 
- * deriving from {@link AbstractModule} or, more commonly, from {@link TestModule}. 
- * This last class will let you bind {@link TestSingletonMockProvider} and the runner will make sure
- * these singletons are reset at every invocation of a test case.
+ * This class implements the mockito runner but allows Guice dependency
+ * injection. To setup the guice environment, the test class can have an inner
+ * static class deriving from {@link AbstractModule} or, more commonly, from
+ * {@link TestModule}. This last class will let you bind
+ * {@link TestSingletonMockProvider} and the runner will make sure these
+ * singletons are reset at every invocation of a test case.
  * <p />
- * This code not very clean as it is cut & paste from {@link org.mockito.internal.runners.JUnit45AndHigherRunnerImpl},
- * but it's unclear how we could make otherwise.
+ * This code not very clean as it is cut & paste from
+ * {@link org.mockito.internal.runners.JUnit45AndHigherRunnerImpl}, but it's
+ * unclear how we could make otherwise.
  * <p />
- * Most of the code here is inspired from:
- * <a href="http://cowwoc.blogspot.com/2008/10/integrating-google-guice-into-junit4.html">
- * http://cowwoc.blogspot.com/2008/10/integrating-google-guice-into-junit4.html</a>
+ * Most of the code here is inspired from: <a href=
+ * "http://cowwoc.blogspot.com/2008/10/integrating-google-guice-into-junit4.html"
+ * > http://cowwoc.blogspot.com/2008/10/integrating-google-guice-into-junit4.
+ * html</a>
  * <p />
  * 
  * @author Philippe Beaudoin
  */
-public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner  {
+public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
 
   private final Injector injector;
 
-  public GuiceMockitoJUnitRunner(Class<?> klass) throws InitializationError, InvocationTargetException, InstantiationException, IllegalAccessException {
+  public GuiceMockitoJUnitRunner(Class<?> klass) throws InitializationError,
+      InvocationTargetException, InstantiationException, IllegalAccessException {
     super(klass);
-    Injector injector = null;
-    for( Class<?> subclass : klass.getClasses() ) {
-      if( AbstractModule.class.isAssignableFrom(subclass) ) {
-        assert injector == null : "More than one AbstractModule inner class found within test class \"" + klass.getName() + "\".";
-        injector = Guice.createInjector( (Module)subclass.newInstance() );
+    Injector inj = null;
+    for (Class<?> subclass : klass.getClasses()) {
+      if (AbstractModule.class.isAssignableFrom(subclass)) {
+        assert inj == null : "More than one AbstractModule inner class found within test class \""
+            + klass.getName() + "\".";
+        inj = Guice.createInjector((Module) subclass.newInstance());
       }
     }
-    if( injector == null )
-      injector = Guice.createInjector(); 
+    if (inj == null) {
+      inj = Guice.createInjector();
+    }
 
-    this.injector = injector;
+    injector = inj;
   }
 
   @Override
@@ -56,17 +78,10 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner  {
     notifier.addListener(new FrameworkUsageValidator(notifier));
     super.run(notifier);
   }
-  
-  @Override
-  protected Statement withBefores(FrameworkMethod method,
-      Object target,
-      Statement statement) {
-    TestScope.clear();
-    return super.withBefores(method, target, statement);
-  }
+
   @Override
   protected Object createTest() throws Exception {
-    return injector.getInstance(getTestClass().getJavaClass()); 
+    return injector.getInstance(getTestClass().getJavaClass());
   }
 
   /**
@@ -76,5 +91,13 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner  {
    */
   protected Injector getInjector() {
     return injector;
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  protected Statement withBefores(FrameworkMethod method, Object target,
+      Statement statement) {
+    TestScope.clear();
+    return super.withBefores(method, target, statement);
   }
 }
