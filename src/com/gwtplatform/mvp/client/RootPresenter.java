@@ -20,13 +20,15 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersHandler;
+import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler;
+import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
+import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
 
 /**
  * This is the presenter for the top-level of the application. It is derived
@@ -90,8 +92,6 @@ public final class RootPresenter extends
 
   private static final Object rootSlot = new Object();
 
-  private PresenterWidget<?> activePresenter = null;
-
   private boolean isResetting = false;
 
   /**
@@ -107,9 +107,9 @@ public final class RootPresenter extends
 
   @Override
   public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
-    if (!isResetting && activePresenter != null) {
+    if (!isResetting) {
       isResetting = true;
-      activePresenter.reset();
+      reset();
       isResetting = false;
     }
   }
@@ -123,9 +123,8 @@ public final class RootPresenter extends
           @Override
           public void onRevealContent(
               final RevealRootContentEvent revealContentEvent) {
-            activePresenter = revealContentEvent.getContent();
             getView().setUsingRootLayoutPanel(false);
-            setContent(rootSlot, activePresenter);
+            setContent(rootSlot, revealContentEvent.getContent());
           }
         });
 
@@ -134,9 +133,17 @@ public final class RootPresenter extends
           @Override
           public void onRevealContent(
               final RevealRootLayoutContentEvent revealContentEvent) {
-            activePresenter = revealContentEvent.getContent();
             getView().setUsingRootLayoutPanel(true);
-            setContent(rootSlot, activePresenter);
+            setContent(rootSlot, revealContentEvent.getContent());
+          }
+        });
+
+    addRegisteredHandler(RevealRootPopupContentEvent.getType(),
+        new RevealRootPopupContentHandler() {
+          @Override
+          public void onRevealContent(
+              final RevealRootPopupContentEvent revealContentEvent) {
+            addPopupContent(revealContentEvent.getContent());
           }
         });
 
