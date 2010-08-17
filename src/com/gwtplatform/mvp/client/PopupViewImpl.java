@@ -135,7 +135,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
    * needed.
    */
   private void doCenter() {
-    boolean wasVisible = asPopupPanel().isVisible();
+    boolean wasVisible = asPopupPanel().isShowing();
     asPopupPanel().center();
     if (!wasVisible) {
       asPopupPanel().hide();
