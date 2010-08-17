@@ -26,7 +26,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * @author Philippe Beaudoin
  */
 public abstract class PresenterImpl<V extends View, Proxy_ extends Proxy<?>>
-    extends PresenterWidgetImpl<V> implements Presenter {
+    extends PresenterWidgetImpl<V> implements Presenter<V> {
 
   /**
    * The light-weight {@PresenterProxy} around this presenter.
@@ -45,16 +45,7 @@ public abstract class PresenterImpl<V extends View, Proxy_ extends Proxy<?>>
     this.proxy = proxy;
   }
 
-  /**
-   * <b>Important:</b> This method is only meant to be used internally by GWTP.
-   * If you wish to reveal a presenter, call
-   * {@link PlaceManager#revealPlace(PlaceRequest)} or a related method. This
-   * will ensure you don't inadvertently reveal a non-leaf presenter. Also, you
-   * will benefit from the change confirmation mechanism. (See
-   * {@link PlaceManager#setOnLeaveConfirmation(String)}).
-   * <p />
-   * Forces the presenter to reveal itself on screen.
-   */
+  @Override
   public final void forceReveal() {
     if (isVisible()) {
       return;
@@ -67,40 +58,12 @@ public abstract class PresenterImpl<V extends View, Proxy_ extends Proxy<?>>
     return proxy;
   }
 
-  /**
-   * This method is called when a {@link Presenter} should prepare itself based
-   * on a {@link PlaceRequest}. The presenter should extract any parameters it
-   * needs from the request. A presenter should override this method if it
-   * handles custom parameters, but it should call the parent's
-   * {@code prepareFromRequest} method.
-   * 
-   * @param request The request.
-   */
+  @Override
   public void prepareFromRequest(PlaceRequest request) {
     // By default, no parameter to extract from request.
   }
 
-  /**
-   * This method is called when creating a {@link PlaceRequest} for this
-   * {@link Presenter}. The presenter should add all the required parameters to
-   * the request.
-   * <p/>
-   * <p/>
-   * If nothing is to be done, simply return the {@code request} unchanged.
-   * Otherwise, call {@link PlaceRequest#with(String, String)} to add
-   * parameters. Eg:
-   * <p/>
-   * 
-   * <pre>
-   * return request.with( &quot;id&quot;, getId() );
-   * </pre>
-   * <p/>
-   * A presenter should override this method if it handles custom parameters,
-   * but it should call the parent's {@code prepareRequest} method.
-   * 
-   * @param request The current request.
-   * @return The prepared place request.
-   */
+  @Override
   public PlaceRequest prepareRequest(PlaceRequest request) {
     // By default, no parameter to add to request
     return request;

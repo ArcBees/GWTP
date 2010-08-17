@@ -27,6 +27,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * @author David Peterson
  * @author Philippe Beaudoin
  */
-public class ProxyPlaceImpl<P extends Presenter> extends
+public class ProxyPlaceImpl<P extends Presenter<?>> extends
     ProxyPlaceAbstract<P, Proxy<P>> {
 }

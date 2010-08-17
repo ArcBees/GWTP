@@ -48,7 +48,6 @@ public interface Place {
   /**
    * Places are equal if their name token matches.
    * 
-   * @param The other {@link Place} to compare with.
    * @return <code>true</code> if the places name token matches,
    *         <code>false</code> otherwise.
    */

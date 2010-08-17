@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * 
  * @author Philippe Beaudoin
  */
-public class ProxyImpl<P extends Presenter> implements Proxy<P> {
+public class ProxyImpl<P extends Presenter<?>> implements Proxy<P> {
 
   protected ProxyFailureHandler failureHandler;
   protected IndirectProvider<P> presenter;
@@ -45,16 +45,16 @@ public class ProxyImpl<P extends Presenter> implements Proxy<P> {
 
   @SuppressWarnings("unchecked")
   @Override
-  public void getRawPresenter(AsyncCallback<Presenter> callback) {
+  public void getRawPresenter(AsyncCallback<Presenter<?>> callback) {
     presenter.get((AsyncCallback<P>) callback);
   }
 
   @Override
-  public void onPresenterChanged(Presenter presenter) {
+  public void onPresenterChanged(Presenter<?> presenter) {
   }
 
   @Override
-  public void onPresenterRevealed(Presenter presenter) {
+  public void onPresenterRevealed(Presenter<?> presenter) {
   }
 
   /**
