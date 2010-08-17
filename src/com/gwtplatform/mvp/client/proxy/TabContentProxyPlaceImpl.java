@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.Tab;
  * 
  * @author Philippe Beaudoin
  */
-public class TabContentProxyPlaceImpl<P extends Presenter> extends
+public class TabContentProxyPlaceImpl<P extends Presenter<?>> extends
     ProxyPlaceAbstract<P, TabContentProxy<P>> implements
     TabContentProxyPlace<P> {
 

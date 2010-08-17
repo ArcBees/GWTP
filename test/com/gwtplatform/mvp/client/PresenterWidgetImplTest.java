@@ -64,13 +64,13 @@ public class PresenterWidgetImplTest {
     }
   }
 
-  static class PopupPresenterWidgetB extends PresenterWidgetSpy<PopupViewB> {
+  static class PopupPresenterWidgetB extends PresenterWidgetSpy<PopupViewB> implements PopupPresenter<PopupViewB> {
     @Inject
     public PopupPresenterWidgetB(EventBus eventBus, PopupViewB view) {
       super(eventBus, view);
     }
   }
-  static class PopupPresenterWidgetC extends PresenterWidgetSpy<PopupViewC> {
+  static class PopupPresenterWidgetC extends PresenterWidgetSpy<PopupViewC> implements PopupPresenter<PopupViewC> {
     @Inject
     public PopupPresenterWidgetC(EventBus eventBus, PopupViewC view) {
       super(eventBus, view);

@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -56,9 +58,11 @@ import com.google.gwt.user.client.ui.Widget;
  * (top down: first the parent, then the children).</li>
  * </ul>
  * 
+ * @param <V> The {@link View} type.
+ * 
  * @author Philippe Beaudoin
  */
-public interface PresenterWidget extends HandlerContainer, HasEventBus {
+public interface PresenterWidget<V extends View> extends PresenterWidgetInternal<V>, HandlerContainer, HasEventBus {
 
   /**
    * Makes it possible to access the {@link EventBus} object associated with
@@ -73,7 +77,7 @@ public interface PresenterWidget extends HandlerContainer, HasEventBus {
    * 
    * @return The view.
    */
-  View getView();
+  V getView();
 
   /**
    * Makes it possible to access the {@link Widget} object associated with that
@@ -91,4 +95,15 @@ public interface PresenterWidget extends HandlerContainer, HasEventBus {
    * @return {@code true} if the presenter is visible, {@code false} otherwise.
    */
   boolean isVisible();
+  
+  /**
+   * Convenience method to register an event handler to the {@link EventBus}.
+   * The handler will be automatically unregistered when
+   * {@link HandlerContainer#unbind()} is called.
+   * 
+   * @param <H> The handler type
+   * @param type See {@link Type}
+   * @param handler The handler to register
+   */
+  <H extends EventHandler> void addRegisteredHandler(Type<H> type, H handler);
 }

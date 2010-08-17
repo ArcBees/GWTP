@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client;
 
 import com.google.inject.Singleton;
 
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 /**
@@ -27,10 +28,12 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * correspond to a singleton {@link Presenter} and it should have an
  * accompanying singleton {@link View} and {@link Proxy}.
  * 
+ * @param <V> The {@link View} type.
+ * 
  * @author Philippe Beaudoin
  */
 @Singleton
-public interface Presenter extends PresenterWidget {
+public interface Presenter<V extends View> extends PresenterWidget<V> {
 
   /**
    * Returns the {@link Proxy} for the current presenter.
@@ -39,4 +42,50 @@ public interface Presenter extends PresenterWidget {
    */
   Proxy<?> getProxy();
 
+  /**
+   * This method is called when a {@link Presenter} should prepare itself based
+   * on a {@link PlaceRequest}. The presenter should extract any parameters it
+   * needs from the request. A presenter should override this method if it
+   * handles custom parameters, but it should call the parent's
+   * {@code prepareFromRequest} method.
+   * 
+   * @param request The request.
+   */
+  void prepareFromRequest(PlaceRequest request);
+
+  /**
+   * This method is called when creating a {@link PlaceRequest} for this
+   * {@link Presenter}. The presenter should add all the required parameters to
+   * the request.
+   * <p/>
+   * <p/>
+   * If nothing is to be done, simply return the {@code request} unchanged.
+   * Otherwise, call {@link PlaceRequest#with(String, String)} to add
+   * parameters. Eg:
+   * <p/>
+   * 
+   * <pre>
+   * return request.with( &quot;id&quot;, getId() );
+   * </pre>
+   * <p/>
+   * A presenter should override this method if it handles custom parameters,
+   * but it should call the parent's {@code prepareRequest} method.
+   * 
+   * @param request The current request.
+   * @return The prepared place request.
+   */
+  PlaceRequest prepareRequest(PlaceRequest request);
+
+  /**
+   * <b>Important:</b> This method is only meant to be used internally by GWTP
+   * when used with place. You can only use it freely with presenters that
+   * aren't places. If you wish to reveal a presenter that is a place, call
+   * {@link PlaceManager#revealPlace(PlaceRequest)} or a related method. This
+   * will ensure you don't inadvertently reveal a non-leaf presenter. Also, you
+   * will benefit from the change confirmation mechanism. (See
+   * {@link PlaceManager#setOnLeaveConfirmation(String)}).
+   * <p />
+   * Forces the presenter to reveal itself on screen.
+   */
+  void forceReveal();
 }
