@@ -125,9 +125,12 @@ public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
 
   @Override
   public void onPresenterRevealed(Presenter presenter) {
-    proxy.onPresenterRevealed(presenter);
-    placeManager.onPlaceRevealed(((PresenterImpl<?, ?>) presenter).prepareRequest(new PlaceRequest(
-        getNameToken())));
+    //Do nothing until the currentPlaceHierarchy matches the presenter's token.
+    if (placeManager.getCurrentPlaceHierarchy().get(placeManager.getCurrentPlaceHierarchy().size() - 1).matchesNameToken(getNameToken())) {
+      proxy.onPresenterRevealed(presenter);
+      placeManager.onPlaceRevealed(((PresenterImpl<?, ?>) presenter).prepareRequest(new PlaceRequest(
+                getNameToken()))); 	
+    }
   }
 
   // /////////////////////
