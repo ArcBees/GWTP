@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.client.Tab;
  * 
  * @author Philippe Beaudoin
  */
-public interface TabContentProxy<P extends Presenter> extends Proxy<P> {
+public interface TabContentProxy<P extends Presenter<?>> extends Proxy<P> {
 
   /**
    * Retrieves the history token to show when this tab is displayed. In the

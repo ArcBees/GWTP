@@ -37,7 +37,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * 
  * @author beaudoin
  */
-public interface Proxy<P extends Presenter> extends ProxyRaw {
+public interface Proxy<P extends Presenter<?>> extends ProxyRaw {
 
   /**
    * Get the associated {@link Presenter}. The presenter can only be obtained in

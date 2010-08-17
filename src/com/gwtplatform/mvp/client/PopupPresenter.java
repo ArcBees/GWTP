@@ -16,23 +16,10 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.gwtplatform.mvp.client.proxy.TabContentProxy;
-
 /**
- * @param <V> The specific type of the {@link View}. Must implement
- *          {@link TabPanel}.
+ * @param <V> The {@link View} type.
  * 
- * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
-public interface TabContainerPresenter<V extends View & TabPanel> extends Presenter<V> {
-
-  /**
-   * Adds a new tab to this presenter.
-   * 
-   * @param tabProxy The {@link TabContentProxy} containing information on the
-   *          tab to add.
-   * @return The newly added tab.
-   */
-  Tab addTab(TabContentProxy<?> tabProxy);
-
+public interface PopupPresenter<V extends PopupView> extends PresenterWidget<V> {
 }

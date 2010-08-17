@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.Tab;
  * 
  * @author Philippe Beaudoin
  */
-public class TabContentProxyImpl<P extends Presenter> extends ProxyImpl<P>
+public class TabContentProxyImpl<P extends Presenter<?>> extends ProxyImpl<P>
     implements TabContentProxy<P> {
 
   protected String historyToken;

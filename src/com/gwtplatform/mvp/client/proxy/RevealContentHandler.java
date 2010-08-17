@@ -34,7 +34,7 @@ import com.gwtplatform.mvp.client.PresenterImpl;
  * 
  * @author Philippe Beaudoin
  */
-public class RevealContentHandler<P extends Presenter> implements EventHandler {
+public class RevealContentHandler<P extends Presenter<?>> implements EventHandler {
 
   private final ProxyFailureHandler failureHandler;
   private final ProxyImpl<P> proxy;

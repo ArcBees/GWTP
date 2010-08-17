@@ -24,7 +24,6 @@ import com.google.inject.Inject;
 
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.PresenterImpl;
 
 /**
  * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
@@ -40,7 +39,7 @@ import com.gwtplatform.mvp.client.PresenterImpl;
  */
 @SuppressWarnings("deprecation")
 // TODO: Remove after making members private
-public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
+public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
     implements ProxyPlace<P> {
 
   /**
@@ -102,7 +101,7 @@ public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
   }
 
   @Override
-  public void getRawPresenter(AsyncCallback<Presenter> callback) {
+  public void getRawPresenter(AsyncCallback<Presenter<?>> callback) {
     proxy.getRawPresenter(callback);
   }
 
@@ -117,19 +116,23 @@ public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
   }
 
   @Override
-  public void onPresenterChanged(Presenter presenter) {
+  public void onPresenterChanged(Presenter<?> presenter) {
+    PlaceRequest request = new PlaceRequest(getNameToken());
+    
     proxy.onPresenterChanged(presenter);
-    placeManager.onPlaceChanged(((PresenterImpl<?, ?>) presenter).prepareRequest(new PlaceRequest(
-        getNameToken())));
+    placeManager.onPlaceChanged((presenter).prepareRequest(request));
   }
 
   @Override
-  public void onPresenterRevealed(Presenter presenter) {
-    //Do nothing until the currentPlaceHierarchy matches the presenter's token.
-    if (placeManager.getCurrentPlaceHierarchy().get(placeManager.getCurrentPlaceHierarchy().size() - 1).matchesNameToken(getNameToken())) {
+  public void onPresenterRevealed(Presenter<?> presenter) {
+    PlaceRequest requestToCompare = placeManager.getCurrentPlaceHierarchy().get(placeManager.getCurrentPlaceHierarchy().size() - 1);
+    
+    // Do nothing until the currentPlaceHierarchy matches the presenter's token.
+    if (requestToCompare.matchesNameToken(getNameToken())) {
+      PlaceRequest request = new PlaceRequest(getNameToken());
+      
       proxy.onPresenterRevealed(presenter);
-      placeManager.onPlaceRevealed(((PresenterImpl<?, ?>) presenter).prepareRequest(new PlaceRequest(
-                getNameToken()))); 	
+      placeManager.onPlaceRevealed(presenter.prepareRequest(request));
     }
   }
 
@@ -236,16 +239,14 @@ public class ProxyPlaceAbstract<P extends Presenter, Proxy_ extends Proxy<P>>
         DeferredCommand.addCommand(new Command() {
           @Override
           public void execute() {
-            PresenterImpl<?, ?> presenterImpl = (PresenterImpl<?, ?>) presenter;
-            presenterImpl.prepareFromRequest(request);
+            presenter.prepareFromRequest(request);
             if (!presenter.isVisible()) {
-              presenterImpl.forceReveal(); // This will trigger a reset in due
-                                           // time
+              // This will trigger a reset in due time
+              presenter.forceReveal(); 
             } else {
-              ResetPresentersEvent.fire(ProxyPlaceAbstract.this); // We have to
-                                                                  // do the
-                                                                  // reset
-                                                                  // ourselves
+              // We have to do the reset ourselves
+              presenter.forceReveal(); 
+              ResetPresentersEvent.fire(ProxyPlaceAbstract.this); 
             }
           }
         });
