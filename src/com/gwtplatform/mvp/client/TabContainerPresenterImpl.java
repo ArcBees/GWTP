@@ -33,7 +33,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * @author Christian Goudreau
  */
 public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy_ extends Proxy<?>>
-    extends PresenterImpl<V, Proxy_> implements TabContainerPresenter {
+    extends PresenterImpl<V, Proxy_> implements TabContainerPresenter<V> {
 
   private final Type<RequestTabsHandler> requestTabsEventType;
   private final Object tabContentSlot;
@@ -65,10 +65,10 @@ public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy
   }
 
   @Override
-  public void setContent(Object slot, PresenterWidget content) {
+  public void setContent(Object slot, PresenterWidget<?> content) {
     super.setContent(slot, content);
     if (slot == tabContentSlot) {
-      Tab tab = ((TabContentProxy<?>) ((Presenter) content).getProxy()).getTab();
+      Tab tab = ((TabContentProxy<?>) ((Presenter<?>) content).getProxy()).getTab();
       getView().setActiveTab(tab);
     }
   }

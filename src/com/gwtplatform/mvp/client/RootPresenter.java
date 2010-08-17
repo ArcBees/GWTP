@@ -90,7 +90,7 @@ public final class RootPresenter extends
 
   private static final Object rootSlot = new Object();
 
-  private PresenterWidgetImpl<?> activePresenter = null;
+  private PresenterWidget<?> activePresenter = null;
 
   private boolean isResetting = false;
 
@@ -123,7 +123,7 @@ public final class RootPresenter extends
           @Override
           public void onRevealContent(
               final RevealRootContentEvent revealContentEvent) {
-            activePresenter = (PresenterWidgetImpl<?>) revealContentEvent.getContent();
+            activePresenter = revealContentEvent.getContent();
             getView().setUsingRootLayoutPanel(false);
             setContent(rootSlot, activePresenter);
           }
@@ -134,7 +134,7 @@ public final class RootPresenter extends
           @Override
           public void onRevealContent(
               final RevealRootLayoutContentEvent revealContentEvent) {
-            activePresenter = (PresenterWidgetImpl<?>) revealContentEvent.getContent();
+            activePresenter = revealContentEvent.getContent();
             getView().setUsingRootLayoutPanel(true);
             setContent(rootSlot, activePresenter);
           }

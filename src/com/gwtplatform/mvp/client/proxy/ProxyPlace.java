@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * 
  * @param <P> The type of the {@link Presenter} attached to this {@link Proxy}.
  */
-public interface ProxyPlace<P extends Presenter> extends Proxy<P>, Place,
+public interface ProxyPlace<P extends Presenter<?>> extends Proxy<P>, Place,
     HasEventBus {
 
   /**

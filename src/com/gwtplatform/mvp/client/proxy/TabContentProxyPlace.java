@@ -26,6 +26,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * @param <P> The type of the {@link Presenter} attached to this
  *          {@link TabContentProxy}.
  */
-public interface TabContentProxyPlace<P extends Presenter> extends
+public interface TabContentProxyPlace<P extends Presenter<?>> extends
     TabContentProxy<P>, Place {
 }
