@@ -143,6 +143,22 @@ public abstract class PresenterWidgetImpl<V extends View> extends
    * @param slot An opaque object identifying which slot to clear.
    */
   public void clearContent(Object slot) {
+    clearContent(slot, true);
+    getView().setContent(slot, null);
+  }
+
+  /**
+   * This method clears the content in a specific slot. No
+   * {@link ResetPresentersEvent} is fired. The attached {@link View} should
+   * manage this slot when its {@link View#setContent(Object, Widget)} is
+   * called. It should also clear the slot when the {@code setContent} method is
+   * called with {@code null} as a parameter.
+   * 
+   * @param slot An opaque object identifying which slot to clear.
+   * @param Marker to call clear content without calling the view's setContent
+   *          method.
+   */
+  public void clearContent(Object slot, boolean dontCallViewSetContent) {
     List<PresenterWidgetImpl<?>> slotChildren = activeChildren.get(slot);
     if (slotChildren != null) {
       // This presenter is visible, its time to call onHide
@@ -154,7 +170,6 @@ public abstract class PresenterWidgetImpl<V extends View> extends
       }
       slotChildren.clear();
     }
-    getView().setContent(slot, null);
   }
 
   @Override
