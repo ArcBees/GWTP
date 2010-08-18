@@ -62,40 +62,21 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Philippe Beaudoin
  */
-public interface PresenterWidget<V extends View> extends PresenterWidgetInternal<V>, HandlerContainer, HasEventBus {
+public interface PresenterWidget<V extends View> extends HandlerContainer, HasEventBus {
 
   /**
-   * Makes it possible to access the {@link EventBus} object associated with
-   * that presenter.
+   * This method adds some content in a specific slot of the {@link Presenter}.
+   * No {@link ResetPresentersEvent} is fired. The attached {@link View} should
+   * manage this slot when its {@link View#addContent(Object, Widget)} is
+   * called.
    * 
-   * @return The EventBus associated with that presenter.
+   * @param slot An opaque object identifying which slot this content is being
+   *          added into.
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+   *          will not add anything.
    */
-  EventBus getEventBus();
+  void addContent(Object slot, PresenterWidget<?> content);
 
-  /**
-   * Returns the {@link View} for the current presenter.
-   * 
-   * @return The view.
-   */
-  V getView();
-
-  /**
-   * Makes it possible to access the {@link Widget} object associated with that
-   * presenter.
-   * 
-   * @return The Widget associated with that presenter.
-   */
-  Widget getWidget();
-
-  /**
-   * Verifies if the presenter is currently visible on the screen. A presenter
-   * should be visible if it successfully revealed itself and was not hidden
-   * later.
-   * 
-   * @return {@code true} if the presenter is visible, {@code false} otherwise.
-   */
-  boolean isVisible();
-  
   /**
    * Convenience method to register an event handler to the {@link EventBus}.
    * The handler will be automatically unregistered when
@@ -106,4 +87,72 @@ public interface PresenterWidget<V extends View> extends PresenterWidgetInternal
    * @param handler The handler to register
    */
   <H extends EventHandler> void addRegisteredHandler(Type<H> type, H handler);
+
+  /**
+    * This method clears the content in a specific slot. No
+    * {@link ResetPresentersEvent} is fired. The attached {@link View} should
+    * manage this slot when its {@link View#setContent(Object, Widget)} is
+    * called. It should also clear the slot when the {@code setContent} method is
+    * called with {@code null} as a parameter.
+    * 
+    * @param slot An opaque object identifying which slot to clear.
+    */
+   void clearContent(Object slot);
+
+  /**
+   * Makes it possible to access the {@link EventBus} object associated with
+   * that presenter.
+   * 
+   * @return The EventBus associated with that presenter.
+   */
+  EventBus getEventBus();
+  
+  /**
+   * Returns the {@link View} for the current presenter.
+   * 
+   * @return The view.
+   */
+  V getView();
+  
+  /**
+   * Makes it possible to access the {@link Widget} object associated with that
+   * presenter.
+   * 
+   * @return The Widget associated with that presenter.
+   */
+  Widget getWidget();
+  
+  /**
+   * Verifies if the presenter is currently visible on the screen. A presenter
+   * should be visible if it successfully revealed itself and was not hidden
+   * later.
+   * 
+   * @return {@code true} if the presenter is visible, {@code false} otherwise.
+   */
+  boolean isVisible(); 
+  
+  /**
+   * This method removes some content in a specific slot of the
+   * {@link Presenter}. No {@link ResetPresentersEvent} is fired. The attached
+   * {@link View} should manage this slot when its
+   * {@link View#removeContent(Object, Widget)} is called.
+   * 
+   * @param slot An opaque object identifying which slot this content is being
+   *          removed from.
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+   *          will not remove anything.
+   */
+  void removeContent(Object slot, PresenterWidget<?> content);
+   
+   /**
+   * This method sets some content in a specific slot of the {@link Presenter}.
+   * A {@link ResetPresentersEvent} will be fired after the top-most visible
+   * presenter is revealed.
+   * 
+   * @param slot An opaque object identifying which slot this content is being
+   *          set into. The attached view should know what to do with this slot.
+   * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+   *          will clear the slot.
+   */
+   void setContent(Object slot, PresenterWidget<?> content);
 }
