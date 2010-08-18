@@ -155,4 +155,6 @@ public interface PresenterWidget<V extends View> extends HandlerContainer, HasEv
    *          will clear the slot.
    */
    void setContent(Object slot, PresenterWidget<?> content);
+   
+   PresenterWidgetImpl<?> getPresenterWidgetImpl();
 }
