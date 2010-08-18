@@ -107,7 +107,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public void getCurrentTitle(int index, SetPlaceTitleHandler handler)
+  public void getTitle(int index, SetPlaceTitleHandler handler)
       throws IndexOutOfBoundsException {
     GetPlaceTitleEvent event = new GetPlaceTitleEvent(
         placeHierarchy.get(index), handler);
@@ -120,7 +120,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void getCurrentTitle(SetPlaceTitleHandler handler) {
-    getCurrentTitle(0, handler);
+    getTitle(placeHierarchy.size()-1, handler);
   }
 
   @Override
