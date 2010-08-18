@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * @param <V> The {@link View} type.
+ * This interface is meant to be used by internal classes only.
  * 
  * @author Christian Goudreau
  */
@@ -29,9 +29,6 @@ interface PresenterWidgetInternal {
   void notifyHide();
 
   /**
-   * <b>Important!</b> Do not call directly, this is meant to be called only
-   * internally by GWTP.
-   * <p/>
    * This methods attaches this presenter to its parent.
    * 
    * @param newParent The {@link PresenterWidgetImpl} that will be this
@@ -68,6 +65,14 @@ interface PresenterWidgetInternal {
    * fire a {@link ResetPresentersEvent} instead.
    */
   void reset();
-  
+
+  /**
+   * This class is mostly used to have access to {@link PresenterWidgetInternal}
+   * when used other presenter without exposing internal logic.
+   * 
+   * @param presenterWidget The presenter Widget to cast to
+   *          {@link PresenterWidgetImpl}.
+   * @return an instance of {@link PresenterWidgetInternal}.
+   */
   PresenterWidgetInternal toTypeSafe(PresenterWidget<?> presenterWidget);
 }
