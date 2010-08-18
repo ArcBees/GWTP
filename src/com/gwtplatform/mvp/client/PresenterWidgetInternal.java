@@ -65,14 +65,4 @@ interface PresenterWidgetInternal {
    * fire a {@link ResetPresentersEvent} instead.
    */
   void reset();
-
-  /**
-   * This class is mostly used to have access to {@link PresenterWidgetInternal}
-   * when used other presenter without exposing internal logic.
-   * 
-   * @param presenterWidget The presenter Widget to cast to
-   *          {@link PresenterWidgetImpl}.
-   * @return an instance of {@link PresenterWidgetInternal}.
-   */
-  PresenterWidgetInternal getPresenterWidgetInternal(PresenterWidget<?> presenterWidget);
 }
