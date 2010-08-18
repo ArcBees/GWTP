@@ -67,7 +67,7 @@ public class DispatchServiceImpl extends RemoteServiceServlet implements
   protected Provider<HttpServletRequest> requestProvider;
   @Inject(optional = true)
   @SecurityCookie
-  protected String securityCookieName = null;
+  protected String securityCookieName;
 
   @Inject
   public DispatchServiceImpl(final Logger logger, final Dispatch dispatch,

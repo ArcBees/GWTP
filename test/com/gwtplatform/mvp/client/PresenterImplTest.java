@@ -61,7 +61,7 @@ public class PresenterImplTest {
   // Simple subclasses of PresenterWidgetImpl
   abstract static class PresenterSpy<V extends View, P extends Proxy<?>>
       extends PresenterImpl<V, P> {
-    public int revealInParentCalled = 0;
+    public int revealInParentCalled;
 
     PresenterSpy(EventBus eventBus, V view, P proxy) {
       super(eventBus, view, proxy);
