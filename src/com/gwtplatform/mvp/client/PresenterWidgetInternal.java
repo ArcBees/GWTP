@@ -74,5 +74,5 @@ interface PresenterWidgetInternal {
    *          {@link PresenterWidgetImpl}.
    * @return an instance of {@link PresenterWidgetInternal}.
    */
-  PresenterWidgetInternal toTypeSafe(PresenterWidget<?> presenterWidget);
+  PresenterWidgetInternal getPresenterWidgetInternal(PresenterWidget<?> presenterWidget);
 }
