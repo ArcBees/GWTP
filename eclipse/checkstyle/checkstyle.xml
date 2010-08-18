@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: PropertySimplified
+    Checkstyle-Configuration: gwtp
     Description: none
 -->
 <module name="Checker">
@@ -15,17 +15,12 @@
     <module name="UnnecessaryParentheses"/>
     <module name="ExplicitInitialization"/>
     <module name="ParameterAssignment"/>
-    <module name="DeclarationOrder"/>
-    <module name="ReturnCount"/>
     <module name="JUnitTestCase"/>
-    <module name="IllegalCatch"/>
-    <module name="IllegalThrows"/>
     <module name="StringLiteralEquality"/>
     <module name="SimplifyBooleanReturn"/>
     <module name="SimplifyBooleanExpression"/>
     <module name="ModifiedControlVariable"/>
     <module name="MissingSwitchDefault"/>
-    <module name="MagicNumber"/>
     <module name="MissingOverride"/>
     <module name="InterfaceIsType">
       <property name="severity" value="error"/>
@@ -188,7 +183,7 @@
   <module name="FileTabCharacter">
     <property name="severity" value="error"/>
     <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="no tabs"/>
-  </module>  
+  </module>
   <module name="RegexpSingleline">
     <property name="severity" value="error"/>
     <property name="format" value="  [/][/][A-z]"/>
