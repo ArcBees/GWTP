@@ -38,7 +38,7 @@ public class TabContentProxyImpl<P extends Presenter<?>> extends ProxyImpl<P>
   protected float priority;
   protected Type<RequestTabsHandler> requestTabsEventType;
 
-  private Tab tab = null;
+  private Tab tab;
 
   /**
    * Creates a {@link Proxy} for a {@link Presenter} that is meant to be

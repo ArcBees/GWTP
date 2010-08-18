@@ -132,24 +132,24 @@ public class ProxyGenerator extends Generator {
   private static final String tabContentProxyImplClassName = TabContentProxyImpl.class.getCanonicalName();
   private static final String tabContentProxyPlaceImplClassName = TabContentProxyPlaceImpl.class.getCanonicalName();
   private static final String typeClassName = Type.class.getCanonicalName();
-  private JClassType asyncProviderClass = null;
-  private JClassType baseGinjectorClass = null;
-  private JClassType basePlaceClass = null;
-  private JClassType basePresenterClass = null;
-  private JClassType eventHandlerClass = null;
-  private JClassType gatekeeperClass = null;
-  private JGenericType gwtEventClass = null;
-  private JGenericType gwtEventTypeClass = null;
-  private JClassType placeRequestClass = null;
-  private JClassType providerClass = null;
-  private JClassType requestTabsHandlerClass = null;
-  private JClassType revealContentHandlerClass = null;
-  private JClassType setPlaceTitleHandlerClass = null;
-  private JClassType stringClass = null;
+  private JClassType asyncProviderClass;
+  private JClassType baseGinjectorClass;
+  private JClassType basePlaceClass;
+  private JClassType basePresenterClass;
+  private JClassType eventHandlerClass;
+  private JClassType gatekeeperClass;
+  private JGenericType gwtEventClass;
+  private JGenericType gwtEventTypeClass;
+  private JClassType placeRequestClass;
+  private JClassType providerClass;
+  private JClassType requestTabsHandlerClass;
+  private JClassType revealContentHandlerClass;
+  private JClassType setPlaceTitleHandlerClass;
+  private JClassType stringClass;
 
-  private JClassType tabContentProxyClass = null;
+  private JClassType tabContentProxyClass;
 
-  private JClassType typeClass = null;
+  private JClassType typeClass;
 
   @Override
   public String generate(TreeLogger logger, GeneratorContext ctx,

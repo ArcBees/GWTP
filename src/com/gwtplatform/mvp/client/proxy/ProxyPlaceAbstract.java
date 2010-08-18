@@ -120,7 +120,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
     PlaceRequest request = new PlaceRequest(getNameToken());
     
     proxy.onPresenterChanged(presenter);
-    placeManager.onPlaceChanged((presenter).prepareRequest(request));
+    placeManager.onPlaceChanged(presenter.prepareRequest(request));
   }
 
   @Override

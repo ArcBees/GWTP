@@ -22,7 +22,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersHandler;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
@@ -53,7 +52,7 @@ public final class RootPresenter extends
    */
   public static final class RootView extends ViewImpl {
 
-    private boolean usingRootLayoutPanel = false;
+    private boolean usingRootLayoutPanel;
 
     @Override
     public Widget asWidget() {
@@ -92,7 +91,7 @@ public final class RootPresenter extends
 
   private static final Object rootSlot = new Object();
 
-  private boolean isResetting = false;
+  private boolean isResetting;
 
   /**
    * Creates a proxy class for a presenter that can contain tabs.
