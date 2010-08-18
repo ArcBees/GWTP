@@ -38,9 +38,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class PresenterImplTest {
-  // Guice environment
   /**
-   * @author Philippe Beaudoin
+   * Guice environment.
    */
   public static class Env extends TestModule {
     @Override
