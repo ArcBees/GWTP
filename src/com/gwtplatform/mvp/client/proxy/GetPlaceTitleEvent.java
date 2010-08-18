@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.HasEventBus;
  * <p />
  * <b>Important!</b> You should never fire that event directly. Instead, use
  * {@link PlaceManager#getCurrentTitle(SetPlaceTitleHandler)} or
- * {@link PlaceManager#getCurrentTitle(int, SetPlaceTitleHandler)}.
+ * {@link PlaceManager#getTitle(int, SetPlaceTitleHandler)}.
  * 
  * @author Philippe Beaudoin
  */

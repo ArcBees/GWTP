@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client.proxy;
 /**
  * The interface for a handler that will be invoked when a place title is
  * available. For more information see
- * {@link PlaceManager#getCurrentTitle(SetPlaceTitleHandler, int)}.
+ * {@link PlaceManager#getTitle(SetPlaceTitleHandler, int)}.
  * 
  * @author Philippe Beaudoin
  */
