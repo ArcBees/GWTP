@@ -120,7 +120,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void getCurrentTitle(SetPlaceTitleHandler handler) {
-    getTitle(placeHierarchy.size()-1, handler);
+    getTitle(placeHierarchy.size() - 1, handler);
   }
 
   @Override
