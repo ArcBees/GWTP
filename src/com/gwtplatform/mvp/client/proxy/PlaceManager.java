@@ -164,20 +164,22 @@ public interface PlaceManager extends HasEventBus {
    * 
    * @see #getCurrentTitle(SetPlaceTitleHandler)
    * 
-   * @param index The index of the place to reveal within the hierarchy.
+   * @param index The index of the place to for which to get a title, 0 is 
+   *          the top-level class, {@link #getHierarchyDepth()}-1 is the current
+   *          place.
    * @param handler The {@link SetPlaceTitleHandler} to invoke when the place
    *          title is available. This will be invoked with {@code null} if the
    *          place doesn't have a title.
    * @throws IndexOutOfBoundsException If the index is less than {@code 0} or
    *           greater or equal to {@link #getHierarchyDepth()}.
    */
-  void getCurrentTitle(int index, SetPlaceTitleHandler handler)
+  void getTitle(int index, SetPlaceTitleHandler handler)
       throws IndexOutOfBoundsException;
 
   /**
    * Retrieves the title of the currently displayed place, or {@code null} if it
    * doesn't have a title. Same as calling {@link #getCurrentTitle(int)} with a
-   * {@code level} of 0.
+   * {@code level} of {@link #getHierarchyDepth()}-1.
    * <p />
    * Instead of returning the title directly, this method accepts a callback and
    * will call {@link SetPlaceTitleHandler#onSetPlaceTitle} as soon as the title
