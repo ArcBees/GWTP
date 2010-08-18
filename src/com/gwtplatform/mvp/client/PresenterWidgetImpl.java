@@ -193,7 +193,7 @@ public abstract class PresenterWidgetImpl<V extends View> extends
       return;
     }
     
-    internal.reparent(this);
+    internal.toTypeSafe(content).reparent(this);
 
     List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
     if (slotChildren != null) {
