@@ -34,7 +34,7 @@ public class DefaultSecurityCookieAccessor implements SecurityCookieAccessor {
 
   @Inject(optional = true)
   @SecurityCookie
-  public String cookieName = null;
+  public String cookieName;
 
   public String getCookieContent() {
     if (cookieName == null) {

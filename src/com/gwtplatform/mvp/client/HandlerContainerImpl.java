@@ -35,7 +35,7 @@ public class HandlerContainerImpl implements HandlerContainer {
    * since objectify persists field maked as {@code transient}.
    */
   private static class BindMonitor {
-    public boolean value = false;
+    public boolean value;
   }
 
   private final transient boolean autoBind;

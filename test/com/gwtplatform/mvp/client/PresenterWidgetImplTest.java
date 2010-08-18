@@ -103,9 +103,9 @@ public class PresenterWidgetImplTest {
   // Simple subclasses of PresenterWidgetImpl
   abstract static class PresenterWidgetSpy<V extends View> extends
       PresenterWidgetImpl<V> {
-    public int onHideMethodCalled = 0;
-    public int onResetMethodCalled = 0;
-    public int onRevealMethodCalled = 0;
+    public int onHideMethodCalled;
+    public int onResetMethodCalled;
+    public int onRevealMethodCalled;
 
     PresenterWidgetSpy(EventBus eventBus, V view) {
       super(eventBus, view);

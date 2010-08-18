@@ -58,9 +58,9 @@ public abstract class PresenterWidgetImpl<V extends View> extends
    * The parent presenter, in order to make sure this widget is only ever in one
    * parent.
    */
-  PresenterWidgetInternal<?> currentParentPresenter = null;
+  PresenterWidgetInternal<?> currentParentPresenter;
 
-  boolean visible = false;
+  boolean visible;
 
   /**
    * This map makes it possible to keep a list of all the active children in
