@@ -108,7 +108,7 @@ public final class RootPresenter extends
   public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
     if (!isResetting) {
       isResetting = true;
-      reset();
+      internal.reset();
       isResetting = false;
     }
   }
