@@ -26,16 +26,7 @@ interface PresenterWidgetInternal {
    * Called right after the widget has been made revealed on screen. You should
    * not call this, fire a {@link ResetPresentersEvent} instead.
    */
-  void notifyHide();
-
-  /**
-   * This methods attaches this presenter to its parent.
-   * 
-   * @param newParent The {@link PresenterWidgetImpl} that will be this
-   *          presenter's new parent, or {@code null} to detach from all
-   *          parents.
-   */
-  void reparent(PresenterWidget<?> newParent);
+  // void notifyHide();
 
   /**
    * Called by a child {@link PresenterWidget} when it wants to detach itself
@@ -47,22 +38,11 @@ interface PresenterWidgetInternal {
   void detach(PresenterWidget<?> childPresenter);
 
   /**
-   * Called right after the widget has been revealed on screen. You should not
-   * call this. Fire a {@link ResetPresentersEvent} instead.
-   */
-  void notifyReveal();
-
-  /**
-   * Makes sure we monitor the specified popup presenter so that we know when it
-   * is closing. This way we can make sure it doesn't receive future messages.
+   * This methods attaches this presenter to its parent.
    * 
-   * @param popupPresenter The {@link PresenterWidgetImpl} to monitor.
+   * @param newParent The {@link PresenterWidgetImpl} that will be this
+   *          presenter's new parent, or {@code null} to detach from all
+   *          parents.
    */
-  void monitorCloseEvent(PopupPresenter<?> popupPresenter);
-
-  /**
-   * Called whenever the presenters need to be reset. You should not call this,
-   * fire a {@link ResetPresentersEvent} instead.
-   */
-  void reset();
+  void reparent(PresenterWidget<?> newParent);
 }
