@@ -36,6 +36,17 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 public interface Presenter<V extends View> extends PresenterWidget<V> {
 
   /**
+   * This method can be used to reveal any presenter. This call will go up the
+   * hierarchy, revealing any parent of this presenter. This method will also
+   * bypass the change confirmation mechanism (see {@link PlaceManager#setOnLeaveConfirmation(String)}).
+   * 
+   * <b>Important:</b> If you're using this method to reveal a place, this
+   * method will not update the browser history. Consider using
+   * {@link PlaceManager#revealPlace(PlaceRequest)}.
+   */
+  void forceReveal();
+
+  /**
    * Returns the {@link Proxy} for the current presenter.
    * 
    * @return The proxy.
@@ -75,17 +86,4 @@ public interface Presenter<V extends View> extends PresenterWidget<V> {
    * @return The prepared place request.
    */
   PlaceRequest prepareRequest(PlaceRequest request);
-
-  /**
-   * <b>Important:</b> This method is only meant to be used internally by GWTP
-   * when used with place. You can only use it freely with presenters that
-   * aren't places. If you wish to reveal a presenter that is a place, call
-   * {@link PlaceManager#revealPlace(PlaceRequest)} or a related method. This
-   * will ensure you don't inadvertently reveal a non-leaf presenter. Also, you
-   * will benefit from the change confirmation mechanism. (See
-   * {@link PlaceManager#setOnLeaveConfirmation(String)}).
-   * <p />
-   * Forces the presenter to reveal itself on screen.
-   */
-  void forceReveal();
 }
