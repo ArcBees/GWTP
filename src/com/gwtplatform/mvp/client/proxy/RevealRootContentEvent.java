@@ -59,7 +59,7 @@ public final class RevealRootContentEvent extends
 
   @Override
   protected void dispatch(RevealRootContentHandler handler) {
-    handler.onRevealContent(this);
+    handler.onRevealRootContent(this);
   }
 
 }
