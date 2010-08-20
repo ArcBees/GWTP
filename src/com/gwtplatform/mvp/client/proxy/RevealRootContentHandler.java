@@ -34,6 +34,6 @@ public interface RevealRootContentHandler extends EventHandler {
    * @param event The event containing the presenter that wants to bet set as
    *          root content.
    */
-  void onRevealContent(RevealRootContentEvent event);
+  void onRevealRootContent(RevealRootContentEvent event);
 
 }

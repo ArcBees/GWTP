@@ -60,7 +60,7 @@ public final class RevealRootLayoutContentEvent extends
 
   @Override
   protected void dispatch(RevealRootLayoutContentHandler handler) {
-    handler.onRevealContent(this);
+    handler.onRevealRootLayoutContent(this);
   }
 
 }

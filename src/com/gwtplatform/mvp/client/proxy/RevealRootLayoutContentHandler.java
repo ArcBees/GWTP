@@ -34,6 +34,6 @@ public interface RevealRootLayoutContentHandler extends EventHandler {
    * @param event The event containing the presenter that wants to bet set as
    *          root layout content.
    */
-  void onRevealContent(RevealRootLayoutContentEvent event);
+  void onRevealRootLayoutContent(RevealRootLayoutContentEvent event);
 
 }

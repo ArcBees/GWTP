@@ -56,7 +56,7 @@ public final class RevealRootPopupContentEvent extends
 
   @Override
   protected void dispatch(RevealRootPopupContentHandler handler) {
-    handler.onRevealContent(this);
+    handler.onRevealRootPopupContent(this);
   }
 
 }
