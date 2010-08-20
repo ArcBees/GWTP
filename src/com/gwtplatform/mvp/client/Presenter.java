@@ -29,29 +29,48 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * accompanying singleton {@link View} and {@link Proxy}.
  * 
  * @param <V> The {@link View} type.
+ * @param <Proxy_> The {@link Proxy} type.
  * 
  * @author Philippe Beaudoin
  */
 @Singleton
-public interface Presenter<V extends View> extends PresenterWidget<V> {
-
+public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends PresenterWidget<V> {
   /**
-   * This method can be used to reveal any presenter. This call will go up the
-   * hierarchy, revealing any parent of this presenter. This method will also
-   * bypass the change confirmation mechanism (see {@link PlaceManager#setOnLeaveConfirmation(String)}).
-   * 
-   * <b>Important:</b> If you're using this method to reveal a place, this
-   * method will not update the browser history. Consider using
-   * {@link PlaceManager#revealPlace(PlaceRequest)}.
+   * The light-weight {@PresenterProxy} around this presenter.
    */
-  void forceReveal();
-
+  private final Proxy_ proxy;
+  
+  public Presenter(EventBus eventBus, V view, Proxy_ proxy) {
+    super(eventBus, view);
+    this.proxy = proxy;
+  }
+  
   /**
    * Returns the {@link Proxy} for the current presenter.
    * 
    * @return The proxy.
    */
-  Proxy<?> getProxy();
+  public final Proxy_ getProxy() {
+    return proxy;
+  }
+
+  /**
+   * This method can be used to reveal any presenter. This call will go up the
+   * hierarchy, revealing any parent of this presenter. This method will also
+   * bypass the change confirmation mechanism (see
+   * {@link PlaceManager#setOnLeaveConfirmation(String)}).
+   * 
+   * <b>Important:</b> If you're using this method to reveal a place, it will
+   * not update the browser history. Consider using
+   * {@link PlaceManager#revealPlace(PlaceRequest)}.
+   */
+  public final void forceReveal() {
+    if (isVisible()) {
+      return;
+    }
+    
+    revealInParent();
+  }
 
   /**
    * This method is called when a {@link Presenter} should prepare itself based
@@ -62,7 +81,8 @@ public interface Presenter<V extends View> extends PresenterWidget<V> {
    * 
    * @param request The request.
    */
-  void prepareFromRequest(PlaceRequest request);
+  public void prepareFromRequest(PlaceRequest request) {
+  }
 
   /**
    * This method is called when creating a {@link PlaceRequest} for this
@@ -85,5 +105,36 @@ public interface Presenter<V extends View> extends PresenterWidget<V> {
    * @param request The current request.
    * @return The prepared place request.
    */
-  PlaceRequest prepareRequest(PlaceRequest request);
+  public PlaceRequest prepareRequest(PlaceRequest request) {
+    return request;
+  }
+  
+  /**
+   * <b>Deprecated!</b> This method will soon be removed from the API. For more
+   * information see <a
+   * href="http://code.google.com/p/gwt-platform/issues/detail?id=136">Issue
+   * 136</a>.
+   * <p />
+   * Notify others that this presenter has been changed. This is especially
+   * useful for stateful presenters that store parameters within the history
+   * token. Calling this will make sure the history token is updated with the
+   * right parameters.
+   */
+  @Deprecated
+  protected final void notifyChange() {
+    getProxy().onPresenterChanged(this);
+  }
+  
+  @Override
+  protected void onReset() {
+    super.onReset();
+    getProxy().onPresenterRevealed(this);
+  }
+  
+  /**
+   * Called whenever the presenter needs to set its content in a parent. You
+   * need to override this method. You should usually fire a
+   * {@link RevealContentEvent}.
+   */
+  protected abstract void revealInParent();
 }

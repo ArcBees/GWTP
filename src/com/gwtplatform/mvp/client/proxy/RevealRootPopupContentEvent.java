@@ -18,7 +18,8 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.gwtplatform.mvp.client.HasEventBus;
-import com.gwtplatform.mvp.client.PopupPresenter;
+import com.gwtplatform.mvp.client.PopupView;
+import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
  * Use this type of event to reveal popup content that should get added at the
@@ -31,7 +32,7 @@ public final class RevealRootPopupContentEvent extends
 
   private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
 
-  public static void fire(final HasEventBus source, final PopupPresenter<?> content) {
+  public static void fire(final HasEventBus source, final PresenterWidget<? extends PopupView> content) {
     source.fireEvent(new RevealRootPopupContentEvent(content));
   }
 
@@ -39,9 +40,9 @@ public final class RevealRootPopupContentEvent extends
     return TYPE;
   }
 
-  private final PopupPresenter<?> content;
+  private final PresenterWidget<? extends PopupView> content;
 
-  public RevealRootPopupContentEvent(PopupPresenter<?> content) {
+  public RevealRootPopupContentEvent(PresenterWidget<? extends PopupView> content) {
     this.content = content;
   }
 
@@ -50,7 +51,7 @@ public final class RevealRootPopupContentEvent extends
     return getType();
   }
 
-  public PopupPresenter<?> getContent() {
+  public PresenterWidget<? extends PopupView> getContent() {
     return content;
   }
 

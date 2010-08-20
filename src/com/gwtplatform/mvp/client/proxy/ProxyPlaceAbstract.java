@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * You can usually inherit from the simpler form {@link ProxyPlace}.
  * <p />
  * 
- * @param <P> Type of the associated {@link Presenter}.
+ * @param <T> The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
  * 
  * @author David Peterson
@@ -39,8 +39,8 @@ import com.gwtplatform.mvp.client.Presenter;
  */
 @SuppressWarnings("deprecation")
 // TODO: Remove after making members private
-public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
-    implements ProxyPlace<P> {
+public class ProxyPlaceAbstract<T extends Presenter<?, ?>, Proxy_ extends Proxy<T>>
+    implements ProxyPlace<T> {
 
   /**
    * The {@link EventBus} for the application.
@@ -96,12 +96,12 @@ public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
   // Inherited from Place
 
   @Override
-  public void getPresenter(AsyncCallback<P> callback) {
+  public void getPresenter(AsyncCallback<T> callback) {
     proxy.getPresenter(callback);
   }
 
   @Override
-  public void getRawPresenter(AsyncCallback<Presenter<?>> callback) {
+  public void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback) {
     proxy.getRawPresenter(callback);
   }
 
@@ -116,7 +116,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
   }
 
   @Override
-  public void onPresenterChanged(Presenter<?> presenter) {
+  public void onPresenterChanged(Presenter<?, ?> presenter) {
     PlaceRequest request = new PlaceRequest(getNameToken());
     
     proxy.onPresenterChanged(presenter);
@@ -124,7 +124,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
   }
 
   @Override
-  public void onPresenterRevealed(Presenter<?> presenter) {
+  public void onPresenterRevealed(Presenter<?, ?> presenter) {
     PlaceRequest requestToCompare = placeManager.getCurrentPlaceHierarchy().get(placeManager.getCurrentPlaceHierarchy().size() - 1);
     
     // Do nothing until the currentPlaceHierarchy matches the presenter's token.
@@ -223,7 +223,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
    *          revealed.
    */
   private void handleRequest(final PlaceRequest request) {
-    proxy.getPresenter(new AsyncCallback<P>() {
+    proxy.getPresenter(new AsyncCallback<T>() {
 
       @Override
       public void onFailure(Throwable caught) {
@@ -231,7 +231,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?>, Proxy_ extends Proxy<P>>
       }
 
       @Override
-      public void onSuccess(final P presenter) {
+      public void onSuccess(final T presenter) {
         // Everything should be bound before we prepare the presenter from the
         // request,
         // in case it wants to fire some events. That's why we will do this in a

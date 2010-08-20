@@ -19,10 +19,9 @@ package com.gwtplatform.externaltest;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.PresenterImpl;
+import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
@@ -37,7 +36,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author Philippe Beaudoin
  */
 @Singleton
-public class MainPresenter extends PresenterImpl<MainPresenter.MyView, MainPresenter.MyProxy> {
+public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter.MyProxy> {
 
   @ContentSlot
   public static final Type<RevealContentHandler<?>> TYPE_SetMainContent = new Type<RevealContentHandler<?>>();
@@ -59,13 +58,13 @@ public class MainPresenter extends PresenterImpl<MainPresenter.MyView, MainPrese
   
   @Inject
   public MainPresenter(final EventBus eventBus, final MyView view, 
-      final MyProxy proxy, @Named("Sub") PresenterWidget<View> subPresenter) {
+      final MyProxy proxy, SubPresenterWidget subPresenter) {
     super(eventBus, view, proxy);
     this.subPresenter = subPresenter;
   }
 
   public void setSubPresenter() {
-    setContent(TYPE_SetMainContent, subPresenter);
+    setInSlot(TYPE_SetMainContent, subPresenter);
   }
   
   @Override

@@ -18,13 +18,9 @@ package com.gwtplatform.externaltest;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.TypeLiteral;
-import com.google.inject.name.Names;
 
 import com.gwtplatform.mvp.client.DefaultEventBus;
 import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.PresenterWidget;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.testing.GuiceMockitoJUnitRunner;
 import com.gwtplatform.testing.TestModule;
 import com.gwtplatform.testing.TestScope;
@@ -45,12 +41,9 @@ public class RealInjectionTest {
    * @author Philippe Beaudoin
    */
   public static class Env extends TestModule {
-    @SuppressWarnings("unchecked")
     @Override
     protected void configure() {
-      bind(new TypeLiteral<PresenterWidget<View>>() { })
-        .annotatedWith(Names.named("Sub"))
-        .to((Class<? extends PresenterWidget<View>>) SubPresenterWidget.class)
+      bind(SubPresenterWidget.class)
         .in(TestScope.SINGLETON);
       // TODO Provide methods for binding presenters, views and proxy
       bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
