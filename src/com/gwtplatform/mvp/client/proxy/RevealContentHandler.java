@@ -22,7 +22,6 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.PresenterImpl;
 
 /**
  * This is the handler class for {@link RevealContentEvent}. It should be used
@@ -30,17 +29,17 @@ import com.gwtplatform.mvp.client.PresenterImpl;
  * presenters. When this handler is triggered, the proxy should <b>first</b> set
  * the content appropriately in the presenter, and then reveal the presenter.
  * 
- * @param <P> {@link Presenter}'s type.
+ * @param <T> The Presenter's type.
  * 
  * @author Philippe Beaudoin
  */
-public class RevealContentHandler<P extends Presenter<?>> implements EventHandler {
+public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHandler {
 
   private final ProxyFailureHandler failureHandler;
-  private final ProxyImpl<P> proxy;
+  private final ProxyImpl<T> proxy;
 
   public RevealContentHandler(final ProxyFailureHandler failureHandler,
-      final ProxyImpl<P> proxy) {
+      final ProxyImpl<T> proxy) {
     this.failureHandler = failureHandler;
     this.proxy = proxy;
   }
@@ -52,14 +51,14 @@ public class RevealContentHandler<P extends Presenter<?>> implements EventHandle
    *          bet set as content.
    */
   public final void onRevealContent(final RevealContentEvent revealContentEvent) {
-    proxy.getPresenter(new AsyncCallback<P>() {
+    proxy.getPresenter(new AsyncCallback<T>() {
       @Override
       public void onFailure(Throwable caught) {
         failureHandler.onFailedGetPresenter(caught);
       }
 
       @Override
-      public void onSuccess(final P presenter) {
+      public void onSuccess(final T presenter) {
         // Deferring is needed because the event bus enqueues and delays handler
         // registration when events are currently being processed.
         // (see {@link com.google.gwt.event.shared.HandlerManager@addHandler()})
@@ -69,10 +68,9 @@ public class RevealContentHandler<P extends Presenter<?>> implements EventHandle
         DeferredCommand.addCommand(new Command() {
           @Override
           public void execute() {
-            PresenterImpl<?, ?> presenterImpl = (PresenterImpl<?, ?>) presenter;
-            presenterImpl.setContent(revealContentEvent.getAssociatedType(),
+            presenter.setInSlot(revealContentEvent.getAssociatedType(),
                 revealContentEvent.getContent());
-            presenterImpl.forceReveal();
+            presenter.forceReveal();
           }
         });
       }

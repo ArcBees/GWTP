@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.PresenterWidgetImpl;
+import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 /**
@@ -29,7 +29,7 @@ import com.gwtplatform.mvp.client.View;
  * @author Philippe Beaudoin
  */
 @Singleton
-public class SubPresenterWidget extends PresenterWidgetImpl<SubPresenterWidget.MyView> {
+public class SubPresenterWidget extends PresenterWidget<SubPresenterWidget.MyView> {
   
   /**
    * Presenter's view.

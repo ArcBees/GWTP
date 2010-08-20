@@ -26,12 +26,12 @@ import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.Tab;
 
 /**
- * @param <P> {@link Presenter}'s type.
+ * @param <T> The Presenter's type.
  * 
  * @author Philippe Beaudoin
  */
-public class TabContentProxyImpl<P extends Presenter<?>> extends ProxyImpl<P>
-    implements TabContentProxy<P> {
+public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
+    implements TabContentProxy<T> {
 
   protected String historyToken;
   protected String label;

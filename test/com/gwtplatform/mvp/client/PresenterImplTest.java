@@ -59,7 +59,7 @@ public class PresenterImplTest {
   }
   // Simple subclasses of PresenterWidgetImpl
   abstract static class PresenterSpy<V extends View, P extends Proxy<?>>
-      extends PresenterImpl<V, P> {
+      extends Presenter<V, P> {
     public int revealInParentCalled;
 
     PresenterSpy(EventBus eventBus, V view, P proxy) {
@@ -110,7 +110,7 @@ public class PresenterImplTest {
     PresenterA presenter = presenterAProvider.get();
 
     // Given
-    presenter.reveal();
+    presenter.notifyReveal();
     assertTrue(presenter.isVisible());
 
     // When
