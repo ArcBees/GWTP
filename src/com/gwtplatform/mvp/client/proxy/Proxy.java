@@ -33,11 +33,11 @@ import com.gwtplatform.mvp.client.Presenter;
  * Proxy and derived from this one. Naming this interface Proxy would therefore
  * be impractical for code-writing purposes.
  * 
- * @param <P> {@link Presenter}'s type.
+ * @param <T> The presenter's type.
  * 
  * @author beaudoin
  */
-public interface Proxy<P extends Presenter<?>> extends ProxyRaw {
+public interface Proxy<T extends Presenter<?, ?>> extends ProxyRaw {
 
   /**
    * Get the associated {@link Presenter}. The presenter can only be obtained in
@@ -47,6 +47,6 @@ public interface Proxy<P extends Presenter<?>> extends ProxyRaw {
    * @param callback The callback in which the {@link Presenter} will be passed
    *          as a parameter.
    */
-  void getPresenter(AsyncCallback<P> callback);
+  void getPresenter(AsyncCallback<T> callback);
 
 }

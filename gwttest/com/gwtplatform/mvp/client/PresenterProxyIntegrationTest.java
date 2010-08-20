@@ -40,7 +40,7 @@ public class PresenterProxyIntegrationTest extends GWTTestCase {
    * @author Philippe Beaudoin
    */
   public static class MyPresenter extends
-      PresenterImpl<View, MyPresenter.MyProxy> {
+      Presenter<View, MyPresenter.MyProxy> {
 
     /**
      * {@link MyPresenter}'s proxy.

@@ -16,7 +16,6 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 /**
@@ -25,14 +24,9 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * 
  * @author Philippe Beaudoin
  */
+@Deprecated
 public abstract class PresenterImpl<V extends View, Proxy_ extends Proxy<?>>
-    extends PresenterWidgetImpl<V> implements Presenter<V> {
-
-  /**
-   * The light-weight {@PresenterProxy} around this presenter.
-   */
-  private final Proxy_ proxy;
-
+    extends Presenter<V, Proxy_> {
   /**
    * Creates a basic {@link Presenter}.
    * 
@@ -41,61 +35,6 @@ public abstract class PresenterImpl<V extends View, Proxy_ extends Proxy<?>>
    * @param proxy The presenter proxy.
    */
   public PresenterImpl(final EventBus eventBus, final V view, final Proxy_ proxy) {
-    super(eventBus, view);
-    this.proxy = proxy;
+    super(eventBus, view, proxy);
   }
-
-  @Override
-  public final void forceReveal() {
-    if (isVisible()) {
-      return;
-    }
-    revealInParent();
-  }
-
-  @Override
-  public final Proxy_ getProxy() {
-    return proxy;
-  }
-
-  @Override
-  public void prepareFromRequest(PlaceRequest request) {
-    // By default, no parameter to extract from request.
-  }
-
-  @Override
-  public PlaceRequest prepareRequest(PlaceRequest request) {
-    // By default, no parameter to add to request
-    return request;
-  }
-
-  /**
-   * <b>Deprecated!</b> This method will soon be removed from the API. For more
-   * information see <a
-   * href="http://code.google.com/p/gwt-platform/issues/detail?id=136">Issue
-   * 136</a>.
-   * <p />
-   * Notify others that this presenter has been changed. This is especially
-   * useful for stateful presenters that store parameters within the history
-   * token. Calling this will make sure the history token is updated with the
-   * right parameters.
-   */
-  @Deprecated
-  protected final void notifyChange() {
-    getProxy().onPresenterChanged(this);
-  }
-
-  @Override
-  protected void onReset() {
-    super.onReset();
-    getProxy().onPresenterRevealed(this);
-  }
-
-  /**
-   * Called whenever the presenter needs to set its content in a parent. You
-   * need to override this method. You should usually fire a
-   * {@link RevealContentEvent}.
-   */
-  protected abstract void revealInParent();
-
 }

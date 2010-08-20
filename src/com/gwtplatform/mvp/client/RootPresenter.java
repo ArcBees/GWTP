@@ -44,7 +44,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * @author Philippe Beaudoin
  */
 public final class RootPresenter extends
-    PresenterWidgetImpl<RootPresenter.RootView> implements
+    PresenterWidget<RootPresenter.RootView> implements
     ResetPresentersHandler {
 
   /**
@@ -123,7 +123,7 @@ public final class RootPresenter extends
           public void onRevealContent(
               final RevealRootContentEvent revealContentEvent) {
             getView().setUsingRootLayoutPanel(false);
-            setContent(rootSlot, revealContentEvent.getContent());
+            setInSlot(rootSlot, revealContentEvent.getContent());
           }
         });
 
@@ -133,7 +133,7 @@ public final class RootPresenter extends
           public void onRevealContent(
               final RevealRootLayoutContentEvent revealContentEvent) {
             getView().setUsingRootLayoutPanel(true);
-            setContent(rootSlot, revealContentEvent.getContent());
+            setInSlot(rootSlot, revealContentEvent.getContent());
           }
         });
 

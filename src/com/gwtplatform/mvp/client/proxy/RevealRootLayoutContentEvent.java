@@ -35,7 +35,7 @@ public final class RevealRootLayoutContentEvent extends
 
   private static final Type<RevealRootLayoutContentHandler> TYPE = new Type<RevealRootLayoutContentHandler>();
 
-  public static void fire(final HasEventBus source, final Presenter<?> content) {
+  public static void fire(final HasEventBus source, final Presenter<?, ?> content) {
     source.fireEvent(new RevealRootLayoutContentEvent(content));
   }
 
@@ -43,9 +43,9 @@ public final class RevealRootLayoutContentEvent extends
     return TYPE;
   }
 
-  private final Presenter<?> content;
+  private final Presenter<?, ?> content;
 
-  public RevealRootLayoutContentEvent(Presenter<?> content) {
+  public RevealRootLayoutContentEvent(Presenter<?, ?> content) {
     this.content = content;
   }
 
@@ -54,7 +54,7 @@ public final class RevealRootLayoutContentEvent extends
     return getType();
   }
 
-  public Presenter<?> getContent() {
+  public Presenter<?, ?> getContent() {
     return content;
   }
 

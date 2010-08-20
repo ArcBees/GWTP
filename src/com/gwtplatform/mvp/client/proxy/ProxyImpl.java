@@ -23,14 +23,14 @@ import com.gwtplatform.mvp.client.IndirectProvider;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
- * @param <P> {@link Presenter}'s type.
- * 
  * @author Philippe Beaudoin
+ * 
+ * @param <T> The presenter's type.
  */
-public class ProxyImpl<P extends Presenter<?>> implements Proxy<P> {
+public class ProxyImpl<T extends Presenter<?, ?>> implements Proxy<T> {
 
   protected ProxyFailureHandler failureHandler;
-  protected IndirectProvider<P> presenter;
+  protected IndirectProvider<T> presenter;
 
   /**
    * Creates a Proxy class for a specific presenter.
@@ -39,22 +39,22 @@ public class ProxyImpl<P extends Presenter<?>> implements Proxy<P> {
   }
 
   @Override
-  public void getPresenter(AsyncCallback<P> callback) {
+  public void getPresenter(AsyncCallback<T> callback) {
     presenter.get(callback);
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public void getRawPresenter(AsyncCallback<Presenter<?>> callback) {
-    presenter.get((AsyncCallback<P>) callback);
+  public void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback) {
+    presenter.get((AsyncCallback<T>) callback);
   }
 
   @Override
-  public void onPresenterChanged(Presenter<?> presenter) {
+  public void onPresenterChanged(Presenter<?, ?> presenter) {
   }
 
   @Override
-  public void onPresenterRevealed(Presenter<?> presenter) {
+  public void onPresenterRevealed(Presenter<?, ?> presenter) {
   }
 
   /**
@@ -70,5 +70,4 @@ public class ProxyImpl<P extends Presenter<?>> implements Proxy<P> {
   protected void bind(ProxyFailureHandler failureHandler) {
     this.failureHandler = failureHandler;
   }
-
 }
