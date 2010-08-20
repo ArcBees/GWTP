@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 
-import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
 /**
@@ -32,12 +31,8 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy_ extends Proxy<?>>
-    extends PresenterImpl<V, Proxy_> implements TabContainerPresenter<V> {
-
-  private final Type<RequestTabsHandler> requestTabsEventType;
-  private final Object tabContentSlot;
-
+public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy_ extends TabContentProxy<?>>
+    extends TabContainerPresenter<V, Proxy_> {
   /**
    * Create a presenter that can display many tabs and the content of one of
    * these tabs.
@@ -53,42 +48,6 @@ public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy
   public TabContainerPresenterImpl(final EventBus eventBus, final V view,
       final Proxy_ proxy, final Object tabContentSlot,
       final Type<RequestTabsHandler> requestTabsEventType) {
-    super(eventBus, view, proxy);
-    this.tabContentSlot = tabContentSlot;
-    this.requestTabsEventType = requestTabsEventType;
+    super(eventBus, view, proxy, tabContentSlot, requestTabsEventType);
   }
-
-  @Override
-  public Tab addTab(final TabContentProxy<?> tabProxy) {
-    return getView().addTab(tabProxy.getLabel(), tabProxy.getHistoryToken(),
-        tabProxy.getPriority());
-  }
-
-  @Override
-  public void setContent(Object slot, PresenterWidget<?> content) {
-    super.setContent(slot, content);
-    if (slot == tabContentSlot) {
-      Tab tab = ((TabContentProxy<?>) ((Presenter<?>) content).getProxy()).getTab();
-      getView().setActiveTab(tab);
-    }
-  }
-
-  @Override
-  protected void onBind() {
-    super.onBind();
-
-    // The following call will trigger a series of call to addTab, so
-    // we should make sure we clear all the tabs when unbinding.
-    RequestTabsEvent.fire(this, requestTabsEventType, this);
-  }
-
-  @Override
-  protected void onUnbind() {
-    super.onUnbind();
-
-    // The tabs are added indirectly in onBind() via the RequestTabsEvent, so we
-    // clear them now.
-    getView().removeTabs();
-  }
-
 }

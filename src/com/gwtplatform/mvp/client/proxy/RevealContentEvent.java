@@ -31,16 +31,16 @@ import com.gwtplatform.mvp.client.Presenter;
 public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> {
 
   public static void fire(final HasEventBus source,
-      final Type<RevealContentHandler<?>> type, final Presenter<?> content) {
+      final Type<RevealContentHandler<?>> type, final Presenter<?, ?> content) {
     source.fireEvent(new RevealContentEvent(type, content));
   }
 
-  private final Presenter<?> content;
+  private final Presenter<?, ?> content;
 
   private final Type<RevealContentHandler<?>> type;
 
   public RevealContentEvent(Type<RevealContentHandler<?>> type,
-      Presenter<?> content) {
+      Presenter<?, ?> content) {
     this.type = type;
     this.content = content;
   }
@@ -50,7 +50,7 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
     return type;
   }
 
-  public Presenter<?> getContent() {
+  public Presenter<?, ?> getContent() {
     return content;
   }
 
