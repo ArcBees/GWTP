@@ -33,6 +33,6 @@ public interface RevealRootPopupContentHandler extends EventHandler {
    * @param event The event containing the presenter that wants to bet set as
    *          root popup content.
    */
-  void onRevealContent(RevealRootPopupContentEvent event);
+  void onRevealRootPopupContent(RevealRootPopupContentEvent event);
 
 }
