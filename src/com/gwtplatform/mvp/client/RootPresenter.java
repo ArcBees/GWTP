@@ -43,9 +43,10 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * 
  * @author Philippe Beaudoin
  */
-public final class RootPresenter extends
+public class RootPresenter extends
     PresenterWidget<RootPresenter.RootView> implements
-    ResetPresentersHandler {
+    ResetPresentersHandler, RevealRootContentHandler, 
+    RevealRootLayoutContentHandler, RevealRootPopupContentHandler {
 
   /**
    * {@link RootPresenter}'s view.
@@ -105,6 +106,19 @@ public final class RootPresenter extends
   }
 
   @Override
+  protected void onBind() {
+    super.onBind();
+
+    addRegisteredHandler(ResetPresentersEvent.getType(), this);
+
+    addRegisteredHandler(RevealRootContentEvent.getType(), this);
+
+    addRegisteredHandler(RevealRootLayoutContentEvent.getType(), this);
+
+    addRegisteredHandler(RevealRootPopupContentEvent.getType(), this);
+  }
+
+  @Override
   public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
     if (!isResetting) {
       isResetting = true;
@@ -112,41 +126,23 @@ public final class RootPresenter extends
       isResetting = false;
     }
   }
-
   @Override
-  protected void onBind() {
-    super.onBind();
+  public void onRevealRootContent(
+      final RevealRootContentEvent revealContentEvent) {
+    getView().setUsingRootLayoutPanel(false);
+    setInSlot(rootSlot, revealContentEvent.getContent());
+  }
 
-    addRegisteredHandler(RevealRootContentEvent.getType(),
-        new RevealRootContentHandler() {
-          @Override
-          public void onRevealContent(
-              final RevealRootContentEvent revealContentEvent) {
-            getView().setUsingRootLayoutPanel(false);
-            setInSlot(rootSlot, revealContentEvent.getContent());
-          }
-        });
-
-    addRegisteredHandler(RevealRootLayoutContentEvent.getType(),
-        new RevealRootLayoutContentHandler() {
-          @Override
-          public void onRevealContent(
-              final RevealRootLayoutContentEvent revealContentEvent) {
-            getView().setUsingRootLayoutPanel(true);
-            setInSlot(rootSlot, revealContentEvent.getContent());
-          }
-        });
-
-    addRegisteredHandler(RevealRootPopupContentEvent.getType(),
-        new RevealRootPopupContentHandler() {
-          @Override
-          public void onRevealContent(
-              final RevealRootPopupContentEvent revealContentEvent) {
-            addPopupContent(revealContentEvent.getContent());
-          }
-        });
-
-    addRegisteredHandler(ResetPresentersEvent.getType(), this);
+  public void onRevealRootLayoutContent(
+      final RevealRootLayoutContentEvent revealContentEvent) {
+    getView().setUsingRootLayoutPanel(true);
+    setInSlot(rootSlot, revealContentEvent.getContent());
+  }
+  
+  @Override
+  public void onRevealRootPopupContent(
+      final RevealRootPopupContentEvent revealContentEvent) {
+    addPopupContent(revealContentEvent.getContent());
   }
 
 }
