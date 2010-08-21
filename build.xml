@@ -3,7 +3,7 @@
 
 	<property name="version.num" value="0.4"/>
 	
-	<buildnumber file="build.num"/>
+	<property environment="env"/>
 	<property name="in.src.folder" location="src" />
 	<property name="in.test.folder" location="test" />
 	<property name="out.classes.folder" location="war/WEB-INF/classes" />
@@ -19,7 +19,13 @@
     <property name="base.gwtp.jar.name" value="gwtp"/>
     <property name="manifest.file" value="MANIFEST.MF"/>
 	<property name="all.gwtp.jar.files" value="${base.gwtp.jar.name}*.jar"/>
-	<property name="gwtp.jar.file" value="${base.gwtp.jar.name}-${version.num}-SNAPSHOT-b${build.number}.jar"/>
+	<condition property="version-suffix" value="-b${env.BUILD_NUMBER}" else="-SNAPSHOT">
+		<isset property="env.BUILD_NUMBER"/>
+	</condition>		
+	<property name="gwtp.jar.file" value="${base.gwtp.jar.name}-${version.num}${version-suffix}.jar"/>
+	<tstamp>
+		<format property="today.timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
 	
 	<path id="project.class.path">
 		<fileset dir="${warlib.folder}" includes="**/*.jar,**/*.class" />
@@ -63,7 +69,7 @@
 	
 	<target name="build" depends="clean,javac" description="Build this project" />
 
-	<target name="all" depends="clean,javac,tests,jar" description="Build test and package" />
+	<target name="all" depends="clean,javac,tests,jar" description="Build, test and package" />
 
 	<target name="clean" description="Cleans this project">
 		<delete file="${manifest.file}" failonerror="false" />
@@ -108,7 +114,8 @@
 	<target name="jar" depends="clean,javac" description="Package into a jar">
 		<manifest file="${manifest.file}">
 	        <attribute name="Built-By" value="teamcity.codebetter.com"/>
-	        <attribute name="Implementation-Version" value="${version.num}-b${build.number}"/> 
+	        <attribute name="Implementation-Version" value="${version.num}${version-suffix}"/> 
+		    <attribute name="Built-Date" value="${today.timestamp}"/>  			
 	    </manifest>
 		
 		<jar jarfile="${gwtp.jar.file}" manifest="${manifest.file}">
