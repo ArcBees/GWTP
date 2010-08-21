@@ -1,3 +1,5 @@
-#Tue May 04 11:58:19 PDT 2010
+#Fri Aug 20 17:22:45 PDT 2010
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=C\:/Users/beaudoin/workspace/gwtp/lib/mockito-all-1.8.4.jar|C\:/Users/beaudoin/workspace2/gwtp/lib/mockito-all-1.8.4.jar|C\:/Temp/web/gwtp/lib/mockito-all-1.8.4.jar|C\:/Users/beaudoin/coldwin/code/gwtp/lib/mockito-all-1.8.4.jar
+warSrcDir=war
+warSrcDirIsOutput=true
