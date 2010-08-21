@@ -1,3 +1,5 @@
+glob:src/**/*.class
+glob:test/**/*.class
 glob:war/WEB-INF/classes/**
 glob:war/WEB-INF/lib/appengine-api-*-sdk-*.jar
 glob:war/WEB-INF/lib/appengine-api-labs-*.jar
