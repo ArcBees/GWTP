@@ -21,6 +21,8 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
 /**
+ * Use {@link TabContainerPresenter} instead.
+ * 
  * A presenter that can display many tabs and the content of one of these tabs.
  * 
  * @param <V> The specific type of the {@link View}. Must implement
@@ -31,6 +33,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
+@Deprecated
 public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy_ extends TabContentProxy<?>>
     extends TabContainerPresenter<V, Proxy_> {
   /**

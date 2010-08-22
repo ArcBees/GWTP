@@ -25,12 +25,12 @@ import com.gwtplatform.mvp.client.Presenter;
 /**
  * @author Philippe Beaudoin
  * 
- * @param <T> The presenter's type.
+ * @param <P> The presenter's type.
  */
-public class ProxyImpl<T extends Presenter<?, ?>> implements Proxy<T> {
+public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
   protected ProxyFailureHandler failureHandler;
-  protected IndirectProvider<T> presenter;
+  protected IndirectProvider<P> presenter;
 
   /**
    * Creates a Proxy class for a specific presenter.
@@ -39,14 +39,14 @@ public class ProxyImpl<T extends Presenter<?, ?>> implements Proxy<T> {
   }
 
   @Override
-  public void getPresenter(AsyncCallback<T> callback) {
+  public void getPresenter(AsyncCallback<P> callback) {
     presenter.get(callback);
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback) {
-    presenter.get((AsyncCallback<T>) callback);
+    presenter.get((AsyncCallback<P>) callback);
   }
 
   @Override

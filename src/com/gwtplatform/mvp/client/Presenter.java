@@ -32,6 +32,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * @param <Proxy_> The {@link Proxy} type.
  * 
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 @Singleton
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends PresenterWidget<V> {

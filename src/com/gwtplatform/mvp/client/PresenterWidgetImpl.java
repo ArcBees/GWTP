@@ -17,6 +17,8 @@
 package com.gwtplatform.mvp.client;
 
 /**
+ * Use {@link PresenterWidget} instead.
+ * 
  * @param <V> The {@link View} type.
  * 
  * @author Philippe Beaudoin
@@ -47,29 +49,52 @@ public abstract class PresenterWidgetImpl<V extends View> extends PresenterWidge
     super(eventBus, view);
   }
   
+  /**
+   * Use {@link PresenterWidget#addToSlot(Object, PresenterWidget))} instead.
+   */
   @Deprecated
   public void addContent(Object slot, PresenterWidget<?> content) {
-    super.addInSlot(slot, content);
+    super.addToSlot(slot, content);
   }
   
+  /**
+   * Use {@link PresenterWidget#clearSlot(Object)} instead.
+   */
   @Deprecated
   public void clearContent(Object slot) {
     super.clearSlot(slot);
   }
 
+  /**
+   * Use {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)} instead.
+   */
   @Deprecated
   public void removeContent(Object slot, PresenterWidget<?> content) {
     super.removeFromSlot(slot, content);
   }
 
+  /**
+   * Use {@link PresenterWidget#setInSlot(Object, PresenterWidget)} instead.
+   */
   @Deprecated
   public void setContent(Object slot, PresenterWidget<?> content) {
-    setContent(slot, content, true);
+    setInSlot(slot, content, true);
+  }
+  
+  /**
+   * Use {@link PresenterWidget#addToPopupSlot(PresenterWidget)} instead.
+   */
+  @Deprecated
+  public void addPopupContent(final PresenterWidget<? extends PopupView> content) {
+    addToPopupSlot(content, true);
   }
 
+  /**
+   * Use {@link PresenterWidget#addToPopupSlot(PresenterWidget, boolean)} instead.
+   */
   @Deprecated
-  private void setContent(Object slot, PresenterWidget<?> content,
-      boolean performReset) {
-    super.setInSlot(slot, content);
+  public void addToPopupSlot(
+      final PresenterWidget<? extends PopupView> content, boolean center) {
+    addToPopupSlot(content, center);
   }
 }
