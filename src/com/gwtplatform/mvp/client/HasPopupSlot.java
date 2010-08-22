@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client;
 /**
  * @author Christian Goudreau
  */
-public interface HasPopupContent {
+public interface HasPopupSlot {
 
   /**
    * This method sets some popup content within the {@link Presenter} and
@@ -30,12 +30,12 @@ public interface HasPopupContent {
    * Contrary to the {@link setContent()} method, no
    * {@link ResetPresentersEvent} is fired.
    * 
-   * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+   * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
    *          will clear the slot.
    * 
-   * @see #addPopupContent(PresenterWidget)
+   * @see #addToPopupSlot(PresenterWidget)
    */
-  void addPopupContent(final PresenterWidget<? extends PopupView> content);
+  void addToPopupSlot(final PresenterWidget<? extends PopupView> child);
   
   /**
    * This method sets some popup content within the {@link Presenter}. The view
@@ -46,12 +46,12 @@ public interface HasPopupContent {
    * Contrary to the {@link setContent()} method, no
    * {@link ResetPresentersEvent} is fired.
    * 
-   * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+   * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
    *          will clear the slot.
    * @param center Pass {@code true} to center the popup, otherwise its position
    *          will not be adjusted.
    * 
-   * @see #addPopupContent(PresenterWidget)
+   * @see #addToPopupSlot(PresenterWidget)
    */
-  void addPopupContent(final PresenterWidget<? extends PopupView> content, boolean center);
+  void addToPopupSlot(final PresenterWidget<? extends PopupView> child, boolean center);
 }

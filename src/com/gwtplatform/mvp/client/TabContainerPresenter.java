@@ -21,12 +21,15 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
 /**
+ * A presenter that can display many tabs and the content of one of these tabs.
+ *
  * @param <V> The specific type of the {@link View}. Must implement
  *          {@link TabPanel}.
  * @param <Proxy_> The specific type of the proxy, must be a
  *          {@link TabContainerProxy}.
  * 
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends TabContentProxy<?>> extends Presenter<V, Proxy_> {
   private final Type<RequestTabsHandler> requestTabsEventType;
@@ -63,6 +66,16 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
         tabProxy.getPriority());
   }
   
+  /**
+   * This method sets some content in a specific slot of the {@link Presenter}.
+   * A {@link ResetPresentersEvent} will be fired after the top-most visible
+   * presenter is revealed.
+   * 
+   * @param slot An opaque object identifying which slot this content is being
+   *          set into. The attached view should know what to do with this slot.
+   * @param content The content, a {@link TabContainerPresenter}. Passing {@code null}
+   *          will clear the slot.
+   */
   public void setInSlot(Object slot, TabContainerPresenter<?, ?> content) {
     super.setInSlot(slot, content);
     

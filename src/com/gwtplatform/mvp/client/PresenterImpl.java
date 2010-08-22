@@ -19,6 +19,8 @@ package com.gwtplatform.mvp.client;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 /**
+ * Use {@link Presenter} instead.
+ * 
  * @param <V> The {@link View} type.
  * @param <Proxy_> The {@link Proxy} type.
  * 

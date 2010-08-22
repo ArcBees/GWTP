@@ -31,7 +31,7 @@ public interface HasSlots {
    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
    *          will not add anything.
    */
-  void addInSlot(Object slot, PresenterWidget<?> content);
+  void addToSlot(Object slot, PresenterWidget<?> content);
   
   /**
    * This method clears the content in a specific slot. No

@@ -71,9 +71,10 @@ import java.util.Map;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-//TODO: Remove after making members private
+// TODO: Remove after making members private
 @SuppressWarnings("deprecation")
-public abstract class PresenterWidget<V extends View> extends HandlerContainerImpl implements HasEventBus, HasSlots, HasPopupContent {
+public abstract class PresenterWidget<V extends View> extends
+    HandlerContainerImpl implements HasEventBus, HasSlots, HasPopupSlot {
   /**
    * The {@link EventBus} for the application.
    * 
@@ -81,7 +82,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
    */
   @Deprecated
   protected final EventBus eventBus; // TODO: Make private.
-  
+
   /**
    * The view for the presenter.
    * 
@@ -89,7 +90,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
    */
   @Deprecated
   protected final V view;
-  
+
   boolean visible;
 
   /**
@@ -100,16 +101,16 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
   private final Map<Object, List<PresenterWidget<?>>> activeChildren = new HashMap<Object, List<PresenterWidget<?>>>();
 
   /**
-   * The parent presenter, in order to make sure this widget is only ever in
-   * one parent.
+   * The parent presenter, in order to make sure this widget is only ever in one
+   * parent.
    */
   private PresenterWidget<?> currentParentPresenter;
 
   private final List<PresenterWidget<? extends PopupView>> popupChildren = new ArrayList<PresenterWidget<? extends PopupView>>();
 
   /**
-   * Creates a {@link PresenterWidgetImpl} that is not necessarily using
-   * automatic binding (see {@link HandlerContainerImpl(boolean)}).
+   * Creates a {@link PresenterWidget} that is not necessarily using automatic
+   * binding (see {@link HandlerContainerImpl(boolean)}).
    * 
    * @param eventBus The {@link EventBus}.
    * @param view The {@link View}.
@@ -118,20 +119,66 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
    */
   public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
     super(autoBind);
-    
+
     this.eventBus = eventBus;
     this.view = view;
   }
 
+  /**
+   * Creates a {@link PresenterWidget} with automatic binding (see {@link
+   * HandlerContainerImpl()}).
+   * 
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   */
   public PresenterWidget(EventBus eventBus, V view) {
     super();
-    
+
     this.eventBus = eventBus;
-    this.view = view;   
+    this.view = view;
   }
 
   @Override
-  public void addInSlot(Object slot, PresenterWidget<?> content) {
+  public void addToPopupSlot(final PresenterWidget<? extends PopupView> child) {
+    addToPopupSlot(child, true);
+  }
+
+  @Override
+  public void addToPopupSlot(final PresenterWidget<? extends PopupView> child,
+      boolean center) {
+    if (child == null) {
+      return;
+    }
+
+    child.reparent(this);
+
+    // Do nothing if the content is already added
+    for (PresenterWidget<?> popupPresenter : popupChildren) {
+      if (popupPresenter == child) {
+        return;
+      }
+    }
+
+    final PopupView popupView = child.getView();
+    popupChildren.add(child);
+
+    // Center if desired
+    if (center) {
+      popupView.center();
+    }
+
+    // Display the popup content
+    if (isVisible()) {
+      popupView.show();
+      // This presenter is visible, its time to call onReveal
+      // on the newly added child (and recursively on this child children)
+      monitorCloseEvent(child);
+      child.notifyReveal();
+    }
+  }
+
+  @Override
+  public void addToSlot(Object slot, PresenterWidget<?> content) {
     if (content == null) {
       return;
     }
@@ -152,57 +199,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
       // on the newly added child (and recursively on this child children)
       content.notifyReveal();
     }
-  }
-
-  @Override
-  public void addPopupContent(final PresenterWidget<? extends PopupView> content) {
-    addPopupContent(content, true);
-  }
-  
-  @Override
-  public void addPopupContent(final PresenterWidget<? extends PopupView> content, boolean center) {
-    if (content == null) {
-      return;
-    }
-
-    content.reparent(this);
-
-    // Do nothing if the content is already added
-    for (PresenterWidget<?> popupPresenter : popupChildren) {
-      if (popupPresenter == content) {
-        return;
-      }
-    }
-
-    final PopupView popupView = content.getView();
-    popupChildren.add(content);
-
-    // Center if desired
-    if (center) {
-      popupView.center();
-    }
-
-    // Display the popup content
-    if (isVisible()) {
-      popupView.show();
-      // This presenter is visible, its time to call onReveal
-      // on the newly added child (and recursively on this child children)
-      monitorCloseEvent(content);
-      content.notifyReveal();
-    }
-  }
-  /**
-   * Convenience method to register an event handler to the {@link EventBus}.
-   * The handler will be automatically unregistered when
-   * {@link HandlerContainer#unbind()} is called.
-   * 
-   * @param <H> The handler type
-   * @param type See {@link Type}
-   * @param handler The handler to register
-   */
-  public final <H extends EventHandler> void addRegisteredHandler(Type<H> type,
-      H handler) {
-    registerHandler(getEventBus().addHandler(type, handler));
   }
 
   @Override
@@ -227,23 +223,10 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
   }
 
   /**
-   * Makes it possible to access the {@link EventBus} object associated with
-   * that presenter.
-   * 
-   * @return The EventBus associated with that presenter.
-   */
-  public final EventBus getEventBus() {
-    return eventBus;
-  }
-
-  /**
    * Returns the {@link View} for the current presenter.
    * 
    * @return The view.
    */
-  // TODO This should be final. Can't be now because it makes testing injected
-  // PresenterWidgets impossible. Make final once
-  // http://code.google.com/p/gwt-platform/issues/detail?id=111 is solved.
   public final V getView() {
     return view;
   }
@@ -295,7 +278,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
   }
 
   @Override
-  public void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset) {
+  public void setInSlot(Object slot, PresenterWidget<?> content,
+      boolean performReset) {
     if (content == null) {
       // Assumes the user wants to clear the slot content.
       clearSlot(slot);
@@ -339,7 +323,31 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
       }
     }
   }
-  
+
+  /**
+   * Convenience method to register an event handler to the {@link EventBus}.
+   * The handler will be automatically unregistered when
+   * {@link HandlerContainer#unbind()} is called.
+   * 
+   * @param <H> The handler type
+   * @param type See {@link Type}
+   * @param handler The handler to register
+   */
+  protected final <H extends EventHandler> void addRegisteredHandler(
+      Type<H> type, H handler) {
+    registerHandler(getEventBus().addHandler(type, handler));
+  }
+
+  /**
+   * Makes it possible to access the {@link EventBus} object associated with
+   * that presenter.
+   * 
+   * @return The EventBus associated with that presenter.
+   */
+  protected final EventBus getEventBus() {
+    return eventBus;
+  }
+
   /**
    * <b>Important:</b> Make sure you call your superclass {@link #onHide()} if
    * you override.
@@ -372,7 +380,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
    */
   protected void onReveal() {
   }
-  
+
   /**
    * Call when you want to hide a presenter. You should fire a
    * {@link ResetPresentersEvent} instead.
@@ -391,9 +399,9 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     visible = false;
-    onHide();    
+    onHide();
   }
-  
+
   /**
    * Call when you need to reveal a presenter. You should fire a
    * {@link ResetPresentersEvent} instead.
@@ -416,7 +424,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
       popupPresenter.notifyReveal();
     }
   }
-  
+
   void reparent(PresenterWidget<?> newParent) {
     if (currentParentPresenter != null && currentParentPresenter != newParent) {
       currentParentPresenter.detach(this);
@@ -424,7 +432,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
     currentParentPresenter = newParent;
   }
-  
+
   /**
    * Call whenever the presenters need to be reset. You should fire a
    * {@link ResetPresentersEvent} instead.
@@ -438,9 +446,9 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
     for (PresenterWidget<?> popupPresenter : popupChildren) {
       popupPresenter.reset();
-    }    
+    }
   }
-  
+
   /**
    * Called by a child {@link PresenterWidget} when it wants to detach itself
    * from this parent.
@@ -452,7 +460,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
       slotChildren.remove(childPresenter);
     }
-    popupChildren.remove(childPresenter);   
+    popupChildren.remove(childPresenter);
   }
 
   /**
@@ -461,7 +469,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
    * 
    * @param popupPresenter The {@link PresenterWidgetImpl} to monitor.
    */
-  private void monitorCloseEvent(final PresenterWidget<? extends PopupView> popupPresenter) {
+  private void monitorCloseEvent(
+      final PresenterWidget<? extends PopupView> popupPresenter) {
     PopupView popupView = popupPresenter.getView();
 
     popupView.setCloseHandler(new PopupViewCloseHandler() {
@@ -474,7 +483,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
       }
     });
   }
-  
+
   /**
    * Go through the popup children and remove the specified one.
    * 

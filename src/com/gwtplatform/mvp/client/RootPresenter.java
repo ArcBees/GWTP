@@ -142,7 +142,7 @@ public class RootPresenter extends
   @Override
   public void onRevealRootPopupContent(
       final RevealRootPopupContentEvent revealContentEvent) {
-    addPopupContent(revealContentEvent.getContent());
+    addToPopupSlot(revealContentEvent.getContent());
   }
 
 }
