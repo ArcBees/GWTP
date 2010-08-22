@@ -221,8 +221,8 @@ public class PresenterWidgetImplTest {
     assertFalse(presenterWidgetA.isVisible());
 
     // When
-    presenterWidgetA.addPopupContent(popupContentB);
-    presenterWidgetA.addPopupContent(popupContentC);
+    presenterWidgetA.addToPopupSlot(popupContentB);
+    presenterWidgetA.addToPopupSlot(popupContentC);
 
     // Then
     verify(popupContentB.getView(), times(0)).show();
@@ -269,8 +269,8 @@ public class PresenterWidgetImplTest {
     presenterWidgetA.notifyReveal();
 
     // When
-    presenterWidgetA.addPopupContent(popupContentB);
-    presenterWidgetA.addPopupContent(popupContentC);
+    presenterWidgetA.addToPopupSlot(popupContentB);
+    presenterWidgetA.addToPopupSlot(popupContentC);
 
     // Then
     verify(popupContentB.getView()).show();
@@ -324,8 +324,8 @@ public class PresenterWidgetImplTest {
     presenterWidgetA.notifyReveal();
 
     // When
-    presenterWidgetA.addInSlot(slotBC, contentB);
-    presenterWidgetA.addInSlot(slotBC, contentC);
+    presenterWidgetA.addToSlot(slotBC, contentB);
+    presenterWidgetA.addToSlot(slotBC, contentC);
 
     // Then
     verify(viewAProvider.get()).addContent(slotBC, widgetB);
@@ -356,8 +356,8 @@ public class PresenterWidgetImplTest {
     assertFalse(presenterWidgetA.isVisible());
 
     // When
-    presenterWidgetA.addPopupContent(popupContentB, false);
-    presenterWidgetA.addPopupContent(popupContentC, false);
+    presenterWidgetA.addToPopupSlot(popupContentB, false);
+    presenterWidgetA.addToPopupSlot(popupContentC, false);
 
     // Then
     verify(popupContentB.getView(), times(0)).show();
@@ -430,8 +430,8 @@ public class PresenterWidgetImplTest {
 
     // Given
     presenterWidgetA.notifyReveal();
-    presenterWidgetA.addInSlot(slotBC, contentB);
-    presenterWidgetA.addInSlot(slotBC, contentC);
+    presenterWidgetA.addToSlot(slotBC, contentB);
+    presenterWidgetA.addToSlot(slotBC, contentC);
 
     // When
     presenterWidgetA.removeFromSlot(slotBC, contentB);
@@ -674,10 +674,10 @@ public class PresenterWidgetImplTest {
     // Given
     presenterWidgetA.notifyReveal();
     presenterWidgetB.notifyReveal();
-    presenterWidgetA.addPopupContent(popupContentC);
+    presenterWidgetA.addToPopupSlot(popupContentC);
 
     // When
-    presenterWidgetB.addPopupContent(popupContentC);
+    presenterWidgetB.addToPopupSlot(popupContentC);
     presenterWidgetB.notifyHide();
 
     // Then
@@ -694,12 +694,12 @@ public class PresenterWidgetImplTest {
     // Given
     presenterWidgetA.notifyReveal();
     presenterWidgetB.notifyReveal();
-    presenterWidgetA.addPopupContent(popupContentC);
+    presenterWidgetA.addToPopupSlot(popupContentC);
 
     // When
-    presenterWidgetB.addPopupContent(popupContentC);
+    presenterWidgetB.addToPopupSlot(popupContentC);
     presenterWidgetB.notifyHide();
-    presenterWidgetA.addPopupContent(popupContentC);
+    presenterWidgetA.addToPopupSlot(popupContentC);
 
     // Then
     assertTrue(popupContentC.isVisible());
