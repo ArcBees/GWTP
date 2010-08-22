@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * You can usually inherit from the simpler form {@link ProxyPlace}.
  * <p />
  * 
- * @param <T> The Presenter's type.
+ * @param <P> The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
  * 
  * @author David Peterson
@@ -39,8 +39,8 @@ import com.gwtplatform.mvp.client.Presenter;
  */
 @SuppressWarnings("deprecation")
 // TODO: Remove after making members private
-public class ProxyPlaceAbstract<T extends Presenter<?, ?>, Proxy_ extends Proxy<T>>
-    implements ProxyPlace<T> {
+public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>>
+    implements ProxyPlace<P> {
 
   /**
    * The {@link EventBus} for the application.
@@ -96,7 +96,7 @@ public class ProxyPlaceAbstract<T extends Presenter<?, ?>, Proxy_ extends Proxy<
   // Inherited from Place
 
   @Override
-  public void getPresenter(AsyncCallback<T> callback) {
+  public void getPresenter(AsyncCallback<P> callback) {
     proxy.getPresenter(callback);
   }
 
@@ -223,7 +223,7 @@ public class ProxyPlaceAbstract<T extends Presenter<?, ?>, Proxy_ extends Proxy<
    *          revealed.
    */
   private void handleRequest(final PlaceRequest request) {
-    proxy.getPresenter(new AsyncCallback<T>() {
+    proxy.getPresenter(new AsyncCallback<P>() {
 
       @Override
       public void onFailure(Throwable caught) {
@@ -231,7 +231,7 @@ public class ProxyPlaceAbstract<T extends Presenter<?, ?>, Proxy_ extends Proxy<
       }
 
       @Override
-      public void onSuccess(final T presenter) {
+      public void onSuccess(final P presenter) {
         // Everything should be bound before we prepare the presenter from the
         // request,
         // in case it wants to fire some events. That's why we will do this in a
