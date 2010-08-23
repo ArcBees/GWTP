@@ -14,7 +14,6 @@
  * the License.
  */
 
-
 package com.gwtplatform.testing;
 
 import com.google.inject.AbstractModule;
