@@ -24,12 +24,12 @@ import com.google.gwt.event.shared.GwtEvent;
 public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
 
   public static void fire(final HasEventBus source,
-      final Type<RequestTabsHandler> type, TabContainerPresenter tabContainer) {
+      final Type<RequestTabsHandler> type, TabContainerPresenter<?, ?> tabContainer) {
 
     source.fireEvent(new RequestTabsEvent(type, tabContainer));
   }
 
-  private final TabContainerPresenter tabContainer;
+  private final TabContainerPresenter<?, ?> tabContainer;
   private final Type<RequestTabsHandler> type;
 
   /**
@@ -40,7 +40,7 @@ public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
    * @param tabContainer The {@link TabContainerPresenter} making the request.
    */
   public RequestTabsEvent(final Type<RequestTabsHandler> type,
-      TabContainerPresenter tabContainer) {
+      TabContainerPresenter<?, ?> tabContainer) {
     this.type = type;
     this.tabContainer = tabContainer;
   }
@@ -50,7 +50,7 @@ public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
     return type;
   }
 
-  public TabContainerPresenter getTabContainer() {
+  public TabContainerPresenter<?, ?> getTabContainer() {
     return tabContainer;
   }
 

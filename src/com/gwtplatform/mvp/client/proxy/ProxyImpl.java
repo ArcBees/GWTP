@@ -23,11 +23,11 @@ import com.gwtplatform.mvp.client.IndirectProvider;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
- * @param <P> {@link Presenter}'s type.
- * 
  * @author Philippe Beaudoin
+ * 
+ * @param <P> The presenter's type.
  */
-public class ProxyImpl<P extends Presenter> implements Proxy<P> {
+public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
   protected ProxyFailureHandler failureHandler;
   protected IndirectProvider<P> presenter;
@@ -45,16 +45,16 @@ public class ProxyImpl<P extends Presenter> implements Proxy<P> {
 
   @SuppressWarnings("unchecked")
   @Override
-  public void getRawPresenter(AsyncCallback<Presenter> callback) {
+  public void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback) {
     presenter.get((AsyncCallback<P>) callback);
   }
 
   @Override
-  public void onPresenterChanged(Presenter presenter) {
+  public void onPresenterChanged(Presenter<?, ?> presenter) {
   }
 
   @Override
-  public void onPresenterRevealed(Presenter presenter) {
+  public void onPresenterRevealed(Presenter<?, ?> presenter) {
   }
 
   /**
@@ -70,5 +70,4 @@ public class ProxyImpl<P extends Presenter> implements Proxy<P> {
   protected void bind(ProxyFailureHandler failureHandler) {
     this.failureHandler = failureHandler;
   }
-
 }

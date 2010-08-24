@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.gwtplatform.mvp.client.HasEventBus;
+import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
@@ -31,7 +32,7 @@ public final class RevealRootPopupContentEvent extends
 
   private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
 
-  public static void fire(final HasEventBus source, final PresenterWidget content) {
+  public static void fire(final HasEventBus source, final PresenterWidget<? extends PopupView> content) {
     source.fireEvent(new RevealRootPopupContentEvent(content));
   }
 
@@ -39,9 +40,9 @@ public final class RevealRootPopupContentEvent extends
     return TYPE;
   }
 
-  private final PresenterWidget content;
+  private final PresenterWidget<? extends PopupView> content;
 
-  public RevealRootPopupContentEvent(PresenterWidget content) {
+  public RevealRootPopupContentEvent(PresenterWidget<? extends PopupView> content) {
     this.content = content;
   }
 
@@ -50,7 +51,7 @@ public final class RevealRootPopupContentEvent extends
     return getType();
   }
 
-  public PresenterWidget getContent() {
+  public PresenterWidget<? extends PopupView> getContent() {
     return content;
   }
 
