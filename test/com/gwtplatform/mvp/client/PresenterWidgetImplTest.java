@@ -187,7 +187,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetA presenterWidget = presenterWidgetAProvider.get();
 
     // Given, When
-    presenterWidget.notifyReveal();
+    presenterWidget.reveal();
 
     // Then
     assertTrue(presenterWidget.isVisible());
@@ -236,7 +236,7 @@ public class PresenterWidgetImplTest {
     assertEquals(0, popupContentC.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // Then
     assertEquals(1, popupContentB.onRevealMethodCalled);
@@ -245,7 +245,7 @@ public class PresenterWidgetImplTest {
     verify(popupContentC.getView()).show();
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, popupContentB.onRevealMethodCalled);
@@ -266,7 +266,7 @@ public class PresenterWidgetImplTest {
     PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // When
     presenterWidgetA.addToPopupSlot(popupContentB);
@@ -284,7 +284,7 @@ public class PresenterWidgetImplTest {
     assertTrue(popupContentC.isVisible());
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, popupContentB.onRevealMethodCalled);
@@ -297,7 +297,7 @@ public class PresenterWidgetImplTest {
     verify(popupContentC.getView()).hide();
 
     // and then When
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // Then
     assertEquals(2, popupContentB.onRevealMethodCalled);
@@ -321,7 +321,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentC = presenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // When
     presenterWidgetA.addToSlot(slotBC, contentB);
@@ -369,7 +369,7 @@ public class PresenterWidgetImplTest {
     assertEquals(0, popupContentC.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // Then
     assertEquals(1, popupContentB.onRevealMethodCalled);
@@ -378,7 +378,7 @@ public class PresenterWidgetImplTest {
     verify(popupContentC.getView()).show();
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, popupContentB.onRevealMethodCalled);
@@ -402,7 +402,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetB contentB = presenterWidgetBProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
     presenterWidgetA.setInSlot(slotB, contentB);
 
     // When
@@ -414,7 +414,7 @@ public class PresenterWidgetImplTest {
     assertEquals(1, contentB.onHideMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, contentB.onHideMethodCalled);
@@ -429,7 +429,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentC = presenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
     presenterWidgetA.addToSlot(slotBC, contentB);
     presenterWidgetA.addToSlot(slotBC, contentC);
 
@@ -469,14 +469,14 @@ public class PresenterWidgetImplTest {
     assertEquals(0, contentCinB.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
     assertEquals(1, contentCinB.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
@@ -514,14 +514,14 @@ public class PresenterWidgetImplTest {
     assertEquals(0, contentB.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
     assertEquals(1, contentCinB.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
@@ -540,7 +540,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentCinB = presenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // When
     presenterWidgetA.setInSlot(slotB, contentB);
@@ -555,7 +555,7 @@ public class PresenterWidgetImplTest {
     assertEquals(1, contentCinB.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
@@ -589,14 +589,14 @@ public class PresenterWidgetImplTest {
     assertEquals(0, contentC.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
     assertEquals(1, contentC.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
@@ -615,7 +615,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentC = presenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
 
     // When
     presenterWidgetA.setInSlot(slotB, contentB);
@@ -629,7 +629,7 @@ public class PresenterWidgetImplTest {
     assertEquals(1, contentC.onRevealMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, contentB.onRevealMethodCalled);
@@ -646,7 +646,7 @@ public class PresenterWidgetImplTest {
     PresenterWidgetB contentB = presenterWidgetBProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
+    presenterWidgetA.reveal();
     presenterWidgetA.setInSlot(slotB, contentB);
 
     // When
@@ -658,7 +658,7 @@ public class PresenterWidgetImplTest {
     assertEquals(1, contentB.onHideMethodCalled);
 
     // and then When
-    presenterWidgetA.notifyHide();
+    presenterWidgetA.hide();
 
     // Then
     assertEquals(1, contentB.onHideMethodCalled);
@@ -672,13 +672,13 @@ public class PresenterWidgetImplTest {
     PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
-    presenterWidgetB.notifyReveal();
+    presenterWidgetA.reveal();
+    presenterWidgetB.reveal();
     presenterWidgetA.addToPopupSlot(popupContentC);
 
     // When
     presenterWidgetB.addToPopupSlot(popupContentC);
-    presenterWidgetB.notifyHide();
+    presenterWidgetB.hide();
 
     // Then
     assertFalse(popupContentC.isVisible());
@@ -692,13 +692,13 @@ public class PresenterWidgetImplTest {
     PopupPresenterWidgetC popupContentC = popupPresenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
-    presenterWidgetB.notifyReveal();
+    presenterWidgetA.reveal();
+    presenterWidgetB.reveal();
     presenterWidgetA.addToPopupSlot(popupContentC);
 
     // When
     presenterWidgetB.addToPopupSlot(popupContentC);
-    presenterWidgetB.notifyHide();
+    presenterWidgetB.hide();
     presenterWidgetA.addToPopupSlot(popupContentC);
 
     // Then
@@ -715,13 +715,13 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentC = presenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
-    presenterWidgetB.notifyReveal();
+    presenterWidgetA.reveal();
+    presenterWidgetB.reveal();
 
     // When
     presenterWidgetA.setInSlot(slotCinA, contentC);
     presenterWidgetB.setInSlot(slotCinB, contentC);
-    presenterWidgetB.notifyHide();
+    presenterWidgetB.hide();
 
     // Then
     assertFalse(contentC.isVisible());
@@ -737,13 +737,13 @@ public class PresenterWidgetImplTest {
     PresenterWidgetC contentC = presenterWidgetCProvider.get();
 
     // Given
-    presenterWidgetA.notifyReveal();
-    presenterWidgetB.notifyReveal();
+    presenterWidgetA.reveal();
+    presenterWidgetB.reveal();
 
     // When
     presenterWidgetA.setInSlot(slotCinA, contentC);
     presenterWidgetB.setInSlot(slotCinB, contentC);
-    presenterWidgetB.notifyHide();
+    presenterWidgetB.hide();
     presenterWidgetA.setInSlot(slotCinA, contentC);
 
     // Then
