@@ -110,7 +110,7 @@ public class PresenterImplTest {
     PresenterA presenter = presenterAProvider.get();
 
     // Given
-    presenter.notifyReveal();
+    presenter.reveal();
     assertTrue(presenter.isVisible());
 
     // When
