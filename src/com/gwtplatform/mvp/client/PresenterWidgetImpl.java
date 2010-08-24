@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Use {@link PresenterWidget} instead.
+ * Deprecated, use {@link PresenterWidget} instead.
  * 
  * @param <V> The {@link View} type.
  * 
@@ -47,54 +47,5 @@ public abstract class PresenterWidgetImpl<V extends View> extends PresenterWidge
    */
   public PresenterWidgetImpl(EventBus eventBus, V view) {
     super(eventBus, view);
-  }
-  
-  /**
-   * Use {@link PresenterWidget#addToSlot(Object, PresenterWidget))} instead.
-   */
-  @Deprecated
-  public void addContent(Object slot, PresenterWidget<?> content) {
-    super.addToSlot(slot, content);
-  }
-  
-  /**
-   * Use {@link PresenterWidget#clearSlot(Object)} instead.
-   */
-  @Deprecated
-  public void clearContent(Object slot) {
-    super.clearSlot(slot);
-  }
-
-  /**
-   * Use {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)} instead.
-   */
-  @Deprecated
-  public void removeContent(Object slot, PresenterWidget<?> content) {
-    super.removeFromSlot(slot, content);
-  }
-
-  /**
-   * Use {@link PresenterWidget#setInSlot(Object, PresenterWidget)} instead.
-   */
-  @Deprecated
-  public void setContent(Object slot, PresenterWidget<?> content) {
-    setInSlot(slot, content, true);
-  }
-  
-  /**
-   * Use {@link PresenterWidget#addToPopupSlot(PresenterWidget)} instead.
-   */
-  @Deprecated
-  public void addPopupContent(final PresenterWidget<? extends PopupView> content) {
-    addToPopupSlot(content, true);
-  }
-
-  /**
-   * Use {@link PresenterWidget#addToPopupSlot(PresenterWidget, boolean)} instead.
-   */
-  @Deprecated
-  public void addPopupContent(
-      final PresenterWidget<? extends PopupView> content, boolean center) {
-    addToPopupSlot(content, center);
-  }
+  }  
 }

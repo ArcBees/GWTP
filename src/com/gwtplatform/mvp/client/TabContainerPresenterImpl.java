@@ -17,11 +17,10 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
-
-import com.gwtplatform.mvp.client.proxy.TabContentProxy;
+import com.gwtplatform.mvp.client.proxy.Proxy;
 
 /**
- * Use {@link TabContainerPresenter} instead.
+ * Deprecated, use {@link TabContainerPresenter} instead.
  * 
  * A presenter that can display many tabs and the content of one of these tabs.
  * 
@@ -34,7 +33,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * @author Christian Goudreau
  */
 @Deprecated
-public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy_ extends TabContentProxy<?>>
+public abstract class TabContainerPresenterImpl<V extends View & TabPanel, Proxy_ extends Proxy<?>>
     extends TabContainerPresenter<V, Proxy_> {
   /**
    * Create a presenter that can display many tabs and the content of one of
