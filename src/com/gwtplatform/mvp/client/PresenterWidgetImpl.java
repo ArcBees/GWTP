@@ -93,7 +93,7 @@ public abstract class PresenterWidgetImpl<V extends View> extends PresenterWidge
    * Use {@link PresenterWidget#addToPopupSlot(PresenterWidget, boolean)} instead.
    */
   @Deprecated
-  public void addToPopupSlot(
+  public void addPopupContent(
       final PresenterWidget<? extends PopupView> content, boolean center) {
     addToPopupSlot(content, center);
   }
