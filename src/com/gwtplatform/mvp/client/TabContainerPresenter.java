@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
-
+import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
 /**
@@ -31,7 +31,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends TabContentProxy<?>> extends Presenter<V, Proxy_> {
+public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends Proxy<?>> extends Presenter<V, Proxy_> {
   private final Type<RequestTabsHandler> requestTabsEventType;
   private final Object tabContentSlot;
   
@@ -66,22 +66,22 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
         tabProxy.getPriority());
   }
   
-  /**
-   * This method sets some content in a specific slot of the {@link Presenter}.
-   * A {@link ResetPresentersEvent} will be fired after the top-most visible
-   * presenter is revealed.
-   * 
-   * @param slot An opaque object identifying which slot this content is being
-   *          set into. The attached view should know what to do with this slot.
-   * @param content The content, a {@link TabContainerPresenter}. Passing {@code null}
-   *          will clear the slot.
-   */
-  public void setInSlot(Object slot, TabContainerPresenter<?, ?> content) {
+  @Override
+  public void setInSlot(Object slot, PresenterWidget<?> content) {
     super.setInSlot(slot, content);
     
+    // TODO: Consider switching this to an event bus based mechanism where the
+    // child presenter fires an event when it is revealed and the parent highlights the tab.
+
+    // If we're setting a presenter attached to an actual slot, then highlight the tab
     if (slot == tabContentSlot) {
-      Tab tab = content.getProxy().getTab();
-      getView().setActiveTab(tab);
+      try {
+        Presenter<?,?> presenter = (Presenter<?,?>) content;
+        TabContentProxy<?> proxy = (TabContentProxy<?>) presenter.getProxy();
+        getView().setActiveTab(proxy.getTab());
+      } catch (Exception e) {
+        // We can't cast, no worry, we just won't highlight a tab
+      }      
     }
   }
   
