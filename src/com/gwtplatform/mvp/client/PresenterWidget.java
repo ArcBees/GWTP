@@ -139,12 +139,12 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   @Override
-  public void addToPopupSlot(final PresenterWidget<? extends PopupView> child) {
+  public final void addToPopupSlot(final PresenterWidget<? extends PopupView> child) {
     addToPopupSlot(child, true);
   }
 
   @Override
-  public void addToPopupSlot(final PresenterWidget<? extends PopupView> child,
+  public final void addToPopupSlot(final PresenterWidget<? extends PopupView> child,
       boolean center) {
     if (child == null) {
       return;
@@ -173,12 +173,12 @@ public abstract class PresenterWidget<V extends View> extends
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
       monitorCloseEvent(child);
-      child.notifyReveal();
+      child.reveal();
     }
   }
 
   @Override
-  public void addToSlot(Object slot, PresenterWidget<?> content) {
+  public final void addToSlot(Object slot, PresenterWidget<?> content) {
     if (content == null) {
       return;
     }
@@ -197,19 +197,19 @@ public abstract class PresenterWidget<V extends View> extends
     if (isVisible()) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      content.notifyReveal();
+      content.reveal();
     }
   }
 
   @Override
-  public void clearSlot(Object slot) {
+  public final void clearSlot(Object slot) {
     List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
     if (slotChildren != null) {
       // This presenter is visible, its time to call onHide
       // on the children to be removed (and recursively on their children)
       if (isVisible()) {
         for (PresenterWidget<?> activeChild : slotChildren) {
-          activeChild.notifyHide();
+          activeChild.hide();
         }
       }
       slotChildren.clear();
@@ -253,7 +253,7 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   @Override
-  public void removeFromSlot(Object slot, PresenterWidget<?> content) {
+  public final void removeFromSlot(Object slot, PresenterWidget<?> content) {
     if (content == null) {
       return;
     }
@@ -265,7 +265,7 @@ public abstract class PresenterWidget<V extends View> extends
       // This presenter is visible, its time to call onHide
       // on the child to be removed (and recursively on itschildren)
       if (isVisible()) {
-        content.notifyHide();
+        content.hide();
       }
       slotChildren.remove(content);
     }
@@ -273,12 +273,12 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   @Override
-  public void setInSlot(Object slot, PresenterWidget<?> content) {
+  public final void setInSlot(Object slot, PresenterWidget<?> content) {
     setInSlot(slot, content, true);
   }
 
   @Override
-  public void setInSlot(Object slot, PresenterWidget<?> content,
+  public final void setInSlot(Object slot, PresenterWidget<?> content,
       boolean performReset) {
     if (content == null) {
       // Assumes the user wants to clear the slot content.
@@ -300,7 +300,7 @@ public abstract class PresenterWidget<V extends View> extends
         // We are visible, make sure the content that we're removing
         // is being notified as hidden
         for (PresenterWidget<?> activeChild : slotChildren) {
-          activeChild.notifyHide();
+          activeChild.hide();
         }
       }
       slotChildren.clear();
@@ -316,7 +316,7 @@ public abstract class PresenterWidget<V extends View> extends
     if (isVisible()) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      content.notifyReveal();
+      content.reveal();
       if (performReset) {
         // And to reset everything if needed
         ResetPresentersEvent.fire(this);
@@ -385,16 +385,16 @@ public abstract class PresenterWidget<V extends View> extends
    * Call when you want to hide a presenter. You should fire a
    * {@link ResetPresentersEvent} instead.
    */
-  void notifyHide() {
+  void hide() {
     assert isVisible() : "Hide() called on a hidden presenter!";
     for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
       for (PresenterWidget<?> activeChild : slotChildren) {
-        activeChild.notifyHide();
+        activeChild.hide();
       }
     }
     for (PresenterWidget<? extends PopupView> popupPresenter : popupChildren) {
       popupPresenter.getView().setCloseHandler(null);
-      popupPresenter.notifyHide();
+      popupPresenter.hide();
       popupPresenter.getView().hide();
     }
 
@@ -406,14 +406,14 @@ public abstract class PresenterWidget<V extends View> extends
    * Call when you need to reveal a presenter. You should fire a
    * {@link ResetPresentersEvent} instead.
    */
-  void notifyReveal() {
+  void reveal() {
     assert !isVisible() : "notifyReveal() called on a visible presenter!";
     onReveal();
     visible = true;
 
     for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
       for (PresenterWidget<?> activeChild : slotChildren) {
-        activeChild.notifyReveal();
+        activeChild.reveal();
       }
     }
     for (PresenterWidget<? extends PopupView> popupPresenter : popupChildren) {
@@ -421,7 +421,7 @@ public abstract class PresenterWidget<V extends View> extends
       // on the newly added child (and recursively on this child children)
       popupPresenter.getView().show();
       monitorCloseEvent(popupPresenter);
-      popupPresenter.notifyReveal();
+      popupPresenter.reveal();
     }
   }
 
@@ -477,7 +477,7 @@ public abstract class PresenterWidget<V extends View> extends
       @Override
       public void onClose() {
         if (isVisible()) {
-          popupPresenter.notifyHide();
+          popupPresenter.hide();
         }
         removePopupChildren(popupPresenter);
       }
