@@ -14,28 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionHandlerValidator;
+package com.gwtplatform.dispatch.server.actionvalidator;
+
+import com.google.inject.Singleton;
 
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * This is the interface that define the map of
- * {@link ActionHandlerValidatorInstance}.
- * 
- * @param <A> Type of the associated {@link Action}
- * @param <R> Type of the associated {@link Result}
+ * The default {@link ActionValidator} implementation. It'll accept every
+ * action.
  * 
  * @author Christian Goudreau
  */
-public interface ActionHandlerValidatorMap<A extends Action<R>, R extends Result> {
-  /**
-   * @return the {@link Action} class associated
-   */
-  Class<A> getActionClass();
-
-  /**
-   * @return the {@link ActionHandlerValidatorClass} class associated
-   */
-  ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass();
+@Singleton
+public class DefaultActionValidator implements ActionValidator {
+  @Override
+  public boolean isValid(Action<? extends Result> action) {
+    return true;
+  }
 }

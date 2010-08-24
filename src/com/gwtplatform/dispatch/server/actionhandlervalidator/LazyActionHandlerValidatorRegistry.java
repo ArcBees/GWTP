@@ -14,32 +14,39 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionHandlerValidator;
+package com.gwtplatform.dispatch.server.actionhandlervalidator;
 
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
+
 /**
  * @author Christian Goudreau
  */
-public interface EagerActionHandlerValidatorRegistry extends
+public interface LazyActionHandlerValidatorRegistry extends
     ActionHandlerValidatorRegistry {
   /**
+   * Registers the specified {@link ActionValidator} class with the registry.
+   * 
    * @param <A> Type of associated {@link Action}
    * @param <R> Type of associated {@link Result}
    * @param actionClass The {@link Action} class
+   * @param actionHandlerValidatorClass The {@link ActionHandlerValidatorClass}
    */
-  <A extends Action<R>, R extends Result> void addActionHandlerValidator(
+  <A extends Action<R>, R extends Result> void addActionHandlerValidatorClass(
       Class<A> actionClass,
-      ActionHandlerValidatorInstance actionHandlerValidatorInstance);
+      ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass);
 
   /**
+   * Removes any registration of specified class, as well as any instances which
+   * have been created.
+   * 
    * @param <A> Type of associated {@link Action}
    * @param <R> Type of associated {@link Result}
    * @param actionClass The {@link Action} class
-   * @return <code>true</code> if the handler was previously registered and was
-   *         successfully removed.
+   * @param actionValidatorClass The {@link ActionValidator} class
    */
-  <A extends Action<R>, R extends Result> boolean removeActionHandlerValidator(
-      Class<A> actionClass);
+  <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(
+      Class<A> actionClass,
+      ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass);
 }

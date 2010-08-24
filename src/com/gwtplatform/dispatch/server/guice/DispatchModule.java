@@ -21,10 +21,10 @@ import com.google.inject.Singleton;
 
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.DispatchImpl;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorLinker;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistry;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistryImpl;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinker;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl;
 
 /**
  * This module will configure the implementation for the {@link Dispatch} and

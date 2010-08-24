@@ -20,11 +20,11 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.Tab;
 
 /**
- * @param <P> {@link Presenter}'s type.
+ * @param <T> The Presenter's type.
  * 
  * @author Philippe Beaudoin
  */
-public interface TabContentProxy<P extends Presenter> extends Proxy<P> {
+public interface TabContentProxy<T extends Presenter<?, ?>> extends Proxy<T> {
 
   /**
    * Retrieves the history token to show when this tab is displayed. In the

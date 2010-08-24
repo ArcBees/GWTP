@@ -14,11 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionHandlerValidator;
+package com.gwtplatform.dispatch.server.actionhandlervalidator;
 
 import com.google.inject.Singleton;
 
-import com.gwtplatform.dispatch.server.actionValidator.ActionValidator;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
