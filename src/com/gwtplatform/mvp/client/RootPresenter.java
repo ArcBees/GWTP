@@ -22,7 +22,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersHandler;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
@@ -45,7 +44,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * @author Philippe Beaudoin
  */
 public class RootPresenter extends
-    PresenterWidgetImpl<RootPresenter.RootView> implements
+    PresenterWidget<RootPresenter.RootView> implements
     ResetPresentersHandler, RevealRootContentHandler, 
     RevealRootLayoutContentHandler, RevealRootPopupContentHandler {
 
@@ -54,7 +53,7 @@ public class RootPresenter extends
    */
   public static final class RootView extends ViewImpl {
 
-    private boolean usingRootLayoutPanel = false;
+    private boolean usingRootLayoutPanel;
 
     @Override
     public Widget asWidget() {
@@ -93,7 +92,7 @@ public class RootPresenter extends
 
   private static final Object rootSlot = new Object();
 
-  private boolean isResetting = false;
+  private boolean isResetting;
 
   /**
    * Creates a proxy class for a presenter that can contain tabs.
@@ -131,20 +130,19 @@ public class RootPresenter extends
   public void onRevealRootContent(
       final RevealRootContentEvent revealContentEvent) {
     getView().setUsingRootLayoutPanel(false);
-    setContent(rootSlot, (PresenterWidgetImpl<?>) revealContentEvent.getContent());
+    setInSlot(rootSlot, revealContentEvent.getContent());
   }
 
-  @Override
   public void onRevealRootLayoutContent(
       final RevealRootLayoutContentEvent revealContentEvent) {
     getView().setUsingRootLayoutPanel(true);
-    setContent(rootSlot, (PresenterWidgetImpl<?>) revealContentEvent.getContent());
+    setInSlot(rootSlot, revealContentEvent.getContent());
   }
   
   @Override
   public void onRevealRootPopupContent(
       final RevealRootPopupContentEvent revealContentEvent) {
-    addPopupContent((PresenterWidgetImpl<?>) revealContentEvent.getContent());
+    addToPopupSlot(revealContentEvent.getContent());
   }
-  
+
 }

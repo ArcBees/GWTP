@@ -38,9 +38,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class PresenterImplTest {
-  // Guice environment
   /**
-   * @author Philippe Beaudoin
+   * Guice environment.
    */
   public static class Env extends TestModule {
     @Override
@@ -60,8 +59,8 @@ public class PresenterImplTest {
   }
   // Simple subclasses of PresenterWidgetImpl
   abstract static class PresenterSpy<V extends View, P extends Proxy<?>>
-      extends PresenterImpl<V, P> {
-    public int revealInParentCalled = 0;
+      extends Presenter<V, P> {
+    public int revealInParentCalled;
 
     PresenterSpy(EventBus eventBus, V view, P proxy) {
       super(eventBus, view, proxy);
@@ -111,7 +110,7 @@ public class PresenterImplTest {
     PresenterA presenter = presenterAProvider.get();
 
     // Given
-    presenter.notifyReveal();
+    presenter.reveal();
     assertTrue(presenter.isVisible());
 
     // When

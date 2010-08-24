@@ -23,3 +23,5 @@ glob:gwtp*.jar
 glob:MANIFEST.MF
 glob:build.num
 
+syntax: regexp
+^crchris\.bat$

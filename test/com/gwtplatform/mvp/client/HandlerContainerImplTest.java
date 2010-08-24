@@ -42,8 +42,8 @@ public class HandlerContainerImplTest {
   // A subclass of HandlerContainerImpl that does not use autobinding
   // and counts its inherited method invocations
   static class NonAutoboundHandlerContainer extends HandlerContainerImpl {
-    public int onBindMethodCalled = 0;
-    public int onUnbindMethodCalled = 0;
+    public int onBindMethodCalled;
+    public int onUnbindMethodCalled;
 
     @Inject
     NonAutoboundHandlerContainer() {

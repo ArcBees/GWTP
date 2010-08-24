@@ -14,27 +14,33 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.externaltest;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.HasEventBus;
-import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.View;
 
 /**
- * The interface of a {@link Proxy} that is also a {@link Place}.
- *
- * @param <P> The Presenter's type.
+ * This is the test presenter.
  * 
  * @author Philippe Beaudoin
  */
-public interface ProxyPlace<P extends Presenter<?, ?>> extends Proxy<P>, Place,
-    HasEventBus {
-
+@Singleton
+public class SubPresenterWidget extends PresenterWidget<SubPresenterWidget.MyView> {
+  
   /**
-   * Makes it possible to access the {@link EventBus} object associated with
-   * that presenter.
-   * 
-   * @return The EventBus associated with that presenter.
+   * Presenter's view.
    */
-  EventBus getEventBus();
+  public interface MyView extends View {    
+  }  
+  
+  @Inject
+  public SubPresenterWidget(final EventBus eventBus, final MyView view) {
+    super(eventBus, view);
+  }
+
 }
+

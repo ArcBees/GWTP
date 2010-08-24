@@ -61,7 +61,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
    * be responsible for this event. Handlers should not process this event if
    * {@link isHandled()} return {@code true}.
    */
-  private boolean handled = false;
+  private boolean handled;
 
   private final SetPlaceTitleHandler handler;
 
