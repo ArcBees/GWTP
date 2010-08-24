@@ -48,14 +48,14 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private String currentHistoryToken = "";
 
   private String currentHRef = "";
-  private boolean errorReveal = false;
-  private String onLeaveQuestion = null;
+  private boolean errorReveal;
+  private String onLeaveQuestion;
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
-  private String previousHistoryToken = null;
+  private String previousHistoryToken;
 
   private final TokenFormatter tokenFormatter;
 
-  private HandlerRegistration windowClosingHandlerRegistration = null;
+  private HandlerRegistration windowClosingHandlerRegistration;
 
   public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
     this.eventBus = eventBus;
@@ -120,7 +120,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void getCurrentTitle(SetPlaceTitleHandler handler) {
-    getTitle(placeHierarchy.size()-1, handler);
+    getTitle(placeHierarchy.size() - 1, handler);
   }
 
   @Override
@@ -200,7 +200,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
-    if (this.errorReveal == false) {
+    if (!this.errorReveal) {
       this.errorReveal = true;
       revealDefaultPlace();
     } else {

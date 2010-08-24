@@ -38,9 +38,9 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
  */
 public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
-  private HandlerRegistration autoHideHandler = null;
+  private HandlerRegistration autoHideHandler;
 
-  private HandlerRegistration closeHandlerRegistration = null;
+  private HandlerRegistration closeHandlerRegistration;
   private final EventBus eventBus;
 
   /**

@@ -23,13 +23,13 @@ import com.gwtplatform.mvp.client.Tab;
  * A useful mixing class to define a {@link TabContentProxy} that is also a
  * {@link Place}.
  * 
- * @param <P> {@link Presenter}'s type.
+ * @param <T> The Presenter's type.
  * 
  * @author Philippe Beaudoin
  */
-public class TabContentProxyPlaceImpl<P extends Presenter> extends
-    ProxyPlaceAbstract<P, TabContentProxy<P>> implements
-    TabContentProxyPlace<P> {
+public class TabContentProxyPlaceImpl<T extends Presenter<?, ?>> extends
+    ProxyPlaceAbstract<T, TabContentProxy<T>> implements
+    TabContentProxyPlace<T> {
 
   public TabContentProxyPlaceImpl() {
   }

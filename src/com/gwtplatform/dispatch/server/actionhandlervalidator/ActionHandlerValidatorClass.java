@@ -14,10 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionHandlerValidator;
+package com.gwtplatform.dispatch.server.actionhandlervalidator;
 
-import com.gwtplatform.dispatch.server.actionHandler.ActionHandler;
-import com.gwtplatform.dispatch.server.actionValidator.ActionValidator;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 

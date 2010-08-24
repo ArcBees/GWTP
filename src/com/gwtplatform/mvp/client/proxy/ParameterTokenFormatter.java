@@ -93,12 +93,12 @@ public final class ParameterTokenFormatter implements TokenFormatter {
   public ParameterTokenFormatter(String hierarchySeparator,
       String paramSeparator, String valueSeparator) {
 
-    assert (hierarchySeparator.length() == 1);
-    assert (paramSeparator.length() == 1);
-    assert (valueSeparator.length() == 1);
-    assert (!hierarchySeparator.equals(paramSeparator));
-    assert (!hierarchySeparator.equals(valueSeparator));
-    assert (!paramSeparator.equals(valueSeparator));
+    assert hierarchySeparator.length() == 1;
+    assert paramSeparator.length() == 1;
+    assert valueSeparator.length() == 1;
+    assert !hierarchySeparator.equals(paramSeparator);
+    assert !hierarchySeparator.equals(valueSeparator);
+    assert !paramSeparator.equals(valueSeparator);
     this.hierarchySeparator = hierarchySeparator;
     this.paramSeparator = paramSeparator;
     this.valueSeparator = valueSeparator;

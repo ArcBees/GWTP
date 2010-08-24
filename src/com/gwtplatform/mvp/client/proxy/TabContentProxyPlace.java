@@ -21,11 +21,10 @@ import com.gwtplatform.mvp.client.Presenter;
 /**
  * The interface of a {@link TabContentProxy} that is also a {@link Place}.
  * 
- * @author Philippe Beaudoin
+ * @param <T> The Presenter's type.
  * 
- * @param <P> The type of the {@link Presenter} attached to this
- *          {@link TabContentProxy}.
+ * @author Philippe Beaudoin
  */
-public interface TabContentProxyPlace<P extends Presenter> extends
-    TabContentProxy<P>, Place {
+public interface TabContentProxyPlace<T extends Presenter<?, ?>> extends
+    TabContentProxy<T>, Place {
 }
