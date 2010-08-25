@@ -197,7 +197,7 @@ public abstract class PresenterWidget<V extends View> extends
       slotChildren.add(content);
       activeChildren.put(slot, slotChildren);
     }
-    getView().addContent(slot, content.getWidget());
+    getView().addToSlot(slot, content.getWidget());
     if (isVisible()) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
@@ -218,7 +218,7 @@ public abstract class PresenterWidget<V extends View> extends
       }
       slotChildren.clear();
     }
-    getView().setContent(slot, null);
+    getView().setInSlot(slot, null);
   }
 
   @Override
@@ -273,7 +273,7 @@ public abstract class PresenterWidget<V extends View> extends
       }
       slotChildren.remove(content);
     }
-    getView().removeContent(slot, content.getWidget());
+    getView().removeFromSlot(slot, content.getWidget());
   }
 
   // TODO This should be final but needs to be overriden in {@link
@@ -320,7 +320,7 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     // Set the content in the view
-    getView().setContent(slot, content.getWidget());
+    getView().setInSlot(slot, content.getWidget());
     if (isVisible()) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
