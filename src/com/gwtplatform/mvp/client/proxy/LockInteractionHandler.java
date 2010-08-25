@@ -16,15 +16,14 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.gwtplatform.mvp.client.Presenter;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
- * The interface of a {@link TabContentProxy} that is also a {@link Place}.
- * 
- * @param <T> The Presenter's type.
+ * Handler for {@link LockInteractionEvent}.
  * 
  * @author Philippe Beaudoin
  */
-public interface TabContentProxyPlace<T extends Presenter<?, ?>> extends
-    TabContentProxy<T>, ProxyPlace<T> {
+public interface LockInteractionHandler extends EventHandler {
+  void onLockInteraction(
+      final LockInteractionEvent lockInteractionEvent);
 }

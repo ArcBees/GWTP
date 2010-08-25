@@ -56,6 +56,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private final TokenFormatter tokenFormatter;
 
   private HandlerRegistration windowClosingHandlerRegistration;
+  private boolean locked;
 
   public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
     this.eventBus = eventBus;
@@ -165,18 +166,20 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    */
   @Override
   public final void onValueChange(ValueChangeEvent<String> event) {
-    if (!confirmLeaveState()) {
+    if (!getLock()) {
       return;
     }
     String historyToken = event.getValue();
     try {
       if (historyToken.trim().equals("")) {
+        unlock();
         revealDefaultPlace();
       } else {
         placeHierarchy = tokenFormatter.toPlaceRequestHierarchy(historyToken);
         doRevealPlace(getCurrentPlaceRequest());
       }
     } catch (TokenFormatException e) {
+      unlock();
       revealErrorPlace(historyToken);
       NavigationEvent.fire(this, null);
     }
@@ -211,7 +214,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public final void revealPlace(PlaceRequest request) {
-    if (!confirmLeaveState()) {
+    if (!getLock()) {
       return;
     }
     placeHierarchy.clear();
@@ -222,7 +225,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   @Override
   public final void revealPlaceHierarchy(
       List<PlaceRequest> placeRequestHierarchy) {
-    if (!confirmLeaveState()) {
+    if (!getLock()) {
       return;
     }
     if (placeRequestHierarchy.size() == 0) {
@@ -235,7 +238,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void revealRelativePlace(int level) {
-    if (!confirmLeaveState()) {
+    if (!getLock()) {
       return;
     }
     placeHierarchy = updatePlaceHierarchy(level);
@@ -255,7 +258,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void revealRelativePlace(PlaceRequest request, int level) {
-    if (!confirmLeaveState()) {
+    if (!getLock()) {
       return;
     }
     placeHierarchy = updatePlaceHierarchy(level);
@@ -282,6 +285,24 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     onLeaveQuestion = question;
   }
 
+  /**
+   * Checks that the place manager is not locked and that the user allows
+   * the application to navigate (see {@link #confirmLeaveState()}. If the
+   * application is allowed to navigate, this method locks navigation.
+   * 
+   * @return true if the place manager can get the lock false otherwise. 
+   */
+  private boolean getLock() {
+    if (locked) {
+      return false;
+    }
+    if (!confirmLeaveState()) {
+      return false;
+    }
+    lock();
+    return true;
+  }
+  
   /**
    * If a confirmation question is set (see {@link #setOnLeaveConfirmation()}),
    * this asks the user if he wants to leave the current page.
@@ -314,8 +335,10 @@ public abstract class PlaceManagerImpl implements PlaceManager,
         request);
     fireEvent(requestEvent);
     if (!requestEvent.isHandled()) {
+      unlock();
       revealErrorPlace(tokenFormatter.toHistoryToken(placeHierarchy));
     } else if (!requestEvent.isAuthorized()) {
+      unlock();
       revealUnauthorizedPlace(tokenFormatter.toHistoryToken(placeHierarchy));
     }
     this.errorReveal = false;
@@ -374,4 +397,20 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     }
     return new ArrayList<PlaceRequest>(placeHierarchy);
   }
+
+  private void lock() {
+    if (!locked) {
+      locked = true;
+      LockInteractionEvent.fire(this, true);
+    }
+  }
+  
+  @Override
+  public void unlock() {
+    if (locked) {
+      locked = false;
+      LockInteractionEvent.fire(this, false);
+    }
+  }
+ 
 }
