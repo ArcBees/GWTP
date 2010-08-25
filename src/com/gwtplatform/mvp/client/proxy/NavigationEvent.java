@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.HasEventBus;
 
 /**
@@ -40,7 +39,7 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
   
   /**
    * Fires a {@link NavigationEvent} 
-   * into a source that has access to an {@link EventBus}.
+   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}.
    * 
    * @param source The source that fires this event ({@link HasEventBus}).
    */

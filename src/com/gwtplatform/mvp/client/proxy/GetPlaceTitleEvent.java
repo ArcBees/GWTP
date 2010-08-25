@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.HasEventBus;
 
 /**
@@ -37,7 +36,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
 
   /**
    * Fires a {@link GetPlaceTitleEvent}
-   * into a source that has access to an {@link EventBus}.
+   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}.
    * <p />
    * <b>Important!</b> You should never fire that event directly. See
    * {@link GetPlaceTitleEvent} for details.
