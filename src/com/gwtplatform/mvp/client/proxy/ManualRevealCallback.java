@@ -45,7 +45,7 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
    * 
    * @param presenter The presenter that will be revealed upon successful completion of this callback.
    */
-  public static <T> ManualRevealCallback<T> create( Presenter<?, ? extends ProxyPlace<?>> presenter,
+  public static <T> ManualRevealCallback<T> create(Presenter<?, ? extends ProxyPlace<?>> presenter,
       AsyncCallback<T> callback) {
     return new ManualRevealCallback<T>(presenter);
   }
@@ -70,17 +70,17 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
   @Override
   public void onFailure(Throwable caught) {
     presenter.getProxy().manualRevealFailed();    
-    if (callback!=null) {
+    if (callback != null) {
       callback.onFailure(caught);
     }
   }
 
   @Override
   public void onSuccess(T result) {
-    presenter.getProxy().manualReveal(presenter);
-    if (callback!=null) {
+    if (callback != null) {
       callback.onSuccess(result);
     }
+    presenter.getProxy().manualReveal(presenter);
   }
 
 }

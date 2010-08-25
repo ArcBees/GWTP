@@ -17,15 +17,15 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.gwtplatform.mvp.client.EventBus;
+
 import com.gwtplatform.mvp.client.HasEventBus;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
- * This event is fired when a {@link PresenterWidget} wants to reveal itself
+ * This event is fired when a {@link com.gwtplatform.mvp.client.PresenterWidget} wants to reveal itself
  * as a popup at the root of the application. It is typically fired by the
- * {@link PresenterWidget}'s parent.
+ * {@link com.gwtplatform.mvp.client.PresenterWidget}'s parent.
  *
  * @see RevealContentEvent
  * @see RevealRootContentEvent
@@ -46,7 +46,7 @@ public final class RevealRootPopupContentEvent extends
 
   /**
    * Fires a {@link RevealRootPopupContentEvent} 
-   * into a source that has access to an {@link EventBus}. 
+   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}. 
    * 
    * @param source The source that fires this event ({@link HasEventBus}).
    * @param content The {@link PresenterWidget} with a {@link PopupView} that wants to set 

@@ -186,7 +186,7 @@ public class RootPresenter extends
 
   @Override
   public void onLockInteraction(LockInteractionEvent lockInteractionEvent) {
-    if( lockInteractionEvent.shouldLock() ) {
+    if (lockInteractionEvent.shouldLock()) {
       getView().lockScreen();
     } else {
       getView().unlockScreen();      
