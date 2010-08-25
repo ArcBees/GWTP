@@ -223,7 +223,7 @@ public abstract class PresenterWidget<V extends View> extends
 
   @Override
   public void fireEvent(GwtEvent<?> event) {
-    getEventBus().fireEvent(event);
+    getEventBus().fireEvent(event, this);
   }
 
   /**

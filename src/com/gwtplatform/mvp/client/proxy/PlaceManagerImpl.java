@@ -94,7 +94,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void fireEvent(GwtEvent<?> event) {
-    eventBus.fireEvent(event);
+    getEventBus().fireEvent(event, this);
   }
 
   @Override
