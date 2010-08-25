@@ -75,7 +75,7 @@ public class RootPresenter extends
     }
 
     @Override
-    public void setContent(Object slot, Widget content) {
+    public void setInSlot(Object slot, Widget content) {
       assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
       if (usingRootLayoutPanel) {

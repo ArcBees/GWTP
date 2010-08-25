@@ -20,8 +20,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A simple implementation of {@link View} that simply disregards every call to
- * {@link #setContent(Object, Widget)}, {@link #addContent(Object, Widget)}, and
- * {@link #clearContent(Object)}.
+ * {@link #setInSlot(Object, Widget)}, {@link #addToSlot(Object, Widget)}, and
+ * {@link #clearSlot(Object)}.
  * <p />
  * Feel free not to inherit from this if you need another base class (such as
  * {@link com.google.gwt.user.client.ui.Composite}), but you will have to define
@@ -32,14 +32,32 @@ import com.google.gwt.user.client.ui.Widget;
 public abstract class ViewImpl implements View {
 
   @Override
+  @Deprecated
   public void addContent(Object slot, Widget content) {
   }
 
   @Override
+  @Deprecated
   public void removeContent(Object slot, Widget content) {
   }
 
   @Override
+  @Deprecated
   public void setContent(Object slot, Widget content) {
+  }
+
+  @Override
+  public void addToSlot(Object slot, Widget content) {
+    addContent(slot, content);
+  }
+
+  @Override
+  public void removeFromSlot(Object slot, Widget content) {
+    removeContent(slot, content);
+  }
+
+  @Override
+  public void setInSlot(Object slot, Widget content) {
+    setContent(slot, content);
   }
 }
