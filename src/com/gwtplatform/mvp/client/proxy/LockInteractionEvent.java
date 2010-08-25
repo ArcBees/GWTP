@@ -18,9 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.HasEventBus;
-import com.gwtplatform.mvp.client.RootPresenter;
 
 /**
  * This event is fired whenever interaction should be locked throughout the application,
@@ -28,8 +26,8 @@ import com.gwtplatform.mvp.client.RootPresenter;
  * unexpected state switches.
  * <p />
  * This event is typically fired by the {@link PlaceManager} whenever a navigation operation
- * starts or stops. It is handled by the default {@link RootPresenter} implementation. 
- * Override {@link RootPresenter#lockInteraction(boolean)} to customize the behaviour.
+ * starts or stops. It is handled by the default {@link com.gwtplatform.mvp.client.RootPresenter} implementation. 
+ * Override {@link com.gwtplatform.mvp.client.RootPresenter#lockInteraction(boolean)} to customize the behaviour.
  * 
  * @author Philippe Beaudoin
  */
@@ -39,7 +37,7 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
 
   /**
    * Fires a {@link LockInteractionEvent} 
-   * into a source that has access to an {@link EventBus}
+   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}
    * specifying whether interaction should be locked or unlocked.
    * 
    * @param source The source that fires this event ({@link HasEventBus}).
