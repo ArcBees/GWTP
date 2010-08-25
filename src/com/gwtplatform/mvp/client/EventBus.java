@@ -34,6 +34,8 @@ public interface EventBus {
       H handler);
 
   void fireEvent(GwtEvent<?> event);
+  
+  void fireEvent(GwtEvent<?> event, Object source);
 
   <H extends EventHandler> H getHandler(Type<H> type, int index);
 

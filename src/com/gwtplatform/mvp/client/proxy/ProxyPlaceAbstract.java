@@ -79,7 +79,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
 
   @Override
   public void fireEvent(GwtEvent<?> event) {
-    eventBus.fireEvent(event);
+    getEventBus().fireEvent(event, this);
   }
 
   @Override
