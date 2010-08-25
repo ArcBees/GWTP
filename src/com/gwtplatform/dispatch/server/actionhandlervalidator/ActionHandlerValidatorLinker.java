@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * This class links any registered {@link ActionHandler} and
  * {@link ActionValidator} instances with the default
- * {@link ActionHandlerValidatorRegistry}
+ * {@link ActionHandlerValidatorRegistry}.
  * 
  * @author Christian Goudreau
  * 
