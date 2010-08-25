@@ -138,10 +138,7 @@ public abstract class PresenterWidget<V extends View> extends
    *          The {@link View}.
    */
   public PresenterWidget(EventBus eventBus, V view) {
-    super();
-
-    this.eventBus = eventBus;
-    this.view = view;
+    this(true, eventBus, view);
   }
 
   @Override
