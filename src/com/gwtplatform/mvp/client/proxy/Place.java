@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+
 /**
  * <b>Important:</b> For simplicity, places do not participate in dependency
  * injection and can be created with <code>new</code>.

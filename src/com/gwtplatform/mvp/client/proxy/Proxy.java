@@ -48,5 +48,4 @@ public interface Proxy<P extends Presenter<?, ?>> extends ProxyRaw {
    *          as a parameter.
    */
   void getPresenter(AsyncCallback<P> callback);
-
 }

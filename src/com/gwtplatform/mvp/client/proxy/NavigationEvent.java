@@ -18,22 +18,32 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 
+import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.HasEventBus;
 
 /**
- * Event fired after navigation has occured. Will not be fired if navigation is
- * refused through {@link PlaceManager#setOnLeaveConfirmation}.
+ * Event fired after navigation has occurred. It will not be fired if navigation is
+ * refused through {@link PlaceManager#setOnLeaveConfirmation}, instead 
+ * {@link NavigationRefusedEvent} will.
  * <p />
  * Instead of registering your presenter towards this event, consider overriding
  * {@link com.gwtplatform.mvp.client.PresenterWidgetImpl#onReset()}. From there
  * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the
  * {@link PlaceRequest}.
  * 
+ * @see NavigationRefusedEvent
+ * 
  * @author Philippe Beaudoin
  */
 public final class NavigationEvent extends GwtEvent<NavigationHandler> {
   private static final Type<NavigationHandler> TYPE = new Type<NavigationHandler>();
-
+  
+  /**
+   * Fires a {@link NavigationEvent} 
+   * into a source that has access to an {@link EventBus}.
+   * 
+   * @param source The source that fires this event ({@link HasEventBus}).
+   */
   public static void fire(final HasEventBus source, PlaceRequest request) {
     source.fireEvent(new NavigationEvent(request));
   }
