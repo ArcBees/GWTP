@@ -23,7 +23,7 @@ public interface HasSlots {
   /**
    * This method adds some content in a specific slot of the {@link Presenter}.
    * No {@link ResetPresentersEvent} is fired. The attached {@link View} should
-   * manage this slot when its {@link View#addContent(Object, Widget)} is
+   * manage this slot when its {@link View#addToSlot(Object, Widget)} is
    * called.
    * 
    * @param slot An opaque object identifying which slot this content is being
@@ -36,8 +36,8 @@ public interface HasSlots {
   /**
    * This method clears the content in a specific slot. No
    * {@link ResetPresentersEvent} is fired. The attached {@link View} should
-   * manage this slot when its {@link View#setContent(Object, Widget)} is
-   * called. It should also clear the slot when the {@code setContent} method is
+   * manage this slot when its {@link View#setInSlot(Object, Widget)} is
+   * called. It should also clear the slot when the {@code setCosetInSlotntent} method is
    * called with {@code null} as a parameter.
    * 
    * @param slot An opaque object identifying which slot to clear.
@@ -48,7 +48,7 @@ public interface HasSlots {
    * This method removes some content in a specific slot of the
    * {@link Presenter}. No {@link ResetPresentersEvent} is fired. The attached
    * {@link View} should manage this slot when its
-   * {@link View#removeContent(Object, Widget)} is called.
+   * {@link View#removeFromSlot(Object, Widget)} is called.
    * 
    * @param slot An opaque object identifying which slot this content is being
    *          removed from.
@@ -72,8 +72,8 @@ public interface HasSlots {
   /**
    * This method sets some content in a specific slot of the {@link Presenter}.
    * The attached {@link View} should manage this slot when its
-   * {@link View#setContent(Object, Widget)} is called. It should also clear the
-   * slot when the {@code setContent} method is called with {@code null} as a
+   * {@link View#setInSlot(Object, Widget)} is called. It should also clear the
+   * slot when the {@code setInSlot} method is called with {@code null} as a
    * parameter.
    * 
    * @param slot An opaque object identifying which slot this content is being

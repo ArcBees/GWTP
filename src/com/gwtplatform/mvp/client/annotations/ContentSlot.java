@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * containing a type of event that is monitored by this presenter. When handling
  * this event, a child presenter is inserted in the presenter's view. You should
  * make sure the view handles event of this type in its
- * {@link View#setContent(Object, Widget)} method.
+ * {@link View#setInSlot(Object, Widget)} method.
  * 
  * @author Philippe Beaudoin
  */

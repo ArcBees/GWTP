@@ -27,7 +27,7 @@ public interface HasPopupSlot {
    * inherit from {@link PopupView}. The popup will be visible and the
    * corresponding presenter will receive the lifecycle events as needed.
    * <p />
-   * Contrary to the {@link setContent()} method, no
+   * Contrary to the {@link setInSlot()} method, no
    * {@link ResetPresentersEvent} is fired.
    * 
    * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
@@ -43,7 +43,7 @@ public interface HasPopupSlot {
    * {@link PopupView}. The popup will be visible and the corresponding
    * presenter will receive the lifecycle events as needed.
    * <p />
-   * Contrary to the {@link setContent()} method, no
+   * Contrary to the {@link setInSlot()} method, no
    * {@link ResetPresentersEvent} is fired.
    * 
    * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
