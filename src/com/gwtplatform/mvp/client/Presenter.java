@@ -47,15 +47,6 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
   }
   
   /**
-   * Returns the {@link Proxy} for the current presenter.
-   * 
-   * @return The proxy.
-   */
-  public final Proxy_ getProxy() {
-    return proxy;
-  }
-
-  /**
    * This method can be used to reveal any presenter. This call will go up the
    * hierarchy, revealing any parent of this presenter. This method will also
    * bypass the change confirmation mechanism (see
@@ -74,17 +65,80 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
   }
 
   /**
+   * Returns the {@link Proxy} for the current presenter.
+   * 
+   * @return The proxy.
+   */
+  public final Proxy_ getProxy() {
+    return proxy;
+  }
+
+  /**
+   * <b>Deprecated!</b> This method will soon be removed from the API. For more
+   * information see <a
+   * href="http://code.google.com/p/gwt-platform/issues/detail?id=136">Issue
+   * 136</a>.
+   * <p />
+   * Notify others that this presenter has been changed. This is especially
+   * useful for stateful presenters that store parameters within the history
+   * token. Calling this will make sure the history token is updated with the
+   * right parameters.
+   */
+  @Deprecated
+  protected final void notifyChange() {
+    getProxy().onPresenterChanged(this);
+  }
+
+  @Override
+  protected void onReset() {
+    super.onReset();
+    getProxy().onPresenterRevealed(this);
+  }
+
+  /**
+   * Verifies if this presenter can be revealed automatically or if it is meant to be
+   * revealed manually.
+   * Normally, the user wants to reveal a presenter manually when it cannot be used
+   * until some data is received from the server. For example, a form
+   * to edit client details is unusable until all the data for this user has been 
+   * received. Fetching this data should be done in the {@link #prepareFromRequest(PlaceRequest)}
+   * method.
+   * <p />
+   * In order to use manual reveal, override this method to return {@code false}.
+   * Then you can either:
+   * <ul>
+   * <li> Fetch the data using a {@link com.gwtplatform.mvp.clien.proxy.ProxyPlace.ManualRevealCallback}, 
+   *      which will automatically reveal the presenter upon success.</li>
+   * <li> Fetch the data by any other mean and call 
+   * {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualReveal(Presenter)} when 
+   * your data is available. In this case you also have to call 
+   * {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualRevealFailed(Presenter)} 
+   * if loading fails, otherwise your application will become unusable.</li>
+   * </li>
+   * The default implementation uses automatic reveal, and therefore returns {@code false}.
+   * 
+   * @return {@code true} if you want to use manual reveal, or {@code false} to use
+   *         automatic reveal.
+   */
+  public boolean useManualReveal() {
+    return false;
+  }
+
+  /**
    * This method is called when a {@link Presenter} should prepare itself based
    * on a {@link PlaceRequest}. The presenter should extract any parameters it
    * needs from the request. A presenter should override this method if it
    * handles custom parameters, but it should call the parent's
    * {@code prepareFromRequest} method.
+   * <p />
+   * If your presenter needs to fetch some information from the server while
+   * preparing itself, consider using manual reveal. See {@link #useManualReveal()}.
    * 
    * @param request The request.
    */
   public void prepareFromRequest(PlaceRequest request) {
   }
-
+  
   /**
    * This method is called when creating a {@link PlaceRequest} for this
    * {@link Presenter}. The presenter should add all the required parameters to
@@ -108,28 +162,6 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    */
   public PlaceRequest prepareRequest(PlaceRequest request) {
     return request;
-  }
-  
-  /**
-   * <b>Deprecated!</b> This method will soon be removed from the API. For more
-   * information see <a
-   * href="http://code.google.com/p/gwt-platform/issues/detail?id=136">Issue
-   * 136</a>.
-   * <p />
-   * Notify others that this presenter has been changed. This is especially
-   * useful for stateful presenters that store parameters within the history
-   * token. Calling this will make sure the history token is updated with the
-   * right parameters.
-   */
-  @Deprecated
-  protected final void notifyChange() {
-    getProxy().onPresenterChanged(this);
-  }
-  
-  @Override
-  protected void onReset() {
-    super.onReset();
-    getProxy().onPresenterRevealed(this);
   }
   
   /**
