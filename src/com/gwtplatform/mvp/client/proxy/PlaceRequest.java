@@ -45,7 +45,7 @@ import java.util.Set;
  * @author David Peterson
  * @author Philippe Beaudoin
  */
-public final class PlaceRequest {
+public class PlaceRequest {
 
   private final String nameToken;
 
