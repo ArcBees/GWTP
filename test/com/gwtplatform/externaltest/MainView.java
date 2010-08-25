@@ -42,11 +42,11 @@ public class MainView extends ViewImpl implements MainPresenter.MyView {
   }
 
   @Override
-  public void setContent(Object slot, Widget content) {
+  public void setInSlot(Object slot, Widget content) {
     if (slot == MainPresenter.TYPE_SetMainContent) {
       setMainContent(content);
     } else {
-      super.setContent(slot, content);
+      super.setInSlot(slot, content);
     }
   }
 
