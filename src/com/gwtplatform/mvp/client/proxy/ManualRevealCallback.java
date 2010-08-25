@@ -47,7 +47,7 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
    */
   public static <T> ManualRevealCallback<T> create(Presenter<?, ? extends ProxyPlace<?>> presenter,
       AsyncCallback<T> callback) {
-    return new ManualRevealCallback<T>(presenter);
+    return new ManualRevealCallback<T>(presenter, callback);
   }
   
   /**
