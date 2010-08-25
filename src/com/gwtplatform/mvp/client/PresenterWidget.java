@@ -234,7 +234,7 @@ public abstract class PresenterWidget<V extends View> extends
    * 
    * @return The view.
    */
-  public final V getView() {
+  public V getView() {
     return view;
   }
 
