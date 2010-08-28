@@ -25,3 +25,5 @@ glob:build.num
 
 syntax: regexp
 ^crchris\.bat$
+glob:com/**
+glob:.factorypath

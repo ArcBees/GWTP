@@ -19,28 +19,13 @@ package com.gwtplatform.annotation;
 import static org.junit.Assert.*;
 
 /**
- * To test this in eclipse:
- * 
- * 1. Export gwtp to jar: Right click on project, Export, Jar file, Next,
- * gwtp.jar, Finish
- * 
- * 2. Enable annotation processing: right click on project, Properties, Java
- * Compiler, Annotation Processing, Tick all the Enables. Factory Path, Add
- * External Jar, select the jar that was exported in step 1.
- * 
- * 3. Uncomment the following tests
+ * This test is being run by ant, but is not run in eclipse.
  * 
  * @author Brendan Doherty
  */
 @SuppressWarnings("unused")
 public class AnnotationProcessingTest {
   
-  @org.junit.Test
-  public void dummy() {
-    // Just a dummy test to get rid of an error on the CI server
-  }
-    
-  /*
   @org.junit.Test
   public void event() {
     Foo foo = new Foo("bar");
@@ -104,5 +89,5 @@ public class AnnotationProcessingTest {
     PersonNameDto dto3 = new PersonNameDto("bobby", "smith");
     assertFalse(dto.equals(dto3));
   }
-  */
+
 }
