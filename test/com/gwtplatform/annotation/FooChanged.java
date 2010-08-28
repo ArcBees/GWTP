@@ -16,6 +16,11 @@
 
 package com.gwtplatform.annotation;
 
+/**
+ * For testing purposes only.
+ * 
+ * @author Brendan Doherty
+ */
 @GenEvent
 public class FooChanged {
   @Order(1)
