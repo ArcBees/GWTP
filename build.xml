@@ -42,6 +42,7 @@
 
 	<path id="tests.class.path">
 		<path refid="project.class.path" />
+    <pathelement location="." />
 		<pathelement location="${in.test.folder}" />
 		<pathelement location="${out.classes.folder}" />
 		<fileset dir="${junit.folder}" includes="junit.jar" />
@@ -64,7 +65,8 @@
 	</target>
 
 	<target name="javac.tests" depends="javac" description="Compiles test code">
-		<javac srcdir="${in.test.folder}" includes="**" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
+		<javac srcdir="${in.test.folder}" destdir="${in.test.folder}" includes="**" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
+			<compilerarg value="-version"/>
 			<classpath refid="tests.class.path" />
 		</javac>
 	</target>
