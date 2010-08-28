@@ -30,10 +30,10 @@ import java.lang.annotation.Target;
  * without an @Order will be afterwards in an undefined order.
  * <p/>
  * See {@link GenEvent} or {@link GenDto} for an example.
+ * 
  * @author Brendan Doherty
  * @author Stephen Haberman (concept)
  */
-
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited

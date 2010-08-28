@@ -18,6 +18,11 @@ package com.gwtplatform.annotation;
 
 import com.gwtplatform.dispatch.shared.Action;
 
+/**
+ * For testing purposes only.
+ * 
+ * @author Brendan Doherty
+ */
 @GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
     + "Blah", extraResultInterfaces = "com.gwtplatform.annotation.HasThing<com.gwtplatform.annotation.Foo>")
 public class RetrieveBar {

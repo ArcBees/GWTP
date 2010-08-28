@@ -16,6 +16,13 @@
 
 package com.gwtplatform.annotation;
 
+/**
+ * For testing purposes only.
+ * 
+ * @param <T> Type
+ * 
+ * @author Brendan Doherty
+ */
 public interface HasThing<T> {
   T getThing();
 }

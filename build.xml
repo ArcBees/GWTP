@@ -3,12 +3,12 @@
 
 	<property name="version.num" value="0.4"/>
 	
-	<property environment="env"/>
-	<property name="in.src.folder" location="src" />
-	<property name="in.test.folder" location="test" />
-	<property name="out.classes.folder" location="war/WEB-INF/classes" />
-	<property name="report.folder" location="reports" />
-	<property name="out.test.report.folder" location="${report.folder}/tests" />
+  <property environment="env"/>
+  <property name="in.src.folder" location="src" />
+  <property name="in.test.folder" location="test" />
+  <property name="out.classes.folder" location="war/WEB-INF/classes" />
+  <property name="report.folder" location="reports" />
+  <property name="out.test.report.folder" location="${report.folder}/tests" />
     <property name="lib.folder" location="lib" />
     <property name="extlib.folder" location="../gwt-platform-libs" />
     <property name="warlib.folder" location="war/WEB-INF/lib" />
@@ -25,8 +25,8 @@
 	<property name="gwtp.jar.file" value="${base.gwtp.jar.name}-${version.num}${version-suffix}.jar"/>
 	<tstamp>
 		<format property="today.timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
-	</tstamp>
-	
+	</tstamp>	
+
 	<path id="project.class.path">
 		<fileset dir="${warlib.folder}" includes="**/*.jar,**/*.class" />
 		<pathelement location="${out.classes.folder}" />
@@ -51,8 +51,10 @@
 
 	<target name="javac" description="Compile java source">
 		<mkdir dir="${out.classes.folder}" />
-		<javac srcdir="${in.src.folder}" includes="**" encoding="utf-8" destdir="${out.classes.folder}" source="1.5" target="1.5" 
+		<javac srcdir="${in.src.folder}" includes="**" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
 			nowarn="true" debug="true" debuglevel="lines,vars,source">
+			<!-- Do not use any annotation processor -->
+			<compilerarg value="-proc:none" />
 			<classpath refid="project.class.path" />
 		</javac>
 		<copy todir="${out.classes.folder}">
@@ -62,7 +64,7 @@
 	</target>
 
 	<target name="javac.tests" depends="javac" description="Compiles test code">
-		<javac srcdir="${in.test.folder}" includes="**" encoding="utf-8" source="1.5" target="1.5" nowarn="true" debug="true" debuglevel="lines,vars,source">
+		<javac srcdir="${in.test.folder}" includes="**" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
 			<classpath refid="tests.class.path" />
 		</javac>
 	</target>
