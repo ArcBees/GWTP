@@ -77,7 +77,6 @@ import java.lang.annotation.Target;
  * @author Brendan Doherty
  * @author Stephen Haberman (concept)
  */
-
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited

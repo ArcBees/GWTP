@@ -18,7 +18,7 @@ package com.gwtplatform.annotation;
 
 import static org.junit.Assert.*;
 
-/*
+/**
  * To test this in eclipse:
  * 
  * 1. Export gwtp to jar: Right click on project, Export, Jar file, Next,
@@ -29,11 +29,17 @@ import static org.junit.Assert.*;
  * External Jar, select the jar that was exported in step 1.
  * 
  * 3. Uncomment the following tests
+ * 
+ * @author Brendan Doherty
  */
-
 @SuppressWarnings("unused")
 public class AnnotationProcessingTest {
-
+  
+  @org.junit.Test
+  public void dummy() {
+    // Just a dummy test to get rid of an error on the CI server
+  }
+    
   /*
   @org.junit.Test
   public void event() {

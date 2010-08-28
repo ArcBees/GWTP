@@ -16,6 +16,11 @@
 
 package com.gwtplatform.annotation;
 
+/**
+ * For testing purposes only.
+ * 
+ * @author Brendan Doherty
+ */
 @GenDto
 public class PersonName {
   @Order(1)
