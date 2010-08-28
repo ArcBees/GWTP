@@ -6,6 +6,7 @@
   <property environment="env"/>
   <property name="in.src.folder" location="src" />
   <property name="in.test.folder" location="test" />
+	<property name="in.test.annotation.folder" location="${in.test.folder}/com/gwtplatform/annotation" />
   <property name="out.classes.folder" location="war/WEB-INF/classes" />
   <property name="report.folder" location="reports" />
   <property name="out.test.report.folder" location="${report.folder}/tests" />
@@ -73,7 +74,7 @@
 	
 	<target name="build" depends="clean,javac" description="Build this project" />
 
-	<target name="all" depends="clean,javac,tests,jar" description="Build, test and package" />
+	<target name="all" depends="tests,jar" description="Build, test and package" />
 
 	<target name="clean" description="Cleans this project">
 		<delete file="${manifest.file}" failonerror="false" />
@@ -85,6 +86,7 @@
 		<delete failonerror="false">
 			<fileset dir="${in.src.folder}" includes="**/*.class" />
 			<fileset dir="${in.test.folder}" includes="**/*.class" />
+      <fileset dir="${in.test.annotation.folder}" includes="*Event.java,*Dto.java,*Action.java,*Result.java" />
 		</delete>
 	</target>
 
@@ -115,7 +117,7 @@
         </fail>			
 	</target>
 
-	<target name="jar" depends="clean,javac" description="Package into a jar">
+	<target name="jar" depends="javac" description="Package into a jar">
 		<manifest file="${manifest.file}">
 	        <attribute name="Built-By" value="teamcity.codebetter.com"/>
 	        <attribute name="Implementation-Version" value="${version.num}${version-suffix}"/> 
