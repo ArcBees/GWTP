@@ -16,6 +16,11 @@
 
 package com.gwtplatform.annotation;
 
+/**
+ * For testing purposes only.
+ * 
+ * @author Brendan Doherty
+ */
 @GenDispatch
 public class RetrieveFoo {
   @In(1)

@@ -16,6 +16,11 @@
 
 package com.gwtplatform.annotation;
 
+/**
+ * For testing purposes only.
+ * 
+ * @author Brendan Doherty
+ */
 public class Foo {
   private String name;
 
