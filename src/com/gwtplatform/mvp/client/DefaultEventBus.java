@@ -34,7 +34,7 @@ public final class DefaultEventBus extends HandlerManager implements EventBus {
   }
 
   @Override
-  public void fireEvent(Object source, GwtEvent<?> event) {
+  public void fireEvent(HasEventBus source, GwtEvent<?> event) {
     GwtEventHelper.setSource(event, source);
     
     fireEvent(event);
