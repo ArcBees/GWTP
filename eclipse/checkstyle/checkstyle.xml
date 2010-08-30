@@ -202,6 +202,7 @@
     <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
   </module>
   <module name="Header">
+    <property name="fileExtensions" value="java"/>
     <property name="severity" value="error"/>
     <property name="headerFile" value="${config_loc}java.header"/>
   </module>

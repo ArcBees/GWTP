@@ -17,13 +17,12 @@
   <property name="gae.folder" location="${extlib.folder}/gae" />
   <property name="junit.folder" location="${extlib.folder}/junit" />
   <property name="mockito.folder" location="${lib.folder}" />
-  <property name="base.gwtp.jar.name" value="gwtp"/>
   <property name="manifest.file" value="MANIFEST.MF"/>
   <property name="all.gwtp.jar.files" value="${base.gwtp.jar.name}*.jar"/>
-  <condition property="version-suffix" value="-b${env.BUILD_NUMBER}" else="-SNAPSHOT">
+  <condition property="version-suffix" value="-b${env.BUILD_NUMBER}" else="-bLOCAL">
     <isset property="env.BUILD_NUMBER"/>
   </condition>    
-  <property name="gwtp.jar.file" value="${base.gwtp.jar.name}-${version.num}${version-suffix}.jar"/>
+  <property name="gwtp.jar.file" value="gwtp-${version.num}-SNAPSHOT.jar"/>
   <tstamp>
     <format property="today.timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
   </tstamp>  
