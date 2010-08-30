@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -333,9 +334,13 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * Convenience method to register an event handler to the {@link EventBus}.
+   * Registers an event handler towards the {@link EventBus}.
    * The handler will be automatically unregistered when
-   * {@link HandlerContainer#unbind()} is called.
+   * {@link HandlerContainer#unbind()} is called. This is usually the
+   * desired behaviour, but if you want to unregister handlers manually
+   * use {@link #addHandler(Type, EventHandler)}
+   * 
+   * @see #addHandler(Type, EventHandler)
    * 
    * @param <H>
    *          The handler type
@@ -347,6 +352,26 @@ public abstract class PresenterWidget<V extends View> extends
   protected final <H extends EventHandler> void addRegisteredHandler(
       Type<H> type, H handler) {
     registerHandler(getEventBus().addHandler(type, handler));
+  }
+
+  /**
+   * Registers an event handler towards the {@link EventBus}.
+   * You have to manually unregister the handler. In most cases, you
+   * should consider using {@link #addRegisteredHandler(Type, EventHandler)}.
+   * 
+   * @see #addRegisteredHandler(Type, EventHandler)
+   * 
+   * @param <H>
+   *          The handler type
+   * @param type
+   *          See {@link Type}
+   * @param handler
+   *          The handler to register
+   * @return The {@link HandlerRegistration} you should use to unregister the handler.
+   */
+  protected final <H extends EventHandler> HandlerRegistration addHandler(
+      Type<H> type, H handler) {
+    return getEventBus().addHandler(type, handler);
   }
 
   /**
