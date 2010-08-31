@@ -23,18 +23,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Use with <code>@GenEvent</code> to specify an optional
+ * Use with <code>@{@link GenEvent}</code> to specify an optional
  * parameter.
  * See {@link GenEvent} or {@link GenDto} for an example.
- * <p>
- * <b>Important:</b> Primitive types are not supported by default. Therefore, 
- * the default value must be set by hand.
- * </p>
+ *
  * @author Florian Sauter
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Optional {
-  String defaultValue() default "null";
 }
