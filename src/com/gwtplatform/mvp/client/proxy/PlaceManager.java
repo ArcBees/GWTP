@@ -214,20 +214,18 @@ public interface PlaceManager extends HasEventBus {
   void navigateBack();
 
   /**
-   * Called whenever the current place has changed in a way that requires
-   * history parameters to be modified.
+   * Updates History, without firing a {@link com.google.gwt.event.logical.shared.ValueChangeEvent}.
+   * Only the last {@link PlaceRequest} of the place request hierarchy is modified.   
+   * <p />
+   * This method will only work if the passed {@link PlaceRequest} has the same name token
+   * as the current place request (see {@link #getCurrentPlaceRequest()}.
+   * <p />
+   * This method causes a new token to be added to the browser history, affecting the behavior
+   * of the browser's <em>back</em> button.
    * 
-   * @param placeRequest The {@link PlaceRequest} portraying the change.
+   * @param request The {@link PlaceRequest} to display in the updated history.
    */
-  void onPlaceChanged(PlaceRequest placeRequest);
-
-  /**
-   * Called whenever a new place has been revealed.
-   * 
-   * @param placeRequest The {@link PlaceRequest} for the place that has just
-   *          been revealed.
-   */
-  void onPlaceRevealed(PlaceRequest placeRequest);
+  void updateHistory(PlaceRequest request);
 
   /**
    * Reveals the place corresponding to the current value of the history token

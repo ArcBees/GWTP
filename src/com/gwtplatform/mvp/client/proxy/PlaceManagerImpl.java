@@ -48,7 +48,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private String currentHistoryToken = "";
 
   private String currentHRef = "";
-  private boolean errorReveal;
+  private boolean internalError;
   private String onLeaveQuestion;
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
   private String previousHistoryToken;
@@ -143,24 +143,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     }
   }
 
-  @Override
-  public final void onPlaceChanged(PlaceRequest placeRequest) {
-    try {
-      if (placeRequest.hasSameNameToken(getCurrentPlaceRequest())) {
-        // Only update if the change comes from a place that matches
-        // the current location.
-        updateHistory(placeRequest);
-      }
-    } catch (TokenFormatException e) {
-      // Do nothing...
-    }
-  }
-
-  @Override
-  public final void onPlaceRevealed(PlaceRequest placeRequest) {
-    updateHistory(placeRequest);
-  }
-
   /**
    * Handles change events from {@link History}.
    */
@@ -180,7 +162,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       }
     } catch (TokenFormatException e) {
       unlock();
-      revealErrorPlace(historyToken);
+      error(historyToken);
       NavigationEvent.fire(this, null);
     }
   }
@@ -203,13 +185,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void revealErrorPlace(String invalidHistoryToken) {
-    if (!this.errorReveal) {
-      this.errorReveal = true;
-      revealDefaultPlace();
-    } else {
-      throw new RuntimeException(
-          "revealErrorPlace is set to revealDefaultPlace.  However revealDefaultPlace is causing an error which if left to continue will result in an infinite loop.");
-    }
+    revealDefaultPlace();
   }
 
   @Override
@@ -335,23 +311,74 @@ public abstract class PlaceManagerImpl implements PlaceManager,
         request);
     fireEvent(requestEvent);
     if (!requestEvent.isHandled()) {
-      unlock();
-      revealErrorPlace(tokenFormatter.toHistoryToken(placeHierarchy));
+      unlock();      
+      error(tokenFormatter.toHistoryToken(placeHierarchy));
     } else if (!requestEvent.isAuthorized()) {
       unlock();
-      revealUnauthorizedPlace(tokenFormatter.toHistoryToken(placeHierarchy));
+      illegalAccess(tokenFormatter.toHistoryToken(placeHierarchy));
+    } else {
+      String historyToken = tokenFormatter.toHistoryToken(placeHierarchy);
+      saveHistoryToken(historyToken);
+      NavigationEvent.fire(this, request);
     }
-    this.errorReveal = false;
-    NavigationEvent.fire(this, request);
   }
 
   /**
-   * Updates History if it has changed, without firing another
-   * {@link ValueChangeEvent}.
+   * Called whenever an error occured that requires the error page
+   * to be shown to the user.
+   * This method will detect infinite reveal loops and throw an
+   * {@link RuntimeException} in that case.
    * 
-   * @param request The request to display in the updated history.
+   * @param invalidHistoryToken The history token that was not recognised.
    */
-  private void updateHistory(PlaceRequest request) {
+  private void error(String invalidHistoryToken) {   
+    startError();
+    revealErrorPlace(invalidHistoryToken);
+    stopError();
+  }
+  
+  /**
+   * Called whenever the user tries to access an page to which he doesn't
+   * have access, and we need to reveal the user-defined unauthorized place.
+   * This method will detect infinite reveal loops and throw an
+   * {@link RuntimeException} in that case.
+   * 
+   * @param invalidHistoryToken The history token that was not recognised.
+   */
+  private void illegalAccess(String historyToken) {   
+    startError();
+    revealUnauthorizedPlace(historyToken);
+    stopError();
+  }
+
+  /**
+   * Start revealing an error or unauthorized page. This method will
+   * throw an exception if an infinite loop is detected.
+   * 
+   * @see #stopError()
+   */
+  private void startError() {
+    if (this.internalError) {
+      throw new RuntimeException(
+          "Encountered repeated errors resulting in an infinite loop. Make sure all users have access " +
+          "to the pages revealed by revealErrorPlace and revealUnauthorizedPlace. (Note that the default " +
+          "implementations call revealDefaultPlace)");
+    }
+    internalError = true;
+  }
+
+  /**
+   * Indicates that an error page has successfully been revealed. Makes it possible
+   * to detect infinite loops.
+   * 
+   * @see #startError()
+   */
+  private void stopError() {
+    internalError = false;
+  }
+
+  @Override
+  public void updateHistory(PlaceRequest request) {
     try {
       // Make sure the request match
       assert request.hasSameNameToken(getCurrentPlaceRequest()) : "Internal error, PlaceRequest passed to updateHistory doesn't match the tail of the place hierarchy.";
@@ -361,13 +388,24 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       if (browserHistoryToken == null
           || !browserHistoryToken.equals(historyToken)) {
         History.newItem(historyToken, false);
-      }
-      previousHistoryToken = currentHistoryToken;
-      currentHistoryToken = historyToken;
-      currentHRef = Window.Location.getHref();
+        saveHistoryToken(historyToken);
+      }      
     } catch (TokenFormatException e) {
       // Do nothing.
     }
+  }
+
+  /**
+   * This method saves the history token, allowing the {@link #navigateBack()} method to
+   * be used and making it possible to correctly restore the browser's URL if the
+   * user refuses to navigate. (See {@link #onWindowClosing(ClosingEvent)})
+   * 
+   * @param historyToken The current history token, a string.
+   */
+  private void saveHistoryToken(String historyToken) {
+    previousHistoryToken = currentHistoryToken;
+    currentHistoryToken = historyToken;
+    currentHRef = Window.Location.getHref();
   }
 
   /**
