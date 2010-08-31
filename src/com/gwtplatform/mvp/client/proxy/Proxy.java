@@ -28,10 +28,8 @@ import com.gwtplatform.mvp.client.Presenter;
  * <p />
  * The relationship between a presenter and its proxy is two-way.
  * <p />
- * This class is called PresenterProxy instead of simply Proxy because
  * {@link Presenter} subclasses will usually define their own interface called
- * Proxy and derived from this one. Naming this interface Proxy would therefore
- * be impractical for code-writing purposes.
+ * MyProxy and be derived from this one.
  * 
  * @param <P> The presenter's type.
  * 
