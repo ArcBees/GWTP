@@ -194,6 +194,10 @@ class AnnotationHelper {
     out.println("  }");
     out.println();
   }
+  
+  public void generateFieldAssignment(PrintWriter out, VariableElement field, Object value) {
+    out.println("    this." + field.getSimpleName() + " = " + String.valueOf(value) + ";");
+  }
 
   public void generateToString(PrintWriter out, String className,
       Collection<VariableElement> fieldElements) {
@@ -267,7 +271,7 @@ class AnnotationHelper {
   /**
    * Checks if a type is a primitive type.
    */
-  private boolean isPrimitive(TypeMirror type) {
+  public boolean isPrimitive(TypeMirror type) {
     String typeName = type.toString();
     if (typeName.equals("byte")) {
       return true;
