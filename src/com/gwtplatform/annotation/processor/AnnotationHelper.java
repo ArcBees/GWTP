@@ -17,6 +17,7 @@
 package com.gwtplatform.annotation.processor;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.SortedMap;
@@ -30,6 +31,7 @@ import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 
+import com.gwtplatform.annotation.Optional;
 import com.gwtplatform.annotation.Order;
 
 /**
@@ -63,6 +65,18 @@ class AnnotationHelper {
         (TypeElement) classElement));
   }
 
+  public List<VariableElement> getOptionalFields(Element classElement) {
+    List<VariableElement> optionalFields = new ArrayList<VariableElement>();
+    Collection<VariableElement> fields = getOrderedFields(classElement).values();
+    for (VariableElement field : fields) {
+      Optional elementsOptionalAnnotation = field.getAnnotation(Optional.class);
+      if (elementsOptionalAnnotation != null) {
+        optionalFields.add(field);
+      }
+    }
+    return optionalFields;
+  }
+  
   public void generateFields(PrintWriter out,
       Collection<VariableElement> collection, boolean useFinal) {
 

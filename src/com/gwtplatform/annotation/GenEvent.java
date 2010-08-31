@@ -52,10 +52,10 @@ import java.lang.annotation.Target;
  * There is no naming requirement for your class name. It will be appended with
  * Event and Handler.
  * <p/>
- * <b>Using @Order:</b>
+ * <b>Using @{@link Order}:</b>
  * <p/>
- * The order the the fields can be optionally specified using the @Order
- * annotation. If @Order is not used, then the order of the parameters to the
+ * The order the the fields can be optionally specified using the @{@link Order}
+ * annotation. If @{@link Order} is not used, then the order of the parameters to the
  * constructor and to fire() is undefined.
  * <p/>
  * If you type:
@@ -77,7 +77,7 @@ import java.lang.annotation.Target;
  *  FooChangedEvent(Foo foo, int bar, boolean originator)
  * </code>
  * </pre>
- * Without the @Order annotations, it would have generated this constructor:
+ * Without the @{@link Order} annotations, it would have generated this constructor:
  * 
  * <pre>
  * <code>
@@ -86,7 +86,42 @@ import java.lang.annotation.Target;
  * </pre>
  * 
  * 
+ * <b>Using @{@link Optional}:</b>
+ * <p/>
+ * If @{@link Optional} is used, a special constructor and a fire method
+ * will be generated which both contains the optional parameters.
+ * <br/><b>Important:</b> Primitive types are not supported by default. Therefore, 
+ * the default value must be set by hand.
+ * <p/>
+ * If you type:
+ * 
+ * <pre>
+ * <code> 
+ * {@literal}@GenEvent
+ * public class FooChanged {
+ *   @Order(1) @Optional Foo foo;
+ *   @Order(2) int bar;
+ *   @Order(3) @Optional(defaultValue = "false") boolean originator;
+ * }
+ * </code>
+ * </pre>
+ * Will generate this constructors/fire methods:
+ * 
+ * <pre>
+ * <code>
+ *  ...
+ *  FooChangedEvent(int bar)
+ *  FooChangedEvent(Foo foo, int bar, boolean originator)
+ *  ...
+ *  public static void fire(HasEventBus source, int bar)
+ *  public static void fire(HasEventBus source, java.lang.Object foo, int bar, boolean originator)
+ *  ...
+ * </code>
+ * </pre>
+ * 
+ * 
  * @author Brendan Doherty
+ * @author Florian Sauter
  * @author Stephen Haberman (concept)
  */
 @Target({ElementType.TYPE})
