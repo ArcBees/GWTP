@@ -115,27 +115,6 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
     return place.matchesRequest(request);
   }
 
-  @Override
-  public void onPresenterChanged(Presenter<?, ?> presenter) {
-    PlaceRequest request = new PlaceRequest(getNameToken());
-    
-    proxy.onPresenterChanged(presenter);
-    placeManager.onPlaceChanged(presenter.prepareRequest(request));
-  }
-
-  @Override
-  public void onPresenterRevealed(Presenter<?, ?> presenter) {
-    PlaceRequest requestToCompare = placeManager.getCurrentPlaceHierarchy().get(placeManager.getCurrentPlaceHierarchy().size() - 1);
-    
-    // Do nothing until the currentPlaceHierarchy matches the presenter's token.
-    if (requestToCompare.matchesNameToken(getNameToken())) {
-      PlaceRequest request = new PlaceRequest(getNameToken());
-      
-      proxy.onPresenterRevealed(presenter);
-      placeManager.onPlaceRevealed(presenter.prepareRequest(request));
-    }
-  }
-
   // /////////////////////
   // Protected methods that can be overridden
 

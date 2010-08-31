@@ -74,28 +74,6 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
   }
 
   /**
-   * <b>Deprecated!</b> This method will soon be removed from the API. For more
-   * information see <a
-   * href="http://code.google.com/p/gwt-platform/issues/detail?id=136">Issue
-   * 136</a>.
-   * <p />
-   * Notify others that this presenter has been changed. This is especially
-   * useful for stateful presenters that store parameters within the history
-   * token. Calling this will make sure the history token is updated with the
-   * right parameters.
-   */
-  @Deprecated
-  protected final void notifyChange() {
-    getProxy().onPresenterChanged(this);
-  }
-
-  @Override
-  protected void onReset() {
-    super.onReset();
-    getProxy().onPresenterRevealed(this);
-  }
-
-  /**
    * Verifies if this presenter can be revealed automatically or if it is meant to be
    * revealed manually.
    * Normally, the user wants to reveal a presenter manually when it cannot be used
