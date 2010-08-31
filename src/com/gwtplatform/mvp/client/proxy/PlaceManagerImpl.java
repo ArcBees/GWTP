@@ -104,7 +104,11 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public PlaceRequest getCurrentPlaceRequest() {
-    return placeHierarchy.get(placeHierarchy.size() - 1);
+    try {
+      return placeHierarchy.get(placeHierarchy.size() - 1);
+    } catch (ArrayIndexOutOfBoundsException e) {
+        return new PlaceRequest();
+    }
   }
 
   @Override
