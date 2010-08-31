@@ -20,6 +20,8 @@ import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * Marker interface that tell that an object is bound to an {@link EventBus}.
+ * Objects implementing this type can be used as a source when firing an event 
+ * on the event bus.
  * 
  * @author Christian Goudreau
  */
