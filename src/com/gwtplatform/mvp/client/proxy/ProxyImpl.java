@@ -49,14 +49,6 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
     presenter.get((AsyncCallback<P>) callback);
   }
 
-  @Override
-  public void onPresenterChanged(Presenter<?, ?> presenter) {
-  }
-
-  @Override
-  public void onPresenterRevealed(Presenter<?, ?> presenter) {
-  }
-
   /**
    * Injects the various resources and performs other bindings.
    * <p />
