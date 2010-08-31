@@ -146,9 +146,9 @@ public interface PlaceManager extends HasEventBus {
 
   /**
    * Access the current place request, that is, the tail of the place request
-   * hierarchy.
+   * hierarchy. If the hierarchy is empty this returns an empty {@link PlaceRequest}.
    * 
-   * @return The current {@link PlaceRequest}.
+   * @return The current {@link PlaceRequest}, or an empty one if the hierarchy is empty.
    * 
    * @see {@link #getCurrentPlaceHierarchy()}
    */
