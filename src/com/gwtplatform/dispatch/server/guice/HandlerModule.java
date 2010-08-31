@@ -35,16 +35,16 @@ import com.gwtplatform.dispatch.shared.Result;
  * @author David Peterson
  */
 public abstract class HandlerModule extends AbstractModule {
+  
   /**
    * Implementation of {@link ActionHandlerMap} that links {@link Action}s to
-   * {@link ActionHandler}s
+   * {@link ActionHandler}s.
    * 
    * @param <A> Type of {@link Action}
    * @param <R> Type of {@link Result}
    * 
    * @author David Paterson
    */
-
   private static class ActionHandlerValidatorMapImpl<A extends Action<R>, R extends Result>
       implements ActionHandlerValidatorMap<A, R> {
     private final Class<A> actionClass;

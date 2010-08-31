@@ -51,7 +51,6 @@ public interface ExecutionContext {
    * @param <A> The {@link Action} type.
    * @param <R> The {@link Result} type.
    * @param action The {@link Action}.
-   * @return The {@link Result}.
    * @throws ActionException if the action execution failed.
    * @throws ServiceException if the execution failed due to a service error.
    */
