@@ -321,8 +321,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       unlock();
       illegalAccess(tokenFormatter.toHistoryToken(placeHierarchy));
     } else {
-      String historyToken = tokenFormatter.toHistoryToken(placeHierarchy);
-      saveHistoryToken(historyToken);
+      updateHistory(request);
       NavigationEvent.fire(this, request);
     }
   }
