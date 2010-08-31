@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.server.actionhandlervalidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
-
 /**
  * @author Christian Goudreau
  */
@@ -44,7 +43,7 @@ public interface LazyActionHandlerValidatorRegistry extends
    * @param <A> Type of associated {@link Action}
    * @param <R> Type of associated {@link Result}
    * @param actionClass The {@link Action} class
-   * @param actionValidatorClass The {@link ActionValidator} class
+   * @param actionHandlerValidatorClass The {@link ActionHandlerValidatorClass} class
    */
   <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(
       Class<A> actionClass,
