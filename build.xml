@@ -71,7 +71,7 @@
     </javac>
   </target>
   
-  <target name="build" depends="clean,javac" description="Build this project" />
+  <target name="build" depends="javac" description="Build this project" />
 
   <target name="all" depends="tests,jar" description="Build, test and package" />
 
