@@ -38,7 +38,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
 import com.gwtplatform.annotation.GenEvent;
-import com.gwtplatform.annotation.Optional;
 
 /**
  * Processes {@link GenEvent} annotations.
@@ -262,14 +261,14 @@ public class GenEventProcessor extends AbstractProcessor {
     out.println(") {");
     if (optionalFieldElements != null) {
       for (VariableElement optionalField : optionalFieldElements) {
-        Optional optionalFieldAnnotation = optionalField.getAnnotation(Optional.class);
-        out.println("    this." + optionalField.getSimpleName() + " = " + optionalFieldAnnotation.defaultValue() + ";");
+        if (!helper.isPrimitive(optionalField.asType())) {
+          helper.generateFieldAssignment(out, optionalField, null);
+        }
       }
     }
     if (fieldElements != null) {
       for (VariableElement fieldElement : fieldElements) {
-        out.println("    this." + fieldElement.getSimpleName() + " = "
-            + fieldElement.getSimpleName() + ";");
+        helper.generateFieldAssignment(out, fieldElement, fieldElement.getSimpleName());
       }
     }
     out.println("  }");

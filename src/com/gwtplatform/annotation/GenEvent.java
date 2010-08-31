@@ -90,9 +90,7 @@ import java.lang.annotation.Target;
  * <p/>
  * If @{@link Optional} is used, a special constructor and a fire method
  * will be generated which both contains the optional parameters.
- * <br/><b>Important:</b> Primitive types are not supported by default. Therefore, 
- * the default value must be set by hand.
- * <p/>
+ * <br/>
  * If you type:
  * 
  * <pre>
