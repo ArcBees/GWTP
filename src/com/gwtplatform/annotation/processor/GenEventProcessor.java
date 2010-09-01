@@ -96,57 +96,46 @@ public class GenEventProcessor extends AbstractProcessor {
 
       SortedMap<Integer, VariableElement> fieldsMap = helper.getOrderedFields(eventElement);
 
-      generatePackageDeclaration(out, helper.getPackage(eventElement));
+      helper.generatePackageDeclaration(out, helper.getPackage(eventElement));
       
-      generateLineSeparator(out);
-
-      generateImports(out);
-      
-      generateLineSeparator(out);
+      helper.generateImports(out, 
+          "com.google.gwt.event.shared.EventHandler",
+          "com.google.gwt.event.shared.GwtEvent",
+          "com.google.gwt.event.shared.HandlerRegistration",
+          "",
+          "com.gwtplatform.mvp.client.HasEventBus",
+          "com.google.gwt.event.shared.HasHandlers"
+      );
       
       generateClassHeader(out, eventSimpleName);
       
-      generateLineSeparator(out);
-
       generateHasHandlerInterface(out, eventSimpleName);
       
-      generateLineSeparator(out);
-
       generateHandlerInterface(out, eventSimpleName);
       
-      generateLineSeparator(out);
-      
-      generateTypeField(out, eventSimpleName);
-      
-      generateLineSeparator(out);
+      generateStaticTypeField(out, eventSimpleName);
       
       generateFireMethodsUsingFields(out, helper, eventElement, fieldsMap.values());
       
       generateTypeAccessorMethod(out, eventSimpleName);
       
-      generateLineSeparator(out);
-
       helper.generateFields(out, fieldsMap.values(), true);
 
       generateConstructorsUsingFields(out, helper, eventElement, fieldsMap.values());
       
       generateAssociatedTypeMethod(out, eventSimpleName);
       
-      generateLineSeparator(out);
-      
       helper.generateAccessors(out, fieldsMap.values());
 
       generateDispatchMethod(out, eventSimpleName);
       
-      generateLineSeparator(out);   
-
       helper.generateEquals(out, eventSimpleName + "Event", fieldsMap.values());
 
       helper.generateHashCode(out, fieldsMap.values());
 
       helper.generateToString(out, eventSimpleName + "Event", fieldsMap.values());
 
-      generateClassFooter(out);
+      helper.generateClassFooter(out);
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {
@@ -156,90 +145,26 @@ public class GenEventProcessor extends AbstractProcessor {
     }
   }
   
-  protected void generateLineSeparator(PrintWriter out) {
+  protected void generateAssociatedTypeMethod(PrintWriter out, Name eventSimpleName) {
     out.println();
-  }
-  
-  protected void generatePackageDeclaration(PrintWriter out, String packageName) {
-    out.println("package " + packageName + ";");
-  }
-  
-  protected void generateImports(PrintWriter out) {
-    out.println("import com.google.gwt.event.shared.EventHandler;");
-    out.println("import com.google.gwt.event.shared.GwtEvent;");
-    out.println("import com.google.gwt.event.shared.HandlerRegistration;");
-    out.println();
-    out.println("import com.gwtplatform.mvp.client.HasEventBus;");
-    out.println("import com.google.gwt.event.shared.HasHandlers;");
+    out.println("  @Override");
+    out.println("  public Type<" + eventSimpleName + "Handler> getAssociatedType() {");
+    out.println("    return TYPE;");
+    out.println("  }");
   }
   
   protected void generateClassHeader(PrintWriter out, Name eventSimpleName) {
+    out.println();
     out.println("public class " + eventSimpleName + "Event extends GwtEvent<" + eventSimpleName
         + "Event." + eventSimpleName + "Handler> { ");
-  }
-  
-  protected void generateHasHandlerInterface(PrintWriter out, Name eventSimpleName) {
-    out.println("  public interface Has" + eventSimpleName
-        + "Handlers extends HasHandlers {");
-    out.println("    HandlerRegistration add" + eventSimpleName + "Handler(" + eventSimpleName
-        + "Handler handler);");
-    out.println("  }");
-  }
-  
-  protected void generateHandlerInterface(PrintWriter out, Name eventSimpleName) {
-    out.println("  public interface " + eventSimpleName
-        + "Handler extends EventHandler {");
-    out.println("    public void on" + eventSimpleName + "(" + eventSimpleName + "Event event);");
-    out.println("  }");
-  }
-  
-  protected void generateTypeField(PrintWriter out, Name eventSimpleName) {
-    out.println("  private static final Type<" + eventSimpleName
-        + "Handler> TYPE = new Type<" + eventSimpleName + "Handler>();");
-  }
-  
-  protected void generateFireMethodsUsingFields(PrintWriter out, AnnotationHelper helper, Element eventElement, Collection<VariableElement> fieldElements) {
-    Name eventSimpleName = eventElement.getSimpleName();
-    
-    // generate fire method with all fields
-    generateFireMethodUsingFields(out, helper, eventSimpleName, fieldElements);
-    
-    generateLineSeparator(out);
-
-    Collection<VariableElement> optionalFields = helper.getOptionalFields(eventElement);
-    if (!optionalFields.isEmpty()) {
-      // generate fire method without optional fields
-      ArrayList<VariableElement> fields = new ArrayList<VariableElement>();
-      fields.addAll(fieldElements);
-      fields.removeAll(optionalFields);
-      generateFireMethodUsingFields(out, helper, eventSimpleName, fields);
-      generateLineSeparator(out);
-    }
-  }
-  
-  protected void generateFireMethodUsingFields(PrintWriter out, AnnotationHelper helper, Name eventSimpleName, Collection<VariableElement> fieldElements) {
-    out.print("  public static void fire(HasEventBus source");
-    helper.generateFieldList(out, fieldElements, true, true);
-    out.println(") {");
-    out.print("    source.fireEvent(new " + eventSimpleName + "Event(");
-    helper.generateFieldList(out, fieldElements, false, false);
-    out.println("));");
-    out.println("  }");
-  }
-  
-  protected void generateTypeAccessorMethod(PrintWriter out, Name eventSimpleName) {
-    out.println("  public static Type<" + eventSimpleName + "Handler> getType() {");
-    out.println("    return TYPE;");
-    out.println("  }");
   }
   
   protected void generateConstructorsUsingFields(PrintWriter out, AnnotationHelper helper, Element eventElement, Collection<VariableElement> fieldElements) {
     Name eventSimpleName = eventElement.getSimpleName();
     
     // constructor with all fields
+    out.println();
     generateConstructorUsingFields(out, helper, eventSimpleName, fieldElements, null);
-    
-    generateLineSeparator(out);
     
     Collection<VariableElement> optionalFields = helper.getOptionalFields(eventElement);
     if (!optionalFields.isEmpty()) {
@@ -247,8 +172,8 @@ public class GenEventProcessor extends AbstractProcessor {
       ArrayList<VariableElement> fields = new ArrayList<VariableElement>();
       fields.addAll(fieldElements);
       fields.removeAll(optionalFields);
+      out.println();
       generateConstructorUsingFields(out, helper, eventSimpleName, fields, optionalFields);
-      generateLineSeparator(out);
     }
   }
   
@@ -256,6 +181,7 @@ public class GenEventProcessor extends AbstractProcessor {
    * Optional field elements will not be listed in the constructor field list but initialized with the default value.
    */
   protected void generateConstructorUsingFields(PrintWriter out, AnnotationHelper helper, Name eventSimpleName, Collection<VariableElement> fieldElements, Collection<VariableElement> optionalFieldElements) {
+    out.println();
     out.print("  public " + eventSimpleName + "Event(");
     helper.generateFieldList(out, fieldElements, true, false);
     out.println(") {");
@@ -275,21 +201,69 @@ public class GenEventProcessor extends AbstractProcessor {
   }
   
   protected void generateDispatchMethod(PrintWriter out, Name eventSimpleName) {
+    out.println();
     out.println("  @Override");
     out.println("  protected void dispatch(" + eventSimpleName + "Handler handler) {");
     out.println("    handler.on" + eventSimpleName + "(this);");
     out.println("  }");
   }
+  
+  protected void generateFireMethodsUsingFields(PrintWriter out, AnnotationHelper helper, Element eventElement, Collection<VariableElement> fieldElements) {
+    Name eventSimpleName = eventElement.getSimpleName();
+    
+    // generate fire method with all fields
+    out.println();
+    generateFireMethodUsingFields(out, helper, eventSimpleName, fieldElements);
 
-  protected void generateAssociatedTypeMethod(PrintWriter out, Name eventSimpleName) {
-    out.println("  @Override");
-    out.println("  public Type<" + eventSimpleName + "Handler> getAssociatedType() {");
-    out.println("    return TYPE;");
+    Collection<VariableElement> optionalFields = helper.getOptionalFields(eventElement);
+    if (!optionalFields.isEmpty()) {
+      // generate fire method without optional fields
+      ArrayList<VariableElement> fields = new ArrayList<VariableElement>();
+      fields.addAll(fieldElements);
+      fields.removeAll(optionalFields);
+      out.println();
+      generateFireMethodUsingFields(out, helper, eventSimpleName, fields);
+    }
+  }
+  
+  protected void generateFireMethodUsingFields(PrintWriter out, AnnotationHelper helper, Name eventSimpleName, Collection<VariableElement> fieldElements) {
+    out.println();
+    out.print("  public static void fire(HasEventBus source");
+    helper.generateFieldList(out, fieldElements, true, true);
+    out.println(") {");
+    out.print("    source.fireEvent(new " + eventSimpleName + "Event(");
+    helper.generateFieldList(out, fieldElements, false, false);
+    out.println("));");
     out.println("  }");
   }
   
-  protected void generateClassFooter(PrintWriter out) {
-    out.println("}");
+  protected void generateHasHandlerInterface(PrintWriter out, Name eventSimpleName) {
+    out.println();
+    out.println("  public interface Has" + eventSimpleName
+        + "Handlers extends HasHandlers {");
+    out.println("    HandlerRegistration add" + eventSimpleName + "Handler(" + eventSimpleName
+        + "Handler handler);");
+    out.println("  }");
   }
   
+  protected void generateHandlerInterface(PrintWriter out, Name eventSimpleName) {
+    out.println();
+    out.println("  public interface " + eventSimpleName
+        + "Handler extends EventHandler {");
+    out.println("    public void on" + eventSimpleName + "(" + eventSimpleName + "Event event);");
+    out.println("  }");
+  }
+  
+  protected void generateStaticTypeField(PrintWriter out, Name eventSimpleName) {
+    out.println();
+    out.println("  private static final Type<" + eventSimpleName
+        + "Handler> TYPE = new Type<" + eventSimpleName + "Handler>();");
+  }
+  
+  protected void generateTypeAccessorMethod(PrintWriter out, Name eventSimpleName) {
+    out.println();
+    out.println("  public static Type<" + eventSimpleName + "Handler> getType() {");
+    out.println("    return TYPE;");
+    out.println("  }");
+  }
 }

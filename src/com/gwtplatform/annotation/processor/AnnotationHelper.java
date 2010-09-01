@@ -76,6 +76,28 @@ class AnnotationHelper {
     }
     return optionalFields;
   }
+
+  public void generatePackageDeclaration(PrintWriter out, String packageName) {
+    out.println("package " + packageName + ";");
+  }
+
+  /**
+   * Use null or an empty string as class name to separate package groups.
+   */
+  public void generateImports(PrintWriter out, String... importClassNames) {
+    out.println();
+    for (String importClassName : importClassNames) {
+      if (importClassName == null || importClassName.isEmpty()) {
+        out.println();
+      } else {
+        out.println("import " + importClassName + ";");
+      }
+    }
+  }
+  
+  public void generateClassFooter(PrintWriter out) {
+    out.println("}");
+  }
   
   public void generateFields(PrintWriter out,
       Collection<VariableElement> collection, boolean useFinal) {

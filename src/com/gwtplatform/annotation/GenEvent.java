@@ -99,7 +99,7 @@ import java.lang.annotation.Target;
  * public class FooChanged {
  *   @Order(1) @Optional Foo foo;
  *   @Order(2) int bar;
- *   @Order(3) @Optional(defaultValue = "false") boolean originator;
+ *   @Order(3) @Optional boolean originator;
  * }
  * </code>
  * </pre>
@@ -112,7 +112,7 @@ import java.lang.annotation.Target;
  *  FooChangedEvent(Foo foo, int bar, boolean originator)
  *  ...
  *  public static void fire(HasEventBus source, int bar)
- *  public static void fire(HasEventBus source, java.lang.Object foo, int bar, boolean originator)
+ *  public static void fire(HasEventBus source, Foo foo, int bar, boolean originator)
  *  ...
  * </code>
  * </pre>
