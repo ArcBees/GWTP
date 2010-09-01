@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * Use with <code>@{@link GenEvent}</code> to specify an optional
  * parameter.
- * See {@link GenEvent} or {@link GenDto} for an example.
+ * See {@link GenEvent} for an example.
  *
  * @author Florian Sauter
  */
