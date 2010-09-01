@@ -174,7 +174,7 @@ public class GenEventProcessor extends AbstractProcessor {
     // generate fire method with all fields
     generateFireMethodUsingFields(out, helper, eventSimpleName, fieldElements);
 
-    Collection<VariableElement> optionalFields = helper.getOptionalFields(eventElement);
+    Collection<VariableElement> optionalFields = helper.getOptionalFields(helper.getOrderedFields(eventElement).values());
     if (!optionalFields.isEmpty()) {
       // generate fire method without optional fields
       ArrayList<VariableElement> fields = new ArrayList<VariableElement>();

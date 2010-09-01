@@ -40,6 +40,26 @@ public class AnnotationProcessingTest {
     FooChangedEvent event3 = new FooChangedEvent(foo, false);
     assertFalse(event3.equals(event));
   }
+  
+  @org.junit.Test
+  public void eventOptional() {
+    Foo foo = new Foo("bar");
+    FooChangedEvent event = new FooChangedEvent(foo, true, "message", 1.0);
+    assertEquals("message", event.getAdditionalMessage());
+    assertTrue(1.0 == event.getPriority());
+    
+    try {
+      event.fire(null, foo, false, "fireMessage", 2.0);
+    } catch (NullPointerException e) {
+      // the method fire was generated correctly
+    }
+    
+    try {
+      event.fire(null, foo, true);
+    } catch (NullPointerException e) {
+      // the method fire was generated correctly
+    }
+  }
 
   @org.junit.Test
   public void dispatch() {
@@ -76,6 +96,19 @@ public class AnnotationProcessingTest {
     RetrieveBarResult result4 = new RetrieveBarResult(foo, 42);
     assertEquals(foo, result4.getThing());
   }
+  
+  @org.junit.Test
+  public void dispatchOptional() {
+    RetrieveFooAction action = new RetrieveFooAction(42, "meaning of life");
+    assertEquals(42, action.getFooId());
+    assertTrue(action.isSecured());
+    assertEquals("dispatch/RetrieveFoo",action.getServiceName());
+    
+    Foo foo = new Foo("bar");
+    RetrieveFooResult result = new RetrieveFooResult(foo, 42, true);
+    assertEquals(true, result.isAnswer42());
+    assertEquals(42, result.getMeaningOfLife());
+  }
 
   @org.junit.Test
   public void dto() {
@@ -88,6 +121,14 @@ public class AnnotationProcessingTest {
 
     PersonNameDto dto3 = new PersonNameDto("bobby", "smith");
     assertFalse(dto.equals(dto3));
+  }
+  
+  @org.junit.Test
+  public void dtoOptional() {
+    PersonNameDto dto = new PersonNameDto("bob", "andrews", "peter");
+    assertEquals("bob", dto.getFirstName());
+    assertEquals("andrews", dto.getLastName());
+    assertEquals("peter", dto.getSecondName());
   }
 
 }
