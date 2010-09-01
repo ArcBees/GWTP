@@ -403,7 +403,9 @@ public interface PlaceManager extends HasEventBus {
 
   /**
    * Resets the navigation lock if it is currently set. You should usually not call this
-   * directly, instead it is meant to be used with presenters that use manual reveal.
+   * directly, instead it is meant to be used with presenters that use manual reveal via
+   * {@link ProxyPlace#manualReveal(com.gwtplatform.mvp.client.Presenter)} and 
+   * {@link ProxyPlace#manualRevealFailed()}.
    * 
    * @see com.gwtplatform.mvp.client.Presenter#useManualReveal()
    * @see ProxyPlace#manualReveal(com.gwtplatform.mvp.client.Presenter)
