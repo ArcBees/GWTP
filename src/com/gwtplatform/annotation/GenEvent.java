@@ -88,18 +88,16 @@ import java.lang.annotation.Target;
  * 
  * <b>Using @{@link Optional}:</b>
  * <p/>
- * If @{@link Optional} is used, a special constructor and a fire method
- * will be generated which both contains the optional parameters.
- * <br/>
+ * If @{@link Optional} is used together with @{@link GenEvent}, an additional fire method is generated.
  * If you type:
  * 
  * <pre>
  * <code> 
  * {@literal}@GenEvent
  * public class FooChanged {
- *   @Order(1) @Optional Foo foo;
+ *   &#064;Optional @Order(1) Foo foo;
  *   @Order(2) int bar;
- *   @Order(3) @Optional boolean originator;
+ *   &#064;Optional @Order(3) boolean originator;
  * }
  * </code>
  * </pre>

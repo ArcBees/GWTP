@@ -21,6 +21,7 @@ import com.gwtplatform.annotation.GenDto;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Set;
 import java.util.SortedMap;
 
@@ -43,6 +44,7 @@ import javax.lang.model.element.VariableElement;
  * See {@link javax.annotation.processing.Processor} for more details. 
  * 
  * @author Brendan Doherty 
+ * @author Florian Sauter
  * @author Stephen Haberman (concept) 
  */
 
@@ -82,48 +84,43 @@ public class GenDtoProcessor extends AbstractProcessor {
     PrintWriter out = null;
     try {
       AnnotationHelper helper = new AnnotationHelper(env);
-      out = new PrintWriter(new BufferedWriter(
-          this.env.getFiler().createSourceFile(
-              helper.getQName(dtoElement) + "Dto", dtoElement).openWriter()));
+      
+      String sourceFileName = helper.getQName(dtoElement) + "Dto";
+      Writer sourceWriter = this.env.getFiler().createSourceFile(sourceFileName, dtoElement).openWriter();
+      BufferedWriter bufferedWriter = new BufferedWriter(sourceWriter);
+      out = new PrintWriter(bufferedWriter);
 
-      Name name = dtoElement.getSimpleName();
-
+      Name dtoSimpleName = dtoElement.getSimpleName();
+      String dtoClassName = dtoSimpleName + "Dto";
+      
       SortedMap<Integer, VariableElement> fieldsMap = helper.getOrderedFields(dtoElement);
 
-      out.println("package " + helper.getPackage(dtoElement) + ";");
-      out.println();
-      out.println("import com.google.gwt.user.client.rpc.IsSerializable;");
-      out.println();
-      out.print("public class ");
-      out.print(name);
-      out.println("Dto implements IsSerializable {");
+      helper.generatePackageDeclaration(out, helper.getPackage(dtoElement));
 
+      helper.generateImports(out, "com.google.gwt.user.client.rpc.IsSerializable");
+      
+      helper.generateClassHeader(out, 
+          dtoClassName, null, 
+          "IsSerializable"
+      );
+      
       helper.generateFields(out, fieldsMap.values(), false);
 
-      if (!fieldsMap.isEmpty()) {
-        out.println("  protected " + name + "Dto() { }");
-        out.println();
+      if (!fieldsMap.isEmpty() && !helper.hasOnlyOptionalFields(fieldsMap.values())) {
+        helper.generateEmptyConstructor(out, "protected", dtoClassName);
       }
 
-      out.print("  public " + name + "Dto(");
-      helper.generateFieldList(out, fieldsMap.values(), true, false);
-      out.println(") { ");
-      for (VariableElement fieldDecl : fieldsMap.values()) {
-        out.println("    this." + fieldDecl.getSimpleName() + " = "
-            + fieldDecl.getSimpleName() + ";");
-      }
-      out.println("  }");
-      out.println();
+      helper.generateConstructorsUsingFields(out, dtoClassName, dtoElement, fieldsMap.values());
 
-      helper.generateAccessors(out, fieldsMap.values());
+      helper.generateFieldAccessors(out, fieldsMap.values());
 
-      helper.generateEquals(out, name + "Dto", fieldsMap.values());
+      helper.generateEquals(out, dtoSimpleName + "Dto", fieldsMap.values());
 
       helper.generateHashCode(out, fieldsMap.values());
 
-      helper.generateToString(out, name + "Dto", fieldsMap.values());
+      helper.generateToString(out, dtoSimpleName + "Dto", fieldsMap.values());
 
-      out.println("}");
+      helper.generateClassFooter(out);
 
     } catch (IOException e) {
       throw new RuntimeException(e);

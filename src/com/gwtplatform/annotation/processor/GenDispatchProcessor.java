@@ -21,9 +21,9 @@ import static javax.lang.model.SourceVersion.RELEASE_6;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Collection;
 import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
@@ -37,8 +37,6 @@ import javax.lang.model.element.VariableElement;
 import javax.annotation.processing.AbstractProcessor;
 
 import com.gwtplatform.annotation.GenDispatch;
-import com.gwtplatform.annotation.In;
-import com.gwtplatform.annotation.Out;
 
 /**
  * Processes {@link GenDispatch} annotations.
@@ -47,6 +45,7 @@ import com.gwtplatform.annotation.Out;
  * {@link javax.annotation.processing.Processor} for more details.
  * 
  * @author Brendan Doherty
+ * @author Florian Sauter
  * @author Stephen Haberman (concept)
  */
 
@@ -97,81 +96,48 @@ public class GenDispatchProcessor extends AbstractProcessor {
     PrintWriter out = null;
     try {
       AnnotationHelper helper = new AnnotationHelper(env);
-      out = new PrintWriter(
-          new BufferedWriter(
-              this.env.getFiler().createSourceFile(
-                  helper.getQName(dispatchElement) + "Action", dispatchElement).openWriter()));
+      
+      String sourceFileName = helper.getQName(dispatchElement) + "Action";
+      Writer sourceWriter = this.env.getFiler().createSourceFile(sourceFileName, dispatchElement).openWriter();
+      BufferedWriter bufferedWriter = new BufferedWriter(sourceWriter);
+      out = new PrintWriter(bufferedWriter);
+      
+      Name dispatchSimpleName = dispatchElement.getSimpleName();
+      String dispatchActionClassName = dispatchSimpleName + "Action";
+      
+      Collection<VariableElement> annotatedInFields = helper.getInFields(dispatchElement);
 
-      Name name = dispatchElement.getSimpleName();
+      helper.generatePackageDeclaration(out, helper.getPackage(dispatchElement));
 
-      SortedMap<Integer, VariableElement> fieldsMap = new TreeMap<Integer, VariableElement>();
-      for (VariableElement fieldElement : helper.getFields(dispatchElement)) {
-        In order = fieldElement.getAnnotation(In.class);
-        if (order != null) {
-          fieldsMap.put(order.value(), fieldElement);
-        }
+      helper.generateImports(out, "com.gwtplatform.dispatch.shared.Action");
+
+      helper.generateClassHeader(out, 
+          dispatchActionClassName, null, 
+          "Action<" + dispatchSimpleName + "Result>", 
+          extraActionInterfaces
+      );
+
+      helper.generateFields(out, annotatedInFields, false);
+
+      if (annotatedInFields.isEmpty() && !helper.hasOnlyOptionalFields(annotatedInFields)) {
+        helper.generateEmptyConstructor(out, "protected", dispatchActionClassName);
       }
 
-      out.println("package " + helper.getPackage(dispatchElement) + ";");
-      out.println();
-      out.println("import com.gwtplatform.dispatch.shared.Action;");
-      out.println();
-      out.print("public class ");
-      out.print(name);
-      out.print("Action implements Action<");
-      out.print(name);
-      out.print("Result>");
-      if (!extraActionInterfaces.isEmpty()) {
-        out.print(", ");
-        out.print(extraActionInterfaces);
-      }
+      helper.generateConstructorsUsingFields(out, dispatchActionClassName, dispatchElement, annotatedInFields);
 
-      out.println(" { ");
+      helper.generateFieldAccessors(out, annotatedInFields);
+      
+      generateServiceNameAccessor(out, dispatchSimpleName, serviceName);
 
-      helper.generateFields(out, fieldsMap.values(), false);
+      generateIsSecuredMethod(out, isSecure);
 
-      if (fieldsMap.size() > 0) {
-        out.println("  protected " + name + "Action() { }");
-        out.println();
-      }
+      helper.generateEquals(out, dispatchActionClassName, annotatedInFields);
 
-      out.print("  public " + name + "Action(");
-      helper.generateFieldList(out, fieldsMap.values(), true, false);
-      out.println(") { ");
-      for (VariableElement fieldElement : fieldsMap.values()) {
-        out.println("    this." + fieldElement.getSimpleName() + " = "
-            + fieldElement.getSimpleName() + ";");
-      }
-      out.println("  }");
-      out.println();
+      helper.generateHashCode(out, annotatedInFields);
 
-      helper.generateAccessors(out, fieldsMap.values());
+      helper.generateToString(out, dispatchActionClassName, annotatedInFields);
 
-      out.println("  @Override");
-      out.println("  public String getServiceName() {");
-      if (serviceName.isEmpty()) {
-        out.println("    return Action.DEFAULT_SERVICE_NAME + \"" + name
-            + "\";");
-      } else {
-        out.println("    return \"" + serviceName + "\";");
-      }
-
-      out.println("  }");
-      out.println();
-
-      out.println("  @Override");
-      out.println("  public boolean isSecured() {");
-      out.println("    return " + isSecure + ";");
-      out.println("  }");
-      out.println();
-
-      helper.generateEquals(out, name + "Action", fieldsMap.values());
-
-      helper.generateHashCode(out, fieldsMap.values());
-
-      helper.generateToString(out, name + "Action", fieldsMap.values());
-
-      out.println("}");
+      helper.generateClassFooter(out);
 
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -187,62 +153,44 @@ public class GenDispatchProcessor extends AbstractProcessor {
     PrintWriter out = null;
     try {
       AnnotationHelper helper = new AnnotationHelper(env);
-      out = new PrintWriter(
-          new BufferedWriter(
-              this.env.getFiler().createSourceFile(
-                  helper.getQName(dispatchElement) + "Result", dispatchElement).openWriter()));
+      
+      String sourceFileName = helper.getQName(dispatchElement) + "Result";
+      Writer sourceWriter = this.env.getFiler().createSourceFile(sourceFileName, dispatchElement).openWriter();
+      BufferedWriter bufferedWriter = new BufferedWriter(sourceWriter);
+      out = new PrintWriter(bufferedWriter);
+      
+      Name dispatchSimpleName = dispatchElement.getSimpleName();
+      String dispatchResultClassName = dispatchSimpleName + "Result";
 
-      Name name = dispatchElement.getSimpleName();
+      Collection<VariableElement> annotatedOutFields = helper.getOutFields(dispatchElement);
 
-      SortedMap<Integer, VariableElement> fieldsMap = new TreeMap<Integer, VariableElement>();
-      for (VariableElement fieldElement : helper.getFields(dispatchElement)) {
-        Out order = fieldElement.getAnnotation(Out.class);
-        if (order != null) {
-          fieldsMap.put(order.value(), fieldElement);
-        }
+      helper.generatePackageDeclaration(out, helper.getPackage(dispatchElement));
+      
+      helper.generateImports(out, "com.gwtplatform.dispatch.shared.Result");
+      
+      helper.generateClassHeader(out, 
+          dispatchResultClassName, null, 
+          "Result", 
+          extraResultInterfaces
+      );
+
+      helper.generateFields(out, annotatedOutFields, false);
+
+      if (!annotatedOutFields.isEmpty() && !helper.hasOnlyOptionalFields(annotatedOutFields)) {
+        helper.generateEmptyConstructor(out, "protected", dispatchResultClassName);
       }
 
-      out.println("package " + helper.getPackage(dispatchElement) + ";");
-      out.println();
-      out.println("import com.gwtplatform.dispatch.shared.Result;");
-      out.println();
-      out.print("public class ");
-      out.print(name);
-      out.print("Result implements Result");
-      if (!extraResultInterfaces.isEmpty()) {
-        out.print(",");
-        out.print(extraResultInterfaces);
-      }
+      helper.generateConstructorsUsingFields(out, dispatchResultClassName, dispatchElement, annotatedOutFields);
 
-      out.print(" { ");
-      out.println();
+      helper.generateFieldAccessors(out, annotatedOutFields);
 
-      helper.generateFields(out, fieldsMap.values(), false);
+      helper.generateEquals(out, dispatchResultClassName, annotatedOutFields);
 
-      if (fieldsMap.size() > 0) {
-        out.println("  protected " + name + "Result() { }");
-        out.println();
-      }
+      helper.generateHashCode(out, annotatedOutFields);
 
-      out.print("  public " + name + "Result(");
-      helper.generateFieldList(out, fieldsMap.values(), true, false);
-      out.println(") { ");
-      for (VariableElement fieldElement : fieldsMap.values()) {
-        out.println("    this." + fieldElement.getSimpleName() + " = "
-            + fieldElement.getSimpleName() + ";");
-      }
-      out.println("  }");
-      out.println();
+      helper.generateToString(out, dispatchResultClassName, annotatedOutFields);
 
-      helper.generateAccessors(out, fieldsMap.values());
-
-      helper.generateEquals(out, name + "Result", fieldsMap.values());
-
-      helper.generateHashCode(out, fieldsMap.values());
-
-      helper.generateToString(out, name + "Result", fieldsMap.values());
-
-      out.println("}");
+      helper.generateClassFooter(out);
 
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -251,5 +199,26 @@ public class GenDispatchProcessor extends AbstractProcessor {
         out.close();
       }
     }
+  }
+  
+  protected void generateIsSecuredMethod(PrintWriter out, boolean isSecure) {
+    out.println();
+    out.println("  @Override");
+    out.println("  public boolean isSecured() {");
+    out.println("    return " + isSecure + ";");
+    out.println("  }");
+  }
+  
+  protected void generateServiceNameAccessor(PrintWriter out, Name simpleClassName, String serviceName) {
+    out.println();
+    out.println("  @Override");
+    out.println("  public String getServiceName() {");
+    if (serviceName.isEmpty()) {
+      out.println("    return Action.DEFAULT_SERVICE_NAME + \"" + simpleClassName
+          + "\";");
+    } else {
+      out.println("    return \"" + serviceName + "\";");
+    }
+    out.println("  }");
   }
 }
