@@ -93,6 +93,7 @@ public class GenEventProcessor extends AbstractProcessor {
       out = new PrintWriter(bufferedWriter);
       
       Name eventSimpleName = eventElement.getSimpleName();
+      String eventClassName = eventSimpleName + "Event";
 
       SortedMap<Integer, VariableElement> fieldsMap = helper.getOrderedFields(eventElement);
 
@@ -121,19 +122,19 @@ public class GenEventProcessor extends AbstractProcessor {
       
       helper.generateFields(out, fieldsMap.values(), true);
 
-      generateConstructorsUsingFields(out, helper, eventElement, fieldsMap.values());
+      helper.generateConstructorsUsingFields(out, eventClassName, eventElement, fieldsMap.values());
       
       generateAssociatedTypeMethod(out, eventSimpleName);
       
-      helper.generateAccessors(out, fieldsMap.values());
+      helper.generateFieldAccessors(out, fieldsMap.values());
 
       generateDispatchMethod(out, eventSimpleName);
       
-      helper.generateEquals(out, eventSimpleName + "Event", fieldsMap.values());
+      helper.generateEquals(out, eventClassName, fieldsMap.values());
 
       helper.generateHashCode(out, fieldsMap.values());
 
-      helper.generateToString(out, eventSimpleName + "Event", fieldsMap.values());
+      helper.generateToString(out, eventClassName, fieldsMap.values());
 
       helper.generateClassFooter(out);
     } catch (IOException e) {
@@ -159,47 +160,6 @@ public class GenEventProcessor extends AbstractProcessor {
         + "Event." + eventSimpleName + "Handler> { ");
   }
   
-  protected void generateConstructorsUsingFields(PrintWriter out, AnnotationHelper helper, Element eventElement, Collection<VariableElement> fieldElements) {
-    Name eventSimpleName = eventElement.getSimpleName();
-    
-    // constructor with all fields
-    out.println();
-    generateConstructorUsingFields(out, helper, eventSimpleName, fieldElements, null);
-    
-    Collection<VariableElement> optionalFields = helper.getOptionalFields(eventElement);
-    if (!optionalFields.isEmpty()) {
-      // constructor without optional fields
-      ArrayList<VariableElement> fields = new ArrayList<VariableElement>();
-      fields.addAll(fieldElements);
-      fields.removeAll(optionalFields);
-      out.println();
-      generateConstructorUsingFields(out, helper, eventSimpleName, fields, optionalFields);
-    }
-  }
-  
-  /**
-   * Optional field elements will not be listed in the constructor field list but initialized with the default value.
-   */
-  protected void generateConstructorUsingFields(PrintWriter out, AnnotationHelper helper, Name eventSimpleName, Collection<VariableElement> fieldElements, Collection<VariableElement> optionalFieldElements) {
-    out.println();
-    out.print("  public " + eventSimpleName + "Event(");
-    helper.generateFieldList(out, fieldElements, true, false);
-    out.println(") {");
-    if (optionalFieldElements != null) {
-      for (VariableElement optionalField : optionalFieldElements) {
-        if (!helper.isPrimitive(optionalField.asType())) {
-          helper.generateFieldAssignment(out, optionalField, null);
-        }
-      }
-    }
-    if (fieldElements != null) {
-      for (VariableElement fieldElement : fieldElements) {
-        helper.generateFieldAssignment(out, fieldElement, fieldElement.getSimpleName());
-      }
-    }
-    out.println("  }");
-  }
-  
   protected void generateDispatchMethod(PrintWriter out, Name eventSimpleName) {
     out.println();
     out.println("  @Override");
@@ -212,7 +172,6 @@ public class GenEventProcessor extends AbstractProcessor {
     Name eventSimpleName = eventElement.getSimpleName();
     
     // generate fire method with all fields
-    out.println();
     generateFireMethodUsingFields(out, helper, eventSimpleName, fieldElements);
 
     Collection<VariableElement> optionalFields = helper.getOptionalFields(eventElement);
@@ -221,7 +180,6 @@ public class GenEventProcessor extends AbstractProcessor {
       ArrayList<VariableElement> fields = new ArrayList<VariableElement>();
       fields.addAll(fieldElements);
       fields.removeAll(optionalFields);
-      out.println();
       generateFireMethodUsingFields(out, helper, eventSimpleName, fields);
     }
   }

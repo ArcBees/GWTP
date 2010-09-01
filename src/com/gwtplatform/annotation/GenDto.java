@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
  * <code> 
  * {@literal}@GenDto
  * public class LineItem {
- *   String Key&lt;Product&gt; productKey;
+ *   Key&lt;Product&gt; productKey;
  *   int quantity; 
  * }
  * </code>
