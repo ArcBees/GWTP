@@ -111,8 +111,36 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * <p />
    * If your presenter needs to fetch some information from the server while
    * preparing itself, consider using manual reveal. See {@link #useManualReveal()}.
+   * <p />
+   * If you want to redirect to another page within this method you also have to use
+   * manual reveal and call 
+   * {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualRevealFailed()} 
+   * before the redirection. Here is an example of a {@link #prepareFromRequest(PlaceRequest)}
+   * method aborting early if an error is encountered:
+   * <pre>
+   * <code>
+   *  {@literal}@Override
+   *  public boolean useManualReveal() {
+   *    return true;
+   *  }
+   *
+   *  {@literal}@Override
+   *  public void prepareFromRequest(PlaceRequest placeRequest) {
+   *    super.prepareFromRequest(placeRequest);
+   *    
+   *    if (isInvalidRequest(placeRequest))
+   *    {
+   *      getProxy().manualRevealFailed();
+   *      placeManager.revealErrorPlace(placeRequest.getNameToken());
+   *    } else {
+   *      processRequest(placeRequest);
+   *      getProxy().manualReveal(this);  
+   *    }
+   *  }
+   * </code>
+   * </pre>
    * 
-   * @param request The request.
+   * @param request The {@link PlaceRequest}.
    */
   public void prepareFromRequest(PlaceRequest request) {
   }  
