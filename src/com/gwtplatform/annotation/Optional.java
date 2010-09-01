@@ -23,10 +23,24 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Use with <code>@{@link GenEvent}</code> to specify an optional
- * parameter.
- * See {@link GenEvent} for an example.
- *
+ * Use the @{@link Optional} annotation to specify optional fields.
+ * 
+ * <p>
+ * Once one or more optional fields have been declared optional, an additional
+ * constructor is generated which can be called without these fields.
+ * </p>
+ * 
+ * <p>
+ * You can use this annotation with:
+ * </p>
+ * <ul>
+ * <li>@{@link GenEvent}</li>
+ * <li>@{@link GenDto}</li>
+ * <li>@{@link GenDispatch}</li>
+ * </ul>
+ * 
+ * <p>See @{@link GenEvent}, @{@link GenDto} or @{@link GenDispatch} for specific behaviors with optional fields.</p>
+ * 
  * @author Florian Sauter
  */
 @Target({ElementType.FIELD})

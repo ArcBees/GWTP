@@ -31,14 +31,17 @@ import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 
+import com.gwtplatform.annotation.In;
 import com.gwtplatform.annotation.Optional;
 import com.gwtplatform.annotation.Order;
+import com.gwtplatform.annotation.Out;
 
 /**
  * AnnotationHelper is an internal class that provides common routines only used
  * by the annotation processors.
  * 
  * @author Brendan Doherty
+ * @author Florian Sauter
  */
 
 class AnnotationHelper {
@@ -65,8 +68,8 @@ class AnnotationHelper {
         (TypeElement) classElement));
   }
 
-  public List<VariableElement> getOptionalFields(Element classElement) {
-    List<VariableElement> optionalFields = new ArrayList<VariableElement>();
+  public Collection<VariableElement> getOptionalFields(Element classElement) {
+    Collection<VariableElement> optionalFields = new ArrayList<VariableElement>();
     Collection<VariableElement> fields = getOrderedFields(classElement).values();
     for (VariableElement field : fields) {
       Optional elementsOptionalAnnotation = field.getAnnotation(Optional.class);
@@ -75,6 +78,39 @@ class AnnotationHelper {
       }
     }
     return optionalFields;
+  }
+  
+  public Collection<VariableElement> getOptionalFields(Collection<VariableElement> fieldElements) {
+    Collection<VariableElement> optionalFields = new ArrayList<VariableElement>();
+    for (VariableElement field : fieldElements) {
+      Optional elementsOptionalAnnotation = field.getAnnotation(Optional.class);
+      if (elementsOptionalAnnotation != null) {
+        optionalFields.add(field);
+      }
+    }
+    return optionalFields;
+  }
+  
+  public Collection<VariableElement> getInFields(Element classElement) {
+    SortedMap<Integer, VariableElement> annotatedInFields = new TreeMap<Integer, VariableElement>();
+    for (VariableElement fieldElement : getFields(classElement)) {
+      In order = fieldElement.getAnnotation(In.class);
+      if (order != null) {
+        annotatedInFields.put(order.value(), fieldElement);
+      }
+    }
+    return annotatedInFields.values();
+  }
+  
+  public Collection<VariableElement> getOutFields(Element classElement) {
+    SortedMap<Integer, VariableElement> annotatedOutFields = new TreeMap<Integer, VariableElement>();
+    for (VariableElement fieldElement : getFields(classElement)) {
+      Out order = fieldElement.getAnnotation(Out.class);
+      if (order != null) {
+        annotatedOutFields.put(order.value(), fieldElement);
+      }
+    }
+    return annotatedOutFields.values();
   }
 
   public void generatePackageDeclaration(PrintWriter out, String packageName) {
@@ -95,13 +131,80 @@ class AnnotationHelper {
     }
   }
   
+  public void generateClassHeader(PrintWriter out, String className, String extendedClassName, String... interfaceNames) {
+    out.println();
+    out.print("public class ");
+    out.print(className);
+    if (extendedClassName != null) {
+      out.print(" extends " + extendedClassName);
+    }
+    if (interfaceNames.length > 0) {
+      out.print(" implements ");
+      String implodedInterfaceString = implode(interfaceNames, ",");
+      out.print(implodedInterfaceString);
+    }
+    out.println(" { ");
+  }
+  
+  public void generateEmptyConstructor(PrintWriter out, String visibility, String simpleClassName) {
+    out.println();
+    out.println("  " + visibility + " " + simpleClassName + "() { }");
+  }
+  
+  public void generateConstructorsUsingFields(PrintWriter out, String simpleClassName, Element classDescription, Collection<VariableElement> fieldElements) {
+    // constructor with all fields
+    generateConstructorUsingFields(out, simpleClassName, fieldElements, null);
+    
+    Collection<VariableElement> optionalFields = getOptionalFields(fieldElements);
+    
+    if (!optionalFields.isEmpty()) {
+      // constructor without optional fields
+      ArrayList<VariableElement> fields = new ArrayList<VariableElement>();
+      fields.addAll(fieldElements);
+      fields.removeAll(optionalFields);
+      generateConstructorUsingFields(out, simpleClassName, fields, optionalFields);
+    }
+  }
+
+  /**
+   * Optional field elements will not be listed in the constructor field list but initialized with the default value.
+   */
+  public void generateConstructorUsingFields(PrintWriter out, String simpleClassName, Collection<VariableElement> fieldElements, Collection<VariableElement> optionalFieldElements) {
+    out.println();
+    out.print("  public " + simpleClassName + "(");
+    generateFieldList(out, fieldElements, true, false);
+    out.println(") {");
+    if (optionalFieldElements != null) {
+      for (VariableElement optionalField : optionalFieldElements) {
+        if (!isPrimitive(optionalField.asType())) {
+          generateFieldAssignment(out, optionalField, null);
+        }
+      }
+    }
+    if (fieldElements != null) {
+      for (VariableElement fieldElement : fieldElements) {
+        generateFieldAssignment(out, fieldElement, fieldElement.getSimpleName());
+      }
+    }
+    out.println("  }");
+  }
+  
+  public boolean hasOnlyOptionalFields(Element classElement) {
+    return getOptionalFields(classElement).size() == getFields(classElement).size();
+  }
+  
+  public boolean hasOnlyOptionalFields(Collection<VariableElement> fieldElements) {
+    return getOptionalFields(fieldElements).size() == fieldElements.size();
+  }
+  
   public void generateClassFooter(PrintWriter out) {
     out.println("}");
   }
   
   public void generateFields(PrintWriter out,
       Collection<VariableElement> collection, boolean useFinal) {
-
+    out.println();
+    
     for (VariableElement fieldElement : collection) {
 
       out.print("  private ");
@@ -113,14 +216,13 @@ class AnnotationHelper {
       out.print(fieldElement.getSimpleName());
       out.println(";");
     }
-    out.println();
   }
 
-  public void generateAccessors(PrintWriter out,
+  public void generateFieldAccessors(PrintWriter out,
       Collection<VariableElement> fieldElements) {
 
     for (VariableElement fieldElement : fieldElements) {
-
+      out.println();
       out.print("  public ");
       out.print(fieldElement.asType().toString());
       out.print(" ");
@@ -130,12 +232,12 @@ class AnnotationHelper {
       out.print(fieldElement.getSimpleName());
       out.println(";");
       out.println("  }");
-      out.println();
     }
   }
 
   public void generateEquals(PrintWriter out, String className,
       Collection<VariableElement> fieldElements) {
+    out.println();
     out.println("  @Override");
     out.println("  public boolean equals(Object other) {");
     out.println("    if (other != null && other.getClass().equals(this.getClass())) {");
@@ -178,11 +280,11 @@ class AnnotationHelper {
     out.println("    }");
     out.println("    return false;");
     out.println("  }");
-    out.println();
   }
 
   public void generateHashCode(PrintWriter out,
       Collection<VariableElement> fieldElements) {
+    out.println();
     out.println("  @Override");
     out.println("  public int hashCode() {");
     out.println("    int hashCode = 23;");
@@ -214,7 +316,6 @@ class AnnotationHelper {
     }
     out.println("    return hashCode;");
     out.println("  }");
-    out.println();
   }
   
   public void generateFieldAssignment(PrintWriter out, VariableElement field, Object value) {
@@ -223,7 +324,8 @@ class AnnotationHelper {
 
   public void generateToString(PrintWriter out, String className,
       Collection<VariableElement> fieldElements) {
-
+    out.println();
+    
     out.println("  @Override");
     out.println("  public String toString() {");
     out.println("    return \"" + className + "[\"");
@@ -236,7 +338,6 @@ class AnnotationHelper {
     }
     out.println("    + \"]\";");
     out.println("  }");
-    out.println("");
   }
 
   public void generateFieldList(PrintWriter out,
@@ -353,6 +454,29 @@ class AnnotationHelper {
     } else {
       return null;
     }
+  }
+  
+  /**
+   * @param segments array of strings
+   * @param delimiter character that glues the passed strings together
+   * @return imploded and glued list of strings
+   */
+  public static String implode(String[] segments, String delimiter) {
+    String implodedString;
+    if (segments.length == 0) {
+      implodedString = "";
+   } else {
+       StringBuffer sb = new StringBuffer();
+       sb.append(segments[0]);
+       for (int i = 1; i < segments.length; i++) {
+         if (segments[i] != null && !segments[i].isEmpty()) {
+           sb.append(",");
+           sb.append(segments[i]);
+         }
+      }
+      implodedString = sb.toString();
+    }
+    return implodedString;
   }
 
 }
