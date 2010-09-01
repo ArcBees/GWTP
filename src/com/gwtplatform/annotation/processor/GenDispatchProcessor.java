@@ -119,7 +119,7 @@ public class GenDispatchProcessor extends AbstractProcessor {
 
       helper.generateFields(out, annotatedInFields, false);
 
-      if (annotatedInFields.isEmpty() && !helper.hasOnlyOptionalFields(annotatedInFields)) {
+      if (!annotatedInFields.isEmpty() && !helper.hasOnlyOptionalFields(annotatedInFields)) {
         helper.generateEmptyConstructor(out, "protected", dispatchActionClassName);
       }
 

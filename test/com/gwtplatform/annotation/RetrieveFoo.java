@@ -26,9 +26,17 @@ public class RetrieveFoo {
   @In(1)
   int fooId;
   
+  @In(2)
+  @Optional
+  String additionalQuestion;
+  
   @Out(1)
   Foo foo;
   
   @Out(2)
   int meaningOfLife;
+  
+  @Out(3)
+  @Optional
+  boolean answer42;
 }
