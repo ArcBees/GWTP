@@ -16,13 +16,15 @@
 
 package com.gwtplatform.annotation.processor;
 
-import static javax.lang.model.SourceVersion.RELEASE_6;
+import com.gwtplatform.annotation.GenDto;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
 import java.util.SortedMap;
+
+import static javax.lang.model.SourceVersion.RELEASE_6;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -33,8 +35,6 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-
-import com.gwtplatform.annotation.GenDto;
 
 /**
  * Processes {@link GenDto} annotations.
@@ -92,9 +92,11 @@ public class GenDtoProcessor extends AbstractProcessor {
 
       out.println("package " + helper.getPackage(dtoElement) + ";");
       out.println();
+      out.println("import com.google.gwt.user.client.rpc.IsSerializable;");
+      out.println();
       out.print("public class ");
       out.print(name);
-      out.print("Dto {");
+      out.println("Dto implements IsSerializable {");
 
       helper.generateFields(out, fieldsMap.values(), false);
 
