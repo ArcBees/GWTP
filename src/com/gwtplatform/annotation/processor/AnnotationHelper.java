@@ -68,18 +68,6 @@ class AnnotationHelper {
         (TypeElement) classElement));
   }
 
-  public Collection<VariableElement> getOptionalFields(Element classElement) {
-    Collection<VariableElement> optionalFields = new ArrayList<VariableElement>();
-    Collection<VariableElement> fields = getOrderedFields(classElement).values();
-    for (VariableElement field : fields) {
-      Optional elementsOptionalAnnotation = field.getAnnotation(Optional.class);
-      if (elementsOptionalAnnotation != null) {
-        optionalFields.add(field);
-      }
-    }
-    return optionalFields;
-  }
-  
   public Collection<VariableElement> getOptionalFields(Collection<VariableElement> fieldElements) {
     Collection<VariableElement> optionalFields = new ArrayList<VariableElement>();
     for (VariableElement field : fieldElements) {
@@ -188,11 +176,7 @@ class AnnotationHelper {
     }
     out.println("  }");
   }
-  
-  public boolean hasOnlyOptionalFields(Element classElement) {
-    return getOptionalFields(classElement).size() == getFields(classElement).size();
-  }
-  
+
   public boolean hasOnlyOptionalFields(Collection<VariableElement> fieldElements) {
     return getOptionalFields(fieldElements).size() == fieldElements.size();
   }

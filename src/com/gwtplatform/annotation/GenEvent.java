@@ -101,7 +101,7 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- * Will generate this constructors/fire methods:
+ * Will generate the following constructors/fire methods:
  * 
  * <pre>
  * <code>
