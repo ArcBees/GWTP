@@ -17,8 +17,9 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Marker interface to use with your definition of controls usually named
- * myControls inside your view.
+ * Use this marker interface on classes that implement the controls required by
+ * a {@link View} to communicate back with its {@link Presenter} or
+ * {@link PresenterWidget}.
  * 
  * @author Christian Goudreau
  */

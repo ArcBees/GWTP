@@ -17,11 +17,12 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Interface meant to be extended by your view interface to be able to set your
- * view's control inside your presenter's constructor. <b>Important</b>, don't
- * forget to call getView().setControls() in your presenter's constructor.
+ * Interface meant to be implemented by you {@link View} so that its controller
+ * can attach its {@link Controls}. <b>Important</b>, when using this interface,
+ * you should always call {@link #setControls()} from your presenter
+ * constructor.
  * 
- * @param <C> Your {@link Controls}'s interface type.
+ * @param <C> Your {@link Controls} interface type.
  * 
  * @author Christian Goudreau
  */
