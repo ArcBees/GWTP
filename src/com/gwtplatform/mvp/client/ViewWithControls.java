@@ -17,19 +17,22 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Class to extends when your view have controls.
+ * Base class for a {@link View} that implements the {@link HasControls}
+ * interface. You should always call {@link #setControls()} from your presenter
+ * constructor.
  * 
- * @param <C> Your {@link Controls}'s interface type.
+ * @param <C> Your {@link Controls} interface type.
  * 
  * @author Christian Goudreau
  */
-public abstract class ViewWithControls<C extends Controls> extends ViewImpl implements HasControls<C> {
+public abstract class ViewWithControls<C extends Controls> extends ViewImpl
+    implements HasControls<C> {
   private C controls;
 
-  public C getControls() {
+  protected C getControls() {
     return controls;
   }
-  
+
   @Override
   public void setControls(C controls) {
     this.controls = controls;
