@@ -215,7 +215,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
         // request,
         // in case it wants to fire some events. That's why we will do this in a
         // deferred command.
-        DeferredCommand.addCommand(new Command() {
+        addDeferredCommand(new Command() {
           @Override
           public void execute() {
             presenter.prepareFromRequest(request);
@@ -249,4 +249,14 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
     placeManager.unlock();
   }
 
+  /**
+   * This method allows unit test to handle deferred command with a mechanism that doesn't
+   * require a GWTTestCase.
+   * 
+   * @param command The {@Command} to defer, see {@link DeferredCommand}.
+   */
+  void addDeferredCommand(Command command) {
+    DeferredCommand.addCommand(command);
+  }
+  
 }
