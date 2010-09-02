@@ -231,12 +231,15 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
 
   @Override
   public void manualReveal(Presenter<?, ?> presenter) {
-    if (!presenter.isVisible()) {
-      // This will trigger a reset in due time
-      presenter.forceReveal();
-    } else {
-      // We have to do the reset ourselves
-      ResetPresentersEvent.fire(this);
+    // Reveal only if there are no pending navigation requests
+    if (!placeManager.hasPendingNavigation()) {    
+      if (!presenter.isVisible()) {
+        // This will trigger a reset in due time
+        presenter.forceReveal();
+      } else {
+        // We have to do the reset ourselves
+        ResetPresentersEvent.fire(this);
+      }
     }
     placeManager.unlock();
   }
