@@ -31,7 +31,7 @@ import java.util.List;
  * @author Christian Goudreau
  */
 public interface PlaceManager extends HasEventBus {
-
+  
   /**
    * Builds a string corresponding to the history token to reveal the specified
    * {@link PlaceRequest}. This can be used with a
@@ -412,5 +412,13 @@ public interface PlaceManager extends HasEventBus {
    * @see ProxyPlace#manualRevealFailed()
    */
   void unlock();
+
+  /**
+   * Checks if the {@link PlaceManager} has to perform any pending navigation that were
+   * not immediately executed because it was requested while the navigation was locked.
+   * 
+   * @return {@code true} if there are any pending navigation requests, {@code false} otherwise.
+   */
+  boolean hasPendingNavigation();
 
 }
