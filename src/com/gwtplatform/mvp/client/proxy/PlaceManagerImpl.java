@@ -57,6 +57,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   private HandlerRegistration windowClosingHandlerRegistration;
   private boolean locked;
+  private Command defferedNavigation;
 
   public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
     this.eventBus = eventBus;
@@ -146,13 +147,19 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       revealDefaultPlace();
     }
   }
-
+  
   /**
    * Handles change events from {@link History}.
    */
   @Override
-  public final void onValueChange(ValueChangeEvent<String> event) {
+  public final void onValueChange(final ValueChangeEvent<String> event) {
     if (!getLock()) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          onValueChange(event);
+        }
+      };
       return;
     }
     String historyToken = event.getValue();
@@ -193,8 +200,14 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public final void revealPlace(PlaceRequest request) {
+  public final void revealPlace(final PlaceRequest request) {
     if (!getLock()) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealPlace(request);
+        }
+      };
       return;
     }
     placeHierarchy.clear();
@@ -204,8 +217,14 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public final void revealPlaceHierarchy(
-      List<PlaceRequest> placeRequestHierarchy) {
+      final List<PlaceRequest> placeRequestHierarchy) {
     if (!getLock()) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealPlaceHierarchy(placeRequestHierarchy);
+        }
+      };
       return;
     }
     if (placeRequestHierarchy.size() == 0) {
@@ -217,8 +236,14 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public void revealRelativePlace(int level) {
+  public void revealRelativePlace(final int level) {
     if (!getLock()) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealRelativePlace(level);
+        }
+      };
       return;
     }
     placeHierarchy = updatePlaceHierarchy(level);
@@ -237,8 +262,14 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public void revealRelativePlace(PlaceRequest request, int level) {
+  public void revealRelativePlace(final PlaceRequest request, final int level) {
     if (!getLock()) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealRelativePlace(request, level);
+        }
+      };
       return;
     }
     placeHierarchy = updatePlaceHierarchy(level);
@@ -451,7 +482,16 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     if (locked) {
       locked = false;
       LockInteractionEvent.fire(this, false);
+      if (hasPendingNavigation()) {
+        Command navigation = defferedNavigation;
+        defferedNavigation = null;
+        navigation.execute();
+      }
     }
   }
  
+  @Override
+  public boolean hasPendingNavigation() {
+    return defferedNavigation != null;
+  }
 }
