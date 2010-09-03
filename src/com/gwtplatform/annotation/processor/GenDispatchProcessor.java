@@ -18,9 +18,7 @@ package com.gwtplatform.annotation.processor;
 
 import static javax.lang.model.SourceVersion.RELEASE_6;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.Set;
@@ -30,18 +28,21 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
 import javax.annotation.processing.AbstractProcessor;
 
 import com.gwtplatform.annotation.GenDispatch;
+import com.gwtplatform.annotation.In;
+import com.gwtplatform.annotation.Optional;
+import com.gwtplatform.annotation.Out;
+import com.gwtplatform.annotation.processor.GenerationHelper.Visibility;
 
 /**
  * Processes {@link GenDispatch} annotations.
  * <p/>
- * GenDispatchProcessor should only ever be called by tool infrastructure. See
+ * {@link GenDispatchProcessor} should only ever be called by tool infrastructure. See
  * {@link javax.annotation.processing.Processor} for more details.
  * 
  * @author Brendan Doherty
@@ -90,135 +91,134 @@ public class GenDispatchProcessor extends AbstractProcessor {
     generateResult(dispatchElement, genDispatch.extraResultInterfaces());
   }
 
-  void generateAction(Element dispatchElement, boolean isSecure,
-      String serviceName, String extraActionInterfaces) {
-
-    PrintWriter out = null;
+  @SuppressWarnings("unchecked")
+  protected void generateAction(Element dispatchElement, boolean isSecure, String serviceName, String extraActionInterfaces) {
+    GenerationHelper writer = null;
     try {
-      AnnotationHelper helper = new AnnotationHelper(env);
-      
-      String sourceFileName = helper.getQName(dispatchElement) + "Action";
-      Writer sourceWriter = this.env.getFiler().createSourceFile(sourceFileName, dispatchElement).openWriter();
-      BufferedWriter bufferedWriter = new BufferedWriter(sourceWriter);
-      out = new PrintWriter(bufferedWriter);
-      
-      Name dispatchSimpleName = dispatchElement.getSimpleName();
-      String dispatchActionClassName = dispatchSimpleName + "Action";
-      
-      Collection<VariableElement> annotatedInFields = helper.getInFields(dispatchElement);
+      ReflectionHelper reflection = new ReflectionHelper(env, (TypeElement) dispatchElement);
+      String dispatchElementSimpleName = reflection.getSimpleClassName();
+      String dispatchActionSimpleName = dispatchElementSimpleName + "Action";
+      String dispatchActionClassName = reflection.getClassName() + "Action";
+      Writer sourceWriter = this.env.getFiler().createSourceFile(dispatchActionClassName, dispatchElement).openWriter();
+      writer = new GenerationHelper(sourceWriter);
 
-      helper.generatePackageDeclaration(out, helper.getPackage(dispatchElement));
+      Collection<VariableElement> annotatedInFields = reflection.getInFields();
 
-      helper.generateImports(out, "com.gwtplatform.dispatch.shared.Action");
+      writer.generatePackageDeclaration(reflection.getPackageName());
 
-      helper.generateClassHeader(out, 
-          dispatchActionClassName, null, 
-          "Action<" + dispatchSimpleName + "Result>", 
+      writer.generateImports(
+          "com.gwtplatform.dispatch.shared.Action"
+      );
+
+      writer.generateClassHeader(dispatchActionSimpleName, null, 
+          "Action<" + dispatchElementSimpleName + "Result>", 
           extraActionInterfaces
       );
 
-      helper.generateFields(out, annotatedInFields, false);
+      writer.generateFields(annotatedInFields, false);
 
-      if (!annotatedInFields.isEmpty() && !helper.hasOnlyOptionalFields(annotatedInFields)) {
-        helper.generateEmptyConstructor(out, "protected", dispatchActionClassName);
+      if (!annotatedInFields.isEmpty() && !reflection.hasOnlyOptionalFields(In.class)) {
+        writer.generateEmptyConstructor(dispatchActionSimpleName, Visibility.PROTECTED);
       }
 
-      helper.generateConstructorsUsingFields(out, dispatchActionClassName, dispatchElement, annotatedInFields);
+      writer.generateConstructorsUsingFields(dispatchActionSimpleName, 
+          annotatedInFields, 
+          reflection.getAnnotatedFields(In.class, Optional.class)
+      );
 
-      helper.generateFieldAccessors(out, annotatedInFields);
+      writer.generateFieldAccessors(annotatedInFields);
       
-      generateServiceNameAccessor(out, dispatchSimpleName, serviceName);
+      generateServiceNameAccessor(writer, dispatchElementSimpleName, serviceName);
 
-      generateIsSecuredMethod(out, isSecure);
+      generateIsSecuredMethod(writer, isSecure);
 
-      helper.generateEquals(out, dispatchActionClassName, annotatedInFields);
+      writer.generateEquals(dispatchActionSimpleName, annotatedInFields);
 
-      helper.generateHashCode(out, annotatedInFields);
+      writer.generateHashCode(annotatedInFields);
 
-      helper.generateToString(out, dispatchActionClassName, annotatedInFields);
+      writer.generateToString(dispatchActionSimpleName, annotatedInFields);
 
-      helper.generateClassFooter(out);
+      writer.generateClassFooter();
 
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {
-      if (out != null) {
-        out.close();
+      if (writer != null) {
+        writer.close();
       }
     }
   }
 
-  void generateResult(Element dispatchElement, String extraResultInterfaces) {
-
-    PrintWriter out = null;
+  @SuppressWarnings("unchecked")
+  protected void generateResult(Element dispatchElement, String extraResultInterfaces) {
+    GenerationHelper writer = null;
     try {
-      AnnotationHelper helper = new AnnotationHelper(env);
-      
-      String sourceFileName = helper.getQName(dispatchElement) + "Result";
-      Writer sourceWriter = this.env.getFiler().createSourceFile(sourceFileName, dispatchElement).openWriter();
-      BufferedWriter bufferedWriter = new BufferedWriter(sourceWriter);
-      out = new PrintWriter(bufferedWriter);
-      
-      Name dispatchSimpleName = dispatchElement.getSimpleName();
-      String dispatchResultClassName = dispatchSimpleName + "Result";
+      ReflectionHelper reflection = new ReflectionHelper(env, (TypeElement) dispatchElement);
+      String dispatchElementSimpleName = reflection.getSimpleClassName();
+      String dispatchResultSimpleName = dispatchElementSimpleName + "Result";
+      String dispatchResultClassName = reflection.getClassName() + "Result";
+      Writer sourceWriter = this.env.getFiler().createSourceFile(dispatchResultClassName, dispatchElement).openWriter();
+      writer = new GenerationHelper(sourceWriter);
 
-      Collection<VariableElement> annotatedOutFields = helper.getOutFields(dispatchElement);
+      Collection<VariableElement> annotatedOutFields = reflection.getOutFields();
 
-      helper.generatePackageDeclaration(out, helper.getPackage(dispatchElement));
+      writer.generatePackageDeclaration(reflection.getPackageName());
       
-      helper.generateImports(out, "com.gwtplatform.dispatch.shared.Result");
+      writer.generateImports("com.gwtplatform.dispatch.shared.Result");
       
-      helper.generateClassHeader(out, 
-          dispatchResultClassName, null, 
+      writer.generateClassHeader(dispatchResultSimpleName, null, 
           "Result", 
           extraResultInterfaces
       );
 
-      helper.generateFields(out, annotatedOutFields, false);
+      writer.generateFields(annotatedOutFields, false);
 
-      if (!annotatedOutFields.isEmpty() && !helper.hasOnlyOptionalFields(annotatedOutFields)) {
-        helper.generateEmptyConstructor(out, "protected", dispatchResultClassName);
+      if (!annotatedOutFields.isEmpty() && !reflection.hasOnlyOptionalFields(Out.class)) {
+        writer.generateEmptyConstructor(dispatchResultSimpleName, Visibility.PROTECTED);
       }
 
-      helper.generateConstructorsUsingFields(out, dispatchResultClassName, dispatchElement, annotatedOutFields);
+      writer.generateConstructorsUsingFields(dispatchResultSimpleName, 
+          annotatedOutFields, 
+          reflection.getAnnotatedFields(Out.class, Optional.class)
+      );
 
-      helper.generateFieldAccessors(out, annotatedOutFields);
+      writer.generateFieldAccessors(annotatedOutFields);
 
-      helper.generateEquals(out, dispatchResultClassName, annotatedOutFields);
+      writer.generateEquals(dispatchResultSimpleName, annotatedOutFields);
 
-      helper.generateHashCode(out, annotatedOutFields);
+      writer.generateHashCode(annotatedOutFields);
 
-      helper.generateToString(out, dispatchResultClassName, annotatedOutFields);
+      writer.generateToString(dispatchResultSimpleName, annotatedOutFields);
 
-      helper.generateClassFooter(out);
+      writer.generateClassFooter();
 
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {
-      if (out != null) {
-        out.close();
+      if (writer != null) {
+        writer.close();
       }
     }
   }
   
-  protected void generateIsSecuredMethod(PrintWriter out, boolean isSecure) {
-    out.println();
-    out.println("  @Override");
-    out.println("  public boolean isSecured() {");
-    out.println("    return " + isSecure + ";");
-    out.println("  }");
+  protected void generateIsSecuredMethod(GenerationHelper writer, boolean isSecure) {
+    writer.println();
+    writer.println("  @Override");
+    writer.println("  public boolean isSecured() {");
+    writer.println("    return " + isSecure + ";");
+    writer.println("  }");
   }
   
-  protected void generateServiceNameAccessor(PrintWriter out, Name simpleClassName, String serviceName) {
-    out.println();
-    out.println("  @Override");
-    out.println("  public String getServiceName() {");
+  protected void generateServiceNameAccessor(GenerationHelper writer, String simpleClassName, String serviceName) {
+    writer.println();
+    writer.println("  @Override");
+    writer.println("  public String getServiceName() {");
     if (serviceName.isEmpty()) {
-      out.println("    return Action.DEFAULT_SERVICE_NAME + \"" + simpleClassName
+      writer.println("    return Action.DEFAULT_SERVICE_NAME + \"" + simpleClassName
           + "\";");
     } else {
-      out.println("    return \"" + serviceName + "\";");
+      writer.println("    return \"" + serviceName + "\";");
     }
-    out.println("  }");
+    writer.println("  }");
   }
 }
