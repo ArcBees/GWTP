@@ -26,8 +26,13 @@ import java.lang.annotation.Target;
  * Use the @{@link Optional} annotation to specify optional fields.
  * 
  * <p>
- * Once one or more optional fields have been declared optional, an additional
- * constructor is generated which can be called without these fields.
+ * If one or more fields are declared optional, the system generates an
+ * additional pair of constructor and {@code fire} method that can be called
+ * without these fields.
+ * </p>
+ * <p>
+ * The omitted fields are not initialized and will contain
+ * their default value (i.e. objects will be initialized to {@code null}).
  * </p>
  * 
  * <p>
@@ -39,7 +44,9 @@ import java.lang.annotation.Target;
  * <li>@{@link GenDispatch}</li>
  * </ul>
  * 
- * <p>See @{@link GenEvent}, @{@link GenDto} or @{@link GenDispatch} for specific behaviors with optional fields.</p>
+ * <p>
+ * See the above annotations for specific behaviors with optional fields.
+ * </p>
  * 
  * @author Florian Sauter
  */
