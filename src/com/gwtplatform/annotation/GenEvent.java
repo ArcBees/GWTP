@@ -37,15 +37,14 @@ import java.lang.annotation.Target;
  * </code>
  * </pre>
  * 
- * gwt-platform will generate two classes, FooChangedEvent and
- * FooChangedHandler.
+ * gwt-platform will generate two classes, {@code FooChangedEvent} and {@code FooChangedHandler}.
  * <p/>
- * FooChangedEvent will have fields, getters, and a constructor for foo and
- * originator, plus static getType(), instance dispatch, etc., for it to
- * function correctly as a GwtEvent.
+ * {@code FooChangedEvent} will have fields, getters, and a constructor for foo and
+ * originator, plus static {@code getType()}, instance dispatch, etc., for it to
+ * function correctly as a {@link com.google.gwt.event.shared.GwtEvent}.
  * <p/>
- * FooChangedHandler will be an interface with a onFooChanged method that takes
- * a FooChangedEvent parameter.
+ * {@code FooChangedHandler} will be an interface with a {@code onFooChanged} method that takes
+ * a {@code FooChangedEvent} parameter.
  * <p/>
  * <b>Notes:</b>
  * <p/>
@@ -70,18 +69,26 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- * Will generate this constructor:
+ * The following constructor and {@code fire} methods will be generated:
  * 
  * <pre>
  * <code>
+ *  ...
  *  FooChangedEvent(Foo foo, int bar, boolean originator)
+ *  ...
+ *  public static void fire(HasEventBus source, Foo foo, int bar, boolean originator)
+ *  ...
  * </code>
  * </pre>
- * Without the @{@link Order} annotations, it would have generated this constructor:
+ * Omitting the @{@link Order} annotations would yield:
  * 
  * <pre>
  * <code>
+ *  ...
  *  FooChangedEvent(int bar, Foo foo, boolean originator)
+ *  ...
+ *  public static void fire(HasEventBus source, int bar, Foo foo, boolean originator)
+ *  ...
  * </code>
  * </pre>
  * 
@@ -95,13 +102,13 @@ import java.lang.annotation.Target;
  * <code> 
  * {@literal}@GenEvent
  * public class FooChanged {
- *   &#064;Optional @Order(1) Foo foo;
+ *   {@literal @}Optional @Order(1) Foo foo;
  *   @Order(2) int bar;
- *   &#064;Optional @Order(3) boolean originator;
+ *   {@literal @}Optional @Order(3) boolean originator;
  * }
  * </code>
  * </pre>
- * Will generate the following constructors/fire methods:
+ * The following constructors and {@code fire} methods will be generated:
  * 
  * <pre>
  * <code>

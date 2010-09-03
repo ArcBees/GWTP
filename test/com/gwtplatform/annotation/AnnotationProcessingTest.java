@@ -21,11 +21,14 @@ import static org.junit.Assert.*;
 /**
  * This test is being run by ant, but is not run in eclipse.
  * 
+ * TODO: Make a test suite with a couple of permutations. (With/without Order, Optional, both....)
+ * 
  * @author Brendan Doherty
+ * @author Florian Sauter
  */
 @SuppressWarnings("unused")
 public class AnnotationProcessingTest {
-  
+
   @org.junit.Test
   public void event() {
     Foo foo = new Foo("bar");
