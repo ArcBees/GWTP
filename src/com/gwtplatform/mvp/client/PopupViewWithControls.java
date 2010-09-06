@@ -16,26 +16,29 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEventHelper;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.inject.Inject;
-
 /**
- * @author David Peterson
+ * Base class for a {@link PopupView} that implements the {@link HasControls}
+ * interface. You should always call {@link #setControls()} from your presenter
+ * constructor.
+ * 
+ * @param <C> Your {@link Controls} interface type.
+ * 
+ * @author Christian Goudreau
  */
-public final class DefaultEventBus extends HandlerManager implements EventBus {
+public abstract class PopupViewWithControls<C extends Controls> extends
+    PopupViewImpl implements HasControls<C> {
+  protected PopupViewWithControls(EventBus eventBus) {
+    super(eventBus);
+  }
 
-  @Inject
-  public DefaultEventBus() {
-    super(null);
+  private C controls;
+
+  protected C getControls() {
+    return controls;
   }
 
   @Override
-  public void fireEvent(HasEventBus source, GwtEvent<?> event) {
-    GwtEventHelper.setSource(event, source);
-    
-    fireEvent(event);
+  public void setControls(C controls) {
+    this.controls = controls;
   }
-
 }
