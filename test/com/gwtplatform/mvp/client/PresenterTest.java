@@ -32,7 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Unit tests for {@link PresenterImpl}.
+ * Unit tests for {@link Presenter}.
  * 
  * @author Philippe Beaudoin
  */
@@ -80,8 +80,6 @@ public class PresenterTest {
   }
 
   // Providers to use Guice injection
-  @Inject
-  Provider<EventBus> EventBusProvider;
   @Inject
   Provider<PresenterA> presenterAProvider;
   @Inject
