@@ -24,6 +24,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 
 import com.gwtplatform.mvp.client.EventBus;
@@ -32,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This is the default implementation of the {@link PlaceManager}.
+ * 
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
@@ -57,13 +60,12 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   private HandlerRegistration windowClosingHandlerRegistration;
   private boolean locked;
+  private Command defferedNavigation;
 
   public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
     this.eventBus = eventBus;
-    this.tokenFormatter = tokenFormatter;
-
-    // Register ourselves with the History API.
-    History.addValueChangeHandler(this);
+    this.tokenFormatter = tokenFormatter;    
+    registerTowardsHistory();
   }
 
   @Override
@@ -92,197 +94,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     return tokenFormatter.toHistoryToken(placeHierarchyCopy);
   }
 
-  @Override
-  public void fireEvent(GwtEvent<?> event) {
-    getEventBus().fireEvent(this, event);
-  }
-
-  @Override
-  public List<PlaceRequest> getCurrentPlaceHierarchy() {
-    return placeHierarchy;
-  }
-
-  @Override
-  public PlaceRequest getCurrentPlaceRequest() {
-    try {
-      return placeHierarchy.get(placeHierarchy.size() - 1);
-    } catch (ArrayIndexOutOfBoundsException e) {
-        return new PlaceRequest();
-    }
-  }
-
-  @Override
-  public void getTitle(int index, SetPlaceTitleHandler handler)
-      throws IndexOutOfBoundsException {
-    GetPlaceTitleEvent event = new GetPlaceTitleEvent(
-        placeHierarchy.get(index), handler);
-    fireEvent(event);
-    // If nobody took care of the title, indicate it's null
-    if (!event.isHandled()) {
-      handler.onSetPlaceTitle(null);
-    }
-  }
-
-  @Override
-  public void getCurrentTitle(SetPlaceTitleHandler handler) {
-    getTitle(placeHierarchy.size() - 1, handler);
-  }
-
-  @Override
-  public EventBus getEventBus() {
-    return eventBus;
-  }
-
-  @Override
-  public int getHierarchyDepth() {
-    return placeHierarchy.size();
-  }
-
-  @Override
-  public final void navigateBack() {
-    if (previousHistoryToken != null) {
-      History.newItem(previousHistoryToken);
-    } else {
-      revealDefaultPlace();
-    }
-  }
-
-  /**
-   * Handles change events from {@link History}.
-   */
-  @Override
-  public final void onValueChange(ValueChangeEvent<String> event) {
-    if (!getLock()) {
-      return;
-    }
-    String historyToken = event.getValue();
-    try {
-      if (historyToken.trim().equals("")) {
-        unlock();
-        revealDefaultPlace();
-      } else {
-        placeHierarchy = tokenFormatter.toPlaceRequestHierarchy(historyToken);
-        doRevealPlace(getCurrentPlaceRequest());
-      }
-    } catch (TokenFormatException e) {
-      unlock();
-      error(historyToken);
-      NavigationEvent.fire(this, null);
-    }
-  }
-
-  @Override
-  public final void onWindowClosing(Window.ClosingEvent event) {
-    event.setMessage(onLeaveQuestion);
-    DeferredCommand.addCommand(new Command() {
-      @Override
-      public void execute() {
-        Window.Location.replace(currentHRef);
-      }
-    });
-  }
-
-  @Override
-  public void revealCurrentPlace() {
-    History.fireCurrentHistoryState();
-  }
-
-  @Override
-  public void revealErrorPlace(String invalidHistoryToken) {
-    revealDefaultPlace();
-  }
-
-  @Override
-  public final void revealPlace(PlaceRequest request) {
-    if (!getLock()) {
-      return;
-    }
-    placeHierarchy.clear();
-    placeHierarchy.add(request);
-    doRevealPlace(request);
-  }
-
-  @Override
-  public final void revealPlaceHierarchy(
-      List<PlaceRequest> placeRequestHierarchy) {
-    if (!getLock()) {
-      return;
-    }
-    if (placeRequestHierarchy.size() == 0) {
-      revealDefaultPlace();
-    } else {
-      placeHierarchy = placeRequestHierarchy;
-      doRevealPlace(getCurrentPlaceRequest());
-    }
-  }
-
-  @Override
-  public void revealRelativePlace(int level) {
-    if (!getLock()) {
-      return;
-    }
-    placeHierarchy = updatePlaceHierarchy(level);
-    int hierarchySize = placeHierarchy.size();
-    if (hierarchySize == 0) {
-      revealDefaultPlace();
-    } else {
-      PlaceRequest request = placeHierarchy.get(hierarchySize - 1);
-      doRevealPlace(request);
-    }
-  }
-
-  @Override
-  public void revealRelativePlace(PlaceRequest request) {
-    revealRelativePlace(request, 0);
-  }
-
-  @Override
-  public void revealRelativePlace(PlaceRequest request, int level) {
-    if (!getLock()) {
-      return;
-    }
-    placeHierarchy = updatePlaceHierarchy(level);
-    placeHierarchy.add(request);
-    doRevealPlace(request);
-  }
-
-  @Override
-  public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
-    revealErrorPlace(unauthorizedHistoryToken);
-  }
-
-  @Override
-  public final void setOnLeaveConfirmation(String question) {
-    if (question == null && onLeaveQuestion == null) {
-      return;
-    }
-    if (question != null && onLeaveQuestion == null) {
-      windowClosingHandlerRegistration = Window.addWindowClosingHandler(this);
-    }
-    if (question == null && onLeaveQuestion != null) {
-      windowClosingHandlerRegistration.removeHandler();
-    }
-    onLeaveQuestion = question;
-  }
-
-  /**
-   * Checks that the place manager is not locked and that the user allows
-   * the application to navigate (see {@link #confirmLeaveState()}. If the
-   * application is allowed to navigate, this method locks navigation.
-   * 
-   * @return true if the place manager can get the lock false otherwise. 
-   */
-  private boolean getLock() {
-    if (locked) {
-      return false;
-    }
-    if (!confirmLeaveState()) {
-      return false;
-    }
-    lock();
-    return true;
-  }
-  
   /**
    * If a confirmation question is set (see {@link #setOnLeaveConfirmation()}),
    * this asks the user if he wants to leave the current page.
@@ -299,7 +110,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       setOnLeaveConfirmation(null);
     } else {
       NavigationRefusedEvent.fire(this);
-      History.newItem(currentHistoryToken, false);
+      setBrowserHistoryToken(currentHistoryToken, false);
     }
     return confirmed;
   }
@@ -339,7 +150,84 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     revealErrorPlace(invalidHistoryToken);
     stopError();
   }
+
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    getEventBus().fireEvent(this, event);
+  }
+
+  String getBrowserHistoryToken() {
+    return History.getToken();
+  }
+
+  String getCurrentHref() {
+    return Window.Location.getHref();
+  }
+
+  @Override
+  public List<PlaceRequest> getCurrentPlaceHierarchy() {
+    return placeHierarchy;
+  }
+
+  @Override
+  public PlaceRequest getCurrentPlaceRequest() {
+    try {
+      return placeHierarchy.get(placeHierarchy.size() - 1);
+    } catch (ArrayIndexOutOfBoundsException e) {
+        return new PlaceRequest();
+    }
+  }
+
+  @Override
+  public void getCurrentTitle(SetPlaceTitleHandler handler) {
+    getTitle(placeHierarchy.size() - 1, handler);
+  }
   
+  @Override
+  public EventBus getEventBus() {
+    return eventBus;
+  }
+
+  @Override
+  public int getHierarchyDepth() {
+    return placeHierarchy.size();
+  }
+
+  /**
+   * Checks that the place manager is not locked and that the user allows
+   * the application to navigate (see {@link #confirmLeaveState()}. If the
+   * application is allowed to navigate, this method locks navigation.
+   * 
+   * @return true if the place manager can get the lock false otherwise. 
+   */
+  private boolean getLock() {
+    if (locked) {
+      return false;
+    }
+    if (!confirmLeaveState()) {
+      return false;
+    }
+    lock();
+    return true;
+  }
+
+  @Override
+  public void getTitle(int index, SetPlaceTitleHandler handler)
+      throws IndexOutOfBoundsException {
+    GetPlaceTitleEvent event = new GetPlaceTitleEvent(
+        placeHierarchy.get(index), handler);
+    fireEvent(event);
+    // If nobody took care of the title, indicate it's null
+    if (!event.isHandled()) {
+      handler.onSetPlaceTitle(null);
+    }
+  }
+
+  @Override
+  public boolean hasPendingNavigation() {
+    return defferedNavigation != null;
+  }
+
   /**
    * Called whenever the user tries to access an page to which he doesn't
    * have access, and we need to reveal the user-defined unauthorized place.
@@ -352,6 +240,206 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     startError();
     revealUnauthorizedPlace(historyToken);
     stopError();
+  }
+
+  private void lock() {
+    if (!locked) {
+      locked = true;
+      LockInteractionEvent.fire(this, true);
+    }
+  }
+
+  @Override
+  public final void navigateBack() {
+    if (previousHistoryToken != null) {
+      setBrowserHistoryToken(previousHistoryToken, true);
+    } else {
+      revealDefaultPlace();
+    }
+  }
+
+  /**
+   * Handles change events from {@link History}.
+   */
+  @Override
+  public final void onValueChange(final ValueChangeEvent<String> event) {
+    if (locked) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          onValueChange(event);
+        }
+      };
+      return;
+    }
+    if (!getLock()) {
+      return;
+    }
+    String historyToken = event.getValue();
+    try {
+      if (historyToken.trim().equals("")) {
+        unlock();
+        revealDefaultPlace();
+      } else {
+        placeHierarchy = tokenFormatter.toPlaceRequestHierarchy(historyToken);
+        doRevealPlace(getCurrentPlaceRequest());
+      }
+    } catch (TokenFormatException e) {
+      unlock();
+      error(historyToken);
+      NavigationEvent.fire(this, null);
+    }
+  }
+
+  @Override
+  public final void onWindowClosing(ClosingEvent event) {
+    event.setMessage(onLeaveQuestion);
+    DeferredCommand.addCommand(new Command() {
+      @Override
+      public void execute() {
+        Window.Location.replace(currentHRef);
+      }
+    });
+  }
+
+  void registerTowardsHistory() {
+    History.addValueChangeHandler(this);
+  }
+
+  @Override
+  public void revealCurrentPlace() {
+    History.fireCurrentHistoryState();
+  }
+  
+  @Override
+  public void revealErrorPlace(String invalidHistoryToken) {
+    revealDefaultPlace();
+  }
+
+  @Override
+  public final void revealPlace(final PlaceRequest request) {
+    if (locked) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealPlace(request);
+        }
+      };
+      return;
+    }
+    if (!getLock()) {
+      return;
+    }
+    placeHierarchy.clear();
+    placeHierarchy.add(request);
+    doRevealPlace(request);
+  }
+
+  @Override
+  public final void revealPlaceHierarchy(
+      final List<PlaceRequest> placeRequestHierarchy) {
+    if (locked) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealPlaceHierarchy(placeRequestHierarchy);
+        }
+      };
+      return;
+    }
+    if (!getLock()) {
+      return;
+    }
+    if (placeRequestHierarchy.size() == 0) {
+      revealDefaultPlace();
+    } else {
+      placeHierarchy = placeRequestHierarchy;
+      doRevealPlace(getCurrentPlaceRequest());
+    }
+  }
+  
+  @Override
+  public void revealRelativePlace(final int level) {
+    if (locked) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealRelativePlace(level);
+        }
+      };
+      return;
+    }
+    if (!getLock()) {
+      return;
+    }
+    placeHierarchy = updatePlaceHierarchy(level);
+    int hierarchySize = placeHierarchy.size();
+    if (hierarchySize == 0) {
+      revealDefaultPlace();
+    } else {
+      PlaceRequest request = placeHierarchy.get(hierarchySize - 1);
+      doRevealPlace(request);
+    }
+  }
+
+  @Override
+  public void revealRelativePlace(PlaceRequest request) {
+    revealRelativePlace(request, 0);
+  }
+
+  @Override
+  public void revealRelativePlace(final PlaceRequest request, final int level) {
+    if (locked) {
+      defferedNavigation = new Command() {
+        @Override
+        public void execute() {
+          revealRelativePlace(request, level);
+        }
+      };
+      return;
+    }
+    if (!getLock()) {
+      return;
+    }
+    placeHierarchy = updatePlaceHierarchy(level);
+    placeHierarchy.add(request);
+    doRevealPlace(request);
+  }
+
+  @Override
+  public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
+    revealErrorPlace(unauthorizedHistoryToken);
+  }
+
+  /**
+   * This method saves the history token, allowing the {@link #navigateBack()} method to
+   * be used and making it possible to correctly restore the browser's URL if the
+   * user refuses to navigate. (See {@link #onWindowClosing(ClosingEvent)})
+   * 
+   * @param historyToken The current history token, a string.
+   */
+  private void saveHistoryToken(String historyToken) {
+    previousHistoryToken = currentHistoryToken;
+    currentHistoryToken = historyToken;
+    currentHRef = getCurrentHref();
+  }
+
+  void setBrowserHistoryToken(String historyToken, boolean issueEvent) {
+    History.newItem(historyToken, issueEvent);
+  }
+
+  @Override
+  public final void setOnLeaveConfirmation(String question) {
+    if (question == null && onLeaveQuestion == null) {
+      return;
+    }
+    if (question != null && onLeaveQuestion == null) {
+      windowClosingHandlerRegistration = Window.addWindowClosingHandler(this);
+    }
+    if (question == null && onLeaveQuestion != null) {
+      windowClosingHandlerRegistration.removeHandler();
+    }
+    onLeaveQuestion = question;
   }
 
   /**
@@ -381,36 +469,36 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
+  public void unlock() {
+    if (locked) {
+      locked = false;
+      LockInteractionEvent.fire(this, false);
+      if (hasPendingNavigation()) {
+        Command navigation = defferedNavigation;
+        defferedNavigation = null;
+        navigation.execute();
+      }
+    }
+  }
+  
+  @Override
   public void updateHistory(PlaceRequest request) {
     try {
       // Make sure the request match
       assert request.hasSameNameToken(getCurrentPlaceRequest()) : "Internal error, PlaceRequest passed to updateHistory doesn't match the tail of the place hierarchy.";
       placeHierarchy.set(placeHierarchy.size() - 1, request);
       String historyToken = tokenFormatter.toHistoryToken(placeHierarchy);
-      String browserHistoryToken = History.getToken();
+      String browserHistoryToken = getBrowserHistoryToken();
       if (browserHistoryToken == null
           || !browserHistoryToken.equals(historyToken)) {
-        History.newItem(historyToken, false);
+        setBrowserHistoryToken(historyToken, false);
         saveHistoryToken(historyToken);
       }      
     } catch (TokenFormatException e) {
       // Do nothing.
     }
   }
-
-  /**
-   * This method saves the history token, allowing the {@link #navigateBack()} method to
-   * be used and making it possible to correctly restore the browser's URL if the
-   * user refuses to navigate. (See {@link #onWindowClosing(ClosingEvent)})
-   * 
-   * @param historyToken The current history token, a string.
-   */
-  private void saveHistoryToken(String historyToken) {
-    previousHistoryToken = currentHistoryToken;
-    currentHistoryToken = historyToken;
-    currentHRef = Window.Location.getHref();
-  }
-
+ 
   /**
    * Returns a modified copy of the place hierarchy based on the specified
    * {@code level}.
@@ -438,20 +526,4 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     }
     return new ArrayList<PlaceRequest>(placeHierarchy);
   }
-
-  private void lock() {
-    if (!locked) {
-      locked = true;
-      LockInteractionEvent.fire(this, true);
-    }
-  }
-  
-  @Override
-  public void unlock() {
-    if (locked) {
-      locked = false;
-      LockInteractionEvent.fire(this, false);
-    }
-  }
- 
 }

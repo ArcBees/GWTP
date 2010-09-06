@@ -20,7 +20,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
- * Use this annotation in classes implementing {@link Presenter} and that have
+ * Use this annotation in classes implementing {@link UserActionHandler} and that have
  * slots to display child presenters. This annotates every static field
  * containing a type of event that is monitored by this presenter. When handling
  * this event, a child presenter is inserted in the presenter's view. You should

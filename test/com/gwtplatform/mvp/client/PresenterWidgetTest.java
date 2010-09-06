@@ -39,7 +39,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Unit tests for {@link PresenterWidgetImpl}.
+ * Unit tests for {@link PresenterWidget}.
  * 
  * @author Philippe Beaudoin
  */
@@ -137,8 +137,6 @@ public class PresenterWidgetTest {
   }
 
   // Providers to use Guice injection
-  @Inject
-  Provider<EventBus> EventBusProvider;
   @Inject
   Provider<PopupPresenterWidgetB> popupPresenterWidgetBProvider;
   @Inject
