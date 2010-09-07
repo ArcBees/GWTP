@@ -17,15 +17,12 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Interface meant to be implemented by you {@link View} so that its controller
- * can attach its {@link Controls}. <b>Important</b>, when using this interface,
- * you should always call {@link #setControls()} from your presenter
- * constructor.
- * 
- * @param <C> Your {@link Controls} interface type.
+ * Use this marker interface on classes that implement the controls required by
+ * a {@link View} to communicate back with its {@link Presenter} or
+ * {@link PresenterWidget}.
  * 
  * @author Christian Goudreau
  */
-public interface HasControls<C extends Controls> {
-  void setControls(C controls);
+public interface UiHandlers {
+
 }
