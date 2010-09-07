@@ -34,8 +34,13 @@ import com.google.inject.Provider;
 public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
     implements HasUiHandlers<C> {
   private C uiHandlers;
+  private Provider<C> uiHandlersProvider;
 
   protected C getUiHandlers() {
+    if (uiHandlers == null && uiHandlersProvider != null) {
+      this.uiHandlers = uiHandlersProvider.get();
+    }
+    
     return uiHandlers;
   }
 
@@ -54,7 +59,7 @@ public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
    * @param uiHandlersProvider {@link UiHandlers} provider.
    */
   public ViewWithUiHandlers(Provider<C> uiHandlersProvider) {
-    this.uiHandlers = uiHandlersProvider.get();
+    this.uiHandlersProvider = uiHandlersProvider;
   }
 
   @Override
