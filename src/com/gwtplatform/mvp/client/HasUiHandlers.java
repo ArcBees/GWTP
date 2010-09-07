@@ -17,28 +17,15 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Base class for a {@link PopupView} that implements the {@link HasControls}
- * interface. You should always call {@link #setControls()} from your presenter
+ * Interface meant to be implemented by you {@link View} so that its controller
+ * can attach its {@link UiHandlers}. <b>Important</b>, when using this interface,
+ * you should always call {@link #setControls()} from your presenter
  * constructor.
  * 
- * @param <C> Your {@link Controls} interface type.
+ * @param <C> Your {@link UiHandlers} interface type.
  * 
  * @author Christian Goudreau
  */
-public abstract class PopupViewWithControls<C extends Controls> extends
-    PopupViewImpl implements HasControls<C> {
-  protected PopupViewWithControls(EventBus eventBus) {
-    super(eventBus);
-  }
-
-  private C controls;
-
-  protected C getControls() {
-    return controls;
-  }
-
-  @Override
-  public void setControls(C controls) {
-    this.controls = controls;
-  }
+public interface HasUiHandlers<C extends UiHandlers> {
+  void setUiHandlers(C uiHandlers);
 }

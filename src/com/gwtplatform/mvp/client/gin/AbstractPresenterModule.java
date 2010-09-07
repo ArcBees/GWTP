@@ -21,6 +21,7 @@ import com.google.inject.Singleton;
 
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
@@ -55,6 +56,22 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     bind(presenterImpl).in(Singleton.class);
     bind(proxy).asEagerSingleton();
     bind(presenter).to(presenterImpl);
+  }
+
+  /**
+   * Convenience method for binding a {@link UiHandlers}-derived interface with
+   * the presenter implementing it. A {@link com.google.inject.Provider} to this
+   * interface should be injected into the {@link View} that requires it. See
+   * {@link ViewWithUiHandlers} for details.
+   * 
+   * @param <U> The UiHandlers interface type.
+   * @param <P> The Presenter type extending the UiHandlers interface.
+   * @param uiHandlers The {@link UiHandlers} interface class.
+   * @param presenter The Presenter class extending the UiHandlers interface.
+   */
+  protected <U extends UiHandlers, P extends U> void bindUiHandlers(
+      Class<U> uiHandlers, Class<P> presenter) {
+    bind(uiHandlers).to(presenter);
   }
 
   /**
