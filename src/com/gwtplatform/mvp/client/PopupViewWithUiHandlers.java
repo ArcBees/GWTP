@@ -33,6 +33,9 @@ import com.google.inject.Provider;
  */
 public abstract class PopupViewWithUiHandlers<C extends UiHandlers> extends
     PopupViewImpl implements HasUiHandlers<C> {
+  private Provider<C> uiHandlersProvider;
+  private C uiHandlers;
+  
   /**
    * You should always call {@link #setHandlers()} from your {@link Presenter}
    * when using {@link PopupViewWithUiHandlers}'s empty constructor.
@@ -52,12 +55,14 @@ public abstract class PopupViewWithUiHandlers<C extends UiHandlers> extends
   protected PopupViewWithUiHandlers(EventBus eventBus, Provider<C> uiHandlersProvider) {
     super(eventBus);
     
-    this.uiHandlers = uiHandlersProvider.get();
+    this.uiHandlersProvider = uiHandlersProvider;
   }
 
-  private C uiHandlers;
-
   protected C getUiHandlers() {
+    if (uiHandlers == null && uiHandlersProvider != null) {
+      this.uiHandlers = uiHandlersProvider.get();
+    }
+    
     return uiHandlers;
   }
 
