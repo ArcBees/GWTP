@@ -21,9 +21,6 @@ package com.gwtplatform.mvp.client;
  * interface. You should always call {@link #setHandlers()} from your
  * presenter's contructor.
  * <p />
- * If you are using a singleton {@link Presenter} or {@link PresenterWidget},
- * you should consider using {@link ViewWithInjectedUiHandlers}.
- * <p />
  * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
  * since the {@link UiHandlers} are not yet set.
  * 
