@@ -27,5 +27,12 @@ package com.gwtplatform.mvp.client;
  * @author Christian Goudreau
  */
 public interface HasUiHandlers<C extends UiHandlers> {
+
+  /**
+   * Sets the {@link UiHandlers} subclass associated with this object.
+   * 
+   * @param uiHandlers The {@link UiHandlers} subclass (of type {@code C}) to associate with this object.
+   */
   void setUiHandlers(C uiHandlers);
+  
 }
