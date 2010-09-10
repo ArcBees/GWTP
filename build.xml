@@ -18,11 +18,12 @@
   <property name="junit.folder" location="${extlib.folder}/junit" />
   <property name="mockito.folder" location="${lib.folder}" />
   <property name="manifest.file" value="MANIFEST.MF"/>
-  <property name="all.gwtp.jar.files" value="${base.gwtp.jar.name}*.jar"/>
+  <property name="all.gwtp.jar.files" value="**/gwtp*.jar"/>
   <condition property="version-suffix" value="-b${env.BUILD_NUMBER}" else="-bLOCAL">
     <isset property="env.BUILD_NUMBER"/>
   </condition>    
   <property name="gwtp.jar.file" value="gwtp-${version.num}-SNAPSHOT.jar"/>
+  <property name="gwtp.release.jar.file" value="gwtp-${version.num}.jar"/>
   <tstamp>
     <format property="today.timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
   </tstamp>  
@@ -85,8 +86,8 @@
     <delete dir="${out.test.src.folder}" failonerror="false" />
     <delete failonerror="false">
       <fileset dir="." includes="${all.gwtp.jar.files}" />
-    </delete>
-    <delete failonerror="false">
+      <fileset dir="." includes="**/*.zip"/>
+      <fileset dir="." includes="**/*.orig"/>
       <fileset dir="${in.src.folder}" includes="**/*.class" />
       <fileset dir="${in.test.folder}" includes="**/*.class" />
     </delete>
@@ -132,5 +133,28 @@
       <fileset dir="." includes="META-INF/**" />
     </jar>
   </target>
-  
+	
+  <target name="release" depends="javac" description="Build the jar for a release">
+    <manifest file="${manifest.file}">
+      <attribute name="Built-By" value="teamcity.codebetter.com"/>
+      <attribute name="Implementation-Version" value="${version.num}"/> 
+      <attribute name="Built-Date" value="${today.timestamp}"/>
+    </manifest>
+    
+    <jar jarfile="${gwtp.release.jar.file}" manifest="${manifest.file}">
+      <fileset dir="${out.classes.folder}" includes="**/*.class" />
+      <fileset dir="${in.src.folder}" includes="**/*.java" />
+      <fileset dir="${in.src.folder}" includes="**/*.xml" />
+      <fileset dir="." includes="META-INF/**" />
+    </jar>
+  </target>
+
+  <target name="package" depends="clean" description="Package everything into a zip file.">
+    <zip destfile="gwtp-${version.num}-SNAPSHOT.zip" basedir="." excludes="**/*.zip,**/.hg/**,**/.hg*" />
+  </target>
+
+  <target name="package.release" depends="clean" description="Package everything into a zip file.">
+    <zip destfile="gwtp-${version.num}.zip" basedir="." excludes="**/*.zip,**/.hg/**,**/.hg*,*.bat,upload.py" />
+  </target>
+	
 </project>
