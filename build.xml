@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="BAM_product" default="build" basedir=".">
 
-  <property name="version.num" value="0.4"/>
+  <property name="version.num" value="0.5"/>
   
   <property environment="env"/>
   <property name="in.src.folder" location="src" />
