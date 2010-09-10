@@ -16,53 +16,47 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.inject.Provider;
-
 /**
  * Base class for a {@link PopupView} that implements the {@link HasUiHandlers}
  * interface. You should always call {@link #setHandlers()} from your
- * {@link Presenter} when using {@link ViewWithUiHandlers}'s empty constructor.
- * 
- * You can also use {@link #ViewWithUiHandlers(Provider)} in conjunction with
- * {@link AbstractPresenterModule#bindUiHandlers()} and use a {@link Provider} in
- * your {@link View}. That way, you won't have to set anything manually.
+ * presenter's contructor.
+ * <p />
+ * If you are using a singleton {@link Presenter} or {@link PresenterWidget},
+ * you should consider using {@link PopupViewWithInjectedUiHandlers}.
+ * <p />
+ * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
+ * since the {@link UiHandlers} are not yet set.
  * 
  * @param <C> Your {@link UiHandlers} interface type.
  * 
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public abstract class PopupViewWithUiHandlers<C extends UiHandlers> extends
-    PopupViewImpl implements HasUiHandlers<C> {
-  private Provider<C> uiHandlersProvider;
+PopupViewImpl implements HasUiHandlers<C> {
   private C uiHandlers;
-  
+
   /**
-   * You should always call {@link #setHandlers()} from your {@link Presenter}
-   * when using {@link PopupViewWithUiHandlers}'s empty constructor.
+   * The {@link PopupViewWithUiHandlers} class uses the {@link EventBus} to listen to
+   * {@link com.gwtplatform.mvp.client.proxy.NavigationEvent} in order to automatically 
+   * close when this event is fired, if desired. See
+   * {@link #setAutoHideOnNavigationEventEnabled(boolean)} for details.
+   * 
+   * @param eventBus The {@link EventBus}.
    */
   protected PopupViewWithUiHandlers(EventBus eventBus) {
     super(eventBus);
   }
-  
-  /**
-   * Use {@link PopupViewWithUiHandlers(Provider)} in conjunction with
-   * {@link AbstractPresenterModule#bindUiHandlers()} and use a {@link Provider}
-   * in your {@link View}. That way, you won't have to set anything manually.
-   * 
-   * @param eventBus The eventBus.
-   * @param uiHandlersProvider {@link UiHandlers} provider.
-   */
-  protected PopupViewWithUiHandlers(EventBus eventBus, Provider<C> uiHandlersProvider) {
-    super(eventBus);
-    
-    this.uiHandlersProvider = uiHandlersProvider;
-  }
 
+  /**
+   * Access the {@link UiHandlers} associated with this {@link View}.
+   * <p>
+   * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
+   * since the {@link UiHandlers} are not yet set.
+   * 
+   * @return The {@link UiHandlers}, or {@code null} if they are not yet set.
+   */
   protected C getUiHandlers() {
-    if (uiHandlers == null && uiHandlersProvider != null) {
-      this.uiHandlers = uiHandlersProvider.get();
-    }
-    
     return uiHandlers;
   }
 
