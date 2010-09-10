@@ -16,50 +16,36 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.inject.Provider;
-
 /**
  * Base class for a {@link View} that implements the {@link HasUiHandlers}
  * interface. You should always call {@link #setHandlers()} from your
- * {@link Presenter} when using {@link ViewWithUiHandlers}'s empty constructor.
- * 
- * You can also use {@link #ViewWithUiHandlers(Provider)} in conjunction with
- * {@link AbstractPresenterModule#bindUiHandlers()} and use a {@link Provider} in
- * your {@link View}. That way, you won't have to set anything manually.
+ * presenter's contructor.
+ * <p />
+ * If you are using a singleton {@link Presenter} or {@link PresenterWidget},
+ * you should consider using {@link ViewWithInjectedUiHandlers}.
+ * <p />
+ * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
+ * since the {@link UiHandlers} are not yet set.
  * 
  * @param <C> Your {@link UiHandlers} interface type.
  * 
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
     implements HasUiHandlers<C> {
   private C uiHandlers;
-  private Provider<C> uiHandlersProvider;
-
-  protected C getUiHandlers() {
-    if (uiHandlers == null && uiHandlersProvider != null) {
-      this.uiHandlers = uiHandlersProvider.get();
-    }
-    
-    return uiHandlers;
-  }
 
   /**
-   * You should always call {@link #setHandlers()} from your {@link Presenter}
-   * when using {@link ViewWithUiHandlers}'s empty constructor.
-   */
-  public ViewWithUiHandlers() {
-  }
-
-  /**
-   * Use {@link #ViewWithUiHandlers(Provider)} in conjunction with
-   * {@link AbstractPresenterModule#bindUiHandlers()} and use a {@link Provider}
-   * in your {@link View}. That way, you won't have to set anything manually.
+   * Access the {@link UiHandlers} associated with this {@link View}.
+   * <p>
+   * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
+   * since the {@link UiHandlers} are not yet set.
    * 
-   * @param uiHandlersProvider {@link UiHandlers} provider.
+   * @return The {@link UiHandlers}, or {@code null} if they are not yet set.
    */
-  public ViewWithUiHandlers(Provider<C> uiHandlersProvider) {
-    this.uiHandlersProvider = uiHandlersProvider;
+  protected C getUiHandlers() {
+    return uiHandlers;
   }
 
   @Override
