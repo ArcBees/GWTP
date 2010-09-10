@@ -46,7 +46,11 @@
 			<resource>
 				<directory>${project.basedir}/src</directory>
 			</resource>
-		</resources>
+      <resource>
+        <directory>${project.basedir}/META-INF/</directory>
+        <targetPath>META-INF</targetPath>
+      </resource>
+  	</resources>
 
 		<plugins>
 			<plugin>
