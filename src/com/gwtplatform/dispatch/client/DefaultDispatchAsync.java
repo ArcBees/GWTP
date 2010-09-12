@@ -20,6 +20,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
@@ -30,17 +32,21 @@ import com.gwtplatform.dispatch.shared.Result;
  * 
  * @author David Peterson
  * @author Christian Goudreau
+ * @author Brendan Doherty
  */
 public class DefaultDispatchAsync implements DispatchAsync {
   private static final DispatchServiceAsync realService = GWT.create(DispatchService.class);
   private final String baseUrl;
   private final ExceptionHandler exceptionHandler;
   private final SecurityCookieAccessor securityCookieAccessor;
+  private final ClientActionHandlerRegistry registry;
 
   public DefaultDispatchAsync(ExceptionHandler exceptionHandler,
-      SecurityCookieAccessor securityCookieAccessor) {
+      SecurityCookieAccessor securityCookieAccessor,
+      ClientActionHandlerRegistry registry) {
     this.exceptionHandler = exceptionHandler;
     this.securityCookieAccessor = securityCookieAccessor;
+    this.registry = registry;
     String entryPointUrl = ((ServiceDefTarget) realService).getServiceEntryPoint();
     if (entryPointUrl == null) {
       this.baseUrl = "";
@@ -54,20 +60,41 @@ public class DefaultDispatchAsync implements DispatchAsync {
     ((ServiceDefTarget) realService).setServiceEntryPoint(baseUrl
         + action.getServiceName());
 
+    final ClientActionHandler<A, R> clientActionHandler = registry.findActionInterceptor(action.getClass());
+    if (clientActionHandler != null) {
+      clientActionHandler.execute(action, callback, new DispatchAsync() {
+
+        @Override
+        public <A extends Action<R>, R extends Result> DispatchRequest undo(
+            A action, R result, AsyncCallback<Void> callback) {          
+          return null;
+        }
+
+        @Override
+        public <A extends Action<R>, R extends Result> DispatchRequest execute(
+            A action, AsyncCallback<R> callback) {
+          // TODO Auto-generated method stub
+          return null;
+        }
+      });
+    }
+
     String securityCookie = securityCookieAccessor.getCookieContent();
 
     return DispatchRequestFactory.createRequest(realService.execute(
         securityCookie, action, new AsyncCallback<Result>() {
           public void onFailure(Throwable caught) {
-            DefaultDispatchAsync.this.onExecuteFailure(action, caught, callback);
+            DefaultDispatchAsync.this.onExecuteFailure(action, caught,
+                callback);
           }
 
           @SuppressWarnings("unchecked")
           public void onSuccess(Result result) {
+
             // Note: This cast is a dodgy hack to get around a GWT 1.6 async
             // compiler issue
-            DefaultDispatchAsync.this.onExecuteSuccess(action, (R) result,
-                callback);
+            DefaultDispatchAsync.this.onExecuteSuccess(action,
+                (R) result, callback);
           }
         }));
   }
