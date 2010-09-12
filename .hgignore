@@ -22,8 +22,6 @@ glob:reports/**
 glob:gwtp*.jar
 glob:MANIFEST.MF
 glob:build.num
-
-syntax: regexp
-^crchris\.bat$
-glob:com/**
-glob:.factorypath
+glob:crchris.bat
+glob:.apt_generated/**
+glob:**.zip
