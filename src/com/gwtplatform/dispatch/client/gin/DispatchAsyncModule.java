@@ -26,6 +26,7 @@ import com.gwtplatform.dispatch.client.DispatchAsync;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 
 /**
  * This gin module provides provides access to the {@link DispatchAsync}
@@ -63,12 +64,12 @@ import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
 public class DispatchAsyncModule extends AbstractGinModule {
   protected final Class<? extends ExceptionHandler> exceptionHandlerType;
   protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
-  protected final Class<? extends ClientActionHandlerRegistry> actionInterceptorRegistryType;
+  protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
 
   public DispatchAsyncModule() {
     this.exceptionHandlerType = null;
     this.sessionAccessorType = null;
-    this.actionInterceptorRegistryType = null;
+    this.clientActionHandlerRegistryType = null;
   }
 
   public DispatchAsyncModule(
@@ -78,12 +79,17 @@ public class DispatchAsyncModule extends AbstractGinModule {
   }
 
   public DispatchAsyncModule(
+      Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
+    this(null, null, clientActionHandlerRegistryType);
+  }
+
+  public DispatchAsyncModule(
       Class<? extends ExceptionHandler> exceptionHandlerType,
       Class<? extends SecurityCookieAccessor> sessionAccessorType,
-      Class<? extends ClientActionHandlerRegistry> actionInterceptorRegistry) {
+      Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
     this.exceptionHandlerType = exceptionHandlerType;
     this.sessionAccessorType = sessionAccessorType;
-    this.actionInterceptorRegistryType = actionInterceptorRegistry;
+    this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
   }
 
   @Override
@@ -98,6 +104,14 @@ public class DispatchAsyncModule extends AbstractGinModule {
       bind(SecurityCookieAccessor.class).to(DefaultSecurityCookieAccessor.class);
     } else {
       bind(SecurityCookieAccessor.class).to(sessionAccessorType);
+    }
+
+    if (clientActionHandlerRegistryType == null) {
+      bind(ClientActionHandlerRegistry.class).to(
+          DefaultClientActionHandlerRegistry.class).asEagerSingleton();
+    } else {
+      bind(ClientActionHandlerRegistry.class).to(
+          clientActionHandlerRegistryType).asEagerSingleton();
     }
   }
 
