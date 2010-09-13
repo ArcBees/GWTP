@@ -16,18 +16,10 @@
 
 package com.gwtplatform.dispatch.client.actionhandler;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
-/**
- * FIXME
- * 
- * @author Brendan Doherty
- */
-
-public interface ClientActionHandlerRegistry {
-
-  <A extends Action<R>, R extends Result> ClientActionHandler<A, R> find(
-      Class<A> actionClass);
-
+public interface AsyncUndo<A extends Action<R>, R extends Result> {
+  void undo(A action, R result, AsyncCallback<Void> callback);
 }

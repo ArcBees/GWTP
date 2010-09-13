@@ -17,8 +17,6 @@
 package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import com.gwtplatform.dispatch.client.DispatchAsync;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
@@ -39,19 +37,10 @@ import com.gwtplatform.dispatch.shared.Result;
 public interface ClientActionHandler<A extends Action<R>, R extends Result> {
 
   /**
-   * Handles the specified action. If you want to build a compound action that
-   * can rollback automatically upon failure, call
-   * {@link ExecutionContext#execute(Action)}. See <a
-   * href="http://code.google.com/p/gwt-dispatch/wiki/CompoundActions" >here</a>
-   * for details.
-   * 
-   * @param action The action.
-   * @param context The {@link ExecutionContext}.
-   * @return The {@link Result}.
-   * @throws ActionException if there is a problem performing the specified
-   *           action.
+   * FIXME
    */
-  void execute(A action, AsyncCallback<R> callback, DispatchAsync dispatch);
+  void execute(A action, AsyncCallback<R> resultCallback,
+      AsyncExecute<A, R> dispatch);
 
   /**
    * @return The type of {@link Action} supported by this handler.
@@ -59,19 +48,9 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
   Class<A> getActionType();
 
   /**
-   * Undoes the specified action. If you want to build a compound action that
-   * can rollback automatically upon failure, call
-   * {@link ExecutionContext#undo(Action, Result)}. See <a
-   * href="http://code.google.com/p/gwt-dispatch/wiki/CompoundActions" >here</a>
-   * for details.
-   * 
-   * @param action The action.
-   * @param result The result of the action.
-   * @param context The {@link ExecutionContext}.
-   * @throws ActionException if there is a problem performing the specified
-   *           action.
+   * FIXME
    */
   void undo(A action, R result, AsyncCallback<Void> callback,
-      DispatchAsync dispatch);
+      AsyncUndo<A, R> dispatch);
 
 }

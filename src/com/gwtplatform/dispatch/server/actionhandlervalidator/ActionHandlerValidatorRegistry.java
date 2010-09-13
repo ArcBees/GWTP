@@ -32,7 +32,7 @@ public interface ActionHandlerValidatorRegistry {
   void clearActionHandlerValidators();
 
   /**
-   * Searches the registry and returns the first {@link ActionValidator} wich
+   * Searches the registry and returns the first {@link ActionValidator} which
    * supports the specified {@link Action} , or <code>null</code> if none is
    * available.
    * 
