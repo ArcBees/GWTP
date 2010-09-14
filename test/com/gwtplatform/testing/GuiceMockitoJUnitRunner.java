@@ -17,15 +17,16 @@
 package com.gwtplatform.testing;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Binding;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.Scope;
+import com.google.inject.spi.DefaultBindingScopingVisitor;
 
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
-import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
-import org.junit.runners.model.Statement;
 import org.mockito.internal.runners.util.FrameworkUsageValidator;
 
 import java.lang.reflect.InvocationTargetException;
@@ -53,7 +54,7 @@ import java.lang.reflect.InvocationTargetException;
 public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
 
   private final Injector injector;
-
+  
   public GuiceMockitoJUnitRunner(Class<?> klass) throws InitializationError,
       InvocationTargetException, InstantiationException, IllegalAccessException {
     super(klass);
@@ -68,10 +69,9 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
     if (inj == null) {
       inj = Guice.createInjector();
     }
-
     injector = inj;
   }
-
+  
   @Override
   public void run(final RunNotifier notifier) {
     // add listener that validates framework usage at the end of each test
@@ -81,7 +81,29 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
 
   @Override
   protected Object createTest() throws Exception {
+    TestScope.clear();
+    instantiateEagerTestSingletons();
     return injector.getInstance(getTestClass().getJavaClass());
+  }
+
+  private void instantiateEagerTestSingletons() {
+    DefaultBindingScopingVisitor<Boolean> isEagerTestScopeSingleton = new DefaultBindingScopingVisitor<Boolean>() {
+      public Boolean visitScope(Scope scope) {
+        return scope == TestScope.EAGER_SINGLETON;          
+      }
+    };
+    for (Binding<?> binding : injector.getBindings().values()) {
+      boolean instantiate = false;
+      if (binding != null) {
+        Boolean result = binding.acceptScopingVisitor(isEagerTestScopeSingleton);
+        if (result != null && result) {
+          instantiate = true;
+        }
+      }
+      if (instantiate) {
+        binding.getProvider().get();
+      }
+    }
   }
 
   /**
@@ -93,11 +115,4 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
     return injector;
   }
 
-  @SuppressWarnings("deprecation")
-  @Override
-  protected Statement withBefores(FrameworkMethod method, Object target,
-      Statement statement) {
-    TestScope.clear();
-    return super.withBefores(method, target, statement);
-  }
 }

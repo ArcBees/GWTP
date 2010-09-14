@@ -7,4 +7,5 @@
   <fileset name="all" enabled="true" check-config-name="gwtp" local="true">
     <file-match-pattern match-pattern="." include-pattern="true"/>
   </fileset>
+  <filter name="NonSrcDirs" enabled="true"/>
 </fileset-config>

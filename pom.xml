@@ -22,17 +22,6 @@
 
 	<repositories>
 		<repository>
-			<id>Platform related releases</id>
-			<url>http://dep.gwt-platform.googlecode.com/hg/release-repository
-			</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-		<repository>
 			<id>Google guice repository</id>
 			<url>http://guice-maven.googlecode.com/svn/trunk
 			</url>
@@ -57,7 +46,11 @@
 			<resource>
 				<directory>${project.basedir}/src</directory>
 			</resource>
-		</resources>
+      <resource>
+        <directory>${project.basedir}/META-INF/</directory>
+        <targetPath>META-INF</targetPath>
+      </resource>
+  	</resources>
 
 		<plugins>
 			<plugin>
@@ -85,6 +78,8 @@
 			<groupId>net.sourceforge.htmlunit</groupId>
 			<artifactId>crawl_htmlunit</artifactId>
 			<version>${htmlunit.version}</version>
+			<scope>system</scope>
+      <systemPath>${basedir}/lib/crawl_htmlunit-r5662-gae.jar</systemPath>
 		</dependency>
 
 		<!-- Google Web Toolkit dependencies -->
@@ -127,6 +122,8 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-gin</artifactId>
 			<version>${gwt-gin.version}</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/lib/gwt-gin-1.0-r137.jar</systemPath>
 		</dependency>
 
 		<!-- Spring dependencies -->

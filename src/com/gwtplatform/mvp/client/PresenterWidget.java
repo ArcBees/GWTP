@@ -402,6 +402,9 @@ public abstract class PresenterWidget<V extends View> extends
    * This method is called whenever a new presenter is requested, even if the
    * presenter was already visible. It is called on every visible presenter,
    * starting from the top-level presenter and going to the leaves.
+   * <p />
+   * Note that {@link #onReset()} is <b>not</b> called only when using 
+   * {@link #addToSlot(Object, PresenterWidget)} or {@link #addToPopupSlot(PresenterWidget)}.
    */
   protected void onReset() {
   }

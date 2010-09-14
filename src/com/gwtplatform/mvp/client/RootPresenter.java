@@ -79,7 +79,7 @@ public class RootPresenter extends
       assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
       if (usingRootLayoutPanel) {
-        // TODO Next 2 lines are a dirty workaround for
+        // TODO Next 3 lines are a dirty workaround for
         // http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
         RootPanel.get().clear();
         RootLayoutPanel.get().clear();
