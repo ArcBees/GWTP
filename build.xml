@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="BAM_product" default="build" basedir=".">
 
-  <property name="version.num" value="0.4"/>
+  <property name="version.num" value="0.5"/>
   
   <property environment="env"/>
   <property name="in.src.folder" location="src" />
   <property name="in.test.folder" location="test" />
-  <property name="in.test.annotation.folder" location="${in.test.folder}/com/gwtplatform/annotation" />
+  <property name="out.test.src.folder" location=".apt_generated" />
   <property name="out.classes.folder" location="war/WEB-INF/classes" />
   <property name="report.folder" location="reports" />
   <property name="out.test.report.folder" location="${report.folder}/tests" />
@@ -18,11 +18,12 @@
   <property name="junit.folder" location="${extlib.folder}/junit" />
   <property name="mockito.folder" location="${lib.folder}" />
   <property name="manifest.file" value="MANIFEST.MF"/>
-  <property name="all.gwtp.jar.files" value="${base.gwtp.jar.name}*.jar"/>
+  <property name="all.gwtp.jar.files" value="**/gwtp*.jar"/>
   <condition property="version-suffix" value="-b${env.BUILD_NUMBER}" else="-bLOCAL">
     <isset property="env.BUILD_NUMBER"/>
   </condition>    
   <property name="gwtp.jar.file" value="gwtp-${version.num}-SNAPSHOT.jar"/>
+  <property name="gwtp.release.jar.file" value="gwtp-${version.num}.jar"/>
   <tstamp>
     <format property="today.timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
   </tstamp>  
@@ -65,9 +66,12 @@
   </target>
 
   <target name="javac.tests" depends="javac" description="Compiles test code">
+    <mkdir dir="${out.test.src.folder}" />  	
     <javac srcdir="${in.test.folder}" destdir="${in.test.folder}" includes="**" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
-      <compilerarg value="-version"/>
       <classpath refid="tests.class.path" />
+      <!-- Send files generated via annotation processing to .apt_generated -->
+    	<compilerarg value="-s"/>
+      <compilerarg path="${out.test.src.folder}"/>
     </javac>
   </target>
   
@@ -79,13 +83,13 @@
     <delete file="${manifest.file}" failonerror="false" />
     <delete dir="${report.folder}" failonerror="false" />
     <delete dir="${out.classes.folder}" failonerror="false" />
+    <delete dir="${out.test.src.folder}" failonerror="false" />
     <delete failonerror="false">
       <fileset dir="." includes="${all.gwtp.jar.files}" />
-    </delete>
-    <delete failonerror="false">
+      <fileset dir="." includes="**/*.zip"/>
+      <fileset dir="." includes="**/*.orig"/>
       <fileset dir="${in.src.folder}" includes="**/*.class" />
       <fileset dir="${in.test.folder}" includes="**/*.class" />
-      <fileset dir="${in.test.annotation.folder}" includes="*Event.java,*Dto.java,*Action.java,*Result.java" />
     </delete>
   </target>
 
@@ -129,5 +133,28 @@
       <fileset dir="." includes="META-INF/**" />
     </jar>
   </target>
-  
+	
+  <target name="release" depends="javac" description="Build the jar for a release">
+    <manifest file="${manifest.file}">
+      <attribute name="Built-By" value="teamcity.codebetter.com"/>
+      <attribute name="Implementation-Version" value="${version.num}"/> 
+      <attribute name="Built-Date" value="${today.timestamp}"/>
+    </manifest>
+    
+    <jar jarfile="${gwtp.release.jar.file}" manifest="${manifest.file}">
+      <fileset dir="${out.classes.folder}" includes="**/*.class" />
+      <fileset dir="${in.src.folder}" includes="**/*.java" />
+      <fileset dir="${in.src.folder}" includes="**/*.xml" />
+      <fileset dir="." includes="META-INF/**" />
+    </jar>
+  </target>
+
+  <target name="package" depends="clean" description="Package everything into a zip file.">
+    <zip destfile="gwtp-${version.num}-SNAPSHOT.zip" basedir="." excludes="**/*.zip,**/.hg/**,**/.hg*" />
+  </target>
+
+  <target name="package.release" depends="clean" description="Package everything into a zip file.">
+    <zip destfile="gwtp-${version.num}.zip" basedir="." excludes="**/*.zip,**/.hg/**,**/.hg*,*.bat,upload.py" />
+  </target>
+	
 </project>

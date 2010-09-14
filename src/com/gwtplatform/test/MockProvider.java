@@ -14,28 +14,31 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.test;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEventHelper;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
- * @author David Peterson
+ * For use in test cases where an {@link Provider} is required to provide an
+ * object and the test case needs to provide a mock of the object.
+ * 
+ * @author Brendan Doherty
+ * 
+ * @param <T> The type of mock object provided
  */
-public final class DefaultEventBus extends HandlerManager implements EventBus {
+public class MockProvider<T> implements Provider<T> {
+  private T mock;
 
-  @Inject
-  public DefaultEventBus() {
-    super(null);
+  /**
+   * Construct a {@link Provider} that will provide the mock object.
+   * 
+   * @param mock The mock object to provide.
+   */
+  public MockProvider(T mock) {
+    this.mock = mock;
   }
 
-  @Override
-  public void fireEvent(HasEventBus source, GwtEvent<?> event) {
-    GwtEventHelper.setSource(event, source);
-    
-    fireEvent(event);
+  public T get() {
+    return this.mock;
   }
-
 }

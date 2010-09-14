@@ -82,7 +82,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * received. Fetching this data should be done in the {@link #prepareFromRequest(PlaceRequest)}
    * method.
    * <p />
-   * In order to use manual reveal, override this method to return {@code false}.
+   * In order to use manual reveal, override this method to return {@code true}.
    * Then you can either:
    * <ul>
    * <li> Fetch the data using a {@link com.gwtplatform.mvp.clien.proxy.ProxyPlace.ManualRevealCallback}, 
@@ -112,7 +112,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * If your presenter needs to fetch some information from the server while
    * preparing itself, consider using manual reveal. See {@link #useManualReveal()}.
    * 
-   * @param request The request.
+   * @param request The {@link PlaceRequest}.
    */
   public void prepareFromRequest(PlaceRequest request) {
   }  
