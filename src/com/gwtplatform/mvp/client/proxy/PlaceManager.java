@@ -31,7 +31,7 @@ import java.util.List;
  * @author Christian Goudreau
  */
 public interface PlaceManager extends HasEventBus {
-
+  
   /**
    * Builds a string corresponding to the history token to reveal the specified
    * {@link PlaceRequest}. This can be used with a
@@ -146,9 +146,9 @@ public interface PlaceManager extends HasEventBus {
 
   /**
    * Access the current place request, that is, the tail of the place request
-   * hierarchy.
+   * hierarchy. If the hierarchy is empty this returns an empty {@link PlaceRequest}.
    * 
-   * @return The current {@link PlaceRequest}.
+   * @return The current {@link PlaceRequest}, or an empty one if the hierarchy is empty.
    * 
    * @see {@link #getCurrentPlaceHierarchy()}
    */
@@ -403,12 +403,22 @@ public interface PlaceManager extends HasEventBus {
 
   /**
    * Resets the navigation lock if it is currently set. You should usually not call this
-   * directly, instead it is meant to be used with presenters that use manual reveal.
+   * directly, instead it is meant to be used with presenters that use manual reveal via
+   * {@link ProxyPlace#manualReveal(com.gwtplatform.mvp.client.Presenter)} and 
+   * {@link ProxyPlace#manualRevealFailed()}.
    * 
    * @see com.gwtplatform.mvp.client.Presenter#useManualReveal()
    * @see ProxyPlace#manualReveal(com.gwtplatform.mvp.client.Presenter)
    * @see ProxyPlace#manualRevealFailed()
    */
   void unlock();
+
+  /**
+   * Checks if the {@link PlaceManager} has to perform any pending navigation that were
+   * not immediately executed because it was requested while the navigation was locked.
+   * 
+   * @return {@code true} if there are any pending navigation requests, {@code false} otherwise.
+   */
+  boolean hasPendingNavigation();
 
 }

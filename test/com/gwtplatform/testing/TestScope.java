@@ -63,8 +63,17 @@ public class TestScope {
    * correspond to singletons in the application. Your JUnit test case must use
    * {@link GuiceMockitoJUnitRunner} on its {@code @RunWith} annotation so that
    * test-scoped singletons are reset before every test case.
+   * <p />
+   * If you want your singleton to be instantiated automatically with each new
+   * test, use {@link #EAGER_SINGLETON}.
    */
   public static final Singleton SINGLETON = new Singleton();
+  
+  /**
+   * Eager test-scoped singleton are similar to test-scoped {@link #SINGLETON}
+   * but they get instantiated automatically with each new test. 
+   */
+  public static final Singleton EAGER_SINGLETON = new Singleton();
 
   /**
    * Clears all the instances of test-scoped singletons. After this method is
@@ -73,6 +82,7 @@ public class TestScope {
    */
   public static void clear() {
     SINGLETON.clear();
+    EAGER_SINGLETON.clear();
   }
 
 }
