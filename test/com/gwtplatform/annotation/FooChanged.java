@@ -27,4 +27,10 @@ public class FooChanged {
   Foo foo;
   @Order(2)
   boolean originator;
+  @Optional
+  @Order(3)
+  String additionalMessage;
+  @Optional
+  @Order(4)
+  double priority;
 }
