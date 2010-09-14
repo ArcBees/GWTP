@@ -27,4 +27,7 @@ public class PersonName {
   String firstName;
   @Order(2)
   String lastName;
+  @Optional
+  @Order(3)
+  String secondName;
 }
