@@ -28,7 +28,8 @@ public interface HasPopupSlot {
    * corresponding presenter will receive the lifecycle events as needed.
    * <p />
    * Contrary to the {@link setInSlot()} method, no
-   * {@link ResetPresentersEvent} is fired.
+   * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is 
+   * fired, so {@link PresenterWidget#onReset()} is not invoked.
    * 
    * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
    *          will clear the slot.
@@ -44,7 +45,8 @@ public interface HasPopupSlot {
    * presenter will receive the lifecycle events as needed.
    * <p />
    * Contrary to the {@link setInSlot()} method, no
-   * {@link ResetPresentersEvent} is fired.
+   * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired, 
+   * so {@link PresenterWidget#onReset()} is not invoked.
    * 
    * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
    *          will clear the slot.

@@ -16,26 +16,23 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEventHelper;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.inject.Inject;
-
 /**
- * @author David Peterson
+ * Interface meant to be implemented by you {@link View} so that its controller
+ * can attach its {@link UiHandlers}. <b>Important</b>, when using this interface,
+ * you should always call {@link #setControls()} from your presenter
+ * constructor.
+ * 
+ * @param <C> Your {@link UiHandlers} interface type.
+ * 
+ * @author Christian Goudreau
  */
-public final class DefaultEventBus extends HandlerManager implements EventBus {
+public interface HasUiHandlers<C extends UiHandlers> {
 
-  @Inject
-  public DefaultEventBus() {
-    super(null);
-  }
-
-  @Override
-  public void fireEvent(HasEventBus source, GwtEvent<?> event) {
-    GwtEventHelper.setSource(event, source);
-    
-    fireEvent(event);
-  }
-
+  /**
+   * Sets the {@link UiHandlers} subclass associated with this object.
+   * 
+   * @param uiHandlers The {@link UiHandlers} subclass (of type {@code C}) to associate with this object.
+   */
+  void setUiHandlers(C uiHandlers);
+  
 }

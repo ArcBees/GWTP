@@ -16,26 +16,13 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEventHelper;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.inject.Inject;
-
 /**
- * @author David Peterson
+ * Use this marker interface on classes that implement the controls required by
+ * a {@link View} to communicate back with its {@link Presenter} or
+ * {@link PresenterWidget}.
+ * 
+ * @author Christian Goudreau
  */
-public final class DefaultEventBus extends HandlerManager implements EventBus {
-
-  @Inject
-  public DefaultEventBus() {
-    super(null);
-  }
-
-  @Override
-  public void fireEvent(HasEventBus source, GwtEvent<?> event) {
-    GwtEventHelper.setSource(event, source);
-    
-    fireEvent(event);
-  }
+public interface UiHandlers {
 
 }
