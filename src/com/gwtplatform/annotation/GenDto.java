@@ -32,18 +32,18 @@ import java.lang.annotation.Target;
  * <code> 
  * {@literal}@GenDto
  * public class LineItem {
- *   String Key&lt;Product&gt; productKey;
+ *   Key&lt;Product&gt; productKey;
  *   int quantity; 
  * }
  * </code>
  * </pre>
  * 
- * gwt-platform will generate a LineItemDto class.
+ * gwt-platform will generate a {@code LineItemDto} class.
  * <p/>
- * LineItemDto will have fields, getters, and a constructor that takes
- * productKey and quantity plus equals, hashCode, toString etc,
+ * {@code LineItemDto} will have fields, getters, and a constructor that takes
+ * {@code productKey} and quantity plus equals, hashCode, toString etc,
  * <p/>
- * LineItemDto could be used when creating an invoice.
+ * {@code LineItemDto} could be used when creating an invoice.
  * 
  * <pre>
  * <code> 
@@ -57,12 +57,12 @@ import java.lang.annotation.Target;
  * </pre>
  * 
  * The alternative to using Dto classes would be to construct persistable
- * LineItem objects on the client and send them as part of the gwt-rpc call.
+ * {@code LineItem} objects on the client and send them as part of the gwt-rpc call.
  * Using Dto classes is a better choice because:
  * <ul>
  * <li>Lower bandwidth.</li>
- * <li>The client cannot be trusted. The LineItem persistable object will
- * probably have a price field. The server may need ignore the price as it may
+ * <li>The client cannot be trusted. The {@code LineItem} persistable object will
+ * probably have a price field. The server should ignore the price as it may
  * have been tampered with.</li>
  * </ul>
  * 
@@ -75,6 +75,7 @@ import java.lang.annotation.Target;
  * <p/>
  * 
  * @author Brendan Doherty
+ * @author Florian Sauter
  * @author Stephen Haberman (concept)
  */
 @Target({ElementType.TYPE})
