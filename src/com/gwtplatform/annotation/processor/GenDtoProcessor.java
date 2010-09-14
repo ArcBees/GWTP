@@ -17,12 +17,12 @@
 package com.gwtplatform.annotation.processor;
 
 import com.gwtplatform.annotation.GenDto;
+import com.gwtplatform.annotation.processor.GenerationHelper.Visibility;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Collection;
 import java.util.Set;
-import java.util.SortedMap;
 
 import static javax.lang.model.SourceVersion.RELEASE_6;
 
@@ -32,17 +32,17 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
 /**
  * Processes {@link GenDto} annotations.
  * <p/> 
- * GenDtoProcessor should only ever be called by tool infrastructure. 
+ * {@link GenDtoProcessor} should only ever be called by tool infrastructure. 
  * See {@link javax.annotation.processing.Processor} for more details. 
  * 
  * @author Brendan Doherty 
+ * @author Florian Sauter
  * @author Stephen Haberman (concept) 
  */
 
@@ -79,57 +79,49 @@ public class GenDtoProcessor extends AbstractProcessor {
   }
 
   void generateDto(Element dtoElement) {
-    PrintWriter out = null;
+    GenerationHelper writer = null;
     try {
-      AnnotationHelper helper = new AnnotationHelper(env);
-      out = new PrintWriter(new BufferedWriter(
-          this.env.getFiler().createSourceFile(
-              helper.getQName(dtoElement) + "Dto", dtoElement).openWriter()));
+      ReflectionHelper reflection = new ReflectionHelper(env, (TypeElement) dtoElement);
+      String dtoElementSimpleName = reflection.getSimpleClassName();
+      String dtoSimpleName = dtoElementSimpleName + "Dto";
+      String dtoClassName = reflection.getClassName() + "Dto";
+      Writer sourceWriter = this.env.getFiler().createSourceFile(dtoClassName, dtoElement).openWriter();
+      writer = new GenerationHelper(sourceWriter);
 
-      Name name = dtoElement.getSimpleName();
+      Collection<VariableElement> orderedElementFields = reflection.getOrderedFields();
 
-      SortedMap<Integer, VariableElement> fieldsMap = helper.getOrderedFields(dtoElement);
+      writer.generatePackageDeclaration(reflection.getPackageName());
 
-      out.println("package " + helper.getPackage(dtoElement) + ";");
-      out.println();
-      out.println("import com.google.gwt.user.client.rpc.IsSerializable;");
-      out.println();
-      out.print("public class ");
-      out.print(name);
-      out.println("Dto implements IsSerializable {");
+      writer.generateImports("com.google.gwt.user.client.rpc.IsSerializable");
+      
+      writer.generateClassHeader(dtoSimpleName, null, "IsSerializable");
+      
+      writer.generateFields(orderedElementFields, false);
 
-      helper.generateFields(out, fieldsMap.values(), false);
-
-      if (!fieldsMap.isEmpty()) {
-        out.println("  protected " + name + "Dto() { }");
-        out.println();
+      if (!orderedElementFields.isEmpty() && !reflection.hasOnlyOptionalFields()) {
+        writer.generateEmptyConstructor(dtoSimpleName, Visibility.PROTECTED);
       }
 
-      out.print("  public " + name + "Dto(");
-      helper.generateFieldList(out, fieldsMap.values(), true, false);
-      out.println(") { ");
-      for (VariableElement fieldDecl : fieldsMap.values()) {
-        out.println("    this." + fieldDecl.getSimpleName() + " = "
-            + fieldDecl.getSimpleName() + ";");
-      }
-      out.println("  }");
-      out.println();
+      writer.generateConstructorsUsingFields(dtoSimpleName, 
+          orderedElementFields,
+          reflection.getOptionalFields()
+      );
 
-      helper.generateAccessors(out, fieldsMap.values());
+      writer.generateFieldAccessors(orderedElementFields);
 
-      helper.generateEquals(out, name + "Dto", fieldsMap.values());
+      writer.generateEquals(dtoSimpleName, orderedElementFields);
 
-      helper.generateHashCode(out, fieldsMap.values());
+      writer.generateHashCode(orderedElementFields);
 
-      helper.generateToString(out, name + "Dto", fieldsMap.values());
+      writer.generateToString(dtoSimpleName, orderedElementFields);
 
-      out.println("}");
+      writer.generateClassFooter();
 
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {
-      if (out != null) {
-        out.close();
+      if (writer != null) {
+        writer.close();
       }
     }
   }
