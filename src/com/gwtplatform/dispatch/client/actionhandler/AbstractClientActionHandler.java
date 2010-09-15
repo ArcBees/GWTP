@@ -19,6 +19,17 @@ package com.gwtplatform.dispatch.client.actionhandler;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
+/**
+ * Simple abstract super-class for {@link ActionHandler} implementations that
+ * forces the {@link Action} class to be passed in as a constructor to the
+ * handler. 
+ * 
+ * @author David Peterson
+ * @author Brendan Doherty
+ * 
+ * @param <A> The {@link Action} type.
+ * @param <R> The {@link Result} type.
+ */
 public abstract class AbstractClientActionHandler<A extends Action<R>, R extends Result>
     implements ClientActionHandler<A, R> {
 

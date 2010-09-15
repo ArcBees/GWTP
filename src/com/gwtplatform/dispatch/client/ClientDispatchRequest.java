@@ -18,25 +18,40 @@ package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.http.client.Request;
 
-public class FakeDispatchRequest implements DispatchRequest {
+/**
+ * An implementation of {@link DispatchRequest} that is used with
+ * {@link ClientActionHandler}s. Initially it does not contain an http
+ * {@link com.google.gwt.http.client.Request Request}, but then when a
+ * {@link com.google.gwt.http.client.Request Request} is established, the
+ * request can be populated by calling {@link #setRequest(Request)}.
+ * 
+ * @author Brendan Doherty
+ */
+public class ClientDispatchRequest implements DispatchRequest {
 
   private Request request;
   private boolean pending;
   private boolean cancelled;
 
-  FakeDispatchRequest() {
+  ClientDispatchRequest() {
     this.pending = true;
   }
 
-  void setRequest(Request request) {
+  public void setRequest(Request request) {
+    if (this.request != null) {
+      throw new RuntimeException("Request can only be set once.");
+    }
     this.request = request;
+    if (this.cancelled) {
+      this.request.cancel();
+    }
   }
 
   void setCompleted() {
     pending = false;
   }
-  
-  boolean isCancelled() {
+
+  public boolean isCancelled() {
     return cancelled;
   }
 

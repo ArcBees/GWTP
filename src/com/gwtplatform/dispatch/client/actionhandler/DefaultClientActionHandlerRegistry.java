@@ -22,7 +22,10 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * FIXME
+ * The default implementation that {@link ClientActionHandlerRegistry} that if
+ * bound will not any client-side action handlers. </p> To register client-side
+ * action handlers, extend this class and pass one or more handlers in the
+ * constructor.
  * 
  * @author Brendan Doherty
  */
@@ -34,7 +37,7 @@ public class DefaultClientActionHandlerRegistry implements
   DefaultClientActionHandlerRegistry() {
   }
 
-  public DefaultClientActionHandlerRegistry(
+  protected DefaultClientActionHandlerRegistry(
       ClientActionHandler<?, ?>... handlers) {
     clientActionHandlers = new HashMap<Class<? extends Action<?>>, ClientActionHandler<?, ?>>();
 
