@@ -20,13 +20,20 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * FIXME
+ * Implementations of this interface will be used by {@link DispatchAsync}
+ * implementation to find client-side action handlers.
  * 
  * @author Brendan Doherty
  */
 
 public interface ClientActionHandlerRegistry {
 
+  /**
+   * Gets the client-side action handler that supports the specific action.
+   * 
+   * @return The the client-side action handler , or {@code null} if no
+   *         appropriate client-side action handler could be found.
+   */
   <A extends Action<R>, R extends Result> ClientActionHandler<A, R> find(
       Class<A> actionClass);
 
