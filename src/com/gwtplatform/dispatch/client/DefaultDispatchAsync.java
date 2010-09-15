@@ -67,8 +67,8 @@ public class DefaultDispatchAsync implements DispatchAsync {
 
     final ClientActionHandler<A, R> clientActionHandler = registry.find(action.getClass());
     if (clientActionHandler != null) {
-      final FakeDispatchRequest request = new FakeDispatchRequest();
-      clientActionHandler.execute(action, callback, new AsyncExecute<A, R>() {
+      final ClientDispatchRequest request = new ClientDispatchRequest();
+      clientActionHandler.execute(action, callback, request, new AsyncExecute<A, R>() {
 
         @Override
         public void execute(A action, AsyncCallback<R> resultCallback) {
@@ -117,8 +117,8 @@ public class DefaultDispatchAsync implements DispatchAsync {
 
     final ClientActionHandler<A, R> clientActionHandler = registry.find(action.getClass());
     if (clientActionHandler != null) {
-      final FakeDispatchRequest request = new FakeDispatchRequest();
-      clientActionHandler.undo(action, result, callback, new AsyncUndo<A, R>() {
+      final ClientDispatchRequest request = new ClientDispatchRequest();
+      clientActionHandler.undo(action, result, callback, request, new AsyncUndo<A, R>() {
 
         @Override
         public void undo(A action, R result, AsyncCallback<Void> callback) {

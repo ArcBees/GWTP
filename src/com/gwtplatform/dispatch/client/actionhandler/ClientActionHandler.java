@@ -17,17 +17,34 @@
 package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import com.gwtplatform.dispatch.client.ClientDispatchRequest;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * /** Instances of this interface will handle specific types of {@link Action}
- * classes.
- * <p />
+ * Instances of this interface will handle specific types of {@link Action}
+ * classes on the client.
+ * <p/>
+ * When a command is executed (or undone), {@link ClientActionHandler}s that
+ * have been registered with the bound {@link ClientActionHandlerRegistry} will
+ * be called instead of {@link DispatchAsync} sending the command over gwt-rpc
+ * to the server.
+ * 
+ * Client Action Handlers provide a number of flexible options:
+ * <ul>
+ * <li>The action can be modified before sending the action over gwt-rpc to the
+ * server.</li>
+ * <li>A result can be returned without contacting the server.</li>
+ * <li>The result can be modified after it is returned from the server.</li>
+ * <li>Before or after returning the result to the calling code, the result can
+ * be processed.</li>
+ * <li>An alternate way of communicating with a server could be used instead of
+ * gwt-rpc.</li>
+ * </ul>
+ * <p/>
  * <b>Important!</b> Your action handlers must be thread safe since they will be
- * bound as singletons. For details, see <a href=
- * "http://code.google.com/p/google-guice/wiki/Scopes#Scopes_and_Concurrency">
- * http://code.google.com/p/google-guice/wiki/Scopes#Scopes_and_Concurrency</a>.
+ * singletons.
  * 
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
@@ -37,10 +54,29 @@ import com.gwtplatform.dispatch.shared.Result;
 public interface ClientActionHandler<A extends Action<R>, R extends Result> {
 
   /**
-   * FIXME
+   * Handles the specified action.
+   * 
+   * @param action The action to handle.
+   * @param resultCallback A callback that can be used both return the result,
+   *          or return any exceptions that are caught.
+   * @param request An instance of
+   *          {@link com.gwtplatform.dispatch.client.DispatchRequest
+   *          DispatchRequest} that will been returned to the calling code that
+   *          requested the action be executed. It is possible that the calling
+   *          code may cancel the request, so after returning from asynchronous
+   *          calls, confirm that {@link ClientDispatchRequest#isCancelled()} is
+   *          still <code>false</code>. Also, if you get an instance of
+   *          {@link com.google.gwt.http.client.Request Request} as a result of
+   *          network communications, call
+   *          {@link ClientDispatchRequest#setRequest()} so that the calling
+   *          code has the ability to cancel the http request.
+   * @param dispatch A callback that provides a way to send the action (possibly
+   *          modified) to the server over gwt-rpc. If you want to either modify
+   *          or process the result, create a new <code>AsyncCallback</code>
+   *          object, otherwise just pass in <code>resultCallback</code>.
    */
   void execute(A action, AsyncCallback<R> resultCallback,
-      AsyncExecute<A, R> dispatch);
+      ClientDispatchRequest request, AsyncExecute<A, R> dispatch);
 
   /**
    * @return The type of {@link Action} supported by this handler.
@@ -48,9 +84,30 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
   Class<A> getActionType();
 
   /**
-   * FIXME
+   * Undoes the specified action.
+   * 
+   * @param action The action to undo.
+   * @param result The result to undo.
+   * @param callback A callback that can be both used to indicate that the undo
+   *          is complete, or return any exceptions that are caught.
+   * @param request An instance of
+   *          {@link com.gwtplatform.dispatch.client.DispatchRequest
+   *          DispatchRequest} that will been returned to the calling code that
+   *          requested the action be executed. It is possible that the calling
+   *          code may cancel the request, so after returning from asynchronous
+   *          calls, confirm that {@link ClientDispatchRequest#isCancelled()} is
+   *          still <code>false</code>. Also, if you get an instance of
+   *          {@link com.google.gwt.http.client.Request Request} as a result of
+   *          network communications, call
+   *          {@link ClientDispatchRequest#setRequest()} so that the calling
+   *          code has the ability to cancel the http request.
+   * @param dispatch A callback that provides a way to send the action (possibly
+   *          modified) to the server over gwt-rpc. If you want to perform
+   *          additional processing after the server has returned, create a new
+   *          <code>AsyncCallback</code> object, otherwise just pass in
+   *          <code>callback</code>.
    */
   void undo(A action, R result, AsyncCallback<Void> callback,
-      AsyncUndo<A, R> dispatch);
+      ClientDispatchRequest request, AsyncUndo<A, R> dispatch);
 
 }
