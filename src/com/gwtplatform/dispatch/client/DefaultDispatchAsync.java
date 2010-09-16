@@ -27,6 +27,7 @@ import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.mvp.client.IndirectProvider;
 
 /**
  * This class is the default implementation of {@link DispatchAsync}, which is
@@ -58,6 +59,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
     }
   }
 
+  @SuppressWarnings("unchecked")
   public <A extends Action<R>, R extends Result> DispatchRequest execute(
       final A action, final AsyncCallback<R> callback) {
     ((ServiceDefTarget) realService).setServiceEntryPoint(baseUrl
@@ -65,32 +67,47 @@ public class DefaultDispatchAsync implements DispatchAsync {
 
     final String securityCookie = securityCookieAccessor.getCookieContent();
 
-    final ClientActionHandler<A, R> clientActionHandler = registry.find(action.getClass());
+    final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider = registry.find(action.getClass());
 
-    if (clientActionHandler != null) {
+    if (clientActionHandlerProvider != null) {
       final ClientDispatchRequest request = new ClientDispatchRequest();
-      AsyncCallback<R> resultCallback = new AsyncCallback<R>() {
+      clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
+
+        @SuppressWarnings("unchecked")
         @Override
-        public void onSuccess(R result) {
-          request.setCompleted();
-          callback.onSuccess(result);
+        public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
+          AsyncCallback<R> resultCallback = new AsyncCallback<R>() {
+            @Override
+            public void onSuccess(R result) {
+              request.setCompleted();
+              callback.onSuccess(result);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+              request.setCompleted();
+              callback.onFailure(caught);
+            }
+          };
+          ((ClientActionHandler<A, R>) clientActionHandler).execute(action,
+              resultCallback, request, new ExecuteCommand<A, R>() {
+
+                @Override
+                public void execute(A action, AsyncCallback<R> resultCallback) {
+                  if (!request.isCancelled()) {
+                    request.setRequest(serviceExecute(securityCookie, action,
+                        resultCallback));
+                  }
+                }
+
+              });
         }
+
         @Override
         public void onFailure(Throwable caught) {
           request.setCompleted();
           callback.onFailure(caught);
         }
-      };
-      clientActionHandler.execute(action, resultCallback, request, new ExecuteCommand<A, R>() {
-
-        @Override
-        public void execute(A action, AsyncCallback<R> resultCallback) {
-          if (!request.isCancelled()) {
-            request.setRequest(serviceExecute(securityCookie, action,
-                resultCallback));
-          }
-        }
-
       });
       return request;
 
@@ -112,7 +129,8 @@ public class DefaultDispatchAsync implements DispatchAsync {
           @SuppressWarnings("unchecked")
           public void onSuccess(Result result) {
 
-            // Note: This cast is a dodgy hack to get around a GWT 1.6 async
+            // Note: This cast is a dodgy hack to get around a GWT
+            // 1.6 async
             // compiler issue
             DefaultDispatchAsync.this.onExecuteSuccess(action, (R) result,
                 callback);
@@ -128,33 +146,49 @@ public class DefaultDispatchAsync implements DispatchAsync {
 
     final String securityCookie = securityCookieAccessor.getCookieContent();
 
-    final ClientActionHandler<A, R> clientActionHandler = registry.find(action.getClass());
-    if (clientActionHandler != null) {
+    final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider = registry.find(action.getClass());
+
+    if (clientActionHandlerProvider != null) {
       final ClientDispatchRequest request = new ClientDispatchRequest();
-      AsyncCallback<Void> doneCallback = new AsyncCallback<Void>() {
+      clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
+
+        @SuppressWarnings("unchecked")
         @Override
-        public void onSuccess(Void v) {
-          request.setCompleted();
-          callback.onSuccess(v);
+        public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
+
+          AsyncCallback<Void> doneCallback = new AsyncCallback<Void>() {
+            @Override
+            public void onSuccess(Void v) {
+              request.setCompleted();
+              callback.onSuccess(v);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+              request.setCompleted();
+              callback.onFailure(caught);
+            }
+          };
+          ((ClientActionHandler<A, R>) clientActionHandler).undo(action,
+              result, doneCallback, request, new UndoCommand<A, R>() {
+
+                @Override
+                public void undo(A action, R result,
+                    AsyncCallback<Void> callback) {
+                  if (!request.isCancelled()) {
+                    request.setRequest(serviceUndo(securityCookie, action,
+                        result, callback));
+                  }
+                }
+              });
         }
+
         @Override
         public void onFailure(Throwable caught) {
           request.setCompleted();
           callback.onFailure(caught);
         }
-      };
-      clientActionHandler.undo(action, result, doneCallback, request,
-          new UndoCommand<A, R>() {
-
-            @Override
-            public void undo(A action, R result, AsyncCallback<Void> callback) {
-              if (!request.isCancelled()) {
-                request.setRequest(serviceUndo(securityCookie, action, result,
-                    callback));
-              }
-            }
-
-          });
+      });
       return request;
 
     } else {

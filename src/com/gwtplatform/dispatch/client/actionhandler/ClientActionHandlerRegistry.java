@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.mvp.client.IndirectProvider;
 
 /**
  * Implementations of this interface will be used by {@link DispatchAsync}
@@ -34,7 +35,7 @@ public interface ClientActionHandlerRegistry {
    * @return The the client-side action handler , or {@code null} if no
    *         appropriate client-side action handler could be found.
    */
-  <A extends Action<R>, R extends Result> ClientActionHandler<A, R> find(
+  <A extends Action<R>, R extends Result> IndirectProvider<ClientActionHandler<?, ?>> find(
       Class<A> actionClass);
 
 }
