@@ -21,20 +21,21 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * The interface that {@link ClientActionHandler}s use send the action to execute
- * the server over gwt-rpc.
+ * The interface that {@link ClientActionHandler}s use to send the action to
+ * execute to the server over gwt-rpc.
  * 
  * @param <A> The {@link Action} type.
  * @param <R> The {@link Result} type.
  * 
  * @author Brendan Doherty
  */
-public interface AsyncExecute<A extends Action<R>, R extends Result> {
+public interface ExecuteCommand<A extends Action<R>, R extends Result> {
   /**
    * Execute an action.
    * 
    * @param action The action to execute.
-   * @param callback A callback that will either indicate success or failure.
+   * @param resultCallback A callback that will be invoked once the action has been
+   *          executed, successfully or not.
    */
   void execute(A action, AsyncCallback<R> resultCallback);
 }
