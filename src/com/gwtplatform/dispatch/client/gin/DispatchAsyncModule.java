@@ -67,20 +67,21 @@ public class DispatchAsyncModule extends AbstractGinModule {
   protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
 
   public DispatchAsyncModule() {
-    this.exceptionHandlerType = null;
-    this.sessionAccessorType = null;
-    this.clientActionHandlerRegistryType = null;
+    this(DefaultExceptionHandler.class, DefaultSecurityCookieAccessor.class,
+        DefaultClientActionHandlerRegistry.class);
   }
 
   public DispatchAsyncModule(
       Class<? extends ExceptionHandler> exceptionHandlerType,
       Class<? extends SecurityCookieAccessor> sessionAccessorType) {
-    this(exceptionHandlerType, sessionAccessorType, null);
+    this(exceptionHandlerType, sessionAccessorType,
+        DefaultClientActionHandlerRegistry.class);
   }
 
   public DispatchAsyncModule(
       Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-    this(null, null, clientActionHandlerRegistryType);
+    this(DefaultExceptionHandler.class, DefaultSecurityCookieAccessor.class,
+        clientActionHandlerRegistryType);
   }
 
   public DispatchAsyncModule(
@@ -94,25 +95,9 @@ public class DispatchAsyncModule extends AbstractGinModule {
 
   @Override
   protected void configure() {
-    if (exceptionHandlerType == null) {
-      bind(ExceptionHandler.class).to(DefaultExceptionHandler.class);
-    } else {
-      bind(ExceptionHandler.class).to(exceptionHandlerType);
-    }
-
-    if (sessionAccessorType == null) {
-      bind(SecurityCookieAccessor.class).to(DefaultSecurityCookieAccessor.class);
-    } else {
-      bind(SecurityCookieAccessor.class).to(sessionAccessorType);
-    }
-
-    if (clientActionHandlerRegistryType == null) {
-      bind(ClientActionHandlerRegistry.class).to(
-          DefaultClientActionHandlerRegistry.class).asEagerSingleton();
-    } else {
-      bind(ClientActionHandlerRegistry.class).to(
-          clientActionHandlerRegistryType).asEagerSingleton();
-    }
+    bind(ExceptionHandler.class).to(exceptionHandlerType);
+    bind(SecurityCookieAccessor.class).to(sessionAccessorType);
+    bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
   }
 
   @Provides
