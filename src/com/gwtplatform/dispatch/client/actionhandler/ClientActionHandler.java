@@ -26,25 +26,98 @@ import com.gwtplatform.dispatch.shared.Result;
  * Instances of this interface will handle specific types of {@link Action}
  * classes on the client.
  * <p/>
- * When a command is executed (or undone), {@link ClientActionHandler}s that
- * have been registered with the bound {@link ClientActionHandlerRegistry} will
- * be called instead of {@link DispatchAsync} sending the command over gwt-rpc
- * to the server.
+ * When a command is executed (or undone), the {@link ClientActionHandler} that
+ * has been registered with the bound {@link ClientActionHandlerRegistry} is
+ * called and {@link DispatchAsync} does not automatically send the command over
+ * gwt-rpc to the server.
  * 
  * Client Action Handlers provide a number of flexible options:
  * <ul>
  * <li>The action can be modified before sending the action over gwt-rpc to the
  * server.</li>
  * <li>A result can be returned without contacting the server.</li>
- * <li>The result can be modified after it is returned from the server.</li>
- * <li>Before or after returning the result to the calling code, the result can
- * be processed.</li>
- * <li>An alternate way of communicating with a server could be used instead of
- * gwt-rpc.</li>
+ * <li>The result can be modified or processed after it is returned from the
+ * server.</li>
+ * <li>The {@link ClientActionHandler} can take over and communicate directly
+ * with the server, possibly using a different mechanism than gwt-rpc.</li>
  * </ul>
  * <p/>
- * <b>Important!</b> Your action handlers must be thread safe since they will be
- * singletons.
+ * 
+ * <b>Important!</b> If your action handler makes asynchronous calls, be careful
+ * with your use of fields as a second call your handler could be made while it
+ * is waiting for the asynchronous call to return.
+ * 
+ * <h3>Caching Client Action Handler Example</h3>
+ * 
+ * <pre>
+ * <code>
+ * // Interface of cache singleton
+ * public interface Cache {
+ *   &lt;A extends Action&lt;R&gt;, R extends Result&gt; R get(A action);
+ *   &lt;A extends Action&lt;R&gt;, R extends Result&gt; void put(A action, R result);
+ * }
+ * 
+ * // Client action handler that injects the cache
+ * public class RetrieveFooClientActionHandler
+ *     extends
+ *     AbstractCachingClientActionHandler&lt;RetrieveFooAction, RetrieveFooResult&gt; {
+ *   {@literal}@Inject
+ *   RetrieveFooClientActionHandler(
+ *       Cache cache) {
+ *       
+ *     super(RetrieveFooAction.class, cache);
+ *   }
+ * }
+ * 
+ * // abstract client action handler that: 
+ * // - first checks cache and returns result immediately if found in cache
+ * // - executes command on server using gwt-rpc
+ * // - saves result to cache before returning it 
+ * public abstract class AbstractCachingClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt;
+ *     extends AbstractClientActionHandler&lt;A, R&gt; {
+ * 
+ *   private final Cache cache;
+ * 
+ *   public AbstractCachingClientActionHandler(
+ *       Class&lt;A&gt; actionType, Cache cache) {
+ *       
+ *     super(actionType);
+ *     this.cache = cache;
+ *   }
+ * 
+ *   {@literal}@Override
+ *   public void execute(final A action, final AsyncCallback&lt;R&gt; resultCallback,
+ *       ClientDispatchRequest request, ExecuteCommand&lt;A, R&gt; executeCommand) {
+ *       
+ *     R cacheResult = cache.get(action);
+ *     if (cacheResult != null) {
+ *       resultCallback.onSuccess(cacheResult);
+ *     } else {
+ *       executeCommand.execute(action, new AsyncCallback&lt;R&gt;() {
+ *         {@literal}@Override
+ *         public void onSuccess(R result) {
+ *           if(!request.isCancelled()) {
+ *             cache.put(action, result);
+ *             resultCallback.onSuccess(result);
+ *           }
+ *         }
+ * 
+ *         {@literal}@Override
+ *         public void onFailure(Throwable caught) {
+ *           resultCallback.onFailure(caught);
+ *         }
+ *       });
+ *     }
+ *   }
+ * 
+ *   {@literal}@Override
+ *   public void undo(A action, R result, AsyncCallback&lt;Void&gt; callback,
+ *       ClientDispatchRequest request, UndoCommand&lt;A, R&gt; undoCommand) {
+ *     // do nothing    
+ *   }
+ * }
+ * </code>
+ * </pre>
  * 
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
@@ -56,27 +129,32 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
   /**
    * Handles the specified action.
    * 
-   * @param action The action to handle.
-   * @param resultCallback A callback that can be used both return the result,
-   *          or return any exceptions that are caught.
-   * @param request An instance of
+   * If the handler makes asynchronous calls, it is recommended that you confirm
+   * that this request has not been cancelled after returning by calling
+   * {@link ClientDispatchRequest#isCancelled()} against the {@link request}
+   * parameter.
+   * 
+   * @param action The {@link Action} to execute.
+   * @param resultCallback The callback to use to communicate the result of the
+   *          action. Unless the request is cancelled, you must invoke
+   *          {@link AsyncCallback#onSuccess} on this callback once you have
+   *          obtained the result. If any failure occurs call
+   *          {@link AsyncCallback#onFailure}.
+   * @param request The instance of
    *          {@link com.gwtplatform.dispatch.client.DispatchRequest
-   *          DispatchRequest} that will been returned to the calling code that
-   *          requested the action be executed. It is possible that the calling
-   *          code may cancel the request, so after returning from asynchronous
-   *          calls, confirm that {@link ClientDispatchRequest#isCancelled()} is
-   *          still <code>false</code>. Also, if you get an instance of
+   *          DispatchRequest} that will be returned to the calling code that
+   *          requested the action be executed. If you get an instance of
    *          {@link com.google.gwt.http.client.Request Request} as a result of
    *          network communications, call
    *          {@link ClientDispatchRequest#setRequest()} so that the calling
    *          code has the ability to cancel the http request.
-   * @param dispatch A callback that provides a way to send the action (possibly
-   *          modified) to the server over gwt-rpc. If you want to either modify
-   *          or process the result, create a new <code>AsyncCallback</code>
-   *          object, otherwise just pass in <code>resultCallback</code>.
+   * @param executeCommand Call {@link ExecuteCommand#execute(A, AsyncCallback)}
+   *          on this object to send the action over to the server via gwt-rpc.
+   *          As a parameter you can pass {@code resultCallback} or your custom
+   *          {@link AsyncCallback} if you want to process the result.
    */
   void execute(A action, AsyncCallback<R> resultCallback,
-      ClientDispatchRequest request, AsyncExecute<A, R> dispatch);
+      ClientDispatchRequest request, ExecuteCommand<A, R> executeCommand);
 
   /**
    * @return The type of {@link Action} supported by this handler.
@@ -86,10 +164,18 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
   /**
    * Undoes the specified action.
    * 
-   * @param action The action to undo.
-   * @param result The result to undo.
-   * @param callback A callback that can be both used to indicate that the undo
-   *          is complete, or return any exceptions that are caught.
+   * If the handler makes asynchronous calls, it is recommended that you confirm
+   * that this request has not been cancelled after returning by calling
+   * {@link ClientDispatchRequest#isCancelled()} against the {@link request}
+   * parameter.
+   * 
+   * @param action The {@link Action} to undo.
+   * @param result The {@link Result} to undo.
+   * @param callback The callback to use to indicate when the action has been
+   *          undone. Unless the request is cancelled, you must invoke
+   *          {@link AsyncCallback#onSuccess} on this callback when you have
+   *          successfully undone the action. If any failure occurs call
+   *          {@link AsyncCallback#onFailure}.
    * @param request An instance of
    *          {@link com.gwtplatform.dispatch.client.DispatchRequest
    *          DispatchRequest} that will been returned to the calling code that
@@ -101,13 +187,13 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
    *          network communications, call
    *          {@link ClientDispatchRequest#setRequest()} so that the calling
    *          code has the ability to cancel the http request.
-   * @param dispatch A callback that provides a way to send the action (possibly
-   *          modified) to the server over gwt-rpc. If you want to perform
-   *          additional processing after the server has returned, create a new
-   *          <code>AsyncCallback</code> object, otherwise just pass in
-   *          <code>callback</code>.
+   * @param undoCommand Call {@link UndoCommand#undo(A, R, AsyncCallback)} on
+   *          this object to send the action over to the server via gwt-rpc. As
+   *          a parameter you can pass {@code callback} or your custom
+   *          {@link AsyncCallback} if you want to perform any processing
+   *          following the undo.
    */
   void undo(A action, R result, AsyncCallback<Void> callback,
-      ClientDispatchRequest request, AsyncUndo<A, R> dispatch);
+      ClientDispatchRequest request, UndoCommand<A, R> undoCommand);
 
 }

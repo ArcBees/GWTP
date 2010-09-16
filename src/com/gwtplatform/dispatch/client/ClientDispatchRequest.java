@@ -20,10 +20,11 @@ import com.google.gwt.http.client.Request;
 
 /**
  * An implementation of {@link DispatchRequest} that is used with
- * {@link ClientActionHandler}s. Initially it does not contain an http
- * {@link com.google.gwt.http.client.Request Request}, but then when a
- * {@link com.google.gwt.http.client.Request Request} is established, the
- * request can be populated by calling {@link #setRequest(Request)}.
+ * {@link ClientActionHandler}s. A {@link ClientDispatchRequest} will be return
+ * by {@link DispatchAsync) to the code that requested the command be executed.
+ * <p/> Initially it does not contain an http {@link Request} , but then when an
+ * http {@link Request} is established, the request should be populated by
+ * calling {@link #setRequest(Request)}.
  * 
  * @author Brendan Doherty
  */
@@ -37,6 +38,14 @@ public class ClientDispatchRequest implements DispatchRequest {
     this.pending = true;
   }
 
+  /**
+   * Populates the {@link ClientDispatchRequest} object with a {@link Request}.
+   * </p> If the code that requested the command be executed chooses to cancel
+   * the {@link DispatchRequest} and the {@link Request} that has been passed is
+   * still pending, it will be cancelled.
+   * 
+   * @param request The {@link Request} object.
+   */
   public void setRequest(Request request) {
     if (this.request != null) {
       throw new RuntimeException("Request can only be set once.");
@@ -47,10 +56,19 @@ public class ClientDispatchRequest implements DispatchRequest {
     }
   }
 
+  /**
+   * Causes subsequent calls to {@link #isPending()} return false;
+   */
   void setCompleted() {
     pending = false;
   }
 
+  /**
+   * Checks to see if the code that requested the command be executed has chosen
+   * to cancel this request.
+   * 
+   * @return Has the request has been cancelled.
+   */
   public boolean isCancelled() {
     return cancelled;
   }

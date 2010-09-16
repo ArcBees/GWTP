@@ -21,8 +21,8 @@ import com.google.gwt.http.client.Request;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-import com.gwtplatform.dispatch.client.actionhandler.AsyncExecute;
-import com.gwtplatform.dispatch.client.actionhandler.AsyncUndo;
+import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
+import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.Action;
@@ -66,9 +66,22 @@ public class DefaultDispatchAsync implements DispatchAsync {
     final String securityCookie = securityCookieAccessor.getCookieContent();
 
     final ClientActionHandler<A, R> clientActionHandler = registry.find(action.getClass());
+
     if (clientActionHandler != null) {
       final ClientDispatchRequest request = new ClientDispatchRequest();
-      clientActionHandler.execute(action, callback, request, new AsyncExecute<A, R>() {
+      AsyncCallback<R> resultCallback = new AsyncCallback<R>() {
+        @Override
+        public void onSuccess(R result) {
+          request.setCompleted();
+          callback.onSuccess(result);
+        }
+        @Override
+        public void onFailure(Throwable caught) {
+          request.setCompleted();
+          callback.onFailure(caught);
+        }
+      };
+      clientActionHandler.execute(action, resultCallback, request, new ExecuteCommand<A, R>() {
 
         @Override
         public void execute(A action, AsyncCallback<R> resultCallback) {
@@ -118,17 +131,30 @@ public class DefaultDispatchAsync implements DispatchAsync {
     final ClientActionHandler<A, R> clientActionHandler = registry.find(action.getClass());
     if (clientActionHandler != null) {
       final ClientDispatchRequest request = new ClientDispatchRequest();
-      clientActionHandler.undo(action, result, callback, request, new AsyncUndo<A, R>() {
-
+      AsyncCallback<Void> doneCallback = new AsyncCallback<Void>() {
         @Override
-        public void undo(A action, R result, AsyncCallback<Void> callback) {
-          if (!request.isCancelled()) {
-            request.setRequest(serviceUndo(securityCookie, action, result,
-                callback));
-          }
+        public void onSuccess(Void v) {
+          request.setCompleted();
+          callback.onSuccess(v);
         }
+        @Override
+        public void onFailure(Throwable caught) {
+          request.setCompleted();
+          callback.onFailure(caught);
+        }
+      };
+      clientActionHandler.undo(action, result, doneCallback, request,
+          new UndoCommand<A, R>() {
 
-      });
+            @Override
+            public void undo(A action, R result, AsyncCallback<Void> callback) {
+              if (!request.isCancelled()) {
+                request.setRequest(serviceUndo(securityCookie, action, result,
+                    callback));
+              }
+            }
+
+          });
       return request;
 
     } else {
