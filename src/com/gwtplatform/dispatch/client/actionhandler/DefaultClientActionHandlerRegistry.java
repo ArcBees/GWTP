@@ -17,43 +17,122 @@
 package com.gwtplatform.dispatch.client.actionhandler;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import com.google.gwt.inject.client.AsyncProvider;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Provider;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.mvp.client.IndirectProvider;
 
 /**
  * The default implementation that {@link ClientActionHandlerRegistry} that if
- * bound will not any client-side action handlers. </p> To register client-side
- * action handlers, extend this class and pass one or more handlers in the
- * constructor.
+ * bound will not load any client-side action handlers. </p> To register
+ * client-side action handlers, extend this class and call {@link #register()}
+ * in the constructor.
+ * 
+ * <h3><u>Example</u></h3>
+ * 
+ * <pre>
+ * <code>
+ * public class MyActionHandlerRegistry extends
+ *     DefaultClientActionHandlerRegistry {
+ * 
+ *   {@literal}@Inject
+ *   public ClientActionHandlerRegistry(
+ *       final RetrieveFooClientActionHandler handler,
+ *       final Provider&lt;ListFooClientActionHandler&gt; provider,
+ *       final AsyncProvider&lt;UpdateFooClientActionHandler&gt; asyncProvider) {
+ * 
+ *     register(RetrieveFooClientAction.class, handler);
+ *     register(ListFooClientAction.class, provider);
+ *     register(UpdateFooClientAction.class, asyncProvider);
+ * }
+ * </code>
+ * </pre>
+ * 
  * 
  * @author Brendan Doherty
  */
 public class DefaultClientActionHandlerRegistry implements
     ClientActionHandlerRegistry {
 
-  private HashMap<Class<? extends Action<?>>, ClientActionHandler<?, ?>> clientActionHandlers;
+  private Map<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>> clientActionHandlers;
 
-  DefaultClientActionHandlerRegistry() {
+  /**
+   * Register a instance of a client-side action handler.
+   * 
+   * @param handler The {@link ClientActionHandler};
+   */
+  protected void register(final ClientActionHandler<?, ?> handler) {
+
+    register(handler.getActionType(),
+        new IndirectProvider<ClientActionHandler<?, ?>>() {
+          @Override
+          public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+            callback.onSuccess(handler);
+          }
+        });
   }
 
-  protected DefaultClientActionHandlerRegistry(
-      ClientActionHandler<?, ?>... handlers) {
-    clientActionHandlers = new HashMap<Class<? extends Action<?>>, ClientActionHandler<?, ?>>();
+  /**
+   * Register a {@link Provider} of a client-side action handler.
+   * 
+   * @param handlerProvider The {@Provider}.
+   */
+  protected void register(Class<? extends Action<?>> actionType,
+      final Provider<? extends ClientActionHandler<?, ?>> handlerProvider) {
 
-    for (ClientActionHandler<?, ?> handler : handlers) {
-      clientActionHandlers.put(handler.getActionType(), handler);
+    register(actionType, new IndirectProvider<ClientActionHandler<?, ?>>() {
+      @Override
+      public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+        callback.onSuccess(handlerProvider.get());
+      }
+    });
+  }
+
+  /**
+   * Register an {@link AsyncProvider} of a client-side action handler.
+   * 
+   * @param handlerProvider The {@AsyncProvider}.
+   */
+  protected void register(Class<? extends Action<?>> actionType,
+      final AsyncProvider<? extends ClientActionHandler<?, ?>> handlerProvider) {
+
+    register(actionType, new IndirectProvider<ClientActionHandler<?, ?>>() {
+      @SuppressWarnings("unchecked")
+      @Override
+      public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+
+        ((AsyncProvider<ClientActionHandler<?, ?>>) handlerProvider).get(callback);
+      }
+    });
+  }
+
+  /**
+   * Register an {@link IndirectProvider} of a client-side action handler.
+   * 
+   * @param handlerProvider The {@IndirectProvider}.
+   */
+  protected void register(Class<? extends Action<?>> actionType,
+      IndirectProvider<ClientActionHandler<?, ?>> handlerProvider) {
+
+    if (clientActionHandlers == null) {
+      clientActionHandlers = new HashMap<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>>();
     }
+
+    clientActionHandlers.put(actionType, handlerProvider);
   }
 
   @SuppressWarnings("unchecked")
-  public <A extends Action<R>, R extends Result> ClientActionHandler<A, R> find(
+  public <A extends Action<R>, R extends Result> IndirectProvider<ClientActionHandler<?, ?>> find(
       Class<A> actionClass) {
 
     if (clientActionHandlers == null) {
       return null;
     } else {
-      return (ClientActionHandler<A, R>) clientActionHandlers.get(actionClass);
+      return clientActionHandlers.get(actionClass);
     }
   }
 }
