@@ -21,6 +21,7 @@ import com.google.gwt.http.client.Request;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
@@ -76,6 +77,14 @@ public class DefaultDispatchAsync implements DispatchAsync {
         @SuppressWarnings("unchecked")
         @Override
         public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
+
+          if (clientActionHandler.getActionType() != action.getClass()) {
+            request.setCompleted();
+            callback.onFailure(new ClientActionHandlerMismatchException(
+                action.getClass(), clientActionHandler.getActionType()));
+            return;
+          }
+
           AsyncCallback<R> resultCallback = new AsyncCallback<R>() {
             @Override
             public void onSuccess(R result) {
@@ -155,6 +164,13 @@ public class DefaultDispatchAsync implements DispatchAsync {
         @SuppressWarnings("unchecked")
         @Override
         public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
+
+          if (clientActionHandler.getActionType() != action.getClass()) {
+            request.setCompleted();
+            callback.onFailure(new ClientActionHandlerMismatchException(
+                action.getClass(), clientActionHandler.getActionType()));
+            return;
+          }
 
           AsyncCallback<Void> doneCallback = new AsyncCallback<Void>() {
             @Override
