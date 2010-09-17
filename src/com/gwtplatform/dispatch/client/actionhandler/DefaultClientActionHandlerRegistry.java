@@ -45,7 +45,7 @@ import com.gwtplatform.mvp.client.IndirectProvider;
  *       final Provider&lt;ListFooClientActionHandler&gt; provider,
  *       final AsyncProvider&lt;UpdateFooClientActionHandler&gt; asyncProvider) {
  * 
- *     register(RetrieveFooClientAction.class, handler);
+ *     register(handler);
  *     register(ListFooClientAction.class, provider);
  *     register(UpdateFooClientAction.class, asyncProvider);
  * }
