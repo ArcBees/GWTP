@@ -34,7 +34,7 @@ public class ClientDispatchRequest implements DispatchRequest {
   private boolean pending;
   private boolean cancelled;
 
-  ClientDispatchRequest() {
+  public ClientDispatchRequest() {
     this.pending = true;
   }
 

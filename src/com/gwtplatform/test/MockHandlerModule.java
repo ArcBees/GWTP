@@ -17,7 +17,10 @@
 package com.gwtplatform.test;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.internal.UniqueAnnotations;
 
+import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
@@ -28,25 +31,38 @@ import com.gwtplatform.dispatch.shared.Result;
  * 
  * Your injector must also have an class that subclasses {@link HandlerModule}
  * to bind Actions to ActionHandlers and ActionValidators.
- * 
- * You should subclass this module to register mock handlers in the
- * configureMockHandlers() method.
- * 
+ * <p/>
+ * You should subclass this module and use the {@link #configureMockHandlers())}
+ * method to:
+ * <ul>
+ * <li>register mock server-side action handlers with
+ * {@link #bindMockActionHandler()}.</li>
+ * <li>register mock client-side action handlers with
+ * {@link #bindMockClientActionHandler()}.</li>
+ * </ul>
+ *
+ * <h3>Unit Testing Example</h3>
  * <pre>
- *  // create mock handler
+ *  // create mock handlers
  *  CreateFooActionHandler mockCreateFooActionHandler =
  *       mock(CreateFooActionHandler.class);
  * 
+ *  GeocodeAddressClientActionHandler geocodeAddressClientActionHandler =
+ *       mock(GeocodeAddressClientActionHandler.class);
+ *
  *  // create injector
  *  Injector injector =
  *      Guice.createInjector(new MyHandlerModule(),
  *          new MockHandlerModule() {
  *            {@literal}@Override
  *            protected void configureMockHandlers() {
- *              bindMockHandler(
+ *              bindMockActionHandler(
  *                  CreateFooActionHandler.class,
  *                  mockCreateFooActionHandler);
  *              }
+ *              bindMockClientActionHandler(
+ *                  GeocodeAddressAction.class,
+ *                  geocodeAddressClientActionHandler);
  *            });
  *            
  *  // get dispatcher
@@ -62,11 +78,51 @@ import com.gwtplatform.dispatch.shared.Result;
  *        eq(new CreateFooAction("Bar")),
  *          any(ExecutionContext.class))).thenReturn(result);
  *            
+ *  // configuring mockito to return result for clent action handler
+ *  // is a bit more complex
+ *  final GeocodeAddressResult geocodeAddressResult = new GeocodeAddressResult(...);
+ *  doAnswer(new Answer<Object>() {
+ *    @SuppressWarnings("unchecked")
+ *    public Object answer(InvocationOnMock invocation) {
+ *      AsyncCallback<GeocodeAddressResult> callback 
+ *          = (AsyncCallback<GeocodeAddressResult>) invocation.getArguments()[1];
+ *      callback.onSuccess(new GeocodeAddressResult(geocodeAddressResult));
+ *      return null;
+ *    }
+ *  }).when(geocodeAddressClientActionHandler)
+ *       .execute(
+ *           eq(new GeocodeAddressAction("2 Google Way, New Zealand",
+ *               "nz")), any(AsyncCallback.class),
+ *           any(ClientDispatchRequest.class), any(ExecuteCommand.class));
+ * 
  * </pre>
  * 
  * @author Brendan Doherty
  */
 public abstract class MockHandlerModule extends AbstractModule {
+
+  private static class MockClientActionHandlerMapImpl<A extends Action<R>, R extends Result>
+      implements MockClientActionHandlerMap {
+
+    private final Class<A> actionClass;
+    private final ClientActionHandler<A, R> clientActionHandler;
+
+    public MockClientActionHandlerMapImpl(final Class<A> actionClass,
+        final ClientActionHandler<A, R> clientActionHandler) {
+      this.actionClass = actionClass;
+      this.clientActionHandler = clientActionHandler;
+    }
+
+    @Override
+    public Class<A> getActionClass() {
+      return actionClass;
+    }
+
+    @Override
+    public ClientActionHandler<A, R> getClientActionHandler() {
+      return clientActionHandler;
+    }
+  }
 
   @Override
   protected void configure() {
@@ -78,8 +134,15 @@ public abstract class MockHandlerModule extends AbstractModule {
 
   protected abstract void configureMockHandlers();
 
-  protected <A extends Action<R>, R extends Result, H extends AbstractActionHandler<A, R>> void bindMockHandler(
+  protected <A extends Action<R>, R extends Result, H extends AbstractActionHandler<A, R>> void bindMockActionHandler(
       Class<H> handler, H mockHandler) {
     bind(handler).toProvider(new MockProvider<H>(mockHandler));
+  }
+
+  protected <A extends Action<R>, R extends Result, H extends AbstractClientActionHandler<A, R>> void bindMockClientActionHandler(
+      Class<A> actionClass, H mockHandler) {
+    bind(MockClientActionHandlerMap.class).annotatedWith(
+        UniqueAnnotations.create()).toInstance(
+        new MockClientActionHandlerMapImpl<A, R>(actionClass, mockHandler));
   }
 }
