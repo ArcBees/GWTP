@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.shared.Result;
 
 /**
  * The asynchronous client-side dispatcher service. The server-side
- * implementation is {@link com.gwtplatform.dispatch.server.DispatchServiceImpl}
+ * implementation is {@link com.gwtplatform.dispatch.server.guice.DispatchServiceImpl}
  * .
  * <p />
  * This class is closely related to {@link DispatchAsync}, in theory the latter
@@ -33,10 +33,10 @@ import com.gwtplatform.dispatch.shared.Result;
  * 
  * @see com.gwtplatform.dispatch.client.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
- * @see com.gwtplatform.dispatch.server.DispatchImpl
+ * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.client.DispatchService
  * @see com.gwtplatform.dispatch.client.DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
  * 
  * @author Philippe Beaudoin
  */
