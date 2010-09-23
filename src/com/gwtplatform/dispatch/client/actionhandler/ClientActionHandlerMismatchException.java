@@ -30,16 +30,19 @@ import com.gwtplatform.dispatch.shared.Action;
  */
 public class ClientActionHandlerMismatchException extends RuntimeException {
 
-  private final Class<? extends Action> requestedActionType;
+  private static final long serialVersionUID = -2232006507185873458L;
+  
+  private final Class<? extends Action<?>> requestedActionType;
   private final Class<?> supportedActionType;
 
+  @SuppressWarnings("unchecked")
   public ClientActionHandlerMismatchException(
       Class<? extends Action> requestedActionType, Class<?> supportedActionType) {
-    this.requestedActionType = requestedActionType;
+    this.requestedActionType = (Class<? extends Action<?>>) requestedActionType;
     this.supportedActionType = supportedActionType;
   }
 
-  public Class<? extends Action> getRequestedActionType() {
+  public Class<? extends Action<?>> getRequestedActionType() {
     return this.requestedActionType;
   }
 
