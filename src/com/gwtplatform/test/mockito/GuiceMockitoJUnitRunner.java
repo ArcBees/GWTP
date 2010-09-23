@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.testing;
+package com.gwtplatform.test.mockito;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Binding;
@@ -23,6 +23,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Scope;
 import com.google.inject.spi.DefaultBindingScopingVisitor;
+
 
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
