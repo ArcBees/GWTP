@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.shared.ServiceException;
 /**
  * The base class of the synchronous dispatcher service with an arbitrary action
  * type. The server-side implementation is
- * {@link com.gwtplatform.dispatch.server.DispatchImpl} and the async
+ * {@link com.gwtplatform.dispatch.server.guice.DispatchImpl} and the async
  * client-side version is {@link DispatchAsync}.
  * <p />
  * This class is closely related to
