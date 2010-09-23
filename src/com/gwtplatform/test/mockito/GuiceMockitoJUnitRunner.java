@@ -49,6 +49,7 @@ import java.lang.reflect.InvocationTargetException;
  * > http://cowwoc.blogspot.com/2008/10/integrating-google-guice-into-junit4.
  * html</a>
  * <p />
+ * Depends on Mockito.
  * 
  * @author Philippe Beaudoin
  */
