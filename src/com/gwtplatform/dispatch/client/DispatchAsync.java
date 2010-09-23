@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.shared.Result;
 /**
  * The asynchronous client-side dispatcher service with an arbitrary action
  * type. The server-side implementation is
- * {@link com.gwtplatform.dispatch.server.DispatchImpl}.
+ * {@link com.gwtplatform.dispatch.server.guice.DispatchImpl}.
  * <p />
  * This class is closely related to {@link DispatchServiceAsync}. In theory this
  * class wouldn't be needed, but we use it to workaround a GWT limitation. In
@@ -33,10 +33,10 @@ import com.gwtplatform.dispatch.shared.Result;
  * 
  * @see com.gwtplatform.dispatch.client.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
- * @see com.gwtplatform.dispatch.server.DispatchImpl
+ * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.client.DispatchService
  * @see com.gwtplatform.dispatch.client.DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
  * 
  * @author David Peterson
  * @author Philippe Beaudoin
