@@ -25,10 +25,10 @@ import com.gwtplatform.mvp.client.DefaultEventBus;
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.testing.GuiceMockitoJUnitRunner;
-import com.gwtplatform.testing.MockProvider;
-import com.gwtplatform.testing.TestModule;
-import com.gwtplatform.testing.TestScope;
+import com.gwtplatform.test.MockProvider;
+import com.gwtplatform.test.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.test.mockito.TestModule;
+import com.gwtplatform.test.mockito.TestScope;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

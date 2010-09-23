@@ -14,20 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.testing;
+package com.gwtplatform.test.mockito;
 
 import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.Scope;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Container of various scopes useful in test cases:
- * <ul>
- * <li>{@link #SINGLETON}.</li>
- * </ul>
+ * Container of the {@link #SINGLETON} and {@link #EAGER_SINGLETON} scopes for 
+ * test cases running with the {@link GuiceMockitoJUnitRunner}. Depends on mockito.
+ * <p />
+ * Depends on Mockito.
  * 
  * @author Philippe Beaudoin
  */
