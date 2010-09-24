@@ -122,7 +122,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * @param request The {@link PlaceRequest} to fire.
    */
   private void doRevealPlace(PlaceRequest request) {
-    PlaceRequest originalRequest = getCurrentPlaceRequest();
     PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent(
         request);
     fireEvent(requestEvent);
@@ -132,12 +131,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     } else if (!requestEvent.isAuthorized()) {
       unlock();
       illegalAccess(tokenFormatter.toHistoryToken(placeHierarchy));
-    } else {
-      if (originalRequest == getCurrentPlaceRequest()) {
-        // User did not manually update place request while preparing from place request, update it here.
-        updateHistory(request);
-      }
-      NavigationEvent.fire(this, request);
     }
   }
 

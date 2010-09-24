@@ -32,6 +32,8 @@ import com.gwtplatform.test.mockito.TestModule;
 import com.gwtplatform.test.mockito.TestScope;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -228,6 +230,8 @@ public class PlaceManagerImplTest {
   Provider<DummyPresenterRedirect> presenterRedirectProvider;
   @Inject
   Provider<DummyProxyPlaceRedirect> proxyPlaceRedirectProvider;
+  @Inject
+  Provider<GwtWindowMethods> gwtWindowMethodsProvider;
   
   @Test
   public void placeManagerRevealPlaceStandard() {
@@ -235,6 +239,7 @@ public class PlaceManagerImplTest {
     DeferredCommandManager deferredCommandManager = deferredCommandManagerProvider.get();
     PlaceManager placeManager = placeManagerProvider.get();
     DummyPresenterBasic presenter = presenterBasicProvider.get();
+    GwtWindowMethods gwtWindowMethods = gwtWindowMethodsProvider.get();
     
     // When
     placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic").with("dummyParam", "dummyValue"));
@@ -253,6 +258,8 @@ public class PlaceManagerImplTest {
     
     verify(presenter).prepareFromRequest(placeRequest);
     verify(presenter).forceReveal();
+
+    verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
   }
 
   @Test
@@ -286,7 +293,6 @@ public class PlaceManagerImplTest {
     verify(otherPresenter).forceReveal();
   }
   
-
   @Test
   public void placeManagerUserUpdateHistoryWhenRevealPlace() {
     // Given
