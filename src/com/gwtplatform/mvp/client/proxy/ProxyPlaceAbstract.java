@@ -218,7 +218,13 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
         addDeferredCommand(new Command() {
           @Override
           public void execute() {
+            PlaceRequest originalRequest = placeManager.getCurrentPlaceRequest();
             presenter.prepareFromRequest(request);
+            if (originalRequest == placeManager.getCurrentPlaceRequest()) {
+              // User did not manually update place request in prepareFromRequest, update it here.
+              placeManager.updateHistory(request);
+            }
+            NavigationEvent.fire(placeManager, request);
             if (!presenter.useManualReveal()) {
               // Automatic reveal
               manualReveal(presenter);
