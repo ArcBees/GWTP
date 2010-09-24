@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.junit.GWTMockUtilities;
+import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -72,9 +73,9 @@ public class PlaceManagerImpl2Test {
   Provider<GwtWindowMethods> gwtWindowMethodsProvider;
   
   @Test
-  public void placeManagerRevealPlaceStandard() {
+  public void placeManagerUserCallUpdateHistoryWhenRevealingPlace() {
     // Given
-    DeferredCommandManager deferredCommandManager = deferredCommandManagerProvider.get();
+    final DeferredCommandManager deferredCommandManager = deferredCommandManagerProvider.get();
     final PlaceManager placeManager = placeManagerProvider.get();
     EventBus eventBus = eventBusProvider.get();
     GwtWindowMethods gwtWindowMethods = gwtWindowMethodsProvider.get();
@@ -82,10 +83,14 @@ public class PlaceManagerImpl2Test {
       @Override
       public Void answer(InvocationOnMock invocation) throws Throwable {
         Object[] args = invocation.getArguments();
-        placeManager.updateHistory(new PlaceRequest("dummyNameToken").with("dummyParam", "dummyValue"));
+        deferredCommandManager.addCommand(new Command() {
+          @Override
+          public void execute() {
+            placeManager.updateHistory(new PlaceRequest("dummyNameToken").with("dummyParam", "dummyValue"));
+          } });
         ((PlaceRequestInternalEvent) args[1]).setHandled();
         return null;
-      }      
+      }
     }).when(eventBus).fireEvent(eq(placeManager), isA(PlaceRequestInternalEvent.class));
     
     // When
