@@ -217,6 +217,16 @@ public class PlaceManagerImplTest {
     }
   }
   
+  static class NavigationEventSpy implements NavigationHandler {
+    int navCount;
+    NavigationEvent lastEvent;
+    @Override
+    public void onNavigation(NavigationEvent navigationEvent) {
+      navCount++;
+      lastEvent = navigationEvent;
+    };
+  }
+  
   // Providers to use Guice injection
   @Inject
   Provider<DeferredCommandManager> deferredCommandManagerProvider;
@@ -232,6 +242,8 @@ public class PlaceManagerImplTest {
   Provider<DummyProxyPlaceRedirect> proxyPlaceRedirectProvider;
   @Inject
   Provider<GwtWindowMethods> gwtWindowMethodsProvider;
+  @Inject
+  Provider<EventBus> eventBusProvider;
   
   @Test
   public void placeManagerRevealPlaceStandard() {
@@ -240,6 +252,8 @@ public class PlaceManagerImplTest {
     PlaceManager placeManager = placeManagerProvider.get();
     DummyPresenterBasic presenter = presenterBasicProvider.get();
     GwtWindowMethods gwtWindowMethods = gwtWindowMethodsProvider.get();
+    NavigationEventSpy navigationHandler = new NavigationEventSpy();
+    eventBusProvider.get().addHandler(NavigationEvent.getType(), navigationHandler);
     
     // When
     placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic").with("dummyParam", "dummyValue"));
@@ -260,6 +274,12 @@ public class PlaceManagerImplTest {
     verify(presenter).forceReveal();
 
     verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+
+    assertEquals(1, navigationHandler.navCount);
+    placeRequest = navigationHandler.lastEvent.getRequest();
+    assertEquals("dummyNameTokenBasic", placeRequest.getNameToken());
+    assertEquals(1, placeRequest.getParameterNames().size());
+    assertEquals("dummyValue", placeRequest.getParameter("dummyParam", null));  
   }
 
   @Test
