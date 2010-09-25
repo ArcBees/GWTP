@@ -5,6 +5,8 @@
   
   <property environment="env"/>
   <property name="in.src.folder" location="src" />
+  <property name="in.src.htmlunitdependant" value="com/gwtplatform/crawler/**" />
+  <property name="in.src.mockitodependant" value="com/gwtplatform/test/mockito/**" />
   <property name="in.test.folder" location="test" />
   <property name="out.test.src.folder" location=".apt_generated" />
   <property name="out.classes.folder" location="war/WEB-INF/classes" />
@@ -16,14 +18,13 @@
   <property name="gwt.folder" location="${extlib.folder}/gwt" />
   <property name="gae.folder" location="${extlib.folder}/gae" />
   <property name="junit.folder" location="${extlib.folder}/junit" />
+  <property name="htmlunit.folder" location="${lib.folder}" />
   <property name="mockito.folder" location="${lib.folder}" />
   <property name="manifest.file" value="MANIFEST.MF"/>
   <property name="all.gwtp.jar.files" value="**/gwtp*.jar"/>
   <condition property="version-suffix" value="-b${env.BUILD_NUMBER}" else="-bLOCAL">
     <isset property="env.BUILD_NUMBER"/>
-  </condition>    
-  <property name="gwtp.jar.file" value="gwtp-${version.num}-SNAPSHOT.jar"/>
-  <property name="gwtp.release.jar.file" value="gwtp-${version.num}.jar"/>
+  </condition>
   <tstamp>
     <format property="today.timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
   </tstamp>  
@@ -41,6 +42,17 @@
     </fileset>
   </path>
 
+	<path id="project.htmlunit.class.path">
+    <fileset dir="${htmlunit.folder}" includes="crawl_htmlunit*.jar"/>
+    <path refid="project.class.path" />
+  </path>
+
+  <path id="project.mockito.class.path">
+    <path refid="project.class.path" />
+    <fileset dir="${junit.folder}" includes="junit.jar" />
+    <fileset dir="${mockito.folder}" includes="mockito*.jar"/>
+  </path>
+	
   <path id="tests.class.path">
     <path refid="project.class.path" />
     <pathelement location="." />
@@ -51,9 +63,28 @@
     <fileset dir="${mockito.folder}" includes="mockito*.jar"/>
   </path>
 
-  <target name="javac" description="Compile java source">
+	<path id="jar.files">
+    <fileset dir="${out.classes.folder}" includes="**/*.class" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
+    <fileset dir="${in.src.folder}" includes="**/*.java" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
+    <fileset dir="${in.src.folder}" includes="**/*.xml" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
+    <fileset dir="." includes="META-INF/**" />
+	</path>
+
+  <path id="jar.files.htmlunit">
+    <fileset dir="${out.classes.folder}" includes="${in.src.htmlunitdependant}/*.class" />
+    <fileset dir="${in.src.folder}" includes="${in.src.htmlunitdependant}/*.java" />
+    <fileset dir="${in.src.folder}" includes="${in.src.htmlunitdependant}/*.xml" />
+  </path>
+
+  <path id="jar.files.mockito">
+    <fileset dir="${out.classes.folder}" includes="${in.src.mockitodependant}/*.class" />
+    <fileset dir="${in.src.folder}" includes="${in.src.mockitodependant}/*.java" />
+    <fileset dir="${in.src.folder}" includes="${in.src.mockitodependant}/*.xml" />
+  </path>
+    	
+  <target name="javac" description="Compile java source (without external dependencies)">
     <mkdir dir="${out.classes.folder}" />
-    <javac srcdir="${in.src.folder}" includes="**" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
+    <javac srcdir="${in.src.folder}" includes="**" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
       nowarn="true" debug="true" debuglevel="lines,vars,source">
       <!-- Do not use any annotation processor -->
       <compilerarg value="-proc:none" />
@@ -64,8 +95,36 @@
     </copy>
     <delete dir="${in.src.folder}" includes="**/*.class" failonerror="false" />
   </target>
+  	
+  <target name="javac.htmlunit"  depends="javac" description="Compile java source for the HTMLUnit dependent code">
+    <mkdir dir="${out.classes.folder}" />
+    <javac srcdir="${in.src.folder}" includes="${in.src.htmlunitdependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
+      nowarn="true" debug="true" debuglevel="lines,vars,source">
+      <!-- Do not use any annotation processor -->
+      <compilerarg value="-proc:none" />
+      <classpath refid="project.htmlunit.class.path" />
+    </javac>
+    <copy todir="${out.classes.folder}">
+      <fileset dir="${in.src.folder}" includes="**/*.class" />
+    </copy>
+    <delete dir="${in.src.folder}" includes="**/*.class" failonerror="false" />
+  </target>
+	
+  <target name="javac.mockito" depends="javac" description="Compile java source for the mockito dependent code">
+    <mkdir dir="${out.classes.folder}" />
+    <javac srcdir="${in.src.folder}" includes="${in.src.mockitodependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
+      nowarn="true" debug="true" debuglevel="lines,vars,source">
+      <!-- Do not use any annotation processor -->
+      <compilerarg value="-proc:none" />
+      <classpath refid="project.mockito.class.path" />
+    </javac>
+    <copy todir="${out.classes.folder}">
+      <fileset dir="${in.src.folder}" includes="**/*.class" />
+    </copy>
+    <delete dir="${in.src.folder}" includes="**/*.class" failonerror="false" />
+  </target>
 
-  <target name="javac.tests" depends="javac" description="Compiles test code">
+  <target name="javac.tests" depends="javac,javac.mockito,javac.htmlunit" description="Compiles test code">
     <mkdir dir="${out.test.src.folder}" />  	
     <javac srcdir="${in.test.folder}" destdir="${in.test.folder}" includes="**" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
       <classpath refid="tests.class.path" />
@@ -119,36 +178,47 @@
     </fail>      
   </target>
 
-  <target name="jar" depends="javac" description="Package into a jar">
+  <target name="jar.manifest" description="Package into a jar">
     <manifest file="${manifest.file}">
       <attribute name="Built-By" value="teamcity.codebetter.com"/>
       <attribute name="Implementation-Version" value="${version.num}${version-suffix}"/> 
       <attribute name="Built-Date" value="${today.timestamp}"/>        
     </manifest>
-    
-    <jar jarfile="${gwtp.jar.file}" manifest="${manifest.file}">
-      <fileset dir="${out.classes.folder}" includes="**/*.class" />
-      <fileset dir="${in.src.folder}" includes="**/*.java" />
-      <fileset dir="${in.src.folder}" includes="**/*.xml" />
-      <fileset dir="." includes="META-INF/**" />
-    </jar>
   </target>
 	
-  <target name="release" depends="javac" description="Build the jar for a release">
+  <target name="jar.manifest.release" description="Package into a jar">
     <manifest file="${manifest.file}">
       <attribute name="Built-By" value="teamcity.codebetter.com"/>
       <attribute name="Implementation-Version" value="${version.num}"/> 
-      <attribute name="Built-Date" value="${today.timestamp}"/>
+      <attribute name="Built-Date" value="${today.timestamp}"/>        
     </manifest>
-    
-    <jar jarfile="${gwtp.release.jar.file}" manifest="${manifest.file}">
-      <fileset dir="${out.classes.folder}" includes="**/*.class" />
-      <fileset dir="${in.src.folder}" includes="**/*.java" />
-      <fileset dir="${in.src.folder}" includes="**/*.xml" />
-      <fileset dir="." includes="META-INF/**" />
+  </target>
+	
+  <target name="jar" depends="jar.manifest,javac,javac.htmlunit,javac.mockito" description="Package into a jar">
+    <jar jarfile="gwtp-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
+      <path refid="jar.files" />
+    </jar>
+    <jar jarfile="gwtp-htmlunit-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
+      <path refid="jar.files.htmlunit" />
+    </jar>
+    <jar jarfile="gwtp-mockito-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
+      <path refid="jar.files.mockito" />
+    </jar>
+  </target>
+		
+  <target name="release" depends="jar.manifest.release,javac,javac.htmlunit,javac.mockito" description="Build the jar for a release">
+    <jar jarfile="gwtp-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
+      <path refid="jar.files" />
+    </jar>
+    <jar jarfile="gwtp-htmlunit-${version.num}.jar" manifest="${manifest.file}">
+      <path refid="jar.files.htmlunit" />
+    </jar>
+    <jar jarfile="gwtp-mockito-${version.num}.jar" manifest="${manifest.file}">
+      <path refid="jar.files.mockito" />
     </jar>
   </target>
 
+	
   <target name="package" depends="clean" description="Package everything into a zip file.">
     <zip destfile="gwtp-${version.num}-SNAPSHOT.zip" basedir="." excludes="**/*.zip,**/.hg/**,**/.hg*" />
   </target>

@@ -20,7 +20,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import com.gwtplatform.testing.GuiceMockitoJUnitRunner;
+import com.gwtplatform.test.mockito.GuiceMockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

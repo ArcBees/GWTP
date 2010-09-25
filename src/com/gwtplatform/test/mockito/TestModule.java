@@ -14,14 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.testing;
+package com.gwtplatform.test.mockito;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.binder.ScopedBindingBuilder;
 
 /**
  * A guice {@link AbstractModule} with a bit of syntactic sugar to bind within
- * typical test scopes.
+ * typical test scopes. Depends on mockito.
+ * <p />
+ * Depends on Mockito.
  * 
  * @author Philippe Beaudoin
  */
