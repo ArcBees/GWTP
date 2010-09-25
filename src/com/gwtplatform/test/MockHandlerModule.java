@@ -134,6 +134,15 @@ public abstract class MockHandlerModule extends AbstractModule {
 
   protected abstract void configureMockHandlers();
 
+  /**
+   * Use bindMockActionHandler instead.
+   */
+  @Deprecated
+  protected <A extends Action<R>, R extends Result, H extends AbstractActionHandler<A, R>> void bindMockHandler(
+      Class<H> handler, H mockHandler) {
+    bindMockActionHandler(handler, mockHandler);
+  }
+
   protected <A extends Action<R>, R extends Result, H extends AbstractActionHandler<A, R>> void bindMockActionHandler(
       Class<H> handler, H mockHandler) {
     bind(handler).toProvider(new MockProvider<H>(mockHandler));

@@ -131,9 +131,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     } else if (!requestEvent.isAuthorized()) {
       unlock();
       illegalAccess(tokenFormatter.toHistoryToken(placeHierarchy));
-    } else {
-      updateHistory(request);
-      NavigationEvent.fire(this, request);
     }
   }
 
