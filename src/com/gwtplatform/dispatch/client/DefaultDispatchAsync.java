@@ -74,7 +74,6 @@ public class DefaultDispatchAsync implements DispatchAsync {
       final ClientDispatchRequest request = new ClientDispatchRequest();
       clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
 
-        @SuppressWarnings("unchecked")
         @Override
         public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
 
@@ -147,6 +146,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
         });
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public <A extends Action<R>, R extends Result> DispatchRequest undo(
       final A action, final R result, final AsyncCallback<Void> callback) {
@@ -161,7 +161,6 @@ public class DefaultDispatchAsync implements DispatchAsync {
       final ClientDispatchRequest request = new ClientDispatchRequest();
       clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
 
-        @SuppressWarnings("unchecked")
         @Override
         public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
 
