@@ -59,7 +59,7 @@ public class RootPresenter extends
   /**
    * {@link RootPresenter}'s view.
    */
-  public static final class RootView extends ViewImpl {
+  public static class RootView extends ViewImpl {
 
     private boolean usingRootLayoutPanel;
 
