@@ -34,7 +34,7 @@ import com.gwtplatform.dispatch.shared.Result;
 public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R extends Result> 
     extends AbstractClientActionHandler<A, R> {
 
-  protected final Cache cache;
+  private final Cache cache;
 
   public AbstractCachingClientActionHandler(Class<A> actionType, Cache cache) {
     super(actionType);
@@ -44,7 +44,7 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
   public void execute(final A action, final AsyncCallback<R> resultCallback, 
       final ClientDispatchRequest request, ExecuteCommand<A,R> executeCommand) {
     // Prefetch to see if result is cached
-    R prefetchResult = this.prefetch(action);
+    R prefetchResult = prefetch(action);
     if (prefetchResult != null) {
       // Return the cached result
       resultCallback.onSuccess(prefetchResult);
@@ -54,6 +54,8 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
 
         @Override
         public void onFailure(Throwable caught) {
+          // Call postfetch with null result
+          postfetch(action, null);
           resultCallback.onFailure(caught);
         }
 
@@ -75,5 +77,12 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
   public abstract R prefetch(A action);
   
   public abstract void postfetch(A action, R result);
+
+  /**
+   * @return the cache
+   */
+  public Cache getCache() {
+    return cache;
+  }
 
 }

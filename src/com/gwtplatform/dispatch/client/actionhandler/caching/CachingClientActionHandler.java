@@ -30,17 +30,22 @@ import com.gwtplatform.dispatch.shared.Result;
  * @param <A>
  * @param <R>
  */
-public class ActionCachingClientActionHandler<A extends Action<R>, R extends Result> extends
+public class CachingClientActionHandler<A extends Action<R>, R extends Result> extends
     AbstractCachingClientActionHandler<A, R> {
 
-  public ActionCachingClientActionHandler(Class<A> actionType, Cache cache) {
+  public CachingClientActionHandler(Class<A> actionType, Cache cache) {
     super(actionType, cache);
   }
 
   @Override
   public void postfetch(A action, R result) {
-    // Cache
-    super.cache.put(action, result);
+    // Check if null result
+    if (result == null) {
+      getCache().remove(action);
+    } else {
+      // Cache
+      getCache().put(action, result);
+    }
   }
 
   @SuppressWarnings("unchecked")
@@ -48,7 +53,7 @@ public class ActionCachingClientActionHandler<A extends Action<R>, R extends Res
   public R prefetch(A action) {
     try {
       // Check if Action available in Cache
-      Object value = super.cache.get(action);
+      Object value = super.getCache().get(action);
       if (value != null && value instanceof Result) {
         return (R) value;
       } else {
@@ -63,6 +68,10 @@ public class ActionCachingClientActionHandler<A extends Action<R>, R extends Res
   public void undo(A action, R result, AsyncCallback<Void> callback,
       ClientDispatchRequest request, UndoCommand<A, R> undoCommand) {
     // TODO Need to think about it
+    /* Need to change as per consensus on what's to be done
+    getCache().remove(action);
+    super.execute(action, callback, request, undoCommand);
+    */
   }
 
 }
