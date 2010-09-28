@@ -12,7 +12,6 @@ package com.gwtplatform.dispatch.server.spring;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.server.Dispatch;
@@ -21,7 +20,6 @@ import com.gwtplatform.dispatch.server.IRequestProvider;
 /**
  * @author Peter Simun
  */
-@Service
 public class DispatchServiceImpl extends AbstractDispatchServiceImpl {
 
 	private static final long serialVersionUID = 136176741488585959L;

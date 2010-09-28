@@ -8,13 +8,15 @@ import com.gwtplatform.dispatch.shared.action.TestResult;
 
 public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
 
+	public static final String MESSAGE = "This is test message!";
+
 	public TestActionHandler() {
 		super(TestAction.class);
 	}
 
 	@Override
 	public TestResult execute(TestAction action, ExecutionContext context) throws ActionException {
-		if (action.getTestMessage().equals("test")) {
+		if (action.getTestMessage().equals(MESSAGE)) {
 			return new TestResult(true);
 		}
 		return new TestResult(false);

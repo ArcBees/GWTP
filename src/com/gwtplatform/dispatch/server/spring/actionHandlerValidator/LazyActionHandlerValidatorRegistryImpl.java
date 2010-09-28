@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.actionHandler.ActionHandler;
 import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorClass;
@@ -17,7 +16,6 @@ import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
-@Component
 public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandlerValidatorRegistry, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;

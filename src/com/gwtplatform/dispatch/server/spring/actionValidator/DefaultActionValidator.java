@@ -9,8 +9,6 @@
 
 package com.gwtplatform.dispatch.server.spring.actionValidator;
 
-import org.springframework.stereotype.Component;
-
 import com.gwtplatform.dispatch.server.actionValidator.AbstractDefaultActionValidator;
 import com.gwtplatform.dispatch.server.actionValidator.ActionValidator;
 
@@ -20,5 +18,4 @@ import com.gwtplatform.dispatch.server.actionValidator.ActionValidator;
  * 
  * @author Peter Simun
  */
-@Component
 public class DefaultActionValidator extends AbstractDefaultActionValidator {}

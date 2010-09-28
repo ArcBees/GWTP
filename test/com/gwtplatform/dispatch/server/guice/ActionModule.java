@@ -1,12 +1,12 @@
 package com.gwtplatform.dispatch.server.guice;
 
-import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
+import com.gwtplatform.dispatch.shared.action.TestAction;
 
-public class ActionModule extends AbstractGinModule {
+public class ActionModule extends HandlerModule {
 
 	@Override
-	protected void configure() {
-		bind(TestActionHandler.class).asEagerSingleton();
+	protected void configureHandlers() {
+		bindHandler(TestAction.class, TestActionHandler.class);
 	}
 }
