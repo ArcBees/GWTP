@@ -19,6 +19,9 @@ public class DispatchModule {
 	@Autowired
 	private ApplicationContext context;
 
+	@Autowired
+	private HandlerModule handlerModule;
+
 	public DispatchModule() {
 		this(DispatchImpl.class, LazyActionHandlerValidatorRegistryImpl.class);
 	}
@@ -34,11 +37,13 @@ public class DispatchModule {
 
 	@Bean
 	public ActionHandlerValidatorRegistry getActionHandlerValidatorRegistry() {
+		handlerModule.configureHandlers();
+
 		ActionHandlerValidatorRegistry instance = SpringUtils.getOrCreate(context, lazyActionHandlerValidatorRegistryClass);
 
 		//TODO check this out
 		if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass)) {
-			ActionHandlerValidatorLinker.linkValidators(context, getActionHandlerValidatorRegistry());
+			ActionHandlerValidatorLinker.linkValidators(context, instance);
 		}
 
 		return instance;
@@ -48,8 +53,5 @@ public class DispatchModule {
 	public Dispatch getDispatch() {
 		Dispatch instance = SpringUtils.getOrCreate(context, dispatchClass);
 		return instance;
-	}
-
-	protected final void configure() {
 	}
 }

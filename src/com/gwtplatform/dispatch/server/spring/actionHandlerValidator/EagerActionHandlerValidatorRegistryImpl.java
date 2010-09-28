@@ -9,12 +9,9 @@
 
 package com.gwtplatform.dispatch.server.spring.actionHandlerValidator;
 
-import org.springframework.stereotype.Component;
-
 import com.gwtplatform.dispatch.server.actionHandlerValidator.AbstractEagerActionHandlerValidatorRegistryImpl;
 
 /**
  * @author Peter Simun
  */
-@Component
 public class EagerActionHandlerValidatorRegistryImpl extends AbstractEagerActionHandlerValidatorRegistryImpl {}
