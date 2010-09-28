@@ -1,8 +1,13 @@
 package com.gwtplatform.dispatch.server.spring.utils;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.DefaultBeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
 public class SpringUtils {
 
@@ -14,29 +19,27 @@ public class SpringUtils {
 		return instantiate(applicationContext, clazz);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <B> B instantiate(ApplicationContext applicationContext, Class<B> clazz) throws BeansException {
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(applicationContext);
-		return beanFactory.createBean(clazz);
+		return (B) beanFactory.createBean(clazz, AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
+	}
+
+	public static <B> void registerBean(ApplicationContext applicationContext, B instance) throws BeansException {
+		DefaultListableBeanFactory beanFactory = null;
+
+		if (applicationContext instanceof GenericApplicationContext) {
+			beanFactory = ((GenericApplicationContext) applicationContext).getDefaultListableBeanFactory();
+		} else {
+			beanFactory = new DefaultListableBeanFactory(applicationContext);
+		}
+		RootBeanDefinition bd = new RootBeanDefinition(instance.getClass(), AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
+		bd.setScope(BeanDefinition.SCOPE_SINGLETON);
+		beanFactory.registerSingleton(new DefaultBeanNameGenerator().generateBeanName(bd, beanFactory), instance);
 	}
 
 	public static <B> B getInstance(ApplicationContext applicationContext, Class<B> clazz) throws BeansException {
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(applicationContext);
 		return beanFactory.getBean(clazz);
 	}
-
-	//	@SuppressWarnings("unchecked")
-	//	public static <T, B> T getInstance(ApplicationContext applicationContext, Class<B> clazz) {
-	//
-	//		Map<String, B> beans = applicationContext.getBeansOfType(clazz);
-	//
-	//		if (beans == null || beans.size() == 0) {
-	//			throw new RuntimeException("No bean was found while instantiating bean class: " + clazz.getCanonicalName());
-	//		}
-	//
-	//		if (beans.size() == 1) {
-	//			return (T) beans.values().toArray()[0];
-	//		}
-	//
-	//		throw new RuntimeException("More than one bean was found (" + beans.size() + ") while instantiating bean class: " + clazz.getCanonicalName());
-	//	}
 }

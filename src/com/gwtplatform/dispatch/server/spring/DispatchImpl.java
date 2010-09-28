@@ -10,12 +10,10 @@
 package com.gwtplatform.dispatch.server.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.AbstractDispatchImpl;
 import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
 
-@Component
 public class DispatchImpl extends AbstractDispatchImpl {
 
 	@Autowired

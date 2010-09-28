@@ -23,8 +23,8 @@ public class ActionHandlerValidatorLinkerHelper {
 	}
 
 	/**
-	 * BingingDescriptor implementation for the Guice. This allows us to obtain bindings from guice injector/or from
-	 * Spring application context
+	 * BingingDescriptor implementation for the Guice/Spring. This allows us to obtain bindings from guice injector/or
+	 * from Spring application context
 	 * 
 	 * @author Peter Simun (simun@seges.sk)
 	 */
