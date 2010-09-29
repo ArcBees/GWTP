@@ -20,9 +20,10 @@ import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.TypeMirror;
@@ -36,19 +37,6 @@ import javax.lang.model.type.TypeMirror;
  * @author Stephen Haberman (concept) 
  */
 public class GenerationHelper implements Closeable {
-
-  /**
-   * Visibility levels of an element.
-   * @author Florian Sauter
-   */
-  public enum Visibility { 
-    PUBLIC, PROTECTED, PRIVATE, DEFAULT;
-    
-    @Override
-    public String toString() {
-      return this.name().toLowerCase();
-    };
-  };
   
   private PrintWriter writer;
   
@@ -66,8 +54,7 @@ public class GenerationHelper implements Closeable {
   }
   
   /**
-   * Generates a class header. The class name is provided by the reflection
-   * class. Pass null to skip the parent class.
+   * Generates a class header. Pass null to skip the parent class.
    * 
    * <p>
    * <b>Usage:</b>
@@ -93,7 +80,7 @@ public class GenerationHelper implements Closeable {
    */
   public void generateClassHeader(String className, String extendedClassName, String... interfaceNames) {
     println();
-    print("{0} class ", Visibility.PUBLIC);
+    print("{0} class ", Modifier.PUBLIC.toString());
     print(className);
     if (extendedClassName != null) {
       print(" extends " + extendedClassName);
@@ -106,145 +93,83 @@ public class GenerationHelper implements Closeable {
     println(" { ");
   }
   
-  public void generateConstructorsUsingFields(String simpleClassName, Collection<VariableElement> fieldElements, Collection<VariableElement> optionalFields) {
-    // constructor with all fields
-    generateConstructorUsingFields(simpleClassName, fieldElements, null);
-    
-    if (!optionalFields.isEmpty()) {
-      // constructor without optional fields
-      ArrayList<VariableElement> fields = new ArrayList<VariableElement>();
-      fields.addAll(fieldElements);
-      fields.removeAll(optionalFields);
-      generateConstructorUsingFields(simpleClassName, fields, optionalFields);
-    }
-  }
-
-  /**
-   * Optional field elements will not be listed in the constructor field list but initialized with the default value.
-   */
-  public void generateConstructorUsingFields(String simpleClassName, Collection<VariableElement> fieldElements, Collection<VariableElement> optionalFieldElements) {
-    println();
-    print("  {0} {1}(", Visibility.PUBLIC, simpleClassName);
-    generateFieldList(fieldElements, true, false);
-    println(") {");
-    if (optionalFieldElements != null) {
-      for (VariableElement optionalField : optionalFieldElements) {
-        if (!isPrimitive(optionalField.asType())) {
-          generateFieldAssignment(optionalField, null);
-        }
+  public void generateConstantFieldDeclaration(VariableElement fieldElement) {
+    if (isConstant(fieldElement)) {
+      String constantValue = determineFinalConstantValue(fieldElement);
+      if (constantValue != null) {
+        println("  {0}{1} {2} = {3};", 
+            determineFieldModifiers(fieldElement),
+            fieldElement.asType().toString(),
+            fieldElement.getSimpleName(),
+            constantValue
+         );
+      } else {
+        println("  {0}{1} {2};", 
+            determineFieldModifiers(fieldElement),
+            fieldElement.asType().toString(),
+            fieldElement.getSimpleName()
+         );
       }
     }
-    if (fieldElements != null) {
-      for (VariableElement fieldElement : fieldElements) {
-        generateFieldAssignment(fieldElement, fieldElement.getSimpleName());
+  }
+  
+  public void generateConstructorUsingFields(String simpleClassName, Collection<VariableElement> fieldsToBePassedAndAssigned) {
+    println();
+    print("  {0} {1}(", Modifier.PUBLIC.toString(), simpleClassName);
+    generateFieldList(fieldsToBePassedAndAssigned, true, false);
+    println(") {");
+    if (fieldsToBePassedAndAssigned != null) {
+      for (VariableElement fieldToBeAssigned : fieldsToBePassedAndAssigned) {
+        generateFieldAssignment(fieldToBeAssigned, fieldToBeAssigned.getSimpleName().toString());
       }
     }
     println("  }");
   }
   
-  public void generateEmptyConstructor(String simpleClassName, Visibility visibility) {
+  public void generateEmptyConstructor(String simpleClassName, Modifier modifier) {
     println();
-    if (visibility != null && visibility != Visibility.DEFAULT) {
-      println("  {0} {1}() { }", visibility, simpleClassName);
+    if (modifier != null) {
+      println("  {0} {1}() {", modifier, simpleClassName);
     } else {
-      println("  {1}() { }", simpleClassName);
+      println("  {1}() {", simpleClassName);
     }
+    println("    // Possibly for serialization.");
+    println("  }");
   }
   
   public void generateEquals(String simpleClassName, Collection<VariableElement> fieldElements) {
     println();
     println("  @Override");
-    println("  public boolean equals(Object other) {");
-    println("    if (other != null && other.getClass().equals(this.getClass())) {");
-    println("          " + simpleClassName + " o = (" + simpleClassName + ") other;");
-    println("      return true");
-    for (VariableElement fieldElement : fieldElements) {
-
-      TypeMirror type = fieldElement.asType();
-      if (type instanceof ArrayType) {
-        // && java.util.Arrays.deepEquals(o.banana, this.banana)
-        print("          && java.util.Arrays.deepEquals(o.");
-        print(fieldElement.getSimpleName());
-        print(", this.");
-        print(fieldElement.getSimpleName());
-        println(")");
-
-      } else if (isPrimitive(type)) {
-        // && o.blah == this.blah
-        print("          && o.");
-        print(fieldElement.getSimpleName());
-        print(" == this.");
-        println(fieldElement.getSimpleName());
-      } else {
-        // && ((o.blah == null && this.blah == null) || (o.blah != null &&
-        // o.blah.equals(this.blah)))
-        print("          && ((o.");
-        print(fieldElement.getSimpleName());
-        print(" == null && this.");
-        print(fieldElement.getSimpleName());
-        print(" == null) || (o.");
-        print(fieldElement.getSimpleName());
-        print(" != null && o.");
-        print(fieldElement.getSimpleName());
-        print(".equals(this.");
-        print(fieldElement.getSimpleName());
-        println(")))");
+    println("  public boolean equals(Object obj) {");
+    if (fieldElements.size() > 0) {
+      println("    if (this == obj)");
+      println("        return true;");
+      println("    if (obj == null)");
+      println("        return false;");
+      println("    if (getClass() != obj.getClass())");
+      println("        return false;");
+      println("    {0} other = ({0}) obj;", simpleClassName);
+      
+      for (VariableElement fieldElement : fieldElements) {
+        TypeMirror type = fieldElement.asType();
+        String fieldName = fieldElement.getSimpleName().toString();
+        if (!isStatic(fieldElement)) {
+          if (isPrimitive(type)) {
+            println("    if ({0} != other.{0})", fieldName);
+            println("        return false;");
+          } else {
+            println("    if ({0} == null) {", fieldName);
+            println("      if (other.{0} != null)", fieldName);
+            println("        return false;");
+            println("    } else if (!{0}.equals(other.{0}))", fieldName);
+            println("      return false;");
+          }
+        }
       }
+      println("    return true;");
+    } else {
+      println("    return super.equals(obj);");
     }
-    println("        ;");
-    println("    }");
-    println("    return false;");
-    println("  }");
-  }
-  
-  public void generateFields(Collection<VariableElement> collection, boolean useFinal) {
-    println();
-    
-    for (VariableElement fieldElement : collection) {
-
-      print("  {0} ", Visibility.PRIVATE);
-      if (useFinal && !isPrimitive(fieldElement.asType())) {
-        print("final ");
-      }
-      print(fieldElement.asType().toString());
-      print(" ");
-      print(fieldElement.getSimpleName());
-      println(";");
-    }
-  }
-
-  public void generateHashCode(Collection<VariableElement> fieldElements) {
-    println();
-    println("  @Override");
-    println("  public int hashCode() {");
-    println("    int hashCode = 23;");
-    println("    hashCode = (hashCode * 37) + getClass().hashCode();");
-    for (VariableElement fieldElement : fieldElements) {
-      print("    hashCode = (hashCode * 37) + ");
-      TypeMirror type = fieldElement.asType();
-      if (type instanceof ArrayType) {
-        // hashCode = (hashCode * 37) + java.util.Arrays.deepHashCode(banana);
-        print("java.util.Arrays.deepHashCode(");
-        print(fieldElement.getSimpleName());
-        println(");");
-      } else if (isPrimitive(fieldElement.asType())) {
-        // hashCode = (hashCode * 37) + new Integer(height).hashCode();
-        print("new ");
-        print(determineWrapperClass(fieldElement.asType()));
-        print("(");
-        print(fieldElement.getSimpleName());
-        println(").hashCode();");
-
-      } else {
-        // hashCode = (hashCode * 37) + (blah == null ? 1 : blah.hashCode());
-        print("(");
-        print(fieldElement.getSimpleName());
-        print(" == null ? 1 : ");
-        print(fieldElement.getSimpleName());
-        println(".hashCode());");
-      }
-    }
-    println("    return hashCode;");
     println("  }");
   }
   
@@ -252,7 +177,7 @@ public class GenerationHelper implements Closeable {
 
     for (VariableElement fieldElement : fieldElements) {
       println();
-      print("  {0} ", Visibility.PUBLIC);
+      print("  {0} ", Modifier.PUBLIC);
       print(fieldElement.asType().toString());
       print(" ");
       print(determineAccessorName(fieldElement));
@@ -264,24 +189,95 @@ public class GenerationHelper implements Closeable {
     }
   }
   
-  public void generateFieldAssignment(VariableElement field, Object value) {
-    println("    this.{0} = {1};", field.getSimpleName(), String.valueOf(value));
+  public void generateFieldAssignment(VariableElement fieldElement, Object value) {
+    println("    this.{0} = {1};", fieldElement.getSimpleName(), String.valueOf(value));
   }
 
+  public void generateFieldDeclaration(VariableElement fieldElement) {
+    println("  {0}{1} {2};", 
+        determineFieldModifiers(fieldElement),
+        fieldElement.asType().toString(),
+        fieldElement.getSimpleName()
+    );
+  }
+  
+  /**
+   * Generates all field declarations which are included in the passed list.
+   */
+  public void generateFieldDeclarations(Collection<VariableElement> collection) {
+    println();
+    for (VariableElement fieldElement : collection) {
+      if (isConstant(fieldElement)) {
+        generateConstantFieldDeclaration(fieldElement);
+      } else {
+        generateFieldDeclaration(fieldElement);
+      }
+    }
+  }
+  
+  /**
+   * Generates a list of Fields.
+   * 
+   *  <p>
+   * <b>Usage:</b>
+   * </p>
+   * 
+   * <pre>
+   * <code>generateFieldList(myList, true, false)</code></pre>
+   * 
+   * <b>Generated example:</b>
+   * 
+   * <pre>
+   * <code>
+   *  String myField1, int myField2, final String myField3
+   * </code></pre>
+   */
   public void generateFieldList(Collection<VariableElement> fieldElements, boolean withType, boolean leadingComma) {
-    int i = 0;
-    for (VariableElement fieldElement : fieldElements) {
-      if (leadingComma || i++ > 0) {
-        print(", ");
+    if (fieldElements != null) {
+      int i = 0;
+      for (VariableElement fieldElement : fieldElements) {
+        if (leadingComma || i++ > 0) {
+          print(", ");
+        }
+        if (withType) {
+          print(fieldElement.asType().toString());
+          print(" ");
+        }
+        print(fieldElement.getSimpleName());
       }
-      if (withType) {
-        print(fieldElement.asType().toString());
-        print(" ");
-      }
-      print(fieldElement.getSimpleName());
     }
   }
 
+  public void generateHashCode(Collection<VariableElement> fieldElements) {
+    println();
+    println("  @Override");
+    println("  public int hashCode() {");
+    if (fieldElements.size() > 0) {
+      println("    int hashCode = 23;");
+      for (VariableElement fieldElement : fieldElements) {
+        TypeMirror type = fieldElement.asType();
+        String fieldName = fieldElement.getSimpleName().toString();
+        if (!isStatic(fieldElement)) {
+          if (type instanceof ArrayType) {
+            // hashCode = (hashCode * 37) + java.util.Arrays.deepHashCode(banana);
+            println("    hashCode = (hashCode * 37) + java.util.Arrays.deepHashCode({0});", fieldName);
+          } else if (isPrimitive(type)) {
+            // hashCode = (hashCode * 37) + new Integer(height).hashCode();
+            println("    hashCode = (hashCode * 37) + new {0}({1}).hashCode();", determineWrapperClass(type), fieldName);
+          } else {
+            // hashCode = (hashCode * 37) + (blah == null ? 1 : blah.hashCode());
+            println("    hashCode = (hashCode * 37) + ({0} == null ? 1 : {0}.hashCode());", fieldName);
+          }
+        }
+      }
+      println("    return hashCode;");
+    } else {
+      println("    return super.hashCode();");
+    }
+    println("  }");
+  }
+  
+  
   /**
    * Use null as import to separate import groups.
    * 
@@ -340,6 +336,19 @@ public class GenerationHelper implements Closeable {
     println("package {0};", packageName);
   }
   
+  private String determineAccessorName(VariableElement fieldElement) {
+    String name;
+    if (fieldElement.asType().toString().equals(java.lang.Boolean.class.getSimpleName().toLowerCase())) {
+      name = "is";
+    } else {
+      name = "get";
+    }
+    name += fieldElement.getSimpleName().toString().substring(0, 1).toUpperCase();
+    name += fieldElement.getSimpleName().toString().substring(1);
+
+    return name;
+  }
+  
   public void generateToString(String simpleClassName, Collection<VariableElement> fieldElements) {
     println();
     
@@ -356,86 +365,35 @@ public class GenerationHelper implements Closeable {
     println("    + \"]\";");
     println("  }");
   }
-
-  public void print(Object o) {
-    writer.print(o);
-  }
   
-  public void print(String s, Object... parameters) {
-    print(replaceParameters(s, parameters));
-  }
-  
-  public void println() {
-    writer.println();
-  }
-  
-  public void println(Object o) {
-    writer.println(o);
-  }
-  
-  public void println(String s, Object... parameters) {
-    println(replaceParameters(s, parameters));
+  private String determineFieldModifiers(VariableElement fieldElement) {
+    String fieldModifier = "";
+    Set<Modifier> modifiers = fieldElement.getModifiers();
+    for (Modifier modifier : modifiers) {
+        fieldModifier =  fieldModifier + modifier.toString() + " ";
+    }
+    return fieldModifier;
   }
   
   /**
-   * Construct a single string from an array of strings, gluing them together
-   * with the specified delimiter.
-   * 
-   * @param segments array of strings
-   * @param delimiter character that glues the passed strings together
-   * @return imploded and glued list of strings
+   * Note that to have a constant value, a field's type must be either a primitive type or String otherwise the value is null.
    */
-  public static String implode(String[] segments, String delimiter) {
-    String implodedString;
-    if (segments.length == 0) {
-      implodedString = "";
-   } else {
-       StringBuffer sb = new StringBuffer();
-       sb.append(segments[0]);
-       for (int i = 1; i < segments.length; i++) {
-         if (segments[i] != null && !segments[i].isEmpty()) {
-           sb.append(",");
-           sb.append(segments[i]);
-         }
-      }
-      implodedString = sb.toString();
-    }
-    return implodedString;
-  }
-  
-  /**
-   * Replaces each placeholder of this string that matches a parameter index.
-   * <p><b>Placeholder format:</b> {int}</p>
-   * 
-   * <p><b>Usage:</b></p>
-   * <pre><code>replaceParameters("{0} int myField = {1};", "private", 20);</code></pre>
-   * 
-   * @param target the string to be replace.
-   * @param parameters the replacement parameters
-   * @return the resulting string. 
-   *   <p>For example:</p> <code>private int myField = 20;</code>
-   */
-  public static String replaceParameters(String target , Object... parameters) {
-    String result = target;
-    if (parameters != null) {
-      for (int i = 0; i < parameters.length; i++) {
-        result = result.replace("{" + i + "}", String.valueOf(parameters[i]));
-      }
-    }
-    return result;
-  }
-  
-  private String determineAccessorName(VariableElement fieldElement) {
-    String name;
-    if (fieldElement.asType().toString().equals(java.lang.Boolean.class.getSimpleName().toLowerCase())) {
-      name = "is";
-    } else {
-      name = "get";
-    }
-    name += fieldElement.getSimpleName().toString().substring(0, 1).toUpperCase();
-    name += fieldElement.getSimpleName().toString().substring(1);
+  private String determineFinalConstantValue(VariableElement fieldElement) {
+    Object fieldConstantValue = fieldElement.getConstantValue();
+    String determinedConstantValue = null;
 
-    return name;
+    if (fieldConstantValue instanceof java.lang.String) {
+      determinedConstantValue = "\"" + String.valueOf(fieldConstantValue) + "\"";
+    } else if (fieldConstantValue instanceof java.lang.Character) {
+      determinedConstantValue = "'" + String.valueOf(fieldConstantValue) + "'";
+    } else if (isPrimitive(fieldElement.asType())) {
+      determinedConstantValue = String.valueOf(fieldConstantValue);
+      if ("null".equals(determinedConstantValue)) {
+        determinedConstantValue = null;
+      }
+    }
+    
+    return determinedConstantValue;
   }
   
   /**
@@ -503,8 +461,90 @@ public class GenerationHelper implements Closeable {
     return false;    
   }
   
+  /**
+   * Checks if a field contains a static or final modifier.
+   */
+  public boolean isConstant(VariableElement fieldElement) {
+    return fieldElement.getModifiers().contains(Modifier.STATIC) || fieldElement.getModifiers().contains(Modifier.FINAL);
+  }
+  
+  /**
+   * Checks if a field contains a static or final modifier.
+   */
+  public boolean isStatic(VariableElement fieldElement) {
+    return fieldElement.getModifiers().contains(Modifier.STATIC);
+  }
+  
+  public void print(Object o) {
+    writer.print(o);
+  }
+  
+  public void print(String s, Object... parameters) {
+    print(replaceParameters(s, parameters));
+  }
+  
+  public void println() {
+    writer.println();
+  }
+  
+  public void println(Object o) {
+    writer.println(o);
+  }
+  
+  public void println(String s, Object... parameters) {
+    println(replaceParameters(s, parameters));
+  }
+  
   private void initializeSourceWriter(Writer sourceWriter) {
     BufferedWriter bufferedWriter = new BufferedWriter(sourceWriter);
     writer = new PrintWriter(bufferedWriter);
+  }
+  
+  /**
+   * Construct a single string from an array of strings, gluing them together
+   * with the specified delimiter.
+   * 
+   * @param segments array of strings
+   * @param delimiter character that glues the passed strings together
+   * @return imploded and glued list of strings
+   */
+  public static String implode(String[] segments, String delimiter) {
+    String implodedString;
+    if (segments.length == 0) {
+      implodedString = "";
+   } else {
+       StringBuffer sb = new StringBuffer();
+       sb.append(segments[0]);
+       for (int i = 1; i < segments.length; i++) {
+         if (segments[i] != null && !segments[i].isEmpty()) {
+           sb.append(",");
+           sb.append(segments[i]);
+         }
+      }
+      implodedString = sb.toString();
+    }
+    return implodedString;
+  }
+  
+  /**
+   * Replaces each placeholder of this string that matches a parameter index.
+   * <p><b>Placeholder format:</b> {int}</p>
+   * 
+   * <p><b>Usage:</b></p>
+   * <pre><code>replaceParameters("{0} int myField = {1};", "private", 20);</code></pre>
+   * 
+   * @param target the string to be replace.
+   * @param parameters the replacement parameters
+   * @return the resulting string. 
+   *   <p>For example:</p> <code>private int myField = 20;</code>
+   */
+  public static String replaceParameters(String target , Object... parameters) {
+    String result = target;
+    if (parameters != null) {
+      for (int i = 0; i < parameters.length; i++) {
+        result = result.replace("{" + i + "}", String.valueOf(parameters[i]));
+      }
+    }
+    return result;
   }
 }
