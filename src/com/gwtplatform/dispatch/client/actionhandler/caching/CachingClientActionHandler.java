@@ -32,7 +32,7 @@ import com.gwtplatform.dispatch.shared.Result;
  */
 public class CachingClientActionHandler<A extends Action<R>, R extends Result> extends
     AbstractCachingClientActionHandler<A, R> {
-
+  
   public CachingClientActionHandler(Class<A> actionType, Cache cache) {
     super(actionType, cache);
   }
