@@ -23,21 +23,19 @@ import java.io.Writer;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
-import javax.annotation.processing.AbstractProcessor;
-
 import com.gwtplatform.annotation.GenDispatch;
 import com.gwtplatform.annotation.In;
-import com.gwtplatform.annotation.Optional;
 import com.gwtplatform.annotation.Out;
-import com.gwtplatform.annotation.processor.GenerationHelper.Visibility;
 
 /**
  * Processes {@link GenDispatch} annotations.
@@ -91,7 +89,6 @@ public class GenDispatchProcessor extends AbstractProcessor {
     generateResult(dispatchElement, genDispatch.extraResultInterfaces());
   }
 
-  @SuppressWarnings("unchecked")
   protected void generateAction(Element dispatchElement, boolean isSecure, String serviceName, String extraActionInterfaces) {
     GenerationHelper writer = null;
     try {
@@ -115,17 +112,24 @@ public class GenDispatchProcessor extends AbstractProcessor {
           extraActionInterfaces
       );
 
-      writer.generateFields(annotatedInFields, false);
+      writer.generateFieldDeclarations(annotatedInFields);
 
-      if (!annotatedInFields.isEmpty() && !reflection.hasOnlyOptionalFields(In.class)) {
-        writer.generateEmptyConstructor(dispatchActionSimpleName, Visibility.PROTECTED);
+      Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getInFields());
+      Collection<VariableElement> optionalFields = reflection.sortFields(In.class, reflection.getOptionalFields(In.class));
+      Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getInFields());
+      requiredFields.removeAll(optionalFields);
+      
+      writer.generateConstructorUsingFields(dispatchActionSimpleName, allFields);
+      
+      if (allFields.isEmpty()) {
+        // nothing to do - empty constructor is generated above
+      } else if (allFields.size() == requiredFields.size()) {
+        // only required fields - generate empty constructor for serialization
+        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
+      } else {
+        writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields);
       }
-
-      writer.generateConstructorsUsingFields(dispatchActionSimpleName, 
-          annotatedInFields, 
-          reflection.getAnnotatedFields(In.class, Optional.class)
-      );
-
+      
       writer.generateFieldAccessors(annotatedInFields);
       
       generateServiceNameAccessor(writer, dispatchElementSimpleName, serviceName);
@@ -149,7 +153,6 @@ public class GenDispatchProcessor extends AbstractProcessor {
     }
   }
 
-  @SuppressWarnings("unchecked")
   protected void generateResult(Element dispatchElement, String extraResultInterfaces) {
     GenerationHelper writer = null;
     try {
@@ -171,17 +174,24 @@ public class GenDispatchProcessor extends AbstractProcessor {
           extraResultInterfaces
       );
 
-      writer.generateFields(annotatedOutFields, false);
+      writer.generateFieldDeclarations(annotatedOutFields);
 
-      if (!annotatedOutFields.isEmpty() && !reflection.hasOnlyOptionalFields(Out.class)) {
-        writer.generateEmptyConstructor(dispatchResultSimpleName, Visibility.PROTECTED);
+      Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getOutFields());
+      Collection<VariableElement> optionalFields = reflection.sortFields(Out.class, reflection.getOptionalFields(Out.class));
+      Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getOutFields());
+      requiredFields.removeAll(optionalFields);
+      
+      writer.generateConstructorUsingFields(dispatchResultSimpleName, allFields);
+      
+      if (allFields.isEmpty()) {
+        // nothing to do - empty constructor is generated above
+      } else if (allFields.size() == requiredFields.size()) {
+        // only required fields - generate empty constructor for serialization
+        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
+      } else {
+        writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields);
       }
-
-      writer.generateConstructorsUsingFields(dispatchResultSimpleName, 
-          annotatedOutFields, 
-          reflection.getAnnotatedFields(Out.class, Optional.class)
-      );
-
+      
       writer.generateFieldAccessors(annotatedOutFields);
 
       writer.generateEquals(dispatchResultSimpleName, annotatedOutFields);
