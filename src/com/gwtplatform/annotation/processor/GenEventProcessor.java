@@ -30,6 +30,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
@@ -88,7 +89,7 @@ public class GenEventProcessor extends AbstractProcessor {
       Writer sourceWriter = this.env.getFiler().createSourceFile(eventClassName, eventElement).openWriter();
       writer = new GenerationHelper(sourceWriter);
       
-      Collection<VariableElement> allElementFields = reflection.getOrderedFields();
+      Collection<VariableElement> orderedElementFields = reflection.getOrderedFields();
 
       writer.generatePackageDeclaration(reflection.getPackageName());
 
@@ -113,24 +114,35 @@ public class GenEventProcessor extends AbstractProcessor {
       
       generateTypeAccessorMethod(writer, eventElementSimpleName);
       
-      writer.generateFields(allElementFields, true);
-
-      writer.generateConstructorsUsingFields(eventSimpleName,
-          reflection.getOrderedFields(),
-          reflection.getOptionalFields()
-      );
+      writer.generateFieldDeclarations(orderedElementFields);
       
+      Collection<VariableElement> allFields = reflection.getNonConstantFields();
+      Collection<VariableElement> optionalFields = reflection.getOptionalFields();
+      Collection<VariableElement> requiredFields = reflection.getNonConstantFields();
+      requiredFields.removeAll(optionalFields);
+      
+      writer.generateConstructorUsingFields(eventSimpleName, allFields);
+      
+      if (allFields.isEmpty()) {
+        // nothing to do - empty constructor is generated above
+      } else if (allFields.size() == requiredFields.size()) {
+        // only required fields - generate empty constructor for serialization
+        writer.generateEmptyConstructor(eventSimpleName, Modifier.PROTECTED);
+      } else {
+        writer.generateConstructorUsingFields(eventSimpleName, requiredFields);
+      }
+
       generateAssociatedTypeMethod(writer, eventElementSimpleName);
       
-      writer.generateFieldAccessors(allElementFields);
+      writer.generateFieldAccessors(orderedElementFields);
 
       generateDispatchMethod(writer, eventElementSimpleName);
       
-      writer.generateEquals(eventSimpleName, allElementFields);
+      writer.generateEquals(eventSimpleName, orderedElementFields);
 
-      writer.generateHashCode(allElementFields);
+      writer.generateHashCode(orderedElementFields);
 
-      writer.generateToString(eventSimpleName, allElementFields);
+      writer.generateToString(eventSimpleName, orderedElementFields);
 
       writer.generateClassFooter();
     } catch (IOException e) {
@@ -159,7 +171,7 @@ public class GenEventProcessor extends AbstractProcessor {
   }
   
   protected void generateFireMethodsUsingFields(GenerationHelper writer, String simpleClassName, ReflectionHelper reflection) {
-    Collection<VariableElement> fields = reflection.getOrderedFields();
+    Collection<VariableElement> fields = reflection.getNonConstantFields();
     // generate fire method with all fields
     generateFireMethodUsingFields(writer, simpleClassName, reflection, fields);
 
