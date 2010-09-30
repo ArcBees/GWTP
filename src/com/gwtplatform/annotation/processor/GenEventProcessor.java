@@ -123,14 +123,14 @@ public class GenEventProcessor extends AbstractProcessor {
       
       writer.generateConstructorUsingFields(eventSimpleName, allFields);
       
-      if (allFields.isEmpty()) {
-        // nothing to do - empty constructor is generated above
-      } else if (allFields.size() == requiredFields.size()) {
-        // only required fields - generate empty constructor for serialization
-        writer.generateEmptyConstructor(eventSimpleName, Modifier.PROTECTED);
-      } else {
+      if (optionalFields.size() > 0) {
         writer.generateConstructorUsingFields(eventSimpleName, requiredFields);
       }
+      
+      if (!allFields.isEmpty() && requiredFields.size() > 0) {
+        writer.generateEmptyConstructor(eventSimpleName, Modifier.PROTECTED);
+      }
+
 
       generateAssociatedTypeMethod(writer, eventElementSimpleName);
       
