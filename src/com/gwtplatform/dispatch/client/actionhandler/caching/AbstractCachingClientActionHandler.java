@@ -28,11 +28,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Abstract base class for Client side Action Handlers with Caching Support.
- * <p>Currently supported features include:</p>
- * <p>1. Prefetch / Postfetch to actually do the Cache lookup, which provides flexibility of changing the caching logic</p>
- * <p>2. Same Action Queuing to optimize on number of server trips</p>
- * <p>3. Flexibility of Cache implementation to support custom Caching</p>
+ * Abstract base class for client-side action handlers with caching support.
+ * <p>Supported features include:</p>
+ * <p>1. {@link #prefetch}/{@link #postfetch} perform the cache lookup and the 
+ * cache store. You can use this to customize the caching logic.</p>
+ * <p>2. Automatic action queuing so that calls in quick succession result in a 
+ * single trip to the server.</p>
+ * <p>3. Flexibility of cache implementation to support custom caching</p>
  * 
  * @author Sunny Gupta
  *
@@ -42,18 +44,35 @@ import java.util.HashMap;
 public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R extends Result> 
     extends AbstractClientActionHandler<A, R> {
 
+  /**
+   * Request-Callback pair to hold them together and make callbacks based on the request status.
+   * 
+   * @author Sunny Gupta
+   *
+   */
+  private class RequestCallbackPair {
+    private final ClientDispatchRequest request;
+    private final AsyncCallback<R> callback;
+    
+    public RequestCallbackPair(final ClientDispatchRequest request, final AsyncCallback<R> callback) {
+      this.request = request;
+      this.callback = callback;
+    }
+    
+    public AsyncCallback<R> getCallback() {
+      return callback;
+    }
+    public ClientDispatchRequest getRequest() {
+      return request;
+    }
+  }
+  
   private final Cache cache;
   
   // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
-  /* TODO Generics cause null type for result...not using generics forces typecasting...
-   * TODO Cannot use A, R as this is static field
-   * TODO Something is wrong somewhere?
-   * private static HashMap<Action<? extends Result>, ArrayList<AsyncCallback<? extends Result>>> 
-     pendingCallbackMap = new HashMap<Action<? extends Result>, ArrayList<AsyncCallback<? extends Result>>>();
-   */  
-  private static HashMap<Action<Result>, ArrayList<AsyncCallback<Result>>> 
-      pendingCallbackMap = new HashMap<Action<Result>, ArrayList<AsyncCallback<Result>>>();
-
+  private HashMap<A, ArrayList<RequestCallbackPair>> 
+      pendingRequestCallbackMap = new HashMap<A, ArrayList<RequestCallbackPair>>();
+  
   public AbstractCachingClientActionHandler(Class<A> actionType, Cache cache) {
     super(actionType);
     this.cache = cache;
@@ -62,15 +81,11 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
   public void execute(final A action, final AsyncCallback<R> resultCallback, 
       final ClientDispatchRequest request, ExecuteCommand<A,R> executeCommand) {
     // First check if any pending callbacks for this action
-    ArrayList<AsyncCallback<Result>> pendingCallbacks = pendingCallbackMap.get(action);
+    ArrayList<RequestCallbackPair> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
  
-    // TODO Think about some timeout mechanism in case the pending call never returns. 
-    // TODO Is such a scenario possible in the first place?
-    if (pendingCallbacks != null) {
+    if (pendingRequestCallbacks != null) {
       // Add callback to pending list and return
-      // TODO Try to get rid of unchecked cast,
-      // TODO though actually it is not unchecked since R is bounded by Result
-      pendingCallbacks.add((AsyncCallback<Result>) resultCallback);
+      pendingRequestCallbacks.add(new RequestCallbackPair(request, resultCallback));
       return;
     }
     
@@ -81,11 +96,9 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
       resultCallback.onSuccess(prefetchResult);
     } else {
       // Add pending callback
-      ArrayList<AsyncCallback<Result>> resultCallbacks = new ArrayList<AsyncCallback<Result>>();
-      // TODO Try to get rid of unchecked cast
-      // TODO though actually it is not unchecked since A, R is bounded by Action, Result
-      resultCallbacks.add((AsyncCallback<Result>) resultCallback);
-      pendingCallbackMap.put((Action<Result>) action, resultCallbacks);
+      ArrayList<RequestCallbackPair> resultRequestCallbacks = new ArrayList<RequestCallbackPair>();
+      resultRequestCallbacks.add(new RequestCallbackPair(request, resultCallback));
+      pendingRequestCallbackMap.put(action, resultRequestCallbacks);
       
       // Execute
       executeCommand.execute(action, new AsyncCallback<R>() {
@@ -96,22 +109,25 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
           postfetch(action, null);
           
           // Callback onFailure
-          ArrayList<AsyncCallback<Result>> finishedCallbacks = pendingCallbackMap.remove(action);
-          for (AsyncCallback<? extends Result> finishedCallback : finishedCallbacks) {
-            finishedCallback.onFailure(caught);
+          ArrayList<RequestCallbackPair> pendingRequestCallbacks = pendingRequestCallbackMap.remove(action);
+          for (RequestCallbackPair pendingRequestCallback : pendingRequestCallbacks) {
+            // TODO Do we also gate call to onFailure with request cancellation?
+            if (!pendingRequestCallback.getRequest().isCancelled()) {
+              pendingRequestCallback.getCallback().onFailure(caught);
+            }
           }
         }
 
         @Override
         public void onSuccess(R result) {
-          if (!request.isCancelled()) {
-            // Postfetch
-            postfetch(action, result);
-            
-            // Callback onSuccess
-            ArrayList<AsyncCallback<Result>> finishedCallbacks = pendingCallbackMap.remove(action);
-            for (AsyncCallback<Result> finishedCallback : finishedCallbacks) {
-              finishedCallback.onSuccess(result);
+          // Postfetch
+          postfetch(action, result);
+
+          // Callback onSuccess
+          ArrayList<RequestCallbackPair> pendingRequestCallbacks = pendingRequestCallbackMap.remove(action);
+          for (RequestCallbackPair pendingRequestCallback : pendingRequestCallbacks) {
+            if (!pendingRequestCallback.getRequest().isCancelled()) {
+              pendingRequestCallback.getCallback().onSuccess(result);
             }
           }
         }
@@ -120,8 +136,22 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
     }
   };
 
+  /**
+   * Override this method to perform prefetching from the cache to see if the result is available.
+   * 
+   * @param action The action to be prefetched
+   * @return The prefetched result. If not found, return null
+   */
   public abstract R prefetch(A action);
   
+  /**
+   * Override this method to perform postfetch after the server trip returns. The result will be empty if
+   * the server call failed. You can add the result to the cache here based on specific requirements so that
+   * the results can be prefetched in subsequent calls.
+   * 
+   * @param action The action to be postfetched
+   * @param result The result after the server call
+   */
   public abstract void postfetch(A action, R result);
 
   /**
