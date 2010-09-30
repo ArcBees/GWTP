@@ -121,13 +121,12 @@ public class GenDispatchProcessor extends AbstractProcessor {
       
       writer.generateConstructorUsingFields(dispatchActionSimpleName, allFields);
       
-      if (allFields.isEmpty()) {
-        // nothing to do - empty constructor is generated above
-      } else if (allFields.size() == requiredFields.size()) {
-        // only required fields - generate empty constructor for serialization
-        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
-      } else {
+      if (optionalFields.size() > 0) {
         writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields);
+      }
+      
+      if (!allFields.isEmpty() && requiredFields.size() > 0) {
+        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
       }
       
       writer.generateFieldAccessors(annotatedInFields);
@@ -183,13 +182,12 @@ public class GenDispatchProcessor extends AbstractProcessor {
       
       writer.generateConstructorUsingFields(dispatchResultSimpleName, allFields);
       
-      if (allFields.isEmpty()) {
-        // nothing to do - empty constructor is generated above
-      } else if (allFields.size() == requiredFields.size()) {
-        // only required fields - generate empty constructor for serialization
-        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
-      } else {
+      if (optionalFields.size() > 0) {
         writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields);
+      }
+      
+      if (!allFields.isEmpty() && requiredFields.size() > 0) {
+        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
       }
       
       writer.generateFieldAccessors(annotatedOutFields);

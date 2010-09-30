@@ -131,7 +131,7 @@ public class GenerationHelper implements Closeable {
     if (modifier != null) {
       println("  {0} {1}() {", modifier, simpleClassName);
     } else {
-      println("  {1}() {", simpleClassName);
+      println("  {0}() {", simpleClassName);
     }
     println("    // Possibly for serialization.");
     println("  }");
