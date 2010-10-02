@@ -16,10 +16,6 @@
 
 package com.gwtplatform.dispatch.client.actionhandler.caching;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import com.gwtplatform.dispatch.client.ClientDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
@@ -64,15 +60,6 @@ public class CachingClientActionHandler<A extends Action<R>, R extends Result> e
     } catch (Exception e) {
       return null;
     }
-  }
-
-  @Override
-  public void undo(A action, R result, AsyncCallback<Void> callback,
-      ClientDispatchRequest request, UndoCommand<A, R> undoCommand) {
-    // Remove the cached entry
-    getCache().remove(action);
-    // Undo the previous action
-    undoCommand.undo(action, result, callback);
   }
 
 }

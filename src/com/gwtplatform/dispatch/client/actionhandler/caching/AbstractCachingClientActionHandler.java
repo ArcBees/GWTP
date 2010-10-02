@@ -21,6 +21,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ClientDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
+import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
@@ -136,6 +137,15 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
     }
   };
 
+  @Override
+  public void undo(A action, R result, AsyncCallback<Void> callback,
+      ClientDispatchRequest request, UndoCommand<A, R> undoCommand) {
+    // Remove the cached entry
+    getCache().remove(action);
+    // Undo the previous action
+    undoCommand.undo(action, result, callback);
+  }
+  
   /**
    * Override this method to perform an action before the call is sent to the server.
    * If the call returns a non-{@code null} result then the action is never executed
