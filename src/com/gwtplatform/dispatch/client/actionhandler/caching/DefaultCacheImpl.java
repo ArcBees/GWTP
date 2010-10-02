@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.client.actionhandler.caching;
 
+import com.google.appengine.repackaged.org.joda.time.DateTime;
 import com.google.inject.Inject;
 
 import org.apache.commons.lang.NullArgumentException;
@@ -29,12 +30,31 @@ import java.util.HashMap;
  */
 public class DefaultCacheImpl implements Cache {
 
-  private HashMap<Object, Object> map;
+  private class CacheValue {
+
+    private Object value;
+    private DateTime lastUpdateTime;
+    
+    public CacheValue(Object value) {
+      this.value = value;
+      this.lastUpdateTime = new DateTime();
+    }
+
+    public Object getValue() {
+      return this.value;
+    }
+
+    public DateTime getLastUpateTime() {
+      return this.lastUpdateTime;
+    }  
+  }
+  
+  private HashMap<Object, CacheValue> map;
   
   @Inject
   public DefaultCacheImpl() {
     // Initialize map
-    map = new HashMap<Object, Object>();
+    map = new HashMap<Object, CacheValue>();
   }
   
   @Override
@@ -48,7 +68,7 @@ public class DefaultCacheImpl implements Cache {
     if (key == null) {
       throw new NullArgumentException("key");
     }
-    return map.get(key);
+    return map.get(key).getValue();
   }
 
   @Override
@@ -62,12 +82,21 @@ public class DefaultCacheImpl implements Cache {
     }
     
     // Put in map
-    map.put(key, value);
+    map.put(key, new CacheValue(value));
   }
 
   @Override
   public void remove(Object key) {
     map.remove(key);
+  }
+
+  @Override
+  public DateTime getLastUpateTime(Object key) {
+    // Check for null as Cache should not store null values / keys
+    if (key == null) {
+      throw new NullArgumentException("key");
+    }
+    return map.get(key).getLastUpateTime();
   }
 
 }
