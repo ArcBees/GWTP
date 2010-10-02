@@ -67,11 +67,10 @@ public class CachingClientActionHandler<A extends Action<R>, R extends Result> e
   @Override
   public void undo(A action, R result, AsyncCallback<Void> callback,
       ClientDispatchRequest request, UndoCommand<A, R> undoCommand) {
-    // TODO Need to think about it
-    /* Need to change as per consensus on what's to be done
+    // Remove the cached entry
     getCache().remove(action);
-    super.execute(action, callback, request, undoCommand);
-    */
+    // Undo the previous action
+    undoCommand.undo(action, result, callback);
   }
 
 }
