@@ -37,6 +37,7 @@ import java.util.HashMap;
  * <p>3. Flexibility of cache implementation to support custom caching</p>
  * 
  * @author Sunny Gupta
+ * @author David M. Chandler
  *
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
@@ -111,7 +112,6 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
           // Callback onFailure
           ArrayList<RequestCallbackPair> pendingRequestCallbacks = pendingRequestCallbackMap.remove(action);
           for (RequestCallbackPair pendingRequestCallback : pendingRequestCallbacks) {
-            // TODO Do we also gate call to onFailure with request cancellation?
             if (!pendingRequestCallback.getRequest().isCancelled()) {
               pendingRequestCallback.getCallback().onFailure(caught);
             }
@@ -137,27 +137,35 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
   };
 
   /**
-   * Override this method to perform prefetching from the cache to see if the result is available.
+   * Override this method to perform an action before the call is sent to the server.
+   * If the call returns a non-{@code null} result then the action is never executed
+   * on the server and the returned value is used. If the call returns {@code null}
+   * then the action is executed on the server.
+   * <p/>
+   * You can use this method to fetch the {@code action} from the cache.
    * 
    * @param action The action to be prefetched
-   * @return The prefetched result. If not found, return null
+   * @return The prefetched result. If not found, return {@code null}.
    */
-  public abstract R prefetch(A action);
+  protected abstract R prefetch(A action);
   
   /**
-   * Override this method to perform postfetch after the server trip returns. The result will be empty if
-   * the server call failed. You can add the result to the cache here based on specific requirements so that
-   * the results can be prefetched in subsequent calls.
+   * Override this method to perform an action after the call to the server returns
+   * successfully or not. If the call succeeded, the result will be passed, if it
+   * failed {@code null} will be passed in the {@code result} parameter.
+   * <p/>
+   * You can use this method to add the result to cache, if it is {@code null} you
+   * should remove the {@code action} from the cache.
    * 
-   * @param action The action to be postfetched
-   * @param result The result after the server call
+   * @param action The action that just finished execution on the server.
+   * @param result The result after the server call, or {@code null} if the server call failed.
    */
-  public abstract void postfetch(A action, R result);
+  protected abstract void postfetch(A action, R result);
 
   /**
    * @return the cache
    */
-  public Cache getCache() {
+  protected Cache getCache() {
     return cache;
   }
 
