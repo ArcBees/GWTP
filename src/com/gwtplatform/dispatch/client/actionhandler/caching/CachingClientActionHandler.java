@@ -24,11 +24,13 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * 
+ * Default implementation of {@link AbstractCachingClientActionHandler}. It supports {@link Action} caching
+ * </p>
+ * TODO Add support for timeout based auto-expiry of cached results?
  * @author Sunny Gupta
  *
- * @param <A>
- * @param <R>
+ * @param <A> The type of the action extending {@link Action}.
+ * @param <R> The type of the result extending {@link Result}.
  */
 public class CachingClientActionHandler<A extends Action<R>, R extends Result> extends
     AbstractCachingClientActionHandler<A, R> {
@@ -38,7 +40,7 @@ public class CachingClientActionHandler<A extends Action<R>, R extends Result> e
   }
 
   @Override
-  public void postfetch(A action, R result) {
+  protected void postfetch(A action, R result) {
     // Check if null result
     if (result == null) {
       getCache().remove(action);
@@ -50,7 +52,7 @@ public class CachingClientActionHandler<A extends Action<R>, R extends Result> e
 
   @SuppressWarnings("unchecked")
   @Override
-  public R prefetch(A action) {
+  protected R prefetch(A action) {
     try {
       // Check if Action available in Cache
       Object value = super.getCache().get(action);
