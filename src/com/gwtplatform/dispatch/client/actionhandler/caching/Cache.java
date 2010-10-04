@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.client.actionhandler.caching;
 
-import com.google.appengine.repackaged.org.joda.time.DateTime;
+import java.util.Date;
 
 /**
  * Interface for client side caching. This is kept different from generic Cache interfaces for simplicity
@@ -37,5 +37,5 @@ public interface Cache {
    * @param key The key for which last update time is required
    * @return The last update time
    */
-  DateTime getLastUpateTime(Object key);
+  Date getLastUpateTime(Object key);
 }
