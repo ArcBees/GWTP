@@ -16,11 +16,9 @@
 
 package com.gwtplatform.dispatch.client.actionhandler.caching;
 
-import com.google.appengine.repackaged.org.joda.time.DateTime;
 import com.google.inject.Inject;
 
-import org.apache.commons.lang.NullArgumentException;
-
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -33,18 +31,18 @@ public class DefaultCacheImpl implements Cache {
   private class CacheValue {
 
     private Object value;
-    private DateTime lastUpdateTime;
+    private Date lastUpdateTime;
     
     public CacheValue(Object value) {
       this.value = value;
-      this.lastUpdateTime = new DateTime();
+      this.lastUpdateTime = new Date();
     }
 
     public Object getValue() {
       return this.value;
     }
 
-    public DateTime getLastUpateTime() {
+    public Date getLastUpateTime() {
       return this.lastUpdateTime;
     }  
   }
@@ -66,8 +64,10 @@ public class DefaultCacheImpl implements Cache {
   public Object get(Object key) {
     // Check for null as Cache should not store null values / keys
     if (key == null) {
-      throw new NullArgumentException("key");
-    }
+      // TODO Find a way to throw NullArgumentException, maybe create a custom one for gwtp?
+      // throw new NullArgumentException("key");
+      throw new RuntimeException("key is null");
+   }
     return map.get(key).getValue();
   }
 
@@ -75,10 +75,14 @@ public class DefaultCacheImpl implements Cache {
   public void put(Object key, Object value) {
     // Check for null as Cache should not store null values / keys
     if (key == null) {
-      throw new NullArgumentException("key");
+      // TODO Find a way to throw NullArgumentException, maybe create a custom one for gwtp?
+      // throw new NullArgumentException("key");
+      throw new RuntimeException("key is null");
     }
     if (value == null) {
-      throw new NullArgumentException("value");
+      // TODO Find a way to throw NullArgumentException, maybe create a custom one for gwtp?
+      // throw new NullArgumentException("key");
+      throw new RuntimeException("value is null");
     }
     
     // Put in map
@@ -91,10 +95,12 @@ public class DefaultCacheImpl implements Cache {
   }
 
   @Override
-  public DateTime getLastUpateTime(Object key) {
+  public Date getLastUpateTime(Object key) {
     // Check for null as Cache should not store null values / keys
     if (key == null) {
-      throw new NullArgumentException("key");
+      // TODO Find a way to throw NullArgumentException, maybe create a custom one for gwtp?
+      // throw new NullArgumentException("key");
+      throw new RuntimeException("key is null");
     }
     return map.get(key).getLastUpateTime();
   }
