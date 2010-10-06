@@ -17,15 +17,14 @@
 package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.http.client.Request;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.mvp.client.IndirectProvider;
@@ -71,65 +70,55 @@ public class DefaultDispatchAsync implements DispatchAsync {
     final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider = registry.find(action.getClass());
 
     if (clientActionHandlerProvider != null) {
-      final ClientDispatchRequest request = new ClientDispatchRequest();
+      final DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
       clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
 
         @Override
         public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
 
           if (clientActionHandler.getActionType() != action.getClass()) {
-            request.setCompleted();
+            dispatchRequest.cancel();
             callback.onFailure(new ClientActionHandlerMismatchException(
                 action.getClass(), clientActionHandler.getActionType()));
             return;
           }
 
-          AsyncCallback<R> resultCallback = new AsyncCallback<R>() {
-            @Override
-            public void onSuccess(R result) {
-              request.setCompleted();
-              callback.onSuccess(result);
-            }
+          if (dispatchRequest.isPending()) {
+            dispatchRequest.setDelegate(((ClientActionHandler<A, R>) clientActionHandler).execute(
+                action, callback, new ExecuteCommand<A, R>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-              request.setCompleted();
-              callback.onFailure(caught);
-            }
-          };
-          ((ClientActionHandler<A, R>) clientActionHandler).execute(action,
-              resultCallback, request, new ExecuteCommand<A, R>() {
-
-                @Override
-                public void execute(A action, AsyncCallback<R> resultCallback) {
-                  if (!request.isCancelled()) {
-                    request.setRequest(serviceExecute(securityCookie, action,
-                        resultCallback));
+                  @Override
+                  public DispatchRequest execute(A action,
+                      AsyncCallback<R> resultCallback) {
+                    if (dispatchRequest.isPending()) {
+                      return serviceExecute(securityCookie, action,
+                          resultCallback);
+                    } else {
+                      return null;
+                    }
                   }
-                }
-
-              });
+                }));
+          }
         }
 
         @Override
         public void onFailure(Throwable caught) {
-          request.setCompleted();
+          dispatchRequest.cancel();
           callback.onFailure(caught);
         }
       });
-      return request;
+      return dispatchRequest;
 
     } else {
 
-      return DispatchRequestFactory.createRequest(serviceExecute(
-          securityCookie, action, callback));
+      return serviceExecute(securityCookie, action, callback);
     }
   }
 
-  private <A extends Action<R>, R extends Result> Request serviceExecute(
+  private <A extends Action<R>, R extends Result> DispatchRequest serviceExecute(
       String securityCookie, final A action, final AsyncCallback<R> callback) {
-    return realService.execute(securityCookie, action,
-        new AsyncCallback<Result>() {
+    return new GwtHttpDispatchRequest(realService.execute(
+        securityCookie, action, new AsyncCallback<Result>() {
           public void onFailure(Throwable caught) {
             DefaultDispatchAsync.this.onExecuteFailure(action, caught, callback);
           }
@@ -143,7 +132,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
             DefaultDispatchAsync.this.onExecuteSuccess(action, (R) result,
                 callback);
           }
-        });
+        }));
   }
 
   @SuppressWarnings("unchecked")
@@ -158,67 +147,54 @@ public class DefaultDispatchAsync implements DispatchAsync {
     final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider = registry.find(action.getClass());
 
     if (clientActionHandlerProvider != null) {
-      final ClientDispatchRequest request = new ClientDispatchRequest();
+      final DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();      
       clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
 
         @Override
         public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
 
           if (clientActionHandler.getActionType() != action.getClass()) {
-            request.setCompleted();
+            dispatchRequest.cancel();
             callback.onFailure(new ClientActionHandlerMismatchException(
                 action.getClass(), clientActionHandler.getActionType()));
             return;
           }
 
-          AsyncCallback<Void> doneCallback = new AsyncCallback<Void>() {
-            @Override
-            public void onSuccess(Void v) {
-              request.setCompleted();
-              callback.onSuccess(v);
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-              request.setCompleted();
-              callback.onFailure(caught);
-            }
-          };
-          ((ClientActionHandler<A, R>) clientActionHandler).undo(action,
-              result, doneCallback, request, new UndoCommand<A, R>() {
+          dispatchRequest.setDelegate(((ClientActionHandler<A, R>) clientActionHandler).undo(
+              action, result, callback, new UndoCommand<A, R>() {
 
                 @Override
-                public void undo(A action, R result,
+                public DispatchRequest undo(A action, R result,
                     AsyncCallback<Void> callback) {
-                  if (!request.isCancelled()) {
-                    request.setRequest(serviceUndo(securityCookie, action,
-                        result, callback));
+                  if (dispatchRequest.isPending()) {
+                    return serviceUndo(securityCookie, action, result, callback);
+                  } else {
+                    return null;
                   }
                 }
-              });
+              }));
         }
 
         @Override
         public void onFailure(Throwable caught) {
-          request.setCompleted();
+          dispatchRequest.cancel();
           callback.onFailure(caught);
         }
       });
-      return request;
+      return dispatchRequest;
 
     } else {
 
-      return DispatchRequestFactory.createRequest(serviceUndo(securityCookie,
-          action, result, callback));
+      return serviceUndo(securityCookie, action, result, callback);
     }
   }
 
-  private <A extends Action<R>, R extends Result> Request serviceUndo(
+  private <A extends Action<R>, R extends Result> DispatchRequest serviceUndo(
       String securityCookie, final A action, final R result,
       final AsyncCallback<Void> callback) {
 
-    return realService.undo(securityCookie, action, result,
-        new AsyncCallback<Void>() {
+    return new GwtHttpDispatchRequest(realService.undo(
+        securityCookie, action, result, new AsyncCallback<Void>() {
           public void onFailure(Throwable caught) {
             DefaultDispatchAsync.this.onUndoFailure(action, caught, callback);
           }
@@ -227,7 +203,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
             DefaultDispatchAsync.this.onUndoSuccess(action, voidResult,
                 callback);
           }
-        });
+        }));
   }
 
   protected <A extends Action<R>, R extends Result> void onExecuteFailure(

@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import com.gwtplatform.dispatch.client.ClientDispatchRequest;
+import com.gwtplatform.dispatch.client.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
@@ -86,14 +86,15 @@ import com.gwtplatform.dispatch.shared.Result;
  *   }
  * 
  *   {@literal}@Override
- *   public void execute(final A action, final AsyncCallback&lt;R&gt; resultCallback,
- *       ClientDispatchRequest request, ExecuteCommand&lt;A, R&gt; executeCommand) {
+ *   public DispatchRequest execute(final A action, final AsyncCallback&lt;R&gt; resultCallback,
+ *       ExecuteCommand&lt;A, R&gt; executeCommand) {
  *       
  *     R cacheResult = cache.get(action);
  *     if (cacheResult != null) {
  *       resultCallback.onSuccess(cacheResult);
+ *       return new CompletedDispatchRequest();
  *     } else {
- *       executeCommand.execute(action, new AsyncCallback&lt;R&gt;() {
+ *       return executeCommand.execute(action, new AsyncCallback&lt;R&gt;() {
  *         {@literal}@Override
  *         public void onSuccess(R result) {
  *           if(!request.isCancelled()) {
@@ -114,6 +115,7 @@ import com.gwtplatform.dispatch.shared.Result;
  *   public void undo(A action, R result, AsyncCallback&lt;Void&gt; callback,
  *       ClientDispatchRequest request, UndoCommand&lt;A, R&gt; undoCommand) {
  *     // do nothing    
+ *       return new CompletedDispatchRequest();
  *   }
  * }
  * </code>
@@ -131,7 +133,7 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
    * 
    * If the handler makes asynchronous calls, it is recommended that you confirm
    * that this request has not been cancelled after returning by calling
-   * {@link ClientDispatchRequest#isCancelled()} against the {@link request}
+   * {@link DelegatingDispatchRequest#isCancelled()} against the {@link request}
    * parameter.
    * 
    * @param action The {@link Action} to execute.
@@ -140,21 +142,14 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
    *          {@link AsyncCallback#onSuccess} on this callback once you have
    *          obtained the result. If any failure occurs call
    *          {@link AsyncCallback#onFailure}.
-   * @param request The instance of
-   *          {@link com.gwtplatform.dispatch.client.DispatchRequest
-   *          DispatchRequest} that will be returned to the calling code that
-   *          requested the action be executed. If you get an instance of
-   *          {@link com.google.gwt.http.client.Request Request} as a result of
-   *          network communications, call
-   *          {@link ClientDispatchRequest#setRequest()} so that the calling
-   *          code has the ability to cancel the http request.
    * @param executeCommand Call {@link ExecuteCommand#execute(A, AsyncCallback)}
    *          on this object to send the action over to the server via gwt-rpc.
    *          As a parameter you can pass {@code resultCallback} or your custom
    *          {@link AsyncCallback} if you want to process the result.
+   * @returns A {@link DispatchRequest} object.
    */
-  void execute(A action, AsyncCallback<R> resultCallback,
-      ClientDispatchRequest request, ExecuteCommand<A, R> executeCommand);
+  DispatchRequest execute(A action, AsyncCallback<R> resultCallback,
+      ExecuteCommand<A, R> executeCommand);
 
   /**
    * @return The type of {@link Action} supported by this handler.
@@ -166,7 +161,7 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
    * 
    * If the handler makes asynchronous calls, it is recommended that you confirm
    * that this request has not been cancelled after returning by calling
-   * {@link ClientDispatchRequest#isCancelled()} against the {@link request}
+   * {@link DelegatingDispatchRequest#isCancelled()} against the {@link request}
    * parameter.
    * 
    * @param action The {@link Action} to undo.
@@ -176,24 +171,14 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
    *          {@link AsyncCallback#onSuccess} on this callback when you have
    *          successfully undone the action. If any failure occurs call
    *          {@link AsyncCallback#onFailure}.
-   * @param request An instance of
-   *          {@link com.gwtplatform.dispatch.client.DispatchRequest
-   *          DispatchRequest} that will been returned to the calling code that
-   *          requested the action be executed. It is possible that the calling
-   *          code may cancel the request, so after returning from asynchronous
-   *          calls, confirm that {@link ClientDispatchRequest#isCancelled()} is
-   *          still <code>false</code>. Also, if you get an instance of
-   *          {@link com.google.gwt.http.client.Request Request} as a result of
-   *          network communications, call
-   *          {@link ClientDispatchRequest#setRequest()} so that the calling
-   *          code has the ability to cancel the http request.
    * @param undoCommand Call {@link UndoCommand#undo(A, R, AsyncCallback)} on
    *          this object to send the action over to the server via gwt-rpc. As
    *          a parameter you can pass {@code callback} or your custom
    *          {@link AsyncCallback} if you want to perform any processing
    *          following the undo.
+   * @returns A {@link DispatchRequest} object.
    */
-  void undo(A action, R result, AsyncCallback<Void> callback,
-      ClientDispatchRequest request, UndoCommand<A, R> undoCommand);
+  DispatchRequest undo(A action, R result, AsyncCallback<Void> callback,
+      UndoCommand<A, R> undoCommand);
 
 }
