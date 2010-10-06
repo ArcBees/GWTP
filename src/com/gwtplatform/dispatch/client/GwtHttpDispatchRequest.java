@@ -19,30 +19,32 @@ package com.gwtplatform.dispatch.client;
 import com.google.gwt.http.client.Request;
 
 /**
- * This is a common factory class that provides {@link DispatchRequest}.
+ * An implementation of {@link DispatchRequest} that is an adapter for {@link Request}.
+ * </p>
+ * If the code that requested the command be executed chooses to cancel
+ * the {@link DispatchRequest} and the {@link Request} that has been passed is
+ * still pending, it will be cancelled.
+ * 
+ * @param request The {@link Request} object.
  * 
  * @author Christian Goudreau
+ * @auther Brendan Doherty
  */
-public class DispatchRequestFactory {
-  private static class RequestImpl implements DispatchRequest {
-    Request request;
+public class GwtHttpDispatchRequest implements DispatchRequest {
 
-    private RequestImpl(Request request) {
-      this.request = request;
-    }
+  private final Request request;
 
-    @Override
-    public void cancel() {
-      request.cancel();
-    }
-
-    @Override
-    public boolean isPending() {
-      return request.isPending();
-    }
+  public GwtHttpDispatchRequest(Request request) {
+    this.request = request;
   }
 
-  public static DispatchRequest createRequest(Request request) {
-    return new RequestImpl(request);
+  @Override
+  public void cancel() {
+    request.cancel();
+  }
+
+  @Override
+  public boolean isPending() {
+    return request.isPending();
   }
 }
