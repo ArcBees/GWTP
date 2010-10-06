@@ -132,7 +132,7 @@ public class ProxyGenerator extends Generator {
   private static final String tabContentProxyImplClassName = TabContentProxyImpl.class.getCanonicalName();
   private static final String tabContentProxyPlaceImplClassName = TabContentProxyPlaceImpl.class.getCanonicalName();
   private static final String typeClassName = Type.class.getCanonicalName();
-  private JClassType asyncProviderClass;
+  private JGenericType asyncProviderClass;
   private JClassType baseGinjectorClass;
   private JClassType basePlaceClass;
   private JClassType basePresenterClass;
@@ -141,7 +141,7 @@ public class ProxyGenerator extends Generator {
   private JGenericType gwtEventClass;
   private JGenericType gwtEventTypeClass;
   private JClassType placeRequestClass;
-  private JClassType providerClass;
+  private JGenericType providerClass;
   private JClassType requestTabsHandlerClass;
   private JClassType revealContentHandlerClass;
   private JClassType setPlaceTitleHandlerClass;
@@ -734,8 +734,8 @@ public class ProxyGenerator extends Generator {
     typeClass = oracle.findType(typeClassName);
     revealContentHandlerClass = oracle.findType(revealContentHandlerClassName);
     requestTabsHandlerClass = oracle.findType(requestTabsHandlerClassName);
-    providerClass = oracle.findType(providerClassName);
-    asyncProviderClass = oracle.findType(asyncProviderClassName);
+    providerClass = oracle.findType(providerClassName).isGenericType();
+    asyncProviderClass = oracle.findType(asyncProviderClassName).isGenericType();
     basePlaceClass = oracle.findType(basePlaceClassName);
     tabContentProxyClass = oracle.findType(tabContentProxyClassName);
     gatekeeperClass = oracle.findType(gatekeeperClassName);
@@ -1073,16 +1073,8 @@ public class ProxyGenerator extends Generator {
       // StandardProvider
 
       // Find the appropriate get method in the Ginjector
-      String methodName = null;
-      for (JMethod method : ginjectorClass.getMethods()) {
-        JParameterizedType returnType = method.getReturnType().isParameterized();
-        if (method.getParameters().length == 0 && returnType != null
-            && returnType.isAssignableTo(providerClass)
-            && returnType.getTypeArgs()[0].isAssignableTo(presenterClass)) {
-          methodName = method.getName();
-          break;
-        }
-      }
+      String methodName = findGetMethod(providerClass, presenterClass, ginjectorClass);
+      
       if (methodName == null) {
         logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorClassName
             + "' does not have a get() method returning 'Provider<"
@@ -1097,16 +1089,8 @@ public class ProxyGenerator extends Generator {
       // CodeSplitProvider
 
       // Find the appropriate get method in the Ginjector
-      String methodName = null;
-      for (JMethod method : ginjectorClass.getMethods()) {
-        JParameterizedType returnType = method.getReturnType().isParameterized();
-        if (method.getParameters().length == 0 && returnType != null
-            && returnType.isAssignableTo(asyncProviderClass)
-            && returnType.getTypeArgs()[0].isAssignableTo(presenterClass)) {
-          methodName = method.getName();
-          break;
-        }
-      }
+      String methodName = findGetMethod(asyncProviderClass, presenterClass, ginjectorClass);
+      
       if (methodName == null) {
         logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorClassName
             + "' does not have a get() method returning 'AsyncProvider<"
@@ -1132,16 +1116,8 @@ public class ProxyGenerator extends Generator {
       }
 
       // Find the appropriate get method in the Ginjector
-      String methodName = null;
-      for (JMethod method : ginjectorClass.getMethods()) {
-        JParameterizedType returnType = method.getReturnType().isParameterized();
-        if (method.getParameters().length == 0 && returnType != null
-            && returnType.isAssignableTo(asyncProviderClass)
-            && returnType.getTypeArgs()[0].isAssignableTo(bundleClass)) {
-          methodName = method.getName();
-          break;
-        }
-      }
+      String methodName = findGetMethod(asyncProviderClass, bundleClass, ginjectorClass);
+      
       if (methodName == null) {
         logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorClassName
             + "' does not have a get() method returning 'AsyncProvider<"
@@ -1155,6 +1131,22 @@ public class ProxyGenerator extends Generator {
           + presenterClassName + ", " + bundleClassName + ">( ginjector."
           + methodName + "(), " + proxyCodeSplitBundleAnnotation.id() + ");");
     }
+  }
+
+  private String findGetMethod(JGenericType desiredReturnType, 
+      JClassType desiredReturnTypeParameter, JClassType ginjectorClass) {
+
+    for (JClassType classType : ginjectorClass.getFlattenedSupertypeHierarchy()) {      
+      for (JMethod method : classType.getMethods()) {
+        JParameterizedType returnType = method.getReturnType().isParameterized();
+        if (method.getParameters().length == 0 && returnType != null
+            && returnType.isAssignableTo(desiredReturnType)
+            && returnType.getTypeArgs()[0].isAssignableTo(desiredReturnTypeParameter)) {
+          return method.getName();
+        }
+      }
+    }
+    return null;
   }
 
   private void writeRequestTabHandler(TreeLogger logger,
