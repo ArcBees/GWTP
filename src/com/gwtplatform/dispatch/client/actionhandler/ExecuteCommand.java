@@ -39,7 +39,7 @@ public interface ExecuteCommand<A extends Action<R>, R extends Result> {
    * @param resultCallback A callback that will be invoked once the action has been
    *          executed, successfully or not.
    *          
-   * @return A {@link DispatchRequest} representing the gwt-rpc request.
+   * @return A {@link DispatchRequest} representing the gwt-rpc request, it should never be {@code null}.
    */
   DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
 }
