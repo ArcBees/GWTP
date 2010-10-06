@@ -117,8 +117,8 @@ public class DefaultDispatchAsync implements DispatchAsync {
 
   private <A extends Action<R>, R extends Result> DispatchRequest serviceExecute(
       String securityCookie, final A action, final AsyncCallback<R> callback) {
-    return new GwtHttpDispatchRequest(realService.execute(
-        securityCookie, action, new AsyncCallback<Result>() {
+    return new GwtHttpDispatchRequest(realService.execute(securityCookie,
+        action, new AsyncCallback<Result>() {
           public void onFailure(Throwable caught) {
             DefaultDispatchAsync.this.onExecuteFailure(action, caught, callback);
           }
@@ -147,7 +147,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
     final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider = registry.find(action.getClass());
 
     if (clientActionHandlerProvider != null) {
-      final DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();      
+      final DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
       clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
 
         @Override
@@ -160,19 +160,22 @@ public class DefaultDispatchAsync implements DispatchAsync {
             return;
           }
 
-          dispatchRequest.setDelegate(((ClientActionHandler<A, R>) clientActionHandler).undo(
-              action, result, callback, new UndoCommand<A, R>() {
+          if (dispatchRequest.isPending()) {
+            dispatchRequest.setDelegate(((ClientActionHandler<A, R>) clientActionHandler).undo(
+                action, result, callback, new UndoCommand<A, R>() {
 
-                @Override
-                public DispatchRequest undo(A action, R result,
-                    AsyncCallback<Void> callback) {
-                  if (dispatchRequest.isPending()) {
-                    return serviceUndo(securityCookie, action, result, callback);
-                  } else {
-                    return null;
+                  @Override
+                  public DispatchRequest undo(A action, R result,
+                      AsyncCallback<Void> callback) {
+                    if (dispatchRequest.isPending()) {
+                      return serviceUndo(securityCookie, action, result,
+                          callback);
+                    } else {
+                      return null;
+                    }
                   }
-                }
-              }));
+                }));
+          }
         }
 
         @Override
@@ -193,8 +196,8 @@ public class DefaultDispatchAsync implements DispatchAsync {
       String securityCookie, final A action, final R result,
       final AsyncCallback<Void> callback) {
 
-    return new GwtHttpDispatchRequest(realService.undo(
-        securityCookie, action, result, new AsyncCallback<Void>() {
+    return new GwtHttpDispatchRequest(realService.undo(securityCookie, action,
+        result, new AsyncCallback<Void>() {
           public void onFailure(Throwable caught) {
             DefaultDispatchAsync.this.onUndoFailure(action, caught, callback);
           }
