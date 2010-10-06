@@ -28,10 +28,10 @@ import com.gwtplatform.dispatch.shared.Result;
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
  */
-public class CachingClientActionHandler<A extends Action<R>, R extends Result> extends
+public class ActionCachingHandler<A extends Action<R>, R extends Result> extends
     AbstractCachingClientActionHandler<A, R> {
   
-  public CachingClientActionHandler(Class<A> actionType, Cache cache) {
+  public ActionCachingHandler(Class<A> actionType, Cache cache) {
     super(actionType, cache);
   }
 

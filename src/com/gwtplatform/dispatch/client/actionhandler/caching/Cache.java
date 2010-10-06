@@ -16,26 +16,81 @@
 
 package com.gwtplatform.dispatch.client.actionhandler.caching;
 
-import java.util.Date;
-
 /**
- * Interface for client side caching. This is kept different from generic Cache interfaces for simplicity
+ * Interface for client side caching.
  * 
  * @author Sunny Gupta
  */
 public interface Cache {
+  /**
+   * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
+   * This entry will be expired after {@link #getAutoExpireTimeInMs()} milliseconds if it is positive.
+   * 
+   * @param key The key for the entry to be cached
+   * @param value The corresponding value
+   */
   void put(Object key, Object value);
-  
-  Object get(Object key);
-  
-  void clear();
-  
-  void remove(Object key);
   
   /**
    * 
-   * @param key The key for which last update time is required
-   * @return The last update time
+   * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
+   * If autoExpire is false, this entry will not auto-expire. Otherwise, the entry will be expired after {@link #getAutoExpireTimeInMs()} milliseconds if it is positive.
+   * 
+   * @param key The key for the entry to be cached
+   * @param value The corresponding value
+   * @param autoExpire If set true, the entry will expire after 
    */
-  Date getLastUpateTime(Object key);
+  void put(Object key, Object value, boolean autoExpire);
+  
+  /**
+   * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
+   * This entry will be expired after expirationTimeInMs if it is positive, otherwise it'll expire after {@link #getAutoExpireTimeInMs()} milliseconds if it is positive.
+   * 
+   * @param key The key for the entry to be cached
+   * @param value The corresponding value
+   * @param expirationTimeInMs The time after which entry will expire. 
+   * This overrides the default value for the cache and applies to this specific entry
+   */
+  void put(Object key, Object value, long expirationTimeInMs);
+  
+  /*
+   * Returns the auto expiry time in milliseconds.
+   */
+  long getAutoExpireTimeInMs();
+  
+  /**
+   * Set the auto expiry time, after which an entry will expire after it is put in cache.
+   * 
+   * @param autoExpireTimeInMs The auto expiry time in milliseconds
+   */
+  void setAutoExpireTimeInMs(long autoExpireTimeInMs);
+  
+  /**
+   * Returns the cached value corresponding to key.
+   * 
+   * @param key The key for the cached entry
+   * @return The value corresponding to key
+   */
+  Object get(Object key);
+  
+  /**
+   * Clears the entire cache.
+   * 
+   */
+  void clear();
+  
+  /**
+   * Removes the entry from the cache.
+   * 
+   * @param key The key for the cached entry
+   */
+  void remove(Object key);
+  
+  /**
+   * Returns the last update time in milliseconds since January 1, 1970, 00:00:00 GMT for the cached entry.
+   * 
+   * @param key The key for which last update time is required
+   * @return The last update time as long value
+   */
+  long getLastUpateTime(Object key);
 }
