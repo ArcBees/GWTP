@@ -22,7 +22,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
 
-import com.gwtplatform.dispatch.client.ClientDispatchRequest;
+import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchAsync;
 import com.gwtplatform.dispatch.client.DispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchService;
@@ -67,8 +68,8 @@ class TestDispatchAsync implements DispatchAsync {
   public TestDispatchAsync(TestDispatchService service, Injector injector) {
     this.service = service;
 
-    clientActionHandlers = new HashMap<Class<?>, ClientActionHandler<?,?>>();
-    
+    clientActionHandlers = new HashMap<Class<?>, ClientActionHandler<?, ?>>();
+
     List<Binding<MockClientActionHandlerMap>> bindings = injector.findBindingsByType(TypeLiteral.get(MockClientActionHandlerMap.class));
     for (Binding<MockClientActionHandlerMap> binding : bindings) {
       MockClientActionHandlerMap mapping = binding.getProvider().get();
@@ -84,12 +85,13 @@ class TestDispatchAsync implements DispatchAsync {
     assert callback != null;
     ClientActionHandler<?, ?> clientActionHandler = clientActionHandlers.get(action.getClass());
     if (clientActionHandler != null) {
-      ClientDispatchRequest request = new ClientDispatchRequest();
+      DelegatingDispatchRequest request = new DelegatingDispatchRequest();
       ((ClientActionHandler<A, R>) clientActionHandler).execute(action,
-          callback, request, new ExecuteCommand<A, R>() {
+          callback, new ExecuteCommand<A, R>() {
             @Override
-            public void execute(A action, AsyncCallback<R> resultCallback) {
-              serviceExecute(action, resultCallback);
+            public DispatchRequest execute(A action,
+                AsyncCallback<R> resultCallback) {
+              return serviceExecute(action, resultCallback);
             }
           });
       return request;
@@ -100,8 +102,8 @@ class TestDispatchAsync implements DispatchAsync {
   }
 
   @SuppressWarnings("unchecked")
-  private <A extends Action<R>, R extends Result> void serviceExecute(A action,
-      AsyncCallback<R> callback) {
+  private <A extends Action<R>, R extends Result> DispatchRequest serviceExecute(
+      A action, AsyncCallback<R> callback) {
 
     boolean fail = false;
     R result = null;
@@ -114,32 +116,33 @@ class TestDispatchAsync implements DispatchAsync {
     if (!fail) {
       callback.onSuccess(result);
     }
+    return new CompletedDispatchRequest();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public <A extends Action<R>, R extends Result> DispatchRequest undo(A action,
       R result, AsyncCallback<Void> callback) {
-    
+
     ClientActionHandler<?, ?> clientActionHandler = clientActionHandlers.get(action.getClass());
     if (clientActionHandler != null) {
-      ClientDispatchRequest request = new ClientDispatchRequest();
-      ((ClientActionHandler<A, R>) clientActionHandler).undo(action, result, 
-          callback, request, new UndoCommand<A, R>() {
+      DelegatingDispatchRequest request = new DelegatingDispatchRequest();
+      ((ClientActionHandler<A, R>) clientActionHandler).undo(action, result,
+          callback, new UndoCommand<A, R>() {
             @Override
-            public void undo(A action, R result, AsyncCallback<Void> callback) {
-              serviceUndo(action, result, callback);
+            public DispatchRequest undo(A action, R result, AsyncCallback<Void> callback) {
+              return serviceUndo(action, result, callback);
             }
           });
       return request;
     } else {
       serviceUndo(action, result, callback);
       return new TestingDispatchRequest();
-    }    
+    }
   }
-  
+
   @SuppressWarnings("unchecked")
-  private <A extends Action<R>, R extends Result> void serviceUndo(A action,
+  private <A extends Action<R>, R extends Result> DispatchRequest serviceUndo(A action,
       R result, AsyncCallback<Void> callback) {
 
     boolean fail = false;
@@ -152,7 +155,6 @@ class TestDispatchAsync implements DispatchAsync {
     if (!fail) {
       callback.onSuccess(null);
     }
+    return new CompletedDispatchRequest();
   }
-  
-
 }
