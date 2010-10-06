@@ -39,8 +39,9 @@ public interface UndoCommand<A extends Action<R>, R extends Result> {
    * @param result The result of the action to undo.
    * @param callback A callback that will be invoked once the action has been
    *          undone, successfully or not.
-   *          
-   * @return A {@link DispatchRequest} object representing the gwt-rpc request, it should never be {@code null}.
+   * 
+   * @return A {@link DispatchRequest} object representing the gwt-rpc request,
+   *         it should never be {@code null}.
    */
   DispatchRequest undo(A action, R result, AsyncCallback<Void> callback);
 }
