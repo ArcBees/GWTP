@@ -207,7 +207,7 @@
   </target>
 		
   <target name="release" depends="jar.manifest.release,javac,javac.htmlunit,javac.mockito" description="Build the jar for a release">
-    <jar jarfile="gwtp-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
+    <jar jarfile="gwtp-${version.num}.jar" manifest="${manifest.file}">
       <path refid="jar.files" />
     </jar>
     <jar jarfile="gwtp-htmlunit-${version.num}.jar" manifest="${manifest.file}">
