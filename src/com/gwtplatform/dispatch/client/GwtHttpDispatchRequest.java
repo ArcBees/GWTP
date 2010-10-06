@@ -19,11 +19,12 @@ package com.gwtplatform.dispatch.client;
 import com.google.gwt.http.client.Request;
 
 /**
- * An implementation of {@link DispatchRequest} that is an adapter for {@link Request}.
- * </p>
- * If the code that requested the command be executed chooses to cancel
- * the {@link DispatchRequest} and the {@link Request} that has been passed is
- * still pending, it will be cancelled.
+ * An implementation of {@link DispatchRequest} that is an adapter for
+ * {@link Request}.
+ * <p/>
+ * If the code that requested the command to be executed chooses to cancel the
+ * {@link DispatchRequest} and the {@link Request} that has been passed is still
+ * pending, it will be cancelled.
  * 
  * @param request The {@link Request} object.
  * 

@@ -112,10 +112,10 @@ import com.gwtplatform.dispatch.shared.Result;
  *   }
  * 
  *   {@literal}@Override
- *   public void undo(A action, R result, AsyncCallback&lt;Void&gt; callback,
+ *   public DispatchRequest undo(A action, R result, AsyncCallback&lt;Void&gt; callback,
  *       ClientDispatchRequest request, UndoCommand&lt;A, R&gt; undoCommand) {
  *     // do nothing    
- *       return new CompletedDispatchRequest();
+ *     return new CompletedDispatchRequest();
  *   }
  * }
  * </code>
@@ -146,7 +146,9 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
    *          on this object to send the action over to the server via gwt-rpc.
    *          As a parameter you can pass {@code resultCallback} or your custom
    *          {@link AsyncCallback} if you want to process the result.
-   * @returns A {@link DispatchRequest} object.
+   * @return A {@link DispatchRequest} object. Never return {@code null},
+   *         instead return a new {@link CompletedDispatchRequest} if you
+   *         executed, cancelled or ignored the action.
    */
   DispatchRequest execute(A action, AsyncCallback<R> resultCallback,
       ExecuteCommand<A, R> executeCommand);
@@ -176,7 +178,9 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
    *          a parameter you can pass {@code callback} or your custom
    *          {@link AsyncCallback} if you want to perform any processing
    *          following the undo.
-   * @returns A {@link DispatchRequest} object.
+   * @return A {@link DispatchRequest} object. Never return {@code null},
+   *         instead return a new {@link CompletedDispatchRequest} if you
+   *         executed, cancelled or ignored the action.
    */
   DispatchRequest undo(A action, R result, AsyncCallback<Void> callback,
       UndoCommand<A, R> undoCommand);
