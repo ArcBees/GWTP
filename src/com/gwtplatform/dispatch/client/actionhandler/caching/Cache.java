@@ -24,34 +24,12 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 public interface Cache {
   /**
    * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
-   * This entry will be expired after {@link #getAutoExpireTimeInMs()} milliseconds if it is positive.
-   * 
+   * If automatic expiration is used, this entry will be expired 
+   * after {@link #getAutoExpireTimeInMs()} milliseconds. 
    * @param key The key for the entry to be cached
    * @param value The corresponding value
    */
   void put(Object key, Object value);
-  
-  /**
-   * 
-   * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
-   * If autoExpire is false, this entry will not auto-expire. Otherwise, the entry will be expired after {@link #getAutoExpireTimeInMs()} milliseconds if it is positive.
-   * 
-   * @param key The key for the entry to be cached
-   * @param value The corresponding value
-   * @param autoExpire If set true, the entry will expire after 
-   */
-  void put(Object key, Object value, boolean autoExpire);
-  
-  /**
-   * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
-   * This entry will be expired after expirationTimeInMs if it is positive, otherwise it'll expire after {@link #getAutoExpireTimeInMs()} milliseconds if it is positive.
-   * 
-   * @param key The key for the entry to be cached
-   * @param value The corresponding value
-   * @param expirationTimeInMs The time after which entry will expire. 
-   * This overrides the default value for the cache and applies to this specific entry
-   */
-  void put(Object key, Object value, long expirationTimeInMs);
   
   /*
    * Returns the auto expiry time in milliseconds.
