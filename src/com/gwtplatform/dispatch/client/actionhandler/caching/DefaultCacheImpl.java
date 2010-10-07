@@ -30,14 +30,10 @@ public class DefaultCacheImpl implements Cache {
 
     private final Object value;
     private final long lastUpdateTime;
-    private final boolean autoExpire;
-    private final long expirationTimeInMs;
     
-    public CacheValue(final Object value, final boolean autoExpire, long expirationTimeInMs) {
+    public CacheValue(final Object value) {
       this.value = value;
       this.lastUpdateTime = new Date().getTime();
-      this.autoExpire = autoExpire;
-      this.expirationTimeInMs = expirationTimeInMs;
     }
 
     public Object getValue() {
@@ -47,14 +43,6 @@ public class DefaultCacheImpl implements Cache {
     public long getLastUpateTime() {
       return this.lastUpdateTime;
     }
-
-    public boolean isAutoExpire() {
-      return autoExpire;
-    }
-
-    public long getExpirationTimeInMs() {
-      return expirationTimeInMs;
-    }  
   }
   
   private HashMap<Object, CacheValue> map;
@@ -93,50 +81,22 @@ public class DefaultCacheImpl implements Cache {
       throw new NullPointerException("key is null");
     }
     CacheValue cacheValue = map.get(key);
-    // First check if entry can auto-expire
-    if (cacheValue.isAutoExpire()) {
-      // Now check if expirationTimeInMs is positive
-      long expireTime = 0;
-      if (cacheValue.getExpirationTimeInMs() > 0) {
-        expireTime = cacheValue.getExpirationTimeInMs();
-      } else {
-        // Apply default behaviour of cache: Check if autoexpired
-        if (cacheValue.isAutoExpire() && this.autoExpireTimeInMs > 0) {
-          expireTime = this.autoExpireTimeInMs;
-        }
-      }
+    // Check if to be autoexpired
+    if (this.autoExpireTimeInMs > 0) {
       // Check if expired
       long now = new Date().getTime();
-      if (cacheValue.getLastUpateTime() + expireTime > now) {
+      if (cacheValue.getLastUpateTime() + this.autoExpireTimeInMs > now) {
         // Expired, remove
         remove(key);
         return null;
       }
     }
-    
     // Not expired, return the value
     return cacheValue.getValue();
   }
 
   @Override
   public void put(Object key, Object value) {
-    // Put with autoExpire = true
-    put(key, value, true, 0);
-  }
-  
-  @Override
-  public void put(Object key, Object value, boolean autoExpire) {
-    // Put with autoExpire = true
-    put(key, value, autoExpire, 0);
-  }
-
-  @Override
-  public void put(Object key, Object value, long expirationTimeInMs) {
-    // Put with autoExpire = true
-    put(key, value, true, expirationTimeInMs);
-  }
-  
-  private void put(Object key, Object value, boolean autoExpire, long expirationTimeInMs) {
     // Check for null as Cache should not store null values / keys
     if (key == null) {
       throw new NullPointerException("key is null");
@@ -146,7 +106,7 @@ public class DefaultCacheImpl implements Cache {
     }
     
     // Put in map
-    map.put(key, new CacheValue(value, autoExpire, expirationTimeInMs));
+    map.put(key, new CacheValue(value));
   }
   
   @Override
