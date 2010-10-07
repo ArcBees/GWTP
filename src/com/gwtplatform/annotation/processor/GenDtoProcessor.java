@@ -16,15 +16,12 @@
 
 package com.gwtplatform.annotation.processor;
 
-import com.gwtplatform.annotation.GenDto;
-import com.gwtplatform.annotation.processor.GenerationHelper.Visibility;
+import static javax.lang.model.SourceVersion.RELEASE_6;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.Set;
-
-import static javax.lang.model.SourceVersion.RELEASE_6;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -32,8 +29,11 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+
+import com.gwtplatform.annotation.GenDto;
 
 /**
  * Processes {@link GenDto} annotations.
@@ -96,23 +96,28 @@ public class GenDtoProcessor extends AbstractProcessor {
       
       writer.generateClassHeader(dtoSimpleName, null, "IsSerializable");
       
-      writer.generateFields(orderedElementFields, false);
-
-      if (!orderedElementFields.isEmpty() && !reflection.hasOnlyOptionalFields()) {
-        writer.generateEmptyConstructor(dtoSimpleName, Visibility.PROTECTED);
+      writer.generateFieldDeclarations(orderedElementFields);
+      
+      Collection<VariableElement> allFields = reflection.getNonConstantFields();
+      Collection<VariableElement> optionalFields = reflection.getOptionalFields();
+      Collection<VariableElement> requiredFields = reflection.getNonConstantFields();
+      requiredFields.removeAll(optionalFields);
+      
+      writer.generateConstructorUsingFields(dtoSimpleName, allFields);
+      
+      if (optionalFields.size() > 0) {
+        writer.generateConstructorUsingFields(dtoSimpleName, requiredFields);
       }
-
-      writer.generateConstructorsUsingFields(dtoSimpleName, 
-          orderedElementFields,
-          reflection.getOptionalFields()
-      );
+      
+      if (!allFields.isEmpty() && requiredFields.size() > 0) {
+        writer.generateEmptyConstructor(dtoSimpleName, Modifier.PROTECTED);
+      }
 
       writer.generateFieldAccessors(orderedElementFields);
 
       writer.generateEquals(dtoSimpleName, orderedElementFields);
-
       writer.generateHashCode(orderedElementFields);
-
+      
       writer.generateToString(dtoSimpleName, orderedElementFields);
 
       writer.generateClassFooter();

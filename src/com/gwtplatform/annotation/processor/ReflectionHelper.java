@@ -30,6 +30,7 @@ import java.util.TreeMap;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
@@ -54,25 +55,55 @@ public class ReflectionHelper {
     this.environment = environment;
   }
   
+  public Collection<VariableElement> filterConstantFields(Collection<VariableElement> fieldElements) {
+    return filterFields(fieldElements, Modifier.STATIC, Modifier.FINAL);
+  }
+  
+  /**
+   * Returns only fields which doesn't contain one of the passed modifiers.
+   */
+  public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, Modifier... modifiers) {
+    Collection<VariableElement> filteredFields = new ArrayList<VariableElement>();
+    filteredFields.addAll(fieldElements);
+    for (VariableElement fieldElement : fieldElements) {
+      for (Modifier modifier : modifiers) {
+        if (fieldElement.getModifiers().contains(modifier)) {
+          filteredFields.remove(fieldElement);
+          break;
+        }
+      }
+    }
+    return filteredFields;
+  }
+  
+  /**
+   * Returns only fields which doesn't annotated with one of the passed annotation.
+   */
+  public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, Class<? extends Annotation>... annotations) {
+    Collection<VariableElement> filteredFields = new ArrayList<VariableElement>();
+    filteredFields.addAll(fieldElements);
+    for (VariableElement fieldElement : fieldElements) {
+      for (Class<? extends Annotation> passedAnnotation : annotations) {
+        Annotation fieldAnnotation = fieldElement.getAnnotation(passedAnnotation);
+        if (fieldAnnotation != null) {
+          filteredFields.remove(fieldElement);
+          break;
+        }
+      }
+    }
+    return filteredFields;
+  }
+  
   /**
    * Returns all fields annotated with the passed annotation classes.
    */
   public Collection<VariableElement> getAnnotatedFields(Class<? extends Annotation>... annotations) {
-    Collection<VariableElement> optionalFields = new ArrayList<VariableElement>();
-    for (VariableElement field : getFields()) {
-      boolean passedAnnotationsArePresent = true;
-      for (Class<? extends Annotation> passedAnnotation : annotations) {
-        Annotation fieldAnnotation = field.getAnnotation(passedAnnotation);
-        if (fieldAnnotation == null) {
-          passedAnnotationsArePresent = false;
-          break;
-        }
-      }
-      if (passedAnnotationsArePresent) {
-        optionalFields.add(field);
-      }
+    Collection<VariableElement> fieldsCopy = getFields();
+    for (Class<? extends Annotation> annotation : annotations) {
+      Collection<VariableElement> nonAnnotatedFields = filterFields(getFields(), annotation);
+      fieldsCopy.removeAll(nonAnnotatedFields);
     }
-    return optionalFields;
+    return fieldsCopy;
   }
   
   /**
@@ -92,15 +123,29 @@ public class ReflectionHelper {
   }
   
   /**
+   * Returns all fields ordered that are {@link Modifier.FINAL} or {@link Modifier.STATIC}.
+   */
+  public Collection<VariableElement> getConstantFields() {
+    return getModifierFields(Modifier.FINAL, Modifier.STATIC);
+  }
+  
+  /**
    * Returns all fields.
    * <p>
    * <b>Important:</b> Fields are not sorted according to @{@link Order}!
    * </p>
    * To get these sorted use {@link ReflectionHelper#getOrderedFields()}.
    */
-  public List<VariableElement> getFields() {
+  public Collection<VariableElement> getFields() {
     List<? extends Element> members = getElementUtils().getAllMembers(classRepresenter);
     return ElementFilter.fieldsIn(members);
+  }
+  
+  /**
+   * Returns all fields which contains {@link Modifier.FINAL}.
+   */
+  public Collection<VariableElement> getFinalFields() {
+    return filterFields(getOrderedFields(), Modifier.FINAL);
   }
   
   /**
@@ -111,11 +156,41 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns all fields annotated with @{@link Optional}. Sorted based on the @
+   * Returns all fields with the passed modifier.
+   */
+  public Collection<VariableElement> getModifierFields(Modifier... modifiers) {
+    Collection<VariableElement> modifierFields = new ArrayList<VariableElement>();
+    modifierFields.addAll(getFields());
+    for (Modifier modifier : modifiers) {
+      Collection<VariableElement> nonModifierFields = filterFields(getFields(), modifier);
+      modifierFields.removeAll(nonModifierFields);
+    }
+    return modifierFields;
+  }
+  
+  /**
+   * Returns all fields ordered that are not {@link Modifier.FINAL} or {@link Modifier.STATIC}.
+   */
+  public Collection<VariableElement> getNonConstantFields() {
+    return filterFields(getOrderedFields(), Modifier.FINAL, Modifier.STATIC);
+  }
+  
+  /**
+   * Returns all non constant fields annotated with @{@link Optional}. Sorted based on the @
    * {@link Order} annotation.
    */
   public Collection<VariableElement> getOptionalFields() {
-    return sortFields(Order.class, getAnnotatedFields(Optional.class));
+    return sortFields(Order.class, filterConstantFields(getAnnotatedFields(Optional.class)));
+  }
+  
+  /**
+   * Returns all non constant fields annotated with passed annotation.
+   * <p>
+   * <b>Important:</b> Fields are not sorted!
+   * </p>
+   */
+  public Collection<VariableElement> getOptionalFields(Class<? extends Annotation> annotation) {
+    return filterConstantFields(getAnnotatedFields(Optional.class, annotation));
   }
   
   /**
@@ -140,16 +215,36 @@ public class ReflectionHelper {
     return environment;
   }
   
+  /**
+   * Returns all non {@link Optional}|{@link Modifier#STATIC}|
+   * {@link Modifier#FINAL} fields <b>ordered</b>. See {@link Order} for
+   * detailed order informations.
+   * <p>
+   * Required are all:
+   * <ul>
+   * <li>Declared fields matching rules below</li>
+   * <li><b>Non</b> annotated {@link Optional} fields</li>
+   * <li><b>Non</b> {@link Modifier#STATIC} fields</li>
+   * <li><b>Non</b> {@link Modifier#FINAL} fields</li>
+   * </ul>
+   * </p>
+   */
+  public Collection<VariableElement> getRequiredFields() {
+    Collection<VariableElement> fields = getFields();
+    fields.removeAll(getOptionalFields());
+    fields = filterFields(fields, Modifier.FINAL, Modifier.STATIC);
+    return sortFields(Order.class, fields);
+  }
+  
   public String getSimpleClassName() {
     return classRepresenter.getSimpleName().toString();
   }
   
-  public boolean hasOnlyOptionalFields() {
-    return getOptionalFields().size() == getFields().size();
-  }
-  
-  public boolean hasOnlyOptionalFields(Class<? extends Annotation> annotation) {
-    return getOptionalFields().size() == getAnnotatedFields(annotation).size();
+  /**
+   * Returns all fields which contains {@link Modifier.STATIC}.
+   */
+  public Collection<VariableElement> getStaticFields() {
+    return filterFields(getOrderedFields(), Modifier.STATIC);
   }
   
   /**
