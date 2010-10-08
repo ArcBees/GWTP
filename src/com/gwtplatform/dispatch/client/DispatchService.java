@@ -25,7 +25,7 @@ import com.gwtplatform.dispatch.shared.ServiceException;
 
 /**
  * The base class of the synchronous dispatcher service. The server-side
- * implementation is {@link com.gwtplatform.dispatch.server.DispatchServiceImpl}
+ * implementation is {@link com.gwtplatform.dispatch.server.guice.DispatchServiceImpl}
  * and the async client-side version is {@link DispatchServiceAsync}.
  * <p />
  * This class is closely related to
@@ -35,10 +35,10 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * 
  * @see com.gwtplatform.dispatch.client.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
- * @see com.gwtplatform.dispatch.server.DispatchImpl
+ * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.client.DispatchService
  * @see com.gwtplatform.dispatch.client.DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
  * 
  * @author Philippe Beaudoin
  */
