@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server;
+package com.gwtplatform.dispatch.server.guice;
 
 import com.google.inject.Singleton;
 
