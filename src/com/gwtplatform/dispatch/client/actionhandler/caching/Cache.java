@@ -68,7 +68,7 @@ public interface Cache {
    * Returns the last update time in milliseconds since January 1, 1970, 00:00:00 GMT for the cached entry.
    * 
    * @param key The key for which last update time is required
-   * @return The last update time as long value
+   * @return The last update time as long value, if the value is cached, otherwise -1
    */
   long getLastUpateTime(Object key);
 }
