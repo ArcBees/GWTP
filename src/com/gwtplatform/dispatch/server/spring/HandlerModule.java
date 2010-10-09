@@ -1,10 +1,17 @@
 /**
- * Copyright 2010 ArcBees Inc. Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language governing permissions and limitations under the
- * License.
+ * Copyright 2010 ArcBees Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.gwtplatform.dispatch.server.spring;
@@ -22,22 +29,25 @@ import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
+/**
+ * @author Peter Simun
+ */
 @Import({DispatchModule.class})
 public abstract class HandlerModule {
 
-	@Autowired
-	protected ApplicationContext applicationContext;
+  @Autowired
+  protected ApplicationContext applicationContext;
 
-	protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
-		SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass, new ActionHandlerValidatorClass<A, R>(handlerClass,
-				DefaultActionValidator.class)));
-	}
+  protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
+    SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass, new ActionHandlerValidatorClass<A, R>(handlerClass,
+        DefaultActionValidator.class)));
+  }
 
-	protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass,
-			Class<? extends ActionValidator> actionValidator) {
-		SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass, new ActionHandlerValidatorClass<A, R>(handlerClass,
-				actionValidator)));
-	}
+  protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass,
+      Class<? extends ActionValidator> actionValidator) {
+    SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass, new ActionHandlerValidatorClass<A, R>(handlerClass,
+        actionValidator)));
+  }
 
-	protected abstract void configureHandlers();
+  protected abstract void configureHandlers();
 }
