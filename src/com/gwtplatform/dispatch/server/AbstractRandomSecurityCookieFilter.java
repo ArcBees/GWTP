@@ -30,7 +30,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  * This filter will automatically inject a security cookie inside the request the first time the page is loaded. This
  * security cookie is a simple randomly generated number, and might be slightly less secure than
