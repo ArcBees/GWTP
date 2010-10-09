@@ -54,8 +54,8 @@ public class DefaultCacheImpl implements Cache {
   public DefaultCacheImpl() {
     // Initialize map
     this.map = new HashMap<Object, CacheValue>();
-    // By default, autoExpireTime is 0 so that objects never expire
-    this.autoExpireTimeInMs = 0;
+    // By default, autoExpireTime is -1 so that objects never expire
+    this.autoExpireTimeInMs = -1;
   }
   
   /**
@@ -81,8 +81,13 @@ public class DefaultCacheImpl implements Cache {
       throw new NullPointerException("key is null");
     }
     CacheValue cacheValue = map.get(key);
-    // Check if to be autoexpired
-    if (this.autoExpireTimeInMs > 0) {
+    // Check for null
+    if (cacheValue == null) {
+      return null;
+    }
+    // Check if to be autoexpired, autoExpireTimeInMs = 0 means expire immediately / no caching
+    // Note: This point will never be reached if the value was put in cache when autoExpireTimeInMs was 0
+    if (this.autoExpireTimeInMs >= 0) {
       // Check if expired
       long now = new Date().getTime();
       if (cacheValue.getLastUpateTime() + this.autoExpireTimeInMs > now) {
@@ -97,16 +102,19 @@ public class DefaultCacheImpl implements Cache {
 
   @Override
   public void put(Object key, Object value) {
-    // Check for null as Cache should not store null values / keys
-    if (key == null) {
-      throw new NullPointerException("key is null");
+    // No point caching if autoExpireTimeInMs = 0
+    if (this.autoExpireTimeInMs != 0) {
+      // Check for null as Cache should not store null values / keys
+      if (key == null) {
+        throw new NullPointerException("key is null");
+      }
+      if (value == null) {
+        throw new NullPointerException("value is null");
+      }
+
+      // Put in map
+      map.put(key, new CacheValue(value));
     }
-    if (value == null) {
-      throw new NullPointerException("value is null");
-    }
-    
-    // Put in map
-    map.put(key, new CacheValue(value));
   }
   
   @Override
@@ -120,7 +128,14 @@ public class DefaultCacheImpl implements Cache {
     if (key == null) {
       throw new NullPointerException("key is null");
     }
-    return map.get(key).getLastUpateTime();
+    CacheValue value = map.get(key);
+    
+    // Check for null
+    if (value != null) {
+      return value.getLastUpateTime();
+    } else {
+      return -1;
+    }
   }
 
   @Override
@@ -130,10 +145,7 @@ public class DefaultCacheImpl implements Cache {
 
   @Override
   public void setAutoExpireTimeInMs(long autoExpireTimeInMs) {
-    // Check for a positive value
-    if (autoExpireTimeInMs >= 0) {
-      this.autoExpireTimeInMs = autoExpireTimeInMs;
-    }
+    this.autoExpireTimeInMs = autoExpireTimeInMs;
   }
 
 }
