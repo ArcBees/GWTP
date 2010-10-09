@@ -14,24 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.spring.actionhandlervalidator;
+package com.gwtplatform.dispatch.server.guice.actionhandlervalidator;
 
-import org.springframework.context.ApplicationContext;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
-import com.gwtplatform.dispatch.server.spring.SpringBeanProvider;
+import com.gwtplatform.dispatch.server.guice.GuiceBeanProvider;
 
 /**
- * This class links any registered {@link ActionHandler} and {@link ActionValidator} instances with the default
- * {@link ActionHandlerValidatorRegistry}.
+ * This class links any registered {@link ActionHandler} and {@link ActionValidator} instances with the default.
+ * {@link ActionHandlerValidatorRegistry}
  * 
- * @author Peter Simun (simun@seges.sk)
+ * @author Christian Goudreau
  */
 public class ActionHandlerValidatorLinker {
 
-  public static void linkValidators(ApplicationContext applicationContent, ActionHandlerValidatorRegistry registry) {
-    ActionHandlerValidatorLinkerHelper.linkValidators(new SpringBeanProvider(applicationContent), registry);
+  @Inject
+  public static void linkValidators(Injector injector, ActionHandlerValidatorRegistry registry) {
+    ActionHandlerValidatorLinkerHelper.linkValidators(new GuiceBeanProvider(injector), registry);
   }
 
   private ActionHandlerValidatorLinker() {

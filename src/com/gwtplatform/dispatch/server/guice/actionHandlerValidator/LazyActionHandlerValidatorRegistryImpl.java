@@ -14,16 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.guice.actionHandlerValidator;
+package com.gwtplatform.dispatch.server.guice.actionhandlervalidator;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
-import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorClass;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorInstance;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.LazyActionHandlerValidatorRegistry;
-import com.gwtplatform.dispatch.server.actionValidator.ActionValidator;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
