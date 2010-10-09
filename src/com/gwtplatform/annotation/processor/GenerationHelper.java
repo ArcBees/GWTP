@@ -275,8 +275,7 @@ public class GenerationHelper implements Closeable {
       println("    return super.hashCode();");
     }
     println("  }");
-  }
-  
+  }  
   
   /**
    * Use null as import to separate import groups.
