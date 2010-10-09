@@ -24,7 +24,6 @@ import com.google.inject.Module;
 import com.google.inject.Scope;
 import com.google.inject.spi.DefaultBindingScopingVisitor;
 
-
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
