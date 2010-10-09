@@ -131,7 +131,6 @@ public class GenEventProcessor extends AbstractProcessor {
         writer.generateEmptyConstructor(eventSimpleName, Modifier.PROTECTED);
       }
 
-
       generateAssociatedTypeMethod(writer, eventElementSimpleName);
       
       writer.generateFieldAccessors(orderedElementFields);
