@@ -5,8 +5,10 @@
   
   <property environment="env"/>
   <property name="in.src.folder" location="src" />
+  <property name="in.src.springdependant" value="**/spring/**" />
   <property name="in.src.htmlunitdependant" value="com/gwtplatform/crawler/**" />
   <property name="in.src.mockitodependant" value="com/gwtplatform/test/mockito/**" />
+  <property name="in.test.springdependant" value="**/spring/**" />
   <property name="in.test.folder" location="test" />
   <property name="out.test.src.folder" location=".apt_generated" />
   <property name="out.classes.folder" location="war/WEB-INF/classes" />
@@ -84,7 +86,7 @@
     	
   <target name="javac" description="Compile java source (without external dependencies)">
     <mkdir dir="${out.classes.folder}" />
-    <javac srcdir="${in.src.folder}" includes="**" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
+    <javac srcdir="${in.src.folder}" includes="**" excludes="${in.src.springdependant},${in.src.htmlunitdependant},${in.src.mockitodependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
       nowarn="true" debug="true" debuglevel="lines,vars,source">
       <!-- Do not use any annotation processor -->
       <compilerarg value="-proc:none" />
@@ -126,7 +128,7 @@
 
   <target name="javac.tests" depends="javac,javac.mockito,javac.htmlunit" description="Compiles test code">
     <mkdir dir="${out.test.src.folder}" />  	
-    <javac srcdir="${in.test.folder}" destdir="${in.test.folder}" includes="**" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
+    <javac srcdir="${in.test.folder}" destdir="${in.test.folder}" includes="**" excludes="${in.test.springdependant}" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
       <classpath refid="tests.class.path" />
       <!-- Send files generated via annotation processing to .apt_generated -->
     	<compilerarg value="-s"/>
@@ -163,6 +165,7 @@
         <fileset dir="${in.test.folder}">
           <include name="**/*Test.java" />
           <include name="**/*Tests.java" />
+        	<exclude name="**/spring/**" />
         </fileset>
       </batchtest>
       <formatter type="plain" />

@@ -14,34 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionhandler;
+package com.gwtplatform.dispatch.server;
 
-import com.gwtplatform.dispatch.server.ExecutionContext;
+import junit.framework.Assert;
+
+import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
+import com.gwtplatform.dispatch.shared.ServiceException;
 import com.gwtplatform.dispatch.shared.action.TestAction;
 import com.gwtplatform.dispatch.shared.action.TestResult;
 
 /**
  * @author Peter Simun
  */
-public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
+public class ActionTestBase {
 
-  public static final String MESSAGE = "This is test message!";
-
-  public TestActionHandler() {
-    super(TestAction.class);
-  }
-
-  @Override
-  public TestResult execute(TestAction action, ExecutionContext context) throws ActionException {
-    if (action.getTestMessage().equals(MESSAGE)) {
-      return new TestResult(true);
-    }
-    return new TestResult(false);
-  }
-
-  @Override
-  public void undo(TestAction action, TestResult result, ExecutionContext context) throws ActionException {
-    // No undo support
+  protected void testAction(Dispatch dispatch) throws ActionException, ServiceException {
+    TestAction action = new TestAction(TestActionHandler.MESSAGE);
+    TestResult result = dispatch.execute(action);
+    Assert.assertTrue("Invalid action result! Processing error occured", result.getResult());
   }
 }

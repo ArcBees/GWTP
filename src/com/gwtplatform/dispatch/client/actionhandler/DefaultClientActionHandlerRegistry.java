@@ -75,7 +75,6 @@ import java.util.Map;
  * </code>
  * </pre>
  * 
- * 
  * @author Brendan Doherty
  */
 public class DefaultClientActionHandlerRegistry implements

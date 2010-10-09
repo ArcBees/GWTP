@@ -1,3 +1,19 @@
+/**
+ * Copyright 2010 ArcBees Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package com.gwtplatform.dispatch.server.spring;
 
 import java.util.ArrayList;
@@ -12,42 +28,45 @@ import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValid
 import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor;
 import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 
+/**
+ * @author Peter Simun
+ */
 public class SpringBeanProvider implements BeanProvider {
 
-	/**
-	 * Adapter for tranforming Guice Binding into BeanProvider implementation
-	 * 
-	 * @author Peter Simun (simun@seges.sk)
-	 */
-	public static class SpringBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
+  /**
+   * Adapter for tranforming Guice Binding into BeanProvider implementation.
+   * 
+   * @author Peter Simun (simun@seges.sk)
+   */
+  public static class SpringBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
 
-		public SpringBindingDescriptorAdapter(Entry<String, B> binding) {
-			super(binding.getValue(), binding.getKey());
-		}
-	}
+    public SpringBindingDescriptorAdapter(Entry<String, B> binding) {
+      super(binding.getValue(), binding.getKey());
+    }
+  }
 
-	private ApplicationContext applicationContext;
+  private ApplicationContext applicationContext;
 
-	public SpringBeanProvider(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
+  public SpringBeanProvider(ApplicationContext applicationContext) {
+    this.applicationContext = applicationContext;
+  }
 
-	@Override
-	public <B> B getInstance(Class<B> clazz) {
-		return SpringUtils.getInstance(applicationContext, clazz);
-	}
+  @Override
+  public <B> B getInstance(Class<B> clazz) {
+    return SpringUtils.getInstance(applicationContext, clazz);
+  }
 
-	@Override
-	public <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz) {
+  @Override
+  public <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz) {
 
-		List<BindingDescriptor<B>> result = new ArrayList<BindingDescriptor<B>>();
+    List<BindingDescriptor<B>> result = new ArrayList<BindingDescriptor<B>>();
 
-		Map<String, B> beansOfType = applicationContext.getBeansOfType(clazz);
+    Map<String, B> beansOfType = applicationContext.getBeansOfType(clazz);
 
-		for (Entry<String, B> beans : beansOfType.entrySet()) {
-			result.add(new SpringBindingDescriptorAdapter<B>(beans));
-		}
+    for (Entry<String, B> beans : beansOfType.entrySet()) {
+      result.add(new SpringBindingDescriptorAdapter<B>(beans));
+    }
 
-		return result.iterator();
-	}
+    return result.iterator();
+  }
 }

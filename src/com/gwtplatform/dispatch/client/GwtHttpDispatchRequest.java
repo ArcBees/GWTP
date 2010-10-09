@@ -26,10 +26,8 @@ import com.google.gwt.http.client.Request;
  * {@link DispatchRequest} and the {@link Request} that has been passed is still
  * pending, it will be cancelled.
  * 
- * @param request The {@link Request} object.
- * 
  * @author Christian Goudreau
- * @auther Brendan Doherty
+ * @author Brendan Doherty
  */
 public class GwtHttpDispatchRequest implements DispatchRequest {
 
