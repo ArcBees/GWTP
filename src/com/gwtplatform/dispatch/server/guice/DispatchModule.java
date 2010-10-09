@@ -20,10 +20,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 
 import com.gwtplatform.dispatch.server.Dispatch;
+import com.gwtplatform.dispatch.server.RequestProvider;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker;
 import com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl;
+import com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider;
 
 /**
  * This module will configure the implementation for the {@link Dispatch} and
@@ -81,7 +83,8 @@ public class DispatchModule extends AbstractModule {
     bind(ActionHandlerValidatorRegistry.class).to(
         lazyActionHandlerValidatorRegistryClass).in(Singleton.class);
     bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
-
+    bind(RequestProvider.class).to(DefaultRequestProvider.class).in(Singleton.class);    
+    
     // This will bind registered validators and handlers to the registry lazily.
     if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass)) {
       requestStaticInjection(ActionHandlerValidatorLinker.class);
