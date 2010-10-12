@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.HasEventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
@@ -55,15 +54,6 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
     source.fireEvent(new RevealContentEvent(type, content));
   }
 
-  /**
-   * Deprecated, use {@link #fire(HasEventBus, com.google.gwt.event.shared.GwtEvent.Type, Presenter)} instead.
-   */
-  @Deprecated
-  public static void fire(final EventBus source,
-      final Type<RevealContentHandler<?>> type, final Presenter<?, ?> content) {
-    source.fireEvent(new RevealContentEvent(type, content));
-  }
-  
   private final Presenter<?, ?> content;
 
   private final Type<RevealContentHandler<?>> type;
