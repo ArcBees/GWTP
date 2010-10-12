@@ -20,8 +20,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
+import com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchRequest;
-import com.gwtplatform.dispatch.client.GwtHttpCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
@@ -75,10 +76,10 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
     ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
 
     if (pendingRequestCallbacks != null) {
-      CallbackDispatchRequest<R> callbackDispatchRequest = new CallbackDispatchRequest<R>(resultCallback);
+      CallbackDispatchRequest<R> callbackDispatchRequest = new DefaultCallbackDispatchRequest<R>(resultCallback);
       
       // Add callback to pending list and return
-      pendingRequestCallbacks.add(new CallbackDispatchRequest<R>(resultCallback));
+      pendingRequestCallbacks.add(callbackDispatchRequest);
 
       return callbackDispatchRequest;
     }
@@ -126,12 +127,12 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
       // Add pending callback
       ArrayList<CallbackDispatchRequest<R>> resultRequestCallbacks = new ArrayList<CallbackDispatchRequest<R>>();
       
-      GwtHttpCallbackDispatchRequest<R> gwtHttpCallbackDispatchRequest = new GwtHttpCallbackDispatchRequest<R>(request, resultCallback);
-      resultRequestCallbacks.add(gwtHttpCallbackDispatchRequest);
+      CallbackDispatchRequest<R> callbackDispatchRequest = new DelagatingCallbackDispatchRequest<R>(request, resultCallback);
+      resultRequestCallbacks.add(callbackDispatchRequest);
       
       pendingRequestCallbackMap.put(action, resultRequestCallbacks);
       
-      return gwtHttpCallbackDispatchRequest;
+      return callbackDispatchRequest;
     }
   };
 
