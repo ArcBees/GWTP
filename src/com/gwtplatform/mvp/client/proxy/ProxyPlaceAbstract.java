@@ -37,23 +37,15 @@ import com.gwtplatform.mvp.client.Presenter;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-@SuppressWarnings("deprecation")
-// TODO: Remove after making members private
 public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>>
     implements ProxyPlace<P> {
-
-  /**
-   * The {@link EventBus} for the application.
-   * 
-   * Deprecated to use directly, use {@link #getEventBus()} instead.
-   */
-  @Deprecated
-  protected EventBus eventBus; // TODO: Make private.
 
   protected ProxyFailureHandler failureHandler;
   protected Place place;
   protected PlaceManager placeManager;
   protected Proxy_ proxy;
+  
+  private EventBus eventBus;
 
   /**
    * Creates a {@link ProxyPlaceAbstract}. That is, the {@link Proxy} of a
