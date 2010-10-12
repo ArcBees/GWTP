@@ -41,13 +41,7 @@ import java.util.List;
 public abstract class PlaceManagerImpl implements PlaceManager,
     ValueChangeHandler<String>, ClosingHandler {
 
-  /**
-   * The {@link EventBus} for the application.
-   * 
-   * Deprecated to use directly, use {@link #getEventBus()} instead.
-   */
-  @Deprecated
-  protected final EventBus eventBus; // TODO: Make private.
+  private final EventBus eventBus;
   private String currentHistoryToken = "";
 
   private String currentHRef = "";
