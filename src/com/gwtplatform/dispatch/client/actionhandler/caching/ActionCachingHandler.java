@@ -23,10 +23,11 @@ import com.gwtplatform.dispatch.shared.Result;
  * Default implementation of {@link AbstractCachingClientActionHandler}. It supports {@link Action} caching
  * </p>
  * TODO Add support for timeout based auto-expiry of cached results?
- * @author Sunny Gupta
  *
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
+ * 
+ * @author Sunny Gupta
  */
 public class ActionCachingHandler<A extends Action<R>, R extends Result> extends
     AbstractCachingClientActionHandler<A, R> {
@@ -61,5 +62,4 @@ public class ActionCachingHandler<A extends Action<R>, R extends Result> extends
       return null;
     }
   }
-
 }
