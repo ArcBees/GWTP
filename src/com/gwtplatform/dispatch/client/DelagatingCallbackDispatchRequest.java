@@ -23,23 +23,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * {@link ClientActionHandler}s that make asynchronous calls that return a
  * {@link com.google.gwt.http.client.Request}.
  * 
+ * This class also takes a {@link DispatchRequest} and delegate work to this {@link DispatchRequest}.
+ * 
  * This class is used within {@link AbstractCachingClientActionHandler} to be
- * able to store inside an HashMap {@link CallbackDispatchRequest} while keeping
+ * able to store inside an HashMap {@link DefaultCallbackDispatchRequest} while keeping
  * {@link GwtHttpDispatchRequest} nature.
  * 
  * @param <R> The type of the {@link AsyncCallback}.
  * 
  * @author Christian Goudreau
  */
-public class GwtHttpCallbackDispatchRequest<R> extends
-    CallbackDispatchRequest<R> {
+public class DelagatingCallbackDispatchRequest<R> implements CallbackDispatchRequest<R> {
   private final DispatchRequest request;
+  private final AsyncCallback<R> callback;
 
-  public GwtHttpCallbackDispatchRequest(DispatchRequest request,
+  public DelagatingCallbackDispatchRequest(DispatchRequest request,
       AsyncCallback<R> callback) {
-    super(callback);
 
     this.request = request;
+    this.callback = callback;
   }
 
   @Override
@@ -50,5 +52,15 @@ public class GwtHttpCallbackDispatchRequest<R> extends
   @Override
   public boolean isPending() {
     return request.isPending();
+  }
+
+  @Override
+  public void onFailure(Throwable caught) {
+    callback.onFailure(caught);
+  }
+
+  @Override
+  public void onSuccess(R result) {
+    callback.onSuccess(result);
   }
 }
