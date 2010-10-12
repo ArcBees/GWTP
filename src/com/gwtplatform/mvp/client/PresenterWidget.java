@@ -73,25 +73,10 @@ import java.util.Map;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-// TODO: Remove after making members private
-@SuppressWarnings("deprecation")
 public abstract class PresenterWidget<V extends View> extends
     HandlerContainerImpl implements HasEventBus, HasSlots, HasPopupSlot {
-  /**
-   * The {@link EventBus} for the application.
-   * 
-   * Deprecated to use directly, use {@link #getEventBus()} instead.
-   */
-  @Deprecated
-  protected final EventBus eventBus; // TODO: Make private.
-
-  /**
-   * The view for the presenter.
-   * 
-   * Deprecated to use directly, use {@link #getView()} instead.
-   */
-  @Deprecated
-  protected final V view;
+  private final EventBus eventBus;
+  private final V view;
 
   boolean visible;
 
@@ -253,7 +238,7 @@ public abstract class PresenterWidget<V extends View> extends
    * 
    * @return {@code true} if the presenter is visible, {@code false} otherwise.
    */
-  public final boolean isVisible() {
+  public boolean isVisible() {
     return visible;
   }
 
@@ -544,64 +529,4 @@ public abstract class PresenterWidget<V extends View> extends
       popupChildren.remove(i);
     }
   }
-
-  /**
-   * Use {@link PresenterWidget#addToSlot(Object, PresenterWidget))} instead.
-   */
-  @Deprecated
-  public void addContent(Object slot, PresenterWidget<?> content) {
-    addToSlot(slot, content);
-  }
-
-  /**
-   * Use {@link PresenterWidget#clearSlot(Object)} instead.
-   */
-  @Deprecated
-  public void clearContent(Object slot) {
-    clearSlot(slot);
-  }
-
-  /**
-   * Use {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)}
-   * instead.
-   */
-  @Deprecated
-  public void removeContent(Object slot, PresenterWidget<?> content) {
-    removeFromSlot(slot, content);
-  }
-
-  /**
-   * Use {@link PresenterWidget#setInSlot(Object, PresenterWidget)} instead.
-   */
-  @Deprecated
-  public void setContent(Object slot, PresenterWidget<?> content) {
-    setInSlot(slot, content, true);
-  }
-
-  /**
-   * Use {@link PresenterWidget#setInSlot(Object, PresenterWidget, boolean)} instead.
-   */
-  @Deprecated
-  public void setContent(Object slot, PresenterWidget<?> content, boolean performReset) {
-    setInSlot(slot, content, performReset);
-  }
-
-  /**
-   * Use {@link PresenterWidget#addToPopupSlot(PresenterWidget)} instead.
-   */
-  @Deprecated
-  public void addPopupContent(final PresenterWidget<? extends PopupView> content) {
-    addToPopupSlot(content, true);
-  }
-
-  /**
-   * Use {@link PresenterWidget#addToPopupSlot(PresenterWidget, boolean)}
-   * instead.
-   */
-  @Deprecated
-  public void addPopupContent(
-      final PresenterWidget<? extends PopupView> content, boolean center) {
-    addToPopupSlot(content, center);
-  }
-
 }
