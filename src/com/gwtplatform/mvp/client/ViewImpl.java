@@ -28,36 +28,19 @@ import com.google.gwt.user.client.ui.Widget;
  * the above methods.
  * 
  * @author Philippe Beaudoin
+ * @author Christian Goudreau
  */
 public abstract class ViewImpl implements View {
 
   @Override
-  @Deprecated
-  public void addContent(Object slot, Widget content) {
-  }
-
-  @Override
-  @Deprecated
-  public void removeContent(Object slot, Widget content) {
-  }
-
-  @Override
-  @Deprecated
-  public void setContent(Object slot, Widget content) {
-  }
-
-  @Override
   public void addToSlot(Object slot, Widget content) {
-    addContent(slot, content);
   }
 
   @Override
   public void removeFromSlot(Object slot, Widget content) {
-    removeContent(slot, content);
   }
 
   @Override
   public void setInSlot(Object slot, Widget content) {
-    setContent(slot, content);
   }
 }
