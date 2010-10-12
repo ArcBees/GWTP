@@ -28,15 +28,6 @@ import com.google.gwt.user.client.ui.Widget;
 public interface View {
 
   /**
-   * Deprecated, use {@link #addToSlot(Object, Widget)} instead.
-   * 
-   * @param slot An opaque object indicating the slot to add into.
-   * @param content The content to add, a {@link Widget}.
-   */
-  @Deprecated
-  void addContent(Object slot, Widget content);
-
-  /**
    * Requests the view to add content within a specific slot.
    * <p />
    * Override the default implementation and manage all the slots of your view
@@ -60,15 +51,6 @@ public interface View {
   Widget asWidget();
 
   /**
-   * Deprecated, use {@link #removeFromSlot(Object, Widget)} instead.
-   * 
-   * @param slot An opaque object indicating the slot to remove from.
-   * @param content The content to remove, a {@link Widget}.
-   */
-  @Deprecated
-  void removeContent(Object slot, Widget content);
-
-  /**
    * Requests the view to remove content from a specific slot.
    * <p />
    * Override the default implementation and manage all the slots of your view
@@ -82,16 +64,6 @@ public interface View {
    * @param content The content to remove, a {@link Widget}.
    */
   void removeFromSlot(Object slot, Widget content);
-
-  /**
-   * Deprecated, use {@link #setContent(Object, Widget)} instead.
-   * 
-   * @param slot An opaque object indicating the slot to add into.
-   * @param content The content to add, a {@link Widget}. Pass {@code null} to
-   *          clear the slot entirely.
-   */
-  @Deprecated
-  void setContent(Object slot, Widget content);
 
   /**
    * Requests the view to set content within a specific slot, clearing anything
