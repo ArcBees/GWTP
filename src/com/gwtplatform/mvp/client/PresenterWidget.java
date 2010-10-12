@@ -238,7 +238,7 @@ public abstract class PresenterWidget<V extends View> extends
    * 
    * @return {@code true} if the presenter is visible, {@code false} otherwise.
    */
-  public final boolean isVisible() {
+  public boolean isVisible() {
     return visible;
   }
 
