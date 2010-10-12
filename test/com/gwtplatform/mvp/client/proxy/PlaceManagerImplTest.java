@@ -156,7 +156,11 @@ public class PlaceManagerImplTest {
     @Inject
     public DummyPresenterBasic(EventBus eventBus, View view, DummyProxyPlaceBasic proxy) {
       super(eventBus, view, proxy);
-    }    
+    }
+    
+    public final boolean isVisible() {
+      return super.isVisible();
+    }
   }
   
   static class DummyProxyBasic extends ProxyImpl<DummyPresenterBasic> {
@@ -254,6 +258,7 @@ public class PlaceManagerImplTest {
     GwtWindowMethods gwtWindowMethods = gwtWindowMethodsProvider.get();
     NavigationEventSpy navigationHandler = new NavigationEventSpy();
     eventBusProvider.get().addHandler(NavigationEvent.getType(), navigationHandler);
+    
     
     // When
     placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic").with("dummyParam", "dummyValue"));
