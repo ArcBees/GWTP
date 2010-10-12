@@ -20,64 +20,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * An implementation of {@link DispatchRequest} that should be used by
- * {@link ClientActionHandler}s that make asynchronous calls that do not return
- * a {@link com.google.gwt.http.client.Request}.
- * <p/>
- * {@link #isPending()} will return true until either {@link #onSuccess()} or
- * {@link #onFailure()} is called.
- * <p/>
- * Calling {@link #cancel()} will prevent the {@link #onSuccess()} and
- * {@link #onFailure()} from being forwarded to the code that requested the
- * action handler be executed/undone.
+ * {@link ClientActionHandler}s that make asynchronous calls.
  * 
- * @author Brendan Doherty
+ * @author Christian Goudreau
  * 
  * @param <R> The type of the {@link AsyncCallback}.
  */
 
-public class CallbackDispatchRequest<R> implements AsyncCallback<R>,
+public interface CallbackDispatchRequest<R> extends AsyncCallback<R>,
     DispatchRequest {
-
-  private boolean pending;
-
-  private final AsyncCallback<R> callback;
-
-  /**
-   * Construct a {@link CallbackDispatchRequest}. See the class documentation
-   * for details.
-   * 
-   * @param callback The resultCallback parameter passed to
-   *          {@link ClientActionHandler#execute()} or the callback parameter
-   *          passed to {@link ClientActionHandler#undo()
-   */
-  public CallbackDispatchRequest(AsyncCallback<R> callback) {
-    this.callback = callback;
-    this.pending = true;
-  }
-
-  @Override
-  public void cancel() {
-    pending = false;
-  }
-
-  @Override
-  public boolean isPending() {
-    return pending;
-  }
-
-  @Override
-  public void onFailure(Throwable caught) {
-    if (pending) {
-      pending = false;
-      callback.onFailure(caught);
-    }
-  }
-
-  @Override
-  public void onSuccess(R result) {
-    if (pending) {
-      pending = false;
-      callback.onSuccess(result);
-    }
-  }
 }
