@@ -57,7 +57,6 @@ import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
-import com.gwtplatform.mvp.client.annotations.PlaceInstance;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
@@ -91,7 +90,6 @@ import java.util.List;
  * @author Philippe Beaudoin
  * @author Olivier Monaco
  */
-@SuppressWarnings("deprecation")
 public class ProxyGenerator extends Generator {
 
   private static class ProxyEventDescription {
@@ -301,17 +299,7 @@ public class ProxyGenerator extends Generator {
                   + UseGatekeeper.class.getSimpleName() + ".", null);
           throw new UnableToCompleteException();
         }
-      } else {
-        PlaceInstance newPlaceCodeAnnotation = proxyInterface.getAnnotation(PlaceInstance.class);
-        if (newPlaceCodeAnnotation != null) {
-          logger.log(TreeLogger.WARN,
-              "The @" + PlaceInstance.class.getCanonicalName()
-                  + " annotation is deprecated. Please use the @"
-                  + UseGatekeeper.class.getCanonicalName()
-                  + " annotation instead.", null);
-          newPlaceCode = newPlaceCodeAnnotation.value();
-        }
-      }
+      } 
       if (getGatekeeperMethod == null && newPlaceCode == null
           && proxyInterface.getAnnotation(NoGatekeeper.class) == null) {
         // No Gatekeeper specified, see if there is a DefaultGatekeeper defined
@@ -417,7 +405,7 @@ public class ProxyGenerator extends Generator {
       }
       if (tabInfoAnnotation.nameToken().length() > 0) {
         // token to use when the
-                                                      // tab is clicked
+        // tab is clicked
         tabNameToken = tabInfoAnnotation.nameToken();
       }
     }
@@ -500,7 +488,7 @@ public class ProxyGenerator extends Generator {
     for (ProxyEventDescription desc : proxyEvents) {
       composerFactory.addImplementedInterface(desc.handlerFullName);
     }
-    
+
     // Get a source writer
     SourceWriter writer = composerFactory.createSourceWriter(ctx, printWriter);
 
@@ -1073,8 +1061,9 @@ public class ProxyGenerator extends Generator {
       // StandardProvider
 
       // Find the appropriate get method in the Ginjector
-      String methodName = findGetMethod(providerClass, presenterClass, ginjectorClass);
-      
+      String methodName = findGetMethod(providerClass, presenterClass,
+          ginjectorClass);
+
       if (methodName == null) {
         logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorClassName
             + "' does not have a get() method returning 'Provider<"
@@ -1089,8 +1078,9 @@ public class ProxyGenerator extends Generator {
       // CodeSplitProvider
 
       // Find the appropriate get method in the Ginjector
-      String methodName = findGetMethod(asyncProviderClass, presenterClass, ginjectorClass);
-      
+      String methodName = findGetMethod(asyncProviderClass, presenterClass,
+          ginjectorClass);
+
       if (methodName == null) {
         logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorClassName
             + "' does not have a get() method returning 'AsyncProvider<"
@@ -1116,8 +1106,9 @@ public class ProxyGenerator extends Generator {
       }
 
       // Find the appropriate get method in the Ginjector
-      String methodName = findGetMethod(asyncProviderClass, bundleClass, ginjectorClass);
-      
+      String methodName = findGetMethod(asyncProviderClass, bundleClass,
+          ginjectorClass);
+
       if (methodName == null) {
         logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorClassName
             + "' does not have a get() method returning 'AsyncProvider<"
@@ -1133,13 +1124,14 @@ public class ProxyGenerator extends Generator {
     }
   }
 
-  private String findGetMethod(JGenericType desiredReturnType, 
+  private String findGetMethod(JGenericType desiredReturnType,
       JClassType desiredReturnTypeParameter, JClassType ginjectorClass) {
 
-    for (JClassType classType : ginjectorClass.getFlattenedSupertypeHierarchy()) {      
+    for (JClassType classType : ginjectorClass.getFlattenedSupertypeHierarchy()) {
       for (JMethod method : classType.getMethods()) {
         JParameterizedType returnType = method.getReturnType().isParameterized();
-        if (method.getParameters().length == 0 && returnType != null
+        if (method.getParameters().length == 0
+            && returnType != null
             && returnType.isAssignableTo(desiredReturnType)
             && returnType.getTypeArgs()[0].isAssignableTo(desiredReturnTypeParameter)) {
           return method.getName();
