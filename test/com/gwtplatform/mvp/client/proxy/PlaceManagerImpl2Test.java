@@ -23,10 +23,10 @@ import com.google.inject.Provider;
 
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.GwtWindowMethods;
-import com.gwtplatform.test.DeferredCommandManager;
-import com.gwtplatform.test.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.test.mockito.TestModule;
-import com.gwtplatform.test.mockito.TestScope;
+import com.gwtplatform.tester.DeferredCommandManager;
+import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.TestModule;
+import com.gwtplatform.tester.mockito.TestScope;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.*;

@@ -14,15 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.test.mockito;
+package com.gwtplatform.tester.mockito;
 
-import com.google.inject.Provider;
+import com.google.gwt.inject.client.AsyncProvider;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import static org.mockito.Mockito.mock;
 
 /**
- * For use in test cases where an {@link Provider} is required to provide an
- * object and the test case needs to provide a mock of the object.
+ * For use in test cases where an {@link AsyncProvider} is required to provide
+ * an object and the test case needs to provide a mock of the object.
  * <p />
  * A new object is returned each the the provider is invoked, unless the object
  * is bound as a {@link TestScope#SINGLETON} or {@link TestScope#EAGER_SINGLETON}.  
@@ -33,22 +34,39 @@ import static org.mockito.Mockito.mock;
  * 
  * @param <T> The class to provide.
  */
-public class MockProvider<T> implements Provider<T> {
+public class AsyncMockProvider<T> implements AsyncProvider<T> {
 
   private final Class<T> classToProvide;
+  private final Throwable error;
 
   /**
-   * Construct a {@link Provider} that will return mocked objects of the specified types.
+   * Construct an {@link AsyncProvider} that will successfully return mocked objects 
+   * of the specified types.
    * 
    * @param mock The {@link Class} of the mock object to provide.
    */
-  public MockProvider(Class<T> classToProvide) {
+  public AsyncMockProvider(Class<T> classToProvide) {
     this.classToProvide = classToProvide;
+    this.error = null;
+  }
+  
+  /**
+   * Construct a {@link AsyncProvider} that will fail with the specified error.
+   * 
+   * @param error The error to fail with, a {@link Throwable}.
+   */
+  public AsyncMockProvider(Throwable error) {
+    this.classToProvide = null;
+    this.error = error;
   }
 
   @Override
-  public T get() {
-    return mock(classToProvide);
+  public void get(AsyncCallback<T> callback) {
+    if (this.error != null) {
+      callback.onFailure(error);
+    } else {
+      callback.onSuccess(mock(classToProvide));
+    }
   }
 
 }

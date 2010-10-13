@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.test.mockito;
+package com.gwtplatform.tester.mockito;
 
 import com.google.inject.Key;
 import com.google.inject.Provider;

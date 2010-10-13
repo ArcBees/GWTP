@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.test;
+package com.gwtplatform.tester;
 
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.client.DispatchService;
