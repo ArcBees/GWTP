@@ -17,7 +17,9 @@
 package com.gwtplatform.tester.mockito;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.TypeLiteral;
 import com.google.inject.binder.ScopedBindingBuilder;
+import com.google.inject.name.Names;
 
 /**
  * A guice {@link AbstractModule} with a bit of syntactic sugar to bind within
@@ -39,5 +41,29 @@ public abstract class TestModule extends AbstractModule {
   protected <T> ScopedBindingBuilder bindMock(Class<T> klass) {
     return bind(klass).toProvider(new MockProvider<T>(klass));
   }
-
+  
+  /**
+   * Binds an parameterized interface to a mocked version of itself.
+   * 
+   * @param <T> The type of the interface to bind, a parameterized type
+   * @param typeLiteral The {@link TypeLiteral} corresponding to the parameterized type to bind.
+   * @return A {@link ScopedBindingBuilder}.
+   */
+  @SuppressWarnings("unchecked")
+  protected <T> ScopedBindingBuilder bindMock(
+      TypeLiteral<T> typeLiteral) {
+    return bind(typeLiteral).toProvider(new MockProvider<T>((Class<T>) typeLiteral.getRawType()));
+  }
+  
+  /**
+   * Binds an interface to a mocked version of itself.
+   * 
+   * @param <T> The type of the interface to bind
+   * @param klass The class to bind
+   * @param name The name used with the {@link com.google.inject.name.Named @Named} annotation.
+   * @return A {@link ScopedBindingBuilder}.
+   */
+  protected <T> ScopedBindingBuilder bindNamedMock(Class<T> klass, String name) {
+    return bind(klass).annotatedWith(Names.named(name)).toProvider(new MockProvider<T>(klass));
+  }
 }
