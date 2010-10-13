@@ -18,25 +18,25 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.GwtWindowMethods;
 import com.gwtplatform.tester.DeferredCommandManager;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
 /**
  * Unit tests for {@link PlaceManagerImpl}.
  * 
@@ -57,28 +57,18 @@ public class PlaceManagerImpl2Test {
       bindMock(EventBus.class).in(TestScope.SINGLETON);
       bindMock(TokenFormatter.class).in(TestScope.SINGLETON);
       bindMock(ProxyFailureHandler.class).in(TestScope.SINGLETON);
-      bindMock(GwtWindowMethods.class).in(TestScope.SINGLETON);
-      bind(PlaceManager.class).to(PlaceManagerImplTest.MyPlaceManager.class).in(TestScope.SINGLETON);
+      bindMock(PlaceManagerWindowMethods.class).in(TestScope.SINGLETON);
+      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
     }
   }
   
-  // Providers to use Guice injection
-  @Inject
-  Provider<DeferredCommandManager> deferredCommandManagerProvider;
-  @Inject
-  Provider<PlaceManager> placeManagerProvider;
-  @Inject
-  Provider<EventBus> eventBusProvider;
-  @Inject
-  Provider<GwtWindowMethods> gwtWindowMethodsProvider;
-  
-  @Test
-  public void placeManagerUserCallUpdateHistoryWhenRevealingPlace() {
+  @InjectTest
+  public void placeManagerUserCallUpdateHistoryWhenRevealingPlace(
+      final DeferredCommandManager deferredCommandManager,
+      final PlaceManager placeManager,
+      final EventBus eventBus,
+      final PlaceManagerWindowMethods gwtWindowMethods) {
     // Given
-    final DeferredCommandManager deferredCommandManager = deferredCommandManagerProvider.get();
-    final PlaceManager placeManager = placeManagerProvider.get();
-    EventBus eventBus = eventBusProvider.get();
-    GwtWindowMethods gwtWindowMethods = gwtWindowMethodsProvider.get();
     doAnswer(new Answer<Void>() {
       @Override
       public Void answer(InvocationOnMock invocation) throws Throwable {

@@ -16,8 +16,6 @@
 
 package com.gwtplatform.externaltest;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 
@@ -27,10 +25,10 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.MockProvider;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -60,14 +58,8 @@ public class MockInjectionTest {
     }
   }
 
-  // Providers to use Guice injection
-  @Inject
-  Provider<MainPresenter> mainPresenterProvider;
-
-  @Test
-  public void settingSubPresenterShouldNotCrash() {
-    MainPresenter mainPresenter = mainPresenterProvider.get();
-
+  @InjectTest
+  public void settingSubPresenterShouldNotCrash(MainPresenter mainPresenter) {
     // When
     mainPresenter.setSubPresenter();
 
