@@ -7,7 +7,7 @@
   <property name="in.src.folder" location="src" />
   <property name="in.src.springdependant" value="**/spring/**" />
   <property name="in.src.htmlunitdependant" value="com/gwtplatform/crawler/**" />
-  <property name="in.src.mockitodependant" value="com/gwtplatform/test/mockito/**" />
+  <property name="in.src.mockitodependant" value="com/gwtplatform/tester/mockito/**" />
   <property name="in.test.springdependant" value="**/spring/**" />
   <property name="in.test.folder" location="test" />
   <property name="out.test.src.folder" location=".apt_generated" />
