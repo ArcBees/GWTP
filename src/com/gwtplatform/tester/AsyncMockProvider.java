@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.test;
+package com.gwtplatform.tester;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -26,7 +26,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * Note that the same mock will be returned for every invocation of of {@link #get()}
  * (it behaves as a singleton) which may impact your tests, for example
  * if you rely on {@code ==}. If you're using mockito, consider using the
- * {@link com.gwtplatform.test.mockito.AsyncMockProvider AsyncMockProvider} instead.
+ * {@link com.gwtplatform.tester.mockito.AsyncMockProvider AsyncMockProvider} instead.
  *  
  * 
  * @author Brendan Doherty
