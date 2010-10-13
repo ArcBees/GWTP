@@ -21,8 +21,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-import com.gwtplatform.tester.mockito.InjectBefore;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.InjectBefore;
 import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
@@ -34,8 +34,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 
 /**
@@ -52,6 +50,7 @@ public class PresenterWidgetTest {
   public static class Env extends TestModule {
     @Override
     protected void configure() {
+      GWTMockUtilities.disarm();
       bindMock(EventBus.class).in(TestScope.SINGLETON);
       bindNamedMock(View.class,"A").in(TestScope.SINGLETON);
       bindNamedMock(View.class,"B").in(TestScope.SINGLETON);
@@ -133,16 +132,6 @@ public class PresenterWidgetTest {
     PresenterWidgetPopupC(EventBus eventBus, @Named("PopupC") PopupView view) {
       super(eventBus, view);
     }
-  }
-  
-  @Before
-  public void disarmGwt() {
-    GWTMockUtilities.disarm();
-  }
-
-  @After
-  public void rearmGwt() {
-    GWTMockUtilities.restore();
   }
   
   @InjectBefore
