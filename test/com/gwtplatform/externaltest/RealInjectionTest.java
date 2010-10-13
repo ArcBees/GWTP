@@ -22,22 +22,23 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.DefaultEventBus;
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Test behaviour when a real {@link PresenterWidget} is injected.
+ * Test behaviour when a real {@link com.gwtplatform.mvp.client.PresenterWidget} is injected.
  * 
  * @author Philippe Beaudoin
  */
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class RealInjectionTest {
 
-  // Guice environment
   /**
+   * Guice environment.
+   * 
    * @author Philippe Beaudoin
    */
   public static class Env extends TestModule {
@@ -57,10 +58,8 @@ public class RealInjectionTest {
   @Inject
   Provider<MainPresenter> mainPresenterProvider;
 
-  @Test
-  public void settingSubPresenterShouldNotCrash() {
-    MainPresenter mainPresenter = mainPresenterProvider.get();
-
+  @InjectTest
+  public void settingSubPresenterShouldNotCrash(MainPresenter mainPresenter) {
     // When
     mainPresenter.setSubPresenter();
 

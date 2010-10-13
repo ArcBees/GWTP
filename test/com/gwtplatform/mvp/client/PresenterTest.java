@@ -17,10 +17,11 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import com.google.inject.TypeLiteral;
 
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
@@ -28,7 +29,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -45,24 +45,20 @@ public class PresenterTest {
     @Override
     protected void configure() {
       bindMock(EventBus.class).in(TestScope.SINGLETON);
-      bindMock(ViewA.class).in(TestScope.SINGLETON);
-      bindMock(ProxyA.class).in(TestScope.SINGLETON);
-      bind(PresenterA.class).in(TestScope.SINGLETON);
+      bindMock(View.class).in(TestScope.SINGLETON);
+      bindMock(new TypeLiteral<Proxy<TestPresenter>>() { }).in(TestScope.SINGLETON);
+            
+      bind(TestPresenter.class).in(TestScope.SINGLETON);
     }
   }
-
-  static class PresenterA extends PresenterSpy<ViewA, ProxyA> {
-    @Inject
-    public PresenterA(EventBus eventBus, ViewA view, ProxyA proxy) {
-      super(eventBus, view, proxy);
-    }
-  }
+  
   // Simple subclasses of PresenterWidgetImpl
-  abstract static class PresenterSpy<V extends View, P extends Proxy<?>>
-      extends Presenter<V, P> {
+  static class TestPresenter
+      extends Presenter<View, Proxy<TestPresenter>> {
     public int revealInParentCalled;
 
-    PresenterSpy(EventBus eventBus, V view, P proxy) {
+    @Inject
+    TestPresenter(EventBus eventBus, View view, Proxy<TestPresenter> proxy) {
       super(eventBus, view, proxy);
     }
 
@@ -73,25 +69,9 @@ public class PresenterTest {
     }
   }
 
-  interface ProxyA extends Proxy<PresenterA> {
-  }
-
-  interface ViewA extends View {
-  }
-
-  // Providers to use Guice injection
-  @Inject
-  Provider<PresenterA> presenterAProvider;
-  @Inject
-  Provider<ProxyA> proxyAProvider;
-  @Inject
-  Provider<ViewA> viewAProvider;
-
-  @Test
-  public void forceRevealWhenPresenterIsNotVisible() {
-    // Set-up
-    PresenterA presenter = presenterAProvider.get();
-
+  @InjectTest
+  public void forceRevealWhenPresenterIsNotVisible(
+      TestPresenter presenter) {
     // Given
     assertFalse(presenter.isVisible());
 
@@ -102,11 +82,9 @@ public class PresenterTest {
     assertEquals(1, presenter.revealInParentCalled);
   }
 
-  @Test
-  public void forceRevealWhenPresenterIsVisible() {
-    // Set-up
-    PresenterA presenter = presenterAProvider.get();
-
+  @InjectTest
+  public void forceRevealWhenPresenterIsVisible(
+      TestPresenter presenter) {
     // Given
     presenter.reveal();
     assertTrue(presenter.isVisible());

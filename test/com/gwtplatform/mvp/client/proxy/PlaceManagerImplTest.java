@@ -16,7 +16,6 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -28,6 +27,7 @@ import com.gwtplatform.mvp.client.StandardProvider;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.DeferredCommandManager;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
@@ -37,7 +37,6 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
@@ -49,20 +48,20 @@ import java.util.List;
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class PlaceManagerImplTest {
 
-  // Guice environment
   /**
+   * Guice test environment.
+   * 
    * @author Philippe Beaudoin
    */
   public static class Env extends TestModule {
     @Override
     protected void configure() {
-      GWTMockUtilities.disarm();
       bind(DeferredCommandManager.class).in(TestScope.SINGLETON);
       bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
       bindMock(TokenFormatter.class).in(TestScope.SINGLETON);
       bindMock(ProxyFailureHandler.class).in(TestScope.SINGLETON);
-      bindMock(GwtWindowMethods.class).in(TestScope.SINGLETON);
-      bind(PlaceManager.class).to(MyPlaceManager.class).in(TestScope.SINGLETON);
+      bindMock(PlaceManagerWindowMethods.class).in(TestScope.SINGLETON);
+      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
       bind(DummyProxyBasic.class).in(TestScope.EAGER_SINGLETON);
       bind(DummyProxyPlaceBasic.class).in(TestScope.EAGER_SINGLETON);
       bindMock(DummyPresenterBasic.class).in(TestScope.SINGLETON);
@@ -71,69 +70,7 @@ public class PlaceManagerImplTest {
       bind(DummyPresenterRedirect.class).in(TestScope.SINGLETON);
     }
   }
-  
-  /**
-   * GWT window and history related methods that will be mocked.
-   */
-  public interface GwtWindowMethods {
-    void registerTowardsHistory();     
-    String getBrowserHistoryToken();
-    String getCurrentHref();
-    void revealCurrentPlace();
-    void setBrowserHistoryToken(String historyToken, boolean issueEvent);
-  }
-  
-  /**
-   * This place manager overrides all the methods that use
-   * GWT-dependent classes.
-   * 
-   * @author Philippe Beaudoin
-   */
-  static class MyPlaceManager extends PlaceManagerImpl {
 
-    private final PlaceRequest defaultPlaceRequest = new PlaceRequest("defaultPlace");
-    private final GwtWindowMethods gwtWindowMethods;
-
-    @Inject
-    public MyPlaceManager(EventBus eventBus, TokenFormatter tokenFormatter, 
-        GwtWindowMethods gwtWindowMethods) {
-      super(eventBus, tokenFormatter);
-      this.gwtWindowMethods = gwtWindowMethods;
-    }
-
-    @Override
-    public void revealDefaultPlace() {
-      revealPlace(defaultPlaceRequest);
-    }    
-    
-    @Override 
-    void registerTowardsHistory() {      
-      if (gwtWindowMethods != null) {
-        gwtWindowMethods.registerTowardsHistory();
-      }
-    }
-    
-    @Override
-    String getBrowserHistoryToken() {
-      return gwtWindowMethods.getBrowserHistoryToken();
-    }
-    
-    @Override
-    String getCurrentHref() {
-      return gwtWindowMethods.getCurrentHref();
-    }
-
-    @Override
-    public void revealCurrentPlace() {
-      gwtWindowMethods.revealCurrentPlace();
-    }
-    
-    @Override
-    void setBrowserHistoryToken(String historyToken, boolean issueEvent) {
-      gwtWindowMethods.setBrowserHistoryToken(historyToken, issueEvent);
-    }
-  }
-  
   abstract static class ProxyPlaceBase<P extends Presenter<?,?>> extends ProxyPlaceImpl<P> {
     private final DeferredCommandManager deferredCommandManager;
 
@@ -231,34 +168,17 @@ public class PlaceManagerImplTest {
     };
   }
   
-  // Providers to use Guice injection
-  @Inject
-  Provider<DeferredCommandManager> deferredCommandManagerProvider;
-  @Inject
-  Provider<PlaceManager> placeManagerProvider;
-  @Inject
-  Provider<DummyPresenterBasic> presenterBasicProvider;
-  @Inject
-  Provider<DummyProxyPlaceBasic> proxyPlaceBasicProvider;
-  @Inject
-  Provider<DummyPresenterRedirect> presenterRedirectProvider;
-  @Inject
-  Provider<DummyProxyPlaceRedirect> proxyPlaceRedirectProvider;
-  @Inject
-  Provider<GwtWindowMethods> gwtWindowMethodsProvider;
-  @Inject
-  Provider<EventBus> eventBusProvider;
-  
-  @Test
-  public void placeManagerRevealPlaceStandard() {
+  @InjectTest
+  public void placeManagerRevealPlaceStandard(
+      DeferredCommandManager deferredCommandManager,
+      PlaceManager placeManager,
+      DummyPresenterBasic presenter,
+      PlaceManagerWindowMethods gwtWindowMethods,
+      NavigationEventSpy navigationHandler,
+      EventBus eventBus) {
+
     // Given
-    DeferredCommandManager deferredCommandManager = deferredCommandManagerProvider.get();
-    PlaceManager placeManager = placeManagerProvider.get();
-    DummyPresenterBasic presenter = presenterBasicProvider.get();
-    GwtWindowMethods gwtWindowMethods = gwtWindowMethodsProvider.get();
-    NavigationEventSpy navigationHandler = new NavigationEventSpy();
-    eventBusProvider.get().addHandler(NavigationEvent.getType(), navigationHandler);
-    
+    eventBus.addHandler(NavigationEvent.getType(), navigationHandler);    
     
     // When
     placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic").with("dummyParam", "dummyValue"));
@@ -287,13 +207,13 @@ public class PlaceManagerImplTest {
     assertEquals("dummyValue", placeRequest.getParameter("dummyParam", null));  
   }
 
-  @Test
-  public void placeManagerRevealPlaceRedirectInPrepareFromRequest() {
+  @InjectTest
+  public void placeManagerRevealPlaceRedirectInPrepareFromRequest(
+      DeferredCommandManager deferredCommandManager,
+      PlaceManager placeManager,
+      DummyPresenterRedirect presenter,
+      DummyPresenterBasic otherPresenter) {
     // Given
-    DeferredCommandManager deferredCommandManager = deferredCommandManagerProvider.get();
-    PlaceManager placeManager = placeManagerProvider.get();
-    DummyPresenterRedirect presenter = presenterRedirectProvider.get();
-    DummyPresenterBasic otherPresenter = presenterBasicProvider.get();
     PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenRedirect").with("dummyParam", "dummyValue"); 
 
     // When
@@ -318,13 +238,13 @@ public class PlaceManagerImplTest {
     verify(otherPresenter).forceReveal();
   }
   
-  @Test
-  public void placeManagerUserUpdateHistoryWhenRevealPlace() {
+  @InjectTest
+  public void placeManagerUserUpdateHistoryWhenRevealPlace(
+      DeferredCommandManager deferredCommandManager,
+      PlaceManager placeManager,
+      DummyPresenterRedirect presenter,
+      DummyPresenterBasic otherPresenter) {
     // Given
-    DeferredCommandManager deferredCommandManager = deferredCommandManagerProvider.get();
-    PlaceManager placeManager = placeManagerProvider.get();
-    DummyPresenterRedirect presenter = presenterRedirectProvider.get();
-    DummyPresenterBasic otherPresenter = presenterBasicProvider.get();
     PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenRedirect").with("dummyParam", "dummyValue"); 
 
     // When
