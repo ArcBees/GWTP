@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.test;
+package com.gwtplatform.tester;
 
 import com.google.inject.Provider;
 
@@ -25,7 +25,7 @@ import com.google.inject.Provider;
  * Note that the same mock will be returned for every invocation of {{@link #get()}
  * (it behaves as a singleton) which may impact your tests, for example
  * if you rely on {@code ==}. If you're using mockito, consider using the
- * {@link com.gwtplatform.test.mockito.MockProvider MockProvider} instead.
+ * {@link com.gwtplatform.tester.mockito.MockProvider MockProvider} instead.
   * 
  * @author Brendan Doherty
  * 
