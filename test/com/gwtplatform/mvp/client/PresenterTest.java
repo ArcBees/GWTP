@@ -20,9 +20,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.test.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.test.mockito.TestModule;
-import com.gwtplatform.test.mockito.TestScope;
+import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.TestModule;
+import com.gwtplatform.tester.mockito.TestScope;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

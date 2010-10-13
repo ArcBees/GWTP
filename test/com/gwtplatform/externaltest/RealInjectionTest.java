@@ -21,9 +21,9 @@ import com.google.inject.Provider;
 
 import com.gwtplatform.mvp.client.DefaultEventBus;
 import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.test.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.test.mockito.TestModule;
-import com.gwtplatform.test.mockito.TestScope;
+import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
+import com.gwtplatform.tester.mockito.TestModule;
+import com.gwtplatform.tester.mockito.TestScope;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

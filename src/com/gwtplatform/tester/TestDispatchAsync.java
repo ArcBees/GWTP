@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.test;
+package com.gwtplatform.tester;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Binding;
