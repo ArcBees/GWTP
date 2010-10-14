@@ -14,33 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.externaltest;
+package com.gwtplatform.tester.mockito;
 
-import com.google.inject.Inject;
-
-import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.PresenterWidget;
-import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.tester.mockito.TestSingleton;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * This is the test presenter.
+ * This annotation can be used on any classes that should be bound as
+ * an mock within the {@link TestScope#SINGLETON} scope.
  * 
  * @author Philippe Beaudoin
  */
-@TestSingleton
-public class SubPresenterWidget extends PresenterWidget<SubPresenterWidget.MyView> {
-  
-  /**
-   * Presenter's view.
-   */
-  public interface MyView extends View {    
-  }  
-  
-  @Inject
-  public SubPresenterWidget(final EventBus eventBus, final MyView view) {
-    super(eventBus, view);
-  }
-
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface TestMockSingleton {
 }
-

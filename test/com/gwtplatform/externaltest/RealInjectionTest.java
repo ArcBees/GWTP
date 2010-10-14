@@ -16,14 +16,15 @@
 
 package com.gwtplatform.externaltest;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import com.google.inject.TypeLiteral;
 
 import com.gwtplatform.mvp.client.DefaultEventBus;
 import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
 import org.junit.runner.RunWith;
@@ -37,26 +38,19 @@ import org.junit.runner.RunWith;
 public class RealInjectionTest {
 
   /**
-   * Guice environment.
+   * Guice test environment.
    * 
    * @author Philippe Beaudoin
    */
-  public static class Env extends TestModule {
+  public static class Env extends AutomockingModule {
+    @SuppressWarnings("unchecked")
     @Override
-    protected void configure() {
-      bind(SubPresenterWidget.class)
+    protected void configureTest() {
+      bindNamed(new TypeLiteral<PresenterWidget<View>>() { }, "Sub").to(SubPresenterWidget.class)
         .in(TestScope.SINGLETON);
-      // TODO Provide methods for binding presenters, views and proxy
       bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
-      bindMock(MainPresenter.MyView.class).in(TestScope.SINGLETON);
-      bindMock(MainPresenter.MyProxy.class).in(TestScope.SINGLETON);
-      bindMock(SubPresenterWidget.MyView.class).in(TestScope.SINGLETON);
     }
   }
-
-  // Providers to use Guice injection
-  @Inject
-  Provider<MainPresenter> mainPresenterProvider;
 
   @InjectTest
   public void settingSubPresenterShouldNotCrash(MainPresenter mainPresenter) {

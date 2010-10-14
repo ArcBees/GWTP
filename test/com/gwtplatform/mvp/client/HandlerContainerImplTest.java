@@ -21,8 +21,7 @@ import com.google.inject.Inject;
 
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestModule;
-import com.gwtplatform.tester.mockito.TestScope;
+import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -39,22 +38,10 @@ import org.junit.runner.RunWith;
  */
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class HandlerContainerImplTest {
-
-  /**
-   * Guice environment.
-   * 
-   * @author Philippe Beaudoin
-   */
-  public static class Env extends TestModule {
-    @Override
-    protected void configure() {
-      bind(NonAutoboundHandlerContainer.class).in(TestScope.SINGLETON);
-      bind(HandlerContainerImpl.class).in(TestScope.SINGLETON);
-    }
-  }
-
+  
   // A subclass of HandlerContainerImpl that does not use autobinding
   // and counts its inherited method invocations
+  @TestSingleton
   static class NonAutoboundHandlerContainer extends HandlerContainerImpl {
     public int onBindMethodCalled;
     public int onUnbindMethodCalled;
