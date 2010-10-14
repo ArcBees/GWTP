@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.HasEventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -27,16 +25,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * 
  * @author Philippe Beaudoin
  */
-public interface ProxyPlace<P extends Presenter<?, ?>> extends Proxy<P>, Place,
-    HasEventBus {
-
-  /**
-   * Makes it possible to access the {@link EventBus} object associated with
-   * that presenter.
-   * 
-   * @return The EventBus associated with that presenter.
-   */
-  EventBus getEventBus();
+public interface ProxyPlace<P extends Presenter<?, ?>> extends Proxy<P>, Place {
 
   /**
    * Manually reveals a presenter. Only use this method if your presenter is configured
