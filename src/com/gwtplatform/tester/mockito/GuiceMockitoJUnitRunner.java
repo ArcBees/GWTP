@@ -16,11 +16,9 @@
 
 package com.gwtplatform.tester.mockito;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Binding;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.Scope;
 import com.google.inject.spi.DefaultBindingScopingVisitor;
 
@@ -41,8 +39,7 @@ import java.util.Set;
 /**
  * This class implements the mockito runner but allows Guice dependency
  * injection. To setup the guice environment, the test class can have an inner
- * static class deriving from {@link AbstractModule} or, more commonly, from
- * {@link TestModule}. This last class will let you bind
+ * static class deriving from {@link TestModule}. This last class will let you bind
  * {@link TestSingletonMockProvider} and the runner will make sure these
  * singletons are reset at every invocation of a test case.
  * <p />
@@ -65,19 +62,32 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
   
   public GuiceMockitoJUnitRunner(Class<?> klass) throws InitializationError,
       InvocationTargetException, InstantiationException, IllegalAccessException {
+    this(klass, true);
+  }
+
+  public GuiceMockitoJUnitRunner(Class<?> klass, boolean useAutomockingIfNoEnvironmentFound) throws InitializationError,
+      InvocationTargetException, InstantiationException, IllegalAccessException {
     super(klass);
-    Injector inj = null;
+
+    TestModule testModule = null;
     for (Class<?> subclass : klass.getClasses()) {
-      if (AbstractModule.class.isAssignableFrom(subclass)) {
-        assert inj == null : "More than one AbstractModule inner class found within test class \""
+      if (TestModule.class.isAssignableFrom(subclass)) {
+        assert testModule == null : "More than one TestModule inner class found within test class \""
             + klass.getName() + "\".";
-        inj = Guice.createInjector((Module) subclass.newInstance());
+        testModule = (TestModule) subclass.newInstance();
       }
     }
-    if (inj == null) {
-      inj = Guice.createInjector();
+    if (testModule == null) {
+      if (useAutomockingIfNoEnvironmentFound) {
+        testModule = new AutomockingModule() {          
+          @Override protected void configureTest() { } };
+      } else {
+        testModule = new TestModule() {          
+          @Override protected void configureTest() { } };        
+      }
     }
-    injector = inj;
+    testModule.setTestClass(klass);
+    injector = Guice.createInjector(testModule);
   }
   
   @Override

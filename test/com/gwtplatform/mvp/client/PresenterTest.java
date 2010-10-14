@@ -17,13 +17,11 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.inject.Inject;
-import com.google.inject.TypeLiteral;
 
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestModule;
-import com.gwtplatform.tester.mockito.TestScope;
+import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -38,21 +36,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class PresenterTest {
-  /**
-   * Guice environment.
-   */
-  public static class Env extends TestModule {
-    @Override
-    protected void configure() {
-      bindMock(EventBus.class).in(TestScope.SINGLETON);
-      bindMock(View.class).in(TestScope.SINGLETON);
-      bindMock(new TypeLiteral<Proxy<TestPresenter>>() { }).in(TestScope.SINGLETON);
-            
-      bind(TestPresenter.class).in(TestScope.SINGLETON);
-    }
-  }
   
-  // Simple subclasses of PresenterWidgetImpl
+  @TestSingleton
   static class TestPresenter
       extends Presenter<View, Proxy<TestPresenter>> {
     public int revealInParentCalled;

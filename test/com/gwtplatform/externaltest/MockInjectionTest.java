@@ -17,16 +17,14 @@
 package com.gwtplatform.externaltest;
 
 import com.google.inject.TypeLiteral;
-import com.google.inject.name.Names;
 
 import com.gwtplatform.mvp.client.DefaultEventBus;
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.tester.MockProvider;
+import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
 import org.junit.runner.RunWith;
@@ -39,22 +37,16 @@ import org.junit.runner.RunWith;
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class MockInjectionTest {
 
-  // Guice environment
   /**
+   * Guice test environment.
+   * 
    * @author Philippe Beaudoin
    */
-  public static class Env extends TestModule {
-    @SuppressWarnings("unchecked")
+  public static class Env extends AutomockingModule {
     @Override
-    protected void configure() {
-      bind(new TypeLiteral<PresenterWidget<View>>() { })
-        .annotatedWith(Names.named("Sub"))
-        .toProvider(new MockProvider(PresenterWidget.class) { });
-      // TODO Provide methods for binding presenters, views and proxy
+    protected void configureTest() {
+      bindNamedMock(new TypeLiteral<PresenterWidget<View>>() { }, "Sub").in(TestScope.SINGLETON);
       bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
-      bindMock(MainPresenter.MyView.class).in(TestScope.SINGLETON);
-      bindMock(MainPresenter.MyProxy.class).in(TestScope.SINGLETON);
-      bindMock(SubPresenterWidget.MyView.class).in(TestScope.SINGLETON);
     }
   }
 

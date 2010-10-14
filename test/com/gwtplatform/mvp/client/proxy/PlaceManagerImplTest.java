@@ -26,10 +26,13 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.StandardProvider;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.DeferredCommandManager;
+import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestModule;
+import com.gwtplatform.tester.mockito.TestEagerSingleton;
+import com.gwtplatform.tester.mockito.TestMockSingleton;
 import com.gwtplatform.tester.mockito.TestScope;
+import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -53,22 +56,33 @@ public class PlaceManagerImplTest {
    * 
    * @author Philippe Beaudoin
    */
-  public static class Env extends TestModule {
+  public static class Env extends AutomockingModule {
     @Override
-    protected void configure() {
+    protected void configureTest() {      
       bind(DeferredCommandManager.class).in(TestScope.SINGLETON);
       bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
-      bindMock(TokenFormatter.class).in(TestScope.SINGLETON);
-      bindMock(ProxyFailureHandler.class).in(TestScope.SINGLETON);
-      bindMock(PlaceManagerWindowMethods.class).in(TestScope.SINGLETON);
       bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
-      bind(DummyProxyBasic.class).in(TestScope.EAGER_SINGLETON);
-      bind(DummyProxyPlaceBasic.class).in(TestScope.EAGER_SINGLETON);
-      bindMock(DummyPresenterBasic.class).in(TestScope.SINGLETON);
-      bind(DummyProxyRedirect.class).in(TestScope.EAGER_SINGLETON);
-      bind(DummyProxyPlaceRedirect.class).in(TestScope.EAGER_SINGLETON);
-      bind(DummyPresenterRedirect.class).in(TestScope.SINGLETON);
     }
+  }
+  
+  @TestMockSingleton
+  abstract static class DummyPresenterBasic extends Presenter<View,DummyProxyPlaceBasic> {
+    @Inject
+    public DummyPresenterBasic(EventBus eventBus, View view, DummyProxyPlaceBasic proxy) {
+      super(eventBus, view, proxy);
+    }
+    @Override
+    public final boolean isVisible() {
+      return super.isVisible();
+    }
+  }
+  
+  @TestEagerSingleton
+  static class DummyProxyBasic extends ProxyImpl<DummyPresenterBasic> {
+    @Inject
+    public DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
+        this.presenter = new StandardProvider<DummyPresenterBasic>(presenter);        
+    };
   }
 
   abstract static class ProxyPlaceBase<P extends Presenter<?,?>> extends ProxyPlaceImpl<P> {
@@ -89,24 +103,7 @@ public class PlaceManagerImplTest {
     }
   }
   
-  abstract static class DummyPresenterBasic extends Presenter<View,DummyProxyPlaceBasic> {
-    @Inject
-    public DummyPresenterBasic(EventBus eventBus, View view, DummyProxyPlaceBasic proxy) {
-      super(eventBus, view, proxy);
-    }
-    
-    public final boolean isVisible() {
-      return super.isVisible();
-    }
-  }
-  
-  static class DummyProxyBasic extends ProxyImpl<DummyPresenterBasic> {
-    @Inject
-    public DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
-        this.presenter = new StandardProvider<DummyPresenterBasic>(presenter);        
-    };
-  }
-    
+  @TestEagerSingleton
   static class DummyProxyPlaceBasic extends ProxyPlaceBase<DummyPresenterBasic> {
     @Inject
     public DummyProxyPlaceBasic(DummyProxyBasic proxy, 
@@ -115,7 +112,10 @@ public class PlaceManagerImplTest {
     }
   }
 
-  // This presenter automatically redirects in prepareFromRequest to PresenterBasic
+  /**
+   * This presenter automatically redirects in prepareFromRequest to PresenterBasic.
+   */
+  @TestEagerSingleton
   static class DummyPresenterRedirect extends Presenter<View,DummyProxyPlaceBasic> {
     private final PlaceManager placeManager;
 
@@ -143,6 +143,7 @@ public class PlaceManagerImplTest {
     }
   }
   
+  @TestEagerSingleton
   static class DummyProxyRedirect extends ProxyImpl<DummyPresenterRedirect> {
     @Inject
     public DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
@@ -150,6 +151,7 @@ public class PlaceManagerImplTest {
     };
   }
     
+  @TestEagerSingleton
   static class DummyProxyPlaceRedirect extends ProxyPlaceBase<DummyPresenterRedirect> {
     @Inject
     public DummyProxyPlaceRedirect(DummyProxyRedirect proxy, 
@@ -158,6 +160,7 @@ public class PlaceManagerImplTest {
     }
   }
   
+  @TestSingleton
   static class NavigationEventSpy implements NavigationHandler {
     int navCount;
     NavigationEvent lastEvent;

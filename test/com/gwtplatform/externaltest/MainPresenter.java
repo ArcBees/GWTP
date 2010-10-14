@@ -18,7 +18,7 @@ package com.gwtplatform.externaltest;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -29,13 +29,14 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.gwtplatform.tester.mockito.TestSingleton;
 
 /**
  * This is the test presenter.
  * 
  * @author Philippe Beaudoin
  */
-@Singleton
+@TestSingleton
 public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter.MyProxy> {
 
   @ContentSlot
@@ -58,7 +59,7 @@ public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter
   
   @Inject
   public MainPresenter(final EventBus eventBus, final MyView view, 
-      final MyProxy proxy, SubPresenterWidget subPresenter) {
+      final MyProxy proxy, @Named("Sub") PresenterWidget<View> subPresenter) {
     super(eventBus, view, proxy);
     this.subPresenter = subPresenter;
   }
