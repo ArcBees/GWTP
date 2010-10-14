@@ -16,9 +16,11 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
+import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.IndirectProvider;
 import com.gwtplatform.mvp.client.Presenter;
 
@@ -31,6 +33,7 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
   protected ProxyFailureHandler failureHandler;
   protected IndirectProvider<P> presenter;
+  private EventBus eventBus;
 
   /**
    * Creates a Proxy class for a specific presenter.
@@ -57,9 +60,21 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
    * with GWT generators.
    * 
    * @param failureHandler The {@link ProxyFailureHandler}.
+   * @param eventBus The {@link EventBus}.
    */
   @Inject
-  protected void bind(ProxyFailureHandler failureHandler) {
+  protected void bind(ProxyFailureHandler failureHandler, EventBus eventBus) {
     this.failureHandler = failureHandler;
+    this.eventBus = eventBus;
+  }
+  
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    eventBus.fireEvent(this, event);
+  }
+
+  @Override
+  public final EventBus getEventBus() {
+    return eventBus;
   }
 }
