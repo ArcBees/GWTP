@@ -517,17 +517,19 @@ public class ProxyGenerator extends Generator {
 
       // BEGIN Enclosed proxy Bind method
       writer.println();
-      writer.println("private void delayedBind( " + ginjectorClassName
-          + " ginjector ) {");
+      writer.println("private void delayedBind(" + ginjectorClassName
+          + " ginjector) {");
       writer.indent();
-      // Call ProxyImpl bind method.
-      writer.println("bind( ginjector.getProxyFailureHandler() );");
-      writer.println("EventBus eventBus = ginjector.getEventBus();");
+
       if (tabContainerClass != null) {
         writeRequestTabHandler(logger, presenterClassName, nameToken,
             tabContainerClass, tabContainerClassName, tabPriority, tabLabel,
             tabGetLabel, writer);
       }
+      
+      // Call ProxyImpl bind method.
+      writer.println("bind(ginjector.getProxyFailureHandler(),ginjector.getEventBus());");
+
       writePresenterProvider(logger, ctx, writer, proxyCodeSplitAnnotation,
           proxyCodeSplitBundleAnnotation, ginjectorClass, ginjectorClassName,
           presenterClass, presenterClassName);
@@ -640,21 +642,21 @@ public class ProxyGenerator extends Generator {
     // BEGIN Bind method
     writer.println();
     writer.println("@Override");
-    writer.println("public void delayedBind( Ginjector baseGinjector ) {");
+    writer.println("public void delayedBind(Ginjector baseGinjector) {");
     writer.indent();
     writeGinjector(writer, ginjectorClassName);
     if (nameToken == null) {
       // Standard proxy (not a Place)
 
-      // Call ProxyImpl bind method.
-      writer.println("bind( ginjector.getProxyFailureHandler() );");
-
-      writer.println("EventBus eventBus = ginjector.getEventBus();");
       if (tabContainerClass != null) {
         writeRequestTabHandler(logger, presenterClassName, tabNameToken,
             tabContainerClass, tabContainerClassName, tabPriority, tabLabel,
             tabGetLabel, writer);
       }
+
+      // Call ProxyImpl bind method.
+      writer.println("bind(ginjector.getProxyFailureHandler(),ginjector.getEventBus());");
+
       writePresenterProvider(logger, ctx, writer, proxyCodeSplitAnnotation,
           proxyCodeSplitBundleAnnotation, ginjectorClass, ginjectorClassName,
           presenterClass, presenterClassName);
@@ -667,9 +669,9 @@ public class ProxyGenerator extends Generator {
       // Place proxy
 
       // Call ProxyPlaceAbstract bind method.
-      writer.println("bind(  ginjector.getProxyFailureHandler(), ");
+      writer.println("bind(ginjector.getProxyFailureHandler(), ");
       writer.println("    ginjector.getPlaceManager(),");
-      writer.println("    ginjector.getEventBus() );");
+      writer.println("    ginjector.getEventBus());");
       writer.println("WrappedProxy wrappedProxy = GWT.create(WrappedProxy.class);");
       writer.println("wrappedProxy.delayedBind( ginjector ); ");
       writer.println("proxy = wrappedProxy; ");
@@ -688,7 +690,7 @@ public class ProxyGenerator extends Generator {
 
     // Register all @ProxyEvent
     for (ProxyEventDescription desc : proxyEvents) {
-      writer.println("eventBus.addHandler( " + desc.eventFullName
+      writer.println("getEventBus().addHandler( " + desc.eventFullName
           + ".getType(), this );");
     }
 
@@ -1187,8 +1189,6 @@ public class ProxyGenerator extends Generator {
       writer.println("label = " + tabGetLabel + ";");
     }
     writer.println("historyToken = \"" + nameToken + "\";");
-    // Call TabContentProxyImpl bind method.
-    writer.println("bind( eventBus );");
   }
 
   private void writeSlotHandlers(TreeLogger logger, GeneratorContext ctx,
@@ -1231,7 +1231,7 @@ public class ProxyGenerator extends Generator {
                 + presenterClassName + ">( failureHandler, this );");
           }
 
-          writer.println("eventBus.addHandler( " + presenterClassName + "."
+          writer.println("getEventBus().addHandler( " + presenterClassName + "."
               + field.getName() + ", revealContentHandler );");
         }
       }
