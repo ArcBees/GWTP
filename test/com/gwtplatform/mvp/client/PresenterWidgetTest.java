@@ -21,11 +21,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectBefore;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestModule;
-import com.gwtplatform.tester.mockito.TestScope;
+import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -43,30 +43,17 @@ import org.junit.runner.RunWith;
  */
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class PresenterWidgetTest {
-  // Guice environment
+   
   /**
+   * Guice test environment.
+   * 
    * @author Philippe Beaudoin
    */
-  public static class Env extends TestModule {
+  public static class Env extends AutomockingModule {
     @Override
-    protected void configure() {
+    protected void configureTest() {
       GWTMockUtilities.disarm();
-      bindMock(EventBus.class).in(TestScope.SINGLETON);
-      bindNamedMock(View.class,"A").in(TestScope.SINGLETON);
-      bindNamedMock(View.class,"B").in(TestScope.SINGLETON);
-      bindNamedMock(View.class,"C").in(TestScope.SINGLETON);
-      bindNamedMock(PopupView.class,"PopupB").in(TestScope.SINGLETON);
-      bindNamedMock(PopupView.class,"PopupC").in(TestScope.SINGLETON);
-      bind(PresenterWidgetA.class).in(TestScope.SINGLETON);
-      bind(PresenterWidgetB.class).in(TestScope.SINGLETON);
-      bind(PresenterWidgetC.class).in(TestScope.SINGLETON);
-      bind(PresenterWidgetPopupB.class).in(TestScope.SINGLETON);
-      bind(PresenterWidgetPopupC.class).in(TestScope.SINGLETON);
-      bindNamedMock(Widget.class, "A").in(TestScope.SINGLETON);
-      bindNamedMock(Widget.class, "B").in(TestScope.SINGLETON);
-      bindNamedMock(Widget.class, "C").in(TestScope.SINGLETON);
-      bindNamedMock(Widget.class, "PopupB").in(TestScope.SINGLETON);
-      bindNamedMock(Widget.class, "PopupC").in(TestScope.SINGLETON);
+      forceMock(Widget.class);
     }
   }
   
@@ -100,6 +87,7 @@ public class PresenterWidgetTest {
     }
   }
   
+  @TestSingleton
   static class PresenterWidgetA extends PresenterWidgetSpy<View> {
     @Inject
     PresenterWidgetA(EventBus eventBus, @Named("A") View view) {
@@ -107,6 +95,7 @@ public class PresenterWidgetTest {
     }
   }
   
+  @TestSingleton
   static class PresenterWidgetB extends PresenterWidgetSpy<View> {
     @Inject
     PresenterWidgetB(EventBus eventBus, @Named("B") View view) {
@@ -114,12 +103,15 @@ public class PresenterWidgetTest {
     }
   }
   
+  @TestSingleton
   static class PresenterWidgetC extends PresenterWidgetSpy<View> {
     @Inject
     PresenterWidgetC(EventBus eventBus, @Named("C") View view) {
       super(eventBus, view);
     }
   }
+
+  @TestSingleton
   static class PresenterWidgetPopupB extends PresenterWidgetSpy<PopupView> {
     @Inject
     PresenterWidgetPopupB(EventBus eventBus, @Named("PopupB") PopupView view) {
@@ -127,6 +119,7 @@ public class PresenterWidgetTest {
     }
   }
   
+  @TestSingleton
   static class PresenterWidgetPopupC extends PresenterWidgetSpy<PopupView> {
     @Inject
     PresenterWidgetPopupC(EventBus eventBus, @Named("PopupC") PopupView view) {

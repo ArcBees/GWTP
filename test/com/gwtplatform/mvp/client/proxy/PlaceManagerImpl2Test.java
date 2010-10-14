@@ -21,9 +21,9 @@ import com.google.gwt.user.client.Command;
 
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.tester.DeferredCommandManager;
+import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestModule;
 import com.gwtplatform.tester.mockito.TestScope;
 
 import static org.junit.Assert.assertEquals;
@@ -45,19 +45,16 @@ import org.mockito.stubbing.Answer;
 @RunWith(GuiceMockitoJUnitRunner.class)
 public class PlaceManagerImpl2Test {
 
-  // Guice environment
   /**
+   * Guice test environment.
+   * 
    * @author Philippe Beaudoin
    */
-  public static class Env extends TestModule {
+  public static class Env extends AutomockingModule {
     @Override
-    protected void configure() {
+    protected void configureTest() {
       GWTMockUtilities.disarm();
       bind(DeferredCommandManager.class).in(TestScope.SINGLETON);
-      bindMock(EventBus.class).in(TestScope.SINGLETON);
-      bindMock(TokenFormatter.class).in(TestScope.SINGLETON);
-      bindMock(ProxyFailureHandler.class).in(TestScope.SINGLETON);
-      bindMock(PlaceManagerWindowMethods.class).in(TestScope.SINGLETON);
       bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
     }
   }
