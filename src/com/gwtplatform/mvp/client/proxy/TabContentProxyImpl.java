@@ -67,9 +67,11 @@ public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
   public Tab getTab() {
     return tab;
   }
-
+  
   @Inject
-  protected void bind(EventBus eventBus) {
+  @Override
+  protected void bind(ProxyFailureHandler failureHandler, EventBus eventBus) {
+    super.bind(failureHandler, eventBus);
     eventBus.addHandler(requestTabsEventType, new RequestTabsHandler() {
       @Override
       public void onRequestTabs(RequestTabsEvent event) {

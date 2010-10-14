@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -37,6 +38,14 @@ import com.gwtplatform.mvp.client.Presenter;
  */
 public interface Proxy<P extends Presenter<?, ?>> extends ProxyRaw {
 
+  /**
+   * Makes it possible to access the {@link EventBus} object associated with
+   * that proxy.
+   * 
+   * @return The {@link EventBus} associated with that proxy.
+   */
+  EventBus getEventBus();
+  
   /**
    * Get the associated {@link Presenter}. The presenter can only be obtained in
    * an asynchronous manner to support code splitting when needed. To access the
