@@ -228,7 +228,7 @@ public abstract class PresenterWidget<V extends View> extends
    * @return The Widget associated with that presenter.
    */
   public final Widget getWidget() {
-    return view.asWidget();
+    return (view == null) ? null : view.asWidget();
   }
 
   /**

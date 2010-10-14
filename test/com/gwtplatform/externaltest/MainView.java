@@ -18,16 +18,16 @@ package com.gwtplatform.externaltest;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Singleton;
 
 import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.tester.mockito.TestSingleton;
 
 /**
  * This is the test view of the {@link MainPresenter}.
  * 
  * @author Philippe Beaudoin
  */
-@Singleton
+@TestSingleton
 public class MainView extends ViewImpl implements MainPresenter.MyView {
 
   public final FlowPanel widget;
