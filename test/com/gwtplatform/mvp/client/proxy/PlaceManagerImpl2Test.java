@@ -46,11 +46,9 @@ import org.mockito.stubbing.Answer;
 public class PlaceManagerImpl2Test {
 
   /**
-   * Guice test environment.
-   * 
-   * @author Philippe Beaudoin
+   * Guice test module.
    */
-  public static class Env extends AutomockingModule {
+  public static class Module extends AutomockingModule {
     @Override
     protected void configureTest() {
       GWTMockUtilities.disarm();

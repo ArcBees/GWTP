@@ -22,6 +22,11 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Names;
 
+import com.gwtplatform.mvp.client.AutobindDisable;
+import com.gwtplatform.mvp.client.HandlerContainerImpl;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.PresenterWidget;
+
 /**
  * A guice {@link com.google.inject.Module Module} with a bit of syntactic sugar to bind within
  * typical test scopes. Depends on mockito. 
@@ -129,4 +134,13 @@ public abstract class TestModule extends AbstractModule {
     return bind(typeLiteral).annotatedWith(Names.named(name));
   }
  
+  /**
+   * Globally disable automatic binding in
+   * classes derived from {@link HandlerContainerImpl}, such as {@link PresenterWidget} 
+   * or {@link Presenter}.
+   */
+  protected void disableAutobinding() {
+    bind(AutobindDisable.class).toInstance(new AutobindDisable(true));    
+  }
+  
 }
