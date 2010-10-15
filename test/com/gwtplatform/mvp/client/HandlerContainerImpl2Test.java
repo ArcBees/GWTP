@@ -14,45 +14,42 @@
  * the License.
  */
 
-package com.gwtplatform.externaltest;
+package com.gwtplatform.mvp.client;
 
-import com.google.inject.TypeLiteral;
-
-import com.gwtplatform.mvp.client.DefaultEventBus;
-import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.PresenterWidget;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
 import com.gwtplatform.tester.mockito.InjectTest;
-import com.gwtplatform.tester.mockito.TestScope;
+
+import static org.junit.Assert.assertFalse;
 
 import org.junit.runner.RunWith;
 
 /**
- * Test behaviour when a mock {@link PresenterWidget} is injected.
+ * Unit tests for {@link HandlerContainerImpl}.
  * 
  * @author Philippe Beaudoin
  */
 @RunWith(GuiceMockitoJUnitRunner.class)
-public class MockInjectionTest {
-
+public class HandlerContainerImpl2Test {
+  
   /**
    * Guice test module.
    */
   public static class Module extends AutomockingModule {
     @Override
     protected void configureTest() {
-      bindNamedMock(new TypeLiteral<PresenterWidget<View>>() { }, "Sub").in(TestScope.SINGLETON);
-      bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
+      disableAutobinding();
     }
   }
 
   @InjectTest
-  public void settingSubPresenterShouldNotCrash(MainPresenter mainPresenter) {
-    // When
-    mainPresenter.setSubPresenter();
+  public void shouldNotBindDefaultHandlerContainerOnInjection(
+      HandlerContainerImpl handlerContainer) {
+    // Given
+    // HandlerContainerImpl is injected
 
-    // Then nothing should crash 
+    // When, Then
+    // the bind method should be injected at creation time
+    assertFalse(handlerContainer.isBound());
   }
 }

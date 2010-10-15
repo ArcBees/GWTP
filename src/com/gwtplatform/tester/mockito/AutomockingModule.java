@@ -206,6 +206,10 @@ public abstract class AutomockingModule extends TestModule {
   }
 
   private void addInjectionPointDependencies(InjectionPoint injectionPoint, Set<Key<?>> keysObserved, Set<Key<?>> keysNeeded) {
+    // Do not consider dependencies coming from optional injections
+    if (injectionPoint.isOptional()) {
+      return;
+    }
     for (Dependency<?> dependency : injectionPoint.getDependencies()) {
       Key<?> key = dependency.getKey();
       addKeyDependency(key, keysObserved, keysNeeded);

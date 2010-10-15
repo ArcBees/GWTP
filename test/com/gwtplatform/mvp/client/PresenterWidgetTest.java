@@ -45,11 +45,9 @@ import org.junit.runner.RunWith;
 public class PresenterWidgetTest {
    
   /**
-   * Guice test environment.
-   * 
-   * @author Philippe Beaudoin
+   * Guice test module.
    */
-  public static class Env extends AutomockingModule {
+  public static class Module extends AutomockingModule {
     @Override
     protected void configureTest() {
       GWTMockUtilities.disarm();
