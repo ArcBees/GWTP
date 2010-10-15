@@ -33,7 +33,7 @@ import com.gwtplatform.dispatch.client.SecurityCookieAccessor;
  * @author Brendan Doherty
  * 
  */
-class TestDispatchModule extends AbstractModule {
+public class TestDispatchModule extends AbstractModule {
   @Override
   protected void configure() {
 

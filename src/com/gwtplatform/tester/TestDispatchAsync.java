@@ -44,7 +44,7 @@ import java.util.Map;
  * @author Brendan Doherty
  */
 
-class TestDispatchAsync implements DispatchAsync {
+public class TestDispatchAsync implements DispatchAsync {
 
   private DispatchService service;
   private Map<Class<?>, ClientActionHandler<?, ?>> clientActionHandlers;
