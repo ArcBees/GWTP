@@ -52,11 +52,9 @@ import java.util.List;
 public class PlaceManagerImplTest {
 
   /**
-   * Guice test environment.
-   * 
-   * @author Philippe Beaudoin
+   * Guice test module.
    */
-  public static class Env extends AutomockingModule {
+  public static class Module extends AutomockingModule {
     @Override
     protected void configureTest() {      
       bind(DeferredCommandManager.class).in(TestScope.SINGLETON);

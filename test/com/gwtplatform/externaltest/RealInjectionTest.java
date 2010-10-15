@@ -38,11 +38,9 @@ import org.junit.runner.RunWith;
 public class RealInjectionTest {
 
   /**
-   * Guice test environment.
-   * 
-   * @author Philippe Beaudoin
+   * Guice test module.
    */
-  public static class Env extends AutomockingModule {
+  public static class Module extends AutomockingModule {
     @SuppressWarnings("unchecked")
     @Override
     protected void configureTest() {
