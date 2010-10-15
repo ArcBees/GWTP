@@ -23,9 +23,6 @@ import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Names;
 
 import com.gwtplatform.mvp.client.AutobindDisable;
-import com.gwtplatform.mvp.client.HandlerContainerImpl;
-import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
  * A guice {@link com.google.inject.Module Module} with a bit of syntactic sugar to bind within
@@ -133,11 +130,11 @@ public abstract class TestModule extends AbstractModule {
       String name) {
     return bind(typeLiteral).annotatedWith(Names.named(name));
   }
- 
+
   /**
    * Globally disable automatic binding in
-   * classes derived from {@link HandlerContainerImpl}, such as {@link PresenterWidget} 
-   * or {@link Presenter}.
+   * classes derived from {@link com.gwtplatform.mvp.client.HandlerContainerImpl HandlerContainerImpl}, 
+   * such as {@link com.gwtplatform.mvp.client.Presenter PresenterWidget} or {@link com.gwtplatform.mvp.client.PresenterWidget Presenter}.
    */
   protected void disableAutobinding() {
     bind(AutobindDisable.class).toInstance(new AutobindDisable(true));    
