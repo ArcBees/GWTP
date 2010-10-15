@@ -31,7 +31,7 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * @author Brendan Doherty
  */
 
-class TestDispatchService implements DispatchService {
+public class TestDispatchService implements DispatchService {
   private Dispatch dispatch;
 
   @Inject
