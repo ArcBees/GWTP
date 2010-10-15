@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
+
 import java.util.List;
 
 /**
@@ -143,11 +144,12 @@ public class HandlerContainerImpl implements HandlerContainer {
    * Never call this directly. This method is used only by Guice/GIN dependency
    * injection mechanism.
    */
-  @Inject
-  final void automaticBind() {
-    if (autoBind) {
-      bind();
+  @Inject(optional = true)
+  final void automaticBind(AutobindDisable disable) {
+    if (!autoBind || (disable != null)) {
+      return;
     }
+      bind();
   }
 
 }

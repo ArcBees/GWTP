@@ -75,14 +75,14 @@ public abstract class AutomockingModule extends TestModule {
   @SuppressWarnings("unchecked")
   public final void configure() {
     configureTest();
-    Set<Key<?>> bindingsObservedSet = new HashSet<Key<?>>(bindingsObserved.size());
-    Set<Key<?>> bindingsNeeded = new HashSet<Key<?>>(bindingsObserved.size());
+    Set<Key<?>> keysObserved = new HashSet<Key<?>>(bindingsObserved.size());
+    Set<Key<?>> keysNeeded = new HashSet<Key<?>>(bindingsObserved.size());
     
     for (BindingInfo bindingInfo : bindingsObserved) {
       if (bindingInfo.annotation != null) {
-        bindingsObservedSet.add(Key.get(bindingInfo.abstractType, bindingInfo.annotation));
+        keysObserved.add(Key.get(bindingInfo.abstractType, bindingInfo.annotation));
       } else {
-        bindingsObservedSet.add(Key.get(bindingInfo.abstractType));
+        keysObserved.add(Key.get(bindingInfo.abstractType));
       }
     }
     
@@ -90,16 +90,16 @@ public abstract class AutomockingModule extends TestModule {
     // classes annotated with @TestSingleton and @TestEagerSingleton
     for (Class<?> subClass : testClass.getDeclaredClasses()) {
       Key key = Key.get(subClass);
-      if (!bindingsObservedSet.contains(key)) {
+      if (!keysObserved.contains(key)) {
         if (subClass.isAnnotationPresent(TestSingleton.class)) {
           bind(subClass).in(TestScope.SINGLETON);
-          bindingsObservedSet.add(key);
+          keysObserved.add(key);
         } else if (subClass.isAnnotationPresent(TestEagerSingleton.class)) {
           bind(subClass).in(TestScope.EAGER_SINGLETON);
-          bindingsObservedSet.add(key);
+          keysObserved.add(key);
         } else if (subClass.isAnnotationPresent(TestMockSingleton.class)) {
-          bindMock(subClass).in(TestScope.EAGER_SINGLETON);
-          bindingsObservedSet.add(key);
+          bindMock(subClass).in(TestScope.SINGLETON);
+          keysObserved.add(key);
         }
       }
     }    
@@ -121,33 +121,40 @@ public abstract class AutomockingModule extends TestModule {
           } else {
             key = Key.get(parameter);            
           }
-          bindingsNeeded.add(key);
-          if (!parameter.getRawType().isInterface() &&
-              !Modifier.isAbstract(parameter.getRawType().getModifiers()) &&
-              !forceMock.contains(parameter) &&
-              !bindingsObservedSet.contains(key)) {
-            bind(key).in(TestScope.SINGLETON);
-            bindingsObservedSet.add(key);            
-          }
+          keysNeeded.add(key);
+          bindIfConcrete(keysObserved, key);
         }
       }
     }
     
-    for (BindingInfo bindingInfo : bindingsObserved) {
+    for (int i = 0; i < bindingsObserved.size(); ++i) {
+      BindingInfo bindingInfo = bindingsObserved.get(i);
       if (bindingInfo.boundType != null) {
-        addDependencies(Key.get(bindingInfo.boundType), bindingsNeeded);
+        addDependencies(Key.get(bindingInfo.boundType), keysObserved, keysNeeded);
       } else {
-        if (!bindingInfo.isBound) {
-          addDependencies(Key.get(bindingInfo.abstractType), bindingsNeeded);
+        if (!bindingInfo.isBoundToInstanceOrProvider) {
+          addDependencies(Key.get(bindingInfo.abstractType), keysObserved, keysNeeded);
         }
-      }
-    }
+      }      
+    }    
     
-    for (Key<?> key : bindingsNeeded) {
-      if (!bindingsObservedSet.contains(key)) {
+    for (Key<?> key : keysNeeded) {
+      if (!keysObserved.contains(key)) {
         LinkedBindingBuilder<?> mockBuilder = bind(key);
         mockBuilder.toProvider(new MockProvider(key.getTypeLiteral().getRawType())).in(TestScope.SINGLETON);
       }
+    }
+  }
+
+  private void bindIfConcrete(
+      Set<Key<?>> keysObserved, Key<?> key) {
+    TypeLiteral<?> parameter = key.getTypeLiteral();
+    if (!parameter.getRawType().isInterface() &&
+        !Modifier.isAbstract(parameter.getRawType().getModifiers()) &&
+        !forceMock.contains(parameter) &&
+        !keysObserved.contains(key)) {
+      bind(key).in(TestScope.SINGLETON);
+      keysObserved.add(key);            
     }
   }
 
@@ -188,24 +195,24 @@ public abstract class AutomockingModule extends TestModule {
     return bindingInfo;
   }
   
-  private <T> void addDependencies(Key<T> key, Set<Key<?>> bindingsNeeded) {
+  private <T> void addDependencies(Key<T> key, Set<Key<?>> keysObserved, Set<Key<?>> keysNeeded) {
     addInjectionPointDependencies(InjectionPoint.forConstructorOf(key.getTypeLiteral()),
-        bindingsNeeded);
+        keysObserved, keysNeeded);
     Set<InjectionPoint> methodsAndFieldsInjectionPoints = 
       InjectionPoint.forInstanceMethodsAndFields(key.getTypeLiteral());
     for (InjectionPoint injectionPoint : methodsAndFieldsInjectionPoints) {      
-      addInjectionPointDependencies(injectionPoint, bindingsNeeded);
+      addInjectionPointDependencies(injectionPoint, keysObserved, keysNeeded);
     }
   }
 
-  private void addInjectionPointDependencies(InjectionPoint injectionPoint, Set<Key<?>> bindingsNeeded) {
+  private void addInjectionPointDependencies(InjectionPoint injectionPoint, Set<Key<?>> keysObserved, Set<Key<?>> keysNeeded) {
     for (Dependency<?> dependency : injectionPoint.getDependencies()) {
       Key<?> key = dependency.getKey();
-      addKeyDependency(key, bindingsNeeded);
+      addKeyDependency(key, keysObserved, keysNeeded);
     }
   }
 
-  private void addKeyDependency(Key<?> key, Set<Key<?>> bindingsNeeded) {
+  private void addKeyDependency(Key<?> key, Set<Key<?>> keysObserved, Set<Key<?>> keysNeeded) {
     Key<?> newKey = key;
     if (Provider.class.isAssignableFrom(key.getTypeLiteral().getRawType())) {
       Type providedType = ((ParameterizedType) key.getTypeLiteral().getType()).getActualTypeArguments()[0];
@@ -216,7 +223,8 @@ public abstract class AutomockingModule extends TestModule {
         newKey = Key.get(providedType, annotation);
       }
     }
-    bindingsNeeded.add(newKey);
+    bindIfConcrete(keysObserved, newKey);
+    keysNeeded.add(newKey);
   }  
 
   private static class SpyLinkedBindingBuilder<T> implements LinkedBindingBuilder<T> {
@@ -232,34 +240,34 @@ public abstract class AutomockingModule extends TestModule {
     @Override
     public ScopedBindingBuilder to(Class<? extends T> type) {
       bindingInfo.boundType = TypeLiteral.get(type);
-      bindingInfo.isBound = true;
+      bindingInfo.isBoundToInstanceOrProvider = true;
       return delegate.to(type);
     }
 
     @Override
     public ScopedBindingBuilder to(TypeLiteral<? extends T> type) {
       bindingInfo.boundType = type;
-      bindingInfo.isBound = true;
+      bindingInfo.isBoundToInstanceOrProvider = true;
       return delegate.to(type);
     }
 
     @Override
     public ScopedBindingBuilder to(Key<? extends T> key) {
       bindingInfo.boundType = key.getTypeLiteral();
-      bindingInfo.isBound = true;
+      bindingInfo.isBoundToInstanceOrProvider = true;
       return delegate.to(key);
     }
 
     @Override
     public void toInstance(T instance) {
-      bindingInfo.isBound = true;
+      bindingInfo.isBoundToInstanceOrProvider = true;
       delegate.toInstance(instance);
     }
 
     @Override
     public ScopedBindingBuilder toProvider(Provider<? extends T> provider) {
       // TODO Do something when we're bound to a provider?
-      bindingInfo.isBound = true;
+      bindingInfo.isBoundToInstanceOrProvider = true;
       return delegate.toProvider(provider);
     }
 
@@ -267,7 +275,7 @@ public abstract class AutomockingModule extends TestModule {
     public ScopedBindingBuilder toProvider(
         Class<? extends Provider<? extends T>> providerClass) {
       // TODO Do something when we're bound to a provider?
-      bindingInfo.isBound = true;
+      bindingInfo.isBoundToInstanceOrProvider = true;
       return delegate.toProvider(providerClass);
     }
 
@@ -275,7 +283,7 @@ public abstract class AutomockingModule extends TestModule {
     public ScopedBindingBuilder toProvider(
         Key<? extends Provider<? extends T>> key) {
       // TODO Do something when we're bound to a provider?
-      bindingInfo.isBound = true;
+      bindingInfo.isBoundToInstanceOrProvider = true;
       return delegate.toProvider(key);
     }
 
@@ -323,11 +331,11 @@ public abstract class AutomockingModule extends TestModule {
     }
   }
 
-  private class BindingInfo {
+  private static class BindingInfo {
     private TypeLiteral<?> abstractType;
     private Annotation annotation;
     private TypeLiteral<?> boundType;
-    private boolean isBound;
+    private boolean isBoundToInstanceOrProvider;
   }
 
 }
