@@ -72,6 +72,7 @@ import java.util.Map;
  * 
  * @author Philippe Beaudoin
  * @author Christian Goudreau
+ * @author Denis Labaye
  */
 public abstract class PresenterWidget<V extends View> extends
     HandlerContainerImpl implements HasEventBus, HasSlots, HasPopupSlot {
@@ -227,7 +228,7 @@ public abstract class PresenterWidget<V extends View> extends
    * 
    * @return The Widget associated with that presenter.
    */
-  public final Widget getWidget() {
+  public Widget getWidget() {
     return (view == null) ? null : view.asWidget();
   }
 
