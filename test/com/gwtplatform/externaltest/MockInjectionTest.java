@@ -16,6 +16,7 @@
 
 package com.gwtplatform.externaltest;
 
+import com.google.inject.Inject;
 import com.google.inject.TypeLiteral;
 
 import com.gwtplatform.mvp.client.DefaultEventBus;
@@ -24,9 +25,9 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestScope;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -48,11 +49,12 @@ public class MockInjectionTest {
     }
   }
 
-  @InjectTest
-  public void settingSubPresenterShouldNotCrash(MainPresenter mainPresenter) {
+  // SUT
+  @Inject MainPresenter mainPresenter;
+  
+  @Test
+  public void settingSubPresenterShouldNotCrash() {
     // When
     mainPresenter.setSubPresenter();
-
-    // Then nothing should crash 
-  }
+  }  
 }

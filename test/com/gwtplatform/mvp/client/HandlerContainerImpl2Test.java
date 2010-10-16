@@ -16,12 +16,14 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.inject.Inject;
+
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectTest;
 
 import static org.junit.Assert.assertFalse;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -42,9 +44,11 @@ public class HandlerContainerImpl2Test {
     }
   }
 
-  @InjectTest
-  public void shouldNotBindDefaultHandlerContainerOnInjection(
-      HandlerContainerImpl handlerContainer) {
+  // SUT
+  @Inject HandlerContainerImpl handlerContainer;
+  
+  @Test
+  public void shouldNotBindDefaultHandlerContainerOnInjection() {
     // Given
     // HandlerContainerImpl is injected
 

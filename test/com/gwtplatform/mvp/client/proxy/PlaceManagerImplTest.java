@@ -28,7 +28,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.DeferredCommandManager;
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestEagerSingleton;
 import com.gwtplatform.tester.mockito.TestMockSingleton;
 import com.gwtplatform.tester.mockito.TestScope;
@@ -40,6 +39,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
@@ -168,15 +168,18 @@ public class PlaceManagerImplTest {
       lastEvent = navigationEvent;
     };
   }
+
+  // SUT
+  @Inject PlaceManager placeManager;
+
+  @Inject DeferredCommandManager deferredCommandManager;
+  @Inject PlaceManagerWindowMethods gwtWindowMethods;
+  @Inject NavigationEventSpy navigationHandler;
+  @Inject EventBus eventBus;
   
-  @InjectTest
+  @Test
   public void placeManagerRevealPlaceStandard(
-      DeferredCommandManager deferredCommandManager,
-      PlaceManager placeManager,
-      DummyPresenterBasic presenter,
-      PlaceManagerWindowMethods gwtWindowMethods,
-      NavigationEventSpy navigationHandler,
-      EventBus eventBus) {
+      DummyPresenterBasic presenter) {
 
     // Given
     eventBus.addHandler(NavigationEvent.getType(), navigationHandler);    
@@ -208,10 +211,8 @@ public class PlaceManagerImplTest {
     assertEquals("dummyValue", placeRequest.getParameter("dummyParam", null));  
   }
 
-  @InjectTest
+  @Test
   public void placeManagerRevealPlaceRedirectInPrepareFromRequest(
-      DeferredCommandManager deferredCommandManager,
-      PlaceManager placeManager,
       DummyPresenterRedirect presenter,
       DummyPresenterBasic otherPresenter) {
     // Given
@@ -239,10 +240,8 @@ public class PlaceManagerImplTest {
     verify(otherPresenter).forceReveal();
   }
   
-  @InjectTest
+  @Test
   public void placeManagerUserUpdateHistoryWhenRevealPlace(
-      DeferredCommandManager deferredCommandManager,
-      PlaceManager placeManager,
       DummyPresenterRedirect presenter,
       DummyPresenterBasic otherPresenter) {
     // Given
@@ -268,5 +267,6 @@ public class PlaceManagerImplTest {
 
     verify(otherPresenter).prepareFromRequest(finalPlaceRequest);
     verify(otherPresenter).forceReveal();
-  }  
+  }
+  
 }

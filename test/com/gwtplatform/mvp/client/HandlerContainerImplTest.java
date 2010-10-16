@@ -20,7 +20,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
@@ -29,6 +28,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -64,7 +64,7 @@ public class HandlerContainerImplTest {
     }
   }
 
-  @InjectTest
+  @Test
   public void callingBindShouldInvokeOnBind(
       NonAutoboundHandlerContainer handlerContainer) {
     // Given
@@ -74,7 +74,7 @@ public class HandlerContainerImplTest {
     assertEquals(1, handlerContainer.onBindMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void callingUnbindShouldInvokeOnUnbind(
       NonAutoboundHandlerContainer handlerContainer) {
     // Given
@@ -85,7 +85,7 @@ public class HandlerContainerImplTest {
     assertEquals(1, handlerContainer.onUnbindMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void callingUnbindWhenUnboundShouldNotInvokeOnUnbind(
       NonAutoboundHandlerContainer handlerContainer) {
     // Given
@@ -100,7 +100,7 @@ public class HandlerContainerImplTest {
     assertEquals(2, handlerContainer.onUnbindMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void shouldBindDefaultHandlerContainerOnInjection(
       HandlerContainerImpl handlerContainer) {
     // Given
@@ -111,7 +111,7 @@ public class HandlerContainerImplTest {
     assertTrue(handlerContainer.isBound());
   }
 
-  @InjectTest
+  @Test
   public void shouldNotBindNonAutoboundHandlerContainerOnInjection(
       NonAutoboundHandlerContainer handlerContainer) {
     // Given
@@ -122,7 +122,7 @@ public class HandlerContainerImplTest {
     assertFalse(handlerContainer.isBound());
   }
 
-  @InjectTest
+  @Test
   public void unbindingMultipleTimesRemoveHandlersOnlyOnce(
       HandlerContainerImpl handlerContainer) {
     // Given
@@ -139,7 +139,7 @@ public class HandlerContainerImplTest {
     verify(mockHandlerRegistration).removeHandler();
   }
 
-  @InjectTest
+  @Test
   public void unbindingRemoveHandlers(
       HandlerContainerImpl handlerContainer) {
     // Given

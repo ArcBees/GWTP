@@ -16,6 +16,7 @@
 
 package com.gwtplatform.externaltest;
 
+import com.google.inject.Inject;
 import com.google.inject.TypeLiteral;
 
 import com.gwtplatform.mvp.client.DefaultEventBus;
@@ -24,9 +25,9 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestScope;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -41,17 +42,19 @@ public class RealInjectionTest {
    * Guice test module.
    */
   public static class Module extends AutomockingModule {
-    @SuppressWarnings("unchecked")
     @Override
     protected void configureTest() {
-      bindNamed(new TypeLiteral<PresenterWidget<View>>() { }, "Sub").to(SubPresenterWidget.class)
+      bindNamed(new TypeLiteral<PresenterWidget<? extends View>>() { }, "Sub").to(SubPresenterWidget.class)
         .in(TestScope.SINGLETON);
       bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
     }
   }
+  
+  // SUT
+  @Inject MainPresenter mainPresenter;
 
-  @InjectTest
-  public void settingSubPresenterShouldNotCrash(MainPresenter mainPresenter) {
+  @Test
+  public void settingSubPresenterShouldNotCrash() {
     // When
     mainPresenter.setSubPresenter();
 
