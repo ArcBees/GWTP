@@ -20,13 +20,13 @@ import com.google.inject.Inject;
 
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -54,9 +54,11 @@ public class PresenterTest {
     }
   }
 
-  @InjectTest
-  public void forceRevealWhenPresenterIsNotVisible(
-      TestPresenter presenter) {
+  // SUT
+  @Inject TestPresenter presenter;
+  
+  @Test
+  public void forceRevealWhenPresenterIsNotVisible() {
     // Given
     assertFalse(presenter.isVisible());
 
@@ -67,9 +69,8 @@ public class PresenterTest {
     assertEquals(1, presenter.revealInParentCalled);
   }
 
-  @InjectTest
-  public void forceRevealWhenPresenterIsVisible(
-      TestPresenter presenter) {
+  @Test
+  public void forceRevealWhenPresenterIsVisible() {
     // Given
     presenter.reveal();
     assertTrue(presenter.isVisible());

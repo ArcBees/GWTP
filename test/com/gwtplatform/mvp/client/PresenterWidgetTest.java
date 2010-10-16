@@ -23,8 +23,6 @@ import com.google.inject.name.Named;
 
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectBefore;
-import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
@@ -34,6 +32,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -124,19 +124,20 @@ public class PresenterWidgetTest {
       super(eventBus, view);
     }
   }
+
+  @Inject @Named("A") Widget widgetA;
+  @Inject @Named("B") Widget widgetB;
+  @Inject @Named("C") Widget widgetC;
+  @Inject @Named("PopupB") Widget widgetPopupB;
+  @Inject @Named("PopupC") Widget widgetPopupC;
+  @Inject @Named("A") View viewA;
+  @Inject @Named("B") View viewB;
+  @Inject @Named("C") View viewC;
+  @Inject @Named("PopupB") PopupView popupViewB;
+  @Inject @Named("PopupC") PopupView popupViewC;
   
-  @InjectBefore
-  public void arrange(
-      @Named("A") Widget widgetA,
-      @Named("B") Widget widgetB,
-      @Named("C") Widget widgetC,
-      @Named("PopupB") Widget widgetPopupB,
-      @Named("PopupC") Widget widgetPopupC,
-      @Named("A") View viewA,
-      @Named("B") View viewB,
-      @Named("C") View viewC,
-      @Named("PopupB") PopupView popupViewB,
-      @Named("PopupC") PopupView popupViewC) {
+  @Before
+  public void arrange() {
     when(viewA.asWidget()).thenReturn(widgetA);
     when(viewB.asWidget()).thenReturn(widgetB);
     when(viewC.asWidget()).thenReturn(widgetC);
@@ -144,7 +145,7 @@ public class PresenterWidgetTest {
     when(popupViewC.asWidget()).thenReturn(widgetPopupC);
   }
   
-  @InjectTest
+  @Test
   public void onRevealMakesPresenterWidgetVisible(
       PresenterWidgetA presenterWidget) {
     // When
@@ -154,7 +155,7 @@ public class PresenterWidgetTest {
     assertTrue(presenterWidget.isVisible());
   }
 
-  @InjectTest
+  @Test
   public void presenterWidgetIsInitiallyNotVisible(
       PresenterWidgetA presenterWidget) {
     // Then
@@ -163,7 +164,7 @@ public class PresenterWidgetTest {
     assertFalse(presenterWidget.isVisible());
   }
 
-  @InjectTest
+  @Test
   public void testAddCenteredPopupOnInitiallyInvisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetPopupB popupContentB,
@@ -211,7 +212,7 @@ public class PresenterWidgetTest {
     verify(popupContentC.getView()).hide();
   }
 
-  @InjectTest
+  @Test
   public void testAddCenteredPopupOnInitiallyVisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetPopupB popupContentB,
@@ -264,14 +265,11 @@ public class PresenterWidgetTest {
   // parent then child for onReveal and onReset
   // child then parent for onHide
 
-  @InjectTest
+  @Test
   public void testAddToSlotToSlot(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
-      PresenterWidgetC contentC,
-      @Named("A") View viewA,
-      @Named("B") Widget widgetB,
-      @Named("C") Widget widgetC) {
+      PresenterWidgetC contentC) {
 
     // Given
     Object slotBC = new Object();
@@ -298,7 +296,7 @@ public class PresenterWidgetTest {
     assertEquals(1, contentC.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testAddUncenteredPopupOnInitiallyInvisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetPopupB popupContentB,
@@ -346,11 +344,10 @@ public class PresenterWidgetTest {
     verify(popupContentC.getView(), times(0)).center();
   }
 
-  @InjectTest
+  @Test
   public void testClearContentInSlot(
       PresenterWidgetA presenterWidgetA, 
-      PresenterWidgetB contentB,
-      @Named("A") View viewA) {
+      PresenterWidgetB contentB) {
     // Given
     Object slotB = new Object();
     presenterWidgetA.reveal();
@@ -371,13 +368,11 @@ public class PresenterWidgetTest {
     assertEquals(1, contentB.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testRemoveFromSlotFromSlot(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
-      PresenterWidgetC contentC,
-      @Named("A") View viewA,
-      @Named("B") Widget widgetB) {
+      PresenterWidgetC contentC) {
     // Given
     Object slotBC = new Object();
     presenterWidgetA.reveal();
@@ -394,15 +389,11 @@ public class PresenterWidgetTest {
     assertEquals(0, contentC.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter1(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
-      PresenterWidgetC contentCinB,
-      @Named("A") View viewA,
-      @Named("B") View viewB,
-      @Named("B") Widget widgetB,
-      @Named("C") Widget widgetC) {
+      PresenterWidgetC contentCinB) {
     // Given
     // slot is empty in presenterWidgets, and it is NOT visible
     Object slotB = new Object();
@@ -438,15 +429,11 @@ public class PresenterWidgetTest {
     assertEquals(1, contentCinB.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter2(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
-      PresenterWidgetC contentCinB,
-      @Named("A") View viewA,
-      @Named("B") View viewB,
-      @Named("B") Widget widgetB,
-      @Named("C") Widget widgetC) {
+      PresenterWidgetC contentCinB) {
     // Given
     // slot is empty in presenterWidgets, and it is NOT visible
     Object slotB = new Object();
@@ -485,15 +472,11 @@ public class PresenterWidgetTest {
     assertEquals(1, contentCinB.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testSetInSlotHierarchyInEmptySlotOnInitiallyVisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
-      PresenterWidgetC contentCinB,
-      @Named("A") View viewA,
-      @Named("B") View viewB,
-      @Named("B") Widget widgetB,
-      @Named("C") Widget widgetC) {
+      PresenterWidgetC contentCinB) {
 
     // Given
     Object slotB = new Object();
@@ -522,15 +505,11 @@ public class PresenterWidgetTest {
     assertEquals(1, contentCinB.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testSetInSlotInEmptySlotOnInitiallyInvisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
-      PresenterWidgetC contentC,
-      @Named("A") View viewA,
-      @Named("B") View viewB,
-      @Named("B") Widget widgetB,
-      @Named("C") Widget widgetC) {
+      PresenterWidgetC contentC) {
     // Given
     // slot is empty in presenterWidget, and it is NOT visible
     Object slotB = new Object();
@@ -565,14 +544,11 @@ public class PresenterWidgetTest {
     assertEquals(1, contentC.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testSetInSlotInEmptySlotOnInitiallyVisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
-      PresenterWidgetC contentC,
-      @Named("A") View viewA,
-      @Named("B") Widget widgetB,
-      @Named("C") Widget widgetC) {
+      PresenterWidgetC contentC) {
     // Given
     Object slotB = new Object();
     Object slotC = new Object();
@@ -599,11 +575,10 @@ public class PresenterWidgetTest {
     assertEquals(1, contentC.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testSetNullContentInSlot(
       PresenterWidgetA presenterWidgetA, 
-      PresenterWidgetB contentB,
-      @Named("A") View viewA) {
+      PresenterWidgetB contentB) {
     // Given
     Object slotB = new Object();
     presenterWidgetA.reveal();
@@ -624,7 +599,7 @@ public class PresenterWidgetTest {
     assertEquals(1, contentB.onHideMethodCalled);
   }
 
-  @InjectTest
+  @Test
   public void testSwitchPopupToAnotherPresenter1(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
@@ -642,7 +617,7 @@ public class PresenterWidgetTest {
     assertFalse(popupContentC.isVisible());
   }
 
-  @InjectTest
+  @Test
   public void testSwitchPopupToAnotherPresenter2(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
@@ -661,7 +636,7 @@ public class PresenterWidgetTest {
     assertTrue(popupContentC.isVisible());
   }
 
-  @InjectTest
+  @Test
   public void testSwitchPresenterWidgetToAnotherPresenter1(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
@@ -681,7 +656,7 @@ public class PresenterWidgetTest {
     assertFalse(contentC.isVisible());
   }
 
-  @InjectTest
+  @Test
   public void testSwitchPresenterWidgetToAnotherPresenter2(
       PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
