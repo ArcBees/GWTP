@@ -22,6 +22,9 @@ import com.google.inject.Injector;
 import com.google.inject.Scope;
 import com.google.inject.spi.DefaultBindingScopingVisitor;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -112,22 +115,18 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
   @Override
   protected Statement withBefores(FrameworkMethod method, Object target,
       Statement statement) {
-    Statement newStatement = super.withBefores(method, target, statement); 
-    
     List<FrameworkMethod> befores = getTestClass().getAnnotatedMethods(
-        InjectBefore.class);
-    return befores.isEmpty() ? newStatement : new InjectedBeforeStatements(newStatement,
+        Before.class);
+    return befores.isEmpty() ? statement : new InjectedBeforeStatements(statement,
         befores, target, injector);
   }
 
   @Override
   protected Statement withAfters(FrameworkMethod method, Object target,
       Statement statement) {
-    Statement newStatement = super.withAfters(method, target, statement); 
-    
     List<FrameworkMethod> afters = getTestClass().getAnnotatedMethods(
-        InjectAfter.class);
-    return afters.isEmpty() ? newStatement : new InjectedBeforeStatements(newStatement,
+        After.class);
+    return afters.isEmpty() ? statement : new InjectedBeforeStatements(statement,
         afters, target, injector);
   }
   
@@ -135,8 +134,7 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
   protected List<FrameworkMethod> computeTestMethods() {
     // Use a set otherwise methods are listed multiple times
     Set<FrameworkMethod> guiceTestMethods = new HashSet<FrameworkMethod>();
-    guiceTestMethods.addAll(super.computeTestMethods());
-    guiceTestMethods.addAll(getTestClass().getAnnotatedMethods(InjectTest.class));
+    guiceTestMethods.addAll(getTestClass().getAnnotatedMethods(Test.class));
     List<FrameworkMethod> result = new ArrayList<FrameworkMethod>(guiceTestMethods.size());
     result.addAll(guiceTestMethods);    
     return result;
@@ -167,8 +165,7 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
    * is not a public, void instance method with no arguments.
    */
   protected void validateTestMethods(List<Throwable> errors) {
-    super.validateTestMethods(errors);
-    validatePublicVoidMethods(InjectTest.class, false, errors);
+    validatePublicVoidMethods(Test.class, false, errors);
   }
 
   /**

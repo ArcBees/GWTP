@@ -23,8 +23,13 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
+import com.google.inject.internal.Errors;
 import com.google.inject.spi.Dependency;
 import com.google.inject.spi.InjectionPoint;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -86,47 +91,61 @@ public abstract class AutomockingModule extends TestModule {
       }
     }
     
-    // Preempt JIT binding by looking through the test class looking for
-    // classes annotated with @TestSingleton and @TestEagerSingleton
-    for (Class<?> subClass : testClass.getDeclaredClasses()) {
-      Key key = Key.get(subClass);
-      if (!keysObserved.contains(key)) {
-        if (subClass.isAnnotationPresent(TestSingleton.class)) {
-          bind(subClass).in(TestScope.SINGLETON);
-          keysObserved.add(key);
-        } else if (subClass.isAnnotationPresent(TestEagerSingleton.class)) {
-          bind(subClass).in(TestScope.EAGER_SINGLETON);
-          keysObserved.add(key);
-        } else if (subClass.isAnnotationPresent(TestMockSingleton.class)) {
-          bindMock(subClass).in(TestScope.SINGLETON);
-          keysObserved.add(key);
+    // Preempt JIT binding by looking through the test class and any base class
+    // looking for nested classes annotated with @TestSingleton and @TestEagerSingleton
+    Class<?> currentClass = testClass;
+    while (currentClass != null) {
+      for (Class<?> subClass : testClass.getDeclaredClasses()) {
+        Key key = Key.get(subClass);
+        if (!keysObserved.contains(key)) {
+          if (subClass.isAnnotationPresent(TestSingleton.class)) {
+            bind(subClass).in(TestScope.SINGLETON);
+            keysObserved.add(key);
+          } else if (subClass.isAnnotationPresent(TestEagerSingleton.class)) {
+            bind(subClass).in(TestScope.EAGER_SINGLETON);
+            keysObserved.add(key);
+          } else if (subClass.isAnnotationPresent(TestMockSingleton.class)) {
+            bindMock(subClass).in(TestScope.SINGLETON);
+            keysObserved.add(key);
+          }
         }
       }
-    }    
+      currentClass = currentClass.getSuperclass();
+    }
     
     // Preempt JIT binding by looking through the test class looking for
     // methods annotated with @InjectTest, @InjectBefore, or @InjectAfter
     for (Method method : testClass.getDeclaredMethods()) {
-      TypeLiteral<?> testClassType = TypeLiteral.get(testClass);
-      if (method.isAnnotationPresent(InjectTest.class) ||
-          method.isAnnotationPresent(InjectBefore.class) ||
-          method.isAnnotationPresent(InjectAfter.class)) {
-        List<TypeLiteral<?>> parameters = testClassType.getParameterTypes(method);
-        Annotation[][] annotations = method.getParameterAnnotations();
-        for (int i = 0; i < parameters.size(); ++i) {
-          TypeLiteral<?> parameter = parameters.get(i);
-          Key key;
-          if (annotations[i].length > 0) {
-            key = Key.get(parameter, annotations[i][0]);
-          } else {
-            key = Key.get(parameter);            
-          }
-          keysNeeded.add(key);
-          bindIfConcrete(keysObserved, key);
+      if (method.isAnnotationPresent(Test.class) ||
+          method.isAnnotationPresent(Before.class) ||
+          method.isAnnotationPresent(After.class)) {
+        
+        Errors errors = new Errors(method);
+        List<Key<?>> keys = GuiceUtils.getMethodKeys(method, errors);
+        
+        for (Key<?> key : keys) {
+            Key<?> keyNeeded = GuiceUtils.ensureProvidedKey(key, errors);
+            addNeededKey(keysObserved, keysNeeded, keyNeeded);
         }
+        
+        errors.throwConfigurationExceptionIfErrorsExist();
       }
     }
     
+    // Preempt JIT binding by looking through the test class looking for
+    // fields and methods annotated with @Inject
+    Set<InjectionPoint> injectionPoints = InjectionPoint.forInstanceMethodsAndFields(testClass);
+    for (InjectionPoint injectionPoint : injectionPoints) {
+      Errors errors = new Errors(injectionPoint);
+      List<Dependency<?>> dependencies = injectionPoint.getDependencies();
+      for (Dependency dependency : dependencies) {
+        Key<?> keyNeeded = GuiceUtils.ensureProvidedKey(dependency.getKey(), errors);
+        addNeededKey(keysObserved, keysNeeded, keyNeeded);
+      }
+      errors.throwConfigurationExceptionIfErrorsExist();
+    }
+    
+    // Recursively add the dependencies of all the bindings observed
     for (int i = 0; i < bindingsObserved.size(); ++i) {
       BindingInfo bindingInfo = bindingsObserved.get(i);
       if (bindingInfo.boundType != null) {
@@ -138,6 +157,7 @@ public abstract class AutomockingModule extends TestModule {
       }      
     }    
     
+    // Bind all keys needed but not observed as mocks
     for (Key<?> key : keysNeeded) {
       if (!keysObserved.contains(key)) {
         LinkedBindingBuilder<?> mockBuilder = bind(key);
@@ -146,6 +166,11 @@ public abstract class AutomockingModule extends TestModule {
     }
   }
 
+  private void addNeededKey(Set<Key<?>> keysObserved, Set<Key<?>> keysNeeded,
+      Key<?> keyNeeded) {
+    keysNeeded.add(keyNeeded);
+    bindIfConcrete(keysObserved, keyNeeded);
+  }
   private void bindIfConcrete(
       Set<Key<?>> keysObserved, Key<?> key) {
     TypeLiteral<?> parameter = key.getTypeLiteral();

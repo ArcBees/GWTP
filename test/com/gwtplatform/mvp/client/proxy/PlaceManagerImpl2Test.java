@@ -18,12 +18,12 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
+import com.google.inject.Inject;
 
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.tester.DeferredCommandManager;
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.InjectTest;
 import com.gwtplatform.tester.mockito.TestScope;
 
 import static org.junit.Assert.assertEquals;
@@ -33,6 +33,7 @@ import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -56,13 +57,16 @@ public class PlaceManagerImpl2Test {
       bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
     }
   }
+
+  // SUT
+  @Inject PlaceManager placeManager;
   
-  @InjectTest
-  public void placeManagerUserCallUpdateHistoryWhenRevealingPlace(
-      final DeferredCommandManager deferredCommandManager,
-      final PlaceManager placeManager,
-      final EventBus eventBus,
-      final PlaceManagerWindowMethods gwtWindowMethods) {
+  @Inject DeferredCommandManager deferredCommandManager;
+  @Inject EventBus eventBus;
+  @Inject PlaceManagerWindowMethods gwtWindowMethods;
+  
+  @Test
+  public void placeManagerUserCallUpdateHistoryWhenRevealingPlace() {
     // Given
     doAnswer(new Answer<Void>() {
       @Override

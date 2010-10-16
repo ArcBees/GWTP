@@ -18,12 +18,14 @@ package com.gwtplatform.tester.mockito;
 
 import com.google.inject.Injector;
 import com.google.inject.Key;
+import com.google.inject.internal.Errors;
 
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A {@link Statement} invoking a method with parameters by filling-in these
@@ -43,23 +45,19 @@ class InjectedStatement extends Statement {
     this.injector = injector;
   }
   
-  @SuppressWarnings("unchecked")
   @Override
   public void evaluate() throws Throwable {
-    // TODO Handle Provider<>
     Method javaMethod = method.getMethod();
-    Class<?> parameters[] = javaMethod.getParameterTypes();
-    Annotation annotations[][] = javaMethod.getParameterAnnotations();
-    Object injectedParameters[] = new Object[parameters.length];
-    for (int i = 0; i < parameters.length; ++i) {
-      Key<Object> key = null;
-      if (annotations[i].length == 0) {
-        key = (Key<Object>) Key.get(parameters[i]);
-      } else {
-        key = (Key<Object>) Key.get(parameters[i], annotations[i][0]);
-      }
-      injectedParameters[i] = injector.getInstance(key);  
+    
+    Errors errors = new Errors(javaMethod);
+    List<Key<?>> keys = GuiceUtils.getMethodKeys(javaMethod, errors);      
+    errors.throwConfigurationExceptionIfErrorsExist();
+    
+    List<Object> injectedParameters = new ArrayList<Object>();    
+    for (Key<?> key : keys) {
+      injectedParameters.add(injector.getInstance(key));
     }
-    method.invokeExplosively(test, injectedParameters);
-  }    
+    
+    method.invokeExplosively(test, injectedParameters.toArray());
+  }
 }

@@ -112,8 +112,7 @@ public abstract class TestModule extends AbstractModule {
    * @param name The name used with the {@link com.google.inject.name.Named @Named} annotation.
    * @return A {@link ScopedBindingBuilder}.
    */
-  @SuppressWarnings("unchecked")
-  protected <T> LinkedBindingBuilder bindNamed(Class<T> klass, String name) {
+  protected <T> LinkedBindingBuilder<T> bindNamed(Class<T> klass, String name) {
     return bind(klass).annotatedWith(Names.named(name));
   }
 
@@ -125,8 +124,7 @@ public abstract class TestModule extends AbstractModule {
    * @param name The name used with the {@link com.google.inject.name.Named @Named} annotation.
    * @return A {@link ScopedBindingBuilder}.
    */
-  @SuppressWarnings("unchecked")
-  protected <T> LinkedBindingBuilder bindNamed(TypeLiteral<T> typeLiteral,
+  protected <T> LinkedBindingBuilder<T> bindNamed(TypeLiteral<T> typeLiteral,
       String name) {
     return bind(typeLiteral).annotatedWith(Names.named(name));
   }
