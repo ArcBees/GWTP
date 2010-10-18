@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.spring.actionValidator;
+package com.gwtplatform.dispatch.server.spring.actionvalidator;
 
 import com.gwtplatform.dispatch.server.actionvalidator.AbstractDefaultActionValidator;
 
