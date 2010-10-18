@@ -99,7 +99,8 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
             public void onFailure(Throwable caught) {
               // Call postfetch with null result
               postfetch(action, null);
-
+              resultCallback.onFailure(caught);
+              
               // Callback onFailure
               ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.remove(action);
               for (CallbackDispatchRequest<R> pendingRequestCallback : pendingRequestCallbacks) {
@@ -113,6 +114,7 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
             public void onSuccess(R result) {
               // Postfetch
               postfetch(action, result);
+              resultCallback.onSuccess(result);
 
               // Callback onSuccess
               ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.remove(action);
