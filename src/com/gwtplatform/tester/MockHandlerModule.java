@@ -40,8 +40,9 @@ import com.gwtplatform.dispatch.shared.Result;
  * <li>register mock client-side action handlers with
  * {@link #bindMockClientActionHandler()}.</li>
  * </ul>
- *
+ * 
  * <h3>Unit Testing Example</h3>
+ * 
  * <pre>
  *  // create mock handlers
  *  CreateFooActionHandler mockCreateFooActionHandler =
@@ -143,11 +144,55 @@ public abstract class MockHandlerModule extends AbstractModule {
     bindMockActionHandler(handler, mockHandler);
   }
 
+  /**
+   * Registers a mock server-side action handlers.
+   * <p/>
+   * This mock server-side action handler will be executed when the class under
+   * test calls {@link com.gwtplatform.dispatch.client.DispatchAsync#execute
+   * DispatchAsync#execute()} or
+   * {@link com.gwtplatform.dispatch.client.DispatchAsync#undo
+   * DispatchAsync#undo()}.
+   * 
+   * @param <A> Type of {@link Action} that will be executed by mock handler
+   * @param <R> Type of {@link Result} that will be returned by mock handler
+   * @param <H> Type of the mock handler that extends
+   *          {@link AbstractActionHandler}
+   * @param handlerClass The type of the mock server-side handler
+   * @param mockHandler Instance of the {@link AbstractActionHandler} to execute
+   *          actions of type {@literal <A>}
+   * 
+   */
   protected <A extends Action<R>, R extends Result, H extends AbstractActionHandler<A, R>> void bindMockActionHandler(
-      Class<H> handler, H mockHandler) {
-    bind(handler).toProvider(new MockProvider<H>(mockHandler));
+      Class<H> handlerClass, H mockHandler) {
+    bind(handlerClass).toProvider(new MockProvider<H>(mockHandler));
   }
 
+  /**
+   * Registers a mock client-side action handlers.
+   * <p/>
+   * This mock client-side action handler will be executed when the class under
+   * test calls {@link com.gwtplatform.dispatch.client.DispatchAsync#execute
+   * DispatchAsync#execute()} or
+   * {@link com.gwtplatform.dispatch.client.DispatchAsync#undo
+   * DispatchAsync#undo()}.
+   * <p/>
+   * 
+   * If both mock client and mock server action handlers have been registered,
+   * the server side action handler will only be called if the mock client side
+   * action handler calls
+   * {@link com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand#execute
+   * ExecuteCommand#execute()} or
+   * {@link com.gwtplatform.dispatch.client.actionhandler.UndoCommand#undo
+   * UndoCommand#undo()}
+   * 
+   * @param <A> Type of {@link Action}
+   * @param <R> Type of {@link Result}
+   * @param <H> Type of {@link AbstractClientActionHandler}
+   * @param actionClass Implementation of {@link AbstractActionHandler} to link
+   *          and bind
+   * @param mockHandler Instance of the {@link AbstractActionHandler} to execute
+   *          actions of type {@literal <A>}
+   */
   protected <A extends Action<R>, R extends Result, H extends AbstractClientActionHandler<A, R>> void bindMockClientActionHandler(
       Class<A> actionClass, H mockHandler) {
     bind(MockClientActionHandlerMap.class).annotatedWith(
