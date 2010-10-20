@@ -49,10 +49,12 @@ import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerR
  * {@literal @}GinModules( { {@link DispatchAsyncModule}.class, ... } 
  * </pre>
  * For customization, skip the previous step and install the module in one of
- * your {@link #configure()} method:
+ * your {@link #configure()} methods:
  * 
  * <pre>
- * install( new DispatchAsyncModule( MyExceptionHandler.class, MySecurityCookieAccessor.class ) );
+ * install(new DispatchAsyncModule.Builder().exceptionHandler(
+ *     MyExceptionHandler.class).sessionAccessor(
+ *     MySecurityCookieAccessor.class).build());
  * </pre>
  * You can pass {@code null} as any of the two parameter to fallback to the
  * default.
@@ -66,31 +68,110 @@ public class DispatchAsyncModule extends AbstractGinModule {
   protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
   protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
 
-  public DispatchAsyncModule() {
-    this(DefaultExceptionHandler.class, DefaultSecurityCookieAccessor.class,
-        DefaultClientActionHandlerRegistry.class);
+  /**
+   * A {@link DispatchAsyncModule} builder.
+   * 
+   * By default, this builder configures the {@link DispatchAsyncModule} to use
+   * {@link DefaultExceptionHandler}, {@link DefaultSecurityCookieAccessor}, and
+   * {@link DefaultClientActionHandlerRegistry}.
+   * 
+   * @author Brendan Doherty
+   */
+  public static class Builder {
+
+    protected Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
+    protected Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
+    protected Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType = DefaultClientActionHandlerRegistry.class;
+
+    /**
+     * Constructs {@link DispatchAsyncModule} builder.
+     */
+    public Builder() {
+    }
+
+    /**
+     * Specify an alternative exception handler.
+     * 
+     * @param exceptionHandlerType The {@link ExceptionHandler} class.
+     * @return a {@link Builder} object.
+     */
+    public Builder exceptionHandler(
+        Class<? extends ExceptionHandler> exceptionHandlerType) {
+      this.exceptionHandlerType = exceptionHandlerType;
+      return this;
+    }
+
+    /**
+     * Specify an alternate session accessor.
+     * 
+     * @param sessionAccessorType The {@link SecurityCookieAccessor} class.
+     * @return a {@link Builder} object.
+     */
+    public Builder sessionAccessor(
+        Class<? extends SecurityCookieAccessor> sessionAccessorType) {
+      this.sessionAccessorType = sessionAccessorType;
+      return this;
+    }
+
+    /**
+     * Specify an alternate client action handler registry.
+     * 
+     * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
+     * @return a {@link Builder} object.
+     */
+    public Builder clientActionHandlerRegistry(
+        Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
+      this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
+      return this;
+    }
+
+    /**
+     * Build the {@link DispatchAsyncModule}.
+     * @return The built {@link DispatchAsyncModule}.
+     */
+    public DispatchAsyncModule build() {
+      return new DispatchAsyncModule(this);
+    }
   }
 
+  private DispatchAsyncModule(Builder builder) {
+    this.exceptionHandlerType = builder.exceptionHandlerType;
+    this.sessionAccessorType = builder.sessionAccessorType;
+    this.clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
+  }
+
+  public DispatchAsyncModule() {
+    this(new Builder());
+  }
+
+  @Deprecated
+  // FIXME: Remove in 0.6
   public DispatchAsyncModule(
       Class<? extends ExceptionHandler> exceptionHandlerType,
       Class<? extends SecurityCookieAccessor> sessionAccessorType) {
-    this(exceptionHandlerType, sessionAccessorType,
-        DefaultClientActionHandlerRegistry.class);
+    this(
+        (new Builder()).exceptionHandler(exceptionHandlerType).sessionAccessor(
+            sessionAccessorType));
   }
 
+  @Deprecated
+  // FIXME: Remove in 0.6
   public DispatchAsyncModule(
       Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-    this(DefaultExceptionHandler.class, DefaultSecurityCookieAccessor.class,
-        clientActionHandlerRegistryType);
+    this(
+        (new Builder()).clientActionHandlerRegistry(clientActionHandlerRegistryType));
   }
 
+  @Deprecated
+  // FIXME: Remove in 0.6
   public DispatchAsyncModule(
       Class<? extends ExceptionHandler> exceptionHandlerType,
       Class<? extends SecurityCookieAccessor> sessionAccessorType,
       Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-    this.exceptionHandlerType = exceptionHandlerType;
-    this.sessionAccessorType = sessionAccessorType;
-    this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
+    this(
+        (new Builder()).exceptionHandler(exceptionHandlerType).sessionAccessor(
+            sessionAccessorType).clientActionHandlerRegistry(
+            clientActionHandlerRegistryType));
   }
 
   @Override
