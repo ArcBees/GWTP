@@ -43,21 +43,69 @@ import com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider;
  */
 public class DispatchModule extends AbstractModule {
   private Class<? extends Dispatch> dispatchClass;
-  private Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass;
+  private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
+  private Class<? extends RequestProvider> requestProviderClass;
+
+  /**
+   * A DispatchModule builder.
+   * 
+   * @author Brendan Doherty
+   * 
+   */
+  public static class Builder {
+    private Class<? extends Dispatch> dispatchClass = DispatchImpl.class;
+    private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass = LazyActionHandlerValidatorRegistryImpl.class;
+    private Class<? extends RequestProvider> requestProviderClass = DefaultRequestProvider.class;
+
+    public Builder() {
+    }
+
+    public Builder dispatch(Class<? extends Dispatch> dispatchClass) {
+      this.dispatchClass = dispatchClass;
+      return this;
+    }
+
+    public Builder actionHandlerValidatorRegistry(
+        Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass) {
+      this.actionHandlerValidatorRegistryClass = actionHandlerValidatorRegistryClass;
+      return this;
+    }
+
+    public Builder requestProvider(
+        Class<? extends RequestProvider> requestProviderClass) {
+      this.requestProviderClass = requestProviderClass;
+      return this;
+    }
+
+    public DispatchModule build() {
+      return new DispatchModule(this);
+    }
+  }
 
   public DispatchModule() {
-    this(DispatchImpl.class, LazyActionHandlerValidatorRegistryImpl.class);
+    this(new Builder());
   }
 
+  private DispatchModule(Builder builder) {
+    this.dispatchClass = builder.dispatchClass;
+    this.actionHandlerValidatorRegistryClass = builder.actionHandlerValidatorRegistryClass;
+    this.requestProviderClass = builder.requestProviderClass;
+  }
+
+  @Deprecated
+  // FIXME: Remove 0.6
   public DispatchModule(Class<? extends Dispatch> dispatchClass) {
-    this(dispatchClass, LazyActionHandlerValidatorRegistryImpl.class);
+    this((new Builder()).dispatch(dispatchClass));
   }
 
+  @Deprecated
+  // FIXME: Remove 0.6
   public DispatchModule(
       Class<? extends Dispatch> dispatchClass,
       Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
-    this.dispatchClass = dispatchClass;
-    this.lazyActionHandlerValidatorRegistryClass = lazyActionHandlerValidatorRegistryClass;
+    this(
+        (new Builder()).dispatch(dispatchClass).actionHandlerValidatorRegistry(
+            lazyActionHandlerValidatorRegistryClass));
   }
 
   /**
@@ -81,12 +129,12 @@ public class DispatchModule extends AbstractModule {
   @Override
   protected final void configure() {
     bind(ActionHandlerValidatorRegistry.class).to(
-        lazyActionHandlerValidatorRegistryClass).in(Singleton.class);
+        actionHandlerValidatorRegistryClass).in(Singleton.class);
     bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
-    bind(RequestProvider.class).to(DefaultRequestProvider.class).in(Singleton.class);    
-    
+    bind(RequestProvider.class).to(requestProviderClass).in(Singleton.class);
+
     // This will bind registered validators and handlers to the registry lazily.
-    if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass)) {
+    if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(actionHandlerValidatorRegistryClass)) {
       requestStaticInjection(ActionHandlerValidatorLinker.class);
     }
   }
