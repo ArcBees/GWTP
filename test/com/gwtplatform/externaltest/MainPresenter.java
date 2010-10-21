@@ -29,14 +29,12 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
-import com.gwtplatform.tester.mockito.TestSingleton;
 
 /**
  * This is the test presenter.
  * 
  * @author Philippe Beaudoin
  */
-@TestSingleton
 public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter.MyProxy> {
 
   @ContentSlot

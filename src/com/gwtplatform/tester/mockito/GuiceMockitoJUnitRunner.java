@@ -19,7 +19,9 @@ package com.gwtplatform.tester.mockito;
 import com.google.inject.Binding;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
 import com.google.inject.Scope;
+import com.google.inject.internal.Errors;
 import com.google.inject.spi.DefaultBindingScopingVisitor;
 
 import org.junit.After;
@@ -34,10 +36,9 @@ import org.mockito.internal.runners.util.FrameworkUsageValidator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * This class implements the mockito runner but allows Guice dependency
@@ -61,17 +62,21 @@ import java.util.Set;
  */
 public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
 
-  private final Injector injector;
+  private static final boolean useAutomockingIfNoEnvironmentFound = true;
+  private Injector injector;
   
   public GuiceMockitoJUnitRunner(Class<?> klass) throws InitializationError,
       InvocationTargetException, InstantiationException, IllegalAccessException {
-    this(klass, true);
+    super(klass);
+    ensureInjector();
   }
 
-  public GuiceMockitoJUnitRunner(Class<?> klass, boolean useAutomockingIfNoEnvironmentFound) throws InitializationError,
-      InvocationTargetException, InstantiationException, IllegalAccessException {
-    super(klass);
-
+  private void ensureInjector()
+      throws InstantiationException, IllegalAccessException {
+    Class<?> klass = getTestClass().getJavaClass();
+    if (injector != null) {
+      return;
+    }
     TestModule testModule = null;
     for (Class<?> subclass : klass.getClasses()) {
       if (TestModule.class.isAssignableFrom(subclass)) {
@@ -132,18 +137,80 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
   
   @Override
   protected List<FrameworkMethod> computeTestMethods() {
+    try {
+      ensureInjector();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
     // Use a set otherwise methods are listed multiple times
-    Set<FrameworkMethod> guiceTestMethods = new HashSet<FrameworkMethod>();
-    guiceTestMethods.addAll(getTestClass().getAnnotatedMethods(Test.class));
-    List<FrameworkMethod> result = new ArrayList<FrameworkMethod>(guiceTestMethods.size());
-    result.addAll(guiceTestMethods);    
+    List<FrameworkMethod> testMethods = getTestClass().getAnnotatedMethods(Test.class);
+    List<FrameworkMethod> result = new ArrayList<FrameworkMethod>(testMethods.size());
+    for (FrameworkMethod method : testMethods) {      
+      Method javaMethod = method.getMethod();
+      Errors errors = new Errors(javaMethod);
+      List<Key<?>> keys = GuiceUtils.getMethodKeys(javaMethod, errors);
+      errors.throwConfigurationExceptionIfErrorsExist();
+      
+      List<List<Binding<?>>> bindingsToUseForParameters = new ArrayList<List<Binding<?>>>();
+      for (Key<?> key : keys) {
+        if (All.class.equals(key.getAnnotationType())) {
+          List<Binding<?>> bindings = new ArrayList<Binding<?>>();
+          for (Binding<?> binding : injector.findBindingsByType(key.getTypeLiteral())) {
+            bindings.add(binding);
+          }          
+          bindingsToUseForParameters.add(bindings);
+        }
+      }
+      
+      // Add an injected method for every combination of binding
+      addAllBindingAssignations(bindingsToUseForParameters, 0, 
+          new ArrayList<Binding<?>>(bindingsToUseForParameters.size()), 
+          javaMethod, result);
+    }
+    
     return result;
   }
   
+  /**
+   * This method looks at all possible way to assign the bindings in
+   * {@code bindingsToUseForParameters}, starting at index {@code index}.
+   * If {@code index} is larger than the number of elements in {@code bindingsToUseForParameters}
+   * then the {@code currentAssignation} with {@javaMethod} is added to {@code result}.
+   * 
+   * @param result
+   * @param javaMethod
+   * @param bindingsToUseForParameters
+   * @param index
+   * @param currentAssignation
+   */
+  private void addAllBindingAssignations(
+      List<List<Binding<?>>> bindingsToUseForParameters, int index, 
+      List<Binding<?>> currentAssignation, 
+      Method javaMethod, List<FrameworkMethod> result) {
+    
+    if (index >= bindingsToUseForParameters.size()) {
+      List<Binding<?>> assignation = new ArrayList<Binding<?>>(currentAssignation.size());
+      assignation.addAll(currentAssignation);
+      result.add(new InjectedFrameworkMethod(javaMethod, assignation));
+      return;
+    }
+    
+    for (Binding<?> binding : bindingsToUseForParameters.get(index)) {
+      currentAssignation.add(binding);
+      if (currentAssignation.size() != index + 1) {
+        throw new AssertionError("Size of currentAssignation list is wrong.");
+      }
+      addAllBindingAssignations(bindingsToUseForParameters, index + 1,
+          currentAssignation,
+          javaMethod, result);
+      currentAssignation.remove(index);
+    }
+  }
+
   private void instantiateEagerTestSingletons() {
     DefaultBindingScopingVisitor<Boolean> isEagerTestScopeSingleton = new DefaultBindingScopingVisitor<Boolean>() {
       public Boolean visitScope(Scope scope) {
-        return scope == TestScope.EAGER_SINGLETON;          
+        return scope == TestScope.EAGER_SINGLETON;
       }
     };
     for (Binding<?> binding : injector.getBindings().values()) {
