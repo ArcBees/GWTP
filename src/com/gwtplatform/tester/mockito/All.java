@@ -16,7 +16,7 @@
 
 package com.gwtplatform.tester.mockito;
 
-import com.google.inject.ScopeAnnotation;
+import com.google.inject.BindingAnnotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -24,15 +24,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation can be used on any classes that should be bound 
- * within the {@link TestScope#SINGLETON} scope. It is meant to be 
- * used on inner static classes of the test class or its parents
- * and shouldn't be used on top-level classes.
+ * This annotation can be used on one or more parameter of a test function.
+ * The test function will be executed multiple times, one for each value bound 
+ * to the parameter type.
+ * <p />
+ * If more than one parameter is annotated with {@literal @}{@link All} then
+ * all combinations will be used. Therefore, be careful when using it on more than
+ * two or three parameters as it can result in a combinatorial explosion.
  * 
  * @author Philippe Beaudoin
  */
-@ScopeAnnotation
+@BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface TestSingleton {
+@Target(ElementType.PARAMETER)
+public @interface All {
 }

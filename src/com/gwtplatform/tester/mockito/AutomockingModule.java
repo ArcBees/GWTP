@@ -43,8 +43,9 @@ import java.util.Set;
 
 /**
  * A guice {@link com.google.inject.Module Module} with a bit of syntactic sugar to bind within
- * typical test scopes. Depends on mockito. This module automatically mocks any dependency
- * for which a binding is not explicitely provided.
+ * typical test scopes. Depends on mockito. This module automatically mocks any interface or
+ * abstract class dependency for which a binding is not explicitly provided. Any concrete class
+ * for which a binding is not explicitly provided is bound as a {@link TestScope#SINGLETON}.
  * <p />
  * Depends on Mockito.
  * 
@@ -62,7 +63,7 @@ public abstract class AutomockingModule extends TestModule {
    * 
    * @param klass The {@link Class} to force mock
    */
-  public void forceMock(Class<?> klass) {
+  protected void forceMock(Class<?> klass) {
     forceMock.add(TypeLiteral.get(klass));
   }
 
@@ -73,7 +74,7 @@ public abstract class AutomockingModule extends TestModule {
    * 
    * @param type The {@link TypeLiteral} to force mock
    */
-  public void forceMock(TypeLiteral<?> type) {
+  protected void forceMock(TypeLiteral<?> type) {
     forceMock.add(type);
   }
 
@@ -114,7 +115,7 @@ public abstract class AutomockingModule extends TestModule {
     }
     
     // Preempt JIT binding by looking through the test class looking for
-    // methods annotated with @InjectTest, @InjectBefore, or @InjectAfter
+    // methods annotated with @Test, @Before, or @After
     for (Method method : testClass.getDeclaredMethods()) {
       if (method.isAnnotationPresent(Test.class) ||
           method.isAnnotationPresent(Before.class) ||
@@ -124,8 +125,11 @@ public abstract class AutomockingModule extends TestModule {
         List<Key<?>> keys = GuiceUtils.getMethodKeys(method, errors);
         
         for (Key<?> key : keys) {
+          // Skip keys annotated with @All
+          if (!All.class.equals(key.getAnnotationType())) {
             Key<?> keyNeeded = GuiceUtils.ensureProvidedKey(key, errors);
             addNeededKey(keysObserved, keysNeeded, keyNeeded);
+          }
         }
         
         errors.throwConfigurationExceptionIfErrorsExist();
@@ -197,6 +201,8 @@ public abstract class AutomockingModule extends TestModule {
   protected <T> AnnotatedBindingBuilder<T> bind(Class<T> clazz) {
     return new SpyAnnotatedBindingBuilder<T>(newBindingObserved(clazz), super.bind(clazz));
   }
+  
+  
   
   private BindingInfo newBindingObserved(Key<?> key) {
     BindingInfo bindingInfo = new BindingInfo();
