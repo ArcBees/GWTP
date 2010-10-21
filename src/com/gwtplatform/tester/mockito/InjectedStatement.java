@@ -16,6 +16,7 @@
 
 package com.gwtplatform.tester.mockito;
 
+import com.google.inject.Binding;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.internal.Errors;
@@ -25,6 +26,7 @@ import org.junit.runners.model.Statement;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -50,12 +52,26 @@ class InjectedStatement extends Statement {
     Method javaMethod = method.getMethod();
     
     Errors errors = new Errors(javaMethod);
-    List<Key<?>> keys = GuiceUtils.getMethodKeys(javaMethod, errors);      
+    List<Key<?>> keys = GuiceUtils.getMethodKeys(javaMethod, errors);
     errors.throwConfigurationExceptionIfErrorsExist();
     
-    List<Object> injectedParameters = new ArrayList<Object>();    
+    Iterator<Binding<?>> bindingIter;
+    if (InjectedFrameworkMethod.class.isAssignableFrom(method.getClass())) {
+      bindingIter = ((InjectedFrameworkMethod) method).getBindingsToUseForParameters().iterator();
+    } else {
+      bindingIter = new ArrayList<Binding<?>>().iterator();
+    }
+    
+    List<Object> injectedParameters = new ArrayList<Object>();
     for (Key<?> key : keys) {
-      injectedParameters.add(injector.getInstance(key));
+      if (!All.class.equals(key.getAnnotationType())) {
+        injectedParameters.add(injector.getInstance(key));
+      } else {
+        if (!bindingIter.hasNext()) {
+          throw new AssertionError("Expected more bindings to fill @All parameters.");
+        }
+        injectedParameters.add(injector.getInstance(bindingIter.next().getKey()));
+      }
     }
     
     method.invokeExplosively(test, injectedParameters.toArray());
