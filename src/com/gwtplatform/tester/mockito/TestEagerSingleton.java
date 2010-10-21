@@ -16,6 +16,8 @@
 
 package com.gwtplatform.tester.mockito;
 
+import com.google.inject.ScopeAnnotation;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,10 +25,13 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation can be used on any classes that should be bound 
- * within the {@link TestScope#EAGER_SINGLETON} scope.
+ * within the {@link TestScope#EAGER_SINGLETON} scope. It is meant to be 
+ * used on inner static classes of the test class or its parents
+ * and shouldn't be used on top-level classes.
  * 
  * @author Philippe Beaudoin
  */
+@ScopeAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface TestEagerSingleton {

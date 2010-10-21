@@ -20,14 +20,12 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.tester.mockito.TestSingleton;
 
 /**
  * This is the test view of the {@link SubPresenterWidget}.
  * 
  * @author Philippe Beaudoin
  */
-@TestSingleton
 public class SubView extends ViewImpl implements SubPresenterWidget.MyView {
 
   public final HTML widget;
