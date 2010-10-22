@@ -24,6 +24,8 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -62,13 +64,33 @@ public class ParentTestClassBase {
 
   /**
    */
-  public interface DummyInterfaceUsedOnlyInParent {
+  public interface DummyInterfaceUsedOnlyInParent1 {
     String getDummyValue();
   }
   
   /**
    */
-  public static class DummyClassUsedOnlyInParent { }
+  public interface DummyInterfaceUsedOnlyInParent2 {
+    String getDummyValue();
+  }
+  
+  /**
+   */
+  public interface DummyInterfaceUsedOnlyInParent3 {
+    String getDummyValue();
+  }
+  
+  /**
+   */
+  public static class DummyClassUsedOnlyInParent1 { }
+  
+  /**
+   */
+  public static class DummyClassUsedOnlyInParent2 { }
+  
+  /**
+   */
+  public static class DummyClassUsedOnlyInParent3 { }
   
   @Inject protected Provider<DummyInterface> dummyProvider;
   @Inject protected MockSingletonDefinedInParent mockSingletonDefinedInParent;
@@ -99,7 +121,7 @@ public class ParentTestClassBase {
 
   @Test
   public void interfaceUsedInParentTestMethodShouldBeMockedAsTestSingleton(
-      Provider<DummyInterfaceUsedOnlyInParent> provider) {
+      Provider<DummyInterfaceUsedOnlyInParent1> provider) {
     // Following should not crash
     verify(provider.get(), never()).getDummyValue();
     
@@ -108,7 +130,37 @@ public class ParentTestClassBase {
   
   @Test
   public void concreteClassUsedInParentTestMethodShouldBeBoundAsTestSingleton(
-      Provider<DummyClassUsedOnlyInParent> provider) {
+      Provider<DummyClassUsedOnlyInParent1> provider) {
     assertSame(provider.get(), provider.get());
-  }  
+  }
+
+  @Before
+  public void interfaceUsedInParentBeforeMethodShouldBeMockedAsTestSingleton(
+      Provider<DummyInterfaceUsedOnlyInParent2> provider) {
+    // Following should not crash
+    verify(provider.get(), never()).getDummyValue();
+    
+    assertSame(provider.get(), provider.get());
+  }
+  
+  @Before
+  public void concreteClassUsedInParentBeforeMethodShouldBeBoundAsTestSingleton(
+      Provider<DummyClassUsedOnlyInParent2> provider) {
+    assertSame(provider.get(), provider.get());
+  }
+
+  @After
+  public void interfaceUsedInParentAfterMethodShouldBeMockedAsTestSingleton(
+      Provider<DummyInterfaceUsedOnlyInParent3> provider) {
+    // Following should not crash
+    verify(provider.get(), never()).getDummyValue();
+    
+    assertSame(provider.get(), provider.get());
+  }
+  
+  @After
+  public void concreteClassUsedInParentAfterMethodShouldBeBoundAsTestSingleton(
+      Provider<DummyClassUsedOnlyInParent3> provider) {
+    assertSame(provider.get(), provider.get());
+  }
 }
