@@ -116,24 +116,28 @@ public abstract class AutomockingModule extends TestModule {
     
     // Preempt JIT binding by looking through the test class looking for
     // methods annotated with @Test, @Before, or @After
-    for (Method method : testClass.getDeclaredMethods()) {
-      if (method.isAnnotationPresent(Test.class) ||
-          method.isAnnotationPresent(Before.class) ||
-          method.isAnnotationPresent(After.class)) {
-        
-        Errors errors = new Errors(method);
-        List<Key<?>> keys = GuiceUtils.getMethodKeys(method, errors);
-        
-        for (Key<?> key : keys) {
-          // Skip keys annotated with @All
-          if (!All.class.equals(key.getAnnotationType())) {
-            Key<?> keyNeeded = GuiceUtils.ensureProvidedKey(key, errors);
-            addNeededKey(keysObserved, keysNeeded, keyNeeded);
+    currentClass = testClass;
+    while (currentClass != null) {
+      for (Method method : currentClass.getDeclaredMethods()) {
+        if (method.isAnnotationPresent(Test.class) ||
+            method.isAnnotationPresent(Before.class) ||
+            method.isAnnotationPresent(After.class)) {
+          
+          Errors errors = new Errors(method);
+          List<Key<?>> keys = GuiceUtils.getMethodKeys(method, errors);
+          
+          for (Key<?> key : keys) {
+            // Skip keys annotated with @All
+            if (!All.class.equals(key.getAnnotationType())) {
+              Key<?> keyNeeded = GuiceUtils.ensureProvidedKey(key, errors);
+              addNeededKey(keysObserved, keysNeeded, keyNeeded);
+            }
           }
+          
+          errors.throwConfigurationExceptionIfErrorsExist();
         }
-        
-        errors.throwConfigurationExceptionIfErrorsExist();
       }
+      currentClass = currentClass.getSuperclass();
     }
     
     // Preempt JIT binding by looking through the test class looking for
