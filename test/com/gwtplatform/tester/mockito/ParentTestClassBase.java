@@ -20,6 +20,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -56,6 +59,16 @@ public class ParentTestClassBase {
   public interface DummyInterface { 
     String getDummyValue();
   }
+
+  /**
+   */
+  public interface DummyInterfaceUsedOnlyInParent {
+    String getDummyValue();
+  }
+  
+  /**
+   */
+  public static class DummyClassUsedOnlyInParent { }
   
   @Inject protected Provider<DummyInterface> dummyProvider;
   @Inject protected MockSingletonDefinedInParent mockSingletonDefinedInParent;
@@ -83,4 +96,19 @@ public class ParentTestClassBase {
       DummyInterface dummyInterface) {
     assertEquals("DummyValue", dummyInterface.getDummyValue());
   }
+
+  @Test
+  public void interfaceUsedInParentTestMethodShouldBeMockedAsTestSingleton(
+      Provider<DummyInterfaceUsedOnlyInParent> provider) {
+    // Following should not crash
+    verify(provider.get(), never()).getDummyValue();
+    
+    assertSame(provider.get(), provider.get());
+  }
+  
+  @Test
+  public void concreteClassUsedInParentTestMethodShouldBeBoundAsTestSingleton(
+      Provider<DummyClassUsedOnlyInParent> provider) {
+    assertSame(provider.get(), provider.get());
+  }  
 }
