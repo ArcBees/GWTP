@@ -120,6 +120,11 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
   @Override
   protected Statement withBefores(FrameworkMethod method, Object target,
       Statement statement) {
+    try {
+      ensureInjector();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
     List<FrameworkMethod> befores = getTestClass().getAnnotatedMethods(
         Before.class);
     return befores.isEmpty() ? statement : new InjectedBeforeStatements(statement,
@@ -129,9 +134,14 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
   @Override
   protected Statement withAfters(FrameworkMethod method, Object target,
       Statement statement) {
+    try {
+      ensureInjector();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
     List<FrameworkMethod> afters = getTestClass().getAnnotatedMethods(
         After.class);
-    return afters.isEmpty() ? statement : new InjectedBeforeStatements(statement,
+    return afters.isEmpty() ? statement : new InjectedAfterStatements(statement,
         afters, target, injector);
   }
   
@@ -142,7 +152,6 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-    // Use a set otherwise methods are listed multiple times
     List<FrameworkMethod> testMethods = getTestClass().getAnnotatedMethods(Test.class);
     List<FrameworkMethod> result = new ArrayList<FrameworkMethod>(testMethods.size());
     for (FrameworkMethod method : testMethods) {      
@@ -226,7 +235,22 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
       }
     }
   }
+  
+  /**
+   * Adds to {@code errors} for each method annotated with {@code @Test},
+   * {@code @Before}, or {@code @After} that is not a public, void instance
+   * method with no arguments.
+   */
+  protected void validateInstanceMethods(List<Throwable> errors) {
+    validatePublicVoidMethods(After.class, false, errors);
+    validatePublicVoidMethods(Before.class, false, errors);
+    validateTestMethods(errors);
 
+    if (computeTestMethods().size() == 0) {
+      errors.add(new Exception("No runnable methods"));
+    }
+  }
+  
   /**
    * Adds to {@code errors} for each method annotated with {@code @Test}that
    * is not a public, void instance method with no arguments.
