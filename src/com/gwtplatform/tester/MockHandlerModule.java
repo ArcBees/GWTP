@@ -21,7 +21,7 @@ import com.google.inject.internal.UniqueAnnotations;
 
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
@@ -139,7 +139,7 @@ public abstract class MockHandlerModule extends AbstractModule {
    * Use bindMockActionHandler instead.
    */
   @Deprecated
-  protected <A extends Action<R>, R extends Result, H extends AbstractActionHandler<A, R>> void bindMockHandler(
+  protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockHandler(
       Class<H> handler, H mockHandler) {
     bindMockActionHandler(handler, mockHandler);
   }
@@ -156,13 +156,13 @@ public abstract class MockHandlerModule extends AbstractModule {
    * @param <A> Type of {@link Action} that will be executed by mock handler
    * @param <R> Type of {@link Result} that will be returned by mock handler
    * @param <H> Type of the mock handler that extends
-   *          {@link AbstractActionHandler}
+   *          {@link ActionHandler}
    * @param handlerClass The type of the mock server-side handler
-   * @param mockHandler Instance of the {@link AbstractActionHandler} to execute
+   * @param mockHandler Instance of the {@link ActionHandler} to execute
    *          actions of type {@literal <A>}
    * 
    */
-  protected <A extends Action<R>, R extends Result, H extends AbstractActionHandler<A, R>> void bindMockActionHandler(
+  protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockActionHandler(
       Class<H> handlerClass, H mockHandler) {
     bind(handlerClass).toProvider(new MockProvider<H>(mockHandler));
   }
@@ -188,9 +188,9 @@ public abstract class MockHandlerModule extends AbstractModule {
    * @param <A> Type of {@link Action}
    * @param <R> Type of {@link Result}
    * @param <H> Type of {@link AbstractClientActionHandler}
-   * @param actionClass Implementation of {@link AbstractActionHandler} to link
+   * @param actionClass Implementation of {@link ActionHandler} to link
    *          and bind
-   * @param mockHandler Instance of the {@link AbstractActionHandler} to execute
+   * @param mockHandler Instance of the {@link ActionHandler} to execute
    *          actions of type {@literal <A>}
    */
   protected <A extends Action<R>, R extends Result, H extends AbstractClientActionHandler<A, R>> void bindMockClientActionHandler(
