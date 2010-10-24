@@ -21,14 +21,12 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.tester.mockito.TestSingleton;
 
 /**
  * This is the test presenter.
  * 
  * @author Philippe Beaudoin
  */
-@TestSingleton
 public class SubPresenterWidget extends PresenterWidget<SubPresenterWidget.MyView> {
   
   /**
