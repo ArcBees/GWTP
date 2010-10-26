@@ -16,6 +16,8 @@
 
 package com.gwtplatform.tester.mockito;
 
+import static org.mockito.Mockito.*;
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -44,6 +46,8 @@ public class ProviderTest {
       bindNamedMock(Mock.class, "nonsingleton");
       bindNamed(Instance.class, "singleton").to(Instance.class).in(TestScope.SINGLETON);
       bindNamed(Instance.class, "nonsingleton").to(Instance.class);
+      bindNamed(Parent.class, "providerInstance").toProvider(new ParentProviderA());
+      bindNamed(Parent.class, "providerClass").toProvider(ParentProviderB.class);
     }
   }
   
@@ -55,6 +59,68 @@ public class ProviderTest {
    */
   public static class Instance {
     @Inject Instance() { }
+  }
+  
+  /** 
+   */
+  public interface Parent {
+    String getValue();
+  }  
+
+  /** 
+   */
+  public static class ChildA implements Parent {
+    public String getValue() {
+      return "childA";
+    }
+  }
+
+  /** 
+   */
+  public interface MockInChildB { }
+
+  /** 
+   */
+  public interface MockInProviderB {
+    void test();
+  }
+  
+  /** 
+   */
+  public static class ChildB implements Parent {
+    @Inject MockInChildB mockB;
+    public String getValue() {
+      return "childB";
+    }
+  }
+  
+  /** 
+   */
+  public static class ParentProviderA implements Provider<Parent> {
+    @Override
+    public Parent get() {
+      return new ChildA();
+    }
+  }
+  
+  /** 
+   */
+  public static class ParentProviderB implements Provider<Parent> {
+    private final Provider<ChildB> childBProvider;
+
+    @Inject
+    ParentProviderB(Provider<ChildB> childBProvider, Provider<MockInProviderB> myMock) {
+      this.childBProvider = childBProvider;
+      
+      // These calls should succeed
+      myMock.get().test();
+      verify(myMock.get()).test();
+    }
+    
+    @Override
+    public Parent get() {
+      return childBProvider.get();
+    }
   }
   
   @Test
@@ -80,5 +146,21 @@ public class ProviderTest {
       @Named("nonsingleton") Provider<Instance> provider) {
     assertNotSame(provider.get(), provider.get());
   }
-  
+
+  @Test
+  public void bindingToProviderInstanceShouldWorkAndInject(
+      @Named("nonsingleton") Provider<Mock> provider) {
+    assertNotSame(provider.get(), provider.get());
+  }
+
+  @Test
+  public void shouldInjectProviderBoundWithInstance(
+      @Named("providerInstance") Parent parentProvidedFromProviderInstance) {
+  }
+
+  @Test
+  public void shouldInjectProviderBoundWithClass(
+      @Named("providerClass") Parent parentProvidedFromProviderInstance) {
+  }
+
 }
