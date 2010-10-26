@@ -17,6 +17,7 @@
 package com.gwtplatform.tester.mockito;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
@@ -51,7 +52,7 @@ public abstract class TestModule extends AbstractModule {
    * Configures a test {@link com.google.inject.Module Module} via the exposed methods.
    */
   protected abstract void configureTest();
-  
+
   /**
    * Binds an interface to a mocked version of itself.
    * 
@@ -78,6 +79,31 @@ public abstract class TestModule extends AbstractModule {
   }
   
   /**
+   * Binds a concrete object type so that spies of instances are returned
+   * instead of instances themselves.
+   * 
+   * @param <T> The type of the interface to bind
+   * @param klass The class to bind
+   * @return A {@link ScopedBindingBuilder}.
+   */
+  protected <T> ScopedBindingBuilder bindSpy(Class<T> klass) {
+    return bind(klass).toProvider(createNewSpyProvider(TypeLiteral.get(klass)));
+  }
+  
+  /**
+   * Binds a concrete object type so that spies of instances are returned
+   * instead of instances themselves.
+   *   
+   * @param <T> The type of the interface to bind, a parameterized type
+   * @param typeLiteral The {@link TypeLiteral} corresponding to the parameterized type to bind.
+   * @return A {@link ScopedBindingBuilder}.
+   */
+  protected <T> ScopedBindingBuilder bindSpy(
+      TypeLiteral<T> typeLiteral) {
+    return bind(typeLiteral).toProvider(createNewSpyProvider(typeLiteral));
+  }
+  
+  /**
    * Binds an interface annotated with a {@link com.google.inject.name.Named @Named} to a 
    * mocked version of itself.
    * 
@@ -91,7 +117,8 @@ public abstract class TestModule extends AbstractModule {
   }
 
   /**
-   * Binds an interface annotated with a {@link com.google.inject.name.Named @Named}.
+   * Binds an interface annotated with a {@link com.google.inject.name.Named @Named} to a 
+   * mocked version of itself.
    * 
    * @param <T> The type of the interface to bind
    * @param typeLiteral The {@link TypeLiteral} corresponding to the parameterized type to bind.
@@ -105,6 +132,39 @@ public abstract class TestModule extends AbstractModule {
         new MockProvider<T>((Class<T>) typeLiteral.getRawType()));
   }
 
+  /**
+   * Binds a concrete object type annotated with a 
+   * {@link com.google.inject.name.Named @Named} so that spies of instances are returned
+   * instead of instances themselves.
+   * 
+   * @param <T> The type of the interface to bind
+   * @param klass The class to bind
+   * @param name The name used with the {@link com.google.inject.name.Named @Named} annotation.
+   * @return A {@link ScopedBindingBuilder}.
+   */
+  protected <T> ScopedBindingBuilder bindNamedSpy(Class<T> klass, String name) {
+    return bind(klass).annotatedWith(Names.named(name)).toProvider(createNewSpyProvider(TypeLiteral.get(klass)));
+  }
+
+  /**
+   * Binds  a concrete object type annotated with a 
+   * {@link com.google.inject.name.Named @Named} so that spies of instances are returned
+   * instead of instances themselves.
+   * 
+   * @param <T> The type of the interface to bind
+   * @param typeLiteral The {@link TypeLiteral} corresponding to the parameterized type to bind.
+   * @param name The name used with the {@link com.google.inject.name.Named @Named} annotation.
+   * @return A {@link ScopedBindingBuilder}.
+   */
+  protected <T> ScopedBindingBuilder bindNamedSpy(TypeLiteral<T> typeLiteral,
+      String name) {
+    return bind(typeLiteral).annotatedWith(Names.named(name)).toProvider(createNewSpyProvider(typeLiteral));
+  }
+
+  private <T> Provider<T> createNewSpyProvider(TypeLiteral<T> typeLiteral) {
+    return new SpyProvider<T>(testClass, typeLiteral);
+  }
+  
   /**
    * This method binds many different instances to the same class or interface. Use this only
    * if the instances are totally stateless. That is, they are immutable and have

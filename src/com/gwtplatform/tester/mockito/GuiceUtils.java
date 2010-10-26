@@ -44,10 +44,11 @@ public class GuiceUtils {
   public static boolean isProvider(Key<?> key) {
     return key.getTypeLiteral().getRawType().equals(Provider.class);
   }
-  
+
   @SuppressWarnings("unchecked")
-  public static <T> Key<T> getProvidedKey(Key<Provider<T>> key, Errors errors) throws ErrorsException {
-    Type providerType = key.getTypeLiteral().getType();
+  public static <T> TypeLiteral<T> getProvidedType(TypeLiteral<? extends Provider<? extends T>> providerTypeLiteral, 
+      Errors errors) throws ErrorsException {
+    Type providerType = providerTypeLiteral.getType();
 
     // If the Provider has no type parameter (raw Provider)...
     if (!(providerType instanceof ParameterizedType)) {
@@ -55,12 +56,17 @@ public class GuiceUtils {
     }
 
     Type entryType = ((ParameterizedType) providerType).getActualTypeArguments()[0];
+    return (TypeLiteral<T>) TypeLiteral.get(entryType);
+  }
+
+  public static <T> Key<T> getProvidedKey(Key<Provider<T>> key, Errors errors) throws ErrorsException {
+    TypeLiteral<T> providedType = getProvidedType(key.getTypeLiteral(), errors);
 
     Key<T> providedKey;
     if (key.getAnnotation() == null) {
-      providedKey = (Key<T>) Key.get(entryType);
+      providedKey = (Key<T>) Key.get(providedType);
     } else {
-      providedKey = (Key<T>) Key.get(entryType, key.getAnnotation());
+      providedKey = (Key<T>) Key.get(providedType, key.getAnnotation());
     }
     return providedKey;
   }
