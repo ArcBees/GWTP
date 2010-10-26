@@ -42,6 +42,7 @@ public class AllAnnotationTest {
     @Override
     protected void configureTest() {
       bindManyInstances(String.class, "A", "B");
+      bindManyInstances(TestDataInstance.class, new TestDataInstance("A"), new TestDataInstance("B"));
       bindMany(TestData.class, TestDataA.class, TestDataB.class);
     }
   }
@@ -65,12 +66,24 @@ public class AllAnnotationTest {
   }
   
   /**
+   */
+  public static class TestDataInstance {
+    private final String data;
+    public TestDataInstance(String data) {
+      this.data = data;
+    }
+
+    public String getData() { return data; }
+  }
+  
+  /**
    * This class keeps track of what happens in all the tests run in this
    * class. It's used to make sure all expected tests are called.
    */
   private static class Bookkeeper {
     static List<String> stringsProcessed = new ArrayList<String>();
     static List<String> dataProcessed = new ArrayList<String>();
+    static List<String> dataInstanceProcessed = new ArrayList<String>();
   }
   
   @Test
@@ -81,6 +94,11 @@ public class AllAnnotationTest {
   @Test
   public void testAllWithClass(@All TestData data1, @All TestData data2) {
     Bookkeeper.dataProcessed.add(data1.getData() + data2.getData());
+  }
+  
+  @Test
+  public void testAllWithClassInstance(@All TestDataInstance data1, @All TestDataInstance data2) {
+    Bookkeeper.dataInstanceProcessed.add(data1.getData() + data2.getData());
   }
   
   @AfterClass
@@ -96,5 +114,11 @@ public class AllAnnotationTest {
     assertTrue(Bookkeeper.dataProcessed.contains("BA"));
     assertTrue(Bookkeeper.dataProcessed.contains("BB"));
     assertEquals(4, Bookkeeper.dataProcessed.size());  
+
+    assertTrue(Bookkeeper.dataInstanceProcessed.contains("AA"));
+    assertTrue(Bookkeeper.dataInstanceProcessed.contains("AB"));
+    assertTrue(Bookkeeper.dataInstanceProcessed.contains("BA"));
+    assertTrue(Bookkeeper.dataInstanceProcessed.contains("BB"));
+    assertEquals(4, Bookkeeper.dataInstanceProcessed.size());  
   }
 }
