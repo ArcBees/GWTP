@@ -63,7 +63,7 @@ import java.util.List;
 public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
 
   private static final boolean useAutomockingIfNoEnvironmentFound = true;
-  private Injector injector;
+  private Injector injector;  
   
   public GuiceMockitoJUnitRunner(Class<?> klass) throws InitializationError,
       InvocationTargetException, InstantiationException, IllegalAccessException {
@@ -73,15 +73,15 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
 
   private void ensureInjector()
       throws InstantiationException, IllegalAccessException {
-    Class<?> klass = getTestClass().getJavaClass();
+    Class<?> testClass = getTestClass().getJavaClass();
     if (injector != null) {
       return;
     }
     TestModule testModule = null;
-    for (Class<?> subclass : klass.getClasses()) {
+    for (Class<?> subclass : testClass.getClasses()) {
       if (TestModule.class.isAssignableFrom(subclass)) {
         assert testModule == null : "More than one TestModule inner class found within test class \""
-            + klass.getName() + "\".";
+            + testClass.getName() + "\".";
         testModule = (TestModule) subclass.newInstance();
       }
     }
@@ -94,8 +94,9 @@ public class GuiceMockitoJUnitRunner extends BlockJUnit4ClassRunner {
           @Override protected void configureTest() { } };        
       }
     }
-    testModule.setTestClass(klass);
+    testModule.setTestClass(testClass);
     injector = Guice.createInjector(testModule);
+    SpyProvider.setInjector(testClass, injector);
   }
   
   @Override
