@@ -16,7 +16,9 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
+
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 

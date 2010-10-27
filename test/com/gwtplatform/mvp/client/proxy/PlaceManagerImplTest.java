@@ -16,12 +16,12 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import com.gwtplatform.mvp.client.DefaultEventBus;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.StandardProvider;
 import com.gwtplatform.mvp.client.View;
@@ -58,7 +58,7 @@ public class PlaceManagerImplTest {
     @Override
     protected void configureTest() {      
       bind(DeferredCommandManager.class).in(TestScope.SINGLETON);
-      bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
+      bind(EventBus.class).to(SimpleEventBus.class).in(TestScope.SINGLETON);
       bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
     }
   }

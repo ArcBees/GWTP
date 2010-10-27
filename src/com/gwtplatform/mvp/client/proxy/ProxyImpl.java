@@ -16,11 +16,11 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.IndirectProvider;
 import com.gwtplatform.mvp.client.Presenter;
 
@@ -70,7 +70,7 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
   
   @Override
   public void fireEvent(GwtEvent<?> event) {
-    eventBus.fireEvent(this, event);
+    eventBus.fireEventFromSource(event, this);
   }
 
   @Override

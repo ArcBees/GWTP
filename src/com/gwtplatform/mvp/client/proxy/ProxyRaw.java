@@ -16,9 +16,9 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import com.gwtplatform.mvp.client.HasEventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -28,7 +28,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * 
  * @author Philippe Beaudoin
  */
-public interface ProxyRaw extends HasEventBus {
+public interface ProxyRaw extends HasHandlers {
 
   /**
    * Get the associated {@link Presenter}. The presenter can only be obtained in
