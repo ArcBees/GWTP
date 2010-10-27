@@ -17,8 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * Event fired after navigation has occurred. It will not be fired if navigation is
@@ -43,7 +42,7 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
    * 
    * @param source The source that fires this event ({@link HasEventBus}).
    */
-  public static void fire(final HasEventBus source, PlaceRequest request) {
+  public static void fire(final HasHandlers source, PlaceRequest request) {
     source.fireEvent(new NavigationEvent(request));
   }
 

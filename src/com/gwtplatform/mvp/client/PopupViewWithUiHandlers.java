@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.event.shared.EventBus;
+
 /**
  * Base class for a {@link PopupView} that implements the {@link HasUiHandlers}
  * interface. You should always call {@link #setHandlers()} from your

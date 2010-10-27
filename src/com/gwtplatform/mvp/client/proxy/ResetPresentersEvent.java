@@ -17,8 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * This event is fired whenever all visible presenters should
@@ -42,7 +41,7 @@ public final class ResetPresentersEvent extends
    * 
    * @param source The source that fires this event ({@link HasEventBus}).
    */
-  public static void fire(final HasEventBus source) {
+  public static void fire(final HasHandlers source) {
     source.fireEvent(new ResetPresentersEvent());
   }
 
