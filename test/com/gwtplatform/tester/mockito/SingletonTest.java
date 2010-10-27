@@ -55,7 +55,7 @@ public class SingletonTest {
    * This should automatically register before each test.
    */
   @TestEagerSingleton
-  public static class MyTestEagerSingleton {
+  static class MyTestEagerSingleton {
     @Inject
     public MyTestEagerSingleton(Registry registry) {
       registry.register();
@@ -67,7 +67,7 @@ public class SingletonTest {
    * This should register only in tests where it is injected.
    */
   @TestSingleton
-  public static class MyTestSingleton {
+  static class MyTestSingleton {
     @Inject
     public MyTestSingleton(Registry registry) {
       registry.register();

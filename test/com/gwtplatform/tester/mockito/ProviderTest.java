@@ -51,61 +51,43 @@ public class ProviderTest {
     }
   }
   
-  /** 
-   */
-  public interface Mock { }  
+  interface Mock { }  
 
-  /** 
-   */
-  public static class Instance {
+  static class Instance {
     @Inject Instance() { }
   }
   
-  /** 
-   */
-  public interface Parent {
+  interface Parent {
     String getValue();
   }  
 
-  /** 
-   */
-  public static class ChildA implements Parent {
+  static class ChildA implements Parent {
     public String getValue() {
       return "childA";
     }
   }
 
-  /** 
-   */
-  public interface MockInChildB { }
+  interface MockInChildB { }
 
-  /** 
-   */
-  public interface MockInProviderB {
+  interface MockInProviderB {
     void test();
   }
   
-  /** 
-   */
-  public static class ChildB implements Parent {
+  static class ChildB implements Parent {
     @Inject MockInChildB mockB;
     public String getValue() {
       return "childB";
     }
   }
   
-  /** 
-   */
-  public static class ParentProviderA implements Provider<Parent> {
+  static class ParentProviderA implements Provider<Parent> {
     @Override
     public Parent get() {
       return new ChildA();
     }
   }
   
-  /** 
-   */
-  public static class ParentProviderB implements Provider<Parent> {
+  static class ParentProviderB implements Provider<Parent> {
     private final Provider<ChildB> childBProvider;
 
     @Inject
