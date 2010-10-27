@@ -16,10 +16,12 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -75,7 +77,7 @@ import java.util.Map;
  * @author Denis Labaye
  */
 public abstract class PresenterWidget<V extends View> extends
-    HandlerContainerImpl implements HasEventBus, HasSlots, HasPopupSlot {
+    HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot {
   private final EventBus eventBus;
   private final V view;
 
@@ -210,7 +212,7 @@ public abstract class PresenterWidget<V extends View> extends
 
   @Override
   public void fireEvent(GwtEvent<?> event) {
-    getEventBus().fireEvent(this, event);
+    getEventBus().fireEventFromSource(event, this);
   }
 
   /**

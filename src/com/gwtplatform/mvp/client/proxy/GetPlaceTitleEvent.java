@@ -17,8 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * This event is fired whenever the user wants to have access to the title of a
@@ -46,7 +45,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
    * @param handler The {@link SetPlaceTitleHandler} that will be invoked when
    *          the title is obtained.
    */
-  public static void fire(HasEventBus source, PlaceRequest request,
+  public static void fire(HasHandlers source, PlaceRequest request,
       SetPlaceTitleHandler handler) {
     source.fireEvent(new GetPlaceTitleEvent(request, handler));
   }

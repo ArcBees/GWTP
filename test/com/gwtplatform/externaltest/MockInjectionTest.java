@@ -16,11 +16,11 @@
 
 package com.gwtplatform.externaltest;
 
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.inject.Inject;
 import com.google.inject.TypeLiteral;
 
-import com.gwtplatform.mvp.client.DefaultEventBus;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.mockito.AutomockingModule;
@@ -45,7 +45,7 @@ public class MockInjectionTest {
     @Override
     protected void configureTest() {
       bindNamedMock(new TypeLiteral<PresenterWidget<View>>() { }, "Sub").in(TestScope.SINGLETON);
-      bind(EventBus.class).to(DefaultEventBus.class).in(TestScope.SINGLETON);
+      bind(EventBus.class).to(SimpleEventBus.class).in(TestScope.SINGLETON);
     }
   }
 

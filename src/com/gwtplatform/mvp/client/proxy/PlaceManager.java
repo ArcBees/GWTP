@@ -16,8 +16,8 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HasHandlers;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ import java.util.List;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public interface PlaceManager extends HasEventBus {
+public interface PlaceManager extends HasHandlers {
   
   /**
    * Builds a string corresponding to the history token to reveal the specified
