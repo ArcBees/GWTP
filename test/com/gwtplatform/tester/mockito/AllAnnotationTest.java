@@ -47,27 +47,19 @@ public class AllAnnotationTest {
     }
   }
   
-  /**
-   */
-  public interface TestData {
+  interface TestData {
     String getData();
   }
 
-  /**
-   */
-  public static class TestDataA implements TestData {
+  static class TestDataA implements TestData {
     public String getData() { return "A"; }
   }
 
-  /**
-   */
-  public static class TestDataB implements TestData {
+  static class TestDataB implements TestData {
     public String getData() { return "B"; }
   }
   
-  /**
-   */
-  public static class TestDataInstance {
+  static class TestDataInstance {
     private final String data;
     public TestDataInstance(String data) {
       this.data = data;

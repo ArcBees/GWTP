@@ -46,7 +46,7 @@ public class ParentTestClassTest extends ParentTestClassBase {
   /**
    * This class should be injected in parent tests.
    */
-  public static class MyDummyClass implements DummyInterface {
+  static class MyDummyClass implements DummyInterface {
     @Override
     public String getDummyValue() {
       return "DummyValue";

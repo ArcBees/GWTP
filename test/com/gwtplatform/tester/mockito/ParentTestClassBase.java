@@ -52,45 +52,29 @@ public class ParentTestClassBase {
    * This should be automatically injected in the child class.
    */
   @TestMockSingleton
-  public interface MockSingletonDefinedInParent { 
+  interface MockSingletonDefinedInParent { 
     void mockSingletonMethod();
   }
 
-  /**
-   */
-  public interface DummyInterface { 
+  interface DummyInterface { 
     String getDummyValue();
   }
 
-  /**
-   */
-  public interface DummyInterfaceUsedOnlyInParent1 {
+  interface DummyInterfaceUsedOnlyInParent1 {
     String getDummyValue();
   }
   
-  /**
-   */
-  public interface DummyInterfaceUsedOnlyInParent2 {
+  interface DummyInterfaceUsedOnlyInParent2 {
     String getDummyValue();
   }
   
-  /**
-   */
-  public interface DummyInterfaceUsedOnlyInParent3 {
+  interface DummyInterfaceUsedOnlyInParent3 {
     String getDummyValue();
   }
   
-  /**
-   */
-  public static class DummyClassUsedOnlyInParent1 { }
-  
-  /**
-   */
-  public static class DummyClassUsedOnlyInParent2 { }
-  
-  /**
-   */
-  public static class DummyClassUsedOnlyInParent3 { }
+  static class DummyClassUsedOnlyInParent1 { }
+  static class DummyClassUsedOnlyInParent2 { }
+  static class DummyClassUsedOnlyInParent3 { }
   
   @Inject protected Provider<DummyInterface> dummyProvider;
   @Inject protected MockSingletonDefinedInParent mockSingletonDefinedInParent;

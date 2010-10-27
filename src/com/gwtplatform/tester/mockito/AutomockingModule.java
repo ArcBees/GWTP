@@ -21,6 +21,8 @@ import com.google.inject.Provider;
 import com.google.inject.Scope;
 import com.google.inject.TypeLiteral;
 import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.google.inject.binder.AnnotatedConstantBindingBuilder;
+import com.google.inject.binder.ConstantBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.internal.Errors;
@@ -54,31 +56,21 @@ import java.util.Set;
  */
 public abstract class AutomockingModule extends TestModule {
 
-  private Set<TypeLiteral<?>> forceMock = new HashSet<TypeLiteral<?>>();
+  private Set<Class<?>> forceMock = new HashSet<Class<?>>();
+  private Set<Class<?>> dontForceMock = new HashSet<Class<?>>();
   private List<BindingInfo> bindingsObserved = new ArrayList<BindingInfo>();
 
   /**
    * By default, only abstract classes, interfaces and classes annotated with
    * {@link TestMockSingleton} are automatically mocked. Use {@link #forceMock} 
-   * to indicate that a given concrete class type should be mocked.  
+   * to indicate that all concrete classes derived from the a specific type should be mocked.
    * 
-   * @param klass The {@link Class} to force mock
+   * @param klass The {@link Class} or interface for which all subclasses will be mocked. 
    */
   protected void forceMock(Class<?> klass) {
-    forceMock.add(TypeLiteral.get(klass));
+    forceMock.add(klass);
   }
-
-  /**
-   * By default, only abstract classes, interfaces and classes annotated with
-   * {@link TestMockSingleton} are automatically mocked. Use {@link #forceMock} 
-   * to indicate that a given concrete class type should be mocked.  
-   * 
-   * @param type The {@link TypeLiteral} to force mock
-   */
-  protected void forceMock(TypeLiteral<?> type) {
-    forceMock.add(type);
-  }
-
+  
   @SuppressWarnings("unchecked")
   public final void configure() {
     configureTest();
@@ -88,6 +80,8 @@ public abstract class AutomockingModule extends TestModule {
     for (BindingInfo bindingInfo : bindingsObserved) {
       if (bindingInfo.annotation != null) {
         keysObserved.add(Key.get(bindingInfo.abstractType, bindingInfo.annotation));
+      } else if (bindingInfo.annotationClass != null) {
+        keysObserved.add(Key.get(bindingInfo.abstractType, bindingInfo.annotationClass));
       } else {
         keysObserved.add(Key.get(bindingInfo.abstractType));
       }
@@ -182,12 +176,40 @@ public abstract class AutomockingModule extends TestModule {
   private void bindIfConcrete(
       Set<Key<?>> keysObserved, Key<?> key) {
     TypeLiteral<?> parameter = key.getTypeLiteral();
-    if (isInstantiable(parameter.getRawType()) &&
-        !forceMock.contains(parameter) &&
+    Class<?> rawType = parameter.getRawType();
+    if (isInstantiable(rawType) &&
+        !shouldForceMock(rawType) &&
         !keysObserved.contains(key)) {
       bind(key).in(TestScope.SINGLETON);
       keysObserved.add(key);            
     }
+  }
+
+  private boolean shouldForceMock(Class<?> klass) {
+    if (dontForceMock.contains(klass)) {
+      return false;
+    }
+    if (forceMock.contains(klass)) {
+      return true;
+    }
+    // The forceMock set contains all the base classes the user wants
+    // to force mock, check id the specified klass is a subclass of one of these.
+    // Update forceMock or dontForceMock based on the result to speed-up future look-ups.
+    boolean result = false;
+    for (Class<?> classToMock : forceMock) {
+      if (classToMock.isAssignableFrom(klass)) {
+        result = true;
+        break;
+      }
+    }
+    
+    if (result) {
+      forceMock.add(klass);
+    } else {
+      dontForceMock.add(klass);
+    }
+    
+    return result;
   }
 
   private boolean isInstantiable(Class<?> klass) {
@@ -209,10 +231,16 @@ public abstract class AutomockingModule extends TestModule {
     return new SpyAnnotatedBindingBuilder<T>(newBindingObserved(clazz), super.bind(clazz));
   }
 
+  @Override
+  protected AnnotatedConstantBindingBuilder bindConstant() {
+    return new SpyAnnotatedConstantBindingBuilder(newBindingObserved(), super.bindConstant());
+  }
+  
   private BindingInfo newBindingObserved(Key<?> key) {
     BindingInfo bindingInfo = new BindingInfo();
     bindingInfo.abstractType = key.getTypeLiteral();
     bindingInfo.annotation = key.getAnnotation();
+    bindingInfo.annotationClass = key.getAnnotationType();
     bindingsObserved.add(bindingInfo);
     return bindingInfo;
   }
@@ -231,6 +259,12 @@ public abstract class AutomockingModule extends TestModule {
     return bindingInfo;
   }
 
+  private BindingInfo newBindingObserved() {
+    BindingInfo bindingInfo = new BindingInfo();
+    bindingsObserved.add(bindingInfo);
+    return bindingInfo;
+  }
+  
   private <T> void addDependencies(Key<T> key, Set<Key<?>> keysObserved, Set<Key<?>> keysNeeded) {
     TypeLiteral<T> type = key.getTypeLiteral();
     if (!isInstantiable(type.getRawType())) {
@@ -260,11 +294,12 @@ public abstract class AutomockingModule extends TestModule {
     Key<?> newKey = key;
     if (Provider.class.isAssignableFrom(key.getTypeLiteral().getRawType())) {
       Type providedType = ((ParameterizedType) key.getTypeLiteral().getType()).getActualTypeArguments()[0];
-      Annotation annotation = key.getAnnotation();
-      if (annotation == null) {
-        newKey = Key.get(providedType);
+      if (key.getAnnotation() != null) {
+        newKey = Key.get(providedType, key.getAnnotation());
+      } else if (key.getAnnotationType() != null) {
+        newKey = Key.get(providedType, key.getAnnotationType());
       } else {
-        newKey = Key.get(providedType, annotation);
+        newKey = Key.get(providedType);
       }
     }
     bindIfConcrete(keysObserved, newKey);
@@ -362,13 +397,9 @@ public abstract class AutomockingModule extends TestModule {
 
     @Override
     public LinkedBindingBuilder<T> annotatedWith(
-        Class<? extends Annotation> annotation) {
-      try {
-        bindingInfo.annotation = annotation.newInstance();
-      } catch (Throwable e) {
-        throw new RuntimeException(e);
-      }
-      return new SpyLinkedBindingBuilder<T>(bindingInfo, delegate.annotatedWith(annotation));
+        Class<? extends Annotation> annotationClass) {
+      bindingInfo.annotationClass = annotationClass;
+      return new SpyLinkedBindingBuilder<T>(bindingInfo, delegate.annotatedWith(annotationClass));
     }
 
     @Override
@@ -378,9 +409,109 @@ public abstract class AutomockingModule extends TestModule {
     }
   }
 
+  private class SpyAnnotatedConstantBindingBuilder implements AnnotatedConstantBindingBuilder {
+
+    private final BindingInfo bindingInfo;
+    private final AnnotatedConstantBindingBuilder delegate;    
+
+    public SpyAnnotatedConstantBindingBuilder(BindingInfo bindingInfo, 
+        AnnotatedConstantBindingBuilder delegate) {
+      this.bindingInfo = bindingInfo;
+      this.delegate = delegate;
+      bindingInfo.isBoundToInstance = true;
+    }
+
+    @Override
+    public ConstantBindingBuilder annotatedWith(
+        Class<? extends Annotation> annotationClass) {
+      bindingInfo.annotationClass = annotationClass;
+      return new SpyConstantBindingBuilder(bindingInfo, delegate.annotatedWith(annotationClass));
+    }
+
+    @Override
+    public ConstantBindingBuilder annotatedWith(Annotation annotation) {
+      bindingInfo.annotation = annotation;
+      return new SpyConstantBindingBuilder(bindingInfo, delegate.annotatedWith(annotation));
+    }
+  }  
+
+  private class SpyConstantBindingBuilder implements ConstantBindingBuilder {
+
+    private final BindingInfo bindingInfo;
+    private final ConstantBindingBuilder delegate;    
+
+    public SpyConstantBindingBuilder(BindingInfo bindingInfo, 
+        ConstantBindingBuilder delegate) {
+      this.bindingInfo = bindingInfo;
+      this.delegate = delegate;
+      bindingInfo.isBoundToInstance = true;
+    }
+
+    @Override
+    public void to(String constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(constant.getClass());
+    }
+
+    @Override
+    public void to(int constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(Integer.class);
+    }
+
+    @Override
+    public void to(long constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(Long.class);
+    }
+
+    @Override
+    public void to(boolean constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(Boolean.class);
+    }
+
+    @Override
+    public void to(double constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(Double.class);
+    }
+
+    @Override
+    public void to(float constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(Float.class);
+    }
+
+    @Override
+    public void to(short constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(Short.class);
+    }
+
+    @Override
+    public void to(char constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(Character.class);
+    }
+
+    @Override
+    public void to(Class<?> constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(constant.getClass());
+    }
+
+    @Override
+    public <E extends Enum<E>> void to(E constant) {
+      delegate.to(constant);
+      bindingInfo.abstractType = TypeLiteral.get(constant.getClass());
+    }
+  }
+  
   private static class BindingInfo {
     private TypeLiteral<?> abstractType;
     private Annotation annotation;
+    private Class<? extends Annotation> annotationClass;
     private TypeLiteral<?> boundType;
     private boolean isBoundToInstance;
   }
