@@ -103,12 +103,12 @@ public class HandlerContainerImpl implements HandlerContainer {
    * initialisation should be done here too, in order to speed-up construction.
    * <p />
    * Handlers registered by calling
-   * {@link #registerHandler (HandlerRegistration)} will be removed
-   * automatically. Any other initialisation that takes place here (or as a
-   * side-effect of what is done here) should be taken down in {@link #unbind()}.
+   * {@link #registerHandler (HandlerRegistration)} will be removed automatically 
+   * when unbinding. Any other initialisation that takes place here (or as a
+   * side-effect of what is done here) should be taken down in {@link #onUnbind()}.
    * <p />
    * This method will never be invoked more then once, or if it is, the second
-   * time will necessarily be preceded by an invocation of {@link #unbind()}.
+   * time will necessarily be preceded by an invocation of {@link #onUnbind()}.
    */
   protected void onBind() {
   }
@@ -123,7 +123,7 @@ public class HandlerContainerImpl implements HandlerContainer {
    * initialisation that took place in {@link #unbind()}.
    * <p />
    * This method will never be invoked more then once, or if it is, the second
-   * time will necessarily be preceded by an invocation of {@link #bind()}.
+   * time will necessarily be preceded by an invocation of {@link #onBind()}.
    */
   protected void onUnbind() {
   }
