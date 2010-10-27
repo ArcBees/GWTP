@@ -77,7 +77,7 @@ public class PlaceManagerImpl2Test {
           public void execute() {
             placeManager.updateHistory(new PlaceRequest("dummyNameToken").with("dummyParam", "dummyValue"));
           } });
-        ((PlaceRequestInternalEvent) args[1]).setHandled();
+        ((PlaceRequestInternalEvent) args[2]).setHandled();
         return null;
       }
     }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
