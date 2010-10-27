@@ -16,11 +16,11 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
 
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.tester.DeferredCommandManager;
 import com.gwtplatform.tester.mockito.AutomockingModule;
 import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
@@ -80,7 +80,7 @@ public class PlaceManagerImpl2Test {
         ((PlaceRequestInternalEvent) args[1]).setHandled();
         return null;
       }
-    }).when(eventBus).fireEvent(eq(placeManager), isA(PlaceRequestInternalEvent.class));
+    }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
     
     // When
     placeManager.revealPlace(new PlaceRequest("dummyNameToken"));

@@ -17,8 +17,8 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HasHandlers;
 
-import com.gwtplatform.mvp.client.HasEventBus;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
@@ -52,7 +52,7 @@ public final class RevealRootPopupContentEvent extends
    * @param content The {@link PresenterWidget} with a {@link PopupView} that wants to set 
    *                itself as root content.
    */
-  public static void fire(final HasEventBus source, final PresenterWidget<? extends PopupView> content) {
+  public static void fire(final HasHandlers source, final PresenterWidget<? extends PopupView> content) {
     source.fireEvent(new RevealRootPopupContentEvent(content));
   }
 
