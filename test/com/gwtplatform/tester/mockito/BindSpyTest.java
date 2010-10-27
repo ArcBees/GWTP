@@ -44,21 +44,15 @@ public class BindSpyTest {
     }
   }
   
-  /**
-   */
-  public interface CompositionMockA {
-    String test();
-  }
-  
-  /**
-   */
-  public interface CompositionMockB {
+  interface CompositionMockA {
     String test();
   }
 
-  /**
-   */
-  public static class SimpleClass {
+  interface CompositionMockB {
+    String test();
+  }
+
+  static class SimpleClass {
     private CompositionMockA mockA;
     @Inject CompositionMockB mockB;
 
