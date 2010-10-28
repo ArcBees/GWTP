@@ -16,9 +16,8 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-
-import com.gwtplatform.mvp.client.EventBus;
 
 /**
  * This place manager overrides all the methods that use

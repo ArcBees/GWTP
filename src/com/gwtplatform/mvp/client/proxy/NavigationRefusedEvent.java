@@ -17,8 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * Event fired when a user refuses to leave a page. See
@@ -34,11 +33,11 @@ public final class NavigationRefusedEvent extends
 
   /**
    * Fires a {@link NavigationRefusedEvent} 
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}.
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    */
-  public static void fire(final HasEventBus source) {
+  public static void fire(final HasHandlers source) {
     source.fireEvent(new NavigationRefusedEvent());
   }
 

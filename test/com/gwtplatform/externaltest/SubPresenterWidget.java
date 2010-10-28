@@ -16,9 +16,9 @@
 
 package com.gwtplatform.externaltest;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 

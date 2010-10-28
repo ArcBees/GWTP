@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * This event is fired by the {@link TabContainerPresenter} to identify all
@@ -28,13 +29,13 @@ public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
 
   /**
    * Fires a {@link RequestTabsEvent} with a specific {@link Type}
-   * into a source that has access to an {@link EventBus}. 
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param type The specific event {@link Type}.
    * @param tabContainer The {@link TabContainerPresenter} requesting the tabs.
    */
-  public static void fire(final HasEventBus source,
+  public static void fire(final HasHandlers source,
       final Type<RequestTabsHandler> type, TabContainerPresenter<?, ?> tabContainer) {
 
     source.fireEvent(new RequestTabsEvent(type, tabContainer));

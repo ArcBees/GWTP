@@ -7,6 +7,7 @@
   <property name="in.src.folder" location="src" />
   <property name="in.src.springdependant" value="**/spring/**" />
   <property name="in.src.htmlunitdependant" value="com/gwtplatform/crawler/**" />
+  <property name="in.src.gwteventbusdependant" value="com/google/gwt/event/shared/**" />
   <property name="in.src.mockitodependant" value="com/gwtplatform/tester/mockito/**" />
   <property name="in.test.springdependant" value="**/spring/**" />
   <property name="in.test.folder" location="test" />
@@ -66,9 +67,9 @@
   </path>
 
 	<path id="jar.files">
-    <fileset dir="${out.classes.folder}" includes="**/*.class" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
-    <fileset dir="${in.src.folder}" includes="**/*.java" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
-    <fileset dir="${in.src.folder}" includes="**/*.xml" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
+    <fileset dir="${out.classes.folder}" includes="**/*.class" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" />
+    <fileset dir="${in.src.folder}" includes="**/*.java" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" />
+    <fileset dir="${in.src.folder}" includes="**/*.xml" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" />
     <fileset dir="." includes="META-INF/**" />
 	</path>
 
@@ -77,6 +78,12 @@
     <fileset dir="${in.src.folder}" includes="${in.src.htmlunitdependant}/*.java" />
     <fileset dir="${in.src.folder}" includes="${in.src.htmlunitdependant}/*.xml" />
   </path>
+	
+  <path id="jar.files.gwteventbus">
+    <fileset dir="${out.classes.folder}" includes="${in.src.gwteventbusdependant}/*.class" />
+    <fileset dir="${in.src.folder}" includes="${in.src.gwteventbusdependant}/*.java" />
+    <fileset dir="${in.src.folder}" includes="${in.src.gwteventbusdependant}/*.xml" />
+  </path>	
 
   <path id="jar.files.mockito">
     <fileset dir="${out.classes.folder}" includes="${in.src.mockitodependant}/*.class" />
@@ -86,7 +93,7 @@
     	
   <target name="javac" description="Compile java source (without external dependencies)">
     <mkdir dir="${out.classes.folder}" />
-    <javac srcdir="${in.src.folder}" includes="**" excludes="${in.src.springdependant},${in.src.htmlunitdependant},${in.src.mockitodependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
+    <javac srcdir="${in.src.folder}" includes="**" excludes="${in.src.springdependant},${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
       nowarn="true" debug="true" debuglevel="lines,vars,source">
       <!-- Do not use any annotation processor -->
       <compilerarg value="-proc:none" />
@@ -126,7 +133,7 @@
     <delete dir="${in.src.folder}" includes="**/*.class" failonerror="false" />
   </target>
 
-  <target name="javac.tests" depends="javac,javac.mockito,javac.htmlunit" description="Compiles test code">
+  <target name="javac.tests" depends="javac,javac.mockito,javac.htmlunit,javac.gwteventbus" description="Compiles test code">
     <mkdir dir="${out.test.src.folder}" />  	
     <javac srcdir="${in.test.folder}" destdir="${in.test.folder}" includes="**" excludes="${in.test.springdependant}" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
       <classpath refid="tests.class.path" />
@@ -134,6 +141,19 @@
     	<compilerarg value="-s"/>
       <compilerarg path="${out.test.src.folder}"/>
     </javac>
+  </target>
+	
+  <target name="javac.gwteventbus" depends="javac" description="Compiles gwt eventbus">
+	<mkdir dir="${out.classes.folder}" />  	
+    <javac srcdir="${in.src.folder}"  destdir="${out.classes.folder}" includes="${in.src.gwteventbusdependant}" encoding="utf-8" source="1.6" target="1.6" nowarn="true" debug="true" debuglevel="lines,vars,source">
+	  <classpath refid="project.class.path" />
+	  <!-- Do not use any annotation processor -->
+	  <compilerarg value="-proc:none" />
+    </javac>
+    <copy todir="${out.classes.folder}">
+      <fileset dir="${in.src.folder}" includes="**/*.class" />
+    </copy>
+    <delete dir="${in.src.folder}" includes="**/*.class" failonerror="false" />
   </target>
   
   <target name="build" depends="javac" description="Build this project" />
@@ -197,7 +217,7 @@
     </manifest>
   </target>
 	
-  <target name="jar" depends="jar.manifest,javac,javac.htmlunit,javac.mockito" description="Package into a jar">
+  <target name="jar" depends="jar.manifest,javac,javac.htmlunit,javac.mockito,javac.gwteventbus" description="Package into a jar">
     <jar jarfile="gwtp-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
       <path refid="jar.files" />
     </jar>
@@ -207,9 +227,12 @@
     <jar jarfile="gwtp-mockito-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
       <path refid="jar.files.mockito" />
     </jar>
+    <jar jarfile="gwtp-gwteventbus-${version.num}-SNAPSHOT.jar" manifest="${manifest.file}">
+      <path refid="jar.files.gwteventbus" />
+    </jar>
   </target>
 		
-  <target name="release" depends="jar.manifest.release,javac,javac.htmlunit,javac.mockito" description="Build the jar for a release">
+  <target name="release" depends="jar.manifest.release,javac,javac.htmlunit,javac.mockito, javac.gwteventbus" description="Build the jar for a release">
     <jar jarfile="gwtp-${version.num}.jar" manifest="${manifest.file}">
       <path refid="jar.files" />
     </jar>
@@ -219,6 +242,9 @@
     <jar jarfile="gwtp-mockito-${version.num}.jar" manifest="${manifest.file}">
       <path refid="jar.files.mockito" />
     </jar>
+    <jar jarfile="gwtp-gwteventbus-${version.num}.jar" manifest="${manifest.file}">
+      <path refid="jar.files.gwteventbus" />
+    </jar>  	
   </target>
 
 	
