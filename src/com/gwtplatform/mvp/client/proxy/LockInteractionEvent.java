@@ -17,8 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * This event is fired whenever interaction should be locked throughout the application,
@@ -37,13 +36,13 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
 
   /**
    * Fires a {@link LockInteractionEvent} 
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}
    * specifying whether interaction should be locked or unlocked.
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param lock {@code true} to lock interaction, {@code false} to unlock it.
    */
-  public static void fire(HasEventBus source, boolean lock) {
+  public static void fire(HasHandlers source, boolean lock) {
     source.fireEvent(new LockInteractionEvent(lock));
   }
 

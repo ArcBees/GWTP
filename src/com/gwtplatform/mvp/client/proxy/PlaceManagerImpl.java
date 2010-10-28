@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
@@ -26,8 +27,6 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
-
-import com.gwtplatform.mvp.client.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,7 +143,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void fireEvent(GwtEvent<?> event) {
-    getEventBus().fireEvent(this, event);
+    getEventBus().fireEventFromSource(event, this);
   }
 
   String getBrowserHistoryToken() {
