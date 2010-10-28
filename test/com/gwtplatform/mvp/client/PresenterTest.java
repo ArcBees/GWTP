@@ -73,7 +73,7 @@ public class PresenterTest {
   @Test
   public void forceRevealWhenPresenterIsVisible() {
     // Given
-    presenter.reveal();
+    presenter.internalReveal();
     assertTrue(presenter.isVisible());
 
     // When
