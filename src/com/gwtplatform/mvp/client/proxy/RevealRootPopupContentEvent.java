@@ -46,9 +46,9 @@ public final class RevealRootPopupContentEvent extends
 
   /**
    * Fires a {@link RevealRootPopupContentEvent} 
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}. 
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param content The {@link PresenterWidget} with a {@link PopupView} that wants to set 
    *                itself as root content.
    */

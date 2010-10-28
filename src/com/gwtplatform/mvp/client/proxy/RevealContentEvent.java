@@ -42,9 +42,9 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
 
   /**
    * Fires a {@link RevealContentEvent} with a specific {@link Type}
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}. 
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param type The specific event {@link Type}, usually defined in the parent presenter
    *             and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
    * @param content The {@link Presenter} that wants to set itself as content in his parent.

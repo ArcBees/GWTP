@@ -37,9 +37,9 @@ public final class ResetPresentersEvent extends
 
   /**
    * Fires a {@link ResetPresentersEvent} 
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}. 
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new ResetPresentersEvent());
