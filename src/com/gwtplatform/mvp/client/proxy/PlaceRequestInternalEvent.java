@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.gwtplatform.mvp.client.HasEventBus;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * 
@@ -42,15 +42,15 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
   /**
    * Fires a {@link PlaceRequestInternalEvent} 
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}. 
+   * into a source that has access to an {@com.google.gwt.event.shared.EventBus}. 
    * <p />
    * <b>Important!</b> You should not fire that event directly, see 
    * {@link PlaceRequestInternalEvent} for more details.
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param request The request.
    */
-  public static void fire(HasEventBus source, PlaceRequest request) {
+  public static void fire(HasHandlers source, PlaceRequest request) {
     source.fireEvent(new PlaceRequestInternalEvent(request));
   }
 
