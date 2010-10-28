@@ -44,9 +44,9 @@ public final class RevealRootLayoutContentEvent extends
 
   /**
    * Fires a {@link RevealRootLayoutContentEvent} 
-   * into a source that has access to an {@link EventBus}. 
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param content The {@link Presenter} that wants to set itself as root content.
    */
   public static void fire(final HasHandlers source, final Presenter<?, ?> content) {

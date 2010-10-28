@@ -36,10 +36,10 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
 
   /**
    * Fires a {@link LockInteractionEvent} 
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}
    * specifying whether interaction should be locked or unlocked.
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param lock {@code true} to lock interaction, {@code false} to unlock it.
    */
   public static void fire(HasHandlers source, boolean lock) {

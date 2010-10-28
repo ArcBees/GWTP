@@ -35,12 +35,12 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
 
   /**
    * Fires a {@link GetPlaceTitleEvent}
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}.
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
    * <p />
    * <b>Important!</b> You should never fire that event directly. See
    * {@link GetPlaceTitleEvent} for details.
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param request The {@link PlaceRequest} for which to obtain the title.
    * @param handler The {@link SetPlaceTitleHandler} that will be invoked when
    *          the title is obtained.
