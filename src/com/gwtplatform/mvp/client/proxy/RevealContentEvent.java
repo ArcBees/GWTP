@@ -17,8 +17,8 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HasHandlers;
 
-import com.gwtplatform.mvp.client.HasEventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -42,14 +42,14 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
 
   /**
    * Fires a {@link RevealContentEvent} with a specific {@link Type}
-   * into a source that has access to an {@link com.gwtplatform.mvp.client.EventBus}. 
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param type The specific event {@link Type}, usually defined in the parent presenter
    *             and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
    * @param content The {@link Presenter} that wants to set itself as content in his parent.
    */
-  public static void fire(final HasEventBus source,
+  public static void fire(final HasHandlers source,
       final Type<RevealContentHandler<?>> type, final Presenter<?, ?> content) {
     source.fireEvent(new RevealContentEvent(type, content));
   }

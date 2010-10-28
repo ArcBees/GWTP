@@ -17,8 +17,8 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HasHandlers;
 
-import com.gwtplatform.mvp.client.HasEventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -42,12 +42,12 @@ public final class RevealRootContentEvent extends
 
   /**
    * Fires a {@link RevealRootContentEvent} 
-   * into a source that has access to an {@link EventBus}. 
+   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
-   * @param source The source that fires this event ({@link HasEventBus}).
+   * @param source The source that fires this event ({@link HasHandlers}).
    * @param content The {@link Presenter} that wants to set itself as root content.
    */
-  public static void fire(final HasEventBus source, final Presenter<?, ?> content) {
+  public static void fire(final HasHandlers source, final Presenter<?, ?> content) {
     source.fireEvent(new RevealRootContentEvent(content));
   }
 
