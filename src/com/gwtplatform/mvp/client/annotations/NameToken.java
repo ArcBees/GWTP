@@ -20,8 +20,9 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to specify the name token to use to access this
- * presenter.
+ * This annotation is used on the declaration of a presenter's 
+ * {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace}
+ * to specify the name token to use to access this presenter.
  * 
  * @author Philippe Beaudoin
  */

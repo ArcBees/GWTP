@@ -23,12 +23,27 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
 /**
- * A presenter that can display many tabs and the content of one of these tabs.
+ * A {@link Presenter} that can display many tabs and the content of one of these tabs.
+ * Note that this presenter is only meant to be used when the content are themselves 
+ * {@link Presenter}, if they are {@link PresenterWidget} then no special mechanism is
+ * required and you can rely on a standard widget. 
+ * <p />
+ * Classes extending {@link TabContainerPresenter} must declare one constant of type
+ * {@link com.google.gwt.event.shared.GwtEvent.Type Type&lt;RequestTabsHandler&gt;}
+ * and annotate it with {@link com.gwtplatform.mvp.client.annotations.RequestTabs RequestTabs}.
+ * For example:
+ * <pre>
+ *{@literal @}RequestTabs
+ * public static final Type&lt;RequestTabsHandler&gt; TYPE_RequestTabs = 
+ *   new Type&lt;RequestTabsHandler&gt;();
+ * </pre>
+ * {@link Presenter} meant to appear within a {@link TabContainerPresenter} main
+ * content area should be associated to a 
+ * {@link com.gwtplatform.mvp.client.proxy.TabContentProxy TabContentProxy}
+ * or a {@link com.gwtplatform.mvp.client.proxy.TabContentProxyPlace TabContentProxyPlace}.
  *
- * @param <V> The specific type of the {@link View}. Must implement
- *          {@link TabPanel}.
- * @param <Proxy_> The specific type of the proxy, must be a
- *          {@link TabContainerProxy}.
+ * @param <V> The specific type of the {@link View}. Must implement {@link TabPanel}.
+ * @param <Proxy_> The specific type of the {@link Proxy}.
  * 
  * @author Philippe Beaudoin
  * @author Christian Goudreau
@@ -38,12 +53,14 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
   private final Object tabContentSlot;
   
   /**
-   * Create a presenter that can display many tabs and the content of one of
-   * these tabs.
+   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
+   * only work when instantiating this object using Guice/GIN dependency injection. 
+   * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+   * automatic binding.
    * 
    * @param eventBus The {@link EventBus}.
    * @param view The {@link View}.
-   * @param proxy The proxy, a {@link TabContainerProxy}.
+   * @param proxy The {@link Proxy}.
    * @param tabContentSlot An opaque object identifying the slot in which the
    *          main content should be displayed.
    * @param requestTabsEventType The {@link Type} of the object to fire to
@@ -57,11 +74,11 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
   }
 
   /**
-   * Adds a new tab to this presenter.
+   * Adds a new tab to this presenter. This is meant to be called by a 
+   * {@link TabContentProxy} in response to a {@link RequestTabsEvent}.
    * 
-   * @param tabProxy The {@link TabContentProxy} containing information on the
-   *          tab to add.
-   * @return The newly added tab.
+   * @param tabProxy The {@link TabContentProxy} containing information on the tab to add.
+   * @return The newly added {@link Tab}.
    */
   public Tab addTab(final TabContentProxy<?> tabProxy) {
     return getView().addTab(tabProxy.getLabel(), tabProxy.getHistoryToken(),

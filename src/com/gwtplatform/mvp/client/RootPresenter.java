@@ -163,7 +163,7 @@ public class RootPresenter extends
   public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
     if (!isResetting) {
       isResetting = true;
-      reset();
+      internalReset();
       isResetting = false;
     }
   }
