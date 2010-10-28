@@ -17,7 +17,27 @@
 package com.gwtplatform.mvp.client;
 
 /**
+ * Interface of objects containing slots in which {@link PresenterWidget} can
+ * be inserted.
+ * <p />
+ * Slots are opaque objects and can be of any type. For slots meant to hold
+ * only {@link PresenterWidget}s, you will usually declare an {@link Object} 
+ * constant within your presenter class:
+ * <pre>
+ * public static final Object TYPE_RevealTopBarContent = new Object();
+ * </pre>
+ * For slots in which you want to insert {@link Presenter}s, you must
+ * use a {@link com.google.gwt.event.shared.GwtEvent.Type Type&lt;RevealContentHandler&lt;?&gt;&gt;} 
+ * object and annotate it with 
+ * {@link com.gwtplatform.mvp.client.annotations.ContentSlot ContentSlot}:
+ * <pre>
+ *{@literal @}ContentSlot
+ * public static final Type&lt;RevealContentHandler&lt;?&gt;&gt; TYPE_RevealMainContent
+ *   = new Type&lt;RevealContentHandler&lt;?&gt;&gt;();
+ * </pre>
+ * 
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public interface HasSlots { 
   /**
@@ -28,6 +48,8 @@ public interface HasSlots {
    * Contrary to the {@link setInSlot()} method, no
    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired, 
    * so {@link PresenterWidget#onReset()} is not invoked.
+   * <p />
+   * For more details on slots, see {@link HasSlots}.
    * 
    * @param slot An opaque object identifying which slot this content is being
    *          added into.
@@ -43,6 +65,8 @@ public interface HasSlots {
    * {@link View#setInSlot(Object, Widget)} is called. It should also clear 
    * the slot when the {@link View#setInSlot(Object, Widget)} method is
    * called with {@code null} as a parameter.
+   * <p />
+   * For more details on slots, see {@link HasSlots}.
    * 
    * @param slot An opaque object identifying which slot to clear.
    */
@@ -54,6 +78,8 @@ public interface HasSlots {
    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired. 
    * The attached {@link View} should manage this slot when its
    * {@link View#removeFromSlot(Object, Widget)} is called.
+   * <p />
+   * For more details on slots, see {@link HasSlots}.
    * 
    * @param slot An opaque object identifying which slot this content is being
    *          removed from.
@@ -67,6 +93,8 @@ public interface HasSlots {
    * A {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} will be fired 
    * after the top-most visible presenter is revealed, resulting in a call to
    * {@link PresenterWidget#onReset()}.
+   * <p />
+   * For more details on slots, see {@link HasSlots}.
    * 
    * @param slot An opaque object identifying which slot this content is being
    *          set into. The attached view should know what to do with this slot.
@@ -81,6 +109,8 @@ public interface HasSlots {
    * {@link View#setInSlot(Object, Widget)} is called. It should also clear the
    * slot when the {@code setInSlot} method is called with {@code null} as a
    * parameter.
+   * <p />
+   * For more details on slots, see {@link HasSlots}.
    * 
    * @param slot An opaque object identifying which slot this content is being
    *          set into.

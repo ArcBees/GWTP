@@ -19,12 +19,22 @@ package com.gwtplatform.mvp.client.proxy;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
- * The interface of a {@link TabContentProxy} that is also a {@link Place}.
+ * The interface for the {@link Proxy} of a {@link Presenter} that has
+ * a name token and can be displayed within a 
+ * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter}'s main area.
+ * Example of use:
+ * <pre>
+ *{@literal @}ProxyCodeSplit
+ *{@literal @}NameToken("homepage")
+ *{@literal @}TabInfo(container = MainPagePresenter.class, priority = 0, label = "Home")
+ * public interface MyProxy extends TabContentProxyPlace&lt;HomePagePresenter&gt; { }
+ * </pre>
+ * @see {@link com.gwtplatform.mvp.client.annotations.TabInfo TabInfo}
  * 
- * @param <T> The Presenter's type.
+ * @param <P> The type of the {@link Presenter} associated with this proxy.
  * 
  * @author Philippe Beaudoin
  */
-public interface TabContentProxyPlace<T extends Presenter<?, ?>> extends
-    TabContentProxy<T>, ProxyPlace<T> {
+public interface TabContentProxyPlace<P extends Presenter<?, ?>> extends
+    TabContentProxy<P>, ProxyPlace<P> {
 }

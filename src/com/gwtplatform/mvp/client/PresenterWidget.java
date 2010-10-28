@@ -32,45 +32,76 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A presenter that does not have to be a singleton. Single pages from your
- * application will usually implement the singleton {@link Presenter} interface.
- * Use the {@link PresenterWidget} interface for complex widget that need to
- * interact with model objects, but that can be instantiated in many different
- * places in your application.
+ * A presenter that does not have to be a singleton. Pages from your
+ * application will usually be singletons and extend the {@link Presenter} class.
+ * <p />
+ * Choosing between a {@link Presenter} and {@link PresenterWidget} is a design decision that
+ * requires some thought. For example, a {@link PresenterWidget} is useful when
+ * you need a custom widget with extensive logic. For example, a chat box that can be instantiated 
+ * multiple times and needs to communicate with the server would be a good candidate for
+ * a {@link PresenterWidget}. The drawback of a {@link PresenterWidget} is that it is managed by its 
+ * parent presenter, which increases coupling. Therefore, you should use a {@link Presenter} when 
+ * the parent is not expected to know its child. Moreover, only {@link Presenter} can be attached
+ * to name tokens in order to support browser history.
  * <p />
  * {@link PresenterWidget}s and {@link Presenter}s are organized in a hierarchy.
- * Parent presenters have links to their child presenters. To reveal a presenter
- * you should build a {@link PlaceRequest} and call one of the following method:
+ * Internally, parent presenters have links to their currently attached children presenters. A
+ * parent {@link Presenter} can contain either {@link Presenter}s or {@link PresenterWidget}s,
+ * but a {@link PresenterWidget} can only contain {@link PresenterWidget}s.
+ * <p /> 
+ * To reveal a {@link PresenterWidget} you should insert it within a {@link HasSlot slot} of its 
+ * containing presenter using one of the following methods:
  * <ul>
- * <li>{@link PlaceManager#revealPlace(PlaceRequest)}</li>
- * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest)}</li>
- * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest, int)}</li>
+ * <li>{@link #setInSlot(Object, PresenterWidget)}
+ * <li>{@link #setInSlot(Object, PresenterWidget, boolean)}
+ * <li>{@link #addToSlot(Object, PresenterWidget)}
+ * <li>{@link #addToPopupSlot(PresenterWidget)}
+ * <li>{@link #addToPopupSlot(PresenterWidget, boolean)}
  * </ul>
- * The presenter's {@link Proxy} then asks the presenter to reveal itself by
- * calling {@link Presenter#forceReveal()}, triggering the following sequence of
- * operations:
+ * Revealing a {@link Presenter} is done differently, refer to the class documentation for more details.
+ * <p />
+ * To hide a {@link PresenterWidget} or a {@link Presenter} you can use {@link #setInSlot} to place 
+ * another presenter in the same slot, or you can call one of the following methods:
  * <ul>
- * <li>The presenter that wants to reveal itself asks to be set in one of its
- * parent slot by firing a {@link RevealContentEvent} ;
- * <li>If a presenter already occupies this slot it is removed. If the parent is
- * currently visible, then {@link PresenterWidgetImpl#onHide()} is called on the
- * removed presenter and, recursively, on its children (bottom up: first the
- * child, then the parent) ;
- * <li>If the parent is not visible, it asks to be set in one of its parent slot
- * by firing a {@link RevealContentEvent} too, this continue recursively until
- * the top-level or until a visible presenter is reached ;
- * <li>When a visible presenter is reached, it calls
- * {@link PresenterWidgetImpl#onReveal()} on the presenter it just added to a
- * slot and, recursively, on that presenter's children (top down: first the
- * parent, then the children);</li>
- * <li>Finally {@link PresenterWidgetImpl#onReset()} is called on all the
- * currently visible presenters</li>
- * starting from the top-level presenter and going down to the leaf presenters
- * (top down: first the parent, then the children).</li>
+ * <li>{@link #removeFromSlot(Object, PresenterWidget)}
+ * <li>{@link #clearSlot(Object)}
+ * <li>{@link PopupView#hide()} if the presenter is a popup or a dialog box.
+ * </ul>
+ * Hide a {@link Presenter} using these methods, but  
+ * <p />
+ * A presenter has a number of lifecycle methods that you can hook on to:
+ * <ul>
+ * <li>{@link #onBind()}
+ * <li>{@link #onReveal()}
+ * <li>{@link #onReset()}
+ * <li>{@link #onHide()}
+ * <li>{@link #onUnbind()}
+ * </ul>
+ * Revealing or hiding a {@link PresenterWidget} triggers an internal chain of events that result in
+ * these lifecycle methods being called. For an example, here is what happens following
+ * a call to {@link #setInSlot(Object, PresenterWidget)}:
+ * <ul>
+ * <li>If a presenter already occupies this slot it is removed.</li>
+ * <ul><li>If the presenter owning the slot is currently visible then
+ *         {@link #onHide()} is called on the removed presenter and, recursively, 
+ *         on its children (bottom-up: first the children, then the parent)</li>
+ *     <li>If the parent is not visible and is a {@link Presenter}, it asks to be 
+ *         set in one of its parent slot by firing a 
+ *         {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent}. 
+ *         For more details, see the documentation for {@link Presenter}.</li>
+ * </ul>
+ * <li>If, at this point, the presenter owning the slot is not visible, then the 
+ *     chain stops. Otherwise, {@link #onReveal()} is called on the {@link PresenterWidget} that
+ *     was just added.</li>
+ * <li>{@link #onReveal()} is called recursively on that presenter's children
+ *     (top-down: first the parent, then the children).</li>
+ * <li>If {@link #setInSlot(Object, PresenterWidget, boolean)} was called with {@code false}
+ *     as the third parameter then the process stops. Otherwise, {@link #onReset()} is 
+ *     called on all the currently visible presenters (top-down: first the parent, then 
+ *     the children).</li>
  * </ul>
  * 
- * @param <V>
- *          The {@link View} type.
+ * @param <V> The {@link View} type.
  * 
  * @author Philippe Beaudoin
  * @author Christian Goudreau
@@ -85,10 +116,11 @@ public abstract class PresenterWidget<V extends View> extends
 
   /**
    * This map makes it possible to keep a list of all the active children in
-   * every slot managed by this PresenterWidget. A slot is identified by an
+   * every slot managed by this {@link PresenterWidget}. A slot is identified by an
    * opaque object. A single slot can have many children.
    */
-  private final Map<Object, List<PresenterWidget<?>>> activeChildren = new HashMap<Object, List<PresenterWidget<?>>>();
+  private final Map<Object, List<PresenterWidget<?>>> activeChildren = 
+    new HashMap<Object, List<PresenterWidget<?>>>();
 
   /**
    * The parent presenter, in order to make sure this widget is only ever in one
@@ -96,19 +128,24 @@ public abstract class PresenterWidget<V extends View> extends
    */
   private PresenterWidget<?> currentParentPresenter;
 
-  private final List<PresenterWidget<? extends PopupView>> popupChildren = new ArrayList<PresenterWidget<? extends PopupView>>();
+  /**
+   * This list tracks all the active children in popup slots managed by this 
+   * {@link PresenterWidget}. A slot is identified by an opaque object. A 
+   * single slot can have many children.
+   */
+  private final List<PresenterWidget<? extends PopupView>> popupChildren = 
+    new ArrayList<PresenterWidget<? extends PopupView>>();
 
   /**
    * Creates a {@link PresenterWidget} that is not necessarily using automatic
-   * binding (see {@link HandlerContainerImpl(boolean)}).
+   * binding. Automatic binding will only work when instantiating this object using
+   * Guice/GIN dependency injection. See 
+   * {@link HandlerContainerImpl#HandlerContainerImpl(boolean)} for
+   * more details on automatic binding.
    * 
-   * @param eventBus
-   *          The {@link EventBus}.
-   * @param view
-   *          The {@link View}.
-   * @param autoBind
-   *          {@code true} to request automatic binding, {@code false}
-   *          otherwise.
+   * @param autoBind {@code true} to request automatic binding, {@code false} otherwise.
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
    */
   public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
     super(autoBind);
@@ -118,13 +155,13 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * Creates a {@link PresenterWidget} with automatic binding (see {@link
-   * HandlerContainerImpl()}).
+   * Creates a {@link PresenterWidget} that uses automatic binding. This will
+   * only work when instantiating this object using Guice/GIN dependency injection. 
+   * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+   * automatic binding.
    * 
-   * @param eventBus
-   *          The {@link EventBus}.
-   * @param view
-   *          The {@link View}.
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
    */
   public PresenterWidget(EventBus eventBus, V view) {
     this(true, eventBus, view);
@@ -166,7 +203,7 @@ public abstract class PresenterWidget<V extends View> extends
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
       monitorCloseEvent(child);
-      child.reveal();
+      child.internalReveal();
     }
   }
 
@@ -190,7 +227,7 @@ public abstract class PresenterWidget<V extends View> extends
     if (isVisible()) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      content.reveal();
+      content.internalReveal();
     }
   }
 
@@ -202,7 +239,7 @@ public abstract class PresenterWidget<V extends View> extends
       // on the children to be removed (and recursively on their children)
       if (isVisible()) {
         for (PresenterWidget<?> activeChild : slotChildren) {
-          activeChild.hide();
+          activeChild.internalHide();
         }
       }
       slotChildren.clear();
@@ -258,7 +295,7 @@ public abstract class PresenterWidget<V extends View> extends
       // This presenter is visible, its time to call onHide
       // on the child to be removed (and recursively on itschildren)
       if (isVisible()) {
-        content.hide();
+        content.internalHide();
       }
       slotChildren.remove(content);
     }
@@ -297,7 +334,7 @@ public abstract class PresenterWidget<V extends View> extends
         // We are visible, make sure the content that we're removing
         // is being notified as hidden
         for (PresenterWidget<?> activeChild : slotChildren) {
-          activeChild.hide();
+          activeChild.internalHide();
         }
       }
       slotChildren.clear();
@@ -313,7 +350,7 @@ public abstract class PresenterWidget<V extends View> extends
     if (isVisible()) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      content.reveal();
+      content.internalReveal();
       if (performReset) {
         // And to reset everything if needed
         ResetPresentersEvent.fire(this);
@@ -322,39 +359,32 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * Registers an event handler towards the {@link EventBus}.
-   * The handler will be automatically unregistered when
-   * {@link HandlerContainer#unbind()} is called. This is usually the
-   * desired behaviour, but if you want to unregister handlers manually
-   * use {@link #addHandler(Type, EventHandler)}
+   * Registers an event handler towards the {@link EventBus} and
+   * registers it to be automatically removed when {@link #unbind()}
+   * is called. This is usually the desired behavior, but if you 
+   * want to unregister handlers manually use {@link #addHandler} 
+   * instead.
    * 
    * @see #addHandler(Type, EventHandler)
    * 
-   * @param <H>
-   *          The handler type
-   * @param type
-   *          See {@link Type}
-   * @param handler
-   *          The handler to register
+   * @param <H> The handler type.
+   * @param type See {@link Type}.
+   * @param handler The handler to register.
    */
   protected final <H extends EventHandler> void addRegisteredHandler(
       Type<H> type, H handler) {
-    registerHandler(getEventBus().addHandler(type, handler));
+    registerHandler(addHandler(type, handler));
   }
 
   /**
    * Registers an event handler towards the {@link EventBus}.
-   * You have to manually unregister the handler. In most cases, you
-   * should consider using {@link #addRegisteredHandler(Type, EventHandler)}.
+   * Use this only in the rare situations where you want to manually 
+   * control when the handler is unregistered, otherwise call
+   * {@link #addRegisteredHandler(Type, EventHandler)}.
    * 
-   * @see #addRegisteredHandler(Type, EventHandler)
-   * 
-   * @param <H>
-   *          The handler type
-   * @param type
-   *          See {@link Type}
-   * @param handler
-   *          The handler to register
+   * @param <H> The handler type.
+   * @param type See {@link Type}.
+   * @param handler The handler to register.
    * @return The {@link HandlerRegistration} you should use to unregister the handler.
    */
   protected final <H extends EventHandler> HandlerRegistration addHandler(
@@ -363,8 +393,10 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * Makes it possible to access the {@link EventBus} object associated with
-   * that presenter.
+   * Access the {@link EventBus} object associated with that presenter.
+   * You should not usually use this method to interact with the event bus.
+   * Instead call {@link #fireEvent}, {@link #addRegisteredHandler} or
+   * {@link #addHandler}.
    * 
    * @return The EventBus associated with that presenter.
    */
@@ -373,55 +405,83 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * <b>Important:</b> Make sure you call your superclass {@link #onHide()} if
-   * you override.
+   * Lifecycle method called whenever this presenter is about to be
+   * hidden.
    * <p />
-   * Override this method to perform any clean-up operations. For example,
-   * objects created directly or indirectly during the call to
-   * {@link #onReveal()} should be disposed of in this methods.
+   * <b>Important:</b> Make sure you call your superclass {@link #onHide()} if
+   * you override. Also, do not call directly, see {@link PresenterWidget} 
+   * for more details on lifecycle methods.
+   * <p />
+   * You should override this method to dispose of any object
+   * created directly or indirectly during the call to {@link #onReveal()}.
+   * <p />
+   * This method will not be invoked a multiple times without {@link #onReveal()}
+   * being called. 
+   * <p />
+   * In a presenter hierarchy, this method is called bottom-up: first on the 
+   * child presenters, then on the parent.
    */
   protected void onHide() {
   }
 
   /**
+   * Lifecycle method called on all visible presenters whenever a 
+   * presenter is revealed anywhere in the presenter hierarchy.
+   * <p />
    * <b>Important:</b> Make sure you call your superclass {@link #onReset()} if
-   * you override.
+   * you override. Also, do not call directly, fire a {@link ResetPresentersEvent}
+   * to perform a reset manually. See {@link PresenterWidget} for more details on 
+   * lifecycle methods.
    * <p />
-   * This method is called whenever a new presenter is requested, even if the
-   * presenter was already visible. It is called on every visible presenter,
-   * starting from the top-level presenter and going to the leaves.
+   * This is one of the most frequently used lifecycle method. This is usually a good
+   * place to refresh any information displayed by your presenter.
    * <p />
-   * Note that {@link #onReset()} is <b>not</b> called only when using 
-   * {@link #addToSlot(Object, PresenterWidget)} or {@link #addToPopupSlot(PresenterWidget)}.
+   * Note that {@link #onReset()} is not called only when using 
+   * {@link #addToSlot(Object, PresenterWidget)}, {@link #addToPopupSlot(PresenterWidget)}
+   * or #setInSlot(Object, PresenterWidget, boolean)} with {@code false} as the third 
+   * parameter.
+   * <p />
+   * In a presenter hierarchy, this method is called top-down: first on the 
+   * parent presenters, then on the children.
    */
   protected void onReset() {
   }
 
   /**
-   * <b>Important:</b> Make sure you call your superclass {@link #onReveal()} if
-   * you override.
+   * Lifecycle method called whenever this presenter is about to be
+   * revealed.
    * <p />
-   * This method will be called whenever the presenter is revealed. Override it
-   * to perform any action (such as refreshing content) that needs to be done
-   * when the presenter is revealed.
+   * <b>Important:</b> Make sure you call your superclass {@link #onReveal()} if
+   * you override. Also, do not call directly, see {@link PresenterWidget} 
+   * for more details on lifecycle methods.
+   * <p />
+   * You should override this method to perform any action or initialisation
+   * that needs to be done when the presenter is revealed. Any initialisation
+   * you perform here should be taken down in {@link #onHide()}.
+   * <p />
+   * Information that needs to be updated whenever the user navigates should
+   * be refreshed in {@link #onReset()}.
+   * <p />
+   * In a presenter hierarchy, this method is called top-down: first on the 
+   * parent presenters, then on the children.
    */
   protected void onReveal() {
   }
 
   /**
-   * Call when you want to hide a presenter. You should fire a
-   * {@link ResetPresentersEvent} instead.
+   * Internal method called to hide a presenter. 
+   * See {@link PresenterWidget} for ways to hide a presenter.
    */
-  void hide() {
+  void internalHide() {
     assert isVisible() : "Hide() called on a hidden presenter!";
     for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
       for (PresenterWidget<?> activeChild : slotChildren) {
-        activeChild.hide();
+        activeChild.internalHide();
       }
     }
     for (PresenterWidget<? extends PopupView> popupPresenter : popupChildren) {
       popupPresenter.getView().setCloseHandler(null);
-      popupPresenter.hide();
+      popupPresenter.internalHide();
       popupPresenter.getView().hide();
     }
 
@@ -430,17 +490,18 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * Call when you need to reveal a presenter. You should fire a
-   * {@link ResetPresentersEvent} instead.
+   * Internal method called to reveal a presenter.
+   * See {@link PresenterWidget} and {@link Presenter} for ways to reveal a 
+   * presenter.
    */
-  void reveal() {
+  void internalReveal() {
     assert !isVisible() : "notifyReveal() called on a visible presenter!";
     onReveal();
     visible = true;
 
     for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
       for (PresenterWidget<?> activeChild : slotChildren) {
-        activeChild.reveal();
+        activeChild.internalReveal();
       }
     }
     for (PresenterWidget<? extends PopupView> popupPresenter : popupChildren) {
@@ -448,10 +509,16 @@ public abstract class PresenterWidget<V extends View> extends
       // on the newly added child (and recursively on this child children)
       popupPresenter.getView().show();
       monitorCloseEvent(popupPresenter);
-      popupPresenter.reveal();
+      popupPresenter.internalReveal();
     }
   }
 
+  /**
+   * Detaches this presenter from its current parent and attaches it
+   * to a new parent.
+   * 
+   * @param newParent The new parent {@link PresenterWidget}.
+   */
   void reparent(PresenterWidget<?> newParent) {
     if (currentParentPresenter != null && currentParentPresenter != newParent) {
       currentParentPresenter.detach(this);
@@ -461,18 +528,18 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * Call whenever the presenters need to be reset. You should fire a
-   * {@link ResetPresentersEvent} instead.
+   * Internal method called to reset a presenter. Instead of using that method,
+   * fire a {@link ResetPresentersEvent} to perform a reset manually.
    */
-  void reset() {
+  void internalReset() {
     onReset();
     for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
       for (PresenterWidget<?> activeChild : slotChildren) {
-        activeChild.reset();
+        activeChild.internalReset();
       }
     }
     for (PresenterWidget<?> popupPresenter : popupChildren) {
-      popupPresenter.reset();
+      popupPresenter.internalReset();
     }
   }
 
@@ -480,8 +547,7 @@ public abstract class PresenterWidget<V extends View> extends
    * Called by a child {@link PresenterWidget} when it wants to detach itself
    * from this parent.
    * 
-   * @param childPresenter
-   *          The {@link PresenterWidgetImpl} that is a child of this presenter.
+   * @param childPresenter The {@link PresenterWidget}. It should be a child of this presenter.
    */
   private void detach(PresenterWidget<?> childPresenter) {
     for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
@@ -491,11 +557,11 @@ public abstract class PresenterWidget<V extends View> extends
   }
 
   /**
-   * Makes sure we monitor the specified popup presenter so that we know when it
-   * is closing. This way we can make sure it doesn't receive future messages.
+   * Monitors the specified popup presenter so that we know when it
+   * is closing. This allows us to make sure it doesn't receive 
+   * future messages.
    * 
-   * @param popupPresenter
-   *          The {@link PresenterWidgetImpl} to monitor.
+   * @param popupPresenter The {@link PresenterWidget} to monitor.
    */
   private void monitorCloseEvent(
       final PresenterWidget<? extends PopupView> popupPresenter) {
@@ -505,7 +571,7 @@ public abstract class PresenterWidget<V extends View> extends
       @Override
       public void onClose() {
         if (isVisible()) {
-          popupPresenter.hide();
+          popupPresenter.internalHide();
         }
         removePopupChildren(popupPresenter);
       }
@@ -515,8 +581,7 @@ public abstract class PresenterWidget<V extends View> extends
   /**
    * Go through the popup children and remove the specified one.
    * 
-   * @param content
-   *          The {@link PresenterWidget} added as a popup which we now remove.
+   * @param content The {@link PresenterWidget} added as a popup which we want to remove.
    */
   private void removePopupChildren(PresenterWidget<? extends PopupView> content) {
     int i;
