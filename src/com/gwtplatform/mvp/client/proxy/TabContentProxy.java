@@ -20,11 +20,27 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.Tab;
 
 /**
- * @param <T> The Presenter's type.
+ * The interface for the {@link Proxy} of a {@link Presenter} that can
+ * be displayed within a 
+ * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter}'s main area.
+ * If the presenter is associated to a name token use {@link TabContentProxyPlace} instead.
+ * Example of use:
+ * <pre>
+ *{@literal @}ProxyCodeSplit
+ *{@literal @}TabInfo(container = MainPagePresenter.class, priority = 0, 
+ *          label = "Home", nameToken = "homepage")
+ * public interface MyProxy extends TabContentProxy&lt;ThisPresenter&gt; { }
+ * </pre>
+ * In this case, the {@code nameToken} parameter indicates the presenter to reveal
+ * when this tab is selected.
+ * 
+ * @see {@link com.gwtplatform.mvp.client.annotations.TabInfo TabInfo}
+ * 
+ * @param <P> The type of the {@link Presenter} associated with this proxy.
  * 
  * @author Philippe Beaudoin
  */
-public interface TabContentProxy<T extends Presenter<?, ?>> extends Proxy<T> {
+public interface TabContentProxy<P extends Presenter<?, ?>> extends Proxy<P> {
 
   /**
    * Retrieves the history token to show when this tab is displayed. In the

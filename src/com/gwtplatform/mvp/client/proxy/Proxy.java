@@ -32,7 +32,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * {@link Presenter} subclasses will usually define their own interface called
  * MyProxy and be derived from this one.
  * 
- * @param <P> The presenter's type.
+ * @param <P> The type of the {@link Presenter} associated with this proxy.
  * 
  * @author Philippe Beaudoin
  */

@@ -24,13 +24,13 @@ import java.lang.annotation.Target;
  * the proxy rather than being registered in the presenter. Handlers annotated
  * in this way should not be registered in the Presenter.
  * <p />
- * The presenter will be spawned as soon as the proxy intercepts the event, so
+ * The presenter will be instantiated as soon as the proxy intercepts the event, so
  * the presenter will handle the event even if it was not yet initialized.
  * <p />
  * Methods annotated by {@code @ProxyEvent} must return {@code void} and accept
- * a single parameter derived from {@link com.google.gwt.event.shared.GwtEvent}.
- * This event class must have a static {@code getType} method return a type
- * derived from {@link com.google.gwt.event.shared.GwtEvent.Type}.
+ * a single parameter derived from {@link com.google.gwt.event.shared.GwtEvent GwtEvent}.
+ * This event class must have a static {@code getType} method returning a type
+ * derived from {@link com.google.gwt.event.shared.GwtEvent.Type Type}.
  * 
  * @author Philippe Beaudoin
  */

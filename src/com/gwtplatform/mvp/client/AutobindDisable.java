@@ -28,6 +28,8 @@ import com.google.inject.Singleton;
  * </pre>
  * If you do not bind this class then autobinding is controlled on a case-by-case
  * basis using the {@link HandlerContainerImpl}'s constructors.
+ * <p />
+ * Disabling automatic binding can be useful in unit tests, for example.
  * 
  * @author Philippe Beaudoin
  */
