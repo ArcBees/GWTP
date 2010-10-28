@@ -67,9 +67,9 @@
   </path>
 
 	<path id="jar.files">
-    <fileset dir="${out.classes.folder}" includes="**/*.class" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
-    <fileset dir="${in.src.folder}" includes="**/*.java" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant}" />
-    <fileset dir="${in.src.folder}" includes="**/*.xml" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwt2_1dependant}" />
+    <fileset dir="${out.classes.folder}" includes="**/*.class" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" />
+    <fileset dir="${in.src.folder}" includes="**/*.java" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" />
+    <fileset dir="${in.src.folder}" includes="**/*.xml" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" />
     <fileset dir="." includes="META-INF/**" />
 	</path>
 
