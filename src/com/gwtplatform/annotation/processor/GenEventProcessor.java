@@ -98,7 +98,6 @@ public class GenEventProcessor extends AbstractProcessor {
           "com.google.gwt.event.shared.GwtEvent",
           "com.google.gwt.event.shared.HandlerRegistration",
           null,
-          "com.gwtplatform.mvp.client.HasEventBus",
           "com.google.gwt.event.shared.HasHandlers"
       );
       
@@ -186,7 +185,7 @@ public class GenEventProcessor extends AbstractProcessor {
   
   protected void generateFireMethodUsingFields(GenerationHelper writer, String simpleClassName, ReflectionHelper reflection, Collection<VariableElement> fieldElements) {
     writer.println();
-    writer.print("  public static void fire(HasEventBus source");
+    writer.print("  public static void fire(HasHandlers source");
     writer.generateFieldList(fieldElements, true, true);
     writer.println(") {");
     writer.print("    source.fireEvent(new " + simpleClassName + "(");
