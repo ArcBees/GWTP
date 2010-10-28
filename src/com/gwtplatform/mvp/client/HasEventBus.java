@@ -19,9 +19,11 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.HasHandlers;
 
 /**
- * Marker interface that tell that an object is bound to an {@link EventBus}.
- * Objects implementing this type can be used as a source when firing an event 
- * on the event bus.
+ * Marker interface that tell that an object is bound to an
+ * {@link com.google.gwt.event.shared.EventBus}. Objects implementing this type
+ * can be used as a source when firing an event on the event bus.
+ * 
+ * {@link Deprecated} use directly {@link HasHandlers} instead.
  * 
  * @author Christian Goudreau
  */
