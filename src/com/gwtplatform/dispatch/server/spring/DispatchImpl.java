@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.server.spring;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.AbstractDispatchImpl;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorRegistry;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 
 /**
  * @author Peter Simun
