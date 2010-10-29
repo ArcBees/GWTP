@@ -20,11 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 
-import com.gwtplatform.dispatch.server.actionHandler.ActionHandler;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorClass;
-import com.gwtplatform.dispatch.server.actionHandlerValidator.ActionHandlerValidatorMapImpl;
-import com.gwtplatform.dispatch.server.actionValidator.ActionValidator;
-import com.gwtplatform.dispatch.server.guice.actionValidator.DefaultActionValidator;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
+import com.gwtplatform.dispatch.server.guice.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
