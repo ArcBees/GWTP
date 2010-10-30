@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl;
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
-import com.gwtplatform.dispatch.server.guice.actionvalidator.DefaultActionValidator;
+import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
