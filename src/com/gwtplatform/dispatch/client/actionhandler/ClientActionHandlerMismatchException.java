@@ -35,9 +35,8 @@ public class ClientActionHandlerMismatchException extends RuntimeException {
   private final Class<? extends Action<?>> requestedActionType;
   private final Class<?> supportedActionType;
 
-  @SuppressWarnings("unchecked")
   public ClientActionHandlerMismatchException(
-      Class<? extends Action> requestedActionType, Class<?> supportedActionType) {
+      Class<? extends Action<?>> requestedActionType, Class<?> supportedActionType) {
     this.requestedActionType = (Class<? extends Action<?>>) requestedActionType;
     this.supportedActionType = supportedActionType;
   }
