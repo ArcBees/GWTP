@@ -64,14 +64,13 @@ private final InjectionPoint injectionPoint;
     constructor = (Constructor<T>) injectionPoint.getMember();
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public T get() {
     List<Dependency<?>> dependencies = injectionPoint.getDependencies();
     Injector injector = testClassToInjector.get(testClass);
     
     Object[] constructorParameters = new Object[dependencies.size()];
-    for (Dependency dependency : dependencies) {
+    for (Dependency<?> dependency : dependencies) {
       constructorParameters[dependency.getParameterIndex()] = 
         injector.getInstance(dependency.getKey());
     }
