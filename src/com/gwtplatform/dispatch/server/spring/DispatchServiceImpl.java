@@ -16,26 +16,40 @@
 
 package com.gwtplatform.dispatch.server.spring;
 
-import java.util.logging.Logger;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.RequestProvider;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.HttpRequestHandler;
+import org.springframework.web.context.ServletContextAware;
+
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author Peter Simun
  */
-public class DispatchServiceImpl extends AbstractDispatchServiceImpl {
+@Component("dispatch")
+public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler, ServletContextAware {
 
   private static final long serialVersionUID = 136176741488585959L;
 
+  private ServletContext servletContext = null;
+  
+  
   @Autowired(required = false)
   protected String securityCookieName;
 
   @Autowired
-  public DispatchServiceImpl(final Logger logger, final Dispatch dispatch, RequestProvider requestProvider) {
+  public DispatchServiceImpl(final Logger logger, final Dispatch dispatch,
+      RequestProvider requestProvider) {
     super(logger, dispatch, requestProvider);
   }
 
@@ -43,4 +57,21 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl {
   public String getSecurityCookieName() {
     return securityCookieName;
   }
+
+  @Override
+  public void handleRequest(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    doPost(request, response);
+  }
+
+  @Override
+  public void setServletContext(ServletContext arg0) {
+      this.servletContext = arg0;
+  }
+  
+  @Override
+  public ServletContext getServletContext() {
+      return servletContext;
+  }
+
 }
