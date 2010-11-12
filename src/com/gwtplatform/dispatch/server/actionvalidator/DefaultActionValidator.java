@@ -25,8 +25,7 @@ import com.gwtplatform.dispatch.shared.Result;
  * The default {@link ActionValidator} implementation. It'll accept every
  * action.
  * 
- * @deprecated change it to
- *             {@link com.gwtplatform.dispatch.server.guice.actionvalidator.DefaultActionValidator}
+ * @deprecated use {@link com.gwtplatform.dispatch.server.guice.actionvalidator.DefaultActionValidator} instead.
  * 
  * @author Christian Goudreau
  */
