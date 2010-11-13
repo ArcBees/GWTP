@@ -25,9 +25,12 @@ import com.gwtplatform.dispatch.shared.Result;
  * The default {@link ActionValidator} implementation. It'll accept every
  * action.
  * 
+ * @deprecated use {@link com.gwtplatform.dispatch.server.guice.actionvalidator.DefaultActionValidator} instead.
+ * 
  * @author Christian Goudreau
  */
 @Singleton
+@Deprecated
 public class DefaultActionValidator implements ActionValidator {
   @Override
   public boolean isValid(Action<? extends Result> action) {
