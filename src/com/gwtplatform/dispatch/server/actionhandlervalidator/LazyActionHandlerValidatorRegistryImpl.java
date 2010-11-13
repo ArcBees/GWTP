@@ -30,11 +30,14 @@ import java.util.Map;
 /**
  * This is a lazy-loading implementation of the registry. It will only create
  * action handlers and validators when they are first used. All
- * {@link ActionHandler} and {@link ActionValidator} implementations <b>must</b>
+ * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} and {@link ActionValidator} implementations <b>must</b>
  * have a public, default constructor.
+ * 
+ * @deprecated Use {@link com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl} instead.
  * 
  * @author Christian Goudreau
  */
+@Deprecated
 @Singleton
 public class LazyActionHandlerValidatorRegistryImpl implements
     LazyActionHandlerValidatorRegistry {
