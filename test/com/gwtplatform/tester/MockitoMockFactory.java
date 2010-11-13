@@ -19,7 +19,7 @@ package com.gwtplatform.tester;
 import org.mockito.Mockito;
 
 /**
- * Mock factory that use Mockito.
+ * {@link MockFactory} that uses Mockito.
  * 
 * @author Christian Goudreau
 */

@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.tester.TestView.Binder;
 
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
@@ -60,16 +61,52 @@ public class MockingBinderTest {
   @Inject
   TestView view;
   
+  @Inject
+  Binder binder;
+  
   @AfterClass
   public static void tearDown() {
     GWTMockUtilities.restore();
   }
   
   @Test
-  public void mockVerficationTest() {
+  public void mockNullTest() {
+    // THEN
     assertNotNull(view);
     assertNotNull(view.mainPanel);
     assertNotNull(view.someField);
-    assertNotNull(view.asWidget());
+  }
+  
+  @Test
+  public void mockVerification1Test() {
+    // WHEN
+    view.mainPanel.add(view.someField);
+    
+    // THEN
+    verify(view.mainPanel).add(view.someField);
+  }
+  
+  @Test
+  public void mockVerification2Test() {
+    // GIVEN
+    String someText = "some text";
+    
+    // WHEN
+    view.someField.setText(someText);
+    
+    // THEN
+    verify(view.someField).setText(someText);
+  }
+  
+  @Test
+  public void mockVerification3Test() {
+    // GIVEN
+    Widget widget = binder.createAndBindUi(view);
+    
+    // WHEN
+    widget.asWidget();
+    
+    // THEN
+    verify(widget).asWidget();
   }
 }
