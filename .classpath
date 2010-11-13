@@ -7,6 +7,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-2.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-servlet-2.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-assisted-inject-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/mockito-all-1.8.4.jar" sourcepath="C:/Users/beaudoin/.m2/repository/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jukito-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gin-r137.jar"/>
