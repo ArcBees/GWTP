@@ -23,10 +23,10 @@ import com.google.inject.TypeLiteral;
 
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.tester.mockito.AutomockingModule;
-import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.TestScope;
 
+import org.jukito.JukitoModule;
+import org.jukito.JukitoRunner;
+import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,18 +35,18 @@ import org.junit.runner.RunWith;
  * 
  * @author Philippe Beaudoin
  */
-@RunWith(GuiceMockitoJUnitRunner.class)
+@RunWith(JukitoRunner.class)
 public class RealInjectionTest {
 
   /**
    * Guice test module.
    */
-  public static class Module extends AutomockingModule {
+  public static class Module extends JukitoModule {
     @Override
     protected void configureTest() {
       bindNamed(new TypeLiteral<PresenterWidget<? extends View>>() { }, "Sub").to(SubPresenterWidget.class)
-        .in(TestScope.SINGLETON);
-      bind(EventBus.class).to(SimpleEventBus.class).in(TestScope.SINGLETON);
+        .in(TestSingleton.class);
+      bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
     }
   }
   

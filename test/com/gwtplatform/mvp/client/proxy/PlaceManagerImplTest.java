@@ -26,12 +26,6 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.StandardProvider;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.DeferredCommandManager;
-import com.gwtplatform.tester.mockito.AutomockingModule;
-import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.TestEagerSingleton;
-import com.gwtplatform.tester.mockito.TestMockSingleton;
-import com.gwtplatform.tester.mockito.TestScope;
-import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -39,6 +33,11 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import org.jukito.JukitoModule;
+import org.jukito.JukitoRunner;
+import org.jukito.TestEagerSingleton;
+import org.jukito.TestMockSingleton;
+import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -48,18 +47,18 @@ import java.util.List;
  * 
  * @author Philippe Beaudoin
  */
-@RunWith(GuiceMockitoJUnitRunner.class)
+@RunWith(JukitoRunner.class)
 public class PlaceManagerImplTest {
 
   /**
    * Guice test module.
    */
-  public static class Module extends AutomockingModule {
+  public static class Module extends JukitoModule {
     @Override
     protected void configureTest() {      
-      bind(DeferredCommandManager.class).in(TestScope.SINGLETON);
-      bind(EventBus.class).to(SimpleEventBus.class).in(TestScope.SINGLETON);
-      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
+      bind(DeferredCommandManager.class).in(TestSingleton.class);
+      bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
+      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestSingleton.class);
     }
   }
   

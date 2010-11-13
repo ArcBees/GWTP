@@ -22,9 +22,6 @@ import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
 
 import com.gwtplatform.tester.DeferredCommandManager;
-import com.gwtplatform.tester.mockito.AutomockingModule;
-import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.TestScope;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -33,6 +30,9 @@ import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
+import org.jukito.JukitoModule;
+import org.jukito.JukitoRunner;
+import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
@@ -43,18 +43,18 @@ import org.mockito.stubbing.Answer;
  * 
  * @author Philippe Beaudoin
  */
-@RunWith(GuiceMockitoJUnitRunner.class)
+@RunWith(JukitoRunner.class)
 public class PlaceManagerImpl2Test {
 
   /**
    * Guice test module.
    */
-  public static class Module extends AutomockingModule {
+  public static class Module extends JukitoModule {
     @Override
     protected void configureTest() {
       GWTMockUtilities.disarm();
-      bind(DeferredCommandManager.class).in(TestScope.SINGLETON);
-      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestScope.SINGLETON);
+      bind(DeferredCommandManager.class).in(TestSingleton.class);
+      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestSingleton.class);
     }
   }
 

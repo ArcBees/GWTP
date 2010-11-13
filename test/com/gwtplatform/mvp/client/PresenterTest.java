@@ -20,13 +20,13 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.TestSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.jukito.JukitoRunner;
+import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,7 +35,7 @@ import org.junit.runner.RunWith;
  * 
  * @author Philippe Beaudoin
  */
-@RunWith(GuiceMockitoJUnitRunner.class)
+@RunWith(JukitoRunner.class)
 public class PresenterTest {
   
   @TestSingleton
