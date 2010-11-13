@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.server.actionvalidator;
 
 import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
@@ -36,11 +37,13 @@ import com.gwtplatform.dispatch.shared.Result;
 public interface ActionValidator {
   /**
    * Validate whether or not that {@link Action} can be executed at this time.
+   * You can also throw an {@link ActionException} if you want to fine grain why
+   * the validator failed.
    * 
    * @param action The action that called this validator.
    * 
    * @return {@code true} if the action can be executed, {@code false}
    *         otherwise.
    */
-  boolean isValid(Action<? extends Result> action);
+  boolean isValid(Action<? extends Result> action) throws ActionException;
 }
