@@ -23,6 +23,7 @@
   <property name="junit.folder" location="${extlib.folder}/junit" />
   <property name="htmlunit.folder" location="${lib.folder}" />
   <property name="mockito.folder" location="${lib.folder}" />
+  <property name="jukito.folder" location="${lib.folder}"/>
   <property name="manifest.file" value="MANIFEST.MF"/>
   <property name="all.gwtp.jar.files" value="**/gwtp*.jar"/>
   <condition property="version-suffix" value="-b${env.BUILD_NUMBER}" else="-bLOCAL">
@@ -45,7 +46,7 @@
     </fileset>
   </path>
 
-	<path id="project.htmlunit.class.path">
+  <path id="project.htmlunit.class.path">
     <fileset dir="${htmlunit.folder}" includes="crawl_htmlunit*.jar"/>
     <path refid="project.class.path" />
   </path>
@@ -55,7 +56,7 @@
     <fileset dir="${junit.folder}" includes="junit.jar" />
     <fileset dir="${mockito.folder}" includes="mockito*.jar"/>
   </path>
-	
+
   <path id="tests.class.path">
     <path refid="project.class.path" />
     <pathelement location="." />
@@ -64,6 +65,7 @@
     <fileset dir="${junit.folder}" includes="junit.jar" />
     <fileset dir="${junit.folder}" includes="org.hamcrest.*.jar" />
     <fileset dir="${mockito.folder}" includes="mockito*.jar"/>
+  	<fileset dir="${jukito.folder}" includes="jukito*.jar"/>
   </path>
 
 	<path id="jar.files">
