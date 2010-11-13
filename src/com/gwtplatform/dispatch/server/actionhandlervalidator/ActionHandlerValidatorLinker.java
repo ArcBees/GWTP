@@ -31,9 +31,11 @@ import java.util.List;
  * {@link ActionValidator} instances with the default
  * {@link ActionHandlerValidatorRegistry}.
  * 
- * @author Christian Goudreau
+ * @deprecated Use {@link com.gwtplatform.dispatch.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker} instead.
  * 
+ * @author Christian Goudreau
  */
+@Deprecated
 public class ActionHandlerValidatorLinker {
   @SuppressWarnings({"unchecked", "rawtypes"})
   @Inject

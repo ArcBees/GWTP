@@ -31,9 +31,12 @@ import java.util.Map;
  * {@link ActionValidator} implementations <b>must</b> have a public, default
  * constructor.
  * 
+ * @deprecated Use {@link com.gwtplatform.dispatch.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl} instead.
+ * 
  * @author Christian Goudreau
  */
 @Singleton
+@Deprecated
 public class EagerActionHandlerValidatorRegistryImpl implements
     EagerActionHandlerValidatorRegistry {
   private final Map<Class<? extends Action<? extends Result>>, ActionHandlerValidatorInstance> actionHandlerValidatorInstances;
