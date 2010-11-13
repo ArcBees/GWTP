@@ -18,11 +18,10 @@ package com.gwtplatform.mvp.client;
 
 import com.google.inject.Inject;
 
-import com.gwtplatform.tester.mockito.AutomockingModule;
-import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-
 import static org.junit.Assert.assertFalse;
 
+import org.jukito.JukitoModule;
+import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -31,16 +30,16 @@ import org.junit.runner.RunWith;
  * 
  * @author Philippe Beaudoin
  */
-@RunWith(GuiceMockitoJUnitRunner.class)
+@RunWith(JukitoRunner.class)
 public class HandlerContainerImpl2Test {
   
   /**
    * Guice test module.
    */
-  public static class Module extends AutomockingModule {
+  public static class Module extends JukitoModule {
     @Override
     protected void configureTest() {
-      disableAutobinding();
+      bind(AutobindDisable.class).toInstance(new AutobindDisable(true));
     }
   }
 

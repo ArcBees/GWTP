@@ -19,15 +19,14 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
-import com.gwtplatform.tester.mockito.GuiceMockitoJUnitRunner;
-import com.gwtplatform.tester.mockito.TestSingleton;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import org.jukito.JukitoRunner;
+import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,7 +35,7 @@ import org.junit.runner.RunWith;
  * 
  * @author Philippe Beaudoin
  */
-@RunWith(GuiceMockitoJUnitRunner.class)
+@RunWith(JukitoRunner.class)
 public class HandlerContainerImplTest {
   
   // A subclass of HandlerContainerImpl that does not use autobinding
