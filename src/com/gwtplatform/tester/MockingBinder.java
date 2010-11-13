@@ -25,16 +25,17 @@ import java.lang.reflect.Field;
 /**
  * MockingBinder makes testing view even easier by mocking every {@link UiField}
  * and returning a mocked object upon creation.
- * 
- * To use it, you should build a small class that will extends
- * MockingBinder and bind that class inside your Guice test module.
+ * <p />
+ * To use it, you should build a small class that extends MockingBinder and bind
+ * that class inside your Guice test module. You will have to provide a
+ * {@link MockFactory} to let MockingBinder mock everything.
  * 
  * Ex:
  * 
  * <pre>public static class Module extends JukitoModule {
  *   static class MyTestBinder extends MockingBinder<Widget, BlogView> implements Binder {
- *     public MyTestBinder() {
- *       super(Widget.class);
+ *     public MyTestBinder(final AnyMockFactory anyMockFactory) {
+ *       super(Widget.class, anyMockFactory);
  *     }
  *   }
  *
@@ -45,9 +46,9 @@ import java.lang.reflect.Field;
  *   }
  * }</pre>
  * 
- * Disarming GWT is important to succeed unit test in views.
+ * Disarming GWT is important to unit test views.
  * 
- * @param <U> Mock type to return. It's usually widget.
+ * @param <U> Mock type returned by {@link UiBinder#createAndBindUi()}.
  * @param <O> Owner type.
  * 
  * @author Christian Goudreau
@@ -58,15 +59,16 @@ public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
 
   /**
    * @param returnTypeClass Type to return when creating the mocked ui.
-   * @param mockFactory A {@link MockFactory} to provide mock object. 
+   * @param mockFactory A {@link MockFactory} to provide mock object.
    */
-  public MockingBinder(final Class<U> returnTypeClass, final MockFactory mockFactory) {
+  public MockingBinder(final Class<U> returnTypeClass,
+      final MockFactory mockFactory) {
     this.returnTypeClass = returnTypeClass;
     this.mockFactory = mockFactory;
   }
 
   @Override
-  public U createAndBindUi(O owner) {
+  public U createAndBindUi(O owner) throws IllegalArgumentException {
     Field[] fields = owner.getClass().getDeclaredFields();
 
     for (Field field : fields) {
@@ -75,15 +77,13 @@ public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
 
       for (Annotation annotation : annotations) {
         if (annotation.annotationType().equals(UiField.class)) {
-          try {
             Object mockObject = mockFactory.mock(field.getType());
 
-            field.set(owner, mockObject);
-          } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-          } catch (IllegalAccessException e) {
-            e.printStackTrace();
-          }
+            try {
+              field.set(owner, mockObject);
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
+            }
         }
       }
     }
