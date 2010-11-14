@@ -23,7 +23,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 /**
- * MockingBinder makes testing view even easier by mocking every {@link UiField}
+ * {@link MockingBinder} makes testing view even easier by mocking every {@link UiField}
  * and returning a mocked object upon creation.
  * <p />
  * To use it, you should build a small class that extends MockingBinder and bind
@@ -83,6 +83,7 @@ public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
               field.set(owner, mockObject);
             } catch (IllegalAccessException e) {
               e.printStackTrace();
+              throw new RuntimeException(e);
             }
         }
       }
