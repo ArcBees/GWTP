@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Import;
 
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
-import com.gwtplatform.dispatch.server.guice.actionvalidator.DefaultActionValidator;
+import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.server.spring.configuration.DefaultModule;
 import com.gwtplatform.dispatch.shared.action.TestAction;
 
