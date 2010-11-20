@@ -22,6 +22,6 @@
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
-  <source path='shared'/>
+  <source path='shared'/>            <!-- xxx -->
 
 </module>

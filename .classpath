@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="**/spring/**" kind="src" path="src"/>
-	<classpathentry excluding="**/spring/**|com/gwtplatform/annotation/*Test.java" kind="src" path="test"/>
 	<classpathentry kind="src" path="gwttest"/>
+	<classpathentry excluding="**/spring/**" kind="src" path="src"/>
+	<classpathentry kind="src" path="META-INF"/>
+	<classpathentry excluding="**/spring/**|com/gwtplatform/annotation/*Test.java" kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-2.0.jar"/>
@@ -15,5 +16,5 @@
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
