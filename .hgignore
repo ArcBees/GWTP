@@ -25,6 +25,7 @@ glob:build.num
 glob:crchris.bat
 glob:.apt_generated/**
 glob:**.zip
-glob:*iml
-glob:*ipr
-glob:*iws
+glob:*.iml
+glob:*.ipr
+glob:*.iws
+glob:*.eml
