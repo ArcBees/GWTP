@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.server;
 
-import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -27,13 +25,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 /**
  * This filter will automatically inject a security cookie inside the request the first time the page is loaded. This
- * security cookie is based on the {@link HttpSession} and will only work if the session is enabled. To setup this
- * filter, add the following line at before any other {@code serve} call in your own
- * {@link com.google.inject.servlet.ServletModule#configureServlets}:
+ * security cookie is a simple randomly generated number, and might be slightly less secure than
+ * {@link HttpSessionSecurityCookieFilter}, although it will work even if you don't have access to an
+ * {@link javax.servlet.http.HttpSession}. To setup this filter, add the following line at before any other
+ * {@code serve} call in your own {@link com.google.inject.servlet.ServletModule#configureServlets}:
  * 
  * <pre>
  * filter(&quot;*.jsp&quot;).through(HttpSessionSecurityCookieFilter.class);
@@ -43,24 +44,24 @@ import javax.servlet.http.HttpSession;
  * 
  * @author Philippe Beaudoin
  */
-public abstract class AbstractHttpSessionSecurityCookieFilter implements Filter {
+public abstract class AbstractRandomSecurityCookieFilter implements Filter {
 
-  private final String securityCookieName;
+  protected final SecureRandom random;
+  protected final String securityCookieName;
 
-  protected AbstractHttpSessionSecurityCookieFilter(String securityCookieName) {
+  protected AbstractRandomSecurityCookieFilter(String securityCookieName, SecureRandom random) {
     this.securityCookieName = securityCookieName;
+    this.random = random;
   }
 
   public void destroy() {
   }
 
-  protected abstract HttpSession getSession();
-
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
     if (request instanceof HttpServletRequest) {
       HttpServletResponse httpResponse = (HttpServletResponse) response;
-      Cookie securityCookie = new Cookie(securityCookieName, getSession().getId());
+      Cookie securityCookie = new Cookie(securityCookieName, new BigInteger(130, random).toString(32));
       securityCookie.setMaxAge(-1);
       securityCookie.setPath("/");
       httpResponse.addCookie(securityCookie);
@@ -70,4 +71,5 @@ public abstract class AbstractHttpSessionSecurityCookieFilter implements Filter 
 
   public void init(FilterConfig filterConfig) throws ServletException {
   }
+
 }
