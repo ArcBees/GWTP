@@ -1,174 +1,174 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.philbeaudoin</groupId>
-	<artifactId>gwtp</artifactId>
-	<version>0.4-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>GWT-Platform</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.philbeaudoin</groupId>
+    <artifactId>gwtp</artifactId>
+    <version>0.4-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>GWT-Platform</name>
 
-	<properties>
-		<gwt-gin.version>1.0-r137</gwt-gin.version>
-		<guice.version>2.0</guice.version>
-		<aopalliance.version>1.0</aopalliance.version>
-		<gwt.version>2.0.4</gwt.version>
-		<spring.version>3.0.3.RELEASE</spring.version>
-		<mockito.version>1.8.4</mockito.version>
-		<junit.version>4.5</junit.version>
-		<appengine.version>1.3.1</appengine.version>
-		<htmlunit.version>r5662-gae</htmlunit.version>
-		<cglib.version>2.2</cglib.version>
-	</properties>
+    <properties>
+        <gwt-gin.version>1.0-r137</gwt-gin.version>
+        <guice.version>2.0</guice.version>
+        <aopalliance.version>1.0</aopalliance.version>
+        <gwt.version>2.0.4</gwt.version>
+        <spring.version>3.0.3.RELEASE</spring.version>
+        <mockito.version>1.8.4</mockito.version>
+        <junit.version>4.5</junit.version>
+        <appengine.version>1.3.1</appengine.version>
+        <htmlunit.version>r5662-gae</htmlunit.version>
+        <cglib.version>2.2</cglib.version>
+    </properties>
 
 
-	<repositories>
-		<repository>
-			<id>Google guice repository</id>
-			<url>http://guice-maven.googlecode.com/svn/trunk
-			</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>Google guice repository</id>
+            <url>http://guice-maven.googlecode.com/svn/trunk
+            </url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
 
-	<build>
-		<sourceDirectory>${basedir}/src</sourceDirectory>
-		<testSourceDirectory>${basedir}/test</testSourceDirectory>
-		<testResources>
-			<testResource>
-				<directory>${project.basedir}/resources/test</directory>
-			</testResource>
-		</testResources>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src</directory>
-			</resource>
-      <resource>
-        <directory>${project.basedir}/META-INF/</directory>
-        <targetPath>META-INF</targetPath>
-      </resource>
-  	</resources>
+    <build>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <testSourceDirectory>${basedir}/test</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/resources/test</directory>
+            </testResource>
+        </testResources>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src</directory>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/META-INF/</directory>
+                <targetPath>META-INF</targetPath>
+            </resource>
+        </resources>
 
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
-					<compilerArgument>-proc:none</compilerArgument>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgument>-proc:none</compilerArgument>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-	<dependencies>
-		<!-- HTMLUnit custom build -->
-		<!-- http://jira.codehaus.org/browse/MECLIPSE-388 http://jira.codehaus.org/browse/MECLIPSE-472 Due to this issues we HTMLUnit 
-			library should be on classpath before gwt-dev library (gwt-dev library also contains embedded htmlunit) and currently dependencies 
-			are ordered alphabetically in eclipse. This will be fixed in 2.9 version, so we have to live for a while with this "fix" -->
-		<dependency>
-			<groupId>net.sourceforge.htmlunit</groupId>
-			<artifactId>crawl_htmlunit</artifactId>
-			<version>${htmlunit.version}</version>
-			<scope>system</scope>
-      <systemPath>${basedir}/lib/crawl_htmlunit-r5662-gae.jar</systemPath>
-		</dependency>
+    <dependencies>
+        <!-- HTMLUnit custom build -->
+        <!-- http://jira.codehaus.org/browse/MECLIPSE-388 http://jira.codehaus.org/browse/MECLIPSE-472 Due to this issues we HTMLUnit
+              library should be on classpath before gwt-dev library (gwt-dev library also contains embedded htmlunit) and currently dependencies
+              are ordered alphabetically in eclipse. This will be fixed in 2.9 version, so we have to live for a while with this "fix" -->
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>crawl_htmlunit</artifactId>
+            <version>${htmlunit.version}</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/crawl_htmlunit-r5662-gae.jar</systemPath>
+        </dependency>
 
-		<!-- Google Web Toolkit dependencies -->
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${gwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-dev</artifactId>
-			<version>${gwt.version}</version>
-			<scope>provided</scope>
-		</dependency>
+        <!-- Google Web Toolkit dependencies -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
-		<!-- Appengine dependencies -->
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>${appengine.version}</version>
-		</dependency>
+        <!-- Appengine dependencies -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${appengine.version}</version>
+        </dependency>
 
-		<!-- DI dependencies -->
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice</artifactId>
-			<version>${guice.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice-servlet</artifactId>
-			<version>${guice.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>${aopalliance.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-gin</artifactId>
-			<version>${gwt-gin.version}</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/lib/gwt-gin-1.0-r137.jar</systemPath>
-		</dependency>
+        <!-- DI dependencies -->
+        <dependency>
+            <groupId>com.google.code.guice</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.guice</groupId>
+            <artifactId>guice-servlet</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>${aopalliance.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-gin</artifactId>
+            <version>${gwt-gin.version}</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/gwt-gin-1.0-r137.jar</systemPath>
+        </dependency>
 
-		<!-- Spring dependencies -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>${cglib.version}</version>
-		</dependency>
+        <!-- Spring dependencies -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>${cglib.version}</version>
+        </dependency>
 
-		<!-- Test dependencies -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>${mockito.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>	
