@@ -1,33 +1,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.philbeaudoin</groupId>
+
+    <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
     <version>0.4-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>GWT-Platform</name>
 
-    <properties>
-        <gwt-gin.version>1.0-r137</gwt-gin.version>
-        <guice.version>2.0</guice.version>
-        <aopalliance.version>1.0</aopalliance.version>
-        <gwt.version>2.0.4</gwt.version>
-        <spring.version>3.0.3.RELEASE</spring.version>
-        <mockito.version>1.8.4</mockito.version>
-        <junit.version>4.5</junit.version>
-        <appengine.version>1.3.1</appengine.version>
-        <htmlunit.version>r5662-gae</htmlunit.version>
-        <cglib.version>2.2</cglib.version>
-    </properties>
+    <modules>
+        <module>gwtp-core</module>
+        <module>gwtp-samples</module>
+    </modules>
 
+    <properties>
+        <target.jdk>1.6</target.jdk>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!--<gwt-gin.version>1.0-r137</gwt-gin.version>-->
+        <!--<guice.version>2.0</guice.version>-->
+        <!--<aopalliance.version>1.0</aopalliance.version>-->
+        <!--<gwt.version>2.0.4</gwt.version>-->
+        <!--<spring.version>3.0.3.RELEASE</spring.version>-->
+        <!--<mockito.version>1.8.4</mockito.version>-->
+        <!--<junit.version>4.5</junit.version>-->
+        <!--<appengine.version>1.3.1</appengine.version>-->
+        <!--<htmlunit.version>r5662-gae</htmlunit.version>-->
+        <!--<cglib.version>2.2</cglib.version>-->
+    </properties>
 
     <repositories>
         <repository>
             <id>Google guice repository</id>
-            <url>http://guice-maven.googlecode.com/svn/trunk
-            </url>
+            <url>http://guice-maven.googlecode.com/svn/trunk</url>
             <snapshots>
                 <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>Custom Compiled dependencies</id>
+            <url>file:///tmp/mvnrepo</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
             <releases>
                 <enabled>true</enabled>
@@ -36,7 +54,7 @@
     </repositories>
 
     <build>
-        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <!--<sourceDirectory>${basedir}/src</sourceDirectory>
         <testSourceDirectory>${basedir}/test</testSourceDirectory>
         <testResources>
             <testResource>
@@ -51,27 +69,27 @@
                 <directory>${project.basedir}/META-INF/</directory>
                 <targetPath>META-INF</targetPath>
             </resource>
-        </resources>
+        </resources>-->
 
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArgument>-proc:none</compilerArgument>
+                    <source>${target.jdk}</source>
+                    <target>${target.jdk}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
+<!--
     <dependencies>
-        <!-- HTMLUnit custom build -->
-        <!-- http://jira.codehaus.org/browse/MECLIPSE-388 http://jira.codehaus.org/browse/MECLIPSE-472 Due to this issues we HTMLUnit
+        &lt;!&ndash; HTMLUnit custom build &ndash;&gt;
+        &lt;!&ndash; http://jira.codehaus.org/browse/MECLIPSE-388 http://jira.codehaus.org/browse/MECLIPSE-472 Due to this issues we HTMLUnit
               library should be on classpath before gwt-dev library (gwt-dev library also contains embedded htmlunit) and currently dependencies
-              are ordered alphabetically in eclipse. This will be fixed in 2.9 version, so we have to live for a while with this "fix" -->
+              are ordered alphabetically in eclipse. This will be fixed in 2.9 version, so we have to live for a while with this "fix" &ndash;&gt;
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>crawl_htmlunit</artifactId>
@@ -80,7 +98,7 @@
             <systemPath>${basedir}/lib/crawl_htmlunit-r5662-gae.jar</systemPath>
         </dependency>
 
-        <!-- Google Web Toolkit dependencies -->
+        &lt;!&ndash; Google Web Toolkit dependencies &ndash;&gt;
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
@@ -93,14 +111,14 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Appengine dependencies -->
+        &lt;!&ndash; Appengine dependencies &ndash;&gt;
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
             <version>${appengine.version}</version>
         </dependency>
 
-        <!-- DI dependencies -->
+        &lt;!&ndash; DI dependencies &ndash;&gt;
         <dependency>
             <groupId>com.google.code.guice</groupId>
             <artifactId>guice</artifactId>
@@ -124,7 +142,7 @@
             <systemPath>${basedir}/lib/gwt-gin-1.0-r137.jar</systemPath>
         </dependency>
 
-        <!-- Spring dependencies -->
+        &lt;!&ndash; Spring dependencies &ndash;&gt;
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -151,7 +169,7 @@
             <version>${cglib.version}</version>
         </dependency>
 
-        <!-- Test dependencies -->
+        &lt;!&ndash; Test dependencies &ndash;&gt;
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -171,4 +189,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-</project>	
+-->
+</project>

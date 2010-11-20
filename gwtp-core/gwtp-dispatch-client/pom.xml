@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.gwtplatform</groupId>
+        <artifactId>gwtp-core</artifactId>
+        <version>0.4-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.gwtplatform</groupId>
+    <artifactId>gwtp-dispatch-client</artifactId>
+    <name>GWTP Dispatch client</name>
+
+    <build>
+        <!-- bundle the sources with the jar, so they are visible to GWT's compiler -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                    <include>**/*.gwt.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+    <dependencies>
+        <!-- TODO this should not be here. Dispatch should NOT depend on MVP -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-mvp-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-shared</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-gin</artifactId>
+        </dependency>
+    </dependencies>
+</project>
