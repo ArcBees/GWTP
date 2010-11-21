@@ -21,22 +21,17 @@
         <module>gwtp-dispatch-shared</module>
         <module>gwtp-dispatch-server</module>
         <module>gwtp-tester</module>
+        <module>gwtp-crawler</module>
     </modules>
 
     <properties>
-        <!--<maven.compiler.source>1.6</maven.compiler.source>-->
-        <!--<maven.compiler.target>1.6</maven.compiler.target>-->
         <gwt-gin.version>1.0-r137</gwt-gin.version>
         <guice.version>2.0</guice.version>
         <aopalliance.version>1.0</aopalliance.version>
         <gwt.version>2.1.0</gwt.version>
-        <!--<spring.version>3.0.3.RELEASE</spring.version>-->
         <junit.version>4.5</junit.version>
         <jukito.version>1.0-SNAPSHOT</jukito.version>
         <mockito.version>1.8.4</mockito.version>
-        <!--<appengine.version>1.3.1</appengine.version>-->
-        <!--<htmlunit.version>r5662-gae</htmlunit.version>-->
-        <lib.dir>${basedir}/../lib</lib.dir>
     </properties>
 
     <dependencies>
@@ -55,6 +50,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-shared</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
