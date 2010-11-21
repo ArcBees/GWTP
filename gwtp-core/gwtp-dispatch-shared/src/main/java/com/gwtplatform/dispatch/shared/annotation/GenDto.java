@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.annotation;
+package com.gwtplatform.dispatch.shared.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

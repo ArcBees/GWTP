@@ -14,16 +14,15 @@
     <artifactId>gwtp-dispatch-shared</artifactId>
     <name>GWTP Dispatch Shared</name>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.guice</groupId>
-            <artifactId>guice</artifactId>
-        </dependency>
-    </dependencies>
+    <pluginRepositories>
+        <!-- To use maven-processor-plugin -->
+        <pluginRepository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
         <!-- bundle the sources with the jar, so they are visible to GWT's compiler -->
@@ -36,6 +35,50 @@
                 </includes>
             </resource>
         </resources>
+
+        <plugins>
+            <!-- Disable annotation processors during normal compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <proc>none</proc>
+                </configuration>
+            </plugin>
+
+            <!-- Run annotation processors on src/test/java sources -->
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>process-test</id>
+                        <goals>
+                            <goal>process-test</goal>
+                        </goals>
+                        <phase>generate-test-sources</phase>
+                        <configuration>
+                            <processors>
+                                <!-- list of processors to use -->
+                                <processor>com.gwtplatform.dispatch.shared.annotation.processor.GenDtoProcessor</processor>
+                                <processor>com.gwtplatform.dispatch.shared.annotation.processor.GenEventProcessor</processor>
+                                <processor>com.gwtplatform.dispatch.shared.annotation.processor.GenDispatchProcessor</processor>
+                            </processors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.guice</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -14,24 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.annotation;
-
-import com.gwtplatform.dispatch.shared.Action;
+package com.gwtplatform.dispatch.shared.annotation;
 
 /**
  * For testing purposes only.
  * 
+ * @param <T> Type
+ * 
  * @author Brendan Doherty
  */
-@GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
-    + "Blah", extraResultInterfaces = "com.gwtplatform.annotation.HasThing<com.gwtplatform.annotation.Foo>")
-public class RetrieveBar {
-  @In(1)
-  String goodName;
-
-  @Out(1)
-  Foo thing;
-
-  @Out(2)
-  int meaningOfLife;
+public interface HasThing<T> {
+  T getThing();
 }
