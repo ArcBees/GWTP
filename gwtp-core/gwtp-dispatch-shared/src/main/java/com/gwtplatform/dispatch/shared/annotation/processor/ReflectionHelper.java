@@ -14,12 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.annotation.processor;
+package com.gwtplatform.dispatch.shared.annotation.processor;
 
-import com.gwtplatform.annotation.In;
-import com.gwtplatform.annotation.Optional;
-import com.gwtplatform.annotation.Order;
-import com.gwtplatform.annotation.Out;
+import com.gwtplatform.dispatch.shared.annotation.In;
+import com.gwtplatform.dispatch.shared.annotation.Optional;
+import com.gwtplatform.dispatch.shared.annotation.Order;
+import com.gwtplatform.dispatch.shared.annotation.Out;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class ReflectionHelper {
    * Returns the class name. 
    * <p>
    * For example:<br>
-   * {@code com.gwtplatform.annotation.Foo}
+   * {@code com.gwtplatform.dispatch.shared.annotation.Foo}
    * </p>
    * @return the class name.
    */
