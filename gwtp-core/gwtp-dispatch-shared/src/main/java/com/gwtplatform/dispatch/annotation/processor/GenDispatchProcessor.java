@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.annotation.processor;
+package com.gwtplatform.dispatch.annotation.processor;
 
 import static javax.lang.model.SourceVersion.RELEASE_6;
 
@@ -33,9 +33,9 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
-import com.gwtplatform.dispatch.shared.annotation.GenDispatch;
-import com.gwtplatform.dispatch.shared.annotation.In;
-import com.gwtplatform.dispatch.shared.annotation.Out;
+import com.gwtplatform.dispatch.annotation.GenDispatch;
+import com.gwtplatform.dispatch.annotation.In;
+import com.gwtplatform.dispatch.annotation.Out;
 
 /**
  * Processes {@link GenDispatch} annotations.
@@ -48,7 +48,7 @@ import com.gwtplatform.dispatch.shared.annotation.Out;
  * @author Stephen Haberman (concept)
  */
 
-@SupportedAnnotationTypes("com.gwtplatform.dispatch.shared.annotation.GenDispatch")
+@SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDispatch")
 @SupportedSourceVersion(RELEASE_6)
 public class GenDispatchProcessor extends AbstractProcessor {
 

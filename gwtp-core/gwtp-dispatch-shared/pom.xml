@@ -66,9 +66,9 @@
                         <configuration>
                             <processors>
                                 <!-- list of processors to use -->
-                                <processor>com.gwtplatform.dispatch.shared.annotation.processor.GenDtoProcessor</processor>
-                                <processor>com.gwtplatform.dispatch.shared.annotation.processor.GenEventProcessor</processor>
-                                <processor>com.gwtplatform.dispatch.shared.annotation.processor.GenDispatchProcessor</processor>
+                                <processor>com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor</processor>
+                                <processor>com.gwtplatform.dispatch.annotation.processor.GenEventProcessor</processor>
+                                <processor>com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor</processor>
                             </processors>
                         </configuration>
                     </execution>

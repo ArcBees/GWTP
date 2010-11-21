@@ -14,23 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.annotation;
+package com.gwtplatform.dispatch.annotation;
+
+import com.gwtplatform.dispatch.shared.Action;
 
 /**
  * For testing purposes only.
  * 
  * @author Brendan Doherty
  */
-@GenEvent
-public class FooChanged {
-  @Order(1)
-  Foo foo;
-  @Order(2)
-  boolean originator;
-  @Optional
-  @Order(3)
-  String additionalMessage;
-  @Optional
-  @Order(4)
-  double priority;
+@GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
+    + "Blah", extraResultInterfaces = "com.gwtplatform.dispatch.annotation.HasThing<com.gwtplatform.dispatch.annotation.Foo>")
+public class RetrieveBar {
+  @In(1)
+  String goodName;
+
+  @Out(1)
+  Foo thing;
+
+  @Out(2)
+  int meaningOfLife;
 }
