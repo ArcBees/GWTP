@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.annotation.processor;
+package com.gwtplatform.dispatch.shared.annotation.processor;
 
 import static javax.lang.model.SourceVersion.RELEASE_6;
 
@@ -34,7 +34,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
-import com.gwtplatform.annotation.GenEvent;
+import com.gwtplatform.dispatch.shared.annotation.GenEvent;
 
 /**
  * Processes {@link GenEvent} annotations.
@@ -47,7 +47,7 @@ import com.gwtplatform.annotation.GenEvent;
  * @author Stephen Haberman (concept) 
  */
 
-@SupportedAnnotationTypes("com.gwtplatform.annotation.GenEvent")
+@SupportedAnnotationTypes("com.gwtplatform.dispatch.shared.annotation.GenEvent")
 @SupportedSourceVersion(RELEASE_6)
 public class GenEventProcessor extends AbstractProcessor {
 

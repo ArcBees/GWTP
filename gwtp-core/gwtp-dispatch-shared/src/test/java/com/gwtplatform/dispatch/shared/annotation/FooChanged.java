@@ -14,20 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.annotation;
+package com.gwtplatform.dispatch.shared.annotation;
 
 /**
  * For testing purposes only.
  * 
  * @author Brendan Doherty
  */
-@GenDto
-public class PersonName {
+@GenEvent
+public class FooChanged {
   @Order(1)
-  String firstName;
+  Foo foo;
   @Order(2)
-  String lastName;
+  boolean originator;
   @Optional
   @Order(3)
-  String secondName;
+  String additionalMessage;
+  @Optional
+  @Order(4)
+  double priority;
 }

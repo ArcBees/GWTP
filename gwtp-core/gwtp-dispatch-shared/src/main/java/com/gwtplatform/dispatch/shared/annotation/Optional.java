@@ -14,29 +14,44 @@
  * the License.
  */
 
-package com.gwtplatform.annotation;
+package com.gwtplatform.dispatch.shared.annotation;
 
 import java.lang.annotation.ElementType;
-
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Use the @In(value) annotation on fields in an @GenDispatch class.
- * <p/>
- * See {@link GenDispatch} for an example.
- * <p/>
- * {@code value} Defines the order that fields should be specified in the
- *          constructor of the generated action class.
+ * Use the @{@link Optional} annotation to specify optional fields.
  * 
- * @author Brendan Doherty
- * @author Stephen Haberman (concept)
+ * <p>
+ * If one or more fields are declared optional, the system generates an
+ * additional pair of constructor and {@code fire} method that can be called
+ * without these fields.
+ * </p>
+ * <p>
+ * The omitted fields are not initialized and will contain
+ * their default value (i.e. objects will be initialized to {@code null}).
+ * </p>
+ * 
+ * <p>
+ * You can use this annotation with:
+ * </p>
+ * <ul>
+ * <li>@{@link GenEvent}</li>
+ * <li>@{@link GenDto}</li>
+ * <li>@{@link GenDispatch}</li>
+ * </ul>
+ * 
+ * <p>
+ * See the above annotations for specific behaviors with optional fields.
+ * </p>
+ * 
+ * @author Florian Sauter
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface In {
-  int value();
+public @interface Optional {
 }

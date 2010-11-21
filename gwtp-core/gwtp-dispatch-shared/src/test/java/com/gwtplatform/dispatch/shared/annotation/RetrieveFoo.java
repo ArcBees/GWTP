@@ -14,23 +14,29 @@
  * the License.
  */
 
-package com.gwtplatform.annotation;
+package com.gwtplatform.dispatch.shared.annotation;
 
 /**
  * For testing purposes only.
  * 
  * @author Brendan Doherty
  */
-@GenEvent
-public class FooChanged {
-  @Order(1)
+@GenDispatch
+public class RetrieveFoo {
+  @In(1)
+  int fooId;
+  
+  @In(2)
+  @Optional
+  String additionalQuestion;
+  
+  @Out(1)
   Foo foo;
-  @Order(2)
-  boolean originator;
+  
+  @Out(2)
+  int meaningOfLife;
+  
+  @Out(3)
   @Optional
-  @Order(3)
-  String additionalMessage;
-  @Optional
-  @Order(4)
-  double priority;
+  boolean answer42;
 }

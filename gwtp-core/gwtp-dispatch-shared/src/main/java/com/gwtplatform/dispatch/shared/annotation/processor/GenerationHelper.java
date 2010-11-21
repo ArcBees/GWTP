@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.annotation.processor;
+package com.gwtplatform.dispatch.shared.annotation.processor;
 
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -294,7 +294,7 @@ public class GenerationHelper implements Closeable {
    *  import {@link com.google.gwt.event.shared.EventHandler};
    *  import {@link com.google.gwt.event.shared.EventHandler};
    *  
-   *  import {@link com.gwtplatform.annotation.processor.GenEventProcessor};
+   *  import {@link com.gwtplatform.dispatch.shared.annotation.processor.GenEventProcessor};
    * </code></pre>
    * 
    * TODO: It seems as the compiler can't find GWT classes during generation - why?
@@ -329,7 +329,7 @@ public class GenerationHelper implements Closeable {
    * <p>
    * <b>Generated example:</b>
    * </p>
-   * <code>package com.gwtplatform.annotation.processor;</code>
+   * <code>package com.gwtplatform.dispatch.shared.annotation.processor;</code>
    */
   public void generatePackageDeclaration(String packageName) {
     println("package {0};", packageName);

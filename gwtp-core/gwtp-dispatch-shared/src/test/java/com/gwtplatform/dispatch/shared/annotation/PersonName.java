@@ -14,29 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.annotation;
+package com.gwtplatform.dispatch.shared.annotation;
 
 /**
  * For testing purposes only.
  * 
  * @author Brendan Doherty
  */
-@GenDispatch
-public class RetrieveFoo {
-  @In(1)
-  int fooId;
-  
-  @In(2)
+@GenDto
+public class PersonName {
+  @Order(1)
+  String firstName;
+  @Order(2)
+  String lastName;
   @Optional
-  String additionalQuestion;
-  
-  @Out(1)
-  Foo foo;
-  
-  @Out(2)
-  int meaningOfLife;
-  
-  @Out(3)
-  @Optional
-  boolean answer42;
+  @Order(3)
+  String secondName;
 }

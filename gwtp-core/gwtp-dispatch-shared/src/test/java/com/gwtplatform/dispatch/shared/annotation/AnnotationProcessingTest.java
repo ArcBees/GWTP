@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.annotation;
+package com.gwtplatform.dispatch.shared.annotation;
 
 import static org.junit.Assert.*;
 
