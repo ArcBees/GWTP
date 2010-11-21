@@ -14,20 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.annotation;
+package com.gwtplatform.dispatch.annotation;
 
 /**
  * For testing purposes only.
  * 
+ * @param <T> Type
+ * 
  * @author Brendan Doherty
  */
-@GenDto
-public class PersonName {
-  @Order(1)
-  String firstName;
-  @Order(2)
-  String lastName;
-  @Optional
-  @Order(3)
-  String secondName;
+public interface HasThing<T> {
+  T getThing();
 }
