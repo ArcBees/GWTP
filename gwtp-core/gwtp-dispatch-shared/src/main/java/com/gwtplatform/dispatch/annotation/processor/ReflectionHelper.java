@@ -14,12 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.annotation.processor;
+package com.gwtplatform.dispatch.annotation.processor;
 
-import com.gwtplatform.dispatch.shared.annotation.In;
-import com.gwtplatform.dispatch.shared.annotation.Optional;
-import com.gwtplatform.dispatch.shared.annotation.Order;
-import com.gwtplatform.dispatch.shared.annotation.Out;
+import com.gwtplatform.dispatch.annotation.In;
+import com.gwtplatform.dispatch.annotation.Optional;
+import com.gwtplatform.dispatch.annotation.Order;
+import com.gwtplatform.dispatch.annotation.Out;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;

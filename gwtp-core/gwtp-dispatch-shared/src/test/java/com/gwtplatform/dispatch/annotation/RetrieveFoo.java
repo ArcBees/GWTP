@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.annotation;
+package com.gwtplatform.dispatch.annotation;
 
 /**
  * For testing purposes only.
