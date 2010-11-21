@@ -17,6 +17,9 @@
     <properties>
         <appengine.version>1.3.1</appengine.version>
         <htmlunit.version>r5662-gae</htmlunit.version>
+
+        <!-- TODO: remove once public repo is available -->
+        <customCompiledDependenciesRepo>file:///${project.basedir}/../../mvnrepo</customCompiledDependenciesRepo>
     </properties>
 
     <build>
