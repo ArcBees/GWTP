@@ -15,6 +15,7 @@
     <name>GWTP Tester</name>
 
     <dependencies>
+        <!-- Compile Dependencies -->
         <dependency>
             <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-dispatch-shared</artifactId>
@@ -41,6 +42,22 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-gin</artifactId>
         </dependency>
-    </dependencies>
 
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>org.jukito</groupId>
+            <artifactId>jukito</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
