@@ -14,15 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.annotation;
+package com.gwtplatform.dispatch.annotation;
 
 /**
  * For testing purposes only.
  * 
- * @param <T> Type
- * 
  * @author Brendan Doherty
  */
-public interface HasThing<T> {
-  T getThing();
+@GenEvent
+public class FooChanged {
+  @Order(1)
+  Foo foo;
+  @Order(2)
+  boolean originator;
+  @Optional
+  @Order(3)
+  String additionalMessage;
+  @Optional
+  @Order(4)
+  double priority;
 }

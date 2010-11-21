@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.annotation;
+package com.gwtplatform.dispatch.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -23,13 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Use with <code>@GenEvent</code> or <code>@GenDto</code> to specify the order
- * of the fields in the constructor parameter list.
+ * Use the @Out(value) annotation on fields in an @GenDispatch class.
  * <p/>
- * Fields with an @Order will be first, sorted numerically, and then fields
- * without an @Order will be afterwards in an undefined order.
+ * See {@link GenDispatch} for an example.
  * <p/>
- * See {@link GenEvent} or {@link GenDto} for an example.
+ * {@code value} Defines the order that fields should be specified in the
+ *          constructor of the generated result class.
  * 
  * @author Brendan Doherty
  * @author Stephen Haberman (concept)
@@ -37,6 +36,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface Order {
+public @interface Out {
   int value();
 }
