@@ -15,7 +15,8 @@
     <name>GWTP MVP client</name>
 
     <properties>
-        <lib.dir>${basedir}/../../lib</lib.dir>
+        <!-- TODO: remove once public repo is available -->
+        <customCompiledDependenciesRepo>file:///${project.basedir}/../../mvnrepo</customCompiledDependenciesRepo>
     </properties>
 
     <build>
