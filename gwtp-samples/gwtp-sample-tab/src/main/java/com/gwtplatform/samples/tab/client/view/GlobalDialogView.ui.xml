@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+  <g:DialogBox modal="false" >
+    <g:caption>
+      <b>Global dialog box example</b>
+    </g:caption>
+    <g:HTMLPanel>
+      <p>This is an example of a global dialog PresenterWidget.</p>
+      <p>Try clicking tabs and navigating while the dialog is showing and<br />
+        it will not disappear.<br />
+        Compare this to the behavior of the presenter-local dialog box you<br />
+        get by clicking on the "Launch local dialog" button.</p>
+      <g:Label ui:field="navigationMessage"/>
+      <g:Button ui:field="okButton">Ok</g:Button>
+    </g:HTMLPanel>
+  </g:DialogBox>
+</ui:UiBinder> 

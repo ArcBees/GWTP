@@ -1,0 +1,77 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+	<!--
+		Copyright 2010 Philippe Beaudoin Licensed under the Apache License,
+		Version 2.0 (the "License"); you may not use this file except in
+		compliance with the License. You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+		applicable law or agreed to in writing, software distributed under the
+		License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+		CONDITIONS OF ANY KIND, either express or implied. See the License for
+		the specific language governing permissions and limitations under the
+		License.
+	-->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <ui:style src='../../defines.css' type='com.gwtplatform.samples.tab.client.ui.BaseTab.Style'>
+		.tab {
+			float: left;
+			margin-right: 8px;
+		}
+		
+		.tab a,.tab a:visited,.tab a:hover {
+			text-decoration: none;
+			cursor: pointer;
+			cursor: hand;
+			color: black;
+		}
+		
+		.tab_inner {
+			margin: 0px;
+			padding: 0px 13px;
+		}
+		
+		.active {
+			background-color: darkPanelColor;
+		}
+		
+		.inactive {
+			background-color: lightPanelColor;
+		}
+		
+		.round1,.round2,.round4 {
+			font-size: 0px;
+			height: 1px;
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		.round1 {
+			border-left: 1px solid white;
+			border-right: 1px solid white;
+		}
+		
+		.round2 {
+			border-left: 2px solid white;
+			border-right: 2px solid white;
+		}
+		
+		.round4 {
+			border-left: 4px solid white;
+			border-right: 4px solid white;
+		}
+	</ui:style>
+
+	<g:HTMLPanel addStyleNames="{style.tab} {style.inactive}">
+		<div class="{style.round4}" />
+		<div class="{style.round2}" />
+		<div class="{style.round1}" />
+		<div class="{style.tab_inner}">
+			<g:Hyperlink ui:field="hyperlink" />
+		</div>
+	</g:HTMLPanel>
+
+</ui:UiBinder>
