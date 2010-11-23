@@ -18,7 +18,7 @@
         <!-- TODO: Replace with correct repo url once is available and remove file repo -->
         <customCompiledDependenciesRepo>file:///${project.basedir}/../../mvnrepo</customCompiledDependenciesRepo>
     </properties>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -42,11 +42,31 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-shared</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-server</artifactId>
+        </dependency>
+
+        <!-- Google Web Toolkit dependencies -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+        </dependency>
+
+        <!-- DI dependencies -->
+        <dependency>
+            <groupId>com.google.code.guice</groupId>
+            <artifactId>guice</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.code.guice</groupId>
             <artifactId>guice-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-gin</artifactId>
         </dependency>
     </dependencies>
 </project>
