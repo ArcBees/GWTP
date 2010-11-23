@@ -1,0 +1,10 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		<h1>Choose one of the following...</h1>
+    <g:Button ui:field='all'>All Products</g:Button>
+    <g:Button ui:field='favorites'>Favorite Products</g:Button>
+    <g:Button ui:field='specials'>Specials</g:Button>
+	</g:HTMLPanel>
+</ui:UiBinder> 

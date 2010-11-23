@@ -25,6 +25,7 @@
     <modules>
         <module>gwtp-sample-basic</module>
         <module>gwtp-sample-nested</module>
+        <module>gwtp-sample-hplace</module>
     </modules>
 
     <build>
