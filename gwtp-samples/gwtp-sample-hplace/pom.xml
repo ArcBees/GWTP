@@ -13,7 +13,7 @@
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-hplace</artifactId>
     <packaging>war</packaging>
-    <name>GWTP hplace sample</name>
+    <name>GWTP Samples - hplace</name>
 
     <pluginRepositories>
         <!-- To use maven-processor-plugin -->
