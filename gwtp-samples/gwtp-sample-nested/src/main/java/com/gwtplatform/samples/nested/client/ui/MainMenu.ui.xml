@@ -1,0 +1,12 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with type="com.gwtplatform.samples.nested.client.NameTokens" field="nameTokens"></ui:with>
+
+	<g:HTMLPanel>
+		<g:InlineHyperlink targetHistoryToken="{nameTokens.getHomePage}">Home</g:InlineHyperlink> | 
+		<g:InlineHyperlink targetHistoryToken="{nameTokens.getAboutUsePage}">About Us</g:InlineHyperlink> | 
+		<g:InlineHyperlink targetHistoryToken="{nameTokens.getContactPage}">Contact</g:InlineHyperlink>
+	</g:HTMLPanel>
+</ui:UiBinder> 
