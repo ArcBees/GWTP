@@ -13,7 +13,7 @@
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-basic</artifactId>
     <packaging>war</packaging>
-    <name>GWTP basic sample</name>
+    <name>GWTP Samples - basic</name>
 
     <properties>
         <!-- TODO: Replace with correct repo url once is available and remove file repo -->
