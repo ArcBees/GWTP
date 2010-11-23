@@ -13,7 +13,7 @@
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-nested</artifactId>
     <packaging>war</packaging>
-    <name>GWTP nested sample</name>
+    <name>GWTP Samples - nested</name>
 
     <properties>
         <!-- TODO: remove once public repo is available -->

@@ -13,7 +13,7 @@
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-tab</artifactId>
     <packaging>war</packaging>
-    <name>GWTP tab sample</name>
+    <name>GWTP Samples - tab</name>
 
     <properties>
         <!-- TODO: remove once public repo is available -->
