@@ -12,6 +12,7 @@
 
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-basic</artifactId>
+    <packaging>war</packaging>
     <name>GWTP basic sample</name>
 
     <properties>
