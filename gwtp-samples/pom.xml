@@ -16,7 +16,10 @@
     <name>GWTP Samples</name>
 
     <properties>
+        <gwt.version>2.1.0</gwt.version>
+        <gwt-gin.version>1.0-r137</gwt-gin.version>
         <guice.version>2.0</guice.version>
+        <aopalliance.version>1.0</aopalliance.version>
     </properties>
 
     <modules>
@@ -95,10 +98,34 @@
                 <artifactId>gwtp-dispatch-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <!-- Google Web Toolkit dependencies -->
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-user</artifactId>
+                <version>${gwt.version}</version>
+            </dependency>
+
+            <!-- DI dependencies -->
+            <dependency>
+                <groupId>com.google.code.guice</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.google.code.guice</groupId>
                 <artifactId>guice-servlet</artifactId>
                 <version>${guice.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>aopalliance</groupId>
+                <artifactId>aopalliance</artifactId>
+                <version>${aopalliance.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-gin</artifactId>
+                <version>${gwt-gin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
