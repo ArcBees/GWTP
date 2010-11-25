@@ -57,6 +57,11 @@
                 <artifactId>gwtp-dispatch-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-tester</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Google Web Toolkit dependencies -->
             <dependency>
