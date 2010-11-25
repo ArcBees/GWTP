@@ -24,6 +24,13 @@
 
     <repositories>
         <repository>
+            <id>jukito-sonatype</id>
+            <url>https://oss.sonatype.org/content/groups/staging</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>Google guice repository</id>
             <url>http://guice-maven.googlecode.com/svn/trunk</url>
             <snapshots>
