@@ -20,6 +20,7 @@
   <property name="warlib.folder" location="war/WEB-INF/lib" />
   <property name="gwt.folder" location="${extlib.folder}/gwt" />
   <property name="gae.folder" location="${extlib.folder}/gae" />
+  <property name="spring.folder" location="${extlib.folder}/spring" />
   <property name="junit.folder" location="${extlib.folder}/junit" />
   <property name="htmlunit.folder" location="${lib.folder}" />
   <property name="mockito.folder" location="${lib.folder}" />
@@ -38,6 +39,7 @@
     <pathelement location="${out.classes.folder}" />
     <pathelement location="${gwt.folder}/gwt-user.jar"/>
     <fileset dir="${gwt.folder}" includes="gwt-dev*.jar"/>
+    <fileset dir="${spring.folder}" includes="*.jar"/>
     <fileset dir="${gae.folder}/lib">
       <include name="shared/**/*.jar" />
     </fileset>
@@ -95,7 +97,7 @@
     	
   <target name="javac" description="Compile java source (without external dependencies)">
     <mkdir dir="${out.classes.folder}" />
-    <javac srcdir="${in.src.folder}" includes="**" excludes="${in.src.springdependant},${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
+    <javac srcdir="${in.src.folder}" includes="**" excludes="${in.src.htmlunitdependant},${in.src.mockitodependant},${in.src.gwteventbusdependant}" encoding="utf-8" destdir="${out.classes.folder}" source="1.6" target="1.6" 
       nowarn="true" debug="true" debuglevel="lines,vars,source">
       <!-- Do not use any annotation processor -->
       <compilerarg value="-proc:none" />
