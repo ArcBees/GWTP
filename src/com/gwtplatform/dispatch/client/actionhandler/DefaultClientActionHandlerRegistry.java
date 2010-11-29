@@ -171,7 +171,6 @@ public class DefaultClientActionHandlerRegistry implements
     clientActionHandlers.put(actionType, handlerProvider);
   }
 
-  @SuppressWarnings("unchecked")
   public <A extends Action<R>, R extends Result> IndirectProvider<ClientActionHandler<?, ?>> find(
       Class<A> actionClass) {
 
