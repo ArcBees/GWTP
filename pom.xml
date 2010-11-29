@@ -4,7 +4,7 @@
 
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
-    <version>0.4-SNAPSHOT</version>
+    <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GWT-Platform</name>
 
@@ -12,6 +12,10 @@
         <module>gwtp-core</module>
         <module>gwtp-samples</module>
     </modules>
+
+     <scm>
+        <connection>scm:hg:https://gwt-platform.googlecode.com/hg/</connection>
+    </scm>
 
     <properties>
         <target.jdk>1.6</target.jdk>
@@ -74,6 +78,12 @@
                         <include>**/*TestCase.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
             </plugin>
         </plugins>
     </build>
