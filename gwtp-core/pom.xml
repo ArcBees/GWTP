@@ -47,7 +47,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Sub-modules dependencies -->
+            <!-- Sub-modules -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-clients-common</artifactId>
@@ -56,6 +56,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-shared</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gwtplatform</groupId>
+                <artifactId>gwtp-dispatch-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
