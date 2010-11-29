@@ -20,11 +20,11 @@ import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
 
+import com.gwtplatform.common.client.CodeSplitBundleProvider;
+import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.common.client.ProviderBundle;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
-import com.gwtplatform.mvp.client.CodeSplitBundleProvider;
-import com.gwtplatform.mvp.client.IndirectProvider;
-import com.gwtplatform.mvp.client.ProviderBundle;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -139,7 +139,7 @@ public class DefaultClientActionHandlerRegistry implements
   }
 
   /**
-   * Register a client-side action handler that is part of a {@link ProviderBundle}.
+   * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
    * 
    * @param actionType The type of {@link Action} that the 
    *          client-side action handler supports.

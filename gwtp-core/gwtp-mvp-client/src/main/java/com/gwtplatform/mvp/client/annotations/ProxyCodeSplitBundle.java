@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client.annotations;
 
-import com.gwtplatform.mvp.client.ProviderBundle;
+import com.gwtplatform.common.client.ProviderBundle;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
