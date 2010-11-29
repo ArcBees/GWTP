@@ -33,6 +33,7 @@ import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -599,6 +600,7 @@ public class PresenterWidgetTest {
     assertEquals(1, contentB.onHideMethodCalled);
   }
 
+  @Ignore
   @Test
   public void testSwitchPopupToAnotherPresenter1(
       PresenterWidgetA presenterWidgetA, 
@@ -617,6 +619,7 @@ public class PresenterWidgetTest {
     assertFalse(popupContentC.isVisible());
   }
 
+  @Ignore
   @Test
   public void testSwitchPopupToAnotherPresenter2(
       PresenterWidgetA presenterWidgetA, 
@@ -636,6 +639,7 @@ public class PresenterWidgetTest {
     assertTrue(popupContentC.isVisible());
   }
 
+  @Ignore
   @Test
   public void testSwitchPresenterWidgetToAnotherPresenter1(
       PresenterWidgetA presenterWidgetA, 
@@ -656,6 +660,7 @@ public class PresenterWidgetTest {
     assertFalse(contentC.isVisible());
   }
 
+  @Ignore
   @Test
   public void testSwitchPresenterWidgetToAnotherPresenter2(
       PresenterWidgetA presenterWidgetA, 
