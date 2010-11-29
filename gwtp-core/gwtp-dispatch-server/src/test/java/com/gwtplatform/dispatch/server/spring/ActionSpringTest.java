@@ -31,7 +31,7 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * @author Peter Simun
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:test/com/gwtplatform/dispatch/server/spring/spring-test-context.xml"})
+@ContextConfiguration(locations = {"spring-test-context.xml"})
 public class ActionSpringTest extends ActionTestBase {
 
   @Autowired
