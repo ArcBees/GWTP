@@ -13,7 +13,7 @@
         <module>gwtp-samples</module>
     </modules>
 
-     <scm>
+    <scm>
         <connection>scm:hg:https://gwt-platform.googlecode.com/hg/</connection>
     </scm>
 
