@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.client.actionhandler;
 
+import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
-import com.gwtplatform.mvp.client.IndirectProvider;
 
 /**
  * Implementations of this interface will be used by {@link DispatchAsync}

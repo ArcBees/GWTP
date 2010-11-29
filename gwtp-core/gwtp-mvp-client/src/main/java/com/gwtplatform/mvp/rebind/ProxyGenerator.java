@@ -46,13 +46,13 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import com.gwtplatform.mvp.client.CodeSplitBundleProvider;
-import com.gwtplatform.mvp.client.CodeSplitProvider;
+import com.gwtplatform.common.client.CodeSplitProvider;
+import com.gwtplatform.common.client.CodeSplitBundleProvider;
+import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.DelayedBind;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
-import com.gwtplatform.mvp.client.StandardProvider;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.annotations.NameToken;

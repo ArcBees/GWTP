@@ -20,10 +20,6 @@
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
 
-  <!-- Inherit shared modules -->
-  <inherits name='com.gwtplatform.common.ClientsCommon'/>
-  <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
-
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
 
