@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.common.client;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;

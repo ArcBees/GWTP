@@ -34,11 +34,9 @@
     </build>
 
     <dependencies>
-        <!-- TODO this should not be here. Dispatch should NOT depend on MVP -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-mvp-client</artifactId>
-            <version>${project.version}</version>
+            <artifactId>gwtp-clients-common</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

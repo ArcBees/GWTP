@@ -22,8 +22,8 @@ import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.StandardProvider;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.tester.DeferredCommandManager;
 
@@ -144,7 +144,7 @@ public class PlaceManagerImplTest {
   static class DummyProxyRedirect extends ProxyImpl<DummyPresenterRedirect> {
     @Inject
     public DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
-        this.presenter = new StandardProvider<DummyPresenterRedirect>(presenter);        
+        this.presenter = new StandardProvider<DummyPresenterRedirect>(presenter);
     };
   }
     
