@@ -41,9 +41,8 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
 
   private static final long serialVersionUID = 136176741488585959L;
 
-  private ServletContext servletContext = null;
-  
-  
+  private ServletContext servletContext;
+    
   @Autowired(required = false)
   protected String securityCookieName;
 
