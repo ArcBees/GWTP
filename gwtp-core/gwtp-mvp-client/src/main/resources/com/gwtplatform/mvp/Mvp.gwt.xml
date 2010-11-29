@@ -21,6 +21,9 @@
   <inherits name='com.google.gwt.user.User'/>
   <inherits name="com.google.gwt.inject.Inject" />
 
+  <!-- Inherit shared modules -->
+  <inherits name='com.gwtplatform.common.ClientsCommon'/>
+
   <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
     <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy" />
   </generate-with>
