@@ -61,12 +61,10 @@ public class SpringUtils {
       beanFactory.registerSingleton(
           new DefaultBeanNameGenerator().generateBeanName(createBeanDefinition(instance), beanFactory),
           instance);
-    } else if( applicationContext instanceof AbstractRefreshableWebApplicationContext) {
+    } else if (applicationContext instanceof AbstractRefreshableWebApplicationContext) {
         ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableWebApplicationContext) applicationContext).getBeanFactory();
-        beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance) ), instance);
+        beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance)), instance);
     }
-
-  
   }
 
   public static <B> B getInstance(ApplicationContext applicationContext,
@@ -76,7 +74,7 @@ public class SpringUtils {
     return beanFactory.getBean(clazz);
   }
   
-  private static <B> RootBeanDefinition createBeanDefinition( B instance ) {
+  private static <B> RootBeanDefinition createBeanDefinition(B instance) {
     RootBeanDefinition bd = new RootBeanDefinition(instance.getClass(),
         AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
     bd.setScope(BeanDefinition.SCOPE_SINGLETON);
@@ -104,7 +102,7 @@ public class SpringUtils {
     // Top-level bean: use plain class name.
     // Increase counter until the id is unique.
     int counter = -1;
-    while (counter == -1 || (registry.containsSingleton(id) )) {
+    while (counter == -1 || (registry.containsSingleton(id))) {
       counter++;
       id = generatedBeanName + "#" + counter;
     }
