@@ -65,7 +65,7 @@ public class MockingBinderTest {
   Binder binder;
   
   @AfterClass
-  public static void tearDown() {
+  public static void cleanup() {
     GWTMockUtilities.restore();
   }
   
