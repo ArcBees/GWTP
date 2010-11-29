@@ -20,7 +20,7 @@ import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-import com.gwtplatform.tester.MyView.Binder;
+import com.gwtplatform.tester.TestView.Binder;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -43,7 +43,7 @@ public class MockingBinderTest {
     /**
      * Test {@link Binder} delegating createAndBindUi to {@link MockingBinder}.
      */
-    static class MyTestBinder extends MockingBinder<Widget, MyView> implements Binder {
+    static class MyTestBinder extends MockingBinder<Widget, TestView> implements Binder {
       @Inject
       public MyTestBinder(MockitoMockFactory mockitoMockFactory) {
         super(Widget.class, mockitoMockFactory);
@@ -59,7 +59,7 @@ public class MockingBinderTest {
   
   // SUT
   @Inject
-  MyView view;
+  TestView view;
   
   @Inject
   Binder binder;
