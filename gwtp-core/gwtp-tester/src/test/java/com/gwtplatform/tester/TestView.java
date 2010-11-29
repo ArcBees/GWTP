@@ -27,11 +27,11 @@ import com.google.inject.Inject;
 /**
 * @author Christian Goudreau
 */
-public class MyView extends Composite {
+public class TestView extends Composite {
   /**
-   * {@link MyView}'s {@link UiBinder}.
+   * {@link TestView}'s {@link UiBinder}.
    */
-  public interface Binder extends UiBinder<Widget, MyView> {
+  public interface Binder extends UiBinder<Widget, TestView> {
   }
   
   @UiField
@@ -41,7 +41,7 @@ public class MyView extends Composite {
   TextBox someField;
 
   @Inject 
-  public MyView(final Binder uiBinder) {
+  public TestView(final Binder uiBinder) {
     initWidget(uiBinder.createAndBindUi(this));
   }
 }
