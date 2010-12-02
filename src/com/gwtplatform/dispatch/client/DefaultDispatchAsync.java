@@ -79,7 +79,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
           if (clientActionHandler.getActionType() != action.getClass()) {
             dispatchRequest.cancel();
             callback.onFailure(new ClientActionHandlerMismatchException(
-                action.getClass(), clientActionHandler.getActionType()));
+                (Class<? extends Action<?>>) action.getClass(), clientActionHandler.getActionType()));
             return;
           }
 
@@ -156,7 +156,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
           if (clientActionHandler.getActionType() != action.getClass()) {
             dispatchRequest.cancel();
             callback.onFailure(new ClientActionHandlerMismatchException(
-                action.getClass(), clientActionHandler.getActionType()));
+                (Class<? extends Action<?>>) action.getClass(), clientActionHandler.getActionType()));
             return;
           }
 
