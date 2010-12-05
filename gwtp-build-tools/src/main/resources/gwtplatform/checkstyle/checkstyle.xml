@@ -204,9 +204,9 @@
   <module name="Header">
     <property name="fileExtensions" value="java"/>
     <property name="severity" value="error"/>
-    <property name="headerFile" value="${config_loc}java.header"/>
+    <property name="headerFile" value="java.header"/>
   </module>
   <module name="SuppressionFilter">
-    <property name="file" value="${config_loc}suppressions.xml"/>
+    <property name="file" value="suppressions.xml"/>
   </module>
 </module>
