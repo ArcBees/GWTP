@@ -29,8 +29,56 @@
                     <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
                     <copyWebapp>true</copyWebapp>
-                    <runTarget>gwtpsample/Gwtpsample.html</runTarget>
+                    <runTarget>Gwtpsample.html</runTarget>
+                    <module>com.gwtplatform.samples.basic.Gwtpsample</module>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <useProjectReferences>true</useProjectReferences>
+
+                    <classpathContainers>
+                        <classpathContainer>com.google.appengine.eclipse.core.GAE_CONTAINER</classpathContainer>
+                        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+                        <classpathContainer>com.google.gwt.eclipse.core.GWT_CONTAINER</classpathContainer>
+                    </classpathContainers>
+
+                    <additionalBuildcommands>
+                        <buildcommand>com.google.gwt.eclipse.core.gwtProjectValidator</buildcommand>
+                        <buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
+                    </additionalBuildcommands>
+
+                    <additionalProjectnatures>
+                        <projectnature>com.google.appengine.eclipse.core.gaeNature</projectnature>
+                        <projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
+                        <projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
+                    </additionalProjectnatures>
+
+                    <additionalConfig>
+                        <file>
+                            <name>.settings/com.google.gwt.eclipse.core.prefs</name>
+                            <content><![CDATA[
+                                    eclipse.preferences.version=1
+                                    entryPointModules=com.gwtplatform.samples.basic.Gwtpsample
+                            ]]></content>
+                        </file>
+                        <file>
+                            <name>.checkstyle</name>
+                            <location>${checkstyleBaseLocation}/checkstyle-eclipse.xml</location>
+                        </file>
+                    </additionalConfig>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.gwtplatform</groupId>
+                        <artifactId>gwtp-build-tools</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
