@@ -20,6 +20,7 @@
         <gwt-gin.version>1.0-r137</gwt-gin.version>
         <guice.version>2.0</guice.version>
         <aopalliance.version>1.0</aopalliance.version>
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     </properties>
 
     <modules>
@@ -30,53 +31,8 @@
     </modules>
 
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.2</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/${project.build.finalName}/WEB-INF/</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-                                    <filtering>false</filtering>
-                                    <includes>
-                                        <include>web.xml</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>gwt-maven-plugin</artifactId>
-                    <version>2.1.0</version>
-                    <executions>
-                        <execution>
-                            <configuration>
-                                <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
-                            </configuration>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <!-- Generate compiled stuff in the folder used for developing mode -->
+        <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
     </build>
 
     <dependencyManagement>

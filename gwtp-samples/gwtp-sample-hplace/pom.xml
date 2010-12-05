@@ -26,6 +26,9 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <configuration>
+                    <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
+                    <hostedWebapp>${webappDirectory}</hostedWebapp>
+                    <copyWebapp>true</copyWebapp>
                     <runTarget>gwtphplacesample/Gwtphplacesample.html</runTarget>
                 </configuration>
             </plugin>
