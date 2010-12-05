@@ -9,6 +9,7 @@
     <name>GWT-Platform</name>
 
     <modules>
+        <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
         <module>gwtp-samples</module>
     </modules>
@@ -22,6 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
+        <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
+        <checkstyleBaseLocation>gwtplatform/checkstyle</checkstyleBaseLocation>
 
         <!-- TODO: Replace with correct repo url once is available and remove file repo -->
         <customCompiledDependenciesRepo>file:///${project.basedir}/mvnrepo</customCompiledDependenciesRepo>
@@ -75,14 +78,32 @@
                     <artifactId>maven-processor-plugin</artifactId>
                     <version>1.3.7</version>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-eclipse-plugin</artifactId>
                     <version>${maven-eclipse-plugin.version}</version>
+                    <configuration>
+                        <downloadSources>true</downloadSources>
+                        <downloadJavadocs>true</downloadJavadocs>
+                        <wtpversion>2.0</wtpversion>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.gwtplatform</groupId>
+                            <artifactId>gwtp-build-tools</artifactId>
+                            <version>${project.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
 
+        <!--
+        Plugins to be inherited by sub-projects.
+        Note that definitions and configurations of the following plugins in a sub module,
+        will override the top level parent pom's definition
+        -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -112,8 +133,29 @@
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>${maven-eclipse-plugin.version}</version>
                 <configuration>
-                    <!-- TODO: add global configurations -->
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <wtpversion>2.0</wtpversion>
+                    <additionalBuildcommands>
+                        <buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <additionalProjectnatures>
+                        <projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalConfig>
+                        <file>
+                            <name>.checkstyle</name>
+                            <location>${checkstyleBaseLocation}/checkstyle-eclipse.xml</location>
+                        </file>
+                    </additionalConfig>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.gwtplatform</groupId>
+                        <artifactId>gwtp-build-tools</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
@@ -121,6 +163,21 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.1</version>
             </plugin>
+
+<!-- TODO: setup maven-checkstyle-plugin to use gwtp's checkstyle config from gwtp-build-tools
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.gwtplatform</groupId>
+                        <artifactId>gwtp-build-tools</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+-->
         </plugins>
     </build>
 </project>
