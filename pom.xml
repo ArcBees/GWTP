@@ -69,16 +69,6 @@
             <url>http://download.java.net/maven/2/</url>
             <layout>default</layout>
         </pluginRepository>
-        <!-- TODO: remove as soon as gwt-maven-plugin:2.1.0-1 becomes available in central -->
-        <pluginRepository>
-            <id>codehaus-plugin-stage</id>
-            <name>Codehaus Stage Repo</name>
-            <url>https://nexus.codehaus.org/content/repositories/orgcodehausmojo-047/</url>
-            <releases>
-                <updatePolicy>always</updatePolicy>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
     </pluginRepositories>
 
     <build>
