@@ -28,7 +28,6 @@
         <appEngine.version>1.4.0</appEngine.version>
         <!-- TODO: Replace with correct repo url once is available and remove file repo -->
         <customCompiledDependenciesRepo>file:///${project.basedir}/mvnrepo</customCompiledDependenciesRepo>
-        <checkstyleBaseLocation>gwtplatform/checkstyle</checkstyleBaseLocation>
     </properties>
 
     <repositories>
@@ -165,7 +164,7 @@
                     <additionalConfig>
                         <file>
                             <name>.checkstyle</name>
-                            <location>${checkstyleBaseLocation}/checkstyle-eclipse.xml</location>
+                            <location>/gwtp-eclipse-checkstyle.xml</location>
                         </file>
                     </additionalConfig>
                 </configuration>
@@ -184,20 +183,41 @@
                 <version>2.1</version>
             </plugin>
 
-            <!-- TODO: setup maven-checkstyle-plugin to use gwtp's checkstyle config from gwtp-build-tools
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-checkstyle-plugin</artifactId>
-                            <version>${maven-checkstyle-plugin}</version>
-                            <dependencies>
-                                <dependency>
-                                    <groupId>com.gwtplatform</groupId>
-                                    <artifactId>gwtp-build-tools</artifactId>
-                                    <version>${project.version}</version>
-                                </dependency>
-                            </dependencies>
-                        </plugin>
-            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <configLocation>/gwtp-checkstyle.xml</configLocation>
+                    <headerLocation>/gwtp-java-header.txt</headerLocation>
+                    <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
+                    <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
+                    <!-- Used in gwtp-checkstyle.xml to construct absolute paths for eclipse -->
+                    <propertyExpansion>basedir=${basedir}</propertyExpansion>
+                    <consoleOutput>true</consoleOutput>
+                    <!--<failsOnError>true</failsOnError>-->
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.gwtplatform</groupId>
+                        <artifactId>gwtp-build-tools</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <!-- Run checkstyle goal while in validate phase.
+                    A desired side-effect is that checkstyle config files will be
+                    copied where eclipse expects them to be (under target) -->
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
