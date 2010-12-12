@@ -16,12 +16,12 @@
 
 package com.gwtplatform.samples.basic.client;
 
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Inject;
+
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
-
-import com.google.gwt.event.shared.EventBus;
-import com.google.inject.Inject;
 
 /**
  * @author Philippe Beaudoin

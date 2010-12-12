@@ -11,4 +11,7 @@
   <!-- Suppress files under target -->
   <suppress checks=".*" files=".*[/\\]target[/\\].*" />
 
+  <!-- Suppress files under com/google -->  
+  <suppress checks=".*" files="com[/\\]google[/\\]" />
+
 </suppressions>
