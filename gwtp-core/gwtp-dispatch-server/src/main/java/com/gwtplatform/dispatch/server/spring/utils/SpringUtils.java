@@ -61,12 +61,10 @@ public class SpringUtils {
       beanFactory.registerSingleton(
           new DefaultBeanNameGenerator().generateBeanName(createBeanDefinition(instance), beanFactory),
           instance);
-    } else if( applicationContext instanceof AbstractRefreshableWebApplicationContext) {
+    } else if ( applicationContext instanceof AbstractRefreshableWebApplicationContext) {
         ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableWebApplicationContext) applicationContext).getBeanFactory();
         beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance) ), instance);
     }
-
-  
   }
 
   public static <B> B getInstance(ApplicationContext applicationContext,
