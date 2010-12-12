@@ -19,19 +19,17 @@ package com.gwtplatform.dispatch.server.spring;
 import com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.RequestProvider;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.context.ServletContextAware;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * @author Peter Simun
@@ -42,7 +40,6 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
   private static final long serialVersionUID = 136176741488585959L;
 
   private ServletContext servletContext = null;
-  
   
   @Autowired(required = false)
   protected String securityCookieName;
