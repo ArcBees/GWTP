@@ -67,7 +67,7 @@
                         </file>
                         <file>
                             <name>.checkstyle</name>
-                            <location>${checkstyleBaseLocation}/checkstyle-eclipse.xml</location>
+                            <location>/gwtp-eclipse-checkstyle.xml</location>
                         </file>
                     </additionalConfig>
                 </configuration>
