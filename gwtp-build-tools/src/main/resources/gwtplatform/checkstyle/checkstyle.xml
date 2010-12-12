@@ -175,10 +175,10 @@
     </module>
     <module name="RedundantModifier"/>
     <module name="EqualsHashCode"/>
-    <module name="PackageHtml">
-      <property name="severity" value="ignore"/>
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
-    </module>
+  </module>
+  <module name="JavadocPackage">
+    <property name="severity" value="ignore"/>
+    <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
   </module>
   <module name="FileTabCharacter">
     <property name="severity" value="error"/>
