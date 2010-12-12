@@ -195,7 +195,7 @@
                     <!-- Used in gwtp-checkstyle.xml to construct absolute paths for eclipse -->
                     <propertyExpansion>basedir=${basedir}</propertyExpansion>
                     <consoleOutput>true</consoleOutput>
-                    <!--<failsOnError>true</failsOnError>-->
+                    <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
                 </configuration>
                 <dependencies>
