@@ -25,6 +25,7 @@
         <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
         <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
         <gwt-maven-plugin.version>2.1.0-1</gwt-maven-plugin.version>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <appEngine.version>1.4.0</appEngine.version>
         <!-- TODO: Replace with correct repo url once is available and remove file repo -->
         <customCompiledDependenciesRepo>file:///${project.basedir}/mvnrepo</customCompiledDependenciesRepo>
@@ -73,6 +74,17 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${target.jdk}</source>
+                        <target>${target.jdk}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+
                 <plugin>
                     <groupId>org.bsc.maven</groupId>
                     <artifactId>maven-processor-plugin</artifactId>
@@ -127,7 +139,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${target.jdk}</source>
                     <target>${target.jdk}</target>
