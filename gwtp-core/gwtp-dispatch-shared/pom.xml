@@ -27,12 +27,59 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
+                    <include>**/*.Processor</include>
                     <include>**/*.gwt.xml</include>
                 </includes>
             </resource>
         </resources>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <useProjectReferences>true</useProjectReferences>
+                    <additionalBuildcommands>
+                        <buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <additionalProjectnatures>
+                        <projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalConfig>
+                        <!--
+                        <file>
+                            <name>.factorypath</name>
+                            <content><![CDATA[
+                                <factorypath>
+                                <factorypathentry kind="VARJAR" id="M2_REPO/com/gwtplatform/${project.artifactId}/${project.version}/${project.build.finalName}.jar" enabled="true" runInBatchMode="false"/>
+                                </factorypath>
+                            ]]></content>
+                        </file>
+                        <file>
+                            <name>.settings/org.eclipse.jdt.apt.core.prefs</name>
+                            <content><![CDATA[
+                                eclipse.preferences.version=1
+                                org.eclipse.jdt.apt.aptEnabled=true
+                                org.eclipse.jdt.apt.genSrcDir=target/generated-sources/apt
+                                org.eclipse.jdt.apt.reconcileEnabled=true
+                            ]]></content>
+                        </file>
+                        -->
+                        <file>
+                            <name>.checkstyle</name>
+                            <location>/gwtp-eclipse-checkstyle.xml</location>
+                        </file>
+                    </additionalConfig>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.gwtplatform</groupId>
+                        <artifactId>gwtp-build-tools</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
             <!-- Disable annotation processors during normal compilation -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -41,11 +88,36 @@
                     <proc>none</proc>
                 </configuration>
             </plugin>
-
-            <!-- Run annotation processors on src/test/java sources -->
+            <!--
             <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
+                &lt;!&ndash; Run annotation processors on src/main/java and src/test/java sources &ndash;&gt;
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <goals>
+                            <goal>process</goal>
+                            <goal>process-test</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            &lt;!&ndash;<failOnError>false</failOnError>&ndash;&gt;
+                            <processors>
+                                &lt;!&ndash; list of processors to use &ndash;&gt;
+                                <processor>com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor</processor>
+                                <processor>com.gwtplatform.dispatch.annotation.processor.GenEventProcessor</processor>
+                                <processor>com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor</processor>
+                            </processors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <!-- Run annotation processors on src/test/java sources -->
                 <executions>
                     <execution>
                         <id>process-test</id>
