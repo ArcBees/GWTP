@@ -48,13 +48,13 @@
 
                     <additionalBuildcommands>
                         <buildcommand>com.google.gwt.eclipse.core.gwtProjectValidator</buildcommand>
-                        <buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
+                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
                     </additionalBuildcommands>
 
                     <additionalProjectnatures>
                         <projectnature>com.google.appengine.eclipse.core.gaeNature</projectnature>
                         <projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
-                        <projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
+                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
                     </additionalProjectnatures>
 
                     <additionalConfig>

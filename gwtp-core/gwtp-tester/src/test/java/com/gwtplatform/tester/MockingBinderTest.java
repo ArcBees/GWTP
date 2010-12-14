@@ -16,20 +16,19 @@
 
 package com.gwtplatform.tester;
 
-import com.google.gwt.junit.GWTMockUtilities;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
-
-import com.gwtplatform.tester.TestView.Binder;
-
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.google.gwt.junit.GWTMockUtilities;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.tester.TestView.Binder;
 
 /**
 * @author Christian Goudreau

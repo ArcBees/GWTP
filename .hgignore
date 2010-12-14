@@ -29,3 +29,8 @@ glob:*.iml
 glob:*.ipr
 glob:*.iws
 glob:*.eml
+glob:**/.checkstyle
+glob:**/.classpath
+glob:**/.project
+glob:**/.settings/**
+glob:**/.factorypath

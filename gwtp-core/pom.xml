@@ -22,6 +22,7 @@
         <module>gwtp-dispatch-shared</module>
         <module>gwtp-dispatch-server</module>
         <module>gwtp-tester</module>
+        <module>gwtp-processors</module>
         <module>gwtp-crawler</module>
     </modules>
 
@@ -45,6 +46,15 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>        
+        </plugins>
+    </build>
+
     <dependencyManagement>
         <dependencies>
             <!-- Sub-modules -->
@@ -66,6 +76,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-processors</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
