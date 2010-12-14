@@ -92,24 +92,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-eclipse-plugin</artifactId>
-                    <version>${maven-eclipse-plugin.version}</version>
-                    <configuration>
-                        <downloadSources>true</downloadSources>
-                        <downloadJavadocs>true</downloadJavadocs>
-                        <wtpversion>2.0</wtpversion>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.gwtplatform</groupId>
-                            <artifactId>gwtp-build-tools</artifactId>
-                            <version>${project.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
                     <version>${gwt-maven-plugin.version}</version>
@@ -127,6 +109,39 @@
                         </execution>
                     </executions>
                 </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <configLocation>/gwtp-checkstyle.xml</configLocation>
+                        <headerLocation>/gwtp-java-header.txt</headerLocation>
+                        <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
+                        <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
+                        <propertyExpansion>basedir=${basedir}</propertyExpansion>
+                        <consoleOutput>true</consoleOutput>
+                        <failsOnError>true</failsOnError>
+                        <linkXRef>false</linkXRef>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.gwtplatform</groupId>
+                            <artifactId>gwtp-build-tools</artifactId>
+                            <version>${project.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>validate</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>checkstyle</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                
             </plugins>
         </pluginManagement>
 
@@ -168,10 +183,10 @@
                     <downloadJavadocs>true</downloadJavadocs>
                     <wtpversion>2.0</wtpversion>
                     <additionalBuildcommands>
-                        <buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
+                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
                     </additionalBuildcommands>
                     <additionalProjectnatures>
-                        <projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
+                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
                     </additionalProjectnatures>
                     <additionalConfig>
                         <file>
@@ -194,42 +209,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.1</version>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <configLocation>/gwtp-checkstyle.xml</configLocation>
-                    <headerLocation>/gwtp-java-header.txt</headerLocation>
-                    <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
-                    <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
-                    <!-- Used in gwtp-checkstyle.xml to construct absolute paths for eclipse -->
-                    <propertyExpansion>basedir=${basedir}</propertyExpansion>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.gwtplatform</groupId>
-                        <artifactId>gwtp-build-tools</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <!-- Run checkstyle goal while in validate phase.
-                    A desired side-effect is that checkstyle config files will be
-                    copied where eclipse expects them to be (under target) -->
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>checkstyle</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            
         </plugins>
     </build>
 </project>
