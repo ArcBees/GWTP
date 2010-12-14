@@ -16,7 +16,9 @@
 
 package com.gwtplatform.dispatch.annotation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This test is being run by ant, but is not run in eclipse.
@@ -26,7 +28,6 @@ import static org.junit.Assert.*;
  * @author Brendan Doherty
  * @author Florian Sauter
  */
-@SuppressWarnings("unused")
 public class AnnotationProcessingTest {
 
   @org.junit.Test
@@ -52,13 +53,13 @@ public class AnnotationProcessingTest {
     assertTrue(1.0 == event.getPriority());
     
     try {
-      event.fire(null, foo, false, "fireMessage", 2.0);
+      FooChangedEvent.fire(null, foo, false, "fireMessage", 2.0);
     } catch (NullPointerException e) {
       // the method fire was generated correctly
     }
     
     try {
-      event.fire(null, foo, true);
+      FooChangedEvent.fire(null, foo, true);
     } catch (NullPointerException e) {
       // the method fire was generated correctly
     }
