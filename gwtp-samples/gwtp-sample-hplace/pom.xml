@@ -37,7 +37,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <configuration>
-                    <useProjectReferences>true</useProjectReferences>
+                    <useProjectReferences>false</useProjectReferences>
 
                     <classpathContainers>
                         <classpathContainer>com.google.appengine.eclipse.core.GAE_CONTAINER</classpathContainer>
@@ -70,7 +70,7 @@
                             <content><![CDATA[
                                 eclipse.preferences.version=1
                                 org.eclipse.jdt.apt.aptEnabled=true
-                                org.eclipse.jdt.apt.genSrcDir=target/generated-sources/apt-test
+                                org.eclipse.jdt.apt.genSrcDir=target/generated-sources/apt
                                 org.eclipse.jdt.apt.reconcileEnabled=true
                             ]]></content>
                         </file>
