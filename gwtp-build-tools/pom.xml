@@ -14,4 +14,12 @@
     <artifactId>gwtp-build-tools</artifactId>
     <name>GWTP Build Tools</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

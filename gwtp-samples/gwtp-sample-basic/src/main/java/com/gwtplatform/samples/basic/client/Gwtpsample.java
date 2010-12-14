@@ -26,7 +26,7 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  */
 public class Gwtpsample implements EntryPoint {
   public final MyGinjector ginjector = GWT.create(MyGinjector.class);
-
+  
   public void onModuleLoad() {
 
     DelayedBindRegistry.bind(ginjector);
