@@ -15,11 +15,6 @@
     <packaging>war</packaging>
     <name>GWTP Samples - basic Spring</name>
 
-    <properties>
-        <!-- TODO: Replace with correct repo url once is available and remove file repo -->
-        <customCompiledDependenciesRepo>file:///${project.basedir}/../../mvnrepo</customCompiledDependenciesRepo>
-    </properties>
-
     <build>
         <plugins>
             <plugin>

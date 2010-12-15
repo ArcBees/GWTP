@@ -14,11 +14,6 @@
     <artifactId>gwtp-mvp-client</artifactId>
     <name>GWTP MVP client</name>
 
-    <properties>
-        <!-- TODO: remove once public repo is available -->
-        <customCompiledDependenciesRepo>file:///${project.basedir}/../../mvnrepo</customCompiledDependenciesRepo>
-    </properties>
-
     <build>
         <resources>
             <!-- bundle sources with the jar, so they are visible to GWT's compiler -->
