@@ -16,12 +16,6 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.junit.GWTMockUtilities;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -33,9 +27,14 @@ import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.junit.GWTMockUtilities;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Unit tests for {@link PresenterWidget}.
@@ -165,7 +164,6 @@ public class PresenterWidgetTest {
     assertFalse(presenterWidget.isVisible());
   }
 
-  @Ignore
   @Test
   public void testAddCenteredPopupOnInitiallyInvisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
@@ -214,7 +212,6 @@ public class PresenterWidgetTest {
     verify(popupContentC.getView()).hide();
   }
 
-  @Ignore
   @Test
   public void testAddCenteredPopupOnInitiallyVisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
@@ -299,7 +296,6 @@ public class PresenterWidgetTest {
     assertEquals(1, contentC.onHideMethodCalled);
   }
 
-  @Ignore
   @Test
   public void testAddUncenteredPopupOnInitiallyInvisiblePresenter(
       PresenterWidgetA presenterWidgetA, 
@@ -603,7 +599,6 @@ public class PresenterWidgetTest {
     assertEquals(1, contentB.onHideMethodCalled);
   }
 
-  @Ignore
   @Test
   public void testSwitchPopupToAnotherPresenter1(
       PresenterWidgetA presenterWidgetA, 
@@ -622,7 +617,6 @@ public class PresenterWidgetTest {
     assertFalse(popupContentC.isVisible());
   }
 
-  @Ignore
   @Test
   public void testSwitchPopupToAnotherPresenter2(
       PresenterWidgetA presenterWidgetA, 
@@ -642,7 +636,6 @@ public class PresenterWidgetTest {
     assertTrue(popupContentC.isVisible());
   }
 
-  @Ignore
   @Test
   public void testSwitchPresenterWidgetToAnotherPresenter1(
       PresenterWidgetA presenterWidgetA, 
@@ -663,7 +656,6 @@ public class PresenterWidgetTest {
     assertFalse(contentC.isVisible());
   }
 
-  @Ignore
   @Test
   public void testSwitchPresenterWidgetToAnotherPresenter2(
       PresenterWidgetA presenterWidgetA, 

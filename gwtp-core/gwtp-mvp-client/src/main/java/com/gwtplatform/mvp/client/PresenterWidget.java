@@ -203,7 +203,9 @@ public abstract class PresenterWidget<V extends View> extends
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
       monitorCloseEvent(child);
-      child.internalReveal();
+      if (!child.isVisible()) {
+        child.internalReveal();
+      }
     }
   }
 
@@ -350,7 +352,9 @@ public abstract class PresenterWidget<V extends View> extends
     if (isVisible()) {
       // This presenter is visible, its time to call onReveal
       // on the newly added child (and recursively on this child children)
-      content.internalReveal();
+      if (!content.isVisible()) {
+        content.internalReveal();
+      }
       if (performReset) {
         // And to reset everything if needed
         ResetPresentersEvent.fire(this);
