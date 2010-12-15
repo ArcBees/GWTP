@@ -167,7 +167,7 @@
         </repository>
         <repository>
             <id>Custom Compiled dependencies, including gin-r137 and htmlunit-r5662</id>
-            <url>https://maven.gwt-platform.googlecode.com/hg/</url>
+            <url>http://maven.gwt-platform.googlecode.com/hg</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
