@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.gwtplatform</groupId>
+        <artifactId>gwtp</artifactId>
+        <version>0.5-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.gwtplatform</groupId>
+    <artifactId>gwtp-samples</artifactId>
+    <packaging>pom</packaging>
+    <name>GWTP Samples</name>
+
+    <properties>
+        <gwt.version>2.1.0</gwt.version>
+        <gwt-gin.version>1.0-r137</gwt-gin.version>
+        <guice.version>2.0</guice.version>
+        <aopalliance.version>1.0</aopalliance.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+    </properties>
+
+    <modules>
+        <module>gwtp-sample-basic</module>
+        <module>gwtp-sample-basic-spring</module>
+        <module>gwtp-sample-hplace</module>
+        <module>gwtp-sample-nested</module>
+        <module>gwtp-sample-tab</module>
+    </modules>
+
+    <build>
+        <!-- Generate compiled stuff in the folder used for developing mode -->
+        <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>        
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-mvp-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-shared</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-processors</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Google Web Toolkit dependencies -->
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-user</artifactId>
+                <version>${gwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-servlet</artifactId>
+                <version>${gwt.version}</version>
+            </dependency>
+
+            <!-- DI dependencies -->
+            <dependency>
+                <groupId>com.google.code.guice</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.guice</groupId>
+                <artifactId>guice-servlet</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>aopalliance</groupId>
+                <artifactId>aopalliance</artifactId>
+                <version>${aopalliance.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-gin</artifactId>
+                <version>${gwt-gin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

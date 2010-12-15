@@ -1,0 +1,15 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:npui="urn:import:com.gwtplatform.samples.nested.client.ui">
+	
+	<g:HTMLPanel>
+	  <div ui:field="loadingMessage" style="position:absolute; top:0; left:0; background-color:yellow;">
+	  Loading...</div>
+		<npui:MainMenu />
+		
+		<g:FlowPanel ui:field="mainContentPanel" />
+		
+		<npui:MainMenu />
+	</g:HTMLPanel>
+</ui:UiBinder> 
