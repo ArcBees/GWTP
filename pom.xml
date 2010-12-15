@@ -27,8 +27,12 @@
         <gwt-maven-plugin.version>2.1.0-1</gwt-maven-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <appEngine.version>1.4.0</appEngine.version>
-        <!-- TODO: Replace with correct repo url once is available and remove file repo -->
+        <!-- TODO: Replace with correct repo url once is available and remove file repo
+             We have 3 levels to overcome an issue with the build server on which ${basedir} is
+             not the directory of the top-level POM, but the directory of the child POM. -->
         <customCompiledDependenciesRepo>file://${basedir}/mvnrepo</customCompiledDependenciesRepo>
+        <customCompiledDependenciesRepo1>file://${basedir}/../mvnrepo</customCompiledDependenciesRepo1>
+        <customCompiledDependenciesRepo2>file://${basedir}/../../mvnrepo</customCompiledDependenciesRepo2>
     </properties>
 
     <repositories>
@@ -49,9 +53,30 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
+        <!-- See above for an explanation of these three repositories -->
         <repository>
             <id>Custom Compiled dependencies</id>
             <url>${customCompiledDependenciesRepo}</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>Custom Compiled dependencies 1</id>
+            <url>${customCompiledDependenciesRepo1}</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>Custom Compiled dependencies 2</id>
+            <url>${customCompiledDependenciesRepo2}</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
