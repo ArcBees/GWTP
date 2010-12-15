@@ -20,11 +20,13 @@
         <gwt-gin.version>1.0-r137</gwt-gin.version>
         <guice.version>2.0</guice.version>
         <aopalliance.version>1.0</aopalliance.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     </properties>
 
     <modules>
         <module>gwtp-sample-basic</module>
+        <module>gwtp-sample-basic-spring</module>
         <module>gwtp-sample-hplace</module>
         <module>gwtp-sample-nested</module>
         <module>gwtp-sample-tab</module>
@@ -76,6 +78,11 @@
                 <artifactId>gwt-user</artifactId>
                 <version>${gwt.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-servlet</artifactId>
+                <version>${gwt.version}</version>
+            </dependency>
 
             <!-- DI dependencies -->
             <dependency>
@@ -97,6 +104,17 @@
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-gin</artifactId>
                 <version>${gwt-gin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
