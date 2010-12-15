@@ -7,7 +7,7 @@
   
   <context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:META-INF/spring/applicationContext*.xml</param-value>
+		<param-value>META-INF/spring/applicationContext.xml</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -27,7 +27,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Gwtpsample.html</welcome-file>
+    <welcome-file>Gwtpsamplespring.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
