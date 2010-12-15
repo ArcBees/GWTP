@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gwtplatform</groupId>
@@ -7,16 +7,134 @@
     <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GWT-Platform</name>
+    <inceptionYear>2010</inceptionYear>
+    <description>A complete model-view-presenter framework to simplify your next GWT project.</description>
+    <url>http://gwtplatform.com</url>
 
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>ArcBees</name>
+        <url>http://arcbees.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>philippe.beaudoin</id>
+            <name>Philippe Beaudoin</name>
+            <email>philippe.beaudoin@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>lead developer</role>
+            </roles>
+            <timezone>-8</timezone>
+            <properties>
+                <picUrl>http://goo.gl/xV2K8</picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>goudreau.christian</id>
+            <name>Christain Goudreau</name>
+            <email>goudreau.christian@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+        <developer>
+            <id>brendanpdoherty</id>
+            <name>Brendan Doherty</name>
+            <email>brendan@doherty.net.nz</email>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Olivier Monaco</name>
+            <email>monaco.olivier@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Gene Conroy-Jones</name>
+            <email>drgenejones@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Raphael André Bauer</name>
+            <email>raphael.andre.bauer@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Jian Jiang</name>
+            <email>youarehow2@gmail.com></email>
+        </contributor>
+        <contributor>
+            <name>Peter Simun</name>
+            <email>Peter.Simun@seges.sk</email>
+        </contributor>
+        <contributor>
+            <name>David Peterson</name>
+            <email>david.peterson@customware.net</email>
+        </contributor>
+        <contributor>
+            <name>David M. Chandler</name>
+            <email>david@turbomanage.com</email>
+        </contributor>
+        <contributor>
+            <name>Chema Molins</name>
+            <email>chemamolins@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Bailey Cosier</name>
+            <email>bailey@cosier.org</email>
+        </contributor>
+        <contributor>
+            <name>Florian Sauter</name>
+            <email>floonweb@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Yannis Gonianakis</name>
+            <email>jgonian@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Denis Labaye</name>
+            <email>denis.labaye@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Travis Camechis</name>
+            <email>camechis@gmail.com</email>
+        </contributor>
+    </contributors>
+    
+    <scm>
+        <connection>scm:hg:https://gwt-platform.googlecode.com/hg/</connection>
+        <url>http://code.google.com/p/gwt-platform/source/browse/</url>
+    </scm>
+    
+    <issueManagement>
+      <system>Google Code</system>
+      <url>http://code.google.com/p/gwt-platform/issues</url>
+    </issueManagement>
+    
+    <ciManagement>
+      <system>Team City</system>
+      <url>http://teamcity.codebetter.com</url>
+    </ciManagement>
+    
     <modules>
         <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
         <module>gwtp-samples</module>
     </modules>
-
-    <scm>
-        <connection>scm:hg:https://gwt-platform.googlecode.com/hg/</connection>
-    </scm>
 
     <properties>
         <target.jdk>1.6</target.jdk>
@@ -27,12 +145,6 @@
         <gwt-maven-plugin.version>2.1.0-1</gwt-maven-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <appEngine.version>1.4.0</appEngine.version>
-        <!-- TODO: Replace with correct repo url once is available and remove file repo
-             We have 3 levels to overcome an issue with the build server on which ${basedir} is
-             not the directory of the top-level POM, but the directory of the child POM. -->
-        <customCompiledDependenciesRepo>file://${basedir}/mvnrepo</customCompiledDependenciesRepo>
-        <customCompiledDependenciesRepo1>file://${basedir}/../mvnrepo</customCompiledDependenciesRepo1>
-        <customCompiledDependenciesRepo2>file://${basedir}/../../mvnrepo</customCompiledDependenciesRepo2>
     </properties>
 
     <repositories>
@@ -53,30 +165,9 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
-        <!-- See above for an explanation of these three repositories -->
         <repository>
-            <id>Custom Compiled dependencies</id>
-            <url>${customCompiledDependenciesRepo}</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>Custom Compiled dependencies 1</id>
-            <url>${customCompiledDependenciesRepo1}</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>Custom Compiled dependencies 2</id>
-            <url>${customCompiledDependenciesRepo2}</url>
+            <id>Custom Compiled dependencies, including gin-r137 and htmlunit-r5662</id>
+            <url>https://maven.gwt-platform.googlecode.com/hg/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -134,7 +225,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
@@ -166,15 +257,13 @@
                         </execution>
                     </executions>
                 </plugin>
-                
+
             </plugins>
         </pluginManagement>
 
-        <!--
-        Plugins to be inherited by sub-projects.
-        Note that definitions and configurations of the following plugins in a sub module,
-        will override the top level parent pom's definition
-        -->
+        <!-- Plugins to be inherited by sub-projects. Note that definitions 
+            and configurations of the following plugins in a sub module, will override 
+            the top level parent pom's definition -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -234,7 +323,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.1</version>
             </plugin>
-            
+
         </plugins>
     </build>
 </project>
