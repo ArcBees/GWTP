@@ -235,7 +235,7 @@
                         <headerLocation>/gwtp-java-header.txt</headerLocation>
                         <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
                         <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
-                        <propertyExpansion>basedir=${basedir}</propertyExpansion>
+                        <propertyExpansion>basedir=${project.basedir}</propertyExpansion>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>true</failsOnError>
                         <linkXRef>false</linkXRef>
