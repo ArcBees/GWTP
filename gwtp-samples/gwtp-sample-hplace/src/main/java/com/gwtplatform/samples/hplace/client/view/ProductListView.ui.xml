@@ -1,0 +1,10 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		<h1 ui:field="title" />
+    <g:FlowPanel ui:field="productList" />
+    <br />
+    <g:Hyperlink ui:field="backLink">&laquo; Go back</g:Hyperlink>
+	</g:HTMLPanel>
+</ui:UiBinder> 
