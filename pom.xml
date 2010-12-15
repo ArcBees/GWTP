@@ -1,174 +1,215 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.philbeaudoin</groupId>
-	<artifactId>gwtp</artifactId>
-	<version>0.4-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>GWT-Platform</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<properties>
-		<gwt-gin.version>1.0-r137</gwt-gin.version>
-		<guice.version>2.0</guice.version>
-		<aopalliance.version>1.0</aopalliance.version>
-		<gwt.version>2.0.4</gwt.version>
-		<spring.version>3.0.3.RELEASE</spring.version>
-		<mockito.version>1.8.4</mockito.version>
-		<junit.version>4.5</junit.version>
-		<appengine.version>1.3.1</appengine.version>
-		<htmlunit.version>r5662-gae</htmlunit.version>
-		<cglib.version>2.2</cglib.version>
-	</properties>
+    <groupId>com.gwtplatform</groupId>
+    <artifactId>gwtp</artifactId>
+    <version>0.5-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>GWT-Platform</name>
 
+    <modules>
+        <module>gwtp-build-tools</module>
+        <module>gwtp-core</module>
+        <module>gwtp-samples</module>
+    </modules>
 
-	<repositories>
-		<repository>
-			<id>Google guice repository</id>
-			<url>http://guice-maven.googlecode.com/svn/trunk
-			</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-	</repositories>
+    <scm>
+        <connection>scm:hg:https://gwt-platform.googlecode.com/hg/</connection>
+    </scm>
 
-	<build>
-		<sourceDirectory>${basedir}/src</sourceDirectory>
-		<testSourceDirectory>${basedir}/test</testSourceDirectory>
-		<testResources>
-			<testResource>
-				<directory>${project.basedir}/resources/test</directory>
-			</testResource>
-		</testResources>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src</directory>
-			</resource>
-      <resource>
-        <directory>${project.basedir}/META-INF/</directory>
-        <targetPath>META-INF</targetPath>
-      </resource>
-  	</resources>
+    <properties>
+        <target.jdk>1.6</target.jdk>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
+        <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
+        <gwt-maven-plugin.version>2.1.0-1</gwt-maven-plugin.version>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <appEngine.version>1.4.0</appEngine.version>
+        <!-- TODO: Replace with correct repo url once is available and remove file repo -->
+        <customCompiledDependenciesRepo>file:///${project.basedir}/mvnrepo</customCompiledDependenciesRepo>
+    </properties>
 
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
-					<compilerArgument>-proc:none</compilerArgument>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <repositories>
+        <repository>
+            <id>jukito-sonatype</id>
+            <url>https://oss.sonatype.org/content/groups/staging</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>Google guice repository</id>
+            <url>http://guice-maven.googlecode.com/svn/trunk</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>Custom Compiled dependencies</id>
+            <url>${customCompiledDependenciesRepo}</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
 
-	<dependencies>
-		<!-- HTMLUnit custom build -->
-		<!-- http://jira.codehaus.org/browse/MECLIPSE-388 http://jira.codehaus.org/browse/MECLIPSE-472 Due to this issues we HTMLUnit 
-			library should be on classpath before gwt-dev library (gwt-dev library also contains embedded htmlunit) and currently dependencies 
-			are ordered alphabetically in eclipse. This will be fixed in 2.9 version, so we have to live for a while with this "fix" -->
-		<dependency>
-			<groupId>net.sourceforge.htmlunit</groupId>
-			<artifactId>crawl_htmlunit</artifactId>
-			<version>${htmlunit.version}</version>
-			<scope>system</scope>
-      <systemPath>${basedir}/lib/crawl_htmlunit-r5662-gae.jar</systemPath>
-		</dependency>
+    <pluginRepositories>
+        <!-- To use maven-processor-plugin -->
+        <pluginRepository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
 
-		<!-- Google Web Toolkit dependencies -->
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${gwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-dev</artifactId>
-			<version>${gwt.version}</version>
-			<scope>provided</scope>
-		</dependency>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${target.jdk}</source>
+                        <target>${target.jdk}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
 
-		<!-- Appengine dependencies -->
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>${appengine.version}</version>
-		</dependency>
+                <plugin>
+                    <groupId>org.bsc.maven</groupId>
+                    <artifactId>maven-processor-plugin</artifactId>
+                    <version>1.3.7</version>
+                </plugin>
 
-		<!-- DI dependencies -->
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice</artifactId>
-			<version>${guice.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice-servlet</artifactId>
-			<version>${guice.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>${aopalliance.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-gin</artifactId>
-			<version>${gwt-gin.version}</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/lib/gwt-gin-1.0-r137.jar</systemPath>
-		</dependency>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>gwt-maven-plugin</artifactId>
+                    <version>${gwt-maven-plugin.version}</version>
+                    <configuration>
+                        <appEngineVersion>${appEngine.version}</appEngineVersion>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <configuration>
+                                <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
+                            </configuration>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <configLocation>/gwtp-checkstyle.xml</configLocation>
+                        <headerLocation>/gwtp-java-header.txt</headerLocation>
+                        <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
+                        <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
+                        <propertyExpansion>basedir=${basedir}</propertyExpansion>
+                        <consoleOutput>true</consoleOutput>
+                        <failsOnError>true</failsOnError>
+                        <linkXRef>false</linkXRef>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.gwtplatform</groupId>
+                            <artifactId>gwtp-build-tools</artifactId>
+                            <version>${project.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>validate</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>checkstyle</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                
+            </plugins>
+        </pluginManagement>
 
-		<!-- Spring dependencies -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>${cglib.version}</version>
-		</dependency>
+        <!--
+        Plugins to be inherited by sub-projects.
+        Note that definitions and configurations of the following plugins in a sub module,
+        will override the top level parent pom's definition
+        -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${target.jdk}</source>
+                    <target>${target.jdk}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
 
-		<!-- Test dependencies -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>${mockito.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-</project>	
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>${maven-eclipse-plugin.version}</version>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <wtpversion>2.0</wtpversion>
+                    <additionalBuildcommands>
+                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <additionalProjectnatures>
+                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalConfig>
+                        <file>
+                            <name>.checkstyle</name>
+                            <location>/gwtp-eclipse-checkstyle.xml</location>
+                        </file>
+                    </additionalConfig>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.gwtplatform</groupId>
+                        <artifactId>gwtp-build-tools</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+            
+        </plugins>
+    </build>
+</project>

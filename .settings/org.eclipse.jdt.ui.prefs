@@ -1,8 +1,0 @@
-#Wed Aug 18 09:08:25 EDT 2010
-eclipse.preferences.version=1
-formatter_profile=_GWT Format
-formatter_settings_version=11
-org.eclipse.jdt.ui.ignorelowercasenames=true
-org.eclipse.jdt.ui.importorder=\#com.google;com.google;com.gwtplatform;\#com;com;\#junit;junit;\#net;net;\#org;org;\#java;java;\#javax;javax;\#;;
-org.eclipse.jdt.ui.ondemandthreshold=99
-org.eclipse.jdt.ui.staticondemandthreshold=99
