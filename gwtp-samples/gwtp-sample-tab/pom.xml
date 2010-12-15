@@ -15,11 +15,6 @@
     <packaging>war</packaging>
     <name>GWTP Samples - tab</name>
 
-    <properties>
-        <!-- TODO: remove once public repo is available -->
-        <customCompiledDependenciesRepo>file:///${project.basedir}/../../mvnrepo</customCompiledDependenciesRepo>
-    </properties>
-
     <build>
         <plugins>
             <plugin>
