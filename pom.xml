@@ -28,7 +28,7 @@
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <appEngine.version>1.4.0</appEngine.version>
         <!-- TODO: Replace with correct repo url once is available and remove file repo -->
-        <customCompiledDependenciesRepo>file:///${project.basedir}/mvnrepo</customCompiledDependenciesRepo>
+        <customCompiledDependenciesRepo>file://${basedir}/mvnrepo</customCompiledDependenciesRepo>
     </properties>
 
     <repositories>
