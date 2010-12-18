@@ -25,3 +25,12 @@ glob:build.num
 glob:crchris.bat
 glob:.apt_generated/**
 glob:**.zip
+glob:*.iml
+glob:*.ipr
+glob:*.iws
+glob:*.eml
+glob:**.settings/**
+glob:**.project
+glob:**.factorypath
+glob:**.classpath
+glob:**.checkstyle

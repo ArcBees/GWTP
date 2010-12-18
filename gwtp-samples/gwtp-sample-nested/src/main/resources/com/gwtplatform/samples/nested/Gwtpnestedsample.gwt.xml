@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='gwtpnestedsample'>
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name="com.google.gwt.uibinder.UiBinder" />
+  <inherits name="com.google.gwt.inject.Inject" />
+
+  <inherits name="com.gwtplatform.mvp.Mvp" />
+
+  <!-- Inherit the default GWT style sheet.  You can change       -->
+  <!-- the theme of your GWT application by uncommenting          -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+
+  <!-- Other module inherits                                      -->
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='com.gwtplatform.samples.nested.client.Gwtpnestedsample'/>
+
+  <!-- Specify the paths for translatable code                    -->
+  <source path='client'/>
+
+  <!-- This is required for Gwt-Platform Proxy's generator        -->
+  <define-configuration-property name="gin.ginjector" is-multi-valued="false" />
+  <set-configuration-property name="gin.ginjector" value="com.gwtplatform.samples.nested.client.gin.ClientGinjector" />
+</module>
