@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<g:DialogBox modal="false" >
+		<g:caption>
+			<b>Local dialog box example</b>
+		</g:caption>
+		<g:HTMLPanel>
+		  <p>This is an example of a presenter-local dialog PresenterWidget.</p>
+			<p>Try clicking tabs and navigating while the dialog is showing. It<br />
+			should disappear and reappear when you come back.<br />
+      Compare this to the behavior of the global dialog box you get by<br />
+      clicking on the "Launch global dialog" button.</p>
+      <p>You could make this a modal dialog if desired. However, the<br/> 
+         mechanism described above ensures that your app is robust<br/>
+         even when the user navigates with the browser arrows or by<br/>
+         manually modifying the URL.</p>
+			<g:Button ui:field="okButton">Ok</g:Button>
+		</g:HTMLPanel>
+	</g:DialogBox>
+</ui:UiBinder> 
