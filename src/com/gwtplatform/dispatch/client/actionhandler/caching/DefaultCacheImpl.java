@@ -90,7 +90,7 @@ public class DefaultCacheImpl implements Cache {
     if (this.autoExpireTimeInMs >= 0) {
       // Check if expired
       long now = new Date().getTime();
-      if (cacheValue.getLastUpateTime() + this.autoExpireTimeInMs > now) {
+      if (cacheValue.getLastUpateTime() + this.autoExpireTimeInMs < now) {
         // Expired, remove
         remove(key);
         return null;
