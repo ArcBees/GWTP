@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://users.tpg.com.au/ojburn/dtds/suppressions_1_1.dtd">
+    
+<suppressions>
+
+  <!-- Suppress MagicNumberCheck for files under test -->
+  <suppress checks="MagicNumberCheck" files=".*[/\\]test[/\\].*" />
+
+  <!-- Suppress files under target -->
+  <suppress checks=".*" files=".*[/\\]target[/\\].*" />
+
+  <!-- Suppress files under com/google -->  
+  <suppress checks=".*" files="com[/\\]google[/\\]" />
+
+</suppressions>
