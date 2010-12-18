@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+  <filter>
+    <filter-name>guiceFilter</filter-name>
+    <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>guiceFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping>
+
+  <!--
+    This Guice listener hijacks all further filters and servlets. Extra
+    filters and servlets have to be configured in your
+    ServletModule#configureServlets() by calling
+    serve(String).with(Class<? extends HttpServlet>) and
+    filter(String).through(Class<? extends Filter)
+  -->
+  <listener>
+    <listener-class>com.gwtplatform.samples.hplace.server.guice.MyGuiceServletContextListener
+    </listener-class>
+  </listener>
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Gwtphplacesample.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
