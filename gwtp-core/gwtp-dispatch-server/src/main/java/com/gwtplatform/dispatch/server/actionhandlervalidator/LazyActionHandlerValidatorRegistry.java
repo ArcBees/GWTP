@@ -25,7 +25,8 @@ import com.gwtplatform.dispatch.shared.Result;
 public interface LazyActionHandlerValidatorRegistry extends
     ActionHandlerValidatorRegistry {
   /**
-   * Registers the specified {@link ActionValidator} class with the registry.
+   * Registers the specified {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}
+   * class with the registry.
    * 
    * @param <A> Type of associated {@link Action}
    * @param <R> Type of associated {@link Result}

@@ -19,7 +19,7 @@ package com.gwtplatform.tester;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 
 /**
- * This is the interface that define the map of {@link Action} to
+ * This is the interface that define the map of {@link com.gwtplatform.dispatch.shared.Action} to
  * {@link ClientActionHandler} for unit testing.
  * 
  * @author Brendan Doherty
@@ -27,7 +27,7 @@ import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 public interface MockClientActionHandlerMap {
 
   /**
-   * @return the {@link Action} class associated
+   * @return the {@link com.gwtplatform.dispatch.shared.Action} class associated
    */
   Class<?> getActionClass();
 

@@ -44,8 +44,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * will be bound as an eager singleton. It sets content within GWT's
  * {@link RootPanel} and {@link RootLayoutPanel}.
  * <p />
- * Fire a {@link RevealContentEvent} with type {@link #TYPE_RevealContent} or
- * {@link #TYPE_RevealLayoutContent} to set your presenter at the top level. The
+ * Fire a {@link RevealRootContentEvent} or {@link RevealRootLayoutContentEvent}
+ * to set your presenter at the top level. The
  * choice depends on whether your presenter works as a
  * {@link com.google.gwt.user.client.ui.Panel} or as a
  * {@link com.google.gwt.user.client.ui.LayoutPanel}.

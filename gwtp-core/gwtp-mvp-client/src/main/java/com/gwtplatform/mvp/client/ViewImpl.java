@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * A simple implementation of {@link View} that simply disregards every call to
  * {@link #setInSlot(Object, Widget)}, {@link #addToSlot(Object, Widget)}, and
- * {@link #clearSlot(Object)}.
+ * {@link #removeFromSlot(Object, Widget)}.
  * <p />
  * Feel free not to inherit from this if you need another base class (such as
  * {@link com.google.gwt.user.client.ui.Composite}), but you will have to define

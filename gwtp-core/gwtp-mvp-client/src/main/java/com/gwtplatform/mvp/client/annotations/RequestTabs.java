@@ -20,7 +20,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
- * Use this annotation in classes implementing {@link TabContainerPresenter}.
+ * Use this annotation in classes implementing
+ * {@link com.gwtplatform.mvp.client.TabContainerPresenter}.
  * This annotates a static field containing the type of the event fired when the
  * tab container wants to discover its contained tabs.
  * 

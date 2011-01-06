@@ -22,8 +22,8 @@ import com.google.gwt.inject.client.Ginjector;
  * Classes implementing that interface are expected to be bound with GIN as
  * eager singletons ({code .asEagerSingleton()}). However, they have an empty
  * constructor and are bound manually when the program starts by calling their
- * {@link #bind(Ginjector)}. Their constructor will typically register
- * themselves with the {@link DelayedBindRegistry}, which will take car of
+ * {@link #delayedBind(Ginjector)}. Their constructor will typically register
+ * themselves with the {@link DelayedBindRegistry}, which will take care of
  * calling {@code bind} on all the registered classes.
  * 
  * @author Philippe Beaudoin

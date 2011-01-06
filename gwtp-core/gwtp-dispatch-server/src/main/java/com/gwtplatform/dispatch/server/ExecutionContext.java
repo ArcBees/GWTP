@@ -22,8 +22,9 @@ import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.ServiceException;
 
 /**
- * ExecutionContext instances are passed to {@link ActionHandler}s, and allows
- * them to execute sub-actions. These actions can be automatically rolled back
+ * ExecutionContext instances are passed to
+ * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler}s,
+ * and allows them to execute sub-actions. These actions can be automatically rolled back
  * if any part of the action handler fails.
  * 
  * @author David Peterson

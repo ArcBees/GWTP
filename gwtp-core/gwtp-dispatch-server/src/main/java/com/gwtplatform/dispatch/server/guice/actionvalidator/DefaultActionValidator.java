@@ -20,8 +20,8 @@ import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.server.actionvalidator.AbstractDefaultActionValidator;
 
 /**
- * The default {@link ActionValidator} guice implementation. It's here just to define default action validator as a
- * guice bean.
+ * The default {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} guice implementation.
+ * It's here just to define default action validator as a Guice bean.
  * 
  * @author Peter Simun
  */

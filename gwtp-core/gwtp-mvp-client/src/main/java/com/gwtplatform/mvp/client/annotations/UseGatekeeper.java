@@ -23,7 +23,8 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation lets you define a {@link Gatekeeper} to use for the
- * {@link Place} associated with your proxy. Your custom {@code Ginjector} must
+ * {@link com.gwtplatform.mvp.client.proxy.Place} associated with
+ * your proxy. Your custom {@code Ginjector} must
  * have a method returning the {@link Gatekeeper} specified in this annotation.
  * 
  * @author Olivier Monaco

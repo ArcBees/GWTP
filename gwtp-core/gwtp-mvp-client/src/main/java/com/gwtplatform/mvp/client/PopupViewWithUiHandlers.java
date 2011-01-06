@@ -20,8 +20,8 @@ import com.google.gwt.event.shared.EventBus;
 
 /**
  * Base class for a {@link PopupView} that implements the {@link HasUiHandlers}
- * interface. You should always call {@link #setHandlers()} from your
- * presenter's contructor.
+ * interface. You should always call {@link #setUiHandlers(UiHandlers)} from your
+ * presenter 's constructor.
  * <p />
  * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
  * since the {@link UiHandlers} are not yet set.

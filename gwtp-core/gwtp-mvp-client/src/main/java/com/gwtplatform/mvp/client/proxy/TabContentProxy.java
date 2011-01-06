@@ -34,7 +34,7 @@ import com.gwtplatform.mvp.client.Tab;
  * In this case, the {@code nameToken} parameter indicates the presenter to reveal
  * when this tab is selected.
  * 
- * @see {@link com.gwtplatform.mvp.client.annotations.TabInfo TabInfo}
+ * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  * 
  * @param <P> The type of the {@link Presenter} associated with this proxy.
  * 

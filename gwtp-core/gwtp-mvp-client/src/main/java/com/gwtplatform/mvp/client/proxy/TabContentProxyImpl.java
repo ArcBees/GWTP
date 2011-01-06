@@ -42,7 +42,7 @@ public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
 
   /**
    * Creates a {@link Proxy} for a {@link Presenter} that is meant to be
-   * contained within at {@link TabContainerPresenter}. As such, these proxy
+   * contained within at {@link com.gwtplatform.mvp.client.TabContainerPresenter}. As such, these proxy
    * hold a string that can be displayed on the tab.
    */
   public TabContentProxyImpl() {

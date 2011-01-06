@@ -20,7 +20,7 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * This is the handler interface for {@link RevealRootContentEvent}. It is used
- * solely by {@link RootPresenter}.
+ * solely by {@link com.gwtplatform.mvp.client.RootPresenter}.
  * 
  * @author Philippe Beaudoin
  */

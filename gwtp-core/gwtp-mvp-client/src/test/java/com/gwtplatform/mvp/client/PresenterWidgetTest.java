@@ -55,7 +55,7 @@ public class PresenterWidgetTest {
     }
   }
   
-  // Simple subclasses of PresenterWidgetImpl
+  // Simple subclasses of PresenterWidget
   abstract static class PresenterWidgetSpy<V extends View> extends
       PresenterWidget<V> {
     public int onHideMethodCalled;

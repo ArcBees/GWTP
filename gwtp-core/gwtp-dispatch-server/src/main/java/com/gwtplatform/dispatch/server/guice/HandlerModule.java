@@ -99,9 +99,8 @@ public abstract class HandlerModule extends AbstractModule {
 
   /**
    * Override this method to configure your handlers. Use calls to
-   * {@link #bindHandler()} to register actions that do not need any specific
-   * security validation. Use calls to {@link #bindSecureHandler()} if you need
-   * a specific type validation.
+   * {@link #bindHandler} to register actions that do not need any specific
+   * security validation.
    */
   protected abstract void configureHandlers();
 

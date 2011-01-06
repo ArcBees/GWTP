@@ -210,12 +210,12 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * In order to use manual reveal, override this method to return {@code true}.
    * Then, in your {@link #prepareFromRequest}, you can either:
    * <ul>
-   * <li> Fetch the data using a {@link com.gwtplatform.mvp.clien.proxy.ProxyPlace.ManualRevealCallback ManualRevealCallback}, 
+   * <li> Fetch the data using a {@link com.gwtplatform.mvp.client.proxy.ManualRevealCallback ManualRevealCallback},
    *      which will automatically reveal the presenter upon success.</li>
    * <li> Fetch the data by any other mean and call 
    *      {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualReveal(Presenter)} when 
    *      your data is available. In this case you also have to call 
-   *      {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualRevealFailed(Presenter)} 
+   *      {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualRevealFailed()}
    *      if loading fails, otherwise your application will become unusable.</li>
    * </ul>
    * The default implementation uses automatic reveal, and therefore returns {@code false}.
