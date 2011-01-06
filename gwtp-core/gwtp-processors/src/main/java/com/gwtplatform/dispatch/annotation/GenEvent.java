@@ -26,13 +26,13 @@ import java.lang.annotation.Target;
  * Annotation to generate Event and Handler classes.
  * <p/>
  * If you type:
- * 
+ *
  * <pre>
  * <code> 
- * {@literal}@GenEvent
+ * {@literal @}GenEvent
  * public class FooChanged {
- *   Foo foo;
- *   boolean originator;
+ *  Foo foo;
+ *  boolean originator;
  * }
  * </code>
  * </pre>
@@ -61,11 +61,11 @@ import java.lang.annotation.Target;
  * 
  * <pre>
  * <code> 
- * {@literal}@GenEvent
+ * {@literal @}GenEvent
  * public class FooChanged {
- *   @Order(1) Foo foo;
- *   @Order(2) int bar;
- *   @Order(3) boolean originator;
+ *   {@literal @}Order(1) Foo foo;
+ *   {@literal @}Order(2) int bar;
+ *   {@literal @}Order(3) boolean originator;
  * }
  * </code>
  * </pre>
@@ -99,12 +99,12 @@ import java.lang.annotation.Target;
  * If you type:
  * 
  * <pre>
- * <code> 
- * {@literal}@GenEvent
+ * <code>
+ * {@literal @}GenEvent
  * public class FooChanged {
- *   {@literal @}Optional @Order(1) Foo foo;
- *   @Order(2) int bar;
- *   {@literal @}Optional @Order(3) boolean originator;
+ *  {@literal @}Optional @Order(1) Foo foo;
+ *  {@literal @}Order(2) int bar;
+ *  {@literal @}Optional @Order(3) boolean originator;
  * }
  * </code>
  * </pre>

@@ -18,13 +18,13 @@ package com.gwtplatform.dispatch.client;
 
 /**
  * An implementation of {@link DispatchRequest} that is used in conjunction with
- * {@link ClientActionHandler}s. 
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s.
  * <p/> 
  * As the ClientActionHandler may be provided asynchronously, the 
- * {@link ClientActionHandlerDispatchRequest} will initially not contain an
- * {@link DispatchRequest}. Once the {@link ClientActionHandler} is
+ * {@link ClientActionHandlerDispatchRequest} will initially not contain an {@link DispatchRequest}.
+ * Once the {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler} is
  * executed, this be populated with a {@link DelegatingDispatchRequest} by
- * calling {@link #setDelegate(Request)}.
+ * calling {@link #setDelegate(DispatchRequest)}.
  * 
  * @author Brendan Doherty
  */

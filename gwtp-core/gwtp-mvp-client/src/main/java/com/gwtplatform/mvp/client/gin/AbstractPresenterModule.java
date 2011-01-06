@@ -318,8 +318,8 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * {@link PresenterWidget} in different presenters, as long as these are not
    * simultaneously visible. Also, if you do this, you must make sure to set the
    * singleton presenter widget as content in its containing presenter
-   * {@link PresenterImpl#onReveal} and to remove it in the
-   * {@link PresenterImpl#onHide}.
+   * {@link Presenter#onReveal} and to remove it in the
+   * {@link Presenter#onHide}.
    * 
    * @param <P> The {@link PresenterWidget} interface type.
    * @param <V> The {@link View} interface type.
@@ -346,8 +346,8 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * {@link PresenterWidget} in different presenters, as long as these are not
    * simultaneously visible. Also, if you do this, you must make sure to set the
    * singleton presenter widget as content in its containing presenter
-   * {@link PresenterImpl#onReveal} and to remove it in the
-   * {@link PresenterImpl#onHide}.
+   * {@link Presenter#onReveal} and to remove it in the
+   * {@link Presenter#onHide}.
    * 
    * @param <P> The {@link PresenterWidget} class type.
    * @param <V> The {@link View} interface type.

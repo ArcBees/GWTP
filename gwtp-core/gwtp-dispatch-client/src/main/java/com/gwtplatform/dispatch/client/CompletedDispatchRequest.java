@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.client;
 
 /**
  * An implementation of {@link DispatchRequest} that is always completed. It
- * should be used with {@link ClientActionHandler}s that do not perform any
- * asynchronous processing.
+ * should be used with {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
+ * that do not perform any asynchronous processing.
  * 
  * @author Brendan Doherty
  */

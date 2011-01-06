@@ -27,8 +27,8 @@ import java.util.Set;
  * {@link PlaceRequest} hierarchies and vice-versa. The default implementation
  * uses:
  * <ul>
- * <li>{@code '/'} to separate {@PlaceRequest}s in a hierarchy;</li>
- * <li>{@code ';'} to separate parameters in a {@PlaceRequest};</li>
+ * <li>{@code '/'} to separate {@link PlaceRequest}s in a hierarchy;</li>
+ * <li>{@code ';'} to separate parameters in a {@link PlaceRequest};</li>
  * <li>{@code '='} to separate the parameter name from its value.</li>
  * </ul>
  * These symbols cannot be used in a name token. If one of the separating symbol
@@ -37,7 +37,7 @@ import java.util.Set;
  * For example, {@link ParameterTokenFormatter} would parse:
  * 
  * <pre>
- * nameToken1;param1.1=value1.1;parame1.2=value1.2/nameToken2/nameToken3;param3.1=value//3==1
+ * nameToken1;param1.1=value1.1;param1.2=value1.2/nameToken2/nameToken3;param3.1=value//3==1
  * </pre>
  * Into the following hierarchy of {@link PlaceRequest}:
  * 

@@ -283,9 +283,12 @@ public class GenerationHelper implements Closeable {
    * <p>
    * <b>Usage:</b>
    * </p>
-   * 
+   *
    * <pre>
-   * <code>generateImports({@link EventHandler}.class, {@link GwtEvent}.class, null, {@link GenEventProcessor}.class)</code></pre>
+   * <code>
+   * generateImports({@link com.google.gwt.event.shared.EventHandler EventHandler}.class, {@link com.google.gwt.event.shared.GwtEvent GwtEvent}.class, null, {@link GenEventProcessor}.class)
+   * </code>
+   * </pre>
    * 
    * <b>Generated example:</b>
    * 

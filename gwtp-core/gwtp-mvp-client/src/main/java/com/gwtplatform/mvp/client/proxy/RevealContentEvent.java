@@ -41,11 +41,11 @@ import com.gwtplatform.mvp.client.Presenter;
 public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> {
 
   /**
-   * Fires a {@link RevealContentEvent} with a specific {@link Type}
+   * Fires a {@link RevealContentEvent} with a specific {@link com.google.gwt.event.shared.GwtEvent.Type}
    * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
    * @param source The source that fires this event ({@link HasHandlers}).
-   * @param type The specific event {@link Type}, usually defined in the parent presenter
+   * @param type The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}, usually defined in the parent presenter
    *             and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
    * @param content The {@link Presenter} that wants to set itself as content in his parent.
    */

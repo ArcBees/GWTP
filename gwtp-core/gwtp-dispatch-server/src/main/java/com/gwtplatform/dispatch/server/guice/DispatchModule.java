@@ -30,7 +30,8 @@ import com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider;
 /**
  * This module will configure the implementation for the {@link Dispatch} and
  * {@link ActionHandlerValidatorRegistry} interfaces. Also every
- * {@link ActionHandler} and {@link ActionValidator} will be loaded lazily.
+ * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler} and
+ * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator ActionValidator} will be loaded lazily.
  * 
  * 
  * If you want to override the defaults ({@link DispatchImpl},
@@ -110,7 +111,7 @@ public class DispatchModule extends AbstractModule {
 
   /**
    * Override so that only one instance of this class will ever be installed in
-   * an {@link Injector}.
+   * an {@link com.google.inject.Injector}.
    */
   @Override
   public boolean equals(Object obj) {
@@ -119,7 +120,7 @@ public class DispatchModule extends AbstractModule {
 
   /**
    * Override so that only one instance of this class will ever be installed in
-   * an {@link Injector}.
+   * an {@link com.google.inject.Injector}.
    */
   @Override
   public int hashCode() {

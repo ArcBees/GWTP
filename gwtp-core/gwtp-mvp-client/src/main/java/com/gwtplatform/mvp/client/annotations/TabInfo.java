@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * either {@link #label} or {@link #getLabel}. The latter let you specify the
  * code to call to obtain the name of the tab. Make sure class names are fully
  * qualified. Also, you have access to the variable {@code ginjector} (your
- * specific {@link Ginjector}-derived class). For example:
+ * specific {@link com.google.gwt.inject.client.Ginjector}-derived class). For example:
  * 
  * <pre>
  * {@code @}TabInfo( 

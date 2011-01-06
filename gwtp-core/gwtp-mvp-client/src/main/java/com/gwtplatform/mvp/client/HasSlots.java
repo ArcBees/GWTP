@@ -43,9 +43,9 @@ public interface HasSlots {
   /**
    * This method adds some content in a specific slot of the {@link Presenter}.
    * The attached {@link View} should manage this slot when its 
-   * {@link View#addToSlot(Object, Widget)} is called.
+   * {@link View#addToSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
    * <p />
-   * Contrary to the {@link setInSlot()} method, no
+   * Contrary to the {@link #setInSlot} method, no
    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired, 
    * so {@link PresenterWidget#onReset()} is not invoked.
    * <p />
@@ -62,8 +62,8 @@ public interface HasSlots {
    * This method clears the content in a specific slot. No
    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired. 
    * The attached {@link View} should manage this slot when its 
-   * {@link View#setInSlot(Object, Widget)} is called. It should also clear 
-   * the slot when the {@link View#setInSlot(Object, Widget)} method is
+   * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear
+   * the slot when the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method is
    * called with {@code null} as a parameter.
    * <p />
    * For more details on slots, see {@link HasSlots}.
@@ -77,7 +77,7 @@ public interface HasSlots {
    * {@link Presenter}. No 
    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired. 
    * The attached {@link View} should manage this slot when its
-   * {@link View#removeFromSlot(Object, Widget)} is called.
+   * {@link View#removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
    * <p />
    * For more details on slots, see {@link HasSlots}.
    * 
@@ -106,7 +106,7 @@ public interface HasSlots {
   /**
    * This method sets some content in a specific slot of the {@link Presenter}.
    * The attached {@link View} should manage this slot when its
-   * {@link View#setInSlot(Object, Widget)} is called. It should also clear the
+   * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear the
    * slot when the {@code setInSlot} method is called with {@code null} as a
    * parameter.
    * <p />

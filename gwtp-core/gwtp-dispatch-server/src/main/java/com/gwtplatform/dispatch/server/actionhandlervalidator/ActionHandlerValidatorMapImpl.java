@@ -20,7 +20,8 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * Implementation of {@link ActionHandlerMap} that links {@link Action}s to {@link ActionHandler}s.
+ * Implementation of {@link ActionHandlerValidatorMap} that links {@link Action}s
+ * to {@link ActionHandlerValidatorClass}es.
  * 
  * @param <A> Type of {@link Action}
  * @param <R> Type of {@link Result}

@@ -29,16 +29,16 @@ import com.gwtplatform.dispatch.shared.Result;
  * Module for use in test cases when creating a guice injector that needs to
  * provide mock handlers.
  * 
- * Your injector must also have an class that subclasses {@link HandlerModule}
+ * Your injector must also have an class that subclasses {@link com.gwtplatform.dispatch.server.guice.HandlerModule}
  * to bind Actions to ActionHandlers and ActionValidators.
  * <p/>
- * You should subclass this module and use the {@link #configureMockHandlers())}
+ * You should subclass this module and use the {@link #configureMockHandlers()}
  * method to:
  * <ul>
  * <li>register mock server-side action handlers with
- * {@link #bindMockActionHandler()}.</li>
+ * {@link #bindMockActionHandler(Class, ActionHandler)}.</li>
  * <li>register mock client-side action handlers with
- * {@link #bindMockClientActionHandler()}.</li>
+ * {@link #bindMockClientActionHandler(Class, AbstractClientActionHandler)}.</li>
  * </ul>
  * 
  * <h3>Unit Testing Example</h3>
@@ -82,11 +82,11 @@ import com.gwtplatform.dispatch.shared.Result;
  *  // configuring mockito to return result for clent action handler
  *  // is a bit more complex
  *  final GeocodeAddressResult geocodeAddressResult = new GeocodeAddressResult(...);
- *  doAnswer(new Answer<Object>() {
- *    @SuppressWarnings("unchecked")
+ *  doAnswer(new Answer&lt;Object&gt;() {
+ *    {@literal @SuppressWarnings("unchecked")}
  *    public Object answer(InvocationOnMock invocation) {
- *      AsyncCallback<GeocodeAddressResult> callback 
- *          = (AsyncCallback<GeocodeAddressResult>) invocation.getArguments()[1];
+ *      AsyncCallback&lt;GeocodeAddressResult&gt; callback
+ *          = (AsyncCallback&lt;GeocodeAddressResult&gt;) invocation.getArguments()[1];
  *      callback.onSuccess(new GeocodeAddressResult(geocodeAddressResult));
  *      return null;
  *    }

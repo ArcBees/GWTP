@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * {@link NavigationRefusedEvent} will.
  * <p />
  * Instead of registering your presenter towards this event, consider overriding
- * {@link com.gwtplatform.mvp.client.PresenterWidgetImpl#onReset()}. From there
+ * {@link com.gwtplatform.mvp.client.PresenterWidget#onReset()}. From there
  * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the
  * {@link PlaceRequest}.
  * 
