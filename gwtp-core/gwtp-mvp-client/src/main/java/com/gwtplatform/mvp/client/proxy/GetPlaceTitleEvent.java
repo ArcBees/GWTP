@@ -59,9 +59,9 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
 
   /**
    * The handled flag can let others know when the event has been handled.
-   * Handlers should call {@link setHandled()} as soon as they figure they are
+   * Handlers should call {@link #setHandled()} as soon as they figure they are
    * be responsible for this event. Handlers should not process this event if
-   * {@link isHandled()} return {@code true}.
+   * {@link #isHandled()} return {@code true}.
    */
   private boolean handled;
 

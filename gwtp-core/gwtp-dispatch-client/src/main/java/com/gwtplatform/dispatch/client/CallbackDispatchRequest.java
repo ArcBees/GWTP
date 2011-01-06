@@ -20,7 +20,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * An implementation of {@link DispatchRequest} that should be used by
- * {@link ClientActionHandler}s that make asynchronous calls.
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
+ * that make asynchronous calls.
  * 
  * @author Christian Goudreau
  * 

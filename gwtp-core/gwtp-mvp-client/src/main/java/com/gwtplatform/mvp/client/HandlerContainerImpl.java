@@ -54,7 +54,7 @@ public class HandlerContainerImpl implements HandlerContainer {
    * binding.
    * <p /> 
    * Autobinding requires the class to be instantiated by Guice/GIN.
-   * If you are instantiating {@link HandlerContrainerImpl} with {@code new},
+   * If you are instantiating {@link HandlerContainerImpl} with {@code new},
    * autobinding will not work. It is recommended you document it by
    * using #HandlerContainerImpl(boolean) with {@code false} as a parameter.
    */
@@ -72,7 +72,7 @@ public class HandlerContainerImpl implements HandlerContainer {
    * {@link #bind()}.
    * <p />
    * Autobinding requires the class to be instantiated by Guice/GIN.
-   * If you are instantiating {@link HandlerContrainerImpl} with {@code new},
+   * If you are instantiating {@link HandlerContainerImpl} with {@code new},
    * autobinding will not work. It is recommended you document it by
    * passing {@code false} to the {@code autoBind} parameter.
    * 
@@ -137,7 +137,7 @@ public class HandlerContainerImpl implements HandlerContainer {
    * Lifecycle method called when unbinding the object. 
    * <p /> 
    * <b>Important :</b> Make sure you call your parent class {@link #onUnbind()}. 
-   * Also, do not call directly, call {@link unbind()} instead.
+   * Also, do not call directly, call {@link #unbind()} instead.
    * <p /> 
    * Any handler registration recorded with {@link #registerHandler (HandlerRegistration)} 
    * will have

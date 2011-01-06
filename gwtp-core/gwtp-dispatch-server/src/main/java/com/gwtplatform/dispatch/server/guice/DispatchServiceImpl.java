@@ -27,7 +27,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
 import java.util.logging.Logger;
 
 /**
- * This is the server-side implementation of the {@link DispatchService}, for which the client-side async service is
+ * This is the server-side implementation of the {@link com.gwtplatform.dispatch.client.DispatchService},
+ * for which the client-side async service is
  * {@link com.gwtplatform.dispatch.client.DispatchServiceAsync}.
  * <p />
  * This class is closely related to {@link DispatchImpl}, in theory the latter wouldn't be needed, but we use it to

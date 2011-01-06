@@ -41,7 +41,7 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
   /**
    * Creates an {@link ManualRevealCallback} that is attached to another {@link AsyncCallback}.
    * 
-   * @see ManualRevealCallback(Presenter, AsyncCallback)
+   * @see #ManualRevealCallback(Presenter, AsyncCallback)
    * 
    * @param presenter The presenter that will be revealed upon successful completion of this callback.
    */
@@ -53,7 +53,7 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
   /**
    * Creates an {@link ManualRevealCallback} that is not attached to another {@link AsyncCallback}.
    * 
-   * @see ManualRevealCallback(Presenter, AsyncCallback)
+   * @see #ManualRevealCallback(Presenter, AsyncCallback)
    * 
    * @param presenter The presenter that will be revealed upon successful completion of this callback.
    */

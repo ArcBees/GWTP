@@ -20,13 +20,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * An implementation of {@link DispatchRequest} that should be used by
- * {@link ClientActionHandler}s that make asynchronous calls that return a
- * {@link com.google.gwt.http.client.Request}.
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
+ * that make asynchronous calls that return a {@link com.google.gwt.http.client.Request Request}.
  * 
  * This class also takes a {@link DispatchRequest} and delegate work to this {@link DispatchRequest}.
  * 
- * This class is used within {@link AbstractCachingClientActionHandler} to be
- * able to store inside an HashMap {@link DefaultCallbackDispatchRequest} while keeping
+ * This class is used within
+ * {@link com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler AbstractCachingClientActionHandler}
+ * to be able to store inside an HashMap {@link DefaultCallbackDispatchRequest} while keeping
  * {@link GwtHttpDispatchRequest} nature.
  * 
  * @param <R> The type of the {@link AsyncCallback}.

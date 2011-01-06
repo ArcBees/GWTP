@@ -28,7 +28,7 @@ public final class DefaultExceptionHandler implements ExceptionHandler {
   }
 
   /**
-   * Always returns {@link Status#CONTINUE}.
+   * Always returns {@link ExceptionHandler.Status#CONTINUE}.
    * 
    * @param e The exception.
    * @return The status.

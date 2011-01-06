@@ -22,8 +22,8 @@ import com.gwtplatform.dispatch.shared.Result;
 /**
  * This contains both the original {@link Action} and the {@link Result} of that
  * action. It also indicates if this action was executed (
- * {@link ActionHandler#execute(Action, ExecutionContext)}) or undoed (
- * {@link ActionHandler#undo(Action, Result, ExecutionContext)}).
+ * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)}) or undone (
+ * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}).
  * 
  * @author David Peterson
  * 
@@ -40,8 +40,8 @@ public class ActionResult<A extends Action<R>, R extends Result> {
   /**
    * Creates a new action/result pair. The {@code executed} field indicates if
    * this action was executed via
-   * {@link ActionHandler#execute(Action, ExecutionContext)} or undoed via
-   * {@link ActionHandler#undo(Action, Result, ExecutionContext)}.
+   * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
+   * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
    * 
    * @param action The {@link Action}.
    * @param result The {@link Result}.
@@ -64,8 +64,8 @@ public class ActionResult<A extends Action<R>, R extends Result> {
 
   /**
    * Checks wheter this action was executed via
-   * {@link ActionHandler#execute(Action, ExecutionContext)} or undoed via
-   * {@link ActionHandler#undo(Action, Result, ExecutionContext)}.
+   * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
+   * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
    * 
    * @return {@code true} if the action was executed, {@code false} if it was
    *         undoed.

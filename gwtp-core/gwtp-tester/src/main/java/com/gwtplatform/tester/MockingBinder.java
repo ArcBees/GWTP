@@ -48,7 +48,7 @@ import java.lang.reflect.Field;
  * 
  * Disarming GWT is important to unit test views.
  * 
- * @param <U> Mock type returned by {@link UiBinder#createAndBindUi()}.
+ * @param <U> Mock type returned by {@link UiBinder#createAndBindUi(Object)}.
  * @param <O> Owner type.
  * 
  * @author Christian Goudreau

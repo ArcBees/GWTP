@@ -17,9 +17,9 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Interface meant to be implemented by you {@link View} so that its controller
+ * Interface meant to be implemented by the {@link View} so that its controller
  * can attach its {@link UiHandlers}. <b>Important</b>, when using this interface,
- * you should always call {@link #setControls()} from your presenter
+ * you should always call {@link #setUiHandlers(UiHandlers)} from your presenter
  * constructor.
  * 
  * @param <C> Your {@link UiHandlers} interface type.

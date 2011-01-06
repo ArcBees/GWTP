@@ -27,7 +27,7 @@ public interface HasPopupSlot {
    * inherit from {@link PopupView}. The popup will be visible and the
    * corresponding presenter will receive the lifecycle events as needed.
    * <p />
-   * Contrary to the {@link setInSlot()} method, no
+   * Contrary to the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method, no
    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is 
    * fired, so {@link PresenterWidget#onReset()} is not invoked.
    * 
@@ -44,7 +44,7 @@ public interface HasPopupSlot {
    * {@link PopupView}. The popup will be visible and the corresponding
    * presenter will receive the lifecycle events as needed.
    * <p />
-   * Contrary to the {@link setInSlot()} method, no
+   * Contrary to the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method, no
    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired, 
    * so {@link PresenterWidget#onReset()} is not invoked.
    * 

@@ -31,7 +31,7 @@ public class Utils {
   /**
    * Logs an entire stack trace to the logger, so that it can easily be viewed
    * in the App Engine log. The exception will be logged as a severe error. See
-   * also {@link #logStackTrace(Level, Logger, Exception)}.
+   * also {@link #logStackTrace(Logger, Level, Throwable)}.
    * 
    * @param log The {@link Logger} to use.
    * @param e The {@link Exception} with the stack trace to log.

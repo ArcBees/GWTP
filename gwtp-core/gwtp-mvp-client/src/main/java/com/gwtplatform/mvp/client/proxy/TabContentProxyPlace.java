@@ -29,7 +29,7 @@ import com.gwtplatform.mvp.client.Presenter;
  *{@literal @}TabInfo(container = MainPagePresenter.class, priority = 0, label = "Home")
  * public interface MyProxy extends TabContentProxyPlace&lt;HomePagePresenter&gt; { }
  * </pre>
- * @see {@link com.gwtplatform.mvp.client.annotations.TabInfo TabInfo}
+ * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  * 
  * @param <P> The type of the {@link Presenter} associated with this proxy.
  * 

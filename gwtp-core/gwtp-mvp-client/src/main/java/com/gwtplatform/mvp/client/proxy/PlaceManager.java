@@ -140,7 +140,7 @@ public interface PlaceManager extends HasHandlers {
    * 
    * @return The current {@link PlaceRequest}.
    * 
-   * @see {@link #getCurrentPlaceRequest()}
+   * @see #getCurrentPlaceRequest()
    */
   List<PlaceRequest> getCurrentPlaceHierarchy();
 
@@ -150,12 +150,12 @@ public interface PlaceManager extends HasHandlers {
    * 
    * @return The current {@link PlaceRequest}, or an empty one if the hierarchy is empty.
    * 
-   * @see {@link #getCurrentPlaceHierarchy()}
+   * @see #getCurrentPlaceHierarchy()
    */
   PlaceRequest getCurrentPlaceRequest();
 
   /**
-   * Retrieves the title of the a specific place within the place hierarchy.
+   * Retrieves the title of a specific place within the place hierarchy.
    * <p />
    * Instead of returning the title directly, this method accepts a callback and
    * will call {@link SetPlaceTitleHandler#onSetPlaceTitle} as soon as the title
@@ -164,7 +164,7 @@ public interface PlaceManager extends HasHandlers {
    * 
    * @see #getCurrentTitle(SetPlaceTitleHandler)
    * 
-   * @param index The index of the place to for which to get a title, 0 is 
+   * @param index The index of the place for which to get a title, 0 is
    *          the top-level class, {@link #getHierarchyDepth()}-1 is the current
    *          place.
    * @param handler The {@link SetPlaceTitleHandler} to invoke when the place
@@ -178,7 +178,7 @@ public interface PlaceManager extends HasHandlers {
 
   /**
    * Retrieves the title of the currently displayed place, or {@code null} if it
-   * doesn't have a title. Same as calling {@link #getCurrentTitle(int)} with a
+   * doesn't have a title. Same as calling {@link #getTitle(int, SetPlaceTitleHandler)} with a
    * {@code level} of {@link #getHierarchyDepth()}-1.
    * <p />
    * Instead of returning the title directly, this method accepts a callback and
@@ -202,7 +202,7 @@ public interface PlaceManager extends HasHandlers {
 
   /**
    * Retrieves the number of elements in the place hierarchy. The title of each
-   * of these elements can be obtained through {@link #getCurrentTitle(int)}.
+   * of these elements can be obtained through {@link #getTitle(int, SetPlaceTitleHandler)}.
    * 
    * @return The depth of the place hierarchy.
    */
@@ -267,7 +267,7 @@ public interface PlaceManager extends HasHandlers {
    * Application-specific place managers should build a {@link PlaceRequest}
    * corresponding to the desired presenter and call
    * {@link #revealPlace(PlaceRequest)} with it. The default implementation is
-   * simply to call {@link #revealErrorPlace()}.
+   * simply to call {@link #revealErrorPlace(String)}.
    * <p />
    * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and that
    * the user has access to it, otherwise you might create an infinite loop.

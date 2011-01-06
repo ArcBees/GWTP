@@ -30,15 +30,14 @@ import java.lang.annotation.Target;
  * 
  * <pre>
  * <code> 
- * {@literal}@GenDispatch
+ * {@literal @}GenDispatch
  * public class RetrieveFoo {
- *   @In(1) Key<Foo> fooKey;
- *   @Out(1) Foo foo;
- *   @Out(2) boolean bar;
+ *   {@literal @}In(1) Key<Foo> fooKey;
+ *   {@literal @}Out(1) Foo foo;
+ *   {@literal @}Out(2) boolean bar;
  * }
  * </code>
  * </pre>
- * 
  * gwt-platform will generate two classes, RetrieveFooAction and
  * RetrieveFooResult.
  * <p/>
@@ -60,19 +59,18 @@ import java.lang.annotation.Target;
  * <b>Complex example:</b>
  * 
  * <pre>
- * <code>
- * public interface HasThing<T> {
+ * <code>public interface HasThing&lt;T&gt; {
  *   T getThing();
  * }
  * 
- * {@literal}@GenDispatch(
+ * {@literal @}GenDispatch(
  *     isSecure = false, 
  *     serviceName = Action.DEFAULT_SERVICE_NAME + "MyBar", 
- *     extraResultInterfaces = "com.example.shared.HasThing<com.example.shared.Foo>"
+ *     extraResultInterfaces = "com.example.shared.HasThing&lt;com.example.shared.Foo&gt;"
  * ) 
  * public class RetrieveBar {
- *   @In(1) String id;
- *   @Out(1) Foo thing;
+ *   {@literal @}In(1) String id;
+ *   {@literal @}Out(1) Foo thing;
  * }
  * </code>
  * </pre>

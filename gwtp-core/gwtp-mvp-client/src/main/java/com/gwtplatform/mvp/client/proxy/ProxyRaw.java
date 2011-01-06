@@ -35,7 +35,8 @@ public interface ProxyRaw extends HasHandlers {
    * an asynchronous manner to support code splitting when needed. To access the
    * presenter, pass a callback.
    * <p />
-   * The difference between this method and {@link Proxy#getPresenter(Callback)}
+   * The difference between this method and 
+   * {@link Proxy#getPresenter(com.google.gwt.user.client.rpc.AsyncCallback)}
    * is that the latter one gets the specific parameterised {@link Presenter}
    * type.
    * 
