@@ -71,7 +71,7 @@ public interface PopupView extends View {
 
   /**
    * <b>Important!</b> Do not call this directly, instead use
-   * {@link PresenterWidgetImpl#addToPopupSlot(PresenterWidget)} passing this
+   * {@link PresenterWidget#addToPopupSlot(PresenterWidget)} passing this
    * view's {@link PresenterWidget}.
    * <p/>
    * Make sure the {@link PopupView} is visible.

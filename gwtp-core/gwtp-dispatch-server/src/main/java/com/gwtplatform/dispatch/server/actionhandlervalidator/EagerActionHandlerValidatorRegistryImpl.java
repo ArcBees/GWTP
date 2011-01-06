@@ -27,7 +27,8 @@ import java.util.Map;
 
 /**
  * This is a eager-loading implementation of the registry. It will create action
- * handlers and validators at startup. All {@link ActionHandler} and
+ * handlers and validators at startup. All
+ * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler} and
  * {@link ActionValidator} implementations <b>must</b> have a public, default
  * constructor.
  * 

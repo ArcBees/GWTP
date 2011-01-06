@@ -28,11 +28,11 @@ import com.google.gwt.event.shared.HasHandlers;
 public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
 
   /**
-   * Fires a {@link RequestTabsEvent} with a specific {@link Type}
+   * Fires a {@link RequestTabsEvent} with a specific {@link com.google.gwt.event.shared.GwtEvent.Type}
    * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}. 
    * 
    * @param source The source that fires this event ({@link HasHandlers}).
-   * @param type The specific event {@link Type}.
+   * @param type The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}.
    * @param tabContainer The {@link TabContainerPresenter} requesting the tabs.
    */
   public static void fire(final HasHandlers source,
@@ -48,7 +48,7 @@ public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
    * Creates an event for requesting the tabs that should be displayed in a
    * {@link TabContainerPresenter}.
    * 
-   * @param type The specific {@link Type} of this event.
+   * @param type The specific {@link com.google.gwt.event.shared.GwtEvent.Type} of this event.
    * @param tabContainer The {@link TabContainerPresenter} making the request.
    */
   public RequestTabsEvent(final Type<RequestTabsHandler> type,

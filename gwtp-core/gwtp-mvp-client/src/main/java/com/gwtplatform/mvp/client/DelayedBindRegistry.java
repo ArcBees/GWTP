@@ -36,7 +36,7 @@ public final class DelayedBindRegistry {
 
   /**
    * Bind all the registered classes, by calling their
-   * {@link DelayedBind#bind(Ginjector)} method. This method should only be
+   * {@link DelayedBind#delayedBind(Ginjector)} method. This method should only be
    * called once, typically when the program starts.
    * 
    * @param ginjector The {@link Ginjector} from which to get object instances.

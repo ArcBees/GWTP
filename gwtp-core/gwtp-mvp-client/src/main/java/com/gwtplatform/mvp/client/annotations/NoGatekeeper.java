@@ -20,8 +20,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
- * This annotation lets you specify that the {@link Place} associated with your
- * proxy should not use a {@link com.gwtplatform.mvp.client.proxy.Gatekeeper}
+ * This annotation lets you specify that the {@link com.gwtplatform.mvp.client.proxy.Place}
+ * associated with your proxy should not use a {@link com.gwtplatform.mvp.client.proxy.Gatekeeper}
  * even if one is defined with {@link DefaultGatekeeper}.
  * 
  * @author Philippe Beaudoin

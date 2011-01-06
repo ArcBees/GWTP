@@ -24,7 +24,9 @@ import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValid
 import com.gwtplatform.dispatch.server.guice.GuiceBeanProvider;
 
 /**
- * This class links any registered {@link ActionHandler} and {@link ActionValidator} instances with the default.
+ * This class links any registered {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler}
+ * and {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator ActionValidator}
+ * instances with the default.
  * {@link ActionHandlerValidatorRegistry}
  * 
  * @author Christian Goudreau

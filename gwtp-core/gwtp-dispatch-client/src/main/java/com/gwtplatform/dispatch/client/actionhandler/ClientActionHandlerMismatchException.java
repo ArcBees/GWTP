@@ -20,7 +20,7 @@ import com.gwtplatform.dispatch.shared.Action;
 
 /**
  * This exception is throw as a side-effect of an error calling
- * {@link DefaultClientActionHandlerRegistry#register()}. A provider was
+ * {@link DefaultClientActionHandlerRegistry#register}. A provider was
  * registered to provide an client-side action handler for an action, but this
  * action was not the same action as specified by
  * {@link ClientActionHandler#getActionType()}.

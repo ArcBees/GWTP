@@ -88,7 +88,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   /**
-   * If a confirmation question is set (see {@link #setOnLeaveConfirmation()}),
+   * If a confirmation question is set (see {@link #setOnLeaveConfirmation(String)}),
    * this asks the user if he wants to leave the current page.
    * 
    * @return true if the user accepts to leave. false if he refuses.
@@ -128,7 +128,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   /**
-   * Called whenever an error occured that requires the error page
+   * Called whenever an error occurred that requires the error page
    * to be shown to the user.
    * This method will detect infinite reveal loops and throw an
    * {@link RuntimeException} in that case.
@@ -224,7 +224,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * This method will detect infinite reveal loops and throw an
    * {@link RuntimeException} in that case.
    * 
-   * @param invalidHistoryToken The history token that was not recognised.
+   * @param historyToken The history token that was not recognised.
    */
   private void illegalAccess(String historyToken) {   
     startError();

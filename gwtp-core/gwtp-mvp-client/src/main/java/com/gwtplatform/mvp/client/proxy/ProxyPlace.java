@@ -42,7 +42,7 @@ public interface ProxyPlace<P extends Presenter<?, ?>> extends Proxy<P>, Place {
    * {@link #manualReveal(Presenter)} upon success and {@link #manualRevealFailed()} upon 
    * failure.  
    * 
-   * @see Presenter#useDelayedReveal()
+   * @see Presenter#useManualReveal() 
    * @see #manualRevealFailed()
    * 
    * @param presenter The presenter that will be delayed revealed.

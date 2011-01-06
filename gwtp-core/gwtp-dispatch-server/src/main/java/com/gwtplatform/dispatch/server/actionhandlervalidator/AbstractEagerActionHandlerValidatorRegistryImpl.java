@@ -25,7 +25,8 @@ import com.gwtplatform.dispatch.shared.Result;
 
 /**
  * This is a eager-loading implementation of the registry. It will create action handlers and validators at startup. All
- * {@link ActionHandler} and {@link ActionValidator} implementations <b>must</b> have a public, default constructor.
+ * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler}
+ * and {@link ActionValidator} implementations <b>must</b> have a public, default constructor.
  * 
  * @author Christian Goudreau
  */

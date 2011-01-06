@@ -31,9 +31,9 @@ public interface View {
    * Requests the view to add content within a specific slot.
    * <p />
    * Override the default implementation and manage all the slots of your view
-   * into which content can be added. You should also consider over overriding
-   * {@link #removeContent(Object, Widget)}. If the view doesn't know about this
-   * slot, it can silently ignore the request.
+   * into which content can be added. You should also consider overriding
+   * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)}.
+   * If the view doesn't know about this slot, it can silently ignore the request.
    * <p />
    * Used by {@link PresenterWidget#addToSlot(Object, PresenterWidget)}.
    * 
@@ -55,8 +55,8 @@ public interface View {
    * <p />
    * Override the default implementation and manage all the slots of your view
    * into which content can be added and removed. You should also override
-   * {@link #addContent(Object, Widget)}. If the view doesn't know about this
-   * slot, it can silently ignore the request.
+   * {@link #addToSlot(Object, com.google.gwt.user.client.ui.Widget)}.
+   * If the view doesn't know about this slot, it can silently ignore the request.
    * <p />
    * Used by {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)}.
    * 

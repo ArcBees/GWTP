@@ -174,7 +174,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   /**
    * Obtains the title for this place and invoke the passed handler when the
    * title is available. By default, places don't have a title and will invoke
-   * the hanler with {@code null}, but override this method to provide your own
+   * the handler with {@code null}, but override this method to provide your own
    * title.
    * 
    * @param event The {@link GetPlaceTitleEvent} to invoke once the title is
@@ -187,7 +187,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   /**
    * Prepares the presenter with the information contained in the current
    * request, then reveals it. Will refuse to reveal the display and do nothing
-   * if {@link canReveal()} returns <code>false</code>.
+   * if {@link #canReveal()} returns <code>false</code>.
    * 
    * @param request The request to handle. Can pass <code>null</code> if no
    *          request is used, in which case the presenter will be directly

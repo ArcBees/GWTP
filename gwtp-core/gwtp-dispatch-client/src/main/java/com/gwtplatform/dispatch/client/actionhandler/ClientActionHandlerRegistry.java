@@ -21,7 +21,8 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * Implementations of this interface will be used by {@link DispatchAsync}
+ * Implementations of this interface will be used by
+ * {@link com.gwtplatform.dispatch.client.DispatchAsync DispatchAsync}
  * implementation to find client-side action handlers.
  * 
  * @author Brendan Doherty

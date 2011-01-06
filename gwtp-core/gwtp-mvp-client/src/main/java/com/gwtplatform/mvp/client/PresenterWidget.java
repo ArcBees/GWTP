@@ -49,7 +49,7 @@ import java.util.Map;
  * parent {@link Presenter} can contain either {@link Presenter}s or {@link PresenterWidget}s,
  * but a {@link PresenterWidget} can only contain {@link PresenterWidget}s.
  * <p /> 
- * To reveal a {@link PresenterWidget} you should insert it within a {@link HasSlot slot} of its 
+ * To reveal a {@link PresenterWidget} you should insert it within a {@link HasSlots slot} of its
  * containing presenter using one of the following methods:
  * <ul>
  * <li>{@link #setInSlot(Object, PresenterWidget)}
@@ -369,10 +369,10 @@ public abstract class PresenterWidget<V extends View> extends
    * want to unregister handlers manually use {@link #addHandler} 
    * instead.
    * 
-   * @see #addHandler(Type, EventHandler)
+   * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
    * 
    * @param <H> The handler type.
-   * @param type See {@link Type}.
+   * @param type See {@link com.google.gwt.event.shared.GwtEvent.Type}.
    * @param handler The handler to register.
    */
   protected final <H extends EventHandler> void addRegisteredHandler(
@@ -384,10 +384,10 @@ public abstract class PresenterWidget<V extends View> extends
    * Registers an event handler towards the {@link EventBus}.
    * Use this only in the rare situations where you want to manually 
    * control when the handler is unregistered, otherwise call
-   * {@link #addRegisteredHandler(Type, EventHandler)}.
+   * {@link #addRegisteredHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)}.
    * 
    * @param <H> The handler type.
-   * @param type See {@link Type}.
+   * @param type See {@link com.google.gwt.event.shared.GwtEvent.Type}.
    * @param handler The handler to register.
    * @return The {@link HandlerRegistration} you should use to unregister the handler.
    */
