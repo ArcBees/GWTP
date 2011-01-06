@@ -16,6 +16,7 @@
     <name>GWTP Core</name>
 
     <modules>
+        <module>gwtp-all</module>
         <module>gwtp-mvp-client</module>
         <module>gwtp-clients-common</module>
         <module>gwtp-dispatch-client</module>
@@ -51,13 +52,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>        
+            </plugin>
         </plugins>
     </build>
 
     <dependencyManagement>
         <dependencies>
             <!-- Sub-modules -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-crawler</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-clients-common</artifactId>
@@ -76,6 +82,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-mvp-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
