@@ -18,7 +18,7 @@
     <properties>
         <gwt.version>2.1.0</gwt.version>
         <gwt-gin.version>1.0-r137</gwt-gin.version>
-        <guice.version>2.0</guice.version>
+        <guice.version>3.0-rc2</guice.version>
         <aopalliance.version>1.0</aopalliance.version>
         <spring.version>3.0.5.RELEASE</spring.version>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
@@ -86,12 +86,12 @@
 
             <!-- DI dependencies -->
             <dependency>
-                <groupId>com.google.code.guice</groupId>
+                <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>
                 <version>${guice.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.code.guice</groupId>
+                <groupId>com.google.inject.extensions</groupId>
                 <artifactId>guice-servlet</artifactId>
                 <version>${guice.version}</version>
             </dependency>
