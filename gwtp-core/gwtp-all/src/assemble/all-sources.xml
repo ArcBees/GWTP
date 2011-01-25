@@ -1,0 +1,16 @@
+<assembly>
+    <id>sources</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputFileNameMapping/>
+            <unpack>true</unpack>
+            <includes>
+                <include>com.gwtplatform:*:*:sources</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+</assembly>
