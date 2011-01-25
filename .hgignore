@@ -34,3 +34,17 @@ glob:**.project
 glob:**.factorypath
 glob:**.classpath
 glob:**.checkstyle
+glob:gwtp-build-tools/bin/**
+glob:gwtp-core/gwtp-clients-common/bin/**
+glob:gwtp-core/gwtp-crawler/bin/**
+glob:gwtp-core/gwtp-dispatch-client/bin/**
+glob:gwtp-core/gwtp-dispatch-server/bin/**
+glob:gwtp-core/gwtp-dispatch-shared/bin/**
+glob:gwtp-core/gwtp-mvp-client/bin/**
+glob:gwtp-core/gwtp-processors/bin/**
+glob:gwtp-core/gwtp-tester/bin/**
+glob:gwtp-samples/gwtp-sample-basic/bin/**
+glob:gwtp-samples/gwtp-sample-basic-spring/bin/**
+glob:gwtp-samples/gwtp-sample-hplace/bin/**
+glob:gwtp-samples/gwtp-sample-nested/bin/**
+glob:gwtp-samples/gwtp-sample-tab/bin/**
