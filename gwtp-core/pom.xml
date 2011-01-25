@@ -33,7 +33,7 @@
         <aopalliance.version>1.0</aopalliance.version>
         <gwt.version>2.1.0</gwt.version>
         <junit.version>4.5</junit.version>
-        <jukito.version>1.0-SNAPSHOT</jukito.version>
+        <jukito.version>1.0</jukito.version>
         <mockito.version>1.8.5</mockito.version>
     </properties>
 
