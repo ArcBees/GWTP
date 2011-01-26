@@ -44,10 +44,6 @@ import java.lang.annotation.Target;
 public @interface TabInfo {
   Class<? extends TabContainerPresenter<?, ?>> container();
 
-  String getLabel() default "";
-
-  String label() default "";
-
   String nameToken() default "";
 
   int priority();

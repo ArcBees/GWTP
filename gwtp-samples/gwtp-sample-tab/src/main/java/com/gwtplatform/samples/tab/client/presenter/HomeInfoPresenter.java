@@ -24,6 +24,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
+import com.gwtplatform.mvp.client.annotations.TabLabel;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
@@ -38,9 +39,9 @@ public class HomeInfoPresenter extends
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.infoPage)
-  @TabInfo(container = HomePresenter.class, priority = 1, // The second tab in
+  @TabInfo(container = HomePresenter.class, priority = 1) // The second tab in
                                                           // the home tab
-  label = "Info")
+  @TabLabel("Info")
   public interface MyProxy extends TabContentProxyPlace<HomeInfoPresenter> {
   }
 
