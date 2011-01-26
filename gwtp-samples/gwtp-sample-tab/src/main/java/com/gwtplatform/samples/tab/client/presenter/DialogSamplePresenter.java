@@ -26,6 +26,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
+import com.gwtplatform.mvp.client.annotations.TabLabel;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
@@ -44,8 +45,8 @@ public class DialogSamplePresenter extends
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.dialogSamplePage)
-  @TabInfo(container = MainPagePresenter.class, priority = 1, // The second tab
-  label = "Dialog samples")
+  @TabInfo(container = MainPagePresenter.class, priority = 1) // The second tab
+  @TabLabel("Dialog samples")
   public interface MyProxy extends TabContentProxyPlace<DialogSamplePresenter> {
   }
 
