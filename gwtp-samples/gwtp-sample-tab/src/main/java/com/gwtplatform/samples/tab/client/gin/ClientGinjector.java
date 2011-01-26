@@ -23,6 +23,7 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
+import com.gwtplatform.samples.tab.client.MyConstants;
 import com.gwtplatform.samples.tab.client.presenter.ContactPresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
@@ -48,6 +49,7 @@ public interface ClientGinjector extends Ginjector {
   Provider<MainPagePresenter> getMainPagePresenter();
   PlaceManager getPlaceManager();
   ProxyFailureHandler getProxyFailureHandler();
+  MyConstants getMyConstants();
   
   // The following methods allow our widget to participate in dependency injection
   LinkMenu getLinkMenu();

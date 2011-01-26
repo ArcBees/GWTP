@@ -27,6 +27,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 import com.gwtplatform.samples.tab.client.FailureHandlerAlert;
 import com.gwtplatform.samples.tab.client.GwtptabsamplePlaceManager;
+import com.gwtplatform.samples.tab.client.MyConstants;
 import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.presenter.ContactPresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
@@ -62,6 +63,7 @@ public class ClientModule extends AbstractPresenterModule {
     bind(RootPresenter.class).asEagerSingleton();
     bind(ProxyFailureHandler.class).to(FailureHandlerAlert.class).in(
         Singleton.class);
+    bind(MyConstants.class).in(Singleton.class);
 
     // Constants
     bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);

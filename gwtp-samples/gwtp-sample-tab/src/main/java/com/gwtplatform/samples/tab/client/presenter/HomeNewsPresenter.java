@@ -18,15 +18,16 @@ package com.gwtplatform.samples.tab.client.presenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
+import com.gwtplatform.mvp.client.annotations.TabLabelFunction;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
+import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
 /**
  * @author Christian Goudreau
@@ -38,10 +39,14 @@ public class HomeNewsPresenter extends
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.homePage)
-  @TabInfo(container = HomePresenter.class, priority = 0, // The left-most tab
+  @TabInfo(container = HomePresenter.class, priority = 0) // The left-most tab
                                                           // in the home tab
-  label = "News")
   public interface MyProxy extends TabContentProxyPlace<HomeNewsPresenter> {
+  }
+
+  @TabLabelFunction
+  public static String getTabLabel(ClientGinjector ginjector) {
+    return ginjector.getMyConstants().news();
   }
 
   /**

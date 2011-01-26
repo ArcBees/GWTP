@@ -24,6 +24,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
+import com.gwtplatform.mvp.client.annotations.TabLabel;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
@@ -38,10 +39,9 @@ public class ContactPresenter extends
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.contactPage)
-  @TabInfo(container = MainPagePresenter.class, priority = 1000, // The last
-                                                                 // tab, no
-                                                                 // matter what
-  label = "Contact")
+  @TabInfo(container = MainPagePresenter.class, priority = 1000) // The last tab
+                                                                 // no matter what
+  @TabLabel("Contact")
   public interface MyProxy extends TabContentProxyPlace<ContactPresenter> {
   }
 
