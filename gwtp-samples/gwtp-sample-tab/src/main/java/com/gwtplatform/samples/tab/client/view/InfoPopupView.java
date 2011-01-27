@@ -16,31 +16,29 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.PopupViewImpl;
-import com.gwtplatform.samples.tab.client.presenter.PopupPresenterWidget;
+import com.gwtplatform.samples.tab.client.presenter.InfoPopupPresenterWidget;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.InfoPopupPresenterWidget}.
+ * 
  * @author Philippe Beaudoin
  */
 public class InfoPopupView extends PopupViewImpl implements
-    PopupPresenterWidget.MyView {
+    InfoPopupPresenterWidget.MyView {
 
-  interface InfoPopupViewUiBinder extends UiBinder<PopupPanel, InfoPopupView> {
-  }
-
-  private static InfoPopupViewUiBinder uiBinder = GWT.create(InfoPopupViewUiBinder.class);
+  public interface Binder extends UiBinder<PopupPanel, InfoPopupView> { }
 
   private final PopupPanel widget;
 
   @Inject
-  public InfoPopupView(EventBus eventBus) {
+  public InfoPopupView(Binder uiBinder, EventBus eventBus) {
     super(eventBus);
     widget = uiBinder.createAndBindUi(this);
   }

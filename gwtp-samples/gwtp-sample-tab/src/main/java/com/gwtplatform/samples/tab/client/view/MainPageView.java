@@ -16,10 +16,11 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -27,24 +28,22 @@ import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
 import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
 
 /**
- * This is the main view of the application. Every time a leaf presenter wants
- * to reveal himself, mainPage will add the content of the target inside the
- * mainContantPanel.
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.MainPagePresenter}.
  * 
  * @author Christian Goudreau
  */
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
-  interface MainPageViewUiBinder extends UiBinder<Widget, MainPageView> {
-  }
-
-  private static MainPageViewUiBinder uiBinder = GWT.create(MainPageViewUiBinder.class);
+  
+  public interface Binder extends UiBinder<Widget, MainPageView> { }
 
   public final Widget widget;
 
   @UiField
   RoundTabPanel tabPanel;
 
-  public MainPageView() {
+  @Inject
+  public MainPageView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
   }
 

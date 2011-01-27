@@ -20,8 +20,8 @@ import com.gwtplatform.mvp.client.TabDataBasic;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
- * This class allows the definition of tabs that can be protected to allow
- * access only to the administrator.
+ * This class allows the definition of tabs that can be protected by
+ * any {@link Gatekeeper}.
  * 
  * @author Philippe Beaudoin
  */

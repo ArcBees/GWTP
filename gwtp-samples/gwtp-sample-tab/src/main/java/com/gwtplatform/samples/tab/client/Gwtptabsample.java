@@ -23,6 +23,8 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
 /**
+ * The entry point of this sample.
+ * 
  * @author Christian Goudreau
  */
 public class Gwtptabsample implements EntryPoint {

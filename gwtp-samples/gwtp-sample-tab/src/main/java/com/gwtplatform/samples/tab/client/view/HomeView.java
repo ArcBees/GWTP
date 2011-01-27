@@ -16,11 +16,11 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
-
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -28,20 +28,22 @@ import com.gwtplatform.samples.tab.client.presenter.HomePresenter;
 import com.gwtplatform.samples.tab.client.ui.SimpleTabPanel;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.HomePresenter}.
+ * 
  * @author Christian Goudreau
  */
 public class HomeView extends ViewImpl implements HomePresenter.MyView {
-  interface HomeViewUiBinder extends UiBinder<Widget, HomeView> {
-  }
-
-  private static HomeViewUiBinder uiBinder = GWT.create(HomeViewUiBinder.class);
+  
+  public interface Binder extends UiBinder<Widget, HomeView> { }
 
   @UiField
   SimpleTabPanel tabPanel;
 
   private final Widget widget;
 
-  public HomeView() {
+  @Inject
+  public HomeView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
   }
 

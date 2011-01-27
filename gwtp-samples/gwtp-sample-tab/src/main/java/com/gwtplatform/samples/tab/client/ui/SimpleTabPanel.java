@@ -22,26 +22,16 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.TabData;
 
 /**
- * A widget that can show multiple tabs with rounded corners, each with its own
- * content.
+ * A {@link BaseTabPanel} styled to contain {@link SimpleTab}.
  * <p />
- * Instead of using a static field and {@code GWT.create(Binder.class)} to
- * instantiate the binder we rely on GIN dependency injection. This
- * would facilitate testing if we ever wanted to test this class.
- * Using this widget in a UiBinder file is made possible by our use or
- * {@code GinUiBinder.gwt.xml} in the module file, {@code Gwtptabsample.gwt.xml}.
- * We also need a method to return {@link SimpleTabPanel} in 
- * {@link com.gwtplatform.samples.tab.client.gin.ClientGinjector ClientGinjector}.
- * Finally, it is good practice to bind the {@link SimpleTabPanel.Binder} interface
- * as a singleton, which is done in {@link UiModule}.
+ * Look at {@link LinkMenu} to see how we can use this widget within a 
+ * UiBinder file even though its constructor relies on dependency injection.
  * 
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
 public class SimpleTabPanel extends BaseTabPanel {
-  /**
-   * Our custom binder.
-   */
+  
   public interface Binder extends UiBinder<Widget, SimpleTabPanel> { }
 
   @Inject
@@ -51,6 +41,7 @@ public class SimpleTabPanel extends BaseTabPanel {
 
   @Override
   protected BaseTab createNewTab(TabData tabData) {
+    // TODO Try using assisted injection here (to inject UiBinder in SimpleTab)
     return new SimpleTab(tabData);
   }
 

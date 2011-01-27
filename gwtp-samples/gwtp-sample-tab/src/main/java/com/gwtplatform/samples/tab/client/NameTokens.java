@@ -21,20 +21,21 @@ package com.gwtplatform.samples.tab.client;
  * {@link ProxyPlace} classes get their tokens from here. This class also makes
  * it easy to use name tokens as a resource within UIBinder xml files.
  * <p />
- * The public static final String is used within the annotation
- * {@link NameToken}, which can't use a method and the method associated with
- * this field is used within UiBinder which can't access static fields.
+ * The String constants are used within the {@link NameToken} annotations, which can't 
+ * use a method. The static method corresponding to these constants are used within 
+ * UiBinder which can't access static fields.
  * <p />
- * Also note the exclamation mark in front of the tokens, this is used for
- * search engine crawling support.
+ * Also note the exclamation mark in front of the tokens, this is the first step
+ * towards search engine crawling support.
  * 
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public class NameTokens {
   public static final String dialogSamplePage = "!dialogPage";
   public static final String adminPage = "!adminPage";
-  public static final String homePage = "!homePage";
-  public static final String infoPage = "!infoPage";
+  public static final String homeNewsPage = "!homeNewsPage";
+  public static final String infoInfoPage = "!homeInfoPage";
   public static final String settingsPage = "!settingsPage";
 
   public static String getDialogSamplePage() {
@@ -45,12 +46,12 @@ public class NameTokens {
     return adminPage;
   }
 
-  public static String getHomePage() {
-    return homePage;
+  public static String getHomeNewsPage() {
+    return homeNewsPage;
   }
 
-  public static String getInfoPage() {
-    return infoPage;
+  public static String getHomeInfoPage() {
+    return infoInfoPage;
   }
 
   public static String getSettingsPage() {

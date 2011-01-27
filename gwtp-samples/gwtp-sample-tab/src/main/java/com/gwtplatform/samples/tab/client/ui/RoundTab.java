@@ -23,7 +23,8 @@ import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
- * A tab with rounded corner contained within an {@link RoundTabPanel}.
+ * A {@link BaseTab} styled with rounded upper corners and meant to
+ * be contained in a {@link RoundTabPanel}.
  * This tab can be protected so that it is only displayed when a given
  * {@link Gatekeeper} can allow access. If a {@code null} 
  * {@link Gatekeeper} is used then the tab is always accessible.
@@ -32,9 +33,9 @@ import com.gwtplatform.mvp.client.proxy.Gatekeeper;
  */
 public class RoundTab extends BaseTab {
 
-  interface Binder extends UiBinder<Widget, RoundTab> {
-  }
+  interface Binder extends UiBinder<Widget, RoundTab> { }
 
+  // TODO Once we use assisted injection in {@link SimpleTabPabel}, then inject the binder.
   private static final Binder binder = GWT.create(Binder.class);
 
   private final Gatekeeper gatekeeper;

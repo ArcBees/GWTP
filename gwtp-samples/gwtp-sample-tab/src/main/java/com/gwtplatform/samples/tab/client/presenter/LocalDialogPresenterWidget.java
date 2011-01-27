@@ -23,6 +23,10 @@ import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
+ * The {@link PresenterWidget} of a dialog box that is meant to be 
+ * displayed only when its parent presenter is visible. Compare
+ * to {@link GlobalDialogPresenterWidget}.
+ * 
  * @author Philippe Beaudoin
  */
 public class LocalDialogPresenterWidget extends

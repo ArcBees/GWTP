@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -26,21 +25,20 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter.MyView;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.DialogPresenter}.
+ * 
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
 public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers> 
     implements MyView {
   
-  interface DialogSampleViewUiBinder extends UiBinder<Widget, DialogSampleView> {
-  }
-
-  private static DialogSampleViewUiBinder uiBinder = GWT.create(DialogSampleViewUiBinder.class);
+  public interface Binder extends UiBinder<Widget, DialogSampleView> { }
 
   @UiField
   Button localDialog;
@@ -54,7 +52,7 @@ public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers>
   private final Widget widget;
 
   @Inject
-  public DialogSampleView() {
+  public DialogSampleView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
   }
 

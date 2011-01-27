@@ -20,7 +20,8 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
- * This gatekeeper only allows access if the user is an administrator.
+ * This gatekeeper only allows access if the user 
+ * currently logged in has administrator privileges.
  * 
  * @author Philippe Beaudoin
  */

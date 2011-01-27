@@ -33,7 +33,16 @@ import com.gwtplatform.samples.tab.client.TabDataExt;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
 /**
+ * A sample {@link Presenter} that should only be displayed to administrator users.
+ * It appears as a tab within {@link MainPagePresenter}.
+ * <p />
+ * It uses {@link IsAdminGatekeeper} to prevent access to non-administrator users.
+ * <p />
+ * It uses the option 3 described in {@link TabInfo} to describe the tab using a
+ * {@link TabDataExt} that ensures the tab is not visible to non-administrator users. 
+ *  
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public class AdminAreaPresenter
     extends Presenter<AdminAreaPresenter.MyView, AdminAreaPresenter.MyProxy>  {
@@ -45,7 +54,6 @@ public class AdminAreaPresenter
   @UseGatekeeper(IsAdminGatekeeper.class)
   public interface MyProxy extends TabContentProxyPlace<AdminAreaPresenter> {
   }
-
 
   @TabInfo(container = MainPagePresenter.class)
   static TabData getTabLabel(ClientGinjector ginjector) {
