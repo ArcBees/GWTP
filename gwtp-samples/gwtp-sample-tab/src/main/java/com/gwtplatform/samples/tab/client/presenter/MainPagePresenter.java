@@ -34,8 +34,10 @@ import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent;
 import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent.CurrentUserChangedHandler;
 
 /**
- * This is the main presenter of the application. It's a
- * {@link com.gwtplatform.mvp.client.TabContainerPresenter}.
+ * The main {@link Presenter} of the application. It contains a number
+ * of tabs allowing access to the various parts of the application.
+ * Tabs are refreshed whenever the current user's privileges change in
+ * order to hide areas that cannot be accessed.
  * 
  * @author Christian Goudreau
  * @author Philippe Beaudoin
@@ -43,6 +45,7 @@ import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent.CurrentUserCha
 public class MainPagePresenter
     extends TabContainerPresenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> 
     implements CurrentUserChangedHandler {
+  
   /**
    * {@link MainPagePresenter}'s proxy.
    */

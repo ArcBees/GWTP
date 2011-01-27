@@ -23,15 +23,16 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.TabData;
 
 /**
- * A tab with rounded corner contained within an {@link RoundTabPanel}.
+ * A {@link BaseTab} styled as a square and meant to
+ * be contained in a {@link SimpleTabPanel}.
  * 
  * @author Philippe Beaudoin
  */
 public class SimpleTab extends BaseTab {
 
-  interface Binder extends UiBinder<Widget, SimpleTab> {
-  }
+  interface Binder extends UiBinder<Widget, SimpleTab> { }
 
+  // TODO Once we use assisted injection in {@link SimpleTabPabel}, then inject the binder.
   private static final Binder binder = GWT.create(Binder.class);
 
   @UiConstructor

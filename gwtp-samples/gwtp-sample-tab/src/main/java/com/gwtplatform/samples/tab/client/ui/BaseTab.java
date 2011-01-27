@@ -26,7 +26,12 @@ import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 
 /**
+ * This is a basic implementation of a {@link Tab} that must be 
+ * subclassed. Subclasses can style the tab in any way they want.
+ * A {@link BaseTab} is added to a {@link BaseTabPanel}.
+ * 
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public abstract class BaseTab extends Composite implements Tab {
   /**

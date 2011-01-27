@@ -23,19 +23,23 @@ import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
+ * The {@link PresenterWidget} of a simple popup box that is 
+ * dismissed as soon as the user clicks outside of it or
+ * navigates.
+ * 
  * @author Philippe Beaudoin
  */
-public class PopupPresenterWidget extends
-    PresenterWidget<PopupPresenterWidget.MyView> {
+public class InfoPopupPresenterWidget extends
+    PresenterWidget<InfoPopupPresenterWidget.MyView> {
 
   /**
-   * {@link PopupPresenterWidget}'s view.
+   * {@link InfoPopupPresenterWidget}'s view.
    */
   public interface MyView extends PopupView {
   }
 
   @Inject
-  public PopupPresenterWidget(final EventBus eventBus, final MyView view) {
+  public InfoPopupPresenterWidget(final EventBus eventBus, final MyView view) {
     super(eventBus, view);
   }
 }

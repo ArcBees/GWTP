@@ -27,9 +27,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used in {@link GwtptabsamplePlaceManager} and is bind in
- * {@link ClientModule}. It's purpose is to bind the default place to a default
- * presenter.
+ * This annotation is used in {@link GwtptabsamplePlaceManager} and is bound in
+ * {@link ClientModule} to a constant indicating the name token of the default place.
  * 
  * @author Christian Goudreau
  */

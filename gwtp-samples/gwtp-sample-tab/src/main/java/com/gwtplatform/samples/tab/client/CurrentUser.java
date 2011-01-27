@@ -22,9 +22,8 @@ import com.google.gwt.event.shared.HasHandlers;
 import com.google.inject.Inject;
 
 /**
- * This is a basic class that represents the currently
- * logged-in user. In this example, the user can be an
- * administrator or a regular user.
+ * This is a basic class that holds the privileges of the user
+ * currently logged in.
  * 
  * @author Philippe Beaudoin
  */

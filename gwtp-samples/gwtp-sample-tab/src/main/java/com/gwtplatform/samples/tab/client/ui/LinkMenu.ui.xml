@@ -5,7 +5,7 @@
 	<ui:with type="com.gwtplatform.samples.tab.client.NameTokens" field="nameTokens" />
 
 	<g:HTMLPanel>
-		<g:InlineHyperlink targetHistoryToken="{nameTokens.getHomePage}">Home</g:InlineHyperlink> | 
+		<g:InlineHyperlink targetHistoryToken="{nameTokens.getHomeNewsPage}">Home</g:InlineHyperlink> | 
 		<g:InlineHyperlink targetHistoryToken="{nameTokens.getDialogSamplePage}">Dialogs</g:InlineHyperlink> | 
 		<g:InlineHyperlink targetHistoryToken="{nameTokens.getSettingsPage}">Settings</g:InlineHyperlink>
 	</g:HTMLPanel>

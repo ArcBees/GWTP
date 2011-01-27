@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -24,18 +23,20 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.SettingsPresenter}.
+ * 
  * @author Christian Goudreau
  */
 public class SettingsView extends ViewWithUiHandlers<SettingsUiHandlers>
     implements SettingsPresenter.MyView {
-  interface SettingsViewUiBinder extends UiBinder<Widget, SettingsView> {
-  }
-
-  private static SettingsViewUiBinder uiBinder = GWT.create(SettingsViewUiBinder.class);
+  
+  public interface Binder extends UiBinder<Widget, SettingsView> { }
 
   private final Widget widget;
 
@@ -45,7 +46,8 @@ public class SettingsView extends ViewWithUiHandlers<SettingsUiHandlers>
   @UiField
   Button togglePrivileges;
   
-  public SettingsView() {
+  @Inject
+  public SettingsView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
   }
 

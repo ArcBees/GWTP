@@ -28,6 +28,12 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
 
 /**
+ * A sample {@link Presenter} filled with arbitrary content.
+ * It appears as a tab within {@link HomePresenter}, which
+ * is itself a s tab in {@link MainPagePresenter}.
+ * <p />
+ * It demonstrates the option 1 described in {@link TabInfo}. 
+ *  
  * @author Christian Goudreau
  */
 public class HomeInfoPresenter extends
@@ -36,7 +42,7 @@ public class HomeInfoPresenter extends
    * {@link HomeInfoPresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @NameToken(NameTokens.infoPage)
+  @NameToken(NameTokens.infoInfoPage)
   @TabInfo(container = HomePresenter.class,
       label = "Info",
       priority = 1) // The second tab in the home tab

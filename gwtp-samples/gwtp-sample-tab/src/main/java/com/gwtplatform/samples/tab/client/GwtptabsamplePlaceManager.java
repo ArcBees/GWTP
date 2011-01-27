@@ -25,6 +25,8 @@ import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 import com.gwtplatform.samples.tab.client.gin.DefaultPlace;
 
 /**
+ * The place manager of this sample.
+ * 
  * @author Christian Goudreau
  */
 public class GwtptabsamplePlaceManager extends PlaceManagerImpl {

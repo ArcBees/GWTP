@@ -26,6 +26,10 @@ import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 
 /**
+ * The {@link PresenterWidget} of a dialog box that is meant to be 
+ * displayed no matter which presenter is visible. Compare
+ * to {@link LocalDialogPresenterWidget}.
+ * 
  * @author Philippe Beaudoin
  */
 public class GlobalDialogPresenterWidget extends 
