@@ -31,7 +31,14 @@ import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
 /**
+ * A sample {@link Presenter} filled with arbitrary content.
+ * It appears as a tab within {@link HomePresenter}, which
+ * is itself a s tab in {@link MainPagePresenter}.
+ * <p />
+ * It demonstrates the option 3 described in {@link TabInfo}. 
+ *  
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public class HomeNewsPresenter extends
     Presenter<HomeNewsPresenter.MyView, HomeNewsPresenter.MyProxy> {
@@ -39,7 +46,7 @@ public class HomeNewsPresenter extends
    * {@link HomeNewsPresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @NameToken(NameTokens.homePage)
+  @NameToken(NameTokens.homeNewsPage)
   public interface MyProxy extends TabContentProxyPlace<HomeNewsPresenter> {
   }
 

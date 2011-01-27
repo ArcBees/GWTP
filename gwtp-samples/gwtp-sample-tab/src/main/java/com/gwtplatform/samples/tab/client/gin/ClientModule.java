@@ -39,7 +39,7 @@ import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomePresenter;
 import com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
-import com.gwtplatform.samples.tab.client.presenter.PopupPresenterWidget;
+import com.gwtplatform.samples.tab.client.presenter.InfoPopupPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
 import com.gwtplatform.samples.tab.client.view.AdminAreaView;
 import com.gwtplatform.samples.tab.client.view.DialogSampleView;
@@ -72,7 +72,7 @@ public class ClientModule extends AbstractPresenterModule {
     bind(IsAdminGatekeeper.class).in(Singleton.class);
     
     // Constants
-    bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);
+    bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homeNewsPage);
 
     // Presenters
     bindPresenter(MainPagePresenter.class, MainPagePresenter.MyView.class,
@@ -89,8 +89,8 @@ public class ClientModule extends AbstractPresenterModule {
         HomeNewsView.class, HomeNewsPresenter.MyProxy.class);
     bindPresenter(HomeInfoPresenter.class, HomeInfoPresenter.MyView.class,
         HomeInfoView.class, HomeInfoPresenter.MyProxy.class);
-    bindSingletonPresenterWidget(PopupPresenterWidget.class,
-        PopupPresenterWidget.MyView.class, InfoPopupView.class);
+    bindSingletonPresenterWidget(InfoPopupPresenterWidget.class,
+        InfoPopupPresenterWidget.MyView.class, InfoPopupView.class);
     bindSingletonPresenterWidget(LocalDialogPresenterWidget.class,
         LocalDialogPresenterWidget.MyView.class, LocalDialogView.class);
     bindSingletonPresenterWidget(GlobalDialogPresenterWidget.class,

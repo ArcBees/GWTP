@@ -19,6 +19,7 @@ package com.gwtplatform.samples.tab.client.presenter;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabContainerPresenter;
 import com.gwtplatform.mvp.client.TabView;
@@ -33,7 +34,16 @@ import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
 /**
+ * A sample {@link Presenter} appearing as a tab within {@link MainPagePresenter}
+ * and itself containing two tabs. When the tab for {@link HomePresenter}
+ * is clicked, them {@link HomeNewsPresenter} is displayed.
+ * <p />
+ * It demonstrates the option 2 described in {@link TabInfo}, together with the
+ * use of the {@code nameToken} parameter of {@code @TabInfo} to specify which
+ * place to show when the tab is clicked.
+ *  
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public class HomePresenter extends
     TabContainerPresenter<HomePresenter.MyView, HomePresenter.MyProxy> {
@@ -45,8 +55,8 @@ public class HomePresenter extends
   }
 
   @TabInfo(container = MainPagePresenter.class, 
-      priority = 0, // The first tab in the main page
-      nameToken = NameTokens.homePage)
+      priority = 0,                         // The first tab in the main page
+      nameToken = NameTokens.homeNewsPage)  // Go to HomeNewsPresenter when clicked
   static String getTabLabel(ClientGinjector ginjector) {
     return ginjector.getMyConstants().home();
   }

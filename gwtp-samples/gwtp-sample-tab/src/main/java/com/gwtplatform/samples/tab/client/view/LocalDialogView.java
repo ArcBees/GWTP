@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -26,20 +25,19 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.PopupViewImpl;
 import com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget.MyView;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget}.
+ * 
  * @author Philippe Beaudoin
  */
 public class LocalDialogView extends PopupViewImpl implements MyView {
 
-  interface LocalDialogViewUiBinder extends
-      UiBinder<PopupPanel, LocalDialogView> {
-  }
-
-  private static LocalDialogViewUiBinder uiBinder = GWT.create(LocalDialogViewUiBinder.class);
+  public interface Binder extends UiBinder<PopupPanel, LocalDialogView> { }
 
   @UiField
   Button okButton;
@@ -47,7 +45,7 @@ public class LocalDialogView extends PopupViewImpl implements MyView {
   private final PopupPanel widget;
 
   @Inject
-  public LocalDialogView(EventBus eventBus) {
+  public LocalDialogView(Binder uiBinder, EventBus eventBus) {
     super(eventBus);
     widget = uiBinder.createAndBindUi(this);
   }

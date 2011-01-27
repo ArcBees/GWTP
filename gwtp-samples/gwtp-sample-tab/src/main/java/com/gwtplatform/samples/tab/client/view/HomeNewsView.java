@@ -16,25 +16,26 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
-
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter}.
+ * 
  * @author Christian Goudreau
  */
 public class HomeNewsView extends ViewImpl implements HomeNewsPresenter.MyView {
-  interface HomeNewsViewUiBinder extends UiBinder<Widget, HomeNewsView> {
-  }
 
-  private static HomeNewsViewUiBinder uiBinder = GWT.create(HomeNewsViewUiBinder.class);
+  public interface Binder extends UiBinder<Widget, HomeNewsView> { }
 
   private final Widget widget;
 
-  public HomeNewsView() {
+  @Inject
+  public HomeNewsView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
   }
 

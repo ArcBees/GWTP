@@ -19,9 +19,12 @@ package com.gwtplatform.samples.tab.client;
 import com.gwtplatform.dispatch.annotation.GenEvent;
 
 /**
+ * An event triggered whenever the privileges of the user currently
+ * logged in are modified.
+ * <p />
  * This classes uses GWTP annotation processors
- * to generate {@link GetProductEvent} and 
- * {@link GetProductHandler}.
+ * to generate {@code CurrentUserChangedEvent} and 
+ * {@code CurrentUserChangedHandler}.
  * 
  * @author Philippe Beaudoin
  */
