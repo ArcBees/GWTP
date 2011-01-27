@@ -26,22 +26,23 @@ import com.google.inject.Inject;
  * <p />
  * Instead of using a static field and {@code GWT.create(Binder.class)} to
  * instantiate the binder we rely on GIN dependency injection. This
- * would facilitate testing if we ever wanted to test this class.
- * Using this widget in a UiBinder file is made possible by our use or
- * {@code GinUiBinder.gwt.xml} in the module file, {@code Gwtptabsample.gwt.xml}.
- * We also need a method to return {@link LinkMenu} in 
- * {@link com.gwtplatform.samples.tab.client.gin.ClientGinjector ClientGinjector}.
+ * would facilitate testing if we ever wanted to test this class outside
+ * of a {@code GWTTestCase}.
+ * <p />
+ * Even though this widget contains an {@code @Inject} constructor, it can be
+ * used within a UiBinder file. This is made possible by using GWTP's 
+ * {@link com.google.gwt.uibinder.rebind.GinUiBinderGenerator} and our use of
+ * {@code &lt;inherits name="com.google.gwt.uibinder.GinUiBinder" /&gt}
+ * in {@code Gwtptabsample.gwt.xml}. This also requires a method returning 
+ * {@link LinkMenu} in {@link com.gwtplatform.samples.tab.client.gin.ClientGinjector ClientGinjector}.
  * Finally, it is good practice to bind the {@link LinkMenu.Binder} interface
  * as a singleton, which is done in {@link UiModule}.
  * 
  * @author Christian Goudreau
  * @author Philippe Beaudoin
- * @author Christian Goudreau
  */
 public class LinkMenu extends Composite {
-  /**
-   * Our custom binder.
-   */
+
   public interface Binder extends UiBinder<Widget, LinkMenu> { }
 
   @Inject

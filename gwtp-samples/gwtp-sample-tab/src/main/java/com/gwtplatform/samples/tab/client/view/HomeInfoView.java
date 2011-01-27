@@ -16,25 +16,26 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
-
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter}.
+ * 
  * @author Christian Goudreau
  */
 public class HomeInfoView extends ViewImpl implements HomeInfoPresenter.MyView {
-  interface HomeInfoViewUiBinder extends UiBinder<Widget, HomeInfoView> {
-  }
 
-  private static HomeInfoViewUiBinder uiBinder = GWT.create(HomeInfoViewUiBinder.class);
+  public interface Binder extends UiBinder<Widget, HomeInfoView> { }
 
   private final Widget widget;
 
-  public HomeInfoView() {
+  @Inject
+  public HomeInfoView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
   }
 

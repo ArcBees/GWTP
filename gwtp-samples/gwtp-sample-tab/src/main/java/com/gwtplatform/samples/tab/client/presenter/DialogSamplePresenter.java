@@ -32,6 +32,12 @@ import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.view.DialogSampleUiHandlers;
 
 /**
+ * A sample {@link Presenter} that allows the user to trigger various types of
+ * dialog boxes and popup windows. It appears as a tab within 
+ * {@link MainPagePresenter}.
+ * <p />
+ * It demonstrates the option 1 described in {@link TabInfo}. 
+
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
@@ -57,13 +63,13 @@ public class DialogSamplePresenter
 
   private final LocalDialogPresenterWidget detailsDialog;
   private final GlobalDialogPresenterWidget wizardDialog;
-  private final PopupPresenterWidget infoPopup;
+  private final InfoPopupPresenterWidget infoPopup;
 
   @Inject
   public DialogSamplePresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy, final LocalDialogPresenterWidget dialogBox,
       final GlobalDialogPresenterWidget wizardDialog,
-      final PopupPresenterWidget infoPopup) {
+      final InfoPopupPresenterWidget infoPopup) {
     super(eventBus, view, proxy);
     this.detailsDialog = dialogBox;
     this.wizardDialog = wizardDialog;

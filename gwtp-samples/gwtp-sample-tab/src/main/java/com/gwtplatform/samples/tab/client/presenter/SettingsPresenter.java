@@ -31,7 +31,13 @@ import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.view.SettingsUiHandlers;
 
 /**
+ * A sample {@link Presenter} that lets user toggle between being an
+ * administrator and a regular user.
+ * <p />
+ * It demonstrates the option 1 described in {@link TabInfo}. 
+ * 
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public class SettingsPresenter
     extends Presenter<SettingsPresenter.MyView, SettingsPresenter.MyProxy> 

@@ -21,6 +21,9 @@ import com.google.gwt.user.client.Window;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 /**
+ * The mechanism by which we let the user know that an code loading
+ * operation has failed.
+ * 
  * @author Christian Goudreau
  */
 public class FailureHandlerAlert implements ProxyFailureHandler {

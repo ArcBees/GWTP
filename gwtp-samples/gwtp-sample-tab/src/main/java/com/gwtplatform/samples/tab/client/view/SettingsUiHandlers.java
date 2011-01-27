@@ -19,7 +19,7 @@ package com.gwtplatform.samples.tab.client.view;
 import com.gwtplatform.mvp.client.UiHandlers;
 
 /**
- * {@link AdminAreaView}'s {@link UiHandlers}.
+ * {@link SettingsView}'s {@link UiHandlers}.
  * 
  * @author Philippe Beaudoin
  */

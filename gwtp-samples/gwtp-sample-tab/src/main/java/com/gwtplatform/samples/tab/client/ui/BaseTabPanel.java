@@ -29,6 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This is a basic implementation of a {@link TabPanel} that must be 
+ * subclassed. Subclasses can style the tab panel in any way they want.
+ * A {@link BaseTabPanel} will hold a number of {@link BaseTab}.
+ * 
  * @author Philippe Beaudoin
  */
 public abstract class BaseTabPanel extends Composite implements TabPanel {

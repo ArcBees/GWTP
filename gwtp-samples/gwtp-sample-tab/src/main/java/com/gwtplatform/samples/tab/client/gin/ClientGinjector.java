@@ -38,7 +38,10 @@ import com.gwtplatform.samples.tab.client.ui.SimpleTabPanel;
 import com.gwtplatform.samples.tab.client.ui.UiModule;
 
 /**
+ * The main {@link Ginjector} of our application.
+ * 
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 @GinModules({ClientModule.class, UiModule.class})
 public interface ClientGinjector extends Ginjector {
@@ -55,7 +58,8 @@ public interface ClientGinjector extends Ginjector {
   MyConstants getMyConstants();
   IsAdminGatekeeper getIsAdminGatekeeper();
   
-  // The following methods allow our widget to participate in dependency injection
+  // The following methods allow these widgets to be used in UiBinder files
+  // and participate in dependency injection.
   LinkMenu getLinkMenu();
   RoundTabPanel getRoundTabPanel();
   SimpleTabPanel getSimpleTabPanel();

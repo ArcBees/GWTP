@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
 
 /**
  * Annotation used to specify various information on a tab. The {@link #container} 
- * parameter is mandatory.This annotation can be used in one of three ways:
+ * parameter is mandatory. This annotation can be used in one of three ways:
  * <p />
  * <b>1) Annotating the proxy</b><br />
  * You can directly annotate your proxy with it, in which case the {@link #label}

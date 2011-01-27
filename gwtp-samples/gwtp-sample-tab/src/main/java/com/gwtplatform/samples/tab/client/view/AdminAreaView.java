@@ -16,24 +16,26 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
 
 /**
+ * The view implementation for
+ * {@link com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter}.
+ * 
  * @author Christian Goudreau
  */
 public class AdminAreaView extends ViewImpl implements AdminAreaPresenter.MyView {
-  interface AdminAreaViewUiBinder extends UiBinder<Widget, AdminAreaView> {
-  }
-
-  private static AdminAreaViewUiBinder uiBinder = GWT.create(AdminAreaViewUiBinder.class);
+  
+  public interface Binder extends UiBinder<Widget, AdminAreaView> { }
 
   private final Widget widget;
 
-  public AdminAreaView() {
+  @Inject
+  public AdminAreaView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
   }
 
