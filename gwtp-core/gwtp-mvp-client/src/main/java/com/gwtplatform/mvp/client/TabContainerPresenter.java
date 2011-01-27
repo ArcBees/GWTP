@@ -81,8 +81,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
    * @return The newly added {@link Tab}.
    */
   public Tab addTab(final TabContentProxy<?> tabProxy) {
-    return getView().addTab(tabProxy.getLabel(), tabProxy.getHistoryToken(),
-        tabProxy.getPriority());
+    return getView().addTab(tabProxy.getTabData(), tabProxy.getTargetHistoryToken());
   }
   
   @Override

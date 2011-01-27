@@ -24,11 +24,14 @@ import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabContainerPresenter;
 import com.gwtplatform.mvp.client.TabView;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent;
+import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent.CurrentUserChangedHandler;
 
 /**
  * This is the main presenter of the application. It's a
@@ -38,7 +41,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author Philippe Beaudoin
  */
 public class MainPagePresenter
-    extends TabContainerPresenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
+    extends TabContainerPresenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> 
+    implements CurrentUserChangedHandler {
   /**
    * {@link MainPagePresenter}'s proxy.
    */
@@ -50,6 +54,7 @@ public class MainPagePresenter
    * {@link MainPagePresenter}'s view.
    */
   public interface MyView extends TabView {
+    void refreshTabs();
   }
 
   /**
@@ -75,4 +80,11 @@ public class MainPagePresenter
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
+
+  @ProxyEvent
+  @Override
+  public void onCurrentUserChanged(CurrentUserChangedEvent event) {
+    getView().refreshTabs();
+  }
+  
 }

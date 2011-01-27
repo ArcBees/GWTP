@@ -26,7 +26,6 @@ import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.annotations.TabLabelFunction;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
@@ -42,14 +41,13 @@ public class HomePresenter extends
    * {@link HomePresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @TabInfo(container = MainPagePresenter.class, priority = 0, // The first tab
-                                                              // in the home tab
-      nameToken = NameTokens.homePage)
   public interface MyProxy extends TabContentProxy<HomePresenter> {
   }
 
-  @TabLabelFunction
-  public static String getTabLabel(ClientGinjector ginjector) {
+  @TabInfo(container = MainPagePresenter.class, 
+      priority = 0, // The first tab in the main page
+      nameToken = NameTokens.homePage)
+  static String getTabLabel(ClientGinjector ginjector) {
     return ginjector.getMyConstants().home();
   }
 

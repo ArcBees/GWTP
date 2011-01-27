@@ -18,41 +18,50 @@ package com.gwtplatform.samples.tab.client.presenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.annotations.TabLabel;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
+import com.gwtplatform.samples.tab.client.IsAdminGatekeeper;
 import com.gwtplatform.samples.tab.client.NameTokens;
+import com.gwtplatform.samples.tab.client.TabDataExt;
+import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
 /**
  * @author Christian Goudreau
  */
-public class ContactPresenter extends
-    Presenter<ContactPresenter.MyView, ContactPresenter.MyProxy> {
+public class AdminAreaPresenter
+    extends Presenter<AdminAreaPresenter.MyView, AdminAreaPresenter.MyProxy>  {
   /**
-   * {@link ContactPresenter}'s proxy.
+   * {@link AdminAreaPresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @NameToken(NameTokens.contactPage)
-  @TabInfo(container = MainPagePresenter.class, priority = 1000) // The last tab
-                                                                 // no matter what
-  @TabLabel("Contact")
-  public interface MyProxy extends TabContentProxyPlace<ContactPresenter> {
+  @NameToken(NameTokens.adminPage)
+  @UseGatekeeper(IsAdminGatekeeper.class)
+  public interface MyProxy extends TabContentProxyPlace<AdminAreaPresenter> {
   }
 
+
+  @TabInfo(container = MainPagePresenter.class)
+  static TabData getTabLabel(ClientGinjector ginjector) {
+    // Priority = 1000, means it will be the right-most tab in the home tab
+    return new TabDataExt("Admin area", 1000, 
+        ginjector.getIsAdminGatekeeper());
+  }
+  
   /**
-   * {@link ContactPresenter}'s view.
+   * {@link AdminAreaPresenter}'s view.
    */
   public interface MyView extends View {
   }
 
   @Inject
-  public ContactPresenter(final EventBus eventBus, final MyView view,
+  public AdminAreaPresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy) {
     super(eventBus, view, proxy);
   }
@@ -62,4 +71,5 @@ public class ContactPresenter extends
     RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetTabContent,
         this);
   }
+
 }

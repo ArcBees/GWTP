@@ -19,7 +19,9 @@ package com.gwtplatform.samples.tab.client.ui;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
+import com.gwtplatform.mvp.client.proxy.Gatekeeper;
+import com.gwtplatform.samples.tab.client.TabDataExt;
 
 /**
  * A widget that can show multiple tabs with rounded corners, each with its own
@@ -50,8 +52,13 @@ public class RoundTabPanel extends BaseTabPanel {
   }
 
   @Override
-  protected Tab createNewTab(float priority) {
-    return new RoundTab(priority);
+  protected BaseTab createNewTab(TabData tabData) {
+    Gatekeeper gatekeeper = null;
+    if (tabData instanceof TabDataExt) {
+      TabDataExt tabDataExt = (TabDataExt) tabData;
+      gatekeeper = tabDataExt.getGatekeeper();
+    }
+    return new RoundTab(tabData, gatekeeper);
   }
 
 }

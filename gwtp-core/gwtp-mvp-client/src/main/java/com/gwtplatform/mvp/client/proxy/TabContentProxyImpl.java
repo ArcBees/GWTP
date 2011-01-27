@@ -24,6 +24,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsEvent;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
 
 /**
  * @param <T> The Presenter's type.
@@ -33,9 +34,8 @@ import com.gwtplatform.mvp.client.Tab;
 public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
     implements TabContentProxy<T> {
 
-  protected String historyToken;
-  protected String label;
-  protected float priority;
+  protected String targetHistoryToken;
+  protected TabData tabData;
   protected Type<RequestTabsHandler> requestTabsEventType;
 
   private Tab tab;
@@ -49,18 +49,13 @@ public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
   }
 
   @Override
-  public String getHistoryToken() {
-    return historyToken;
+  public String getTargetHistoryToken() {
+    return targetHistoryToken;
   }
 
   @Override
-  public String getLabel() {
-    return label;
-  }
-
-  @Override
-  public float getPriority() {
-    return priority;
+  public TabData getTabData() {
+    return tabData;
   }
 
   @Override

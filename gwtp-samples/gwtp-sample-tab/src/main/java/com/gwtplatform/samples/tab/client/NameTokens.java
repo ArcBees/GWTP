@@ -32,16 +32,17 @@ package com.gwtplatform.samples.tab.client;
  */
 public class NameTokens {
   public static final String dialogSamplePage = "!dialogPage";
-  public static final String contactPage = "!contactPage";
+  public static final String adminPage = "!adminPage";
   public static final String homePage = "!homePage";
   public static final String infoPage = "!infoPage";
+  public static final String settingsPage = "!settingsPage";
 
   public static String getDialogSamplePage() {
     return dialogSamplePage;
   }
 
-  public static String getContactPage() {
-    return contactPage;
+  public static String getAdminPage() {
+    return adminPage;
   }
 
   public static String getHomePage() {
@@ -50,6 +51,10 @@ public class NameTokens {
 
   public static String getInfoPage() {
     return infoPage;
+  }
+
+  public static String getSettingsPage() {
+    return settingsPage;
   }
 
 }
