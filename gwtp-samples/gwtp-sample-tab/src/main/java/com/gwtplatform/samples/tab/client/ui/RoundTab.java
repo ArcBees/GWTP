@@ -18,11 +18,15 @@ package com.gwtplatform.samples.tab.client.ui;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.TabData;
+import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
  * A tab with rounded corner contained within an {@link RoundTabPanel}.
+ * This tab can be protected so that it is only displayed when a given
+ * {@link Gatekeeper} can allow access. If a {@code null} 
+ * {@link Gatekeeper} is used then the tab is always accessible.
  * 
  * @author Philippe Beaudoin
  */
@@ -33,10 +37,18 @@ public class RoundTab extends BaseTab {
 
   private static final Binder binder = GWT.create(Binder.class);
 
-  @UiConstructor
-  RoundTab(float priority) {
-    super(priority);
+  private final Gatekeeper gatekeeper;
+
+  RoundTab(TabData tabData, Gatekeeper gatekeeper) {
+    super(tabData);
+    this.gatekeeper = gatekeeper;
     initWidget(binder.createAndBindUi(this));
+    setText(tabData.getLabel());    
+  }
+
+  @Override
+  public boolean canUserAccess() {
+    return gatekeeper == null || gatekeeper.canReveal();
   }
 
 }

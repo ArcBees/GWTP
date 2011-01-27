@@ -18,7 +18,6 @@ package com.gwtplatform.samples.tab.client.presenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.Presenter;
@@ -26,7 +25,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.annotations.TabLabel;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
@@ -37,16 +35,17 @@ import com.gwtplatform.samples.tab.client.view.DialogSampleUiHandlers;
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
-public class DialogSamplePresenter extends
-    Presenter<DialogSamplePresenter.MyView, DialogSamplePresenter.MyProxy> implements
-    DialogSampleUiHandlers {
+public class DialogSamplePresenter 
+    extends Presenter<DialogSamplePresenter.MyView, DialogSamplePresenter.MyProxy> 
+    implements DialogSampleUiHandlers {
   /**
    * {@link DialogSamplePresenter}'s proxy.
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.dialogSamplePage)
-  @TabInfo(container = MainPagePresenter.class, priority = 1) // The second tab
-  @TabLabel("Dialog samples")
+  @TabInfo(container = MainPagePresenter.class,
+      label = "Dialog samples", 
+      priority = 1) // The second tab in the main page
   public interface MyProxy extends TabContentProxyPlace<DialogSamplePresenter> {
   }
 

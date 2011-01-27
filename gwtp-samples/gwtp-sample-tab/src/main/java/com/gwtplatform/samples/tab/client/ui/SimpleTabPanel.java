@@ -19,7 +19,7 @@ package com.gwtplatform.samples.tab.client.ui;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
 
 /**
  * A widget that can show multiple tabs with rounded corners, each with its own
@@ -50,8 +50,8 @@ public class SimpleTabPanel extends BaseTabPanel {
   }
 
   @Override
-  protected Tab createNewTab(float priority) {
-    return new SimpleTab(priority);
+  protected BaseTab createNewTab(TabData tabData) {
+    return new SimpleTab(tabData);
   }
 
 }

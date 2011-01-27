@@ -10,7 +10,10 @@
 	</ui:style>
 
 	<g:HTMLPanel addStyleNames="{style.panel}">
-		<h1>Contact page</h1>
+		<h1>Settings page</h1>
+
+		<p>Currently logged in as: <g:InlineLabel ui:field="userPrivileges"/></p>
+    <g:Button ui:field="togglePrivileges" visible="false" />
 
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
 			varius malesuada mollis. Nunc elit justo, pellentesque at condimentum

@@ -23,13 +23,15 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
+import com.gwtplatform.samples.tab.client.IsAdminGatekeeper;
 import com.gwtplatform.samples.tab.client.MyConstants;
-import com.gwtplatform.samples.tab.client.presenter.ContactPresenter;
+import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomePresenter;
 import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
+import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
 import com.gwtplatform.samples.tab.client.ui.LinkMenu;
 import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
 import com.gwtplatform.samples.tab.client.ui.SimpleTabPanel;
@@ -41,7 +43,8 @@ import com.gwtplatform.samples.tab.client.ui.UiModule;
 @GinModules({ClientModule.class, UiModule.class})
 public interface ClientGinjector extends Ginjector {
   AsyncProvider<DialogSamplePresenter> getAboutUsPresenter();
-  AsyncProvider<ContactPresenter> getContactPresenter();
+  AsyncProvider<AdminAreaPresenter> getContactPresenter();
+  AsyncProvider<SettingsPresenter> getSettingsPresenter();
   EventBus getEventBus();
   AsyncProvider<HomeInfoPresenter> getHomeInfoPresenter();
   AsyncProvider<HomeNewsPresenter> getHomeNewsPresenter();
@@ -50,6 +53,7 @@ public interface ClientGinjector extends Ginjector {
   PlaceManager getPlaceManager();
   ProxyFailureHandler getProxyFailureHandler();
   MyConstants getMyConstants();
+  IsAdminGatekeeper getIsAdminGatekeeper();
   
   // The following methods allow our widget to participate in dependency injection
   LinkMenu getLinkMenu();
