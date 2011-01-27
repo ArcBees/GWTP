@@ -14,18 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.annotations;
+package com.gwtplatform.samples.tab.client.view;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+import com.gwtplatform.mvp.client.UiHandlers;
 
 /**
- * Annotation used to specify the label of a tab as a string. This label can
- * be displayed on the tab. For more control see {@link TabLabelFunction}.
+ * {@link AdminAreaView}'s {@link UiHandlers}.
  * 
  * @author Philippe Beaudoin
  */
-@Target(ElementType.TYPE)
-public @interface TabLabel {
-  String value() default "";
+public interface SettingsUiHandlers extends UiHandlers {
+  void togglePrivileges();
 }

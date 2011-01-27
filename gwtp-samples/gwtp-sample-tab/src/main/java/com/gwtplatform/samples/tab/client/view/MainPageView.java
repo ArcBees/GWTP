@@ -21,6 +21,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
 import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
@@ -48,10 +49,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
   }
 
   @Override
-  public Tab addTab(String tabName, String historyToken, float priority) {
-    return tabPanel.addTab(tabName, historyToken, priority);
+  public Tab addTab(TabData tabData, String historyToken) {
+    return tabPanel.addTab(tabData, historyToken);
   }
-
+  
   @Override
   public Widget asWidget() {
     return widget;
@@ -79,5 +80,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     } else {
       super.setInSlot(slot, content);
     }
+  }
+
+  @Override
+  public void refreshTabs() {
+    tabPanel.refreshTabs();
   }
 }

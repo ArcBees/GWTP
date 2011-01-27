@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
 
 /**
  * @author Christian Goudreau
@@ -45,9 +46,9 @@ public abstract class BaseTab extends Composite implements Tab {
 
   private final float priority;
 
-  public BaseTab(float priority) {
+  public BaseTab(TabData tabData) {
     super();
-    this.priority = priority;
+    this.priority = tabData.getPriority();
   }
 
   @Override
@@ -85,6 +86,16 @@ public abstract class BaseTab extends Composite implements Tab {
   @Override
   public void setText(String text) {
     hyperlink.setText(text);
+  }
+
+  /**
+   * Checks whether or not the current user has the right to access this tab.
+   * By default, all tabs can be accessed.
+   * 
+   * @return {@code true} if the user can access this tab, {@code false} otherwise.
+   */
+  public boolean canUserAccess() {
+    return true;
   }
 
 }

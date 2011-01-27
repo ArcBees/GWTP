@@ -19,22 +19,21 @@ package com.gwtplatform.samples.tab.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.samples.tab.client.presenter.ContactPresenter;
+import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
 
 /**
  * @author Christian Goudreau
  */
-public class ContactView extends ViewImpl implements ContactPresenter.MyView {
-  interface ContactViewUiBinder extends UiBinder<Widget, ContactView> {
+public class AdminAreaView extends ViewImpl implements AdminAreaPresenter.MyView {
+  interface AdminAreaViewUiBinder extends UiBinder<Widget, AdminAreaView> {
   }
 
-  private static ContactViewUiBinder uiBinder = GWT.create(ContactViewUiBinder.class);
+  private static AdminAreaViewUiBinder uiBinder = GWT.create(AdminAreaViewUiBinder.class);
 
   private final Widget widget;
 
-  public ContactView() {
+  public AdminAreaView() {
     widget = uiBinder.createAndBindUi(this);
   }
 

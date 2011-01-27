@@ -18,51 +18,70 @@ package com.gwtplatform.samples.tab.client.presenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.TabData;
-import com.gwtplatform.mvp.client.TabDataBasic;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
+import com.gwtplatform.samples.tab.client.CurrentUser;
 import com.gwtplatform.samples.tab.client.NameTokens;
-import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
+import com.gwtplatform.samples.tab.client.view.SettingsUiHandlers;
 
 /**
  * @author Christian Goudreau
  */
-public class HomeNewsPresenter extends
-    Presenter<HomeNewsPresenter.MyView, HomeNewsPresenter.MyProxy> {
+public class SettingsPresenter
+    extends Presenter<SettingsPresenter.MyView, SettingsPresenter.MyProxy> 
+    implements SettingsUiHandlers {
   /**
-   * {@link HomeNewsPresenter}'s proxy.
+   * {@link SettingsPresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @NameToken(NameTokens.homePage)
-  public interface MyProxy extends TabContentProxyPlace<HomeNewsPresenter> {
-  }
-
-  @TabInfo(container = HomePresenter.class)
-  static TabData getTabLabel(ClientGinjector ginjector) {
-    // Priority = 0, means it will be the left-most tab in the home tab
-    return new TabDataBasic(ginjector.getMyConstants().news(), 0);
+  @NameToken(NameTokens.settingsPage)
+  @TabInfo(container = MainPagePresenter.class,
+      label = "Settings",
+      priority = 2) // The third tab in the main page
+  public interface MyProxy extends TabContentProxyPlace<SettingsPresenter> {
   }
 
   /**
-   * {@link HomeNewsPresenter}'s view.
+   * {@link SettingsPresenter}'s view.
    */
-  public interface MyView extends View {
+  public interface MyView extends View, HasUiHandlers<SettingsUiHandlers>  {
+    void setAdmin(boolean isAdmin);
   }
+  
+  private final CurrentUser currentUser;
 
   @Inject
-  public HomeNewsPresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy) {
+  public SettingsPresenter(final EventBus eventBus, final MyView view,
+      final MyProxy proxy, final CurrentUser currentUser) {
     super(eventBus, view, proxy);
+    this.currentUser = currentUser;
+    view.setUiHandlers(this);
   }
 
   @Override
   protected void revealInParent() {
-    RevealContentEvent.fire(this, HomePresenter.TYPE_SetTabContent, this);
+    RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetTabContent,
+        this);
+  }
+
+  @Override
+  protected void onReveal() {
+    updateView();
+  }
+  
+  @Override
+  public void togglePrivileges() {
+    currentUser.setAdmin(!currentUser.isAdmin());
+    updateView();
+  }
+
+  private void updateView() {
+    getView().setAdmin(currentUser.isAdmin());
   }
 }
