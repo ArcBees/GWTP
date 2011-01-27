@@ -25,11 +25,13 @@ import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+import com.gwtplatform.samples.tab.client.CurrentUser;
 import com.gwtplatform.samples.tab.client.FailureHandlerAlert;
 import com.gwtplatform.samples.tab.client.GwtptabsamplePlaceManager;
+import com.gwtplatform.samples.tab.client.IsAdminGatekeeper;
 import com.gwtplatform.samples.tab.client.MyConstants;
 import com.gwtplatform.samples.tab.client.NameTokens;
-import com.gwtplatform.samples.tab.client.presenter.ContactPresenter;
+import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
 import com.gwtplatform.samples.tab.client.presenter.GlobalDialogPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
@@ -38,7 +40,8 @@ import com.gwtplatform.samples.tab.client.presenter.HomePresenter;
 import com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
 import com.gwtplatform.samples.tab.client.presenter.PopupPresenterWidget;
-import com.gwtplatform.samples.tab.client.view.ContactView;
+import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
+import com.gwtplatform.samples.tab.client.view.AdminAreaView;
 import com.gwtplatform.samples.tab.client.view.DialogSampleView;
 import com.gwtplatform.samples.tab.client.view.GlobalDialogView;
 import com.gwtplatform.samples.tab.client.view.HomeInfoView;
@@ -47,6 +50,7 @@ import com.gwtplatform.samples.tab.client.view.HomeView;
 import com.gwtplatform.samples.tab.client.view.InfoPopupView;
 import com.gwtplatform.samples.tab.client.view.LocalDialogView;
 import com.gwtplatform.samples.tab.client.view.MainPageView;
+import com.gwtplatform.samples.tab.client.view.SettingsView;
 
 /**
  * @author Christian Goudreau
@@ -64,7 +68,9 @@ public class ClientModule extends AbstractPresenterModule {
     bind(ProxyFailureHandler.class).to(FailureHandlerAlert.class).in(
         Singleton.class);
     bind(MyConstants.class).in(Singleton.class);
-
+    bind(CurrentUser.class).in(Singleton.class);
+    bind(IsAdminGatekeeper.class).in(Singleton.class);
+    
     // Constants
     bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);
 
@@ -75,8 +81,10 @@ public class ClientModule extends AbstractPresenterModule {
         HomeView.class, HomePresenter.MyProxy.class);
     bindPresenter(DialogSamplePresenter.class, DialogSamplePresenter.MyView.class,
         DialogSampleView.class, DialogSamplePresenter.MyProxy.class);
-    bindPresenter(ContactPresenter.class, ContactPresenter.MyView.class,
-        ContactView.class, ContactPresenter.MyProxy.class);
+    bindPresenter(SettingsPresenter.class, SettingsPresenter.MyView.class,
+        SettingsView.class, SettingsPresenter.MyProxy.class);
+    bindPresenter(AdminAreaPresenter.class, AdminAreaPresenter.MyView.class,
+        AdminAreaView.class, AdminAreaPresenter.MyProxy.class);
     bindPresenter(HomeNewsPresenter.class, HomeNewsPresenter.MyView.class,
         HomeNewsView.class, HomeNewsPresenter.MyProxy.class);
     bindPresenter(HomeInfoPresenter.class, HomeInfoPresenter.MyView.class,

@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
 
 /**
  * A useful mixing class to define a {@link TabContentProxy} that is also a
@@ -35,18 +36,13 @@ public class TabContentProxyPlaceImpl<T extends Presenter<?, ?>> extends
   }
 
   @Override
-  public String getHistoryToken() {
+  public String getTargetHistoryToken() {
     return getNameToken();
   }
 
   @Override
-  public String getLabel() {
-    return proxy.getLabel();
-  }
-
-  @Override
-  public float getPriority() {
-    return proxy.getPriority();
+  public TabData getTabData() {
+    return proxy.getTabData();
   }
 
   @Override

@@ -18,13 +18,11 @@ package com.gwtplatform.samples.tab.client.presenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.annotations.TabLabel;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
@@ -39,11 +37,10 @@ public class HomeInfoPresenter extends
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.infoPage)
-  @TabInfo(container = HomePresenter.class, priority = 1) // The second tab in
-                                                          // the home tab
-  @TabLabel("Info")
-  public interface MyProxy extends TabContentProxyPlace<HomeInfoPresenter> {
-  }
+  @TabInfo(container = HomePresenter.class,
+      label = "Info",
+      priority = 1) // The second tab in the home tab
+  public interface MyProxy extends TabContentProxyPlace<HomeInfoPresenter> { }
 
   /**
    * {@link HomeInfoPresenter}'s view.

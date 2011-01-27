@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.TabPanel;
 
 import java.util.ArrayList;
@@ -39,11 +40,11 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
 
   @UiField
   FlowPanel tabPanel;
-  private final List<Tab> tabList = new ArrayList<Tab>();
+  private final List<BaseTab> tabList = new ArrayList<BaseTab>();
 
   @Override
-  public Tab addTab(String text, String historyToken, float priority) {
-    Tab newTab = createNewTab(priority);
+  public Tab addTab(TabData tabData, String historyToken) {
+    BaseTab newTab = createNewTab(tabData);
     int beforeIndex;
     for (beforeIndex = 0; beforeIndex < tabList.size(); ++beforeIndex) {
       if (newTab.getPriority() < tabList.get(beforeIndex).getPriority()) {
@@ -52,8 +53,8 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
     }
     tabPanel.insert(newTab.asWidget(), beforeIndex);
     tabList.add(beforeIndex, newTab);
-    newTab.setText(text);
     newTab.setTargetHistoryToken(historyToken);
+    setTabVisibility(newTab);
     return newTab;
   }
 
@@ -96,11 +97,30 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
   }
 
   /**
+   * Ensures that all tabs are visible or hidden as they should.
+   */
+  public void refreshTabs() {
+    for (BaseTab tab : tabList) {
+      setTabVisibility(tab);
+    }
+  }
+  
+  /**
+   * Ensures the specified tab is visible or hidden as it should.
+   * 
+   * @param tab The {@link BaseTab} to check.
+   */
+  private void setTabVisibility(BaseTab tab) {
+    boolean visible = (tab == currentActiveTab) || tab.canUserAccess();
+    tab.setVisible(visible);
+  }
+
+  /**
    * Returns a new tab of the type specific for this tab panel.
    * 
-   * @param priority The desired priority of the new tab.
+   * @param tabData Some data on the tab to create.
    * @return The new tab.
    */
-  protected abstract Tab createNewTab(float priority);
+  protected abstract BaseTab createNewTab(TabData tabData);
 
 }

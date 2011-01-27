@@ -16,6 +16,10 @@
 
 package com.gwtplatform.mvp.rebind;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.Generator;
@@ -45,14 +49,15 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-
-import com.gwtplatform.common.client.CodeSplitProvider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
+import com.gwtplatform.common.client.CodeSplitProvider;
 import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.DelayedBind;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
+import com.gwtplatform.mvp.client.TabData;
+import com.gwtplatform.mvp.client.TabDataBasic;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -63,8 +68,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.annotations.TabLabel;
-import com.gwtplatform.mvp.client.annotations.TabLabelFunction;
 import com.gwtplatform.mvp.client.annotations.Title;
 import com.gwtplatform.mvp.client.annotations.TitleFunction;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
@@ -83,10 +86,6 @@ import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyImpl;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlaceImpl;
-
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Philippe Beaudoin
@@ -110,9 +109,11 @@ public class ProxyGenerator extends Generator {
     public int setPlaceTitleHandlerParamIndex = -1;
   }
   
-  private static class TabLabelFunctionDescription {
+  private static class TabInfoFunctionDescription {
+    public TabInfo annotation;
     public String functionName;
-    public boolean hasGingectorParam = false;
+    public boolean hasGingectorParam;
+    public boolean returnString; // Either returns a String or a TabInfo
   }
 
   private static final String asyncProviderClassName = AsyncProvider.class.getCanonicalName();
@@ -137,6 +138,7 @@ public class ProxyGenerator extends Generator {
   private static final String tabContentProxyImplClassName = TabContentProxyImpl.class.getCanonicalName();
   private static final String tabContentProxyPlaceImplClassName = TabContentProxyPlaceImpl.class.getCanonicalName();
   private static final String typeClassName = Type.class.getCanonicalName();
+  private static final String tabDataClassName = TabData.class.getCanonicalName();
   private JGenericType asyncProviderClass;
   private JClassType baseGinjectorClass;
   private JClassType basePlaceClass;
@@ -151,6 +153,7 @@ public class ProxyGenerator extends Generator {
   private JClassType revealContentHandlerClass;
   private JClassType setPlaceTitleHandlerClass;
   private JClassType stringClass;
+  private JClassType tabDataClass;
 
   private JClassType tabContentProxyClass;
 
@@ -258,8 +261,7 @@ public class ProxyGenerator extends Generator {
 
     // Check if this proxy is also a place.
     String nameToken = null;
-    String newPlaceCode = null; // TODO Get rid of this when we remove
-                                // @PlaceInstance
+    String newPlaceCode = null; // TODO Get rid of this when we remove @PlaceInstance
     String getGatekeeperMethod = null;
     String title = null;
     if (proxyInterface.isAssignableTo(basePlaceClass)) {
@@ -367,18 +369,71 @@ public class ProxyGenerator extends Generator {
     // Check if this proxy is also a TabContentProxy.
     JClassType tabContainerClass = null;
     String tabContainerClassName = null;
-    int tabPriority = 0;
+    Integer tabPriority = null;
     String tabLabel = null;
-    TabLabelFunctionDescription tabLabelFunctionDescription = null;
+    TabInfoFunctionDescription tabInfoFunctionDescription = null;
     String tabNameToken = null;
     if (proxyInterface.isAssignableTo(tabContentProxyClass)) {
       TabInfo tabInfoAnnotation = proxyInterface.getAnnotation(TabInfo.class);
+      tabInfoFunctionDescription = findTabInfoFunction(
+          logger, presenterClass, presenterClassName, ginjectorClassName,
+          ginjectorClass);
+      
+      // Ensure @TabInfo is there exactly once
+      if (tabInfoAnnotation != null && tabInfoFunctionDescription != null) {
+        logger.log(TreeLogger.ERROR, "Presenter " + presenterClassName
+            + " contains both a proxy and a method annotated with @' +"
+            + TabInfo.class.getSimpleName() + ". This is illegal.", null);
+        throw new UnableToCompleteException();
+      }
+      if (tabInfoFunctionDescription != null) {
+        tabInfoAnnotation = tabInfoFunctionDescription.annotation;
+      }      
       if (tabInfoAnnotation == null) {
         logger.log(TreeLogger.ERROR, "The proxy for '" + presenterClassName
             + "' is a TabContentProxy, but is not annotated with @' +"
-            + TabInfo.class.getSimpleName() + ".", null);
+            + TabInfo.class.getSimpleName() 
+            + " and its presenter has no method annotated with it either.", null);
         throw new UnableToCompleteException();
       }
+      
+      // Extract the label if its in TabInfo
+      if (tabInfoAnnotation.label().length() > 0) {
+        tabLabel = tabInfoAnnotation.label();
+      }
+      if (tabLabel != null && tabInfoFunctionDescription != null) {
+        logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+            + " in " + presenterClassName + " defines the 'label' parameter and"
+            + " annotates a method, this is not permitted.", null);
+        throw new UnableToCompleteException();
+      }
+      if (tabLabel == null && tabInfoFunctionDescription == null) {
+        logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+            + " in " + presenterClassName + " does not define the 'label' parameter and"
+            + " does not annotate a method, this is not permitted.", null);
+        throw new UnableToCompleteException();
+      }
+
+      // Extract the label if its in TabInfo (it is a negative integer if not set)
+      if (tabInfoAnnotation.priority() >= 0) {
+        tabPriority = tabInfoAnnotation.priority();
+      }
+      if (tabPriority != null &&
+          tabInfoFunctionDescription != null && !tabInfoFunctionDescription.returnString) {
+        logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+            + " in " + presenterClassName + " defines the 'priority' parameter and"
+            + " annotates a method returning TabData, this is not permitted.", null);
+        throw new UnableToCompleteException();
+      }
+      if (tabPriority == null &&
+          (tabInfoFunctionDescription == null || tabInfoFunctionDescription.returnString)) {
+        logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+            + " in " + presenterClassName + " does not define the 'priority' parameter and"
+            + " does not annotate a method returning TabData, this is not permitted.", null);
+        throw new UnableToCompleteException();
+      }
+      
+      // Find the container
       tabContainerClass = oracle.findType(tabInfoAnnotation.container().getCanonicalName());
       if (tabContainerClass == null) {
         logger.log(TreeLogger.ERROR, "The container '"
@@ -388,35 +443,22 @@ public class ProxyGenerator extends Generator {
         throw new UnableToCompleteException();
       }
       tabContainerClassName = tabContainerClass.getParameterizedQualifiedSourceName();
-      tabPriority = tabInfoAnnotation.priority();
-
-      TabLabel tabLabelAnnotation = proxyInterface.getAnnotation(TabLabel.class);
-      if (tabLabelAnnotation != null) {
-        // contains the label
-        tabLabel = tabLabelAnnotation.value();
-      }
-
-      tabLabelFunctionDescription = findTabLabelFunction(
-          logger, presenterClass, presenterClassName, ginjectorClassName,
-          ginjectorClass);
-            
-      if (tabLabel == null && tabLabelFunctionDescription == null) {
-        logger.log(TreeLogger.ERROR, "Presenter " + presenterClassName
-            + " must use either @" + TabLabel.class.getSimpleName()
-            + " or @" + TabLabelFunction.class.getSimpleName(), null);
-        throw new UnableToCompleteException();
-      }
-      if (tabLabel != null && tabLabelFunctionDescription != null) {
-        logger.log(TreeLogger.ERROR, "Presenter " + presenterClassName
-            + " uses both @" + TabLabel.class.getSimpleName()
-            + " and @" + TabLabelFunction.class.getSimpleName()
-            + ". This is illegal.", null);
-        throw new UnableToCompleteException();
-      }
+      
+      // Find the name token to use when the tab is clicked
       if (tabInfoAnnotation.nameToken().length() > 0) {
-        // token to use when the
-        // tab is clicked
         tabNameToken = tabInfoAnnotation.nameToken();
+      }
+      if (tabNameToken != null && nameToken != null) {
+        logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+            + " in " + presenterClassName + " defines the 'nameToken' parameter but"
+            + " its proxy is a place, this is not permitted.", null);
+        throw new UnableToCompleteException();
+      }
+      if (tabNameToken == null && nameToken == null) {
+        logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+            + " in " + presenterClassName + " does not define the 'nameToken' parameter and"
+            + " its proxy is not a place, this is not permitted.", null);
+        throw new UnableToCompleteException();
       }
     }
 
@@ -446,6 +488,8 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImport(DeferredCommand.class.getCanonicalName());
     composerFactory.addImport(Command.class.getCanonicalName());
     composerFactory.addImport(AsyncCallback.class.getCanonicalName());
+    composerFactory.addImport(TabData.class.getCanonicalName());
+    composerFactory.addImport(TabDataBasic.class.getCanonicalName());
     if (title != null || titleFunctionDescription != null) {
       composerFactory.addImport(GetPlaceTitleEvent.class.getCanonicalName());
       composerFactory.addImport(AsyncCallback.class.getCanonicalName());
@@ -506,7 +550,16 @@ public class ProxyGenerator extends Generator {
     writer.println();
     writer.println("private " + ginjectorClassName + " ginjector;");
 
-    if (nameToken != null) {
+    if (nameToken == null) {
+      // Not a place proxy
+      
+      if (tabContainerClass != null) {
+        // A TabContentProxy
+        writeGetTabDataInternalMethod(ginjectorClassName, presenterClassName,
+            tabLabel, tabPriority, tabInfoFunctionDescription, writer);
+      }
+      
+    } else {
       // Place proxy
 
       // BEGIN Enclosed proxy class
@@ -521,8 +574,11 @@ public class ProxyGenerator extends Generator {
       }
       writer.indent();
 
-      writeTabLabelMethod(ginjectorClassName, presenterClassName, tabLabel,
-          tabLabelFunctionDescription, writer);
+      if (tabContainerClass != null) {
+        // A TabContentProxy
+        writeGetTabDataInternalMethod(ginjectorClassName, presenterClassName,
+            tabLabel, tabPriority, tabInfoFunctionDescription, writer);
+      }
       
       // Enclosed proxy construcotr
       writer.println();
@@ -537,7 +593,7 @@ public class ProxyGenerator extends Generator {
       if (tabContainerClass != null) {
         writeRequestTabHandler(logger, presenterClassName, nameToken,
             tabContainerClass, tabContainerClassName, tabPriority, tabLabel,
-            tabLabelFunctionDescription, writer);
+            tabInfoFunctionDescription, writer);
       }
       
       // Call ProxyImpl bind method.
@@ -642,9 +698,6 @@ public class ProxyGenerator extends Generator {
         writer.outdent();
         writer.println("}");
       }
-    } else {
-      writeTabLabelMethod(ginjectorClassName, presenterClassName, tabLabel,
-          tabLabelFunctionDescription, writer);
     }
 
     // Constructor
@@ -667,7 +720,7 @@ public class ProxyGenerator extends Generator {
       if (tabContainerClass != null) {
         writeRequestTabHandler(logger, presenterClassName, tabNameToken,
             tabContainerClass, tabContainerClassName, tabPriority, tabLabel,
-            tabLabelFunctionDescription, writer);
+            tabInfoFunctionDescription, writer);
       }
 
       // Call ProxyImpl bind method.
@@ -725,27 +778,39 @@ public class ProxyGenerator extends Generator {
     return generatedClassName;
   }
 
-  private void writeTabLabelMethod(String ginjectorClassName,
-      String presenterClassName, String tabLabel,
-      TabLabelFunctionDescription tabLabelFunctionDescription,
+  private void writeGetTabDataInternalMethod(String ginjectorClassName,
+      String presenterClassName, String tabLabel, Integer tabPriority, 
+      TabInfoFunctionDescription tabLabelFunctionDescription,
       SourceWriter writer) {
-    // Simple string tab label
+
     if (tabLabel != null) {
+      // Simple string tab label
       writer.println();
-      writer.println("protected String getTabLabel(" + ginjectorClassName + " ginjector) {");
+      writer.println("protected TabData getTabDataInternal(" + ginjectorClassName + " ginjector) {");
       writer.indent();
-      writer.println("  return \"" + tabLabel + "\";");
+      writer.println("  return new TabDataBasic(\"" + tabLabel + "\", " + tabPriority + ");");
       writer.outdent();
       writer.println("}");
-    }
-
-    // Presenter static tab label method
-    if (tabLabelFunctionDescription != null) {
+    } else if (tabLabelFunctionDescription.returnString) {
+      // Presenter static method returning a string
       writer.println();
-      writer.println("protected String getTabLabel(" + ginjectorClassName + " ginjector) {");
+      writer.println("protected TabData getTabDataInternal(" + ginjectorClassName + " ginjector) {");
       writer.indent();
-      writer.print("return " + presenterClassName + ".");
-      writeTabLabelFunction(tabLabelFunctionDescription, writer);
+      writer.print("  return new TabDataBasic(");
+      writer.print(presenterClassName + ".");
+      writeTabInfoFunctionCall(tabLabelFunctionDescription, writer);
+      writer.println(", " + tabPriority + ");");
+      writer.outdent();
+      writer.println("}");
+    } else {
+      // Presenter static method returning tab data
+      writer.println();
+      writer.println("protected TabData getTabDataInternal(" + ginjectorClassName + " ginjector) {");
+      writer.indent();
+      writer.print("  return ");
+      writer.print(presenterClassName + ".");
+      writeTabInfoFunctionCall(tabLabelFunctionDescription, writer);
+      writer.println(";");
       writer.outdent();
       writer.println("}");
     }
@@ -776,6 +841,7 @@ public class ProxyGenerator extends Generator {
     gwtEventTypeClass = oracle.findType(gwtEventTypeClassName).isGenericType();
     eventHandlerClass = oracle.findType(eventHandlerClassName);
     setPlaceTitleHandlerClass = oracle.findType(setPlaceTitleHandlerClassName);
+    tabDataClass = oracle.findType(tabDataClassName);
   }
 
   private List<ProxyEventDescription> findProxyEvents(TreeLogger logger,
@@ -1043,22 +1109,23 @@ public class ProxyGenerator extends Generator {
     return result;
   }
 
-  private TabLabelFunctionDescription findTabLabelFunction(TreeLogger logger,
+  private TabInfoFunctionDescription findTabInfoFunction(TreeLogger logger,
       JClassType presenterClass, String presenterClassName,
       String ginjectorClassName, JClassType ginjectorClass)
       throws UnableToCompleteException {
     // Look for the title function in the parent presenter
-    TabLabelFunctionDescription result = null;
+    TabInfoFunctionDescription result = null;
     for (JMethod method : presenterClass.getMethods()) {
-      TabLabelFunction annotation = method.getAnnotation(TabLabelFunction.class);
+      TabInfo annotation = method.getAnnotation(TabInfo.class);
       if (annotation != null) {
         if (result != null) {
           logger.log(TreeLogger.ERROR, "At least two methods in presenter "
               + presenterClassName + "are annotated with @"
-              + TabLabelFunction.class.getSimpleName() + ". This is illegal.");
+              + TabInfo.class.getSimpleName() + ". This is illegal.");
           throw new UnableToCompleteException();
         }
-        result = new TabLabelFunctionDescription();
+        result = new TabInfoFunctionDescription();
+        result.annotation = annotation;
         result.functionName = method.getName();
         if (!method.isStatic()) {
           logger.log(
@@ -1068,13 +1135,17 @@ public class ProxyGenerator extends Generator {
                   + ", method "
                   + result.functionName
                   + " annotated with @"
-                  + TabLabelFunction.class.getSimpleName()
+                  + TabInfo.class.getSimpleName()
                   + " is not static. This is illegal.");
           throw new UnableToCompleteException();
         }
 
         JClassType classReturnType = method.getReturnType().isClassOrInterface();
-        if (classReturnType != stringClass) {
+        if (classReturnType == stringClass) {
+          result.returnString = true;
+        } else if (classReturnType.isAssignableFrom(tabDataClass)) {
+          result.returnString = false;
+        } else {
           logger.log(
               TreeLogger.ERROR,
               "In presenter "
@@ -1082,8 +1153,9 @@ public class ProxyGenerator extends Generator {
                   + ", method "
                   + result.functionName
                   + " annotated with @"
-                  + TabLabelFunction.class.getSimpleName()
-                  + " returns something else than a String. This is illegal.");
+                  + TabInfo.class.getSimpleName()
+                  + " must return either a String or a " 
+                  + TabData.class.getSimpleName());
           throw new UnableToCompleteException();
         }
 
@@ -1096,7 +1168,7 @@ public class ProxyGenerator extends Generator {
                   + ", method "
                   + result.functionName
                   + " annotated with @"
-                  + TabLabelFunction.class.getSimpleName()
+                  + TabInfo.class.getSimpleName()
                   + " accepts more than one parameter. This is illegal.");
           throw new UnableToCompleteException();
         }
@@ -1113,7 +1185,7 @@ public class ProxyGenerator extends Generator {
                     + ", method "
                     + result.functionName
                     + " annotated with @"
-                    + TabLabelFunction.class.getSimpleName()
+                    + TabInfo.class.getSimpleName()
                     + " has a parameter that is not of type "
                     + ginjectorClassName
                     + ". This is illegal.");
@@ -1271,8 +1343,8 @@ public class ProxyGenerator extends Generator {
   private void writeRequestTabHandler(TreeLogger logger,
       String presenterClassName, String nameToken,
       JClassType tabContainerClass, String tabContainerClassName,
-      int tabPriority, String tabLabel, 
-      TabLabelFunctionDescription tabLabelFunctionDescription, 
+      Integer tabPriority, String tabLabel, 
+      TabInfoFunctionDescription tabLabelFunctionDescription, 
       SourceWriter writer)
       throws UnableToCompleteException {
     boolean foundRequestTabsEventType = false;
@@ -1309,9 +1381,8 @@ public class ProxyGenerator extends Generator {
           + presenterClassName + "'.", null);
       throw new UnableToCompleteException();
     }
-    writer.println("priority = " + tabPriority + ";");
-    writer.println("label = getTabLabel(ginjector);");
-    writer.println("historyToken = \"" + nameToken + "\";");
+    writer.println("tabData = getTabDataInternal(ginjector);");
+    writer.println("targetHistoryToken = \"" + nameToken + "\";");
   }
 
   private void writeSlotHandlers(TreeLogger logger, GeneratorContext ctx,
@@ -1385,13 +1456,13 @@ public class ProxyGenerator extends Generator {
     writer.print(");");
   }
 
-  private void writeTabLabelFunction(
-      TabLabelFunctionDescription tabLabelFunctionDescription, SourceWriter writer) {
+  private void writeTabInfoFunctionCall(
+      TabInfoFunctionDescription tabLabelFunctionDescription, SourceWriter writer) {
     writer.print(tabLabelFunctionDescription.functionName + "( ");
     if (tabLabelFunctionDescription.hasGingectorParam) {
       writer.print("ginjector");
     }
-     writer.print(");");
+     writer.print(")");
   }
 
 }

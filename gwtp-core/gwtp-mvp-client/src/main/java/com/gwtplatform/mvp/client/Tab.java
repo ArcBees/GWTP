@@ -20,6 +20,10 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
+ * This interface represents a tab after it has been instantiated
+ * as a {@link Widget}. The full description of a tab before it is 
+ * created is given by {@link TabData}.
+ * 
  * @author Philippe Beaudoin
  */
 public interface Tab extends HasText {
@@ -44,9 +48,10 @@ public interface Tab extends HasText {
   void deactivate();
 
   /**
-   * A tab priority indicates where it should appear within the tab strip. A tab
-   * with low priority will be placed more towards the left of the strip. Two
-   * tabs with the same priority will be placed in an arbitrary order.
+   * A tab priority indicates where it should appear within the tab strip. In
+   * typical implementations of {@link TabPanel}, a tab with low priority will 
+   * be placed more towards the left of the strip. Two tabs with the same 
+   * priority will be placed in an arbitrary order.
    * 
    * @return The priority.
    */

@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
 
 /**
  * The interface for the {@link Proxy} of a {@link Presenter} that can
@@ -43,36 +44,28 @@ import com.gwtplatform.mvp.client.Tab;
 public interface TabContentProxy<P extends Presenter<?, ?>> extends Proxy<P> {
 
   /**
-   * Retrieves the history token to show when this tab is displayed. In the
-   * fairly typical scenario where a tab directly contains a {@link ProxyPlace},
-   * this should return the name token of the proxy place. In the case of tabs
-   * that contain other tab presenters, this should return the name token of a
-   * leaf-level proxy.
+   * Gets the history token that should be accessed when the tab is clicked.
+   * In the fairly typical scenario where a tab directly contains a place, 
+   * this should return the name token of that place. In the case of tabs 
+   * that contain non-leaf presenters (for example, other tabs), this should 
+   * return the name token of a leaf-level presenter. 
    * 
-   * @return The default history token to show.
+   * @return The history token.
    */
-  String getHistoryToken();
+  String getTargetHistoryToken();
+  
+  /**
+   * Retrieves the {@link TabData} that should be used to create this tab. 
+   * 
+   * @return The tab data.
+   */
+  TabData getTabData();
 
   /**
-   * Retrieves the text label to show on that tab.
+   * Retrieves the {@link Tab} object that was created from the
+   * {@link TabData} returned by {@link #getTabData()}.
    * 
-   * @return The text label.
-   */
-  String getLabel();
-
-  /**
-   * A tab priority indicates where it should appear within the tab strip. A tab
-   * with low priority will be placed more towards the left of the strip. Two
-   * tabs with the same priority will be placed in an arbitrary order.
-   * 
-   * @return The priority.
-   */
-  float getPriority();
-
-  /**
-   * Retrieves the tab object associated with this presenter.
-   * 
-   * @return The tab object.
+   * @return The tab.
    */
   Tab getTab();
 

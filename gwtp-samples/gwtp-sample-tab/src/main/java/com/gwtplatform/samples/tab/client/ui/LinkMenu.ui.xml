@@ -2,11 +2,11 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:with type="com.gwtplatform.samples.tab.client.NameTokens" field="nameTokens"></ui:with>
+	<ui:with type="com.gwtplatform.samples.tab.client.NameTokens" field="nameTokens" />
 
 	<g:HTMLPanel>
 		<g:InlineHyperlink targetHistoryToken="{nameTokens.getHomePage}">Home</g:InlineHyperlink> | 
 		<g:InlineHyperlink targetHistoryToken="{nameTokens.getDialogSamplePage}">Dialogs</g:InlineHyperlink> | 
-		<g:InlineHyperlink targetHistoryToken="{nameTokens.getContactPage}">Contact</g:InlineHyperlink>
+		<g:InlineHyperlink targetHistoryToken="{nameTokens.getSettingsPage}">Settings</g:InlineHyperlink>
 	</g:HTMLPanel>
 </ui:UiBinder> 

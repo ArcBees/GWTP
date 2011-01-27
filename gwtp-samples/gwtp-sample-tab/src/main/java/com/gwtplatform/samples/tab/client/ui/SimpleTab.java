@@ -20,6 +20,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.TabData;
 
 /**
  * A tab with rounded corner contained within an {@link RoundTabPanel}.
@@ -34,9 +35,10 @@ public class SimpleTab extends BaseTab {
   private static final Binder binder = GWT.create(Binder.class);
 
   @UiConstructor
-  SimpleTab(float priority) {
-    super(priority);
+  SimpleTab(TabData tabData) {
+    super(tabData);
     initWidget(binder.createAndBindUi(this));
+    setText(tabData.getLabel());    
   }
 
 }

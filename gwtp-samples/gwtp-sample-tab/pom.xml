@@ -53,6 +53,23 @@
 
                     <additionalConfig>
                         <file>
+                            <name>.factorypath</name>
+                            <content><![CDATA[
+                                <factorypath>
+                                <factorypathentry kind="VARJAR" id="M2_REPO/com/gwtplatform/gwtp-processors/${project.version}/gwtp-processors-${project.version}.jar" enabled="true" runInBatchMode="false"/>
+                                </factorypath>
+                            ]]></content>
+                        </file>
+                        <file>
+                            <name>.settings/org.eclipse.jdt.apt.core.prefs</name>
+                            <content><![CDATA[
+                                eclipse.preferences.version=1
+                                org.eclipse.jdt.apt.aptEnabled=true
+                                org.eclipse.jdt.apt.genSrcDir=target/generated-sources/apt
+                                org.eclipse.jdt.apt.reconcileEnabled=true
+                            ]]></content>
+                        </file>
+                        <file>
                             <name>.settings/com.google.gwt.eclipse.core.prefs</name>
                             <content><![CDATA[
                                     eclipse.preferences.version=1
@@ -73,13 +90,47 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+            <!-- Disable annotation processors during normal compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <proc>none</proc>
+                </configuration>
+            </plugin>
+            <!-- Run annotation processors on src/main/java sources -->
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <processors>
+                                <processor>com.gwtplatform.dispatch.annotation.processor.GenEventProcessor</processor>
+                            </processors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        
     </build>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-mvp-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-processors</artifactId>
         </dependency>
 
         <!-- Google Web Toolkit dependencies -->
