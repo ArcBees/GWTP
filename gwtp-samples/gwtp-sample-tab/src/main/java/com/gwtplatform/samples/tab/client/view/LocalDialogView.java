@@ -25,7 +25,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.PopupViewImpl;
 import com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget.MyView;
 
