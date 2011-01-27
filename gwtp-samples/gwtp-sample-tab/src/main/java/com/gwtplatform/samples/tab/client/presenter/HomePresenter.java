@@ -19,7 +19,6 @@ package com.gwtplatform.samples.tab.client.presenter;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabContainerPresenter;
 import com.gwtplatform.mvp.client.TabView;
@@ -34,7 +33,7 @@ import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
 /**
- * A sample {@link Presenter} appearing as a tab within {@link MainPagePresenter}
+ * A sample {@link TabContainerPresenter} appearing as a tab within {@link MainPagePresenter}
  * and itself containing two tabs. When the tab for {@link HomePresenter}
  * is clicked, them {@link HomeNewsPresenter} is displayed.
  * <p />
