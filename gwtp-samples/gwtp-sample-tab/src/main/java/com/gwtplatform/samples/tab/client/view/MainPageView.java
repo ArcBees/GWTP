@@ -34,6 +34,8 @@ import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
  */
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
   
+  /**
+   */
   public interface Binder extends UiBinder<Widget, MainPageView> { }
 
   public final Widget widget;

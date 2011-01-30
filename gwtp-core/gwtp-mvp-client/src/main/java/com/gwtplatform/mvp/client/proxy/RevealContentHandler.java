@@ -16,11 +16,10 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -65,7 +64,7 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
         // So if a presenter registers a handler in its onBind() method and a
         // child fires the event in its onReveal() method, then the event might
         // get lost because the handler is not officially registered yet.
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new Command() {
           @Override
           public void execute() {
             presenter.setInSlot(revealContentEvent.getAssociatedType(),

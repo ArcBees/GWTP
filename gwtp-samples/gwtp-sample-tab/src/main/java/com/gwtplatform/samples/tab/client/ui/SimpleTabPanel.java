@@ -32,6 +32,8 @@ import com.gwtplatform.mvp.client.TabData;
  */
 public class SimpleTabPanel extends BaseTabPanel {
   
+  /**
+   */
   public interface Binder extends UiBinder<Widget, SimpleTabPanel> { }
 
   @Inject

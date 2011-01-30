@@ -30,6 +30,8 @@ import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
  */
 public class HomeNewsView extends ViewImpl implements HomeNewsPresenter.MyView {
 
+  /**
+   */
   public interface Binder extends UiBinder<Widget, HomeNewsView> { }
 
   private final Widget widget;
