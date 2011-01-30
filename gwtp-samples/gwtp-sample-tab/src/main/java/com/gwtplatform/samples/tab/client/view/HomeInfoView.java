@@ -30,6 +30,8 @@ import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
  */
 public class HomeInfoView extends ViewImpl implements HomeInfoPresenter.MyView {
 
+  /**
+   */
   public interface Binder extends UiBinder<Widget, HomeInfoView> { }
 
   private final Widget widget;

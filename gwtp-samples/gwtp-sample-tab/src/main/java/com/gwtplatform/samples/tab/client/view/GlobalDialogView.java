@@ -37,6 +37,8 @@ import com.gwtplatform.samples.tab.client.presenter.GlobalDialogPresenterWidget.
  */
 public class GlobalDialogView extends PopupViewImpl implements MyView {
   
+  /**
+   */
   public interface Binder extends UiBinder<PopupPanel, GlobalDialogView> { }
 
   @UiField

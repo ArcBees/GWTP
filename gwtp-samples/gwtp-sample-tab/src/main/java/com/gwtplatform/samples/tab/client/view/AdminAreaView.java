@@ -30,6 +30,8 @@ import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
  */
 public class AdminAreaView extends ViewImpl implements AdminAreaPresenter.MyView {
   
+  /**
+   */
   public interface Binder extends UiBinder<Widget, AdminAreaView> { }
 
   private final Widget widget;

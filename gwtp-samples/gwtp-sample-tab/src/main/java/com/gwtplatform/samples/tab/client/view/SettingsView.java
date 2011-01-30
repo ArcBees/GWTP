@@ -36,6 +36,8 @@ import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
 public class SettingsView extends ViewWithUiHandlers<SettingsUiHandlers>
     implements SettingsPresenter.MyView {
   
+  /**
+   */
   public interface Binder extends UiBinder<Widget, SettingsView> { }
 
   private final Widget widget;

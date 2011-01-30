@@ -16,14 +16,13 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.PopupPanel;
-
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 
@@ -61,7 +60,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     doCenter();
     // We center again in a deferred command to solve a bug in IE where newly
     // created window are sometimes not centered.
-    DeferredCommand.addCommand(new Command() {
+    Scheduler.get().scheduleDeferred(new Command() {
       @Override
       public void execute() {
         doCenter();

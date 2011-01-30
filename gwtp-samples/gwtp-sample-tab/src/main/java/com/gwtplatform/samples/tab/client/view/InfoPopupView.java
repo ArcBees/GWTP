@@ -33,6 +33,8 @@ import com.gwtplatform.samples.tab.client.presenter.InfoPopupPresenterWidget;
 public class InfoPopupView extends PopupViewImpl implements
     InfoPopupPresenterWidget.MyView {
 
+  /**
+   */
   public interface Binder extends UiBinder<PopupPanel, InfoPopupView> { }
 
   private final PopupPanel widget;

@@ -16,10 +16,10 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
@@ -254,7 +254,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    * @param command The {@Command} to defer, see {@link DeferredCommand}.
    */
   void addDeferredCommand(Command command) {
-    DeferredCommand.addCommand(command);
+    Scheduler.get().scheduleDeferred(command);
   }
   
 }

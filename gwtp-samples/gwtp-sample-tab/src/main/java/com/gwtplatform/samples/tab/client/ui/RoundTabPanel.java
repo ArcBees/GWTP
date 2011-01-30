@@ -34,6 +34,8 @@ import com.gwtplatform.samples.tab.client.TabDataExt;
  */
 public class RoundTabPanel extends BaseTabPanel {
 
+  /**
+   */
   public interface Binder extends UiBinder<Widget, RoundTabPanel> { }
 
   @Inject
