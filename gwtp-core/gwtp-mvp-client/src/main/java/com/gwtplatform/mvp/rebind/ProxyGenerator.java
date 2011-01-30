@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -43,7 +44,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
@@ -485,7 +485,7 @@ public class ProxyGenerator extends Generator {
     composerFactory.addImport(DelayedBindRegistry.class.getCanonicalName());
     composerFactory.addImport(Ginjector.class.getCanonicalName());
     composerFactory.addImport(RevealContentEvent.class.getCanonicalName()); // Obsolete?
-    composerFactory.addImport(DeferredCommand.class.getCanonicalName());
+    composerFactory.addImport(Scheduler.class.getCanonicalName());
     composerFactory.addImport(Command.class.getCanonicalName());
     composerFactory.addImport(AsyncCallback.class.getCanonicalName());
     composerFactory.addImport(TabData.class.getCanonicalName());
@@ -1224,7 +1224,7 @@ public class ProxyGenerator extends Generator {
     writer.println("public void onSuccess(final " + presenterClassName
         + " presenter) {");
     writer.indent();
-    writer.println("DeferredCommand.addCommand( new Command() {");
+    writer.println("Scheduler.get().scheduleDeferred( new Command() {");
     writer.indent();
     writer.println("@Override");
     writer.println("public void execute() {");

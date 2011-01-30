@@ -38,6 +38,8 @@ import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter.MyView
 public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers> 
     implements MyView {
   
+  /**
+   */
   public interface Binder extends UiBinder<Widget, DialogSampleView> { }
 
   @UiField

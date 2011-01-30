@@ -34,6 +34,8 @@ import com.gwtplatform.samples.tab.client.ui.SimpleTabPanel;
  */
 public class HomeView extends ViewImpl implements HomePresenter.MyView {
   
+  /**
+   */
   public interface Binder extends UiBinder<Widget, HomeView> { }
 
   @UiField
