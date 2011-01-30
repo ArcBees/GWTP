@@ -16,13 +16,13 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
@@ -284,7 +284,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   @Override
   public final void onWindowClosing(ClosingEvent event) {
     event.setMessage(onLeaveQuestion);
-    DeferredCommand.addCommand(new Command() {
+    Scheduler.get().scheduleDeferred(new Command() {
       @Override
       public void execute() {
         Window.Location.replace(currentHRef);

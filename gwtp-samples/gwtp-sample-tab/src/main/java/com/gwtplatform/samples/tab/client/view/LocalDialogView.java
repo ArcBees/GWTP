@@ -36,6 +36,8 @@ import com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget.M
  */
 public class LocalDialogView extends PopupViewImpl implements MyView {
 
+  /**
+   */
   public interface Binder extends UiBinder<PopupPanel, LocalDialogView> { }
 
   @UiField
