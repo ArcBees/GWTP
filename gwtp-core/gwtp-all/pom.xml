@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.gwtplatform</groupId>
         <artifactId>gwtp-core</artifactId>
-        <version>0.5-SNAPSHOT</version>
+        <version>0.5</version>
     </parent>
 
     <groupId>com.gwtplatform</groupId>
@@ -214,14 +212,7 @@
                                 <phase>compile</phase>
                                 <configuration>
                                     <target>
-                                        <javadoc packagenames="com.gwtplatform.*"
-                                                 maxmemory="256m"
-                                                 sourcepath="${unpackedDependenciesDir}"
-                                                 defaultexcludes="yes"
-                                                 destdir="${unpackedJavadocDir}"
-                                                 version="true"
-                                                 use="true"
-                                                 windowtitle="${project.name} ${project.version} API.">
+                                        <javadoc packagenames="com.gwtplatform.*" maxmemory="256m" sourcepath="${unpackedDependenciesDir}" defaultexcludes="yes" destdir="${unpackedJavadocDir}" version="true" use="true" windowtitle="${project.name} ${project.version} API.">
                                             <doctitle>
                                                 <![CDATA[<h1>${project.name} ${project.version} API</h1>]]>
                                             </doctitle>
@@ -230,7 +221,7 @@
                                                 <a href="${project.organization.url}">${project.organization.name}</a>.
                                                 All Rights Reserved.</i>]]>
                                             </bottom>
-                                            <classpath refid="maven.compile.classpath"/>
+                                            <classpath refid="maven.compile.classpath" />
                                             <link href="http://download.oracle.com/javase/6/docs/api/" />
                                             <link href="http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/" />
                                             <link href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/" />
@@ -238,9 +229,7 @@
                                             <link href="http://google-guice.googlecode.com/svn/trunk/javadoc/" />
                                             <link href="http://aopalliance.sourceforge.net/doc/" />
                                         </javadoc>
-                                        <jar destfile="${javadocArtifactFile}"
-                                             basedir="${unpackedJavadocDir}"
-                                             includes="**/**" />
+                                        <jar destfile="${javadocArtifactFile}" basedir="${unpackedJavadocDir}" includes="**/**" />
                                     </target>
                                 </configuration>
                                 <goals>
