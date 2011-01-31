@@ -322,6 +322,7 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
+                    <arguments>-Psonatype-oss-release -Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
             </plugin>
 
