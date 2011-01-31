@@ -67,9 +67,9 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
         Scheduler.get().scheduleDeferred(new Command() {
           @Override
           public void execute() {
+            presenter.forceReveal();
             presenter.setInSlot(revealContentEvent.getAssociatedType(),
                 revealContentEvent.getContent());
-            presenter.forceReveal();
           }
         });
       }
