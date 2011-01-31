@@ -2,6 +2,12 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>5</version>
+    </parent>
+
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
     <version>0.5-SNAPSHOT</version>
@@ -116,7 +122,8 @@
     </contributors>
     
     <scm>
-        <connection>scm:hg:https://gwt-platform.googlecode.com/hg/</connection>
+        <connection>scm:hg:http://gwt-platform.googlecode.com/hg/</connection>
+        <developerConnection>scm:hg:https://gwt-platform.googlecode.com/hg/</developerConnection>
         <url>http://code.google.com/p/gwt-platform/source/browse/</url>
     </scm>
     
@@ -182,6 +189,12 @@
                         <target>${target.jdk}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.5</version>
                 </plugin>
 
                 <plugin>
@@ -317,6 +330,12 @@
     <profiles>
         <profile>
             <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
             <build>
                 <pluginManagement>
                     <plugins>
@@ -358,6 +377,34 @@
                                     <link>http://aopalliance.sourceforge.net/doc/</link>
                                 </links>
                             </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-gpg-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>sign-artifacts</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>sign</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
                         </plugin>
                     </plugins>
                 </pluginManagement>
