@@ -12,11 +12,6 @@
     <artifactId>gwtp-dispatch-server</artifactId>
     <name>GWTP Dispatch Server</name>
 
-    <properties>
-        <spring.version>3.0.3.RELEASE</spring.version>
-        <cglib.version>2.2</cglib.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.gwtplatform</groupId>

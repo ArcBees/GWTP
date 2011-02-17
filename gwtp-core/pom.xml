@@ -25,16 +25,6 @@
         <module>gwtp-crawler</module>
     </modules>
 
-    <properties>
-        <gwt-gin.version>1.0-r137</gwt-gin.version>
-        <guice.version>3.0-rc2</guice.version>
-        <aopalliance.version>1.0</aopalliance.version>
-        <gwt.version>2.1.0</gwt.version>
-        <junit.version>4.5</junit.version>
-        <jukito.version>1.0</jukito.version>
-        <mockito.version>1.8.5</mockito.version>
-    </properties>
-
     <dependencies>
         <!-- Allow junit to be inherited by every sub module -->
         <dependency>
@@ -128,9 +118,9 @@
                 <version>${aopalliance.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-gin</artifactId>
-                <version>${gwt-gin.version}</version>
+                <groupId>com.google.gwt.inject</groupId>
+                <artifactId>gin</artifactId>
+                <version>${gin.version}</version>
             </dependency>
 
             <!-- Test dependencies -->
