@@ -96,12 +96,16 @@
             <artifactId>guice-servlet</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+        </dependency>
+        <dependency>
             <groupId>aopalliance</groupId>
             <artifactId>aopalliance</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-gin</artifactId>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
         </dependency>
     </dependencies>
 </project>

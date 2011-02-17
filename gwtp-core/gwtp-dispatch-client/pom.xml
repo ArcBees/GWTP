@@ -45,8 +45,8 @@
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-gin</artifactId>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
         </dependency>
     </dependencies>
 </project>

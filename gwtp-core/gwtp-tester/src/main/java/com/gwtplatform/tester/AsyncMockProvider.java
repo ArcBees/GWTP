@@ -60,7 +60,7 @@ public class AsyncMockProvider<T> implements AsyncProvider<T> {
   }
 
   @Override
-  public void get(AsyncCallback<T> callback) {
+  public void get(AsyncCallback<? super T> callback) {
     if (this.error != null) {
       callback.onFailure(error);
     } else {
