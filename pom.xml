@@ -148,9 +148,19 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
         <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
-        <gwt-maven-plugin.version>2.1.0-1</gwt-maven-plugin.version>
+        <gwt-maven-plugin.version>2.2.0</gwt-maven-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-        <appEngine.version>1.4.0</appEngine.version>
+
+        <appEngine.version>1.4.2</appEngine.version>
+        <gin.version>1.0-r170</gin.version>
+        <guice.version>3.0-rc2</guice.version>
+        <aopalliance.version>1.0</aopalliance.version>
+        <gwt.version>2.2.0</gwt.version>
+        <junit.version>4.5</junit.version>
+        <jukito.version>1.0</jukito.version>
+        <mockito.version>1.8.5</mockito.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
+        <cglib.version>2.2</cglib.version>
     </properties>
 
     <repositories>
@@ -172,6 +182,14 @@
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net Repository for Maven</name>
             <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </pluginRepository>
+
+        <!-- For our custom-build gwt-maven-plugin -->
+        <pluginRepository>
+            <id>gwtplatform.plugin</id>
+            <name>Gwtplatform custom plugin epository</name>
+            <url>http://maven.gwt-platform.googlecode.com/hg/</url>
             <layout>default</layout>
         </pluginRepository>
     </pluginRepositories>
