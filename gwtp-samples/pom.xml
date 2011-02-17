@@ -14,11 +14,6 @@
     <name>GWTP Samples</name>
 
     <properties>
-        <gwt.version>2.1.0</gwt.version>
-        <gwt-gin.version>1.0-r137</gwt-gin.version>
-        <guice.version>3.0-rc2</guice.version>
-        <aopalliance.version>1.0</aopalliance.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     </properties>
 
@@ -102,14 +97,19 @@
                 <version>${guice.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-assistedinject</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>aopalliance</groupId>
                 <artifactId>aopalliance</artifactId>
                 <version>${aopalliance.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-gin</artifactId>
-                <version>${gwt-gin.version}</version>
+                <groupId>com.google.gwt.inject</groupId>
+                <artifactId>gin</artifactId>
+                <version>${gin.version}</version>
             </dependency>
 
             <!--  Spring dependencies -->
