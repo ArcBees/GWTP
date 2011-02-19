@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.annotation.processor;
+package com.gwtplatform.dispatch.annotation.helper;
 
 import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Optional;
@@ -60,6 +60,24 @@ public class ReflectionHelper {
   }
   
   /**
+   * Returns only fields which doesn't annotated with one of the passed annotation.
+   */
+  public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, Class<? extends Annotation>... annotations) {
+    Collection<VariableElement> filteredFields = new ArrayList<VariableElement>();
+    filteredFields.addAll(fieldElements);
+    for (VariableElement fieldElement : fieldElements) {
+      for (Class<? extends Annotation> passedAnnotation : annotations) {
+        Annotation fieldAnnotation = fieldElement.getAnnotation(passedAnnotation);
+        if (fieldAnnotation != null) {
+          filteredFields.remove(fieldElement);
+          break;
+        }
+      }
+    }
+    return filteredFields;
+  }
+  
+  /**
    * Returns only fields which doesn't contain one of the passed modifiers.
    */
   public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, Modifier... modifiers) {
@@ -77,15 +95,14 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns only fields which doesn't annotated with one of the passed annotation.
+   * Returns only fields which simple names doesn't equals the passed field names.
    */
-  public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, Class<? extends Annotation>... annotations) {
+  public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, String... simpleFieldNames) {
     Collection<VariableElement> filteredFields = new ArrayList<VariableElement>();
     filteredFields.addAll(fieldElements);
     for (VariableElement fieldElement : fieldElements) {
-      for (Class<? extends Annotation> passedAnnotation : annotations) {
-        Annotation fieldAnnotation = fieldElement.getAnnotation(passedAnnotation);
-        if (fieldAnnotation != null) {
+      for (String simpleFieldName : simpleFieldNames) {
+        if (fieldElement.getSimpleName().toString().equals(simpleFieldName)) {
           filteredFields.remove(fieldElement);
           break;
         }
@@ -110,7 +127,7 @@ public class ReflectionHelper {
    * Returns the class name. 
    * <p>
    * For example:<br>
-   * {@code com.gwtplatform.dispatch.shared.annotation.Foo}
+   * {@code com.gwtplatform.dispatch.annotation.Foo}
    * </p>
    * @return the class name.
    */
@@ -123,7 +140,7 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns all fields ordered that are {@link Modifier#FINAL} or {@link Modifier#STATIC}.
+   * Returns all fields ordered that are {@link Modifier.FINAL} or {@link Modifier.STATIC}.
    */
   public Collection<VariableElement> getConstantFields() {
     return getModifierFields(Modifier.FINAL, Modifier.STATIC);
@@ -142,14 +159,15 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns all fields which contains {@link Modifier#FINAL}.
+   * Returns all fields which contains {@link Modifier.FINAL}.
    */
   public Collection<VariableElement> getFinalFields() {
     return filterFields(getOrderedFields(), Modifier.FINAL);
   }
   
   /**
-   * Returns all fields annotated with @{@link In}.
+   * Returns all fields annotated with @{@link In}. Sorted based on the @
+   * {@link In} annotation.
    */
   public Collection<VariableElement> getInFields() {
     return sortFields(In.class, getAnnotatedFields(In.class));
@@ -169,15 +187,16 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns all fields ordered that are not {@link Modifier#FINAL} or {@link Modifier#STATIC}.
+   * Returns all fields that are not {@link Modifier.FINAL} or
+   * {@link Modifier.STATIC}. Sorted based on the @ {@link Order} annotation.
    */
   public Collection<VariableElement> getNonConstantFields() {
     return filterFields(getOrderedFields(), Modifier.FINAL, Modifier.STATIC);
   }
   
   /**
-   * Returns all non constant fields annotated with @{@link Optional}. Sorted based on the @
-   * {@link Order} annotation.
+   * Returns all non constant fields annotated with @{@link Optional}. Sorted
+   * based on the @ {@link Order} annotation.
    */
   public Collection<VariableElement> getOptionalFields() {
     return sortFields(Order.class, filterConstantFields(getAnnotatedFields(Optional.class)));
@@ -194,14 +213,15 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns all fields ordered. See {@link Order} for detailed informations.
+   * Returns all fields ordered. Sorted based on the @ {@link Order} annotation.
    */
   public Collection<VariableElement> getOrderedFields() {
     return sortFields(Order.class, getFields());
   }
-  
+
   /**
-   * Returns all fields annotated with @{@link Out}.
+   * Returns all fields annotated with @{@link Out}. Sorted based on the @
+   * {@link Out} annotation.
    */
   public Collection<VariableElement> getOutFields() {
     return sortFields(Out.class, getAnnotatedFields(Out.class));
@@ -217,8 +237,8 @@ public class ReflectionHelper {
   
   /**
    * Returns all non {@link Optional}|{@link Modifier#STATIC}|
-   * {@link Modifier#FINAL} fields <b>ordered</b>. See {@link Order} for
-   * detailed order informations.
+   * {@link Modifier#FINAL} fields <b>ordered</b>. Sorted based on the @
+   * {@link Order} annotation.
    * <p>
    * Required are all:
    * <ul>
@@ -241,7 +261,7 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns all fields which contains {@link Modifier#STATIC}.
+   * Returns all fields which contains {@link Modifier.STATIC}.
    */
   public Collection<VariableElement> getStaticFields() {
     return filterFields(getOrderedFields(), Modifier.STATIC);
@@ -262,6 +282,14 @@ public class ReflectionHelper {
       return fields;
     }
     return sortedFields.values();
+  }
+  
+  public boolean hasOptionalFields() {
+    return getOptionalFields().size() > 0;
+  }
+  
+  public boolean hasRequiredFields() {
+    return getRequiredFields().size() > 0;
   }
   
   /**
