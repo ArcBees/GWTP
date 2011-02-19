@@ -21,11 +21,7 @@ import static javax.lang.model.SourceVersion.RELEASE_6;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
-import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
@@ -33,7 +29,8 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
-import com.gwtplatform.dispatch.annotation.GenDto;
+import com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper;
+import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
 /**
  * Processes {@link GenDto} annotations.
@@ -45,83 +42,54 @@ import com.gwtplatform.dispatch.annotation.GenDto;
  * @author Florian Sauter
  * @author Stephen Haberman (concept) 
  */
-
-@SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDto")
 @SupportedSourceVersion(RELEASE_6)
-public class GenDtoProcessor extends AbstractProcessor {
-
-  private ProcessingEnvironment env;
-
-  @Override
-  public synchronized void init(ProcessingEnvironment env) {
-    super.init(env);
-    this.env = env;
-  }
+@SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDto")
+public class GenDtoProcessor extends GenProcessor {
 
   @Override
-  public boolean process(Set<? extends TypeElement> annotations,
-      RoundEnvironment roundEnv) {
-
-    if (!roundEnv.processingOver()) {
-
-      for (TypeElement currAnnotation : annotations) {
-
-        if (currAnnotation.getQualifiedName().contentEquals(
-            GenDto.class.getName())) {
-
-          for (Element dto : roundEnv.getElementsAnnotatedWith(currAnnotation)) {
-            this.generateDto(dto);
-          }
-        }
-      }
-    }
-    return true;
-  }
-
-  void generateDto(Element dtoElement) {
-    GenerationHelper writer = null;
+  public void process(Element dtoElement) {
+    BuilderGenerationHelper writer = null;
     try {
-      ReflectionHelper reflection = new ReflectionHelper(env, (TypeElement) dtoElement);
+      ReflectionHelper reflection = new ReflectionHelper(getEnvironment(), (TypeElement) dtoElement);
       String dtoElementSimpleName = reflection.getSimpleClassName();
       String dtoSimpleName = dtoElementSimpleName + "Dto";
       String dtoClassName = reflection.getClassName() + "Dto";
-      Writer sourceWriter = this.env.getFiler().createSourceFile(dtoClassName, dtoElement).openWriter();
-      writer = new GenerationHelper(sourceWriter);
+      Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dtoClassName, dtoElement).openWriter();
+      writer = new BuilderGenerationHelper(sourceWriter);
 
       Collection<VariableElement> orderedElementFields = reflection.getOrderedFields();
-
-      writer.generatePackageDeclaration(reflection.getPackageName());
-
-      writer.generateImports("com.google.gwt.user.client.rpc.IsSerializable");
-      
-      writer.generateClassHeader(dtoSimpleName, null, "IsSerializable");
-      
-      writer.generateFieldDeclarations(orderedElementFields);
-      
       Collection<VariableElement> allFields = reflection.getNonConstantFields();
       Collection<VariableElement> optionalFields = reflection.getOptionalFields();
       Collection<VariableElement> requiredFields = reflection.getNonConstantFields();
       requiredFields.removeAll(optionalFields);
       
-      writer.generateConstructorUsingFields(dtoSimpleName, allFields);
+      writer.generatePackageDeclaration(reflection.getPackageName());
+      writer.generateImports("com.google.gwt.user.client.rpc.IsSerializable");
+      writer.generateClassHeader(dtoSimpleName, null, reflection.getClassRepresenter().getModifiers(), "IsSerializable");
+      writer.generateFieldDeclarations(orderedElementFields);
       
-      if (optionalFields.size() > 0) {
-        writer.generateConstructorUsingFields(dtoSimpleName, requiredFields);
-      }
-      
-      if (!allFields.isEmpty() && requiredFields.size() > 0) {
+      if (reflection.hasOptionalFields()) { // has optional fields.
+        writer.setWhitespaces(2);
+        writer.generateBuilderClass(dtoSimpleName, requiredFields, optionalFields, "IsSerializable");
+        writer.resetWhitespaces();
         writer.generateEmptyConstructor(dtoSimpleName, Modifier.PROTECTED);
+        if (reflection.hasRequiredFields()) { // and required fields
+          writer.generateConstructorUsingFields(dtoSimpleName, requiredFields, Modifier.PUBLIC);
+        }
+        writer.generateCustomBuilderConstructor(dtoSimpleName, allFields);
+      } else if (reflection.hasRequiredFields()) { // has only required fields
+        writer.generateEmptyConstructor(dtoSimpleName, Modifier.PROTECTED);
+        writer.generateConstructorUsingFields(dtoSimpleName, requiredFields, Modifier.PUBLIC);
+      } else { // has no non-static fields
+        writer.generateEmptyConstructor(dtoSimpleName, Modifier.PUBLIC);
       }
-
+      
       writer.generateFieldAccessors(orderedElementFields);
-
       writer.generateEquals(dtoSimpleName, orderedElementFields);
       writer.generateHashCode(orderedElementFields);
-      
       writer.generateToString(dtoSimpleName, orderedElementFields);
-
-      writer.generateClassFooter();
-
+      
+      writer.generateFooter();
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {
@@ -130,5 +98,4 @@ public class GenDtoProcessor extends AbstractProcessor {
       }
     }
   }
-
 }
