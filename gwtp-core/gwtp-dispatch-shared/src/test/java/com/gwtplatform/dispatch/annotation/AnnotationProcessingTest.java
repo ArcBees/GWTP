@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import com.google.gwt.event.shared.HasHandlers;
+
 /**
  * This test is being run by ant, but is not run in eclipse.
  * 
@@ -33,36 +35,28 @@ public class AnnotationProcessingTest {
   @org.junit.Test
   public void event() {
     Foo foo = new Foo("bar");
-    FooChangedEvent event = new FooChangedEvent(foo, true);
+    FooChangedEvent event = new FooChangedEvent.Builder(foo, true).build();
     assertEquals("bar", event.getFoo().getName());
     assertTrue(event.isOriginator());
 
-    FooChangedEvent event2 = new FooChangedEvent(foo, true);
+    FooChangedEvent event2 = new FooChangedEvent.Builder(foo, true).build();
     assertEquals(event, event2);
     assertEquals(event.hashCode(), event2.hashCode());
 
-    FooChangedEvent event3 = new FooChangedEvent(foo, false);
+    FooChangedEvent event3 = new FooChangedEvent.Builder(foo, false).build();
     assertFalse(event3.equals(event));
   }
   
   @org.junit.Test
-  public void eventOptional() {
+  public void eventOptional() throws SecurityException, NoSuchMethodException {
     Foo foo = new Foo("bar");
-    FooChangedEvent event = new FooChangedEvent(foo, true, "message", 1.0);
+    FooChangedEvent event = new FooChangedEvent.Builder(foo, true).additionalMessage("message").priority(1.0).build();
     assertEquals("message", event.getAdditionalMessage());
     assertTrue(1.0 == event.getPriority());
     
-    try {
-      FooChangedEvent.fire(null, foo, false, "fireMessage", 2.0);
-    } catch (NullPointerException e) {
-      // the method fire was generated correctly
-    }
-    
-    try {
-      FooChangedEvent.fire(null, foo, true);
-    } catch (NullPointerException e) {
-      // the method fire was generated correctly
-    }
+    Class<?> eventClass = FooChangedEvent.class;
+    eventClass.getMethod("fire", HasHandlers.class);
+    eventClass.getMethod("fire", HasHandlers.class, FooChangedEvent.class);
   }
 
   @org.junit.Test
@@ -103,13 +97,13 @@ public class AnnotationProcessingTest {
   
   @org.junit.Test
   public void dispatchOptional() {
-    RetrieveFooAction action = new RetrieveFooAction(42, "meaning of life");
+    RetrieveFooAction action = new RetrieveFooAction.Builder(42).additionalQuestion("meaning of life").build();
     assertEquals(42, action.getFooId());
     assertTrue(action.isSecured());
     assertEquals("dispatch/RetrieveFoo",action.getServiceName());
     
     Foo foo = new Foo("bar");
-    RetrieveFooResult result = new RetrieveFooResult(foo, 42, true);
+    RetrieveFooResult result = new RetrieveFooResult.Builder(foo, 42).answer42(true).build();
     assertEquals(true, result.isAnswer42());
     assertEquals(42, result.getMeaningOfLife());
   }
@@ -129,7 +123,7 @@ public class AnnotationProcessingTest {
   
   @org.junit.Test
   public void dtoOptional() {
-    PersonNameDto dto = new PersonNameDto("bob", "andrews", "peter");
+    PersonNameDto dto = new PersonNameDto.Builder("bob", "andrews").secondName("peter").build();
     assertEquals("bob", dto.getFirstName());
     assertEquals("andrews", dto.getLastName());
     assertEquals("peter", dto.getSecondName());
