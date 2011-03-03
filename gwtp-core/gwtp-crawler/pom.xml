@@ -32,18 +32,12 @@
     </build>
 
     <dependencies>
-        <!-- HTMLUnit custom build -->
-        <!-- http://jira.codehaus.org/browse/MECLIPSE-388 http://jira.codehaus.org/browse/MECLIPSE-472 Due to
-        this issues the HTMLUnit library should be on classpath before gwt-dev library (gwt-dev library also contains
-        embedded htmlunit) and currently dependencies are ordered alphabetically in eclipse. This will be
-        fixed in 2.9 version, so we have to live for a while with this "fix" -->
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
             <version>${htmlunit.version}</version>
         </dependency>
 
-        <!-- Appengine dependencies -->
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
@@ -59,11 +53,13 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-dev</artifactId>
             <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
