@@ -118,8 +118,7 @@
                 <version>${aopalliance.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.gwt.inject</groupId>
-                <artifactId>gin</artifactId>
+                <groupId>com.google.gwt.inject</groupId>              <artifactId>gin</artifactId>
                 <version>${gin.version}</version>
             </dependency>
 
