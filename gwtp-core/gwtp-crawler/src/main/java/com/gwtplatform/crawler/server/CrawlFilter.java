@@ -157,7 +157,7 @@ public final class CrawlFilter implements Filter {
         webClient.setThrowExceptionOnScriptError(false);
         webClient.setJavaScriptEnabled(true);
         HtmlPage page = webClient.getPage(pageName);
-        webClient.pumpEventLoop(timeoutMillis);
+        webClient.getJavaScriptEngine().pumpEventLoop(timeoutMillis);
 
         res.setContentType("text/html;charset=UTF-8");
         PrintWriter out = res.getWriter();
