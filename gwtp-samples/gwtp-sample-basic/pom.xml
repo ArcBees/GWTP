@@ -113,7 +113,8 @@
             <artifactId>guice-assistedinject</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt.inject</groupId>      <artifactId>gin</artifactId>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
         </dependency>
     </dependencies>
 </project>
