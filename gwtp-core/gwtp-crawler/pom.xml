@@ -12,11 +12,6 @@
     <artifactId>gwtp-crawler</artifactId>
     <name>GWTP Crawler</name>
 
-    <properties>
-        <appengine.version>1.3.1</appengine.version>
-        <htmlunit.version>r5662-gae</htmlunit.version>
-    </properties>
-
     <build>
         <resources>
             <!-- bundle sources with the jar, so they are visible to GWT's compiler -->
@@ -39,12 +34,12 @@
     <dependencies>
         <!-- HTMLUnit custom build -->
         <!-- http://jira.codehaus.org/browse/MECLIPSE-388 http://jira.codehaus.org/browse/MECLIPSE-472 Due to
-        this issues we HTMLUnit library should be on classpath before gwt-dev library (gwt-dev library also contains
+        this issues the HTMLUnit library should be on classpath before gwt-dev library (gwt-dev library also contains
         embedded htmlunit) and currently dependencies are ordered alphabetically in eclipse. This will be
         fixed in 2.9 version, so we have to live for a while with this "fix" -->
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>crawl_htmlunit</artifactId>
+            <artifactId>htmlunit</artifactId>
             <version>${htmlunit.version}</version>
         </dependency>
 
