@@ -50,7 +50,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt.inject</groupId>      <artifactId>gin</artifactId>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
         </dependency>
 
         <!-- Test dependencies -->
