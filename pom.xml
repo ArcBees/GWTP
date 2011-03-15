@@ -157,15 +157,15 @@
         <aopalliance.version>1.0</aopalliance.version>
         <gwt.version>2.2.0</gwt.version>
         <junit.version>4.5</junit.version>
-        <jukito.version>1.0</jukito.version>
+        <jukito.version>1.1-SNAPSHOT</jukito.version>
         <mockito.version>1.8.5</mockito.version>
         <spring.version>3.0.5.RELEASE</spring.version>
         <cglib.version>2.2</cglib.version>
         <htmlunit.version>2.8</htmlunit.version>
     </properties>
 
-<!-- Not needed now, we only depend on released components
     <repositories>
+<!-- Uncomment when we depend on dependencies only released on our repository
         <repository>
             <id>Custom Compiled dependencies</id>
             <url>http://maven.gwt-platform.googlecode.com/hg</url>
@@ -176,17 +176,26 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
-  	</repositories>
 -->
+<!-- Uncomment when we depend on snapshots released on sonatype -->
+        <repository>
+            <id>sonatype.snapshots</id>
+            <name>Sonatype snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <pluginRepositories>
         <!-- To use maven-processor-plugin -->
         <pluginRepository>
             <id>maven-annotation-plugin</id>
             <url>http://maven-annotation-plugin.googlecode.com/svn/trunk/mavenrepo</url>
-                <releases>
-                    <enabled>true</enabled>
-                </releases>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
