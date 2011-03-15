@@ -61,7 +61,7 @@ public class PlaceManagerImplTest {
       bind(PlaceManager.class).to(TestPlaceManager.class).in(TestSingleton.class);
     }
   }
-  
+
   @TestMockSingleton
   abstract static class DummyPresenterBasic extends Presenter<View,DummyProxyPlaceBasic> {
     @Inject
