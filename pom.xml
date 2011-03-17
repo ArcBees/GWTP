@@ -119,23 +119,33 @@
             <email>camechis@gmail.com</email>
         </contributor>
     </contributors>
-    
+
     <scm>
         <connection>scm:hg:http://gwt-platform.googlecode.com/hg/</connection>
         <developerConnection>scm:hg:https://gwt-platform.googlecode.com/hg/</developerConnection>
         <url>http://code.google.com/p/gwt-platform/source/browse/</url>
     </scm>
-    
+
     <issueManagement>
       <system>Google Code</system>
       <url>http://code.google.com/p/gwt-platform/issues</url>
     </issueManagement>
-    
+
     <ciManagement>
       <system>Team City</system>
       <url>http://teamcity.codebetter.com</url>
     </ciManagement>
-    
+
+    <mailingLists>
+        <mailingList>
+            <name>Development</name>
+            <subscribe>gwt-platform+subscribe@googlegroups.com</subscribe>
+            <unsubscribe>gwt-platform+unsubscribe@googlegroups.com</unsubscribe>
+            <post>gwt-platform@googlegroups.com</post>
+            <archive>http://groups.google.com/group/gwt-platform</archive>
+        </mailingList>
+    </mailingLists>
+
     <modules>
         <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
@@ -146,10 +156,17 @@
         <target.jdk>1.6</target.jdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
-        <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
+
         <gwt-maven-plugin.version>2.2.0</gwt-maven-plugin.version>
+        <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
+        <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
+        <maven-javadoc-plugin.version>2.6.1</maven-javadoc-plugin.version>
+        <maven-processor-plugin.version>2.0.1</maven-processor-plugin.version>
+        <maven-release-plugin.version>2.1</maven-release-plugin.version>
+        <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
+        <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
 
         <appengine.version>1.4.2</appengine.version>
         <gin.version>1.5.0</gin.version>
@@ -215,17 +232,17 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>${maven-deploy-plugin.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.bsc.maven</groupId>
                     <artifactId>maven-processor-plugin</artifactId>
-                    <version>2.0.1</version>
+                    <version>${maven-processor-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -250,7 +267,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>${maven-checkstyle-plugin.version}</version>
                     <configuration>
                         <configLocation>/gwtp-checkstyle.xml</configLocation>
                         <headerLocation>/gwtp-java-header.txt</headerLocation>
@@ -278,7 +295,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
             </plugins>
         </pluginManagement>
 
@@ -300,7 +316,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.6</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
@@ -342,7 +358,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.1</version>
+                <version>@{maven-release-plugin.version}</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
@@ -350,7 +366,6 @@
                     <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
@@ -365,11 +380,12 @@
             </activation>
             <build>
                 <pluginManagement>
+                
                     <plugins>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-source-plugin</artifactId>
-                            <version>2.1.2</version>
+                            <version>${maven-source-plugin.version}</version>
                             <executions>
                                 <execution>
                                     <id>attach-sources</id>
@@ -379,10 +395,11 @@
                                 </execution>
                             </executions>
                         </plugin>
+                        
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>2.5</version>  <!-- Stick to 2.5 till http://jira.codehaus.org/browse/MJAVADOC-268 is fixed -->
+                            <version>${maven-javadoc-plugin.version}</version>
                             <executions>
                                 <execution>
                                     <id>attach-javadocs</id>
@@ -405,10 +422,12 @@
                                 </links>
                             </configuration>
                         </plugin>
+                        
                     </plugins>
                 </pluginManagement>
             </build>
         </profile>
+
         <profile>
             <id>release-sign-artifacts</id>
             <activation>

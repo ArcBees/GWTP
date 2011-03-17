@@ -25,6 +25,15 @@
         <module>gwtp-crawler</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <!-- Allow junit to be inherited by every sub module -->
         <dependency>
@@ -34,15 +43,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencyManagement>
         <dependencies>
