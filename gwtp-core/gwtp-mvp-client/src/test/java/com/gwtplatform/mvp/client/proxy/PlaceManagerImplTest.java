@@ -59,6 +59,11 @@ public class PlaceManagerImplTest {
       bind(DeferredCommandManager.class).in(TestSingleton.class);
       bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
       bind(PlaceManager.class).to(TestPlaceManager.class).in(TestSingleton.class);
+      bind(DummyPresenterRedirect.class);
+      bind(DummyProxyBasic.class);
+      bind(DummyProxyPlaceBasic.class);
+      bind(DummyProxyRedirect.class);
+      bind(DummyProxyPlaceRedirect.class);
     }
   }
 
