@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,10 +26,10 @@ import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 
 /**
- * This is a basic implementation of a {@link Tab} that must be 
+ * This is a basic implementation of a {@link Tab} that must be
  * subclassed. Subclasses can style the tab in any way they want.
  * A {@link BaseTab} is added to a {@link BaseTabPanel}.
- * 
+ *
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
@@ -96,7 +96,7 @@ public abstract class BaseTab extends Composite implements Tab {
   /**
    * Checks whether or not the current user has the right to access this tab.
    * By default, all tabs can be accessed.
-   * 
+   *
    * @return {@code true} if the user can access this tab, {@code false} otherwise.
    */
   public boolean canUserAccess() {

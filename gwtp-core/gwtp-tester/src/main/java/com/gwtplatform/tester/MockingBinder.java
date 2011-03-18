@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,9 +29,9 @@ import java.lang.reflect.Field;
  * To use it, you should build a small class that extends MockingBinder and bind
  * that class inside your Guice test module. You will have to provide a
  * {@link MockFactory} to let MockingBinder mock everything.
- * 
+ *
  * Ex:
- * 
+ *
  * <pre>public static class Module extends JukitoModule {
  *   static class MyTestBinder extends MockingBinder<Widget, BlogView> implements Binder {
  *     public MyTestBinder(final AnyMockFactory anyMockFactory) {
@@ -45,12 +45,12 @@ import java.lang.reflect.Field;
  *     bind(Binder.class).to(MyTestBinder.class);
  *   }
  * }</pre>
- * 
+ *
  * Disarming GWT is important to unit test views.
- * 
+ *
  * @param <U> Mock type returned by {@link UiBinder#createAndBindUi(Object)}.
  * @param <O> Owner type.
- * 
+ *
  * @author Christian Goudreau
  */
 public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
