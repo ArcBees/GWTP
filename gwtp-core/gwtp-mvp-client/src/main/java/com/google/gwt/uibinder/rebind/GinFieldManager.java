@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -31,13 +31,13 @@ import java.util.Map;
 
 /**
  * This version of {@link FieldManager} makes it possible for UiBinder
- * files to use widgets that need to be instantiated with gin. 
- * See {@link GinUiBinderGenerator} for details. This 
+ * files to use widgets that need to be instantiated with gin.
+ * See {@link GinUiBinderGenerator} for details. This
  * is a slightly modified version of {@link FieldManager}
- * that allows fields to be instantiated using gin dependency 
- * injection. Modifications are clearly indicated by 
+ * that allows fields to be instantiated using gin dependency
+ * injection. Modifications are clearly indicated by
  * {@code MODIFICATION} comments.
- * 
+ *
  * @author Philippe Beaudoin (philippe.beaudoin@gmail.com)
  */
 public class GinFieldManager extends FieldManager {
@@ -63,7 +63,7 @@ public class GinFieldManager extends FieldManager {
   // BEGIN MODIFICATION
   private Map<JClassType, String> ginjectorMethods = new HashMap<JClassType, String>();
   private JClassType ginjectorClass;
-  
+
   public GinFieldManager(TypeOracle types, MortalLogger logger, JClassType ginjectorClass) {
     super(types, logger);
     this.types = types;
@@ -74,7 +74,7 @@ public class GinFieldManager extends FieldManager {
       if (method.getParameters().length == 0 && returnType != null) {
         ginjectorMethods.put(returnType, method.getName());
       }
-    }  
+    }
   }
   // END MODIFICATION
 
@@ -111,7 +111,7 @@ public class GinFieldManager extends FieldManager {
    * upon the field being declared. This ensures, for example, that dom id
    * fields (see {@link com.google.gwt.uibinder.rebind.UiBinderWriter#declareDomIdHolder()})
    * used by an HTMLPanel will be declared before it is.
-   * 
+   *
    * @param fieldType the type of the new field
    * @param fieldName the name of the new field
    * @return a new {@link FieldWriter} instance
@@ -121,13 +121,13 @@ public class GinFieldManager extends FieldManager {
       throws UnableToCompleteException {
     // BEGIN MODIFICATION
     String ginjectorMethod = ginjectorMethods.get(fieldType);
-    
+
     FieldWriter field;
     if (ginjectorMethod != null) {
       // If the ginjector lets us create that fieldType then we use gin to instantiate it
       field = new FieldWriterOfInjectedType(fieldType, fieldName, ginjectorClass, ginjectorMethod, logger);
     } else {
-      // Otherwise 
+      // Otherwise
       field = new FieldWriterOfExistingType(fieldType, fieldName, logger);
     }
 
@@ -147,7 +147,7 @@ public class GinFieldManager extends FieldManager {
    * upon the field being declared. This ensures, for example, that dom id
    * fields (see {@link com.google.gwt.uibinder.rebind.UiBinderWriter#declareDomIdHolder()})
    * used by an HTMLPanel will be declared before it is.
-   * 
+   *
    * @throws UnableToCompleteException on duplicate name
    * @return a new {@link FieldWriter} instance
    */
@@ -169,7 +169,7 @@ public class GinFieldManager extends FieldManager {
    * upon the field being declared. This ensures, for example, that dom id
    * fields (see {@link com.google.gwt.uibinder.rebind.UiBinderWriter#declareDomIdHolder()})
    * used by an HTMLPanel will be declared before it is.
-   * 
+   *
    * @param assignableType class or interface extened or implemented by this
    *          type
    * @param typeName the full qualified name for the class associated with the
@@ -189,7 +189,7 @@ public class GinFieldManager extends FieldManager {
   /**
    * Called to register a <code>{field.reference}</code> encountered during
    * parsing, to be validated against the type oracle once parsing is complete.
-   * 
+   *
    * @throws UnableToCompleteException
    */
   public void registerFieldReference(String fieldReferenceString, JType type) {
@@ -207,7 +207,7 @@ public class GinFieldManager extends FieldManager {
    * To be called after parsing is complete. Surveys all
    * <code>{field.reference}</code>s and checks they refer to existing types,
    * and have appropriate return types.
-   * 
+   *
    * @throws UnableToCompleteException if any <code>{field.references}</code>
    *           can't be resolved
    */
@@ -228,7 +228,7 @@ public class GinFieldManager extends FieldManager {
 
   /**
    * Writes all stored gwt fields.
-   * 
+   *
    * @param writer the writer to output
    * @param ownerTypeName the name of the class being processed
    */
@@ -256,5 +256,5 @@ public class GinFieldManager extends FieldManager {
     if (fieldsMap.containsKey(fieldName)) {
       logger.die(DUPLICATE_FIELD_ERROR, fieldName);
     }
-  }  
+  }
 }

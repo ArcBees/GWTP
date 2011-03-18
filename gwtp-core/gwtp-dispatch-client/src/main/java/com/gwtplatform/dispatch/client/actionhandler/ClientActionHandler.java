@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,7 +30,7 @@ import com.gwtplatform.dispatch.shared.Result;
  * has been registered with the bound {@link ClientActionHandlerRegistry} is
  * called and {@link com.gwtplatform.dispatch.client.DispatchAsync DispatchAsync} does
  * not automatically send the command over gwt-rpc to the server.
- * 
+ *
  * Client Action Handlers provide a number of flexible options:
  * <ul>
  * <li>The action can be modified before sending the action over gwt-rpc to the
@@ -42,13 +42,13 @@ import com.gwtplatform.dispatch.shared.Result;
  * with the server, possibly using a different mechanism than gwt-rpc.</li>
  * </ul>
  * <p/>
- * 
+ *
  * <b>Important!</b> If your action handler makes asynchronous calls, be careful
  * with your use of fields as a second call your handler could be made while it
  * is waiting for the asynchronous call to return.
- * 
+ *
  * <h3>Caching Client Action Handler Example</h3>
- * 
+ *
  * <pre>
  * <code>
  * // Interface of cache singleton
@@ -56,7 +56,7 @@ import com.gwtplatform.dispatch.shared.Result;
  *   &lt;A extends Action&lt;R&gt;, R extends Result&gt; R get(A action);
  *   &lt;A extends Action&lt;R&gt;, R extends Result&gt; void put(A action, R result);
  * }
- * 
+ *
  * // Client action handler that injects the cache
  * public class RetrieveFooClientActionHandler
  *     extends
@@ -64,31 +64,31 @@ import com.gwtplatform.dispatch.shared.Result;
  *   {@literal}@Inject
  *   RetrieveFooClientActionHandler(
  *       Cache cache) {
- *       
+ *
  *     super(RetrieveFooAction.class, cache);
  *   }
  * }
- * 
- * // abstract client action handler that: 
+ *
+ * // abstract client action handler that:
  * // - first checks cache and returns result immediately if found in cache
  * // - executes command on server using gwt-rpc
- * // - saves result to cache before returning it 
+ * // - saves result to cache before returning it
  * public abstract class AbstractCachingClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt;
  *     extends AbstractClientActionHandler&lt;A, R&gt; {
- * 
+ *
  *   private final Cache cache;
- * 
+ *
  *   public AbstractCachingClientActionHandler(
  *       Class&lt;A&gt; actionType, Cache cache) {
- *       
+ *
  *     super(actionType);
  *     this.cache = cache;
  *   }
- * 
+ *
  *   {@literal}@Override
  *   public DispatchRequest execute(final A action, final AsyncCallback&lt;R&gt; resultCallback,
  *       ExecuteCommand&lt;A, R&gt; executeCommand) {
- *       
+ *
  *     R cacheResult = cache.get(action);
  *     if (cacheResult != null) {
  *       resultCallback.onSuccess(cacheResult);
@@ -102,7 +102,7 @@ import com.gwtplatform.dispatch.shared.Result;
  *             resultCallback.onSuccess(result);
  *           }
  *         }
- * 
+ *
  *         {@literal}@Override
  *         public void onFailure(Throwable caught) {
  *           resultCallback.onFailure(caught);
@@ -110,32 +110,32 @@ import com.gwtplatform.dispatch.shared.Result;
  *       });
  *     }
  *   }
- * 
+ *
  *   {@literal}@Override
  *   public DispatchRequest undo(A action, R result, AsyncCallback&lt;Void&gt; callback,
  *       ClientDispatchRequest request, UndoCommand&lt;A, R&gt; undoCommand) {
- *     // do nothing    
+ *     // do nothing
  *     return new CompletedDispatchRequest();
  *   }
  * }
  * </code>
  * </pre>
- * 
+ *
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
- * 
+ *
  * @author Brendan Doherty
  */
 public interface ClientActionHandler<A extends Action<R>, R extends Result> {
 
   /**
    * Handles the specified action.
-   * 
+   *
    * If the handler makes asynchronous calls, it is recommended that you confirm
    * that this request has not been cancelled after returning by calling
    * {@link DelegatingDispatchRequest#isCancelled()} against the request
    * parameter.
-   * 
+   *
    * @param action The {@link Action} to execute.
    * @param resultCallback The callback to use to communicate the result of the
    *          action. Unless the request is cancelled, you must invoke
@@ -160,12 +160,12 @@ public interface ClientActionHandler<A extends Action<R>, R extends Result> {
 
   /**
    * Undoes the specified action.
-   * 
+   *
    * If the handler makes asynchronous calls, it is recommended that you confirm
    * that this request has not been cancelled after returning by calling
    * {@link DelegatingDispatchRequest#isCancelled()} against the request
    * parameter.
-   * 
+   *
    * @param action The {@link Action} to undo.
    * @param result The {@link Result} to undo.
    * @param callback The callback to use to indicate when the action has been

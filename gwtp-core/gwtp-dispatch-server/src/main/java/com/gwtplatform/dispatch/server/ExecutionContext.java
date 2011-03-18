@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler}s,
  * and allows them to execute sub-actions. These actions can be automatically rolled back
  * if any part of the action handler fails.
- * 
+ *
  * @author David Peterson
  */
 public interface ExecutionContext {
@@ -34,7 +34,7 @@ public interface ExecutionContext {
   /**
    * Executes an action in the current context. If the surrounding execution
    * fails, the action will be rolled back.
-   * 
+   *
    * @param <A> The {@link Action} type.
    * @param <R> The {@link Result} type.
    * @param action The {@link Action}.
@@ -48,7 +48,7 @@ public interface ExecutionContext {
   /**
    * Undoes an action in the current context. If the surrounding execution
    * fails, the action will be rolled back.
-   * 
+   *
    * @param <A> The {@link Action} type.
    * @param <R> The {@link Result} type.
    * @param action The {@link Action}.

@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -48,26 +48,26 @@ public class MockingBinderTest {
         super(Widget.class, mockitoMockFactory);
       }
     }
-    
+
     @Override
     protected void configureTest() {
       GWTMockUtilities.disarm();
       bind(Binder.class).to(MyTestBinder.class);
     }
   }
-  
+
   // SUT
   @Inject
   TestView view;
-  
+
   @Inject
   Binder binder;
-  
+
   @AfterClass
   public static void cleanup() {
     GWTMockUtilities.restore();
   }
-  
+
   @Test
   public void mockNullTest() {
     // THEN
@@ -75,36 +75,36 @@ public class MockingBinderTest {
     assertNotNull(view.mainPanel);
     assertNotNull(view.someField);
   }
-  
+
   @Test
   public void mockVerification1Test() {
     // WHEN
     view.mainPanel.add(view.someField);
-    
+
     // THEN
     verify(view.mainPanel).add(view.someField);
   }
-  
+
   @Test
   public void mockVerification2Test() {
     // GIVEN
     String someText = "some text";
-    
+
     // WHEN
     view.someField.setText(someText);
-    
+
     // THEN
     verify(view.someField).setText(someText);
   }
-  
+
   @Test
   public void mockVerification3Test() {
     // GIVEN
     Widget widget = binder.createAndBindUi(view);
-    
+
     // WHEN
     widget.asWidget();
-    
+
     // THEN
     verify(widget).asWidget();
   }

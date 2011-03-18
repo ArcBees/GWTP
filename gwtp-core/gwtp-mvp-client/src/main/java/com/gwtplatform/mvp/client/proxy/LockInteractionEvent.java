@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,9 +25,9 @@ import com.google.gwt.event.shared.HasHandlers;
  * unexpected state switches.
  * <p />
  * This event is typically fired by the {@link PlaceManager} whenever a navigation operation
- * starts or stops. It is handled by the default {@link com.gwtplatform.mvp.client.RootPresenter} implementation. 
+ * starts or stops. It is handled by the default {@link com.gwtplatform.mvp.client.RootPresenter} implementation.
  * Override {@link com.gwtplatform.mvp.client.RootPresenter#lockInteraction(boolean)} to customize the behaviour.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
@@ -35,10 +35,10 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
   private static Type<LockInteractionHandler> TYPE;
 
   /**
-   * Fires a {@link LockInteractionEvent} 
+   * Fires a {@link LockInteractionEvent}
    * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}
    * specifying whether interaction should be locked or unlocked.
-   * 
+   *
    * @param source The source that fires this event ({@link HasHandlers}).
    * @param lock {@code true} to lock interaction, {@code false} to unlock it.
    */

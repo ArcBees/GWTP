@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -35,14 +35,14 @@ import java.util.Set;
  * is encountered in a parameter or a value it is escaped by being duplicated.
  * <p />
  * For example, {@link ParameterTokenFormatter} would parse:
- * 
+ *
  * <pre>
  * nameToken1;param1.1=value1.1;param1.2=value1.2/nameToken2/nameToken3;param3.1=value//3==1
  * </pre>
  * Into the following hierarchy of {@link PlaceRequest}:
- * 
+ *
  * <pre>
- * { 
+ * {
  *   { "nameToken1", { {"param1.1", "value1.1"}, {"parame1.2","value1.2"} },
  *     "nameToken2", {},
  *     "nameToken3", { {"param3.1", "value/3=1"} } }
@@ -50,7 +50,7 @@ import java.util.Set;
  * </pre>
  * If you want to use different symbols as separator, use the
  * {@link #ParameterTokenFormatter(String, String, String)} constructor.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public final class ParameterTokenFormatter implements TokenFormatter {
@@ -82,7 +82,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
    * This constructor makes it possible to use custom separators in your token
    * formatter. The separators must be 1-letter strings and they must all be
    * different from one another.
-   * 
+   *
    * @param hierarchySeparator The symbol used to separate {@link PlaceRequest}
    *          in a hierarchy. Must be a 1-character string.
    * @param paramSeparator The symbol used to separate parameters in a
@@ -196,7 +196,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     for (String placeToken : placeTokens) {
       result.add(toPlaceRequest(placeToken));
     }
-      
+
     return result;
   }
 

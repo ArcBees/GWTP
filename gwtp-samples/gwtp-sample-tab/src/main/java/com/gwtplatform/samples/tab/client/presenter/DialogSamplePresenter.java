@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -33,16 +33,16 @@ import com.gwtplatform.samples.tab.client.view.DialogSampleUiHandlers;
 
 /**
  * A sample {@link Presenter} that allows the user to trigger various types of
- * dialog boxes and popup windows. It appears as a tab within 
+ * dialog boxes and popup windows. It appears as a tab within
  * {@link MainPagePresenter}.
  * <p />
- * It demonstrates the option 1 described in {@link TabInfo}. 
+ * It demonstrates the option 1 described in {@link TabInfo}.
 
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
-public class DialogSamplePresenter 
-    extends Presenter<DialogSamplePresenter.MyView, DialogSamplePresenter.MyProxy> 
+public class DialogSamplePresenter
+    extends Presenter<DialogSamplePresenter.MyView, DialogSamplePresenter.MyProxy>
     implements DialogSampleUiHandlers {
   /**
    * {@link DialogSamplePresenter}'s proxy.
@@ -50,7 +50,7 @@ public class DialogSamplePresenter
   @ProxyCodeSplit
   @NameToken(NameTokens.dialogSamplePage)
   @TabInfo(container = MainPagePresenter.class,
-      label = "Dialog samples", 
+      label = "Dialog samples",
       priority = 1) // The second tab in the main page
   public interface MyProxy extends TabContentProxyPlace<DialogSamplePresenter> {
   }
@@ -87,7 +87,7 @@ public class DialogSamplePresenter
   public void showDetailsDialog() {
     addToPopupSlot(detailsDialog);
   }
-  
+
   @Override
   public void showWizardDialog() {
     RevealRootPopupContentEvent.fire(this, wizardDialog);

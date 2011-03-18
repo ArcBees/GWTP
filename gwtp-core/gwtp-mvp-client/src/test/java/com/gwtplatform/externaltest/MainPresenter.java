@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -32,31 +32,31 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 /**
  * This is the test presenter.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter.MyProxy> {
 
   @ContentSlot
   public static final Type<RevealContentHandler<?>> TYPE_SetMainContent = new Type<RevealContentHandler<?>>();
-  
+
   /**
    * Presenter's view.
    */
-  public interface MyView extends View {    
+  public interface MyView extends View {
   }
-  
+
   /**
    * Presenter's proxy.
    */
   @ProxyStandard
-  public interface MyProxy extends Proxy<MainPresenter> {    
+  public interface MyProxy extends Proxy<MainPresenter> {
   }
 
   private PresenterWidget<?> subPresenter;
-  
+
   @Inject
-  public MainPresenter(final EventBus eventBus, final MyView view, 
+  public MainPresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy, @Named("Sub") PresenterWidget<View> subPresenter) {
     super(eventBus, view, proxy);
     this.subPresenter = subPresenter;
@@ -65,7 +65,7 @@ public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter
   public void setSubPresenter() {
     setInSlot(TYPE_SetMainContent, subPresenter);
   }
-  
+
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
