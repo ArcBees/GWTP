@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,9 +26,9 @@ import com.google.inject.Provider;
  * (it behaves as a singleton) which may impact your tests, for example
  * if you rely on {@code ==}. If you're using mockito, consider using the
  * {@link com.gwtplatform.tester.mockito.MockProvider MockProvider} instead.
-  * 
+  *
  * @author Brendan Doherty
- * 
+ *
  * @param <T> The type of mock object provided
  */
 public class MockProvider<T> implements Provider<T> {
@@ -36,7 +36,7 @@ public class MockProvider<T> implements Provider<T> {
 
   /**
    * Construct a {@link Provider} that will provide the mock object.
-   * 
+   *
    * @param mock The mock object to provide.
    */
   public MockProvider(T mock) {

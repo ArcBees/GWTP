@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,9 +22,9 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * This test is being run by ant, but is not run in eclipse.
- * 
+ *
  * TODO: Make a test suite with a couple of permutations. (With/without Order, Optional, both....)
- * 
+ *
  * @author Brendan Doherty
  * @author Florian Sauter
  */
@@ -44,20 +44,20 @@ public class AnnotationProcessingTest {
     FooChangedEvent event3 = new FooChangedEvent(foo, false);
     assertFalse(event3.equals(event));
   }
-  
+
   @org.junit.Test
   public void eventOptional() {
     Foo foo = new Foo("bar");
     FooChangedEvent event = new FooChangedEvent(foo, true, "message", 1.0);
     assertEquals("message", event.getAdditionalMessage());
     assertTrue(1.0 == event.getPriority());
-    
+
     try {
       FooChangedEvent.fire(null, foo, false, "fireMessage", 2.0);
     } catch (NullPointerException e) {
       // the method fire was generated correctly
     }
-    
+
     try {
       FooChangedEvent.fire(null, foo, true);
     } catch (NullPointerException e) {
@@ -70,7 +70,7 @@ public class AnnotationProcessingTest {
     RetrieveFooAction action = new RetrieveFooAction(16);
     assertEquals(16, action.getFooId());
     assertTrue(action.isSecured());
-    assertEquals("dispatch/RetrieveFoo",action.getServiceName());
+    assertEquals("dispatch/RetrieveFoo", action.getServiceName());
 
     RetrieveFooAction action2 = new RetrieveFooAction(16);
     assertEquals(action, action2);
@@ -92,22 +92,22 @@ public class AnnotationProcessingTest {
     RetrieveFooResult result3 = new RetrieveFooResult(foo, 43);
     assertFalse(result.equals(result3));
     assertFalse(result.hashCode() == result3.hashCode());
-    
+
     RetrieveBarAction action4 = new RetrieveBarAction("blah");
     assertFalse(action4.isSecured());
     assertEquals("dispatch/Blah", action4.getServiceName());
-    
+
     RetrieveBarResult result4 = new RetrieveBarResult(foo, 42);
     assertEquals(foo, result4.getThing());
   }
-  
+
   @org.junit.Test
   public void dispatchOptional() {
     RetrieveFooAction action = new RetrieveFooAction(42, "meaning of life");
     assertEquals(42, action.getFooId());
     assertTrue(action.isSecured());
     assertEquals("dispatch/RetrieveFoo",action.getServiceName());
-    
+
     Foo foo = new Foo("bar");
     RetrieveFooResult result = new RetrieveFooResult(foo, 42, true);
     assertEquals(true, result.isAnswer42());
@@ -126,7 +126,7 @@ public class AnnotationProcessingTest {
     PersonNameDto dto3 = new PersonNameDto("bobby", "smith");
     assertFalse(dto.equals(dto3));
   }
-  
+
   @org.junit.Test
   public void dtoOptional() {
     PersonNameDto dto = new PersonNameDto("bob", "andrews", "peter");

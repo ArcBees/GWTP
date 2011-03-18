@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -20,7 +20,7 @@ package com.gwtplatform.dispatch.shared;
  * This provides a simple way to send multiple actions to be executed in
  * sequence. If any fail, the rules for the {@link OnException} value provided
  * in the constructor determine the outcome.
- * 
+ *
  * @author David Peterson
  */
 public abstract class BatchAction implements Action<BatchResult> {
@@ -50,7 +50,7 @@ public abstract class BatchAction implements Action<BatchResult> {
    * Constructs a new batch action, which will attempt to execute the provided
    * list of actions in order. If there is a failure, it will follow the rules
    * specified by <code>onException</code>.
-   * 
+   *
    * @param onException If there is an exception, specify the behaviour.
    * @param actions The list of actions to execute.
    */
@@ -67,7 +67,7 @@ public abstract class BatchAction implements Action<BatchResult> {
 
   /**
    * The list of actions to execute.
-   * 
+   *
    * @return The actions.
    */
   public Action<?>[] getActions() {
@@ -76,7 +76,7 @@ public abstract class BatchAction implements Action<BatchResult> {
 
   /**
    * The expected behaviour if any of the sub-actions throw an exception.
-   * 
+   *
    * @return The exception handling behaviour.
    */
   public OnException getOnException() {
