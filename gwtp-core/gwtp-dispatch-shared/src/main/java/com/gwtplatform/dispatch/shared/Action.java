@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * <p />
  * You can usually inherit from {@link ActionImpl} or
  * {@link UnsecuredActionImpl} instead.
- * 
+ *
  * @author David Peterson
  * @param <R> The {@link Result} type.
  */
@@ -44,7 +44,7 @@ public interface Action<R extends Result> extends IsSerializable {
   /**
    * Access the name of the service, which will be used as the URL path to
    * access the action.
-   * 
+   *
    * @return The service name.
    */
   String getServiceName();
@@ -61,7 +61,7 @@ public interface Action<R extends Result> extends IsSerializable {
    * this field is serialized, the user could change it on his side. A simple
    * and good practice is simply to {@code return true;} or
    * {@code return false;}.
-   * 
+   *
    * @return {@code true} if the action should be secured against XSRF attacks,
    *         {@code false} otherwise.
    */

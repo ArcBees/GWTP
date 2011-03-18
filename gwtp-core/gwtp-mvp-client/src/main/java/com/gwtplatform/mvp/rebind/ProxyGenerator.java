@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -108,7 +108,7 @@ public class ProxyGenerator extends Generator {
     public boolean returnString;
     public int setPlaceTitleHandlerParamIndex = -1;
   }
-  
+
   private static class TabInfoFunctionDescription {
     public TabInfo annotation;
     public String functionName;
@@ -308,7 +308,7 @@ public class ProxyGenerator extends Generator {
                   + UseGatekeeper.class.getSimpleName() + ".", null);
           throw new UnableToCompleteException();
         }
-      } 
+      }
       if (getGatekeeperMethod == null && newPlaceCode == null
           && proxyInterface.getAnnotation(NoGatekeeper.class) == null) {
         // No Gatekeeper specified, see if there is a DefaultGatekeeper defined
@@ -378,7 +378,7 @@ public class ProxyGenerator extends Generator {
       tabInfoFunctionDescription = findTabInfoFunction(
           logger, presenterClass, presenterClassName, ginjectorClassName,
           ginjectorClass);
-      
+
       // Ensure @TabInfo is there exactly once
       if (tabInfoAnnotation != null && tabInfoFunctionDescription != null) {
         logger.log(TreeLogger.ERROR, "Presenter " + presenterClassName
@@ -388,15 +388,15 @@ public class ProxyGenerator extends Generator {
       }
       if (tabInfoFunctionDescription != null) {
         tabInfoAnnotation = tabInfoFunctionDescription.annotation;
-      }      
+      }
       if (tabInfoAnnotation == null) {
         logger.log(TreeLogger.ERROR, "The proxy for '" + presenterClassName
             + "' is a TabContentProxy, but is not annotated with @' +"
-            + TabInfo.class.getSimpleName() 
+            + TabInfo.class.getSimpleName()
             + " and its presenter has no method annotated with it either.", null);
         throw new UnableToCompleteException();
       }
-      
+
       // Extract the label if its in TabInfo
       if (tabInfoAnnotation.label().length() > 0) {
         tabLabel = tabInfoAnnotation.label();
@@ -432,7 +432,7 @@ public class ProxyGenerator extends Generator {
             + " does not annotate a method returning TabData, this is not permitted.", null);
         throw new UnableToCompleteException();
       }
-      
+
       // Find the container
       tabContainerClass = oracle.findType(tabInfoAnnotation.container().getCanonicalName());
       if (tabContainerClass == null) {
@@ -443,7 +443,7 @@ public class ProxyGenerator extends Generator {
         throw new UnableToCompleteException();
       }
       tabContainerClassName = tabContainerClass.getParameterizedQualifiedSourceName();
-      
+
       // Find the name token to use when the tab is clicked
       if (tabInfoAnnotation.nameToken().length() > 0) {
         tabNameToken = tabInfoAnnotation.nameToken();
@@ -552,13 +552,13 @@ public class ProxyGenerator extends Generator {
 
     if (nameToken == null) {
       // Not a place proxy
-      
+
       if (tabContainerClass != null) {
         // A TabContentProxy
         writeGetTabDataInternalMethod(ginjectorClassName, presenterClassName,
             tabLabel, tabPriority, tabInfoFunctionDescription, writer);
       }
-      
+
     } else {
       // Place proxy
 
@@ -579,7 +579,7 @@ public class ProxyGenerator extends Generator {
         writeGetTabDataInternalMethod(ginjectorClassName, presenterClassName,
             tabLabel, tabPriority, tabInfoFunctionDescription, writer);
       }
-      
+
       // Enclosed proxy construcotr
       writer.println();
       writer.println("public WrappedProxy() {}");
@@ -595,7 +595,7 @@ public class ProxyGenerator extends Generator {
             tabContainerClass, tabContainerClassName, tabPriority, tabLabel,
             tabInfoFunctionDescription, writer);
       }
-      
+
       // Call ProxyImpl bind method.
       writer.println("bind(ginjector.getProxyFailureHandler(),ginjector.getEventBus());");
 
@@ -779,7 +779,7 @@ public class ProxyGenerator extends Generator {
   }
 
   private void writeGetTabDataInternalMethod(String ginjectorClassName,
-      String presenterClassName, String tabLabel, Integer tabPriority, 
+      String presenterClassName, String tabLabel, Integer tabPriority,
       TabInfoFunctionDescription tabLabelFunctionDescription,
       SourceWriter writer) {
 
@@ -818,7 +818,7 @@ public class ProxyGenerator extends Generator {
 
   /**
    * Make sure all the required base type information is known.
-   * 
+   *
    * @param ctx The generator context.
    */
   private void findBaseTypes(GeneratorContext ctx) {
@@ -1154,7 +1154,7 @@ public class ProxyGenerator extends Generator {
                   + result.functionName
                   + " annotated with @"
                   + TabInfo.class.getSimpleName()
-                  + " must return either a String or a " 
+                  + " must return either a String or a "
                   + TabData.class.getSimpleName());
           throw new UnableToCompleteException();
         }
@@ -1172,7 +1172,7 @@ public class ProxyGenerator extends Generator {
                   + " accepts more than one parameter. This is illegal.");
           throw new UnableToCompleteException();
         }
-        
+
         if (parameters.length == 1) {
           JClassType parameterType = parameters[0].getType().isClassOrInterface();
           if (parameterType.isAssignableFrom(ginjectorClass)) {
@@ -1343,8 +1343,8 @@ public class ProxyGenerator extends Generator {
   private void writeRequestTabHandler(TreeLogger logger,
       String presenterClassName, String nameToken,
       JClassType tabContainerClass, String tabContainerClassName,
-      Integer tabPriority, String tabLabel, 
-      TabInfoFunctionDescription tabLabelFunctionDescription, 
+      Integer tabPriority, String tabLabel,
+      TabInfoFunctionDescription tabLabelFunctionDescription,
       SourceWriter writer)
       throws UnableToCompleteException {
     boolean foundRequestTabsEventType = false;

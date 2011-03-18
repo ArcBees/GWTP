@@ -1,26 +1,23 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.gwtplatform.dispatch.server;
-
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.ServiceException;
-
 /**
  * The base class of the synchronous dispatcher service with an arbitrary action
  * type. The server-side implementation is
@@ -31,15 +28,14 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * {@link com.gwtplatform.dispatch.server.DispatchService}. In fact, this class
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
  * {@link com.gwtplatform.dispatch.client.DispatchAsync}.
- * 
+ *
  * @author Christian Goudreau
  * @author David Peterson
  */
 public interface Dispatch {
-
   /**
    * Executes the specified action and returns the appropriate result.
-   * 
+   *
    * @param <A> The {@link Action} type.
    * @param <R> The {@link Result} type.
    * @param action The {@link Action}.
@@ -49,10 +45,9 @@ public interface Dispatch {
    */
   <A extends Action<R>, R extends Result> R execute(A action)
       throws ActionException, ServiceException;
-
   /**
    * Undoes a previously executed action.
-   * 
+   *
    * @param <A> The {@link Action} type.
    * @param <R> The {@link Result} type.
    * @param action The {@link Action} to undo.

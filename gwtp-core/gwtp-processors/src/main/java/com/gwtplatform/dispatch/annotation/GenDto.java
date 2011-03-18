@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -27,26 +27,26 @@ import java.lang.annotation.Target;
  * transferring data between the client and the server.
  * <p/>
  * If you type:
- * 
+ *
  * <pre>
- * <code> 
+ * <code>
  * {@literal}@GenDto
  * public class LineItem {
  *   Key&lt;Product&gt; productKey;
- *   int quantity; 
+ *   int quantity;
  * }
  * </code>
  * </pre>
- * 
+ *
  * gwt-platform will generate a {@code LineItemDto} class.
  * <p/>
  * {@code LineItemDto} will have fields, getters, and a constructor that takes
  * {@code productKey} and quantity plus equals, hashCode, toString etc,
  * <p/>
  * {@code LineItemDto} could be used when creating an invoice.
- * 
+ *
  * <pre>
- * <code> 
+ * <code>
  * {@literal}@GenDispatch
  * public class CreateInvoice {
  *   {@literal}@In Key&lt;Customer&gt; customerKey
@@ -55,7 +55,7 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- * 
+ *
  * The alternative to using Dto classes would be to construct persistable
  * {@code LineItem} objects on the client and send them as part of the gwt-rpc call.
  * Using Dto classes is a better choice because:
@@ -65,15 +65,15 @@ import java.lang.annotation.Target;
  * probably have a price field. The server should ignore the price as it may
  * have been tampered with.</li>
  * </ul>
- * 
+ *
  * <p/>
  * Notes:
  * <p/>
  * There is no naming requirement for your class name. It will be appended with
  * Dto
- * 
+ *
  * <p/>
- * 
+ *
  * @author Brendan Doherty
  * @author Florian Sauter
  * @author Stephen Haberman (concept)
