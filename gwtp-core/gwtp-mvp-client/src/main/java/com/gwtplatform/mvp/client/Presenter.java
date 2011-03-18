@@ -1,45 +1,49 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.gwtplatform.mvp.client;
+
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
+
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+
 /**
- * A singleton presenter, the basic building block of the
+ * A singleton presenter, the basic building block of the 
  * <a href="http://code.google.com/intl/nl/events/io/2009/sessions/GoogleWebToolkitBestPractices.html">
  * model-view-presenter</a> architecture. Each logical page of your application will usually
  * correspond to a singleton {@link Presenter}. If you need to separate logic from view
- * in a simple graphical component, you might consider using a {@link PresenterWidget}.
+ * in a simple graphical component, you might consider using a {@link PresenterWidget}. 
  * <p />
  * For more details on the hierarchical organization of presenters, see {@link PresenterWidget}.
  * <p />
  * Each presenter is associated to a {@link Proxy} which is responsible for listening to the
- * various events of interest for this presenter. This makes it possible to lazily instantiate
- * the presenter and use GWT code splitting. Proxies are automatically generated for you
- * based on the information contained in the presenter. For this purpose, your presenter has to
- * define an embedded interface extending {@link Proxy} or
+ * various events of interest for this presenter. This makes it possible to lazily instantiate 
+ * the presenter and use GWT code splitting. Proxies are automatically generated for you 
+ * based on the information contained in the presenter. For this purpose, your presenter has to 
+ * define an embedded interface extending {@link Proxy} or 
  * {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace}. Then you should apply various
  * annotations to that interface in order to specify the characteristics of your presenter. For example,
  * the following code indicates that the presenter will use GWT code splitting and will be
  * reachable at url {@code http://mydomain.com#main}:
  * <pre>
- * public class MainPagePresenter extends
+ * public class MainPagePresenter extends 
  *     Presenter&lt;MainPagePresenter.MyView, MainPagePresenter.MyProxy&gt; {
- *
+ *     
  *   public interface MyView extends View {}
  *
  *  {@literal @}ProxyCodeSplit
@@ -50,23 +54,23 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  *   public MainPagePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
  *     super(eventBus, view, proxy);
  *   }
- *
+ *   
  *  {@literal @}Override
  *   protected void revealInParent() {
  *     RevealRootContentEvent.fire( this, this );
  *   }
  * }
- * </pre>
- * One of {@link com.gwtplatform.mvp.client.annotations.ProxyStandard ProxyStandard},
- * {@link com.gwtplatform.mvp.client.annotations.ProxyCodeSplit ProxyCodeSplit} or
+ * </pre> 
+ * One of {@link com.gwtplatform.mvp.client.annotations.ProxyStandard ProxyStandard}, 
+ * {@link com.gwtplatform.mvp.client.annotations.ProxyCodeSplit ProxyCodeSplit} or 
  * {@link com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle ProxyCodeSplitBundle}
- * must always annotate the {@link Proxy} interface.
+ * must always annotate the {@link Proxy} interface. 
  * <p />
- * To reveal a presenter associated to a {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace}
- * you can simply navigate to an hyperlink corresponding to this place's name token. The
+ * To reveal a presenter associated to a {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace} 
+ * you can simply navigate to an hyperlink corresponding to this place's name token. The 
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} offers a number of method for building
- * such hyperlinks. If you want to reveal it programatically, you should build a
- * {@link com.gwtplatform.mvp.client.proxy.PlaceRequest PlaceRequest} and call one of the
+ * such hyperlinks. If you want to reveal it programatically, you should build a 
+ * {@link com.gwtplatform.mvp.client.proxy.PlaceRequest PlaceRequest} and call one of the 
  * following method:
  * <ul>
  * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealPlace(com.gwtplatform.mvp.client.proxy.PlaceRequest) PlaceManager.revealPlace(PlaceRequest)}</li>
@@ -77,10 +81,10 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * a name token then you should call the {@link #forceReveal()} method. For such
  * presenters, it is customary to define an event responsible of revealing them in
  * order to enforce loose coupling. This event is then handled by the presenter
- * using the {@link com.gwtplatform.mvp.client.annotations.ProxyEvent ProxyEvent}
+ * using the {@link com.gwtplatform.mvp.client.annotations.ProxyEvent ProxyEvent} 
  * mechanism.
- * <p />
- * If the presenter is revealed and is not currently visible, then its {@link #revealInParent()} method
+ * <p /> 
+ * If the presenter is revealed and is not currently visible, then its {@link #revealInParent()} method 
  * will be called.
  * <p />
  * To hide a presenter, you can reveal another one in the same slot or you can use
@@ -94,33 +98,33 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * <li>{@link #onHide()}
  * <li>{@link #onUnbind()}
  * </ul>
- * Revealing or hiding a {@link PresenterWidget} triggers an internal chain of events that result
+ * Revealing or hiding a {@link PresenterWidget} triggers an internal chain of events that result 
  * in these lifecycle methods being called. For an example, here is what happens when a presenter
- * is revealed (either via {@link #forceReveal()}, or through a
+ * is revealed (either via {@link #forceReveal()}, or through a 
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} method):
  * <ul>
  * <li>The presenter's {@link #revealInParent()} is call ant it asks to be set in one of its
- *     parent slot by firing a
+ *     parent slot by firing a 
  *     {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent}</li>
  * <li>If a presenter already occupies this slot it is removed.</li>
  * <ul><li>If the presenter owning the slot is currently visible then
- *         {@link #onHide()} is called on the removed presenter and, recursively,
+ *         {@link #onHide()} is called on the removed presenter and, recursively, 
  *         on its children (bottom-up: first the children, then the parent)</li>
  *     <li>If the parent is not visible, it asks to be set in one of its parent slot
- *         by firing a {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent}
+ *         by firing a {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent} 
  *         too, this continues recursively until a visible presenter is reached, or until a presenter fires
- *         {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent}
+ *         {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent} 
  *         or {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}</li>
  * </ul>
  * <li>When the above chain stops, {@link #onReveal} is called on all the presenters
  *     that were traversed. (top down: first the parent, then the children);</li>
  * <li>Finally {@link #onReset()} is called on all the
- *     currently visible presenters (top-down: first the parent, then
+ *     currently visible presenters (top-down: first the parent, then 
  *     the children).</li>
  * </ul>
  * @param <V> The {@link View} type.
  * @param <Proxy_> The {@link Proxy} type.
- *
+ * 
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
@@ -130,13 +134,14 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * The light-weight {@Proxy} around this presenter.
    */
   private final Proxy_ proxy;
+
   /**
    * Creates a {@link Presenter} that is not necessarily using automatic
    * binding. Automatic binding will only work when instantiating this object using
-   * Guice/GIN dependency injection. See
+   * Guice/GIN dependency injection. See 
    * {@link HandlerContainerImpl#HandlerContainerImpl(boolean)} for
    * more details on automatic binding.
-   *
+   * 
    * @param autoBind {@code true} to request automatic binding, {@code false} otherwise.
    * @param eventBus The {@link EventBus}.
    * @param view The {@link View}.
@@ -146,12 +151,13 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     super(eventBus, view);
     this.proxy = proxy;
   }
+  
   /**
    * Creates a {@link Presenter} that uses automatic binding. This will
-   * only work when instantiating this object using Guice/GIN dependency injection.
+   * only work when instantiating this object using Guice/GIN dependency injection. 
    * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
    * automatic binding.
-   *
+   * 
    * @param eventBus The {@link EventBus}.
    * @param view The {@link View}.
    * @param proxy The {@link Proxy}.
@@ -160,10 +166,11 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     super(eventBus, view);
     this.proxy = proxy;
   }
+  
   /**
-   * Reveals the presenter, bypassing any service offered by the
-   * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager}.
-   * Since this method bypasses the {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager}
+   * Reveals the presenter, bypassing any service offered by the 
+   * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager}. 
+   * Since this method bypasses the {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} 
    * it will not:
    * <ul>
    * <li>Update the browser history</li>
@@ -181,20 +188,22 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     }
     revealInParent();
   }
+
   /**
    * Returns the {@link Proxy} attached to this presenter.
-   *
+   * 
    * @return The {@link Proxy}.
    */
   public final Proxy_ getProxy() {
     return proxy;
   }
+
   /**
    * Verifies if this presenter can be revealed automatically or if it is meant to be
    * revealed manually.
    * Normally, the user wants to reveal a presenter manually when it cannot be used
    * until some data is received from the server. For example, a form
-   * to edit client details is unusable until all the data for this user has been
+   * to edit client details is unusable until all the data for this user has been 
    * received. Fetching this data should be done in the {@link #prepareFromRequest(PlaceRequest)}
    * method.
    * <p />
@@ -203,25 +212,26 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * <ul>
    * <li> Fetch the data using a {@link com.gwtplatform.mvp.client.proxy.ManualRevealCallback ManualRevealCallback},
    *      which will automatically reveal the presenter upon success.</li>
-   * <li> Fetch the data by any other mean and call
-   *      {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualReveal(Presenter)} when
-   *      your data is available. In this case you also have to call
+   * <li> Fetch the data by any other mean and call 
+   *      {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualReveal(Presenter)} when 
+   *      your data is available. In this case you also have to call 
    *      {@link com.gwtplatform.mvp.client.proxy.ProxyPlace#manualRevealFailed()}
    *      if loading fails, otherwise your application will become unusable.</li>
    * </ul>
    * The default implementation uses automatic reveal, and therefore returns {@code false}.
-   *
+   * 
    * @return {@code true} if you want to use manual reveal, or {@code false} to use
    *         automatic reveal.
    */
   public boolean useManualReveal() {
     return false;
   }
+
   /**
    * Prepare the state of the presenter given the information contained in
    * the {@link PlaceRequest}. This method is called when the
    * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} navigates
-   * to this {@link Presenter}. You should override the method to extract any
+   * to this {@link Presenter}. You should override the method to extract any 
    * parameters you need from the request. Make sure you call your parent's
    * {@link #prepareFromRequest} method.
    * <p />
@@ -230,16 +240,17 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * <p />
    * If your presenter does not handle any parameter and does not want to fetch
    * extra information, then there is no need to override this method.
-   *
+   * 
    * @param request The {@link PlaceRequest}.
    */
   public void prepareFromRequest(PlaceRequest request) {
-  }
+  }  
+  
   /**
    * Requests that the presenter reveal itself in its parent presenter.
-   * You must override this method to either fire a
+   * You must override this method to either fire a 
    * {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent},
-   * a {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent}
+   * a {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent} 
    * or a {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}.
    */
   protected abstract void revealInParent();

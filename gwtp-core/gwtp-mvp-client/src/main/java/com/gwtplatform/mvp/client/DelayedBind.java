@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,7 +25,7 @@ import com.google.gwt.inject.client.Ginjector;
  * {@link #delayedBind(Ginjector)}. Their constructor will typically register
  * themselves with the {@link DelayedBindRegistry}, which will take care of
  * calling {@code bind} on all the registered classes.
- *
+ * 
  * @author Philippe Beaudoin
  */
 public interface DelayedBind {
@@ -34,7 +34,7 @@ public interface DelayedBind {
    * to get the required instances. This should ever only be called once,
    * typically by {@link DelayedBindRegistry#bind(Ginjector)}. You should cast
    * the passed {@link Ginjector} to your specific Ginjector interface.
-   *
+   * 
    * @param ginjector The {@link Ginjector} from which to get object instances.
    */
   void delayedBind(Ginjector ginjector);

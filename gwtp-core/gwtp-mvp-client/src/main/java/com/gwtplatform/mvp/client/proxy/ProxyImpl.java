@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,7 +26,7 @@ import com.gwtplatform.mvp.client.Presenter;
 
 /**
  * @author Philippe Beaudoin
- *
+ * 
  * @param <P> The presenter's type.
  */
 public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
@@ -58,7 +58,7 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
    * Never call directly, it should only be called by GIN. Method injection is
    * used instead of constructor injection, because the latter doesn't work well
    * with GWT generators.
-   *
+   * 
    * @param failureHandler The {@link ProxyFailureHandler}.
    * @param eventBus The {@link EventBus}.
    */
@@ -67,7 +67,7 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
     this.failureHandler = failureHandler;
     this.eventBus = eventBus;
   }
-
+  
   @Override
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEventFromSource(event, this);

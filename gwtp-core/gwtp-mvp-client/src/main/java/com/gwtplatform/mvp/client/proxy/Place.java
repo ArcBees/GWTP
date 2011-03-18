@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,7 +25,7 @@ package com.gwtplatform.mvp.client.proxy;
  * current settings, such as a particular ID value, or other unique indicators
  * that will allow a user to track back to that location later, either via a
  * browser bookmark, or by clicking the 'back' button.
- *
+ * 
  * @author Philippe Beaudoin
  */
 public interface Place {
@@ -39,7 +39,7 @@ public interface Place {
    * {@link PlaceManager#revealDefaultPlace()} and
    * {@link PlaceManager#revealErrorPlace(String)} can reveal themselves,
    * otherwise your application could get into an infinite loop.
-   *
+   * 
    * @return <code>true</code> if the presenter can be revealed,
    *         <code>false</code> otherwise.
    */
@@ -47,7 +47,7 @@ public interface Place {
 
   /**
    * Places are equal if their name token matches.
-   *
+   * 
    * @return <code>true</code> if the places name token matches,
    *         <code>false</code> otherwise.
    */
@@ -58,7 +58,7 @@ public interface Place {
    * The name token is the first part of the history token, before the
    * parameters. It is meant to be a unique identifier of a place. An exception
    * will be thrown if two places are registered with the same name token.
-   *
+   * 
    * @return The name token for this place.
    */
   String getNameToken();
@@ -68,7 +68,7 @@ public interface Place {
 
   /**
    * Makes sure the method matches the passed request.
-   *
+   * 
    * @param request The request to check.
    * @return <code>true</code> if the ID matches this place's name.
    */
