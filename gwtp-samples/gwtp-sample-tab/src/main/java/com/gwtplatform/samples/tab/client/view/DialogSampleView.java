@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -31,13 +31,13 @@ import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter.MyView
 /**
  * The view implementation for
  * {@link com.gwtplatform.samples.tab.client.presenter.DialogPresenter}.
- * 
+ *
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers> 
+public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers>
     implements MyView {
-  
+
   /**
    */
   public interface Binder extends UiBinder<Widget, DialogSampleView> { }
@@ -67,7 +67,7 @@ public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers>
   void onDetailsClicked(ClickEvent event) {
     getUiHandlers().showDetailsDialog();
   }
-  
+
   @UiHandler("globalDialog")
   void onWizardClicked(ClickEvent event) {
     getUiHandlers().showWizardDialog();

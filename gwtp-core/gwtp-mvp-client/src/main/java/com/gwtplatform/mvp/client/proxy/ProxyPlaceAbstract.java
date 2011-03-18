@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,10 +29,10 @@ import com.gwtplatform.mvp.client.Presenter;
  * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
  * You can usually inherit from the simpler form {@link ProxyPlace}.
  * <p />
- * 
+ *
  * @param <P> The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
- * 
+ *
  * @author David Peterson
  * @author Philippe Beaudoin
  * @author Christian Goudreau
@@ -44,7 +44,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   protected Place place;
   protected PlaceManager placeManager;
   protected Proxy_ proxy;
-  
+
   private EventBus eventBus;
 
   /**
@@ -124,7 +124,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    * Never call directly, it should only be called by GIN. Method injection is
    * used instead of constructor injection, because the latter doesn't work well
    * with GWT generators.
-   * 
+   *
    * @param failureHandler The {@link ProxyFailureHandler}.
    * @param placeManager The {@link PlaceManager}.
    * @param eventBus The {@link EventBus}.
@@ -176,7 +176,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    * title is available. By default, places don't have a title and will invoke
    * the handler with {@code null}, but override this method to provide your own
    * title.
-   * 
+   *
    * @param event The {@link GetPlaceTitleEvent} to invoke once the title is
    *          available.
    */
@@ -188,7 +188,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    * Prepares the presenter with the information contained in the current
    * request, then reveals it. Will refuse to reveal the display and do nothing
    * if {@link #canReveal()} returns <code>false</code>.
-   * 
+   *
    * @param request The request to handle. Can pass <code>null</code> if no
    *          request is used, in which case the presenter will be directly
    *          revealed.
@@ -230,7 +230,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   @Override
   public void manualReveal(Presenter<?, ?> presenter) {
     // Reveal only if there are no pending navigation requests
-    if (!placeManager.hasPendingNavigation()) {    
+    if (!placeManager.hasPendingNavigation()) {
       if (!presenter.isVisible()) {
         // This will trigger a reset in due time
         presenter.forceReveal();
@@ -250,11 +250,11 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   /**
    * This method allows unit test to handle deferred command with a mechanism that doesn't
    * require a GWTTestCase.
-   * 
+   *
    * @param command The {@Command} to defer, see {@link DeferredCommand}.
    */
   void addDeferredCommand(Command command) {
     Scheduler.get().scheduleDeferred(command);
   }
-  
+
 }

@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,8 +21,8 @@ import com.google.inject.Singleton;
 
 /**
  * Bind this class to indicate that you wish to globally disable automatic binding in
- * classes derived from {@link HandlerContainerImpl}, such as {@link PresenterWidget} 
- * or {@link Presenter}. Simply bind it like this: 
+ * classes derived from {@link HandlerContainerImpl}, such as {@link PresenterWidget}
+ * or {@link Presenter}. Simply bind it like this:
  * <pre>
  * bind(AutobindDisable.class).toInstance(new AutobindDisable(true));
  * </pre>
@@ -30,7 +30,7 @@ import com.google.inject.Singleton;
  * basis using the {@link HandlerContainerImpl}'s constructors.
  * <p />
  * Disabling automatic binding can be useful in unit tests, for example.
- * 
+ *
  * @author Philippe Beaudoin
  */
 @Singleton
@@ -45,7 +45,7 @@ public class AutobindDisable {
   public AutobindDisable(boolean disable) {
     this.disable = disable;
   }
-  
+
   public boolean disable() {
     return disable;
   }

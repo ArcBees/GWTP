@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -24,9 +24,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * invokes the callback once the code is loaded. This is essentially the same as
  * a standard {@link AsyncProvider}, but shares the interface of other
  * {@link IndirectProvider}.
- * 
+ *
  * @param <T> The type of the provided object.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public final class CodeSplitProvider<T> implements IndirectProvider<T> {
@@ -36,7 +36,7 @@ public final class CodeSplitProvider<T> implements IndirectProvider<T> {
   /**
    * Construct an {@link IndirectProvider} that gets the object using code
    * splitting and invokes the callback once the code is loaded.
-   * 
+   *
    * @param provider The {@link AsyncProvider} providing the object.
    */
   public CodeSplitProvider(AsyncProvider<T> provider) {
