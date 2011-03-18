@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,16 +26,16 @@ import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 
 /**
- * The {@link PresenterWidget} of a dialog box that is meant to be 
+ * The {@link PresenterWidget} of a dialog box that is meant to be
  * displayed no matter which presenter is visible. Compare
  * to {@link LocalDialogPresenterWidget}.
- * 
+ *
  * @author Philippe Beaudoin
  */
-public class GlobalDialogPresenterWidget extends 
-    PresenterWidget<GlobalDialogPresenterWidget.MyView> 
+public class GlobalDialogPresenterWidget extends
+    PresenterWidget<GlobalDialogPresenterWidget.MyView>
     implements NavigationHandler  {
-  
+
   /**
    * @author Philippe beaudoin
    */
@@ -47,11 +47,11 @@ public class GlobalDialogPresenterWidget extends
 
   @Inject
   public GlobalDialogPresenterWidget(
-      final EventBus eventBus, 
+      final EventBus eventBus,
       final MyView view) {
     super(eventBus, view);
   }
-  
+
   @Override
   public void onReveal() {
     super.onReveal();
@@ -64,7 +64,7 @@ public class GlobalDialogPresenterWidget extends
   public void onHide() {
     super.onHide();
     unregisterNavigationHandler();
-  }  
+  }
 
   @Override
   public void onNavigation(NavigationEvent navigationEvent) {

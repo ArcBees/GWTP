@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,7 +29,7 @@ import java.util.List;
  * injection with Guice/GIN can use the automatic binding mechanism. See
  * {@link HandlerContainerImpl#HandlerContainerImpl()} and {@link #HandlerContainerImpl(boolean)}
  * for more details.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public class HandlerContainerImpl implements HandlerContainer {
@@ -49,10 +49,10 @@ public class HandlerContainerImpl implements HandlerContainer {
   private final transient List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
 
   /**
-   * Creates a handler container class with automatic binding, unless 
+   * Creates a handler container class with automatic binding, unless
    * {@link AutobindDisable} is used to globally disable automatic
    * binding.
-   * <p /> 
+   * <p />
    * Autobinding requires the class to be instantiated by Guice/GIN.
    * If you are instantiating {@link HandlerContainerImpl} with {@code new},
    * autobinding will not work. It is recommended you document it by
@@ -67,7 +67,7 @@ public class HandlerContainerImpl implements HandlerContainer {
    * Creates a handler container class with or without automatic binding. If
    * automatic binding is requested, the {@link #bind()} method will be called
    * automatically after the class is instantiated through Guice/GIN dependency
-   * injection mechanism, unless {@link AutobindDisable} is used to globally 
+   * injection mechanism, unless {@link AutobindDisable} is used to globally
    * disable automatic binding. Otherwise, the user is responsible for calling
    * {@link #bind()}.
    * <p />
@@ -75,9 +75,9 @@ public class HandlerContainerImpl implements HandlerContainer {
    * If you are instantiating {@link HandlerContainerImpl} with {@code new},
    * autobinding will not work. It is recommended you document it by
    * passing {@code false} to the {@code autoBind} parameter.
-   * 
+   *
    * @param autoBind {@code true} to request automatic binding, {@code false} otherwise.
-   * 
+   *
    * @see #HandlerContainerImpl()
    */
   public HandlerContainerImpl(boolean autoBind) {
@@ -113,8 +113,8 @@ public class HandlerContainerImpl implements HandlerContainer {
   }
 
   /**
-   * Lifecycle method called when binding the object. 
-   * <p /> 
+   * Lifecycle method called when binding the object.
+   * <p />
    * <b>Important :</b> Make sure you call your parent class {@link #onBind()}. Also, do
    * not call directly, call {@link #bind()} instead.
    * <p />
@@ -134,12 +134,12 @@ public class HandlerContainerImpl implements HandlerContainer {
   }
 
   /**
-   * Lifecycle method called when unbinding the object. 
-   * <p /> 
-   * <b>Important :</b> Make sure you call your parent class {@link #onUnbind()}. 
+   * Lifecycle method called when unbinding the object.
+   * <p />
+   * <b>Important :</b> Make sure you call your parent class {@link #onUnbind()}.
    * Also, do not call directly, call {@link #unbind()} instead.
-   * <p /> 
-   * Any handler registration recorded with {@link #registerHandler (HandlerRegistration)} 
+   * <p />
+   * Any handler registration recorded with {@link #registerHandler (HandlerRegistration)}
    * will have
    * already been removed at this point. You should override this method to
    * take down any other initialisation that took place in {@link #onBind()}.
@@ -151,10 +151,10 @@ public class HandlerContainerImpl implements HandlerContainer {
   }
 
   /**
-   * Registers a handler so that it is automatically removed when 
+   * Registers a handler so that it is automatically removed when
    * {@link #unbind()} is called. This provides an easy way to track event
    * handler registrations.
-   * 
+   *
    * @param handlerRegistration The registration of handler to track.
    */
   protected void registerHandler(HandlerRegistration handlerRegistration) {

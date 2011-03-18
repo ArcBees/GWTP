@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,7 +28,7 @@ import com.gwtplatform.dispatch.shared.Result;
 /**
  * Module for use in test cases when creating a guice injector that needs to
  * provide mock handlers.
- * 
+ *
  * Your injector must also have an class that subclasses {@link com.gwtplatform.dispatch.server.guice.HandlerModule}
  * to bind Actions to ActionHandlers and ActionValidators.
  * <p/>
@@ -40,14 +40,14 @@ import com.gwtplatform.dispatch.shared.Result;
  * <li>register mock client-side action handlers with
  * {@link #bindMockClientActionHandler(Class, AbstractClientActionHandler)}.</li>
  * </ul>
- * 
+ *
  * <h3>Unit Testing Example</h3>
- * 
+ *
  * <pre>
  *  // create mock handlers
  *  CreateFooActionHandler mockCreateFooActionHandler =
  *       mock(CreateFooActionHandler.class);
- * 
+ *
  *  GeocodeAddressClientActionHandler geocodeAddressClientActionHandler =
  *       mock(GeocodeAddressClientActionHandler.class);
  *
@@ -65,20 +65,20 @@ import com.gwtplatform.dispatch.shared.Result;
  *                  GeocodeAddressAction.class,
  *                  geocodeAddressClientActionHandler);
  *            });
- *            
+ *
  *  // get dispatcher
  *  DispatchAsync dispatcher = injector.getInstance(DispatchAsync.class);
  *
  *  // create mock result
  *  final CreateFooResult result =
  *      new CreateFooResult(new Key<Foo>(Foo.class, 1));
- *      
+ *
  *  // configure mockito to return mock result on specific action
  *  when(
  *    businessCreateActionHandler.execute(
  *        eq(new CreateFooAction("Bar")),
  *          any(ExecutionContext.class))).thenReturn(result);
- *            
+ *
  *  // configuring mockito to return result for clent action handler
  *  // is a bit more complex
  *  final GeocodeAddressResult geocodeAddressResult = new GeocodeAddressResult(...);
@@ -95,9 +95,9 @@ import com.gwtplatform.dispatch.shared.Result;
  *           eq(new GeocodeAddressAction("2 Google Way, New Zealand",
  *               "nz")), any(AsyncCallback.class),
  *           any(ClientDispatchRequest.class), any(ExecuteCommand.class));
- * 
+ *
  * </pre>
- * 
+ *
  * @author Brendan Doherty
  */
 public abstract class MockHandlerModule extends AbstractModule {
@@ -152,7 +152,7 @@ public abstract class MockHandlerModule extends AbstractModule {
    * DispatchAsync#execute()} or
    * {@link com.gwtplatform.dispatch.client.DispatchAsync#undo
    * DispatchAsync#undo()}.
-   * 
+   *
    * @param <A> Type of {@link Action} that will be executed by mock handler
    * @param <R> Type of {@link Result} that will be returned by mock handler
    * @param <H> Type of the mock handler that extends
@@ -160,7 +160,7 @@ public abstract class MockHandlerModule extends AbstractModule {
    * @param handlerClass The type of the mock server-side handler
    * @param mockHandler Instance of the {@link ActionHandler} to execute
    *          actions of type {@literal <A>}
-   * 
+   *
    */
   protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockActionHandler(
       Class<H> handlerClass, H mockHandler) {
@@ -176,7 +176,7 @@ public abstract class MockHandlerModule extends AbstractModule {
    * {@link com.gwtplatform.dispatch.client.DispatchAsync#undo
    * DispatchAsync#undo()}.
    * <p/>
-   * 
+   *
    * If both mock client and mock server action handlers have been registered,
    * the server side action handler will only be called if the mock client side
    * action handler calls
@@ -184,7 +184,7 @@ public abstract class MockHandlerModule extends AbstractModule {
    * ExecuteCommand#execute()} or
    * {@link com.gwtplatform.dispatch.client.actionhandler.UndoCommand#undo
    * UndoCommand#undo()}
-   * 
+   *
    * @param <A> Type of {@link Action}
    * @param <R> Type of {@link Result}
    * @param <H> Type of {@link AbstractClientActionHandler}

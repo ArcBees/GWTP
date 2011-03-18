@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,11 +29,11 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 /**
  * A simple implementation of {@link PopupView} that can be used when the widget
  * returned by {@link #asWidget()} inherits from {@link PopupPanel}.
- * 
+ *
  * Also, this implementation simply disregards every call to
  * {@link #setInSlot(Object, com.google.gwt.user.client.ui.Widget)}, {@link #addToSlot(Object, com.google.gwt.user.client.ui.Widget)}, and
  * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)}.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public abstract class PopupViewImpl extends ViewImpl implements PopupView {
@@ -48,7 +48,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
    * {@link NavigationEvent} in order to automatically close when this event is
    * fired, if desired. See
    * {@link #setAutoHideOnNavigationEventEnabled(boolean)} for details.
-   * 
+   *
    * @param eventBus The {@link EventBus}.
    */
   protected PopupViewImpl(EventBus eventBus) {
@@ -123,7 +123,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
   /**
    * Retrieves this view as a {@link PopupPanel}. See {@link #asWidget()}.
-   * 
+   *
    * @return This view as a {@link PopupPanel} object.
    */
   protected PopupPanel asPopupPanel() {

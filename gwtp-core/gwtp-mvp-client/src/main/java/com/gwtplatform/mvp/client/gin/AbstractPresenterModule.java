@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -43,7 +43,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * {@link #bindSharedView} method. If the view class is use only by one
    * presenter, you should consider using
    * {@link #bindPresenter(Class, Class, Class, Class, Class)} instead.
-   * 
+   *
    * @param <P> The {@link Presenter} interface type.
    * @param <Proxy_> The {@link Proxy} type.
    * @param presenterImpl The {@link Presenter} interface.
@@ -60,7 +60,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
   /**
    * Convenience method for binding a singleton presenter with its view and its
    * proxy, when using automatically generated proxy classes.
-   * 
+   *
    * @param <P> The {@link Presenter} interface type.
    * @param <V> The {@link View} interface type.
    * @param <Proxy_> The {@link Proxy} type.
@@ -91,7 +91,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * {@link #bindSharedView} method. If the view class is use only by one
    * presenter, you should consider using
    * {@link #bindPresenter(Class, Class, Class, Class)} instead.
-   * 
+   *
    * @param <P> The {@link Presenter} class type.
    * @param <Proxy_> The {@link Proxy} type.
    * @param presenterImpl The {@link Presenter} implementation (a singleton).
@@ -107,7 +107,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
   /**
    * Convenience method for binding a singleton presenter with its view and its
    * proxy, when using automatically generated proxy classes.
-   * 
+   *
    * @param <P> The {@link Presenter} class type.
    * @param <V> The {@link View} interface type.
    * @param <Proxy_> The {@link Proxy} type.
@@ -137,7 +137,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * presenter, you should consider using
    * {@link #bindPresenterCustomProxy(Class, Class, Class, Class, Class, Class)}
    * instead.
-   * 
+   *
    * @param <P> The {@link Presenter} interface type.
    * @param <Proxy_> The {@link Proxy} type.
    * @param presenter The {@link Presenter} interface.
@@ -157,7 +157,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
   /**
    * Convenience method for binding a singleton presenter with its view and its
    * proxy, when using custom-made proxy classes.
-   * 
+   *
    * @param <P> The {@link Presenter} interface type.
    * @param <V> The {@link View} interface type.
    * @param <Proxy_> The {@link Proxy} type.
@@ -191,7 +191,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * presenter, you should consider using
    * {@link #bindPresenterCustomProxy(Class, Class, Class, Class, Class)}
    * instead.
-   * 
+   *
    * @param <P> The {@link Presenter} class type.
    * @param <Proxy_> The {@link Proxy} type.
    * @param presenterImpl The {@link Presenter} implementation (a singleton).
@@ -209,7 +209,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
   /**
    * Convenience method for binding a singleton presenter with its view and its
    * proxy, when using custom-made proxy classes.
-   * 
+   *
    * @param <P> The {@link Presenter} class type.
    * @param <V> The {@link View} interface type.
    * @param <Proxy_> The {@link Proxy} type.
@@ -232,7 +232,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
   /**
    * Convenience method for binding a non-singleton {@link PresenterWidget} with
    * its {@link View}.
-   * 
+   *
    * @param <P> The {@link PresenterWidget} interface type.
    * @param <V> The {@link View} interface type.
    * @param presenter The {@link PresenterWidget} interface.
@@ -251,7 +251,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
   /**
    * Convenience method for binding a non-singleton {@link PresenterWidget} with
    * its {@link View}.
-   * 
+   *
    * @param <P> The {@link PresenterWidget} class type.
    * @param <V> The {@link View} interface type.
    * @param presenterImpl The {@link PresenterWidget} implementation (NOT a
@@ -269,7 +269,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * Convenience method for binding a non-singleton {@link PresenterWidget} that
    * is created via a factory to its {@link View}, which is also created via a
    * factory.
-   * 
+   *
    * @param <P> The type of the {@link PresenterWidget} factory.
    * @param <V> The type of the {@link View} factory.
    * @param presenterFactory The interface to the {@link PresenterWidget}
@@ -298,7 +298,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * {@link #bindPresenterCustomProxy(Class, Class, Class, Class)}, If the view
    * class is use only by one presenter, you should consider using
    * {@link #bindPresenter(Class, Class, Class, Class, Class)} instead.
-   * 
+   *
    * @param <V> The {@link View} interface type.
    * @param view The {@link View} interface.
    * @param viewImpl The {@link View} implementation (not a singleton).
@@ -320,7 +320,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * singleton presenter widget as content in its containing presenter
    * {@link Presenter#onReveal} and to remove it in the
    * {@link Presenter#onHide}.
-   * 
+   *
    * @param <P> The {@link PresenterWidget} interface type.
    * @param <V> The {@link View} interface type.
    * @param presenter The {@link PresenterWidget} interface (a singleton).
@@ -348,7 +348,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
    * singleton presenter widget as content in its containing presenter
    * {@link Presenter#onReveal} and to remove it in the
    * {@link Presenter#onHide}.
-   * 
+   *
    * @param <P> The {@link PresenterWidget} class type.
    * @param <V> The {@link View} interface type.
    * @param presenterImpl The {@link PresenterWidget} implementation (a

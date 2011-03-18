@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -27,7 +27,7 @@ import java.util.List;
  * interface. These classes should be eager singletons and they should register
  * themselves with the {@link DelayedBindRegistry} in their constructor by
  * calling {@link #register(DelayedBind)}.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public final class DelayedBindRegistry {
@@ -38,7 +38,7 @@ public final class DelayedBindRegistry {
    * Bind all the registered classes, by calling their
    * {@link DelayedBind#delayedBind(Ginjector)} method. This method should only be
    * called once, typically when the program starts.
-   * 
+   *
    * @param ginjector The {@link Ginjector} from which to get object instances.
    */
   public static void bind(Ginjector ginjector) {
@@ -51,7 +51,7 @@ public final class DelayedBindRegistry {
    * Registers a new object so that it is bound using delayed binding. This
    * method should be called in the constructor of objects implementing the
    * {@link DelayedBind} interface.
-   * 
+   *
    * @param delayedBindObject The object to register.
    */
   public static void register(DelayedBind delayedBindObject) {

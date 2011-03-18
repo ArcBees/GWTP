@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -27,9 +27,9 @@ import com.gwtplatform.mvp.client.Presenter;
  * by any {@link Proxy} class of a {@link Presenter} that accepts child
  * presenters. When this handler is triggered, the proxy should <b>first</b> set
  * the content appropriately in the presenter, and then reveal the presenter.
- * 
+ *
  * @param <T> The Presenter's type.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHandler {
@@ -45,7 +45,7 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
 
   /**
    * This is the dispatched method. Reveals
-   * 
+   *
    * @param revealContentEvent The event containing the presenter that wants to
    *          bet set as content.
    */

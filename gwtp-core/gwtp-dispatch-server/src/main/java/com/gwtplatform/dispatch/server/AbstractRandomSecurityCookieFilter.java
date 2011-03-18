@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -35,13 +35,13 @@ import java.security.SecureRandom;
  * {@link HttpSessionSecurityCookieFilter}, although it will work even if you don't have access to an
  * {@link javax.servlet.http.HttpSession}. To setup this filter, add the following line at before any other
  * {@code serve} call in your own {@link com.google.inject.servlet.ServletModule#configureServlets}:
- * 
+ *
  * <pre>
  * filter(&quot;*.jsp&quot;).through(HttpSessionSecurityCookieFilter.class);
  * </pre>
- * 
+ *
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public abstract class AbstractRandomSecurityCookieFilter implements Filter {

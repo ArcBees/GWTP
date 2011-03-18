@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,10 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is a basic implementation of a {@link TabPanel} that must be 
+ * This is a basic implementation of a {@link TabPanel} that must be
  * subclassed. Subclasses can style the tab panel in any way they want.
  * A {@link BaseTabPanel} will hold a number of {@link BaseTab}.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public abstract class BaseTabPanel extends Composite implements TabPanel {
@@ -89,7 +89,7 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
 
   /**
    * Sets the content displayed in the main panel.
-   * 
+   *
    * @param panelContent The {@link Widget} to set in the main panel, or
    *          {@code null} to clear the panel.
    */
@@ -108,10 +108,10 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
       setTabVisibility(tab);
     }
   }
-  
+
   /**
    * Ensures the specified tab is visible or hidden as it should.
-   * 
+   *
    * @param tab The {@link BaseTab} to check.
    */
   private void setTabVisibility(BaseTab tab) {
@@ -121,7 +121,7 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
 
   /**
    * Returns a new tab of the type specific for this tab panel.
-   * 
+   *
    * @param tabData Some data on the tab to create.
    * @return The new tab.
    */

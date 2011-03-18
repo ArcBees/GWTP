@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -31,19 +31,19 @@ import javax.lang.model.type.TypeMirror;
 /**
  * {@link GenerationHelper} is an internal class that provides common routines
  * only used by the annotation processors.
- * 
- * @author Brendan Doherty 
+ *
+ * @author Brendan Doherty
  * @author Florian Sauter
- * @author Stephen Haberman (concept) 
+ * @author Stephen Haberman (concept)
  */
 public class GenerationHelper implements Closeable {
-  
+
   private PrintWriter writer;
-  
+
   public GenerationHelper(Writer sourceWriter) {
     initializeSourceWriter(sourceWriter);
   }
-  
+
   @Override
   public void close() {
     writer.close();
@@ -52,14 +52,14 @@ public class GenerationHelper implements Closeable {
   public void generateClassFooter() {
     println("}");
   }
-  
+
   /**
    * Generates a class header. Pass null to skip the parent class.
-   * 
+   *
    * <p>
    * <b>Usage:</b>
    * </p>
-   * 
+   *
    * <pre>
    * <code>
    *  generateClassHeader(Foo.class.getSimpleName(),
@@ -71,10 +71,10 @@ public class GenerationHelper implements Closeable {
    * <p>
    * <b>Generated example:</b>
    * </p>
-   * 
+   *
    * <pre>
    * <code>public class MyFoo extends Foo implements HasName, MyGenericInterface{@literal <Foo>} {</code></pre>
-   * 
+   *
    * @param extendedClassName the parent class name
    * @param interfaceNames array of interface names to be implemented
    */
@@ -92,19 +92,19 @@ public class GenerationHelper implements Closeable {
     }
     println(" { ");
   }
-  
+
   public void generateConstantFieldDeclaration(VariableElement fieldElement) {
     if (isConstant(fieldElement)) {
       String constantValue = determineFinalConstantValue(fieldElement);
       if (constantValue != null) {
-        println("  {0}{1} {2} = {3};", 
+        println("  {0}{1} {2} = {3};",
             determineFieldModifiers(fieldElement),
             fieldElement.asType().toString(),
             fieldElement.getSimpleName(),
             constantValue
          );
       } else {
-        println("  {0}{1} {2};", 
+        println("  {0}{1} {2};",
             determineFieldModifiers(fieldElement),
             fieldElement.asType().toString(),
             fieldElement.getSimpleName()
@@ -112,7 +112,7 @@ public class GenerationHelper implements Closeable {
       }
     }
   }
-  
+
   public void generateConstructorUsingFields(String simpleClassName, Collection<VariableElement> fieldsToBePassedAndAssigned) {
     println();
     print("  {0} {1}(", Modifier.PUBLIC.toString(), simpleClassName);
@@ -125,7 +125,7 @@ public class GenerationHelper implements Closeable {
     }
     println("  }");
   }
-  
+
   public void generateEmptyConstructor(String simpleClassName, Modifier modifier) {
     println();
     if (modifier != null) {
@@ -136,7 +136,7 @@ public class GenerationHelper implements Closeable {
     println("    // Possibly for serialization.");
     println("  }");
   }
-  
+
   public void generateEquals(String simpleClassName, Collection<VariableElement> fieldElements) {
     println();
     println("  @Override");
@@ -149,7 +149,7 @@ public class GenerationHelper implements Closeable {
       println("    if (getClass() != obj.getClass())");
       println("        return false;");
       println("    {0} other = ({0}) obj;", simpleClassName);
-      
+
       for (VariableElement fieldElement : fieldElements) {
         TypeMirror type = fieldElement.asType();
         String fieldName = fieldElement.getSimpleName().toString();
@@ -172,7 +172,7 @@ public class GenerationHelper implements Closeable {
     }
     println("  }");
   }
-  
+
   public void generateFieldAccessors(Collection<VariableElement> fieldElements) {
 
     for (VariableElement fieldElement : fieldElements) {
@@ -188,19 +188,19 @@ public class GenerationHelper implements Closeable {
       println("  }");
     }
   }
-  
+
   public void generateFieldAssignment(VariableElement fieldElement, Object value) {
     println("    this.{0} = {1};", fieldElement.getSimpleName(), String.valueOf(value));
   }
 
   public void generateFieldDeclaration(VariableElement fieldElement) {
-    println("  {0}{1} {2};", 
+    println("  {0}{1} {2};",
         determineFieldModifiers(fieldElement),
         fieldElement.asType().toString(),
         fieldElement.getSimpleName()
     );
   }
-  
+
   /**
    * Generates all field declarations which are included in the passed list.
    */
@@ -214,19 +214,19 @@ public class GenerationHelper implements Closeable {
       }
     }
   }
-  
+
   /**
    * Generates a list of Fields.
-   * 
+   *
    *  <p>
    * <b>Usage:</b>
    * </p>
-   * 
+   *
    * <pre>
    * <code>generateFieldList(myList, true, false)</code></pre>
-   * 
+   *
    * <b>Generated example:</b>
-   * 
+   *
    * <pre>
    * <code>
    *  String myField1, int myField2, final String myField3
@@ -275,11 +275,11 @@ public class GenerationHelper implements Closeable {
       println("    return super.hashCode();");
     }
     println("  }");
-  }  
-  
+  }
+
   /**
    * Use null as import to separate import groups.
-   * 
+   *
    * <p>
    * <b>Usage:</b>
    * </p>
@@ -289,19 +289,19 @@ public class GenerationHelper implements Closeable {
    * generateImports({@link com.google.gwt.event.shared.EventHandler EventHandler}.class, {@link com.google.gwt.event.shared.GwtEvent GwtEvent}.class, null, {@link GenEventProcessor}.class)
    * </code>
    * </pre>
-   * 
+   *
    * <b>Generated example:</b>
-   * 
+   *
    * <pre>
    * <code>
    *  import {@link com.google.gwt.event.shared.EventHandler};
    *  import {@link com.google.gwt.event.shared.EventHandler};
-   *  
+   *
    *  import {@link com.gwtplatform.dispatch.annotation.processor.GenEventProcessor};
    * </code></pre>
-   * 
+   *
    * TODO: It seems as the compiler can't find GWT classes during generation - why?
-   * 
+   *
    * @param imports array of classes to be imported
    */
   public void generateImports(Class<?>... imports) {
@@ -314,7 +314,7 @@ public class GenerationHelper implements Closeable {
       }
     }
   }
-  
+
   public void generateImports(String... imports) {
     println();
     for (String importClass : imports) {
@@ -325,10 +325,10 @@ public class GenerationHelper implements Closeable {
       }
     }
   }
-  
+
   /**
    * Generates a package declaration.
-   * 
+   *
    * <p>
    * <b>Generated example:</b>
    * </p>
@@ -337,7 +337,7 @@ public class GenerationHelper implements Closeable {
   public void generatePackageDeclaration(String packageName) {
     println("package {0};", packageName);
   }
-  
+
   private String determineAccessorName(VariableElement fieldElement) {
     String name;
     if (fieldElement.asType().toString().equals(java.lang.Boolean.class.getSimpleName().toLowerCase())) {
@@ -350,10 +350,10 @@ public class GenerationHelper implements Closeable {
 
     return name;
   }
-  
+
   public void generateToString(String simpleClassName, Collection<VariableElement> fieldElements) {
     println();
-    
+
     println("  @Override");
     println("  public String toString() {");
     println("    return \"" + simpleClassName + "[\"");
@@ -367,7 +367,7 @@ public class GenerationHelper implements Closeable {
     println("    + \"]\";");
     println("  }");
   }
-  
+
   private String determineFieldModifiers(VariableElement fieldElement) {
     String fieldModifier = "";
     Set<Modifier> modifiers = fieldElement.getModifiers();
@@ -376,7 +376,7 @@ public class GenerationHelper implements Closeable {
     }
     return fieldModifier;
   }
-  
+
   /**
    * Note that to have a constant value, a field's type must be either a primitive type or String otherwise the value is null.
    */
@@ -394,10 +394,10 @@ public class GenerationHelper implements Closeable {
         determinedConstantValue = null;
       }
     }
-    
+
     return determinedConstantValue;
   }
-  
+
   /**
    * Returns the name of the wrapper class for a primitive class.
    */
@@ -430,7 +430,7 @@ public class GenerationHelper implements Closeable {
       return null;
     }
   }
-  
+
   /**
    * Checks if a type is a primitive type.
    */
@@ -459,53 +459,53 @@ public class GenerationHelper implements Closeable {
     }
     if (typeName.equals("boolean")) {
       return true;
-    } 
-    return false;    
+    }
+    return false;
   }
-  
+
   /**
    * Checks if a field contains a static or final modifier.
    */
   public boolean isConstant(VariableElement fieldElement) {
     return fieldElement.getModifiers().contains(Modifier.STATIC) || fieldElement.getModifiers().contains(Modifier.FINAL);
   }
-  
+
   /**
    * Checks if a field contains a static or final modifier.
    */
   public boolean isStatic(VariableElement fieldElement) {
     return fieldElement.getModifiers().contains(Modifier.STATIC);
   }
-  
+
   public void print(Object o) {
     writer.print(o);
   }
-  
+
   public void print(String s, Object... parameters) {
     print(replaceParameters(s, parameters));
   }
-  
+
   public void println() {
     writer.println();
   }
-  
+
   public void println(Object o) {
     writer.println(o);
   }
-  
+
   public void println(String s, Object... parameters) {
     println(replaceParameters(s, parameters));
   }
-  
+
   private void initializeSourceWriter(Writer sourceWriter) {
     BufferedWriter bufferedWriter = new BufferedWriter(sourceWriter);
     writer = new PrintWriter(bufferedWriter);
   }
-  
+
   /**
    * Construct a single string from an array of strings, gluing them together
    * with the specified delimiter.
-   * 
+   *
    * @param segments array of strings
    * @param delimiter character that glues the passed strings together
    * @return imploded and glued list of strings
@@ -527,17 +527,17 @@ public class GenerationHelper implements Closeable {
     }
     return implodedString;
   }
-  
+
   /**
    * Replaces each placeholder of this string that matches a parameter index.
    * <p><b>Placeholder format:</b> {int}</p>
-   * 
+   *
    * <p><b>Usage:</b></p>
    * <pre><code>replaceParameters("{0} int myField = {1};", "private", 20);</code></pre>
-   * 
+   *
    * @param target the string to be replace.
    * @param parameters the replacement parameters
-   * @return the resulting string. 
+   * @return the resulting string.
    *   <p>For example:</p> <code>private int myField = 20;</code>
    */
   public static String replaceParameters(String target , Object... parameters) {
