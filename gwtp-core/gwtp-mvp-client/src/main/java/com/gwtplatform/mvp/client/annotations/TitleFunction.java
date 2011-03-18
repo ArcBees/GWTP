@@ -1,21 +1,24 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.gwtplatform.mvp.client.annotations;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+
 /**
  * This annotation can be used to specify a function returning the title of a
  * place as a string, given the request. It can work in one of two ways. For
@@ -28,13 +31,13 @@ import java.lang.annotation.Target;
  * optionally accept another parameter corresponding to your custom ginjector.
  * Using a static method is more efficient, as it doesn't force instantiation of
  * the associated presenter and view. Example of use:
- *
+ * 
  * <pre>
  * {@code @}TitleFunction
  *  static public String getTranslatedTitle( MyGinjector ginjector ) {
  *    return ginjector.getTranslations().productTitle();
  *  }
- *
+ * 
  * {@code @}TitleFunction
  *  public String getTitle( PlaceRequest placeRequest ) {
  *    prepareFromRequest( placeRequest );
@@ -51,7 +54,7 @@ import java.lang.annotation.Target;
  * fashion, for example following a call to the server. As above, your method
  * can accept a {@link com.gwtplatform.mvp.client.proxy.PlaceRequest} parameter
  * and your custom ginjector. Example of use:
- *
+ * 
  * <pre>
  * {@code @}TitleFunction
  *  public void getTitle( PlaceRequest placeRequest, final SetPlaceTitleHandler handler ) {
@@ -66,7 +69,7 @@ import java.lang.annotation.Target;
  *    }
  *  }
  * </pre>
- *
+ * 
  * @author Philippe Beaudoin
  */
 @Target(ElementType.METHOD)

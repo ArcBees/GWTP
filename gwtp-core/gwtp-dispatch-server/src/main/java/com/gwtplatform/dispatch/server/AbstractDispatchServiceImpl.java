@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -34,7 +34,7 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * <p />
  * This class is closely related to {@link AbstractDispatchImpl}, in theory the latter wouldn't be needed, but we use it
  * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.client.DispatchAsync}.
- *
+ * 
  * @see com.gwtplatform.dispatch.client.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
@@ -116,7 +116,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
 
   /**
    * Checks that the cookie in the RPC matches the one in the http request header.
-   *
+   * 
    * @param cookieSentByRPC The content of the security cookie sent by RPC.
    * @return {@code true} if the cookies match, {@code false} otherwise.
    * @throws ServiceException If you forgot to bind a {@link SecurityCookie}.

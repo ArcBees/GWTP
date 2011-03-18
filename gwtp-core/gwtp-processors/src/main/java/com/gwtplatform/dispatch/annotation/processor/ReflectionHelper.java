@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -39,26 +39,26 @@ import javax.lang.model.util.Elements;
 /**
  * {@link ReflectionHelper} is an internal class that provides common routines
  * only used by the annotation processors.
- *
- * @author Brendan Doherty
+ * 
+ * @author Brendan Doherty 
  * @author Florian Sauter
- * @author Stephen Haberman (concept)
+ * @author Stephen Haberman (concept) 
  */
 @SuppressWarnings("unchecked")
 public class ReflectionHelper {
 
   private TypeElement classRepresenter;
   private ProcessingEnvironment environment;
-
+  
   public ReflectionHelper(ProcessingEnvironment environment, TypeElement classRepresenter) {
     this.classRepresenter = classRepresenter;
     this.environment = environment;
   }
-
+  
   public Collection<VariableElement> filterConstantFields(Collection<VariableElement> fieldElements) {
     return filterFields(fieldElements, Modifier.STATIC, Modifier.FINAL);
   }
-
+  
   /**
    * Returns only fields which doesn't contain one of the passed modifiers.
    */
@@ -75,7 +75,7 @@ public class ReflectionHelper {
     }
     return filteredFields;
   }
-
+  
   /**
    * Returns only fields which doesn't annotated with one of the passed annotation.
    */
@@ -93,7 +93,7 @@ public class ReflectionHelper {
     }
     return filteredFields;
   }
-
+  
   /**
    * Returns all fields annotated with the passed annotation classes.
    */
@@ -105,9 +105,9 @@ public class ReflectionHelper {
     }
     return fieldsCopy;
   }
-
+  
   /**
-   * Returns the class name.
+   * Returns the class name. 
    * <p>
    * For example:<br>
    * {@code com.gwtplatform.dispatch.shared.annotation.Foo}
@@ -117,18 +117,18 @@ public class ReflectionHelper {
   public String getClassName() {
     return getPackageName() + '.' + getSimpleClassName();
   }
-
+  
   public TypeElement getClassRepresenter() {
     return classRepresenter;
   }
-
+  
   /**
    * Returns all fields ordered that are {@link Modifier#FINAL} or {@link Modifier#STATIC}.
    */
   public Collection<VariableElement> getConstantFields() {
     return getModifierFields(Modifier.FINAL, Modifier.STATIC);
   }
-
+  
   /**
    * Returns all fields.
    * <p>
@@ -140,21 +140,21 @@ public class ReflectionHelper {
     List<? extends Element> members = getElementUtils().getAllMembers(classRepresenter);
     return ElementFilter.fieldsIn(members);
   }
-
+  
   /**
    * Returns all fields which contains {@link Modifier#FINAL}.
    */
   public Collection<VariableElement> getFinalFields() {
     return filterFields(getOrderedFields(), Modifier.FINAL);
   }
-
+  
   /**
    * Returns all fields annotated with @{@link In}.
    */
   public Collection<VariableElement> getInFields() {
     return sortFields(In.class, getAnnotatedFields(In.class));
   }
-
+  
   /**
    * Returns all fields with the passed modifier.
    */
@@ -167,14 +167,14 @@ public class ReflectionHelper {
     }
     return modifierFields;
   }
-
+  
   /**
    * Returns all fields ordered that are not {@link Modifier#FINAL} or {@link Modifier#STATIC}.
    */
   public Collection<VariableElement> getNonConstantFields() {
     return filterFields(getOrderedFields(), Modifier.FINAL, Modifier.STATIC);
   }
-
+  
   /**
    * Returns all non constant fields annotated with @{@link Optional}. Sorted based on the @
    * {@link Order} annotation.
@@ -182,7 +182,7 @@ public class ReflectionHelper {
   public Collection<VariableElement> getOptionalFields() {
     return sortFields(Order.class, filterConstantFields(getAnnotatedFields(Optional.class)));
   }
-
+  
   /**
    * Returns all non constant fields annotated with passed annotation.
    * <p>
@@ -192,29 +192,29 @@ public class ReflectionHelper {
   public Collection<VariableElement> getOptionalFields(Class<? extends Annotation> annotation) {
     return filterConstantFields(getAnnotatedFields(Optional.class, annotation));
   }
-
+  
   /**
    * Returns all fields ordered. See {@link Order} for detailed informations.
    */
   public Collection<VariableElement> getOrderedFields() {
     return sortFields(Order.class, getFields());
   }
-
+  
   /**
    * Returns all fields annotated with @{@link Out}.
    */
   public Collection<VariableElement> getOutFields() {
     return sortFields(Out.class, getAnnotatedFields(Out.class));
   }
-
+  
   public String getPackageName() {
     return getElementUtils().getPackageOf(classRepresenter).getQualifiedName().toString();
   }
-
+  
   public ProcessingEnvironment getProcessingEnvironment() {
     return environment;
   }
-
+  
   /**
    * Returns all non {@link Optional}|{@link Modifier#STATIC}|
    * {@link Modifier#FINAL} fields <b>ordered</b>. See {@link Order} for
@@ -235,18 +235,18 @@ public class ReflectionHelper {
     fields = filterFields(fields, Modifier.FINAL, Modifier.STATIC);
     return sortFields(Order.class, fields);
   }
-
+  
   public String getSimpleClassName() {
     return classRepresenter.getSimpleName().toString();
   }
-
+  
   /**
    * Returns all fields which contains {@link Modifier#STATIC}.
    */
   public Collection<VariableElement> getStaticFields() {
     return filterFields(getOrderedFields(), Modifier.STATIC);
   }
-
+  
   /**
    * Sorts the passed fields based on the passed annotation sort logic.
    */
@@ -263,14 +263,14 @@ public class ReflectionHelper {
     }
     return sortedFields.values();
   }
-
+  
   /**
    * Utility method.
    */
   protected Elements getElementUtils() {
     return environment.getElementUtils();
   }
-
+  
   protected void sortInFields(SortedMap<Integer, VariableElement> sortedFields, Collection<VariableElement> fields) {
     for (VariableElement fieldElement : fields) {
       In inFieldAnnotation = fieldElement.getAnnotation(In.class);
@@ -279,7 +279,7 @@ public class ReflectionHelper {
       }
     }
   }
-
+  
   protected void sortOrderFields(SortedMap<Integer, VariableElement> sortedFields, Collection<VariableElement> fields) {
     int maxOrderNum = -1;
     for (VariableElement fieldElement : fields) {
@@ -299,7 +299,7 @@ public class ReflectionHelper {
       }
     }
   }
-
+  
   protected void sortOutFields(SortedMap<Integer, VariableElement> sortedFields, Collection<VariableElement> fields) {
     for (VariableElement fieldElement : fields) {
       Out outFieldAnnotation = fieldElement.getAnnotation(Out.class);
