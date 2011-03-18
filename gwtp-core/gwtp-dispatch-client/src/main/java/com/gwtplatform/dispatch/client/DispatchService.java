@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -32,22 +32,22 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * {@link com.gwtplatform.dispatch.server.Dispatch}, in theory the latter
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
  * {@link com.gwtplatform.dispatch.client.DispatchAsync}.
- * 
+ *
  * @see com.gwtplatform.dispatch.client.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.client.DispatchService
  * @see com.gwtplatform.dispatch.client.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
- * 
+ *
  * @author Philippe Beaudoin
  */
 public interface DispatchService extends RemoteService {
   /**
    * This method is called server-side whenever a new action is dispatched.
-   * 
+   *
    * @see DispatchServiceAsync#execute
-   * 
+   *
    * @param cookieSentByRPC This is the content of the security cookie accessed
    *          on the client (in javascript), its goal is to prevent XSRF
    *          attacks. See {@link SecurityCookieAccessor} for more details.
@@ -65,9 +65,9 @@ public interface DispatchService extends RemoteService {
   /**
    * This method is called server-side whenever a previously executed action
    * needs to be undone.
-   * 
+   *
    * @see DispatchServiceAsync#undo
-   * 
+   *
    * @param cookieSentByRPC This is the content of the security cookie accessed
    *          on the client (in javascript), its goal is to prevent XSRF
    *          attacks. See {@link SecurityCookieAccessor} for more details.

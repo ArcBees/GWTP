@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -45,7 +45,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <b>Important!</b> For testing purposes only, this class shouldn't be included
  * in official releases.
- * 
+ *
  * This class demonstrates a problem with App Engine.
  * <p />
  * If you activate this filter and navigate to: <br />
@@ -69,7 +69,7 @@ import javax.servlet.http.HttpServletResponse;
  * terminated (with an exception). This seems to hint at the fact that
  * AppEngine's servlet container does not allocate a new thread for the second
  * request.
- * 
+ *
  * @author Philippe Beaudoin
  */
 @Singleton

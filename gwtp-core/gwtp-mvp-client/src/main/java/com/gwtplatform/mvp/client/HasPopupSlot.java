@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,16 +28,16 @@ public interface HasPopupSlot {
    * corresponding presenter will receive the lifecycle events as needed.
    * <p />
    * Contrary to the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method, no
-   * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is 
+   * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is
    * fired, so {@link PresenterWidget#onReset()} is not invoked.
-   * 
+   *
    * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
    *          will clear the slot.
-   * 
+   *
    * @see #addToPopupSlot(PresenterWidget)
    */
   void addToPopupSlot(final PresenterWidget<? extends PopupView> child);
-  
+
   /**
    * This method sets some popup content within the {@link Presenter}. The view
    * associated with the {@code content}'s presenter must inherit from
@@ -45,14 +45,14 @@ public interface HasPopupSlot {
    * presenter will receive the lifecycle events as needed.
    * <p />
    * Contrary to the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method, no
-   * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired, 
+   * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired,
    * so {@link PresenterWidget#onReset()} is not invoked.
-   * 
+   *
    * @param child The popup child, a {@link PresenterWidget}. Passing {@code null}
    *          will clear the slot.
    * @param center Pass {@code true} to center the popup, otherwise its position
    *          will not be adjusted.
-   * 
+   *
    * @see #addToPopupSlot(PresenterWidget)
    */
   void addToPopupSlot(final PresenterWidget<? extends PopupView> child, boolean center);

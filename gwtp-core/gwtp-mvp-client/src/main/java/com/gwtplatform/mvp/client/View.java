@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * The interface for view classes that handles all the UI-related code for a
  * {@link Presenter}.
- * 
+ *
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
@@ -36,7 +36,7 @@ public interface View {
    * If the view doesn't know about this slot, it can silently ignore the request.
    * <p />
    * Used by {@link PresenterWidget#addToSlot(Object, PresenterWidget)}.
-   * 
+   *
    * @param slot An opaque object indicating the slot to add into.
    * @param content The content to add, a {@link Widget}.
    */
@@ -45,7 +45,7 @@ public interface View {
   /**
    * Retrieves this view as a {@link Widget} so that it can be inserted within
    * the DOM.
-   * 
+   *
    * @return This view as a DOM object.
    */
   Widget asWidget();
@@ -59,7 +59,7 @@ public interface View {
    * If the view doesn't know about this slot, it can silently ignore the request.
    * <p />
    * Used by {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)}.
-   * 
+   *
    * @param slot An opaque object indicating the slot to remove from.
    * @param content The content to remove, a {@link Widget}.
    */
@@ -76,7 +76,7 @@ public interface View {
    * <p />
    * Used by {@link PresenterWidget#setInSlot(Object, PresenterWidget)} and
    * {@link PresenterWidget#clearSlot(Object)}.
-   * 
+   *
    * @param slot An opaque object indicating the slot to add into.
    * @param content The content to add, a {@link Widget}. Pass {@code null} to
    *          clear the slot entirely.
