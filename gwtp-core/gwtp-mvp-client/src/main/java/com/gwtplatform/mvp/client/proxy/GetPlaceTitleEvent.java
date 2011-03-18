@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,7 +26,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * <b>Important!</b> You should never fire that event directly. Instead, use
  * {@link PlaceManager#getCurrentTitle(SetPlaceTitleHandler)} or
  * {@link PlaceManager#getTitle(int, SetPlaceTitleHandler)}.
- *
+ * 
  * @author Philippe Beaudoin
  */
 public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
@@ -39,7 +39,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
    * <p />
    * <b>Important!</b> You should never fire that event directly. See
    * {@link GetPlaceTitleEvent} for details.
-   *
+   * 
    * @param source The source that fires this event ({@link HasHandlers}).
    * @param request The {@link PlaceRequest} for which to obtain the title.
    * @param handler The {@link SetPlaceTitleHandler} that will be invoked when
@@ -90,7 +90,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
   /**
    * Checks if the event was handled. If it was, then it should not be processed
    * further.
-   *
+   * 
    * @return {@code true} if the event was handled. {@code false} otherwise.
    */
   public boolean isHandled() {

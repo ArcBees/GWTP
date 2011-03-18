@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -24,9 +24,9 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
 /**
  * A {@link Presenter} that can display many tabs and the content of one of these tabs.
- * Note that this presenter is only meant to be used when the content are themselves
+ * Note that this presenter is only meant to be used when the content are themselves 
  * {@link Presenter}, if they are {@link PresenterWidget} then no special mechanism is
- * required and you can rely on a standard widget.
+ * required and you can rely on a standard widget. 
  * <p />
  * Classes extending {@link TabContainerPresenter} must declare one constant of type
  * {@link com.google.gwt.event.shared.GwtEvent.Type Type&lt;RequestTabsHandler&gt;}
@@ -34,30 +34,30 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * For example:
  * <pre>
  *{@literal @}RequestTabs
- * public static final Type&lt;RequestTabsHandler&gt; TYPE_RequestTabs =
+ * public static final Type&lt;RequestTabsHandler&gt; TYPE_RequestTabs = 
  *   new Type&lt;RequestTabsHandler&gt;();
  * </pre>
  * {@link Presenter} meant to appear within a {@link TabContainerPresenter} main
- * content area should be associated to a
+ * content area should be associated to a 
  * {@link com.gwtplatform.mvp.client.proxy.TabContentProxy TabContentProxy}
  * or a {@link com.gwtplatform.mvp.client.proxy.TabContentProxyPlace TabContentProxyPlace}.
  *
  * @param <V> The specific type of the {@link View}. Must implement {@link TabPanel}.
  * @param <Proxy_> The specific type of the {@link Proxy}.
- *
+ * 
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
 public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends Proxy<?>> extends Presenter<V, Proxy_> {
   private final Type<RequestTabsHandler> requestTabsEventType;
   private final Object tabContentSlot;
-
+  
   /**
    * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
-   * only work when instantiating this object using Guice/GIN dependency injection.
+   * only work when instantiating this object using Guice/GIN dependency injection. 
    * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
    * automatic binding.
-   *
+   * 
    * @param eventBus The {@link EventBus}.
    * @param view The {@link View}.
    * @param proxy The {@link Proxy}.
@@ -74,20 +74,20 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
   }
 
   /**
-   * Adds a new tab to this presenter. This is meant to be called by a
+   * Adds a new tab to this presenter. This is meant to be called by a 
    * {@link TabContentProxy} in response to a {@link RequestTabsEvent}.
-   *
+   * 
    * @param tabProxy The {@link TabContentProxy} containing information on the tab to add.
    * @return The newly added {@link Tab}.
    */
   public Tab addTab(final TabContentProxy<?> tabProxy) {
     return getView().addTab(tabProxy.getTabData(), tabProxy.getTargetHistoryToken());
   }
-
+  
   @Override
   public void setInSlot(Object slot, PresenterWidget<?> content) {
     super.setInSlot(slot, content);
-
+    
     // TODO: Consider switching this to an event bus based mechanism where the
     // child presenter fires an event when it is revealed and the parent highlights the tab.
 
@@ -99,10 +99,10 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
         getView().setActiveTab(proxy.getTab());
       } catch (Exception e) {
         // We can't cast, no worry, we just won't highlight a tab
-      }
+      }      
     }
   }
-
+  
   @Override
   protected void onBind() {
     super.onBind();

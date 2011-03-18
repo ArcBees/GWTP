@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,25 +21,25 @@ import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * Event fired after navigation has occurred. It will not be fired if navigation is
- * refused through {@link PlaceManager#setOnLeaveConfirmation}, instead
+ * refused through {@link PlaceManager#setOnLeaveConfirmation}, instead 
  * {@link NavigationRefusedEvent} will.
  * <p />
  * Instead of registering your presenter towards this event, consider overriding
  * {@link com.gwtplatform.mvp.client.PresenterWidget#onReset()}. From there
  * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the
  * {@link PlaceRequest}.
- *
+ * 
  * @see NavigationRefusedEvent
- *
+ * 
  * @author Philippe Beaudoin
  */
 public final class NavigationEvent extends GwtEvent<NavigationHandler> {
   private static final Type<NavigationHandler> TYPE = new Type<NavigationHandler>();
-
+  
   /**
-   * Fires a {@link NavigationEvent}
+   * Fires a {@link NavigationEvent} 
    * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
-   *
+   * 
    * @param source The source that fires this event ({@link HasHandlers}).
    */
   public static void fire(final HasHandlers source, PlaceRequest request) {
@@ -56,7 +56,7 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
    * Create a navigation event and attach it to a place request. You can pass
    * {@code null} as a request if it's unknown, for example when revealing a
    * default place or an error place.
-   *
+   * 
    * @param request The {@link PlaceRequest}.
    */
   public NavigationEvent(PlaceRequest request) {
@@ -70,7 +70,7 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
 
   /**
    * Access the {@link PlaceRequest} that triggered that navigation event.
-   *
+   * 
    * @return The {@link PlaceRequest} or {@code null} if no place request is
    *         known.
    */

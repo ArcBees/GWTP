@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 /**
  * Collection of utility methods.
- *
+ * 
  * @author Philippe Beaudoin
  */
 public class Utils {
@@ -32,7 +32,7 @@ public class Utils {
    * Logs an entire stack trace to the logger, so that it can easily be viewed
    * in the App Engine log. The exception will be logged as a severe error. See
    * also {@link #logStackTrace(Logger, Level, Throwable)}.
-   *
+   * 
    * @param log The {@link Logger} to use.
    * @param e The {@link Exception} with the stack trace to log.
    */
@@ -43,7 +43,7 @@ public class Utils {
   /**
    * Logs an entire stack trace to the logger, so that it can easily be viewed
    * in the App Engine log.
-   *
+   * 
    * @param log The {@link Logger} to use.
    * @param level The {@link Level} at which to log the stac trace.
    * @param e The {@link Exception} with the stack trace to log.

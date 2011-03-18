@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -44,13 +44,13 @@ import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerR
  * <p />
  * If you don't need XSRF protection, you can use directly this module with your
  * {@link com.google.gwt.inject.client.Ginjector}, i.e.:
- *
+ * 
  * <pre>
- * {@literal @}GinModules( { {@link DispatchAsyncModule}.class, ... }
+ * {@literal @}GinModules( { {@link DispatchAsyncModule}.class, ... } 
  * </pre>
  * For customization, skip the previous step and install the module in one of
  * your {@link #configure()} methods:
- *
+ * 
  * <pre>
  * install(new DispatchAsyncModule.Builder().exceptionHandler(
  *     MyExceptionHandler.class).sessionAccessor(
@@ -58,7 +58,7 @@ import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerR
  * </pre>
  * You can pass {@code null} as any of the two parameter to fallback to the
  * default.
- *
+ * 
  * @author David Peterson
  * @author Philippe Beaudoin
  * @author Brendan Doherty
@@ -70,11 +70,11 @@ public class DispatchAsyncModule extends AbstractGinModule {
 
   /**
    * A {@link DispatchAsyncModule} builder.
-   *
+   * 
    * By default, this builder configures the {@link DispatchAsyncModule} to use
    * {@link DefaultExceptionHandler}, {@link DefaultSecurityCookieAccessor}, and
    * {@link DefaultClientActionHandlerRegistry}.
-   *
+   * 
    * @author Brendan Doherty
    */
   public static class Builder {
@@ -91,7 +91,7 @@ public class DispatchAsyncModule extends AbstractGinModule {
 
     /**
      * Specify an alternative exception handler.
-     *
+     * 
      * @param exceptionHandlerType The {@link ExceptionHandler} class.
      * @return a {@link Builder} object.
      */
@@ -103,7 +103,7 @@ public class DispatchAsyncModule extends AbstractGinModule {
 
     /**
      * Specify an alternate session accessor.
-     *
+     * 
      * @param sessionAccessorType The {@link SecurityCookieAccessor} class.
      * @return a {@link Builder} object.
      */
@@ -115,7 +115,7 @@ public class DispatchAsyncModule extends AbstractGinModule {
 
     /**
      * Specify an alternate client action handler registry.
-     *
+     * 
      * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
      * @return a {@link Builder} object.
      */

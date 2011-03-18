@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,18 +21,18 @@ package com.gwtplatform.mvp.client;
  * can attach its {@link UiHandlers}. <b>Important</b>, when using this interface,
  * you should always call {@link #setUiHandlers(UiHandlers)} from your presenter
  * constructor.
- *
+ * 
  * @param <C> Your {@link UiHandlers} interface type.
- *
+ * 
  * @author Christian Goudreau
  */
 public interface HasUiHandlers<C extends UiHandlers> {
 
   /**
    * Sets the {@link UiHandlers} subclass associated with this object.
-   *
+   * 
    * @param uiHandlers The {@link UiHandlers} subclass (of type {@code C}) to associate with this object.
    */
   void setUiHandlers(C uiHandlers);
-
+  
 }

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -40,10 +40,10 @@ import java.io.PrintWriter;
 
 /**
  * Generator for implementations of
- * {@link com.google.gwt.uibinder.client.UiBinder}. This
+ * {@link com.google.gwt.uibinder.client.UiBinder}. This 
  * is a slightly modified version of {@link UiBinderGenerator}
- * that allows fields to be instantiated using gin dependency
- * injection. Modifications are clearly indicated by
+ * that allows fields to be instantiated using gin dependency 
+ * injection. Modifications are clearly indicated by 
  * {@code MODIFICATION} comments.
  * <p />
  * To use this you need to use the following in your module file:
@@ -53,9 +53,9 @@ import java.io.PrintWriter;
  * by defining a {@code gin.gingector} configuration property. For example:
  * <pre> &lt;define-configuration-property name="gin.ginjector" is-multi-valued="false" /&gt;
  * &lt;set-configuration-property name="gin.ginjector" value="com.mycompany.project.client.MyGinjector" /&gt;</pre>
- * Finally, you need to make sure every widget that participates in dependency
- * injection can be created via a method of your ginjector interface.
- *
+ * Finally, you need to make sure every widget that participates in dependency 
+ * injection can be created via a method of your ginjector interface. 
+ * 
  * @author Google
  * @author Philippe Beaudoin (philippe.beaudoin@gmail.com)
  */
@@ -112,7 +112,7 @@ public class GinUiBinderGenerator extends Generator {
   public String generate(TreeLogger logger, GeneratorContext genCtx,
       String fqInterfaceName) throws UnableToCompleteException {
     TypeOracle oracle = genCtx.getTypeOracle();
-    ResourceOracle resourceOracle = genCtx.getResourcesOracle();
+    ResourceOracle resourceOracle = genCtx.getResourcesOracle();    
 
     JClassType interfaceType;
     try {
@@ -159,10 +159,10 @@ public class GinUiBinderGenerator extends Generator {
         templatePath, interfaceType.getPackage().getName(), implName);
 
     FieldManager fieldManager = getFieldManager(logger, oracle,
-        propertyOracle); // MODIFICATION
-
+        propertyOracle); // MODIFICATION    
+    
     UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName,
-        templatePath, oracle, logger,
+        templatePath, oracle, logger, 
         fieldManager, // MODIFICATION
         messages, designTime, uiBinderCtx);
 
@@ -181,7 +181,7 @@ public class GinUiBinderGenerator extends Generator {
     writerManager.commit();
   }
 
-  // BEGIN MODIFICATION
+  // BEGIN MODIFICATION 
   private FieldManager getFieldManager(MortalLogger logger,
       TypeOracle oracle, PropertyOracle propertyOracle)
       throws UnableToCompleteException {
@@ -191,7 +191,7 @@ public class GinUiBinderGenerator extends Generator {
     try {
       String ginjectorClassName = propertyOracle.getConfigurationProperty(
           "gin.ginjector").getValues().get(0);
-
+      
 
       JClassType ginjectorClass = oracle.findType(ginjectorClassName);
       if (ginjectorClass == null
@@ -199,17 +199,17 @@ public class GinUiBinderGenerator extends Generator {
         logger.die(
             "The configuration property 'gin.ginjector' is '%s' "
                 + " which doesn't identify a type inheriting from 'Ginjector'.", ginjectorClassName );
-      }
-      fieldManager = new GinFieldManager(oracle, logger, ginjectorClass);
+      }      
+      fieldManager = new GinFieldManager(oracle, logger, ginjectorClass); 
 
     } catch (BadPropertyValueException e) {
       logger.warn(
           "The configuration property 'gin.ginjector' was not found, it is required to use " +
           "gin injection for UiBinder fields. If you don't need this consider using " +
           "UiBinder.gwt.xml instead of GinUiBinder.gwt.xml in your module." );
-      fieldManager = new FieldManager(oracle, logger);
+      fieldManager = new FieldManager(oracle, logger); 
     }
-
+    
     return fieldManager;
   }
   // END MODIFICATION
