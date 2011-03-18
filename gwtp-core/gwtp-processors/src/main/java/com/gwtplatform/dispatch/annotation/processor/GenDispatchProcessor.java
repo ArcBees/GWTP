@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -42,7 +42,7 @@ import com.gwtplatform.dispatch.annotation.Out;
  * <p/>
  * {@link GenDispatchProcessor} should only ever be called by tool infrastructure. See
  * {@link javax.annotation.processing.Processor} for more details.
- * 
+ *
  * @author Brendan Doherty
  * @author Florian Sauter
  * @author Stephen Haberman (concept)
@@ -107,8 +107,8 @@ public class GenDispatchProcessor extends AbstractProcessor {
           "com.gwtplatform.dispatch.shared.Action"
       );
 
-      writer.generateClassHeader(dispatchActionSimpleName, null, 
-          "Action<" + dispatchElementSimpleName + "Result>", 
+      writer.generateClassHeader(dispatchActionSimpleName, null,
+          "Action<" + dispatchElementSimpleName + "Result>",
           extraActionInterfaces
       );
 
@@ -118,19 +118,19 @@ public class GenDispatchProcessor extends AbstractProcessor {
       Collection<VariableElement> optionalFields = reflection.sortFields(In.class, reflection.getOptionalFields(In.class));
       Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getInFields());
       requiredFields.removeAll(optionalFields);
-      
+
       writer.generateConstructorUsingFields(dispatchActionSimpleName, allFields);
-      
+
       if (optionalFields.size() > 0) {
         writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields);
       }
-      
+
       if (!allFields.isEmpty() && requiredFields.size() > 0) {
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
       }
-      
+
       writer.generateFieldAccessors(annotatedInFields);
-      
+
       generateServiceNameAccessor(writer, dispatchElementSimpleName, serviceName);
 
       generateIsSecuredMethod(writer, isSecure);
@@ -165,11 +165,11 @@ public class GenDispatchProcessor extends AbstractProcessor {
       Collection<VariableElement> annotatedOutFields = reflection.getOutFields();
 
       writer.generatePackageDeclaration(reflection.getPackageName());
-      
+
       writer.generateImports("com.gwtplatform.dispatch.shared.Result");
-      
-      writer.generateClassHeader(dispatchResultSimpleName, null, 
-          "Result", 
+
+      writer.generateClassHeader(dispatchResultSimpleName, null,
+          "Result",
           extraResultInterfaces
       );
 
@@ -179,17 +179,17 @@ public class GenDispatchProcessor extends AbstractProcessor {
       Collection<VariableElement> optionalFields = reflection.sortFields(Out.class, reflection.getOptionalFields(Out.class));
       Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getOutFields());
       requiredFields.removeAll(optionalFields);
-      
+
       writer.generateConstructorUsingFields(dispatchResultSimpleName, allFields);
-      
+
       if (optionalFields.size() > 0) {
         writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields);
       }
-      
+
       if (!allFields.isEmpty() && requiredFields.size() > 0) {
         writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
       }
-      
+
       writer.generateFieldAccessors(annotatedOutFields);
 
       writer.generateEquals(dispatchResultSimpleName, annotatedOutFields);
@@ -208,7 +208,7 @@ public class GenDispatchProcessor extends AbstractProcessor {
       }
     }
   }
-  
+
   protected void generateIsSecuredMethod(GenerationHelper writer, boolean isSecure) {
     writer.println();
     writer.println("  @Override");
@@ -216,7 +216,7 @@ public class GenDispatchProcessor extends AbstractProcessor {
     writer.println("    return " + isSecure + ";");
     writer.println("  }");
   }
-  
+
   protected void generateServiceNameAccessor(GenerationHelper writer, String simpleClassName, String serviceName) {
     writer.println();
     writer.println("  @Override");

@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -49,12 +49,12 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * choice depends on whether your presenter works as a
  * {@link com.google.gwt.user.client.ui.Panel} or as a
  * {@link com.google.gwt.user.client.ui.LayoutPanel}.
- * 
+ *
  * @author Philippe Beaudoin
  */
 public class RootPresenter extends
     PresenterWidget<RootPresenter.RootView> implements
-    ResetPresentersHandler, RevealRootContentHandler, 
+    ResetPresentersHandler, RevealRootContentHandler,
     RevealRootLayoutContentHandler, RevealRootPopupContentHandler,
     LockInteractionHandler {
 
@@ -69,7 +69,7 @@ public class RootPresenter extends
      * The glass element.
      */
     private Element glass;
-    
+
     @Override
     public Widget asWidget() {
       assert false : "Root view has no widget, you should never call asWidget()";
@@ -106,14 +106,14 @@ public class RootPresenter extends
 
     public void lockScreen() {
       ensureGlass();
-      Document.get().getBody().appendChild(glass);      
+      Document.get().getBody().appendChild(glass);
     }
 
     public void unlockScreen() {
       ensureGlass();
-      Document.get().getBody().removeChild(glass);      
+      Document.get().getBody().removeChild(glass);
     }
-    
+
     public void ensureGlass() {
       if (glass == null) {
         glass = Document.get().createDivElement();
@@ -135,7 +135,7 @@ public class RootPresenter extends
 
   /**
    * Creates a proxy class for a presenter that can contain tabs.
-   * 
+   *
    * @param eventBus The event bus.
    */
   @Inject
@@ -155,7 +155,7 @@ public class RootPresenter extends
     addRegisteredHandler(RevealRootLayoutContentEvent.getType(), this);
 
     addRegisteredHandler(RevealRootPopupContentEvent.getType(), this);
-    
+
     addRegisteredHandler(LockInteractionEvent.getType(), this);
   }
 
@@ -179,7 +179,7 @@ public class RootPresenter extends
     getView().setUsingRootLayoutPanel(true);
     setInSlot(rootSlot, revealContentEvent.getContent());
   }
-  
+
   @Override
   public void onRevealRootPopupContent(
       final RevealRootPopupContentEvent revealContentEvent) {
@@ -191,7 +191,7 @@ public class RootPresenter extends
     if (lockInteractionEvent.shouldLock()) {
       getView().lockScreen();
     } else {
-      getView().unlockScreen();      
+      getView().unlockScreen();
     }
   }
 

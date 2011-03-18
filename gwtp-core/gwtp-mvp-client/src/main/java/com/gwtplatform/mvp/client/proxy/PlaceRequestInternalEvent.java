@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -20,7 +20,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 
 /**
- * 
+ *
  * This event is fired by the {@link PlaceManager} whenever a new place is
  * requested, either by history navigation or directly.
  * <p />
@@ -31,22 +31,22 @@ import com.google.gwt.event.shared.HasHandlers;
  * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest)}</li>
  * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest, int)}</li>
  * </ul>
- * 
+ *
  * @author David Peterson
  * @author Philippe Beaudoin
- * 
+ *
  */
 class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
   private static Type<PlaceRequestInternalHandler> TYPE;
 
   /**
-   * Fires a {@link PlaceRequestInternalEvent} 
-   * into a source that has access to an {@com.google.gwt.event.shared.EventBus}. 
+   * Fires a {@link PlaceRequestInternalEvent}
+   * into a source that has access to an {@com.google.gwt.event.shared.EventBus}.
    * <p />
-   * <b>Important!</b> You should not fire that event directly, see 
+   * <b>Important!</b> You should not fire that event directly, see
    * {@link PlaceRequestInternalEvent} for more details.
-   * 
+   *
    * @param source The source that fires this event ({@link HasHandlers}).
    * @param request The request.
    */
@@ -88,7 +88,7 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
   /**
    * Checks if the user was authorized to see the page.
-   * 
+   *
    * @return {@code true} if the user was authorized. {@code false} otherwise.
    */
   public boolean isAuthorized() {
@@ -98,7 +98,7 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
   /**
    * Checks if the event was handled. If it was, then it should not be processed
    * further.
-   * 
+   *
    * @return {@code true} if the event was handled. {@code false} otherwise.
    */
   public boolean isHandled() {

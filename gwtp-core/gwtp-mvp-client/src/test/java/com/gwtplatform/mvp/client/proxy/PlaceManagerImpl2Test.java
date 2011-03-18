@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -40,7 +40,7 @@ import org.mockito.stubbing.Answer;
 
 /**
  * Unit tests for {@link PlaceManagerImpl}.
- * 
+ *
  * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
@@ -60,11 +60,11 @@ public class PlaceManagerImpl2Test {
 
   // SUT
   @Inject PlaceManager placeManager;
-  
+
   @Inject DeferredCommandManager deferredCommandManager;
   @Inject EventBus eventBus;
   @Inject PlaceManagerWindowMethods gwtWindowMethods;
-  
+
   @Test
   public void placeManagerUserCallUpdateHistoryWhenRevealingPlace() {
     // Given
@@ -81,17 +81,17 @@ public class PlaceManagerImpl2Test {
         return null;
       }
     }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
-    
+
     // When
     placeManager.revealPlace(new PlaceRequest("dummyNameToken"));
     deferredCommandManager.pump();
-    
+
     // Then
     PlaceRequest placeRequest = placeManager.getCurrentPlaceRequest();
     assertEquals("dummyNameToken", placeRequest.getNameToken());
     assertEquals(1, placeRequest.getParameterNames().size());
     assertEquals("dummyValue", placeRequest.getParameter("dummyParam", null));
-    
+
     verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
   }
 }
