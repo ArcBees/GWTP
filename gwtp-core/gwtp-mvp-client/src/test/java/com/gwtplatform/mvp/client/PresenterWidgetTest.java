@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -38,12 +38,12 @@ import com.google.inject.name.Named;
 
 /**
  * Unit tests for {@link PresenterWidget}.
- *
+ * 
  * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
 public class PresenterWidgetTest {
-
+   
   /**
    * Guice test module.
    */
@@ -54,7 +54,7 @@ public class PresenterWidgetTest {
       forceMock(Widget.class);
     }
   }
-
+  
   // Simple subclasses of PresenterWidget
   abstract static class PresenterWidgetSpy<V extends View> extends
       PresenterWidget<V> {
@@ -84,7 +84,7 @@ public class PresenterWidgetTest {
       onRevealMethodCalled++;
     }
   }
-
+  
   @TestSingleton
   static class PresenterWidgetA extends PresenterWidgetSpy<View> {
     @Inject
@@ -92,7 +92,7 @@ public class PresenterWidgetTest {
       super(eventBus, view);
     }
   }
-
+  
   @TestSingleton
   static class PresenterWidgetB extends PresenterWidgetSpy<View> {
     @Inject
@@ -100,7 +100,7 @@ public class PresenterWidgetTest {
       super(eventBus, view);
     }
   }
-
+  
   @TestSingleton
   static class PresenterWidgetC extends PresenterWidgetSpy<View> {
     @Inject
@@ -116,7 +116,7 @@ public class PresenterWidgetTest {
       super(eventBus, view);
     }
   }
-
+  
   @TestSingleton
   static class PresenterWidgetPopupC extends PresenterWidgetSpy<PopupView> {
     @Inject
@@ -135,7 +135,7 @@ public class PresenterWidgetTest {
   @Inject @Named("C") View viewC;
   @Inject @Named("PopupB") PopupView popupViewB;
   @Inject @Named("PopupC") PopupView popupViewC;
-
+  
   @Before
   public void arrange() {
     when(viewA.asWidget()).thenReturn(widgetA);
@@ -144,7 +144,7 @@ public class PresenterWidgetTest {
     when(popupViewB.asWidget()).thenReturn(widgetPopupB);
     when(popupViewC.asWidget()).thenReturn(widgetPopupC);
   }
-
+  
   @Test
   public void onRevealMakesPresenterWidgetVisible(
       PresenterWidgetA presenterWidget) {
@@ -166,7 +166,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testAddCenteredPopupOnInitiallyInvisiblePresenter(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetPopupB popupContentB,
       PresenterWidgetPopupC popupContentC) {
 
@@ -214,7 +214,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testAddCenteredPopupOnInitiallyVisiblePresenter(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetPopupB popupContentB,
       PresenterWidgetPopupC popupContentC) {
 
@@ -267,7 +267,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testAddToSlotToSlot(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
       PresenterWidgetC contentC) {
 
@@ -298,7 +298,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testAddUncenteredPopupOnInitiallyInvisiblePresenter(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetPopupB popupContentB,
       PresenterWidgetPopupC popupContentC) {
     // Given
@@ -346,7 +346,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testClearContentInSlot(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB) {
     // Given
     Object slotB = new Object();
@@ -370,7 +370,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testRemoveFromSlotFromSlot(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
       PresenterWidgetC contentC) {
     // Given
@@ -391,7 +391,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter1(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
       PresenterWidgetC contentCinB) {
     // Given
@@ -431,7 +431,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter2(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
       PresenterWidgetC contentCinB) {
     // Given
@@ -474,7 +474,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSetInSlotHierarchyInEmptySlotOnInitiallyVisiblePresenter(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
       PresenterWidgetC contentCinB) {
 
@@ -507,7 +507,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSetInSlotInEmptySlotOnInitiallyInvisiblePresenter(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
       PresenterWidgetC contentC) {
     // Given
@@ -546,7 +546,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSetInSlotInEmptySlotOnInitiallyVisiblePresenter(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB,
       PresenterWidgetC contentC) {
     // Given
@@ -577,7 +577,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSetNullContentInSlot(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB contentB) {
     // Given
     Object slotB = new Object();
@@ -601,7 +601,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSwitchPopupToAnotherPresenter1(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
       PresenterWidgetPopupC popupContentC) {
     // Given
@@ -619,7 +619,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSwitchPopupToAnotherPresenter2(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
       PresenterWidgetPopupC popupContentC) {
     // Given
@@ -638,7 +638,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSwitchPresenterWidgetToAnotherPresenter1(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
       PresenterWidgetC contentC) {
     // Given
@@ -658,7 +658,7 @@ public class PresenterWidgetTest {
 
   @Test
   public void testSwitchPresenterWidgetToAnotherPresenter2(
-      PresenterWidgetA presenterWidgetA,
+      PresenterWidgetA presenterWidgetA, 
       PresenterWidgetB presenterWidgetB,
       PresenterWidgetC contentC) {
     // Given

@@ -1,12 +1,12 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -41,7 +41,7 @@ import java.util.Set;
  * </ul>
  * The separators (';' and '=') can be modified in
  * {@link ParameterTokenFormatter}.
- *
+ * 
  * @author David Peterson
  * @author Philippe Beaudoin
  */
@@ -56,7 +56,7 @@ public class PlaceRequest {
    * typically use {@link #PlaceRequest(String)} and specify the name token.
    * However, this version is acceptable when calling
    * {@link Proxy#reveal(PlaceRequest)}. You can later add parameters by doing:
-   *
+   * 
    * <pre>
    *   PlaceRequest request = newRequest.with(key1, param1)
    *                                    .with(key2, param2);
@@ -76,12 +76,12 @@ public class PlaceRequest {
   /**
    * Builds a request with the specified name token and without parameters. You
    * can later add parameters by doing:
-   *
+   * 
    * <pre>
    *   PlaceRequest request = newRequest.with(key1, param1)
    *                                    .with(key2, param2);
    * </pre>
-   *
+   * 
    * @param nameToken The name token for the request.
    */
   public PlaceRequest(String nameToken) {
@@ -98,7 +98,7 @@ public class PlaceRequest {
   /**
    * Builds a place request that copies all the parameters of the passed request
    * and adds a new parameter.
-   *
+   * 
    * @param req The {@link PlaceRequest} to copy.
    * @param name The new parameter name.
    * @param value The new parameter value.
@@ -140,7 +140,7 @@ public class PlaceRequest {
 
   /**
    * Extracts a given parameter from the {@link PlaceRequest}.
-   *
+   * 
    * @param key The name of the parameter.
    * @param defaultValue The value returned if the parameter is not found.
    * @return The value of the parameter if found, the {@code defaultValue}
@@ -161,7 +161,7 @@ public class PlaceRequest {
 
   /**
    * Retrieves all the parameters available with the request.
-   *
+   * 
    * @return A {@link Set} containing all the parameter names.
    */
   public Set<String> getParameterNames() {
@@ -183,7 +183,7 @@ public class PlaceRequest {
 
   /**
    * Checks if this place request has the same name token as the one passed in.
-   *
+   * 
    * @param other The {@link PlaceRequest} to check against.
    * @return <code>true</code> if both requests share the same name token.
    *         <code>false</code> otherwise.
@@ -197,7 +197,7 @@ public class PlaceRequest {
 
   /**
    * Checks if this place request matches the name token passed.
-   *
+   * 
    * @param nameToken The name token to match.
    * @return <code>true</code> if the request matches. <code>false</code>
    *         otherwise.
@@ -213,7 +213,7 @@ public class PlaceRequest {
    * Returns a new instance of the request with the specified parameter name and
    * value. If a parameter with the same name was previously specified, the new
    * request contains the new value.
-   *
+   * 
    * @param name The new parameter name.
    * @param value The new parameter value.
    * @return The new place request instance.

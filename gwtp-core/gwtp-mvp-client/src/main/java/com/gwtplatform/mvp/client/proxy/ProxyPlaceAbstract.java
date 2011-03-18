@@ -1,45 +1,52 @@
 /**
  * Copyright 2010 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.gwtplatform.mvp.client.proxy;
+
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+
 import com.gwtplatform.mvp.client.Presenter;
+
 /**
  * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
  * You can usually inherit from the simpler form {@link ProxyPlace}.
  * <p />
- *
+ * 
  * @param <P> The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
- *
+ * 
  * @author David Peterson
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
 public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>>
     implements ProxyPlace<P> {
+
   protected ProxyFailureHandler failureHandler;
   protected Place place;
   protected PlaceManager placeManager;
   protected Proxy_ proxy;
+  
   private EventBus eventBus;
+
   /**
    * Creates a {@link ProxyPlaceAbstract}. That is, the {@link Proxy} of a
    * {@link Presenter} attached to a {@link Place}. This presenter can be
@@ -48,61 +55,76 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    */
   public ProxyPlaceAbstract() {
   }
+
   @Override
   public boolean canReveal() {
     return place.canReveal();
   }
+
   // /////////////////////
   // Inherited from Proxy
+
   @Override
   public final boolean equals(Object o) {
     return place.equals(o);
   }
+
   @Override
   public void fireEvent(GwtEvent<?> event) {
     getEventBus().fireEventFromSource(event, this);
   }
+
   @Override
   public final EventBus getEventBus() {
     return eventBus;
   }
+
   @Override
   public String getNameToken() {
     return place.getNameToken();
   }
+
   // /////////////////////
   // Inherited from Place
+
   @Override
   public void getPresenter(AsyncCallback<P> callback) {
     proxy.getPresenter(callback);
   }
+
   @Override
   public void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback) {
     proxy.getRawPresenter(callback);
   }
+
   @Override
   public final int hashCode() {
     return place.hashCode();
   }
+
   @Override
   public boolean matchesRequest(PlaceRequest request) {
     return place.matchesRequest(request);
   }
+
   // /////////////////////
   // Protected methods that can be overridden
+
   @Override
   public final String toString() {
     return place.toString();
   }
+
   // /////////////////////
   // Private methods
+
   /**
    * Injects the various resources and performs other bindings.
    * <p />
    * Never call directly, it should only be called by GIN. Method injection is
    * used instead of constructor injection, because the latter doesn't work well
    * with GWT generators.
-   *
+   * 
    * @param failureHandler The {@link ProxyFailureHandler}.
    * @param placeManager The {@link PlaceManager}.
    * @param eventBus The {@link EventBus}.
@@ -148,33 +170,37 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
           }
         });
   }
+
   /**
    * Obtains the title for this place and invoke the passed handler when the
    * title is available. By default, places don't have a title and will invoke
    * the handler with {@code null}, but override this method to provide your own
    * title.
-   *
+   * 
    * @param event The {@link GetPlaceTitleEvent} to invoke once the title is
    *          available.
    */
   protected void getPlaceTitle(GetPlaceTitleEvent event) {
     event.getHandler().onSetPlaceTitle(null);
   }
+
   /**
    * Prepares the presenter with the information contained in the current
    * request, then reveals it. Will refuse to reveal the display and do nothing
    * if {@link #canReveal()} returns <code>false</code>.
-   *
+   * 
    * @param request The request to handle. Can pass <code>null</code> if no
    *          request is used, in which case the presenter will be directly
    *          revealed.
    */
   private void handleRequest(final PlaceRequest request) {
     proxy.getPresenter(new AsyncCallback<P>() {
+
       @Override
       public void onFailure(Throwable caught) {
         failureHandler.onFailedGetPresenter(caught);
       }
+
       @Override
       public void onSuccess(final P presenter) {
         // Everything should be bound before we prepare the presenter from the
@@ -200,10 +226,11 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
       }
     });
   }
+
   @Override
   public void manualReveal(Presenter<?, ?> presenter) {
     // Reveal only if there are no pending navigation requests
-    if (!placeManager.hasPendingNavigation()) {
+    if (!placeManager.hasPendingNavigation()) {    
       if (!presenter.isVisible()) {
         // This will trigger a reset in due time
         presenter.forceReveal();
@@ -214,17 +241,20 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
     }
     placeManager.unlock();
   }
+
   @Override
   public void manualRevealFailed() {
     placeManager.unlock();
   }
+
   /**
    * This method allows unit test to handle deferred command with a mechanism that doesn't
    * require a GWTTestCase.
-   *
+   * 
    * @param command The {@Command} to defer, see {@link DeferredCommand}.
    */
   void addDeferredCommand(Command command) {
     Scheduler.get().scheduleDeferred(command);
   }
+  
 }

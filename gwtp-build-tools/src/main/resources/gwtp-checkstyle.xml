@@ -201,10 +201,6 @@
     <property name="messageFormat" value=".*name.*"/>
     <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
   </module>
-  <module name="RegexpSingleline">
-    <property name="format" value="\s+$"/>
-    <property name="message" value="Line has trailing spaces."/>
-  </module>
   <module name="Header">
     <property name="fileExtensions" value="java"/>
     <property name="severity" value="error"/>
