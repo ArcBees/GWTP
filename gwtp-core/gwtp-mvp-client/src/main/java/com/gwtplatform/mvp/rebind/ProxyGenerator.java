@@ -43,11 +43,12 @@ public class ProxyGenerator extends Generator {
   public String generate(TreeLogger logger, GeneratorContext ctx,
       String requestedClass) throws UnableToCompleteException {
 
-    // Initializes dependencies
+    // Initialize dependencies
     TypeOracle oracle = ctx.getTypeOracle();
     classCollection = new ClassCollection(oracle);
     ginjectorInspector = new GinjectorInspector(classCollection, ctx, logger);
-    presenterInspector = new PresenterInspector(oracle, logger, classCollection, ginjectorInspector);
+    presenterInspector = new PresenterInspector(oracle, logger, classCollection,
+        ginjectorInspector);
     proxyOutputterFactory = new ProxyOutputterFactory(oracle, logger, classCollection,
         ginjectorInspector, presenterInspector);
 

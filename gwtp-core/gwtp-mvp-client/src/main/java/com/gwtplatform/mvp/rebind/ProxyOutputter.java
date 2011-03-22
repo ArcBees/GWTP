@@ -20,7 +20,8 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
- * TODO Document
+ * Interface of classes that are able to output the code of a specific
+ * type of proxy. Usually produced via {@link ProxyOutputterFactory}.
  *
  * @author Philippe Beaudoin
  */
@@ -64,12 +65,4 @@ public interface ProxyOutputter {
    * @param writer The {@link SourceWriter}.
    */
   void writeMethods(SourceWriter writer);
-
-  /**
-   * Access the name token associated with this proxy.
-   * TODO Try to remove this.
-   *
-   * @return The name token, {@code null} if none exists.
-   */
-  String getNameToken();
 }
