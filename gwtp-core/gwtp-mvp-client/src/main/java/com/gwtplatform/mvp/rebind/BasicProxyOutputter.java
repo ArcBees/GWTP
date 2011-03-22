@@ -24,7 +24,7 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
- * TODO Document
+ * Proxy outputter for a basic, non-place, non-tab-container proxy.
  *
  * @author Philippe Beaudoin
  */
@@ -57,16 +57,11 @@ public class BasicProxyOutputter extends ProxyOutputterBase {
   @Override
   void writeSubclassDelayedBind(SourceWriter writer) {
     presenterInspector.writeProviderAssignation(writer);
-    presenterInspector.writeSlotHandlers(writer);
+    presenterInspector.writeContentSlotHandlerRegistration(writer);
   }
 
   @Override
   String getSuperclassName() {
     return ClassCollection.proxyImplClassName;
-  }
-
-  @Override
-  public String getNameToken() {
-    return null;
   }
 }

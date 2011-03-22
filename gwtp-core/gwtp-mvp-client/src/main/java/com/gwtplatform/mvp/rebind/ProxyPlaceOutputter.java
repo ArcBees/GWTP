@@ -82,7 +82,6 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     return ClassCollection.proxyPlaceImplClassName;
   }
 
-  @Override
   public String getNameToken() {
     return nameToken;
   }
