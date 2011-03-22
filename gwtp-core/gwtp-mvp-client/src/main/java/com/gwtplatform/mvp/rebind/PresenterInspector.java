@@ -51,6 +51,7 @@ public class PresenterInspector {
   private final TreeLogger logger;
   private final ClassCollection classCollection;
   private final GinjectorInspector ginjectorInspector;
+  private final List<JField> contentSlots = new ArrayList<JField>();
 
   private JClassType presenterClass;
   private String presenterClassName;
@@ -58,6 +59,8 @@ public class PresenterInspector {
   private ProxyStandard proxyStandardAnnotation;
   private ProxyCodeSplit proxyCodeSplitAnnotation;
   private ProxyCodeSplitBundle proxyCodeSplitBundleAnnotation;
+  private String getPresenterMethodName;
+  private String bundleClassName;
 
   public PresenterInspector(TypeOracle oracle, TreeLogger logger,
       ClassCollection classCollection, GinjectorInspector ginjectorInspector) {
@@ -68,6 +71,8 @@ public class PresenterInspector {
   }
 
   /**
+   * TODO: Refactor
+   *
    * Initializes the presenter inspector given the annotation present on a proxy interface. The possible
    * annotations are {@link ProxyStandard}, {@link ProxyCodeSplit} or {@link ProxyCodeSplitBundle}.
    * If none are present the method returns {@code false} and no code should be generated.
@@ -86,7 +91,80 @@ public class PresenterInspector {
     proxyCodeSplitAnnotation = proxyInterface.getAnnotation(ProxyCodeSplit.class);
     proxyCodeSplitBundleAnnotation = proxyInterface.getAnnotation(ProxyCodeSplitBundle.class);
 
-    return shouldGenerate();
+    if (!shouldGenerate()) {
+      return false;
+    }
+
+    if (proxyStandardAnnotation != null) {
+      getPresenterMethodName = ginjectorInspector.findGetMethod(
+          classCollection.providerClass, presenterClass);
+
+      if (getPresenterMethodName == null) {
+        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
+            + "' does not have a get() method returning 'Provider<"
+            + presenterClassName + ">'. This is required when using @"
+            + ProxyStandard.class.getSimpleName() + ".", null);
+        throw new UnableToCompleteException();
+      }
+    } else if (proxyCodeSplitAnnotation != null) {
+      getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass, presenterClass);
+
+      if (getPresenterMethodName == null) {
+        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
+            + "' does not have a get() method returning 'AsyncProvider<"
+            + presenterClassName + ">'. This is required when using @"
+            + ProxyCodeSplit.class.getSimpleName() + ".", null);
+        throw new UnableToCompleteException();
+      }
+    } else {
+      assert proxyCodeSplitBundleAnnotation != null;
+
+      bundleClassName = proxyCodeSplitBundleAnnotation.bundleClass().getCanonicalName();
+      JClassType bundleClass = oracle.findType(bundleClassName);
+
+      if (bundleClass == null) {
+        logger.log(TreeLogger.ERROR,
+            "Cannot find the bundle class '" + bundleClassName
+                + ", used with @" + ProxyCodeSplitBundle.class.getSimpleName()
+                + " on presenter '" + presenterClassName + "'.", null);
+        throw new UnableToCompleteException();
+      }
+
+      // Find the appropriate get method in the Ginjector
+      getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass, bundleClass);
+
+      if (getPresenterMethodName == null) {
+        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
+            + "' does not have a get() method returning 'AsyncProvider<"
+            + bundleClassName + ">'. This is required when using @"
+            + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '"
+            + presenterClassName + "'.", null);
+        throw new UnableToCompleteException();
+      }
+    }
+
+    for (JField field : presenterClass.getFields()) {
+      ContentSlot annotation = field.getAnnotation(ContentSlot.class);
+      JParameterizedType parameterizedType = field.getType().isParameterized();
+      if (annotation != null) {
+        if (!field.isStatic()
+            || parameterizedType == null
+            || !parameterizedType.isAssignableTo(classCollection.typeClass)
+            || !parameterizedType.getTypeArgs()[0].isAssignableTo(classCollection.revealContentHandlerClass)) {
+          logger.log(
+              TreeLogger.WARN,
+              "Found the annotation @" + ContentSlot.class.getSimpleName()
+                  + " on the invalid field '" + presenterClassName + "." + field.getName()
+                  + "'. Field must be static and its type must be "
+                  + "Type<RevealContentHandler<?>>. Skipping this field.",
+              null);
+        } else {
+          contentSlots.add(field);
+        }
+      }
+    }
+
+    return true;
   }
 
   /**
@@ -104,120 +182,44 @@ public class PresenterInspector {
   }
 
   /**
-   * TODO Document and refactor.
+   * Writes the assignation into the {@code provider} field of
+   * {@link com.gwtplatform.mvp.client.proxy.ProxyImpl ProxyImpl}.
+   *
+   * TODO refactor
    */
-  public void writeProvider(SourceWriter writer)
-      throws UnableToCompleteException {
+  public void writeProviderAssignation(SourceWriter writer) {
 
-    // Create presenter provider and sets it in parent class
-    if (proxyCodeSplitAnnotation == null
-        && proxyCodeSplitBundleAnnotation == null) {
-      // StandardProvider
-
-      // Find the appropriate get method in the Ginjector
-      String methodName = ginjectorInspector.findGetMethod(classCollection.providerClass, presenterClass);
-
-      if (methodName == null) {
-        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
-            + "' does not have a get() method returning 'Provider<"
-            + presenterClassName + ">'. This is required when using @"
-            + ProxyStandard.class.getSimpleName() + ".", null);
-        throw new UnableToCompleteException();
-      }
-
+    if (proxyStandardAnnotation != null) {
       writer.println("presenter = new StandardProvider<" + presenterClassName
-          + ">( ginjector." + methodName + "() );");
+          + ">( ginjector." + getPresenterMethodName + "() );");
     } else if (proxyCodeSplitAnnotation != null) {
-      // CodeSplitProvider
-
-      // Find the appropriate get method in the Ginjector
-      String methodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass, presenterClass);
-
-      if (methodName == null) {
-        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
-            + "' does not have a get() method returning 'AsyncProvider<"
-            + presenterClassName + ">'. This is required when using @"
-            + ProxyCodeSplit.class.getSimpleName() + ".", null);
-        throw new UnableToCompleteException();
-      }
-
       writer.println("presenter = new CodeSplitProvider<" + presenterClassName
-          + ">( ginjector." + methodName + "() );");
+          + ">( ginjector." + getPresenterMethodName + "() );");
     } else {
-      // CodeSplitBundleProvider
-
-      String bundleClassName = proxyCodeSplitBundleAnnotation.bundleClass().getCanonicalName();
-      JClassType bundleClass = oracle.findType(bundleClassName);
-
-      if (bundleClass == null) {
-        logger.log(TreeLogger.ERROR,
-            "Cannot find the bundle class '" + bundleClassName
-                + ", used with @" + ProxyCodeSplitBundle.class.getSimpleName()
-                + " on presenter '" + presenterClassName + "'.", null);
-        throw new UnableToCompleteException();
-      }
-
-      // Find the appropriate get method in the Ginjector
-      String methodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass, bundleClass);
-
-      if (methodName == null) {
-        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
-            + "' does not have a get() method returning 'AsyncProvider<"
-            + bundleClassName + ">'. This is required when using @"
-            + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '"
-            + presenterClassName + "'.", null);
-        throw new UnableToCompleteException();
-      }
-
+      assert proxyCodeSplitBundleAnnotation != null;
       writer.println("presenter = new CodeSplitBundleProvider<"
           + presenterClassName + ", " + bundleClassName + ">( ginjector."
-          + methodName + "(), " + proxyCodeSplitBundleAnnotation.id() + ");");
+          + getPresenterMethodName + "(), " + proxyCodeSplitBundleAnnotation.id() + ");");
     }
   }
 
   /**
    * TODO Document and refactor.
    */
-  public void writeSlotHandlers(SourceWriter writer)
-      throws UnableToCompleteException {
-    // Register all RevealContentHandler for the @ContentSlot defined in the
-    // presenter
+  public void writeSlotHandlers(SourceWriter writer) {
+    // Register all RevealContentHandler for the @ContentSlot defined in the presenter
+    if (contentSlots.size() == 0) {
+      return;
+    }
+
     writer.println();
-    boolean noContentSlotFound = true;
-    for (JField field : presenterClass.getFields()) {
-      ContentSlot annotation = field.getAnnotation(ContentSlot.class);
-      JParameterizedType parameterizedType = field.getType().isParameterized();
-      if (annotation != null) {
-        if (!field.isStatic()
-            || parameterizedType == null
-            || !parameterizedType.isAssignableTo(classCollection.typeClass)
-            || !parameterizedType.getTypeArgs()[0].isAssignableTo(classCollection.revealContentHandlerClass)) {
-          logger.log(
-              TreeLogger.WARN,
-              "Found the annotation @"
-                  + ContentSlot.class.getSimpleName()
-                  + " on the invalid field '"
-                  + presenterClassName
-                  + "."
-                  + field.getName()
-                  + "'. Field must be static and its type must be Type<RevealContentHandler<?>>. Skipping this field.",
-              null);
-        } else {
-          if (noContentSlotFound) {
-            // First content slot, fill in the required information.
-            noContentSlotFound = false;
+    writer.println("RevealContentHandler<" + presenterClassName
+        + "> revealContentHandler = new RevealContentHandler<"
+        + presenterClassName + ">( failureHandler, this );");
 
-            // Create RevealContentHandler
-            writer.println();
-            writer.println("RevealContentHandler<" + presenterClassName
-                + "> revealContentHandler = new RevealContentHandler<"
-                + presenterClassName + ">( failureHandler, this );");
-          }
-
-          writer.println("getEventBus().addHandler( " + presenterClassName + "."
-              + field.getName() + ", revealContentHandler );");
-        }
-      }
+    for (JField field : contentSlots) {
+      writer.println("getEventBus().addHandler( " + presenterClassName + "."
+          + field.getName() + ", revealContentHandler );");
     }
   }
 
@@ -239,12 +241,13 @@ public class PresenterInspector {
 
   /**
    * TODO Document and refactor. Should probably look in the entire class hierarchy.
+   *
+   * @param proxyEvents The list into which to collect the proxy events.
    */
-  public List<ProxyEventDescription> findProxyEvents()
+  public void collectProxyEvents(List<ProxyEventDescription> proxyEvents)
       throws UnableToCompleteException {
 
     // Look for @ProxyEvent methods in the parent presenter
-    List<ProxyEventDescription> result = new ArrayList<ProxyEventDescription>();
     for (JMethod method : presenterClass.getMethods()) {
       ProxyEvent annotation = method.getAnnotation(ProxyEvent.class);
       if (annotation != null) {
@@ -389,7 +392,7 @@ public class PresenterInspector {
         }
 
         // Make sure that handler method name is not already used
-        for (ProxyEventDescription prevDesc : result) {
+        for (ProxyEventDescription prevDesc : proxyEvents) {
           if (prevDesc.handlerMethodName.equals(desc.handlerMethodName)
               && prevDesc.eventFullName.equals(desc.eventFullName)) {
             logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName
@@ -401,11 +404,9 @@ public class PresenterInspector {
           }
         }
 
-        result.add(desc);
+        proxyEvents.add(desc);
       }
     }
-
-    return result;
   }
 
   /**

@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.rebind;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -55,30 +56,34 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
   protected final ClassCollection classCollection;
   protected final GinjectorInspector ginjectorInspector;
   protected final PresenterInspector presenterInspector;
-  protected final ProxyOutputterBase parent;
+  private final List<ProxyEventDescription> proxyEvents = new ArrayList<ProxyEventDescription>();
 
   private JClassType proxyInterface;
-  private List<ProxyEventDescription> proxyEvents;
 
   ProxyOutputterBase(TypeOracle oracle,
       TreeLogger logger,
       ClassCollection classCollection,
       GinjectorInspector ginjectorInspector,
-      PresenterInspector presenterInspector,
-      ProxyOutputterBase parent) {
+      PresenterInspector presenterInspector) {
     this.oracle = oracle;
     this.logger = logger;
     this.classCollection = classCollection;
     this.ginjectorInspector = ginjectorInspector;
     this.presenterInspector = presenterInspector;
-    this.parent = parent;
   }
 
-  @Override
-  public final void init(JClassType proxyInterface) throws UnableToCompleteException {
+  /**
+   * Initializes this proxy outputter given the specified proxy interface.
+   * You should still call {@link #findProxyEvents()} after that if you
+   * want this outputter to forward any proxy event.
+   */
+  public void init(JClassType proxyInterface) throws UnableToCompleteException {
     this.proxyInterface = proxyInterface;
-    proxyEvents = presenterInspector.findProxyEvents();
     initSubclass(proxyInterface);
+  }
+
+  public void findProxyEvents() throws UnableToCompleteException {
+    presenterInspector.collectProxyEvents(proxyEvents);
   }
 
   abstract void initSubclass(JClassType proxyInterface) throws UnableToCompleteException;
@@ -87,20 +92,6 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
   public void initComposerFactory(ClassSourceFileComposerFactory composerFactory) {
     addImports(composerFactory);
     setInterfacesAndSuperclass(composerFactory);
-  }
-
-  /**
-   * Finds the root of this hierarchy of {@link ProxyOutputter}. A hierarchy is build via
-   * the {@link CompositeProxyOutputter}. If this {@link ProxyOutputter} has no parent, returns
-   * itself.
-   *
-   * @return The {@link ProxyOutputter} at the root of the hierarchy.
-   */
-  final ProxyOutputter getRootProxyOutputter() {
-    if (parent == null) {
-      return this;
-    }
-    return parent.getRootProxyOutputter();
   }
 
   /**
@@ -164,21 +155,66 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
   abstract String getSuperclassName();
 
   @Override
-  public void writeFields(SourceWriter writer) {
+  public final void writeFields(SourceWriter writer) {
     writer.println();
     writer.println("private " + ginjectorInspector.getGinjectorClassName() + " ginjector;");
   }
 
   @Override
-  public final void writeAddHandlerForProxyEvents(SourceWriter writer) {
+  public final void writeConstructor(SourceWriter writer, String className, boolean registerDelayedBind) {
+    writer.println();
+    writer.println("public " + className + "() {");
+    if (registerDelayedBind) {
+      writer.indent();
+      writer.println("DelayedBindRegistry.register(this);");
+      writer.outdent();
+    }
+    writer.println("}");
+  }
+
+  @Override
+  public final void writeMethods(SourceWriter writer) {
+    // Write delayedBind
+    writer.println();
+    writer.println("@Override");
+    writer.println("public void delayedBind(Ginjector baseGinjector) {");
+    writer.indent();
+    writeGinjectorAssignation(writer, ginjectorInspector.getGinjectorClassName());
+    writer.println("bind(ginjector.getProxyFailureHandler(), ");
+    writer.println("    ginjector.getPlaceManager(),");
+    writer.println("    ginjector.getEventBus());");
+    writeSubclassDelayedBind(writer);
+    writeAddHandlerForProxyEvents(writer);
+    writer.outdent();
+    writer.println("}");
+    writeHandlerMethodsForProxyEvents(writer);
+
+    writeSubclassMethods(writer);
+  }
+
+  abstract void writeSubclassDelayedBind(SourceWriter writer);
+
+  abstract void writeSubclassMethods(SourceWriter writer);
+
+  /**
+   * Writes all the calls to {@code addHandler} needed to register all the
+   * proxy events.
+   *
+   * @param writer The {@link SourceWriter}.
+   */
+  private void writeAddHandlerForProxyEvents(SourceWriter writer) {
     for (ProxyEventDescription desc : proxyEvents) {
       writer.println("getEventBus().addHandler( " + desc.eventFullName
           + ".getType(), this );");
     }
   }
 
-  @Override
-  public final void writeHandlerMethodsForProxyEvents(SourceWriter writer) {
+  /**
+   * Writes all the handlers needed to handle the proxy events.
+   *
+   * @param writer The {@link SourceWriter}.
+   */
+  private void writeHandlerMethodsForProxyEvents(SourceWriter writer) {
     for (ProxyEventDescription desc : proxyEvents) {
       writer.println("");
       writeHandlerMethod(presenterInspector.getPresenterClassName(), desc, writer);
@@ -220,5 +256,12 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
     writer.println("} );");
     writer.outdent();
     writer.println("}");
+  }
+
+  /**
+   * Writes a local ginjector variable to the source writer.
+   */
+  private void writeGinjectorAssignation(SourceWriter writer, String ginjectorClassName) {
+    writer.println("ginjector = (" + ginjectorClassName + ")baseGinjector;");
   }
 }

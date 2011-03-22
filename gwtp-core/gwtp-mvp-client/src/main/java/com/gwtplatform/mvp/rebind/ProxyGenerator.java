@@ -66,7 +66,7 @@ public class ProxyGenerator extends Generator {
       return null;
     }
 
-    // If it's not annotated don't use generator.
+    ginjectorInspector.init();
     if (!presenterInspector.init(proxyInterface)) {
       return null;
     }
@@ -85,7 +85,6 @@ public class ProxyGenerator extends Generator {
       return generatedClassName;
     }
 
-    ginjectorInspector.init();
     ProxyOutputter proxyOutputter = proxyOutputterFactory.create(proxyInterface);
 
     // Start composing the class
@@ -97,109 +96,13 @@ public class ProxyGenerator extends Generator {
     SourceWriter writer = composerFactory.createSourceWriter(ctx, printWriter);
 
     proxyOutputter.writeFields(writer);
-
-    if (proxyOutputter.getNameToken() == null) {
-      // Not a place proxy
-      proxyOutputter.writeGetTabDataInternalMethod(writer);
-    } else {
-      // Place proxy
-
-      // BEGIN Enclosed proxy class
-      writer.println();
-      writer.println("public static class WrappedProxy");
-      writer.println("extends " + proxyOutputter.getWrappedProxySuperclassName() + "<"
-          + presenterInspector.getPresenterClassName() + "> {");
-      writer.indent();
-
-      proxyOutputter.writeGetTabDataInternalMethod(writer);
-
-      // Enclosed proxy constructor
-      writer.println();
-      writer.println("public WrappedProxy() {}");
-
-      // BEGIN Enclosed proxy Bind method
-      writer.println();
-      writer.println("private void delayedBind(" + ginjectorInspector.getGinjectorClassName()
-          + " ginjector) {");
-      writer.indent();
-
-      proxyOutputter.writeRequestTabHandler(writer);
-
-      // Call ProxyImpl bind method.
-      writer.println("bind(ginjector.getProxyFailureHandler(),ginjector.getEventBus());");
-
-      presenterInspector.writeProvider(writer);
-      presenterInspector.writeSlotHandlers(writer);
-      writer.outdent();
-      writer.println("}");
-
-      // END Enclosed proxy class
-      writer.outdent();
-      writer.println("}");
-
-      // Check if title override if needed
-
-      // Simple string title
-      proxyOutputter.writeGetPlaceTitleMethod(writer);
-    }
-
-    // Constructor
-    writer.println();
-    writer.println("public " + implClassName + "() {");
-    writer.indent();
-    writer.println("DelayedBindRegistry.register(this);");
-    writer.outdent();
-    writer.println("}");
-
-    // BEGIN Bind method
-    writer.println();
-    writer.println("@Override");
-    writer.println("public void delayedBind(Ginjector baseGinjector) {");
-    writer.indent();
-    writeGinjector(writer, ginjectorInspector.getGinjectorClassName());
-    if (proxyOutputter.getNameToken() == null) {
-      // Standard proxy (not a Place)
-
-      proxyOutputter.writeRequestTabHandler(writer);
-
-      // Call ProxyImpl bind method.
-      writer.println("bind(ginjector.getProxyFailureHandler(),ginjector.getEventBus());");
-
-      presenterInspector.writeProvider(writer);
-      presenterInspector.writeSlotHandlers(writer);
-    } else {
-
-      // Place proxy
-
-      // Call ProxyPlaceAbstract bind method.
-      writer.println("bind(ginjector.getProxyFailureHandler(), ");
-      writer.println("    ginjector.getPlaceManager(),");
-      writer.println("    ginjector.getEventBus());");
-      writer.println("WrappedProxy wrappedProxy = GWT.create(WrappedProxy.class);");
-      writer.println("wrappedProxy.delayedBind( ginjector ); ");
-      writer.println("proxy = wrappedProxy; ");
-      writer.println("String nameToken = \"" + proxyOutputter.getNameToken() + "\"; ");
-      writer.println("place = " +
-          proxyOutputter.getPlaceInstantiationString());
-    }
-
-    proxyOutputter.writeAddHandlerForProxyEvents(writer);
-
-    // END Bind method
-    writer.outdent();
-    writer.println("}");
-
-    proxyOutputter.writeHandlerMethodsForProxyEvents(writer);
+    proxyOutputter.writeInnerClasses(writer);
+    proxyOutputter.writeConstructor(writer, implClassName, true);
+    proxyOutputter.writeMethods(writer);
 
     writer.commit(logger);
 
     return generatedClassName;
   }
 
-  /**
-   * Writes a local ginjector variable to the source writer.
-   */
-  private void writeGinjector(SourceWriter writer, String ginjectorClassName) {
-    writer.println("ginjector = (" + ginjectorClassName + ")baseGinjector;");
-  }
 }

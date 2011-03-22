@@ -16,10 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsEvent;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
@@ -63,10 +60,7 @@ public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
     return tab;
   }
 
-  @Inject
-  @Override
-  protected void bind(ProxyFailureHandler failureHandler, EventBus eventBus) {
-    super.bind(failureHandler, eventBus);
+  protected void addRequestTabsHandler() {
     eventBus.addHandler(requestTabsEventType, new RequestTabsHandler() {
       @Override
       public void onRequestTabs(RequestTabsEvent event) {
