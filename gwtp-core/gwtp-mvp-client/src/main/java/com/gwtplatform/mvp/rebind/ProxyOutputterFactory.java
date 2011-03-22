@@ -56,40 +56,29 @@ public class ProxyOutputterFactory {
   public ProxyOutputter create(JClassType proxyInterface)
       throws UnableToCompleteException {
 
-    CompositeProxyOutputter compositeProxyOutputter = null;
-    if (isProxyPlace(proxyInterface) && isTabContentProxy(proxyInterface)) {
-      compositeProxyOutputter =
-          new CompositeProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector,
-              null, ClassCollection.tabContentProxyPlaceImplClassName,
-              ClassCollection.tabContentProxyImplClassName);
-    }
-
     ProxyOutputterBase result = null;
-    if (isProxyPlace(proxyInterface)) {
-      result = new ProxyPlaceOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector,
-          compositeProxyOutputter);
-      if (compositeProxyOutputter != null) {
-        compositeProxyOutputter.add(result);
-      }
-    }
-    if (isTabContentProxy(proxyInterface)) {
-      result = new TabContentProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector,
-          compositeProxyOutputter);
-      if (compositeProxyOutputter != null) {
-        compositeProxyOutputter.add(result);
-      }
-    }
-
-    if (compositeProxyOutputter != null) {
-      result = compositeProxyOutputter;
-    }
-
-    if (result == null) {
-      result = new BasicProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector, null);
+    if (isProxyPlace(proxyInterface) && isTabContentProxy(proxyInterface)) {
+      result = new TabContentProxyPlaceOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector,
+          createProxyPlaceOutputter(), createTabContentProxyOutputter());
+    } else if (isProxyPlace(proxyInterface)) {
+      result = createProxyPlaceOutputter();
+    } else if (isTabContentProxy(proxyInterface)) {
+      result = createTabContentProxyOutputter();
+    } else {
+      result = new BasicProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
     }
 
     result.init(proxyInterface);
+    result.findProxyEvents();
     return result;
+  }
+
+  private ProxyPlaceOutputter createProxyPlaceOutputter() {
+    return new ProxyPlaceOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
+  }
+
+  private TabContentProxyOutputter createTabContentProxyOutputter() {
+    return new TabContentProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
   }
 
   private boolean isProxyPlace(JClassType proxyInterface) {

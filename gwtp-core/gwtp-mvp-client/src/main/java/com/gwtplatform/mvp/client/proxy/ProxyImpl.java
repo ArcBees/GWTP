@@ -33,7 +33,7 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
   protected ProxyFailureHandler failureHandler;
   protected IndirectProvider<P> presenter;
-  private EventBus eventBus;
+  protected EventBus eventBus;
 
   /**
    * Creates a Proxy class for a specific presenter.
@@ -60,10 +60,12 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
    * with GWT generators.
    *
    * @param failureHandler The {@link ProxyFailureHandler}.
+   * @param placeManager The {@link PlaceManager}. Ignored.
    * @param eventBus The {@link EventBus}.
    */
   @Inject
-  protected void bind(ProxyFailureHandler failureHandler, EventBus eventBus) {
+  protected void bind(ProxyFailureHandler failureHandler,
+      final PlaceManager placeManager, EventBus eventBus) {
     this.failureHandler = failureHandler;
     this.eventBus = eventBus;
   }

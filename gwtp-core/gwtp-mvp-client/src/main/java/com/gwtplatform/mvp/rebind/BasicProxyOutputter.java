@@ -34,9 +34,12 @@ public class BasicProxyOutputter extends ProxyOutputterBase {
       TreeLogger logger,
       ClassCollection classCollection,
       GinjectorInspector ginjectorInspector,
-      PresenterInspector presenterInspector,
-      ProxyOutputterBase parent) {
-    super(oracle, logger, classCollection, ginjectorInspector, presenterInspector, parent);
+      PresenterInspector presenterInspector) {
+    super(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
+  }
+
+  @Override
+  public void writeInnerClasses(SourceWriter writer) {
   }
 
   @Override
@@ -48,35 +51,22 @@ public class BasicProxyOutputter extends ProxyOutputterBase {
   }
 
   @Override
-  public String getSuperclassName() {
-    return ClassCollection.proxyImplClassName;
+  void writeSubclassMethods(SourceWriter writer) {
   }
 
   @Override
-  public String getWrappedProxySuperclassName() {
-    return null;
+  void writeSubclassDelayedBind(SourceWriter writer) {
+    presenterInspector.writeProviderAssignation(writer);
+    presenterInspector.writeSlotHandlers(writer);
+  }
+
+  @Override
+  String getSuperclassName() {
+    return ClassCollection.proxyImplClassName;
   }
 
   @Override
   public String getNameToken() {
     return null;
-  }
-
-  @Override
-  public void writeGetTabDataInternalMethod(SourceWriter writer) {
-  }
-
-  @Override
-  public void writeRequestTabHandler(SourceWriter writer)
-      throws UnableToCompleteException {
-  }
-
-  @Override
-  public String getPlaceInstantiationString() {
-    return null;
-  }
-
-  @Override
-  public void writeGetPlaceTitleMethod(SourceWriter writer) {
   }
 }
