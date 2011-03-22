@@ -25,9 +25,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
-import com.google.gwt.core.ext.typeinfo.JParameterizedType;
-import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
-import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.TabData;
@@ -71,16 +68,17 @@ public class PresenterInspector {
   }
 
   /**
-   * TODO: Refactor
+   * Initializes the presenter inspector given the annotation present on a proxy interface. The
+   * possible annotations are {@link ProxyStandard}, {@link ProxyCodeSplit} or
+   * {@link ProxyCodeSplitBundle}. If none are present the method returns {@code false} and no code
+   * should be generated.
    *
-   * Initializes the presenter inspector given the annotation present on a proxy interface. The possible
-   * annotations are {@link ProxyStandard}, {@link ProxyCodeSplit} or {@link ProxyCodeSplitBundle}.
-   * If none are present the method returns {@code false} and no code should be generated.
-   *
-   * @param proxyInterface The annotated interface inheriting from proxy and that should be annotated.
+   * @param proxyInterface The annotated interface inheriting from proxy and that should be
+   *        annotated.
    * @return {@code true} if the presenter provider was built, {@code false} if the interface wasn't
    *         annotated indicating that no proxy should be generated.
-   * @throws UnableToCompleteException When more than one annotation is present on the proxy interface.
+   * @throws UnableToCompleteException When more than one annotation is present on the proxy
+   *         interface.
    */
   public boolean init(JClassType proxyInterface) throws UnableToCompleteException {
     findPresenterClass(logger, proxyInterface);
@@ -95,76 +93,76 @@ public class PresenterInspector {
       return false;
     }
 
+    findGetPresenterMethodName();
+
+    classInspector.collectStaticAnnotatedFields(classCollection.typeClass,
+        classCollection.revealContentHandlerClass, ContentSlot.class, contentSlots);
+
+    return true;
+  }
+
+  private void findGetPresenterMethodName() throws UnableToCompleteException {
     if (proxyStandardAnnotation != null) {
       getPresenterMethodName = ginjectorInspector.findGetMethod(
           classCollection.providerClass, presenterClass);
 
-      if (getPresenterMethodName == null) {
-        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
-            + "' does not have a get() method returning 'Provider<"
-            + presenterClassName + ">'. This is required when using @"
-            + ProxyStandard.class.getSimpleName() + ".", null);
-        throw new UnableToCompleteException();
-      }
+      failIfNoProviderError(getPresenterMethodName, "Provider",
+          ProxyStandard.class.getSimpleName());
     } else if (proxyCodeSplitAnnotation != null) {
-      getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass, presenterClass);
+      getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass,
+          presenterClass);
 
-      if (getPresenterMethodName == null) {
-        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
-            + "' does not have a get() method returning 'AsyncProvider<"
-            + presenterClassName + ">'. This is required when using @"
-            + ProxyCodeSplit.class.getSimpleName() + ".", null);
-        throw new UnableToCompleteException();
-      }
+      failIfNoProviderError(getPresenterMethodName, "AsyncProvider",
+          ProxyCodeSplit.class.getSimpleName());
     } else {
-      assert proxyCodeSplitBundleAnnotation != null;
+      JClassType bundleClass = findBundleClass();
+      getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass,
+          bundleClass);
 
-      bundleClassName = proxyCodeSplitBundleAnnotation.bundleClass().getCanonicalName();
-      JClassType bundleClass = oracle.findType(bundleClassName);
+      failIfNoProviderError(getPresenterMethodName, "AsyncProvider", bundleClassName,
+          ProxyCodeSplit.class.getSimpleName());
+    }
+  }
 
-      if (bundleClass == null) {
-        logger.log(TreeLogger.ERROR,
-            "Cannot find the bundle class '" + bundleClassName
-                + ", used with @" + ProxyCodeSplitBundle.class.getSimpleName()
-                + " on presenter '" + presenterClassName + "'.", null);
-        throw new UnableToCompleteException();
-      }
+  private JClassType findBundleClass() throws UnableToCompleteException {
+    assert proxyCodeSplitBundleAnnotation != null;
+    bundleClassName = proxyCodeSplitBundleAnnotation.bundleClass().getCanonicalName();
+    JClassType bundleClass = oracle.findType(bundleClassName);
 
-      // Find the appropriate get method in the Ginjector
-      getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass, bundleClass);
+    if (bundleClass == null) {
+      logger.log(TreeLogger.ERROR,
+          "Cannot find the bundle class '" + bundleClassName
+              + ", used with @" + ProxyCodeSplitBundle.class.getSimpleName()
+              + " on presenter '" + presenterClassName + "'.", null);
+      throw new UnableToCompleteException();
+    }
+    return bundleClass;
+  }
 
-      if (getPresenterMethodName == null) {
-        logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
-            + "' does not have a get() method returning 'AsyncProvider<"
-            + bundleClassName + ">'. This is required when using @"
-            + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '"
-            + presenterClassName + "'.", null);
-        throw new UnableToCompleteException();
-      }
+  private void failIfNoProviderError(String providerMethodName,
+      String providerClassName, String providedClassName,
+      String annotationClassName) throws UnableToCompleteException {
+    if (providerClassName != null) {
+      return;
     }
 
-    for (JField field : presenterClass.getFields()) {
-      ContentSlot annotation = field.getAnnotation(ContentSlot.class);
-      JParameterizedType parameterizedType = field.getType().isParameterized();
-      if (annotation != null) {
-        if (!field.isStatic()
-            || parameterizedType == null
-            || !parameterizedType.isAssignableTo(classCollection.typeClass)
-            || !parameterizedType.getTypeArgs()[0].isAssignableTo(classCollection.revealContentHandlerClass)) {
-          logger.log(
-              TreeLogger.WARN,
-              "Found the annotation @" + ContentSlot.class.getSimpleName()
-                  + " on the invalid field '" + presenterClassName + "." + field.getName()
-                  + "'. Field must be static and its type must be "
-                  + "Type<RevealContentHandler<?>>. Skipping this field.",
-              null);
-        } else {
-          contentSlots.add(field);
-        }
-      }
+    String actualProvidedClassName = providedClassName;
+    String extraString = " See presenter '" + presenterClassName + "'.";
+    if (providedClassName == null) {
+      actualProvidedClassName = presenterClassName;
+      extraString = "";
     }
 
-    return true;
+    logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
+        + "' does not have a get() method returning '" + providerClassName + "<"
+        + actualProvidedClassName + ">'. This is required when using @"
+        + annotationClassName + "." + extraString, null);
+    throw new UnableToCompleteException();
+  }
+
+  private void failIfNoProviderError(String providerMethodName,
+      String providerClassName, String annotationClassName) throws UnableToCompleteException {
+    failIfNoProviderError(providerMethodName, providerClassName, null, annotationClassName);
   }
 
   /**
@@ -184,8 +182,6 @@ public class PresenterInspector {
   /**
    * Writes the assignation into the {@code provider} field of
    * {@link com.gwtplatform.mvp.client.proxy.ProxyImpl ProxyImpl}.
-   *
-   * TODO refactor
    */
   public void writeProviderAssignation(SourceWriter writer) {
 
@@ -204,10 +200,10 @@ public class PresenterInspector {
   }
 
   /**
-   * TODO Document and refactor.
+   * Register a {@link com.gwtplatform.mvp.client.proxy.RevealContentHandler RevealContentHandler}
+   * for each {@code @ContentSlot} defined in the presenter.
    */
-  public void writeSlotHandlers(SourceWriter writer) {
-    // Register all RevealContentHandler for the @ContentSlot defined in the presenter
+  public void writeContentSlotHandlerRegistration(SourceWriter writer) {
     if (contentSlots.size() == 0) {
       return;
     }
@@ -224,7 +220,7 @@ public class PresenterInspector {
   }
 
   /**
-   * TODO Document and refactor. Should probably look in the entire class hierarchy.
+   * Look in the presenter and any superclass for a method annotated with {@link TitleFunction}.
    */
   public PresenterTitleMethod findPresenterTitleMethod()
       throws UnableToCompleteException {
@@ -234,178 +230,33 @@ public class PresenterInspector {
       return null;
     }
 
-    PresenterTitleMethod result = new PresenterTitleMethod(logger, classCollection, ginjectorInspector, this);
+    PresenterTitleMethod result = new PresenterTitleMethod(logger, classCollection,
+        ginjectorInspector, this);
     result.init(method);
     return result;
   }
 
   /**
-   * TODO Document and refactor. Should probably look in the entire class hierarchy.
+   * Collect all the {@link ProxyEventMethod} of methods annotated with
+   * {@literal @}{@link ProxyEvent} and contained in the presenter or its super classes.
    *
-   * @param proxyEvents The list into which to collect the proxy events.
+   * @param proxyEventMethods The list into which to collect the proxy events.
    */
-  public void collectProxyEvents(List<ProxyEventDescription> proxyEvents)
+  public void collectProxyEvents(List<ProxyEventMethod> proxyEventMethods)
       throws UnableToCompleteException {
 
     // Look for @ProxyEvent methods in the parent presenter
-    for (JMethod method : presenterClass.getMethods()) {
-      ProxyEvent annotation = method.getAnnotation(ProxyEvent.class);
-      if (annotation != null) {
-        ProxyEventDescription desc = new ProxyEventDescription();
-        desc.functionName = method.getName();
+    List<JMethod> collectedMethods = new ArrayList<JMethod>();
+    classInspector.collectAnnotatedMethods(ProxyEvent.class, collectedMethods);
 
-        JClassType methodReturnType = method.getReturnType().isClassOrInterface();
-        if (methodReturnType != null
-            || method.getReturnType().isPrimitive() != JPrimitiveType.VOID) {
-          logger.log(
-              TreeLogger.WARN,
-              "In presenter "
-                  + presenterClassName
-                  + ", method "
-                  + desc.functionName
-                  + " annotated with @"
-                  + ProxyEvent.class.getSimpleName()
-                  + " returns something else than void. Return value will be ignored.");
-        }
-
-        if (method.getParameters().length != 1) {
-          logger.log(
-              TreeLogger.ERROR,
-              "In presenter "
-                  + presenterClassName
-                  + ", method "
-                  + desc.functionName
-                  + " annotated with @"
-                  + ProxyEvent.class.getSimpleName()
-                  + " needs to have exactly 1 parameter of a type derived from GwtEvent.");
-          throw new UnableToCompleteException();
-        }
-
-        JClassType eventType = method.getParameters()[0].getType().isClassOrInterface();
-        if (eventType == null || !eventType.isAssignableTo(classCollection.gwtEventClass)) {
-          logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName
-              + ", method " + desc.functionName + " annotated with @"
-              + ProxyEvent.class.getSimpleName()
-              + ", the parameter must be derived from GwtEvent.");
-          throw new UnableToCompleteException();
-        }
-        desc.eventFullName = eventType.getQualifiedSourceName();
-
-        // Make sure the eventType has a static getType method
-        JMethod getTypeMethod = eventType.findMethod("getType", new JType[0]);
-        if (getTypeMethod == null || !getTypeMethod.isStatic()
-            || getTypeMethod.getParameters().length != 0) {
-          logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName
-              + ", method " + desc.functionName + " annotated with @"
-              + ProxyEvent.class.getSimpleName() + ". The event class "
-              + eventType.getName()
-              + " does not have a static getType method with no parameters.");
-          throw new UnableToCompleteException();
-        }
-        JClassType getTypeReturnType = getTypeMethod.getReturnType().isClassOrInterface();
-        if (getTypeReturnType == null
-            || !getTypeReturnType.isAssignableTo(classCollection.gwtEventTypeClass)) {
-          logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName
-              + ", method " + desc.functionName + " annotated with @"
-              + ProxyEvent.class.getSimpleName() + ". The event class "
-              + eventType.getName()
-              + " getType() method  not return a GwtEvent.Type object.");
-          throw new UnableToCompleteException();
-        }
-
-        // Find the handler class via the dispatch method
-        JClassType handlerType = null;
-        for (JMethod eventMethod : eventType.getMethods()) {
-          if (eventMethod.getName().equals("dispatch")
-              && eventMethod.getParameters().length == 1) {
-            JClassType maybeHandlerType = eventMethod.getParameters()[0].getType().isClassOrInterface();
-            if (maybeHandlerType != null
-                && maybeHandlerType.isAssignableTo(classCollection.eventHandlerClass)) {
-              if (handlerType != null) {
-                logger.log(TreeLogger.ERROR, "In presenter "
-                    + presenterClassName + ", method " + desc.functionName
-                    + " annotated with @" + ProxyEvent.class.getSimpleName()
-                    + ". The event class " + eventType.getName()
-                    + " has more than one potential 'dispatch' method.");
-                throw new UnableToCompleteException();
-              }
-              handlerType = maybeHandlerType;
-            }
-          }
-        }
-
-        if (handlerType == null) {
-          logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName
-              + ", method " + desc.functionName + " annotated with @"
-              + ProxyEvent.class.getSimpleName() + ". The event class "
-              + eventType.getName() + " has no valid 'dispatch' method.");
-          throw new UnableToCompleteException();
-        }
-        desc.handlerFullName = handlerType.getQualifiedSourceName();
-
-        // Find the handler method
-        if (handlerType.getMethods().length != 1) {
-          logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName
-              + ", method " + desc.functionName + " annotated with @"
-              + ProxyEvent.class.getSimpleName() + ". The handler class "
-              + handlerType.getName() + " has more than one method.");
-          throw new UnableToCompleteException();
-        }
-
-        JMethod handlerMethod = handlerType.getMethods()[0];
-
-        JClassType handlerMethodReturnType = handlerMethod.getReturnType().isClassOrInterface();
-        if (handlerMethodReturnType != null
-            || handlerMethod.getReturnType().isPrimitive() != JPrimitiveType.VOID) {
-          logger.log(
-              TreeLogger.WARN,
-              "In presenter "
-                  + presenterClassName
-                  + ", method "
-                  + desc.functionName
-                  + " annotated with @"
-                  + ProxyEvent.class.getSimpleName()
-                  + ". The handler class "
-                  + handlerType.getName()
-                  + " method "
-                  + handlerMethod.getName()
-                  + " returns something else than void. Return value will be ignored.");
-        }
-
-        desc.handlerMethodName = handlerMethod.getName();
-
-        // Warn if handlerMethodName is different
-        if (!desc.handlerMethodName.equals(desc.functionName)) {
-          logger.log(
-              TreeLogger.WARN,
-              "In presenter "
-                  + presenterClassName
-                  + ", method "
-                  + desc.functionName
-                  + " annotated with @"
-                  + ProxyEvent.class.getSimpleName()
-                  + ". The handler class "
-                  + handlerType.getName()
-                  + " method "
-                  + handlerMethod.getName()
-                  + " differs from the annotated method. You should use the same method name for easier reference.");
-        }
-
-        // Make sure that handler method name is not already used
-        for (ProxyEventDescription prevDesc : proxyEvents) {
-          if (prevDesc.handlerMethodName.equals(desc.handlerMethodName)
-              && prevDesc.eventFullName.equals(desc.eventFullName)) {
-            logger.log(TreeLogger.ERROR, "In presenter " + presenterClassName
-                + ", method " + desc.functionName + " annotated with @"
-                + ProxyEvent.class.getSimpleName() + ". The handler method "
-                + handlerMethod.getName() + " is already used by method "
-                + prevDesc.functionName + ".");
-            throw new UnableToCompleteException();
-          }
-        }
-
-        proxyEvents.add(desc);
+    for (JMethod method : collectedMethods) {
+      ProxyEventMethod proxyEventMethod = new ProxyEventMethod(logger, classCollection, this);
+      proxyEventMethod.init(method);
+      // Make sure that handler method name is not already used
+      for (ProxyEventMethod previousMethod : proxyEventMethods) {
+        proxyEventMethod.ensureNoClashWith(previousMethod);
       }
+      proxyEventMethods.add(proxyEventMethod);
     }
   }
 

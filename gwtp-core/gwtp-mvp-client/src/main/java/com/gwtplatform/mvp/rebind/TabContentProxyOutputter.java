@@ -64,7 +64,7 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
   void writeSubclassDelayedBind(SourceWriter writer) {
     writeRequestTabHandler(writer);
     presenterInspector.writeProviderAssignation(writer);
-    presenterInspector.writeSlotHandlers(writer);
+    presenterInspector.writeContentSlotHandlerRegistration(writer);
   }
 
   @Override
@@ -74,11 +74,6 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
 
   public void setNameToken(String nameToken) {
     this.nameToken = nameToken;
-  }
-
-  @Override
-  public String getNameToken() {
-    return null;
   }
 
   private void writeGetTabDataInternalMethod(SourceWriter writer) {

@@ -56,7 +56,7 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
   protected final ClassCollection classCollection;
   protected final GinjectorInspector ginjectorInspector;
   protected final PresenterInspector presenterInspector;
-  private final List<ProxyEventDescription> proxyEvents = new ArrayList<ProxyEventDescription>();
+  private final List<ProxyEventMethod> proxyEventMethods = new ArrayList<ProxyEventMethod>();
 
   private JClassType proxyInterface;
 
@@ -83,7 +83,7 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
   }
 
   public void findProxyEvents() throws UnableToCompleteException {
-    presenterInspector.collectProxyEvents(proxyEvents);
+    presenterInspector.collectProxyEvents(proxyEventMethods);
   }
 
   abstract void initSubclass(JClassType proxyInterface) throws UnableToCompleteException;
@@ -141,8 +141,8 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
         + presenterInspector.getPresenterClassName() + ">");
 
     // Add all implemented handlers
-    for (ProxyEventDescription desc : proxyEvents) {
-      composerFactory.addImplementedInterface(desc.handlerFullName);
+    for (ProxyEventMethod proxyEventMethod : proxyEventMethods) {
+      proxyEventMethod.addImplementedInterface(composerFactory);
     }
   }
 
@@ -203,9 +203,8 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
    * @param writer The {@link SourceWriter}.
    */
   private void writeAddHandlerForProxyEvents(SourceWriter writer) {
-    for (ProxyEventDescription desc : proxyEvents) {
-      writer.println("getEventBus().addHandler( " + desc.eventFullName
-          + ".getType(), this );");
+    for (ProxyEventMethod proxyEventMethod : proxyEventMethods) {
+      proxyEventMethod.writeAddHandler(writer);
     }
   }
 
@@ -215,47 +214,9 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
    * @param writer The {@link SourceWriter}.
    */
   private void writeHandlerMethodsForProxyEvents(SourceWriter writer) {
-    for (ProxyEventDescription desc : proxyEvents) {
-      writer.println("");
-      writeHandlerMethod(presenterInspector.getPresenterClassName(), desc, writer);
+    for (ProxyEventMethod proxyEventMethod : proxyEventMethods) {
+      proxyEventMethod.writeHandlerMethod(writer);
     }
-  }
-
-  private void writeHandlerMethod(String presenterClassName,
-      ProxyEventDescription desc, SourceWriter writer) {
-    writer.println("@Override");
-    writer.println("public final void " + desc.handlerMethodName + "( final "
-        + desc.eventFullName + " event ) {");
-    writer.indent();
-    writer.println("getPresenter( new AsyncCallback<" + presenterClassName
-        + ">() {");
-    writer.indent();
-    writer.println("@Override");
-    writer.println("public void onFailure(Throwable caught) {");
-    writer.indent();
-    writer.println("failureHandler.onFailedGetPresenter(caught);");
-    writer.outdent();
-    writer.println("}");
-    writer.println("@Override");
-    writer.println("public void onSuccess(final " + presenterClassName
-        + " presenter) {");
-    writer.indent();
-    writer.println("Scheduler.get().scheduleDeferred( new Command() {");
-    writer.indent();
-    writer.println("@Override");
-    writer.println("public void execute() {");
-    writer.indent();
-    writer.println("presenter." + desc.functionName + "( event );");
-    writer.outdent();
-    writer.println("}");
-    writer.outdent();
-    writer.println("} );");
-    writer.outdent();
-    writer.println("}");
-    writer.outdent();
-    writer.println("} );");
-    writer.outdent();
-    writer.println("}");
   }
 
   /**

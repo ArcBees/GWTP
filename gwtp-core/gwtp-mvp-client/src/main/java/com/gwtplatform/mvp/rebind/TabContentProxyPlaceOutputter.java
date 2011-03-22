@@ -78,11 +78,6 @@ public class TabContentProxyPlaceOutputter extends ProxyOutputterBase {
   }
 
   @Override
-  public String getNameToken() {
-    return proxyPlaceOutputter.getNameToken();
-  }
-
-  @Override
   void writeSubclassDelayedBind(SourceWriter writer) {
     proxyPlaceOutputter.writeSubclassDelayedBind(writer);
   }
