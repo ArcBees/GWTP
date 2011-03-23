@@ -32,11 +32,13 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.GetPlaceTitleEvent;
 
 /**
- * TODO Document
+ * Proxy outputter for a proxy that is also a place.
  *
  * @author Philippe Beaudoin
  */
 public class ProxyPlaceOutputter extends ProxyOutputterBase {
+
+  public static final String WRAPPED_CLASS_NAME = "WrappedProxy";
 
   private String nameToken;
   private String getGatekeeperMethod;
@@ -55,20 +57,21 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
   @Override
   public void writeInnerClasses(SourceWriter writer) {
     beginWrappedProxy(writer, ClassCollection.proxyImplClassName);
-    BasicProxyOutputter basicOutputter =
-        new BasicProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
+    BasicProxyOutputter basicOutputter = new BasicProxyOutputter(oracle, logger, classCollection,
+        ginjectorInspector, presenterInspector);
     basicOutputter.writeFields(writer);
     basicOutputter.writeInnerClasses(writer);
-    basicOutputter.writeConstructor(writer, "WrappedProxy", false); // TODO Remove magic string
+    basicOutputter.writeConstructor(writer, WRAPPED_CLASS_NAME, false);
     basicOutputter.writeMethods(writer);
     endWrappedProxy(writer);
   }
 
   public void beginWrappedProxy(SourceWriter writer, String wrappedProxySuperclassName) {
     writer.println();
-    writer.println("public static class WrappedProxy");
-    writer.println("extends " + wrappedProxySuperclassName + "<" + presenterInspector.getPresenterClassName() + "> "
-        + "implements " + ClassCollection.delayedBindClassName + " {");
+    writer.println("public static class " + WRAPPED_CLASS_NAME);
+    writer.println("extends " + wrappedProxySuperclassName + "<"
+        + presenterInspector.getPresenterClassName() + "> " + "implements "
+        + ClassCollection.delayedBindClassName + " {");
     writer.indent();
   }
 
@@ -205,8 +208,8 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
 
   @Override
   void writeSubclassDelayedBind(SourceWriter writer) {
-    // TODO There is probably a way to assign directly proxy...
-    writer.println("WrappedProxy wrappedProxy = GWT.create(WrappedProxy.class);");
+    writer.println(WRAPPED_CLASS_NAME + " wrappedProxy = GWT.create(" + WRAPPED_CLASS_NAME
+        + ".class);");
     writer.println("wrappedProxy.delayedBind( ginjector ); ");
     writer.println("proxy = wrappedProxy; ");
     writer.println("String nameToken = \"" + getNameToken() + "\"; ");
@@ -217,5 +220,4 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
   void writeSubclassMethods(SourceWriter writer) {
     writeGetPlaceTitleMethod(writer);
   }
-
 }
