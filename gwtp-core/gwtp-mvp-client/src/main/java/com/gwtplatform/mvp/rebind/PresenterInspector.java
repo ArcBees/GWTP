@@ -24,10 +24,8 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
@@ -241,6 +239,7 @@ public class PresenterInspector {
    * {@literal @}{@link ProxyEvent} and contained in the presenter or its super classes.
    *
    * @param proxyEventMethods The list into which to collect the proxy events.
+   * @throws UnableToCompleteException If something goes wrong. An error will be logged.
    */
   public void collectProxyEvents(List<ProxyEventMethod> proxyEventMethods)
       throws UnableToCompleteException {
@@ -261,91 +260,21 @@ public class PresenterInspector {
   }
 
   /**
-   * TODO Document and refactor. Should probably look in the entire class hierarchy.
+   * Retrieves the static {@link TabInfoMethod} defined in the presenter.
+   *
+   * @return The {@link TabInfoMethod}, or {@code null} if none is found.
+   * @throws UnableToCompleteException If something goes wrong. An error will be logged.
    */
-  public TabInfoFunctionDescription findTabInfoFunction()
+  public TabInfoMethod findTabInfoMethod()
       throws UnableToCompleteException {
-    // Look for the title function in the parent presenter
-    TabInfoFunctionDescription result = null;
-    for (JMethod method : presenterClass.getMethods()) {
-      TabInfo annotation = method.getAnnotation(TabInfo.class);
-      if (annotation != null) {
-        if (result != null) {
-          logger.log(TreeLogger.ERROR, "At least two methods in presenter "
-              + presenterClassName + "are annotated with @"
-              + TabInfo.class.getSimpleName() + ". This is illegal.");
-          throw new UnableToCompleteException();
-        }
-        result = new TabInfoFunctionDescription();
-        result.annotation = annotation;
-        result.functionName = method.getName();
-        if (!method.isStatic()) {
-          logger.log(
-              TreeLogger.ERROR,
-              "In presenter "
-                  + presenterClassName
-                  + ", method "
-                  + result.functionName
-                  + " annotated with @"
-                  + TabInfo.class.getSimpleName()
-                  + " is not static. This is illegal.");
-          throw new UnableToCompleteException();
-        }
 
-        JClassType classReturnType = method.getReturnType().isClassOrInterface();
-        if (classReturnType == classCollection.stringClass) {
-          result.returnString = true;
-        } else if (classReturnType.isAssignableFrom(classCollection.tabDataClass)) {
-          result.returnString = false;
-        } else {
-          logger.log(
-              TreeLogger.ERROR,
-              "In presenter "
-                  + presenterClassName
-                  + ", method "
-                  + result.functionName
-                  + " annotated with @"
-                  + TabInfo.class.getSimpleName()
-                  + " must return either a String or a "
-                  + TabData.class.getSimpleName());
-          throw new UnableToCompleteException();
-        }
-
-        JParameter[] parameters = method.getParameters();
-        if (parameters.length > 1) {
-          logger.log(
-              TreeLogger.ERROR,
-              "In presenter "
-                  + presenterClassName
-                  + ", method "
-                  + result.functionName
-                  + " annotated with @"
-                  + TabInfo.class.getSimpleName()
-                  + " accepts more than one parameter. This is illegal.");
-          throw new UnableToCompleteException();
-        }
-
-        if (parameters.length == 1) {
-          JClassType parameterType = parameters[0].getType().isClassOrInterface();
-          if (parameterType.isAssignableFrom(ginjectorInspector.getGinjectorClass())) {
-              result.hasGingectorParam = true;
-          } else {
-            logger.log(
-                TreeLogger.ERROR,
-                "In presenter "
-                    + presenterClassName
-                    + ", method "
-                    + result.functionName
-                    + " annotated with @"
-                    + TabInfo.class.getSimpleName()
-                    + " has a parameter that is not of type "
-                    + ginjectorInspector.getGinjectorClassName()
-                    + ". This is illegal.");
-            throw new UnableToCompleteException();
-          }
-        }
-      }
+    JMethod method = classInspector.findAnnotatedMethod(TabInfo.class);
+    if (method == null) {
+      return null;
     }
+    TabInfoMethod result = new TabInfoMethod(logger, classCollection,
+        ginjectorInspector, this);
+    result.init(method);
 
     return result;
   }
@@ -392,5 +321,4 @@ public class PresenterInspector {
     }
     return true;
   }
-
 }

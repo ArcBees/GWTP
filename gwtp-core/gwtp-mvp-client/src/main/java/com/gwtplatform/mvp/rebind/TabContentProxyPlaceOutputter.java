@@ -67,7 +67,8 @@ public class TabContentProxyPlaceOutputter extends ProxyOutputterBase {
     proxyPlaceOutputter.beginWrappedProxy(writer, ClassCollection.tabContentProxyImplClassName);
     tabContentProxyOutputter.writeFields(writer);
     tabContentProxyOutputter.writeInnerClasses(writer);
-    tabContentProxyOutputter.writeConstructor(writer, "WrappedProxy", false); // TODO Remove magic string
+    tabContentProxyOutputter.writeConstructor(writer, ProxyPlaceOutputter.WRAPPED_CLASS_NAME,
+        false);
     tabContentProxyOutputter.writeMethods(writer);
     proxyPlaceOutputter.endWrappedProxy(writer);
   }
