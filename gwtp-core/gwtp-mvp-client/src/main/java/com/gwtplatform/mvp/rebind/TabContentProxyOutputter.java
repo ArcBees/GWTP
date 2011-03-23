@@ -16,11 +16,13 @@
 
 package com.gwtplatform.mvp.rebind;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JField;
-import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
@@ -28,7 +30,8 @@ import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 
 /**
- * TODO Document
+ * Proxy outputter for a proxy corresponding to a presenter which is displayed within a
+ * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter}.
  *
  * @author Philippe Beaudoin
  */
@@ -38,7 +41,7 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
   private String tabContainerClassName;
   private Integer tabPriority;
   private String tabLabel;
-  private TabInfoFunctionDescription tabInfoFunctionDescription;
+  private TabInfoMethod tabInfoMethod;
   private String targetNameToken;
   private String nameToken;
   private String requestTabFieldName;
@@ -86,170 +89,133 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
       writer.println("  return new TabDataBasic(\"" + tabLabel + "\", " + tabPriority + ");");
       writer.outdent();
       writer.println("}");
-    } else if (tabInfoFunctionDescription.returnString) {
-      // Presenter static method returning a string
-      writer.println();
-      writer.println("protected TabData getTabDataInternal("
-          + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
-      writer.indent();
-      writer.print("  return new TabDataBasic(");
-      writer.print(presenterInspector.getPresenterClassName() + ".");
-      writeTabInfoFunctionCall(writer);
-      writer.println(", " + tabPriority + ");");
-      writer.outdent();
-      writer.println("}");
     } else {
-      // Presenter static method returning tab data
-      writer.println();
-      writer.println("protected TabData getTabDataInternal("
-          + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
-      writer.indent();
-      writer.print("  return ");
-      writer.print(presenterInspector.getPresenterClassName() + ".");
-      writeTabInfoFunctionCall(writer);
-      writer.println(";");
-      writer.outdent();
-      writer.println("}");
+      tabInfoMethod.writeGetTabDataInternalMethod(writer);
     }
   }
 
   private void writeRequestTabHandler(SourceWriter writer) {
     writer.println("requestTabsEventType = " + tabContainerClassName + "."
-          + requestTabFieldName + ";");
+        + requestTabFieldName + ";");
     writer.println("tabData = getTabDataInternal(ginjector);");
     writer.println("targetHistoryToken = \"" + getTargetNameToken() + "\";");
     writer.println("addRequestTabsHandler();");
   }
 
-  private void writeTabInfoFunctionCall(SourceWriter writer) {
-    writer.print(tabInfoFunctionDescription.functionName + "( ");
-    if (tabInfoFunctionDescription.hasGingectorParam) {
-      writer.print("ginjector");
+  @Override
+  void initSubclass(JClassType proxyInterface) throws UnableToCompleteException {
+    tabInfoMethod = presenterInspector.findTabInfoMethod();
+
+    TabInfo tabInfoAnnotation = proxyInterface.getAnnotation(TabInfo.class);
+    ensureExactlyOneTabInfoAnnotation(tabInfoAnnotation);
+
+    tabPriority = null;
+    tabLabel = null;
+    if (tabInfoMethod == null) {
+      findTabPriority(tabInfoAnnotation);
+      findTabLabel(tabInfoAnnotation);
+      targetNameToken = tabInfoAnnotation.nameToken();
+      tabContainerClassName = tabInfoAnnotation.container().getCanonicalName();
+    } else {
+      targetNameToken = tabInfoMethod.getNameToken();
+      tabContainerClassName = tabInfoMethod.getTabContainerClassName();
     }
-    writer.print(")");
+    ensureNameTokenIsValid();
+    findTabContainerClass();
+    findRequestTabFieldName();
   }
 
-  @Override
-  // TODO Refactor
-  void initSubclass(JClassType proxyInterface)
-      throws UnableToCompleteException {
-    TabInfo tabInfoAnnotation = proxyInterface.getAnnotation(TabInfo.class);
-    tabInfoFunctionDescription =  presenterInspector.findTabInfoFunction();
+  private void findRequestTabFieldName() throws UnableToCompleteException {
+    ClassInspector tabContainerInspector = new ClassInspector(logger, tabContainerClass);
+    List<JField> requestTabFields = new ArrayList<JField>();
+    tabContainerInspector.collectStaticAnnotatedFields(classCollection.typeClass,
+        classCollection.requestTabsHandlerClass, RequestTabs.class, requestTabFields);
+    if (requestTabFields.size() == 0) {
+      logger.log(TreeLogger.ERROR, "Did not find any static field annotated with @"
+          + RequestTabs.class.getSimpleName() + " on the container '"
+          + tabContainerClassName + "' while building proxy for presenter '"
+          + presenterInspector.getPresenterClassName() + "'.", null);
+      throw new UnableToCompleteException();
+    }
+    if (requestTabFields.size() > 1) {
+      logger.log(TreeLogger.ERROR, "Found the annotation @" + RequestTabs.class.getSimpleName()
+          + " on more than one field in '" + tabContainerClassName
+          + "'. This is not allowed.", null);
+      throw new UnableToCompleteException();
+    }
+    requestTabFieldName = requestTabFields.get(0).getName();
+  }
 
-    // Ensure @TabInfo is there exactly once
-    if (tabInfoAnnotation != null && tabInfoFunctionDescription != null) {
+  private void findTabContainerClass() throws UnableToCompleteException {
+    if (tabContainerClassName == null) {
+      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+            + " in " + presenterInspector.getPresenterClassName()
+            + " must define the 'container' parameter.", null);
+      throw new UnableToCompleteException();
+    }
+
+    tabContainerClass = oracle.findType(tabContainerClassName);
+    if (tabContainerClass == null) {
+      logger.log(TreeLogger.ERROR, "The container '" + tabContainerClassName + "' in @"
+          + TabInfo.class.getSimpleName() + " for '" + presenterInspector.getPresenterClassName()
+          + "' was not found.", null);
+      throw new UnableToCompleteException();
+    }
+  }
+
+  private void ensureNameTokenIsValid() throws UnableToCompleteException {
+    if (targetNameToken.length() == 0) {
+      targetNameToken =  null;
+    }
+
+    if (targetNameToken != null && nameToken != null) {
+      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName() + " in "
+          + presenterInspector.getPresenterClassName() + " defines the 'nameToken' parameter but "
+          + "its proxy is a place, this is not permitted.", null);
+      throw new UnableToCompleteException();
+    }
+    if (targetNameToken == null && nameToken == null) {
+      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName() + " in "
+          + presenterInspector.getPresenterClassName() + " does not define the 'nameToken' "
+          + "parameter and its proxy is not a place, this is not permitted.", null);
+      throw new UnableToCompleteException();
+    }
+  }
+
+  private void findTabLabel(TabInfo tabInfoAnnotation)
+      throws UnableToCompleteException {
+    if (tabInfoAnnotation.label().length() > 0) {
+      tabLabel = tabInfoAnnotation.label();
+    }
+
+    if (tabLabel == null) {
+      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
+          + " annotating a proxy in " + presenterInspector.getPresenterClassName()
+          + " must define the 'label' parameter.", null);
+      throw new UnableToCompleteException();
+    }
+  }
+
+  private void findTabPriority(TabInfo tabInfoAnnotation) {
+    tabPriority = tabInfoAnnotation.priority();
+    if (tabPriority < 0) {
+      tabPriority = null;
+    }
+  }
+
+  private void ensureExactlyOneTabInfoAnnotation(TabInfo tabInfoAnnotation)
+      throws UnableToCompleteException {
+    if (tabInfoAnnotation != null && tabInfoMethod != null) {
       logger.log(TreeLogger.ERROR, "Presenter " + presenterInspector.getPresenterClassName()
           + " contains both a proxy and a method annotated with @' +"
           + TabInfo.class.getSimpleName() + ". This is illegal.", null);
       throw new UnableToCompleteException();
     }
-    if (tabInfoFunctionDescription != null) {
-      tabInfoAnnotation = tabInfoFunctionDescription.annotation;
-    }
-    if (tabInfoAnnotation == null) {
+    if (tabInfoAnnotation == null && tabInfoMethod == null) {
       logger.log(TreeLogger.ERROR, "The proxy for '" + presenterInspector.getPresenterClassName()
-          + "' is a TabContentProxy, but is not annotated with @' +"
+          + "' is a TabContentProxy but is not annotated with @' +"
           + TabInfo.class.getSimpleName()
           + " and its presenter has no method annotated with it either.", null);
-      throw new UnableToCompleteException();
-    }
-
-    // Extract the label if its in TabInfo
-    if (tabInfoAnnotation.label().length() > 0) {
-      tabLabel = tabInfoAnnotation.label();
-    }
-    if (tabLabel != null && tabInfoFunctionDescription != null) {
-      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
-          + " in " + presenterInspector.getPresenterClassName() + " defines the 'label' parameter and"
-          + " annotates a method, this is not permitted.", null);
-      throw new UnableToCompleteException();
-    }
-    if (tabLabel == null && tabInfoFunctionDescription == null) {
-      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
-          + " in " + presenterInspector.getPresenterClassName() + " does not define the 'label' parameter and"
-          + " does not annotate a method, this is not permitted.", null);
-      throw new UnableToCompleteException();
-    }
-
-    // Extract the label if its in TabInfo (it is a negative integer if not set)
-    if (tabInfoAnnotation.priority() >= 0) {
-      tabPriority = tabInfoAnnotation.priority();
-    }
-    if (tabPriority != null &&
-        tabInfoFunctionDescription != null && !tabInfoFunctionDescription.returnString) {
-      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
-          + " in " + presenterInspector.getPresenterClassName() + " defines the 'priority' parameter and"
-          + " annotates a method returning TabData, this is not permitted.", null);
-      throw new UnableToCompleteException();
-    }
-    if (tabPriority == null &&
-        (tabInfoFunctionDescription == null || tabInfoFunctionDescription.returnString)) {
-      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
-          + " in " + presenterInspector.getPresenterClassName() + " does not define the 'priority' parameter and"
-          + " does not annotate a method returning TabData, this is not permitted.", null);
-      throw new UnableToCompleteException();
-    }
-
-    // Find the container
-    tabContainerClass = oracle.findType(tabInfoAnnotation.container().getCanonicalName());
-    if (tabContainerClass == null) {
-      logger.log(TreeLogger.ERROR, "The container '"
-          + tabInfoAnnotation.container().getCanonicalName()
-          + "' in the proxy annotation for '" + presenterInspector.getPresenterClassName()
-          + "' was not found.", null);
-      throw new UnableToCompleteException();
-    }
-    tabContainerClassName = tabContainerClass.getParameterizedQualifiedSourceName();
-
-    // Find the name token to use when the tab is clicked
-    if (tabInfoAnnotation.nameToken().length() > 0) {
-      targetNameToken = tabInfoAnnotation.nameToken();
-    }
-    if (targetNameToken != null && nameToken != null) {
-      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
-          + " in " + presenterInspector.getPresenterClassName() + " defines the 'nameToken' parameter but"
-          + " its proxy is a place, this is not permitted.", null);
-      throw new UnableToCompleteException();
-    }
-    if (targetNameToken == null && nameToken == null) {
-      logger.log(TreeLogger.ERROR, "The @" + TabInfo.class.getSimpleName()
-          + " in " + presenterInspector.getPresenterClassName() + " does not define the 'nameToken' parameter and"
-          + " its proxy is not a place, this is not permitted.", null);
-      throw new UnableToCompleteException();
-    }
-
-    // Find the field annotated with @RequestTabs in the tabContainerClass
-    requestTabFieldName = null;
-    for (JField field : tabContainerClass.getFields()) {
-      RequestTabs annotation = field.getAnnotation(RequestTabs.class);
-      JParameterizedType parameterizedType = field.getType().isParameterized();
-      if (annotation != null) {
-        if (!field.isStatic()
-            || parameterizedType == null
-            || !parameterizedType.isAssignableTo(classCollection.typeClass)
-            || !parameterizedType.getTypeArgs()[0].isAssignableTo(classCollection.requestTabsHandlerClass)) {
-          logger.log(
-              TreeLogger.ERROR,
-              "Found the annotation @" + RequestTabs.class.getSimpleName() + " on the invalid field '"
-                  + tabContainerClassName + "." + field.getName()
-                  + "'. Field must be static and its type must be Type<RequestTabsHandler<?>>.", null);
-          throw new UnableToCompleteException();
-        }
-        if (requestTabFieldName != null) {
-          logger.log(
-              TreeLogger.ERROR,
-              "Found the annotation @" + RequestTabs.class.getSimpleName() + " on more than one field in '"
-                  + tabContainerClassName + "'. This is not allowed.", null);
-          throw new UnableToCompleteException();
-        }
-        requestTabFieldName = field.getName();
-      }
-    }
-    if (requestTabFieldName == null) {
-      logger.log(TreeLogger.ERROR, "Did not find any field annotated with @"
-          + RequestTabs.class.getSimpleName() + " on the container '"
-          + tabContainerClassName + "' while building proxy for presenter '"
-          + presenterInspector.getPresenterClassName() + "'.", null);
       throw new UnableToCompleteException();
     }
   }
