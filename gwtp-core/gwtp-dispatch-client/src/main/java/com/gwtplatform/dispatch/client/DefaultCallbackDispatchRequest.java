@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * An implementation of {@link DispatchRequest} that should be used by
+ * An implementation of {@link CallbackDispatchRequest} that should be used by
  * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that
  * make asynchronous calls that do not return a {@link com.google.gwt.http.client.Request}.
  * <p/>

@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.client;
 
+import com.gwtplatform.dispatch.shared.DispatchRequest;
+
 /**
  * An implementation of {@link DispatchRequest} that is always completed. It
  * should be used with {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s

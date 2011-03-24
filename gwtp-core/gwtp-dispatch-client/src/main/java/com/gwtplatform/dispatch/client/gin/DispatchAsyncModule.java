@@ -22,11 +22,11 @@ import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.DefaultDispatchAsync;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.DispatchAsync;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This gin module provides provides access to the {@link DispatchAsync}

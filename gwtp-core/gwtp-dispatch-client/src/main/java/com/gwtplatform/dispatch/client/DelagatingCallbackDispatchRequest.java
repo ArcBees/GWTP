@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * An implementation of {@link DispatchRequest} that should be used by

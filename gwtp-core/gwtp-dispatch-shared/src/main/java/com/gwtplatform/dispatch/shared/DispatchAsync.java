@@ -14,12 +14,9 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
 
 /**
  * The asynchronous client-side dispatcher service with an arbitrary action
@@ -31,11 +28,11 @@ import com.gwtplatform.dispatch.shared.Result;
  * fact, GWT currently can't correctly handle having generic method templates in
  * method signatures (eg. <code>&lt;A&gt; A create( Class<A> type )</code>)
  *
- * @see com.gwtplatform.dispatch.client.DispatchAsync
+ * @see com.gwtplatform.dispatch.shared.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
- * @see com.gwtplatform.dispatch.client.DispatchService
- * @see com.gwtplatform.dispatch.client.DispatchServiceAsync
+ * @see com.gwtplatform.dispatch.shared.DispatchService
+ * @see com.gwtplatform.dispatch.shared.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
  *
  * @author David Peterson

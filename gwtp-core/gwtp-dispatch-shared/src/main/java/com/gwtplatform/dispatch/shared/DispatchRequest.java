@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.shared;
 
 /**
  * This interface provides a common base to give the ability to the client to
