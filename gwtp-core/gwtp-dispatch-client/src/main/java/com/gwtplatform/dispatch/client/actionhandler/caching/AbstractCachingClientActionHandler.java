@@ -22,11 +22,11 @@ import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
 
 import java.util.ArrayList;

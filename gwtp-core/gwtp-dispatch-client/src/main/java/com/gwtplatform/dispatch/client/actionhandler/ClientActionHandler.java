@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import com.gwtplatform.dispatch.client.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
@@ -28,7 +28,7 @@ import com.gwtplatform.dispatch.shared.Result;
  * <p/>
  * When a command is executed (or undone), the {@link ClientActionHandler} that
  * has been registered with the bound {@link ClientActionHandlerRegistry} is
- * called and {@link com.gwtplatform.dispatch.client.DispatchAsync DispatchAsync} does
+ * called and {@link com.gwtplatform.dispatch.shared.DispatchAsync DispatchAsync} does
  * not automatically send the command over gwt-rpc to the server.
  *
  * Client Action Handlers provide a number of flexible options:

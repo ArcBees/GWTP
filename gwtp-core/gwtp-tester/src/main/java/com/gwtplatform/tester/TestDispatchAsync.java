@@ -18,13 +18,13 @@ package com.gwtplatform.tester;
 
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchAsync;
-import com.gwtplatform.dispatch.client.DispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchService;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.DispatchService;
 import com.gwtplatform.dispatch.shared.Result;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
