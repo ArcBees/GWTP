@@ -41,6 +41,14 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-server-guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-server-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-tester</artifactId>
         </dependency>
         <dependency>
@@ -120,6 +128,18 @@
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-server</artifactId>
+                    <version>${project.version}</version>
+                    <classifier>sources</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-server-guice</artifactId>
+                    <version>${project.version}</version>
+                    <classifier>sources</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-server-spring</artifactId>
                     <version>${project.version}</version>
                     <classifier>sources</classifier>
                 </dependency>

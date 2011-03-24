@@ -9,21 +9,24 @@
     </parent>
 
     <groupId>com.gwtplatform</groupId>
-    <artifactId>gwtp-dispatch-server</artifactId>
-    <name>GWTP Dispatch Server Base</name>
+    <artifactId>gwtp-dispatch-test</artifactId>
+    <name>Testing class for gwtp-dispatch projects</name>
+	<description>This is only meant for internal testing and should never be used outside of GWTP.</description>
 
     <dependencies>
         <dependency>
             <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-shared</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-client</artifactId>   <!-- TODO We should not have to depend on this -->
+            <artifactId>gwtp-dispatch-server</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+			<scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
