@@ -20,6 +20,9 @@
         <module>gwtp-dispatch-client</module>
         <module>gwtp-dispatch-shared</module>
         <module>gwtp-dispatch-server</module>
+        <module>gwtp-dispatch-server-guice</module>
+        <module>gwtp-dispatch-server-spring</module>
+        <module>gwtp-dispatch-test</module>
         <module>gwtp-tester</module>
         <module>gwtp-processors</module>
         <module>gwtp-crawler</module>
@@ -53,6 +56,8 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+				<!-- Even though this is not needed server-side, we do not use a provided
+				scope as this dependency is always included transitively. -->
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-clients-common</artifactId>
                 <version>${project.version}</version>
@@ -66,6 +71,8 @@
                 <groupId>com.gwtplatform</groupId>
                 <artifactId>gwtp-dispatch-client</artifactId>
                 <version>${project.version}</version>
+				<!-- TODO Uncomment when http://code.google.com/p/gwt-platform/issues/detail?id=274 is solved -->
+				<!-- <scope>provided</scope> --> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -74,13 +81,31 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-server-guice</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-server-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-test</artifactId>
+                <version>${project.version}</version>
+				<scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-mvp-client</artifactId>
                 <version>${project.version}</version>
+				<scope>provided</scope> <!-- Not needed server-side -->				
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-processors</artifactId>
                 <version>${project.version}</version>
+				<scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -93,12 +118,13 @@
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-user</artifactId>
                 <version>${gwt.version}</version>
+                <scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-dev</artifactId>
                 <version>${gwt.version}</version>
-                <scope>provided</scope>
+                <scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
 
             <!-- DI dependencies -->
@@ -121,6 +147,7 @@
                 <groupId>com.google.gwt.inject</groupId>
                 <artifactId>gin</artifactId>
                 <version>${gin.version}</version>
+				<scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
 
             <!-- Test dependencies -->

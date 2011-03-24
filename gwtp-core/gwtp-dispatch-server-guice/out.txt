@@ -1,0 +1,1284 @@
+Apache Maven 3.0 (r1004208; 2010-10-04 04:50:56-0700)
+Java version: 1.6.0_20
+Java home: C:\Program Files\Java\jdk1.6.0_20\jre
+Default locale: en_US, platform encoding: Cp1252
+OS name: "windows 7" version: "6.1" arch: "amd64" Family: "windows"
+[INFO] Error stacktraces are turned on.
+[DEBUG] Reading user settings from C:\Users\beaudoin\.m2\settings.xml
+[DEBUG] Reading global settings from C:\Program Files\Apache Software Foundation\apache-maven-3.0\conf\settings.xml
+[DEBUG] Using local repository at C:\Users\beaudoin\.m2\repository
+[INFO] Scanning for projects...
+[DEBUG] Extension realms for project com.gwtplatform:gwtp-dispatch-server-guice:jar:0.6-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging jar from ClassRealm[plexus.core, parent: null]
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: com.gwtplatform:gwtp-dispatch-server-guice:jar:0.6-SNAPSHOT
+[DEBUG] Tasks:   [install]
+[DEBUG] Style:   Regular
+[DEBUG] =======================================================================
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building GWTP Dispatch Server, Guice implementation 0.6-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       com.gwtplatform:gwtp-dispatch-server-guice:0.6-SNAPSHOT
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): [compile, runtime, test]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-enforcer-plugin:1.0-beta-1:enforce (enforce-maven)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <fail default-value="true">${enforcer.fail}</fail>
+  <failFast default-value="false">${enforcer.failFast}</failFast>
+  <ignoreCache default-value="false">${enforcer.ignoreCache}</ignoreCache>
+  <project>${project}</project>
+  <rules>
+    <requireMavenVersion>
+      <version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+      <message>Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums respectively.</message>
+    </requireMavenVersion>
+  </rules>
+  <session>${session}</session>
+  <skip default-value="false">${enforcer.skip}</skip>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-checkstyle-plugin:2.6:checkstyle (validate)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <cacheFile default-value="${project.build.directory}/checkstyle-cachefile"/>
+  <configLocation default-value="config/sun_checks.xml">/gwtp-checkstyle.xml</configLocation>
+  <consoleOutput default-value="false">true</consoleOutput>
+  <enableFilesSummary default-value="true">${checkstyle.enable.files.summary}</enableFilesSummary>
+  <enableRSS default-value="true">${checkstyle.enable.rss}</enableRSS>
+  <enableRulesSummary default-value="true">${checkstyle.enable.rules.summary}</enableRulesSummary>
+  <enableSeveritySummary default-value="true">${checkstyle.enable.severity.summary}</enableSeveritySummary>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <excludes>${checkstyle.excludes}</excludes>
+  <failsOnError default-value="false">true</failsOnError>
+  <format default-value="sun"/>
+  <headerFile>${basedir}/LICENSE.txt</headerFile>
+  <headerLocation default-value="LICENSE.txt">/gwtp-java-header.txt</headerLocation>
+  <includeTestSourceDirectory default-value="${false}">true</includeTestSourceDirectory>
+  <includes default-value="**/*.java">${checkstyle.includes}</includes>
+  <linkXRef default-value="true">false</linkXRef>
+  <outputDirectory default-value="${project.reporting.outputDirectory}"/>
+  <outputFile default-value="${project.build.directory}/checkstyle-result.xml">${checkstyle.output.file}</outputFile>
+  <outputFileFormat default-value="xml">${checkstyle.output.format}</outputFileFormat>
+  <project default-value="${project}"/>
+  <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
+  <propertyExpansion>basedir=C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice</propertyExpansion>
+  <skip default-value="false">${checkstyle.skip}</skip>
+  <sourceDirectory default-value="${project.build.sourceDirectory}"/>
+  <suppressionsFileExpression default-value="checkstyle.suppressions.file">${checkstyle.suppression.expression}</suppressionsFileExpression>
+  <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
+  <testSourceDirectory default-value="${project.build.testSourceDirectory}"/>
+  <xrefLocation default-value="${project.reporting.outputDirectory}/xref"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources (default-resources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <escapeString default-value="${maven.resources.escapeString}"/>
+  <escapeWindowsPaths default-value="true">${maven.resources.escapeWindowsPaths}</escapeWindowsPaths>
+  <includeEmptyDirs default-value="false">${maven.resources.includeEmptyDirs}</includeEmptyDirs>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <overwrite default-value="false">${maven.resources.overwrite}</overwrite>
+  <project default-value="${project}"/>
+  <resources default-value="${project.resources}"/>
+  <session default-value="${session}"/>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile (default-compile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <classpathElements default-value="${project.compileClasspathElements}"/>
+  <compileSourceRoots default-value="${project.compileSourceRoots}"/>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <fork default-value="false">${maven.compiler.fork}</fork>
+  <generatedSourcesDirectory default-value="${project.build.directory}/generated-sources/annotations"/>
+  <maxmem>${maven.compiler.maxmem}</maxmem>
+  <meminitial>${maven.compiler.meminitial}</meminitial>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <outputFileName>${project.build.finalName}</outputFileName>
+  <projectArtifact default-value="${project.artifact}"/>
+  <session default-value="${session}"/>
+  <showDeprecation default-value="false">${maven.compiler.showDeprecation}</showDeprecation>
+  <showWarnings default-value="false">${maven.compiler.showWarnings}</showWarnings>
+  <source default-value="1.5">1.6</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.5">1.6</target>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources (default-testResources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <escapeString default-value="${maven.resources.escapeString}"/>
+  <escapeWindowsPaths default-value="true">${maven.resources.escapeWindowsPaths}</escapeWindowsPaths>
+  <includeEmptyDirs default-value="false">${maven.resources.includeEmptyDirs}</includeEmptyDirs>
+  <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+  <overwrite default-value="false">${maven.resources.overwrite}</overwrite>
+  <project default-value="${project}"/>
+  <resources>${project.testResources}</resources>
+  <session default-value="${session}"/>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile (default-testCompile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <classpathElements default-value="${project.testClasspathElements}"/>
+  <compileSourceRoots default-value="${project.testCompileSourceRoots}"/>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <fork default-value="false">${maven.compiler.fork}</fork>
+  <generatedTestSourcesDirectory default-value="${project.build.directory}/generated-sources/test-annotations"/>
+  <maxmem>${maven.compiler.maxmem}</maxmem>
+  <meminitial>${maven.compiler.meminitial}</meminitial>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <outputFileName>${project.build.finalName}</outputFileName>
+  <session default-value="${session}"/>
+  <showDeprecation default-value="false">${maven.compiler.showDeprecation}</showDeprecation>
+  <showWarnings default-value="false">${maven.compiler.showWarnings}</showWarnings>
+  <skip>${maven.test.skip}</skip>
+  <source default-value="1.5">1.6</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.5">1.6</target>
+  <testSource>${maven.compiler.testSource}</testSource>
+  <testTarget>${maven.compiler.testTarget}</testTarget>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-surefire-plugin:2.6:test (default-test)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <argLine>${argLine}</argLine>
+  <basedir default-value="${basedir}"/>
+  <childDelegation default-value="false">${childDelegation}</childDelegation>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <debugForkedProcess>${maven.surefire.debug}</debugForkedProcess>
+  <disableXmlReport default-value="false">${disableXmlReport}</disableXmlReport>
+  <enableAssertions default-value="true">${enableAssertions}</enableAssertions>
+  <excludedGroups>${excludedGroups}</excludedGroups>
+  <failIfNoTests>${failIfNoTests}</failIfNoTests>
+  <forkMode default-value="once">${forkMode}</forkMode>
+  <forkedProcessTimeoutInSeconds>${surefire.timeout}</forkedProcessTimeoutInSeconds>
+  <groups>${groups}</groups>
+  <includes>
+    <include>**/*Test.java</include>
+    <include>**/*TestCase.java</include>
+  </includes>
+  <junitArtifactName default-value="junit:junit">${junitArtifactName}</junitArtifactName>
+  <jvm>${jvm}</jvm>
+  <localRepository>${localRepository}</localRepository>
+  <objectFactory>${objectFactory}</objectFactory>
+  <parallel>${parallel}</parallel>
+  <parallelMavenExecution default-value="${session.parallel}"/>
+  <perCoreThreadCount>${perCoreThreadCount}</perCoreThreadCount>
+  <pluginArtifactMap>${plugin.artifactMap}</pluginArtifactMap>
+  <printSummary default-value="true">${surefire.printSummary}</printSummary>
+  <project default-value="${project}"/>
+  <projectArtifactMap>${project.artifactMap}</projectArtifactMap>
+  <redirectTestOutputToFile default-value="false">${maven.test.redirectTestOutputToFile}</redirectTestOutputToFile>
+  <remoteRepositories>${project.pluginArtifactRepositories}</remoteRepositories>
+  <reportFormat default-value="brief">${surefire.reportFormat}</reportFormat>
+  <reportsDirectory default-value="${project.build.directory}/surefire-reports"/>
+  <session>${session}</session>
+  <skip default-value="false">${maven.test.skip}</skip>
+  <skipExec>${maven.test.skip.exec}</skipExec>
+  <skipTests default-value="false">${skipTests}</skipTests>
+  <test>${test}</test>
+  <testClassesDirectory default-value="${project.build.testOutputDirectory}"/>
+  <testFailureIgnore default-value="false">${maven.test.failure.ignore}</testFailureIgnore>
+  <testNGArtifactName default-value="org.testng:testng">${testNGArtifactName}</testNGArtifactName>
+  <testSourceDirectory default-value="${project.build.testSourceDirectory}"/>
+  <threadCount>${threadCount}</threadCount>
+  <trimStackTrace default-value="true">${trimStackTrace}</trimStackTrace>
+  <useFile default-value="true">${surefire.useFile}</useFile>
+  <useManifestOnlyJar default-value="true">${surefire.useManifestOnlyJar}</useManifestOnlyJar>
+  <useSystemClassLoader>${surefire.useSystemClassLoader}</useSystemClassLoader>
+  <useUnlimitedThreads>${useUnlimitedThreads}</useUnlimitedThreads>
+  <workingDirectory>${basedir}</workingDirectory>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar (default-jar)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+  <defaultManifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</defaultManifestFile>
+  <finalName default-value="${project.build.finalName}">${jar.finalName}</finalName>
+  <forceCreation default-value="false">${jar.forceCreation}</forceCreation>
+  <outputDirectory>${project.build.directory}</outputDirectory>
+  <project>${project}</project>
+  <useDefaultManifestFile default-value="false">${jar.useDefaultManifestFile}</useDefaultManifestFile>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-install-plugin:2.3.1:install (default-install)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <artifact default-value="${project.artifact}"/>
+  <attachedArtifacts default-value="${project.attachedArtifacts}"/>
+  <createChecksum default-value="false">${createChecksum}</createChecksum>
+  <localRepository>${localRepository}</localRepository>
+  <packaging default-value="${project.packaging}"/>
+  <pomFile default-value="${project.file}"/>
+  <updateReleaseInfo default-value="false">${updateReleaseInfo}</updateReleaseInfo>
+</configuration>
+[DEBUG] =======================================================================
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-server:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-server:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-core:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-core:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-shared:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-shared:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-client:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-client:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-clients-common:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-clients-common:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] com.gwtplatform:gwtp-dispatch-server-guice:jar:0.6-SNAPSHOT
+[DEBUG]    com.gwtplatform:gwtp-dispatch-server:jar:0.6-SNAPSHOT:compile
+[DEBUG]       com.gwtplatform:gwtp-dispatch-shared:jar:0.6-SNAPSHOT:compile
+[DEBUG]       com.gwtplatform:gwtp-dispatch-client:jar:0.6-SNAPSHOT:compile
+[DEBUG]          com.gwtplatform:gwtp-clients-common:jar:0.6-SNAPSHOT:compile
+[DEBUG]          com.google.gwt.inject:gin:jar:1.5.0:provided (scope managed from compile)
+[DEBUG]             com.google.inject.extensions:guice-assistedinject:jar:3.0-rc2:provided
+[DEBUG]             com.google.gwt:gwt-servlet:jar:2.2.0:provided
+[DEBUG]       com.google.gwt:gwt-user:jar:2.2.0:provided (scope managed from compile)
+[DEBUG]       org.springframework:spring-core:jar:3.0.5.RELEASE:compile
+[DEBUG]          org.springframework:spring-asm:jar:3.0.5.RELEASE:compile
+[DEBUG]          commons-logging:commons-logging:jar:1.1.1:compile
+[DEBUG]       org.springframework:spring-context:jar:3.0.5.RELEASE:compile
+[DEBUG]          org.springframework:spring-aop:jar:3.0.5.RELEASE:compile
+[DEBUG]          org.springframework:spring-expression:jar:3.0.5.RELEASE:compile
+[DEBUG]       org.springframework:spring-beans:jar:3.0.5.RELEASE:compile
+[DEBUG]       org.springframework:spring-web:jar:3.0.5.RELEASE:compile
+[DEBUG]    com.google.inject:guice:jar:3.0-rc2:compile
+[DEBUG]       javax.inject:javax.inject:jar:1:compile
+[DEBUG]       aopalliance:aopalliance:jar:1.0:compile
+[DEBUG]    junit:junit:jar:4.5:test
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-server:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-server:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-shared:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-shared:0.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-client:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-dispatch-client:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-clients-common:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.gwtplatform:gwtp-clients-common:0.6-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0-beta-1:enforce (enforce-maven) @ gwtp-dispatch-server-guice ---
+[DEBUG] org.apache.maven.plugins:maven-enforcer-plugin:jar:1.0-beta-1:
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-model:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.9:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]          junit:junit:jar:3.8.2:test (scope managed from compile) (version managed from 3.8.1)
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9:compile
+[DEBUG]       org.apache.maven.reporting:maven-reporting-api:jar:2.0.9:compile
+[DEBUG]          org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-10:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.9:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.0:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.9:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4:compile
+[DEBUG]       org.apache.maven:maven-monitor:jar:2.0.9:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:1.5.8:compile
+[DEBUG]    commons-lang:commons-lang:jar:2.3:compile
+[DEBUG]    org.apache.maven.enforcer:enforcer-api:jar:1.0-beta-1:compile
+[DEBUG]    org.apache.maven.enforcer:enforcer-rules:jar:1.0-beta-1:compile
+[DEBUG]       org.beanshell:bsh:jar:2.0b4:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-enforcer-plugin:1.0-beta-1
+[DEBUG] Created new class realm maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-enforcer-plugin:1.0-beta-1
+[DEBUG]   Included: org.apache.maven.plugins:maven-enforcer-plugin:jar:1.0-beta-1
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.0.9
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-10
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:1.5.8
+[DEBUG]   Included: commons-lang:commons-lang:jar:2.3
+[DEBUG]   Included: org.apache.maven.enforcer:enforcer-api:jar:1.0-beta-1
+[DEBUG]   Included: org.apache.maven.enforcer:enforcer-rules:jar:1.0-beta-1
+[DEBUG]   Included: org.beanshell:bsh:jar:2.0b4
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.9
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG]   Excluded: junit:junit:jar:3.8.2
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.9
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-enforcer-plugin:1.0-beta-1:enforce from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-enforcer-plugin:1.0-beta-1, parent: ClassRealm[maven.api, parent: null]]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-enforcer-plugin:1.0-beta-1:enforce' with basic configurator -->
+[DEBUG]   (s) fail = true
+[DEBUG]   (s) failFast = false
+[DEBUG]   (f) ignoreCache = false
+[DEBUG]   (s) project = MavenProject: com.gwtplatform:gwtp-dispatch-server-guice:0.6-SNAPSHOT @ C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\pom.xml
+[DEBUG]   (s) version = (,2.1.0),(2.1.0,2.2.0),(2.2.0,)
+[DEBUG]   (f) message = Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums respectively.
+[DEBUG]   (s) rules = [org.apache.maven.plugins.enforcer.RequireMavenVersion@d71194d]
+[DEBUG]   (s) session = org.apache.maven.execution.MavenSession@3f56e5ed
+[DEBUG]   (s) skip = false
+[DEBUG] -- end configuration --
+[DEBUG] Executing rule: org.apache.maven.plugins.enforcer.RequireMavenVersion
+[DEBUG] Rule org.apache.maven.plugins.enforcer.RequireMavenVersion is cacheable.
+[DEBUG] Detected Maven Version: 3.0
+[DEBUG] Detected Maven Version: 3.0 is allowed in the range (,2.1.0),(2.1.0,2.2.0),(2.2.0,).
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.6:checkstyle (validate) @ gwtp-dispatch-server-guice ---
+[DEBUG] Failure to find com.gwtplatform:gwtp-build-tools:0.6-SNAPSHOT/maven-metadata.xml in http://maven-annotation-plugin.googlecode.com/svn/trunk/mavenrepo was cached in the local repository, resolution will not be reattempted until the update interval of maven-annotation-plugin has elapsed or updates are forced
+[DEBUG] Failure to find com.gwtplatform:gwtp-build-tools:0.6-SNAPSHOT/maven-metadata.xml in http://repository.apache.org/snapshots was cached in the local repository, resolution will not be reattempted until the update interval of apache.snapshots has elapsed or updates are forced
+[DEBUG] Failure to find com.gwtplatform:gwtp-build-tools:0.6-SNAPSHOT/maven-metadata.xml in http://maven-annotation-plugin.googlecode.com/svn/trunk/mavenrepo was cached in the local repository, resolution will not be reattempted until the update interval of maven-annotation-plugin has elapsed or updates are forced
+[DEBUG] Failure to find com.gwtplatform:gwtp-build-tools:0.6-SNAPSHOT/maven-metadata.xml in http://repository.apache.org/snapshots was cached in the local repository, resolution will not be reattempted until the update interval of apache.snapshots has elapsed or updates are forced
+[DEBUG] org.apache.maven.plugins:maven-checkstyle-plugin:jar:2.6:
+[DEBUG]    com.gwtplatform:gwtp-build-tools:jar:0.6-SNAPSHOT:runtime
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]          org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]    org.apache.maven.reporting:maven-reporting-api:jar:3.0:compile
+[DEBUG]    org.apache.maven.reporting:maven-reporting-impl:jar:2.1:compile
+[DEBUG]       org.apache.maven.doxia:doxia-core:jar:1.1.2:compile
+[DEBUG]          xerces:xercesImpl:jar:2.8.1:compile
+[DEBUG]          commons-httpclient:commons-httpclient:jar:3.1:compile
+[DEBUG]             commons-codec:commons-codec:jar:1.2:compile
+[DEBUG]       commons-validator:commons-validator:jar:1.2.0:compile
+[DEBUG]          commons-beanutils:commons-beanutils:jar:1.7.0:compile
+[DEBUG]          commons-digester:commons-digester:jar:1.6:compile
+[DEBUG]          xml-apis:xml-apis:jar:1.0.b2:compile
+[DEBUG]    org.apache.maven.doxia:doxia-sink-api:jar:1.1.3:compile
+[DEBUG]       org.apache.maven.doxia:doxia-logging-api:jar:1.1.3:compile
+[DEBUG]    org.apache.maven.doxia:doxia-decoration-model:jar:1.1.3:compile
+[DEBUG]    org.apache.maven.doxia:doxia-site-renderer:jar:1.1.3:compile
+[DEBUG]       org.apache.maven.doxia:doxia-module-xhtml:jar:1.1.3:compile
+[DEBUG]       org.apache.maven.doxia:doxia-module-fml:jar:1.1.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-i18n:jar:1.0-beta-7:compile
+[DEBUG]    org.apache.maven.shared:maven-doxia-tools:jar:1.2.1:compile
+[DEBUG]       commons-io:commons-io:jar:1.4:compile
+[DEBUG]    org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9:compile
+[DEBUG]       junit:junit:jar:3.8.1:compile
+[DEBUG]       classworlds:classworlds:jar:1.1-alpha-2:compile
+[DEBUG]    org.codehaus.plexus:plexus-resources:jar:1.0-alpha-7:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:2.0.5:compile
+[DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.13:compile
+[DEBUG]    org.codehaus.plexus:plexus-velocity:jar:1.1.8:compile
+[DEBUG]    checkstyle:checkstyle:jar:5.0:compile
+[DEBUG]       antlr:antlr:jar:2.7.6:compile
+[DEBUG]       commons-beanutils:commons-beanutils-core:jar:1.7.0:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.0:compile
+[DEBUG]       commons-logging:commons-logging:jar:1.0.3:compile
+[DEBUG]       com.google.collections:google-collections:jar:0.9:compile
+[DEBUG]    org.apache.velocity:velocity:jar:1.5:compile
+[DEBUG]       commons-lang:commons-lang:jar:2.1:compile
+[DEBUG]       oro:oro:jar:2.0.8:compile
+[DEBUG]    commons-collections:commons-collections:jar:3.2.1:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-checkstyle-plugin:2.6
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-checkstyle-plugin:2.6
+[DEBUG]   Included: org.apache.maven.plugins:maven-checkstyle-plugin:jar:2.6
+[DEBUG]   Included: com.gwtplatform:gwtp-build-tools:jar:0.6-SNAPSHOT
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:3.0
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-impl:jar:2.1
+[DEBUG]   Included: org.apache.maven.doxia:doxia-core:jar:1.1.2
+[DEBUG]   Included: xerces:xercesImpl:jar:2.8.1
+[DEBUG]   Included: commons-httpclient:commons-httpclient:jar:3.1
+[DEBUG]   Included: commons-codec:commons-codec:jar:1.2
+[DEBUG]   Included: commons-validator:commons-validator:jar:1.2.0
+[DEBUG]   Included: commons-beanutils:commons-beanutils:jar:1.7.0
+[DEBUG]   Included: commons-digester:commons-digester:jar:1.6
+[DEBUG]   Included: xml-apis:xml-apis:jar:1.0.b2
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.1.3
+[DEBUG]   Included: org.apache.maven.doxia:doxia-logging-api:jar:1.1.3
+[DEBUG]   Included: org.apache.maven.doxia:doxia-decoration-model:jar:1.1.3
+[DEBUG]   Included: org.apache.maven.doxia:doxia-site-renderer:jar:1.1.3
+[DEBUG]   Included: org.apache.maven.doxia:doxia-module-xhtml:jar:1.1.3
+[DEBUG]   Included: org.apache.maven.doxia:doxia-module-fml:jar:1.1.3
+[DEBUG]   Included: org.codehaus.plexus:plexus-i18n:jar:1.0-beta-7
+[DEBUG]   Included: org.apache.maven.shared:maven-doxia-tools:jar:1.2.1
+[DEBUG]   Included: commons-io:commons-io:jar:1.4
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-resources:jar:1.0-alpha-7
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.13
+[DEBUG]   Included: org.codehaus.plexus:plexus-velocity:jar:1.1.8
+[DEBUG]   Included: checkstyle:checkstyle:jar:5.0
+[DEBUG]   Included: antlr:antlr:jar:2.7.6
+[DEBUG]   Included: commons-beanutils:commons-beanutils-core:jar:1.7.0
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.0
+[DEBUG]   Included: commons-logging:commons-logging:jar:1.0.3
+[DEBUG]   Included: com.google.collections:google-collections:jar:0.9
+[DEBUG]   Included: org.apache.velocity:velocity:jar:1.5
+[DEBUG]   Included: commons-lang:commons-lang:jar:2.1
+[DEBUG]   Included: oro:oro:jar:2.0.8
+[DEBUG]   Included: commons-collections:commons-collections:jar:3.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1-alpha-2
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-checkstyle-plugin:2.6:checkstyle from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-checkstyle-plugin:2.6, parent: ClassRealm[maven.api, parent: null]]
+[DEBUG] Setting property: classpath.resource.loader.class => 'org.codehaus.plexus.velocity.ContextClassLoaderResourceLoader'.
+[DEBUG] Setting property: site.resource.loader.class => 'org.codehaus.plexus.velocity.SiteResourceLoader'.
+[DEBUG] Setting property: velocimacro.messages.on => 'false'.
+[DEBUG] Setting property: resource.loader => 'classpath,site'.
+[DEBUG] Setting property: runtime.log.invalid.references => 'false'.
+[DEBUG] Setting property: resource.manager.logwhenfound => 'false'.
+[DEBUG] Setting property: velocimacro.permissions.allow.inline.to.replace.global => 'true'.
+[DEBUG] *******************************************************************
+[DEBUG] Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+[DEBUG] RuntimeInstance initializing.
+[DEBUG] Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+[DEBUG] LogSystem has been deprecated. Please use a LogChute implementation.
+[DEBUG] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+[DEBUG] ResourceLoader instantiated: org.codehaus.plexus.velocity.ContextClassLoaderResourceLoader
+[DEBUG] ResourceLoader instantiated: org.codehaus.plexus.velocity.SiteResourceLoader
+[DEBUG] ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+[DEBUG] Default ResourceManager initialization complete.
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Include
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+[DEBUG] Created '20' parsers.
+[DEBUG] Velocimacro : initialization starting.
+[DEBUG] Velocimacro : allowInline = true : VMs can be defined inline in templates
+[DEBUG] Velocimacro : allowInlineToOverride = true : VMs defined inline may replace previous VM definitions
+[DEBUG] Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+[DEBUG] Velocimacro : autoload off : VM system will not automatically reload global library macros
+[DEBUG] Velocimacro : Velocimacro : initialization complete.
+[DEBUG] RuntimeInstance successfully initialized.
+[DEBUG] Setting property: classpath.resource.loader.class => 'org.codehaus.plexus.velocity.ContextClassLoaderResourceLoader'.
+[DEBUG] Setting property: site.resource.loader.class => 'org.codehaus.plexus.velocity.SiteResourceLoader'.
+[DEBUG] Setting property: velocimacro.messages.on => 'false'.
+[DEBUG] Setting property: resource.loader => 'classpath,site'.
+[DEBUG] Setting property: runtime.log.invalid.references => 'false'.
+[DEBUG] Setting property: resource.manager.logwhenfound => 'false'.
+[DEBUG] *******************************************************************
+[DEBUG] Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+[DEBUG] RuntimeInstance initializing.
+[DEBUG] Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+[DEBUG] LogSystem has been deprecated. Please use a LogChute implementation.
+[DEBUG] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+[DEBUG] ResourceLoader instantiated: org.codehaus.plexus.velocity.ContextClassLoaderResourceLoader
+[DEBUG] ResourceLoader instantiated: org.codehaus.plexus.velocity.SiteResourceLoader
+[DEBUG] ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+[DEBUG] Default ResourceManager initialization complete.
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Include
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+[DEBUG] Created '20' parsers.
+[DEBUG] Velocimacro : initialization starting.
+[DEBUG] Velocimacro : allowInline = true : VMs can be defined inline in templates
+[DEBUG] Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+[DEBUG] Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+[DEBUG] Velocimacro : autoload off : VM system will not automatically reload global library macros
+[DEBUG] Velocimacro : Velocimacro : initialization complete.
+[DEBUG] RuntimeInstance successfully initialized.
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-checkstyle-plugin:2.6:checkstyle' with basic configurator -->
+[DEBUG]   (f) cacheFile = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target/checkstyle-cachefile
+[DEBUG]   (f) configLocation = /gwtp-checkstyle.xml
+[DEBUG]   (f) consoleOutput = true
+[DEBUG]   (f) enableFilesSummary = true
+[DEBUG]   (f) enableRSS = true
+[DEBUG]   (f) enableRulesSummary = true
+[DEBUG]   (f) enableSeveritySummary = true
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failsOnError = true
+[DEBUG]   (f) format = sun
+[DEBUG]   (f) headerFile = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\LICENSE.txt
+[DEBUG]   (f) headerLocation = /gwtp-java-header.txt
+[DEBUG]   (f) includeTestSourceDirectory = true
+[DEBUG]   (f) includes = **/*.java
+[DEBUG]   (f) linkXRef = false
+[DEBUG]   (f) outputDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\site
+[DEBUG]   (f) outputFile = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\checkstyle-result.xml
+[DEBUG]   (f) outputFileFormat = xml
+[DEBUG]   (f) project = MavenProject: com.gwtplatform:gwtp-dispatch-server-guice:0.6-SNAPSHOT @ C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\pom.xml
+[DEBUG]   (f) propertiesLocation = /gwtp-checkstyle.properties
+[DEBUG]   (f) propertyExpansion = basedir=C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) sourceDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\main\java
+[DEBUG]   (f) suppressionsFileExpression = checkstyle.suppressions.file
+[DEBUG]   (f) suppressionsLocation = /gwtp-suppressions.xml
+[DEBUG]   (f) testSourceDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java
+[DEBUG]   (f) xrefLocation = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\site\xref
+[DEBUG] -- end configuration --
+[DEBUG] executeCheckstyle start headerLocation : /gwtp-java-header.txt
+[DEBUG] The resource '/gwtp-suppressions.xml' was not found with resourceLoader org.codehaus.plexus.resource.loader.FileResourceLoader.
+[DEBUG] URLResourceLoader: Exception when looking for '/gwtp-suppressions.xml
+java.net.MalformedURLException: no protocol: /gwtp-suppressions.xml
+	at java.net.URL.<init>(URL.java:567)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at org.codehaus.plexus.resource.loader.URLResourceLoader.getResource(URLResourceLoader.java:123)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResource(DefaultResourceManager.java:159)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResourceAsFile(DefaultResourceManager.java:91)
+	at org.codehaus.plexus.resource.DefaultResourceManager.resolveLocation(DefaultResourceManager.java:111)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getSuppressions(DefaultCheckstyleExecutor.java:427)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.executeCheckstyle(DefaultCheckstyleExecutor.java:97)
+	at org.apache.maven.plugin.checkstyle.CheckstyleReport.executeReport(CheckstyleReport.java:578)
+	at org.apache.maven.reporting.AbstractMavenReport.generate(AbstractMavenReport.java:190)
+	at org.apache.maven.reporting.AbstractMavenReport.execute(AbstractMavenReport.java:99)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+[DEBUG] The resource '/gwtp-suppressions.xml' was not found with resourceLoader org.codehaus.plexus.resource.loader.URLResourceLoader.
+[DEBUG] The resource '/gwtp-suppressions.xml' was found as jar:file:/C:/Users/beaudoin/.m2/repository/com/gwtplatform/gwtp-build-tools/0.6-SNAPSHOT/gwtp-build-tools-0.6-SNAPSHOT.jar!/gwtp-suppressions.xml.
+[DEBUG] Adding the outputDirectory file:/C:/Users/beaudoin/workspace/gwtp/gwtp-core/gwtp-dispatch-server-guice/target/classes/ to the Checkstyle class path
+[DEBUG] Adding the outputDirectory file:/C:/Users/beaudoin/workspace/gwtp/gwtp-core/gwtp-dispatch-server-guice/target/test-classes/ to the Checkstyle class path
+[DEBUG] request.getConfigLocation() /gwtp-checkstyle.xml
+[DEBUG] Extension realms for project com.gwtplatform:gwtp-core:pom:0.6-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
+[DEBUG] Extension realms for project com.gwtplatform:gwtp:pom:0.6-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
+[DEBUG] Extension realms for project org.sonatype.oss:oss-parent:pom:5: (none)
+[DEBUG] Looking up lifecyle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
+[DEBUG] The resource '/gwtp-checkstyle.xml' was not found with resourceLoader org.codehaus.plexus.resource.loader.FileResourceLoader.
+[DEBUG] URLResourceLoader: Exception when looking for '/gwtp-checkstyle.xml' at ''
+java.net.MalformedURLException: no protocol: /gwtp-checkstyle.xml
+	at java.net.URL.<init>(URL.java:567)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at org.codehaus.plexus.resource.loader.URLResourceLoader.getResource(URLResourceLoader.java:71)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResource(DefaultResourceManager.java:159)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResourceAsFile(DefaultResourceManager.java:91)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfigFile(DefaultCheckstyleExecutor.java:471)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfiguration(DefaultCheckstyleExecutor.java:236)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.executeCheckstyle(DefaultCheckstyleExecutor.java:173)
+	at org.apache.maven.plugin.checkstyle.CheckstyleReport.executeReport(CheckstyleReport.java:578)
+	at org.apache.maven.reporting.AbstractMavenReport.generate(AbstractMavenReport.java:190)
+	at org.apache.maven.reporting.AbstractMavenReport.execute(AbstractMavenReport.java:99)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+[DEBUG] URLResourceLoader: Exception when looking for '/gwtp-checkstyle.xml
+java.net.MalformedURLException: no protocol: /gwtp-checkstyle.xml
+	at java.net.URL.<init>(URL.java:567)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at org.codehaus.plexus.resource.loader.URLResourceLoader.getResource(URLResourceLoader.java:123)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResource(DefaultResourceManager.java:159)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResourceAsFile(DefaultResourceManager.java:91)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfigFile(DefaultCheckstyleExecutor.java:471)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfiguration(DefaultCheckstyleExecutor.java:236)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.executeCheckstyle(DefaultCheckstyleExecutor.java:173)
+	at org.apache.maven.plugin.checkstyle.CheckstyleReport.executeReport(CheckstyleReport.java:578)
+	at org.apache.maven.reporting.AbstractMavenReport.generate(AbstractMavenReport.java:190)
+	at org.apache.maven.reporting.AbstractMavenReport.execute(AbstractMavenReport.java:99)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+[DEBUG] The resource '/gwtp-checkstyle.xml' was not found with resourceLoader org.codehaus.plexus.resource.loader.URLResourceLoader.
+[DEBUG] The resource '/gwtp-checkstyle.xml' was found as jar:file:/C:/Users/beaudoin/.m2/repository/com/gwtplatform/gwtp-build-tools/0.6-SNAPSHOT/gwtp-build-tools-0.6-SNAPSHOT.jar!/gwtp-checkstyle.xml.
+[DEBUG] request.getPropertiesLocation() /gwtp-checkstyle.properties
+[DEBUG] The resource '/gwtp-checkstyle.properties' was not found with resourceLoader org.codehaus.plexus.resource.loader.FileResourceLoader.
+[DEBUG] URLResourceLoader: Exception when looking for '/gwtp-checkstyle.properties' at ''
+java.net.MalformedURLException: no protocol: /gwtp-checkstyle.properties
+	at java.net.URL.<init>(URL.java:567)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at org.codehaus.plexus.resource.loader.URLResourceLoader.getResource(URLResourceLoader.java:71)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResource(DefaultResourceManager.java:159)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResourceAsFile(DefaultResourceManager.java:91)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getOverridingProperties(DefaultCheckstyleExecutor.java:299)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfiguration(DefaultCheckstyleExecutor.java:237)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.executeCheckstyle(DefaultCheckstyleExecutor.java:173)
+	at org.apache.maven.plugin.checkstyle.CheckstyleReport.executeReport(CheckstyleReport.java:578)
+	at org.apache.maven.reporting.AbstractMavenReport.generate(AbstractMavenReport.java:190)
+	at org.apache.maven.reporting.AbstractMavenReport.execute(AbstractMavenReport.java:99)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+[DEBUG] URLResourceLoader: Exception when looking for '/gwtp-checkstyle.properties
+java.net.MalformedURLException: no protocol: /gwtp-checkstyle.properties
+	at java.net.URL.<init>(URL.java:567)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at org.codehaus.plexus.resource.loader.URLResourceLoader.getResource(URLResourceLoader.java:123)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResource(DefaultResourceManager.java:159)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResourceAsFile(DefaultResourceManager.java:91)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getOverridingProperties(DefaultCheckstyleExecutor.java:299)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfiguration(DefaultCheckstyleExecutor.java:237)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.executeCheckstyle(DefaultCheckstyleExecutor.java:173)
+	at org.apache.maven.plugin.checkstyle.CheckstyleReport.executeReport(CheckstyleReport.java:578)
+	at org.apache.maven.reporting.AbstractMavenReport.generate(AbstractMavenReport.java:190)
+	at org.apache.maven.reporting.AbstractMavenReport.execute(AbstractMavenReport.java:99)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+[DEBUG] The resource '/gwtp-checkstyle.properties' was not found with resourceLoader org.codehaus.plexus.resource.loader.URLResourceLoader.
+[DEBUG] The resource '/gwtp-checkstyle.properties' was found as jar:file:/C:/Users/beaudoin/.m2/repository/com/gwtplatform/gwtp-build-tools/0.6-SNAPSHOT/gwtp-build-tools-0.6-SNAPSHOT.jar!/gwtp-checkstyle.properties.
+[DEBUG] headerLocation /gwtp-java-header.txt
+[DEBUG] The resource '/gwtp-java-header.txt' was not found with resourceLoader org.codehaus.plexus.resource.loader.FileResourceLoader.
+[DEBUG] URLResourceLoader: Exception when looking for '/gwtp-java-header.txt' at ''
+java.net.MalformedURLException: no protocol: /gwtp-java-header.txt
+	at java.net.URL.<init>(URL.java:567)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at org.codehaus.plexus.resource.loader.URLResourceLoader.getResource(URLResourceLoader.java:71)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResource(DefaultResourceManager.java:159)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResourceAsFile(DefaultResourceManager.java:91)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getOverridingProperties(DefaultCheckstyleExecutor.java:337)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfiguration(DefaultCheckstyleExecutor.java:237)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.executeCheckstyle(DefaultCheckstyleExecutor.java:173)
+	at org.apache.maven.plugin.checkstyle.CheckstyleReport.executeReport(CheckstyleReport.java:578)
+	at org.apache.maven.reporting.AbstractMavenReport.generate(AbstractMavenReport.java:190)
+	at org.apache.maven.reporting.AbstractMavenReport.execute(AbstractMavenReport.java:99)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+[DEBUG] URLResourceLoader: Exception when looking for '/gwtp-java-header.txt
+java.net.MalformedURLException: no protocol: /gwtp-java-header.txt
+	at java.net.URL.<init>(URL.java:567)
+	at java.net.URL.<init>(URL.java:464)
+	at java.net.URL.<init>(URL.java:413)
+	at org.codehaus.plexus.resource.loader.URLResourceLoader.getResource(URLResourceLoader.java:123)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResource(DefaultResourceManager.java:159)
+	at org.codehaus.plexus.resource.DefaultResourceManager.getResourceAsFile(DefaultResourceManager.java:91)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getOverridingProperties(DefaultCheckstyleExecutor.java:337)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.getConfiguration(DefaultCheckstyleExecutor.java:237)
+	at org.apache.maven.plugin.checkstyle.DefaultCheckstyleExecutor.executeCheckstyle(DefaultCheckstyleExecutor.java:173)
+	at org.apache.maven.plugin.checkstyle.CheckstyleReport.executeReport(CheckstyleReport.java:578)
+	at org.apache.maven.reporting.AbstractMavenReport.generate(AbstractMavenReport.java:190)
+	at org.apache.maven.reporting.AbstractMavenReport.execute(AbstractMavenReport.java:99)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+[DEBUG] The resource '/gwtp-java-header.txt' was not found with resourceLoader org.codehaus.plexus.resource.loader.URLResourceLoader.
+[DEBUG] The resource '/gwtp-java-header.txt' was found as jar:file:/C:/Users/beaudoin/.m2/repository/com/gwtplatform/gwtp-build-tools/0.6-SNAPSHOT/gwtp-build-tools-0.6-SNAPSHOT.jar!/gwtp-java-header.txt.
+[INFO] Starting audit...
+Audit done.
+
+[DEBUG] Parent Configuration Path: Checker
+[DEBUG] Parent Configuration Path: Checker --> TreeWalker
+[DEBUG] File C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\site/checkstyle.rss created...
+[DEBUG] Velocimacro : added #link(  href name target img position alt border width height ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #image(  img alt border width height ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #banner(  banner id ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #links(  links ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #breadcrumbs(  breadcrumbs ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #displayTree(  display item ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #menuItem(  item ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #mainMenu(  menus ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #copyright(  ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #publishDate(  position publishDate version ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[DEBUG] Velocimacro : added #poweredByLogo(  poweredBy ) : source = org/apache/maven/doxia/siterenderer/resources/default-site.vm
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:resources (default-resources) @ gwtp-dispatch-server-guice ---
+[DEBUG] org.apache.maven.plugins:maven-resources-plugin:jar:2.4.3:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6:compile
+[DEBUG]       org.apache.maven.reporting:maven-reporting-api:jar:2.0.6:compile
+[DEBUG]          org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-7:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.6:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.0:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.6:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-monitor:jar:2.0.6:compile
+[DEBUG]    org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]       junit:junit:jar:3.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:2.0.5:compile
+[DEBUG]    org.apache.maven.shared:maven-filtering:jar:1.0-beta-4:compile
+[DEBUG]       org.sonatype.plexus:plexus-build-api:jar:0.0.4:compile
+[DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.13:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-resources-plugin:2.4.3
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-resources-plugin:2.4.3
+[DEBUG]   Included: org.apache.maven.plugins:maven-resources-plugin:jar:2.4.3
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.0.6
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-7
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.5
+[DEBUG]   Included: org.apache.maven.shared:maven-filtering:jar:1.0-beta-4
+[DEBUG]   Included: org.sonatype.plexus:plexus-build-api:jar:0.0.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.13
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.6
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:2.4.3, parent: ClassRealm[maven.api, parent: null]]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources' with basic configurator -->
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: com.gwtplatform:gwtp-dispatch-server-guice:0.6-SNAPSHOT @ C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\main\resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@3f56e5ed
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used {java.vendor=Sun Microsystems Inc., env.SYSTEMROOT=C:\Windows, env.VS90COMNTOOLS=c:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\Tools\, sun.java.launcher=SUN_STANDARD, sun.management.compiler=HotSpot 64-Bit Server Compiler, env.PROMPT=$P$G, os.name=Windows 7, env.FP_NO_HOST_CHECK=NO, sun.boot.class.path=C:\Program Files\Java\jdk1.6.0_20\jre\lib\resources.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\rt.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\jce.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.6.0_20\jre\classes, env.COMPUTERNAME=BEAUDOIN-DESK, env.ALLUSERSPROFILE=C:\ProgramData, sun.desktop=windows, env.GPG_HOME=C:\Program Files (x86)\GNU\GnuPG, java.vm.specification.vendor=Sun Microsystems Inc., java.runtime.version=1.6.0_20-b02, env.HOMEPATH=\Users\beaudoin, project.build.sourceEncoding=UTF-8, maven-checkstyle-plugin.version=2.6, user.name=beaudoin, maven-eclipse-plugin.version=2.8, env.QTJAVA=C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip, env.PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Ruby187\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Ant\bin;C:\Python26;C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin;C:\Program Files (x86)\GNU\GnuPG;%DEPOT_TOOLS%, mockito.version=1.8.5, user.language=en, maven-deploy-plugin.version=2.5, env.WINDIR=C:\Windows, sun.boot.library.path=C:\Program Files\Java\jdk1.6.0_20\jre\bin, classworlds.conf=C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin\m2.conf, maven-javadoc-plugin.version=2.5, env.COM.ADOBE.VERSIONCUE.CLIENT.APPNAME=AdobeDrive, java.version=1.6.0_20, env.PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 30 Stepping 5, GenuineIntel, user.timezone=America/Los_Angeles, env.TEMP=C:\Users\beaudoin\AppData\Local\Temp, sun.arch.data.model=64, java.endorsed.dirs=C:\Program Files\Java\jdk1.6.0_20\jre\lib\endorsed, sun.cpu.isalist=amd64, env.COM.ADOBE.VERSIONCUE.CLIENT.APPVERSION=1.0.0, env.HOMEDRIVE=C:, sun.jnu.encoding=Cp1252, file.encoding.pkg=sun.io, env.SYSTEMDRIVE=C:, file.separator=\, java.specification.name=Java Platform API Specification, java.class.version=50.0, user.country=US, appengine.version=1.4.2, java.home=C:\Program Files\Java\jdk1.6.0_20\jre, env.APPDATA=C:\Users\beaudoin\AppData\Roaming, env.PUBLIC=C:\Users\Public, java.vm.info=mixed mode, gwt-maven-plugin.version=2.2.0, env.OS=Windows_NT, os.version=6.1, htmlunit.version=2.8, env.=::=::\, project.reporting.outputEncoding=UTF-8, path.separator=;, java.vm.version=16.3-b01, env.ASL.LOG=Destination=file, env.USERPROFILE=C:\Users\beaudoin, user.variant=, maven-processor-plugin.version=2.0.1, env.JAVA_HOME=C:\Program Files\Java\jdk1.6.0_20, java.awt.printerjob=sun.awt.windows.WPrinterJob, gin.version=1.5.0, cglib.version=2.2, env.TMP=C:\Users\beaudoin\AppData\Local\Temp, env.PROGRAMFILES=C:\Program Files, maven-surefire-plugin.version=2.6, sun.io.unicode.encoding=UnicodeLittle, awt.toolkit=sun.awt.windows.WToolkit, guice.version=3.0-rc2, maven-source-plugin.version=2.1.2, user.home=C:\Users\beaudoin, maven-compiler-plugin.version=2.3.2, env.COMMONPROGRAMFILES=C:\Program Files\Common Files, target.jdk=1.6, env.=EXITCODE=00000001, env.SESSIONNAME=Console, java.specification.vendor=Sun Microsystems Inc., env.CLASSPATH=.;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip, env.M2_HOME=C:\Program Files\Apache Software Foundation\apache-maven-3.0, env.NUMBER_OF_PROCESSORS=8, java.library.path=C:\Program Files\Java\jdk1.6.0_20\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Ruby187\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Ant\bin;C:\Python26;C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin;C:\Program Files (x86)\GNU\GnuPG;%DEPOT_TOOLS%, java.vendor.url=http://java.sun.com/, env.COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files, env.PSMODULEPATH=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\, env.CLASSWORLDS_LAUNCHER=org.codehaus.plexus.classworlds.launcher.Launcher, env.MAVEN_CMD_LINE_ARGS=install -X, java.vm.vendor=Sun Microsystems Inc., maven.home=C:\Program Files\Apache Software Foundation\apache-maven-3.0, java.runtime.name=Java(TM) SE Runtime Environment, java.class.path=C:\Program Files\Apache Software Foundation\apache-maven-3.0\boot\plexus-classworlds-2.2.3.jar, sonatypeOssDistMgmtSnapshotsUrl=https://oss.sonatype.org/content/repositories/snapshots/, env.PROGRAMW6432=C:\Program Files, env.DXSDK_DIR=C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\, env.PROGRAMFILES(X86)=C:\Program Files (x86), env.MAVEN_JAVA_EXE="C:\Program Files\Java\jdk1.6.0_20\bin\java.exe", java.vm.specification.name=Java Virtual Machine Specification, env.LOGONSERVER=\\BEAUDOIN-DESK, java.vm.specification.version=1.0, env.PROCESSOR_ARCHITECTURE=AMD64, env.COMMONPROGRAMW6432=C:\Program Files\Common Files, sun.cpu.endian=little, sun.os.patch.level=, env.HOME=C:\Users\beaudoin, env.ANT_HOME=C:\Program Files\Ant, java.io.tmpdir=C:\Users\beaudoin\AppData\Local\Temp\, env.PROCESSOR_REVISION=1e05, java.vendor.url.bug=http://java.sun.com/cgi-bin/bugreport.cgi, env.MAVEN_OPTS=-Xms256m -Xmx512m, env.PROGRAMDATA=C:\ProgramData, env.COMSPEC=C:\Windows\system32\cmd.exe, jukito.version=1.1-SNAPSHOT, os.arch=amd64, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, gwt.version=2.2.0, java.ext.dirs=C:\Program Files\Java\jdk1.6.0_20\jre\lib\ext;C:\Windows\Sun\Java\lib\ext, aopalliance.version=1.0, user.dir=C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice, env.LOCALAPPDATA=C:\Users\beaudoin\AppData\Local, env.COM.ADOBE.VERSIONCUE.CLIENT.APPLOCALE=en_US, line.separator=
+, env.CLASSWORLDS_JAR="C:\Program Files\Apache Software Foundation\apache-maven-3.0\boot\plexus-classworlds-2.2.3.jar", java.vm.name=Java HotSpot(TM) 64-Bit Server VM, env.PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC, maven-release-plugin.version=2.1, env.GWT_HOME=C:\eclipse\plugins\com.google.gwt.eclipse.sdkbundle.2.2.0_2.2.0.v201102111811\gwt-2.2.0, env.M2=C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin, env.ERROR_CODE=0, env.USERNAME=beaudoin, spring.version=3.0.5.RELEASE, file.encoding=Cp1252, env.USERDOMAIN=beaudoin-desk, java.specification.version=1.6, env.=C:=C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice, junit.version=4.5, env.PROCESSOR_LEVEL=6}
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] resource with targetPath null
+directory C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\main\resources
+excludes []
+includes []
+[INFO] skip non existing resourceDirectory C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ gwtp-dispatch-server-guice ---
+[DEBUG] org.apache.maven.plugins:maven-compiler-plugin:jar:2.3.2:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-model:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]          org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-monitor:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-toolchain:jar:1.0:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:2.0.5:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-api:jar:1.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-manager:jar:1.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-javac:jar:1.8.1:runtime
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2
+[DEBUG]   Included: org.apache.maven.plugins:maven-compiler-plugin:jar:2.3.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-api:jar:1.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-manager:jar:1.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-javac:jar:1.8.1
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-toolchain:jar:1.0
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2, parent: ClassRealm[maven.api, parent: null]]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile' with basic configurator -->
+[DEBUG]   (f) basedir = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice
+[DEBUG]   (f) buildDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target
+[DEBUG]   (f) classpathElements = [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-server\0.6-SNAPSHOT\gwtp-dispatch-server-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-shared\0.6-SNAPSHOT\gwtp-dispatch-shared-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-client\0.6-SNAPSHOT\gwtp-dispatch-client-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-clients-common\0.6-SNAPSHOT\gwtp-clients-common-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\google\gwt\inject\gin\1.5.0\gin-1.5.0.jar, C:\Users\beaudoin\.m2\repository\com\google\inject\extensions\guice-assistedinject\3.0-rc2\guice-assistedinject-3.0-rc2.jar, C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-servlet\2.2.0\gwt-servlet-2.2.0.jar, C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-user\2.2.0\gwt-user-2.2.0.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-core\3.0.5.RELEASE\spring-core-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-asm\3.0.5.RELEASE\spring-asm-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-context\3.0.5.RELEASE\spring-context-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-aop\3.0.5.RELEASE\spring-aop-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-expression\3.0.5.RELEASE\spring-expression-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-beans\3.0.5.RELEASE\spring-beans-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-web\3.0.5.RELEASE\spring-web-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\com\google\inject\guice\3.0-rc2\guice-3.0-rc2.jar, C:\Users\beaudoin\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar, C:\Users\beaudoin\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar]
+[DEBUG]   (f) compileSourceRoots = [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\main\java]
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) fork = false
+[DEBUG]   (f) generatedSourcesDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\generated-sources\annotations
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes
+[DEBUG]   (f) outputFileName = gwtp-dispatch-server-guice-0.6-SNAPSHOT
+[DEBUG]   (f) projectArtifact = com.gwtplatform:gwtp-dispatch-server-guice:jar:0.6-SNAPSHOT
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@3f56e5ed
+[DEBUG]   (f) showDeprecation = false
+[DEBUG]   (f) showWarnings = false
+[DEBUG]   (f) source = 1.6
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (f) target = 1.6
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Using compiler 'javac'.
+[DEBUG] Source directories: [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\main\java]
+[DEBUG] Classpath: [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-server\0.6-SNAPSHOT\gwtp-dispatch-server-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-shared\0.6-SNAPSHOT\gwtp-dispatch-shared-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-client\0.6-SNAPSHOT\gwtp-dispatch-client-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-clients-common\0.6-SNAPSHOT\gwtp-clients-common-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\google\gwt\inject\gin\1.5.0\gin-1.5.0.jar
+ C:\Users\beaudoin\.m2\repository\com\google\inject\extensions\guice-assistedinject\3.0-rc2\guice-assistedinject-3.0-rc2.jar
+ C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-servlet\2.2.0\gwt-servlet-2.2.0.jar
+ C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-user\2.2.0\gwt-user-2.2.0.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-core\3.0.5.RELEASE\spring-core-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-asm\3.0.5.RELEASE\spring-asm-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-context\3.0.5.RELEASE\spring-context-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-aop\3.0.5.RELEASE\spring-aop-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-expression\3.0.5.RELEASE\spring-expression-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-beans\3.0.5.RELEASE\spring-beans-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-web\3.0.5.RELEASE\spring-web-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\com\google\inject\guice\3.0-rc2\guice-3.0-rc2.jar
+ C:\Users\beaudoin\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar
+ C:\Users\beaudoin\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar]
+[DEBUG] Output directory: C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:testResources (default-testResources) @ gwtp-dispatch-server-guice ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:2.4.3, parent: ClassRealm[maven.api, parent: null]]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources' with basic configurator -->
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: com.gwtplatform:gwtp-dispatch-server-guice:0.6-SNAPSHOT @ C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@3f56e5ed
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used {java.vendor=Sun Microsystems Inc., env.SYSTEMROOT=C:\Windows, env.VS90COMNTOOLS=c:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\Tools\, sun.java.launcher=SUN_STANDARD, sun.management.compiler=HotSpot 64-Bit Server Compiler, env.PROMPT=$P$G, os.name=Windows 7, env.FP_NO_HOST_CHECK=NO, sun.boot.class.path=C:\Program Files\Java\jdk1.6.0_20\jre\lib\resources.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\rt.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\jce.jar;C:\Program Files\Java\jdk1.6.0_20\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.6.0_20\jre\classes, env.COMPUTERNAME=BEAUDOIN-DESK, env.ALLUSERSPROFILE=C:\ProgramData, sun.desktop=windows, env.GPG_HOME=C:\Program Files (x86)\GNU\GnuPG, java.vm.specification.vendor=Sun Microsystems Inc., java.runtime.version=1.6.0_20-b02, env.HOMEPATH=\Users\beaudoin, project.build.sourceEncoding=UTF-8, maven-checkstyle-plugin.version=2.6, user.name=beaudoin, maven-eclipse-plugin.version=2.8, env.QTJAVA=C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip, env.PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Ruby187\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Ant\bin;C:\Python26;C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin;C:\Program Files (x86)\GNU\GnuPG;%DEPOT_TOOLS%, mockito.version=1.8.5, user.language=en, maven-deploy-plugin.version=2.5, env.WINDIR=C:\Windows, sun.boot.library.path=C:\Program Files\Java\jdk1.6.0_20\jre\bin, classworlds.conf=C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin\m2.conf, maven-javadoc-plugin.version=2.5, env.COM.ADOBE.VERSIONCUE.CLIENT.APPNAME=AdobeDrive, java.version=1.6.0_20, env.PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 30 Stepping 5, GenuineIntel, user.timezone=America/Los_Angeles, env.TEMP=C:\Users\beaudoin\AppData\Local\Temp, sun.arch.data.model=64, java.endorsed.dirs=C:\Program Files\Java\jdk1.6.0_20\jre\lib\endorsed, sun.cpu.isalist=amd64, env.COM.ADOBE.VERSIONCUE.CLIENT.APPVERSION=1.0.0, env.HOMEDRIVE=C:, sun.jnu.encoding=Cp1252, file.encoding.pkg=sun.io, env.SYSTEMDRIVE=C:, file.separator=\, java.specification.name=Java Platform API Specification, java.class.version=50.0, user.country=US, appengine.version=1.4.2, java.home=C:\Program Files\Java\jdk1.6.0_20\jre, env.APPDATA=C:\Users\beaudoin\AppData\Roaming, env.PUBLIC=C:\Users\Public, java.vm.info=mixed mode, gwt-maven-plugin.version=2.2.0, env.OS=Windows_NT, os.version=6.1, htmlunit.version=2.8, env.=::=::\, project.reporting.outputEncoding=UTF-8, path.separator=;, java.vm.version=16.3-b01, env.ASL.LOG=Destination=file, env.USERPROFILE=C:\Users\beaudoin, user.variant=, maven-processor-plugin.version=2.0.1, env.JAVA_HOME=C:\Program Files\Java\jdk1.6.0_20, java.awt.printerjob=sun.awt.windows.WPrinterJob, gin.version=1.5.0, cglib.version=2.2, env.TMP=C:\Users\beaudoin\AppData\Local\Temp, env.PROGRAMFILES=C:\Program Files, maven-surefire-plugin.version=2.6, sun.io.unicode.encoding=UnicodeLittle, awt.toolkit=sun.awt.windows.WToolkit, guice.version=3.0-rc2, maven-source-plugin.version=2.1.2, user.home=C:\Users\beaudoin, maven-compiler-plugin.version=2.3.2, env.COMMONPROGRAMFILES=C:\Program Files\Common Files, target.jdk=1.6, env.=EXITCODE=00000001, env.SESSIONNAME=Console, java.specification.vendor=Sun Microsystems Inc., env.CLASSPATH=.;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip, env.M2_HOME=C:\Program Files\Apache Software Foundation\apache-maven-3.0, env.NUMBER_OF_PROCESSORS=8, java.library.path=C:\Program Files\Java\jdk1.6.0_20\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Ruby187\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\SlikSvn\bin\;C:\Program Files (x86)\TortoiseHg\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Ant\bin;C:\Python26;C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin;C:\Program Files (x86)\GNU\GnuPG;%DEPOT_TOOLS%, java.vendor.url=http://java.sun.com/, env.COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files, env.PSMODULEPATH=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\, env.CLASSWORLDS_LAUNCHER=org.codehaus.plexus.classworlds.launcher.Launcher, env.MAVEN_CMD_LINE_ARGS=install -X, java.vm.vendor=Sun Microsystems Inc., maven.home=C:\Program Files\Apache Software Foundation\apache-maven-3.0, java.runtime.name=Java(TM) SE Runtime Environment, java.class.path=C:\Program Files\Apache Software Foundation\apache-maven-3.0\boot\plexus-classworlds-2.2.3.jar, sonatypeOssDistMgmtSnapshotsUrl=https://oss.sonatype.org/content/repositories/snapshots/, env.PROGRAMW6432=C:\Program Files, env.DXSDK_DIR=C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\, env.PROGRAMFILES(X86)=C:\Program Files (x86), env.MAVEN_JAVA_EXE="C:\Program Files\Java\jdk1.6.0_20\bin\java.exe", java.vm.specification.name=Java Virtual Machine Specification, env.LOGONSERVER=\\BEAUDOIN-DESK, java.vm.specification.version=1.0, env.PROCESSOR_ARCHITECTURE=AMD64, env.COMMONPROGRAMW6432=C:\Program Files\Common Files, sun.cpu.endian=little, sun.os.patch.level=, env.HOME=C:\Users\beaudoin, env.ANT_HOME=C:\Program Files\Ant, java.io.tmpdir=C:\Users\beaudoin\AppData\Local\Temp\, env.PROCESSOR_REVISION=1e05, java.vendor.url.bug=http://java.sun.com/cgi-bin/bugreport.cgi, env.MAVEN_OPTS=-Xms256m -Xmx512m, env.PROGRAMDATA=C:\ProgramData, env.COMSPEC=C:\Windows\system32\cmd.exe, jukito.version=1.1-SNAPSHOT, os.arch=amd64, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, gwt.version=2.2.0, java.ext.dirs=C:\Program Files\Java\jdk1.6.0_20\jre\lib\ext;C:\Windows\Sun\Java\lib\ext, aopalliance.version=1.0, user.dir=C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice, env.LOCALAPPDATA=C:\Users\beaudoin\AppData\Local, env.COM.ADOBE.VERSIONCUE.CLIENT.APPLOCALE=en_US, line.separator=
+, env.CLASSWORLDS_JAR="C:\Program Files\Apache Software Foundation\apache-maven-3.0\boot\plexus-classworlds-2.2.3.jar", java.vm.name=Java HotSpot(TM) 64-Bit Server VM, env.PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC, maven-release-plugin.version=2.1, env.GWT_HOME=C:\eclipse\plugins\com.google.gwt.eclipse.sdkbundle.2.2.0_2.2.0.v201102111811\gwt-2.2.0, env.M2=C:\Program Files\Apache Software Foundation\apache-maven-3.0\bin, env.ERROR_CODE=0, env.USERNAME=beaudoin, spring.version=3.0.5.RELEASE, file.encoding=Cp1252, env.USERDOMAIN=beaudoin-desk, java.specification.version=1.6, env.=C:=C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice, junit.version=4.5, env.PROCESSOR_LEVEL=6}
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] resource with targetPath null
+directory C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\resources
+excludes []
+includes []
+[INFO] skip non existing resourceDirectory C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ gwtp-dispatch-server-guice ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2, parent: ClassRealm[maven.api, parent: null]]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile' with basic configurator -->
+[DEBUG]   (f) basedir = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice
+[DEBUG]   (f) buildDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target
+[DEBUG]   (f) classpathElements = [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes, C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-server\0.6-SNAPSHOT\gwtp-dispatch-server-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-shared\0.6-SNAPSHOT\gwtp-dispatch-shared-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-client\0.6-SNAPSHOT\gwtp-dispatch-client-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-clients-common\0.6-SNAPSHOT\gwtp-clients-common-0.6-SNAPSHOT.jar, C:\Users\beaudoin\.m2\repository\com\google\gwt\inject\gin\1.5.0\gin-1.5.0.jar, C:\Users\beaudoin\.m2\repository\com\google\inject\extensions\guice-assistedinject\3.0-rc2\guice-assistedinject-3.0-rc2.jar, C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-servlet\2.2.0\gwt-servlet-2.2.0.jar, C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-user\2.2.0\gwt-user-2.2.0.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-core\3.0.5.RELEASE\spring-core-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-asm\3.0.5.RELEASE\spring-asm-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-context\3.0.5.RELEASE\spring-context-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-aop\3.0.5.RELEASE\spring-aop-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-expression\3.0.5.RELEASE\spring-expression-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-beans\3.0.5.RELEASE\spring-beans-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\org\springframework\spring-web\3.0.5.RELEASE\spring-web-3.0.5.RELEASE.jar, C:\Users\beaudoin\.m2\repository\com\google\inject\guice\3.0-rc2\guice-3.0-rc2.jar, C:\Users\beaudoin\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar, C:\Users\beaudoin\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar, C:\Users\beaudoin\.m2\repository\junit\junit\4.5\junit-4.5.jar]
+[DEBUG]   (f) compileSourceRoots = [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java]
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) fork = false
+[DEBUG]   (f) generatedTestSourcesDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\generated-sources\test-annotations
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes
+[DEBUG]   (f) outputFileName = gwtp-dispatch-server-guice-0.6-SNAPSHOT
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@3f56e5ed
+[DEBUG]   (f) showDeprecation = false
+[DEBUG]   (f) showWarnings = false
+[DEBUG]   (f) source = 1.6
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (f) target = 1.6
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Using compiler 'javac'.
+[DEBUG] Source directories: [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java]
+[DEBUG] Classpath: [C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes
+ C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-server\0.6-SNAPSHOT\gwtp-dispatch-server-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-shared\0.6-SNAPSHOT\gwtp-dispatch-shared-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-client\0.6-SNAPSHOT\gwtp-dispatch-client-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-clients-common\0.6-SNAPSHOT\gwtp-clients-common-0.6-SNAPSHOT.jar
+ C:\Users\beaudoin\.m2\repository\com\google\gwt\inject\gin\1.5.0\gin-1.5.0.jar
+ C:\Users\beaudoin\.m2\repository\com\google\inject\extensions\guice-assistedinject\3.0-rc2\guice-assistedinject-3.0-rc2.jar
+ C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-servlet\2.2.0\gwt-servlet-2.2.0.jar
+ C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-user\2.2.0\gwt-user-2.2.0.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-core\3.0.5.RELEASE\spring-core-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-asm\3.0.5.RELEASE\spring-asm-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-context\3.0.5.RELEASE\spring-context-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-aop\3.0.5.RELEASE\spring-aop-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-expression\3.0.5.RELEASE\spring-expression-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-beans\3.0.5.RELEASE\spring-beans-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\org\springframework\spring-web\3.0.5.RELEASE\spring-web-3.0.5.RELEASE.jar
+ C:\Users\beaudoin\.m2\repository\com\google\inject\guice\3.0-rc2\guice-3.0-rc2.jar
+ C:\Users\beaudoin\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar
+ C:\Users\beaudoin\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar
+ C:\Users\beaudoin\.m2\repository\junit\junit\4.5\junit-4.5.jar]
+[DEBUG] Output directory: C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes
+[DEBUG] Classpath:
+[DEBUG]  C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes
+[DEBUG]  C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-server\0.6-SNAPSHOT\gwtp-dispatch-server-0.6-SNAPSHOT.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-shared\0.6-SNAPSHOT\gwtp-dispatch-shared-0.6-SNAPSHOT.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-client\0.6-SNAPSHOT\gwtp-dispatch-client-0.6-SNAPSHOT.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-clients-common\0.6-SNAPSHOT\gwtp-clients-common-0.6-SNAPSHOT.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\google\gwt\inject\gin\1.5.0\gin-1.5.0.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\google\inject\extensions\guice-assistedinject\3.0-rc2\guice-assistedinject-3.0-rc2.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-servlet\2.2.0\gwt-servlet-2.2.0.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-user\2.2.0\gwt-user-2.2.0.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\org\springframework\spring-core\3.0.5.RELEASE\spring-core-3.0.5.RELEASE.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\org\springframework\spring-asm\3.0.5.RELEASE\spring-asm-3.0.5.RELEASE.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\org\springframework\spring-context\3.0.5.RELEASE\spring-context-3.0.5.RELEASE.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\org\springframework\spring-aop\3.0.5.RELEASE\spring-aop-3.0.5.RELEASE.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\org\springframework\spring-expression\3.0.5.RELEASE\spring-expression-3.0.5.RELEASE.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\org\springframework\spring-beans\3.0.5.RELEASE\spring-beans-3.0.5.RELEASE.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\org\springframework\spring-web\3.0.5.RELEASE\spring-web-3.0.5.RELEASE.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\com\google\inject\guice\3.0-rc2\guice-3.0-rc2.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar
+[DEBUG]  C:\Users\beaudoin\.m2\repository\junit\junit\4.5\junit-4.5.jar
+[DEBUG] Source roots:
+[DEBUG]  C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java
+[DEBUG] Command line options:
+[DEBUG] -d C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes -classpath C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes;C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\classes;C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-server\0.6-SNAPSHOT\gwtp-dispatch-server-0.6-SNAPSHOT.jar;C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-shared\0.6-SNAPSHOT\gwtp-dispatch-shared-0.6-SNAPSHOT.jar;C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-dispatch-client\0.6-SNAPSHOT\gwtp-dispatch-client-0.6-SNAPSHOT.jar;C:\Users\beaudoin\.m2\repository\com\gwtplatform\gwtp-clients-common\0.6-SNAPSHOT\gwtp-clients-common-0.6-SNAPSHOT.jar;C:\Users\beaudoin\.m2\repository\com\google\gwt\inject\gin\1.5.0\gin-1.5.0.jar;C:\Users\beaudoin\.m2\repository\com\google\inject\extensions\guice-assistedinject\3.0-rc2\guice-assistedinject-3.0-rc2.jar;C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-servlet\2.2.0\gwt-servlet-2.2.0.jar;C:\Users\beaudoin\.m2\repository\com\google\gwt\gwt-user\2.2.0\gwt-user-2.2.0.jar;C:\Users\beaudoin\.m2\repository\org\springframework\spring-core\3.0.5.RELEASE\spring-core-3.0.5.RELEASE.jar;C:\Users\beaudoin\.m2\repository\org\springframework\spring-asm\3.0.5.RELEASE\spring-asm-3.0.5.RELEASE.jar;C:\Users\beaudoin\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar;C:\Users\beaudoin\.m2\repository\org\springframework\spring-context\3.0.5.RELEASE\spring-context-3.0.5.RELEASE.jar;C:\Users\beaudoin\.m2\repository\org\springframework\spring-aop\3.0.5.RELEASE\spring-aop-3.0.5.RELEASE.jar;C:\Users\beaudoin\.m2\repository\org\springframework\spring-expression\3.0.5.RELEASE\spring-expression-3.0.5.RELEASE.jar;C:\Users\beaudoin\.m2\repository\org\springframework\spring-beans\3.0.5.RELEASE\spring-beans-3.0.5.RELEASE.jar;C:\Users\beaudoin\.m2\repository\org\springframework\spring-web\3.0.5.RELEASE\spring-web-3.0.5.RELEASE.jar;C:\Users\beaudoin\.m2\repository\com\google\inject\guice\3.0-rc2\guice-3.0-rc2.jar;C:\Users\beaudoin\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar;C:\Users\beaudoin\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;C:\Users\beaudoin\.m2\repository\junit\junit\4.5\junit-4.5.jar; -sourcepath C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java; C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\guice\ActionModule.java C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java -s C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\generated-sources\test-annotations -g -nowarn -target 1.6 -source 1.6 -encoding UTF-8
+[INFO] Compiling 3 source files to C:\Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[24,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[25,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\guice\ActionModule.java:[20,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[21,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[22,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[27,61] cannot find symbol
+symbol: class TestAction
+public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[27,73] cannot find symbol
+symbol: class TestResult
+public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[36,28] cannot find symbol
+symbol  : class TestAction
+location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[36,9] cannot find symbol
+symbol  : class TestResult
+location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[44,19] cannot find symbol
+symbol  : class TestAction
+location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[44,38] cannot find symbol
+symbol  : class TestResult
+location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[33,4] cannot find symbol
+symbol  : class TestAction
+location: class com.gwtplatform.dispatch.server.ActionTestBase
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[33,28] cannot find symbol
+symbol  : class TestAction
+location: class com.gwtplatform.dispatch.server.ActionTestBase
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[34,4] cannot find symbol
+symbol  : class TestResult
+location: class com.gwtplatform.dispatch.server.ActionTestBase
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\guice\ActionModule.java:[29,16] cannot find symbol
+symbol  : class TestAction
+location: class com.gwtplatform.dispatch.server.guice.ActionModule
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[32,10] cannot find symbol
+symbol  : class TestAction
+location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[38,17] cannot find symbol
+symbol  : class TestResult
+location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[40,15] cannot find symbol
+symbol  : class TestResult
+location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[INFO] 18 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.770s
+[INFO] Finished at: Wed Mar 23 19:30:58 PDT 2011
+[INFO] Final Memory: 23M/309M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile (default-testCompile) on project gwtp-dispatch-server-guice: Compilation failure: Compilation failure:
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[24,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[25,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\guice\ActionModule.java:[20,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[21,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[22,45] package com.gwtplatform.dispatch.shared.action does not exist
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[27,61] cannot find symbol
+[ERROR] symbol: class TestAction
+[ERROR] public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[27,73] cannot find symbol
+[ERROR] symbol: class TestResult
+[ERROR] public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[36,28] cannot find symbol
+[ERROR] symbol  : class TestAction
+[ERROR] location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[36,9] cannot find symbol
+[ERROR] symbol  : class TestResult
+[ERROR] location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[44,19] cannot find symbol
+[ERROR] symbol  : class TestAction
+[ERROR] location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[44,38] cannot find symbol
+[ERROR] symbol  : class TestResult
+[ERROR] location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[33,4] cannot find symbol
+[ERROR] symbol  : class TestAction
+[ERROR] location: class com.gwtplatform.dispatch.server.ActionTestBase
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[33,28] cannot find symbol
+[ERROR] symbol  : class TestAction
+[ERROR] location: class com.gwtplatform.dispatch.server.ActionTestBase
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\ActionTestBase.java:[34,4] cannot find symbol
+[ERROR] symbol  : class TestResult
+[ERROR] location: class com.gwtplatform.dispatch.server.ActionTestBase
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\guice\ActionModule.java:[29,16] cannot find symbol
+[ERROR] symbol  : class TestAction
+[ERROR] location: class com.gwtplatform.dispatch.server.guice.ActionModule
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[32,10] cannot find symbol
+[ERROR] symbol  : class TestAction
+[ERROR] location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[38,17] cannot find symbol
+[ERROR] symbol  : class TestResult
+[ERROR] location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] \Users\beaudoin\workspace\gwtp\gwtp-core\gwtp-dispatch-server-guice\src\test\java\com\gwtplatform\dispatch\server\actionhandler\TestActionHandler.java:[40,15] cannot find symbol
+[ERROR] symbol  : class TestResult
+[ERROR] location: class com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
+[ERROR] -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile (default-testCompile) on project gwtp-dispatch-server-guice: Compilation failure
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:199)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:140)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:314)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:151)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:445)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:168)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+Caused by: org.apache.maven.plugin.CompilationFailureException: Compilation failure
+	at org.apache.maven.plugin.AbstractCompilerMojo.execute(AbstractCompilerMojo.java:656)
+	at org.apache.maven.plugin.TestCompilerMojo.execute(TestCompilerMojo.java:161)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:195)
+	... 19 more
+[ERROR] 
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
