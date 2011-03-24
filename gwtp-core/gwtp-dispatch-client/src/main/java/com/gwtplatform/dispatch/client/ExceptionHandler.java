@@ -17,9 +17,9 @@
 package com.gwtplatform.dispatch.client;
 
 /**
- * Implementations of this interface can be added to a {@link DispatchAsync}
- * implementation to intercept exceptions which return from further up the
- * chain.
+ * Implementations of this interface can be added to a
+ * {com.gwtplatform.dispatch.shared.DispatchAsync @link DispatchAsync} implementation to intercept
+ * exceptions which return from further up the chain.
  *
  * @author David Peterson
  */

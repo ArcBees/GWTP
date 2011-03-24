@@ -31,17 +31,17 @@ import com.gwtplatform.dispatch.shared.UnsupportedActionException;
 
 /**
  * This is the server-side implementation of the {@link Dispatch} service with an arbitrary action type, for which the
- * client-side async service is {@link com.gwtplatform.dispatch.client.DispatchAsync}.
+ * client-side async service is {@link com.gwtplatform.dispatch.shared.DispatchAsync}.
  * <p />
  * This class is closely related to {@link com.gwtplatform.dispatch.server.guice.DispatchServiceImpl}.
  * In fact, this class wouldn't be needed, but we use it
- * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.client.DispatchAsync}.
+ * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.shared.DispatchAsync}.
  *
- * @see com.gwtplatform.dispatch.client.DispatchAsync
+ * @see com.gwtplatform.dispatch.shared.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
- * @see com.gwtplatform.dispatch.client.DispatchService
- * @see com.gwtplatform.dispatch.client.DispatchServiceAsync
+ * @see com.gwtplatform.dispatch.shared.DispatchService
+ * @see com.gwtplatform.dispatch.shared.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
  *
  * @author Christian Goudreau

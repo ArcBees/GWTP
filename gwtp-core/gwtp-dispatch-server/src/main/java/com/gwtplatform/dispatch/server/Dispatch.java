@@ -28,9 +28,9 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * client-side version is {@link DispatchAsync}.
  * <p />
  * This class is closely related to
- * {@link com.gwtplatform.dispatch.server.DispatchService}. In fact, this class
+ * {@link com.gwtplatform.dispatch.shared.DispatchService}. In fact, this class
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
- * {@link com.gwtplatform.dispatch.client.DispatchAsync}.
+ * {@link com.gwtplatform.dispatch.shared.DispatchAsync}.
  *
  * @author Christian Goudreau
  * @author David Peterson

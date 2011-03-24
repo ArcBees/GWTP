@@ -20,6 +20,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.inject.Inject;
 
 import com.gwtplatform.dispatch.shared.SecurityCookie;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This class provides access to the session id client side by looking into a

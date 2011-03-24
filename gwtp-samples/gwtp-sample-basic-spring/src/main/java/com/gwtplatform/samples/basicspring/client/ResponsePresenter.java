@@ -16,7 +16,7 @@
 
 package com.gwtplatform.samples.basicspring.client;
 
-import com.gwtplatform.dispatch.client.DispatchAsync;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;

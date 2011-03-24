@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.shared;
 
 /**
  * Provides access to the security cookie stored on the client. The goal of this
