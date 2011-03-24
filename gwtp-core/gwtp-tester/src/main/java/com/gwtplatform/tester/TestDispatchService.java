@@ -17,10 +17,10 @@
 package com.gwtplatform.tester;
 
 import com.google.inject.Inject;
-import com.gwtplatform.dispatch.client.DispatchService;
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
+import com.gwtplatform.dispatch.shared.DispatchService;
 import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.ServiceException;
 

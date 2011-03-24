@@ -22,7 +22,7 @@ import com.gwtplatform.dispatch.shared.Result;
 
 /**
  * Implementors must provide an implementation of this interface and provide it
- * to the {@link com.gwtplatform.dispatch.client.DispatchService DispatchService}
+ * to the {@link com.gwtplatform.dispatch.shared.DispatchService DispatchService}
  * implementation so that it can check whether or
  * not the action can be executed. Doing so will often requiring session
  * information, which can be done by injecting a {@code Provider<HttpSession>}

@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.http.client.Request;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * An implementation of {@link DispatchRequest} that is an adapter for

@@ -71,8 +71,7 @@
                 <groupId>com.gwtplatform</groupId>
                 <artifactId>gwtp-dispatch-client</artifactId>
                 <version>${project.version}</version>
-				<!-- TODO Uncomment when http://code.google.com/p/gwt-platform/issues/detail?id=274 is solved -->
-				<!-- <scope>provided</scope> --> <!-- Not needed server-side -->
+				<scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>

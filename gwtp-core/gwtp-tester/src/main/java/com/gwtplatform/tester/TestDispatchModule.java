@@ -21,10 +21,10 @@ import com.google.inject.Singleton;
 
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.DispatchAsync;
-import com.gwtplatform.dispatch.client.DispatchService;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.DispatchService;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This class configures guice for use in test cases with a

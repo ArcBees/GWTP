@@ -148,9 +148,9 @@ public abstract class MockHandlerModule extends AbstractModule {
    * Registers a mock server-side action handlers.
    * <p/>
    * This mock server-side action handler will be executed when the class under
-   * test calls {@link com.gwtplatform.dispatch.client.DispatchAsync#execute
+   * test calls {@link com.gwtplatform.dispatch.shared.DispatchAsync#execute
    * DispatchAsync#execute()} or
-   * {@link com.gwtplatform.dispatch.client.DispatchAsync#undo
+   * {@link com.gwtplatform.dispatch.shared.DispatchAsync#undo
    * DispatchAsync#undo()}.
    *
    * @param <A> Type of {@link Action} that will be executed by mock handler
@@ -171,9 +171,9 @@ public abstract class MockHandlerModule extends AbstractModule {
    * Registers a mock client-side action handlers.
    * <p/>
    * This mock client-side action handler will be executed when the class under
-   * test calls {@link com.gwtplatform.dispatch.client.DispatchAsync#execute
+   * test calls {@link com.gwtplatform.dispatch.shared.DispatchAsync#execute
    * DispatchAsync#execute()} or
-   * {@link com.gwtplatform.dispatch.client.DispatchAsync#undo
+   * {@link com.gwtplatform.dispatch.shared.DispatchAsync#undo
    * DispatchAsync#undo()}.
    * <p/>
    *
