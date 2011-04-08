@@ -75,6 +75,11 @@
                 <version>${project.version}</version>
 				<scope>provided</scope> <!-- Not needed server-side -->				
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-all</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Google Web Toolkit dependencies -->
             <dependency>
