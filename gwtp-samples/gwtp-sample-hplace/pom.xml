@@ -120,24 +120,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-mvp-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-server-guice</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-processors</artifactId>
-        </dependency>
-        
         <!-- Google Web Toolkit dependencies -->
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -166,5 +148,49 @@
             <artifactId>gin</artifactId>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <!-- Activate this profile to compile the sample
+            including just the adequate GWTP dependencies -->
+            <id>default-samples</id>
+            <activation>
+                <property><name>!gwtp-all</name></property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-mvp-client</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-client</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-server-guice</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-processors</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <!-- Activate this profile to compile the sample
+            using the compound GWTP dependency (gwtp-all) -->
+            <id>gwtp-all-samples</id>
+            <activation>
+                <property><name>gwtp-all</name></property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-all</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 </project>
