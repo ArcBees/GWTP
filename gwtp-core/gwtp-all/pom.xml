@@ -22,42 +22,52 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-mvp-client</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-clients-common</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-client</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-shared</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-server</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-server-guice</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-server-spring</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-tester</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-processors</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-crawler</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
