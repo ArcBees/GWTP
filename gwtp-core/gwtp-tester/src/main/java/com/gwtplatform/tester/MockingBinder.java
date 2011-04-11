@@ -16,15 +16,14 @@
 
 package com.gwtplatform.tester;
 
+import java.lang.reflect.Field;
+
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-
 /**
- * {@link MockingBinder} makes testing view even easier by mocking every {@link UiField}
- * and returning a mocked object upon creation.
+ * {@link MockingBinder} makes testing view even easier by mocking every
+ * {@link UiField} and returning a mocked object upon creation.
  * <p />
  * To use it, you should build a small class that extends MockingBinder and bind
  * that class inside your Guice test module. You will have to provide a
@@ -32,19 +31,22 @@ import java.lang.reflect.Field;
  *
  * Ex:
  *
- * <pre>public static class Module extends JukitoModule {
- *   static class MyTestBinder extends MockingBinder<Widget, BlogView> implements Binder {
- *     public MyTestBinder(final AnyMockFactory anyMockFactory) {
- *       super(Widget.class, anyMockFactory);
- *     }
- *   }
+ * <pre>
+ * public static class Module extends JukitoModule {
+ *  static class MyTestBinder extends MockingBinder&lt;Widget, BlogView&gt; implements
+ *  Binder {
+ *    public MyTestBinder(final AnyMockFactory anyMockFactory) {
+ *      super(Widget.class, anyMockFactory);
+ *    }
+ *  }
  *
- *   protected void configureTest() {
- *     GWTMockUtilities.disarm();
+ *  protected void configureTest() {
+ *    GWTMockUtilities.disarm();
  *
- *     bind(Binder.class).to(MyTestBinder.class);
- *   }
- * }</pre>
+ *    bind(Binder.class).to(MyTestBinder.class);
+ *  }
+ * }
+ * </pre>
  *
  * Disarming GWT is important to unit test views.
  *
@@ -72,19 +74,16 @@ public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
     Field[] fields = owner.getClass().getDeclaredFields();
 
     for (Field field : fields) {
-      Annotation[] annotations = field.getAnnotations();
       field.setAccessible(true);
 
-      for (Annotation annotation : annotations) {
-        if (annotation.annotationType().equals(UiField.class)) {
-            Object mockObject = mockFactory.mock(field.getType());
+      if (field.isAnnotationPresent(UiField.class)) {
+        Object mockObject = mockFactory.mock(field.getType());
 
-            try {
-              field.set(owner, mockObject);
-            } catch (IllegalAccessException e) {
-              e.printStackTrace();
-              throw new RuntimeException(e);
-            }
+        try {
+          field.set(owner, mockObject);
+        } catch (IllegalAccessException e) {
+          e.printStackTrace();
+          throw new RuntimeException(e);
         }
       }
     }
