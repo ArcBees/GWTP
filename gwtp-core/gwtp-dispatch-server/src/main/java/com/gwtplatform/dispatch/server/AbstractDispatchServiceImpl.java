@@ -139,10 +139,12 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
     // Try to match session tokens to prevent XSRF
     Cookie[] cookies = request.getCookies();
     String cookieInRequest = null;
-    for (Cookie cookie : cookies) {
-      if (cookie.getName().equals(getSecurityCookieName())) {
-        cookieInRequest = cookie.getValue();
-        break;
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        if (cookie.getName().equals(getSecurityCookieName())) {
+          cookieInRequest = cookie.getValue();
+          break;
+        }
       }
     }
 
