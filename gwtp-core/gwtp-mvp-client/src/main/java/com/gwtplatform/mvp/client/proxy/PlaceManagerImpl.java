@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * This is the default implementation of the {@link PlaceManager}.
- * 
+ *
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
@@ -60,7 +60,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     this.tokenFormatter = tokenFormatter;
     registerTowardsHistory();
   }
-  
+
   @Override
   public String buildHistoryToken(PlaceRequest request) {
     return tokenFormatter.toPlaceToken(request);
@@ -91,7 +91,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * If a confirmation question is set (see
    * {@link #setOnLeaveConfirmation(String)}), this asks the user if he wants to
    * leave the current page.
-   * 
+   *
    * @return true if the user accepts to leave. false if he refuses.
    */
   private boolean confirmLeaveState() {
@@ -111,11 +111,12 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   /**
    * Fires the {@link PlaceRequestInternalEvent} for the given
-   * {@link PlaceRequest}.
-   * 
+   * {@link PlaceRequest}. Do not call this method directly,
+   * instead call {@link #revealPlace(PlaceRequest)} or a related method.
+   *
    * @param request The {@link PlaceRequest} to fire.
    */
-  private void doRevealPlace(PlaceRequest request) {
+  protected void doRevealPlace(PlaceRequest request) {
     PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent(
         request);
     fireEvent(requestEvent);
@@ -132,7 +133,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * Called whenever an error occurred that requires the error page to be shown
    * to the user. This method will detect infinite reveal loops and throw an
    * {@link RuntimeException} in that case.
-   * 
+   *
    * @param invalidHistoryToken The history token that was not recognised.
    */
   private void error(String invalidHistoryToken) {
@@ -149,7 +150,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   String getBrowserHistoryToken() {
     return History.getToken();
   }
-  
+
   @Override
   public String getPreviousHistoryToken() {
     return previousHistoryToken;
@@ -192,7 +193,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * Checks that the place manager is not locked and that the user allows the
    * application to navigate (see {@link #confirmLeaveState()}. If the
    * application is allowed to navigate, this method locks navigation.
-   * 
+   *
    * @return true if the place manager can get the lock false otherwise.
    */
   private boolean getLock() {
@@ -228,7 +229,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * access, and we need to reveal the user-defined unauthorized place. This
    * method will detect infinite reveal loops and throw an
    * {@link RuntimeException} in that case.
-   * 
+   *
    * @param historyToken The history token that was not recognised.
    */
   private void illegalAccess(String historyToken) {
@@ -245,7 +246,8 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public final void navigateBack() {
+  @Deprecated
+  public void navigateBack() {
     if (previousHistoryToken != null) {
       setBrowserHistoryToken(previousHistoryToken, true);
     } else {
@@ -257,7 +259,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * Handles change events from {@link History}.
    */
   @Override
-  public final void onValueChange(final ValueChangeEvent<String> event) {
+  public void onValueChange(final ValueChangeEvent<String> event) {
     if (locked) {
       defferedNavigation = new Command() {
         @Override
@@ -287,7 +289,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public final void onWindowClosing(ClosingEvent event) {
+  public void onWindowClosing(ClosingEvent event) {
     event.setMessage(onLeaveQuestion);
     Scheduler.get().scheduleDeferred(new Command() {
       @Override
@@ -312,7 +314,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public final void revealPlace(final PlaceRequest request) {
+  public void revealPlace(final PlaceRequest request) {
     if (locked) {
       defferedNavigation = new Command() {
         @Override
@@ -331,7 +333,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public final void revealPlaceHierarchy(
+  public void revealPlaceHierarchy(
       final List<PlaceRequest> placeRequestHierarchy) {
     if (locked) {
       defferedNavigation = new Command() {
@@ -411,7 +413,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * method to be used and making it possible to correctly restore the browser's
    * URL if the user refuses to navigate. (See
    * {@link #onWindowClosing(ClosingEvent)})
-   * 
+   *
    * @param historyToken The current history token, a string.
    */
   private void saveHistoryToken(String historyToken) {
@@ -425,7 +427,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public final void setOnLeaveConfirmation(String question) {
+  public void setOnLeaveConfirmation(String question) {
     if (question == null && onLeaveQuestion == null) {
       return;
     }
@@ -441,7 +443,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   /**
    * Start revealing an error or unauthorized page. This method will throw an
    * exception if an infinite loop is detected.
-   * 
+   *
    * @see #stopError()
    */
   private void startError() {
@@ -457,7 +459,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   /**
    * Indicates that an error page has successfully been revealed. Makes it
    * possible to detect infinite loops.
-   * 
+   *
    * @see #startError()
    */
   private void stopError() {
@@ -498,7 +500,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   /**
    * Returns a modified copy of the place hierarchy based on the specified
    * {@code level}.
-   * 
+   *
    * @param level If negative, take back that many elements from the tail of the
    *          hierarchy. If positive, keep only that many elements from the head
    *          of the hierarchy. Passing {@code 0} leaves the hierarchy
