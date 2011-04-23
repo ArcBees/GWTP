@@ -20,14 +20,11 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
-import com.gwtplatform.mvp.client.TabContainerPresenter;
 import com.gwtplatform.mvp.client.TabView;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
@@ -44,8 +41,7 @@ import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
-public class HomePresenter extends
-    TabContainerPresenter<HomePresenter.MyView, HomePresenter.MyProxy> {
+public class HomePresenter extends HomePresenterBase<HomePresenter.MyView, HomePresenter.MyProxy> {
   /**
    * {@link HomePresenter}'s proxy.
    */
@@ -72,12 +68,6 @@ public class HomePresenter extends
    */
   @RequestTabs
   public static final Type<RequestTabsHandler> TYPE_RequestTabs = new Type<RequestTabsHandler>();
-
-  /**
-   * Use this in leaf presenters, inside their {@link #revealInParent} method.
-   */
-  @ContentSlot
-  public static final Type<RevealContentHandler<?>> TYPE_SetTabContent = new Type<RevealContentHandler<?>>();
 
   @Inject
   public HomePresenter(final EventBus eventBus, final MyView view,
