@@ -246,25 +246,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>gwt-maven-plugin</artifactId>
-                    <version>${gwt-maven-plugin.version}</version>
-                    <configuration>
-                        <appEngineVersion>${appEngine.version}</appEngineVersion>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <configuration>
-                                <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
-                            </configuration>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${maven-checkstyle-plugin.version}</version>
@@ -323,6 +304,9 @@
                         <include>**/*Test.java</include>
                         <include>**/*TestCase.java</include>
                     </includes>
+                    <excludes>
+                        <exclude>**/*GwtTest.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 

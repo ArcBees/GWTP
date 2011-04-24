@@ -34,6 +34,24 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>${gwt-maven-plugin.version}</version>
+                <configuration>
+                    <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
+                    <includes>**/*GwtTest.java</includes>
+                    <mode>htmlunit</mode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
