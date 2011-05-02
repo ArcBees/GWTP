@@ -14,29 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.externaltest;
-
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Widget;
-
-import com.gwtplatform.mvp.client.ViewImpl;
+package com.gwtplatform.mvp.client.proxy;
 
 /**
- * This is the test view of the {@link SubPresenterWidget}.
+ * GWT window and history related methods that can be mocked.
  *
  * @author Philippe Beaudoin
  */
-public class SubView extends ViewImpl implements SubPresenterWidget.MyView {
-
-  public final HTML widget;
-
-  public SubView() {
-    widget = new HTML("Test!");
-  }
-
-  @Override
-  public Widget asWidget() {
-    return widget;
-  }
-
+public interface PlaceManagerWindowMethodsTestUtil {
+  void registerTowardsHistory();
+  String getBrowserHistoryToken();
+  String getCurrentHref();
+  void revealCurrentPlace();
+  void setBrowserHistoryToken(String historyToken, boolean issueEvent);
 }

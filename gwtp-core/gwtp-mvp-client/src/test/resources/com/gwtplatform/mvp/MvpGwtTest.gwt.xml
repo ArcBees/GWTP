@@ -19,16 +19,21 @@
 <module>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
+  <inherits name="com.google.gwt.uibinder.GinUiBinder" />
   <inherits name="com.google.gwt.inject.Inject" />
+  
+  <inherits name="com.gwtplatform.mvp.Mvp" />
 
-  <!-- Inherit shared modules -->
-  <inherits name='com.gwtplatform.common.ClientsCommon'/>
-
-  <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
-    <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy" />
-  </generate-with>
+  <!-- Inherit the default GWT style sheet.  You can change       -->
+  <!-- the theme of your GWT application by uncommenting          -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
   
   <!-- Specify the paths for translatable code                    -->
   <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java" />
+
+  <!-- This is required for Gwt-Platform Proxy's generator        -->
+  <define-configuration-property name="gin.ginjector" is-multi-valued="false" />
+  <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.gwt.mvp.GinjectorTestUtilGwt" />
 
 </module>

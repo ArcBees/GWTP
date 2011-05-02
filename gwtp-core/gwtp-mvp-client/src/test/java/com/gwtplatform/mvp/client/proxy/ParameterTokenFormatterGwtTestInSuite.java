@@ -31,13 +31,13 @@ import com.google.gwt.junit.client.GWTTestCase;
  *
  * @author Yannis Gonianakis
  */
-public class ParameterTokenFormatterGwtTest extends GWTTestCase {
+public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
   ParameterTokenFormatter tokenFormatter;
 
   @Override
   public String getModuleName() {
-    return "com.gwtplatform.mvp.Mvp";
+    return "com.gwtplatform.mvp.MvpTest";
   }
 
   @Override

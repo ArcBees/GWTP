@@ -14,31 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.externaltest;
+package com.gwtplatform.mvp.client.gwt.mvp;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
-
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
+import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
-import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 /**
- * This is the test presenter.
+ * A test presenter meant to be run in a GWTTestCase.
  *
  * @author Philippe Beaudoin
  */
-public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter.MyProxy> {
-
-  @ContentSlot
-  public static final Type<RevealContentHandler<?>> TYPE_SetMainContent = new Type<RevealContentHandler<?>>();
+public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilGwt.MyView, AdminPresenterTestUtilGwt.MyProxy> {
 
   /**
    * Presenter's view.
@@ -50,20 +42,13 @@ public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter
    * Presenter's proxy.
    */
   @ProxyStandard
-  public interface MyProxy extends Proxy<MainPresenter> {
+  @NameToken("admin")
+  public interface MyProxy extends ProxyPlace<AdminPresenterTestUtilGwt> {
   }
-
-  private PresenterWidget<?> subPresenter;
 
   @Inject
-  public MainPresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy, @Named("Sub") PresenterWidget<View> subPresenter) {
+  public AdminPresenterTestUtilGwt(final EventBus eventBus, final MyView view, final MyProxy proxy) {
     super(eventBus, view, proxy);
-    this.subPresenter = subPresenter;
-  }
-
-  public void setSubPresenter() {
-    setInSlot(TYPE_SetMainContent, subPresenter);
   }
 
   @Override

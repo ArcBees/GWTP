@@ -32,6 +32,7 @@ import java.util.List;
  */
 public final class DelayedBindRegistry {
 
+  private static Ginjector ginjector;
   private static List<DelayedBind> delayedBindObjects = new ArrayList<DelayedBind>();
 
   /**
@@ -42,6 +43,7 @@ public final class DelayedBindRegistry {
    * @param ginjector The {@link Ginjector} from which to get object instances.
    */
   public static void bind(Ginjector ginjector) {
+    DelayedBindRegistry.ginjector = ginjector;
     for (DelayedBind delayedBindObject : delayedBindObjects) {
       delayedBindObject.delayedBind(ginjector);
     }
@@ -56,5 +58,14 @@ public final class DelayedBindRegistry {
    */
   public static void register(DelayedBind delayedBindObject) {
     delayedBindObjects.add(delayedBindObject);
+  }
+
+  /**
+   * Access the ginjector that was bound to this {@link DelayedBindRegistry}.
+   *
+   * @return The {@link Ginjector}.
+   */
+  public static Ginjector getGinjector() {
+    return ginjector;
   }
 }

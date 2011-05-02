@@ -58,7 +58,7 @@ public class PlaceManagerImplTest {
     protected void configureTest() {
       bind(DeferredCommandManager.class).in(TestSingleton.class);
       bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
-      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestSingleton.class);
+      bind(PlaceManager.class).to(PlaceManagerTestUtil.class).in(TestSingleton.class);
       bind(DummyPresenterRedirect.class);
       bind(DummyProxyBasic.class);
       bind(DummyProxyPlaceBasic.class);
@@ -177,7 +177,7 @@ public class PlaceManagerImplTest {
   @Inject PlaceManager placeManager;
 
   @Inject DeferredCommandManager deferredCommandManager;
-  @Inject PlaceManagerWindowMethods gwtWindowMethods;
+  @Inject PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
   @Inject NavigationEventSpy navigationHandler;
   @Inject EventBus eventBus;
 

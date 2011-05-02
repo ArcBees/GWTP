@@ -26,14 +26,14 @@ import com.google.inject.Inject;
  *
  * @author Philippe Beaudoin
  */
-class TestPlaceManager extends PlaceManagerImpl {
+class PlaceManagerTestUtil extends PlaceManagerImpl {
 
   private final PlaceRequest defaultPlaceRequest = new PlaceRequest("defaultPlace");
-  private final PlaceManagerWindowMethods gwtWindowMethods;
+  private final PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
 
   @Inject
-  public TestPlaceManager(EventBus eventBus, TokenFormatter tokenFormatter,
-      PlaceManagerWindowMethods gwtWindowMethods) {
+  public PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
+      PlaceManagerWindowMethodsTestUtil gwtWindowMethods) {
     super(eventBus, tokenFormatter);
     this.gwtWindowMethods = gwtWindowMethods;
   }
