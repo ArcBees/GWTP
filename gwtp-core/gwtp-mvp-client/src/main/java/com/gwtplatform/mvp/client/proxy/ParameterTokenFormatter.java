@@ -84,11 +84,11 @@ public final class ParameterTokenFormatter implements TokenFormatter {
    * {@link URL#encodeQueryString(String)})
    *
    * @param hierarchySeparator The symbol used to separate {@link PlaceRequest}
-   *          in a hierarchy. Must be a 1-character string.
+   *          in a hierarchy. Must be a 1-character string and can't be {@code %}.
    * @param paramSeparator The symbol used to separate parameters in a
-   *          {@link PlaceRequest}. Must be a 1-character string.
+   *          {@link PlaceRequest}. Must be a 1-character string and can't be {@code %}.
    * @param valueSeparator The symbol used to separate the parameter name from
-   *          its value. Must be a 1-character string.
+   *          its value. Must be a 1-character string and can't be {@code %}.
    */
   public ParameterTokenFormatter(String hierarchySeparator,
       String paramSeparator, String valueSeparator) {
@@ -176,7 +176,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     List<PlaceRequest> result = new ArrayList<PlaceRequest>();
 
     for (String placeToken : placeTokens) {
-      if (placeToken.isEmpty() && placeTokens.indexOf(placeToken) != 0) {
+      if (placeTokens.size() > 1 && placeToken.isEmpty()) {
         throw new TokenFormatException();
       }
 
