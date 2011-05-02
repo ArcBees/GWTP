@@ -322,16 +322,13 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     String historyToken = "/t2;a=b";
 
     // When
-    List<PlaceRequest> placeRequests = tokenFormatter
-            .toPlaceRequestHierarchy(historyToken);
-
-    // Then
-    assertEquals(2, placeRequests.size());
-    assertEquals("", placeRequests.get(0).getNameToken());
-    assertEquals(0, placeRequests.get(0).getParameterNames().size());
-    assertEquals("t2", placeRequests.get(1).getNameToken());
-    assertEquals(1, placeRequests.get(1).getParameterNames().size());
-    assertEquals("b", placeRequests.get(1).getParameter("a", null));
+    try {
+      tokenFormatter.toPlaceRequestHierarchy(historyToken);
+    
+      // then
+      Assert.fail("TokenFormatException (Bad parameter) was expected");
+    } catch (TokenFormatException e) {
+    }
   }
 
   public void testToPlaceRequestHierarchyValidHistoryToken() {
