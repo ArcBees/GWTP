@@ -2,7 +2,7 @@
 <module rename-to='gwtptabsample'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
-  <inherits name="com.google.gwt.uibinder.GinUiBinder" />
+  <inherits name="com.google.gwt.uibinder.GinUiBinder" /> <!-- GinUiBinder allows injecting widgets in UiBinder -->
   <inherits name="com.google.gwt.inject.Inject" />
   
   <inherits name="com.gwtplatform.mvp.Mvp" />

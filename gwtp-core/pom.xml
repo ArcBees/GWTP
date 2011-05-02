@@ -41,7 +41,7 @@
                 <version>${gwt-maven-plugin.version}</version>
                 <configuration>
                     <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
-                    <includes>**/*GwtTest.java</includes>
+                    <includes>**/*GwtTest.java,**/*GwtTestSuite.java</includes>
                     <mode>htmlunit</mode>
                 </configuration>
                 <executions>

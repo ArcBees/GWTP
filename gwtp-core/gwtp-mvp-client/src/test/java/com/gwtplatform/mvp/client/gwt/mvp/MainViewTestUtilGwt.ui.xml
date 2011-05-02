@@ -1,0 +1,8 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+    xmlns:g="urn:import:com.google.gwt.user.client.ui"
+    xmlns:myui="urn:import:com.gwtplatform.mvp.client.gwt.mvp">
+    <g:HTMLPanel ui:field='mainSlot'>
+        <myui:InjectedLabel/>
+    </g:HTMLPanel>
+</ui:UiBinder> 

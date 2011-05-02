@@ -14,44 +14,39 @@
  * the License.
  */
 
-package com.gwtplatform.externaltest;
+package com.gwtplatform.mvp.client.gwt.mvp;
 
-import com.google.gwt.user.client.ui.FlowPanel;
+import javax.inject.Inject;
+
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
- * This is the test view of the {@link MainPresenter}.
+ * A test presenter meant to be run in a GWTTestCase.
  *
  * @author Philippe Beaudoin
  */
-public class MainView extends ViewImpl implements MainPresenter.MyView {
+public class MainViewTestUtilGwt extends ViewImpl implements MainPresenterTestUtilGwt.MyView {
 
-  public final FlowPanel widget;
+  /**
+   */
+  public interface Binder extends UiBinder<Widget, MainViewTestUtilGwt> { }
 
-  public MainView() {
-    widget = new FlowPanel();
+  @UiField
+  HTMLPanel mainSlot;
+
+  private final Widget widget;
+
+  @Inject
+  public MainViewTestUtilGwt(Binder uiBinder) {
+    widget = uiBinder.createAndBindUi(this);
   }
 
   @Override
   public Widget asWidget() {
     return widget;
-  }
-
-  @Override
-  public void setInSlot(Object slot, Widget content) {
-    if (slot == MainPresenter.TYPE_SetMainContent) {
-      setMainContent(content);
-    } else {
-      super.setInSlot(slot, content);
-    }
-  }
-
-  private void setMainContent(Widget content) {
-    widget.clear();
-    if (content != null) {
-      widget.add(content);
-    }
   }
 }
