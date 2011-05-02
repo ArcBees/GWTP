@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.externaltest;
+package com.gwtplatform.mvp.client.mvp;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -31,12 +31,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Test behaviour when a mock {@link PresenterWidget} is injected.
+ * Test behaviour when a real {@link com.gwtplatform.mvp.client.PresenterWidget} is injected.
  *
  * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
-public class MockInjectionTest {
+public class RealInjectionTest {
 
   /**
    * Guice test module.
@@ -44,17 +44,20 @@ public class MockInjectionTest {
   public static class Module extends JukitoModule {
     @Override
     protected void configureTest() {
-      bindNamedMock(new TypeLiteral<PresenterWidget<View>>() { }, "Sub").in(TestSingleton.class);
+      bindNamed(new TypeLiteral<PresenterWidget<? extends View>>() { }, "Sub").to(SubPresenterWidgetTestUtil.class)
+        .in(TestSingleton.class);
       bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
     }
   }
 
   // SUT
-  @Inject MainPresenter mainPresenter;
+  @Inject MainPresenterTestUtil mainPresenter;
 
   @Test
   public void settingSubPresenterShouldNotCrash() {
     // When
     mainPresenter.setSubPresenter();
+
+    // Then nothing should crash
   }
 }

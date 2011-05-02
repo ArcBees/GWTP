@@ -23,7 +23,7 @@
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>
-  
+
   <!-- This is required for Gwt-Platform Proxy's generator        -->
   <define-configuration-property name="gin.ginjector" is-multi-valued="false" />
   <set-configuration-property name="gin.ginjector" value="com.gwtplatform.samples.hplace.client.gin.ClientGinjector" />

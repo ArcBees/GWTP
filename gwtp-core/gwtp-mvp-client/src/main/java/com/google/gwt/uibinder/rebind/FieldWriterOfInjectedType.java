@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.google.gwt.uibinder.rebind;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -32,7 +33,7 @@ public class FieldWriterOfInjectedType extends FieldWriterOfExistingType {
 
   public void write(IndentedWriter w) throws UnableToCompleteException {
     // Preempt creation of initializer, provide our own based on gin.
-    setInitializer( String.format("(%1$s) (((%2$s)GWT.create(%2$s.class)).%3$s())",
+    setInitializer( String.format("(%1$s) (((%2$s)com.gwtplatform.mvp.client.DelayedBindRegistry.getGinjector()).%3$s())",
         getQualifiedSourceName(), ginjectorClass.getQualifiedSourceName(), ginjectorMethod) );
     super.write(w);
   }

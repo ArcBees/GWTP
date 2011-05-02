@@ -54,7 +54,7 @@ public class PlaceManagerImpl2Test {
     protected void configureTest() {
       GWTMockUtilities.disarm();
       bind(DeferredCommandManager.class).in(TestSingleton.class);
-      bind(PlaceManager.class).to(TestPlaceManager.class).in(TestSingleton.class);
+      bind(PlaceManager.class).to(PlaceManagerTestUtil.class).in(TestSingleton.class);
     }
   }
 
@@ -63,7 +63,7 @@ public class PlaceManagerImpl2Test {
 
   @Inject DeferredCommandManager deferredCommandManager;
   @Inject EventBus eventBus;
-  @Inject PlaceManagerWindowMethods gwtWindowMethods;
+  @Inject PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
 
   @Test
   public void placeManagerUserCallUpdateHistoryWhenRevealingPlace() {

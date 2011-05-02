@@ -50,3 +50,4 @@ glob:gwtp-samples/gwtp-sample-nested/bin/**
 glob:gwtp-samples/gwtp-sample-tab/bin/**
 glob:**/bin/**
 glob:**/.gwt
+glob:**/manifest.txt

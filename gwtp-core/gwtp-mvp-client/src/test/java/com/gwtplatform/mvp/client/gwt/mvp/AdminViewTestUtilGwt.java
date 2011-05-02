@@ -14,17 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.client.gwt.mvp;
+
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
- * GWT window and history related methods that can be mocked.
+ * A test presenter meant to be run in a GWTTestCase.
  *
  * @author Philippe Beaudoin
  */
-public interface PlaceManagerWindowMethods {
-  void registerTowardsHistory();
-  String getBrowserHistoryToken();
-  String getCurrentHref();
-  void revealCurrentPlace();
-  void setBrowserHistoryToken(String historyToken, boolean issueEvent);
+public class AdminViewTestUtilGwt extends ViewImpl implements AdminPresenterTestUtilGwt.MyView {
+
+  public final FlowPanel widget;
+
+  public AdminViewTestUtilGwt() {
+    widget = new FlowPanel();
+  }
+
+  @Override
+  public Widget asWidget() {
+    return widget;
+  }
 }
