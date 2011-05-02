@@ -64,11 +64,8 @@ public final class ParameterTokenFormatter implements TokenFormatter {
   protected static final String DEFAULT_PARAM_SEPARATOR = ";";
   protected static final String DEFAULT_VALUE_SEPARATOR = "=";
 
-  private final String hierarchyPattern;
   private final String hierarchySeparator;
-  private final String paramPattern;
   private final String paramSeparator;
-  private final String valuePattern;
   private final String valueSeparator;
 
   /**
@@ -105,15 +102,13 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     assert !valueSeparator.equals(URL.encodeQueryString(valueSeparator));
     assert !hierarchySeparator.equals(URL.encodeQueryString(hierarchySeparator));
     assert !paramSeparator.equals(URL.encodeQueryString(paramSeparator));
+    assert !hierarchySeparator.equals("%");
+    assert !paramSeparator.equals("%");
+    assert !valueSeparator.equals("%");
+    
     this.hierarchySeparator = hierarchySeparator;
     this.paramSeparator = paramSeparator;
     this.valueSeparator = valueSeparator;
-
-    hierarchyPattern = "(?<!" + hierarchySeparator + ")" + hierarchySeparator + "(?!" + hierarchySeparator + ")";
-
-    paramPattern = "(?<!" + paramSeparator + ")" + paramSeparator + "(?!" + paramSeparator + ")";
-
-    valuePattern = "(?<!" + valueSeparator + ")" + valueSeparator + "(?!" + valueSeparator + ")";
   }
 
   @Override
@@ -142,7 +137,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     } else if (split >= 0) {
       req = new PlaceRequest(placeToken.substring(0, split));
       String paramsChunk = placeToken.substring(split + 1);
-      String[] paramTokens = paramsChunk.split(paramPattern);
+      String[] paramTokens = paramsChunk.split(paramSeparator);
       for (String paramToken : paramTokens) {
 
         // Split failed due to un-escaped param separator
@@ -152,7 +147,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
                           + "' between them.");
         }
 
-        String[] param = paramToken.split(valuePattern, 2);
+        String[] param = paramToken.split(valueSeparator, 2);
 
         // Split failed due to un-escaped value separators
         if (param.length == 1                           // pattern didn't match
@@ -181,6 +176,10 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     List<PlaceRequest> result = new ArrayList<PlaceRequest>();
 
     for (String placeToken : placeTokens) {
+      if (placeToken.isEmpty() && placeTokens.indexOf(placeToken) != 0) {
+        throw new TokenFormatException();
+      }
+
       result.add(toPlaceRequest(placeToken));
     }
 
@@ -215,7 +214,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
   private List<String> toPlaceTokenList(String historyToken)
       throws TokenFormatException {
     List<String> result = new ArrayList<String>();
-    String[] placeTokens = historyToken.split(hierarchyPattern);
+    String[] placeTokens = historyToken.split(hierarchySeparator);
     for (String placeToken : placeTokens) {
 
       // Split failed due to un-escaped hierarchy separator
