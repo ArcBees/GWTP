@@ -169,7 +169,6 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
   public void testToPlaceRequestPlaceTokenKeyMissingValue() {
     try {
       tokenFormatter.toPlaceRequest("nameToken;key1;key2=value2;");
-
       Assert.fail("TokenFormatException (Bad parameter) was expected.");
     } catch (TokenFormatException e) {
     }
@@ -178,7 +177,6 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
   public void testToPlaceRequestPlaceTokenWithUnescapedValueSeparators() {
     try {
       tokenFormatter.toPlaceRequest("token;a====b;");
-
       Assert.fail("TokenFormatException (Bad parameter) was expected.");
     } catch (TokenFormatException e) {
     }
@@ -186,15 +184,11 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
   public void testToPlaceRequestPlaceTokenWithUnescapedParamSeparators() {
     // Given
-    String[] placeTokens = {
-            "token;a=b;;;c=d",
-            "token;a=b;c=d;;",
-            "token;;a=b"
-    };
+    String[] placeTokens = {"token;a=b;;;c=d", "token;a=b;c=d;;", "token;;a=b"};
 
-    // When
     try {
       for (String placeToken : placeTokens) {
+        // When
         tokenFormatter.toPlaceRequest(placeToken);
         Assert.fail("TokenFormatException (Bad parameter) was expected.");
       }
@@ -206,17 +200,17 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
   public void testToPlaceRequestIsReverseOfToPlaceToken() {
 
     PlaceRequest[] testCases = {
-            new PlaceRequest("token").with("=a=b=", "=c=d=").with("x", "y"),
-            new PlaceRequest("token").with("==a==b==", "==c==d==").with("x", "y"),
-            new PlaceRequest("token").with(";a;b;", ";c;d;").with("x", "y"),
-            new PlaceRequest("token").with(";;a;;b;;", ";;c;;d;;").with("x", "y"),
-            new PlaceRequest("token").with("/a/b/", "/c/d/").with("x", "y"),
-            new PlaceRequest("token").with("//a//b//", "//c//d//").with("x", "y"),
+        new PlaceRequest("token").with("=a=b=", "=c=d=").with("x", "y"),
+        new PlaceRequest("token").with("==a==b==", "==c==d==").with("x", "y"),
+        new PlaceRequest("token").with(";a;b;", ";c;d;").with("x", "y"),
+        new PlaceRequest("token").with(";;a;;b;;", ";;c;;d;;").with("x", "y"),
+        new PlaceRequest("token").with("/a/b/", "/c/d/").with("x", "y"),
+        new PlaceRequest("token").with("//a//b//", "//c//d//").with("x", "y"),
     };
 
     for (PlaceRequest placeRequestA : testCases) {
       PlaceRequest placeRequestB = tokenFormatter.toPlaceRequest(
-              tokenFormatter.toPlaceToken(placeRequestA));
+          tokenFormatter.toPlaceToken(placeRequestA));
 
       for (String key : placeRequestB.getParameterNames()) {
         assertEquals(placeRequestA.getParameter(key, null), placeRequestB.getParameter(key, null));
@@ -282,9 +276,9 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     for (String key : params.keySet()) {
       // Escape separators
       String placeToken = "token;"
-              + URL.encodeQueryString(key)
-              + "="
-              + URL.encodeQueryString(params.get(key));
+          + URL.encodeQueryString(key)
+          + "="
+          + URL.encodeQueryString(params.get(key));
 
       testPlaceTokens.add(placeToken);
     }
@@ -292,7 +286,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     for (String placeRequestA : testPlaceTokens) {
       // When
       String placeRequestB = tokenFormatter.toPlaceToken(
-              tokenFormatter.toPlaceRequest(placeRequestA));
+          tokenFormatter.toPlaceRequest(placeRequestA));
 
       // Then
       assertEquals(placeRequestA, placeRequestB);
@@ -309,7 +303,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     // When
     List<PlaceRequest> placeRequests = tokenFormatter
-            .toPlaceRequestHierarchy(historyToken);
+        .toPlaceRequestHierarchy(historyToken);
 
     // Then
     assertEquals(1, placeRequests.size());
@@ -321,13 +315,12 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     // Given
     String historyToken = "/t2;a=b";
 
-    // When
     try {
+      // When
       tokenFormatter.toPlaceRequestHierarchy(historyToken);
-    
-      // then
       Assert.fail("TokenFormatException (Bad parameter) was expected");
     } catch (TokenFormatException e) {
+      // Then
     }
   }
 
@@ -337,7 +330,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     // When
     List<PlaceRequest> placeRequests = tokenFormatter
-            .toPlaceRequestHierarchy(historyToken);
+        .toPlaceRequestHierarchy(historyToken);
 
     // Then
     assertEquals(3, placeRequests.size());
@@ -356,9 +349,9 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     try {
       // When
       tokenFormatter.toPlaceRequestHierarchy(historyToken);
-
       Assert.fail("TokenFormatException (Bad parameter) was expected");
     } catch (TokenFormatException e) {
+      // Then
     }
   }
 
@@ -371,7 +364,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     // When
     List<PlaceRequest> placeRequestHierarchyB = tokenFormatter.toPlaceRequestHierarchy(
-            tokenFormatter.toHistoryToken(placeRequestHierarchyA));
+        tokenFormatter.toHistoryToken(placeRequestHierarchyA));
 
     // Then
     assertEquals(placeRequestHierarchyA, placeRequestHierarchyB);
@@ -427,7 +420,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     // When
     String stringB = tokenFormatter.toHistoryToken(
-            tokenFormatter.toPlaceRequestHierarchy(stringA));
+        tokenFormatter.toPlaceRequestHierarchy(stringA));
 
     // Then
     assertEquals(stringA, stringB);
