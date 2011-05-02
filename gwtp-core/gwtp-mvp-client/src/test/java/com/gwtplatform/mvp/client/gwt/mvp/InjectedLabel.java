@@ -14,31 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.externaltest;
+package com.gwtplatform.mvp.client.gwt.mvp;
 
-import com.google.gwt.event.shared.EventBus;
+import javax.inject.Named;
+
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 
-import com.gwtplatform.mvp.client.PresenterWidget;
-import com.gwtplatform.mvp.client.View;
-
 /**
- * This is the test presenter.
+ * A dummy widget participating in dependency injection to test GinUiBinder.
  *
  * @author Philippe Beaudoin
  */
-public class SubPresenterWidget extends PresenterWidget<SubPresenterWidget.MyView> {
+public class InjectedLabel extends Composite {
 
-  /**
-   * Presenter's view.
-   */
-  public interface MyView extends View {
-  }
+  private final Label label;
 
   @Inject
-  public SubPresenterWidget(final EventBus eventBus, final MyView view) {
-    super(eventBus, view);
+  public InjectedLabel(@Named("notice") String notice) {
+    label = new Label(notice);
+    initWidget(label);
   }
-
 }
-
