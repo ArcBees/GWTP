@@ -54,19 +54,24 @@ public class GoogleAnalyticsImpl implements GoogleAnalytics {
 
   @Override
   public void init(String userAccount) {
+    Element firstScript = Document.get().getElementsByTagName("script").getItem(
+        0);
+    
     ScriptElement config = Document.get().createScriptElement(
         "var _gaq = _gaq || [];_gaq.push(['_setAccount', '" + userAccount
             + "']);_gaq.push(['_trackPageview']);");
-    Element firstscript = Document.get().getElementsByTagName("script").getItem(
-        0);
-    firstscript.getParentNode().insertBefore(config, firstscript);
+    
+    firstScript.getParentNode().insertBefore(config, firstScript);
 
     ScriptElement script = Document.get().createScriptElement();
+
+    // Add the google analytics script.
     script.setSrc(("https:".equals(Window.Location.getProtocol())
         ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js");
     script.setType("text/javascript");
     script.setAttribute("async", "true");
-    firstscript.getParentNode().insertBefore(script, firstscript);
+    
+    firstScript.getParentNode().insertBefore(script, firstScript);
   }
 
   @Override
