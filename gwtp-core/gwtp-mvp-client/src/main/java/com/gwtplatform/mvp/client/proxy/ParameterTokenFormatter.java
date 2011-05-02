@@ -91,7 +91,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
    *          its value. Must be a 1-character string and can't be {@code %}.
    */
   public ParameterTokenFormatter(String hierarchySeparator,
-      String paramSeparator, String valueSeparator) {
+                                 String paramSeparator, String valueSeparator) {
 
     assert hierarchySeparator.length() == 1;
     assert paramSeparator.length() == 1;
@@ -105,7 +105,7 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     assert !hierarchySeparator.equals("%");
     assert !paramSeparator.equals("%");
     assert !valueSeparator.equals("%");
-    
+
     this.hierarchySeparator = hierarchySeparator;
     this.paramSeparator = paramSeparator;
     this.valueSeparator = valueSeparator;
@@ -139,31 +139,28 @@ public final class ParameterTokenFormatter implements TokenFormatter {
       String paramsChunk = placeToken.substring(split + 1);
       String[] paramTokens = paramsChunk.split(paramSeparator);
       for (String paramToken : paramTokens) {
-
         // Split failed due to un-escaped param separator
         if (paramToken.isEmpty() || paramToken.contains(paramSeparator)) {
           throw new TokenFormatException(
-                  "Bad parameter: Successive parameters require a single '" + paramSeparator
-                          + "' between them.");
+              "Bad parameter: Successive parameters require a single '" + paramSeparator
+                  + "' between them.");
         }
 
         String[] param = paramToken.split(valueSeparator, 2);
 
         // Split failed due to un-escaped value separators
         if (param.length == 1                           // pattern didn't match
-                || param[0].contains(valueSeparator)    // un-escaped separator encountered in the key
-                || param[1].contains(valueSeparator)) { // un-escaped separator encountered in the value
+            || param[0].contains(valueSeparator)    // un-escaped separator encountered in the key
+            || param[1].contains(valueSeparator)) { // un-escaped separator encountered in the value
           throw new TokenFormatException(
-                  "Bad parameter: Parameters require a single '" + valueSeparator
-                          + "' between the key and value.");
+              "Bad parameter: Parameters require a single '" + valueSeparator
+                  + "' between the key and value.");
         }
-
         String key = unescape(param[0]);
         String value = unescape(param[1]);
         req = req.with(key, value);
       }
     }
-
     return req;
   }
 
@@ -182,7 +179,6 @@ public final class ParameterTokenFormatter implements TokenFormatter {
 
       result.add(toPlaceRequest(placeToken));
     }
-
     return result;
   }
 
@@ -195,11 +191,10 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     if (params != null) {
       for (String name : params) {
         out.append(paramSeparator)
-                .append(escape(name)).append(valueSeparator)
-                .append(escape(placeRequest.getParameter(name, null)));
+            .append(escape(name)).append(valueSeparator)
+            .append(escape(placeRequest.getParameter(name, null)));
       }
     }
-
     return out.toString();
   }
 
@@ -216,14 +211,12 @@ public final class ParameterTokenFormatter implements TokenFormatter {
     List<String> result = new ArrayList<String>();
     String[] placeTokens = historyToken.split(hierarchySeparator);
     for (String placeToken : placeTokens) {
-
       // Split failed due to un-escaped hierarchy separator
       if (placeToken.contains(hierarchySeparator)) {
         throw new TokenFormatException(
-                "Bad parameter: Successive place tokens require a single '" + hierarchySeparator
-                        + "' between them.");
+            "Bad parameter: Successive place tokens require a single '" + hierarchySeparator
+                + "' between them.");
       }
-
       result.add(placeToken);
     }
     return result;
