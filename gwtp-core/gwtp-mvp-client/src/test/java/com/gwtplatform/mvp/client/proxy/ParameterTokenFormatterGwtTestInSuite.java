@@ -154,7 +154,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
   public void testToPlaceRequestPlaceTokenWithEmptyKey() {
     // Given
-    String placeToken = "nameToken;=value1;key2=value2;";
+    String placeToken = "nameToken;=value1;key2=value2";
 
     // When
     PlaceRequest placeRequest = tokenFormatter.toPlaceRequest(placeToken);
@@ -166,34 +166,57 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     assertEquals("value2", placeRequest.getParameter("key2", null));
   }
 
+  public void testToPlaceRequestDiscardsTrailingParamSeparators() {
+    // Given
+    String placeToken = "token;a=b;;";
+
+    // When
+    PlaceRequest placeRequest = tokenFormatter.toPlaceRequest(placeToken);
+
+    // Then
+    assertEquals(1, placeRequest.getParameterNames().size());
+  }
+
   public void testToPlaceRequestPlaceTokenKeyMissingValue() {
+    // Given
+    String placeToken = "nameToken;key1;key2=value2";
+
     try {
-      tokenFormatter.toPlaceRequest("nameToken;key1;key2=value2;");
+      // When
+      tokenFormatter.toPlaceRequest(placeToken);
       Assert.fail("TokenFormatException (Bad parameter) was expected.");
     } catch (TokenFormatException e) {
+      // Then
     }
   }
 
   public void testToPlaceRequestPlaceTokenWithUnescapedValueSeparators() {
-    try {
-      tokenFormatter.toPlaceRequest("token;a====b;");
-      Assert.fail("TokenFormatException (Bad parameter) was expected.");
-    } catch (TokenFormatException e) {
+    // Given
+    String[] placeTokens = {"token;=a=b", "token;a==b", "token;a=b="};
+
+    for (String placeToken : placeTokens) {
+      try {
+        // When
+        tokenFormatter.toPlaceRequest(placeToken);
+        Assert.fail("TokenFormatException was expected for '" + placeToken + "'");
+      } catch (Exception ex) {
+        // Then
+      }
     }
   }
 
   public void testToPlaceRequestPlaceTokenWithUnescapedParamSeparators() {
     // Given
-    String[] placeTokens = {"token;a=b;;;c=d", "token;a=b;c=d;;", "token;;a=b"};
+    String[] placeTokens = {"token;;a=b", "token;a=b;;c=d"};
 
-    try {
-      for (String placeToken : placeTokens) {
+    for (String placeToken : placeTokens) {
+      try {
         // When
         tokenFormatter.toPlaceRequest(placeToken);
-        Assert.fail("TokenFormatException (Bad parameter) was expected.");
+        Assert.fail("TokenFormatException was expected for '" + placeToken + "'");
+      } catch (Exception ex) {
+        // Then
       }
-    } catch (Exception ex) {
-      // Then
     }
   }
 
@@ -313,14 +336,16 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
   public void testToPlaceRequestHierarchyHistoryTokenWithEmptyPlaceToken() {
     // Given
-    String historyToken = "/t2;a=b";
+    String[] historyTokens = {"/", "/t1", "t1//t2"};
 
-    try {
-      // When
-      tokenFormatter.toPlaceRequestHierarchy(historyToken);
-      Assert.fail("TokenFormatException (Bad parameter) was expected");
-    } catch (TokenFormatException e) {
-      // Then
+    for (String historyToken : historyTokens) {
+      try {
+        // When
+        tokenFormatter.toPlaceRequestHierarchy(historyToken);
+        Assert.fail("TokenFormatException was expected for '" + historyToken + "'");
+      } catch (TokenFormatException e) {
+        // Then
+      }
     }
   }
 
@@ -340,6 +365,20 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     assertEquals(2, placeRequests.get(1).getParameterNames().size());
     assertEquals("t3", placeRequests.get(2).getNameToken());
     assertEquals(1, placeRequests.get(2).getParameterNames().size());
+  }
+
+  public void testToPlaceRequestDiscardsTrailingHierarchySeparators() {
+    // Given
+    String historyToken = "t1;a=b//";
+
+    // When
+    List<PlaceRequest> placeRequests = tokenFormatter
+        .toPlaceRequestHierarchy(historyToken);
+
+    // Then
+    assertEquals(1, placeRequests.size());
+    assertEquals("t1", placeRequests.get(0).getNameToken());
+    assertEquals(1, placeRequests.get(0).getParameterNames().size());
   }
 
   public void testToPlaceRequestHierarchyUnescapedHierarchySeparators() {
