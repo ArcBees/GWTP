@@ -139,23 +139,12 @@ public final class ParameterTokenFormatter implements TokenFormatter {
       String paramsChunk = placeToken.substring(split + 1);
       String[] paramTokens = paramsChunk.split(paramSeparator);
       for (String paramToken : paramTokens) {
-        // Split failed due to un-escaped param separator
-        if (paramToken.isEmpty() || paramToken.contains(paramSeparator)) {
+        if (paramToken.isEmpty()) {
           throw new TokenFormatException(
-              "Bad parameter: Successive parameters require a single '" + paramSeparator
-                  + "' between them.");
+              "Bad parameter: Successive parameters require a single '"
+                  + paramSeparator + "' between them.");
         }
-
-        String[] param = paramToken.split(valueSeparator, 2);
-
-        // Split failed due to un-escaped value separators
-        if (param.length == 1                           // pattern didn't match
-            || param[0].contains(valueSeparator)    // un-escaped separator encountered in the key
-            || param[1].contains(valueSeparator)) { // un-escaped separator encountered in the value
-          throw new TokenFormatException(
-              "Bad parameter: Parameters require a single '" + valueSeparator
-                  + "' between the key and value.");
-        }
+        String[] param = splitParamToken(paramToken);
         String key = unescape(param[0]);
         String value = unescape(param[1]);
         req = req.with(key, value);
@@ -211,5 +200,17 @@ public final class ParameterTokenFormatter implements TokenFormatter {
 
   private String unescape(String value) {
     return URL.decodeQueryString(value);
+  }
+
+  private String[] splitParamToken(String paramToken) {
+    String[] param = paramToken.split(valueSeparator, 2);
+    if (param.length == 1                       // pattern didn't match
+        || param[0].contains(valueSeparator)    // un-escaped separator encountered in the key
+        || param[1].contains(valueSeparator)) { // un-escaped separator encountered in the value
+      throw new TokenFormatException(
+          "Bad parameter: Parameters require a single '" + valueSeparator
+              + "' between the key and value.");
+    }
+    return param;
   }
 }
