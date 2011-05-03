@@ -32,6 +32,7 @@ public interface TokenFormatter {
    *
    * @param placeRequestHierarchy The place request hierarchy.
    * @return The history token.
+   * @throws TokenFormatException if there is an error converting.
    */
   String toHistoryToken(List<PlaceRequest> placeRequestHierarchy)
       throws TokenFormatException;
@@ -59,10 +60,13 @@ public interface TokenFormatter {
       throws TokenFormatException;
 
   /**
-   * Converts a {@link PlaceRequest} into a place token.
+   * Converts a {@link PlaceRequest} into a place token. A place token is
+   * different than a history token, since the history token can contain a
+   * hierarchy of different place requests.
    *
    * @param placeRequest The place request.
-   * @return The history token.
+   * @return The place token.
+   * @throws TokenFormatException if there is an error converting.
    */
   String toPlaceToken(PlaceRequest placeRequest) throws TokenFormatException;
 
