@@ -35,6 +35,7 @@
                     <version>${gwt-maven-plugin.version}</version>
                     <configuration>
                         <appEngineVersion>${appEngine.version}</appEngineVersion>
+                        <testTimeOut>180</testTimeOut>
                     </configuration>
                     <executions>
                         <execution>
