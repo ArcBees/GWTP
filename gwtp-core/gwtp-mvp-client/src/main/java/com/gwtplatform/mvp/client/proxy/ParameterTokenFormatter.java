@@ -167,19 +167,26 @@ public final class ParameterTokenFormatter implements TokenFormatter {
   @Override
   public List<PlaceRequest> toPlaceRequestHierarchy(String historyToken)
       throws TokenFormatException {
-
-    List<String> placeTokens = toPlaceTokenList(historyToken);
-
-    List<PlaceRequest> result = new ArrayList<PlaceRequest>();
-
-    for (String placeToken : placeTokens) {
-      if (placeTokens.size() > 1 && placeToken.isEmpty()) {
-        throw new TokenFormatException();
+    int split = historyToken.indexOf(hierarchySeparator);
+    if (split == 0) {
+      throw new TokenFormatException("Place history token is missing.");
+    } else {
+      List<PlaceRequest> result = new ArrayList<PlaceRequest>();
+      if (split == -1) {
+        result.add(toPlaceRequest(historyToken)); // History token consists of a single place token
+      } else {
+        String[] placeTokens = historyToken.split(hierarchySeparator);
+        for (String placeToken : placeTokens) {
+          if (placeToken.isEmpty()) {
+            throw new TokenFormatException(
+                "Bad parameter: Successive place tokens require a single '"
+                    + hierarchySeparator + "' between them.");
+          }
+          result.add(toPlaceRequest(placeToken));
+        }
       }
-
-      result.add(toPlaceRequest(placeToken));
+      return result;
     }
-    return result;
   }
 
   @Override
@@ -204,21 +211,5 @@ public final class ParameterTokenFormatter implements TokenFormatter {
 
   private String unescape(String value) {
     return URL.decodeQueryString(value);
-  }
-
-  private List<String> toPlaceTokenList(String historyToken)
-      throws TokenFormatException {
-    List<String> result = new ArrayList<String>();
-    String[] placeTokens = historyToken.split(hierarchySeparator);
-    for (String placeToken : placeTokens) {
-      // Split failed due to un-escaped hierarchy separator
-      if (placeToken.contains(hierarchySeparator)) {
-        throw new TokenFormatException(
-            "Bad parameter: Successive place tokens require a single '" + hierarchySeparator
-                + "' between them.");
-      }
-      result.add(placeToken);
-    }
-    return result;
   }
 }
