@@ -14,28 +14,29 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.server.guice;
+package com.gwtplatform.crawlerservice.server.guice;
 
-import com.gwtplatform.crawler.server.CrawlFilter;
-import com.gwtplatform.crawler.server.ServiceKey;
-import com.gwtplatform.crawler.server.ServiceUrl;
-import com.gwtplatform.dispatch.server.guice.DispatchServiceImpl;
-import com.gwtplatform.dispatch.shared.ActionImpl;
+import javax.inject.Singleton;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.google.inject.Provides;
 import com.google.inject.servlet.ServletModule;
+import com.gwtplatform.crawlerservice.server.CrawlServiceServlet;
 
 /**
  * @author Philippe Beaudoin
  */
-public class DispatchServletModule extends ServletModule {
+public class CrawlServiceModule extends ServletModule {
 
   @Override
   public void configureServlets() {
-    bindConstant().annotatedWith(ServiceKey.class).to("123456");
-    bindConstant().annotatedWith(ServiceUrl.class).to("http://crawlservice.appspot.com/");
-    filter("/*").through(CrawlFilter.class);
-    serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(
-        DispatchServiceImpl.class);
+    serve("*").with(CrawlServiceServlet.class);
   }
 
+  @Singleton
+  @Provides
+  WebClient getWebClient() {
+    return new WebClient(BrowserVersion.FIREFOX_3_6);
+  }
 }

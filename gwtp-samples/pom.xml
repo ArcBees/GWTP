@@ -14,7 +14,10 @@
     <name>GWTP Samples</name>
 
     <properties>
+        <maven-gae-plugin.version>0.8.1</maven-gae-plugin.version>
+
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+        <gae.home>${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
     </properties>
 
     <modules>
@@ -23,6 +26,7 @@
         <module>gwtp-sample-hplace</module>
         <module>gwtp-sample-nested</module>
         <module>gwtp-sample-tab</module>
+        <module>gwtp-sample-crawler-service</module>
     </modules>
 
     <build>
@@ -92,6 +96,16 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-server-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-crawler</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-crawler-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

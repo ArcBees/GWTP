@@ -41,7 +41,7 @@
                 <role>architect</role>
                 <role>lead developer</role>
             </roles>
-            <timezone>-8</timezone>
+            <timezone>-5</timezone>
             <properties>
                 <picUrl>http://goo.gl/xV2K8</picUrl>
             </properties>
@@ -168,9 +168,9 @@
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
 
-        <appengine.version>1.4.3</appengine.version>
+        <gae.version>1.4.3</gae.version>
         <gin.version>1.5.0</gin.version>
-        <guice.version>3.0-rc2</guice.version>
+        <guice.version>3.0</guice.version>
         <aopalliance.version>1.0</aopalliance.version>
         <gwt.version>2.2.0</gwt.version>
         <junit.version>4.5</junit.version>
@@ -178,7 +178,10 @@
         <mockito.version>1.8.5</mockito.version>
         <spring.version>3.0.5.RELEASE</spring.version>
         <cglib.version>2.2</cglib.version>
+        <servlet-api.version>2.5</servlet-api.version>
         <htmlunit.version>2.8</htmlunit.version>
+        <objectify.version>2.2.3</objectify.version>
+        <persistence-api.version>1.0</persistence-api.version>
     </properties>
 
     <repositories>
