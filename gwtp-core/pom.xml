@@ -26,6 +26,7 @@
         <module>gwtp-tester</module>
         <module>gwtp-processors</module>
         <module>gwtp-crawler</module>
+        <module>gwtp-crawler-service</module>
     </modules>
 
     <build>
@@ -75,8 +76,13 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-				<!-- Even though this is not needed server-side, we do not use a provided
-				scope as this dependency is always included transitively. -->
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-crawler-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <!-- Even though this is not needed server-side, we do not use a provided
+                scope as this dependency is always included transitively. -->
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-clients-common</artifactId>
                 <version>${project.version}</version>
@@ -90,7 +96,7 @@
                 <groupId>com.gwtplatform</groupId>
                 <artifactId>gwtp-dispatch-client</artifactId>
                 <version>${project.version}</version>
-				<scope>provided</scope> <!-- Not needed server-side -->
+                <scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -111,19 +117,19 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-test</artifactId>
                 <version>${project.version}</version>
-				<scope>test</scope>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-mvp-client</artifactId>
                 <version>${project.version}</version>
-				<scope>provided</scope> <!-- Not needed server-side -->				
+                <scope>provided</scope> <!-- Not needed server-side -->				
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-processors</artifactId>
                 <version>${project.version}</version>
-				<scope>provided</scope> <!-- Not needed server-side -->
+                <scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -157,6 +163,11 @@
                 <version>${guice.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-assistedinject</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>aopalliance</groupId>
                 <artifactId>aopalliance</artifactId>
                 <version>${aopalliance.version}</version>
@@ -165,7 +176,14 @@
                 <groupId>com.google.gwt.inject</groupId>
                 <artifactId>gin</artifactId>
                 <version>${gin.version}</version>
-				<scope>provided</scope> <!-- Not needed server-side -->
+                <scope>provided</scope> <!-- Not needed server-side -->
+            </dependency>
+
+            <!-- Servlet dependencies -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
             </dependency>
 
             <!-- Test dependencies -->
