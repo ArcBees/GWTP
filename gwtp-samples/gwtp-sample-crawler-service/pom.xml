@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -9,23 +10,12 @@
     </parent>
 
     <groupId>com.gwtplatform</groupId>
-    <artifactId>gwtp-sample-hplace</artifactId>
+    <artifactId>gwtp-sample-crawler-service</artifactId>
     <packaging>war</packaging>
-    <name>GWTP Samples - hplace</name>
+    <name>GWTP Samples - crawler service</name>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <configuration>
-                    <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
-                    <hostedWebapp>${webappDirectory}</hostedWebapp>
-                    <copyWebapp>true</copyWebapp>
-                    <runTarget>Gwtphplacesample.html</runTarget>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -35,45 +25,18 @@
                     <classpathContainers>
                         <classpathContainer>com.google.appengine.eclipse.core.GAE_CONTAINER</classpathContainer>
                         <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
-                        <classpathContainer>com.google.gwt.eclipse.core.GWT_CONTAINER</classpathContainer>
                     </classpathContainers>
 
                     <additionalBuildcommands>
-                        <buildcommand>com.google.gwt.eclipse.core.gwtProjectValidator</buildcommand>
                         <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
                     </additionalBuildcommands>
 
                     <additionalProjectnatures>
                         <projectnature>com.google.appengine.eclipse.core.gaeNature</projectnature>
-                        <projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
                         <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
                     </additionalProjectnatures>
 
                     <additionalConfig>
-                        <file>
-                            <name>.factorypath</name>
-                            <content><![CDATA[
-                                <factorypath>
-                                <factorypathentry kind="VARJAR" id="M2_REPO/com/gwtplatform/gwtp-processors/${project.version}/gwtp-processors-${project.version}.jar" enabled="true" runInBatchMode="false" />
-                                </factorypath>
-                            ]]></content>
-                        </file>
-                        <file>
-                            <name>.settings/org.eclipse.jdt.apt.core.prefs</name>
-                            <content><![CDATA[
-                                eclipse.preferences.version=1
-                                org.eclipse.jdt.apt.aptEnabled=true
-                                org.eclipse.jdt.apt.genSrcDir=target/generated-sources/apt
-                                org.eclipse.jdt.apt.reconcileEnabled=true
-                            ]]></content>
-                        </file>
-                        <file>
-                            <name>.settings/com.google.gwt.eclipse.core.prefs</name>
-                            <content><![CDATA[
-                                    eclipse.preferences.version=1
-                                    entryPointModules=com.gwtplatform.samples.hplace.Gwtphplacesample
-                            ]]></content>
-                        </file>
                         <file>
                             <name>.checkstyle</name>
                             <location>/gwtp-eclipse-checkstyle.xml</location>
@@ -89,36 +52,8 @@
                 </dependencies>
             </plugin>
 
-            <!-- Disable annotation processors during normal compilation -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <proc>none</proc>
-                </configuration>
-            </plugin>
-            <!-- Run annotation processors on src/main/java sources -->
-            <plugin>
-                <groupId>org.bsc.maven</groupId>
-                <artifactId>maven-processor-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>process</id>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <processors>
-                                <processor>com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor</processor>
-                            </processors>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- maven-gae-plugin handles deployment, so disable standard deploy -->
-			<!-- UNCOMMENT TO DEPLOY TO APPENGINE -->
+			<!-- UNCOMMENT TO DEPLOY TO APPENGINE
             <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-deploy-plugin</artifactId>
@@ -127,13 +62,12 @@
                 <skip>true</skip>
             </configuration>
             </plugin>
-			
+			 -->
 		
             <!-- Some jars with <scope>provided</scope> are copied by gwt-maven-plugin 
                 because of <copyWebapp>true</copyWebapp>. These jars can be safely removed 
                 here. For more information, see this thread: https://groups.google.com/d/topic/codehaus-mojo-gwt-maven-plugin-users/Si8eqJsVjdE/discussion -->
-				
-			<!-- UNCOMMENT TO DEPLOY TO APPENGINE -->
+			<!-- UNCOMMENT TO DEPLOY TO APPENGINE
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -190,39 +124,9 @@
                     </execution>
                 </executions>
             </plugin>
-			
+			 -->
         </plugins>
     </build>
-
-    <dependencies>
-        <!-- Google Web Toolkit dependencies -->
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-        </dependency>
-
-        <!-- DI dependencies -->
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-servlet</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-assistedinject</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>aopalliance</groupId>
-            <artifactId>aopalliance</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt.inject</groupId>
-            <artifactId>gin</artifactId>
-        </dependency>
-    </dependencies>
 
     <profiles>
         <profile>
@@ -235,23 +139,7 @@
             <dependencies>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-mvp-client</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-client</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-server-guice</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-processors</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-crawler</artifactId>
+                    <artifactId>gwtp-crawler-service</artifactId>
                 </dependency>
             </dependencies>
         </profile>
@@ -273,3 +161,4 @@
     </profiles>
 
 </project>
+  

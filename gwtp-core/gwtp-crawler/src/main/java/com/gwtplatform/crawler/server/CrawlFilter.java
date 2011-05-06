@@ -16,20 +16,16 @@
 
 package com.gwtplatform.crawler.server;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-
-import com.gwtplatform.dispatch.server.Utils;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.logging.Logger;
 
 import javax.servlet.Filter;
@@ -41,23 +37,29 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 /**
  * Servlet that makes this application crawlable.
  */
 @Singleton
 public final class CrawlFilter implements Filter {
 
+  private final String charEncoding = "UTF-8";
+
   /**
    * Special URL token that gets passed from the crawler to the servlet filter.
    * This token is used in case there are already existing query parameters.
    */
   private static final String ESCAPED_FRAGMENT_FORMAT1 = "_escaped_fragment_=";
+
   /**
    * Special URL token that gets passed from the crawler to the servlet filter.
    * This token is used in case there are not already existing query parameters.
    */
   private static final String ESCAPED_FRAGMENT_FORMAT2 = "&"
-      + ESCAPED_FRAGMENT_FORMAT1;
+    + ESCAPED_FRAGMENT_FORMAT1;
   private static final int ESCAPED_FRAGMENT_LENGTH1 = ESCAPED_FRAGMENT_FORMAT1.length();
   private static final int ESCAPED_FRAGMENT_LENGTH2 = ESCAPED_FRAGMENT_FORMAT2.length();
 
@@ -73,7 +75,7 @@ public final class CrawlFilter implements Filter {
    * @throws UnsupportedEncodingException
    */
   private static String rewriteQueryString(String queryString)
-      throws UnsupportedEncodingException {
+  throws UnsupportedEncodingException {
     int index = queryString.indexOf(ESCAPED_FRAGMENT_FORMAT2);
     int length = ESCAPED_FRAGMENT_LENGTH2;
     if (index == -1) {
@@ -94,17 +96,16 @@ public final class CrawlFilter implements Filter {
     return queryString;
   }
 
+  private final String serviceUrl;
+  private final String key;
   private final Logger log;
 
-  @Inject(optional = true)
-  @HtmlUnitTimeout
-  private long timeoutMillis = 10000;
-
-  @Inject(optional = true)
-  private final Provider<WebClient> webClientProvider = null;
-
   @Inject
-  public CrawlFilter(Logger log) {
+  public CrawlFilter(@ServiceUrl String serviceUrl,
+      @ServiceKey String key,
+      Logger log) {
+    this.serviceUrl = serviceUrl;
+    this.key = key;
     this.log = log;
   }
 
@@ -116,7 +117,7 @@ public final class CrawlFilter implements Filter {
   }
 
   /**
-   * Filters all requests and invokes headless browser if necessary.
+   * Filters all requests and invokes the external service if necessary.
    */
   @Override
   public void doFilter(ServletRequest request, ServletResponse response,
@@ -132,8 +133,11 @@ public final class CrawlFilter implements Filter {
     // Does this request contain an _escaped_fragment_?
     if ((queryString != null)
         && (queryString.contains(ESCAPED_FRAGMENT_FORMAT1))) {
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+
+      PrintWriter writer = res.getWriter();
       try {
-        StringBuilder pageNameSb = new StringBuilder("http://");
+        StringBuilder pageNameSb = new StringBuilder(req.getScheme() + "://");
         pageNameSb.append(req.getServerName());
         if (req.getServerPort() != 0) {
           pageNameSb.append(":");
@@ -144,38 +148,47 @@ public final class CrawlFilter implements Filter {
         pageNameSb.append(queryString);
         String pageName = pageNameSb.toString();
 
-        log.info("Crawl filter encountered escaped fragment, will open: "
-            + pageName);
+        log.info("Crawl filter encountered escaped fragment, will open: " + pageName);
 
-        WebClient webClient;
-        if (webClientProvider == null) {
-          webClient = new WebClient(BrowserVersion.FIREFOX_3);
-        } else {
-          webClient = webClientProvider.get();
+        String serviceRequest = serviceUrl + "?key=" + URLEncoder.encode(key, charEncoding)
+            + "&url=" + URLEncoder.encode(pageName, charEncoding);
+
+        log.info("Full service request: " + serviceRequest);
+
+        // Retry until we're cut off
+        while (true) {
+          BufferedReader reader = null;
+          try {
+            URL url = new URL(serviceRequest);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(10000);
+            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            line = reader.readLine();
+            if (!"FETCH_IN_PROGRESS".equals(line)) {
+              writer.println(line);
+              while ((line = reader.readLine()) != null) {
+                writer.println(line);
+              }
+              break;
+            }
+          } catch (IOException exception) {
+            if (!exception.getMessage().contains("Timeout")) {
+              throw exception;
+            }
+          } finally {
+            if (reader != null) {
+              reader.close();
+            }
+          }
         }
-
-        webClient.setThrowExceptionOnScriptError(false);
-        webClient.setJavaScriptEnabled(true);
-        HtmlPage page = webClient.getPage(pageName);
-        webClient.getJavaScriptEngine().pumpEventLoop(timeoutMillis);
-
-        res.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = res.getWriter();
-        out.println("<hr />");
-        out.println("<center><h3>You are viewing a non-interactive page that is intended for the crawler.  "
-            + "You probably want to see this page: <a href=\""
-            + pageName
-            + "\">" + pageName + "</a></h3></center>");
-        out.println("<hr />");
-
-        out.println(page.asXml());
-        webClient.closeAllWindows();
-
-        out.println("");
-        out.close();
-      } catch (Throwable e) {
-        log.severe("Crawl filter encountered an exception.");
-        Utils.logStackTrace(log, e);
+      } catch (MalformedURLException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
+      } finally {
+        writer.close();
       }
 
       log.info("Crawl filter exiting, no chaining.");

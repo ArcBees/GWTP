@@ -9,8 +9,8 @@
     </parent>
 
     <groupId>com.gwtplatform</groupId>
-    <artifactId>gwtp-crawler</artifactId>
-    <name>GWTP Crawler</name>
+    <artifactId>gwtp-crawler-service</artifactId>
+    <name>GWTP Crawler Service</name>
 
     <build>
         <resources>
@@ -31,10 +31,24 @@
         </resources>
     </build>
 
+    <repositories>
+        <!-- For Objectify -->
+        <repository>
+            <id>objectify-appengine</id>
+            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>${htmlunit.version}</version>
         </dependency>
 
         <dependency>
@@ -61,5 +75,16 @@
             <artifactId>aopalliance</artifactId>
         </dependency>
 
+        <!-- Objectify dependencies -->
+        <dependency>
+            <groupId>com.googlecode.objectify</groupId>
+            <artifactId>objectify</artifactId>
+            <version>${objectify.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>${persistence-api.version}</version>
+        </dependency>
     </dependencies>
 </project>
