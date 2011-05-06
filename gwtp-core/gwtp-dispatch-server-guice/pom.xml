@@ -25,12 +25,12 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
         </dependency>
-		
-		<!-- Test dependencies -->
+
+        <!-- Test dependencies -->
         <dependency>
             <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-dispatch-test</artifactId>
-			<scope>test</scope>
+            <scope>test</scope>
         </dependency>		
 	</dependencies>
 </project>
