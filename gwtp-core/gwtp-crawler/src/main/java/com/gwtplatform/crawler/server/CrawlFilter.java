@@ -46,7 +46,7 @@ import com.google.inject.Singleton;
 @Singleton
 public final class CrawlFilter implements Filter {
 
-  private final String charEncoding = "UTF-8";
+  private static final String CHAR_ENCODING = "UTF-8";
 
   /**
    * Special URL token that gets passed from the crawler to the servlet filter.
@@ -88,9 +88,13 @@ public final class CrawlFilter implements Filter {
         queryStringSb.append("?");
         queryStringSb.append(queryString.substring(0, index));
       }
-      queryStringSb.append("#!");
-      queryStringSb.append(URLDecoder.decode(
-          queryString.substring(index + length, queryString.length()), "UTF-8"));
+      String hashFragmentWithoutBang = URLDecoder.decode(
+          queryString.substring(index + length, queryString.length()), CHAR_ENCODING).trim();
+
+      if (hashFragmentWithoutBang.length() > 0) {
+        queryStringSb.append("#!");
+        queryStringSb.append(hashFragmentWithoutBang);
+      }
       return queryStringSb.toString();
     }
     return queryString;
@@ -133,7 +137,7 @@ public final class CrawlFilter implements Filter {
     // Does this request contain an _escaped_fragment_?
     if ((queryString != null)
         && (queryString.contains(ESCAPED_FRAGMENT_FORMAT1))) {
-      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      res.setHeader("Content-Type", "text/html; charset=" + CHAR_ENCODING);
 
       PrintWriter writer = res.getWriter();
       try {
@@ -150,8 +154,8 @@ public final class CrawlFilter implements Filter {
 
         log.info("Crawl filter encountered escaped fragment, will open: " + pageName);
 
-        String serviceRequest = serviceUrl + "?key=" + URLEncoder.encode(key, charEncoding)
-            + "&url=" + URLEncoder.encode(pageName, charEncoding);
+        String serviceRequest = serviceUrl + "?key=" + URLEncoder.encode(key, CHAR_ENCODING)
+            + "&url=" + URLEncoder.encode(pageName, CHAR_ENCODING);
 
         log.info("Full service request: " + serviceRequest);
 

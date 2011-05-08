@@ -117,8 +117,7 @@
                 </executions>
             </plugin>
 
-            <!-- maven-gae-plugin handles deployment, so disable standard deploy -->
-			<!-- UNCOMMENT TO DEPLOY TO APPENGINE
+            <!-- UNCOMMENT TO DEPLOY TO APPENGINE
             <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-deploy-plugin</artifactId>
@@ -127,13 +126,7 @@
                 <skip>true</skip>
             </configuration>
             </plugin>
-			-->
 
-            <!-- Some jars with <scope>provided</scope> are copied by gwt-maven-plugin 
-                because of <copyWebapp>true</copyWebapp>. These jars can be safely removed 
-                here. For more information, see this thread: https://groups.google.com/d/topic/codehaus-mojo-gwt-maven-plugin-users/Si8eqJsVjdE/discussion -->
-				
-			<!-- UNCOMMENT TO DEPLOY TO APPENGINE
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -190,7 +183,7 @@
                     </execution>
                 </executions>
             </plugin>
-			-->
+            -->
         </plugins>
     </build>
 
