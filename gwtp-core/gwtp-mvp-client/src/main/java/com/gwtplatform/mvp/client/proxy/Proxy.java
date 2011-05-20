@@ -17,8 +17,6 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -54,5 +52,5 @@ public interface Proxy<P extends Presenter<?, ?>> extends ProxyRaw {
    * @param callback The callback in which the {@link Presenter} will be passed
    *          as a parameter.
    */
-  void getPresenter(AsyncCallback<P> callback);
+  void getPresenter(NotifyingAsyncCallback<P> callback);
 }

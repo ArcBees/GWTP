@@ -20,30 +20,34 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
 /**
- * Module with default GWTP bindings. You can {@code install(new DefaultModule)}
+ * Module with default GWTP bindings. You can
+ * {@code install(new DefaultModule(MyPlaceManager.class))}
  * instead of manually binding the different classes to their default implementation.
  *
  * @author Christian Goudreau
  */
 public class DefaultModule extends AbstractGinModule {
+
+  private final Class<? extends PlaceManager> placeManagerClass;
+
+  public DefaultModule(Class<? extends PlaceManager> placeManagerClass) {
+    this.placeManagerClass = placeManagerClass;
+  }
+
   @Override
   protected void configure() {
     bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-    bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(
-        Singleton.class);
+    bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
     bind(RootPresenter.class).asEagerSingleton();
-    bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(
-        Singleton.class);
-    bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(
-        Singleton.class);
+    bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(Singleton.class);
+    bind(PlaceManager.class).to(placeManagerClass).in(Singleton.class);
   }
 }

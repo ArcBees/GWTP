@@ -20,9 +20,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
-
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.samples.hplace.client.presenter.BreadcrumbsPresenter;
 import com.gwtplatform.samples.hplace.client.presenter.HomePresenter;
 import com.gwtplatform.samples.hplace.client.presenter.ProductListPresenter;
@@ -58,5 +56,4 @@ public interface ClientGinjectorBase extends Ginjector {
   PlaceManager getPlaceManager();
   AsyncProvider<ProductListPresenter> getProductListPresenter();
   AsyncProvider<ProductPresenter> getProductPresenter();
-  ProxyFailureHandler getProxyFailureHandler();
 }

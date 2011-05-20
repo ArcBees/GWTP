@@ -21,9 +21,7 @@ import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
-
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.samples.nested.client.presenter.AboutUsPresenter;
 import com.gwtplatform.samples.nested.client.presenter.ContactPresenter;
 import com.gwtplatform.samples.nested.client.presenter.HomePresenter;
@@ -45,6 +43,4 @@ public interface ClientGinjector extends Ginjector {
   Provider<MainPagePresenter> getMainPagePresenter();
 
   PlaceManager getPlaceManager();
-
-  ProxyFailureHandler getProxyFailureHandler();
 }
