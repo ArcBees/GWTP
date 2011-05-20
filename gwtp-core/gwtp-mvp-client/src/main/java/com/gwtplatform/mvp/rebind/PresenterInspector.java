@@ -209,7 +209,7 @@ public class PresenterInspector {
     writer.println();
     writer.println("RevealContentHandler<" + presenterClassName
         + "> revealContentHandler = new RevealContentHandler<"
-        + presenterClassName + ">( failureHandler, this );");
+        + presenterClassName + ">( eventBus, this );");
 
     for (JField field : contentSlots) {
       writer.println("getEventBus().addHandler( " + presenterClassName + "."

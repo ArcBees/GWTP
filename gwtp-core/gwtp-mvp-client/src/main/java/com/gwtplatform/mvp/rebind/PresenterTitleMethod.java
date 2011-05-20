@@ -163,11 +163,11 @@ public class PresenterTitleMethod {
     writer.println();
     writer.println("protected void getPlaceTitle(final GetPlaceTitleEvent event) {");
     writer.indent();
-    writer.println("getPresenter( new AsyncCallback<" + presenterInspector.getPresenterClassName()
-        + ">(){");
+    writer.println("getPresenter( new NotifyingAsyncCallback<" + presenterInspector.getPresenterClassName()
+        + ">(getEventBus()){");
     writer.indent();
     writer.indent();
-    writer.println("public void onSuccess(" + presenterInspector.getPresenterClassName() + " p ) {");
+    writer.println("public void success(" + presenterInspector.getPresenterClassName() + " p ) {");
     writer.indent();
     writer.print("String title = p.");
     writePresenterMethodCall(writer);
@@ -175,7 +175,7 @@ public class PresenterTitleMethod {
     writer.println("event.getHandler().onSetPlaceTitle( title );");
     writer.outdent();
     writer.println(" }");
-    writer.println("public void onFailure(Throwable t) { event.getHandler().onSetPlaceTitle(null); }");
+    writer.println("public void failure(Throwable t) { event.getHandler().onSetPlaceTitle(null); }");
     writer.outdent();
     writer.println("} );");
     writer.outdent();
@@ -186,15 +186,15 @@ public class PresenterTitleMethod {
     writer.println();
     writer.println("protected void getPlaceTitle(final GetPlaceTitleEvent event) {");
     writer.indent();
-    writer.println("getPresenter( new AsyncCallback<" + presenterInspector.getPresenterClassName()
-        + ">(){");
+    writer.println("getPresenter( new NotifyingAsyncCallback<" + presenterInspector.getPresenterClassName()
+        + ">(getEventBus()){");
     writer.indent();
     writer.indent();
-    writer.print("public void onSuccess(" + presenterInspector.getPresenterClassName()
+    writer.print("public void success(" + presenterInspector.getPresenterClassName()
         + " p ) { p.");
     writePresenterMethodCall(writer);
     writer.println(" }");
-    writer.println("public void onFailure(Throwable t) { event.getHandler().onSetPlaceTitle(null); }");
+    writer.println("public void failure(Throwable t) { event.getHandler().onSetPlaceTitle(null); }");
     writer.outdent();
     writer.println("} );");
     writer.outdent();

@@ -19,7 +19,6 @@ package com.gwtplatform.samples.tab.client.gin;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.samples.tab.client.MyConstants;
 import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
@@ -39,13 +38,12 @@ import com.gwtplatform.samples.tab.client.ui.UiModule;
  */
 @GinModules({ClientModule.class, UiModule.class})
 public interface ClientGinjector extends ClientGinjectorBase {
-  AsyncProvider<DialogSamplePresenter> getAboutUsPresenter();
-  AsyncProvider<AdminAreaPresenter> getContactPresenter();
+  AsyncProvider<DialogSamplePresenter> getDialogSamplePresenter();
+  AsyncProvider<AdminAreaPresenter> getAdminAreaPresenter();
   AsyncProvider<SettingsPresenter> getSettingsPresenter();
   AsyncProvider<HomeInfoPresenter> getHomeInfoPresenter();
   AsyncProvider<HomeNewsPresenter> getHomeNewsPresenter();
   PlaceManager getPlaceManager();
-  ProxyFailureHandler getProxyFailureHandler();
   MyConstants getMyConstants();
 
   // The following methods allow these widgets to be used in UiBinder files

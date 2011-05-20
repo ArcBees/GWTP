@@ -16,9 +16,13 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.event.shared.EventHandler;
+
 /**
+ * Handler for {@link AsyncCallStartEvent}.
+ *
  * @author Philippe Beaudoin
  */
-public interface ProxyFailureHandler {
-  void onFailedGetPresenter(Throwable caught);
+public interface AsyncCallStartHandler extends EventHandler {
+  void onAsyncCallStart(final AsyncCallStartEvent asyncCallStartEvent);
 }

@@ -18,6 +18,7 @@ package com.gwtplatform.samples.tab.client.view;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Tab;
@@ -31,6 +32,7 @@ import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
  * {@link com.gwtplatform.samples.tab.client.presenter.MainPagePresenter}.
  *
  * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
@@ -42,6 +44,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
   @UiField
   RoundTabPanel tabPanel;
+
+  @UiField
+  InlineLabel topMessage;
 
   @Inject
   public MainPageView(Binder uiBinder) {
@@ -85,5 +90,16 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
   @Override
   public void refreshTabs() {
     tabPanel.refreshTabs();
+  }
+
+  @Override
+  public void setTopMessage(String string) {
+    if (string == null || string.length() == 0) {
+      topMessage.setVisible(false);
+      topMessage.setText("");
+    } else {
+      topMessage.setVisible(true);
+      topMessage.setText(string);
+    }
   }
 }

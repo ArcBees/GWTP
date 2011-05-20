@@ -20,12 +20,10 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
-import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
 /**
@@ -41,8 +39,6 @@ public class ClientModuleTestUtilGwt extends AbstractPresenterModule {
     bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(
         Singleton.class);
     bind(RootPresenter.class).asEagerSingleton();
-    bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(
-        Singleton.class);
 
     // Presenters
     bindPresenter(MainPresenterTestUtilGwt.class, MainPresenterTestUtilGwt.MyView.class,
