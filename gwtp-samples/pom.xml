@@ -38,7 +38,7 @@
                     <artifactId>gwt-maven-plugin</artifactId>
                     <version>${gwt-maven-plugin.version}</version>
                     <configuration>
-                        <appEngineVersion>${appEngine.version}</appEngineVersion>
+                        <appEngineVersion>${gae.version}</appEngineVersion>
                         <testTimeOut>180</testTimeOut>
                     </configuration>
                     <executions>

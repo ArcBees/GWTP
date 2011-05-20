@@ -53,7 +53,7 @@ public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
         public void execute() {
           analytics.init(gaAccount);
 
-          eventBus.addHandler(NavigationEvent.getType(), GoogleAnalyticsNavigationTracker.this);     
+          eventBus.addHandler(NavigationEvent.getType(), GoogleAnalyticsNavigationTracker.this);
         }
       });
     }

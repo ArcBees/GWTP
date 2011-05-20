@@ -19,7 +19,6 @@ package com.gwtplatform.samples.tab.client.presenter;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabContainerPresenter;
 import com.gwtplatform.mvp.client.TabView;
@@ -27,6 +26,12 @@ import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.RequestTabs;
+import com.gwtplatform.mvp.client.proxy.AsyncCallFailEvent;
+import com.gwtplatform.mvp.client.proxy.AsyncCallFailHandler;
+import com.gwtplatform.mvp.client.proxy.AsyncCallStartEvent;
+import com.gwtplatform.mvp.client.proxy.AsyncCallStartHandler;
+import com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent;
+import com.gwtplatform.mvp.client.proxy.AsyncCallSucceedHandler;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
@@ -44,7 +49,8 @@ import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent.CurrentUserCha
  */
 public class MainPagePresenter
     extends TabContainerPresenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy>
-    implements CurrentUserChangedHandler {
+    implements CurrentUserChangedHandler, AsyncCallStartHandler, AsyncCallFailHandler,
+    AsyncCallSucceedHandler {
 
   /**
    * {@link MainPagePresenter}'s proxy.
@@ -58,6 +64,7 @@ public class MainPagePresenter
    */
   public interface MyView extends TabView {
     void refreshTabs();
+    void setTopMessage(String string);
   }
 
   /**
@@ -90,4 +97,21 @@ public class MainPagePresenter
     getView().refreshTabs();
   }
 
+  @ProxyEvent
+  @Override
+  public void onAsyncCallStart(AsyncCallStartEvent event) {
+    getView().setTopMessage("Loading...");
+  }
+
+  @ProxyEvent
+  @Override
+  public void onAsyncCallFail(AsyncCallFailEvent event) {
+    getView().setTopMessage("Oops, something went wrong...");
+  }
+
+  @ProxyEvent
+  @Override
+  public void onAsyncCallSucceed(AsyncCallSucceedEvent event) {
+    getView().setTopMessage(null);
+  }
 }

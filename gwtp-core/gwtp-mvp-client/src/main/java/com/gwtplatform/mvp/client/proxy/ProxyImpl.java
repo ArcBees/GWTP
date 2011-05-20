@@ -31,7 +31,6 @@ import com.gwtplatform.mvp.client.Presenter;
  */
 public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
-  protected ProxyFailureHandler failureHandler;
   protected IndirectProvider<P> presenter;
   protected EventBus eventBus;
 
@@ -42,14 +41,18 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
   }
 
   @Override
-  public void getPresenter(AsyncCallback<P> callback) {
+  public void getPresenter(NotifyingAsyncCallback<P> callback) {
+    callback.prepare();
     presenter.get(callback);
+    callback.checkLoading();
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback) {
+  public void getRawPresenter(NotifyingAsyncCallback<Presenter<?, ?>> callback) {
+    callback.prepare();
     presenter.get((AsyncCallback<P>) callback);
+    callback.checkLoading();
   }
 
   /**
@@ -59,14 +62,11 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
    * used instead of constructor injection, because the latter doesn't work well
    * with GWT generators.
    *
-   * @param failureHandler The {@link ProxyFailureHandler}.
    * @param placeManager The {@link PlaceManager}. Ignored.
    * @param eventBus The {@link EventBus}.
    */
   @Inject
-  protected void bind(ProxyFailureHandler failureHandler,
-      final PlaceManager placeManager, EventBus eventBus) {
-    this.failureHandler = failureHandler;
+  protected void bind(final PlaceManager placeManager, EventBus eventBus) {
     this.eventBus = eventBus;
   }
 

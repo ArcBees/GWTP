@@ -20,9 +20,7 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -40,7 +38,6 @@ import com.gwtplatform.mvp.client.Presenter;
 public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>>
     implements ProxyPlace<P> {
 
-  protected ProxyFailureHandler failureHandler;
   protected Place place;
   protected PlaceManager placeManager;
   protected Proxy_ proxy;
@@ -88,12 +85,12 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   // Inherited from Place
 
   @Override
-  public void getPresenter(AsyncCallback<P> callback) {
+  public void getPresenter(NotifyingAsyncCallback<P> callback) {
     proxy.getPresenter(callback);
   }
 
   @Override
-  public void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback) {
+  public void getRawPresenter(NotifyingAsyncCallback<Presenter<?, ?>> callback) {
     proxy.getRawPresenter(callback);
   }
 
@@ -125,14 +122,11 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    * used instead of constructor injection, because the latter doesn't work well
    * with GWT generators.
    *
-   * @param failureHandler The {@link ProxyFailureHandler}.
    * @param placeManager The {@link PlaceManager}.
    * @param eventBus The {@link EventBus}.
    */
   @Inject
-  protected void bind(ProxyFailureHandler failureHandler,
-      final PlaceManager placeManager, EventBus eventBus) {
-    this.failureHandler = failureHandler;
+  protected void bind(final PlaceManager placeManager, EventBus eventBus) {
     this.eventBus = eventBus;
     this.placeManager = placeManager;
     eventBus.addHandler(PlaceRequestInternalEvent.getType(),
@@ -194,15 +188,10 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    *          revealed.
    */
   private void handleRequest(final PlaceRequest request) {
-    proxy.getPresenter(new AsyncCallback<P>() {
+    proxy.getPresenter(new NotifyingAsyncCallback<P>(eventBus) {
 
       @Override
-      public void onFailure(Throwable caught) {
-        failureHandler.onFailedGetPresenter(caught);
-      }
-
-      @Override
-      public void onSuccess(final P presenter) {
+      public void success(final P presenter) {
         // Everything should be bound before we prepare the presenter from the
         // request,
         // in case it wants to fire some events. That's why we will do this in a

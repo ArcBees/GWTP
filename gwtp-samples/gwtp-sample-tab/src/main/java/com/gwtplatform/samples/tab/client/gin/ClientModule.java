@@ -16,17 +16,10 @@
 
 package com.gwtplatform.samples.tab.client.gin;
 
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
-import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.gwtplatform.samples.tab.client.CurrentUser;
-import com.gwtplatform.samples.tab.client.FailureHandlerAlert;
 import com.gwtplatform.samples.tab.client.GwtptabsamplePlaceManager;
 import com.gwtplatform.samples.tab.client.IsAdminGatekeeper;
 import com.gwtplatform.samples.tab.client.MyConstants;
@@ -37,9 +30,9 @@ import com.gwtplatform.samples.tab.client.presenter.GlobalDialogPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomePresenter;
+import com.gwtplatform.samples.tab.client.presenter.InfoPopupPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
-import com.gwtplatform.samples.tab.client.presenter.InfoPopupPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
 import com.gwtplatform.samples.tab.client.view.AdminAreaView;
 import com.gwtplatform.samples.tab.client.view.DialogSampleView;
@@ -58,15 +51,9 @@ import com.gwtplatform.samples.tab.client.view.SettingsView;
 public class ClientModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
-    // Singletons
-    bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-    bind(PlaceManager.class).to(GwtptabsamplePlaceManager.class).in(
-        Singleton.class);
-    bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(
-        Singleton.class);
-    bind(RootPresenter.class).asEagerSingleton();
-    bind(ProxyFailureHandler.class).to(FailureHandlerAlert.class).in(
-        Singleton.class);
+    // Default implementation of standard resources
+    install(new DefaultModule(GwtptabsamplePlaceManager.class));
+
     bind(MyConstants.class).in(Singleton.class);
     bind(CurrentUser.class).in(Singleton.class);
     bind(IsAdminGatekeeper.class).in(Singleton.class);

@@ -56,11 +56,11 @@ public class GoogleAnalyticsImpl implements GoogleAnalytics {
   public void init(String userAccount) {
     Element firstScript = Document.get().getElementsByTagName("script").getItem(
         0);
-    
+
     ScriptElement config = Document.get().createScriptElement(
         "var _gaq = _gaq || [];_gaq.push(['_setAccount', '" + userAccount
             + "']);_gaq.push(['_trackPageview']);");
-    
+
     firstScript.getParentNode().insertBefore(config, firstScript);
 
     ScriptElement script = Document.get().createScriptElement();
@@ -70,7 +70,7 @@ public class GoogleAnalyticsImpl implements GoogleAnalytics {
         ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js");
     script.setType("text/javascript");
     script.setAttribute("async", "true");
-    
+
     firstScript.getParentNode().insertBefore(script, firstScript);
   }
 

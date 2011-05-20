@@ -17,9 +17,9 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -34,12 +34,12 @@ import com.gwtplatform.mvp.client.Presenter;
  */
 public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHandler {
 
-  private final ProxyFailureHandler failureHandler;
+  private final EventBus eventBus;
   private final ProxyImpl<T> proxy;
 
-  public RevealContentHandler(final ProxyFailureHandler failureHandler,
+  public RevealContentHandler(final EventBus eventBus,
       final ProxyImpl<T> proxy) {
-    this.failureHandler = failureHandler;
+    this.eventBus = eventBus;
     this.proxy = proxy;
   }
 
@@ -50,14 +50,10 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
    *          bet set as content.
    */
   public final void onRevealContent(final RevealContentEvent revealContentEvent) {
-    proxy.getPresenter(new AsyncCallback<T>() {
-      @Override
-      public void onFailure(Throwable caught) {
-        failureHandler.onFailedGetPresenter(caught);
-      }
+    proxy.getPresenter(new NotifyingAsyncCallback<T>(eventBus) {
 
       @Override
-      public void onSuccess(final T presenter) {
+      public void success(final T presenter) {
         // Deferring is needed because the event bus enqueues and delays handler
         // registration when events are currently being processed.
         // (see {@link com.google.gwt.event.shared.HandlerManager@addHandler()})
