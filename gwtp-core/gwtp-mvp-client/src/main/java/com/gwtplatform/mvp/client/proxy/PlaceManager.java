@@ -157,8 +157,8 @@ public interface PlaceManager extends HasHandlers {
   PlaceRequest getCurrentPlaceRequest();
 
   /**
-   * Access the previous history token visited by the user in the applicatin.
-   * 
+   * Access the previous history token visited by the user in the application.
+   *
    * @return The previous history token.
    */
   String getPreviousHistoryToken();
@@ -271,7 +271,7 @@ public interface PlaceManager extends HasHandlers {
    * <p />
    * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and that
    * the user has access to it, otherwise you might create an infinite loop.
-   * 
+   *
    * @param invalidHistoryToken The history token that was not recognised.
    */
   void revealErrorPlace(String invalidHistoryToken);
@@ -302,7 +302,7 @@ public interface PlaceManager extends HasHandlers {
    * navigation will be cancelled, {@link NavigationRefusedEvent} will be
    * triggered and the current page will remain.
    * <p />
-   * 
+   *
    * @param question The question to display. Pass {@code null} to accept
    *          navigation directly, without asking a question.
    */

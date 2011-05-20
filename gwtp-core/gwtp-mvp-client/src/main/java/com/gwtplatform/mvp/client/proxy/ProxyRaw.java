@@ -17,8 +17,6 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.HasHandlers;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -36,13 +34,13 @@ public interface ProxyRaw extends HasHandlers {
    * presenter, pass a callback.
    * <p />
    * The difference between this method and
-   * {@link Proxy#getPresenter(com.google.gwt.user.client.rpc.AsyncCallback)}
+   * {@link Proxy#getPresenter}
    * is that the latter one gets the specific parameterised {@link Presenter}
    * type.
    *
    * @param callback The callback in which the {@link Presenter} will be passed
    *          as a parameter.
    */
-  void getRawPresenter(AsyncCallback<Presenter<?, ?>> callback);
+  void getRawPresenter(NotifyingAsyncCallback<Presenter<?, ?>> callback);
 
 }

@@ -170,8 +170,8 @@ public class ProxyEventMethod {
       logger.log(TreeLogger.ERROR, getErrorPrefix()
           + ". The handler method " + handlerMethodName + " is already used by method "
           + previousMethod.functionName + ".");
+      throw new UnableToCompleteException();
     }
-    throw new UnableToCompleteException();
   }
 
   /**
@@ -205,17 +205,11 @@ public class ProxyEventMethod {
     writer.println("public final void " + handlerMethodName + "( final " + eventTypeName
         + " event ) {");
     writer.indent();
-    writer.println("getPresenter( new AsyncCallback<" + presenterInspector.getPresenterClassName()
-        + ">() {");
+    writer.println("getPresenter( new NotifyingAsyncCallback<" + presenterInspector.getPresenterClassName()
+        + ">(getEventBus()) {");
     writer.indent();
     writer.println("@Override");
-    writer.println("public void onFailure(Throwable caught) {");
-    writer.indent();
-    writer.println("failureHandler.onFailedGetPresenter(caught);");
-    writer.outdent();
-    writer.println("}");
-    writer.println("@Override");
-    writer.println("public void onSuccess(final " + presenterInspector.getPresenterClassName()
+    writer.println("public void success(final " + presenterInspector.getPresenterClassName()
         + " presenter) {");
     writer.indent();
     writer.println("Scheduler.get().scheduleDeferred( new Command() {");

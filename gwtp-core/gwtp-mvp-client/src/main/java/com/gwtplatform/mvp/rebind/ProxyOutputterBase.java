@@ -26,7 +26,6 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -40,7 +39,7 @@ import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.TabDataBasic;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
+import com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
@@ -104,12 +103,11 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
     composerFactory.addImport(GWT.class.getCanonicalName());
     composerFactory.addImport(Inject.class.getCanonicalName()); // Obsolete?
     composerFactory.addImport(Provider.class.getCanonicalName());
-    composerFactory.addImport(AsyncProvider.class.getCanonicalName());
+    composerFactory.addImport(NotifyingAsyncCallback.class.getCanonicalName());
     composerFactory.addImport(EventBus.class.getCanonicalName());
     composerFactory.addImport(StandardProvider.class.getCanonicalName());
     composerFactory.addImport(CodeSplitProvider.class.getCanonicalName());
     composerFactory.addImport(CodeSplitBundleProvider.class.getCanonicalName());
-    composerFactory.addImport(ProxyFailureHandler.class.getCanonicalName());
     composerFactory.addImport(ClassCollection.proxyImplClassName);
     composerFactory.addImport(ClassCollection.proxyPlaceImplClassName);
     composerFactory.addImport(RevealContentHandler.class.getCanonicalName());
@@ -180,8 +178,7 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
     writer.println("public void delayedBind(Ginjector baseGinjector) {");
     writer.indent();
     writeGinjectorAssignation(writer, ginjectorInspector.getGinjectorClassName());
-    writer.println("bind(ginjector.getProxyFailureHandler(), ");
-    writer.println("    ginjector.getPlaceManager(),");
+    writer.println("bind(ginjector.getPlaceManager(),");
     writer.println("    ginjector.getEventBus());");
     writeSubclassDelayedBind(writer);
     writeAddHandlerForProxyEvents(writer);

@@ -14,22 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.gwt.mvp;
+package com.gwtplatform.mvp.client.proxy;
 
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.inject.client.GinModules;
-import com.google.gwt.inject.client.Ginjector;
-import com.google.inject.Provider;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
+ * Handler for {@link AsyncCallFailEvent}.
+ *
  * @author Philippe Beaudoin
  */
-@GinModules({ClientModuleTestUtilGwt.class})
-public interface GinjectorTestUtilGwt extends Ginjector {
-  Provider<MainPresenterTestUtilGwt> getMainPresenter();
-  Provider<AdminPresenterTestUtilGwt> getAdminPresenter();
-  EventBus getEventBus();
-  PlaceManager getPlaceManager();
-  InjectedLabel getInjectedLabel();
+public interface AsyncCallFailHandler extends EventHandler {
+  void onAsyncCallFail(final AsyncCallFailEvent asyncCallFailEvent);
 }

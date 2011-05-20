@@ -41,6 +41,7 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
    * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
    *
    * @param source The source that fires this event ({@link HasHandlers}).
+   * @param request The {@link PlaceRequest} that was navigated to.
    */
   public static void fire(final HasHandlers source, PlaceRequest request) {
     source.fireEvent(new NavigationEvent(request));
