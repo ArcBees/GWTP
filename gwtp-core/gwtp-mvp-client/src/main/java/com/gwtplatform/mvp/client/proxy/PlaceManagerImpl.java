@@ -16,7 +16,9 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.gwt.core.client.Scheduler;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -27,9 +29,6 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is the default implementation of the {@link PlaceManager}.
@@ -43,7 +42,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private final EventBus eventBus;
   private String currentHistoryToken = "";
 
-  private String currentHRef = "";
   private boolean internalError;
   private String onLeaveQuestion;
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
@@ -154,10 +152,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   @Override
   public String getPreviousHistoryToken() {
     return previousHistoryToken;
-  }
-
-  String getCurrentHref() {
-    return Window.Location.getHref();
   }
 
   @Override
@@ -290,13 +284,30 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void onWindowClosing(ClosingEvent event) {
+    // The current implementation has a few bugs described below. However these are browser
+    // bugs, and the workarounds we've experimented with gave worst results than the bug itself.
+    //
+    // Here are the current behaviours of different browsers after cancelling navigation
+    // * Chrome
+    //    - URL bar shows new website (FAIL)
+    //    - Bookmarking uses the title of the webapp, but url of new website (FAIL)
+    //    - Navigating away and then back goes back to the correct webapp page (WORKS)
+    // * Firefox
+    //    - URL bar shows new website (FAIL)
+    //    - Bookmarking uses the title of the webapp, and url of webapp (WORKS)
+    //    - Navigating away and then back goes back to the correct webapp page (WORKS)
+    // * IE
+    //    - Untested
+    //
+    // Options are to report that upstream in the browsers or to go back to our workarounds in a
+    // browser-dependent fashion using deferred binding. The workarounds we've experimented with
+    // consisted of adding a deferred command that used Window.Location.replace to reset the URL
+    // to the current page. However, this caused infinite loops in some browsers.
+    //
+    // See this issue:
+    //   http://code.google.com/p/gwt-platform/issues/detail?id=315
+
     event.setMessage(onLeaveQuestion);
-    Scheduler.get().scheduleDeferred(new Command() {
-      @Override
-      public void execute() {
-        Window.Location.replace(currentHRef);
-      }
-    });
   }
 
   void registerTowardsHistory() {
@@ -419,7 +430,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private void saveHistoryToken(String historyToken) {
     previousHistoryToken = currentHistoryToken;
     currentHistoryToken = historyToken;
-    currentHRef = getCurrentHref();
   }
 
   void setBrowserHistoryToken(String historyToken, boolean issueEvent) {
@@ -490,8 +500,8 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       if (browserHistoryToken == null
           || !browserHistoryToken.equals(historyToken)) {
         setBrowserHistoryToken(historyToken, false);
-        saveHistoryToken(historyToken);
       }
+      saveHistoryToken(historyToken);
     } catch (TokenFormatException e) {
       // Do nothing.
     }
