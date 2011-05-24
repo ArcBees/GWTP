@@ -179,6 +179,7 @@
         <spring.version>3.0.5.RELEASE</spring.version>
         <cglib.version>2.2</cglib.version>
         <servlet-api.version>2.5</servlet-api.version>
+        <javax.inject.version>1</javax.inject.version>
         <htmlunit.version>2.8</htmlunit.version>
         <objectify.version>2.2.3</objectify.version>
         <persistence-api.version>1.0</persistence-api.version>
