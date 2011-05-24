@@ -49,6 +49,16 @@
             <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Test dependencies -->
         <dependency>
@@ -59,6 +69,11 @@
         <dependency>
             <groupId>org.jukito</groupId>
             <artifactId>jukito</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

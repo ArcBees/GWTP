@@ -18,10 +18,6 @@
             <artifactId>gwtp-dispatch-shared</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-client</artifactId>   <!-- TODO We should not have to depend on this -->
-        </dependency>
-        <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
