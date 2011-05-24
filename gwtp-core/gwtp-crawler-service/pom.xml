@@ -44,6 +44,10 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
@@ -66,14 +70,6 @@
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-servlet</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-assistedinject</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>aopalliance</groupId>
-            <artifactId>aopalliance</artifactId>
-        </dependency>
 
         <!-- Objectify dependencies -->
         <dependency>
@@ -84,7 +80,6 @@
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
-            <version>${persistence-api.version}</version>
         </dependency>
     </dependencies>
 </project>
