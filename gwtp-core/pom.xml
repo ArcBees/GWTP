@@ -209,11 +209,21 @@
                 <scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
 
-            <!-- Servlet dependencies -->
+            <!-- Standard Java extension jars -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${persistence-api.version}</version>
             </dependency>
 
             <!-- Test dependencies -->
