@@ -56,11 +56,6 @@ class PlaceManagerTestUtil extends PlaceManagerImpl {
   }
 
   @Override
-  String getCurrentHref() {
-    return gwtWindowMethods.getCurrentHref();
-  }
-
-  @Override
   public void revealCurrentPlace() {
     gwtWindowMethods.revealCurrentPlace();
   }
