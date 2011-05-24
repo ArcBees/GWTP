@@ -16,7 +16,11 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -36,6 +40,11 @@ public class HomeNewsView extends ViewImpl implements HomeNewsPresenter.MyView {
 
   private final Widget widget;
 
+  @UiField
+  Anchor confirmationLink;
+
+  private HomeNewsPresenter presenter;
+
   @Inject
   public HomeNewsView(Binder uiBinder) {
     widget = uiBinder.createAndBindUi(this);
@@ -44,5 +53,20 @@ public class HomeNewsView extends ViewImpl implements HomeNewsPresenter.MyView {
   @Override
   public Widget asWidget() {
     return widget;
+  }
+
+  @Override
+  public void setConfirmationText(String text) {
+    confirmationLink.setText(text);
+  }
+
+  @Override
+  public void setPresenter(HomeNewsPresenter presenter) {
+    this.presenter = presenter;
+  }
+
+  @UiHandler("confirmationLink")
+  public void onClick(ClickEvent clickEvent) {
+    presenter.toggleConfirmation();
   }
 }

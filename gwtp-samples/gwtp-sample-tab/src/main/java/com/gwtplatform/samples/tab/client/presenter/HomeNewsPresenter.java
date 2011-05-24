@@ -25,6 +25,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
@@ -60,16 +61,52 @@ public class HomeNewsPresenter extends
    * {@link HomeNewsPresenter}'s view.
    */
   public interface MyView extends View {
+    void setConfirmationText(String text);
+    void setPresenter(HomeNewsPresenter presenter);
   }
+
+  private final PlaceManager placeManager;
+
+  private boolean confirmationEnabled;
 
   @Inject
   public HomeNewsPresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy) {
+      final MyProxy proxy, final PlaceManager placeManager) {
     super(eventBus, view, proxy);
+    this.placeManager = placeManager;
+    view.setPresenter(this);
   }
 
   @Override
   protected void revealInParent() {
     RevealContentEvent.fire(this, HomePresenter.TYPE_SetTabContent, this);
+  }
+
+  @Override
+  protected void onReveal() {
+    enableConfirmation(false);
+  }
+
+  /**
+   * Enables or disables the confirmation dialog.
+   *
+   * @param enabled {@code true} to enable the confirmation dialog, {@code false} to disable it.
+   */
+  private void enableConfirmation(boolean enabled) {
+    this.confirmationEnabled = enabled;
+    if (enabled) {
+      placeManager.setOnLeaveConfirmation("Are you sure you want to navigate away from this page?");
+      getView().setConfirmationText("Navigation confirmation ON, click here to disable it!");
+    } else {
+      placeManager.setOnLeaveConfirmation(null);
+      getView().setConfirmationText("Navigation confirmation OFF, click here to enable it!");
+    }
+  }
+
+  /**
+   * Toggles the state of the confirmation dialog.
+   */
+  public void toggleConfirmation() {
+    enableConfirmation(!confirmationEnabled);
   }
 }

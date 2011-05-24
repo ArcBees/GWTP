@@ -3,13 +3,13 @@
     xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <ui:style>
         .popup {
-        	background-color: aqua;
-        	border: 3px double black;
-        	padding: 0 15px;
+          background-color: aqua;
+          border: 3px double black;
+          padding: 0 15px;
         }
         
         .bold {
-        	font-weight: bold;
+          font-weight: bold;
         }
     </ui:style>
 
