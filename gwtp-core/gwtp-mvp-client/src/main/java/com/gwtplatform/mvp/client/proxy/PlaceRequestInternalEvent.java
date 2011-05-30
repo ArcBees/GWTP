@@ -49,9 +49,11 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
    *
    * @param source The source that fires this event ({@link HasHandlers}).
    * @param request The request.
+   * @param updateBrowserHistory {@code true} If the browser URL should be updated, {@code false}
+   *          otherwise.
    */
-  public static void fire(HasHandlers source, PlaceRequest request) {
-    source.fireEvent(new PlaceRequestInternalEvent(request));
+  public static void fire(HasHandlers source, PlaceRequest request, boolean updateBrowserHistory) {
+    source.fireEvent(new PlaceRequestInternalEvent(request, updateBrowserHistory));
   }
 
   public static Type<PlaceRequestInternalHandler> getType() {
@@ -72,9 +74,11 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
   private boolean handled;
 
   private final PlaceRequest request;
+  private final boolean updateBrowserHistory;
 
-  public PlaceRequestInternalEvent(PlaceRequest request) {
+  public PlaceRequestInternalEvent(PlaceRequest request, boolean updateBrowserHistory) {
     this.request = request;
+    this.updateBrowserHistory = updateBrowserHistory;
   }
 
   @Override
@@ -105,6 +109,10 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
     return handled;
   }
 
+  public boolean shouldUpdateBrowserHistory() {
+    return updateBrowserHistory;
+  }
+
   /**
    * Indicates that the event was handled and that other handlers should not
    * process it.
@@ -125,5 +133,4 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
   protected void dispatch(PlaceRequestInternalHandler handler) {
     handler.onPlaceRequest(this);
   }
-
 }

@@ -51,3 +51,4 @@ glob:gwtp-samples/gwtp-sample-tab/bin/**
 glob:**/bin/**
 glob:**/.gwt
 glob:**/manifest.txt
+glob:**/src/main/webapp/**

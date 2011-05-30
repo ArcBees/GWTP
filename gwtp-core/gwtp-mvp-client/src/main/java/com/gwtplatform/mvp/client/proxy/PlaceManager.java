@@ -240,8 +240,10 @@ public interface PlaceManager extends HasHandlers {
    * affecting the behavior of the browser's <em>back</em> button.
    *
    * @param request The {@link PlaceRequest} to display in the updated history.
+   * @param updateBrowserUrl {@code true} If the browser URL should be updated, {@code false}
+   *          otherwise.
    */
-  void updateHistory(PlaceRequest request);
+  void updateHistory(PlaceRequest request, boolean updateBrowserUrl);
 
   /**
    * Reveals the place corresponding to the current value of the history token
@@ -310,7 +312,8 @@ public interface PlaceManager extends HasHandlers {
 
   /**
    * Programmatically reveals the specified place. This will result in a
-   * {@link PlaceRequestInternalEvent} being fired.
+   * {@link PlaceRequestInternalEvent} being fired. The browser URL will be updated, if you don't
+   * want this see {@link #revealPlace(PlaceRequest, boolean)}.
    * <p />
    * This discards all the place hierarchy, effectively revealing the request as
    * a top-level place. To keep the place hierarchy, see
@@ -325,6 +328,25 @@ public interface PlaceManager extends HasHandlers {
    *          reveal.
    */
   void revealPlace(PlaceRequest request);
+
+  /**
+   * Programmatically reveals the specified place. This will result in a
+   * {@link PlaceRequestInternalEvent} being fired.
+   * <p />
+   * This discards all the place hierarchy, effectively revealing the request as
+   * a top-level place. To keep the place hierarchy, see
+   * {@link #revealRelativePlace(PlaceRequest)},
+   * {@link #revealRelativePlace(PlaceRequest, int)} or
+   * {@link #revealRelativePlace(int)}. To reveal an entire place hierarchy, see
+   * {@link #revealPlaceHierarchy}.
+   *
+   * @see #buildHistoryToken(PlaceRequest)
+   *
+   * @param request The {@link PlaceRequest} corresponding to the place to reveal.
+   * @param updateBrowserUrl {@code true} If the browser URL should be updated, {@code false}
+   *          otherwise.
+   */
+  void revealPlace(PlaceRequest request, boolean updateBrowserUrl);
 
   /**
    * Programmatically reveals the specified hierarchy of places place. This will
