@@ -22,7 +22,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.samples.nested.client.presenter.ContactPresenter.MyView;
+import com.gwtplatform.samples.nested.client.presenter.ContactPresenterBase.MyView;
 
 /**
  * @author Christian Goudreau
