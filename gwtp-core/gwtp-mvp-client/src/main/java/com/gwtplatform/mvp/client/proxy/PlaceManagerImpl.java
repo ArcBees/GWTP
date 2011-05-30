@@ -66,7 +66,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public String buildRelativeHistoryToken(int level) {
-    List<PlaceRequest> placeHierarchyCopy = updatePlaceHierarchy(level);
+    List<PlaceRequest> placeHierarchyCopy = truncatePlaceHierarchy(level);
     if (placeHierarchyCopy.size() == 0) {
       return "";
     }
@@ -80,7 +80,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public String buildRelativeHistoryToken(PlaceRequest request, int level) {
-    List<PlaceRequest> placeHierarchyCopy = updatePlaceHierarchy(level);
+    List<PlaceRequest> placeHierarchyCopy = truncatePlaceHierarchy(level);
     placeHierarchyCopy.add(request);
     return tokenFormatter.toHistoryToken(placeHierarchyCopy);
   }
@@ -113,10 +113,12 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    * instead call {@link #revealPlace(PlaceRequest)} or a related method.
    *
    * @param request The {@link PlaceRequest} to fire.
+   * @param updateBrowserUrl {@code true} If the browser URL should be updated, {@code false}
+   *          otherwise.
    */
-  protected void doRevealPlace(PlaceRequest request) {
-    PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent(
-        request);
+  protected void doRevealPlace(PlaceRequest request, boolean updateBrowserUrl) {
+    PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent(request,
+        updateBrowserUrl);
     fireEvent(requestEvent);
     if (!requestEvent.isHandled()) {
       unlock();
@@ -273,7 +275,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
         revealDefaultPlace();
       } else {
         placeHierarchy = tokenFormatter.toPlaceRequestHierarchy(historyToken);
-        doRevealPlace(getCurrentPlaceRequest());
+        doRevealPlace(getCurrentPlaceRequest(), true);
       }
     } catch (TokenFormatException e) {
       unlock();
@@ -326,6 +328,11 @@ public abstract class PlaceManagerImpl implements PlaceManager,
 
   @Override
   public void revealPlace(final PlaceRequest request) {
+    revealPlace(request, true);
+  }
+
+  @Override
+  public void revealPlace(final PlaceRequest request, boolean updateBrowserUrl) {
     if (locked) {
       defferedNavigation = new Command() {
         @Override
@@ -340,7 +347,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     }
     placeHierarchy.clear();
     placeHierarchy.add(request);
-    doRevealPlace(request);
+    doRevealPlace(request, updateBrowserUrl);
   }
 
   @Override
@@ -362,7 +369,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       revealDefaultPlace();
     } else {
       placeHierarchy = placeRequestHierarchy;
-      doRevealPlace(getCurrentPlaceRequest());
+      doRevealPlace(getCurrentPlaceRequest(), true);
     }
   }
 
@@ -380,13 +387,13 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     if (!getLock()) {
       return;
     }
-    placeHierarchy = updatePlaceHierarchy(level);
+    placeHierarchy = truncatePlaceHierarchy(level);
     int hierarchySize = placeHierarchy.size();
     if (hierarchySize == 0) {
       revealDefaultPlace();
     } else {
       PlaceRequest request = placeHierarchy.get(hierarchySize - 1);
-      doRevealPlace(request);
+      doRevealPlace(request, true);
     }
   }
 
@@ -409,9 +416,9 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     if (!getLock()) {
       return;
     }
-    placeHierarchy = updatePlaceHierarchy(level);
+    placeHierarchy = truncatePlaceHierarchy(level);
     placeHierarchy.add(request);
-    doRevealPlace(request);
+    doRevealPlace(request, true);
   }
 
   @Override
@@ -490,18 +497,20 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public void updateHistory(PlaceRequest request) {
+  public void updateHistory(PlaceRequest request, boolean updateBrowserUrl) {
     try {
       // Make sure the request match
       assert request.hasSameNameToken(getCurrentPlaceRequest()) : "Internal error, PlaceRequest passed to updateHistory doesn't match the tail of the place hierarchy.";
       placeHierarchy.set(placeHierarchy.size() - 1, request);
-      String historyToken = tokenFormatter.toHistoryToken(placeHierarchy);
-      String browserHistoryToken = getBrowserHistoryToken();
-      if (browserHistoryToken == null
-          || !browserHistoryToken.equals(historyToken)) {
-        setBrowserHistoryToken(historyToken, false);
+      if (updateBrowserUrl) {
+        String historyToken = tokenFormatter.toHistoryToken(placeHierarchy);
+        String browserHistoryToken = getBrowserHistoryToken();
+        if (browserHistoryToken == null
+            || !browserHistoryToken.equals(historyToken)) {
+          setBrowserHistoryToken(historyToken, false);
+        }
+        saveHistoryToken(historyToken);
       }
-      saveHistoryToken(historyToken);
     } catch (TokenFormatException e) {
       // Do nothing.
     }
@@ -516,7 +525,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
    *          of the hierarchy. Passing {@code 0} leaves the hierarchy
    *          untouched.
    */
-  private List<PlaceRequest> updatePlaceHierarchy(int level) {
+  private List<PlaceRequest> truncatePlaceHierarchy(int level) {
     int size = placeHierarchy.size();
     if (level < 0) {
       if (-level >= size) {

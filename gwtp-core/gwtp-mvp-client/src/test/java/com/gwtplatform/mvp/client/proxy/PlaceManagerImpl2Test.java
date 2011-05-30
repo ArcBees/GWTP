@@ -75,7 +75,7 @@ public class PlaceManagerImpl2Test {
         deferredCommandManager.addCommand(new Command() {
           @Override
           public void execute() {
-            placeManager.updateHistory(new PlaceRequest("dummyNameToken").with("dummyParam", "dummyValue"));
+            placeManager.updateHistory(new PlaceRequest("dummyNameToken").with("dummyParam", "dummyValue"), true);
           } });
         ((PlaceRequestInternalEvent) args[0]).setHandled();
         return null;
