@@ -22,6 +22,7 @@ import com.gwtplatform.samples.nested.client.GwtpnestedsamplePlaceManager;
 import com.gwtplatform.samples.nested.client.NameTokens;
 import com.gwtplatform.samples.nested.client.presenter.AboutUsPresenter;
 import com.gwtplatform.samples.nested.client.presenter.ContactPresenter;
+import com.gwtplatform.samples.nested.client.presenter.ContactPresenterBase;
 import com.gwtplatform.samples.nested.client.presenter.HomePresenter;
 import com.gwtplatform.samples.nested.client.presenter.MainPagePresenter;
 import com.gwtplatform.samples.nested.client.view.AboutUsView;
@@ -48,7 +49,7 @@ public class ClientModule extends AbstractPresenterModule {
         HomeView.class, HomePresenter.MyProxy.class);
     bindPresenter(AboutUsPresenter.class, AboutUsPresenter.MyView.class,
         AboutUsView.class, AboutUsPresenter.MyProxy.class);
-    bindPresenter(ContactPresenter.class, ContactPresenter.MyView.class,
+    bindPresenter(ContactPresenter.class, ContactPresenterBase.MyView.class,
         ContactView.class, ContactPresenter.MyProxy.class);
   }
 }
