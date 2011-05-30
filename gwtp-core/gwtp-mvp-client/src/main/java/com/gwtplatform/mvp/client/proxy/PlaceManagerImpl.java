@@ -45,7 +45,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   private boolean internalError;
   private String onLeaveQuestion;
   private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
-  private String previousHistoryToken;
 
   private final TokenFormatter tokenFormatter;
 
@@ -152,11 +151,6 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public String getPreviousHistoryToken() {
-    return previousHistoryToken;
-  }
-
-  @Override
   public List<PlaceRequest> getCurrentPlaceHierarchy() {
     return placeHierarchy;
   }
@@ -242,13 +236,8 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  @Deprecated
   public void navigateBack() {
-    if (previousHistoryToken != null) {
-      setBrowserHistoryToken(previousHistoryToken, true);
-    } else {
-      revealDefaultPlace();
-    }
+    History.back();
   }
 
   /**
@@ -427,15 +416,12 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   /**
-   * This method saves the history token, allowing the {@link #navigateBack()}
-   * method to be used and making it possible to correctly restore the browser's
-   * URL if the user refuses to navigate. (See
-   * {@link #onWindowClosing(ClosingEvent)})
+   * This method saves the history token, making it possible to correctly restore the browser's
+   * URL if the user refuses to navigate. (See {@link #onWindowClosing(ClosingEvent)})
    *
    * @param historyToken The current history token, a string.
    */
   private void saveHistoryToken(String historyToken) {
-    previousHistoryToken = currentHistoryToken;
     currentHistoryToken = historyToken;
   }
 
