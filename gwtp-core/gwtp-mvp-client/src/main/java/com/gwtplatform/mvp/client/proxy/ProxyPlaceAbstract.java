@@ -140,7 +140,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
             if (matchesRequest(request)) {
               event.setHandled();
               if (canReveal()) {
-                handleRequest(request);
+                handleRequest(request, event.shouldUpdateBrowserHistory());
               } else {
                 event.setUnauthorized();
               }
@@ -186,8 +186,10 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
    * @param request The request to handle. Can pass <code>null</code> if no
    *          request is used, in which case the presenter will be directly
    *          revealed.
+   * @param updateBrowserUrl {@code true} If the browser URL should be updated, {@code false}
+   *          otherwise.
    */
-  private void handleRequest(final PlaceRequest request) {
+  private void handleRequest(final PlaceRequest request, final boolean updateBrowserUrl) {
     proxy.getPresenter(new NotifyingAsyncCallback<P>(eventBus) {
 
       @Override
@@ -203,7 +205,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
             presenter.prepareFromRequest(request);
             if (originalRequest == placeManager.getCurrentPlaceRequest()) {
               // User did not manually update place request in prepareFromRequest, update it here.
-              placeManager.updateHistory(request);
+              placeManager.updateHistory(request, updateBrowserUrl);
             }
             NavigationEvent.fire(placeManager, request);
             if (!presenter.useManualReveal()) {
