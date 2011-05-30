@@ -42,6 +42,8 @@ public class GwtptabsamplePlaceManager extends PlaceManagerImpl {
 
   @Override
   public void revealDefaultPlace() {
-    revealPlace(defaultPlaceRequest);
+    // Make sure we don't update the URL browser, so as not to introduce an extra history token,
+    // which would basically lock the user inside the application.
+    revealPlace(defaultPlaceRequest, false);
   }
 }
