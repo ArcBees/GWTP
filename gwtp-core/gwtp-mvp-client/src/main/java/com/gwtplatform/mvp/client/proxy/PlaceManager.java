@@ -157,13 +157,6 @@ public interface PlaceManager extends HasHandlers {
   PlaceRequest getCurrentPlaceRequest();
 
   /**
-   * Access the previous history token visited by the user in the application.
-   *
-   * @return The previous history token.
-   */
-  String getPreviousHistoryToken();
-
-  /**
    * Retrieves the title of a specific place within the place hierarchy.
    * <p />
    * Instead of returning the title directly, this method accepts a callback and
@@ -220,11 +213,9 @@ public interface PlaceManager extends HasHandlers {
   int getHierarchyDepth();
 
   /**
-   * {@link Deprecated} Use {@link History#back()} instead.
-   *
-   * Navigate back to last visited history token.
+   * Calls {@link History#back()}. This may cause the user's browser to leave your application, if
+   * case you call this method from the first page visited.
    */
-  @Deprecated
   void navigateBack();
 
   /**
