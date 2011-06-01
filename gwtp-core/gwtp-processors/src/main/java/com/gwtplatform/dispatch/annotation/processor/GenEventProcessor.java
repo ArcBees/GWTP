@@ -33,6 +33,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.tools.Diagnostic.Kind;
 
 import com.gwtplatform.dispatch.annotation.GenEvent;
 
@@ -65,16 +66,14 @@ public class GenEventProcessor extends AbstractProcessor {
 
     if (!roundEnv.processingOver()) {
 
-      for (TypeElement currAnnotation : annotations) {
+      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenEventProcessor started.");
 
-        if (currAnnotation.getQualifiedName().contentEquals(
-            GenEvent.class.getName())) {
-
-          for (Element eventElement : roundEnv.getElementsAnnotatedWith(currAnnotation)) {
-            this.generateEvent(eventElement);
-          }
-        }
+      this.env.getMessager().printMessage(Kind.NOTE, "Searching for @GenEvent annotations.");
+      for (Element event : roundEnv.getElementsAnnotatedWith(GenEvent.class)) {
+        this.env.getMessager().printMessage(Kind.NOTE, "Found " + event.toString() + ".");
+        this.generateEvent(event);
       }
+      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenEventProcessor finished.");
     }
     return true;
   }
@@ -86,6 +85,9 @@ public class GenEventProcessor extends AbstractProcessor {
       String eventElementSimpleName = reflection.getSimpleClassName();
       String eventSimpleName = eventElementSimpleName + "Event";
       String eventClassName = reflection.getClassName() + "Event";
+  
+      this.env.getMessager().printMessage(Kind.NOTE, "Generating '" + eventClassName + "' from '" + eventElementSimpleName + "'.");
+
       Writer sourceWriter = this.env.getFiler().createSourceFile(eventClassName, eventElement).openWriter();
       writer = new GenerationHelper(sourceWriter);
 
