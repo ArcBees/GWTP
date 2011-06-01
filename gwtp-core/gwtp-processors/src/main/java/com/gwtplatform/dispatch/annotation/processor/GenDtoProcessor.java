@@ -32,6 +32,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.tools.Diagnostic.Kind;
 
 import com.gwtplatform.dispatch.annotation.GenDto;
 
@@ -64,16 +65,14 @@ public class GenDtoProcessor extends AbstractProcessor {
 
     if (!roundEnv.processingOver()) {
 
-      for (TypeElement currAnnotation : annotations) {
+      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor started.");
 
-        if (currAnnotation.getQualifiedName().contentEquals(
-            GenDto.class.getName())) {
-
-          for (Element dto : roundEnv.getElementsAnnotatedWith(currAnnotation)) {
-            this.generateDto(dto);
-          }
-        }
+      this.env.getMessager().printMessage(Kind.NOTE, "Searching for @GenDto annotations.");
+      for (Element dto : roundEnv.getElementsAnnotatedWith(GenDto.class)) {
+        this.env.getMessager().printMessage(Kind.NOTE, "Found " + dto.toString() + ".");
+        this.generateDto(dto);
       }
+      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor finished.");
     }
     return true;
   }
@@ -85,6 +84,9 @@ public class GenDtoProcessor extends AbstractProcessor {
       String dtoElementSimpleName = reflection.getSimpleClassName();
       String dtoSimpleName = dtoElementSimpleName + "Dto";
       String dtoClassName = reflection.getClassName() + "Dto";
+  
+      this.env.getMessager().printMessage(Kind.NOTE, "Generating '" + dtoClassName + "' from '" + dtoElementSimpleName + "'.");
+
       Writer sourceWriter = this.env.getFiler().createSourceFile(dtoClassName, dtoElement).openWriter();
       writer = new GenerationHelper(sourceWriter);
 
