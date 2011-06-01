@@ -32,6 +32,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.tools.Diagnostic.Kind;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
@@ -66,16 +67,14 @@ public class GenDispatchProcessor extends AbstractProcessor {
 
     if (!roundEnv.processingOver()) {
 
-      for (TypeElement currAnnotation : annotations) {
+      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor started.");
 
-        if (currAnnotation.getQualifiedName().contentEquals(
-            GenDispatch.class.getName())) {
-
-          for (Element dispatch : roundEnv.getElementsAnnotatedWith(currAnnotation)) {
-            this.generateGenDispatch(dispatch);
-          }
-        }
+      this.env.getMessager().printMessage(Kind.NOTE, "Searching for @GenDispatch annotations.");
+      for (Element dispatch : roundEnv.getElementsAnnotatedWith(GenDispatch.class)) {
+        this.env.getMessager().printMessage(Kind.NOTE, "Found " + dispatch.toString() + ".");
+        this.generateGenDispatch(dispatch);
       }
+      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor finished.");
     }
     return true;
   }
@@ -96,6 +95,9 @@ public class GenDispatchProcessor extends AbstractProcessor {
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchActionSimpleName = dispatchElementSimpleName + "Action";
       String dispatchActionClassName = reflection.getClassName() + "Action";
+
+      this.env.getMessager().printMessage(Kind.NOTE, "Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
+
       Writer sourceWriter = this.env.getFiler().createSourceFile(dispatchActionClassName, dispatchElement).openWriter();
       writer = new GenerationHelper(sourceWriter);
 
@@ -159,6 +161,9 @@ public class GenDispatchProcessor extends AbstractProcessor {
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchResultSimpleName = dispatchElementSimpleName + "Result";
       String dispatchResultClassName = reflection.getClassName() + "Result";
+  
+      this.env.getMessager().printMessage(Kind.NOTE, "Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
+
       Writer sourceWriter = this.env.getFiler().createSourceFile(dispatchResultClassName, dispatchElement).openWriter();
       writer = new GenerationHelper(sourceWriter);
 
