@@ -92,6 +92,21 @@
         </plugins>
     </build>
 
+    <dependencies>
+        <!-- When using m2eclipse to import a sample in Eclipse the Google Plugin
+        for Eclipse expects to find an App Engine SDK on the sample's build path,
+        despite that the samples don't have a GAE component.
+        TODO: Remove once GWT Issue 6430 is fixed
+        See: http://code.google.com/p/google-web-toolkit/issues/detail?id=6430 -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${gae.version}</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
