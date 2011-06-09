@@ -63,7 +63,19 @@
             <name>Brendan Doherty</name>
             <email>brendan@doherty.net.nz</email>
         </developer>
-    </developers>
+        <developer>
+            <name>Yannis Gonianakis</name>
+            <email>jgonian@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Yannis Gonianakis</name>
+            <email>jgonian@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Michael Renaud</name>
+            <email>michael.renaud@imagemsoft.com</email>
+        </developer>
+	</developers>
 
     <contributors>
         <contributor>
@@ -105,10 +117,6 @@
         <contributor>
             <name>Florian Sauter</name>
             <email>floonweb@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Yannis Gonianakis</name>
-            <email>jgonian@gmail.com</email>
         </contributor>
         <contributor>
             <name>Denis Labaye</name>
