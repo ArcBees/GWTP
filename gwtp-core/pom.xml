@@ -81,13 +81,17 @@
         </plugins>
     </build>
 
+    <!-- Dependencies that are inherited by sub-modules -->
     <dependencies>
-        <!-- Allow junit to be inherited by every sub module -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-build-tools</artifactId>
         </dependency>
     </dependencies>
 
