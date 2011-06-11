@@ -64,10 +64,7 @@
             <email>brendan@doherty.net.nz</email>
         </developer>
         <developer>
-            <name>Yannis Gonianakis</name>
-            <email>jgonian@gmail.com</email>
-        </developer>
-        <developer>
+            <id>jgonian</id>
             <name>Yannis Gonianakis</name>
             <email>jgonian@gmail.com</email>
         </developer>
