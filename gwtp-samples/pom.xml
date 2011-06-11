@@ -92,6 +92,7 @@
         </plugins>
     </build>
 
+    <!-- Dependencies that are inherited by sub-modules -->
     <dependencies>
         <!-- When using m2eclipse to import a sample in Eclipse the Google Plugin
         for Eclipse expects to find an App Engine SDK on the sample's build path,
@@ -104,6 +105,10 @@
             <version>${gae.version}</version>
             <scope>provided</scope>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-build-tools</artifactId>
         </dependency>
     </dependencies>
 
