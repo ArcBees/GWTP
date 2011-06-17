@@ -140,7 +140,7 @@ public class PresenterInspector {
   private void failIfNoProviderError(String providerMethodName,
       String providerClassName, String providedClassName,
       String annotationClassName) throws UnableToCompleteException {
-    if (providerClassName != null) {
+    if (providerMethodName != null) {
       return;
     }
 
