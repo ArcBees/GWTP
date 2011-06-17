@@ -64,10 +64,7 @@
             <email>brendan@doherty.net.nz</email>
         </developer>
         <developer>
-            <name>Yannis Gonianakis</name>
-            <email>jgonian@gmail.com</email>
-        </developer>
-        <developer>
+            <id>jgonian</id>
             <name>Yannis Gonianakis</name>
             <email>jgonian@gmail.com</email>
         </developer>
@@ -385,9 +382,30 @@
         </plugins>
     </build>
 
-<dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <!-- This dependency is required by maven-checkstyle-plugin
+            and maven-eclipse-plugin (as configured here). Use this
+            dependency when these plugins are in use. -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-build-tools</artifactId>
+                <version>${project.version}</version>
+                <scope>provided</scope>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-        <!-- TODO: Remove once we upgrade to newer version of GWT 
+    <!-- Dependencies that are inherited by sub-modules -->
+    <dependencies>
+        <!-- TODO: Remove once we upgrade to newer version of GWT
              See https://groups.google.com/forum/#!topic/codehaus-mojo-gwt-maven-plugin-users/X2yTJKMRnDA -->
         <dependency> 
             <groupId>javax.validation</groupId> 
@@ -402,7 +420,6 @@
             <classifier>sources</classifier> 
             <scope>provided</scope> 
         </dependency>
-
     </dependencies>
 
     <profiles>
