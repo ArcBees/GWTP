@@ -150,14 +150,8 @@ public class ClassGenerationHelper extends GenerationHelper {
   public void generateFieldAccessors(Collection<VariableElement> fieldElements) {
     for (VariableElement fieldElement : fieldElements) {
       println();
-      print("  {0} ", Modifier.PUBLIC);
-      print(fieldElement.asType().toString());
-      print(" ");
-      print(manufactureAccessorName(fieldElement));
-      println("() {");
-      print("    return ");
-      print(fieldElement.getSimpleName());
-      println(";");
+      println("  {0} {1}(){", Modifier.PUBLIC, manufactureAccessorName(fieldElement));
+      println("    return {0};", fieldElement.getSimpleName());
       println("  }");
     }
   }
