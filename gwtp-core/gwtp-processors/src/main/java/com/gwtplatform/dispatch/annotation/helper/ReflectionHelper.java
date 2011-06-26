@@ -60,7 +60,7 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns only fields which doesn't annotated with one of the passed annotation.
+   * Returns only fields which are not annotated with one of the passed annotation.
    */
   public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, Class<? extends Annotation>... annotations) {
     Collection<VariableElement> filteredFields = new ArrayList<VariableElement>();
@@ -78,7 +78,7 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns only fields which doesn't contain one of the passed modifiers.
+   * Returns only fields which do not contain one of the passed modifiers.
    */
   public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, Modifier... modifiers) {
     Collection<VariableElement> filteredFields = new ArrayList<VariableElement>();
@@ -95,7 +95,7 @@ public class ReflectionHelper {
   }
   
   /**
-   * Returns only fields which simple names doesn't equals the passed field names.
+   * Returns only fields which simple names do not equal the passed field names.
    */
   public Collection<VariableElement> filterFields(Collection<VariableElement> fieldElements, String... simpleFieldNames) {
     Collection<VariableElement> filteredFields = new ArrayList<VariableElement>();
