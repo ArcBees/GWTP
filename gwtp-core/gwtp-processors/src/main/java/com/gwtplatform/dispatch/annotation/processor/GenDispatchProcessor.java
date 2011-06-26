@@ -68,6 +68,9 @@ public class GenDispatchProcessor extends GenProcessor {
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchActionSimpleName = dispatchElementSimpleName + "Action";
       String dispatchActionClassName = reflection.getClassName() + "Action";
+      
+      printMessage("Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
+      
       Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchActionClassName, dispatchElement).openWriter();
       writer = new BuilderGenerationHelper(sourceWriter);
 
@@ -132,6 +135,9 @@ public class GenDispatchProcessor extends GenProcessor {
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchResultSimpleName = dispatchElementSimpleName + "Result";
       String dispatchResultClassName = reflection.getClassName() + "Result";
+      
+     printMessage("Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
+      
       Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchResultClassName, dispatchElement).openWriter();
       writer = new BuilderGenerationHelper(sourceWriter);
 
