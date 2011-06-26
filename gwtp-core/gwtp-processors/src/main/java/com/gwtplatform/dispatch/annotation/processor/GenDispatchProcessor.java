@@ -91,19 +91,19 @@ public class GenDispatchProcessor extends GenProcessor {
       );
       writer.generateFieldDeclarations(annotatedInFields);
 
-      if (reflection.hasOptionalFields()) {
+      if (reflection.hasOptionalFields()) { // has optional fields.
         writer.setWhitespaces(2);
         writer.generateBuilderClass(dispatchActionSimpleName, requiredFields, optionalFields, "IsSerializable");
         writer.resetWhitespaces();
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
-        if (reflection.hasRequiredFields()) {
+        if (reflection.hasRequiredFields()) { // and required fields
           writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
         }
         writer.generateCustomBuilderConstructor(dispatchActionSimpleName, allFields);
-      } else if (reflection.hasRequiredFields()) {
+      } else if (reflection.hasRequiredFields()) { // has only required fields
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
         writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
-      } else {
+      } else { // has no non-static fields
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PUBLIC);
       }
       
@@ -199,10 +199,9 @@ public class GenDispatchProcessor extends GenProcessor {
     writer.println("  @Override");
     writer.println("  public String getServiceName() {");
     if (serviceName.isEmpty()) {
-      writer.println("    return Action.DEFAULT_SERVICE_NAME + \"" + simpleClassName
-          + "\";");
+      writer.println("    return Action.DEFAULT_SERVICE_NAME + \"{0}\";",  simpleClassName);
     } else {
-      writer.println("    return \"" + serviceName + "\";");
+      writer.println("    return \"{0}\";", serviceName);
     }
     writer.println("  }");
   }
