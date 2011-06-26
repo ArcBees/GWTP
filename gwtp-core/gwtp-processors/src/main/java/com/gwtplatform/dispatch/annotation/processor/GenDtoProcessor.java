@@ -54,6 +54,9 @@ public class GenDtoProcessor extends GenProcessor {
       String dtoElementSimpleName = reflection.getSimpleClassName();
       String dtoSimpleName = dtoElementSimpleName + "Dto";
       String dtoClassName = reflection.getClassName() + "Dto";
+      
+      printMessage("Generating '" + dtoClassName + "' from '" + dtoElementSimpleName + "'.");
+      
       Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dtoClassName, dtoElement).openWriter();
       writer = new BuilderGenerationHelper(sourceWriter);
 
