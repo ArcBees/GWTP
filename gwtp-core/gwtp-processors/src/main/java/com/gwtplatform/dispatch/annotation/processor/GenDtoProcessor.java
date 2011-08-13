@@ -73,7 +73,7 @@ public class GenDtoProcessor extends GenProcessor {
       
       if (reflection.hasOptionalFields()) { // has optional fields.
         writer.setWhitespaces(2);
-        writer.generateBuilderClass(dtoSimpleName, requiredFields, optionalFields, "IsSerializable");
+        writer.generateBuilderClass(dtoSimpleName, requiredFields, optionalFields);
         writer.resetWhitespaces();
         writer.generateEmptyConstructor(dtoSimpleName, Modifier.PROTECTED);
         if (reflection.hasRequiredFields()) { // and required fields

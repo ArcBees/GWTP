@@ -33,7 +33,22 @@ import com.google.gwt.event.shared.HasHandlers;
 public class AnnotationProcessingTest {
 
   @org.junit.Test
-  public void event() {
+  public void shouldGenerateEvent() {
+    Foo foo = new Foo("bar");
+    FooChangedEvent event = new FooChangedEvent(foo, true);
+    assertEquals("bar", event.getFoo().getName());
+    assertTrue(event.isOriginator());
+
+    FooChangedEvent event2 = new FooChangedEvent(foo, true);
+    assertEquals(event, event2);
+    assertEquals(event.hashCode(), event2.hashCode());
+
+    FooChangedEvent event3 = new FooChangedEvent(foo, false);
+    assertFalse(event3.equals(event));
+  }
+  
+  @org.junit.Test
+  public void shouldGenerateEventWithBuilder() {
     Foo foo = new Foo("bar");
     FooChangedEvent event = new FooChangedEvent.Builder(foo, true).build();
     assertEquals("bar", event.getFoo().getName());
@@ -48,7 +63,7 @@ public class AnnotationProcessingTest {
   }
   
   @org.junit.Test
-  public void eventOptional() throws SecurityException, NoSuchMethodException {
+  public void shouldGenerateEventWithOptionalFieldsAndBuilder() throws SecurityException, NoSuchMethodException {
     Foo foo = new Foo("bar");
     FooChangedEvent event = new FooChangedEvent.Builder(foo, true).additionalMessage("message").priority(1.0).build();
     assertEquals("message", event.getAdditionalMessage());
@@ -60,7 +75,7 @@ public class AnnotationProcessingTest {
   }
 
   @org.junit.Test
-  public void dispatch() {
+  public void shouldGenerateDispatch() {
     RetrieveFooAction action = new RetrieveFooAction(16);
     assertEquals(16, action.getFooId());
     assertTrue(action.isSecured());
@@ -96,7 +111,7 @@ public class AnnotationProcessingTest {
   }
   
   @org.junit.Test
-  public void dispatchOptional() {
+  public void shouldGenerateDispatchWithOptionalFields() {
     RetrieveFooAction action = new RetrieveFooAction.Builder(42).additionalQuestion("meaning of life").build();
     assertEquals(42, action.getFooId());
     assertTrue(action.isSecured());
@@ -109,7 +124,7 @@ public class AnnotationProcessingTest {
   }
 
   @org.junit.Test
-  public void dto() {
+  public void shouldGenerateDto() {
     PersonNameDto dto = new PersonNameDto("bob", "smith");
     assertEquals("bob", dto.getFirstName());
     assertEquals("smith", dto.getLastName());
@@ -122,7 +137,7 @@ public class AnnotationProcessingTest {
   }
   
   @org.junit.Test
-  public void dtoOptional() {
+  public void shouldGenerateDtoWithOptionalFieldsAndBuilder() {
     PersonNameDto dto = new PersonNameDto.Builder("bob", "andrews").secondName("peter").build();
     assertEquals("bob", dto.getFirstName());
     assertEquals("andrews", dto.getLastName());
