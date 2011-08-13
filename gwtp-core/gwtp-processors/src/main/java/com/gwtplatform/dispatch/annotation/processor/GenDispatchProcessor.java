@@ -81,11 +81,7 @@ public class GenDispatchProcessor extends GenProcessor {
       requiredFields.removeAll(optionalFields);
       
       writer.generatePackageDeclaration(reflection.getPackageName());
-      writer.generateImports(
-          reflection.hasOptionalFields() ? "com.google.gwt.user.client.rpc.IsSerializable" : null,
-          null,
-          "com.gwtplatform.dispatch.shared.Action"
-      );
+      writer.generateImports("com.gwtplatform.dispatch.shared.Action");
 
       String actionInterface = "Action<" + dispatchElementSimpleName + "Result>";
       writer.generateClassHeader(dispatchActionSimpleName, null, 
@@ -96,7 +92,7 @@ public class GenDispatchProcessor extends GenProcessor {
 
       if (reflection.hasOptionalFields()) { // has optional fields.
         writer.setWhitespaces(2);
-        writer.generateBuilderClass(dispatchActionSimpleName, requiredFields, optionalFields, "IsSerializable");
+        writer.generateBuilderClass(dispatchActionSimpleName, requiredFields, optionalFields);
         writer.resetWhitespaces();
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
         if (reflection.hasRequiredFields()) { // and required fields
