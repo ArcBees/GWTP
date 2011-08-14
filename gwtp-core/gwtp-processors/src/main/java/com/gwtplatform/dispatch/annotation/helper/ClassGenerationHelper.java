@@ -1,12 +1,12 @@
 /**
- * Copyright 2010 ArcBees Inc.
- * 
+ * Copyright 2011 ArcBees Inc.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,24 +28,24 @@ import javax.lang.model.type.TypeMirror;
 /**
  * {@link ClassGenerationHelper} is an internal class that provides common routines
  * only used by the annotation processors.
- * 
- * @author Brendan Doherty 
+ *
+ * @author Brendan Doherty
  * @author Florian Sauter
- * @author Stephen Haberman (concept) 
+ * @author Stephen Haberman (concept)
  */
 public class ClassGenerationHelper extends GenerationHelper {
 
   public ClassGenerationHelper(Writer sourceWriter) {
     super(sourceWriter);
   }
-  
+
   /**
    * Generates a class header. Pass null to skip the parent class.
-   * 
+   *
    * <p>
    * <b>Usage:</b>
    * </p>
-   * 
+   *
    * <pre>
    * <code>
    *  generateClassHeader(Foo.class.getSimpleName(),
@@ -57,10 +57,10 @@ public class ClassGenerationHelper extends GenerationHelper {
    * <p>
    * <b>Generated example:</b>
    * </p>
-   * 
+   *
    * <pre>
    * <code>public class MyFoo extends Foo implements HasName, MyGenericInterface{@literal <Foo>} {</code></pre>
-   * 
+   *
    * @param className the simple class name
    * @param modifiers the modifiers for the class
    * @param extendedClassName the parent class name
@@ -78,12 +78,12 @@ public class ClassGenerationHelper extends GenerationHelper {
     }
     printWithoutSpaces(" { ");
   }
-  
+
   public void generateConstructorUsingFields(String simpleClassName, Collection<VariableElement> fieldsToBePassedAndAssigned, Modifier... constructorModifiers) {
     println();
-    println("  {0}{1}({2}) {", 
-        generateModifierList(constructorModifiers), 
-        simpleClassName, 
+    println("  {0}{1}({2}) {",
+        generateModifierList(constructorModifiers),
+        simpleClassName,
         generateFieldList(fieldsToBePassedAndAssigned, true, false)
     );
     if (fieldsToBePassedAndAssigned != null) {
@@ -93,7 +93,7 @@ public class ClassGenerationHelper extends GenerationHelper {
     }
     println("  }");
   }
-  
+
   public void generateEmptyConstructor(String simpleClassName, Modifier modifier) {
     println();
     if (modifier != null) {
@@ -104,10 +104,10 @@ public class ClassGenerationHelper extends GenerationHelper {
     println("    // Possibly for serialization.");
     println("  }");
   }
-  
+
   /**
    * Creates an equals method using Java standards.
-   * 
+   *
    * @param simpleClassName the class name
    * @param fieldElements the field elements
    */
@@ -123,7 +123,7 @@ public class ClassGenerationHelper extends GenerationHelper {
       println("    if (getClass() != obj.getClass())");
       println("        return false;");
       println("    {0} other = ({0}) obj;", simpleClassName);
-      
+
       for (VariableElement fieldElement : fieldElements) {
         TypeMirror type = fieldElement.asType();
         String fieldName = fieldElement.getSimpleName().toString();
@@ -146,7 +146,7 @@ public class ClassGenerationHelper extends GenerationHelper {
     }
     println("  }");
   }
-  
+
   public void generateFieldAccessors(Collection<VariableElement> fieldElements) {
     for (VariableElement fieldElement : fieldElements) {
       println();
@@ -155,30 +155,30 @@ public class ClassGenerationHelper extends GenerationHelper {
       println("  }");
     }
   }
-  
+
   /**
    * Creates a default field assignment.
-   * 
+   *
    * <p>
    * <code>generateFieldAssignment(myNameIsTest, null)</code>
    * </p>
-   * 
+   *
    * Generates:
-   * 
+   *
    * <p>
    * <code>    this.test = null;</code>
    * </p>
-   * 
+   *
    * @param fieldElement
    * @param value
    */
   public void generateFieldAssignment(VariableElement fieldElement, Object value) {
     println("    this.{0} = {1};", fieldElement.getSimpleName(), String.valueOf(value));
   }
-  
+
   /**
    * Creates an hashCode method using Java standards.
-   * 
+   *
    * @param fieldElements the field elements
    */
   public void generateHashCode(Collection<VariableElement> fieldElements) {
@@ -209,10 +209,10 @@ public class ClassGenerationHelper extends GenerationHelper {
     }
     println("  }");
   }
-  
+
   public void generateToString(String simpleClassName, Collection<VariableElement> fieldElements) {
     println();
-    
+
     println("  @Override");
     println("  public String toString() {");
     println("    return \"" + simpleClassName + "[\"");
@@ -226,5 +226,5 @@ public class ClassGenerationHelper extends GenerationHelper {
     println("    + \"]\";");
     println("  }");
   }
-  
+
 }
