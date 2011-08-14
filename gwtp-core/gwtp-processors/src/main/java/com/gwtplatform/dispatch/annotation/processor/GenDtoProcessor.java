@@ -1,12 +1,12 @@
 /**
  * Copyright 2011 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -34,13 +34,13 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
 /**
  * Processes {@link GenDto} annotations.
- * <p/> 
- * {@link GenDtoProcessor} should only ever be called by tool infrastructure. 
- * See {@link javax.annotation.processing.Processor} for more details. 
- * 
- * @author Brendan Doherty 
+ * <p/>
+ * {@link GenDtoProcessor} should only ever be called by tool infrastructure.
+ * See {@link javax.annotation.processing.Processor} for more details.
+ *
+ * @author Brendan Doherty
  * @author Florian Sauter
- * @author Stephen Haberman (concept) 
+ * @author Stephen Haberman (concept)
  */
 @SupportedSourceVersion(RELEASE_6)
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDto")
@@ -54,9 +54,9 @@ public class GenDtoProcessor extends GenProcessor {
       String dtoElementSimpleName = reflection.getSimpleClassName();
       String dtoSimpleName = dtoElementSimpleName + "Dto";
       String dtoClassName = reflection.getClassName() + "Dto";
-      
+
       printMessage("Generating '" + dtoClassName + "' from '" + dtoElementSimpleName + "'.");
-      
+
       Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dtoClassName, dtoElement).openWriter();
       writer = new BuilderGenerationHelper(sourceWriter);
 
@@ -65,12 +65,12 @@ public class GenDtoProcessor extends GenProcessor {
       Collection<VariableElement> optionalFields = reflection.getOptionalFields();
       Collection<VariableElement> requiredFields = reflection.getNonConstantFields();
       requiredFields.removeAll(optionalFields);
-      
+
       writer.generatePackageDeclaration(reflection.getPackageName());
       writer.generateImports("com.google.gwt.user.client.rpc.IsSerializable");
       writer.generateClassHeader(dtoSimpleName, null, reflection.getClassRepresenter().getModifiers(), "IsSerializable");
       writer.generateFieldDeclarations(orderedElementFields);
-      
+
       if (reflection.hasOptionalFields()) { // has optional fields.
         writer.setWhitespaces(2);
         writer.generateBuilderClass(dtoSimpleName, requiredFields, optionalFields);
@@ -86,12 +86,12 @@ public class GenDtoProcessor extends GenProcessor {
       } else { // has no non-static fields
         writer.generateEmptyConstructor(dtoSimpleName, Modifier.PUBLIC);
       }
-      
+
       writer.generateFieldAccessors(orderedElementFields);
       writer.generateEquals(dtoSimpleName, orderedElementFields);
       writer.generateHashCode(orderedElementFields);
       writer.generateToString(dtoSimpleName, orderedElementFields);
-      
+
       writer.generateFooter();
     } catch (IOException e) {
       throw new RuntimeException(e);
