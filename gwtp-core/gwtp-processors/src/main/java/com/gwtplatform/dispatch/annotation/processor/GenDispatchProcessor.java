@@ -1,12 +1,12 @@
 /**
  * Copyright 2011 ArcBees Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,130 +21,100 @@ import static javax.lang.model.SourceVersion.RELEASE_6;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
-import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import javax.tools.Diagnostic.Kind;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Out;
+import com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper;
+import com.gwtplatform.dispatch.annotation.helper.GenerationHelper;
+import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
 /**
  * Processes {@link GenDispatch} annotations.
  * <p/>
  * {@link GenDispatchProcessor} should only ever be called by tool infrastructure. See
  * {@link javax.annotation.processing.Processor} for more details.
- *
+ * 
  * @author Brendan Doherty
  * @author Florian Sauter
  * @author Stephen Haberman (concept)
  */
-
-@SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDispatch")
 @SupportedSourceVersion(RELEASE_6)
-public class GenDispatchProcessor extends AbstractProcessor {
-
-  private ProcessingEnvironment env;
-
-  @Override
-  public synchronized void init(ProcessingEnvironment env) {
-    super.init(env);
-    this.env = env;
-  }
+@SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDispatch")
+public class GenDispatchProcessor extends GenProcessor {
 
   @Override
-  public boolean process(Set<? extends TypeElement> annotations,
-      RoundEnvironment roundEnv) {
-
-    if (!roundEnv.processingOver()) {
-
-      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor started.");
-
-      this.env.getMessager().printMessage(Kind.NOTE, "Searching for @GenDispatch annotations.");
-      for (Element dispatch : roundEnv.getElementsAnnotatedWith(GenDispatch.class)) {
-        this.env.getMessager().printMessage(Kind.NOTE, "Found " + dispatch.toString() + ".");
-        this.generateGenDispatch(dispatch);
-      }
-      this.env.getMessager().printMessage(Kind.NOTE, "com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor finished.");
-    }
-    return true;
-  }
-
-  public void generateGenDispatch(Element dispatchElement) {
-
+  public void process(Element dispatchElement) {
     GenDispatch genDispatch = dispatchElement.getAnnotation(GenDispatch.class);
-
-    generateAction(dispatchElement, genDispatch.isSecure(),
-        genDispatch.serviceName(), genDispatch.extraActionInterfaces());
+    generateAction(dispatchElement, 
+        genDispatch.isSecure(),
+        genDispatch.serviceName(), 
+        genDispatch.extraActionInterfaces()
+    );
     generateResult(dispatchElement, genDispatch.extraResultInterfaces());
   }
 
   protected void generateAction(Element dispatchElement, boolean isSecure, String serviceName, String extraActionInterfaces) {
-    GenerationHelper writer = null;
+    BuilderGenerationHelper writer = null;
     try {
-      ReflectionHelper reflection = new ReflectionHelper(env, (TypeElement) dispatchElement);
+      ReflectionHelper reflection = new ReflectionHelper(getEnvironment(), (TypeElement) dispatchElement);
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchActionSimpleName = dispatchElementSimpleName + "Action";
       String dispatchActionClassName = reflection.getClassName() + "Action";
-
-      this.env.getMessager().printMessage(Kind.NOTE, "Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
-
-      Writer sourceWriter = this.env.getFiler().createSourceFile(dispatchActionClassName, dispatchElement).openWriter();
-      writer = new GenerationHelper(sourceWriter);
+      
+      printMessage("Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
+      
+      Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchActionClassName, dispatchElement).openWriter();
+      writer = new BuilderGenerationHelper(sourceWriter);
 
       Collection<VariableElement> annotatedInFields = reflection.getInFields();
-
-      writer.generatePackageDeclaration(reflection.getPackageName());
-
-      writer.generateImports(
-          "com.gwtplatform.dispatch.shared.Action"
-      );
-
-      writer.generateClassHeader(dispatchActionSimpleName, null,
-          "Action<" + dispatchElementSimpleName + "Result>",
-          extraActionInterfaces
-      );
-
-      writer.generateFieldDeclarations(annotatedInFields);
-
       Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getInFields());
       Collection<VariableElement> optionalFields = reflection.sortFields(In.class, reflection.getOptionalFields(In.class));
       Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getInFields());
       requiredFields.removeAll(optionalFields);
+      
+      writer.generatePackageDeclaration(reflection.getPackageName());
+      writer.generateImports("com.gwtplatform.dispatch.shared.Action");
 
-      writer.generateConstructorUsingFields(dispatchActionSimpleName, allFields);
+      String actionInterface = "Action<" + dispatchElementSimpleName + "Result>";
+      writer.generateClassHeader(dispatchActionSimpleName, null, 
+          reflection.getClassRepresenter().getModifiers(),
+          actionInterface, extraActionInterfaces
+      );
+      writer.generateFieldDeclarations(annotatedInFields);
 
-      if (optionalFields.size() > 0) {
-        writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields);
-      }
-
-      if (!allFields.isEmpty() && requiredFields.size() > 0) {
+      if (reflection.hasOptionalFields()) { // has optional fields.
+        writer.setWhitespaces(2);
+        writer.generateBuilderClass(dispatchActionSimpleName, requiredFields, optionalFields);
+        writer.resetWhitespaces();
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
+        if (reflection.hasRequiredFields()) { // and required fields
+          writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
+        }
+        writer.generateCustomBuilderConstructor(dispatchActionSimpleName, allFields);
+      } else if (reflection.hasRequiredFields()) { // has only required fields
+        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
+        writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
+      } else { // has no non-static fields
+        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PUBLIC);
       }
-
-      writer.generateFieldAccessors(annotatedInFields);
-
+      
       generateServiceNameAccessor(writer, dispatchElementSimpleName, serviceName);
-
       generateIsSecuredMethod(writer, isSecure);
 
+      writer.generateFieldAccessors(annotatedInFields);
       writer.generateEquals(dispatchActionSimpleName, annotatedInFields);
-
       writer.generateHashCode(annotatedInFields);
-
       writer.generateToString(dispatchActionSimpleName, annotatedInFields);
-
-      writer.generateClassFooter();
-
+      
+      writer.generateFooter();
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {
@@ -155,56 +125,60 @@ public class GenDispatchProcessor extends AbstractProcessor {
   }
 
   protected void generateResult(Element dispatchElement, String extraResultInterfaces) {
-    GenerationHelper writer = null;
+    BuilderGenerationHelper writer = null;
     try {
-      ReflectionHelper reflection = new ReflectionHelper(env, (TypeElement) dispatchElement);
+      ReflectionHelper reflection = new ReflectionHelper(getEnvironment(), (TypeElement) dispatchElement);
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchResultSimpleName = dispatchElementSimpleName + "Result";
       String dispatchResultClassName = reflection.getClassName() + "Result";
-  
-      this.env.getMessager().printMessage(Kind.NOTE, "Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
-
-      Writer sourceWriter = this.env.getFiler().createSourceFile(dispatchResultClassName, dispatchElement).openWriter();
-      writer = new GenerationHelper(sourceWriter);
+      
+     printMessage("Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
+      
+      Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchResultClassName, dispatchElement).openWriter();
+      writer = new BuilderGenerationHelper(sourceWriter);
 
       Collection<VariableElement> annotatedOutFields = reflection.getOutFields();
-
-      writer.generatePackageDeclaration(reflection.getPackageName());
-
-      writer.generateImports("com.gwtplatform.dispatch.shared.Result");
-
-      writer.generateClassHeader(dispatchResultSimpleName, null,
-          "Result",
-          extraResultInterfaces
-      );
-
-      writer.generateFieldDeclarations(annotatedOutFields);
-
       Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getOutFields());
       Collection<VariableElement> optionalFields = reflection.sortFields(Out.class, reflection.getOptionalFields(Out.class));
       Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getOutFields());
       requiredFields.removeAll(optionalFields);
+      
+      writer.generatePackageDeclaration(reflection.getPackageName());
+      writer.generateImports(
+          reflection.hasOptionalFields() ? "com.google.gwt.user.client.rpc.IsSerializable" : null,
+          null,
+          "com.gwtplatform.dispatch.shared.Result"
+      );
+      
+      String resultInterface = "Result";
+      writer.generateClassHeader(dispatchResultSimpleName, null, 
+          reflection.getClassRepresenter().getModifiers(),
+          resultInterface, extraResultInterfaces
+      );
+      writer.generateFieldDeclarations(annotatedOutFields);
 
-      writer.generateConstructorUsingFields(dispatchResultSimpleName, allFields);
-
-      if (optionalFields.size() > 0) {
-        writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields);
-      }
-
-      if (!allFields.isEmpty() && requiredFields.size() > 0) {
+      if (reflection.hasOptionalFields()) {
+        writer.setWhitespaces(2);
+        writer.generateBuilderClass(dispatchResultSimpleName, requiredFields, optionalFields, "IsSerializable");
+        writer.resetWhitespaces();
         writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
+        if (reflection.hasRequiredFields()) {
+          writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
+        }
+        writer.generateCustomBuilderConstructor(dispatchResultSimpleName, allFields);
+      } else if (reflection.hasRequiredFields()) {
+        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
+        writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
+      } else {
+        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PUBLIC);
       }
-
+      
       writer.generateFieldAccessors(annotatedOutFields);
-
       writer.generateEquals(dispatchResultSimpleName, annotatedOutFields);
-
       writer.generateHashCode(annotatedOutFields);
-
       writer.generateToString(dispatchResultSimpleName, annotatedOutFields);
 
-      writer.generateClassFooter();
-
+      writer.generateFooter();
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {
@@ -213,7 +187,7 @@ public class GenDispatchProcessor extends AbstractProcessor {
       }
     }
   }
-
+  
   protected void generateIsSecuredMethod(GenerationHelper writer, boolean isSecure) {
     writer.println();
     writer.println("  @Override");
@@ -221,16 +195,15 @@ public class GenDispatchProcessor extends AbstractProcessor {
     writer.println("    return " + isSecure + ";");
     writer.println("  }");
   }
-
+  
   protected void generateServiceNameAccessor(GenerationHelper writer, String simpleClassName, String serviceName) {
     writer.println();
     writer.println("  @Override");
     writer.println("  public String getServiceName() {");
     if (serviceName.isEmpty()) {
-      writer.println("    return Action.DEFAULT_SERVICE_NAME + \"" + simpleClassName
-          + "\";");
+      writer.println("    return Action.DEFAULT_SERVICE_NAME + \"{0}\";",  simpleClassName);
     } else {
-      writer.println("    return \"" + serviceName + "\";");
+      writer.println("    return \"{0}\";", serviceName);
     }
     writer.println("  }");
   }
