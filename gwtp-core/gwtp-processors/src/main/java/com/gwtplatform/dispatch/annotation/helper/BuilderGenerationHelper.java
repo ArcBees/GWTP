@@ -1,12 +1,12 @@
 /**
- * Copyright 2010 ArcBees Inc.
- * 
+ * Copyright 2011 ArcBees Inc.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,7 +28,7 @@ import javax.lang.model.element.VariableElement;
  * <p>You should consider to use a builder when you are faced with many constructor
  * parameters. Specially mandatory and optional parameters. Here comes the
  * {@link BuilderGenerationHelper} into play.</p>
- * 
+ *
  * Instead of making the desired object directly, the client calls a constructor
  * (or static factory) with all of the required parameters and gets a builder
  * object. Then the client calls setter-like methods on the builder object to
@@ -36,21 +36,21 @@ import javax.lang.model.element.VariableElement;
  * parameterless build method to generate the object, which is immutable. The
  * builder is a static member class of the class it builds. This class offers a
  * method to generate a builder like this.
- * 
+ *
  * Rules:
  * No optional fields - no Builder.
  * Has required fields and optional fields - Constructor for required fields + Builder.
  * Has optional fields - only Builder.
- * 
+ *
  * @author Florian Sauter
- * @author Brendan Doherty 
- * 
+ * @author Brendan Doherty
+ *
  * @see http://my.safaribooksonline.com/9780137150021/ch02lev1sec2
  */
 public class BuilderGenerationHelper extends ClassGenerationHelper {
 
   private static final String SIMPLE_CLASS_NAME = "Builder";
-  
+
   public BuilderGenerationHelper(Writer sourceWriter) {
     super(sourceWriter);
   }
@@ -80,10 +80,10 @@ public class BuilderGenerationHelper extends ClassGenerationHelper {
     generateBuilderBuildMethod(builderObjectSimpleClassName);
     generateFooter();
   }
-  
+
   /**
-   * Creates a private object constructor which should only ever be called by the intern Builder class. 
-   * 
+   * Creates a private object constructor which should only ever be called by the intern Builder class.
+   *
    * @param customClassName the object class name
    * @param fieldsToBePassedAndAssigned the fields
    */
@@ -100,7 +100,7 @@ public class BuilderGenerationHelper extends ClassGenerationHelper {
 
   /**
    * Helper method to create the Builder#build() method which returns a concrete object instance.
-   * 
+   *
    * @param builderObjectSimpleClassName the object class name
    */
   protected void generateBuilderBuildMethod(String builderObjectSimpleClassName) {
@@ -109,30 +109,30 @@ public class BuilderGenerationHelper extends ClassGenerationHelper {
     println("    return new {0}(this);", builderObjectSimpleClassName);
     println("  }");
   }
-  
+
   /**
-  * 
+  *
   * @param fieldElement
   * @param value
   */
   protected void generateBuilderFieldAssignment(VariableElement fieldElement, Object value) {
     println("    this.{0} = builder.{0};", fieldElement.getSimpleName());
   }
-  
+
   protected void generateBuilderHeader() {
     println("public static class {0} {", SIMPLE_CLASS_NAME);
   }
-  
+
   protected void generateBuilderInvocationMethod(VariableElement fieldElement) {
     println();
-    println("  public {0} {1}({2}) {", 
-        SIMPLE_CLASS_NAME, 
-        fieldElement.getSimpleName(), 
+    println("  public {0} {1}({2}) {",
+        SIMPLE_CLASS_NAME,
+        fieldElement.getSimpleName(),
         manufactureField(fieldElement)
     );
     generateFieldAssignment(fieldElement, fieldElement.getSimpleName());
     println("    return this;");
     println("  }");
   }
-  
+
 }

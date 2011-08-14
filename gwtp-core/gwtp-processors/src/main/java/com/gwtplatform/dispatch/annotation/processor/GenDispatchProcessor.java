@@ -1,12 +1,12 @@
 /**
  * Copyright 2011 ArcBees Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -41,7 +41,7 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
  * <p/>
  * {@link GenDispatchProcessor} should only ever be called by tool infrastructure. See
  * {@link javax.annotation.processing.Processor} for more details.
- * 
+ *
  * @author Brendan Doherty
  * @author Florian Sauter
  * @author Stephen Haberman (concept)
@@ -53,9 +53,9 @@ public class GenDispatchProcessor extends GenProcessor {
   @Override
   public void process(Element dispatchElement) {
     GenDispatch genDispatch = dispatchElement.getAnnotation(GenDispatch.class);
-    generateAction(dispatchElement, 
+    generateAction(dispatchElement,
         genDispatch.isSecure(),
-        genDispatch.serviceName(), 
+        genDispatch.serviceName(),
         genDispatch.extraActionInterfaces()
     );
     generateResult(dispatchElement, genDispatch.extraResultInterfaces());
@@ -68,9 +68,9 @@ public class GenDispatchProcessor extends GenProcessor {
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchActionSimpleName = dispatchElementSimpleName + "Action";
       String dispatchActionClassName = reflection.getClassName() + "Action";
-      
+
       printMessage("Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
-      
+
       Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchActionClassName, dispatchElement).openWriter();
       writer = new BuilderGenerationHelper(sourceWriter);
 
@@ -79,12 +79,12 @@ public class GenDispatchProcessor extends GenProcessor {
       Collection<VariableElement> optionalFields = reflection.sortFields(In.class, reflection.getOptionalFields(In.class));
       Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getInFields());
       requiredFields.removeAll(optionalFields);
-      
+
       writer.generatePackageDeclaration(reflection.getPackageName());
       writer.generateImports("com.gwtplatform.dispatch.shared.Action");
 
       String actionInterface = "Action<" + dispatchElementSimpleName + "Result>";
-      writer.generateClassHeader(dispatchActionSimpleName, null, 
+      writer.generateClassHeader(dispatchActionSimpleName, null,
           reflection.getClassRepresenter().getModifiers(),
           actionInterface, extraActionInterfaces
       );
@@ -105,7 +105,7 @@ public class GenDispatchProcessor extends GenProcessor {
       } else { // has no non-static fields
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PUBLIC);
       }
-      
+
       generateServiceNameAccessor(writer, dispatchElementSimpleName, serviceName);
       generateIsSecuredMethod(writer, isSecure);
 
@@ -113,7 +113,7 @@ public class GenDispatchProcessor extends GenProcessor {
       writer.generateEquals(dispatchActionSimpleName, annotatedInFields);
       writer.generateHashCode(annotatedInFields);
       writer.generateToString(dispatchActionSimpleName, annotatedInFields);
-      
+
       writer.generateFooter();
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -131,9 +131,9 @@ public class GenDispatchProcessor extends GenProcessor {
       String dispatchElementSimpleName = reflection.getSimpleClassName();
       String dispatchResultSimpleName = dispatchElementSimpleName + "Result";
       String dispatchResultClassName = reflection.getClassName() + "Result";
-      
+
      printMessage("Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
-      
+
       Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchResultClassName, dispatchElement).openWriter();
       writer = new BuilderGenerationHelper(sourceWriter);
 
@@ -142,16 +142,16 @@ public class GenDispatchProcessor extends GenProcessor {
       Collection<VariableElement> optionalFields = reflection.sortFields(Out.class, reflection.getOptionalFields(Out.class));
       Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getOutFields());
       requiredFields.removeAll(optionalFields);
-      
+
       writer.generatePackageDeclaration(reflection.getPackageName());
       writer.generateImports(
           reflection.hasOptionalFields() ? "com.google.gwt.user.client.rpc.IsSerializable" : null,
           null,
           "com.gwtplatform.dispatch.shared.Result"
       );
-      
+
       String resultInterface = "Result";
-      writer.generateClassHeader(dispatchResultSimpleName, null, 
+      writer.generateClassHeader(dispatchResultSimpleName, null,
           reflection.getClassRepresenter().getModifiers(),
           resultInterface, extraResultInterfaces
       );
@@ -172,7 +172,7 @@ public class GenDispatchProcessor extends GenProcessor {
       } else {
         writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PUBLIC);
       }
-      
+
       writer.generateFieldAccessors(annotatedOutFields);
       writer.generateEquals(dispatchResultSimpleName, annotatedOutFields);
       writer.generateHashCode(annotatedOutFields);
@@ -187,7 +187,7 @@ public class GenDispatchProcessor extends GenProcessor {
       }
     }
   }
-  
+
   protected void generateIsSecuredMethod(GenerationHelper writer, boolean isSecure) {
     writer.println();
     writer.println("  @Override");
@@ -195,7 +195,7 @@ public class GenDispatchProcessor extends GenProcessor {
     writer.println("    return " + isSecure + ";");
     writer.println("  }");
   }
-  
+
   protected void generateServiceNameAccessor(GenerationHelper writer, String simpleClassName, String serviceName) {
     writer.println();
     writer.println("  @Override");
