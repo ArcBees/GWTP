@@ -22,7 +22,6 @@ import static org.mockito.Mockito.verify;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.AfterClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,7 +34,6 @@ import com.gwtplatform.tester.TestView.Binder;
 * @author Christian Goudreau
 */
 @RunWith(JukitoRunner.class)
-@Ignore("beaudoin: Ignored because since GWT 2.4 Composite.initWidget performs JSNI calls.")
 public class MockingBinderTest {
   /**
    * Guice test module.
