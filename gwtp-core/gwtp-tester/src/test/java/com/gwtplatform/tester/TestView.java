@@ -16,6 +16,7 @@
 
 package com.gwtplatform.tester;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -43,5 +44,17 @@ public class TestView extends Composite {
   @Inject
   public TestView(final Binder uiBinder) {
     initWidget(uiBinder.createAndBindUi(this));
+  }
+
+  /**
+   * Workaround for the fact that Composite.initWidget calls some JSNI.
+   *
+   * @param widget the widget to be wrapped
+   */
+  @Override
+  protected void initWidget(Widget widget) {
+    if (GWT.isScript()) {
+      super.initWidget(widget);
+    }
   }
 }
