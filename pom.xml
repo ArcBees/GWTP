@@ -173,11 +173,11 @@
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
 
-        <gae.version>1.5.0</gae.version>
+        <gae.version>1.5.2</gae.version>
         <gin.version>1.5.0</gin.version>
         <guice.version>3.0</guice.version>
         <aopalliance.version>1.0</aopalliance.version>
-        <gwt.version>2.3.0</gwt.version>
+        <gwt.version>2.4.0</gwt.version>
         <junit.version>4.5</junit.version>
         <jukito.version>1.1</jukito.version>
         <mockito.version>1.8.5</mockito.version>

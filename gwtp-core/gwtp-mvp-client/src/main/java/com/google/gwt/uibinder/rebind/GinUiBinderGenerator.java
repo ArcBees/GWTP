@@ -67,9 +67,10 @@ public class GinUiBinderGenerator extends Generator {
   private static final String TEMPLATE_SUFFIX = ".ui.xml";
 
   private static final String XSS_SAFE_CONFIG_PROPERTY = "UiBinder.useSafeHtmlTemplates";
+  private static final String LAZY_WIDGET_BUILDERS_PROPERTY = "UiBinder.useLazyWidgetBuilders";
 
-  private static boolean xssWarningGiven = false;
-  
+  private static boolean gaveSafeHtmlWarning;
+
   /**
    * Given a UiBinder interface, return the path to its ui.xml file, suitable
    * for any classloader to find it as a resource.
@@ -84,7 +85,7 @@ public class GinUiBinderGenerator extends Generator {
       if (interfaceType.getEnclosingType() != null) {
         interfaceType = interfaceType.getEnclosingType();
       }
-      return slashify(interfaceType.getQualifiedSourceName()) + TEMPLATE_SUFFIX;
+      return slashify(interfaceType.getQualifiedBinaryName()) + TEMPLATE_SUFFIX;
     } else {
       templateName = annotation.value();
       if (!templateName.endsWith(TEMPLATE_SUFFIX)) {
@@ -108,7 +109,7 @@ public class GinUiBinderGenerator extends Generator {
   }
 
   private static String slashify(String s) {
-    return s.replace(".", "/");
+    return s.replace(".", "/").replace("$", ".");
   }
 
   private final UiBinderContext uiBinderCtx = new UiBinderContext();
@@ -148,25 +149,45 @@ public class GinUiBinderGenerator extends Generator {
     return packageName + "." + implName;
   }
 
+  private Boolean extractConfigProperty(MortalLogger logger,
+      PropertyOracle propertyOracle, String configProperty, boolean defaultValue) {
+    List<String> values;
+    try {
+      values = propertyOracle.getConfigurationProperty(configProperty).getValues();
+    } catch (BadPropertyValueException e) {
+      logger.warn("No value found for configuration property %s.", configProperty);
+      return defaultValue;
+    }
+
+    String value = values.get(0);
+    if (!value.equals(Boolean.FALSE.toString()) && !value.equals(Boolean.TRUE.toString())) {
+      logger.warn("Unparseable value \"%s\" found for configuration property %s", value,
+          configProperty);
+      return defaultValue;
+    }
+
+    return Boolean.valueOf(value);
+  }
+
   private void generateOnce(JClassType interfaceType, String implName,
       PrintWriter binderPrintWriter, TreeLogger treeLogger, TypeOracle oracle,
-      ResourceOracle resourceOracle, PropertyOracle propertyOracle, 
-      PrintWriterManager writerManager,  DesignTimeUtils designTime) 
+      ResourceOracle resourceOracle, PropertyOracle propertyOracle,
+      PrintWriterManager writerManager,  DesignTimeUtils designTime)
   throws UnableToCompleteException {
 
     MortalLogger logger = new MortalLogger(treeLogger);
     String templatePath = deduceTemplateFile(logger, interfaceType);
-    MessagesWriter messages = new MessagesWriter(BINDER_URI, logger,
+    MessagesWriter messages = new MessagesWriter(oracle, BINDER_URI, logger,
         templatePath, interfaceType.getPackage().getName(), implName);
 
-    FieldManager fieldManager = getFieldManager(logger, oracle,
-        propertyOracle); // MODIFICATION
+    boolean useLazyWidgetBuilders = useLazyWidgetBuilders(logger, propertyOracle);
+
+    FieldManager fieldManager = getFieldManager(oracle, logger,
+        propertyOracle, useLazyWidgetBuilders); // MODIFICATION
     
     UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName,
-        templatePath, oracle, logger, 
-        fieldManager, // MODIFICATION
-        messages, designTime, uiBinderCtx, 
-        useSafeHtmlTemplates(logger, propertyOracle));
+        templatePath, oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
+        useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI);
 
     Document doc = getW3cDoc(logger, designTime, resourceOracle, templatePath);
     designTime.rememberPathForElements(doc);
@@ -208,37 +229,26 @@ public class GinUiBinderGenerator extends Generator {
     return doc;
   }
 
+  private Boolean useLazyWidgetBuilders(MortalLogger logger, PropertyOracle propertyOracle) {
+    return extractConfigProperty(logger, propertyOracle, LAZY_WIDGET_BUILDERS_PROPERTY, false);
+  }
+
   private Boolean useSafeHtmlTemplates(MortalLogger logger, PropertyOracle propertyOracle) {
-    List<String> values;
-    try {
-      values = propertyOracle.getConfigurationProperty(XSS_SAFE_CONFIG_PROPERTY).getValues();
-    } catch (BadPropertyValueException e) {
-      logger.warn("No value found for configuration property %s.", XSS_SAFE_CONFIG_PROPERTY);
-      return true;
-    }
+    Boolean rtn = extractConfigProperty(
+        logger, propertyOracle, XSS_SAFE_CONFIG_PROPERTY, true);
 
-    String value = values.get(0);
-    if (!value.equals(Boolean.FALSE.toString()) && !value.equals(Boolean.TRUE.toString())) {
-      logger.warn("Unparseable value \"%s\" found for configuration property %s", value,
-          XSS_SAFE_CONFIG_PROPERTY);
-      return true;
-    }
-
-    Boolean rtn = Boolean.valueOf(value);
-
-    if (!rtn && !xssWarningGiven) {
+    if (!gaveSafeHtmlWarning && !rtn) {
       logger.warn("Configuration property %s is false! UiBinder SafeHtml integration is off, "
-          + "leaving your users more vulnerable to cross-site scripting attacks. This "
-          + "property will default to true in future releases of GWT.",
+          + "leaving your users more vulnerable to cross-site scripting attacks.",
           XSS_SAFE_CONFIG_PROPERTY);
-      xssWarningGiven = true;
+      gaveSafeHtmlWarning = true;
     }
     return rtn;
   }
 
   // BEGIN MODIFICATION
-  private FieldManager getFieldManager(MortalLogger logger,
-      TypeOracle oracle, PropertyOracle propertyOracle)
+  private FieldManager getFieldManager(TypeOracle oracle, MortalLogger logger,
+	  PropertyOracle propertyOracle, boolean useLazyWidgetBuilder)
       throws UnableToCompleteException {
 
     // Find ginjector
@@ -254,14 +264,14 @@ public class GinUiBinderGenerator extends Generator {
             "The configuration property 'gin.ginjector' is '%s' "
                 + " which doesn't identify a type inheriting from 'Ginjector'.", ginjectorClassName );
       }
-      fieldManager = new GinFieldManager(oracle, logger, ginjectorClass);
+      fieldManager = new GinFieldManager(oracle, logger, ginjectorClass, useLazyWidgetBuilder);
 
     } catch (BadPropertyValueException e) {
       logger.warn(
           "The configuration property 'gin.ginjector' was not found, it is required to use " +
           "gin injection for UiBinder fields. If you don't need this consider using " +
           "UiBinder.gwt.xml instead of GinUiBinder.gwt.xml in your module." );
-      fieldManager = new FieldManager(oracle, logger);
+      fieldManager = new FieldManager(oracle, logger, useLazyWidgetBuilder);
     }
 
     return fieldManager;
