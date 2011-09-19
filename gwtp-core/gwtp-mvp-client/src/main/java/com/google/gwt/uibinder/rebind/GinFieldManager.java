@@ -16,15 +16,19 @@
 
 package com.google.gwt.uibinder.rebind;
 
-import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.uibinder.rebind.model.ImplicitCssResource;
+import com.google.gwt.uibinder.rebind.model.OwnerClass;
+import com.google.gwt.uibinder.rebind.model.OwnerField;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -45,6 +49,27 @@ public class GinFieldManager extends FieldManager {
 
   private static final String DUPLICATE_FIELD_ERROR = "Duplicate declaration of field %1$s.";
 
+  private static final Comparator<FieldWriter> BUILD_DEFINITION_SORT =
+      new Comparator<FieldWriter>() {
+    public int compare(FieldWriter field1, FieldWriter field2) {
+      // First get type precedence, if ties the field precedence is used.
+      int precedence = field2.getFieldType().getBuildPrecedence()
+          - field1.getFieldType().getBuildPrecedence();
+      if (precedence == 0) {
+        precedence = field2.getBuildPrecedence() - field1.getBuildPrecedence();
+      }
+      return precedence;
+    }
+  };
+
+  public static String getFieldBuilder(String fieldName) {
+    return String.format("build_%s()", fieldName);
+  }
+
+  public static String getFieldGetter(String fieldName) {
+    return String.format("get_%s()", fieldName);
+  }
+
   private final TypeOracle types;
   private final MortalLogger logger;
 
@@ -52,23 +77,39 @@ public class GinFieldManager extends FieldManager {
    * Map of field name to FieldWriter. Note its a LinkedHashMap--we want to
    * write these out in the order they're declared.
    */
-  private final LinkedHashMap<String, FieldWriter> fieldsMap = new LinkedHashMap<String, FieldWriter>();
+  private final LinkedHashMap<String, FieldWriter> fieldsMap =
+      new LinkedHashMap<String, FieldWriter>();
 
   /**
    * A stack of the fields.
    */
   private final LinkedList<FieldWriter> parsedFieldStack = new LinkedList<FieldWriter>();
 
-  private LinkedHashMap<String, FieldReference> fieldReferences = new LinkedHashMap<String, FieldReference>();
+  private LinkedHashMap<String, FieldReference> fieldReferences =
+      new LinkedHashMap<String, FieldReference>();
+
+  /**
+   * Counts the number of times a getter field is called, this important to
+   * decide which strategy to take when outputing getters and builders.
+   * {@see com.google.gwt.uibinder.rebind.FieldWriter#writeFieldDefinition}.
+   */
+  private final Map<String, Integer> gettersCounter = new HashMap<String, Integer>();
+
+  /**
+   * Whether to use the new strategy of generating UiBinder code.
+   */
+  private final boolean useLazyWidgetBuilders;
 
   // BEGIN MODIFICATION
   private Map<JClassType, String> ginjectorMethods = new HashMap<JClassType, String>();
   private JClassType ginjectorClass;
 
-  public GinFieldManager(TypeOracle types, MortalLogger logger, JClassType ginjectorClass) {
-    super(types, logger);
+  public GinFieldManager(TypeOracle types, MortalLogger logger, JClassType ginjectorClass,
+      boolean useLazyWidgetBuilders) {
+    super(types, logger, useLazyWidgetBuilders);
     this.types = types;
     this.logger = logger;
+    this.useLazyWidgetBuilders = useLazyWidgetBuilders;
     this.ginjectorClass = ginjectorClass;
     for (JMethod method : ginjectorClass.getMethods()) {
       JClassType returnType = method.getReturnType().isClassOrInterface();
@@ -78,6 +119,40 @@ public class GinFieldManager extends FieldManager {
     }
   }
   // END MODIFICATION
+
+  /**
+   * Converts the given field to its getter. Example:
+   *  <li> myWidgetX = get_myWidgetX()
+   *  <li> f_html1 = get_f_html1()
+   */
+  public String convertFieldToGetter(String fieldName) {
+    // TODO(hermes, rjrjr, rdcastro): revisit this and evaluate if this
+    // conversion can be made directly in FieldWriter.
+    if (!useLazyWidgetBuilders) {
+      return fieldName;
+    }
+
+    int count = getGetterCounter(fieldName) + 1;
+    gettersCounter.put(fieldName, count);
+    return getFieldGetter(fieldName);
+  }
+
+  /**
+   * Initialize with field builders the generated <b>Widgets</b> inner class.
+   * {@see com.google.gwt.uibinder.rebind.FieldWriter#writeFieldBuilder}.
+   */
+  public void initializeWidgetsInnerClass(IndentedWriter w,
+      OwnerClass ownerClass) throws UnableToCompleteException {
+
+    FieldWriter[] fields = fieldsMap.values().toArray(
+        new FieldWriter[fieldsMap.size()]);
+    Arrays.sort(fields, BUILD_DEFINITION_SORT);
+
+    for (FieldWriter field : fields) {
+      int count = getGetterCounter(field.getName());
+      field.writeFieldBuilder(w, count, ownerClass.getUiField(field.getName()));
+    }
+  }
 
   /**
    * @param fieldName the name of the {@link FieldWriter} to find
@@ -110,30 +185,42 @@ public class GinFieldManager extends FieldManager {
    * When making a field we peek at the {@link #parsedFieldStack} to make sure
    * that the field that holds the widget currently being parsed will depended
    * upon the field being declared. This ensures, for example, that dom id
-   * fields (see {@link com.google.gwt.uibinder.rebind.UiBinderWriter#declareDomIdHolder()})
-   * used by an HTMLPanel will be declared before it is.
+   * fields (see {@link UiBinderWriter#declareDomIdHolder()}) used by an HTMLPanel
+   * will be declared before it is.
    *
+   * @param fieldWriterType the field writer type associated
    * @param fieldType the type of the new field
    * @param fieldName the name of the new field
    * @return a new {@link FieldWriter} instance
    * @throws UnableToCompleteException on duplicate name
    */
-  public FieldWriter registerField(JClassType fieldType, String fieldName)
-      throws UnableToCompleteException {
+  public FieldWriter registerField(FieldWriterType fieldWriterType,
+      JClassType fieldType, String fieldName) throws UnableToCompleteException {
     // BEGIN MODIFICATION
     String ginjectorMethod = ginjectorMethods.get(fieldType);
 
     FieldWriter field;
     if (ginjectorMethod != null) {
       // If the ginjector lets us create that fieldType then we use gin to instantiate it
-      field = new FieldWriterOfInjectedType(fieldType, fieldName, ginjectorClass, ginjectorMethod, logger);
+      field = new FieldWriterOfInjectedType(fieldWriterType, fieldType, fieldName, ginjectorClass,
+          ginjectorMethod, logger);
     } else {
       // Otherwise
-      field = new FieldWriterOfExistingType(fieldType, fieldName, logger);
+      field = new FieldWriterOfExistingType(fieldWriterType, fieldType, fieldName, logger);
     }
 
     return registerField(fieldName, field);
     // END MODIFICATION
+  }
+
+  public FieldWriter registerField(JClassType fieldType, String fieldName)
+      throws UnableToCompleteException {
+    return registerField(FieldWriterType.DEFAULT, fieldType, fieldName);
+  }
+
+  public FieldWriter registerField(String type, String fieldName)
+      throws UnableToCompleteException {
+    return registerField(types.findType(type), fieldName);
   }
 
   /**
@@ -146,8 +233,8 @@ public class GinFieldManager extends FieldManager {
    * When making a field we peek at the {@link #parsedFieldStack} to make sure
    * that the field that holds the widget currently being parsed will depended
    * upon the field being declared. This ensures, for example, that dom id
-   * fields (see {@link com.google.gwt.uibinder.rebind.UiBinderWriter#declareDomIdHolder()})
-   * used by an HTMLPanel will be declared before it is.
+   * fields (see {@link UiBinderWriter#declareDomIdHolder()}) used by an HTMLPanel
+   * will be declared before it is.
    *
    * @throws UnableToCompleteException on duplicate name
    * @return a new {@link FieldWriter} instance
@@ -160,6 +247,27 @@ public class GinFieldManager extends FieldManager {
   }
 
   /**
+   * Register a new field for {@link com.google.gwt.uibinder.client.LazyDomElement}
+   * types. LazyDomElement fields can only be associated with html elements. Example:
+   *
+   *  <li>LazyDomElement&lt;DivElement&gt; -&gt; &lt;div&gt;</li>
+   *  <li>LazyDomElement&lt;Element&gt; -&gt; &lt;div&gt;</li>
+   *  <li>LazyDomElement&lt;SpanElement&gt; -&gt; &lt;span&gt;</li>
+   *
+   * @param templateFieldType the html type to bind, eg, SpanElement, DivElement, etc
+   * @param ownerField the field instance
+   */
+  public FieldWriter registerFieldForLazyDomElement(JClassType templateFieldType,
+      OwnerField ownerField) throws UnableToCompleteException {
+    if (ownerField == null) {
+      throw new RuntimeException("Cannot register a null owner field for LazyDomElement.");
+    }
+    FieldWriter field = new FieldWriterOfLazyDomElement(
+        templateFieldType, ownerField, logger);
+    return registerField(ownerField.getName(), field);
+  }
+
+  /**
    * Used to declare fields of a type (other than CssResource) that is to be
    * generated. If your field will hold a reference of an existing type, see
    * {@link #registerField}. For generated CssResources, see
@@ -168,8 +276,8 @@ public class GinFieldManager extends FieldManager {
    * When making a field we peek at the {@link #parsedFieldStack} to make sure
    * that the field that holds the widget currently being parsed will depended
    * upon the field being declared. This ensures, for example, that dom id
-   * fields (see {@link com.google.gwt.uibinder.rebind.UiBinderWriter#declareDomIdHolder()})
-   * used by an HTMLPanel will be declared before it is.
+   * fields (see {@link UiBinderWriter#declareDomIdHolder()}) used by an HTMLPanel
+   * will be declared before it is.
    *
    * @param assignableType class or interface extened or implemented by this
    *          type
@@ -190,8 +298,6 @@ public class GinFieldManager extends FieldManager {
   /**
    * Called to register a <code>{field.reference}</code> encountered during
    * parsing, to be validated against the type oracle once parsing is complete.
-   *
-   * @throws UnableToCompleteException
    */
   public void registerFieldReference(String fieldReferenceString, JType type) {
     FieldReference fieldReference = fieldReferences.get(fieldReferenceString);
@@ -202,6 +308,19 @@ public class GinFieldManager extends FieldManager {
     }
 
     fieldReference.addLeftHandType(type);
+  }
+
+  /**
+   * Gets a FieldWriter given its name or throws a RuntimeException if not found.
+   * @param fieldName the name of the {@link FieldWriter} to find
+   * @return the {@link FieldWriter} instance indexed by fieldName
+   */
+  public FieldWriter require(String fieldName) {
+    FieldWriter fieldWriter = lookup(fieldName);
+    if (fieldWriter == null) {
+      throw new RuntimeException("The required field %s doesn't exist.");
+    }
+    return fieldWriter;
   }
 
   /**
@@ -218,12 +337,32 @@ public class GinFieldManager extends FieldManager {
     for (Map.Entry<String, FieldReference> entry : fieldReferences.entrySet()) {
       FieldReference ref = entry.getValue();
       MonitoredLogger monitoredLogger = new MonitoredLogger(
-          logger.getTreeLogger().branch(Type.TRACE, "validating " + ref));
+          logger.getTreeLogger().branch(TreeLogger.TRACE, "validating " + ref));
       ref.validate(monitoredLogger);
       failed |= monitoredLogger.hasErrors();
     }
     if (failed) {
       throw new UnableToCompleteException();
+    }
+  }
+
+  /**
+   * Outputs the getter and builder definitions for all fields.
+   * {@see com.google.gwt.uibinder.rebind.AbstractFieldWriter#writeFieldDefinition}.
+   */
+  public void writeFieldDefinitions(IndentedWriter writer, TypeOracle typeOracle,
+      OwnerClass ownerClass, DesignTimeUtils designTime)
+      throws UnableToCompleteException {
+    Collection<FieldWriter> fields = fieldsMap.values();
+    for (FieldWriter field : fields) {
+      int counter = getGetterCounter(field.getName());
+      field.writeFieldDefinition(
+          writer,
+          typeOracle,
+          ownerClass.getUiField(field.getName()),
+          designTime,
+          counter,
+          useLazyWidgetBuilders);
     }
   }
 
@@ -241,13 +380,27 @@ public class GinFieldManager extends FieldManager {
     }
   }
 
+  /**
+   * Gets the number of times a getter for the given field is called.
+   */
+  private int getGetterCounter(String fieldName) {
+    Integer count = gettersCounter.get(fieldName);
+    return (count == null) ? 0 : count;
+  }
+
+  private FieldWriter peek() {
+    return parsedFieldStack.getFirst();
+  }
+
   private FieldWriter registerField(String fieldName, FieldWriter field)
       throws UnableToCompleteException {
     requireUnique(fieldName);
     fieldsMap.put(fieldName, field);
 
     if (parsedFieldStack.size() > 0) {
-      parsedFieldStack.getFirst().needs(field);
+      FieldWriter parent = peek();
+      field.setBuildPrecedence(parent.getBuildPrecedence() + 1);
+      parent.needs(field);
     }
 
     return field;

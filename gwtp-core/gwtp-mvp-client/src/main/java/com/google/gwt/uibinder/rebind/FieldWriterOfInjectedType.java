@@ -24,9 +24,10 @@ public class FieldWriterOfInjectedType extends FieldWriterOfExistingType {
   private final JClassType ginjectorClass;
   private final String ginjectorMethod;
 
-  public FieldWriterOfInjectedType(JClassType type, String name, JClassType ginjectorClass,
+  public FieldWriterOfInjectedType(FieldWriterType fieldType,
+      JClassType type, String name, JClassType ginjectorClass,
       String ginjectorMethod, MortalLogger logger) {
-    super(type, name, logger);
+    super(fieldType, type, name, logger);
     this.ginjectorClass = ginjectorClass;
     this.ginjectorMethod = ginjectorMethod;
   }
