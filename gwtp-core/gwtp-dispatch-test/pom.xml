@@ -8,7 +8,6 @@
         <version>0.7-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-dispatch-test</artifactId>
     <name>Testing class for gwtp-dispatch projects</name>
 	<description>This is only meant for internal testing and should never be used outside of GWTP.</description>
@@ -29,8 +28,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-			<scope>compile</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

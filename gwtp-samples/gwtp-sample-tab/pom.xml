@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -8,7 +9,6 @@
         <version>0.7-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-tab</artifactId>
     <packaging>war</packaging>
     <name>GWTP Samples - tab</name>
@@ -26,6 +26,54 @@
                 </configuration>
             </plugin>
 
+            <!-- Disable annotation processors during normal compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <proc>none</proc>
+                </configuration>
+            </plugin>
+            <!-- Run annotation processors on src/main/java sources -->
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>gwtp-processors</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/apt</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -88,34 +136,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-            <!-- Disable annotation processors during normal compilation -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <proc>none</proc>
-                </configuration>
-            </plugin>
-            <!-- Run annotation processors on src/main/java sources -->
-            <plugin>
-                <groupId>org.bsc.maven</groupId>
-                <artifactId>maven-processor-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>process</id>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <processors>
-                                <processor>com.gwtplatform.dispatch.annotation.processor.GenEventProcessor</processor>
-                            </processors>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
 
     </build>
@@ -152,11 +172,13 @@
 
     <profiles>
         <profile>
-            <!-- Activate this profile to compile the sample
-            including just the adequate GWTP dependencies -->
+            <!-- Activate this profile to compile the sample including just 
+                the adequate GWTP dependencies -->
             <id>default-samples</id>
             <activation>
-                <property><name>!gwtp-all</name></property>
+                <property>
+                    <name>!gwtp-all</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
@@ -171,11 +193,13 @@
         </profile>
 
         <profile>
-            <!-- Activate this profile to compile the sample
-            using the compound GWTP dependency (gwtp-all) -->
+            <!-- Activate this profile to compile the sample using the compound 
+                GWTP dependency (gwtp-all) -->
             <id>gwtp-all-samples</id>
             <activation>
-                <property><name>gwtp-all</name></property>
+                <property>
+                    <name>gwtp-all</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
