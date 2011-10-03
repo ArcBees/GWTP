@@ -8,7 +8,6 @@
         <version>0.7-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-crawler-service</artifactId>
     <packaging>war</packaging>
     <name>GWTP Samples - crawler service</name>
@@ -53,12 +52,12 @@
 
             <!-- UNCOMMENT TO DEPLOY TO APPENGINE
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <version>2.5</version>
-            <configuration>
-                <skip>true</skip>
-            </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -116,8 +115,8 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            -->
+            </plugin> -->
+
         </plugins>
     </build>
 

@@ -8,7 +8,6 @@
         <version>0.7-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-nested</artifactId>
     <packaging>war</packaging>
     <name>GWTP Samples - nested</name>
@@ -71,6 +70,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 
