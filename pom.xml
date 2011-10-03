@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -72,7 +73,7 @@
             <name>Michael Renaud</name>
             <email>michael.renaud@imagemsoft.com</email>
         </developer>
-	</developers>
+    </developers>
 
     <contributors>
         <contributor>
@@ -132,13 +133,13 @@
     </scm>
 
     <issueManagement>
-      <system>Google Code</system>
-      <url>http://code.google.com/p/gwt-platform/issues</url>
+        <system>Google Code</system>
+        <url>http://code.google.com/p/gwt-platform/issues</url>
     </issueManagement>
 
     <ciManagement>
-      <system>Team City</system>
-      <url>http://teamcity.codebetter.com</url>
+        <system>Team City</system>
+        <url>http://teamcity.codebetter.com</url>
     </ciManagement>
 
     <mailingLists>
@@ -162,36 +163,38 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <gwt-maven-plugin.version>2.2.0</gwt-maven-plugin.version>
-        <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
+        <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
+        <gwt-maven-plugin.version>2.4.0</gwt-maven-plugin.version>
+        <lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
+        <maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
         <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
+        <maven-gae-plugin.version>0.9.1</maven-gae-plugin.version>
         <maven-javadoc-plugin.version>2.5</maven-javadoc-plugin.version> <!-- More recent versions fail -->
-        <maven-processor-plugin.version>2.0.1</maven-processor-plugin.version>
-        <maven-release-plugin.version>2.1</maven-release-plugin.version>
+        <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
 
-        <gae.version>1.5.2</gae.version>
+        <aopalliance.version>1.0</aopalliance.version>
+        <cglib.version>2.2</cglib.version>
+        <gae.version>1.5.4</gae.version>
         <gin.version>1.5.0</gin.version>
         <guice.version>3.0</guice.version>
-        <aopalliance.version>1.0</aopalliance.version>
         <gwt.version>2.4.0</gwt.version>
-        <junit.version>4.5</junit.version>
-        <jukito.version>1.1</jukito.version>
-        <mockito.version>1.8.5</mockito.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
-        <cglib.version>2.2</cglib.version>
-        <servlet-api.version>2.5</servlet-api.version>
-        <javax.inject.version>1</javax.inject.version>
         <htmlunit.version>2.8</htmlunit.version>
+        <javax.inject.version>1</javax.inject.version>
+        <jukito.version>1.1</jukito.version>
+        <junit.version>4.9</junit.version>
+        <mockito.version>1.8.5</mockito.version>
         <objectify.version>2.2.3</objectify.version>
         <persistence-api.version>1.0</persistence-api.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
     </properties>
 
     <repositories>
-<!-- Uncomment when we depend on dependencies only released on our repository
+        <!-- Uncomment when we depend on dependencies only released on our repository
         <repository>
             <id>Custom Compiled dependencies</id>
             <url>http://maven.gwt-platform.googlecode.com/hg</url>
@@ -201,9 +204,8 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-        </repository>
--->
-<!-- Uncomment when we depend on snapshots released on sonatype -->
+        </repository> -->
+        <!-- Uncomment when we depend on snapshots released on sonatype -->
 
         <repository>
             <id>sonatype.snapshots</id>
@@ -214,22 +216,8 @@
             </snapshots>
         </repository>
 
-	</repositories>
+    </repositories>
 
-    <pluginRepositories>
-        <!-- To use maven-processor-plugin -->
-        <pluginRepository>
-            <id>maven-annotation-plugin</id>
-            <url>http://maven-annotation-plugin.googlecode.com/svn/trunk/mavenrepo</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    
     <build>
         <pluginManagement>
             <plugins>
@@ -304,6 +292,89 @@
                     </executions>
                 </plugin>
 
+                <!--This plugin's configuration is used to store Eclipse 
+                    m2e settings only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>${lifecycle-mapping-plugin.version}</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.datanucleus</groupId>
+                                        <artifactId>maven-datanucleus-plugin</artifactId>
+                                        <versionRange>[1.1.4,)</versionRange>
+                                        <goals>
+                                            <goal>enhance</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>net.kindleit</groupId>
+                                        <artifactId>maven-gae-plugin</artifactId>
+                                        <versionRange>[0.7.3,)</versionRange>
+                                        <goals>
+                                            <goal>unpack</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.bsc.maven</groupId>
+                                        <artifactId>maven-processor-plugin</artifactId>
+                                        <versionRange>[2.0.5,)</versionRange>
+                                        <goals>
+                                            <goal>process</goal>
+                                            <goal>process-test</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <!-- TODO(beaudoin): This should be `execute` but it fails. 
+                                            The workaround is to manually execute mvn package. -->
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-enforcer-plugin</artifactId>
+                                        <versionRange>[1.0-beta-1,)</versionRange>
+                                        <goals>
+                                            <goal>enforce</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-compiler-plugin</artifactId>
+                                        <versionRange>[2.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>default-compile</goal>
+                                            <goal>default-testCompile</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
@@ -311,31 +382,6 @@
             and configurations of the following plugins in a sub module, will override 
             the top level parent pom's definition -->
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${target.jdk}</source>
-                    <target>${target.jdk}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/*TestCase.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/*GwtTest.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -369,13 +415,38 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${target.jdk}</source>
+                    <target>${target.jdk}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*GwtTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>${maven-release-plugin.version}</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
-                    <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase}</arguments>
+                    <arguments>-Psonatype-oss-release -Prelease
+                        -Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
             </plugin>
 
@@ -384,9 +455,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- This dependency is required by maven-checkstyle-plugin
-            and maven-eclipse-plugin (as configured here). Use this
-            dependency when these plugins are in use. -->
+            <!-- This dependency is required by maven-checkstyle-plugin. -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-build-tools</artifactId>
@@ -405,20 +474,19 @@
 
     <!-- Dependencies that are inherited by sub-modules -->
     <dependencies>
-        <!-- TODO: Remove once we upgrade to newer version of GWT
-             See https://groups.google.com/forum/#!topic/codehaus-mojo-gwt-maven-plugin-users/X2yTJKMRnDA -->
-        <dependency> 
-            <groupId>javax.validation</groupId> 
-            <artifactId>validation-api</artifactId> 
-            <version>1.0.0.GA</version> 
-            <scope>provided</scope> 
-        </dependency> 
-        <dependency> 
-            <groupId>javax.validation</groupId> 
-            <artifactId>validation-api</artifactId> 
-            <version>1.0.0.GA</version> 
-            <classifier>sources</classifier> 
-            <scope>provided</scope> 
+        <!-- TODO: Remove once we upgrade to newer version of GWT See https://groups.google.com/forum/#!topic/codehaus-mojo-gwt-maven-plugin-users/X2yTJKMRnDA -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+            <classifier>sources</classifier>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -433,7 +501,7 @@
             </activation>
             <build>
                 <pluginManagement>
-                
+
                     <plugins>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
@@ -461,7 +529,7 @@
                                 </links>
                             </configuration>
                         </plugin>
-                        
+
                     </plugins>
                 </pluginManagement>
             </build>

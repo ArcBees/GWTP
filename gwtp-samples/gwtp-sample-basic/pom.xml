@@ -8,7 +8,6 @@
         <version>0.7-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-sample-basic</artifactId>
     <packaging>war</packaging>
     <name>GWTP Samples - basic</name>
@@ -72,6 +71,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 
