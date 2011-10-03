@@ -8,14 +8,11 @@
         <version>0.7-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp-samples</artifactId>
     <packaging>pom</packaging>
     <name>GWTP Samples</name>
 
     <properties>
-        <maven-gae-plugin.version>0.8.4</maven-gae-plugin.version>
-
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
         <gae.home>${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
     </properties>
