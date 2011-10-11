@@ -34,19 +34,16 @@ import com.gwtplatform.common.client.ProviderBundle;
  * {@link ProviderBundle}.
  * <p/>
  * Here is an example use of {@link ProxyCodeSplitBundle}:
- * 
+ *
  * <pre>
  * &#064;ProxyCodeSplitBundle(bundleClass = MyPresenterBundle.class, id = MyPresenterBundle.ID_Object1)
  * public interface MyProxy extends ProxyPlace&lt;Object1&gt; {
  * }
  * </pre>
- * 
- * 
+ *
  * @see ProviderBundle
- * @see <a
- *      href="http://code.google.com/intl/de-DE/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code
- *      Splitting</a>
- * 
+ * @see <a href="http://code.google.com/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code Splitting</a>
+ *
  * @author Philippe Beaudoin
  */
 @Target(ElementType.TYPE)
