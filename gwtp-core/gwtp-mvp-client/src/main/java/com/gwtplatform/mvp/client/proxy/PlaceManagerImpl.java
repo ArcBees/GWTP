@@ -355,6 +355,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
       return;
     }
     if (placeRequestHierarchy.size() == 0) {
+      unlock();
       revealDefaultPlace();
     } else {
       placeHierarchy = placeRequestHierarchy;
@@ -379,6 +380,7 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     placeHierarchy = truncatePlaceHierarchy(level);
     int hierarchySize = placeHierarchy.size();
     if (hierarchySize == 0) {
+      unlock();
       revealDefaultPlace();
     } else {
       PlaceRequest request = placeHierarchy.get(hierarchySize - 1);

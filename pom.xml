@@ -128,6 +128,10 @@
             <name>Björn Moritz</name>
             <email>bjoern.moritz@gmail.com</email>
         </contributor>
+        <contributor>
+            <name>Andrey Vityuk</name>
+            <email>andrey.vityuk@gmail.com</email>
+        </contributor>
     </contributors>
 
     <scm>
@@ -399,6 +403,21 @@
                                         <goals>
                                             <goal>default-compile</goal>
                                             <goal>default-testCompile</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <!-- TODO: This disables checkstyle in Eclipse. It's a workaround
+                                for https://bugs.eclipse.org/bugs/show_bug.cgi?id=360491 -->
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-checkstyle-plugin</artifactId>
+                                        <versionRange>[2.7,)</versionRange>
+                                        <goals>
+                                            <goal>checkstyle</goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
