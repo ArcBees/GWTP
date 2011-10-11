@@ -25,17 +25,15 @@ import java.lang.annotation.Target;
  * sit behind a split point.
  * <p/>
  * Here is an example use of {@link ProxyStandard}:
- * 
+ *
  * <pre>
  * &#064;ProxyStandard
  * public interface MyProxy extends ProxyPlace&lt;MyPresenter&gt; {
  * }
  * </pre>
- * 
- * @see <a
- *      href="http://code.google.com/intl/de-DE/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code
- *      Splitting</a>
- * 
+ *
+ * @see <a href="http://code.google.com/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code Splitting</a>
+ *
  * @author Philippe Beaudoin
  */
 @Target(ElementType.TYPE)
