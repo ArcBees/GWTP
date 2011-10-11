@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import java.util.Collections;
+
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
@@ -91,6 +93,65 @@ public class PlaceManagerImpl2Test {
     assertEquals("dummyNameToken", placeRequest.getNameToken());
     assertEquals(1, placeRequest.getParameterNames().size());
     assertEquals("dummyValue", placeRequest.getParameter("dummyParam", null));
+
+    verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+  }
+  
+
+  @Test
+  public void placeManagerRevealRelativePlaceWithZeroLevelShouldGoToDefaultPlace() {
+    // Given
+    doAnswer(new Answer<Void>() {
+      @Override
+      public Void answer(InvocationOnMock invocation) throws Throwable {
+        Object[] args = invocation.getArguments();
+        deferredCommandManager.addCommand(new Command() {
+          @Override
+          public void execute() {
+            placeManager.updateHistory(new PlaceRequest("defaultPlace"), true);
+          } });
+        ((PlaceRequestInternalEvent) args[0]).setHandled();
+        return null;
+      }
+    }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
+
+    // When
+    placeManager.revealRelativePlace(0);
+    deferredCommandManager.pump();
+
+    // Then
+    PlaceRequest placeRequest = placeManager.getCurrentPlaceRequest();
+    assertEquals("defaultPlace", placeRequest.getNameToken());
+    assertEquals(0, placeRequest.getParameterNames().size());
+
+    verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+  }
+
+  @Test
+  public void placeManagerRevealPlaceHierarchyWithEmptyHierarchyShouldGoToDefaultPlace() {
+    // Given
+    doAnswer(new Answer<Void>() {
+      @Override
+      public Void answer(InvocationOnMock invocation) throws Throwable {
+        Object[] args = invocation.getArguments();
+        deferredCommandManager.addCommand(new Command() {
+          @Override
+          public void execute() {
+            placeManager.updateHistory(new PlaceRequest("defaultPlace"), true);
+          } });
+        ((PlaceRequestInternalEvent) args[0]).setHandled();
+        return null;
+      }
+    }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
+
+    // When
+    placeManager.revealPlaceHierarchy(Collections.<PlaceRequest>emptyList());
+    deferredCommandManager.pump();
+
+    // Then
+    PlaceRequest placeRequest = placeManager.getCurrentPlaceRequest();
+    assertEquals("defaultPlace", placeRequest.getNameToken());
+    assertEquals(0, placeRequest.getParameterNames().size());
 
     verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
   }
