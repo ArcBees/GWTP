@@ -96,7 +96,6 @@
             <plugin>
                 <groupId>net.kindleit</groupId>
                 <artifactId>maven-gae-plugin</artifactId>
-                <version>${maven-gae-plugin.version}</version>
                 <configuration>
                     <sdkDir>${gae.home}</sdkDir>
                 </configuration>
