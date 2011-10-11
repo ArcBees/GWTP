@@ -32,6 +32,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
@@ -60,10 +61,13 @@ public class PlaceManagerImplTest {
       bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
       bind(PlaceManager.class).to(PlaceManagerTestUtil.class).in(TestSingleton.class);
       bind(DummyPresenterRedirect.class);
+      bind(DummyPresenterRedirectNoHistory.class);
       bind(DummyProxyBasic.class);
       bind(DummyProxyPlaceBasic.class);
       bind(DummyProxyRedirect.class);
       bind(DummyProxyPlaceRedirect.class);
+      bind(DummyProxyRedirectNoHistory.class);
+      bind(DummyProxyPlaceRedirectNoHistory.class);
     }
   }
 
@@ -126,7 +130,8 @@ public class PlaceManagerImplTest {
     public int revealInParentCalls;
 
     @Inject
-    public DummyPresenterRedirect(EventBus eventBus, DummyProxyPlaceBasic proxy, PlaceManager placeManager) {
+    public DummyPresenterRedirect(EventBus eventBus, DummyProxyPlaceBasic proxy,
+        PlaceManager placeManager) {
       super(eventBus, mock(View.class), proxy);
       this.placeManager = placeManager;
     }
@@ -162,6 +167,50 @@ public class PlaceManagerImplTest {
     }
   }
 
+  @TestEagerSingleton
+  static class DummyPresenterRedirectNoHistory extends
+      Presenter<View,DummyProxyPlaceRedirectNoHistory> {
+    private static final String TOKEN = "dummyNameTokenRedirectNoHistory";
+    private final PlaceManager placeManager;
+
+    @Inject
+    public DummyPresenterRedirectNoHistory(EventBus eventBus,
+        DummyProxyPlaceRedirectNoHistory proxy, PlaceManager placeManager) {
+      super(eventBus, mock(View.class), proxy);
+      this.placeManager = placeManager;
+    }
+
+    @Override
+    public void prepareFromRequest(PlaceRequest request) {
+      super.prepareFromRequest(request);
+      // This call is deferred by GWTP
+      placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic"), false);
+    }
+
+    @Override
+    protected void revealInParent() {
+    }
+  }
+
+  @TestEagerSingleton
+  static class DummyProxyRedirectNoHistory extends ProxyImpl<DummyPresenterRedirectNoHistory> {
+    @Inject
+    public DummyProxyRedirectNoHistory(Provider<DummyPresenterRedirectNoHistory> presenter) {
+        this.presenter = new StandardProvider<DummyPresenterRedirectNoHistory>(presenter);
+    };
+  }
+
+  @TestEagerSingleton
+  static class DummyProxyPlaceRedirectNoHistory extends
+      ProxyPlaceBase<DummyPresenterRedirectNoHistory> {
+
+    @Inject
+    public DummyProxyPlaceRedirectNoHistory(DummyProxyRedirectNoHistory proxy,
+        DeferredCommandManager deferredCommandManager) {
+        super(new PlaceImpl(DummyPresenterRedirectNoHistory.TOKEN), proxy, deferredCommandManager);
+    }
+  }
+
   @TestSingleton
   static class NavigationEventSpy implements NavigationHandler {
     int navCount;
@@ -189,7 +238,8 @@ public class PlaceManagerImplTest {
     eventBus.addHandler(NavigationEvent.getType(), navigationHandler);
 
     // When
-    placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic").with("dummyParam", "dummyValue"));
+    placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic").with("dummyParam",
+        "dummyValue"));
     deferredCommandManager.pump();
 
     // Then
@@ -215,12 +265,34 @@ public class PlaceManagerImplTest {
     assertEquals("dummyValue", placeRequest.getParameter("dummyParam", null));
   }
 
+  /**
+   * DummyPresenterRedirectNoHistory makes a call to revealPlace in prepareFromRequest. This call 
+   * is deferred but useBrowserUrl must be preserved and the history token must be set only once.
+   */
+  @Test
+  public void placeManagerRevealPlaceRedirectInPrepareFromRequestNoHistory () {
+    // Given
+    PlaceRequest placeRequest = new PlaceRequest(DummyPresenterRedirectNoHistory.TOKEN);
+
+    // When
+    placeManager.revealPlace(placeRequest);
+    deferredCommandManager.pump();
+
+    // Then
+    // assert called only once
+    verify(gwtWindowMethods, times(1) ).setBrowserHistoryToken(any(String.class), eq(false));
+
+    PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
+    assertEquals("dummyNameTokenBasic", finalPlaceRequest.getNameToken());
+  }
+
   @Test
   public void placeManagerRevealPlaceRedirectInPrepareFromRequest(
       DummyPresenterRedirect presenter,
       DummyPresenterBasic otherPresenter) {
     // Given
-    PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenRedirect").with("dummyParam", "dummyValue");
+    PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenRedirect").with("dummyParam",
+        "dummyValue");
 
     // When
     placeManager.revealPlace(placeRequest);
