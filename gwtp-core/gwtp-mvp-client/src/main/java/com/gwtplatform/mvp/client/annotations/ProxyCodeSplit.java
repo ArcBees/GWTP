@@ -20,6 +20,23 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
+ * Use this annotation with a {@link com.gwtplatform.mvp.client.proxy.Proxy} if
+ * you want the associated {@link com.gwtplatform.mvp.client.Presenter} to sit
+ * behind a split point. Thus the javascript code will be compiled into a new
+ * javascript file and only be loaded from the webapplication server if needed.
+ * <p/>
+ * Here is an example use of {@link ProxyCodeSplit}:
+ * 
+ * <pre>
+ * &#064;ProxyCodeSplit
+ * public interface MyProxy extends ProxyPlace&lt;MyPresenter&gt; {
+ * }
+ * </pre>
+ * 
+ * @see <a
+ *      href="http://code.google.com/intl/de-DE/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code
+ *      Splitting</a>
+ * 
  * @author Philippe Beaudoin
  */
 @Target(ElementType.TYPE)
