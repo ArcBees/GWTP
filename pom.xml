@@ -191,6 +191,7 @@
         <persistence-api.version>1.0</persistence-api.version>
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>3.0.5.RELEASE</spring.version>
+
     </properties>
 
     <repositories>
@@ -223,6 +224,12 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-eclipse-plugin</artifactId>
+                    <version>${maven-eclipse-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
@@ -253,7 +260,7 @@
                         <headerLocation>/gwtp-java-header.txt</headerLocation>
                         <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
                         <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
-                        <propertyExpansion>basedir=${project.basedir}</propertyExpansion>
+                        <propertyExpansion>basedir=${basedir}</propertyExpansion>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>true</failsOnError>
                         <linkXRef>false</linkXRef>
@@ -287,6 +294,29 @@
                             <phase>verify</phase>
                             <goals>
                                 <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>net.kindleit</groupId>
+                    <artifactId>maven-gae-plugin</artifactId>
+                    <version>${maven-gae-plugin.version}</version>
+                    <dependencies>
+                          <dependency>
+                                <groupId>net.kindleit</groupId>
+                                <artifactId>gae-runtime</artifactId>
+                                <version>${gae.version}</version>
+                                <type>pom</type>
+                          </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id />
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>unpack</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -339,7 +369,8 @@
                                     </pluginExecutionFilter>
                                     <action>
                                         <!-- TODO(beaudoin): This should be `execute` but it fails. 
-                                            The workaround is to manually execute mvn package. -->
+                                            The workaround is to manually run `mvn install`
+                                            whenever the code generating files are changed. -->
                                         <ignore />
                                     </action>
                                 </pluginExecution>
@@ -382,36 +413,6 @@
             and configurations of the following plugins in a sub module, will override 
             the top level parent pom's definition -->
         <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>${maven-eclipse-plugin.version}</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>2.0</wtpversion>
-                    <additionalBuildcommands>
-                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <additionalProjectnatures>
-                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
-                    </additionalProjectnatures>
-                    <additionalConfig>
-                        <file>
-                            <name>.checkstyle</name>
-                            <location>/gwtp-eclipse-checkstyle.xml</location>
-                        </file>
-                    </additionalConfig>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.gwtplatform</groupId>
-                        <artifactId>gwtp-build-tools</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -471,24 +472,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!-- Dependencies that are inherited by sub-modules -->
-    <dependencies>
-        <!-- TODO: Remove once we upgrade to newer version of GWT See https://groups.google.com/forum/#!topic/codehaus-mojo-gwt-maven-plugin-users/X2yTJKMRnDA -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.0.0.GA</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.0.0.GA</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <profiles>
         <profile>
