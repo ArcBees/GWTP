@@ -16,7 +16,7 @@
         <maven-assembly-plugin.version>2.2</maven-assembly-plugin.version>
     </properties>
 
-    <!-- the compound jar consist of the following dependencies -->
+    <!-- The compound jar consist of the following dependencies -->
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -240,7 +240,7 @@
                         <artifactId>maven-antrun-plugin</artifactId>
                         <version>1.6</version>
                         <executions>
-                            <!-- generate the javadoc -->
+                            <!-- Generate the javadoc -->
                             <execution>
                                 <id>generate-all-javadoc</id>
                                 <phase>compile</phase>

@@ -15,6 +15,7 @@
     <properties>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
         <gae.home>${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
+        <gwt.style>OBFUSCATED</gwt.style> <!-- Can make this DETAILED for debugging. -->
     </properties>
 
     <modules>
@@ -72,13 +73,13 @@
 
         <!-- Generate compiled stuff in the folder used for developing mode -->
         <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>        
-        
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -86,23 +87,16 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>net.kindleit</groupId>
+                <artifactId>maven-gae-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
     <!-- Dependencies that are inherited by sub-modules -->
     <dependencies>
-        <!-- When using m2eclipse to import a sample in Eclipse the Google Plugin
-        for Eclipse expects to find an App Engine SDK on the sample's build path,
-        despite that the samples don't have a GAE component.
-        TODO: Remove once GWT Issue 6430 is fixed
-        See: http://code.google.com/p/google-web-toolkit/issues/detail?id=6430 -->
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>${gae.version}</version>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-build-tools</artifactId>
@@ -115,7 +109,7 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-mvp-client</artifactId>
                 <version>${project.version}</version>
-                <scope>provided</scope> <!-- Not needed server-side -->				
+                <scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -173,6 +167,13 @@
                 <artifactId>gwt-servlet</artifactId>
                 <version>${gwt.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+
+            <!-- AppEngine dependencies -->
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-1.0-sdk</artifactId>
+                <version>${gae.version}</version>
             </dependency>
 
             <!-- DI dependencies -->
