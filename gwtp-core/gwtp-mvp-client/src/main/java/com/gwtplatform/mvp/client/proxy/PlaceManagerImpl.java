@@ -321,12 +321,12 @@ public abstract class PlaceManagerImpl implements PlaceManager,
   }
 
   @Override
-  public void revealPlace(final PlaceRequest request, boolean updateBrowserUrl) {
+  public void revealPlace(final PlaceRequest request, final boolean updateBrowserUrl) {
     if (locked) {
       defferedNavigation = new Command() {
         @Override
         public void execute() {
-          revealPlace(request);
+          revealPlace(request, updateBrowserUrl);
         }
       };
       return;
