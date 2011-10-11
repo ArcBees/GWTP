@@ -19,10 +19,12 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <configuration>
+                    <logLevel>INFO</logLevel>
+                    <style>${gwt.style}</style>
                     <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
                     <copyWebapp>true</copyWebapp>
-                    <runTarget>Gwtptabsample.html</runTarget>
+                    <runTarget>Gwtpnestedsample.html</runTarget>
                 </configuration>
             </plugin>
 
@@ -79,54 +81,12 @@
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <configuration>
                     <useProjectReferences>false</useProjectReferences>
-
-                    <classpathContainers>
-                        <classpathContainer>com.google.appengine.eclipse.core.GAE_CONTAINER</classpathContainer>
-                        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
-                        <classpathContainer>com.google.gwt.eclipse.core.GWT_CONTAINER</classpathContainer>
-                    </classpathContainers>
-
                     <additionalBuildcommands>
                         <buildcommand>com.google.gwt.eclipse.core.gwtProjectValidator</buildcommand>
-                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
                     </additionalBuildcommands>
-
                     <additionalProjectnatures>
-                        <projectnature>com.google.appengine.eclipse.core.gaeNature</projectnature>
                         <projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
-                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
                     </additionalProjectnatures>
-
-                    <additionalConfig>
-                        <file>
-                            <name>.factorypath</name>
-                            <content><![CDATA[
-                                <factorypath>
-                                <factorypathentry kind="VARJAR" id="M2_REPO/com/gwtplatform/gwtp-processors/${project.version}/gwtp-processors-${project.version}.jar" enabled="true" runInBatchMode="false" />
-                                </factorypath>
-                            ]]></content>
-                        </file>
-                        <file>
-                            <name>.settings/org.eclipse.jdt.apt.core.prefs</name>
-                            <content><![CDATA[
-                                eclipse.preferences.version=1
-                                org.eclipse.jdt.apt.aptEnabled=true
-                                org.eclipse.jdt.apt.genSrcDir=target/generated-sources/apt
-                                org.eclipse.jdt.apt.reconcileEnabled=true
-                            ]]></content>
-                        </file>
-                        <file>
-                            <name>.settings/com.google.gwt.eclipse.core.prefs</name>
-                            <content><![CDATA[
-                                    eclipse.preferences.version=1
-                                    entryPointModules=com.gwtplatform.samples.tab.Gwtptabsample
-                            ]]></content>
-                        </file>
-                        <file>
-                            <name>.checkstyle</name>
-                            <location>/gwtp-eclipse-checkstyle.xml</location>
-                        </file>
-                    </additionalConfig>
                 </configuration>
                 <dependencies>
                     <dependency>
