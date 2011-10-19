@@ -90,16 +90,16 @@ public class GenDispatchProcessor extends GenProcessor {
       );
       writer.generateFieldDeclarations(annotatedInFields);
 
-      if (reflection.hasOptionalFields()) { // has optional fields.
+      if (!optionalFields.isEmpty()) { // has optional fields.
         writer.setWhitespaces(2);
         writer.generateBuilderClass(dispatchActionSimpleName, requiredFields, optionalFields);
         writer.resetWhitespaces();
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
-        if (reflection.hasRequiredFields()) { // and required fields
+        if (!requiredFields.isEmpty()) { // and required fields
           writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
         }
         writer.generateCustomBuilderConstructor(dispatchActionSimpleName, allFields);
-      } else if (reflection.hasRequiredFields()) { // has only required fields
+      } else if (!requiredFields.isEmpty()) { // has only required fields
         writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
         writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
       } else { // has no non-static fields
@@ -157,16 +157,16 @@ public class GenDispatchProcessor extends GenProcessor {
       );
       writer.generateFieldDeclarations(annotatedOutFields);
 
-      if (reflection.hasOptionalFields()) {
+      if (!optionalFields.isEmpty()) {
         writer.setWhitespaces(2);
         writer.generateBuilderClass(dispatchResultSimpleName, requiredFields, optionalFields, "IsSerializable");
         writer.resetWhitespaces();
         writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
-        if (reflection.hasRequiredFields()) {
+        if (!requiredFields.isEmpty()) {
           writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
         }
         writer.generateCustomBuilderConstructor(dispatchResultSimpleName, allFields);
-      } else if (reflection.hasRequiredFields()) {
+      } else if (!requiredFields.isEmpty()) {
         writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
         writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
       } else {
