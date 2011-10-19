@@ -79,16 +79,16 @@ public class GenEventProcessor extends GenProcessor {
       );
       writer.generateFieldDeclarations(orderedElementFields);
 
-      if (reflection.hasOptionalFields()) { // has optional fields.
+      if (!optionalFields.isEmpty()) { // has optional fields.
         writer.setWhitespaces(2);
         writer.generateBuilderClass(eventSimpleName, requiredFields, optionalFields);
         writer.resetWhitespaces();
-        if (reflection.hasRequiredFields()) { // and required fields
+        if (!requiredFields.isEmpty()) { // and required fields
           writer.generateConstructorUsingFields(eventSimpleName, requiredFields, Modifier.PUBLIC);
         }
         writer.generateCustomBuilderConstructor(eventSimpleName, allFields);
         generateFireSelfMethod(writer);
-      } else if (reflection.hasRequiredFields()) {  // has only required fields
+      } else if (!requiredFields.isEmpty()) {  // has only required fields
         writer.generateEmptyConstructor(eventSimpleName, Modifier.PROTECTED);
         writer.generateConstructorUsingFields(eventSimpleName, requiredFields, Modifier.PUBLIC);
         generateFireFieldsStaticMethod(writer, requiredFields, eventSimpleName);
