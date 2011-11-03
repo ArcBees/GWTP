@@ -42,7 +42,7 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
 
   /**
    * Fires a {@link RevealContentEvent} with a specific {@link com.google.gwt.event.shared.GwtEvent.Type}
-   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
    *
    * @param source The source that fires this event ({@link HasHandlers}).
    * @param type The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}, usually defined in the parent presenter
