@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Event fired right before any asynchronous call to the server is performed by GWTP MVP.
@@ -35,10 +36,23 @@ public class AsyncCallStartEvent extends GwtEvent<AsyncCallStartHandler> {
 
   /**
    * Fires a {@link AsyncCallStartEvent}
-   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+   *
+   * @param source The source that fires this event ({@link EventBus}).
+   * @param caught failure encountered while executing a remote procedure call.
+   */
+  public static void fire(EventBus source) {
+    source.fireEvent(new AsyncCallStartEvent());  
+  }
+
+  /**
+   * Fires a {@link AsyncCallStartEvent}
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+   * @deprecated Use {@link #fire(EventBus)} instead.
    *
    * @param source The source that fires this event ({@link HasHandlers}).
    */
+  @Deprecated
   public static void fire(final HasHandlers source) {
     source.fireEvent(new AsyncCallStartEvent());
   }

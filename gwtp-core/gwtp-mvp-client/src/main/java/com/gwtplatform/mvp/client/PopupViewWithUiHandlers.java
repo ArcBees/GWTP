@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Base class for a {@link PopupView} that implements the {@link HasUiHandlers}

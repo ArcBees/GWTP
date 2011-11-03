@@ -33,7 +33,7 @@ public final class NavigationRefusedEvent extends
 
   /**
    * Fires a {@link NavigationRefusedEvent}
-   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
    *
    * @param source The source that fires this event ({@link HasHandlers}).
    */
