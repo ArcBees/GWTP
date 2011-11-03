@@ -68,7 +68,7 @@ public class GenEventProcessor extends GenProcessor {
       writer.generateImports(
           "com.google.gwt.event.shared.EventHandler",
           "com.google.gwt.event.shared.GwtEvent",
-          "com.google.gwt.event.shared.HandlerRegistration",
+          "com.google.web.bindery.event.shared.HandlerRegistration",
           null,
           "com.google.gwt.event.shared.HasHandlers"
       );

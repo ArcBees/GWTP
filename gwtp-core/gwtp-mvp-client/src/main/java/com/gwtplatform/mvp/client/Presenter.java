@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Singleton;
 
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;

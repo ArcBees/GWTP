@@ -36,7 +36,7 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
 
   /**
    * Fires a {@link LockInteractionEvent}
-   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}
    * specifying whether interaction should be locked or unlocked.
    *
    * @param source The source that fires this event ({@link HasHandlers}).
