@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Event fired after any asynchronous call to the server performed by GWTP MVP returns with
@@ -34,11 +35,24 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
 
   /**
    * Fires a {@link AsyncCallFailEvent}
-   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+   *
+   * @param source The source that fires this event ({@link EventBus}).
+   * @param caught failure encountered while executing a remote procedure call.
+   */
+  public static void fire(EventBus source, Throwable caught) {
+    source.fireEvent(new AsyncCallFailEvent(caught));  
+  }
+
+  /**
+   * Fires a {@link AsyncCallFailEvent}
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+   * @deprecated Use {@link #fire(EventBus, Throwable)} instead.
    *
    * @param source The source that fires this event ({@link HasHandlers}).
    * @param caught failure encountered while executing a remote procedure call.
    */
+  @Deprecated
   public static void fire(final HasHandlers source, Throwable caught) {
     source.fireEvent(new AsyncCallFailEvent(caught));
   }

@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;

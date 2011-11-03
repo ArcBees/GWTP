@@ -35,7 +35,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
 
   /**
    * Fires a {@link GetPlaceTitleEvent}
-   * into a source that has access to an {@link com.google.gwt.event.shared.EventBus}.
+   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
    * <p />
    * <b>Important!</b> You should never fire that event directly. See
    * {@link GetPlaceTitleEvent} for details.

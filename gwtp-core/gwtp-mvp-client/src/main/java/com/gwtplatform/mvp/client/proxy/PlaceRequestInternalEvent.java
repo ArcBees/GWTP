@@ -42,7 +42,7 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
   /**
    * Fires a {@link PlaceRequestInternalEvent}
-   * into a source that has access to an {@com.google.gwt.event.shared.EventBus}.
+   * into a source that has access to an {@com.google.web.bindery.event.shared.EventBus}.
    * <p />
    * <b>Important!</b> You should not fire that event directly, see
    * {@link PlaceRequestInternalEvent} for more details.

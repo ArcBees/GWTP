@@ -16,7 +16,7 @@
 
 package com.gwtplatform.samples.hplace.client.presenter;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 

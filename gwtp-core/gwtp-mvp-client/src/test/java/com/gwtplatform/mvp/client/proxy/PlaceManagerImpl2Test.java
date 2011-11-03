@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import java.util.Collections;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
