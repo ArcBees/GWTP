@@ -52,3 +52,5 @@ glob:**/bin/**
 glob:**/.gwt
 glob:**/manifest.txt
 
+syntax: glob
+.idea/*
