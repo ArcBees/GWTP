@@ -29,30 +29,6 @@ import com.google.gwt.user.client.Window;
  */
 public class GoogleAnalyticsImpl implements GoogleAnalytics {
   @Override
-  public native void trackEvent(String category, String action) /*-{
-    $wnd._gaq.push([ '_trackEvent', category, action ]);
-  }-*/;
-
-  @Override
-  public native void trackEvent(String category, String action,
-      String optLabel, int optValue) /*-{
-    $wnd._gaq.push([ '_trackEvent', category, action, optLabel, optValue ]);
-  }-*/;
-
-  public native void trackPageview(String pageName) /*-{
-    if (!pageName.match("^/") == "/") {
-      pageName = "/" + pageName;
-    }
-
-    $wnd._gaq.push([ '_trackPageview', pageName ]);
-  }-*/;
-
-  @Override
-  public native void trackPageview() /*-{
-    $wnd._gaq.push([ '_trackPageview' ]);
-  }-*/;
-
-  @Override
   public void init(String userAccount) {
     Element firstScript = Document.get().getElementsByTagName("script").getItem(
         0);
@@ -79,9 +55,22 @@ public class GoogleAnalyticsImpl implements GoogleAnalytics {
     $wnd._gaq.push([ '" + trackerName + "._setAccount', '" + userAccount + "' ]);
   }-*/;
 
+  public native void trackPageview(String pageName) /*-{
+    if (!pageName.match("^/") == "/") {
+      pageName = "/" + pageName;
+    }
+
+    $wnd._gaq.push([ '_trackPageview', pageName ]);
+  }-*/;
+
+  @Override
+  public native void trackPageview() /*-{
+    $wnd._gaq.push([ '_trackPageview' ]);
+  }-*/;
+
   @Override
   public native void trackPageview(String trackerName, String pageName) /*-{
-     if (!pageName.match("^/") == "/") {
+    if (!pageName.match("^/") == "/") {
       pageName = "/" + pageName;
     }
 
@@ -89,13 +78,44 @@ public class GoogleAnalyticsImpl implements GoogleAnalytics {
   }-*/;
 
   @Override
-  public native void trackEvent(String trackerName, String category, String action) /*-{
+  public native void trackEvent(String category, String action) /*-{
+    $wnd._gaq.push([ '_trackEvent', category, action ]);
+  }-*/;
+
+  @Override
+  public native void trackEvent(String category, String action, String optLabel) /*-{
+    $wnd._gaq.push([ '_trackEvent', category, action, optLabel ]);
+  }-*/;
+
+  @Override
+  public native void trackEvent(String category, String action,
+                                String optLabel, int optValue) /*-{
+    $wnd._gaq.push([ '_trackEvent', category, action, optLabel, optValue ]);
+  }-*/;
+
+  @Override
+  public native void trackEvent(String category, String action, String optLabel, int optValue, boolean optNonInteraction) /*-{
+    $wnd._gaq.push([ '_trackEvent', category, action, optLabel, optValue, optNonInteraction ]);
+  }-*/;
+
+  @Override
+  public native void trackEventWithTracker(String trackerName, String category, String action) /*-{
     $wnd._gaq.push([ '" + trackerName + "._trackEvent', category, action ]);
   }-*/;
 
   @Override
-  public native void trackEvent(String trackerName, String category, String action,
-      String optLabel, int optValue) /*-{
+  public native void trackEventWithTracker(String trackerName, String category, String action, String optLabel) /*-{
+    $wnd._gaq.push([ '" + trackerName + "._trackEvent', category, action, optLabel ]);
+  }-*/;
+
+  @Override
+  public native void trackEventWithTracker(String trackerName, String category, String action,
+                                           String optLabel, int optValue) /*-{
     $wnd._gaq.push([ '" + trackerName + "._trackEvent', category, action, optLabel, optValue ]);
+  }-*/;
+
+  @Override
+  public native void trackEventWithTracker(String trackerName, String category, String action, String optLabel, int optValue, boolean optNonInteraction) /*-{
+    $wnd._gaq.push([ '" + trackerName + "._trackEvent', category, action, optLabel, optValue, optNonInteraction ]);
   }-*/;
 }
