@@ -41,7 +41,7 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
    * @param caught failure encountered while executing a remote procedure call.
    */
   public static void fire(EventBus source, Throwable caught) {
-    source.fireEvent(new AsyncCallFailEvent(caught));  
+    source.fireEvent(new AsyncCallFailEvent(caught));
   }
 
   /**

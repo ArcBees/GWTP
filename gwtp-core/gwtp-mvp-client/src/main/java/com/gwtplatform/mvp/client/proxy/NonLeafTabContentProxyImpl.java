@@ -17,6 +17,8 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.gwtplatform.mvp.client.ChangeTabEvent;
+import com.gwtplatform.mvp.client.ChangeTabHandler;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsEvent;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
@@ -28,26 +30,23 @@ import com.gwtplatform.mvp.client.TabData;
  *
  * @author Philippe Beaudoin
  */
-public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
-    implements TabContentProxy<T> {
+public class NonLeafTabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
+    implements NonLeafTabContentProxy<T> {
 
-  protected String targetHistoryToken;
   protected TabData tabData;
+  protected String targetHistoryToken;
   protected Type<RequestTabsHandler> requestTabsEventType;
+  protected Type<ChangeTabHandler> changeTabEventType;
 
   private Tab tab;
 
   /**
-   * Creates a {@link Proxy} for a {@link Presenter} that is meant to be
-   * contained within at {@link com.gwtplatform.mvp.client.TabContainerPresenter}. As such, these proxy
-   * hold a string that can be displayed on the tab.
+   * Creates a {@link Proxy} for a {@link Presenter} that is meant to be contained within a
+   * {@link com.gwtplatform.mvp.client.TabContainerPresenter} but not as a leaf. As such, these
+   * proxy hold information that can be displayed on the tab together with the target history
+   * token of the leaf page to display when the tab is clicked.
    */
-  public TabContentProxyImpl() {
-  }
-
-  @Override
-  public String getTargetHistoryToken() {
-    return targetHistoryToken;
+  public NonLeafTabContentProxyImpl() {
   }
 
   @Override
@@ -56,17 +55,35 @@ public class TabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
   }
 
   @Override
+  public String getTargetHistoryToken() {
+    return targetHistoryToken;
+  }
+
+  @Override
   public Tab getTab() {
     return tab;
+  }
+
+  @Override
+  public void changeTab(TabData tabData) {
+    this.tabData = tabData;
+    if (changeTabEventType != null) {
+      ChangeTabEvent.fire(this, changeTabEventType, this);
+    }
   }
 
   protected void addRequestTabsHandler() {
     eventBus.addHandler(requestTabsEventType, new RequestTabsHandler() {
       @Override
       public void onRequestTabs(RequestTabsEvent event) {
-        tab = event.getTabContainer().addTab(TabContentProxyImpl.this);
+        tab = event.getTabContainer().addTab(NonLeafTabContentProxyImpl.this);
       }
     });
   }
 
+  @Override
+  public void changeTab(TabData tabData, String targetHistoryToken) {
+    this.targetHistoryToken = targetHistoryToken;
+    changeTab(tabData);
+  }
 }

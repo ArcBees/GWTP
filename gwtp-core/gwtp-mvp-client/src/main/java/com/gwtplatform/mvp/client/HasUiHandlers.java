@@ -17,10 +17,9 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * Interface meant to be implemented by the {@link View} so that its controller
- * can attach its {@link UiHandlers}. <b>Important</b>, when using this interface,
- * you should always call {@link #setUiHandlers(UiHandlers)} from your presenter
- * constructor.
+ * Interface meant to be implemented by the {@link View} so that its controller can attach its
+ * {@link UiHandlers}. <b>Important</b>, when using this interface, you should always call
+ * {@link #setUiHandlers(UiHandlers)} from your presenter constructor.
  *
  * @param <C> Your {@link UiHandlers} interface type.
  *
@@ -31,7 +30,8 @@ public interface HasUiHandlers<C extends UiHandlers> {
   /**
    * Sets the {@link UiHandlers} subclass associated with this object.
    *
-   * @param uiHandlers The {@link UiHandlers} subclass (of type {@code C}) to associate with this object.
+   * @param uiHandlers The {@link UiHandlers} subclass (of type {@code C}) to associate with this
+   * object.
    */
   void setUiHandlers(C uiHandlers);
 

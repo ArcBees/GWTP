@@ -25,11 +25,13 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
+import com.gwtplatform.mvp.client.ChangeTabHandler;
 import com.gwtplatform.mvp.client.DelayedBind;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
+import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -39,7 +41,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
-import com.gwtplatform.mvp.client.proxy.TabContentProxyImpl;
+import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlaceImpl;
 
 /**
@@ -66,11 +68,16 @@ public class ClassCollection {
   static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
   static final String proxyPlaceImplClassName = ProxyPlaceImpl.class.getCanonicalName();
   static final String requestTabsHandlerClassName = RequestTabsHandler.class.getCanonicalName();
+  static final String changeTabHandlerClassName = ChangeTabHandler.class.getCanonicalName();
   static final String revealContentHandlerClassName = RevealContentHandler.class.getCanonicalName();
   static final String setPlaceTitleHandlerClassName = SetPlaceTitleHandler.class.getCanonicalName();
   static final String tabContentProxyClassName = TabContentProxy.class.getCanonicalName();
-  static final String tabContentProxyImplClassName = TabContentProxyImpl.class.getCanonicalName();
-  static final String tabContentProxyPlaceImplClassName = TabContentProxyPlaceImpl.class.getCanonicalName();
+  static final String nonLeafTabContentProxyClassName =
+      NonLeafTabContentProxy.class.getCanonicalName();
+  static final String nonLeafTabContentProxyImplClassName =
+      NonLeafTabContentProxyImpl.class.getCanonicalName();
+  static final String tabContentProxyPlaceImplClassName =
+      TabContentProxyPlaceImpl.class.getCanonicalName();
   static final String typeClassName = Type.class.getCanonicalName();
   static final String tabDataClassName = TabData.class.getCanonicalName();
   final JGenericType asyncProviderClass;
@@ -84,11 +91,13 @@ public class ClassCollection {
   final JClassType placeRequestClass;
   final JGenericType providerClass;
   final JClassType requestTabsHandlerClass;
+  final JClassType changeTabHandlerClass;
   final JClassType revealContentHandlerClass;
   final JClassType setPlaceTitleHandlerClass;
   final JClassType stringClass;
   final JClassType tabDataClass;
   final JClassType tabContentProxyClass;
+  final JClassType nonLeafTabContentProxyClass;
   final JClassType typeClass;
 
   public ClassCollection(TypeOracle oracle) {
@@ -99,10 +108,12 @@ public class ClassCollection {
     typeClass = oracle.findType(typeClassName);
     revealContentHandlerClass = oracle.findType(revealContentHandlerClassName);
     requestTabsHandlerClass = oracle.findType(requestTabsHandlerClassName);
+    changeTabHandlerClass = oracle.findType(changeTabHandlerClassName);
     providerClass = oracle.findType(providerClassName).isGenericType();
     asyncProviderClass = oracle.findType(asyncProviderClassName).isGenericType();
     basePlaceClass = oracle.findType(basePlaceClassName);
     tabContentProxyClass = oracle.findType(tabContentProxyClassName);
+    nonLeafTabContentProxyClass = oracle.findType(nonLeafTabContentProxyClassName);
     gatekeeperClass = oracle.findType(gatekeeperClassName);
     placeRequestClass = oracle.findType(placeRequestClassName);
     gwtEventClass = oracle.findType(gwtEventClassName).isGenericType();

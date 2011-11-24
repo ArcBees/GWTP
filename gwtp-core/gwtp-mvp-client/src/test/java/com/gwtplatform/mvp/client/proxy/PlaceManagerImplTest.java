@@ -266,11 +266,11 @@ public class PlaceManagerImplTest {
   }
 
   /**
-   * DummyPresenterRedirectNoHistory makes a call to revealPlace in prepareFromRequest. This call 
+   * DummyPresenterRedirectNoHistory makes a call to revealPlace in prepareFromRequest. This call
    * is deferred but useBrowserUrl must be preserved and the history token must be set only once.
    */
   @Test
-  public void placeManagerRevealPlaceRedirectInPrepareFromRequestNoHistory () {
+  public void placeManagerRevealPlaceRedirectInPrepareFromRequestNoHistory() {
     // Given
     PlaceRequest placeRequest = new PlaceRequest(DummyPresenterRedirectNoHistory.TOKEN);
 
@@ -280,7 +280,7 @@ public class PlaceManagerImplTest {
 
     // Then
     // assert called only once
-    verify(gwtWindowMethods, times(1) ).setBrowserHistoryToken(any(String.class), eq(false));
+    verify(gwtWindowMethods, times(1)).setBrowserHistoryToken(any(String.class), eq(false));
 
     PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
     assertEquals("dummyNameTokenBasic", finalPlaceRequest.getNameToken());

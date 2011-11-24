@@ -43,7 +43,7 @@ import com.gwtplatform.tester.TestDispatchService;
  * Tests (using {@link AsyncEventPresenterTestUtil}) the correct firing and
  * handling of {@link AsyncCallStartEvent}, {@link AsyncCallSucceedEvent} and
  * {@link AsyncCallFailEvent}.
- * 
+ *
  * @author bjoern.moritz
  */
 @RunWith(JukitoRunner.class)
@@ -96,7 +96,7 @@ public class AsyncEventTest {
   /**
    * A mock {@link Answer} which will allways call
    * {@link AsyncCallback#onSuccess(Object)} method.
-   * 
+   *
    * @author bjoern.moritz
    */
   private static final class GetAsynchronousAnswer implements Answer<Void> {
@@ -112,7 +112,7 @@ public class AsyncEventTest {
   /**
    * A mock {@link Answer} which will allways call
    * {@link AsyncCallback#onFailure(Throwable)} method.
-   * 
+   *
    * @author bjoern.moritz
    */
   private static final class GetAsynchronousFailureAnswer implements Answer<Void> {
