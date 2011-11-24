@@ -25,17 +25,20 @@ import com.google.gwt.user.rebind.SourceWriter;
 
 /**
  * A {@link ProxyOutputter} that is at once a {@link ProxyPlaceOutputter} and a
- * {@link TabContentProxyOutputter}.
+ * {@link NonLeafTabContentProxyOutputter}.
  *
  * @author Philippe Beaudoin
  */
 public class TabContentProxyPlaceOutputter extends ProxyOutputterBase {
 
   private final ProxyPlaceOutputter proxyPlaceOutputter;
-  private final TabContentProxyOutputter tabContentProxyOutputter;
+  private final NonLeafTabContentProxyOutputter nonLeafTabContentProxyOutputter;
 
   /**
    * Create a {@link TabContentProxyPlaceOutputter} based on the superclass passed as a parameter.
+   * TODO(beaudoin): Currently using a {@link NonLeafTabContentProxyOutputter} as a wrapped proxy,
+   * even though it's a bit too complex for our needs. We could refactor to use a slightly simpler
+   * proxy, without a name token for example.
    */
   public TabContentProxyPlaceOutputter(TypeOracle oracle,
       TreeLogger logger,
@@ -43,33 +46,33 @@ public class TabContentProxyPlaceOutputter extends ProxyOutputterBase {
       GinjectorInspector ginjectorInspector,
       PresenterInspector presenterInspector,
       ProxyPlaceOutputter proxyPlaceOutputter,
-      TabContentProxyOutputter tabContentProxyOutputter) {
+      NonLeafTabContentProxyOutputter nonLeafTabContentProxyOutputter) {
     super(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
     this.proxyPlaceOutputter = proxyPlaceOutputter;
-    this.tabContentProxyOutputter = tabContentProxyOutputter;
+    this.nonLeafTabContentProxyOutputter = nonLeafTabContentProxyOutputter;
   }
 
   @Override
   void initSubclass(JClassType proxyInterface) throws UnableToCompleteException {
     proxyPlaceOutputter.init(proxyInterface);
-    tabContentProxyOutputter.setNameToken(proxyPlaceOutputter.getNameToken());
-    tabContentProxyOutputter.init(proxyInterface);
+    nonLeafTabContentProxyOutputter.setNameToken(proxyPlaceOutputter.getNameToken());
+    nonLeafTabContentProxyOutputter.init(proxyInterface);
   }
 
   @Override
   void addSubclassImports(ClassSourceFileComposerFactory composerFactory) {
     proxyPlaceOutputter.addSubclassImports(composerFactory);
-    tabContentProxyOutputter.addSubclassImports(composerFactory);
+    nonLeafTabContentProxyOutputter.addSubclassImports(composerFactory);
   }
 
   @Override
   public void writeInnerClasses(SourceWriter writer) {
-    proxyPlaceOutputter.beginWrappedProxy(writer, ClassCollection.tabContentProxyImplClassName);
-    tabContentProxyOutputter.writeFields(writer);
-    tabContentProxyOutputter.writeInnerClasses(writer);
-    tabContentProxyOutputter.writeConstructor(writer, ProxyPlaceOutputter.WRAPPED_CLASS_NAME,
+    proxyPlaceOutputter.beginWrappedProxy(writer, ClassCollection.nonLeafTabContentProxyImplClassName);
+    nonLeafTabContentProxyOutputter.writeFields(writer);
+    nonLeafTabContentProxyOutputter.writeInnerClasses(writer);
+    nonLeafTabContentProxyOutputter.writeConstructor(writer, ProxyPlaceOutputter.WRAPPED_CLASS_NAME,
         false);
-    tabContentProxyOutputter.writeMethods(writer);
+    nonLeafTabContentProxyOutputter.writeMethods(writer);
     proxyPlaceOutputter.endWrappedProxy(writer);
   }
 

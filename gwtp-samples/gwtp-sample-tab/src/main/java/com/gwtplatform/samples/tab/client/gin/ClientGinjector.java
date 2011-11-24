@@ -22,8 +22,10 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.samples.tab.client.MyConstants;
 import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
+import com.gwtplatform.samples.tab.client.presenter.GlobalDialogSubTabPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
+import com.gwtplatform.samples.tab.client.presenter.LocalDialogSubTabPresenter;
 import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
 import com.gwtplatform.samples.tab.client.ui.LinkMenu;
 import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
@@ -39,6 +41,8 @@ import com.gwtplatform.samples.tab.client.ui.UiModule;
 @GinModules({ClientModule.class, UiModule.class})
 public interface ClientGinjector extends ClientGinjectorBase {
   AsyncProvider<DialogSamplePresenter> getDialogSamplePresenter();
+  AsyncProvider<LocalDialogSubTabPresenter> getLocalDialogSubTabPresenter();
+  AsyncProvider<GlobalDialogSubTabPresenter> getGlobalDialogSubTabPresenter();
   AsyncProvider<AdminAreaPresenter> getAdminAreaPresenter();
   AsyncProvider<SettingsPresenter> getSettingsPresenter();
   AsyncProvider<HomeInfoPresenter> getHomeInfoPresenter();

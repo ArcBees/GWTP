@@ -16,40 +16,32 @@
 
 package com.gwtplatform.samples.tab.client.view;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.gwtplatform.mvp.client.Tab;
+import com.gwtplatform.mvp.client.TabData;
+import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter.MyView;
+import com.gwtplatform.samples.tab.client.ui.SimpleTabPanel;
 
 /**
  * The view implementation for
- * {@link com.gwtplatform.samples.tab.client.presenter.DialogPresenter}.
+ * {@link com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter}.
  *
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers>
-    implements MyView {
+public class DialogSampleView extends ViewImpl implements MyView {
 
   /**
    */
   public interface Binder extends UiBinder<Widget, DialogSampleView> { }
 
   @UiField
-  Button localDialog;
-
-  @UiField
-  Button globalDialog;
-
-  @UiField
-  Anchor popupLink;
+  SimpleTabPanel tabPanel;
 
   private final Widget widget;
 
@@ -59,22 +51,41 @@ public class DialogSampleView extends ViewWithUiHandlers<DialogSampleUiHandlers>
   }
 
   @Override
+  public Tab addTab(TabData tabData, String historyToken) {
+    return tabPanel.addTab(tabData, historyToken);
+  }
+
+  @Override
   public Widget asWidget() {
     return widget;
   }
 
-  @UiHandler("localDialog")
-  void onDetailsClicked(ClickEvent event) {
-    getUiHandlers().showDetailsDialog();
+  @Override
+  public void removeTab(Tab tab) {
+    tabPanel.removeTab(tab);
   }
 
-  @UiHandler("globalDialog")
-  void onWizardClicked(ClickEvent event) {
-    getUiHandlers().showWizardDialog();
+  @Override
+  public void removeTabs() {
+    tabPanel.removeTabs();
   }
 
-  @UiHandler("popupLink")
-  void onPopupLinkClicked(MouseDownEvent event) {
-    getUiHandlers().showInfoPopup(event.getClientX(), event.getClientY());
+  @Override
+  public void setActiveTab(Tab tab) {
+    tabPanel.setActiveTab(tab);
+  }
+
+  @Override
+  public void changeTab(Tab tab, TabData tabData, String historyToken) {
+    tabPanel.changeTab(tab, tabData, historyToken);
+  }
+
+  @Override
+  public void setInSlot(Object slot, Widget content) {
+    if (slot == DialogSamplePresenter.TYPE_SetTabContent) {
+      tabPanel.setPanelContent(content);
+    } else {
+      super.setInSlot(slot, content);
+    }
   }
 }

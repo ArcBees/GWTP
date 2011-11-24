@@ -39,10 +39,9 @@ public class AsyncCallStartEvent extends GwtEvent<AsyncCallStartHandler> {
    * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
    *
    * @param source The source that fires this event ({@link EventBus}).
-   * @param caught failure encountered while executing a remote procedure call.
    */
   public static void fire(EventBus source) {
-    source.fireEvent(new AsyncCallStartEvent());  
+    source.fireEvent(new AsyncCallStartEvent());
   }
 
   /**

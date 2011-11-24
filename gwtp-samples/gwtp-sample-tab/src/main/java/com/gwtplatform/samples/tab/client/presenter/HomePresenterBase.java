@@ -16,8 +16,8 @@
 
 package com.gwtplatform.samples.tab.client.presenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabContainerPresenter;
 import com.gwtplatform.mvp.client.TabPanel;
@@ -39,13 +39,14 @@ public abstract class HomePresenterBase<V extends View & TabPanel, P extends Pro
     extends TabContainerPresenter<V, P> {
 
   public HomePresenterBase(EventBus eventBus, V view, P proxy,
-      Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
-    super(eventBus, view, proxy, tabContentSlot, requestTabsEventType);
+      Type<RequestTabsHandler> requestTabsEventType) {
+    super(eventBus, view, proxy, TYPE_SetTabContent, requestTabsEventType);
   }
 
   /**
    * Use this in leaf presenters, inside their {@link #revealInParent} method.
    */
   @ContentSlot
-  public static final Type<RevealContentHandler<?>> TYPE_SetTabContent = new Type<RevealContentHandler<?>>();
+  public static final Type<RevealContentHandler<?>> TYPE_SetTabContent =
+      new Type<RevealContentHandler<?>>();
 }

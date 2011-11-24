@@ -54,5 +54,4 @@ public class RoundTabPanel extends BaseTabPanel {
     // TODO Try using assisted injection here (to inject UiBinder in RoundTab)
     return new RoundTab(tabData, gatekeeper);
   }
-
 }

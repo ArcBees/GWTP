@@ -74,6 +74,11 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
   }
 
   @Override
+  public void changeTab(Tab tab, TabData tabData, String historyToken) {
+    tabPanel.changeTab(tab, tabData, historyToken);
+  }
+
+  @Override
   public void setInSlot(Object slot, Widget content) {
     if (slot == HomePresenter.TYPE_SetTabContent) {
       tabPanel.setPanelContent(content);
