@@ -34,7 +34,7 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
  */
 public class GlobalDialogPresenterWidget extends
     PresenterWidget<GlobalDialogPresenterWidget.MyView>
-    implements NavigationHandler  {
+    implements NavigationHandler {
 
   /**
    * @author Philippe beaudoin

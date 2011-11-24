@@ -96,7 +96,6 @@ public class PlaceManagerImpl2Test {
 
     verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
   }
-  
 
   @Test
   public void placeManagerRevealRelativePlaceWithZeroLevelShouldGoToDefaultPlace() {

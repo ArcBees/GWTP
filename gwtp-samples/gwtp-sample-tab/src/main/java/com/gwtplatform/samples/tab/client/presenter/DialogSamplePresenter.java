@@ -16,25 +16,24 @@
 
 package com.gwtplatform.samples.tab.client.presenter;
 
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.PopupView;
-import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.RequestTabsHandler;
+import com.gwtplatform.mvp.client.TabContainerPresenter;
+import com.gwtplatform.mvp.client.TabView;
+import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
+import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
-import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.samples.tab.client.NameTokens;
-import com.gwtplatform.samples.tab.client.view.DialogSampleUiHandlers;
 
 /**
- * A sample {@link Presenter} that allows the user to trigger various types of
- * dialog boxes and popup windows. It appears as a tab within
- * {@link MainPagePresenter}.
+ * A sample {@link com.gwtplatform.mvp.client.Presenter Presenter} that acts as a container for the
+ * dialog sub tab presenters. It appears as a tab within {@link MainPagePresenter}.
  * <p />
  * It demonstrates the option 1 described in {@link TabInfo}.
 
@@ -42,61 +41,46 @@ import com.gwtplatform.samples.tab.client.view.DialogSampleUiHandlers;
  * @author Philippe Beaudoin
  */
 public class DialogSamplePresenter
-    extends Presenter<DialogSamplePresenter.MyView, DialogSamplePresenter.MyProxy>
-    implements DialogSampleUiHandlers {
+    extends TabContainerPresenter<DialogSamplePresenter.MyView, DialogSamplePresenter.MyProxy> {
   /**
    * {@link DialogSamplePresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @NameToken(NameTokens.dialogSamplePage)
   @TabInfo(container = MainPagePresenter.class,
-      label = "Dialog samples",
-      priority = 1) // The second tab in the main page
-  public interface MyProxy extends TabContentProxyPlace<DialogSamplePresenter> {
+      label = "Dialogs",
+      priority = 1, // The second tab in the main page
+      nameToken = NameTokens.globalDialogSamplePage)
+  public interface MyProxy extends NonLeafTabContentProxy<DialogSamplePresenter> {
   }
 
   /**
    * {@link DialogSamplePresenter}'s view.
    */
-  public interface MyView extends View, HasUiHandlers<DialogSampleUiHandlers> {
+  public interface MyView extends TabView {
   }
 
-  private final LocalDialogPresenterWidget detailsDialog;
-  private final GlobalDialogPresenterWidget wizardDialog;
-  private final InfoPopupPresenterWidget infoPopup;
+  /**
+   * This will be the event sent to our "unknown" child presenters, in order for
+   * them to register their tabs.
+   */
+  @RequestTabs
+  public static final Type<RequestTabsHandler> TYPE_RequestTabs = new Type<RequestTabsHandler>();
+
+  /**
+   * Use this in leaf presenters, inside their {@link #revealInParent} method.
+   */
+  @ContentSlot
+  public static final Type<RevealContentHandler<?>> TYPE_SetTabContent =
+      new Type<RevealContentHandler<?>>();
 
   @Inject
   public DialogSamplePresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy, final LocalDialogPresenterWidget dialogBox,
-      final GlobalDialogPresenterWidget wizardDialog,
-      final InfoPopupPresenterWidget infoPopup) {
-    super(eventBus, view, proxy);
-    this.detailsDialog = dialogBox;
-    this.wizardDialog = wizardDialog;
-    this.infoPopup = infoPopup;
-
-    getView().setUiHandlers(this);
+      final MyProxy proxy) {
+    super(eventBus, view, proxy, TYPE_SetTabContent, TYPE_RequestTabs);
   }
 
   @Override
   protected void revealInParent() {
     RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetTabContent, this);
-  }
-
-  @Override
-  public void showDetailsDialog() {
-    addToPopupSlot(detailsDialog);
-  }
-
-  @Override
-  public void showWizardDialog() {
-    RevealRootPopupContentEvent.fire(this, wizardDialog);
-  }
-
-  @Override
-  public void showInfoPopup(int mousePosX, int mousePosY) {
-    addToPopupSlot(infoPopup, false);
-    PopupView popupView = (PopupView) infoPopup.getView();
-    popupView.setPosition(mousePosX + 15, mousePosY);
   }
 }

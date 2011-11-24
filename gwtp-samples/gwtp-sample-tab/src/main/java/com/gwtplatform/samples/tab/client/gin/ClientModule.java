@@ -27,20 +27,24 @@ import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.presenter.AdminAreaPresenter;
 import com.gwtplatform.samples.tab.client.presenter.DialogSamplePresenter;
 import com.gwtplatform.samples.tab.client.presenter.GlobalDialogPresenterWidget;
+import com.gwtplatform.samples.tab.client.presenter.GlobalDialogSubTabPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomePresenter;
 import com.gwtplatform.samples.tab.client.presenter.InfoPopupPresenterWidget;
 import com.gwtplatform.samples.tab.client.presenter.LocalDialogPresenterWidget;
+import com.gwtplatform.samples.tab.client.presenter.LocalDialogSubTabPresenter;
 import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
 import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
 import com.gwtplatform.samples.tab.client.view.AdminAreaView;
 import com.gwtplatform.samples.tab.client.view.DialogSampleView;
+import com.gwtplatform.samples.tab.client.view.GlobalDialogSubTabView;
 import com.gwtplatform.samples.tab.client.view.GlobalDialogView;
 import com.gwtplatform.samples.tab.client.view.HomeInfoView;
 import com.gwtplatform.samples.tab.client.view.HomeNewsView;
 import com.gwtplatform.samples.tab.client.view.HomeView;
 import com.gwtplatform.samples.tab.client.view.InfoPopupView;
+import com.gwtplatform.samples.tab.client.view.LocalDialogSubTabView;
 import com.gwtplatform.samples.tab.client.view.LocalDialogView;
 import com.gwtplatform.samples.tab.client.view.MainPageView;
 import com.gwtplatform.samples.tab.client.view.SettingsView;
@@ -68,6 +72,10 @@ public class ClientModule extends AbstractPresenterModule {
         HomeView.class, HomePresenter.MyProxy.class);
     bindPresenter(DialogSamplePresenter.class, DialogSamplePresenter.MyView.class,
         DialogSampleView.class, DialogSamplePresenter.MyProxy.class);
+    bindPresenter(LocalDialogSubTabPresenter.class, LocalDialogSubTabPresenter.MyView.class,
+        LocalDialogSubTabView.class, LocalDialogSubTabPresenter.MyProxy.class);
+    bindPresenter(GlobalDialogSubTabPresenter.class, GlobalDialogSubTabPresenter.MyView.class,
+        GlobalDialogSubTabView.class, GlobalDialogSubTabPresenter.MyProxy.class);
     bindPresenter(SettingsPresenter.class, SettingsPresenter.MyView.class,
         SettingsView.class, SettingsPresenter.MyProxy.class);
     bindPresenter(AdminAreaPresenter.class, AdminAreaPresenter.MyView.class,

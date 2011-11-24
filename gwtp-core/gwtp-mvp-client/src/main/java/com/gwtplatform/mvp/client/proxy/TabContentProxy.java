@@ -24,16 +24,9 @@ import com.gwtplatform.mvp.client.TabData;
  * The interface for the {@link Proxy} of a {@link Presenter} that can
  * be displayed within a
  * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter}'s main area.
- * If the presenter is associated to a name token use {@link TabContentProxyPlace} instead.
- * Example of use:
- * <pre>
- *{@literal @}ProxyCodeSplit
- *{@literal @}TabInfo(container = MainPagePresenter.class, priority = 0,
- *          label = "Home", nameToken = "homepage")
- * public interface MyProxy extends TabContentProxy&lt;ThisPresenter&gt; { }
- * </pre>
- * In this case, the {@code nameToken} parameter indicates the presenter to reveal
- * when this tab is selected.
+ * You should not use this proxy directly. If the presenter is associated to a name token use
+ * {@link TabContentProxyPlace} instead. If the presenter is not a leaf, so it is not associated
+ * with a name token, use {@link NonLeafTabContentProxy} instead.
  *
  * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  *
@@ -42,24 +35,23 @@ import com.gwtplatform.mvp.client.TabData;
  * @author Philippe Beaudoin
  */
 public interface TabContentProxy<P extends Presenter<?, ?>> extends Proxy<P> {
-
-  /**
-   * Gets the history token that should be accessed when the tab is clicked.
-   * In the fairly typical scenario where a tab directly contains a place,
-   * this should return the name token of that place. In the case of tabs
-   * that contain non-leaf presenters (for example, other tabs), this should
-   * return the name token of a leaf-level presenter.
-   *
-   * @return The history token.
-   */
-  String getTargetHistoryToken();
-
   /**
    * Retrieves the {@link TabData} that should be used to create this tab.
    *
    * @return The tab data.
    */
   TabData getTabData();
+
+  /**
+   * Gets the history token that should be accessed when the tab is clicked.
+   * In the fairly typical scenario where a tab directly contains a place,
+   * this should return the name token of that place. In the case of tabs
+   * that contain non-leaf presenters (for example, other tabs), this should
+   * return the name token of a leaf-level presenter. See {@link NonLeafTabContentProxy}.
+   *
+   * @return The history token.
+   */
+  String getTargetHistoryToken();
 
   /**
    * Retrieves the {@link Tab} object that was created from the
@@ -69,4 +61,12 @@ public interface TabContentProxy<P extends Presenter<?, ?>> extends Proxy<P> {
    */
   Tab getTab();
 
+  /**
+   * Changes the data associated with this tab. This will automatically cause the displayed tab to
+   * change, provided the
+   * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter} containing this
+   * tab defines a {@link com.gwtplatform.mvp.client.annotations.ChangeTab ChangeTab} field and
+   * passes it to the parent constructor.
+   */
+  void changeTab(TabData tabData);
 }

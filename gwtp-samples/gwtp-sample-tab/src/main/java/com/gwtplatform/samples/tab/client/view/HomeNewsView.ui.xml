@@ -18,6 +18,8 @@
     <g:HTMLPanel>
         <h1>News</h1>
 
+        <p>Clicking on the <b>Home</b> tab will always come back to the last tab selected.</p>
+
         <div class="{style.confirmationLink}"><g:Anchor ui:field='confirmationLink' /></div>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.

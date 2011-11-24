@@ -22,6 +22,8 @@ import com.gwtplatform.mvp.client.Presenter;
  * The interface for the {@link Proxy} of a {@link Presenter} that has
  * a name token and can be displayed within a
  * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter}'s main area.
+ * If the presenter is not associated to a name token use {@link NonLeafTabContentProxy} instead.
+ *
  * Example of use:
  * <pre>
  *{@literal @}ProxyCodeSplit

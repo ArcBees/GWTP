@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.rebind;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -58,14 +59,20 @@ public class ProxyOutputterFactory {
 
     ProxyOutputterBase result = null;
     if (isProxyPlace(proxyInterface) && isTabContentProxy(proxyInterface)) {
-      result = new TabContentProxyPlaceOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector,
-          createProxyPlaceOutputter(), createTabContentProxyOutputter());
+      result = new TabContentProxyPlaceOutputter(oracle, logger, classCollection,
+          ginjectorInspector, presenterInspector, createProxyPlaceOutputter(),
+          createNonLeafTabContentProxyOutputter());
     } else if (isProxyPlace(proxyInterface)) {
       result = createProxyPlaceOutputter();
+    } else if (isNonLeafTabContentProxy(proxyInterface)) {
+      result = createNonLeafTabContentProxyOutputter();
     } else if (isTabContentProxy(proxyInterface)) {
-      result = createTabContentProxyOutputter();
+      logger.log(Type.WARN, "TabContentProxy is deprecated. Use NonLeafTabContentProxy or " +
+          "TabContentProxyPlace instead.");
+      result = createNonLeafTabContentProxyOutputter();
     } else {
-      result = new BasicProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
+      result = new BasicProxyOutputter(oracle, logger, classCollection, ginjectorInspector,
+          presenterInspector);
     }
 
     result.init(proxyInterface);
@@ -74,11 +81,13 @@ public class ProxyOutputterFactory {
   }
 
   private ProxyPlaceOutputter createProxyPlaceOutputter() {
-    return new ProxyPlaceOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
+    return new ProxyPlaceOutputter(oracle, logger, classCollection, ginjectorInspector,
+        presenterInspector);
   }
 
-  private TabContentProxyOutputter createTabContentProxyOutputter() {
-    return new TabContentProxyOutputter(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
+  private NonLeafTabContentProxyOutputter createNonLeafTabContentProxyOutputter() {
+    return new NonLeafTabContentProxyOutputter(oracle, logger, classCollection, ginjectorInspector,
+        presenterInspector);
   }
 
   private boolean isProxyPlace(JClassType proxyInterface) {
@@ -87,5 +96,9 @@ public class ProxyOutputterFactory {
 
   private boolean isTabContentProxy(JClassType proxyInterface) {
     return proxyInterface.isAssignableTo(classCollection.tabContentProxyClass);
+  }
+
+  private boolean isNonLeafTabContentProxy(JClassType proxyInterface) {
+    return proxyInterface.isAssignableTo(classCollection.nonLeafTabContentProxyClass);
   }
 }

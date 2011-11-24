@@ -1,16 +1,37 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g="urn:import:com.google.gwt.user.client.ui">
-    <g:HTMLPanel>
-        <h1>Information</h1>
+    <ui:style src='../../defines.css'>
+        .anchor {
+            text-decoration: underline;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .panel {
+            background-color: lightPanelColor;
+            padding: 5px;
+        }
+    </ui:style>
+    <g:HTMLPanel addStyleNames="{style.panel}">
+        <h1>Global Dialog Sample</h1>
 
-        <p>Clicking on the <b>Home</b> tab will always come back to the last tab selected.</p>
+        <p>Clicking on the <b>Dialogs</b> tab will always come back to the <b>Global</b> tab.</p>
+
+        <g:Button ui:field="globalDialog">Launch global dialog</g:Button>
+
+        <p>
+            You can <g:Anchor styleName="{style.anchor}" ui:field="popupLink">click here</g:Anchor>
+            to see a popup panel.
+        </p>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Nulla
-            varius malesuada mollis. Nunc elit justo, pellentesque at condimentum
+            varius malesuada mollis. Nunc elit justo, pellentesque at
+            condimentum
             a, egestas eget ipsum. Sed pulvinar metus non purus sollicitudin
-            porta. Donec est diam, auctor a feugiat ac, elementum in felis. Donec
+            porta. Donec est diam, auctor a feugiat ac, elementum in felis.
+            Donec
             non fringilla nisi. Etiam sollicitudin sapien vitae ipsum porta
             dictum blandit metus consectetur. Duis libero est, consectetur in
             tincidunt eu, ultricies eget dui. Integer felis elit, porttitor at
@@ -18,9 +39,9 @@
             interdum vel vel mauris. In lacinia tellus sed leo cursus sodales.
             Vivamus in purus a nunc fermentum viverra quis non mauris. Nulla nec
             justo tellus. Maecenas leo velit, bibendum at dapibus at, vulputate
-            et turpis. Sed fringilla interdum libero eu facilisis. Quisque lectus
-            odio, aliquam sed vehicula at, euismod et nunc. Praesent at
-            lacinia
+            et turpis. Sed fringilla interdum libero eu facilisis. Quisque
+            lectus
+            odio, aliquam sed vehicula at, euismod et nunc. Praesent at lacinia
             tortor.</p>
 
         <p>Fusce id blandit augue. Nulla sed velit augue. Vestibulum
@@ -38,7 +59,8 @@
             volutpat massa sollicitudin. Donec eleifend risus nec mauris
             pellentesque consectetur. Nulla ornare convallis metus, quis
             condimentum eros cursus ut. Pellentesque venenatis tellus non felis
-            ullamcorper hendrerit. Praesent semper, nunc eu condimentum interdum,
+            ullamcorper hendrerit. Praesent semper, nunc eu condimentum
+            interdum,
             justo nunc semper nulla, nec consequat nisi diam sit amet magna.</p>
 
         <p>Nulla non magna id nunc volutpat tincidunt. Morbi sed velit
@@ -47,7 +69,8 @@
             pellentesque vitae tortor. Etiam eu lacus in felis sodales
             rhoncus.
             Nulla fermentum sodales arcu sed congue. Nunc molestie, augue et
-            congue pharetra, urna dolor bibendum risus, a consectetur lectus diam
+            congue pharetra, urna dolor bibendum risus, a consectetur lectus
+            diam
             ac purus. Nulla convallis mi sit amet elit semper vulputate. Aenean
             congue, velit eu dapibus molestie, lacus dui lacinia dui, id
             malesuada nisl turpis eget magna. Curabitur in gravida diam.
@@ -57,7 +80,8 @@
             et tellus. Quisque ipsum mauris, sollicitudin et facilisis sit amet,
             placerat fringilla erat. Praesent non condimentum erat.
             Vestibulum
-            ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+            ante ipsum primis in faucibus orci luctus et ultrices posuere
+            cubilia
             Curae;</p>
     </g:HTMLPanel>
 </ui:UiBinder> 
