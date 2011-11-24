@@ -46,5 +46,4 @@ public class SimpleTabPanel extends BaseTabPanel {
     // TODO Try using assisted injection here (to inject UiBinder in SimpleTab)
     return new SimpleTab(tabData);
   }
-
 }

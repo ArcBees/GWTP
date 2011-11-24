@@ -22,8 +22,9 @@ import java.lang.annotation.Target;
 /**
  * Use this annotation in classes implementing
  * {@link com.gwtplatform.mvp.client.TabContainerPresenter}.
- * This annotates a static field containing the type of the event fired when the
- * tab container wants to discover its contained tabs.
+ * This annotates a static field containing the type of the event fired when the tab container wants
+ * to discover its contained tabs. <b>Important!</b> The corresponding type must be passed to the
+ * parent's constructor.
  *
  * @author Philippe Beaudoin
  */

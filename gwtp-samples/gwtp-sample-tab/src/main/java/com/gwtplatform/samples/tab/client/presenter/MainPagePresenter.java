@@ -19,9 +19,11 @@ package com.gwtplatform.samples.tab.client.presenter;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ChangeTabHandler;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabContainerPresenter;
 import com.gwtplatform.mvp.client.TabView;
+import com.gwtplatform.mvp.client.annotations.ChangeTab;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -75,6 +77,12 @@ public class MainPagePresenter
   public static final Type<RequestTabsHandler> TYPE_RequestTabs = new Type<RequestTabsHandler>();
 
   /**
+   * Fired by child proxie's when their tab content is changed.
+   */
+  @ChangeTab
+  public static final Type<ChangeTabHandler> TYPE_ChangeTab = new Type<ChangeTabHandler>();
+
+  /**
    * Use this in leaf presenters, inside their {@link #revealInParent} method.
    */
   @ContentSlot
@@ -83,7 +91,7 @@ public class MainPagePresenter
   @Inject
   public MainPagePresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy) {
-    super(eventBus, view, proxy, TYPE_SetTabContent, TYPE_RequestTabs);
+    super(eventBus, view, proxy, TYPE_SetTabContent, TYPE_RequestTabs, TYPE_ChangeTab);
   }
 
   @Override

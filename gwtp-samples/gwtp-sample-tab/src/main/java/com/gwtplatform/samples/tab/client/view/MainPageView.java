@@ -79,6 +79,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
   }
 
   @Override
+  public void changeTab(Tab tab, TabData tabData, String historyToken) {
+    tabPanel.changeTab(tab, tabData, historyToken);
+  }
+
+  @Override
   public void setInSlot(Object slot, Widget content) {
     if (slot == MainPagePresenter.TYPE_SetTabContent) {
       tabPanel.setPanelContent(content);

@@ -36,7 +36,7 @@ public interface TabPanel {
   /**
    * Removes a tab from the widget.
    *
-   * @param tab The tab to remove
+   * @param tab The tab to remove.
    */
   void removeTab(Tab tab);
 
@@ -48,8 +48,16 @@ public interface TabPanel {
   /**
    * Sets the currently active tab.
    *
-   * @param tab The tab to activate
+   * @param tab The tab to activate.
    */
   void setActiveTab(Tab tab);
 
+  /**
+   * Change the data or history token associated with a tab.
+   *
+   * @param tab The tab to change.
+   * @param tabData The data to set for this tab.
+   * @param historyToken The history token to use for this tab.
+   */
+  void changeTab(Tab tab, TabData tabData, String historyToken);
 }

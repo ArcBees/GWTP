@@ -4,16 +4,17 @@
 
     <ui:style>
         .topMessage {
-          background-color: yellow;
-          padding: 5px;
-          font-weight: bold;
+            background-color: yellow;
+            padding: 5px;
+            font-weight: bold;
         }
     </ui:style>
 
     <g:HTMLPanel>
         <div style="float: right; position: relative; left: -50%;">
             <div style="position: relative; left: 50%;">
-                <g:InlineLabel ui:field="topMessage" styleName="{style.topMessage}" visible="false"/>
+                <g:InlineLabel ui:field="topMessage"
+                    styleName="{style.topMessage}" visible="false" />
             </div>
         </div>
         <div style="margin: 10px 3px 0;">

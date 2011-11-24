@@ -87,6 +87,12 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
     currentActiveTab = tab;
   }
 
+  @Override
+  public void changeTab(Tab tab, TabData tabData, String historyToken) {
+    tab.setText(tabData.getLabel());
+    tab.setTargetHistoryToken(historyToken);
+  }
+
   /**
    * Sets the content displayed in the main panel.
    *

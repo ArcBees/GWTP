@@ -26,6 +26,7 @@ import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.gwtplatform.mvp.client.annotations.ChangeTab;
 import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 
@@ -35,7 +36,7 @@ import com.gwtplatform.mvp.client.annotations.TabInfo;
  *
  * @author Philippe Beaudoin
  */
-public class TabContentProxyOutputter extends ProxyOutputterBase {
+public class NonLeafTabContentProxyOutputter extends ProxyOutputterBase {
 
   private JClassType tabContainerClass;
   private String tabContainerClassName;
@@ -44,9 +45,10 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
   private TabInfoMethod tabInfoMethod;
   private String targetNameToken;
   private String nameToken;
-  private String requestTabFieldName;
+  private String requestTabsFieldName;
+  private String changeTabFieldName;
 
-  public TabContentProxyOutputter(TypeOracle oracle,
+  public NonLeafTabContentProxyOutputter(TypeOracle oracle,
       TreeLogger logger,
       ClassCollection classCollection,
       GinjectorInspector ginjectorInspector,
@@ -72,7 +74,7 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
 
   @Override
   String getSuperclassName() {
-    return ClassCollection.tabContentProxyImplClassName;
+    return ClassCollection.nonLeafTabContentProxyImplClassName;
   }
 
   public void setNameToken(String nameToken) {
@@ -96,7 +98,11 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
 
   private void writeRequestTabHandler(SourceWriter writer) {
     writer.println("requestTabsEventType = " + tabContainerClassName + "."
-        + requestTabFieldName + ";");
+        + requestTabsFieldName + ";");
+    if (changeTabFieldName != null) {
+      writer.println("changeTabEventType = " + tabContainerClassName + "."
+          + changeTabFieldName + ";");
+    }
     writer.println("tabData = getTabDataInternal(ginjector);");
     writer.println("targetHistoryToken = \"" + getTargetNameToken() + "\";");
     writer.println("addRequestTabsHandler();");
@@ -122,28 +128,47 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
     }
     ensureNameTokenIsValid();
     findTabContainerClass();
-    findRequestTabFieldName();
+    findRequestTabsFieldName();
+    findChangeTabFieldName();
   }
 
-  private void findRequestTabFieldName() throws UnableToCompleteException {
+  private void findRequestTabsFieldName() throws UnableToCompleteException {
     ClassInspector tabContainerInspector = new ClassInspector(logger, tabContainerClass);
-    List<JField> requestTabFields = new ArrayList<JField>();
+    List<JField> requestTabsFields = new ArrayList<JField>();
     tabContainerInspector.collectStaticAnnotatedFields(classCollection.typeClass,
-        classCollection.requestTabsHandlerClass, RequestTabs.class, requestTabFields);
-    if (requestTabFields.size() == 0) {
+        classCollection.requestTabsHandlerClass, RequestTabs.class, requestTabsFields);
+    if (requestTabsFields.size() == 0) {
       logger.log(TreeLogger.ERROR, "Did not find any static field annotated with @"
           + RequestTabs.class.getSimpleName() + " on the container '"
           + tabContainerClassName + "' while building proxy for presenter '"
           + presenterInspector.getPresenterClassName() + "'.", null);
       throw new UnableToCompleteException();
     }
-    if (requestTabFields.size() > 1) {
+    if (requestTabsFields.size() > 1) {
       logger.log(TreeLogger.ERROR, "Found the annotation @" + RequestTabs.class.getSimpleName()
           + " on more than one field in '" + tabContainerClassName
           + "'. This is not allowed.", null);
       throw new UnableToCompleteException();
     }
-    requestTabFieldName = requestTabFields.get(0).getName();
+    requestTabsFieldName = requestTabsFields.get(0).getName();
+  }
+
+  private void findChangeTabFieldName() throws UnableToCompleteException {
+    ClassInspector tabContainerInspector = new ClassInspector(logger, tabContainerClass);
+    List<JField> changeTabFields = new ArrayList<JField>();
+    tabContainerInspector.collectStaticAnnotatedFields(classCollection.typeClass,
+        classCollection.changeTabHandlerClass, ChangeTab.class, changeTabFields);
+    if (changeTabFields.size() > 1) {
+      logger.log(TreeLogger.ERROR, "Found the annotation @" + ChangeTab.class.getSimpleName()
+          + " on more than one field in '" + tabContainerClassName
+          + "'. This is not allowed.", null);
+      throw new UnableToCompleteException();
+    }
+    if (changeTabFields.size() == 0) {
+      changeTabFieldName = null;
+    } else {
+      changeTabFieldName = changeTabFields.get(0).getName();
+    }
   }
 
   private void findTabContainerClass() throws UnableToCompleteException {
@@ -213,7 +238,7 @@ public class TabContentProxyOutputter extends ProxyOutputterBase {
     }
     if (tabInfoAnnotation == null && tabInfoMethod == null) {
       logger.log(TreeLogger.ERROR, "The proxy for '" + presenterInspector.getPresenterClassName()
-          + "' is a TabContentProxy but is not annotated with @' +"
+          + "' is a NonLeafTabContentProxy but is not annotated with @' +"
           + TabInfo.class.getSimpleName()
           + " and its presenter has no method annotated with it either.", null);
       throw new UnableToCompleteException();

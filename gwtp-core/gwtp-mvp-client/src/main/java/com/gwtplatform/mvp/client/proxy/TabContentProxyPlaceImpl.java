@@ -29,8 +29,7 @@ import com.gwtplatform.mvp.client.TabData;
  * @author Philippe Beaudoin
  */
 public class TabContentProxyPlaceImpl<T extends Presenter<?, ?>> extends
-    ProxyPlaceAbstract<T, TabContentProxy<T>> implements
-    TabContentProxyPlace<T> {
+    ProxyPlaceAbstract<T, TabContentProxy<T>> implements TabContentProxyPlace<T> {
 
   public TabContentProxyPlaceImpl() {
   }
@@ -50,4 +49,8 @@ public class TabContentProxyPlaceImpl<T extends Presenter<?, ?>> extends
     return proxy.getTab();
   }
 
+  @Override
+  public void changeTab(TabData tabData) {
+    proxy.changeTab(tabData);
+  }
 }

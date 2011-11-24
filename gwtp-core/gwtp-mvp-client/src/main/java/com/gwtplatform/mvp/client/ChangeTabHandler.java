@@ -14,17 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client.view;
+package com.gwtplatform.mvp.client;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
- * {@link DialogSampleView}'s {@link UiHandlers}.
- *
  * @author Philippe Beaudoin
  */
-public interface DialogSampleUiHandlers extends UiHandlers {
-  void showDetailsDialog();
-  void showInfoPopup(int mousePosX, int mousePosY);
-  void showWizardDialog();
+public interface ChangeTabHandler extends EventHandler {
+
+  /**
+   * Called whenever a tab contained in a {@link TabContainerPresenter} wants to change its
+   * information.
+   *
+   * @param event The event.
+   */
+  void onChangeTab(ChangeTabEvent event);
+
 }

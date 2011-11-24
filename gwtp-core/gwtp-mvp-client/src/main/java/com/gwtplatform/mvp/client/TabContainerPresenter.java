@@ -16,9 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
-
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
@@ -48,7 +47,8 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends Proxy<?>> extends Presenter<V, Proxy_> {
+public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends Proxy<?>>
+    extends Presenter<V, Proxy_> {
   private final Type<RequestTabsHandler> requestTabsEventType;
   private final Object tabContentSlot;
 
@@ -67,10 +67,41 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
    *          identify all the displayed tabs.
    */
   public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-      Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
+      Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+      Type<ChangeTabHandler> changeTabType) {
     super(eventBus, view, proxy);
     this.tabContentSlot = tabContentSlot;
     this.requestTabsEventType = requestTabsEventType;
+    if (changeTabType != null) {
+      eventBus.addHandler(changeTabType, new ChangeTabHandler() {
+        @Override
+        public void onChangeTab(ChangeTabEvent event) {
+          TabContentProxy<?> tabProxy = event.getTabContentProxy();
+          getView().changeTab(tabProxy.getTab(), tabProxy.getTabData(),
+              tabProxy.getTargetHistoryToken());
+        }
+      });
+    }
+  }
+
+  /**
+   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
+   * instantiating this object using Guice/GIN dependency injection. See
+   * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
+   * This version of the constructor does not allow dynamically modifying the tabs after they were
+   * created.
+   *
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   * @param proxy The {@link Proxy}.
+   * @param tabContentSlot An opaque object identifying the slot in which the
+   *          main content should be displayed.
+   * @param requestTabsEventType The {@link Type} of the object to fire to
+   *          identify all the displayed tabs.
+   */
+  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+      Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
+    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null);
   }
 
   /**
