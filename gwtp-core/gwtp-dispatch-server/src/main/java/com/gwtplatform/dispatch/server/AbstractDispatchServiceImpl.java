@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.server;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.Cookie;
@@ -79,13 +80,19 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
     try {
       return dispatch.execute(action);
     } catch (ActionException e) {
-      logger.warning("Action exception while executing " + action.getClass().getName() + ": " + e.getMessage());
+      if (logger.isLoggable(Level.WARNING)) {
+        logger.log(Level.WARNING, "Action exception while executing " + action.getClass().getName() + ": " + e.getMessage(), e);
+      }
       throw e;
     } catch (ServiceException e) {
-      logger.warning("Service exception while executing " + action.getClass().getName() + ": " + e.getMessage());
+      if (logger.isLoggable(Level.WARNING)) {
+        logger.log(Level.WARNING, "Service exception while executing " + action.getClass().getName() + ": " + e.getMessage(), e);
+      }
       throw e;
     } catch (RuntimeException e) {
-      logger.warning("Unexpected exception while executing " + action.getClass().getName() + ": " + e.getMessage());
+      if (logger.isLoggable(Level.WARNING)) {
+        logger.log(Level.WARNING, "Unexpected exception while executing " + action.getClass().getName() + ": " + e.getMessage(), e);
+      }
       throw new ServiceException(e);
     }
   }
@@ -119,7 +126,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
    *
    * @param cookieSentByRPC The content of the security cookie sent by RPC.
    * @return {@code true} if the cookies match, {@code false} otherwise.
-   * @throws ServiceException If you forgot to bind a {@link SecurityCookie}.
+   * @throws ServiceException If you forgot to bind a {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
    */
   private boolean cookieMatch(String cookieSentByRPC) throws ServiceException {
 
