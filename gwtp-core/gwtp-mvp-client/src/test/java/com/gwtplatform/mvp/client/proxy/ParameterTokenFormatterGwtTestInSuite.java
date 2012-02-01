@@ -30,6 +30,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  * Unit tests for {@link ParameterTokenFormatter}.
  *
  * @author Yannis Gonianakis
+ * @author Philippe Beaudoin
  */
 public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
@@ -44,6 +45,13 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
   protected void gwtSetUp() throws Exception {
     super.gwtSetUp();
     tokenFormatter = new ParameterTokenFormatter();
+  }
+
+  //------------------------------------------
+  // Utility methods
+  //------------------------------------------
+  private String urlEncodeEverything(String input) {
+    return URL.encodeQueryString(URL.decodeQueryString(input));
   }
 
   //------------------------------------------
@@ -223,12 +231,14 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
   public void testToPlaceRequestIsReverseOfToPlaceToken() {
 
     PlaceRequest[] testCases = {
-        new PlaceRequest("token").with("=a=b=", "=c=d=").with("x", "y"),
-        new PlaceRequest("token").with("==a==b==", "==c==d==").with("x", "y"),
-        new PlaceRequest("token").with(";a;b;", ";c;d;").with("x", "y"),
-        new PlaceRequest("token").with(";;a;;b;;", ";;c;;d;;").with("x", "y"),
-        new PlaceRequest("token").with("/a/b/", "/c/d/").with("x", "y"),
-        new PlaceRequest("token").with("//a//b//", "//c//d//").with("x", "y"),
+      new PlaceRequest("token").with("=a=b=", "=c=d=").with("x", "y"),
+      new PlaceRequest("token").with("==a==b==", "==c==d==").with("x", "y"),
+      new PlaceRequest("token").with(";a;b;", ";c;d;").with("x", "y"),
+      new PlaceRequest("token").with(";;a;;b;;", ";;c;;d;;").with("x", "y"),
+      new PlaceRequest("token").with("/a/b/", "/c/d/").with("x", "y"),
+      new PlaceRequest("token").with("//a//b//", "//c//d//").with("x", "y"),
+      new PlaceRequest("token").with("\\a\\b\\", "\\c\\d\\").with("x", "y"),
+      new PlaceRequest("token").with("\\\\a\\\\b\\\\", "\\\\c\\\\d\\\\").with("x", "y"),
     };
 
     for (PlaceRequest placeRequestA : testCases) {
@@ -239,10 +249,36 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
         assertEquals(placeRequestA.getParameter(key, null), placeRequestB.getParameter(key, null));
       }
 
-      assertEquals(placeRequestA.getParameterNames().size(), placeRequestB.getParameterNames().size());
+      assertEquals(placeRequestA.getParameterNames().size(),
+          placeRequestB.getParameterNames().size());
     }
   }
 
+  public void testToPlaceRequestIsReverseOfToPlaceTokenAfterFullUrlEncode() {
+
+    PlaceRequest[] testCases = {
+      new PlaceRequest("token").with("=a=b=", "=c=d=").with("x", "y"),
+      new PlaceRequest("token").with("==a==b==", "==c==d==").with("x", "y"),
+      new PlaceRequest("token").with(";a;b;", ";c;d;").with("x", "y"),
+      new PlaceRequest("token").with(";;a;;b;;", ";;c;;d;;").with("x", "y"),
+      new PlaceRequest("token").with("/a/b/", "/c/d/").with("x", "y"),
+      new PlaceRequest("token").with("//a//b//", "//c//d//").with("x", "y"),
+      new PlaceRequest("token").with("\\a\\b\\", "\\c\\d\\").with("x", "y"),
+      new PlaceRequest("token").with("\\\\a\\\\b\\\\", "\\\\c\\\\d\\\\").with("x", "y"),
+    };
+
+    for (PlaceRequest placeRequestA : testCases) {
+      PlaceRequest placeRequestB = tokenFormatter.toPlaceRequest(
+          urlEncodeEverything(tokenFormatter.toPlaceToken(placeRequestA)));
+
+      for (String key : placeRequestB.getParameterNames()) {
+        assertEquals(placeRequestA.getParameter(key, null), placeRequestB.getParameter(key, null));
+      }
+
+      assertEquals(placeRequestA.getParameterNames().size(),
+          placeRequestB.getParameterNames().size());
+    }
+  }
   //------------------------------------------
   // Tests for toPlaceToken
   //------------------------------------------
@@ -261,7 +297,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
   public void testToPlaceTokenShouldEscapeSeparators() {
     // Given
-    String expectedPlaceToken = "token;%3Bc%3D=%3Dd;%3Ba%3D=%3Db%3B";
+    String expectedPlaceToken = "token;%5C1c%5C2=%5C2d;%5C1a%5C2=%5C2b%5C1";
     PlaceRequest placeRequest = new PlaceRequest("token").with(";a=", "=b;").with(";c=","=d");
 
     // When
@@ -292,6 +328,11 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     params.put("a//b//c", "d");
     params.put("//a", "d");
     params.put("a", "d//");
+    params.put("a", "b\\\\c\\\\d");
+    params.put("a\\\\b", "c\\\\d");
+    params.put("a\\\\b\\\\c", "d");
+    params.put("\\\\a", "d");
+    params.put("a", "d\\\\");
 
     // Given
     ArrayList<String> testPlaceTokens = new ArrayList<String>();
@@ -299,9 +340,9 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     for (String key : params.keySet()) {
       // Escape separators
       String placeToken = "token;"
-          + URL.encodeQueryString(key)
+          + tokenFormatter.customEscape(key)
           + "="
-          + URL.encodeQueryString(params.get(key));
+          + tokenFormatter.customEscape(params.get(key));
 
       testPlaceTokens.add(placeToken);
     }
@@ -397,13 +438,30 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
   public void testToPlaceRequestHierarchyIsReverseOfToHistoryToken() {
     // Given
     List<PlaceRequest> placeRequestHierarchyA = new ArrayList<PlaceRequest>();
-    placeRequestHierarchyA.add(new PlaceRequest("t1").with("a", "b"));
-    placeRequestHierarchyA.add(new PlaceRequest("t2").with("c", "d"));
+    placeRequestHierarchyA.add(new PlaceRequest("t1\\/=;").with("a", "b"));
+    placeRequestHierarchyA.add(new PlaceRequest("t2").with("c\\/=;", "d"));
+    placeRequestHierarchyA.add(new PlaceRequest("t3").with("c", "d\\/=;"));
     placeRequestHierarchyA.add(new PlaceRequest("t3"));
 
     // When
     List<PlaceRequest> placeRequestHierarchyB = tokenFormatter.toPlaceRequestHierarchy(
         tokenFormatter.toHistoryToken(placeRequestHierarchyA));
+
+    // Then
+    assertEquals(placeRequestHierarchyA, placeRequestHierarchyB);
+  }
+
+  public void testToPlaceRequestHierarchyIsReverseOfToHistoryTokenAfterFullUrlEncode() {
+    // Given
+    List<PlaceRequest> placeRequestHierarchyA = new ArrayList<PlaceRequest>();
+    placeRequestHierarchyA.add(new PlaceRequest("t1\\/=;").with("a", "b"));
+    placeRequestHierarchyA.add(new PlaceRequest("t2").with("c\\/=;", "d"));
+    placeRequestHierarchyA.add(new PlaceRequest("t3").with("c", "d\\/=;"));
+    placeRequestHierarchyA.add(new PlaceRequest("t3"));
+
+    // When
+    List<PlaceRequest> placeRequestHierarchyB = tokenFormatter.toPlaceRequestHierarchy(
+        urlEncodeEverything(tokenFormatter.toHistoryToken(placeRequestHierarchyA)));
 
     // Then
     assertEquals(placeRequestHierarchyA, placeRequestHierarchyB);
