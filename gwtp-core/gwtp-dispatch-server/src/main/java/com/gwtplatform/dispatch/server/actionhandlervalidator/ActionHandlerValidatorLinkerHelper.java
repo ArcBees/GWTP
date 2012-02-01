@@ -30,7 +30,7 @@ public class ActionHandlerValidatorLinkerHelper {
   /**
    * @author Peter Simun (simun@seges.sk)
    */
-  public static interface BeanProvider {
+  public interface BeanProvider {
 
     <B> B getInstance(Class<B> clazz);
 
@@ -41,7 +41,7 @@ public class ActionHandlerValidatorLinkerHelper {
      *
      * @param <B>
      */
-    public static interface BindingDescriptor<B> {
+    public interface BindingDescriptor<B> {
 
       String getBeanName();
 

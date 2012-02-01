@@ -137,7 +137,8 @@ public class GenerationHelper implements Closeable {
         fieldElement.asType().toString(),
         fieldElement.getSimpleName()
     );
-  }
+  }
+
   public void generateFieldDeclaration(VariableElement fieldElement, Modifier... modifiers) {
     println("  {0}{1} {2};",
         generateModifierList(modifiers),
