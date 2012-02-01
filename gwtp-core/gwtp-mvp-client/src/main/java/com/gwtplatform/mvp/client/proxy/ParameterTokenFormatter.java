@@ -16,33 +16,41 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.gwt.http.client.URL;
-import com.google.inject.Inject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.google.gwt.http.client.URL;
+import com.google.inject.Inject;
+
 /**
- * Formats tokens from {@code String} values to {@link PlaceRequest} and
- * {@link PlaceRequest} hierarchies and vice-versa. The default implementation
+ * Formats tokens from {@code String} values to {@link PlaceRequest} and {@link PlaceRequest}
+ * hierarchies and vice-versa. The default implementation
  * uses:
  * <ul>
  * <li>{@code '/'} to separate {@link PlaceRequest}s in a hierarchy;</li>
  * <li>{@code ';'} to separate parameters in a {@link PlaceRequest};</li>
- * <li>{@code '='} to separate the parameter name from its value.</li>
+ * <li>{@code '='} to separate the parameter name from its value;</li>
+ * <li>{@code '\'} to escape separators inside parameters names and values in a
+ * {@link PlaceRequest}.</li>
  * </ul>
- * These symbols cannot be used in a name token. If one of the separating symbol
- * is encountered in a parameter or a value it is escaped by being query-string
- * encoded (see {@link URL#encodeQueryString(String)}). As a consequence, a custom
- * {@code ParameterTokenFormatter} must use separators that are modified when
- * passed to {@link URL#encodeQueryString(String)}.
+ * These symbols cannot be used in a name token. If one of the separating symbol is encountered in a
+ * parameter or a value it is escaped using the {@code '\'} character by replacing {@code '/'} with
+ * {@code '\0'}, {@code ';'} with {@code '\1'}, {@code '='} with {@code '\2'} and {@code '\'} with
+ * {@code '\3'}.
  * <p />
- * For example, {@link ParameterTokenFormatter} would parse:
+ * Before decoding a {@link String} URL fragment into a {@link PlaceRequest} or a
+ * {@link PlaceRequest} hierarchy, {@link ParameterTokenFormatter} will first pass the
+ * {@link String} through {@link URL#decodeQueryString(String)} so that if the URL was URL-encoded
+ * by some user agent, like a mail user agent, it is still parsed correctly.
+ * <p />
+ * For example, {@link ParameterTokenFormatter} would parse any of the following:
  *
  * <pre>
- * nameToken1;param1.1=value1.1;param1.2=value1.2/nameToken2/nameToken3;param3.1=value%2f3%3d1
+ * nameToken1%3Bparam1.1%3Dvalue1.1%3Bparam1.2%3Dvalue1.2%2FnameToken2%2FnameToken3%3Bparam3.1%3Dvalue%03%11
+ * nameToken1;param1.1=value1.1;param1.2=value1.2/nameToken2/nameToken3;param3.1=value\03\21
  * </pre>
+ *
  * Into the following hierarchy of {@link PlaceRequest}:
  *
  * <pre>
@@ -52,47 +60,53 @@ import java.util.Set;
  *     "nameToken3", { {"param3.1", "value/3=1"} } }
  * }
  * </pre>
+ *
  * If you want to use different symbols as separator, use the
- * {@link #ParameterTokenFormatter(String, String, String)} constructor.
+ * {@link #ParameterTokenFormatter(String, String, String, String)} constructor.
  *
  * @author Philippe Beaudoin
  * @author Yannis Gonianakis
+ * @author Daniel Colchete
  */
-public final class ParameterTokenFormatter implements TokenFormatter {
+public class ParameterTokenFormatter implements TokenFormatter {
 
   protected static final String DEFAULT_HIERARCHY_SEPARATOR = "/";
   protected static final String DEFAULT_PARAM_SEPARATOR = ";";
   protected static final String DEFAULT_VALUE_SEPARATOR = "=";
+
+  // Escaped versions of the above.
+  protected static final char   ESCAPE_CHARACTER = '\\';
+  protected static final String ESCAPED_HIERARCHY_SEPARATOR = "\\0";
+  protected static final String ESCAPED_PARAM_SEPARATOR = "\\1";
+  protected static final String ESCAPED_VALUE_SEPARATOR = "\\2";
+  protected static final String ESCAPED_ESCAPE_CHAR = "\\3";
 
   private final String hierarchySeparator;
   private final String paramSeparator;
   private final String valueSeparator;
 
   /**
-   * Builds a {@link ParameterTokenFormatter} using the default separators.
+   * Builds a {@link ParameterTokenFormatter} using the default separators and escape character.
    */
   @Inject
   public ParameterTokenFormatter() {
-    this(DEFAULT_HIERARCHY_SEPARATOR, DEFAULT_PARAM_SEPARATOR,
-        DEFAULT_VALUE_SEPARATOR);
+    this(DEFAULT_HIERARCHY_SEPARATOR, DEFAULT_PARAM_SEPARATOR, DEFAULT_VALUE_SEPARATOR);
   }
 
   /**
-   * This constructor makes it possible to use custom separators in your token
-   * formatter. The separators must be 1-letter strings, they must all be
-   * different from one another, and they must be encoded when ran through
-   * {@link URL#encodeQueryString(String)})
+   * This constructor makes it possible to use custom separators in your token formatter. The
+   * separators must be 1-letter strings, they must all be different from one another, and they
+   * must be encoded when ran through {@link URL#encodeQueryString(String)}).
    *
-   * @param hierarchySeparator The symbol used to separate {@link PlaceRequest}
-   *          in a hierarchy. Must be a 1-character string and can't be {@code %}.
-   * @param paramSeparator The symbol used to separate parameters in a
-   *          {@link PlaceRequest}. Must be a 1-character string and can't be {@code %}.
-   * @param valueSeparator The symbol used to separate the parameter name from
-   *          its value. Must be a 1-character string and can't be {@code %}.
+   * @param hierarchySeparator The symbol used to separate {@link PlaceRequest} in a hierarchy.
+   *     Must be a 1-character string and can't be {@code %}.
+   * @param paramSeparator The symbol used to separate parameters in a {@link PlaceRequest}. Must
+   *     be a 1-character string and can't be {@code %}.
+   * @param valueSeparator The symbol used to separate the parameter name from its value. Must be
+   *     a 1-character string and can't be {@code %}.
    */
-  public ParameterTokenFormatter(String hierarchySeparator,
-                                 String paramSeparator, String valueSeparator) {
-
+  public ParameterTokenFormatter(String hierarchySeparator, String paramSeparator,
+      String valueSeparator) {
     assert hierarchySeparator.length() == 1;
     assert paramSeparator.length() == 1;
     assert valueSeparator.length() == 1;
@@ -115,38 +129,64 @@ public final class ParameterTokenFormatter implements TokenFormatter {
   public String toHistoryToken(List<PlaceRequest> placeRequestHierarchy)
       throws TokenFormatException {
     StringBuilder out = new StringBuilder();
+
     for (int i = 0; i < placeRequestHierarchy.size(); ++i) {
       if (i != 0) {
         out.append(hierarchySeparator);
       }
-      out.append(toPlaceToken(placeRequestHierarchy.get(i)));
+      out.append(placeTokenToUnescapedString(placeRequestHierarchy.get(i)));
     }
+
     return out.toString();
   }
 
   @Override
-  public PlaceRequest toPlaceRequest(String placeToken)
+  public PlaceRequest toPlaceRequest(String placeToken) throws TokenFormatException {
+    return unescapedStringToPlaceRequest(URL.decodeQueryString(placeToken));
+  }
+
+  /**
+   * Converts an unescaped string to a place request. To unescape the hash fragment you must run it
+   * through {@link URL#decodeQueryString(String)}.
+   * @param unescapedPlaceToken The unescaped string to convert to a place request.
+   * @return The place request.
+   * @throws TokenFormatException if there is an error converting.
+   */
+  private PlaceRequest unescapedStringToPlaceRequest(String unescapedPlaceToken)
       throws TokenFormatException {
     PlaceRequest req = null;
 
-    int split = placeToken.indexOf(paramSeparator);
+    int split = unescapedPlaceToken.indexOf(paramSeparator);
     if (split == 0) {
       throw new TokenFormatException("Place history token is missing.");
     } else if (split == -1) {
-      req = new PlaceRequest(placeToken);
+      // No parameters.
+      req = new PlaceRequest(customUnescape(unescapedPlaceToken));
     } else if (split >= 0) {
-      req = new PlaceRequest(placeToken.substring(0, split));
-      String paramsChunk = placeToken.substring(split + 1);
+      req = new PlaceRequest(customUnescape(unescapedPlaceToken.substring(0, split)));
+      String paramsChunk = unescapedPlaceToken.substring(split + 1);
       String[] paramTokens = paramsChunk.split(paramSeparator);
       for (String paramToken : paramTokens) {
         if (paramToken.isEmpty()) {
-          throw new TokenFormatException(
-              "Bad parameter: Successive parameters require a single '"
-                  + paramSeparator + "' between them.");
+          throw new TokenFormatException("Bad parameter: Successive parameters require a single '" +
+              paramSeparator + "' between them.");
         }
-        String[] param = splitParamToken(paramToken);
-        String key = unescape(param[0]);
-        String value = unescape(param[1]);
+        String[] param = paramToken.split(valueSeparator);
+        if (param.length == 1) {
+          // If there is only one parameter, then we need an '=' at the last position.
+          if (paramToken.charAt(paramToken.length() - 1) != valueSeparator.charAt(0)) {
+            throw new TokenFormatException("Bad parameter: Need exactly one key and one value.");
+          }
+        } else if (param.length == 2) {
+          // If there are two parameters, then there must not be a '=' at the last position.
+          if (paramToken.charAt(paramToken.length() - 1) == valueSeparator.charAt(0)) {
+            throw new TokenFormatException("Bad parameter: Need exactly one key and one value.");
+          }
+        } else {
+          throw new TokenFormatException("Bad parameter: Need exactly one key and one value.");
+        }
+        String key = customUnescape(param[0]);
+        String value = param.length == 2 ? customUnescape(param[1]) : "";
         req = req.with(key, value);
       }
     }
@@ -154,63 +194,137 @@ public final class ParameterTokenFormatter implements TokenFormatter {
   }
 
   @Override
-  public List<PlaceRequest> toPlaceRequestHierarchy(String historyToken)
-      throws TokenFormatException {
-    int split = historyToken.indexOf(hierarchySeparator);
-    if (split == 0) {
-      throw new TokenFormatException("Place history token is missing.");
+  public List<PlaceRequest> toPlaceRequestHierarchy(String historyToken) throws TokenFormatException {
+    String unescapedHistoryToken = URL.decodeQueryString(historyToken);
+
+    int split = unescapedHistoryToken.indexOf(hierarchySeparator);
+    List<PlaceRequest> result = new ArrayList<PlaceRequest>();
+    if (split == -1) {
+      // History token consists of a single place token.
+      result.add(unescapedStringToPlaceRequest(unescapedHistoryToken));
     } else {
-      List<PlaceRequest> result = new ArrayList<PlaceRequest>();
-      if (split == -1) {
-        result.add(toPlaceRequest(historyToken)); // History token consists of a single place token
-      } else {
-        String[] placeTokens = historyToken.split(hierarchySeparator);
-        for (String placeToken : placeTokens) {
-          if (placeToken.isEmpty()) {
-            throw new TokenFormatException(
-                "Bad parameter: Successive place tokens require a single '"
-                    + hierarchySeparator + "' between them.");
-          }
-          result.add(toPlaceRequest(placeToken));
-        }
+      String[] unescapedPlaceTokens = unescapedHistoryToken.split(hierarchySeparator);
+      if (unescapedPlaceTokens.length == 0) {
+        throw new TokenFormatException("Bad parameter: nothing in the history token.");
       }
-      return result;
+      for (String unescapedPlaceToken : unescapedPlaceTokens) {
+        if (unescapedPlaceToken.isEmpty()) {
+          throw new TokenFormatException("Bad parameter: Successive place tokens require a single '"
+              + hierarchySeparator + "' between them.");
+        }
+        result.add(unescapedStringToPlaceRequest(unescapedPlaceToken));
+      }
     }
+    return result;
   }
 
   @Override
-  public String toPlaceToken(PlaceRequest placeRequest) {
-    StringBuilder out = new StringBuilder();
-    out.append(placeRequest.getNameToken());
+  public String toPlaceToken(PlaceRequest placeRequest) throws TokenFormatException {
+    return placeTokenToUnescapedString(placeRequest);
+  }
 
+  /**
+   * Converts a place token to an unescaped string. If the name token or the parameters contain any
+   * of the separator symbols, they will be escaped with our custom escaping mechanism.
+   * @param placeRequest The place request to convert.
+   * @return The unescaped string for the place token corresponding to that place request.
+   * @throws TokenFormatException if there is an error converting.
+   */
+  private String placeTokenToUnescapedString(PlaceRequest placeRequest)
+      throws TokenFormatException {
+    StringBuilder out = new StringBuilder();
+    out.append(customEscape(placeRequest.getNameToken()));
     Set<String> params = placeRequest.getParameterNames();
     if (params != null) {
       for (String name : params) {
-        out.append(paramSeparator)
-            .append(escape(name)).append(valueSeparator)
-            .append(escape(placeRequest.getParameter(name, null)));
+        out.append(paramSeparator).append(customEscape(name)).append(valueSeparator).append(
+            customEscape(placeRequest.getParameter(name, null)));
       }
     }
+
     return out.toString();
   }
 
-  private String escape(String value) {
-    return URL.encodeQueryString(value);
-  }
+  /**
+   * Use our custom escaping mechanism to escape the provided string. This should be used on the
+   * name token, and the parameter keys and values, before they are attached with the various
+   * separators. The string will also be passed through {@link URL#encodeQueryString}.
+   * Visible for testing.
+   * @param string The string to escape.
+   * @return The escaped string.
+   */
+   String customEscape(String string) {
+    StringBuffer sbuf = new StringBuffer();
+    int len = string.length();
 
-  private String unescape(String value) {
-    return URL.decodeQueryString(value);
-  }
+    char hierarchyChar = hierarchySeparator.charAt(0);
+    char paramChar = paramSeparator.charAt(0);
+    char valueChar = valueSeparator.charAt(0);
 
-  private String[] splitParamToken(String paramToken) {
-    String[] param = paramToken.split(valueSeparator, 2);
-    if (param.length == 1                       // pattern didn't match
-        || param[0].contains(valueSeparator)    // un-escaped separator encountered in the key
-        || param[1].contains(valueSeparator)) { // un-escaped separator encountered in the value
-      throw new TokenFormatException(
-          "Bad parameter: Parameters require a single '" + valueSeparator
-              + "' between the key and value.");
+    for (int i = 0; i < len; i++) {
+      char ch = string.charAt(i);
+      if (ch == ESCAPE_CHARACTER) {
+        sbuf.append(ESCAPED_ESCAPE_CHAR);
+      } else if (ch == hierarchyChar) {
+        sbuf.append(ESCAPED_HIERARCHY_SEPARATOR);
+      } else if (ch == paramChar) {
+        sbuf.append(ESCAPED_PARAM_SEPARATOR);
+      } else if (ch == valueChar) {
+        sbuf.append(ESCAPED_VALUE_SEPARATOR);
+      } else {
+        sbuf.append(ch);
+      }
     }
-    return param;
+
+    return URL.encodeQueryString(sbuf.toString());
+  }
+
+  /**
+   * Use our custom escaping mechanism to unescape the provided string. This should be used on the
+   * name token, and the parameter keys and values, after they have been split using the various
+   * separators. The input string is expected to already be sent through
+   * {@link URL#decodeQueryString}.
+   * @param string The string to unescape, must have passed through {@link URL#decodeQueryString}.
+   * @return The unescaped string.
+   * @throws TokenFormatException if there is an error converting.
+   */
+  private String customUnescape(String string) throws TokenFormatException {
+    StringBuffer sbuf = new StringBuffer();
+    int len = string.length();
+
+    char hierarchyNum = ESCAPED_HIERARCHY_SEPARATOR.charAt(1);
+    char paramNum = ESCAPED_PARAM_SEPARATOR.charAt(1);
+    char valueNum = ESCAPED_VALUE_SEPARATOR.charAt(1);
+    char escapeNum = ESCAPED_ESCAPE_CHAR.charAt(1);
+
+    int i = 0;
+    while (i < len - 1) {
+      char ch = string.charAt(i);
+      if (ch == ESCAPE_CHARACTER) {
+        i++;
+        char ch2 = string.charAt(i);
+        if (ch2 == hierarchyNum) {
+          sbuf.append(hierarchySeparator);
+        } else if (ch2 == paramNum) {
+          sbuf.append(paramSeparator);
+        } else if (ch2 == valueNum) {
+          sbuf.append(valueSeparator);
+        } else if (ch2 == escapeNum) {
+          sbuf.append(ESCAPE_CHARACTER);
+        }
+      } else {
+        sbuf.append(ch);
+      }
+      i++;
+    }
+    if (i == len - 1) {
+      char ch = string.charAt(i);
+      if (ch == ESCAPE_CHARACTER) {
+        throw new TokenFormatException("Last character of string being unescaped cannot be '" +
+            ESCAPE_CHARACTER + "'.");
+      }
+      sbuf.append(ch);
+    }
+    return sbuf.toString();
   }
 }
