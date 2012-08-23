@@ -56,6 +56,10 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
     return securityCookieName;
   }
 
+  public void setSecurityCookieName(String securityCookieName) {
+    this.securityCookieName = securityCookieName;
+  }
+
   @Override
   public void handleRequest(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
