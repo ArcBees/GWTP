@@ -43,4 +43,8 @@ public abstract class ViewImpl implements View {
   @Override
   public void setInSlot(Object slot, Widget content) {
   }
+  
+  protected void initWidget(Widget widget) {
+    this.widget = widget;
+  }
 }
