@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
-  
+
+  <!-- Java-based annotation-driven Spring container definition -->
   <context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>META-INF/spring/applicationContext.xml</param-value>
-	</context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+  </context-param>
 
-	<!-- Creates the Spring Container shared by all Servlets and Filters -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>com.gwtplatform.samples.basicspring.server</param-value>
+  </context-param>
 
-	<servlet>
-		<servlet-name>dispatch</servlet-name>
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-	</servlet>
+  <!-- Creates the Spring Container shared by all Servlets and Filters -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
-	<servlet-mapping>
-		<servlet-name>dispatch</servlet-name>
-		<url-pattern>/dispatch/*</url-pattern>
-	</servlet-mapping>
+  <servlet>
+    <servlet-name>dispatch</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dispatch</servlet-name>
+    <url-pattern>/dispatch/*</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
