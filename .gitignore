@@ -48,7 +48,7 @@ gwtp-samples/gwtp-sample-basic-spring/bin/**
 gwtp-samples/gwtp-sample-hplace/bin/**
 gwtp-samples/gwtp-sample-nested/bin/**
 gwtp-samples/gwtp-sample-tab/bin/**
-**/bin/**
+**bin**
 **/.gwt
 **/manifest.txt
 .idea/**
