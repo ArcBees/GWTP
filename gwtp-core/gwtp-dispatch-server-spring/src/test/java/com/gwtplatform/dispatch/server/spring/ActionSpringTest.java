@@ -26,12 +26,13 @@ import com.gwtplatform.dispatch.server.ActionTestBase;
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.ServiceException;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * @author Peter Simun
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"spring-test-context.xml"})
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = ActionModule.class)
 public class ActionSpringTest extends ActionTestBase {
 
   @Autowired
