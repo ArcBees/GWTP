@@ -185,7 +185,7 @@
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
         <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
-        <maven-gae-plugin.version>0.9.1</maven-gae-plugin.version>
+        <maven-gae-plugin.version>0.9.4</maven-gae-plugin.version>
         <maven-javadoc-plugin.version>2.5</maven-javadoc-plugin.version> <!-- More recent versions fail -->
         <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
@@ -193,7 +193,7 @@
 
         <aopalliance.version>1.0</aopalliance.version>
         <cglib.version>2.2</cglib.version>
-        <gae.version>1.6.1</gae.version>
+        <gae.version>1.7.0</gae.version>
         <gin.version>1.5.0</gin.version>
         <guice.version>3.0</guice.version>
         <gwt.version>2.4.0</gwt.version>
