@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>com.gwtplatform</groupId>
+  <artifactId>gwtp-build-tools</artifactId>
+  <version>0.8-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20120924.025011</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20120924025011</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.8-20120924.025011-1</value>
+        <updated>20120924025011</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.8-20120924.025011-1</value>
+        <updated>20120924025011</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

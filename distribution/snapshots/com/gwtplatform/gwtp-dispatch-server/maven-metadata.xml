@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.gwtplatform</groupId>
+  <artifactId>gwtp-dispatch-server</artifactId>
+  <versioning>
+    <versions>
+      <version>0.8-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20120924025039</lastUpdated>
+  </versioning>
+</metadata>
