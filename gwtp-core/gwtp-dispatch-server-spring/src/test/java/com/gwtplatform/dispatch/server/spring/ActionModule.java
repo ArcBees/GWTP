@@ -16,21 +16,20 @@
 
 package com.gwtplatform.dispatch.server.spring;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-
-import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
+import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.server.spring.configuration.DefaultModule;
 import com.gwtplatform.dispatch.shared.action.TestAction;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author Peter Simun
  */
 @Configuration
-@Import({DefaultModule.class, DispatchModule.class})
+@Import({DefaultModule.class})
 public class ActionModule extends HandlerModule {
 
   public ActionModule() {

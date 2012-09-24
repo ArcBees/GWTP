@@ -16,19 +16,15 @@
 
 package com.gwtplatform.dispatch.server.spring.configuration;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-
 import com.gwtplatform.dispatch.server.AbstractHttpSessionSecurityCookieFilter;
 import com.gwtplatform.dispatch.server.RequestProvider;
-import com.gwtplatform.dispatch.server.spring.DispatchModule;
 import com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter;
 import com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author Peter Simun
  */
-@Import(DispatchModule.class)
 public class DefaultModule {
 
   private/* @Value("cookie") */String securityCookieName;
