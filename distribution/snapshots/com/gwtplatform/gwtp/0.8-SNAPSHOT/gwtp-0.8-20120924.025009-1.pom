@@ -174,14 +174,14 @@
     </modules>
 
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <url>file:./distribution/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <url>file:./distribution/snapshots/</url>
-        </snapshotRepository>
+      <repository>
+        <id>releases</id>
+        <url>file:./distribution/releases/</url>
+      </repository>
+      <snapshotRepository>
+        <id>snapshots</id>
+        <url>file:./distribution/snapshots/</url>
+      </snapshotRepository>
     </distributionManagement>
     
     <properties>
