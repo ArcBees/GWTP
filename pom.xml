@@ -173,6 +173,17 @@
         <module>gwtp-samples</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>file:./distribution/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>file:./distribution/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
     <properties>
         <target.jdk>1.6</target.jdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
