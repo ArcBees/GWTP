@@ -18,7 +18,7 @@ the ones for my GWT & GWTP dojo are here, and you can get the accompanying proje
 https://github.com/ArcBees/gwtp-eclipse-plugin - Eclipse Plugin source
 
 ##Downloads
-[[Using-Gwtp-with-Maven]] 
+[Using Maven with GWTP](Using-Gwtp-with-Maven)
 
 ##Why Use GWTP
 GWT makes programming web apps look deceptively simple. However, building an efficient application that you 
