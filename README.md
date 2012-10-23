@@ -14,11 +14,11 @@ Get it from the download section or Maven central. See the Release Notes and the
 06/15/2011 - The slides for my PrairieDevCon 2011 talk on AppEngine are available here, 
 the ones for my GWT & GWTP dojo are here, and you can get the accompanying project.
 
-##Plugins
-https://github.com/ArcBees/gwtp-eclipse-plugin - Eclipse Plugin source
-
 ##Downloads
 [Using Maven with GWTP](Using-Gwtp-with-Maven)
+
+##Plugins
+[Eclipse Plugin source](https://github.com/ArcBees/gwtp-eclipse-plugin)
 
 ##Why Use GWTP
 GWT makes programming web apps look deceptively simple. However, building an efficient application that you 
