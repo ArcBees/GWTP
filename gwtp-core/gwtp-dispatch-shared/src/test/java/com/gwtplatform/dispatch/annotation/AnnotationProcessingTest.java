@@ -21,11 +21,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.requestfactory.shared.EntityProxy;
+import com.google.web.bindery.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.ValueProxy;
+import com.gwtplatform.dispatch.annotation.proxy.AddressProxy;
+import com.gwtplatform.dispatch.annotation.proxy.EmployeeProxy;
 
 /**
  * This test is being run by ant, but is not run in eclipse.
  *
- * TODO: Make a test suite with a couple of permutations. (With/without Order, Optional, both....)
+ * TODO: Make a test suite with a couple of permutations (with/without Order, Optional, both...).
  *
  * @author Brendan Doherty
  * @author Florian Sauter
@@ -46,7 +51,7 @@ public class AnnotationProcessingTest {
     FooChangedEvent event3 = new FooChangedEvent(foo, false);
     assertFalse(event3.equals(event));
   }
-  
+
   @org.junit.Test
   public void shouldGenerateEventWithBuilder() {
     Foo foo = new Foo("bar");
@@ -61,14 +66,14 @@ public class AnnotationProcessingTest {
     FooChangedEvent event3 = new FooChangedEvent.Builder(foo, false).build();
     assertFalse(event3.equals(event));
   }
-  
+
   @org.junit.Test
   public void shouldGenerateEventWithOptionalFieldsAndBuilder() throws SecurityException, NoSuchMethodException {
     Foo foo = new Foo("bar");
     FooChangedEvent event = new FooChangedEvent.Builder(foo, true).additionalMessage("message").priority(1.0).build();
     assertEquals("message", event.getAdditionalMessage());
     assertTrue(1.0 == event.getPriority());
-    
+
     Class<?> eventClass = FooChangedEvent.class;
     eventClass.getMethod("fire", HasHandlers.class);
     eventClass.getMethod("fire", HasHandlers.class, FooChangedEvent.class);
@@ -79,7 +84,7 @@ public class AnnotationProcessingTest {
     RetrieveFooAction action = new RetrieveFooAction(16);
     assertEquals(16, action.getFooId());
     assertTrue(action.isSecured());
-    assertEquals("dispatch/RetrieveFoo",action.getServiceName());
+    assertEquals("dispatch/RetrieveFoo", action.getServiceName());
 
     RetrieveFooAction action2 = new RetrieveFooAction(16);
     assertEquals(action, action2);
@@ -142,6 +147,42 @@ public class AnnotationProcessingTest {
     assertEquals("bob", dto.getFirstName());
     assertEquals("andrews", dto.getLastName());
     assertEquals("peter", dto.getSecondName());
+  }
+
+  @org.junit.Test
+  public void shouldGenerateEntityProxy() throws SecurityException, NoSuchMethodException {
+    Class<?> proxyClass = EmployeeProxy.class;
+    ProxyFor proxyAnnotation = EmployeeProxy.class.getAnnotation(ProxyFor.class);
+
+    proxyClass.getMethod("getDisplayName");
+    proxyClass.getMethod("getSupervisorKey");
+    proxyClass.getMethod("getId");
+    proxyClass.getMethod("getSupervisor");
+    proxyClass.getMethod("setSupervisorKey", Long.class);
+    proxyClass.getMethod("setSupervisor", EmployeeProxy.class);
+    proxyClass.getMethod("setVersion", Integer.class);
+    proxyClass.getMethod("stableId");
+
+    boolean filteredFields = false;
+
+    try {
+      proxyClass.getMethod("setId", Long.class);
+      proxyClass.getMethod("getVersion", Long.class);
+    } catch (NoSuchMethodException e) {
+      filteredFields = true;
+    }
+
+    assertTrue(EntityProxy.class.isAssignableFrom(EmployeeProxy.class));
+    assertTrue(filteredFields);
+    assertEquals(proxyAnnotation.value(), Employee.class);
+    assertEquals(proxyAnnotation.locator(), EmployeeLocator.class);
+  }
+
+  @org.junit.Test
+  public void shouldGenerateValueProxy() throws SecurityException, NoSuchMethodException {
+    ProxyFor proxyAnnotation = AddressProxy.class.getAnnotation(ProxyFor.class);
+    assertTrue(ValueProxy.class.isAssignableFrom(AddressProxy.class));
+    assertEquals(proxyAnnotation.value(), Address.class);
   }
 
 }
