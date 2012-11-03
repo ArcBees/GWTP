@@ -19,18 +19,21 @@ package com.gwtplatform.dispatch.annotation;
 /**
  * For testing purposes only.
  *
- * @author Brendan Doherty
+ * @author Florian Sauter
  */
-@GenEvent
-public class FooChanged {
-  @Order(1)
-  Foo foo;
-  @Order(2)
-  boolean originator;
-  @Optional
-  @Order(3)
-  String additionalMessage;
-  @Optional
-  @Order(4)
-  double priority;
+@GenProxy
+public class Person {
+
+  int id;
+
+  Long age;
+
+  float weight;
+
+  @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.AddressProxy")
+  Address addressDetail;
+
+  @UseProxy(DetailProxy.class)
+  Detail detail;
+
 }

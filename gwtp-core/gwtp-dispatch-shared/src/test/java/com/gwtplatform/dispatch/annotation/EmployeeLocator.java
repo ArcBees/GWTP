@@ -16,21 +16,43 @@
 
 package com.gwtplatform.dispatch.annotation;
 
+import com.google.web.bindery.requestfactory.shared.Locator;
+
 /**
  * For testing purposes only.
  *
- * @author Brendan Doherty
+ * @author Florian Sauter
  */
-@GenEvent
-public class FooChanged {
-  @Order(1)
-  Foo foo;
-  @Order(2)
-  boolean originator;
-  @Optional
-  @Order(3)
-  String additionalMessage;
-  @Optional
-  @Order(4)
-  double priority;
+public class EmployeeLocator extends Locator<Employee, Long> {
+
+  @Override
+  public Employee create(Class<? extends Employee> clazz) {
+    return new Employee();
+  }
+
+  @Override
+  public Employee find(Class<? extends Employee> clazz, Long id) {
+    return null;
+  }
+
+  @Override
+  public Class<Employee> getDomainType() {
+    return null;
+  }
+
+  @Override
+  public Long getId(Employee domainObject) {
+    return null;
+  }
+
+  @Override
+  public Class<Long> getIdType() {
+    return null;
+  }
+
+  @Override
+  public Object getVersion(Employee domainObject) {
+    return null;
+  }
+
 }
