@@ -76,6 +76,10 @@ import com.google.web.bindery.requestfactory.shared.Locator;
  * </code>
  * </pre>
  * <p>
+ * <b>Using Value Proxies:</b> Set {@link #isEmbeddedType()} to true.
+ * </p>
+ * <br/>
+ * <p>
  * <b>Note:</b> If your package name contains ".server", the processor
  * automatically replaces this with ".shared". To avoid this behaviour, set the
  * target package manual using {@link GenProxy#targetPackage()}.
