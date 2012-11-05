@@ -28,7 +28,6 @@ package com.gwtplatform.dispatch.annotation;
     locator = EmployeeLocator.class
 )
 public class Employee {
-
   private String displayName;
   private Long supervisorKey;
   private Long id;
