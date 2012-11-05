@@ -48,7 +48,6 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 @SupportedSourceVersion(RELEASE_6)
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenProxy")
 public class GenProxyProcessor extends GenProcessor {
-
   @Override
   public void process(final Element proxyElement) {
     GenProxy genProxy = proxyElement.getAnnotation(GenProxy.class);
@@ -74,7 +73,7 @@ public class GenProxyProcessor extends GenProcessor {
       String preparedProxyElementPackage = proxyElementPackage;
 
       if (targetPackage != null && !targetPackage.isEmpty()) {
-        // Prepare user defined proxy target package.
+        // Prepare user defined proxy target package and do not replace server with shared.
         preparedProxyElementClassName = targetPackage + "." + proxyElementSimpleName;
         preparedProxyElementPackage = targetPackage;
       } else {
@@ -95,68 +94,22 @@ public class GenProxyProcessor extends GenProcessor {
 
       writer.generatePackageDeclaration(preparedProxyElementPackage);
 
-      String proxyForClassSimpleName = "ProxyFor";
-
       if (isEmbeddedType) {
-        // Process ValueProxy.
-        writer.generateImports(
-            "com.google.web.bindery.requestfactory.shared." + proxyForClassSimpleName,
-            "com.google.web.bindery.requestfactory.shared.ValueProxy"
-        );
-        writer.println();
-        writer.generateAnnotation(proxyForClassSimpleName, proxyElementClassName + ".class");
-        writer.generateInterfaceHeader(proxySimpleName, reflection.getClassRepresenter().getModifiers(),
-            "ValueProxy"
-        );
+        generateValueProxyHeader(writer, reflection, proxyElementClassName, proxySimpleName);
       } else {
-          // Process EntityProxy.
-          writer.generateImports(
-              "com.google.web.bindery.requestfactory.shared.ProxyFor",
-              "com.google.web.bindery.requestfactory.shared.EntityProxy",
-              "com.google.web.bindery.requestfactory.shared.EntityProxyId"
-          );
-          writer.println();
-          // Check for locator.
-          if (locatorType == null || Locator.class.getName().equals(locatorType.toString())) {
-            writer.generateAnnotation(proxyForClassSimpleName, proxyElementClassName + ".class");
-          } else {
-            writer.println("@{0}(value = {1}.class, locator = {2}.class)", proxyForClassSimpleName, proxyElementClassName, locatorType.toString());
-          }
-          writer.generateInterfaceHeader(proxySimpleName, reflection.getClassRepresenter().getModifiers(),
-              "EntityProxy"
-          );
-          writer.println();
-          writer.generateEmptyMethodBody("stableId", "EntityProxyId<" + proxySimpleName + ">");
+        generateEntityProxyHeader(writer, reflection, proxyElementClassName, proxySimpleName, locatorType);
       }
 
       writer.println();
 
       // Generate getters.
       for (VariableElement getterField : getterFields) {
-        // Check for embedded types.
-        UseProxy useProxyAnnotation = getterField.getAnnotation(UseProxy.class);
-        UseProxyName useProxyNameAnnotation = getterField.getAnnotation(UseProxyName.class);
-        if (useProxyAnnotation != null) {
-          writer.generateGetter(getterField.getSimpleName().toString(), getProxyTypeMirror(useProxyAnnotation).toString());
-        } else if (useProxyAnnotation == null && useProxyNameAnnotation != null) {
-          writer.generateGetter(getterField.getSimpleName().toString(), useProxyNameAnnotation.value());
-        } else {
-          writer.generateGetter(getterField);
-        }
+        generateGetter(writer, getterField);
       }
 
       // Generate setters.
       for (VariableElement setterField : setterFields) {
-        // Check for embedded types.
-        UseProxy useProxyAnnotation = setterField.getAnnotation(UseProxy.class);
-        UseProxyName useProxyNameAnnotation = setterField.getAnnotation(UseProxyName.class);
-        if (useProxyAnnotation != null) {
-          writer.generateSetter(setterField.getSimpleName().toString(), getProxyTypeMirror(useProxyAnnotation).toString());
-        } else if (useProxyAnnotation == null && useProxyNameAnnotation != null) {
-          writer.generateSetter(setterField.getSimpleName().toString(), useProxyNameAnnotation.value());
-        } else {
-          writer.generateSetter(setterField);
-        }
+        generateSetter(writer, setterField);
       }
 
       writer.println();
@@ -167,6 +120,66 @@ public class GenProxyProcessor extends GenProcessor {
       if (writer != null) {
         writer.close();
       }
+    }
+  }
+
+  protected void generateEntityProxyHeader(InterfaceGenerationHelper writer, ReflectionHelper reflection, String proxyElementClassName, String proxySimpleName, TypeMirror locatorType) {
+    writer.generateImports(
+        "com.google.web.bindery.requestfactory.shared.ProxyFor",
+        "com.google.web.bindery.requestfactory.shared.EntityProxy",
+        "com.google.web.bindery.requestfactory.shared.EntityProxyId"
+    );
+    writer.println();
+    // Check for locator.
+    if (locatorType == null || Locator.class.getName().equals(locatorType.toString())) {
+      writer.generateAnnotation("ProxyFor", proxyElementClassName + ".class");
+    } else {
+    writer.println("@{0}(value = {1}.class, locator = {2}.class)",
+        "ProxyFor", proxyElementClassName,
+        locatorType.toString());
+    }
+    writer.generateInterfaceHeader(proxySimpleName, reflection.getClassRepresenter().getModifiers(),
+        "EntityProxy"
+    );
+    writer.println();
+    writer.generateEmptyMethodBody("stableId", "EntityProxyId<" + proxySimpleName + ">");
+  }
+
+  protected void generateValueProxyHeader(InterfaceGenerationHelper writer, ReflectionHelper reflection, String proxyElementClassName, String proxySimpleName) {
+    writer.generateImports(
+        "com.google.web.bindery.requestfactory.shared.ProxyFor",
+        "com.google.web.bindery.requestfactory.shared.ValueProxy"
+    );
+    writer.println();
+    writer.generateAnnotation("ProxyFor", proxyElementClassName + ".class");
+    writer.generateInterfaceHeader(proxySimpleName, reflection.getClassRepresenter().getModifiers(),
+        "ValueProxy"
+    );
+  }
+
+  protected void generateGetter(InterfaceGenerationHelper writer, VariableElement getterField) {
+    // Check for embedded types.
+    UseProxy useProxyAnnotation = getterField.getAnnotation(UseProxy.class);
+    UseProxyName useProxyNameAnnotation = getterField.getAnnotation(UseProxyName.class);
+    if (useProxyAnnotation != null) {
+      writer.generateGetter(getterField.getSimpleName().toString(), getProxyTypeMirror(useProxyAnnotation).toString());
+    } else if (useProxyAnnotation == null && useProxyNameAnnotation != null) {
+      writer.generateGetter(getterField.getSimpleName().toString(), useProxyNameAnnotation.value());
+    } else {
+      writer.generateGetter(getterField);
+    }
+  }
+
+  protected void generateSetter(InterfaceGenerationHelper writer, VariableElement setterField) {
+    // Check for embedded types.
+    UseProxy useProxyAnnotation = setterField.getAnnotation(UseProxy.class);
+    UseProxyName useProxyNameAnnotation = setterField.getAnnotation(UseProxyName.class);
+    if (useProxyAnnotation != null) {
+      writer.generateSetter(setterField.getSimpleName().toString(), getProxyTypeMirror(useProxyAnnotation).toString());
+    } else if (useProxyAnnotation == null && useProxyNameAnnotation != null) {
+      writer.generateSetter(setterField.getSimpleName().toString(), useProxyNameAnnotation.value());
+    } else {
+      writer.generateSetter(setterField);
     }
   }
 

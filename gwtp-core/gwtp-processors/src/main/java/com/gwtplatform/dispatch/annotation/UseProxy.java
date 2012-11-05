@@ -38,10 +38,8 @@ import com.google.web.bindery.requestfactory.shared.BaseProxy;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface UseProxy {
-
   /**
    * The proxy that the domain type field is mapped to.
    */
   Class<? extends BaseProxy> value();
-
 }

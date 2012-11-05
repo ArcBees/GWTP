@@ -36,10 +36,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface UseProxyName {
-
   /**
    * The name of the proxy that the domain type field is mapped to.
    */
   String value();
-
 }
