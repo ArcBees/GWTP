@@ -23,7 +23,6 @@ package com.gwtplatform.dispatch.annotation;
  */
 @GenProxy
 public class Person {
-
   int id;
 
   Long age;
@@ -35,5 +34,4 @@ public class Person {
 
   @UseProxy(DetailProxy.class)
   Detail detail;
-
 }

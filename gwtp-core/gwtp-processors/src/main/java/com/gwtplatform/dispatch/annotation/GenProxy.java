@@ -64,7 +64,6 @@ import com.google.web.bindery.requestfactory.shared.Locator;
  * <code>
  * {@literal @}ProxyFor(com.gwtplatform.dispatch.annotation.Person.class)
  * public interface PersonProxy extends EntityProxy {
- *
  *   EntityProxyId{@literal <}PersonProxy{@literal >} stableId();
  *
  *   com.gwtplatform.dispatch.annotation.AddressProxy getAddress();
@@ -91,7 +90,6 @@ import com.google.web.bindery.requestfactory.shared.Locator;
 @Retention(RetentionPolicy.SOURCE)
 @Inherited
 public @interface GenProxy {
-
   /**
    * Defines the output package.
    *

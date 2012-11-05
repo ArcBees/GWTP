@@ -24,7 +24,6 @@ import com.google.web.bindery.requestfactory.shared.Locator;
  * @author Florian Sauter
  */
 public class EmployeeLocator extends Locator<Employee, Long> {
-
   @Override
   public Employee create(Class<? extends Employee> clazz) {
     return new Employee();
@@ -54,5 +53,4 @@ public class EmployeeLocator extends Locator<Employee, Long> {
   public Object getVersion(Employee domainObject) {
     return null;
   }
-
 }
