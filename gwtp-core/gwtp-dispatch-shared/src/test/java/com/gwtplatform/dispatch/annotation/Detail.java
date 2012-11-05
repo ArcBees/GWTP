@@ -22,5 +22,4 @@ package com.gwtplatform.dispatch.annotation;
  * @author Florian Sauter
  */
 public class Detail {
-
 }

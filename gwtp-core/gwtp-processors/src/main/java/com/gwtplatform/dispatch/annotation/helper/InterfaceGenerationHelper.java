@@ -29,7 +29,6 @@ import javax.lang.model.element.VariableElement;
  * @author Florian Sauter
  */
 public class InterfaceGenerationHelper extends GenerationHelper {
-
   public InterfaceGenerationHelper(Writer sourceWriter) {
     super(sourceWriter);
   }

@@ -24,6 +24,6 @@ import com.google.web.bindery.requestfactory.shared.ValueProxy;
  *
  * @author Florian Sauter
  */
-@ProxyFor(com.gwtplatform.dispatch.annotation.Detail.class)
+@ProxyFor(Detail.class)
 public interface DetailProxy extends ValueProxy {
 }

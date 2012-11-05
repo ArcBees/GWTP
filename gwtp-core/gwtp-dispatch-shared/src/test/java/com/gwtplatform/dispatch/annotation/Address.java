@@ -26,7 +26,5 @@ package com.gwtplatform.dispatch.annotation;
     isEmbeddedType = true
 )
 public class Address {
-
   public String street;
-
 }
