@@ -140,7 +140,6 @@ public class GinFieldManager extends FieldManager {
     this.logger = logger;
     this.useLazyWidgetBuilders = useLazyWidgetBuilders;
     
-    // MODIFICATION
     this.ginjectorClass = ginjectorClass;
     for (JMethod method : ginjectorClass.getMethods()) {
       JClassType returnType = method.getReturnType().isClassOrInterface();
@@ -148,7 +147,6 @@ public class GinFieldManager extends FieldManager {
         ginjectorMethods.put(returnType, method.getName());
       }
     }
-    System.out.println("");
   }
   // END MODIFICATION
 
