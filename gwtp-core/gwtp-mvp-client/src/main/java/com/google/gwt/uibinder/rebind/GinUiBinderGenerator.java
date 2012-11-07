@@ -174,7 +174,7 @@ public class GinUiBinderGenerator extends Generator {
   private void generateOnce(JClassType interfaceType, String implName,
       PrintWriter binderPrintWriter, TreeLogger treeLogger, TypeOracle oracle,
       ResourceOracle resourceOracle, PropertyOracle propertyOracle,
-      PrintWriterManager writerManager,  DesignTimeUtils designTime)
+      PrintWriterManager writerManager, DesignTimeUtils designTime)
   throws UnableToCompleteException {
 
     MortalLogger logger = new MortalLogger(treeLogger);
