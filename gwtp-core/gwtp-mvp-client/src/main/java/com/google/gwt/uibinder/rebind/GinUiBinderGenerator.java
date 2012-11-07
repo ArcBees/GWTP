@@ -290,4 +290,3 @@ public class GinUiBinderGenerator extends Generator {
  }
  // END MODIFICATION
 }
-
