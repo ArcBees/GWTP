@@ -202,11 +202,11 @@ public class GinFieldManager extends FieldManager {
     FieldWriter field;
     if (ginjectorMethod != null) {
       // If the ginjector lets us create that fieldType then we use gin to instantiate it
-      field = new FieldWriterOfInjectedType(fieldWriterType, fieldType, fieldName, ginjectorClass,
+      field = new FieldWriterOfInjectedType(this, fieldWriterType, fieldType, fieldName, ginjectorClass,
           ginjectorMethod, logger);
     } else {
       // Otherwise
-      field = new FieldWriterOfExistingType(fieldWriterType, fieldType, fieldName, logger);
+      field = new FieldWriterOfExistingType(this, fieldWriterType, fieldType, fieldName, logger);
     }
 
     return registerField(fieldName, field);
@@ -241,7 +241,7 @@ public class GinFieldManager extends FieldManager {
    */
   public FieldWriter registerFieldForGeneratedCssResource(
       ImplicitCssResource cssResource) throws UnableToCompleteException {
-    FieldWriter field = new FieldWriterOfGeneratedCssResource(
+    FieldWriter field = new FieldWriterOfGeneratedCssResource(this, 
         types.findType(String.class.getCanonicalName()), cssResource, logger);
     return registerField(cssResource.getName(), field);
   }
@@ -262,7 +262,7 @@ public class GinFieldManager extends FieldManager {
     if (ownerField == null) {
       throw new RuntimeException("Cannot register a null owner field for LazyDomElement.");
     }
-    FieldWriter field = new FieldWriterOfLazyDomElement(
+    FieldWriter field = new FieldWriterOfLazyDomElement(this, 
         templateFieldType, ownerField, logger);
     return registerField(ownerField.getName(), field);
   }
@@ -290,7 +290,7 @@ public class GinFieldManager extends FieldManager {
   public FieldWriter registerFieldOfGeneratedType(JClassType assignableType,
       String typePackage, String typeName, String fieldName)
       throws UnableToCompleteException {
-    FieldWriter field = new FieldWriterOfGeneratedType(assignableType,
+    FieldWriter field = new FieldWriterOfGeneratedType(this, assignableType,
         typePackage, typeName, fieldName, logger);
     return registerField(fieldName, field);
   }
@@ -298,16 +298,17 @@ public class GinFieldManager extends FieldManager {
   /**
    * Called to register a <code>{field.reference}</code> encountered during
    * parsing, to be validated against the type oracle once parsing is complete.
+   * @param source 
    */
-  public void registerFieldReference(String fieldReferenceString, JType type) {
+  public void registerFieldReference(XMLElement source, String fieldReferenceString, JType type) {
     FieldReference fieldReference = fieldReferences.get(fieldReferenceString);
 
     if (fieldReference == null) {
-      fieldReference = new FieldReference(fieldReferenceString, this, types);
+      fieldReference = new FieldReference(fieldReferenceString, null, this, types);
       fieldReferences.put(fieldReferenceString, fieldReference);
     }
 
-    fieldReference.addLeftHandType(type);
+    fieldReference.addLeftHandType(source, type);
   }
 
   /**
@@ -336,8 +337,8 @@ public class GinFieldManager extends FieldManager {
 
     for (Map.Entry<String, FieldReference> entry : fieldReferences.entrySet()) {
       FieldReference ref = entry.getValue();
-      MonitoredLogger monitoredLogger = new MonitoredLogger(
-          logger.getTreeLogger().branch(TreeLogger.TRACE, "validating " + ref));
+      MortalLogger mortalLogger = new MortalLogger(logger.getTreeLogger().branch(TreeLogger.TRACE, "validating " + ref));
+      MonitoredLogger monitoredLogger = new MonitoredLogger(mortalLogger);
       ref.validate(monitoredLogger);
       failed |= monitoredLogger.hasErrors();
     }
