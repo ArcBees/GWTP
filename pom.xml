@@ -201,7 +201,7 @@
         <javax.inject.version>1</javax.inject.version>
         <jukito.version>1.1</jukito.version>
         <junit.version>4.9</junit.version>
-        <mockito.version>1.8.5</mockito.version>
+        <mockito.version>1.9.0</mockito.version>
         <objectify.version>2.2.3</objectify.version>
         <persistence-api.version>1.0</persistence-api.version>
         <servlet-api.version>2.5</servlet-api.version>
