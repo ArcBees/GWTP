@@ -142,14 +142,14 @@
     </contributors>
 
     <scm>
-        <connection>scm:hg:http://gwt-platform.googlecode.com/hg/</connection>
-        <developerConnection>scm:hg:https://gwt-platform.googlecode.com/hg/</developerConnection>
-        <url>http://code.google.com/p/gwt-platform/source/browse/</url>
+        <connection>scm:git:https://github.com/ArcBees/GWTP.git</connection>
+        <developerConnection>scm:git:https://github.com/ArcBees/GWTP.git</developerConnection>
+        <url>https://github.com/ArcBees/GWTP</url>
     </scm>
 
     <issueManagement>
-        <system>Google Code</system>
-        <url>http://code.google.com/p/gwt-platform/issues</url>
+        <url>https://github.com/ArcBees/GWTP/issues</url>
+        <system>Github Issues</system>
     </issueManagement>
 
     <ciManagement>
@@ -179,7 +179,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-        <gwt-maven-plugin.version>2.4.0</gwt-maven-plugin.version>
+        <gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
         <lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
         <maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -193,10 +193,10 @@
 
         <aopalliance.version>1.0</aopalliance.version>
         <cglib.version>2.2</cglib.version>
-        <gae.version>1.7.0</gae.version>
-        <gin.version>1.5.0</gin.version>
+        <gae.version>1.7.2</gae.version>
+        <gin.version>2.0.0</gin.version>
         <guice.version>3.0</guice.version>
-        <gwt.version>2.4.0</gwt.version>
+        <gwt.version>2.5.0</gwt.version>
         <htmlunit.version>2.8</htmlunit.version>
         <javax.inject.version>1</javax.inject.version>
         <jukito.version>1.1</jukito.version>
