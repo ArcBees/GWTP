@@ -182,8 +182,7 @@ public class GinUiBinderGenerator extends Generator {
     MessagesWriter messages = new MessagesWriter(oracle, BINDER_URI, logger,
         templatePath, interfaceType.getPackage().getName(), implName);
 
-    boolean useLazyWidgetBuilders =
-        useLazyWidgetBuilders(logger, propertyOracle) && !designTime.isDesignTime();
+    boolean useLazyWidgetBuilders = useLazyWidgetBuilders(logger, propertyOracle) && !designTime.isDesignTime();
     
     FieldManager fieldManager = getFieldManager(oracle, logger, propertyOracle, useLazyWidgetBuilders); // MODIFICATION
 
@@ -258,7 +257,7 @@ public class GinUiBinderGenerator extends Generator {
     return rtn;
   }
   
-//BEGIN MODIFICATION
+ //BEGIN MODIFICATION
  private FieldManager getFieldManager(TypeOracle oracle, MortalLogger logger,
    PropertyOracle propertyOracle, boolean useLazyWidgetBuilder)
      throws UnableToCompleteException {
@@ -266,15 +265,12 @@ public class GinUiBinderGenerator extends Generator {
    // Find ginjector
    FieldManager fieldManager;
    try {
-     String ginjectorClassName = propertyOracle.getConfigurationProperty(
-         "gin.ginjector").getValues().get(0);
+     String ginjectorClassName = propertyOracle.getConfigurationProperty("gin.ginjector").getValues().get(0);
 
      JClassType ginjectorClass = oracle.findType(ginjectorClassName);
-     if (ginjectorClass == null
-         || !ginjectorClass.isAssignableTo(oracle.findType(Ginjector.class.getCanonicalName()))) {
-       logger.die(
-           "The configuration property 'gin.ginjector' is '%s' "
-               + " which doesn't identify a type inheriting from 'Ginjector'.", ginjectorClassName );
+     if (ginjectorClass == null || !ginjectorClass.isAssignableTo(oracle.findType(Ginjector.class.getCanonicalName()))) {
+       logger.die("The configuration property 'gin.ginjector' is '%s' "+ 
+         " which doesn't identify a type inheriting from 'Ginjector'.", ginjectorClassName );
      }
      fieldManager = new GinFieldManager(oracle, logger, ginjectorClass, useLazyWidgetBuilder);
 

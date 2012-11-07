@@ -148,6 +148,7 @@ public class GinFieldManager extends FieldManager {
         ginjectorMethods.put(returnType, method.getName());
       }
     }
+    System.out.println("");
   }
   // END MODIFICATION
 
