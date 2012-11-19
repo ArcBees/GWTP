@@ -3,6 +3,10 @@
     xmlns:g="urn:import:com.google.gwt.user.client.ui"
     xmlns:myui="urn:import:com.gwtplatform.mvp.client.gwt.mvp">
     <g:HTMLPanel ui:field='mainSlot'>
-        <myui:InjectedLabel/>
+    
+        <!-- TODO fix gin binding injection - need to stub providing -->
+        <!-- <myui:InjectedLabel/> -->
+        
+        
     </g:HTMLPanel>
 </ui:UiBinder> 
