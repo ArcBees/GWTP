@@ -49,7 +49,7 @@ import java.util.List;
  * <p />
  * To use this you need to use the following in your module file:
  * <pre> &lt;inherits name="com.google.gwt.uibinder.GinUiBinder" /&gt;</pre>
- * instead of {@code com.google.gwt.uibinder.UiBinde}.
+ * instead of {@code com.google.gwt.uibinder.UiBinder}.
  * Then you need to identify your ginjector class in your module
  * by defining a {@code gin.gingector} configuration property. For example:
  * <pre> &lt;define-configuration-property name="gin.ginjector" is-multi-valued="false" /&gt;
