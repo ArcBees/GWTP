@@ -28,10 +28,14 @@ public class FieldWriterOfInjectedType extends FieldWriterOfExistingType {
       JClassType type, String name, JClassType ginjectorClass,
       String ginjectorMethod, MortalLogger logger) {
     super(manager, fieldType, type, name, logger);
+    
     this.ginjectorClass = ginjectorClass;
     this.ginjectorMethod = ginjectorMethod;
   }
 
+  /**
+   * TODO this isn't being used to preepmt the initializer...
+   */
   public void write(IndentedWriter w) throws UnableToCompleteException {
     // Preempt creation of initializer, provide our own based on gin.
     setInitializer(String.format("(%1$s) (((%2$s)com.gwtplatform.mvp.client.DelayedBindRegistry.getGinjector()).%3$s())",
