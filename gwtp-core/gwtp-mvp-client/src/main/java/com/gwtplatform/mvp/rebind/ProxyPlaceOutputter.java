@@ -24,6 +24,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
+import com.gwtplatform.mvp.client.annotations.GatekeeperParams;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.Title;
@@ -42,6 +43,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
 
   private String nameToken;
   private String getGatekeeperMethod;
+  private String[] gatekeeperParams;
 
   private String title;
   private PresenterTitleMethod presenterTitleMethod;
@@ -88,12 +90,28 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
   public String getNameToken() {
     return nameToken;
   }
+  
+  public String getGatekeeperParamsString() {
+    if (gatekeeperParams == null) {
+      return "null";
+    }
+    StringBuilder builder = new StringBuilder("new String[] {");
+    for (int i = 0; i < gatekeeperParams.length; i++) {
+      builder.append("\"").append(gatekeeperParams[i]).append("\",");
+    }
+    if (",".equals(builder.charAt(builder.length() - 1))) {
+      builder.deleteCharAt(builder.length() - 1);
+    }
+    builder.append("}");
+    return builder.toString();
+  }
 
   @Override
   void initSubclass(JClassType proxyInterface)
       throws UnableToCompleteException {
     findNameToken(proxyInterface);
     findGatekeeperMethod(proxyInterface);
+    findGatekeeperParams(proxyInterface);
     findTitle(proxyInterface);
   }
 
@@ -156,6 +174,13 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     }
   }
 
+  private void findGatekeeperParams(JClassType proxyInterface) {
+    GatekeeperParams gatekeeperParamsAnnotation = proxyInterface.getAnnotation(GatekeeperParams.class);
+    if (gatekeeperParamsAnnotation != null) {
+      gatekeeperParams = gatekeeperParamsAnnotation.value();
+    }
+  }
+
   private void findTitle(JClassType proxyInterface)
       throws UnableToCompleteException {
     presenterTitleMethod = presenterInspector.findPresenterTitleMethod();
@@ -176,9 +201,14 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
   private String getPlaceInstantiationString() {
     if (getGatekeeperMethod == null) {
       return "new " + ClassCollection.placeImplClassName + "( nameToken );";
-    } else {
-      return "new " + ClassCollection.placeWithGatekeeperClassName
-          + "( nameToken, ginjector." + getGatekeeperMethod + "() );";
+    } else { 
+      if (gatekeeperParams == null) {
+        return "new " + ClassCollection.placeWithGatekeeperClassName 
+        + "( nameToken, ginjector." + getGatekeeperMethod + "() );";
+        } else {
+          return "new " + ClassCollection.placeWithParameterizedGatekeeperClassName 
+          + "( nameToken, ginjector." + getGatekeeperMethod + "(), gatekeeperParams );";
+      }
     }
   }
 
@@ -213,6 +243,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     writer.println("wrappedProxy.delayedBind( ginjector ); ");
     writer.println("proxy = wrappedProxy; ");
     writer.println("String nameToken = \"" + getNameToken() + "\"; ");
+    writer.println("String[] gatekeeperParams = " + getGatekeeperParamsString() + ";");
     writer.println("place = " + getPlaceInstantiationString());
   }
 
