@@ -167,8 +167,7 @@ public class CrawlServiceServlet extends HttpServlet {
   }
 
   /**
-   * Fetches the page at {@code url} and renders the page in a {@link StringBuilder}. The rendered
-   * page is prefixed with a message indicating this is a non-interactive version.
+   * Fetches the page at {@code url} and renders the page in a {@link StringBuilder}.
    *
    * @param url The URL of the page to render.
    * @return The rendered page, in a {@link StringBuilder}.
@@ -181,20 +180,14 @@ public class CrawlServiceServlet extends HttpServlet {
 
     webClient.setCssEnabled(false);
     webClient.setJavaScriptTimeout(0);
-    webClient.setJavaScriptTimeout(0);
     webClient.setThrowExceptionOnScriptError(false);
     webClient.setThrowExceptionOnFailingStatusCode(false);
     webClient.setJavaScriptEnabled(true);
     HtmlPage page = webClient.getPage(url);
     webClient.getJavaScriptEngine().pumpEventLoop(timeoutMillis);
 
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("<hr />\n");
-    stringBuilder.append("<center><h3>You are viewing a non-interactive page that is intended for the crawler.  ");
-    stringBuilder.append("You probably want to see this page: <a href=\"" + url + "\">" + url + "</a></h3></center>\n");
-    stringBuilder.append("<hr />\n");
+    StringBuilder stringBuilder = new StringBuilder(page.asXml());
 
-    stringBuilder.append(page.asXml());
     webClient.closeAllWindows();
     return stringBuilder;
   }
