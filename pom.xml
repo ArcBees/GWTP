@@ -206,6 +206,7 @@
         <persistence-api.version>1.0</persistence-api.version>
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>3.1.2.RELEASE</spring.version>
+        <gae.version>1.7.2</gae.version>
 
     </properties>
 
