@@ -23,9 +23,7 @@ import java.util.Map;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
-import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 import com.gwtplatform.crawlerservice.server.objectify.Ofy;
 import com.gwtplatform.crawlerservice.server.objectify.OfyFactory;
 
