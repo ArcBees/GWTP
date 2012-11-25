@@ -218,7 +218,7 @@ public class CrawlServiceServlet extends HttpServlet {
             matchingPage.getFetchDate().getTime() + cachedPageTimeoutSec * 1000) {
       matchingPage = null;
     } else {
-      deprecatedPages.remove(new Key<CachedPage>(CachedPage.class, matchingPage.getId()));
+      deprecatedPages.remove(Key.create(CachedPage.class, matchingPage.getId()));
     }
 
     return matchingPage;
