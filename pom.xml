@@ -320,18 +320,12 @@
                     <artifactId>maven-gae-plugin</artifactId>
                     <version>${maven-gae-plugin.version}</version>
                     <dependencies>
-                          <dependency>
-                                <groupId>net.kindleit</groupId>
-                                <artifactId>gae-runtime</artifactId>
-                                <version>${gae.version}</version>
-                                <type>pom</type>
-                          </dependency>
-                          <!-- Work around for team city error unpacking -->
-                          <dependency>
-                                <groupId>org.codehaus.plexus</groupId>
-                                <artifactId>plexus-archiver</artifactId>
-                                <version>2.1.2</version>
-                          </dependency>
+                        <dependency>
+                            <groupId>net.kindleit</groupId>
+                            <artifactId>gae-runtime</artifactId>
+                            <version>${gae.version}</version>
+                            <type>pom</type>
+                        </dependency>
                     </dependencies>
                     <executions>
                         <execution>
