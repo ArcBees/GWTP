@@ -34,7 +34,7 @@
         <!-- For Objectify -->
         <repository>
             <id>objectify-appengine</id>
-            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
+            <url>http://maven.objectify-appengine.googlecode.com/git/</url>
         </repository>
     </repositories>
 
