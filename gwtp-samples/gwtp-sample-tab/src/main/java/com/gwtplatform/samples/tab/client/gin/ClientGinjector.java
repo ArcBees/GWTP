@@ -27,9 +27,6 @@ import com.gwtplatform.samples.tab.client.presenter.HomeInfoPresenter;
 import com.gwtplatform.samples.tab.client.presenter.HomeNewsPresenter;
 import com.gwtplatform.samples.tab.client.presenter.LocalDialogSubTabPresenter;
 import com.gwtplatform.samples.tab.client.presenter.SettingsPresenter;
-import com.gwtplatform.samples.tab.client.ui.LinkMenu;
-import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
-import com.gwtplatform.samples.tab.client.ui.SimpleTabPanel;
 import com.gwtplatform.samples.tab.client.ui.UiModule;
 
 /**
@@ -50,9 +47,10 @@ public interface ClientGinjector extends ClientGinjectorBase {
   PlaceManager getPlaceManager();
   MyConstants getMyConstants();
 
+  // TODO fix this so it doesn't us UiBinder injection, or GinBinder injection. Revisit this later.
   // The following methods allow these widgets to be used in UiBinder files
-  // and participate in dependency injection.
-  LinkMenu getLinkMenu();
-  RoundTabPanel getRoundTabPanel();
-  SimpleTabPanel getSimpleTabPanel();
+  // and participate in dependency injection. 
+  // LinkMenu getLinkMenu();
+  // RoundTabPanel getRoundTabPanel();
+  // SimpleTabPanel getSimpleTabPanel();
 }
