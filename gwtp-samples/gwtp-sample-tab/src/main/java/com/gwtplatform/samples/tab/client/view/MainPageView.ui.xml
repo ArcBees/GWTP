@@ -19,7 +19,7 @@
         </div>
         <div style="margin: 10px 3px 0;">
             <npui:RoundTabPanel ui:field="tabPanel" />
-            <!-- <npui:LinkMenu /> -->
+            <npui:LinkMenu ui:field="linkMenu" />
         </div>
     </g:HTMLPanel>
 </ui:UiBinder> 
