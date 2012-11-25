@@ -109,10 +109,6 @@ public class ObjectifyDao<T> {
     return Key.create(this.clazz, id);
   }
 
-  public Key<T> key(T obj) {
-    return ObjectifyService.factory().getKey(obj);
-  }
-
   public List<T> listChildren(Object parent) {
     return ofy().query(clazz).ancestor(parent).list();
   }
