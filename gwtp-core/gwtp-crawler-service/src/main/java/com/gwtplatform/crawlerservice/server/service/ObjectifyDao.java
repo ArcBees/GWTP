@@ -38,10 +38,6 @@ import com.gwtplatform.crawlerservice.server.objectify.OfyFactory;
 public class ObjectifyDao<T> {
   static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
 
-  static {
-    ObjectifyService.register(CachedPage.class);
-  }
-
   protected Class<T> clazz;
 
   private OfyFactory ofyFactory;
