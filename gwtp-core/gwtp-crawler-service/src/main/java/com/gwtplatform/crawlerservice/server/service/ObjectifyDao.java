@@ -23,9 +23,7 @@ import java.util.Map;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
-import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 import com.gwtplatform.crawlerservice.server.objectify.Ofy;
 import com.gwtplatform.crawlerservice.server.objectify.OfyFactory;
 
@@ -37,10 +35,6 @@ import com.gwtplatform.crawlerservice.server.objectify.OfyFactory;
  */
 public class ObjectifyDao<T> {
   static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
-
-  static {
-    ObjectifyService.register(CachedPage.class);
-  }
 
   protected Class<T> clazz;
 
@@ -111,10 +105,6 @@ public class ObjectifyDao<T> {
 
   public Key<T> getKey(Long id) {
     return Key.create(this.clazz, id);
-  }
-
-  public Key<T> key(T obj) {
-    return ObjectifyService.factory().getKey(obj);
   }
 
   public List<T> listChildren(Object parent) {
