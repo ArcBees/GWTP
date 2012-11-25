@@ -25,6 +25,7 @@ import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
+import com.gwtplatform.samples.tab.client.ui.LinkMenu;
 import com.gwtplatform.samples.tab.client.ui.RoundTabPanel;
 
 /**
@@ -40,16 +41,20 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
    */
   public interface Binder extends UiBinder<Widget, MainPageView> { }
 
-  public final Widget widget;
-
-  @UiField
+  @UiField(provided = true)
   RoundTabPanel tabPanel;
-
   @UiField
   InlineLabel topMessage;
+  @UiField(provided = true)
+  LinkMenu linkMenu;
 
+  public final Widget widget;
+  
   @Inject
-  public MainPageView(Binder uiBinder) {
+  public MainPageView(Binder uiBinder, RoundTabPanel tabPanel, final LinkMenu linkMenu) {
+    this.tabPanel = tabPanel;
+    this.linkMenu = linkMenu;
+    
     widget = uiBinder.createAndBindUi(this);
   }
 
