@@ -28,10 +28,10 @@ public class UiModule extends AbstractGinModule {
 
   @Override
   protected void configure() {
-    // Singleton binders
-    bind(LinkMenu.Binder.class).in(Singleton.class);
-    bind(RoundTabPanel.Binder.class).in(Singleton.class);
-    bind(SimpleTabPanel.Binder.class).in(Singleton.class);
+    // Singleton binders 
+     bind(LinkMenu.Binder.class).in(Singleton.class);
+     bind(RoundTabPanel.Binder.class).in(Singleton.class);
+     bind(SimpleTabPanel.Binder.class).in(Singleton.class);
   }
 
 }

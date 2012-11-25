@@ -1,5 +1,5 @@
-/**
- * Copyright 2011 ArcBees Inc.
+/*
+ * Copyright 2008 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,18 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.google.gwt.uibinder.rebind;
-
-import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.uibinder.rebind.model.ImplicitCssResource;
-import com.google.gwt.uibinder.rebind.model.OwnerClass;
-import com.google.gwt.uibinder.rebind.model.OwnerField;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,6 +22,17 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.regex.Pattern;
+
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JType;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.uibinder.attributeparsers.FieldReferenceConverter;
+import com.google.gwt.uibinder.rebind.model.ImplicitCssResource;
+import com.google.gwt.uibinder.rebind.model.OwnerClass;
+import com.google.gwt.uibinder.rebind.model.OwnerField;
 
 /**
  * This version of {@link FieldManager} makes it possible for UiBinder
@@ -43,9 +43,25 @@ import java.util.Map;
  * injection. Modifications are clearly indicated by
  * {@code MODIFICATION} comments.
  *
+ * @author Google
  * @author Philippe Beaudoin (philippe.beaudoin@gmail.com)
+ * @author Brandon Donnelson (branflake2267@gmail.com)
  */
 public class GinFieldManager extends FieldManager {
+
+  static class FieldAndSource {
+    final FieldWriter field;
+    final XMLElement element;
+    
+    public FieldAndSource(FieldWriter field, XMLElement element) {
+      this.field = field;
+      this.element = element;
+    }
+  }
+
+  private static final String GETTER_PREFIX = "get_";
+
+  private static final String BUILDER_PREFIX = "build_";
 
   private static final String DUPLICATE_FIELD_ERROR = "Duplicate declaration of field %1$s.";
 
@@ -62,15 +78,26 @@ public class GinFieldManager extends FieldManager {
     }
   };
 
+  private static final Pattern JAVA_IDENTIFIER =
+      Pattern.compile("[\\p{L}_$][\\p{L}\\p{N}_$]*");
+
   public static String getFieldBuilder(String fieldName) {
-    return String.format("build_%s()", fieldName);
+    return String.format(BUILDER_PREFIX + "%s()", fieldName);
   }
 
   public static String getFieldGetter(String fieldName) {
-    return String.format("get_%s()", fieldName);
+    return String.format(GETTER_PREFIX + "%s()", fieldName);
   }
 
-  private final TypeOracle types;
+  public static String stripFieldGetter(String fieldName) {
+    if (fieldName.startsWith(GETTER_PREFIX)) {
+      return fieldName.substring(GETTER_PREFIX.length());
+    }
+    return fieldName;
+  }
+
+  private final TypeOracle typeOracle;
+
   private final MortalLogger logger;
 
   /**
@@ -83,7 +110,7 @@ public class GinFieldManager extends FieldManager {
   /**
    * A stack of the fields.
    */
-  private final LinkedList<FieldWriter> parsedFieldStack = new LinkedList<FieldWriter>();
+  private final LinkedList<FieldAndSource> parsedFieldStack = new LinkedList<FieldAndSource>();
 
   private LinkedHashMap<String, FieldReference> fieldReferences =
       new LinkedHashMap<String, FieldReference>();
@@ -103,13 +130,15 @@ public class GinFieldManager extends FieldManager {
   // BEGIN MODIFICATION
   private Map<JClassType, String> ginjectorMethods = new HashMap<JClassType, String>();
   private JClassType ginjectorClass;
-
-  public GinFieldManager(TypeOracle types, MortalLogger logger, JClassType ginjectorClass,
+  
+  public GinFieldManager(TypeOracle typeOracle, MortalLogger logger, JClassType ginjectorClass, 
       boolean useLazyWidgetBuilders) {
-    super(types, logger, useLazyWidgetBuilders);
-    this.types = types;
+    super(typeOracle, logger, useLazyWidgetBuilders);
+    
+    this.typeOracle = typeOracle;
     this.logger = logger;
     this.useLazyWidgetBuilders = useLazyWidgetBuilders;
+    
     this.ginjectorClass = ginjectorClass;
     for (JMethod method : ginjectorClass.getMethods()) {
       JClassType returnType = method.getReturnType().isClassOrInterface();
@@ -126,15 +155,39 @@ public class GinFieldManager extends FieldManager {
    *  <li> f_html1 = get_f_html1()
    */
   public String convertFieldToGetter(String fieldName) {
-    // TODO(hermes, rjrjr, rdcastro): revisit this and evaluate if this
-    // conversion can be made directly in FieldWriter.
+    // could this conversion can be moved to FieldWriter?
     if (!useLazyWidgetBuilders) {
       return fieldName;
     }
 
-    int count = getGetterCounter(fieldName) + 1;
-    gettersCounter.put(fieldName, count);
+    incrementFieldCounter(fieldName);
     return getFieldGetter(fieldName);
+  }
+
+  /**
+   * Prevent a field from being optimized as only being referenced once (and therefore constant for
+   * all intents). This is necessary for UiRenderer fields passed as parameters to render() calls.
+   * Those fields are modified every time a template is rendered with the parameter values.
+   */
+  public void disableOptimization(String fieldName) {
+    // TODO(rchandia): This hackish method should go away when the
+    // UiRenderer generator gets separated from the one used for
+    // UiBinder. Fields corresponding to parameters of render() will
+    // not use the initialization generated by the FieldWriter.
+
+    // Incrementing the counter twice ensures no optimization happens.
+    // See AbstractFieldWriter#writeFieldDefinition()
+    incrementFieldCounter(fieldName);
+    incrementFieldCounter(fieldName);
+  }
+
+  public FieldReference findFieldReference(String expressionIn) {
+    String expression = expressionIn;
+    if (useLazyWidgetBuilders) {
+      expression = stripFieldGetter(expression);
+    }
+    String converted = FieldReferenceConverter.expressionToPath(expression);
+    return fieldReferences.get(converted);
   }
 
   /**
@@ -171,11 +224,12 @@ public class GinFieldManager extends FieldManager {
   }
 
   /**
+   * @param source the element this field was parsed from 
    * @param fieldWriter the field to push on the top of the
    *          {@link #parsedFieldStack}
    */
-  public void push(FieldWriter fieldWriter) {
-    parsedFieldStack.addFirst(fieldWriter);
+  public void push(XMLElement source, FieldWriter fieldWriter) {
+    parsedFieldStack.addFirst(new FieldAndSource(fieldWriter, source));
   }
 
   /**
@@ -198,19 +252,19 @@ public class GinFieldManager extends FieldManager {
       JClassType fieldType, String fieldName) throws UnableToCompleteException {
     // BEGIN MODIFICATION
     String ginjectorMethod = ginjectorMethods.get(fieldType);
-
+    
     FieldWriter field;
     if (ginjectorMethod != null) {
       // If the ginjector lets us create that fieldType then we use gin to instantiate it
-      field = new FieldWriterOfInjectedType(fieldWriterType, fieldType, fieldName, ginjectorClass,
+      field = new FieldWriterOfInjectedType(this, fieldWriterType, fieldType, fieldName, ginjectorClass, 
           ginjectorMethod, logger);
     } else {
       // Otherwise
-      field = new FieldWriterOfExistingType(fieldWriterType, fieldType, fieldName, logger);
+      field = new FieldWriterOfExistingType(this, fieldWriterType, fieldType, fieldName, logger);
     }
-
-    return registerField(fieldName, field);
     // END MODIFICATION
+    
+    return registerField(fieldName, field);
   }
 
   public FieldWriter registerField(JClassType fieldType, String fieldName)
@@ -220,7 +274,7 @@ public class GinFieldManager extends FieldManager {
 
   public FieldWriter registerField(String type, String fieldName)
       throws UnableToCompleteException {
-    return registerField(types.findType(type), fieldName);
+    return registerField(typeOracle.findType(type), fieldName);
   }
 
   /**
@@ -241,8 +295,8 @@ public class GinFieldManager extends FieldManager {
    */
   public FieldWriter registerFieldForGeneratedCssResource(
       ImplicitCssResource cssResource) throws UnableToCompleteException {
-    FieldWriter field = new FieldWriterOfGeneratedCssResource(
-        types.findType(String.class.getCanonicalName()), cssResource, logger);
+    FieldWriter field = new FieldWriterOfGeneratedCssResource(this,
+        typeOracle.findType(String.class.getCanonicalName()), cssResource, logger);
     return registerField(cssResource.getName(), field);
   }
 
@@ -262,7 +316,7 @@ public class GinFieldManager extends FieldManager {
     if (ownerField == null) {
       throw new RuntimeException("Cannot register a null owner field for LazyDomElement.");
     }
-    FieldWriter field = new FieldWriterOfLazyDomElement(
+    FieldWriter field = new FieldWriterOfLazyDomElement(this,
         templateFieldType, ownerField, logger);
     return registerField(ownerField.getName(), field);
   }
@@ -290,7 +344,7 @@ public class GinFieldManager extends FieldManager {
   public FieldWriter registerFieldOfGeneratedType(JClassType assignableType,
       String typePackage, String typeName, String fieldName)
       throws UnableToCompleteException {
-    FieldWriter field = new FieldWriterOfGeneratedType(assignableType,
+    FieldWriter field = new FieldWriterOfGeneratedType(this, assignableType,
         typePackage, typeName, fieldName, logger);
     return registerField(fieldName, field);
   }
@@ -299,15 +353,16 @@ public class GinFieldManager extends FieldManager {
    * Called to register a <code>{field.reference}</code> encountered during
    * parsing, to be validated against the type oracle once parsing is complete.
    */
-  public void registerFieldReference(String fieldReferenceString, JType type) {
-    FieldReference fieldReference = fieldReferences.get(fieldReferenceString);
+  public void registerFieldReference(XMLElement source, String fieldReferenceString, JType... types) {
+    source = source != null ? source : parsedFieldStack.peek().element;
 
+    FieldReference fieldReference = fieldReferences.get(fieldReferenceString);
     if (fieldReference == null) {
-      fieldReference = new FieldReference(fieldReferenceString, this, types);
+      fieldReference = new FieldReference(fieldReferenceString, source, this, typeOracle);
       fieldReferences.put(fieldReferenceString, fieldReference);
     }
 
-    fieldReference.addLeftHandType(type);
+    fieldReference.addLeftHandType(source, types);
   }
 
   /**
@@ -336,8 +391,7 @@ public class GinFieldManager extends FieldManager {
 
     for (Map.Entry<String, FieldReference> entry : fieldReferences.entrySet()) {
       FieldReference ref = entry.getValue();
-      MonitoredLogger monitoredLogger = new MonitoredLogger(
-          logger.getTreeLogger().branch(TreeLogger.TRACE, "validating " + ref));
+      MonitoredLogger monitoredLogger = new MonitoredLogger(logger);
       ref.validate(monitoredLogger);
       failed |= monitoredLogger.hasErrors();
     }
@@ -345,7 +399,7 @@ public class GinFieldManager extends FieldManager {
       throw new UnableToCompleteException();
     }
   }
-
+  
   /**
    * Outputs the getter and builder definitions for all fields.
    * {@see com.google.gwt.uibinder.rebind.AbstractFieldWriter#writeFieldDefinition}.
@@ -370,13 +424,17 @@ public class GinFieldManager extends FieldManager {
    * Writes all stored gwt fields.
    *
    * @param writer the writer to output
-   * @param ownerTypeName the name of the class being processed
    */
-  public void writeGwtFieldsDeclaration(IndentedWriter writer,
-      String ownerTypeName) throws UnableToCompleteException {
+  public void writeGwtFieldsDeclaration(IndentedWriter writer) throws UnableToCompleteException {
     Collection<FieldWriter> fields = fieldsMap.values();
     for (FieldWriter field : fields) {
       field.write(writer);
+    }
+  }
+
+  private void ensureValidity(String fieldName) throws UnableToCompleteException {
+    if (!JAVA_IDENTIFIER.matcher(fieldName).matches()) {
+      logger.die("Illegal field name \"%s\"", fieldName);
     }
   }
 
@@ -388,27 +446,33 @@ public class GinFieldManager extends FieldManager {
     return (count == null) ? 0 : count;
   }
 
-  private FieldWriter peek() {
-    return parsedFieldStack.getFirst();
+  /**
+   * Increments the number of times a getter for the given field is called.
+   */
+  private void incrementFieldCounter(String fieldName) {
+    int count = getGetterCounter(fieldName) + 1;
+    gettersCounter.put(fieldName, count);
   }
 
   private FieldWriter registerField(String fieldName, FieldWriter field)
       throws UnableToCompleteException {
+    ensureValidity(fieldName);
     requireUnique(fieldName);
     fieldsMap.put(fieldName, field);
 
     if (parsedFieldStack.size() > 0) {
-      FieldWriter parent = peek();
+      FieldWriter parent = parsedFieldStack.peek().field;
       field.setBuildPrecedence(parent.getBuildPrecedence() + 1);
       parent.needs(field);
     }
 
     return field;
   }
-
+  
   private void requireUnique(String fieldName) throws UnableToCompleteException {
     if (fieldsMap.containsKey(fieldName)) {
       logger.die(DUPLICATE_FIELD_ERROR, fieldName);
     }
   }
+  
 }
