@@ -98,8 +98,8 @@ public class PlaceManagerImplTest {
         Proxy<P> proxy,
         DeferredCommandManager deferredCommandManager) {
         super();
-        this.place = place;
-        this.proxy = proxy;
+        super.setPlace(place);
+        super.setProxy(proxy);
         this.deferredCommandManager = deferredCommandManager;
     };
 
