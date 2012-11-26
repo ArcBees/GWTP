@@ -136,7 +136,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   }
 
   protected void setProxy(Proxy_ proxy) {
-  this.proxy = proxy;
+    this.proxy = proxy;
   }
 
   /**
