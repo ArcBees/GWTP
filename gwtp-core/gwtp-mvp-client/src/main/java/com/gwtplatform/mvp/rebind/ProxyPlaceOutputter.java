@@ -211,9 +211,9 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     writer.println(WRAPPED_CLASS_NAME + " wrappedProxy = GWT.create(" + WRAPPED_CLASS_NAME
         + ".class);");
     writer.println("wrappedProxy.delayedBind( ginjector ); ");
-    writer.println("super.setProxy(wrappedProxy); ");
+    writer.println("setProxy(wrappedProxy); ");
     writer.println("String nameToken = \"" + getNameToken() + "\"; ");
-    writer.println("super.setPlace(" + getPlaceInstantiationString() + ");");
+    writer.println("setPlace(" + getPlaceInstantiationString() + ");");
   }
 
   @Override
