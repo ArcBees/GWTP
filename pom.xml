@@ -577,4 +577,17 @@
             </build>
         </profile>
     </profiles>
+    
+    <!-- Run by using mvn clean install deploy -->
+    <!-- https://issues.sonatype.org/browse/OSSRH-1229?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel -->
+    <distributionManagement>
+        <repository>
+            <id>gwtp-releases</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>gwtp-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement> 
 </project>
