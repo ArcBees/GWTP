@@ -26,7 +26,6 @@ import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.samples.tab.client.NameTokens;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 
@@ -74,7 +73,7 @@ public class HomePresenter extends HomePresenterBase<HomePresenter.MyView, HomeP
   @Inject
   public HomePresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy, PlaceManager placeManager) {
-    super(eventBus, view, proxy, TYPE_RequestTabs);
+    super(eventBus, view, proxy, TYPE_RequestTabs, MainPagePresenter.TYPE_SetTabContent);
     this.placeManager = placeManager;
   }
 
@@ -83,10 +82,5 @@ public class HomePresenter extends HomePresenterBase<HomePresenter.MyView, HomeP
     super.onReset();
     MyProxy proxy = getProxy();
     proxy.changeTab(proxy.getTabData(), placeManager.getCurrentPlaceRequest().getNameToken());
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetTabContent, this);
   }
 }

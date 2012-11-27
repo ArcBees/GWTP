@@ -18,11 +18,10 @@ package com.gwtplatform.samples.basic.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.inject.Inject;
-
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -32,7 +31,6 @@ import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.samples.basic.shared.SendTextToServer;
 import com.gwtplatform.samples.basic.shared.SendTextToServerResult;
 
@@ -72,7 +70,7 @@ public class ResponsePresenter extends
   @Inject
   public ResponsePresenter(EventBus eventBus, MyView view, MyProxy proxy,
       PlaceManager placeManager, DispatchAsync dispatcher) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, RevealType.Root);
     this.placeManager = placeManager;
     this.dispatcher = dispatcher;
   }
@@ -114,10 +112,5 @@ public class ResponsePresenter extends
             getView().setServerResponse(result.getResponse());
           }
         });
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealRootContentEvent.fire(this, this);
   }
 }
