@@ -15,7 +15,7 @@
     <properties>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
         <gae.home>${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
-        <gwt.style>OBFUSCATED</gwt.style> <!-- Can make this DETAILED for debugging. -->
+        <gwt.style>OBF</gwt.style> <!-- Can make this DETAILED for debugging. -->
     </properties>
 
     <modules>
