@@ -132,11 +132,11 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 @Singleton
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends PresenterWidget<V> {
   /**
-   * The RevealType define which event will be fired in the default {@link #revealInParent()}
+   * The RevealType define which event will be fired in the default {@link #revealInParent()}.
    *
-   * Root will fire a {@link RevealRootContentEvent}
-   * RootLayout will fire a {@link RevealRootLayoutContentEvent}
-   * RootPopup will fire a {@link RevealRootPopupContentEvent}
+   * Root will fire a {@link RevealRootContentEvent}.
+   * RootLayout will fire a {@link RevealRootLayoutContentEvent}.
+   * RootPopup will fire a {@link RevealRootPopupContentEvent}.
    */
   public enum RevealType {
     Root,
@@ -206,7 +206,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * @param eventBus The {@link EventBus}.
    * @param view The {@link View}.
    * @param proxy The {@link Proxy}.
-   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see RevealContentHandler}
+   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see RevealContentHandler}.
    */
   public Presenter(EventBus eventBus, V view, Proxy_ proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
     this(eventBus, view, proxy, null, slot);
