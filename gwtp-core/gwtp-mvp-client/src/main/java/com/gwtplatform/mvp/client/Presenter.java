@@ -357,21 +357,22 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * or a {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}.
    */
   protected void revealInParent() {
-    switch (revealType) {
-      case Root:
-        RevealRootContentEvent.fire(this, this);
-        break;
+    if (revealType != null) {
+      switch (revealType) {
+        case Root:
+          RevealRootContentEvent.fire(this, this);
+          break;
 
-      case RootLayout:
-        RevealRootLayoutContentEvent.fire(this, this);
-        break;
+        case RootLayout:
+          RevealRootLayoutContentEvent.fire(this, this);
+          break;
 
-      case RootPopup:
-        RevealRootPopupContentEvent.fire(this, (PresenterWidget<PopupView>) this);
-        break;
-
-      default:
-        RevealContentEvent.fire(this, slot, this);
+        case RootPopup:
+          RevealRootPopupContentEvent.fire(this, (PresenterWidget<PopupView>) this);
+          break;
+      }
+    } else {
+      RevealContentEvent.fire(this, slot, this);
     }
   }
 }
