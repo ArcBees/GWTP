@@ -38,9 +38,9 @@ import com.gwtplatform.mvp.client.Presenter;
 public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>>
     implements ProxyPlace<P> {
 
-  protected Place place;
-  protected PlaceManager placeManager;
-  protected Proxy_ proxy;
+  private Place place;
+  private PlaceManager placeManager;
+  private Proxy_ proxy;
 
   private EventBus eventBus;
 
@@ -114,6 +114,30 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
 
   // /////////////////////
   // Private methods
+
+  protected Place getPlace() {
+    return place;
+  }
+
+  protected void setPlace(Place place) {
+    this.place = place;
+  }
+
+  protected PlaceManager getPlaceManager() {
+    return placeManager;
+  }
+
+  protected void setPlaceManager(PlaceManager placeManager) {
+    this.placeManager = placeManager;
+  }
+
+  protected Proxy_ getProxy() {
+    return proxy;
+  }
+
+  protected void setProxy(Proxy_ proxy) {
+    this.proxy = proxy;
+  }
 
   /**
    * Injects the various resources and performs other bindings.
@@ -247,5 +271,4 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
   void addDeferredCommand(Command command) {
     Scheduler.get().scheduleDeferred(command);
   }
-
 }
