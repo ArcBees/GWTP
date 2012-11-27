@@ -16,9 +16,8 @@
 
 package com.gwtplatform.samples.hplace.client.presenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
-
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -28,7 +27,6 @@ import com.gwtplatform.mvp.client.annotations.Title;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.samples.hplace.client.NameTokens;
 import com.gwtplatform.samples.hplace.client.view.HomeUiHandlers;
 
@@ -59,15 +57,9 @@ public class HomePresenter extends
   @Inject
   public HomePresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy, final PlaceManager placeManager) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, BreadcrumbsPresenter.TYPE_SetMainContent);
     this.placeManager = placeManager;
     view.setUiHandlers(this);
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealContentEvent.fire(this, BreadcrumbsPresenter.TYPE_SetMainContent,
-        this);
   }
 
   @Override

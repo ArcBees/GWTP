@@ -16,12 +16,14 @@
 
 package com.gwtplatform.samples.nested.client.presenter;
 
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * The base class of {@link ContactPresenter}. The goal of this class is just to show that
@@ -43,8 +45,8 @@ public abstract class ContactPresenterBase<Proxy_ extends Proxy<?>>
     void setNavigationHistory(String navigationHistory);
   }
 
-  public ContactPresenterBase(EventBus eventBus, MyView view, Proxy_ proxy) {
-    super(eventBus, view, proxy);
+  public ContactPresenterBase(EventBus eventBus, MyView view, Proxy_ proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
+    super(eventBus, view, proxy, slot);
   }
 
   /**
