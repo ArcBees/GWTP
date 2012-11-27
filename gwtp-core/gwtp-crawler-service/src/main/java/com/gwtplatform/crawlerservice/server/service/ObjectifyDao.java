@@ -23,58 +23,51 @@ import java.util.Map;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Query;
-import com.googlecode.objectify.helper.DAOBase;
-import com.gwtplatform.crawlerservice.server.domain.CachedPage;
+import com.googlecode.objectify.cmd.Query;
+import com.gwtplatform.crawlerservice.server.objectify.Ofy;
+import com.gwtplatform.crawlerservice.server.objectify.OfyFactory;
 
 /**
  * Generic DAO for use with Objectify.
- *
  * @author David M. Chandler
- *
+ * @author Brandon Donnelson
  * @param <T>
  */
-public class ObjectifyDao<T> extends DAOBase {
-
-  static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC
-  | Modifier.TRANSIENT;
-
-  static
-  {
-    ObjectifyService.register(CachedPage.class);
-  }
+public class ObjectifyDao<T> {
+  static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
 
   protected Class<T> clazz;
 
+  private OfyFactory ofyFactory;
+  private Ofy lazyOfy;
+
   @SuppressWarnings("unchecked")
   public ObjectifyDao() {
-    clazz = (Class<T>) ((ParameterizedType) getClass()
-        .getGenericSuperclass()).getActualTypeArguments()[0];
+    clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
   }
 
   public Key<T> put(T entity) {
-    return ofy().put(entity);
+    return ofy().save().entity(entity).now();
   }
 
   public Map<Key<T>, T> putAll(Iterable<T> entities) {
-    return ofy().put(entities);
+    return ofy().save().entities(entities).now();
   }
 
   public void delete(T entity) {
-    ofy().delete(entity);
+    ofy().delete().entity(entity);
   }
 
   public void deleteKey(Key<T> entityKey) {
-    ofy().delete(entityKey);
+    ofy().delete().entity(entityKey);
   }
 
   public void deleteAll(Iterable<T> entities) {
-    ofy().delete(entities);
+    ofy().delete().entities(entities);
   }
 
   public void deleteKeys(Iterable<Key<T>> keys) {
-    ofy().delete(keys);
+    ofy().delete().keys(keys);
   }
 
   public T get(Long id) throws EntityNotFoundException {
@@ -86,7 +79,7 @@ public class ObjectifyDao<T> extends DAOBase {
   }
 
   public Map<Key<T>, T> get(Iterable<Key<T>> keys) {
-    return ofy().get(keys);
+    return ofy().load().keys(keys);
   }
 
   public List<T> listAll(int start, int length) {
@@ -98,31 +91,34 @@ public class ObjectifyDao<T> extends DAOBase {
     return ofy().query(clazz).count();
   }
 
-   public List<T> listByProperty(String propName, Object propValue) {
-     Query<T> q = ofy().query(clazz);
-     q.filter(propName, propValue);
-     return q.list();
-   }
+  public List<T> listByProperty(String propName, Object propValue) {
+    Query<T> q = ofy().query(clazz);
+    q.filter(propName, propValue);
+    return q.list();
+  }
 
-   public List<Key<T>> listKeysByProperty(String propName, Object propValue) {
-     Query<T> q = ofy().query(clazz);
-     q.filter(propName, propValue);
-     return q.listKeys();
-   }
+  public List<Key<T>> listKeysByProperty(String propName, Object propValue) {
+    Query<T> q = ofy().query(clazz);
+    q.filter(propName, propValue);
+    return q.keys().list();
+  }
 
-   public Key<T> getKey(Long id) {
-     return new Key<T>(this.clazz, id);
-   }
+  public Key<T> getKey(Long id) {
+    return Key.create(this.clazz, id);
+  }
 
-   public Key<T> key(T obj) {
-     return ObjectifyService.factory().getKey(obj);
-   }
+  public List<T> listChildren(Object parent) {
+    return ofy().query(clazz).ancestor(parent).list();
+  }
 
-   public List<T> listChildren(Object parent) {
-     return ofy().query(clazz).ancestor(parent).list();
-   }
+  public List<Key<T>> listChildKeys(Object parent) {
+    return ofy().query(clazz).ancestor(parent).keys().list();
+  }
 
-   public List<Key<T>> listChildKeys(Object parent) {
-     return ofy().query(clazz).ancestor(parent).listKeys();
-   }
+  protected Ofy ofy() {
+    if (lazyOfy == null) {
+      lazyOfy = ofyFactory.begin();
+    }
+    return lazyOfy;
+  }
 }

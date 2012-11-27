@@ -30,14 +30,6 @@
         </resources>
     </build>
 
-    <repositories>
-        <!-- For Objectify -->
-        <repository>
-            <id>objectify-appengine</id>
-            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
