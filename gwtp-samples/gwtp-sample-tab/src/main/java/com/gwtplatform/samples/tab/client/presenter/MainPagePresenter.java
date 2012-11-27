@@ -16,9 +16,9 @@
 
 package com.gwtplatform.samples.tab.client.presenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ChangeTabHandler;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabContainerPresenter;
@@ -36,12 +36,11 @@ import com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent;
 import com.gwtplatform.mvp.client.proxy.AsyncCallSucceedHandler;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent;
 import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent.CurrentUserChangedHandler;
 
 /**
- * The main {@link Presenter} of the application. It contains a number
+ * The main {@link com.gwtplatform.mvp.client.Presenter} of the application. It contains a number
  * of tabs allowing access to the various parts of the application.
  * Tabs are refreshed whenever the current user's privileges change in
  * order to hide areas that cannot be accessed.
@@ -91,12 +90,7 @@ public class MainPagePresenter
   @Inject
   public MainPagePresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy) {
-    super(eventBus, view, proxy, TYPE_SetTabContent, TYPE_RequestTabs, TYPE_ChangeTab);
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealRootContentEvent.fire(this, this);
+    super(eventBus, view, proxy, TYPE_SetTabContent, TYPE_RequestTabs, TYPE_ChangeTab, RevealType.Root);
   }
 
   @ProxyEvent

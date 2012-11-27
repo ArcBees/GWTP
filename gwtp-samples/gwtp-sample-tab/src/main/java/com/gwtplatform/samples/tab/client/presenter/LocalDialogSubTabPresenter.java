@@ -23,7 +23,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
 
@@ -61,14 +60,9 @@ public class LocalDialogSubTabPresenter extends
   @Inject
   public LocalDialogSubTabPresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy, final LocalDialogPresenterWidget localDialog) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, DialogSamplePresenter.TYPE_SetTabContent);
     this.localDialog = localDialog;
     view.setPresenter(this);
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealContentEvent.fire(this, DialogSamplePresenter.TYPE_SetTabContent, this);
   }
 
   public void showLocalDialog() {

@@ -16,6 +16,11 @@
 
 package com.gwtplatform.samples.basicspring.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -24,14 +29,7 @@ import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.samples.basicspring.shared.FieldVerifier;
-
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.user.client.ui.Button;
-import com.google.inject.Inject;
 
 /**
  * @author Philippe Beaudoin
@@ -66,7 +64,7 @@ public class MainPagePresenter extends
   @Inject
   public MainPagePresenter(EventBus eventBus, MyView view, MyProxy proxy,
       PlaceManager placeManager) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, RevealType.Root);
     this.placeManager = placeManager;
   }
 
@@ -86,11 +84,6 @@ public class MainPagePresenter extends
   protected void onReset() {
     super.onReset();
     getView().resetAndFocus();
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealRootContentEvent.fire(this, this);
   }
 
   /**
