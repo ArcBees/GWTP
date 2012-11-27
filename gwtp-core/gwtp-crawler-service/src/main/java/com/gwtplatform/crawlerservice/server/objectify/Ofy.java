@@ -13,25 +13,30 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.gwtplatform.samples.tab.client.ui;
 
-import com.google.gwt.inject.client.AbstractGinModule;
-import com.google.inject.Singleton;
+package com.gwtplatform.crawlerservice.server.objectify;
+
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.cmd.LoadType;
+import com.googlecode.objectify.util.cmd.ObjectifyWrapper;
 
 /**
- * This module makes sure every binder required by our widgets are bound as
- * singleton.
- *
- * @author Philippe Beaudoin
  */
-public class UiModule extends AbstractGinModule {
-
-  @Override
-  protected void configure() {
-    // Singleton binders 
-     bind(LinkMenu.Binder.class).in(Singleton.class);
-     bind(RoundTabPanel.Binder.class).in(Singleton.class);
-     bind(SimpleTabPanel.Binder.class).in(Singleton.class);
+public class Ofy extends ObjectifyWrapper<Ofy, OfyFactory> {
+  public Ofy(Objectify base) {
+    super(base);
   }
 
+  public <T> LoadType<T> query(Class<T> clazz) {
+    return load().type(clazz);
+  }
+
+  public <T> T get(Key<T> key) {
+    return load().key(key).get();
+  }
+
+  public <T> T get(Class<T> clazz, long id) {
+    return load().type(clazz).id(id).get();
+  }
 }

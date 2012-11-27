@@ -40,13 +40,15 @@ public class DialogSampleView extends ViewImpl implements MyView {
    */
   public interface Binder extends UiBinder<Widget, DialogSampleView> { }
 
-  @UiField
+  @UiField(provided = true)
   SimpleTabPanel tabPanel;
 
   private final Widget widget;
 
   @Inject
-  public DialogSampleView(Binder uiBinder) {
+  public DialogSampleView(Binder uiBinder, final SimpleTabPanel tabPanel) {
+    this.tabPanel = tabPanel;
+    
     widget = uiBinder.createAndBindUi(this);
   }
 

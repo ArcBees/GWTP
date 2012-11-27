@@ -38,13 +38,15 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
    */
   public interface Binder extends UiBinder<Widget, HomeView> { }
 
-  @UiField
+  @UiField(provided = true)
   SimpleTabPanel tabPanel;
 
   private final Widget widget;
 
   @Inject
-  public HomeView(Binder uiBinder) {
+  public HomeView(Binder uiBinder, final SimpleTabPanel tabPanel) {
+    this.tabPanel = tabPanel;
+    
     widget = uiBinder.createAndBindUi(this);
   }
 
