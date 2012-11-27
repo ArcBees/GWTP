@@ -131,6 +131,13 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
  */
 @Singleton
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends PresenterWidget<V> {
+  /**
+   * The RevealType define which event will be fired in the default {@link #revealInParent()}
+   *
+   * Root will fire a {@link RevealRootContentEvent}
+   * RootLayout will fire a {@link RevealRootLayoutContentEvent}
+   * RootPopup will fire a {@link RevealRootPopupContentEvent}
+   */
   public enum RevealType {
     Root,
     RootLayout,
@@ -215,7 +222,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * @param view The {@link View}.
    * @param proxy The {@link Proxy}.
    * @param revealType The {@link RevealType}.
-   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see RevealContentHandler}
+   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see RevealContentHandler}.
    */
   public Presenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType,
                    GwtEvent.Type<RevealContentHandler<?>> slot) {
@@ -303,6 +310,24 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
    * @param request The {@link PlaceRequest}.
    */
   public void prepareFromRequest(PlaceRequest request) {
+  }
+
+  /**
+   * Set the reveal type of this presenter
+   *
+   * @param revealType The {@link RevealType}.
+   */
+  protected void setRevealType(RevealType revealType) {
+    this.revealType = revealType;
+  }
+
+  /**
+   * Set the slot where this presenter is to be revealed
+   *
+   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see RevealContentHandler}.
+   */
+  protected void setSlot(GwtEvent.Type<RevealContentHandler<?>> slot) {
+    this.slot = slot;
   }
 
   /**
