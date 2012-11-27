@@ -16,9 +16,11 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
 /**
@@ -65,11 +67,57 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
    *          main content should be displayed.
    * @param requestTabsEventType The {@link Type} of the object to fire to
    *          identify all the displayed tabs.
+   * @param revealType The {@link RevealType}.
+   */
+  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+                               Type<ChangeTabHandler> changeTabType, RevealType revealType) {
+    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, revealType, null);
+  }
+
+  /**
+   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
+   * only work when instantiating this object using Guice/GIN dependency injection.
+   * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+   * automatic binding.
+   *
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   * @param proxy The {@link Proxy}.
+   * @param tabContentSlot An opaque object identifying the slot in which the
+   *          main content should be displayed.
+   * @param requestTabsEventType The {@link Type} of the object to fire to
+   *          identify all the displayed tabs.
+   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
+   *          and {@see RevealContentHandler}.
+   */
+  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+                               Type<ChangeTabHandler> changeTabType, GwtEvent.Type<RevealContentHandler<?>> slot) {
+    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, null, slot);
+  }
+
+  /**
+   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
+   * only work when instantiating this object using Guice/GIN dependency injection.
+   * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+   * automatic binding.
+   *
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   * @param proxy The {@link Proxy}.
+   * @param tabContentSlot An opaque object identifying the slot in which the
+   *          main content should be displayed.
+   * @param requestTabsEventType The {@link Type} of the object to fire to
+   *          identify all the displayed tabs.
+   * @param revealType The {@link RevealType}.
+   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
+   *          and {@see RevealContentHandler}.
    */
   public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
       Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-      Type<ChangeTabHandler> changeTabType) {
-    super(eventBus, view, proxy);
+      Type<ChangeTabHandler> changeTabType, RevealType revealType, Type<RevealContentHandler<?>> slot) {
+    super(eventBus, view, proxy, revealType, slot);
     this.tabContentSlot = tabContentSlot;
     this.requestTabsEventType = requestTabsEventType;
     if (changeTabType != null) {
@@ -100,8 +148,53 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
    *          identify all the displayed tabs.
    */
   public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-      Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
-    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null);
+                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
+    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, null);
+  }
+
+  /**
+   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
+   * instantiating this object using Guice/GIN dependency injection. See
+   * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
+   * This version of the constructor does not allow dynamically modifying the tabs after they were
+   * created.
+   *
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   * @param proxy The {@link Proxy}.
+   * @param tabContentSlot An opaque object identifying the slot in which the
+   *          main content should be displayed.
+   * @param requestTabsEventType The {@link Type} of the object to fire to
+   *          identify all the displayed tabs.
+   * @param revealType The {@link RevealType}.
+   */
+  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+                               RevealType revealType) {
+    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, revealType, null);
+  }
+
+  /**
+   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
+   * instantiating this object using Guice/GIN dependency injection. See
+   * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
+   * This version of the constructor does not allow dynamically modifying the tabs after they were
+   * created.
+   *
+   * @param eventBus The {@link EventBus}.
+   * @param view The {@link View}.
+   * @param proxy The {@link Proxy}.
+   * @param tabContentSlot An opaque object identifying the slot in which the
+   *          main content should be displayed.
+   * @param requestTabsEventType The {@link Type} of the object to fire to
+   *          identify all the displayed tabs.
+   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
+   *          and {@see RevealContentHandler}.
+   */
+  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+                               GwtEvent.Type<RevealContentHandler<?>> slot) {
+    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, slot);
   }
 
   /**
