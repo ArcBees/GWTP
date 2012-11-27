@@ -175,10 +175,10 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
 
   private String getPlaceInstantiationString() {
     if (getGatekeeperMethod == null) {
-      return "new " + ClassCollection.placeImplClassName + "( nameToken );";
+      return "new " + ClassCollection.placeImplClassName + "( nameToken )";
     } else {
       return "new " + ClassCollection.placeWithGatekeeperClassName
-          + "( nameToken, ginjector." + getGatekeeperMethod + "() );";
+          + "( nameToken, ginjector." + getGatekeeperMethod + "() )";
     }
   }
 
@@ -211,9 +211,9 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     writer.println(WRAPPED_CLASS_NAME + " wrappedProxy = GWT.create(" + WRAPPED_CLASS_NAME
         + ".class);");
     writer.println("wrappedProxy.delayedBind( ginjector ); ");
-    writer.println("proxy = wrappedProxy; ");
+    writer.println("setProxy(wrappedProxy); ");
     writer.println("String nameToken = \"" + getNameToken() + "\"; ");
-    writer.println("place = " + getPlaceInstantiationString());
+    writer.println("setPlace(" + getPlaceInstantiationString() + ");");
   }
 
   @Override
