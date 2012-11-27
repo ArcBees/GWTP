@@ -54,3 +54,4 @@ gwtp-samples/gwtp-sample-tab/bin/**
 .idea/**
 .settings**
 **.gwt-log
+/distribution

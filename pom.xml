@@ -578,8 +578,9 @@
         </profile>
     </profiles>
     
-    <!-- Run by using mvn clean install deploy -->
+    <!-- Run by using: mvn clean install deploy -->
     <!-- https://issues.sonatype.org/browse/OSSRH-1229?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel -->
+    <!-- Build a local maven repo: mvn -DaltDeploymentRepository=snapshot-repo::default::file:./distribution/snapshots clean deploy -->
     <distributionManagement>
         <repository>
             <id>gwtp-releases</id>
