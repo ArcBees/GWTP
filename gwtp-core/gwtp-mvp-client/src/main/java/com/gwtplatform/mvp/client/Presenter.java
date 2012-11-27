@@ -232,7 +232,6 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     this.slot = slot;
   }
 
-
   /**
    * Reveals the presenter, bypassing any service offered by the
    * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager}.
@@ -313,7 +312,17 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
   }
 
   /**
-   * Set the reveal type of this presenter
+   * Returns the {@link RevealType} of this presenter.
+   *
+   * @return The {@link RevealType}.
+   */
+  protected RevealType getRevealType() {
+    return revealType;
+  }
+
+  /**
+   * Set the {@link RevealType} of this presenter.
+   * If the parent type is not null, the slot will be ignored in {@link #revealInParent()}.
    *
    * @param revealType The {@link RevealType}.
    */
@@ -322,7 +331,17 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
   }
 
   /**
-   * Set the slot where this presenter is to be revealed
+   * Returns the slot where this presenter is to be revealed.
+   *
+   * @return The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see RevealContentHandler}.
+   */
+  protected GwtEvent.Type<RevealContentHandler<?>> getSlot() {
+    return slot;
+  }
+
+  /**
+   * Set the slot where this presenter is to be revealed.
+   * The slot is ignored in {@link #revealInParent()} if the parent type is not null.
    *
    * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see RevealContentHandler}.
    */
