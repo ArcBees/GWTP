@@ -46,4 +46,3 @@ rm -rf gwtp-samples/ gwtp-separate/ gwtp-all/
 echo "\nSee the zips in folder: $DISTRIBUTION\n"
 
 echo "Finished"
-
