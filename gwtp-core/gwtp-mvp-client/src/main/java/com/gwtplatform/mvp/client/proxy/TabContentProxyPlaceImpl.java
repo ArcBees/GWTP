@@ -41,16 +41,16 @@ public class TabContentProxyPlaceImpl<T extends Presenter<?, ?>> extends
 
   @Override
   public TabData getTabData() {
-    return proxy.getTabData();
+    return getProxy().getTabData();
   }
 
   @Override
   public Tab getTab() {
-    return proxy.getTab();
+    return getProxy().getTab();
   }
 
   @Override
   public void changeTab(TabData tabData) {
-    proxy.changeTab(tabData);
+    super.getProxy().changeTab(tabData);
   }
 }
