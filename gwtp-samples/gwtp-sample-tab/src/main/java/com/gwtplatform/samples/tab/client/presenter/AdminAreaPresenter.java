@@ -16,8 +16,8 @@
 
 package com.gwtplatform.samples.tab.client.presenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.View;
@@ -25,7 +25,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.IsAdminGatekeeper;
 import com.gwtplatform.samples.tab.client.NameTokens;
@@ -71,13 +70,6 @@ public class AdminAreaPresenter
   @Inject
   public AdminAreaPresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, MainPagePresenter.TYPE_SetTabContent);
   }
-
-  @Override
-  protected void revealInParent() {
-    RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetTabContent,
-        this);
-  }
-
 }
