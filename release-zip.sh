@@ -1,15 +1,15 @@
 #/bin/sh
 
 # Editable
-GWTPVER=0.8
+GWTPVER=0.8-SNAPSHOT
+REPO=~/.m2/repository/com/gwtplatform
 
 # Don't Edit Below *********
+echo "Started"
+
 CURRENTDIR=`pwd`
 DISTRIBUTION=$CURRENTDIR/distribution
-RELEASE=$DISTRIBUTION/release/com/gwtplatform
 ZIPDIR=$DISTRIBUTION/downloads
-
-echo "Started"
 
 # Clean House
 # Don't delete distribution if deploying to a repository
@@ -18,30 +18,32 @@ mkdir $DISTRIBUTION
 mkdir $ZIPDIR
 
 # Zip Samples
-zip -x ".*" -r $ZIPDIR/gwtp-samples-$GWTPVER.zip gwtp-samples
+zip -r $ZIPDIR/gwtp-samples-$GWTPVER.zip gwtp-samples -x "*/.*"
 
 # Maven Building
+mvn clean install
 
+# Maven options to building
 # Build local snapshots maven repository
 #mvn -DaltDeploymentRepository=snapshot-repo::default::file:$DISTRIBUTION/snapshots clean deploy
-
 # Build local release
-mvn -Prelease -DaltDeploymentRepository=release::default::file://$DISTRIBUTION/release clean deploy
+#mvn -Prelease -DaltDeploymentRepository=release::default::file://$DISTRIBUTION/release clean deploy
 
 # Copy and zip jars
-mkdir $ZIPDIR/gwtp-all
-cp $RELEASE/gwtp-all/*.jar $ZIPDIR/gwtp-all
+cd $ZIPDIR
+mkdir gwtp-all
+cp  $REPO/gwtp-all/$GWTPVER/*.jar gwtp-all
+cd gwtp-all
+zip ../gwtp-all-$GWTPVER.zip *.jar
+cd ..
+mkdir gwtp-separate
+for d in `ls -d $REPO/gwtp-clients* $REPO/gwtp-crawler* $REPO/gwtp-dispatch* $REPO/gwtp-mvp* $REPO/gwtp-processors* $REPO/gwtp-tester*`; do cp $d/$GWTPVER/*.jar gwtp-separate/; done
+cd gwtp-separate
+zip ../gwtp-separate-$GWTPVER.zip *.jar
+cd ..
+rm -rf gwtp-samples/ gwtp-separate/ gwtp-all/
 
-cd $ZIPDIR/gwtp-all
-zip -x ".*" $ZIPDIR/gwtp-all/gwtp-all-$GWTPVER.zip *.jar
-
-mkdir $ZIPDIR/gwtp-separate
-for d in `ls -d $RELEASE/gwtp-clients* $RELEASE/gwtp-crawler* $RELEASE/gwtp-dispatch* $RELEASE/gwtp-mvp* $RELEASE/gwtp-processors* $RELEASE/gwtp-tester*`; do cp $d/$GWTPVER/*.jar $ZIPDIR/gwtp-separate/; done
-
-cd $ZIPDIR/gwtp-separate
-zip -x ".*" $ZIPDIR/gwtp-separate/gwtp-separate-$GWTPVER.zip *.jar
-
-# Remove tmp directories
-rm -rf $ZIPDIR/gwtp-samples/ $ZIPDIR/gwtp-separate/ $ZIPDIR/gwtp-all/
+echo "\nSee the zips in folder: $DISTRIBUTION\n"
 
 echo "Finished"
+
