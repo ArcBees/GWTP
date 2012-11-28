@@ -31,7 +31,8 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Christian Goudreau
  */
 public abstract class ViewImpl implements View {
-
+  private Widget widget;
+  
   @Override
   public void addToSlot(Object slot, Widget content) {
   }
@@ -42,5 +43,14 @@ public abstract class ViewImpl implements View {
 
   @Override
   public void setInSlot(Object slot, Widget content) {
+  }
+  
+  @Override
+  public Widget asWidget() {
+      return widget;
+  }
+  
+  protected void initWidget(Widget widget) {
+    this.widget = widget;
   }
 }
