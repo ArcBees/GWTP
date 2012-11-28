@@ -16,21 +16,14 @@
 
 package com.gwtplatform.dispatch.annotation;
 
+import com.google.web.bindery.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.ValueProxy;
+
 /**
  * For testing purposes only.
  *
- * @author Brendan Doherty
+ * @author Florian Sauter
  */
-@GenEvent
-public class FooChanged {
-  @Order(1)
-  Foo foo;
-  @Order(2)
-  boolean originator;
-  @Optional
-  @Order(3)
-  String additionalMessage;
-  @Optional
-  @Order(4)
-  double priority;
+@ProxyFor(Detail.class)
+public interface DetailProxy extends ValueProxy {
 }
