@@ -25,7 +25,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
 import com.gwtplatform.samples.tab.client.NameTokens;
@@ -67,16 +66,11 @@ public class GlobalDialogSubTabPresenter extends
   public GlobalDialogSubTabPresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy, final GlobalDialogPresenterWidget globalDialog,
       final InfoPopupPresenterWidget infoPopup) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, DialogSamplePresenter.TYPE_SetTabContent);
     this.globalDialog = globalDialog;
     this.infoPopup = infoPopup;
 
     getView().setUiHandlers(this);
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealContentEvent.fire(this, DialogSamplePresenter.TYPE_SetTabContent, this);
   }
 
   public void showGlobalDialog() {
