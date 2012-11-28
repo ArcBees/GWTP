@@ -1,4 +1,6 @@
 #/bin/sh
+# Zip GWTP Jars
+# This will zip of the GWTP library jars into ./distribution/downloads folder.
 
 # Editable
 GWTPVER=0.8-SNAPSHOT
