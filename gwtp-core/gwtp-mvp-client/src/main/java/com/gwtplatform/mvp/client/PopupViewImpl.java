@@ -17,8 +17,10 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.Window;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
@@ -135,10 +137,18 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
    * needed.
    */
   private void doCenter() {
-    boolean wasVisible = asPopupPanel().isShowing();
-    asPopupPanel().center();
-    if (!wasVisible) {
-      asPopupPanel().hide();
-    }
+    // If left/top are set from a previous doCenter() call, and our content
+    // has changed, we may get a bogus getOffsetWidth because our new content
+    // is wrapping (giving a lower offset width) then it would without the
+    // previous left. Clearing left/top to avoids this.
+    PopupPanel popup = asPopupPanel();
+    Element elem = popup.getElement();
+    elem.getStyle().clearLeft();
+    elem.getStyle().clearTop();
+
+    int left = (Window.getClientWidth() - popup.getOffsetWidth()) >> 1;
+    int top = (Window.getClientHeight() - popup.getOffsetHeight()) >> 1;
+    popup.setPopupPosition(Math.max(Window.getScrollLeft() + left, 0), Math.max(
+        Window.getScrollTop() + top, 0));
   }
 }
