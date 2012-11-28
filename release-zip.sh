@@ -20,6 +20,7 @@ mkdir $DISTRIBUTION
 mkdir $ZIPDIR
 
 # Zip Samples
+mvn clean
 zip -r $ZIPDIR/gwtp-samples-$GWTPVER.zip gwtp-samples -x "*/.*"
 
 # Maven Building
