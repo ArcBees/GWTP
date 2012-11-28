@@ -48,4 +48,6 @@ rm -rf gwtp-samples/ gwtp-separate/ gwtp-all/
 
 echo "\nSee the zips in folder: $DISTRIBUTION\n"
 
+# TODO add readme in the zip about how to build it down the road. 
+
 echo "Finished"
