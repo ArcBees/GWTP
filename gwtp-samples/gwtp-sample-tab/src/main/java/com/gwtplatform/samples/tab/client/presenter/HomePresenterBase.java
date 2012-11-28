@@ -16,6 +16,7 @@
 
 package com.gwtplatform.samples.tab.client.presenter;
 
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
@@ -39,8 +40,8 @@ public abstract class HomePresenterBase<V extends View & TabPanel, P extends Pro
     extends TabContainerPresenter<V, P> {
 
   public HomePresenterBase(EventBus eventBus, V view, P proxy,
-      Type<RequestTabsHandler> requestTabsEventType) {
-    super(eventBus, view, proxy, TYPE_SetTabContent, requestTabsEventType);
+      Type<RequestTabsHandler> requestTabsEventType, GwtEvent.Type<RevealContentHandler<?>> slot) {
+    super(eventBus, view, proxy, TYPE_SetTabContent, requestTabsEventType, slot);
   }
 
   /**
