@@ -16,11 +16,10 @@
 
 package com.gwtplatform.mvp.client.mvp;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
@@ -28,7 +27,6 @@ import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 /**
  * This is the test presenter.
@@ -58,17 +56,12 @@ public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyVie
   @Inject
   public MainPresenterTestUtil(final EventBus eventBus, final MyView view,
       final MyProxy proxy, @Named("Sub") PresenterWidget<View> subPresenter) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, RevealType.Root);
     this.subPresenter = subPresenter;
   }
 
   public void setSubPresenter() {
     setInSlot(TYPE_SetMainContent, subPresenter);
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealRootContentEvent.fire(this, this);
   }
 }
 

@@ -27,7 +27,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.RequestTabs;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.samples.tab.client.NameTokens;
 
@@ -76,11 +75,6 @@ public class DialogSamplePresenter
   @Inject
   public DialogSamplePresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy) {
-    super(eventBus, view, proxy, TYPE_SetTabContent, TYPE_RequestTabs);
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetTabContent, this);
+    super(eventBus, view, proxy, TYPE_SetTabContent, TYPE_RequestTabs, MainPagePresenter.TYPE_SetTabContent);
   }
 }
