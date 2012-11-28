@@ -53,7 +53,7 @@ public class AsyncEventPresenterTestUtil extends
   }
 
   public AsyncEventPresenterTestUtil(EventBus eventBus, MyView view, MyProxy proxy, DispatchAsync dispatcher) {
-    super(eventBus, view, proxy);
+    super(eventBus, view, proxy, RevealType.Root);
     this.dispatcher = dispatcher;
   }
 
@@ -95,11 +95,6 @@ public class AsyncEventPresenterTestUtil extends
   @Override
   public void onAsyncCallFail(AsyncCallFailEvent asyncCallFailEvent) {
     getView().setMessage("Oops, something went wrong...");
-  }
-
-  @Override
-  protected void revealInParent() {
-    RevealRootContentEvent.fire(this, this);
   }
 
   static class MyAction extends ActionImpl<MyResult> {
