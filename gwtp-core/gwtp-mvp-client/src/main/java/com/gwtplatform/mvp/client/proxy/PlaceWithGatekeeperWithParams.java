@@ -13,22 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.gwtplatform.mvp.client.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+package com.gwtplatform.mvp.client.proxy;
 
 /**
- * This annotation lets you define the parameters for a
- * {@link GatekeeperWithParams} to use for the
- * {@link com.gwtplatform.mvp.client.proxy.Place} associated
- * with your proxy. Your custom {@code Ginjector} must have a
- * method returning the {@link GatekeeperWithParams} specified
- * in this annotation.
+ * Specialized {@link PlaceWithGatekeeper} which uses a {@link GatekeeperWithParams}
+ * and an array of parameters to protect the {@link Place}.
  *
  * @author Juan Carlos González
  */
-@Target(ElementType.TYPE)
-public @interface GatekeeperParams {
-  String[] value();
+public class PlaceWithGatekeeperWithParams extends PlaceImpl {
+
+  private final GatekeeperWithParams gatekeeper;
+  private final String[] params;
+
+  public PlaceWithGatekeeperWithParams(String nameToken, GatekeeperWithParams gatekeeper,
+      String[] params) {
+    super(nameToken);
+    this.gatekeeper = gatekeeper;
+    this.params = params;
+  }
+
+  @Override
+  public boolean canReveal() {
+    return gatekeeper.withParams(params).canReveal();
+  }
 }

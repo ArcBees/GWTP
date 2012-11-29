@@ -90,7 +90,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
   public String getNameToken() {
     return nameToken;
   }
-  
+
   public String getGatekeeperParamsString() {
     if (gatekeeperParams == null) {
       return "null";
@@ -201,12 +201,12 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
   private String getPlaceInstantiationString() {
     if (getGatekeeperMethod == null) {
       return "new " + ClassCollection.placeImplClassName + "( nameToken );";
-    } else { 
+    } else {
       if (gatekeeperParams == null) {
-        return "new " + ClassCollection.placeWithGatekeeperClassName 
+        return "new " + ClassCollection.placeWithGatekeeperClassName
         + "( nameToken, ginjector." + getGatekeeperMethod + "() );";
         } else {
-          return "new " + ClassCollection.placeWithParameterizedGatekeeperClassName 
+          return "new " + ClassCollection.placeWithGatekeeperWithParamsClassName
           + "( nameToken, ginjector." + getGatekeeperMethod + "(), gatekeeperParams );";
       }
     }
