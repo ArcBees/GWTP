@@ -137,6 +137,10 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
    * needed.
    */
   private void doCenter() {
+    // We can't use Element.center() method as it will show the popup
+    // by default and not only centering it. This is resulting in onAttach()
+    // being called twice when using setInSlot() or addToPopupSlot() in PresenterWidget
+
     // If left/top are set from a previous doCenter() call, and our content
     // has changed, we may get a bogus getOffsetWidth because our new content
     // is wrapping (giving a lower offset width) then it would without the
