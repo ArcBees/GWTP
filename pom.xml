@@ -481,6 +481,18 @@
                 </configuration>
             </plugin>
 
+ <!--            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>gwtp-snapshots</serverId>
+                    <nexusUrl>http://localhost:8081/nexus/</nexusUrl>
+                    update this to the correct id!
+                    <stagingProfileId>1296f79efe04a4d0</stagingProfileId>
+                </configuration>
+              </plugin> -->
         </plugins>
     </build>
 
@@ -578,15 +590,16 @@
         </profile>
     </profiles>
     
-    <!-- Run by using mvn clean install deploy -->
+    <!-- Run by using: mvn clean install deploy -->
     <!-- https://issues.sonatype.org/browse/OSSRH-1229?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel -->
+    <!-- Build a local maven repo: mvn -DaltDeploymentRepository=snapshot-repo::default::file:./distribution/snapshots clean deploy -->
     <distributionManagement>
         <repository>
-            <id>gwtp-releases</id>
+            <id>gwtp-releases</id> <!-- Add to settings.xml <server><id>gwtp-releases</id> -->
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-            <id>gwtp-snapshots</id>
+            <id>gwtp-snapshots</id> <!-- Add to settings.xml <server><id>gwtp-snapshots</id> -->
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement> 
