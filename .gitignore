@@ -24,7 +24,6 @@ MANIFEST.MF
 build.num
 crchris.bat
 .apt_generated/**
-**.zip
 *.iml
 *.ipr
 *.iws
@@ -54,3 +53,4 @@ gwtp-samples/gwtp-sample-tab/bin/**
 .idea/**
 .settings**
 **.gwt-log
+
