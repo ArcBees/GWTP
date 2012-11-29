@@ -65,8 +65,7 @@ public class ClassCollection {
   static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
   static final String placeRequestClassName = PlaceRequest.class.getCanonicalName();
   static final String placeWithGatekeeperClassName = PlaceWithGatekeeper.class.getCanonicalName();
-  static final String placeWithGatekeeperWithParamsClassName =
-    PlaceWithGatekeeperWithParams.class.getCanonicalName();
+  static final String placeWithGatekeeperWithParamsClassName = PlaceWithGatekeeperWithParams.class.getCanonicalName();
   static final String providerClassName = Provider.class.getCanonicalName();
   static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
   static final String proxyPlaceImplClassName = ProxyPlaceImpl.class.getCanonicalName();

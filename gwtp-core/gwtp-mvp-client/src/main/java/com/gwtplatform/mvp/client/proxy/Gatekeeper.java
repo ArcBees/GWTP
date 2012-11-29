@@ -49,8 +49,8 @@ package com.gwtplatform.mvp.client.proxy;
  */
 public interface Gatekeeper {
   /**
-   * Checks whether or not the {@link Place} controlled by this gatekeeper can
-   * be revealed.
+   * Checks whether or not the {@link Place} controlled by this gatekeeper
+   * can be revealed.
    *
    * @return {@code true} if the {@link Place} can be revealed, {@code false}
    *         otherwise.

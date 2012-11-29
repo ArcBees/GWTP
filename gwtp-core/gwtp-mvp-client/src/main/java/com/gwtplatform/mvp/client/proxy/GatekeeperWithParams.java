@@ -60,8 +60,8 @@ public interface GatekeeperWithParams extends Gatekeeper {
    * in order to decide if {@link Place} can be revealed.
    *
    * @param params array of parameters
-   * @return a reference to itself for chaining with the call to the inherited
-   * canReveal method.
+   * @return a reference to itself for chaining with the call to the
+   * inherited canReveal method.
    */
   GatekeeperWithParams withParams(String[] params);
 }

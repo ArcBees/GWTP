@@ -95,6 +95,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     if (gatekeeperParams == null) {
       return "null";
     }
+    // Build the params array declaration
     StringBuilder builder = new StringBuilder("new String[] {");
     for (int i = 0; i < gatekeeperParams.length; i++) {
       builder.append("\"").append(gatekeeperParams[i]).append("\",");
