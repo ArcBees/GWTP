@@ -8,23 +8,24 @@ REPO=~/.m2/repository/com/gwtplatform
 
 # Don't Edit Below *********
 echo "Started"
+echo "Do no use control-c"
 
 CURRENTDIR=`pwd`
-DISTRIBUTION=$CURRENTDIR/distribution
+DISTRIBUTION=$CURRENTDIR/target/distribution
 ZIPDIR=$DISTRIBUTION/downloads
 
 # Clean House
 # Don't delete distribution if deploying to a repository
-rm -rf $DISTRIBUTION
+mvn clean
+mkdir target
 mkdir $DISTRIBUTION
 mkdir $ZIPDIR
 
 # Zip Samples
-mvn clean
 zip -r $ZIPDIR/gwtp-samples-$GWTPVER.zip gwtp-samples -x "*/.*"
 
 # Maven Building
-mvn clean install
+mvn install -DskipTests
 
 # Maven options to building
 # Build local snapshots maven repository
@@ -45,6 +46,9 @@ cd gwtp-separate
 zip ../gwtp-separate-$GWTPVER.zip *.jar
 cd ..
 rm -rf gwtp-samples/ gwtp-separate/ gwtp-all/
+
+# Upload to github downloads
+mvn ghDownloads:upload
 
 echo "\nSee the zips in folder: $DISTRIBUTION\n"
 
