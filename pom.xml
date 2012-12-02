@@ -208,6 +208,8 @@
         <spring.version>3.1.2.RELEASE</spring.version>
         <gae.version>1.7.2</gae.version>
 
+        <github.global.server>github</github.global.server>
+        <github.version>0.6</github.version>
     </properties>
 
     <repositories>
@@ -434,6 +436,22 @@
                                 </pluginExecution>
                             </pluginExecutions>
                         </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+
+                <!-- mvn ghDownloads:upload -->
+                <plugin>
+                    <groupId>com.github.github</groupId>
+                    <artifactId>downloads-maven-plugin</artifactId>
+                    <version>${github.version}</version>
+                    <configuration>
+                        <description>${project.version} release of ${project.name}</description>
+                        <override>true</override>
+                        <includeAttached>false</includeAttached>
+                        <dryRun>false</dryRun>
+                        <includes>
+                            <include>**/*.zip</include>
+                        </includes>
                     </configuration>
                 </plugin>
 
