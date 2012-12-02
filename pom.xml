@@ -595,11 +595,11 @@
     <!-- Build a local maven repo: mvn -DaltDeploymentRepository=snapshot-repo::default::file:./distribution/snapshots clean deploy -->
     <distributionManagement>
         <repository>
-            <id>gwtp-releases</id> <!-- Add to settings.xml <server><id>gwtp-releases</id> -->
+            <id>sona-nexus-deploy</id> <!-- Add to settings.xml <server><id>sona-nexus-deploy</id> -->
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-            <id>gwtp-snapshots</id> <!-- Add to settings.xml <server><id>gwtp-snapshots</id> -->
+            <id>sona-nexus-deploy</id> 
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement> 
