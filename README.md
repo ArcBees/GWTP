@@ -15,6 +15,9 @@ Get it from the download section or Maven central. See the Release Notes and the
 06/15/2011 - The slides for my PrairieDevCon 2011 talk on AppEngine are available here, 
 the ones for my GWT & GWTP dojo are here, and you can get the accompanying project.
 
+##License
+GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
+
 ##Downloads
 [Using Maven with GWTP](Using-Gwtp-with-Maven)
 
