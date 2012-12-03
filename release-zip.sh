@@ -33,7 +33,7 @@ zip -r $ZIPDIR/gwtp-samples-$GWTPVER.zip gwtp-samples -x "*/.*"
 
 # Maven Building
 echo "mvn install -DskipTests"
-mvn install -DskipTests
+mvn install -Prelease -DskipTests
 
 # Maven options to building
 # Build local snapshots maven repository
