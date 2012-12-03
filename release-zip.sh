@@ -48,7 +48,7 @@ cd ..
 rm -rf gwtp-samples/ gwtp-separate/ gwtp-all/
 
 # Upload to github downloads
-mvn ghDownloads:upload
+#mvn ghDownloads:upload
 
 echo "\nSee the zips in folder: $DISTRIBUTION\n"
 
