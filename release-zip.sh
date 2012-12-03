@@ -32,7 +32,7 @@ mkdir $ZIPDIR
 zip -r $ZIPDIR/gwtp-samples-$GWTPVER.zip gwtp-samples -x "*/.*"
 
 # Maven Building
-echo "mvn install -DskipTests"
+echo "mvn install -Prelease -DskipTests"
 mvn install -Prelease -DskipTests
 
 # Maven options to building
