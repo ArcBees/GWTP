@@ -32,7 +32,7 @@ mkdir $ZIPDIR
 zip -r $ZIPDIR/gwtp-samples-$GWTPVER.zip gwtp-samples -x "*/.*"
 
 # Maven Building
-echo "mvn install -DskipTests"
+echo "mvn install -Prelease -DskipTests"
 mvn install -Prelease -DskipTests
 
 # Maven options to building
@@ -79,7 +79,7 @@ echo "rm -rf gwtp-samples/ gwtp-separate/ gwtp-all/"
 rm -rf gwtp-samples/ gwtp-separate/ gwtp-all/
 
 # Upload to github downloads
-#mvn ghDownloads:upload
+mvn ghDownloads:upload
 
 echo "\nSee the zips in folder: $DISTRIBUTION\n"
 
