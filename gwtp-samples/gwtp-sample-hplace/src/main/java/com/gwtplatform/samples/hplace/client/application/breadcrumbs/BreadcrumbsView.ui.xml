@@ -14,4 +14,4 @@
 		
 		<g:FlowPanel ui:field="mainContentPanel" />
 	</g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

@@ -12,4 +12,4 @@
 		<br />
 		<g:Hyperlink ui:field="backLink">&laquo; Go back</g:Hyperlink>
 	</g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>
