@@ -16,15 +16,13 @@
 
 package com.gwtplatform.samples.tab.client.application.globaldialog;
 
+import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
-import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
-import com.gwtplatform.samples.tab.client.application.localdialog.LocalDialogPresenterWidget;
 
 /**
  * The {@link PresenterWidget} of a dialog box that is meant to be displayed no
