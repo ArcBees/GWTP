@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.hplace.client.application.breadcrumbs;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -36,12 +35,10 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  * @author Christian Goudreau
  */
 public class BreadcrumbsView extends ViewImpl implements BreadcrumbsPresenter.MyView {
-  public interface BreadcrumbsViewUiBinder extends UiBinder<Widget, BreadcrumbsView> {
+  /**
+   */
+  public interface Binder extends UiBinder<Widget, BreadcrumbsView> {
   }
-
-  private static BreadcrumbsViewUiBinder uiBinder = GWT.create(BreadcrumbsViewUiBinder.class);
-
-  public final Widget widget;
 
   @UiField
   FlowPanel breadcrumbs;
@@ -49,11 +46,13 @@ public class BreadcrumbsView extends ViewImpl implements BreadcrumbsPresenter.My
   FlowPanel mainContentPanel;
 
   private final PlaceManager placeManager;
+  private final Widget widget;
 
   @Inject
-  public BreadcrumbsView(PlaceManager placeManager) {
+  public BreadcrumbsView(final Binder binder, final PlaceManager placeManager) {
     this.placeManager = placeManager;
-    widget = uiBinder.createAndBindUi(this);
+
+    widget = binder.createAndBindUi(this);
   }
 
   @Override

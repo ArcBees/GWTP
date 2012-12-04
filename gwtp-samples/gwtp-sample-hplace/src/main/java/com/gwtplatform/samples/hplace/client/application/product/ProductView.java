@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.hplace.client.application.product;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -25,6 +24,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
@@ -32,10 +32,10 @@ import com.gwtplatform.samples.hplace.shared.dispatch.Product;
  * @author Philippe Beaudoin
  */
 public class ProductView extends ViewImpl implements ProductPresenter.MyView {
-  public interface ProductViewUiBinder extends UiBinder<Widget, ProductView> {
+  /**
+   */
+  public interface Binder extends UiBinder<Widget, ProductView> {
   }
-
-  private static ProductViewUiBinder uiBinder = GWT.create(ProductViewUiBinder.class);
 
   @UiField
   Hyperlink backLink;
@@ -52,8 +52,9 @@ public class ProductView extends ViewImpl implements ProductPresenter.MyView {
 
   private final Widget widget;
 
-  public ProductView() {
-    widget = uiBinder.createAndBindUi(this);
+  @Inject
+  public ProductView(final Binder binder) {
+    widget = binder.createAndBindUi(this);
   }
 
   @Override
