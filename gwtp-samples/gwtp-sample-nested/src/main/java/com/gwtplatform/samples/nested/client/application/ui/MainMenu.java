@@ -14,32 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client.view;
+package com.gwtplatform.samples.nested.client.application.ui;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.samples.nested.client.presenter.AboutUsPresenter.MyView;
-
 /**
+ * A simple menu that can be reused.
+ *
  * @author Christian Goudreau
  */
-public class AboutUsView extends ViewImpl implements MyView {
-  interface AboutUsViewUiBinder extends UiBinder<Widget, AboutUsView> {
+public class MainMenu extends Composite {
+  /**
+   */
+  public interface MainMenuUiBinder extends UiBinder<Widget, MainMenu> {
   }
 
-  private static AboutUsViewUiBinder uiBinder = GWT.create(AboutUsViewUiBinder.class);
+  private static MainMenuUiBinder uiBinder = GWT.create(MainMenuUiBinder.class);
 
-  private final Widget widget;
-
-  public AboutUsView() {
-    widget = uiBinder.createAndBindUi(this);
-  }
-
-  @Override
-  public Widget asWidget() {
-    return widget;
+  public MainMenu() {
+    initWidget(uiBinder.createAndBindUi(this));
   }
 }

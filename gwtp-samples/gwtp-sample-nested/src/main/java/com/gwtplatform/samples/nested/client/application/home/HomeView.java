@@ -14,41 +14,31 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client.view;
+package com.gwtplatform.samples.nested.client.application.home;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.samples.nested.client.presenter.ContactPresenterBase.MyView;
 
 /**
  * @author Christian Goudreau
  */
-public class ContactView extends ViewImpl implements MyView {
-  interface ContactViewUiBinder extends UiBinder<Widget, ContactView> {
+public class HomeView extends ViewImpl implements HomePresenter.MyView {
+  /**
+  */
+  public interface Binder extends UiBinder<Widget, HomeView> {
   }
-
-  private static ContactViewUiBinder uiBinder = GWT.create(ContactViewUiBinder.class);
 
   private final Widget widget;
 
-  @UiField
-  Label navigationHistory;
-
-  public ContactView() {
-    widget = uiBinder.createAndBindUi(this);
+  @Inject
+  public HomeView(final Binder binder) {
+    widget = binder.createAndBindUi(this);
   }
 
   @Override
   public Widget asWidget() {
     return widget;
-  }
-
-  @Override
-  public void setNavigationHistory(String navigationHistory) {
-    this.navigationHistory.setText(navigationHistory);
   }
 }
