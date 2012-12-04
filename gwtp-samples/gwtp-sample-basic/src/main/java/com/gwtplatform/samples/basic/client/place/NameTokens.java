@@ -14,30 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.shared;
-
-import com.gwtplatform.dispatch.shared.Result;
+package com.gwtplatform.samples.basic.client.place;
 
 /**
- * The result of a {@link SendTextToServer} action.
+ * Main presenters name tokens
+ * 
+ * @author Brandon Donnelson
  */
-public class SendTextToServerResult implements Result {
+public class NameTokens {
+  public static final String home = "home";
+  public static final String response = "response";
 
-  private String response;
-
-  public SendTextToServerResult(final String response) {
-    this.response = response;
+  public static String getHome() {
+    return home;
   }
-
-  /**
-   * For serialization only.
-   */
-  @SuppressWarnings("unused")
-  private SendTextToServerResult() {
-  }
-
-  public String getResponse() {
+  
+  public static String getResponse() {
     return response;
   }
-
 }

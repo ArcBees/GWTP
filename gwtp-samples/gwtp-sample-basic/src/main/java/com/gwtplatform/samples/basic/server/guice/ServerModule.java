@@ -14,10 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.server;
+package com.gwtplatform.samples.basic.server.guice;
 
 import com.gwtplatform.dispatch.server.guice.HandlerModule;
-import com.gwtplatform.samples.basic.shared.SendTextToServer;
+import com.gwtplatform.samples.basic.server.dispatch.SendTextToServerHandler;
+import com.gwtplatform.samples.basic.shared.dispatch.SendTextToServerAction;
 
 /**
  * Module which binds the handlers and configurations.
@@ -28,6 +29,6 @@ public class ServerModule extends HandlerModule {
 
   @Override
   protected void configureHandlers() {
-    bindHandler(SendTextToServer.class, SendTextToServerHandler.class);
+    bindHandler(SendTextToServerAction.class, SendTextToServerHandler.class);
   }
 }
