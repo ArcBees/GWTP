@@ -9,14 +9,27 @@
         padding: 2px 5px;
         float: left;
       }
+      
       .confirmationLink a, .confirmationLink a:visited, .confirmationLink a:hover {
         color: white;
         cursor: pointer;
       }
+      
+      .links {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            font-style: italic;
+        }
     </ui:style>
     
     <g:HTMLPanel>
         <h1>News</h1>
+
+        <div class="{style.links}">
+            GWTP Tabs Sample<br/> 
+            <a href="https://github.com/ArcBees/GWTP">Project Home</a><br/>
+            <a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-tab">Source</a>
+        </div>
 
         <p>Clicking on the <b>Home</b> tab will always come back to the last tab selected.</p>
 
