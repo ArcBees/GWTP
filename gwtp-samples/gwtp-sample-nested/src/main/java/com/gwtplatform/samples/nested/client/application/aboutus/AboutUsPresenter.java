@@ -14,34 +14,38 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client.presenter;
+package com.gwtplatform.samples.nested.client.application.aboutus;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.samples.nested.client.NameTokens;
+import com.gwtplatform.samples.nested.client.application.ApplicationPresenter;
+import com.gwtplatform.samples.nested.client.place.NameTokens;
 
 /**
- * The events are handled in {@link ContactPresenterBase}.
- *
  * @author Christian Goudreau
- * @author Philippe Beaudoin
  */
-public class ContactPresenter
-    extends ContactPresenterBase<ContactPresenter.MyProxy> {
+public class AboutUsPresenter extends Presenter<AboutUsPresenter.MyView, AboutUsPresenter.MyProxy> {
   /**
-   * {@link ContactPresenter}'s proxy.
+   * {@link AboutUsPresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @NameToken(NameTokens.contactPage)
-  public interface MyProxy extends ProxyPlace<ContactPresenter> {
+  @NameToken(NameTokens.aboutUsPage)
+  public interface MyProxy extends ProxyPlace<AboutUsPresenter> {
+  }
+
+  /**
+   * {@link AboutUsPresenter}'s view.
+   */
+  public interface MyView extends View {
   }
 
   @Inject
-  public ContactPresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy) {
-    super(eventBus, view, proxy, MainPagePresenter.TYPE_SetMainContent);
+  public AboutUsPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
+    super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
   }
 }

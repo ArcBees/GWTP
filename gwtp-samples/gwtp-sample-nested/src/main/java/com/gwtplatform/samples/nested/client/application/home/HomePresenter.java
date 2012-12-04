@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client.presenter;
+package com.gwtplatform.samples.nested.client.application.home;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -23,13 +23,13 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.samples.nested.client.NameTokens;
+import com.gwtplatform.samples.nested.client.application.ApplicationPresenter;
+import com.gwtplatform.samples.nested.client.place.NameTokens;
 
 /**
  * @author Christian Goudreau
  */
-public class HomePresenter extends
-    Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
+public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
   /**
    * {@link HomePresenter}'s proxy.
    */
@@ -45,8 +45,7 @@ public class HomePresenter extends
   }
 
   @Inject
-  public HomePresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy) {
-    super(eventBus, view, proxy, MainPagePresenter.TYPE_SetMainContent);
+  public HomePresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
+    super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
   }
 }

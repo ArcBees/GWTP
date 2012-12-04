@@ -1,8 +1,22 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+        .links {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </ui:style>
 	<g:HTMLPanel>
 		<h1>Home page</h1>
+
+        <div class="{style.links}">
+            GWTP Nested Sample<br/> 
+            <a href="https://github.com/ArcBees/GWTP">Project Home</a><br/>
+            <a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-nested">Source</a>
+        </div> 
+
 		<p>This is the home page for this demonstration. You'll always get
 			this page as the default when you come in this showcase.</p>
 			

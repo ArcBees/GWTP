@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:with type="com.gwtplatform.samples.nested.client.NameTokens" field="nameTokens"></ui:with>
+	<ui:with type="com.gwtplatform.samples.nested.client.place.NameTokens" field="nameTokens"></ui:with>
 
 	<g:HTMLPanel>
 		<g:InlineHyperlink targetHistoryToken="{nameTokens.getHomePage}">Home</g:InlineHyperlink> | 

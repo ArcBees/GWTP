@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client;
+package com.gwtplatform.samples.nested.client.place;
 
 /**
  * The central location of all name tokens for the application. All
@@ -32,9 +32,7 @@ package com.gwtplatform.samples.nested.client;
  */
 public class NameTokens {
   public static final String aboutUsPage = "!aboutUsPage";
-
   public static final String contactPage = "!contactPage";
-
   public static final String homePage = "!homePage";
 
   public static String getAboutUsePage() {

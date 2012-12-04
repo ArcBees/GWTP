@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client.presenter;
+package com.gwtplatform.samples.nested.client.application;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
@@ -32,23 +32,22 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  * This is the top-level presenter of the hierarchy. Other presenters reveal
  * themselves within this presenter.
  * <p />
- * The goal of this sample is to show how to use nested presenters. These can
- * be useful to decouple multiple presenters that need to be displayed on the
+ * The goal of this sample is to show how to use nested presenters. These can be
+ * useful to decouple multiple presenters that need to be displayed on the
  * screen simultaneously.
- *
+ * 
  * @author Christian Goudreau
  */
-public class MainPagePresenter extends
-    Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
+public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
   /**
-   * {@link MainPagePresenter}'s proxy.
+   * {@link ApplicationPresenter}'s proxy.
    */
   @ProxyStandard
-  public interface MyProxy extends Proxy<MainPagePresenter> {
+  public interface MyProxy extends Proxy<ApplicationPresenter> {
   }
 
   /**
-   * {@link MainPagePresenter}'s view.
+   * {@link ApplicationPresenter}'s view.
    */
   public interface MyView extends View {
     void showLoading(boolean visibile);
@@ -61,15 +60,15 @@ public class MainPagePresenter extends
   public static final Type<RevealContentHandler<?>> TYPE_SetMainContent = new Type<RevealContentHandler<?>>();
 
   @Inject
-  public MainPagePresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy) {
+  public ApplicationPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
     super(eventBus, view, proxy, RevealType.Root);
   }
 
   /**
    * We display a short lock message whenever navigation is in progress.
-   *
-   * @param event The {@link LockInteractionEvent}.
+   * 
+   * @param event
+   *          The {@link LockInteractionEvent}.
    */
   @ProxyEvent
   public void onLockInteraction(LockInteractionEvent event) {

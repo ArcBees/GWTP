@@ -22,10 +22,10 @@ import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.samples.nested.client.presenter.AboutUsPresenter;
-import com.gwtplatform.samples.nested.client.presenter.ContactPresenter;
-import com.gwtplatform.samples.nested.client.presenter.HomePresenter;
-import com.gwtplatform.samples.nested.client.presenter.MainPagePresenter;
+import com.gwtplatform.samples.nested.client.application.ApplicationPresenter;
+import com.gwtplatform.samples.nested.client.application.aboutus.AboutUsPresenter;
+import com.gwtplatform.samples.nested.client.application.contact.ContactPresenter;
+import com.gwtplatform.samples.nested.client.application.home.HomePresenter;
 
 /**
  * @author Christian Goudreau
@@ -40,7 +40,7 @@ public interface ClientGinjector extends Ginjector {
 
   AsyncProvider<HomePresenter> getHomePresenter();
 
-  Provider<MainPagePresenter> getMainPagePresenter();
+  Provider<ApplicationPresenter> getMainPagePresenter();
 
   PlaceManager getPlaceManager();
 }
