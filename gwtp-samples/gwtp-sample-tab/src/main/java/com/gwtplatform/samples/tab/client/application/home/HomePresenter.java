@@ -27,7 +27,6 @@ import com.gwtplatform.mvp.client.annotations.TabInfo;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.samples.tab.client.application.ApplicationPresenter;
-import com.gwtplatform.samples.tab.client.application.homenews.HomeNewsPresenter;
 import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
 import com.gwtplatform.samples.tab.client.place.NameTokens;
 

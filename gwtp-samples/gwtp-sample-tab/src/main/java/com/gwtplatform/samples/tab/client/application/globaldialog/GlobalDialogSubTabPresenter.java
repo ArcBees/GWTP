@@ -27,7 +27,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlace;
-import com.gwtplatform.samples.tab.client.application.ApplicationPresenter;
 import com.gwtplatform.samples.tab.client.application.dialog.DialogSamplePresenter;
 import com.gwtplatform.samples.tab.client.application.infopopup.InfoPopupPresenterWidget;
 import com.gwtplatform.samples.tab.client.place.NameTokens;
