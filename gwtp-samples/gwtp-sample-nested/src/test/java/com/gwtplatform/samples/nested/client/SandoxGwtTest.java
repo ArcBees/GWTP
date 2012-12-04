@@ -14,25 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client.ui;
+package com.gwtplatform.samples.nested.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * A simple menu that can be reused.
- *
- * @author Christian Goudreau
+ * @author Brandon Donnelson
  */
-public class MainMenu extends Composite {
-  interface MainMenuUiBinder extends UiBinder<Widget, MainMenu> {
+public class SandoxGwtTest extends GWTTestCase {
+  @Override
+  public String getModuleName() {
+    return "com.gwtplatform.samples.nested.Gwtpnestedsample";
   }
 
-  private static MainMenuUiBinder uiBinder = GWT.create(MainMenuUiBinder.class);
-
-  public MainMenu() {
-    initWidget(uiBinder.createAndBindUi(this));
+  public void testSandbox() {
+    assertTrue(true);
   }
 }
