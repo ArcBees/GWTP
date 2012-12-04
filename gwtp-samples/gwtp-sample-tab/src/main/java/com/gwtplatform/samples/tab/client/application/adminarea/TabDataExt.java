@@ -14,20 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client;
+package com.gwtplatform.samples.tab.client.application.adminarea;
 
-import com.google.gwt.i18n.client.Constants;
+import com.gwtplatform.mvp.client.TabDataBasic;
+import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
- * Constants to allow translation of various strings. Note that the translations
- * themselves are not part of this example.
+ * This class allows the definition of tabs that can be protected by any
+ * {@link Gatekeeper}.
  * 
  * @author Philippe Beaudoin
  */
-public interface MyConstants extends Constants {
-  @DefaultStringValue("News")
-  String news();
+public class TabDataExt extends TabDataBasic {
+  private final Gatekeeper gatekeeper;
 
-  @DefaultStringValue("Home")
-  String home();
+  public TabDataExt(String label, float priority, Gatekeeper gatekeeper) {
+    super(label, priority);
+    this.gatekeeper = gatekeeper;
+  }
+
+  public Gatekeeper getGatekeeper() {
+    return gatekeeper;
+  }
 }

@@ -14,20 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client;
+package com.gwtplatform.samples.tab.client.security;
 
-import com.google.gwt.i18n.client.Constants;
+import com.gwtplatform.dispatch.annotation.GenEvent;
 
 /**
- * Constants to allow translation of various strings. Note that the translations
- * themselves are not part of this example.
+ * An event triggered whenever the privileges of the user currently logged in
+ * are modified.
+ * <p />
+ * This classes uses GWTP annotation processors to generate
+ * {@code CurrentUserChangedEvent} and {@code CurrentUserChangedHandler}.
  * 
  * @author Philippe Beaudoin
  */
-public interface MyConstants extends Constants {
-  @DefaultStringValue("News")
-  String news();
-
-  @DefaultStringValue("Home")
-  String home();
+@GenEvent
+public class CurrentUserChanged {
 }
