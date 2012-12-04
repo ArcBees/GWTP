@@ -28,9 +28,9 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 /**
  * The base class of {@link ContactPresenter}. The goal of this class is just to
  * show that {@code @ProxyEvent} can be used in base classes. See Issue 180.
- * 
+ *
  * @author Philippe Beaudoin
- * 
+ *
  * @param <Proxy_>
  *          The {@link Proxy} type.
  */
@@ -46,14 +46,13 @@ public abstract class ContactPresenterBase<Proxy_ extends Proxy<?>> extends
     void setNavigationHistory(String navigationHistory);
   }
 
-  public ContactPresenterBase(EventBus eventBus, MyView view, Proxy_ proxy, 
-      GwtEvent.Type<RevealContentHandler<?>> slot) {
+  public ContactPresenterBase(EventBus eventBus, MyView view, Proxy_ proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
     super(eventBus, view, proxy, slot);
   }
 
   /**
    * We keep track of the previously visited pages.
-   * 
+   *
    * @param event
    *          The {@link com.gwtplatform.mvp.client.proxy.LockInteractionEvent}.
    */
