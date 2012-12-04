@@ -14,42 +14,40 @@
  * the License.
  */
 
-package com.gwtplatform.samples.nested.client.view;
+package com.gwtplatform.samples.nested.client.application;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.samples.nested.client.presenter.MainPagePresenter;
-import com.gwtplatform.samples.nested.client.presenter.MainPagePresenter.MyView;
 
 /**
  * This is the top-level view of the application. Every time another presenter
- * wants to reveal itself, {@link MainPageView} will add its content of the
+ * wants to reveal itself, {@link ApplicationView} will add its content of the
  * target inside the {@code mainContantPanel}.
  *
  * @author Christian Goudreau
  */
-public class MainPageView extends ViewImpl implements MyView {
-  interface MainPageViewUiBinder extends UiBinder<Widget, MainPageView> {
+public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
+  /**
+   */
+  public interface Binder extends UiBinder<Widget, ApplicationView> {
   }
-
-  private static MainPageViewUiBinder uiBinder = GWT.create(MainPageViewUiBinder.class);
 
   public final Widget widget;
 
   @UiField
   FlowPanel mainContentPanel;
-
   @UiField
   Element loadingMessage;
 
-  public MainPageView() {
-    widget = uiBinder.createAndBindUi(this);
+  @Inject
+  public ApplicationView(final Binder binder) {
+    widget = binder.createAndBindUi(this);
   }
 
   @Override
@@ -59,7 +57,7 @@ public class MainPageView extends ViewImpl implements MyView {
 
   @Override
   public void setInSlot(Object slot, Widget content) {
-    if (slot == MainPagePresenter.TYPE_SetMainContent) {
+    if (slot == ApplicationPresenter.TYPE_SetMainContent) {
       setMainContent(content);
     } else {
       super.setInSlot(slot, content);
