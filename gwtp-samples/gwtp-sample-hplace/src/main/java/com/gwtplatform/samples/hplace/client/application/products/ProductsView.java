@@ -18,7 +18,6 @@ package com.gwtplatform.samples.hplace.client.application.products;
 
 import java.util.List;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -40,10 +39,8 @@ import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 public class ProductsView extends ViewImpl implements ProductsPresenter.MyView {
   /**
    */
-  public interface ProductListViewUiBinder extends UiBinder<Widget, ProductsView> {
+  public interface Binder extends UiBinder<Widget, ProductsView> {
   }
-
-  private static ProductListViewUiBinder uiBinder = GWT.create(ProductListViewUiBinder.class);
 
   @UiField
   Hyperlink backLink;
@@ -56,8 +53,8 @@ public class ProductsView extends ViewImpl implements ProductsPresenter.MyView {
   private final Widget widget;
 
   @Inject
-  public ProductsView(PlaceManager placeManager) {
-    widget = uiBinder.createAndBindUi(this);
+  public ProductsView(final Binder binder, final PlaceManager placeManager) {
+    widget = binder.createAndBindUi(this);
     this.placeManager = placeManager;
   }
 

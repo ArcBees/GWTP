@@ -69,7 +69,7 @@ public class ProductPresenter extends Presenter<ProductPresenter.MyView, Product
   public ProductPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
       final PlaceManager placeManager, final DispatchAsync dispatcher) {
     super(eventBus, view, proxy, BreadcrumbsPresenter.TYPE_SetMainContent);
-    
+
     this.placeManager = placeManager;
     this.dispatcher = dispatcher;
   }
@@ -77,9 +77,8 @@ public class ProductPresenter extends Presenter<ProductPresenter.MyView, Product
   @TitleFunction
   public void getListTitle(PlaceRequest request, final SetPlaceTitleHandler handler) {
     prepareFromRequest(request);
-    
-    dispatcher.execute(new GetProductAction(id), new AsyncCallback<GetProductResult>() {
 
+    dispatcher.execute(new GetProductAction(id), new AsyncCallback<GetProductResult>() {
       @Override
       public void onFailure(Throwable caught) {
         handler.onSetPlaceTitle("Unknown Product");
@@ -95,7 +94,7 @@ public class ProductPresenter extends Presenter<ProductPresenter.MyView, Product
   @Override
   public void prepareFromRequest(PlaceRequest request) {
     super.prepareFromRequest(request);
-    
+
     String idString = request.getParameter(TOKEN_ID, null);
     try {
       id = Integer.parseInt(idString);
@@ -107,11 +106,10 @@ public class ProductPresenter extends Presenter<ProductPresenter.MyView, Product
   @Override
   protected void onReset() {
     super.onReset();
-    
+
     getView().setMessage("Loading...");
     getView().setBackLinkHistoryToken(placeManager.buildRelativeHistoryToken(-1));
     dispatcher.execute(new GetProductAction(id), new AsyncCallback<GetProductResult>() {
-
       @Override
       public void onFailure(Throwable caught) {
         getView().setMessage("Unknown product");

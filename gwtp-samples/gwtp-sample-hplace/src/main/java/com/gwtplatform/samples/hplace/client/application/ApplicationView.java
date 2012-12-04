@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.hplace.client.application;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -32,10 +31,8 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> implements ApplicationPresenter.MyView {
   /**
    */
-  public interface HomeViewUiBinder extends UiBinder<Widget, ApplicationView> {
+  public interface Binder extends UiBinder<Widget, ApplicationView> {
   }
-
-  private static HomeViewUiBinder uiBinder = GWT.create(HomeViewUiBinder.class);
 
   @UiField
   Button all;
@@ -47,8 +44,8 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
   private final Widget widget;
 
   @Inject
-  public ApplicationView() {
-    widget = uiBinder.createAndBindUi(this);
+  public ApplicationView(final Binder binder) {
+    widget = binder.createAndBindUi(this);
   }
 
   @Override

@@ -83,14 +83,14 @@ public class ProductsPresenter extends Presenter<ProductsPresenter.MyView, Produ
 
   private final DispatchAsync dispatcher;
   private final PlaceManager placeManager;
-  
+
   private String currentType = TYPE_ALL_PRODUCTS;
 
   @Inject
   public ProductsPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
       final PlaceManager placeManager, final DispatchAsync dispatcher) {
     super(eventBus, view, proxy, BreadcrumbsPresenter.TYPE_SetMainContent);
-    
+
     this.placeManager = placeManager;
     this.dispatcher = dispatcher;
   }
@@ -98,7 +98,7 @@ public class ProductsPresenter extends Presenter<ProductsPresenter.MyView, Produ
   @Override
   public void prepareFromRequest(PlaceRequest request) {
     super.prepareFromRequest(request);
-    
+
     String type = request.getParameter(TOKEN_TYPE, TYPE_ALL_PRODUCTS);
     if (type.equals(TYPE_FAVORITE_PRODUCTS)) {
       currentType = TYPE_FAVORITE_PRODUCTS;
@@ -114,7 +114,7 @@ public class ProductsPresenter extends Presenter<ProductsPresenter.MyView, Produ
   @Override
   protected void onReset() {
     super.onReset();
-    
+
     getView().setMessage("Loading list...");
     getView().setBackLinkHistoryToken(placeManager.buildRelativeHistoryToken(-1));
     dispatcher.execute(new GetProductListAction(getFlags()), new AsyncCallback<GetProductListResult>() {

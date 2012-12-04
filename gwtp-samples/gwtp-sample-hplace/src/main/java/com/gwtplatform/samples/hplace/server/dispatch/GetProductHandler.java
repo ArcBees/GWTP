@@ -37,14 +37,14 @@ public class GetProductHandler implements ActionHandler<GetProductAction, GetPro
   }
 
   @Override
-  public GetProductResult execute(final GetProductAction action, final ExecutionContext context) 
+  public GetProductResult execute(final GetProductAction action, final ExecutionContext context)
       throws ActionException {
     Product product = database.get(action.getId());
-    
+
     if (product == null) {
       throw new ActionException("Product not found");
     }
-    
+
     return new GetProductResult(product);
   }
 
