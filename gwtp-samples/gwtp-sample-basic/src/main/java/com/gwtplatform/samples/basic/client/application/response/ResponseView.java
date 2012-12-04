@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.basic.client.application.response;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -29,9 +28,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
  * @author Philippe Beaudoin
  */
 public class ResponseView extends ViewImpl implements ResponsePresenter.MyView {
-  private static ResponseViewUiBinder uiBinder = GWT.create(ResponseViewUiBinder.class);
-
-  public interface ResponseViewUiBinder extends UiBinder<Widget, ResponseView> {
+  public interface Binder extends UiBinder<Widget, ResponseView> {
   }
   
   @UiField
@@ -44,8 +41,8 @@ public class ResponseView extends ViewImpl implements ResponsePresenter.MyView {
   private Widget widget;
 
   @Inject
-  public ResponseView() {
-    widget = uiBinder.createAndBindUi(this);
+  public ResponseView(final Binder binder) {
+    widget = binder.createAndBindUi(this);
   }
 
   @Override

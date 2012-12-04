@@ -16,7 +16,6 @@
 
 package com.gwtplatform.samples.basic.client.application;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -30,9 +29,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
  * @author Philippe Beaudoin
  */
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
-  private static ApplicationViewUiBinder uiBinder = GWT.create(ApplicationViewUiBinder.class);
-
-  public interface ApplicationViewUiBinder extends UiBinder<Widget, ApplicationView> {
+  public interface Binder extends UiBinder<Widget, ApplicationView> {
   }
 
   @UiField
@@ -45,8 +42,8 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
   private Widget widget;
 
   @Inject
-  public ApplicationView() {
-    widget = uiBinder.createAndBindUi(this);
+  public ApplicationView(final Binder binder) {
+    widget = binder.createAndBindUi(this);
   }
 
   @Override

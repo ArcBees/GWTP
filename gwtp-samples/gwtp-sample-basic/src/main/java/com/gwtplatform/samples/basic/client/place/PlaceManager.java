@@ -33,6 +33,6 @@ public class PlaceManager extends PlaceManagerImpl {
 
   @Override
   public void revealDefaultPlace() {
-    revealPlace(new PlaceRequest(NameTokens.getHome()));
+    revealPlace(new PlaceRequest(NameTokens.getHome()), false);
   }
 }
