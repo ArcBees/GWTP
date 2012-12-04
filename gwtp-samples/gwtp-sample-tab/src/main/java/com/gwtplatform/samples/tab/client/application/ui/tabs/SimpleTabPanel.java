@@ -14,35 +14,37 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client.application.ui.simpletab;
+package com.gwtplatform.samples.tab.client.application.ui.tabs;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.TabData;
-import com.gwtplatform.samples.tab.client.application.ui.BaseTab;
+import com.gwtplatform.samples.tab.client.application.ui.linkmenu.LinkMenu;
 
 /**
- * A {@link BaseTab} styled as a square and meant to be contained in a
- * {@link SimpleTabPanel}.
+ * A {@link BaseTabPanel} styled to contain {@link SimpleTab}.
+ * <p />
+ * Look at {@link LinkMenu} to see how we can use this widget within a UiBinder
+ * file even though its constructor relies on dependency injection.
  * 
+ * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
-public class SimpleTab extends BaseTab {
+public class SimpleTabPanel extends BaseTabPanel {
   /**
    */
-  public interface Binder extends UiBinder<Widget, SimpleTab> {
+  public interface Binder extends UiBinder<Widget, SimpleTabPanel> {
   }
 
-  // TODO Once we use assisted injection in {@link SimpleTabPabel}, then inject
-  // the binder.
-  private static final Binder binder = GWT.create(Binder.class);
-
-  @UiConstructor
-  SimpleTab(TabData tabData) {
-    super(tabData);
+  @Inject
+  public SimpleTabPanel(Binder binder) {
     initWidget(binder.createAndBindUi(this));
-    setText(tabData.getLabel());
+  }
+
+  @Override
+  protected BaseTab createNewTab(TabData tabData) {
+    // TODO Try using assisted injection here (to inject UiBinder in SimpleTab)
+    return new SimpleTab(tabData);
   }
 }

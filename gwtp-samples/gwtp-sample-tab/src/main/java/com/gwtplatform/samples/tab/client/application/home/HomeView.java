@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.samples.tab.client.application.ui.simpletab.SimpleTabPanel;
+import com.gwtplatform.samples.tab.client.application.ui.tabs.SimpleTabPanel;
 
 /**
  * The view implementation for
