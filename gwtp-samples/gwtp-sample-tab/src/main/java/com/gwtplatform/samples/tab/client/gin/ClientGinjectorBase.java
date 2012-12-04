@@ -16,10 +16,10 @@
 
 package com.gwtplatform.samples.tab.client.gin;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.samples.tab.client.application.ApplicationPresenter;
 import com.gwtplatform.samples.tab.client.application.home.HomePresenter;
 import com.gwtplatform.samples.tab.client.security.IsAdminGatekeeper;

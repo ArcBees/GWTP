@@ -16,17 +16,16 @@
 
 package com.gwtplatform.samples.tab.client.application.ui.tabs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.TabPanel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is a basic implementation of a {@link TabPanel} that must be subclassed.

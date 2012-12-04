@@ -16,9 +16,8 @@
 
 package com.gwtplatform.samples.tab.client.application.infopopup;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
-
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 

@@ -22,7 +22,6 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 import com.gwtplatform.samples.tab.client.application.adminarea.TabDataExt;
-import com.gwtplatform.samples.tab.client.application.ui.linkmenu.LinkMenu;
 
 /**
  * A {@link BaseTabPanel} styled to contain {@link RoundTab}.

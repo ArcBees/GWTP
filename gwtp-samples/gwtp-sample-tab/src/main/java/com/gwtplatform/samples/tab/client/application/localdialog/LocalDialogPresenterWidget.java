@@ -16,12 +16,10 @@
 
 package com.gwtplatform.samples.tab.client.application.localdialog;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
-
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
-import com.gwtplatform.samples.tab.client.application.globaldialog.GlobalDialogPresenterWidget;
 
 /**
  * The {@link PresenterWidget} of a dialog box that is meant to be displayed
