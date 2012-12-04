@@ -1,4 +1,4 @@
-#GWTP Sample
+#GWTP Hierarchical Places
 
 ##Demo
 http://gwtp-sample-hplace.appspot.com
