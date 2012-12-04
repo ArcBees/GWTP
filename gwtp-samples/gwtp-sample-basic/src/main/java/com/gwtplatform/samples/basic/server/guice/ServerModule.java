@@ -14,22 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.server;
+package com.gwtplatform.samples.basic.server.guice;
 
-import com.google.inject.servlet.ServletModule;
-
-import com.gwtplatform.dispatch.server.guice.DispatchServiceImpl;
-import com.gwtplatform.dispatch.shared.ActionImpl;
+import com.gwtplatform.dispatch.server.guice.HandlerModule;
+import com.gwtplatform.samples.basic.server.dispatch.SendTextToServerHandler;
+import com.gwtplatform.samples.basic.shared.dispatch.SendTextToServerAction;
 
 /**
+ * Module which binds the handlers and configurations.
+
  * @author Philippe Beaudoin
  */
-public class DispatchServletModule extends ServletModule {
+public class ServerModule extends HandlerModule {
 
   @Override
-  public void configureServlets() {
-    serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(
-        DispatchServiceImpl.class);
+  protected void configureHandlers() {
+    bindHandler(SendTextToServerAction.class, SendTextToServerHandler.class);
   }
-
 }
