@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.shared;
+package com.gwtplatform.samples.basic.shared.dispatch;
 
 import com.gwtplatform.dispatch.shared.UnsecuredActionImpl;
 
@@ -23,12 +23,10 @@ import com.gwtplatform.dispatch.shared.UnsecuredActionImpl;
  * corresponding to a {@link com.gwtplatform.dispatch.server.Dispatch}
  * (server-side).
  */
-public class SendTextToServer extends
-    UnsecuredActionImpl<SendTextToServerResult> {
-
+public class SendTextToServerAction extends UnsecuredActionImpl<SendTextToServerResult> {
   private String textToServer;
 
-  public SendTextToServer(final String textToServer) {
+  public SendTextToServerAction(final String textToServer) {
     this.textToServer = textToServer;
   }
 
@@ -36,7 +34,7 @@ public class SendTextToServer extends
    * For serialization only.
    */
   @SuppressWarnings("unused")
-  private SendTextToServer() {
+  private SendTextToServerAction() {
   }
 
   public String getTextToServer() {

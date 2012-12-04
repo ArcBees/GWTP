@@ -49,8 +49,11 @@ gwtp-samples/gwtp-sample-nested/bin/**
 gwtp-samples/gwtp-sample-tab/bin/**
 **bin**
 **/.gwt
+.gwt
 **/manifest.txt
 .idea/**
 .settings**
 **.gwt-log
+**gwt-unitCache**
+**www-test**
 

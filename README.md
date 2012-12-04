@@ -10,6 +10,20 @@ A complete model-view-presenter framework to simplify your next GWT project.
 ##Current Release
 * 0.7 is the current stable release. 
 
+##Demos
+<table>
+  <tr>
+    <th>Sample</th>
+    <th>Demo</th>
+    <th>Source</th>
+  </tr>
+  <tr>
+    <th>Basic</th>
+    <td><a href="http://gwtp-sample-basic.appspot.com">AppEngine Demo</a></td>
+    <td><a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-basic">Source</a></td>
+  </tr>
+</table>
+
 ##Downloads
 * [Maven Usage](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
 * [Download Jars](https://github.com/ArcBees/GWTP/downloads)
