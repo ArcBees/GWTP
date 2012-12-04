@@ -14,44 +14,34 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client.application.ui.roundtab;
+package com.gwtplatform.samples.tab.client.application.ui.tabs;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.TabData;
-import com.gwtplatform.mvp.client.proxy.Gatekeeper;
-import com.gwtplatform.samples.tab.client.application.ui.BaseTab;
 
 /**
- * A {@link BaseTab} styled with rounded upper corners and meant to be contained
- * in a {@link RoundTabPanel}. This tab can be protected so that it is only
- * displayed when a given {@link Gatekeeper} can allow access. If a {@code null}
- * {@link Gatekeeper} is used then the tab is always accessible.
+ * A {@link BaseTab} styled as a square and meant to be contained in a
+ * {@link SimpleTabPanel}.
  * 
  * @author Philippe Beaudoin
  */
-public class RoundTab extends BaseTab {
+public class SimpleTab extends BaseTab {
   /**
    */
-  public interface Binder extends UiBinder<Widget, RoundTab> {
+  public interface Binder extends UiBinder<Widget, SimpleTab> {
   }
 
   // TODO Once we use assisted injection in {@link SimpleTabPabel}, then inject
   // the binder.
   private static final Binder binder = GWT.create(Binder.class);
 
-  private final Gatekeeper gatekeeper;
-
-  RoundTab(TabData tabData, Gatekeeper gatekeeper) {
+  @UiConstructor
+  SimpleTab(TabData tabData) {
     super(tabData);
-    this.gatekeeper = gatekeeper;
     initWidget(binder.createAndBindUi(this));
     setText(tabData.getLabel());
-  }
-
-  @Override
-  public boolean canUserAccess() {
-    return gatekeeper == null || gatekeeper.canReveal();
   }
 }
