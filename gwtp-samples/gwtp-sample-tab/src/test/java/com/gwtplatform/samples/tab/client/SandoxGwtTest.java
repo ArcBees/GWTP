@@ -16,25 +16,18 @@
 
 package com.gwtplatform.samples.tab.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-
-import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.samples.tab.client.gin.ClientGinjector;
+import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * The entry point of this sample.
- * 
- * @author Christian Goudreau
+ * @author Brandon Donnelson
  */
-public class Gwtptabsample implements EntryPoint {
-  public final ClientGinjector ginjector = GWT.create(ClientGinjector.class);
-
+public class SandoxGwtTest extends GWTTestCase {
   @Override
-  public void onModuleLoad() {
-    // This is required for Gwt-Platform proxy's generator.
-    DelayedBindRegistry.bind(ginjector);
+  public String getModuleName() {
+    return "com.gwtplatform.samples.tab.Gwtptabsample";
+  }
 
-    ginjector.getPlaceManager().revealCurrentPlace();
+  public void testSandbox() {
+    assertTrue(true);
   }
 }

@@ -20,19 +20,22 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
-import com.gwtplatform.samples.tab.client.IsAdminGatekeeper;
-import com.gwtplatform.samples.tab.client.presenter.HomePresenter;
-import com.gwtplatform.samples.tab.client.presenter.MainPagePresenter;
+import com.gwtplatform.samples.tab.client.application.ApplicationPresenter;
+import com.gwtplatform.samples.tab.client.application.home.HomePresenter;
+import com.gwtplatform.samples.tab.client.security.IsAdminGatekeeper;
 
 /**
- * The base interface of {@link ClientGinjector}. Used mostly to exercise issue 217:
- * http://code.google.com/p/gwt-platform/issues/detail?id=217
- *
+ * The base interface of {@link ClientGinjector}. Used mostly to exercise issue
+ * 217: http://code.google.com/p/gwt-platform/issues/detail?id=217
+ * 
  * @author Philippe Beaudoin
  */
 public interface ClientGinjectorBase extends Ginjector {
   EventBus getEventBus();
+
   AsyncProvider<HomePresenter> getHomePresenter();
-  Provider<MainPagePresenter> getMainPagePresenter();
+
+  Provider<ApplicationPresenter> getMainPagePresenter();
+
   IsAdminGatekeeper getIsAdminGatekeeper();
 }
