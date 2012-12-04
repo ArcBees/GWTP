@@ -14,20 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.server;
-
-import com.gwtplatform.dispatch.server.guice.HandlerModule;
-import com.gwtplatform.samples.basic.shared.SendTextToServer;
+package com.gwtplatform.samples.basic.client.place;
 
 /**
- * Module which binds the handlers and configurations.
-
- * @author Philippe Beaudoin
+ * Main presenters name tokens
+ * 
+ * @author Brandon Donnelson
  */
-public class ServerModule extends HandlerModule {
+public class NameTokens {
+  public static final String home = "home";
+  public static final String response = "response";
 
-  @Override
-  protected void configureHandlers() {
-    bindHandler(SendTextToServer.class, SendTextToServerHandler.class);
+  public static String getHome() {
+    return home;
+  }
+  
+  public static String getResponse() {
+    return response;
   }
 }
