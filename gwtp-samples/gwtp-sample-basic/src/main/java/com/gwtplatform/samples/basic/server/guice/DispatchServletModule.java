@@ -14,28 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.client;
+package com.gwtplatform.samples.basic.server.guice;
 
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.inject.Inject;
+import com.google.inject.servlet.ServletModule;
 
-import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
-import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+import com.gwtplatform.dispatch.server.guice.DispatchServiceImpl;
+import com.gwtplatform.dispatch.shared.ActionImpl;
 
 /**
  * @author Philippe Beaudoin
  */
-public class MyPlaceManager extends PlaceManagerImpl {
-
-  @Inject
-  public MyPlaceManager(EventBus eventBus, TokenFormatter tokenFormatter) {
-    super(eventBus, tokenFormatter);
-  }
-
+public class DispatchServletModule extends ServletModule {
   @Override
-  public void revealDefaultPlace() {
-    revealPlace(new PlaceRequest(MainPagePresenter.nameToken));
+  public void configureServlets() {
+    serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(
+        DispatchServiceImpl.class);
   }
-
 }

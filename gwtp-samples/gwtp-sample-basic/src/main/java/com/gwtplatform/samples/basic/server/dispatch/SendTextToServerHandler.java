@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.server;
+package com.gwtplatform.samples.basic.server.dispatch;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -23,8 +23,8 @@ import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.samples.basic.shared.FieldVerifier;
-import com.gwtplatform.samples.basic.shared.SendTextToServer;
-import com.gwtplatform.samples.basic.shared.SendTextToServerResult;
+import com.gwtplatform.samples.basic.shared.dispatch.SendTextToServerAction;
+import com.gwtplatform.samples.basic.shared.dispatch.SendTextToServerResult;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Philippe Beaudoin
  */
 public class SendTextToServerHandler implements
-    ActionHandler<SendTextToServer, SendTextToServerResult> {
+    ActionHandler<SendTextToServerAction, SendTextToServerResult> {
 
   private Provider<HttpServletRequest> requestProvider;
   private ServletContext servletContext;
@@ -46,7 +46,7 @@ public class SendTextToServerHandler implements
   }
 
   @Override
-  public SendTextToServerResult execute(SendTextToServer action,
+  public SendTextToServerResult execute(SendTextToServerAction action,
       ExecutionContext context) throws ActionException {
 
     String input = action.getTextToServer();
@@ -66,12 +66,12 @@ public class SendTextToServerHandler implements
   }
 
   @Override
-  public Class<SendTextToServer> getActionType() {
-    return SendTextToServer.class;
+  public Class<SendTextToServerAction> getActionType() {
+    return SendTextToServerAction.class;
   }
 
   @Override
-  public void undo(SendTextToServer action, SendTextToServerResult result,
+  public void undo(SendTextToServerAction action, SendTextToServerResult result,
       ExecutionContext context) throws ActionException {
     // Not undoable
   }
