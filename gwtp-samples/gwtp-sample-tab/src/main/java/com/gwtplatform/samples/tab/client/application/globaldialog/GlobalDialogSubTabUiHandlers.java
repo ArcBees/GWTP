@@ -14,20 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client;
+package com.gwtplatform.samples.tab.client.application.globaldialog;
 
-import com.google.gwt.i18n.client.Constants;
+import com.gwtplatform.mvp.client.UiHandlers;
 
 /**
- * Constants to allow translation of various strings. Note that the translations
- * themselves are not part of this example.
+ * {@link GlobalDialogSubTabView}'s {@link UiHandlers}.
  * 
  * @author Philippe Beaudoin
  */
-public interface MyConstants extends Constants {
-  @DefaultStringValue("News")
-  String news();
+public interface GlobalDialogSubTabUiHandlers extends UiHandlers {
+  void showInfoPopup(int mousePosX, int mousePosY);
 
-  @DefaultStringValue("Home")
-  String home();
+  void showGlobalDialog();
 }

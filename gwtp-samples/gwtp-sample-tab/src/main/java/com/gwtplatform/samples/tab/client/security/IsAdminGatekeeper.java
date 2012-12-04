@@ -14,20 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client;
+package com.gwtplatform.samples.tab.client.security;
 
-import com.google.gwt.i18n.client.Constants;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
- * Constants to allow translation of various strings. Note that the translations
- * themselves are not part of this example.
+ * This gatekeeper only allows access if the user currently logged in has
+ * administrator privileges.
  * 
  * @author Philippe Beaudoin
  */
-public interface MyConstants extends Constants {
-  @DefaultStringValue("News")
-  String news();
+public class IsAdminGatekeeper implements Gatekeeper {
+  private final CurrentUser currentUser;
 
-  @DefaultStringValue("Home")
-  String home();
+  @Inject
+  public IsAdminGatekeeper(CurrentUser currentUser) {
+    this.currentUser = currentUser;
+  }
+
+  @Override
+  public boolean canReveal() {
+    return currentUser.isAdmin();
+  }
 }
