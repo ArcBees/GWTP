@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.client.application;
+package com.gwtplatform.samples.basicspring.client.application;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -40,7 +40,7 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
   Button sendButton;
   @UiField
   HTML error;
-  
+
   /**
    */
   private Widget widget;

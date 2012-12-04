@@ -14,22 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basicspring.client;
-
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.samples.basicspring.client.gin.ClientGinjector;
+package com.gwtplatform.samples.basicspring.client.place;
 
 /**
- * @author Philippe Beaudoin
+ * Main presenters name tokens.
+ *
+ * @author Brandon Donnelson
  */
-public class Gwtpsamplespring implements EntryPoint {
-  public final ClientGinjector ginjector = GWT.create(ClientGinjector.class);
+public class NameTokens {
+  public static final String home = "home";
+  public static final String response = "response";
 
-  public void onModuleLoad() {
-    DelayedBindRegistry.bind(ginjector);
+  public static String getHome() {
+    return home;
+  }
 
-    ginjector.getPlaceManager().revealCurrentPlace();
+  public static String getResponse() {
+    return response;
   }
 }

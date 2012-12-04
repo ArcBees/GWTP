@@ -14,32 +14,33 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basicspring.server;
+package com.gwtplatform.samples.basicspring.server.spring;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.spring.HandlerModule;
 import com.gwtplatform.dispatch.server.spring.LoggerFactoryBean;
 import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.server.spring.configuration.DefaultModule;
-import com.gwtplatform.samples.basicspring.shared.SendTextToServer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.gwtplatform.samples.basicspring.server.dispatch.SendTextToServerHandler;
+import com.gwtplatform.samples.basicspring.shared.dispatch.SendTextToServerAction;
 
 /**
  * Module which binds the handlers and configurations.
-
+ *
  * @author Philippe Beaudoin
  */
 @Configuration
 @Import(DefaultModule.class)
 @ComponentScan(basePackages = "com.gwtplatform.dispatch.server.spring")
 public class ServerModule extends HandlerModule {
-
   public ServerModule() {
   }
 
@@ -61,6 +62,6 @@ public class ServerModule extends HandlerModule {
   }
 
   protected void configureHandlers() {
-    bindHandler(SendTextToServer.class, SendTextToServerHandler.class);
+    bindHandler(SendTextToServerAction.class, SendTextToServerHandler.class);
   }
 }

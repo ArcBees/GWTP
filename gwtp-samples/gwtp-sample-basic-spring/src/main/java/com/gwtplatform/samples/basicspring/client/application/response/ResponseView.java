@@ -14,13 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.client.application;
+package com.gwtplatform.samples.basicspring.client.application.response;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -28,25 +27,25 @@ import com.gwtplatform.mvp.client.ViewImpl;
 /**
  * @author Philippe Beaudoin
  */
-public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
+public class ResponseView extends ViewImpl implements ResponsePresenter.MyView {
   /**
    */
-  public interface Binder extends UiBinder<Widget, ApplicationView> {
+  public interface Binder extends UiBinder<Widget, ResponseView> {
   }
 
   @UiField
-  TextBox nameField;
+  HTML textToServer;
   @UiField
-  Button sendButton;
+  HTML serverResponse;
   @UiField
-  HTML error;
-  
+  Button closeButton;
+
   /**
    */
   private Widget widget;
 
   @Inject
-  public ApplicationView(final Binder binder) {
+  public ResponseView(final Binder binder) {
     widget = binder.createAndBindUi(this);
   }
 
@@ -56,24 +55,17 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
   }
 
   @Override
-  public String getName() {
-    return nameField.getText();
+  public Button getCloseButton() {
+    return closeButton;
   }
 
   @Override
-  public Button getSendButton() {
-    return sendButton;
+  public void setServerResponse(String serverResponse) {
+    this.serverResponse.setHTML(serverResponse);
   }
 
   @Override
-  public void resetAndFocus() {
-    // Focus the cursor on the name field when the app loads
-    nameField.setFocus(true);
-    nameField.selectAll();
-  }
-
-  @Override
-  public void setError(String errorText) {
-    error.setText(errorText);
+  public void setTextToServer(String textToServer) {
+    this.textToServer.setHTML(textToServer);
   }
 }
