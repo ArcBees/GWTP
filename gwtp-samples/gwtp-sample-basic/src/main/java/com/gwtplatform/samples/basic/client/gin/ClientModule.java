@@ -14,22 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.server;
+package com.gwtplatform.samples.basic.client.gin;
 
-import com.google.inject.servlet.ServletModule;
-
-import com.gwtplatform.dispatch.server.guice.DispatchServiceImpl;
-import com.gwtplatform.dispatch.shared.ActionImpl;
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.gwtplatform.samples.basic.client.application.ApplicationModule;
+import com.gwtplatform.samples.basic.client.place.PlaceManager;
 
 /**
  * @author Philippe Beaudoin
  */
-public class DispatchServletModule extends ServletModule {
-
+public class ClientModule extends AbstractPresenterModule {
   @Override
-  public void configureServlets() {
-    serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(
-        DispatchServiceImpl.class);
-  }
+  protected void configure() {
+    // Default implementation of standard resources
+    install(new DefaultModule(PlaceManager.class));
 
+    install(new ApplicationModule());
+  }
 }
