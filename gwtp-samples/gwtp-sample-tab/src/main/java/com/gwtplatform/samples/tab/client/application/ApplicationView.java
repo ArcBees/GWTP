@@ -25,7 +25,7 @@ import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.samples.tab.client.application.ui.linkmenu.LinkMenu;
-import com.gwtplatform.samples.tab.client.application.ui.roundtab.RoundTabPanel;
+import com.gwtplatform.samples.tab.client.application.ui.tabs.RoundTabPanel;
 
 /**
  * The view implementation for

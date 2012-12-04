@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client.application.ui;
+package com.gwtplatform.samples.tab.client.application.ui.tabs;
 
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiField;
