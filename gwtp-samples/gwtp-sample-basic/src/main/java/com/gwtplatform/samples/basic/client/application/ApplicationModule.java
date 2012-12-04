@@ -14,24 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.client;
+package com.gwtplatform.samples.basic.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.gwtplatform.samples.basic.client.application.response.ResponsePresenter;
+import com.gwtplatform.samples.basic.client.application.response.ResponseView;
 
 /**
  * @author Philippe Beaudoin
  */
-public class MyModule extends AbstractPresenterModule {
-
+public class ApplicationModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
-    // Default implementation of standard resources
-    install(new DefaultModule(MyPlaceManager.class));
-
-    // Presenters
-    bindPresenter(MainPagePresenter.class, MainPagePresenter.MyView.class,
-        MainPageView.class, MainPagePresenter.MyProxy.class);
+    // Application Presenters
+    bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class,
+        ApplicationView.class, ApplicationPresenter.MyProxy.class);
 
     bindPresenter(ResponsePresenter.class, ResponsePresenter.MyView.class,
         ResponseView.class, ResponsePresenter.MyProxy.class);
