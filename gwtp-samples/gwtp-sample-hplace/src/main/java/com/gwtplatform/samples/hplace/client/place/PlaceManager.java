@@ -14,25 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client;
+package com.gwtplatform.samples.hplace.client.place;
 
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 import com.gwtplatform.samples.hplace.client.gin.DefaultPlace;
 
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.inject.Inject;
-
 /**
  * @author Christian Goudreau
  */
-public class GwtphplacesamplePlaceManager extends PlaceManagerImpl {
+public class PlaceManager extends PlaceManagerImpl {
   private final PlaceRequest defaultPlaceRequest;
 
   @Inject
-  public GwtphplacesamplePlaceManager(final EventBus eventBus,
-      final TokenFormatter tokenFormatter, @DefaultPlace String defaultNameToken) {
+  public PlaceManager(final EventBus eventBus, final TokenFormatter tokenFormatter,
+      @DefaultPlace String defaultNameToken) {
     super(eventBus, tokenFormatter);
 
     this.defaultPlaceRequest = new PlaceRequest(defaultNameToken);

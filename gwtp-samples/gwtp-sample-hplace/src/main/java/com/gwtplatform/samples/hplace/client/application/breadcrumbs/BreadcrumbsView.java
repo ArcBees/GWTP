@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.view;
+package com.gwtplatform.samples.hplace.client.application.breadcrumbs;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -24,11 +24,8 @@ import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.samples.hplace.client.presenter.BreadcrumbsPresenter;
-import com.gwtplatform.samples.hplace.client.presenter.BreadcrumbsPresenter.MyView;
 
 /**
  * This is the top-level view of the application. Every time another presenter
@@ -38,8 +35,8 @@ import com.gwtplatform.samples.hplace.client.presenter.BreadcrumbsPresenter.MyVi
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public class BreadcrumbsView extends ViewImpl implements MyView {
-  interface BreadcrumbsViewUiBinder extends UiBinder<Widget, BreadcrumbsView> {
+public class BreadcrumbsView extends ViewImpl implements BreadcrumbsPresenter.MyView {
+  public interface BreadcrumbsViewUiBinder extends UiBinder<Widget, BreadcrumbsView> {
   }
 
   private static BreadcrumbsViewUiBinder uiBinder = GWT.create(BreadcrumbsViewUiBinder.class);
@@ -48,9 +45,9 @@ public class BreadcrumbsView extends ViewImpl implements MyView {
 
   @UiField
   FlowPanel breadcrumbs;
-
   @UiField
   FlowPanel mainContentPanel;
+
   private final PlaceManager placeManager;
 
   @Inject
@@ -102,5 +99,4 @@ public class BreadcrumbsView extends ViewImpl implements MyView {
       mainContentPanel.add(content);
     }
   }
-
 }

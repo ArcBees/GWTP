@@ -18,16 +18,9 @@ package com.gwtplatform.samples.hplace.client.gin;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.gwtplatform.samples.hplace.client.GwtphplacesamplePlaceManager;
-import com.gwtplatform.samples.hplace.client.NameTokens;
-import com.gwtplatform.samples.hplace.client.presenter.BreadcrumbsPresenter;
-import com.gwtplatform.samples.hplace.client.presenter.HomePresenter;
-import com.gwtplatform.samples.hplace.client.presenter.ProductListPresenter;
-import com.gwtplatform.samples.hplace.client.presenter.ProductPresenter;
-import com.gwtplatform.samples.hplace.client.view.BreadcrumbsView;
-import com.gwtplatform.samples.hplace.client.view.HomeView;
-import com.gwtplatform.samples.hplace.client.view.ProductListView;
-import com.gwtplatform.samples.hplace.client.view.ProductView;
+import com.gwtplatform.samples.hplace.client.application.ApplicationModule;
+import com.gwtplatform.samples.hplace.client.place.NameTokens;
+import com.gwtplatform.samples.hplace.client.place.PlaceManager;
 
 /**
  * @author Christian Goudreau
@@ -36,21 +29,11 @@ public class ClientModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
     // Default implementation of standard resources
-    install(new DefaultModule(GwtphplacesamplePlaceManager.class));
+    install(new DefaultModule(PlaceManager.class));
 
     // Constants
     bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);
 
-    // Presenters
-    bindPresenter(BreadcrumbsPresenter.class,
-        BreadcrumbsPresenter.MyView.class, BreadcrumbsView.class,
-        BreadcrumbsPresenter.MyProxy.class);
-    bindPresenter(HomePresenter.class, HomePresenter.MyView.class,
-        HomeView.class, HomePresenter.MyProxy.class);
-    bindPresenter(ProductListPresenter.class,
-        ProductListPresenter.MyView.class, ProductListView.class,
-        ProductListPresenter.MyProxy.class);
-    bindPresenter(ProductPresenter.class, ProductPresenter.MyView.class,
-        ProductView.class, ProductPresenter.MyProxy.class);
+    install(new ApplicationModule());
   }
 }

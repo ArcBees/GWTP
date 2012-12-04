@@ -14,17 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.view;
+package com.gwtplatform.samples.hplace.shared.dispatch;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+import java.util.ArrayList;
+
+import com.gwtplatform.dispatch.annotation.GenDispatch;
+import com.gwtplatform.dispatch.annotation.In;
+import com.gwtplatform.dispatch.annotation.Out;
 
 /**
- * {@link HomeView}'s {@link UiHandlers}.
+ * This classes uses GWTP annotation processors
+ * to generate {@link GetProductListAction} and
+ * {@link GetProductListResult}.
  *
  * @author Philippe Beaudoin
  */
-public interface HomeUiHandlers extends UiHandlers {
-  void revealAllProductsList();
-  void revealFavoriteProductsList();
-  void revealSpecialsList();
+@GenDispatch(isSecure = false)
+public class GetProductList {
+  @In(1)
+  int flags;
+
+  @Out(1)
+  ArrayList<Product> products;
 }
