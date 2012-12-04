@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.view;
+package com.gwtplatform.samples.hplace.client.application;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -25,32 +25,29 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.gwtplatform.samples.hplace.client.presenter.HomePresenter.MyView;
 
 /**
  * @author Philippe Beaudoin
  */
-public class HomeView extends ViewWithUiHandlers<HomeUiHandlers>
-  implements MyView {
-
-  interface HomeViewUiBinder extends UiBinder<Widget, HomeView> {
+public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> implements ApplicationPresenter.MyView {
+  /**
+   */
+  public interface HomeViewUiBinder extends UiBinder<Widget, ApplicationView> {
   }
 
   private static HomeViewUiBinder uiBinder = GWT.create(HomeViewUiBinder.class);
 
   @UiField
   Button all;
-
   @UiField
   Button favorites;
-
   @UiField
   Button specials;
 
   private final Widget widget;
 
   @Inject
-  public HomeView() {
+  public ApplicationView() {
     widget = uiBinder.createAndBindUi(this);
   }
 
@@ -73,5 +70,4 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers>
   void onSpecialsClicked(ClickEvent event) {
     getUiHandlers().revealSpecialsList();
   }
-
 }
