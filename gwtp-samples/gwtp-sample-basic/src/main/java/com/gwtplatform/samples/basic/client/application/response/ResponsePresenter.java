@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.client;
+package com.gwtplatform.samples.basic.client.application.response;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -31,19 +31,19 @@ import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.samples.basic.shared.SendTextToServer;
-import com.gwtplatform.samples.basic.shared.SendTextToServerResult;
+import com.gwtplatform.samples.basic.client.place.NameTokens;
+import com.gwtplatform.samples.basic.shared.dispatch.SendTextToServerAction;
+import com.gwtplatform.samples.basic.shared.dispatch.SendTextToServerResult;
 
 /**
  * @author Philippe Beaudoin
  */
-public class ResponsePresenter extends
-    Presenter<ResponsePresenter.MyView, ResponsePresenter.MyProxy> {
+public class ResponsePresenter extends Presenter<ResponsePresenter.MyView, ResponsePresenter.MyProxy> {
   /**
    * {@link ResponsePresenter}'s proxy.
    */
   @ProxyCodeSplit
-  @NameToken(nameToken)
+  @NameToken(NameTokens.response)
   public interface MyProxy extends Proxy<ResponsePresenter>, Place {
   }
 
@@ -58,8 +58,6 @@ public class ResponsePresenter extends
     void setTextToServer(String textToServer);
   }
 
-  public static final String nameToken = "response";
-
   public static final String textToServerParam = "textToServer";
 
   private final DispatchAsync dispatcher;
@@ -68,9 +66,10 @@ public class ResponsePresenter extends
   private String textToServer;
 
   @Inject
-  public ResponsePresenter(EventBus eventBus, MyView view, MyProxy proxy,
-      PlaceManager placeManager, DispatchAsync dispatcher) {
+  public ResponsePresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager,
+      DispatchAsync dispatcher) {
     super(eventBus, view, proxy, RevealType.Root);
+
     this.placeManager = placeManager;
     this.dispatcher = dispatcher;
   }
@@ -84,14 +83,12 @@ public class ResponsePresenter extends
   @Override
   protected void onBind() {
     super.onBind();
-    registerHandler(getView().getCloseButton().addClickHandler(
-        new ClickHandler() {
-          @Override
-          public void onClick(ClickEvent event) {
-            placeManager.revealPlace(new PlaceRequest(
-                MainPagePresenter.nameToken));
-          }
-        }));
+    registerHandler(getView().getCloseButton().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        placeManager.revealPlace(new PlaceRequest(NameTokens.getHome()));
+      }
+    }));
   }
 
   @Override
@@ -99,18 +96,16 @@ public class ResponsePresenter extends
     super.onReset();
     getView().setTextToServer(textToServer);
     getView().setServerResponse("Waiting for response...");
-    dispatcher.execute(new SendTextToServer(textToServer),
-        new AsyncCallback<SendTextToServerResult>() {
-          @Override
-          public void onFailure(Throwable caught) {
-            getView().setServerResponse(
-                "An error occured: " + caught.getMessage());
-          }
+    dispatcher.execute(new SendTextToServerAction(textToServer), new AsyncCallback<SendTextToServerResult>() {
+      @Override
+      public void onFailure(Throwable caught) {
+        getView().setServerResponse("An error occured: " + caught.getMessage());
+      }
 
-          @Override
-          public void onSuccess(SendTextToServerResult result) {
-            getView().setServerResponse(result.getResponse());
-          }
-        });
+      @Override
+      public void onSuccess(SendTextToServerResult result) {
+        getView().setServerResponse(result.getResponse());
+      }
+    });
   }
 }

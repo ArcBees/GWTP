@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.client;
+package com.gwtplatform.samples.basic.client.application;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -29,27 +29,28 @@ import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.samples.basic.client.application.response.ResponsePresenter;
+import com.gwtplatform.samples.basic.client.place.NameTokens;
 import com.gwtplatform.samples.basic.shared.FieldVerifier;
 
 /**
  * @author Philippe Beaudoin
  */
-public class MainPagePresenter extends
-    Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
+public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
   /**
-   * {@link MainPagePresenter}'s proxy.
+   * {@link ApplicationPresenter}'s proxy.
    */
   @ProxyStandard
-  @NameToken(nameToken)
-  public interface MyProxy extends Proxy<MainPagePresenter>, Place {
+  @NameToken(NameTokens.home)
+  public interface MyProxy extends Proxy<ApplicationPresenter>, Place {
   }
 
   /**
-   * {@link MainPagePresenter}'s view.
+   * {@link ApplicationPresenter}'s view.
    */
   public interface MyView extends View {
     String getName();
-
+    
     Button getSendButton();
 
     void resetAndFocus();
@@ -57,20 +58,19 @@ public class MainPagePresenter extends
     void setError(String errorText);
   }
 
-  public static final String nameToken = "main";
-
   private final PlaceManager placeManager;
 
   @Inject
-  public MainPagePresenter(EventBus eventBus, MyView view, MyProxy proxy,
-      PlaceManager placeManager) {
+  public ApplicationPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
     super(eventBus, view, proxy, RevealType.Root);
+    
     this.placeManager = placeManager;
   }
 
   @Override
   protected void onBind() {
     super.onBind();
+    
     registerHandler(getView().getSendButton().addClickHandler(
         new ClickHandler() {
           @Override
@@ -83,6 +83,7 @@ public class MainPagePresenter extends
   @Override
   protected void onReset() {
     super.onReset();
+    
     getView().resetAndFocus();
   }
 
@@ -98,10 +99,8 @@ public class MainPagePresenter extends
       return;
     }
 
-    // Then, we transmit it to the ResponsePresenter, which will do the server
-    // call
-    placeManager.revealPlace(new PlaceRequest(ResponsePresenter.nameToken).with(
+    // Then, we transmit it to the ResponsePresenter, which will do the server call
+    placeManager.revealPlace(new PlaceRequest(NameTokens.response).with(
         ResponsePresenter.textToServerParam, textToServer));
   }
-
 }
