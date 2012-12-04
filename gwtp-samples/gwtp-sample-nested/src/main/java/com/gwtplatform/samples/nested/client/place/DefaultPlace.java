@@ -16,9 +16,6 @@
 
 package com.gwtplatform.samples.nested.client.place;
 
-import com.google.inject.BindingAnnotation;
-import com.gwtplatform.samples.nested.client.gin.ClientModule;
-
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
@@ -27,15 +24,17 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import com.google.inject.BindingAnnotation;
+
 /**
- * This annotation is used in {@link PlaceManager} and is bind
- * in {@link ClientModule}. It's purpose is to bind the default place to a
- * default presenter.
+ * This annotation is used in {@link PlaceManager} and is bind in
+ * {@link ClientModule}. It's purpose is to bind the default place to a default
+ * presenter.
  *
  * @author Christian Goudreau
  */
 @BindingAnnotation
-@Target({FIELD, PARAMETER, METHOD})
+@Target({ FIELD, PARAMETER, METHOD })
 @Retention(RUNTIME)
 public @interface DefaultPlace {
 }
