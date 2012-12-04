@@ -3,8 +3,7 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
-    <ui:style src='../../defines.css'
-        type='com.gwtplatform.samples.tab.client.application.ui.BaseTab.Style'>
+    <ui:style src='../../defines.css' type='com.gwtplatform.samples.tab.client.application.ui.tabs.BaseTab.Style'>
             .tab {
                 float: left;
                 margin-right: 8px;

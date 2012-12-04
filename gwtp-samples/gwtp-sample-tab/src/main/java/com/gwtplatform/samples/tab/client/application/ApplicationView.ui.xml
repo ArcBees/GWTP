@@ -1,7 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g="urn:import:com.google.gwt.user.client.ui" 
-    xmlns:npui="urn:import:com.gwtplatform.samples.tab.client.application.ui.roundtab"
+    xmlns:npui="urn:import:com.gwtplatform.samples.tab.client.application.ui.tabs"
     xmlns:npui2="urn:import:com.gwtplatform.samples.tab.client.application.ui.linkmenu">
 
     <ui:style>

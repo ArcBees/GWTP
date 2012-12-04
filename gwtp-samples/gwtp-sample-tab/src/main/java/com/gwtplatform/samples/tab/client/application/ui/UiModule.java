@@ -18,8 +18,8 @@ package com.gwtplatform.samples.tab.client.application.ui;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 import com.gwtplatform.samples.tab.client.application.ui.linkmenu.LinkMenu;
-import com.gwtplatform.samples.tab.client.application.ui.roundtab.RoundTabPanel;
-import com.gwtplatform.samples.tab.client.application.ui.simpletab.SimpleTabPanel;
+import com.gwtplatform.samples.tab.client.application.ui.tabs.RoundTabPanel;
+import com.gwtplatform.samples.tab.client.application.ui.tabs.SimpleTabPanel;
 
 /**
  * This module makes sure every binder required by our widgets are bound as

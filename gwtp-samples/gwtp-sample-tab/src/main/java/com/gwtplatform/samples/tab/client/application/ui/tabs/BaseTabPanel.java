@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client.application.ui;
+package com.gwtplatform.samples.tab.client.application.ui.tabs;
 
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -39,9 +39,9 @@ public abstract class BaseTabPanel extends Composite implements TabPanel {
   Tab currentActiveTab;
 
   @UiField
-  FlowPanel tabContentContainer;
+  public FlowPanel tabContentContainer;
   @UiField
-  FlowPanel tabPanel;
+  public FlowPanel tabPanel;
   
   private final List<BaseTab> tabList = new ArrayList<BaseTab>();
 
