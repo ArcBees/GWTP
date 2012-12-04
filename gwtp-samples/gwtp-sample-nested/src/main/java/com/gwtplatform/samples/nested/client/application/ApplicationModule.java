@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
- 
+
 package com.gwtplatform.samples.nested.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
@@ -25,7 +25,7 @@ import com.gwtplatform.samples.nested.client.application.contact.ContactView;
 import com.gwtplatform.samples.nested.client.application.home.HomePresenter;
 import com.gwtplatform.samples.nested.client.application.home.HomeView;
 
-/** 
+/**
  * @author Brandon Donnelson
  */
 public class ApplicationModule extends AbstractPresenterModule {

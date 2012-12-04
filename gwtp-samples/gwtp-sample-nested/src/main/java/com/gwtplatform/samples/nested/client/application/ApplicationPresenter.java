@@ -35,7 +35,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  * The goal of this sample is to show how to use nested presenters. These can be
  * useful to decouple multiple presenters that need to be displayed on the
  * screen simultaneously.
- * 
+ *
  * @author Christian Goudreau
  */
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
@@ -66,7 +66,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
   /**
    * We display a short lock message whenever navigation is in progress.
-   * 
+   *
    * @param event
    *          The {@link LockInteractionEvent}.
    */
