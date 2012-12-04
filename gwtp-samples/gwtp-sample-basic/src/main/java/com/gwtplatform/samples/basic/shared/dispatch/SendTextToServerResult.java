@@ -14,23 +14,28 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.client;
+package com.gwtplatform.samples.basic.shared.dispatch;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-
-import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.samples.basic.client.gin.ClientGinjector;
+import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * @author Philippe Beaudoin
+ * The result of a {@link SendTextToServerAction} action.
  */
-public class Gwtpsample implements EntryPoint {
-  public final ClientGinjector ginjector = GWT.create(ClientGinjector.class);
+public class SendTextToServerResult implements Result {
+  private String response;
 
-  public void onModuleLoad() {
-    DelayedBindRegistry.bind(ginjector);
+  public SendTextToServerResult(final String response) {
+    this.response = response;
+  }
 
-    ginjector.getPlaceManager().revealCurrentPlace();
+  /**
+   * For serialization only.
+   */
+  @SuppressWarnings("unused")
+  private SendTextToServerResult() {
+  }
+
+  public String getResponse() {
+    return response;
   }
 }
