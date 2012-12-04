@@ -14,32 +14,28 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basicspring.shared;
+package com.gwtplatform.samples.basicspring.shared.dispatch;
 
-import com.gwtplatform.dispatch.shared.UnsecuredActionImpl;
+import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * An action that can be sent using an {@link DispatchAsync} (client-side)
- * corresponding to a {@link com.gwtplatform.dispatch.server.Dispatch}
- * (server-side).
+ * The result of a {@link SendTextToServerAction} action.
  */
-public class SendTextToServer extends
-    UnsecuredActionImpl<SendTextToServerResult> {
+public class SendTextToServerResult implements Result {
+  private String response;
 
-  private String textToServer;
-
-  public SendTextToServer(final String textToServer) {
-    this.textToServer = textToServer;
+  public SendTextToServerResult(final String response) {
+    this.response = response;
   }
 
   /**
    * For serialization only.
    */
   @SuppressWarnings("unused")
-  private SendTextToServer() {
+  private SendTextToServerResult() {
   }
 
-  public String getTextToServer() {
-    return textToServer;
+  public String getResponse() {
+    return response;
   }
 }
