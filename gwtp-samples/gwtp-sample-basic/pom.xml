@@ -168,12 +168,6 @@
             <artifactId>junit</artifactId>
         </dependency>
 
-        <!-- AppEngine dependencies -->
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-        </dependency>
-
         <!-- DI dependencies -->
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -196,7 +190,7 @@
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-labs</artifactId>

@@ -14,26 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basicspring.client;
+package com.gwtplatform.samples.basicspring.client.place;
 
+import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.inject.client.AsyncProvider;
-import com.google.gwt.inject.client.GinModules;
-import com.google.gwt.inject.client.Ginjector;
-import com.google.inject.Provider;
-import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
 /**
  * @author Philippe Beaudoin
  */
-@GinModules({DispatchAsyncModule.class, MyModule.class})
-public interface MyGinjector extends Ginjector {
-  EventBus getEventBus();
+public class PlaceManager extends PlaceManagerImpl {
 
-  Provider<MainPagePresenter> getMainPagePresenter();
+  @Inject
+  public PlaceManager(EventBus eventBus, TokenFormatter tokenFormatter) {
+    super(eventBus, tokenFormatter);
+  }
 
-  PlaceManager getPlaceManager();
+  @Override
+  public void revealDefaultPlace() {
+    revealPlace(new PlaceRequest(NameTokens.home));
+  }
 
-  AsyncProvider<ResponsePresenter> getResponsePresenter();
 }
