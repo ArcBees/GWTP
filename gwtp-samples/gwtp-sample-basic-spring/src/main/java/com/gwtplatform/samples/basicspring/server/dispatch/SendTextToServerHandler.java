@@ -14,37 +14,33 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basicspring.server;
+package com.gwtplatform.samples.basicspring.server.dispatch;
 
-//import com.google.inject.Inject;
-//import com.google.inject.Provider;
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.samples.basicspring.shared.FieldVerifier;
-import com.gwtplatform.samples.basicspring.shared.SendTextToServer;
-import com.gwtplatform.samples.basicspring.shared.SendTextToServerResult;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.servlet.ServletContext;
+import com.gwtplatform.samples.basicspring.shared.dispatch.SendTextToServerAction;
+import com.gwtplatform.samples.basicspring.shared.dispatch.SendTextToServerResult;
 
 /**
  * @author Philippe Beaudoin
  */
-public class SendTextToServerHandler extends
-  AbstractActionHandler<SendTextToServer, SendTextToServerResult> {
+public class SendTextToServerHandler extends AbstractActionHandler<SendTextToServerAction, SendTextToServerResult> {
 
   @Autowired
   private ServletContext servletContext;
 
   public SendTextToServerHandler() {
-    super(SendTextToServer.class);
+    super(SendTextToServerAction.class);
   }
 
   @Override
-  public SendTextToServerResult execute(SendTextToServer action,
-      ExecutionContext context) throws ActionException {
+  public SendTextToServerResult execute(SendTextToServerAction action, ExecutionContext context) throws ActionException {
 
     String input = action.getTextToServer();
 
@@ -56,18 +52,17 @@ public class SendTextToServerHandler extends
     }
 
     String serverInfo = servletContext.getServerInfo();
-    return new SendTextToServerResult("Hello, " + input
-        + "!<br><br>I am running " + serverInfo);
+    return new SendTextToServerResult("Hello, " + input + "!<br><br>I am running " + serverInfo);
   }
 
   @Override
-  public Class<SendTextToServer> getActionType() {
-    return SendTextToServer.class;
+  public Class<SendTextToServerAction> getActionType() {
+    return SendTextToServerAction.class;
   }
 
   @Override
-  public void undo(SendTextToServer action, SendTextToServerResult result,
-      ExecutionContext context) throws ActionException {
+  public void undo(SendTextToServerAction action, SendTextToServerResult result, ExecutionContext context)
+      throws ActionException {
     // Not undoable
   }
 

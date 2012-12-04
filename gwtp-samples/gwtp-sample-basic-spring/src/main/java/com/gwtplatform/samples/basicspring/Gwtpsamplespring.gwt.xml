@@ -42,6 +42,6 @@
 
   <define-configuration-property name="gin.ginjector" is-multi-valued="false" />
   <set-configuration-property name="gin.ginjector" 
-      value="com.gwtplatform.samples.basicspring.client.MyGinjector" />
+      value="com.gwtplatform.samples.basicspring.client.gin.ClientGinjector" />
 
 </module>

@@ -26,7 +26,7 @@ public class SandoxGwtTest extends GWTTestCase {
   public String getModuleName() {
     return "com.gwtplatform.samples.basicspring.Gwtpsamplespring";
   }
-  
+
   public void testSandbox() {
     assertTrue(true);
   }
