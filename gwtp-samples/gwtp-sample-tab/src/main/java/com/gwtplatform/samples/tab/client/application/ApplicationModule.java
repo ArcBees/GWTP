@@ -14,15 +14,9 @@
  * the License.
  */
 
-package com.gwtplatform.samples.tab.client.gin;
+package com.gwtplatform.samples.tab.client.application;
 
-import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.gwtplatform.samples.tab.client.MyConstants;
-import com.gwtplatform.samples.tab.client.application.ApplicationModule;
-import com.gwtplatform.samples.tab.client.application.ApplicationPresenter;
-import com.gwtplatform.samples.tab.client.application.ApplicationView;
 import com.gwtplatform.samples.tab.client.application.adminarea.AdminAreaPresenter;
 import com.gwtplatform.samples.tab.client.application.adminarea.AdminAreaView;
 import com.gwtplatform.samples.tab.client.application.dialog.DialogSamplePresenter;
@@ -45,28 +39,39 @@ import com.gwtplatform.samples.tab.client.application.localdialog.LocalDialogSub
 import com.gwtplatform.samples.tab.client.application.localdialog.LocalDialogView;
 import com.gwtplatform.samples.tab.client.application.settings.SettingsPresenter;
 import com.gwtplatform.samples.tab.client.application.settings.SettingsView;
-import com.gwtplatform.samples.tab.client.place.DefaultPlace;
-import com.gwtplatform.samples.tab.client.place.NameTokens;
-import com.gwtplatform.samples.tab.client.place.PlaceManager;
-import com.gwtplatform.samples.tab.client.security.CurrentUser;
-import com.gwtplatform.samples.tab.client.security.IsAdminGatekeeper;
+import com.gwtplatform.samples.tab.client.application.ui.UiModule;
 
 /**
- * @author Christian Goudreau
+ * @author Brandon Donnelson
  */
-public class ClientModule extends AbstractPresenterModule {
+public class ApplicationModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
-    // Default implementation of standard resources
-    install(new DefaultModule(PlaceManager.class));
+    install(new UiModule());
 
-    bind(MyConstants.class).in(Singleton.class);
-    bind(CurrentUser.class).in(Singleton.class);
-    bind(IsAdminGatekeeper.class).in(Singleton.class);
-
-    // Constants
-    bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homeNewsPage);
-
-    install(new ApplicationModule());
+    // Applicaiton Presenters
+    bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class,
+        ApplicationPresenter.MyProxy.class);
+    bindPresenter(HomePresenter.class, HomePresenter.MyView.class, HomeView.class, HomePresenter.MyProxy.class);
+    bindPresenter(DialogSamplePresenter.class, DialogSamplePresenter.MyView.class, DialogSampleView.class,
+        DialogSamplePresenter.MyProxy.class);
+    bindPresenter(LocalDialogSubTabPresenter.class, LocalDialogSubTabPresenter.MyView.class,
+        LocalDialogSubTabView.class, LocalDialogSubTabPresenter.MyProxy.class);
+    bindPresenter(GlobalDialogSubTabPresenter.class, GlobalDialogSubTabPresenter.MyView.class,
+        GlobalDialogSubTabView.class, GlobalDialogSubTabPresenter.MyProxy.class);
+    bindPresenter(SettingsPresenter.class, SettingsPresenter.MyView.class, SettingsView.class,
+        SettingsPresenter.MyProxy.class);
+    bindPresenter(AdminAreaPresenter.class, AdminAreaPresenter.MyView.class, AdminAreaView.class,
+        AdminAreaPresenter.MyProxy.class);
+    bindPresenter(HomeNewsPresenter.class, HomeNewsPresenter.MyView.class, HomeNewsView.class,
+        HomeNewsPresenter.MyProxy.class);
+    bindPresenter(HomeInfoPresenter.class, HomeInfoPresenter.MyView.class, HomeInfoView.class,
+        HomeInfoPresenter.MyProxy.class);
+    bindSingletonPresenterWidget(InfoPopupPresenterWidget.class, InfoPopupPresenterWidget.MyView.class,
+        InfoPopupView.class);
+    bindSingletonPresenterWidget(LocalDialogPresenterWidget.class, LocalDialogPresenterWidget.MyView.class,
+        LocalDialogView.class);
+    bindSingletonPresenterWidget(GlobalDialogPresenterWidget.class, GlobalDialogPresenterWidget.MyView.class,
+        GlobalDialogView.class);
   }
 }
