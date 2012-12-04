@@ -14,30 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basic.shared;
+package com.gwtplatform.samples.basic.client.gin;
 
-import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.gwtplatform.samples.basic.client.application.ApplicationModule;
+import com.gwtplatform.samples.basic.client.place.PlaceManager;
 
 /**
- * The result of a {@link SendTextToServer} action.
+ * @author Philippe Beaudoin
  */
-public class SendTextToServerResult implements Result {
+public class ClientModule extends AbstractPresenterModule {
+  @Override
+  protected void configure() {
+    // Default implementation of standard resources
+    install(new DefaultModule(PlaceManager.class));
 
-  private String response;
-
-  public SendTextToServerResult(final String response) {
-    this.response = response;
+    install(new ApplicationModule());
   }
-
-  /**
-   * For serialization only.
-   */
-  @SuppressWarnings("unused")
-  private SendTextToServerResult() {
-  }
-
-  public String getResponse() {
-    return response;
-  }
-
 }
