@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.presenter;
+package com.gwtplatform.samples.hplace.client.application.product;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -29,16 +29,16 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
-import com.gwtplatform.samples.hplace.client.NameTokens;
-import com.gwtplatform.samples.hplace.shared.GetProductAction;
-import com.gwtplatform.samples.hplace.shared.GetProductResult;
-import com.gwtplatform.samples.hplace.shared.Product;
+import com.gwtplatform.samples.hplace.client.application.breadcrumbs.BreadcrumbsPresenter;
+import com.gwtplatform.samples.hplace.client.place.NameTokens;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductAction;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductResult;
+import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
 /**
  * @author Christian Goudreau
  */
-public class ProductPresenter extends
-    Presenter<ProductPresenter.MyView, ProductPresenter.MyProxy> {
+public class ProductPresenter extends Presenter<ProductPresenter.MyView, ProductPresenter.MyProxy> {
   /**
    * {@link ProductPresenter}'s proxy.
    */
@@ -52,48 +52,50 @@ public class ProductPresenter extends
    */
   public interface MyView extends View {
     void setBackLinkHistoryToken(String historyToken);
+
     void setMessage(String string);
+
     void setProductDetails(Product product);
   }
 
   public static final String TOKEN_ID = "id";
 
   private final DispatchAsync dispatcher;
-  private int id;
-
   private final PlaceManager placeManager;
 
+  private int id;
+
   @Inject
-  public ProductPresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy, final PlaceManager placeManager,
-      final DispatchAsync dispatcher) {
+  public ProductPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
+      final PlaceManager placeManager, final DispatchAsync dispatcher) {
     super(eventBus, view, proxy, BreadcrumbsPresenter.TYPE_SetMainContent);
+    
     this.placeManager = placeManager;
     this.dispatcher = dispatcher;
   }
 
   @TitleFunction
-  public void getListTitle(PlaceRequest request,
-      final SetPlaceTitleHandler handler) {
+  public void getListTitle(PlaceRequest request, final SetPlaceTitleHandler handler) {
     prepareFromRequest(request);
-    dispatcher.execute(new GetProductAction(id),
-        new AsyncCallback<GetProductResult>() {
+    
+    dispatcher.execute(new GetProductAction(id), new AsyncCallback<GetProductResult>() {
 
-          @Override
-          public void onFailure(Throwable caught) {
-            handler.onSetPlaceTitle("Unknown Product");
-          }
+      @Override
+      public void onFailure(Throwable caught) {
+        handler.onSetPlaceTitle("Unknown Product");
+      }
 
-          @Override
-          public void onSuccess(GetProductResult result) {
-            handler.onSetPlaceTitle(result.getProduct().getName());
-          }
-        });
+      @Override
+      public void onSuccess(GetProductResult result) {
+        handler.onSetPlaceTitle(result.getProduct().getName());
+      }
+    });
   }
 
   @Override
   public void prepareFromRequest(PlaceRequest request) {
     super.prepareFromRequest(request);
+    
     String idString = request.getParameter(TOKEN_ID, null);
     try {
       id = Integer.parseInt(idString);
@@ -105,21 +107,20 @@ public class ProductPresenter extends
   @Override
   protected void onReset() {
     super.onReset();
+    
     getView().setMessage("Loading...");
-    getView().setBackLinkHistoryToken(
-        placeManager.buildRelativeHistoryToken(-1));
-    dispatcher.execute(new GetProductAction(id),
-        new AsyncCallback<GetProductResult>() {
+    getView().setBackLinkHistoryToken(placeManager.buildRelativeHistoryToken(-1));
+    dispatcher.execute(new GetProductAction(id), new AsyncCallback<GetProductResult>() {
 
-          @Override
-          public void onFailure(Throwable caught) {
-            getView().setMessage("Unknown product");
-          }
+      @Override
+      public void onFailure(Throwable caught) {
+        getView().setMessage("Unknown product");
+      }
 
-          @Override
-          public void onSuccess(GetProductResult result) {
-            getView().setProductDetails(result.getProduct());
-          }
-        });
+      @Override
+      public void onSuccess(GetProductResult result) {
+        getView().setProductDetails(result.getProduct());
+      }
+    });
   }
 }

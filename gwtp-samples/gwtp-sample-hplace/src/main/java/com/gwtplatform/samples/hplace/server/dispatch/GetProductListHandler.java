@@ -14,25 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.server;
+package com.gwtplatform.samples.hplace.server.dispatch;
 
+import java.util.ArrayList;
+
+import com.google.inject.Inject;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.samples.hplace.shared.GetProductListAction;
-import com.gwtplatform.samples.hplace.shared.GetProductListResult;
-import com.gwtplatform.samples.hplace.shared.Product;
-
-import com.google.inject.Inject;
-
-import java.util.ArrayList;
+import com.gwtplatform.samples.hplace.server.ProductDatabase;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductListAction;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductListResult;
+import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
 /**
  * @author Philippe Beaudoin
  */
-public class GetProductListHandler implements
-    ActionHandler<GetProductListAction, GetProductListResult> {
-
+public class GetProductListHandler implements ActionHandler<GetProductListAction, GetProductListResult> {
   private final ProductDatabase database;
 
   @Inject
@@ -41,8 +39,8 @@ public class GetProductListHandler implements
   }
 
   @Override
-  public GetProductListResult execute(final GetProductListAction action,
-      final ExecutionContext context) throws ActionException {
+  public GetProductListResult execute(final GetProductListAction action, final ExecutionContext context)
+      throws ActionException {
     ArrayList<Product> products = database.getMatching(action.getFlags());
     return new GetProductListResult(products);
   }
@@ -53,8 +51,7 @@ public class GetProductListHandler implements
   }
 
   @Override
-  public void undo(final GetProductListAction action,
-      final GetProductListResult result, final ExecutionContext context)
+  public void undo(final GetProductListAction action, final GetProductListResult result, final ExecutionContext context)
       throws ActionException {
     // No undo
   }

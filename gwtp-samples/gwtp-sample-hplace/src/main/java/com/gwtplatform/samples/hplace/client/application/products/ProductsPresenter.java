@@ -14,7 +14,9 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.presenter;
+package com.gwtplatform.samples.hplace.client.application.products;
+
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -28,41 +30,40 @@ import com.gwtplatform.mvp.client.annotations.TitleFunction;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.samples.hplace.client.NameTokens;
-import com.gwtplatform.samples.hplace.shared.GetProductListAction;
-import com.gwtplatform.samples.hplace.shared.GetProductListResult;
-import com.gwtplatform.samples.hplace.shared.Product;
-
-import java.util.List;
+import com.gwtplatform.samples.hplace.client.application.breadcrumbs.BreadcrumbsPresenter;
+import com.gwtplatform.samples.hplace.client.place.NameTokens;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductListAction;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductListResult;
+import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
 /**
  * @author Philippe Beaudoin
  */
-public class ProductListPresenter extends
-    Presenter<ProductListPresenter.MyView, ProductListPresenter.MyProxy> {
+public class ProductsPresenter extends Presenter<ProductsPresenter.MyView, ProductsPresenter.MyProxy> {
   /**
-   * {@link ProductListPresenter}'s proxy.
+   * {@link ProductsPresenter}'s proxy.
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.productList)
-  public interface MyProxy extends ProxyPlace<ProductListPresenter> {
+  public interface MyProxy extends ProxyPlace<ProductsPresenter> {
   }
 
   /**
-   * {@link ProductListPresenter}'s view.
+   * {@link ProductsPresenter}'s view.
    */
   public interface MyView extends View {
     void setBackLinkHistoryToken(String historyToken);
+
     void setList(List<Product> products);
+
     void setMessage(String string);
+
     void setTitle(String title);
   }
 
   public static final String TOKEN_TYPE = "type";
   public static final String TYPE_ALL_PRODUCTS = "all";
-
   public static final String TYPE_FAVORITE_PRODUCTS = "fav";
-
   public static final String TYPE_SPECIALS = "spec";
 
   @TitleFunction
@@ -80,17 +81,16 @@ public class ProductListPresenter extends
     }
   }
 
+  private final DispatchAsync dispatcher;
+  private final PlaceManager placeManager;
+  
   private String currentType = TYPE_ALL_PRODUCTS;
 
-  private final DispatchAsync dispatcher;
-
-  private final PlaceManager placeManager;
-
   @Inject
-  public ProductListPresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy, final PlaceManager placeManager,
-      final DispatchAsync dispatcher) {
+  public ProductsPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
+      final PlaceManager placeManager, final DispatchAsync dispatcher) {
     super(eventBus, view, proxy, BreadcrumbsPresenter.TYPE_SetMainContent);
+    
     this.placeManager = placeManager;
     this.dispatcher = dispatcher;
   }
@@ -98,6 +98,7 @@ public class ProductListPresenter extends
   @Override
   public void prepareFromRequest(PlaceRequest request) {
     super.prepareFromRequest(request);
+    
     String type = request.getParameter(TOKEN_TYPE, TYPE_ALL_PRODUCTS);
     if (type.equals(TYPE_FAVORITE_PRODUCTS)) {
       currentType = TYPE_FAVORITE_PRODUCTS;
@@ -113,21 +114,20 @@ public class ProductListPresenter extends
   @Override
   protected void onReset() {
     super.onReset();
+    
     getView().setMessage("Loading list...");
-    getView().setBackLinkHistoryToken(
-        placeManager.buildRelativeHistoryToken(-1));
-    dispatcher.execute(new GetProductListAction(getFlags()),
-        new AsyncCallback<GetProductListResult>() {
-          @Override
-          public void onFailure(Throwable caught) {
-            getView().setMessage("Loading error!");
-          }
+    getView().setBackLinkHistoryToken(placeManager.buildRelativeHistoryToken(-1));
+    dispatcher.execute(new GetProductListAction(getFlags()), new AsyncCallback<GetProductListResult>() {
+      @Override
+      public void onFailure(Throwable caught) {
+        getView().setMessage("Loading error!");
+      }
 
-          @Override
-          public void onSuccess(GetProductListResult result) {
-            getView().setList(result.getProducts());
-          }
-        });
+      @Override
+      public void onSuccess(GetProductListResult result) {
+        getView().setList(result.getProducts());
+      }
+    });
   }
 
   private int getFlags() {
@@ -142,5 +142,4 @@ public class ProductListPresenter extends
   private void setViewTitle() {
     getView().setTitle(getTitleFor(currentType));
   }
-
 }

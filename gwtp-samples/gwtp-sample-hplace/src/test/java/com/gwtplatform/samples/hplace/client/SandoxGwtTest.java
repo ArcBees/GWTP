@@ -14,19 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.server.guice;
+package com.gwtplatform.samples.hplace.client;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.servlet.GuiceServletContextListener;
+import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * @author Philippe Beaudoin
+ * @author Brandon Donnelson
  */
-public class MyGuiceServletContextListener extends GuiceServletContextListener {
-
+public class SandoxGwtTest extends GWTTestCase {
   @Override
-  protected Injector getInjector() {
-    return Guice.createInjector(new ServerModule(), new DispatchServletModule());
+  public String getModuleName() {
+    return "com.gwtplatform.samples.hplace.Gwtphplacesample";
+  }
+
+  public void testSandbox() {
+    assertTrue(true);
   }
 }

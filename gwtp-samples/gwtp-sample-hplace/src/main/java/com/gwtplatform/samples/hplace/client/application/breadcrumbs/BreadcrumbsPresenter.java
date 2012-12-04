@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.presenter;
+package com.gwtplatform.samples.hplace.client.application.breadcrumbs;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
@@ -65,12 +65,14 @@ public class BreadcrumbsPresenter extends
   public BreadcrumbsPresenter(final EventBus eventBus, final MyView view,
       final MyProxy proxy, final PlaceManager placeManager) {
     super(eventBus, view, proxy, RevealType.Root);
+    
     this.placeManager = placeManager;
   }
 
   @Override
   protected void onReset() {
     super.onReset();
+    
     int size = placeManager.getHierarchyDepth();
     getView().clearBreadcrumbs(size);
     for (int i = 0; i < size; ++i) {

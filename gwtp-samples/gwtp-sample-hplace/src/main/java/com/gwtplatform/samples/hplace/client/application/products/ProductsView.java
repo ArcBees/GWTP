@@ -14,7 +14,9 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.view;
+package com.gwtplatform.samples.hplace.client.application.products;
+
+import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
@@ -25,42 +27,36 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
-import com.gwtplatform.samples.hplace.client.NameTokens;
-import com.gwtplatform.samples.hplace.client.presenter.ProductListPresenter.MyView;
-import com.gwtplatform.samples.hplace.client.presenter.ProductPresenter;
-import com.gwtplatform.samples.hplace.shared.Product;
-
-import java.util.List;
+import com.gwtplatform.samples.hplace.client.application.product.ProductPresenter;
+import com.gwtplatform.samples.hplace.client.place.NameTokens;
+import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
 /**
  * @author Philippe Beaudoin
  */
-public class ProductListView extends ViewImpl implements MyView {
-
-  interface ProductListViewUiBinder extends UiBinder<Widget, ProductListView> {
+public class ProductsView extends ViewImpl implements ProductsPresenter.MyView {
+  /**
+   */
+  public interface ProductListViewUiBinder extends UiBinder<Widget, ProductsView> {
   }
 
   private static ProductListViewUiBinder uiBinder = GWT.create(ProductListViewUiBinder.class);
 
   @UiField
   Hyperlink backLink;
-
   @UiField
   FlowPanel productList;
-
   @UiField
   HeadingElement title;
 
   private final PlaceManager placeManager;
-
   private final Widget widget;
 
   @Inject
-  public ProductListView(PlaceManager placeManager) {
+  public ProductsView(PlaceManager placeManager) {
     widget = uiBinder.createAndBindUi(this);
     this.placeManager = placeManager;
   }

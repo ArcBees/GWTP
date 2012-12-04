@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client;
+package com.gwtplatform.samples.hplace.client.place;
 
 /**
  * The central location of all name tokens for the application. All

@@ -14,25 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.shared;
+package com.gwtplatform.samples.hplace.client.application;
 
-import com.gwtplatform.dispatch.annotation.GenDispatch;
-import com.gwtplatform.dispatch.annotation.In;
-import com.gwtplatform.dispatch.annotation.Out;
+import com.gwtplatform.mvp.client.UiHandlers;
 
 /**
- * This classes uses GWTP annotation processors
- * to generate {@link GetProductAction} and
- * {@link GetProductResult}.
+ * {@link ApplicationView}'s {@link UiHandlers}.
  *
  * @author Philippe Beaudoin
  */
-@GenDispatch(isSecure = false)
-public class GetProduct {
-
-  @In(1)
-  int id;
-
-  @Out(1)
-  Product product;
+public interface ApplicationUiHandlers extends UiHandlers {
+  void revealAllProductsList();
+  void revealFavoriteProductsList();
+  void revealSpecialsList();
 }
