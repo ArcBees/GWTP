@@ -20,7 +20,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.TabData;
-import com.gwtplatform.samples.tab.client.application.ui.linkmenu.LinkMenu;
 
 /**
  * A {@link BaseTabPanel} styled to contain {@link SimpleTab}.
