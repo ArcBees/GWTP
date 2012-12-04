@@ -40,7 +40,7 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
   Button sendButton;
   @UiField
   HTML error;
-  
+
   /**
    */
   private Widget widget;
