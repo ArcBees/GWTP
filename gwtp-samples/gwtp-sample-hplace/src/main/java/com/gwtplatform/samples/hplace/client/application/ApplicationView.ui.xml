@@ -22,4 +22,4 @@
     <g:Button ui:field='specials'>Specials</g:Button>
     
     </g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>
