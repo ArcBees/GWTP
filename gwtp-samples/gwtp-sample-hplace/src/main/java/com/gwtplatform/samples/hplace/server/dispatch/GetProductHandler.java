@@ -14,23 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.server;
+package com.gwtplatform.samples.hplace.server.dispatch;
 
+import com.google.inject.Inject;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.samples.hplace.shared.GetProductAction;
-import com.gwtplatform.samples.hplace.shared.GetProductResult;
-import com.gwtplatform.samples.hplace.shared.Product;
-
-import com.google.inject.Inject;
+import com.gwtplatform.samples.hplace.server.ProductDatabase;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductAction;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductResult;
+import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
 /**
  * @author Philippe Beaudoin
  */
-public class GetProductHandler implements
-    ActionHandler<GetProductAction, GetProductResult> {
-
+public class GetProductHandler implements ActionHandler<GetProductAction, GetProductResult> {
   private final ProductDatabase database;
 
   @Inject
@@ -39,12 +37,14 @@ public class GetProductHandler implements
   }
 
   @Override
-  public GetProductResult execute(final GetProductAction action,
-      final ExecutionContext context) throws ActionException {
+  public GetProductResult execute(final GetProductAction action, final ExecutionContext context) 
+      throws ActionException {
     Product product = database.get(action.getId());
+    
     if (product == null) {
       throw new ActionException("Product not found");
     }
+    
     return new GetProductResult(product);
   }
 
@@ -54,8 +54,8 @@ public class GetProductHandler implements
   }
 
   @Override
-  public void undo(final GetProductAction action, final GetProductResult result,
-      final ExecutionContext context) throws ActionException {
+  public void undo(final GetProductAction action, final GetProductResult result, final ExecutionContext context)
+      throws ActionException {
     // No undo
   }
 }

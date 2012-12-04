@@ -14,26 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.shared;
+package com.gwtplatform.samples.hplace.shared.dispatch;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Out;
 
-import java.util.ArrayList;
-
 /**
  * This classes uses GWTP annotation processors
- * to generate {@link GetProductListAction} and
- * {@link GetProductListResult}.
+ * to generate {@link GetProductAction} and
+ * {@link GetProductResult}.
  *
  * @author Philippe Beaudoin
  */
 @GenDispatch(isSecure = false)
-public class GetProductList {
+public class GetProduct {
   @In(1)
-  int flags;
+  int id;
 
   @Out(1)
-  ArrayList<Product> products;
+  Product product;
 }

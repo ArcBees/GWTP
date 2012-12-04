@@ -16,21 +16,16 @@
 
 package com.gwtplatform.samples.hplace.server.guice;
 
-import com.gwtplatform.dispatch.server.guice.HandlerModule;
-import com.gwtplatform.samples.hplace.server.dispatch.GetProductHandler;
-import com.gwtplatform.samples.hplace.server.dispatch.GetProductListHandler;
-import com.gwtplatform.samples.hplace.shared.dispatch.GetProductAction;
-import com.gwtplatform.samples.hplace.shared.dispatch.GetProductListAction;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.servlet.GuiceServletContextListener;
 
 /**
- * Module which binds the handlers and configurations.
- *
  * @author Philippe Beaudoin
  */
-public class ServerModule extends HandlerModule {
+public class GuiceServletConfig extends GuiceServletContextListener {
   @Override
-  protected void configureHandlers() {
-    bindHandler(GetProductAction.class, GetProductHandler.class);
-    bindHandler(GetProductListAction.class, GetProductListHandler.class);
+  protected Injector getInjector() {
+    return Guice.createInjector(new ServerModule(), new DispatchServletModule());
   }
 }

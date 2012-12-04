@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.presenter;
+package com.gwtplatform.samples.hplace.client.application;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -27,36 +27,36 @@ import com.gwtplatform.mvp.client.annotations.Title;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.samples.hplace.client.NameTokens;
-import com.gwtplatform.samples.hplace.client.view.HomeUiHandlers;
+import com.gwtplatform.samples.hplace.client.application.breadcrumbs.BreadcrumbsPresenter;
+import com.gwtplatform.samples.hplace.client.application.products.ProductsPresenter;
+import com.gwtplatform.samples.hplace.client.place.NameTokens;
 
 /**
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
-public class HomePresenter extends
-    Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements
-    HomeUiHandlers {
+public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy>
+    implements ApplicationUiHandlers {
   /**
-   * {@link HomePresenter}'s proxy.
+   * {@link ApplicationPresenter}'s proxy.
    */
   @ProxyCodeSplit
   @NameToken(NameTokens.homePage)
   @Title("Home")
-  public interface MyProxy extends ProxyPlace<HomePresenter> {
+  public interface MyProxy extends ProxyPlace<ApplicationPresenter> {
   }
 
   /**
-   * {@link HomePresenter}'s view.
+   * {@link ApplicationPresenter}'s view.
    */
-  public interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
+  public interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
   }
 
   private PlaceManager placeManager;
 
   @Inject
-  public HomePresenter(final EventBus eventBus, final MyView view,
-      final MyProxy proxy, final PlaceManager placeManager) {
+  public ApplicationPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
+      final PlaceManager placeManager) {
     super(eventBus, view, proxy, BreadcrumbsPresenter.TYPE_SetMainContent);
     this.placeManager = placeManager;
     view.setUiHandlers(this);
@@ -64,21 +64,19 @@ public class HomePresenter extends
 
   @Override
   public void revealAllProductsList() {
-    placeManager.revealRelativePlace(new PlaceRequest(NameTokens.productList).with(
-        ProductListPresenter.TOKEN_TYPE, ProductListPresenter.TYPE_ALL_PRODUCTS));
+    placeManager.revealRelativePlace(new PlaceRequest(NameTokens.productList).with(ProductsPresenter.TOKEN_TYPE,
+        ProductsPresenter.TYPE_ALL_PRODUCTS));
   }
 
   @Override
   public void revealFavoriteProductsList() {
-    placeManager.revealRelativePlace(new PlaceRequest(NameTokens.productList).with(
-        ProductListPresenter.TOKEN_TYPE,
-        ProductListPresenter.TYPE_FAVORITE_PRODUCTS));
+    placeManager.revealRelativePlace(new PlaceRequest(NameTokens.productList).with(ProductsPresenter.TOKEN_TYPE,
+        ProductsPresenter.TYPE_FAVORITE_PRODUCTS));
   }
 
   @Override
   public void revealSpecialsList() {
-    placeManager.revealRelativePlace(new PlaceRequest(NameTokens.productList).with(
-        ProductListPresenter.TOKEN_TYPE, ProductListPresenter.TYPE_SPECIALS));
+    placeManager.revealRelativePlace(new PlaceRequest(NameTokens.productList).with(ProductsPresenter.TOKEN_TYPE,
+        ProductsPresenter.TYPE_SPECIALS));
   }
-
 }

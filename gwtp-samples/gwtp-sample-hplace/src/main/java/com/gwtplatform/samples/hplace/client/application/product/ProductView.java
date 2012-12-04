@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.view;
+package com.gwtplatform.samples.hplace.client.application.product;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
@@ -25,35 +25,28 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.gwtplatform.samples.hplace.client.presenter.ProductPresenter.MyView;
-import com.gwtplatform.samples.hplace.shared.Product;
+import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
 /**
  * @author Philippe Beaudoin
  */
-public class ProductView extends ViewImpl implements MyView {
-  interface ProductViewUiBinder extends UiBinder<Widget, ProductView> {
+public class ProductView extends ViewImpl implements ProductPresenter.MyView {
+  public interface ProductViewUiBinder extends UiBinder<Widget, ProductView> {
   }
 
   private static ProductViewUiBinder uiBinder = GWT.create(ProductViewUiBinder.class);
 
   @UiField
   Hyperlink backLink;
-
   @UiField
   Button buyButton;
-
   @UiField
   InlineLabel price;
-
   @UiField
   HTMLPanel productDetails;
-
   @UiField
   InlineLabel quantity;
-
   @UiField
   HeadingElement title;
 

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.shared;
+package com.gwtplatform.samples.hplace.shared.dispatch;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -22,7 +22,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * @author Philippe Beaudoin
  */
 public class Product implements IsSerializable {
-
   public static int FLAG_FAVORITE = 0x1;
   public static int FLAG_SPECIAL = 0x2;
 
