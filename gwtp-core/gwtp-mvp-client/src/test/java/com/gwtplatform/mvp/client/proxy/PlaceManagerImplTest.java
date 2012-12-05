@@ -19,8 +19,6 @@ package com.gwtplatform.mvp.client.proxy;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.Command;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.Presenter;
@@ -42,6 +40,8 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
 import java.util.List;
 /**
  * Unit tests for {@link PlaceManagerImpl}.
@@ -88,7 +88,7 @@ public class PlaceManagerImplTest {
     @Inject
     public DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
         this.presenter = new StandardProvider<DummyPresenterBasic>(presenter);
-    };
+    }
   }
 
   abstract static class ProxyPlaceBase<P extends Presenter<?,?>> extends ProxyPlaceImpl<P> {
@@ -101,7 +101,7 @@ public class PlaceManagerImplTest {
         super.setPlace(place);
         super.setProxy(proxy);
         this.deferredCommandManager = deferredCommandManager;
-    };
+    }
 
     @Override
     void addDeferredCommand(Command command) {
@@ -155,7 +155,7 @@ public class PlaceManagerImplTest {
     @Inject
     public DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
         this.presenter = new StandardProvider<DummyPresenterRedirect>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -197,7 +197,7 @@ public class PlaceManagerImplTest {
     @Inject
     public DummyProxyRedirectNoHistory(Provider<DummyPresenterRedirectNoHistory> presenter) {
         this.presenter = new StandardProvider<DummyPresenterRedirectNoHistory>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -219,7 +219,7 @@ public class PlaceManagerImplTest {
     public void onNavigation(NavigationEvent navigationEvent) {
       navCount++;
       lastEvent = navigationEvent;
-    };
+    }
   }
 
   // SUT

@@ -30,8 +30,6 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.common.client.StandardProvider;
@@ -39,6 +37,9 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.ProxyPlaceBase;
 import com.gwtplatform.tester.DeferredCommandManager;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * Unit tests for {@link GatekeeperWithParams}.
@@ -88,7 +89,7 @@ public class GatekeeperWithParamsTest {
     public DummyProxyWithDenyGatekeeperWithParams(
         Provider<DummyPresenterWithDenyGatekeeperWithParams> presenter) {
         this.presenter = new StandardProvider<DummyPresenterWithDenyGatekeeperWithParams>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -125,7 +126,7 @@ public class GatekeeperWithParamsTest {
     public DummyProxyWithGrantGatekeeperWithParams(
         Provider<DummyPresenterWithGrantGatekeeperWithParams> presenter) {
         this.presenter = new StandardProvider<DummyPresenterWithGrantGatekeeperWithParams>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -158,7 +159,7 @@ public class GatekeeperWithParamsTest {
     @Inject
     public DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
         this.presenter = new StandardProvider<DummyPresenterDefault>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -193,9 +194,7 @@ public class GatekeeperWithParamsTest {
   @Inject DeferredCommandManager deferredCommandManager;
 
   @Test
-  public void placeManagerRevealDefaultPlaceWhenGatekeeperWithParamsCanNotReveal(
-      DummyPresenterWithDenyGatekeeperWithParams presenter,
-      DummyPresenterDefault defaultPresenter) {
+  public void placeManagerRevealDefaultPlaceWhenGatekeeperWithParamsCanNotReveal(DummyPresenterDefault defaultPresenter) {
     // Given
     PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithDenyGatekeeperWithParams");
 

@@ -31,8 +31,6 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.CodeSplitProvider;
 import com.gwtplatform.common.client.StandardProvider;
@@ -42,6 +40,9 @@ import com.gwtplatform.mvp.client.TabDataBasic;
 import com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * The base class of any {@link ProxyOutputter} implementation.

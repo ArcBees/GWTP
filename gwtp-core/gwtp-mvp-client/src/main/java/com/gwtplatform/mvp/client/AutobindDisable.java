@@ -16,8 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Bind this class to indicate that you wish to globally disable automatic binding in
