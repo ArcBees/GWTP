@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.gin;
+package com.gwtplatform.samples.hplace.client.place;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -25,6 +25,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
+import com.gwtplatform.samples.hplace.client.gin.ClientModule;
 
 /**
  * This annotation is used in {@link gwtphplacesamplePlaceManager} and is bind

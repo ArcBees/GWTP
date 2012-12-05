@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.place;
+package com.gwtplatform.samples.mobile.client.place;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
