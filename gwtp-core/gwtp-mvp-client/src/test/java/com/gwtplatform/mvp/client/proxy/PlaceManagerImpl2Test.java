@@ -21,7 +21,6 @@ import java.util.Collections;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
-import com.google.inject.Inject;
 
 import com.gwtplatform.tester.DeferredCommandManager;
 
@@ -39,6 +38,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
+import javax.inject.Inject;
 
 /**
  * Unit tests for {@link PlaceManagerImpl}.

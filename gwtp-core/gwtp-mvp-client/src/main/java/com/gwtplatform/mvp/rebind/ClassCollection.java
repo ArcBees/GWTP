@@ -24,7 +24,6 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
-import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ChangeTabHandler;
 import com.gwtplatform.mvp.client.DelayedBind;
 import com.gwtplatform.mvp.client.Presenter;
@@ -44,6 +43,8 @@ import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlaceImpl;
+
+import javax.inject.Provider;
 
 /**
  * Contains all the classes that are useful to various generators.

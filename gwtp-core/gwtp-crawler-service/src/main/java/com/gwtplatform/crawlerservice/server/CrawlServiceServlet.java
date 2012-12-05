@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Provider;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import com.googlecode.objectify.Key;
 import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 import com.gwtplatform.crawlerservice.server.service.CachedPageDao;

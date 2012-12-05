@@ -16,12 +16,13 @@
 
 package com.gwtplatform.dispatch.server.guice.actionhandlervalidator;
 
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.guice.GuiceBeanProvider;
+
+import javax.inject.Inject;
 
 /**
  * This class links any registered {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler}

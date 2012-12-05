@@ -17,7 +17,6 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.web.bindery.event.shared.EventBus;
-import com.google.inject.Inject;
 
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
@@ -29,6 +28,8 @@ import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import javax.inject.Inject;
 
 /**
  * Unit tests for {@link Presenter}.

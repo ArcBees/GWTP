@@ -16,14 +16,14 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.inject.Inject;
-
 import static org.junit.Assert.assertFalse;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import javax.inject.Inject;
 
 /**
  * Unit tests for {@link HandlerContainerImpl}.

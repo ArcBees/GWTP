@@ -17,13 +17,12 @@
 package com.gwtplatform.dispatch.server.guice;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
 import com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.RequestProvider;
 import com.gwtplatform.dispatch.shared.SecurityCookie;
 
+import javax.inject.Singleton;
 import java.util.logging.Logger;
 
 /**
