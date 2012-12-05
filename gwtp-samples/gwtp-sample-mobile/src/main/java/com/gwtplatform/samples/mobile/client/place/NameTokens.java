@@ -16,6 +16,9 @@
 
 package com.gwtplatform.samples.mobile.client.place;
 
+import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+
 /**
  * The central location of all name tokens for the application. All
  * {@link ProxyPlace} classes get their tokens from here. This class also makes

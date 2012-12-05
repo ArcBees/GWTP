@@ -17,29 +17,27 @@
 package com.gwtplatform.samples.mobile.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import com.gwtplatform.samples.mobile.client.application.breadcrumbs.BreadcrumbsMobileView;
 import com.gwtplatform.samples.mobile.client.application.breadcrumbs.BreadcrumbsPresenter;
-import com.gwtplatform.samples.mobile.client.application.breadcrumbs.BreadcrumbsView;
+import com.gwtplatform.samples.mobile.client.application.product.ProductMobileView;
 import com.gwtplatform.samples.mobile.client.application.product.ProductPresenter;
-import com.gwtplatform.samples.mobile.client.application.product.ProductView;
+import com.gwtplatform.samples.mobile.client.application.products.ProductsMobileView;
 import com.gwtplatform.samples.mobile.client.application.products.ProductsPresenter;
-import com.gwtplatform.samples.mobile.client.application.products.ProductsView;
 
 /**
  * @author Brandon Donnelson
  */
-public class ApplicationModule extends AbstractPresenterModule {
+public class ApplicationMobileModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
     // Application Presenters
-    bindPresenter(BreadcrumbsPresenter.class,
-        BreadcrumbsPresenter.MyView.class, BreadcrumbsView.class,
+    bindPresenter(BreadcrumbsPresenter.class, BreadcrumbsPresenter.MyView.class, BreadcrumbsMobileView.class,
         BreadcrumbsPresenter.MyProxy.class);
-    bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class,
-        ApplicationView.class, ApplicationPresenter.MyProxy.class);
-    bindPresenter(ProductsPresenter.class,
-        ProductsPresenter.MyView.class, ProductsView.class,
+    bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationMobileView.class,
+        ApplicationPresenter.MyProxy.class);
+    bindPresenter(ProductsPresenter.class, ProductsPresenter.MyView.class, ProductsMobileView.class,
         ProductsPresenter.MyProxy.class);
-    bindPresenter(ProductPresenter.class, ProductPresenter.MyView.class,
-        ProductView.class, ProductPresenter.MyProxy.class);
+    bindPresenter(ProductPresenter.class, ProductPresenter.MyView.class, ProductMobileView.class,
+        ProductPresenter.MyProxy.class);
   }
 }
