@@ -22,9 +22,6 @@ import com.google.gwt.core.client.GWT;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.samples.basic.client.gin.ClientGinjector;
 
-/**
- * @author Philippe Beaudoin
- */
 public class Gwtpsample implements EntryPoint {
   public final ClientGinjector ginjector = GWT.create(ClientGinjector.class);
 

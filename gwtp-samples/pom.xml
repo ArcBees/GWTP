@@ -77,11 +77,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
@@ -160,7 +155,7 @@
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-dev</artifactId>
                 <version>${gwt.version}</version>
-                <scope>test</scope>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.gwt</groupId>

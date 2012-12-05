@@ -78,6 +78,7 @@
                     <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
                     <logLevel>INFO</logLevel>
                     <style>${gwt.style}</style>
+                    <gen>true</gen>
                     
                     <copyWebapp>true</copyWebapp>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
