@@ -143,3 +143,4 @@ public class ProductsPresenter extends Presenter<ProductsPresenter.MyView, Produ
     getView().setTitle(getTitleFor(currentType));
   }
 }
+
