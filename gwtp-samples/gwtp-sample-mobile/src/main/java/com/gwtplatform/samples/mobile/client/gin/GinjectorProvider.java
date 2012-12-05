@@ -16,6 +16,8 @@
 
 package com.gwtplatform.samples.mobile.client.gin;
 
+/**
+ */
 public interface GinjectorProvider {
     ClientGinjector get();
 }
