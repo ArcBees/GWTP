@@ -16,27 +16,12 @@
 
 package com.gwtplatform.samples.basic.client.gin;
 
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-import com.google.inject.Provider;
-
 import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.samples.basic.client.application.ApplicationPresenter;
-import com.gwtplatform.samples.basic.client.application.response.ResponsePresenter;
 
-/**
- * @author Philippe Beaudoin
- */
 @GinModules({DispatchAsyncModule.class, ClientModule.class})
 public interface ClientGinjector extends Ginjector {
-  EventBus getEventBus();
-
-  Provider<ApplicationPresenter> getMainPagePresenter();
-
   PlaceManager getPlaceManager();
-
-  AsyncProvider<ResponsePresenter> getResponsePresenter();
 }
