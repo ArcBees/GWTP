@@ -27,27 +27,6 @@ import com.gwtplatform.samples.mobile.client.application.product.ProductPresente
 import com.gwtplatform.samples.mobile.client.application.products.ProductsPresenter;
 
 /**
- * This example illustrates GWTP's support for hierarchical ginjectors. This is useful
- * when using configuration-dependent gin modules. For example, say you have three gin modules:
- * <ul>
- * <li>{@code MainModuleShared}</li>
- * <li>{@code MainModuleRelease}</li>
- * <li>{@code MainModuleDebug}</li>
- * </ul>
- * Then you want to switch between two ginjectors based on your configuration:
- * <pre>
- *   @GinModules({DispatchAsyncModule.class, ClientModuleShared.class, ClientModuleRelease.class})
- *   public interface ClientGinjectorRelease extends ClientGinjectorBase {}
- * </pre>
- * or
- * <pre>
- *   @GinModules({DispatchAsyncModule.class, ClientModuleShared.class, ClientModuleDebug.class})
- *   public interface ClientGinjectorDebug extends ClientGinjectorBase {}
- * </pre>
- * Since you don't want to cut-and-past all your {@code get} methods you place them in
- * {@code ClientGinjectorBase}, as is done here.
- *
- * @author Philippe Beaudoin
  */
 public interface ClientGinjector extends Ginjector {
   EventBus getEventBus();
