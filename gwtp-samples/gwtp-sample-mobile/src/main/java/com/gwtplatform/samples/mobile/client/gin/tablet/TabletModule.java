@@ -18,7 +18,7 @@ package com.gwtplatform.samples.mobile.client.gin.tablet;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.gwtplatform.samples.mobile.client.application.ApplicationModule;
+import com.gwtplatform.samples.mobile.client.application.ApplicationTabletModule;
 import com.gwtplatform.samples.mobile.client.place.DefaultPlace;
 import com.gwtplatform.samples.mobile.client.place.NameTokens;
 import com.gwtplatform.samples.mobile.client.place.PlaceManager;
@@ -32,6 +32,6 @@ public class TabletModule extends AbstractPresenterModule {
       // Constants
       bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);
 
-      install(new ApplicationModule());
+      install(new ApplicationTabletModule());
     }
 }

@@ -15,7 +15,7 @@
         <a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-hplace">Source</a>
     </div>
 
-    <h1>Choose one of the following... Desktop View</h1>
+    <h1>Choose one of the following... Mobile View</h1>
 
     <g:Button ui:field='all'>All Products</g:Button>
     <g:Button ui:field='favorites'>Favorite Products</g:Button>
