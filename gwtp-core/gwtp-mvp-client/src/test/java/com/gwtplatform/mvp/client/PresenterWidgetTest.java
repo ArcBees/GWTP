@@ -33,8 +33,9 @@ import org.junit.runner.RunWith;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Unit tests for {@link PresenterWidget}.

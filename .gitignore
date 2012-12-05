@@ -56,4 +56,6 @@ gwtp-samples/gwtp-sample-tab/bin/**
 **.gwt-log
 **gwt-unitCache**
 **www-test**
+*/target/*
+*/true/*
 

@@ -16,11 +16,11 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.inject.Inject;
 
 /**
  * A dummy widget participating in dependency injection to test GinUiBinder.

@@ -16,10 +16,11 @@
 
 package com.gwtplatform.dispatch.server.guice;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.server.AbstractDispatchImpl;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * @author Philippe Beaudoin

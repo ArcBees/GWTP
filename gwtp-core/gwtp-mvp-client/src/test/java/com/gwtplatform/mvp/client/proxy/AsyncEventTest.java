@@ -29,7 +29,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.mvp.client.proxy.AsyncEventPresenterTestUtil.MyAction;
@@ -38,6 +37,8 @@ import com.gwtplatform.mvp.client.proxy.AsyncEventPresenterTestUtil.MyResult;
 import com.gwtplatform.mvp.client.proxy.AsyncEventPresenterTestUtil.MyView;
 import com.gwtplatform.tester.TestDispatchAsync;
 import com.gwtplatform.tester.TestDispatchService;
+
+import javax.inject.Inject;
 
 /**
  * Tests (using {@link AsyncEventPresenterTestUtil}) the correct firing and
