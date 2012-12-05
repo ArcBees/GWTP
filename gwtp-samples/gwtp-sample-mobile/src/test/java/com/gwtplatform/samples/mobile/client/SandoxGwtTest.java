@@ -24,7 +24,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 public class SandoxGwtTest extends GWTTestCase {
   @Override
   public String getModuleName() {
-    return "com.gwtplatform.samples.mobile.Gwtphplacesample";
+    return "com.gwtplatform.samples.mobile.Gwtpmobilesample";
   }
 
   public void testSandbox() {

@@ -23,6 +23,8 @@ import com.gwtplatform.samples.mobile.client.place.DefaultPlace;
 import com.gwtplatform.samples.mobile.client.place.NameTokens;
 import com.gwtplatform.samples.mobile.client.place.PlaceManager;
 
+/**
+ */
 public class DesktopModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
