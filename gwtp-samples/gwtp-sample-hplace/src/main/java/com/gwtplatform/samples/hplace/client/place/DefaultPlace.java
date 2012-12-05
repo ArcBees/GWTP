@@ -25,7 +25,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
-import com.gwtplatform.samples.hplace.client.gin.ClientModule;
 
 /**
  * This annotation is used in {@link gwtphplacesamplePlaceManager} and is bind
