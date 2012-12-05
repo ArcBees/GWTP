@@ -16,19 +16,15 @@
 
 package com.gwtplatform.samples.mobile.client.gin.desktop;
 
-import java.util.logging.Logger;
-
 import com.google.gwt.core.client.GWT;
 import com.gwtplatform.samples.mobile.client.gin.ClientGinjector;
 import com.gwtplatform.samples.mobile.client.gin.GinjectorProvider;
 
+/**
+ */
 public class DesktopGinjectorProvider implements GinjectorProvider {
-    public final static Logger logger = Logger.getLogger(DesktopGinjectorProvider.class.getName());
-
     @Override
     public ClientGinjector get() {
-        logger.info("DesktopGinjectorProvider get() DesktopGinjector was used.");
-
         return GWT.create(DesktopGinjector.class);
     }
 }

@@ -20,6 +20,8 @@ import com.google.gwt.inject.client.GinModules;
 import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
 import com.gwtplatform.samples.mobile.client.gin.ClientGinjector;
 
+/**
+ */
 @GinModules({DispatchAsyncModule.class, MobileModule.class})
 public interface MobileGinjector extends ClientGinjector {
 }
