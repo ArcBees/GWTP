@@ -45,7 +45,7 @@
     </replace-with>
 
     <!-- Tablet -->
-    <replace-with class="com.gwtplatform.samples.mobile.client.gin.tablet.MobileGinjectorProvider">
+    <replace-with class="com.gwtplatform.samples.mobile.client.gin.tablet.TabletGinjectorProvider">
         <when-type-is class="com.gwtplatform.samples.mobile.client.gin.GinjectorProvider"/>
         <when-property-is name="formfactor" value="tablet"/>
     </replace-with>
