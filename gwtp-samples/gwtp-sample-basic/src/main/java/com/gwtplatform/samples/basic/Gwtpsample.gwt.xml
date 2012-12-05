@@ -42,11 +42,10 @@
     <source path='shared'/>
 
     <generate-with class="com.gwtplatform.samples.basic.rebind.GinjectorGenerator">
-        <when-type-assignable class="com.gwtplatform.samples.basic.client.gin.ClientGinjector"/>
+        <when-type-is class="com.gwtplatform.samples.basic.client.gin.ClientGinjector"/>
     </generate-with>
 
     <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
-    <set-configuration-property name="gin.ginjector"
-                                value="com.gwtplatform.samples.basic.client.gin.ClientGinjector"/>
+    <set-configuration-property name="gin.ginjector" value="com.gwtplatform.samples.basic.client.gin.ClientGinjectorGenerated"/>
 
 </module>

@@ -19,10 +19,11 @@ package com.gwtplatform.mvp.client.proxy;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Inject;
 
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.mvp.client.Presenter;
+
+import javax.inject.Inject;
 
 /**
  * @author Philippe Beaudoin
