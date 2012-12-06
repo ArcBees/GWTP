@@ -36,8 +36,8 @@ import com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent;
 import com.gwtplatform.mvp.client.proxy.AsyncCallSucceedHandler;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent;
-import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent.CurrentUserChangedHandler;
+import com.gwtplatform.samples.tab.client.security.CurrentUserChangedEvent;
+import com.gwtplatform.samples.tab.client.security.CurrentUserChangedEvent.CurrentUserChangedHandler;
 
 /**
  * The main {@link com.gwtplatform.mvp.client.Presenter} of the application. It
