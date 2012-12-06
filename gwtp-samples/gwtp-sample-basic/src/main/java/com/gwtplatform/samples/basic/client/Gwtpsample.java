@@ -18,7 +18,7 @@ package com.gwtplatform.samples.basic.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.gwtplatform.samples.basic.client.gin.ApplicationController;
+import com.gwtplatform.mvp.client.ApplicationController;
 
 public class Gwtpsample implements EntryPoint {
   public void onModuleLoad() {

@@ -17,15 +17,11 @@
     <entry-point class='com.gwtplatform.samples.basic.client.Gwtpsample'/>
 
     <inherits name='com.gwtplatform.dispatch.Dispatch'/>
-    <inherits name='com.gwtplatform.mvp.Mvp'/>
+    <inherits name='com.gwtplatform.mvp.MvpGinjectorGenerator'/>
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
     <source path='shared'/>
-
-    <generate-with class="com.gwtplatform.samples.basic.rebind.ApplicationControllerGenerator">
-        <when-type-is class="com.gwtplatform.samples.basic.client.gin.ApplicationController"/>
-    </generate-with>
 
     <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
     <set-configuration-property name="gin.ginjector" value="com.gwtplatform.samples.basic.client.gin.ClientGinjectorGenerated"/>
