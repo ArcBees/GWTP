@@ -1,12 +1,9 @@
-package com.gwtplatform.samples.basic.rebind;
+package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModule;
@@ -15,37 +12,36 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.common.client.ProviderBundle;
+import com.gwtplatform.mvp.client.annotations.GWTPGinModules;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.samples.basic.client.gin.GWTPGinModules;
 
 import javax.inject.Provider;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class GinjectorGenerator extends Generator {
+/**
+ * Will generate a Ginjector from Ginjector defined by the user. This generator must be annotated with
+ * {@link GWTPGinModules} and every module defined on the Ginjector as well as custom ginjector element will be
+ * inherited by the generated Ginjector.
+ */
+public class GinjectorGenerator extends AbstractGenerator {
   private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
   private static final String GETTER_METHOD = "%s get%s();";
   private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
   private static final String GIN_MODULES = "@%s({%s})";
 
-  private String packageName = "";
-  private String className = "";
-  private String typeName = "";
-  private TypeOracle typeOracle;
-  private TreeLogger treeLogger;
-
   @Override
   public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
       throws UnableToCompleteException {
-    typeOracle = generatorContext.getTypeOracle();
-    this.treeLogger = treeLogger;
-    this.typeName = typeName;
+    setTypeOracle(generatorContext.getTypeOracle());
+    setTreeLogger(treeLogger);
+    setTypeClass(getType(typeName));
 
     PrintWriter printWriter;
-    printWriter = tryCreate(generatorContext, typeName);
+    printWriter = tryCreatePrintWriter(generatorContext, "Generated");
 
     if (printWriter == null) {
       return null;
@@ -65,28 +61,11 @@ public class GinjectorGenerator extends Generator {
 
     closeDefinition(generatorContext, printWriter, sourceWriter);
 
-    return packageName + "." + className;
-  }
-
-  private PrintWriter tryCreate(GeneratorContext generatorContext, String typeName) throws UnableToCompleteException {
-    JClassType classType = getType(typeName);
-    packageName = classType.getPackage().getName();
-    className = classType.getSimpleSourceName() + "Generated";
-
-    return generatorContext.tryCreate(treeLogger, packageName, className);
-  }
-
-  private JClassType getType(String typeName) throws UnableToCompleteException {
-    try {
-      return typeOracle.getType(typeName);
-    } catch (NotFoundException e) {
-      treeLogger.log(TreeLogger.ERROR, "Cannot find " + typeName, e);
-      throw new UnableToCompleteException();
-    }
+    return getPackageName() + "." + getClassName();
   }
 
   private void findAllPresenters(PresenterDefinitions presenterDefinitions) {
-    for (JClassType type : typeOracle.getTypes()) {
+    for (JClassType type : getTypeOracle().getTypes()) {
       if (type.isAnnotationPresent(ProxyStandard.class)) {
         presenterDefinitions.addStandardPresenter(type.getEnclosingType());
       } else if (type.isAnnotationPresent(ProxyCodeSplit.class)) {
@@ -98,15 +77,16 @@ public class GinjectorGenerator extends Generator {
   }
 
   private ClassSourceFileComposerFactory initComposer() {
-    ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, className);
-    composer.addImplementedInterface(typeName);
+    ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
+    composer.addImport(getTypeClass().getQualifiedSourceName());
     composer.makeInterface();
+    composer.addImplementedInterface(getTypeClass().getName());
 
     return composer;
   }
 
   private void writeGinModulesAnnotation(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
-    JClassType ginjector = getType(typeName);
+    JClassType ginjector = getType(getTypeClass().getQualifiedSourceName());
 
     GWTPGinModules ginModules = ginjector.getAnnotation(GWTPGinModules.class);
     StringBuilder stringBuilder = new StringBuilder();
@@ -158,7 +138,8 @@ public class GinjectorGenerator extends Generator {
   }
 
   private void writeMandatoryGetter(SourceWriter sourceWriter) {
-    sourceWriter.println(String.format(SINGLETON_DECLARATION, className, GWT.class.getSimpleName(), className));
+    sourceWriter.println(String.format(SINGLETON_DECLARATION, getClassName(), GWT.class.getSimpleName(),
+        getClassName()));
     sourceWriter.println();
 
     String eventBusName = EventBus.class.getSimpleName();
@@ -192,13 +173,5 @@ public class GinjectorGenerator extends Generator {
       sourceWriter.println();
       sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, presenterName, presenterName));
     }
-  }
-
-  private void closeDefinition(GeneratorContext generatorContext, PrintWriter printWriter,
-      SourceWriter sourceWriter) {
-    sourceWriter.outdent();
-    sourceWriter.println("}");
-
-    generatorContext.commit(treeLogger, printWriter);
   }
 }

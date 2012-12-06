@@ -1,4 +1,4 @@
-package com.gwtplatform.samples.basic.client.gin;
+package com.gwtplatform.mvp.client.annotations;
 
 import com.google.gwt.inject.client.GinModule;
 
