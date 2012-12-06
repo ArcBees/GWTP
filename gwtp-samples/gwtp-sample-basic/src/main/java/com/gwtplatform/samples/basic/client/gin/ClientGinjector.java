@@ -18,6 +18,7 @@ package com.gwtplatform.samples.basic.client.gin;
 
 import com.google.gwt.inject.client.Ginjector;
 import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
+import com.gwtplatform.mvp.client.annotations.GWTPGinModules;
 
 @GWTPGinModules({DispatchAsyncModule.class, ClientModule.class})
 public interface ClientGinjector extends Ginjector {

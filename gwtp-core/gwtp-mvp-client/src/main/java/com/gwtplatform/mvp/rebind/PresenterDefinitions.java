@@ -1,10 +1,14 @@
-package com.gwtplatform.samples.basic.rebind;
+package com.gwtplatform.mvp.rebind;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class will hold a reference to all type of presenters that can be found in an application to be able to
+ * retrieve them by type afterward.
+ */
 public class PresenterDefinitions {
   private final List<JClassType> standardPresenters;
   private final List<JClassType> codeSplitPresenters;
