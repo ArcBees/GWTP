@@ -14,19 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionvalidator;
+package com.gwtplatform.samples.mobile.client.gin.desktop;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.google.gwt.inject.client.GinModules;
+import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
+import com.gwtplatform.samples.mobile.client.gin.ClientGinjector;
 
 /**
- * The default {@link ActionValidator} implementation. It'll accept every action.
- *
- * @author Christian Goudreau
  */
-public class AbstractDefaultActionValidator implements ActionValidator {
-  @Override
-  public boolean isValid(Action<? extends Result> action) {
-    return true;
-  }
+@GinModules({DispatchAsyncModule.class, DesktopModule.class})
+public interface DesktopGinjector extends ClientGinjector {
 }
