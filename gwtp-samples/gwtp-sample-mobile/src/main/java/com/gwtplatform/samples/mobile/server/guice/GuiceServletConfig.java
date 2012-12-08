@@ -14,19 +14,18 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionvalidator;
+package com.gwtplatform.samples.mobile.server.guice;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.servlet.GuiceServletContextListener;
 
 /**
- * The default {@link ActionValidator} implementation. It'll accept every action.
- *
- * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
-public class AbstractDefaultActionValidator implements ActionValidator {
+public class GuiceServletConfig extends GuiceServletContextListener {
   @Override
-  public boolean isValid(Action<? extends Result> action) {
-    return true;
+  protected Injector getInjector() {
+    return Guice.createInjector(new ServerModule(), new DispatchServletModule());
   }
 }

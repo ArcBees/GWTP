@@ -14,19 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionvalidator;
+package com.gwtplatform.samples.mobile.client.gin.tablet;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.google.gwt.core.client.GWT;
+import com.gwtplatform.samples.mobile.client.gin.ClientGinjector;
+import com.gwtplatform.samples.mobile.client.gin.GinjectorProvider;
 
 /**
- * The default {@link ActionValidator} implementation. It'll accept every action.
- *
- * @author Christian Goudreau
  */
-public class AbstractDefaultActionValidator implements ActionValidator {
-  @Override
-  public boolean isValid(Action<? extends Result> action) {
-    return true;
-  }
+public class TabletGinjectorProvider implements GinjectorProvider {
+    @Override
+    public ClientGinjector get() {
+        return GWT.create(TabletGinjector.class);
+    }
 }

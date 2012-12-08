@@ -20,7 +20,6 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.samples.tab.client.CurrentUserChangedEvent;
 
 /**
  * This is a basic class that holds the privileges of the user currently logged
