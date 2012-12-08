@@ -6,7 +6,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
 
 ##Community Help
 * [Discussion Group](https://groups.google.com/forum/?fromgroups#!forum/gwt-platform)
-* [G+ GWT-Platform Community](https://plus.google.com/communities/113139554133824081251)
+* [GWT-Platform G+ Community](https://plus.google.com/communities/113139554133824081251)
 
 ##License
 * GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
