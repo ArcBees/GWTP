@@ -29,6 +29,8 @@ import com.gwtplatform.mvp.client.ViewImpl;
  * @author Philippe Beaudoin
  */
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
+  /**
+   */
   public interface Binder extends UiBinder<Widget, ApplicationView> {
   }
 
@@ -38,7 +40,9 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
   Button sendButton;
   @UiField
   HTML error;
-  
+
+  /**
+   */
   private Widget widget;
 
   @Inject

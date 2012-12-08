@@ -28,16 +28,20 @@ import com.gwtplatform.mvp.client.ViewImpl;
  * @author Philippe Beaudoin
  */
 public class ResponseView extends ViewImpl implements ResponsePresenter.MyView {
+  /**
+   */
   public interface Binder extends UiBinder<Widget, ResponseView> {
   }
-  
+
   @UiField
   HTML textToServer;
   @UiField
   HTML serverResponse;
   @UiField
   Button closeButton;
-  
+
+  /**
+   */
   private Widget widget;
 
   @Inject
