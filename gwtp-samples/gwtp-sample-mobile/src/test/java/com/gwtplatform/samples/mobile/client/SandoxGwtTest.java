@@ -14,19 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionvalidator;
+package com.gwtplatform.samples.mobile.client;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * The default {@link ActionValidator} implementation. It'll accept every action.
- *
- * @author Christian Goudreau
+ * @author Brandon Donnelson
  */
-public class AbstractDefaultActionValidator implements ActionValidator {
+public class SandoxGwtTest extends GWTTestCase {
   @Override
-  public boolean isValid(Action<? extends Result> action) {
-    return true;
+  public String getModuleName() {
+    return "com.gwtplatform.samples.mobile.Gwtpmobilesample";
+  }
+
+  public void testSandbox() {
+    assertTrue(true);
   }
 }
