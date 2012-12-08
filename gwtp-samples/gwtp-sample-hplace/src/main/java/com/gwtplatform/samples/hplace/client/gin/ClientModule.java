@@ -19,6 +19,7 @@ package com.gwtplatform.samples.hplace.client.gin;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.gwtplatform.samples.hplace.client.application.ApplicationModule;
+import com.gwtplatform.samples.hplace.client.place.DefaultPlace;
 import com.gwtplatform.samples.hplace.client.place.NameTokens;
 import com.gwtplatform.samples.hplace.client.place.PlaceManager;
 
