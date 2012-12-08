@@ -11,10 +11,9 @@
     <artifactId>gwtp-sample-basic</artifactId>
     <packaging>war</packaging>
     <name>GWTP Samples - basic</name>
-    <!-- <packaging>war</packaging> -->
 
     <properties>
-     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
         <gae.home>
             ${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
         </gae.home>
@@ -168,12 +167,6 @@
             <artifactId>junit</artifactId>
         </dependency>
 
-        <!-- AppEngine dependencies -->
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-        </dependency>
-
         <!-- DI dependencies -->
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -196,7 +189,7 @@
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-labs</artifactId>
