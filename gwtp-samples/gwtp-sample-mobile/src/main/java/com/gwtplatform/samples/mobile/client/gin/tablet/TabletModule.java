@@ -14,27 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.samples.hplace.client.gin;
+package com.gwtplatform.samples.mobile.client.gin.tablet;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.gwtplatform.samples.hplace.client.application.ApplicationModule;
-import com.gwtplatform.samples.hplace.client.place.DefaultPlace;
-import com.gwtplatform.samples.hplace.client.place.NameTokens;
-import com.gwtplatform.samples.hplace.client.place.PlaceManager;
+import com.gwtplatform.samples.mobile.client.application.ApplicationTabletModule;
+import com.gwtplatform.samples.mobile.client.place.DefaultPlace;
+import com.gwtplatform.samples.mobile.client.place.NameTokens;
+import com.gwtplatform.samples.mobile.client.place.PlaceManager;
 
 /**
- * @author Christian Goudreau
  */
-public class ClientModule extends AbstractPresenterModule {
-  @Override
-  protected void configure() {
-    // Default implementation of standard resources
-    install(new DefaultModule(PlaceManager.class));
+public class TabletModule extends AbstractPresenterModule {
+    @Override
+    protected void configure() {
+      // Default implementation of standard resources
+      install(new DefaultModule(PlaceManager.class));
 
-    // Constants
-    bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);
+      // Constants
+      bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);
 
-    install(new ApplicationModule());
-  }
+      install(new ApplicationTabletModule());
+    }
 }

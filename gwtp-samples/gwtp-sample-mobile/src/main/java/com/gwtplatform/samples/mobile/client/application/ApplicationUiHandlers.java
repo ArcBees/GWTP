@@ -14,19 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionvalidator;
+package com.gwtplatform.samples.mobile.client.application;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.mvp.client.UiHandlers;
 
 /**
- * The default {@link ActionValidator} implementation. It'll accept every action.
+ * {@link ApplicationView}'s {@link UiHandlers}.
  *
- * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
-public class AbstractDefaultActionValidator implements ActionValidator {
-  @Override
-  public boolean isValid(Action<? extends Result> action) {
-    return true;
-  }
+public interface ApplicationUiHandlers extends UiHandlers {
+  void revealAllProductsList();
+  void revealFavoriteProductsList();
+  void revealSpecialsList();
 }

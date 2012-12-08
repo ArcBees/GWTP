@@ -14,19 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server.actionvalidator;
+package com.gwtplatform.samples.mobile.shared.dispatch;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.annotation.GenDispatch;
+import com.gwtplatform.dispatch.annotation.In;
+import com.gwtplatform.dispatch.annotation.Out;
 
 /**
- * The default {@link ActionValidator} implementation. It'll accept every action.
+ * This classes uses GWTP annotation processors
+ * to generate {@link GetProductAction} and
+ * {@link GetProductResult}.
  *
- * @author Christian Goudreau
+ * @author Philippe Beaudoin
  */
-public class AbstractDefaultActionValidator implements ActionValidator {
-  @Override
-  public boolean isValid(Action<? extends Result> action) {
-    return true;
-  }
+@GenDispatch(isSecure = false)
+public class GetProduct {
+  @In(1)
+  int id;
+
+  @Out(1)
+  Product product;
 }
