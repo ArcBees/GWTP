@@ -16,26 +16,22 @@
 
 package com.gwtplatform.samples.hplace.server.guice;
 
+import com.google.inject.servlet.ServletModule;
 import com.gwtplatform.crawler.server.CrawlFilter;
 import com.gwtplatform.crawler.server.ServiceKey;
 import com.gwtplatform.crawler.server.ServiceUrl;
 import com.gwtplatform.dispatch.server.guice.DispatchServiceImpl;
 import com.gwtplatform.dispatch.shared.ActionImpl;
 
-import com.google.inject.servlet.ServletModule;
-
 /**
  * @author Philippe Beaudoin
  */
 public class DispatchServletModule extends ServletModule {
-
   @Override
   public void configureServlets() {
     bindConstant().annotatedWith(ServiceKey.class).to("123456");
-    bindConstant().annotatedWith(ServiceUrl.class).to("http://crawlservice.appspot.com/");
+    bindConstant().annotatedWith(ServiceUrl.class).to("http://gwtp-sample-hplace.appspot.com/");
     filter("/*").through(CrawlFilter.class);
-    serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(
-        DispatchServiceImpl.class);
+    serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(DispatchServiceImpl.class);
   }
-
 }

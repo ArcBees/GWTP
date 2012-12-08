@@ -19,8 +19,7 @@
     filter(String).through(Class<? extends Filter)
   -->
   <listener>
-    <listener-class>com.gwtplatform.samples.hplace.server.guice.MyGuiceServletContextListener
-    </listener-class>
+    <listener-class>com.gwtplatform.samples.hplace.server.guice.GuiceServletConfig</listener-class>
   </listener>
 
   <!-- Default page to serve -->
