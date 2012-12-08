@@ -18,17 +18,10 @@ package com.gwtplatform.samples.nested.client.gin;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.gwtplatform.samples.nested.client.GwtpnestedsamplePlaceManager;
-import com.gwtplatform.samples.nested.client.NameTokens;
-import com.gwtplatform.samples.nested.client.presenter.AboutUsPresenter;
-import com.gwtplatform.samples.nested.client.presenter.ContactPresenter;
-import com.gwtplatform.samples.nested.client.presenter.ContactPresenterBase;
-import com.gwtplatform.samples.nested.client.presenter.HomePresenter;
-import com.gwtplatform.samples.nested.client.presenter.MainPagePresenter;
-import com.gwtplatform.samples.nested.client.view.AboutUsView;
-import com.gwtplatform.samples.nested.client.view.ContactView;
-import com.gwtplatform.samples.nested.client.view.HomeView;
-import com.gwtplatform.samples.nested.client.view.MainPageView;
+import com.gwtplatform.samples.nested.client.application.ApplicationModule;
+import com.gwtplatform.samples.nested.client.place.DefaultPlace;
+import com.gwtplatform.samples.nested.client.place.NameTokens;
+import com.gwtplatform.samples.nested.client.place.PlaceManager;
 
 /**
  * @author Christian Goudreau
@@ -37,19 +30,11 @@ public class ClientModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
     // Default implementation of standard resources
-    install(new DefaultModule(GwtpnestedsamplePlaceManager.class));
+    install(new DefaultModule(PlaceManager.class));
 
     // Constants
     bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.homePage);
 
-    // Presenters
-    bindPresenter(MainPagePresenter.class, MainPagePresenter.MyView.class,
-        MainPageView.class, MainPagePresenter.MyProxy.class);
-    bindPresenter(HomePresenter.class, HomePresenter.MyView.class,
-        HomeView.class, HomePresenter.MyProxy.class);
-    bindPresenter(AboutUsPresenter.class, AboutUsPresenter.MyView.class,
-        AboutUsView.class, AboutUsPresenter.MyProxy.class);
-    bindPresenter(ContactPresenter.class, ContactPresenterBase.MyView.class,
-        ContactView.class, ContactPresenter.MyProxy.class);
+    install(new ApplicationModule());
   }
 }

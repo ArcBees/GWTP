@@ -16,18 +16,16 @@
 
 package com.gwtplatform.samples.hplace.server;
 
-import com.gwtplatform.samples.hplace.shared.Product;
+import java.util.ArrayList;
 
 import com.google.inject.Singleton;
-
-import java.util.ArrayList;
+import com.gwtplatform.samples.hplace.shared.dispatch.Product;
 
 /**
  * @author Philippe Beaudoin
  */
 @Singleton
 public class ProductDatabase {
-
   private Product[] products = {
       new Product("jPad Wifi 16GB", Product.FLAG_SPECIAL, "$529.00", 13),
       new Product("jPad Wifi 32GB", 0, "$649.00", 77),
