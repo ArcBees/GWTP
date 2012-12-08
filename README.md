@@ -22,6 +22,21 @@ A complete model-view-presenter framework to simplify your next GWT project.
     <td><a href="http://gwtp-sample-basic.appspot.com">AppEngine Demo</a></td>
     <td><a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-basic">Source</a></td>
   </tr>
+  <tr>
+    <th>Basic Spring</th>
+    <td><a href="http://gwtp-sample-basic-spring.appspot.com">AppEngine Demo</a></td>
+    <td><a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-basic-spring">Source</a></td>
+  </tr>
+  <tr>
+    <th>Hierarchical Places</th>
+    <td><a href="http://gwtp-sample-hplace.appspot.com">AppEngine Demo</a></td>
+    <td><a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-hplace">Source</a></td>
+  </tr>
+  <tr>
+    <th>Tabs</th>
+    <td><a href="http://gwtp-sample-tab.appspot.com">AppEngine Demo</a></td>
+    <td><a href="https://github.com/ArcBees/GWTP/tree/master/gwtp-samples/gwtp-sample-tab">Source</a></td>
+  </tr>
 </table>
 
 ##Downloads
