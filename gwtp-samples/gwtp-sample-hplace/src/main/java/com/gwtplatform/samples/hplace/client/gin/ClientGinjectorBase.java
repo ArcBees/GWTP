@@ -16,15 +16,15 @@
 
 package com.gwtplatform.samples.hplace.client.gin;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.samples.hplace.client.presenter.BreadcrumbsPresenter;
-import com.gwtplatform.samples.hplace.client.presenter.HomePresenter;
-import com.gwtplatform.samples.hplace.client.presenter.ProductListPresenter;
-import com.gwtplatform.samples.hplace.client.presenter.ProductPresenter;
+import com.gwtplatform.samples.hplace.client.application.ApplicationPresenter;
+import com.gwtplatform.samples.hplace.client.application.breadcrumbs.BreadcrumbsPresenter;
+import com.gwtplatform.samples.hplace.client.application.product.ProductPresenter;
+import com.gwtplatform.samples.hplace.client.application.products.ProductsPresenter;
 
 /**
  * This example illustrates GWTP's support for hierarchical ginjectors. This is useful
@@ -51,9 +51,14 @@ import com.gwtplatform.samples.hplace.client.presenter.ProductPresenter;
  */
 public interface ClientGinjectorBase extends Ginjector {
   EventBus getEventBus();
-  AsyncProvider<HomePresenter> getHomePresenter();
+
+  AsyncProvider<ApplicationPresenter> getHomePresenter();
+
   Provider<BreadcrumbsPresenter> getBreadcrumbsPresenter();
+
   PlaceManager getPlaceManager();
-  AsyncProvider<ProductListPresenter> getProductListPresenter();
+
+  AsyncProvider<ProductsPresenter> getProductListPresenter();
+
   AsyncProvider<ProductPresenter> getProductPresenter();
 }

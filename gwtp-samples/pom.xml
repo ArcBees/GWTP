@@ -25,6 +25,7 @@
         <module>gwtp-sample-nested</module>
         <module>gwtp-sample-tab</module>
         <module>gwtp-sample-crawler-service</module>
+        <module>gwtp-sample-mobile</module>
     </modules>
 
     <build>

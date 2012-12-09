@@ -17,10 +17,10 @@
 package com.gwtplatform.samples.hplace.server.guice;
 
 import com.gwtplatform.dispatch.server.guice.HandlerModule;
-import com.gwtplatform.samples.hplace.server.GetProductHandler;
-import com.gwtplatform.samples.hplace.server.GetProductListHandler;
-import com.gwtplatform.samples.hplace.shared.GetProductAction;
-import com.gwtplatform.samples.hplace.shared.GetProductListAction;
+import com.gwtplatform.samples.hplace.server.dispatch.GetProductHandler;
+import com.gwtplatform.samples.hplace.server.dispatch.GetProductListHandler;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductAction;
+import com.gwtplatform.samples.hplace.shared.dispatch.GetProductListAction;
 
 /**
  * Module which binds the handlers and configurations.
@@ -28,7 +28,6 @@ import com.gwtplatform.samples.hplace.shared.GetProductListAction;
  * @author Philippe Beaudoin
  */
 public class ServerModule extends HandlerModule {
-
   @Override
   protected void configureHandlers() {
     bindHandler(GetProductAction.class, GetProductHandler.class);
