@@ -25,7 +25,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
 
 import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.LockInteractionHandler;
@@ -37,6 +36,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
+
+import javax.inject.Inject;
 
 /**
  * This is the presenter for the top-level of the application. It is derived

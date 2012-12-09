@@ -17,8 +17,6 @@
 package com.gwtplatform.mvp.client.mvp;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -27,6 +25,9 @@ import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * This is the test presenter.

@@ -17,8 +17,8 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.http.client.URL;
-import com.google.inject.Inject;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

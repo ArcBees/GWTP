@@ -16,9 +16,7 @@
 
 package com.gwtplatform.dispatch.server.guice.actionhandlervalidator;
 
-import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
 
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance;
@@ -27,6 +25,8 @@ import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
 

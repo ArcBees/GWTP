@@ -20,8 +20,9 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
-import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
+
+import javax.inject.Inject;
 
 /**
  * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
