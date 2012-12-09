@@ -21,7 +21,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.gwt.http.client.URL;
-import com.google.inject.Inject;
+
+import javax.inject.Inject;
 
 /**
  * Formats tokens from {@code String} values to {@link PlaceRequest} and {@link PlaceRequest}

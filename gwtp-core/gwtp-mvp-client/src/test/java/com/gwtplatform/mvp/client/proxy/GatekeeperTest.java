@@ -21,8 +21,11 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 
+import com.google.inject.name.Names;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestEagerSingleton;
@@ -31,9 +34,6 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Names;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.common.client.StandardProvider;
@@ -91,7 +91,7 @@ public class GatekeeperTest {
     @Inject
     public DummyProxyWithDenyGatekeeper(Provider<DummyPresenterWithDenyGatekeeper> presenter) {
         this.presenter = new StandardProvider<DummyPresenterWithDenyGatekeeper>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -125,7 +125,7 @@ public class GatekeeperTest {
     @Inject
     public DummyProxyWithGrantGatekeeper(Provider<DummyPresenterWithGrantGatekeeper> presenter) {
         this.presenter = new StandardProvider<DummyPresenterWithGrantGatekeeper>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -157,7 +157,7 @@ public class GatekeeperTest {
     @Inject
     public DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
         this.presenter = new StandardProvider<DummyPresenterDefault>(presenter);
-    };
+    }
   }
 
   @TestEagerSingleton
@@ -187,9 +187,7 @@ public class GatekeeperTest {
   @Inject DeferredCommandManager deferredCommandManager;
 
   @Test
-  public void placeManagerRevealDefaultPlaceWhenGatekeeperCanNotReveal(
-      DummyPresenterWithDenyGatekeeper presenterWithGatekeeper,
-      DummyPresenterDefault defaultPresenter) {
+  public void placeManagerRevealDefaultPlaceWhenGatekeeperCanNotReveal(DummyPresenterDefault defaultPresenter) {
     // Given
     PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithDenyGatekeeper");
 

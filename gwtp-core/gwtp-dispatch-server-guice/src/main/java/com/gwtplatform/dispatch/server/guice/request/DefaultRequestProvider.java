@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.server.guice.request;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.server.RequestProvider;
 
 /**

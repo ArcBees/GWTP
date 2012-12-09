@@ -17,7 +17,8 @@
 package com.gwtplatform.common.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Provider;
+
+import javax.inject.Provider;
 
 /**
  * An {@link IndirectProvider} that immediately gets the object and invokes the
