@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+    xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+        .popup {
+          background-color: aqua;
+          border: 3px double black;
+          padding: 0 15px;
+        }
+        
+        .bold {
+          font-weight: bold;
+        }
+    </ui:style>
+
+    <g:PopupPanel autoHideOnHistoryEventsEnabled="true"
+        autoHideEnabled="true" styleName="{style.popup}">
+        <g:HTMLPanel>
+            <p class="{style.bold}">
+                This is an example of an auto-hiding
+                <br />
+                popup PresenterWidget.
+            </p>
+            <p>
+                It will automatically go away if you click
+                <br />
+                anywhere or navigate.
+            </p>
+        </g:HTMLPanel>
+    </g:PopupPanel>
+</ui:UiBinder> 

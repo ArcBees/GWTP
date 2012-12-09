@@ -51,7 +51,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
    */
   public interface MyView extends View {
     String getName();
-    
+
     Button getSendButton();
 
     void resetAndFocus();
@@ -64,14 +64,14 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
   @Inject
   public ApplicationPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
     super(eventBus, view, proxy, RevealType.Root);
-    
+
     this.placeManager = placeManager;
   }
 
   @Override
   protected void onBind() {
     super.onBind();
-    
+
     registerHandler(getView().getSendButton().addClickHandler(
         new ClickHandler() {
           @Override
@@ -84,7 +84,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
   @Override
   protected void onReset() {
     super.onReset();
-    
+
     getView().resetAndFocus();
   }
 
