@@ -20,6 +20,9 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.gwtplatform.mvp.client.ApplicationController;
 
+/**
+ * Entry point.
+ */
 public class Gwtpsample implements EntryPoint {
   public void onModuleLoad() {
     GWT.create(ApplicationController.class);
