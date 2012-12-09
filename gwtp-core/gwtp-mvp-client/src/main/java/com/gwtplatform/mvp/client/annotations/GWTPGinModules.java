@@ -31,17 +31,11 @@ import java.lang.annotation.Target;
  * string using the {@code properties} parameter.
  *
  * <p>Example:
- * <pre>  @GinModules(value=MyGinModule.class, properties="example.ginModules")
+ * <pre>{@code
+ * @literal @GinModules(value=MyGinModule.class, properties="example.ginModules")
  *  public interface ConfigurationModulesGinjector extends Ginjector {
  *    // ...
- *  }</pre>
- *
- * In <b>MyApp.gwt.xml</b>:
- * <pre>  &lt;define-configuration-property name="example.ginModules" is-multi-valued="true" /&gt;
- *  &lt;extend-configuration-property name="example.ginModules"
- *      value="com.company.myapp.client.ExampleModule1" /&gt;
- *  &lt;extend-configuration-property name="example.ginModules"
- *      value="com.company.myapp.client.ExampleModule2" /&gt;</pre>
+ *  }}</pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
