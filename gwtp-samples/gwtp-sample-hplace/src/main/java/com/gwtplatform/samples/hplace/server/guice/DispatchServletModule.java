@@ -30,7 +30,7 @@ public class DispatchServletModule extends ServletModule {
   @Override
   public void configureServlets() {
     bindConstant().annotatedWith(ServiceKey.class).to("123456");
-    bindConstant().annotatedWith(ServiceUrl.class).to("http://gwtp-sample-hplace.appspot.com/");
+    bindConstant().annotatedWith(ServiceUrl.class).to("http://crawlservice.appspot.com/");
     filter("/*").through(CrawlFilter.class);
     serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(DispatchServiceImpl.class);
   }

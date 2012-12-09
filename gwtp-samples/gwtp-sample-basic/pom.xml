@@ -84,6 +84,7 @@
                     <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
                     <appEngineVersion>${gae.version}</appEngineVersion>
                     <appEngineHome>${gae.home}</appEngineHome>
+                    <extraJvmArgs>-Dappengine.sdk.root=${gae.home}</extraJvmArgs>
                     
                     <runTarget>Gwtpsample.html</runTarget>
                     <module>com.gwtplatform.samples.basic.Gwtpsample</module>
@@ -162,9 +163,17 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-dev</artifactId>
         </dependency>
+        
+        <!-- Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jukito</groupId>
+            <artifactId>jukito</artifactId>
+            <version>${jukito.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- DI dependencies -->

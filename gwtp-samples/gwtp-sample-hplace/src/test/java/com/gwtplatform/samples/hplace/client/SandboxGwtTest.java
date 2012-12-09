@@ -21,7 +21,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 /**
  * @author Brandon Donnelson
  */
-public class SandoxGwtTest extends GWTTestCase {
+public class SandboxGwtTest extends GWTTestCase {
   @Override
   public String getModuleName() {
     return "com.gwtplatform.samples.hplace.Gwtphplacesample";

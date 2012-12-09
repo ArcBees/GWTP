@@ -14,17 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.samples.mobile.client;
+package com.gwtplatform.samples.basic.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
  * @author Brandon Donnelson
  */
-public class SandoxGwtTest extends GWTTestCase {
+public class SandboxGwtTest extends GWTTestCase {
   @Override
   public String getModuleName() {
-    return "com.gwtplatform.samples.mobile.Gwtpmobilesample";
+    return "com.gwtplatform.samples.basic.Gwtpsample";
   }
 
   public void testSandbox() {

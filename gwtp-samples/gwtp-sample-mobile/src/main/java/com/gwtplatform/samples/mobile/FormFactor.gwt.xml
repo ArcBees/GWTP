@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
     <define-property name="formfactor" values="desktop,tablet,mobile"/>
-    <collapse-property name="formfactor" values="*"/>
     <property-provider name="formfactor">
         <![CDATA[
         // Look for the formfactor as a url argument.
@@ -20,7 +19,7 @@
           return value.substring(begin, end);
         }
         // Detect form factor from user agent.
-        var ua = navigator.userAgent.toLowerCase();      5
+        var ua = navigator.userAgent.toLowerCase();     
         if (ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1) {
           return "mobile";
         } else if (ua.indexOf("ipad") != -1) {
