@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,16 +23,20 @@ import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ */
 @RunWith(JukitoRunner.class)
 public class SandboxJukitoTest {
-    public static class Module extends JukitoModule {
-        @Override
-        protected void configureTest() {
-        }
+  /**
+   */
+  public static class Module extends JukitoModule {
+    @Override
+    protected void configureTest() {
     }
+  }
 
-    @Test
-    public void testSandbox() {
-      assertTrue(true);
-    }
+  @Test
+  public void testSandbox() {
+    assertTrue(true);
+  }
 }
