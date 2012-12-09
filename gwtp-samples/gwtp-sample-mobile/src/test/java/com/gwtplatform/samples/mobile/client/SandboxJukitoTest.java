@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2012 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,20 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basicspring.client;
+package com.gwtplatform.samples.mobile.client;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import static org.junit.Assert.assertTrue;
 
-/**
- * @author Brandon Donnelson
- */
-public class SandoxGwtTest extends GWTTestCase {
-  @Override
-  public String getModuleName() {
-    return "com.gwtplatform.samples.basicspring.Gwtpsamplespring";
-  }
+import org.jukito.JukitoModule;
+import org.jukito.JukitoRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-  public void testSandbox() {
-    assertTrue(true);
-  }
+@RunWith(JukitoRunner.class)
+public class SandboxJukitoTest {
+    public static class Module extends JukitoModule {
+        @Override
+        protected void configureTest() {
+        }
+    }
+
+    @Test
+    public void testSandbox() {
+      assertTrue(true);
+    }
 }

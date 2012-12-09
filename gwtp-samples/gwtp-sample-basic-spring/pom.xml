@@ -158,11 +158,19 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-servlet</artifactId>
         </dependency>
+        
+        <!--  Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.jukito</groupId>
+            <artifactId>jukito</artifactId>
+            <version>${jukito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
         <!-- DI dependencies -->
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
