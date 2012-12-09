@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <define-property name="formfactor" values="desktop,tablet,mobile"/>
+    <collapse-property name="formfactor" values="*"/>
+    <property-provider name="formfactor">
+        <![CDATA[
+        // Look for the formfactor as a url argument.
+        var args = location.href;
+        var start = args.indexOf("formfactor");
+        if (start >= 0) {
+          var value = args.substring(start);
+          var begin = value.indexOf("=") + 1;
+          var end = value.indexOf("&");
+          if (end == -1) {
+            end = value.indexOf("#");
+            if (end == -1) {
+              end = value.length;
+            }
+          }
+          return value.substring(begin, end);
+        }
+        // Detect form factor from user agent.
+        var ua = navigator.userAgent.toLowerCase();      5
+        if (ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1) {
+          return "mobile";
+        } else if (ua.indexOf("ipad") != -1) {
+          return "tablet";
+        } else if (ua.indexOf("android") != -1 ||
+                   ua.indexOf("mobile") != -1) {
+          var dpi = 160;
+          var width = $wnd.screen.width / dpi;
+          var height = $wnd.screen.height / dpi;
+          var size = Math.sqrt(width*width + height*height);
+          return (size < 6) ? "mobile" : "tablet";
+        }
+        return "desktop";
+    ]]>
+    </property-provider>
+
+    <!-- Form Factor Ginjectors -->
+    
+    <!-- Desktop -->
+    <replace-with class="com.gwtplatform.samples.mobile.client.gin.desktop.DesktopGinjectorProvider">
+        <when-type-is class="com.gwtplatform.samples.mobile.client.gin.GinjectorProvider"/>
+    </replace-with>
+
+    <!-- Tablet -->
+    <replace-with class="com.gwtplatform.samples.mobile.client.gin.tablet.TabletGinjectorProvider">
+        <when-type-is class="com.gwtplatform.samples.mobile.client.gin.GinjectorProvider"/>
+        <when-property-is name="formfactor" value="tablet"/>
+    </replace-with>
+
+    <!-- Mobile -->
+    <replace-with class="com.gwtplatform.samples.mobile.client.gin.mobile.MobileGinjectorProvider">
+        <when-type-is class="com.gwtplatform.samples.mobile.client.gin.GinjectorProvider"/>
+        <when-property-is name="formfactor" value="mobile"/>
+    </replace-with>
+
+</module>

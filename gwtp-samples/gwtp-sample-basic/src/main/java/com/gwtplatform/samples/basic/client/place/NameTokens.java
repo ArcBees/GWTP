@@ -17,8 +17,8 @@
 package com.gwtplatform.samples.basic.client.place;
 
 /**
- * Main presenters name tokens
- * 
+ * Main presenters name tokens.
+ *
  * @author Brandon Donnelson
  */
 public class NameTokens {
@@ -28,7 +28,7 @@ public class NameTokens {
   public static String getHome() {
     return home;
   }
-  
+
   public static String getResponse() {
     return response;
   }
