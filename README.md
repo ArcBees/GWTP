@@ -37,14 +37,19 @@ A complete model-view-presenter framework to simplify your next GWT project.
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-hplace">Source</a></td>
   </tr>
   <tr>
+    <th>Mobile</th>
+    <td><a href="http://gwtp-sample-mobile.appspot.com">AppEngine Demo</a></td>
+    <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-mobile">Source</a></td>
+  </tr>
+  <tr>
+    <th>Nested</th>
+    <td><a href="http://gwtp-sample-nested.appspot.com">AppEngine Demo</a></td>
+    <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-nested">Source</a></td>
+  </tr>
+  <tr>
     <th>Tabs</th>
     <td><a href="http://gwtp-sample-tab.appspot.com">AppEngine Demo</a></td>
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-tab">Source</a></td>
-  </tr>
-  <tr>
-    <th>Mobile</th>
-    <td><a href="http://gwtp-sample-mobile.appspot.com/">AppEngine Demo</a></td>
-    <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-mobile">Source</a></td>
   </tr>
 </table>
 
