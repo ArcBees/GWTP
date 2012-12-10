@@ -42,7 +42,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-tab">Source</a></td>
   </tr>
   <tr>
-    <th>Tabs</th>
+    <th>Mobile</th>
     <td><a href="http://gwtp-sample-mobile.appspot.com/">AppEngine Demo</a></td>
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-mobile">Source</a></td>
   </tr>
