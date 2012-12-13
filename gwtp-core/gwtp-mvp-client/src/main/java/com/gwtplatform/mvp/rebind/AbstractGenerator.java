@@ -16,7 +16,13 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.*;
+import com.google.gwt.core.ext.BadPropertyValueException;
+import com.google.gwt.core.ext.ConfigurationProperty;
+import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.PropertyOracle;
+import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -25,7 +31,7 @@ import com.google.gwt.user.rebind.SourceWriter;
 import java.io.PrintWriter;
 
 /**
- * Base generator
+ * Base generator.
  */
 public abstract class AbstractGenerator extends Generator {
   protected static final String GIN_MODULE_NAME = "gin.module.name";
