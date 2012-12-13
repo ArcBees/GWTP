@@ -19,20 +19,20 @@ package com.gwtplatform.mvp.client;
 /**
  * ApplicationController will trigger the generation of your Ginjector. To activate the
  * generation of your Ginjector, remove this line from your module.gwt.xml file:
- *
+ * <p/>
  * <pre>{@code
  * <define-configuration-property name="gin.module.name" is-multi-valued="false" />
  * <set-configuration-property name="gin.module.name" value="com.arcbees.example.client.gin.ClientModule"/>
- *
+ * <p/>
  * <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
  * <set-configuration-property name="gin.ginjector" value="com.arcbees.example.client.gin.ClientGinjector"/>
  * }</pre>
- *
+ * <p/>
  * The final step is to call {@code GWTP.create(ApplicationController.class)} inside your entry point and then call
  * {@code applicationController.init()} .
  */
 public interface ApplicationController {
-  static final String GINJECTOR = "ClientGinjector";
+  String GINJECTOR_NAME = "ClientGinjector";
 
   void init();
 }
