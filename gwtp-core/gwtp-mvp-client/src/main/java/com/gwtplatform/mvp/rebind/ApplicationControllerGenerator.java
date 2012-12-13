@@ -78,7 +78,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     // Only to make sure that the class exist since getType will throw an error if the type isn't found.
     getType(moduleName);
 
-    String ginjectorName = getPackageNameFromTypeName(moduleName) + "." + ApplicationController.GINJECTOR;
+    String ginjectorName = getPackageNameFromTypeName(moduleName) + "." + ApplicationController.GINJECTOR_NAME;
 
     generatorName = ginjectorGenerator.generate(getTreeLogger(), generatorContext, ginjectorName);
   }
