@@ -67,8 +67,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
   @SuppressWarnings("unchecked")
   public <A extends Action<R>, R extends Result> DispatchRequest execute(
       final A action, final AsyncCallback<R> callback) {
-    ((ServiceDefTarget) realService).setServiceEntryPoint(baseUrl
-        + action.getServiceName());
+    prepareService((ServiceDefTarget) realService, baseUrl, action.getServiceName());
 
     final String securityCookie = securityCookieAccessor.getCookieContent();
 
@@ -144,8 +143,7 @@ public class DefaultDispatchAsync implements DispatchAsync {
   @Override
   public <A extends Action<R>, R extends Result> DispatchRequest undo(
       final A action, final R result, final AsyncCallback<Void> callback) {
-    ((ServiceDefTarget) realService).setServiceEntryPoint(baseUrl
-        + action.getServiceName());
+    prepareService((ServiceDefTarget) realService, baseUrl, action.getServiceName());
 
     final String securityCookie = securityCookieAccessor.getCookieContent();
 
@@ -242,5 +240,9 @@ public class DefaultDispatchAsync implements DispatchAsync {
   protected <A extends Action<R>, R extends Result> void onUndoSuccess(
       A action, Void voidResult, final AsyncCallback<Void> callback) {
     callback.onSuccess(voidResult);
+  }
+
+  protected void prepareService(ServiceDefTarget service, final String moduleUrl, String relativeServiceUrl) {
+    service.setServiceEntryPoint(moduleUrl + relativeServiceUrl);
   }
 }
