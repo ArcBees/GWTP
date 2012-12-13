@@ -16,14 +16,14 @@
 
 package com.gwtplatform.mvp.rebind;
 
+import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.gwtplatform.mvp.client.ApplicationController;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.mvp.client.annotations.GWTPGinModules;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 import java.io.PrintWriter;
@@ -34,7 +34,9 @@ import java.io.PrintWriter;
  * revealCurrentPlace() from the place manager.
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
-  private static final String CTOR = "public %s() {";
+  private static final String SUFFIX = "Impl";
+  private static final String OVERRIDE = "@Override";
+  private static final String INJECT_METHOD = "public void init() {";
   private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
   private static final String PLACEMANAGER_REVEALCURRENTPLACE = "%s.SINGLETON.get%s().revealCurrentPlace();";
 
@@ -46,22 +48,23 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
   public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
       throws UnableToCompleteException {
     setTypeOracle(generatorContext.getTypeOracle());
+    setPropertyOracle(generatorContext.getPropertyOracle());
     setTreeLogger(treeLogger);
     setTypeClass(getType(typeName));
 
     PrintWriter printWriter;
-    printWriter = tryCreatePrintWriter(generatorContext, "Impl");
+    printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
 
     if (printWriter == null) {
-      return null;
+      return typeName + SUFFIX;
     }
 
     generateGenerator(generatorContext);
 
     ClassSourceFileComposerFactory composer = initComposer();
-    SourceWriter sourceWriter = initSourceWriter(composer, generatorContext, printWriter);
+    SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
 
-    writeConstructor(sourceWriter);
+    writeInit(sourceWriter);
 
     closeDefinition(generatorContext, printWriter, sourceWriter);
 
@@ -69,13 +72,20 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
   }
 
   private void generateGenerator(GeneratorContext generatorContext) throws UnableToCompleteException {
-    JClassType ginjector = findGinjector();
+    ConfigurationProperty moduleProperty = findConfigurationProperty(GIN_MODULE_NAME);
+    String moduleName = moduleProperty.getValues().get(0);
 
-    generatorName = ginjectorGenerator.generate(getTreeLogger(), generatorContext, ginjector.getQualifiedSourceName());
+    // Only to make sure that the class exist since getType will throw an error if the type isn't found.
+    getType(moduleName);
+
+    String ginjectorName = getPackageNameFromTypeName(moduleName) + "." + ApplicationController.GINJECTOR_NAME;
+
+    generatorName = ginjectorGenerator.generate(getTreeLogger(), generatorContext, ginjectorName);
   }
 
-  private void writeConstructor(SourceWriter sourceWriter) {
-    sourceWriter.println(String.format(CTOR, getClassName()));
+  private void writeInit(SourceWriter sourceWriter) {
+    sourceWriter.println(OVERRIDE);
+    sourceWriter.println(INJECT_METHOD);
     sourceWriter.indent();
 
     sourceWriter.println(String.format(DELAYED_BIND, DelayedBindRegistry.class.getSimpleName(), generatorName));
@@ -87,17 +97,6 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     sourceWriter.println("}");
   }
 
-  private JClassType findGinjector() throws UnableToCompleteException {
-    for (JClassType type : getTypeOracle().getTypes()) {
-      if (type.isAnnotationPresent(GWTPGinModules.class)) {
-        return type;
-      }
-    }
-
-    getTreeLogger().log(TreeLogger.ERROR, "Cannot find ginjector");
-    throw new UnableToCompleteException();
-  }
-
   private ClassSourceFileComposerFactory initComposer() {
     ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
     composer.addImport(getTypeClass().getQualifiedSourceName());
@@ -106,10 +105,5 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     composer.addImport(DelayedBindRegistry.class.getCanonicalName());
 
     return composer;
-  }
-
-  private SourceWriter initSourceWriter(ClassSourceFileComposerFactory composer, GeneratorContext generatorContext,
-      PrintWriter printWriter) {
-    return composer.createSourceWriter(generatorContext, printWriter);
   }
 }
