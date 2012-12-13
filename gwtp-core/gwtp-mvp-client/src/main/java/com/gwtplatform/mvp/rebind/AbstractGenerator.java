@@ -16,10 +16,7 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.Generator;
-import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.*;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -31,12 +28,23 @@ import java.io.PrintWriter;
  * Base generator
  */
 public abstract class AbstractGenerator extends Generator {
+  protected static final String GIN_MODULE_NAME = "gin.module.name";
+
   private TreeLogger treeLogger;
   private TypeOracle typeOracle;
   private JClassType typeClass;
+  private PropertyOracle propertyOracle;
 
   private String packageName = "";
   private String className = "";
+
+  public PropertyOracle getPropertyOracle() {
+    return propertyOracle;
+  }
+
+  public void setPropertyOracle(PropertyOracle propertyOracle) {
+    this.propertyOracle = propertyOracle;
+  }
 
   public void setTreeLogger(TreeLogger treeLogger) {
     this.treeLogger = treeLogger;
@@ -78,6 +86,14 @@ public abstract class AbstractGenerator extends Generator {
     this.className = className;
   }
 
+  protected String getPackageNameFromTypeName(String typeName) {
+    return typeName.substring(0, typeName.lastIndexOf("."));
+  }
+
+  protected String getSimpleNameFromTypeName(String typeName) {
+    return typeName.substring(typeName.lastIndexOf(".") + 1);
+  }
+
   protected PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext,
       String suffix) throws UnableToCompleteException {
     setPackageName(getTypeClass().getPackage().getName());
@@ -88,9 +104,19 @@ public abstract class AbstractGenerator extends Generator {
 
   protected JClassType getType(String typeName) throws UnableToCompleteException {
     try {
-      return typeOracle.getType(typeName);
+      return getTypeOracle().getType(typeName);
     } catch (NotFoundException e) {
-      treeLogger.log(TreeLogger.ERROR, "Cannot find " + typeName, e);
+      getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + typeName, e);
+      throw new UnableToCompleteException();
+    }
+  }
+
+  protected ConfigurationProperty findConfigurationProperty(String propertyName) throws UnableToCompleteException {
+    try {
+      return getPropertyOracle().getConfigurationProperty(propertyName);
+    } catch (BadPropertyValueException e) {
+      getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + propertyName +
+          " property in your module.gwt.xml file.");
       throw new UnableToCompleteException();
     }
   }
@@ -100,6 +126,6 @@ public abstract class AbstractGenerator extends Generator {
     sourceWriter.outdent();
     sourceWriter.println("}");
 
-    generatorContext.commit(treeLogger, printWriter);
+    generatorContext.commit(getTreeLogger(), printWriter);
   }
 }

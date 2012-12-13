@@ -24,6 +24,10 @@
   <!-- Inherit shared modules -->
   <inherits name='com.gwtplatform.common.ClientsCommon'/>
 
+  <generate-with class="com.zafinlabs.zui.miapp.rebind.ApplicationControllerGenerator">
+    <when-type-is class="com.zafinlabs.zui.miapp.client.ApplicationController"/>
+  </generate-with>
+
   <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
     <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy" />
   </generate-with>
