@@ -19,7 +19,9 @@ package com.gwtplatform.mvp.rebind;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class will hold a reference to all type of presenters that can be found in an application to be able to
@@ -28,12 +30,14 @@ import java.util.List;
 public class PresenterDefinitions {
   private final List<JClassType> standardPresenters;
   private final List<JClassType> codeSplitPresenters;
-  private final List<JClassType> codeSplitBundlePresenters;
+  private final Set<JClassType> codeSplitBundlePresenters;
+  private final Set<JClassType> gatekeepers;
 
   public PresenterDefinitions() {
     this.standardPresenters = new ArrayList<JClassType>();
     this.codeSplitPresenters = new ArrayList<JClassType>();
-    this.codeSplitBundlePresenters = new ArrayList<JClassType>();
+    this.codeSplitBundlePresenters = new HashSet<JClassType>();
+    this.gatekeepers = new HashSet<JClassType>();
   }
 
   public List<JClassType> getStandardPresenters() {
@@ -44,8 +48,12 @@ public class PresenterDefinitions {
     return codeSplitPresenters;
   }
 
-  public List<JClassType> getCodeSplitBundlePresenters() {
+  public Set<JClassType> getCodeSplitBundlePresenters() {
     return codeSplitBundlePresenters;
+  }
+
+  public Set<JClassType> getGatekeepers() {
+    return gatekeepers;
   }
 
   public void addStandardPresenter(JClassType presenter) {
@@ -58,5 +66,9 @@ public class PresenterDefinitions {
 
   public void addCodeSplitBundlePresenter(JClassType presenter) {
     codeSplitBundlePresenters.add(presenter);
+  }
+
+  public void addGatekeeper(JClassType presenter) {
+    gatekeepers.add(presenter);
   }
 }
