@@ -66,7 +66,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
 
     writeInit(sourceWriter);
 
-    closeDefinition(generatorContext, printWriter, sourceWriter);
+    closeDefinition(treeLogger, sourceWriter);
 
     return getPackageName() + "." + getClassName();
   }
