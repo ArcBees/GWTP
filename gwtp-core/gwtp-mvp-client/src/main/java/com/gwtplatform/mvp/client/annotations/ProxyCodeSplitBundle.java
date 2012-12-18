@@ -23,23 +23,31 @@ import java.lang.annotation.Target;
  * Use this annotation if you want to have certain
  * {@link com.gwtplatform.mvp.client.proxy.Proxy}s and their associated
  * {@link com.gwtplatform.mvp.client.Presenter}s to sit behind one split point
- * and to be compiled into one javascript file seperately from others.
+ * and to be compiled into one javascript file separately from others.
  * <p/>
  * Use this annotation if you already have too much code splitting using
  * {@link ProxyCodeSplit} and it is more efficient to group
  * {@link com.gwtplatform.mvp.client.Presenter}s because they share a bulk of
  * their code. You will also have to set up your own implementation of a
- * {@link ProviderBundle}.
+ * {@link com.gwtplatform.common.client.ProviderBundle}.
  * <p/>
+ *
+ * The best way to keep your bundles in order is to create an interface that identifies your bundles.
+ * <pre>{@code
+ * public interface Bundles {
+ *   String MAIN = "Main";
+ *   String OTHER = "Other";
+ * }</pre>
+ * <p/>
+ *
  * Here is an example use of {@link ProxyCodeSplitBundle}:
- *
- * <pre>
- * &#064;ProxyCodeSplitBundle(bundleClass = MyPresenterBundle.class, id = MyPresenterBundle.ID_Object1)
+ * <pre>{@code
+ * &#064;ProxyCodeSplitBundle(Bundles.MAIN)
  * public interface MyProxy extends ProxyPlace&lt;Object1&gt; {
- * }
- * </pre>
+ * }</pre>
+ * <p/>
  *
- * @see ProviderBundle
+ * @see com.gwtplatform.common.client.ProviderBundle
  * @see <a href="http://code.google.com/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code Splitting</a>
  *
  * @author Philippe Beaudoin
