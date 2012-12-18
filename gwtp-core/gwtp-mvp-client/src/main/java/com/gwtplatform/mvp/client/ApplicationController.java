@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client;
 
 /**
  * ApplicationController will trigger the generation of your Ginjector. To activate the
- * generation of your Ginjector, remove this line from your module.gwt.xml file:
+ * generation of your Ginjector, add these lines to your module.gwt.xml file:
  * <p/>
  * <pre>{@code
  * <define-configuration-property name="gin.module.name" is-multi-valued="false" />
@@ -28,8 +28,29 @@ package com.gwtplatform.mvp.client;
  * <set-configuration-property name="gin.ginjector" value="com.arcbees.example.client.gin.ClientGinjector"/>
  * }</pre>
  * <p/>
- * The final step is to call {@code GWTP.create(ApplicationController.class)} inside your entry point and then call
+ *
+ * The ClientModule and the ClientGinjector property must point to the same package and ClientGinjector class name
+ * is mandatory.
+ *
+ * The final step is to call {@code GWT.create(ApplicationController.class)} inside your entry point and then call
  * {@code applicationController.init()} .
+ *
+ * You can add additional methods to your Ginjector by specifying an additional interface.
+ * <p/>
+ * <pre>{@code
+ * <define-configuration-property name="gin.ginjector.additional" is-multi-valued="false"/>
+ * <set-configuration-property name="gin.ginjector.additional" value="com.arcbees.example.client.gin.ClientInjectorAdditional"/>
+ * }</pre>
+ * <p/>
+ *
+ * In this additional interface you can for example add a {@link com.gwtplatform.mvp.client.annotations.DefaultGatekeeper}.
+ * <p/>
+ * <pre>{@code
+ * public interface ClientInjectorAdditional {
+ *   @DefaultGatekeeper
+ *   MyDefaultGateKeeper getMyDefaultGateKeeper();
+ * }</pre>
+ * <p/>
  */
 public interface ApplicationController {
   String GINJECTOR_NAME = "ClientGinjector";
