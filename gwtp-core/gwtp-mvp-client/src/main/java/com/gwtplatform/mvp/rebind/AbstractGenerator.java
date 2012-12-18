@@ -127,11 +127,7 @@ public abstract class AbstractGenerator extends Generator {
     }
   }
 
-  protected void closeDefinition(GeneratorContext generatorContext, PrintWriter printWriter,
-      SourceWriter sourceWriter) {
-    sourceWriter.outdent();
-    sourceWriter.println("}");
-
-    generatorContext.commit(getTreeLogger(), printWriter);
+  protected void closeDefinition(TreeLogger treeLogger, SourceWriter sourceWriter) {
+    sourceWriter.commit(treeLogger);
   }
 }
