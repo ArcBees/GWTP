@@ -19,8 +19,10 @@ package com.gwtplatform.mvp.rebind;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -30,13 +32,13 @@ import java.util.Set;
 public class PresenterDefinitions {
   private final List<JClassType> standardPresenters;
   private final List<JClassType> codeSplitPresenters;
-  private final Set<JClassType> codeSplitBundlePresenters;
+  private final Map<String, Set<JClassType>> codeSplitBundlePresenters;
   private final Set<JClassType> gatekeepers;
 
   public PresenterDefinitions() {
     this.standardPresenters = new ArrayList<JClassType>();
     this.codeSplitPresenters = new ArrayList<JClassType>();
-    this.codeSplitBundlePresenters = new HashSet<JClassType>();
+    this.codeSplitBundlePresenters = new HashMap<String, Set<JClassType>>();
     this.gatekeepers = new HashSet<JClassType>();
   }
 
@@ -48,7 +50,7 @@ public class PresenterDefinitions {
     return codeSplitPresenters;
   }
 
-  public Set<JClassType> getCodeSplitBundlePresenters() {
+  public Map<String, Set<JClassType>> getCodeSplitBundlePresenters() {
     return codeSplitBundlePresenters;
   }
 
@@ -64,8 +66,13 @@ public class PresenterDefinitions {
     codeSplitPresenters.add(presenter);
   }
 
-  public void addCodeSplitBundlePresenter(JClassType presenter) {
-    codeSplitBundlePresenters.add(presenter);
+  public void addCodeSplitBundlePresenter(String bundle, JClassType presenter) {
+    Set<JClassType> presenters = codeSplitBundlePresenters.get(bundle);
+    if (presenters == null) {
+      presenters = new HashSet<JClassType>();
+      codeSplitBundlePresenters.put(bundle, presenters);
+    }
+    presenters.add(presenter);
   }
 
   public void addGatekeeper(JClassType presenter) {

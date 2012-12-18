@@ -19,8 +19,6 @@ package com.gwtplatform.mvp.client.annotations;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-import com.gwtplatform.common.client.ProviderBundle;
-
 /**
  * Use this annotation if you want to have certain
  * {@link com.gwtplatform.mvp.client.proxy.Proxy}s and their associated
@@ -48,7 +46,5 @@ import com.gwtplatform.common.client.ProviderBundle;
  */
 @Target(ElementType.TYPE)
 public @interface ProxyCodeSplitBundle {
-  Class<? extends ProviderBundle> bundleClass();
-
-  int id();
+  String value();
 }

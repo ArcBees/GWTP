@@ -55,7 +55,7 @@ public class PresenterInspector {
   private ProxyCodeSplit proxyCodeSplitAnnotation;
   private ProxyCodeSplitBundle proxyCodeSplitBundleAnnotation;
   private String getPresenterMethodName;
-  private String bundleClassName;
+  private JClassType bundleClass;
 
   public PresenterInspector(TypeOracle oracle, TreeLogger logger,
       ClassCollection classCollection, GinjectorInspector ginjectorInspector) {
@@ -113,19 +113,19 @@ public class PresenterInspector {
       failIfNoProviderError(getPresenterMethodName, "AsyncProvider",
           ProxyCodeSplit.class.getSimpleName());
     } else {
-      JClassType bundleClass = findBundleClass();
+      JClassType bundleType = findBundleClass();
       getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass,
-          bundleClass);
+          bundleType);
 
-      failIfNoProviderError(getPresenterMethodName, "AsyncProvider", bundleClassName,
-          ProxyCodeSplit.class.getSimpleName());
+      failIfNoProviderError(getPresenterMethodName, "AsyncProvider", bundleType.getName(),
+          ProxyCodeSplitBundle.class.getSimpleName());
     }
   }
 
   private JClassType findBundleClass() throws UnableToCompleteException {
     assert proxyCodeSplitBundleAnnotation != null;
-    bundleClassName = proxyCodeSplitBundleAnnotation.bundleClass().getCanonicalName();
-    JClassType bundleClass = oracle.findType(bundleClassName);
+    String bundleClassName = ginjectorInspector.getGinjectorClass().getPackage().getName() + "." + proxyCodeSplitBundleAnnotation.value() + "Bundle";
+    bundleClass = oracle.findType(bundleClassName);
 
     if (bundleClass == null) {
       logger.log(TreeLogger.ERROR,
@@ -192,8 +192,9 @@ public class PresenterInspector {
     } else {
       assert proxyCodeSplitBundleAnnotation != null;
       writer.println("presenter = new CodeSplitBundleProvider<"
-          + presenterClassName + ", " + bundleClassName + ">( ginjector."
-          + getPresenterMethodName + "(), " + proxyCodeSplitBundleAnnotation.id() + ");");
+          + presenterClassName + ", " + bundleClass.getQualifiedSourceName() + ">( ginjector."
+          + getPresenterMethodName + "(), " + bundleClass.getQualifiedSourceName() + "."
+          + presenterClass.getSimpleSourceName().toUpperCase() + ");");
     }
   }
 
