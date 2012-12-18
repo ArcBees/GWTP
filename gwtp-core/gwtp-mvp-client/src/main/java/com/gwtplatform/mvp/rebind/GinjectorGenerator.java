@@ -39,6 +39,8 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import javax.inject.Provider;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Will generate a Ginjector from Ginjector.
@@ -49,6 +51,8 @@ public class GinjectorGenerator extends AbstractGenerator {
   private static final String GETTER_METHOD = "%s get%s();";
   private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
   private static final String GIN_MODULES = "@%s({%s})";
+
+  private final ProviderBundleGenerator providerBundleGenerator = new ProviderBundleGenerator();
 
   private String typeName;
 
@@ -79,6 +83,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
     writeMandatoryGetter(sourceWriter);
     writePresentersGetter(sourceWriter, presenterDefinitions);
+    writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
 
     closeDefinition(treeLogger, sourceWriter);
 
@@ -112,19 +117,14 @@ public class GinjectorGenerator extends AbstractGenerator {
   }
 
   private void findAllPresenters(PresenterDefinitions presenterDefinitions) throws UnableToCompleteException {
+
     for (JClassType type : getTypeOracle().getTypes()) {
       if (type.isAnnotationPresent(ProxyStandard.class)) {
         presenterDefinitions.addStandardPresenter(type.getEnclosingType());
       } else if (type.isAnnotationPresent(ProxyCodeSplit.class)) {
         presenterDefinitions.addCodeSplitPresenter(type.getEnclosingType());
       } else if (type.isAnnotationPresent(ProxyCodeSplitBundle.class)) {
-        final String bundleName = type.getAnnotation(ProxyCodeSplitBundle.class).bundleClass().getName();
-        try {
-          presenterDefinitions.addCodeSplitBundlePresenter(getTypeOracle().getType(bundleName));
-        } catch (NotFoundException e) {
-          getTreeLogger().log(TreeLogger.ERROR, "Cannot find ProviderBundle " + bundleName, e);
-          throw new UnableToCompleteException();
-        }
+        presenterDefinitions.addCodeSplitBundlePresenter(type.getAnnotation(ProxyCodeSplitBundle.class).value(), type.getEnclosingType());
       }
 
       if (type.isAnnotationPresent(UseGatekeeper.class)) {
@@ -176,7 +176,6 @@ public class GinjectorGenerator extends AbstractGenerator {
       PresenterDefinitions presenterDefinitions) {
     writePresenterImportsFromList(composer, presenterDefinitions.getStandardPresenters());
     writePresenterImportsFromList(composer, presenterDefinitions.getCodeSplitPresenters());
-    writePresenterImportsFromList(composer, presenterDefinitions.getCodeSplitBundlePresenters());
     writePresenterImportsFromList(composer, presenterDefinitions.getGatekeepers());
 
     if (presenterDefinitions.getStandardPresenters().size() > 0) {
@@ -211,11 +210,21 @@ public class GinjectorGenerator extends AbstractGenerator {
     writeGatekeeperSetterFromList(sourceWriter, presenterDefinitions.getGatekeepers());
 
     writePresenterGettersFromList(sourceWriter, presenterDefinitions.getStandardPresenters(),
-        Provider.class.getSimpleName());
+            Provider.class.getSimpleName());
     writePresenterGettersFromList(sourceWriter, presenterDefinitions.getCodeSplitPresenters(),
         AsyncProvider.class.getSimpleName());
-    writePresenterGettersFromList(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(),
-        AsyncProvider.class.getSimpleName());
+  }
+
+  private void writeBundleGetters(SourceWriter sourceWriter, Map<String,Set<JClassType>> bundles,
+      GeneratorContext generatorContext) throws UnableToCompleteException {
+    for (String bundle : bundles.keySet()) {
+
+      providerBundleGenerator.setPresenters(bundles.get(bundle));
+      providerBundleGenerator.setPackageName(getPackageName());
+      String bundleName = providerBundleGenerator.generate(getTreeLogger(), generatorContext, bundle);
+      sourceWriter.println();
+      sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, AsyncProvider.class.getSimpleName(), bundleName, getSimpleNameFromTypeName(bundleName)));
+    }
   }
 
   private void writeGatekeeperSetterFromList(SourceWriter sourceWriter, Collection<JClassType> gatekeepers) {
