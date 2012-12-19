@@ -34,7 +34,9 @@ import java.io.PrintWriter;
  * Base generator.
  */
 public abstract class AbstractGenerator extends Generator {
-  protected static final String GIN_MODULE_NAME = "gin.module.name";
+  static final String DEFAULT_PACKAGE = "com.gwtplatform.mvp.client";
+  static final String GIN_GINJECTOR_MODULES = "gin.ginjector.modules";
+  static final String GIN_GINJECTOR_EXTENSION = "gin.ginjector.extensions";
 
   private TreeLogger treeLogger;
   private TypeOracle typeOracle;
@@ -131,7 +133,7 @@ public abstract class AbstractGenerator extends Generator {
     } catch (BadPropertyValueException e) {
       if (doThrow) {
         getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + prop +
-            " property in your module.gwt.xml file.");
+            " property in your module.gwt.xml file.", e);
         throw new UnableToCompleteException();
       }
       return null;
