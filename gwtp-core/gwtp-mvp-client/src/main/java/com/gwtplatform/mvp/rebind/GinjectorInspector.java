@@ -152,8 +152,7 @@ public class GinjectorInspector {
       logger.log(TreeLogger.ERROR,
           "The configuration property 'gin.ginjector' is '"
               + ginjectorClassName + "' "
-              + " which doesn't identify a type inheriting from 'Ginjector'.",
-          null);
+              + " which doesn't identify a type inheriting from 'Ginjector'.");
       throw new UnableToCompleteException();
     }
   }
@@ -163,5 +162,9 @@ public class GinjectorInspector {
       return null;
     }
     return method.getName();
+  }
+
+  boolean isGenerated() {
+    return ginjectorClassName.equals(GinjectorGenerator.DEFAULT_FQ_NAME);
   }
 }

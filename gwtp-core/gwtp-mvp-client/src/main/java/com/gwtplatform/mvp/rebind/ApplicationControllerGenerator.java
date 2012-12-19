@@ -16,13 +16,11 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.mvp.client.ApplicationController;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
@@ -40,10 +38,6 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
   private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
   private static final String PLACEMANAGER_REVEALCURRENTPLACE = "%s.SINGLETON.get%s().revealCurrentPlace();";
 
-  private final GinjectorGenerator ginjectorGenerator = new GinjectorGenerator();
-
-  private String generatorName = "";
-
   @Override
   public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
       throws UnableToCompleteException {
@@ -59,31 +53,18 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
       return typeName + SUFFIX;
     }
 
-    generateGenerator(generatorContext);
-
     ClassSourceFileComposerFactory composer = initComposer();
     SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
 
-    writeInit(sourceWriter);
+    writeInit(sourceWriter,
+        new GinjectorGenerator().generate(getTreeLogger(), generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME));
 
     closeDefinition(sourceWriter);
 
     return getPackageName() + "." + getClassName();
   }
 
-  private void generateGenerator(GeneratorContext generatorContext) throws UnableToCompleteException {
-    ConfigurationProperty moduleProperty = findMandatoryConfigurationProperty(GIN_MODULE_NAME);
-    String moduleName = moduleProperty.getValues().get(0);
-
-    // Only to make sure that the class exist since getType will throw an error if the type isn't found.
-    getType(moduleName);
-
-    String ginjectorName = getPackageNameFromTypeName(moduleName) + "." + ApplicationController.GINJECTOR_NAME;
-
-    generatorName = ginjectorGenerator.generate(getTreeLogger(), generatorContext, ginjectorName);
-  }
-
-  private void writeInit(SourceWriter sourceWriter) {
+  private void writeInit(SourceWriter sourceWriter, String generatorName) {
     sourceWriter.println(OVERRIDE);
     sourceWriter.println(INJECT_METHOD);
     sourceWriter.indent();
