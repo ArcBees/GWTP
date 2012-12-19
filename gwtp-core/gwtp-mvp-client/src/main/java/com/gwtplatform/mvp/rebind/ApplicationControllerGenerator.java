@@ -66,13 +66,13 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
 
     writeInit(sourceWriter);
 
-    closeDefinition(treeLogger, sourceWriter);
+    closeDefinition(sourceWriter);
 
     return getPackageName() + "." + getClassName();
   }
 
   private void generateGenerator(GeneratorContext generatorContext) throws UnableToCompleteException {
-    ConfigurationProperty moduleProperty = findConfigurationProperty(GIN_MODULE_NAME);
+    ConfigurationProperty moduleProperty = findMandatoryConfigurationProperty(GIN_MODULE_NAME);
     String moduleName = moduleProperty.getValues().get(0);
 
     // Only to make sure that the class exist since getType will throw an error if the type isn't found.
