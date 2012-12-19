@@ -117,17 +117,28 @@ public abstract class AbstractGenerator extends Generator {
     }
   }
 
-  protected ConfigurationProperty findConfigurationProperty(String propertyName) throws UnableToCompleteException {
+  protected ConfigurationProperty findMandatoryConfigurationProperty(String prop) throws UnableToCompleteException {
+    return findConfigurationProperty(prop, true);
+  }
+
+  protected ConfigurationProperty findOptionalConfigurationProperty(String prop) throws UnableToCompleteException {
+    return findConfigurationProperty(prop, false);
+  }
+
+  private ConfigurationProperty findConfigurationProperty(String prop, boolean doThrow) throws UnableToCompleteException {
     try {
-      return getPropertyOracle().getConfigurationProperty(propertyName);
+      return getPropertyOracle().getConfigurationProperty(prop);
     } catch (BadPropertyValueException e) {
-      getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + propertyName +
-          " property in your module.gwt.xml file.");
-      throw new UnableToCompleteException();
+      if (doThrow) {
+        getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + prop +
+            " property in your module.gwt.xml file.");
+        throw new UnableToCompleteException();
+      }
+      return null;
     }
   }
 
-  protected void closeDefinition(TreeLogger treeLogger, SourceWriter sourceWriter) {
-    sourceWriter.commit(treeLogger);
+  protected void closeDefinition(SourceWriter sourceWriter) {
+    sourceWriter.commit(getTreeLogger());
   }
 }
