@@ -29,6 +29,7 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.TabInfo;
@@ -55,7 +56,7 @@ public class PresenterInspector {
   private ProxyCodeSplit proxyCodeSplitAnnotation;
   private ProxyCodeSplitBundle proxyCodeSplitBundleAnnotation;
   private String getPresenterMethodName;
-  private JClassType bundleClass;
+  private String bundleClassName;
 
   public PresenterInspector(TypeOracle oracle, TreeLogger logger,
       ClassCollection classCollection, GinjectorInspector ginjectorInspector) {
@@ -92,6 +93,7 @@ public class PresenterInspector {
     }
 
     findGetPresenterMethodName();
+    verifyCodeSplitBundleConfiguration();
 
     classInspector.collectStaticAnnotatedFields(classCollection.typeClass,
         classCollection.revealContentHandlerClass, ContentSlot.class, contentSlots);
@@ -113,25 +115,58 @@ public class PresenterInspector {
       failIfNoProviderError(getPresenterMethodName, "AsyncProvider",
           ProxyCodeSplit.class.getSimpleName());
     } else {
-      JClassType bundleType = findBundleClass();
+      JClassType bundleClass = findBundleClass();
       getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass,
-          bundleType);
+          bundleClass);
 
-      failIfNoProviderError(getPresenterMethodName, "AsyncProvider", bundleType.getName(),
+      failIfNoProviderError(getPresenterMethodName, "AsyncProvider", bundleClassName,
           ProxyCodeSplitBundle.class.getSimpleName());
+    }
+  }
+
+  private void verifyCodeSplitBundleConfiguration() throws UnableToCompleteException {
+    if (proxyCodeSplitBundleAnnotation != null) {
+      if (ginjectorInspector.isGenerated()) {
+        if (proxyCodeSplitBundleAnnotation.value().isEmpty()) {
+          logger.log(TreeLogger.ERROR, "Cannot find the bundle value used with @"
+              + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "'.");
+          throw new UnableToCompleteException();
+        }
+        if (proxyCodeSplitBundleAnnotation.id() != -1 ||
+            !proxyCodeSplitBundleAnnotation.bundleClass().equals(NoOpProviderBundle.class)) {
+          logger.log(TreeLogger.WARN, "ID and bundleClass used with @" + ProxyCodeSplitBundle.class.getSimpleName()
+              + " on presenter '" + presenterClassName + "' are ignored since bundles are automatically generated");
+        }
+      } else {
+        if (!proxyCodeSplitBundleAnnotation.value().isEmpty()) {
+          logger.log(TreeLogger.WARN, "Bundle value used with @"
+              + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "' is ignored");
+        }
+        if (proxyCodeSplitBundleAnnotation.id() == -1 ||
+            proxyCodeSplitBundleAnnotation.bundleClass().equals(NoOpProviderBundle.class)) {
+          logger.log(TreeLogger.ERROR, "ID and bundleClass must be specified with @"
+              + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "'.");
+          throw new UnableToCompleteException();
+        }
+      }
     }
   }
 
   private JClassType findBundleClass() throws UnableToCompleteException {
     assert proxyCodeSplitBundleAnnotation != null;
-    String bundleClassName = ginjectorInspector.getGinjectorClass().getPackage().getName() + "." + proxyCodeSplitBundleAnnotation.value() + "Bundle";
-    bundleClass = oracle.findType(bundleClassName);
+    if (ginjectorInspector.isGenerated()) {
+      bundleClassName = GinjectorGenerator.DEFAULT_PACKAGE + "." + proxyCodeSplitBundleAnnotation.value() +
+          ProviderBundleGenerator.SUFFIX;
+    } else {
+      bundleClassName = proxyCodeSplitBundleAnnotation.bundleClass().getName();
+    }
+    JClassType bundleClass = oracle.findType(bundleClassName);
 
     if (bundleClass == null) {
       logger.log(TreeLogger.ERROR,
           "Cannot find the bundle class '" + bundleClassName
               + ", used with @" + ProxyCodeSplitBundle.class.getSimpleName()
-              + " on presenter '" + presenterClassName + "'.", null);
+              + " on presenter '" + presenterClassName + "'.");
       throw new UnableToCompleteException();
     }
     return bundleClass;
@@ -154,7 +189,7 @@ public class PresenterInspector {
     logger.log(TreeLogger.ERROR, "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
         + "' does not have a get() method returning '" + providerClassName + "<"
         + actualProvidedClassName + ">'. This is required when using @"
-        + annotationClassName + "." + extraString, null);
+        + annotationClassName + "." + extraString);
     throw new UnableToCompleteException();
   }
 
@@ -191,10 +226,13 @@ public class PresenterInspector {
           + ">( ginjector." + getPresenterMethodName + "() );");
     } else {
       assert proxyCodeSplitBundleAnnotation != null;
-      writer.println("presenter = new CodeSplitBundleProvider<"
-          + presenterClassName + ", " + bundleClass.getQualifiedSourceName() + ">( ginjector."
-          + getPresenterMethodName + "(), " + bundleClass.getQualifiedSourceName() + "."
-          + presenterClass.getSimpleSourceName().toUpperCase() + ");");
+      writer.print("presenter = new CodeSplitBundleProvider<"
+          + presenterClassName + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
+      if (ginjectorInspector.isGenerated()) {
+        writer.print(bundleClassName + "." + presenterClass.getSimpleSourceName().toUpperCase() + ");");
+      } else {
+        writer.print(proxyCodeSplitBundleAnnotation.id() + ");");
+      }
     }
   }
 
@@ -291,7 +329,7 @@ public class PresenterInspector {
       presenterClass = null;
       logger.log(TreeLogger.ERROR,
           "Proxy must be enclosed in a class derived from '"
-              + ClassCollection.basePresenterClassName + "'", null);
+              + ClassCollection.basePresenterClassName + "'");
 
       throw new UnableToCompleteException();
     }
@@ -317,7 +355,7 @@ public class PresenterInspector {
     // Fail if there is more than one annotation.
     if (nbNonNullTags > 1) {
       logger.log(TreeLogger.ERROR, "Proxy for '" + presenterClassName
-          + "' has more than one @Proxy annotation.", null);
+          + "' has more than one @Proxy annotation.");
       throw new UnableToCompleteException();
     }
     return true;

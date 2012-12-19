@@ -34,10 +34,10 @@ import java.util.Set;
  * Will generate a ProviderBundle.
  */
 public class ProviderBundleGenerator extends AbstractGenerator {
+  static final String SUFFIX = "Bundle";
   private static final String PUBLIC_STATIC_INT = "public static final int %s = %s;";
   private static final String CTOR_PARAM = "Provider<%s> %s";
   private static final String ARRAY_SETTER = "providers[%s] = %s;";
-  private static final String SUFFIX = "Bundle";
 
   private Set<JClassType> presenters;
 
