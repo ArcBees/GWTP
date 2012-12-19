@@ -44,7 +44,9 @@ import java.util.Set;
  * Will generate a Ginjector from Ginjector.
  */
 public class GinjectorGenerator extends AbstractGenerator {
-  private static final String GIN_GINJECTOR_ADDITIONAL = "gin.ginjector.additional";
+  static final String DEFAULT_NAME = "ClientGinjector";
+  static final String DEFAULT_FQ_NAME = DEFAULT_PACKAGE + "." + DEFAULT_NAME;
+  private static final String DELIMITER = ",";
   private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
   private static final String GETTER_METHOD = "%s get%s();";
   private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
@@ -52,12 +54,9 @@ public class GinjectorGenerator extends AbstractGenerator {
 
   private final ProviderBundleGenerator providerBundleGenerator = new ProviderBundleGenerator();
 
-  private String typeName;
-
   @Override
   public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
       throws UnableToCompleteException {
-    this.typeName = typeName;
 
     setTypeOracle(generatorContext.getTypeOracle());
     setTreeLogger(treeLogger);
@@ -85,20 +84,12 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     closeDefinition(sourceWriter);
 
-    return getPackageName() + "." + getClassName();
-  }
-
-  private JClassType findAdditionalInterface() throws UnableToCompleteException {
-    ConfigurationProperty additional = findOptionalConfigurationProperty(GIN_GINJECTOR_ADDITIONAL);
-    if (additional == null) {
-      return null;
-    }
-    return getType(additional.getValues().get(0));
+    return DEFAULT_FQ_NAME;
   }
 
   private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
-    setClassName(getSimpleNameFromTypeName(typeName));
-    setPackageName(getPackageNameFromTypeName(typeName));
+    setClassName(DEFAULT_NAME);
+    setPackageName(DEFAULT_PACKAGE);
 
     return generatorContext.tryCreate(getTreeLogger(), getPackageName(), getClassName());
   }
@@ -126,25 +117,41 @@ public class GinjectorGenerator extends AbstractGenerator {
     composer.makeInterface();
     composer.addImplementedInterface(Ginjector.class.getSimpleName());
 
-    JClassType additional = findAdditionalInterface();
-    if (additional != null) {
-      composer.addImport(additional.getQualifiedSourceName());
-      composer.addImplementedInterface(additional.getName());
-    }
+    addExtensionInterfaces(composer);
 
     return composer;
   }
 
+  private void addExtensionInterfaces(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
+    ConfigurationProperty ex = findOptionalConfigurationProperty(GIN_GINJECTOR_EXTENSION);
+    if (ex != null) {
+      for (String extension : ex.getValues().get(0).split(DELIMITER)) {
+        final JClassType extensionType = getType(extension);
+        composer.addImport(extensionType.getQualifiedSourceName());
+        composer.addImplementedInterface(extensionType.getName());
+      }
+    }
+  }
+
   private void writeGinModulesAnnotation(ClassSourceFileComposerFactory composer)
       throws UnableToCompleteException {
-    ConfigurationProperty moduleProperty = findMandatoryConfigurationProperty(GIN_MODULE_NAME);
-    String moduleName = moduleProperty.getValues().get(0);
-    String moduleSimpleNameClass = getSimpleNameFromTypeName(moduleName) + ".class";
+    ConfigurationProperty moduleProperty = findMandatoryConfigurationProperty(GIN_GINJECTOR_MODULES);
 
-    composer.addImport(moduleName);
     composer.addImport(GinModules.class.getName());
 
-    composer.addAnnotationDeclaration(String.format(GIN_MODULES, GinModules.class.getSimpleName(), moduleSimpleNameClass));
+    StringBuilder modules = new StringBuilder();
+    for (String module  : moduleProperty.getValues().get(0).split(DELIMITER)) {
+      // verify that the module exists
+      getType(module);
+
+      composer.addImport(module);
+      if (modules.length() != 0) {
+        modules.append(", ");
+      }
+      modules.append(getSimpleNameFromTypeName(module)).append(".class");
+    }
+
+    composer.addAnnotationDeclaration(String.format(GIN_MODULES, GinModules.class.getSimpleName(), modules));
   }
 
   private void writeMandatoryGetterImports(ClassSourceFileComposerFactory composer) {
