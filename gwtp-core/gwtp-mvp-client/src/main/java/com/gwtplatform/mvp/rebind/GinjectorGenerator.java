@@ -37,6 +37,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import javax.inject.Provider;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -123,10 +124,10 @@ public class GinjectorGenerator extends AbstractGenerator {
   }
 
   private void addExtensionInterfaces(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
-    ConfigurationProperty ex = findOptionalConfigurationProperty(GIN_GINJECTOR_EXTENSION);
-    if (ex != null) {
-      for (String extension : ex.getValues().get(0).split(DELIMITER)) {
-        final JClassType extensionType = getType(extension);
+    List<String> values = findConfigurationProperty(GIN_GINJECTOR_EXTENSION).getValues();
+    if (values.size() > 0) {
+      for (String extension : values.get(0).split(DELIMITER)) {
+        final JClassType extensionType = getType(extension.trim());
         composer.addImport(extensionType.getQualifiedSourceName());
         composer.addImplementedInterface(extensionType.getName());
       }
@@ -135,20 +136,19 @@ public class GinjectorGenerator extends AbstractGenerator {
 
   private void writeGinModulesAnnotation(ClassSourceFileComposerFactory composer)
       throws UnableToCompleteException {
-    ConfigurationProperty moduleProperty = findMandatoryConfigurationProperty(GIN_GINJECTOR_MODULES);
+    ConfigurationProperty moduleProperty = findConfigurationProperty(GIN_GINJECTOR_MODULES);
 
     composer.addImport(GinModules.class.getName());
 
     StringBuilder modules = new StringBuilder();
     for (String module  : moduleProperty.getValues().get(0).split(DELIMITER)) {
-      // verify that the module exists
-      getType(module);
+      JClassType moduleType = getType(module.trim());
 
-      composer.addImport(module);
+      composer.addImport(moduleType.getQualifiedSourceName());
       if (modules.length() != 0) {
         modules.append(", ");
       }
-      modules.append(getSimpleNameFromTypeName(module)).append(".class");
+      modules.append(moduleType.getName()).append(".class");
     }
 
     composer.addAnnotationDeclaration(String.format(GIN_MODULES, GinModules.class.getSimpleName(), modules));
