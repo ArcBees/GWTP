@@ -16,13 +16,11 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
@@ -85,28 +83,17 @@ public class GinjectorGenerator extends AbstractGenerator {
     writePresentersGetter(sourceWriter, presenterDefinitions);
     writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
 
-    closeDefinition(treeLogger, sourceWriter);
+    closeDefinition(sourceWriter);
 
     return getPackageName() + "." + getClassName();
   }
 
   private JClassType findAdditionalInterface() throws UnableToCompleteException {
-    ConfigurationProperty additional = null;
-    try {
-      additional = getPropertyOracle().getConfigurationProperty(GIN_GINJECTOR_ADDITIONAL);
-    } catch (BadPropertyValueException e) {
-      // ignore, is not mandatory
-    }
+    ConfigurationProperty additional = findOptionalConfigurationProperty(GIN_GINJECTOR_ADDITIONAL);
     if (additional == null) {
       return null;
     }
-    final String additionalName = additional.getValues().get(0);
-    try {
-        return getTypeOracle().getType(additionalName);
-    } catch (NotFoundException e) {
-      getTreeLogger().log(TreeLogger.ERROR, "Cannot find additional interface " + additionalName, e);
-      throw new UnableToCompleteException();
-    }
+    return getType(additional.getValues().get(0));
   }
 
   private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
@@ -117,24 +104,18 @@ public class GinjectorGenerator extends AbstractGenerator {
   }
 
   private void findAllPresenters(PresenterDefinitions presenterDefinitions) throws UnableToCompleteException {
-
     for (JClassType type : getTypeOracle().getTypes()) {
       if (type.isAnnotationPresent(ProxyStandard.class)) {
         presenterDefinitions.addStandardPresenter(type.getEnclosingType());
       } else if (type.isAnnotationPresent(ProxyCodeSplit.class)) {
         presenterDefinitions.addCodeSplitPresenter(type.getEnclosingType());
       } else if (type.isAnnotationPresent(ProxyCodeSplitBundle.class)) {
-        presenterDefinitions.addCodeSplitBundlePresenter(type.getAnnotation(ProxyCodeSplitBundle.class).value(), type.getEnclosingType());
+        presenterDefinitions.addCodeSplitBundlePresenter(type.getAnnotation(ProxyCodeSplitBundle.class).value(),
+            type.getEnclosingType());
       }
 
       if (type.isAnnotationPresent(UseGatekeeper.class)) {
-        final String gkName = type.getAnnotation(UseGatekeeper.class).value().getName();
-        try {
-          presenterDefinitions.addGatekeeper(getTypeOracle().getType(gkName));
-        } catch (NotFoundException e) {
-          getTreeLogger().log(TreeLogger.ERROR, "Cannot find Gatekeeper " + gkName, e);
-          throw new UnableToCompleteException();
-        }
+        presenterDefinitions.addGatekeeper(getType(type.getAnnotation(UseGatekeeper.class).value().getName()));
       }
     }
   }
@@ -156,7 +137,7 @@ public class GinjectorGenerator extends AbstractGenerator {
 
   private void writeGinModulesAnnotation(ClassSourceFileComposerFactory composer)
       throws UnableToCompleteException {
-    ConfigurationProperty moduleProperty = findConfigurationProperty(GIN_MODULE_NAME);
+    ConfigurationProperty moduleProperty = findMandatoryConfigurationProperty(GIN_MODULE_NAME);
     String moduleName = moduleProperty.getValues().get(0);
     String moduleSimpleNameClass = getSimpleNameFromTypeName(moduleName) + ".class";
 
@@ -182,7 +163,8 @@ public class GinjectorGenerator extends AbstractGenerator {
       composer.addImport(Provider.class.getCanonicalName());
     }
 
-    if (presenterDefinitions.getCodeSplitPresenters().size() > 0 || presenterDefinitions.getCodeSplitBundlePresenters().size() > 0) {
+    if (presenterDefinitions.getCodeSplitPresenters().size() > 0 ||
+        presenterDefinitions.getCodeSplitBundlePresenters().size() > 0) {
       composer.addImport(AsyncProvider.class.getCanonicalName());
     }
   }
@@ -210,7 +192,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     writeGatekeeperSetterFromList(sourceWriter, presenterDefinitions.getGatekeepers());
 
     writePresenterGettersFromList(sourceWriter, presenterDefinitions.getStandardPresenters(),
-            Provider.class.getSimpleName());
+        Provider.class.getSimpleName());
     writePresenterGettersFromList(sourceWriter, presenterDefinitions.getCodeSplitPresenters(),
         AsyncProvider.class.getSimpleName());
   }
@@ -218,12 +200,12 @@ public class GinjectorGenerator extends AbstractGenerator {
   private void writeBundleGetters(SourceWriter sourceWriter, Map<String,Set<JClassType>> bundles,
       GeneratorContext generatorContext) throws UnableToCompleteException {
     for (String bundle : bundles.keySet()) {
-
       providerBundleGenerator.setPresenters(bundles.get(bundle));
       providerBundleGenerator.setPackageName(getPackageName());
       String bundleName = providerBundleGenerator.generate(getTreeLogger(), generatorContext, bundle);
       sourceWriter.println();
-      sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, AsyncProvider.class.getSimpleName(), bundleName, getSimpleNameFromTypeName(bundleName)));
+      sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, AsyncProvider.class.getSimpleName(), bundleName,
+          getSimpleNameFromTypeName(bundleName)));
     }
   }
 
@@ -246,4 +228,3 @@ public class GinjectorGenerator extends AbstractGenerator {
     }
   }
 }
-

@@ -31,19 +31,20 @@ import java.io.PrintWriter;
 import java.util.Set;
 
 /**
- * Will generate a Ginjector from Ginjector.
+ * Will generate a ProviderBundle.
  */
 public class ProviderBundleGenerator extends AbstractGenerator {
   private static final String PUBLIC_STATIC_INT = "public static final int %s = %s;";
   private static final String CTOR_PARAM = "Provider<%s> %s";
   private static final String ARRAY_SETTER = "providers[%s] = %s;";
+  private static final String SUFFIX = "Bundle";
 
   private Set<JClassType> presenters;
 
   @Override
   public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
       throws UnableToCompleteException {
-    setClassName(typeName + "Bundle");
+    setClassName(typeName + SUFFIX);
 
     setTypeOracle(generatorContext.getTypeOracle());
     setTreeLogger(treeLogger);
@@ -63,7 +64,7 @@ public class ProviderBundleGenerator extends AbstractGenerator {
     writeStaticFields(sourceWriter, presenters);
     writeConstructor(sourceWriter, presenters);
 
-    closeDefinition(treeLogger, sourceWriter);
+    closeDefinition(sourceWriter);
 
     return getPackageName() + "." + getClassName();
   }
