@@ -93,7 +93,6 @@ public class PresenterInspector {
     }
 
     findGetPresenterMethodName();
-    verifyCodeSplitBundleConfiguration();
 
     classInspector.collectStaticAnnotatedFields(classCollection.typeClass,
         classCollection.revealContentHandlerClass, ContentSlot.class, contentSlots);
@@ -115,6 +114,7 @@ public class PresenterInspector {
       failIfNoProviderError(getPresenterMethodName, "AsyncProvider",
           ProxyCodeSplit.class.getSimpleName());
     } else {
+      verifyManualCodeSplitBundleConfiguration();
       JClassType bundleClass = findBundleClass();
       getPresenterMethodName = ginjectorInspector.findGetMethod(classCollection.asyncProviderClass,
           bundleClass);
@@ -124,31 +124,19 @@ public class PresenterInspector {
     }
   }
 
-  private void verifyCodeSplitBundleConfiguration() throws UnableToCompleteException {
-    if (proxyCodeSplitBundleAnnotation != null) {
-      if (ginjectorInspector.isGenerated()) {
-        if (proxyCodeSplitBundleAnnotation.value().isEmpty()) {
-          logger.log(TreeLogger.ERROR, "Cannot find the bundle value used with @"
-              + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "'.");
-          throw new UnableToCompleteException();
-        }
-        if (proxyCodeSplitBundleAnnotation.id() != -1 ||
-            !proxyCodeSplitBundleAnnotation.bundleClass().equals(NoOpProviderBundle.class)) {
-          logger.log(TreeLogger.WARN, "ID and bundleClass used with @" + ProxyCodeSplitBundle.class.getSimpleName()
-              + " on presenter '" + presenterClassName + "' are ignored since bundles are automatically generated");
-        }
-      } else {
-        if (!proxyCodeSplitBundleAnnotation.value().isEmpty()) {
-          logger.log(TreeLogger.WARN, "Bundle value used with @"
-              + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "' is ignored");
-        }
-        if (proxyCodeSplitBundleAnnotation.id() == -1 ||
-            proxyCodeSplitBundleAnnotation.bundleClass().equals(NoOpProviderBundle.class)) {
-          logger.log(TreeLogger.ERROR, "ID and bundleClass must be specified with @"
-              + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "'.");
-          throw new UnableToCompleteException();
-        }
-      }
+  private void verifyManualCodeSplitBundleConfiguration() throws UnableToCompleteException {
+    if (ginjectorInspector.isGenerated()) {
+      return;
+    }
+    if (!proxyCodeSplitBundleAnnotation.value().isEmpty()) {
+      logger.log(TreeLogger.WARN, "Bundle value used with @"
+          + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "' is ignored");
+    }
+    if (proxyCodeSplitBundleAnnotation.id() == -1 ||
+        proxyCodeSplitBundleAnnotation.bundleClass().equals(NoOpProviderBundle.class)) {
+      logger.log(TreeLogger.ERROR, "ID and bundleClass must be specified with @"
+          + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenterClassName + "'.");
+      throw new UnableToCompleteException();
     }
   }
 
