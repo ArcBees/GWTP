@@ -30,6 +30,7 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -102,13 +103,27 @@ public class GinjectorGenerator extends AbstractGenerator {
       } else if (type.isAnnotationPresent(ProxyCodeSplit.class)) {
         presenterDefinitions.addCodeSplitPresenter(type.getEnclosingType());
       } else if (type.isAnnotationPresent(ProxyCodeSplitBundle.class)) {
-        presenterDefinitions.addCodeSplitBundlePresenter(type.getAnnotation(ProxyCodeSplitBundle.class).value(),
-            type.getEnclosingType());
+        ProxyCodeSplitBundle annotation = type.getAnnotation(ProxyCodeSplitBundle.class);
+        verifyCodeSplitBundleConfiguration(type.getName(), annotation);
+        presenterDefinitions.addCodeSplitBundlePresenter(annotation.value(), type.getEnclosingType());
       }
 
       if (type.isAnnotationPresent(UseGatekeeper.class)) {
         presenterDefinitions.addGatekeeper(getType(type.getAnnotation(UseGatekeeper.class).value().getName()));
       }
+    }
+  }
+
+  private void verifyCodeSplitBundleConfiguration(String presenter, ProxyCodeSplitBundle annotation)
+      throws UnableToCompleteException {
+    if (annotation.value().isEmpty()) {
+      getTreeLogger().log(TreeLogger.ERROR, "Cannot find the bundle value used with @"
+          + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenter + "'.");
+      throw new UnableToCompleteException();
+    }
+    if (annotation.id() != -1 || !annotation.bundleClass().equals(NoOpProviderBundle.class)) {
+      getTreeLogger().log(TreeLogger.WARN, "ID and bundleClass used with @" + ProxyCodeSplitBundle.class.getSimpleName()
+          + " on presenter '" + presenter + "' are ignored since bundles are automatically generated");
     }
   }
 
