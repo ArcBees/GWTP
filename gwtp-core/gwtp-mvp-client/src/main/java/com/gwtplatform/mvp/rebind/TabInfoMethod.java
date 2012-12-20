@@ -86,7 +86,9 @@ public class TabInfoMethod {
     parameters = method.getParameters();
     if (parameters.length > 0) {
       for (JParameter parameter : parameters) {
-        if (ginjectorInspector.findGetMethod(parameter.getType().isClassOrInterface()) == null) {
+        final JClassType parameterType = parameter.getType().isClassOrInterface();
+        if (!ginjectorInspector.getGinjectorClass().equals(parameterType) &&
+            ginjectorInspector.findGetMethod(parameterType) == null) {
           logger.log(TreeLogger.ERROR, getErrorPrefix() + " has a parameter that is not provided by "
                   + ginjectorInspector.getGinjectorClassName() + ". This is illegal.");
           throw new UnableToCompleteException();
