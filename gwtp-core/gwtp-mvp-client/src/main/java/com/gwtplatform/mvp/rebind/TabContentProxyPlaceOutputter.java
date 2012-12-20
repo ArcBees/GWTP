@@ -66,7 +66,7 @@ public class TabContentProxyPlaceOutputter extends ProxyOutputterBase {
   }
 
   @Override
-  public void writeInnerClasses(SourceWriter writer) {
+  public void writeInnerClasses(SourceWriter writer) throws UnableToCompleteException {
     proxyPlaceOutputter.beginWrappedProxy(writer, ClassCollection.nonLeafTabContentProxyImplClassName);
     nonLeafTabContentProxyOutputter.writeFields(writer);
     nonLeafTabContentProxyOutputter.writeInnerClasses(writer);

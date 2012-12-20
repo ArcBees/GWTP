@@ -57,7 +57,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
   }
 
   @Override
-  public void writeInnerClasses(SourceWriter writer) {
+  public void writeInnerClasses(SourceWriter writer) throws UnableToCompleteException {
     beginWrappedProxy(writer, ClassCollection.proxyImplClassName);
     BasicProxyOutputter basicOutputter = new BasicProxyOutputter(oracle, logger, classCollection,
         ginjectorInspector, presenterInspector);
@@ -96,10 +96,10 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
       return "null";
     }
     StringBuilder builder = new StringBuilder("new String[] {");
-    for (int i = 0; i < gatekeeperParams.length; i++) {
-      builder.append("\"").append(gatekeeperParams[i]).append("\",");
+    for (String param : gatekeeperParams) {
+      builder.append("\"").append(param).append("\",");
     }
-    if (",".equals(builder.charAt(builder.length() - 1))) {
+    if (',' == builder.charAt(builder.length() - 1)) {
       builder.deleteCharAt(builder.length() - 1);
     }
     builder.append("}");
