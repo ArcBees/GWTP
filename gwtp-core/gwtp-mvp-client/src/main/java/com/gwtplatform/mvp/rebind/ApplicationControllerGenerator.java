@@ -56,8 +56,10 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     ClassSourceFileComposerFactory composer = initComposer();
     SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
 
-    writeInit(sourceWriter,
-        new GinjectorGenerator().generate(getTreeLogger(), generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME));
+    String ginjectorName = new GinjectorGenerator().generate(getTreeLogger(),
+        generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME);
+
+    writeInit(sourceWriter, ginjectorName);
 
     closeDefinition(sourceWriter);
 
