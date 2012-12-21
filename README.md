@@ -56,6 +56,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
 
 ##Implementors
 * [ArcBees.com](http://arcbees.com)
+* [Jukito](http://jukito.arcbees.com/)
 
 ##Downloads
 * [Maven Usage](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
