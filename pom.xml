@@ -497,19 +497,6 @@
                     <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
             </plugin>
-
- <!--            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.2</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>gwtp-snapshots</serverId>
-                    <nexusUrl>http://localhost:8081/nexus/</nexusUrl>
-                    update this to the correct id!
-                    <stagingProfileId>1296f79efe04a4d0</stagingProfileId>
-                </configuration>
-              </plugin> -->
         </plugins>
     </build>
 
