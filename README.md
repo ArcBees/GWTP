@@ -15,6 +15,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * 0.7 is the current stable release. 
 
 ##Demos
+* [GWTP Samples Project Home](https://github.com/ArcBees/GWTP-Samples)
 <table>
   <tr>
     <th>Sample</th>
