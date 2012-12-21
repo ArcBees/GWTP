@@ -58,7 +58,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * [Maven Usage](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
 * [Download Jars](https://github.com/ArcBees/GWTP/downloads)
 
-##Archetype Tools
+##Archetype
 * [More about Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools)
 
 ```
