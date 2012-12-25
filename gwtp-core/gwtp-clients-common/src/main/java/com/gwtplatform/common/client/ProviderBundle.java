@@ -24,8 +24,11 @@ import com.google.inject.Provider;
  * loaded, so is the code for the others. This is useful when the provided
  * objects share the bulk of their code, which would end up in the left-overs if
  * the objects were behind their individual split points.
+ * GWTP automatically handles ProviderBundles when used with ApplicationController
+ * and Ginjector generation.
  * <p />
- * Here is an example use of {@link ProviderBundle}:
+ *
+ * Here is an example use of a manual {@link ProviderBundle}:
  *
  * <pre>
  * public class MyPresenterBundle extends ProviderBundle {

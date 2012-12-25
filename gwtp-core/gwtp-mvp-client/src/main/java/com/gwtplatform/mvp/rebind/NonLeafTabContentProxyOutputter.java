@@ -61,7 +61,7 @@ public class NonLeafTabContentProxyOutputter extends ProxyOutputterBase {
   }
 
   @Override
-  void writeSubclassMethods(SourceWriter writer) {
+  void writeSubclassMethods(SourceWriter writer) throws UnableToCompleteException {
     writeGetTabDataInternalMethod(writer);
   }
 
@@ -81,14 +81,14 @@ public class NonLeafTabContentProxyOutputter extends ProxyOutputterBase {
     this.nameToken = nameToken;
   }
 
-  private void writeGetTabDataInternalMethod(SourceWriter writer) {
+  private void writeGetTabDataInternalMethod(SourceWriter writer) throws UnableToCompleteException {
     if (tabLabel != null) {
       // Simple string tab label
       writer.println();
       writer.println("protected TabData getTabDataInternal("
           + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
       writer.indent();
-      writer.println("  return new TabDataBasic(\"" + tabLabel + "\", " + tabPriority + ");");
+      writer.println("return new TabDataBasic(\"" + tabLabel + "\", " + tabPriority + ");");
       writer.outdent();
       writer.println("}");
     } else {

@@ -35,4 +35,15 @@
   <!-- Specify the paths for translatable code                    -->
   <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java" />
 
+  <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation -->
+  <!-- if another value is set, it must point to a valid manual Ginjector class -->
+  <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
+  <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.ClientGinjector"/>
+
+  <!-- comma separated list of gin modules, mandatory when using Ginjector generation -->
+  <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true" />
+
+  <!-- optional comma separated list of extension interface to the ginjector -->
+  <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
+
 </module>
