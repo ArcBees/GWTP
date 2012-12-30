@@ -20,33 +20,32 @@ package com.gwtplatform.mvp.client;
  * Base class for a {@link View} that implements the {@link HasUiHandlers}
  * interface. You should always call {@link #setUiHandlers(UiHandlers)} from your
  * presenter's constructor.
- * <p />
+ * <p/>
  * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
  * since the {@link UiHandlers} are not yet set.
  *
  * @param <C> Your {@link UiHandlers} interface type.
- *
  * @author Christian Goudreau
  * @author Philippe Beaudoin
  */
 public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
-    implements HasUiHandlers<C> {
-  private C uiHandlers;
+        implements HasUiHandlers<C> {
+    private C uiHandlers;
 
-  /**
-   * Access the {@link UiHandlers} associated with this {@link View}.
-   * <p>
-   * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
-   * since the {@link UiHandlers} are not yet set.
-   *
-   * @return The {@link UiHandlers}, or {@code null} if they are not yet set.
-   */
-  protected C getUiHandlers() {
-    return uiHandlers;
-  }
+    /**
+     * Access the {@link UiHandlers} associated with this {@link View}.
+     * <p/>
+     * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
+     * since the {@link UiHandlers} are not yet set.
+     *
+     * @return The {@link UiHandlers}, or {@code null} if they are not yet set.
+     */
+    protected C getUiHandlers() {
+        return uiHandlers;
+    }
 
-  @Override
-  public void setUiHandlers(C uiHandlers) {
-    this.uiHandlers = uiHandlers;
-  }
+    @Override
+    public void setUiHandlers(C uiHandlers) {
+        this.uiHandlers = uiHandlers;
+    }
 }

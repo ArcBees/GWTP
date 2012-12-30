@@ -25,8 +25,8 @@ import com.gwtplatform.dispatch.shared.Result;
  * @author Christian Goudreau
  */
 public class AbstractDefaultActionValidator implements ActionValidator {
-  @Override
-  public boolean isValid(Action<? extends Result> action) {
-    return true;
-  }
+    @Override
+    public boolean isValid(Action<? extends Result> action) {
+        return true;
+    }
 }

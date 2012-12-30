@@ -24,16 +24,16 @@ package com.gwtplatform.dispatch.client;
  */
 public final class DefaultExceptionHandler implements ExceptionHandler {
 
-  public DefaultExceptionHandler() {
-  }
+    public DefaultExceptionHandler() {
+    }
 
-  /**
-   * Always returns {@link ExceptionHandler.Status#CONTINUE}.
-   *
-   * @param e The exception.
-   * @return The status.
-   */
-  public Status onFailure(Throwable e) {
-    return Status.CONTINUE;
-  }
+    /**
+     * Always returns {@link ExceptionHandler.Status#CONTINUE}.
+     *
+     * @param e The exception.
+     * @return The status.
+     */
+    public Status onFailure(Throwable e) {
+        return Status.CONTINUE;
+    }
 }

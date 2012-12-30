@@ -24,22 +24,21 @@ import com.gwtplatform.dispatch.shared.Result;
  * forces the {@link Action} class to be passed in as a constructor to the
  * handler.
  *
- * @author David Peterson
- * @author Brendan Doherty
- *
  * @param <A> The {@link Action} type.
  * @param <R> The {@link Result} type.
+ * @author David Peterson
+ * @author Brendan Doherty
  */
 public abstract class AbstractClientActionHandler<A extends Action<R>, R extends Result>
-    implements ClientActionHandler<A, R> {
+        implements ClientActionHandler<A, R> {
 
-  private final Class<A> actionType;
+    private final Class<A> actionType;
 
-  protected AbstractClientActionHandler(Class<A> actionType) {
-    this.actionType = actionType;
-  }
+    protected AbstractClientActionHandler(Class<A> actionType) {
+        this.actionType = actionType;
+    }
 
-  public Class<A> getActionType() {
-    return actionType;
-  }
+    public Class<A> getActionType() {
+        return actionType;
+    }
 }

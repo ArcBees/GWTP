@@ -16,14 +16,15 @@
 
 package com.gwtplatform.dispatch.server.spring;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+
 import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.server.spring.configuration.DefaultModule;
 import com.gwtplatform.dispatch.shared.action.TestAction;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * @author Peter Simun
@@ -32,20 +33,20 @@ import org.springframework.context.annotation.Import;
 @Import({DefaultModule.class})
 public class ActionModule extends HandlerModule {
 
-  public ActionModule() {
-  }
+    public ActionModule() {
+    }
 
-  @Bean
-  public TestActionHandler getTestActionHandler() {
-    return new TestActionHandler();
-  }
+    @Bean
+    public TestActionHandler getTestActionHandler() {
+        return new TestActionHandler();
+    }
 
-  @Bean
-  public ActionValidator getDefaultActionValidator() {
-    return new DefaultActionValidator();
-  }
+    @Bean
+    public ActionValidator getDefaultActionValidator() {
+        return new DefaultActionValidator();
+    }
 
-  protected void configureHandlers() {
-    bindHandler(TestAction.class, TestActionHandler.class);
-  }
+    protected void configureHandlers() {
+        bindHandler(TestAction.class, TestActionHandler.class);
+    }
 }

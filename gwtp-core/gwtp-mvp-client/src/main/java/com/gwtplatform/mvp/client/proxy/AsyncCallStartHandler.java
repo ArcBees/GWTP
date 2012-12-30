@@ -24,5 +24,5 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Philippe Beaudoin
  */
 public interface AsyncCallStartHandler extends EventHandler {
-  void onAsyncCallStart(final AsyncCallStartEvent asyncCallStartEvent);
+    void onAsyncCallStart(final AsyncCallStartEvent asyncCallStartEvent);
 }

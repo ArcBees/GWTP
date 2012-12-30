@@ -16,19 +16,18 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.junit.client.GWTTestCase;
+import org.junit.Ignore;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-
-import org.junit.Ignore;
 
 /**
  * Integration test for {@link PresenterImpl} and automatically-generated
  * {@link Proxy} classes.
- * <p />
+ * <p/>
  * TODO: This doesn't work yet. See
  * http://code.google.com/p/gwt-platform/issues/detail?id=38
  *
@@ -37,35 +36,35 @@ import org.junit.Ignore;
 @Ignore
 public class PresenterProxyIntegrationTest extends GWTTestCase {
 
-  /**
-   * @author Philippe Beaudoin
-   */
-  public static class MyPresenter extends
-      Presenter<View, MyPresenter.MyProxy> {
-
     /**
-     * {@link MyPresenter}'s proxy.
+     * @author Philippe Beaudoin
      */
-    @ProxyCodeSplit
-    public interface MyProxy extends Proxy<MyPresenter> {
-    }
+    public static class MyPresenter extends
+            Presenter<View, MyPresenter.MyProxy> {
 
-    public MyPresenter() {
-      super((EventBus) GWT.create(EventBus.class),
-          (View) GWT.create(View.class), (MyProxy) GWT.create(MyProxy.class));
+        /**
+         * {@link MyPresenter}'s proxy.
+         */
+        @ProxyCodeSplit
+        public interface MyProxy extends Proxy<MyPresenter> {
+        }
+
+        public MyPresenter() {
+            super((EventBus) GWT.create(EventBus.class),
+                    (View) GWT.create(View.class), (MyProxy) GWT.create(MyProxy.class));
+        }
+
+        @Override
+        protected void revealInParent() {
+        }
     }
 
     @Override
-    protected void revealInParent() {
+    public String getModuleName() {
+        return "com.gwtplatform.mvp.Mvp";
     }
-  }
 
-  @Override
-  public String getModuleName() {
-    return "com.gwtplatform.mvp.Mvp";
-  }
-
-  public void test() {
-    GWT.create(MyPresenter.class);
-  }
+    public void test() {
+        GWT.create(MyPresenter.class);
+    }
 }

@@ -27,14 +27,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
  */
 public class AdminViewTestUtilGwt extends ViewImpl implements AdminPresenterTestUtilGwt.MyView {
 
-  public final FlowPanel widget;
+    public final FlowPanel widget;
 
-  public AdminViewTestUtilGwt() {
-    widget = new FlowPanel();
-  }
+    public AdminViewTestUtilGwt() {
+        widget = new FlowPanel();
+    }
 
-  @Override
-  public Widget asWidget() {
-    return widget;
-  }
+    @Override
+    public Widget asWidget() {
+        return widget;
+    }
 }

@@ -16,16 +16,16 @@
 
 package com.gwtplatform.tester;
 
-import com.google.gwt.user.client.Command;
-
 import java.util.LinkedList;
 import java.util.List;
+
+import com.google.gwt.user.client.Command;
 
 /**
  * This class mimicks GWT's {@link com.google.gwt.user.client.DeferredCommand}
  * but it can be used in test cases without having to rely on a
  * {@link com.google.gwt.junit.client.GWTTestCase}.
- * <p />
+ * <p/>
  * Use {@link #addCommand(Command)} to add deferred commands, then call
  * {@link #pump()} to process all the deferred commands.
  *
@@ -33,16 +33,16 @@ import java.util.List;
  */
 public class DeferredCommandManager {
 
-  private List<Command> commands = new LinkedList<Command>();
+    private List<Command> commands = new LinkedList<Command>();
 
-  public void addCommand(Command command) {
-    commands.add(command);
-  }
-
-  public void pump() {
-    while (!commands.isEmpty()) {
-      commands.remove(0).execute();
+    public void addCommand(Command command) {
+        commands.add(command);
     }
-  }
+
+    public void pump() {
+        while (!commands.isEmpty()) {
+            commands.remove(0).execute();
+        }
+    }
 
 }

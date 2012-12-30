@@ -22,9 +22,9 @@ package com.gwtplatform.dispatch.annotation;
  * @author Florian Sauter
  */
 @GenProxy(
-    targetPackage = "com.gwtplatform.dispatch.annotation.proxy",
-    isEmbeddedType = true
+        targetPackage = "com.gwtplatform.dispatch.annotation.proxy",
+        isEmbeddedType = true
 )
 public class Address {
-  public String street;
+    public String street;
 }

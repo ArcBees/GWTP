@@ -22,8 +22,8 @@ import java.util.List;
  * Contains the list of {@link Result}s from successful actions in the
  * {@link BatchAction}. The order will match the order of the original
  * {@link Action}s listed in the {@link BatchAction}.
- *
- * <p>
+ * <p/>
+ * <p/>
  * If the {@link BatchAction} was specified to have an {@link BatchAction.OnException} value
  * of {@link BatchAction.OnException#CONTINUE}, failed actions will have a <code>null</code>
  * value.
@@ -32,25 +32,25 @@ import java.util.List;
  */
 public class BatchResult implements Result {
 
-  private List<Result> results;
+    private List<Result> results;
 
-  /**
-   * Creates a new result with the list of results from the batch action, in
-   * order.
-   *
-   * @param results The list of results.
-   */
-  public BatchResult(List<Result> results) {
-    this.results = results;
-  }
+    /**
+     * Creates a new result with the list of results from the batch action, in
+     * order.
+     *
+     * @param results The list of results.
+     */
+    public BatchResult(List<Result> results) {
+        this.results = results;
+    }
 
-  /**
-   * For serialization.
-   */
-  BatchResult() {
-  }
+    /**
+     * For serialization.
+     */
+    BatchResult() {
+    }
 
-  public List<Result> getResults() {
-    return results;
-  }
+    public List<Result> getResults() {
+        return results;
+    }
 }

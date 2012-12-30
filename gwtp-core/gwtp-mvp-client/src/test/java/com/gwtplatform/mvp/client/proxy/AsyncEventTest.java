@@ -16,10 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import javax.inject.Inject;
 
 import org.jukito.JukitoRunner;
 import org.junit.Test;
@@ -38,7 +35,10 @@ import com.gwtplatform.mvp.client.proxy.AsyncEventPresenterTestUtil.MyView;
 import com.gwtplatform.tester.TestDispatchAsync;
 import com.gwtplatform.tester.TestDispatchService;
 
-import javax.inject.Inject;
+import static org.mockito.BDDMockito.willAnswer;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 /**
  * Tests (using {@link AsyncEventPresenterTestUtil}) the correct firing and
@@ -50,79 +50,80 @@ import javax.inject.Inject;
 @RunWith(JukitoRunner.class)
 public class AsyncEventTest {
 
-  @Inject
-  MyView view;
-  @Inject
-  MyProxy proxy;
-  @Inject
-  SimpleEventBus eventBus;
-  @Inject
-  TestDispatchService service;
-  @Inject
-  Injector injector;
+    @Inject
+    MyView view;
+    @Inject
+    MyProxy proxy;
+    @Inject
+    SimpleEventBus eventBus;
+    @Inject
+    TestDispatchService service;
+    @Inject
+    Injector injector;
 
-  @Test
-  public void shouldSetLoadingAndNullOnSuccessfulServerCall() {
-    // given
-    TestDispatchAsync spy = spy(new TestDispatchAsync(service, injector));
-    AsyncEventPresenterTestUtil presenter = new AsyncEventPresenterTestUtil(eventBus, view, proxy, spy);
-    willAnswer(new GetAsynchronousAnswer()).given(spy).execute(eq(new MyAction()), Matchers.<AsyncCallback<MyResult>> any());
+    @Test
+    public void shouldSetLoadingAndNullOnSuccessfulServerCall() {
+        // given
+        TestDispatchAsync spy = spy(new TestDispatchAsync(service, injector));
+        AsyncEventPresenterTestUtil presenter = new AsyncEventPresenterTestUtil(eventBus, view, proxy, spy);
+        willAnswer(new GetAsynchronousAnswer()).given(spy).execute(eq(new MyAction()),
+                Matchers.<AsyncCallback<MyResult>>any());
 
-    // when
-    presenter.onBind();
-    presenter.executeAsync();
+        // when
+        presenter.onBind();
+        presenter.executeAsync();
 
-    // then
-    verify(view).setMessage("Loading...");
-    verify(view).setMessage(null);
-  }
-
-  @Test
-  public void shouldSetLoadingAndFailureOnFailedServerCall() {
-    // given
-    TestDispatchAsync spy = spy(new TestDispatchAsync(service, injector));
-    AsyncEventPresenterTestUtil presenter = new AsyncEventPresenterTestUtil(eventBus, view, proxy, spy);
-    willAnswer(new GetAsynchronousFailureAnswer()).given(spy).execute(eq(new MyAction()),
-        Matchers.<AsyncCallback<MyResult>> any());
-
-    // when
-    presenter.onBind();
-    presenter.executeAsync();
-
-    // then
-    verify(view).setMessage("Loading...");
-    verify(view).setMessage(null);
-  }
-
-  /**
-   * A mock {@link Answer} which will allways call
-   * {@link AsyncCallback#onSuccess(Object)} method.
-   *
-   * @author bjoern.moritz
-   */
-  private static final class GetAsynchronousAnswer implements Answer<Void> {
-    @Override
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public Void answer(InvocationOnMock invocation) throws Throwable {
-      final AsyncCallback callback = (AsyncCallback) invocation.getArguments()[1];
-      callback.onSuccess(invocation.getArguments()[0]);
-      return null;
+        // then
+        verify(view).setMessage("Loading...");
+        verify(view).setMessage(null);
     }
-  }
 
-  /**
-   * A mock {@link Answer} which will allways call
-   * {@link AsyncCallback#onFailure(Throwable)} method.
-   *
-   * @author bjoern.moritz
-   */
-  private static final class GetAsynchronousFailureAnswer implements Answer<Void> {
-    @Override
-    @SuppressWarnings({ "rawtypes" })
-    public Void answer(InvocationOnMock invocation) throws Throwable {
-      final AsyncCallback callback = (AsyncCallback) invocation.getArguments()[1];
-      callback.onFailure(new IllegalStateException());
-      return null;
+    @Test
+    public void shouldSetLoadingAndFailureOnFailedServerCall() {
+        // given
+        TestDispatchAsync spy = spy(new TestDispatchAsync(service, injector));
+        AsyncEventPresenterTestUtil presenter = new AsyncEventPresenterTestUtil(eventBus, view, proxy, spy);
+        willAnswer(new GetAsynchronousFailureAnswer()).given(spy).execute(eq(new MyAction()),
+                Matchers.<AsyncCallback<MyResult>>any());
+
+        // when
+        presenter.onBind();
+        presenter.executeAsync();
+
+        // then
+        verify(view).setMessage("Loading...");
+        verify(view).setMessage(null);
     }
-  }
+
+    /**
+     * A mock {@link Answer} which will allways call
+     * {@link AsyncCallback#onSuccess(Object)} method.
+     *
+     * @author bjoern.moritz
+     */
+    private static final class GetAsynchronousAnswer implements Answer<Void> {
+        @Override
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        public Void answer(InvocationOnMock invocation) throws Throwable {
+            final AsyncCallback callback = (AsyncCallback) invocation.getArguments()[1];
+            callback.onSuccess(invocation.getArguments()[0]);
+            return null;
+        }
+    }
+
+    /**
+     * A mock {@link Answer} which will allways call
+     * {@link AsyncCallback#onFailure(Throwable)} method.
+     *
+     * @author bjoern.moritz
+     */
+    private static final class GetAsynchronousFailureAnswer implements Answer<Void> {
+        @Override
+        @SuppressWarnings({"rawtypes"})
+        public Void answer(InvocationOnMock invocation) throws Throwable {
+            final AsyncCallback callback = (AsyncCallback) invocation.getArguments()[1];
+            callback.onFailure(new IllegalStateException());
+            return null;
+        }
+    }
 }
