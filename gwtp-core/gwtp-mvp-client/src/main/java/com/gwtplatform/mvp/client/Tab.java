@@ -28,60 +28,58 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public interface Tab extends HasText {
 
-  /**
-   * Should not be called directly. Call {@link TabPanel#setActiveTab(Tab)}
-   * instead.
-   */
-  void activate();
+    /**
+     * Should not be called directly. Call {@link TabPanel#setActiveTab(Tab)}
+     * instead.
+     */
+    void activate();
 
-  /**
-   * Every tab should be able to return itself as an instance of a widget class.
-   *
-   * @return The tab as a {@link Widget}.
-   */
-  Widget asWidget();
+    /**
+     * Every tab should be able to return itself as an instance of a widget class.
+     *
+     * @return The tab as a {@link Widget}.
+     */
+    Widget asWidget();
 
-  /**
-   * Should not be called directly. Call {@link TabPanel#setActiveTab(Tab)}
-   * instead.
-   */
-  void deactivate();
+    /**
+     * Should not be called directly. Call {@link TabPanel#setActiveTab(Tab)}
+     * instead.
+     */
+    void deactivate();
 
-  /**
-   * A tab priority indicates where it should appear within the tab strip. In
-   * typical implementations of {@link TabPanel}, a tab with low priority will
-   * be placed more towards the left of the strip. Two tabs with the same
-   * priority will be placed in an arbitrary order.
-   *
-   * @return The priority.
-   */
-  float getPriority();
+    /**
+     * A tab priority indicates where it should appear within the tab strip. In
+     * typical implementations of {@link TabPanel}, a tab with low priority will
+     * be placed more towards the left of the strip. Two tabs with the same
+     * priority will be placed in an arbitrary order.
+     *
+     * @return The priority.
+     */
+    float getPriority();
 
-  /**
-   * Gets the text displayed on the tab.
-   *
-   * @return The text.
-   *
-   * @see HasText#getText()
-   */
-  @Override
-  String getText();
+    /**
+     * Gets the text displayed on the tab.
+     *
+     * @return The text.
+     * @see HasText#getText()
+     */
+    @Override
+    String getText();
 
-  /**
-   * Sets the history token this tab links to.
-   *
-   * @param historyToken The history token.
-   */
-  void setTargetHistoryToken(String historyToken);
+    /**
+     * Sets the history token this tab links to.
+     *
+     * @param historyToken The history token.
+     */
+    void setTargetHistoryToken(String historyToken);
 
-  /**
-   * Sets the text displayed on the tab.
-   *
-   * @param text The text.
-   *
-   * @see HasText#setText(String)
-   */
-  @Override
-  void setText(String text);
+    /**
+     * Sets the text displayed on the tab.
+     *
+     * @param text The text.
+     * @see HasText#setText(String)
+     */
+    @Override
+    void setText(String text);
 
 }

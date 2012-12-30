@@ -24,8 +24,8 @@ import com.gwtplatform.dispatch.shared.action.TestAction;
  */
 public class ActionModule extends HandlerModule {
 
-  @Override
-  protected void configureHandlers() {
-    bindHandler(TestAction.class, TestActionHandler.class);
-  }
+    @Override
+    protected void configureHandlers() {
+        bindHandler(TestAction.class, TestActionHandler.class);
+    }
 }

@@ -20,9 +20,8 @@ package com.gwtplatform.dispatch.annotation;
  * For testing purposes only.
  *
  * @param <T> Type
- *
  * @author Brendan Doherty
  */
 public interface HasThing<T> {
-  T getThing();
+    T getThing();
 }

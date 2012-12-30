@@ -25,35 +25,34 @@ import com.gwtplatform.dispatch.shared.Action;
  * action was not the same action as specified by
  * {@link ClientActionHandler#getActionType()}.
  *
- *
  * @author Brendan Doherty
  */
 public class ClientActionHandlerMismatchException extends RuntimeException {
 
-  private static final long serialVersionUID = -2232006507185873458L;
+    private static final long serialVersionUID = -2232006507185873458L;
 
-  private final Class<? extends Action<?>> requestedActionType;
-  private final Class<?> supportedActionType;
+    private final Class<? extends Action<?>> requestedActionType;
+    private final Class<?> supportedActionType;
 
-  public ClientActionHandlerMismatchException(
-      Class<? extends Action<?>> requestedActionType, Class<?> supportedActionType) {
-    this.requestedActionType = (Class<? extends Action<?>>) requestedActionType;
-    this.supportedActionType = supportedActionType;
-  }
+    public ClientActionHandlerMismatchException(
+            Class<? extends Action<?>> requestedActionType, Class<?> supportedActionType) {
+        this.requestedActionType = (Class<? extends Action<?>>) requestedActionType;
+        this.supportedActionType = supportedActionType;
+    }
 
-  public Class<? extends Action<?>> getRequestedActionType() {
-    return this.requestedActionType;
-  }
+    public Class<? extends Action<?>> getRequestedActionType() {
+        return this.requestedActionType;
+    }
 
-  public Class<?> getSupportedActionType() {
-    return this.supportedActionType;
-  }
+    public Class<?> getSupportedActionType() {
+        return this.supportedActionType;
+    }
 
-  @Override
-  public String toString() {
-    return "ClientActionHandlerMismatchException [requestedActionType="
-        + this.requestedActionType + ", supportedActionType="
-        + this.supportedActionType + "]";
-  }
+    @Override
+    public String toString() {
+        return "ClientActionHandlerMismatchException [requestedActionType="
+                + this.requestedActionType + ", supportedActionType="
+                + this.supportedActionType + "]";
+    }
 
 }

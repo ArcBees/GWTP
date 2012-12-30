@@ -24,40 +24,40 @@ package com.gwtplatform.mvp.client;
  */
 public interface TabPanel {
 
-  /**
-   * Adds a new tab to the widget.
-   *
-   * @param tabData The data to use for that tab.
-   * @param historyToken The history token the tab points to.
-   * @return The newly added {@link Tab}.
-   */
-  Tab addTab(TabData tabData, String historyToken);
+    /**
+     * Adds a new tab to the widget.
+     *
+     * @param tabData      The data to use for that tab.
+     * @param historyToken The history token the tab points to.
+     * @return The newly added {@link Tab}.
+     */
+    Tab addTab(TabData tabData, String historyToken);
 
-  /**
-   * Removes a tab from the widget.
-   *
-   * @param tab The tab to remove.
-   */
-  void removeTab(Tab tab);
+    /**
+     * Removes a tab from the widget.
+     *
+     * @param tab The tab to remove.
+     */
+    void removeTab(Tab tab);
 
-  /**
-   * Removes all tabs from the widget.
-   */
-  void removeTabs();
+    /**
+     * Removes all tabs from the widget.
+     */
+    void removeTabs();
 
-  /**
-   * Sets the currently active tab.
-   *
-   * @param tab The tab to activate.
-   */
-  void setActiveTab(Tab tab);
+    /**
+     * Sets the currently active tab.
+     *
+     * @param tab The tab to activate.
+     */
+    void setActiveTab(Tab tab);
 
-  /**
-   * Change the data or history token associated with a tab.
-   *
-   * @param tab The tab to change.
-   * @param tabData The data to set for this tab.
-   * @param historyToken The history token to use for this tab.
-   */
-  void changeTab(Tab tab, TabData tabData, String historyToken);
+    /**
+     * Change the data or history token associated with a tab.
+     *
+     * @param tab          The tab to change.
+     * @param tabData      The data to set for this tab.
+     * @param historyToken The history token to use for this tab.
+     */
+    void changeTab(Tab tab, TabData tabData, String historyToken);
 }

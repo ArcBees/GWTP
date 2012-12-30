@@ -22,9 +22,13 @@ package com.gwtplatform.mvp.client.proxy;
  * @author Philippe Beaudoin
  */
 public interface PlaceManagerWindowMethodsTestUtil {
-  void registerTowardsHistory();
-  String getBrowserHistoryToken();
-  String getCurrentHref();
-  void revealCurrentPlace();
-  void setBrowserHistoryToken(String historyToken, boolean issueEvent);
+    void registerTowardsHistory();
+
+    String getBrowserHistoryToken();
+
+    String getCurrentHref();
+
+    void revealCurrentPlace();
+
+    void setBrowserHistoryToken(String historyToken, boolean issueEvent);
 }

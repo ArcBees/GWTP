@@ -17,10 +17,10 @@
 -->
 
 <module>
-  <!-- Inherit the core Web Toolkit stuff.                        -->
-  <inherits name='com.google.gwt.user.User'/>
+    <!-- Inherit the core Web Toolkit stuff.                        -->
+    <inherits name='com.google.gwt.user.User'/>
 
-  <!-- Specify the paths for translatable code                    -->
-  <source path='client'/>
+    <!-- Specify the paths for translatable code                    -->
+    <source path='client'/>
 
 </module>

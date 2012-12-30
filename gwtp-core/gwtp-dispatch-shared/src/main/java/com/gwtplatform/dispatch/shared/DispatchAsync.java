@@ -22,38 +22,37 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * The asynchronous client-side dispatcher service with an arbitrary action
  * type. The server-side implementation is
  * {@link com.gwtplatform.dispatch.server.guice.DispatchImpl}.
- * <p />
+ * <p/>
  * This class is closely related to {@link DispatchServiceAsync}. In theory this
  * class wouldn't be needed, but we use it to workaround a GWT limitation. In
  * fact, GWT currently can't correctly handle having generic method templates in
  * method signatures (eg. <code>&lt;A&gt; A create( Class<A> type )</code>)
  *
+ * @author David Peterson
+ * @author Philippe Beaudoin
  * @see com.gwtplatform.dispatch.shared.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.shared.DispatchService
  * @see com.gwtplatform.dispatch.shared.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
- *
- * @author David Peterson
- * @author Philippe Beaudoin
  */
 public interface DispatchAsync {
 
-  /**
-   * This method is called client-side whenever a new action is executed.
-   *
-   * @see DispatchServiceAsync#execute
-   */
-  <A extends Action<R>, R extends Result> DispatchRequest execute(A action,
-      AsyncCallback<R> callback);
+    /**
+     * This method is called client-side whenever a new action is executed.
+     *
+     * @see DispatchServiceAsync#execute
+     */
+    <A extends Action<R>, R extends Result> DispatchRequest execute(A action,
+            AsyncCallback<R> callback);
 
-  /**
-   * This method is called client-side whenever a previous executed action need
-   * to be undone.
-   *
-   * @see DispatchServiceAsync#undo
-   */
-  <A extends Action<R>, R extends Result> DispatchRequest undo(A action,
-      R result, AsyncCallback<Void> callback);
+    /**
+     * This method is called client-side whenever a previous executed action need
+     * to be undone.
+     *
+     * @see DispatchServiceAsync#undo
+     */
+    <A extends Action<R>, R extends Result> DispatchRequest undo(A action,
+            R result, AsyncCallback<Void> callback);
 }

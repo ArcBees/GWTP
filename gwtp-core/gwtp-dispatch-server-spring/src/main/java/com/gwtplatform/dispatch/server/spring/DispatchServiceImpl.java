@@ -16,64 +16,66 @@
 
 package com.gwtplatform.dispatch.server.spring;
 
-import com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl;
-import com.gwtplatform.dispatch.server.Dispatch;
-import com.gwtplatform.dispatch.server.RequestProvider;
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.context.ServletContextAware;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.logging.Logger;
+import com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl;
+import com.gwtplatform.dispatch.server.Dispatch;
+import com.gwtplatform.dispatch.server.RequestProvider;
 
 /**
  * @author Peter Simun
  */
 @Component("dispatch")
-public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler, ServletContextAware {
+public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler,
+        ServletContextAware {
 
-  private static final long serialVersionUID = 136176741488585959L;
+    private static final long serialVersionUID = 136176741488585959L;
 
-  private ServletContext servletContext;
+    private ServletContext servletContext;
 
-  @Autowired(required = false)
-  protected String securityCookieName;
+    @Autowired(required = false)
+    protected String securityCookieName;
 
-  @Autowired
-  public DispatchServiceImpl(final Logger logger, final Dispatch dispatch,
-      RequestProvider requestProvider) {
-    super(logger, dispatch, requestProvider);
-  }
+    @Autowired
+    public DispatchServiceImpl(final Logger logger, final Dispatch dispatch,
+            RequestProvider requestProvider) {
+        super(logger, dispatch, requestProvider);
+    }
 
-  @Override
-  public String getSecurityCookieName() {
-    return securityCookieName;
-  }
+    @Override
+    public String getSecurityCookieName() {
+        return securityCookieName;
+    }
 
-  public void setSecurityCookieName(String securityCookieName) {
-    this.securityCookieName = securityCookieName;
-  }
+    public void setSecurityCookieName(String securityCookieName) {
+        this.securityCookieName = securityCookieName;
+    }
 
-  @Override
-  public void handleRequest(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    doPost(request, response);
-  }
+    @Override
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
 
-  @Override
-  public void setServletContext(ServletContext arg0) {
-      this.servletContext = arg0;
-  }
+    @Override
+    public void setServletContext(ServletContext arg0) {
+        this.servletContext = arg0;
+    }
 
-  @Override
-  public ServletContext getServletContext() {
-      return servletContext;
-  }
+    @Override
+    public ServletContext getServletContext() {
+        return servletContext;
+    }
 
 }

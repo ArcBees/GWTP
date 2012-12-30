@@ -16,19 +16,19 @@
 
 package com.gwtplatform.dispatch.server.guice.actionhandlervalidator;
 
-import com.google.inject.Injector;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import com.google.inject.Injector;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This is a lazy-loading implementation of the registry. It will only create
@@ -40,114 +40,119 @@ import java.util.Map;
  */
 @Singleton
 public class LazyActionHandlerValidatorRegistryImpl implements
-    LazyActionHandlerValidatorRegistry {
-  private final Map<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>> actionHandlerValidatorClasses;
-  private final Map<Class<? extends Action<?>>, ActionHandlerValidatorInstance> actionHandlerValidatorInstances;
-  private final Injector injector;
-  private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
+        LazyActionHandlerValidatorRegistry {
+    private final Map<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends Action<?>,
+            ? extends Result>> actionHandlerValidatorClasses;
+    private final Map<Class<? extends Action<?>>, ActionHandlerValidatorInstance> actionHandlerValidatorInstances;
+    private final Injector injector;
+    private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
 
-  @Inject
-  LazyActionHandlerValidatorRegistryImpl(Injector injector) {
-    this.injector = injector;
-    actionHandlerValidatorClasses = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>>();
-    actionHandlerValidatorInstances = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
-    validators = new HashMap<Class<? extends ActionValidator>, ActionValidator>();
-  }
+    @Inject
+    LazyActionHandlerValidatorRegistryImpl(Injector injector) {
+        this.injector = injector;
+        actionHandlerValidatorClasses = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
+                Action<?>, ? extends Result>>();
+        actionHandlerValidatorInstances = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
+        validators = new HashMap<Class<? extends ActionValidator>, ActionValidator>();
+    }
 
-  @Override
-  public <A extends Action<R>, R extends Result> void addActionHandlerValidatorClass(
-      Class<A> actionClass,
-      ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
-    actionHandlerValidatorClasses.put(actionClass, actionHandlerValidatorClass);
-  }
+    @Override
+    public <A extends Action<R>, R extends Result> void addActionHandlerValidatorClass(
+            Class<A> actionClass,
+            ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
+        actionHandlerValidatorClasses.put(actionClass, actionHandlerValidatorClass);
+    }
 
-  @Override
-  public void clearActionHandlerValidators() {
-    actionHandlerValidatorInstances.clear();
-    validators.clear();
-  }
+    @Override
+    public void clearActionHandlerValidators() {
+        actionHandlerValidatorInstances.clear();
+        validators.clear();
+    }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public <A extends Action<R>, R extends Result> ActionHandlerValidatorInstance findActionHandlerValidator(
-      A action) {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <A extends Action<R>, R extends Result> ActionHandlerValidatorInstance findActionHandlerValidator(
+            A action) {
 
-    ActionHandlerValidatorInstance actionHandlerValidatorInstance = actionHandlerValidatorInstances.get(action.getClass());
+        ActionHandlerValidatorInstance actionHandlerValidatorInstance = actionHandlerValidatorInstances.get(action
+                .getClass());
 
-    if (actionHandlerValidatorInstance == null) {
-      ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass = actionHandlerValidatorClasses.get(action.getClass());
-      if (actionHandlerValidatorClass != null) {
-        actionHandlerValidatorInstance = createInstance(actionHandlerValidatorClass);
-        if (actionHandlerValidatorInstance != null) {
-          actionHandlerValidatorInstances.put(
-              (Class<? extends Action<?>>) action.getClass(),
-              actionHandlerValidatorInstance);
+        if (actionHandlerValidatorInstance == null) {
+            ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass =
+                    actionHandlerValidatorClasses.get(action.getClass());
+            if (actionHandlerValidatorClass != null) {
+                actionHandlerValidatorInstance = createInstance(actionHandlerValidatorClass);
+                if (actionHandlerValidatorInstance != null) {
+                    actionHandlerValidatorInstances.put(
+                            (Class<? extends Action<?>>) action.getClass(),
+                            actionHandlerValidatorInstance);
+                }
+            }
         }
-      }
+
+        return (ActionHandlerValidatorInstance) actionHandlerValidatorInstance;
     }
 
-    return (ActionHandlerValidatorInstance) actionHandlerValidatorInstance;
-  }
-
-  @Override
-  public ActionValidator findActionValidator(
-      Class<? extends ActionValidator> actionValidatorClass) {
-    return validators.get(actionValidatorClass);
-  }
-
-  @Override
-  public <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(
-      Class<A> actionClass,
-      ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
-
-    ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get(actionClass);
-
-    if (oldActionHandlerValidatorClass == actionHandlerValidatorClass) {
-      actionHandlerValidatorClasses.remove(actionClass);
-      ActionHandlerValidatorInstance instance = actionHandlerValidatorInstances.remove(actionClass);
-
-      if (!containValidator(instance.getActionValidator())) {
-        validators.remove(instance.getActionValidator().getClass());
-      }
-    }
-  }
-
-  private boolean containValidator(ActionValidator actionValidator) {
-    for (ActionHandlerValidatorInstance validator : actionHandlerValidatorInstances.values()) {
-      if (validator.getActionValidator().getClass().equals(
-          actionValidator.getClass())) {
-        return true;
-      }
+    @Override
+    public ActionValidator findActionValidator(
+            Class<? extends ActionValidator> actionValidatorClass) {
+        return validators.get(actionValidatorClass);
     }
 
-    return false;
-  }
+    @Override
+    public <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(
+            Class<A> actionClass,
+            ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
 
-  private ActionHandlerValidatorInstance createInstance(
-      ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass) {
+        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get
+                (actionClass);
 
-    ActionHandlerValidatorInstance actionHandlerValidatorInstance = null;
-    ActionValidator actionValidator = findActionValidator(actionHandlerValidatorClass.getActionValidatorClass());
+        if (oldActionHandlerValidatorClass == actionHandlerValidatorClass) {
+            actionHandlerValidatorClasses.remove(actionClass);
+            ActionHandlerValidatorInstance instance = actionHandlerValidatorInstances.remove(actionClass);
 
-    if (actionValidator == null) {
-      actionValidator = injector.getInstance(actionHandlerValidatorClass.getActionValidatorClass());
-
-      actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(
-          actionValidator,
-          injector.getInstance(actionHandlerValidatorClass.getActionHandlerClass()));
-
-      validators.put(actionValidator.getClass(), actionValidator);
-    } else {
-      actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(
-          actionValidator,
-          injector.getInstance(actionHandlerValidatorClass.getActionHandlerClass()));
+            if (!containValidator(instance.getActionValidator())) {
+                validators.remove(instance.getActionValidator().getClass());
+            }
+        }
     }
 
-    if (actionHandlerValidatorInstance.getActionHandler() == null
-        || actionHandlerValidatorInstance.getActionValidator() == null) {
-      return null;
+    private boolean containValidator(ActionValidator actionValidator) {
+        for (ActionHandlerValidatorInstance validator : actionHandlerValidatorInstances.values()) {
+            if (validator.getActionValidator().getClass().equals(
+                    actionValidator.getClass())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    return actionHandlerValidatorInstance;
-  }
+    private ActionHandlerValidatorInstance createInstance(
+            ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass) {
+
+        ActionHandlerValidatorInstance actionHandlerValidatorInstance = null;
+        ActionValidator actionValidator = findActionValidator(actionHandlerValidatorClass.getActionValidatorClass());
+
+        if (actionValidator == null) {
+            actionValidator = injector.getInstance(actionHandlerValidatorClass.getActionValidatorClass());
+
+            actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(
+                    actionValidator,
+                    injector.getInstance(actionHandlerValidatorClass.getActionHandlerClass()));
+
+            validators.put(actionValidator.getClass(), actionValidator);
+        } else {
+            actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(
+                    actionValidator,
+                    injector.getInstance(actionHandlerValidatorClass.getActionHandlerClass()));
+        }
+
+        if (actionHandlerValidatorInstance.getActionHandler() == null
+                || actionHandlerValidatorInstance.getActionValidator() == null) {
+            return null;
+        }
+
+        return actionHandlerValidatorInstance;
+    }
 }
