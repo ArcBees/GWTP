@@ -34,79 +34,81 @@ import org.springframework.web.context.support.AbstractRefreshableWebApplication
  */
 public class SpringUtils {
 
-  public static <B> B getOrCreate(ApplicationContext applicationContext,
-      Class<B> clazz) throws BeansException {
-    try {
-      return getInstance(applicationContext, clazz);
-    } catch (BeansException ex) {
+    public static <B> B getOrCreate(ApplicationContext applicationContext,
+            Class<B> clazz) throws BeansException {
+        try {
+            return getInstance(applicationContext, clazz);
+        } catch (BeansException ex) {
+        }
+
+        return instantiate(applicationContext, clazz);
     }
 
-    return instantiate(applicationContext, clazz);
-  }
-
-  @SuppressWarnings("unchecked")
-  public static <B> B instantiate(ApplicationContext applicationContext,
-      Class<B> clazz) throws BeansException {
-    DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(
-        applicationContext);
-    return (B) beanFactory.createBean(clazz,
-        AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
-  }
-
-  public static <B> void registerBean(ApplicationContext applicationContext,
-      B instance) throws BeansException {
-
-    if (applicationContext instanceof GenericApplicationContext) {
-      DefaultListableBeanFactory beanFactory = ((GenericApplicationContext) applicationContext).getDefaultListableBeanFactory();
-      beanFactory.registerSingleton(
-          new DefaultBeanNameGenerator().generateBeanName(createBeanDefinition(instance), beanFactory),
-          instance);
-    } else if (applicationContext instanceof AbstractRefreshableWebApplicationContext) {
-        ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableWebApplicationContext) applicationContext).getBeanFactory();
-        beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance)), instance);
-    }
-  }
-
-  public static <B> B getInstance(ApplicationContext applicationContext,
-      Class<B> clazz) throws BeansException {
-    DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(
-        applicationContext);
-    return beanFactory.getBean(clazz);
-  }
-
-  private static <B> RootBeanDefinition createBeanDefinition(B instance) {
-    RootBeanDefinition bd = new RootBeanDefinition(instance.getClass(),
-        AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
-    bd.setScope(BeanDefinition.SCOPE_SINGLETON);
-    return bd;
-  }
-
-  private static String generateName(ConfigurableListableBeanFactory registry,
-      RootBeanDefinition definition) {
-    String generatedBeanName = definition.getBeanClassName();
-    if (generatedBeanName == null) {
-      if (definition.getParentName() != null) {
-        generatedBeanName = definition.getParentName() + "$child";
-      } else if (definition.getFactoryBeanName() != null) {
-        generatedBeanName = definition.getFactoryBeanName() + "$created";
-      }
-    }
-    if (!StringUtils.hasText(generatedBeanName)) {
-      throw new BeanDefinitionStoreException(
-          "Unnamed bean definition specifies neither "
-              + "'class' nor 'parent' nor 'factory-bean' - can't generate bean name");
+    @SuppressWarnings("unchecked")
+    public static <B> B instantiate(ApplicationContext applicationContext,
+            Class<B> clazz) throws BeansException {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(
+                applicationContext);
+        return (B) beanFactory.createBean(clazz,
+                AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
     }
 
-    String id = generatedBeanName;
+    public static <B> void registerBean(ApplicationContext applicationContext,
+            B instance) throws BeansException {
 
-    // Top-level bean: use plain class name.
-    // Increase counter until the id is unique.
-    int counter = -1;
-    while (counter == -1 || (registry.containsSingleton(id))) {
-      counter++;
-      id = generatedBeanName + "#" + counter;
+        if (applicationContext instanceof GenericApplicationContext) {
+            DefaultListableBeanFactory beanFactory = ((GenericApplicationContext) applicationContext)
+                    .getDefaultListableBeanFactory();
+            beanFactory.registerSingleton(
+                    new DefaultBeanNameGenerator().generateBeanName(createBeanDefinition(instance), beanFactory),
+                    instance);
+        } else if (applicationContext instanceof AbstractRefreshableWebApplicationContext) {
+            ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableWebApplicationContext)
+                    applicationContext).getBeanFactory();
+            beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance)), instance);
+        }
     }
 
-    return id;
-  }
+    public static <B> B getInstance(ApplicationContext applicationContext,
+            Class<B> clazz) throws BeansException {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(
+                applicationContext);
+        return beanFactory.getBean(clazz);
+    }
+
+    private static <B> RootBeanDefinition createBeanDefinition(B instance) {
+        RootBeanDefinition bd = new RootBeanDefinition(instance.getClass(),
+                AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
+        bd.setScope(BeanDefinition.SCOPE_SINGLETON);
+        return bd;
+    }
+
+    private static String generateName(ConfigurableListableBeanFactory registry,
+            RootBeanDefinition definition) {
+        String generatedBeanName = definition.getBeanClassName();
+        if (generatedBeanName == null) {
+            if (definition.getParentName() != null) {
+                generatedBeanName = definition.getParentName() + "$child";
+            } else if (definition.getFactoryBeanName() != null) {
+                generatedBeanName = definition.getFactoryBeanName() + "$created";
+            }
+        }
+        if (!StringUtils.hasText(generatedBeanName)) {
+            throw new BeanDefinitionStoreException(
+                    "Unnamed bean definition specifies neither "
+                            + "'class' nor 'parent' nor 'factory-bean' - can't generate bean name");
+        }
+
+        String id = generatedBeanName;
+
+        // Top-level bean: use plain class name.
+        // Increase counter until the id is unique.
+        int counter = -1;
+        while (counter == -1 || (registry.containsSingleton(id))) {
+            counter++;
+            id = generatedBeanName + "#" + counter;
+        }
+
+        return id;
+    }
 }

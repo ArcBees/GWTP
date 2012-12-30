@@ -31,22 +31,23 @@ import com.gwtplatform.mvp.client.ViewImpl;
  */
 public class MainViewTestUtilGwt extends ViewImpl implements MainPresenterTestUtilGwt.MyView {
 
-  /**
-   */
-  public interface Binder extends UiBinder<Widget, MainViewTestUtilGwt> { }
+    /**
+     */
+    public interface Binder extends UiBinder<Widget, MainViewTestUtilGwt> {
+    }
 
-  @UiField
-  HTMLPanel mainSlot;
+    @UiField
+    HTMLPanel mainSlot;
 
-  private final Widget widget;
+    private final Widget widget;
 
-  @Inject
-  public MainViewTestUtilGwt(Binder uiBinder) {
-    widget = uiBinder.createAndBindUi(this);
-  }
+    @Inject
+    public MainViewTestUtilGwt(Binder uiBinder) {
+        widget = uiBinder.createAndBindUi(this);
+    }
 
-  @Override
-  public Widget asWidget() {
-    return widget;
-  }
+    @Override
+    public Widget asWidget() {
+        return widget;
+    }
 }

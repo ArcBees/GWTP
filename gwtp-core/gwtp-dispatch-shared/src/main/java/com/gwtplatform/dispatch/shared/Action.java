@@ -27,43 +27,43 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * action to be secured against such attacks (i.e. it's not meant to be an
  * anonymous action) then you should override {@link #isSecured()} to return
  * {@code true}.
- * <p />
+ * <p/>
  * You can usually inherit from {@link ActionImpl} or
  * {@link UnsecuredActionImpl} instead.
  *
- * @author David Peterson
  * @param <R> The {@link Result} type.
+ * @author David Peterson
  */
 public interface Action<R extends Result> extends IsSerializable {
 
-  /**
-   * The URL of the service used by default.
-   */
-  String DEFAULT_SERVICE_NAME = "dispatch/";
+    /**
+     * The URL of the service used by default.
+     */
+    String DEFAULT_SERVICE_NAME = "dispatch/";
 
-  /**
-   * Access the name of the service, which will be used as the URL path to
-   * access the action.
-   *
-   * @return The service name.
-   */
-  String getServiceName();
+    /**
+     * Access the name of the service, which will be used as the URL path to
+     * access the action.
+     *
+     * @return The service name.
+     */
+    String getServiceName();
 
-  /**
-   * Verifies if the action is secured. Secured actions perform a number of
-   * extra security checks, such as validating the {@link SecurityCookie} to
-   * foil XSRF attacks.
-   * <p />
-   * <b>Important!</b> Make sure your method returns a value that does not
-   * depend on client-side information, otherwise it could be tampered with to
-   * turn a secure action into an insecure one. An example of a bad practice
-   * would be to store a {@code boolean secured} member and return that. Since
-   * this field is serialized, the user could change it on his side. A simple
-   * and good practice is simply to {@code return true;} or
-   * {@code return false;}.
-   *
-   * @return {@code true} if the action should be secured against XSRF attacks,
-   *         {@code false} otherwise.
-   */
-  boolean isSecured();
+    /**
+     * Verifies if the action is secured. Secured actions perform a number of
+     * extra security checks, such as validating the {@link SecurityCookie} to
+     * foil XSRF attacks.
+     * <p/>
+     * <b>Important!</b> Make sure your method returns a value that does not
+     * depend on client-side information, otherwise it could be tampered with to
+     * turn a secure action into an insecure one. An example of a bad practice
+     * would be to store a {@code boolean secured} member and return that. Since
+     * this field is serialized, the user could change it on his side. A simple
+     * and good practice is simply to {@code return true;} or
+     * {@code return false;}.
+     *
+     * @return {@code true} if the action should be secured against XSRF attacks,
+     *         {@code false} otherwise.
+     */
+    boolean isSecured();
 }

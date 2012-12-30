@@ -24,6 +24,6 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Philippe Beaudoin
  */
 public interface LockInteractionHandler extends EventHandler {
-  void onLockInteraction(
-      final LockInteractionEvent lockInteractionEvent);
+    void onLockInteraction(
+            final LockInteractionEvent lockInteractionEvent);
 }

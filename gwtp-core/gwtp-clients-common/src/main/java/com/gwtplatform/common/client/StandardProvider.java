@@ -16,9 +16,9 @@
 
 package com.gwtplatform.common.client;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import javax.inject.Provider;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * An {@link IndirectProvider} that immediately gets the object and invokes the
@@ -27,26 +27,25 @@ import javax.inject.Provider;
  * {@link IndirectProvider}.
  *
  * @param <T> The type of the provided object.
- *
  * @author Philippe Beaudoin
  */
 public final class StandardProvider<T> implements IndirectProvider<T> {
 
-  private final Provider<T> provider;
+    private final Provider<T> provider;
 
-  /**
-   * Creates a {@link IndirectProvider} that directly gets the object and
-   * invokes the callback.
-   *
-   * @param provider The {@link Provider} of the object.
-   */
-  public StandardProvider(Provider<T> provider) {
-    this.provider = provider;
-  }
+    /**
+     * Creates a {@link IndirectProvider} that directly gets the object and
+     * invokes the callback.
+     *
+     * @param provider The {@link Provider} of the object.
+     */
+    public StandardProvider(Provider<T> provider) {
+        this.provider = provider;
+    }
 
-  @Override
-  public void get(AsyncCallback<T> callback) {
-    callback.onSuccess(provider.get());
-  }
+    @Override
+    public void get(AsyncCallback<T> callback) {
+        callback.onSuccess(provider.get());
+    }
 
 }

@@ -21,11 +21,11 @@ import org.mockito.Mockito;
 /**
  * {@link MockFactory} that uses Mockito.
  *
-* @author Christian Goudreau
-*/
+ * @author Christian Goudreau
+ */
 public class MockitoMockFactory implements MockFactory {
-  @Override
-  public <T> T mock(Class<T> classToMock) {
-    return Mockito.mock(classToMock);
-  }
+    @Override
+    public <T> T mock(Class<T> classToMock) {
+        return Mockito.mock(classToMock);
+    }
 }

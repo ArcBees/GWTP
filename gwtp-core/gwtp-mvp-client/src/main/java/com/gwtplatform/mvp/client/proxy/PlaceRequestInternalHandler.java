@@ -24,11 +24,11 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Philippe Beaudoin
  */
 interface PlaceRequestInternalHandler extends EventHandler {
-  /**
-   * Called when something has requested a new place. Should be implemented by
-   * instances which can show the place.
-   *
-   * @param event The event.
-   */
-  void onPlaceRequest(PlaceRequestInternalEvent event);
+    /**
+     * Called when something has requested a new place. Should be implemented by
+     * instances which can show the place.
+     *
+     * @param event The event.
+     */
+    void onPlaceRequest(PlaceRequestInternalEvent event);
 }

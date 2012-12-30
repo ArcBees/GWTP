@@ -25,53 +25,52 @@ import com.gwtplatform.dispatch.shared.Result;
  * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)}) or undone (
  * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}).
  *
- * @author David Peterson
- *
  * @param <A> The action type.
  * @param <R> The result type.
+ * @author David Peterson
  */
 public class ActionResult<A extends Action<R>, R extends Result> {
-  private final A action;
+    private final A action;
 
-  private final boolean executed;
+    private final boolean executed;
 
-  private final R result;
+    private final R result;
 
-  /**
-   * Creates a new action/result pair. The {@code executed} field indicates if
-   * this action was executed via
-   * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
-   * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
-   *
-   * @param action The {@link Action}.
-   * @param result The {@link Result}.
-   * @param executed {@code true} if the action was executed, {@code false} if
-   *          it was undoed.
-   */
-  public ActionResult(A action, R result, boolean executed) {
-    this.action = action;
-    this.result = result;
-    this.executed = executed;
-  }
+    /**
+     * Creates a new action/result pair. The {@code executed} field indicates if
+     * this action was executed via
+     * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
+     * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
+     *
+     * @param action   The {@link Action}.
+     * @param result   The {@link Result}.
+     * @param executed {@code true} if the action was executed, {@code false} if
+     *                 it was undoed.
+     */
+    public ActionResult(A action, R result, boolean executed) {
+        this.action = action;
+        this.result = result;
+        this.executed = executed;
+    }
 
-  public A getAction() {
-    return action;
-  }
+    public A getAction() {
+        return action;
+    }
 
-  public R getResult() {
-    return result;
-  }
+    public R getResult() {
+        return result;
+    }
 
-  /**
-   * Checks wheter this action was executed via
-   * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
-   * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
-   *
-   * @return {@code true} if the action was executed, {@code false} if it was
-   *         undoed.
-   */
-  public boolean isExecuted() {
-    return executed;
-  }
+    /**
+     * Checks wheter this action was executed via
+     * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
+     * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
+     *
+     * @return {@code true} if the action was executed, {@code false} if it was
+     *         undoed.
+     */
+    public boolean isExecuted() {
+        return executed;
+    }
 
 }

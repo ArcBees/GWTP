@@ -16,14 +16,14 @@
 
 package com.gwtplatform.mvp.client;
 
-import static org.junit.Assert.assertFalse;
+import javax.inject.Inject;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.inject.Inject;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Unit tests for {@link HandlerContainerImpl}.
@@ -33,26 +33,27 @@ import javax.inject.Inject;
 @RunWith(JukitoRunner.class)
 public class HandlerContainerImpl2Test {
 
-  /**
-   * Guice test module.
-   */
-  public static class Module extends JukitoModule {
-    @Override
-    protected void configureTest() {
-      bind(AutobindDisable.class).toInstance(new AutobindDisable(true));
+    /**
+     * Guice test module.
+     */
+    public static class Module extends JukitoModule {
+        @Override
+        protected void configureTest() {
+            bind(AutobindDisable.class).toInstance(new AutobindDisable(true));
+        }
     }
-  }
 
-  // SUT
-  @Inject HandlerContainerImpl handlerContainer;
+    // SUT
+    @Inject
+    HandlerContainerImpl handlerContainer;
 
-  @Test
-  public void shouldNotBindDefaultHandlerContainerOnInjection() {
-    // Given
-    // HandlerContainerImpl is injected
+    @Test
+    public void shouldNotBindDefaultHandlerContainerOnInjection() {
+        // Given
+        // HandlerContainerImpl is injected
 
-    // When, Then
-    // the bind method should be injected at creation time
-    assertFalse(handlerContainer.isBound());
-  }
+        // When, Then
+        // the bind method should be injected at creation time
+        assertFalse(handlerContainer.isBound());
+    }
 }

@@ -16,13 +16,13 @@
 
 package com.gwtplatform.mvp.client.annotations;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Bind this annotation to your Google Analytics account number.

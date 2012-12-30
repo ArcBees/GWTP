@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.server;
 
+import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -26,47 +28,47 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * This filter will automatically inject a security cookie inside the request the first time the page is loaded. This
  * security cookie is based on the {@link HttpSession} and will only work if the session is enabled. To setup this
  * filter, add the following line at before any other {@code serve} call in your own
  * {@link com.google.inject.servlet.ServletModule#configureServlets}:
- *
+ * <p/>
  * <pre>
  * filter(&quot;*.jsp&quot;).through(HttpSessionSecurityCookieFilter.class);
  * </pre>
- *
+ * <p/>
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
  *
  * @author Philippe Beaudoin
  */
 public abstract class AbstractHttpSessionSecurityCookieFilter implements Filter {
 
-  private final String securityCookieName;
+    private final String securityCookieName;
 
-  protected AbstractHttpSessionSecurityCookieFilter(String securityCookieName) {
-    this.securityCookieName = securityCookieName;
-  }
-
-  public void destroy() {
-  }
-
-  protected abstract HttpSession getSession();
-
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-    if (request instanceof HttpServletRequest) {
-      HttpServletResponse httpResponse = (HttpServletResponse) response;
-      Cookie securityCookie = new Cookie(securityCookieName, getSession().getId());
-      securityCookie.setMaxAge(-1);
-      securityCookie.setPath("/");
-      httpResponse.addCookie(securityCookie);
+    protected AbstractHttpSessionSecurityCookieFilter(String securityCookieName) {
+        this.securityCookieName = securityCookieName;
     }
-    chain.doFilter(request, response);
-  }
 
-  public void init(FilterConfig filterConfig) throws ServletException {
-  }
+    public void destroy() {
+    }
+
+    protected abstract HttpSession getSession();
+
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+            ServletException {
+
+        if (request instanceof HttpServletRequest) {
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            Cookie securityCookie = new Cookie(securityCookieName, getSession().getId());
+            securityCookie.setMaxAge(-1);
+            securityCookie.setPath("/");
+            httpResponse.addCookie(securityCookie);
+        }
+        chain.doFilter(request, response);
+    }
+
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 }

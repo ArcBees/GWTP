@@ -23,7 +23,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * This event is fired whenever interaction should be locked throughout the application,
  * usually because a navigation operation is taking place and interacting could cause
  * unexpected state switches.
- * <p />
+ * <p/>
  * This event is typically fired by the {@link PlaceManager} whenever a navigation operation
  * starts or stops. It is handled by the default {@link com.gwtplatform.mvp.client.RootPresenter} implementation.
  * Override {@link com.gwtplatform.mvp.client.RootPresenter#lockInteraction(boolean)} to customize the behaviour.
@@ -32,45 +32,45 @@ import com.google.gwt.event.shared.HasHandlers;
  */
 public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
 
-  private static Type<LockInteractionHandler> TYPE;
+    private static Type<LockInteractionHandler> TYPE;
 
-  /**
-   * Fires a {@link LockInteractionEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}
-   * specifying whether interaction should be locked or unlocked.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   * @param lock {@code true} to lock interaction, {@code false} to unlock it.
-   */
-  public static void fire(HasHandlers source, boolean lock) {
-    source.fireEvent(new LockInteractionEvent(lock));
-  }
-
-  public static Type<LockInteractionHandler> getType() {
-    if (TYPE == null) {
-      TYPE = new Type<LockInteractionHandler>();
+    /**
+     * Fires a {@link LockInteractionEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}
+     * specifying whether interaction should be locked or unlocked.
+     *
+     * @param source The source that fires this event ({@link HasHandlers}).
+     * @param lock   {@code true} to lock interaction, {@code false} to unlock it.
+     */
+    public static void fire(HasHandlers source, boolean lock) {
+        source.fireEvent(new LockInteractionEvent(lock));
     }
-    return TYPE;
-  }
 
-  private final boolean lock;
+    public static Type<LockInteractionHandler> getType() {
+        if (TYPE == null) {
+            TYPE = new Type<LockInteractionHandler>();
+        }
+        return TYPE;
+    }
 
-  public LockInteractionEvent(boolean lock) {
-    this.lock = lock;
-  }
+    private final boolean lock;
 
-  @Override
-  public Type<LockInteractionHandler> getAssociatedType() {
-    return getType();
-  }
+    public LockInteractionEvent(boolean lock) {
+        this.lock = lock;
+    }
 
-  public boolean shouldLock() {
-    return lock;
-  }
+    @Override
+    public Type<LockInteractionHandler> getAssociatedType() {
+        return getType();
+    }
 
-  @Override
-  protected void dispatch(LockInteractionHandler handler) {
-    handler.onLockInteraction(this);
-  }
+    public boolean shouldLock() {
+        return lock;
+    }
+
+    @Override
+    protected void dispatch(LockInteractionHandler handler) {
+        handler.onLockInteraction(this);
+    }
 
 }

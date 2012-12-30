@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.typeinfo.JClassType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,57 +23,59 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.gwt.core.ext.typeinfo.JClassType;
+
 /**
  * This class will hold a reference to all type of presenters that can be found in an application to be able to
  * retrieve them by type afterward.
  */
 public class PresenterDefinitions {
-  private final List<JClassType> standardPresenters;
-  private final List<JClassType> codeSplitPresenters;
-  private final Map<String, Set<JClassType>> codeSplitBundlePresenters;
-  private final Set<JClassType> gatekeepers;
+    private final List<JClassType> standardPresenters;
+    private final List<JClassType> codeSplitPresenters;
+    private final Map<String, Set<JClassType>> codeSplitBundlePresenters;
+    private final Set<JClassType> gatekeepers;
 
-  public PresenterDefinitions() {
-    this.standardPresenters = new ArrayList<JClassType>();
-    this.codeSplitPresenters = new ArrayList<JClassType>();
-    this.codeSplitBundlePresenters = new HashMap<String, Set<JClassType>>();
-    this.gatekeepers = new HashSet<JClassType>();
-  }
-
-  public List<JClassType> getStandardPresenters() {
-    return standardPresenters;
-  }
-
-  public List<JClassType> getCodeSplitPresenters() {
-    return codeSplitPresenters;
-  }
-
-  public Map<String, Set<JClassType>> getCodeSplitBundlePresenters() {
-    return codeSplitBundlePresenters;
-  }
-
-  public Set<JClassType> getGatekeepers() {
-    return gatekeepers;
-  }
-
-  public void addStandardPresenter(JClassType presenter) {
-    standardPresenters.add(presenter);
-  }
-
-  public void addCodeSplitPresenter(JClassType presenter) {
-    codeSplitPresenters.add(presenter);
-  }
-
-  public void addCodeSplitBundlePresenter(String bundle, JClassType presenter) {
-    Set<JClassType> presenters = codeSplitBundlePresenters.get(bundle);
-    if (presenters == null) {
-      presenters = new HashSet<JClassType>();
-      codeSplitBundlePresenters.put(bundle, presenters);
+    public PresenterDefinitions() {
+        this.standardPresenters = new ArrayList<JClassType>();
+        this.codeSplitPresenters = new ArrayList<JClassType>();
+        this.codeSplitBundlePresenters = new HashMap<String, Set<JClassType>>();
+        this.gatekeepers = new HashSet<JClassType>();
     }
-    presenters.add(presenter);
-  }
 
-  public void addGatekeeper(JClassType presenter) {
-    gatekeepers.add(presenter);
-  }
+    public List<JClassType> getStandardPresenters() {
+        return standardPresenters;
+    }
+
+    public List<JClassType> getCodeSplitPresenters() {
+        return codeSplitPresenters;
+    }
+
+    public Map<String, Set<JClassType>> getCodeSplitBundlePresenters() {
+        return codeSplitBundlePresenters;
+    }
+
+    public Set<JClassType> getGatekeepers() {
+        return gatekeepers;
+    }
+
+    public void addStandardPresenter(JClassType presenter) {
+        standardPresenters.add(presenter);
+    }
+
+    public void addCodeSplitPresenter(JClassType presenter) {
+        codeSplitPresenters.add(presenter);
+    }
+
+    public void addCodeSplitBundlePresenter(String bundle, JClassType presenter) {
+        Set<JClassType> presenters = codeSplitBundlePresenters.get(bundle);
+        if (presenters == null) {
+            presenters = new HashSet<JClassType>();
+            codeSplitBundlePresenters.put(bundle, presenters);
+        }
+        presenters.add(presenter);
+    }
+
+    public void addGatekeeper(JClassType presenter) {
+        gatekeepers.add(presenter);
+    }
 }

@@ -16,12 +16,12 @@
 
 package com.gwtplatform.mvp.client;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.gwtplatform.mvp.client.gwt.mvp.MvpGwtTestInSuite;
 import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterGwtTestInSuite;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
 
 /**
  * All the GWT test cases of gwtp-mvp-client. Does not extend {@code GWTTestSuite} as it is
@@ -30,10 +30,10 @@ import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterGwtTestInSuite;
  * @author Philippe Beaudoin
  */
 public class MvpGwtTestSuite extends TestCase {
-  public static Test suite() {
-    GWTTestSuite suite = new GWTTestSuite("All the GWT test cases of gwtp-mvp-client.");
-    suite.addTestSuite(ParameterTokenFormatterGwtTestInSuite.class);
-    suite.addTestSuite(MvpGwtTestInSuite.class);
-    return suite;
-  }
+    public static Test suite() {
+        GWTTestSuite suite = new GWTTestSuite("All the GWT test cases of gwtp-mvp-client.");
+        suite.addTestSuite(ParameterTokenFormatterGwtTestInSuite.class);
+        suite.addTestSuite(MvpGwtTestInSuite.class);
+        return suite;
+    }
 }
