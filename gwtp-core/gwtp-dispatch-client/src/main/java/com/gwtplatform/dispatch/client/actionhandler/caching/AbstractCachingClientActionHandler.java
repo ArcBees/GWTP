@@ -16,8 +16,10 @@
 
 package com.gwtplatform.dispatch.client.actionhandler.caching;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
@@ -28,9 +30,6 @@ import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Abstract base class for client-side action handlers with caching support.
@@ -51,135 +50,138 @@ import java.util.HashMap;
  *
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
- *
  * @author Sunny Gupta
  * @author David M. Chandler
  * @author Christian Goudreau
  */
 public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R extends Result>
-    extends AbstractClientActionHandler<A, R> {
+        extends AbstractClientActionHandler<A, R> {
 
-  private final Cache cache;
+    private final Cache cache;
 
-  // Holds callbacks, so that for multiple requests before the first returns (is
-  // served), we save round trips as well
-  private HashMap<A, ArrayList<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = new HashMap<A, ArrayList<CallbackDispatchRequest<R>>>();
+    // Holds callbacks, so that for multiple requests before the first returns (is
+    // served), we save round trips as well
+    private HashMap<A, ArrayList<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = new HashMap<A,
+            ArrayList<CallbackDispatchRequest<R>>>();
 
-  public AbstractCachingClientActionHandler(Class<A> actionType, Cache cache) {
-    super(actionType);
-    this.cache = cache;
-  }
-
-  public DispatchRequest execute(final A action,
-      final AsyncCallback<R> resultCallback, ExecuteCommand<A, R> executeCommand) {
-    // First check if any pending callbacks for this action
-    ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
-
-    if (pendingRequestCallbacks != null) {
-      CallbackDispatchRequest<R> callbackDispatchRequest = new DefaultCallbackDispatchRequest<R>(resultCallback);
-
-      // Add callback to pending list and return
-      pendingRequestCallbacks.add(callbackDispatchRequest);
-
-      return callbackDispatchRequest;
+    public AbstractCachingClientActionHandler(Class<A> actionType, Cache cache) {
+        super(actionType);
+        this.cache = cache;
     }
 
-    // Prefetch to see if result is cached
-    R prefetchResult = prefetch(action);
-    if (prefetchResult != null) {
-      // Return the cached result
-      resultCallback.onSuccess(prefetchResult);
+    public DispatchRequest execute(final A action,
+            final AsyncCallback<R> resultCallback, ExecuteCommand<A, R> executeCommand) {
+        // First check if any pending callbacks for this action
+        ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
 
-      return new CompletedDispatchRequest();
-    } else {
-      // Execute
-      DispatchRequest request = executeCommand.execute(action,
-          new AsyncCallback<R>() {
-            @Override
-            public void onFailure(Throwable caught) {
-              // Call postfetch with null result
-              postfetch(action, null);
-              resultCallback.onFailure(caught);
+        if (pendingRequestCallbacks != null) {
+            CallbackDispatchRequest<R> callbackDispatchRequest = new DefaultCallbackDispatchRequest<R>(resultCallback);
 
-              // Callback onFailure
-              ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.remove(action);
-              for (CallbackDispatchRequest<R> pendingRequestCallback : pendingRequestCallbacks) {
-                if (pendingRequestCallback.isPending()) {
-                  pendingRequestCallback.onFailure(caught);
-                }
-              }
-            }
+            // Add callback to pending list and return
+            pendingRequestCallbacks.add(callbackDispatchRequest);
 
-            @Override
-            public void onSuccess(R result) {
-              // Postfetch
-              postfetch(action, result);
-              resultCallback.onSuccess(result);
+            return callbackDispatchRequest;
+        }
 
-              // Callback onSuccess
-              ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.remove(action);
-              for (CallbackDispatchRequest<R> pendingRequestCallback : pendingRequestCallbacks) {
-                if (pendingRequestCallback.isPending()) {
-                  pendingRequestCallback.onSuccess(result);
-                }
-              }
-            }
-          });
+        // Prefetch to see if result is cached
+        R prefetchResult = prefetch(action);
+        if (prefetchResult != null) {
+            // Return the cached result
+            resultCallback.onSuccess(prefetchResult);
 
-      // Add pending callback
-      ArrayList<CallbackDispatchRequest<R>> resultRequestCallbacks = new ArrayList<CallbackDispatchRequest<R>>();
+            return new CompletedDispatchRequest();
+        } else {
+            // Execute
+            DispatchRequest request = executeCommand.execute(action,
+                    new AsyncCallback<R>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            // Call postfetch with null result
+                            postfetch(action, null);
+                            resultCallback.onFailure(caught);
 
-      CallbackDispatchRequest<R> callbackDispatchRequest = new DelagatingCallbackDispatchRequest<R>(request, resultCallback);
-      resultRequestCallbacks.add(callbackDispatchRequest);
+                            // Callback onFailure
+                            ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap
+                                    .remove(action);
+                            for (CallbackDispatchRequest<R> pendingRequestCallback : pendingRequestCallbacks) {
+                                if (pendingRequestCallback.isPending()) {
+                                    pendingRequestCallback.onFailure(caught);
+                                }
+                            }
+                        }
 
-      pendingRequestCallbackMap.put(action, resultRequestCallbacks);
+                        @Override
+                        public void onSuccess(R result) {
+                            // Postfetch
+                            postfetch(action, result);
+                            resultCallback.onSuccess(result);
 
-      return callbackDispatchRequest;
+                            // Callback onSuccess
+                            ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap
+                                    .remove(action);
+                            for (CallbackDispatchRequest<R> pendingRequestCallback : pendingRequestCallbacks) {
+                                if (pendingRequestCallback.isPending()) {
+                                    pendingRequestCallback.onSuccess(result);
+                                }
+                            }
+                        }
+                    });
+
+            // Add pending callback
+            ArrayList<CallbackDispatchRequest<R>> resultRequestCallbacks = new ArrayList<CallbackDispatchRequest<R>>();
+
+            CallbackDispatchRequest<R> callbackDispatchRequest = new DelagatingCallbackDispatchRequest<R>(request,
+                    resultCallback);
+            resultRequestCallbacks.add(callbackDispatchRequest);
+
+            pendingRequestCallbackMap.put(action, resultRequestCallbacks);
+
+            return callbackDispatchRequest;
+        }
     }
-  };
 
-  @Override
-  public DispatchRequest undo(A action, R result, AsyncCallback<Void> callback,
-      UndoCommand<A, R> undoCommand) {
-    // Remove the cached entry
-    getCache().remove(action);
-    // Undo the previous action
-    return undoCommand.undo(action, result, callback);
-  }
+    @Override
+    public DispatchRequest undo(A action, R result, AsyncCallback<Void> callback,
+            UndoCommand<A, R> undoCommand) {
+        // Remove the cached entry
+        getCache().remove(action);
+        // Undo the previous action
+        return undoCommand.undo(action, result, callback);
+    }
 
-  /**
-   * Override this method to perform an action before the call is sent to the
-   * server. If the call returns a non-{@code null} result then the action is
-   * never executed on the server and the returned value is used. If the call
-   * returns {@code null} then the action is executed on the server.
-   * <p/>
-   * You can use this method to fetch the {@code action} from the cache.
-   *
-   * @param action The action to be prefetched
-   * @return The prefetched result. If not found, return {@code null}.
-   */
-  protected abstract R prefetch(A action);
+    /**
+     * Override this method to perform an action before the call is sent to the
+     * server. If the call returns a non-{@code null} result then the action is
+     * never executed on the server and the returned value is used. If the call
+     * returns {@code null} then the action is executed on the server.
+     * <p/>
+     * You can use this method to fetch the {@code action} from the cache.
+     *
+     * @param action The action to be prefetched
+     * @return The prefetched result. If not found, return {@code null}.
+     */
+    protected abstract R prefetch(A action);
 
-  /**
-   * Override this method to perform an action after the call to the server
-   * returns successfully or not. If the call succeeded, the result will be
-   * passed, if it failed {@code null} will be passed in the {@code result}
-   * parameter.
-   * <p/>
-   * You can use this method to add the result to cache, if it is {@code null}
-   * you should remove the {@code action} from the cache.
-   *
-   * @param action The action that just finished execution on the server.
-   * @param result The result after the server call, or {@code null} if the
-   *          server call failed.
-   */
-  protected abstract void postfetch(A action, R result);
+    /**
+     * Override this method to perform an action after the call to the server
+     * returns successfully or not. If the call succeeded, the result will be
+     * passed, if it failed {@code null} will be passed in the {@code result}
+     * parameter.
+     * <p/>
+     * You can use this method to add the result to cache, if it is {@code null}
+     * you should remove the {@code action} from the cache.
+     *
+     * @param action The action that just finished execution on the server.
+     * @param result The result after the server call, or {@code null} if the
+     *               server call failed.
+     */
+    protected abstract void postfetch(A action, R result);
 
-  /**
-   * @return the cache
-   */
-  protected Cache getCache() {
-    return cache;
-  }
+    /**
+     * @return the cache
+     */
+    protected Cache getCache() {
+        return cache;
+    }
 
 }

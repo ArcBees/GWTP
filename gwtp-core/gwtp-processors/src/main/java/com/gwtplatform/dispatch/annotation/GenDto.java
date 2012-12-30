@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
  * transferring data between the client and the server.
  * <p/>
  * If you type:
- *
+ * <p/>
  * <pre>
  * <code>
  * {@literal}@GenDto
@@ -37,14 +37,14 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- *
+ * <p/>
  * gwt-platform will generate a {@code LineItemDto} class.
  * <p/>
  * {@code LineItemDto} will have fields, getters, and a constructor that takes
  * {@code productKey} and quantity plus equals, hashCode, toString etc,
  * <p/>
  * {@code LineItemDto} could be used when creating an invoice.
- *
+ * <p/>
  * <pre>
  * <code>
  * {@literal}@GenDispatch
@@ -55,7 +55,7 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- *
+ * <p/>
  * The alternative to using Dto classes would be to construct persistable
  * {@code LineItem} objects on the client and send them as part of the gwt-rpc call.
  * Using Dto classes is a better choice because:
@@ -65,13 +65,13 @@ import java.lang.annotation.Target;
  * probably have a price field. The server should ignore the price as it may
  * have been tampered with.</li>
  * </ul>
- *
+ * <p/>
  * <p/>
  * Notes:
  * <p/>
  * There is no naming requirement for your class name. It will be appended with
  * Dto
- *
+ * <p/>
  * <p/>
  *
  * @author Brendan Doherty

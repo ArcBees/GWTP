@@ -30,54 +30,55 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * {@link #onFailure(Throwable)} from being forwarded to the code that requested the
  * action handler be executed/undone.
  *
- * @author Brendan Doherty
- *
  * @param <R> The type of the {@link AsyncCallback}.
+ * @author Brendan Doherty
  */
 
 public class DefaultCallbackDispatchRequest<R> implements CallbackDispatchRequest<R> {
 
-  private boolean pending;
+    private boolean pending;
 
-  private final AsyncCallback<R> callback;
+    private final AsyncCallback<R> callback;
 
-  /**
-   * Construct a {@link DefaultCallbackDispatchRequest}. See the class documentation
-   * for details.
-   *
-   * @param callback The resultCallback parameter passed to
-   * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler#execute ClientActionHandler#execute()}
-   * or the callback parameter passed to
-   * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler#undo ClientActionHandler#undo()}
-   */
-  public DefaultCallbackDispatchRequest(AsyncCallback<R> callback) {
-    this.callback = callback;
-    this.pending = true;
-  }
-
-  @Override
-  public void cancel() {
-    pending = false;
-  }
-
-  @Override
-  public boolean isPending() {
-    return pending;
-  }
-
-  @Override
-  public void onFailure(Throwable caught) {
-    if (pending) {
-      pending = false;
-      callback.onFailure(caught);
+    /**
+     * Construct a {@link DefaultCallbackDispatchRequest}. See the class documentation
+     * for details.
+     *
+     * @param callback The resultCallback parameter passed to
+     *                 {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler#execute
+     *                 ClientActionHandler#execute()}
+     *                 or the callback parameter passed to
+     *                 {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler#undo
+     *                 ClientActionHandler#undo()}
+     */
+    public DefaultCallbackDispatchRequest(AsyncCallback<R> callback) {
+        this.callback = callback;
+        this.pending = true;
     }
-  }
 
-  @Override
-  public void onSuccess(R result) {
-    if (pending) {
-      pending = false;
-      callback.onSuccess(result);
+    @Override
+    public void cancel() {
+        pending = false;
     }
-  }
+
+    @Override
+    public boolean isPending() {
+        return pending;
+    }
+
+    @Override
+    public void onFailure(Throwable caught) {
+        if (pending) {
+            pending = false;
+            callback.onFailure(caught);
+        }
+    }
+
+    @Override
+    public void onSuccess(R result) {
+        if (pending) {
+            pending = false;
+            callback.onSuccess(result);
+        }
+    }
 }

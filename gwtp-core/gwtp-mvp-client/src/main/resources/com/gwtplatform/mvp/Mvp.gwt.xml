@@ -17,33 +17,33 @@
 -->
 
 <module>
-  <!-- Inherit the core Web Toolkit stuff.                        -->
-  <inherits name='com.google.gwt.user.User'/>
-  <inherits name="com.google.gwt.inject.Inject" />
+    <!-- Inherit the core Web Toolkit stuff.                        -->
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.inject.Inject"/>
 
-  <!-- Inherit shared modules -->
-  <inherits name='com.gwtplatform.common.ClientsCommon'/>
+    <!-- Inherit shared modules -->
+    <inherits name='com.gwtplatform.common.ClientsCommon'/>
 
-  <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
-    <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
-  </generate-with>
+    <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
+        <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
+    </generate-with>
 
-  <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
-    <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy" />
-  </generate-with>
+    <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
+        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy"/>
+    </generate-with>
 
-  <!-- Specify the paths for translatable code                    -->
-  <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java" />
+    <!-- Specify the paths for translatable code                    -->
+    <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
 
-  <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation -->
-  <!-- if another value is set, it must point to a valid manual Ginjector class -->
-  <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
-  <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.ClientGinjector"/>
+    <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation -->
+    <!-- if another value is set, it must point to a valid manual Ginjector class -->
+    <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.ClientGinjector"/>
 
-  <!-- comma separated list of gin modules, mandatory when using Ginjector generation -->
-  <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true" />
+    <!-- comma separated list of gin modules, mandatory when using Ginjector generation -->
+    <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
 
-  <!-- optional comma separated list of extension interface to the ginjector -->
-  <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
+    <!-- optional comma separated list of extension interface to the ginjector -->
+    <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
 
 </module>

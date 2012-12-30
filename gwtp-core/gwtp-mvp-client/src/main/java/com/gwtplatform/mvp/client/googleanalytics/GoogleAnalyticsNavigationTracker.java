@@ -31,36 +31,36 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
  * account. To use it, you must bind GoogleAnalytics as eager singleton in your
  * gin module and also bind the annotation {@link GaAccount} to your Google
  * Analytics account number:
- * <p />
+ * <p/>
  * <code>bind(GoogleAnalyticsImpl.class).to(GoogleAnalytics.class).asEagerSingleton();
  * bindConstant().annotatedWith(GaAccount.class).to("UA-12345678-1");</code>
- * <p />
+ * <p/>
  * If you want to log custom events, see {@link GoogleAnalytics}.
  *
  * @author Christian Goudreau
  */
 public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
-  private final GoogleAnalytics analytics;
+    private final GoogleAnalytics analytics;
 
-  @Inject
-  public GoogleAnalyticsNavigationTracker(@GaAccount final String gaAccount,
-      final EventBus eventBus, final GoogleAnalytics analytics) {
-    this.analytics = analytics;
+    @Inject
+    public GoogleAnalyticsNavigationTracker(@GaAccount final String gaAccount,
+            final EventBus eventBus, final GoogleAnalytics analytics) {
+        this.analytics = analytics;
 
-    if (GWT.isScript()) {
-      Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-        @Override
-        public void execute() {
-          analytics.init(gaAccount);
+        if (GWT.isScript()) {
+            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                @Override
+                public void execute() {
+                    analytics.init(gaAccount);
 
-          eventBus.addHandler(NavigationEvent.getType(), GoogleAnalyticsNavigationTracker.this);
+                    eventBus.addHandler(NavigationEvent.getType(), GoogleAnalyticsNavigationTracker.this);
+                }
+            });
         }
-      });
     }
-  }
 
-  @Override
-  public void onNavigation(NavigationEvent navigationEvent) {
-    analytics.trackPageview(navigationEvent.getRequest().getNameToken());
-  }
+    @Override
+    public void onNavigation(NavigationEvent navigationEvent) {
+        analytics.trackPageview(navigationEvent.getRequest().getNameToken());
+    }
 }

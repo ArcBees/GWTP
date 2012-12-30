@@ -22,53 +22,53 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
  * @author Sunny Gupta
  */
 public interface Cache {
-  /**
-   * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
-   * If automatic expiration is used, this entry will be expired
-   * after {@link #getAutoExpireTimeInMs()} milliseconds.
-   * @param key The key for the entry to be cached
-   * @param value The corresponding value
-   */
-  void put(Object key, Object value);
+    /**
+     * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
+     * If automatic expiration is used, this entry will be expired
+     * after {@link #getAutoExpireTimeInMs()} milliseconds.
+     *
+     * @param key   The key for the entry to be cached
+     * @param value The corresponding value
+     */
+    void put(Object key, Object value);
 
-  /*
-   * Returns the auto expiry time in milliseconds.
-   */
-  long getAutoExpireTimeInMs();
+    /*
+     * Returns the auto expiry time in milliseconds.
+     */
+    long getAutoExpireTimeInMs();
 
-  /**
-   * Set the auto expiry time, after which an entry will expire after it is put in cache.
-   *
-   * @param autoExpireTimeInMs The auto expiry time in milliseconds
-   */
-  void setAutoExpireTimeInMs(long autoExpireTimeInMs);
+    /**
+     * Set the auto expiry time, after which an entry will expire after it is put in cache.
+     *
+     * @param autoExpireTimeInMs The auto expiry time in milliseconds
+     */
+    void setAutoExpireTimeInMs(long autoExpireTimeInMs);
 
-  /**
-   * Returns the cached value corresponding to key.
-   *
-   * @param key The key for the cached entry
-   * @return The value corresponding to key
-   */
-  Object get(Object key);
+    /**
+     * Returns the cached value corresponding to key.
+     *
+     * @param key The key for the cached entry
+     * @return The value corresponding to key
+     */
+    Object get(Object key);
 
-  /**
-   * Clears the entire cache.
-   *
-   */
-  void clear();
+    /**
+     * Clears the entire cache.
+     */
+    void clear();
 
-  /**
-   * Removes the entry from the cache.
-   *
-   * @param key The key for the cached entry
-   */
-  void remove(Object key);
+    /**
+     * Removes the entry from the cache.
+     *
+     * @param key The key for the cached entry
+     */
+    void remove(Object key);
 
-  /**
-   * Returns the last update time in milliseconds since January 1, 1970, 00:00:00 GMT for the cached entry.
-   *
-   * @param key The key for which last update time is required
-   * @return The last update time as long value, if the value is cached, otherwise -1
-   */
-  long getLastUpateTime(Object key);
+    /**
+     * Returns the last update time in milliseconds since January 1, 1970, 00:00:00 GMT for the cached entry.
+     *
+     * @param key The key for which last update time is required
+     * @return The last update time as long value, if the value is cached, otherwise -1
+     */
+    long getLastUpateTime(Object key);
 }
