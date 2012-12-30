@@ -172,7 +172,7 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
   }
 
   @Override
-  public final void writeMethods(SourceWriter writer) {
+  public final void writeMethods(SourceWriter writer) throws UnableToCompleteException {
     // Write delayedBind
     writer.println();
     writer.println("@Override");
@@ -192,7 +192,7 @@ public abstract class ProxyOutputterBase implements ProxyOutputter {
 
   abstract void writeSubclassDelayedBind(SourceWriter writer);
 
-  abstract void writeSubclassMethods(SourceWriter writer);
+  abstract void writeSubclassMethods(SourceWriter writer) throws UnableToCompleteException;
 
   /**
    * Writes all the calls to {@code addHandler} needed to register all the

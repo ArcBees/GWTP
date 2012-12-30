@@ -34,7 +34,9 @@ import java.io.PrintWriter;
  * Base generator.
  */
 public abstract class AbstractGenerator extends Generator {
-  protected static final String GIN_MODULE_NAME = "gin.module.name";
+  static final String DEFAULT_PACKAGE = "com.gwtplatform.mvp.client";
+  static final String GIN_GINJECTOR_MODULES = "gin.ginjector.modules";
+  static final String GIN_GINJECTOR_EXTENSION = "gin.ginjector.extensions";
 
   private TreeLogger treeLogger;
   private TypeOracle typeOracle;
@@ -117,21 +119,16 @@ public abstract class AbstractGenerator extends Generator {
     }
   }
 
-  protected ConfigurationProperty findConfigurationProperty(String propertyName) throws UnableToCompleteException {
+  protected ConfigurationProperty findConfigurationProperty(String prop) throws UnableToCompleteException {
     try {
-      return getPropertyOracle().getConfigurationProperty(propertyName);
+      return getPropertyOracle().getConfigurationProperty(prop);
     } catch (BadPropertyValueException e) {
-      getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + propertyName +
-          " property in your module.gwt.xml file.");
+      getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + prop + " property in your module.gwt.xml file.", e);
       throw new UnableToCompleteException();
     }
   }
 
-  protected void closeDefinition(GeneratorContext generatorContext, PrintWriter printWriter,
-      SourceWriter sourceWriter) {
-    sourceWriter.outdent();
-    sourceWriter.println("}");
-
-    generatorContext.commit(getTreeLogger(), printWriter);
+  protected void closeDefinition(SourceWriter sourceWriter) {
+    sourceWriter.commit(getTreeLogger());
   }
 }
