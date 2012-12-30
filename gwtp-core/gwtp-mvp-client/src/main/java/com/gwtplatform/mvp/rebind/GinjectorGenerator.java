@@ -214,7 +214,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     }
 
     private void writePresentersGetter(SourceWriter sourceWriter, PresenterDefinitions presenterDefinitions) {
-        writeGatekeeperSetterFromList(sourceWriter, presenterDefinitions.getGatekeepers());
+        writeGatekeeperGetterFromList(sourceWriter, presenterDefinitions.getGatekeepers());
 
         writePresenterGettersFromList(sourceWriter, presenterDefinitions.getStandardPresenters(),
                 Provider.class.getSimpleName());
@@ -234,7 +234,7 @@ public class GinjectorGenerator extends AbstractGenerator {
         }
     }
 
-    private void writeGatekeeperSetterFromList(SourceWriter sourceWriter, Collection<JClassType> gatekeepers) {
+    private void writeGatekeeperGetterFromList(SourceWriter sourceWriter, Collection<JClassType> gatekeepers) {
         for (JClassType gatekeeper : gatekeepers) {
             String gatekeeperName = gatekeeper.getName();
 
