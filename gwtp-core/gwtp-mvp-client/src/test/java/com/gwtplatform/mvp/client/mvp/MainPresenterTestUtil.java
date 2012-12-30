@@ -16,6 +16,9 @@
 
 package com.gwtplatform.mvp.client.mvp;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -26,9 +29,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 /**
  * This is the test presenter.
  *
@@ -36,33 +36,33 @@ import javax.inject.Named;
  */
 public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyView, MainPresenterTestUtil.MyProxy> {
 
-  @ContentSlot
-  public static final Type<RevealContentHandler<?>> TYPE_SetMainContent = new Type<RevealContentHandler<?>>();
+    @ContentSlot
+    public static final Type<RevealContentHandler<?>> TYPE_SetMainContent = new Type<RevealContentHandler<?>>();
 
-  /**
-   * Presenter's view.
-   */
-  public interface MyView extends View {
-  }
+    /**
+     * Presenter's view.
+     */
+    public interface MyView extends View {
+    }
 
-  /**
-   * Presenter's proxy.
-   */
-  @ProxyStandard
-  public interface MyProxy extends Proxy<MainPresenterTestUtil> {
-  }
+    /**
+     * Presenter's proxy.
+     */
+    @ProxyStandard
+    public interface MyProxy extends Proxy<MainPresenterTestUtil> {
+    }
 
-  private PresenterWidget<?> subPresenter;
+    private PresenterWidget<?> subPresenter;
 
-  @Inject
-  public MainPresenterTestUtil(final EventBus eventBus, final MyView view,
-      final MyProxy proxy, @Named("Sub") PresenterWidget<View> subPresenter) {
-    super(eventBus, view, proxy, RevealType.Root);
-    this.subPresenter = subPresenter;
-  }
+    @Inject
+    public MainPresenterTestUtil(final EventBus eventBus, final MyView view,
+            final MyProxy proxy, @Named("Sub") PresenterWidget<View> subPresenter) {
+        super(eventBus, view, proxy, RevealType.Root);
+        this.subPresenter = subPresenter;
+    }
 
-  public void setSubPresenter() {
-    setInSlot(TYPE_SetMainContent, subPresenter);
-  }
+    public void setSubPresenter() {
+        setInSlot(TYPE_SetMainContent, subPresenter);
+    }
 }
 

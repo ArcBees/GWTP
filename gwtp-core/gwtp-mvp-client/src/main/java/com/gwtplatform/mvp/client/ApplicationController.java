@@ -25,18 +25,19 @@ package com.gwtplatform.mvp.client;
  * }</pre>
  * Multiple modules may be supplied as comma separated list.
  * <p/>
- *
+ * <p/>
  * The final step is to call {@code GWT.create(ApplicationController.class)} inside your entry point and then call
  * {@code applicationController.init()} .
- *
+ * <p/>
  * You can add extension methods to your Ginjector by specifying additional interfaces. This property also
  * accepts a comma separated list.
  * <p/>
  * <pre>{@code
- * <set-configuration-property name="gin.ginjector.extensions" value="com.arcbees.example.client.gin.ClientInjectorAdditional"/>
+ * <set-configuration-property name="gin.ginjector.extensions" value="com.arcbees.example.client.gin
+ * .ClientInjectorAdditional"/>
  * }</pre>
  * <p/>
- *
+ * <p/>
  * In these additional interfaces you may for example add a {@link com.gwtplatform.mvp.client.annotations
  * .DefaultGatekeeper}.
  * <p/>
@@ -48,5 +49,5 @@ package com.gwtplatform.mvp.client;
  * <p/>
  */
 public interface ApplicationController {
-  void init();
+    void init();
 }

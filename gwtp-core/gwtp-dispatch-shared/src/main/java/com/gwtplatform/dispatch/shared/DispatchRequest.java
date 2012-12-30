@@ -23,7 +23,7 @@ package com.gwtplatform.dispatch.shared;
  * @author Christian Goudreau
  */
 public interface DispatchRequest {
-  void cancel();
+    void cancel();
 
-  boolean isPending();
+    boolean isPending();
 }

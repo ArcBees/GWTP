@@ -23,23 +23,23 @@ import com.gwtplatform.dispatch.shared.Result;
  * @author Christian Goudreau
  */
 public interface EagerActionHandlerValidatorRegistry extends
-    ActionHandlerValidatorRegistry {
-  /**
-   * @param <A> Type of associated {@link Action}
-   * @param <R> Type of associated {@link Result}
-   * @param actionClass The {@link Action} class
-   */
-  <A extends Action<R>, R extends Result> void addActionHandlerValidator(
-      Class<A> actionClass,
-      ActionHandlerValidatorInstance actionHandlerValidatorInstance);
+        ActionHandlerValidatorRegistry {
+    /**
+     * @param <A>         Type of associated {@link Action}
+     * @param <R>         Type of associated {@link Result}
+     * @param actionClass The {@link Action} class
+     */
+    <A extends Action<R>, R extends Result> void addActionHandlerValidator(
+            Class<A> actionClass,
+            ActionHandlerValidatorInstance actionHandlerValidatorInstance);
 
-  /**
-   * @param <A> Type of associated {@link Action}
-   * @param <R> Type of associated {@link Result}
-   * @param actionClass The {@link Action} class
-   * @return <code>true</code> if the handler was previously registered and was
-   *         successfully removed.
-   */
-  <A extends Action<R>, R extends Result> boolean removeActionHandlerValidator(
-      Class<A> actionClass);
+    /**
+     * @param <A>         Type of associated {@link Action}
+     * @param <R>         Type of associated {@link Result}
+     * @param actionClass The {@link Action} class
+     * @return <code>true</code> if the handler was previously registered and was
+     *         successfully removed.
+     */
+    <A extends Action<R>, R extends Result> boolean removeActionHandlerValidator(
+            Class<A> actionClass);
 }

@@ -18,7 +18,6 @@ package com.gwtplatform.tester;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.internal.UniqueAnnotations;
-
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
@@ -28,7 +27,7 @@ import com.gwtplatform.dispatch.shared.Result;
 /**
  * Module for use in test cases when creating a guice injector that needs to
  * provide mock handlers.
- *
+ * <p/>
  * Your injector must also have an class that subclasses {@link com.gwtplatform.dispatch.server.guice.HandlerModule}
  * to bind Actions to ActionHandlers and ActionValidators.
  * <p/>
@@ -40,9 +39,9 @@ import com.gwtplatform.dispatch.shared.Result;
  * <li>register mock client-side action handlers with
  * {@link #bindMockClientActionHandler(Class, AbstractClientActionHandler)}.</li>
  * </ul>
- *
+ * <p/>
  * <h3>Unit Testing Example</h3>
- *
+ * <p/>
  * <pre>
  *  // create mock handlers
  *  CreateFooActionHandler mockCreateFooActionHandler =
@@ -102,101 +101,101 @@ import com.gwtplatform.dispatch.shared.Result;
  */
 public abstract class MockHandlerModule extends AbstractModule {
 
-  private static class MockClientActionHandlerMapImpl<A extends Action<R>, R extends Result>
-      implements MockClientActionHandlerMap {
+    private static class MockClientActionHandlerMapImpl<A extends Action<R>, R extends Result>
+            implements MockClientActionHandlerMap {
 
-    private final Class<A> actionClass;
-    private final ClientActionHandler<A, R> clientActionHandler;
+        private final Class<A> actionClass;
+        private final ClientActionHandler<A, R> clientActionHandler;
 
-    public MockClientActionHandlerMapImpl(final Class<A> actionClass,
-        final ClientActionHandler<A, R> clientActionHandler) {
-      this.actionClass = actionClass;
-      this.clientActionHandler = clientActionHandler;
+        public MockClientActionHandlerMapImpl(final Class<A> actionClass,
+                final ClientActionHandler<A, R> clientActionHandler) {
+            this.actionClass = actionClass;
+            this.clientActionHandler = clientActionHandler;
+        }
+
+        @Override
+        public Class<A> getActionClass() {
+            return actionClass;
+        }
+
+        @Override
+        public ClientActionHandler<A, R> getClientActionHandler() {
+            return clientActionHandler;
+        }
     }
 
     @Override
-    public Class<A> getActionClass() {
-      return actionClass;
+    protected void configure() {
+
+        install(new TestDispatchModule());
+
+        configureMockHandlers();
     }
 
-    @Override
-    public ClientActionHandler<A, R> getClientActionHandler() {
-      return clientActionHandler;
+    protected abstract void configureMockHandlers();
+
+    /**
+     * Use bindMockActionHandler instead.
+     */
+    @Deprecated
+    protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockHandler(
+            Class<H> handler, H mockHandler) {
+        bindMockActionHandler(handler, mockHandler);
     }
-  }
 
-  @Override
-  protected void configure() {
+    /**
+     * Registers a mock server-side action handlers.
+     * <p/>
+     * This mock server-side action handler will be executed when the class under
+     * test calls {@link com.gwtplatform.dispatch.shared.DispatchAsync#execute
+     * DispatchAsync#execute()} or
+     * {@link com.gwtplatform.dispatch.shared.DispatchAsync#undo
+     * DispatchAsync#undo()}.
+     *
+     * @param <A>          Type of {@link Action} that will be executed by mock handler
+     * @param <R>          Type of {@link Result} that will be returned by mock handler
+     * @param <H>          Type of the mock handler that extends
+     *                     {@link ActionHandler}
+     * @param handlerClass The type of the mock server-side handler
+     * @param mockHandler  Instance of the {@link ActionHandler} to execute
+     *                     actions of type {@literal <A>}
+     */
+    protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockActionHandler(
+            Class<H> handlerClass, H mockHandler) {
+        bind(handlerClass).toProvider(new MockProvider<H>(mockHandler));
+    }
 
-    install(new TestDispatchModule());
-
-    configureMockHandlers();
-  }
-
-  protected abstract void configureMockHandlers();
-
-  /**
-   * Use bindMockActionHandler instead.
-   */
-  @Deprecated
-  protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockHandler(
-      Class<H> handler, H mockHandler) {
-    bindMockActionHandler(handler, mockHandler);
-  }
-
-  /**
-   * Registers a mock server-side action handlers.
-   * <p/>
-   * This mock server-side action handler will be executed when the class under
-   * test calls {@link com.gwtplatform.dispatch.shared.DispatchAsync#execute
-   * DispatchAsync#execute()} or
-   * {@link com.gwtplatform.dispatch.shared.DispatchAsync#undo
-   * DispatchAsync#undo()}.
-   *
-   * @param <A> Type of {@link Action} that will be executed by mock handler
-   * @param <R> Type of {@link Result} that will be returned by mock handler
-   * @param <H> Type of the mock handler that extends
-   *          {@link ActionHandler}
-   * @param handlerClass The type of the mock server-side handler
-   * @param mockHandler Instance of the {@link ActionHandler} to execute
-   *          actions of type {@literal <A>}
-   *
-   */
-  protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockActionHandler(
-      Class<H> handlerClass, H mockHandler) {
-    bind(handlerClass).toProvider(new MockProvider<H>(mockHandler));
-  }
-
-  /**
-   * Registers a mock client-side action handlers.
-   * <p/>
-   * This mock client-side action handler will be executed when the class under
-   * test calls {@link com.gwtplatform.dispatch.shared.DispatchAsync#execute
-   * DispatchAsync#execute()} or
-   * {@link com.gwtplatform.dispatch.shared.DispatchAsync#undo
-   * DispatchAsync#undo()}.
-   * <p/>
-   *
-   * If both mock client and mock server action handlers have been registered,
-   * the server side action handler will only be called if the mock client side
-   * action handler calls
-   * {@link com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand#execute
-   * ExecuteCommand#execute()} or
-   * {@link com.gwtplatform.dispatch.client.actionhandler.UndoCommand#undo
-   * UndoCommand#undo()}
-   *
-   * @param <A> Type of {@link Action}
-   * @param <R> Type of {@link Result}
-   * @param <H> Type of {@link AbstractClientActionHandler}
-   * @param actionClass Implementation of {@link ActionHandler} to link
-   *          and bind
-   * @param mockHandler Instance of the {@link ActionHandler} to execute
-   *          actions of type {@literal <A>}
-   */
-  protected <A extends Action<R>, R extends Result, H extends AbstractClientActionHandler<A, R>> void bindMockClientActionHandler(
-      Class<A> actionClass, H mockHandler) {
-    bind(MockClientActionHandlerMap.class).annotatedWith(
-        UniqueAnnotations.create()).toInstance(
-        new MockClientActionHandlerMapImpl<A, R>(actionClass, mockHandler));
-  }
+    /**
+     * Registers a mock client-side action handlers.
+     * <p/>
+     * This mock client-side action handler will be executed when the class under
+     * test calls {@link com.gwtplatform.dispatch.shared.DispatchAsync#execute
+     * DispatchAsync#execute()} or
+     * {@link com.gwtplatform.dispatch.shared.DispatchAsync#undo
+     * DispatchAsync#undo()}.
+     * <p/>
+     * <p/>
+     * If both mock client and mock server action handlers have been registered,
+     * the server side action handler will only be called if the mock client side
+     * action handler calls
+     * {@link com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand#execute
+     * ExecuteCommand#execute()} or
+     * {@link com.gwtplatform.dispatch.client.actionhandler.UndoCommand#undo
+     * UndoCommand#undo()}
+     *
+     * @param <A>         Type of {@link Action}
+     * @param <R>         Type of {@link Result}
+     * @param <H>         Type of {@link AbstractClientActionHandler}
+     * @param actionClass Implementation of {@link ActionHandler} to link
+     *                    and bind
+     * @param mockHandler Instance of the {@link ActionHandler} to execute
+     *                    actions of type {@literal <A>}
+     */
+    protected <A extends Action<R>, R extends Result, H extends AbstractClientActionHandler<A,
+            R>> void bindMockClientActionHandler(
+            Class<A> actionClass, H mockHandler) {
+        bind(MockClientActionHandlerMap.class).annotatedWith(
+                UniqueAnnotations.create()).toInstance(
+                new MockClientActionHandlerMapImpl<A, R>(actionClass, mockHandler));
+    }
 }

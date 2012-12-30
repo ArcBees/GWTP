@@ -26,14 +26,14 @@ import com.google.gwt.event.shared.EventHandler;
  */
 public interface RevealRootContentHandler extends EventHandler {
 
-  /**
-   * Called whenever a presenter wants to sets itself as the root content of the
-   * application, that is, within GWT's
-   * {@link com.google.gwt.user.client.ui.RootPanel}.
-   *
-   * @param event The event containing the presenter that wants to bet set as
-   *          root content.
-   */
-  void onRevealRootContent(RevealRootContentEvent event);
+    /**
+     * Called whenever a presenter wants to sets itself as the root content of the
+     * application, that is, within GWT's
+     * {@link com.google.gwt.user.client.ui.RootPanel}.
+     *
+     * @param event The event containing the presenter that wants to bet set as
+     *              root content.
+     */
+    void onRevealRootContent(RevealRootContentEvent event);
 
 }

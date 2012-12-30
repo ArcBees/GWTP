@@ -30,13 +30,13 @@ import com.gwtplatform.dispatch.shared.Result;
 
 public interface ClientActionHandlerRegistry {
 
-  /**
-   * Gets the client-side action handler that supports the specific action.
-   *
-   * @return The the client-side action handler , or {@code null} if no
-   *         appropriate client-side action handler could be found.
-   */
-  <A extends Action<R>, R extends Result> IndirectProvider<ClientActionHandler<?, ?>> find(
-      Class<A> actionClass);
+    /**
+     * Gets the client-side action handler that supports the specific action.
+     *
+     * @return The the client-side action handler , or {@code null} if no
+     *         appropriate client-side action handler could be found.
+     */
+    <A extends Action<R>, R extends Result> IndirectProvider<ClientActionHandler<?, ?>> find(
+            Class<A> actionClass);
 
 }

@@ -21,12 +21,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.gwtplatform.dispatch.server.ActionTestBase;
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.ServiceException;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * @author Peter Simun
@@ -35,11 +35,11 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = ActionModule.class)
 public class ActionSpringTest extends ActionTestBase {
 
-  @Autowired
-  private Dispatch dispatchService;
+    @Autowired
+    private Dispatch dispatchService;
 
-  @Test
-  public void testAction() throws ActionException, ServiceException {
-    super.testAction(dispatchService);
-  }
+    @Test
+    public void testAction() throws ActionException, ServiceException {
+        super.testAction(dispatchService);
+    }
 }

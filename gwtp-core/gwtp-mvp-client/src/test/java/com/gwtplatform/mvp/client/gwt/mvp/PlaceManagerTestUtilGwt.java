@@ -16,29 +16,29 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
+import javax.inject.Inject;
+
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
-import javax.inject.Inject;
-
 /**
  * @author Philippe Beaudoin
  */
 public class PlaceManagerTestUtilGwt extends PlaceManagerImpl {
-  private final PlaceRequest defaultPlaceRequest;
+    private final PlaceRequest defaultPlaceRequest;
 
-  @Inject
-  public PlaceManagerTestUtilGwt(final EventBus eventBus,
-      final TokenFormatter tokenFormatter) {
-    super(eventBus, tokenFormatter);
+    @Inject
+    public PlaceManagerTestUtilGwt(final EventBus eventBus,
+            final TokenFormatter tokenFormatter) {
+        super(eventBus, tokenFormatter);
 
-    this.defaultPlaceRequest = new PlaceRequest("home");
-  }
+        this.defaultPlaceRequest = new PlaceRequest("home");
+    }
 
-  @Override
-  public void revealDefaultPlace() {
-    revealPlace(defaultPlaceRequest);
-  }
+    @Override
+    public void revealDefaultPlace() {
+        revealPlace(defaultPlaceRequest);
+    }
 }

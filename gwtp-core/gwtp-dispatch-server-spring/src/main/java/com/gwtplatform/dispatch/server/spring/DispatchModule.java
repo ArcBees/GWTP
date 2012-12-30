@@ -16,70 +16,72 @@
 
 package com.gwtplatform.dispatch.server.spring;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker;
 import com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl;
 import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-
-import java.util.List;
 
 /**
  * @author Peter Simun
  */
 public class DispatchModule {
 
-  private final Class<? extends Dispatch> dispatchClass;
-  private final Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass;
+    private final Class<? extends Dispatch> dispatchClass;
+    private final Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass;
 
-  @Autowired
-  private ApplicationContext context;
+    @Autowired
+    private ApplicationContext context;
 
-  @Autowired
-  private List<HandlerModule> handlerModules;
+    @Autowired
+    private List<HandlerModule> handlerModules;
 
-  public DispatchModule() {
-    this(DispatchImpl.class, LazyActionHandlerValidatorRegistryImpl.class);
-  }
-
-  public DispatchModule(Class<? extends Dispatch> dispatchClass) {
-    this(dispatchClass, LazyActionHandlerValidatorRegistryImpl.class);
-  }
-
-  public DispatchModule(Class<? extends Dispatch> dispatchClass,
-                        Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
-    this.dispatchClass = dispatchClass;
-    this.lazyActionHandlerValidatorRegistryClass = lazyActionHandlerValidatorRegistryClass;
-  }
-
-  @Autowired
-  public void setHandlerModules(List<HandlerModule> handlerModules) {
-    this.handlerModules = handlerModules;
-  }
-
-  @Bean
-  public ActionHandlerValidatorRegistry getActionHandlerValidatorRegistry() {
-    for (HandlerModule handlerModule : handlerModules) {
-      handlerModule.configureHandlers();
+    public DispatchModule() {
+        this(DispatchImpl.class, LazyActionHandlerValidatorRegistryImpl.class);
     }
 
-    ActionHandlerValidatorRegistry instance = SpringUtils.getOrCreate(context, lazyActionHandlerValidatorRegistryClass);
-
-    // TODO check this out
-    if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass)) {
-      ActionHandlerValidatorLinker.linkValidators(context, instance);
+    public DispatchModule(Class<? extends Dispatch> dispatchClass) {
+        this(dispatchClass, LazyActionHandlerValidatorRegistryImpl.class);
     }
 
-    return instance;
-  }
+    public DispatchModule(Class<? extends Dispatch> dispatchClass,
+            Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
+        this.dispatchClass = dispatchClass;
+        this.lazyActionHandlerValidatorRegistryClass = lazyActionHandlerValidatorRegistryClass;
+    }
 
-  @Bean
-  public Dispatch getDispatch() {
-    Dispatch instance = SpringUtils.getOrCreate(context, dispatchClass);
-    return instance;
-  }
+    @Autowired
+    public void setHandlerModules(List<HandlerModule> handlerModules) {
+        this.handlerModules = handlerModules;
+    }
+
+    @Bean
+    public ActionHandlerValidatorRegistry getActionHandlerValidatorRegistry() {
+        for (HandlerModule handlerModule : handlerModules) {
+            handlerModule.configureHandlers();
+        }
+
+        ActionHandlerValidatorRegistry instance = SpringUtils.getOrCreate(context,
+                lazyActionHandlerValidatorRegistryClass);
+
+        // TODO check this out
+        if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(lazyActionHandlerValidatorRegistryClass)) {
+            ActionHandlerValidatorLinker.linkValidators(context, instance);
+        }
+
+        return instance;
+    }
+
+    @Bean
+    public Dispatch getDispatch() {
+        Dispatch instance = SpringUtils.getOrCreate(context, dispatchClass);
+        return instance;
+    }
 }
