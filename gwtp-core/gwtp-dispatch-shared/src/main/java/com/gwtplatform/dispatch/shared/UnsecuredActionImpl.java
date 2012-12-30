@@ -21,19 +21,18 @@ package com.gwtplatform.dispatch.shared;
  * Actions inheriting from this are <b>not</b> secured against XSRF attacks, and
  * they will work even if you do not configure a {@link SecurityCookie}.
  *
- * @author Philippe Beaudoin
- *
  * @param <R> The {@link Result} type.
+ * @author Philippe Beaudoin
  */
 public class UnsecuredActionImpl<R extends Result> implements Action<R> {
 
-  @Override
-  public String getServiceName() {
-    return DEFAULT_SERVICE_NAME;
-  }
+    @Override
+    public String getServiceName() {
+        return DEFAULT_SERVICE_NAME;
+    }
 
-  @Override
-  public boolean isSecured() {
-    return false;
-  }
+    @Override
+    public boolean isSecured() {
+        return false;
+    }
 }

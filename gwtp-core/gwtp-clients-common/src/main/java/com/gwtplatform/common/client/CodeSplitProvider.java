@@ -26,26 +26,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * {@link IndirectProvider}.
  *
  * @param <T> The type of the provided object.
- *
  * @author Philippe Beaudoin
  */
 public final class CodeSplitProvider<T> implements IndirectProvider<T> {
 
-  private final AsyncProvider<T> provider;
+    private final AsyncProvider<T> provider;
 
-  /**
-   * Construct an {@link IndirectProvider} that gets the object using code
-   * splitting and invokes the callback once the code is loaded.
-   *
-   * @param provider The {@link AsyncProvider} providing the object.
-   */
-  public CodeSplitProvider(AsyncProvider<T> provider) {
-    this.provider = provider;
-  }
+    /**
+     * Construct an {@link IndirectProvider} that gets the object using code
+     * splitting and invokes the callback once the code is loaded.
+     *
+     * @param provider The {@link AsyncProvider} providing the object.
+     */
+    public CodeSplitProvider(AsyncProvider<T> provider) {
+        this.provider = provider;
+    }
 
-  @Override
-  public void get(AsyncCallback<T> callback) {
-    provider.get(callback);
-  }
+    @Override
+    public void get(AsyncCallback<T> callback) {
+        provider.get(callback);
+    }
 
 }

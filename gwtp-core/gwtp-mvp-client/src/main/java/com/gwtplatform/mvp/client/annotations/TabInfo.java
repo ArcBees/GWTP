@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
 /**
  * Annotation used to specify various information on a tab. The {@link #container}
  * parameter is mandatory. This annotation can be used in one of three ways:
- * <p />
+ * <p/>
  * <b>1) Annotating the proxy</b><br />
  * You can directly annotate your proxy with it, in which case the {@link #label}
  * parameter must be specified. For example:
@@ -46,12 +46,12 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *    nameToken = "SETTINGS-USER")
  * public interface MyProxy extends TabContentProxy&lt;SettingsTabStripPresenter&gt; { }
  * </pre>
- * <p />
+ * <p/>
  * <b>2) Annotating a static method returning {@code String}</b><br />
  * You can annotate a static method returning a {@code String}, in which case you must
  * not specify the {@link #label}. Again, specify the {@link #nameToken} parameter only
  * if your presenter is not a place.
- * <p />
+ * <p/>
  * The method you annotate can optionally accept exactly 1 parameter having the type
  * of your custom {@link com.google.gwt.inject.client.Ginjector}. Here's an example of
  * this usage:
@@ -67,17 +67,17 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *   return gingector.getTranslations().homePageLabel();
  * }
  * </pre>
- * <p />
+ * <p/>
  * <b>3) Annotating a static method returning
  * {@code TabData}</b><br />
  * You can annotate a static method returning a {@link com.gwtplatform.mvp.client.TabData},
  * in which case you must not specify either the {@link #label} nor the {@link #priority}.
  * Again, specify the {@link #nameToken} parameter only if your presenter is not a place.
- * <p />
+ * <p/>
  * The method you annotate can optionally accept parameters having either the type
  * of your custom {@link com.google.gwt.inject.client.Ginjector} or any type that is provided by
  * the ginjector. Here are two examples of this usage:
- *
+ * <p/>
  * <pre>
  * {@code @}ProxyCodeSplit
  * public interface MyProxy extends TabContentProxy&lt;SettingsTabStripPresenter&gt; { }
@@ -90,7 +90,7 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *   return ginjector.getTabDataFactory().createUserTabData();
  * }
  * </pre>
- *
+ * <p/>
  * <pre>
  * {@code @}TabInfo(container = ApplicationPresenter.class)
  * static TabData getTabData(Messages msgs, IsAdminGateKeeper keeper) {
@@ -103,40 +103,40 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface TabInfo {
 
-  /**
-   * This parameter indicates the presenter into which this tab will be
-   * displayed. Typically, the container will contain a tab strip and
-   * this tab will be displayed in it.
-   *
-   * @return The container presenter.
-   */
-  Class<? extends TabContainerPresenter<?, ?>> container();
+    /**
+     * This parameter indicates the presenter into which this tab will be
+     * displayed. Typically, the container will contain a tab strip and
+     * this tab will be displayed in it.
+     *
+     * @return The container presenter.
+     */
+    Class<? extends TabContainerPresenter<?, ?>> container();
 
-  /**
-   * A static string corresponding to the label to display on the tab.
-   * For more flexibility, see other ways to use the {@link TabInfo}
-   * annotation.
-   *
-   * @return The label.
-   */
-  String label() default "";
+    /**
+     * A static string corresponding to the label to display on the tab.
+     * For more flexibility, see other ways to use the {@link TabInfo}
+     * annotation.
+     *
+     * @return The label.
+     */
+    String label() default "";
 
-  /**
-   * The priority is a <b>non-negative</b> integer that controls the order
-   * in which tabs are displayed. For more information see
-   * {@link com.gwtplatform.mvp.client.TabData#getPriority()}.
-   *
-   * @return The priority, or a negative integer if not set.
-   */
-  int priority() default -1;
+    /**
+     * The priority is a <b>non-negative</b> integer that controls the order
+     * in which tabs are displayed. For more information see
+     * {@link com.gwtplatform.mvp.client.TabData#getPriority()}.
+     *
+     * @return The priority, or a negative integer if not set.
+     */
+    int priority() default -1;
 
-  /**
-   * The name token indicates which place should be visited when you click
-   * on this tab. You should only specify this if your presenter is not
-   * a place. For example, if it is a tab panel meant to be contained in
-   * another tab panel.
-   *
-   * @return The name token.
-   */
-  String nameToken() default "";
+    /**
+     * The name token indicates which place should be visited when you click
+     * on this tab. You should only specify this if your presenter is not
+     * a place. For example, if it is a tab panel meant to be contained in
+     * another tab panel.
+     *
+     * @return The name token.
+     */
+    String nameToken() default "";
 }

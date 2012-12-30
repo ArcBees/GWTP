@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.server.guice;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
-
 import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.RequestProvider;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
@@ -32,8 +31,8 @@ import com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider;
  * {@link ActionHandlerValidatorRegistry} interfaces. Also every
  * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler} and
  * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator ActionValidator} will be loaded lazily.
- *
- *
+ * <p/>
+ * <p/>
  * If you want to override the defaults ({@link DispatchImpl},
  * {@link LazyActionHandlerValidatorRegistryImpl} pass the override values into
  * the constructor for this module and ensure it is installed <b>before</b> any
@@ -43,101 +42,101 @@ import com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider;
  * @author David Peterson
  */
 public class DispatchModule extends AbstractModule {
-  private Class<? extends Dispatch> dispatchClass;
-  private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
-  private Class<? extends RequestProvider> requestProviderClass;
+    private Class<? extends Dispatch> dispatchClass;
+    private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
+    private Class<? extends RequestProvider> requestProviderClass;
 
-  /**
-   * A DispatchModule builder.
-   *
-   * @author Brendan Doherty
-   *
-   */
-  public static class Builder {
-    private Class<? extends Dispatch> dispatchClass = DispatchImpl.class;
-    private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass = LazyActionHandlerValidatorRegistryImpl.class;
-    private Class<? extends RequestProvider> requestProviderClass = DefaultRequestProvider.class;
+    /**
+     * A DispatchModule builder.
+     *
+     * @author Brendan Doherty
+     */
+    public static class Builder {
+        private Class<? extends Dispatch> dispatchClass = DispatchImpl.class;
+        private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass =
+                LazyActionHandlerValidatorRegistryImpl.class;
+        private Class<? extends RequestProvider> requestProviderClass = DefaultRequestProvider.class;
 
-    public Builder() {
+        public Builder() {
+        }
+
+        public Builder dispatch(Class<? extends Dispatch> dispatchClass) {
+            this.dispatchClass = dispatchClass;
+            return this;
+        }
+
+        public Builder actionHandlerValidatorRegistry(
+                Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass) {
+            this.actionHandlerValidatorRegistryClass = actionHandlerValidatorRegistryClass;
+            return this;
+        }
+
+        public Builder requestProvider(
+                Class<? extends RequestProvider> requestProviderClass) {
+            this.requestProviderClass = requestProviderClass;
+            return this;
+        }
+
+        public DispatchModule build() {
+            return new DispatchModule(this);
+        }
     }
 
-    public Builder dispatch(Class<? extends Dispatch> dispatchClass) {
-      this.dispatchClass = dispatchClass;
-      return this;
+    public DispatchModule() {
+        this(new Builder());
     }
 
-    public Builder actionHandlerValidatorRegistry(
-        Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass) {
-      this.actionHandlerValidatorRegistryClass = actionHandlerValidatorRegistryClass;
-      return this;
+    private DispatchModule(Builder builder) {
+        this.dispatchClass = builder.dispatchClass;
+        this.actionHandlerValidatorRegistryClass = builder.actionHandlerValidatorRegistryClass;
+        this.requestProviderClass = builder.requestProviderClass;
     }
 
-    public Builder requestProvider(
-        Class<? extends RequestProvider> requestProviderClass) {
-      this.requestProviderClass = requestProviderClass;
-      return this;
+    @Deprecated
+    // FIXME: Remove 0.6
+    public DispatchModule(Class<? extends Dispatch> dispatchClass) {
+        this((new Builder()).dispatch(dispatchClass));
     }
 
-    public DispatchModule build() {
-      return new DispatchModule(this);
+    @Deprecated
+    // FIXME: Remove 0.6
+    public DispatchModule(
+            Class<? extends Dispatch> dispatchClass,
+            Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
+        this(
+                (new Builder()).dispatch(dispatchClass).actionHandlerValidatorRegistry(
+                        lazyActionHandlerValidatorRegistryClass));
     }
-  }
 
-  public DispatchModule() {
-    this(new Builder());
-  }
-
-  private DispatchModule(Builder builder) {
-    this.dispatchClass = builder.dispatchClass;
-    this.actionHandlerValidatorRegistryClass = builder.actionHandlerValidatorRegistryClass;
-    this.requestProviderClass = builder.requestProviderClass;
-  }
-
-  @Deprecated
-  // FIXME: Remove 0.6
-  public DispatchModule(Class<? extends Dispatch> dispatchClass) {
-    this((new Builder()).dispatch(dispatchClass));
-  }
-
-  @Deprecated
-  // FIXME: Remove 0.6
-  public DispatchModule(
-      Class<? extends Dispatch> dispatchClass,
-      Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
-    this(
-        (new Builder()).dispatch(dispatchClass).actionHandlerValidatorRegistry(
-            lazyActionHandlerValidatorRegistryClass));
-  }
-
-  /**
-   * Override so that only one instance of this class will ever be installed in
-   * an {@link com.google.inject.Injector}.
-   */
-  @Override
-  public boolean equals(Object obj) {
-    return obj instanceof DispatchModule;
-  }
-
-  /**
-   * Override so that only one instance of this class will ever be installed in
-   * an {@link com.google.inject.Injector}.
-   */
-  @Override
-  public int hashCode() {
-    return DispatchModule.class.hashCode();
-  }
-
-  @Override
-  protected final void configure() {
-    bind(ActionHandlerValidatorRegistry.class).to(
-        actionHandlerValidatorRegistryClass).in(Singleton.class);
-    bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
-    bind(RequestProvider.class).to(requestProviderClass).in(Singleton.class);
-
-    // This will bind registered validators and handlers to the registry lazily.
-    if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(actionHandlerValidatorRegistryClass)) {
-      requestStaticInjection(ActionHandlerValidatorLinker.class);
+    /**
+     * Override so that only one instance of this class will ever be installed in
+     * an {@link com.google.inject.Injector}.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DispatchModule;
     }
-  }
+
+    /**
+     * Override so that only one instance of this class will ever be installed in
+     * an {@link com.google.inject.Injector}.
+     */
+    @Override
+    public int hashCode() {
+        return DispatchModule.class.hashCode();
+    }
+
+    @Override
+    protected final void configure() {
+        bind(ActionHandlerValidatorRegistry.class).to(
+                actionHandlerValidatorRegistryClass).in(Singleton.class);
+        bind(Dispatch.class).to(dispatchClass).in(Singleton.class);
+        bind(RequestProvider.class).to(requestProviderClass).in(Singleton.class);
+
+        // This will bind registered validators and handlers to the registry lazily.
+        if (LazyActionHandlerValidatorRegistry.class.isAssignableFrom(actionHandlerValidatorRegistryClass)) {
+            requestStaticInjection(ActionHandlerValidatorLinker.class);
+        }
+    }
 
 }

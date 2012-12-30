@@ -24,18 +24,18 @@ import javax.inject.Inject;
  * @author beaudoin
  */
 public class InstantiationCounterTestUtilGwt {
-  private static int counter;
+    private static int counter;
 
-  public static void resetCounter() {
-    counter = 0;
-  }
+    public static void resetCounter() {
+        counter = 0;
+    }
 
-  public static int getCounter() {
-    return counter;
-  }
+    public static int getCounter() {
+        return counter;
+    }
 
-  @Inject
-  public InstantiationCounterTestUtilGwt() {
-    counter++;
-  }
+    @Inject
+    public InstantiationCounterTestUtilGwt() {
+        counter++;
+    }
 }

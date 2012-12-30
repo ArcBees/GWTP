@@ -14,12 +14,12 @@
 
 <!-- GWT UI Binder support.                                                 -->
 <module>
-  <inherits name="com.google.gwt.resources.Resources" />
-  
-  <source path="client"/>
-  <source path="resources"/>
-  
-  <generate-with class="com.google.gwt.uibinder.rebind.GinUiBinderGenerator">
-    <when-type-assignable class="com.google.gwt.uibinder.client.UiBinder"/>
-  </generate-with>
+    <inherits name="com.google.gwt.resources.Resources"/>
+
+    <source path="client"/>
+    <source path="resources"/>
+
+    <generate-with class="com.google.gwt.uibinder.rebind.GinUiBinderGenerator">
+        <when-type-assignable class="com.google.gwt.uibinder.client.UiBinder"/>
+    </generate-with>
 </module>

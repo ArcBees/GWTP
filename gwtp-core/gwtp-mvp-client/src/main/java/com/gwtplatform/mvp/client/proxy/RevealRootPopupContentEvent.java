@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
@@ -33,6 +32,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
  *
  * @author Philippe Beaudoin
  */
+
 /**
  * Use this type of event to reveal popup content that should get added at the
  * root of the presenter hierarchy.
@@ -40,44 +40,44 @@ import com.gwtplatform.mvp.client.PresenterWidget;
  * @author Philippe Beaudoin
  */
 public final class RevealRootPopupContentEvent extends
-    GwtEvent<RevealRootPopupContentHandler> {
+        GwtEvent<RevealRootPopupContentHandler> {
 
-  private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
+    private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
 
-  /**
-   * Fires a {@link RevealRootPopupContentEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   * @param content The {@link PresenterWidget} with a {@link PopupView} that wants to set
-   *                itself as root content.
-   */
-  public static void fire(final HasHandlers source, final PresenterWidget<? extends PopupView> content) {
-    source.fireEvent(new RevealRootPopupContentEvent(content));
-  }
+    /**
+     * Fires a {@link RevealRootPopupContentEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source  The source that fires this event ({@link HasHandlers}).
+     * @param content The {@link PresenterWidget} with a {@link PopupView} that wants to set
+     *                itself as root content.
+     */
+    public static void fire(final HasHandlers source, final PresenterWidget<? extends PopupView> content) {
+        source.fireEvent(new RevealRootPopupContentEvent(content));
+    }
 
-  public static Type<RevealRootPopupContentHandler> getType() {
-    return TYPE;
-  }
+    public static Type<RevealRootPopupContentHandler> getType() {
+        return TYPE;
+    }
 
-  private final PresenterWidget<? extends PopupView> content;
+    private final PresenterWidget<? extends PopupView> content;
 
-  public RevealRootPopupContentEvent(PresenterWidget<? extends PopupView> content) {
-    this.content = content;
-  }
+    public RevealRootPopupContentEvent(PresenterWidget<? extends PopupView> content) {
+        this.content = content;
+    }
 
-  @Override
-  public Type<RevealRootPopupContentHandler> getAssociatedType() {
-    return getType();
-  }
+    @Override
+    public Type<RevealRootPopupContentHandler> getAssociatedType() {
+        return getType();
+    }
 
-  public PresenterWidget<? extends PopupView> getContent() {
-    return content;
-  }
+    public PresenterWidget<? extends PopupView> getContent() {
+        return content;
+    }
 
-  @Override
-  protected void dispatch(RevealRootPopupContentHandler handler) {
-    handler.onRevealRootPopupContent(this);
-  }
+    @Override
+    protected void dispatch(RevealRootPopupContentHandler handler) {
+        handler.onRevealRootPopupContent(this);
+    }
 
 }
