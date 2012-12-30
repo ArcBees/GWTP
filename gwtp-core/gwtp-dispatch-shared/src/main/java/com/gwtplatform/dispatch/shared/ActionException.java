@@ -25,21 +25,21 @@ package com.gwtplatform.dispatch.shared;
  */
 public class ActionException extends Exception {
 
-  private static final long serialVersionUID = -1423773155541528952L;
+    private static final long serialVersionUID = -1423773155541528952L;
 
-  public ActionException() {
-  }
+    public ActionException() {
+    }
 
-  public ActionException(String message) {
-    super(message);
-  }
+    public ActionException(String message) {
+        super(message);
+    }
 
-  public ActionException(String message, Throwable cause) {
-    super(message + " (" + cause.getMessage() + ")");
-  }
+    public ActionException(String message, Throwable cause) {
+        super(message + " (" + cause.getMessage() + ")");
+    }
 
-  public ActionException(Throwable cause) {
-    super(cause.getMessage());
-  }
+    public ActionException(Throwable cause) {
+        super(cause.getMessage());
+    }
 
 }

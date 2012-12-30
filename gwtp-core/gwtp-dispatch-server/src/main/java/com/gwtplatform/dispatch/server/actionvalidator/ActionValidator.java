@@ -28,7 +28,7 @@ import com.gwtplatform.dispatch.shared.Result;
  * information, which can be done by injecting a {@code Provider<HttpSession>}
  * into the validator and calling {@code httpSessionProvider.get()} within the
  * {@link #isValid} method.
- * <p />
+ * <p/>
  * You should think of annotating your validators with {@code @RequestScoped} or
  * {@code @Singleton}.
  *
@@ -36,15 +36,14 @@ import com.gwtplatform.dispatch.shared.Result;
  * @author Christian Goudreau
  */
 public interface ActionValidator {
-  /**
-   * Validate whether or not that {@link Action} can be executed at this time.
-   * You can also throw an {@link ActionException} if you want to fine grain why
-   * the validator failed.
-   *
-   * @param action The action that called this validator.
-   *
-   * @return {@code true} if the action can be executed, {@code false}
-   *         otherwise.
-   */
-  boolean isValid(Action<? extends Result> action) throws ActionException;
+    /**
+     * Validate whether or not that {@link Action} can be executed at this time.
+     * You can also throw an {@link ActionException} if you want to fine grain why
+     * the validator failed.
+     *
+     * @param action The action that called this validator.
+     * @return {@code true} if the action can be executed, {@code false}
+     *         otherwise.
+     */
+    boolean isValid(Action<? extends Result> action) throws ActionException;
 }

@@ -24,11 +24,10 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
  * that make asynchronous calls.
  *
- * @author Christian Goudreau
- *
  * @param <R> The type of the {@link AsyncCallback}.
+ * @author Christian Goudreau
  */
 
 public interface CallbackDispatchRequest<R> extends AsyncCallback<R>,
-    DispatchRequest {
+        DispatchRequest {
 }

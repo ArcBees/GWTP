@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -27,55 +26,55 @@ import com.gwtplatform.mvp.client.Presenter;
  * method. To reveal a presenter at the root of the application, fire either
  * {@link RevealRootContentEvent}, {@link RevealRootLayoutContentEvent} or
  * {@link RevealRootPopupContentEvent} instead.
- * <p />
+ * <p/>
  * This event is handled by {@link Proxy} classes. Upon handling this
  * event, the proxy <b>first</b> sets the content appropriately in the
  * presenter, and then reveals the presenter.
  *
+ * @author Philippe Beaudoin
  * @see RevealRootContentEvent
  * @see RevealRootLayoutContentEvent
  * @see RevealRootPopupContentEvent
- *
- * @author Philippe Beaudoin
  */
 public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> {
 
-  /**
-   * Fires a {@link RevealContentEvent} with a specific {@link com.google.gwt.event.shared.GwtEvent.Type}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   * @param type The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}, usually defined in the parent presenter
-   *             and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
-   * @param content The {@link Presenter} that wants to set itself as content in his parent.
-   */
-  public static void fire(final HasHandlers source,
-      final Type<RevealContentHandler<?>> type, final Presenter<?, ?> content) {
-    source.fireEvent(new RevealContentEvent(type, content));
-  }
+    /**
+     * Fires a {@link RevealContentEvent} with a specific {@link com.google.gwt.event.shared.GwtEvent.Type}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source  The source that fires this event ({@link HasHandlers}).
+     * @param type    The specific event {@link com.google.gwt.event.shared.GwtEvent.Type},
+     *                usually defined in the parent presenter
+     *                and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
+     * @param content The {@link Presenter} that wants to set itself as content in his parent.
+     */
+    public static void fire(final HasHandlers source,
+            final Type<RevealContentHandler<?>> type, final Presenter<?, ?> content) {
+        source.fireEvent(new RevealContentEvent(type, content));
+    }
 
-  private final Presenter<?, ?> content;
+    private final Presenter<?, ?> content;
 
-  private final Type<RevealContentHandler<?>> type;
+    private final Type<RevealContentHandler<?>> type;
 
-  public RevealContentEvent(Type<RevealContentHandler<?>> type,
-      Presenter<?, ?> content) {
-    this.type = type;
-    this.content = content;
-  }
+    public RevealContentEvent(Type<RevealContentHandler<?>> type,
+            Presenter<?, ?> content) {
+        this.type = type;
+        this.content = content;
+    }
 
-  @Override
-  public Type<RevealContentHandler<?>> getAssociatedType() {
-    return type;
-  }
+    @Override
+    public Type<RevealContentHandler<?>> getAssociatedType() {
+        return type;
+    }
 
-  public Presenter<?, ?> getContent() {
-    return content;
-  }
+    public Presenter<?, ?> getContent() {
+        return content;
+    }
 
-  @Override
-  protected void dispatch(RevealContentHandler<?> handler) {
-    handler.onRevealContent(this);
-  }
+    @Override
+    protected void dispatch(RevealContentHandler<?> handler) {
+        handler.onRevealContent(this);
+    }
 
 }

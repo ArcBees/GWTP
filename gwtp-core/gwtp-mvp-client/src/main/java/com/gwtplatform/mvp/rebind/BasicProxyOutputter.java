@@ -30,38 +30,38 @@ import com.google.gwt.user.rebind.SourceWriter;
  */
 public class BasicProxyOutputter extends ProxyOutputterBase {
 
-  public BasicProxyOutputter(TypeOracle oracle,
-      TreeLogger logger,
-      ClassCollection classCollection,
-      GinjectorInspector ginjectorInspector,
-      PresenterInspector presenterInspector) {
-    super(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
-  }
+    public BasicProxyOutputter(TypeOracle oracle,
+            TreeLogger logger,
+            ClassCollection classCollection,
+            GinjectorInspector ginjectorInspector,
+            PresenterInspector presenterInspector) {
+        super(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
+    }
 
-  @Override
-  public void writeInnerClasses(SourceWriter writer) {
-  }
+    @Override
+    public void writeInnerClasses(SourceWriter writer) {
+    }
 
-  @Override
-  void initSubclass(JClassType proxyInterface) throws UnableToCompleteException {
-  }
+    @Override
+    void initSubclass(JClassType proxyInterface) throws UnableToCompleteException {
+    }
 
-  @Override
-  void addSubclassImports(ClassSourceFileComposerFactory composerFactory) {
-  }
+    @Override
+    void addSubclassImports(ClassSourceFileComposerFactory composerFactory) {
+    }
 
-  @Override
-  void writeSubclassMethods(SourceWriter writer) {
-  }
+    @Override
+    void writeSubclassMethods(SourceWriter writer) {
+    }
 
-  @Override
-  void writeSubclassDelayedBind(SourceWriter writer) {
-    presenterInspector.writeProviderAssignation(writer);
-    presenterInspector.writeContentSlotHandlerRegistration(writer);
-  }
+    @Override
+    void writeSubclassDelayedBind(SourceWriter writer) {
+        presenterInspector.writeProviderAssignation(writer);
+        presenterInspector.writeContentSlotHandlerRegistration(writer);
+    }
 
-  @Override
-  String getSuperclassName() {
-    return ClassCollection.proxyImplClassName;
-  }
+    @Override
+    String getSuperclassName() {
+        return ClassCollection.proxyImplClassName;
+    }
 }

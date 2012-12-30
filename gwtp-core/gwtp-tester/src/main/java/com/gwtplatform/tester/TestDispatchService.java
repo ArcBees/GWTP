@@ -32,22 +32,22 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  */
 
 public class TestDispatchService implements DispatchService {
-  private Dispatch dispatch;
+    private Dispatch dispatch;
 
-  @Inject
-  public TestDispatchService(Dispatch dispatch) {
-    this.dispatch = dispatch;
-  }
+    @Inject
+    public TestDispatchService(Dispatch dispatch) {
+        this.dispatch = dispatch;
+    }
 
-  @Override
-  public Result execute(String cookieSentByRPC, Action<?> action)
-      throws ActionException, ServiceException {
-    return dispatch.execute(action);
-  }
+    @Override
+    public Result execute(String cookieSentByRPC, Action<?> action)
+            throws ActionException, ServiceException {
+        return dispatch.execute(action);
+    }
 
-  @Override
-  public void undo(String cookieSentByRPC, Action<Result> action, Result result)
-      throws ActionException, ServiceException {
-    dispatch.undo(action, result);
-  }
+    @Override
+    public void undo(String cookieSentByRPC, Action<Result> action, Result result)
+            throws ActionException, ServiceException {
+        dispatch.undo(action, result);
+    }
 }

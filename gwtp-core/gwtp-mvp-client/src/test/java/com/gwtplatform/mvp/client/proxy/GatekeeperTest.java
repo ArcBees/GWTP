@@ -16,16 +16,12 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import com.google.inject.name.Names;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestEagerSingleton;
@@ -34,6 +30,7 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.inject.name.Names;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.common.client.StandardProvider;
@@ -41,6 +38,9 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.ProxyPlaceBase;
 import com.gwtplatform.tester.DeferredCommandManager;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for {@link Gatekeeper}.
@@ -50,186 +50,191 @@ import com.gwtplatform.tester.DeferredCommandManager;
 @RunWith(JukitoRunner.class)
 public class GatekeeperTest {
 
-  /**
-   * Guice test module.
-   */
-  public static class Module extends JukitoModule {
-    @Override
-    protected void configureTest() {
-      bind(DeferredCommandManager.class).in(TestSingleton.class);
-      bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
-      bind(PlaceManager.class).to(PlaceManagerTestUtil.class).in(TestSingleton.class);
-      bind(Gatekeeper.class).annotatedWith(Names.named("DenyGatekeeper")).to(DenyGatekeeper.class)
-        .in(TestSingleton.class);
-      bind(Gatekeeper.class).annotatedWith(Names.named("GrantGatekeeper")).to(GrantGatekeeper.class)
-        .in(TestSingleton.class);
-      bind(DummyProxyWithDenyGatekeeper.class);
-      bind(DummyProxyPlaceWithDenyGatekeeper.class);
-      bind(DummyProxyWithGrantGatekeeper.class);
-      bind(DummyProxyPlaceWithGrantGatekeeper.class);
-      bind(DummyProxyDefault.class);
-      bind(DummyProxyPlaceDefault.class);
+    /**
+     * Guice test module.
+     */
+    public static class Module extends JukitoModule {
+        @Override
+        protected void configureTest() {
+            bind(DeferredCommandManager.class).in(TestSingleton.class);
+            bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
+            bind(PlaceManager.class).to(PlaceManagerTestUtil.class).in(TestSingleton.class);
+            bind(Gatekeeper.class).annotatedWith(Names.named("DenyGatekeeper")).to(DenyGatekeeper.class)
+                    .in(TestSingleton.class);
+            bind(Gatekeeper.class).annotatedWith(Names.named("GrantGatekeeper")).to(GrantGatekeeper.class)
+                    .in(TestSingleton.class);
+            bind(DummyProxyWithDenyGatekeeper.class);
+            bind(DummyProxyPlaceWithDenyGatekeeper.class);
+            bind(DummyProxyWithGrantGatekeeper.class);
+            bind(DummyProxyPlaceWithGrantGatekeeper.class);
+            bind(DummyProxyDefault.class);
+            bind(DummyProxyPlaceDefault.class);
+        }
     }
-  }
 
-  @TestMockSingleton
-  abstract static class DummyPresenterWithDenyGatekeeper
-  extends Presenter<View,DummyProxyPlaceWithDenyGatekeeper> {
+    @TestMockSingleton
+    abstract static class DummyPresenterWithDenyGatekeeper
+            extends Presenter<View, DummyProxyPlaceWithDenyGatekeeper> {
+        @Inject
+        public DummyPresenterWithDenyGatekeeper(EventBus eventBus, View view,
+                DummyProxyPlaceWithDenyGatekeeper proxy) {
+            super(eventBus, view, proxy);
+        }
+
+        @Override
+        public final boolean isVisible() {
+            return super.isVisible();
+        }
+    }
+
+    @TestEagerSingleton
+    static class DummyProxyWithDenyGatekeeper extends ProxyImpl<DummyPresenterWithDenyGatekeeper> {
+        @Inject
+        public DummyProxyWithDenyGatekeeper(Provider<DummyPresenterWithDenyGatekeeper> presenter) {
+            this.presenter = new StandardProvider<DummyPresenterWithDenyGatekeeper>(presenter);
+        }
+    }
+
+    @TestEagerSingleton
+    static class DummyProxyPlaceWithDenyGatekeeper
+            extends ProxyPlaceBase<DummyPresenterWithDenyGatekeeper> {
+        @Inject
+        public DummyProxyPlaceWithDenyGatekeeper(DummyProxyWithDenyGatekeeper proxy,
+                DeferredCommandManager deferredCommandManager,
+                @Named("DenyGatekeeper") Gatekeeper gatekeeper) {
+            super(new PlaceWithGatekeeper("dummyNameTokenWithDenyGatekeeper", gatekeeper), proxy,
+                    deferredCommandManager);
+        }
+    }
+
+    @TestMockSingleton
+    abstract static class DummyPresenterWithGrantGatekeeper
+            extends Presenter<View, DummyProxyPlaceWithGrantGatekeeper> {
+        @Inject
+        public DummyPresenterWithGrantGatekeeper(EventBus eventBus, View view,
+                DummyProxyPlaceWithGrantGatekeeper proxy) {
+            super(eventBus, view, proxy);
+        }
+
+        @Override
+        public final boolean isVisible() {
+            return super.isVisible();
+        }
+    }
+
+    @TestEagerSingleton
+    static class DummyProxyWithGrantGatekeeper extends ProxyImpl<DummyPresenterWithGrantGatekeeper> {
+        @Inject
+        public DummyProxyWithGrantGatekeeper(Provider<DummyPresenterWithGrantGatekeeper> presenter) {
+            this.presenter = new StandardProvider<DummyPresenterWithGrantGatekeeper>(presenter);
+        }
+    }
+
+    @TestEagerSingleton
+    static class DummyProxyPlaceWithGrantGatekeeper
+            extends ProxyPlaceBase<DummyPresenterWithGrantGatekeeper> {
+        @Inject
+        public DummyProxyPlaceWithGrantGatekeeper(DummyProxyWithGrantGatekeeper proxy,
+                DeferredCommandManager deferredCommandManager,
+                @Named("GrantGatekeeper") Gatekeeper gatekeeper) {
+            super(new PlaceWithGatekeeper("dummyNameTokenWithGrantGatekeeper", gatekeeper), proxy,
+                    deferredCommandManager);
+        }
+    }
+
+    @TestMockSingleton
+    abstract static class DummyPresenterDefault extends Presenter<View, DummyProxyPlaceDefault> {
+        @Inject
+        public DummyPresenterDefault(EventBus eventBus, View view, DummyProxyPlaceDefault proxy) {
+            super(eventBus, view, proxy);
+        }
+
+        @Override
+        public final boolean isVisible() {
+            return super.isVisible();
+        }
+    }
+
+    @TestEagerSingleton
+    static class DummyProxyDefault extends ProxyImpl<DummyPresenterDefault> {
+        @Inject
+        public DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
+            this.presenter = new StandardProvider<DummyPresenterDefault>(presenter);
+        }
+    }
+
+    @TestEagerSingleton
+    static class DummyProxyPlaceDefault extends ProxyPlaceBase<DummyPresenterDefault> {
+        @Inject
+        public DummyProxyPlaceDefault(DummyProxyDefault proxy,
+                DeferredCommandManager deferredCommandManager) {
+            super(new PlaceImpl("defaultPlace"), proxy, deferredCommandManager);
+        }
+    }
+
+    static class DenyGatekeeper implements Gatekeeper {
+        public boolean canReveal() {
+            return false;
+        }
+    }
+
+    static class GrantGatekeeper implements Gatekeeper {
+        public boolean canReveal() {
+            return true;
+        }
+    }
+
+    // SUT
     @Inject
-    public DummyPresenterWithDenyGatekeeper(EventBus eventBus, View view,
-        DummyProxyPlaceWithDenyGatekeeper proxy) {
-      super(eventBus, view, proxy);
-    }
-    @Override
-    public final boolean isVisible() {
-      return super.isVisible();
-    }
-  }
+    PlaceManager placeManager;
 
-  @TestEagerSingleton
-  static class DummyProxyWithDenyGatekeeper extends ProxyImpl<DummyPresenterWithDenyGatekeeper> {
     @Inject
-    public DummyProxyWithDenyGatekeeper(Provider<DummyPresenterWithDenyGatekeeper> presenter) {
-        this.presenter = new StandardProvider<DummyPresenterWithDenyGatekeeper>(presenter);
+    DeferredCommandManager deferredCommandManager;
+
+    @Test
+    public void placeManagerRevealDefaultPlaceWhenGatekeeperCanNotReveal(DummyPresenterDefault defaultPresenter) {
+        // Given
+        PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithDenyGatekeeper");
+
+        // When
+        placeManager.revealPlace(placeRequest);
+        deferredCommandManager.pump();
+
+        // Then
+        List<PlaceRequest> placeHierarchy = placeManager.getCurrentPlaceHierarchy();
+        assertEquals(1, placeHierarchy.size());
+
+        PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
+        assertEquals(placeHierarchy.get(0), finalPlaceRequest);
+
+        assertEquals("defaultPlace", finalPlaceRequest.getNameToken());
+        assertEquals(0, finalPlaceRequest.getParameterNames().size());
+
+        verify(defaultPresenter).prepareFromRequest(finalPlaceRequest);
+        verify(defaultPresenter).forceReveal();
     }
-  }
 
-  @TestEagerSingleton
-  static class DummyProxyPlaceWithDenyGatekeeper
-  extends ProxyPlaceBase<DummyPresenterWithDenyGatekeeper> {
-    @Inject
-    public DummyProxyPlaceWithDenyGatekeeper(DummyProxyWithDenyGatekeeper proxy,
-        DeferredCommandManager deferredCommandManager,
-        @Named("DenyGatekeeper")Gatekeeper gatekeeper) {
-      super(new PlaceWithGatekeeper("dummyNameTokenWithDenyGatekeeper", gatekeeper), proxy,
-            deferredCommandManager);
+    @Test
+    public void placeManagerRevealRequestPlaceWhenGatekeeperCanReveal(
+            DummyPresenterWithGrantGatekeeper presenterWithGatekeeper) {
+        // Given
+        PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithGrantGatekeeper");
+
+        // When
+        placeManager.revealPlace(placeRequest);
+        deferredCommandManager.pump();
+
+        // Then
+        List<PlaceRequest> placeHierarchy = placeManager.getCurrentPlaceHierarchy();
+        assertEquals(1, placeHierarchy.size());
+
+        PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
+        assertEquals(placeHierarchy.get(0), finalPlaceRequest);
+
+        assertEquals("dummyNameTokenWithGrantGatekeeper", finalPlaceRequest.getNameToken());
+        assertEquals(0, finalPlaceRequest.getParameterNames().size());
+
+        verify(presenterWithGatekeeper).prepareFromRequest(finalPlaceRequest);
+        verify(presenterWithGatekeeper).forceReveal();
     }
-  }
-
-  @TestMockSingleton
-  abstract static class DummyPresenterWithGrantGatekeeper
-  extends Presenter<View,DummyProxyPlaceWithGrantGatekeeper> {
-    @Inject
-    public DummyPresenterWithGrantGatekeeper(EventBus eventBus, View view,
-        DummyProxyPlaceWithGrantGatekeeper proxy) {
-      super(eventBus, view, proxy);
-    }
-    @Override
-    public final boolean isVisible() {
-      return super.isVisible();
-    }
-  }
-
-  @TestEagerSingleton
-  static class DummyProxyWithGrantGatekeeper extends ProxyImpl<DummyPresenterWithGrantGatekeeper> {
-    @Inject
-    public DummyProxyWithGrantGatekeeper(Provider<DummyPresenterWithGrantGatekeeper> presenter) {
-        this.presenter = new StandardProvider<DummyPresenterWithGrantGatekeeper>(presenter);
-    }
-  }
-
-  @TestEagerSingleton
-  static class DummyProxyPlaceWithGrantGatekeeper
-  extends ProxyPlaceBase<DummyPresenterWithGrantGatekeeper> {
-    @Inject
-    public DummyProxyPlaceWithGrantGatekeeper(DummyProxyWithGrantGatekeeper proxy,
-        DeferredCommandManager deferredCommandManager,
-        @Named("GrantGatekeeper")Gatekeeper gatekeeper) {
-      super(new PlaceWithGatekeeper("dummyNameTokenWithGrantGatekeeper", gatekeeper), proxy,
-            deferredCommandManager);
-    }
-  }
-
-  @TestMockSingleton
-  abstract static class DummyPresenterDefault extends Presenter<View,DummyProxyPlaceDefault> {
-    @Inject
-    public DummyPresenterDefault(EventBus eventBus, View view, DummyProxyPlaceDefault proxy) {
-      super(eventBus, view, proxy);
-    }
-    @Override
-    public final boolean isVisible() {
-      return super.isVisible();
-    }
-  }
-
-  @TestEagerSingleton
-  static class DummyProxyDefault extends ProxyImpl<DummyPresenterDefault> {
-    @Inject
-    public DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
-        this.presenter = new StandardProvider<DummyPresenterDefault>(presenter);
-    }
-  }
-
-  @TestEagerSingleton
-  static class DummyProxyPlaceDefault extends ProxyPlaceBase<DummyPresenterDefault> {
-    @Inject
-    public DummyProxyPlaceDefault(DummyProxyDefault proxy,
-        DeferredCommandManager deferredCommandManager) {
-        super(new PlaceImpl("defaultPlace"), proxy, deferredCommandManager);
-    }
-  }
-
-  static class DenyGatekeeper implements Gatekeeper {
-    public boolean canReveal() {
-      return false;
-    }
-  }
-
-  static class GrantGatekeeper implements Gatekeeper {
-    public boolean canReveal() {
-      return true;
-    }
-  }
-
-  // SUT
-  @Inject PlaceManager placeManager;
-
-  @Inject DeferredCommandManager deferredCommandManager;
-
-  @Test
-  public void placeManagerRevealDefaultPlaceWhenGatekeeperCanNotReveal(DummyPresenterDefault defaultPresenter) {
-    // Given
-    PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithDenyGatekeeper");
-
-    // When
-    placeManager.revealPlace(placeRequest);
-    deferredCommandManager.pump();
-
-    // Then
-    List<PlaceRequest> placeHierarchy = placeManager.getCurrentPlaceHierarchy();
-    assertEquals(1, placeHierarchy.size());
-
-    PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
-    assertEquals(placeHierarchy.get(0), finalPlaceRequest);
-
-    assertEquals("defaultPlace", finalPlaceRequest.getNameToken());
-    assertEquals(0, finalPlaceRequest.getParameterNames().size());
-
-    verify(defaultPresenter).prepareFromRequest(finalPlaceRequest);
-    verify(defaultPresenter).forceReveal();
-  }
-
-  @Test
-  public void placeManagerRevealRequestPlaceWhenGatekeeperCanReveal(
-      DummyPresenterWithGrantGatekeeper presenterWithGatekeeper) {
-    // Given
-    PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithGrantGatekeeper");
-
-    // When
-    placeManager.revealPlace(placeRequest);
-    deferredCommandManager.pump();
-
-    // Then
-    List<PlaceRequest> placeHierarchy = placeManager.getCurrentPlaceHierarchy();
-    assertEquals(1, placeHierarchy.size());
-
-    PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
-    assertEquals(placeHierarchy.get(0), finalPlaceRequest);
-
-    assertEquals("dummyNameTokenWithGrantGatekeeper", finalPlaceRequest.getNameToken());
-    assertEquals(0, finalPlaceRequest.getParameterNames().size());
-
-    verify(presenterWithGatekeeper).prepareFromRequest(finalPlaceRequest);
-    verify(presenterWithGatekeeper).forceReveal();
-  }
 }

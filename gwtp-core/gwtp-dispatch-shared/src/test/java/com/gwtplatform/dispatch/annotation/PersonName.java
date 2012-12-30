@@ -23,11 +23,11 @@ package com.gwtplatform.dispatch.annotation;
  */
 @GenDto
 public class PersonName {
-  @Order(1)
-  String firstName;
-  @Order(2)
-  String lastName;
-  @Optional
-  @Order(3)
-  String secondName;
+    @Order(1)
+    String firstName;
+    @Order(2)
+    String lastName;
+    @Optional
+    @Order(3)
+    String secondName;
 }

@@ -23,20 +23,20 @@ package com.gwtplatform.dispatch.annotation;
  */
 @GenDispatch
 public class RetrieveFoo {
-  @In(1)
-  int fooId;
+    @In(1)
+    int fooId;
 
-  @In(2)
-  @Optional
-  String additionalQuestion;
+    @In(2)
+    @Optional
+    String additionalQuestion;
 
-  @Out(1)
-  Foo foo;
+    @Out(1)
+    Foo foo;
 
-  @Out(2)
-  int meaningOfLife;
+    @Out(2)
+    int meaningOfLife;
 
-  @Out(3)
-  @Optional
-  boolean answer42;
+    @Out(3)
+    @Optional
+    boolean answer42;
 }

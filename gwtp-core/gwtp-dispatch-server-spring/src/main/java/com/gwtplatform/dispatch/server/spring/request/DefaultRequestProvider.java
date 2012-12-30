@@ -28,13 +28,13 @@ import com.gwtplatform.dispatch.server.RequestProvider;
  */
 public class DefaultRequestProvider implements RequestProvider {
 
-  public DefaultRequestProvider() {
-  }
+    public DefaultRequestProvider() {
+    }
 
-  // It should be in this way, or the HttpServletRequest should be autowired
-  @Override
-  public HttpServletRequest getServletRequest() {
-    return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-  }
+    // It should be in this way, or the HttpServletRequest should be autowired
+    @Override
+    public HttpServletRequest getServletRequest() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
 
 }

@@ -24,19 +24,19 @@ import com.googlecode.objectify.util.cmd.ObjectifyWrapper;
 /**
  */
 public class Ofy extends ObjectifyWrapper<Ofy, OfyFactory> {
-  public Ofy(Objectify base) {
-    super(base);
-  }
+    public Ofy(Objectify base) {
+        super(base);
+    }
 
-  public <T> LoadType<T> query(Class<T> clazz) {
-    return load().type(clazz);
-  }
+    public <T> LoadType<T> query(Class<T> clazz) {
+        return load().type(clazz);
+    }
 
-  public <T> T get(Key<T> key) {
-    return load().key(key).get();
-  }
+    public <T> T get(Key<T> key) {
+        return load().key(key).get();
+    }
 
-  public <T> T get(Class<T> clazz, long id) {
-    return load().type(clazz).id(id).get();
-  }
+    public <T> T get(Class<T> clazz, long id) {
+        return load().type(clazz).id(id).get();
+    }
 }

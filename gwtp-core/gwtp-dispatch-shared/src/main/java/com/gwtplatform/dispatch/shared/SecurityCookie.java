@@ -16,20 +16,20 @@
 
 package com.gwtplatform.dispatch.shared;
 
-import com.google.inject.BindingAnnotation;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.inject.BindingAnnotation;
+
 /**
  * Bind this annotation on the string you want to use as a security cookie:
- *
+ * <p/>
  * <pre>
  * bindConstant().annotatedWith(SecurityCookie.class).to("MYCOOKIE");
  * </pre>
- *
+ * <p/>
  * See {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor} for
  * details.
  *

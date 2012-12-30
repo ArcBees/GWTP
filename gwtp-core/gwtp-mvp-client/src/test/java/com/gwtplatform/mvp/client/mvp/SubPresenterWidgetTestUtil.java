@@ -16,12 +16,11 @@
 
 package com.gwtplatform.mvp.client.mvp;
 
-import com.google.web.bindery.event.shared.EventBus;
+import javax.inject.Inject;
 
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-
-import javax.inject.Inject;
 
 /**
  * This is the test presenter.
@@ -30,16 +29,16 @@ import javax.inject.Inject;
  */
 public class SubPresenterWidgetTestUtil extends PresenterWidget<SubPresenterWidgetTestUtil.MyView> {
 
-  /**
-   * Presenter's view.
-   */
-  public interface MyView extends View {
-  }
+    /**
+     * Presenter's view.
+     */
+    public interface MyView extends View {
+    }
 
-  @Inject
-  public SubPresenterWidgetTestUtil(final EventBus eventBus, final MyView view) {
-    super(eventBus, view);
-  }
+    @Inject
+    public SubPresenterWidgetTestUtil(final EventBus eventBus, final MyView view) {
+        super(eventBus, view);
+    }
 
 }
 

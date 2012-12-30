@@ -32,51 +32,51 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  */
 public class DelegatingDispatchRequest implements DispatchRequest {
 
-  private boolean cancelled;
-  private DispatchRequest delegate;
+    private boolean cancelled;
+    private DispatchRequest delegate;
 
-  public DelegatingDispatchRequest() {
-  }
-
-  /**
-   * Populates the {@link DelegatingDispatchRequest} object with a
-   * {@link DispatchRequest}. <p/> If the code that requested the command to be
-   * executed has already chosen to cancel the {@link DispatchRequest}, the
-   * {@link DispatchRequest} that has been passed will be immediately cancelled.
-   *
-   * @param delegate The {@link DispatchRequest} object.
-   */
-  public void setDelegate(DispatchRequest delegate) {
-    if (cancelled) {
-      if (delegate != null) {
-        this.delegate.cancel();
-      }
-    } else {
-      if (delegate == null) {
-        throw new NullPointerException("delegate");
-      }
-      if (this.delegate != null) {
-        throw new RuntimeException("Delegate can only be set once.");
-      }
-      this.delegate = delegate;
+    public DelegatingDispatchRequest() {
     }
-  }
 
-  @Override
-  public void cancel() {
-    if (delegate != null) {
-      delegate.cancel();
-    } else {
-      cancelled = true;
+    /**
+     * Populates the {@link DelegatingDispatchRequest} object with a
+     * {@link DispatchRequest}. <p/> If the code that requested the command to be
+     * executed has already chosen to cancel the {@link DispatchRequest}, the
+     * {@link DispatchRequest} that has been passed will be immediately cancelled.
+     *
+     * @param delegate The {@link DispatchRequest} object.
+     */
+    public void setDelegate(DispatchRequest delegate) {
+        if (cancelled) {
+            if (delegate != null) {
+                this.delegate.cancel();
+            }
+        } else {
+            if (delegate == null) {
+                throw new NullPointerException("delegate");
+            }
+            if (this.delegate != null) {
+                throw new RuntimeException("Delegate can only be set once.");
+            }
+            this.delegate = delegate;
+        }
     }
-  }
 
-  @Override
-  public boolean isPending() {
-    if (delegate != null) {
-      return delegate.isPending();
-    } else {
-      return !cancelled;
+    @Override
+    public void cancel() {
+        if (delegate != null) {
+            delegate.cancel();
+        } else {
+            cancelled = true;
+        }
     }
-  }
+
+    @Override
+    public boolean isPending() {
+        if (delegate != null) {
+            return delegate.isPending();
+        } else {
+            return !cancelled;
+        }
+    }
 }

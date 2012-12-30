@@ -16,12 +16,7 @@
 
 package com.gwtplatform.mvp.client.mvp;
 
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.web.bindery.event.shared.SimpleEventBus;
-import com.google.inject.TypeLiteral;
-
-import com.gwtplatform.mvp.client.PresenterWidget;
-import com.gwtplatform.mvp.client.View;
+import javax.inject.Inject;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
@@ -29,7 +24,11 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.inject.Inject;
+import com.google.inject.TypeLiteral;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
+import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.View;
 
 /**
  * Test behaviour when a real {@link com.gwtplatform.mvp.client.PresenterWidget} is injected.
@@ -39,26 +38,28 @@ import javax.inject.Inject;
 @RunWith(JukitoRunner.class)
 public class RealInjectionTest {
 
-  /**
-   * Guice test module.
-   */
-  public static class Module extends JukitoModule {
-    @Override
-    protected void configureTest() {
-      bindNamed(new TypeLiteral<PresenterWidget<? extends View>>() { }, "Sub").to(SubPresenterWidgetTestUtil.class)
-        .in(TestSingleton.class);
-      bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
+    /**
+     * Guice test module.
+     */
+    public static class Module extends JukitoModule {
+        @Override
+        protected void configureTest() {
+            bindNamed(new TypeLiteral<PresenterWidget<? extends View>>() {
+            }, "Sub").to(SubPresenterWidgetTestUtil.class)
+                    .in(TestSingleton.class);
+            bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
+        }
     }
-  }
 
-  // SUT
-  @Inject MainPresenterTestUtil mainPresenter;
+    // SUT
+    @Inject
+    MainPresenterTestUtil mainPresenter;
 
-  @Test
-  public void settingSubPresenterShouldNotCrash() {
-    // When
-    mainPresenter.setSubPresenter();
+    @Test
+    public void settingSubPresenterShouldNotCrash() {
+        // When
+        mainPresenter.setSubPresenter();
 
-    // Then nothing should crash
-  }
+        // Then nothing should crash
+    }
 }
