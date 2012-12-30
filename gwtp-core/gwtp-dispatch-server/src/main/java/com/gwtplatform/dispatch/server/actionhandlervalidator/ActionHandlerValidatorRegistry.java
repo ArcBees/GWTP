@@ -26,31 +26,31 @@ import com.gwtplatform.dispatch.shared.Result;
  * @author Christian Goudreau
  */
 public interface ActionHandlerValidatorRegistry {
-  /**
-   * Clears all registered {@link ActionValidator} from the registry.
-   */
-  void clearActionHandlerValidators();
+    /**
+     * Clears all registered {@link ActionValidator} from the registry.
+     */
+    void clearActionHandlerValidators();
 
-  /**
-   * Searches the registry and returns the first {@link ActionValidator} which
-   * supports the specified {@link Action} , or <code>null</code> if none is
-   * available.
-   *
-   * @param <A> Type of associated {@link Action}
-   * @param <R> Type of associated {@link Result}
-   * @param action The {@link Action}
-   * @return The {@link ActionValidator}
-   */
-  <A extends Action<R>, R extends Result> ActionHandlerValidatorInstance findActionHandlerValidator(
-      A action);
+    /**
+     * Searches the registry and returns the first {@link ActionValidator} which
+     * supports the specified {@link Action} , or <code>null</code> if none is
+     * available.
+     *
+     * @param <A>    Type of associated {@link Action}
+     * @param <R>    Type of associated {@link Result}
+     * @param action The {@link Action}
+     * @return The {@link ActionValidator}
+     */
+    <A extends Action<R>, R extends Result> ActionHandlerValidatorInstance findActionHandlerValidator(
+            A action);
 
-  /**
-   * Searches the registry for already bound {@link ActionValidator} class and
-   * return the instance or <code>null</code> if none is available.
-   *
-   * @param actionValidatorClass The {@link Action}
-   * @return
-   */
-  ActionValidator findActionValidator(
-      Class<? extends ActionValidator> actionValidatorClass);
+    /**
+     * Searches the registry for already bound {@link ActionValidator} class and
+     * return the instance or <code>null</code> if none is available.
+     *
+     * @param actionValidatorClass The {@link Action}
+     * @return
+     */
+    ActionValidator findActionValidator(
+            Class<? extends ActionValidator> actionValidatorClass);
 }

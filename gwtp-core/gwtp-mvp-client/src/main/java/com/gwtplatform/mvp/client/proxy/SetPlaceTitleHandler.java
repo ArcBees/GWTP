@@ -24,10 +24,10 @@ package com.gwtplatform.mvp.client.proxy;
  * @author Philippe Beaudoin
  */
 public interface SetPlaceTitleHandler {
-  /**
-   * Invoked when the title of the place is available.
-   *
-   * @param title The place title.
-   */
-  void onSetPlaceTitle(String title);
+    /**
+     * Invoked when the title of the place is available.
+     *
+     * @param title The place title.
+     */
+    void onSetPlaceTitle(String title);
 }

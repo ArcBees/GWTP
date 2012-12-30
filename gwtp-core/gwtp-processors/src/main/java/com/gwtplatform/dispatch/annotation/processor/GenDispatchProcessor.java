@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.annotation.processor;
 
-import static javax.lang.model.SourceVersion.RELEASE_6;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
@@ -36,6 +34,8 @@ import com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper;
 import com.gwtplatform.dispatch.annotation.helper.GenerationHelper;
 import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
+import static javax.lang.model.SourceVersion.RELEASE_6;
+
 /**
  * Processes {@link GenDispatch} annotations.
  * <p/>
@@ -50,161 +50,166 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDispatch")
 public class GenDispatchProcessor extends GenProcessor {
 
-  @Override
-  public void process(Element dispatchElement) {
-    GenDispatch genDispatch = dispatchElement.getAnnotation(GenDispatch.class);
-    generateAction(dispatchElement,
-        genDispatch.isSecure(),
-        genDispatch.serviceName(),
-        genDispatch.extraActionInterfaces()
-    );
-    generateResult(dispatchElement, genDispatch.extraResultInterfaces());
-  }
+    @Override
+    public void process(Element dispatchElement) {
+        GenDispatch genDispatch = dispatchElement.getAnnotation(GenDispatch.class);
+        generateAction(dispatchElement,
+                genDispatch.isSecure(),
+                genDispatch.serviceName(),
+                genDispatch.extraActionInterfaces()
+        );
+        generateResult(dispatchElement, genDispatch.extraResultInterfaces());
+    }
 
-  protected void generateAction(Element dispatchElement, boolean isSecure, String serviceName, String extraActionInterfaces) {
-    BuilderGenerationHelper writer = null;
-    try {
-      ReflectionHelper reflection = new ReflectionHelper(getEnvironment(), (TypeElement) dispatchElement);
-      String dispatchElementSimpleName = reflection.getSimpleClassName();
-      String dispatchActionSimpleName = dispatchElementSimpleName + "Action";
-      String dispatchActionClassName = reflection.getClassName() + "Action";
+    protected void generateAction(Element dispatchElement, boolean isSecure, String serviceName,
+            String extraActionInterfaces) {
+        BuilderGenerationHelper writer = null;
+        try {
+            ReflectionHelper reflection = new ReflectionHelper(getEnvironment(), (TypeElement) dispatchElement);
+            String dispatchElementSimpleName = reflection.getSimpleClassName();
+            String dispatchActionSimpleName = dispatchElementSimpleName + "Action";
+            String dispatchActionClassName = reflection.getClassName() + "Action";
 
-      printMessage("Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
+            printMessage("Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
 
-      Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchActionClassName, dispatchElement).openWriter();
-      writer = new BuilderGenerationHelper(sourceWriter);
+            Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchActionClassName,
+                    dispatchElement).openWriter();
+            writer = new BuilderGenerationHelper(sourceWriter);
 
-      Collection<VariableElement> annotatedInFields = reflection.getInFields();
-      Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getInFields());
-      Collection<VariableElement> optionalFields = reflection.sortFields(In.class, reflection.getOptionalFields(In.class));
-      Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getInFields());
-      requiredFields.removeAll(optionalFields);
+            Collection<VariableElement> annotatedInFields = reflection.getInFields();
+            Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getInFields());
+            Collection<VariableElement> optionalFields = reflection.sortFields(In.class,
+                    reflection.getOptionalFields(In.class));
+            Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getInFields());
+            requiredFields.removeAll(optionalFields);
 
-      writer.generatePackageDeclaration(reflection.getPackageName());
-      writer.generateImports("com.gwtplatform.dispatch.shared.Action");
+            writer.generatePackageDeclaration(reflection.getPackageName());
+            writer.generateImports("com.gwtplatform.dispatch.shared.Action");
 
-      String actionInterface = "Action<" + dispatchElementSimpleName + "Result>";
-      writer.generateClassHeader(dispatchActionSimpleName, null,
-          reflection.getClassRepresenter().getModifiers(),
-          actionInterface, extraActionInterfaces
-      );
-      writer.generateFieldDeclarations(annotatedInFields);
+            String actionInterface = "Action<" + dispatchElementSimpleName + "Result>";
+            writer.generateClassHeader(dispatchActionSimpleName, null,
+                    reflection.getClassRepresenter().getModifiers(),
+                    actionInterface, extraActionInterfaces
+            );
+            writer.generateFieldDeclarations(annotatedInFields);
 
-      if (!optionalFields.isEmpty()) { // has optional fields.
-        writer.setWhitespaces(2);
-        writer.generateBuilderClass(dispatchActionSimpleName, requiredFields, optionalFields);
-        writer.resetWhitespaces();
-        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
-        if (!requiredFields.isEmpty()) { // and required fields
-          writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
+            if (!optionalFields.isEmpty()) { // has optional fields.
+                writer.setWhitespaces(2);
+                writer.generateBuilderClass(dispatchActionSimpleName, requiredFields, optionalFields);
+                writer.resetWhitespaces();
+                writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
+                if (!requiredFields.isEmpty()) { // and required fields
+                    writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
+                }
+                writer.generateCustomBuilderConstructor(dispatchActionSimpleName, allFields);
+            } else if (!requiredFields.isEmpty()) { // has only required fields
+                writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
+                writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
+            } else { // has no non-static fields
+                writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PUBLIC);
+            }
+
+            generateServiceNameAccessor(writer, dispatchElementSimpleName, serviceName);
+            generateIsSecuredMethod(writer, isSecure);
+
+            writer.generateFieldAccessors(annotatedInFields);
+            writer.generateEquals(dispatchActionSimpleName, annotatedInFields);
+            writer.generateHashCode(annotatedInFields);
+            writer.generateToString(dispatchActionSimpleName, annotatedInFields);
+
+            writer.generateFooter();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
         }
-        writer.generateCustomBuilderConstructor(dispatchActionSimpleName, allFields);
-      } else if (!requiredFields.isEmpty()) { // has only required fields
-        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PROTECTED);
-        writer.generateConstructorUsingFields(dispatchActionSimpleName, requiredFields, Modifier.PUBLIC);
-      } else { // has no non-static fields
-        writer.generateEmptyConstructor(dispatchActionSimpleName, Modifier.PUBLIC);
-      }
-
-      generateServiceNameAccessor(writer, dispatchElementSimpleName, serviceName);
-      generateIsSecuredMethod(writer, isSecure);
-
-      writer.generateFieldAccessors(annotatedInFields);
-      writer.generateEquals(dispatchActionSimpleName, annotatedInFields);
-      writer.generateHashCode(annotatedInFields);
-      writer.generateToString(dispatchActionSimpleName, annotatedInFields);
-
-      writer.generateFooter();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    } finally {
-      if (writer != null) {
-        writer.close();
-      }
     }
-  }
 
-  protected void generateResult(Element dispatchElement, String extraResultInterfaces) {
-    BuilderGenerationHelper writer = null;
-    try {
-      ReflectionHelper reflection = new ReflectionHelper(getEnvironment(), (TypeElement) dispatchElement);
-      String dispatchElementSimpleName = reflection.getSimpleClassName();
-      String dispatchResultSimpleName = dispatchElementSimpleName + "Result";
-      String dispatchResultClassName = reflection.getClassName() + "Result";
+    protected void generateResult(Element dispatchElement, String extraResultInterfaces) {
+        BuilderGenerationHelper writer = null;
+        try {
+            ReflectionHelper reflection = new ReflectionHelper(getEnvironment(), (TypeElement) dispatchElement);
+            String dispatchElementSimpleName = reflection.getSimpleClassName();
+            String dispatchResultSimpleName = dispatchElementSimpleName + "Result";
+            String dispatchResultClassName = reflection.getClassName() + "Result";
 
-     printMessage("Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
+            printMessage("Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
 
-      Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchResultClassName, dispatchElement).openWriter();
-      writer = new BuilderGenerationHelper(sourceWriter);
+            Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchResultClassName,
+                    dispatchElement).openWriter();
+            writer = new BuilderGenerationHelper(sourceWriter);
 
-      Collection<VariableElement> annotatedOutFields = reflection.getOutFields();
-      Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getOutFields());
-      Collection<VariableElement> optionalFields = reflection.sortFields(Out.class, reflection.getOptionalFields(Out.class));
-      Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getOutFields());
-      requiredFields.removeAll(optionalFields);
+            Collection<VariableElement> annotatedOutFields = reflection.getOutFields();
+            Collection<VariableElement> allFields = reflection.filterConstantFields(reflection.getOutFields());
+            Collection<VariableElement> optionalFields = reflection.sortFields(Out.class,
+                    reflection.getOptionalFields(Out.class));
+            Collection<VariableElement> requiredFields = reflection.filterConstantFields(reflection.getOutFields());
+            requiredFields.removeAll(optionalFields);
 
-      writer.generatePackageDeclaration(reflection.getPackageName());
-      writer.generateImports(
-          reflection.hasOptionalFields() ? "com.google.gwt.user.client.rpc.IsSerializable" : null,
-          null,
-          "com.gwtplatform.dispatch.shared.Result"
-      );
+            writer.generatePackageDeclaration(reflection.getPackageName());
+            writer.generateImports(
+                    reflection.hasOptionalFields() ? "com.google.gwt.user.client.rpc.IsSerializable" : null,
+                    null,
+                    "com.gwtplatform.dispatch.shared.Result"
+            );
 
-      String resultInterface = "Result";
-      writer.generateClassHeader(dispatchResultSimpleName, null,
-          reflection.getClassRepresenter().getModifiers(),
-          resultInterface, extraResultInterfaces
-      );
-      writer.generateFieldDeclarations(annotatedOutFields);
+            String resultInterface = "Result";
+            writer.generateClassHeader(dispatchResultSimpleName, null,
+                    reflection.getClassRepresenter().getModifiers(),
+                    resultInterface, extraResultInterfaces
+            );
+            writer.generateFieldDeclarations(annotatedOutFields);
 
-      if (!optionalFields.isEmpty()) {
-        writer.setWhitespaces(2);
-        writer.generateBuilderClass(dispatchResultSimpleName, requiredFields, optionalFields, "IsSerializable");
-        writer.resetWhitespaces();
-        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
-        if (!requiredFields.isEmpty()) {
-          writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
+            if (!optionalFields.isEmpty()) {
+                writer.setWhitespaces(2);
+                writer.generateBuilderClass(dispatchResultSimpleName, requiredFields, optionalFields, "IsSerializable");
+                writer.resetWhitespaces();
+                writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
+                if (!requiredFields.isEmpty()) {
+                    writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
+                }
+                writer.generateCustomBuilderConstructor(dispatchResultSimpleName, allFields);
+            } else if (!requiredFields.isEmpty()) {
+                writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
+                writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
+            } else {
+                writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PUBLIC);
+            }
+
+            writer.generateFieldAccessors(annotatedOutFields);
+            writer.generateEquals(dispatchResultSimpleName, annotatedOutFields);
+            writer.generateHashCode(annotatedOutFields);
+            writer.generateToString(dispatchResultSimpleName, annotatedOutFields);
+
+            writer.generateFooter();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
         }
-        writer.generateCustomBuilderConstructor(dispatchResultSimpleName, allFields);
-      } else if (!requiredFields.isEmpty()) {
-        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PROTECTED);
-        writer.generateConstructorUsingFields(dispatchResultSimpleName, requiredFields, Modifier.PUBLIC);
-      } else {
-        writer.generateEmptyConstructor(dispatchResultSimpleName, Modifier.PUBLIC);
-      }
-
-      writer.generateFieldAccessors(annotatedOutFields);
-      writer.generateEquals(dispatchResultSimpleName, annotatedOutFields);
-      writer.generateHashCode(annotatedOutFields);
-      writer.generateToString(dispatchResultSimpleName, annotatedOutFields);
-
-      writer.generateFooter();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    } finally {
-      if (writer != null) {
-        writer.close();
-      }
     }
-  }
 
-  protected void generateIsSecuredMethod(GenerationHelper writer, boolean isSecure) {
-    writer.println();
-    writer.println("  @Override");
-    writer.println("  public boolean isSecured() {");
-    writer.println("    return " + isSecure + ";");
-    writer.println("  }");
-  }
-
-  protected void generateServiceNameAccessor(GenerationHelper writer, String simpleClassName, String serviceName) {
-    writer.println();
-    writer.println("  @Override");
-    writer.println("  public String getServiceName() {");
-    if (serviceName.isEmpty()) {
-      writer.println("    return Action.DEFAULT_SERVICE_NAME + \"{0}\";",  simpleClassName);
-    } else {
-      writer.println("    return \"{0}\";", serviceName);
+    protected void generateIsSecuredMethod(GenerationHelper writer, boolean isSecure) {
+        writer.println();
+        writer.println("  @Override");
+        writer.println("  public boolean isSecured() {");
+        writer.println("    return " + isSecure + ";");
+        writer.println("  }");
     }
-    writer.println("  }");
-  }
+
+    protected void generateServiceNameAccessor(GenerationHelper writer, String simpleClassName, String serviceName) {
+        writer.println();
+        writer.println("  @Override");
+        writer.println("  public String getServiceName() {");
+        if (serviceName.isEmpty()) {
+            writer.println("    return Action.DEFAULT_SERVICE_NAME + \"{0}\";", simpleClassName);
+        } else {
+            writer.println("    return \"{0}\";", serviceName);
+        }
+        writer.println("  }");
+    }
 }

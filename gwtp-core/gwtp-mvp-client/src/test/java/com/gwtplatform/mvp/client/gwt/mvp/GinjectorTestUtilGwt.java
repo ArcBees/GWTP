@@ -16,10 +16,10 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
@@ -27,9 +27,13 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  */
 @GinModules({ClientModuleTestUtilGwt.class})
 public interface GinjectorTestUtilGwt extends Ginjector {
-  Provider<MainPresenterTestUtilGwt> getMainPresenter();
-  Provider<AdminPresenterTestUtilGwt> getAdminPresenter();
-  EventBus getEventBus();
-  PlaceManager getPlaceManager();
-  InjectedLabel getInjectedLabel();
+    Provider<MainPresenterTestUtilGwt> getMainPresenter();
+
+    Provider<AdminPresenterTestUtilGwt> getAdminPresenter();
+
+    EventBus getEventBus();
+
+    PlaceManager getPlaceManager();
+
+    InjectedLabel getInjectedLabel();
 }

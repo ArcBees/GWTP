@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
@@ -26,22 +25,20 @@ import com.gwtplatform.dispatch.shared.Result;
  * The interface that {@link ClientActionHandler}s use to send the action to
  * undo to the server over gwt-rpc.
  *
- * @author Brendan Doherty
- *
  * @param <A> The {@link Action} type.
  * @param <R> The {@link Result} type.
+ * @author Brendan Doherty
  */
 public interface UndoCommand<A extends Action<R>, R extends Result> {
-  /**
-   * Undo an action.
-   *
-   * @param action The action to undo.
-   * @param result The result of the action to undo.
-   * @param callback A callback that will be invoked once the action has been
-   *          undone, successfully or not.
-   *
-   * @return A {@link DispatchRequest} object representing the gwt-rpc request,
-   *         it should never be {@code null}.
-   */
-  DispatchRequest undo(A action, R result, AsyncCallback<Void> callback);
+    /**
+     * Undo an action.
+     *
+     * @param action   The action to undo.
+     * @param result   The result of the action to undo.
+     * @param callback A callback that will be invoked once the action has been
+     *                 undone, successfully or not.
+     * @return A {@link DispatchRequest} object representing the gwt-rpc request,
+     *         it should never be {@code null}.
+     */
+    DispatchRequest undo(A action, R result, AsyncCallback<Void> callback);
 }
