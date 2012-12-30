@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.rebind;
 
+import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -47,7 +48,7 @@ public interface ProxyOutputter {
    *
    * @param writer The {@link SourceWriter}.
    */
-  void writeInnerClasses(SourceWriter writer);
+  void writeInnerClasses(SourceWriter writer) throws UnableToCompleteException;
 
   /**
    * Write all the empty constructor of the proxy.
@@ -64,5 +65,5 @@ public interface ProxyOutputter {
    *
    * @param writer The {@link SourceWriter}.
    */
-  void writeMethods(SourceWriter writer);
+  void writeMethods(SourceWriter writer) throws UnableToCompleteException;
 }

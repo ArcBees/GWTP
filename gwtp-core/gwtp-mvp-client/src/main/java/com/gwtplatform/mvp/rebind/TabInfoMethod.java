@@ -39,7 +39,7 @@ public class TabInfoMethod {
   private TabInfo annotation;
   private Integer tabPriority;
   private String functionName;
-  private boolean hasGingectorParam;
+  private JParameter[] parameters;
   private boolean returnString; // Either returns a String or a TabInfo
 
   public TabInfoMethod(TreeLogger logger,
@@ -83,21 +83,16 @@ public class TabInfoMethod {
       throw new UnableToCompleteException();
     }
 
-    JParameter[] parameters = method.getParameters();
-    if (parameters.length > 1) {
-      logger.log(TreeLogger.ERROR, getErrorPrefix()
-          + " accepts more than one parameter. This is illegal.");
-      throw new UnableToCompleteException();
-    }
-
-    if (parameters.length == 1) {
-      JClassType parameterType = parameters[0].getType().isClassOrInterface();
-      if (parameterType.isAssignableFrom(ginjectorInspector.getGinjectorClass())) {
-          hasGingectorParam = true;
-      } else {
-        logger.log(TreeLogger.ERROR, getErrorPrefix() + " has a parameter that is not of type "
-                + ginjectorInspector.getGinjectorClassName() + ". This is illegal.");
-        throw new UnableToCompleteException();
+    parameters = method.getParameters();
+    if (parameters.length > 0) {
+      for (JParameter parameter : parameters) {
+        final JClassType parameterType = parameter.getType().isClassOrInterface();
+        if (!ginjectorInspector.getGinjectorClass().equals(parameterType) &&
+            ginjectorInspector.findGetMethod(parameterType) == null) {
+          logger.log(TreeLogger.ERROR, getErrorPrefix() + " has a parameter that is not provided by "
+                  + ginjectorInspector.getGinjectorClassName() + ". This is illegal.");
+          throw new UnableToCompleteException();
+        }
       }
     }
 
@@ -125,7 +120,7 @@ public class TabInfoMethod {
    *
    * @param writer The {@code SourceWriter}
    */
-  public void writeGetTabDataInternalMethod(SourceWriter writer) {
+  public void writeGetTabDataInternalMethod(SourceWriter writer) throws UnableToCompleteException {
     if (returnString) {
       // Presenter static method returning a string
       assert tabPriority != null;
@@ -133,7 +128,7 @@ public class TabInfoMethod {
       writer.println("protected TabData getTabDataInternal("
           + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
       writer.indent();
-      writer.print("  return new TabDataBasic(");
+      writer.print("return new TabDataBasic(");
       writer.print(presenterInspector.getPresenterClassName() + ".");
       writeTabInfoFunctionCall(writer);
       writer.println(", " + tabPriority + ");");
@@ -145,7 +140,7 @@ public class TabInfoMethod {
       writer.println("protected TabData getTabDataInternal("
           + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
       writer.indent();
-      writer.print("  return ");
+      writer.print("return ");
       writer.print(presenterInspector.getPresenterClassName() + ".");
       writeTabInfoFunctionCall(writer);
       writer.println(";");
@@ -154,10 +149,21 @@ public class TabInfoMethod {
     }
   }
 
-  private void writeTabInfoFunctionCall(SourceWriter writer) {
-    writer.print(functionName + "( ");
-    if (hasGingectorParam) {
+  private void writeTabInfoFunctionCall(SourceWriter writer) throws UnableToCompleteException {
+    writer.print(functionName + "(");
+    for (int i = 0; i < parameters.length; i++) {
+      if (i > 0) {
+        writer.print(", ");
+      }
       writer.print("ginjector");
+
+      JParameter parameter = parameters[i];
+      final JClassType returnType = parameter.getType().isClassOrInterface();
+      if (!returnType.equals(ginjectorInspector.getGinjectorClass())) {
+        writer.print(".");
+        writer.print(ginjectorInspector.findGetMethod(returnType));
+        writer.print("()");
+      }
     }
     writer.print(")");
   }

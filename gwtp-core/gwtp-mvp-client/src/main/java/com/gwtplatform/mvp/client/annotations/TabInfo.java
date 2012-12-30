@@ -74,9 +74,10 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  * in which case you must not specify either the {@link #label} nor the {@link #priority}.
  * Again, specify the {@link #nameToken} parameter only if your presenter is not a place.
  * <p />
- * The method you annotate can optionally accept exactly 1 parameter having the type
- * of your custom {@link com.google.gwt.inject.client.Ginjector}. Here's an example of
- * this usage:
+ * The method you annotate can optionally accept parameters having either the type
+ * of your custom {@link com.google.gwt.inject.client.Ginjector} or any type that is provided by
+ * the ginjector. Here are two examples of this usage:
+ *
  * <pre>
  * {@code @}ProxyCodeSplit
  * public interface MyProxy extends TabContentProxy&lt;SettingsTabStripPresenter&gt; { }
@@ -87,6 +88,13 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *    nameToken = "SETTINGS-USER")
  * static TabData getTabData(MyGingector ginjector) {
  *   return ginjector.getTabDataFactory().createUserTabData();
+ * }
+ * </pre>
+ *
+ * <pre>
+ * {@code @}TabInfo(container = ApplicationPresenter.class)
+ * static TabData getTabData(Messages msgs, IsAdminGateKeeper keeper) {
+ *   return new TabDataExt(msgs.adminTitle(), 1000, keeper);;
  * }
  * </pre>
  *
