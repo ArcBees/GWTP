@@ -25,17 +25,16 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @param <A> Type of the associated {@link Action}
  * @param <R> Type of the associated {@link Result}
- *
  * @author Christian Goudreau
  */
 public interface ActionHandlerValidatorMap<A extends Action<R>, R extends Result> {
-  /**
-   * @return the {@link Action} class associated
-   */
-  Class<A> getActionClass();
+    /**
+     * @return the {@link Action} class associated
+     */
+    Class<A> getActionClass();
 
-  /**
-   * @return the {@link ActionHandlerValidatorClass} class associated
-   */
-  ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass();
+    /**
+     * @return the {@link ActionHandlerValidatorClass} class associated
+     */
+    ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass();
 }

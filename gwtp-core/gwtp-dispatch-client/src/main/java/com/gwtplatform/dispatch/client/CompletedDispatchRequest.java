@@ -27,15 +27,15 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  */
 public class CompletedDispatchRequest implements DispatchRequest {
 
-  public CompletedDispatchRequest() {
-  }
+    public CompletedDispatchRequest() {
+    }
 
-  @Override
-  public void cancel() {
-  }
+    @Override
+    public void cancel() {
+    }
 
-  @Override
-  public boolean isPending() {
-    return false;
-  }
+    @Override
+    public boolean isPending() {
+        return false;
+    }
 }

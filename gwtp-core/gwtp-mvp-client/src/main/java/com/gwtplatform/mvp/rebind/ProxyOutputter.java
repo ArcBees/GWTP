@@ -28,42 +28,43 @@ import com.google.gwt.user.rebind.SourceWriter;
  */
 public interface ProxyOutputter {
 
-  /**
-   * Initializes the composer factory, adding all the imports, setting the
-   * implemented interfaces and extending the correct superclass.
-   *
-   * @param composerFactory The composer factory used to generate to proxy.
-   */
-  void initComposerFactory(ClassSourceFileComposerFactory composerFactory);
+    /**
+     * Initializes the composer factory, adding all the imports, setting the
+     * implemented interfaces and extending the correct superclass.
+     *
+     * @param composerFactory The composer factory used to generate to proxy.
+     */
+    void initComposerFactory(ClassSourceFileComposerFactory composerFactory);
 
-  /**
-   * Write all the fields of the proxy.
-   *
-   * @param writer The {@link SourceWriter}.
-   */
-  void writeFields(SourceWriter writer);
+    /**
+     * Write all the fields of the proxy.
+     *
+     * @param writer The {@link SourceWriter}.
+     */
+    void writeFields(SourceWriter writer);
 
-  /**
-   * Write all the inner classes of the proxy.
-   *
-   * @param writer The {@link SourceWriter}.
-   */
-  void writeInnerClasses(SourceWriter writer) throws UnableToCompleteException;
+    /**
+     * Write all the inner classes of the proxy.
+     *
+     * @param writer The {@link SourceWriter}.
+     */
+    void writeInnerClasses(SourceWriter writer) throws UnableToCompleteException;
 
-  /**
-   * Write all the empty constructor of the proxy.
-   *
-   * @param writer The {@link SourceWriter}.
-   * @param className The class name, which will be the name of the constructor method.
-   * @param registerDelayedBind {@code true} if the constructor should register this class towards the
-   *        {@link com.gwtplatform.mvp.client.DelayedBindRegistry DelayedBindRegistry}, {@code false} otherwise.
-   */
-  void writeConstructor(SourceWriter writer, String className, boolean registerDelayedBind);
+    /**
+     * Write all the empty constructor of the proxy.
+     *
+     * @param writer              The {@link SourceWriter}.
+     * @param className           The class name, which will be the name of the constructor method.
+     * @param registerDelayedBind {@code true} if the constructor should register this class towards the
+     *                            {@link com.gwtplatform.mvp.client.DelayedBindRegistry DelayedBindRegistry},
+     *                            {@code false} otherwise.
+     */
+    void writeConstructor(SourceWriter writer, String className, boolean registerDelayedBind);
 
-  /**
-   * Write all the methods of the proxy, not including the constructor.
-   *
-   * @param writer The {@link SourceWriter}.
-   */
-  void writeMethods(SourceWriter writer) throws UnableToCompleteException;
+    /**
+     * Write all the methods of the proxy, not including the constructor.
+     *
+     * @param writer The {@link SourceWriter}.
+     */
+    void writeMethods(SourceWriter writer) throws UnableToCompleteException;
 }

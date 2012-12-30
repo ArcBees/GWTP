@@ -24,45 +24,46 @@ import com.google.inject.Binding;
 import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper
+        .CommonBindingDescriptor;
 
 /**
  * @author Peter Simun (simun@seges.sk)
  */
 public class GuiceBeanProvider implements BeanProvider {
 
-  /**
-   * Adapter for tranforming Guice Binding into BeanProvider implementation.
-   *
-   * @author Peter Simun (simun@seges.sk)
-   */
-  public static class GuiceBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
+    /**
+     * Adapter for tranforming Guice Binding into BeanProvider implementation.
+     *
+     * @author Peter Simun (simun@seges.sk)
+     */
+    public static class GuiceBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
 
-    public GuiceBindingDescriptorAdapter(Binding<B> binding) {
-      super(binding.getProvider().get(), binding.getKey().toString());
-    }
-  }
-
-  private Injector injector;
-
-  public GuiceBeanProvider(Injector injector) {
-    this.injector = injector;
-  }
-
-  @Override
-  public <B> B getInstance(Class<B> clazz) {
-    return injector.getInstance(clazz);
-  }
-
-  @Override
-  public <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz) {
-
-    List<BindingDescriptor<B>> result = new ArrayList<BindingDescriptor<B>>();
-
-    for (Binding<B> binding : injector.findBindingsByType(TypeLiteral.get(clazz))) {
-      result.add(new GuiceBindingDescriptorAdapter<B>(binding));
+        public GuiceBindingDescriptorAdapter(Binding<B> binding) {
+            super(binding.getProvider().get(), binding.getKey().toString());
+        }
     }
 
-    return result.iterator();
-  }
+    private Injector injector;
+
+    public GuiceBeanProvider(Injector injector) {
+        this.injector = injector;
+    }
+
+    @Override
+    public <B> B getInstance(Class<B> clazz) {
+        return injector.getInstance(clazz);
+    }
+
+    @Override
+    public <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz) {
+
+        List<BindingDescriptor<B>> result = new ArrayList<BindingDescriptor<B>>();
+
+        for (Binding<B> binding : injector.findBindingsByType(TypeLiteral.get(clazz))) {
+            result.add(new GuiceBindingDescriptorAdapter<B>(binding));
+        }
+
+        return result.iterator();
+    }
 }

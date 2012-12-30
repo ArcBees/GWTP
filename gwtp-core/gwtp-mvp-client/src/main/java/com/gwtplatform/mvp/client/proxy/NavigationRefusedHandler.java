@@ -24,6 +24,6 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Christian Goudreau
  */
 public interface NavigationRefusedHandler extends EventHandler {
-  void onNavigationRefused(
-      final NavigationRefusedEvent navigationRefusedEvent);
+    void onNavigationRefused(
+            final NavigationRefusedEvent navigationRefusedEvent);
 }

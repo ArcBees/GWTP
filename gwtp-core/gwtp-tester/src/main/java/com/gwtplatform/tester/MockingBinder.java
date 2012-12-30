@@ -24,13 +24,13 @@ import com.google.gwt.uibinder.client.UiField;
 /**
  * {@link MockingBinder} makes testing view even easier by mocking every
  * {@link UiField} and returning a mocked object upon creation.
- * <p />
+ * <p/>
  * To use it, you should build a small class that extends MockingBinder and bind
  * that class inside your Guice test module. You will have to provide a
  * {@link MockFactory} to let MockingBinder mock everything.
- *
+ * <p/>
  * Ex:
- *
+ * <p/>
  * <pre>
  * public static class Module extends JukitoModule {
  *  static class MyTestBinder extends MockingBinder&lt;Widget, BlogView&gt; implements
@@ -47,47 +47,46 @@ import com.google.gwt.uibinder.client.UiField;
  *  }
  * }
  * </pre>
- *
+ * <p/>
  * Disarming GWT is important to unit test views.
  *
  * @param <U> Mock type returned by {@link UiBinder#createAndBindUi(Object)}.
  * @param <O> Owner type.
- *
  * @author Christian Goudreau
  */
 public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
-  private final Class<U> returnTypeClass;
-  private final MockFactory mockFactory;
+    private final Class<U> returnTypeClass;
+    private final MockFactory mockFactory;
 
-  /**
-   * @param returnTypeClass Type to return when creating the mocked ui.
-   * @param mockFactory A {@link MockFactory} to provide mock object.
-   */
-  public MockingBinder(final Class<U> returnTypeClass,
-      final MockFactory mockFactory) {
-    this.returnTypeClass = returnTypeClass;
-    this.mockFactory = mockFactory;
-  }
-
-  @Override
-  public U createAndBindUi(O owner) throws IllegalArgumentException {
-    Field[] fields = owner.getClass().getDeclaredFields();
-
-    for (Field field : fields) {
-      field.setAccessible(true);
-
-      if (field.isAnnotationPresent(UiField.class)) {
-        Object mockObject = mockFactory.mock(field.getType());
-
-        try {
-          field.set(owner, mockObject);
-        } catch (IllegalAccessException e) {
-          e.printStackTrace();
-          throw new RuntimeException(e);
-        }
-      }
+    /**
+     * @param returnTypeClass Type to return when creating the mocked ui.
+     * @param mockFactory     A {@link MockFactory} to provide mock object.
+     */
+    public MockingBinder(final Class<U> returnTypeClass,
+            final MockFactory mockFactory) {
+        this.returnTypeClass = returnTypeClass;
+        this.mockFactory = mockFactory;
     }
 
-    return mockFactory.mock(returnTypeClass);
-  }
+    @Override
+    public U createAndBindUi(O owner) throws IllegalArgumentException {
+        Field[] fields = owner.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+
+            if (field.isAnnotationPresent(UiField.class)) {
+                Object mockObject = mockFactory.mock(field.getType());
+
+                try {
+                    field.set(owner, mockObject);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return mockFactory.mock(returnTypeClass);
+    }
 }

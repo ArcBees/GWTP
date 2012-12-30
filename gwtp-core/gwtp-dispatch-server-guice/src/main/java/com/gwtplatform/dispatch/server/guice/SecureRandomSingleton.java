@@ -16,14 +16,14 @@
 
 package com.gwtplatform.dispatch.server.guice;
 
-import com.google.inject.Singleton;
-
 import java.security.SecureRandom;
+
+import com.google.inject.Singleton;
 
 /**
  * @author Philippe Beaudoin
  */
 @Singleton
 public class SecureRandomSingleton extends SecureRandom {
-  private static final long serialVersionUID = 462441711297897572L;
+    private static final long serialVersionUID = 462441711297897572L;
 }

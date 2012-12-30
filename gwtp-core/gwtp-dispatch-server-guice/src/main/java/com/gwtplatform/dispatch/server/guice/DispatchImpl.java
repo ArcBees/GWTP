@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.server.guice;
 
-import com.gwtplatform.dispatch.server.AbstractDispatchImpl;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import com.gwtplatform.dispatch.server.AbstractDispatchImpl;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 
 /**
  * @author Philippe Beaudoin
@@ -28,8 +28,8 @@ import javax.inject.Singleton;
 @Singleton
 public class DispatchImpl extends AbstractDispatchImpl {
 
-  @Inject
-  public DispatchImpl(ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
-    super(actionHandlerValidatorRegistry);
-  }
+    @Inject
+    public DispatchImpl(ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
+        super(actionHandlerValidatorRegistry);
+    }
 }

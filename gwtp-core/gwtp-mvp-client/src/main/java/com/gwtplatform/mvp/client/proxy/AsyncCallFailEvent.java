@@ -24,72 +24,71 @@ import com.google.web.bindery.event.shared.EventBus;
  * Event fired after any asynchronous call to the server performed by GWTP MVP returns with
  * Such asynchronous calls only occur when using code splitting.
  *
+ * @author Philippe Beaudoin
  * @see AsyncCallFailHandler
  * @see AsyncCallStartEvent
  * @see AsyncCallSucceedEvent
- *
- * @author Philippe Beaudoin
  */
 public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
-  private static final Type<AsyncCallFailHandler> TYPE = new Type<AsyncCallFailHandler>();
+    private static final Type<AsyncCallFailHandler> TYPE = new Type<AsyncCallFailHandler>();
 
-  /**
-   * Fires a {@link AsyncCallFailEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   *
-   * @param source The source that fires this event ({@link EventBus}).
-   * @param caught failure encountered while executing a remote procedure call.
-   */
-  public static void fire(EventBus source, Throwable caught) {
-    source.fireEvent(new AsyncCallFailEvent(caught));
-  }
+    /**
+     * Fires a {@link AsyncCallFailEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source The source that fires this event ({@link EventBus}).
+     * @param caught failure encountered while executing a remote procedure call.
+     */
+    public static void fire(EventBus source, Throwable caught) {
+        source.fireEvent(new AsyncCallFailEvent(caught));
+    }
 
-  /**
-   * Fires a {@link AsyncCallFailEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   * @deprecated Use {@link #fire(EventBus, Throwable)} instead.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   * @param caught failure encountered while executing a remote procedure call.
-   */
-  @Deprecated
-  public static void fire(final HasHandlers source, Throwable caught) {
-    source.fireEvent(new AsyncCallFailEvent(caught));
-  }
+    /**
+     * Fires a {@link AsyncCallFailEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source The source that fires this event ({@link HasHandlers}).
+     * @param caught failure encountered while executing a remote procedure call.
+     * @deprecated Use {@link #fire(EventBus, Throwable)} instead.
+     */
+    @Deprecated
+    public static void fire(final HasHandlers source, Throwable caught) {
+        source.fireEvent(new AsyncCallFailEvent(caught));
+    }
 
-  private final Throwable caught;
+    private final Throwable caught;
 
- /**
-  * Creates an event indicating that an asynchronous call has failed, and attach a {@link Throwable}
-  * to it.
-  *
-  * @param caught failure encountered while executing a remote procedure call.
-  */
-  AsyncCallFailEvent(Throwable caught) {
-    this.caught = caught;
-  }
+    /**
+     * Creates an event indicating that an asynchronous call has failed, and attach a {@link Throwable}
+     * to it.
+     *
+     * @param caught failure encountered while executing a remote procedure call.
+     */
+    AsyncCallFailEvent(Throwable caught) {
+        this.caught = caught;
+    }
 
-  public static Type<AsyncCallFailHandler> getType() {
-    return TYPE;
-  }
+    public static Type<AsyncCallFailHandler> getType() {
+        return TYPE;
+    }
 
-  @Override
-  public Type<AsyncCallFailHandler> getAssociatedType() {
-    return getType();
-  }
+    @Override
+    public Type<AsyncCallFailHandler> getAssociatedType() {
+        return getType();
+    }
 
-  @Override
-  protected void dispatch(AsyncCallFailHandler handler) {
-    handler.onAsyncCallFail(this);
-  }
+    @Override
+    protected void dispatch(AsyncCallFailHandler handler) {
+        handler.onAsyncCallFail(this);
+    }
 
-  /**
-   * Access the {@link Throwable} that was obtained when this asynchronous call failed.
-   *
-   * @return The {@link PlaceRequest} or {@code null} if no place request is
-   *         known.
-   */
-  public Throwable getCaught() {
-    return caught;
-  }
+    /**
+     * Access the {@link Throwable} that was obtained when this asynchronous call failed.
+     *
+     * @return The {@link PlaceRequest} or {@code null} if no place request is
+     *         known.
+     */
+    public Throwable getCaught() {
+        return caught;
+    }
 }
