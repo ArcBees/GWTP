@@ -17,8 +17,10 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * When a class implementing the Boostrapper interface is found, GWTP will call init() instead of revealCurrentPlace.
- * This is particularly useful when you need to do initialisation steps before the first page is shown to the user.
+ * When a class implementing the Boostrapper interface is found that us annotated with
+ * {@link com.gwtplatform.mvp.client.annotations.IsTheBoostrapper}, GWTP will call init() of the bootstapper instead
+ * of revealCurrentPlace. This is particularly useful when you need to do initialisation steps before the first page
+ * is shown to the user.
  */
 public interface Bootstrapper {
     void init();
