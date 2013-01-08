@@ -24,8 +24,9 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.mvp.client.annotations.IsTheBoostrapper;
+import com.gwtplatform.mvp.client.annotations.IsTheBootstrapper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
@@ -34,6 +35,11 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  * revealCurrentPlace() from the place manager.
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
+    private static final String TOO_MANY_BOOTSTRAPPER_FOUND =
+            "Too many bootstrapper has been found. Only one bootstrapper annotated with IsTheBoostrapper can be used.";
+    private static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
+            "The boostrapper provided doesn't implements the interface Bootstrapper.";
+
     private static final String SUFFIX = "Impl";
     private static final String OVERRIDE = "@Override";
     private static final String INJECT_METHOD = "public void init() {";
@@ -58,7 +64,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         ClassSourceFileComposerFactory composer = initComposer();
         SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
 
-        JClassType bootstrapper = getTypeAnnotatedWith(IsTheBoostrapper.class);
+        JClassType bootstrapper = getBootstrapper();
         String ginjectorName = new GinjectorGenerator(bootstrapper).generate(getTreeLogger(),
                 generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME);
 
@@ -77,6 +83,39 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         composer.addImport(DelayedBindRegistry.class.getCanonicalName());
 
         return composer;
+    }
+
+    private JClassType getBootstrapper() throws UnableToCompleteException {
+        int boostrapperCounter = 0;
+        JClassType bootstrapper = null;
+        for (JClassType type : getTypeOracle().getTypes()) {
+            if (type.isAnnotationPresent(IsTheBootstrapper.class)) {
+                bootstrapper = type;
+                boostrapperCounter++;
+
+                verifyBoostrapperInterface(bootstrapper);
+            }
+        }
+
+        verifyThatTheresOnlyOneBootstrapper(boostrapperCounter);
+
+        return bootstrapper;
+    }
+
+    private void verifyThatTheresOnlyOneBootstrapper(int boostrapperCounter) throws UnableToCompleteException {
+        if (boostrapperCounter > 1) {
+            getTreeLogger().log(TreeLogger.ERROR, TOO_MANY_BOOTSTRAPPER_FOUND);
+            throw new UnableToCompleteException();
+        }
+    }
+
+    private void verifyBoostrapperInterface(JClassType bootstrapper) throws UnableToCompleteException {
+        JClassType bootstrapperInterface = getType(Bootstrapper.class.getName());
+
+        if (!bootstrapper.isAssignableTo(bootstrapperInterface)) {
+            getTreeLogger().log(TreeLogger.ERROR, DOES_NOT_EXTEND_BOOTSTRAPPER);
+            throw new UnableToCompleteException();
+        }
     }
 
     private void writeInit(SourceWriter sourceWriter, String generatorName, JClassType bootstrapper) {
