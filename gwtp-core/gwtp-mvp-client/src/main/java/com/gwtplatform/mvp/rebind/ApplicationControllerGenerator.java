@@ -21,9 +21,11 @@ import java.io.PrintWriter;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
+import com.gwtplatform.mvp.client.annotations.IsTheBoostrapper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
@@ -37,6 +39,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     private static final String INJECT_METHOD = "public void init() {";
     private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
     private static final String PLACEMANAGER_REVEALCURRENTPLACE = "%s.SINGLETON.get%s().revealCurrentPlace();";
+    private static final String INIT_BOOSTRAPPER = "%s.SINGLETON.get%s().init();";
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -46,8 +49,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         setTreeLogger(treeLogger);
         setTypeClass(getType(typeName));
 
-        PrintWriter printWriter;
-        printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
+        PrintWriter printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
 
         if (printWriter == null) {
             return typeName + SUFFIX;
@@ -56,28 +58,15 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         ClassSourceFileComposerFactory composer = initComposer();
         SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
 
-        String ginjectorName = new GinjectorGenerator().generate(getTreeLogger(),
+        JClassType bootstrapper = getTypeAnnotatedWith(IsTheBoostrapper.class);
+        String ginjectorName = new GinjectorGenerator(bootstrapper).generate(getTreeLogger(),
                 generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME);
 
-        writeInit(sourceWriter, ginjectorName);
+        writeInit(sourceWriter, ginjectorName, bootstrapper);
 
         closeDefinition(sourceWriter);
 
         return getPackageName() + "." + getClassName();
-    }
-
-    private void writeInit(SourceWriter sourceWriter, String generatorName) {
-        sourceWriter.println(OVERRIDE);
-        sourceWriter.println(INJECT_METHOD);
-        sourceWriter.indent();
-
-        sourceWriter.println(String.format(DELAYED_BIND, DelayedBindRegistry.class.getSimpleName(), generatorName));
-        sourceWriter.println();
-
-        sourceWriter.println(String.format(PLACEMANAGER_REVEALCURRENTPLACE, generatorName,
-                PlaceManager.class.getSimpleName()));
-        sourceWriter.outdent();
-        sourceWriter.println("}");
     }
 
     private ClassSourceFileComposerFactory initComposer() {
@@ -88,5 +77,24 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         composer.addImport(DelayedBindRegistry.class.getCanonicalName());
 
         return composer;
+    }
+
+    private void writeInit(SourceWriter sourceWriter, String generatorName, JClassType bootstrapper) {
+        sourceWriter.println(OVERRIDE);
+        sourceWriter.println(INJECT_METHOD);
+        sourceWriter.indent();
+
+        sourceWriter.println(String.format(DELAYED_BIND, DelayedBindRegistry.class.getSimpleName(), generatorName));
+        sourceWriter.println();
+
+        if (bootstrapper == null) {
+            sourceWriter.println(String.format(PLACEMANAGER_REVEALCURRENTPLACE, generatorName,
+                    PlaceManager.class.getSimpleName()));
+        } else {
+            sourceWriter.println(String.format(INIT_BOOSTRAPPER, generatorName, bootstrapper.getSimpleSourceName()));
+        }
+
+        sourceWriter.outdent();
+        sourceWriter.println("}");
     }
 }

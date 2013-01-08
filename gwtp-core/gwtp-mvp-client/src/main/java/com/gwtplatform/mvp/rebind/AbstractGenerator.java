@@ -94,10 +94,6 @@ public abstract class AbstractGenerator extends Generator {
         this.className = className;
     }
 
-    protected String getPackageNameFromTypeName(String typeName) {
-        return typeName.substring(0, typeName.lastIndexOf("."));
-    }
-
     protected String getSimpleNameFromTypeName(String typeName) {
         return typeName.substring(typeName.lastIndexOf(".") + 1);
     }
@@ -117,6 +113,16 @@ public abstract class AbstractGenerator extends Generator {
             getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + typeName, e);
             throw new UnableToCompleteException();
         }
+    }
+
+    protected JClassType getTypeAnnotatedWith(Class clazz) {
+        for (JClassType type : getTypeOracle().getTypes()) {
+            if (type.isAnnotationPresent(clazz)) {
+                return type;
+            }
+        }
+
+        return null;
     }
 
     protected ConfigurationProperty findConfigurationProperty(String prop) throws UnableToCompleteException {
