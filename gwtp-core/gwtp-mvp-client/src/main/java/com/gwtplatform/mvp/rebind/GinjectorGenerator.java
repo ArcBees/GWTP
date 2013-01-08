@@ -36,6 +36,7 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
@@ -55,6 +56,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     private static final String GETTER_METHOD = "%s get%s();";
     private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
     private static final String GIN_MODULES = "@%s({%s})";
+    private static final String DEFAULT_GATEKEEPER = "@%s";
 
     private final ProviderBundleGenerator providerBundleGenerator = new ProviderBundleGenerator();
 
@@ -116,6 +118,8 @@ public class GinjectorGenerator extends AbstractGenerator {
 
             if (type.isAnnotationPresent(UseGatekeeper.class)) {
                 presenterDefinitions.addGatekeeper(getType(type.getAnnotation(UseGatekeeper.class).value().getName()));
+            } else if (type.isAnnotationPresent(DefaultGatekeeper.class)) {
+                presenterDefinitions.addGatekeeper(type);
             }
         }
     }
@@ -254,6 +258,10 @@ public class GinjectorGenerator extends AbstractGenerator {
             String gatekeeperName = gatekeeper.getName();
 
             sourceWriter.println();
+            if (gatekeeper.isAnnotationPresent(DefaultGatekeeper.class)) {
+                sourceWriter.println(String.format(DEFAULT_GATEKEEPER, DefaultGatekeeper.class.getCanonicalName()));
+            }
+
             sourceWriter.println(String.format(GETTER_METHOD, gatekeeperName, gatekeeperName));
         }
     }
