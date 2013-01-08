@@ -49,6 +49,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 public class GinjectorGenerator extends AbstractGenerator {
     static final String DEFAULT_NAME = "ClientGinjector";
     static final String DEFAULT_FQ_NAME = DEFAULT_PACKAGE + "." + DEFAULT_NAME;
+
     private static final String DELIMITER = ",";
     private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
     private static final String GETTER_METHOD = "%s get%s();";
@@ -57,16 +58,20 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     private final ProviderBundleGenerator providerBundleGenerator = new ProviderBundleGenerator();
 
+    private final JClassType boostrapper;
+
+    public GinjectorGenerator(JClassType bootstrapper) {
+        this.boostrapper = bootstrapper;
+    }
+
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
             throws UnableToCompleteException {
-
         setTypeOracle(generatorContext.getTypeOracle());
         setTreeLogger(treeLogger);
         setPropertyOracle(generatorContext.getPropertyOracle());
 
-        PrintWriter printWriter;
-        printWriter = tryCreatePrintWriter(generatorContext);
+        PrintWriter printWriter = tryCreatePrintWriter(generatorContext);
 
         if (printWriter == null) {
             return typeName;
@@ -175,6 +180,10 @@ public class GinjectorGenerator extends AbstractGenerator {
         composer.addImport(GWT.class.getCanonicalName());
         composer.addImport(EventBus.class.getCanonicalName());
         composer.addImport(PlaceManager.class.getCanonicalName());
+
+        if (boostrapper != null) {
+            composer.addImport(boostrapper.getQualifiedSourceName());
+        }
     }
 
     private void writePresenterImports(ClassSourceFileComposerFactory composer,
@@ -211,6 +220,12 @@ public class GinjectorGenerator extends AbstractGenerator {
 
         String placeManagerName = PlaceManager.class.getSimpleName();
         sourceWriter.println(String.format(GETTER_METHOD, placeManagerName, placeManagerName));
+
+        if (boostrapper != null) {
+            sourceWriter.println();
+            String bootstrapperName = boostrapper.getSimpleSourceName();
+            sourceWriter.println(String.format(GETTER_METHOD, bootstrapperName, bootstrapperName));
+        }
     }
 
     private void writePresentersGetter(SourceWriter sourceWriter, PresenterDefinitions presenterDefinitions) {
