@@ -12,10 +12,10 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ##Current Release
-0.8-alpha-2
+0.8-alpha-3
 
 ##Current Snapshot
-0.8-alpha-2-SNAPSHOT
+0.8-alpha-4-SNAPSHOT
 
 ##Demos
 * [GWTP Samples Project Home](https://github.com/ArcBees/GWTP-Samples)
