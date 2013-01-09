@@ -115,16 +115,6 @@ public abstract class AbstractGenerator extends Generator {
         }
     }
 
-    protected JClassType getTypeAnnotatedWith(Class clazz) {
-        for (JClassType type : getTypeOracle().getTypes()) {
-            if (type.isAnnotationPresent(clazz)) {
-                return type;
-            }
-        }
-
-        return null;
-    }
-
     protected ConfigurationProperty findConfigurationProperty(String prop) throws UnableToCompleteException {
         try {
             return getPropertyOracle().getConfigurationProperty(prop);
