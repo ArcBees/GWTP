@@ -47,6 +47,7 @@
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
