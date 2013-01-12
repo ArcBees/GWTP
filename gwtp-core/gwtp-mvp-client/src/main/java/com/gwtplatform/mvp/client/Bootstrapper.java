@@ -21,6 +21,7 @@ package com.gwtplatform.mvp.client;
  * {@link com.gwtplatform.mvp.client.annotations.Bootstrap} is found, GWTP will call onBootstrap() of the bootstapper
  * instead of revealCurrentPlace. This is particularly useful when you need to do initialisation steps before the first
  * page is shown to the user.
+ * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP
  */
 public interface Bootstrapper {
     void onBootstrap();
