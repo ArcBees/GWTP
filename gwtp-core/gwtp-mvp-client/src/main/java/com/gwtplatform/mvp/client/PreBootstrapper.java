@@ -21,6 +21,7 @@ package com.gwtplatform.mvp.client;
  * {@link com.gwtplatform.mvp.client.annotations.PreBootstrap} is found, the ApplicationController
  * will call onPreBootstrap() before GWTP is initialized.
  * Because of this fact, <em>no injection can be provided</em> for this class.
+ * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP
  */
 public interface PreBootstrapper {
     void onPreBootstrap();

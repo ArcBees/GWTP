@@ -39,10 +39,11 @@ import com.gwtplatform.mvp.client.annotations.PreBootstrap;
  * revealCurrentPlace() from the place manager.
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
+    private static final String HINT_URL = " * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP";
     private static final String TOO_MANY_BOOTSTRAPPER_FOUND =
-            "Too many %s have been found. Only one %s annotated with @%s must be defined.";
+            "Too many %s have been found. Only one %s annotated with @%s must be defined. See " + HINT_URL;
     private static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
-            "The %s provided doesn't implement the %s interface.";
+            "The %s provided doesn't implement the %s interface. See " + HINT_URL;
 
     private static final String DEFAULT_BOOTSTRAPPER = "com.gwtplatform.mvp.client.DefaultBootstrapper";
     private static final String SUFFIX = "Impl";
@@ -99,44 +100,42 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     }
 
     private JClassType getBootstrapper() throws UnableToCompleteException {
-        return findBootstrapperType(getType(DEFAULT_BOOTSTRAPPER), Bootstrapper.class, Bootstrap.class);
+        return findSingleAnnotatedType(getType(DEFAULT_BOOTSTRAPPER), Bootstrapper.class, Bootstrap.class);
     }
 
     private JClassType getPreBootstrapper() throws UnableToCompleteException {
-        return findBootstrapperType(null, PreBootstrapper.class, PreBootstrap.class);
+        return findSingleAnnotatedType(null, PreBootstrapper.class, PreBootstrap.class);
     }
 
-    private JClassType findBootstrapperType(JClassType defaultType, Class<?> clazz,
-                                            Class<? extends Annotation> annotation) throws UnableToCompleteException {
-        int boostrapperCounter = 0;
-        JClassType bootstrapper = defaultType;
-        for (JClassType type : getTypeOracle().getTypes()) {
+    private JClassType findSingleAnnotatedType(JClassType defaultType, Class<?> clazz,
+                                               Class<? extends Annotation> annotation) throws UnableToCompleteException {
+        int count = 0;
+        JClassType type = defaultType;
+        for (JClassType t : getTypeOracle().getTypes()) {
             if (type.isAnnotationPresent(annotation)) {
-                bootstrapper = type;
-                boostrapperCounter++;
+                count++;
 
-                verifyBoostrapperInterfaceIsImplemented(bootstrapper, clazz);
-                verifySingleBootstrapperImplementor(boostrapperCounter, clazz, annotation);
+                verifyInterfaceIsImplemented(type, clazz);
+                verifySingleImplementer(count, clazz, annotation);
+                type = t;
             }
         }
-        return bootstrapper;
+        return type;
     }
 
-    private void verifySingleBootstrapperImplementor(int boostrapperCounter, Class<?> clazz,
-                                                     Class<? extends Annotation> annotation)
+    private void verifySingleImplementer(int count, Class<?> clazz, Class<? extends Annotation> annotation)
             throws UnableToCompleteException {
-        if (boostrapperCounter > 1) {
+        if (count > 1) {
             getTreeLogger().log(TreeLogger.ERROR, String.format(TOO_MANY_BOOTSTRAPPER_FOUND, clazz.getSimpleName(),
                     clazz.getSimpleName(), annotation.getSimpleName()));
             throw new UnableToCompleteException();
         }
     }
 
-    private void verifyBoostrapperInterfaceIsImplemented(JClassType bootstrapper, Class<?> clazz)
-            throws UnableToCompleteException {
-        JClassType bootstrapperInterface = getType(clazz.getName());
+    private void verifyInterfaceIsImplemented(JClassType type, Class<?> clazz) throws UnableToCompleteException {
+        JClassType interfaceType = getType(clazz.getName());
 
-        if (!bootstrapper.isAssignableTo(bootstrapperInterface)) {
+        if (!type.isAssignableTo(interfaceType)) {
             getTreeLogger().log(TreeLogger.ERROR, String.format(DOES_NOT_EXTEND_BOOTSTRAPPER,
                     clazz.getSimpleName(), clazz.getSimpleName()));
             throw new UnableToCompleteException();
