@@ -14,15 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.mvp.client.annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
 /**
- * When a class implementing the Bootstrapper interface and annotated with
- * {@link com.gwtplatform.mvp.client.annotations.Bootstrap} is found, GWTP will call onBootstrap() of the bootstapper
- * instead of revealCurrentPlace. This is particularly useful when you need to do initialisation steps before the first
- * page is shown to the user.
+ * Use this annotation with an implementation of {@link com.gwtplatform.mvp.client.PreBootstrapper} if
+ * you want to execute code before GWTP is bootstrapped for example to set a GWT.setUncaughtExceptionHandler().
  * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP
  */
-public interface Bootstrapper {
-    void onBootstrap();
+@Target(ElementType.TYPE)
+public @interface PreBootstrap {
 }
