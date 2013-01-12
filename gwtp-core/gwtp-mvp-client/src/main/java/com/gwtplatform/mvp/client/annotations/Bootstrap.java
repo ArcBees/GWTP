@@ -24,5 +24,5 @@ import java.lang.annotation.Target;
  * you want your application to start and use your own initializer for your application.
  */
 @Target(ElementType.TYPE)
-public @interface IsTheBootstrapper {
+public @interface Bootstrap {
 }
