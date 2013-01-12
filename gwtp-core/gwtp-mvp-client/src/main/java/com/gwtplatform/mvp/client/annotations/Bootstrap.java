@@ -22,7 +22,8 @@ import java.lang.annotation.Target;
 /**
  * Use this annotation with an implementation of {@link com.gwtplatform.mvp.client.Bootstrapper} if
  * you want your application to start and use your own initializer for your application.
+ * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP
  */
 @Target(ElementType.TYPE)
-public @interface IsTheBootstrapper {
+public @interface Bootstrap {
 }
