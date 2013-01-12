@@ -17,11 +17,10 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * When a class implementing the Boostrapper interface and annotated with
- * {@link com.gwtplatform.mvp.client.annotations.Bootstrap} is found, GWTP will call onBootstrap() of the bootstapper
- * instead of revealCurrentPlace. This is particularly useful when you need to do initialisation steps before the first
- * page is shown to the user.
+ * When a class implementing the PreBoostrapper interface and annotated with
+ * {@link com.gwtplatform.mvp.client.annotations.Bootstrap} is found, GWTP will call onPreBootstrap() before GWTP
+ * is initialized. Because of this fact, no injection can be provided for this class.
  */
-public interface Bootstrapper {
-    void onBootstrap();
+public interface PreBootstrapper {
+    void onPreBootstrap();
 }

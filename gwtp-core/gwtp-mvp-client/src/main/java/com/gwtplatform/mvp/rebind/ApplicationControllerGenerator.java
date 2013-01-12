@@ -17,7 +17,10 @@
 package com.gwtplatform.mvp.rebind;
 
 import java.io.PrintWriter;
+import java.lang.annotation.Annotation;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -26,8 +29,9 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.mvp.client.annotations.IsTheBootstrapper;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.PreBootstrapper;
+import com.gwtplatform.mvp.client.annotations.Bootstrap;
+import com.gwtplatform.mvp.client.annotations.PreBootstrap;
 
 /**
  * Will generate a {@link com.gwtplatform.mvp.client.ApplicationController}. If the user wants his Generator to be
@@ -36,16 +40,19 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
     private static final String TOO_MANY_BOOTSTRAPPER_FOUND =
-            "Too many bootstrapper has been found. Only one bootstrapper annotated with IsTheBoostrapper can be used.";
+            "Too many %s have been found. Only one %s annotated with @%s must be defined.";
     private static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
-            "The boostrapper provided doesn't implements the interface Bootstrapper.";
+            "The %s provided doesn't implement the %s interface.";
 
+    private static final String DEFAULT_BOOTSTRAPPER = "com.gwtplatform.mvp.client.DefaultBootstrapper";
     private static final String SUFFIX = "Impl";
     private static final String OVERRIDE = "@Override";
     private static final String INJECT_METHOD = "public void init() {";
     private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
-    private static final String PLACEMANAGER_REVEALCURRENTPLACE = "%s.SINGLETON.get%s().revealCurrentPlace();";
-    private static final String INIT_BOOSTRAPPER = "%s.SINGLETON.get%s().init();";
+    private static final String ONBOOTSTRAP = "%s.SINGLETON.get%s().onBootstrap();";
+    private static final String ONPREBOOTSTRAP = "new %s().onPreBootstrap();";
+    private static final String SCHEDULE_DEFERRED_1 = "Scheduler.get().scheduleDeferred(new ScheduledCommand() {";
+    private static final String SCHEDULE_DEFERRED_2 = "public void execute() {";
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -57,27 +64,33 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
 
         PrintWriter printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
 
-        if (printWriter == null) {
-            return typeName + SUFFIX;
-        }
+        JClassType preBootstrapper = getPreBootstrapper();
 
-        ClassSourceFileComposerFactory composer = initComposer();
-        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+        ClassSourceFileComposerFactory composer = initComposer(preBootstrapper);
+        SourceWriter sw = composer.createSourceWriter(generatorContext, printWriter);
 
         JClassType bootstrapper = getBootstrapper();
+
         String ginjectorName = new GinjectorGenerator(bootstrapper).generate(getTreeLogger(),
                 generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME);
 
-        writeInit(sourceWriter, ginjectorName, bootstrapper);
+        writeInit(sw, ginjectorName, preBootstrapper, bootstrapper);
 
-        closeDefinition(sourceWriter);
+        closeDefinition(sw);
 
         return getPackageName() + "." + getClassName();
     }
 
-    private ClassSourceFileComposerFactory initComposer() {
+    private ClassSourceFileComposerFactory initComposer(JClassType preBootstrapper) {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
         composer.addImport(getTypeClass().getQualifiedSourceName());
+
+        if (preBootstrapper != null) {
+            composer.addImport(preBootstrapper.getQualifiedSourceName());
+            composer.addImport(Scheduler.class.getCanonicalName());
+            composer.addImport(ScheduledCommand.class.getCanonicalName());
+        }
+
         composer.addImplementedInterface(getTypeClass().getName());
 
         composer.addImport(DelayedBindRegistry.class.getCanonicalName());
@@ -86,54 +99,78 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     }
 
     private JClassType getBootstrapper() throws UnableToCompleteException {
+        return findBootstrapperType(getType(DEFAULT_BOOTSTRAPPER), Bootstrapper.class, Bootstrap.class);
+    }
+
+    private JClassType getPreBootstrapper() throws UnableToCompleteException {
+        return findBootstrapperType(null, PreBootstrapper.class, PreBootstrap.class);
+    }
+
+    private JClassType findBootstrapperType(JClassType defaultType, Class<?> clazz,
+                                            Class<? extends Annotation> annotation) throws UnableToCompleteException {
         int boostrapperCounter = 0;
-        JClassType bootstrapper = null;
+        JClassType bootstrapper = defaultType;
         for (JClassType type : getTypeOracle().getTypes()) {
-            if (type.isAnnotationPresent(IsTheBootstrapper.class)) {
+            if (type.isAnnotationPresent(annotation)) {
                 bootstrapper = type;
                 boostrapperCounter++;
 
-                verifyBoostrapperInterface(bootstrapper);
+                verifyBoostrapperInterfaceIsImplemented(bootstrapper, clazz);
+                verifySingleBootstrapperImplementor(boostrapperCounter, clazz, annotation);
             }
         }
-
-        verifyThatTheresOnlyOneBootstrapper(boostrapperCounter);
-
         return bootstrapper;
     }
 
-    private void verifyThatTheresOnlyOneBootstrapper(int boostrapperCounter) throws UnableToCompleteException {
+    private void verifySingleBootstrapperImplementor(int boostrapperCounter, Class<?> clazz,
+                                                     Class<? extends Annotation> annotation)
+            throws UnableToCompleteException {
         if (boostrapperCounter > 1) {
-            getTreeLogger().log(TreeLogger.ERROR, TOO_MANY_BOOTSTRAPPER_FOUND);
+            getTreeLogger().log(TreeLogger.ERROR, String.format(TOO_MANY_BOOTSTRAPPER_FOUND, clazz.getSimpleName(),
+                    clazz.getSimpleName(), annotation.getSimpleName()));
             throw new UnableToCompleteException();
         }
     }
 
-    private void verifyBoostrapperInterface(JClassType bootstrapper) throws UnableToCompleteException {
-        JClassType bootstrapperInterface = getType(Bootstrapper.class.getName());
+    private void verifyBoostrapperInterfaceIsImplemented(JClassType bootstrapper, Class<?> clazz)
+            throws UnableToCompleteException {
+        JClassType bootstrapperInterface = getType(clazz.getName());
 
         if (!bootstrapper.isAssignableTo(bootstrapperInterface)) {
-            getTreeLogger().log(TreeLogger.ERROR, DOES_NOT_EXTEND_BOOTSTRAPPER);
+            getTreeLogger().log(TreeLogger.ERROR, String.format(DOES_NOT_EXTEND_BOOTSTRAPPER,
+                    clazz.getSimpleName(), clazz.getSimpleName()));
             throw new UnableToCompleteException();
         }
     }
 
-    private void writeInit(SourceWriter sourceWriter, String generatorName, JClassType bootstrapper) {
-        sourceWriter.println(OVERRIDE);
-        sourceWriter.println(INJECT_METHOD);
-        sourceWriter.indent();
+    private void writeInit(SourceWriter sw, String generatorName, JClassType preBootstrapper, JClassType bootstrapper) {
+        sw.println(OVERRIDE);
+        sw.println(INJECT_METHOD);
+        sw.indent();
 
-        sourceWriter.println(String.format(DELAYED_BIND, DelayedBindRegistry.class.getSimpleName(), generatorName));
-        sourceWriter.println();
-
-        if (bootstrapper == null) {
-            sourceWriter.println(String.format(PLACEMANAGER_REVEALCURRENTPLACE, generatorName,
-                    PlaceManager.class.getSimpleName()));
-        } else {
-            sourceWriter.println(String.format(INIT_BOOSTRAPPER, generatorName, bootstrapper.getSimpleSourceName()));
+        if (preBootstrapper != null) {
+            sw.println(ONPREBOOTSTRAP, preBootstrapper.getSimpleSourceName());
+            sw.println();
+            sw.println(SCHEDULE_DEFERRED_1);
+            sw.indent();
+            sw.println(OVERRIDE);
+            sw.println(SCHEDULE_DEFERRED_2);
+            sw.indent();
         }
 
-        sourceWriter.outdent();
-        sourceWriter.println("}");
+        sw.println(String.format(DELAYED_BIND, DelayedBindRegistry.class.getSimpleName(), generatorName));
+        sw.println();
+
+        sw.println(String.format(ONBOOTSTRAP, generatorName, bootstrapper.getSimpleSourceName()));
+
+        sw.outdent();
+        sw.println("}");
+
+        if (preBootstrapper != null) {
+            sw.outdent();
+            sw.println("});");
+            sw.outdent();
+            sw.println("}");
+        }
     }
 }
