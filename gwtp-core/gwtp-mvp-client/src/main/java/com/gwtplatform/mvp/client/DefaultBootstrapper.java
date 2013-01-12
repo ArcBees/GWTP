@@ -16,13 +16,25 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+
+import javax.inject.Inject;
+
 /**
- * When a class implementing the Bootstrapper interface and annotated with
- * {@link com.gwtplatform.mvp.client.annotations.Bootstrap} is found, GWTP will call onBootstrap() of the bootstapper
- * instead of revealCurrentPlace. This is particularly useful when you need to do initialisation steps before the first
- * page is shown to the user.
+ * The default Bootstrapper that is used by GWTP if no other is specified via
+ * {@link com.gwtplatform.mvp.client.annotations.Bootstrap}.
  * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP
  */
-public interface Bootstrapper {
-    void onBootstrap();
+public class DefaultBootstrapper implements Bootstrapper {
+    private final PlaceManager placeManager;
+
+    @Inject
+    public DefaultBootstrapper(PlaceManager placeManager) {
+        this.placeManager = placeManager;
+    }
+
+    @Override
+    public void onBootstrap() {
+        placeManager.revealCurrentPlace();
+    }
 }
