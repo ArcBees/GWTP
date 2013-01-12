@@ -39,7 +39,7 @@ import com.gwtplatform.mvp.client.annotations.PreBootstrap;
  * revealCurrentPlace() from the place manager.
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
-    private static final String HINT_URL = " * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP";
+    private static final String HINT_URL = "https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP";
     private static final String TOO_MANY_BOOTSTRAPPER_FOUND =
             "Too many %s have been found. Only one %s annotated with @%s must be defined. See " + HINT_URL;
     private static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
