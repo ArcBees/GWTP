@@ -112,7 +112,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         int count = 0;
         JClassType type = defaultType;
         for (JClassType t : getTypeOracle().getTypes()) {
-            if (type.isAnnotationPresent(annotation)) {
+            if (t.isAnnotationPresent(annotation)) {
                 count++;
 
                 verifyInterfaceIsImplemented(type, clazz);
