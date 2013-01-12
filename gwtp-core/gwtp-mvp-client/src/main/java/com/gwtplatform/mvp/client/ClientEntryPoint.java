@@ -20,7 +20,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
 public class ClientEntryPoint implements EntryPoint {
-
     public static final ApplicationController controller = GWT.create(ApplicationController.class);
 
     @Override
