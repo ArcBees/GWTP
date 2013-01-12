@@ -57,7 +57,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
   </tr>
 </table>
 
-##Implementors
+##Implementers
 * [ArcBees.com](http://arcbees.com)
 * [Jukito](http://jukito.arcbees.com/)
 
