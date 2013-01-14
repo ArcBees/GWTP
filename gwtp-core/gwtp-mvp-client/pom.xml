@@ -61,6 +61,12 @@
 
         <!-- Test dependencies -->
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>13.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-tester</artifactId>
             <scope>test</scope>
