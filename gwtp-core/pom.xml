@@ -13,7 +13,6 @@
     <name>GWTP Core</name>
 
     <modules>
-        <module>gwtp-all</module>
         <module>gwtp-mvp-client</module>
         <module>gwtp-clients-common</module>
         <module>gwtp-dispatch-client</module>
