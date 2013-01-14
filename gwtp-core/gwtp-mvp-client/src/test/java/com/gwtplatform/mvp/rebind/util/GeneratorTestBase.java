@@ -95,7 +95,7 @@ public class GeneratorTestBase {
     }
     
     protected Set<Resource> gwtpResourcesWith(Resource... resources) {
-        final Set<Resource> res = Sets.newHashSet(GwtpResourceBase.getResources());
+        Set<Resource> res = Sets.newHashSet(GwtpResourceBase.getResources());
         res.addAll(Sets.newHashSet(resources));
         return res;
     }

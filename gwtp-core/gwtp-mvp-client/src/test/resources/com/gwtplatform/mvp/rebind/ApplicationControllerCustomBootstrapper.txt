@@ -8,6 +8,6 @@ public class ApplicationControllerImpl implements ApplicationController {
   public void init() {
     DelayedBindRegistry.bind(com.gwtplatform.mvp.client.ClientGinjector.SINGLETON);
     
-    com.gwtplatform.mvp.client.ClientGinjector.SINGLETON.getCustomBootstrapper().onBootstrap();
+    com.gwtplatform.mvp.client.ClientGinjector.SINGLETON.getCustomBootstrapper1().onBootstrap();
   }
 }
