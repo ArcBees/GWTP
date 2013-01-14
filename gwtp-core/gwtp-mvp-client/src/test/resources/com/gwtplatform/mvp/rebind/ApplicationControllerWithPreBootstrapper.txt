@@ -1,7 +1,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.gwtplatform.mvp.client.ApplicationController;
-import com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper;
+import com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper1;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
@@ -9,7 +9,7 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
 public class ApplicationControllerImpl implements ApplicationController {
   @Override
   public void init() {
-    new CustomPreBootstrapper().onPreBootstrap();
+    new CustomPreBootstrapper1().onPreBootstrap();
     
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       @Override
