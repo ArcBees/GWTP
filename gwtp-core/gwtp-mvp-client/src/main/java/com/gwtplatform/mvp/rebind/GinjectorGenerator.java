@@ -152,7 +152,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     private void addExtensionInterfaces(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
         List<String> values = findConfigurationProperty(GIN_GINJECTOR_EXTENSION).getValues();
         if (values.size() > 0) {
-            for (String extension : values.get(0).split(DELIMITER)) {
+            for (String extension : values) {
                 final JClassType extensionType = getType(extension.trim());
                 composer.addImport(extensionType.getQualifiedSourceName());
                 composer.addImplementedInterface(extensionType.getName());
@@ -167,7 +167,7 @@ public class GinjectorGenerator extends AbstractGenerator {
         composer.addImport(GinModules.class.getName());
 
         StringBuilder modules = new StringBuilder();
-        for (String module : moduleProperty.getValues().get(0).split(DELIMITER)) {
+        for (String module : moduleProperty.getValues()) {
             JClassType moduleType = getType(module.trim());
 
             composer.addImport(moduleType.getQualifiedSourceName());
