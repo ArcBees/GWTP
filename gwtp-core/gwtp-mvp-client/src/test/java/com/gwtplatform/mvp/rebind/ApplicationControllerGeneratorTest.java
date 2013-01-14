@@ -26,17 +26,9 @@ import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.PreBootstrapper;
 import com.gwtplatform.mvp.client.annotations.Bootstrap;
 import com.gwtplatform.mvp.client.annotations.PreBootstrap;
-import com.gwtplatform.mvp.rebind.model.BarModule;
-import com.gwtplatform.mvp.rebind.model.CustomBootstrapper;
-import com.gwtplatform.mvp.rebind.model.CustomBootstrapper2;
-import com.gwtplatform.mvp.rebind.model.CustomBootstrapper3;
-import com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper;
-import com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper2;
-import com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper3;
-import com.gwtplatform.mvp.rebind.model.FooModule;
 import com.gwtplatform.mvp.rebind.util.GeneratorTestBase;
-import com.gwtplatform.mvp.rebind.util.RealJavaResource;
-import com.gwtplatform.mvp.rebind.util.UnitTestTreeLogger;
+import com.gwtplatform.mvp.rebind.util.GwtpResourceBase;
+import com.google.gwt.dev.util.UnitTestTreeLogger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -47,7 +39,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
-
     private static final String FINAL_NAME = ApplicationController.class.getName() + ApplicationControllerGenerator.SUFFIX;
 
     private static String CONTROLLER_DEFAULT,
@@ -87,7 +78,7 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
     public void testFooModuleOnly() throws Exception {
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle, gwtpResourcesWith());
@@ -108,7 +99,8 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
     public void testFooAndBarModule() throws Exception {
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName(), BarModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName(),
+                        GwtpResourceBase.BARMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle, gwtpResourcesWith());
@@ -129,11 +121,11 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
     public void testWithCustomBootstrapper() throws Exception {
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle,
-                gwtpResourcesWith(new RealJavaResource(CustomBootstrapper.class)));
+                gwtpResourcesWith(GwtpResourceBase.CUSTOMBOOTSTRAPPER));
 
         assertEquals(FINAL_NAME, generator.generate(logger, context, ApplicationController.class.getName()));
 
@@ -157,12 +149,11 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
 
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle, gwtpResourcesWith(
-                new RealJavaResource(CustomBootstrapper.class),
-                new RealJavaResource(CustomBootstrapper2.class)));
+                GwtpResourceBase.CUSTOMBOOTSTRAPPER, GwtpResourceBase.CUSTOMBOOTSTRAPPER2));
 
         try {
             generator.generate(logger, context, ApplicationController.class.getName());
@@ -180,11 +171,11 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
 
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle, gwtpResourcesWith(
-                new RealJavaResource(CustomBootstrapper3.class)));
+                GwtpResourceBase.CUSTOMBOOTSTRAPPER3));
 
         try {
             generator.generate(logger, context, ApplicationController.class.getName());
@@ -197,11 +188,11 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
     public void testWithPreBootstrapper() throws Exception {
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle,
-                gwtpResourcesWith(new RealJavaResource(CustomPreBootstrapper.class)));
+                gwtpResourcesWith(GwtpResourceBase.CUSTOMPREBOOTSTRAPPER));
 
         assertEquals(FINAL_NAME, generator.generate(logger, context, ApplicationController.class.getName()));
 
@@ -225,12 +216,11 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
 
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle, gwtpResourcesWith(
-                new RealJavaResource(CustomPreBootstrapper.class),
-                new RealJavaResource(CustomPreBootstrapper2.class)));
+                GwtpResourceBase.CUSTOMPREBOOTSTRAPPER, GwtpResourceBase.CUSTOMPREBOOTSTRAPPER2));
 
         try {
             generator.generate(logger, context, ApplicationController.class.getName());
@@ -248,11 +238,11 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
 
         PropertyOracle propOracle = createPropertyOracleBuilder()
                 .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true)
-                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, FooModule.class.getName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true, GwtpResourceBase.FOOMODULE.getTypeName())
                 .build();
 
         StandardGeneratorContext context = createGeneratorContext(propOracle, gwtpResourcesWith(
-                new RealJavaResource(CustomPreBootstrapper3.class)));
+                GwtpResourceBase.CUSTOMPREBOOTSTRAPPER3));
 
         try {
             generator.generate(logger, context, ApplicationController.class.getName());

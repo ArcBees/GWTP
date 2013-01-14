@@ -51,7 +51,6 @@ public class GinjectorGenerator extends AbstractGenerator {
     static final String DEFAULT_NAME = "ClientGinjector";
     static final String DEFAULT_FQ_NAME = DEFAULT_PACKAGE + "." + DEFAULT_NAME;
 
-    private static final String DELIMITER = ",";
     private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
     private static final String GETTER_METHOD = "%s get%s();";
     private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";

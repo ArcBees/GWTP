@@ -27,6 +27,7 @@ import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.resource.Resource;
+import com.google.gwt.dev.util.UnitTestTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 
 import java.io.PrintWriter;
@@ -35,9 +36,7 @@ import java.util.List;
 import java.util.Set;
 
 public class GeneratorTestBase {
-
     protected class PropertyOracleBuilder {
-
         private final List<ConfigurationProperty> props;
 
         public PropertyOracleBuilder() {
