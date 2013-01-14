@@ -183,10 +183,7 @@ public class GinjectorGenerator extends AbstractGenerator {
         composer.addImport(GWT.class.getCanonicalName());
         composer.addImport(EventBus.class.getCanonicalName());
         composer.addImport(PlaceManager.class.getCanonicalName());
-
-        if (boostrapper != null) {
-            composer.addImport(boostrapper.getQualifiedSourceName());
-        }
+        composer.addImport(boostrapper.getQualifiedSourceName());
     }
 
     private void writePresenterImports(ClassSourceFileComposerFactory composer,
@@ -224,11 +221,9 @@ public class GinjectorGenerator extends AbstractGenerator {
         String placeManagerName = PlaceManager.class.getSimpleName();
         sourceWriter.println(String.format(GETTER_METHOD, placeManagerName, placeManagerName));
 
-        if (boostrapper != null) {
-            sourceWriter.println();
-            String bootstrapperName = boostrapper.getSimpleSourceName();
-            sourceWriter.println(String.format(GETTER_METHOD, bootstrapperName, bootstrapperName));
-        }
+        sourceWriter.println();
+        String bootstrapperName = boostrapper.getSimpleSourceName();
+        sourceWriter.println(String.format(GETTER_METHOD, bootstrapperName, bootstrapperName));
     }
 
     private void writePresentersGetter(SourceWriter sourceWriter, PresenterDefinitions presenterDefinitions) {
