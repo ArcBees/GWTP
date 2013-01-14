@@ -6,7 +6,7 @@ import com.gwtplatform.mvp.rebind.model.FooModule;
 import com.google.gwt.core.shared.GWT;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.rebind.model.CustomBootstrapper;
+import com.gwtplatform.mvp.rebind.model.CustomBootstrapper1;
 
 @GinModules({FooModule.class})
 public interface ClientGinjector extends Ginjector {
@@ -16,5 +16,5 @@ public interface ClientGinjector extends Ginjector {
   
   PlaceManager getPlaceManager();
   
-  CustomBootstrapper getCustomBootstrapper();
+  CustomBootstrapper1 getCustomBootstrapper1();
 }

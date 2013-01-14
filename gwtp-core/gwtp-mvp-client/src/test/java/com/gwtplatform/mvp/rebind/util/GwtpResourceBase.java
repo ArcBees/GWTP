@@ -81,8 +81,8 @@ public class GwtpResourceBase {
                 }
             };
 
-    public static final MockJavaResource CUSTOMBOOTSTRAPPER =
-            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomBootstrapper") {
+    public static final MockJavaResource CUSTOMBOOTSTRAPPER1 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomBootstrapper1") {
                 @Override
                 public CharSequence getContent() {
                     StringBuilder code = new StringBuilder();
@@ -90,7 +90,7 @@ public class GwtpResourceBase {
                     code.append("import com.gwtplatform.mvp.client.Bootstrapper;\n");
                     code.append("import com.gwtplatform.mvp.client.annotations.Bootstrap;\n");
                     code.append("@Bootstrap\n");
-                    code.append("public class CustomBootstrapper implements Bootstrapper {\n");
+                    code.append("public class CustomBootstrapper1 implements Bootstrapper {\n");
                     code.append("  public void onBootstrap() {}\n");
                     code.append("}\n");
                     return code;
@@ -127,8 +127,8 @@ public class GwtpResourceBase {
                 }
             };
 
-    public static final MockJavaResource CUSTOMPREBOOTSTRAPPER =
-            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper") {
+    public static final MockJavaResource CUSTOMPREBOOTSTRAPPER1 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper1") {
                 @Override
                 public CharSequence getContent() {
                     StringBuilder code = new StringBuilder();
@@ -136,7 +136,7 @@ public class GwtpResourceBase {
                     code.append("import com.gwtplatform.mvp.client.PreBootstrapper;\n");
                     code.append("import com.gwtplatform.mvp.client.annotations.PreBootstrap;\n");
                     code.append("@PreBootstrap\n");
-                    code.append("public class CustomPreBootstrapper implements PreBootstrapper {\n");
+                    code.append("public class CustomPreBootstrapper1 implements PreBootstrapper {\n");
                     code.append("  public void onPreBootstrap() {}\n");
                     code.append("}\n");
                     return code;
@@ -173,6 +173,82 @@ public class GwtpResourceBase {
                 }
             };
 
+    public static final MockJavaResource GINJECTOR_RETURNVALUE1 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.ReturnValue1") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("public interface ReturnValue1 {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource GINJECTOR_RETURNVALUE2 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.ReturnValue2") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("public interface ReturnValue2 {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource GINJECTOREXTENSION1 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.GinjectorExtension1") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("public interface GinjectorExtension1 {\n");
+                    code.append("  ReturnValue1 getReturnValue1();\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource GINJECTOREXTENSION2 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.GinjectorExtension2") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("public interface GinjectorExtension2 {\n");
+                    code.append("  ReturnValue2 getReturnValue2();\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource GINJECTOREXTENSION3 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.GinjectorExtension3") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("public interface GinjectorExtension3 {\n");
+                    code.append("  ReturnValue1 getReturnValue1();\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource GINJECTOREXTENSION4 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.GinjectorExtension4") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("public interface GinjectorExtension4 {\n");
+                    code.append("  ReturnValue1 getReturnValue();\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
     public static Resource[] getResources() {
         return new Resource[]{
                 GINBINDER,
@@ -182,7 +258,13 @@ public class GwtpResourceBase {
                 new RealJavaResource(PreBootstrapper.class),
                 BARMODULE,
                 FOOMODULE,
-                DEFAULT_BOOTSTRAPPER
+                DEFAULT_BOOTSTRAPPER,
+                GINJECTOR_RETURNVALUE1,
+                GINJECTOR_RETURNVALUE2,
+                GINJECTOREXTENSION1,
+                GINJECTOREXTENSION2,
+                GINJECTOREXTENSION3,
+                GINJECTOREXTENSION4
         };
     }
 }
