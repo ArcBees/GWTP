@@ -11,11 +11,18 @@ A complete model-view-presenter framework to simplify your next GWT project.
 ##License
 * GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-##Current Release
-0.8-alpha-3
+##Maven
+* [See whats available in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform)
+* [Maven Usage Instructions](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
 
-##Current Snapshot
-0.8-alpha-4-SNAPSHOT
+###Current Release
+0.8.4 - Released on 1/14/2013
+
+###Current Snapshot
+0.8.5-SNAPSHOT
+
+###Archetype
+* [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools)
 
 ##Demos
 * [GWTP Samples Project Home](https://github.com/ArcBees/GWTP-Samples)
@@ -60,13 +67,6 @@ A complete model-view-presenter framework to simplify your next GWT project.
 ##Implementers
 * [ArcBees.com](http://arcbees.com)
 * [Jukito](http://jukito.arcbees.com/)
-
-##Downloads
-* [Maven Usage](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
-* [Download Jars](https://github.com/ArcBees/GWTP/downloads)
-
-##Archetype
-* [More about Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools)
 
 ##Plugins
 * [Eclipse Plugin source](https://github.com/ArcBees/gwtp-eclipse-plugin)
