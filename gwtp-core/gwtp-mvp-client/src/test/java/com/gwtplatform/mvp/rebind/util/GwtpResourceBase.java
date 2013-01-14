@@ -18,18 +18,16 @@ package com.gwtplatform.mvp.rebind.util;
 
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.resource.Resource;
+import com.google.gwt.dev.util.RealJavaResource;
 import com.google.gwt.inject.client.GinModule;
 import com.gwtplatform.mvp.client.ApplicationController;
 import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.PreBootstrapper;
-import com.gwtplatform.mvp.rebind.model.BarModule;
-import com.gwtplatform.mvp.rebind.model.FooModule;
 
 /**
  * Contains GWTP and dependency sources for testing.
  */
 public class GwtpResourceBase {
-
     public static final MockJavaResource DEFAULT_BOOTSTRAPPER =
             new MockJavaResource("com.gwtplatform.mvp.client.DefaultBootstrapper") {
                 @Override
@@ -55,6 +53,126 @@ public class GwtpResourceBase {
                 }
             };
 
+    public static final MockJavaResource BARMODULE =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.BarModule") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.google.gwt.inject.client.binder.GinBinder;\n");
+                    code.append("public class BarModule {\n");
+                    code.append("  public void configure(GinBinder binder) {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource FOOMODULE =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.FooModule") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.google.gwt.inject.client.binder.GinBinder;\n");
+                    code.append("public class FooModule {\n");
+                    code.append("  public void configure(GinBinder binder) {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource CUSTOMBOOTSTRAPPER =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomBootstrapper") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Bootstrapper;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.Bootstrap;\n");
+                    code.append("@Bootstrap\n");
+                    code.append("public class CustomBootstrapper implements Bootstrapper {\n");
+                    code.append("  public void onBootstrap() {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource CUSTOMBOOTSTRAPPER2 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomBootstrapper2") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Bootstrapper;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.Bootstrap;\n");
+                    code.append("@Bootstrap\n");
+                    code.append("public class CustomBootstrapper2 implements Bootstrapper {\n");
+                    code.append("  public void onBootstrap() {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource CUSTOMBOOTSTRAPPER3 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomBootstrapper3") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.Bootstrap;\n");
+                    code.append("@Bootstrap\n");
+                    code.append("public class CustomBootstrapper3 {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource CUSTOMPREBOOTSTRAPPER =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.PreBootstrapper;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.PreBootstrap;\n");
+                    code.append("@PreBootstrap\n");
+                    code.append("public class CustomPreBootstrapper implements PreBootstrapper {\n");
+                    code.append("  public void onPreBootstrap() {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource CUSTOMPREBOOTSTRAPPER2 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper2") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.PreBootstrapper;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.PreBootstrap;\n");
+                    code.append("@PreBootstrap\n");
+                    code.append("public class CustomPreBootstrapper2 implements PreBootstrapper {\n");
+                    code.append("  public void onPreBootstrap() {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource CUSTOMPREBOOTSTRAPPER3 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.CustomPreBootstrapper3") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.PreBootstrap;\n");
+                    code.append("@PreBootstrap\n");
+                    code.append("public class CustomPreBootstrapper3 {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
     public static Resource[] getResources() {
         return new Resource[]{
                 GINBINDER,
@@ -62,8 +180,8 @@ public class GwtpResourceBase {
                 new RealJavaResource(ApplicationController.class),
                 new RealJavaResource(Bootstrapper.class),
                 new RealJavaResource(PreBootstrapper.class),
-                new RealJavaResource(FooModule.class),
-                new RealJavaResource(BarModule.class),
+                BARMODULE,
+                FOOMODULE,
                 DEFAULT_BOOTSTRAPPER
         };
     }
