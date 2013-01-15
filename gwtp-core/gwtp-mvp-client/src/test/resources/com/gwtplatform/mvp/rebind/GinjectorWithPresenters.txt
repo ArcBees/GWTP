@@ -1,0 +1,31 @@
+package com.gwtplatform.mvp.client;
+
+import com.google.gwt.inject.client.Ginjector;
+import com.google.gwt.inject.client.GinModules;
+import com.gwtplatform.mvp.rebind.model.FooModule;
+import com.google.gwt.core.shared.GWT;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.DefaultBootstrapper;
+import com.gwtplatform.mvp.rebind.model.Presenter1;
+import com.gwtplatform.mvp.rebind.model.Presenter2;
+import com.gwtplatform.mvp.rebind.model.Presenter3;
+import javax.inject.Provider;
+import com.google.gwt.inject.client.AsyncProvider;
+
+@GinModules({FooModule.class})
+public interface ClientGinjector extends Ginjector {
+  static ClientGinjector SINGLETON = GWT.create(ClientGinjector.class);
+  
+  EventBus getEventBus();
+  
+  PlaceManager getPlaceManager();
+  
+  DefaultBootstrapper getDefaultBootstrapper();
+  
+  Provider<Presenter1> getPresenter1();
+  
+  Provider<Presenter2> getPresenter2();
+  
+  AsyncProvider<Presenter3> getPresenter3();
+}

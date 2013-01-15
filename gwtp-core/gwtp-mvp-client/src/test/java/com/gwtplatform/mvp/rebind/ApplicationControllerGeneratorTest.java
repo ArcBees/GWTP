@@ -48,7 +48,12 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
             GINJECTOR_FOO_BAR,
             GINJECTOR_FOO_CUSTOM_BOOTSTRAPPER,
             GINJECTOR_SINGLE_EXTENSION,
-            GINJECTOR_MULTIPLE_EXTENSIONS;
+            GINJECTOR_MULTIPLE_EXTENSIONS,
+            GINJECTOR_WITH_PRESENTERS,
+            GINJECTOR_WITH_PRESENTER_BUNDLES,
+            GINJECTOR_CONFLICT,
+            GINJECTOR_WITH_DEFAULTGATEKEEPER,
+            FOO_PROVIDER_BUNDLE;
 
     private UnitTestTreeLogger logger;
 
@@ -72,6 +77,18 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
                 .getResource("GinjectorSingleExtension.txt").toURI()), Charsets.UTF_8);
         GINJECTOR_MULTIPLE_EXTENSIONS = Files.toString(new File(ApplicationControllerGeneratorTest.class
                 .getResource("GinjectorMultipleExtensions.txt").toURI()), Charsets.UTF_8);
+        GINJECTOR_MULTIPLE_EXTENSIONS = Files.toString(new File(ApplicationControllerGeneratorTest.class
+                .getResource("GinjectorMultipleExtensions.txt").toURI()), Charsets.UTF_8);
+        GINJECTOR_WITH_PRESENTERS = Files.toString(new File(ApplicationControllerGeneratorTest.class
+                .getResource("GinjectorWithPresenters.txt").toURI()), Charsets.UTF_8);
+        GINJECTOR_WITH_PRESENTER_BUNDLES = Files.toString(new File(ApplicationControllerGeneratorTest.class
+                .getResource("GinjectorWithPresenterBundles.txt").toURI()), Charsets.UTF_8);
+        GINJECTOR_CONFLICT = Files.toString(new File(ApplicationControllerGeneratorTest.class
+                .getResource("GinjectorConflict.txt").toURI()), Charsets.UTF_8);
+        FOO_PROVIDER_BUNDLE = Files.toString(new File(ApplicationControllerGeneratorTest.class
+                .getResource("FooProviderBundle.txt").toURI()), Charsets.UTF_8);
+        GINJECTOR_WITH_DEFAULTGATEKEEPER = Files.toString(new File(ApplicationControllerGeneratorTest.class
+                .getResource("GinjectorWithDefaultGatekeeper.txt").toURI()), Charsets.UTF_8);
     }
 
     @Before
@@ -249,7 +266,7 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
 
     @Test
     public void testWithPreBootstrapper() throws Exception {
-        StandardGeneratorContext context = createGeneratorContext(createDefaultOracle(),gwtpResourcesWith(
+        StandardGeneratorContext context = createGeneratorContext(createDefaultOracle(), gwtpResourcesWith(
                 GwtpResourceBase.CUSTOMPREBOOTSTRAPPER1));
 
         assertEquals(FINAL_NAME, generator.generate(logger, context, ApplicationController.class.getName()));
@@ -297,6 +314,84 @@ public class ApplicationControllerGeneratorTest extends GeneratorTestBase {
         } catch (Exception e) {
             logger.assertLogEntriesContainExpected();
         }
+    }
+
+    @Test
+    // with prebootstrapper, custom bootstrapper and multiple modules/extensions
+    public void testComplexExample() throws Exception {
+        PropertyOracle propOracle = createPropertyOracleBuilder()
+                .with(AbstractGenerator.GIN_GINJECTOR_EXTENSION, true,
+                        GwtpResourceBase.GINJECTOREXTENSION1.getTypeName(),
+                        GwtpResourceBase.GINJECTOREXTENSION2.getTypeName())
+                .with(AbstractGenerator.GIN_GINJECTOR_MODULES, true,
+                        GwtpResourceBase.FOOMODULE.getTypeName(),
+                        GwtpResourceBase.BARMODULE.getTypeName())
+                .build();
+
+        StandardGeneratorContext context = createGeneratorContext(propOracle, gwtpResourcesWith(
+                GwtpResourceBase.CUSTOMBOOTSTRAPPER1, GwtpResourceBase.CUSTOMPREBOOTSTRAPPER1));
+
+        assertNotNull(generator.generate(logger, context, ApplicationController.class.getName()));
+    }
+
+    @Test
+    public void testWithPresenters() throws Exception {
+        StandardGeneratorContext context = createGeneratorContext(createDefaultOracle(), gwtpResourcesWith(
+                GwtpResourceBase.PRESENTER1, GwtpResourceBase.PRESENTER2, GwtpResourceBase.PRESENTERASYNC));
+
+        assertNotNull(generator.generate(logger, context, ApplicationController.class.getName()));
+        
+        GeneratedUnit ginjectorUnit = context.getGeneratedUnitMap().get(GinjectorGenerator.DEFAULT_FQ_NAME);
+
+        assertNotNull(ginjectorUnit);
+
+        assertEquals(GINJECTOR_WITH_PRESENTERS, ginjectorUnit.getSource());
+    }
+
+    @Test
+    public void testWithPresenterBundles() throws Exception {
+        StandardGeneratorContext context = createGeneratorContext(createDefaultOracle(), gwtpResourcesWith(
+                GwtpResourceBase.PRESENTER_CODESPLIT_BUNDLE1, GwtpResourceBase.PRESENTER_CODESPLIT_BUNDLE2,
+                GwtpResourceBase.PRESENTER_CODESPLIT_BUNDLE3));
+
+        assertNotNull(generator.generate(logger, context, ApplicationController.class.getName()));
+        
+        GeneratedUnit ginjectorUnit = context.getGeneratedUnitMap().get(GinjectorGenerator.DEFAULT_FQ_NAME);
+        GeneratedUnit fooModuleUnit = context.getGeneratedUnitMap().get("com.gwtplatform.mvp.client.FooBundle");
+
+        assertNotNull(ginjectorUnit);
+
+        assertEquals(FOO_PROVIDER_BUNDLE, fooModuleUnit.getSource());
+        assertEquals(GINJECTOR_WITH_PRESENTER_BUNDLES, ginjectorUnit.getSource());
+    }
+
+    @Test
+    // TODO this needs to fail, 2 methods with same signature!
+    public void testWithConflictingPresenter() throws Exception {
+        StandardGeneratorContext context = createGeneratorContext(createDefaultOracle(), gwtpResourcesWith(
+                GwtpResourceBase.PRESENTER1, GwtpResourceBase.PRESENTER_DIFFERENTPACKAGE));
+
+        assertNotNull(generator.generate(logger, context, ApplicationController.class.getName()));
+        
+        GeneratedUnit ginjectorUnit = context.getGeneratedUnitMap().get(GinjectorGenerator.DEFAULT_FQ_NAME);
+
+        assertNotNull(ginjectorUnit);
+
+        assertEquals(GINJECTOR_CONFLICT, ginjectorUnit.getSource());
+    }
+
+    @Test
+    public void testWithDefaultGatekeeper() throws Exception {
+        StandardGeneratorContext context = createGeneratorContext(createDefaultOracle(), gwtpResourcesWith(
+              GwtpResourceBase.DEFAULTGATEKEEPER, GwtpResourceBase.PRESENTER1));
+
+        assertNotNull(generator.generate(logger, context, ApplicationController.class.getName()));
+        
+        GeneratedUnit ginjectorUnit = context.getGeneratedUnitMap().get(GinjectorGenerator.DEFAULT_FQ_NAME);
+
+        assertNotNull(ginjectorUnit);
+
+        assertEquals(GINJECTOR_WITH_DEFAULTGATEKEEPER, ginjectorUnit.getSource());
     }
 
     private PropertyOracle createDefaultOracle() {
