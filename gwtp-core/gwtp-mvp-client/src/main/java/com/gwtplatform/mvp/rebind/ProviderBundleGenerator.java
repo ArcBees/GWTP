@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.rebind;
 
 import java.io.PrintWriter;
-import java.util.Set;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,7 +40,7 @@ public class ProviderBundleGenerator extends AbstractGenerator {
     private static final String CTOR_PARAM = "Provider<%s> %s";
     private static final String ARRAY_SETTER = "providers[%s] = %s;";
 
-    private Set<JClassType> presenters;
+    private List<JClassType> presenters;
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -87,13 +87,13 @@ public class ProviderBundleGenerator extends AbstractGenerator {
         return composer;
     }
 
-    private void writePresenterImports(ClassSourceFileComposerFactory composer, Set<JClassType> presenters) {
+    private void writePresenterImports(ClassSourceFileComposerFactory composer, List<JClassType> presenters) {
         for (JClassType presenter : presenters) {
             composer.addImport(presenter.getQualifiedSourceName());
         }
     }
 
-    private void writeStaticFields(SourceWriter sourceWriter, Set<JClassType> presenters) {
+    private void writeStaticFields(SourceWriter sourceWriter, List<JClassType> presenters) {
         int i = 0;
         for (JClassType presenter : presenters) {
             sourceWriter.println(String.format(PUBLIC_STATIC_INT, presenter.getSimpleSourceName().toUpperCase(), i));
@@ -102,7 +102,7 @@ public class ProviderBundleGenerator extends AbstractGenerator {
         }
     }
 
-    private void writeConstructor(SourceWriter sourceWriter, Set<JClassType> presenters) {
+    private void writeConstructor(SourceWriter sourceWriter, List<JClassType> presenters) {
         sourceWriter.print("@" + Inject.class.getSimpleName());
         sourceWriter.println();
         sourceWriter.print("public " + getClassName() + "(");
@@ -137,7 +137,7 @@ public class ProviderBundleGenerator extends AbstractGenerator {
         sourceWriter.outdent();
     }
 
-    public void setPresenters(Set<JClassType> presenters) {
+    public void setPresenters(List<JClassType> presenters) {
         this.presenters = presenters;
     }
 }
