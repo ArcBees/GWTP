@@ -1,0 +1,28 @@
+package com.gwtplatform.mvp.client;
+
+import com.google.gwt.inject.client.Ginjector;
+import com.google.gwt.inject.client.GinModules;
+import com.gwtplatform.mvp.rebind.model.FooModule;
+import com.google.gwt.core.shared.GWT;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.DefaultBootstrapper;
+import com.gwtplatform.mvp.rebind.model.Presenter1;
+import com.gwtplatform.mvp.rebind.model.DefaultGatekeeperImpl;
+import javax.inject.Provider;
+
+@GinModules({FooModule.class})
+public interface ClientGinjector extends Ginjector {
+  static ClientGinjector SINGLETON = GWT.create(ClientGinjector.class);
+  
+  EventBus getEventBus();
+  
+  PlaceManager getPlaceManager();
+  
+  DefaultBootstrapper getDefaultBootstrapper();
+  
+  @com.gwtplatform.mvp.client.annotations.DefaultGatekeeper
+  DefaultGatekeeperImpl getDefaultGatekeeperImpl();
+  
+  Provider<Presenter1> getPresenter1();
+}
