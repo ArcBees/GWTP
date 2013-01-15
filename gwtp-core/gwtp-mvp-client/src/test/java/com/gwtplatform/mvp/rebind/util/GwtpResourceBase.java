@@ -23,6 +23,7 @@ import com.google.gwt.inject.client.GinModule;
 import com.gwtplatform.mvp.client.ApplicationController;
 import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.PreBootstrapper;
+import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
  * Contains GWTP and dependency sources for testing.
@@ -249,6 +250,213 @@ public class GwtpResourceBase {
                 }
             };
 
+    public static final MockJavaResource PRESENTER1 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.Presenter1") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("import com.gwtplatform.mvp.client.View;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("import com.google.web.bindery.event.shared.EventBus;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.ProxyStandard;\n");
+                    code.append("public class Presenter1 extends Presenter<Presenter1.MyView, Presenter1.MyProxy> {\n");
+                    code.append("  @ProxyStandard\n");
+                    code.append("  public interface MyProxy extends Proxy<Presenter1> {}\n");
+                    code.append("  public interface MyView extends View {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PRESENTER2 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.Presenter2") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("import com.gwtplatform.mvp.client.View;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("import com.google.web.bindery.event.shared.EventBus;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.ProxyStandard;\n");
+                    code.append("public class Presenter2 extends Presenter<Presenter2.MyView, Presenter2.MyProxy> {\n");
+                    code.append("  @ProxyStandard\n");
+                    code.append("  public interface MyProxy extends Proxy<Presenter2> {}\n");
+                    code.append("  public interface MyView extends View {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PRESENTERASYNC =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.Presenter3") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("import com.gwtplatform.mvp.client.View;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("import com.google.web.bindery.event.shared.EventBus;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;\n");
+                    code.append("public class Presenter3 extends Presenter<Presenter3.MyView, Presenter3.MyProxy> {\n");
+                    code.append("  @ProxyCodeSplit\n");
+                    code.append("  public interface MyProxy extends Proxy<Presenter3> {}\n");
+                    code.append("  public interface MyView extends View {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PRESENTER_CODESPLIT_BUNDLE1 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.Presenter4") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("import com.gwtplatform.mvp.client.View;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("import com.google.web.bindery.event.shared.EventBus;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;\n");
+                    code.append("public class Presenter4 extends Presenter<Presenter4.MyView, Presenter4.MyProxy> {\n");
+                    code.append("  @ProxyCodeSplitBundle(\"Foo\")\n");
+                    code.append("  public interface MyProxy extends Proxy<Presenter4> {}\n");
+                    code.append("  public interface MyView extends View {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PRESENTER_CODESPLIT_BUNDLE2 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.Presenter5") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("import com.gwtplatform.mvp.client.View;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("import com.google.web.bindery.event.shared.EventBus;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;\n");
+                    code.append("public class Presenter5 extends Presenter<Presenter5.MyView, Presenter5.MyProxy> {\n");
+                    code.append("  @ProxyCodeSplitBundle(\"Foo\")\n");
+                    code.append("  public interface MyProxy extends Proxy<Presenter5> {}\n");
+                    code.append("  public interface MyView extends View {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PRESENTER_CODESPLIT_BUNDLE3 =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.Presenter6") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("import com.gwtplatform.mvp.client.View;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("import com.google.web.bindery.event.shared.EventBus;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;\n");
+                    code.append("public class Presenter6 extends Presenter<Presenter6.MyView, Presenter6.MyProxy> {\n");
+                    code.append("  @ProxyCodeSplitBundle(\"Bar\")\n");
+                    code.append("  public interface MyProxy extends Proxy<Presenter6> {}\n");
+                    code.append("  public interface MyView extends View {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource DEFAULTGATEKEEPER =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.DefaultGatekeeperImpl") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Gatekeeper;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;\n");
+                    code.append("@DefaultGatekeeper\n");
+                    code.append("public class DefaultGatekeeperImpl implements Gatekeeper {\n");
+                    code.append("  public boolean canReveal() {return false;}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PRESENTER_DIFFERENTPACKAGE =
+            new MockJavaResource("com.gwtplatform.mvp.rebind.model.foo.Presenter1") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.rebind.model.foo;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("import com.gwtplatform.mvp.client.View;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("import com.google.web.bindery.event.shared.EventBus;\n");
+                    code.append("import com.gwtplatform.mvp.client.annotations.ProxyStandard;\n");
+                    code.append("public class Presenter1 extends Presenter<Presenter1.MyView, Presenter1.MyProxy> {\n");
+                    code.append("  @ProxyStandard\n");
+                    code.append("  public interface MyProxy extends Proxy<Presenter1> {}\n");
+                    code.append("  public interface MyView extends View {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PROXY =
+            new MockJavaResource("com.gwtplatform.mvp.client.proxy.Proxy") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.client.proxy;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("public interface Proxy<P extends Presenter<?, ?>> {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PLACE =
+            new MockJavaResource("com.gwtplatform.mvp.client.proxy.Place") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.client.proxy;\n");
+                    code.append("import com.gwtplatform.mvp.client.Presenter;\n");
+                    code.append("public interface Place {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource VIEW =
+            new MockJavaResource("com.gwtplatform.mvp.client.View") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.client;\n");
+                    code.append("public interface View {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource PRESENTER =
+            new MockJavaResource("com.gwtplatform.mvp.client.Presenter") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.gwtplatform.mvp.client;\n");
+                    code.append("import com.gwtplatform.mvp.client.proxy.Proxy;\n");
+                    code.append("public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
     public static Resource[] getResources() {
         return new Resource[]{
                 GINBINDER,
@@ -256,15 +464,12 @@ public class GwtpResourceBase {
                 new RealJavaResource(ApplicationController.class),
                 new RealJavaResource(Bootstrapper.class),
                 new RealJavaResource(PreBootstrapper.class),
-                BARMODULE,
-                FOOMODULE,
+                new RealJavaResource(Gatekeeper.class),
+                BARMODULE, FOOMODULE,
                 DEFAULT_BOOTSTRAPPER,
-                GINJECTOR_RETURNVALUE1,
-                GINJECTOR_RETURNVALUE2,
-                GINJECTOREXTENSION1,
-                GINJECTOREXTENSION2,
-                GINJECTOREXTENSION3,
-                GINJECTOREXTENSION4
+                GINJECTOR_RETURNVALUE1, GINJECTOR_RETURNVALUE2,
+                GINJECTOREXTENSION1, GINJECTOREXTENSION2, GINJECTOREXTENSION3, GINJECTOREXTENSION4,
+                PRESENTER, VIEW, PROXY, PLACE
         };
     }
 }
