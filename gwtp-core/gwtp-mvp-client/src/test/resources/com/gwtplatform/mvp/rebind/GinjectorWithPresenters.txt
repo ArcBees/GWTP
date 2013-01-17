@@ -7,9 +7,6 @@ import com.google.gwt.core.shared.GWT;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.DefaultBootstrapper;
-import com.gwtplatform.mvp.rebind.model.Presenter1;
-import com.gwtplatform.mvp.rebind.model.Presenter2;
-import com.gwtplatform.mvp.rebind.model.Presenter3;
 import javax.inject.Provider;
 import com.google.gwt.inject.client.AsyncProvider;
 
@@ -23,9 +20,9 @@ public interface ClientGinjector extends Ginjector {
   
   DefaultBootstrapper getDefaultBootstrapper();
   
-  Provider<Presenter1> getPresenter1();
+  Provider<com.gwtplatform.mvp.rebind.model.Presenter1> getcomgwtplatformmvprebindmodelPresenter1();
   
-  Provider<Presenter2> getPresenter2();
+  Provider<com.gwtplatform.mvp.rebind.model.Presenter2> getcomgwtplatformmvprebindmodelPresenter2();
   
-  AsyncProvider<Presenter3> getPresenter3();
+  AsyncProvider<com.gwtplatform.mvp.rebind.model.Presenter3> getcomgwtplatformmvprebindmodelPresenter3();
 }

@@ -19,7 +19,10 @@ package com.gwtplatform.mvp.rebind.util;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.RealJavaResource;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModule;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.mvp.client.ApplicationController;
 import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.PreBootstrapper;
@@ -28,7 +31,7 @@ import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 /**
  * Contains GWTP and dependency sources for testing.
  */
-public class GwtpResourceBase {
+public class ResourceBase {
     public static final MockJavaResource DEFAULT_BOOTSTRAPPER =
             new MockJavaResource("com.gwtplatform.mvp.client.DefaultBootstrapper") {
                 @Override
@@ -49,6 +52,45 @@ public class GwtpResourceBase {
                     StringBuilder code = new StringBuilder();
                     code.append("package com.google.gwt.inject.client.binder;\n");
                     code.append("public interface GinBinder {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource JAVAXPROVIDER =
+            new MockJavaResource("javax.inject.Provider") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package javax.inject;\n");
+                    code.append("public interface Provider<T> {\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource EVENT =
+            new MockJavaResource("com.google.web.bindery.event.shared.Event") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.google.web.bindery.event.shared;\n");
+                    code.append("public abstract class Event<H> {\n");
+                    code.append("  public static class Type<H> {}\n");
+                    code.append("}\n");
+                    return code;
+                }
+            };
+
+    public static final MockJavaResource GWTEVENT =
+            new MockJavaResource("com.google.gwt.event.shared.GwtEvent") {
+                @Override
+                public CharSequence getContent() {
+                    StringBuilder code = new StringBuilder();
+                    code.append("package com.google.gwt.event.shared;\n");
+                    code.append("import com.google.web.bindery.event.shared.Event;\n");
+                    code.append("public abstract class GwtEvent<H extends EventHandler> extends Event<H> {\n");
+                    code.append("  public static class Type<H> extends com.google.web.bindery.event.shared.Event.Type<H> {}\n");
                     code.append("}\n");
                     return code;
                 }
@@ -459,14 +501,27 @@ public class GwtpResourceBase {
 
     public static Resource[] getResources() {
         return new Resource[]{
+                // GWT sources
+                GWTEVENT,
+                EVENT,
+                new RealJavaResource(EventHandler.class),
+                new RealJavaResource(AsyncCallback.class),
+
+                // GIN sources
                 GINBINDER,
                 new RealJavaResource(GinModule.class),
+                JAVAXPROVIDER,
+                new RealJavaResource(AsyncProvider.class),
+
+                // GWTP sources
+                DEFAULT_BOOTSTRAPPER,
                 new RealJavaResource(ApplicationController.class),
                 new RealJavaResource(Bootstrapper.class),
                 new RealJavaResource(PreBootstrapper.class),
                 new RealJavaResource(Gatekeeper.class),
+
+                // test sources
                 BARMODULE, FOOMODULE,
-                DEFAULT_BOOTSTRAPPER,
                 GINJECTOR_RETURNVALUE1, GINJECTOR_RETURNVALUE2,
                 GINJECTOREXTENSION1, GINJECTOREXTENSION2, GINJECTOREXTENSION3, GINJECTOREXTENSION4,
                 PRESENTER, VIEW, PROXY, PLACE

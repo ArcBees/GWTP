@@ -185,12 +185,8 @@ public class GinjectorGenerator extends AbstractGenerator {
         composer.addImport(boostrapper.getQualifiedSourceName());
     }
 
-    private void writePresenterImports(ClassSourceFileComposerFactory composer,
+    private void writePresenterImports(ClassSourceFileComposerFactory composer, 
             PresenterDefinitions presenterDefinitions) {
-        writePresenterImportsFromList(composer, presenterDefinitions.getStandardPresenters());
-        writePresenterImportsFromList(composer, presenterDefinitions.getCodeSplitPresenters());
-        writePresenterImportsFromList(composer, presenterDefinitions.getGatekeepers());
-
         if (presenterDefinitions.getStandardPresenters().size() > 0) {
             composer.addImport(Provider.class.getCanonicalName());
         }
@@ -198,13 +194,6 @@ public class GinjectorGenerator extends AbstractGenerator {
         if (presenterDefinitions.getCodeSplitPresenters().size() > 0 ||
                 presenterDefinitions.getCodeSplitBundlePresenters().size() > 0) {
             composer.addImport(AsyncProvider.class.getCanonicalName());
-        }
-    }
-
-    private void writePresenterImportsFromList(ClassSourceFileComposerFactory composer,
-            Collection<JClassType> presenters) {
-        for (JClassType presenter : presenters) {
-            composer.addImport(presenter.getQualifiedSourceName());
         }
     }
 
@@ -248,24 +237,25 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     private void writeGatekeeperGetterFromList(SourceWriter sourceWriter, Collection<JClassType> gatekeepers) {
         for (JClassType gatekeeper : gatekeepers) {
-            String gatekeeperName = gatekeeper.getName();
+            String name = gatekeeper.getQualifiedSourceName();
 
             sourceWriter.println();
             if (gatekeeper.isAnnotationPresent(DefaultGatekeeper.class)) {
                 sourceWriter.println(String.format(DEFAULT_GATEKEEPER, DefaultGatekeeper.class.getCanonicalName()));
             }
 
-            sourceWriter.println(String.format(GETTER_METHOD, gatekeeperName, gatekeeperName));
+            sourceWriter.println(String.format(GETTER_METHOD, name, name.replaceAll("\\.", "")));
         }
     }
 
     private void writePresenterGettersFromList(SourceWriter sourceWriter, Collection<JClassType> presenters,
             String providerTypeName) {
         for (JClassType presenter : presenters) {
-            String presenterName = presenter.getName();
+            String name = presenter.getQualifiedSourceName();
 
             sourceWriter.println();
-            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, presenterName, presenterName));
+            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, name, 
+                    name.replaceAll("\\.", "")));
         }
     }
 }
