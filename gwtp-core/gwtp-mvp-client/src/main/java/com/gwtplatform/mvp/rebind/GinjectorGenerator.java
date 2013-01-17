@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.inject.Provider;
 
@@ -51,7 +50,6 @@ public class GinjectorGenerator extends AbstractGenerator {
     static final String DEFAULT_NAME = "ClientGinjector";
     static final String DEFAULT_FQ_NAME = DEFAULT_PACKAGE + "." + DEFAULT_NAME;
 
-    private static final String DELIMITER = ",";
     private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
     private static final String GETTER_METHOD = "%s get%s();";
     private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
@@ -152,7 +150,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     private void addExtensionInterfaces(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
         List<String> values = findConfigurationProperty(GIN_GINJECTOR_EXTENSION).getValues();
         if (values.size() > 0) {
-            for (String extension : values.get(0).split(DELIMITER)) {
+            for (String extension : values) {
                 final JClassType extensionType = getType(extension.trim());
                 composer.addImport(extensionType.getQualifiedSourceName());
                 composer.addImplementedInterface(extensionType.getName());
@@ -167,7 +165,7 @@ public class GinjectorGenerator extends AbstractGenerator {
         composer.addImport(GinModules.class.getName());
 
         StringBuilder modules = new StringBuilder();
-        for (String module : moduleProperty.getValues().get(0).split(DELIMITER)) {
+        for (String module : moduleProperty.getValues()) {
             JClassType moduleType = getType(module.trim());
 
             composer.addImport(moduleType.getQualifiedSourceName());
@@ -184,18 +182,11 @@ public class GinjectorGenerator extends AbstractGenerator {
         composer.addImport(GWT.class.getCanonicalName());
         composer.addImport(EventBus.class.getCanonicalName());
         composer.addImport(PlaceManager.class.getCanonicalName());
-
-        if (boostrapper != null) {
-            composer.addImport(boostrapper.getQualifiedSourceName());
-        }
+        composer.addImport(boostrapper.getQualifiedSourceName());
     }
 
-    private void writePresenterImports(ClassSourceFileComposerFactory composer,
+    private void writePresenterImports(ClassSourceFileComposerFactory composer, 
             PresenterDefinitions presenterDefinitions) {
-        writePresenterImportsFromList(composer, presenterDefinitions.getStandardPresenters());
-        writePresenterImportsFromList(composer, presenterDefinitions.getCodeSplitPresenters());
-        writePresenterImportsFromList(composer, presenterDefinitions.getGatekeepers());
-
         if (presenterDefinitions.getStandardPresenters().size() > 0) {
             composer.addImport(Provider.class.getCanonicalName());
         }
@@ -203,13 +194,6 @@ public class GinjectorGenerator extends AbstractGenerator {
         if (presenterDefinitions.getCodeSplitPresenters().size() > 0 ||
                 presenterDefinitions.getCodeSplitBundlePresenters().size() > 0) {
             composer.addImport(AsyncProvider.class.getCanonicalName());
-        }
-    }
-
-    private void writePresenterImportsFromList(ClassSourceFileComposerFactory composer,
-            Collection<JClassType> presenters) {
-        for (JClassType presenter : presenters) {
-            composer.addImport(presenter.getQualifiedSourceName());
         }
     }
 
@@ -225,11 +209,9 @@ public class GinjectorGenerator extends AbstractGenerator {
         String placeManagerName = PlaceManager.class.getSimpleName();
         sourceWriter.println(String.format(GETTER_METHOD, placeManagerName, placeManagerName));
 
-        if (boostrapper != null) {
-            sourceWriter.println();
-            String bootstrapperName = boostrapper.getSimpleSourceName();
-            sourceWriter.println(String.format(GETTER_METHOD, bootstrapperName, bootstrapperName));
-        }
+        sourceWriter.println();
+        String bootstrapperName = boostrapper.getSimpleSourceName();
+        sourceWriter.println(String.format(GETTER_METHOD, bootstrapperName, bootstrapperName));
     }
 
     private void writePresentersGetter(SourceWriter sourceWriter, PresenterDefinitions presenterDefinitions) {
@@ -241,7 +223,7 @@ public class GinjectorGenerator extends AbstractGenerator {
                 AsyncProvider.class.getSimpleName());
     }
 
-    private void writeBundleGetters(SourceWriter sourceWriter, Map<String, Set<JClassType>> bundles,
+    private void writeBundleGetters(SourceWriter sourceWriter, Map<String, List<JClassType>> bundles,
             GeneratorContext generatorContext) throws UnableToCompleteException {
         for (String bundle : bundles.keySet()) {
             providerBundleGenerator.setPresenters(bundles.get(bundle));
@@ -255,24 +237,25 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     private void writeGatekeeperGetterFromList(SourceWriter sourceWriter, Collection<JClassType> gatekeepers) {
         for (JClassType gatekeeper : gatekeepers) {
-            String gatekeeperName = gatekeeper.getName();
+            String name = gatekeeper.getQualifiedSourceName();
 
             sourceWriter.println();
             if (gatekeeper.isAnnotationPresent(DefaultGatekeeper.class)) {
                 sourceWriter.println(String.format(DEFAULT_GATEKEEPER, DefaultGatekeeper.class.getCanonicalName()));
             }
 
-            sourceWriter.println(String.format(GETTER_METHOD, gatekeeperName, gatekeeperName));
+            sourceWriter.println(String.format(GETTER_METHOD, name, name.replaceAll("\\.", "")));
         }
     }
 
     private void writePresenterGettersFromList(SourceWriter sourceWriter, Collection<JClassType> presenters,
             String providerTypeName) {
         for (JClassType presenter : presenters) {
-            String presenterName = presenter.getName();
+            String name = presenter.getQualifiedSourceName();
 
             sourceWriter.println();
-            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, presenterName, presenterName));
+            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, name, 
+                    name.replaceAll("\\.", "")));
         }
     }
 }

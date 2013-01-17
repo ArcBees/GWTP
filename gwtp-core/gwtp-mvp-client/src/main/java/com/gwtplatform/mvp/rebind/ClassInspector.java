@@ -17,6 +17,8 @@
 package com.gwtplatform.mvp.rebind;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.gwt.core.ext.TreeLogger;
@@ -228,6 +230,17 @@ public class ClassInspector {
                 }
             }
         }
+    }
+
+    /**
+     * Collects all methods from either the inspected class or any of its parent classes.
+     */
+    public List<JMethod> getAllMethods() {
+        List<JMethod> all = new ArrayList<JMethod>();
+        for (JClassType classType : inspectedClass.getFlattenedSupertypeHierarchy()) {
+            Collections.addAll(all, classType.getMethods());
+        }
+        return all;
     }
 
     /**
