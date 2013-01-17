@@ -7,8 +7,6 @@ import com.google.gwt.core.shared.GWT;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.DefaultBootstrapper;
-import com.gwtplatform.mvp.rebind.model.Presenter1;
-import com.gwtplatform.mvp.rebind.model.DefaultGatekeeperImpl;
 import javax.inject.Provider;
 
 @GinModules({FooModule.class})
@@ -22,7 +20,7 @@ public interface ClientGinjector extends Ginjector {
   DefaultBootstrapper getDefaultBootstrapper();
   
   @com.gwtplatform.mvp.client.annotations.DefaultGatekeeper
-  DefaultGatekeeperImpl getDefaultGatekeeperImpl();
+  com.gwtplatform.mvp.rebind.model.DefaultGatekeeperImpl getcomgwtplatformmvprebindmodelDefaultGatekeeperImpl();
   
-  Provider<Presenter1> getPresenter1();
+  Provider<com.gwtplatform.mvp.rebind.model.Presenter1> getcomgwtplatformmvprebindmodelPresenter1();
 }
