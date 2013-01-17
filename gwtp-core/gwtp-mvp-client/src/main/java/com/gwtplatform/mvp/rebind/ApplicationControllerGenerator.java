@@ -65,6 +65,10 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
 
         PrintWriter printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
 
+        if (printWriter == null) {
+            return typeName + SUFFIX;
+        }
+
         JClassType preBootstrapper = getPreBootstrapper();
 
         ClassSourceFileComposerFactory composer = initComposer(preBootstrapper);

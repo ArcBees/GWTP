@@ -9,7 +9,7 @@
 
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
-    <version>0.8-alpha-4-SNAPSHOT</version>
+    <version>0.8.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GWT-Platform</name>
     <inceptionYear>2010</inceptionYear>
@@ -71,6 +71,16 @@
         <developer>
             <name>Michael Renaud</name>
             <email>michael.renaud@imagemsoft.com</email>
+        </developer>
+        <developer>
+            <id>brandon.donnelson</id>
+            <name>Brandon Donnelson</name>
+            <email>branflake2267@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
         </developer>
     </developers>
 
@@ -209,6 +219,11 @@
 
         <github.global.server>github</github.global.server>
         <github.version>0.6</github.version>
+        
+        <!-- Used for releasing to sonatype as command line parameter -->
+        <gpg.passphrase>SetAsParam</gpg.passphrase>
+        <github.username>SetAsParam</github.username>
+        <github.password>SetAsParam</github.password>
     </properties>
 
     <repositories>
@@ -495,6 +510,8 @@
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
                     <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase}</arguments>
+                    <username>${github.username}</username>
+                    <password>${github.password}</password>
                 </configuration>
             </plugin>
         </plugins>
