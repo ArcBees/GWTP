@@ -106,7 +106,7 @@ public class ClassCollection {
 
     public ClassCollection(TypeOracle oracle) {
         // Find the required base types
-        stringClass = oracle.findType("java.lang.String");
+        stringClass = oracle.findType(String.class.getName());
         basePresenterClass = oracle.findType(basePresenterClassName);
         baseGinjectorClass = oracle.findType(baseGinjectorClassName);
         typeClass = oracle.findType(typeClassName);
