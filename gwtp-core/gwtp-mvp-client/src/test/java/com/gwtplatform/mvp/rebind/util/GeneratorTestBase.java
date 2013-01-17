@@ -26,12 +26,14 @@ import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
+import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.UnitTestTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -70,6 +72,11 @@ public class GeneratorTestBase {
         return logger;
     }
 
+    protected TypeOracle createTypeOracle(Set<Resource> resources) {
+        resources.addAll(Arrays.asList(JavaResourceBase.getStandardResources()));
+        return buildCompilationState(resources).getTypeOracle();
+    }
+    
     protected StandardGeneratorContext createGeneratorContext(PropertyOracle propOracle, Set<Resource> resources) {
         Set<Resource> res = Sets.<Resource>newHashSet(JavaResourceBase.getStandardResources());
         res.addAll(resources);
@@ -79,7 +86,7 @@ public class GeneratorTestBase {
     }
 
     private CompilationState buildCompilationState(Set<Resource> resources) {
-        return new CompilationStateBuilder().doBuildFrom(createCompileLogger(), resources, null, false);
+        return CompilationStateBuilder.buildFrom(createCompileLogger(), resources);
     }
 
     protected UnitTestTreeLogger createDefaultUnitTestTreeLogger() {
@@ -95,7 +102,7 @@ public class GeneratorTestBase {
     }
     
     protected Set<Resource> gwtpResourcesWith(Resource... resources) {
-        Set<Resource> res = Sets.newHashSet(GwtpResourceBase.getResources());
+        Set<Resource> res = Sets.newHashSet(ResourceBase.getResources());
         res.addAll(Sets.newHashSet(resources));
         return res;
     }
