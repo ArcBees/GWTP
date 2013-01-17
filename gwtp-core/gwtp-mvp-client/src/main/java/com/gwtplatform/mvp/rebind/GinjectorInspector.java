@@ -17,6 +17,8 @@
 package com.gwtplatform.mvp.rebind;
 
 import java.lang.annotation.Annotation;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -26,6 +28,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JGenericType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
 /**
@@ -36,6 +39,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
  * @author Philippe Beaudoin
  */
 public class GinjectorInspector {
+    static final String GINJECTOR_INVALID_METHOD = "The %s has 2 methods returning the same type %s. This is invalid.";
     private final ClassCollection classCollection;
     private final GeneratorContext generatorContext;
     private final TreeLogger logger;
@@ -80,6 +84,16 @@ public class GinjectorInspector {
         findGinjectorClassName(logger, generatorContext.getPropertyOracle());
         findGinjectorClass(logger, generatorContext.getTypeOracle());
         classInspector = new ClassInspector(logger, ginjectorClass);
+        
+        Set<JType> returnTypes = new HashSet<JType>();
+        for (JMethod method : classInspector.getAllMethods()) {
+            final JType type = method.getReturnType();
+            if (!returnTypes.add(type)) {
+                logger.log(TreeLogger.Type.ERROR, String.format(GINJECTOR_INVALID_METHOD, ginjectorClassName,
+                        type.getSimpleSourceName()));
+                throw new UnableToCompleteException();
+            }
+        }
     }
 
     /**
