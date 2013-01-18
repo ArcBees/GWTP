@@ -16,10 +16,10 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * [Maven Usage Instructions](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
 
 ###Current Release
-0.8.4 - Released on 1/14/2013
+0.8-beta-1 - Released on 1/17/2013
 
 ###Current Snapshot
-0.8.5-SNAPSHOT
+0.8-beta-2-SNAPSHOT
 
 ###Archetype
 * [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools)
