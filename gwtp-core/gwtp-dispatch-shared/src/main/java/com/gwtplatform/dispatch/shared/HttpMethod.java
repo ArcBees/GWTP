@@ -14,25 +14,8 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.rest;
+package com.gwtplatform.dispatch.shared;
 
-import java.util.Map;
-
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.HttpMethod;
-import com.gwtplatform.dispatch.shared.Result;
-
-/**
- * TODO: Documentation
- */
-public interface RestAction<R extends Result> extends Action<R> {
-    HttpMethod getHttpMethod();
-
-    Map<String, Object> getPathParams();
-
-    Map<String, Object> getQueryParams();
-
-    Map<String, Object> getFormParams();
-
-    Map<String, Object> getHeaderParams();
+public enum HttpMethod {
+    GET, POST, PUT, DELETE, HEAD
 }
