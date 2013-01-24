@@ -35,12 +35,13 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
+import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.dispatch.client.rest.AbstractRestAction;
-import com.gwtplatform.dispatch.shared.HttpMethod;
 import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.HttpMethod;
 
 public class RestActionGenerator extends AbstractGenerator {
     private static final String SUFFIX = "Impl";
@@ -74,12 +75,11 @@ public class RestActionGenerator extends AbstractGenerator {
             throws UnableToCompleteException {
         setGeneratorContext(generatorContext);
         setTypeOracle(generatorContext.getTypeOracle());
-        setPropertyOracle(generatorContext.getPropertyOracle());
         setTreeLogger(treeLogger);
         setTypeClass(actionMethod.getReturnType().isClassOrInterface());
+        setPackageName(actionMethod.getEnclosingType().getPackage().getName().replace(".shared.", ".client."));
 
-        String packageName = actionMethod.getEnclosingType().getPackage().getName();
-        PrintWriter printWriter = tryCreatePrintWriter(packageName, getActionName(actionMethod), SUFFIX);
+        PrintWriter printWriter = tryCreatePrintWriter(getActionName(actionMethod), SUFFIX);
 
         if (printWriter != null) {
             setTreeLogger(getTreeLogger().branch(Type.INFO, "Generating rest action " + getClassName()));
@@ -102,6 +102,13 @@ public class RestActionGenerator extends AbstractGenerator {
 
         stringBuilder.insert(0, "_");
         stringBuilder.insert(0, actionMethod.getEnclosingType().getName());
+
+        JType[] parameterTypes = actionMethod.getErasedParameterTypes();
+        for (JType type : parameterTypes) {
+            stringBuilder.append("_").append(type.getSimpleSourceName());
+        }
+
+        stringBuilder.append("_");
 
         return stringBuilder.toString();
     }
