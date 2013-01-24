@@ -18,19 +18,13 @@ package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
 
-import com.google.gwt.core.ext.BadPropertyValueException;
-import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JParameterizedType;
-import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
@@ -41,18 +35,9 @@ public abstract class AbstractGenerator extends Generator {
     private TreeLogger treeLogger;
     private TypeOracle typeOracle;
     private JClassType typeClass;
-    private PropertyOracle propertyOracle;
 
     private String packageName = "";
     private String className = "";
-
-    public PropertyOracle getPropertyOracle() {
-        return propertyOracle;
-    }
-
-    public void setPropertyOracle(PropertyOracle propertyOracle) {
-        this.propertyOracle = propertyOracle;
-    }
 
     public void setTreeLogger(TreeLogger treeLogger) {
         this.treeLogger = treeLogger;
@@ -102,17 +87,11 @@ public abstract class AbstractGenerator extends Generator {
         return generatorContext;
     }
 
-    protected String getSimpleNameFromTypeName(String typeName) {
-        return typeName.substring(typeName.lastIndexOf(".") + 1);
-    }
-
     protected PrintWriter tryCreatePrintWriter(String prefix, String suffix) throws UnableToCompleteException {
-        return tryCreatePrintWriter(getTypeClass().getPackage().getName(), prefix, suffix);
-    }
+        if (getPackageName().isEmpty()) {
+            setPackageName(getTypeClass().getPackage().getName());
+        }
 
-    protected PrintWriter tryCreatePrintWriter(String packageName, String prefix, String suffix)
-            throws UnableToCompleteException {
-        setPackageName(packageName);
         setClassName(prefix + getTypeClass().getName() + suffix);
 
         return generatorContext.tryCreate(getTreeLogger(), getPackageName(), getClassName());
@@ -127,35 +106,8 @@ public abstract class AbstractGenerator extends Generator {
         }
     }
 
-    protected ConfigurationProperty findConfigurationProperty(String prop) throws UnableToCompleteException {
-        try {
-            return getPropertyOracle().getConfigurationProperty(prop);
-        } catch (BadPropertyValueException e) {
-            getTreeLogger().log(TreeLogger.ERROR, "Cannot find " + prop + " property in your module.gwt.xml file.", e);
-            throw new UnableToCompleteException();
-        }
-    }
-
     protected void closeDefinition(SourceWriter sourceWriter) {
         sourceWriter.commit(getTreeLogger());
-    }
-
-    /**
-     * Import the given JType in the composer. Also includes generic parameters recursively.
-     */
-    protected void addImports(ClassSourceFileComposerFactory composer, JType type) {
-        if (type.isWildcard() != null) {
-            return;
-        }
-
-        composer.addImport(type.getQualifiedSourceName());
-
-        JParameterizedType parameterizedType = type.isParameterized();
-        if (parameterizedType != null) {
-            for (JClassType typeArg : parameterizedType.getTypeArgs()) {
-                addImports(composer, typeArg);
-            }
-        }
     }
 
     protected String concatenatePath(String prefix, String suffix) {
