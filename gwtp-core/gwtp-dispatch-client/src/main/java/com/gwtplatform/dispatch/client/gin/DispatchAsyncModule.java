@@ -17,9 +17,6 @@
 package com.gwtplatform.dispatch.client.gin;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.client.DefaultDispatchAsync;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
@@ -64,7 +61,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @author Philippe Beaudoin
  * @author Brendan Doherty
  */
-public class DispatchAsyncModule extends AbstractGinModule {
+public abstract class DispatchAsyncModule extends AbstractGinModule {
     protected final Class<? extends ExceptionHandler> exceptionHandlerType;
     protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
     protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
@@ -78,8 +75,7 @@ public class DispatchAsyncModule extends AbstractGinModule {
      *
      * @author Brendan Doherty
      */
-    public static class Builder {
-
+    public abstract static class Builder {
         protected Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
         protected Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
         protected Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
@@ -131,19 +127,13 @@ public class DispatchAsyncModule extends AbstractGinModule {
          *
          * @return The built {@link DispatchAsyncModule}.
          */
-        public DispatchAsyncModule build() {
-            return new DispatchAsyncModule(this);
-        }
+        public abstract DispatchAsyncModule build();
     }
 
-    private DispatchAsyncModule(Builder builder) {
+    protected DispatchAsyncModule(Builder builder) {
         this.exceptionHandlerType = builder.exceptionHandlerType;
         this.sessionAccessorType = builder.sessionAccessorType;
         this.clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
-    }
-
-    public DispatchAsyncModule() {
-        this(new Builder());
     }
 
     @Override
@@ -151,12 +141,5 @@ public class DispatchAsyncModule extends AbstractGinModule {
         bind(ExceptionHandler.class).to(exceptionHandlerType);
         bind(SecurityCookieAccessor.class).to(sessionAccessorType);
         bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
-    }
-
-    @Provides
-    @Singleton
-    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
-            SecurityCookieAccessor secureSessionAccessor, ClientActionHandlerRegistry registry) {
-        return new DefaultDispatchAsync(exceptionHandler, secureSessionAccessor, registry);
     }
 }
