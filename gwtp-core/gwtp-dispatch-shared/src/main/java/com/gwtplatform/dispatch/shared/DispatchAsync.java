@@ -44,8 +44,7 @@ public interface DispatchAsync {
      *
      * @see DispatchServiceAsync#execute
      */
-    <A extends Action<R>, R extends Result> DispatchRequest execute(A action,
-            AsyncCallback<R> callback);
+    <A extends Action<R>, R extends Result> DispatchRequest execute(A action, AsyncCallback<R> callback);
 
     /**
      * This method is called client-side whenever a previous executed action need
@@ -53,6 +52,5 @@ public interface DispatchAsync {
      *
      * @see DispatchServiceAsync#undo
      */
-    <A extends Action<R>, R extends Result> DispatchRequest undo(A action,
-            R result, AsyncCallback<Void> callback);
+    <A extends Action<R>, R extends Result> DispatchRequest undo(A action, R result, AsyncCallback<Void> callback);
 }

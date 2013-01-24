@@ -44,12 +44,20 @@
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
         </dependency>
     </dependencies>
 </project>

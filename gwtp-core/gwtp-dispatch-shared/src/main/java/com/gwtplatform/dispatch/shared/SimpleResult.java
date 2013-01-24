@@ -14,27 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
-
-import com.gwtplatform.dispatch.shared.DispatchRequest;
+package com.gwtplatform.dispatch.shared;
 
 /**
- * An implementation of {@link DispatchRequest} that is always completed. It
- * should be used with {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
- * that do not perform any asynchronous processing.
+ * A common use-case is returning a single value from an action. This provides a
+ * simple, type-safe class for such results.
+ * <p/>
+ * <p/>
+ * <b>Note:</b> Subclasses should provide both an empty constructor for
+ * serialization and a constructor with a single value for normal use. It is
+ * recommended that the empty constructor is private or package-private.
  *
- * @author Brendan Doherty
+ * @param <T> The value type.
+ * @author David Peterson
  */
-public class CompletedDispatchRequest implements DispatchRequest {
-    public CompletedDispatchRequest() {
+public class SimpleResult<T> extends AbstractSimpleResult<T> {
+    SimpleResult() {
     }
 
-    @Override
-    public void cancel() {
-    }
-
-    @Override
-    public boolean isPending() {
-        return false;
+    public SimpleResult(T value) {
+        super(value);
     }
 }
