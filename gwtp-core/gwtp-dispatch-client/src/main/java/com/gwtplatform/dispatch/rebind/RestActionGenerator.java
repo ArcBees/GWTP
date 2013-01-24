@@ -39,7 +39,7 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.dispatch.client.rest.AbstractRestAction;
-import com.gwtplatform.dispatch.client.rest.HttpMethod;
+import com.gwtplatform.dispatch.shared.HttpMethod;
 import com.gwtplatform.dispatch.shared.Action;
 
 public class RestActionGenerator extends AbstractGenerator {
