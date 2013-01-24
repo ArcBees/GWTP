@@ -19,7 +19,7 @@
 <module>
     <!-- Inherit the core Web Toolkit stuff.                        -->
     <inherits name='com.google.gwt.user.User'/>
-    <inherits name="com.google.gwt.http.HTTP" />
+    <inherits name="com.google.gwt.http.HTTP"/>
 
     <!-- Inherit shared modules -->
     <inherits name='com.gwtplatform.common.ClientsCommon'/>
@@ -31,6 +31,6 @@
     <source path='client'/>
 
     <generate-with class="com.gwtplatform.dispatch.rebind.RestServiceGenerator">
-        <when-type-assignable class="com.gwtplatform.dispatch.client.rest.RestService" />
+        <when-type-assignable class="com.gwtplatform.dispatch.client.rest.RestService"/>
     </generate-with>
 </module>
