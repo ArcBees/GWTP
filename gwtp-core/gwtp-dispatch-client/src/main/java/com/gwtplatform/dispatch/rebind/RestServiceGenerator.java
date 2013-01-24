@@ -46,9 +46,9 @@ public class RestServiceGenerator extends AbstractGenerator {
             throws UnableToCompleteException {
         setGeneratorContext(generatorContext);
         setTypeOracle(generatorContext.getTypeOracle());
-        setPropertyOracle(generatorContext.getPropertyOracle());
         setTreeLogger(treeLogger);
         setTypeClass(getType(typeName));
+        setPackageName(getTypeClass().getPackage().getName().replace(".shared.", ".client."));
 
         PrintWriter printWriter = tryCreatePrintWriter("", SUFFIX);
 
