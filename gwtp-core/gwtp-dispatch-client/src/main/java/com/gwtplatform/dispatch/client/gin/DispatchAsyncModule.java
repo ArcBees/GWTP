@@ -97,8 +97,7 @@ public class DispatchAsyncModule extends AbstractGinModule {
          * @param exceptionHandlerType The {@link ExceptionHandler} class.
          * @return a {@link Builder} object.
          */
-        public Builder exceptionHandler(
-                Class<? extends ExceptionHandler> exceptionHandlerType) {
+        public Builder exceptionHandler(Class<? extends ExceptionHandler> exceptionHandlerType) {
             this.exceptionHandlerType = exceptionHandlerType;
             return this;
         }
@@ -109,8 +108,7 @@ public class DispatchAsyncModule extends AbstractGinModule {
          * @param sessionAccessorType The {@link SecurityCookieAccessor} class.
          * @return a {@link Builder} object.
          */
-        public Builder sessionAccessor(
-                Class<? extends SecurityCookieAccessor> sessionAccessorType) {
+        public Builder sessionAccessor(Class<? extends SecurityCookieAccessor> sessionAccessorType) {
             this.sessionAccessorType = sessionAccessorType;
             return this;
         }
@@ -148,36 +146,6 @@ public class DispatchAsyncModule extends AbstractGinModule {
         this(new Builder());
     }
 
-    @Deprecated
-    // FIXME: Remove in 0.6
-    public DispatchAsyncModule(
-            Class<? extends ExceptionHandler> exceptionHandlerType,
-            Class<? extends SecurityCookieAccessor> sessionAccessorType) {
-        this(
-                (new Builder()).exceptionHandler(exceptionHandlerType).sessionAccessor(
-                        sessionAccessorType));
-    }
-
-    @Deprecated
-    // FIXME: Remove in 0.6
-    public DispatchAsyncModule(
-            Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-        this(
-                (new Builder()).clientActionHandlerRegistry(clientActionHandlerRegistryType));
-    }
-
-    @Deprecated
-    // FIXME: Remove in 0.6
-    public DispatchAsyncModule(
-            Class<? extends ExceptionHandler> exceptionHandlerType,
-            Class<? extends SecurityCookieAccessor> sessionAccessorType,
-            Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-        this(
-                (new Builder()).exceptionHandler(exceptionHandlerType).sessionAccessor(
-                        sessionAccessorType).clientActionHandlerRegistry(
-                        clientActionHandlerRegistryType));
-    }
-
     @Override
     protected void configure() {
         bind(ExceptionHandler.class).to(exceptionHandlerType);
@@ -187,11 +155,8 @@ public class DispatchAsyncModule extends AbstractGinModule {
 
     @Provides
     @Singleton
-    protected DispatchAsync provideDispatchAsync(
-            ExceptionHandler exceptionHandler,
-            SecurityCookieAccessor secureSessionAccessor,
-            ClientActionHandlerRegistry registry) {
-        return new DefaultDispatchAsync(exceptionHandler, secureSessionAccessor,
-                registry);
+    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
+            SecurityCookieAccessor secureSessionAccessor, ClientActionHandlerRegistry registry) {
+        return new DefaultDispatchAsync(exceptionHandler, secureSessionAccessor, registry);
     }
 }
