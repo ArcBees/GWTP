@@ -14,27 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.client.rest;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * An implementation of {@link DispatchRequest} that is always completed. It
- * should be used with {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
- * that do not perform any asynchronous processing.
- *
- * @author Brendan Doherty
+ * TODO: Documentation
  */
-public class CompletedDispatchRequest implements DispatchRequest {
-    public CompletedDispatchRequest() {
+public class RestDispatchAsync implements DispatchAsync {
+    @Override
+    public <A extends Action<R>, R extends Result> DispatchRequest execute(A action, AsyncCallback<R> callback) {
+        return null;
     }
 
     @Override
-    public void cancel() {
-    }
-
-    @Override
-    public boolean isPending() {
-        return false;
+    public <A extends Action<R>, R extends Result> DispatchRequest undo(A action, R result, AsyncCallback<Void> callback) {
+        return null;
     }
 }
