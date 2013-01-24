@@ -18,21 +18,17 @@ package com.gwtplatform.dispatch.client.gin;
 
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder;
 import com.gwtplatform.dispatch.client.rest.ApplicationPath;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * An implementation of {@link DispatchAsyncModule} that uses HTTP REST calls.
+ * An implementation of {@link AbstractDispatchAsyncModule} that uses HTTP REST calls.
  * <p/>
  * Warning: This is still a work in progress and subject to many changes.
  */
-public class RestDispatchAsyncModule extends DispatchAsyncModule {
-    public static class Builder extends DispatchAsyncModule.Builder {
+public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
+    public static class Builder extends AbstractDispatchAsyncModule.Builder {
         protected String applicationPath = "";
 
         public Builder applicationPath(String applicationPath) {
