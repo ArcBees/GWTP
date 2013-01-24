@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.client.rest;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gwtplatform.dispatch.shared.HttpMethod;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
