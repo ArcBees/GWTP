@@ -21,8 +21,8 @@ A complete model-view-presenter framework to simplify your next GWT project.
 ###Current Snapshot
 0.8-beta-2-SNAPSHOT
 
-###Archetype
-* [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools)
+###Archetypes
+* [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes)
 
 ##Demos
 * [GWTP Samples Project Home](https://github.com/ArcBees/GWTP-Samples)
