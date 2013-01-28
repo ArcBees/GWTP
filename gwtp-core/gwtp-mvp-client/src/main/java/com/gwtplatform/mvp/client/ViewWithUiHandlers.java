@@ -16,36 +16,45 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.gwtplatform.mvp.client.uihandlers.UiHandlersStrategy;
+
 /**
  * Base class for a {@link View} that implements the {@link HasUiHandlers}
- * interface. You should always call {@link #setUiHandlers(UiHandlers)} from your
- * presenter's constructor.
+ * interface. You should always call {@link #setUiHandlers(UiHandlers)} from
+ * your presenter's constructor.
+ * 
+ * {@link com.gwtplatform.mvp.client.ViewWithUiHandlers} that add a
+ * {@link com.google.gwt.user.client.ui.Composite} like behavior by letting us
+ * assigning a widget to the {@link com.gwtplatform.mvp.client.View}.
  * <p/>
- * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
- * since the {@link UiHandlers} are not yet set.
- *
- * @param <C> Your {@link UiHandlers} interface type.
- * @author Christian Goudreau
- * @author Philippe Beaudoin
+ * <b>Important</b> call
+ * {@link #initWidget(com.google.gwt.user.client.ui.Widget)} in your
+ * {@link com.gwtplatform.mvp.client.View}'s constructor.
+ * 
+ * @param <H> {@link com.gwtplatform.mvp.client.UiHandlers}'s type.
  */
-public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
-        implements HasUiHandlers<C> {
-    private C uiHandlers;
+public abstract class ViewWithUiHandlers<H extends UiHandlers> extends ViewImpl implements UiHandlersStrategy<H> {
+    private UiHandlersStrategy<H> uiHandlersStrategy;
+
+    public ViewWithUiHandlers(final UiHandlersStrategy<H> uiHandlersStrategy) {
+        this.uiHandlersStrategy = uiHandlersStrategy;
+    }
 
     /**
      * Access the {@link UiHandlers} associated with this {@link View}.
      * <p/>
-     * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
-     * since the {@link UiHandlers} are not yet set.
-     *
+     * <b>Important!</b> Never call {@link #getUiHandlers()} inside your
+     * constructor since the {@link UiHandlers} are not yet set.
+     * 
      * @return The {@link UiHandlers}, or {@code null} if they are not yet set.
      */
-    protected C getUiHandlers() {
-        return uiHandlers;
+    @Override
+    public H getUiHandlers() {
+        return uiHandlersStrategy.getUiHandlers();
     }
 
     @Override
-    public void setUiHandlers(C uiHandlers) {
-        this.uiHandlers = uiHandlers;
+    public void setUiHandlers(H uiHandlers) {
+        uiHandlersStrategy.setUiHandlers(uiHandlers);
     }
 }
