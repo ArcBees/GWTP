@@ -29,9 +29,6 @@ import com.google.gwt.user.client.ui.Widget;
  * <p/>
  *  * <b>Important</b> call {@link #initWidget(com.google.gwt.user.client.ui.Widget)} in your {@link com.gwtplatform.mvp.client.View}'s
  * constructor.
- *
- * @author Philippe Beaudoin
- * @author Christian Goudreau
  */
 public abstract class ViewImpl implements View {
     private Widget widget;
