@@ -23,14 +23,11 @@ import com.google.gwt.user.client.ui.Widget;
  * {@link #setInSlot(Object, Widget)}, {@link #addToSlot(Object, Widget)}, and
  * {@link #removeFromSlot(Object, Widget)}.
  * <p/>
- * Feel free not to inherit from this if you need another base class (such as
- * {@link com.google.gwt.user.client.ui.Composite}), but you will have to define
- * the above methods.
- *
- * @author Philippe Beaudoin
- * @author Christian Goudreau
+ * <b>Important</b> call {@link #initWidget(com.google.gwt.user.client.ui.Widget)} in your {@link com.gwtplatform.mvp.client.View}'s
+ * constructor.
  */
 public abstract class ViewImpl implements View {
+    private Widget widget;
 
     @Override
     public void addToSlot(Object slot, Widget content) {
@@ -42,5 +39,14 @@ public abstract class ViewImpl implements View {
 
     @Override
     public void setInSlot(Object slot, Widget content) {
+    }
+    
+    @Override
+    public Widget asWidget() {
+        return widget;
+    }
+
+    protected void initWidget(Widget widget) {
+        this.widget = widget;
     }
 }
