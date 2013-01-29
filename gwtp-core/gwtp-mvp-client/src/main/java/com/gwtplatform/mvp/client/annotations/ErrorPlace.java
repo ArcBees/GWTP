@@ -27,10 +27,8 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Bind this annotation to a name token for an error place (e.g.: error 404 page).
- *
- * This annotation is useful when overriding your {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager}'s
- * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealErrorPlace(String) revealErrorPlace} method.
+ * This annotation is used for binding the error place's (e.g.: error 404 page) name token in your Gin module,
+ * so that you can inject in either your own ClientPlaceManager or the DefaultPlaceManager.
  */
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
