@@ -29,8 +29,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * This annotation is used for binding the default place's name token in your Gin module, so that you can inject
  * in either your own ClientPlaceManager or the DefaultPlaceManager.
- *
- * For example, the default place could be your home page.
  */
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
