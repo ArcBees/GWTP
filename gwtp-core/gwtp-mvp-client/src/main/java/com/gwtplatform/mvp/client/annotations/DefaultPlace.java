@@ -28,10 +28,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * This annotation is useful when overriding your {@link com.gwtplatform.mvp.client.proxy.PlaceManager }'s
- * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealCurrentPlace()} method.
+ * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealDefaultPlace() revealDefaultPlace} method.
  * <p/>
- * Use Guice to bind a default name token to this annotation so it can be injected in your {@link com.gwtplatform.mvp
- * .client.proxy.PlaceManager}'s constructor.
+ * Use Guice to bind a default name token to this annotation so it can be injected in your
+ * {@link com.gwtplatform.mvp.client.proxy.PlaceManager}'s constructor.
  */
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
