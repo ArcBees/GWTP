@@ -27,11 +27,22 @@ import javax.inject.Inject;
  * This is a subtype of {@link com.gwtplatform.mvp.client.proxy.PlaceManagerImpl PlaceManagerImpl} that uses
  * custom name tokens to reveal default, error and unauthorized places.
  * <p/>
- * <b!>Important!</b!>If you use this class, don't forget to bind
+ * <b>Important! </b>If you use this class, don't forget to bind
  * {@link com.gwtplatform.mvp.client.annotations.DefaultPlace DefaultPlace},
  * {@link com.gwtplatform.mvp.client.annotations.ErrorPlace ErrorPlace} and
  * {@link com.gwtplatform.mvp.client.annotations.UnauthorizedPlace UnauthorizedPlace} to Presenter name tokens in
  * your Gin module.
+ * <p/>
+ * <i>Note: </i>The default, error and unauthorized places are revealed without updating the browser's URL (hence
+ * the false value passed in {@link #revealPlace(PlaceRequest, boolean) revealPlace}). This will avoid stepping into
+ * an infinite navigation loop if the user navigates back (using the browser's back button).
+ * <p/>
+ * Here's an example of infinite navigation loop that we want to avoid:
+ * <ol>
+ * <li>An unauthenticated hits #admin (a place reserved to authenticated admins)</li>
+ * <li>The #unauthorized place is revealed, and the browser's URL is updated to #unauthorized</li>
+ * <li>The user clicks the back button in his browser, lands in #admin, then #unauthorized, then #admin, and so on.</li>
+ * </ol>
  */
 public class DefaultPlaceManager extends PlaceManagerImpl {
     private final PlaceRequest defaultPlaceRequest;
