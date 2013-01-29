@@ -27,11 +27,8 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * This annotation is useful when overriding your {@link com.gwtplatform.mvp.client.proxy.PlaceManager }'s
- * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealUnauthorizedPlace(String) revealUnauthorizedPlace} method.
- * <p/>
- * Use Guice to bind a name token to this annotation so it can be injected in your
- * {@link com.gwtplatform.mvp.client.proxy.PlaceManager}'s constructor.
+ * This annotation is used for binding the unauthorized place's name token in your Gin module, so that you can inject
+ * in either your own ClientPlaceManager or the DefaultPlaceManager.
  */
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
