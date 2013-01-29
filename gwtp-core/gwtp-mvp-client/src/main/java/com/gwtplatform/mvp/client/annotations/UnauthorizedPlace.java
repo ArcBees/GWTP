@@ -30,7 +30,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * This annotation is useful when overriding your {@link com.gwtplatform.mvp.client.proxy.PlaceManager }'s
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealUnauthorizedPlace(String) revealUnauthorizedPlace} method.
  * <p/>
- * Use Guice to bind a default name token to this annotation so it can be injected in your
+ * Use Guice to bind a name token to this annotation so it can be injected in your
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager}'s constructor.
  */
 @BindingAnnotation
