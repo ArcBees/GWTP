@@ -27,11 +27,10 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * This annotation is useful when overriding your {@link com.gwtplatform.mvp.client.proxy.PlaceManager }'s
- * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealDefaultPlace() revealDefaultPlace} method.
- * <p/>
- * Use Guice to bind a default name token to this annotation so it can be injected in your
- * {@link com.gwtplatform.mvp.client.proxy.PlaceManager}'s constructor.
+ * This annotation is used for binding the default place's name token in your Gin module, so that you can inject
+ * in either your own ClientPlaceManager or the DefaultPlaceManager.
+ *
+ * For example, the default place could be your home page.
  */
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
