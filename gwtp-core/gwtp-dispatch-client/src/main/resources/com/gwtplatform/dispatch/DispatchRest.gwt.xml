@@ -26,11 +26,12 @@
     <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
 
     <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name="name.pehl.piriti.json.JSON"/>
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
 
     <generate-with class="com.gwtplatform.dispatch.rebind.RestServiceGenerator">
-        <when-type-assignable class="com.gwtplatform.dispatch.client.rest.RestService"/>
+        <when-type-assignable class="com.gwtplatform.dispatch.shared.rest.RestService"/>
     </generate-with>
 </module>
