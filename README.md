@@ -13,7 +13,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
 
 ##Maven
 * [See whats available in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform)
-* [Maven Usage Instructions](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
+* [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration)
 
 ###Current Release
 0.8-beta-1 - Released on 1/17/2013
