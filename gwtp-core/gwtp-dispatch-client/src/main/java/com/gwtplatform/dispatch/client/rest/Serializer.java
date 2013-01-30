@@ -10,5 +10,5 @@ import com.google.gwt.user.client.rpc.SerializationException;
 public interface Serializer<T extends Serializable> {
     T deserialize(String value) throws SerializationException;
 
-    String serialize(Serializable value) throws SerializationException;
+    String serialize(T value) throws SerializationException;
 }

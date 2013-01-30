@@ -64,7 +64,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Provides
     @Singleton
-    protected DispatchAsync provideDispatchAsync(SerializerProvider serializerProvider, @RestApplicationPath String applicationPath) {
+    protected DispatchAsync provideDispatchAsync(SerializerProvider serializerProvider,
+            @RestApplicationPath String applicationPath) {
         // TODO: Add support for the client action handlers and exception handlers (and session cookies?)
         return new RestDispatchAsync(serializerProvider, applicationPath);
     }
