@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright 2013 ArcBees Inc.
+  ~ Copyright 2011 ArcBees Inc.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not
   ~ use this file except in compli ance with the License. You may obtain a copy of
@@ -33,5 +33,9 @@
 
     <generate-with class="com.gwtplatform.dispatch.rebind.RestServiceGenerator">
         <when-type-assignable class="com.gwtplatform.dispatch.shared.rest.RestService"/>
+    </generate-with>
+
+    <generate-with class="com.gwtplatform.dispatch.rebind.SerializerProviderGenerator">
+        <when-type-is class="com.gwtplatform.dispatch.shared.rest.SerializerProvider"/>
     </generate-with>
 </module>
