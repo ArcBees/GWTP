@@ -18,8 +18,9 @@ package com.gwtplatform.dispatch.client.gin;
 
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.client.rest.ApplicationPath;
+import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
+import com.gwtplatform.dispatch.client.rest.SerializerProvider;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 
 /**
@@ -58,13 +59,13 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configure() {
         super.configure();
 
-        bindConstant().annotatedWith(ApplicationPath.class).to(applicationPath);
+        bindConstant().annotatedWith(RestApplicationPath.class).to(applicationPath);
     }
 
     @Provides
     @Singleton
-    protected DispatchAsync provideDispatchAsync(@ApplicationPath String applicationPath) {
-        // TODO: Add support for the required parameters
-        return new RestDispatchAsync(applicationPath);
+    protected DispatchAsync provideDispatchAsync(SerializerProvider serializerProvider, @RestApplicationPath String applicationPath) {
+        // TODO: Add support for the client action handlers and exception handlers (and session cookies?)
+        return new RestDispatchAsync(serializerProvider, applicationPath);
     }
 }

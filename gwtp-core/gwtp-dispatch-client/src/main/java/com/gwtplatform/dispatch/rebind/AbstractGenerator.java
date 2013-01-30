@@ -68,6 +68,8 @@ public abstract class AbstractGenerator extends Generator {
     }
 
     public void setPackageName(String packageName) {
+        getTypeOracle().getOrCreatePackage(packageName);
+
         this.packageName = packageName;
     }
 

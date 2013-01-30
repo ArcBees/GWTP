@@ -26,6 +26,9 @@
 
     <inherits name="com.google.gwt.inject.Inject"/>
 
+    <!--TODO: Create a new project for the REST dispatcher and remove this-->
+    <inherits name="name.pehl.piriti.json.JSON"/>
+
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
 
