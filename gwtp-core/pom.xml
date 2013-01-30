@@ -17,6 +17,7 @@
         <module>gwtp-mvp-client</module>
         <module>gwtp-clients-common</module>
         <module>gwtp-dispatch-client</module>
+        <module>gwtp-dispatch-rest</module>
         <module>gwtp-dispatch-shared</module>
         <module>gwtp-dispatch-server</module>
         <module>gwtp-dispatch-server-guice</module>
