@@ -16,11 +16,16 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.gwtplatform.dispatch.shared.HttpMethod;
 import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.shared.rest.BodyParameter;
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+import com.gwtplatform.dispatch.shared.rest.ResponseParameter;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 /**
  * TODO: Documentation
@@ -29,14 +34,18 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
     private HttpMethod httpMethod;
     private String rawServicePath;
 
-    private HashMap<String, Object> pathParams = new HashMap<String, Object>();
-    private HashMap<String, Object> queryParams = new HashMap<String, Object>();
-    private HashMap<String, Object> headerParams = new HashMap<String, Object>();
-    private HashMap<String, Object> formParams = new HashMap<String, Object>();
+    private List<RestParameter> pathParams = new ArrayList<RestParameter>();
+    private List<RestParameter> headerParams = new ArrayList<RestParameter>();
+    private List<RestParameter> queryParams = new ArrayList<RestParameter>();
+    private List<RestParameter> formParams = new ArrayList<RestParameter>();
+    private BodyParameter bodyParam;
+    private ResponseParameter responseParam;
 
-    protected AbstractRestAction(HttpMethod httpMethod, String rawServicePath) {
+    protected AbstractRestAction(HttpMethod httpMethod, String rawServicePath, String responseSerializerId) {
         this.httpMethod = httpMethod;
         this.rawServicePath = rawServicePath;
+
+        responseParam = new ResponseParameter(responseSerializerId);
     }
 
     protected AbstractRestAction() {
@@ -58,38 +67,62 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
     }
 
     @Override
-    public Map<String, Object> getPathParams() {
+    public List<RestParameter> getPathParams() {
         return pathParams;
     }
 
     @Override
-    public Map<String, Object> getQueryParams() {
+    public List<RestParameter> getQueryParams() {
         return queryParams;
     }
 
     @Override
-    public Map<String, Object> getFormParams() {
+    public List<RestParameter> getFormParams() {
         return formParams;
     }
 
     @Override
-    public Map<String, Object> getHeaderParams() {
+    public List<RestParameter> getHeaderParams() {
         return headerParams;
     }
 
-    protected void putPathParam(String key, Object value) {
-        pathParams.put(key, value);
+    @Override
+    public BodyParameter getBodyParam() {
+        return bodyParam;
     }
 
-    protected void putQueryParam(String key, Object value) {
-        queryParams.put(key, value);
+    @Override
+    public ResponseParameter getResponseParam() {
+        return responseParam;
     }
 
-    protected void putFormParam(String key, Object value) {
-        formParams.put(key, value);
+    @Override
+    public Boolean hasFormParams() {
+        return !formParams.isEmpty();
     }
 
-    protected void putHeaderParam(String key, Object value) {
-        headerParams.put(key, value);
+    @Override
+    public Boolean hasBodyParam() {
+        return bodyParam != null;
+    }
+
+    protected void addPathParam(String name, Serializable value) {
+        pathParams.add(new RestParameter(name, value));
+    }
+
+    protected void addQueryParam(String name, Serializable value) {
+        queryParams.add(new RestParameter(name, value));
+    }
+
+    protected void addFormParam(String name, Serializable value) {
+        formParams.add(new RestParameter(name, value));
+    }
+
+    protected void addHeaderParam(String name, Serializable value) {
+        headerParams.add(new RestParameter(name, value));
+    }
+
+    protected void setBodyParam(Serializable value, String serializerId) {
+        bodyParam = new BodyParameter(value, serializerId);
     }
 }

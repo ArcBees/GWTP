@@ -16,23 +16,15 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.util.Map;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.HttpMethod;
-import com.gwtplatform.dispatch.shared.Result;
+import com.google.inject.BindingAnnotation;
 
-/**
- * TODO: Documentation
- */
-public interface RestAction<R extends Result> extends Action<R> {
-    HttpMethod getHttpMethod();
-
-    Map<String, Object> getPathParams();
-
-    Map<String, Object> getQueryParams();
-
-    Map<String, Object> getFormParams();
-
-    Map<String, Object> getHeaderParams();
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface RestApplicationPath {
 }

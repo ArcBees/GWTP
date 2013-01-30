@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.client.rest;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.http.client.Request;
@@ -25,34 +26,45 @@ import com.google.gwt.http.client.RequestBuilder.Method;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.SerializationException;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.HttpMethod;
 import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.shared.rest.BodyParameter;
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+import com.gwtplatform.dispatch.shared.rest.ResponseParameter;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 /**
  * TODO: Documentation
+ * TODO: Serialization should be handled by a custom ActionHandler that
  */
 public class RestDispatchAsync implements DispatchAsync {
-    private static final Map<HttpMethod, Method> httpMethods = new EnumMap<HttpMethod, Method>(HttpMethod.class);
     private static final String CONTENT_TYPE = "Content-Type";
+    private static final Map<HttpMethod, Method> HTTP_METHODS = new EnumMap<HttpMethod, Method>(HttpMethod.class);
 
     static {
-        httpMethods.put(HttpMethod.GET, RequestBuilder.GET);
-        httpMethods.put(HttpMethod.POST, RequestBuilder.POST);
-        httpMethods.put(HttpMethod.PUT, RequestBuilder.PUT);
-        httpMethods.put(HttpMethod.DELETE, RequestBuilder.DELETE);
-        httpMethods.put(HttpMethod.HEAD, RequestBuilder.HEAD);
+        HTTP_METHODS.put(HttpMethod.GET, RequestBuilder.GET);
+        HTTP_METHODS.put(HttpMethod.POST, RequestBuilder.POST);
+        HTTP_METHODS.put(HttpMethod.PUT, RequestBuilder.PUT);
+        HTTP_METHODS.put(HttpMethod.DELETE, RequestBuilder.DELETE);
+        HTTP_METHODS.put(HttpMethod.HEAD, RequestBuilder.HEAD);
     }
 
+    public static final String JSON_UTF8 = "application/json; charset=utf-8";
+
+    private final SerializerProvider serializerProvider;
     private final String baseUrl;
 
-    public RestDispatchAsync(String applicationPath) {
+    public RestDispatchAsync(SerializerProvider serializerProvider, String applicationPath) {
+        this.serializerProvider = serializerProvider;
         baseUrl = applicationPath;
     }
 
@@ -68,43 +80,29 @@ public class RestDispatchAsync implements DispatchAsync {
 
     public <A extends RestAction<R>, R extends Result> DispatchRequest execute(final A action,
             final AsyncCallback<R> callback) {
-        RequestBuilder requestBuilder = createRequestBuilder(action);
-
-        requestBuilder.setCallback(new RequestCallback() {
-            @Override
-            public void onResponseReceived(Request request, Response response) {
-                // TODO: Add possibility for other success codes
-                if (response.getStatusCode() == Response.SC_OK) {
-                    onExecuteSuccess(action, callback, response);
-                } else {
-                    // TODO: Add message / wrap RestActionException
-                    onExecuteFailure(action, callback, new ActionException(response.getStatusText()));
-                }
-            }
-
-            @Override
-            public void onError(Request request, Throwable exception) {
-                onExecuteFailure(action, callback, exception);
-            }
-        });
-
         try {
+            RequestBuilder requestBuilder = createRequestBuilder(action);
+
+            requestBuilder.setCallback(new RequestCallback() {
+                @Override
+                public void onResponseReceived(Request request, Response response) {
+                    onExecuteResponseReceived(action, response, callback);
+                }
+
+                @Override
+                public void onError(Request request, Throwable exception) {
+                    onExecuteFailure(callback, exception);
+                }
+            });
+
             return new GwtHttpDispatchRequest(requestBuilder.send());
         } catch (RequestException e) {
-            onExecuteFailure(action, callback, e);
+            onExecuteFailure(callback, e);
+        } catch (ActionException e) {
+            onExecuteFailure(callback, e);
         }
 
         return new CompletedDispatchRequest();
-    }
-
-    private <A extends RestAction<R>, R extends Result> void onExecuteSuccess(A action, AsyncCallback<R> callback,
-            Response response) {
-        callback.onSuccess((R) getDeserializedReponse(response.getText()));
-    }
-
-    private <A extends RestAction<R>, R extends Result> void onExecuteFailure(A action, AsyncCallback<R> callback,
-            Throwable exception) {
-        callback.onFailure(exception);
     }
 
     @Override
@@ -113,74 +111,115 @@ public class RestDispatchAsync implements DispatchAsync {
         throw new UnsupportedOperationException();
     }
 
-    private <A extends RestAction<?>> RequestBuilder createRequestBuilder(A action) {
-        Method httpMethod = httpMethods.get(action.getHttpMethod());
+    private <A extends RestAction<R>, R extends Result> void onExecuteResponseReceived(A action, Response response,
+            AsyncCallback<R> callback) {
+        // TODO: Add possibility for other success codes
+        if (response.getStatusCode() == Response.SC_OK) {
+            onExecuteSuccess(action, callback, response);
+        } else {
+            // TODO: Add message / wrap RestActionException
+            onExecuteFailure(callback, new ActionException(response.getStatusText()));
+        }
+    }
+
+    private <A extends RestAction<R>, R extends Result> void onExecuteSuccess(A action, AsyncCallback<R> callback,
+            Response response) {
+        try {
+            @SuppressWarnings("unchecked")
+            R deserializedReponse = (R) getDeserializedReponse(response.getText(), action.getResponseParam());
+
+            callback.onSuccess(deserializedReponse);
+        } catch (ActionException e) {
+            callback.onFailure(e);
+        }
+    }
+
+    private <R extends Result> void onExecuteFailure(AsyncCallback<R> callback,
+            Throwable exception) {
+        callback.onFailure(exception);
+    }
+
+    private <A extends RestAction<?>> RequestBuilder createRequestBuilder(A action) throws ActionException {
+        Method httpMethod = HTTP_METHODS.get(action.getHttpMethod());
         String url = buildUrl(action);
 
         RequestBuilder requestBuilder = new RequestBuilder(httpMethod, url);
 
-        for (Map.Entry<String, Object> param : action.getHeaderParams().entrySet()) {
-            // TODO: header param should be a string?
-            requestBuilder.setHeader(param.getKey(), getSerializedValue(param.getValue()));
+        for (RestParameter param : action.getHeaderParams()) {
+            requestBuilder.setHeader(param.getName(), getSerializedValue(param));
         }
 
-        // TODO: use @Produces
-        requestBuilder.setHeader(CONTENT_TYPE, "application/json; charset=utf-8");
+        requestBuilder.setHeader(CONTENT_TYPE, JSON_UTF8);
 
-        requestBuilder.setRequestData(getSerializedContent(action.getFormParams()));
+        if (action.hasFormParams()) {
+            requestBuilder.setRequestData(buildQueryString(action.getFormParams()));
+        } else if (action.hasBodyParam()) {
+            requestBuilder.setRequestData(getSerializedValue(action.getBodyParam()));
+        }
 
         return requestBuilder;
     }
 
-    private String buildUrl(RestAction<?> restAction) {
+    private String buildUrl(RestAction<?> restAction) throws ActionException {
+        String queryString = buildQueryString(restAction.getQueryParams());
+
+        if (!queryString.isEmpty()) {
+            queryString = "?" + queryString;
+        }
+
+        String path = buildPath(restAction.getServiceName(), restAction.getPathParams());
         return baseUrl
-                + buildPath(restAction.getServiceName(), restAction.getPathParams())
-                + buildQueryString(restAction.getQueryParams());
+                + path
+                + queryString;
     }
 
-    private String buildPath(String rawPath, Map<String, Object> params) {
+    private String buildPath(String rawPath, List<RestParameter> params) throws ActionException {
         String path = rawPath;
 
-        for (Map.Entry<String, Object> param : params.entrySet()) {
-            path = path.replace(param.getKey(), getSerializedValue(param.getValue()));
+        for (RestParameter param : params) {
+            path = path.replace("{" + param.getName() + "}", getSerializedValue(param));
         }
 
         return path;
     }
 
-    private String buildQueryString(Map<String, Object> params) {
+    private String buildQueryString(List<RestParameter> params) throws ActionException {
         StringBuilder queryString = new StringBuilder();
 
-        for (Map.Entry<String, Object> param : params.entrySet()) {
+        for (RestParameter param : params) {
             queryString.append("&")
-                    .append(param.getKey())
+                    .append(param.getName())
                     .append("=")
-                    .append(getSerializedValue(param.getValue()));
+                    .append(getSerializedValue(param));
         }
 
         if (queryString.length() != 0) {
-            queryString.replace(0, 1, "?");
+            queryString.deleteCharAt(0);
         }
 
         return queryString.toString();
     }
 
-    private String getSerializedContent(Map<String, Object> params) {
-        // TODO: add piriti and use the corresponding writer
-
-        return params.toString();
+    private String getSerializedValue(RestParameter value) throws ActionException {
+        return UriUtils.encode(value.getObject().toString());
     }
 
-    private String getSerializedValue(Object object) {
-        // TODO: add piriti and use the corresponding writer
-
-        return object.toString();
+    private String getSerializedValue(BodyParameter bodyParameter) throws ActionException {
+        try {
+            Serializer<?> serializer = serializerProvider.getSerializer(bodyParameter.getSerializerId());
+            return serializer.serialize(bodyParameter.getSerializerId());
+        } catch (SerializationException e) {
+            throw new ActionException("Unable to serialize request body.", e);
+        }
     }
 
-    private <R extends Result> R getDeserializedReponse(String text) {
-        // TODO: use @Consumes
-        // TODO: add piriti and use the corresponding reader
-
-        return null;
+    private <R extends Result> R getDeserializedReponse(String text, ResponseParameter responseParameter)
+            throws ActionException {
+        try {
+            Serializer<R> serializer = serializerProvider.getSerializer(responseParameter.getSerializerId());
+            return serializer.deserialize(text);
+        } catch (SerializationException e) {
+            throw new ActionException("Unable to deserialize response.", e);
+        }
     }
 }

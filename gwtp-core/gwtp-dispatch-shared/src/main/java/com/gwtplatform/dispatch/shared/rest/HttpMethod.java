@@ -14,17 +14,8 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.rest;
+package com.gwtplatform.dispatch.shared.rest;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import com.google.inject.BindingAnnotation;
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@BindingAnnotation
-public @interface ApplicationPath {
+public enum HttpMethod {
+    GET, POST, PUT, DELETE, HEAD
 }

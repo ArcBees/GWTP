@@ -14,8 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.shared.rest;
 
-public enum HttpMethod {
-    GET, POST, PUT, DELETE, HEAD
+/**
+ * TODO: Write javadoc.
+ */
+public interface RestService {
 }

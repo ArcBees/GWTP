@@ -14,10 +14,32 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.rest;
+package com.gwtplatform.dispatch.shared.rest;
+
+import java.util.List;
+
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * TODO: Write javadoc.
+ * TODO: Documentation
  */
-public interface RestService {
+public interface RestAction<R extends Result> extends Action<R> {
+    HttpMethod getHttpMethod();
+
+    List<RestParameter> getPathParams();
+
+    List<RestParameter> getQueryParams();
+
+    List<RestParameter> getFormParams();
+
+    List<RestParameter> getHeaderParams();
+
+    BodyParameter getBodyParam();
+
+    ResponseParameter getResponseParam();
+
+    Boolean hasFormParams();
+
+    Boolean hasBodyParam();
 }
