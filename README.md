@@ -16,10 +16,10 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * [See whats available in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform)
 
 ###Current Release
-0.8-beta-1 - Released on 1/17/2013
+1.0-RC-1 - Released on 1/30/2013
 
 ###Current Snapshot
-0.8-beta-2-SNAPSHOT
+1.0-RC-2-SNAPSHOT
 
 ###Archetypes
 * [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes)
