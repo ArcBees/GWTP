@@ -227,6 +227,7 @@
         <gpg.passphrase>SetAsParam</gpg.passphrase>
         <github.username>SetAsParam</github.username>
         <github.password>SetAsParam</github.password>
+        <guava.version>13.0.1</guava.version>
     </properties>
 
     <repositories>
