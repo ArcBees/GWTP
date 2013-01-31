@@ -65,7 +65,7 @@ public class RestActionGenerator extends AbstractGenerator {
     }
 
     @SuppressWarnings("unchecked")
-    private final static List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
+    private static final List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
             Arrays.asList(HeaderParam.class, QueryParam.class, PathParam.class, FormParam.class);
 
     private static final String SUFFIX = "Impl";

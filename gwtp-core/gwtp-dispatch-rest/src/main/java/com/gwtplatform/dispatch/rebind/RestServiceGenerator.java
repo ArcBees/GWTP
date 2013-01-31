@@ -59,7 +59,7 @@ public class RestServiceGenerator extends AbstractGenerator {
         PrintWriter printWriter = tryCreatePrintWriter("", SUFFIX);
 
         if (printWriter != null) {
-            setTreeLogger(getTreeLogger().branch(Type.INFO, "Generating rest service " + getClassName()));
+            setTreeLogger(getTreeLogger().branch(Type.DEBUG, "Generating rest service " + getClassName()));
 
             verifyIsInterface();
 

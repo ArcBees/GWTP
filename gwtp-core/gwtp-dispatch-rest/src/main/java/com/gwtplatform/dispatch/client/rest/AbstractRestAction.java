@@ -28,7 +28,7 @@ import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 /**
- * TODO: Documentation
+ * TODO: Documentation.
  */
 public abstract class AbstractRestAction<R extends Result> implements RestAction<R> {
     private HttpMethod httpMethod;
