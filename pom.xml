@@ -82,6 +82,16 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>christopher.viel</id>
+            <name>Christopher Viel</name>
+            <email>viel.christopher@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors>
@@ -206,6 +216,7 @@
         <cglib.version>2.2</cglib.version>
         <gae.version>1.7.3</gae.version>
         <gin.version>2.0.0</gin.version>
+        <guava.version>13.0.1</guava.version>
         <guice.version>3.0</guice.version>
         <gwt.version>2.5.0</gwt.version>
         <htmlunit.version>2.9</htmlunit.version>
@@ -227,7 +238,6 @@
         <gpg.passphrase>SetAsParam</gpg.passphrase>
         <github.username>SetAsParam</github.username>
         <github.password>SetAsParam</github.password>
-        <guava.version>13.0.1</guava.version>
     </properties>
 
     <repositories>
@@ -252,7 +262,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-
     </repositories>
 
     <build>

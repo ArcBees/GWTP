@@ -45,7 +45,7 @@ import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 /**
  * TODO: Documentation
- * TODO: Serialization should be handled by a custom ActionHandler that
+ * TODO: Serialization should be handled by a custom ActionHandler that wraps the user handler (SRP)
  */
 public class RestDispatchAsync implements DispatchAsync {
     private static final String CONTENT_TYPE = "Content-Type";
@@ -205,9 +205,11 @@ public class RestDispatchAsync implements DispatchAsync {
         return UriUtils.encode(value.getObject().toString());
     }
 
+    @SuppressWarnings("unchecked")
     private String getSerializedValue(BodyParameter bodyParameter) throws ActionException {
         try {
-            Serializer<Serializable> serializer = serializerProvider.getSerializer(bodyParameter.getSerializerId());
+            Serializer<Serializable> serializer =
+                    serializerProvider.<Serializable>getSerializer(bodyParameter.getSerializerId());
 
             return serializer.serialize(bodyParameter.getObject());
         } catch (SerializationException e) {
@@ -215,10 +217,11 @@ public class RestDispatchAsync implements DispatchAsync {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private <R extends Result> R getDeserializedReponse(String text, ResponseParameter responseParameter)
             throws ActionException {
         try {
-            Serializer<R> serializer = serializerProvider.getSerializer(responseParameter.getSerializerId());
+            Serializer<R> serializer = serializerProvider.<R>getSerializer(responseParameter.getSerializerId());
 
             return serializer.deserialize(text);
         } catch (SerializationException e) {
