@@ -17,10 +17,13 @@
 package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.ws.rs.Path;
 
+import com.google.common.base.Joiner;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
@@ -38,6 +41,9 @@ public class RestServiceGenerator extends AbstractGenerator {
     private static final String METHOD_DECLARATION = "%s %s {";
     private static final String CLOSE_BLOCK = "}";
 
+    private static final String SHARED_PACKAGE = ".shared.";
+    private static final String CLIENT_PACKAGE = ".client.";
+
     private String baseRestPath = "";
     private Map<JMethod, String> actions = new HashMap<JMethod, String>();
 
@@ -48,7 +54,7 @@ public class RestServiceGenerator extends AbstractGenerator {
         setTypeOracle(generatorContext.getTypeOracle());
         setTreeLogger(treeLogger);
         setTypeClass(getType(typeName));
-        setPackageName(getTypeClass().getPackage().getName().replace(".shared.", ".client."));
+        setPackageName(getTypeClass().getPackage().getName().replace(SHARED_PACKAGE, CLIENT_PACKAGE));
 
         PrintWriter printWriter = tryCreatePrintWriter("", SUFFIX);
 
@@ -63,7 +69,7 @@ public class RestServiceGenerator extends AbstractGenerator {
             writeClass(printWriter);
         }
 
-        return getPackageName() + "." + getClassName();
+        return getQualifiedClassName();
     }
 
     private void verifyIsInterface() throws UnableToCompleteException {
@@ -150,17 +156,14 @@ public class RestServiceGenerator extends AbstractGenerator {
 
     private String getParameters(JMethod method) {
         JParameter parameters[] = method.getParameters();
-        StringBuilder sb = new StringBuilder("");
+        List<String> names = new ArrayList<String>();
 
-        if (parameters != null && parameters.length != 0) {
+        if (parameters != null) {
             for (JParameter parameter : parameters) {
-                sb.append(parameter.getName())
-                        .append(", ");
+                names.add(parameter.getName());
             }
-
-            sb.delete(sb.length() - 2, sb.length());
         }
 
-        return sb.toString();
+        return Joiner.on(", ").join(names);
     }
 }
