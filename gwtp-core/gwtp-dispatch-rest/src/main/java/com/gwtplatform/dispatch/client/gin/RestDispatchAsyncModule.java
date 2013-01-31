@@ -60,6 +60,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         super.configure();
 
         bindConstant().annotatedWith(RestApplicationPath.class).to(applicationPath);
+
+        bind(SerializerProvider.class).asEagerSingleton();
     }
 
     @Provides

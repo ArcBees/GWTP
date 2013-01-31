@@ -39,7 +39,7 @@ abstract class SimpleResultJsonSerializer<T extends Serializable> implements Ser
         try {
             return new SimpleResult<T>(reader.read(value));
         } catch (JSONException e) {
-            //TODO: Use our own SerializationException
+            // TODO: Use our own SerializationException
             throw new SerializationException(e);
         }
     }
