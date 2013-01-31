@@ -116,6 +116,10 @@ public abstract class AbstractGenerator extends Generator {
         return generatorContext.tryCreate(getTreeLogger(), getPackageName(), getClassName());
     }
 
+    protected JClassType getType(String pkgName, String simpleName) throws UnableToCompleteException {
+        return getType(pkgName + "." + simpleName);
+    }
+
     protected JClassType getType(String typeName) throws UnableToCompleteException {
         try {
             return getTypeOracle().getType(typeName);
