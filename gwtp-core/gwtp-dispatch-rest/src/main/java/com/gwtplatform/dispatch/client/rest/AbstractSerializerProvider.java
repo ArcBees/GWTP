@@ -13,7 +13,7 @@ public abstract class AbstractSerializerProvider implements SerializerProvider {
         return (Serializer<T>) serializers.get(serializerId);
     }
 
-    protected void addSerializer(String serializerId, Serializer<?> serializer) {
+    protected void registerSerializer(String serializerId, Serializer<?> serializer) {
         serializers.put(serializerId, serializer);
     }
 }
