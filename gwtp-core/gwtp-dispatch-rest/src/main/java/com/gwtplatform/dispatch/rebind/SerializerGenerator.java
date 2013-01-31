@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
@@ -36,6 +37,7 @@ import name.pehl.piriti.json.client.JsonReader;
 import name.pehl.piriti.json.client.JsonWriter;
 
 public class SerializerGenerator extends AbstractGenerator {
+
     private static enum ResultType {
         NO_RESULT("NoResultSerializer"),
         SIMPLE_RESULT("SimpleResultJsonSerializer"),
@@ -53,14 +55,17 @@ public class SerializerGenerator extends AbstractGenerator {
         }
     }
 
+    private static final String READER_NAME = "Reader";
+    private static final String WRITER_NAME = "Writer";
     private static final String PARAMETERIZED_CLASS = "%s<%s>";
-    private static final String INTERFACE_READER = "interface Reader extends JsonReader<%s> {}";
-    private static final String INTERFACE_WRITER = "interface Writer extends JsonWriter<%s> {}";
-    private static final String INTERFACE_READER_LIST = "interface Reader extends JsonReader<List<%s>> {}";
-    private static final String INTERFACE_WRITER_LIST = "interface Writer extends JsonWriter<List<%s>> {}";
+    private static final String INTERFACE_READER = "interface " + READER_NAME + " extends JsonReader<%s> {}";
+    private static final String INTERFACE_WRITER = "interface " + WRITER_NAME + " extends JsonWriter<%s> {}";
+    private static final String INTERFACE_READER_LIST = "interface " + READER_NAME + " extends JsonReader<List<%s>> {}";
+    private static final String INTERFACE_WRITER_LIST = "interface " + WRITER_NAME + " extends JsonWriter<List<%s>> {}";
     private static final String CONSTRUCTOR = "public %s() {";
-    private static final String SUPER_CALL = "super(GWT.create(Reader.class), GWT.create(Writer.class));";
-    private static final String CLOSE_BLOCK = ")";
+    private static final String SUPER_CALL =
+            String.format("super(GWT.<%1$s>create(%1$s.class), GWT.<%2$s>create(%2$s.class));", READER_NAME, WRITER_NAME);
+    private static final String CLOSE_BLOCK = "}";
 
     private final JClassType serializedType;
     private JClassType wrappedSerializedType;
@@ -198,10 +203,12 @@ public class SerializerGenerator extends AbstractGenerator {
 
         JClassType jsonReader = getType(JsonReader.class.getName());
         JClassType jsonWriter = getType(JsonWriter.class.getName());
+        JClassType gwt = getType(GWT.class.getName());
 
-        composer.addImport(jsonSerializer.getPackage().getName());
-        composer.addImport(jsonReader.getPackage().getName());
-        composer.addImport(jsonWriter.getPackage().getName());
+        composer.addImport(gwt.getQualifiedSourceName());
+        composer.addImport(jsonSerializer.getQualifiedSourceName());
+        composer.addImport(jsonReader.getQualifiedSourceName());
+        composer.addImport(jsonWriter.getQualifiedSourceName());
 
         composer.setSuperclass(String.format(PARAMETERIZED_CLASS, jsonSerializer.getSimpleSourceName(),
                 serializedType.getParameterizedQualifiedSourceName()));

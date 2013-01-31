@@ -22,7 +22,7 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * TODO: Documentation
+ * TODO: Documentation.
  */
 public interface RestAction<R extends Result> extends Action<R> {
     HttpMethod getHttpMethod();

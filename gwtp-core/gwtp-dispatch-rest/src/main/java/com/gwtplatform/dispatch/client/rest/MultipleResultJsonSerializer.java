@@ -40,7 +40,7 @@ abstract class MultipleResultJsonSerializer<T extends Serializable> implements S
         try {
             return new MultipleResult<T>(reader.read(value));
         } catch (JSONException e) {
-            //TODO: Use our own SerializationException
+            // TODO: Use our own SerializationException
             throw new SerializationException(e);
         }
     }
