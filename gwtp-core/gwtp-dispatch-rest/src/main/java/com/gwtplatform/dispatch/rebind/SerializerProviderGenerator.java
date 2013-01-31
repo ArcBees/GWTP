@@ -1,15 +1,32 @@
 package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider;
+import com.gwtplatform.dispatch.shared.rest.RestService;
 
 public class SerializerProviderGenerator extends AbstractGenerator {
     private static final String SUFFIX = "Impl";
+    public static final String CONSTRUCTOR = "public %s() {";
+    public static final String CLOSE_BLOCK = "}";
+
+    private final Map<String, String> serializers = new HashMap<String, String>();
+    private JClassType abstractSerializerProvider;
+
+    public SerializerProviderGenerator() {
+        getEventBus().register(this);
+    }
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -22,28 +39,80 @@ public class SerializerProviderGenerator extends AbstractGenerator {
         PrintWriter printWriter = tryCreatePrintWriter("", SUFFIX);
 
         if (printWriter != null) {
-            //TODO: Scan Services and generate them
-            //TODO: Generate implementation of AbstractSerializerProvider
+            generateRestServices();
+
+            abstractSerializerProvider = getType(AbstractSerializerProvider.class.getName());
 
             writeClass(printWriter);
         }
 
-        return getPackageName() + "." + getClassName();
+        return getQualifiedClassName();
+    }
+
+    @Subscribe
+    public void handleRegisterSerializer(RegisterSerializerEvent event) {
+        serializers.put(event.getSerializerId(), event.getSerializerClass());
+    }
+
+    private void generateRestServices() throws UnableToCompleteException {
+        List<JClassType> services = getServices();
+
+        for (JClassType service : services) {
+            RestServiceGenerator serviceGenerator = new RestServiceGenerator();
+
+            serviceGenerator.generate(getTreeLogger(), getGeneratorContext(), service.getQualifiedSourceName());
+        }
+    }
+
+    private List<JClassType> getServices() throws UnableToCompleteException {
+        JClassType serviceInterface = getType(RestService.class.getName());
+        List<JClassType> services = new ArrayList<JClassType>();
+
+        for (JClassType clazz : getTypeOracle().getTypes()) {
+            if (clazz.isAssignableTo(serviceInterface)) {
+                services.add(clazz);
+            }
+        }
+
+        return services;
     }
 
     private void writeClass(PrintWriter printWriter) {
         ClassSourceFileComposerFactory composer = initComposer();
         SourceWriter sourceWriter = composer.createSourceWriter(getGeneratorContext(), printWriter);
 
+        for (Map.Entry<String, String> serializer : serializers.entrySet()) {
+            sourceWriter.println(CONSTRUCTOR, getClassName());
+
+            sourceWriter.indent();
+            {
+                String packageName = extractPackage(serializer.getValue());
+                String className = extractClassName(serializer.getValue());
+
+                composer.addImport(packageName);
+                sourceWriter.println("registerSerializer(\"%s\", new %s());", serializer.getKey(), className);
+            }
+            sourceWriter.outdent();
+
+            sourceWriter.println(CLOSE_BLOCK);
+        }
+
         closeDefinition(sourceWriter);
+    }
+
+    private String extractPackage(String fullClassName) {
+        return fullClassName.substring(0, fullClassName.lastIndexOf('.'));
+    }
+
+    private String extractClassName(String fullClassName) {
+        return fullClassName.substring(fullClassName.lastIndexOf('.') + 1);
     }
 
     private ClassSourceFileComposerFactory initComposer() {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
 
-        composer.addImport(getTypeClass().getQualifiedSourceName());
-
-        composer.addImplementedInterface(getTypeClass().getName());
+        composer.addImport(abstractSerializerProvider.getPackage().getName());
+        composer.setSuperclass(abstractSerializerProvider.getSimpleSourceName());
 
         return composer;
     }

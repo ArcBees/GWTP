@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
 
+import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -31,6 +32,8 @@ import com.google.gwt.user.rebind.SourceWriter;
  * Base generator.
  */
 public abstract class AbstractGenerator extends Generator {
+    private static EventBus eventBus;
+
     private GeneratorContext generatorContext;
     private TreeLogger treeLogger;
     private TypeOracle typeOracle;
@@ -38,6 +41,16 @@ public abstract class AbstractGenerator extends Generator {
 
     private String packageName = "";
     private String className = "";
+
+    public EventBus getEventBus() {
+        // TODO: We could take advantage of using Guice through code generation
+
+        if (eventBus == null) {
+            eventBus = new EventBus();
+        }
+
+        return eventBus;
+    }
 
     public void setTreeLogger(TreeLogger treeLogger) {
         this.treeLogger = treeLogger;
@@ -79,6 +92,10 @@ public abstract class AbstractGenerator extends Generator {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public String getQualifiedClassName() {
+        return getPackageName() + "." + getClassName();
     }
 
     protected void setGeneratorContext(GeneratorContext generatorContext) {

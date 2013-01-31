@@ -74,8 +74,8 @@ public class RestActionGenerator extends AbstractGenerator {
     private static final String ADD_PATH_PARAM = "addPathParam(\"%s\", %s);";
     private static final String ADD_QUERY_PARAM = "addQueryParam(\"%s\", %s);";
     private static final String ADD_FORM_PARAM = "addFormParam(\"%s\", %s);";
+    private static final String SET_BODY_PARAM = "setBodyParam(%s, \"%s\");";
     private static final String SUPER_CLASS_CONSTRUCTOR = "super(HttpMethod.%s, \"%s\", \"%s\");";
-    private static final String PATH_PARAM_MISSING = "@PathParam(\"%1$s\") declared, but '%1$s' not found in %2$s.";
     private static final String PATH_PARAM = "{%s}";
     private static final String ACTION_CONSTRUCTOR = "public %s(%s) {";
     private static final String CLOSE_BLOCK = "}";
@@ -84,20 +84,22 @@ public class RestActionGenerator extends AbstractGenerator {
     private static final String SHARED_PACKAGE = ".shared.";
     private static final String CLIENT_PACKAGE = ".client.";
 
+    private static final String PATH_PARAM_MISSING = "@PathParam(\"%1$s\") declared, but '%1$s' not found in %2$s.";
     private static final String MANY_REST_ANNOTATIONS = "'%s' parameter's '%s' is annotated with more than one REST annotations.";
     private static final String MANY_POTENTIAL_BODY = "%s has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "%s has both @FormParam and a body parameter. You must specify one or the other.";
-
-    private JMethod actionMethod;
-    private HttpMethod httpMethod;
-    private String path = "";
 
     private final List<AnnotatedMethodParameter> pathParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<AnnotatedMethodParameter> headerParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<AnnotatedMethodParameter> queryParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<AnnotatedMethodParameter> formParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<JParameter> potentialBodyParams = new ArrayList<JParameter>();
+
+    private JMethod actionMethod;
+    private HttpMethod httpMethod;
+    private String path = "";
     private JParameter bodyParam;
+
     private String bodySerializerId = "";
     private String responseSerializerId = "";
 
@@ -127,7 +129,7 @@ public class RestActionGenerator extends AbstractGenerator {
         PrintWriter printWriter = tryCreatePrintWriter(getActionName() + "_", SUFFIX);
 
         if (printWriter != null) {
-            setTreeLogger(getTreeLogger().branch(Type.INFO, "Generating rest action " + getClassName()));
+            setTreeLogger(getTreeLogger().branch(Type.DEBUG, "Generating rest action " + getClassName()));
 
             verifyIsAction();
             JClassType resultType = verifyResultIsConcrete();
@@ -138,12 +140,12 @@ public class RestActionGenerator extends AbstractGenerator {
 
             verifyPathParamsExist();
 
-            generateResponseSerializer(resultType);
+            generateSerializers(resultType);
 
             writeClass(printWriter);
         }
 
-        return getPackageName() + "." + getClassName();
+        return getQualifiedClassName();
     }
 
     private String getActionName() {
@@ -366,18 +368,27 @@ public class RestActionGenerator extends AbstractGenerator {
             throw new UnableToCompleteException();
         }
 
-        if(!formParams.isEmpty()) {
+        if (!formParams.isEmpty()) {
             getTreeLogger().log(Type.ERROR, String.format(FORM_AND_BODY_PARAM, actionMethod.getName()));
             throw new UnableToCompleteException();
         }
 
         bodyParam = potentialBodyParams.get(0);
-
-        // TODO: Generate serializer
     }
 
-    private void generateResponseSerializer(JClassType resultType) {
-        //TODO: Generate serializer
+    private void generateSerializers(JClassType resultType) throws UnableToCompleteException {
+        if (bodyParam != null) {
+            bodySerializerId = generateSerializer(bodyParam.getType());
+        }
+
+        responseSerializerId = generateSerializer(resultType);
+    }
+
+    private String generateSerializer(JType type) throws UnableToCompleteException {
+        SerializerGenerator bodySerializerGenerator = new SerializerGenerator(type);
+        bodySerializerGenerator.generate(getTreeLogger(), getGeneratorContext());
+
+        return bodySerializerGenerator.getSerializerId();
     }
 
     private void writeClass(PrintWriter printWriter) {
@@ -425,6 +436,10 @@ public class RestActionGenerator extends AbstractGenerator {
             writeAddParams(sourceWriter, pathParams, ADD_PATH_PARAM);
             writeAddParams(sourceWriter, queryParams, ADD_QUERY_PARAM);
             writeAddParams(sourceWriter, formParams, ADD_FORM_PARAM);
+
+            if (bodyParam != null) {
+                sourceWriter.println(SET_BODY_PARAM, bodyParam.getName(), bodySerializerId);
+            }
         }
         sourceWriter.outdent();
 
