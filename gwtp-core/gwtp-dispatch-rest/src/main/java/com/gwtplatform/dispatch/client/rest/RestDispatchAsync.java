@@ -211,6 +211,10 @@ public class RestDispatchAsync implements DispatchAsync {
             Serializer<Serializable> serializer =
                     serializerProvider.<Serializable>getSerializer(bodyParameter.getSerializerId());
 
+            if (serializer == null) {
+                throw new ActionException("Unable to serialize request body. Serializer not found.");
+            }
+
             return serializer.serialize(bodyParameter.getObject());
         } catch (SerializationException e) {
             throw new ActionException("Unable to serialize request body.", e);
@@ -222,6 +226,10 @@ public class RestDispatchAsync implements DispatchAsync {
             throws ActionException {
         try {
             Serializer<R> serializer = serializerProvider.<R>getSerializer(responseParameter.getSerializerId());
+
+            if (serializer == null) {
+                throw new ActionException("Unable to deserialize response. Serializer not found.");
+            }
 
             return serializer.deserialize(text);
         } catch (SerializationException e) {
