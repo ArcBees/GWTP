@@ -47,7 +47,7 @@ package com.gwtplatform.mvp.client;
  *   MyDefaultGateKeeper getMyDefaultGateKeeper();
  * }</pre>
  * <p/>
- * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP
+ * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
  */
 public interface ApplicationController {
     void init();
