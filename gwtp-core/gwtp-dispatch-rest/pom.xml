@@ -69,15 +69,15 @@
             <groupId>name.pehl</groupId>
             <artifactId>piriti-dev</artifactId>
         </dependency>
+
+        <!--Used only at compile-time-->
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>13.0.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
