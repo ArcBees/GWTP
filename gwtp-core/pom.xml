@@ -234,19 +234,18 @@
                 <version>${persistence-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>jsr311-api</artifactId>
-                <version>${jax-rs.version}</version>
-                <scope>compile</scope>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>jsr311-api</artifactId>
+                <version>${jax-rs.version}</version>
+                <scope>compile</scope>
+            </dependency>
 
-            <!--Serialization dependencies-->
+            <!-- Serialization dependencies -->
             <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>piriti-user</artifactId>
@@ -258,11 +257,6 @@
                 <artifactId>piriti-dev</artifactId>
                 <version>${piriti.version}</version>
                 <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>jsr311-api</artifactId>
-                <version>${jax-rs.version}</version>
             </dependency>
 
             <!-- Test dependencies -->
