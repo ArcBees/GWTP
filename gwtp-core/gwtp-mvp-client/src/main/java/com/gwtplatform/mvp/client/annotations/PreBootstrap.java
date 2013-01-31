@@ -22,7 +22,7 @@ import java.lang.annotation.Target;
 /**
  * Use this annotation with an implementation of {@link com.gwtplatform.mvp.client.PreBootstrapper} if
  * you want to execute code before GWTP is bootstrapped for example to set a GWT.setUncaughtExceptionHandler().
- * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping-in-GWTP
+ * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
  */
 @Target(ElementType.TYPE)
 public @interface PreBootstrap {
