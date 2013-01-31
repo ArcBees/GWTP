@@ -18,6 +18,7 @@
 
 <module>
     <inherits name="com.gwtplatform.dispatch.Dispatch"/>
+    <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
 
     <inherits name="com.google.gwt.http.HTTP"/>
     <inherits name="name.pehl.piriti.json.JSON"/>

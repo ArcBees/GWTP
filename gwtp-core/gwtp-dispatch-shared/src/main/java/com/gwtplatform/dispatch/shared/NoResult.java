@@ -27,7 +27,7 @@ package com.gwtplatform.dispatch.shared;
  *
  * @author Christopher Viel
  */
-public abstract class NoResult implements Result {
-    NoResult() {
+public class NoResult implements Result {
+    public NoResult() {
     }
 }
