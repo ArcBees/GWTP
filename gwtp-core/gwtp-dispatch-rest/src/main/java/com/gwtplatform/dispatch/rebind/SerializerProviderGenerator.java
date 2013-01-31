@@ -17,7 +17,9 @@
 package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.eventbus.Subscribe;
@@ -29,6 +31,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider;
+import com.gwtplatform.dispatch.shared.rest.RestService;
 
 public class SerializerProviderGenerator extends AbstractGenerator {
     private static final String SUFFIX = "Impl";
@@ -52,6 +55,8 @@ public class SerializerProviderGenerator extends AbstractGenerator {
         PrintWriter printWriter = tryCreatePrintWriter("", SUFFIX);
 
         if (printWriter != null) {
+            generateRestServices();
+
             writeClass(printWriter);
         }
 
@@ -60,8 +65,30 @@ public class SerializerProviderGenerator extends AbstractGenerator {
 
     @Subscribe
     public void handleRegisterSerializer(RegisterSerializerEvent event) {
-        getTreeLogger().log(Type.INFO, "Serializer " + event.getSerializerClass() + " registered.");
+        getTreeLogger().log(Type.DEBUG, "Serializer " + event.getSerializerClass() + " registered.");
         serializers.put(event.getSerializerId(), event.getSerializerClass());
+    }
+
+    private void generateRestServices() throws UnableToCompleteException {
+        List<JClassType> services = getServices();
+
+        for (JClassType service : services) {
+            RestServiceGenerator serviceGenerator = new RestServiceGenerator();
+            serviceGenerator.generate(getTreeLogger(), getGeneratorContext(), service.getQualifiedSourceName());
+        }
+    }
+
+    private List<JClassType> getServices() throws UnableToCompleteException {
+        JClassType serviceInterface = getType(RestService.class.getName());
+        List<JClassType> services = new ArrayList<JClassType>();
+
+        for (JClassType clazz : getTypeOracle().getTypes()) {
+            if (clazz.isAssignableTo(serviceInterface)) {
+                services.add(clazz);
+            }
+        }
+
+        return services;
     }
 
     private void writeClass(PrintWriter printWriter) throws UnableToCompleteException {
