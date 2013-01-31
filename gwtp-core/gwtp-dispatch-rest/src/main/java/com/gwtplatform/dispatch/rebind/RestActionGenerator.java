@@ -132,7 +132,7 @@ public class RestActionGenerator extends AbstractGenerator {
             setTreeLogger(getTreeLogger().branch(Type.DEBUG, "Generating rest action " + getClassName()));
 
             verifyIsAction();
-            JClassType resultType = verifyResultIsConcrete();
+            JClassType resultType = getResultType();
 
             retrieveConfigAnnonations();
             retrieveParameterConfig();
@@ -186,16 +186,15 @@ public class RestActionGenerator extends AbstractGenerator {
     /**
      * @return The cooncrete result type.
      */
-    private JClassType verifyResultIsConcrete() throws UnableToCompleteException {
-        JClassType actionInterface = getTypeOracle().findType(Action.class.getName());
-
+    private JClassType getResultType() throws UnableToCompleteException {
+        JClassType actionInterface = getType(Action.class.getName());
         JClassType implementedAction = getInterfaceInHierarchy(getTypeClass(), actionInterface);
 
         JParameterizedType parameterized = implementedAction.isParameterized();
         if (parameterized != null && parameterized.getTypeArgs().length == 1) {
             return parameterized.getTypeArgs()[0];
         } else {
-            getTreeLogger().log(Type.ERROR, "The action myst specify a result type argument.");
+            getTreeLogger().log(Type.ERROR, "The action must specify a result type argument.");
             throw new UnableToCompleteException();
         }
     }
@@ -378,13 +377,13 @@ public class RestActionGenerator extends AbstractGenerator {
 
     private void generateSerializers(JClassType resultType) throws UnableToCompleteException {
         if (bodyParam != null) {
-            bodySerializerId = generateSerializer(bodyParam.getType());
+            bodySerializerId = generateSerializer(bodyParam.getType().isClassOrInterface());
         }
 
         responseSerializerId = generateSerializer(resultType);
     }
 
-    private String generateSerializer(JType type) throws UnableToCompleteException {
+    private String generateSerializer(JClassType type) throws UnableToCompleteException {
         SerializerGenerator bodySerializerGenerator = new SerializerGenerator(type);
         bodySerializerGenerator.generate(getTreeLogger(), getGeneratorContext());
 
