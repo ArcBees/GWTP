@@ -25,8 +25,13 @@
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
+    <source path='shared'/>
+
+    <generate-with class="com.gwtplatform.dispatch.rebind.RestServiceGenerator">
+        <when-type-assignable class="com.gwtplatform.dispatch.shared.rest.RestService"/>
+    </generate-with>
 
     <generate-with class="com.gwtplatform.dispatch.rebind.SerializerProviderGenerator">
-        <when-type-is class="com.gwtplatform.dispatch.shared.rest.SerializerProvider"/>
+        <when-type-is class="com.gwtplatform.dispatch.client.rest.SerializerProvider"/>
     </generate-with>
 </module>

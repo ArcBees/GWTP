@@ -38,7 +38,7 @@ public abstract class JsonSerializer<T extends Serializable> implements Serializ
         try {
             return reader.read(value);
         } catch (JSONException e) {
-            //TODO: Use our own SerializationException
+            // TODO: Use our own SerializationException
             throw new SerializationException(e);
         }
     }

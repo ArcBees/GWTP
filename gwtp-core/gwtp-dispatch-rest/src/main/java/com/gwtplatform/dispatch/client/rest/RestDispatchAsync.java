@@ -44,7 +44,7 @@ import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 /**
- * TODO: Documentation
+ * TODO: Documentation.
  * TODO: Serialization should be handled by a custom ActionHandler that wraps the user handler (SRP)
  */
 public class RestDispatchAsync implements DispatchAsync {
