@@ -484,10 +484,54 @@
             </plugin>
 
             <!-- run 'mvn site' to output javadocs for Github Pages -->
+            <!-- run 'mvn javadoc:javadoc -X' to debug -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <!-- <source>${target.jdk}</source> -->
+                    <failOnError>false</failOnError>
+                    <!-- <quiet>true</quiet> -->
+                    <links>
+                        <link>http://download.oracle.com/javase/6/docs/api/</link>
+                        <link>http://google-web-toolkit.googlecode.com/svn/javadoc/latest/</link>
+                        <link>http://static.springsource.org/spring/docs/3.0.x/javadoc-api/</link>
+                        <link>http://google-gin.googlecode.com/svn/trunk/javadoc/</link>
+                        <link>http://google-guice.googlecode.com/svn/trunk/javadoc/</link>
+                        <link>http://aopalliance.sourceforge.net/doc/</link>
+                        <link>https://developers.google.com/appengine/docs/java/javadoc/</link>
+                        <link>http://docs.guava-libraries.googlecode.com/git/javadoc</link>
+                    </links>
+                    <outputDirectory>${project.build.directory}/javadoc</outputDirectory>
+                    <reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
+
+                    <!-- DocLava -->
+                    <docletArtifact>
+                        <groupId>com.google.doclava</groupId>
+                        <artifactId>doclava</artifactId>
+                        <version>1.0.5</version>
+                    </docletArtifact>
+                    <doclet>com.google.doclava.Doclava</doclet>
+                    <!-- | bootclasspath required by Sun's JVM -->
+                    <bootclasspath>${sun.boot.class.path}</bootclasspath>
+                    <additionalparam>
+                        -quiet
+                        -federate JDK
+                        http://download.oracle.com/javase/6/docs/api/index.html?
+                        -federationxml JDK
+                        http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
+                        -hdf project.name "${project.name}"
+                        -d
+                        ${project.build.directory}/site/apidocs
+                    </additionalparam>
+                    <useStandardDocletOptions>false</useStandardDocletOptions>
+                    <!-- | Apple's JVM sometimes requires more memory -->
+                    <additionalJOption>-J-Xmx1024m</additionalJOption>
+                    <excludes>
+                        <exclude>**/*.txt</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -497,21 +541,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <source>${target.jdk}</source>
-                    <failOnError>true</failOnError>
-                    <quiet>true</quiet>
-                    <links>
-                        <link>http://download.oracle.com/javase/6/docs/api/</link>
-                        <link>http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/</link>
-                        <link>http://static.springsource.org/spring/docs/3.0.x/javadoc-api/</link>
-                        <link>http://google-gin.googlecode.com/svn/trunk/javadoc/</link>
-                        <link>http://google-guice.googlecode.com/svn/trunk/javadoc/</link>
-                        <link>http://aopalliance.sourceforge.net/doc/</link>
-                    </links>
-                    <outputDirectory>${project.build.directory}/javadoc</outputDirectory>
-                    <reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
-                </configuration>
             </plugin>
 
             <!-- run 'mvn ghSite:site -X' to debug -->
