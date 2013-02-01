@@ -218,7 +218,7 @@
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>3.1.2.RELEASE</spring.version>
 
-        <github.global.server>github</github.global.server>
+        <!-- GitHub Sites -->
         <github.version>0.7</github.version>
 
         <!-- Used for releasing to sonatype as command line parameter -->
@@ -227,6 +227,7 @@
         <github.password>SetAsParam</github.password>
     </properties>
 
+    <!-- TODO remove? -->
     <repositories>
         <repository>
             <id>sonatype.snapshots</id>
@@ -236,7 +237,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-
     </repositories>
 
     <build>
@@ -483,8 +483,7 @@
                 </configuration>
             </plugin>
 
-            <!-- JavaDocs for GHSite -->
-            <!-- run 'mvn site' -->
+            <!-- run 'mvn site' to output javadocs for Github Pages -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -515,16 +514,19 @@
                 </configuration>
             </plugin>
 
+            <!-- run 'mvn ghSite:site -X' to debug -->
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>${github.version}</version>
                 <configuration>
+                    <!-- <dryRun>true</dryRun> -->
+                    <outputDirectory>javadoc</outputDirectory>
                     <path>${project.version}</path>
                     <message>Creating site for ${project.version}</message>
-                    <!-- <includes>
-                        <include>javadoc/*</include>
-                    </includes> -->
+                    <!-- sets the ~/.m2/setting.xml profile -->
+                    <server>github</server>
+                    <outputDirectory>${project.build.directory}/site/javadoc</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
