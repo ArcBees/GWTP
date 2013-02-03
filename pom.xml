@@ -485,14 +485,14 @@
 
             <!-- run 'mvn site' to output javadocs to gh-pages -->
             <!-- run 'mvn javadoc:javadoc -X' to debug -->
+            <!-- http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/javadoc.html -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
-                    <source>${target.jdk}</source>
-                    <failOnError>true</failOnError>
-                    <!-- <quiet>true</quiet> -->
+                    <additionalJOption>-J-Xmx2048m</additionalJOption>
+                    <failOnError>false</failOnError>
                     <links>
                         <link>http://download.oracle.com/javase/6/docs/api/</link>
                         <link>http://google-web-toolkit.googlecode.com/svn/javadoc/latest/</link>
@@ -505,29 +505,34 @@
                     </links>
                     <outputDirectory>${project.build.directory}/javadoc</outputDirectory>
                     <reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
+                    <excludes>
+                        <exclude>*.txt</exclude>
+                        <exclude>**/*.txt</exclude>
+                    </excludes>
+                    <header>
+                        <![CDATA[
+                            <a href="https://github.com/ArcBees/GWTP" target="_blank">Back to GWTP Home</a>
+                        ]]>
+                    </header>
 
-
-                    <!-- DocLava -->
-                   <!--  <docletArtifact>
+                    <docletArtifact>
                         <groupId>com.google.doclava</groupId>
                         <artifactId>doclava</artifactId>
                         <version>1.0.5</version>
                     </docletArtifact>
                     <doclet>com.google.doclava.Doclava</doclet>
-                    | bootclasspath required by Sun's JVM
+                    <!-- | bootclasspath required by Sun's JVM -->
                     <bootclasspath>${sun.boot.class.path}</bootclasspath>
                     <additionalparam>
                         -quiet
-                        -federate JDK
-                        http://download.oracle.com/javase/6/docs/api/index.html?
-                        -federationxml JDK
-                        http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
+                        -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
+                        -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
                         -hdf project.name "${project.name}"
                         -d ${project.build.directory}/site/apidocs
                     </additionalparam>
                     <useStandardDocletOptions>false</useStandardDocletOptions>
-                    | Apple's JVM sometimes requires more memory
-                    <additionalJOption>-J-Xmx1024m</additionalJOption>
+                    <!-- | Apple's JVM sometimes requires more memory -->
+                    <additionalJOption>-J-Xmx2024m</additionalJOption>
                     <excludes>
                         <exclude>**/*.txt</exclude>
                     </excludes>
@@ -547,18 +552,20 @@
                             <artifactId>aopalliance</artifactId>
                             <version>1.0</version>
                         </additionnalDependency>
-                    </additionnalDependencies> -->
-                    
-                    
+                    </additionnalDependencies>
+
+
                 </configuration>
                 <executions>
                     <execution>
-                        <id>attach-javadocs</id>
-                        <phase>site</phase>
+                        <id>aggregate</id>
                         <goals>
                             <goal>aggregate</goal>
                         </goals>
+                        <phase>site</phase>
                     </execution>
+                    <!-- <execution> <id>attach-javadocs2</id> <phase>performRelease</phase> 
+                        <goals> <goal>aggregate</goal> </goals> </execution> -->
                 </executions>
             </plugin>
 
@@ -598,6 +605,8 @@
                 <scope>provided</scope>
                 <optional>true</optional>
             </dependency>
+            
+            <!-- Testing -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
