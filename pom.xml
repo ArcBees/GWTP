@@ -536,6 +536,7 @@
                     <excludes>
                         <exclude>**/*.txt</exclude>
                     </excludes>
+                    <excludePackageNames>com.google.appengine.repackaged.*</excludePackageNames>
                     <additionnalDependencies>
                         <additionnalDependency>
                             <groupId>com.google.jsilver</groupId>
