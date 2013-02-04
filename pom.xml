@@ -190,7 +190,6 @@
     <modules>
         <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
-        <module>gwtp-sample-basic</module>
     </modules>
 
     <properties>
