@@ -16,22 +16,30 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import com.google.gwt.http.client.*;
+import java.io.Serializable;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.shared.*;
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.ActionException;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
-
-import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
 
 import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
 import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
