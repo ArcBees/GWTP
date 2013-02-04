@@ -16,17 +16,25 @@
 
 package com.gwtplatform.dispatch.rebind;
 
+import com.gwtplatform.dispatch.client.rest.SerializedType;
+
 public class RegisterSerializerEvent {
-    private final String serializerId;
+    private final String actionClass;
+    private final SerializedType serializedType;
     private final String serializerClass;
 
-    public RegisterSerializerEvent(String serializerId, String serializerClass) {
-        this.serializerId = serializerId;
+    public RegisterSerializerEvent(String actionClass, SerializedType serializedType, String serializerClass) {
+        this.actionClass = actionClass;
+        this.serializedType = serializedType;
         this.serializerClass = serializerClass;
     }
 
-    public String getSerializerId() {
-        return serializerId;
+    public String getActionClass() {
+        return actionClass;
+    }
+
+    public SerializedType getSerializedType() {
+        return serializedType;
     }
 
     public String getSerializerClass() {
