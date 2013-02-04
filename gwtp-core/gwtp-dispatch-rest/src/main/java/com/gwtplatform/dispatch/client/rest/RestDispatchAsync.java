@@ -16,32 +16,25 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.*;
 import com.google.gwt.http.client.RequestBuilder.Method;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.Result;
-import com.gwtplatform.dispatch.shared.rest.BodyParameter;
+import com.gwtplatform.dispatch.shared.*;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
-import com.gwtplatform.dispatch.shared.rest.ResponseParameter;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
+
+import java.io.Serializable;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
+import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
 
 /**
  * TODO: Documentation.
@@ -126,8 +119,7 @@ public class RestDispatchAsync implements DispatchAsync {
     private <A extends RestAction<R>, R extends Result> void onExecuteSuccess(A action, AsyncCallback<R> callback,
             Response response) {
         try {
-            @SuppressWarnings("unchecked")
-            R deserializedReponse = (R) getDeserializedReponse(response.getText(), action.getResponseParam());
+            R deserializedReponse = getDeserializedReponse(action, response);
 
             callback.onSuccess(deserializedReponse);
         } catch (ActionException e) {
@@ -147,7 +139,7 @@ public class RestDispatchAsync implements DispatchAsync {
         RequestBuilder requestBuilder = new RequestBuilder(httpMethod, url);
 
         for (RestParameter param : action.getHeaderParams()) {
-            requestBuilder.setHeader(param.getName(), getSerializedValue(param));
+            requestBuilder.setHeader(param.getName(), encode(param));
         }
 
         requestBuilder.setHeader(CONTENT_TYPE, JSON_UTF8);
@@ -155,7 +147,7 @@ public class RestDispatchAsync implements DispatchAsync {
         if (action.hasFormParams()) {
             requestBuilder.setRequestData(buildQueryString(action.getFormParams()));
         } else if (action.hasBodyParam()) {
-            requestBuilder.setRequestData(getSerializedValue(action.getBodyParam()));
+            requestBuilder.setRequestData(getSerializedValue(action, action.getBodyParam()));
         }
 
         return requestBuilder;
@@ -177,7 +169,7 @@ public class RestDispatchAsync implements DispatchAsync {
         String path = rawPath;
 
         for (RestParameter param : params) {
-            path = path.replace("{" + param.getName() + "}", getSerializedValue(param));
+            path = path.replace("{" + param.getName() + "}", encode(param));
         }
 
         return path;
@@ -190,7 +182,7 @@ public class RestDispatchAsync implements DispatchAsync {
             queryString.append("&")
                     .append(param.getName())
                     .append("=")
-                    .append(getSerializedValue(param));
+                    .append(encode(param));
         }
 
         if (queryString.length() != 0) {
@@ -200,37 +192,34 @@ public class RestDispatchAsync implements DispatchAsync {
         return queryString.toString();
     }
 
-    private String getSerializedValue(RestParameter value) throws ActionException {
+    private String encode(RestParameter value) throws ActionException {
         return UriUtils.encode(value.getObject().toString());
     }
 
-    @SuppressWarnings("unchecked")
-    private String getSerializedValue(BodyParameter bodyParameter) throws ActionException {
+    private String getSerializedValue(Action<?> action, Serializable object) throws ActionException {
         try {
-            Serializer<Serializable> serializer =
-                    serializerProvider.<Serializable>getSerializer(bodyParameter.getSerializerId());
+            Serializer<Serializable> serializer = serializerProvider.getSerializer(action.getClass(), BODY);
 
             if (serializer == null) {
                 throw new ActionException("Unable to serialize request body. Serializer not found.");
             }
 
-            return serializer.serialize(bodyParameter.getObject());
+            return serializer.serialize(object);
         } catch (SerializationException e) {
             throw new ActionException("Unable to serialize request body.", e);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private <R extends Result> R getDeserializedReponse(String text, ResponseParameter responseParameter)
+    private <R extends Result> R getDeserializedReponse(Action<R> action, Response response)
             throws ActionException {
         try {
-            Serializer<R> serializer = serializerProvider.<R>getSerializer(responseParameter.getSerializerId());
+            Serializer<R> serializer = serializerProvider.getSerializer(action.getClass(), RESPONSE);
 
             if (serializer == null) {
                 throw new ActionException("Unable to deserialize response. Serializer not found.");
             }
 
-            return serializer.deserialize(text);
+            return serializer.deserialize(response.getText());
         } catch (SerializationException e) {
             throw new ActionException("Unable to deserialize response.", e);
         }
