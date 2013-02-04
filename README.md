@@ -12,17 +12,21 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ##Maven
+* [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration)
 * [See whats available in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform)
-* [Maven Usage Instructions](https://github.com/ArcBees/GWTP/wiki/Using-Gwtp-with-Maven)
+
+##Downloads
+* [Latest Jars in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform)
+* See the manual dependency download section in [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration) 
 
 ###Current Release
-0.8-beta-1 - Released on 1/17/2013
+1.0-RC-1 - Released on 1/30/2013
 
 ###Current Snapshot
-0.8-beta-2-SNAPSHOT
+1.0-RC-2-SNAPSHOT
 
-###Archetype
-* [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools)
+###Archetypes
+* [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes)
 
 ##Demos
 * [GWTP Samples Project Home](https://github.com/ArcBees/GWTP-Samples)
@@ -75,7 +79,6 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * While we move, you can find the documentation here: http://gwt-platform.googlecode.com
 
 ##Thanks to
-[![Arcbees.com](http://arcbees-ads.appspot.com/images/1.png)](http://arcbees.com)
+[![Arcbees.com](http://arcbees-ads.appspot.com/ad.png)](http://arcbees.com)
 
 [![IntelliJ](https://lh6.googleusercontent.com/--QIIJfKrjSk/UJJ6X-UohII/AAAAAAAAAVM/cOW7EjnH778/s800/banner_IDEA.png)](http://www.jetbrains.com/idea/index.html)
-
