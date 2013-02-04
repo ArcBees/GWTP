@@ -60,14 +60,9 @@ public class SerializerGenerator extends AbstractGenerator {
 
     private final JClassType serializedType;
     private ResultType resultType;
-    private String serializerId;
 
     public SerializerGenerator(JClassType serializedType) {
         this.serializedType = serializedType;
-    }
-
-    public String getSerializerId() {
-        return serializerId;
     }
 
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext) throws UnableToCompleteException {
@@ -86,21 +81,17 @@ public class SerializerGenerator extends AbstractGenerator {
         setTypeClass(getType(typeName));
 
         resultType = resolveResultType();
-        serializerId = generateSerializerId();
 
         if (resultType == ResultType.NO_RESULT) {
             getTreeLogger().log(Type.DEBUG, "No Result Serializer required.");
 
-            getEventBus().post(new RegisterSerializerEvent(serializerId, NoResultSerializer.class.getName()));
             return NoResultSerializer.class.getName();
         }
 
-        PrintWriter printWriter = tryCreatePrintWriter(serializerId, "");
+        PrintWriter printWriter = tryCreatePrintWriter(generateSerializerId(), "");
 
         if (printWriter != null) {
             writeClass(printWriter);
-
-            getEventBus().post(new RegisterSerializerEvent(serializerId, getQualifiedClassName()));
         } else {
             getTreeLogger().log(Type.DEBUG, "Serializer already generated. Returning.");
         }
