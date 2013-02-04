@@ -16,16 +16,14 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
+import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.shared.rest.RestParameter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.gwtplatform.dispatch.shared.Result;
-import com.gwtplatform.dispatch.shared.rest.BodyParameter;
-import com.gwtplatform.dispatch.shared.rest.HttpMethod;
-import com.gwtplatform.dispatch.shared.rest.ResponseParameter;
-import com.gwtplatform.dispatch.shared.rest.RestAction;
-import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 /**
  * TODO: Documentation.
@@ -38,14 +36,12 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
     private List<RestParameter> headerParams = new ArrayList<RestParameter>();
     private List<RestParameter> queryParams = new ArrayList<RestParameter>();
     private List<RestParameter> formParams = new ArrayList<RestParameter>();
-    private BodyParameter bodyParam;
-    private ResponseParameter responseParam;
 
-    protected AbstractRestAction(HttpMethod httpMethod, String rawServicePath, String responseSerializerId) {
+    private Serializable bodyParam;
+
+    protected AbstractRestAction(HttpMethod httpMethod, String rawServicePath) {
         this.httpMethod = httpMethod;
         this.rawServicePath = rawServicePath;
-
-        responseParam = new ResponseParameter(responseSerializerId);
     }
 
     protected AbstractRestAction() {
@@ -87,13 +83,8 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
     }
 
     @Override
-    public BodyParameter getBodyParam() {
+    public Serializable getBodyParam() {
         return bodyParam;
-    }
-
-    @Override
-    public ResponseParameter getResponseParam() {
-        return responseParam;
     }
 
     @Override
@@ -122,7 +113,7 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
         headerParams.add(new RestParameter(name, value));
     }
 
-    protected void setBodyParam(Serializable value, String serializerId) {
-        bodyParam = new BodyParameter(value, serializerId);
+    protected void setBodyParam(Serializable value) {
+        bodyParam = value;
     }
 }

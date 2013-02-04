@@ -16,12 +16,6 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -31,14 +25,21 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider;
+import com.gwtplatform.dispatch.client.rest.SerializedType;
 import com.gwtplatform.dispatch.shared.rest.RestService;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SerializerProviderGenerator extends AbstractGenerator {
     private static final String SUFFIX = "Impl";
+    private static final String SERIALIZED_TYPE_NAME = SerializedType.class.getSimpleName();
     public static final String CONSTRUCTOR = "public %s() {";
+    private static final String REGISTER_SERIALIZER = "registerSerializer(%s.class, " + SERIALIZED_TYPE_NAME + ".%s, new %s());";
     public static final String CLOSE_BLOCK = "}";
 
-    private final Map<String, String> serializers = new HashMap<String, String>();
+    private final List<String> registeredSerializers = new ArrayList<String>();
 
     public SerializerProviderGenerator() {
         getEventBus().register(this);
@@ -65,8 +66,15 @@ public class SerializerProviderGenerator extends AbstractGenerator {
 
     @Subscribe
     public void handleRegisterSerializer(RegisterSerializerEvent event) {
-        getTreeLogger().log(Type.DEBUG, "Serializer " + event.getSerializerClass() + " registered.");
-        serializers.put(event.getSerializerId(), event.getSerializerClass());
+        String serializerClass = event.getSerializerClass();
+        String serializedType = event.getSerializedType().name();
+        String actionClass = event.getActionClass();
+
+        getTreeLogger().log(Type.DEBUG, "Serializer " + serializerClass + " registered.");
+
+        String registerSerializer = String.format(REGISTER_SERIALIZER, actionClass, serializedType, serializerClass);
+
+        registeredSerializers.add(registerSerializer);
     }
 
     private void generateRestServices() throws UnableToCompleteException {
@@ -98,11 +106,8 @@ public class SerializerProviderGenerator extends AbstractGenerator {
         sourceWriter.println(CONSTRUCTOR, getClassName());
         sourceWriter.indent();
 
-        for (Map.Entry<String, String> serializer : serializers.entrySet()) {
-            String className = extractClassName(serializer.getValue());
-
-            composer.addImport(serializer.getValue());
-            sourceWriter.println("registerSerializer(\"%s\", new %s());", serializer.getKey(), className);
+        for (String serializer : registeredSerializers) {
+            sourceWriter.println(serializer);
         }
 
         sourceWriter.outdent();
@@ -111,16 +116,14 @@ public class SerializerProviderGenerator extends AbstractGenerator {
         closeDefinition(sourceWriter);
     }
 
-    private String extractClassName(String fullClassName) {
-        return fullClassName.substring(fullClassName.lastIndexOf('.') + 1);
-    }
-
     private ClassSourceFileComposerFactory initComposer() throws UnableToCompleteException {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
 
         JClassType abstractSerializerProvider = getType(AbstractSerializerProvider.class.getName());
 
         composer.addImport(abstractSerializerProvider.getQualifiedSourceName());
+        composer.addImport(SerializedType.class.getName());
+
         composer.setSuperclass(abstractSerializerProvider.getSimpleSourceName());
 
         return composer;

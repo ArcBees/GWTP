@@ -16,10 +16,11 @@
 
 package com.gwtplatform.dispatch.shared.rest;
 
-import java.util.List;
-
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * TODO: Documentation.
@@ -35,9 +36,7 @@ public interface RestAction<R extends Result> extends Action<R> {
 
     List<RestParameter> getHeaderParams();
 
-    BodyParameter getBodyParam();
-
-    ResponseParameter getResponseParam();
+    Serializable getBodyParam();
 
     Boolean hasFormParams();
 

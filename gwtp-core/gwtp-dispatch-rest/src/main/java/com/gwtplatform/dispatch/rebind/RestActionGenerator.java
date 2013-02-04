@@ -35,6 +35,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
+import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
+
 public class RestActionGenerator extends AbstractGenerator {
     private static class AnnotatedMethodParameter {
         private JParameter parameter;
@@ -60,8 +63,8 @@ public class RestActionGenerator extends AbstractGenerator {
     private static final String ADD_PATH_PARAM = "addPathParam(\"%s\", %s);";
     private static final String ADD_QUERY_PARAM = "addQueryParam(\"%s\", %s);";
     private static final String ADD_FORM_PARAM = "addFormParam(\"%s\", %s);";
-    private static final String SET_BODY_PARAM = "setBodyParam(%s, \"%s\");";
-    private static final String SUPER_CLASS_CONSTRUCTOR = "super(HttpMethod.%s, \"%s\", \"%s\");";
+    private static final String SET_BODY_PARAM = "setBodyParam(%s);";
+    private static final String SUPER_CLASS_CONSTRUCTOR = "super(HttpMethod.%s, \"%s\");";
     private static final String PATH_PARAM = "{%s}";
     private static final String ACTION_CONSTRUCTOR = "public %s(%s) {";
     private static final String CLOSE_BLOCK = "}";
@@ -85,9 +88,6 @@ public class RestActionGenerator extends AbstractGenerator {
     private HttpMethod httpMethod;
     private String path = "";
     private JParameter bodyParam;
-
-    private String bodySerializerId = "";
-    private String responseSerializerId = "";
 
     public RestActionGenerator(String baseRestPath) {
         this.path = baseRestPath;
@@ -277,7 +277,7 @@ public class RestActionGenerator extends AbstractGenerator {
     }
 
     private <T extends Annotation> void buildParamList(JParameter[] parameters, Class<T> annotationClass,
-                                                       AnnotationValueResolver<T> annotationValueResolver, List<AnnotatedMethodParameter> destination)
+            AnnotationValueResolver<T> annotationValueResolver, List<AnnotatedMethodParameter> destination)
             throws UnableToCompleteException {
         List<Class<? extends Annotation>> restrictedAnnotations = getRestrictedAnnotations(annotationClass);
 
@@ -363,17 +363,17 @@ public class RestActionGenerator extends AbstractGenerator {
 
     private void generateSerializers(JClassType resultType) throws UnableToCompleteException {
         if (bodyParam != null) {
-            bodySerializerId = generateSerializer(bodyParam.getType().isClassOrInterface());
+            String bodySerializer = generateSerializer(bodyParam.getType().isClassOrInterface());
+            getEventBus().post(new RegisterSerializerEvent(getQualifiedClassName(), BODY, bodySerializer));
         }
 
-        responseSerializerId = generateSerializer(resultType);
+        String responseSerializer = generateSerializer(resultType);
+        getEventBus().post(new RegisterSerializerEvent(getQualifiedClassName(), RESPONSE, responseSerializer));
     }
 
     private String generateSerializer(JClassType type) throws UnableToCompleteException {
         SerializerGenerator bodySerializerGenerator = new SerializerGenerator(type);
-        bodySerializerGenerator.generate(getTreeLogger(), getGeneratorContext());
-
-        return bodySerializerGenerator.getSerializerId();
+        return bodySerializerGenerator.generate(getTreeLogger(), getGeneratorContext());
     }
 
     private void writeClass(PrintWriter printWriter) {
@@ -414,7 +414,7 @@ public class RestActionGenerator extends AbstractGenerator {
 
         sourceWriter.indent();
         {
-            sourceWriter.println(SUPER_CLASS_CONSTRUCTOR, httpMethod.name(), path, responseSerializerId);
+            sourceWriter.println(SUPER_CLASS_CONSTRUCTOR, httpMethod.name(), path);
             sourceWriter.println();
 
             writeAddParams(sourceWriter, headerParams, ADD_HEADER_PARAM);
@@ -423,7 +423,7 @@ public class RestActionGenerator extends AbstractGenerator {
             writeAddParams(sourceWriter, formParams, ADD_FORM_PARAM);
 
             if (bodyParam != null) {
-                sourceWriter.println(SET_BODY_PARAM, bodyParam.getName(), bodySerializerId);
+                sourceWriter.println(SET_BODY_PARAM, bodyParam.getName());
             }
         }
         sourceWriter.outdent();
