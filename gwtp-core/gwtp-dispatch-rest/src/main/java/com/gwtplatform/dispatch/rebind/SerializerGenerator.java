@@ -16,32 +16,25 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import java.io.PrintWriter;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JGenericType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.dispatch.client.rest.NoResultSerializer;
 import com.gwtplatform.dispatch.client.rest.Serializer;
-import com.gwtplatform.dispatch.shared.MultipleResult;
 import com.gwtplatform.dispatch.shared.NoResult;
-import com.gwtplatform.dispatch.shared.SimpleResult;
-
 import name.pehl.piriti.json.client.JsonReader;
 import name.pehl.piriti.json.client.JsonWriter;
 
-public class SerializerGenerator extends AbstractGenerator {
+import java.io.PrintWriter;
 
+public class SerializerGenerator extends AbstractGenerator {
     private static enum ResultType {
         NO_RESULT("NoResultSerializer"),
-        SIMPLE_RESULT("SimpleResultJsonSerializer"),
-        MULTIPLE_RESULT("MultipleResultJsonSerializer"),
         CUSTOM("JsonSerializer");
 
         private final String superclassName;
@@ -60,15 +53,12 @@ public class SerializerGenerator extends AbstractGenerator {
     private static final String PARAMETERIZED_CLASS = "%s<%s>";
     private static final String INTERFACE_READER = "interface " + READER_NAME + " extends JsonReader<%s> {}";
     private static final String INTERFACE_WRITER = "interface " + WRITER_NAME + " extends JsonWriter<%s> {}";
-    private static final String INTERFACE_READER_LIST = "interface " + READER_NAME + " extends JsonReader<List<%s>> {}";
-    private static final String INTERFACE_WRITER_LIST = "interface " + WRITER_NAME + " extends JsonWriter<List<%s>> {}";
     private static final String CONSTRUCTOR = "public %s() {";
     private static final String SUPER_CALL =
             String.format("super(GWT.<%1$s>create(%1$s.class), GWT.<%2$s>create(%2$s.class));", READER_NAME, WRITER_NAME);
     private static final String CLOSE_BLOCK = "}";
 
     private final JClassType serializedType;
-    private JClassType wrappedSerializedType;
     private ResultType resultType;
     private String serializerId;
 
@@ -97,7 +87,6 @@ public class SerializerGenerator extends AbstractGenerator {
 
         resultType = resolveResultType();
         serializerId = generateSerializerId();
-        wrappedSerializedType = resolvedWrappedSerializedType();
 
         if (resultType == ResultType.NO_RESULT) {
             getTreeLogger().log(Type.DEBUG, "No Result Serializer required.");
@@ -124,10 +113,6 @@ public class SerializerGenerator extends AbstractGenerator {
 
         if (name.equals(NoResult.class.getName())) {
             return ResultType.NO_RESULT;
-        } else if (name.equals(SimpleResult.class.getName())) {
-            return ResultType.SIMPLE_RESULT;
-        } else if (name.equals(MultipleResult.class.getName())) {
-            return ResultType.MULTIPLE_RESULT;
         }
 
         return ResultType.CUSTOM;
@@ -147,36 +132,13 @@ public class SerializerGenerator extends AbstractGenerator {
         return qualifiedName;
     }
 
-    private JClassType resolvedWrappedSerializedType() throws UnableToCompleteException {
-        if (resultType != ResultType.SIMPLE_RESULT && resultType != ResultType.MULTIPLE_RESULT) {
-            return null;
-        }
-
-        JGenericType generic = serializedType.isGenericType();
-
-        if (generic == null) {
-            getTreeLogger().log(Type.ERROR, "SimpleResult or MultipleResult is used without a type parameter.");
-            throw new UnableToCompleteException();
-        }
-
-        return generic.getTypeParameters()[0];
-    }
-
     private void writeClass(PrintWriter printWriter) throws UnableToCompleteException {
         ClassSourceFileComposerFactory composer = initComposer();
         SourceWriter sourceWriter = composer.createSourceWriter(getGeneratorContext(), printWriter);
 
         String readerInterface = INTERFACE_READER;
         String writerInterface = INTERFACE_WRITER;
-        String realSerializedType = serializedType.getParameterizedQualifiedSourceName();
-
-        if (resultType == ResultType.SIMPLE_RESULT) {
-            realSerializedType = wrappedSerializedType.getParameterizedQualifiedSourceName();
-        } else if (resultType == ResultType.MULTIPLE_RESULT) {
-            realSerializedType = wrappedSerializedType.getParameterizedQualifiedSourceName();
-            readerInterface = INTERFACE_READER_LIST;
-            writerInterface = INTERFACE_WRITER_LIST;
-        }
+        String realSerializedType = serializedType.getQualifiedSourceName();
 
         sourceWriter.println(readerInterface, realSerializedType);
         sourceWriter.println();

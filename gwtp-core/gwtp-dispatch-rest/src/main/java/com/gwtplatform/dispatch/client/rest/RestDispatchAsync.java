@@ -169,9 +169,8 @@ public class RestDispatchAsync implements DispatchAsync {
         }
 
         String path = buildPath(restAction.getServiceName(), restAction.getPathParams());
-        return baseUrl
-                + path
-                + queryString;
+
+        return baseUrl + path + queryString;
     }
 
     private String buildPath(String rawPath, List<RestParameter> params) throws ActionException {

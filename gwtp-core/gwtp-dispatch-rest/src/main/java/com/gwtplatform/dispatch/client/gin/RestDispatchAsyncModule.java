@@ -75,7 +75,12 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @RestApplicationPath
     protected String provideRestApplicationPath() {
         if (applicationPath == null) {
-            return GWT.getModuleBaseURL();
+            String moduleBaseUrl = GWT.getModuleBaseURL();
+            if (moduleBaseUrl.endsWith("/")) {
+                moduleBaseUrl = moduleBaseUrl.substring(0, moduleBaseUrl.length() - 1);
+            }
+
+            applicationPath = moduleBaseUrl;
         }
 
         return applicationPath;
