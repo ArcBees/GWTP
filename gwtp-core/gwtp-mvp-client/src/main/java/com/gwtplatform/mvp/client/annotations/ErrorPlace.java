@@ -16,14 +16,22 @@
 
 package com.gwtplatform.mvp.client.annotations;
 
-import java.lang.annotation.ElementType;
+import com.google.inject.BindingAnnotation;
+
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 /**
- * Use this annotation with an implementation of {@link com.gwtplatform.mvp.client.PreBootstrapper} if
- * you want to execute code before GWTP is bootstrapped for example to set a GWT.setUncaughtExceptionHandler().
- * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
+ * This annotation is used for binding the error place's (e.g.: error 404 page) name token in your Gin module,
+ * so that you can inject in either your own ClientPlaceManager or the DefaultPlaceManager.
  */
-@Target(ElementType.TYPE)
-public @interface PreBootstrap {
+@BindingAnnotation
+@Target({FIELD, PARAMETER, METHOD})
+@Retention(RUNTIME)
+public @interface ErrorPlace {
 }
