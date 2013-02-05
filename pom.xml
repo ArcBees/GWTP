@@ -417,7 +417,8 @@
                                         <ignore />
                                     </action>
                                 </pluginExecution>
-                                <!-- TODO: This disables checkstyle in Eclipse. It's a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=360491 -->
+                                <!-- TODO: This disables checkstyle in Eclipse. 
+                                It's a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=360491 -->
                                 <pluginExecution>
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.maven.plugins</groupId>
@@ -482,15 +483,14 @@
             </plugin>
 
             <!-- run 'mvn site' to output javadocs to gh-pages -->
-            <!-- run 'mvn javadoc:javadoc -X' to debug -->
-            <!-- http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/javadoc.html -->
+            <!-- run 'mvn javadoc:aggregate -X' to debug -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
-                    <maxmemory>4048</maxmemory>
-                    <failOnError>false</failOnError>
+                    <maxmemory>2048</maxmemory>
+                    <failOnError>true</failOnError>
                     <links>
                         <link>http://download.oracle.com/javase/6/docs/api/</link>
                         <link>http://google-web-toolkit.googlecode.com/svn/javadoc/latest/</link>
@@ -512,7 +512,7 @@
                         ]]>
                     </header>
                 </configuration>
-                <executions>
+                <!-- <executions>
                     <execution>
                         <id>aggregate</id>
                         <goals>
@@ -520,14 +520,7 @@
                         </goals>
                         <phase>site</phase>
                     </execution>
-                    <execution>
-                        <id>attach-javadocs2</id>
-                        <phase>performRelease</phase>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                </executions> -->
             </plugin>
 
             <!-- run 'mvn ghSite:site -X' to debug -->
@@ -537,12 +530,12 @@
                 <version>${github.version}</version>
                 <configuration>
                     <!-- <dryRun>true</dryRun> -->
-                    <outputDirectory>javadoc</outputDirectory>
+                    <!-- <outputDirectory>javadoc</outputDirectory> -->
                     <path>${project.version}</path>
                     <message>Creating site for ${project.version}</message>
                     <!-- sets the ~/.m2/setting.xml profile -->
                     <server>github</server>
-                    <outputDirectory>${project.build.directory}/site/javadoc</outputDirectory>
+                    <outputDirectory>${project.build.directory}/site</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
