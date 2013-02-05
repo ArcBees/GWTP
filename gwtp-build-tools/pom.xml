@@ -11,27 +11,4 @@
 
     <artifactId>gwtp-build-tools</artifactId>
     <name>GWTP Build Tools</name>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*</exclude>
-                    </excludes>
-                    <outputDirectory>/</outputDirectory>
-                </configuration>
-            </plugin>
-            
-            <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin> -->
-        </plugins>
-    </build>
 </project>
