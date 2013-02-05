@@ -512,7 +512,7 @@
                         ]]>
                     </header>
                 </configuration>
-                <!-- <executions>
+                <executions>
                     <execution>
                         <id>aggregate</id>
                         <goals>
@@ -520,7 +520,7 @@
                         </goals>
                         <phase>site</phase>
                     </execution>
-                </executions> -->
+                </executions>
             </plugin>
 
             <!-- run 'mvn ghSite:site -X' to debug -->
@@ -530,12 +530,15 @@
                 <version>${github.version}</version>
                 <configuration>
                     <!-- <dryRun>true</dryRun> -->
-                    <!-- <outputDirectory>javadoc</outputDirectory> -->
                     <path>${project.version}</path>
                     <message>Creating site for ${project.version}</message>
                     <!-- sets the ~/.m2/setting.xml profile -->
                     <server>github</server>
                     <outputDirectory>${project.build.directory}/site</outputDirectory>
+                    <force>true</force>
+                    <excludes>
+                        <exclude>*.DS_Store</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
