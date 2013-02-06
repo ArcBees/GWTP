@@ -475,8 +475,6 @@
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
                     <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase}</arguments>
-                    <username>${github.username}</username>
-                    <password>${github.password}</password>
                 </configuration>
             </plugin>
 
@@ -510,18 +508,11 @@
                             <a href="https://github.com/ArcBees/GWTP" target="_blank">Back to GWTP Home</a>
                         ]]>
                     </header>
-                    <additionalDependencies>
-                        <additionalDependency>
-                            <groupId>com.google.gwt</groupId>
-                            <artifactId>gwt-user</artifactId>
-                            <version>${gwt.version}</version>
-                        </additionalDependency>
-                    </additionalDependencies>
                 </configuration>
             </plugin>
 
             <!-- run 'mvn site' to upload -->
-            <!-- run 'mvn site -X' to debug and upload. -->
+            <!-- run 'mvn site -X' to debug and upload.-->
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
