@@ -73,7 +73,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * [Jukito](http://jukito.arcbees.com/)
 
 ##Javadocs
-[Javadocs](http://arcbees.github.com/GWTP/javadoc/apidocs/index.html)
+* [Javadocs](http://arcbees.github.com/GWTP/javadoc/apidocs/index.html)
 
 ##Plugins
 * [Eclipse Plugin source](https://github.com/ArcBees/gwtp-eclipse-plugin)
