@@ -1,22 +1,21 @@
 ![GWTP] (http://i.imgur.com/LHvTZ.png "GWTP goo-teepee") *goo-teepee*
-
 A complete model-view-presenter framework to simplify your next GWT project.
 
-#Find More on [GWTP Wiki Home](https://github.com/ArcBees/GWTP/wiki)
+##GWTP Reference
+* [GWTP Documentation](https://github.com/arcbees/gwtp/wiki) - Find out how to use GWT-Platform here.
+* [GWTP Samples](https://github.com/ArcBees/GWTP-Samples) - Find Sample GWT-Platform projects here.
+* [GWTP Archetypes](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes) - Start a project from a template here.
 
-##Community Help
-* [Discussion Group](https://groups.google.com/forum/?fromgroups#!forum/gwt-platform)
-* [GWT-Platform G+ Community](https://plus.google.com/communities/113139554133824081251)
-
-##License
-* GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
+##Community
+* [Join the GWT-Platform G+ Community](https://plus.google.com/communities/113139554133824081251) - See whats happening in the community.
+* [GWTP Google Group](https://groups.google.com/forum/?fromgroups#!forum/gwt-platform) - Ask for help here.
 
 ##Maven
 * [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration)
 * [See whats available in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform)
 
 ##Downloads
-* [Latest Jars in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform)
+* [Latest Jars in Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ccom.gwtplatform) - Download jars from maven central.
 * See the manual dependency download section in [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration) 
 
 ###Current Release
@@ -80,6 +79,9 @@ A complete model-view-presenter framework to simplify your next GWT project.
 
 ##Moving From 
 * While we move, you can find the documentation here: http://gwt-platform.googlecode.com
+
+##License
+* GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ##Thanks to
 [![Arcbees.com](http://arcbees-ads.appspot.com/ad.png)](http://arcbees.com)
