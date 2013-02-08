@@ -1,7 +1,7 @@
 ![GWTP] (http://i.imgur.com/LHvTZ.png "GWTP goo-teepee") *goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
 
-##GWTP Reference
+##Reference
 * [GWTP Documentation](https://github.com/arcbees/gwtp/wiki) - Find out how to use GWT-Platform here.
 * [GWTP Samples](https://github.com/ArcBees/GWTP-Samples) - Find Sample GWT-Platform projects here.
 * [GWTP Archetypes](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes) - Start a project from a template here.
