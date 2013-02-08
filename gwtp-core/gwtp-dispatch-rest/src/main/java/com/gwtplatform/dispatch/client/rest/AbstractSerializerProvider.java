@@ -28,7 +28,7 @@ public abstract class AbstractSerializerProvider implements SerializerProvider {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Serializable> Serializer<T> getSerializer(Class<? extends Action> actionClass,
+    public <T> Serializer<T> getSerializer(Class<? extends Action> actionClass,
             SerializedType serializedType) {
         return (Serializer<T>) serializers.get(new SerializerKey(actionClass, serializedType));
     }
