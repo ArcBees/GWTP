@@ -36,7 +36,7 @@ public interface RestAction<R extends Result> extends Action<R> {
 
     List<RestParameter> getHeaderParams();
 
-    Serializable getBodyParam();
+    Object getBodyParam();
 
     Boolean hasFormParams();
 

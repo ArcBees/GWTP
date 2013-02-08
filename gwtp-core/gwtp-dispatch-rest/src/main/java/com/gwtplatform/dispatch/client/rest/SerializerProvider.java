@@ -31,6 +31,5 @@ public interface SerializerProvider {
         }
     }
 
-    <T extends Serializable> Serializer<T> getSerializer(Class<? extends Action> actionClass,
-            SerializedType serializedType);
+    <T> Serializer<T> getSerializer(Class<? extends Action> actionClass, SerializedType serializedType);
 }

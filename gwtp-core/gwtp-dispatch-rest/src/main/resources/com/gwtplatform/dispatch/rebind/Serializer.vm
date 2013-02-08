@@ -1,0 +1,15 @@
+package com.gwtplatform.dispatch.client.rest;
+
+import com.gwtplatform.dispatch.client.rest.JsonSerializer;
+import name.pehl.piriti.json.client.JsonReader;
+import name.pehl.piriti.json.client.JsonWriter;
+
+public class ${implName} extends JsonSerializer<${resultClass}> {
+    interface Reader extends JsonReader<${resultClass}> {}
+
+    interface Writer extends JsonWriter<${resultClass}> {}
+
+    public ${implName}() {
+        super(GWT.<Reader>create(Reader.class), GWT.<Writer>create(Writer.class));
+    }
+}
