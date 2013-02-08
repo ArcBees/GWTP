@@ -1,0 +1,14 @@
+package com.gwtplatform.dispatch.client.rest;
+
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+
+public class ${implName} extends AbstractRestAction<${resultClass}> {
+    public ${implName}(
+#foreach ($param in ${ctorParams})
+    ${param}.type ${param}.name#commaIfNeeded($velocityCount $ctorParams)
+#end) {
+        super(${httpMethod}, ${restPath});
+
+        ${methodCall};
+    }
+}
