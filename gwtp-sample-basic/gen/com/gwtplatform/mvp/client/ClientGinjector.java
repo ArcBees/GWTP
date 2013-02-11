@@ -2,6 +2,7 @@ package com.gwtplatform.mvp.client;
 
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.inject.client.GinModules;
+import com.gwtplatform.dispatch.client.rest.RestGinModule;
 import com.gwtplatform.samples.basic.client.gin.ClientModule;
 import com.google.gwt.core.shared.GWT;
 import com.google.web.bindery.event.shared.EventBus;
@@ -10,7 +11,7 @@ import com.gwtplatform.samples.basic.client.gin.BootstrapperImpl;
 import javax.inject.Provider;
 import com.google.gwt.inject.client.AsyncProvider;
 
-@GinModules({ClientModule.class})
+@GinModules({RestGinModule.class, ClientModule.class})
 public interface ClientGinjector extends Ginjector {
   static ClientGinjector SINGLETON = GWT.create(ClientGinjector.class);
   

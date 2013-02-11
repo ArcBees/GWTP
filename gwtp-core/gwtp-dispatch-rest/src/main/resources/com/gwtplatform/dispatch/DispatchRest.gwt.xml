@@ -27,11 +27,13 @@
     <source path='client'/>
     <source path='shared'/>
 
-    <generate-with class="com.gwtplatform.dispatch.rebind.SerializerProviderGenerator">
-        <when-type-is class="com.gwtplatform.dispatch.client.rest.SerializerProvider"/>
-    </generate-with>
+    <entry-point class='com.gwtplatform.dispatch.client.RestEntryPoint'/>
 
-    <generate-with class="com.gwtplatform.dispatch.rebind.velocity.RestServiceGenerator">
-        <when-type-assignable class="com.gwtplatform.dispatch.shared.rest.RestService"/>
+    <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
+    <set-configuration-property name="gin.ginjector.modules"
+                                   value="com.gwtplatform.dispatch.client.rest.RestGinModule"/>
+
+    <generate-with class="com.gwtplatform.dispatch.rebind.VelocityGenerator">
+        <when-type-is class="com.gwtplatform.dispatch.client.rest.RestDispatcherController"/>
     </generate-with>
 </module>

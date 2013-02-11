@@ -28,6 +28,6 @@
     <source path='client'/>
     <source path='shared'/>
 
-    <set-configuration-property name="gin.ginjector.modules"
+    <extend-configuration-property name="gin.ginjector.modules"
                                 value="com.gwtplatform.samples.basic.client.gin.ClientModule"/>
 </module>

@@ -7,7 +7,7 @@ public class WindowImplIE_Resources_default_StaticClientBundleGenerator implemen
   private static WindowImplIE_Resources_default_StaticClientBundleGenerator _instance0 = new WindowImplIE_Resources_default_StaticClientBundleGenerator();
   private void initWindowCloseHandlerInitializer() {
     initWindowCloseHandler = new com.google.gwt.resources.client.TextResource() {
-      // jar:file:/C:/Users/Maxime/.m2/repository/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar!/com/google/gwt/user/client/impl/initWindowCloseHandler.js
+      // jar:file:/home/meriouma/.m2/repository/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar!/com/google/gwt/user/client/impl/initWindowCloseHandler.js
       public String getText() {
         return "function __gwt_initWindowCloseHandler(beforeunload, unload) {\n  var wnd = window\n  , oldOnBeforeUnload = wnd.onbeforeunload\n  , oldOnUnload = wnd.onunload;\n  \n  wnd.onbeforeunload = function(evt) {\n    var ret, oldRet;\n    try {\n      ret = beforeunload();\n    } finally {\n      oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);\n    }\n    // Avoid returning null as IE6 will coerce it into a string.\n    // Ensure that \"\" gets returned properly.\n    if (ret != null) {\n      return ret;\n    }\n    if (oldRet != null) {\n      return oldRet;\n    }\n    // returns undefined.\n  };\n  \n  wnd.onunload = function(evt) {\n    try {\n      unload();\n    } finally {\n      oldOnUnload && oldOnUnload(evt);\n      wnd.onresize = null;\n      wnd.onscroll = null;\n      wnd.onbeforeunload = null;\n      wnd.onunload = null;\n    }\n  };\n  \n  // Remove the reference once we've initialize the handler\n  wnd.__gwt_initWindowCloseHandler = undefined;\n}\n";
       }
@@ -30,7 +30,7 @@ public class WindowImplIE_Resources_default_StaticClientBundleGenerator implemen
   }
   private void initWindowResizeHandlerInitializer() {
     initWindowResizeHandler = new com.google.gwt.resources.client.TextResource() {
-      // jar:file:/C:/Users/Maxime/.m2/repository/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar!/com/google/gwt/user/client/impl/initWindowResizeHandler.js
+      // jar:file:/home/meriouma/.m2/repository/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar!/com/google/gwt/user/client/impl/initWindowResizeHandler.js
       public String getText() {
         return "function __gwt_initWindowResizeHandler(resize) {\n  var wnd = window, oldOnResize = wnd.onresize;\n  \n  wnd.onresize = function(evt) {\n    try {\n      resize();\n    } finally {\n      oldOnResize && oldOnResize(evt);\n    }\n  };\n  \n  // Remove the reference once we've initialize the handler\n  wnd.__gwt_initWindowResizeHandler = undefined;\n}\n";
       }
@@ -53,7 +53,7 @@ public class WindowImplIE_Resources_default_StaticClientBundleGenerator implemen
   }
   private void initWindowScrollHandlerInitializer() {
     initWindowScrollHandler = new com.google.gwt.resources.client.TextResource() {
-      // jar:file:/C:/Users/Maxime/.m2/repository/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar!/com/google/gwt/user/client/impl/initWindowScrollHandler.js
+      // jar:file:/home/meriouma/.m2/repository/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar!/com/google/gwt/user/client/impl/initWindowScrollHandler.js
       public String getText() {
         return "function __gwt_initWindowScrollHandler(scroll) {\n  var wnd = window, oldOnScroll = wnd.onscroll;\n  \n  wnd.onscroll = function(evt) {\n    try {\n      scroll();\n    } finally {\n      oldOnScroll && oldOnScroll(evt);\n    }\n  };\n  \n  // Remove the reference once we've initialize the handler\n  wnd.__gwt_initWindowScrollHandler = undefined;\n}\n";
       }

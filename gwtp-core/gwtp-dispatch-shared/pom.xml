@@ -75,7 +75,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>${project.build.directory}/generated-sources/apt-test</source>
+                                <!--<source>${project.build.directory}/generated-sources/apt-test</source>-->
                             </sources>
                         </configuration>
                     </execution>

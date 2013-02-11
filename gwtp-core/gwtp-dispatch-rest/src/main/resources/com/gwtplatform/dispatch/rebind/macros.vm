@@ -1,6 +1,5 @@
 #macro(commaIfNeeded $index $list)
-    #set ($lastone = $list.Count - 1)
-    #if( $index <= $lastone ),
-    #else
-    #end
+#set ($lastone = $list.Count - 1)
+#if( $index <= $lastone ),
+#else#end
 #end
