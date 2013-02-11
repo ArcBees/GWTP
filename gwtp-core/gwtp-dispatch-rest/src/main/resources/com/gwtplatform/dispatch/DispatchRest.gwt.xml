@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
+<!--~
   ~ Copyright 2011 ArcBees Inc.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -17,15 +17,21 @@
   -->
 
 <module>
-    <!-- Inherit the core Web Toolkit stuff.                        -->
-    <inherits name='com.google.gwt.user.User'/>
-
-    <!-- Inherit shared modules -->
-    <inherits name='com.gwtplatform.common.ClientsCommon'/>
+    <inherits name="com.gwtplatform.dispatch.Dispatch"/>
     <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
 
-    <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name="com.google.gwt.http.HTTP"/>
+    <inherits name="name.pehl.piriti.json.JSON"/>
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
+    <source path='shared'/>
+
+    <generate-with class="com.gwtplatform.dispatch.rebind.SerializerProviderGenerator">
+        <when-type-is class="com.gwtplatform.dispatch.client.rest.SerializerProvider"/>
+    </generate-with>
+
+    <generate-with class="com.gwtplatform.dispatch.rebind.RestServiceGenerator">
+        <when-type-assignable class="com.gwtplatform.dispatch.shared.rest.RestService"/>
+    </generate-with>
 </module>
