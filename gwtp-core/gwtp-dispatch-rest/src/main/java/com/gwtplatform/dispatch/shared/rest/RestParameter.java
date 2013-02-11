@@ -14,27 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.shared.rest;
 
-import com.gwtplatform.dispatch.shared.DispatchRequest;
+import java.io.Serializable;
 
-/**
- * An implementation of {@link DispatchRequest} that is always completed. It
- * should be used with {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
- * that do not perform any asynchronous processing.
- *
- * @author Brendan Doherty
- */
-public class CompletedDispatchRequest implements DispatchRequest {
-    public CompletedDispatchRequest() {
+public class RestParameter implements Serializable {
+    private String name;
+    private Serializable object;
+
+    RestParameter() {
     }
 
-    @Override
-    public void cancel() {
+    public RestParameter(String name, Serializable object) {
+        this.name = name;
+        this.object = object;
     }
 
-    @Override
-    public boolean isPending() {
-        return false;
+    public String getName() {
+        return name;
+    }
+
+    public Serializable getObject() {
+        return object;
     }
 }
