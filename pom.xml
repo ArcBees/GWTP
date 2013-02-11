@@ -310,6 +310,7 @@
                         <failsOnError>true</failsOnError>
                         <linkXRef>false</linkXRef>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <skip>true</skip>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -608,6 +609,9 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-gpg-plugin</artifactId>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
                             <executions>
                                 <execution>
                                     <id>sign-artifacts</id>

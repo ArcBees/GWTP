@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,77 +18,72 @@ package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.Path;
 
-import com.google.common.base.Joiner;
-import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.TreeLogger.Type;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.core.ext.typeinfo.JParameter;
-import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
-import com.google.gwt.user.rebind.SourceWriter;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.rebind.type.ActionBinding;
 
-public class RestServiceGenerator extends AbstractGenerator {
-    private static final String SUFFIX = "Impl";
-    private static final String OVERRIDE = "@Override";
-    private static final String PUBLIC = "public";
-    private static final String RETURN_NEW_ACTION = "return new %s(%s);";
-    private static final String METHOD_DECLARATION = "%s %s {";
-    private static final String CLOSE_BLOCK = "}";
+public class RestServiceGenerator extends AbstractVelocityGenerator {
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/RestService.vm";
 
-    private static final String SHARED_PACKAGE = ".shared.";
-    private static final String CLIENT_PACKAGE = ".client.";
+    private List<ActionBinding> actionBindings;
+    private GeneratorFactory generatorFactory;
+    private JClassType service;
 
-    private String baseRestPath = "";
-    private Map<JMethod, String> actions = new HashMap<JMethod, String>();
+    @Inject
+    public RestServiceGenerator(
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            GeneratorFactory generatorFactory,
+            @Assisted JClassType service) {
+        super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
-    @Override
-    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
-            throws UnableToCompleteException {
-        setGeneratorContext(generatorContext);
-        setTypeOracle(generatorContext.getTypeOracle());
-        setTreeLogger(treeLogger);
-        setTypeClass(getType(typeName));
-        setPackageName(getTypeClass().getPackage().getName().replace(SHARED_PACKAGE, CLIENT_PACKAGE));
+        actionBindings = new ArrayList<ActionBinding>();
+        this.generatorFactory = generatorFactory;
+        this.service = service;
+    }
 
-        PrintWriter printWriter = tryCreatePrintWriter("", SUFFIX);
+    public void generate() throws Exception {
+        generateActions();
+
+        String implName = service.getName() + SUFFIX;
+        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
         if (printWriter != null) {
-            setTreeLogger(getTreeLogger().branch(Type.DEBUG, "Generating rest service " + getClassName()));
-
-            verifyIsInterface();
-
-            retrieveServiceAnnonations();
-            generateRestActions();
-
-            writeClass(printWriter);
-        }
-
-        return getQualifiedClassName();
-    }
-
-    private void verifyIsInterface() throws UnableToCompleteException {
-        if (getTypeClass().isInterface() == null) {
-            String typeName = getTypeClass().getQualifiedSourceName();
-            getTreeLogger().log(Type.ERROR, typeName + " must be an interface.");
-
-            throw new UnableToCompleteException();
+            mergeTemplate(printWriter, TEMPLATE, implName);
+        } else {
+            getLogger().debug("Serializer already generated. Returning.");
         }
     }
 
-    private void retrieveServiceAnnonations() {
-        if (getTypeClass().isAnnotationPresent(Path.class)) {
-            baseRestPath = normalizePath(getTypeClass().getAnnotation(Path.class).value());
-        }
+    @Override
+    protected String getPackage() {
+        return service.getPackage().getName().replace(SHARED_PACKAGE, CLIENT_PACKAGE);
     }
 
-    private void generateRestActions() throws UnableToCompleteException {
-        JMethod[] actionMethods = getTypeClass().getMethods();
+    @Override
+    protected void populateVelocityContext(VelocityContext velocityContext)
+            throws UnableToCompleteException {
+        velocityContext.put("serviceInterface", service);
+        velocityContext.put("actionBindings", actionBindings);
+    }
+
+    private void generateActions() throws UnableToCompleteException {
+        JMethod[] actionMethods = service.getMethods();
         if (actionMethods != null) {
             for (JMethod actionMethod : actionMethods) {
                 generateRestAction(actionMethod);
@@ -97,73 +92,20 @@ public class RestServiceGenerator extends AbstractGenerator {
     }
 
     private void generateRestAction(JMethod actionMethod) throws UnableToCompleteException {
+        RestActionGenerator generator = generatorFactory.createActionGenerator(actionMethod);
         try {
-            String actionClassName = new RestActionGenerator(baseRestPath)
-                    .generate(getTreeLogger(), getGeneratorContext(), actionMethod);
-
-            actions.put(actionMethod, actionClassName);
-        } catch (UnableToCompleteException e) {
-            String readableDeclaration = actionMethod.getReadableDeclaration(true, true, true, true, true);
-            getTreeLogger().log(Type.ERROR, "Unable to generate rest action for method " + readableDeclaration + ".");
-
+            String baseRestPath = getBaseRestPath();
+            actionBindings.add(generator.generate(baseRestPath));
+        } catch (Exception e) {
             throw new UnableToCompleteException();
         }
     }
 
-    private void writeClass(PrintWriter printWriter) {
-        ClassSourceFileComposerFactory composer = initComposer();
-        SourceWriter sourceWriter = composer.createSourceWriter(getGeneratorContext(), printWriter);
-
-        writeMethods(sourceWriter);
-
-        closeDefinition(sourceWriter);
-    }
-
-    private ClassSourceFileComposerFactory initComposer() {
-        ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
-
-        composer.addImport(getTypeClass().getQualifiedSourceName());
-
-        composer.addImplementedInterface(getTypeClass().getName());
-
-        return composer;
-    }
-
-    private void writeMethods(SourceWriter sourceWriter) {
-        for (Map.Entry<JMethod, String> action : actions.entrySet()) {
-            writeMethod(action.getKey(), action.getValue(), sourceWriter);
-
-            sourceWriter.println();
+    private String getBaseRestPath() {
+        String baseRestPath = "";
+        if (service.isAnnotationPresent(Path.class)) {
+            baseRestPath = normalizePath(service.getAnnotation(Path.class).value());
         }
-    }
-
-    private void writeMethod(JMethod method, String returnClass, SourceWriter sourceWriter) {
-        sourceWriter.println(OVERRIDE);
-        sourceWriter.println(METHOD_DECLARATION, PUBLIC, method.getReadableDeclaration(true, true, true, true, true));
-
-        sourceWriter.indent();
-        {
-            sourceWriter.println(RETURN_NEW_ACTION, getClassName(returnClass), getParameters(method));
-        }
-        sourceWriter.outdent();
-
-        sourceWriter.println(CLOSE_BLOCK);
-    }
-
-    private String getClassName(String name) {
-        return name.substring(name.lastIndexOf('.') + 1);
-    }
-
-    private String getParameters(JMethod method) {
-        JParameter parameters[] = method.getParameters();
-        List<String> names = new ArrayList<String>();
-
-        if (parameters != null) {
-            for (JParameter parameter : parameters) {
-                names.add(parameter.getName());
-            }
-        }
-
-        return Joiner.on(", ").join(names);
+        return baseRestPath;
     }
 }

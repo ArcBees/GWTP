@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -33,27 +36,29 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
-import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.TreeLogger.Type;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
+import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
-import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
-import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.dispatch.client.rest.AbstractRestAction;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.rebind.archive.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.type.ActionBinding;
+import com.gwtplatform.dispatch.rebind.type.MethodCall;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 
 import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
 import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
 
-public class RestActionGenerator extends AbstractGenerator {
+public class RestActionGenerator extends AbstractVelocityGenerator {
     private static class AnnotatedMethodParameter {
         private JParameter parameter;
         private String fieldName;
@@ -72,81 +77,134 @@ public class RestActionGenerator extends AbstractGenerator {
     private static final List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
             Arrays.asList(HeaderParam.class, QueryParam.class, PathParam.class, FormParam.class);
 
-    private static final String SUFFIX = "Impl";
-    private static final String SERIALIZATION_CONSTRUCTOR = "%s() { /* For serialization */ }";
-    private static final String ADD_HEADER_PARAM = "addHeaderParam(\"%s\", %s);";
-    private static final String ADD_PATH_PARAM = "addPathParam(\"%s\", %s);";
-    private static final String ADD_QUERY_PARAM = "addQueryParam(\"%s\", %s);";
-    private static final String ADD_FORM_PARAM = "addFormParam(\"%s\", %s);";
-    private static final String SET_BODY_PARAM = "setBodyParam(%s);";
-    private static final String SUPER_CLASS_CONSTRUCTOR = "super(HttpMethod.%s, \"%s\");";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/RestAction.vm";
     private static final String PATH_PARAM = "{%s}";
-    private static final String ACTION_CONSTRUCTOR = "public %s(%s) {";
-    private static final String CLOSE_BLOCK = "}";
-    private static final String METHOD_PARAMETER = "%s %s";
-    private static final String METHOD_PARAMETER_SEPARATOR = ", ";
-    private static final String SHARED_PACKAGE = ".shared.";
-    private static final String CLIENT_PACKAGE = ".client.";
-
     private static final String PATH_PARAM_MISSING = "@PathParam(\"%1$s\") declared, but '%1$s' not found in %2$s.";
-    private static final String MANY_REST_ANNOTATIONS = "'%s' parameter's '%s' is annotated with more than one REST annotations.";
+    private static final String MANY_REST_ANNOTATIONS = "'%s' parameter's '%s' is annotated with more than one REST " +
+            "annotations.";
     private static final String MANY_POTENTIAL_BODY = "%s has more than one potential body parameter.";
-    private static final String FORM_AND_BODY_PARAM = "%s has both @FormParam and a body parameter. You must specify one or the other.";
+    private static final String FORM_AND_BODY_PARAM = "%s has both @FormParam and a body parameter. You must specify " +
+            "one or the other.";
+    private static final String ADD_HEADER_PARAM = "addHeaderParam";
+    private static final String ADD_PATH_PARAM = "addPathParam";
+    private static final String ADD_QUERY_PARAM = "addQueryParam";
+    private static final String ADD_FORM_PARAM = "addFormParam";
+    private static final String SET_BODY_PARAM = "setBodyParam";
 
+    private final EventBus eventBus;
+    private GeneratorFactory generatorFactory;
+    private final JMethod actionMethod;
+    private final JType returnType;
     private final List<AnnotatedMethodParameter> pathParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<AnnotatedMethodParameter> headerParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<AnnotatedMethodParameter> queryParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<AnnotatedMethodParameter> formParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<JParameter> potentialBodyParams = new ArrayList<JParameter>();
 
-    private JMethod actionMethod;
     private HttpMethod httpMethod;
     private String path = "";
     private JParameter bodyParam;
 
-    public RestActionGenerator(String baseRestPath) {
-        this.path = baseRestPath;
+    @Inject
+    public RestActionGenerator(
+            EventBus eventBus,
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            GeneratorFactory generatorFactory,
+            @Assisted JMethod actionMethod) throws UnableToCompleteException {
+        super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
+        this.eventBus = eventBus;
+        this.generatorFactory = generatorFactory;
+
+        this.actionMethod = actionMethod;
+        returnType = actionMethod.getReturnType();
+    }
+
+    public ActionBinding generate(String restServicePath) throws Exception {
+        verifyIsAction();
+        JClassType resultType = getResultType();
+
+        path = restServicePath;
+        retrieveConfigAnnonations();
+        retrieveParameterConfig();
+        retrieveBodyConfig();
+
+        verifyPathParamsExist();
+
+        String implName = getActionName() + SUFFIX;
+        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
+
+        if (printWriter != null) {
+            mergeTemplate(printWriter, TEMPLATE, implName);
+        } else {
+            getLogger().debug("Serializer already generated. Returning.");
+        }
+
+        generateSerializers(resultType);
+
+        return new ActionBinding(implName, actionMethod.getName(), resultType.getQualifiedSourceName(),
+                actionMethod.getParameters());
     }
 
     @Override
-    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
-            throws UnableToCompleteException {
-        // TODO: Implement this method for backward compatibility (Custom actions)
-
-        treeLogger.log(Type.ERROR, "Custom actions are not supported.");
-        throw new UnableToCompleteException();
+    protected String getPackage() {
+        return actionMethod.getEnclosingType().getPackage().getName().replace(SHARED_PACKAGE, CLIENT_PACKAGE);
     }
 
-    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, JMethod actionMethod)
-            throws UnableToCompleteException {
-        this.actionMethod = actionMethod;
+    @Override
+    protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
+        velocityContext.put("resultClass", getResultType());
+        velocityContext.put("httpMethod", httpMethod);
+        velocityContext.put("methodCalls", getMethodCallsToAdd());
+        velocityContext.put("restPath", path);
+        velocityContext.put("ctorParams", actionMethod.getParameters());
+    }
 
-        setGeneratorContext(generatorContext);
-        setTypeOracle(generatorContext.getTypeOracle());
-        setTreeLogger(treeLogger);
-        setTypeClass(actionMethod.getReturnType().isClassOrInterface());
-        setPackageName(actionMethod.getEnclosingType().getPackage().getName().replace(SHARED_PACKAGE, CLIENT_PACKAGE));
+    private List<MethodCall> getMethodCallsToAdd() {
+        List<MethodCall> methodCalls = new ArrayList<MethodCall>();
 
-        PrintWriter printWriter = tryCreatePrintWriter(getActionName() + "_", SUFFIX);
+        methodCalls.addAll(getMethodCallsToAdd(headerParams, ADD_HEADER_PARAM));
+        methodCalls.addAll(getMethodCallsToAdd(pathParams, ADD_PATH_PARAM));
+        methodCalls.addAll(getMethodCallsToAdd(queryParams, ADD_QUERY_PARAM));
+        methodCalls.addAll(getMethodCallsToAdd(formParams, ADD_FORM_PARAM));
 
-        if (printWriter != null) {
-            setTreeLogger(getTreeLogger().branch(Type.DEBUG, "Generating rest action " + getClassName()));
-
-            verifyIsAction();
-            JClassType resultType = getResultType();
-
-            retrieveConfigAnnonations();
-            retrieveParameterConfig();
-            retrieveBodyConfig();
-
-            verifyPathParamsExist();
-
-            generateSerializers(resultType);
-
-            writeClass(printWriter);
+        if (bodyParam != null) {
+            methodCalls.add(new MethodCall(SET_BODY_PARAM, null, bodyParam));
         }
 
-        return getQualifiedClassName();
+        return methodCalls;
+    }
+
+    private List<MethodCall> getMethodCallsToAdd(List<AnnotatedMethodParameter> methodParameters,
+            String methodName) {
+        List<MethodCall> methodCalls = new ArrayList<MethodCall>();
+        for (AnnotatedMethodParameter methodParameter : methodParameters) {
+            methodCalls.add(new MethodCall(methodName, methodParameter.fieldName, methodParameter.parameter));
+        }
+        return methodCalls;
+    }
+
+    private void generateSerializers(JClassType resultType) throws Exception {
+        if (bodyParam != null) {
+            String bodySerializer = generateSerializer(bodyParam.getType().isClassOrInterface());
+            eventBus.post(new RegisterSerializerEvent(getQualifiedClassName(), BODY, bodySerializer));
+        }
+
+        String responseSerializer = generateSerializer(resultType);
+        eventBus.post(new RegisterSerializerEvent(getQualifiedClassName(), RESPONSE, responseSerializer));
+    }
+
+    private String generateSerializer(JClassType type) throws Exception {
+        SerializerGenerator generator = generatorFactory.createSerializerGenerator(type);
+        return generator.generate();
+    }
+
+    private String getQualifiedClassName() {
+        String className = getActionName() + returnType.isClassOrInterface().getName() + SUFFIX;
+        return getPackage() + "." + className;
     }
 
     private String getActionName() {
@@ -167,51 +225,19 @@ public class RestActionGenerator extends AbstractGenerator {
     }
 
     private void verifyIsAction() throws UnableToCompleteException {
-        JClassType actionClass;
+        JClassType actionClass = null;
 
         try {
             actionClass = getTypeOracle().getType(Action.class.getName());
         } catch (NotFoundException e) {
-            getTreeLogger().log(Type.ERROR, "Unable to find interface Action.");
-            throw new UnableToCompleteException();
+            getLogger().die("Unable to find interface Action.");
         }
 
-        if (!getTypeClass().isAssignableTo(actionClass)) {
-            String typeName = getTypeClass().getQualifiedSourceName();
-            getTreeLogger().log(Type.ERROR, typeName + " must implement Action.");
-
-            throw new UnableToCompleteException();
+        JClassType returnClass = returnType.isClassOrInterface();
+        if (!returnClass.isAssignableTo(actionClass)) {
+            String typeName = returnClass.getQualifiedSourceName();
+            getLogger().die(typeName + " must implement Action.");
         }
-    }
-
-    /**
-     * @return The cooncrete result type.
-     */
-    private JClassType getResultType() throws UnableToCompleteException {
-        JClassType actionInterface = getType(Action.class.getName());
-        JClassType implementedAction = getInterfaceInHierarchy(getTypeClass(), actionInterface);
-
-        JParameterizedType parameterized = implementedAction.isParameterized();
-        if (parameterized != null && parameterized.getTypeArgs().length == 1) {
-            return parameterized.getTypeArgs()[0];
-        } else {
-            getTreeLogger().log(Type.ERROR, "The action must specify a result type argument.");
-            throw new UnableToCompleteException();
-        }
-    }
-
-    private JClassType getInterfaceInHierarchy(JClassType classType, JClassType actionInterface) {
-        if (getTypeClass().getName().equals(actionInterface.getName())) {
-            return classType;
-        } else {
-            for (JClassType implemented : getTypeClass().getImplementedInterfaces()) {
-                if (implemented.isAssignableTo(actionInterface)) {
-                    return getInterfaceInHierarchy(implemented, actionInterface);
-                }
-            }
-        }
-
-        return null;
     }
 
     private void retrieveConfigAnnonations() throws UnableToCompleteException {
@@ -250,10 +276,9 @@ public class RestActionGenerator extends AbstractGenerator {
         }
 
         if (httpMethod == null) {
-            getTreeLogger().log(Type.ERROR, actionMethod.getName() + " has no http method annotations.");
-            throw new UnableToCompleteException();
+            getLogger().die(actionMethod.getName() + " has no http method annotations.");
         } else if (moreThanOneAnnotation) {
-            getTreeLogger().log(Type.WARN, actionMethod.getName() + " has more than one http method annotation.");
+            getLogger().warn(actionMethod.getName() + " has more than one http method annotation.");
         }
     }
 
@@ -301,7 +326,7 @@ public class RestActionGenerator extends AbstractGenerator {
 
             if (parameterAnnotation != null) {
                 if (hasAnnotationFrom(parameter, restrictedAnnotations)) {
-                    getTreeLogger().log(Type.ERROR, String.format(MANY_REST_ANNOTATIONS, actionMethod.getName(), parameter.getName()));
+                    getLogger().die(String.format(MANY_REST_ANNOTATIONS, actionMethod.getName(), parameter.getName()));
                     throw new UnableToCompleteException();
                 }
 
@@ -352,9 +377,7 @@ public class RestActionGenerator extends AbstractGenerator {
     private void verifyPathParamExists(String param) throws UnableToCompleteException {
         if (!path.contains(String.format(PATH_PARAM, param))) {
             String warning = String.format(PATH_PARAM_MISSING, param, path);
-            getTreeLogger().log(Type.ERROR, warning);
-
-            throw new UnableToCompleteException();
+            getLogger().die(warning);
         }
     }
 
@@ -364,129 +387,21 @@ public class RestActionGenerator extends AbstractGenerator {
         }
 
         if (potentialBodyParams.size() > 1) {
-            getTreeLogger().log(Type.ERROR, String.format(MANY_POTENTIAL_BODY, actionMethod.getName()));
-            throw new UnableToCompleteException();
+            getLogger().die(String.format(MANY_POTENTIAL_BODY, actionMethod.getName()));
         }
 
         if (!formParams.isEmpty()) {
-            getTreeLogger().log(Type.ERROR, String.format(FORM_AND_BODY_PARAM, actionMethod.getName()));
-            throw new UnableToCompleteException();
+            getLogger().die(String.format(FORM_AND_BODY_PARAM, actionMethod.getName()));
         }
 
         bodyParam = potentialBodyParams.get(0);
     }
 
-    private void generateSerializers(JClassType resultType) throws UnableToCompleteException {
-        if (bodyParam != null) {
-            String bodySerializer = generateSerializer(bodyParam.getType().isClassOrInterface());
-            getEventBus().post(new RegisterSerializerEvent(getQualifiedClassName(), BODY, bodySerializer));
+    private JClassType getResultType() throws UnableToCompleteException {
+        JParameterizedType parameterized = returnType.isParameterized();
+        if (parameterized == null || parameterized.getTypeArgs().length != 1) {
+            getLogger().die("The action must specify a result type argument.");
         }
-
-        String responseSerializer = generateSerializer(resultType);
-        getEventBus().post(new RegisterSerializerEvent(getQualifiedClassName(), RESPONSE, responseSerializer));
-    }
-
-    private String generateSerializer(JClassType type) throws UnableToCompleteException {
-        SerializerGenerator bodySerializerGenerator = new SerializerGenerator(type);
-        return bodySerializerGenerator.generate(getTreeLogger(), getGeneratorContext());
-    }
-
-    private void writeClass(PrintWriter printWriter) {
-        ClassSourceFileComposerFactory composer = initComposer();
-        SourceWriter sourceWriter = composer.createSourceWriter(getGeneratorContext(), printWriter);
-
-        writeConstructor(sourceWriter);
-
-        closeDefinition(sourceWriter);
-    }
-
-    private ClassSourceFileComposerFactory initComposer() {
-        ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
-
-        String actionInterfaceParameterizedName = getTypeClass().getParameterizedQualifiedSourceName();
-        String actionInterfaceName = getTypeClass().getQualifiedSourceName();
-
-        String superclassName = AbstractRestAction.class.getSimpleName();
-        superclassName = actionInterfaceParameterizedName.replace(actionInterfaceName, superclassName);
-
-        composer.addImport(AbstractRestAction.class.getCanonicalName());
-        composer.setSuperclass(superclassName);
-
-        composer.addImport(HttpMethod.class.getCanonicalName());
-
-        return composer;
-    }
-
-    private void writeConstructor(SourceWriter sourceWriter) {
-        String arguments = composeConstructorArgs();
-
-        if (!arguments.isEmpty()) {
-            sourceWriter.println(SERIALIZATION_CONSTRUCTOR, getClassName());
-            sourceWriter.println();
-        }
-
-        sourceWriter.println(ACTION_CONSTRUCTOR, getClassName(), arguments);
-
-        sourceWriter.indent();
-        {
-            sourceWriter.println(SUPER_CLASS_CONSTRUCTOR, httpMethod.name(), path);
-            sourceWriter.println();
-
-            writeAddParams(sourceWriter, headerParams, ADD_HEADER_PARAM);
-            writeAddParams(sourceWriter, pathParams, ADD_PATH_PARAM);
-            writeAddParams(sourceWriter, queryParams, ADD_QUERY_PARAM);
-            writeAddParams(sourceWriter, formParams, ADD_FORM_PARAM);
-
-            if (bodyParam != null) {
-                sourceWriter.println(SET_BODY_PARAM, bodyParam.getName());
-            }
-        }
-        sourceWriter.outdent();
-
-        sourceWriter.println(CLOSE_BLOCK);
-        sourceWriter.println();
-    }
-
-    private String composeConstructorArgs() {
-        JParameter[] parameters = actionMethod.getParameters();
-        StringBuilder sb = new StringBuilder();
-
-        Integer i = 1;
-        for (JParameter parameter : parameters) {
-            String className = getQualifiedClassName(parameter.getType());
-
-            sb.append(String.format(METHOD_PARAMETER, className, parameter.getName()));
-
-            if (i < parameters.length) {
-                sb.append(METHOD_PARAMETER_SEPARATOR);
-            }
-
-            i++;
-        }
-
-        return sb.toString();
-    }
-
-    private String getQualifiedClassName(JType type) {
-        JPrimitiveType primitive = type.isPrimitive();
-
-        if (primitive != null) {
-            return primitive.getQualifiedBoxedSourceName();
-        } else {
-            return type.getParameterizedQualifiedSourceName();
-        }
-    }
-
-    private void writeAddParams(SourceWriter sourceWriter, List<AnnotatedMethodParameter> parameters, String format) {
-        Boolean needNewLine = false;
-
-        for (AnnotatedMethodParameter parameter : parameters) {
-            needNewLine = true;
-            sourceWriter.println(format, parameter.fieldName, parameter.parameter.getName());
-        }
-
-        if (needNewLine) {
-            sourceWriter.println();
-        }
+        return parameterized.getTypeArgs()[0];
     }
 }
