@@ -77,7 +77,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 
@@ -107,8 +106,8 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <!-- Even though this is not needed server-side, we do not use a provided
-                scope as this dependency is always included transitively. -->
+                <!-- Even though this is not needed server-side, we do not 
+                    use a provided scope as this dependency is always included transitively. -->
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-clients-common</artifactId>
                 <version>${project.version}</version>
@@ -150,8 +149,12 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-mvp-client</artifactId>
                 <version>${project.version}</version>
+<<<<<<< HEAD
                 <scope>provided</scope>
                 <!-- Not needed server-side -->
+=======
+                <scope>provided</scope> <!-- Not needed server-side -->
+>>>>>>> 9206f22cb4ed79abb75fe94cda1870c9ee7c504e
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
