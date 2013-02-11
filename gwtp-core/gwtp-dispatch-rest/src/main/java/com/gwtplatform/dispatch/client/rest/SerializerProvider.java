@@ -14,16 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.client.rest;
+
+import com.gwtplatform.dispatch.shared.Action;
 
 import java.io.Serializable;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+public interface SerializerProvider {
+    static class SerializerKey {
+        private final Class<? extends Action> actionClass;
+        private final SerializedType serializedType;
 
-/**
- * A marker interface for {@link Action} results.
- *
- * @author David Peterson
- */
-public interface Result extends IsSerializable, Serializable {
+        SerializerKey(Class<? extends Action> actionClass, SerializedType serializedType) {
+            this.actionClass = actionClass;
+            this.serializedType = serializedType;
+        }
+    }
+
+    <T extends Serializable> Serializer<T> getSerializer(Class<? extends Action> actionClass,
+            SerializedType serializedType);
 }

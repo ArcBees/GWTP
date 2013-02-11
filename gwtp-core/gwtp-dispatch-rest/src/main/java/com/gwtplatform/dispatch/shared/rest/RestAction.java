@@ -14,16 +14,31 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.shared.rest;
+
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.Result;
 
 import java.io.Serializable;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
+import java.util.List;
 
 /**
- * A marker interface for {@link Action} results.
- *
- * @author David Peterson
+ * TODO: Documentation.
  */
-public interface Result extends IsSerializable, Serializable {
+public interface RestAction<R extends Result> extends Action<R> {
+    HttpMethod getHttpMethod();
+
+    List<RestParameter> getPathParams();
+
+    List<RestParameter> getQueryParams();
+
+    List<RestParameter> getFormParams();
+
+    List<RestParameter> getHeaderParams();
+
+    Serializable getBodyParam();
+
+    Boolean hasFormParams();
+
+    Boolean hasBodyParam();
 }

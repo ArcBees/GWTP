@@ -14,16 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
-
-import java.io.Serializable;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
+package com.gwtplatform.dispatch.shared.rest;
 
 /**
- * A marker interface for {@link Action} results.
- *
- * @author David Peterson
+ * TODO: Write javadoc.
  */
-public interface Result extends IsSerializable, Serializable {
+public interface RestService {
 }
