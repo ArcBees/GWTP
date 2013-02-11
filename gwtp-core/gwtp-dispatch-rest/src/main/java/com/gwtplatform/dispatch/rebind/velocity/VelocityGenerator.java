@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rebind.velocity;
 
-import java.io.PrintWriter;
-
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -29,6 +27,8 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.io.PrintWriter;
 
 public class VelocityGenerator extends Generator {
     private static String SUFFIX = "Impl";
@@ -54,7 +54,7 @@ public class VelocityGenerator extends Generator {
 
         injector = Guice.createInjector(new RebindModule(logger, generatorContext));
 
-        generateActions();
+        generateServices();
 
         ClassSourceFileComposerFactory composer = initComposer();
         SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
@@ -63,17 +63,13 @@ public class VelocityGenerator extends Generator {
         return typeName + SUFFIX;
     }
 
-    private void generateActions() {
-
-    }
-
-    private void generateSerializers() throws UnableToCompleteException {
-        SerializerGenerator serializerGenerator = injector.getInstance(SerializerGenerator.class);
-        try {
-            serializerGenerator.generate();
-        } catch (Exception e) {
-            logger.die(e.getMessage());
-        }
+    private void generateServices() throws UnableToCompleteException {
+//        RestServiceGenerator restServiceGenerator = injector.getInstance(RestServiceGenerator.class);
+//        try {
+//            restServiceGenerator.generate();
+//        } catch (Exception e) {
+//            logger.die(e.getMessage());
+//        }
     }
 
     // Duplicated from GeneratorUtil so that we don't create twice the injector if we don't need it.
