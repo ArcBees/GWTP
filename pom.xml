@@ -82,6 +82,16 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>christopher.viel</id>
+            <name>Christopher Viel</name>
+            <email>viel.christopher@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors>
@@ -205,10 +215,13 @@
         <cglib.version>2.2</cglib.version>
         <gae.version>1.7.3</gae.version>
         <gin.version>2.0.0</gin.version>
+        <guava.version>13.0.1</guava.version>
         <guice.version>3.0</guice.version>
         <gwt.version>2.5.0</gwt.version>
         <htmlunit.version>2.9</htmlunit.version>
         <javax.inject.version>1</javax.inject.version>
+        <jax-rs.version>1.1.1</jax-rs.version>
+        <piriti.version>0.8</piriti.version>
         <jukito.version>1.1</jukito.version>
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
@@ -248,7 +261,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-
     </repositories>
 
     <build>

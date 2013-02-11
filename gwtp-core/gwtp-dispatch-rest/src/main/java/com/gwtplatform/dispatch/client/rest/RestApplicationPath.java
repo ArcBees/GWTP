@@ -14,16 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.client.rest;
 
-import java.io.Serializable;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.inject.BindingAnnotation;
 
-/**
- * A marker interface for {@link Action} results.
- *
- * @author David Peterson
- */
-public interface Result extends IsSerializable, Serializable {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface RestApplicationPath {
 }
