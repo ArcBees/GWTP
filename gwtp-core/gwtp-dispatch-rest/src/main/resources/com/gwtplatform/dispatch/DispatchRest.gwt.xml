@@ -31,7 +31,7 @@
         <when-type-is class="com.gwtplatform.dispatch.client.rest.SerializerProvider"/>
     </generate-with>
 
-    <generate-with class="com.gwtplatform.dispatch.rebind.RestServiceGenerator">
+    <generate-with class="com.gwtplatform.dispatch.rebind.velocity.RestServiceGenerator">
         <when-type-assignable class="com.gwtplatform.dispatch.shared.rest.RestService"/>
     </generate-with>
 </module>
