@@ -35,7 +35,5 @@ public class ApplicationModule extends AbstractPresenterModule {
 
         bindPresenter(ResponsePresenter.class, ResponsePresenter.MyView.class,
                 ResponseView.class, ResponsePresenter.MyProxy.class);
-
-        bind(TextService.class).in(Singleton.class);
     }
 }

@@ -22,6 +22,7 @@ import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.client.rest.SerializerProvider;
+import com.gwtplatform.dispatch.client.rest.RestDispatcherController;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 
 /**
@@ -60,7 +61,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configure() {
         super.configure();
 
-        bind(SerializerProvider.class).asEagerSingleton();
+        bind(RestDispatcherController.class).asEagerSingleton();
     }
 
     @Provides

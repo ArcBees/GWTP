@@ -1,14 +1,19 @@
-package com.gwtplatform.dispatch.client.rest;
+#* @vtlvariable name="methodCalls" type="com.gwtplatform.dispatch.rebind.type.MethodCall[]" *#
+#* @vtlvariable name="ctorParams" type="com.google.gwt.core.ext.typeinfo.JParameter[]" *#
+package ${package};
 
+import com.gwtplatform.dispatch.client.rest.AbstractRestAction;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 
-public class ${implName} extends AbstractRestAction<${resultClass}> {
-    public ${implName}(
-#foreach ($param in ${ctorParams})
-    ${param}.type ${param}.name#commaIfNeeded($velocityCount $ctorParams)
-#end) {
-        super(${httpMethod}, ${restPath});
-
-        ${methodCall};
+public class ${implName} extends AbstractRestAction<${resultClass.qualifiedSourceName}> {
+    public ${implName}(#foreach (${param} in ${ctorParams})${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded($velocityCount $ctorParams)#end) {
+        super(HttpMethod.${httpMethod}, "${restPath}");
+#foreach ($methodCall in $methodCalls)
+#if ($methodCall.fieldName)
+        ${methodCall.methodName}("${methodCall.fieldName}", ${methodCall.parameter.name});
+#else
+        ${methodCall.methodName}(${methodCall.parameter.name});
+#end
+#end
     }
 }

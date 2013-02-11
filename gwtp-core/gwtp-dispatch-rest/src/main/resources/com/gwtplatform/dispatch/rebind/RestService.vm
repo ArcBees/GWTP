@@ -1,0 +1,22 @@
+#* @vtlvariable name="actionBindings" type="com.gwtplatform.dispatch.rebind.type.ActionBinding[]" *#
+#* @vtlvariable name="serviceInterface" type="com.google.gwt.core.ext.typeinfo.JClassType" *#
+package ${package};
+
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+import ${serviceInterface.qualifiedSourceName};
+
+public class ${implName} implements ${serviceInterface.name} {
+#foreach ($action in ${actionBindings})
+#set($paramsDef = "")
+#set($paramsValues = "")
+#foreach ($param in ${action.getParameters()})
+#set($paramsDef = "${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded($velocityCount ${action.getParameters()})")
+#set($paramsValues = "${param.name}#commaIfNeeded($velocityCount ${action.getParameters()})")
+#end
+    @Override
+    public Action<${action.resultClass}> ${action.methodName}($paramsDef) {
+        return new ${action.actionClass}(${paramsValues});
+    }
+#end
+}
