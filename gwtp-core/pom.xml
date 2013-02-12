@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -77,7 +77,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 
@@ -107,8 +106,8 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <!-- Even though this is not needed server-side, we do not use a provided
-                scope as this dependency is always included transitively. -->
+                <!-- Even though this is not needed server-side, we do not 
+                    use a provided scope as this dependency is always included transitively. -->
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-clients-common</artifactId>
                 <version>${project.version}</version>
@@ -150,8 +149,7 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-mvp-client</artifactId>
                 <version>${project.version}</version>
-                <scope>provided</scope>
-                <!-- Not needed server-side -->
+                <scope>provided</scope> <!-- Not needed server-side -->				
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
