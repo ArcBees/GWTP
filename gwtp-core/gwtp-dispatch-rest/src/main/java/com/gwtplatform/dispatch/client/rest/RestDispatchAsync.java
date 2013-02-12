@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -204,9 +203,9 @@ public class RestDispatchAsync implements DispatchAsync {
         return UriUtils.encode(value.getObject().toString());
     }
 
-    private String getSerializedValue(Action<?> action, Serializable object) throws ActionException {
+    private String getSerializedValue(Action<?> action, Object object) throws ActionException {
         try {
-            Serializer<Serializable> serializer = serializerProvider.getSerializer(action.getClass(), BODY);
+            Serializer<Object> serializer = serializerProvider.getSerializer(action.getClass(), BODY);
 
             if (serializer == null) {
                 throw new ActionException("Unable to serialize request body. Serializer not found.");
