@@ -16,11 +16,10 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import com.gwtplatform.dispatch.shared.Action;
-
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.gwtplatform.dispatch.shared.Action;
 
 public abstract class AbstractSerializerProvider implements SerializerProvider {
     // TODO: Use a more efficient way to store serializers
@@ -28,7 +27,7 @@ public abstract class AbstractSerializerProvider implements SerializerProvider {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Serializable> Serializer<T> getSerializer(Class<? extends Action> actionClass,
+    public <T> Serializer<T> getSerializer(Class<? extends Action> actionClass,
             SerializedType serializedType) {
         return (Serializer<T>) serializers.get(new SerializerKey(actionClass, serializedType));
     }
