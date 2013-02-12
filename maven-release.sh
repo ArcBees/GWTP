@@ -17,6 +17,7 @@ mvn release:perform -Dgpg.passphrase=$1
 
 echo "Finished"
 
+
 #TODO - this is in the works
 #https://github.com/ArcBees/GWTP/issues/89
 
