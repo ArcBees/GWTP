@@ -37,18 +37,18 @@ public interface SerializerProvider {
 
         @Override
         public boolean equals(Object o) {
-            if (o == null || !(o instanceof  SerializerKey)){
+            if (o == null || !(o instanceof  SerializerKey)) {
                 return false;
             }
 
-            if (this == o){
+            if (this == o) {
                 return true;
             }
-            SerializerKey other = (SerializerKey)o;
+            SerializerKey other = (SerializerKey) o;
             return isEquals(actionClass, other.actionClass) && isEquals(serializedType, other.serializedType);
         }
 
-        public boolean isEquals(Object a, Object b){
+        public boolean isEquals(Object a, Object b) {
             return a == b || (a != null && a.equals(b));
         }
     }
