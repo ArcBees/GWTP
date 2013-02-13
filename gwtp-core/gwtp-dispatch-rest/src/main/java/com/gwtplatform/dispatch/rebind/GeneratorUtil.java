@@ -16,15 +16,14 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import java.io.PrintWriter;
-
-import javax.inject.Inject;
-
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+
+import java.io.PrintWriter;
+import javax.inject.Inject;
 
 public class GeneratorUtil {
     private final TypeOracle typeOracle;
