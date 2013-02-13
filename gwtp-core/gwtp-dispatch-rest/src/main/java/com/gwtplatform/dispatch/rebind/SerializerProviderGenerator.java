@@ -16,25 +16,25 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+
 import com.gwtplatform.dispatch.client.rest.SerializedType;
 import com.gwtplatform.dispatch.client.rest.SerializerProvider;
-import com.gwtplatform.dispatch.rebind.archive.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.type.RegisterSerializerEvent;
 import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
+
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class SerializerProviderGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/SerializerProvider.vm";

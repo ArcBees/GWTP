@@ -16,10 +16,6 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -29,10 +25,16 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+
 import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
 import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VelocityGenerator extends Generator {
     private static final String SUFFIX = "Impl";
