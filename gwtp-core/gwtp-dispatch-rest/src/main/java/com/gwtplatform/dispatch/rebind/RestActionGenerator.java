@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rebind;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
@@ -25,9 +26,10 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
-import com.gwtplatform.dispatch.rebind.type.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.event.ChildSerializer;
 import com.gwtplatform.dispatch.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rebind.type.MethodCall;
+import com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 
@@ -199,7 +201,30 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
     private String generateSerializer(JClassType type) throws Exception {
         SerializerGenerator generator = generatorFactory.createSerializerGenerator(type);
+        generateChildSerializersForType(type);
         return generator.generate();
+    }
+
+    private void generateChildSerializersForType(JClassType type) throws Exception {
+        JField[] fields = type.getFields();
+        for (JField field : fields) {
+            if (!field.isFinal()) {
+                JType fieldType = field.getType();
+                if (fieldType.isParameterized() != null) {
+                    JParameterizedType parameterizedType = fieldType.isParameterized();
+                    for (JClassType param : parameterizedType.getTypeArgs()) {
+                        generateChildSerializer(param);
+                    }
+                } else if (field.getType().isPrimitive() == null) {
+                    generateChildSerializer(field.getType().isClassOrInterface());
+                }
+            }
+        }
+    }
+
+    private void generateChildSerializer(JClassType classType) throws Exception {
+        String serializer = generateSerializer(classType);
+        eventBus.post(new ChildSerializer(serializer));
     }
 
     private String getQualifiedClassName() {
