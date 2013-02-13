@@ -16,16 +16,14 @@
 
 package com.gwtplatform.dispatch.shared.rest;
 
-import java.io.Serializable;
-
-public class RestParameter implements Serializable {
+public class RestParameter {
     private String name;
-    private Serializable object;
+    private Object object;
 
     RestParameter() {
     }
 
-    public RestParameter(String name, Serializable object) {
+    public RestParameter(String name, Object object) {
         this.name = name;
         this.object = object;
     }
@@ -34,7 +32,7 @@ public class RestParameter implements Serializable {
         return name;
     }
 
-    public Serializable getObject() {
+    public Object getObject() {
         return object;
     }
 }
