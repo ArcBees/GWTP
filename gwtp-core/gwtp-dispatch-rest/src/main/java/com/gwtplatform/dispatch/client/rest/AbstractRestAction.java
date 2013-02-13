@@ -21,7 +21,6 @@ import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
     private List<RestParameter> queryParams = new ArrayList<RestParameter>();
     private List<RestParameter> formParams = new ArrayList<RestParameter>();
 
-    private Serializable bodyParam;
+    private Object bodyParam;
 
     protected AbstractRestAction(HttpMethod httpMethod, String rawServicePath) {
         this.httpMethod = httpMethod;
@@ -83,7 +82,7 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
     }
 
     @Override
-    public Serializable getBodyParam() {
+    public Object getBodyParam() {
         return bodyParam;
     }
 
@@ -97,23 +96,23 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
         return bodyParam != null;
     }
 
-    protected void addPathParam(String name, Serializable value) {
+    protected void addPathParam(String name, Object value) {
         pathParams.add(new RestParameter(name, value));
     }
 
-    protected void addQueryParam(String name, Serializable value) {
+    protected void addQueryParam(String name, Object value) {
         queryParams.add(new RestParameter(name, value));
     }
 
-    protected void addFormParam(String name, Serializable value) {
+    protected void addFormParam(String name, Object value) {
         formParams.add(new RestParameter(name, value));
     }
 
-    protected void addHeaderParam(String name, Serializable value) {
+    protected void addHeaderParam(String name, Object value) {
         headerParams.add(new RestParameter(name, value));
     }
 
-    protected void setBodyParam(Serializable value) {
+    protected void setBodyParam(Object value) {
         bodyParam = value;
     }
 }

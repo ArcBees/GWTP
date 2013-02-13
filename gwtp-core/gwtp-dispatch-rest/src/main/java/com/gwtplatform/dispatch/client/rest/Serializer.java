@@ -16,14 +16,12 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.io.Serializable;
-
 import com.google.gwt.user.client.rpc.SerializationException;
 
 /**
  * TODO: doc.
  */
-public interface Serializer<T extends Serializable> {
+public interface Serializer<T> {
     T deserialize(String value) throws SerializationException;
 
     String serialize(T value) throws SerializationException;
