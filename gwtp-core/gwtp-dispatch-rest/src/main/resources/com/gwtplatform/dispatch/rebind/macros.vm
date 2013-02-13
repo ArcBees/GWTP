@@ -1,5 +1,8 @@
-#macro(commaIfNeeded $index $list)
-#set ($lastone = $list.Count - 1)
-#if( $index <= $lastone ),
-#else#end
+#macro(commaIfNeeded $list)
+#if($foreach.hasNext), #else#end
+#end
+
+#macro(printNull $element $value)
+#set($null = "null")
+#if($element)$value#else$null#end
 #end

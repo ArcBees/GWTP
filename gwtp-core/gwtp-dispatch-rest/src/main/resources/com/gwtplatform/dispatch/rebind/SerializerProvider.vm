@@ -4,7 +4,7 @@ public class SerializerProviderImpl extends AbstractSerializerProvider {
     public SerializerProviderImpl() {
 #foreach ($serializer in $serializers)
 #set($actionClass = ${serializer.actionClass})
-        registerSerializer(${actionClass}.class, SerializedType.${serializer.serializedType}, new ${serializer.serializerClass}());
+        registerSerializer(#printNull(${serializer.actionClass} "${actionClass}.class"), #printNull(${serializer.serializedType} "SerializedType.${serializer.serializedType}"), new ${serializer.serializerClass}());
 #end
     }
 }

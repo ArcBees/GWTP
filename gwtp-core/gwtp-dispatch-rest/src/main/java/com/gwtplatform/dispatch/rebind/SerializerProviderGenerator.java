@@ -22,7 +22,8 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
 import com.gwtplatform.dispatch.client.rest.SerializedType;
 import com.gwtplatform.dispatch.client.rest.SerializerProvider;
-import com.gwtplatform.dispatch.rebind.type.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.event.ChildSerializer;
+import com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent;
 import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
 
 import com.google.common.eventbus.EventBus;
@@ -40,6 +41,7 @@ public class SerializerProviderGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/SerializerProvider.vm";
 
     private final List<RegisterSerializerBinding> registeredSerializers = new ArrayList<RegisterSerializerBinding>();
+    private final List<String> childSerializers = new ArrayList<String>();
 
     @Inject
     public SerializerProviderGenerator(
@@ -55,9 +57,10 @@ public class SerializerProviderGenerator extends AbstractVelocityGenerator {
     }
 
     public void generate() throws UnableToCompleteException {
+        processChildSerializers();
+
         JClassType type = getGeneratorUtil().getType(SerializerProvider.class.getName());
         String implName = type.getName() + SUFFIX;
-
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
         if (printWriter != null) {
             try {
@@ -67,6 +70,16 @@ public class SerializerProviderGenerator extends AbstractVelocityGenerator {
             }
         } else {
             getLogger().debug("Serializer already generated. Returning.");
+        }
+    }
+
+    private void processChildSerializers() {
+        for (String serializerClass : childSerializers) {
+            if (!isAlreadyRegistered(serializerClass)) {
+                RegisterSerializerBinding binding = new RegisterSerializerBinding(null, null, serializerClass);
+                registeredSerializers.add(binding);
+                getLogger().debug("Serializer " + serializerClass + " registered.");
+            }
         }
     }
 
@@ -83,6 +96,11 @@ public class SerializerProviderGenerator extends AbstractVelocityGenerator {
         registeredSerializers.add(binding);
     }
 
+    @Subscribe
+    public void handleChildSerializerEvent(ChildSerializer event) {
+        childSerializers.add(event.getSerializerClassName());
+    }
+
     @Override
     protected String getPackage() {
         return SerializerProvider.class.getPackage().getName();
@@ -92,5 +110,15 @@ public class SerializerProviderGenerator extends AbstractVelocityGenerator {
     protected void populateVelocityContext(VelocityContext velocityContext)
             throws UnableToCompleteException {
         velocityContext.put("serializers", registeredSerializers);
+    }
+
+    private boolean isAlreadyRegistered(String serializerClassName) {
+        for (RegisterSerializerBinding binding : registeredSerializers) {
+            if (binding.getSerializerClass().equals(serializerClassName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

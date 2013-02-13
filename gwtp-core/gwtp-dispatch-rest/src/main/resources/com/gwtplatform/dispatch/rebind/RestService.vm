@@ -9,8 +9,8 @@ public class ${implName} implements ${serviceInterface.name} {
 #set($paramsDef = "")
 #set($paramsValues = "")
 #foreach ($param in ${action.getParameters()})
-#set($paramsDef = "${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded($velocityCount ${action.getParameters()})")
-#set($paramsValues = "${param.name}#commaIfNeeded($velocityCount ${action.getParameters()})")
+#set($paramsDef = "${paramsDef}${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded(${action.getParameters()})")
+#set($paramsValues = "${paramsValues}${param.name}#commaIfNeeded(${action.getParameters()})")
 #end
     @Override
     public Action<${action.resultClass}> ${action.methodName}($paramsDef) {
