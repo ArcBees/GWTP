@@ -3,16 +3,14 @@
         "http://users.tpg.com.au/ojburn/dtds/configuration_1_3.dtd">
 
 <!--
-    This configuration file was written by the eclipse-cs plugin configuration editor
--->
-<!--
     Checkstyle-Configuration: gwtp
     Description: none
 -->
 <module name="Checker">
     <property name="severity" value="warning"/>
     <module name="TreeWalker">
-        <property name="cacheFile" value="${basedir}/${cache.file}"/>
+        <property name="cacheFile" value="${basedir}/checkstyle.cache"/>
+        <module name="FileContentsHolder"/>
         <module name="FileContentsHolder"/>
         <module name="UnnecessaryParentheses"/>
         <module name="ExplicitInitialization"/>
@@ -202,12 +200,13 @@
         <property name="messageFormat" value=".*name.*"/>
         <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
     </module>
-    <module name="Header">
+    <module name="RegexpHeader">
         <property name="fileExtensions" value="java"/>
         <property name="severity" value="error"/>
-        <property name="headerFile" value="${basedir}/${header.file}"/>
+
+        <property name="headerFile" value="${basedir}/gwtp-java-header.txt"/>
     </module>
     <module name="SuppressionFilter">
-        <property name="file" value="${basedir}/${suppressions.file}"/>
+        <property name="file" value="${basedir}/gwtp-suppressions.xml"/>
     </module>
 </module>
