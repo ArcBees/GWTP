@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rebind.type;
+package com.gwtplatform.dispatch.rebind.event;
 
 import com.gwtplatform.dispatch.client.rest.SerializedType;
 
