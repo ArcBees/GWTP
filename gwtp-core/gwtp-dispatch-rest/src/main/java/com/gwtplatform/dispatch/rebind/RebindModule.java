@@ -16,20 +16,22 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+
+import com.gwtplatform.dispatch.rebind.type.SerializerDefinitions;
+
+import com.google.common.eventbus.EventBus;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
-import com.gwtplatform.dispatch.rebind.type.SerializerDefinitions;
 import org.apache.velocity.app.VelocityEngine;
 
-import javax.inject.Singleton;
 import java.io.InputStream;
 import java.util.Properties;
+import javax.inject.Singleton;
 
 public class RebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rebind/velocity.properties";
@@ -64,14 +66,14 @@ public class RebindModule extends AbstractModule {
     public VelocityEngine getVelocityEngine(@VelocityProperties String velocityProperties, Logger logger)
             throws UnableToCompleteException {
         try {
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(velocityProperties);
-        Properties properties = new Properties();
-        try {
-            properties.load(inputStream);
-            return new VelocityEngine(properties);
-        } catch (Exception e) {
-            logger.die("Cannot load velocity properties from " + velocityProperties);
-        }
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(velocityProperties);
+            Properties properties = new Properties();
+            try {
+                properties.load(inputStream);
+                return new VelocityEngine(properties);
+            } catch (Exception e) {
+                logger.die("Cannot load velocity properties from " + velocityProperties);
+            }
         } catch (Exception e) {
             logger.getTreeLogger().log(TreeLogger.Type.ERROR, e.getMessage(), e);
         }
