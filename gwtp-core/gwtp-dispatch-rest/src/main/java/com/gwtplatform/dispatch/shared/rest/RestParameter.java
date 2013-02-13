@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.shared.rest;
 
-import java.util.Collection;
-
 import com.google.common.base.Joiner;
+
+import java.util.Collection;
 
 public class RestParameter {
     private String name;

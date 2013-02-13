@@ -16,13 +16,32 @@
 
 package com.gwtplatform.dispatch.rebind;
 
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JParameter;
+import com.google.gwt.core.ext.typeinfo.JParameterizedType;
+import com.google.gwt.core.ext.typeinfo.JType;
+import com.google.gwt.core.ext.typeinfo.NotFoundException;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+
+import com.gwtplatform.dispatch.rebind.type.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.type.ActionBinding;
+import com.gwtplatform.dispatch.rebind.type.MethodCall;
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+
+import com.google.common.eventbus.EventBus;
+import com.google.inject.assistedinject.Assisted;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.DELETE;
@@ -35,25 +54,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
-import com.google.common.eventbus.EventBus;
-import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.core.ext.typeinfo.JParameter;
-import com.google.gwt.core.ext.typeinfo.JParameterizedType;
-import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rebind.archive.RegisterSerializerEvent;
-import com.gwtplatform.dispatch.rebind.type.ActionBinding;
-import com.gwtplatform.dispatch.rebind.type.MethodCall;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 
 import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
 import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
