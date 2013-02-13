@@ -134,7 +134,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
         verifyPathParamsExist();
 
-        String implName = getActionName() + SUFFIX;
+        String implName = getClassName();
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
         if (printWriter != null) {
@@ -203,11 +203,14 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
     }
 
     private String getQualifiedClassName() {
-        String className = getActionName() + returnType.isClassOrInterface().getName() + SUFFIX;
-        return getPackage() + "." + className;
+        return getPackage() + "." + getClassName();
     }
 
-    private String getActionName() {
+    private String getClassName() {
+        return getBaseName() + "_" + returnType.isClassOrInterface().getName() + SUFFIX;
+    }
+
+    private String getBaseName() {
         StringBuilder nameBuilder = new StringBuilder(actionMethod.getName());
         Character firstChar = Character.toUpperCase(nameBuilder.charAt(0));
         nameBuilder.setCharAt(0, firstChar);

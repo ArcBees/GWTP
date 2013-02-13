@@ -16,13 +16,14 @@
 
 package com.gwtplatform.dispatch.client.gin;
 
+import javax.inject.Provider;
+
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.client.rest.SerializerProvider;
-import com.gwtplatform.dispatch.client.rest.RestDispatcherController;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 
 /**
@@ -32,7 +33,7 @@ import com.gwtplatform.dispatch.shared.DispatchAsync;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        protected String applicationPath;
+        protected String applicationPath = "";
 
         public Builder applicationPath(String applicationPath) {
             this.applicationPath = applicationPath;
@@ -51,7 +52,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new Builder());
     }
 
-    private RestDispatchAsyncModule(Builder builder) {
+    public RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
         applicationPath = builder.applicationPath;
@@ -61,7 +62,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configure() {
         super.configure();
 
-        bind(RestDispatcherController.class).asEagerSingleton();
+        bindConstant().annotatedWith(RestApplicationPath.class).to(applicationPath);
     }
 
     @Provides
@@ -70,20 +71,5 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
             @RestApplicationPath String applicationPath) {
         // TODO: Add support for the client action handlers and exception handlers (and session cookies?)
         return new RestDispatchAsync(serializerProvider, applicationPath);
-    }
-
-    @Provides
-    @RestApplicationPath
-    protected String provideRestApplicationPath() {
-        if (applicationPath == null) {
-            String moduleBaseUrl = GWT.getModuleBaseURL();
-            if (moduleBaseUrl.endsWith("/")) {
-                moduleBaseUrl = moduleBaseUrl.substring(0, moduleBaseUrl.length() - 1);
-            }
-
-            applicationPath = moduleBaseUrl;
-        }
-
-        return applicationPath;
     }
 }
