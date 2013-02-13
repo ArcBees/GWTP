@@ -3,8 +3,8 @@ package com.gwtplatform.dispatch.client.rest;
 public class SerializerProviderImpl extends AbstractSerializerProvider {
     public SerializerProviderImpl() {
 #foreach ($serializer in $serializers)
-#set($actionClass = $serializer.actionClass)
-    registerSerializer($actionClass, $serializer.serializedType, new ${serializerClass}());
+#set($actionClass = ${serializer.actionClass})
+        registerSerializer(${actionClass}.class, SerializedType.${serializer.serializedType}, new ${serializer.serializerClass}());
 #end
     }
 }
