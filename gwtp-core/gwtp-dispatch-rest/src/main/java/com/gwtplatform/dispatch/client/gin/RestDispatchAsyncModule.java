@@ -50,7 +50,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new Builder());
     }
 
-    public RestDispatchAsyncModule(Builder builder) {
+    private RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
         applicationPath = builder.applicationPath;
