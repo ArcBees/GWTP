@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import com.gwtplatform.dispatch.shared.Action;
+import java.util.Arrays;
 
-import java.io.Serializable;
+import com.gwtplatform.dispatch.shared.Action;
 
 public interface SerializerProvider {
     static class SerializerKey {
@@ -29,7 +29,30 @@ public interface SerializerProvider {
             this.actionClass = actionClass;
             this.serializedType = serializedType;
         }
+
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(new Object[]{actionClass, serializedType});
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || !(o instanceof  SerializerKey)) {
+                return false;
+            }
+
+            if (this == o) {
+                return true;
+            }
+            SerializerKey other = (SerializerKey) o;
+            return isEquals(actionClass, other.actionClass) && isEquals(serializedType, other.serializedType);
+        }
+
+        public boolean isEquals(Object a, Object b) {
+            return a == b || (a != null && a.equals(b));
+        }
     }
 
-    <T> Serializer<T> getSerializer(Class<? extends Action> actionClass, SerializedType serializedType);
+    <T> Serializer<T> getSerializer(Class<? extends Action> actionClass,
+            SerializedType serializedType);
 }
