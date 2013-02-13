@@ -33,6 +33,7 @@ import com.gwtplatform.dispatch.shared.NoResult;
 
 public class SerializerGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/Serializer.vm";
+    private static final String PACKAGE = "com.gwtplatform.dispatch.shared.serializer";
     private JClassType type;
 
     @Inject
@@ -69,12 +70,25 @@ public class SerializerGenerator extends AbstractVelocityGenerator {
 
     @Override
     protected String getPackage() {
-        return type.getPackage().getName();
+        if (isPackageRestricted()) {
+            return PACKAGE;
+        } else {
+            return type.getPackage().getName();
+        }
     }
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
         velocityContext.put("resultClass", type);
+    }
+
+    private boolean isPackageRestricted() {
+        try {
+            Package.getPackage(type.getPackage().getName());
+            return true;
+        } catch (SecurityException e) {
+            return false;
+        }
     }
 
     private String generateSerializerId() throws UnableToCompleteException {
@@ -88,7 +102,7 @@ public class SerializerGenerator extends AbstractVelocityGenerator {
 
         qualifiedName = qualifiedName.replace(" ", "").replaceAll("[.,<>]", "_");
 
-        return qualifiedName;
+        return qualifiedName + "Serializer";
     }
 
     private boolean isNoResult() throws UnableToCompleteException {

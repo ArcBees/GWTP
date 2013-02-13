@@ -48,6 +48,7 @@ public class VelocityGenerator extends Generator {
     private JClassType type;
     private Injector injector;
     private GeneratorFactory generatorFactory;
+    private SerializerProviderGenerator serializerProviderGenerator;
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -62,6 +63,7 @@ public class VelocityGenerator extends Generator {
         }
 
         injector = Guice.createInjector(new RebindModule(logger, generatorContext));
+        serializerProviderGenerator = injector.getInstance(SerializerProviderGenerator.class);
         generatorFactory = injector.getInstance(GeneratorFactory.class);
 
         generateRestServices();
@@ -76,8 +78,7 @@ public class VelocityGenerator extends Generator {
     }
 
     private void generateSerializerProvider() throws UnableToCompleteException {
-        SerializerProviderGenerator generator = injector.getInstance(SerializerProviderGenerator.class);
-        generator.generate();
+        serializerProviderGenerator.generate();
     }
 
     private void generateRestGinModule() throws UnableToCompleteException {

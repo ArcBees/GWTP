@@ -16,23 +16,31 @@
 
 package com.gwtplatform.dispatch.shared.rest;
 
+import java.util.Collection;
+
+import com.google.common.base.Joiner;
+
 public class RestParameter {
     private String name;
-    private Object object;
+    private String stringValue;
 
     RestParameter() {
     }
 
     public RestParameter(String name, Object object) {
         this.name = name;
-        this.object = object;
+        if (object instanceof Collection) {
+            stringValue = Joiner.on(',').join((Collection) object);
+        } else {
+            this.stringValue = object.toString();
+        }
     }
 
     public String getName() {
         return name;
     }
 
-    public Object getObject() {
-        return object;
+    public String getStringValue() {
+        return stringValue;
     }
 }

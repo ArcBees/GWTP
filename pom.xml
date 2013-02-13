@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -87,6 +87,16 @@
             <id>christopher.viel</id>
             <name>Christopher Viel</name>
             <email>viel.christopher@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>maxime.meriouma</id>
+            <name>Maxime Meriouma-Caron</name>
+            <email>maxime.meriouma@arcbees.com</email>
             <organization>ArcBees</organization>
             <organizationUrl>http://arcbees.com</organizationUrl>
             <roles>
@@ -191,7 +201,6 @@
     <modules>
         <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
-        <module>gwtp-sample-basic</module>
     </modules>
 
     <properties>
@@ -656,7 +665,7 @@
             </build>
         </profile>
     </profiles>
-    
+
     <!-- Run by using: mvn clean install deploy -->
     <!-- https://issues.sonatype.org/browse/OSSRH-1229?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel -->
     <!-- Build a local maven repo: mvn -DaltDeploymentRepository=snapshot-repo::default::file:./distribution/snapshots clean deploy -->
@@ -666,8 +675,8 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-            <id>sona-nexus-deploy</id> 
+            <id>sona-nexus-deploy</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
-    </distributionManagement> 
+    </distributionManagement>
 </project>
