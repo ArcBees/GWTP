@@ -21,7 +21,6 @@ import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

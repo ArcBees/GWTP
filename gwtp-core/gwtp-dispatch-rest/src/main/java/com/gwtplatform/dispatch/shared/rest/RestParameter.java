@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.shared.rest;
 
-import java.io.Serializable;
-
 public class RestParameter {
     private String name;
     private Object object;
