@@ -29,13 +29,16 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.SerializationException;
+import com.gwtplatform.dispatch.client.AbstractDispatchAsync;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
@@ -47,7 +50,7 @@ import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
  * TODO: Documentation.
  * TODO: Serialization should be handled by a custom ActionHandler that wraps the user handler (SRP)
  */
-public class RestDispatchAsync implements DispatchAsync {
+public class RestDispatchAsync extends AbstractDispatchAsync {
     private static final String CONTENT_TYPE = "Content-Type";
     private static final Map<HttpMethod, Method> HTTP_METHODS = new EnumMap<HttpMethod, Method>(HttpMethod.class);
 
@@ -64,43 +67,47 @@ public class RestDispatchAsync implements DispatchAsync {
     private final SerializerProvider serializerProvider;
     private final String baseUrl;
 
-    public RestDispatchAsync(SerializerProvider serializerProvider, String applicationPath) {
+    public RestDispatchAsync(ExceptionHandler exceptionHandler,
+            SecurityCookieAccessor securityCookieAccessor,
+            ClientActionHandlerRegistry clientActionHandlerRegistry,
+            SerializerProvider serializerProvider,
+            String applicationPath) {
+        super(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry);
+
         this.serializerProvider = serializerProvider;
         baseUrl = applicationPath;
     }
 
     @Override
-    public <A extends Action<R>, R extends Result> DispatchRequest execute(A action, AsyncCallback<R> callback) {
+    protected <A extends Action<R>, R extends Result> DispatchRequest doExecute(String securityCookie, A action,
+            final AsyncCallback<R> callback) {
         if (!(action instanceof RestAction)) {
-            // TODO: Any better way?
-            throw new IllegalArgumentException("RestDispatchAsync should be used with actions implementing RestAction.");
+            throw new IllegalArgumentException("RestDispatchAsync should be used with actions implementing " +
+                    "RestAction.");
         }
 
-        return execute((RestAction) action, callback);
-    }
+        final RestAction<R> restAction = (RestAction<R>) action;
 
-    public <A extends RestAction<R>, R extends Result> DispatchRequest execute(final A action,
-            final AsyncCallback<R> callback) {
         try {
-            RequestBuilder requestBuilder = createRequestBuilder(action);
+            RequestBuilder requestBuilder = createRequestBuilder(restAction);
 
             requestBuilder.setCallback(new RequestCallback() {
                 @Override
                 public void onResponseReceived(Request request, Response response) {
-                    onExecuteResponseReceived(action, response, callback);
+                    onExecuteResponseReceived(restAction, response, callback);
                 }
 
                 @Override
                 public void onError(Request request, Throwable exception) {
-                    onExecuteFailure(callback, exception);
+                    onExecuteFailure(restAction, exception, callback);
                 }
             });
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
         } catch (RequestException e) {
-            onExecuteFailure(callback, e);
+            onExecuteFailure(restAction, e, callback);
         } catch (ActionException e) {
-            onExecuteFailure(callback, e);
+            onExecuteFailure(restAction, e, callback);
         }
 
         return new CompletedDispatchRequest();
@@ -112,31 +119,27 @@ public class RestDispatchAsync implements DispatchAsync {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    protected <A extends Action<R>, R extends Result> DispatchRequest doUndo(String securityCookie, A action,
+            R result, AsyncCallback<Void> callback) {
+        return null;
+    }
+
     private <A extends RestAction<R>, R extends Result> void onExecuteResponseReceived(A action, Response response,
             AsyncCallback<R> callback) {
-        // TODO: Add possibility for other success codes
-        if (response.getStatusCode() == Response.SC_OK) {
-            onExecuteSuccess(action, callback, response);
+        int statusCode = response.getStatusCode();
+        //TODO normalize 1223 to 204
+        if ((statusCode >= 200 && statusCode < 300) || statusCode == 304 || statusCode == 1223) {
+            try {
+                R deserializedReponse = getDeserializedReponse(action, response);
+
+                onExecuteSuccess(action, deserializedReponse, callback);
+            } catch (ActionException e) {
+                onExecuteFailure(action, e, callback);
+            }
         } else {
-            // TODO: Add message / wrap RestActionException
-            onExecuteFailure(callback, new ActionException(response.getStatusText()));
+            onExecuteFailure(action,  new ActionException(response.getStatusText()), callback);
         }
-    }
-
-    private <A extends RestAction<R>, R extends Result> void onExecuteSuccess(A action, AsyncCallback<R> callback,
-            Response response) {
-        try {
-            R deserializedReponse = getDeserializedReponse(action, response);
-
-            callback.onSuccess(deserializedReponse);
-        } catch (ActionException e) {
-            callback.onFailure(e);
-        }
-    }
-
-    private <R extends Result> void onExecuteFailure(AsyncCallback<R> callback,
-            Throwable exception) {
-        callback.onFailure(exception);
     }
 
     private <A extends RestAction<?>> RequestBuilder createRequestBuilder(A action) throws ActionException {
