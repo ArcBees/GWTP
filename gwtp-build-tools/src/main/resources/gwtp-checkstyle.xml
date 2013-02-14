@@ -204,9 +204,9 @@
         <property name="fileExtensions" value="java"/>
         <property name="severity" value="error"/>
 
-        <property name="headerFile" value="${basedir}/${header.file}"/>
+        <property name="headerFile" value="${basedir}/gwtp-java-header.txt"/>
     </module>
     <module name="SuppressionFilter">
-        <property name="file" value="${basedir}/${suppressions.file}"/>
+        <property name="file" value="${basedir}/gwtp-suppressions.xml"/>
     </module>
 </module>
