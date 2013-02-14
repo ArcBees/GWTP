@@ -66,16 +66,19 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
 
     private final SerializerProvider serializerProvider;
     private final String baseUrl;
+    private final String securityHeaderName;
 
     public RestDispatchAsync(ExceptionHandler exceptionHandler,
             SecurityCookieAccessor securityCookieAccessor,
             ClientActionHandlerRegistry clientActionHandlerRegistry,
             SerializerProvider serializerProvider,
-            String applicationPath) {
+            String applicationPath,
+            String securityHeaderName) {
         super(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry);
 
         this.serializerProvider = serializerProvider;
         baseUrl = applicationPath;
+        this.securityHeaderName = securityHeaderName;
     }
 
     @Override
@@ -89,7 +92,7 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
         final RestAction<R> restAction = (RestAction<R>) action;
 
         try {
-            RequestBuilder requestBuilder = createRequestBuilder(restAction);
+            RequestBuilder requestBuilder = createRequestBuilder(restAction, securityCookie);
 
             requestBuilder.setCallback(new RequestCallback() {
                 @Override
@@ -142,7 +145,8 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
         }
     }
 
-    private <A extends RestAction<?>> RequestBuilder createRequestBuilder(A action) throws ActionException {
+    private <A extends RestAction<?>> RequestBuilder createRequestBuilder(A action,
+            String securityToken) throws ActionException {
         Method httpMethod = HTTP_METHODS.get(action.getHttpMethod());
         String url = buildUrl(action);
 
@@ -158,6 +162,10 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
             requestBuilder.setRequestData(buildQueryString(action.getFormParams()));
         } else if (action.hasBodyParam()) {
             requestBuilder.setRequestData(getSerializedValue(action, action.getBodyParam()));
+        }
+
+        if (securityToken != null && securityToken.length() > 0) {
+            requestBuilder.setHeader(securityHeaderName, securityToken);
         }
 
         return requestBuilder;
