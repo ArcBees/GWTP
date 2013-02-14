@@ -74,6 +74,10 @@ public class VelocityGenerator extends Generator {
 
         ClassSourceFileComposerFactory composer = initComposer();
         SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+        sourceWriter.indent();
+        sourceWriter.println("@Override");
+        sourceWriter.println("public void onModuleLoad() {}");
+        sourceWriter.outdent();
         sourceWriter.commit(treeLogger);
 
         return typeName + SUFFIX;
