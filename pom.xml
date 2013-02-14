@@ -308,7 +308,6 @@
                         <failsOnError>true</failsOnError>
                         <linkXRef>false</linkXRef>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                        <skip>true</skip>
                     </configuration>
                     <dependencies>
                         <dependency>
