@@ -16,13 +16,15 @@
 
 package com.gwtplatform.dispatch.client.gin;
 
-import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.client.rest.SerializerProvider;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses HTTP REST calls.
@@ -31,7 +33,10 @@ import com.gwtplatform.dispatch.shared.DispatchAsync;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        protected String applicationPath;
+        protected String applicationPath = "";
+
+        public Builder() {
+        }
 
         public Builder applicationPath(String applicationPath) {
             this.applicationPath = applicationPath;
@@ -59,30 +64,19 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Override
     protected void configure() {
         super.configure();
-
+        bindConstant().annotatedWith(RestApplicationPath.class).to(applicationPath);
         bind(SerializerProvider.class).asEagerSingleton();
     }
 
     @Provides
     @Singleton
     protected DispatchAsync provideDispatchAsync(SerializerProvider serializerProvider,
+            ExceptionHandler exceptionHandler,
+            ClientActionHandlerRegistry clientActionHandlerRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
             @RestApplicationPath String applicationPath) {
-        // TODO: Add support for the client action handlers and exception handlers (and session cookies?)
-        return new RestDispatchAsync(serializerProvider, applicationPath);
-    }
 
-    @Provides
-    @RestApplicationPath
-    protected String provideRestApplicationPath() {
-        if (applicationPath == null) {
-            String moduleBaseUrl = GWT.getModuleBaseURL();
-            if (moduleBaseUrl.endsWith("/")) {
-                moduleBaseUrl = moduleBaseUrl.substring(0, moduleBaseUrl.length() - 1);
-            }
-
-            applicationPath = moduleBaseUrl;
-        }
-
-        return applicationPath;
+        return new RestDispatchAsync(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry,
+                serializerProvider, applicationPath);
     }
 }
