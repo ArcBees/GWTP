@@ -16,5 +16,7 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-public interface RestDispatcherController {
+import com.google.gwt.core.client.EntryPoint;
+
+public interface RestDispatcherController extends EntryPoint {
 }
