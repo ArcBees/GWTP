@@ -23,6 +23,7 @@ import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
 import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.client.rest.SerializerProvider;
+import com.gwtplatform.dispatch.client.rest.XCSRFHeaderName;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
@@ -34,12 +35,18 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         protected String applicationPath = "";
+        protected String xcsrfTokenHeaderName = "X-CSRF-Token";
 
         public Builder() {
         }
 
         public Builder applicationPath(String applicationPath) {
             this.applicationPath = applicationPath;
+            return this;
+        }
+
+        public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
+            this.xcsrfTokenHeaderName = xcsrfTokenHeaderName;
             return this;
         }
 
@@ -50,6 +57,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     }
 
     private String applicationPath;
+    private String xcsrfTokenHeaderName;
 
     public RestDispatchAsyncModule() {
         this(new Builder());
@@ -59,12 +67,14 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         super(builder);
 
         applicationPath = builder.applicationPath;
+        xcsrfTokenHeaderName = builder.xcsrfTokenHeaderName;
     }
 
     @Override
     protected void configure() {
         super.configure();
         bindConstant().annotatedWith(RestApplicationPath.class).to(applicationPath);
+        bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
         bind(SerializerProvider.class).asEagerSingleton();
     }
 
@@ -74,9 +84,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
             ExceptionHandler exceptionHandler,
             ClientActionHandlerRegistry clientActionHandlerRegistry,
             SecurityCookieAccessor securityCookieAccessor,
-            @RestApplicationPath String applicationPath) {
+            @RestApplicationPath String applicationPath,
+            @XCSRFHeaderName String headerName) {
 
         return new RestDispatchAsync(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry,
-                serializerProvider, applicationPath);
+                serializerProvider, applicationPath, headerName);
     }
 }
