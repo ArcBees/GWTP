@@ -30,7 +30,6 @@ import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 public abstract class AbstractDispatchAsync implements DispatchAsync {
-
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
@@ -56,7 +55,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
         if (clientActionHandlerProvider != null) {
             final DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
             clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
-
                 @Override
                 public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
 
@@ -92,7 +90,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
             return dispatchRequest;
 
         } else {
-
             return doExecute(securityCookie, action, callback);
         }
     }
@@ -108,7 +105,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
         if (clientActionHandlerProvider != null) {
             final DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
             clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
-
                 @Override
                 public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
 
@@ -145,7 +141,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
             return dispatchRequest;
 
         } else {
-
             return doUndo(securityCookie, action, result, callback);
         }
     }
@@ -189,7 +184,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                 && getExceptionHandler().onFailure(caught) == ExceptionHandler.Status.STOP) {
             return;
         }
-
         callback.onFailure(caught);
     }
 
