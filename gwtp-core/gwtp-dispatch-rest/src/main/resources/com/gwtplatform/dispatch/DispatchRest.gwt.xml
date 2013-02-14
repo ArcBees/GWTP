@@ -12,7 +12,7 @@
     <source path='client'/>
     <source path='shared'/>
 
-    <entry-point class='com.gwtplatform.dispatch.client.RestEntryPoint'/>
+    <entry-point class='com.gwtplatform.dispatch.client.rest.RestDispatcherController'/>
 
     <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
     <set-configuration-property name="gin.ginjector.modules"
