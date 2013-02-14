@@ -128,7 +128,7 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
     private <A extends RestAction<R>, R extends Result> void onExecuteResponseReceived(A action, Response response,
             AsyncCallback<R> callback) {
         int statusCode = response.getStatusCode();
-        //TODO normalize 1223 to 204
+        // TODO normalize 1223 to 204
         if ((statusCode >= 200 && statusCode < 300) || statusCode == 304 || statusCode == 1223) {
             try {
                 R deserializedReponse = getDeserializedReponse(action, response);
