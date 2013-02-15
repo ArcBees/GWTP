@@ -94,7 +94,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
     private static final String SET_BODY_PARAM = "setBodyParam";
 
     private final EventBus eventBus;
-    private GeneratorFactory generatorFactory;
+    private final GeneratorFactory generatorFactory;
     private final JMethod actionMethod;
     private final JType returnType;
     private final List<AnnotatedMethodParameter> pathParams = new ArrayList<AnnotatedMethodParameter>();
