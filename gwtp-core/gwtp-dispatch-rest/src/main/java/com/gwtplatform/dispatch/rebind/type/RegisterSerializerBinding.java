@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rebind;
+package com.gwtplatform.dispatch.rebind.type;
 
 import com.gwtplatform.dispatch.client.rest.SerializedType;
 
-public class RegisterSerializerEvent {
+public class RegisterSerializerBinding {
     private final String actionClass;
     private final SerializedType serializedType;
     private final String serializerClass;
 
-    public RegisterSerializerEvent(String actionClass, SerializedType serializedType, String serializerClass) {
+    public RegisterSerializerBinding(String actionClass, SerializedType serializedType, String serializerClass) {
         this.actionClass = actionClass;
         this.serializedType = serializedType;
         this.serializerClass = serializerClass;

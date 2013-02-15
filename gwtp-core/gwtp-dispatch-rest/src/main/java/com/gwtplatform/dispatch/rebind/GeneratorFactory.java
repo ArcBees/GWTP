@@ -14,8 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.rest;
+package com.gwtplatform.dispatch.rebind;
 
-public enum HttpMethod {
-    GET, POST, PUT, DELETE, HEAD
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JMethod;
+
+public interface GeneratorFactory {
+    RestServiceGenerator createServiceGenerator(JClassType service);
+
+    RestActionGenerator createActionGenerator(JMethod actionMethod);
+
+    SerializerGenerator createSerializerGenerator(JClassType type);
 }
