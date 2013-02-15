@@ -14,8 +14,9 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.rest;
+package com.gwtplatform.dispatch.client.rest;
 
-public enum HttpMethod {
-    GET, POST, PUT, DELETE, HEAD
+import com.google.gwt.core.client.EntryPoint;
+
+public interface RestDispatcherController extends EntryPoint {
 }
