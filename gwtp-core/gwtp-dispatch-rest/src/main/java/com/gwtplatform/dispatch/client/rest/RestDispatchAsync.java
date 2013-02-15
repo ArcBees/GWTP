@@ -72,7 +72,6 @@ public class RestDispatchAsync implements DispatchAsync {
     @Override
     public <A extends Action<R>, R extends Result> DispatchRequest execute(A action, AsyncCallback<R> callback) {
         if (!(action instanceof RestAction)) {
-            // TODO: Any better way?
             throw new IllegalArgumentException("RestDispatchAsync should be used with actions implementing RestAction.");
         }
 
@@ -200,7 +199,7 @@ public class RestDispatchAsync implements DispatchAsync {
     }
 
     private String encode(RestParameter value) throws ActionException {
-        return UriUtils.encode(value.getObject().toString());
+        return UriUtils.encode(value.getStringValue());
     }
 
     private String getSerializedValue(Action<?> action, Object object) throws ActionException {

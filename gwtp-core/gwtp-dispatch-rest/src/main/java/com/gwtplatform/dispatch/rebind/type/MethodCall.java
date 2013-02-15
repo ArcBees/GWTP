@@ -14,33 +14,30 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.rest;
+package com.gwtplatform.dispatch.rebind.type;
 
-import com.google.common.base.Joiner;
+import com.google.gwt.core.ext.typeinfo.JParameter;
 
-import java.util.Collection;
+public class MethodCall {
+    private final String methodName;
+    private String fieldName;
+    private final JParameter parameter;
 
-public class RestParameter {
-    private String name;
-    private String stringValue;
-
-    RestParameter() {
+    public MethodCall(String methodName, String fieldName, JParameter parameter) {
+        this.methodName = methodName;
+        this.fieldName = fieldName;
+        this.parameter = parameter;
     }
 
-    public RestParameter(String name, Object object) {
-        this.name = name;
-        if (object instanceof Collection) {
-            stringValue = Joiner.on(',').join((Collection) object);
-        } else {
-            this.stringValue = object.toString();
-        }
+    public String getMethodName() {
+        return methodName;
     }
 
-    public String getName() {
-        return name;
+    public JParameter getParameter() {
+        return parameter;
     }
 
-    public String getStringValue() {
-        return stringValue;
+    public String getFieldName() {
+        return fieldName;
     }
 }
