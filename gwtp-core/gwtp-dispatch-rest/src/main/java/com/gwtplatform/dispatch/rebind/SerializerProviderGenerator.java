@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,116 +16,109 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import com.google.common.eventbus.Subscribe;
-import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
-import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+
 import com.gwtplatform.dispatch.client.rest.SerializedType;
-import com.gwtplatform.dispatch.shared.rest.RestService;
+import com.gwtplatform.dispatch.client.rest.SerializerProvider;
+import com.gwtplatform.dispatch.rebind.event.ChildSerializer;
+import com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
+
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
-public class SerializerProviderGenerator extends AbstractGenerator {
-    private static final String SUFFIX = "Impl";
-    private static final String SERIALIZED_TYPE_NAME = SerializedType.class.getSimpleName();
-    public static final String CONSTRUCTOR = "public %s() {";
-    private static final String REGISTER_SERIALIZER = "registerSerializer(%s.class, " + SERIALIZED_TYPE_NAME + ".%s, new %s());";
-    public static final String CLOSE_BLOCK = "}";
+public class SerializerProviderGenerator extends AbstractVelocityGenerator {
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/SerializerProvider.vm";
 
-    private final List<String> registeredSerializers = new ArrayList<String>();
+    private final List<RegisterSerializerBinding> registeredSerializers = new ArrayList<RegisterSerializerBinding>();
+    private final List<String> childSerializers = new ArrayList<String>();
 
-    public SerializerProviderGenerator() {
-        getEventBus().register(this);
+    @Inject
+    public SerializerProviderGenerator(
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            EventBus eventBus) {
+        super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
+
+        eventBus.register(this);
     }
 
-    @Override
-    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
-            throws UnableToCompleteException {
-        setGeneratorContext(generatorContext);
-        setTypeOracle(generatorContext.getTypeOracle());
-        setTreeLogger(treeLogger);
-        setTypeClass(getType(typeName));
+    public void generate() throws UnableToCompleteException {
+        processChildSerializers();
 
-        PrintWriter printWriter = tryCreatePrintWriter("", SUFFIX);
-
+        JClassType type = getGeneratorUtil().getType(SerializerProvider.class.getName());
+        String implName = type.getName() + SUFFIX;
+        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
         if (printWriter != null) {
-            generateRestServices();
-
-            writeClass(printWriter);
+            try {
+                mergeTemplate(printWriter, TEMPLATE, implName);
+            } catch (Exception e) {
+                getLogger().die(e.getMessage());
+            }
+        } else {
+            getLogger().debug("Serializer already generated. Returning.");
         }
+    }
 
-        return getQualifiedClassName();
+    private void processChildSerializers() {
+        for (String serializerClass : childSerializers) {
+            if (!isAlreadyRegistered(serializerClass)) {
+                RegisterSerializerBinding binding = new RegisterSerializerBinding(null, null, serializerClass);
+                registeredSerializers.add(binding);
+                getLogger().debug("Serializer " + serializerClass + " registered.");
+            }
+        }
     }
 
     @Subscribe
     public void handleRegisterSerializer(RegisterSerializerEvent event) {
         String serializerClass = event.getSerializerClass();
-        String serializedType = event.getSerializedType().name();
+        SerializedType serializedType = event.getSerializedType();
         String actionClass = event.getActionClass();
 
-        getTreeLogger().log(Type.DEBUG, "Serializer " + serializerClass + " registered.");
+        getLogger().debug("Serializer " + serializerClass + " registered.");
 
-        String registerSerializer = String.format(REGISTER_SERIALIZER, actionClass, serializedType, serializerClass);
+        RegisterSerializerBinding binding = new RegisterSerializerBinding(actionClass, serializedType, serializerClass);
 
-        registeredSerializers.add(registerSerializer);
+        registeredSerializers.add(binding);
     }
 
-    private void generateRestServices() throws UnableToCompleteException {
-        List<JClassType> services = getServices();
-
-        for (JClassType service : services) {
-            RestServiceGenerator serviceGenerator = new RestServiceGenerator();
-            serviceGenerator.generate(getTreeLogger(), getGeneratorContext(), service.getQualifiedSourceName());
-        }
+    @Subscribe
+    public void handleChildSerializerEvent(ChildSerializer event) {
+        childSerializers.add(event.getSerializerClassName());
     }
 
-    private List<JClassType> getServices() throws UnableToCompleteException {
-        JClassType serviceInterface = getType(RestService.class.getName());
-        List<JClassType> services = new ArrayList<JClassType>();
+    @Override
+    protected String getPackage() {
+        return SerializerProvider.class.getPackage().getName();
+    }
 
-        for (JClassType clazz : getTypeOracle().getTypes()) {
-            if (clazz.isAssignableTo(serviceInterface)) {
-                services.add(clazz);
+    @Override
+    protected void populateVelocityContext(VelocityContext velocityContext)
+            throws UnableToCompleteException {
+        velocityContext.put("serializers", registeredSerializers);
+    }
+
+    private boolean isAlreadyRegistered(String serializerClassName) {
+        for (RegisterSerializerBinding binding : registeredSerializers) {
+            if (binding.getSerializerClass().equals(serializerClassName)) {
+                return true;
             }
         }
 
-        return services;
-    }
-
-    private void writeClass(PrintWriter printWriter) throws UnableToCompleteException {
-        ClassSourceFileComposerFactory composer = initComposer();
-        SourceWriter sourceWriter = composer.createSourceWriter(getGeneratorContext(), printWriter);
-
-        sourceWriter.println(CONSTRUCTOR, getClassName());
-        sourceWriter.indent();
-
-        for (String serializer : registeredSerializers) {
-            sourceWriter.println(serializer);
-        }
-
-        sourceWriter.outdent();
-        sourceWriter.println(CLOSE_BLOCK);
-
-        closeDefinition(sourceWriter);
-    }
-
-    private ClassSourceFileComposerFactory initComposer() throws UnableToCompleteException {
-        ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
-
-        JClassType abstractSerializerProvider = getType(AbstractSerializerProvider.class.getName());
-
-        composer.addImport(abstractSerializerProvider.getQualifiedSourceName());
-        composer.addImport(SerializedType.class.getName());
-
-        composer.setSuperclass(abstractSerializerProvider.getSimpleSourceName());
-
-        return composer;
+        return false;
     }
 }

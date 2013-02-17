@@ -17,8 +17,8 @@
         <module>gwtp-mvp-client</module>
         <module>gwtp-clients-common</module>
         <module>gwtp-dispatch-client</module>
-        <module>gwtp-dispatch-rest</module>
         <module>gwtp-dispatch-shared</module>
+        <module>gwtp-dispatch-rest</module>
         <module>gwtp-dispatch-server</module>
         <module>gwtp-dispatch-server-guice</module>
         <module>gwtp-dispatch-server-spring</module>
@@ -232,15 +232,20 @@
                 <version>${persistence-api.version}</version>
             </dependency>
             <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>jsr311-api</artifactId>
+                <version>${jax-rs.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
             <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>jsr311-api</artifactId>
-                <version>${jax-rs.version}</version>
-                <scope>compile</scope>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava-gwt</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <!-- Serialization dependencies -->
