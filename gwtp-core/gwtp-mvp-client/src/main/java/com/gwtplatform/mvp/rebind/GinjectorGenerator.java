@@ -23,7 +23,6 @@ import java.util.Map;
 
 import javax.inject.Provider;
 
-import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -53,8 +52,8 @@ public class GinjectorGenerator extends AbstractGenerator {
     private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
     private static final String GETTER_METHOD = "%s get%s();";
     private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
-    private static final String GIN_MODULES = "@%s({%s})";
     private static final String DEFAULT_GATEKEEPER = "@%s";
+    private static final String GIN_MODULES = "@%s(value={}, properties={\"gin.ginjector.modules\"})";
 
     private final ProviderBundleGenerator providerBundleGenerator = new ProviderBundleGenerator();
 
@@ -67,6 +66,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
             throws UnableToCompleteException {
+
         setTypeOracle(generatorContext.getTypeOracle());
         setTreeLogger(treeLogger);
         setPropertyOracle(generatorContext.getPropertyOracle());
@@ -151,31 +151,20 @@ public class GinjectorGenerator extends AbstractGenerator {
         List<String> values = findConfigurationProperty(GIN_GINJECTOR_EXTENSION).getValues();
         if (values.size() > 0) {
             for (String extension : values) {
-                final JClassType extensionType = getType(extension.trim());
-                composer.addImport(extensionType.getQualifiedSourceName());
-                composer.addImplementedInterface(extensionType.getName());
+                if (!extension.isEmpty()) {
+                    final JClassType extensionType = getType(extension.trim());
+                    composer.addImport(extensionType.getQualifiedSourceName());
+                    composer.addImplementedInterface(extensionType.getName());
+                }
             }
         }
     }
 
     private void writeGinModulesAnnotation(ClassSourceFileComposerFactory composer)
             throws UnableToCompleteException {
-        ConfigurationProperty moduleProperty = findConfigurationProperty(GIN_GINJECTOR_MODULES);
-
         composer.addImport(GinModules.class.getName());
 
-        StringBuilder modules = new StringBuilder();
-        for (String module : moduleProperty.getValues()) {
-            JClassType moduleType = getType(module.trim());
-
-            composer.addImport(moduleType.getQualifiedSourceName());
-            if (modules.length() != 0) {
-                modules.append(", ");
-            }
-            modules.append(moduleType.getName()).append(".class");
-        }
-
-        composer.addAnnotationDeclaration(String.format(GIN_MODULES, GinModules.class.getSimpleName(), modules));
+        composer.addAnnotationDeclaration(String.format(GIN_MODULES, GinModules.class.getSimpleName()));
     }
 
     private void writeMandatoryGetterImports(ClassSourceFileComposerFactory composer) {
@@ -185,7 +174,7 @@ public class GinjectorGenerator extends AbstractGenerator {
         composer.addImport(boostrapper.getQualifiedSourceName());
     }
 
-    private void writePresenterImports(ClassSourceFileComposerFactory composer, 
+    private void writePresenterImports(ClassSourceFileComposerFactory composer,
             PresenterDefinitions presenterDefinitions) {
         if (presenterDefinitions.getStandardPresenters().size() > 0) {
             composer.addImport(Provider.class.getCanonicalName());
@@ -254,7 +243,7 @@ public class GinjectorGenerator extends AbstractGenerator {
             String name = presenter.getQualifiedSourceName();
 
             sourceWriter.println();
-            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, name, 
+            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, name,
                     name.replaceAll("\\.", "")));
         }
     }
