@@ -1,0 +1,17 @@
+package ${package};
+
+import com.google.gwt.core.client.GWT;
+import com.gwtplatform.dispatch.client.rest.JsonSerializer;
+import name.pehl.piriti.json.client.JsonReader;
+import name.pehl.piriti.json.client.JsonWriter;
+import ${resultClass.qualifiedSourceName};
+
+public class ${implName} extends JsonSerializer<${resultClass.name}> {
+    interface Reader extends JsonReader<${resultClass.name}> {}
+
+    interface Writer extends JsonWriter<${resultClass.name}> {}
+
+    public ${implName}() {
+        super(GWT.<Reader>create(Reader.class), GWT.<Writer>create(Writer.class));
+    }
+}

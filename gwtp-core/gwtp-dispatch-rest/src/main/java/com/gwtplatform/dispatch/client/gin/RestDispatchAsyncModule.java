@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.client.gin;
 
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
@@ -27,6 +25,9 @@ import com.gwtplatform.dispatch.client.rest.XCSRFHeaderName;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
+
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses HTTP REST calls.
  * <p/>
@@ -35,6 +36,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         protected String applicationPath = "";
+
         protected String xcsrfTokenHeaderName = "X-CSRF-Token";
 
         public Builder() {
@@ -73,6 +75,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Override
     protected void configure() {
         super.configure();
+
         bindConstant().annotatedWith(RestApplicationPath.class).to(applicationPath);
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
         bind(SerializerProvider.class).asEagerSingleton();
