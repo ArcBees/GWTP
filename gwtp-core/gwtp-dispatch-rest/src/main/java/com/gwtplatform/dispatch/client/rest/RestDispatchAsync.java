@@ -211,7 +211,7 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
     }
 
     private String encode(RestParameter value) throws ActionException {
-        return UriUtils.encode(value.getObject().toString());
+        return UriUtils.encode(value.getStringValue());
     }
 
     private String getSerializedValue(Action<?> action, Object object) throws ActionException {

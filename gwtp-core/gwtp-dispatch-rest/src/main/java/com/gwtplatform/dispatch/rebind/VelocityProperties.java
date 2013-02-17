@@ -14,8 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared.rest;
+package com.gwtplatform.dispatch.rebind;
 
-public enum HttpMethod {
-    GET, POST, PUT, DELETE, HEAD
+import com.google.inject.BindingAnnotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface VelocityProperties {
 }
