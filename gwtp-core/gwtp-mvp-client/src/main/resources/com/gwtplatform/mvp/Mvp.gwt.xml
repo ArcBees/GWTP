@@ -56,4 +56,9 @@
 
     <define-configuration-property name="gin.ginjector.module.tablet" is-multi-valued="false"/>
     <set-configuration-property name="gin.ginjector.module.tablet" value=""/>
+
+    <!-- Default form factor Desktop -->
+    <replace-with class="com.gwtplatform.mvp.client.DesktopGinjectorProvider">
+        <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
+    </replace-with>
 </module>
