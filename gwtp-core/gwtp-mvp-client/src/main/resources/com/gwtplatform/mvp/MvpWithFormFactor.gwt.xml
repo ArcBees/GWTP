@@ -30,8 +30,4 @@
 
     <define-configuration-property name="gin.ginjector.module.tablet" is-multi-valued="false"/>
     <set-configuration-property name="gin.ginjector.module.tablet" value=""/>
-
-    <!-- optional comma separated list of extension interface to the ginjector -->
-    <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
-    <set-configuration-property name="gin.ginjector.extensions" value=""/>
 </module>
