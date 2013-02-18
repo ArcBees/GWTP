@@ -29,14 +29,14 @@ import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
 
-public class FormFactorGinjectorProviderGenerator extends AbstractVelocityGenerator {
+public class GinjectorProviderGenerator extends AbstractVelocityGenerator {
     private static final String SUFFIX = "Provider";
 
     private final String velocityTemplate;
     private final String implName;
 
     @Inject
-    FormFactorGinjectorProviderGenerator(
+    GinjectorProviderGenerator(
             Provider<VelocityContext> velocityContextProvider,
             VelocityEngine velocityEngine,
             GeneratorUtil generatorUtil,

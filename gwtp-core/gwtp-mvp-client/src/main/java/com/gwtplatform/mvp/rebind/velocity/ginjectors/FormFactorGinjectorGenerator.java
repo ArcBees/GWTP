@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.rebind.velocity.ginjectors;
 
+import java.io.PrintWriter;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -25,13 +27,16 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
 
-public class FormFactorGinjectorGenerator extends FormFactorGinjectorProviderGenerator {
+public class FormFactorGinjectorGenerator extends AbstractVelocityGenerator {
     private static final String GIN_MODULE = "ginmodule";
     private static final String GIN_MODULE_CLASS = "%s.class";
 
+    private final String velocityTemplate;
     private final String propertyName;
+    private final String implName;
 
     @Inject
     FormFactorGinjectorGenerator(
@@ -41,14 +46,26 @@ public class FormFactorGinjectorGenerator extends FormFactorGinjectorProviderGen
             @Assisted("velocityTemplate") String velocityTemplate,
             @Assisted("propertyName") String propertyName,
             @Assisted("implName") String implName) {
-        super(velocityContextProvider, velocityEngine, generatorUtil, velocityTemplate, implName);
+        super(velocityContextProvider, velocityEngine, generatorUtil);
 
+        this.velocityTemplate = velocityTemplate;
         this.propertyName = propertyName;
+        this.implName = implName;
+    }
+
+    public String generate() throws Exception {
+        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE, implName);
+
+        if (printWriter != null) {
+            mergeTemplate(printWriter, velocityTemplate);
+        }
+
+        return PACKAGE + "." + implName;
     }
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
-        super.populateVelocityContext(velocityContext);
+        velocityContext.put(IMPL_NAME, implName);
 
         ConfigurationProperty configurationProperty =
                 getGeneratorUtil().findConfigurationProperty(propertyName);
