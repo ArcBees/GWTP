@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,9 +15,6 @@
  */
 
 package com.gwtplatform.dispatch.shared;
-
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
 
 /**
  * Base abstract implementation of
