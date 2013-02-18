@@ -26,11 +26,17 @@ import com.gwtplatform.dispatch.shared.Result;
  * @param <R> The {@link com.gwtplatform.dispatch.shared.Result} type returned.
  */
 public abstract class DefaultUnsecureActionImpl<R extends Result> implements Action<R> {
+    /**
+     * Is object equal?
+     */
     @Override
     public boolean equals(Object obj) {
         return this.getClass().equals(obj.getClass());
     }
 
+    /**
+     * Default path dispatch/className.
+     */
     @Override
     public String getServiceName() {
         String className = this.getClass().getName();
@@ -40,11 +46,17 @@ public abstract class DefaultUnsecureActionImpl<R extends Result> implements Act
         return className;
     }
 
+    /**
+     * Class hash.
+     */
     @Override
     public int hashCode() {
         return this.getClass().hashCode();
     }
 
+    /**
+     * Secure is off by default. 
+     */
     @Override
     public boolean isSecured() {
         return false;
