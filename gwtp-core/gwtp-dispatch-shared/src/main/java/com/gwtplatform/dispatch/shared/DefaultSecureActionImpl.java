@@ -35,7 +35,7 @@ public abstract class DefaultSecureActionImpl<R extends Result> implements Actio
     }
 
     /**
-     * Default path dispatch/className
+     * Default path dispatch/className.
      */
     @Override
     public String getServiceName() {
@@ -47,7 +47,7 @@ public abstract class DefaultSecureActionImpl<R extends Result> implements Actio
     }
 
     /**
-     * Class hash
+     * Class hash.
      */
     @Override
     public int hashCode() {
