@@ -35,7 +35,6 @@ import com.google.gwt.user.rebind.SourceWriter;
  */
 public abstract class AbstractGenerator extends Generator {
     static final String DEFAULT_PACKAGE = "com.gwtplatform.mvp.client";
-    static final String GIN_GINJECTOR_MODULES = "gin.ginjector.modules";
     static final String GIN_GINJECTOR_EXTENSION = "gin.ginjector.extensions";
 
     private TreeLogger treeLogger;
