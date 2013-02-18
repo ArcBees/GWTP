@@ -29,6 +29,7 @@ import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
 
 public class FormFactorGinjectorGenerator extends FormFactorGinjectorProviderGenerator {
     private static final String GIN_MODULE = "ginmodule";
+    private static final String GIN_MODULE_CLASS = "%s.class";
 
     private final String propertyName;
 
@@ -51,6 +52,9 @@ public class FormFactorGinjectorGenerator extends FormFactorGinjectorProviderGen
                 getGeneratorUtil().findConfigurationProperty(propertyName);
 
         String moduleClass = configurationProperty.getValues().get(0);
+        if (!moduleClass.isEmpty()) {
+            moduleClass = String.format(GIN_MODULE_CLASS, moduleClass);
+        }
 
         velocityContext.put(GIN_MODULE, moduleClass);
     }
