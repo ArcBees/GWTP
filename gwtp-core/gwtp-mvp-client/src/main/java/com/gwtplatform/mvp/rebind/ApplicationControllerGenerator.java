@@ -40,13 +40,13 @@ import com.gwtplatform.mvp.client.annotations.PreBootstrap;
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
     private static final String HINT_URL = "https://github.com/ArcBees/GWTP/wiki/Bootstrapping";
-    protected static final String TOO_MANY_BOOTSTRAPPER_FOUND =
+    private static final String TOO_MANY_BOOTSTRAPPER_FOUND =
             "Too many %s have been found. Only one %s annotated with @%s must be defined. See " + HINT_URL;
-    protected static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
+    private static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
             "The %s provided doesn't implement the %s interface. See " + HINT_URL;
 
     private static final String DEFAULT_BOOTSTRAPPER = "com.gwtplatform.mvp.client.DefaultBootstrapper";
-    protected static final String SUFFIX = "Impl";
+    private static final String SUFFIX = "Impl";
     private static final String OVERRIDE = "@Override";
     private static final String INJECT_METHOD = "public void init() {";
     private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
