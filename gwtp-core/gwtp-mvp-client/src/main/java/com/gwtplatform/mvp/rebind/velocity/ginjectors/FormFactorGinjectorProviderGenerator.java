@@ -30,6 +30,9 @@ import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
 
 public class FormFactorGinjectorProviderGenerator extends AbstractVelocityGenerator {
+    private final String IMPL_NAME = "implName";
+    private final String SUFFIX = "Provider";
+
     private final String velocityTemplate;
     private final String implName;
 
@@ -53,10 +56,11 @@ public class FormFactorGinjectorProviderGenerator extends AbstractVelocityGenera
             mergeTemplate(printWriter, velocityTemplate);
         }
 
-        return PACKAGE + "." + implName;
+        return PACKAGE + "." + implName + SUFFIX;
     }
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
+        velocityContext.put(IMPL_NAME, implName);
     }
 }
