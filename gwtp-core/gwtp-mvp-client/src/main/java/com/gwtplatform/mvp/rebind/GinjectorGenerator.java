@@ -29,10 +29,11 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.inject.client.AsyncProvider;
-import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -41,6 +42,9 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderB
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors;
+import com.gwtplatform.mvp.rebind.velocity.Logger;
+import com.gwtplatform.mvp.rebind.velocity.RebindModule;
 
 /**
  * Will generate a Ginjector from Ginjector.
@@ -49,11 +53,11 @@ public class GinjectorGenerator extends AbstractGenerator {
     static final String DEFAULT_NAME = "ClientGinjector";
     static final String DEFAULT_FQ_NAME = DEFAULT_PACKAGE + "." + DEFAULT_NAME;
 
-    private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
+    private static final String SINGLETON_DECLARATION
+            = "static ClientGinjector SINGLETON = ((GinjectorProvider) GWT.create(GinjectorProvider.class)).get();";
     private static final String GETTER_METHOD = "%s get%s();";
     private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
     private static final String DEFAULT_GATEKEEPER = "@%s";
-    private static final String GIN_MODULES = "@%s(value={}, properties={\"gin.ginjector.modules\"})";
 
     private final ProviderBundleGenerator providerBundleGenerator = new ProviderBundleGenerator();
 
@@ -81,7 +85,6 @@ public class GinjectorGenerator extends AbstractGenerator {
         findAllPresenters(presenterDefinitions);
 
         ClassSourceFileComposerFactory composer = initComposer();
-        writeGinModulesAnnotation(composer);
         writeMandatoryGetterImports(composer);
         writePresenterImports(composer, presenterDefinitions);
 
@@ -89,6 +92,9 @@ public class GinjectorGenerator extends AbstractGenerator {
         writeMandatoryGetter(sourceWriter);
         writePresentersGetter(sourceWriter, presenterDefinitions);
         writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
+
+        Injector injector = Guice.createInjector(new RebindModule(new Logger(treeLogger), generatorContext));
+        writeFormFactors(injector);
 
         closeDefinition(sourceWriter);
 
@@ -160,13 +166,6 @@ public class GinjectorGenerator extends AbstractGenerator {
         }
     }
 
-    private void writeGinModulesAnnotation(ClassSourceFileComposerFactory composer)
-            throws UnableToCompleteException {
-        composer.addImport(GinModules.class.getName());
-
-        composer.addAnnotationDeclaration(String.format(GIN_MODULES, GinModules.class.getSimpleName()));
-    }
-
     private void writeMandatoryGetterImports(ClassSourceFileComposerFactory composer) {
         composer.addImport(GWT.class.getCanonicalName());
         composer.addImport(EventBus.class.getCanonicalName());
@@ -187,8 +186,7 @@ public class GinjectorGenerator extends AbstractGenerator {
     }
 
     private void writeMandatoryGetter(SourceWriter sourceWriter) {
-        sourceWriter.println(String.format(SINGLETON_DECLARATION, getClassName(), GWT.class.getSimpleName(),
-                getClassName()));
+        sourceWriter.println(SINGLETON_DECLARATION);
         sourceWriter.println();
 
         String eventBusName = EventBus.class.getSimpleName();
@@ -245,6 +243,17 @@ public class GinjectorGenerator extends AbstractGenerator {
             sourceWriter.println();
             sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, name,
                     name.replaceAll("\\.", "")));
+        }
+    }
+
+    private void writeFormFactors(Injector injector) throws UnableToCompleteException {
+        GenerateFormFactorGinjectors generateFormFactorGinjectors
+                = injector.getInstance(GenerateFormFactorGinjectors.class);
+
+        try {
+            generateFormFactorGinjectors.generate();
+        } catch (Exception e) {
+            throw new UnableToCompleteException();
         }
     }
 }
