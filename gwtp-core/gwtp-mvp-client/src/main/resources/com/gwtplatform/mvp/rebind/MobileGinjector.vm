@@ -1,0 +1,7 @@
+package com.gwtplatform.mvp.client;
+
+import com.google.gwt.inject.client.GinModules;
+
+@GinModules(value={${ginmodule}.class}, properties={"gin.ginjector.modules"})
+public interface MobileGinjector extends ClientGinjector {
+}
