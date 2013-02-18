@@ -48,6 +48,8 @@ public class FormFactorGinjectorGenerator extends FormFactorGinjectorProviderGen
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
+        super.populateVelocityContext(velocityContext);
+
         ConfigurationProperty configurationProperty =
                 getGeneratorUtil().findConfigurationProperty(propertyName);
 
