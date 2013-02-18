@@ -212,11 +212,13 @@
         <javax.inject.version>1</javax.inject.version>
         <jukito.version>1.1</jukito.version>
         <junit.version>4.11</junit.version>
+        <guava.version>14.0-rc1</guava.version>
         <mockito.version>1.9.5</mockito.version>
         <objectify.version>4.0b1</objectify.version>
         <persistence-api.version>1.0</persistence-api.version>
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>3.1.2.RELEASE</spring.version>
+        <velocity.version>1.7</velocity.version>
 
         <!-- GitHub Sites -->
         <github.version>0.7</github.version>
