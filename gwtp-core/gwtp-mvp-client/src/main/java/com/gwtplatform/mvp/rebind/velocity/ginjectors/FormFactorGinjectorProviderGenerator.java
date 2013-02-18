@@ -30,8 +30,8 @@ import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
 
 public class FormFactorGinjectorProviderGenerator extends AbstractVelocityGenerator {
-    private final String IMPL_NAME = "implName";
-    private final String SUFFIX = "Provider";
+    private static final String IMPL_NAME = "implName";
+    private static final String SUFFIX = "Provider";
 
     private final String velocityTemplate;
     private final String implName;
