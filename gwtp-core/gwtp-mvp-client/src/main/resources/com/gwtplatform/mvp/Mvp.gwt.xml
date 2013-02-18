@@ -46,4 +46,14 @@
     <!-- optional comma separated list of extension interface to the ginjector -->
     <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
     <set-configuration-property name="gin.ginjector.extensions" value=""/>
+
+    <!-- Form factor specific modules -->
+    <define-configuration-property name="gin.ginjector.module.desktop" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector.module.desktop" value=""/>
+
+    <define-configuration-property name="gin.ginjector.module.mobile" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector.module.mobile" value=""/>
+
+    <define-configuration-property name="gin.ginjector.module.tablet" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector.module.tablet" value=""/>
 </module>
