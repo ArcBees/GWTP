@@ -26,6 +26,7 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.gwt.core.ext.UnableToCompleteException;
 
 public abstract class AbstractVelocityGenerator {
+    protected static final String IMPL_NAME = "implName";
     protected static final String PACKAGE = "com.gwtplatform.mvp.client";
 
     private final Provider<VelocityContext> velocityContextProvider;

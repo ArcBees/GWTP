@@ -27,4 +27,8 @@ public interface FormFactorGinjectorFactory {
     FormFactorGinjectorProviderGenerator createGinjectorProvider(
             @Assisted("velocityTemplate") String velocityTemplate,
             @Assisted("implName") String implName);
+
+    GinjectorProviderGenerator createDefaultGinjectorProvider(
+            @Assisted("velocityTemplate") String velocityTemplate,
+            @Assisted("implName") String implName);
 }

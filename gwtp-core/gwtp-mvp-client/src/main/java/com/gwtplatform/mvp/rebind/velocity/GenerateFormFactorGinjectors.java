@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.rebind.velocity;
 import javax.inject.Inject;
 
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory;
+import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator;
 
 public class GenerateFormFactorGinjectors {
@@ -64,7 +65,7 @@ public class GenerateFormFactorGinjectors {
     }
 
     private void generateDesktopFormFactorGenerators() throws Exception {
-        FormFactorGinjectorProviderGenerator desktopGinjector
+        FormFactorGinjectorGenerator desktopGinjector
                 = formFactorGinjectorFactory.createGinjector(
                 FORMFACTOR_GINJECTOR_TEMPLATE,
                 DESKTOP_PROPERTY_NAME,
@@ -79,7 +80,7 @@ public class GenerateFormFactorGinjectors {
     }
 
     private void generateMobileFormFactorGenerators() throws Exception {
-        FormFactorGinjectorProviderGenerator mobileGinjector
+        FormFactorGinjectorGenerator mobileGinjector
                 = formFactorGinjectorFactory.createGinjector(
                 FORMFACTOR_GINJECTOR_TEMPLATE,
                 MOBILE_PROPERTY_NAME,
@@ -94,7 +95,7 @@ public class GenerateFormFactorGinjectors {
     }
 
     private void generateTabletFormFactorGenerators() throws Exception {
-        FormFactorGinjectorProviderGenerator tabletGinjector
+        FormFactorGinjectorGenerator tabletGinjector
                 = formFactorGinjectorFactory.createGinjector(
                 FORMFACTOR_GINJECTOR_TEMPLATE,
                 TABLET_PROPERTY_NAME,
