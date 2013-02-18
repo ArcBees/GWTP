@@ -38,11 +38,6 @@
 
     <!-- Form Factor Ginjectors -->
     
-    <!-- Desktop -->
-    <replace-with class="com.gwtplatform.mvp.client.DesktopGinjectorProvider">
-        <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
-    </replace-with>
-
     <!-- Tablet -->
     <replace-with class="com.gwtplatform.mvp.client.TabletGinjectorProvider">
         <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
