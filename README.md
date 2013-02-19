@@ -1,6 +1,9 @@
 ![GWTP] (http://i.imgur.com/LHvTZ.png "GWTP goo-teepee") *goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
 
+##Donation
+[![Donate](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SDCQSKDTWZYCQ)
+
 ##Reference
 * [GWTP Custom Google Search](http://www.google.com/cse/home?cx=011138278718949652927:5yuja8xc600) - Search all of the GWTP documentation, wiki and thread collections.
 * [GWTP Documentation](https://github.com/arcbees/gwtp/wiki) - Find out how to use GWT-Platform here.

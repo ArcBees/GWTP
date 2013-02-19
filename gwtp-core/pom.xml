@@ -185,6 +185,11 @@
                 <version>${gwt.version}</version>
                 <scope>runtime</scope>
             </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
 
             <!-- DI dependencies -->
             <dependency>
@@ -260,6 +265,13 @@
                 <artifactId>piriti-dev</artifactId>
                 <version>${piriti.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- Rebind dependencies -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
 
             <!-- Test dependencies -->
