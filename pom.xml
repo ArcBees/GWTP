@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -77,6 +77,26 @@
             <id>brandon.donnelson</id>
             <name>Brandon Donnelson</name>
             <email>branflake2267@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>christopher.viel</id>
+            <name>Christopher Viel</name>
+            <email>viel.christopher@gmail.com</email>
+            <organization>ArcBees</organization>
+            <organizationUrl>http://arcbees.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>maxime.meriouma</id>
+            <name>Maxime Meriouma-Caron</name>
+            <email>maxime.meriouma@arcbees.com</email>
             <organization>ArcBees</organization>
             <organizationUrl>http://arcbees.com</organizationUrl>
             <roles>
@@ -206,10 +226,13 @@
         <cglib.version>2.2</cglib.version>
         <gae.version>1.7.4</gae.version>
         <gin.version>2.0.0</gin.version>
+        <guava.version>13.0.1</guava.version>
         <guice.version>3.0</guice.version>
         <gwt.version>2.5.0</gwt.version>
         <htmlunit.version>2.9</htmlunit.version>
         <javax.inject.version>1</javax.inject.version>
+        <jax-rs.version>1.1.1</jax-rs.version>
+        <piriti.version>0.8</piriti.version>
         <jukito.version>1.1</jukito.version>
         <junit.version>4.11</junit.version>
         <guava.version>14.0-rc1</guava.version>

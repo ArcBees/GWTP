@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.rebind;
 
-import java.io.Serializable;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JMethod;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+public interface GeneratorFactory {
+    RestServiceGenerator createServiceGenerator(JClassType service);
 
-/**
- * A marker interface for {@link Action} results.
- *
- * @author David Peterson
- */
-public interface Result extends IsSerializable, Serializable {
+    RestActionGenerator createActionGenerator(JMethod actionMethod);
+
+    SerializerGenerator createSerializerGenerator(JClassType type);
 }

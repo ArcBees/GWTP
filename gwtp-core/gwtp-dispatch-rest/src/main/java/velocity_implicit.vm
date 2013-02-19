@@ -1,0 +1,2 @@
+#* @implicitly included *#
+#* @vtlvariable name="serviceDefinitions" type="com.gwtplatform.dispatch.rebind.type.ServiceDefinitions" *#
