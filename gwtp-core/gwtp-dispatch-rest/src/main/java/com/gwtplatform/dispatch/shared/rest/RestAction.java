@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,30 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.shared.rest;
 
-import java.io.Serializable;
+import java.util.List;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * A marker interface for {@link Action} results.
- *
- * @author David Peterson
+ * TODO: Documentation.
  */
-public interface Result extends IsSerializable, Serializable {
+public interface RestAction<R extends Result> extends Action<R> {
+    HttpMethod getHttpMethod();
+
+    List<RestParameter> getPathParams();
+
+    List<RestParameter> getQueryParams();
+
+    List<RestParameter> getFormParams();
+
+    List<RestParameter> getHeaderParams();
+
+    Object getBodyParam();
+
+    Boolean hasFormParams();
+
+    Boolean hasBodyParam();
 }
