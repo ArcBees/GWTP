@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.client.gin;
 
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.client.DefaultDispatchAsync;
+import com.gwtplatform.dispatch.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -47,6 +47,6 @@ public class DispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Singleton
     protected  DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
             SecurityCookieAccessor secureSessionAccessor, ClientActionHandlerRegistry registry) {
-        return new DefaultDispatchAsync(exceptionHandler, secureSessionAccessor, registry);
+        return new RpcDispatchAsync(exceptionHandler, secureSessionAccessor, registry);
     }
 }
