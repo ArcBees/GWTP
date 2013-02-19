@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator;
+import com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator;
 
 public class GenerateFormFactorGinjectors {
     private static final String FORMFACTOR_GINJECTOR_TEMPLATE = "com/gwtplatform/mvp/rebind/FormFactorGinjector.vm";
@@ -57,8 +58,8 @@ public class GenerateFormFactorGinjectors {
     }
 
     private void generateGinjectorProvider() throws Exception {
-        FormFactorGinjectorProviderGenerator ginjectorProvider
-                = formFactorGinjectorFactory.createGinjectorProvider(
+        GinjectorProviderGenerator ginjectorProvider
+                = formFactorGinjectorFactory.createDefaultGinjectorProvider(
                 GINJECTOR_PROVIDER_TEMPLATE,
                 GINJECTOR_PROVIDER_IMPL_NAME);
         ginjectorProvider.generate();
