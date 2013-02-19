@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,23 +17,17 @@
 package com.gwtplatform.dispatch.shared;
 
 /**
- * Base abstract implementation of
- * {@link com.gwtplatform.dispatch.shared.Action}.
+ * Default Action using the base path as dispatch/className.
+ * The base abstract implementation is {@link com.gwtplatform.dispatch.shared.Action}.
  * 
  * @param <R> The {@link com.gwtplatform.dispatch.shared.Result} type returned.
  */
-public abstract class DefaultUnsecureActionImpl<R extends Result> implements Action<R> {
-    /**
-     * Is object equal?
-     */
+public abstract class DefaultActionImpl<R extends Result> implements Action<R> {
     @Override
     public boolean equals(Object obj) {
         return this.getClass().equals(obj.getClass());
     }
 
-    /**
-     * Default path dispatch/className.
-     */
     @Override
     public String getServiceName() {
         String className = this.getClass().getName();
@@ -43,17 +37,11 @@ public abstract class DefaultUnsecureActionImpl<R extends Result> implements Act
         return className;
     }
 
-    /**
-     * Class hash.
-     */
     @Override
     public int hashCode() {
         return this.getClass().hashCode();
     }
 
-    /**
-     * Secure is off by default. 
-     */
     @Override
     public boolean isSecured() {
         return false;
