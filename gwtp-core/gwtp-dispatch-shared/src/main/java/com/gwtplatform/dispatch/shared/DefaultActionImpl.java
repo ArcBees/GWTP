@@ -20,6 +20,8 @@ package com.gwtplatform.dispatch.shared;
  * Default Action using the base path as dispatch/className.
  * The base abstract implementation is {@link com.gwtplatform.dispatch.shared.Action}.
  * 
+ * {@link https://github.com/ArcBees/GWTP/wiki/RPC-Dispatch}
+ * 
  * @param <R> The {@link com.gwtplatform.dispatch.shared.Result} type returned.
  */
 public abstract class DefaultActionImpl<R extends Result> implements Action<R> {
