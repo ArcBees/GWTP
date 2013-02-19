@@ -30,8 +30,6 @@ import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
 
 public class GinjectorProviderGenerator extends AbstractVelocityGenerator {
-    private static final String SUFFIX = "Provider";
-
     private final String velocityTemplate;
     private final String implName;
 
@@ -49,13 +47,13 @@ public class GinjectorProviderGenerator extends AbstractVelocityGenerator {
     }
 
     public String generate() throws Exception {
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE, implName + SUFFIX);
+        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE, implName);
 
         if (printWriter != null) {
             mergeTemplate(printWriter, velocityTemplate);
         }
 
-        return PACKAGE + "." + implName + SUFFIX;
+        return PACKAGE + "." + implName;
     }
 
     @Override
