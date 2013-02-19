@@ -14,16 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.client.rest;
 
-import java.io.Serializable;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.user.client.rpc.SerializationException;
 
 /**
- * A marker interface for {@link Action} results.
- *
- * @author David Peterson
+ * TODO: doc.
  */
-public interface Result extends IsSerializable, Serializable {
+public interface Serializer<T> {
+    T deserialize(String value) throws SerializationException;
+
+    String serialize(T value) throws SerializationException;
 }

@@ -14,27 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.client.rest;
 
-import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.google.gwt.user.client.rpc.SerializationException;
+import com.gwtplatform.dispatch.shared.NoResult;
 
-/**
- * An implementation of {@link DispatchRequest} that is always completed. It
- * should be used with {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s
- * that do not perform any asynchronous processing.
- *
- * @author Brendan Doherty
- */
-public class CompletedDispatchRequest implements DispatchRequest {
-    public CompletedDispatchRequest() {
+public class NoResultSerializer implements Serializer<NoResult> {
+    @Override
+    public NoResult deserialize(String value) throws SerializationException {
+        return new NoResult();
     }
 
     @Override
-    public void cancel() {
-    }
-
-    @Override
-    public boolean isPending() {
-        return false;
+    public String serialize(NoResult value) throws SerializationException {
+        return "";
     }
 }

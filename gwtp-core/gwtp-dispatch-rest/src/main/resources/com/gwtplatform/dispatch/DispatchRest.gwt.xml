@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module>
+    <inherits name="com.google.common.base.Base"/>
+    <inherits name="com.gwtplatform.dispatch.Dispatch"/>
+    <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
+
+    <inherits name="com.google.gwt.http.HTTP"/>
+    <inherits name="name.pehl.piriti.json.JSON"/>
+
+    <!-- Specify the paths for translatable code                    -->
+    <source path='client'/>
+    <source path='shared'/>
+
+    <entry-point class='com.gwtplatform.dispatch.client.rest.RestDispatcherController'/>
+
+    <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
+    <set-configuration-property name="gin.ginjector.modules"
+                                value="com.gwtplatform.dispatch.client.rest.RestGinModule"/>
+
+    <generate-with class="com.gwtplatform.dispatch.rebind.VelocityGenerator">
+        <when-type-is class="com.gwtplatform.dispatch.client.rest.RestDispatcherController"/>
+    </generate-with>
+</module>
