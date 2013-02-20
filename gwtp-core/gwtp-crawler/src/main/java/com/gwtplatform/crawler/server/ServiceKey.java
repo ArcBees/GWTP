@@ -16,26 +16,27 @@
 
 package com.gwtplatform.crawler.server;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Use this annotation to bind the key that should be used when invoking
  * {@link CrawlServiceServlet}. For example:
  * <pre>bindConstant().annotatedWith(ServiceKey.class).to("123456");
  * </pre>
+ *
  * @author Philippe Beaudoin
  */
 
 @BindingAnnotation
-@Target({ FIELD, PARAMETER, METHOD })
+@Target({FIELD, PARAMETER, METHOD})
 @Retention(RUNTIME)
 public @interface ServiceKey {
 }

@@ -31,10 +31,10 @@ import com.gwtplatform.dispatch.server.spring.SpringBeanProvider;
  */
 public class ActionHandlerValidatorLinker {
 
-  public static void linkValidators(ApplicationContext applicationContent, ActionHandlerValidatorRegistry registry) {
-    ActionHandlerValidatorLinkerHelper.linkValidators(new SpringBeanProvider(applicationContent), registry);
-  }
+    public static void linkValidators(ApplicationContext applicationContent, ActionHandlerValidatorRegistry registry) {
+        ActionHandlerValidatorLinkerHelper.linkValidators(new SpringBeanProvider(applicationContent), registry);
+    }
 
-  private ActionHandlerValidatorLinker() {
-  }
+    private ActionHandlerValidatorLinker() {
+    }
 }

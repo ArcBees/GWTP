@@ -27,23 +27,25 @@ import com.gwtplatform.dispatch.shared.Result;
  * @param <R> Type of {@link Result}
  * @author David Paterson
  */
-public class ActionHandlerValidatorMapImpl<A extends Action<R>, R extends Result> implements ActionHandlerValidatorMap<A, R> {
+public class ActionHandlerValidatorMapImpl<A extends Action<R>, R extends Result> implements
+        ActionHandlerValidatorMap<A, R> {
 
-  private final Class<A> actionClass;
-  private final ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass;
+    private final Class<A> actionClass;
+    private final ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass;
 
-  public ActionHandlerValidatorMapImpl(final Class<A> actionClass, final ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
-    this.actionClass = actionClass;
-    this.actionHandlerValidatorClass = actionHandlerValidatorClass;
-  }
+    public ActionHandlerValidatorMapImpl(final Class<A> actionClass, final ActionHandlerValidatorClass<A,
+            R> actionHandlerValidatorClass) {
+        this.actionClass = actionClass;
+        this.actionHandlerValidatorClass = actionHandlerValidatorClass;
+    }
 
-  @Override
-  public Class<A> getActionClass() {
-    return actionClass;
-  }
+    @Override
+    public Class<A> getActionClass() {
+        return actionClass;
+    }
 
-  @Override
-  public ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass() {
-    return actionHandlerValidatorClass;
-  }
+    @Override
+    public ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass() {
+        return actionHandlerValidatorClass;
+    }
 }

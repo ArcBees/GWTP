@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.annotation;
 
 import java.lang.annotation.ElementType;
-
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,17 +28,15 @@ import com.google.web.bindery.requestfactory.shared.BaseProxy;
  * Annotation on domain (server-side) object fields specifying an EntityProxy
  * or ValueProxy class for the generation process.
  *
- * @see {@link GenProxy}
- *
  * @author Florian Sauter
- *
+ * @see {@link GenProxy}
  */
-@Target({ ElementType.FIELD })
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface UseProxy {
-  /**
-   * The proxy that the domain type field is mapped to.
-   */
-  Class<? extends BaseProxy> value();
+    /**
+     * The proxy that the domain type field is mapped to.
+     */
+    Class<? extends BaseProxy> value();
 }

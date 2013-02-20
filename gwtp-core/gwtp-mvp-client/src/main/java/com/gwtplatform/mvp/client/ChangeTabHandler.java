@@ -23,12 +23,12 @@ import com.google.gwt.event.shared.EventHandler;
  */
 public interface ChangeTabHandler extends EventHandler {
 
-  /**
-   * Called whenever a tab contained in a {@link TabContainerPresenter} wants to change its
-   * information.
-   *
-   * @param event The event.
-   */
-  void onChangeTab(ChangeTabEvent event);
+    /**
+     * Called whenever a tab contained in a {@link TabContainerPresenter} wants to change its
+     * information.
+     *
+     * @param event The event.
+     */
+    void onChangeTab(ChangeTabEvent event);
 
 }

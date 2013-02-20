@@ -18,7 +18,6 @@ package com.gwtplatform.tester;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
-
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
@@ -31,17 +30,16 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * {@link MockHandlerModule}.
  *
  * @author Brendan Doherty
- *
  */
 public class TestDispatchModule extends AbstractModule {
-  @Override
-  protected void configure() {
+    @Override
+    protected void configure() {
 
-    bind(DispatchService.class).to(TestDispatchService.class).in(
-        Singleton.class);
-    bind(DispatchAsync.class).to(TestDispatchAsync.class);
+        bind(DispatchService.class).to(TestDispatchService.class).in(
+                Singleton.class);
+        bind(DispatchAsync.class).to(TestDispatchAsync.class);
 
-    bind(ExceptionHandler.class).to(DefaultExceptionHandler.class);
-    bind(SecurityCookieAccessor.class).to(DefaultSecurityCookieAccessor.class);
-  }
+        bind(ExceptionHandler.class).to(DefaultExceptionHandler.class);
+        bind(SecurityCookieAccessor.class).to(DefaultSecurityCookieAccessor.class);
+    }
 }

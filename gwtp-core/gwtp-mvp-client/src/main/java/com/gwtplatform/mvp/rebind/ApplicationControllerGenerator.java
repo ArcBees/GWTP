@@ -16,17 +16,22 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.ConfigurationProperty;
+import java.io.PrintWriter;
+import java.lang.annotation.Annotation;
+
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.mvp.client.ApplicationController;
+import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
-
-import java.io.PrintWriter;
+import com.gwtplatform.mvp.client.PreBootstrapper;
+import com.gwtplatform.mvp.client.annotations.Bootstrap;
+import com.gwtplatform.mvp.client.annotations.PreBootstrap;
 
 /**
  * Will generate a {@link com.gwtplatform.mvp.client.ApplicationController}. If the user wants his Generator to be
@@ -34,76 +39,141 @@ import java.io.PrintWriter;
  * revealCurrentPlace() from the place manager.
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
-  private static final String SUFFIX = "Impl";
-  private static final String OVERRIDE = "@Override";
-  private static final String INJECT_METHOD = "public void init() {";
-  private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
-  private static final String PLACEMANAGER_REVEALCURRENTPLACE = "%s.SINGLETON.get%s().revealCurrentPlace();";
+    private static final String HINT_URL = "https://github.com/ArcBees/GWTP/wiki/Bootstrapping";
+    private static final String TOO_MANY_BOOTSTRAPPER_FOUND =
+            "Too many %s have been found. Only one %s annotated with @%s must be defined. See " + HINT_URL;
+    private static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
+            "The %s provided doesn't implement the %s interface. See " + HINT_URL;
 
-  private final GinjectorGenerator ginjectorGenerator = new GinjectorGenerator();
+    private static final String DEFAULT_BOOTSTRAPPER = "com.gwtplatform.mvp.client.DefaultBootstrapper";
+    private static final String SUFFIX = "Impl";
+    private static final String OVERRIDE = "@Override";
+    private static final String INJECT_METHOD = "public void init() {";
+    private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
+    private static final String ONBOOTSTRAP = "%s.SINGLETON.get%s().onBootstrap();";
+    private static final String ONPREBOOTSTRAP = "new %s().onPreBootstrap();";
+    private static final String SCHEDULE_DEFERRED_1 = "Scheduler.get().scheduleDeferred(new ScheduledCommand() {";
+    private static final String SCHEDULE_DEFERRED_2 = "public void execute() {";
 
-  private String generatorName = "";
+    @Override
+    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
+            throws UnableToCompleteException {
+        setTypeOracle(generatorContext.getTypeOracle());
+        setPropertyOracle(generatorContext.getPropertyOracle());
+        setTreeLogger(treeLogger);
+        setTypeClass(getType(typeName));
 
-  @Override
-  public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
-      throws UnableToCompleteException {
-    setTypeOracle(generatorContext.getTypeOracle());
-    setPropertyOracle(generatorContext.getPropertyOracle());
-    setTreeLogger(treeLogger);
-    setTypeClass(getType(typeName));
+        PrintWriter printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
 
-    PrintWriter printWriter;
-    printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
+        if (printWriter == null) {
+            return typeName + SUFFIX;
+        }
 
-    if (printWriter == null) {
-      return typeName + SUFFIX;
+        JClassType preBootstrapper = getPreBootstrapper();
+
+        ClassSourceFileComposerFactory composer = initComposer(preBootstrapper);
+        SourceWriter sw = composer.createSourceWriter(generatorContext, printWriter);
+
+        JClassType bootstrapper = getBootstrapper();
+
+        String ginjectorName = new GinjectorGenerator(bootstrapper).generate(getTreeLogger(),
+                generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME);
+
+        writeInit(sw, ginjectorName, preBootstrapper, bootstrapper);
+
+        closeDefinition(sw);
+
+        return getPackageName() + "." + getClassName();
     }
 
-    generateGenerator(generatorContext);
+    private ClassSourceFileComposerFactory initComposer(JClassType preBootstrapper) {
+        ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
+        composer.addImport(getTypeClass().getQualifiedSourceName());
 
-    ClassSourceFileComposerFactory composer = initComposer();
-    SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+        if (preBootstrapper != null) {
+            composer.addImport(preBootstrapper.getQualifiedSourceName());
+            composer.addImport(Scheduler.class.getCanonicalName());
+            composer.addImport(ScheduledCommand.class.getCanonicalName());
+        }
 
-    writeInit(sourceWriter);
+        composer.addImplementedInterface(getTypeClass().getName());
 
-    closeDefinition(generatorContext, printWriter, sourceWriter);
+        composer.addImport(DelayedBindRegistry.class.getCanonicalName());
 
-    return getPackageName() + "." + getClassName();
-  }
+        return composer;
+    }
 
-  private void generateGenerator(GeneratorContext generatorContext) throws UnableToCompleteException {
-    ConfigurationProperty moduleProperty = findConfigurationProperty(GIN_MODULE_NAME);
-    String moduleName = moduleProperty.getValues().get(0);
+    private JClassType getBootstrapper() throws UnableToCompleteException {
+        return findSingleAnnotatedType(getType(DEFAULT_BOOTSTRAPPER), Bootstrapper.class, Bootstrap.class);
+    }
 
-    // Only to make sure that the class exist since getType will throw an error if the type isn't found.
-    getType(moduleName);
+    private JClassType getPreBootstrapper() throws UnableToCompleteException {
+        return findSingleAnnotatedType(null, PreBootstrapper.class, PreBootstrap.class);
+    }
 
-    String ginjectorName = getPackageNameFromTypeName(moduleName) + "." + ApplicationController.GINJECTOR_NAME;
+    private JClassType findSingleAnnotatedType(JClassType defaultType, Class<?> clazz,
+                                               Class<? extends Annotation> annotation) throws UnableToCompleteException {
+        int count = 0;
+        JClassType type = defaultType;
+        for (JClassType t : getTypeOracle().getTypes()) {
+            if (t.isAnnotationPresent(annotation)) {
+                count++;
 
-    generatorName = ginjectorGenerator.generate(getTreeLogger(), generatorContext, ginjectorName);
-  }
+                verifyInterfaceIsImplemented(t, clazz);
+                verifySingleImplementer(count, clazz, annotation);
+                type = t;
+            }
+        }
+        return type;
+    }
 
-  private void writeInit(SourceWriter sourceWriter) {
-    sourceWriter.println(OVERRIDE);
-    sourceWriter.println(INJECT_METHOD);
-    sourceWriter.indent();
+    private void verifySingleImplementer(int count, Class<?> clazz, Class<? extends Annotation> annotation)
+            throws UnableToCompleteException {
+        if (count > 1) {
+            getTreeLogger().log(TreeLogger.ERROR, String.format(TOO_MANY_BOOTSTRAPPER_FOUND, clazz.getSimpleName(),
+                    clazz.getSimpleName(), annotation.getSimpleName()));
+            throw new UnableToCompleteException();
+        }
+    }
 
-    sourceWriter.println(String.format(DELAYED_BIND, DelayedBindRegistry.class.getSimpleName(), generatorName));
-    sourceWriter.println();
+    private void verifyInterfaceIsImplemented(JClassType type, Class<?> clazz) throws UnableToCompleteException {
+        JClassType interfaceType = getType(clazz.getName());
 
-    sourceWriter.println(String.format(PLACEMANAGER_REVEALCURRENTPLACE, generatorName,
-        PlaceManager.class.getSimpleName()));
-    sourceWriter.outdent();
-    sourceWriter.println("}");
-  }
+        if (!type.isAssignableTo(interfaceType)) {
+            getTreeLogger().log(TreeLogger.ERROR, String.format(DOES_NOT_EXTEND_BOOTSTRAPPER,
+                    clazz.getSimpleName(), clazz.getSimpleName()));
+            throw new UnableToCompleteException();
+        }
+    }
 
-  private ClassSourceFileComposerFactory initComposer() {
-    ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
-    composer.addImport(getTypeClass().getQualifiedSourceName());
-    composer.addImplementedInterface(getTypeClass().getName());
+    private void writeInit(SourceWriter sw, String generatorName, JClassType preBootstrapper, JClassType bootstrapper) {
+        sw.println(OVERRIDE);
+        sw.println(INJECT_METHOD);
+        sw.indent();
 
-    composer.addImport(DelayedBindRegistry.class.getCanonicalName());
+        if (preBootstrapper != null) {
+            sw.println(ONPREBOOTSTRAP, preBootstrapper.getSimpleSourceName());
+            sw.println();
+            sw.println(SCHEDULE_DEFERRED_1);
+            sw.indent();
+            sw.println(OVERRIDE);
+            sw.println(SCHEDULE_DEFERRED_2);
+            sw.indent();
+        }
 
-    return composer;
-  }
+        sw.println(String.format(DELAYED_BIND, DelayedBindRegistry.class.getSimpleName(), generatorName));
+        sw.println();
+
+        sw.println(String.format(ONBOOTSTRAP, generatorName, bootstrapper.getSimpleSourceName()));
+
+        sw.outdent();
+        sw.println("}");
+
+        if (preBootstrapper != null) {
+            sw.outdent();
+            sw.println("});");
+            sw.outdent();
+            sw.println("}");
+        }
+    }
 }

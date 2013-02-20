@@ -28,13 +28,13 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * Note that this presenter is only meant to be used when the content are themselves
  * {@link Presenter}, if they are {@link PresenterWidget} then no special mechanism is
  * required and you can rely on a standard widget.
- * <p />
+ * <p/>
  * Classes extending {@link TabContainerPresenter} must declare one constant of type
  * {@link com.google.gwt.event.shared.GwtEvent.Type Type&lt;RequestTabsHandler&gt;}
  * and annotate it with {@link com.gwtplatform.mvp.client.annotations.RequestTabs RequestTabs}.
  * For example:
  * <pre>
- *{@literal @}RequestTabs
+ * {@literal @}RequestTabs
  * public static final Type&lt;RequestTabsHandler&gt; TYPE_RequestTabs =
  *   new Type&lt;RequestTabsHandler&gt;();
  * </pre>
@@ -43,205 +43,207 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * {@link com.gwtplatform.mvp.client.proxy.TabContentProxy TabContentProxy}
  * or a {@link com.gwtplatform.mvp.client.proxy.TabContentProxyPlace TabContentProxyPlace}.
  *
- * @param <V> The specific type of the {@link View}. Must implement {@link TabPanel}.
+ * @param <V>      The specific type of the {@link View}. Must implement {@link TabPanel}.
  * @param <Proxy_> The specific type of the {@link Proxy}.
- *
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
 public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends Proxy<?>>
-    extends Presenter<V, Proxy_> {
-  private final Type<RequestTabsHandler> requestTabsEventType;
-  private final Object tabContentSlot;
+        extends Presenter<V, Proxy_> {
+    private final Type<RequestTabsHandler> requestTabsEventType;
+    private final Object tabContentSlot;
 
-  /**
-   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
-   * only work when instantiating this object using Guice/GIN dependency injection.
-   * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
-   * automatic binding.
-   *
-   * @param eventBus The {@link EventBus}.
-   * @param view The {@link View}.
-   * @param proxy The {@link Proxy}.
-   * @param tabContentSlot An opaque object identifying the slot in which the
-   *          main content should be displayed.
-   * @param requestTabsEventType The {@link Type} of the object to fire to
-   *          identify all the displayed tabs.
-   * @param revealType The {@link RevealType}.
-   */
-  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-                               Type<ChangeTabHandler> changeTabType, RevealType revealType) {
-    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, revealType, null);
-  }
+    /**
+     * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
+     * only work when instantiating this object using Guice/GIN dependency injection.
+     * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+     * automatic binding.
+     *
+     * @param eventBus             The {@link EventBus}.
+     * @param view                 The {@link View}.
+     * @param proxy                The {@link Proxy}.
+     * @param tabContentSlot       An opaque object identifying the slot in which the
+     *                             main content should be displayed.
+     * @param requestTabsEventType The {@link Type} of the object to fire to
+     *                             identify all the displayed tabs.
+     * @param revealType           The {@link RevealType}.
+     */
+    public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Type<ChangeTabHandler> changeTabType, RevealType revealType) {
+        this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, revealType, null);
+    }
 
-  /**
-   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
-   * only work when instantiating this object using Guice/GIN dependency injection.
-   * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
-   * automatic binding.
-   *
-   * @param eventBus The {@link EventBus}.
-   * @param view The {@link View}.
-   * @param proxy The {@link Proxy}.
-   * @param tabContentSlot An opaque object identifying the slot in which the
-   *          main content should be displayed.
-   * @param requestTabsEventType The {@link Type} of the object to fire to
-   *          identify all the displayed tabs.
-   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
-   *          and {@see RevealContentHandler}.
-   */
-  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-                               Type<ChangeTabHandler> changeTabType, GwtEvent.Type<RevealContentHandler<?>> slot) {
-    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, null, slot);
-  }
+    /**
+     * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
+     * only work when instantiating this object using Guice/GIN dependency injection.
+     * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+     * automatic binding.
+     *
+     * @param eventBus             The {@link EventBus}.
+     * @param view                 The {@link View}.
+     * @param proxy                The {@link Proxy}.
+     * @param tabContentSlot       An opaque object identifying the slot in which the
+     *                             main content should be displayed.
+     * @param requestTabsEventType The {@link Type} of the object to fire to
+     *                             identify all the displayed tabs.
+     * @param slot                 The slot where to reveal this presenter see {@see com.google.gwt.event.shared
+     * .GwtEvent.Type}
+     *                             and {@see RevealContentHandler}.
+     */
+    public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Type<ChangeTabHandler> changeTabType, GwtEvent.Type<RevealContentHandler<?>> slot) {
+        this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, null, slot);
+    }
 
-  /**
-   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
-   * only work when instantiating this object using Guice/GIN dependency injection.
-   * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
-   * automatic binding.
-   *
-   * @param eventBus The {@link EventBus}.
-   * @param view The {@link View}.
-   * @param proxy The {@link Proxy}.
-   * @param tabContentSlot An opaque object identifying the slot in which the
-   *          main content should be displayed.
-   * @param requestTabsEventType The {@link Type} of the object to fire to
-   *          identify all the displayed tabs.
-   * @param revealType The {@link RevealType}.
-   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
-   *          and {@see RevealContentHandler}.
-   */
-  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-      Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-      Type<ChangeTabHandler> changeTabType, RevealType revealType, Type<RevealContentHandler<?>> slot) {
-    super(eventBus, view, proxy, revealType, slot);
-    this.tabContentSlot = tabContentSlot;
-    this.requestTabsEventType = requestTabsEventType;
-    if (changeTabType != null) {
-      eventBus.addHandler(changeTabType, new ChangeTabHandler() {
-        @Override
-        public void onChangeTab(ChangeTabEvent event) {
-          TabContentProxy<?> tabProxy = event.getTabContentProxy();
-          getView().changeTab(tabProxy.getTab(), tabProxy.getTabData(),
-              tabProxy.getTargetHistoryToken());
+    /**
+     * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
+     * only work when instantiating this object using Guice/GIN dependency injection.
+     * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+     * automatic binding.
+     *
+     * @param eventBus             The {@link EventBus}.
+     * @param view                 The {@link View}.
+     * @param proxy                The {@link Proxy}.
+     * @param tabContentSlot       An opaque object identifying the slot in which the
+     *                             main content should be displayed.
+     * @param requestTabsEventType The {@link Type} of the object to fire to
+     *                             identify all the displayed tabs.
+     * @param revealType           The {@link RevealType}.
+     * @param slot                 The slot where to reveal this presenter see {@see com.google.gwt.event.shared
+     * .GwtEvent.Type}
+     *                             and {@see RevealContentHandler}.
+     */
+    public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Type<ChangeTabHandler> changeTabType, RevealType revealType, Type<RevealContentHandler<?>> slot) {
+        super(eventBus, view, proxy, revealType, slot);
+        this.tabContentSlot = tabContentSlot;
+        this.requestTabsEventType = requestTabsEventType;
+        if (changeTabType != null) {
+            eventBus.addHandler(changeTabType, new ChangeTabHandler() {
+                @Override
+                public void onChangeTab(ChangeTabEvent event) {
+                    TabContentProxy<?> tabProxy = event.getTabContentProxy();
+                    getView().changeTab(tabProxy.getTab(), tabProxy.getTabData(),
+                            tabProxy.getTargetHistoryToken());
+                }
+            });
         }
-      });
     }
-  }
 
-  /**
-   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
-   * instantiating this object using Guice/GIN dependency injection. See
-   * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
-   * This version of the constructor does not allow dynamically modifying the tabs after they were
-   * created.
-   *
-   * @param eventBus The {@link EventBus}.
-   * @param view The {@link View}.
-   * @param proxy The {@link Proxy}.
-   * @param tabContentSlot An opaque object identifying the slot in which the
-   *          main content should be displayed.
-   * @param requestTabsEventType The {@link Type} of the object to fire to
-   *          identify all the displayed tabs.
-   */
-  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
-    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, null);
-  }
-
-  /**
-   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
-   * instantiating this object using Guice/GIN dependency injection. See
-   * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
-   * This version of the constructor does not allow dynamically modifying the tabs after they were
-   * created.
-   *
-   * @param eventBus The {@link EventBus}.
-   * @param view The {@link View}.
-   * @param proxy The {@link Proxy}.
-   * @param tabContentSlot An opaque object identifying the slot in which the
-   *          main content should be displayed.
-   * @param requestTabsEventType The {@link Type} of the object to fire to
-   *          identify all the displayed tabs.
-   * @param revealType The {@link RevealType}.
-   */
-  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-                               RevealType revealType) {
-    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, revealType, null);
-  }
-
-  /**
-   * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
-   * instantiating this object using Guice/GIN dependency injection. See
-   * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
-   * This version of the constructor does not allow dynamically modifying the tabs after they were
-   * created.
-   *
-   * @param eventBus The {@link EventBus}.
-   * @param view The {@link View}.
-   * @param proxy The {@link Proxy}.
-   * @param tabContentSlot An opaque object identifying the slot in which the
-   *          main content should be displayed.
-   * @param requestTabsEventType The {@link Type} of the object to fire to
-   *          identify all the displayed tabs.
-   * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
-   *          and {@see RevealContentHandler}.
-   */
-  public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-                               Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-                               GwtEvent.Type<RevealContentHandler<?>> slot) {
-    this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, slot);
-  }
-
-  /**
-   * Adds a new tab to this presenter. This is meant to be called by a
-   * {@link TabContentProxy} in response to a {@link RequestTabsEvent}.
-   *
-   * @param tabProxy The {@link TabContentProxy} containing information on the tab to add.
-   * @return The newly added {@link Tab}.
-   */
-  public Tab addTab(final TabContentProxy<?> tabProxy) {
-    return getView().addTab(tabProxy.getTabData(), tabProxy.getTargetHistoryToken());
-  }
-
-  @Override
-  public void setInSlot(Object slot, PresenterWidget<?> content) {
-    super.setInSlot(slot, content);
-
-    // TODO: Consider switching this to an event bus based mechanism where the
-    // child presenter fires an event when it is revealed and the parent highlights the tab.
-
-    // If we're setting a presenter attached to an actual slot, then highlight the tab
-    if (slot == tabContentSlot) {
-      try {
-        Presenter<?,?> presenter = (Presenter<?,?>) content;
-        TabContentProxy<?> proxy = (TabContentProxy<?>) presenter.getProxy();
-        getView().setActiveTab(proxy.getTab());
-      } catch (Exception e) {
-        // We can't cast, no worry, we just won't highlight a tab
-      }
+    /**
+     * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
+     * instantiating this object using Guice/GIN dependency injection. See
+     * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
+     * This version of the constructor does not allow dynamically modifying the tabs after they were
+     * created.
+     *
+     * @param eventBus             The {@link EventBus}.
+     * @param view                 The {@link View}.
+     * @param proxy                The {@link Proxy}.
+     * @param tabContentSlot       An opaque object identifying the slot in which the
+     *                             main content should be displayed.
+     * @param requestTabsEventType The {@link Type} of the object to fire to
+     *                             identify all the displayed tabs.
+     */
+    public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
+        this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, null);
     }
-  }
 
-  @Override
-  protected void onBind() {
-    super.onBind();
+    /**
+     * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
+     * instantiating this object using Guice/GIN dependency injection. See
+     * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
+     * This version of the constructor does not allow dynamically modifying the tabs after they were
+     * created.
+     *
+     * @param eventBus             The {@link EventBus}.
+     * @param view                 The {@link View}.
+     * @param proxy                The {@link Proxy}.
+     * @param tabContentSlot       An opaque object identifying the slot in which the
+     *                             main content should be displayed.
+     * @param requestTabsEventType The {@link Type} of the object to fire to
+     *                             identify all the displayed tabs.
+     * @param revealType           The {@link RevealType}.
+     */
+    public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            RevealType revealType) {
+        this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, revealType, null);
+    }
 
-    // The following call will trigger a series of call to addTab, so
-    // we should make sure we clear all the tabs when unbinding.
-    RequestTabsEvent.fire(this, requestTabsEventType, this);
-  }
+    /**
+     * Creates a {@link TabContainerPresenter} that uses automatic binding. This will only work when
+     * instantiating this object using Guice/GIN dependency injection. See
+     * {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on automatic binding.
+     * This version of the constructor does not allow dynamically modifying the tabs after they were
+     * created.
+     *
+     * @param eventBus             The {@link EventBus}.
+     * @param view                 The {@link View}.
+     * @param proxy                The {@link Proxy}.
+     * @param tabContentSlot       An opaque object identifying the slot in which the
+     *                             main content should be displayed.
+     * @param requestTabsEventType The {@link Type} of the object to fire to
+     *                             identify all the displayed tabs.
+     * @param slot                 The slot where to reveal this presenter see {@see com.google.gwt.event.shared
+     * .GwtEvent.Type}
+     *                             and {@see RevealContentHandler}.
+     */
+    public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
+            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            GwtEvent.Type<RevealContentHandler<?>> slot) {
+        this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, slot);
+    }
 
-  @Override
-  protected void onUnbind() {
-    super.onUnbind();
+    /**
+     * Adds a new tab to this presenter. This is meant to be called by a
+     * {@link TabContentProxy} in response to a {@link RequestTabsEvent}.
+     *
+     * @param tabProxy The {@link TabContentProxy} containing information on the tab to add.
+     * @return The newly added {@link Tab}.
+     */
+    public Tab addTab(final TabContentProxy<?> tabProxy) {
+        return getView().addTab(tabProxy.getTabData(), tabProxy.getTargetHistoryToken());
+    }
 
-    // The tabs are added indirectly in onBind() via the RequestTabsEvent, so we
-    // clear them now.
-    getView().removeTabs();
-  }
+    @Override
+    public void setInSlot(Object slot, PresenterWidget<?> content) {
+        super.setInSlot(slot, content);
+
+        // TODO: Consider switching this to an event bus based mechanism where the
+        // child presenter fires an event when it is revealed and the parent highlights the tab.
+
+        // If we're setting a presenter attached to an actual slot, then highlight the tab
+        if (slot == tabContentSlot) {
+            try {
+                Presenter<?, ?> presenter = (Presenter<?, ?>) content;
+                TabContentProxy<?> proxy = (TabContentProxy<?>) presenter.getProxy();
+                getView().setActiveTab(proxy.getTab());
+            } catch (Exception e) {
+                // We can't cast, no worry, we just won't highlight a tab
+            }
+        }
+    }
+
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+        // The following call will trigger a series of call to addTab, so
+        // we should make sure we clear all the tabs when unbinding.
+        RequestTabsEvent.fire(this, requestTabsEventType, this);
+    }
+
+    @Override
+    protected void onUnbind() {
+        super.onUnbind();
+
+        // The tabs are added indirectly in onBind() via the RequestTabsEvent, so we
+        // clear them now.
+        getView().removeTabs();
+    }
 }

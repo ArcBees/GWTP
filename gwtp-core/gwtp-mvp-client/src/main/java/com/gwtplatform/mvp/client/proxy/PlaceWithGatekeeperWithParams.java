@@ -24,18 +24,18 @@ package com.gwtplatform.mvp.client.proxy;
  */
 public class PlaceWithGatekeeperWithParams extends PlaceImpl {
 
-  private final GatekeeperWithParams gatekeeper;
-  private final String[] params;
+    private final GatekeeperWithParams gatekeeper;
+    private final String[] params;
 
-  public PlaceWithGatekeeperWithParams(String nameToken, GatekeeperWithParams gatekeeper,
-      String[] params) {
-    super(nameToken);
-    this.gatekeeper = gatekeeper;
-    this.params = params;
-  }
+    public PlaceWithGatekeeperWithParams(String nameToken, GatekeeperWithParams gatekeeper,
+            String[] params) {
+        super(nameToken);
+        this.gatekeeper = gatekeeper;
+        this.params = params;
+    }
 
-  @Override
-  public boolean canReveal() {
-    return gatekeeper.withParams(params).canReveal();
-  }
+    @Override
+    public boolean canReveal() {
+        return gatekeeper.withParams(params).canReveal();
+    }
 }

@@ -29,16 +29,16 @@ import com.gwtplatform.dispatch.server.RequestProvider;
 @Singleton
 public class DefaultRequestProvider implements RequestProvider {
 
-  private Provider<HttpServletRequest> requestProvider;
+    private Provider<HttpServletRequest> requestProvider;
 
-  @Inject
-  public DefaultRequestProvider(Provider<HttpServletRequest> requestProvider) {
-    this.requestProvider = requestProvider;
-  }
+    @Inject
+    public DefaultRequestProvider(Provider<HttpServletRequest> requestProvider) {
+        this.requestProvider = requestProvider;
+    }
 
-  @Override
-  public HttpServletRequest getServletRequest() {
-    return requestProvider.get();
-  }
+    @Override
+    public HttpServletRequest getServletRequest() {
+        return requestProvider.get();
+    }
 
 }

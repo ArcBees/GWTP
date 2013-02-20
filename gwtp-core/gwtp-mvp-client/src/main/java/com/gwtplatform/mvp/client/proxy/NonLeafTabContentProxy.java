@@ -27,28 +27,26 @@ import com.gwtplatform.mvp.client.TabData;
  * If the presenter is associated to a name token use {@link TabContentProxyPlace} instead.
  * Example of use:
  * <pre>
- *{@literal @}ProxyCodeSplit
- *{@literal @}TabInfo(container = MainPagePresenter.class, priority = 0,
+ * {@literal @}ProxyCodeSplit
+ * {@literal @}TabInfo(container = MainPagePresenter.class, priority = 0,
  *          label = "Home", nameToken = "homepage")
  * public interface MyProxy extends NonLeafTabContentProxy&lt;ThisPresenter&gt; { }
  * </pre>
  * In this case, the {@code nameToken} parameter indicates the presenter to reveal
  * when this tab is selected.
  *
- * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
- *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
- *
  * @author Philippe Beaudoin
+ * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  */
 public interface NonLeafTabContentProxy<P extends Presenter<?, ?>> extends TabContentProxy<P> {
 
-  /**
-   * Changes the data and target history token associated with this tab. This will automatically
-   * cause the displayed tab to change, provided the
-   * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter} containing this
-   * tab defines a {@link com.gwtplatform.mvp.client.annotations.ChangeTab ChangeTab} field and
-   * passes it to the parent constructor.
-   */
-  void changeTab(TabData tabData, String targetHistoryToken);
+    /**
+     * Changes the data and target history token associated with this tab. This will automatically
+     * cause the displayed tab to change, provided the
+     * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter} containing this
+     * tab defines a {@link com.gwtplatform.mvp.client.annotations.ChangeTab ChangeTab} field and
+     * passes it to the parent constructor.
+     */
+    void changeTab(TabData tabData, String targetHistoryToken);
 }

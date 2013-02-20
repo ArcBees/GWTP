@@ -26,22 +26,22 @@ import com.gwtplatform.dispatch.shared.action.TestResult;
  */
 public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
 
-  public static final String MESSAGE = "This is test message!";
+    public static final String MESSAGE = "This is test message!";
 
-  public TestActionHandler() {
-    super(TestAction.class);
-  }
-
-  @Override
-  public TestResult execute(TestAction action, ExecutionContext context) throws ActionException {
-    if (action.getTestMessage().equals(MESSAGE)) {
-      return new TestResult(true);
+    public TestActionHandler() {
+        super(TestAction.class);
     }
-    return new TestResult(false);
-  }
 
-  @Override
-  public void undo(TestAction action, TestResult result, ExecutionContext context) throws ActionException {
-    // No undo support
-  }
+    @Override
+    public TestResult execute(TestAction action, ExecutionContext context) throws ActionException {
+        if (action.getTestMessage().equals(MESSAGE)) {
+            return new TestResult(true);
+        }
+        return new TestResult(false);
+    }
+
+    @Override
+    public void undo(TestAction action, TestResult result, ExecutionContext context) throws ActionException {
+        // No undo support
+    }
 }

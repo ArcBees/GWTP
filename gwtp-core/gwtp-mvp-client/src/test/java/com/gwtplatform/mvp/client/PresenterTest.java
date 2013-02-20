@@ -16,20 +16,19 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.web.bindery.event.shared.EventBus;
-
-import com.gwtplatform.mvp.client.proxy.Proxy;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import javax.inject.Inject;
 
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.proxy.Proxy;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for {@link Presenter}.
@@ -39,48 +38,49 @@ import javax.inject.Inject;
 @RunWith(JukitoRunner.class)
 public class PresenterTest {
 
-  @TestSingleton
-  static class TestPresenter
-      extends Presenter<View, Proxy<TestPresenter>> {
-    public int revealInParentCalled;
+    @TestSingleton
+    static class TestPresenter
+            extends Presenter<View, Proxy<TestPresenter>> {
+        public int revealInParentCalled;
 
+        @Inject
+        TestPresenter(EventBus eventBus, View view, Proxy<TestPresenter> proxy) {
+            super(eventBus, view, proxy);
+        }
+
+        @Override
+        public void revealInParent() {
+            super.onReveal();
+            revealInParentCalled++;
+        }
+    }
+
+    // SUT
     @Inject
-    TestPresenter(EventBus eventBus, View view, Proxy<TestPresenter> proxy) {
-      super(eventBus, view, proxy);
+    TestPresenter presenter;
+
+    @Test
+    public void forceRevealWhenPresenterIsNotVisible() {
+        // Given
+        assertFalse(presenter.isVisible());
+
+        // When
+        presenter.forceReveal();
+
+        // Then
+        assertEquals(1, presenter.revealInParentCalled);
     }
 
-    @Override
-    public void revealInParent() {
-      super.onReveal();
-      revealInParentCalled++;
+    @Test
+    public void forceRevealWhenPresenterIsVisible() {
+        // Given
+        presenter.internalReveal();
+        assertTrue(presenter.isVisible());
+
+        // When
+        presenter.forceReveal();
+
+        // Then
+        assertEquals(0, presenter.revealInParentCalled);
     }
-  }
-
-  // SUT
-  @Inject TestPresenter presenter;
-
-  @Test
-  public void forceRevealWhenPresenterIsNotVisible() {
-    // Given
-    assertFalse(presenter.isVisible());
-
-    // When
-    presenter.forceReveal();
-
-    // Then
-    assertEquals(1, presenter.revealInParentCalled);
-  }
-
-  @Test
-  public void forceRevealWhenPresenterIsVisible() {
-    // Given
-    presenter.internalReveal();
-    assertTrue(presenter.isVisible());
-
-    // When
-    presenter.forceReveal();
-
-    // Then
-    assertEquals(0, presenter.revealInParentCalled);
-  }
 }
