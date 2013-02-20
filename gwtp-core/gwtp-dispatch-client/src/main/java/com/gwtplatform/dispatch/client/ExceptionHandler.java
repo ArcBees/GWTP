@@ -25,21 +25,21 @@ package com.gwtplatform.dispatch.client;
  */
 public interface ExceptionHandler {
 
-  /**
-   * {@link ExceptionHandler}'s status enumeration.
-   */
-  public enum Status {
-    CONTINUE, STOP
-  }
+    /**
+     * {@link ExceptionHandler}'s status enumeration.
+     */
+    public enum Status {
+        CONTINUE, STOP
+    }
 
-  /**
-   * This method is called when an exception occurs. Return {@link Status#STOP}
-   * to indicate that the exception has been handled and further processing
-   * should not occur. Return {@link Status#CONTINUE} to indicate that further
-   * processing should occur.
-   *
-   * @param e The exception.
-   * @return The status after execution.
-   */
-  Status onFailure(Throwable e);
+    /**
+     * This method is called when an exception occurs. Return {@link Status#STOP}
+     * to indicate that the exception has been handled and further processing
+     * should not occur. Return {@link Status#CONTINUE} to indicate that further
+     * processing should occur.
+     *
+     * @param e The exception.
+     * @return The status after execution.
+     */
+    Status onFailure(Throwable e);
 }

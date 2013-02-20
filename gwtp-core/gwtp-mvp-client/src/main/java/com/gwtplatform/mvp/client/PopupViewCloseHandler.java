@@ -23,5 +23,5 @@ package com.gwtplatform.mvp.client;
  * @author Philippe Beaudoin
  */
 public interface PopupViewCloseHandler {
-  void onClose();
+    void onClose();
 }

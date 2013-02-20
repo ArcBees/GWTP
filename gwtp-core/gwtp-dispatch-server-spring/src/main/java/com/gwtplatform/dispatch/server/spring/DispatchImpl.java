@@ -26,8 +26,8 @@ import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValid
  */
 public class DispatchImpl extends AbstractDispatchImpl {
 
-  @Autowired
-  public DispatchImpl(ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
-    super(actionHandlerValidatorRegistry);
-  }
+    @Autowired
+    public DispatchImpl(ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
+        super(actionHandlerValidatorRegistry);
+    }
 }

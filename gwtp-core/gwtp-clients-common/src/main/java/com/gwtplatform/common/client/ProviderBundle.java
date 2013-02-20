@@ -24,9 +24,12 @@ import com.google.inject.Provider;
  * loaded, so is the code for the others. This is useful when the provided
  * objects share the bulk of their code, which would end up in the left-overs if
  * the objects were behind their individual split points.
- * <p />
- * Here is an example use of {@link ProviderBundle}:
- *
+ * GWTP automatically handles ProviderBundles when used with ApplicationController
+ * and Ginjector generation.
+ * <p/>
+ * <p/>
+ * Here is an example use of a manual {@link ProviderBundle}:
+ * <p/>
  * <pre>
  * public class MyPresenterBundle extends ProviderBundle {
  *   public final static int ID_Object1 = 0;
@@ -47,33 +50,33 @@ import com.google.inject.Provider;
  */
 public class ProviderBundle {
 
-  protected final Provider<?> providers[];
+    protected final Provider<?> providers[];
 
-  /**
-   * Constructs a {@link ProviderBundle} containing a given number of providers.
-   * After calling this constructor you should set the provider manually like
-   * so:
-   *
-   * <pre>
-   *     providers[0] = object1Provider;
-   *     providers[1] = object2Provider;
-   *     ...
-   *     providers[bundleSize-1] = objectNProvider;</pre>
-   *
-   * @param bundleSize The number of providers in the bundle.
-   */
-  public ProviderBundle(int bundleSize) {
-    providers = new Provider<?>[bundleSize];
-  }
+    /**
+     * Constructs a {@link ProviderBundle} containing a given number of providers.
+     * After calling this constructor you should set the provider manually like
+     * so:
+     * <p/>
+     * <pre>
+     *     providers[0] = object1Provider;
+     *     providers[1] = object2Provider;
+     *     ...
+     *     providers[bundleSize-1] = objectNProvider;</pre>
+     *
+     * @param bundleSize The number of providers in the bundle.
+     */
+    public ProviderBundle(int bundleSize) {
+        providers = new Provider<?>[bundleSize];
+    }
 
-  /**
-   * Accesses a provider given its id.
-   *
-   * @param providerId The id of the provider to access.
-   * @return The provider.
-   */
-  public Provider<?> get(int providerId) {
-    return providers[providerId];
-  }
+    /**
+     * Accesses a provider given its id.
+     *
+     * @param providerId The id of the provider to access.
+     * @return The provider.
+     */
+    public Provider<?> get(int providerId) {
+        return providers[providerId];
+    }
 
 }

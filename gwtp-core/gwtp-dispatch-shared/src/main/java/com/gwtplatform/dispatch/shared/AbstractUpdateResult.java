@@ -20,43 +20,42 @@ package com.gwtplatform.dispatch.shared;
  * Provides support for simple update response which contain both the old value
  * and new value.
  *
- * @author David Peterson
- *
  * @param <T> The value type.
+ * @author David Peterson
  */
 public abstract class AbstractUpdateResult<T> implements Result {
 
-  private T newValue;
+    private T newValue;
 
-  private T oldValue;
+    private T oldValue;
 
-  public AbstractUpdateResult(T oldValue, T newValue) {
-    this.oldValue = oldValue;
-    this.newValue = newValue;
-  }
+    public AbstractUpdateResult(T oldValue, T newValue) {
+        this.oldValue = oldValue;
+        this.newValue = newValue;
+    }
 
-  /**
-   * For serialization support only. Subclasses should provide an package-local
-   * (aka default) empty constructor.
-   */
-  protected AbstractUpdateResult() {
-  }
+    /**
+     * For serialization support only. Subclasses should provide an package-local
+     * (aka default) empty constructor.
+     */
+    protected AbstractUpdateResult() {
+    }
 
-  /**
-   * The new/current value.
-   *
-   * @return The new value.
-   */
-  public T getNew() {
-    return newValue;
-  }
+    /**
+     * The new/current value.
+     *
+     * @return The new value.
+     */
+    public T getNew() {
+        return newValue;
+    }
 
-  /**
-   * The previous value.
-   *
-   * @return The old value.
-   */
-  public T getOld() {
-    return oldValue;
-  }
+    /**
+     * The previous value.
+     *
+     * @return The old value.
+     */
+    public T getOld() {
+        return oldValue;
+    }
 }

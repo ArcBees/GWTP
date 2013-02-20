@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * See {@link GenDispatch} for an example.
  * <p/>
  * {@code value} Defines the order that fields should be specified in the
- *          constructor of the generated result class.
+ * constructor of the generated result class.
  *
  * @author Brendan Doherty
  * @author Stephen Haberman (concept)
@@ -37,5 +37,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Out {
-  int value();
+    int value();
 }

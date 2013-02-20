@@ -22,5 +22,5 @@ import javax.servlet.http.HttpServletRequest;
  * @author Philippe Beaudoin
  */
 public interface RequestProvider {
-  HttpServletRequest getServletRequest();
+    HttpServletRequest getServletRequest();
 }

@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
@@ -28,19 +27,17 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @param <A> The {@link Action} type.
  * @param <R> The {@link Result} type.
- *
  * @author Brendan Doherty
  */
 public interface ExecuteCommand<A extends Action<R>, R extends Result> {
-  /**
-   * Execute an action.
-   *
-   * @param action The action to execute.
-   * @param resultCallback A callback that will be invoked once the action has
-   *          been executed, successfully or not.
-   *
-   * @return A {@link DispatchRequest} representing the gwt-rpc request, it
-   *         should never be {@code null}.
-   */
-  DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
+    /**
+     * Execute an action.
+     *
+     * @param action         The action to execute.
+     * @param resultCallback A callback that will be invoked once the action has
+     *                       been executed, successfully or not.
+     * @return A {@link DispatchRequest} representing the gwt-rpc request, it
+     *         should never be {@code null}.
+     */
+    DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
 }
