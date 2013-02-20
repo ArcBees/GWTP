@@ -29,96 +29,97 @@ import com.gwtplatform.crawlerservice.server.objectify.OfyFactory;
 
 /**
  * Generic DAO for use with Objectify.
+ *
+ * @param <T>
  * @author David M. Chandler
  * @author Brandon Donnelson
- * @param <T>
  */
 public class ObjectifyDao<T> {
-  static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
+    static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
 
-  protected Class<T> clazz;
+    protected Class<T> clazz;
 
-  private OfyFactory ofyFactory;
-  private Ofy lazyOfy;
+    private OfyFactory ofyFactory;
+    private Ofy lazyOfy;
 
-  @SuppressWarnings("unchecked")
-  public ObjectifyDao() {
-    clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-  }
-
-  public Key<T> put(T entity) {
-    return ofy().save().entity(entity).now();
-  }
-
-  public Map<Key<T>, T> putAll(Iterable<T> entities) {
-    return ofy().save().entities(entities).now();
-  }
-
-  public void delete(T entity) {
-    ofy().delete().entity(entity);
-  }
-
-  public void deleteKey(Key<T> entityKey) {
-    ofy().delete().entity(entityKey);
-  }
-
-  public void deleteAll(Iterable<T> entities) {
-    ofy().delete().entities(entities);
-  }
-
-  public void deleteKeys(Iterable<Key<T>> keys) {
-    ofy().delete().keys(keys);
-  }
-
-  public T get(Long id) throws EntityNotFoundException {
-    return ofy().get(this.clazz, id);
-  }
-
-  public T get(Key<T> key) throws EntityNotFoundException {
-    return ofy().get(key);
-  }
-
-  public Map<Key<T>, T> get(Iterable<Key<T>> keys) {
-    return ofy().load().keys(keys);
-  }
-
-  public List<T> listAll(int start, int length) {
-    Query<T> q = ofy().query(clazz).offset(start).limit(length);
-    return q.list();
-  }
-
-  public int countAll() {
-    return ofy().query(clazz).count();
-  }
-
-  public List<T> listByProperty(String propName, Object propValue) {
-    Query<T> q = ofy().query(clazz);
-    q.filter(propName, propValue);
-    return q.list();
-  }
-
-  public List<Key<T>> listKeysByProperty(String propName, Object propValue) {
-    Query<T> q = ofy().query(clazz);
-    q.filter(propName, propValue);
-    return q.keys().list();
-  }
-
-  public Key<T> getKey(Long id) {
-    return Key.create(this.clazz, id);
-  }
-
-  public List<T> listChildren(Object parent) {
-    return ofy().query(clazz).ancestor(parent).list();
-  }
-
-  public List<Key<T>> listChildKeys(Object parent) {
-    return ofy().query(clazz).ancestor(parent).keys().list();
-  }
-
-  protected Ofy ofy() {
-    if (lazyOfy == null) {
-      lazyOfy = ofyFactory.begin();
+    @SuppressWarnings("unchecked")
+    public ObjectifyDao() {
+        clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
-    return lazyOfy;
-  }
+
+    public Key<T> put(T entity) {
+        return ofy().save().entity(entity).now();
+    }
+
+    public Map<Key<T>, T> putAll(Iterable<T> entities) {
+        return ofy().save().entities(entities).now();
+    }
+
+    public void delete(T entity) {
+        ofy().delete().entity(entity);
+    }
+
+    public void deleteKey(Key<T> entityKey) {
+        ofy().delete().entity(entityKey);
+    }
+
+    public void deleteAll(Iterable<T> entities) {
+        ofy().delete().entities(entities);
+    }
+
+    public void deleteKeys(Iterable<Key<T>> keys) {
+        ofy().delete().keys(keys);
+    }
+
+    public T get(Long id) throws EntityNotFoundException {
+        return ofy().get(this.clazz, id);
+    }
+
+    public T get(Key<T> key) throws EntityNotFoundException {
+        return ofy().get(key);
+    }
+
+    public Map<Key<T>, T> get(Iterable<Key<T>> keys) {
+        return ofy().load().keys(keys);
+    }
+
+    public List<T> listAll(int start, int length) {
+        Query<T> q = ofy().query(clazz).offset(start).limit(length);
+        return q.list();
+    }
+
+    public int countAll() {
+        return ofy().query(clazz).count();
+    }
+
+    public List<T> listByProperty(String propName, Object propValue) {
+        Query<T> q = ofy().query(clazz);
+        q.filter(propName, propValue);
+        return q.list();
+    }
+
+    public List<Key<T>> listKeysByProperty(String propName, Object propValue) {
+        Query<T> q = ofy().query(clazz);
+        q.filter(propName, propValue);
+        return q.keys().list();
+    }
+
+    public Key<T> getKey(Long id) {
+        return Key.create(this.clazz, id);
+    }
+
+    public List<T> listChildren(Object parent) {
+        return ofy().query(clazz).ancestor(parent).list();
+    }
+
+    public List<Key<T>> listChildKeys(Object parent) {
+        return ofy().query(clazz).ancestor(parent).keys().list();
+    }
+
+    protected Ofy ofy() {
+        if (lazyOfy == null) {
+            lazyOfy = ofyFactory.begin();
+        }
+        return lazyOfy;
+    }
 }

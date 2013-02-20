@@ -19,7 +19,8 @@ package com.gwtplatform.dispatch.server.actionhandlervalidator;
 import java.util.Iterator;
 
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider
+        .BindingDescriptor;
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 
 /**
@@ -27,87 +28,92 @@ import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
  */
 public class ActionHandlerValidatorLinkerHelper {
 
-  /**
-   * @author Peter Simun (simun@seges.sk)
-   */
-  public interface BeanProvider {
-
-    <B> B getInstance(Class<B> clazz);
-
-    <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz);
-
     /**
      * @author Peter Simun (simun@seges.sk)
-     *
-     * @param <B>
      */
-    public interface BindingDescriptor<B> {
+    public interface BeanProvider {
 
-      String getBeanName();
+        <B> B getInstance(Class<B> clazz);
 
-      B getBean();
-    }
-  }
+        <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz);
 
-  /**
-   * BingingDescriptor implementation for the Guice/Spring. This allows us to obtain bindings from guice injector/or
-   * from Spring application context
-   *
-   * @author Peter Simun (simun@seges.sk)
-   */
-  public static class CommonBindingDescriptor<B> implements BindingDescriptor<B> {
+        /**
+         * @param <B>
+         * @author Peter Simun (simun@seges.sk)
+         */
+        public interface BindingDescriptor<B> {
 
-    private String name;
-    private B bean;
+            String getBeanName();
 
-    public CommonBindingDescriptor(B bean, String name) {
-      this.name = name;
-      this.bean = bean;
+            B getBean();
+        }
     }
 
-    @Override
-    public String getBeanName() {
-      return name;
-    }
+    /**
+     * BingingDescriptor implementation for the Guice/Spring. This allows us to obtain bindings from guice injector/or
+     * from Spring application context
+     *
+     * @author Peter Simun (simun@seges.sk)
+     */
+    public static class CommonBindingDescriptor<B> implements BindingDescriptor<B> {
 
-    @Override
-    public B getBean() {
-      return bean;
-    }
-  }
+        private String name;
+        private B bean;
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public static void linkValidators(BeanProvider beanProvider, ActionHandlerValidatorRegistry registry) {
-    Iterator<BindingDescriptor<ActionHandlerValidatorMap>> bindings = beanProvider.getBindings(ActionHandlerValidatorMap.class);
-
-    if (registry instanceof EagerActionHandlerValidatorRegistry) {
-      EagerActionHandlerValidatorRegistry instanceRegistry = (EagerActionHandlerValidatorRegistry) registry;
-
-      while (bindings.hasNext()) {
-        BindingDescriptor<ActionHandlerValidatorMap> binding = bindings.next();
-
-        Class<? extends ActionValidator> actionValidatorClass = binding.getBean().getActionHandlerValidatorClass().getActionValidatorClass();
-        Class<? extends ActionHandler<?, ?>> handlerClass = binding.getBean().getActionHandlerValidatorClass().getActionHandlerClass();
-
-        ActionHandlerValidatorInstance actionHandlerValidatorInstance = null;
-        ActionValidator actionValidator = instanceRegistry.findActionValidator(actionValidatorClass);
-
-        if (actionValidator == null) {
-          actionValidator = beanProvider.getInstance(actionValidatorClass);
+        public CommonBindingDescriptor(B bean, String name) {
+            this.name = name;
+            this.bean = bean;
         }
 
-        actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(actionValidator, beanProvider.getInstance(handlerClass));
+        @Override
+        public String getBeanName() {
+            return name;
+        }
 
-        instanceRegistry.addActionHandlerValidator(binding.getBean().getActionClass(), actionHandlerValidatorInstance);
-      }
-    } else if (registry instanceof LazyActionHandlerValidatorRegistry) {
-      LazyActionHandlerValidatorRegistry classRegistry = (LazyActionHandlerValidatorRegistry) registry;
-
-      while (bindings.hasNext()) {
-        BindingDescriptor<ActionHandlerValidatorMap> binding = bindings.next();
-        ActionHandlerValidatorMap map = binding.getBean();
-        classRegistry.addActionHandlerValidatorClass(map.getActionClass(), map.getActionHandlerValidatorClass());
-      }
+        @Override
+        public B getBean() {
+            return bean;
+        }
     }
-  }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public static void linkValidators(BeanProvider beanProvider, ActionHandlerValidatorRegistry registry) {
+        Iterator<BindingDescriptor<ActionHandlerValidatorMap>> bindings =
+                beanProvider.getBindings(ActionHandlerValidatorMap.class);
+
+        if (registry instanceof EagerActionHandlerValidatorRegistry) {
+            EagerActionHandlerValidatorRegistry instanceRegistry = (EagerActionHandlerValidatorRegistry) registry;
+
+            while (bindings.hasNext()) {
+                BindingDescriptor<ActionHandlerValidatorMap> binding = bindings.next();
+
+                Class<? extends ActionValidator> actionValidatorClass = binding.getBean()
+                        .getActionHandlerValidatorClass().getActionValidatorClass();
+                Class<? extends ActionHandler<?, ?>> handlerClass =
+                        binding.getBean().getActionHandlerValidatorClass().getActionHandlerClass();
+
+                ActionHandlerValidatorInstance actionHandlerValidatorInstance;
+                ActionValidator actionValidator = instanceRegistry.findActionValidator(actionValidatorClass);
+
+                if (actionValidator == null) {
+                    actionValidator = beanProvider.getInstance(actionValidatorClass);
+                }
+
+                actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(actionValidator,
+                        beanProvider.getInstance(handlerClass));
+
+                instanceRegistry.addActionHandlerValidator(binding.getBean().getActionClass(),
+                        actionHandlerValidatorInstance);
+            }
+        } else if (registry instanceof LazyActionHandlerValidatorRegistry) {
+            LazyActionHandlerValidatorRegistry classRegistry = (LazyActionHandlerValidatorRegistry) registry;
+
+            while (bindings.hasNext()) {
+                BindingDescriptor<ActionHandlerValidatorMap> binding = bindings.next();
+                ActionHandlerValidatorMap map = binding.getBean();
+                classRegistry.addActionHandlerValidatorClass(map.getActionClass(),
+                        map.getActionHandlerValidatorClass());
+            }
+        }
+    }
 }

@@ -18,61 +18,59 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
  * This event is fired by a {@link Presenter} that desires to reveal itself
  * at the root of the application. It is typically fired in the {@link Presenter#revealInParent()}
  * method.
- * <p />
+ * <p/>
  * This type of content is usually meant to use the browser like a regular webpage, adding a vertical
  * scrollbar as the content overflow.
  *
+ * @author Philippe Beaudoin
  * @see RevealContentEvent
  * @see RevealRootLayoutContentEvent
  * @see RevealRootPopupContentEvent
- *
- * @author Philippe Beaudoin
  */
 public final class RevealRootContentEvent extends
-    GwtEvent<RevealRootContentHandler> {
+        GwtEvent<RevealRootContentHandler> {
 
-  private static final Type<RevealRootContentHandler> TYPE = new Type<RevealRootContentHandler>();
+    private static final Type<RevealRootContentHandler> TYPE = new Type<RevealRootContentHandler>();
 
-  /**
-   * Fires a {@link RevealRootContentEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   * @param content The {@link Presenter} that wants to set itself as root content.
-   */
-  public static void fire(final HasHandlers source, final Presenter<?, ?> content) {
-    source.fireEvent(new RevealRootContentEvent(content));
-  }
+    /**
+     * Fires a {@link RevealRootContentEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source  The source that fires this event ({@link HasHandlers}).
+     * @param content The {@link Presenter} that wants to set itself as root content.
+     */
+    public static void fire(final HasHandlers source, final Presenter<?, ?> content) {
+        source.fireEvent(new RevealRootContentEvent(content));
+    }
 
-  public static Type<RevealRootContentHandler> getType() {
-    return TYPE;
-  }
+    public static Type<RevealRootContentHandler> getType() {
+        return TYPE;
+    }
 
-  private final Presenter<?, ?> content;
+    private final Presenter<?, ?> content;
 
-  public RevealRootContentEvent(Presenter<?, ?> content) {
-    this.content = content;
-  }
+    public RevealRootContentEvent(Presenter<?, ?> content) {
+        this.content = content;
+    }
 
-  @Override
-  public Type<RevealRootContentHandler> getAssociatedType() {
-    return getType();
-  }
+    @Override
+    public Type<RevealRootContentHandler> getAssociatedType() {
+        return getType();
+    }
 
-  public Presenter<?, ?> getContent() {
-    return content;
-  }
+    public Presenter<?, ?> getContent() {
+        return content;
+    }
 
-  @Override
-  protected void dispatch(RevealRootContentHandler handler) {
-    handler.onRevealRootContent(this);
-  }
+    @Override
+    protected void dispatch(RevealRootContentHandler handler) {
+        handler.onRevealRootContent(this);
+    }
 
 }

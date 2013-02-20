@@ -27,6 +27,6 @@ import java.lang.annotation.Target;
  *
  * @author Philippe Beaudoin
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD, ElementType.TYPE})
 public @interface DefaultGatekeeper {
 }

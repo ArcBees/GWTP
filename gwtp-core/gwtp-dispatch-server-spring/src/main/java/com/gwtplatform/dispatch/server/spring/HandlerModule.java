@@ -35,19 +35,23 @@ import com.gwtplatform.dispatch.shared.Result;
 @Import({DispatchModule.class})
 public abstract class HandlerModule {
 
-  @Autowired
-  protected ApplicationContext applicationContext;
+    @Autowired
+    protected ApplicationContext applicationContext;
 
-  protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
-    SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass, new ActionHandlerValidatorClass<A, R>(handlerClass,
-        DefaultActionValidator.class)));
-  }
+    protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass,
+            Class<? extends ActionHandler<A, R>> handlerClass) {
+        SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass,
+                new ActionHandlerValidatorClass<A, R>(handlerClass,
+                DefaultActionValidator.class)));
+    }
 
-  protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass,
-      Class<? extends ActionValidator> actionValidator) {
-    SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass, new ActionHandlerValidatorClass<A, R>(handlerClass,
-        actionValidator)));
-  }
+    protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass,
+            Class<? extends ActionHandler<A, R>> handlerClass,
+            Class<? extends ActionValidator> actionValidator) {
+        SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass,
+                new ActionHandlerValidatorClass<A, R>(handlerClass,
+                actionValidator)));
+    }
 
-  protected abstract void configureHandlers();
+    protected abstract void configureHandlers();
 }

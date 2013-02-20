@@ -27,25 +27,24 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @param <A> Type of associated {@link Action}
  * @param <R> Type of associated {@link Result}
- *
  * @author Christian Goudreau
  */
 public class ActionHandlerValidatorClass<A extends Action<R>, R extends Result> {
-  private final Class<? extends ActionHandler<A, R>> actionHandlerClass;
-  private final Class<? extends ActionValidator> actionValidatorClass;
+    private final Class<? extends ActionHandler<A, R>> actionHandlerClass;
+    private final Class<? extends ActionValidator> actionValidatorClass;
 
-  public ActionHandlerValidatorClass(
-      final Class<? extends ActionHandler<A, R>> handlerClass,
-      final Class<? extends ActionValidator> actionValidatorClass) {
-    this.actionHandlerClass = handlerClass;
-    this.actionValidatorClass = actionValidatorClass;
-  }
+    public ActionHandlerValidatorClass(
+            final Class<? extends ActionHandler<A, R>> handlerClass,
+            final Class<? extends ActionValidator> actionValidatorClass) {
+        this.actionHandlerClass = handlerClass;
+        this.actionValidatorClass = actionValidatorClass;
+    }
 
-  public Class<? extends ActionHandler<A, R>> getActionHandlerClass() {
-    return actionHandlerClass;
-  }
+    public Class<? extends ActionHandler<A, R>> getActionHandlerClass() {
+        return actionHandlerClass;
+    }
 
-  public Class<? extends ActionValidator> getActionValidatorClass() {
-    return actionValidatorClass;
-  }
+    public Class<? extends ActionValidator> getActionValidatorClass() {
+        return actionValidatorClass;
+    }
 }

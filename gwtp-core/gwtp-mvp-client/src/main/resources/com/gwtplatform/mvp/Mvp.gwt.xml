@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-   Copyright 2010 Gwt-Platform
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
--->
-
 <module>
-  <!-- Inherit the core Web Toolkit stuff.                        -->
-  <inherits name='com.google.gwt.user.User'/>
-  <inherits name="com.google.gwt.inject.Inject" />
+    <!-- Inherit the core Web Toolkit stuff.                        -->
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.inject.Inject"/>
 
-  <!-- Inherit shared modules -->
-  <inherits name='com.gwtplatform.common.ClientsCommon'/>
+    <!-- Inherit shared modules -->
+    <inherits name='com.gwtplatform.common.ClientsCommon'/>
 
-  <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
-    <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
-  </generate-with>
+    <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
+        <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
+    </generate-with>
 
-  <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
-    <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy" />
-  </generate-with>
+    <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
+        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy"/>
+    </generate-with>
 
-  <!-- Specify the paths for translatable code                    -->
-  <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java" />
+    <!-- Specify the paths for translatable code                    -->
+    <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
 
+    <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation -->
+    <!-- if another value is set, it must point to a valid manual Ginjector class -->
+    <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.ClientGinjector"/>
+
+    <!-- comma separated list of gin modules, mandatory when using Ginjector generation -->
+    <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
+
+    <!-- optional comma separated list of extension interface to the ginjector -->
+    <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
+    <set-configuration-property name="gin.ginjector.extensions" value=""/>
+
+    <!-- Form factor specific modules -->
+    <define-configuration-property name="gin.ginjector.module.desktop" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector.module.desktop" value=""/>
+
+    <define-configuration-property name="gin.ginjector.module.mobile" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector.module.mobile" value=""/>
+
+    <define-configuration-property name="gin.ginjector.module.tablet" is-multi-valued="false"/>
+    <set-configuration-property name="gin.ginjector.module.tablet" value=""/>
+
+    <!-- Default form factor Desktop -->
+    <replace-with class="com.gwtplatform.mvp.client.DesktopGinjectorProvider">
+        <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
+    </replace-with>
 </module>

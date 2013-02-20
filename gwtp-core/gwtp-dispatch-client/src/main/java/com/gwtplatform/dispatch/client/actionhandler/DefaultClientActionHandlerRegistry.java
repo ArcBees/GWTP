@@ -16,27 +16,26 @@
 
 package com.gwtplatform.dispatch.client.actionhandler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
-
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.common.client.ProviderBundle;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * The default implementation that {@link ClientActionHandlerRegistry} that if
  * bound will not load any client-side action handlers. </p> To register
  * client-side action handlers, extend this class and call {@link #register}
  * in the constructor.
- *
+ * <p/>
  * <h3><u>Example</u></h3>
- *
+ * <p/>
  * <pre>
  * <code>
  * public class MyActionHandlerRegistry extends
@@ -78,106 +77,106 @@ import java.util.Map;
  * @author Brendan Doherty
  */
 public class DefaultClientActionHandlerRegistry implements
-    ClientActionHandlerRegistry {
+        ClientActionHandlerRegistry {
 
-  private Map<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>> clientActionHandlers;
+    private Map<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>> clientActionHandlers;
 
-  /**
-   * Register a instance of a client-side action handler.
-   *
-   * @param handler The {@link ClientActionHandler};
-   */
-  protected void register(final ClientActionHandler<?, ?> handler) {
+    /**
+     * Register a instance of a client-side action handler.
+     *
+     * @param handler The {@link ClientActionHandler};
+     */
+    protected void register(final ClientActionHandler<?, ?> handler) {
 
-    register(handler.getActionType(),
-        new IndirectProvider<ClientActionHandler<?, ?>>() {
-          @Override
-          public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
-            callback.onSuccess(handler);
-          }
-        });
-  }
-
-  /**
-   * Register a {@link Provider} of a client-side action handler.
-   *
-   * @param actionType The type of {@link Action} that the
-   *          client-side action handler supports.
-   * @param handlerProvider The {@link Provider} of the handler.
-   */
-  protected void register(Class<? extends Action<?>> actionType,
-      final Provider<? extends ClientActionHandler<?, ?>> handlerProvider) {
-
-    register(actionType,
-        new IndirectProvider<ClientActionHandler<?, ?>>() {
-          @Override
-          public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
-            callback.onSuccess(handlerProvider.get());
-          }
-        });
-  }
-
-  /**
-   * Register an {@link AsyncProvider} of a client-side action handler.
-   *
-   * @param actionType The type of {@link Action} that the
-   *          client-side action handler supports.
-   * @param handlerProvider The {@link AsyncProvider} of the handler.
-   */
-  protected void register(Class<? extends Action<?>> actionType,
-      final AsyncProvider<? extends ClientActionHandler<?, ?>> handlerProvider) {
-
-    register(actionType,
-        new IndirectProvider<ClientActionHandler<?, ?>>() {
-          @SuppressWarnings("unchecked")
-          @Override
-          public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
-
-            ((AsyncProvider<ClientActionHandler<?, ?>>) handlerProvider).get(callback);
-          }
-        });
-  }
-
-  /**
-   * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
-   *
-   * @param actionType The type of {@link Action} that the
-   *          client-side action handler supports.
-   * @param bundleProvider The {@link Provider} of the {@link ProviderBundle}.
-   * @param providerId The id of the client-side action handler provider.
-   */
-  protected <B extends ProviderBundle> void register(
-      Class<? extends Action<?>> actionType, AsyncProvider<B> bundleProvider,
-      int providerId) {
-
-    register(actionType,
-        new CodeSplitBundleProvider<ClientActionHandler<?, ?>, B>(
-            bundleProvider, providerId));
-  }
-
-  /**
-   * Register an {@link IndirectProvider} of a client-side action handler.
-   *
-   * @param handlerProvider The {@link IndirectProvider}.
-   */
-  protected void register(
-      Class<? extends Action<?>> actionType,
-      IndirectProvider<ClientActionHandler<?, ?>> handlerProvider) {
-
-    if (clientActionHandlers == null) {
-      clientActionHandlers = new HashMap<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>>();
+        register(handler.getActionType(),
+                new IndirectProvider<ClientActionHandler<?, ?>>() {
+                    @Override
+                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+                        callback.onSuccess(handler);
+                    }
+                });
     }
 
-    clientActionHandlers.put(actionType, handlerProvider);
-  }
+    /**
+     * Register a {@link Provider} of a client-side action handler.
+     *
+     * @param actionType      The type of {@link Action} that the
+     *                        client-side action handler supports.
+     * @param handlerProvider The {@link Provider} of the handler.
+     */
+    protected void register(Class<? extends Action<?>> actionType,
+            final Provider<? extends ClientActionHandler<?, ?>> handlerProvider) {
 
-  public <A extends Action<R>, R extends Result> IndirectProvider<ClientActionHandler<?, ?>> find(
-      Class<A> actionClass) {
-
-    if (clientActionHandlers == null) {
-      return null;
-    } else {
-      return clientActionHandlers.get(actionClass);
+        register(actionType,
+                new IndirectProvider<ClientActionHandler<?, ?>>() {
+                    @Override
+                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+                        callback.onSuccess(handlerProvider.get());
+                    }
+                });
     }
-  }
+
+    /**
+     * Register an {@link AsyncProvider} of a client-side action handler.
+     *
+     * @param actionType      The type of {@link Action} that the
+     *                        client-side action handler supports.
+     * @param handlerProvider The {@link AsyncProvider} of the handler.
+     */
+    protected void register(Class<? extends Action<?>> actionType,
+            final AsyncProvider<? extends ClientActionHandler<?, ?>> handlerProvider) {
+
+        register(actionType,
+                new IndirectProvider<ClientActionHandler<?, ?>>() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+
+                        ((AsyncProvider<ClientActionHandler<?, ?>>) handlerProvider).get(callback);
+                    }
+                });
+    }
+
+    /**
+     * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
+     *
+     * @param actionType     The type of {@link Action} that the
+     *                       client-side action handler supports.
+     * @param bundleProvider The {@link Provider} of the {@link ProviderBundle}.
+     * @param providerId     The id of the client-side action handler provider.
+     */
+    protected <B extends ProviderBundle> void register(
+            Class<? extends Action<?>> actionType, AsyncProvider<B> bundleProvider,
+            int providerId) {
+
+        register(actionType,
+                new CodeSplitBundleProvider<ClientActionHandler<?, ?>, B>(
+                        bundleProvider, providerId));
+    }
+
+    /**
+     * Register an {@link IndirectProvider} of a client-side action handler.
+     *
+     * @param handlerProvider The {@link IndirectProvider}.
+     */
+    protected void register(
+            Class<? extends Action<?>> actionType,
+            IndirectProvider<ClientActionHandler<?, ?>> handlerProvider) {
+
+        if (clientActionHandlers == null) {
+            clientActionHandlers = new HashMap<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>>();
+        }
+
+        clientActionHandlers.put(actionType, handlerProvider);
+    }
+
+    public <A extends Action<R>, R extends Result> IndirectProvider<ClientActionHandler<?, ?>> find(
+            Class<A> actionClass) {
+
+        if (clientActionHandlers == null) {
+            return null;
+        } else {
+            return clientActionHandlers.get(actionClass);
+        }
+    }
 }

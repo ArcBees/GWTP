@@ -24,15 +24,15 @@ import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 /**
  */
 public class OfyService {
-  static {
-    factory().register(CachedPage.class);
-  }
+    static {
+        factory().register(CachedPage.class);
+    }
 
-  public static Objectify ofy() {
-    return ObjectifyService.ofy();
-  }
+    public static Objectify ofy() {
+        return ObjectifyService.ofy();
+    }
 
-  public static ObjectifyFactory factory() {
-    return ObjectifyService.factory();
-  }
+    public static ObjectifyFactory factory() {
+        return ObjectifyService.factory();
+    }
 }

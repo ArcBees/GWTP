@@ -23,15 +23,15 @@ package com.gwtplatform.dispatch.annotation;
  */
 @GenProxy
 public class Person {
-  int id;
+    int id;
 
-  Long age;
+    Long age;
 
-  float weight;
+    float weight;
 
-  @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.AddressProxy")
-  Address addressDetail;
+    @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.AddressProxy")
+    Address addressDetail;
 
-  @UseProxy(DetailProxy.class)
-  Detail detail;
+    @UseProxy(DetailProxy.class)
+    Detail detail;
 }

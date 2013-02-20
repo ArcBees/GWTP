@@ -18,21 +18,37 @@ package com.gwtplatform.mvp.client;
 
 /**
  * ApplicationController will trigger the generation of your Ginjector. To activate the
- * generation of your Ginjector, remove this line from your module.gwt.xml file:
+ * generation you have to add one line to your module.gwt.xml file:
  * <p/>
  * <pre>{@code
- * <define-configuration-property name="gin.module.name" is-multi-valued="false" />
- * <set-configuration-property name="gin.module.name" value="com.arcbees.example.client.gin.ClientModule"/>
+ * <set-configuration-property name="gin.ginjector.modules" value="com.arcbees.example.client.gin.ClientModule"/>
+ * }</pre>
+ * Multiple modules may be supplied as comma separated list.
  * <p/>
- * <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
- * <set-configuration-property name="gin.ginjector" value="com.arcbees.example.client.gin.ClientGinjector"/>
+ * <p/>
+ * The final step is to call {@code GWT.create(ApplicationController.class)} inside your entry point and then call
+ * {@code applicationController.init()} .
+ * <p/>
+ * You can add extension methods to your Ginjector by specifying additional interfaces. This property also
+ * accepts a comma separated list.
+ * <p/>
+ * <pre>{@code
+ * <set-configuration-property name="gin.ginjector.extensions" value="com.arcbees.example.client.gin
+ * .ClientInjectorAdditional"/>
  * }</pre>
  * <p/>
- * The final step is to call {@code GWTP.create(ApplicationController.class)} inside your entry point and then call
- * {@code applicationController.init()} .
+ * <p/>
+ * In these additional interfaces you may for example add a {@link com.gwtplatform.mvp.client.annotations
+ * .DefaultGatekeeper}.
+ * <p/>
+ * <pre>{@code
+ * public interface ClientInjectorAdditional {
+ *   @DefaultGatekeeper
+ *   MyDefaultGateKeeper getMyDefaultGateKeeper();
+ * }</pre>
+ * <p/>
+ * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
  */
 public interface ApplicationController {
-  String GINJECTOR_NAME = "ClientGinjector";
-
-  void init();
+    void init();
 }

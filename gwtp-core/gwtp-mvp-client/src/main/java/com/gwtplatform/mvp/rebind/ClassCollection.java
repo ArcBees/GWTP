@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.rebind;
 
+import javax.inject.Provider;
+
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JGenericType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -31,6 +33,7 @@ import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
+import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -41,10 +44,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
-import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlaceImpl;
-
-import javax.inject.Provider;
 
 /**
  * Contains all the classes that are useful to various generators.
@@ -54,76 +54,76 @@ import javax.inject.Provider;
  */
 public class ClassCollection {
 
-  static final String asyncProviderClassName = AsyncProvider.class.getCanonicalName();
-  static final String baseGinjectorClassName = Ginjector.class.getCanonicalName();
-  static final String basePlaceClassName = Place.class.getCanonicalName();
-  static final String basePresenterClassName = Presenter.class.getCanonicalName();
-  static final String delayedBindClassName = DelayedBind.class.getCanonicalName();
-  static final String eventHandlerClassName = EventHandler.class.getCanonicalName();
-  static final String gatekeeperClassName = Gatekeeper.class.getCanonicalName();
-  static final String gwtEventClassName = GwtEvent.class.getCanonicalName();
-  static final String gwtEventTypeClassName = GwtEvent.Type.class.getCanonicalName();
-  static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
-  static final String placeRequestClassName = PlaceRequest.class.getCanonicalName();
-  static final String placeWithGatekeeperClassName = PlaceWithGatekeeper.class.getCanonicalName();
-  static final String placeWithGatekeeperWithParamsClassName =
-    PlaceWithGatekeeperWithParams.class.getCanonicalName();
-  static final String providerClassName = Provider.class.getCanonicalName();
-  static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
-  static final String proxyPlaceImplClassName = ProxyPlaceImpl.class.getCanonicalName();
-  static final String requestTabsHandlerClassName = RequestTabsHandler.class.getCanonicalName();
-  static final String changeTabHandlerClassName = ChangeTabHandler.class.getCanonicalName();
-  static final String revealContentHandlerClassName = RevealContentHandler.class.getCanonicalName();
-  static final String setPlaceTitleHandlerClassName = SetPlaceTitleHandler.class.getCanonicalName();
-  static final String tabContentProxyClassName = TabContentProxy.class.getCanonicalName();
-  static final String nonLeafTabContentProxyClassName =
-      NonLeafTabContentProxy.class.getCanonicalName();
-  static final String nonLeafTabContentProxyImplClassName =
-      NonLeafTabContentProxyImpl.class.getCanonicalName();
-  static final String tabContentProxyPlaceImplClassName =
-      TabContentProxyPlaceImpl.class.getCanonicalName();
-  static final String typeClassName = Type.class.getCanonicalName();
-  static final String tabDataClassName = TabData.class.getCanonicalName();
-  final JGenericType asyncProviderClass;
-  final JClassType baseGinjectorClass;
-  final JClassType basePlaceClass;
-  final JClassType basePresenterClass;
-  final JClassType eventHandlerClass;
-  final JClassType gatekeeperClass;
-  final JGenericType gwtEventClass;
-  final JGenericType gwtEventTypeClass;
-  final JClassType placeRequestClass;
-  final JGenericType providerClass;
-  final JClassType requestTabsHandlerClass;
-  final JClassType changeTabHandlerClass;
-  final JClassType revealContentHandlerClass;
-  final JClassType setPlaceTitleHandlerClass;
-  final JClassType stringClass;
-  final JClassType tabDataClass;
-  final JClassType tabContentProxyClass;
-  final JClassType nonLeafTabContentProxyClass;
-  final JClassType typeClass;
+    static final String asyncProviderClassName = AsyncProvider.class.getCanonicalName();
+    static final String baseGinjectorClassName = Ginjector.class.getCanonicalName();
+    static final String basePlaceClassName = Place.class.getCanonicalName();
+    static final String basePresenterClassName = Presenter.class.getCanonicalName();
+    static final String delayedBindClassName = DelayedBind.class.getCanonicalName();
+    static final String eventHandlerClassName = EventHandler.class.getCanonicalName();
+    static final String gatekeeperClassName = Gatekeeper.class.getCanonicalName();
+    static final String gwtEventClassName = GwtEvent.class.getCanonicalName();
+    static final String gwtEventTypeClassName = GwtEvent.Type.class.getCanonicalName();
+    static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
+    static final String placeRequestClassName = PlaceRequest.class.getCanonicalName();
+    static final String placeWithGatekeeperClassName = PlaceWithGatekeeper.class.getCanonicalName();
+    static final String placeWithGatekeeperWithParamsClassName =
+            PlaceWithGatekeeperWithParams.class.getCanonicalName();
+    static final String providerClassName = Provider.class.getCanonicalName();
+    static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
+    static final String proxyPlaceImplClassName = ProxyPlaceImpl.class.getCanonicalName();
+    static final String requestTabsHandlerClassName = RequestTabsHandler.class.getCanonicalName();
+    static final String changeTabHandlerClassName = ChangeTabHandler.class.getCanonicalName();
+    static final String revealContentHandlerClassName = RevealContentHandler.class.getCanonicalName();
+    static final String setPlaceTitleHandlerClassName = SetPlaceTitleHandler.class.getCanonicalName();
+    static final String tabContentProxyClassName = TabContentProxy.class.getCanonicalName();
+    static final String nonLeafTabContentProxyClassName =
+            NonLeafTabContentProxy.class.getCanonicalName();
+    static final String nonLeafTabContentProxyImplClassName =
+            NonLeafTabContentProxyImpl.class.getCanonicalName();
+    static final String tabContentProxyPlaceImplClassName =
+            TabContentProxyPlaceImpl.class.getCanonicalName();
+    static final String typeClassName = Type.class.getCanonicalName();
+    static final String tabDataClassName = TabData.class.getCanonicalName();
+    final JGenericType asyncProviderClass;
+    final JClassType baseGinjectorClass;
+    final JClassType basePlaceClass;
+    final JClassType basePresenterClass;
+    final JClassType eventHandlerClass;
+    final JClassType gatekeeperClass;
+    final JGenericType gwtEventClass;
+    final JGenericType gwtEventTypeClass;
+    final JClassType placeRequestClass;
+    final JGenericType providerClass;
+    final JClassType requestTabsHandlerClass;
+    final JClassType changeTabHandlerClass;
+    final JClassType revealContentHandlerClass;
+    final JClassType setPlaceTitleHandlerClass;
+    final JClassType stringClass;
+    final JClassType tabDataClass;
+    final JClassType tabContentProxyClass;
+    final JClassType nonLeafTabContentProxyClass;
+    final JClassType typeClass;
 
-  public ClassCollection(TypeOracle oracle) {
-    // Find the required base types
-    stringClass = oracle.findType("java.lang.String");
-    basePresenterClass = oracle.findType(basePresenterClassName);
-    baseGinjectorClass = oracle.findType(baseGinjectorClassName);
-    typeClass = oracle.findType(typeClassName);
-    revealContentHandlerClass = oracle.findType(revealContentHandlerClassName);
-    requestTabsHandlerClass = oracle.findType(requestTabsHandlerClassName);
-    changeTabHandlerClass = oracle.findType(changeTabHandlerClassName);
-    providerClass = oracle.findType(providerClassName).isGenericType();
-    asyncProviderClass = oracle.findType(asyncProviderClassName).isGenericType();
-    basePlaceClass = oracle.findType(basePlaceClassName);
-    tabContentProxyClass = oracle.findType(tabContentProxyClassName);
-    nonLeafTabContentProxyClass = oracle.findType(nonLeafTabContentProxyClassName);
-    gatekeeperClass = oracle.findType(gatekeeperClassName);
-    placeRequestClass = oracle.findType(placeRequestClassName);
-    gwtEventClass = oracle.findType(gwtEventClassName).isGenericType();
-    gwtEventTypeClass = oracle.findType(gwtEventTypeClassName).isGenericType();
-    eventHandlerClass = oracle.findType(eventHandlerClassName);
-    setPlaceTitleHandlerClass = oracle.findType(setPlaceTitleHandlerClassName);
-    tabDataClass = oracle.findType(tabDataClassName);
-  }
+    public ClassCollection(TypeOracle oracle) {
+        // Find the required base types
+        stringClass = oracle.findType(String.class.getName());
+        basePresenterClass = oracle.findType(basePresenterClassName);
+        baseGinjectorClass = oracle.findType(baseGinjectorClassName);
+        typeClass = oracle.findType(typeClassName);
+        revealContentHandlerClass = oracle.findType(revealContentHandlerClassName);
+        requestTabsHandlerClass = oracle.findType(requestTabsHandlerClassName);
+        changeTabHandlerClass = oracle.findType(changeTabHandlerClassName);
+        providerClass = oracle.findType(providerClassName).isGenericType();
+        asyncProviderClass = oracle.findType(asyncProviderClassName).isGenericType();
+        basePlaceClass = oracle.findType(basePlaceClassName);
+        tabContentProxyClass = oracle.findType(tabContentProxyClassName);
+        nonLeafTabContentProxyClass = oracle.findType(nonLeafTabContentProxyClassName);
+        gatekeeperClass = oracle.findType(gatekeeperClassName);
+        placeRequestClass = oracle.findType(placeRequestClassName);
+        gwtEventClass = oracle.findType(gwtEventClassName).isGenericType();
+        gwtEventTypeClass = oracle.findType(gwtEventTypeClassName).isGenericType();
+        eventHandlerClass = oracle.findType(eventHandlerClassName);
+        setPlaceTitleHandlerClass = oracle.findType(setPlaceTitleHandlerClassName);
+        tabDataClass = oracle.findType(tabDataClassName);
+    }
 }
