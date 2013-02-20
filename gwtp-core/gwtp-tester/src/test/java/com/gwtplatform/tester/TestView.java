@@ -26,35 +26,35 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 /**
-* @author Christian Goudreau
-*/
+ * @author Christian Goudreau
+ */
 public class TestView extends Composite {
-  /**
-   * {@link TestView}'s {@link UiBinder}.
-   */
-  public interface Binder extends UiBinder<Widget, TestView> {
-  }
-
-  @UiField
-  HTMLPanel mainPanel;
-
-  @UiField
-  TextBox someField;
-
-  @Inject
-  public TestView(final Binder uiBinder) {
-    initWidget(uiBinder.createAndBindUi(this));
-  }
-
-  /**
-   * Workaround for the fact that Composite.initWidget calls some JSNI.
-   *
-   * @param widget the widget to be wrapped
-   */
-  @Override
-  protected void initWidget(Widget widget) {
-    if (GWT.isScript()) {
-      super.initWidget(widget);
+    /**
+     * {@link TestView}'s {@link UiBinder}.
+     */
+    public interface Binder extends UiBinder<Widget, TestView> {
     }
-  }
+
+    @UiField
+    HTMLPanel mainPanel;
+
+    @UiField
+    TextBox someField;
+
+    @Inject
+    public TestView(final Binder uiBinder) {
+        initWidget(uiBinder.createAndBindUi(this));
+    }
+
+    /**
+     * Workaround for the fact that Composite.initWidget calls some JSNI.
+     *
+     * @param widget the widget to be wrapped
+     */
+    @Override
+    protected void initWidget(Widget widget) {
+        if (GWT.isScript()) {
+            super.initWidget(widget);
+        }
+    }
 }

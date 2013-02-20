@@ -29,14 +29,14 @@ import com.gwtplatform.crawlerservice.server.CrawlServiceServlet;
  */
 public class CrawlServiceModule extends ServletModule {
 
-  @Override
-  public void configureServlets() {
-    serve("*").with(CrawlServiceServlet.class);
-  }
+    @Override
+    public void configureServlets() {
+        serve("*").with(CrawlServiceServlet.class);
+    }
 
-  @Singleton
-  @Provides
-  WebClient getWebClient() {
-    return new WebClient(BrowserVersion.FIREFOX_3_6);
-  }
+    @Singleton
+    @Provides
+    WebClient getWebClient() {
+        return new WebClient(BrowserVersion.FIREFOX_3_6);
+    }
 }

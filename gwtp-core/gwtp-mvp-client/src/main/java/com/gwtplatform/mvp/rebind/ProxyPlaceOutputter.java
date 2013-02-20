@@ -39,216 +39,216 @@ import com.gwtplatform.mvp.client.proxy.GetPlaceTitleEvent;
  */
 public class ProxyPlaceOutputter extends ProxyOutputterBase {
 
-  public static final String WRAPPED_CLASS_NAME = "WrappedProxy";
+    public static final String WRAPPED_CLASS_NAME = "WrappedProxy";
 
-  private String nameToken;
-  private String getGatekeeperMethod;
-  private String[] gatekeeperParams;
+    private String nameToken;
+    private String getGatekeeperMethod;
+    private String[] gatekeeperParams;
 
-  private String title;
-  private PresenterTitleMethod presenterTitleMethod;
+    private String title;
+    private PresenterTitleMethod presenterTitleMethod;
 
-  public ProxyPlaceOutputter(TypeOracle oracle,
-      TreeLogger logger,
-      ClassCollection classCollection,
-      GinjectorInspector ginjectorInspector,
-      PresenterInspector presenterInspector) {
-    super(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
-  }
-
-  @Override
-  public void writeInnerClasses(SourceWriter writer) {
-    beginWrappedProxy(writer, ClassCollection.proxyImplClassName);
-    BasicProxyOutputter basicOutputter = new BasicProxyOutputter(oracle, logger, classCollection,
-        ginjectorInspector, presenterInspector);
-    basicOutputter.writeFields(writer);
-    basicOutputter.writeInnerClasses(writer);
-    basicOutputter.writeConstructor(writer, WRAPPED_CLASS_NAME, false);
-    basicOutputter.writeMethods(writer);
-    endWrappedProxy(writer);
-  }
-
-  public void beginWrappedProxy(SourceWriter writer, String wrappedProxySuperclassName) {
-    writer.println();
-    writer.println("public static class " + WRAPPED_CLASS_NAME);
-    writer.println("extends " + wrappedProxySuperclassName + "<"
-        + presenterInspector.getPresenterClassName() + "> " + "implements "
-        + ClassCollection.delayedBindClassName + " {");
-    writer.indent();
-  }
-
-  public void endWrappedProxy(SourceWriter writer) {
-    writer.outdent();
-    writer.println("}");
-  }
-
-  @Override
-  String getSuperclassName() {
-    return ClassCollection.proxyPlaceImplClassName;
-  }
-
-  public String getNameToken() {
-    return nameToken;
-  }
-
-  public String getGatekeeperParamsString() {
-    if (gatekeeperParams == null) {
-      return "null";
+    public ProxyPlaceOutputter(TypeOracle oracle,
+            TreeLogger logger,
+            ClassCollection classCollection,
+            GinjectorInspector ginjectorInspector,
+            PresenterInspector presenterInspector) {
+        super(oracle, logger, classCollection, ginjectorInspector, presenterInspector);
     }
-    StringBuilder builder = new StringBuilder("new String[] {");
-    for (int i = 0; i < gatekeeperParams.length; i++) {
-      builder.append("\"").append(gatekeeperParams[i]).append("\",");
-    }
-    if (",".equals(builder.charAt(builder.length() - 1))) {
-      builder.deleteCharAt(builder.length() - 1);
-    }
-    builder.append("}");
-    return builder.toString();
-  }
 
-  @Override
-  void initSubclass(JClassType proxyInterface)
-      throws UnableToCompleteException {
-    findNameToken(proxyInterface);
-    findGatekeeperMethod(proxyInterface);
-    findGatekeeperParams(proxyInterface);
-    findTitle(proxyInterface);
-  }
+    @Override
+    public void writeInnerClasses(SourceWriter writer) throws UnableToCompleteException {
+        beginWrappedProxy(writer, ClassCollection.proxyImplClassName);
+        BasicProxyOutputter basicOutputter = new BasicProxyOutputter(oracle, logger, classCollection,
+                ginjectorInspector, presenterInspector);
+        basicOutputter.writeFields(writer);
+        basicOutputter.writeInnerClasses(writer);
+        basicOutputter.writeConstructor(writer, WRAPPED_CLASS_NAME, false);
+        basicOutputter.writeMethods(writer);
+        endWrappedProxy(writer);
+    }
 
-  @Override
-  void addSubclassImports(ClassSourceFileComposerFactory composerFactory) {
-    if (title != null || presenterTitleMethod != null) {
-      composerFactory.addImport(GetPlaceTitleEvent.class.getCanonicalName());
-      composerFactory.addImport(AsyncCallback.class.getCanonicalName());
-      composerFactory.addImport(Throwable.class.getCanonicalName());
+    public void beginWrappedProxy(SourceWriter writer, String wrappedProxySuperclassName) {
+        writer.println();
+        writer.println("public static class " + WRAPPED_CLASS_NAME);
+        writer.println("extends " + wrappedProxySuperclassName + "<"
+                + presenterInspector.getPresenterClassName() + "> " + "implements "
+                + ClassCollection.delayedBindClassName + " {");
+        writer.indent();
     }
-  }
 
-  private void findNameToken(JClassType proxyInterface)
-      throws UnableToCompleteException {
-    NameToken nameTokenAnnotation = proxyInterface.getAnnotation(NameToken.class);
-    if (nameTokenAnnotation == null) {
-      logger.log(TreeLogger.ERROR,
-          "The proxy for '" + presenterInspector.getPresenterClassName()
-              + "' is a Place, but is not annotated with @' +"
-              + NameToken.class.getSimpleName() + ".", null);
-      throw new UnableToCompleteException();
+    public void endWrappedProxy(SourceWriter writer) {
+        writer.outdent();
+        writer.println("}");
     }
-    nameToken = nameTokenAnnotation.value();
-  }
 
-  private void findGatekeeperMethod(JClassType proxyInterface)
-      throws UnableToCompleteException {
-    UseGatekeeper gatekeeperAnnotation = proxyInterface.getAnnotation(UseGatekeeper.class);
-    if (gatekeeperAnnotation != null) {
-      String gatekeeperName = gatekeeperAnnotation.value().getCanonicalName();
-      JClassType customGatekeeperClass = oracle.findType(gatekeeperName);
-      if (customGatekeeperClass == null) {
-        logger.log(TreeLogger.ERROR, "The class '" + gatekeeperName
-            + "' provided to @" + UseGatekeeper.class.getSimpleName()
-            + " can't be found.", null);
-        throw new UnableToCompleteException();
-      }
-      if (!customGatekeeperClass.isAssignableTo(classCollection.gatekeeperClass)) {
-        logger.log(TreeLogger.ERROR, "The class '" + gatekeeperName
-            + "' provided to @" + UseGatekeeper.class.getSimpleName()
-            + " does not inherit from '" + ClassCollection.gatekeeperClassName + "'.", null);
-        throw new UnableToCompleteException();
-      }
-      // Find the appropriate get method in the Ginjector
-      getGatekeeperMethod = ginjectorInspector.findGetMethod(customGatekeeperClass);
-      if (getGatekeeperMethod == null) {
-        logger.log(TreeLogger.ERROR,
-            "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
-                + "' does not have a get() method returning '"
-                + gatekeeperName + "'. This is required when using @"
-                + UseGatekeeper.class.getSimpleName() + ".", null);
-        throw new UnableToCompleteException();
-      }
+    @Override
+    String getSuperclassName() {
+        return ClassCollection.proxyPlaceImplClassName;
     }
-    if (getGatekeeperMethod == null
-        && proxyInterface.getAnnotation(NoGatekeeper.class) == null) {
-      // No Gatekeeper specified, see if there is a DefaultGatekeeper defined in the ginjector
-      getGatekeeperMethod = ginjectorInspector.findAnnotatedGetMethod(
-          classCollection.gatekeeperClass, DefaultGatekeeper.class, true);
-    }
-  }
 
-  private void findGatekeeperParams(JClassType proxyInterface) {
-    GatekeeperParams gatekeeperParamsAnnotation = proxyInterface.getAnnotation(GatekeeperParams.class);
-    if (gatekeeperParamsAnnotation != null) {
-      gatekeeperParams = gatekeeperParamsAnnotation.value();
+    public String getNameToken() {
+        return nameToken;
     }
-  }
 
-  private void findTitle(JClassType proxyInterface)
-      throws UnableToCompleteException {
-    presenterTitleMethod = presenterInspector.findPresenterTitleMethod();
-    Title titleAnnotation = proxyInterface.getAnnotation(Title.class);
-    if (titleAnnotation != null) {
-      title = titleAnnotation.value();
-    }
-    if (presenterTitleMethod != null && title != null) {
-      logger.log(TreeLogger.ERROR, "The proxy for '" + presenterInspector.getPresenterClassName()
-          + "' is annotated with @' +" + Title.class.getSimpleName()
-          + " and its presenter has a method annotated with @"
-          + TitleFunction.class.getSimpleName() + ". Only once can be used.",
-          null);
-      throw new UnableToCompleteException();
-    }
-  }
-
-  private String getPlaceInstantiationString() {
-    if (getGatekeeperMethod == null) {
-      return "new " + ClassCollection.placeImplClassName + "( nameToken )";
-    } else {
+    public String getGatekeeperParamsString() {
         if (gatekeeperParams == null) {
-          return "new " + ClassCollection.placeWithGatekeeperClassName
-            + "( nameToken, ginjector." + getGatekeeperMethod + "() )";
+            return "null";
+        }
+        StringBuilder builder = new StringBuilder("new String[] {");
+        for (String param : gatekeeperParams) {
+            builder.append("\"").append(param).append("\",");
+        }
+        if (',' == builder.charAt(builder.length() - 1)) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        builder.append("}");
+        return builder.toString();
+    }
+
+    @Override
+    void initSubclass(JClassType proxyInterface)
+            throws UnableToCompleteException {
+        findNameToken(proxyInterface);
+        findGatekeeperMethod(proxyInterface);
+        findGatekeeperParams(proxyInterface);
+        findTitle(proxyInterface);
+    }
+
+    @Override
+    void addSubclassImports(ClassSourceFileComposerFactory composerFactory) {
+        if (title != null || presenterTitleMethod != null) {
+            composerFactory.addImport(GetPlaceTitleEvent.class.getCanonicalName());
+            composerFactory.addImport(AsyncCallback.class.getCanonicalName());
+            composerFactory.addImport(Throwable.class.getCanonicalName());
+        }
+    }
+
+    private void findNameToken(JClassType proxyInterface)
+            throws UnableToCompleteException {
+        NameToken nameTokenAnnotation = proxyInterface.getAnnotation(NameToken.class);
+        if (nameTokenAnnotation == null) {
+            logger.log(TreeLogger.ERROR,
+                    "The proxy for '" + presenterInspector.getPresenterClassName()
+                            + "' is a Place, but is not annotated with @' +"
+                            + NameToken.class.getSimpleName() + ".", null);
+            throw new UnableToCompleteException();
+        }
+        nameToken = nameTokenAnnotation.value();
+    }
+
+    private void findGatekeeperMethod(JClassType proxyInterface)
+            throws UnableToCompleteException {
+        UseGatekeeper gatekeeperAnnotation = proxyInterface.getAnnotation(UseGatekeeper.class);
+        if (gatekeeperAnnotation != null) {
+            String gatekeeperName = gatekeeperAnnotation.value().getCanonicalName();
+            JClassType customGatekeeperClass = oracle.findType(gatekeeperName);
+            if (customGatekeeperClass == null) {
+                logger.log(TreeLogger.ERROR, "The class '" + gatekeeperName
+                        + "' provided to @" + UseGatekeeper.class.getSimpleName()
+                        + " can't be found.", null);
+                throw new UnableToCompleteException();
+            }
+            if (!customGatekeeperClass.isAssignableTo(classCollection.gatekeeperClass)) {
+                logger.log(TreeLogger.ERROR, "The class '" + gatekeeperName
+                        + "' provided to @" + UseGatekeeper.class.getSimpleName()
+                        + " does not inherit from '" + ClassCollection.gatekeeperClassName + "'.", null);
+                throw new UnableToCompleteException();
+            }
+            // Find the appropriate get method in the Ginjector
+            getGatekeeperMethod = ginjectorInspector.findGetMethod(customGatekeeperClass);
+            if (getGatekeeperMethod == null) {
+                logger.log(TreeLogger.ERROR,
+                        "The Ginjector '" + ginjectorInspector.getGinjectorClassName()
+                                + "' does not have a get() method returning '"
+                                + gatekeeperName + "'. This is required when using @"
+                                + UseGatekeeper.class.getSimpleName() + ".", null);
+                throw new UnableToCompleteException();
+            }
+        }
+        if (getGatekeeperMethod == null
+                && proxyInterface.getAnnotation(NoGatekeeper.class) == null) {
+            // No Gatekeeper specified, see if there is a DefaultGatekeeper defined in the ginjector
+            getGatekeeperMethod = ginjectorInspector.findAnnotatedGetMethod(
+                    classCollection.gatekeeperClass, DefaultGatekeeper.class, true);
+        }
+    }
+
+    private void findGatekeeperParams(JClassType proxyInterface) {
+        GatekeeperParams gatekeeperParamsAnnotation = proxyInterface.getAnnotation(GatekeeperParams.class);
+        if (gatekeeperParamsAnnotation != null) {
+            gatekeeperParams = gatekeeperParamsAnnotation.value();
+        }
+    }
+
+    private void findTitle(JClassType proxyInterface)
+            throws UnableToCompleteException {
+        presenterTitleMethod = presenterInspector.findPresenterTitleMethod();
+        Title titleAnnotation = proxyInterface.getAnnotation(Title.class);
+        if (titleAnnotation != null) {
+            title = titleAnnotation.value();
+        }
+        if (presenterTitleMethod != null && title != null) {
+            logger.log(TreeLogger.ERROR, "The proxy for '" + presenterInspector.getPresenterClassName()
+                    + "' is annotated with @' +" + Title.class.getSimpleName()
+                    + " and its presenter has a method annotated with @"
+                    + TitleFunction.class.getSimpleName() + ". Only once can be used.",
+                    null);
+            throw new UnableToCompleteException();
+        }
+    }
+
+    private String getPlaceInstantiationString() {
+        if (getGatekeeperMethod == null) {
+            return "new " + ClassCollection.placeImplClassName + "( nameToken )";
         } else {
-            return "new " + ClassCollection.placeWithGatekeeperWithParamsClassName
-              + "( nameToken, ginjector." + getGatekeeperMethod + "(), gatekeeperParams )";
-      }
+            if (gatekeeperParams == null) {
+                return "new " + ClassCollection.placeWithGatekeeperClassName
+                        + "( nameToken, ginjector." + getGatekeeperMethod + "() )";
+            } else {
+                return "new " + ClassCollection.placeWithGatekeeperWithParamsClassName
+                        + "( nameToken, ginjector." + getGatekeeperMethod + "(), gatekeeperParams )";
+            }
+        }
     }
-  }
 
-  /**
-   * Writes the method {@code protected void getPlaceTitle(final GetPlaceTitleEvent event)} if
-   * one is needed.
-   *
-   * @param writer The {@link SourceWriter}.
-   */
-  private void writeGetPlaceTitleMethod(SourceWriter writer) {
-    if (title != null) {
-      writeGetPlaceTitleMethodConstantText(writer);
-    } else if (presenterTitleMethod != null) {
-      presenterTitleMethod.writeProxyMethod(writer);
+    /**
+     * Writes the method {@code protected void getPlaceTitle(final GetPlaceTitleEvent event)} if
+     * one is needed.
+     *
+     * @param writer The {@link SourceWriter}.
+     */
+    private void writeGetPlaceTitleMethod(SourceWriter writer) {
+        if (title != null) {
+            writeGetPlaceTitleMethodConstantText(writer);
+        } else if (presenterTitleMethod != null) {
+            presenterTitleMethod.writeProxyMethod(writer);
+        }
     }
-  }
 
-  private void writeGetPlaceTitleMethodConstantText(SourceWriter writer) {
-    writer.println();
-    writer.println("protected void getPlaceTitle(GetPlaceTitleEvent event) {");
-    writer.indent();
-    writer.println("event.getHandler().onSetPlaceTitle( \"" + title
-        + "\" );");
-    writer.outdent();
-    writer.println("}");
-  }
+    private void writeGetPlaceTitleMethodConstantText(SourceWriter writer) {
+        writer.println();
+        writer.println("protected void getPlaceTitle(GetPlaceTitleEvent event) {");
+        writer.indent();
+        writer.println("event.getHandler().onSetPlaceTitle( \"" + title
+                + "\" );");
+        writer.outdent();
+        writer.println("}");
+    }
 
-  @Override
-  void writeSubclassDelayedBind(SourceWriter writer) {
-    writer.println(WRAPPED_CLASS_NAME + " wrappedProxy = GWT.create(" + WRAPPED_CLASS_NAME
-        + ".class);");
-    writer.println("wrappedProxy.delayedBind( ginjector ); ");
-    writer.println("setProxy(wrappedProxy); ");
-    writer.println("String nameToken = \"" + getNameToken() + "\"; ");
-    writer.println("String[] gatekeeperParams = " + getGatekeeperParamsString() + ";");
-    writer.println("setPlace(" + getPlaceInstantiationString() + ");");
-  }
+    @Override
+    void writeSubclassDelayedBind(SourceWriter writer) {
+        writer.println(WRAPPED_CLASS_NAME + " wrappedProxy = GWT.create(" + WRAPPED_CLASS_NAME
+                + ".class);");
+        writer.println("wrappedProxy.delayedBind( ginjector ); ");
+        writer.println("setProxy(wrappedProxy); ");
+        writer.println("String nameToken = \"" + getNameToken() + "\"; ");
+        writer.println("String[] gatekeeperParams = " + getGatekeeperParamsString() + ";");
+        writer.println("setPlace(" + getPlaceInstantiationString() + ");");
+    }
 
-  @Override
-  void writeSubclassMethods(SourceWriter writer) {
-    writeGetPlaceTitleMethod(writer);
-  }
+    @Override
+    void writeSubclassMethods(SourceWriter writer) {
+        writeGetPlaceTitleMethod(writer);
+    }
 }

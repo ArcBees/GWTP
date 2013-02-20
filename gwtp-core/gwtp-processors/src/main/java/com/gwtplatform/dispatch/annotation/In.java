@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.annotation;
 
 import java.lang.annotation.ElementType;
-
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,7 +28,7 @@ import java.lang.annotation.Target;
  * See {@link GenDispatch} for an example.
  * <p/>
  * {@code value} Defines the order that fields should be specified in the
- *          constructor of the generated action class.
+ * constructor of the generated action class.
  *
  * @author Brendan Doherty
  * @author Stephen Haberman (concept)
@@ -38,5 +37,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface In {
-  int value();
+    int value();
 }

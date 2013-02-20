@@ -30,7 +30,7 @@ import javax.tools.Diagnostic.Kind;
  * <p>
  * Abstract processor class for all {@code @GenX} annotations.
  * </p>
- *
+ * <p/>
  * Annotate your processor with @{@link SupportedAnnotationTypes} or override
  * {@link #getSupportedAnnotationTypes()} to receive elements, that are
  * annotated in the current environment with one of the given annotations. You
@@ -41,84 +41,85 @@ import javax.tools.Diagnostic.Kind;
  */
 public abstract class GenProcessor extends AbstractProcessor {
 
-  private ProcessingEnvironment environment;
+    private ProcessingEnvironment environment;
 
-  @Override
-  public synchronized void init(ProcessingEnvironment environment) {
-    super.init(environment);
-    this.environment = environment;
-  }
-
-  /**
-   * Returns the current processing environment.
-   *
-   * @return the processing environment.
-   */
-  public ProcessingEnvironment getEnvironment() {
-    return environment;
-  }
-
-  @Override
-  @SuppressWarnings("unchecked")
-  public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
-    if (!roundEnvironment.processingOver()) {
-      onProcessingStarted();
-      for (String supportedAnnotationName : getSupportedAnnotationTypes()) {
-        printMessage("Searching for " + supportedAnnotationName + " annotations.");
-        try {
-            Class<?> supportedAnnotationClass = Class.forName(supportedAnnotationName);
-            if (supportedAnnotationClass.isAnnotation()) {
-              for (Element annotatedElement : roundEnvironment.getElementsAnnotatedWith((Class<? extends Annotation>) supportedAnnotationClass)) {
-                printMessage("Found " + annotatedElement.toString() + ".");
-                this.process(annotatedElement);
-              }
-            }
-        } catch (ClassNotFoundException e) {
-          printError("Annotation not found: " + supportedAnnotationName);
-        }
-      }
-      onProcessingCompleted();
+    @Override
+    public synchronized void init(ProcessingEnvironment environment) {
+        super.init(environment);
+        this.environment = environment;
     }
-    return true;
-  }
 
-  /**
-   * Prints a message.
-   *
-   * @param message the message
-   */
-  public void printMessage(String message) {
-    getEnvironment().getMessager().printMessage(Kind.NOTE,  message);
-  }
+    /**
+     * Returns the current processing environment.
+     *
+     * @return the processing environment.
+     */
+    public ProcessingEnvironment getEnvironment() {
+        return environment;
+    }
 
-  /**
-   * Prints an error.
-   *
-   * @param message the error message
-   */
-  public void printError(String message) {
-    getEnvironment().getMessager().printMessage(Kind.ERROR,  message);
-  }
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
+        if (!roundEnvironment.processingOver()) {
+            onProcessingStarted();
+            for (String supportedAnnotationName : getSupportedAnnotationTypes()) {
+                printMessage("Searching for " + supportedAnnotationName + " annotations.");
+                try {
+                    Class<?> supportedAnnotationClass = Class.forName(supportedAnnotationName);
+                    if (supportedAnnotationClass.isAnnotation()) {
+                        for (Element annotatedElement : roundEnvironment.getElementsAnnotatedWith((Class<? extends
+                                Annotation>) supportedAnnotationClass)) {
+                            printMessage("Found " + annotatedElement.toString() + ".");
+                            this.process(annotatedElement);
+                        }
+                    }
+                } catch (ClassNotFoundException e) {
+                    printError("Annotation not found: " + supportedAnnotationName);
+                }
+            }
+            onProcessingCompleted();
+        }
+        return true;
+    }
 
-  /**
-   * Override this function to receive elements which you've declared in
-   * supported annotations.
-   *
-   * @param annotatedElement the annotated element.
-   */
-  public abstract void process(Element annotatedElement);
+    /**
+     * Prints a message.
+     *
+     * @param message the message
+     */
+    public void printMessage(String message) {
+        getEnvironment().getMessager().printMessage(Kind.NOTE, message);
+    }
 
-  /**
-   * Utility method called after processing has started.
-   */
-  public void onProcessingStarted() {
-    printMessage(getClass().getName() + " started.");
-  }
+    /**
+     * Prints an error.
+     *
+     * @param message the error message
+     */
+    public void printError(String message) {
+        getEnvironment().getMessager().printMessage(Kind.ERROR, message);
+    }
 
-  /**
-   * Utility method called after the processing is finished.
-   */
- public void onProcessingCompleted() {
-   printMessage(getClass().getName() + " finished.");
-  }
+    /**
+     * Override this function to receive elements which you've declared in
+     * supported annotations.
+     *
+     * @param annotatedElement the annotated element.
+     */
+    public abstract void process(Element annotatedElement);
+
+    /**
+     * Utility method called after processing has started.
+     */
+    public void onProcessingStarted() {
+        printMessage(getClass().getName() + " started.");
+    }
+
+    /**
+     * Utility method called after the processing is finished.
+     */
+    public void onProcessingCompleted() {
+        printMessage(getClass().getName() + " finished.");
+    }
 }

@@ -29,5 +29,5 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 public @interface Title {
-  String value() default "";
+    String value() default "";
 }

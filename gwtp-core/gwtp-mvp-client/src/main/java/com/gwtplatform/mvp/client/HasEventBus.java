@@ -22,7 +22,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * Marker interface that tell that an object is bound to an
  * {@link com.google.web.bindery.event.shared.EventBus}. Objects implementing this type
  * can be used as a source when firing an event on the event bus.
- *
+ * <p/>
  * {@link Deprecated} use directly {@link HasHandlers} instead.
  *
  * @author Christian Goudreau

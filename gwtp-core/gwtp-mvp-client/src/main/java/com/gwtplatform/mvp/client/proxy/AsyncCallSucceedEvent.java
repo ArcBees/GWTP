@@ -24,51 +24,50 @@ import com.google.web.bindery.event.shared.EventBus;
  * Event fired after any asynchronous call to the server performed by GWTP MVP has succeeded.
  * Such asynchronous calls only occur when using code splitting.
  *
+ * @author Philippe Beaudoin
  * @see AsyncCallSucceedHandler
  * @see AsyncCallStartEvent
  * @see AsyncCallFailEvent
- *
- * @author Philippe Beaudoin
  */
 public class AsyncCallSucceedEvent extends GwtEvent<AsyncCallSucceedHandler> {
-  private static final Type<AsyncCallSucceedHandler> TYPE = new Type<AsyncCallSucceedHandler>();
+    private static final Type<AsyncCallSucceedHandler> TYPE = new Type<AsyncCallSucceedHandler>();
 
-  /**
-   * Fires a {@link AsyncCallSucceedEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   *
-   * @param source The source that fires this event ({@link EventBus}).
-   */
-  public static void fire(EventBus source) {
-    source.fireEvent(new AsyncCallSucceedEvent());
-  }
+    /**
+     * Fires a {@link AsyncCallSucceedEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source The source that fires this event ({@link EventBus}).
+     */
+    public static void fire(EventBus source) {
+        source.fireEvent(new AsyncCallSucceedEvent());
+    }
 
-  /**
-   * Fires a {@link AsyncCallSucceedEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   * @deprecated Use {@link #fire(EventBus)} instead.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   */
-  @Deprecated
-  public static void fire(final HasHandlers source) {
-    source.fireEvent(new AsyncCallSucceedEvent());
-  }
+    /**
+     * Fires a {@link AsyncCallSucceedEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source The source that fires this event ({@link HasHandlers}).
+     * @deprecated Use {@link #fire(EventBus)} instead.
+     */
+    @Deprecated
+    public static void fire(final HasHandlers source) {
+        source.fireEvent(new AsyncCallSucceedEvent());
+    }
 
-  AsyncCallSucceedEvent() {
-  }
+    AsyncCallSucceedEvent() {
+    }
 
-  public static Type<AsyncCallSucceedHandler> getType() {
-    return TYPE;
-  }
+    public static Type<AsyncCallSucceedHandler> getType() {
+        return TYPE;
+    }
 
-  @Override
-  public Type<AsyncCallSucceedHandler> getAssociatedType() {
-    return getType();
-  }
+    @Override
+    public Type<AsyncCallSucceedHandler> getAssociatedType() {
+        return getType();
+    }
 
-  @Override
-  protected void dispatch(AsyncCallSucceedHandler handler) {
-    handler.onAsyncCallSucceed(this);
-  }
+    @Override
+    protected void dispatch(AsyncCallSucceedHandler handler) {
+        handler.onAsyncCallSucceed(this);
+    }
 }

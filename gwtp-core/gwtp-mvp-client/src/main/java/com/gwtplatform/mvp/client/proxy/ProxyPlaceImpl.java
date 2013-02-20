@@ -23,10 +23,9 @@ import com.gwtplatform.mvp.client.Presenter;
  * See {@link ProxyPlaceAbstract} for more details.
  *
  * @param <P> Type of the associated {@link Presenter}.
- *
  * @author David Peterson
  * @author Philippe Beaudoin
  */
 public class ProxyPlaceImpl<P extends Presenter<?, ?>> extends
-    ProxyPlaceAbstract<P, Proxy<P>> {
+        ProxyPlaceAbstract<P, Proxy<P>> {
 }

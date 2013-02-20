@@ -26,14 +26,14 @@ import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
  */
 public interface MockClientActionHandlerMap {
 
-  /**
-   * @return the {@link com.gwtplatform.dispatch.shared.Action} class associated
-   */
-  Class<?> getActionClass();
+    /**
+     * @return the {@link com.gwtplatform.dispatch.shared.Action} class associated
+     */
+    Class<?> getActionClass();
 
-  /**
-   * @return the {@link ClientActionHandler} class associated
-   */
-  ClientActionHandler<?, ?> getClientActionHandler();
+    /**
+     * @return the {@link ClientActionHandler} class associated
+     */
+    ClientActionHandler<?, ?> getClientActionHandler();
 
 }

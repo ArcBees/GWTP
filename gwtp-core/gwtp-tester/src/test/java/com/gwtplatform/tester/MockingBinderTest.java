@@ -16,9 +16,6 @@
 
 package com.gwtplatform.tester;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.verify;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.AfterClass;
@@ -30,82 +27,85 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.tester.TestView.Binder;
 
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.verify;
+
 /**
-* @author Christian Goudreau
-*/
+ * @author Christian Goudreau
+ */
 @RunWith(JukitoRunner.class)
 public class MockingBinderTest {
-  /**
-   * Guice test module.
-   */
-  public static class Module extends JukitoModule {
     /**
-     * Test {@link Binder} delegating createAndBindUi to {@link MockingBinder}.
+     * Guice test module.
      */
-    static class MyTestBinder extends MockingBinder<Widget, TestView> implements Binder {
-      @Inject
-      public MyTestBinder(MockitoMockFactory mockitoMockFactory) {
-        super(Widget.class, mockitoMockFactory);
-      }
+    public static class Module extends JukitoModule {
+        /**
+         * Test {@link Binder} delegating createAndBindUi to {@link MockingBinder}.
+         */
+        static class MyTestBinder extends MockingBinder<Widget, TestView> implements Binder {
+            @Inject
+            public MyTestBinder(MockitoMockFactory mockitoMockFactory) {
+                super(Widget.class, mockitoMockFactory);
+            }
+        }
+
+        @Override
+        protected void configureTest() {
+            GWTMockUtilities.disarm();
+            bind(Binder.class).to(MyTestBinder.class);
+        }
     }
 
-    @Override
-    protected void configureTest() {
-      GWTMockUtilities.disarm();
-      bind(Binder.class).to(MyTestBinder.class);
+    // SUT
+    @Inject
+    TestView view;
+
+    @Inject
+    Binder binder;
+
+    @AfterClass
+    public static void cleanup() {
+        GWTMockUtilities.restore();
     }
-  }
 
-  // SUT
-  @Inject
-  TestView view;
+    @Test
+    public void mockNullTest() {
+        // THEN
+        assertNotNull(view);
+        assertNotNull(view.mainPanel);
+        assertNotNull(view.someField);
+    }
 
-  @Inject
-  Binder binder;
+    @Test
+    public void mockVerification1Test() {
+        // WHEN
+        view.mainPanel.add(view.someField);
 
-  @AfterClass
-  public static void cleanup() {
-    GWTMockUtilities.restore();
-  }
+        // THEN
+        verify(view.mainPanel).add(view.someField);
+    }
 
-  @Test
-  public void mockNullTest() {
-    // THEN
-    assertNotNull(view);
-    assertNotNull(view.mainPanel);
-    assertNotNull(view.someField);
-  }
+    @Test
+    public void mockVerification2Test() {
+        // GIVEN
+        String someText = "some text";
 
-  @Test
-  public void mockVerification1Test() {
-    // WHEN
-    view.mainPanel.add(view.someField);
+        // WHEN
+        view.someField.setText(someText);
 
-    // THEN
-    verify(view.mainPanel).add(view.someField);
-  }
+        // THEN
+        verify(view.someField).setText(someText);
+    }
 
-  @Test
-  public void mockVerification2Test() {
-    // GIVEN
-    String someText = "some text";
+    @Test
+    public void mockVerification3Test() {
+        // GIVEN
+        Widget widget = binder.createAndBindUi(view);
 
-    // WHEN
-    view.someField.setText(someText);
+        // WHEN
+        widget.asWidget();
 
-    // THEN
-    verify(view.someField).setText(someText);
-  }
-
-  @Test
-  public void mockVerification3Test() {
-    // GIVEN
-    Widget widget = binder.createAndBindUi(view);
-
-    // WHEN
-    widget.asWidget();
-
-    // THEN
-    verify(widget).asWidget();
-  }
+        // THEN
+        verify(widget).asWidget();
+    }
 }

@@ -22,7 +22,7 @@ import com.google.gwt.event.shared.HasHandlers;
 /**
  * This event is fired whenever the user wants to have access to the title of a
  * place.
- * <p />
+ * <p/>
  * <b>Important!</b> You should never fire that event directly. Instead, use
  * {@link PlaceManager#getCurrentTitle(SetPlaceTitleHandler)} or
  * {@link PlaceManager#getTitle(int, SetPlaceTitleHandler)}.
@@ -31,82 +31,82 @@ import com.google.gwt.event.shared.HasHandlers;
  */
 public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
 
-  private static Type<GetPlaceTitleHandler> TYPE;
+    private static Type<GetPlaceTitleHandler> TYPE;
 
-  /**
-   * Fires a {@link GetPlaceTitleEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   * <p />
-   * <b>Important!</b> You should never fire that event directly. See
-   * {@link GetPlaceTitleEvent} for details.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   * @param request The {@link PlaceRequest} for which to obtain the title.
-   * @param handler The {@link SetPlaceTitleHandler} that will be invoked when
-   *          the title is obtained.
-   */
-  public static void fire(HasHandlers source, PlaceRequest request,
-      SetPlaceTitleHandler handler) {
-    source.fireEvent(new GetPlaceTitleEvent(request, handler));
-  }
-
-  public static Type<GetPlaceTitleHandler> getType() {
-    if (TYPE == null) {
-      TYPE = new Type<GetPlaceTitleHandler>();
+    /**
+     * Fires a {@link GetPlaceTitleEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     * <p/>
+     * <b>Important!</b> You should never fire that event directly. See
+     * {@link GetPlaceTitleEvent} for details.
+     *
+     * @param source  The source that fires this event ({@link HasHandlers}).
+     * @param request The {@link PlaceRequest} for which to obtain the title.
+     * @param handler The {@link SetPlaceTitleHandler} that will be invoked when
+     *                the title is obtained.
+     */
+    public static void fire(HasHandlers source, PlaceRequest request,
+            SetPlaceTitleHandler handler) {
+        source.fireEvent(new GetPlaceTitleEvent(request, handler));
     }
-    return TYPE;
-  }
 
-  /**
-   * The handled flag can let others know when the event has been handled.
-   * Handlers should call {@link #setHandled()} as soon as they figure they are
-   * be responsible for this event. Handlers should not process this event if
-   * {@link #isHandled()} return {@code true}.
-   */
-  private boolean handled;
+    public static Type<GetPlaceTitleHandler> getType() {
+        if (TYPE == null) {
+            TYPE = new Type<GetPlaceTitleHandler>();
+        }
+        return TYPE;
+    }
 
-  private final SetPlaceTitleHandler handler;
+    /**
+     * The handled flag can let others know when the event has been handled.
+     * Handlers should call {@link #setHandled()} as soon as they figure they are
+     * be responsible for this event. Handlers should not process this event if
+     * {@link #isHandled()} return {@code true}.
+     */
+    private boolean handled;
 
-  private final PlaceRequest request;
+    private final SetPlaceTitleHandler handler;
 
-  public GetPlaceTitleEvent(PlaceRequest request, SetPlaceTitleHandler handler) {
-    this.request = request;
-    this.handler = handler;
-  }
+    private final PlaceRequest request;
 
-  @Override
-  public Type<GetPlaceTitleHandler> getAssociatedType() {
-    return getType();
-  }
+    public GetPlaceTitleEvent(PlaceRequest request, SetPlaceTitleHandler handler) {
+        this.request = request;
+        this.handler = handler;
+    }
 
-  public SetPlaceTitleHandler getHandler() {
-    return handler;
-  }
+    @Override
+    public Type<GetPlaceTitleHandler> getAssociatedType() {
+        return getType();
+    }
 
-  public PlaceRequest getRequest() {
-    return request;
-  }
+    public SetPlaceTitleHandler getHandler() {
+        return handler;
+    }
 
-  /**
-   * Checks if the event was handled. If it was, then it should not be processed
-   * further.
-   *
-   * @return {@code true} if the event was handled. {@code false} otherwise.
-   */
-  public boolean isHandled() {
-    return handled;
-  }
+    public PlaceRequest getRequest() {
+        return request;
+    }
 
-  /**
-   * Indicates that the event was handled and that other handlers should not
-   * process it.
-   */
-  public void setHandled() {
-    handled = true;
-  }
+    /**
+     * Checks if the event was handled. If it was, then it should not be processed
+     * further.
+     *
+     * @return {@code true} if the event was handled. {@code false} otherwise.
+     */
+    public boolean isHandled() {
+        return handled;
+    }
 
-  @Override
-  protected void dispatch(GetPlaceTitleHandler handler) {
-    handler.onGetPlaceTitle(this);
-  }
+    /**
+     * Indicates that the event was handled and that other handlers should not
+     * process it.
+     */
+    public void setHandled() {
+        handled = true;
+    }
+
+    @Override
+    protected void dispatch(GetPlaceTitleHandler handler) {
+        handler.onGetPlaceTitle(this);
+    }
 }

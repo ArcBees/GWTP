@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * type. The server-side implementation is
  * {@link com.gwtplatform.dispatch.server.guice.DispatchImpl} and the async
  * client-side version is {@link DispatchAsync}.
- * <p />
+ * <p/>
  * This class is closely related to
  * {@link com.gwtplatform.dispatch.shared.DispatchService}. In fact, this class
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
@@ -37,29 +37,29 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  */
 public interface Dispatch {
 
-  /**
-   * Executes the specified action and returns the appropriate result.
-   *
-   * @param <A> The {@link Action} type.
-   * @param <R> The {@link Result} type.
-   * @param action The {@link Action}.
-   * @return The action's result.
-   * @throws ActionException if the action execution failed.
-   * @throws ServiceException if the execution failed due to a service error.
-   */
-  <A extends Action<R>, R extends Result> R execute(A action)
-      throws ActionException, ServiceException;
+    /**
+     * Executes the specified action and returns the appropriate result.
+     *
+     * @param <A>    The {@link Action} type.
+     * @param <R>    The {@link Result} type.
+     * @param action The {@link Action}.
+     * @return The action's result.
+     * @throws ActionException  if the action execution failed.
+     * @throws ServiceException if the execution failed due to a service error.
+     */
+    <A extends Action<R>, R extends Result> R execute(A action)
+            throws ActionException, ServiceException;
 
-  /**
-   * Undoes a previously executed action.
-   *
-   * @param <A> The {@link Action} type.
-   * @param <R> The {@link Result} type.
-   * @param action The {@link Action} to undo.
-   * @param result The result obtained when the action was previously executed.
-   * @throws ActionException if undoing the action failed.
-   * @throws ServiceException if the execution failed due to a service error.
-   */
-  <A extends Action<R>, R extends Result> void undo(A action, R result)
-      throws ActionException, ServiceException;
+    /**
+     * Undoes a previously executed action.
+     *
+     * @param <A>    The {@link Action} type.
+     * @param <R>    The {@link Result} type.
+     * @param action The {@link Action} to undo.
+     * @param result The result obtained when the action was previously executed.
+     * @throws ActionException  if undoing the action failed.
+     * @throws ServiceException if the execution failed due to a service error.
+     */
+    <A extends Action<R>, R extends Result> void undo(A action, R result)
+            throws ActionException, ServiceException;
 }
