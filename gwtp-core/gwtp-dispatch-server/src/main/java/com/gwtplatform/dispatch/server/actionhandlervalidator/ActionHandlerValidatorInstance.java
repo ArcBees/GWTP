@@ -28,20 +28,20 @@ import com.gwtplatform.dispatch.shared.Result;
  * @author Christian Goudreau
  */
 public class ActionHandlerValidatorInstance {
-  private final ActionHandler<? extends Action<?>, ? extends Result> actionHandler;
-  private final ActionValidator actionValidator;
+    private final ActionHandler<? extends Action<?>, ? extends Result> actionHandler;
+    private final ActionValidator actionValidator;
 
-  public ActionHandlerValidatorInstance(final ActionValidator actionValidator,
-      ActionHandler<?, ?> actionHandler) {
-    this.actionHandler = actionHandler;
-    this.actionValidator = actionValidator;
-  }
+    public ActionHandlerValidatorInstance(final ActionValidator actionValidator,
+            ActionHandler<?, ?> actionHandler) {
+        this.actionHandler = actionHandler;
+        this.actionValidator = actionValidator;
+    }
 
-  public ActionHandler<? extends Action<?>, ? extends Result> getActionHandler() {
-    return actionHandler;
-  }
+    public ActionHandler<? extends Action<?>, ? extends Result> getActionHandler() {
+        return actionHandler;
+    }
 
-  public ActionValidator getActionValidator() {
-    return actionValidator;
-  }
+    public ActionValidator getActionValidator() {
+        return actionValidator;
+    }
 }

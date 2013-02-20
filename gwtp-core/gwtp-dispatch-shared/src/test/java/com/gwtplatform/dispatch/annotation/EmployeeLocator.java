@@ -24,33 +24,33 @@ import com.google.web.bindery.requestfactory.shared.Locator;
  * @author Florian Sauter
  */
 public class EmployeeLocator extends Locator<Employee, Long> {
-  @Override
-  public Employee create(Class<? extends Employee> clazz) {
-    return new Employee();
-  }
+    @Override
+    public Employee create(Class<? extends Employee> clazz) {
+        return new Employee();
+    }
 
-  @Override
-  public Employee find(Class<? extends Employee> clazz, Long id) {
-    return null;
-  }
+    @Override
+    public Employee find(Class<? extends Employee> clazz, Long id) {
+        return null;
+    }
 
-  @Override
-  public Class<Employee> getDomainType() {
-    return null;
-  }
+    @Override
+    public Class<Employee> getDomainType() {
+        return null;
+    }
 
-  @Override
-  public Long getId(Employee domainObject) {
-    return null;
-  }
+    @Override
+    public Long getId(Employee domainObject) {
+        return null;
+    }
 
-  @Override
-  public Class<Long> getIdType() {
-    return null;
-  }
+    @Override
+    public Class<Long> getIdType() {
+        return null;
+    }
 
-  @Override
-  public Object getVersion(Employee domainObject) {
-    return null;
-  }
+    @Override
+    public Object getVersion(Employee domainObject) {
+        return null;
+    }
 }

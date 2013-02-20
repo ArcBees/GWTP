@@ -16,68 +16,66 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.web.bindery.event.shared.EventBus;
+import javax.inject.Inject;
+
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.mvp.client.Presenter;
 
-import javax.inject.Inject;
-
 /**
- * @author Philippe Beaudoin
- *
  * @param <P> The presenter's type.
+ * @author Philippe Beaudoin
  */
 public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
-  protected IndirectProvider<P> presenter;
-  protected EventBus eventBus;
+    protected IndirectProvider<P> presenter;
+    protected EventBus eventBus;
 
-  /**
-   * Creates a Proxy class for a specific presenter.
-   */
-  public ProxyImpl() {
-  }
+    /**
+     * Creates a Proxy class for a specific presenter.
+     */
+    public ProxyImpl() {
+    }
 
-  @Override
-  public void getPresenter(NotifyingAsyncCallback<P> callback) {
-    callback.prepare();
-    presenter.get(callback);
-    callback.checkLoading();
-  }
+    @Override
+    public void getPresenter(NotifyingAsyncCallback<P> callback) {
+        callback.prepare();
+        presenter.get(callback);
+        callback.checkLoading();
+    }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public void getRawPresenter(NotifyingAsyncCallback<Presenter<?, ?>> callback) {
-    callback.prepare();
-    presenter.get((AsyncCallback<P>) callback);
-    callback.checkLoading();
-  }
+    @SuppressWarnings("unchecked")
+    @Override
+    public void getRawPresenter(NotifyingAsyncCallback<Presenter<?, ?>> callback) {
+        callback.prepare();
+        presenter.get((AsyncCallback<P>) callback);
+        callback.checkLoading();
+    }
 
-  /**
-   * Injects the various resources and performs other bindings.
-   * <p />
-   * Never call directly, it should only be called by GIN. Method injection is
-   * used instead of constructor injection, because the latter doesn't work well
-   * with GWT generators.
-   *
-   * @param placeManager The {@link PlaceManager}. Ignored.
-   * @param eventBus The {@link EventBus}.
-   */
-  @Inject
-  protected void bind(final PlaceManager placeManager, EventBus eventBus) {
-    this.eventBus = eventBus;
-  }
+    /**
+     * Injects the various resources and performs other bindings.
+     * <p/>
+     * Never call directly, it should only be called by GIN. Method injection is
+     * used instead of constructor injection, because the latter doesn't work well
+     * with GWT generators.
+     *
+     * @param placeManager The {@link PlaceManager}. Ignored.
+     * @param eventBus     The {@link EventBus}.
+     */
+    @Inject
+    protected void bind(final PlaceManager placeManager, EventBus eventBus) {
+        this.eventBus = eventBus;
+    }
 
-  @Override
-  public void fireEvent(GwtEvent<?> event) {
-    eventBus.fireEventFromSource(event, this);
-  }
+    @Override
+    public void fireEvent(GwtEvent<?> event) {
+        eventBus.fireEventFromSource(event, this);
+    }
 
-  @Override
-  public final EventBus getEventBus() {
-    return eventBus;
-  }
+    @Override
+    public final EventBus getEventBus() {
+        return eventBus;
+    }
 }

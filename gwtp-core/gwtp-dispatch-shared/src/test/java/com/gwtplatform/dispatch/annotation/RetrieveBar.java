@@ -24,14 +24,15 @@ import com.gwtplatform.dispatch.shared.Action;
  * @author Brendan Doherty
  */
 @GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
-    + "Blah", extraResultInterfaces = "com.gwtplatform.dispatch.annotation.HasThing<com.gwtplatform.dispatch.annotation.Foo>")
+        + "Blah", extraResultInterfaces = "com.gwtplatform.dispatch.annotation.HasThing<com.gwtplatform.dispatch" +
+        ".annotation.Foo>")
 public class RetrieveBar {
-  @In(1)
-  String goodName;
+    @In(1)
+    String goodName;
 
-  @Out(1)
-  com.gwtplatform.dispatch.annotation.Foo thing;
+    @Out(1)
+    com.gwtplatform.dispatch.annotation.Foo thing;
 
-  @Out(2)
-  int meaningOfLife;
+    @Out(2)
+    int meaningOfLife;
 }

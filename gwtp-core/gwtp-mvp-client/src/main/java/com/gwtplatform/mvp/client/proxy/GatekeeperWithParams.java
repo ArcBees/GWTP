@@ -24,45 +24,45 @@ package com.gwtplatform.mvp.client.proxy;
  * <pre>
  * public class HasAllRolesGatekeeper implements GatekeeperWithParams {
  *
- *   private final CurrentUser currentUser;
- *   private String[] requiredRoles;
+ * private final CurrentUser currentUser;
+ * private String[] requiredRoles;
  *
- *  {@code @}Inject
- *   public HasAllRolesGatekeeper( CurrentUser currentUser ) {
- *     this.currentUser = currentUser;
- *   }
+ * {@code @}Inject
+ * public HasAllRolesGatekeeper( CurrentUser currentUser ) {
+ * this.currentUser = currentUser;
+ * }
  *
- *  {@code @}Override
- *  public GatekeeperWithParams withParams(String[] params) {
- *     requiredRoles = params;
- *     return this;
- *   }
+ * {@code @}Override
+ * public GatekeeperWithParams withParams(String[] params) {
+ * requiredRoles = params;
+ * return this;
+ * }
  *
- *  {@code @}Override
- *   public boolean canReveal() {
- *     return currentUser.getRoles().containsAll(Arrays.asList(requiredRoles);
- *   }
+ * {@code @}Override
+ * public boolean canReveal() {
+ * return currentUser.getRoles().containsAll(Arrays.asList(requiredRoles);
+ * }
  * }
  * </pre>
- *
+ * <p/>
  * You must also make sure that your custom Ginjector provides a {@code get}
  * method returning this {@link GatekeeperWithParams} if you want to use it
  * with the {@link com.gwtplatform.mvp.client.annotations.GatekeeperParams}
  * annotation.
- * <p />
+ * <p/>
  * You should usually bind your {@link GatekeeperWithParams} as a singleton.
  *
  * @author Juan Carlos González
  */
 public interface GatekeeperWithParams extends Gatekeeper {
 
-  /**
-   * Sets the parameters required by this {@link GatekeeperWithParams}
-   * in order to decide if {@link Place} can be revealed.
-   *
-   * @param params array of parameters
-   * @return a reference to itself for chaining with the call to the inherited
-   * canReveal method.
-   */
-  GatekeeperWithParams withParams(String[] params);
+    /**
+     * Sets the parameters required by this {@link GatekeeperWithParams}
+     * in order to decide if {@link Place} can be revealed.
+     *
+     * @param params array of parameters
+     * @return a reference to itself for chaining with the call to the inherited
+     *         canReveal method.
+     */
+    GatekeeperWithParams withParams(String[] params);
 }

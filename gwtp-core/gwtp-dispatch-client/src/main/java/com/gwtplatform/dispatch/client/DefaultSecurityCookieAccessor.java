@@ -18,14 +18,13 @@ package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.Cookies;
 import com.google.inject.Inject;
-
 import com.gwtplatform.dispatch.shared.SecurityCookie;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This class provides access to the session id client side by looking into a
  * cookie on the browser. This will work to prevent XSRF attack.
- * <p />
+ * <p/>
  * To use this class you have to bind a constant string annotated with {@code @}
  * {@link SecurityCookie} to your desired cookie name.
  *
@@ -33,14 +32,14 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  */
 public class DefaultSecurityCookieAccessor implements SecurityCookieAccessor {
 
-  @Inject(optional = true)
-  @SecurityCookie
-  public String cookieName;
+    @Inject(optional = true)
+    @SecurityCookie
+    public String cookieName;
 
-  public String getCookieContent() {
-    if (cookieName == null) {
-      return null;
+    public String getCookieContent() {
+        if (cookieName == null) {
+            return null;
+        }
+        return Cookies.getCookie(cookieName);
     }
-    return Cookies.getCookie(cookieName);
-  }
 }

@@ -16,9 +16,9 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.google.web.bindery.event.shared.EventBus;
-
 import javax.inject.Inject;
+
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * This place manager overrides all the methods that use
@@ -29,40 +29,40 @@ import javax.inject.Inject;
  */
 class PlaceManagerTestUtil extends PlaceManagerImpl {
 
-  private final PlaceRequest defaultPlaceRequest = new PlaceRequest("defaultPlace");
-  private final PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
+    private final PlaceRequest defaultPlaceRequest = new PlaceRequest("defaultPlace");
+    private final PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
 
-  @Inject
-  public PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
-      PlaceManagerWindowMethodsTestUtil gwtWindowMethods) {
-    super(eventBus, tokenFormatter);
-    this.gwtWindowMethods = gwtWindowMethods;
-  }
-
-  @Override
-  public void revealDefaultPlace() {
-    revealPlace(defaultPlaceRequest);
-  }
-
-  @Override
-  void registerTowardsHistory() {
-    if (gwtWindowMethods != null) {
-      gwtWindowMethods.registerTowardsHistory();
+    @Inject
+    public PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
+            PlaceManagerWindowMethodsTestUtil gwtWindowMethods) {
+        super(eventBus, tokenFormatter);
+        this.gwtWindowMethods = gwtWindowMethods;
     }
-  }
 
-  @Override
-  String getBrowserHistoryToken() {
-    return gwtWindowMethods.getBrowserHistoryToken();
-  }
+    @Override
+    public void revealDefaultPlace() {
+        revealPlace(defaultPlaceRequest);
+    }
 
-  @Override
-  public void revealCurrentPlace() {
-    gwtWindowMethods.revealCurrentPlace();
-  }
+    @Override
+    void registerTowardsHistory() {
+        if (gwtWindowMethods != null) {
+            gwtWindowMethods.registerTowardsHistory();
+        }
+    }
 
-  @Override
-  void setBrowserHistoryToken(String historyToken, boolean issueEvent) {
-    gwtWindowMethods.setBrowserHistoryToken(historyToken, issueEvent);
-  }
+    @Override
+    String getBrowserHistoryToken() {
+        return gwtWindowMethods.getBrowserHistoryToken();
+    }
+
+    @Override
+    public void revealCurrentPlace() {
+        gwtWindowMethods.revealCurrentPlace();
+    }
+
+    @Override
+    void setBrowserHistoryToken(String historyToken, boolean issueEvent) {
+        gwtWindowMethods.setBrowserHistoryToken(historyToken, issueEvent);
+    }
 }

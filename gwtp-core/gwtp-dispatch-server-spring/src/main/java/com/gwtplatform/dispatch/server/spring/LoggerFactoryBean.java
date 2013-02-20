@@ -16,33 +16,33 @@
 
 package com.gwtplatform.dispatch.server.spring;
 
-import org.springframework.beans.factory.FactoryBean;
-
 import java.util.logging.Logger;
+
+import org.springframework.beans.factory.FactoryBean;
 
 /**
  *
  */
 public class LoggerFactoryBean implements FactoryBean<Logger> {
 
-  private final Logger logger;
+    private final Logger logger;
 
-  public LoggerFactoryBean(Logger logger) {
-    this.logger = logger;
-  }
+    public LoggerFactoryBean(Logger logger) {
+        this.logger = logger;
+    }
 
-  @Override
-  public Logger getObject() throws Exception {
-    return logger;
-  }
+    @Override
+    public Logger getObject() throws Exception {
+        return logger;
+    }
 
-  @Override
-  public Class<Logger> getObjectType() {
-    return Logger.class;
-  }
+    @Override
+    public Class<Logger> getObjectType() {
+        return Logger.class;
+    }
 
-  @Override
-  public boolean isSingleton() {
-    return true;
-  }
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
 }

@@ -29,13 +29,13 @@ import com.google.gwt.inject.client.Ginjector;
  * @author Philippe Beaudoin
  */
 public interface DelayedBind {
-  /**
-   * Requests that the classes binds all its objects using the {@link Ginjector}
-   * to get the required instances. This should ever only be called once,
-   * typically by {@link DelayedBindRegistry#bind(Ginjector)}. You should cast
-   * the passed {@link Ginjector} to your specific Ginjector interface.
-   *
-   * @param ginjector The {@link Ginjector} from which to get object instances.
-   */
-  void delayedBind(Ginjector ginjector);
+    /**
+     * Requests that the classes binds all its objects using the {@link Ginjector}
+     * to get the required instances. This should ever only be called once,
+     * typically by {@link DelayedBindRegistry#bind(Ginjector)}. You should cast
+     * the passed {@link Ginjector} to your specific Ginjector interface.
+     *
+     * @param ginjector The {@link Ginjector} from which to get object instances.
+     */
+    void delayedBind(Ginjector ginjector);
 }

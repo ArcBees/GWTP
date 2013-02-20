@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.gwtplatform</groupId>
         <artifactId>gwtp</artifactId>
-        <version>0.8-SNAPSHOT</version>
+        <version>1.0-RC-2-SNAPSHOT</version>
     </parent>
 
     <artifactId>gwtp-core</artifactId>
@@ -13,7 +14,6 @@
     <name>GWTP Core</name>
 
     <modules>
-        <module>gwtp-all</module>
         <module>gwtp-mvp-client</module>
         <module>gwtp-clients-common</module>
         <module>gwtp-dispatch-client</module>
@@ -69,14 +69,13 @@
                         <artifactId>gwt-servlet</artifactId>
                         <version>${gwt.version}</version>
                     </dependency>
-              </dependencies>
+                </dependencies>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 
@@ -106,8 +105,8 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <!-- Even though this is not needed server-side, we do not use a provided
-                scope as this dependency is always included transitively. -->
+                <!-- Even though this is not needed server-side, we do not 
+                    use a provided scope as this dependency is always included transitively. -->
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-clients-common</artifactId>
                 <version>${project.version}</version>
@@ -148,7 +147,7 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-mvp-client</artifactId>
                 <version>${project.version}</version>
-                <scope>provided</scope> <!-- Not needed server-side -->				
+                <scope>provided</scope> <!-- Not needed server-side -->
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -180,6 +179,11 @@
                 <artifactId>gwt-servlet</artifactId>
                 <version>${gwt.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <!-- DI dependencies -->
@@ -225,6 +229,13 @@
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>${persistence-api.version}</version>
+            </dependency>
+
+            <!-- Rebind dependencies -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
 
             <!-- Test dependencies -->

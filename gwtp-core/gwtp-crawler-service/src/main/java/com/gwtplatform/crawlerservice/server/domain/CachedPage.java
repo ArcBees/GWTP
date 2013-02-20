@@ -24,40 +24,40 @@ import java.util.Date;
  * @author Philippe Beaudoin
  */
 public class CachedPage extends DatastoreObject {
-  private String url;
-  private Date fetchDate;
-  private boolean fetchInProgress;
-  private String content;
+    private String url;
+    private Date fetchDate;
+    private boolean fetchInProgress;
+    private String content;
 
-  public void setUrl(String url) {
-    this.url = url;
-  }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-  public String getUrl() {
-    return url;
-  }
+    public String getUrl() {
+        return url;
+    }
 
-  public void setFetchDate(Date fetchDate) {
-    this.fetchDate = fetchDate;
-  }
+    public void setFetchDate(Date fetchDate) {
+        this.fetchDate = fetchDate;
+    }
 
-  public Date getFetchDate() {
-    return fetchDate;
-  }
+    public Date getFetchDate() {
+        return fetchDate;
+    }
 
-  public void setFetchInProgress(boolean fetchInProgress) {
-    this.fetchInProgress = fetchInProgress;
-  }
+    public void setFetchInProgress(boolean fetchInProgress) {
+        this.fetchInProgress = fetchInProgress;
+    }
 
-  public boolean isFetchInProgress() {
-    return fetchInProgress;
-  }
+    public boolean isFetchInProgress() {
+        return fetchInProgress;
+    }
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-  public String getContent() {
-    return content;
-  }
+    public String getContent() {
+        return content;
+    }
 }
