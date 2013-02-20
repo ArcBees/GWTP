@@ -16,6 +16,13 @@
 
 package com.gwtplatform.mvp.client;
 
+import javax.inject.Inject;
+
+import org.jukito.JukitoRunner;
+import org.jukito.TestSingleton;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import static org.junit.Assert.assertEquals;
@@ -23,13 +30,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import org.jukito.JukitoRunner;
-import org.jukito.TestSingleton;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import javax.inject.Inject;
 
 /**
  * Unit tests for {@link HandlerContainerImpl}.
@@ -39,121 +39,121 @@ import javax.inject.Inject;
 @RunWith(JukitoRunner.class)
 public class HandlerContainerImplTest {
 
-  // A subclass of HandlerContainerImpl that does not use autobinding
-  // and counts its inherited method invocations
-  @TestSingleton
-  static class NonAutoboundHandlerContainer extends HandlerContainerImpl {
-    public int onBindMethodCalled;
-    public int onUnbindMethodCalled;
+    // A subclass of HandlerContainerImpl that does not use autobinding
+    // and counts its inherited method invocations
+    @TestSingleton
+    static class NonAutoboundHandlerContainer extends HandlerContainerImpl {
+        public int onBindMethodCalled;
+        public int onUnbindMethodCalled;
 
-    @Inject
-    NonAutoboundHandlerContainer() {
-      super(false);
+        @Inject
+        NonAutoboundHandlerContainer() {
+            super(false);
+        }
+
+        @Override
+        protected void onBind() {
+            super.onBind();
+            onBindMethodCalled++;
+        }
+
+        @Override
+        protected void onUnbind() {
+            super.onUnbind();
+            onUnbindMethodCalled++;
+        }
     }
 
-    @Override
-    protected void onBind() {
-      super.onBind();
-      onBindMethodCalled++;
+    @Test
+    public void callingBindShouldInvokeOnBind(
+            NonAutoboundHandlerContainer handlerContainer) {
+        // Given
+        handlerContainer.bind();
+
+        // When, Then
+        assertEquals(1, handlerContainer.onBindMethodCalled);
     }
 
-    @Override
-    protected void onUnbind() {
-      super.onUnbind();
-      onUnbindMethodCalled++;
+    @Test
+    public void callingUnbindShouldInvokeOnUnbind(
+            NonAutoboundHandlerContainer handlerContainer) {
+        // Given
+        handlerContainer.bind();
+        handlerContainer.unbind();
+
+        // When, Then
+        assertEquals(1, handlerContainer.onUnbindMethodCalled);
     }
-  }
 
-  @Test
-  public void callingBindShouldInvokeOnBind(
-      NonAutoboundHandlerContainer handlerContainer) {
-    // Given
-    handlerContainer.bind();
+    @Test
+    public void callingUnbindWhenUnboundShouldNotInvokeOnUnbind(
+            NonAutoboundHandlerContainer handlerContainer) {
+        // Given
+        handlerContainer.bind();
+        handlerContainer.unbind();
+        handlerContainer.unbind();
+        handlerContainer.bind();
+        handlerContainer.unbind();
+        handlerContainer.unbind();
 
-    // When, Then
-    assertEquals(1, handlerContainer.onBindMethodCalled);
-  }
+        // When, Then
+        assertEquals(2, handlerContainer.onUnbindMethodCalled);
+    }
 
-  @Test
-  public void callingUnbindShouldInvokeOnUnbind(
-      NonAutoboundHandlerContainer handlerContainer) {
-    // Given
-    handlerContainer.bind();
-    handlerContainer.unbind();
+    @Test
+    public void shouldBindDefaultHandlerContainerOnInjection(
+            HandlerContainerImpl handlerContainer) {
+        // Given
+        // HandlerContainerImpl is injected
 
-    // When, Then
-    assertEquals(1, handlerContainer.onUnbindMethodCalled);
-  }
+        // When, Then
+        // the bind method should be injected at creation time
+        assertTrue(handlerContainer.isBound());
+    }
 
-  @Test
-  public void callingUnbindWhenUnboundShouldNotInvokeOnUnbind(
-      NonAutoboundHandlerContainer handlerContainer) {
-    // Given
-    handlerContainer.bind();
-    handlerContainer.unbind();
-    handlerContainer.unbind();
-    handlerContainer.bind();
-    handlerContainer.unbind();
-    handlerContainer.unbind();
+    @Test
+    public void shouldNotBindNonAutoboundHandlerContainerOnInjection(
+            NonAutoboundHandlerContainer handlerContainer) {
+        // Given
+        // A non-autobound subclass is injected
 
-    // When, Then
-    assertEquals(2, handlerContainer.onUnbindMethodCalled);
-  }
+        // When, Then
+        // the bind method should NOT be invoked at creation time
+        assertFalse(handlerContainer.isBound());
+    }
 
-  @Test
-  public void shouldBindDefaultHandlerContainerOnInjection(
-      HandlerContainerImpl handlerContainer) {
-    // Given
-    // HandlerContainerImpl is injected
+    @Test
+    public void unbindingMultipleTimesRemoveHandlersOnlyOnce(
+            HandlerContainerImpl handlerContainer) {
+        // Given
+        HandlerRegistration mockHandlerRegistration = mock(HandlerRegistration.class);
+        handlerContainer.registerHandler(mockHandlerRegistration);
 
-    // When, Then
-    // the bind method should be injected at creation time
-    assertTrue(handlerContainer.isBound());
-  }
+        // When
+        handlerContainer.unbind();
+        handlerContainer.bind();
+        handlerContainer.unbind();
+        handlerContainer.unbind();
 
-  @Test
-  public void shouldNotBindNonAutoboundHandlerContainerOnInjection(
-      NonAutoboundHandlerContainer handlerContainer) {
-    // Given
-    // A non-autobound subclass is injected
+        // Then
+        verify(mockHandlerRegistration).removeHandler();
+    }
 
-    // When, Then
-    // the bind method should NOT be invoked at creation time
-    assertFalse(handlerContainer.isBound());
-  }
+    @Test
+    public void unbindingRemoveHandlers(
+            HandlerContainerImpl handlerContainer) {
+        // Given
+        HandlerRegistration mockHandlerRegistration1 = mock(HandlerRegistration.class);
+        HandlerRegistration mockHandlerRegistration2 = mock(HandlerRegistration.class);
+        handlerContainer.registerHandler(mockHandlerRegistration1);
+        handlerContainer.registerHandler(mockHandlerRegistration2);
 
-  @Test
-  public void unbindingMultipleTimesRemoveHandlersOnlyOnce(
-      HandlerContainerImpl handlerContainer) {
-    // Given
-    HandlerRegistration mockHandlerRegistration = mock(HandlerRegistration.class);
-    handlerContainer.registerHandler(mockHandlerRegistration);
+        // When
+        handlerContainer.unbind();
 
-    // When
-    handlerContainer.unbind();
-    handlerContainer.bind();
-    handlerContainer.unbind();
-    handlerContainer.unbind();
-
-    // Then
-    verify(mockHandlerRegistration).removeHandler();
-  }
-
-  @Test
-  public void unbindingRemoveHandlers(
-      HandlerContainerImpl handlerContainer) {
-    // Given
-    HandlerRegistration mockHandlerRegistration1 = mock(HandlerRegistration.class);
-    HandlerRegistration mockHandlerRegistration2 = mock(HandlerRegistration.class);
-    handlerContainer.registerHandler(mockHandlerRegistration1);
-    handlerContainer.registerHandler(mockHandlerRegistration2);
-
-    // When
-    handlerContainer.unbind();
-
-    // Then
-    verify(mockHandlerRegistration1).removeHandler();
-    verify(mockHandlerRegistration2).removeHandler();
-  }
+        // Then
+        verify(mockHandlerRegistration1).removeHandler();
+        verify(mockHandlerRegistration2).removeHandler();
+    }
 
 }

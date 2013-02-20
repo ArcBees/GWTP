@@ -23,14 +23,14 @@ package com.gwtplatform.dispatch.annotation;
  */
 @GenEvent
 public class FooChanged {
-  @Order(1)
-  Foo foo;
-  @Order(2)
-  boolean originator;
-  @Optional
-  @Order(3)
-  String additionalMessage;
-  @Optional
-  @Order(4)
-  double priority;
+    @Order(1)
+    Foo foo;
+    @Order(2)
+    boolean originator;
+    @Optional
+    @Order(3)
+    String additionalMessage;
+    @Optional
+    @Order(4)
+    double priority;
 }

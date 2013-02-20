@@ -29,11 +29,11 @@ import com.google.gwt.user.client.ui.Label;
  */
 public class InjectedLabel extends Composite {
 
-  private final Label label;
+    private final Label label;
 
-  @Inject
-  public InjectedLabel(@Named("notice") String notice) {
-    label = new Label(notice);
-    initWidget(label);
-  }
+    @Inject
+    public InjectedLabel(@Named("notice") String notice) {
+        label = new Label(notice);
+        initWidget(label);
+    }
 }

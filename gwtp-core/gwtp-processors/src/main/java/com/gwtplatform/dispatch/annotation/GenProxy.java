@@ -86,61 +86,60 @@ import com.google.web.bindery.requestfactory.shared.Locator;
  *
  * @author Florian Sauter
  */
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.SOURCE)
 @Inherited
 public @interface GenProxy {
-  /**
-   * Defines the output package.
-   *
-   * <p>
-   * By default the output is generated to the same source folder.
-   * </p>
-   *
-   * <p>
-   * If you are not using a custom target package, the processor will
-   * automatically replace ".server" in your package name with ".shared".
-   * </p>
-   *
-   * <p>
-   * <code>
-   * {@code @GenProxy}(targetPackage = "com.example.package.server")
-   * </code>
-   * </p>
-   */
-  String targetPackage() default "";
+    /**
+     * Defines the output package.
+     * <p/>
+     * <p>
+     * By default the output is generated to the same source folder.
+     * </p>
+     * <p/>
+     * <p>
+     * If you are not using a custom target package, the processor will
+     * automatically replace ".server" in your package name with ".shared".
+     * </p>
+     * <p/>
+     * <p>
+     * <code>
+     * {@code @GenProxy}(targetPackage = "com.example.package.server")
+     * </code>
+     * </p>
+     */
+    String targetPackage() default "";
 
-  /**
-   * Add a property name to avoid the generation of a getter for this property.
-   * <p>
-   * <code>
-   * {@code @GenProxy}(filterGetter = {"id", "customer"})
-   * </code>
-   * </p>
-   * The properties "id" and "customer" will have no getters.
-   */
-  String[] filterGetter() default { };
+    /**
+     * Add a property name to avoid the generation of a getter for this property.
+     * <p>
+     * <code>
+     * {@code @GenProxy}(filterGetter = {"id", "customer"})
+     * </code>
+     * </p>
+     * The properties "id" and "customer" will have no getters.
+     */
+    String[] filterGetter() default {};
 
-  /**
-   * Add a property name to avoid the generation of a setter for this property.
-   * <p>
-   * <code>
-   * {@code @GenProxy}(filterSetter = {"id", "customer"})
-   * </code>
-   * </p>
-   * The properties "id" and "customer" will have no setters.
-   */
-  String[] filterSetter() default { };
+    /**
+     * Add a property name to avoid the generation of a setter for this property.
+     * <p>
+     * <code>
+     * {@code @GenProxy}(filterSetter = {"id", "customer"})
+     * </code>
+     * </p>
+     * The properties "id" and "customer" will have no setters.
+     */
+    String[] filterSetter() default {};
 
-  /**
-   * An embedded type results in a ValueProxy instead of an EntityProxy. By
-   * default, an EntityProxy is generated.
-   */
-  boolean isEmbeddedType() default false;
+    /**
+     * An embedded type results in a ValueProxy instead of an EntityProxy. By
+     * default, an EntityProxy is generated.
+     */
+    boolean isEmbeddedType() default false;
 
-  /**
-   * @see ProxyFor#locator()
-   */
-  @SuppressWarnings("rawtypes")
-  Class<? extends Locator> locator() default com.google.web.bindery.requestfactory.shared.Locator.class;
+    /**
+     * @see ProxyFor#locator()
+     */
+    @SuppressWarnings("rawtypes") Class<? extends Locator> locator() default com.google.web.bindery.requestfactory.shared.Locator.class;
 }

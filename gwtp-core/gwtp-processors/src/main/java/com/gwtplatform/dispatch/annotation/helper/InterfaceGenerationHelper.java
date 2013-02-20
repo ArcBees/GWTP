@@ -29,71 +29,71 @@ import javax.lang.model.element.VariableElement;
  * @author Florian Sauter
  */
 public class InterfaceGenerationHelper extends GenerationHelper {
-  public InterfaceGenerationHelper(Writer sourceWriter) {
-    super(sourceWriter);
-  }
-
-  /**
-   * Generates an empty method body.
-   *
-   * If you type:
-   *
-   * <pre>
-   * <code>
-   *    writer.generateEmptyMethodBody("MyEntity", "stableId");
-   * </code>
-   * </pre>
-   *
-   * The following method body will be generated:
-   *
-   * <pre>
-   * <code>
-   *     MyEntity stableId();
-   * </code>
-   * </pre>
-   *
-   * @param methodName
-   * @param returnType
-   */
-  public void generateEmptyMethodBody(String methodName, String returnType) {
-    println();
-    print("  {0} {1}();", returnType, methodName);
-  }
-
-  public void generateGetter(String fieldName, String getterType) {
-    println();
-    print("  {0} get{1}();", getterType, firstCharToUpperCase(fieldName));
-    println();
-  }
-
-  public void generateGetter(VariableElement fieldElement) {
-    println();
-    print("  {0} {1}();", fieldElement.asType().toString(), manufactureAccessorName(fieldElement));
-    println();
-  }
-
-  public void generateInterfaceHeader(String inferfaceName, Set<Modifier> modifiers, String... extendedInterfaces) {
-    print("{0}interface {1}", generateModifierList(modifiers.toArray(new Modifier[]{})), inferfaceName);
-    if (extendedInterfaces != null && extendedInterfaces.length > 0) {
-      printWithoutSpaces(" extends {0}", implode(extendedInterfaces, ","));
+    public InterfaceGenerationHelper(Writer sourceWriter) {
+        super(sourceWriter);
     }
-    printWithoutSpaces(" { ");
-  }
 
-  public void generateSetter(String fieldName, String fieldType) {
-    println();
-    print("  void {0}({1} {2});",
-        manufactureSetterName(fieldName),
-        fieldType,
-        fieldName
-    );
-    println();
-  }
+    /**
+     * Generates an empty method body.
+     * <p/>
+     * If you type:
+     * <p/>
+     * <pre>
+     * <code>
+     *    writer.generateEmptyMethodBody("MyEntity", "stableId");
+     * </code>
+     * </pre>
+     * <p/>
+     * The following method body will be generated:
+     * <p/>
+     * <pre>
+     * <code>
+     *     MyEntity stableId();
+     * </code>
+     * </pre>
+     *
+     * @param methodName
+     * @param returnType
+     */
+    public void generateEmptyMethodBody(String methodName, String returnType) {
+        println();
+        print("  {0} {1}();", returnType, methodName);
+    }
 
-  public void generateSetter(VariableElement fieldElement) {
-     generateSetter(
-         fieldElement.getSimpleName().toString(),
-         fieldElement.asType().toString()
-     );
-  }
+    public void generateGetter(String fieldName, String getterType) {
+        println();
+        print("  {0} get{1}();", getterType, firstCharToUpperCase(fieldName));
+        println();
+    }
+
+    public void generateGetter(VariableElement fieldElement) {
+        println();
+        print("  {0} {1}();", fieldElement.asType().toString(), manufactureAccessorName(fieldElement));
+        println();
+    }
+
+    public void generateInterfaceHeader(String inferfaceName, Set<Modifier> modifiers, String... extendedInterfaces) {
+        print("{0}interface {1}", generateModifierList(modifiers.toArray(new Modifier[]{})), inferfaceName);
+        if (extendedInterfaces != null && extendedInterfaces.length > 0) {
+            printWithoutSpaces(" extends {0}", implode(extendedInterfaces, ","));
+        }
+        printWithoutSpaces(" { ");
+    }
+
+    public void generateSetter(String fieldName, String fieldType) {
+        println();
+        print("  void {0}({1} {2});",
+                manufactureSetterName(fieldName),
+                fieldType,
+                fieldName
+        );
+        println();
+    }
+
+    public void generateSetter(VariableElement fieldElement) {
+        generateSetter(
+                fieldElement.getSimpleName().toString(),
+                fieldElement.asType().toString()
+        );
+    }
 }

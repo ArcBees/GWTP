@@ -31,142 +31,148 @@ import com.gwtplatform.mvp.client.annotations.TabInfo;
  * @author Philippe Beaudoin
  */
 public class TabInfoMethod {
-  private final TreeLogger logger;
-  private final ClassCollection classCollection;
-  private final GinjectorInspector ginjectorInspector;
-  private final PresenterInspector presenterInspector;
+    private final TreeLogger logger;
+    private final ClassCollection classCollection;
+    private final GinjectorInspector ginjectorInspector;
+    private final PresenterInspector presenterInspector;
 
-  private TabInfo annotation;
-  private Integer tabPriority;
-  private String functionName;
-  private boolean hasGingectorParam;
-  private boolean returnString; // Either returns a String or a TabInfo
+    private TabInfo annotation;
+    private Integer tabPriority;
+    private String functionName;
+    private JParameter[] parameters;
+    private boolean returnString; // Either returns a String or a TabInfo
 
-  public TabInfoMethod(TreeLogger logger,
-      ClassCollection classCollection,
-      GinjectorInspector ginjectorInspector,
-      PresenterInspector presenterInspector) {
-    this.logger = logger;
-    this.classCollection = classCollection;
-    this.ginjectorInspector = ginjectorInspector;
-    this.presenterInspector = presenterInspector;
-  }
-
-  public void init(JMethod method) throws UnableToCompleteException {
-    annotation = method.getAnnotation(TabInfo.class);
-    assert annotation != null;
-    tabPriority = annotation.priority();
-    if (tabPriority < 0) {
-      tabPriority = null;
+    public TabInfoMethod(TreeLogger logger,
+            ClassCollection classCollection,
+            GinjectorInspector ginjectorInspector,
+            PresenterInspector presenterInspector) {
+        this.logger = logger;
+        this.classCollection = classCollection;
+        this.ginjectorInspector = ginjectorInspector;
+        this.presenterInspector = presenterInspector;
     }
 
-    functionName = method.getName();
-    if (!method.isStatic()) {
-      logger.log(TreeLogger.ERROR, getErrorPrefix() + " is not static. This is not supported.");
-      throw new UnableToCompleteException();
+    public void init(JMethod method) throws UnableToCompleteException {
+        annotation = method.getAnnotation(TabInfo.class);
+        assert annotation != null;
+        tabPriority = annotation.priority();
+        if (tabPriority < 0) {
+            tabPriority = null;
+        }
+
+        functionName = method.getName();
+        if (!method.isStatic()) {
+            logger.log(TreeLogger.ERROR, getErrorPrefix() + " is not static. This is not supported.");
+            throw new UnableToCompleteException();
+        }
+
+        if (annotation.label().length() != 0) {
+            logger.log(TreeLogger.ERROR, getErrorPrefix()
+                    + ". The annotation defines a 'label', this is not permitted.", null);
+            throw new UnableToCompleteException();
+        }
+
+        JClassType classReturnType = method.getReturnType().isClassOrInterface();
+        if (classReturnType == classCollection.stringClass) {
+            returnString = true;
+        } else if (classReturnType.isAssignableFrom(classCollection.tabDataClass)) {
+            returnString = false;
+        } else {
+            logger.log(TreeLogger.ERROR, getErrorPrefix() + " must return either a String or a "
+                    + TabData.class.getSimpleName());
+            throw new UnableToCompleteException();
+        }
+
+        parameters = method.getParameters();
+        if (parameters.length > 0) {
+            for (JParameter parameter : parameters) {
+                final JClassType parameterType = parameter.getType().isClassOrInterface();
+                if (!ginjectorInspector.getGinjectorClass().equals(parameterType) &&
+                        ginjectorInspector.findGetMethod(parameterType) == null) {
+                    logger.log(TreeLogger.ERROR, getErrorPrefix() + " has a parameter that is not provided by "
+                            + ginjectorInspector.getGinjectorClassName() + ". This is illegal.");
+                    throw new UnableToCompleteException();
+                }
+            }
+        }
+
+        if (tabPriority != null && !returnString) {
+            logger.log(TreeLogger.ERROR, getErrorPrefix()
+                    + ". The annotation defines a 'tabPriority' but the method returns TabData, "
+                    + "this is not permitted.", null);
+            throw new UnableToCompleteException();
+        }
+        if (tabPriority == null && returnString) {
+            logger.log(TreeLogger.ERROR, getErrorPrefix()
+                    + ". The annotation does not define a 'tabPriority' but the method returns a String, "
+                    + "this is not permitted.", null);
+            throw new UnableToCompleteException();
+        }
     }
 
-    if (annotation.label().length() != 0) {
-      logger.log(TreeLogger.ERROR, getErrorPrefix()
-          + ". The annotation defines a 'label', this is not permitted.", null);
-      throw new UnableToCompleteException();
+    private String getErrorPrefix() {
+        return "In presenter " + presenterInspector.getPresenterClassName()
+                + ", method " + functionName + " annotated with @" + TabInfo.class.getSimpleName();
     }
 
-    JClassType classReturnType = method.getReturnType().isClassOrInterface();
-    if (classReturnType == classCollection.stringClass) {
-      returnString = true;
-    } else if (classReturnType.isAssignableFrom(classCollection.tabDataClass)) {
-      returnString = false;
-    } else {
-      logger.log(TreeLogger.ERROR, getErrorPrefix() + " must return either a String or a "
-              + TabData.class.getSimpleName());
-      throw new UnableToCompleteException();
+    /**
+     * Writes the {@code getTabDataInternal} method definition in the generated proxy.
+     *
+     * @param writer The {@code SourceWriter}
+     */
+    public void writeGetTabDataInternalMethod(SourceWriter writer) throws UnableToCompleteException {
+        if (returnString) {
+            // Presenter static method returning a string
+            assert tabPriority != null;
+            writer.println();
+            writer.println("protected TabData getTabDataInternal("
+                    + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
+            writer.indent();
+            writer.print("return new TabDataBasic(");
+            writer.print(presenterInspector.getPresenterClassName() + ".");
+            writeTabInfoFunctionCall(writer);
+            writer.println(", " + tabPriority + ");");
+            writer.outdent();
+            writer.println("}");
+        } else {
+            // Presenter static method returning tab data
+            writer.println();
+            writer.println("protected TabData getTabDataInternal("
+                    + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
+            writer.indent();
+            writer.print("return ");
+            writer.print(presenterInspector.getPresenterClassName() + ".");
+            writeTabInfoFunctionCall(writer);
+            writer.println(";");
+            writer.outdent();
+            writer.println("}");
+        }
     }
 
-    JParameter[] parameters = method.getParameters();
-    if (parameters.length > 1) {
-      logger.log(TreeLogger.ERROR, getErrorPrefix()
-          + " accepts more than one parameter. This is illegal.");
-      throw new UnableToCompleteException();
+    private void writeTabInfoFunctionCall(SourceWriter writer) throws UnableToCompleteException {
+        writer.print(functionName + "(");
+        for (int i = 0; i < parameters.length; i++) {
+            if (i > 0) {
+                writer.print(", ");
+            }
+            writer.print("ginjector");
+
+            JParameter parameter = parameters[i];
+            final JClassType returnType = parameter.getType().isClassOrInterface();
+            if (!returnType.equals(ginjectorInspector.getGinjectorClass())) {
+                writer.print(".");
+                writer.print(ginjectorInspector.findGetMethod(returnType));
+                writer.print("()");
+            }
+        }
+        writer.print(")");
     }
 
-    if (parameters.length == 1) {
-      JClassType parameterType = parameters[0].getType().isClassOrInterface();
-      if (parameterType.isAssignableFrom(ginjectorInspector.getGinjectorClass())) {
-          hasGingectorParam = true;
-      } else {
-        logger.log(TreeLogger.ERROR, getErrorPrefix() + " has a parameter that is not of type "
-                + ginjectorInspector.getGinjectorClassName() + ". This is illegal.");
-        throw new UnableToCompleteException();
-      }
+    public String getTabContainerClassName() {
+        return annotation.container().getCanonicalName();
     }
 
-    if (tabPriority != null && !returnString) {
-      logger.log(TreeLogger.ERROR, getErrorPrefix()
-          + ". The annotation defines a 'tabPriority' but the method returns TabData, "
-          + "this is not permitted.", null);
-      throw new UnableToCompleteException();
+    public String getNameToken() {
+        return annotation.nameToken();
     }
-    if (tabPriority == null && returnString) {
-      logger.log(TreeLogger.ERROR, getErrorPrefix()
-          + ". The annotation does not define a 'tabPriority' but the method returns a String, "
-          + "this is not permitted.", null);
-      throw new UnableToCompleteException();
-    }
-  }
-
-  private String getErrorPrefix() {
-    return "In presenter " + presenterInspector.getPresenterClassName()
-        + ", method " + functionName + " annotated with @" + TabInfo.class.getSimpleName();
-  }
-
-  /**
-   * Writes the {@code getTabDataInternal} method definition in the generated proxy.
-   *
-   * @param writer The {@code SourceWriter}
-   */
-  public void writeGetTabDataInternalMethod(SourceWriter writer) {
-    if (returnString) {
-      // Presenter static method returning a string
-      assert tabPriority != null;
-      writer.println();
-      writer.println("protected TabData getTabDataInternal("
-          + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
-      writer.indent();
-      writer.print("  return new TabDataBasic(");
-      writer.print(presenterInspector.getPresenterClassName() + ".");
-      writeTabInfoFunctionCall(writer);
-      writer.println(", " + tabPriority + ");");
-      writer.outdent();
-      writer.println("}");
-    } else {
-      // Presenter static method returning tab data
-      writer.println();
-      writer.println("protected TabData getTabDataInternal("
-          + ginjectorInspector.getGinjectorClassName() + " ginjector) {");
-      writer.indent();
-      writer.print("  return ");
-      writer.print(presenterInspector.getPresenterClassName() + ".");
-      writeTabInfoFunctionCall(writer);
-      writer.println(";");
-      writer.outdent();
-      writer.println("}");
-    }
-  }
-
-  private void writeTabInfoFunctionCall(SourceWriter writer) {
-    writer.print(functionName + "( ");
-    if (hasGingectorParam) {
-      writer.print("ginjector");
-    }
-    writer.print(")");
-  }
-
-  public String getTabContainerClassName() {
-    return annotation.container().getCanonicalName();
-  }
-
-  public String getNameToken() {
-    return annotation.nameToken();
-  }
 }
