@@ -147,8 +147,6 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
         generateSerializers(resultType);
 
-        resultType.getQualifiedSourceName();
-
         return new ActionBinding(implName, actionMethod.getName(), resultType.getParameterizedQualifiedSourceName(),
                 actionMethod.getParameters());
     }
