@@ -28,25 +28,25 @@ import javax.inject.Singleton;
  * </pre>
  * If you do not bind this class then autobinding is controlled on a case-by-case
  * basis using the {@link HandlerContainerImpl}'s constructors.
- * <p />
+ * <p/>
  * Disabling automatic binding can be useful in unit tests, for example.
  *
  * @author Philippe Beaudoin
  */
 @Singleton
 public class AutobindDisable {
-  private final boolean disable;
+    private final boolean disable;
 
-  @Inject
-  AutobindDisable() {
-    disable = false;
-  }
+    @Inject
+    AutobindDisable() {
+        disable = false;
+    }
 
-  public AutobindDisable(boolean disable) {
-    this.disable = disable;
-  }
+    public AutobindDisable(boolean disable) {
+        this.disable = disable;
+    }
 
-  public boolean disable() {
-    return disable;
-  }
+    public boolean disable() {
+        return disable;
+    }
 }

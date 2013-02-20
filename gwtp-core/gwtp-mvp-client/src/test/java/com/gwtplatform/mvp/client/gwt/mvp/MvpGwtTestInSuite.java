@@ -27,27 +27,27 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  */
 public class MvpGwtTestInSuite extends GWTTestCase {
 
-  @Override
-  public String getModuleName() {
-    return "com.gwtplatform.mvp.MvpGwtTest";
-  }
+    @Override
+    public String getModuleName() {
+        return "com.gwtplatform.mvp.MvpGwtTest";
+    }
 
-  GinjectorTestUtilGwt ginjector;
-  MainPresenterTestUtilGwt presenter;
+    GinjectorTestUtilGwt ginjector;
+    MainPresenterTestUtilGwt presenter;
 
-  @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
-    InstantiationCounterTestUtilGwt.resetCounter();
-    ginjector = GWT.create(GinjectorTestUtilGwt.class);
-    DelayedBindRegistry.bind(ginjector);
-  }
+    @Override
+    protected void gwtSetUp() throws Exception {
+        super.gwtSetUp();
+        InstantiationCounterTestUtilGwt.resetCounter();
+        ginjector = GWT.create(GinjectorTestUtilGwt.class);
+        DelayedBindRegistry.bind(ginjector);
+    }
 
-  /**
-   * Verifies that the ginjector is created only once.
-   */
-  public void testShouldCreateOnlyOneGinjector() {
-    ginjector.getPlaceManager().revealCurrentPlace();
-    assertEquals(1, InstantiationCounterTestUtilGwt.getCounter());
-  }
+    /**
+     * Verifies that the ginjector is created only once.
+     */
+    public void testShouldCreateOnlyOneGinjector() {
+        ginjector.getPlaceManager().revealCurrentPlace();
+        assertEquals(1, InstantiationCounterTestUtilGwt.getCounter());
+    }
 }

@@ -17,9 +17,9 @@
 -->
 
 <module>
-  <inherits name='com.gwtplatform.mvp.Mvp'/>
+    <inherits name='com.gwtplatform.mvp.Mvp'/>
 
-  <!-- Specify the paths for translatable code                    -->
-  <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java" />
+    <!-- Specify the paths for translatable code                    -->
+    <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
 
 </module>

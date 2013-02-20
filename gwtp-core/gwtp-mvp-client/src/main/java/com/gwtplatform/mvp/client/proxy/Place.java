@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client.proxy;
 /**
  * <b>Important:</b> For simplicity, places do not participate in dependency
  * injection and can be created with <code>new</code>.
- * <p />
+ * <p/>
  * A place represents a particular 'bookmark' or location inside the
  * application. A place is stateful - it may represent a location with it's
  * current settings, such as a particular ID value, or other unique indicators
@@ -30,51 +30,51 @@ package com.gwtplatform.mvp.client.proxy;
  */
 public interface Place {
 
-  /**
-   * Checks if the associated presenter can be revealed.
-   * <p />
-   * The default implementation of this method always return <code>true</code>,
-   * but subclasses should override this and check to make sure the current user
-   * has the privileges to see the place. Make sure the places you request in
-   * {@link PlaceManager#revealDefaultPlace()} and
-   * {@link PlaceManager#revealErrorPlace(String)} can reveal themselves,
-   * otherwise your application could get into an infinite loop.
-   *
-   * @return <code>true</code> if the presenter can be revealed,
-   *         <code>false</code> otherwise.
-   */
-  boolean canReveal();
+    /**
+     * Checks if the associated presenter can be revealed.
+     * <p/>
+     * The default implementation of this method always return <code>true</code>,
+     * but subclasses should override this and check to make sure the current user
+     * has the privileges to see the place. Make sure the places you request in
+     * {@link PlaceManager#revealDefaultPlace()} and
+     * {@link PlaceManager#revealErrorPlace(String)} can reveal themselves,
+     * otherwise your application could get into an infinite loop.
+     *
+     * @return <code>true</code> if the presenter can be revealed,
+     *         <code>false</code> otherwise.
+     */
+    boolean canReveal();
 
-  /**
-   * Places are equal if their name token matches.
-   *
-   * @return <code>true</code> if the places name token matches,
-   *         <code>false</code> otherwise.
-   */
-  @Override
-  boolean equals(Object o);
+    /**
+     * Places are equal if their name token matches.
+     *
+     * @return <code>true</code> if the places name token matches,
+     *         <code>false</code> otherwise.
+     */
+    @Override
+    boolean equals(Object o);
 
-  /**
-   * The name token is the first part of the history token, before the
-   * parameters. It is meant to be a unique identifier of a place. An exception
-   * will be thrown if two places are registered with the same name token.
-   *
-   * @return The name token for this place.
-   */
-  String getNameToken();
+    /**
+     * The name token is the first part of the history token, before the
+     * parameters. It is meant to be a unique identifier of a place. An exception
+     * will be thrown if two places are registered with the same name token.
+     *
+     * @return The name token for this place.
+     */
+    String getNameToken();
 
-  @Override
-  int hashCode();
+    @Override
+    int hashCode();
 
-  /**
-   * Makes sure the method matches the passed request.
-   *
-   * @param request The request to check.
-   * @return <code>true</code> if the ID matches this place's name.
-   */
-  boolean matchesRequest(PlaceRequest request);
+    /**
+     * Makes sure the method matches the passed request.
+     *
+     * @param request The request to check.
+     * @return <code>true</code> if the ID matches this place's name.
+     */
+    boolean matchesRequest(PlaceRequest request);
 
-  @Override
-  String toString();
+    @Override
+    String toString();
 
 }

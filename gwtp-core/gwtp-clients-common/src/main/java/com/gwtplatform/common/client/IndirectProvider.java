@@ -27,16 +27,15 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * 61</a> for details.
  *
  * @param <T> The type of the provided object.
- *
  * @author Philippe Beaudoin
  */
 public interface IndirectProvider<T> {
-  /**
-   * Asynchronously get the provided object.
-   *
-   * @param callback The {@link AsyncCallback} to invoke once the object is
-   *          available. The parameter to the callback will be the provided
-   *          object.
-   */
-  void get(AsyncCallback<T> callback);
+    /**
+     * Asynchronously get the provided object.
+     *
+     * @param callback The {@link AsyncCallback} to invoke once the object is
+     *                 available. The parameter to the callback will be the provided
+     *                 object.
+     */
+    void get(AsyncCallback<T> callback);
 }

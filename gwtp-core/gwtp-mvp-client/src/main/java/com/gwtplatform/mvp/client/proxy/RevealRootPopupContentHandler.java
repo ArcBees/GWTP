@@ -26,13 +26,13 @@ import com.google.gwt.event.shared.EventHandler;
  */
 public interface RevealRootPopupContentHandler extends EventHandler {
 
-  /**
-   * Called whenever a presenter wants to sets itself as a popup attached to
-   * the root of the application.
-   *
-   * @param event The event containing the presenter that wants to bet set as
-   *          root popup content.
-   */
-  void onRevealRootPopupContent(RevealRootPopupContentEvent event);
+    /**
+     * Called whenever a presenter wants to sets itself as a popup attached to
+     * the root of the application.
+     *
+     * @param event The event containing the presenter that wants to bet set as
+     *              root popup content.
+     */
+    void onRevealRootPopupContent(RevealRootPopupContentEvent event);
 
 }

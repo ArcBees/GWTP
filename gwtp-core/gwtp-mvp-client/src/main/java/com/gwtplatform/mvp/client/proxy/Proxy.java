@@ -24,33 +24,32 @@ import com.gwtplatform.mvp.client.Presenter;
  * before the full {@link Presenter} is instantiated. This include, among
  * others, the presenter's specific {@link RevealContentEvent} that needs the
  * presenter to reveal itself.
- * <p />
+ * <p/>
  * The relationship between a presenter and its proxy is two-way.
- * <p />
+ * <p/>
  * {@link Presenter} subclasses will usually define their own interface called
  * MyProxy and be derived from this one.
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
- *
  * @author Philippe Beaudoin
  */
 public interface Proxy<P extends Presenter<?, ?>> extends ProxyRaw {
 
-  /**
-   * Makes it possible to access the {@link EventBus} object associated with
-   * that proxy.
-   *
-   * @return The {@link EventBus} associated with that proxy.
-   */
-  EventBus getEventBus();
+    /**
+     * Makes it possible to access the {@link EventBus} object associated with
+     * that proxy.
+     *
+     * @return The {@link EventBus} associated with that proxy.
+     */
+    EventBus getEventBus();
 
-  /**
-   * Get the associated {@link Presenter}. The presenter can only be obtained in
-   * an asynchronous manner to support code splitting when needed. To access the
-   * presenter, pass a callback.
-   *
-   * @param callback The callback in which the {@link Presenter} will be passed
-   *          as a parameter.
-   */
-  void getPresenter(NotifyingAsyncCallback<P> callback);
+    /**
+     * Get the associated {@link Presenter}. The presenter can only be obtained in
+     * an asynchronous manner to support code splitting when needed. To access the
+     * presenter, pass a callback.
+     *
+     * @param callback The callback in which the {@link Presenter} will be passed
+     *                 as a parameter.
+     */
+    void getPresenter(NotifyingAsyncCallback<P> callback);
 }

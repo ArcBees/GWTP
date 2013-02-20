@@ -16,10 +16,10 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.inject.client.Ginjector;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gwt.inject.client.Ginjector;
 
 /**
  * A static registry containing all the classes that want to be bound using
@@ -32,40 +32,40 @@ import java.util.List;
  */
 public final class DelayedBindRegistry {
 
-  private static Ginjector ginjector;
-  private static List<DelayedBind> delayedBindObjects = new ArrayList<DelayedBind>();
+    private static Ginjector ginjector;
+    private static List<DelayedBind> delayedBindObjects = new ArrayList<DelayedBind>();
 
-  /**
-   * Bind all the registered classes, by calling their
-   * {@link DelayedBind#delayedBind(Ginjector)} method. This method should only be
-   * called once, typically when the program starts.
-   *
-   * @param ginjector The {@link Ginjector} from which to get object instances.
-   */
-  public static void bind(Ginjector ginjector) {
-    DelayedBindRegistry.ginjector = ginjector;
-    for (DelayedBind delayedBindObject : delayedBindObjects) {
-      delayedBindObject.delayedBind(ginjector);
+    /**
+     * Bind all the registered classes, by calling their
+     * {@link DelayedBind#delayedBind(Ginjector)} method. This method should only be
+     * called once, typically when the program starts.
+     *
+     * @param ginjector The {@link Ginjector} from which to get object instances.
+     */
+    public static void bind(Ginjector ginjector) {
+        DelayedBindRegistry.ginjector = ginjector;
+        for (DelayedBind delayedBindObject : delayedBindObjects) {
+            delayedBindObject.delayedBind(ginjector);
+        }
     }
-  }
 
-  /**
-   * Registers a new object so that it is bound using delayed binding. This
-   * method should be called in the constructor of objects implementing the
-   * {@link DelayedBind} interface.
-   *
-   * @param delayedBindObject The object to register.
-   */
-  public static void register(DelayedBind delayedBindObject) {
-    delayedBindObjects.add(delayedBindObject);
-  }
+    /**
+     * Registers a new object so that it is bound using delayed binding. This
+     * method should be called in the constructor of objects implementing the
+     * {@link DelayedBind} interface.
+     *
+     * @param delayedBindObject The object to register.
+     */
+    public static void register(DelayedBind delayedBindObject) {
+        delayedBindObjects.add(delayedBindObject);
+    }
 
-  /**
-   * Access the ginjector that was bound to this {@link DelayedBindRegistry}.
-   *
-   * @return The {@link Ginjector}.
-   */
-  public static Ginjector getGinjector() {
-    return ginjector;
-  }
+    /**
+     * Access the ginjector that was bound to this {@link DelayedBindRegistry}.
+     *
+     * @return The {@link Ginjector}.
+     */
+    public static Ginjector getGinjector() {
+        return ginjector;
+    }
 }

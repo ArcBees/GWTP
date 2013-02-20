@@ -29,11 +29,11 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
  * security cookie is based on the {@link HttpSession} and will only work if the session is enabled. To setup this
  * filter, add the following line at before any other {@code serve} call in your own
  * {@link com.google.inject.servlet.ServletModule#configureServlets}:
- *
+ * <p/>
  * <pre>
  * filter(&quot;*.jsp&quot;).through(HttpSessionSecurityCookieFilter.class);
  * </pre>
- *
+ * <p/>
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
  *
  * @author Philippe Beaudoin
@@ -41,17 +41,17 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
 @Singleton
 public class HttpSessionSecurityCookieFilter extends AbstractHttpSessionSecurityCookieFilter {
 
-  private final Provider<HttpSession> session;
+    private final Provider<HttpSession> session;
 
-  @Inject
-  HttpSessionSecurityCookieFilter(@SecurityCookie String securityCookieName, Provider<HttpSession> session) {
-    super(securityCookieName);
-    this.session = session;
-  }
+    @Inject
+    HttpSessionSecurityCookieFilter(@SecurityCookie String securityCookieName, Provider<HttpSession> session) {
+        super(securityCookieName);
+        this.session = session;
+    }
 
-  @Override
-  protected HttpSession getSession() {
-    return session.get();
-  }
+    @Override
+    protected HttpSession getSession() {
+        return session.get();
+    }
 
 }

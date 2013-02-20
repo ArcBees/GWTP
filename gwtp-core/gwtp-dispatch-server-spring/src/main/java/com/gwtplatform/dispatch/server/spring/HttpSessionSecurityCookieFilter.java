@@ -28,12 +28,12 @@ import com.gwtplatform.dispatch.server.AbstractHttpSessionSecurityCookieFilter;
  */
 public class HttpSessionSecurityCookieFilter extends AbstractHttpSessionSecurityCookieFilter {
 
-  public HttpSessionSecurityCookieFilter(String securityCookieName) {
-    super(securityCookieName);
-  }
+    public HttpSessionSecurityCookieFilter(String securityCookieName) {
+        super(securityCookieName);
+    }
 
-  @Override
-  protected HttpSession getSession() {
-    return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
-  }
+    @Override
+    protected HttpSession getSession() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
+    }
 }
