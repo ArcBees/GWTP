@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
+import javax.inject.Inject;
+
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -23,32 +25,31 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
-import javax.inject.Inject;
-
 /**
  * A test presenter meant to be run in a GWTTestCase.
  *
  * @author Philippe Beaudoin
  */
-public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilGwt.MyView, AdminPresenterTestUtilGwt.MyProxy> {
+public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilGwt.MyView,
+        AdminPresenterTestUtilGwt.MyProxy> {
 
-  /**
-   * Presenter's view.
-   */
-  public interface MyView extends View {
-  }
+    /**
+     * Presenter's view.
+     */
+    public interface MyView extends View {
+    }
 
-  /**
-   * Presenter's proxy.
-   */
-  @ProxyStandard
-  @NameToken("admin")
-  public interface MyProxy extends ProxyPlace<AdminPresenterTestUtilGwt> {
-  }
+    /**
+     * Presenter's proxy.
+     */
+    @ProxyStandard
+    @NameToken("admin")
+    public interface MyProxy extends ProxyPlace<AdminPresenterTestUtilGwt> {
+    }
 
-  @Inject
-  public AdminPresenterTestUtilGwt(final EventBus eventBus, final MyView view, final MyProxy proxy) {
-    super(eventBus, view, proxy, RevealType.Root);
-  }
+    @Inject
+    public AdminPresenterTestUtilGwt(final EventBus eventBus, final MyView view, final MyProxy proxy) {
+        super(eventBus, view, proxy, RevealType.Root);
+    }
 }
 

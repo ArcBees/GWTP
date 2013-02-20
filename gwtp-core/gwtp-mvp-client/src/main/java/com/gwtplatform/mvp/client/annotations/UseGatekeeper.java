@@ -16,10 +16,10 @@
 
 package com.gwtplatform.mvp.client.annotations;
 
-import com.gwtplatform.mvp.client.proxy.Gatekeeper;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+
+import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
  * This annotation lets you define a {@link Gatekeeper} to use for the
@@ -32,5 +32,5 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 public @interface UseGatekeeper {
-  Class<? extends Gatekeeper> value();
+    Class<? extends Gatekeeper> value();
 }

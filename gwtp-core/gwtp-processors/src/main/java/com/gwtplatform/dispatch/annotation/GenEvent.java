@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * Annotation to generate Event and Handler classes.
  * <p/>
  * If you type:
- *
+ * <p/>
  * <pre>
  * <code>
  * {@literal @}GenEvent
@@ -36,7 +36,7 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- *
+ * <p/>
  * gwt-platform will generate two classes, {@code FooChangedEvent} and {@code FooChangedHandler}.
  * <p/>
  * {@code FooChangedEvent} will have fields, getters, and a constructor for foo and
@@ -58,7 +58,7 @@ import java.lang.annotation.Target;
  * constructor and to fire() is undefined.
  * <p/>
  * If you type:
- *
+ * <p/>
  * <pre>
  * <code>
  * {@literal @}GenEvent
@@ -70,7 +70,7 @@ import java.lang.annotation.Target;
  * </code>
  * </pre>
  * The following constructor and {@code fire} methods will be generated:
- *
+ * <p/>
  * <pre>
  * <code>
  *  ...
@@ -81,7 +81,7 @@ import java.lang.annotation.Target;
  * </code>
  * </pre>
  * Omitting the @{@link Order} annotations would yield:
- *
+ * <p/>
  * <pre>
  * <code>
  *  ...
@@ -91,13 +91,13 @@ import java.lang.annotation.Target;
  *  ...
  * </code>
  * </pre>
- *
- *
+ * <p/>
+ * <p/>
  * <b>Using @{@link Optional}:</b>
  * <p/>
  * If @{@link Optional} is used together with @{@link GenEvent}, an additional fire method is generated.
  * If you type:
- *
+ * <p/>
  * <pre>
  * <code>
  * {@literal @}GenEvent
@@ -109,7 +109,7 @@ import java.lang.annotation.Target;
  * </code>
  * </pre>
  * The following constructors and {@code fire} methods will be generated:
- *
+ * <p/>
  * <pre>
  * <code>
  *  ...
@@ -121,7 +121,6 @@ import java.lang.annotation.Target;
  *  ...
  * </code>
  * </pre>
- *
  *
  * @author Brendan Doherty
  * @author Florian Sauter

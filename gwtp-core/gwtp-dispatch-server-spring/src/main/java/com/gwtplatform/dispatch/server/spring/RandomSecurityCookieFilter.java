@@ -26,8 +26,8 @@ import com.gwtplatform.dispatch.server.AbstractRandomSecurityCookieFilter;
  */
 public class RandomSecurityCookieFilter extends AbstractRandomSecurityCookieFilter {
 
-  @Autowired
-  RandomSecurityCookieFilter(@Qualifier("SecurityCookie") String securityCookieName, SecureRandomSingleton random) {
-    super(securityCookieName, random);
-  }
+    @Autowired
+    RandomSecurityCookieFilter(@Qualifier("SecurityCookie") String securityCookieName, SecureRandomSingleton random) {
+        super(securityCookieName, random);
+    }
 }

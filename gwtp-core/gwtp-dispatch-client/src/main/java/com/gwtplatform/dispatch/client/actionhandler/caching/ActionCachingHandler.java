@@ -26,40 +26,39 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
- *
  * @author Sunny Gupta
  */
 public class ActionCachingHandler<A extends Action<R>, R extends Result> extends
-    AbstractCachingClientActionHandler<A, R> {
+        AbstractCachingClientActionHandler<A, R> {
 
-  public ActionCachingHandler(Class<A> actionType, Cache cache) {
-    super(actionType, cache);
-  }
-
-  @Override
-  protected void postfetch(A action, R result) {
-    // Check if null result
-    if (result == null) {
-      getCache().remove(action);
-    } else {
-      // Cache
-      getCache().put(action, result);
+    public ActionCachingHandler(Class<A> actionType, Cache cache) {
+        super(actionType, cache);
     }
-  }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  protected R prefetch(A action) {
-    try {
-      // Check if Action available in Cache
-      Object value = super.getCache().get(action);
-      if (value != null && value instanceof Result) {
-        return (R) value;
-      } else {
-        return null;
-      }
-    } catch (Exception e) {
-      return null;
+    @Override
+    protected void postfetch(A action, R result) {
+        // Check if null result
+        if (result == null) {
+            getCache().remove(action);
+        } else {
+            // Cache
+            getCache().put(action, result);
+        }
     }
-  }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    protected R prefetch(A action) {
+        try {
+            // Check if Action available in Cache
+            Object value = super.getCache().get(action);
+            if (value != null && value instanceof Result) {
+                return (R) value;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

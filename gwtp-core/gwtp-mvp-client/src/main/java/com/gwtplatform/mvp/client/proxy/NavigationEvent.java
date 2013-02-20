@@ -23,64 +23,63 @@ import com.google.gwt.event.shared.HasHandlers;
  * Event fired after navigation has occurred. It will not be fired if navigation is
  * refused through {@link PlaceManager#setOnLeaveConfirmation}, instead
  * {@link NavigationRefusedEvent} will.
- * <p />
+ * <p/>
  * Instead of registering your presenter towards this event, consider overriding
  * {@link com.gwtplatform.mvp.client.PresenterWidget#onReset()}. From there
  * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the
  * {@link PlaceRequest}.
  *
- * @see NavigationRefusedEvent
- *
  * @author Philippe Beaudoin
+ * @see NavigationRefusedEvent
  */
 public final class NavigationEvent extends GwtEvent<NavigationHandler> {
-  private static final Type<NavigationHandler> TYPE = new Type<NavigationHandler>();
+    private static final Type<NavigationHandler> TYPE = new Type<NavigationHandler>();
 
-  /**
-   * Fires a {@link NavigationEvent}
-   * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-   *
-   * @param source The source that fires this event ({@link HasHandlers}).
-   * @param request The {@link PlaceRequest} that was navigated to.
-   */
-  public static void fire(final HasHandlers source, PlaceRequest request) {
-    source.fireEvent(new NavigationEvent(request));
-  }
+    /**
+     * Fires a {@link NavigationEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source  The source that fires this event ({@link HasHandlers}).
+     * @param request The {@link PlaceRequest} that was navigated to.
+     */
+    public static void fire(final HasHandlers source, PlaceRequest request) {
+        source.fireEvent(new NavigationEvent(request));
+    }
 
-  public static Type<NavigationHandler> getType() {
-    return TYPE;
-  }
+    public static Type<NavigationHandler> getType() {
+        return TYPE;
+    }
 
-  private final PlaceRequest request;
+    private final PlaceRequest request;
 
-  /**
-   * Create a navigation event and attach it to a place request. You can pass
-   * {@code null} as a request if it's unknown, for example when revealing a
-   * default place or an error place.
-   *
-   * @param request The {@link PlaceRequest}.
-   */
-  public NavigationEvent(PlaceRequest request) {
-    this.request = request;
-  }
+    /**
+     * Create a navigation event and attach it to a place request. You can pass
+     * {@code null} as a request if it's unknown, for example when revealing a
+     * default place or an error place.
+     *
+     * @param request The {@link PlaceRequest}.
+     */
+    public NavigationEvent(PlaceRequest request) {
+        this.request = request;
+    }
 
-  @Override
-  public Type<NavigationHandler> getAssociatedType() {
-    return getType();
-  }
+    @Override
+    public Type<NavigationHandler> getAssociatedType() {
+        return getType();
+    }
 
-  /**
-   * Access the {@link PlaceRequest} that triggered that navigation event.
-   *
-   * @return The {@link PlaceRequest} or {@code null} if no place request is
-   *         known.
-   */
-  public PlaceRequest getRequest() {
-    return request;
-  }
+    /**
+     * Access the {@link PlaceRequest} that triggered that navigation event.
+     *
+     * @return The {@link PlaceRequest} or {@code null} if no place request is
+     *         known.
+     */
+    public PlaceRequest getRequest() {
+        return request;
+    }
 
-  @Override
-  protected void dispatch(NavigationHandler handler) {
-    handler.onNavigation(this);
-  }
+    @Override
+    protected void dispatch(NavigationHandler handler) {
+        handler.onNavigation(this);
+    }
 }

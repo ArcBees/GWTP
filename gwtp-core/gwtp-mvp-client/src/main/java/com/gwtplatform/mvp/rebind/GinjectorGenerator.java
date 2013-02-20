@@ -16,173 +16,244 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import com.google.gwt.core.ext.ConfigurationProperty;
+import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Provider;
+
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.inject.client.AsyncProvider;
-import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.common.client.ProviderBundle;
+import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-
-import javax.inject.Provider;
-import java.io.PrintWriter;
-import java.util.List;
+import com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors;
+import com.gwtplatform.mvp.rebind.velocity.Logger;
+import com.gwtplatform.mvp.rebind.velocity.RebindModule;
 
 /**
  * Will generate a Ginjector from Ginjector.
  */
 public class GinjectorGenerator extends AbstractGenerator {
-  private static final String SINGLETON_DECLARATION = "static %s SINGLETON = %s.create(%s.class);";
-  private static final String GETTER_METHOD = "%s get%s();";
-  private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
-  private static final String GIN_MODULES = "@%s({%s})";
+    static final String DEFAULT_NAME = "ClientGinjector";
+    static final String DEFAULT_FQ_NAME = DEFAULT_PACKAGE + "." + DEFAULT_NAME;
 
-  private String typeName;
+    private static final String SINGLETON_DECLARATION
+            = "static ClientGinjector SINGLETON = ((GinjectorProvider) GWT.create(GinjectorProvider.class)).get();";
+    private static final String GETTER_METHOD = "%s get%s();";
+    private static final String GETTER_PROVIDER_METHOD = "%s<%s> get%s();";
+    private static final String DEFAULT_GATEKEEPER = "@%s";
 
-  @Override
-  public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
-      throws UnableToCompleteException {
-    this.typeName = typeName;
+    private final ProviderBundleGenerator providerBundleGenerator = new ProviderBundleGenerator();
 
-    setTypeOracle(generatorContext.getTypeOracle());
-    setTreeLogger(treeLogger);
-    setPropertyOracle(generatorContext.getPropertyOracle());
+    private final JClassType boostrapper;
 
-    PrintWriter printWriter;
-    printWriter = tryCreatePrintWriter(generatorContext);
-
-    if (printWriter == null) {
-      return typeName;
+    public GinjectorGenerator(JClassType bootstrapper) {
+        this.boostrapper = bootstrapper;
     }
 
-    PresenterDefinitions presenterDefinitions = new PresenterDefinitions();
-    findAllPresenters(presenterDefinitions);
+    @Override
+    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
+            throws UnableToCompleteException {
 
-    ClassSourceFileComposerFactory composer = initComposer();
-    writeGinModulesAnnotation(composer);
-    writeMandatoryGetterImports(composer);
-    writePresenterImports(composer, presenterDefinitions);
+        setTypeOracle(generatorContext.getTypeOracle());
+        setTreeLogger(treeLogger);
+        setPropertyOracle(generatorContext.getPropertyOracle());
 
-    SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
-    writeMandatoryGetter(sourceWriter);
-    writePresentersGetter(sourceWriter, presenterDefinitions);
+        PrintWriter printWriter = tryCreatePrintWriter(generatorContext);
 
-    closeDefinition(generatorContext, printWriter, sourceWriter);
+        if (printWriter == null) {
+            return typeName;
+        }
 
-    return getPackageName() + "." + getClassName();
-  }
+        PresenterDefinitions presenterDefinitions = new PresenterDefinitions();
+        findAllPresenters(presenterDefinitions);
 
-  private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
-    setClassName(getSimpleNameFromTypeName(typeName));
-    setPackageName(getPackageNameFromTypeName(typeName));
+        ClassSourceFileComposerFactory composer = initComposer();
+        writeMandatoryGetterImports(composer);
+        writePresenterImports(composer, presenterDefinitions);
 
-    return generatorContext.tryCreate(getTreeLogger(), getPackageName(), getClassName());
-  }
+        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+        writeMandatoryGetter(sourceWriter);
+        writePresentersGetter(sourceWriter, presenterDefinitions);
+        writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
 
-  private void findAllPresenters(PresenterDefinitions presenterDefinitions) {
-    for (JClassType type : getTypeOracle().getTypes()) {
-      if (type.isAnnotationPresent(ProxyStandard.class)) {
-        presenterDefinitions.addStandardPresenter(type.getEnclosingType());
-      } else if (type.isAnnotationPresent(ProxyCodeSplit.class)) {
-        presenterDefinitions.addCodeSplitPresenter(type.getEnclosingType());
-      } else if (type.isAnnotationPresent(ProxyCodeSplitBundle.class)) {
-        presenterDefinitions.addCodeSplitBundlePresenter(type.getEnclosingType());
-      }
-    }
-  }
+        Injector injector = Guice.createInjector(new RebindModule(new Logger(treeLogger), generatorContext));
+        writeFormFactors(injector);
 
-  private ClassSourceFileComposerFactory initComposer() {
-    ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
-    composer.addImport(Ginjector.class.getCanonicalName());
-    composer.makeInterface();
-    composer.addImplementedInterface(Ginjector.class.getSimpleName());
+        closeDefinition(sourceWriter);
 
-    return composer;
-  }
-
-  private void writeGinModulesAnnotation(ClassSourceFileComposerFactory composer)
-      throws UnableToCompleteException {
-    ConfigurationProperty moduleProperty = findConfigurationProperty(GIN_MODULE_NAME);
-    String moduleName = moduleProperty.getValues().get(0);
-    String moduleSimpleNameClass = getSimpleNameFromTypeName(moduleName) + ".class";
-
-    composer.addImport(moduleName);
-    composer.addImport(GinModules.class.getName());
-
-    composer.addAnnotationDeclaration(String.format(GIN_MODULES, GinModules.class.getSimpleName(), moduleSimpleNameClass));
-  }
-
-  private void writeMandatoryGetterImports(ClassSourceFileComposerFactory composer) {
-    composer.addImport(GWT.class.getCanonicalName());
-    composer.addImport(EventBus.class.getCanonicalName());
-    composer.addImport(PlaceManager.class.getCanonicalName());
-  }
-
-  private void writePresenterImports(ClassSourceFileComposerFactory composer,
-      PresenterDefinitions presenterDefinitions) {
-    writePresenterImportsFromList(composer, presenterDefinitions.getStandardPresenters());
-    writePresenterImportsFromList(composer, presenterDefinitions.getCodeSplitPresenters());
-    writePresenterImportsFromList(composer, presenterDefinitions.getCodeSplitBundlePresenters());
-
-    if (presenterDefinitions.getStandardPresenters().size() > 0) {
-      composer.addImport(Provider.class.getCanonicalName());
+        return DEFAULT_FQ_NAME;
     }
 
-    if (presenterDefinitions.getCodeSplitPresenters().size() > 0) {
-      composer.addImport(AsyncProvider.class.getCanonicalName());
+    private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
+        setClassName(DEFAULT_NAME);
+        setPackageName(DEFAULT_PACKAGE);
+
+        return generatorContext.tryCreate(getTreeLogger(), getPackageName(), getClassName());
     }
 
-    if (presenterDefinitions.getCodeSplitBundlePresenters().size() > 0) {
-      composer.addImport(ProviderBundle.class.getCanonicalName());
+    private void findAllPresenters(PresenterDefinitions presenterDefinitions) throws UnableToCompleteException {
+        for (JClassType type : getTypeOracle().getTypes()) {
+            if (type.isAnnotationPresent(ProxyStandard.class)) {
+                presenterDefinitions.addStandardPresenter(type.getEnclosingType());
+            } else if (type.isAnnotationPresent(ProxyCodeSplit.class)) {
+                presenterDefinitions.addCodeSplitPresenter(type.getEnclosingType());
+            } else if (type.isAnnotationPresent(ProxyCodeSplitBundle.class)) {
+                ProxyCodeSplitBundle annotation = type.getAnnotation(ProxyCodeSplitBundle.class);
+                verifyCodeSplitBundleConfiguration(type.getName(), annotation);
+                presenterDefinitions.addCodeSplitBundlePresenter(annotation.value(), type.getEnclosingType());
+            }
+
+            if (type.isAnnotationPresent(UseGatekeeper.class)) {
+                presenterDefinitions.addGatekeeper(getType(type.getAnnotation(UseGatekeeper.class).value().getName()));
+            } else if (type.isAnnotationPresent(DefaultGatekeeper.class)) {
+                presenterDefinitions.addGatekeeper(type);
+            }
+        }
     }
-  }
 
-  private void writePresenterImportsFromList(ClassSourceFileComposerFactory composer, List<JClassType> presenters) {
-    for (JClassType presenter : presenters) {
-      composer.addImport(presenter.getQualifiedSourceName());
+    private void verifyCodeSplitBundleConfiguration(String presenter, ProxyCodeSplitBundle annotation)
+            throws UnableToCompleteException {
+        if (annotation.value().isEmpty()) {
+            getTreeLogger().log(TreeLogger.ERROR, "Cannot find the bundle value used with @"
+                    + ProxyCodeSplitBundle.class.getSimpleName() + " on presenter '" + presenter + "'.");
+            throw new UnableToCompleteException();
+        }
+        if (annotation.id() != -1 || !annotation.bundleClass().equals(NoOpProviderBundle.class)) {
+            getTreeLogger().log(TreeLogger.WARN, "ID and bundleClass used with @" + ProxyCodeSplitBundle.class
+                    .getSimpleName()
+                    + " on presenter '" + presenter + "' are ignored since bundles are automatically generated");
+        }
     }
-  }
 
-  private void writeMandatoryGetter(SourceWriter sourceWriter) {
-    sourceWriter.println(String.format(SINGLETON_DECLARATION, getClassName(), GWT.class.getSimpleName(),
-        getClassName()));
-    sourceWriter.println();
+    private ClassSourceFileComposerFactory initComposer() throws UnableToCompleteException {
+        ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
+        composer.addImport(Ginjector.class.getCanonicalName());
+        composer.makeInterface();
+        composer.addImplementedInterface(Ginjector.class.getSimpleName());
 
-    String eventBusName = EventBus.class.getSimpleName();
-    sourceWriter.println(String.format(GETTER_METHOD, eventBusName, eventBusName));
-    sourceWriter.println();
+        addExtensionInterfaces(composer);
 
-    String placeManagerName = PlaceManager.class.getSimpleName();
-    sourceWriter.println(String.format(GETTER_METHOD, placeManagerName, placeManagerName));
-  }
-
-  private void writePresentersGetter(SourceWriter sourceWriter, PresenterDefinitions presenterDefinitions) {
-    writePresenterGettersFromList(sourceWriter, presenterDefinitions.getStandardPresenters(),
-        Provider.class.getSimpleName());
-    writePresenterGettersFromList(sourceWriter, presenterDefinitions.getCodeSplitPresenters(),
-        AsyncProvider.class.getSimpleName());
-    writePresenterGettersFromList(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(),
-        ProviderBundle.class.getSimpleName());
-  }
-
-  private void writePresenterGettersFromList(SourceWriter sourceWriter, List<JClassType> presenters,
-      String providerTypeName) {
-    for (JClassType presenter : presenters) {
-      String presenterName = presenter.getName();
-
-      sourceWriter.println();
-      sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, presenterName, presenterName));
+        return composer;
     }
-  }
+
+    private void addExtensionInterfaces(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
+        List<String> values = findConfigurationProperty(GIN_GINJECTOR_EXTENSION).getValues();
+        if (values.size() > 0) {
+            for (String extension : values) {
+                if (!extension.isEmpty()) {
+                    final JClassType extensionType = getType(extension.trim());
+                    composer.addImport(extensionType.getQualifiedSourceName());
+                    composer.addImplementedInterface(extensionType.getName());
+                }
+            }
+        }
+    }
+
+    private void writeMandatoryGetterImports(ClassSourceFileComposerFactory composer) {
+        composer.addImport(GWT.class.getCanonicalName());
+        composer.addImport(EventBus.class.getCanonicalName());
+        composer.addImport(PlaceManager.class.getCanonicalName());
+        composer.addImport(boostrapper.getQualifiedSourceName());
+    }
+
+    private void writePresenterImports(ClassSourceFileComposerFactory composer,
+            PresenterDefinitions presenterDefinitions) {
+        if (presenterDefinitions.getStandardPresenters().size() > 0) {
+            composer.addImport(Provider.class.getCanonicalName());
+        }
+
+        if (presenterDefinitions.getCodeSplitPresenters().size() > 0 ||
+                presenterDefinitions.getCodeSplitBundlePresenters().size() > 0) {
+            composer.addImport(AsyncProvider.class.getCanonicalName());
+        }
+    }
+
+    private void writeMandatoryGetter(SourceWriter sourceWriter) {
+        sourceWriter.println(SINGLETON_DECLARATION);
+        sourceWriter.println();
+
+        String eventBusName = EventBus.class.getSimpleName();
+        sourceWriter.println(String.format(GETTER_METHOD, eventBusName, eventBusName));
+        sourceWriter.println();
+
+        String placeManagerName = PlaceManager.class.getSimpleName();
+        sourceWriter.println(String.format(GETTER_METHOD, placeManagerName, placeManagerName));
+
+        sourceWriter.println();
+        String bootstrapperName = boostrapper.getSimpleSourceName();
+        sourceWriter.println(String.format(GETTER_METHOD, bootstrapperName, bootstrapperName));
+    }
+
+    private void writePresentersGetter(SourceWriter sourceWriter, PresenterDefinitions presenterDefinitions) {
+        writeGatekeeperGetterFromList(sourceWriter, presenterDefinitions.getGatekeepers());
+
+        writePresenterGettersFromList(sourceWriter, presenterDefinitions.getStandardPresenters(),
+                Provider.class.getSimpleName());
+        writePresenterGettersFromList(sourceWriter, presenterDefinitions.getCodeSplitPresenters(),
+                AsyncProvider.class.getSimpleName());
+    }
+
+    private void writeBundleGetters(SourceWriter sourceWriter, Map<String, List<JClassType>> bundles,
+            GeneratorContext generatorContext) throws UnableToCompleteException {
+        for (String bundle : bundles.keySet()) {
+            providerBundleGenerator.setPresenters(bundles.get(bundle));
+            providerBundleGenerator.setPackageName(getPackageName());
+            String bundleName = providerBundleGenerator.generate(getTreeLogger(), generatorContext, bundle);
+            sourceWriter.println();
+            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, AsyncProvider.class.getSimpleName(), bundleName,
+                    getSimpleNameFromTypeName(bundleName)));
+        }
+    }
+
+    private void writeGatekeeperGetterFromList(SourceWriter sourceWriter, Collection<JClassType> gatekeepers) {
+        for (JClassType gatekeeper : gatekeepers) {
+            String name = gatekeeper.getQualifiedSourceName();
+
+            sourceWriter.println();
+            if (gatekeeper.isAnnotationPresent(DefaultGatekeeper.class)) {
+                sourceWriter.println(String.format(DEFAULT_GATEKEEPER, DefaultGatekeeper.class.getCanonicalName()));
+            }
+
+            sourceWriter.println(String.format(GETTER_METHOD, name, name.replaceAll("\\.", "")));
+        }
+    }
+
+    private void writePresenterGettersFromList(SourceWriter sourceWriter, Collection<JClassType> presenters,
+            String providerTypeName) {
+        for (JClassType presenter : presenters) {
+            String name = presenter.getQualifiedSourceName();
+
+            sourceWriter.println();
+            sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, providerTypeName, name,
+                    name.replaceAll("\\.", "")));
+        }
+    }
+
+    private void writeFormFactors(Injector injector) throws UnableToCompleteException {
+        GenerateFormFactorGinjectors generateFormFactorGinjectors
+                = injector.getInstance(GenerateFormFactorGinjectors.class);
+
+        try {
+            generateFormFactorGinjectors.generate();
+        } catch (Exception e) {
+            throw new UnableToCompleteException();
+        }
+    }
 }
-

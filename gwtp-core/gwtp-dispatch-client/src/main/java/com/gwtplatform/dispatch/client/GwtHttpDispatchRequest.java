@@ -32,19 +32,19 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  */
 public class GwtHttpDispatchRequest implements DispatchRequest {
 
-  private final Request request;
+    private final Request request;
 
-  public GwtHttpDispatchRequest(Request request) {
-    this.request = request;
-  }
+    public GwtHttpDispatchRequest(Request request) {
+        this.request = request;
+    }
 
-  @Override
-  public void cancel() {
-    request.cancel();
-  }
+    @Override
+    public void cancel() {
+        request.cancel();
+    }
 
-  @Override
-  public boolean isPending() {
-    return request.isPending();
-  }
+    @Override
+    public boolean isPending() {
+        return request.isPending();
+    }
 }

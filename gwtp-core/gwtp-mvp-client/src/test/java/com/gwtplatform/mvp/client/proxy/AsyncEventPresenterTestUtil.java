@@ -33,77 +33,78 @@ import com.gwtplatform.mvp.client.mvp.MainPresenterTestUtil;
  * @author bjoern.moritz
  */
 public class AsyncEventPresenterTestUtil extends
-    Presenter<AsyncEventPresenterTestUtil.MyView, AsyncEventPresenterTestUtil.MyProxy> implements AsyncCallFailHandler,
-    AsyncCallStartHandler, AsyncCallSucceedHandler {
+        Presenter<AsyncEventPresenterTestUtil.MyView, AsyncEventPresenterTestUtil.MyProxy> implements
+        AsyncCallFailHandler,
+        AsyncCallStartHandler, AsyncCallSucceedHandler {
 
-  private DispatchAsync dispatcher;
+    private DispatchAsync dispatcher;
 
-  /**
-   * Presenter's view.
-   */
-  public interface MyView extends View {
-    void setMessage(String string);
-  }
-
-  /**
-   * Presenter's proxy.
-   */
-  @ProxyStandard
-  public interface MyProxy extends Proxy<MainPresenterTestUtil> {
-  }
-
-  public AsyncEventPresenterTestUtil(EventBus eventBus, MyView view, MyProxy proxy, DispatchAsync dispatcher) {
-    super(eventBus, view, proxy, RevealType.Root);
-    this.dispatcher = dispatcher;
-  }
-
-  @Override
-  protected void onBind() {
-    super.onBind();
-
-    registerHandler(addHandler(AsyncCallStartEvent.getType(), this));
-    registerHandler(addHandler(AsyncCallSucceedEvent.getType(), this));
-    registerHandler(addHandler(AsyncCallFailEvent.getType(), this));
-  }
-
-  void executeAsync() {
-    NotifyingAsyncCallback<MyResult> callback = new NotifyingAsyncCallback<MyResult>(getEventBus()) {
-      @Override
-      protected void success(MyResult result) {
-        // Nothing needed here, we only want to test successful event handling
-      }
-    };
-
-    callback.prepare();
-    // In contrast to JavaDoc for NotifyingAsyncCallback we need to call
-    // checkLoading before executing the server call; otherwise the server call
-    // will return before checkLoading could be executed.
-    callback.checkLoading();
-    dispatcher.execute(new MyAction(), callback);
-  }
-
-  @Override
-  public void onAsyncCallSucceed(AsyncCallSucceedEvent asyncCallSucceedEvent) {
-    getView().setMessage(null);
-  }
-
-  @Override
-  public void onAsyncCallStart(AsyncCallStartEvent asyncCallStartEvent) {
-    getView().setMessage("Loading...");
-  }
-
-  @Override
-  public void onAsyncCallFail(AsyncCallFailEvent asyncCallFailEvent) {
-    getView().setMessage("Oops, something went wrong...");
-  }
-
-  static class MyAction extends ActionImpl<MyResult> {
-    public MyAction() {
+    /**
+     * Presenter's view.
+     */
+    public interface MyView extends View {
+        void setMessage(String string);
     }
-  }
 
-  static class MyResult implements Result {
-    private MyResult() {
+    /**
+     * Presenter's proxy.
+     */
+    @ProxyStandard
+    public interface MyProxy extends Proxy<MainPresenterTestUtil> {
     }
-  }
+
+    public AsyncEventPresenterTestUtil(EventBus eventBus, MyView view, MyProxy proxy, DispatchAsync dispatcher) {
+        super(eventBus, view, proxy, RevealType.Root);
+        this.dispatcher = dispatcher;
+    }
+
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+        registerHandler(addHandler(AsyncCallStartEvent.getType(), this));
+        registerHandler(addHandler(AsyncCallSucceedEvent.getType(), this));
+        registerHandler(addHandler(AsyncCallFailEvent.getType(), this));
+    }
+
+    void executeAsync() {
+        NotifyingAsyncCallback<MyResult> callback = new NotifyingAsyncCallback<MyResult>(getEventBus()) {
+            @Override
+            protected void success(MyResult result) {
+                // Nothing needed here, we only want to test successful event handling
+            }
+        };
+
+        callback.prepare();
+        // In contrast to JavaDoc for NotifyingAsyncCallback we need to call
+        // checkLoading before executing the server call; otherwise the server call
+        // will return before checkLoading could be executed.
+        callback.checkLoading();
+        dispatcher.execute(new MyAction(), callback);
+    }
+
+    @Override
+    public void onAsyncCallSucceed(AsyncCallSucceedEvent asyncCallSucceedEvent) {
+        getView().setMessage(null);
+    }
+
+    @Override
+    public void onAsyncCallStart(AsyncCallStartEvent asyncCallStartEvent) {
+        getView().setMessage("Loading...");
+    }
+
+    @Override
+    public void onAsyncCallFail(AsyncCallFailEvent asyncCallFailEvent) {
+        getView().setMessage("Oops, something went wrong...");
+    }
+
+    static class MyAction extends ActionImpl<MyResult> {
+        public MyAction() {
+        }
+    }
+
+    static class MyResult implements Result {
+        private MyResult() {
+        }
+    }
 }

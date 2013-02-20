@@ -21,11 +21,11 @@ import com.googlecode.objectify.ObjectifyFactory;
 /**
  */
 public class OfyFactory extends ObjectifyFactory {
-  public OfyFactory() {
-  }
+    public OfyFactory() {
+    }
 
-  @Override
-  public Ofy begin() {
-    return new Ofy(OfyService.ofy());
-  }
+    @Override
+    public Ofy begin() {
+        return new Ofy(OfyService.ofy());
+    }
 }

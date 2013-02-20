@@ -22,60 +22,60 @@ package com.gwtplatform.dispatch.annotation;
  * @author Florian Sauter
  */
 @GenProxy(
-    targetPackage = "com.gwtplatform.dispatch.annotation.proxy",
-    filterSetter = { "id" },
-    filterGetter = { "version" },
-    locator = EmployeeLocator.class
+        targetPackage = "com.gwtplatform.dispatch.annotation.proxy",
+        filterSetter = {"id"},
+        filterGetter = {"version"},
+        locator = EmployeeLocator.class
 )
 public class Employee {
-  private String displayName;
-  private Long supervisorKey;
-  private Long id;
-  private Integer version;
+    private String displayName;
+    private Long supervisorKey;
+    private Long id;
+    private Integer version;
 
-  @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.EmployeeProxy")
-  private Employee supervisor;
+    @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.EmployeeProxy")
+    private Employee supervisor;
 
-  public Employee() {
-  }
+    public Employee() {
+    }
 
-  public String getDisplayName() {
-    return displayName;
-  }
+    public String getDisplayName() {
+        return displayName;
+    }
 
-  public Long getSupervisorKey() {
-    return supervisorKey;
-  }
+    public Long getSupervisorKey() {
+        return supervisorKey;
+    }
 
-  public void setSupervisorKey(Long supervisorKey) {
-    this.supervisorKey = supervisorKey;
-  }
+    public void setSupervisorKey(Long supervisorKey) {
+        this.supervisorKey = supervisorKey;
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public Integer getVersion() {
-    return version;
-  }
+    public Integer getVersion() {
+        return version;
+    }
 
-  public void setVersion(Integer version) {
-    this.version = version;
-  }
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
-  public Employee getSupervisor() {
-    return supervisor;
-  }
+    public Employee getSupervisor() {
+        return supervisor;
+    }
 
-  public void setSupervisor(Employee supervisor) {
-    this.supervisor = supervisor;
-  }
+    public void setSupervisor(Employee supervisor) {
+        this.supervisor = supervisor;
+    }
 
-  public void setDisplayName(String displayName) {
-    this.displayName = displayName;
-  }
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 }
