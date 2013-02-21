@@ -243,6 +243,10 @@ public class DefaultDispatchAsync implements DispatchAsync {
         callback.onSuccess(voidResult);
     }
 
+    /**
+     * Extension point to let the user change the service entry point. It's useful when the service to reach is not
+     * from the same origin. See {@link PhoneGapDispatchAsync} for an example of its usage.
+     */
     protected void prepareService(ServiceDefTarget service, final String moduleUrl, String relativeServiceUrl) {
         service.setServiceEntryPoint(moduleUrl + relativeServiceUrl);
     }
