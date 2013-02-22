@@ -511,6 +511,15 @@
                         ]]>
                     </header>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>build-upload-javadocs</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- run 'mvn site' to upload -->
