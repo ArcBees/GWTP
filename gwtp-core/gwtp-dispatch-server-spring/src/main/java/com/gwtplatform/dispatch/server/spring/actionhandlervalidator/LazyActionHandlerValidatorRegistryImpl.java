@@ -138,7 +138,8 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
             actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(actionValidator, actionHandler);
         }
 
-        if (actionHandlerValidatorInstance.getActionHandler() == null || actionHandlerValidatorInstance.getActionValidator() == null) {
+        if (actionHandlerValidatorInstance.getActionHandler() == null
+                || actionHandlerValidatorInstance.getActionValidator() == null) {
             return null;
         }
 
