@@ -33,11 +33,11 @@ import com.gwtplatform.dispatch.server.guice.GuiceBeanProvider;
  */
 public class ActionHandlerValidatorLinker {
 
+    private ActionHandlerValidatorLinker() {
+    }
+
     @Inject
     public static void linkValidators(Injector injector, ActionHandlerValidatorRegistry registry) {
         ActionHandlerValidatorLinkerHelper.linkValidators(new GuiceBeanProvider(injector), registry);
-    }
-
-    private ActionHandlerValidatorLinker() {
     }
 }

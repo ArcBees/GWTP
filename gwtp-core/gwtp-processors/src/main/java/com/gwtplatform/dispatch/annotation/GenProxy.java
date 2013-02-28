@@ -141,5 +141,5 @@ public @interface GenProxy {
     /**
      * @see ProxyFor#locator()
      */
-    @SuppressWarnings("rawtypes") Class<? extends Locator> locator() default com.google.web.bindery.requestfactory.shared.Locator.class;
+    @SuppressWarnings("rawtypes") Class<? extends Locator> locator() default Locator.class;
 }
