@@ -147,8 +147,8 @@ public class DefaultDispatchAsync implements DispatchAsync {
 
         final String securityCookie = securityCookieAccessor.getCookieContent();
 
-        final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider = registry.find(action.getClass
-                ());
+        final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
+                registry.find(action.getClass());
 
         if (clientActionHandlerProvider != null) {
             final DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();

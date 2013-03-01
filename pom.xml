@@ -278,7 +278,6 @@
                     <version>${maven-checkstyle-plugin.version}</version>
                     <configuration>
                         <configLocation>/gwtp-checkstyle.xml</configLocation>
-                        <headerLocation>/gwtp-java-header.txt</headerLocation>
                         <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
                         <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
                         <propertyExpansion>basedir=${basedir}</propertyExpansion>
@@ -343,7 +342,7 @@
                     </executions>
                 </plugin>
 
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven 
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven
                     build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -439,7 +438,7 @@
             </plugins>
         </pluginManagement>
 
-        <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in 
+        <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in
             a sub module, will override the top level parent pom's definition -->
         <plugins>
             <plugin>
