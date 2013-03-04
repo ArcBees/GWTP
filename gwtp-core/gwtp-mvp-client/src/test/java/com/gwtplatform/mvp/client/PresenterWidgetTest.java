@@ -301,8 +301,8 @@ public class PresenterWidgetTest {
         presenterWidgetA.addToSlot(slotBC, contentC);
 
         // Then
-        verify(viewA).addToSlot(slotBC, widgetB);
-        verify(viewA).addToSlot(slotBC, widgetC);
+        verify(viewA).addToSlot(slotBC, contentB);
+        verify(viewA).addToSlot(slotBC, contentC);
 
         assertEquals(1, contentB.onRevealMethodCalled);
         assertEquals(1, contentC.onRevealMethodCalled);
@@ -404,7 +404,7 @@ public class PresenterWidgetTest {
         presenterWidgetA.removeFromSlot(slotBC, contentB);
 
         // Then
-        verify(viewA).removeFromSlot(slotBC, widgetB);
+        verify(viewA).removeFromSlot(slotBC, contentB);
 
         assertEquals(1, contentB.onHideMethodCalled);
         assertEquals(0, contentC.onHideMethodCalled);
@@ -427,8 +427,8 @@ public class PresenterWidgetTest {
         contentB.setInSlot(slotC, contentCinB);
 
         // Then
-        verify(viewA).setInSlot(slotB, widgetB);
-        verify(viewB).setInSlot(slotC, widgetC);
+        verify(viewA).setInSlot(slotB, contentB);
+        verify(viewB).setInSlot(slotC, contentCinB);
 
         assertEquals(0, contentB.onRevealMethodCalled);
         assertEquals(0, contentCinB.onRevealMethodCalled);
@@ -466,14 +466,14 @@ public class PresenterWidgetTest {
         contentB.setInSlot(slotC, contentCinB);
 
         // Then
-        verify(viewB).setInSlot(slotC, widgetC);
+        verify(viewB).setInSlot(slotC, contentCinB);
         assertEquals(0, contentCinB.onRevealMethodCalled);
 
         // and then When
         presenterWidgetA.setInSlot(slotB, contentB);
 
         // Then
-        verify(viewA).setInSlot(slotB, widgetB);
+        verify(viewA).setInSlot(slotB, contentB);
         assertEquals(0, contentB.onRevealMethodCalled);
 
         // and then When
@@ -509,8 +509,8 @@ public class PresenterWidgetTest {
         contentB.setInSlot(slotC, contentCinB);
 
         // Then
-        verify(viewA).setInSlot(slotB, widgetB);
-        verify(viewB).setInSlot(slotC, widgetC);
+        verify(viewA).setInSlot(slotB, contentB);
+        verify(viewB).setInSlot(slotC, contentCinB);
 
         // Then
         assertEquals(1, contentB.onRevealMethodCalled);
@@ -542,8 +542,8 @@ public class PresenterWidgetTest {
         presenterWidgetA.setInSlot(slotC, contentC);
 
         // Then
-        verify(viewA).setInSlot(slotB, widgetB);
-        verify(viewA).setInSlot(slotC, widgetC);
+        verify(viewA).setInSlot(slotB, contentB);
+        verify(viewA).setInSlot(slotC, contentC);
 
         assertEquals(0, contentB.onRevealMethodCalled);
         assertEquals(0, contentC.onRevealMethodCalled);
@@ -580,8 +580,8 @@ public class PresenterWidgetTest {
         presenterWidgetA.setInSlot(slotC, contentC);
 
         // Then
-        verify(viewA).setInSlot(slotB, widgetB);
-        verify(viewA).setInSlot(slotC, widgetC);
+        verify(viewA).setInSlot(slotB, contentB);
+        verify(viewA).setInSlot(slotC, contentC);
 
         assertEquals(1, contentB.onRevealMethodCalled);
         assertEquals(1, contentC.onRevealMethodCalled);
