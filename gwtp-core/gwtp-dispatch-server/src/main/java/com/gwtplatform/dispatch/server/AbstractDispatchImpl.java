@@ -191,7 +191,8 @@ public abstract class AbstractDispatchImpl implements Dispatch {
 
     private <A extends Action<R>, R extends Result> ActionValidator findActionValidator(A action) throws
             UnsupportedActionException {
-        ActionHandlerValidatorInstance handlerValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action);
+        ActionHandlerValidatorInstance handlerValidator =
+                actionHandlerValidatorRegistry.findActionHandlerValidator(action);
         if (handlerValidator == null) {
             throw new UnsupportedActionException(action);
         }
@@ -200,8 +201,10 @@ public abstract class AbstractDispatchImpl implements Dispatch {
     }
 
     @SuppressWarnings("unchecked")
-    private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(A action) throws UnsupportedActionException {
-        ActionHandlerValidatorInstance handlerValidator = actionHandlerValidatorRegistry.findActionHandlerValidator(action);
+    private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(A action)
+            throws UnsupportedActionException {
+        ActionHandlerValidatorInstance handlerValidator =
+                actionHandlerValidatorRegistry.findActionHandlerValidator(action);
 
         if (handlerValidator == null) {
             throw new UnsupportedActionException(action);
