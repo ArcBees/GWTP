@@ -16,41 +16,41 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.IsWidget;
 
 /**
  * A simple implementation of {@link View} that simply disregard every call to
- * {@link #setInSlot(Object, Widget)}, {@link #addToSlot(Object, Widget)}, and
- * {@link #removeFromSlot(Object, Widget)}.
+ * {@link #setInSlot(Object, IsWidget)}, {@link #addToSlot(Object, IsWidget)}, and
+ * {@link #removeFromSlot(Object, IsWidget)}.
  * <p/>
  * Feel free not to inherit from this if you need another base class (such as
  * {@link com.google.gwt.user.client.ui.Composite}), but you will have to define
  * the above methods.
  * <p/>
- *  * <b>Important</b> call {@link #initWidget(com.google.gwt.user.client.ui.Widget)} in your {@link com.gwtplatform.mvp.client.View}'s
+ *  * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link com.gwtplatform.mvp.client.View}'s
  * constructor.
  */
 public abstract class ViewImpl implements View {
-    private Widget widget;
+    private IsWidget widget;
 
     @Override
-    public void addToSlot(Object slot, Widget content) {
+    public void addToSlot(Object slot, IsWidget content) {
     }
 
     @Override
-    public void removeFromSlot(Object slot, Widget content) {
+    public void removeFromSlot(Object slot, IsWidget content) {
     }
 
     @Override
-    public void setInSlot(Object slot, Widget content) {
+    public void setInSlot(Object slot, IsWidget content) {
     }
 
     @Override
-    public Widget asWidget() {
+    public IsWidget asWidget() {
         return widget;
     }
 
-    protected void initWidget(Widget widget) {
+    protected void initWidget(IsWidget widget) {
         this.widget = widget;
     }
 }
