@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A simple implementation of {@link View} that simply disregard every call to
@@ -27,11 +28,11 @@ import com.google.gwt.user.client.ui.IsWidget;
  * {@link com.google.gwt.user.client.ui.Composite}), but you will have to define
  * the above methods.
  * <p/>
- *  * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link com.gwtplatform.mvp.client.View}'s
+ * * <b>Important</b> call {@link #initWidget(Widget)} in your {@link com.gwtplatform.mvp.client.View}'s
  * constructor.
  */
 public abstract class ViewImpl implements View {
-    private IsWidget widget;
+    private Widget widget;
 
     @Override
     public void addToSlot(Object slot, IsWidget content) {
@@ -46,11 +47,11 @@ public abstract class ViewImpl implements View {
     }
 
     @Override
-    public IsWidget asWidget() {
+    public Widget asWidget() {
         return widget;
     }
 
-    protected void initWidget(IsWidget widget) {
+    protected void initWidget(Widget widget) {
         this.widget = widget;
     }
 }

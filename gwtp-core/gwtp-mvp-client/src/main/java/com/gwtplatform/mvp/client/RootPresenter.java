@@ -26,6 +26,7 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.LockInteractionHandler;
@@ -71,7 +72,7 @@ public class RootPresenter extends
         private Element glass;
 
         @Override
-        public IsWidget asWidget() {
+        public Widget asWidget() {
             assert false : "Root view has no widget, you should never call asWidget()";
             return null;
         }
