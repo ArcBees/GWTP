@@ -33,9 +33,9 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
  * returned by {@link #asWidget()} inherits from {@link PopupPanel}.
  * <p/>
  * Also, this implementation simply disregards every call to
- * {@link #setInSlot(Object, com.google.gwt.user.client.ui.Widget)}, {@link #addToSlot(Object,
- * com.google.gwt.user.client.ui.Widget)}, and
- * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)}.
+ * {@link #setInSlot(Object, com.google.gwt.user.client.ui.IsWidget)}, {@link #addToSlot(Object,
+ * com.google.gwt.user.client.ui.IsWidget)}, and
+ * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.IsWidget)}.
  *
  * @author Philippe Beaudoin
  */

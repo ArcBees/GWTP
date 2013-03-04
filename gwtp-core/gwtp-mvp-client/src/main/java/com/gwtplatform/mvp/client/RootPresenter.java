@@ -23,9 +23,9 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.LockInteractionHandler;
@@ -71,13 +71,13 @@ public class RootPresenter extends
         private Element glass;
 
         @Override
-        public Widget asWidget() {
+        public IsWidget asWidget() {
             assert false : "Root view has no widget, you should never call asWidget()";
             return null;
         }
 
         @Override
-        public void setInSlot(Object slot, Widget content) {
+        public void setInSlot(Object slot, IsWidget content) {
             assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
             if (usingRootLayoutPanel) {
