@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.IsWidget;
  * @author Philippe Beaudoin
  * @author Christian Goudreau
  */
-public interface View {
+public interface View extends IsWidget {
 
     /**
      * Requests the view to add content within a specific slot.
@@ -41,14 +41,6 @@ public interface View {
      * @param content The content to add, a {@link IsWidget}.
      */
     void addToSlot(Object slot, IsWidget content);
-
-    /**
-     * Retrieves this view as a {@link IsWidget} so that it can be inserted within
-     * the DOM.
-     *
-     * @return This view as a DOM object.
-     */
-    IsWidget asWidget();
 
     /**
      * Requests the view to remove content from a specific slot.
