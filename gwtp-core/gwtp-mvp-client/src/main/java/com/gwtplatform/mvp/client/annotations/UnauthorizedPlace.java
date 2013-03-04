@@ -16,10 +16,10 @@
 
 package com.gwtplatform.mvp.client.annotations;
 
-import com.google.inject.BindingAnnotation;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
+import com.google.inject.BindingAnnotation;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
