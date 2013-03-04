@@ -84,7 +84,7 @@ public class GinjectorInspector {
         findGinjectorClassName(logger, generatorContext.getPropertyOracle());
         findGinjectorClass(logger, generatorContext.getTypeOracle());
         classInspector = new ClassInspector(logger, ginjectorClass);
-        
+
         Set<JType> returnTypes = new HashSet<JType>();
         for (JMethod method : classInspector.getAllMethods()) {
             final JType type = method.getReturnType();
