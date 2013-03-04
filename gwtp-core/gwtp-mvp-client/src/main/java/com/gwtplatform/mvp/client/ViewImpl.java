@@ -27,7 +27,8 @@ import com.google.gwt.user.client.ui.Widget;
  * {@link com.google.gwt.user.client.ui.Composite}), but you will have to define
  * the above methods.
  * <p/>
- *  * <b>Important</b> call {@link #initWidget(com.google.gwt.user.client.ui.Widget)} in your {@link com.gwtplatform.mvp.client.View}'s
+ *  * <b>Important</b> call {@link #initWidget(com.google.gwt.user.client.ui.Widget)} in your
+ *  {@link com.gwtplatform.mvp.client.View}'s
  * constructor.
  */
 public abstract class ViewImpl implements View {

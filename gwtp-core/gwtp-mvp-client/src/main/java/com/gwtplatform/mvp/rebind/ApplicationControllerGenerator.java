@@ -112,7 +112,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     }
 
     private JClassType findSingleAnnotatedType(JClassType defaultType, Class<?> clazz,
-                                               Class<? extends Annotation> annotation) throws UnableToCompleteException {
+            Class<? extends Annotation> annotation) throws UnableToCompleteException {
         int count = 0;
         JClassType type = defaultType;
         for (JClassType t : getTypeOracle().getTypes()) {

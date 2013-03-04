@@ -16,9 +16,9 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
-
 import javax.inject.Inject;
+
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
  * The default Bootstrapper that is used by GWTP if no other is specified via
