@@ -116,7 +116,8 @@ public class GoogleAnalyticsImpl implements GoogleAnalytics {
     }-*/;
 
     @Override
-    public native void trackEventWithTracker(String trackerName, String category, String action, String optLabel, int optValue, boolean optNonInteraction) /*-{
+    public native void trackEventWithTracker(String trackerName, String category, String action, String optLabel,
+            int optValue, boolean optNonInteraction) /*-{
         $wnd._gaq.push([ '" + trackerName + "._trackEvent', category, action, optLabel, optValue, optNonInteraction ]);
     }-*/;
 }
