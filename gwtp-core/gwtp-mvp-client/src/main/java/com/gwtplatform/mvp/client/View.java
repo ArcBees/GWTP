@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.IsWidget;
 
 /**
  * The interface for view classes that handles all the UI-related code for a
@@ -32,38 +32,38 @@ public interface View {
      * <p/>
      * Override the default implementation and manage all the slots of your view
      * into which content can be added. You should also consider overriding
-     * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)}.
+     * {@link #removeFromSlot(Object, IsWidget)}.
      * If the view doesn't know about this slot, it can silently ignore the request.
      * <p/>
      * Used by {@link PresenterWidget#addToSlot(Object, PresenterWidget)}.
      *
      * @param slot    An opaque object indicating the slot to add into.
-     * @param content The content to add, a {@link Widget}.
+     * @param content The content to add, a {@link IsWidget}.
      */
-    void addToSlot(Object slot, Widget content);
+    void addToSlot(Object slot, IsWidget content);
 
     /**
-     * Retrieves this view as a {@link Widget} so that it can be inserted within
+     * Retrieves this view as a {@link IsWidget} so that it can be inserted within
      * the DOM.
      *
      * @return This view as a DOM object.
      */
-    Widget asWidget();
+    IsWidget asWidget();
 
     /**
      * Requests the view to remove content from a specific slot.
      * <p/>
      * Override the default implementation and manage all the slots of your view
      * into which content can be added and removed. You should also override
-     * {@link #addToSlot(Object, com.google.gwt.user.client.ui.Widget)}.
+     * {@link #addToSlot(Object, IsWidget)}.
      * If the view doesn't know about this slot, it can silently ignore the request.
      * <p/>
      * Used by {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)}.
      *
      * @param slot    An opaque object indicating the slot to remove from.
-     * @param content The content to remove, a {@link Widget}.
+     * @param content The content to remove, a {@link IsWidget}.
      */
-    void removeFromSlot(Object slot, Widget content);
+    void removeFromSlot(Object slot, IsWidget content);
 
     /**
      * Requests the view to set content within a specific slot, clearing anything
@@ -78,8 +78,8 @@ public interface View {
      * {@link PresenterWidget#clearSlot(Object)}.
      *
      * @param slot    An opaque object indicating the slot to add into.
-     * @param content The content to add, a {@link Widget}. Pass {@code null} to
+     * @param content The content to add, a {@link IsWidget}. Pass {@code null} to
      *                clear the slot entirely.
      */
-    void setInSlot(Object slot, Widget content);
+    void setInSlot(Object slot, IsWidget content);
 }

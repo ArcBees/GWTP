@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HasHandlers;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -262,12 +262,12 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     /**
-     * Makes it possible to access the {@link Widget} object associated with that
+     * Makes it possible to access the {@link IsWidget} object associated with that
      * presenter.
      *
      * @return The Widget associated with that presenter.
      */
-    public Widget getWidget() {
+    public IsWidget getWidget() {
         return (getView() == null) ? null : getView().asWidget();
     }
 
