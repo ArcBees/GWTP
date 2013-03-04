@@ -164,7 +164,8 @@ public class DefaultClientActionHandlerRegistry implements
             IndirectProvider<ClientActionHandler<?, ?>> handlerProvider) {
 
         if (clientActionHandlers == null) {
-            clientActionHandlers = new HashMap<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>>();
+            clientActionHandlers =
+                    new HashMap<Class<? extends Action<?>>, IndirectProvider<ClientActionHandler<?, ?>>>();
         }
 
         clientActionHandlers.put(actionType, handlerProvider);

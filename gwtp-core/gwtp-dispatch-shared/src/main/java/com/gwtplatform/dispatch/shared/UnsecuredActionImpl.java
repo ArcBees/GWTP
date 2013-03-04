@@ -19,14 +19,14 @@ package com.gwtplatform.dispatch.shared;
 /**
  * Default Action using the base path as dispatch/className.
  * The base abstract implementation is {@link com.gwtplatform.dispatch.shared.Action}.
- * 
+ *
  * {@link https://github.com/ArcBees/GWTP/wiki/RPC-Dispatch}
- * 
+ *
  * An {@link Action} that uses the standard service name {@code "dispatch"}.
  * Actions inheriting from this are <b>not</b> secured against XSRF attacks, and
  * they will work even if you do not configure a {@link SecurityCookie}.
  *
- * Use {@link UnsecuredActionImpl} for secured set to on by default. 
+ * Use {@link UnsecuredActionImpl} for secured set to on by default.
  *
  * @param <R> The {@link Result} type.
  */
@@ -43,7 +43,7 @@ public class UnsecuredActionImpl<R extends Result> implements Action<R> {
     }
 
     /**
-     * Secure is off by default. 
+     * Secure is off by default.
      * {@link https://github.com/ArcBees/GWTP/wiki/Action-Validators}
      */
     @Override

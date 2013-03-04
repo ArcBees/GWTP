@@ -489,7 +489,8 @@ public abstract class PlaceManagerImpl implements PlaceManager,
     public void updateHistory(PlaceRequest request, boolean updateBrowserUrl) {
         try {
             // Make sure the request match
-            assert request.hasSameNameToken(getCurrentPlaceRequest()) : "Internal error, PlaceRequest passed to updateHistory doesn't match the tail of the place hierarchy.";
+            assert request.hasSameNameToken(getCurrentPlaceRequest()) : "Internal error, PlaceRequest passed to" +
+                    "updateHistory doesn't match the tail of the place hierarchy.";
             placeHierarchy.set(placeHierarchy.size() - 1, request);
             if (updateBrowserUrl) {
                 String historyToken = tokenFormatter.toHistoryToken(placeHierarchy);
