@@ -21,9 +21,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 /**
  * The interface for view classes that handles all the UI-related code for a
  * {@link Presenter}.
- *
- * @author Philippe Beaudoin
- * @author Christian Goudreau
  */
 public interface View extends IsWidget {
 
