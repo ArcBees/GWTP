@@ -102,9 +102,6 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * </ul>
  *
  * @param <V> The {@link View} type.
- * @author Philippe Beaudoin
- * @author Christian Goudreau
- * @author Denis Labaye
  */
 public abstract class PresenterWidget<V extends View> extends
         HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {

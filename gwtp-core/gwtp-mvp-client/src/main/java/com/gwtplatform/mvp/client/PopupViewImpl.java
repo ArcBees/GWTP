@@ -36,8 +36,6 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
  * {@link #setInSlot(Object, com.google.gwt.user.client.ui.IsWidget)}, {@link #addToSlot(Object,
  * com.google.gwt.user.client.ui.IsWidget)}, and
  * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.IsWidget)}.
- *
- * @author Philippe Beaudoin
  */
 public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
