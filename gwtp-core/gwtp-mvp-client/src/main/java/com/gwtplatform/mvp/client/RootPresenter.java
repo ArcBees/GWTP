@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -77,7 +78,7 @@ public class RootPresenter extends
         }
 
         @Override
-        public void setInSlot(Object slot, Widget content) {
+        public void setInSlot(Object slot, IsWidget content) {
             assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
             if (usingRootLayoutPanel) {
