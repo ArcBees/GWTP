@@ -48,7 +48,9 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     private static final String DEFAULT_BOOTSTRAPPER = "com.gwtplatform.mvp.client.DefaultBootstrapper";
     private static final String SUFFIX = "Impl";
     private static final String OVERRIDE = "@Override";
-    private static final String INJECT_METHOD = "public void init() {";
+    private static final String INIT_METHOD = "public void init() {";
+    private static final String GINJECTOR_METHOD = "public Ginjector getGinjector() {";
+    private static final String GINJECTOR_RETURN = "return %s.SINGLETON;";
     private static final String DELAYED_BIND = "%s.bind(%s.SINGLETON);";
     private static final String ONBOOTSTRAP = "%s.SINGLETON.get%s().onBootstrap();";
     private static final String ONPREBOOTSTRAP = "new %s().onPreBootstrap();";
@@ -148,7 +150,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
 
     private void writeInit(SourceWriter sw, String generatorName, JClassType preBootstrapper, JClassType bootstrapper) {
         sw.println(OVERRIDE);
-        sw.println(INJECT_METHOD);
+        sw.println(INIT_METHOD);
         sw.indent();
 
         if (preBootstrapper != null) {
@@ -175,5 +177,14 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
             sw.outdent();
             sw.println("}");
         }
+
+        sw.println();
+        sw.println(OVERRIDE);
+        sw.println(GINJECTOR_METHOD);
+        sw.indent();
+
+        sw.println(String.format(GINJECTOR_RETURN, generatorName));
+        sw.outdent();
+        sw.println("}");
     }
 }

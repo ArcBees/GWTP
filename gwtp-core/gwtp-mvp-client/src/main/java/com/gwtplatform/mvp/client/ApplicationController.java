@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.inject.client.Ginjector;
+
 /**
  * ApplicationController will trigger the generation of your Ginjector. To activate the
  * generation you have to add one line to your module.gwt.xml file:
@@ -48,7 +50,13 @@ package com.gwtplatform.mvp.client;
  * }</pre>
  * <p/>
  * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
+ *
+ * If you need to use the Ginjector, you can also get it through a call to Ginjector getGinjector. To be able to use
+ * this class as a singleton anywhere in your application, we suggest to bind ApplicationController as a singleton in
+ * your configuration.
  */
 public interface ApplicationController {
+    Ginjector getGinjector();
+
     void init();
 }
