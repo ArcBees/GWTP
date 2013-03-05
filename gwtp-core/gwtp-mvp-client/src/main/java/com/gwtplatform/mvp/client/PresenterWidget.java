@@ -25,6 +25,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
@@ -101,12 +102,9 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * </ul>
  *
  * @param <V> The {@link View} type.
- * @author Philippe Beaudoin
- * @author Christian Goudreau
- * @author Denis Labaye
  */
 public abstract class PresenterWidget<V extends View> extends
-        HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot {
+        HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
     private final EventBus eventBus;
     private final V view;
 
@@ -223,7 +221,7 @@ public abstract class PresenterWidget<V extends View> extends
             slotChildren.add(content);
             activeChildren.put(slot, slotChildren);
         }
-        getView().addToSlot(slot, content.getWidget());
+        getView().addToSlot(slot, content);
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
@@ -261,14 +259,20 @@ public abstract class PresenterWidget<V extends View> extends
         return view;
     }
 
+    @Override
+    public Widget asWidget() {
+        return getView() == null ? null : getView().asWidget();
+    }
+
     /**
      * Makes it possible to access the {@link Widget} object associated with that
      * presenter.
      *
      * @return The Widget associated with that presenter.
      */
+    @Deprecated
     public Widget getWidget() {
-        return (getView() == null) ? null : getView().asWidget();
+        return asWidget();
     }
 
     /**
@@ -299,7 +303,7 @@ public abstract class PresenterWidget<V extends View> extends
             }
             slotChildren.remove(content);
         }
-        getView().removeFromSlot(slot, content.getWidget());
+        getView().removeFromSlot(slot, content);
     }
 
     // TODO This should be final but needs to be overriden in {@link
@@ -346,7 +350,7 @@ public abstract class PresenterWidget<V extends View> extends
         }
 
         // Set the content in the view
-        getView().setInSlot(slot, content.getWidget());
+        getView().setInSlot(slot, content);
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
