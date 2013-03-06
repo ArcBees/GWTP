@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.Bootstrapper;
@@ -91,6 +92,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     private ClassSourceFileComposerFactory initComposer(JClassType preBootstrapper) {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(getPackageName(), getClassName());
         composer.addImport(getTypeClass().getQualifiedSourceName());
+        composer.addImport(Ginjector.class.getCanonicalName());
 
         if (preBootstrapper != null) {
             composer.addImport(preBootstrapper.getQualifiedSourceName());
