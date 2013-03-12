@@ -96,6 +96,17 @@ public class PlaceRequest {
     }
 
     /**
+     * Builds a place request with the specified name token and with an existing parameter map.
+     *
+     * @param nameToken The name token for the request.
+     * @param params Existing parameter map.
+     */
+    PlaceRequest(String nameToken, Map<String, String> params) {
+        this.nameToken = nameToken;
+        this.params = params;
+    }
+
+    /**
      * Builds a place request that copies all the parameters of the passed request
      * and adds a new parameter.
      *
