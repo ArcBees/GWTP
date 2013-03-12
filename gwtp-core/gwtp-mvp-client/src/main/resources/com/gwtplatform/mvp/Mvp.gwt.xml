@@ -44,4 +44,10 @@
     <replace-with class="com.gwtplatform.mvp.client.DesktopGinjectorProvider">
         <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
     </replace-with>
+
+    <!-- Generate the place token index -->
+    <generate-with class="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator">
+        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry" />
+    </generate-with>
+
 </module>
