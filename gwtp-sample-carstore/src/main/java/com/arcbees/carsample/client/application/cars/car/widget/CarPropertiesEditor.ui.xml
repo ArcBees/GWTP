@@ -1,0 +1,24 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:d="urn:import:com.google.gwt.user.datepicker.client">
+    <ui:with field="resource" type="com.arcbees.carsample.client.resources.AppResources"/>
+
+    <ui:style>
+        .formRow {
+            margin-bottom: 10px;
+        }
+    </ui:style>
+
+    <g:HTMLPanel>
+        <div class="{style.formRow}">
+            <g:TextBox ui:field="someString" styleName="{resource.styles.mobileTextField}"/>
+        </div>
+
+        <div class="{style.formRow}">
+            <g:IntegerBox ui:field="someNumber" styleName="{resource.styles.mobileTextField}"/>
+        </div>
+
+        <div>
+            <d:DateBox ui:field="someDate" styleName="{resource.styles.mobileTextField}"/>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>
