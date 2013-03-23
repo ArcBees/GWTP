@@ -1,0 +1,24 @@
+.cellListWidget {
+    font-family: 'Droid Sans', sans-serif;
+    border-bottom: 2px solid #45a0ec;
+}
+
+.cellListEvenItem, .cellListOddItem {
+    font-size: 1em;
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #ffffff;
+    font-weight: bold;
+}
+
+.cellListSelectedItem {
+    background: none;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: normal;
+    border-bottom: 6px solid #45a0ec;
+    font-weight: bold;
+}
+

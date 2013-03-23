@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.0//EN"
+        "http://google-web-toolkit.googlecode.com/svn/tags/2.5.0/distro-source/core/src/gwt-module.dtd">
+<module>
+    <!-- Inherit the core Web Toolkit stuff. -->
+    <inherits name="com.gwtplatform.mvp.MvpWithEntryPoint" />
+    <inherits name='com.gwtplatform.dispatch.Dispatch' />
+
+    <!-- Inherit the default GWT style sheet. -->
+    <inherits name='com.google.gwt.user.theme.standard.Standard' />
+
+    <!-- Other -->
+    <inherits name="com.google.gwt.query.Query" />
+    <inherits name="com.google.common.collect.Collect" />
+
+    <!-- Global Style -->
+    <stylesheet src="styles-global.css" />
+
+    <!-- Gin modules -->
+    <set-configuration-property name="gin.ginjector.modules"
+                                value="com.arcbees.carsample.client.gin.PhoneGapModule" />
+
+    <!-- Specify the paths for translatable code -->
+    <source path='client' />
+    <source path='shared' />
+</module>

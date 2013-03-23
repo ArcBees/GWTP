@@ -1,0 +1,15 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <g:PopupPanel glassEnabled="true" autoHideEnabled="true" animationEnabled="true">
+        <g:HTMLPanel>
+            <div>
+                <g:InlineLabel>Name:</g:InlineLabel>
+                <g:TextBox ui:field="name"/>
+            </div>
+
+            <div>
+                <g:Button ui:field="save">Save</g:Button>
+                <g:Button ui:field="close">Close</g:Button>
+            </div>
+        </g:HTMLPanel>
+    </g:PopupPanel>
+</ui:UiBinder>
