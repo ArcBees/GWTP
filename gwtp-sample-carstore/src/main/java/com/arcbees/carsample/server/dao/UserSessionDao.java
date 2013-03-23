@@ -6,8 +6,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.arcbees.carsample.shared.domain.User;
@@ -15,12 +13,13 @@ import com.arcbees.carsample.shared.domain.UserSession;
 
 public class UserSessionDao extends BaseDao<UserSession> {
     private static final int TWO_WEEKS_AGO_IN_DAYS = -14;
+    
     private final Logger logger;
     private final UserDao userDao;
 
     @Inject
-    public UserSessionDao(Provider<EntityManager> entityManagerProvider, final Logger logger, final UserDao userDao) {
-        super(UserSession.class, entityManagerProvider);
+    public UserSessionDao(Logger logger, UserDao userDao) {
+        super(UserSession.class);
 
         this.logger = logger;
         this.userDao = userDao;

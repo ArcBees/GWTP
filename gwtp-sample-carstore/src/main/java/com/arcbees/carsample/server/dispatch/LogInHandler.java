@@ -14,7 +14,6 @@ import com.google.inject.Inject;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-@Transactional
 public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult> {
     private final Authenticator authenticator;
     private final UserSessionDao loginCookieDao;
