@@ -9,7 +9,6 @@ import com.arcbees.carsample.shared.domain.Manufacturer;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-@Transactional
 public class SaveManufacturerHandler extends AbstractActionHandler<SaveManufacturerAction, GetResult<Manufacturer>> {
     private final ManufacturerDao manufacturerDao;
 

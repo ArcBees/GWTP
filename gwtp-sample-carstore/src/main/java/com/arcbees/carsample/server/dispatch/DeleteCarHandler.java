@@ -8,7 +8,6 @@ import com.arcbees.carsample.shared.dispatch.NoResults;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-@Transactional
 public class DeleteCarHandler extends AbstractActionHandler<DeleteCarAction, NoResults> {
     private final CarDao carDao;
 

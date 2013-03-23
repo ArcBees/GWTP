@@ -9,7 +9,6 @@ import com.arcbees.carsample.shared.domain.Car;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-@Transactional
 public class SaveCarHandler extends AbstractActionHandler<SaveCarAction, GetResult<Car>> {
     private final CarDao carDao;
 
