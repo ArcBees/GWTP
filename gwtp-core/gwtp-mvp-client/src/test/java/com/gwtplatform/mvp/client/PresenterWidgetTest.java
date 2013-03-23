@@ -282,6 +282,32 @@ public class PresenterWidgetTest {
         verify(popupContentC.getView(), times(2)).show();
     }
 
+    @Test
+    public void shouldHidePopupWhenPopupPresenterRemoved(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetPopupB popupContentB) {
+
+        // Given
+        presenterWidgetA.internalReveal();
+
+        // When
+        presenterWidgetA.addToPopupSlot(popupContentB);
+
+        // Then
+        verify(popupContentB.getView()).show();
+        verify(popupContentB.getView()).center();
+        assertEquals(1, popupContentB.onRevealMethodCalled);
+        assertTrue(popupContentB.isVisible());
+
+        // and When
+        presenterWidgetA.removeFromPopupSlot(popupContentB);
+
+        // Then
+        verify(popupContentB.getView()).hide();
+        assertEquals(1, popupContentB.onHideMethodCalled);
+        assertFalse(popupContentB.isVisible());
+    }
+
     // TODO Make sure the calls happen in the right order
     // parent then child for onReveal and onReset
     // child then parent for onHide

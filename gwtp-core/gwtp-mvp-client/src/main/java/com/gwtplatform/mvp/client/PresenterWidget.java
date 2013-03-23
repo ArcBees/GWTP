@@ -206,6 +206,23 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
+    public void removeFromPopupSlot(PresenterWidget<? extends PopupView> child) {
+        if (child == null) {
+            return;
+        }
+
+        if (popupChildren.contains(child)) {
+            child.getView().hide();
+            if (child.isVisible()) {
+                child.internalHide();
+            }
+            popupChildren.remove(child);
+        }
+
+        child.reparent(null);
+    }
+
+    @Override
     public final void addToSlot(Object slot, PresenterWidget<?> content) {
         if (content == null) {
             return;
