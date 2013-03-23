@@ -1,0 +1,28 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:cell="urn:import:com.google.gwt.user.cellview.client">
+
+    <ui:with field="resources" type="com.arcbees.carsample.client.resources.AppResources"/>
+
+    <ui:style>
+        .tableWrapper {
+            margin-top: 20px;
+        }
+    </ui:style>
+
+    <g:HTMLPanel debugId="ratingPanel">
+        <div class="{resources.styles.bigTitle}">
+            <h2>
+                <g:InlineLabel text="Ratings"/>
+            </h2>
+            <div>
+                <g:Button ui:field="create" styleName="{resources.styles.addAction}"/>
+            </div>
+            <span style="display: block; clear: both;"/>
+        </div>
+
+        <div class="{style.tableWrapper}">
+            <cell:CellTable ui:field="ratingGrid" width="100%" debugId="ratings"/>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

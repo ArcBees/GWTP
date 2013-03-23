@@ -1,0 +1,10 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+    <ui:with field="appResources" type="com.arcbees.carsample.client.resources.AppResources"/>
+
+    <g:HTMLPanel ui:field="messageBox" styleName="{appResources.styles.message}" visible="false">
+        <g:InlineLabel ui:field="messageLabel"/>
+        <g:InlineHTML ui:field="close" styleName="{appResources.styles.close}">X</g:InlineHTML>
+    </g:HTMLPanel>
+
+</ui:UiBinder>
