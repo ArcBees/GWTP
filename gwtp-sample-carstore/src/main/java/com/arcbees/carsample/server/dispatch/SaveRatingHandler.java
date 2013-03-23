@@ -9,7 +9,6 @@ import com.arcbees.carsample.shared.domain.Rating;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-@Transactional
 public class SaveRatingHandler extends AbstractActionHandler<SaveRatingAction, GetResult<Rating>> {
     private final RatingDao ratingDao;
 
