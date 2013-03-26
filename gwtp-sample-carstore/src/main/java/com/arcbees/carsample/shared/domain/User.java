@@ -1,30 +1,15 @@
 package com.arcbees.carsample.shared.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User implements BaseEntity {
-    private static final long serialVersionUID = -4927013195423066882L;
-
-    @Id
-    @GeneratedValue
-    private Integer id;
-
-    @Column(nullable = false, unique = true)
+public class User extends BaseEntity {
     private String username;
 
-    @Column(name = "hash_password")
     private String hashPassword;
 
-    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
     private String lastName;
 
     public User() {
@@ -37,15 +22,6 @@ public class User implements BaseEntity {
         this.hashPassword = hashPassword;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
