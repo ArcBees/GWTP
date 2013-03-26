@@ -85,7 +85,7 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
     private void initDataColumns() {
         Column<Manufacturer, Number> idColumn = new Column<Manufacturer, Number>(new NumberCell()) {
             @Override
-            public Integer getValue(Manufacturer manufacturer) {
+            public Long getValue(Manufacturer manufacturer) {
                 return manufacturer.getId();
             }
         };

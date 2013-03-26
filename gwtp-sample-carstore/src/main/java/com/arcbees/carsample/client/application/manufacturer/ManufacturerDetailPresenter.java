@@ -81,7 +81,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
         createNew = Strings.isNullOrEmpty(param);
 
         if (!createNew) {
-            Integer id = Integer.parseInt(param);
+            Long id = Long.parseLong(param);
             dispatcher.execute(new GetManufacturerAction(id), new SafeAsyncCallback<GetResult<Manufacturer>>() {
                 @Override
                 public void onSuccess(GetResult<Manufacturer> result) {

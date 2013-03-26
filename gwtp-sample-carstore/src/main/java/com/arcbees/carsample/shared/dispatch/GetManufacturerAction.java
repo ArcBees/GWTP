@@ -3,16 +3,16 @@ package com.arcbees.carsample.shared.dispatch;
 import com.arcbees.carsample.shared.domain.Manufacturer;
 
 public class GetManufacturerAction extends ActionImpl<GetResult<Manufacturer>> {
-    private Integer id;
+    private Long id;
 
     public GetManufacturerAction() {
     }
 
-    public GetManufacturerAction(Integer id) {
+    public GetManufacturerAction(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
