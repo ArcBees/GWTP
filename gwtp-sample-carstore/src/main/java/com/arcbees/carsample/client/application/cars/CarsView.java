@@ -98,7 +98,7 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     private void initDataColumns() {
         Column<Car, Number> idColumn = new Column<Car, Number>(new NumberCell()) {
             @Override
-            public Integer getValue(Car car) {
+            public Long getValue(Car car) {
                 return car.getId();
             }
         };

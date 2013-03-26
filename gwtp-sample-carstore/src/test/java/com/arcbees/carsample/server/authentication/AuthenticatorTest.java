@@ -38,7 +38,7 @@ public class AuthenticatorTest {
     private static final String AN_INVALID_USER = "invalid-user";
     private static final String A_VALID_PASSWORD = "valid-password";
     private static final String AN_INVALID_PASSWORD = "invalid-password";
-    private static final int A_USER_ID = 1;
+    private static final long A_USER_ID = 1;
 
     @Inject
     Authenticator authenticator;
@@ -96,7 +96,7 @@ public class AuthenticatorTest {
     public void logoutShouldDestroyTheSession(UserSessionDao userSessionDao) {
         // Given
         User user = mock(User.class);
-        given(user.getId()).willReturn(0);
+        given(user.getId()).willReturn(0l);
         
         CurrentUserDto currentUserDto = mock(CurrentUserDto.class);
         given(currentUserDto.getUser()).willReturn(user);

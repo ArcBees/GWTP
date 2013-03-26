@@ -6,14 +6,13 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.persistence.Query;
 
 import com.arcbees.carsample.shared.domain.User;
 import com.arcbees.carsample.shared.domain.UserSession;
 
 public class UserSessionDao extends BaseDao<UserSession> {
     private static final int TWO_WEEKS_AGO_IN_DAYS = -14;
-    
+
     private final Logger logger;
     private final UserDao userDao;
 
@@ -48,26 +47,13 @@ public class UserSessionDao extends BaseDao<UserSession> {
     public User getUserFromCookie(String loggedInCookie) {
         Date twoWeeksAgo = getTwoWeeksAgo();
 
-        String queryStr = "select o from " + UserSession.class.getName() + " o where "
-                + "o.cookie = :loggedInCookie and o.dateCreated > :twoWeeksAgo";
-
-        Query query = entityManager().createQuery(queryStr);
-        query.setParameter("twoWeeksAgo", twoWeeksAgo);
-        query.setParameter("loggedInCookie", loggedInCookie);
-
-        logger.info("UserSessionDao.getUserFromCookie(): query=" + query.toString());
-
-        Integer userId = null;
-        try {
-            UserSession userSession = (UserSession) query.getSingleResult();
-            userId = userSession.getId();
-        } catch (Exception e) {
-            logger.info("UserSessionDao.getUserFromCookie(): Couldn't find user with cookie.");
-        }
+        UserSession userSession = ofy().query(UserSession.class).filter("cookie", loggedInCookie).filter(
+                "dateCreated > ", twoWeeksAgo).first().getValue();
+        Long userId = userSession.getId();
 
         User user = null;
         if (userId != null) {
-            user = userDao.find(userId);
+            user = userDao.get(userId);
         }
 
         return user;
@@ -80,21 +66,7 @@ public class UserSessionDao extends BaseDao<UserSession> {
         return calendar.getTime();
     }
 
-    private UserSession findUserSession(Integer userId) {
-        String queryStr = "select o from " + UserSession.class.getName() + " o where o.userId = :userId";
-
-        Query query = entityManager().createQuery(queryStr);
-        query.setParameter("userId", userId);
-
-        logger.info("UserSessionDao.getUserFromCookie(): query=" + query.toString());
-
-        UserSession userSession = null;
-        try {
-            userSession = (UserSession) query.getSingleResult();
-        } catch (Exception e) {
-            logger.info("UserSessionDao.findUserSession(userId): User session doesn't exist yet.");
-        }
-
-        return userSession;
+    private UserSession findUserSession(Long userId) {
+        return ofy().query(UserSession.class).filter("userId", userId).first().getValue();
     }
 }

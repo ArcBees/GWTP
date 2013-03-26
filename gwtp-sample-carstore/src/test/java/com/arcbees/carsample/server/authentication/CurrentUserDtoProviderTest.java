@@ -1,24 +1,27 @@
 package com.arcbees.carsample.server.authentication;
 
-import com.arcbees.carsample.server.dao.UserDao;
-import com.arcbees.carsample.shared.domain.User;
-import com.arcbees.carsample.shared.dto.CurrentUserDto;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.mock;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
-
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
+import com.arcbees.carsample.server.dao.UserDao;
+import com.arcbees.carsample.shared.domain.User;
+import com.arcbees.carsample.shared.dto.CurrentUserDto;
 
 @RunWith(JukitoRunner.class)
 public class CurrentUserDtoProviderTest {
-    @SuppressWarnings("unused")
     public static class Module extends JukitoModule {
         @Override
         protected void configureTest() {
@@ -26,7 +29,7 @@ public class CurrentUserDtoProviderTest {
         }
     }
 
-    private static final int A_USER_ID = 1;
+    private static final long A_USER_ID = 1;
 
     @Inject
     HttpSession httpSession;
@@ -40,7 +43,7 @@ public class CurrentUserDtoProviderTest {
         // Given
         User user = mock(User.class);
         given(httpSession.getAttribute(SecurityParameters.getUserSessionKey())).willReturn(A_USER_ID);
-        given(userDao.find(A_USER_ID)).willReturn(user);
+        given(userDao.get(A_USER_ID)).willReturn(user);
 
         // When
         CurrentUserDto currentUserDto = currentUserDtoProvider.get();
@@ -54,7 +57,7 @@ public class CurrentUserDtoProviderTest {
     public void anInvalidSessionShouldNotReturnTheCurrentUser() {
         // Given
         given(httpSession.getAttribute(SecurityParameters.getUserSessionKey())).willReturn(null);
-        given(userDao.find(anyInt())).willReturn(null);
+        given(userDao.get(anyLong())).willReturn(null);
 
         // When
         CurrentUserDto currentUserDto = currentUserDtoProvider.get();
