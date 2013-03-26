@@ -22,6 +22,8 @@ public class GetManufacturerHandler extends AbstractActionHandler<GetManufacture
     @Override
     public GetResult<Manufacturer> execute(GetManufacturerAction action, ExecutionContext context)
             throws ActionException {
-        return new GetResult<Manufacturer>(manufacturerDao.find(action.getId()));
+        Manufacturer manufacturer = manufacturerDao.get(action.getId());
+        
+        return new GetResult<Manufacturer>(manufacturer);
     }
 }

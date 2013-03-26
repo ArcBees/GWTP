@@ -21,11 +21,11 @@ public class CurrentUserDtoProvider implements Provider<CurrentUserDto> {
     @Override
     public CurrentUserDto get() {
         HttpSession session = sessionProvider.get();
-        Integer currentUserId = (Integer) session.getAttribute(SecurityParameters.getUserSessionKey());
+        Long currentUserId = (Long) session.getAttribute(SecurityParameters.getUserSessionKey());
 
         User user = null;
         if (currentUserId != null) {
-            user = userDao.find(currentUserId);
+            user = userDao.get(currentUserId);
         }
 
         boolean isLoggedIn = user != null;

@@ -23,9 +23,9 @@ public class GetCarsHandler extends AbstractActionHandler<GetCarsAction, GetResu
 
     @Override
     public GetResults<Car> execute(GetCarsAction action, ExecutionContext context) throws ActionException {
-        List<Car> cars;
+        List<Car> cars = null;
         if (action.getOffset() != null && action.getLimit() != null) {
-            cars = carDao.getSome(action.getOffset(), action.getLimit());
+            carDao.getSome(action.getOffset(), action.getLimit());
         } else {
             cars = carDao.getAll();
         }

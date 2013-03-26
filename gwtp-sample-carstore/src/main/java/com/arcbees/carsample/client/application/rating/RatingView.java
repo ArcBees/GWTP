@@ -77,7 +77,7 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     private void initDataColumns() {
         Column<Rating, Number> idColumn = new Column<Rating, Number>(new NumberCell()) {
             @Override
-            public Integer getValue(Rating rating) {
+            public Long getValue(Rating rating) {
                 return rating.getId();
             }
         };
