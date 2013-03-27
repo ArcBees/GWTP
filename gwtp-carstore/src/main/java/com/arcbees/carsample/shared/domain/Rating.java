@@ -1,15 +1,11 @@
 package com.arcbees.carsample.shared.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Rating extends BaseEntity {
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Car car;
-
     private Integer rating;
+    private Car car;
 
     public Rating() {
     }
