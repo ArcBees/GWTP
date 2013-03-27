@@ -2,20 +2,14 @@ package com.arcbees.carsample.shared.domain;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import com.googlecode.objectify.annotation.Entity;
 
 @Entity
 public class CarProperties extends BaseEntity {
-    @OneToOne(optional = false, mappedBy = "carProperties", fetch = FetchType.EAGER)
-    private Car car;
-
     private String someString;
-
     private Integer someNumber;
-
     private Date someDate;
+    private Car car;
 
     public CarProperties() {
         this.someString = "";

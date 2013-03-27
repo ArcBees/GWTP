@@ -3,27 +3,15 @@ package com.arcbees.carsample.shared.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 import com.google.gwt.user.client.rpc.GwtTransient;
+import com.googlecode.objectify.annotation.Entity;
 
 @Entity
 public class Car extends BaseEntity {
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Manufacturer manufacturer;
-
     private String model;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.REMOVE)
     @GwtTransient
     private List<Rating> ratings;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Manufacturer manufacturer;
     private CarProperties carProperties;
 
     public Car() {

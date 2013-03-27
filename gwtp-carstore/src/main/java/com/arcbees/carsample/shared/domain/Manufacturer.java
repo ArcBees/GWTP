@@ -3,18 +3,12 @@ package com.arcbees.carsample.shared.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-
 import com.google.gwt.user.client.rpc.GwtTransient;
+import com.googlecode.objectify.annotation.Entity;
 
 @Entity
 public class Manufacturer extends BaseEntity {
     private String name;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manufacturer", cascade = CascadeType.REMOVE)
     @GwtTransient
     private List<Car> cars;
 
