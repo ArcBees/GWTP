@@ -3,12 +3,9 @@ package com.arcbees.carsample.shared.dto;
 import com.arcbees.carsample.shared.domain.User;
 
 public class CurrentUserDto implements Dto {
-    private static final long serialVersionUID = 4455865315479492955L;
-
     private Boolean loggedIn;
     private User user;
 
-    @SuppressWarnings("unused")
     protected CurrentUserDto() {
         // Needed for serialization
     }
