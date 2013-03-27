@@ -10,8 +10,9 @@
     </parent>
     
     <packaging>war</packaging>
-    <artifactId>gwtp-sample-carstore</artifactId>
-    <name>gwtp-sample-carstore</name>
+    <artifactId>gwtp-carstore</artifactId>
+    <name>gwtp-carstore</name>
+    <description>Small applicaiton used for testing GWTP features.</description>
     
     <properties>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
