@@ -184,7 +184,7 @@
     <modules>
         <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
-        <module>gwtp-sample-carstore</module>
+        <module>gwtp-carstore</module>
     </modules>
 
     <properties>
