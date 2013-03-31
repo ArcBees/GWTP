@@ -2,6 +2,8 @@ package com.arcbees.carsample.shared.domain;
 
 import java.util.Date;
 
+import javax.persistence.Embedded;
+
 import com.googlecode.objectify.annotation.Entity;
 
 @Entity
@@ -9,6 +11,7 @@ public class CarProperties extends BaseEntity {
     private String someString;
     private Integer someNumber;
     private Date someDate;
+    @Embedded
     private Car car;
 
     public CarProperties() {

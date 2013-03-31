@@ -9,9 +9,7 @@ import javax.persistence.Id;
 public class UserSession extends BaseEntity {
     @Id
     private Long userId;
-    
     private String cookie;
-
     private Date dateCreated;
 
     public UserSession() {
