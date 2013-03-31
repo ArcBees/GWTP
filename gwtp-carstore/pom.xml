@@ -16,6 +16,12 @@
 
 	<properties>
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+
+		<gae.version>1.7.5</gae.version>
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		<gae.home>
+			${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
+		</gae.home>
 	</properties>
 
 	<build>
@@ -132,48 +138,27 @@
 				</executions>
 			</plugin>
 
-			<!-- Server for running Cucumber tests *TestInt.java -->
-			<!-- 'mvn jetty:run' deploys and starts -->
-			<!-- mvn jetty:start -->
-			<!-- mvn jetty:stop -->
-			<!-- mvn jetty:run -->
-			<!-- mvn integration-test -Pintegration-test -->
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty-plugin.version}</version>
+				<groupId>net.kindleit</groupId>
+				<artifactId>maven-gae-plugin</artifactId>
 				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<stopPort>9966</stopPort>
-					<stopKey>stop-jetty</stopKey>
-					<webAppSourceDirectory>${webappDirectory}</webAppSourceDirectory>
-					<webApp>
-						<descriptor>${webappDirectory}/WEB-INF</descriptor>
-					</webApp>
-					<systemProperties>
-						<systemProperty>
-							<name>jetty.port</name>
-							<value>8888</value>
-						</systemProperty>
-					</systemProperties>
+					<sdkDir>${gae.home}</sdkDir>
+					<!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
+					<serverId>appengine-credentials</serverId>
+					<splitJars>true</splitJars>
 				</configuration>
 				<executions>
 					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
+						<id>install-server-jar</id>
+						<phase>validate</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>unpack</goal>
 						</goals>
-						<configuration>
-							<daemon>true</daemon>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-						</configuration>
 					</execution>
 					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
+						<id>deploy</id>
 						<goals>
-							<goal>stop</goal>
+							<goal>deploy</goal>
 						</goals>
 					</execution>
 				</executions>
