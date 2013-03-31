@@ -12,6 +12,7 @@
     <!-- Other module inherits -->
     <inherits name="com.google.gwt.query.Query" />
     <inherits name="com.google.common.collect.Collect" />
+    <inherits name="com.googlecode.objectify.Objectify" />
 
     <!-- Logging Settings -->
     <inherits name="com.google.gwt.logging.Logging" />

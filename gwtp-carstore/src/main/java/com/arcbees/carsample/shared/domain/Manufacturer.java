@@ -3,13 +3,14 @@ package com.arcbees.carsample.shared.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.user.client.rpc.GwtTransient;
+import javax.persistence.Embedded;
+
 import com.googlecode.objectify.annotation.Entity;
 
 @Entity
 public class Manufacturer extends BaseEntity {
     private String name;
-    @GwtTransient
+    @Embedded
     private List<Car> cars;
 
     public Manufacturer() {
