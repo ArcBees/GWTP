@@ -2,6 +2,9 @@ package com.arcbees.carsample.shared.domain;
 
 import javax.persistence.Entity;
 
+import com.googlecode.objectify.annotation.Index;
+
+@Index
 @Entity
 public class User extends BaseEntity {
     private String username;

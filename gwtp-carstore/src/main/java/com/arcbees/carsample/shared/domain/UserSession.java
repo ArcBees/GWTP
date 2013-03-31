@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.googlecode.objectify.annotation.Index;
+
+@Index
 @Entity
 public class UserSession extends BaseEntity {
     @Id
