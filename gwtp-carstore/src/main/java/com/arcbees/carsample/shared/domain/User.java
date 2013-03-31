@@ -5,11 +5,8 @@ import javax.persistence.Entity;
 @Entity
 public class User extends BaseEntity {
     private String username;
-
     private String hashPassword;
-
     private String firstName;
-
     private String lastName;
 
     public User() {

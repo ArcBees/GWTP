@@ -1,10 +1,12 @@
 package com.arcbees.carsample.shared.domain;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 @Entity
 public class Rating extends BaseEntity {
     private Integer rating;
+    @Embedded
     private Car car;
 
     public Rating() {
