@@ -1,592 +1,596 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 
-    <groupId>com.gwtplatform</groupId>
-    <artifactId>gwtp</artifactId>
-    <version>1.0-RC-3-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>GWT-Platform</name>
-    <inceptionYear>2010</inceptionYear>
-    <description>A complete model-view-presenter framework to simplify your next GWT project.</description>
-    <url>http://gwtplatform.com</url>
+	<groupId>com.gwtplatform</groupId>
+	<artifactId>gwtp</artifactId>
+	<version>1.0-RC-3-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>GWT-Platform</name>
+	<inceptionYear>2010</inceptionYear>
+	<description>A complete model-view-presenter framework to simplify your next GWT project.</description>
+	<url>http://gwtplatform.com</url>
 
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
 
-    <organization>
-        <name>ArcBees</name>
-        <url>http://arcbees.com</url>
-    </organization>
+	<organization>
+		<name>ArcBees</name>
+		<url>http://arcbees.com</url>
+	</organization>
 
-    <developers>
-        <developer>
-            <id>philippe.beaudoin</id>
-            <name>Philippe Beaudoin</name>
-            <email>philippe.beaudoin@gmail.com</email>
-            <organization>ArcBees</organization>
-            <organizationUrl>http://arcbees.com</organizationUrl>
-            <roles>
-                <role>architect</role>
-                <role>lead developer</role>
-            </roles>
-            <timezone>-5</timezone>
-            <properties>
-                <picUrl>http://goo.gl/xV2K8</picUrl>
-            </properties>
-        </developer>
-        <developer>
-            <id>goudreau.christian</id>
-            <name>Christain Goudreau</name>
-            <email>goudreau.christian@gmail.com</email>
-            <organization>ArcBees</organization>
-            <organizationUrl>http://arcbees.com</organizationUrl>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <timezone>-5</timezone>
-        </developer>
-        <developer>
-            <id>brendanpdoherty</id>
-            <name>Brendan Doherty</name>
-            <email>brendan@doherty.net.nz</email>
-        </developer>
-        <developer>
-            <id>jgonian</id>
-            <name>Yannis Gonianakis</name>
-            <email>jgonian@gmail.com</email>
-        </developer>
-        <developer>
-            <name>Michael Renaud</name>
-            <email>michael.renaud@imagemsoft.com</email>
-        </developer>
-        <developer>
-            <id>brandon.donnelson</id>
-            <name>Brandon Donnelson</name>
-            <email>branflake2267@gmail.com</email>
-            <organization>ArcBees</organization>
-            <organizationUrl>http://arcbees.com</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-    </developers>
+	<developers>
+		<developer>
+			<id>philippe.beaudoin</id>
+			<name>Philippe Beaudoin</name>
+			<email>philippe.beaudoin@gmail.com</email>
+			<organization>ArcBees</organization>
+			<organizationUrl>http://arcbees.com</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>lead developer</role>
+			</roles>
+			<timezone>-5</timezone>
+			<properties>
+				<picUrl>http://goo.gl/xV2K8</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>goudreau.christian</id>
+			<name>Christain Goudreau</name>
+			<email>goudreau.christian@gmail.com</email>
+			<organization>ArcBees</organization>
+			<organizationUrl>http://arcbees.com</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>-5</timezone>
+		</developer>
+		<developer>
+			<id>brendanpdoherty</id>
+			<name>Brendan Doherty</name>
+			<email>brendan@doherty.net.nz</email>
+		</developer>
+		<developer>
+			<id>jgonian</id>
+			<name>Yannis Gonianakis</name>
+			<email>jgonian@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Michael Renaud</name>
+			<email>michael.renaud@imagemsoft.com</email>
+		</developer>
+		<developer>
+			<id>brandon.donnelson</id>
+			<name>Brandon Donnelson</name>
+			<email>branflake2267@gmail.com</email>
+			<organization>ArcBees</organization>
+			<organizationUrl>http://arcbees.com</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
 
-    <contributors>
-        <contributor>
-            <name>Olivier Monaco</name>
-            <email>monaco.olivier@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Gene Conroy-Jones</name>
-            <email>drgenejones@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Raphael André Bauer</name>
-            <email>raphael.andre.bauer@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Jian Jiang</name>
-            <email>youarehow2@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Peter Simun</name>
-            <email>Peter.Simun@seges.sk</email>
-        </contributor>
-        <contributor>
-            <name>David Peterson</name>
-            <email>david.peterson@customware.net</email>
-        </contributor>
-        <contributor>
-            <name>David M. Chandler</name>
-            <email>david@turbomanage.com</email>
-        </contributor>
-        <contributor>
-            <name>Chema Molins</name>
-            <email>chemamolins@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Bailey Cosier</name>
-            <email>bailey@cosier.org</email>
-        </contributor>
-        <contributor>
-            <name>Florian Sauter</name>
-            <email>floonweb@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Denis Labaye</name>
-            <email>denis.labaye@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Travis Camechis</name>
-            <email>camechis@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Björn Moritz</name>
-            <email>bjoern.moritz@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Andrey Vityuk</name>
-            <email>andrey.vityuk@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Tom Terrace</name>
-            <email>TTerrace@gmail.com</email>
-        </contributor>
-        <contributor>
-            <name>Daniel Colchete</name>
-            <email>dani@cloud3.tc</email>
-        </contributor>
-        <contributor>
-            <name>Johannes Barop</name>
-            <email>jb@barop.de</email>
-        </contributor>
-    </contributors>
+	<contributors>
+		<contributor>
+			<name>Olivier Monaco</name>
+			<email>monaco.olivier@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Gene Conroy-Jones</name>
+			<email>drgenejones@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Raphael André Bauer</name>
+			<email>raphael.andre.bauer@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Jian Jiang</name>
+			<email>youarehow2@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Peter Simun</name>
+			<email>Peter.Simun@seges.sk</email>
+		</contributor>
+		<contributor>
+			<name>David Peterson</name>
+			<email>david.peterson@customware.net</email>
+		</contributor>
+		<contributor>
+			<name>David M. Chandler</name>
+			<email>david@turbomanage.com</email>
+		</contributor>
+		<contributor>
+			<name>Chema Molins</name>
+			<email>chemamolins@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Bailey Cosier</name>
+			<email>bailey@cosier.org</email>
+		</contributor>
+		<contributor>
+			<name>Florian Sauter</name>
+			<email>floonweb@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Denis Labaye</name>
+			<email>denis.labaye@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Travis Camechis</name>
+			<email>camechis@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Björn Moritz</name>
+			<email>bjoern.moritz@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Andrey Vityuk</name>
+			<email>andrey.vityuk@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Tom Terrace</name>
+			<email>TTerrace@gmail.com</email>
+		</contributor>
+		<contributor>
+			<name>Daniel Colchete</name>
+			<email>dani@cloud3.tc</email>
+		</contributor>
+		<contributor>
+			<name>Johannes Barop</name>
+			<email>jb@barop.de</email>
+		</contributor>
+	</contributors>
 
-    <scm>
-        <connection>scm:git:https://github.com/ArcBees/GWTP.git</connection>
-        <developerConnection>scm:git:https://github.com/ArcBees/GWTP.git</developerConnection>
-        <url>https://github.com/ArcBees/GWTP</url>
-    </scm>
+	<scm>
+		<connection>scm:git:https://github.com/ArcBees/GWTP.git</connection>
+		<developerConnection>scm:git:https://github.com/ArcBees/GWTP.git</developerConnection>
+		<url>https://github.com/ArcBees/GWTP</url>
+	</scm>
 
-    <issueManagement>
-        <url>https://github.com/ArcBees/GWTP/issues</url>
-        <system>Github Issues</system>
-    </issueManagement>
+	<issueManagement>
+		<url>https://github.com/ArcBees/GWTP/issues</url>
+		<system>Github Issues</system>
+	</issueManagement>
 
-    <ciManagement>
-        <system>Team City</system>
-        <url>http://teamcity.codebetter.com</url>
-    </ciManagement>
+	<ciManagement>
+		<system>Team City</system>
+		<url>http://teamcity.codebetter.com</url>
+	</ciManagement>
 
-    <mailingLists>
-        <mailingList>
-            <name>Development</name>
-            <subscribe>gwt-platform+subscribe@googlegroups.com</subscribe>
-            <unsubscribe>gwt-platform+unsubscribe@googlegroups.com</unsubscribe>
-            <post>gwt-platform@googlegroups.com</post>
-            <archive>http://groups.google.com/group/gwt-platform</archive>
-        </mailingList>
-    </mailingLists>
+	<mailingLists>
+		<mailingList>
+			<name>Development</name>
+			<subscribe>gwt-platform+subscribe@googlegroups.com</subscribe>
+			<unsubscribe>gwt-platform+unsubscribe@googlegroups.com</unsubscribe>
+			<post>gwt-platform@googlegroups.com</post>
+			<archive>http://groups.google.com/group/gwt-platform</archive>
+		</mailingList>
+	</mailingLists>
 
-    <modules>
-        <module>gwtp-build-tools</module>
-        <module>gwtp-core</module>
-        <module>gwtp-carstore</module>
-    </modules>
+	<modules>
+		<module>gwtp-build-tools</module>
+		<module>gwtp-core</module>
+		<module>gwtp-carstore</module>
+	</modules>
 
-    <properties>
-        <target.jdk>1.6</target.jdk>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<properties>
+		<target.jdk>1.6</target.jdk>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Maven -->
-        <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-        <gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
-        <lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
-        <maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
-        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-        <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
-        <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
-        <maven-gae-plugin.version>0.9.5</maven-gae-plugin.version>
-        <maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
-        <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
-        <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
-        <maven-war-plugin.version>2.2</maven-war-plugin.version>
+		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
+		<gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
+		<lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
+		<maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
+		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+		<maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
+		<maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
+		<maven-gae-plugin.version>0.9.5</maven-gae-plugin.version>
+		<maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
+		<maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
+		<maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+		<maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
+		<maven-war-plugin.version>2.2</maven-war-plugin.version>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 
 		<!-- Client -->
 		<gwt.version>2.5.1</gwt.version>
 		<gin.version>2.0.0</gin.version>
 		<gwtquery.version>1.3.2</gwtquery.version>
-	
+
 		<!-- Server -->
-        <aopalliance.version>1.0</aopalliance.version>
-        <cglib.version>2.2</cglib.version>
-        <gae.version>1.7.4</gae.version>
-        <guice.version>3.0</guice.version>
-        <javax.inject.version>1</javax.inject.version>
-        <guava.version>14.0-rc1</guava.version>
-        <objectify.version>4.0b1</objectify.version>
-        <persistence-api.version>1.0</persistence-api.version>
-        <servlet-api.version>2.5</servlet-api.version>
-        <spring.version>3.1.2.RELEASE</spring.version>
-        <velocity.version>1.7</velocity.version>
-        <jbcrypt.version>0.3m</jbcrypt.version>
-        
-        <!-- Testing -->
-        <jukito.version>1.1</jukito.version>
-        <junit.version>4.11</junit.version>
-        <mockito.version>1.9.5</mockito.version>
-        <htmlunit.version>2.9</htmlunit.version>
-        <selenium.version>2.25.0</selenium.version>
-        <cucumber.version>1.0.14</cucumber.version>
-        <jetty-plugin.version>8.1.0.v20120127</jetty-plugin.version>
-        
-        <!-- GitHub Sites -->
-        <github.version>0.7</github.version>
+		<aopalliance.version>1.0</aopalliance.version>
+		<cglib.version>2.2</cglib.version>
+		<gae.version>1.7.4</gae.version>
+		<guice.version>3.0</guice.version>
+		<javax.inject.version>1</javax.inject.version>
+		<guava.version>14.0-rc1</guava.version>
+		<objectify.version>4.0b1</objectify.version>
+		<persistence-api.version>1.0</persistence-api.version>
+		<servlet-api.version>2.5</servlet-api.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
+		<velocity.version>1.7</velocity.version>
+		<jbcrypt.version>0.3m</jbcrypt.version>
 
-        <!-- Used for releasing to sonatype as command line parameter -->
-        <gpg.passphrase>SetAsParam</gpg.passphrase>
-        <github.username>SetAsParam</github.username>
-        <github.password>SetAsParam</github.password>
-    </properties>
+		<!-- Testing -->
+		<jukito.version>1.1</jukito.version>
+		<junit.version>4.11</junit.version>
+		<mockito.version>1.9.5</mockito.version>
+		<htmlunit.version>2.9</htmlunit.version>
+		<selenium.version>2.25.0</selenium.version>
+		<cucumber.version>1.0.14</cucumber.version>
+		<jetty-plugin.version>8.1.0.v20120127</jetty-plugin.version>
 
-    <!-- TODO remove? -->
-    <repositories>
-        <repository>
-            <id>sonatype.snapshots</id>
-            <name>Sonatype snapshot repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+		<!-- GitHub Sites -->
+		<github.version>0.7</github.version>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-eclipse-plugin</artifactId>
-                    <version>${maven-eclipse-plugin.version}</version>
-                </plugin>
+		<!-- Used for releasing to sonatype as command line parameter -->
+		<gpg.passphrase>SetAsParam</gpg.passphrase>
+		<github.username>SetAsParam</github.username>
+		<github.password>SetAsParam</github.password>
+	</properties>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
-                    <configuration>
-                        <source>${target.jdk}</source>
-                        <target>${target.jdk}</target>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                    </configuration>
-                </plugin>
+	<!-- TODO remove? -->
+	<repositories>
+		<repository>
+			<id>sonatype.snapshots</id>
+			<name>Sonatype snapshot repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${maven-deploy-plugin.version}</version>
-                </plugin>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>${maven-eclipse-plugin.version}</version>
+				</plugin>
 
-                <plugin>
-                    <groupId>org.bsc.maven</groupId>
-                    <artifactId>maven-processor-plugin</artifactId>
-                    <version>${maven-processor-plugin.version}</version>
-                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<source>${target.jdk}</source>
+						<target>${target.jdk}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${maven-checkstyle-plugin.version}</version>
-                    <configuration>
-                        <configLocation>/gwtp-checkstyle.xml</configLocation>
-                        <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
-                        <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
-                        <propertyExpansion>basedir=${basedir}</propertyExpansion>
-                        <consoleOutput>true</consoleOutput>
-                        <failsOnError>true</failsOnError>
-                        <linkXRef>false</linkXRef>
-                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.gwtplatform</groupId>
-                            <artifactId>gwtp-build-tools</artifactId>
-                            <version>${project.version}</version>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <id>validate</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>checkstyle</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven-deploy-plugin.version}</version>
+				</plugin>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>${maven-source-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+				<plugin>
+					<groupId>org.bsc.maven</groupId>
+					<artifactId>maven-processor-plugin</artifactId>
+					<version>${maven-processor-plugin.version}</version>
+				</plugin>
 
-                <plugin>
-                    <groupId>net.kindleit</groupId>
-                    <artifactId>maven-gae-plugin</artifactId>
-                    <version>${maven-gae-plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>net.kindleit</groupId>
-                            <artifactId>gae-runtime</artifactId>
-                            <version>${gae.version}</version>
-                            <type>pom</type>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <id />
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>unpack</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${maven-checkstyle-plugin.version}</version>
+					<configuration>
+						<configLocation>/gwtp-checkstyle.xml</configLocation>
+						<suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
+						<propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
+						<propertyExpansion>basedir=${basedir}</propertyExpansion>
+						<consoleOutput>true</consoleOutput>
+						<failsOnError>true</failsOnError>
+						<linkXRef>false</linkXRef>
+						<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.gwtplatform</groupId>
+							<artifactId>gwtp-build-tools</artifactId>
+							<version>${project.version}</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>validate</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>checkstyle</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven
-                    build itself. -->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>${lifecycle-mapping-plugin.version}</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.datanucleus</groupId>
-                                        <artifactId>maven-datanucleus-plugin</artifactId>
-                                        <versionRange>[1.1.4,)</versionRange>
-                                        <goals>
-                                            <goal>enhance</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>net.kindleit</groupId>
-                                        <artifactId>maven-gae-plugin</artifactId>
-                                        <versionRange>[0.7.0,)</versionRange>
-                                        <goals>
-                                            <goal>unpack</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <execute />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.bsc.maven</groupId>
-                                        <artifactId>maven-processor-plugin</artifactId>
-                                        <versionRange>[2.0.5,)</versionRange>
-                                        <goals>
-                                            <goal>generate-sources</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <execute />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-enforcer-plugin</artifactId>
-                                        <versionRange>[1.0-beta-1,)</versionRange>
-                                        <goals>
-                                            <goal>enforce</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-compiler-plugin</artifactId>
-                                        <versionRange>[2.0.0,)</versionRange>
-                                        <goals>
-                                            <goal>default-compile</goal>
-                                            <goal>default-testCompile</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <!-- TODO: This disables checkstyle in Eclipse. It's a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=360491 -->
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-checkstyle-plugin</artifactId>
-                                        <versionRange>[2.7,)</versionRange>
-                                        <goals>
-                                            <goal>checkstyle</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 
-        <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in
-            a sub module, will override the top level parent pom's definition -->
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${target.jdk}</source>
-                    <target>${target.jdk}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
+				<plugin>
+					<groupId>net.kindleit</groupId>
+					<artifactId>maven-gae-plugin</artifactId>
+					<version>${maven-gae-plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>net.kindleit</groupId>
+							<artifactId>gae-runtime</artifactId>
+							<version>${gae.version}</version>
+							<type>pom</type>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id />
+							<phase>validate</phase>
+							<goals>
+								<goal>unpack</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 
-            <!-- Skip GWTTests during JUnit tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/*TestCase.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/*GwtTest.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${lifecycle-mapping-plugin.version}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.datanucleus</groupId>
+										<artifactId>maven-datanucleus-plugin</artifactId>
+										<versionRange>[1.1.4,)</versionRange>
+										<goals>
+											<goal>enhance</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>net.kindleit</groupId>
+										<artifactId>maven-gae-plugin</artifactId>
+										<versionRange>[0.7.0,)</versionRange>
+										<goals>
+											<goal>unpack</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.bsc.maven</groupId>
+										<artifactId>maven-processor-plugin</artifactId>
+										<versionRange>[2.0.5,)</versionRange>
+										<goals>
+											<goal>generate-sources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-enforcer-plugin</artifactId>
+										<versionRange>[1.0-beta-1,)</versionRange>
+										<goals>
+											<goal>enforce</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-compiler-plugin</artifactId>
+										<versionRange>[2.0.0,)</versionRange>
+										<goals>
+											<goal>default-compile</goal>
+											<goal>default-testCompile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<!-- TODO: This disables checkstyle in Eclipse. It's a workaround 
+									for https://bugs.eclipse.org/bugs/show_bug.cgi?id=360491 -->
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-checkstyle-plugin</artifactId>
+										<versionRange>[2.7,)</versionRange>
+										<goals>
+											<goal>checkstyle</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <releaseProfiles>release</releaseProfiles>
-                    <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase}</arguments>
-                </configuration>
-            </plugin>
+		<!-- Plugins to be inherited by sub-projects. Note that definitions and 
+			configurations of the following plugins in a sub module, will override the 
+			top level parent pom's definition -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${target.jdk}</source>
+					<target>${target.jdk}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
 
-            <!-- run 'mvn javadoc:aggregate' to generate -->
-            <!-- run 'mvn javadoc:aggregate -X' to debug -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <configuration>
-                    <maxmemory>2048</maxmemory>
-                    <failOnError>true</failOnError>
-                    <doctitle>GWT-Platform Javadocs</doctitle>
-                    <links>
-                        <link>http://download.oracle.com/javase/6/docs/api/</link>
-                        <link>http://google-web-toolkit.googlecode.com/svn/javadoc/latest/</link>
-                        <link>http://static.springsource.org/spring/docs/3.0.x/javadoc-api/</link>
-                        <link>http://google-gin.googlecode.com/svn/trunk/javadoc/</link>
-                        <link>http://google-guice.googlecode.com/svn/trunk/javadoc/</link>
-                        <link>http://aopalliance.sourceforge.net/doc/</link>
-                        <link>https://developers.google.com/appengine/docs/java/javadoc/</link>
-                        <link>http://docs.guava-libraries.googlecode.com/git/javadoc/</link>
-                    </links>
-                    <outputDirectory>${project.build.directory}/javadoc</outputDirectory>
-                    <reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
-                    <excludes>
-                        <exclude>**/*.txt</exclude>
-                    </excludes>
-                    <header>
+			<!-- Skip GWTTests during JUnit tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/*TestCase.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/*GwtTest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<arguments>-Psonatype-oss-release -Prelease
+						-Dgpg.passphrase=${gpg.passphrase}</arguments>
+				</configuration>
+			</plugin>
+
+			<!-- run 'mvn javadoc:aggregate' to generate -->
+			<!-- run 'mvn javadoc:aggregate -X' to debug -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<configuration>
+					<maxmemory>2048</maxmemory>
+					<failOnError>true</failOnError>
+					<doctitle>GWT-Platform Javadocs</doctitle>
+					<links>
+						<link>http://download.oracle.com/javase/6/docs/api/</link>
+						<link>http://google-web-toolkit.googlecode.com/svn/javadoc/latest/</link>
+						<link>http://static.springsource.org/spring/docs/3.0.x/javadoc-api/</link>
+						<link>http://google-gin.googlecode.com/svn/trunk/javadoc/</link>
+						<link>http://google-guice.googlecode.com/svn/trunk/javadoc/</link>
+						<link>http://aopalliance.sourceforge.net/doc/</link>
+						<link>https://developers.google.com/appengine/docs/java/javadoc/</link>
+						<link>http://docs.guava-libraries.googlecode.com/git/javadoc/</link>
+					</links>
+					<outputDirectory>${project.build.directory}/javadoc</outputDirectory>
+					<reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
+					<excludes>
+						<exclude>**/*.txt</exclude>
+					</excludes>
+					<header>
                         <![CDATA[
                             <a href="https://github.com/ArcBees/GWTP" target="_blank">Back to GWTP Home</a>
                         ]]>
-                    </header>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>build-upload-javadocs</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+					</header>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-upload-javadocs</id>
+						<phase>site</phase>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-            <!-- run 'mvn site' to upload -->
-            <!-- run 'mvn site -X' to debug and upload.-->
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>${github.version}</version>
-                <configuration>
-                    <!-- <dryRun>true</dryRun> -->
-                    <message>Creating site for ${project.version}</message>
-                    <!-- github > sets the ~/.m2/setting.xml server id profile -->
-                    <server>github</server>
-                    <excludes>
-                        <exclude>*.DS_Store</exclude>
-                        <exclude>*.sh</exclude>
-                        <exclude>options</exclude>
-                        <exclude>packages</exclude>
-                    </excludes>
-                    <force>true</force>
-                    <merge>true</merge>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+			<!-- run 'mvn site' to upload -->
+			<!-- run 'mvn site -X' to debug and upload. -->
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>${github.version}</version>
+				<configuration>
+					<!-- <dryRun>true</dryRun> -->
+					<message>Creating site for ${project.version}</message>
+					<!-- github > sets the ~/.m2/setting.xml server id profile -->
+					<server>github</server>
+					<excludes>
+						<exclude>*.DS_Store</exclude>
+						<exclude>*.sh</exclude>
+						<exclude>options</exclude>
+						<exclude>packages</exclude>
+					</excludes>
+					<force>true</force>
+					<merge>true</merge>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>site</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- This dependency is required by maven-checkstyle-plugin. -->
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>gwtp-build-tools</artifactId>
-                <version>${project.version}</version>
-                <scope>provided</scope>
-                <optional>true</optional>
-            </dependency>
+	<dependencyManagement>
+		<dependencies>
+			<!-- This dependency is required by maven-checkstyle-plugin. -->
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>gwtp-build-tools</artifactId>
+				<version>${project.version}</version>
+				<scope>provided</scope>
+				<optional>true</optional>
+			</dependency>
 
-            <!-- Testing -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+			<!-- Testing -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
