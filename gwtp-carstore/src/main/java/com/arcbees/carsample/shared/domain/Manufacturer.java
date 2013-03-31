@@ -6,7 +6,9 @@ import java.util.List;
 import javax.persistence.Embedded;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Index;
 
+@Index
 @Entity
 public class Manufacturer extends BaseEntity {
     private String name;

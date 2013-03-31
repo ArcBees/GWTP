@@ -5,7 +5,9 @@ import java.util.Date;
 import javax.persistence.Embedded;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Index;
 
+@Index
 @Entity
 public class CarProperties extends BaseEntity {
     private String someString;
