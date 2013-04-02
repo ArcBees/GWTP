@@ -344,65 +344,65 @@
                     <version>${maven-gae-plugin.version}</version>
                     <configuration>
                         <unpackVersion>${gae.version}</unpackVersion>
-              
+
                         <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
                         <serverId>appengine-credentials</serverId>
                         <splitJars>true</splitJars>
                     </configuration>
-    				<dependencies>
-    					<!-- Google App Engine API -->
-    					<dependency>
-    						<groupId>com.google.appengine</groupId>
-    						<artifactId>appengine-api-1.0-sdk</artifactId>
-    						<version>${gae.version}</version>
-    					</dependency>
-    					<!-- Google App Engine Runtime Dependencies -->
-    					<dependency>
-    						<groupId>org.apache.geronimo.specs</groupId>
-    						<artifactId>geronimo-jta_1.1_spec</artifactId>
-    						<version>1.1.1</version>
-    						<scope>runtime</scope>
-    					</dependency>
-    					<dependency>
-    						<groupId>org.apache.geronimo.specs</groupId>
-    						<artifactId>geronimo-jpa_3.0_spec</artifactId>
-    						<version>1.1.1</version>
-    						<scope>runtime</scope>
-    					</dependency>
-    					<dependency>
-    						<groupId>javax.jdo</groupId>
-    						<artifactId>jdo2-api</artifactId>
-    						<version>2.3-eb</version>
-    						<scope>runtime</scope>
-    					</dependency>
-    					<dependency>
-    						<groupId>org.datanucleus</groupId>
-    						<artifactId>datanucleus-core</artifactId>
-    						<version>1.1.5</version>
-    					</dependency>
-    					<dependency>
-    						<groupId>com.google.appengine.orm</groupId>
-    						<artifactId>datanucleus-appengine</artifactId>
-    						<version>1.0.10</version>
-    						<scope>runtime</scope>
-    					</dependency>
-    					<dependency>
-    						<groupId>org.datanucleus</groupId>
-    						<artifactId>datanucleus-jpa</artifactId>
-    						<version>1.1.5</version>
-    						<scope>runtime</scope>
-    					</dependency>
-    					<!-- App Engine Runtime Dependencies -->
-    					<dependency>
-    						<groupId>com.google.appengine</groupId>
-    						<artifactId>appengine-tools-sdk</artifactId>
-    						<version>${gae.version}</version>
-    					</dependency>
-    				</dependencies>
+                    <dependencies>
+                        <!-- Google App Engine API -->
+                        <dependency>
+                            <groupId>com.google.appengine</groupId>
+                            <artifactId>appengine-api-1.0-sdk</artifactId>
+                            <version>${gae.version}</version>
+                        </dependency>
+                        <!-- Google App Engine Runtime Dependencies -->
+                        <dependency>
+                            <groupId>org.apache.geronimo.specs</groupId>
+                            <artifactId>geronimo-jta_1.1_spec</artifactId>
+                            <version>1.1.1</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.geronimo.specs</groupId>
+                            <artifactId>geronimo-jpa_3.0_spec</artifactId>
+                            <version>1.1.1</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>javax.jdo</groupId>
+                            <artifactId>jdo2-api</artifactId>
+                            <version>2.3-eb</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.datanucleus</groupId>
+                            <artifactId>datanucleus-core</artifactId>
+                            <version>1.1.5</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.google.appengine.orm</groupId>
+                            <artifactId>datanucleus-appengine</artifactId>
+                            <version>1.0.10</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.datanucleus</groupId>
+                            <artifactId>datanucleus-jpa</artifactId>
+                            <version>1.1.5</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <!-- App Engine Runtime Dependencies -->
+                        <dependency>
+                            <groupId>com.google.appengine</groupId>
+                            <artifactId>appengine-tools-sdk</artifactId>
+                            <version>${gae.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
 
-                <!--This plugin's configuration is used to store Eclipse 
-                    m2e settings only. It has no influence on the Maven build itself. -->
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven 
+                    build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -476,8 +476,7 @@
                                         <ignore />
                                     </action>
                                 </pluginExecution>
-                                <!-- TODO: This disables checkstyle in Eclipse. 
-                                    It's a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=360491 -->
+                                <!-- TODO: This disables checkstyle in Eclipse. It's a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=360491 -->
                                 <pluginExecution>
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.maven.plugins</groupId>
@@ -498,9 +497,8 @@
             </plugins>
         </pluginManagement>
 
-        <!-- Plugins to be inherited by sub-projects. Note that definitions 
-            and configurations of the following plugins in a sub module, will override 
-            the top level parent pom's definition -->
+        <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in 
+            a sub module, will override the top level parent pom's definition -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
