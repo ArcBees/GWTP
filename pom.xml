@@ -6,6 +6,7 @@
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
+        <relativePath></relativePath>
     </parent>
 
     <groupId>com.gwtplatform</groupId>
@@ -195,7 +196,7 @@
 
         <!-- Maven -->
         <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-        <gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
+        <gwt-maven-plugin.version>2.5.1</gwt-maven-plugin.version>
         <lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
         <maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -217,7 +218,7 @@
         <!-- Server -->
         <aopalliance.version>1.0</aopalliance.version>
         <cglib.version>2.2</cglib.version>
-        <gae.version>1.7.4</gae.version>
+        <gae.version>1.7.6</gae.version>
         <guice.version>3.0</guice.version>
         <javax.inject.version>1</javax.inject.version>
         <guava.version>14.0-rc1</guava.version>
@@ -341,23 +342,63 @@
                     <groupId>net.kindleit</groupId>
                     <artifactId>maven-gae-plugin</artifactId>
                     <version>${maven-gae-plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>net.kindleit</groupId>
-                            <artifactId>gae-runtime</artifactId>
-                            <version>${gae.version}</version>
-                            <type>pom</type>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <id />
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>unpack</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <configuration>
+                        <unpackVersion>${gae.version}</unpackVersion>
+              
+                        <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
+                        <serverId>appengine-credentials</serverId>
+                        <splitJars>true</splitJars>
+                    </configuration>
+    				<dependencies>
+    					<!-- Google App Engine API -->
+    					<dependency>
+    						<groupId>com.google.appengine</groupId>
+    						<artifactId>appengine-api-1.0-sdk</artifactId>
+    						<version>${gae.version}</version>
+    					</dependency>
+    					<!-- Google App Engine Runtime Dependencies -->
+    					<dependency>
+    						<groupId>org.apache.geronimo.specs</groupId>
+    						<artifactId>geronimo-jta_1.1_spec</artifactId>
+    						<version>1.1.1</version>
+    						<scope>runtime</scope>
+    					</dependency>
+    					<dependency>
+    						<groupId>org.apache.geronimo.specs</groupId>
+    						<artifactId>geronimo-jpa_3.0_spec</artifactId>
+    						<version>1.1.1</version>
+    						<scope>runtime</scope>
+    					</dependency>
+    					<dependency>
+    						<groupId>javax.jdo</groupId>
+    						<artifactId>jdo2-api</artifactId>
+    						<version>2.3-eb</version>
+    						<scope>runtime</scope>
+    					</dependency>
+    					<dependency>
+    						<groupId>org.datanucleus</groupId>
+    						<artifactId>datanucleus-core</artifactId>
+    						<version>1.1.5</version>
+    					</dependency>
+    					<dependency>
+    						<groupId>com.google.appengine.orm</groupId>
+    						<artifactId>datanucleus-appengine</artifactId>
+    						<version>1.0.10</version>
+    						<scope>runtime</scope>
+    					</dependency>
+    					<dependency>
+    						<groupId>org.datanucleus</groupId>
+    						<artifactId>datanucleus-jpa</artifactId>
+    						<version>1.1.5</version>
+    						<scope>runtime</scope>
+    					</dependency>
+    					<!-- App Engine Runtime Dependencies -->
+    					<dependency>
+    						<groupId>com.google.appengine</groupId>
+    						<artifactId>appengine-tools-sdk</artifactId>
+    						<version>${gae.version}</version>
+    					</dependency>
+    				</dependencies>
                 </plugin>
 
                 <!--This plugin's configuration is used to store Eclipse 
@@ -386,7 +427,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>net.kindleit</groupId>
                                         <artifactId>maven-gae-plugin</artifactId>
-                                        <versionRange>[0.7.0,)</versionRange>
+                                        <versionRange>[0.9.0,)</versionRange>
                                         <goals>
                                             <goal>unpack</goal>
                                         </goals>
