@@ -16,9 +16,6 @@
 
 	<properties>
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
-
-		<gae.version>1.7.6</gae.version>
-		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 		<gae.home>
 			${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
 		</gae.home>
@@ -91,6 +88,10 @@
 
 					<copyWebapp>true</copyWebapp>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
+          
+                    <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
+                    <appEngineVersion>${gae.version}</appEngineVersion>
+                    <appEngineHome>${gae.home}</appEngineHome>
 
 					<runTarget>CarStore.html</runTarget>
 					<modules>
@@ -141,65 +142,9 @@
 			<plugin>
 				<groupId>net.kindleit</groupId>
 				<artifactId>maven-gae-plugin</artifactId>
-				<configuration>
-					<unpackVersion>${gae.version}</unpackVersion>
-					<serverId>appengine.google.com</serverId>
-					<appDir>${webappDirectory}</appDir>
-
-					<!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
-					<serverId>appengine-credentials</serverId>
-					<splitJars>true</splitJars>
-				</configuration>
-				<dependencies>
-					<!-- Google App Engine API -->
-					<dependency>
-						<groupId>com.google.appengine</groupId>
-						<artifactId>appengine-api-1.0-sdk</artifactId>
-						<version>${gae.version}</version>
-					</dependency>
-					<!-- Google App Engine Runtime Dependencies -->
-					<dependency>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-jta_1.1_spec</artifactId>
-						<version>1.1.1</version>
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-jpa_3.0_spec</artifactId>
-						<version>1.1.1</version>
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>javax.jdo</groupId>
-						<artifactId>jdo2-api</artifactId>
-						<version>2.3-eb</version>
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.datanucleus</groupId>
-						<artifactId>datanucleus-core</artifactId>
-						<version>1.1.5</version>
-					</dependency>
-					<dependency>
-						<groupId>com.google.appengine.orm</groupId>
-						<artifactId>datanucleus-appengine</artifactId>
-						<version>1.0.10</version>
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.datanucleus</groupId>
-						<artifactId>datanucleus-jpa</artifactId>
-						<version>1.1.5</version>
-						<scope>runtime</scope>
-					</dependency>
-					<!-- App Engine Runtime Dependencies -->
-					<dependency>
-						<groupId>com.google.appengine</groupId>
-						<artifactId>appengine-tools-sdk</artifactId>
-						<version>${gae.version}</version>
-					</dependency>
-				</dependencies>
+                <configuration>
+                    <appDir>${webappDirectory}</appDir>
+                </configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -301,38 +246,44 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>gwtp-dispatch-server-guice</artifactId>
 			<version>${project.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>gwtp-crawler</artifactId>
 			<version>${project.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>gwtp-crawler-service</artifactId>
 			<version>${project.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>gwtp-processors</artifactId>
 			<version>${project.version}</version>
-			<scope>provided</scope>
 		</dependency>
 
-		<!-- DI -->
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-servlet</artifactId>
-			<version>${guice.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-assistedinject</artifactId>
-			<version>${guice.version}</version>
-		</dependency>
+		<!-- DI Guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>com.google.gwt.inject</groupId>
 			<artifactId>gin</artifactId>
