@@ -2,8 +2,7 @@ package com.gwtplatform.carstore.shared.domain;
 
 import java.util.Date;
 
-import javax.persistence.Embedded;
-
+import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
@@ -13,7 +12,7 @@ public class CarProperties extends BaseEntity {
     private String someString;
     private Integer someNumber;
     private Date someDate;
-    @Embedded
+    @Embed
     private Car car;
 
     public CarProperties() {
