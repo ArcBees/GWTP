@@ -20,7 +20,7 @@ public class DeleteRatingHandler extends AbstractActionHandler<DeleteRatingActio
 
     @Override
     public NoResults execute(DeleteRatingAction action, ExecutionContext context) throws ActionException {
-        ratingDao.delete(action.getRating());
+        ratingDao.delete(action.getRating().getId());
 
         return new NoResults();
     }

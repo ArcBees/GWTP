@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 public class CarProxyFactory {
@@ -22,9 +22,9 @@ public class CarProxyFactory {
         this.carProxyImplFactory = carProxyImplFactory;
     }
 
-    public CarPresenter.MyProxy create(Car car, String nameToken) {
+    public CarPresenter.MyProxy create(CarDto carDto, String nameToken) {
         CarPresenterProvider carPresenter = carPresenterProvider.get();
-        carPresenter.setCar(car);
+        carPresenter.setCar(carDto);
 
         CarProxyImpl carProxy = carProxyImplFactory.create(carPresenter, nameToken);
         carProxy.bind(placeManager, eventBus);

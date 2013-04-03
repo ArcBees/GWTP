@@ -12,28 +12,28 @@ import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.ValueListBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.carstore.client.application.cars.car.CarRenderer;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class RatingDetailView extends ViewWithUiHandlers<RatingDetailUiHandlers>
-        implements RatingDetailPresenter.MyView, Editor<Rating> {
+        implements RatingDetailPresenter.MyView, Editor<RatingDto> {
     public interface Binder extends UiBinder<Widget, RatingDetailView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<Rating, RatingDetailView> {
+    public interface Driver extends SimpleBeanEditorDriver<RatingDto, RatingDetailView> {
     }
 
     @UiField
     IntegerBox rating;
     @UiField(provided = true)
-    ValueListBox<Car> car;
+    ValueListBox<CarDto> car;
 
     private final Driver driver;
 
     @Inject
     public RatingDetailView(Binder uiBinder, Driver driver) {
-        car = new ValueListBox<Car>(new CarRenderer());
+        car = new ValueListBox<CarDto>(new CarRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));
@@ -44,18 +44,18 @@ public class RatingDetailView extends ViewWithUiHandlers<RatingDetailUiHandlers>
     }
 
     @Override
-    public void edit(Rating rating) {
-        if (rating.getCar() == null) {
-            rating.setCar(car.getValue());
+    public void edit(RatingDto ratingDto) {
+        if (ratingDto.getCar() == null) {
+            ratingDto.setCar(car.getValue());
         }
 
-        driver.edit(rating);
+        driver.edit(ratingDto);
     }
 
     @Override
-    public void setAllowedCars(List<Car> cars) {
-        car.setValue(cars.isEmpty() ? null : cars.get(0));
-        car.setAcceptableValues(cars);
+    public void setAllowedCars(List<CarDto> carDtos) {
+        car.setValue(carDtos.isEmpty() ? null : carDtos.get(0));
+        car.setAcceptableValues(carDtos);
     }
 
     @Override

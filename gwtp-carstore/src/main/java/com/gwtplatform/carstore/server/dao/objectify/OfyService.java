@@ -3,12 +3,12 @@ package com.gwtplatform.carstore.server.dao.objectify;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.CarProperties;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
-import com.gwtplatform.carstore.shared.domain.Rating;
-import com.gwtplatform.carstore.shared.domain.User;
 import com.gwtplatform.carstore.shared.domain.UserSession;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.CarPropertiesDto;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 /**
  * For use of:
@@ -16,11 +16,11 @@ import com.gwtplatform.carstore.shared.domain.UserSession;
  */
 public class OfyService {
     static {
-        factory().register(Car.class);
-        factory().register(CarProperties.class);
-        factory().register(Manufacturer.class);
-        factory().register(Rating.class);
-        factory().register(User.class);
+        factory().register(CarDto.class);
+        factory().register(CarPropertiesDto.class);
+        factory().register(ManufacturerDto.class);
+        factory().register(RatingDto.class);
+        factory().register(UserDto.class);
         factory().register(UserSession.class);
     }
 

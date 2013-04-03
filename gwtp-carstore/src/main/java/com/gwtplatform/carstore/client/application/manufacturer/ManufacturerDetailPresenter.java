@@ -28,7 +28,7 @@ import com.gwtplatform.carstore.shared.dispatch.GetManufacturerAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.NoResults;
 import com.gwtplatform.carstore.shared.dispatch.SaveManufacturerAction;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -44,7 +44,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> implements GoBackEvent.GoBackHandler,
         ActionBarEvent.ActionBarHandler, ManufacturerDetailUiHandlers {
     public interface MyView extends View, HasUiHandlers<ManufacturerDetailUiHandlers> {
-        void edit(Manufacturer manufacturer);
+        void edit(ManufacturerDto manufacturerDto);
 
         void getManufacturer();
     }
@@ -59,7 +59,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     private final PlaceManager placeManager;
     private final EditManufacturerMessages messages;
 
-    private Manufacturer currentManufacturer;
+    private ManufacturerDto currentManufacturer;
     private Boolean createNew;
 
     @Inject
@@ -82,15 +82,15 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
         if (!createNew) {
             Long id = Long.parseLong(param);
-            dispatcher.execute(new GetManufacturerAction(id), new SafeAsyncCallback<GetResult<Manufacturer>>() {
+            dispatcher.execute(new GetManufacturerAction(id), new SafeAsyncCallback<GetResult<ManufacturerDto>>() {
                 @Override
-                public void onSuccess(GetResult<Manufacturer> result) {
+                public void onSuccess(GetResult<ManufacturerDto> result) {
                     currentManufacturer = result.getResult();
                     getView().edit(currentManufacturer);
                 }
             });
         } else {
-            currentManufacturer = new Manufacturer();
+            currentManufacturer = new ManufacturerDto();
             getView().edit(currentManufacturer);
         }
     }
@@ -118,11 +118,11 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     }
 
     @Override
-    public void onSave(Manufacturer manufacturer) {
-        dispatcher.execute(new SaveManufacturerAction(manufacturer),
-                new ErrorHandlerAsyncCallback<GetResult<Manufacturer>>(this) {
+    public void onSave(ManufacturerDto manufacturerDto) {
+        dispatcher.execute(new SaveManufacturerAction(manufacturerDto),
+                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
             @Override
-            public void onSuccess(GetResult<Manufacturer> result) {
+            public void onSuccess(GetResult<ManufacturerDto> result) {
                 DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
                         new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
                 placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
