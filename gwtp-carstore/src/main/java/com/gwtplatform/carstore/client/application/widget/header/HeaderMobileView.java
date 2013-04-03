@@ -18,7 +18,7 @@ import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.Ac
 import com.gwtplatform.carstore.client.application.renderer.EnumCell;
 import com.gwtplatform.carstore.client.resources.MobileNavigationListStyle;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -105,8 +105,8 @@ public class HeaderMobileView extends ViewWithUiHandlers<HeaderUiHandlers>
     @Override
     public void enableUserOptions(CurrentUser currentUser) {
         menu.setVisible(true);
-        User user = currentUser.getUser();
-        userInfoPopup.setUsername(user.getFirstName());
+        UserDto userDto = currentUser.getUser();
+        userInfoPopup.setUsername(userDto.getFirstName());
     }
 
     @Override

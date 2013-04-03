@@ -1,19 +1,19 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
-public class SaveCarAction extends ActionImpl<GetResult<Car>> {
-    private Car car;
+public class SaveCarAction extends ActionImpl<GetResult<CarDto>> {
+    private CarDto carDto;
 
     protected SaveCarAction() {
     }
 
-    public SaveCarAction(Car car) {
-        this.car = car;
+    public SaveCarAction(CarDto carDto) {
+        this.carDto = carDto;
     }
 
-    public Car getCar() {
-        return car;
+    public CarDto getCar() {
+        return carDto;
     }
 
     @Override

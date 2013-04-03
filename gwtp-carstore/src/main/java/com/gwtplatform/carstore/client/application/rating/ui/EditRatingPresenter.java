@@ -16,8 +16,8 @@ import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dispatch.SaveRatingAction;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
@@ -26,9 +26,9 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class EditRatingPresenter extends PresenterWidget<MyView> implements EditRatingUiHandlers {
     public interface MyView extends PopupView, HasUiHandlers<EditRatingUiHandlers> {
-        void edit(Rating rating);
+        void edit(RatingDto ratingDto);
 
-        void setAllowedCars(List<Car> cars);
+        void setAllowedCars(List<CarDto> carDtos);
     }
 
     private final DispatchAsync dispatcher;
@@ -56,10 +56,10 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     }
 
     @Override
-    public void onSave(Rating rating) {
-        dispatcher.execute(new SaveRatingAction(rating), new ErrorHandlerAsyncCallback<GetResult<Rating>>(this) {
+    public void onSave(RatingDto ratingDto) {
+        dispatcher.execute(new SaveRatingAction(ratingDto), new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
             @Override
-            public void onSuccess(GetResult<Rating> result) {
+            public void onSuccess(GetResult<RatingDto> result) {
                 DisplayMessageEvent.fire(EditRatingPresenter.this, new Message(messages.ratingSaved(),
                         MessageStyle.SUCCESS));
                 RatingAddedEvent.fire(EditRatingPresenter.this, result.getResult());
@@ -69,17 +69,17 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     }
 
     private void reveal() {
-        dispatcher.execute(new GetCarsAction(), new SafeAsyncCallback<GetResults<Car>>() {
+        dispatcher.execute(new GetCarsAction(), new SafeAsyncCallback<GetResults<CarDto>>() {
             @Override
-            public void onSuccess(GetResults<Car> result) {
+            public void onSuccess(GetResults<CarDto> result) {
                 onGetCarsSuccess(result.getResults());
             }
         });
     }
 
-    private void onGetCarsSuccess(List<Car> cars) {
-        getView().setAllowedCars(cars);
-        getView().edit(new Rating());
+    private void onGetCarsSuccess(List<CarDto> carDtos) {
+        getView().setAllowedCars(carDtos);
+        getView().edit(new RatingDto());
         RevealRootPopupContentEvent.fire(this, this);
     }
 }

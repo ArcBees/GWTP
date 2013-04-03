@@ -13,20 +13,20 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiRenderer;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 
-public class RatingCell extends AbstractCell<Rating> {
+public class RatingCell extends AbstractCell<RatingDto> {
     public interface Renderer extends UiRenderer {
         void render(SafeHtmlBuilder sb, String name, String rating);
 
-        void onBrowserEvent(RatingCell o, NativeEvent e, Element p, Rating n);
+        void onBrowserEvent(RatingCell o, NativeEvent e, Element p, RatingDto n);
     }
 
     private final Renderer uiRenderer;
-    private final Delegate<Rating> delegate;
+    private final Delegate<RatingDto> delegate;
 
     @Inject
-    public RatingCell(final Renderer uiRenderer, @Assisted Delegate<Rating> delegate) {
+    public RatingCell(final Renderer uiRenderer, @Assisted Delegate<RatingDto> delegate) {
         super(BrowserEvents.CLICK);
 
         this.uiRenderer = uiRenderer;
@@ -34,18 +34,18 @@ public class RatingCell extends AbstractCell<Rating> {
     }
 
     @Override
-    public void render(Context context, Rating value, SafeHtmlBuilder safeHtmlBuilder) {
+    public void render(Context context, RatingDto value, SafeHtmlBuilder safeHtmlBuilder) {
         uiRenderer.render(safeHtmlBuilder, value.toString(), value.getRating().toString());
     }
 
     @Override
-    public void onBrowserEvent(Context context, Element parent, Rating value,
-                               NativeEvent event, ValueUpdater<Rating> valueUpdater) {
+    public void onBrowserEvent(Context context, Element parent, RatingDto value,
+                               NativeEvent event, ValueUpdater<RatingDto> valueUpdater) {
         uiRenderer.onBrowserEvent(this, event, parent, value);
     }
 
     @UiHandler({"remove"})
-    void onRemoveRatingClicked(ClickEvent event, Element parent, Rating value) {
+    void onRemoveRatingClicked(ClickEvent event, Element parent, RatingDto value) {
         delegate.execute(value);
     }
 }

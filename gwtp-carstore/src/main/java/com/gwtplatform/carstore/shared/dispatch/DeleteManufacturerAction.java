@@ -1,19 +1,19 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 
 public class DeleteManufacturerAction extends ActionImpl<NoResults> {
-    private Manufacturer manufacturer;
+    private ManufacturerDto manufacturerDto;
 
     protected DeleteManufacturerAction() {
     }
 
-    public DeleteManufacturerAction(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
+    public DeleteManufacturerAction(ManufacturerDto manufacturerDto) {
+        this.manufacturerDto = manufacturerDto;
     }
 
-    public Manufacturer getManufacturer() {
-        return manufacturer;
+    public ManufacturerDto getManufacturer() {
+        return manufacturerDto;
     }
 
     @Override

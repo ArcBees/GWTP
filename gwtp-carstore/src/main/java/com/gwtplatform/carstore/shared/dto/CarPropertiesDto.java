@@ -1,40 +1,33 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.shared.dto;
 
 import java.util.Date;
 
-import com.googlecode.objectify.Ref;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Load;
-import com.gwtplatform.carstore.server.dao.objectify.Deref;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 
-@Index
-@Entity
-public class CarProperties extends BaseEntity {
+public class CarPropertiesDto extends BaseEntity {
     private String someString;
     private Integer someNumber;
     private Date someDate;
-    @Load
-    private Ref<Car> car;
+    private CarDto carDto;
 
-    public CarProperties() {
+    public CarPropertiesDto() {
         this.someString = "";
         this.someNumber = 0;
         this.someDate = new Date();
     }
 
-    public CarProperties(String someString, Integer someNumber, Date someDate) {
+    public CarPropertiesDto(String someString, Integer someNumber, Date someDate) {
         this.someString = someString;
         this.someNumber = someNumber;
         this.someDate = someDate;
     }
 
-    public Car getCar() {
-        return Deref.deref(car);
+    public CarDto getCar() {
+        return carDto;
     }
 
-    public void setCar(Car car) {
-        this.car = Ref.create(car);
+    public void setCar(CarDto carDto) {
+        this.carDto = carDto;
     }
 
     public String getSomeString() {

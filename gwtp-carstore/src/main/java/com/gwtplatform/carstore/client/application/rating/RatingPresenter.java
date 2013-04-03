@@ -21,7 +21,7 @@ import com.gwtplatform.carstore.shared.dispatch.DeleteRatingAction;
 import com.gwtplatform.carstore.shared.dispatch.GetRatingsAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dispatch.NoResults;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -38,11 +38,11 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPresenter.MyProxy> implements
         RatingUiHandlers, RatingAddedHandler, ActionBarEvent.ActionBarHandler {
     public interface MyView extends View, HasUiHandlers<RatingUiHandlers> {
-        void displayRatings(List<Rating> results);
+        void displayRatings(List<RatingDto> results);
 
-        void removeRating(Rating rating);
+        void removeRating(RatingDto ratingDto);
 
-        void addRating(Rating rating);
+        void addRating(RatingDto ratingDto);
     }
 
     @ProxyCodeSplit
@@ -81,11 +81,11 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     }
 
     @Override
-    public void onDelete(final Rating rating) {
-        dispatcher.execute(new DeleteRatingAction(rating), new SafeAsyncCallback<NoResults>() {
+    public void onDelete(final RatingDto ratingDto) {
+        dispatcher.execute(new DeleteRatingAction(ratingDto), new SafeAsyncCallback<NoResults>() {
             @Override
             public void onSuccess(NoResults result) {
-                getView().removeRating(rating);
+                getView().removeRating(ratingDto);
             }
         });
     }
@@ -95,9 +95,9 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(new ActionType[] { ActionType.ADD }), true);
 
-        dispatcher.execute(new GetRatingsAction(), new SafeAsyncCallback<GetResults<Rating>>() {
+        dispatcher.execute(new GetRatingsAction(), new SafeAsyncCallback<GetResults<RatingDto>>() {
             @Override
-            public void onSuccess(GetResults<Rating> result) {
+            public void onSuccess(GetResults<RatingDto> result) {
                 getView().displayRatings(result.getResults());
             }
         });
