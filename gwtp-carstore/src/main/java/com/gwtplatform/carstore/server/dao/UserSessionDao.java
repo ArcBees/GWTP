@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import com.gwtplatform.carstore.shared.domain.User;
 import com.gwtplatform.carstore.shared.domain.UserSession;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 public class UserSessionDao extends BaseDao<UserSession> {
     private static final int TWO_WEEKS_AGO_IN_DAYS = -14;
@@ -24,19 +25,19 @@ public class UserSessionDao extends BaseDao<UserSession> {
         this.userDao = userDao;
     }
 
-    public String createLoggedInCookie(User user) {
+    public String createLoggedInCookie(UserDto userDto) {
         String cookie = UUID.randomUUID().toString();
-        UserSession userSession = new UserSession(user, cookie);
+        UserSession userSession = new UserSession(userDto, cookie);
         put(userSession);
 
-        logger.info("UserSessionDao.createLoggedInCookie(user) user=" + user + " userSessionCookie="
+        logger.info("UserSessionDao.createLoggedInCookie(user) user=" + userDto + " userSessionCookie="
                 + userSession.getCookie());
 
         return userSession.getCookie();
     }
 
-    public void removeLoggedInCookie(User user) {
-        UserSession userSession = findUserSession(user.getId());
+    public void removeLoggedInCookie(UserDto userDto) {
+        UserSession userSession = findUserSession(userDto.getId());
         if (userSession != null) {
             delete(userSession);
         }
@@ -44,19 +45,19 @@ public class UserSessionDao extends BaseDao<UserSession> {
         logger.info("UserSessionDao.removeLoggedInCookie(user): Cookie is removed from database.");
     }
 
-    public User getUserFromCookie(String loggedInCookie) {
+    public UserDto getUserFromCookie(String loggedInCookie) {
         Date twoWeeksAgo = getTwoWeeksAgo();
 
         UserSession userSession = ofy().query(UserSession.class).filter("cookie", loggedInCookie).filter(
                 "dateCreated > ", twoWeeksAgo).first().getValue();
         Long userId = userSession.getId();
 
-        User user = null;
+        UserDto userDto = null;
         if (userId != null) {
-            user = userDao.get(userId);
+            userDto = User.createDto(userDao.get(userId));
         }
 
-        return user;
+        return userDto;
     }
 
     private Date getTwoWeeksAgo() {

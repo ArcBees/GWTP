@@ -4,9 +4,9 @@ import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.uibinder.client.UiRenderer;
 import com.google.inject.Inject;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 
-public class ManufacturerCell extends AbstractCell<Manufacturer> {
+public class ManufacturerCell extends AbstractCell<ManufacturerDto> {
     public interface Renderer extends UiRenderer {
         void render(SafeHtmlBuilder sb, String name);
     }
@@ -19,7 +19,7 @@ public class ManufacturerCell extends AbstractCell<Manufacturer> {
     }
 
     @Override
-    public void render(Context context, Manufacturer value, SafeHtmlBuilder safeHtmlBuilder) {
+    public void render(Context context, ManufacturerDto value, SafeHtmlBuilder safeHtmlBuilder) {
         uiRenderer.render(safeHtmlBuilder, value.getName());
     }
 }

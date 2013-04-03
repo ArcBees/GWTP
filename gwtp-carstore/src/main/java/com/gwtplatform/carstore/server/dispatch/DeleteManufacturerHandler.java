@@ -21,7 +21,7 @@ public class DeleteManufacturerHandler extends AbstractActionHandler<DeleteManuf
 
     @Override
     public NoResults execute(DeleteManufacturerAction action, ExecutionContext context) throws ActionException {
-        manufacturerDaoProvider.get().delete(action.getManufacturer());
+        manufacturerDaoProvider.get().delete(action.getManufacturer().getId());
 
         return new NoResults();
     }

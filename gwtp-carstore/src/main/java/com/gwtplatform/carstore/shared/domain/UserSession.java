@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 @Index
 @Entity
@@ -15,10 +16,10 @@ public class UserSession extends BaseEntity {
     public UserSession() {
     }
 
-    public UserSession(User user, String cookie) {
+    public UserSession(UserDto userDto, String cookie) {
         super();
         
-        this.userId = user.getId();
+        this.userId = userDto.getId();
         this.cookie = cookie;
         this.dateCreated = new Date();
     }

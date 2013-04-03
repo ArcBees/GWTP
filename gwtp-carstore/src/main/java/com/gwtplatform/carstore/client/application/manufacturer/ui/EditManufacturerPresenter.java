@@ -11,7 +11,7 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.SaveManufacturerAction;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
@@ -20,11 +20,11 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class EditManufacturerPresenter extends PresenterWidget<MyView> implements EditManufacturerUiHandlers {
     public interface MyView extends PopupView, HasUiHandlers<EditManufacturerUiHandlers> {
-        void edit(Manufacturer manufacturer);
+        void edit(ManufacturerDto manufacturerDto);
     }
 
     private final DispatchAsync dispatcher;
-    private Manufacturer manufacturer;
+    private ManufacturerDto manufacturerDto;
     private final EditManufacturerMessages messages;
 
     @Inject
@@ -40,7 +40,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
     @Override
     public void createNew() {
-        manufacturer = new Manufacturer();
+        manufacturerDto = new ManufacturerDto();
 
         reveal();
     }
@@ -51,18 +51,18 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
     }
 
     @Override
-    public void edit(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
+    public void edit(ManufacturerDto manufacturerDto) {
+        this.manufacturerDto = manufacturerDto;
 
         reveal();
     }
 
     @Override
-    public void onSave(Manufacturer manufacturer) {
-        dispatcher.execute(new SaveManufacturerAction(manufacturer),
-                new ErrorHandlerAsyncCallback<GetResult<Manufacturer>>(this) {
+    public void onSave(ManufacturerDto manufacturerDto) {
+        dispatcher.execute(new SaveManufacturerAction(manufacturerDto),
+                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
                     @Override
-                    public void onSuccess(GetResult<Manufacturer> result) {
+                    public void onSuccess(GetResult<ManufacturerDto> result) {
                         DisplayMessageEvent.fire(EditManufacturerPresenter.this,
                                 new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
                         ManufacturerAddedEvent.fire(EditManufacturerPresenter.this, result.getResult());
@@ -73,7 +73,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
     }
 
     private void reveal() {
-        getView().edit(manufacturer);
+        getView().edit(manufacturerDto);
 
         RevealRootPopupContentEvent.fire(this, this);
     }

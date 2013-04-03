@@ -17,7 +17,7 @@ import com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView;
 import com.gwtplatform.carstore.client.application.cars.renderer.CarCell;
 import com.gwtplatform.carstore.client.application.ui.ShowMorePagerPanel;
 import com.gwtplatform.carstore.client.resources.MobileDataListStyle;
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implements MyView {
@@ -29,15 +29,15 @@ public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implement
     @UiField(provided = true)
     ShowMorePagerPanel pagerPanel;
 
-    private CellList<Car> carList;
-    private AsyncDataProvider<Car> asyncDataProvider;
-    private SingleSelectionModel<Car> selectionModel;
+    private CellList<CarDto> carList;
+    private AsyncDataProvider<CarDto> asyncDataProvider;
+    private SingleSelectionModel<CarDto> selectionModel;
 
     @Inject
     public CarsMobileView(Binder uiBinder, CarCell carCell, MobileDataListStyle mobileDataListStyle) {
         pagerPanel = new ShowMorePagerPanel(PAGE_SIZE);
-        carList = new CellList<Car>(carCell, mobileDataListStyle);
-        selectionModel = new SingleSelectionModel<Car>();
+        carList = new CellList<CarDto>(carCell, mobileDataListStyle);
+        selectionModel = new SingleSelectionModel<CarDto>();
 
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -54,9 +54,9 @@ public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implement
 
     @Override
     public void initDataProvider() {
-        asyncDataProvider = new AsyncDataProvider<Car>() {
+        asyncDataProvider = new AsyncDataProvider<CarDto>() {
             @Override
-            protected void onRangeChanged(HasData<Car> display) {
+            protected void onRangeChanged(HasData<CarDto> display) {
                 Range range = display.getVisibleRange();
                 getUiHandlers().fetchData(range.getStart(), range.getLength());
             }
@@ -66,7 +66,7 @@ public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implement
     }
 
     @Override
-    public HasData<Car> getCarDisplay() {
+    public HasData<CarDto> getCarDisplay() {
         return carList;
     }
 
@@ -76,7 +76,7 @@ public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implement
     }
 
     @Override
-    public void displayCars(int offset, List<Car> cars) {
-        asyncDataProvider.updateRowData(offset, cars);
+    public void displayCars(int offset, List<CarDto> carDtos) {
+        asyncDataProvider.updateRowData(offset, carDtos);
     }
 }

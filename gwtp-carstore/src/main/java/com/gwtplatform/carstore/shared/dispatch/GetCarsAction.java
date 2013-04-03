@@ -1,8 +1,8 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
-public class GetCarsAction extends ActionImpl<GetResults<Car>> {
+public class GetCarsAction extends ActionImpl<GetResults<CarDto>> {
     private Integer limit = null;
     private Integer offset = null;
 

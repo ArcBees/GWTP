@@ -9,11 +9,11 @@ import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.ManufacturerDao;
 import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.UserDao;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.CarProperties;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
-import com.gwtplatform.carstore.shared.domain.Rating;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.CarPropertiesDto;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 public class DevBootStrapper {
     private final UserDao userDao;
@@ -43,8 +43,8 @@ public class DevBootStrapper {
     }
 
     private void createBasicUser() {
-        User user = new User("admin", passwordSecurity.hashPassword("qwerty"), "FirstName", "LastName");
-        userDao.put(user);
+        UserDto userDto = new UserDto("admin", passwordSecurity.hashPassword("qwerty"), "FirstName", "LastName");
+        userDao.put(userDto);
     }
 
 
@@ -52,26 +52,26 @@ public class DevBootStrapper {
         long manufacturerCount = manufacturerDao.countAll();
 
         if (manufacturerCount == 0) {
-            Manufacturer honda = new Manufacturer("Honda");
-            Manufacturer mitsubishi = new Manufacturer("Mitsubishi");
+            ManufacturerDto honda = new ManufacturerDto("Honda");
+            ManufacturerDto mitsubishi = new ManufacturerDto("Mitsubishi");
 
             honda = manufacturerDao.put(honda);
             mitsubishi = manufacturerDao.put(mitsubishi);
 
-            Car civic = new Car("Civic", honda, new CarProperties("Cat", 0, new Date()));
-            Car accord = new Car("Accord", honda, new CarProperties("Fish", 1, new Date()));
-            Car lancer = new Car("Lancer", mitsubishi, new CarProperties("Dog", 2, new Date()));
-            Car galant = new Car("Galant", mitsubishi, new CarProperties("Cow", 3, new Date()));
+            CarDto civic = new CarDto("Civic", honda, new CarPropertiesDto("Cat", 0, new Date()));
+            CarDto accord = new CarDto("Accord", honda, new CarPropertiesDto("Fish", 1, new Date()));
+            CarDto lancer = new CarDto("Lancer", mitsubishi, new CarPropertiesDto("Dog", 2, new Date()));
+            CarDto galant = new CarDto("Galant", mitsubishi, new CarPropertiesDto("Cow", 3, new Date()));
 
             civic = carDao.put(civic);
             accord = carDao.put(accord);
             lancer = carDao.put(lancer);
             galant = carDao.put(galant);
 
-            Rating rating1 = new Rating(accord, 4);
-            Rating rating2 = new Rating(civic, 2);
-            Rating rating3 = new Rating(galant, 3);
-            Rating rating4 = new Rating(lancer, 4);
+            RatingDto rating1 = new RatingDto(accord, 4);
+            RatingDto rating2 = new RatingDto(civic, 2);
+            RatingDto rating3 = new RatingDto(galant, 3);
+            RatingDto rating4 = new RatingDto(lancer, 4);
 
             ratingDao.put(rating1);
             ratingDao.put(rating2);
@@ -79,10 +79,10 @@ public class DevBootStrapper {
             ratingDao.put(rating4);
 
             for (int i = 0; i < 100; ++i) {
-                Car car = new Car("MyCar" + i, honda, new CarProperties("MyCarProperty", i, new Date()));
-                car = carDao.put(car);
-                Rating rating = new Rating(car, i % 10);
-                ratingDao.put(rating);
+                CarDto carDto = new CarDto("MyCar" + i, honda, new CarPropertiesDto("MyCarProperty", i, new Date()));
+                carDto = carDao.put(carDto);
+                RatingDto ratingDto = new RatingDto(carDto, i % 10);
+                ratingDao.put(ratingDto);
             }
         }
     }

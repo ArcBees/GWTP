@@ -1,19 +1,19 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 
-public class SaveManufacturerAction extends ActionImpl<GetResult<Manufacturer>> {
-    private Manufacturer manufacturer;
+public class SaveManufacturerAction extends ActionImpl<GetResult<ManufacturerDto>> {
+    private ManufacturerDto manufacturerDto;
 
     protected SaveManufacturerAction() {
     }
 
-    public SaveManufacturerAction(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
+    public SaveManufacturerAction(ManufacturerDto manufacturerDto) {
+        this.manufacturerDto = manufacturerDto;
     }
 
-    public Manufacturer getManufacturer() {
-        return manufacturer;
+    public ManufacturerDto getManufacturer() {
+        return manufacturerDto;
     }
 
     @Override

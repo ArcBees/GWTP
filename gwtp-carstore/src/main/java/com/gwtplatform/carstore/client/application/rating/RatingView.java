@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements RatingPresenter.MyView {
@@ -31,9 +31,9 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     @UiField
     Button create;
     @UiField(provided = true)
-    CellTable<Rating> ratingGrid;
+    CellTable<RatingDto> ratingGrid;
 
-    private final ListDataProvider<Rating> ratingDataProvider;
+    private final ListDataProvider<RatingDto> ratingDataProvider;
 
     @Inject
     public RatingView(final Binder uiBinder) {
@@ -41,24 +41,24 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
         
         initWidget(uiBinder.createAndBindUi(this));
 
-        ratingDataProvider = new ListDataProvider<Rating>();
+        ratingDataProvider = new ListDataProvider<RatingDto>();
         ratingDataProvider.addDataDisplay(ratingGrid);
     }
 
     @Override
-    public void displayRatings(List<Rating> ratings) {
+    public void displayRatings(List<RatingDto> ratingDtos) {
         ratingDataProvider.getList().clear();
-        ratingDataProvider.getList().addAll(ratings);
+        ratingDataProvider.getList().addAll(ratingDtos);
     }
 
     @Override
-    public void addRating(Rating rating) {
-        ratingDataProvider.getList().add(rating);
+    public void addRating(RatingDto ratingDto) {
+        ratingDataProvider.getList().add(ratingDto);
     }
 
     @Override
-    public void removeRating(Rating rating) {
-        ratingDataProvider.getList().remove(rating);
+    public void removeRating(RatingDto ratingDto) {
+        ratingDataProvider.getList().remove(ratingDto);
     }
 
     @UiHandler("create")
@@ -67,32 +67,32 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     }
 
     private void initRatingGrid() {
-        ratingGrid = new CellTable<Rating>();
-        ratingGrid.setSelectionModel(new NoSelectionModel<Rating>());
+        ratingGrid = new CellTable<RatingDto>();
+        ratingGrid.setSelectionModel(new NoSelectionModel<RatingDto>());
 
         initDataColumns();
         initActionColumns();
     }
 
     private void initDataColumns() {
-        Column<Rating, Number> idColumn = new Column<Rating, Number>(new NumberCell()) {
+        Column<RatingDto, Number> idColumn = new Column<RatingDto, Number>(new NumberCell()) {
             @Override
-            public Long getValue(Rating rating) {
-                return rating.getId();
+            public Long getValue(RatingDto ratingDto) {
+                return ratingDto.getId();
             }
         };
 
-        Column<Rating, String> carColumn = new Column<Rating, String>(new TextCell()) {
+        Column<RatingDto, String> carColumn = new Column<RatingDto, String>(new TextCell()) {
             @Override
-            public String getValue(Rating rating) {
-                return rating.toString();
+            public String getValue(RatingDto ratingDto) {
+                return ratingDto.toString();
             }
         };
 
-        Column<Rating, Number> ratingColumn = new Column<Rating, Number>(new NumberCell()) {
+        Column<RatingDto, Number> ratingColumn = new Column<RatingDto, Number>(new NumberCell()) {
             @Override
-            public Number getValue(Rating rating) {
-                return rating.getRating();
+            public Number getValue(RatingDto ratingDto) {
+                return ratingDto.getRating();
             }
         };
 
@@ -104,18 +104,18 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     }
 
     private void initActionColumns() {
-        Cell<Rating> deleteCell = new ActionCell<Rating>("Delete", new ActionCell.Delegate<Rating>() {
+        Cell<RatingDto> deleteCell = new ActionCell<RatingDto>("Delete", new ActionCell.Delegate<RatingDto>() {
             @Override
-            public void execute(Rating rating) {
-                Boolean confirm = Window.confirm("Are you sure you want to delete" + rating.toString() + "?");
+            public void execute(RatingDto ratingDto) {
+                Boolean confirm = Window.confirm("Are you sure you want to delete" + ratingDto.toString() + "?");
 
                 if (confirm) {
-                    getUiHandlers().onDelete(rating);
+                    getUiHandlers().onDelete(ratingDto);
                 }
             }
         });
 
-        IdentityColumn<Rating> deleteColumn = new IdentityColumn<Rating>(deleteCell);
+        IdentityColumn<RatingDto> deleteColumn = new IdentityColumn<RatingDto>(deleteCell);
         deleteColumn.setCellStyleNames("delete");
         ratingGrid.addColumn(deleteColumn, "Delete");
         ratingGrid.setColumnWidth(deleteColumn, 75, Style.Unit.PX);

@@ -10,8 +10,8 @@ import com.gwtplatform.carstore.server.dao.UserSessionDao;
 import com.gwtplatform.carstore.shared.dispatch.ActionType;
 import com.gwtplatform.carstore.shared.dispatch.LogInAction;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
-import com.gwtplatform.carstore.shared.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
@@ -36,20 +36,20 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
 
     @Override
     public LogInResult execute(LogInAction action, ExecutionContext context) throws ActionException {
-        User user = null;
+        UserDto userDto = null;
         isLoggedIn = true;
 
         if (action.getActionType() == ActionType.VIA_COOKIE) {
-            user = getUserFromCookie(action.getLoggedInCookie());
+            userDto = getUserFromCookie(action.getLoggedInCookie());
         } else {
-            user = getUserFromCredentials(action.getUsername(), action.getPassword());
+            userDto = getUserFromCredentials(action.getUsername(), action.getPassword());
         }
 
-        CurrentUserDto currentUserDto = new CurrentUserDto(isLoggedIn, user);
+        CurrentUserDto currentUserDto = new CurrentUserDto(isLoggedIn, userDto);
 
         String loggedInCookie = "";
         if (isLoggedIn) {
-            loggedInCookie = loginCookieDao.createLoggedInCookie(user);
+            loggedInCookie = loginCookieDao.createLoggedInCookie(userDto);
         }
 
         logger.info("LogInHandlerexecut(): actiontype=" + getActionType());
@@ -59,25 +59,25 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
         return new LogInResult(action.getActionType(), currentUserDto, loggedInCookie);
     }
 
-    private User getUserFromCookie(String loggedInCookie) {
-        User user = null;
+    private UserDto getUserFromCookie(String loggedInCookie) {
+        UserDto userDto = null;
         try {
-            user = authenticator.authenticatCookie(loggedInCookie);
+            userDto = authenticator.authenticatCookie(loggedInCookie);
         } catch (AuthenticationException e) {
             isLoggedIn = false;
         }
 
-        return user;
+        return userDto;
     }
 
-    private User getUserFromCredentials(String username, String password) {
-        User user = null;
+    private UserDto getUserFromCredentials(String username, String password) {
+        UserDto userDto = null;
         try {
-            user = authenticator.authenticateCredentials(username, password);
+            userDto = authenticator.authenticateCredentials(username, password);
         } catch (AuthenticationException e) {
             isLoggedIn = false;
         }
 
-        return user;
+        return userDto;
     }
 }

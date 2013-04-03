@@ -1,19 +1,19 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 
-public class SaveRatingAction extends ActionImpl<GetResult<Rating>> {
-    private Rating rating;
+public class SaveRatingAction extends ActionImpl<GetResult<RatingDto>> {
+    private RatingDto ratingDto;
 
     protected SaveRatingAction() {
     }
 
-    public SaveRatingAction(Rating rating) {
-        this.rating = rating;
+    public SaveRatingAction(RatingDto ratingDto) {
+        this.ratingDto = ratingDto;
     }
 
-    public Rating getRating() {
-        return rating;
+    public RatingDto getRating() {
+        return ratingDto;
     }
 
     @Override
