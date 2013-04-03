@@ -1,7 +1,6 @@
 package com.gwtplatform.carstore.shared.domain;
 
-import javax.persistence.Entity;
-
+import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
 @Index
