@@ -9,14 +9,13 @@ import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.ManufacturerDao;
 import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.UserDao;
-import com.gwtplatform.carstore.shared.BootStrapper;
 import com.gwtplatform.carstore.shared.domain.Car;
 import com.gwtplatform.carstore.shared.domain.CarProperties;
 import com.gwtplatform.carstore.shared.domain.Manufacturer;
 import com.gwtplatform.carstore.shared.domain.Rating;
 import com.gwtplatform.carstore.shared.domain.User;
 
-public class DevBootStrapper implements BootStrapper {
+public class DevBootStrapper {
     private final UserDao userDao;
     private final PasswordSecurity passwordSecurity;
     private final ManufacturerDao manufacturerDao;
@@ -33,7 +32,6 @@ public class DevBootStrapper implements BootStrapper {
         this.ratingDao = ratingDao;
     }
 
-    @Override
     public void init() {
         long userCount = userDao.countAll();
 
