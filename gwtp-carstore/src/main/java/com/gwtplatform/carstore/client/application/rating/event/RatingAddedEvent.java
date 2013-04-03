@@ -4,7 +4,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent.RatingAddedHandler;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 public class RatingAddedEvent extends GwtEvent<RatingAddedHandler> {
     public interface RatingAddedHandler extends EventHandler {
@@ -15,16 +15,16 @@ public class RatingAddedEvent extends GwtEvent<RatingAddedHandler> {
         return TYPE;
     }
 
-    public static void fire(HasHandlers source, Rating rating) {
-        source.fireEvent(new RatingAddedEvent(rating));
+    public static void fire(HasHandlers source, RatingDto ratingDto) {
+        source.fireEvent(new RatingAddedEvent(ratingDto));
     }
 
     private static final Type<RatingAddedHandler> TYPE = new Type<RatingAddedHandler>();
 
-    private Rating rating;
+    private RatingDto ratingDto;
 
-    public RatingAddedEvent(Rating rating) {
-        this.rating = rating;
+    public RatingAddedEvent(RatingDto ratingDto) {
+        this.ratingDto = ratingDto;
     }
 
     @Override
@@ -32,8 +32,8 @@ public class RatingAddedEvent extends GwtEvent<RatingAddedHandler> {
         return TYPE;
     }
 
-    public Rating getRating() {
-        return rating;
+    public RatingDto getRating() {
+        return ratingDto;
     }
 
     @Override

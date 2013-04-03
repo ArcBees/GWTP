@@ -1,32 +1,23 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.shared.dto;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Index;
-import com.gwtplatform.carstore.shared.dto.UserDto;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 
-@Index
-@Entity
-public class User extends BaseEntity {
-    public static UserDto createDto(User user) {
-        if (user == null) {
-            return null;
-        }
-        UserDto userDto = new UserDto();
-        userDto.setFirstName(user.getFirstName());
-        userDto.setId(user.getId());
-        userDto.setLastName(user.getLastName());
-        userDto.setUsername(user.getUsername());
-        
-        return userDto;
-    }
+public class UserDto extends BaseEntity {
     private String username;
     private String hashPassword;
     private String firstName;
     private String lastName;
 
-    public User() {
+    public UserDto() {
         firstName = "";
         lastName = "";
+    }
+
+    public UserDto(String username, String hashPassword, String firstName, String lastName) {
+        this.username = username;
+        this.hashPassword = hashPassword;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -63,13 +54,13 @@ public class User extends BaseEntity {
 
     @Override
     public String toString() {
-        String s = "{ User ";
+        String s = " { User ";
         s += "id=" + id + " ";
         s += "username=" + username + " ";
         s += "hasPassword=" + hashPassword + " ";
         s += "firstName=" + firstName + " ";
         s += "lastName=" + lastName + " ";  
-        s += "}";
+        s += " User } ";
         return s;
     }
 }

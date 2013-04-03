@@ -8,10 +8,11 @@ import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-public class GetCarsHandler extends AbstractActionHandler<GetCarsAction, GetResults<Car>> {
+public class GetCarsHandler extends AbstractActionHandler<GetCarsAction, GetResults<CarDto>> {
     private final CarDao carDao;
 
     @Inject
@@ -22,14 +23,14 @@ public class GetCarsHandler extends AbstractActionHandler<GetCarsAction, GetResu
     }
 
     @Override
-    public GetResults<Car> execute(GetCarsAction action, ExecutionContext context) throws ActionException {
-        List<Car> cars = null;
+    public GetResults<CarDto> execute(GetCarsAction action, ExecutionContext context) throws ActionException {
+        List<CarDto> carDtos = null;
         if (action.getOffset() != null && action.getLimit() != null) {
             carDao.getSome(action.getOffset(), action.getLimit());
         } else {
-            cars = carDao.getAll();
+            carDtos = Car.createDto(carDao.getAll());
         }
 
-        return new GetResults<Car>(cars);
+        return new GetResults<CarDto>(carDtos);
     }
 }

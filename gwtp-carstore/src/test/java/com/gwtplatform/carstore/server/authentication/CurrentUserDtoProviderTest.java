@@ -19,8 +19,8 @@ import org.junit.runner.RunWith;
 import com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider;
 import com.gwtplatform.carstore.server.authentication.SecurityParameters;
 import com.gwtplatform.carstore.server.dao.UserDao;
-import com.gwtplatform.carstore.shared.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 @RunWith(JukitoRunner.class)
 public class CurrentUserDtoProviderTest {
@@ -43,16 +43,16 @@ public class CurrentUserDtoProviderTest {
     @Test
     public void aValidSessionShouldReturnTheCurrentUser() {
         // Given
-        User user = mock(User.class);
+        UserDto userDto = mock(UserDto.class);
         given(httpSession.getAttribute(SecurityParameters.getUserSessionKey())).willReturn(A_USER_ID);
-        given(userDao.get(A_USER_ID)).willReturn(user);
+        given(userDao.get(A_USER_ID)).willReturn(userDto);
 
         // When
         CurrentUserDto currentUserDto = currentUserDtoProvider.get();
 
         // Then
         assertTrue(currentUserDto.isLoggedIn());
-        assertEquals(user, currentUserDto.getUser());
+        assertEquals(userDto, currentUserDto.getUser());
     }
 
     @Test

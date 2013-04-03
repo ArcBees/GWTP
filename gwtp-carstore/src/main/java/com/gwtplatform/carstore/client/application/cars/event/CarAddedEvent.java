@@ -4,7 +4,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler;
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
 public class CarAddedEvent extends GwtEvent<CarAddedHandler> {
     public interface CarAddedHandler extends EventHandler {
@@ -15,26 +15,26 @@ public class CarAddedEvent extends GwtEvent<CarAddedHandler> {
         return TYPE;
     }
 
-    public static void fire(HasHandlers source, Car car) {
-        fire(source, car, false);
+    public static void fire(HasHandlers source, CarDto carDto) {
+        fire(source, carDto, false);
     }
 
-    public static void fire(HasHandlers source, Car car, Boolean isNew) {
-        source.fireEvent(new CarAddedEvent(car, isNew));
+    public static void fire(HasHandlers source, CarDto carDto, Boolean isNew) {
+        source.fireEvent(new CarAddedEvent(carDto, isNew));
     }
 
     private static final Type<CarAddedHandler> TYPE = new Type<CarAddedHandler>();
 
-    private final Car car;
+    private final CarDto carDto;
     private final Boolean isNew;
 
-    public CarAddedEvent(Car car) {
-        this(car, false);
+    public CarAddedEvent(CarDto carDto) {
+        this(carDto, false);
     }
 
-    public CarAddedEvent(Car car, Boolean isNew) {
+    public CarAddedEvent(CarDto carDto, Boolean isNew) {
 
-        this.car = car;
+        this.carDto = carDto;
         this.isNew = isNew;
     }
 
@@ -43,8 +43,8 @@ public class CarAddedEvent extends GwtEvent<CarAddedHandler> {
         return TYPE;
     }
 
-    public Car getCar() {
-        return car;
+    public CarDto getCar() {
+        return carDto;
     }
 
     public Boolean isNew() {

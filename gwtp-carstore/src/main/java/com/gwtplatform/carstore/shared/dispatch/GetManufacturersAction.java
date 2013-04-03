@@ -1,8 +1,8 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 
-public class GetManufacturersAction extends ActionImpl<GetResults<Manufacturer>> {
+public class GetManufacturersAction extends ActionImpl<GetResults<ManufacturerDto>> {
     public GetManufacturersAction() {
     }
 

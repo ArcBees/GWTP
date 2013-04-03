@@ -8,15 +8,15 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class ManufacturerDetailView extends ViewWithUiHandlers<ManufacturerDetailUiHandlers>
-        implements ManufacturerDetailPresenter.MyView, Editor<Manufacturer> {
+        implements ManufacturerDetailPresenter.MyView, Editor<ManufacturerDto> {
     public interface Binder extends UiBinder<Widget, ManufacturerDetailView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<Manufacturer, ManufacturerDetailView> {
+    public interface Driver extends SimpleBeanEditorDriver<ManufacturerDto, ManufacturerDetailView> {
     }
 
     @UiField
@@ -36,9 +36,9 @@ public class ManufacturerDetailView extends ViewWithUiHandlers<ManufacturerDetai
     }
 
     @Override
-    public void edit(Manufacturer manufacturer) {
+    public void edit(ManufacturerDto manufacturerDto) {
         name.setFocus(true);
-        driver.edit(manufacturer);
+        driver.edit(manufacturerDto);
     }
 
     @Override

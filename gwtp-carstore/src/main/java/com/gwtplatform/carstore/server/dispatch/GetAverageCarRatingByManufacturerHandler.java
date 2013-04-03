@@ -22,6 +22,7 @@ public class GetAverageCarRatingByManufacturerHandler
     @Inject
     public GetAverageCarRatingByManufacturerHandler(final ReportService reportService) {
         super(GetAverageCarRatingByManufacturerAction.class);
+        
         this.reportService = reportService;
     }
 
@@ -30,6 +31,7 @@ public class GetAverageCarRatingByManufacturerHandler
             ExecutionContext context)
             throws ActionException {
         List<ManufacturerRatingDto> results = this.reportService.getAverageCarRatingByManufacturer();
+        
         return new GetResults<ManufacturerRatingDto>(results);
     }
 

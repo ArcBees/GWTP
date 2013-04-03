@@ -9,9 +9,9 @@ import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.gwtplatform.carstore.shared.domain.CarProperties;
+import com.gwtplatform.carstore.shared.dto.CarPropertiesDto;
 
-public class CarPropertiesEditor extends Composite implements Editor<CarProperties> {
+public class CarPropertiesEditor extends Composite implements Editor<CarPropertiesDto> {
     public interface Binder extends UiBinder<Widget, CarPropertiesEditor> {
     }
 
