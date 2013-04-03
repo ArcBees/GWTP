@@ -3,8 +3,7 @@ package com.gwtplatform.carstore.shared.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Embedded;
-
+import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
@@ -12,7 +11,7 @@ import com.googlecode.objectify.annotation.Index;
 @Entity
 public class Manufacturer extends BaseEntity {
     private String name;
-    @Embedded
+    @Embed
     private List<Car> cars;
 
     public Manufacturer() {
