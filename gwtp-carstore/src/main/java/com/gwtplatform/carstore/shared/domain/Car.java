@@ -3,20 +3,19 @@ package com.gwtplatform.carstore.shared.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Embedded;
-
+import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
 @Index
 @Entity
 public class Car extends BaseEntity {
-    @Embedded
+    @Embed
     private Manufacturer manufacturer;
     private String model;
-    @Embedded
+    @Embed
     private List<Rating> ratings;
-    @Embedded
+    @Embed
     private CarProperties carProperties;
 
     public Car() {
