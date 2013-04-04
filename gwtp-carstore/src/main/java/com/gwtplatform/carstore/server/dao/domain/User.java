@@ -1,7 +1,8 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.server.dao.domain;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 
 @Index
@@ -19,6 +20,22 @@ public class User extends BaseEntity {
         
         return userDto;
     }
+    
+    public static User create(UserDto userDto) {
+        if (userDto == null) {
+            return null;
+        }
+        
+        User user = new User();
+        user.setFirstName(userDto.getFirstName());
+        user.setHashPassword(userDto.getHashPassword());
+        user.setId(userDto.getId());
+        user.setLastName(userDto.getLastName());
+        user.setUsername(userDto.getUsername());
+        
+        return user;
+    }
+    
     private String username;
     private String hashPassword;
     private String firstName;

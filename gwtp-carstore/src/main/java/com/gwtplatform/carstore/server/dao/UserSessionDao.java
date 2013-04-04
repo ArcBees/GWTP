@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-import com.gwtplatform.carstore.shared.domain.User;
-import com.gwtplatform.carstore.shared.domain.UserSession;
+import com.gwtplatform.carstore.server.dao.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.UserSession;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 
 public class UserSessionDao extends BaseDao<UserSession> {

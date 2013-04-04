@@ -1,6 +1,6 @@
 package com.gwtplatform.carstore.server.dao;
 
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.server.dao.domain.Rating;
 
 public class RatingDao extends BaseDao<Rating> {
     public RatingDao() {
