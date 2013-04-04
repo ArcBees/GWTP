@@ -22,6 +22,10 @@ public class Deref {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static <T> List<T> deref(List<Ref<T>> reflist) {
+        if (reflist == null) {
+            return null;
+        }
+        
         return Lists.transform(reflist, (Func) Func.INSTANCE);
     }
 }

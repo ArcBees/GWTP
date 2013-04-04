@@ -18,62 +18,59 @@ public class Car extends BaseEntity {
         if (cars == null) {
             return null;
         }
-        
+
         List<CarDto> carsDto = new ArrayList<CarDto>();
         for (Car car : cars) {
             carsDto.add(createDto(car));
         }
-        
+
         return carsDto;
     }
-    
+
     public static CarDto createDto(Car car) {
         if (car == null) {
             return null;
         }
-        
+
         CarDto carDto = new CarDto();
-        car.setCarProperties(car.getCarProperties());
-        car.setId(car.getId());
-        car.setManufacturer(car.getManufacturer());
-        car.setModel(car.getModel());
-        car.setRatings(car.getRatings());
-        
+        carDto.setCarProperties(CarProperties.createDto(car.getCarProperties()));
+        carDto.setId(car.getId());
+        carDto.setManufacturer(Manufacturer.createDto(car.getManufacturer()));
+        carDto.setModel(car.getModel());
+
         return carDto;
     }
-    
+
     public static List<Car> create(List<CarDto> carDtos) {
         if (carDtos == null) {
             return null;
         }
-        
+
         List<Car> cars = new ArrayList<Car>();
         for (CarDto carDto : carDtos) {
             cars.add(create(carDto));
         }
-        
+
         return cars;
     }
-    
+
     public static Car create(CarDto carDto) {
         if (carDto == null) {
             return null;
         }
-        
+
         Car car = new Car();
         car.setCarProperties(CarProperties.create(carDto.getCarProperties()));
         car.setId(carDto.getId());
         car.setManufacturer(Manufacturer.create(carDto.getManufacturer()));
         car.setModel(carDto.getModel());
-        car.setRatings(car.getRatings());
-        
+
         return car;
     }
-    
-    private Ref<Manufacturer> manufacturer;
+
     private String model;
     @Load
-    private List<Ref<Rating>> ratings;
+    private Ref<Manufacturer> manufacturer;
     @Load
     private Ref<CarProperties> carProperties;
 
@@ -95,24 +92,11 @@ public class Car extends BaseEntity {
 
     public void setManufacturer(Manufacturer manufacturer) {
         if (manufacturer != null) {
-            this.manufacturer = Ref.create(manufacturer);    
+            this.manufacturer = Ref.create(manufacturer);
         } else {
             this.manufacturer = null;
         }
-        
-    }
 
-    public List<Rating> getRatings() {
-        return Deref.deref(ratings);
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        for (Rating rating : ratings) {
-            if (ratings == null) {
-                this.ratings = new ArrayList<Ref<Rating>>();
-            }
-            this.ratings.add(Ref.create(rating));
-        }
     }
 
     public CarProperties getCarProperties() {
@@ -121,7 +105,12 @@ public class Car extends BaseEntity {
 
     public void setCarProperties(CarProperties carProperties) {
         if (carProperties != null) {
-            this.carProperties = Ref.create(carProperties);
+            try {
+                this.carProperties = Ref.create(carProperties);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         } else {
             this.carProperties = null;
         }
