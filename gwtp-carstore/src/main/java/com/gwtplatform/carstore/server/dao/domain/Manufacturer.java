@@ -35,8 +35,8 @@ public class Manufacturer extends BaseEntity {
         
         ManufacturerDto manufacturerDto = new ManufacturerDto();
         manufacturerDto.setCars(Car.createDto(manufacturer.getCars()));
-        manufacturer.setId(manufacturer.getId());
-        manufacturer.setName(manufacturer.getName());
+        manufacturerDto.setId(manufacturer.getId());
+        manufacturerDto.setName(manufacturer.getName());
         
         return manufacturerDto;
     }
