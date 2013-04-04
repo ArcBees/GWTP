@@ -1,4 +1,4 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.server.dao.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.gwtplatform.carstore.server.dao.objectify.Deref;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 
 @Index
@@ -41,15 +42,28 @@ public class Car extends BaseEntity {
         return carDto;
     }
     
-    public static Car createCar(CarDto carDto) {
+    public static List<Car> create(List<CarDto> carDtos) {
+        if (carDtos == null) {
+            return null;
+        }
+        
+        List<Car> cars = new ArrayList<Car>();
+        for (CarDto carDto : carDtos) {
+            cars.add(create(carDto));
+        }
+        
+        return cars;
+    }
+    
+    public static Car create(CarDto carDto) {
         if (carDto == null) {
             return null;
         }
         
         Car car = new Car();
-        car.setCarProperties(carDto.getCarProperties());
+        car.setCarProperties(CarProperties.create(carDto.getCarProperties()));
         car.setId(carDto.getId());
-        car.setManufacturer(carDto.getManufacturer());
+        car.setManufacturer(Manufacturer.create(carDto.getManufacturer()));
         car.setModel(carDto.getModel());
         car.setRatings(car.getRatings());
         
@@ -79,8 +93,13 @@ public class Car extends BaseEntity {
         return Deref.deref(manufacturer);
     }
 
-    public void setManufacturer(final Manufacturer manufacturer) {
-        this.manufacturer = Ref.create(manufacturer);
+    public void setManufacturer(Manufacturer manufacturer) {
+        if (manufacturer != null) {
+            this.manufacturer = Ref.create(manufacturer);    
+        } else {
+            this.manufacturer = null;
+        }
+        
     }
 
     public List<Rating> getRatings() {
@@ -101,6 +120,10 @@ public class Car extends BaseEntity {
     }
 
     public void setCarProperties(CarProperties carProperties) {
-        this.carProperties = Ref.create(carProperties);
+        if (carProperties != null) {
+            this.carProperties = Ref.create(carProperties);
+        } else {
+            this.carProperties = null;
+        }
     }
 }

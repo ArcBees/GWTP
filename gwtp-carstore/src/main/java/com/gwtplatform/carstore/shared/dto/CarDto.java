@@ -3,9 +3,6 @@ package com.gwtplatform.carstore.shared.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.googlecode.objectify.annotation.Embed;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Index;
 import com.gwtplatform.carstore.shared.domain.BaseEntity;
 
 public class CarDto extends BaseEntity {

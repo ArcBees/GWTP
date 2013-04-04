@@ -1,4 +1,4 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.server.dao.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.gwtplatform.carstore.server.dao.objectify.Deref;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 @Index
@@ -37,6 +38,19 @@ public class Rating extends BaseEntity {
         ratingDto.setRating(rating.getRating());
         
         return ratingDto;
+    }
+    
+    public static Rating create(RatingDto ratingDto) {
+        if (ratingDto == null) {
+            return null;
+        }
+        
+        Rating rating = new Rating();
+        rating.setCar(Car.create(ratingDto.getCar()));
+        rating.setId(ratingDto.getId());
+        rating.setRating(ratingDto.getRating());
+        
+        return rating;
     }
     
     private Integer rating;

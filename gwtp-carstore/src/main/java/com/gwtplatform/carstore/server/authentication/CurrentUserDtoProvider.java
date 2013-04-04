@@ -5,7 +5,7 @@ import javax.inject.Provider;
 import javax.servlet.http.HttpSession;
 
 import com.gwtplatform.carstore.server.dao.UserDao;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 

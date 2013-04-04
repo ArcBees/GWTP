@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.gwtplatform.carstore.server.dao.CarDao;
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.server.dao.domain.Car;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 
 /**
