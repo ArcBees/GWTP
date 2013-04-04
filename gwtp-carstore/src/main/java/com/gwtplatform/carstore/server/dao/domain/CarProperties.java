@@ -20,7 +20,7 @@ public class CarProperties extends BaseEntity {
         
         CarPropertiesDto carPropertiesDto = new CarPropertiesDto();
         carPropertiesDto.setCar(Car.createDto(carProperties.getCar()));
-        carProperties.setId(carProperties.getId());
+        carPropertiesDto.setId(carProperties.getId());
         carPropertiesDto.setSomeDate(carProperties.getSomeDate());
         carPropertiesDto.setSomeNumber(carProperties.getSomeNumber());
         carPropertiesDto.setSomeString(carProperties.getSomeString());
