@@ -1,9 +1,10 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.server.dao.domain;
 
 import java.util.Date;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 
 @Index

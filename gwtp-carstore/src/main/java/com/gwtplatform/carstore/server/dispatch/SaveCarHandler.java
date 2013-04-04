@@ -3,9 +3,9 @@ package com.gwtplatform.carstore.server.dispatch;
 import javax.inject.Inject;
 
 import com.gwtplatform.carstore.server.dao.CarDao;
+import com.gwtplatform.carstore.server.dao.domain.Car;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.SaveCarAction;
-import com.gwtplatform.carstore.shared.domain.Car;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -23,7 +23,7 @@ public class SaveCarHandler extends AbstractActionHandler<SaveCarAction, GetResu
     @Override
     public GetResult<CarDto> execute(SaveCarAction action, ExecutionContext context)
             throws ActionException {
-        CarDto carDto = Car.createDto(carDao.put(action.getCar()));
+        CarDto carDto = Car.createDto(carDao.put(Car.create(action.getCar())));
 
         return new GetResult<CarDto>(carDto);
     }

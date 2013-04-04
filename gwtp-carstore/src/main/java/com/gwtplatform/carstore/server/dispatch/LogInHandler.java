@@ -29,9 +29,6 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
         this.logger = logger;
         this.authenticator = authenticator;
         this.loginCookieDao = loginCookieDao;
-        
-        // TODO move 
-        bootStrapper.init();
     }
 
     @Override

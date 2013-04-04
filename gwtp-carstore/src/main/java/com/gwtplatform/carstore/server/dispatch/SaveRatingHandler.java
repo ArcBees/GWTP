@@ -3,6 +3,7 @@ package com.gwtplatform.carstore.server.dispatch;
 import javax.inject.Inject;
 
 import com.gwtplatform.carstore.server.dao.RatingDao;
+import com.gwtplatform.carstore.server.dao.domain.Rating;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.SaveRatingAction;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
@@ -21,7 +22,7 @@ public class SaveRatingHandler extends AbstractActionHandler<SaveRatingAction, G
 
     @Override
     public GetResult<RatingDto> execute(SaveRatingAction action, ExecutionContext context) throws ActionException {
-        RatingDto ratingDto = ratingDao.put(action.getRating());
+        RatingDto ratingDto = Rating.createDto(ratingDao.put(Rating.create(action.getRating())));
 
         return new GetResult<RatingDto>(ratingDto);
     }

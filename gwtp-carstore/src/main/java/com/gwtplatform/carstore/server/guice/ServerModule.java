@@ -13,7 +13,7 @@ public class ServerModule extends HandlerModule {
     protected void configureHandlers() {
         install(new DispatchModule());
 
-        bind(DevBootStrapper.class).in(Singleton.class);
         bind(PasswordSecurity.class).to(BCryptPasswordSecurity.class).in(Singleton.class);
+        bind(DevBootStrapper.class).asEagerSingleton();
     }
 }
