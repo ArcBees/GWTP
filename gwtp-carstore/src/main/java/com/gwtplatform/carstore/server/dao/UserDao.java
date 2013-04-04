@@ -1,6 +1,6 @@
 package com.gwtplatform.carstore.server.dao;
 
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 
 public class UserDao extends BaseDao<User> {

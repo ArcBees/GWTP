@@ -5,9 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.gwtplatform.carstore.server.dao.CarDao;
+import com.gwtplatform.carstore.server.dao.domain.Car;
 import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
-import com.gwtplatform.carstore.shared.domain.Car;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;

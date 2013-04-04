@@ -1,4 +1,4 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.server.dao.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,6 +9,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.gwtplatform.carstore.server.dao.objectify.Deref;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 
 @Index
@@ -40,6 +41,19 @@ public class Manufacturer extends BaseEntity {
         return manufacturerDto;
     }
     
+    public static Manufacturer create(ManufacturerDto manufacturerDto) {
+        if (manufacturerDto == null) { 
+            return null;
+        }
+        
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setCars(Car.create(manufacturerDto.getCars()));
+        manufacturer.setId(manufacturerDto.getId());
+        manufacturer.setName(manufacturerDto.getName());
+        
+        return manufacturer;
+    }
+    
     private String name;
     @Load
     private HashSet<Ref<Car>> cars;
@@ -65,19 +79,28 @@ public class Manufacturer extends BaseEntity {
     }
 
     public List<Car> getCars() {
+        if (this.cars == null) {
+            return null;
+        }
+        
         List<Car> rcars = new ArrayList<Car>();
         for (Ref<Car> car : cars) {
             rcars.add(Deref.deref(car));
         }
+        
         return rcars;
     }
 
     public void setCars(List<Car> cars) {
-        for (Car car : cars) {
-            if (this.cars == null) {
-                this.cars = new HashSet<Ref<Car>>();
+        if (cars == null) {
+            this.cars = null;
+        } else {
+            for (Car car : cars) {
+                if (this.cars == null) {
+                    this.cars = new HashSet<Ref<Car>>();
+                }
+                this.cars.add(Ref.create(car));
             }
-            this.cars.add(Ref.create(car));
         }
     }
 }
