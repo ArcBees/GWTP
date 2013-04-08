@@ -26,9 +26,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -126,6 +129,14 @@ public class PresenterWidgetTest {
         }
     }
 
+    @TestSingleton
+    static class PresenterWidgetD extends PresenterWidget<View> {
+        @Inject
+        PresenterWidgetD(@Named("EventBusA") EventBus eventBus, @Named("A") PopupView view) {
+            super(eventBus, view);
+        }
+    }
+
     @Inject
     @Named("A")
     Widget widgetA;
@@ -156,6 +167,15 @@ public class PresenterWidgetTest {
     @Inject
     @Named("PopupC")
     PopupView popupViewC;
+    @Inject
+    @Named("EventBusA")
+    EventBus eventBusA;
+    @Inject
+    GwtEvent.Type<EventHandler> typeA;
+    @Inject
+    EventHandler handlerA;
+    @Inject
+    HandlerRegistration registrationA;
 
     @Before
     public void arrange() {
@@ -164,6 +184,7 @@ public class PresenterWidgetTest {
         when(viewC.asWidget()).thenReturn(widgetC);
         when(popupViewB.asWidget()).thenReturn(widgetPopupB);
         when(popupViewC.asWidget()).thenReturn(widgetPopupC);
+        when(eventBusA.addHandler(typeA, handlerA)).thenReturn(registrationA);
     }
 
     @Test
@@ -280,6 +301,47 @@ public class PresenterWidgetTest {
         assertEquals(1, popupContentC.onHideMethodCalled);
         verify(popupContentB.getView(), times(2)).show();
         verify(popupContentC.getView(), times(2)).show();
+    }
+
+    @Test
+    public void testAddAndRemoveVisibleHandler(PresenterWidgetD presenterWidgetD) {
+
+        // Given
+        assertFalse(presenterWidgetD.isVisible());
+        presenterWidgetD.addVisibleHandler(typeA, handlerA);
+
+        // when
+        presenterWidgetD.internalReveal();
+
+        // Then
+        verify(eventBusA).addHandler(typeA, handlerA);
+
+        // and then When
+        presenterWidgetD.internalHide();
+
+        // Then
+        verify(registrationA).removeHandler();
+    }
+
+    @Test
+    public void testAddVisibleHandlerOnVisiblePresenter(PresenterWidgetD presenterWidgetD) {
+
+        // Given
+        assertFalse(presenterWidgetD.isVisible());
+        // and
+        presenterWidgetD.internalReveal();
+
+        // when
+        presenterWidgetD.addVisibleHandler(typeA, handlerA);
+
+        // Then
+        verify(eventBusA).addHandler(typeA, handlerA);
+
+        // and then When
+        presenterWidgetD.internalHide();
+
+        // Then
+        verify(registrationA).removeHandler();
     }
 
     @Test
