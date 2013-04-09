@@ -17,13 +17,9 @@ import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gwtplatform.carstore.server.authentication.AuthenticationException;
-import com.gwtplatform.carstore.server.authentication.Authenticator;
-import com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider;
-import com.gwtplatform.carstore.server.authentication.PasswordSecurity;
-import com.gwtplatform.carstore.server.authentication.SecurityParameters;
 import com.gwtplatform.carstore.server.dao.UserDao;
 import com.gwtplatform.carstore.server.dao.UserSessionDao;
+import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 
@@ -59,9 +55,9 @@ public class AuthenticatorTest {
     @Test
     public void aValidUserShouldBeAbleToConnect() {
         // Given
-        UserDto userDto = mock(UserDto.class);
-        given(userDto.getId()).willReturn(A_USER_ID);
-        given(userDao.findByUsername(A_VALID_USER)).willReturn(userDto);
+        User user = mock(User.class);
+        given(user.getId()).willReturn(A_USER_ID);
+        given(userDao.findByUsername(A_VALID_USER)).willReturn(user);
         given(passwordSecurity.check(anyString(), anyString())).willReturn(true);
 
         // When
@@ -73,9 +69,9 @@ public class AuthenticatorTest {
     }
 
     @Test(expected = AuthenticationException.class)
-    public void aValidUserWithAnInvalidPasswordShouldntBeAbleToConnect() {
+    public void aValidUserWithAnInvalidPasswordShouldntBeAbleToConnect(User user) {
         // Given
-        given(userDao.findByUsername(A_VALID_USER)).willReturn(mock(UserDto.class));
+        given(userDao.findByUsername(A_VALID_USER)).willReturn(user);
         given(passwordSecurity.check(anyString(), anyString())).willReturn(false);
 
         // When
