@@ -10,3 +10,4 @@ target
 bin
 META-INF
 .checkstyle
+chromedriver.log
