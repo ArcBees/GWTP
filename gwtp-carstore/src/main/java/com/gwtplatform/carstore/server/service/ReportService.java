@@ -12,45 +12,41 @@ import javax.persistence.Query;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 
 public class ReportService {
-
-    private final Provider<EntityManager> entityManagerProvider;
-
     @Inject
-    public ReportService(final Provider<EntityManager> entityManagerProvider) {
-        this.entityManagerProvider = entityManagerProvider;
+    public ReportService() {
     }
 
     public List<ManufacturerRatingDto> getAverageCarRatingByManufacturer() {
-        EntityManager entityManager = this.entityManagerProvider.get();
+        
+//        TODO 
+//        Query query = entityManager.createQuery(
+//                "select new map(m.name as manufacturer, c.model as carModel, avg(r.rating) as rating)" +
+//                        " from Manufacturer m" +
+//                        " join m.cars as c" +
+//                        " join c.ratings as r" +
+//                        " group by m.name, c.model");
+//
+//        List resultList = query.getResultList();
+//        HashMap<String, AveragingCounter> averages = new HashMap<String, AveragingCounter>();
+//        for (Object resultObject : resultList) {
+//            HashMap result = (HashMap) resultObject;
+//
+//            String manufacturer = (String) result.get("manufacturer");
+//            Double rating = (Double) result.get("rating");
+//
+//            if (averages.containsKey(manufacturer)) {
+//                averages.get(manufacturer).add(rating);
+//            } else {
+//                averages.put(manufacturer, new AveragingCounter(rating));
+//            }
+//        }
+//
+//        List<ManufacturerRatingDto> results = new ArrayList<ManufacturerRatingDto>(averages.size());
+//        for (String manufacturer : averages.keySet()) {
+//            results.add(new ManufacturerRatingDto(manufacturer, averages.get(manufacturer).average()));
+//        }
 
-        Query query = entityManager.createQuery(
-                "select new map(m.name as manufacturer, c.model as carModel, avg(r.rating) as rating)" +
-                        " from Manufacturer m" +
-                        " join m.cars as c" +
-                        " join c.ratings as r" +
-                        " group by m.name, c.model");
-
-        List resultList = query.getResultList();
-        HashMap<String, AveragingCounter> averages = new HashMap<String, AveragingCounter>();
-        for (Object resultObject : resultList) {
-            HashMap result = (HashMap) resultObject;
-
-            String manufacturer = (String) result.get("manufacturer");
-            Double rating = (Double) result.get("rating");
-
-            if (averages.containsKey(manufacturer)) {
-                averages.get(manufacturer).add(rating);
-            } else {
-                averages.put(manufacturer, new AveragingCounter(rating));
-            }
-        }
-
-        List<ManufacturerRatingDto> results = new ArrayList<ManufacturerRatingDto>(averages.size());
-        for (String manufacturer : averages.keySet()) {
-            results.add(new ManufacturerRatingDto(manufacturer, averages.get(manufacturer).average()));
-        }
-
-        return results;
+        return new ArrayList<ManufacturerRatingDto>();
     }
 
     private class AveragingCounter {
