@@ -26,11 +26,17 @@ public class GetCarsHandler extends AbstractActionHandler<GetCarsAction, GetResu
     public GetResults<CarDto> execute(GetCarsAction action, ExecutionContext context) throws ActionException {
         List<CarDto> carDtos = null;
         if (action.getOffset() != null && action.getLimit() != null) {
-            carDao.getSome(action.getOffset(), action.getLimit());
+            carDtos = getSome(action);
         } else {
             carDtos = Car.createDto(carDao.getAll());
         }
 
         return new GetResults<CarDto>(carDtos);
+    }
+
+    private List<CarDto> getSome(GetCarsAction action) {
+        List<Car> cars = carDao.getSome(action.getOffset(), action.getLimit());
+        
+        return Car.createDto(cars);
     }
 }
