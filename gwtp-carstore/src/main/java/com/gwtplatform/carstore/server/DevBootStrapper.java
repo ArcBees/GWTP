@@ -42,6 +42,8 @@ public class DevBootStrapper {
     }
 
     public void init() {
+        //deleteAllEntities();
+        
         long userCount = userDao.countAll();
 
         if (userCount == 0) {
@@ -49,6 +51,14 @@ public class DevBootStrapper {
         }
 
         createMockData();
+    }
+
+    private void deleteAllEntities() {
+        userDao.deleteAll();
+        manufacturerDao.deleteAll();
+        carDao.deleteAll();
+        ratingDao.deleteAll();
+        carPropertiesDao.deleteAll();
     }
 
     private void createBasicUser() {
@@ -60,7 +70,7 @@ public class DevBootStrapper {
     private void createMockData() {
         long manufacturerCount = manufacturerDao.countAll();
 
-        if (1==1) {
+        if (manufacturerCount == 0) {
             ManufacturerDto honda = new ManufacturerDto("Honda");
             ManufacturerDto mitsubishi = new ManufacturerDto("Mitsubishi");
 
