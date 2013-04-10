@@ -4,7 +4,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent.ManufacturerAddedHandler;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 
 public class ManufacturerAddedEvent extends GwtEvent<ManufacturerAddedHandler> {
     public interface ManufacturerAddedHandler extends EventHandler {
@@ -15,16 +15,16 @@ public class ManufacturerAddedEvent extends GwtEvent<ManufacturerAddedHandler> {
         return TYPE;
     }
 
-    public static void fire(HasHandlers source, Manufacturer manufacturer) {
-        source.fireEvent(new ManufacturerAddedEvent(manufacturer));
+    public static void fire(HasHandlers source, ManufacturerDto manufacturerDto) {
+        source.fireEvent(new ManufacturerAddedEvent(manufacturerDto));
     }
 
     private static final Type<ManufacturerAddedHandler> TYPE = new Type<ManufacturerAddedHandler>();
 
-    private Manufacturer manufacturer;
+    private ManufacturerDto manufacturerDto;
 
-    public ManufacturerAddedEvent(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
+    public ManufacturerAddedEvent(ManufacturerDto manufacturerDto) {
+        this.manufacturerDto = manufacturerDto;
     }
 
     @Override
@@ -32,8 +32,8 @@ public class ManufacturerAddedEvent extends GwtEvent<ManufacturerAddedHandler> {
         return TYPE;
     }
 
-    public Manufacturer getManufacturer() {
-        return manufacturer;
+    public ManufacturerDto getManufacturer() {
+        return manufacturerDto;
     }
 
     @Override

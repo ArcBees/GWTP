@@ -3,14 +3,15 @@ package com.gwtplatform.carstore.server.dispatch;
 import java.util.logging.Logger;
 
 import com.google.inject.Inject;
+import com.gwtplatform.carstore.server.DevBootStrapper;
 import com.gwtplatform.carstore.server.authentication.AuthenticationException;
 import com.gwtplatform.carstore.server.authentication.Authenticator;
 import com.gwtplatform.carstore.server.dao.UserSessionDao;
 import com.gwtplatform.carstore.shared.dispatch.ActionType;
 import com.gwtplatform.carstore.shared.dispatch.LogInAction;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
-import com.gwtplatform.carstore.shared.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
@@ -21,9 +22,10 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
     private Logger logger;
 
     @Inject
-    public LogInHandler(final Logger logger, final Authenticator authenticator, final UserSessionDao loginCookieDao) {
+    public LogInHandler(Logger logger, Authenticator authenticator, UserSessionDao loginCookieDao,
+            DevBootStrapper bootStrapper) {
         super(LogInAction.class);
-        
+
         this.logger = logger;
         this.authenticator = authenticator;
         this.loginCookieDao = loginCookieDao;
@@ -31,22 +33,22 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
 
     @Override
     public LogInResult execute(LogInAction action, ExecutionContext context) throws ActionException {
-        User user = null;
+        UserDto userDto = null;
         isLoggedIn = true;
 
         if (action.getActionType() == ActionType.VIA_COOKIE) {
-            user = getUserFromCookie(action.getLoggedInCookie());
+            userDto = getUserFromCookie(action.getLoggedInCookie());
         } else {
-            user = getUserFromCredentials(action.getUsername(), action.getPassword());
+            userDto = getUserFromCredentials(action.getUsername(), action.getPassword());
         }
 
-        CurrentUserDto currentUserDto = new CurrentUserDto(isLoggedIn, user);
+        CurrentUserDto currentUserDto = new CurrentUserDto(isLoggedIn, userDto);
 
         String loggedInCookie = "";
         if (isLoggedIn) {
-            loggedInCookie = loginCookieDao.createLoggedInCookie(user);
+            loggedInCookie = loginCookieDao.createSessionCookie(userDto);
         }
-        
+
         logger.info("LogInHandlerexecut(): actiontype=" + getActionType());
         logger.info("LogInHandlerexecut(): currentUserDto=" + currentUserDto);
         logger.info("LogInHandlerexecut(): loggedInCookie=" + loggedInCookie);
@@ -54,25 +56,25 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
         return new LogInResult(action.getActionType(), currentUserDto, loggedInCookie);
     }
 
-    private User getUserFromCookie(String loggedInCookie) {
-        User user = null;
+    private UserDto getUserFromCookie(String loggedInCookie) {
+        UserDto userDto = null;
         try {
-            user = authenticator.authenticatCookie(loggedInCookie);
+            userDto = authenticator.authenticatCookie(loggedInCookie);
         } catch (AuthenticationException e) {
             isLoggedIn = false;
         }
 
-        return user;
+        return userDto;
     }
 
-    private User getUserFromCredentials(String username, String password) {
-        User user = null;
+    private UserDto getUserFromCredentials(String username, String password) {
+        UserDto userDto = null;
         try {
-            user = authenticator.authenticateCredentials(username, password);
+            userDto = authenticator.authenticateCredentials(username, password);
         } catch (AuthenticationException e) {
             isLoggedIn = false;
         }
 
-        return user;
+        return userDto;
     }
 }

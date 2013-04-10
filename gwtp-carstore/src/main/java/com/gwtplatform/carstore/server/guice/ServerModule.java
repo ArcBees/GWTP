@@ -6,7 +6,6 @@ import com.gwtplatform.carstore.server.DevBootStrapper;
 import com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity;
 import com.gwtplatform.carstore.server.authentication.PasswordSecurity;
 import com.gwtplatform.carstore.server.dispatch.DispatchModule;
-import com.gwtplatform.carstore.shared.BootStrapper;
 import com.gwtplatform.dispatch.server.guice.HandlerModule;
 
 public class ServerModule extends HandlerModule {
@@ -14,7 +13,7 @@ public class ServerModule extends HandlerModule {
     protected void configureHandlers() {
         install(new DispatchModule());
 
-        bind(BootStrapper.class).to(DevBootStrapper.class).in(Singleton.class);
         bind(PasswordSecurity.class).to(BCryptPasswordSecurity.class).in(Singleton.class);
+        bind(DevBootStrapper.class).asEagerSingleton();
     }
 }

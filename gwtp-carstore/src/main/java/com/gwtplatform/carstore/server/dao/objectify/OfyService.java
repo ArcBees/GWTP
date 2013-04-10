@@ -3,12 +3,12 @@ package com.gwtplatform.carstore.server.dao.objectify;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.CarProperties;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
-import com.gwtplatform.carstore.shared.domain.Rating;
-import com.gwtplatform.carstore.shared.domain.User;
-import com.gwtplatform.carstore.shared.domain.UserSession;
+import com.gwtplatform.carstore.server.dao.domain.Car;
+import com.gwtplatform.carstore.server.dao.domain.CarProperties;
+import com.gwtplatform.carstore.server.dao.domain.Manufacturer;
+import com.gwtplatform.carstore.server.dao.domain.Rating;
+import com.gwtplatform.carstore.server.dao.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.UserSession;
 
 /**
  * For use of:

@@ -1,19 +1,19 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 public class DeleteRatingAction extends ActionImpl<NoResults> {
-    private Rating rating;
+    private RatingDto ratingDto;
 
     protected DeleteRatingAction() {
     }
 
-    public DeleteRatingAction(Rating rating) {
-        this.rating = rating;
+    public DeleteRatingAction(RatingDto ratingDto) {
+        this.ratingDto = ratingDto;
     }
 
-    public Rating getRating() {
-        return rating;
+    public RatingDto getRating() {
+        return ratingDto;
     }
 
     @Override
