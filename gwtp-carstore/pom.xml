@@ -8,14 +8,23 @@
         <artifactId>gwtp</artifactId>
         <version>1.0-RC-3-SNAPSHOT</version>
     </parent>
-    
+
     <packaging>war</packaging>
     <artifactId>gwtp-carstore</artifactId>
     <name>gwtp-carstore</name>
-    <description>Small applicaiton used for testing GWTP features.</description>
-    
+    <description>Simple application used for testing GWTP features.</description>
+
     <properties>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+        <gae.home>
+            ${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
+        </gae.home>
+        
+        <!-- gae maven plugin settings -->
+        <gae.wait>false</gae.wait>
+        <gae.stop.port>8081</gae.stop.port>
+        <gae.port>8888</gae.port>
+        <gae.address>127.0.0.1</gae.address>
     </properties>
 
     <build>
@@ -65,7 +74,6 @@
             <!-- First run 'mvn package -Ppostgres' to setup persistence.xml -->
             <!-- run 'mvn gwt:run' for running application from terminal -->
             <!-- run 'mvn integration-test' for running the GwtTestSuite -->
-            <!-- run 'mvn clean install' will build war to local repo ~/.m2/com/arcbees/samples/CarSample/*.war -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
@@ -87,6 +95,15 @@
                     <copyWebapp>true</copyWebapp>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
 
+                    <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
+                    <appEngineVersion>${gae.version}</appEngineVersion>
+                    <appEngineHome>${gae.home}</appEngineHome>
+
+                    <runTarget>CarStore.html</runTarget>
+                    <modules>
+                        <module>com.gwtplatform.carstore.CarStore</module>
+                    </modules>
+
                     <compileReport>true</compileReport>
                 </configuration>
                 <executions>
@@ -101,7 +118,8 @@
 
             <!-- Integration testing which runs clases *TestInt.java -->
             <!-- run 'mvn integration-test' -->
-            <plugin>
+            <!-- TODO renenable after build server has chrome driver setup -->
+            <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
@@ -118,101 +136,87 @@
                             </includes>
                         </configuration>
                     </execution>
+                </executions>
+            </plugin> -->
+
+            <plugin>
+                <groupId>net.kindleit</groupId>
+                <artifactId>maven-gae-plugin</artifactId>
+                <configuration>
+                    <appDir>${webappDirectory}</appDir>
+                </configuration>
+                 <executions>
                     <execution>
-                        <id>verify</id>
-                        <phase>verify</phase>
+                        <id>unpack</id>
+                        <phase>validate</phase>
                         <goals>
-                            <goal>verify</goal>
+                            <goal>unpack</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
-
-            <!-- Server for running Cucumber tests *TestInt.java -->
-            <!-- 'mvn jetty:run' deploys and starts -->
-            <!-- mvn jetty:start -->
-            <!-- mvn jetty:stop -->
-            <!-- mvn jetty:run -->
-            <!-- mvn integration-test -Pintegration-test -->
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty-plugin.version}</version>
-                <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <stopPort>9966</stopPort>
-                    <stopKey>stop-jetty</stopKey>
-                    <webAppSourceDirectory>${webappDirectory}</webAppSourceDirectory>
-                    <webApp>
-                        <descriptor>${webappDirectory}/WEB-INF</descriptor>
-                    </webApp>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>jetty.port</name>
-                            <value>8888</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start-jetty</id>
+                    <!-- TODO turn on after chrome driver installed on build server -->
+                    <!-- <execution>
+                        <id>start-gae</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>run</goal>
+                            <goal>start</goal>
                         </goals>
-                        <configuration>
-                            <daemon>true</daemon>
-                            <scanIntervalSeconds>0</scanIntervalSeconds>
-                        </configuration>
                     </execution>
                     <execution>
-                        <id>stop-jetty</id>
+                        <id>stop-gae</id>
                         <phase>post-integration-test</phase>
                         <goals>
                             <goal>stop</goal>
                         </goals>
-                    </execution>
+                    </execution> -->
                 </executions>
             </plugin>
         </plugins>
-        <pluginManagement>
-        	<plugins>
-        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        		<plugin>
-        			<groupId>org.eclipse.m2e</groupId>
-        			<artifactId>lifecycle-mapping</artifactId>
-        			<version>1.0.0</version>
-        			<configuration>
-        				<lifecycleMappingMetadata>
-        					<pluginExecutions>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									org.apache.maven.plugins
-        								</groupId>
-        								<artifactId>
-        									maven-war-plugin
-        								</artifactId>
-        								<versionRange>
-        									[2.2,)
-        								</versionRange>
-        								<goals>
-        									<goal>exploded</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        					</pluginExecutions>
-        				</lifecycleMappingMetadata>
-        			</configuration>
-        		</plugin>
-        	</plugins>
-        </pluginManagement>
     </build>
 
     <dependencies>
+        <!-- GWT -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+
+        <!-- AppEngine -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${gae.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${gae.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-stubs</artifactId>
+            <version>${gae.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <version>${gae.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- GWTP -->
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -230,54 +234,29 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-server-guice</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-crawler</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-crawler-service</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-processors</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
         </dependency>
 
-        <!-- GWT -->
+        <!-- DI Guice -->
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-            <scope>compile</scope>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <version>${gwt.version}</version>
-            <scope>compile</scope>            
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
-
-        <!-- AppEngine -->
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>${gae.version}</version>
-        </dependency>
-
-        <!-- DI -->
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-servlet</artifactId>
@@ -286,6 +265,11 @@
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-assistedinject</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
             <version>${guice.version}</version>
         </dependency>
         <dependency>
@@ -355,5 +339,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
 </project>

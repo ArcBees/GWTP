@@ -1,0 +1,7 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:f="urn:import:com.gwtplatform.carstore.client.application.ui">
+    <g:SimpleLayoutPanel>
+        <f:ShowMorePagerPanel ui:field='pagerPanel'/>
+    </g:SimpleLayoutPanel>
+</ui:UiBinder>

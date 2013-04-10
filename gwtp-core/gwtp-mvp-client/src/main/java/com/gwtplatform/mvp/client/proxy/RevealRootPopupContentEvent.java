@@ -22,21 +22,17 @@ import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
- * This event is fired when a {@link com.gwtplatform.mvp.client.PresenterWidget} wants to reveal itself
- * as a popup at the root of the application. It is typically fired by the
- * {@link com.gwtplatform.mvp.client.PresenterWidget}'s parent.
- *
+ * This event is fired when a {@link com.gwtplatform.mvp.client.PresenterWidget}
+ * wants to reveal itself as a popup at the root of the application. It is
+ * typically fired by the {@link com.gwtplatform.mvp.client.PresenterWidget}'s
+ * parent.<br/>
+ * Use this type of event to reveal popup content that should get added at the
+ * root of the presenter hierarchy.
+ * 
  * @see RevealContentEvent
  * @see RevealRootContentEvent
  * @see RevealRootLayoutContentEvent
- *
- * @author Philippe Beaudoin
- */
-
-/**
- * Use this type of event to reveal popup content that should get added at the
- * root of the presenter hierarchy.
- *
+ * 
  * @author Philippe Beaudoin
  */
 public final class RevealRootPopupContentEvent extends
@@ -45,15 +41,37 @@ public final class RevealRootPopupContentEvent extends
     private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
 
     /**
-     * Fires a {@link RevealRootPopupContentEvent}
-     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-     *
-     * @param source  The source that fires this event ({@link HasHandlers}).
-     * @param content The {@link PresenterWidget} with a {@link PopupView} that wants to set
-     *                itself as root content.
+     * Fires a {@link RevealRootPopupContentEvent} into a source that has access
+     * to an {@link com.google.web.bindery.event.shared.EventBus}.
+     * 
+     * @param source
+     *            The source that fires this event ({@link HasHandlers}).
+     * @param content
+     *            The {@link PresenterWidget} with a {@link PopupView} that
+     *            wants to set itself as root content.
      */
-    public static void fire(final HasHandlers source, final PresenterWidget<? extends PopupView> content) {
-        source.fireEvent(new RevealRootPopupContentEvent(content));
+    public static void fire(final HasHandlers source,
+            final PresenterWidget<? extends PopupView> content) {
+        fire(source, content, true);
+    }
+
+    /**
+     * Fires a {@link RevealRootPopupContentEvent} into a source that has access
+     * to an {@link com.google.web.bindery.event.shared.EventBus}.
+     * 
+     * @param source
+     *            The source that fires this event ({@link HasHandlers}).
+     * @param content
+     *            The {@link PresenterWidget} with a {@link PopupView} that
+     *            wants to set itself as root content.
+     * @param center
+     *            Pass true to center the popup, otherwise its position will not
+     *            be adjusted.
+     */
+    public static void fire(final HasHandlers source,
+            final PresenterWidget<? extends PopupView> content,
+            final boolean center) {
+        source.fireEvent(new RevealRootPopupContentEvent(content, center));
     }
 
     public static Type<RevealRootPopupContentHandler> getType() {
@@ -62,8 +80,17 @@ public final class RevealRootPopupContentEvent extends
 
     private final PresenterWidget<? extends PopupView> content;
 
-    public RevealRootPopupContentEvent(PresenterWidget<? extends PopupView> content) {
+    private final boolean center;
+
+    public RevealRootPopupContentEvent(
+            PresenterWidget<? extends PopupView> content) {
+        this(content, true);
+    }
+
+    public RevealRootPopupContentEvent(
+            PresenterWidget<? extends PopupView> content, boolean center) {
         this.content = content;
+        this.center = center;
     }
 
     @Override
@@ -75,9 +102,12 @@ public final class RevealRootPopupContentEvent extends
         return content;
     }
 
+    public boolean isCentered() {
+        return center;
+    }
+
     @Override
     protected void dispatch(RevealRootPopupContentHandler handler) {
         handler.onRevealRootPopupContent(this);
     }
-
 }
