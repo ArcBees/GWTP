@@ -46,16 +46,14 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * {@link RootPanel} and {@link RootLayoutPanel}.
  * <p/>
  * Fire a {@link RevealRootContentEvent} or {@link RevealRootLayoutContentEvent}
- * to set your presenter at the top level. The
- * choice depends on whether your presenter works as a
- * {@link com.google.gwt.user.client.ui.Panel} or as a
+ * to set your presenter at the top level. The choice depends on whether your
+ * presenter works as a {@link com.google.gwt.user.client.ui.Panel} or as a
  * {@link com.google.gwt.user.client.ui.LayoutPanel}.
  *
  * @author Philippe Beaudoin
  */
-public class RootPresenter extends
-        PresenterWidget<RootPresenter.RootView> implements
-        ResetPresentersHandler, RevealRootContentHandler,
+public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
+        implements ResetPresentersHandler, RevealRootContentHandler,
         RevealRootLayoutContentHandler, RevealRootPopupContentHandler,
         LockInteractionHandler {
 
@@ -136,8 +134,9 @@ public class RootPresenter extends
 
     /**
      * Creates a proxy class for a presenter that can contain tabs.
-     *
-     * @param eventBus The event bus.
+     * 
+     * @param eventBus
+     *            The event bus.
      */
     @Inject
     public RootPresenter(final EventBus eventBus, final RootView view) {
@@ -185,7 +184,11 @@ public class RootPresenter extends
     @Override
     public void onRevealRootPopupContent(
             final RevealRootPopupContentEvent revealContentEvent) {
-        addToPopupSlot(revealContentEvent.getContent());
+        if (revealContentEvent.isCentered()) {
+            addToPopupSlot(revealContentEvent.getContent());
+        } else {
+            addToPopupSlot(revealContentEvent.getContent(), false);
+        }
     }
 
     @Override
