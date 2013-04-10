@@ -17,15 +17,11 @@ import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gwtplatform.carstore.server.authentication.AuthenticationException;
-import com.gwtplatform.carstore.server.authentication.Authenticator;
-import com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider;
-import com.gwtplatform.carstore.server.authentication.PasswordSecurity;
-import com.gwtplatform.carstore.server.authentication.SecurityParameters;
 import com.gwtplatform.carstore.server.dao.UserDao;
 import com.gwtplatform.carstore.server.dao.UserSessionDao;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 @RunWith(JukitoRunner.class)
 public class AuthenticatorTest {
@@ -65,7 +61,7 @@ public class AuthenticatorTest {
         given(passwordSecurity.check(anyString(), anyString())).willReturn(true);
 
         // When
-        User fetchUser = authenticator.authenticateCredentials(A_VALID_USER, A_VALID_PASSWORD);
+        UserDto fetchUser = authenticator.authenticateCredentials(A_VALID_USER, A_VALID_PASSWORD);
 
         // Then
         assertNotNull(fetchUser);
@@ -73,9 +69,9 @@ public class AuthenticatorTest {
     }
 
     @Test(expected = AuthenticationException.class)
-    public void aValidUserWithAnInvalidPasswordShouldntBeAbleToConnect() {
+    public void aValidUserWithAnInvalidPasswordShouldntBeAbleToConnect(User user) {
         // Given
-        given(userDao.findByUsername(A_VALID_USER)).willReturn(mock(User.class));
+        given(userDao.findByUsername(A_VALID_USER)).willReturn(user);
         given(passwordSecurity.check(anyString(), anyString())).willReturn(false);
 
         // When
@@ -100,11 +96,11 @@ public class AuthenticatorTest {
     @Test
     public void logoutShouldDestroyTheSession(UserSessionDao userSessionDao) {
         // Given
-        User user = mock(User.class);
-        given(user.getId()).willReturn(0l);
+        UserDto userDto = mock(UserDto.class);
+        given(userDto.getId()).willReturn(0l);
         
         CurrentUserDto currentUserDto = mock(CurrentUserDto.class);
-        given(currentUserDto.getUser()).willReturn(user);
+        given(currentUserDto.getUser()).willReturn(userDto);
         given(currentUserDtoProvider.get()).willReturn(currentUserDto);
         
         // When

@@ -25,7 +25,7 @@ import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.NoSelectionModel;
 import com.google.gwt.view.client.Range;
 import com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView;
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyView {
@@ -33,14 +33,14 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     @UiField(provided = true)
-    CellTable<Car> carGrid;
+    CellTable<CarDto> carGrid;
 
     @UiField(provided = true)
     SimplePager pager;
 
     private static final int PAGE_SIZE = 10;
     
-    private AsyncDataProvider<Car> asyncDataProvider;
+    private AsyncDataProvider<CarDto> asyncDataProvider;
 
     @Inject
     public CarsView(Binder uiBinder) {
@@ -51,9 +51,9 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
 
     @Override
     public void initDataProvider() {
-        asyncDataProvider = new AsyncDataProvider<Car>() {
+        asyncDataProvider = new AsyncDataProvider<CarDto>() {
             @Override
-            protected void onRangeChanged(HasData<Car> display) {
+            protected void onRangeChanged(HasData<CarDto> display) {
                 Range range = display.getVisibleRange();
                 getUiHandlers().fetchData(range.getStart(), range.getLength());
             }
@@ -63,7 +63,7 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     @Override
-    public HasData<Car> getCarDisplay() {
+    public HasData<CarDto> getCarDisplay() {
         return carGrid;
     }
 
@@ -73,8 +73,8 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     @Override
-    public void displayCars(int offset, List<Car> cars) {
-        asyncDataProvider.updateRowData(offset, cars);
+    public void displayCars(int offset, List<CarDto> carDtos) {
+        asyncDataProvider.updateRowData(offset, carDtos);
     }
 
     @UiHandler("create")
@@ -84,8 +84,8 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     private void initCarGrid() {
-        carGrid = new CellTable<Car>();
-        carGrid.setSelectionModel(new NoSelectionModel<Car>());
+        carGrid = new CellTable<CarDto>();
+        carGrid.setSelectionModel(new NoSelectionModel<CarDto>());
 
         pager = new SimplePager(SimplePager.TextLocation.CENTER);
         pager.setDisplay(carGrid);
@@ -96,24 +96,24 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     private void initDataColumns() {
-        Column<Car, Number> idColumn = new Column<Car, Number>(new NumberCell()) {
+        Column<CarDto, Number> idColumn = new Column<CarDto, Number>(new NumberCell()) {
             @Override
-            public Long getValue(Car car) {
-                return car.getId();
+            public Long getValue(CarDto carDto) {
+                return carDto.getId();
             }
         };
 
-        Column<Car, String> manufacturerColumn = new Column<Car, String>(new TextCell()) {
+        Column<CarDto, String> manufacturerColumn = new Column<CarDto, String>(new TextCell()) {
             @Override
-            public String getValue(Car car) {
-                return car.getManufacturer().getName();
+            public String getValue(CarDto carDto) {
+                return carDto.getManufacturer().getName();
             }
         };
 
-        Column<Car, String> modelColumn = new Column<Car, String>(new TextCell()) {
+        Column<CarDto, String> modelColumn = new Column<CarDto, String>(new TextCell()) {
             @Override
-            public String getValue(Car car) {
-                return car.getModel();
+            public String getValue(CarDto carDto) {
+                return carDto.getModel();
             }
         };
 
@@ -124,26 +124,26 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     private void initActionColumns() {
-        Cell<Car> editCell = new ActionCell<Car>("Edit", new Delegate<Car>() {
+        Cell<CarDto> editCell = new ActionCell<CarDto>("Edit", new Delegate<CarDto>() {
             @Override
-            public void execute(Car car) {
-                getUiHandlers().onEdit(car);
+            public void execute(CarDto carDto) {
+                getUiHandlers().onEdit(carDto);
             }
         });
 
-        Cell<Car> deleteCell = new ActionCell<Car>("Delete", new Delegate<Car>() {
+        Cell<CarDto> deleteCell = new ActionCell<CarDto>("Delete", new Delegate<CarDto>() {
             @Override
-            public void execute(Car car) {
-                Boolean confirm = Window.confirm("Are you sure you want to delete " + car.getModel() + "?");
+            public void execute(CarDto carDto) {
+                Boolean confirm = Window.confirm("Are you sure you want to delete " + carDto.getModel() + "?");
 
                 if (confirm) {
-                    getUiHandlers().onDelete(car);
+                    getUiHandlers().onDelete(carDto);
                 }
             }
         });
 
-        IdentityColumn<Car> editColumn = new IdentityColumn<Car>(editCell);
-        IdentityColumn<Car> deleteColumn = new IdentityColumn<Car>(deleteCell);
+        IdentityColumn<CarDto> editColumn = new IdentityColumn<CarDto>(editCell);
+        IdentityColumn<CarDto> deleteColumn = new IdentityColumn<CarDto>(deleteCell);
 
         carGrid.addColumn(editColumn, "Edit");
         carGrid.addColumn(deleteColumn, "Delete");

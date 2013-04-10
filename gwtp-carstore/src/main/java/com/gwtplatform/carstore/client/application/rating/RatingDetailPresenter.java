@@ -25,8 +25,8 @@ import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dispatch.SaveRatingAction;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -42,9 +42,9 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements RatingDetailUiHandlers,
         ActionBarEvent.ActionBarHandler, GoBackEvent.GoBackHandler {
     public interface MyView extends View, HasUiHandlers<RatingDetailUiHandlers> {
-        void edit(Rating rating);
+        void edit(RatingDto ratingDto);
 
-        void setAllowedCars(List<Car> cars);
+        void setAllowedCars(List<CarDto> carDtos);
 
         void getRating();
     }
@@ -84,10 +84,10 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
     }
 
     @Override
-    public void onSave(Rating rating) {
-        dispatcher.execute(new SaveRatingAction(rating), new ErrorHandlerAsyncCallback<GetResult<Rating>>(this) {
+    public void onSave(RatingDto ratingDto) {
+        dispatcher.execute(new SaveRatingAction(ratingDto), new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
             @Override
-            public void onSuccess(GetResult<Rating> result) {
+            public void onSuccess(GetResult<RatingDto> result) {
                 DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
                         MessageStyle.SUCCESS));
                 placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
@@ -107,9 +107,9 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
         List<ActionType> actions = Arrays.asList(new ActionType[] { ActionType.DONE });
         ChangeActionBarEvent.fire(this, actions, false);
 
-        dispatcher.execute(new GetCarsAction(), new SafeAsyncCallback<GetResults<Car>>() {
+        dispatcher.execute(new GetCarsAction(), new SafeAsyncCallback<GetResults<CarDto>>() {
             @Override
-            public void onSuccess(GetResults<Car> result) {
+            public void onSuccess(GetResults<CarDto> result) {
                 onGetCarsSuccess(result.getResults());
             }
         });
@@ -120,8 +120,8 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
         RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
     }
 
-    private void onGetCarsSuccess(List<Car> cars) {
-        getView().setAllowedCars(cars);
-        getView().edit(new Rating());
+    private void onGetCarsSuccess(List<CarDto> carDtos) {
+        getView().setAllowedCars(carDtos);
+        getView().edit(new RatingDto());
     }
 }

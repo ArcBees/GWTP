@@ -16,21 +16,21 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView;
 import com.gwtplatform.carstore.client.application.cars.car.widget.CarPropertiesEditor;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class CarView extends ViewWithUiHandlers<CarUiHandlers> implements MyView, Editor<Car> {
+public class CarView extends ViewWithUiHandlers<CarUiHandlers> implements MyView, Editor<CarDto> {
     public interface Binder extends UiBinder<Widget, CarView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<Car, CarView> {
+    public interface Driver extends SimpleBeanEditorDriver<CarDto, CarView> {
     }
 
     @UiField
     TextBox model;
     @UiField(provided = true)
-    ValueListBox<Manufacturer> manufacturer;
+    ValueListBox<ManufacturerDto> manufacturer;
     @UiField
     CarPropertiesEditor carProperties;
 
@@ -38,7 +38,7 @@ public class CarView extends ViewWithUiHandlers<CarUiHandlers> implements MyView
 
     @Inject
     public CarView(Binder uiBinder, Driver driver) {
-        manufacturer = new ValueListBox<Manufacturer>(new ManufacturerRenderer());
+        manufacturer = new ValueListBox<ManufacturerDto>(new ManufacturerRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));
@@ -47,23 +47,23 @@ public class CarView extends ViewWithUiHandlers<CarUiHandlers> implements MyView
     }
 
     @Override
-    public void edit(Car car) {
-        if (car.getManufacturer() == null) {
-            car.setManufacturer(manufacturer.getValue());
+    public void edit(CarDto carDto) {
+        if (carDto.getManufacturer() == null) {
+            carDto.setManufacturer(manufacturer.getValue());
         }
 
-        driver.edit(car);
+        driver.edit(carDto);
     }
 
     @Override
-    public void setAllowedManufacturers(List<Manufacturer> manufacturers) {
-        manufacturer.setValue(manufacturers.isEmpty() ? null : manufacturers.get(0));
-        manufacturer.setAcceptableValues(manufacturers);
+    public void setAllowedManufacturers(List<ManufacturerDto> manufacturerDtos) {
+        manufacturer.setValue(manufacturerDtos.isEmpty() ? null : manufacturerDtos.get(0));
+        manufacturer.setAcceptableValues(manufacturerDtos);
     }
 
     @Override
-    public void resetFields(Car car) {
-        driver.edit(car);
+    public void resetFields(CarDto carDto) {
+        driver.edit(carDto);
     }
 
     @Override

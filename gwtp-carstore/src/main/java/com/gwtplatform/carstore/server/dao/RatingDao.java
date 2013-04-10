@@ -1,12 +1,9 @@
 package com.gwtplatform.carstore.server.dao;
 
-import javax.inject.Provider;
-import javax.persistence.EntityManager;
-
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.server.dao.domain.Rating;
 
 public class RatingDao extends BaseDao<Rating> {
-    public RatingDao(Provider<EntityManager> entityManagerProvider) {
+    public RatingDao() {
         super(Rating.class);
     }
 }

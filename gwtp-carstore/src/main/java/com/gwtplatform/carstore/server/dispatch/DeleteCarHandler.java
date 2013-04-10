@@ -20,7 +20,7 @@ public class DeleteCarHandler extends AbstractActionHandler<DeleteCarAction, NoR
 
     @Override
     public NoResults execute(DeleteCarAction action, ExecutionContext context) throws ActionException {
-        carDao.delete(action.getCar());
+        carDao.delete(action.getCar().getId());
 
         return new NoResults();
     }
