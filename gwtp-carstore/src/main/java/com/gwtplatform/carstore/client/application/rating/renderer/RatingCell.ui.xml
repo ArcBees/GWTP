@@ -1,0 +1,48 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'>
+    <ui:with field='name' type='java.lang.String'/>
+    <ui:with field='rating' type='java.lang.String'/>
+
+    <ui:style>
+        .listItemWrapper {
+            padding: 15px 10px;
+        }
+
+        .floatLeft {
+            float: left;
+            font-size: 1em;
+        }
+
+        .floatRight {
+            float: right;
+        }
+
+        .subtitle {
+            color: #ababab;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </ui:style>
+
+    <div class="{style.listItemWrapper}">
+        <div class="{style.floatLeft}">
+            <div>
+                <ui:text from="{name}"/>
+            </div>
+            <div class="{style.subtitle}">
+                <ui:text from="{rating}"/>
+            </div>
+        </div>
+
+        <div class="{style.floatRight}">
+            <div class="removeButton" ui:field="remove">
+                Remove
+            </div>
+        </div>
+
+        <div class="{style.clear}"/>
+    </div>
+</ui:UiBinder>
