@@ -1,0 +1,62 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <ui:with field="resource" type="com.gwtplatform.carstore.client.resources.AppResources"/>
+
+    <ui:style>
+        .loginWrapper {
+            margin-top: 100px;
+            font-family: 'Droid Sans', sans-serif;
+        }
+
+        .loginWrapper h1 {
+            font-size: 1.9em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .loginPanel {
+            width: 60%;
+            margin-right: auto;
+            margin-left: auto;
+            border: 1px solid #45a0ec;
+            padding: 20px;
+        }
+
+        .loginButton {
+            margin-top: 20px;
+            padding: 8px 18px;
+            background-color: #08b3d8;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+        }
+
+        .formRow {
+            margin-bottom: 10px;
+        }
+
+    </ui:style>
+
+    <g:HTMLPanel styleName="{style.loginWrapper}">
+        <h1>Car Store</h1>
+
+        <g:HTMLPanel styleName="{style.loginPanel}" debugId="loginPanel">
+            <div class="{style.formRow}">
+                <g:TextBox ui:field="username" debugId="username"
+                           styleName="{resource.styles.mobileTextField}"/>
+            </div>
+
+            <div class="{style.formRow}">
+                <g:PasswordTextBox ui:field="password" debugId="password"
+                                   styleName="{resource.styles.mobileTextField}"/>
+            </div>
+
+            <g:Button ui:field="login" styleName="{style.loginButton}"
+                      debugId="login" text="Login"/>
+        </g:HTMLPanel>
+    </g:HTMLPanel>
+</ui:UiBinder>

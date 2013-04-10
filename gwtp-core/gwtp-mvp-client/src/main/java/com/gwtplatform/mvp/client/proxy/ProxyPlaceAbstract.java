@@ -239,6 +239,12 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
                     }
                 });
             }
+
+            @Override
+            protected void failure(final Throwable caught) {
+                // Unlock place manager to prevent UI "freeze" caused by LockInteractionEvent
+                placeManager.unlock();
+            }
         });
     }
 
