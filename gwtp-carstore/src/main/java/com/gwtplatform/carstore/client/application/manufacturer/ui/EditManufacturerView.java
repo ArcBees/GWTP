@@ -12,15 +12,15 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.PopupViewWithUiHandlers;
 
 public class EditManufacturerView extends PopupViewWithUiHandlers<EditManufacturerUiHandlers> implements MyView,
-        Editor<Manufacturer> {
+        Editor<ManufacturerDto> {
     public interface Binder extends UiBinder<Widget, EditManufacturerView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<Manufacturer, EditManufacturerView> {
+    public interface Driver extends SimpleBeanEditorDriver<ManufacturerDto, EditManufacturerView> {
     }
 
     @UiField
@@ -40,8 +40,8 @@ public class EditManufacturerView extends PopupViewWithUiHandlers<EditManufactur
     }
 
     @Override
-    public void edit(Manufacturer manufacturer) {
-        driver.edit(manufacturer);
+    public void edit(ManufacturerDto manufacturerDto) {
+        driver.edit(manufacturerDto);
     }
 
     @UiHandler("save")

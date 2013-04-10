@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers> implements MyView {
@@ -30,9 +30,9 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
     }
 
     @UiField(provided = true)
-    CellTable<Manufacturer> manufacturerGrid;
+    CellTable<ManufacturerDto> manufacturerGrid;
 
-    private final ListDataProvider<Manufacturer> manufacturerDataProvider;
+    private final ListDataProvider<ManufacturerDto> manufacturerDataProvider;
 
     @Inject
     public ManufacturerView(Binder uiBinder) {
@@ -40,33 +40,33 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
         
         initWidget(uiBinder.createAndBindUi(this));
 
-        manufacturerDataProvider = new ListDataProvider<Manufacturer>();
+        manufacturerDataProvider = new ListDataProvider<ManufacturerDto>();
         manufacturerDataProvider.addDataDisplay(manufacturerGrid);
     }
 
     @Override
-    public void displayManufacturers(List<Manufacturer> manufacturers) {
+    public void displayManufacturers(List<ManufacturerDto> manufacturerDtos) {
         manufacturerDataProvider.getList().clear();
-        manufacturerDataProvider.getList().addAll(manufacturers);
+        manufacturerDataProvider.getList().addAll(manufacturerDtos);
     }
 
     @Override
-    public void addManufacturer(Manufacturer manufacturer) {
-        manufacturerDataProvider.getList().add(manufacturer);
+    public void addManufacturer(ManufacturerDto manufacturerDto) {
+        manufacturerDataProvider.getList().add(manufacturerDto);
     }
 
     @Override
-    public void removeManufacturer(Manufacturer manufacturer) {
-        manufacturerDataProvider.getList().remove(manufacturer);
+    public void removeManufacturer(ManufacturerDto manufacturerDto) {
+        manufacturerDataProvider.getList().remove(manufacturerDto);
     }
 
     @Override
-    public void replaceManufacturer(Manufacturer oldManufacturer, Manufacturer newManufacturer) {
-        List<Manufacturer> manufacturers = manufacturerDataProvider.getList();
-        int index = manufacturers.indexOf(oldManufacturer);
+    public void replaceManufacturer(ManufacturerDto oldManufacturer, ManufacturerDto newManufacturer) {
+        List<ManufacturerDto> manufacturerDtos = manufacturerDataProvider.getList();
+        int index = manufacturerDtos.indexOf(oldManufacturer);
 
-        manufacturers.add(index, newManufacturer);
-        manufacturers.remove(index + 1);
+        manufacturerDtos.add(index, newManufacturer);
+        manufacturerDtos.remove(index + 1);
     }
 
     @UiHandler("create")
@@ -75,25 +75,25 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
     }
 
     private void initManufacturerGrid() {
-        manufacturerGrid = new CellTable<Manufacturer>();
-        manufacturerGrid.setSelectionModel(new NoSelectionModel<Manufacturer>());
+        manufacturerGrid = new CellTable<ManufacturerDto>();
+        manufacturerGrid.setSelectionModel(new NoSelectionModel<ManufacturerDto>());
 
         initDataColumns();
         initActionColumns();
     }
 
     private void initDataColumns() {
-        Column<Manufacturer, Number> idColumn = new Column<Manufacturer, Number>(new NumberCell()) {
+        Column<ManufacturerDto, Number> idColumn = new Column<ManufacturerDto, Number>(new NumberCell()) {
             @Override
-            public Long getValue(Manufacturer manufacturer) {
-                return manufacturer.getId();
+            public Long getValue(ManufacturerDto manufacturerDto) {
+                return manufacturerDto.getId();
             }
         };
 
-        Column<Manufacturer, String> nameColumn = new Column<Manufacturer, String>(new TextCell()) {
+        Column<ManufacturerDto, String> nameColumn = new Column<ManufacturerDto, String>(new TextCell()) {
             @Override
-            public String getValue(Manufacturer manufacturer) {
-                return manufacturer.getName();
+            public String getValue(ManufacturerDto manufacturerDto) {
+                return manufacturerDto.getName();
             }
         };
 
@@ -103,26 +103,26 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
     }
 
     private void initActionColumns() {
-        Cell<Manufacturer> editCell = new ActionCell<Manufacturer>("Edit", new Delegate<Manufacturer>() {
+        Cell<ManufacturerDto> editCell = new ActionCell<ManufacturerDto>("Edit", new Delegate<ManufacturerDto>() {
             @Override
-            public void execute(Manufacturer manufacturer) {
-                getUiHandlers().onEdit(manufacturer);
+            public void execute(ManufacturerDto manufacturerDto) {
+                getUiHandlers().onEdit(manufacturerDto);
             }
         });
 
-        Cell<Manufacturer> deleteCell = new ActionCell<Manufacturer>("Delete", new Delegate<Manufacturer>() {
+        Cell<ManufacturerDto> deleteCell = new ActionCell<ManufacturerDto>("Delete", new Delegate<ManufacturerDto>() {
             @Override
-            public void execute(Manufacturer manufacturer) {
-                Boolean confirm = Window.confirm("Are you sure you want to delete " + manufacturer.getName() + "?");
+            public void execute(ManufacturerDto manufacturerDto) {
+                Boolean confirm = Window.confirm("Are you sure you want to delete " + manufacturerDto.getName() + "?");
 
                 if (confirm) {
-                    getUiHandlers().onDelete(manufacturer);
+                    getUiHandlers().onDelete(manufacturerDto);
                 }
             }
         });
 
-        IdentityColumn<Manufacturer> editColumn = new IdentityColumn<Manufacturer>(editCell);
-        IdentityColumn<Manufacturer> deleteColumn = new IdentityColumn<Manufacturer>(deleteCell);
+        IdentityColumn<ManufacturerDto> editColumn = new IdentityColumn<ManufacturerDto>(editCell);
+        IdentityColumn<ManufacturerDto> deleteColumn = new IdentityColumn<ManufacturerDto>(deleteCell);
 
         manufacturerGrid.addColumn(editColumn, "Edit");
         manufacturerGrid.addColumn(deleteColumn, "Delete");

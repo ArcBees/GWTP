@@ -18,7 +18,7 @@ import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
 import com.gwtplatform.carstore.client.application.renderer.EnumCell;
 import com.gwtplatform.carstore.client.resources.NavigationListStyle;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -56,8 +56,8 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     @Override
     public void enableUserOptions(CurrentUser currentUser) {
         userOptions.setVisible(true);
-        User user = currentUser.getUser();
-        name.setText(user.getFirstName());
+        UserDto userDto = currentUser.getUser();
+        name.setText(userDto.getFirstName());
     }
 
     @Override

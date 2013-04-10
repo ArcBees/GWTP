@@ -5,8 +5,9 @@ import javax.inject.Provider;
 import javax.servlet.http.HttpSession;
 
 import com.gwtplatform.carstore.server.dao.UserDao;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 public class CurrentUserDtoProvider implements Provider<CurrentUserDto> {
     private final UserDao userDao;
@@ -23,13 +24,13 @@ public class CurrentUserDtoProvider implements Provider<CurrentUserDto> {
         HttpSession session = sessionProvider.get();
         Long currentUserId = (Long) session.getAttribute(SecurityParameters.getUserSessionKey());
 
-        User user = null;
+        UserDto userDto = null;
         if (currentUserId != null) {
-            user = userDao.get(currentUserId);
+            userDto = User.createDto(userDao.get(currentUserId));
         }
 
-        boolean isLoggedIn = user != null;
+        boolean isLoggedIn = userDto != null;
 
-        return new CurrentUserDto(isLoggedIn, user);
+        return new CurrentUserDto(isLoggedIn, userDto);
     }
 }

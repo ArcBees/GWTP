@@ -3,14 +3,14 @@ package com.gwtplatform.carstore.client.application.cars.car;
 import javax.inject.Inject;
 
 import com.google.inject.Provider;
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
 public class CarPresenterProvider implements Provider<CarPresenter> {
     private final CarPresenterFactory carPresenterFactory;
 
     private CarPresenter.MyProxy proxy;
     private CarPresenter carPresenter;
-    private Car car;
+    private CarDto carDto;
 
     @Inject
     public CarPresenterProvider(final CarPresenterFactory carPresenterFactory) {
@@ -22,7 +22,7 @@ public class CarPresenterProvider implements Provider<CarPresenter> {
         assert proxy != null : "You must call setProxy first";
 
         if (carPresenter == null) {
-            carPresenter = carPresenterFactory.create(proxy, car);
+            carPresenter = carPresenterFactory.create(proxy, carDto);
         }
 
         return carPresenter;
@@ -32,7 +32,7 @@ public class CarPresenterProvider implements Provider<CarPresenter> {
         this.proxy = proxy;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCar(CarDto carDto) {
+        this.carDto = carDto;
     }
 }

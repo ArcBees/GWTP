@@ -1,19 +1,19 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
 public class DeleteCarAction extends ActionImpl<NoResults> {
-    private Car car;
+    private CarDto carDto;
 
     protected DeleteCarAction() {
     }
 
-    public DeleteCarAction(Car car) {
-        this.car = car;
+    public DeleteCarAction(CarDto carDto) {
+        this.carDto = carDto;
     }
 
-    public Car getCar() {
-        return car;
+    public CarDto getCar() {
+        return carDto;
     }
 
     @Override

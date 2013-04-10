@@ -1,12 +1,9 @@
 package com.gwtplatform.carstore.server.dao;
 
-import javax.inject.Provider;
-import javax.persistence.EntityManager;
-
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.server.dao.domain.Manufacturer;
 
 public class ManufacturerDao extends BaseDao<Manufacturer> {
-    public ManufacturerDao(Provider<EntityManager> entityManagerProvider) {
+    public ManufacturerDao() {
         super(Manufacturer.class);
     }
 }

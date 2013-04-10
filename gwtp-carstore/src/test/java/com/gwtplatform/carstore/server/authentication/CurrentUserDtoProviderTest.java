@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.mock;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -16,11 +15,10 @@ import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider;
-import com.gwtplatform.carstore.server.authentication.SecurityParameters;
 import com.gwtplatform.carstore.server.dao.UserDao;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 @RunWith(JukitoRunner.class)
 public class CurrentUserDtoProviderTest {
@@ -41,18 +39,18 @@ public class CurrentUserDtoProviderTest {
     CurrentUserDtoProvider currentUserDtoProvider;
 
     @Test
-    public void aValidSessionShouldReturnTheCurrentUser() {
+    public void aValidSessionShouldReturnTheCurrentUser(User user) {
         // Given
-        User user = mock(User.class);
         given(httpSession.getAttribute(SecurityParameters.getUserSessionKey())).willReturn(A_USER_ID);
         given(userDao.get(A_USER_ID)).willReturn(user);
+        UserDto userDto = User.createDto(user);
 
         // When
         CurrentUserDto currentUserDto = currentUserDtoProvider.get();
 
         // Then
         assertTrue(currentUserDto.isLoggedIn());
-        assertEquals(user, currentUserDto.getUser());
+        assertEquals(userDto, currentUserDto.getUser());
     }
 
     @Test
