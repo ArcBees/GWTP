@@ -1,0 +1,33 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <ui:style>
+        .globalWrapper {
+            position: relative;
+        }
+
+        .messagesWrapper {
+            width: 300px;
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            margin-left: -150px;
+        }
+
+        .container {
+            width: 1000px;
+            margin: 20px auto;
+        }
+    </ui:style>
+
+    <g:HTMLPanel styleName="{style.globalWrapper}">
+        <g:SimplePanel ui:field="header"/>
+
+        <g:SimplePanel ui:field="messages" styleName="{style.messagesWrapper}"/>
+
+        <g:HTMLPanel ui:field="container" styleName="{style.container}">
+            <g:SimplePanel ui:field="main"/>
+        </g:HTMLPanel>
+        <g:InlineLabel debugId="dom"/>
+    </g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,25 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:c="urn:import:com.gwtplatform.carstore.client.application.cars.car.widget">
+    <g:PopupPanel glassEnabled="true" autoHideEnabled="true" animationEnabled="true">
+        <g:HTMLPanel>
+            <div>
+                <g:InlineLabel>Model:</g:InlineLabel>
+                <g:TextBox ui:field="model"/>
+            </div>
+
+            <div>
+                <g:InlineLabel>Manufacturer:</g:InlineLabel>
+                <g:ValueListBox ui:field="manufacturer"/>
+            </div>
+
+            <div>
+                <c:CarPropertiesEditor ui:field="carProperties"/>
+            </div>
+
+            <div>
+                <g:Button ui:field="save">Save</g:Button>
+                <g:Button ui:field="close">Close</g:Button>
+            </div>
+        </g:HTMLPanel>
+    </g:PopupPanel>
+</ui:UiBinder>
