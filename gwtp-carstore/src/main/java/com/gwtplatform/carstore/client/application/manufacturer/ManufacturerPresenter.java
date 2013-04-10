@@ -23,7 +23,7 @@ import com.gwtplatform.carstore.shared.dispatch.DeleteManufacturerAction;
 import com.gwtplatform.carstore.shared.dispatch.GetManufacturersAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dispatch.NoResults;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -40,13 +40,13 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements ManufacturerUiHandlers,
         ActionBarEvent.ActionBarHandler {
     public interface MyView extends View, HasUiHandlers<ManufacturerUiHandlers> {
-        void addManufacturer(Manufacturer manufacturer);
+        void addManufacturer(ManufacturerDto manufacturerDto);
 
-        void displayManufacturers(List<Manufacturer> manufacturers);
+        void displayManufacturers(List<ManufacturerDto> manufacturerDtos);
 
-        void removeManufacturer(Manufacturer manufacturer);
+        void removeManufacturer(ManufacturerDto manufacturerDto);
 
-        void replaceManufacturer(Manufacturer oldManufacturer, Manufacturer newManufacturer);
+        void replaceManufacturer(ManufacturerDto oldManufacturer, ManufacturerDto newManufacturer);
     }
 
     @ProxyCodeSplit
@@ -59,7 +59,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     private final PlaceManager placeManager;
     private final EditManufacturerPresenter editManufacturerPresenter;
 
-    private Manufacturer editingManufacturer;
+    private ManufacturerDto editingManufacturer;
 
     @Inject
     public ManufacturerPresenter(EventBus eventBus, MyView view, MyProxy proxy, DispatchAsync dispatcher,
@@ -81,16 +81,16 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     }
 
     @Override
-    public void onDetail(Manufacturer manufacturer) {
+    public void onDetail(ManufacturerDto manufacturerDto) {
         PlaceRequest placeRequest = new PlaceRequest(NameTokens.getDetailManufacturer());
-        placeRequest = placeRequest.with("id", String.valueOf(manufacturer.getId()));
+        placeRequest = placeRequest.with("id", String.valueOf(manufacturerDto.getId()));
         placeManager.revealPlace(placeRequest);
     }
 
     @Override
-    public void onEdit(Manufacturer manufacturer) {
-        editingManufacturer = manufacturer;
-        editManufacturerPresenter.edit(manufacturer);
+    public void onEdit(ManufacturerDto manufacturerDto) {
+        editingManufacturer = manufacturerDto;
+        editManufacturerPresenter.edit(manufacturerDto);
     }
 
     @Override
@@ -100,11 +100,11 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     }
 
     @Override
-    public void onDelete(final Manufacturer manufacturer) {
-        dispatcher.execute(new DeleteManufacturerAction(manufacturer), new ErrorHandlerAsyncCallback<NoResults>(this) {
+    public void onDelete(final ManufacturerDto manufacturerDto) {
+        dispatcher.execute(new DeleteManufacturerAction(manufacturerDto), new ErrorHandlerAsyncCallback<NoResults>(this) {
             @Override
             public void onSuccess(NoResults noResults) {
-                getView().removeManufacturer(manufacturer);
+                getView().removeManufacturer(manufacturerDto);
             }
         });
     }
@@ -114,9 +114,9 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(new ActionType[] { ActionType.ADD }), true);
 
-        dispatcher.execute(new GetManufacturersAction(), new SafeAsyncCallback<GetResults<Manufacturer>>() {
+        dispatcher.execute(new GetManufacturersAction(), new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
             @Override
-            public void onSuccess(GetResults<Manufacturer> result) {
+            public void onSuccess(GetResults<ManufacturerDto> result) {
                 getView().displayManufacturers(result.getResults());
             }
         });

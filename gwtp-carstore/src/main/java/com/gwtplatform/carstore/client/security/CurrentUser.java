@@ -1,11 +1,11 @@
 package com.gwtplatform.carstore.client.security;
 
-import com.gwtplatform.carstore.shared.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 public class CurrentUser {
     private Boolean loggedIn;
-    private User user;
+    private UserDto userDto;
 
     public CurrentUser() {
         loggedIn = false;
@@ -29,11 +29,11 @@ public class CurrentUser {
         this.loggedIn = loggedIn;
     }
 
-    public User getUser() {
-        return user;
+    public UserDto getUser() {
+        return userDto;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserDto userDto) {
+        this.userDto = userDto;
     }
 }

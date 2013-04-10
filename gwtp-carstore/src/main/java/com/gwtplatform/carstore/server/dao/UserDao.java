@@ -1,14 +1,9 @@
 package com.gwtplatform.carstore.server.dao;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.persistence.EntityManager;
-
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.User;
 
 public class UserDao extends BaseDao<User> {
-    @Inject
-    public UserDao(Provider<EntityManager> entityManagerProvider) {
+    public UserDao() {
         super(User.class);
     }
 

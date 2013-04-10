@@ -14,7 +14,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwtplatform.carstore.client.application.rating.renderer.RatingCellFactory;
 import com.gwtplatform.carstore.client.resources.MobileDataListStyle;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class RatingMobileView extends ViewWithUiHandlers<RatingUiHandlers> implements RatingPresenter.MyView {
@@ -22,49 +22,49 @@ public class RatingMobileView extends ViewWithUiHandlers<RatingUiHandlers> imple
     }
 
     @UiField(provided = true)
-    CellList<Rating> ratingList;
+    CellList<RatingDto> ratingList;
 
-    private final ListDataProvider<Rating> ratingDataProvider;
-    private final SingleSelectionModel<Rating> selectionModel;
+    private final ListDataProvider<RatingDto> ratingDataProvider;
+    private final SingleSelectionModel<RatingDto> selectionModel;
 
     @Inject
     public RatingMobileView(Binder uiBinder, RatingCellFactory ratingCellFactory,
             MobileDataListStyle mobileDataListStyle) {
-        ratingList = new CellList<Rating>(ratingCellFactory.create(setupRemoveAction()), mobileDataListStyle);
+        ratingList = new CellList<RatingDto>(ratingCellFactory.create(setupRemoveAction()), mobileDataListStyle);
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        ratingDataProvider = new ListDataProvider<Rating>();
+        ratingDataProvider = new ListDataProvider<RatingDto>();
         ratingDataProvider.addDataDisplay(ratingList);
-        selectionModel = new SingleSelectionModel<Rating>();
+        selectionModel = new SingleSelectionModel<RatingDto>();
         ratingList.setSelectionModel(selectionModel);
     }
 
     @Override
-    public void displayRatings(List<Rating> ratings) {
+    public void displayRatings(List<RatingDto> ratingDtos) {
         ratingDataProvider.getList().clear();
-        ratingDataProvider.getList().addAll(ratings);
+        ratingDataProvider.getList().addAll(ratingDtos);
         ratingDataProvider.refresh();
-        ratingList.setPageSize(ratings.size());
+        ratingList.setPageSize(ratingDtos.size());
     }
 
     @Override
-    public void addRating(Rating rating) {
-        ratingDataProvider.getList().add(rating);
+    public void addRating(RatingDto ratingDto) {
+        ratingDataProvider.getList().add(ratingDto);
     }
 
     @Override
-    public void removeRating(Rating rating) {
-        ratingDataProvider.getList().remove(rating);
+    public void removeRating(RatingDto ratingDto) {
+        ratingDataProvider.getList().remove(ratingDto);
     }
 
-    private ActionCell.Delegate<Rating> setupRemoveAction() {
-        return new ActionCell.Delegate<Rating>() {
+    private ActionCell.Delegate<RatingDto> setupRemoveAction() {
+        return new ActionCell.Delegate<RatingDto>() {
             @Override
-            public void execute(Rating rating) {
-                Boolean confirm = Window.confirm("Are you sure you want to delete" + rating.toString() + "?");
+            public void execute(RatingDto ratingDto) {
+                Boolean confirm = Window.confirm("Are you sure you want to delete" + ratingDto.toString() + "?");
                 if (confirm) {
-                    getUiHandlers().onDelete(rating);
+                    getUiHandlers().onDelete(ratingDto);
                 }
             }
         };

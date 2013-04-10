@@ -14,7 +14,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView;
 import com.gwtplatform.carstore.client.application.manufacturer.renderer.ManufacturerCell;
 import com.gwtplatform.carstore.client.resources.MobileDataListStyle;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class ManufacturerMobileView extends ViewWithUiHandlers<ManufacturerUiHandlers> implements MyView {
@@ -22,21 +22,21 @@ public class ManufacturerMobileView extends ViewWithUiHandlers<ManufacturerUiHan
     }
 
     @UiField(provided = true)
-    CellList<Manufacturer> manufacturerList;
+    CellList<ManufacturerDto> manufacturerList;
 
-    private final ListDataProvider<Manufacturer> manufacturerDataProvider;
-    private final SingleSelectionModel<Manufacturer> selectionModel;
+    private final ListDataProvider<ManufacturerDto> manufacturerDataProvider;
+    private final SingleSelectionModel<ManufacturerDto> selectionModel;
 
     @Inject
     public ManufacturerMobileView(Binder uiBinder,
             ManufacturerCell manufacturerCell, MobileDataListStyle mobileDataListStyle) {
-        manufacturerList = new CellList<Manufacturer>(manufacturerCell, mobileDataListStyle);
+        manufacturerList = new CellList<ManufacturerDto>(manufacturerCell, mobileDataListStyle);
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        manufacturerDataProvider = new ListDataProvider<Manufacturer>();
+        manufacturerDataProvider = new ListDataProvider<ManufacturerDto>();
         manufacturerDataProvider.addDataDisplay(manufacturerList);
-        selectionModel = new SingleSelectionModel<Manufacturer>();
+        selectionModel = new SingleSelectionModel<ManufacturerDto>();
         manufacturerList.setSelectionModel(selectionModel);
 
         selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
@@ -48,27 +48,27 @@ public class ManufacturerMobileView extends ViewWithUiHandlers<ManufacturerUiHan
     }
 
     @Override
-    public void displayManufacturers(List<Manufacturer> manufacturers) {
+    public void displayManufacturers(List<ManufacturerDto> manufacturerDtos) {
         manufacturerDataProvider.getList().clear();
-        manufacturerDataProvider.getList().addAll(manufacturers);
+        manufacturerDataProvider.getList().addAll(manufacturerDtos);
     }
 
     @Override
-    public void addManufacturer(Manufacturer manufacturer) {
-        manufacturerDataProvider.getList().add(manufacturer);
+    public void addManufacturer(ManufacturerDto manufacturerDto) {
+        manufacturerDataProvider.getList().add(manufacturerDto);
     }
 
     @Override
-    public void removeManufacturer(Manufacturer manufacturer) {
-        manufacturerDataProvider.getList().remove(manufacturer);
+    public void removeManufacturer(ManufacturerDto manufacturerDto) {
+        manufacturerDataProvider.getList().remove(manufacturerDto);
     }
 
     @Override
-    public void replaceManufacturer(Manufacturer oldManufacturer, Manufacturer newManufacturer) {
-        List<Manufacturer> manufacturers = manufacturerDataProvider.getList();
-        int index = manufacturers.indexOf(oldManufacturer);
+    public void replaceManufacturer(ManufacturerDto oldManufacturer, ManufacturerDto newManufacturer) {
+        List<ManufacturerDto> manufacturerDtos = manufacturerDataProvider.getList();
+        int index = manufacturerDtos.indexOf(oldManufacturer);
 
-        manufacturers.add(index, newManufacturer);
-        manufacturers.remove(index + 1);
+        manufacturerDtos.add(index, newManufacturer);
+        manufacturerDtos.remove(index + 1);
     }
 }
