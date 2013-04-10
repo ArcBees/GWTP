@@ -1,0 +1,149 @@
+@external gwt-TabBar, gwt-TabBarFirst, gwt-TabBarRest, gwt-TabBarItem, gwt-TabBarItem-wrapper,
+          gwt-TabBarItem-selected, gwt-TabBarItem-wrapper-selected;
+
+.message {
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: solid 1px;
+}
+
+.close {
+    position: absolute;
+    font-weight: bold;
+    top: 5px;
+    right: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.success {
+    color: #293a25;
+    background-color: #cee4c8;
+    border-color: #a2b89e;
+}
+
+.error {
+    color: #FF0010;
+    background-color: #e4cfc8;
+    border-color: #b8a6a3;
+}
+
+@sprite .doneAction {
+    gwt-image: "icDone";
+    border: none;
+}
+
+@sprite .addAction {
+    gwt-image: "icAdd";
+    border: none;
+}
+
+@sprite .editAction {
+    gwt-image: "icUpdate";
+    border: none;
+}
+
+@sprite .deleteAction {
+    gwt-image: "icDelete";
+    border: none;
+}
+
+@sprite .menuAction {
+    gwt-image: "icMenu";
+    border: none;
+}
+
+.mobileTextField {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #aeaeae;
+    padding-bottom: 6px;
+    font-size: 1.1em;
+}
+
+.gwt-PopupPanel {
+    background-color: #fff;
+    padding: 10px;
+    height: auto;
+    z-index: 100;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+}
+
+.gwt-TabBar {
+    font-family: 'Droid Sans', sans-serif;
+    background-color: #545454;
+    overflow: hidden;
+    font-size: 1em;
+    padding-bottom: 0px;
+    border-collapse: inherit;
+}
+
+.gwt-TabBar .gwt-TabBarItem {
+    background: none;
+    color: #aeaeae ;
+}
+
+.gwt-TabBar .gwt-TabBarItem-wrapper {
+    padding: 10px 0px;
+    margin-bottom: 0px;
+    border-bottom: 6px solid #545454;
+    min-width: 120px;
+}
+
+.gwt-TabBar .gwt-TabBarItem-selected {
+    background: none;
+    color: #ffffff;
+}
+
+.gwt-TabBar .gwt-TabBarItem-wrapper-selected {
+    background: none;
+    border-bottom: 6px solid #45a0ec;
+    margin-bottom: 0px;
+    min-width: 130px;
+    position: relative;
+}
+
+.gwt-TabBar .gwt-TabBarItem-wrapper .closeButton {
+    display: none;
+}
+
+@sprite .gwt-TabBar .gwt-TabBarItem-wrapper-selected .closeButton {
+    display: block;
+    gwt-image: "removeSmall";
+    padding: 5px;
+    background-color: #910000;
+    background-position: center;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+}
+
+.bigTitle {
+    color: #545454;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #DADADA;
+}
+
+.bigTitle h2 {
+    font-weight: normal;
+    float: left;
+    font-size: 25px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.bigTitle div {
+    float: right;
+}
+
+
+
