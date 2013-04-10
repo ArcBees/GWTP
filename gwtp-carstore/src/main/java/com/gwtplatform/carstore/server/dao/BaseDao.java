@@ -13,9 +13,9 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.LoadType;
 import com.gwtplatform.carstore.server.dao.objectify.Ofy;
 import com.gwtplatform.carstore.server.dao.objectify.OfyFactory;
-import com.gwtplatform.carstore.shared.domain.BaseEntity;
+import com.gwtplatform.carstore.shared.dto.Dto;
 
-public class BaseDao<T extends BaseEntity> {
+public class BaseDao<T extends Dto> {
     private final Class<T> clazz;
 
     @Inject
@@ -76,6 +76,11 @@ public class BaseDao<T extends BaseEntity> {
 
     public void delete(List<T> objects) {
         ofy().delete().entities(objects);
+    }
+    
+    public void deleteAll() {
+        List<T> entities = getAll();
+        ofy().delete().entities(entities);
     }
 
     public List<T> get(List<Key<T>> keys) {

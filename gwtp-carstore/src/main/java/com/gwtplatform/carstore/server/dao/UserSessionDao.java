@@ -25,9 +25,9 @@ public class UserSessionDao extends BaseDao<UserSession> {
         this.userDao = userDao;
     }
 
-    public String createLoggedInCookie(UserDto userDto) {
+    public String createSessionCookie(UserDto userDto) {
         String cookie = UUID.randomUUID().toString();
-        UserSession userSession = new UserSession(userDto, cookie);
+        UserSession userSession = new UserSession(userDto.getId(), cookie);
         put(userSession);
 
         logger.info("UserSessionDao.createLoggedInCookie(user) user=" + userDto + " userSessionCookie="
@@ -48,9 +48,16 @@ public class UserSessionDao extends BaseDao<UserSession> {
     public UserDto getUserFromCookie(String loggedInCookie) {
         Date twoWeeksAgo = getTwoWeeksAgo();
 
-        UserSession userSession = ofy().query(UserSession.class).filter("cookie", loggedInCookie).filter(
-                "dateCreated > ", twoWeeksAgo).first().getValue();
-        Long userId = userSession.getId();
+        UserSession userSession = ofy().query(UserSession.class)
+                .filter("cookie", loggedInCookie)
+                .filter("dateCreated > ", twoWeeksAgo)
+                .first().getValue();
+        
+        if (userSession == null) {
+            return null;
+        }
+        
+        Long userId = userSession.getUserId();
 
         UserDto userDto = null;
         if (userId != null) {
