@@ -1,4 +1,4 @@
-<%@ page import="com.arcbees.carsample.shared.domain.Car" %>
+<%@ page import="com.gwtplatform.carstore.shared.domain.Car" %>
 <%@ page import="java.util.List" %>
 <%
     List<Car> carList = (List<Car>)request.getAttribute("cars");

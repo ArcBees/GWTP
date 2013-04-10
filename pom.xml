@@ -1,10 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
+        <relativePath></relativePath>
     </parent>
 
     <groupId>com.gwtplatform</groupId>
@@ -192,31 +194,31 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<!-- Maven -->
+        <!-- Maven -->
         <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-        <gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
+        <gwt-maven-plugin.version>2.5.1</gwt-maven-plugin.version>
         <lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
         <maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
         <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
-        <maven-gae-plugin.version>0.9.5</maven-gae-plugin.version>
+        <maven-gae-plugin.version>0.9.6-SNAPSHOT</maven-gae-plugin.version>
         <maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
         <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
         <maven-war-plugin.version>2.2</maven-war-plugin.version>
-		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
+        <maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 
-		<!-- Client -->
-		<gwt.version>2.5.1</gwt.version>
-		<gin.version>2.0.0</gin.version>
-		<gwtquery.version>1.3.2</gwtquery.version>
-	
-		<!-- Server -->
+        <!-- Client -->
+        <gwt.version>2.5.1</gwt.version>
+        <gin.version>2.0.0</gin.version>
+        <gwtquery.version>1.3.2</gwtquery.version>
+
+        <!-- Server -->
         <aopalliance.version>1.0</aopalliance.version>
         <cglib.version>2.2</cglib.version>
-        <gae.version>1.7.4</gae.version>
+        <gae.version>1.7.6</gae.version>
         <guice.version>3.0</guice.version>
         <javax.inject.version>1</javax.inject.version>
         <guava.version>14.0-rc1</guava.version>
@@ -226,7 +228,7 @@
         <spring.version>3.1.2.RELEASE</spring.version>
         <velocity.version>1.7</velocity.version>
         <jbcrypt.version>0.3m</jbcrypt.version>
-        
+
         <!-- Testing -->
         <jukito.version>1.1</jukito.version>
         <junit.version>4.11</junit.version>
@@ -235,7 +237,7 @@
         <selenium.version>2.25.0</selenium.version>
         <cucumber.version>1.0.14</cucumber.version>
         <jetty-plugin.version>8.1.0.v20120127</jetty-plugin.version>
-        
+
         <!-- GitHub Sites -->
         <github.version>0.7</github.version>
 
@@ -256,6 +258,14 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <!-- TODO remove? Using for GAE maven plugin, need to release it. -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype.snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
         <pluginManagement>
@@ -340,26 +350,66 @@
                     <groupId>net.kindleit</groupId>
                     <artifactId>maven-gae-plugin</artifactId>
                     <version>${maven-gae-plugin.version}</version>
+                    <configuration>
+                        <unpackVersion>${gae.version}</unpackVersion>
+
+                        <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
+                        <serverId>appengine-credentials</serverId>
+                        <splitJars>true</splitJars>
+                    </configuration>
                     <dependencies>
+                        <!-- Google App Engine API -->
                         <dependency>
-                            <groupId>net.kindleit</groupId>
-                            <artifactId>gae-runtime</artifactId>
+                            <groupId>com.google.appengine</groupId>
+                            <artifactId>appengine-api-1.0-sdk</artifactId>
                             <version>${gae.version}</version>
-                            <type>pom</type>
+                        </dependency>
+                        <!-- Google App Engine Runtime Dependencies -->
+                        <dependency>
+                            <groupId>org.apache.geronimo.specs</groupId>
+                            <artifactId>geronimo-jta_1.1_spec</artifactId>
+                            <version>1.1.1</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.geronimo.specs</groupId>
+                            <artifactId>geronimo-jpa_3.0_spec</artifactId>
+                            <version>1.1.1</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>javax.jdo</groupId>
+                            <artifactId>jdo2-api</artifactId>
+                            <version>2.3-eb</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.datanucleus</groupId>
+                            <artifactId>datanucleus-core</artifactId>
+                            <version>1.1.5</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.google.appengine.orm</groupId>
+                            <artifactId>datanucleus-appengine</artifactId>
+                            <version>1.0.10</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.datanucleus</groupId>
+                            <artifactId>datanucleus-jpa</artifactId>
+                            <version>1.1.5</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <!-- App Engine Runtime Dependencies -->
+                        <dependency>
+                            <groupId>com.google.appengine</groupId>
+                            <artifactId>appengine-tools-sdk</artifactId>
+                            <version>${gae.version}</version>
                         </dependency>
                     </dependencies>
-                    <executions>
-                        <execution>
-                            <id />
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>unpack</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
 
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven 
                     build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -385,7 +435,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>net.kindleit</groupId>
                                         <artifactId>maven-gae-plugin</artifactId>
-                                        <versionRange>[0.7.0,)</versionRange>
+                                        <versionRange>[0.9.0,)</versionRange>
                                         <goals>
                                             <goal>unpack</goal>
                                         </goals>
@@ -455,7 +505,7 @@
             </plugins>
         </pluginManagement>
 
-        <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in
+        <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in 
             a sub module, will override the top level parent pom's definition -->
         <plugins>
             <plugin>
@@ -491,7 +541,8 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
-                    <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase}</arguments>
+                    <arguments>-Psonatype-oss-release -Prelease
+                        -Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
             </plugin>
 
@@ -538,7 +589,7 @@
             </plugin>
 
             <!-- run 'mvn site' to upload -->
-            <!-- run 'mvn site -X' to debug and upload.-->
+            <!-- run 'mvn site -X' to debug and upload. -->
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
