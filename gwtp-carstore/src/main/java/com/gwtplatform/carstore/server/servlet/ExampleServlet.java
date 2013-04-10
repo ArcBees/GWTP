@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.gwtplatform.carstore.server.dao.CarDao;
-import com.gwtplatform.carstore.shared.domain.Car;
+import com.gwtplatform.carstore.server.dao.domain.Car;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
 /**
  * Sample servlet implementation to show how a simple servlet can be written to access
@@ -39,8 +40,8 @@ public class ExampleServlet extends HttpServlet {
             throws IOException, ServletException {
 
         try {
-            List<Car> cars = this.carDao.getAll();
-            request.setAttribute("cars", cars);
+            List<CarDto> carDtos = Car.createDto(this.carDao.getAll());
+            request.setAttribute("cars", carDtos);
 
             request.getRequestDispatcher(OUTPUT_JSP).forward(request, response);
         } catch (IOException e) {

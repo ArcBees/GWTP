@@ -1,23 +1,19 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.shared.dto;
 
-import javax.persistence.Entity;
+import com.gwtplatform.carstore.shared.domain.BaseEntity;
 
-import com.googlecode.objectify.annotation.Index;
-
-@Index
-@Entity
-public class User extends BaseEntity {
+public class UserDto extends BaseEntity {
     private String username;
     private String hashPassword;
     private String firstName;
     private String lastName;
 
-    public User() {
+    public UserDto() {
         firstName = "";
         lastName = "";
     }
 
-    public User(String username, String hashPassword, String firstName, String lastName) {
+    public UserDto(String username, String hashPassword, String firstName, String lastName) {
         this.username = username;
         this.hashPassword = hashPassword;
         this.firstName = firstName;

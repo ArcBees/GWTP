@@ -1,11 +1,11 @@
 package com.gwtplatform.carstore.client.application.manufacturer.ui;
 
 import com.google.gwt.text.shared.AbstractRenderer;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 
-public class ManufacturerRenderer extends AbstractRenderer<Manufacturer> {
+public class ManufacturerRenderer extends AbstractRenderer<ManufacturerDto> {
     @Override
-    public String render(Manufacturer manufacturer) {
-        return manufacturer == null ? "" : manufacturer.getName();
+    public String render(ManufacturerDto manufacturerDto) {
+        return manufacturerDto == null ? "" : manufacturerDto.getName();
     }
 }

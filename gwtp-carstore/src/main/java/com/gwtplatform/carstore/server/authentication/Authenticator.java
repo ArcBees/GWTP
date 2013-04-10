@@ -6,34 +6,37 @@ import javax.servlet.http.HttpSession;
 
 import com.gwtplatform.carstore.server.dao.UserDao;
 import com.gwtplatform.carstore.server.dao.UserSessionDao;
-import com.gwtplatform.carstore.shared.domain.User;
+import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+import com.gwtplatform.carstore.shared.dto.UserDto;
 
 public class Authenticator {
     private final UserDao userDao;
     private final Provider<HttpSession> sessionProvider;
     private final PasswordSecurity passwordSecurity;
     private final CurrentUserDtoProvider currentUserDtoProvider;
-    private final UserSessionDao loginCookieDao;
+    private final UserSessionDao userSessionDao;
 
     @Inject
     public Authenticator(final UserDao userDao, final Provider<HttpSession> sessionProvider,
             final PasswordSecurity passwordSecurity, final CurrentUserDtoProvider currentUserDtoProvider,
-            final UserSessionDao loginCookieDao) {
+            final UserSessionDao userSessionDao) {
         this.userDao = userDao;
         this.sessionProvider = sessionProvider;
         this.passwordSecurity = passwordSecurity;
         this.currentUserDtoProvider = currentUserDtoProvider;
-        this.loginCookieDao = loginCookieDao;
+        this.userSessionDao = userSessionDao;
     }
 
-    public User authenticateCredentials(final String username, final String password) {
+    public UserDto authenticateCredentials(final String username, final String password) {
         try {
             User user = userDao.findByUsername(username);
-
+            
             if (passwordSecurity.check(password, user.getHashPassword())) {
-                login(user);
-                return user;
+                UserDto userDto = User.createDto(user);
+                persistHttpSessionCookie(userDto);
+                
+                return userDto;
             } else {
                 throw new AuthenticationException();
             }
@@ -42,16 +45,16 @@ public class Authenticator {
         }
     }
 
-    public User authenticatCookie(String loggedInCookie) throws AuthenticationException {
-        User user = loginCookieDao.getUserFromCookie(loggedInCookie);
+    public UserDto authenticatCookie(String loggedInCookie) throws AuthenticationException {
+        UserDto userDto = userSessionDao.getUserFromCookie(loggedInCookie);
 
-        if (user == null) {
+        if (userDto == null) {
             throw new AuthenticationException();
         } else {
-            login(user);
+            persistHttpSessionCookie(userDto);
         }
 
-        return user;
+        return userDto;
     }
 
     public void logout() {
@@ -61,21 +64,24 @@ public class Authenticator {
         httpSession.invalidate();
     }
 
-    private void login(User user) {
+    /**
+     * Session support has to be enabled in the appengine-web.xml
+     */
+    private void persistHttpSessionCookie(UserDto user) {
         HttpSession session = sessionProvider.get();
         session.setAttribute(SecurityParameters.getUserSessionKey(), user.getId());
     }
 
     public Boolean isUserLoggedIn() {
         HttpSession session = sessionProvider.get();
-        Integer userId = (Integer) session.getAttribute(SecurityParameters.getUserSessionKey());
+        Long userId = (Long) session.getAttribute(SecurityParameters.getUserSessionKey());
 
         return userId != null;
     }
 
     private void removeCurrentUserLoginCookie() {
         CurrentUserDto currentUserDto = currentUserDtoProvider.get();
-        User user = currentUserDto.getUser();
-        loginCookieDao.removeLoggedInCookie(user);
+        UserDto userDto = currentUserDto.getUser();
+        userSessionDao.removeLoggedInCookie(userDto);
     }
 }

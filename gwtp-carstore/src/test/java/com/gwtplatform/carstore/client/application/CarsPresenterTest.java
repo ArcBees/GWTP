@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jukito.JukitoRunner;
 import org.junit.Test;
@@ -25,20 +24,20 @@ import com.gwtplatform.carstore.shared.dispatch.DeleteCarAction;
 import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dispatch.NoResults;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.Manufacturer;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
 @RunWith(JukitoRunner.class)
 public class CarsPresenterTest extends PresenterWidgetTestBase {
     public static class Module extends PresenterTestModule {
-      @Override
-      protected void configurePresenterTest() {
-          forceMock(CarProxyFactory.class);
-      }
+        @Override
+        protected void configurePresenterTest() {
+            forceMock(CarProxyFactory.class);
+        }
     }
-    
+
     @Inject
     CarsPresenter carsPresenter;
     @Inject
@@ -47,19 +46,19 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     CarProxyFactory carProxyFactory;
     @Inject
     CarPresenter.MyProxy proxy;
-    
+
     @Test
-    public void onEditCar(PlaceManager placeManager) {        
+    public void onEditCar(PlaceManager placeManager, ManufacturerDto manufacturerDto) {
         // Given
-        Car car = mock(Car.class);
-        when(car.getManufacturer()).thenReturn(mock(Manufacturer.class));
-        when(carProxyFactory.create(car, car.getManufacturer().getName() + car.getModel())).thenReturn(proxy);
+        CarDto carDto = mock(CarDto.class);
+        when(carDto.getManufacturer()).thenReturn(manufacturerDto);
+        when(carProxyFactory.create(carDto, carDto.getManufacturer().getName() + carDto.getModel())).thenReturn(proxy);
         when(proxy.getNameToken()).thenReturn("token");
-        
+
         PlaceRequest placeRequest = new PlaceRequest("token");
-        
+
         // When
-        carsPresenter.onEdit(car);
+        carsPresenter.onEdit(carDto);
 
         // Then
         verify(placeManager).revealPlace(eq(placeRequest));
@@ -69,61 +68,60 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     public void onCreate(PlaceManager placeManager) {
         // Given
         PlaceRequest placeRequest = new PlaceRequest(NameTokens.newCar);
-        
+
         // When
         carsPresenter.onCreate();
-        
+
         // Then
         verify(placeManager).revealPlace(eq(placeRequest));
     }
 
     @Test
-    public void onDelete(Car car, 
-            HasData<Car> hasCarData, Range range) {
-        // Given we have DeleteCarAction 
+    public void onDelete(CarDto carDto, HasData<CarDto> hasCarData, Range range) {
+        // Given we have DeleteCarAction
         dispatcher.given(DeleteCarAction.class).willReturn(new NoResults());
-        
+
         // And GetCarAction for fetching after delete
-        GetResults<Car> result = new GetResults<Car>(new ArrayList<Car>());
+        GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
         dispatcher.given(GetCarsAction.class).willReturn(result);
-        
+
         // And display is setup
         when(view.getCarDisplay()).thenReturn(hasCarData);
-        
+
         // And range is setup
-        HasData<Car> display = view.getCarDisplay();
+        HasData<CarDto> display = view.getCarDisplay();
         when(display.getVisibleRange()).thenReturn(range);
-        
+
         // When
-        carsPresenter.onDelete(car);
-        
+        carsPresenter.onDelete(carDto);
+
         // Then
         verify(view).setCarsCount(-1);
     }
-    
+
     @Test
-    public void onFetchData(ArrayList<Car> cars) {
+    public void onFetchData(ArrayList<CarDto> carDtos) {
         // Given
-        GetResults<Car> result = new GetResults<Car>(new ArrayList<Car>());
+        GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
         dispatcher.given(GetCarsAction.class).willReturn(result);
-        
+
         // When
         carsPresenter.fetchData(0, 1);
-        
+
         // Then
-        verify(view).displayCars(0, cars);
+        verify(view).displayCars(0, carDtos);
     }
-    
+
     @Test
-    public void onFetchDataThreeCars(ArrayList<Car> cars) {
+    public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
         // Given
-        GetResults<Car> result = new GetResults<Car>(cars);
+        GetResults<CarDto> result = new GetResults<CarDto>(carDtos);
         dispatcher.given(GetCarsAction.class).willReturn(result);
-        
+
         // When
         carsPresenter.fetchData(0, 3);
-        
+
         // Then
-        verify(view).displayCars(0, cars);
+        verify(view).displayCars(0, carDtos);
     }
 }

@@ -16,21 +16,21 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.cars.car.CarRenderer;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView;
-import com.gwtplatform.carstore.shared.domain.Car;
-import com.gwtplatform.carstore.shared.domain.Rating;
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.PopupViewWithUiHandlers;
 
-public class EditRatingView extends PopupViewWithUiHandlers<EditRatingUiHandlers> implements MyView, Editor<Rating> {
+public class EditRatingView extends PopupViewWithUiHandlers<EditRatingUiHandlers> implements MyView, Editor<RatingDto> {
     public interface Binder extends UiBinder<Widget, EditRatingView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<Rating, EditRatingView> {
+    public interface Driver extends SimpleBeanEditorDriver<RatingDto, EditRatingView> {
     }
 
     @UiField
     IntegerBox rating;
     @UiField(provided = true)
-    ValueListBox<Car> car;
+    ValueListBox<CarDto> car;
 
     private final Driver driver;
 
@@ -38,7 +38,7 @@ public class EditRatingView extends PopupViewWithUiHandlers<EditRatingUiHandlers
     public EditRatingView(Binder uiBinder, Driver driver, EventBus eventBus) {
         super(eventBus);
 
-        car = new ValueListBox<Car>(new CarRenderer());
+        car = new ValueListBox<CarDto>(new CarRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));
@@ -47,18 +47,18 @@ public class EditRatingView extends PopupViewWithUiHandlers<EditRatingUiHandlers
     }
 
     @Override
-    public void edit(Rating rating) {
-        if (rating.getCar() == null) {
-            rating.setCar(car.getValue());
+    public void edit(RatingDto ratingDto) {
+        if (ratingDto.getCar() == null) {
+            ratingDto.setCar(car.getValue());
         }
 
-        driver.edit(rating);
+        driver.edit(ratingDto);
     }
 
     @Override
-    public void setAllowedCars(List<Car> cars) {
-        car.setValue(cars.isEmpty() ? null : cars.get(0));
-        car.setAcceptableValues(cars);
+    public void setAllowedCars(List<CarDto> carDtos) {
+        car.setValue(carDtos.isEmpty() ? null : carDtos.get(0));
+        car.setAcceptableValues(carDtos);
     }
 
     @UiHandler("save")
