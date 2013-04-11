@@ -20,8 +20,7 @@ public class BasicStepdefs {
     private final ApplicationPage applicationPage;
 
     @Inject
-    public BasicStepdefs(LoginPage loginPage,
-            ApplicationPage applicationPage) {
+    public BasicStepdefs(LoginPage loginPage, ApplicationPage applicationPage) {
         this.loginPage = loginPage;
         this.applicationPage = applicationPage;
     }
