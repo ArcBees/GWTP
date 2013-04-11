@@ -118,8 +118,7 @@
 
             <!-- Integration testing which runs clases *TestInt.java -->
             <!-- run 'mvn integration-test' -->
-            <!-- TODO renenable after build server has chrome driver setup -->
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
@@ -137,7 +136,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin>
 
             <plugin>
                 <groupId>net.kindleit</groupId>
@@ -153,8 +152,7 @@
                             <goal>unpack</goal>
                         </goals>
                     </execution>
-                    <!-- TODO turn on after chrome driver installed on build server -->
-                    <!-- <execution>
+                    <execution>
                         <id>start-gae</id>
                         <phase>pre-integration-test</phase>
                         <goals>
@@ -167,7 +165,7 @@
                         <goals>
                             <goal>stop</goal>
                         </goals>
-                    </execution> -->
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
