@@ -21,6 +21,6 @@ public class BasePage {
     }
     
     public void closeUrl() {
-      webDriver.close();
+      webDriver.quit();
     }
 }
