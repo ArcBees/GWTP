@@ -1,12 +1,10 @@
 package com.gwtplatform.carstore.cucumber.application.ratings;
 
 import com.gwtplatform.carstore.cucumber.application.BasePage;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.inject.Inject;
 
@@ -37,26 +35,26 @@ public class RatingPage extends BasePage {
     }
 
     public void clickOnCreate() {
-        webDriverWait().until(ExpectedConditions.presenceOfElementLocated(By.id(RATINGS_ID)));
+        waitUntilElementIsLoaded(RATINGS_ID);
         create.click();
     }
 
     public void fillForm() {
-        webDriverWait().until(ExpectedConditions.presenceOfElementLocated(By.id(SAVE_BTN_ID)));
+        waitUntilElementIsLoaded(SAVE_BTN_ID);
         ratingInput.sendKeys(A_VALID_RATING);
         save.click();
     }
 
     public void deleteFirstRating() {
-        webDriverWait().until(ExpectedConditions.presenceOfElementLocated(By.id(RATINGS_ID)));
+        waitUntilElementIsLoaded(RATINGS_ID);
         WebElement delete = ratings.findElement(By.className(DELETE_BTN_CLASS_NAME)).findElement(By.tagName("button"));
         delete.click();
         webDriver.switchTo().alert().accept();
-        webDriverWait().until(ExpectedConditions.stalenessOf(delete));
+        waitUntilElementIsDettached(delete);
     }
 
     public int getNumberOfLines() {
-        webDriverWait().until(ExpectedConditions.presenceOfElementLocated(By.id(RATINGS_ID)));
+        waitUntilElementIsLoaded(RATINGS_ID);
         return ratings.findElements(By.className("delete")).size();
     }
 }
