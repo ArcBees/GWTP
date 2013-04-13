@@ -23,7 +23,7 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * See the manual dependency download section in [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration) 
 
 ###Current Release
-1.0-RC-3 - Released on 3/13/2013
+1.0-RC-3 - Released on 4/13/2013
 
 ###Current Snapshot
 1.0-RC-4-SNAPSHOT
