@@ -1,11 +1,9 @@
 package com.gwtplatform.carstore.cucumber.application.widgets;
 
 import com.gwtplatform.carstore.cucumber.application.BasePage;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.inject.Inject;
 
@@ -23,7 +21,7 @@ public class HeaderWidgetPage extends BasePage {
     }
 
     public void clickOnLogOut() {
-        webDriverWait().until(ExpectedConditions.visibilityOf(logout));
+        waitUntilElementIsVisible(logout);
         logout.click();
     }
 }
