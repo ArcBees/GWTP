@@ -1,12 +1,10 @@
 package com.gwtplatform.carstore.cucumber.application.login;
 
+import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.cucumber.application.BasePage;
-
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.inject.Inject;
 
@@ -28,26 +26,21 @@ public class LoginPage extends BasePage {
     }
 
     public void setUsername(String username) {
-        webDriverWait().until(ExpectedConditions.visibilityOf(this.username));
+        waitUntilElementIsVisible(this.username);
         this.username.sendKeys(username);
     }
 
     public void setPassword(String password) {
-        webDriverWait().until(ExpectedConditions.visibilityOf(this.password));
+        waitUntilElementIsVisible(this.password);
         this.password.sendKeys(password);
     }
 
     public void submitLoginForm() {
-        webDriverWait().until(ExpectedConditions.visibilityOf(login));
+        waitUntilElementIsVisible(login);
         login.click();
     }
 
     public Boolean isOnLoginPage() {
-        try {
-            webDriverWait().until(ExpectedConditions.visibilityOf(login));
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
+        return webDriver.getCurrentUrl().contains("#" + NameTokens.login);
     }
 }
