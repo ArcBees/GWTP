@@ -146,13 +146,6 @@
                     <appDir>${webappDirectory}</appDir>
                 </configuration>
                  <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                    </execution>
                     <!-- TODO turn on after chrome driver installed on build server -->
                     <!-- <execution>
                         <id>start-gae</id>
