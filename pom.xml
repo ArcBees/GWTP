@@ -406,6 +406,7 @@
                             <artifactId>appengine-tools-sdk</artifactId>
                             <version>${gae.version}</version>
                         </dependency>
+                        <!-- Other Dependencies -->
                         <dependency>
                             <groupId>org.codehaus.plexus</groupId>
                             <artifactId>plexus-utils</artifactId>
