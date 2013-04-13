@@ -158,8 +158,8 @@
     </contributors>
 
     <scm>
-        <connection>scm:git:https://github.com/ArcBees/GWTP.git</connection>
-        <developerConnection>scm:git:https://github.com/ArcBees/GWTP.git</developerConnection>
+        <connection>scm:git:git://github.com/ArcBees/GWTP.git</connection>
+        <developerConnection>scm:git@github.com:ArcBees/GWTP.git</developerConnection>
         <url>https://github.com/ArcBees/GWTP</url>
     </scm>
 
