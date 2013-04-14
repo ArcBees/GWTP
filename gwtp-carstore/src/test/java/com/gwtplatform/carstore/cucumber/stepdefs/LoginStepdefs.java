@@ -1,15 +1,15 @@
 package com.gwtplatform.carstore.cucumber.stepdefs;
 
-import static org.junit.Assert.assertTrue;
-
 import javax.inject.Inject;
+
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
 import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.HeaderWidgetPage;
 
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import static org.junit.Assert.assertTrue;
 
 public class LoginStepdefs {
     private final HeaderWidgetPage headerWidgetPage;
@@ -17,7 +17,8 @@ public class LoginStepdefs {
     private final ApplicationPage applicationPage;
 
     @Inject
-    public LoginStepdefs(BasicStepdefs basicStepdefs, HeaderWidgetPage headerWidgetPage, LoginPage loginPage,
+    public LoginStepdefs(HeaderWidgetPage headerWidgetPage,
+            LoginPage loginPage,
             ApplicationPage applicationPage) {
         this.headerWidgetPage = headerWidgetPage;
         this.loginPage = loginPage;
