@@ -3,7 +3,6 @@ package com.gwtplatform.carstore.server.dispatch;
 import java.util.logging.Logger;
 
 import com.google.inject.Inject;
-import com.gwtplatform.carstore.server.DevBootStrapper;
 import com.gwtplatform.carstore.server.authentication.AuthenticationException;
 import com.gwtplatform.carstore.server.authentication.Authenticator;
 import com.gwtplatform.carstore.server.dao.UserSessionDao;
@@ -22,8 +21,7 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
     private Logger logger;
 
     @Inject
-    public LogInHandler(Logger logger, Authenticator authenticator, UserSessionDao loginCookieDao,
-            DevBootStrapper bootStrapper) {
+    public LogInHandler(Logger logger, Authenticator authenticator, UserSessionDao loginCookieDao) {
         super(LogInAction.class);
 
         this.logger = logger;
@@ -33,7 +31,7 @@ public class LogInHandler extends AbstractActionHandler<LogInAction, LogInResult
 
     @Override
     public LogInResult execute(LogInAction action, ExecutionContext context) throws ActionException {
-        UserDto userDto = null;
+        UserDto userDto;
         isLoggedIn = true;
 
         if (action.getActionType() == ActionType.VIA_COOKIE) {
