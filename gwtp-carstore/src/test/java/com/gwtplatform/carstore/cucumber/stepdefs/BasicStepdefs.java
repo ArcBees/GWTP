@@ -5,9 +5,9 @@ import javax.inject.Inject;
 import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
 import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
 
-import cucumber.annotation.After;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.When;
+import cucumber.api.java.After;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 
 public class BasicStepdefs {
     private static final String baseUrl = "http://127.0.0.1:8888";
