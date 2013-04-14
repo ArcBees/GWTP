@@ -118,52 +118,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- Integration testing which runs clases *TestInt.java -->
-            <!-- run 'mvn integration-test' -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven-failsafe-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>integration-test</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <includes>
-                                <include>**/*TestInt.java</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>net.kindleit</groupId>
-                <artifactId>maven-gae-plugin</artifactId>
-                <configuration>
-                    <appDir>${webappDirectory}</appDir>
-                </configuration>
-                 <executions>
-                    <execution>
-                        <id>start-gae</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop-gae</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -368,6 +322,25 @@
                         <groupId>net.kindleit</groupId>
                         <artifactId>maven-gae-plugin</artifactId>
                         <version>0.9.6-SNAPSHOT</version>
+                        <configuration>
+                            <appDir>${webappDirectory}</appDir>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start-gae</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>stop-gae</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 
                     <plugin>
@@ -376,6 +349,28 @@
                         <configuration>
                             <module>com.gwtplatform.carstore.IntegrationTesting</module>
                         </configuration>
+                    </plugin>
+
+                    <!-- Integration testing which runs clases *TestInt.java -->
+                    <!-- run 'mvn integration-test' -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${maven-failsafe-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                                <configuration>
+                                    <includes>
+                                        <include>**/*TestInt.java</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
