@@ -16,75 +16,44 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.client.rpc.InvocationException;
-import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
-import com.google.gwt.user.rebind.SourceWriter;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry;
+import com.gwtplatform.mvp.rebind.velocity.Logger;
+import com.gwtplatform.mvp.rebind.velocity.RebindModule;
+import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
 
 /**
  * Generates an implementation of {@link PlaceTokenRegistry} based on GWTP's {@link NameToken} annotation.
  */
 public class PlaceTokenRegistryGenerator extends Generator {
-    private static final String PACKAGE_NAME = PlaceTokenRegistry.class.getPackage().getName();
-
-    private static final String SIMPLE_NAME = PlaceTokenRegistry.class.getSimpleName() + "Impl";
-
-    private static final String NAME = PACKAGE_NAME + "." + SIMPLE_NAME;
-
     @Override
-    public String generate(final TreeLogger logger, GeneratorContext generatorContext, String requestedClass)
+    public String generate(final TreeLogger treeLogger, GeneratorContext generatorContext, String requestedClass)
             throws UnableToCompleteException {
-        PrintWriter printWriter = generatorContext.tryCreate(logger, PACKAGE_NAME, SIMPLE_NAME);
-
-        /*
-         * printWriter is null when the type has already been generated
-         */
-        if (printWriter == null) {
-            return NAME;
-        }
-
         Map<String, JClassType> placeTokens = findPlaceTokens(generatorContext);
         checkPlaces(placeTokens);
 
-        SourceWriter sourceWriter = setupType(generatorContext, printWriter);
+        Injector injector = Guice.createInjector(new RebindModule(new Logger(treeLogger), generatorContext));
+        VelocityPlacetokenGenerator.Factory factory = injector.getInstance(VelocityPlacetokenGenerator.Factory.class);
+        VelocityPlacetokenGenerator generator = factory.create(placeTokens.keySet());
 
-        sourceWriter.println();
-        sourceWriter.println("public Set<String> getAllPlaceTokens() {");
-        sourceWriter.println("  Set<String> placeTokens = new HashSet<String>();");
-        sourceWriter.println();
-        for (String placeToken : placeTokens.keySet()) {
-            sourceWriter.println("  placeTokens.add(\"" + placeToken + "\");");
+        try {
+            return generator.generate();
+        } catch (Exception e) {
+            treeLogger.log(Type.ERROR, e.getMessage(), e);
+            throw new UnableToCompleteException();
         }
-        sourceWriter.println();
-        sourceWriter.println("  return placeTokens;");
-        sourceWriter.println("}");
-        sourceWriter.println();
-        sourceWriter.commit(logger);
-
-        return NAME;
-    }
-
-    /**
-     * Initializes the new type and returns a {@link SourceWriter}.
-     */
-    private static SourceWriter setupType(final GeneratorContext generatorContext, final PrintWriter printWriter) {
-        ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(PACKAGE_NAME, SIMPLE_NAME);
-
-        composerFactory.addImport("java.util.Set");
-        composerFactory.addImport("java.util.HashSet");
-        composerFactory.addImplementedInterface(PlaceTokenRegistry.class.getName());
-
-        return composerFactory.createSourceWriter(generatorContext, printWriter);
     }
 
     /**
