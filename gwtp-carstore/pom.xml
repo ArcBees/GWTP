@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.gwtplatform</groupId>
         <artifactId>gwtp</artifactId>
-        <version>1.0-RC-3-SNAPSHOT</version>
+        <version>1.0-RC-4-SNAPSHOT</version>
     </parent>
 
     <packaging>war</packaging>
@@ -39,6 +38,10 @@
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
+                <includes>
+                    <include>**/*.feature</include>
+                    <include>**/*.properties</include>
+                </includes>
             </testResource>
         </testResources>
 
@@ -118,8 +121,7 @@
 
             <!-- Integration testing which runs clases *TestInt.java -->
             <!-- run 'mvn integration-test' -->
-            <!-- TODO renenable after build server has chrome driver setup -->
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
@@ -137,7 +139,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin>
 
             <plugin>
                 <groupId>net.kindleit</groupId>
@@ -147,14 +149,6 @@
                 </configuration>
                  <executions>
                     <execution>
-                        <id>unpack</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                    </execution>
-                    <!-- TODO turn on after chrome driver installed on build server -->
-                    <!-- <execution>
                         <id>start-gae</id>
                         <phase>pre-integration-test</phase>
                         <goals>
@@ -167,7 +161,7 @@
                         <goals>
                             <goal>stop</goal>
                         </goals>
-                    </execution> -->
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
@@ -301,23 +295,26 @@
             <artifactId>jbcrypt</artifactId>
             <version>${jbcrypt.version}</version>
         </dependency>
-
-        <!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jukito</groupId>
-            <artifactId>jukito</artifactId>
-            <version>${jukito.version}</version>
-            <scope>test</scope>
-        </dependency>
+        
+        <!-- Selenium Testing -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Cucumber Testing -->
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -344,6 +341,44 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <!-- JUnit Testing -->
+        <dependency>
+            <groupId>org.jukito</groupId>
+            <artifactId>jukito</artifactId>
+            <version>${jukito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
+
+    <profiles>
+        <!-- 'mvn gwt:compile jetty:run -Pintegration-test' - test run cucumber story from ide -->
+        <profile>
+            <id>integration-test</id>
+            <build>
+                <plugins>
+                    <!-- TODO Workaround for background runner. Remove on release -->
+                    <plugin>
+                        <groupId>net.kindleit</groupId>
+                        <artifactId>maven-gae-plugin</artifactId>
+                        <version>0.9.6-SNAPSHOT</version>
+                    </plugin>
+                
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>gwt-maven-plugin</artifactId>
+                        <configuration>
+                            <module>com.gwtplatform.carstore.IntegrationTesting</module>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
