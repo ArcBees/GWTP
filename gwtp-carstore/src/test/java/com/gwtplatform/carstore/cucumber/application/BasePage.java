@@ -1,6 +1,5 @@
 package com.gwtplatform.carstore.cucumber.application;
 
-import com.gwtplatform.carstore.client.application.testutils.TestParameters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.gwtplatform.carstore.client.application.testutils.TestParameters;
 
 public class BasePage {
     protected final WebDriver webDriver;

@@ -1,13 +1,13 @@
 package com.gwtplatform.carstore.cucumber.stepdefs;
 
-import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
-import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
-import com.gwtplatform.carstore.cucumber.application.widgets.HeaderWidgetPage;
+import javax.inject.Inject;
 
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 
-import javax.inject.Inject;
+import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
+import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
+import com.gwtplatform.carstore.cucumber.application.widgets.HeaderWidgetPage;
 
 import static org.junit.Assert.assertTrue;
 
