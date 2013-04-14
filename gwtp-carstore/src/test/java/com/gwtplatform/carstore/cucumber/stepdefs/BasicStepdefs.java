@@ -2,12 +2,14 @@ package com.gwtplatform.carstore.cucumber.stepdefs;
 
 import javax.inject.Inject;
 
+import cucumber.api.java.After;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
+
+import org.openqa.selenium.WebDriver;
+
 import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
 import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
-
-import cucumber.annotation.After;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.When;
 
 public class BasicStepdefs {
     private static final String baseUrl = "http://127.0.0.1:8888";
@@ -16,19 +18,22 @@ public class BasicStepdefs {
     private static final String INVALID_USERNAME = "--";
     private static final String INVALID_PASSWORD = "--";
 
+    private final WebDriver webDriver;
     private final LoginPage loginPage;
     private final ApplicationPage applicationPage;
 
     @Inject
-    public BasicStepdefs(LoginPage loginPage,
+    public BasicStepdefs(WebDriver webDriver,
+            LoginPage loginPage,
             ApplicationPage applicationPage) {
+        this.webDriver = webDriver;
         this.loginPage = loginPage;
         this.applicationPage = applicationPage;
     }
 
     @After
     public void cleanup() {
-        applicationPage.closeUrl();
+        webDriver.quit();
     }
 
     @Given("^I navigate to the (\\S+) page$")

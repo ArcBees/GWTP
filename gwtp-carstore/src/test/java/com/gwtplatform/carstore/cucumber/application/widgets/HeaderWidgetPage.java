@@ -1,20 +1,15 @@
 package com.gwtplatform.carstore.cucumber.application.widgets;
 
-import com.gwtplatform.carstore.cucumber.application.BasePage;
+import javax.inject.Inject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import javax.inject.Inject;
-
-import static com.google.gwt.user.client.ui.UIObject.DEBUG_ID_PREFIX;
+import com.gwtplatform.carstore.cucumber.application.BasePage;
+import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class HeaderWidgetPage extends BasePage {
-    private static final String LOGOUT_ID = DEBUG_ID_PREFIX + "logout";
-
-    @FindBy(id = LOGOUT_ID)
+    @FindByDebugId("logout")
     private WebElement logout;
 
     @Inject
@@ -23,7 +18,7 @@ public class HeaderWidgetPage extends BasePage {
     }
 
     public void clickOnLogOut() {
-        webDriverWait().until(ExpectedConditions.visibilityOf(logout));
+        waitUntilElementIsVisible(logout);
         logout.click();
     }
 }
