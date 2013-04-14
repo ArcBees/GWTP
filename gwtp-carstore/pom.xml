@@ -368,7 +368,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>gwt-maven-plugin</artifactId>
                         <configuration>
-                            <module>org.gwtplatform.carstore.IntegrationTesting</module>
+                            <module>com.gwtplatform.carstore.IntegrationTesting</module>
                         </configuration>
                     </plugin>
                 </plugins>
