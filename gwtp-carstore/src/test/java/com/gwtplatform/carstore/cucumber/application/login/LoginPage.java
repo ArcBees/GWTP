@@ -1,25 +1,20 @@
 package com.gwtplatform.carstore.cucumber.application.login;
 
-import com.gwtplatform.carstore.cucumber.application.BasePage;
-
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import javax.inject.Inject;
 
-import static com.google.gwt.user.client.ui.UIObject.DEBUG_ID_PREFIX;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.cucumber.application.BasePage;
+import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class LoginPage extends BasePage {
-    private static final String LOGIN_ID = DEBUG_ID_PREFIX + "login";
-
-    @FindBy(id = DEBUG_ID_PREFIX + "username")
+    @FindByDebugId("username")
     private WebElement username;
-    @FindBy(id = DEBUG_ID_PREFIX + "password")
+    @FindByDebugId("password")
     private WebElement password;
-    @FindBy(id = LOGIN_ID)
+    @FindByDebugId("login")
     private WebElement login;
 
     @Inject
@@ -28,26 +23,21 @@ public class LoginPage extends BasePage {
     }
 
     public void setUsername(String username) {
-        webDriverWait().until(ExpectedConditions.visibilityOf(this.username));
+        waitUntilElementIsVisible(this.username);
         this.username.sendKeys(username);
     }
 
     public void setPassword(String password) {
-        webDriverWait().until(ExpectedConditions.visibilityOf(this.password));
+        waitUntilElementIsVisible(this.password);
         this.password.sendKeys(password);
     }
 
     public void submitLoginForm() {
-        webDriverWait().until(ExpectedConditions.visibilityOf(login));
+        waitUntilElementIsVisible(login);
         login.click();
     }
 
     public Boolean isOnLoginPage() {
-        try {
-            webDriverWait().until(ExpectedConditions.visibilityOf(login));
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
+        return webDriver.getCurrentUrl().contains("#" + NameTokens.login);
     }
 }
