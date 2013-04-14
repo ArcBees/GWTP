@@ -1,14 +1,14 @@
 package com.gwtplatform.carstore.cucumber.stepdefs;
 
-import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
-import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
-
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
+import static org.junit.Assert.assertEquals;
 
 import javax.inject.Inject;
 
-import static org.junit.Assert.assertEquals;
+import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
+import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
+
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class RatingStepdefs {
     private final RatingPage ratingPage;
