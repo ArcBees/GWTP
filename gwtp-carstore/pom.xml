@@ -350,4 +350,29 @@
         </dependency>
     </dependencies>
 
+
+    <profiles>
+        <!-- 'mvn gwt:compile jetty:run -Pintegration-test' - test run cucumber story from ide -->
+        <profile>
+            <id>integration-test</id>
+            <build>
+                <plugins>
+                    <!-- TODO Workaround for background runner. Remove on release -->
+                    <plugin>
+                        <groupId>net.kindleit</groupId>
+                        <artifactId>maven-gae-plugin</artifactId>
+                        <version>0.9.6-SNAPSHOT</version>
+                    </plugin>
+                
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>gwt-maven-plugin</artifactId>
+                        <configuration>
+                            <module>org.gwtplatform.carstore.IntegrationTesting</module>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
