@@ -9,6 +9,7 @@ import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RatingStepdefs {
     private final RatingPage ratingPage;
@@ -30,7 +31,7 @@ public class RatingStepdefs {
 
     @Then("^A rating is created$")
     public void aRatingIsCreated() {
-        messageWidgetPage.hasSuccessMessage();
+        assertTrue(messageWidgetPage.hasSuccessMessage());
         assertEquals(numberOfLines + 1, ratingPage.getNumberOfLines());
     }
 
@@ -40,8 +41,8 @@ public class RatingStepdefs {
         ratingPage.deleteFirstRating();
     }
 
-    @Then("^It get removed$")
-    public void ItGetRemoved() {
+    @Then("^It gets removed$")
+    public void ItGetsRemoved() {
         assertEquals(numberOfLines - 1, ratingPage.getNumberOfLines());
     }
 }

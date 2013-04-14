@@ -4,21 +4,17 @@ import javax.inject.Inject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.cucumber.application.BasePage;
-
-import static com.google.gwt.user.client.ui.UIObject.DEBUG_ID_PREFIX;
+import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class LoginPage extends BasePage {
-    private static final String LOGIN_ID = DEBUG_ID_PREFIX + "login";
-
-    @FindBy(id = DEBUG_ID_PREFIX + "username")
+    @FindByDebugId("username")
     private WebElement username;
-    @FindBy(id = DEBUG_ID_PREFIX + "password")
+    @FindByDebugId("password")
     private WebElement password;
-    @FindBy(id = LOGIN_ID)
+    @FindByDebugId("login")
     private WebElement login;
 
     @Inject
