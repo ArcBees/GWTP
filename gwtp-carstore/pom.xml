@@ -18,7 +18,7 @@
         <gae.home>
             ${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
         </gae.home>
-        
+
         <!-- gae maven plugin settings -->
         <gae.wait>false</gae.wait>
         <gae.stop.port>8081</gae.stop.port>
@@ -310,6 +310,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>${httpcore.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
