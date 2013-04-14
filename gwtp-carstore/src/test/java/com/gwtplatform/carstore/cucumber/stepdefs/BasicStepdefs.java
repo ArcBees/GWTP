@@ -6,6 +6,8 @@ import cucumber.annotation.After;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.When;
 
+import org.openqa.selenium.WebDriver;
+
 import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
 import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
 
@@ -16,19 +18,22 @@ public class BasicStepdefs {
     private static final String INVALID_USERNAME = "--";
     private static final String INVALID_PASSWORD = "--";
 
+    private final WebDriver webDriver;
     private final LoginPage loginPage;
     private final ApplicationPage applicationPage;
 
     @Inject
-    public BasicStepdefs(LoginPage loginPage,
+    public BasicStepdefs(WebDriver webDriver,
+            LoginPage loginPage,
             ApplicationPage applicationPage) {
+        this.webDriver = webDriver;
         this.loginPage = loginPage;
         this.applicationPage = applicationPage;
     }
 
     @After
     public void cleanup() {
-        applicationPage.closeUrl();
+        webDriver.quit();
     }
 
     @Given("^I navigate to the (\\S+) page$")
