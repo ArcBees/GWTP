@@ -1,10 +1,11 @@
 package com.gwtplatform.carstore.cucumber.application.widgets;
 
-import com.gwtplatform.carstore.cucumber.application.BasePage;
+import javax.inject.Inject;
+
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
-import javax.inject.Inject;
+import com.gwtplatform.carstore.cucumber.application.BasePage;
 
 import static com.google.gwt.user.client.ui.UIObject.DEBUG_ID_PREFIX;
 

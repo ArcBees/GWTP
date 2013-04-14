@@ -2,12 +2,12 @@ package com.gwtplatform.carstore.cucumber.stepdefs;
 
 import javax.inject.Inject;
 
-import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
-import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
-
 import cucumber.annotation.After;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.When;
+
+import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
+import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
 
 public class BasicStepdefs {
     private static final String baseUrl = "http://127.0.0.1:8888";
