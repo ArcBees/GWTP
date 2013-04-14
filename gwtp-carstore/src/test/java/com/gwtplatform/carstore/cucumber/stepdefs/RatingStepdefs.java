@@ -1,12 +1,12 @@
 package com.gwtplatform.carstore.cucumber.stepdefs;
 
-import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
-import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
+import javax.inject.Inject;
 
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 
-import javax.inject.Inject;
+import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
+import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
 
 import static org.junit.Assert.assertEquals;
 
