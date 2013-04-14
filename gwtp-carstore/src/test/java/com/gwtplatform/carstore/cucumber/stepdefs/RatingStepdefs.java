@@ -2,8 +2,8 @@ package com.gwtplatform.carstore.cucumber.stepdefs;
 
 import javax.inject.Inject;
 
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
@@ -42,7 +42,7 @@ public class RatingStepdefs {
     }
 
     @Then("^It gets removed$")
-    public void ItGetsRemoved() {
+    public void itGetsRemoved() {
         assertEquals(numberOfLines - 1, ratingPage.getNumberOfLines());
     }
 }

@@ -2,9 +2,9 @@ package com.gwtplatform.carstore.cucumber.stepdefs;
 
 import javax.inject.Inject;
 
-import cucumber.annotation.After;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.When;
+import cucumber.api.java.After;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 
 import org.openqa.selenium.WebDriver;
 
