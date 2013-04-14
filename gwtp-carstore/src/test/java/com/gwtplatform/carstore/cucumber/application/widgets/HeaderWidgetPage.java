@@ -7,13 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.gwtplatform.carstore.cucumber.application.BasePage;
+import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 import static com.google.gwt.user.client.ui.UIObject.DEBUG_ID_PREFIX;
 
 public class HeaderWidgetPage extends BasePage {
-    private static final String LOGOUT_ID = DEBUG_ID_PREFIX + "logout";
-
-    @FindBy(id = LOGOUT_ID)
+    @FindByDebugId("logout")
     private WebElement logout;
 
     @Inject
