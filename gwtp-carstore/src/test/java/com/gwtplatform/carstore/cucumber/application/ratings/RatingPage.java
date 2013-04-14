@@ -5,29 +5,26 @@ import javax.inject.Inject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.CacheLookup;
 
 import com.gwtplatform.carstore.cucumber.application.BasePage;
-
-import static com.google.gwt.user.client.ui.UIObject.DEBUG_ID_PREFIX;
+import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class RatingPage extends BasePage {
     private static final String DELETE_BTN_CLASS_NAME = "delete";
     private static final String A_VALID_RATING = "10";
-    private static final String RATINGS_ID = DEBUG_ID_PREFIX + "ratings";
-    private static final String SAVE_BTN_ID = DEBUG_ID_PREFIX + "ratingSave";
-    private static final String CREATE_ID = DEBUG_ID_PREFIX + "ratingCreate";
 
-    @FindBy(id = RATINGS_ID)
+    @FindByDebugId("ratings")
     private WebElement ratings;
 
-    @FindBy(id = CREATE_ID)
+    @FindByDebugId("ratingCreate")
     private WebElement create;
 
-    @FindBy(id = DEBUG_ID_PREFIX + "ratingInput")
+    @FindByDebugId("ratingInput")
     private WebElement ratingInput;
 
-    @FindBy(id = SAVE_BTN_ID)
+    @FindByDebugId("ratingSave")
+    @CacheLookup
     private WebElement save;
 
     @Inject
@@ -36,26 +33,24 @@ public class RatingPage extends BasePage {
     }
 
     public void clickOnCreate() {
-        waitUntilElementIsLoaded(RATINGS_ID);
         create.click();
     }
 
     public void fillForm() {
-        waitUntilElementIsLoaded(SAVE_BTN_ID);
         ratingInput.sendKeys(A_VALID_RATING);
         save.click();
+        waitUntilElementIsDetached(save);
     }
 
     public void deleteFirstRating() {
-        waitUntilElementIsLoaded(RATINGS_ID);
-        WebElement delete = ratings.findElement(By.className(DELETE_BTN_CLASS_NAME)).findElement(By.tagName("button"));
+        WebElement delete = waitUntilElementIsLoaded(ratings, By.className(DELETE_BTN_CLASS_NAME))
+                .findElement(By.tagName("button"));
+        chooseOkOnNextConfirm();
         delete.click();
-        webDriver.switchTo().alert().accept();
-        waitUntilElementIsDettached(delete);
+        waitUntilElementIsDetached(delete);
     }
 
     public int getNumberOfLines() {
-        waitUntilElementIsLoaded(RATINGS_ID);
-        return ratings.findElements(By.className("delete")).size();
+        return ratings.findElements(By.className(DELETE_BTN_CLASS_NAME)).size();
     }
 }

@@ -1,6 +1,7 @@
 package com.gwtplatform.carstore.cucumber.application;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,12 @@ public class BasePage {
         webDriver.get(url);
     }
 
-    public void closeUrl() {
-        webDriver.close();
+    protected void chooseOkOnNextConfirm() {
+        ((JavascriptExecutor) webDriver).executeScript("window.confirm = function(msg){return true;};");
+    }
+
+    protected void chooseCancelOnNextConfirm() {
+        ((JavascriptExecutor) webDriver).executeScript("window.confirm = function(msg){return false;};");
     }
 
     protected WebElement waitUntilElementIsLoaded(String id) {
@@ -37,7 +42,7 @@ public class BasePage {
         webDriverWait().until(ExpectedConditions.visibilityOf(element));
     }
 
-    protected void waitUntilElementIsDettached(WebElement element) {
+    protected void waitUntilElementIsDetached(WebElement element) {
         webDriverWait().until(ExpectedConditions.stalenessOf(element));
     }
 

@@ -42,7 +42,7 @@ public class DevBootStrapper {
     }
 
     public void init() {
-        //deleteAllEntities();
+        deleteAllEntities();
         
         long userCount = userDao.countAll();
 
@@ -109,14 +109,14 @@ public class DevBootStrapper {
             ratingDao.put(Rating.create(rating3));
             ratingDao.put(Rating.create(rating4));
 
-            for (int i = 0; i < 100; ++i) {
-                CarPropertiesDto carProperties = new CarPropertiesDto("MyCarProperty", i, new Date());
-                carProperties = carPropertiesDao.put(carProperties);
-                CarDto carDto = new CarDto("MyCar" + i, honda, carProperties);
-                carDto = Car.createDto(carDao.put(Car.create(carDto)));
-                RatingDto ratingDto = new RatingDto(carDto, i % 10);
-                ratingDao.put(Rating.create(ratingDto));
-            }
+//            for (int i = 0; i < 100; ++i) {
+//                CarPropertiesDto carProperties = new CarPropertiesDto("MyCarProperty", i, new Date());
+//                carProperties = carPropertiesDao.put(carProperties);
+//                CarDto carDto = new CarDto("MyCar" + i, honda, carProperties);
+//                carDto = Car.createDto(carDao.put(Car.create(carDto)));
+//                RatingDto ratingDto = new RatingDto(carDto, i % 10);
+//                ratingDao.put(Rating.create(ratingDto));
+//            }
         }
     }
 }

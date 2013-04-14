@@ -17,7 +17,8 @@ public class LoginStepdefs {
     private final ApplicationPage applicationPage;
 
     @Inject
-    public LoginStepdefs(BasicStepdefs basicStepdefs, HeaderWidgetPage headerWidgetPage, LoginPage loginPage,
+    public LoginStepdefs(HeaderWidgetPage headerWidgetPage,
+            LoginPage loginPage,
             ApplicationPage applicationPage) {
         this.headerWidgetPage = headerWidgetPage;
         this.loginPage = loginPage;
