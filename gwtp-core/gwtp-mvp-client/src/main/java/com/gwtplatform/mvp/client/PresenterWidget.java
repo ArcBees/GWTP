@@ -25,6 +25,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
@@ -101,12 +102,19 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * </ul>
  *
  * @param <V> The {@link View} type.
- * @author Philippe Beaudoin
- * @author Christian Goudreau
- * @author Denis Labaye
  */
 public abstract class PresenterWidget<V extends View> extends
-        HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot {
+        HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
+    private static class HandlerInformation<H extends EventHandler> {
+        private Type<H> type;
+        private H eventHandler;
+
+        private HandlerInformation(Type<H> type, H eventHandler) {
+            this.type = type;
+            this.eventHandler = eventHandler;
+        }
+    }
+
     private final EventBus eventBus;
     private final V view;
 
@@ -133,6 +141,10 @@ public abstract class PresenterWidget<V extends View> extends
      */
     private final List<PresenterWidget<? extends PopupView>> popupChildren =
             new ArrayList<PresenterWidget<? extends PopupView>>();
+
+    private final List<HandlerInformation<EventHandler>> visibleHandlers = new ArrayList<HandlerInformation
+            <EventHandler>>();
+    private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
 
     /**
      * Creates a {@link PresenterWidget} that is not necessarily using automatic
@@ -208,6 +220,23 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
+    public void removeFromPopupSlot(PresenterWidget<? extends PopupView> child) {
+        if (child == null) {
+            return;
+        }
+
+        if (popupChildren.contains(child)) {
+            child.getView().hide();
+            if (child.isVisible()) {
+                child.internalHide();
+            }
+            popupChildren.remove(child);
+        }
+
+        child.reparent(null);
+    }
+
+    @Override
     public final void addToSlot(Object slot, PresenterWidget<?> content) {
         if (content == null) {
             return;
@@ -223,7 +252,7 @@ public abstract class PresenterWidget<V extends View> extends
             slotChildren.add(content);
             activeChildren.put(slot, slotChildren);
         }
-        getView().addToSlot(slot, content.getWidget());
+        getView().addToSlot(slot, content);
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
@@ -261,14 +290,20 @@ public abstract class PresenterWidget<V extends View> extends
         return view;
     }
 
+    @Override
+    public Widget asWidget() {
+        return getView() == null ? null : getView().asWidget();
+    }
+
     /**
      * Makes it possible to access the {@link Widget} object associated with that
      * presenter.
      *
      * @return The Widget associated with that presenter.
      */
+    @Deprecated
     public Widget getWidget() {
-        return (getView() == null) ? null : getView().asWidget();
+        return asWidget();
     }
 
     /**
@@ -299,7 +334,7 @@ public abstract class PresenterWidget<V extends View> extends
             }
             slotChildren.remove(content);
         }
-        getView().removeFromSlot(slot, content.getWidget());
+        getView().removeFromSlot(slot, content);
     }
 
     // TODO This should be final but needs to be overriden in {@link
@@ -346,7 +381,7 @@ public abstract class PresenterWidget<V extends View> extends
         }
 
         // Set the content in the view
-        getView().setInSlot(slot, content.getWidget());
+        getView().setInSlot(slot, content);
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
@@ -361,6 +396,21 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     /**
+     * Registers an event handler towards the {@link EventBus}.
+     * Use this only in the rare situations where you want to manually
+     * control when the handler is unregistered, otherwise call
+     * {@link #addRegisteredHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)}.
+     *
+     * @param <H>     The handler type.
+     * @param type    See {@link com.google.gwt.event.shared.GwtEvent.Type}.
+     * @param handler The handler to register.
+     * @return The {@link HandlerRegistration} you should use to unregister the handler.
+     */
+    protected final <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
+        return getEventBus().addHandler(type, handler);
+    }
+
+    /**
      * Registers an event handler towards the {@link EventBus} and
      * registers it to be automatically removed when {@link #unbind()}
      * is called. This is usually the desired behavior, but if you
@@ -372,25 +422,28 @@ public abstract class PresenterWidget<V extends View> extends
      * @param handler The handler to register.
      * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
      */
-    protected final <H extends EventHandler> void addRegisteredHandler(
-            Type<H> type, H handler) {
+    protected final <H extends EventHandler> void addRegisteredHandler(Type<H> type, H handler) {
         registerHandler(addHandler(type, handler));
     }
 
     /**
-     * Registers an event handler towards the {@link EventBus}.
-     * Use this only in the rare situations where you want to manually
-     * control when the handler is unregistered, otherwise call
-     * {@link #addRegisteredHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)}.
+     * Registers an event handler towards the {@link EventBus} and
+     * registers it to be only active when the presenter is visible
+     * is called.
      *
      * @param <H>     The handler type.
      * @param type    See {@link com.google.gwt.event.shared.GwtEvent.Type}.
      * @param handler The handler to register.
-     * @return The {@link HandlerRegistration} you should use to unregister the handler.
+     * @see #addRegisteredHandler(com.google.gwt.event.shared.GwtEvent.Type, com.google.gwt.event.shared.EventHandler)
+     * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
      */
-    protected final <H extends EventHandler> HandlerRegistration addHandler(
-            Type<H> type, H handler) {
-        return getEventBus().addHandler(type, handler);
+    protected final <H extends EventHandler> void addVisibleHandler(Type<H> type, H handler) {
+        HandlerInformation handlerInformation = new HandlerInformation(type, handler);
+        visibleHandlers.add(handlerInformation);
+
+        if (visible) {
+            registerVisibleHandler(handlerInformation);
+        }
     }
 
     /**
@@ -474,7 +527,7 @@ public abstract class PresenterWidget<V extends View> extends
      * See {@link PresenterWidget} for ways to hide a presenter.
      */
     void internalHide() {
-        assert isVisible() : "Hide() called on a hidden presenter!";
+        assert isVisible() : "internalHide() called on a hidden presenter!";
         for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
             for (PresenterWidget<?> activeChild : slotChildren) {
                 activeChild.internalHide();
@@ -486,7 +539,10 @@ public abstract class PresenterWidget<V extends View> extends
             popupPresenter.getView().hide();
         }
 
+        unregisterVisibleHandlers();
+
         visible = false;
+
         onHide();
     }
 
@@ -496,7 +552,7 @@ public abstract class PresenterWidget<V extends View> extends
      * presenter.
      */
     void internalReveal() {
-        assert !isVisible() : "notifyReveal() called on a visible presenter!";
+        assert !isVisible() : "internalReveal() called on a visible presenter!";
         onReveal();
         visible = true;
 
@@ -512,6 +568,8 @@ public abstract class PresenterWidget<V extends View> extends
             monitorCloseEvent(popupPresenter);
             popupPresenter.internalReveal();
         }
+
+        registerVisibleHandlers();
     }
 
     /**
@@ -597,5 +655,24 @@ public abstract class PresenterWidget<V extends View> extends
         if (i < popupChildren.size()) {
             popupChildren.remove(i);
         }
+    }
+
+    private void registerVisibleHandler(HandlerInformation<EventHandler> handlerInformation) {
+        HandlerRegistration handlerRegistration = addHandler(handlerInformation.type, handlerInformation.eventHandler);
+        visibleHandlerRegistrations.add(handlerRegistration);
+    }
+
+    private void registerVisibleHandlers() {
+        for (HandlerInformation<EventHandler> handlerInformation : visibleHandlers) {
+            registerVisibleHandler(handlerInformation);
+        }
+    }
+
+    private void unregisterVisibleHandlers() {
+        for (HandlerRegistration handlerRegistration : visibleHandlerRegistrations) {
+            handlerRegistration.removeHandler();
+        }
+
+        visibleHandlerRegistrations.clear();
     }
 }

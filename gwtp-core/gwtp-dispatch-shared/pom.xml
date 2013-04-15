@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.gwtplatform</groupId>
         <artifactId>gwtp-core</artifactId>
-        <version>1.0-RC-2-SNAPSHOT</version>
+        <version>1.0-RC-4-SNAPSHOT</version>
     </parent>
 
     <artifactId>gwtp-dispatch-shared</artifactId>
@@ -61,25 +61,6 @@
                         <version>${project.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources/apt-test</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

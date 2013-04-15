@@ -25,8 +25,7 @@ import java.util.Map.Entry;
 import org.springframework.context.ApplicationContext;
 
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper
-        .CommonBindingDescriptor;
+import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor;
 import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 
 /**
