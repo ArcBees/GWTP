@@ -17,10 +17,11 @@
 package com.gwtplatform.mvp.rebind;
 
 import java.io.PrintWriter;
-import java.lang.annotation.Annotation;
+import java.util.List;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -30,8 +31,6 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.client.PreBootstrapper;
-import com.gwtplatform.mvp.client.annotations.Bootstrap;
-import com.gwtplatform.mvp.client.annotations.PreBootstrap;
 
 /**
  * Will generate a {@link com.gwtplatform.mvp.client.ApplicationController}. If the user wants his Generator to be
@@ -39,13 +38,16 @@ import com.gwtplatform.mvp.client.annotations.PreBootstrap;
  * revealCurrentPlace() from the place manager.
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
+    private static final String PROPERTY_BOOTSTRAPPER_EMPTY =
+            "Required configuration property 'gwtp.bootstrapper' can not be empty!.";
+    private static final String PROPERTY_NOT_FOUND = "Undefined configuration property '%s'.";
+    private static final String TYPE_NOT_FOUND = "The type '%s' was not found.";
     private static final String HINT_URL = "https://github.com/ArcBees/GWTP/wiki/Bootstrapping";
-    private static final String TOO_MANY_BOOTSTRAPPER_FOUND =
-            "Too many %s have been found. Only one %s annotated with @%s must be defined. See " + HINT_URL;
-    private static final String DOES_NOT_EXTEND_BOOTSTRAPPER =
-            "The %s provided doesn't implement the %s interface. See " + HINT_URL;
+    private static final String DOES_NOT_EXTEND_INTERFACE = "'%s' doesn't implement the '%s' interface. See "
+            + HINT_URL;
+    private static final String PROPERTY_NAME_BOOTSTRAPPER = "gwtp.bootstrapper";
+    private static final String PROPERTY_NAME_PREBOOTSTRAPPER = "gwtp.prebootstrapper";
 
-    private static final String DEFAULT_BOOTSTRAPPER = "com.gwtplatform.mvp.client.DefaultBootstrapper";
     private static final String SUFFIX = "Impl";
     private static final String OVERRIDE = "@Override";
     private static final String INJECT_METHOD = "public void init() {";
@@ -103,47 +105,73 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         return composer;
     }
 
+    /**
+     * @return The required implementation of {@link Bootstrapper} to use.
+     */
     private JClassType getBootstrapper() throws UnableToCompleteException {
-        return findSingleAnnotatedType(getType(DEFAULT_BOOTSTRAPPER), Bootstrapper.class, Bootstrap.class);
+        String typeName = lookupTypeNameByProperty(PROPERTY_NAME_BOOTSTRAPPER);
+        if (typeName == null) {
+            getTreeLogger()
+                    .log(TreeLogger.ERROR, PROPERTY_BOOTSTRAPPER_EMPTY);
+            throw new UnableToCompleteException();
+        }
+
+        return findAndVerifyType(typeName, Bootstrapper.class);
     }
 
+    /**
+     * @return The optional implementation of {@link PreBootstrapper} or <code>null</code>.
+     */
     private JClassType getPreBootstrapper() throws UnableToCompleteException {
-        return findSingleAnnotatedType(null, PreBootstrapper.class, PreBootstrap.class);
+        String typeName = lookupTypeNameByProperty(PROPERTY_NAME_PREBOOTSTRAPPER);
+        if (typeName == null) {
+            return null;
+        }
+
+        return findAndVerifyType(typeName, PreBootstrapper.class);
     }
 
-    private JClassType findSingleAnnotatedType(JClassType defaultType, Class<?> clazz,
-                                               Class<? extends Annotation> annotation) throws UnableToCompleteException {
-        int count = 0;
-        JClassType type = defaultType;
-        for (JClassType t : getTypeOracle().getTypes()) {
-            if (t.isAnnotationPresent(annotation)) {
-                count++;
-
-                verifyInterfaceIsImplemented(t, clazz);
-                verifySingleImplementer(count, clazz, annotation);
-                type = t;
+    /**
+     * Retrieve the given single-valued property.
+     *
+     * <code>null</code> if the properties' value is empty.
+     */
+    private String lookupTypeNameByProperty(String propertyName) throws UnableToCompleteException {
+        try {
+            List<String> values = getPropertyOracle().getConfigurationProperty(propertyName).getValues();
+            if (values.size() != 0) {
+                String typeName = values.get(0);
+                if (typeName != null && !typeName.trim().isEmpty()) {
+                    return typeName;
+                }
             }
-        }
-        return type;
-    }
-
-    private void verifySingleImplementer(int count, Class<?> clazz, Class<? extends Annotation> annotation)
-            throws UnableToCompleteException {
-        if (count > 1) {
-            getTreeLogger().log(TreeLogger.ERROR, String.format(TOO_MANY_BOOTSTRAPPER_FOUND, clazz.getSimpleName(),
-                    clazz.getSimpleName(), annotation.getSimpleName()));
+        } catch (BadPropertyValueException e) {
+            getTreeLogger().log(TreeLogger.ERROR, String.format(PROPERTY_NOT_FOUND, propertyName));
             throw new UnableToCompleteException();
         }
+
+        return null;
     }
 
-    private void verifyInterfaceIsImplemented(JClassType type, Class<?> clazz) throws UnableToCompleteException {
-        JClassType interfaceType = getType(clazz.getName());
+    /**
+     * Find the Java type by the given class name and verify that it extends the given interface.
+     */
+    private JClassType findAndVerifyType(String typeName, Class<?> interfaceClass) throws UnableToCompleteException {
+        JClassType type = getTypeOracle().findType(typeName);
+        if (type == null) {
+            getTreeLogger().log(TreeLogger.ERROR, String.format(TYPE_NOT_FOUND, typeName));
+            throw new UnableToCompleteException();
+        }
 
+        JClassType interfaceType = getType(interfaceClass.getName());
         if (!type.isAssignableTo(interfaceType)) {
-            getTreeLogger().log(TreeLogger.ERROR, String.format(DOES_NOT_EXTEND_BOOTSTRAPPER,
-                    clazz.getSimpleName(), clazz.getSimpleName()));
+            getTreeLogger().log(
+                    TreeLogger.ERROR,
+                    String.format(DOES_NOT_EXTEND_INTERFACE, typeName, interfaceClass.getSimpleName()));
             throw new UnableToCompleteException();
         }
+
+        return type;
     }
 
     private void writeInit(SourceWriter sw, String generatorName, JClassType preBootstrapper, JClassType bootstrapper) {

@@ -1,0 +1,38 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'>
+    <ui:with field='name' type='java.lang.String'/>
+    <ui:with field='average' type='java.lang.String'/>
+
+    <ui:style>
+        .listItemWrapper {
+            padding: 15px 10px;
+        }
+
+        .floatLeft {
+            float: left;
+            font-size: 1em;
+        }
+
+        .floatRight {
+            float: right;
+            color: #ababab;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </ui:style>
+
+    <div class="{style.listItemWrapper}">
+        <div class="{style.floatLeft}">
+            <ui:text from="{name}"/>
+        </div>
+
+        <div class="{style.floatRight}">
+            <ui:text from="{average}"/>
+        </div>
+
+        <div class="{style.clear}"/>
+    </div>
+</ui:UiBinder>

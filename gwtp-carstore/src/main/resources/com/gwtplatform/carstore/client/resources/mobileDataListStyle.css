@@ -1,0 +1,33 @@
+@external removeButton;
+
+.cellListWidget {
+}
+
+.cellListEvenItem, .cellListOddItem {
+    text-align: left;
+    background-color: #ffffff;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.cellListSelectedItem {
+    background: none;
+    background-color: #fffeaf;
+    color: #000000;
+    font-weight: normal;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.cellListEvenItem .removeButton, .cellListOddItem .removeButton {
+    display: none;
+}
+
+.cellListSelectedItem .removeButton {
+    display: block;
+    padding: 8px;
+    background-color: #910000;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    color: #ffffff;
+    font-weight: bold;
+}

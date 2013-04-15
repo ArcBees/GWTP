@@ -30,6 +30,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory;
+import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
 
 public class RebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/mvp/rebind/velocity.properties";
@@ -52,6 +53,7 @@ public class RebindModule extends AbstractModule {
         bind(GenerateFormFactorGinjectors.class).in(Singleton.class);
 
         install(new FactoryModuleBuilder().build(FormFactorGinjectorFactory.class));
+        install(new FactoryModuleBuilder().build(VelocityPlacetokenGenerator.Factory.class));
     }
 
     @Provides
