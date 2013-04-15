@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<module rename-to='CarStore'>
+    <inherits name='com.gwtplatform.carstore.CarStore'/>
+    
+    <!-- Allows the use of debugId for Selenium/Cucumber -->
+    <inherits name='com.google.gwt.user.Debug'/>
+</module>

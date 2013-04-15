@@ -16,12 +16,12 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import javax.inject.Inject;
+
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
-
-import javax.inject.Inject;
 
 /**
  * This is a subtype of {@link com.gwtplatform.mvp.client.proxy.PlaceManagerImpl PlaceManagerImpl} that uses

@@ -30,6 +30,13 @@
     <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
     <set-configuration-property name="gin.ginjector.extensions" value=""/>
 
+    <!-- kicks off the gwtp application flow -->
+    <define-configuration-property name="gwtp.bootstrapper" is-multi-valued="false"/>
+    <set-configuration-property name="gwtp.bootstrapper" value="com.gwtplatform.mvp.client.DefaultBootstrapper"/>
+
+    <!-- hooks into the GWTP bootstrapping process right before it starts -->
+    <define-configuration-property name="gwtp.prebootstrapper" is-multi-valued="true"/>
+
     <!-- Form factor specific modules -->
     <define-configuration-property name="gin.ginjector.module.desktop" is-multi-valued="false"/>
     <set-configuration-property name="gin.ginjector.module.desktop" value=""/>
@@ -44,4 +51,10 @@
     <replace-with class="com.gwtplatform.mvp.client.DesktopGinjectorProvider">
         <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
     </replace-with>
+
+    <!-- Generate the place token index -->
+    <generate-with class="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator">
+        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry" />
+    </generate-with>
+
 </module>
