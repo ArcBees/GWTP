@@ -1,0 +1,30 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:cell="urn:import:com.google.gwt.user.cellview.client">
+
+    <ui:with field="resources" type="com.gwtplatform.carstore.client.resources.AppResources"/>
+
+    <ui:style>
+        .tableWrapper {
+            margin-top: 20px;
+        }
+    </ui:style>
+
+    <g:HTMLPanel>
+        <g:HTMLPanel styleName="{resources.styles.bigTitle}">
+            <h2>
+                <g:InlineLabel text="Cars"/>
+            </h2>
+            <div>
+                <g:Button ui:field="create" styleName="{resources.styles.addAction}"/>
+            </div>
+            <span style="display: block; clear: both;"/>
+        </g:HTMLPanel>
+
+        <div class="{style.tableWrapper}">
+            <cell:CellTable ui:field="carGrid" width="100%"/>
+        </div>
+
+        <cell:SimplePager ui:field='pager'/>
+    </g:HTMLPanel>
+</ui:UiBinder>
