@@ -26,6 +26,7 @@ import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
+import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -123,15 +124,21 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        dispatcher.execute(manufacturerService.save(manufacturerDto.getId(), manufacturerDto),
-                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
-                    @Override
-                    public void onSuccess(GetResult<ManufacturerDto> result) {
-                        DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
-                                new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
-                        placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
-                    }
-                });
+        Action<GetResult<ManufacturerDto>> action;
+        if (manufacturerDto.isSaved()) {
+            action = manufacturerService.save(manufacturerDto.getId(), manufacturerDto);
+        } else {
+            action = manufacturerService.create(manufacturerDto);
+        }
+
+        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
+            @Override
+            public void onSuccess(GetResult<ManufacturerDto> result) {
+                DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
+                        new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
+                placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+            }
+        });
     }
 
     @Override
@@ -144,10 +151,10 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     protected void onReveal() {
         List<ActionType> actions;
         if (createNew) {
-            actions = Arrays.asList(new ActionType[]{ActionType.DONE});
+            actions = Arrays.asList(ActionType.DONE);
             ChangeActionBarEvent.fire(this, actions, false);
         } else {
-            actions = Arrays.asList(new ActionType[]{ActionType.DELETE, ActionType.UPDATE});
+            actions = Arrays.asList(ActionType.DELETE, ActionType.UPDATE);
             ChangeActionBarEvent.fire(this, actions, false);
         }
     }

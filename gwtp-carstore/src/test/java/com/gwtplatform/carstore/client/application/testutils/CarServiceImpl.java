@@ -21,8 +21,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Action<GetResults<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset, @QueryParam(RestParameter
-            .LIMIT) int limit) {
+    public Action<GetResults<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
+            @QueryParam(RestParameter.LIMIT) int limit) {
         return new ActionImpl<GetResults<CarDto>>(new TypeLiteral<Action<GetResults<CarDto>>>() {
         });
     }

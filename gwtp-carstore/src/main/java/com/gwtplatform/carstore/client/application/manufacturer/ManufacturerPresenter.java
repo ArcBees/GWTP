@@ -120,13 +120,13 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        dispatcher.execute(manufacturerService.getManufacturers(), new SafeAsyncCallback<GetResults<ManufacturerDto>>
-                () {
-            @Override
-            public void onSuccess(GetResults<ManufacturerDto> result) {
-                getView().displayManufacturers(result.getResults());
-            }
-        });
+        dispatcher.execute(manufacturerService.getManufacturers(),
+                new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
+                    @Override
+                    public void onSuccess(GetResults<ManufacturerDto> result) {
+                        getView().displayManufacturers(result.getResults());
+                    }
+                });
     }
 
     @Override
