@@ -195,8 +195,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
             carDto = new CarDto();
             getView().resetFields(carDto);
 
-            MyProxy proxy = carProxyFactory.create(newCar, newCar.getManufacturer().getName() +
-                    newCar.getModel());
+            MyProxy proxy = carProxyFactory.create(newCar, newCar.getManufacturer().getName() + newCar.getModel());
 
             placeManager.revealPlace(new PlaceRequest(proxy.getNameToken()));
         }
