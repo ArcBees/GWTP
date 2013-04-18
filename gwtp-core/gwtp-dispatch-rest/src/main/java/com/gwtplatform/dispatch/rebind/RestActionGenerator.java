@@ -219,8 +219,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
             if (!field.isFinal()) {
                 JType fieldType = field.getType();
                 if (fieldType.isParameterized() != null) {
-                    JParameterizedType parameterizedType = fieldType.isParameterized();
-                    generateParametersSerializers(parameterizedType);
+                    generateParametersSerializers(fieldType.isParameterized());
                 } else if (field.getType().isPrimitive() == null) {
                     generateChildSerializer(field.getType().isClassOrInterface());
                 }
