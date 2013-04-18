@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.gwtplatform.carstore.client.application.testutils.TestParameters;
+import com.gwtplatform.carstore.cucumber.util.TestParameters;
 
 public class BasePage {
     protected final WebDriver webDriver;

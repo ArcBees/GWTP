@@ -8,10 +8,11 @@ import com.gwtplatform.carstore.client.application.manufacturer.event.Manufactur
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
+import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.SaveManufacturerAction;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
+import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
@@ -24,17 +25,24 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
     }
 
     private final DispatchAsync dispatcher;
-    private ManufacturerDto manufacturerDto;
+    private final ManufacturerService manufacturerService;
     private final EditManufacturerMessages messages;
 
+    private ManufacturerDto manufacturerDto;
+
     @Inject
-    public EditManufacturerPresenter(EventBus eventBus, MyView view, DispatchAsync dispatcher,
+    public EditManufacturerPresenter(
+            EventBus eventBus,
+            MyView view,
+            DispatchAsync dispatcher,
+            ManufacturerService manufacturerService,
             EditManufacturerMessages messages) {
         super(eventBus, view);
-        
+
         this.dispatcher = dispatcher;
+        this.manufacturerService = manufacturerService;
         this.messages = messages;
-        
+
         getView().setUiHandlers(this);
     }
 
@@ -59,8 +67,8 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        dispatcher.execute(new SaveManufacturerAction(manufacturerDto),
-                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
+        ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>> callback = new
+                ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
                     @Override
                     public void onSuccess(GetResult<ManufacturerDto> result) {
                         DisplayMessageEvent.fire(EditManufacturerPresenter.this,
@@ -69,7 +77,15 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
                         getView().hide();
                     }
-                });
+                };
+
+        Action<GetResult<ManufacturerDto>> action;
+        if (manufacturerDto.isSaved()) {
+            action = manufacturerService.save(manufacturerDto.getId(), manufacturerDto);
+        } else {
+            action = manufacturerService.create(manufacturerDto);
+        }
+        dispatcher.execute(action, callback);
     }
 
     private void reveal() {

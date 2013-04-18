@@ -14,23 +14,23 @@ import com.gwtplatform.carstore.client.application.cars.car.navigation.Navigatio
 import com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent;
 import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
+import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
-import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.DeleteCarAction;
-import com.gwtplatform.carstore.shared.dispatch.GetManufacturersAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
-import com.gwtplatform.carstore.shared.dispatch.NoResults;
-import com.gwtplatform.carstore.shared.dispatch.SaveCarAction;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
+import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -54,26 +54,37 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
     public interface MyProxy extends ProxyPlace<CarPresenter> {
     }
 
+    private final CarService carService;
+    private final ManufacturerService manufacturerService;
     private final CarMessages messages;
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
     private final CarProxyFactory carProxyFactory;
 
     private CarDto carDto;
-    private Boolean createNew;
 
     @Inject
-    public CarPresenter(final EventBus eventBus, final MyView view, final DispatchAsync dispatcher,
-            final PlaceManager placeManager, final CarProxyFactory carProxyFactory, final CarMessages messages,
-            @Assisted final MyProxy proxy, @Assisted final CarDto carDto) {
+    public CarPresenter(
+            EventBus eventBus,
+            MyView view,
+            DispatchAsync dispatcher,
+            CarService carService,
+            ManufacturerService manufacturerService,
+            PlaceManager placeManager,
+            CarProxyFactory carProxyFactory,
+            CarMessages messages,
+            @Assisted MyProxy proxy,
+            @Assisted CarDto carDto) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
+        this.carService = carService;
+        this.manufacturerService = manufacturerService;
         this.messages = messages;
         this.placeManager = placeManager;
         this.carProxyFactory = carProxyFactory;
         this.carDto = carDto != null ? carDto : new CarDto();
-        
+
         getView().setUiHandlers(this);
     }
 
@@ -104,7 +115,13 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
 
     @Override
     public void onSave(final CarDto carDto) {
-        dispatcher.execute(new SaveCarAction(carDto), new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
+        Action<GetResult<CarDto>> action;
+        if (carDto.isSaved()) {
+            action = carService.save(carDto.getId(), carDto);
+        } else {
+            action = carService.create(carDto);
+        }
+        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
             @Override
             public void onSuccess(GetResult<CarDto> result) {
                 onCarSaved(carDto, result.getResult());
@@ -139,20 +156,21 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
 
     @Override
     protected void onReveal() {
-        dispatcher.execute(new GetManufacturersAction(), new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
-            @Override
-            public void onSuccess(GetResults<ManufacturerDto> result) {
-                onGetManufacturerSuccess(result.getResults());
-            }
-        });
+        dispatcher.execute(manufacturerService.getManufacturers(),
+                new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
+                    @Override
+                    public void onSuccess(GetResults<ManufacturerDto> result) {
+                        onGetManufacturerSuccess(result.getResults());
+                    }
+                });
 
-        createNew = placeManager.getCurrentPlaceRequest().matchesNameToken(NameTokens.newCar);
+        Boolean createNew = placeManager.getCurrentPlaceRequest().matchesNameToken(NameTokens.newCar);
         List<ActionType> actions;
         if (createNew) {
-            actions = Arrays.asList(new ActionType[]{ActionType.DONE});
+            actions = Arrays.asList(ActionType.DONE);
             ChangeActionBarEvent.fire(this, actions, false);
         } else {
-            actions = Arrays.asList(new ActionType[]{ActionType.DELETE, ActionType.UPDATE});
+            actions = Arrays.asList(ActionType.DELETE, ActionType.UPDATE);
             ChangeActionBarEvent.fire(this, actions, false);
         }
 
@@ -177,7 +195,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
             carDto = new CarDto();
             getView().resetFields(carDto);
 
-            CarPresenter.MyProxy proxy = carProxyFactory.create(newCar, newCar.getManufacturer().getName() +
+            MyProxy proxy = carProxyFactory.create(newCar, newCar.getManufacturer().getName() +
                     newCar.getModel());
 
             placeManager.revealPlace(new PlaceRequest(proxy.getNameToken()));
@@ -187,12 +205,13 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
     private void onDeleteCar() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + carDto.getModel() + "?");
         if (confirm) {
-            dispatcher.execute(new DeleteCarAction(carDto), new ErrorHandlerAsyncCallback<NoResults>(this) {
-                @Override
-                public void onSuccess(NoResults noResults) {
-                    NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);
-                }
-            });
+            dispatcher.execute(carService.delete(carDto.getId()),
+                    new ErrorHandlerAsyncCallback<NoResult>(this) {
+                        @Override
+                        public void onSuccess(NoResult noResult) {
+                            NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);
+                        }
+                    });
         }
     }
 }
