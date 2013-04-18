@@ -16,34 +16,14 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JField;
-import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.core.ext.typeinfo.JParameter;
-import com.google.gwt.core.ext.typeinfo.JParameterizedType;
-import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
-
-import com.gwtplatform.dispatch.rebind.event.ChildSerializer;
-import com.gwtplatform.dispatch.rebind.type.ActionBinding;
-import com.gwtplatform.dispatch.rebind.type.MethodCall;
-import com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.rest.HttpMethod;
-
-import com.google.common.eventbus.EventBus;
-import com.google.inject.assistedinject.Assisted;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
 import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.DELETE;
@@ -56,6 +36,27 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
+import com.google.common.eventbus.EventBus;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JField;
+import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JParameter;
+import com.google.gwt.core.ext.typeinfo.JParameterizedType;
+import com.google.gwt.core.ext.typeinfo.JType;
+import com.google.gwt.core.ext.typeinfo.NotFoundException;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.rebind.event.ChildSerializer;
+import com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.type.ActionBinding;
+import com.gwtplatform.dispatch.rebind.type.MethodCall;
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 
 import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
 import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
@@ -95,6 +96,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
     private final EventBus eventBus;
     private final GeneratorFactory generatorFactory;
+    private final Set<JClassType> registeredClasses;
     private final JMethod actionMethod;
     private final JType returnType;
     private final List<AnnotatedMethodParameter> pathParams = new ArrayList<AnnotatedMethodParameter>();
@@ -116,12 +118,15 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
             VelocityEngine velocityEngine,
             GeneratorUtil generatorUtil,
             GeneratorFactory generatorFactory,
+            Set<JClassType> registeredClasses,
             @Assisted JMethod actionMethod) throws UnableToCompleteException {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
+
         this.eventBus = eventBus;
         this.generatorFactory = generatorFactory;
-
+        this.registeredClasses = registeredClasses;
         this.actionMethod = actionMethod;
+
         returnType = actionMethod.getReturnType();
     }
 
@@ -147,7 +152,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
         generateSerializers(resultType);
 
-        return new ActionBinding(implName, actionMethod.getName(), resultType.getQualifiedSourceName(),
+        return new ActionBinding(implName, actionMethod.getName(), resultType.getParameterizedQualifiedSourceName(),
                 actionMethod.getParameters());
     }
 
@@ -201,6 +206,9 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
     private String generateSerializer(JClassType type) throws Exception {
         SerializerGenerator generator = generatorFactory.createSerializerGenerator(type);
+        if (type.isParameterized() != null) {
+            generateParametersSerializers(type.isParameterized());
+        }
         generateChildSerializersForType(type);
         return generator.generate();
     }
@@ -212,9 +220,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
                 JType fieldType = field.getType();
                 if (fieldType.isParameterized() != null) {
                     JParameterizedType parameterizedType = fieldType.isParameterized();
-                    for (JClassType param : parameterizedType.getTypeArgs()) {
-                        generateChildSerializer(param);
-                    }
+                    generateParametersSerializers(parameterizedType);
                 } else if (field.getType().isPrimitive() == null) {
                     generateChildSerializer(field.getType().isClassOrInterface());
                 }
@@ -222,9 +228,17 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         }
     }
 
+    private void generateParametersSerializers(JParameterizedType parameterizedType) throws Exception {
+        for (JClassType param : parameterizedType.getTypeArgs()) {
+            generateChildSerializer(param);
+        }
+    }
+
     private void generateChildSerializer(JClassType classType) throws Exception {
-        String serializer = generateSerializer(classType);
-        eventBus.post(new ChildSerializer(serializer));
+        if (!registeredClasses.contains(classType) && classType.isEnum() == null) {
+            String serializer = generateSerializer(classType);
+            eventBus.post(new ChildSerializer(serializer));
+        }
     }
 
     private String getQualifiedClassName() {

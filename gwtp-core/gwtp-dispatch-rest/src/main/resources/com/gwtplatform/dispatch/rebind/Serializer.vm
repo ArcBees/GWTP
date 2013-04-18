@@ -6,10 +6,10 @@ import name.pehl.piriti.json.client.JsonReader;
 import name.pehl.piriti.json.client.JsonWriter;
 import ${resultClass.qualifiedSourceName};
 
-public class ${implName} extends JsonSerializer<${resultClass.name}> {
-    interface Reader extends JsonReader<${resultClass.name}> {}
+public class ${implName} extends JsonSerializer<${resultClass.parameterizedQualifiedSourceName}> {
+    interface Reader extends JsonReader<${resultClass.parameterizedQualifiedSourceName}> {}
 
-    interface Writer extends JsonWriter<${resultClass.name}> {}
+    interface Writer extends JsonWriter<${resultClass.parameterizedQualifiedSourceName}> {}
 
     public ${implName}() {
         super(GWT.<Reader>create(Reader.class), GWT.<Writer>create(Writer.class));
