@@ -91,8 +91,8 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
 
     @Override
     public void onEdit(CarDto carDto) {
-        CarPresenter.MyProxy proxy = carProxyFactory.create(carDto, carDto.getManufacturer().getName() + carDto
-                .getModel());
+        CarPresenter.MyProxy proxy = carProxyFactory.create(carDto,
+                carDto.getManufacturer().getName() + carDto.getModel());
 
         placeManager.revealPlace(new PlaceRequest(proxy.getNameToken()));
     }
