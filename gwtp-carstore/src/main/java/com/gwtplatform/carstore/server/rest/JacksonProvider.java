@@ -12,6 +12,7 @@ import javax.ws.rs.ext.Provider;
 import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 
 import static org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
 import static org.codehaus.jackson.map.SerializationConfig.Feature;
@@ -23,8 +24,11 @@ public class JacksonProvider extends JacksonJsonProvider {
             MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException {
         ObjectMapper mapper = locateMapper(type, mediaType);
 
-        mapper.setSerializationConfig(mapper.getSerializationConfig().without(Feature.FAIL_ON_EMPTY_BEANS));
-        mapper.setSerializationConfig(mapper.getSerializationConfig().without(Feature.WRITE_DATES_AS_TIMESTAMPS));
+        SerializationConfig newSerializerConfig = mapper.getSerializationConfig()
+                .without(Feature.FAIL_ON_EMPTY_BEANS)
+                .without(Feature.WRITE_DATES_AS_TIMESTAMPS);
+
+        mapper.setSerializationConfig(newSerializerConfig);
         mapper.setVisibility(JsonMethod.FIELD, Visibility.ANY);
 
         super.writeTo(value, type, genericType, annotations, mediaType, httpHeaders, entityStream);
