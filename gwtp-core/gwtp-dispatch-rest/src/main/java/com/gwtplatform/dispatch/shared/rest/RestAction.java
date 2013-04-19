@@ -21,11 +21,6 @@ import java.util.List;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
-/**
- * TODO: Documentation.
- *
- * @param <R> The result type the RestAction will produce
- */
 public interface RestAction<R extends Result> extends Action<R> {
     HttpMethod getHttpMethod();
 

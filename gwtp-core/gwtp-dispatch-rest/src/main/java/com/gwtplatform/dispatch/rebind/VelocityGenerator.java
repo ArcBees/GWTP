@@ -37,9 +37,6 @@ import com.google.inject.TypeLiteral;
 import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
 import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
 
-/**
- * TODO: Documentation.
- */
 public class VelocityGenerator extends Generator {
     private static final String SUFFIX = "Impl";
     private static final String SHARED = "shared";
