@@ -16,12 +16,17 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.HandlerContainer;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -31,18 +36,17 @@ import com.gwtplatform.mvp.client.Presenter;
  *
  * @param <P>      The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
- * @author David Peterson
- * @author Philippe Beaudoin
- * @author Christian Goudreau
  */
-public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>>
-        implements ProxyPlace<P> {
+public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>> implements ProxyPlace<P>,
+        HandlerContainer {
 
     private Place place;
     private PlaceManager placeManager;
     private Proxy_ proxy;
+    private boolean isBound;
 
     private EventBus eventBus;
+    private List<HandlerRegistration> handlerRegistrations = new ArrayList<HandlerRegistration>();
 
     /**
      * Creates a {@link ProxyPlaceAbstract}. That is, the {@link Proxy} of a
@@ -105,6 +109,26 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
     }
 
     // /////////////////////
+    // Inherited from HandlerContainer
+
+    @Override
+    public final void bind() {
+        bind(placeManager, eventBus);
+    }
+
+    @Override
+    public final boolean isBound() {
+        return isBound;
+    }
+
+    @Override
+    public final void unbind() {
+        isBound = false;
+        releaseHandlers();
+    }
+
+
+    // /////////////////////
     // Protected methods that can be overridden
 
     @Override
@@ -151,9 +175,11 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
      */
     @Inject
     protected void bind(final PlaceManager placeManager, EventBus eventBus) {
-        this.eventBus = eventBus;
+        isBound = true;
         this.placeManager = placeManager;
-        eventBus.addHandler(PlaceRequestInternalEvent.getType(),
+        this.eventBus = eventBus;
+
+        addRegisteredHandler(PlaceRequestInternalEvent.getType(),
                 new PlaceRequestInternalHandler() {
                     @Override
                     public void onPlaceRequest(PlaceRequestInternalEvent event) {
@@ -171,7 +197,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
                         }
                     }
                 });
-        eventBus.addHandler(GetPlaceTitleEvent.getType(),
+        addRegisteredHandler(GetPlaceTitleEvent.getType(),
                 new GetPlaceTitleHandler() {
                     @Override
                     public void onGetPlaceTitle(GetPlaceTitleEvent event) {
@@ -200,6 +226,19 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
      */
     protected void getPlaceTitle(GetPlaceTitleEvent event) {
         event.getHandler().onSetPlaceTitle(null);
+    }
+
+    private <H> void addRegisteredHandler(GwtEvent.Type<H> type, H handler) {
+        HandlerRegistration registration = eventBus.addHandler(type, handler);
+        handlerRegistrations.add(registration);
+    }
+
+    private void releaseHandlers() {
+        for (HandlerRegistration registration : handlerRegistrations) {
+            registration.removeHandler();
+        }
+
+        handlerRegistrations.clear();
     }
 
     /**
@@ -272,7 +311,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
      * This method allows unit test to handle deferred command with a mechanism that doesn't
      * require a GWTTestCase.
      *
-     * @param command The {@Command} to defer, see {@link DeferredCommand}.
+     * @param command The {@link Command} to defer, see {@link com.google.gwt.core.client.Scheduler.ScheduledCommand}.
      */
     void addDeferredCommand(Command command) {
         Scheduler.get().scheduleDeferred(command);
