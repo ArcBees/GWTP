@@ -62,7 +62,8 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     private ManufacturerDto editingManufacturer;
 
     @Inject
-    public ManufacturerPresenter(EventBus eventBus,
+    public ManufacturerPresenter(
+            EventBus eventBus,
             MyView view, MyProxy proxy,
             DispatchAsync dispatcher,
             PlaceManager placeManager,
