@@ -1,12 +1,5 @@
 package com.gwtplatform.carstore.server.authentication;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyLong;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +12,13 @@ import com.gwtplatform.carstore.server.dao.UserDao;
 import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.dto.UserDto;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyLong;
 
 @RunWith(JukitoRunner.class)
 public class CurrentUserDtoProviderTest {

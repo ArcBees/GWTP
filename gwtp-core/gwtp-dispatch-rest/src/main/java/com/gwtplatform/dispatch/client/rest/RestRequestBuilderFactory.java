@@ -32,7 +32,8 @@ import com.gwtplatform.dispatch.shared.rest.RestParameter;
 import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
 
 class RestRequestBuilderFactory {
-    private static final Map<HttpMethod, RequestBuilder.Method> HTTP_METHODS = new EnumMap<HttpMethod, RequestBuilder.Method>(HttpMethod.class);
+    private static final Map<HttpMethod, RequestBuilder.Method> HTTP_METHODS =
+            new EnumMap<HttpMethod, RequestBuilder.Method>(HttpMethod.class);
     private static final String CONTENT_TYPE = "Content-Type";
 
     public static final String JSON_UTF8 = "application/json; charset=utf-8";
