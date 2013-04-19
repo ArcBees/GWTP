@@ -33,9 +33,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * Warning: This is still a work in progress and subject to many changes.
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
-    /**
-     * TODO: Documentation.
-     */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         protected String applicationPath = "";
 
