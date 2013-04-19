@@ -1,10 +1,10 @@
 package com.gwtplatform.carstore.client.application.testutils;
 
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.mvp.client.AutobindDisable;
-
 import org.jukito.JukitoModule;
 import org.jukito.TestSingleton;
+
+import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.mvp.client.AutobindDisable;
 
 /**
  * Base module to use while testing presenters. {@link AutomockingModule} is
