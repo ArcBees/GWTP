@@ -115,13 +115,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
 
     @Override
     public void onSave(final CarDto carDto) {
-        Action<GetResult<CarDto>> action;
-        if (carDto.isSaved()) {
-            action = carService.save(carDto.getId(), carDto);
-        } else {
-            action = carService.create(carDto);
-        }
-        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
+        dispatcher.execute(carService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
             @Override
             public void onSuccess(GetResult<CarDto> result) {
                 onCarSaved(carDto, result.getResult());
