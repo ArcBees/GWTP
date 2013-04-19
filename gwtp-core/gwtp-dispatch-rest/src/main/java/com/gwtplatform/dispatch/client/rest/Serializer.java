@@ -18,11 +18,6 @@ package com.gwtplatform.dispatch.client.rest;
 
 import com.google.gwt.user.client.rpc.SerializationException;
 
-/**
- * TODO: Documentation.
- *
- * @param <T>
- */
 public interface Serializer<T> {
     T deserialize(String value) throws SerializationException;
 

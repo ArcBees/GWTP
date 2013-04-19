@@ -20,13 +20,7 @@ import java.util.Arrays;
 
 import com.gwtplatform.dispatch.shared.Action;
 
-/**
- * TODO: Documentation.
- */
 public interface SerializerProvider {
-    /**
-     * TODO: Documentation.
-     */
     static class SerializerKey {
         private final Class<? extends Action> actionClass;
         private final SerializedType serializedType;

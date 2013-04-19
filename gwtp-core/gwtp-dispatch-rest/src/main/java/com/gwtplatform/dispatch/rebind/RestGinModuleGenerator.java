@@ -28,9 +28,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
 
-/**
- * TODO: Documentation.
- */
 public class RestGinModuleGenerator extends AbstractVelocityGenerator {
     private static final String PACKAGE = RestDispatchAsync.class.getPackage().getName();
     private static final String DEFAULT_GIN_MODULE = "RestGinModule";
