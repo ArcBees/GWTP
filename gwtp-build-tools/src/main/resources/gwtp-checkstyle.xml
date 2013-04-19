@@ -56,7 +56,7 @@
         </module>
         <module name="JavadocType">
             <property name="severity" value="info"/>
-            <property name="scope" value="package"/>
+            <property name="scope" value="protected"/>
         </module>
         <module name="JavadocMethod">
             <property name="severity" value="info"/>
@@ -221,7 +221,7 @@
         <property name="messageFormat" value=".*name.*"/>
         <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
     </module>
-    <module name="Header">
+    <module name="RegexpHeader">
         <property name="fileExtensions" value="java"/>
         <property name="severity" value="error"/>
         <property name="header"
