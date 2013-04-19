@@ -27,11 +27,7 @@ public interface RatingService extends RestService {
     Action<GetResult<RatingDto>> get(@PathParam(RestParameter.ID) Long id);
 
     @POST
-    Action<GetResult<RatingDto>> create(RatingDto RatingDto);
-
-    @PUT
-    @Path(PathParameter.ID)
-    Action<GetResult<RatingDto>> save(@PathParam(RestParameter.ID) Long id, RatingDto RatingDto);
+    Action<GetResult<RatingDto>> saveOrCreate(RatingDto RatingDto);
 
     @DELETE
     @Path(PathParameter.ID)
