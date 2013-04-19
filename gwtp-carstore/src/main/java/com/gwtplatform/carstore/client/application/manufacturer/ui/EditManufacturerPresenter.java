@@ -3,6 +3,7 @@ package com.gwtplatform.carstore.client.application.manufacturer.ui;
 import javax.inject.Inject;
 
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView;
@@ -67,8 +68,8 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>> callback = new
-                ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
+        dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
+                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
                     @Override
                     public void onSuccess(GetResult<ManufacturerDto> result) {
                         DisplayMessageEvent.fire(EditManufacturerPresenter.this,
@@ -77,15 +78,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
                         getView().hide();
                     }
-                };
-
-        Action<GetResult<ManufacturerDto>> action;
-        if (manufacturerDto.isSaved()) {
-            action = manufacturerService.save(manufacturerDto.getId(), manufacturerDto);
-        } else {
-            action = manufacturerService.create(manufacturerDto);
-        }
-        dispatcher.execute(action, callback);
+                });
     }
 
     private void reveal() {

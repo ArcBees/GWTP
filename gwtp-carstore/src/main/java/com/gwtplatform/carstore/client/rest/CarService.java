@@ -33,11 +33,7 @@ public interface CarService extends RestService {
     Action<GetResult<NumberDto<Integer>>> getCarsCount();
 
     @POST
-    Action<GetResult<CarDto>> create(CarDto carDto);
-
-    @PUT
-    @Path(PathParameter.ID)
-    Action<GetResult<CarDto>> save(@PathParam(RestParameter.ID) Long carId, CarDto carDto);
+    Action<GetResult<CarDto>> saveOrCreate(CarDto carDto);
 
     @DELETE
     @Path(PathParameter.ID)
