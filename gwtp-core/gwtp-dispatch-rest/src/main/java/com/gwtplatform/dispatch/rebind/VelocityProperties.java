@@ -23,9 +23,6 @@ import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
 
-/**
- * TODO: Documentation.
- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @BindingAnnotation

@@ -33,9 +33,6 @@ import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.dispatch.client.rest.NoResultSerializer;
 import com.gwtplatform.dispatch.shared.NoResult;
 
-/**
- * TODO: Documentation.
- */
 public class SerializerGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/Serializer.vm";
     private static final String PACKAGE = "com.gwtplatform.dispatch.shared.serializer";

@@ -39,9 +39,6 @@ import com.gwtplatform.dispatch.rebind.event.ChildSerializer;
 import com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent;
 import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
 
-/**
- * TODO: Documentation.
- */
 public class SerializerProviderGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/SerializerProvider.vm";
 
