@@ -18,7 +18,7 @@ import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.UserService;
+import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
@@ -51,7 +51,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     private static final Logger logger = Logger.getLogger(LoginPresenter.class.getName());
     private final PlaceManager placeManager;
     private final DispatchAsync dispatchAsync;
-    private final UserService userService;
+    private final SessionService sessionService;
     private final CurrentUser currentUser;
     private final LoginMessages messages;
 
@@ -61,14 +61,14 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
             MyView view, MyProxy proxy,
             PlaceManager placeManager,
             DispatchAsync dispatchAsync,
-            UserService userService,
+            SessionService sessionService,
             CurrentUser currentUser,
             LoginMessages messages) {
         super(eventBus, view, proxy);
 
         this.placeManager = placeManager;
         this.dispatchAsync = dispatchAsync;
-        this.userService = userService;
+        this.sessionService = sessionService;
         this.currentUser = currentUser;
         this.messages = messages;
 
@@ -96,7 +96,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     }
 
     private void callServerLoginAction(LogInRequest loginRequest) {
-        dispatchAsync.execute(userService.login(loginRequest), new AsyncCallback<LogInResult>() {
+        dispatchAsync.execute(sessionService.login(loginRequest), new AsyncCallback<LogInResult>() {
             @Override
             public void onFailure(Throwable e) {
                 DisplayMessageEvent.fire(LoginPresenter.this, new Message(messages.unableToContactServer(),

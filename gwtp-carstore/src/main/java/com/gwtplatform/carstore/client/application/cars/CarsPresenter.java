@@ -21,8 +21,8 @@ import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.Ac
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -65,7 +65,8 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
     private final CarProxyFactory carProxyFactory;
 
     @Inject
-    public CarsPresenter(EventBus eventBus,
+    public CarsPresenter(
+            EventBus eventBus,
             MyView view,
             MyProxy proxy,
             DispatchAsync dispatcher,
@@ -104,7 +105,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
 
     @Override
     public void fetchData(final int offset, int limit) {
-        dispatcher.execute(carService.getCars(offset, limit), new SafeAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(offset, limit), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
             public void onSuccess(GetResults<CarDto> result) {
                 getView().displayCars(offset, result.getResults());
@@ -147,7 +148,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
         getView().initDataProvider();
 
-        dispatcher.execute(carService.getCarsCount(), new SafeAsyncCallback<GetResult<NumberDto<Integer>>>() {
+        dispatcher.execute(carService.getCarsCount(), new AbstractAsyncCallback<GetResult<NumberDto<Integer>>>() {
             @Override
             public void onSuccess(GetResult<NumberDto<Integer>> result) {
                 getView().setCarsCount(result.getResult().getNumber());

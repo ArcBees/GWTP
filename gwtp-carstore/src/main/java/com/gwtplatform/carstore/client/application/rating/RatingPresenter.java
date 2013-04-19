@@ -17,7 +17,7 @@ import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -88,7 +88,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @Override
     public void onDelete(final RatingDto ratingDto) {
-        dispatcher.execute(ratingService.delete(ratingDto.getId()), new SafeAsyncCallback<NoResult>() {
+        dispatcher.execute(ratingService.delete(ratingDto.getId()), new AbstractAsyncCallback<NoResult>() {
             @Override
             public void onSuccess(NoResult result) {
                 getView().removeRating(ratingDto);
@@ -101,7 +101,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        dispatcher.execute(ratingService.getRatings(), new SafeAsyncCallback<GetResults<RatingDto>>() {
+        dispatcher.execute(ratingService.getRatings(), new AbstractAsyncCallback<GetResults<RatingDto>>() {
             @Override
             public void onSuccess(GetResults<RatingDto> result) {
                 getView().displayRatings(result.getResults());
