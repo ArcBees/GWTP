@@ -22,8 +22,6 @@ import com.google.inject.Injector;
 
 @Singleton
 public class GuiceRestEasyFilterDispatcher extends FilterDispatcher {
-    private static final Logger logger = Logger.getLogger(GuiceRestEasyFilterDispatcher.class.getName());
-
     @Inject
     Injector injector;
 
@@ -41,13 +39,11 @@ public class GuiceRestEasyFilterDispatcher extends FilterDispatcher {
             if (type instanceof Class) {
                 final Class<?> beanClass = (Class) type;
                 if (GetRestful.isRootResource(beanClass)) {
-                    final ResourceFactory resourceFactory = new GuiceResourceFactory(binding.getProvider(), beanClass);
-                    logger.info("Registering factory for" + beanClass.getName());
+                    ResourceFactory resourceFactory = new GuiceResourceFactory(binding.getProvider(), beanClass);
                     registry.addResourceFactory(resourceFactory);
                 }
 
                 if (beanClass.isAnnotationPresent(Provider.class)) {
-                    logger.info("Registering provider instance for" + beanClass.getName());
                     providerFactory.registerProviderInstance(binding.getProvider().get());
                 }
             }

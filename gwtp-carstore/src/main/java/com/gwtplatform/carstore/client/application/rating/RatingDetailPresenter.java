@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
@@ -21,8 +22,8 @@ import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -63,7 +64,8 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
     private final PlaceManager placeManager;
 
     @Inject
-    public RatingDetailPresenter(EventBus eventBus,
+    public RatingDetailPresenter(
+            EventBus eventBus,
             MyView view,
             MyProxy proxy,
             DispatchAsync dispatcher,
@@ -108,7 +110,6 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
                 DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
                         MessageStyle.SUCCESS));
                 placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
-
             }
         });
     }
@@ -124,7 +125,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
         List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
-        dispatcher.execute(carService.getCars(), new SafeAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
             public void onSuccess(GetResults<CarDto> result) {
                 onGetCarsSuccess(result.getResults());
