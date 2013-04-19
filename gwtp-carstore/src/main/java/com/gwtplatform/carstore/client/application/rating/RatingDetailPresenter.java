@@ -98,20 +98,15 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        Action<GetResult<RatingDto>> action;
-        if (ratingDto.isSaved()) {
-            action = ratingService.save(ratingDto.getId(), ratingDto);
-        } else {
-            action = ratingService.create(ratingDto);
-        }
-        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
-            @Override
-            public void onSuccess(GetResult<RatingDto> result) {
-                DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
-                        MessageStyle.SUCCESS));
-                placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
-            }
-        });
+        dispatcher.execute(ratingService.saveOrCreate(ratingDto),
+                new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
+                    @Override
+                    public void onSuccess(GetResult<RatingDto> result) {
+                        DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
+                                MessageStyle.SUCCESS));
+                        placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
+                    }
+                });
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView;
@@ -67,22 +68,16 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        Action<GetResult<RatingDto>> action;
-        if (ratingDto.isSaved()) {
-            action = ratingService.save(ratingDto.getId(), ratingDto);
-        } else {
-            action = ratingService.create(ratingDto);
-        }
-
-        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
-            @Override
-            public void onSuccess(GetResult<RatingDto> result) {
-                DisplayMessageEvent.fire(EditRatingPresenter.this, new Message(messages.ratingSaved(),
-                        MessageStyle.SUCCESS));
-                RatingAddedEvent.fire(EditRatingPresenter.this, result.getResult());
-                getView().hide();
-            }
-        });
+        dispatcher.execute(ratingService.saveOrCreate(ratingDto),
+                new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
+                    @Override
+                    public void onSuccess(GetResult<RatingDto> result) {
+                        DisplayMessageEvent.fire(EditRatingPresenter.this, new Message(messages.ratingSaved(),
+                                MessageStyle.SUCCESS));
+                        RatingAddedEvent.fire(EditRatingPresenter.this, result.getResult());
+                        getView().hide();
+                    }
+                });
     }
 
     private void reveal() {
