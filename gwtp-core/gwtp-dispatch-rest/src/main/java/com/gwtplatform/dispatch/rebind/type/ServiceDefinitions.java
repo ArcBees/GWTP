@@ -28,9 +28,6 @@ import com.gwtplatform.dispatch.rebind.GeneratorUtil;
 import com.gwtplatform.dispatch.rebind.Logger;
 import com.gwtplatform.dispatch.shared.rest.RestService;
 
-/**
- * TODO: Documentation.
- */
 public class ServiceDefinitions {
     private Logger logger;
     private final TypeOracle typeOracle;

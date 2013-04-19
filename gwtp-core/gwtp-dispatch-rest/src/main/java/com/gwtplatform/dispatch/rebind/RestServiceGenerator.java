@@ -34,9 +34,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.dispatch.rebind.type.ActionBinding;
 
-/**
- * TODO: Documentation.
- */
 public class RestServiceGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/RestService.vm";
 
