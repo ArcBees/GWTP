@@ -240,8 +240,8 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     public final void bind() {
         super.bind();
 
-        if (getProxy() instanceof HandlerContainer) {
-            ((HandlerContainer) getProxy()).bind();
+        if (getProxy() instanceof HasHandlerContainer) {
+            ((HasHandlerContainer) getProxy()).getHandlerContainer().bind();
         }
     }
 
@@ -249,8 +249,8 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     public final void unbind() {
         super.unbind();
 
-        if (getProxy() instanceof HandlerContainer) {
-            ((HandlerContainer) getProxy()).unbind();
+        if (getProxy() instanceof HasHandlerContainer) {
+            ((HasHandlerContainer) getProxy()).getHandlerContainer().unbind();
         }
     }
 
