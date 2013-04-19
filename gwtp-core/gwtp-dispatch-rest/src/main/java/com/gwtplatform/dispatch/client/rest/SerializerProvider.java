@@ -20,7 +20,13 @@ import java.util.Arrays;
 
 import com.gwtplatform.dispatch.shared.Action;
 
+/**
+ * TODO: Documentation.
+ */
 public interface SerializerProvider {
+    /**
+     * TODO: Documentation.
+     */
     static class SerializerKey {
         private final Class<? extends Action> actionClass;
         private final SerializedType serializedType;
@@ -37,7 +43,7 @@ public interface SerializerProvider {
 
         @Override
         public boolean equals(Object o) {
-            if (o == null || !(o instanceof  SerializerKey)) {
+            if (o == null || !(o instanceof SerializerKey)) {
                 return false;
             }
 
