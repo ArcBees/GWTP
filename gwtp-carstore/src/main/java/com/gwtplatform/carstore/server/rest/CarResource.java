@@ -55,18 +55,8 @@ public class CarResource {
     }
 
     @POST
-    public GetResult<CarDto> create(CarDto carDto) {
+    public GetResult<CarDto> saveOrCreate(CarDto carDto) {
         carDto = Car.createDto(carDao.put(Car.create(carDto)));
-
-        return new GetResult<CarDto>(carDto);
-    }
-
-    @Path(PathParameter.ID)
-    @PUT
-    public GetResult<CarDto> save(@PathParam(RestParameter.ID) Long id, CarDto carDto) {
-        Car car = Car.create(carDto);
-        car.setId(id);
-        carDto = Car.createDto(carDao.put(car));
 
         return new GetResult<CarDto>(carDto);
     }
