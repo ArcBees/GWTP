@@ -42,18 +42,8 @@ public class RatingResource {
     }
 
     @POST
-    public GetResult<RatingDto> create(RatingDto ratingDto) {
+    public GetResult<RatingDto> saveOrCreate(RatingDto ratingDto) {
         ratingDto = Rating.createDto(ratingDao.put(Rating.create(ratingDto)));
-
-        return new GetResult<RatingDto>(ratingDto);
-    }
-
-    @Path(PathParameter.ID)
-    @PUT
-    public GetResult<RatingDto> save(@PathParam(RestParameter.ID) Long id, RatingDto ratingDto) {
-        Rating manufacturer = Rating.create(ratingDto);
-        manufacturer.setId(id);
-        ratingDto = Rating.createDto(ratingDao.put(manufacturer));
 
         return new GetResult<RatingDto>(ratingDto);
     }

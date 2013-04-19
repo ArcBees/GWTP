@@ -28,11 +28,7 @@ public interface ManufacturerService extends RestService {
     Action<GetResult<ManufacturerDto>> get(@PathParam(RestParameter.ID) Long id);
 
     @POST
-    Action<GetResult<ManufacturerDto>> create(ManufacturerDto manufacturerDto);
-
-    @PUT
-    @Path(PathParameter.ID)
-    Action<GetResult<ManufacturerDto>> save(@PathParam(RestParameter.ID) Long id, ManufacturerDto manufacturerDto);
+    Action<GetResult<ManufacturerDto>> saveOrCreate(ManufacturerDto manufacturerDto);
 
     @DELETE
     @Path(PathParameter.ID)
