@@ -13,7 +13,7 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -86,7 +86,7 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     }
 
     private void reveal() {
-        dispatcher.execute(carService.getCars(), new SafeAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
             public void onSuccess(GetResults<CarDto> result) {
                 onGetCarsSuccess(result.getResults());
