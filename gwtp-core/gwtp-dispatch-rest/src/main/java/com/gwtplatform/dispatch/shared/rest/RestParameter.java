@@ -16,10 +16,13 @@
 
 package com.gwtplatform.dispatch.shared.rest;
 
-import com.google.common.base.Joiner;
-
 import java.util.Collection;
 
+import com.google.common.base.Joiner;
+
+/**
+ * TODO: Documentation.
+ */
 public class RestParameter {
     private String name;
     private String stringValue;

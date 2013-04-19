@@ -16,13 +16,13 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TODO: Documentation.

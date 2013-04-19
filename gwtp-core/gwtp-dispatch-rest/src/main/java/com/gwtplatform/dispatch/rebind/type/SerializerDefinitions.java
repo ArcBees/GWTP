@@ -27,6 +27,9 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rebind.GeneratorUtil;
 import com.gwtplatform.dispatch.shared.Result;
 
+/**
+ * TODO: Documentation.
+ */
 public class SerializerDefinitions {
     private final TypeOracle typeOracle;
     private GeneratorUtil generatorUtil;

@@ -38,7 +38,7 @@
             <property name="severity" value="error"/>
         </module>
         <module name="UnusedImports">
-	          <property name="processJavadoc" value="true"/>
+            <property name="processJavadoc" value="true"/>
             <property name="severity" value="error"/>
         </module>
         <module name="IllegalImport">
@@ -56,7 +56,7 @@
         </module>
         <module name="JavadocType">
             <property name="severity" value="info"/>
-            <property name="scope" value="protected"/>
+            <property name="scope" value="package"/>
         </module>
         <module name="JavadocMethod">
             <property name="severity" value="info"/>
@@ -129,7 +129,7 @@
             <property name="message" value="check that a space is left after a colon on an assembled error message"/>
             <property name="illegalPattern" value="true"/>
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment"
-                    value="check that a space is left after a colon with an assembled error message"/>
+                      value="check that a space is left after a colon with an assembled error message"/>
         </module>
         <module name="Regexp">
             <property name="severity" value="error"/>
@@ -179,7 +179,7 @@
         <module name="WhitespaceAround">
             <property name="severity" value="error"/>
             <property name="tokens"
-                    value="COLON,NOT_EQUAL,QUESTION,DIV,DIV_ASSIGN,BXOR,BXOR_ASSIGN,MINUS,LCURLY,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND,BAND,LAND,BAND_ASSIGN,MOD,MOD_ASSIGN,PLUS,PLUS_ASSIGN,LT,SL,SL_ASSIGN,LE,ASSIGN,MINUS_ASSIGN,EQUAL,GT,GE,SR,SR_ASSIGN,BSR,BSR_ASSIGN,BOR,BOR_ASSIGN,LOR,LITERAL_ASSERT,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,SLIST,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE"/>
+                      value="COLON,NOT_EQUAL,QUESTION,DIV,DIV_ASSIGN,BXOR,BXOR_ASSIGN,MINUS,LCURLY,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND,BAND,LAND,BAND_ASSIGN,MOD,MOD_ASSIGN,PLUS,PLUS_ASSIGN,LT,SL,SL_ASSIGN,LE,ASSIGN,MINUS_ASSIGN,EQUAL,GT,GE,SR,SR_ASSIGN,BSR,BSR_ASSIGN,BOR,BOR_ASSIGN,LOR,LITERAL_ASSERT,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,SLIST,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE"/>
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Must have spaces"/>
         </module>
         <module name="WhitespaceAfter">
@@ -221,10 +221,11 @@
         <property name="messageFormat" value=".*name.*"/>
         <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
     </module>
-    <module name="RegexpHeader">
+    <module name="Header">
         <property name="fileExtensions" value="java"/>
         <property name="severity" value="error"/>
-        <property name="header" value="^/\*\*$\n^ \* Copyright \d{4} ArcBees Inc\.$\n^ \*$\n^ \* Licensed under the Apache License, Version 2\.0 \(the &quot;License&quot;\); you may not$\n^ \* use this file except in compliance with the License\. You may obtain a copy of$\n^ \* the License at$\n^ \*$\n^ \* http://www\.apache\.org/licenses/LICENSE-2\.0$\n^ \*$\n^ \* Unless required by applicable law or agreed to in writing, software$\n^ \* distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT$\n^ \* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied\. See the$\n^ \* License for the specific language governing permissions and limitations under$\n^ \* the License\.$\n^ \*/$\n"/>
+        <property name="header"
+                  value="^/\*\*$\n^ \* Copyright \d{4} ArcBees Inc\.$\n^ \*$\n^ \* Licensed under the Apache License, Version 2\.0 \(the &quot;License&quot;\); you may not$\n^ \* use this file except in compliance with the License\. You may obtain a copy of$\n^ \* the License at$\n^ \*$\n^ \* http://www\.apache\.org/licenses/LICENSE-2\.0$\n^ \*$\n^ \* Unless required by applicable law or agreed to in writing, software$\n^ \* distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT$\n^ \* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied\. See the$\n^ \* License for the specific language governing permissions and limitations under$\n^ \* the License\.$\n^ \*/$\n"/>
     </module>
     <module name="SuppressionFilter">
         <property name="file" value="${basedir}/${suppressions.file}"/>
