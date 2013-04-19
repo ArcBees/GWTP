@@ -18,6 +18,9 @@ package com.gwtplatform.dispatch.rebind.type;
 
 import com.gwtplatform.dispatch.client.rest.SerializedType;
 
+/**
+ * TODO: Documentation.
+ */
 public class RegisterSerializerBinding {
     private final String actionClass;
     private final SerializedType serializedType;
