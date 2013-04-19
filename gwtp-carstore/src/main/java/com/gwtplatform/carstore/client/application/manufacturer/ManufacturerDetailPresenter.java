@@ -128,21 +128,15 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        Action<GetResult<ManufacturerDto>> action;
-        if (manufacturerDto.isSaved()) {
-            action = manufacturerService.save(manufacturerDto.getId(), manufacturerDto);
-        } else {
-            action = manufacturerService.create(manufacturerDto);
-        }
-
-        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
-            @Override
-            public void onSuccess(GetResult<ManufacturerDto> result) {
-                DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
-                        new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
-                placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
-            }
-        });
+        dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
+                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
+                    @Override
+                    public void onSuccess(GetResult<ManufacturerDto> result) {
+                        DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
+                                new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
+                        placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+                    }
+                });
     }
 
     @Override
