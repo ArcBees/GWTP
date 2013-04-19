@@ -16,9 +16,6 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import com.google.gwt.core.client.Scheduler;
@@ -27,6 +24,8 @@ import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.HandlerContainer;
+import com.gwtplatform.mvp.client.HandlerContainerImpl;
+import com.gwtplatform.mvp.client.HasHandlerContainer;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -38,15 +37,40 @@ import com.gwtplatform.mvp.client.Presenter;
  * @param <Proxy_> Type of the associated {@link Proxy}.
  */
 public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>> implements ProxyPlace<P>,
-        HandlerContainer {
+        HasHandlerContainer {
+    /**
+     * Hides {@link com.gwtplatform.mvp.client.HandlerContainer#bind()} and
+     * {@link com.gwtplatform.mvp.client.HandlerContainer#unbind()} from implementers.
+     */
+    private class ProxyHandlerContainer extends HandlerContainerImpl {
+        private boolean wasBound;
+
+        @Override
+        protected void registerHandler(HandlerRegistration handlerRegistration) {
+            super.registerHandler(handlerRegistration);
+
+            // Visibility is limited to this package, so registerHandler can only be call by ProxyPlaceAbstract#bind()
+            wasBound = true;
+        }
+
+        @Override
+        public void bind() {
+            // Was never bound, so rebinding it does not make sense.
+            if (wasBound) {
+                super.bind();
+
+                ProxyPlaceAbstract.this.bind(placeManager, eventBus);
+            }
+        }
+    }
+
+    private final ProxyHandlerContainer handlerContainer = new ProxyHandlerContainer();
 
     private Place place;
     private PlaceManager placeManager;
     private Proxy_ proxy;
-    private boolean isBound;
 
     private EventBus eventBus;
-    private List<HandlerRegistration> handlerRegistrations = new ArrayList<HandlerRegistration>();
 
     /**
      * Creates a {@link ProxyPlaceAbstract}. That is, the {@link Proxy} of a
@@ -108,25 +132,10 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
         return place.matchesRequest(request);
     }
 
-    // /////////////////////
-    // Inherited from HandlerContainer
-
     @Override
-    public final void bind() {
-        bind(placeManager, eventBus);
+    public HandlerContainer getHandlerContainer() {
+        return handlerContainer;
     }
-
-    @Override
-    public final boolean isBound() {
-        return isBound;
-    }
-
-    @Override
-    public final void unbind() {
-        isBound = false;
-        releaseHandlers();
-    }
-
 
     // /////////////////////
     // Protected methods that can be overridden
@@ -175,44 +184,41 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
      */
     @Inject
     protected void bind(final PlaceManager placeManager, EventBus eventBus) {
-        isBound = true;
         this.placeManager = placeManager;
         this.eventBus = eventBus;
 
-        addRegisteredHandler(PlaceRequestInternalEvent.getType(),
-                new PlaceRequestInternalHandler() {
-                    @Override
-                    public void onPlaceRequest(PlaceRequestInternalEvent event) {
-                        if (event.isHandled()) {
-                            return;
-                        }
-                        PlaceRequest request = event.getRequest();
-                        if (matchesRequest(request)) {
-                            event.setHandled();
-                            if (canReveal()) {
-                                handleRequest(request, event.shouldUpdateBrowserHistory());
-                            } else {
-                                event.setUnauthorized();
-                            }
-                        }
+        addRegisteredHandler(PlaceRequestInternalEvent.getType(), new PlaceRequestInternalHandler() {
+            @Override
+            public void onPlaceRequest(PlaceRequestInternalEvent event) {
+                if (event.isHandled()) {
+                    return;
+                }
+                PlaceRequest request = event.getRequest();
+                if (matchesRequest(request)) {
+                    event.setHandled();
+                    if (canReveal()) {
+                        handleRequest(request, event.shouldUpdateBrowserHistory());
+                    } else {
+                        event.setUnauthorized();
                     }
-                });
-        addRegisteredHandler(GetPlaceTitleEvent.getType(),
-                new GetPlaceTitleHandler() {
-                    @Override
-                    public void onGetPlaceTitle(GetPlaceTitleEvent event) {
-                        if (event.isHandled()) {
-                            return;
-                        }
-                        PlaceRequest request = event.getRequest();
-                        if (matchesRequest(request)) {
-                            if (canReveal()) {
-                                event.setHandled();
-                                getPlaceTitle(event);
-                            }
-                        }
+                }
+            }
+        });
+        addRegisteredHandler(GetPlaceTitleEvent.getType(), new GetPlaceTitleHandler() {
+            @Override
+            public void onGetPlaceTitle(GetPlaceTitleEvent event) {
+                if (event.isHandled()) {
+                    return;
+                }
+                PlaceRequest request = event.getRequest();
+                if (matchesRequest(request)) {
+                    if (canReveal()) {
+                        event.setHandled();
+                        getPlaceTitle(event);
                     }
-                });
+                }
+            }
+        });
     }
 
     /**
@@ -228,17 +234,17 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
         event.getHandler().onSetPlaceTitle(null);
     }
 
-    private <H> void addRegisteredHandler(GwtEvent.Type<H> type, H handler) {
+    /**
+     * Register an event to be automatically removed when this proxy will be released.
+     * You will have to register your event again if you rebind this proxy.
+     *
+     * @param type    The event type
+     * @param handler The handler to register.
+     * @param <H>     The handler type
+     */
+    protected <H> void addRegisteredHandler(GwtEvent.Type<H> type, H handler) {
         HandlerRegistration registration = eventBus.addHandler(type, handler);
-        handlerRegistrations.add(registration);
-    }
-
-    private void releaseHandlers() {
-        for (HandlerRegistration registration : handlerRegistrations) {
-            registration.removeHandler();
-        }
-
-        handlerRegistrations.clear();
+        handlerContainer.registerHandler(registration);
     }
 
     /**
