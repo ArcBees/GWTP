@@ -16,7 +16,7 @@ import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.login.LoginPresenter;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
-import com.gwtplatform.carstore.client.rest.UserService;
+import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.NoResult;
@@ -47,7 +47,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
 
     private final DispatchAsync dispatchAsync;
-    private final UserService userService;
+    private final SessionService sessionService;
     private final String defaultPlaceNameToken;
     private final PlaceManager placeManager;
     private final CurrentUser currentUser;
@@ -58,7 +58,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
             EventBus eventBus,
             MyView view,
             DispatchAsync dispatchAsync,
-            UserService userService,
+            SessionService sessionService,
             @DefaultPlace String defaultPlaceNameToken,
             PlaceManager placeManager,
             CurrentUser currentUser,
@@ -66,7 +66,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
         super(eventBus, view);
 
         this.dispatchAsync = dispatchAsync;
-        this.userService = userService;
+        this.sessionService = sessionService;
         this.defaultPlaceNameToken = defaultPlaceNameToken;
         this.placeManager = placeManager;
         this.currentUser = currentUser;
@@ -77,7 +77,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
 
     @Override
     public void logout() {
-        dispatchAsync.execute(userService.logout(), new AsyncCallback<NoResult>() {
+        dispatchAsync.execute(sessionService.logout(), new AsyncCallback<NoResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 DisplayMessageEvent.fire(HeaderPresenter.this, new Message(messages.errorLoggingOut(),
