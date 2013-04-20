@@ -18,8 +18,8 @@ import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufactu
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -62,7 +62,8 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     private ManufacturerDto editingManufacturer;
 
     @Inject
-    public ManufacturerPresenter(EventBus eventBus,
+    public ManufacturerPresenter(
+            EventBus eventBus,
             MyView view, MyProxy proxy,
             DispatchAsync dispatcher,
             PlaceManager placeManager,
@@ -121,7 +122,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
         dispatcher.execute(manufacturerService.getManufacturers(),
-                new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
+                new AbstractAsyncCallback<GetResults<ManufacturerDto>>() {
                     @Override
                     public void onSuccess(GetResults<ManufacturerDto> result) {
                         getView().displayManufacturers(result.getResults());

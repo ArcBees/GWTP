@@ -22,8 +22,8 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -115,13 +115,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
 
     @Override
     public void onSave(final CarDto carDto) {
-        Action<GetResult<CarDto>> action;
-        if (carDto.isSaved()) {
-            action = carService.save(carDto.getId(), carDto);
-        } else {
-            action = carService.create(carDto);
-        }
-        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
+        dispatcher.execute(carService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
             @Override
             public void onSuccess(GetResult<CarDto> result) {
                 onCarSaved(carDto, result.getResult());
@@ -157,7 +151,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
     @Override
     protected void onReveal() {
         dispatcher.execute(manufacturerService.getManufacturers(),
-                new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
+                new AbstractAsyncCallback<GetResults<ManufacturerDto>>() {
                     @Override
                     public void onSuccess(GetResults<ManufacturerDto> result) {
                         onGetManufacturerSuccess(result.getResults());

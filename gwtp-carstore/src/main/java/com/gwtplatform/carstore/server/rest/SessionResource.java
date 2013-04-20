@@ -2,6 +2,7 @@ package com.gwtplatform.carstore.server.rest;
 
 import java.util.logging.Logger;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,18 +23,18 @@ import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.dispatch.shared.NoResult;
 
-@Path(ResourcesPath.USER)
+@Path(ResourcesPath.SESSION)
 @Produces(MediaType.APPLICATION_JSON)
-public class UserResource {
+public class SessionResource {
     private final Authenticator authenticator;
     private final CurrentUserDtoProvider currentUserDtoProvider;
-    private final UserSessionDao loginCookieDao;
+    private final UserSessionDao userSessionDao;
 
     private boolean isLoggedIn;
     private Logger logger;
 
     @Inject
-    public UserResource(
+    public SessionResource(
             Logger logger,
             Authenticator authenticator,
             CurrentUserDtoProvider currentUserDtoProvider,
@@ -41,23 +42,20 @@ public class UserResource {
         this.logger = logger;
         this.authenticator = authenticator;
         this.currentUserDtoProvider = currentUserDtoProvider;
-        this.loginCookieDao = userSessionDao;
+        this.userSessionDao = userSessionDao;
     }
 
-    @Path(ResourcesPath.CURRENT)
     @GET
     public GetResult<CurrentUserDto> getCurrentUser() {
         return new GetResult<CurrentUserDto>(currentUserDtoProvider.get());
     }
 
-    @Path(ResourcesPath.LOGOUT)
-    @GET
+    @DELETE
     public NoResult logout() {
         authenticator.logout();
         return new NoResult();
     }
 
-    @Path(ResourcesPath.LOGIN)
     @POST
     public LogInResult login(LogInRequest action) {
         UserDto userDto;
@@ -73,7 +71,7 @@ public class UserResource {
 
         String loggedInCookie = "";
         if (isLoggedIn) {
-            loggedInCookie = loginCookieDao.createSessionCookie(userDto);
+            loggedInCookie = userSessionDao.createSessionCookie(userDto);
         }
 
         logger.info("Login: actiontype=" + action.getActionType());

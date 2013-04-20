@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView;
@@ -13,7 +14,7 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -67,26 +68,20 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        Action<GetResult<RatingDto>> action;
-        if (ratingDto.isSaved()) {
-            action = ratingService.save(ratingDto.getId(), ratingDto);
-        } else {
-            action = ratingService.create(ratingDto);
-        }
-
-        dispatcher.execute(action, new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
-            @Override
-            public void onSuccess(GetResult<RatingDto> result) {
-                DisplayMessageEvent.fire(EditRatingPresenter.this, new Message(messages.ratingSaved(),
-                        MessageStyle.SUCCESS));
-                RatingAddedEvent.fire(EditRatingPresenter.this, result.getResult());
-                getView().hide();
-            }
-        });
+        dispatcher.execute(ratingService.saveOrCreate(ratingDto),
+                new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
+                    @Override
+                    public void onSuccess(GetResult<RatingDto> result) {
+                        DisplayMessageEvent.fire(EditRatingPresenter.this, new Message(messages.ratingSaved(),
+                                MessageStyle.SUCCESS));
+                        RatingAddedEvent.fire(EditRatingPresenter.this, result.getResult());
+                        getView().hide();
+                    }
+                });
     }
 
     private void reveal() {
-        dispatcher.execute(carService.getCars(), new SafeAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
             public void onSuccess(GetResults<CarDto> result) {
                 onGetCarsSuccess(result.getResults());

@@ -9,7 +9,7 @@ public class RestModule extends HandlerModule {
     protected void configureHandlers() {
         bind(CarResource.class);
         bind(ManufacturerResource.class);
-        bind(UserResource.class);
+        bind(SessionResource.class);
         bind(RatingResource.class);
         bind(JacksonProvider.class).in(Singleton.class);
     }
