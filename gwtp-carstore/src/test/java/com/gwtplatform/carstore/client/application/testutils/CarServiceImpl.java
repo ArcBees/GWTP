@@ -34,13 +34,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Action<GetResult<CarDto>> create(CarDto carDto) {
-        return new ActionImpl<GetResult<CarDto>>(new TypeLiteral<Action<GetResult<CarDto>>>() {
-        });
-    }
-
-    @Override
-    public Action<GetResult<CarDto>> save(@PathParam(RestParameter.ID) Long carId, CarDto carDto) {
+    public Action<GetResult<CarDto>> saveOrCreate(CarDto carDto) {
         return new ActionImpl<GetResult<CarDto>>(new TypeLiteral<Action<GetResult<CarDto>>>() {
         });
     }

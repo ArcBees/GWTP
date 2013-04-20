@@ -335,12 +335,12 @@
         <dependency>
             <groupId>name.pehl</groupId>
             <artifactId>piriti-user</artifactId>
-            <version>0.9-SNAPSHOT</version>
+            <version>${piriti.version}</version>
         </dependency>
         <dependency>
             <groupId>name.pehl</groupId>
             <artifactId>piriti-dev</artifactId>
-            <version>0.9-SNAPSHOT</version>
+            <version>${piriti.version}</version>
         </dependency>
     </dependencies>
 

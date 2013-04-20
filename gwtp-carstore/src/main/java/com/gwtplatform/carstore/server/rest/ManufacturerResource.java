@@ -48,18 +48,8 @@ public class ManufacturerResource {
     }
 
     @POST
-    public GetResult<ManufacturerDto> create(ManufacturerDto manufacturerDto) {
+    public GetResult<ManufacturerDto> saveOrCreate(ManufacturerDto manufacturerDto) {
         manufacturerDto = Manufacturer.createDto(manufacturerDao.put(Manufacturer.create(manufacturerDto)));
-
-        return new GetResult<ManufacturerDto>(manufacturerDto);
-    }
-
-    @Path(PathParameter.ID)
-    @PUT
-    public GetResult<ManufacturerDto> save(@PathParam(RestParameter.ID) Long id, ManufacturerDto manufacturerDto) {
-        Manufacturer manufacturer = Manufacturer.create(manufacturerDto);
-        manufacturer.setId(id);
-        manufacturerDto = Manufacturer.createDto(manufacturerDao.put(manufacturer));
 
         return new GetResult<ManufacturerDto>(manufacturerDto);
     }
