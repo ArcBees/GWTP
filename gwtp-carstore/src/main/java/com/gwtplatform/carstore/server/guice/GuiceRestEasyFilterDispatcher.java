@@ -1,7 +1,6 @@
 package com.gwtplatform.carstore.server.guice;
 
 import java.lang.reflect.Type;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

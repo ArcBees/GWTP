@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.client.gin;
 
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
@@ -24,9 +26,6 @@ import com.gwtplatform.dispatch.client.rest.SerializerProvider;
 import com.gwtplatform.dispatch.client.rest.XCSRFHeaderName;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
-
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses HTTP REST calls.

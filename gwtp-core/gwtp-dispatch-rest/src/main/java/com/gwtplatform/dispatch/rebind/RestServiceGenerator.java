@@ -16,23 +16,23 @@
 
 package com.gwtplatform.dispatch.rebind;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.ws.rs.Path;
+
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-
-import com.gwtplatform.dispatch.rebind.type.ActionBinding;
-
 import com.google.inject.assistedinject.Assisted;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.ws.rs.Path;
+import com.gwtplatform.dispatch.rebind.type.ActionBinding;
 
 public class RestServiceGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/RestService.vm";
