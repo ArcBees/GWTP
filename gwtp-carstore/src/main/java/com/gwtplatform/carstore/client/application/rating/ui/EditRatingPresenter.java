@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.google.web.bindery.event.shared.EventBus;
-
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView;
@@ -13,13 +12,12 @@ import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.RatingService;
-import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
+import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
