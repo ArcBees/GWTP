@@ -16,16 +16,17 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import java.io.PrintWriter;
 
-import com.google.common.base.Strings;
+import javax.inject.Provider;
+
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import java.io.PrintWriter;
-import javax.inject.Provider;
+import com.google.common.base.Strings;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
 public abstract class AbstractVelocityGenerator {
     protected static final String SUFFIX = "Impl";
@@ -79,22 +80,23 @@ public abstract class AbstractVelocityGenerator {
     protected abstract void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException;
 
     protected String concatenatePath(String prefix, String suffix) {
-        prefix = normalizePath(prefix);
-        suffix = normalizePath(suffix);
+        String normalizerPrefix = normalizePath(prefix);
+        String normalizedSuffix = normalizePath(suffix);
 
-        if (prefix.endsWith("/") && !suffix.isEmpty()) {
-            suffix = suffix.substring(1);
+        if (normalizerPrefix.endsWith("/") && !normalizedSuffix.isEmpty()) {
+            normalizedSuffix = normalizedSuffix.substring(1);
         }
 
-        return prefix + suffix;
+        return normalizerPrefix + normalizedSuffix;
     }
 
     protected String normalizePath(String path) {
+        String normalizedPath = path;
         if (!path.isEmpty() && !path.startsWith("/")) {
-            path = "/" + path;
+            normalizedPath = "/" + path;
         }
 
-        return path;
+        return normalizedPath;
     }
 
     private String createName(JClassType type, String name, String suffix) {
