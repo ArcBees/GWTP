@@ -38,6 +38,9 @@ import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.gwtplatform.dispatch.rebind.type.SerializerDefinitions;
 
+/**
+ * TODO: Documentation.
+ */
 public class RebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rebind/velocity.properties";
 

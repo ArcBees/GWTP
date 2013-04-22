@@ -6,11 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.google.common.base.Strings;
-
 import com.google.gwt.user.client.Window;
-
 import com.google.web.bindery.event.shared.EventBus;
-
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
@@ -25,11 +22,10 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
-import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
+import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
