@@ -119,7 +119,7 @@ public class RouteTokenFormatter implements TokenFormatter {
         }
 
         /**
-         * Sort {@link RouteMatch}s by the amount of {@link #staticMatchtes}.
+         * Sort {@link RouteMatch}s by the amount of {@link #staticMatches}.
          */
         @Override
         public int compareTo(RouteMatch other) {
@@ -258,7 +258,7 @@ public class RouteTokenFormatter implements TokenFormatter {
 
         match.parameters = parseQueryString(query, match.parameters);
 
-        return new PlaceRequest(match.route, match.parameters);
+        return new PlaceRequest.Builder().withNameToken(match.route).withParams(match.parameters).build();
     }
 
     @Override
