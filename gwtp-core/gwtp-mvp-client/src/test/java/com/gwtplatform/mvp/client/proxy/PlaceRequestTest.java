@@ -32,7 +32,6 @@ import static org.junit.Assert.assertNull;
  * {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder} tests.
  */
 public class PlaceRequestTest {
-
     @Test
     public void shouldBuildEmptyRequest() {
         // when
@@ -48,8 +47,8 @@ public class PlaceRequestTest {
     @Test
     public void shouldBuildRequestWithSeveralParameters() {
         // when
-        PlaceRequest request = new PlaceRequest.Builder().withNameToken("nameToken").withParam("name1", "value1")
-                .withParam("name2", "value2").build();
+        PlaceRequest request = new PlaceRequest.Builder().nameToken("nameToken").with("name1", "value1")
+                .with("name2", "value2").build();
 
         // then
         assertNotNull(request);
@@ -66,8 +65,8 @@ public class PlaceRequestTest {
         existingParameters.put("name2", "value2");
 
         // when
-        PlaceRequest request = new PlaceRequest.Builder().withNameToken("nameToken").withParams(existingParameters)
-                .withParam("name3", "value3").build();
+        PlaceRequest request = new PlaceRequest.Builder().nameToken("nameToken").with(existingParameters)
+                .with("name3", "value3").build();
 
         // then
         assertNotNull(request);
