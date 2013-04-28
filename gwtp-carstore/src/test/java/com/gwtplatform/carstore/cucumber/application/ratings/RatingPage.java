@@ -1,9 +1,6 @@
 package com.gwtplatform.carstore.cucumber.application.ratings;
 
-import javax.inject.Inject;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 
@@ -26,11 +23,6 @@ public class RatingPage extends BasePage {
     @FindByDebugId("ratingSave")
     @CacheLookup
     private WebElement save;
-
-    @Inject
-    public RatingPage(WebDriver webDriver) {
-        super(webDriver);
-    }
 
     public void clickOnCreate() {
         create.click();

@@ -1,10 +1,14 @@
 package com.gwtplatform.carstore.cucumber.application;
 
+import javax.inject.Inject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,10 +16,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.gwtplatform.carstore.cucumber.util.TestParameters;
 
 public class BasePage {
-    protected final WebDriver webDriver;
+    @Inject
+    private static ElementLocatorFactory elementLocatorFactory;
 
-    protected BasePage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+    @Inject
+    protected WebDriver webDriver;
+
+    protected BasePage() {
+        PageFactory.initElements(elementLocatorFactory, this);
     }
 
     public void getUrl(String url) {
