@@ -1,9 +1,6 @@
 package com.gwtplatform.carstore.cucumber.application.widgets;
 
-import javax.inject.Inject;
-
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gwtplatform.carstore.cucumber.application.BasePage;
@@ -14,11 +11,6 @@ public class MessageWidgetPage extends BasePage {
     private WebElement successMessage;
     @FindByDebugId("errorMessage")
     private WebElement errorMessage;
-
-    @Inject
-    public MessageWidgetPage(WebDriver webDriver) {
-        super(webDriver);
-    }
 
     public Boolean hasSuccessMessage() {
         return messageIsVisible(successMessage);
