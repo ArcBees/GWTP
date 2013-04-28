@@ -16,7 +16,7 @@
                 <g:InlineLabel text="Ratings"/>
             </h2>
             <div>
-                <g:Button ui:field="create" styleName="{resources.styles.addAction}"/>
+                <g:Button ui:field="create" debugId="ratingCreate" styleName="{resources.styles.addAction}"/>
             </div>
             <span style="display: block; clear: both;"/>
         </div>
