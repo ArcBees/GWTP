@@ -258,7 +258,7 @@ public class RouteTokenFormatter implements TokenFormatter {
 
         match.parameters = parseQueryString(query, match.parameters);
 
-        return new PlaceRequest.Builder().withNameToken(match.route).withParams(match.parameters).build();
+        return new PlaceRequest.Builder().nameToken(match.route).with(match.parameters).build();
     }
 
     @Override
