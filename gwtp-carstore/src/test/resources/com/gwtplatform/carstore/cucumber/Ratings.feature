@@ -5,9 +5,10 @@ Feature: Ratings
     And I navigate to the rating page
 
   Scenario: Add a rating
-    When I fill the rating form
+    When I click on the create rating button
+    And I fill the rating form
     Then A rating is created
 
   Scenario: Delete a rating
     When I delete the first rating
-    Then It gets removed
+    Then The first rating gets removed
