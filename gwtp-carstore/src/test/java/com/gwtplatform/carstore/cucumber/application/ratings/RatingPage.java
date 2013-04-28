@@ -1,13 +1,12 @@
 package com.gwtplatform.carstore.cucumber.application.ratings;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 
-import com.gwtplatform.carstore.cucumber.application.BasePage;
+import com.gwtplatform.carstore.cucumber.application.PageWithEditTable;
 import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
-public class RatingPage extends BasePage {
+public class RatingPage extends PageWithEditTable {
     private static final String DELETE_BTN_CLASS_NAME = "delete";
     private static final String A_VALID_RATING = "10";
 
@@ -35,14 +34,10 @@ public class RatingPage extends BasePage {
     }
 
     public void deleteFirstRating() {
-        WebElement delete = waitUntilElementIsLoaded(ratings, By.className(DELETE_BTN_CLASS_NAME))
-                .findElement(By.tagName("button"));
-        chooseOkOnNextConfirm();
-        delete.click();
-        waitUntilElementIsDetached(delete);
+        deleteFirstRow(ratings);
     }
 
     public int getNumberOfLines() {
-        return ratings.findElements(By.className(DELETE_BTN_CLASS_NAME)).size();
+        return getNumberOfLines(ratings);
     }
 }

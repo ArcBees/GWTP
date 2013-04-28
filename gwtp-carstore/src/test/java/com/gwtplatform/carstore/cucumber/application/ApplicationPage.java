@@ -7,7 +7,7 @@ import static com.google.gwt.user.client.ui.UIObject.DEBUG_ID_PREFIX;
 public class ApplicationPage extends BasePage {
     public Boolean waitUntilDomIsLoaded(String nameToken) {
         try {
-            waitUntilElementIsLoaded(DEBUG_ID_PREFIX + nameToken + "Panel");
+            waitUntilPlaceIsLoaded(nameToken);
             waitUntilElementIsLoaded(DEBUG_ID_PREFIX + "dom");
             return true;
         } catch (TimeoutException e) {
