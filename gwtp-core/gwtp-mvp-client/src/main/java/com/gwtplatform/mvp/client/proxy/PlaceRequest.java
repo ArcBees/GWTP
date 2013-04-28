@@ -79,7 +79,7 @@ public class PlaceRequest {
      * </pre>
      *
      * @param nameToken The name token for the request.
-     * @deprecated Please use {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder#withNameToken(String)}
+     * @deprecated Please use {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder#nameToken(String)}
      * instead
      */
     @Deprecated
@@ -134,8 +134,7 @@ public class PlaceRequest {
      *
      * @param key          The name of the parameter.
      * @param defaultValue The value returned if the parameter is not found.
-     * @return The value of the parameter if found, the {@code defaultValue}
-     *         otherwise.
+     * @return The value of the parameter if found, the {@code defaultValue} otherwise.
      */
     public String getParameter(String key, String defaultValue) {
         String value = null;
@@ -176,8 +175,7 @@ public class PlaceRequest {
      * Checks if this place request has the same name token as the one passed in.
      *
      * @param other The {@link com.gwtplatform.mvp.client.proxy.PlaceRequest} to check against.
-     * @return <code>true</code> if both requests share the same name token.
-     *         <code>false</code> otherwise.
+     * @return <code>true</code> if both requests share the same name token. <code>false</code> otherwise.
      */
     public boolean hasSameNameToken(PlaceRequest other) {
         if (nameToken == null || other.nameToken == null) {
@@ -190,8 +188,7 @@ public class PlaceRequest {
      * Checks if this place request matches the name token passed.
      *
      * @param nameToken The name token to match.
-     * @return <code>true</code> if the request matches. <code>false</code>
-     *         otherwise.
+     * @return <code>true</code> if the request matches. <code>false</code> otherwise.
      */
     public boolean matchesNameToken(String nameToken) {
         if (this.nameToken == null || nameToken == null) {
@@ -208,7 +205,7 @@ public class PlaceRequest {
      * @param name  The new parameter name.
      * @param value The new parameter value.
      * @return The new place request instance.
-     * @deprecated Please use {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder#withParam(String, String)}
+     * @deprecated Please use {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder#with(String, String)}
      * instead
      */
     @Deprecated
@@ -218,9 +215,9 @@ public class PlaceRequest {
         // it reduces unexpected side-effects. Moreover, it lets
         // us instantiate the parameter map only when needed.
         // (See the PlaceRequest constructors.)
-        Builder b = new Builder().withNameToken(nameToken);
-        b.withParams(params);
-        b.withParam(name, value);
+        Builder b = new Builder().nameToken(nameToken);
+        b.with(params);
+        b.with(name, value);
         return b.build();
     }
 
@@ -237,12 +234,12 @@ public class PlaceRequest {
 
         private Map<String, String> params;
 
-        public Builder withNameToken(String nameToken) {
+        public Builder nameToken(String nameToken) {
             this.nameToken = nameToken;
             return this;
         }
 
-        public Builder withParam(String name, String value) {
+        public Builder with(String name, String value) {
             lazyInitializeParamMap();
             if (value != null) {
                 this.params.put(name, value);
@@ -250,7 +247,7 @@ public class PlaceRequest {
             return this;
         }
 
-        public Builder withParams(Map<String, String> params) {
+        public Builder with(Map<String, String> params) {
             lazyInitializeParamMap();
             if (params != null) {
                 this.params.putAll(params);
