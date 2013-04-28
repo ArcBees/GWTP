@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Function;
 import com.gwtplatform.carstore.cucumber.util.TestParameters;
 
 public class BasePage {
@@ -28,6 +29,15 @@ public class BasePage {
 
     public void getUrl(String url) {
         webDriver.get(url);
+    }
+
+    public void waitUntilPlaceIsLoaded(final String nameToken) {
+        webDriverWait().until(new Function<WebDriver, Boolean>() {
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+                return webDriver.getCurrentUrl().contains("#" + nameToken);
+            }
+        });
     }
 
     protected void chooseOkOnNextConfirm() {
