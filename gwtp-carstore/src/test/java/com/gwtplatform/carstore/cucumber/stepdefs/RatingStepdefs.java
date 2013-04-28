@@ -1,14 +1,15 @@
 package com.gwtplatform.carstore.cucumber.stepdefs;
 
+import javax.inject.Inject;
+
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
 
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-
-import javax.inject.Inject;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RatingStepdefs {
     private final RatingPage ratingPage;
@@ -30,7 +31,7 @@ public class RatingStepdefs {
 
     @Then("^A rating is created$")
     public void aRatingIsCreated() {
-        messageWidgetPage.hasSuccessMessage();
+        assertTrue(messageWidgetPage.hasSuccessMessage());
         assertEquals(numberOfLines + 1, ratingPage.getNumberOfLines());
     }
 
@@ -40,8 +41,8 @@ public class RatingStepdefs {
         ratingPage.deleteFirstRating();
     }
 
-    @Then("^It get removed$")
-    public void ItGetRemoved() {
+    @Then("^It gets removed$")
+    public void itGetsRemoved() {
         assertEquals(numberOfLines - 1, ratingPage.getNumberOfLines());
     }
 }

@@ -1,0 +1,16 @@
+package ${packageName};
+
+import java.util.Set;
+import java.util.HashSet;
+
+public class ${className} implements com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry {
+    public Set<String> getAllPlaceTokens() {
+        Set<String> placeTokens = new HashSet<String>();
+
+#foreach( $token in $placeTokens )
+        placeTokens.add("$token");
+#end
+
+        return placeTokens;
+    }
+}
