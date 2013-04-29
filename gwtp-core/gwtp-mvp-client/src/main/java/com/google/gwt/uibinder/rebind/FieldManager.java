@@ -39,12 +39,10 @@ import java.util.regex.Pattern;
  *
  * Modification summary:
  *
- * Line 92: Modified visibility from private to protected
- * Line 427: Modified visibility from private to protected
+ * Line 98: Modified visibility from private to protected
+ * Line 429: Modified visibility from private to protected
  *
  * Most of the modifications have been made to allow extension
- *
- * @author Christian Goudreau
  */
 public class FieldManager {
     static class FieldAndSource {
@@ -94,11 +92,11 @@ public class FieldManager {
         return fieldName;
     }
 
-    // BEGIN MODIFICATION
     private final TypeOracle typeOracle;
-    // END MODIFICATION
 
+    // BEGIN MODIFICATION
     protected final MortalLogger logger;
+    // END MODIFICATION
 
     /**
      * Map of field name to FieldWriter. Note its a LinkedHashMap--we want to
