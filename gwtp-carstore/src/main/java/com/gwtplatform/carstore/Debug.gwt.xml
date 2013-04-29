@@ -4,17 +4,15 @@
 <module rename-to='CarStore'>
     <inherits name="com.gwtplatform.carstore.Common" />
 
-    <!-- Form factor specific modules -->
-    <set-configuration-property name="gin.ginjector.module.desktop"
-                                value="com.gwtplatform.carstore.client.gin.DesktopModule"/>
-    <set-configuration-property name="gin.ginjector.module.tablet"
-                                value="com.gwtplatform.carstore.client.gin.TabletModule"/>
-    <set-configuration-property name="gin.ginjector.module.mobile"
-                                value="com.gwtplatform.carstore.client.gin.MobileModule"/>
+    <inherits name="com.google.gwt.logging.Logging" />
+    <set-property name="gwt.logging.logLevel" value="INFO" />
+    <set-property name="gwt.logging.enabled" value="TRUE" />
 
     <!-- Shared modules -->
     <set-configuration-property name="gin.ginjector.modules"
                                 value="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule"/>
+    <extend-configuration-property name="gin.ginjector.modules"
+                                   value="com.gwtplatform.carstore.client.gin.MobileModule"/>
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="com.gwtplatform.carstore.client.gin.SharedModule"/>
 </module>
