@@ -28,20 +28,6 @@ public class MessageWidgetPage extends BasePage {
         return messageIsVisible(errorMessage);
     }
 
-    private boolean messageContains(String debugId, String message) {
-        WebElement container = webDriver.findElement(ByDebugId.id(debugId));
-        while (container != null) {
-            WebElement content = container.findElement(By.cssSelector("span"));
-            if (!Strings.isNullOrEmpty(content.getText()) && content.getText().contains(message)) {
-                return true;
-            }
-            hideMessage(container);
-            container = getMessageContainer(ByDebugId.id(debugId));
-        }
-
-        return false;
-    }
-
     public void hideSuccessMessage() {
         hideMessage(successMessage);
     }
@@ -57,6 +43,20 @@ public class MessageWidgetPage extends BasePage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    private boolean messageContains(String debugId, String message) {
+        WebElement container = webDriver.findElement(ByDebugId.id(debugId));
+        while (container != null) {
+            WebElement content = container.findElement(By.cssSelector("span"));
+            if (!Strings.isNullOrEmpty(content.getText()) && content.getText().contains(message)) {
+                return true;
+            }
+            hideMessage(container);
+            container = getMessageContainer(ByDebugId.id(debugId));
+        }
+
+        return false;
     }
 
     private void hideMessage(WebElement message) {

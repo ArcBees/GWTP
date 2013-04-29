@@ -18,6 +18,7 @@ public class CarsStepdefs {
     private final CarsPage carsPage;
     private final EditCarsPage editCarsPage;
     private final MessageWidgetPage messageWidgetPage;
+
     private int numberOfLines;
     private String carManufacturer;
     private String carModel;
