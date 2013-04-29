@@ -16,17 +16,17 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import java.io.PrintWriter;
 
-import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
-import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import java.io.PrintWriter;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
+import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
 
 public class RestGinModuleGenerator extends AbstractVelocityGenerator {
     private static final String PACKAGE = RestDispatchAsync.class.getPackage().getName();
