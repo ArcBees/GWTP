@@ -45,10 +45,8 @@ import java.util.List;
  *
  * Modification summary:
  *
- * line 140: externalized the creation of field manager so that it's overridable
- * line 182: used the externalized method to create the field manager
- *
- * @author Christian Goudreau
+ * line 142: externalized the creation of field manager so that it's overridable
+ * line 184: used the externalized method to create the field manager
  */
 public class UiBinderGenerator extends Generator {
 
