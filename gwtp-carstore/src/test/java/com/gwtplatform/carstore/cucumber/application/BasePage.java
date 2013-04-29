@@ -31,6 +31,10 @@ public class BasePage {
         webDriver.get(url);
     }
 
+    public String getCurrentUrl() {
+        return webDriver.getCurrentUrl();
+    }
+
     public void waitUntilPlaceIsLoaded(final String nameToken) {
         webDriverWait().until(new Function<WebDriver, Boolean>() {
             @Override
