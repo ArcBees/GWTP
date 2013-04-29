@@ -2,10 +2,6 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.0//EN"
         "http://google-web-toolkit.googlecode.com/svn/tags/2.5.0/distro-source/core/src/gwt-module.dtd">
 <module rename-to='CarStore'>
-    <!-- Inherit the core Web Toolkit stuff. -->
-    <inherits name="com.gwtplatform.mvp.MvpWithFormFactor" />
-    <inherits name='com.gwtplatform.dispatch.Dispatch' />
-
     <!-- Inherit the default GWT style sheet. -->
     <inherits name='com.google.gwt.user.theme.standard.Standard' />
 
@@ -22,6 +18,8 @@
     <!-- TODO create a maven profile for this -->
     <!-- Allows the use of debugId (for selenium) -->
     <inherits name='com.google.gwt.user.Debug' />
+    <inherits name="com.gwtplatform.dispatch.DispatchRest"/>
+    <inherits name="com.gwtplatform.mvp.MvpWithFormFactor" />
 
     <!-- Global Style -->
     <stylesheet src="styles-global.css" />
@@ -35,8 +33,6 @@
                                 value="com.gwtplatform.carstore.client.gin.MobileModule"/>
 
     <!-- Shared modules -->
-    <set-configuration-property name="gin.ginjector.modules"
-                                value="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule"/>
     <extend-configuration-property name="gin.ginjector.modules"
                                 value="com.gwtplatform.carstore.client.gin.SharedModule"/>
 

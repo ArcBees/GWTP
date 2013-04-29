@@ -1,13 +1,9 @@
 package com.gwtplatform.carstore.server.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 

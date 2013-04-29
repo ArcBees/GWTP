@@ -1,7 +1,5 @@
 package com.gwtplatform.carstore.client.application.widget.message.ui;
 
-import static com.google.gwt.query.client.GQuery.$;
-
 import javax.inject.Inject;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,6 +17,8 @@ import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageCloseDelay;
 import com.gwtplatform.carstore.client.resources.AppResources;
+
+import static com.google.gwt.query.client.GQuery.$;
 
 public class MessageWidget extends Composite {
     public interface Binder extends UiBinder<Widget, MessageWidget> {

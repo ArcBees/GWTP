@@ -11,25 +11,23 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
+import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
-import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerMessages;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.DeleteManufacturerAction;
-import com.gwtplatform.carstore.shared.dispatch.GetManufacturerAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.NoResults;
-import com.gwtplatform.carstore.shared.dispatch.SaveManufacturerAction;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -56,6 +54,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     }
 
     private final DispatchAsync dispatcher;
+    private final ManufacturerService manufacturerService;
     private final PlaceManager placeManager;
     private final EditManufacturerMessages messages;
 
@@ -63,15 +62,21 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     private Boolean createNew;
 
     @Inject
-    public ManufacturerDetailPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
-            final DispatchAsync dispatcher, final PlaceManager placeManager,
-            final EditManufacturerMessages messages) {
+    public ManufacturerDetailPresenter(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            DispatchAsync dispatcher,
+            ManufacturerService manufacturerService,
+            PlaceManager placeManager,
+            EditManufacturerMessages messages) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
+        this.manufacturerService = manufacturerService;
         this.placeManager = placeManager;
         this.messages = messages;
-        
+
         getView().setUiHandlers(this);
     }
 
@@ -82,7 +87,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
         if (!createNew) {
             Long id = Long.parseLong(param);
-            dispatcher.execute(new GetManufacturerAction(id), new SafeAsyncCallback<GetResult<ManufacturerDto>>() {
+            dispatcher.execute(manufacturerService.get(id), new AbstractAsyncCallback<GetResult<ManufacturerDto>>() {
                 @Override
                 public void onSuccess(GetResult<ManufacturerDto> result) {
                     currentManufacturer = result.getResult();
@@ -119,15 +124,15 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        dispatcher.execute(new SaveManufacturerAction(manufacturerDto),
+        dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
                 new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
-            @Override
-            public void onSuccess(GetResult<ManufacturerDto> result) {
-                DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
-                        new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
-                placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
-            }
-        });
+                    @Override
+                    public void onSuccess(GetResult<ManufacturerDto> result) {
+                        DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
+                                new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
+                        placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+                    }
+                });
     }
 
     @Override
@@ -140,10 +145,10 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     protected void onReveal() {
         List<ActionType> actions;
         if (createNew) {
-            actions = Arrays.asList(new ActionType[] { ActionType.DONE });
+            actions = Arrays.asList(ActionType.DONE);
             ChangeActionBarEvent.fire(this, actions, false);
         } else {
-            actions = Arrays.asList(new ActionType[]{ActionType.DELETE, ActionType.UPDATE});
+            actions = Arrays.asList(ActionType.DELETE, ActionType.UPDATE);
             ChangeActionBarEvent.fire(this, actions, false);
         }
     }
@@ -156,13 +161,13 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     private void deleteManufacturer() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + currentManufacturer.getName() + "?");
         if (confirm) {
-            dispatcher.execute(new DeleteManufacturerAction(currentManufacturer),
-                    new ErrorHandlerAsyncCallback<NoResults>(this) {
-                @Override
-                public void onSuccess(NoResults noResults) {
-                    placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
-                }
-            });
+            dispatcher.execute(manufacturerService.delete(currentManufacturer.getId()),
+                    new ErrorHandlerAsyncCallback<NoResult>(this) {
+                        @Override
+                        public void onSuccess(NoResult noResult) {
+                            placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+                        }
+                    });
         }
     }
 }
