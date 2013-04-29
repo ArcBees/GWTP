@@ -24,7 +24,7 @@ public class RatingStepdefs {
     }
 
     @Given("^I click on the create rating button$")
-    public void iClickOnTheCreateRatingButton() throws Throwable {
+    public void iClickOnTheCreateRatingButton() {
         numberOfLines = ratingPage.getNumberOfLines();
         ratingPage.clickOnCreate();
     }
