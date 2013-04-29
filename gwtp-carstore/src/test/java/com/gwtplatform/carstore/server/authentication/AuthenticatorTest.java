@@ -1,13 +1,5 @@
 package com.gwtplatform.carstore.server.authentication;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
@@ -22,6 +14,14 @@ import com.gwtplatform.carstore.server.dao.UserSessionDao;
 import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.dto.UserDto;
+
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @RunWith(JukitoRunner.class)
 public class AuthenticatorTest {

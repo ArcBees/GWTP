@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -24,6 +25,8 @@
         <gae.stop.port>8081</gae.stop.port>
         <gae.port>8888</gae.port>
         <gae.address>127.0.0.1</gae.address>
+
+        <resteasy.version>3.0-beta-4</resteasy.version>
     </properties>
 
     <build>
@@ -118,6 +121,15 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -170,13 +182,16 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-mvp-client</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-client</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-rest</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -249,7 +264,24 @@
             <artifactId>jbcrypt</artifactId>
             <version>${jbcrypt.version}</version>
         </dependency>
-        
+
+        <!-- REST -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-guice</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+
         <!-- Selenium Testing -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -295,7 +327,7 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- JUnit Testing -->
         <dependency>
             <groupId>org.jukito</groupId>
@@ -308,8 +340,18 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>name.pehl</groupId>
+            <artifactId>piriti-user</artifactId>
+            <version>${piriti.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>name.pehl</groupId>
+            <artifactId>piriti-dev</artifactId>
+            <version>${piriti.version}</version>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <!-- 'mvn gwt:compile jetty:run -Pintegration-test' - test run cucumber story from ide -->
@@ -317,11 +359,9 @@
             <id>integration-test</id>
             <build>
                 <plugins>
-                    <!-- TODO Workaround for background runner. Remove on release -->
                     <plugin>
                         <groupId>net.kindleit</groupId>
                         <artifactId>maven-gae-plugin</artifactId>
-                        <version>0.9.6-SNAPSHOT</version>
                         <configuration>
                             <appDir>${webappDirectory}</appDir>
                         </configuration>
@@ -343,7 +383,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                
+
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>gwt-maven-plugin</artifactId>
@@ -364,12 +404,8 @@
                                 <phase>integration-test</phase>
                                 <goals>
                                     <goal>integration-test</goal>
+                                    <goal>verify</goal>
                                 </goals>
-                                <configuration>
-                                    <includes>
-                                        <include>**/*TestInt.java</include>
-                                    </includes>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
