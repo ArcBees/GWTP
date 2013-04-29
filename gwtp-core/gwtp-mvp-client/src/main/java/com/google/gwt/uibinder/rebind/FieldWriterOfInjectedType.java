@@ -19,13 +19,15 @@ package com.google.gwt.uibinder.rebind;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
 public class FieldWriterOfInjectedType extends FieldWriterOfExistingType {
+    private static final String GINJECTOR =
+            "(%1$s) (((%2$s)com.gwtplatform.mvp.client.DelayedBindRegistry.getGinjector()).%3$s())";
+
     public FieldWriterOfInjectedType(FieldManager manager, FieldWriterType fieldType,
             JClassType type, String name, JClassType ginjectorClass,
             String ginjectorMethod, MortalLogger logger) {
         super(manager, fieldType, type, name, logger);
 
-        setInitializer(String.format("(%1$s) (((%2$s)com.gwtplatform.mvp.client.DelayedBindRegistry.getGinjector())" +
-                ".%3$s())",
+        setInitializer(String.format(GINJECTOR,
                 getQualifiedSourceName(), ginjectorClass.getQualifiedSourceName(), ginjectorMethod));
     }
 }
