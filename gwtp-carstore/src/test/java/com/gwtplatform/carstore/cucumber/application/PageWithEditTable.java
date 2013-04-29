@@ -5,13 +5,13 @@ import org.openqa.selenium.WebElement;
 
 public class PageWithEditTable extends BasePage {
     protected void deleteFirstRow(WebElement table) {
-        WebElement delete = waitUntilElementIsLoaded(table, By.cssSelector("td:last-child button"));
+        WebElement delete = waitUntilElementIsLoaded(table, By.cssSelector("tbody td:last-child button"));
         chooseOkOnNextConfirm();
         delete.click();
         waitUntilElementIsDetached(delete);
     }
 
     public int getNumberOfLines(WebElement table) {
-        return table.findElements(By.cssSelector("tr")).size();
+        return table.findElements(By.xpath("tbody[1]/tr")).size();
     }
 }
