@@ -6,22 +6,22 @@ import java.util.List;
 import com.gwtplatform.carstore.shared.domain.BaseEntity;
 
 public class CarDto extends BaseEntity {
-    private ManufacturerDto manufacturerDto;
+    private ManufacturerDto manufacturer;
     private String model;
-    private List<RatingDto> ratingDtos;
-    private CarPropertiesDto carPropertiesDto;
+    private List<RatingDto> ratings;
+    private CarPropertiesDto carProperties;
 
     public CarDto() {
         this.model = "";
-        this.carPropertiesDto = new CarPropertiesDto();
-        this.ratingDtos = new ArrayList<RatingDto>();
+        this.carProperties = new CarPropertiesDto();
+        this.ratings = new ArrayList<RatingDto>();
     }
 
-    public CarDto(String model, ManufacturerDto manufacturerDto, CarPropertiesDto carPropertiesDto) {
+    public CarDto(String model, ManufacturerDto manufacturer, CarPropertiesDto carProperties) {
         this.model = model;
-        this.manufacturerDto = manufacturerDto;
-        this.carPropertiesDto = carPropertiesDto;
-        this.ratingDtos = new ArrayList<RatingDto>();
+        this.manufacturer = manufacturer;
+        this.carProperties = carProperties;
+        this.ratings = new ArrayList<RatingDto>();
     }
 
     public String getModel() {
@@ -33,26 +33,26 @@ public class CarDto extends BaseEntity {
     }
 
     public ManufacturerDto getManufacturer() {
-        return manufacturerDto;
+        return manufacturer;
     }
 
-    public void setManufacturer(final ManufacturerDto manufacturerDto) {
-        this.manufacturerDto = manufacturerDto;
+    public void setManufacturer(ManufacturerDto manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public List<RatingDto> getRatings() {
-        return ratingDtos;
+        return ratings;
     }
 
-    public void setRatings(List<RatingDto> ratingDtos) {
-        this.ratingDtos = ratingDtos;
+    public void setRatings(List<RatingDto> ratings) {
+        this.ratings = ratings;
     }
 
     public CarPropertiesDto getCarProperties() {
-        return carPropertiesDto;
+        return carProperties;
     }
 
-    public void setCarProperties(CarPropertiesDto carPropertiesDto) {
-        this.carPropertiesDto = carPropertiesDto;
+    public void setCarProperties(CarPropertiesDto carProperties) {
+        this.carProperties = carProperties;
     }
 }
