@@ -14,6 +14,9 @@
     <inherits name="com.google.common.collect.Collect" />
     <inherits name="com.googlecode.objectify.Objectify" />
 
+    <extend-configuration-property name="gin.ginjector.extensions"
+                                   value="com.gwtplatform.carstore.client.gin.MyGinjector"/>
+
     <!-- Specify the paths for translatable code -->
     <source path='client' />
     <source path='shared' />
