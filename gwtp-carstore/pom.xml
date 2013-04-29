@@ -73,28 +73,11 @@
                 </configuration>
             </plugin>
 
-            <!-- GWT -->
-            <!-- First run 'mvn package -Ppostgres' to setup persistence.xml -->
-            <!-- run 'mvn gwt:run' for running application from terminal -->
-            <!-- run 'mvn integration-test' for running the GwtTestSuite -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>${gwt-maven-plugin.version}</version>
                 <configuration>
-                    <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
-
-                    <strict>true</strict>
-                    <testTimeOut>180</testTimeOut>
-                    <!-- With multiple tests use GwtTestSuite.java for speed -->
-                    <includes>**/*GwtTest.java</includes>
-                    <!-- <includes>**/*GwtTestSuite.java</includes> -->
-                    <mode>htmlunit</mode>
-
-                    <extraJvmArgs>-Xss1024K -Xmx1024M -XX:MaxPermSize=256M</extraJvmArgs>
-                    <logLevel>INFO</logLevel>
-                    <style>${gwt.style}</style>
-
                     <copyWebapp>true</copyWebapp>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
 
@@ -106,8 +89,6 @@
                     <modules>
                         <module>com.gwtplatform.carstore.CarStore</module>
                     </modules>
-
-                    <compileReport>true</compileReport>
                 </configuration>
                 <executions>
                     <execution>
@@ -122,6 +103,40 @@
     </build>
 
     <dependencies>
+        <!-- GWTP -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-mvp-client</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-client</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-server-guice</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-crawler</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-crawler-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-processors</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- GWT -->
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -163,40 +178,6 @@
             <artifactId>appengine-testing</artifactId>
             <version>${gae.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- GWTP -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-mvp-client</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-client</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-server-guice</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-crawler</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-crawler-service</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-processors</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <!-- DI Guice -->
