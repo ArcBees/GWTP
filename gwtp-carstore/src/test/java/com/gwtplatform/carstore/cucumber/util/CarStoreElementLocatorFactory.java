@@ -1,6 +1,5 @@
 package com.gwtplatform.carstore.cucumber.util;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 import javax.inject.Inject;
