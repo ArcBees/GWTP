@@ -35,7 +35,7 @@ public class ActionException extends Exception {
     }
 
     public ActionException(String message, Throwable cause) {
-        super(message + " (" + cause.getMessage() + ")");
+        super(message, cause);
     }
 
     public ActionException(Throwable cause) {
