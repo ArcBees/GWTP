@@ -16,6 +16,9 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
+/**
+ * Indicates which part of the message the serialized type represents
+ */
 public enum SerializedType {
     BODY, RESPONSE
 }

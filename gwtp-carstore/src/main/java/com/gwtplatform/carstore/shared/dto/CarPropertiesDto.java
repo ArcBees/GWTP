@@ -8,7 +8,7 @@ public class CarPropertiesDto extends BaseEntity {
     private String someString;
     private Integer someNumber;
     private Date someDate;
-    private CarDto carDto;
+    private CarDto car;
 
     public CarPropertiesDto() {
         this.someString = "";
@@ -23,11 +23,11 @@ public class CarPropertiesDto extends BaseEntity {
     }
 
     public CarDto getCar() {
-        return carDto;
+        return car;
     }
 
     public void setCar(CarDto carDto) {
-        this.carDto = carDto;
+        this.car = carDto;
     }
 
     public String getSomeString() {

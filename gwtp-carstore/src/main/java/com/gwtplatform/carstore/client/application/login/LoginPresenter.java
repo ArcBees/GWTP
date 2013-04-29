@@ -18,10 +18,11 @@ import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.carstore.shared.dispatch.ActionType;
-import com.gwtplatform.carstore.shared.dispatch.LogInAction;
+import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
+import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -34,7 +35,8 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> implements LoginUiHandlers {
+public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> implements
+        LoginUiHandlers {
     public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
         void setLoginButtonEnabled(boolean enabled);
     }
@@ -49,26 +51,34 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     private static final Logger logger = Logger.getLogger(LoginPresenter.class.getName());
     private final PlaceManager placeManager;
     private final DispatchAsync dispatchAsync;
+    private final SessionService sessionService;
     private final CurrentUser currentUser;
     private final LoginMessages messages;
 
     @Inject
-    public LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager,
-            DispatchAsync dispatchAsync, CurrentUser currentUser, LoginMessages messages) {
+    public LoginPresenter(
+            EventBus eventBus,
+            MyView view, MyProxy proxy,
+            PlaceManager placeManager,
+            DispatchAsync dispatchAsync,
+            SessionService sessionService,
+            CurrentUser currentUser,
+            LoginMessages messages) {
         super(eventBus, view, proxy);
 
         this.placeManager = placeManager;
         this.dispatchAsync = dispatchAsync;
+        this.sessionService = sessionService;
         this.currentUser = currentUser;
         this.messages = messages;
-        
+
         getView().setUiHandlers(this);
     }
 
     @Override
     public void login(String username, String password) {
-        LogInAction loginAction = new LogInAction(username, password);
-        callServerLoginAction(loginAction);
+        LogInRequest loginRequest = new LogInRequest(username, password);
+        callServerLoginAction(loginRequest);
     }
 
     @Override
@@ -85,8 +95,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         }
     }
 
-    private void callServerLoginAction(LogInAction loginAction) {
-        dispatchAsync.execute(loginAction, new AsyncCallback<LogInResult>() {
+    private void callServerLoginAction(LogInRequest loginRequest) {
+        dispatchAsync.execute(sessionService.login(loginRequest), new AsyncCallback<LogInResult>() {
             @Override
             public void onFailure(Throwable e) {
                 DisplayMessageEvent.fire(LoginPresenter.this, new Message(messages.unableToContactServer(),
@@ -157,8 +167,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     private void tryLoggingInWithCookieFirst() {
         getView().setLoginButtonEnabled(false);
-        LogInAction loginAction = new LogInAction(getLoggedInCookie());
-        callServerLoginAction(loginAction);
+        LogInRequest loginRequest = new LogInRequest(getLoggedInCookie());
+        callServerLoginAction(loginRequest);
     }
 
     private String getLoggedInCookie() {
