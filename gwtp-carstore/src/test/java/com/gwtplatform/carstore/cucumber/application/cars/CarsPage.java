@@ -26,4 +26,16 @@ public class CarsPage extends PageWithEditTable {
     public int getNumberOfLines() {
         return getNumberOfLines(cars);
     }
+
+    public void editFirstCar() {
+        editFirstRow(cars);
+    }
+
+    public String getFirstCarManufacturer() {
+        return getCellText(cars, "Manufacturer", 1);
+    }
+
+    public String getFirstCarModel() {
+        return getCellText(cars, "Model", 1);
+    }
 }
