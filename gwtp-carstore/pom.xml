@@ -359,11 +359,9 @@
             <id>integration-test</id>
             <build>
                 <plugins>
-                    <!-- TODO Workaround for background runner. Remove on release -->
                     <plugin>
                         <groupId>net.kindleit</groupId>
                         <artifactId>maven-gae-plugin</artifactId>
-                        <version>0.9.6-SNAPSHOT</version>
                         <configuration>
                             <appDir>${webappDirectory}</appDir>
                         </configuration>
@@ -406,12 +404,8 @@
                                 <phase>integration-test</phase>
                                 <goals>
                                     <goal>integration-test</goal>
+                                    <goal>verify</goal>
                                 </goals>
-                                <configuration>
-                                    <includes>
-                                        <include>**/*TestInt.java</include>
-                                    </includes>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
