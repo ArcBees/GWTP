@@ -31,17 +31,17 @@ public class ApplicationMobileView extends ViewImpl implements ApplicationPresen
     SimplePanel messages;
 
     @Inject
-    public ApplicationMobileView(final Binder uiBinder) {
+    ApplicationMobileView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
     public void setInSlot(Object slot, IsWidget content) {
-        if (slot == ApplicationPresenter.TYPE_SetMainContent) {
+        if (slot == ApplicationPresenter.SLOT_MAIN_CONTENT) {
             main.setWidget(content);
-        } else if (slot == ApplicationPresenter.TYPE_SetHeaderContent) {
+        } else if (slot == ApplicationPresenter.SLOT_HEADER_CONTENT) {
             header.setWidget(content);
-        } else if (slot == ApplicationPresenter.TYPE_SetMessagesContent) {
+        } else if (slot == ApplicationPresenter.SLOT_MESSAGES_CONTENT) {
             messages.setWidget(content);
         }
     }

@@ -9,9 +9,9 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
+import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
-import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingMessages;
@@ -35,12 +35,13 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements RatingDetailUiHandlers,
-        ActionBarEvent.ActionBarHandler, GoBackEvent.GoBackHandler {
+public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
+        implements RatingDetailUiHandlers, ActionBarEvent.ActionBarHandler, GoBackEvent.GoBackHandler {
+
     public interface MyView extends View, HasUiHandlers<RatingDetailUiHandlers> {
         void edit(RatingDto ratingDto);
 
@@ -60,20 +61,24 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
     private final PlaceManager placeManager;
 
     @Inject
-    public RatingDetailPresenter(EventBus eventBus, MyView view, MyProxy proxy, DispatchAsync dispatcher,
-            EditRatingMessages messages, PlaceManager placeManager) {
+    RatingDetailPresenter(EventBus eventBus,
+                          MyView view,
+                          MyProxy proxy,
+                          DispatchAsync dispatcher,
+                          EditRatingMessages messages,
+                          PlaceManager placeManager) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
         this.messages = messages;
         this.placeManager = placeManager;
-        
+
         getView().setUiHandlers(this);
     }
 
     @Override
     public void onGoBack(GoBackEvent event) {
-        placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
+        placeManager.revealPlace(new Builder().nameToken(NameTokens.getRating()).build());
     }
 
     @Override
@@ -90,7 +95,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
             public void onSuccess(GetResult<RatingDto> result) {
                 DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
                         MessageStyle.SUCCESS));
-                placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
+                placeManager.revealPlace(new Builder().nameToken(NameTokens.getRating()).build());
 
             }
         });
@@ -104,7 +109,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
 
     @Override
     protected void onReveal() {
-        List<ActionType> actions = Arrays.asList(new ActionType[] { ActionType.DONE });
+        List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
         dispatcher.execute(new GetCarsAction(), new SafeAsyncCallback<GetResults<CarDto>>() {
@@ -117,7 +122,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     private void onGetCarsSuccess(List<CarDto> carDtos) {
