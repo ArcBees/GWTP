@@ -18,6 +18,7 @@ package com.gwtplatform.carstore.client.gin;
 
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.security.SecurityModule;
+import com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
@@ -29,6 +30,7 @@ public class SharedModule extends AbstractPresenterModule {
     protected void configure() {
         install(new DefaultModule());
         install(new SecurityModule());
+        install(new RestDispatchAsyncModule.Builder().applicationPath("rest").build());
 
         // DefaultPlaceManager Places
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.login);

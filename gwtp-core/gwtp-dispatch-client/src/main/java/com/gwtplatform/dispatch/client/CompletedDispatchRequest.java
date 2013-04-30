@@ -26,7 +26,6 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * @author Brendan Doherty
  */
 public class CompletedDispatchRequest implements DispatchRequest {
-
     public CompletedDispatchRequest() {
     }
 
