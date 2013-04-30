@@ -1,8 +1,5 @@
 package com.gwtplatform.carstore.cucumber.application.login;
 
-import javax.inject.Inject;
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gwtplatform.carstore.client.place.NameTokens;
@@ -16,11 +13,6 @@ public class LoginPage extends BasePage {
     private WebElement password;
     @FindByDebugId("login")
     private WebElement login;
-
-    @Inject
-    public LoginPage(WebDriver webDriver) {
-        super(webDriver);
-    }
 
     public void setUsername(String username) {
         waitUntilElementIsVisible(this.username);
