@@ -61,11 +61,15 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @author Brendan Doherty
  */
 public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
+    private static Boolean alreadyBound = false;
+    private static Class<? extends AbstractDispatchAsyncModule> boundType;
+
     protected final Class<? extends ExceptionHandler> exceptionHandlerType;
     protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
     protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
 
     /**
+     * /**
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
      * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use
@@ -137,8 +141,17 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
 
     @Override
     protected void configure() {
-        bind(ExceptionHandler.class).to(exceptionHandlerType);
-        bind(SecurityCookieAccessor.class).to(sessionAccessorType);
-        bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
+        if (alreadyBound) {
+            if (!boundType.equals(getClass())) {
+                throw new RuntimeException("You are trying to use more than one DispatchAsync implementation. " +
+                        boundType.getName() + " was already installed.");
+            }
+        } else {
+            alreadyBound = true;
+            boundType = getClass();
+            bind(ExceptionHandler.class).to(exceptionHandlerType);
+            bind(SecurityCookieAccessor.class).to(sessionAccessorType);
+            bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
+        }
     }
 }

@@ -16,23 +16,31 @@
 
 package com.gwtplatform.dispatch.rebind;
 
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
+
+import javax.inject.Singleton;
+
+import org.apache.velocity.app.VelocityEngine;
+
+import com.google.common.collect.Maps;
+import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-
-import com.gwtplatform.dispatch.rebind.type.SerializerDefinitions;
-
-import com.google.common.eventbus.EventBus;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
-import org.apache.velocity.app.VelocityEngine;
+import com.gwtplatform.dispatch.rebind.type.SerializerDefinitions;
 
-import java.io.InputStream;
-import java.util.Properties;
-import javax.inject.Singleton;
-
+/**
+ * TODO: Documentation.
+ */
 public class RebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rebind/velocity.properties";
 
@@ -90,5 +98,12 @@ public class RebindModule extends AbstractModule {
         bind(EventBus.class).in(Singleton.class);
 
         install(new FactoryModuleBuilder().build(GeneratorFactory.class));
+    }
+
+    @Provides
+    @Singleton
+    Set<JClassType> getRegisteredClassTypes() {
+        ConcurrentMap<JClassType, Boolean> backingConcurrentMap = Maps.newConcurrentMap();
+        return Collections.newSetFromMap(backingConcurrentMap);
     }
 }

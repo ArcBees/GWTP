@@ -16,6 +16,11 @@
 
 package com.gwtplatform.dispatch.rebind;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -25,16 +30,12 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
-
-import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
-import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.inject.Key;
+import com.google.inject.TypeLiteral;
+import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
+import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
 
 public class VelocityGenerator extends Generator {
     private static final String SUFFIX = "Impl";
@@ -68,6 +69,7 @@ public class VelocityGenerator extends Generator {
         serializerProviderGenerator = injector.getInstance(SerializerProviderGenerator.class);
         generatorFactory = injector.getInstance(GeneratorFactory.class);
 
+        registerPrimitiveTypes();
         generateRestServices();
         generateRestGinModule();
         generateSerializerProvider();
@@ -81,6 +83,22 @@ public class VelocityGenerator extends Generator {
         sourceWriter.commit(treeLogger);
 
         return typeName + SUFFIX;
+    }
+
+    private void registerPrimitiveTypes() throws UnableToCompleteException {
+        Set<JClassType> registeredClasses = injector.getInstance(Key.get(new TypeLiteral<Set<JClassType>>() {
+        }));
+
+        registeredClasses.add(getType(Integer.class.getName()));
+        registeredClasses.add(getType(Boolean.class.getName()));
+        registeredClasses.add(getType(Character.class.getName()));
+        registeredClasses.add(getType(Byte.class.getName()));
+        registeredClasses.add(getType(Short.class.getName()));
+        registeredClasses.add(getType(Long.class.getName()));
+        registeredClasses.add(getType(Float.class.getName()));
+        registeredClasses.add(getType(Double.class.getName()));
+        registeredClasses.add(getType(Void.class.getName()));
+        registeredClasses.add(getType(String.class.getName()));
     }
 
     private void generateSerializerProvider() throws UnableToCompleteException {
