@@ -9,22 +9,22 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
+import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
-import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingMessages;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
-import com.gwtplatform.carstore.shared.dispatch.SaveRatingAction;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -56,18 +56,29 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
     }
 
     private final DispatchAsync dispatcher;
+    private final CarService carService;
+    private final RatingService ratingService;
     private final EditRatingMessages messages;
     private final PlaceManager placeManager;
 
     @Inject
-    public RatingDetailPresenter(EventBus eventBus, MyView view, MyProxy proxy, DispatchAsync dispatcher,
-            EditRatingMessages messages, PlaceManager placeManager) {
+    public RatingDetailPresenter(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            DispatchAsync dispatcher,
+            CarService carService,
+            RatingService ratingService,
+            EditRatingMessages messages,
+            PlaceManager placeManager) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
+        this.carService = carService;
+        this.ratingService = ratingService;
         this.messages = messages;
         this.placeManager = placeManager;
-        
+
         getView().setUiHandlers(this);
     }
 
@@ -85,15 +96,15 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        dispatcher.execute(new SaveRatingAction(ratingDto), new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
-            @Override
-            public void onSuccess(GetResult<RatingDto> result) {
-                DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
-                        MessageStyle.SUCCESS));
-                placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
-
-            }
-        });
+        dispatcher.execute(ratingService.saveOrCreate(ratingDto),
+                new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
+                    @Override
+                    public void onSuccess(GetResult<RatingDto> result) {
+                        DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
+                                MessageStyle.SUCCESS));
+                        placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
+                    }
+                });
     }
 
     @Override
@@ -104,10 +115,10 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
 
     @Override
     protected void onReveal() {
-        List<ActionType> actions = Arrays.asList(new ActionType[] { ActionType.DONE });
+        List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
-        dispatcher.execute(new GetCarsAction(), new SafeAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
             public void onSuccess(GetResults<CarDto> result) {
                 onGetCarsSuccess(result.getResults());
