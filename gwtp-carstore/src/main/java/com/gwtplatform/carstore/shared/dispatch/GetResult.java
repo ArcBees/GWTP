@@ -4,7 +4,7 @@ import com.gwtplatform.carstore.shared.dto.Dto;
 import com.gwtplatform.dispatch.shared.Result;
 
 public class GetResult<T extends Dto> implements Result {
-    private T result;
+    T result;
 
     protected GetResult() {
     }
