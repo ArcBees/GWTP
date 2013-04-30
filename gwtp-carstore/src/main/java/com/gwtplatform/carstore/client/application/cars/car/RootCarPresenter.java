@@ -26,13 +26,15 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     public static final GwtEvent.Type<RevealContentHandler<?>> TYPE_SetCarContent = new GwtEvent
             .Type<RevealContentHandler<?>>();
 
-    public static final Object TYPE_SetTabBar = new Object();
+    public static final Object SLOT_TAB_BAR = new Object();
 
     private final NavigationTabPresenter navigationTabPresenter;
 
     @Inject
-    public RootCarPresenter(EventBus eventBus, MyView view, MyProxy proxy,
-            final NavigationTabPresenter navigationTabPresenter) {
+    RootCarPresenter(EventBus eventBus,
+                     MyView view,
+                     MyProxy proxy,
+                     NavigationTabPresenter navigationTabPresenter) {
         super(eventBus, view, proxy);
 
         this.navigationTabPresenter = navigationTabPresenter;
@@ -42,11 +44,11 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     protected void onBind() {
         super.onBind();
 
-        setInSlot(TYPE_SetTabBar, navigationTabPresenter);
+        setInSlot(SLOT_TAB_BAR, navigationTabPresenter);
     }
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 }
