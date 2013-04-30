@@ -3,9 +3,6 @@ package com.gwtplatform.carstore.server.authentication;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity;
-import com.gwtplatform.carstore.server.authentication.PasswordSecurity;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
