@@ -87,18 +87,24 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
                 logger.log(Level.WARNING, "Action exception while executing " + action.getClass().getName() + ": " +
                         e.getMessage(), e);
             }
+
+            e.initCause(null);
             throw e;
         } catch (ServiceException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Service exception while executing " + action.getClass().getName() + ": " +
                         e.getMessage(), e);
             }
+
+            e.initCause(null);
             throw e;
         } catch (RuntimeException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Unexpected exception while executing " + action.getClass().getName() + ": " +
                         "" + e.getMessage(), e);
             }
+
+            e.initCause(null);
             throw new ServiceException(e);
         }
     }
@@ -118,12 +124,18 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
             dispatch.undo(action, result);
         } catch (ActionException e) {
             logger.warning("Action exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+
+            e.initCause(null);
             throw e;
         } catch (ServiceException e) {
             logger.warning("Service exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+
+            e.initCause(null);
             throw e;
         } catch (RuntimeException e) {
             logger.warning("Unexpected exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+
+            e.initCause(null);
             throw new ServiceException(e);
         }
     }

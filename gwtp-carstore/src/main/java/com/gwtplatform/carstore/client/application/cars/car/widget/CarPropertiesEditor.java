@@ -1,6 +1,7 @@
 package com.gwtplatform.carstore.client.application.cars.car.widget;
 
-import com.google.gwt.core.shared.GWT;
+import javax.inject.Inject;
+
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -12,10 +13,8 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.gwtplatform.carstore.shared.dto.CarPropertiesDto;
 
 public class CarPropertiesEditor extends Composite implements Editor<CarPropertiesDto> {
-    public interface Binder extends UiBinder<Widget, CarPropertiesEditor> {
+    interface Binder extends UiBinder<Widget, CarPropertiesEditor> {
     }
-
-    private static Binder uiBinder = GWT.create(Binder.class);
 
     @UiField
     TextBox someString;
@@ -24,7 +23,8 @@ public class CarPropertiesEditor extends Composite implements Editor<CarProperti
     @UiField
     DateBox someDate;
 
-    public CarPropertiesEditor() {
+    @Inject
+    CarPropertiesEditor(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
 
         someString.getElement().setAttribute("placeholder", "Property #1");
