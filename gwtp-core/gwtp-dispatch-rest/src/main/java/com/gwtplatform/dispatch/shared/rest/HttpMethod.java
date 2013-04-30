@@ -16,6 +16,9 @@
 
 package com.gwtplatform.dispatch.shared.rest;
 
+/**
+ * Represents the available HTTP methods
+ */
 public enum HttpMethod {
     GET, POST, PUT, DELETE, HEAD
 }

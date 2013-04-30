@@ -1,33 +1,36 @@
 package com.gwtplatform.carstore.client.application;
 
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 
 import org.jukito.JukitoRunner;
+import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
 import com.google.inject.Inject;
+import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.application.cars.CarsPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.CarPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory;
+import com.gwtplatform.carstore.client.application.testutils.CarServiceImpl;
 import com.gwtplatform.carstore.client.application.testutils.PresenterTestModule;
 import com.gwtplatform.carstore.client.application.testutils.PresenterWidgetTestBase;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.shared.dispatch.DeleteCarAction;
-import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
+import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
-import com.gwtplatform.carstore.shared.dispatch.NoResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(JukitoRunner.class)
 public class CarsPresenterTest extends PresenterWidgetTestBase {
@@ -35,6 +38,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
         @Override
         protected void configurePresenterTest() {
             forceMock(CarProxyFactory.class);
+            bind(CarService.class).to(CarServiceImpl.class).in(TestSingleton.class);
         }
     }
 
@@ -79,11 +83,13 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onDelete(CarDto carDto, HasData<CarDto> hasCarData, Range range) {
         // Given we have DeleteCarAction
-        dispatcher.given(DeleteCarAction.class).willReturn(new NoResults());
+        dispatcher.given(new TypeLiteral<Action<NoResult>>() {
+        }).willReturn(new NoResult());
 
         // And GetCarAction for fetching after delete
         GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
-        dispatcher.given(GetCarsAction.class).willReturn(result);
+        dispatcher.given(new TypeLiteral<Action<GetResults<CarDto>>>() {
+        }).willReturn(result);
 
         // And display is setup
         when(view.getCarDisplay()).thenReturn(hasCarData);
@@ -103,7 +109,8 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     public void onFetchData(ArrayList<CarDto> carDtos) {
         // Given
         GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
-        dispatcher.given(GetCarsAction.class).willReturn(result);
+        dispatcher.given(new TypeLiteral<Action<GetResults<CarDto>>>() {
+        }).willReturn(result);
 
         // When
         carsPresenter.fetchData(0, 1);
@@ -116,7 +123,8 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
         // Given
         GetResults<CarDto> result = new GetResults<CarDto>(carDtos);
-        dispatcher.given(GetCarsAction.class).willReturn(result);
+        dispatcher.given(new TypeLiteral<Action<GetResults<CarDto>>>() {
+        }).willReturn(result);
 
         // When
         carsPresenter.fetchData(0, 3);

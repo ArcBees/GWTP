@@ -16,24 +16,27 @@
 
 package com.gwtplatform.dispatch.rebind;
 
-import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import java.io.PrintWriter;
+import java.util.Set;
 
-import com.gwtplatform.dispatch.client.rest.NoResultSerializer;
-import com.gwtplatform.dispatch.shared.NoResult;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
-import com.google.inject.assistedinject.Assisted;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import java.io.PrintWriter;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import com.google.common.base.Strings;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.client.rest.NoResultSerializer;
+import com.gwtplatform.dispatch.shared.NoResult;
 
 public class SerializerGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/Serializer.vm";
     private static final String PACKAGE = "com.gwtplatform.dispatch.shared.serializer";
+
     private JClassType type;
 
     @Inject
@@ -43,10 +46,13 @@ public class SerializerGenerator extends AbstractVelocityGenerator {
             Provider<VelocityContext> velocityContextProvider,
             VelocityEngine velocityEngine,
             GeneratorUtil generatorUtil,
+            Set<JClassType> registeredClasses,
             @Assisted JClassType type) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
         this.type = type;
+
+        registeredClasses.add(type);
     }
 
     public String generate() throws Exception {
@@ -83,12 +89,8 @@ public class SerializerGenerator extends AbstractVelocityGenerator {
     }
 
     private boolean isPackageRestricted() {
-        try {
-            Package.getPackage(type.getPackage().getName());
-            return true;
-        } catch (SecurityException e) {
-            return false;
-        }
+        Package aPackage = Package.getPackage(type.getPackage().getName());
+        return aPackage != null && !Strings.isNullOrEmpty(aPackage.getSpecificationTitle());
     }
 
     private String generateSerializerId() throws UnableToCompleteException {

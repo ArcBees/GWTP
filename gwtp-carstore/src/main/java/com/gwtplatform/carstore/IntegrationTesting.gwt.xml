@@ -4,4 +4,7 @@
     
     <!-- Allows the use of debugId for Selenium/Cucumber -->
     <inherits name='com.google.gwt.user.Debug'/>
+
+    <set-configuration-property name="CssResource.style" value="pretty"/>
+    <set-property name="user.agent" value="safari"/>
 </module>

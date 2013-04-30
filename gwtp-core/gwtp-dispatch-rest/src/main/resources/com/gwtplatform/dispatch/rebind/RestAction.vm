@@ -3,7 +3,7 @@ package ${package};
 import com.gwtplatform.dispatch.client.rest.AbstractRestAction;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 
-public class ${implName} extends AbstractRestAction<${resultClass.qualifiedSourceName}> {
+public class ${implName} extends AbstractRestAction<${resultClass.parameterizedQualifiedSourceName}> {
     public ${implName}(#foreach (${param} in ${ctorParams})${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded($ctorParams)#end) {
         super(HttpMethod.${httpMethod}, "${restPath}");
 #foreach ($methodCall in $methodCalls)

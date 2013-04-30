@@ -37,7 +37,7 @@ public interface SerializerProvider {
 
         @Override
         public boolean equals(Object o) {
-            if (o == null || !(o instanceof  SerializerKey)) {
+            if (o == null || !(o instanceof SerializerKey)) {
                 return false;
             }
 

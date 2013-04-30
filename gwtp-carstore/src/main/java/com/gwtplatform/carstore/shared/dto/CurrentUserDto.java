@@ -2,16 +2,16 @@ package com.gwtplatform.carstore.shared.dto;
 
 
 public class CurrentUserDto implements Dto {
-    private Boolean loggedIn;
-    private UserDto userDto;
+    Boolean loggedIn;
+    UserDto user;
 
     protected CurrentUserDto() {
         // Needed for serialization
     }
 
-    public CurrentUserDto(Boolean loggedIn, UserDto userDto) {
+    public CurrentUserDto(Boolean loggedIn, UserDto user) {
         this.loggedIn = loggedIn;
-        this.userDto = userDto;
+        this.user = user;
     }
 
     public Boolean isLoggedIn() {
@@ -19,14 +19,14 @@ public class CurrentUserDto implements Dto {
     }
 
     public UserDto getUser() {
-        return userDto;
+        return user;
     }
-    
+
     @Override
     public String toString() {
         String s = " { CurrentUserDto ";
         s += "loggedIn=" + loggedIn + " ";
-        s += "user=" + userDto + " ";
+        s += "user=" + user + " ";
         s += " CurrentUserDto }";
         return s;
     }
