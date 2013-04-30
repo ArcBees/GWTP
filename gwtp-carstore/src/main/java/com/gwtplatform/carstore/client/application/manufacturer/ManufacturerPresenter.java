@@ -34,11 +34,13 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements ManufacturerUiHandlers,
-        ActionBarEvent.ActionBarHandler {
+public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
+        implements ManufacturerUiHandlers, ActionBarEvent.ActionBarHandler {
+
     public interface MyView extends View, HasUiHandlers<ManufacturerUiHandlers> {
         void addManufacturer(ManufacturerDto manufacturerDto);
 
@@ -62,28 +64,33 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     private ManufacturerDto editingManufacturer;
 
     @Inject
-    public ManufacturerPresenter(EventBus eventBus, MyView view, MyProxy proxy, DispatchAsync dispatcher,
-            PlaceManager placeManager, EditManufacturerPresenter editManufacturerPresenter) {
+    ManufacturerPresenter(EventBus eventBus,
+                                 MyView view,
+                                 MyProxy proxy,
+                                 DispatchAsync dispatcher,
+                                 PlaceManager placeManager,
+                                 EditManufacturerPresenter editManufacturerPresenter) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
         this.editManufacturerPresenter = editManufacturerPresenter;
-        
+
         getView().setUiHandlers(this);
     }
 
     @Override
     public void onActionEvent(ActionBarEvent event) {
         if (event.getActionType() == ActionType.ADD && event.isTheSameToken(NameTokens.getManufacturer())) {
-            placeManager.revealPlace(new PlaceRequest(NameTokens.getDetailManufacturer()));
+            placeManager.revealPlace(new Builder().nameToken(NameTokens.getDetailManufacturer()).build());
         }
     }
 
     @Override
     public void onDetail(ManufacturerDto manufacturerDto) {
-        PlaceRequest placeRequest = new PlaceRequest(NameTokens.getDetailManufacturer());
-        placeRequest = placeRequest.with("id", String.valueOf(manufacturerDto.getId()));
+        PlaceRequest placeRequest = new Builder().nameToken(NameTokens.getDetailManufacturer())
+                .with("id", String.valueOf(manufacturerDto.getId())).build();
+
         placeManager.revealPlace(placeRequest);
     }
 
@@ -112,7 +119,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     @Override
     protected void onReveal() {
         ActionBarVisibilityEvent.fire(this, true);
-        ChangeActionBarEvent.fire(this, Arrays.asList(new ActionType[] { ActionType.ADD }), true);
+        ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
         dispatcher.execute(new GetManufacturersAction(), new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
             @Override
@@ -129,7 +136,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     @ProxyEvent
