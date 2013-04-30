@@ -2,10 +2,10 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.0//EN"
         "http://google-web-toolkit.googlecode.com/svn/tags/2.5.0/distro-source/core/src/gwt-module.dtd">
 <module>
-    <inherits name="com.google.gwt.uibinder.GinUiBinder" />
-    <inherits name="com.gwtplatform.mvp.MvpWithFormFactor" />
     <inherits name='com.gwtplatform.dispatch.Dispatch' />
     <inherits name='com.gwtplatform.dispatch.DispatchRest' />
+    <inherits name="com.google.gwt.uibinder.GinUiBinder" />
+    <inherits name="com.gwtplatform.mvp.MvpWithFormFactor" />
 
     <!-- Inherit the default GWT style sheet. -->
     <inherits name='com.google.gwt.user.theme.standard.Standard' />
