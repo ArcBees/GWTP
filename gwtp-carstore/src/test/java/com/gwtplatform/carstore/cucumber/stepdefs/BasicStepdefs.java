@@ -2,17 +2,20 @@ package com.gwtplatform.carstore.cucumber.stepdefs;
 
 import javax.inject.Inject;
 
-import cucumber.api.java.After;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
-
 import org.openqa.selenium.WebDriver;
 
 import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
 import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
+import com.gwtplatform.carstore.cucumber.util.TestParameters;
+
+import cucumber.api.java.After;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+import static org.junit.Assert.assertTrue;
 
 public class BasicStepdefs {
-    private static final String baseUrl = "http://127.0.0.1:8888";
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "qwerty";
     private static final String INVALID_USERNAME = "--";
@@ -38,10 +41,7 @@ public class BasicStepdefs {
 
     @Given("^I navigate to the (\\S+) page$")
     public void iNavigateTo(String nameToken) {
-        String url = baseUrl + "#" + nameToken;
-
-        applicationPage.getUrl(url);
-        applicationPage.waitUntilDomIsLoaded(nameToken);
+        applicationPage.navigateTo(nameToken);
     }
 
     @Given("^I'm logged in$")
@@ -61,5 +61,19 @@ public class BasicStepdefs {
             loginPage.setPassword(INVALID_PASSWORD);
         }
         loginPage.submitLoginForm();
+    }
+
+    @Then("^I should be on the (\\S+) page$")
+    public void iShouldBeOnThePage(String nameToken) throws Throwable {
+        String url = TestParameters.BASE_URL + "#" + nameToken;
+
+        applicationPage.waitUntilDomIsLoaded(nameToken);
+
+        assertTrue(webDriver.getCurrentUrl().startsWith(url));
+    }
+
+    @Then("^I see a success message containing (.*?)$")
+    public void I_see_a_success_message_containing(String message) {
+        assertTrue(applicationPage.successMessageIsPresent(message));
     }
 }

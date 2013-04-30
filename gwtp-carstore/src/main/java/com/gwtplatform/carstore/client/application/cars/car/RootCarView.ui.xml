@@ -1,7 +1,7 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
     <g:HTMLPanel>
-        <g:SimplePanel ui:field="tabBarPanel"/>
+        <g:SimplePanel ui:field="tabBarPanel" debugId="cars-tab-panel"/>
         <g:SimplePanel ui:field="contentPanel"/>
     </g:HTMLPanel>
 </ui:UiBinder>

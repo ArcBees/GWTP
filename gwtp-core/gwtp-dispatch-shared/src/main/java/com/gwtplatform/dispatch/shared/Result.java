@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.shared;
 
+import java.io.Serializable;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
@@ -23,5 +25,5 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  *
  * @author David Peterson
  */
-public interface Result extends IsSerializable {
+public interface Result extends IsSerializable, Serializable {
 }

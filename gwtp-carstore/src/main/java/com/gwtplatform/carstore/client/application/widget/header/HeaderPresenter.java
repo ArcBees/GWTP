@@ -9,17 +9,17 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
+import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
 import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
-import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.login.LoginPresenter;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
+import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.carstore.shared.dispatch.LogoutAction;
-import com.gwtplatform.carstore.shared.dispatch.LogoutResult;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
@@ -47,29 +47,37 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
 
     private final DispatchAsync dispatchAsync;
+    private final SessionService sessionService;
     private final String defaultPlaceNameToken;
     private final PlaceManager placeManager;
     private final CurrentUser currentUser;
     private final HeaderMessages messages;
 
     @Inject
-    public HeaderPresenter(final EventBus eventBus, final MyView view, final DispatchAsync dispatchAsync,
-            @DefaultPlace final String defaultPlaceNameToken, final PlaceManager placeManager,
-            final CurrentUser currentUser, final HeaderMessages messages) {
+    public HeaderPresenter(
+            EventBus eventBus,
+            MyView view,
+            DispatchAsync dispatchAsync,
+            SessionService sessionService,
+            @DefaultPlace String defaultPlaceNameToken,
+            PlaceManager placeManager,
+            CurrentUser currentUser,
+            HeaderMessages messages) {
         super(eventBus, view);
 
         this.dispatchAsync = dispatchAsync;
+        this.sessionService = sessionService;
         this.defaultPlaceNameToken = defaultPlaceNameToken;
         this.placeManager = placeManager;
         this.currentUser = currentUser;
         this.messages = messages;
-        
+
         getView().setUiHandlers(this);
     }
 
     @Override
     public void logout() {
-        dispatchAsync.execute(new LogoutAction(), new AsyncCallback<LogoutResult>() {
+        dispatchAsync.execute(sessionService.logout(), new AsyncCallback<NoResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 DisplayMessageEvent.fire(HeaderPresenter.this, new Message(messages.errorLoggingOut(),
@@ -77,7 +85,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
             }
 
             @Override
-            public void onSuccess(LogoutResult result) {
+            public void onSuccess(NoResult result) {
                 onLogoutSuccess();
             }
         });
