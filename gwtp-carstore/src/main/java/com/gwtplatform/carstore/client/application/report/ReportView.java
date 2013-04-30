@@ -18,8 +18,7 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class ReportView extends ViewImpl implements ReportPresenter.MyView {
-
-    public interface Binder extends UiBinder<Widget, ReportView> {
+    interface Binder extends UiBinder<Widget, ReportView> {
     }
 
     @UiField(provided = true)
@@ -28,13 +27,12 @@ public class ReportView extends ViewImpl implements ReportPresenter.MyView {
     private final ListDataProvider<ManufacturerRatingDto> ratingsProvider;
 
     @Inject
-    public ReportView(final Binder uiBinder) {
-        initCarGrid();
-        
-        initWidget(uiBinder.createAndBindUi(this));
-
+    ReportView(Binder uiBinder) {
         ratingsProvider = new ListDataProvider<ManufacturerRatingDto>();
-        ratingsProvider.addDataDisplay(reportGrid);
+
+        initCarGrid();
+
+        initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
@@ -46,6 +44,8 @@ public class ReportView extends ViewImpl implements ReportPresenter.MyView {
     private void initCarGrid() {
         reportGrid = new CellTable<ManufacturerRatingDto>();
         reportGrid.setSelectionModel(new NoSelectionModel<ManufacturerRatingDto>());
+
+        ratingsProvider.addDataDisplay(reportGrid);
 
         initDataColumns();
     }
@@ -71,5 +71,4 @@ public class ReportView extends ViewImpl implements ReportPresenter.MyView {
         reportGrid.addColumn(ratingColumn, "Rating");
         reportGrid.setColumnWidth(ratingColumn, 50, Unit.PX);
     }
-
 }
