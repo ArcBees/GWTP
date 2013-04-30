@@ -19,13 +19,13 @@ public class RootCarView extends ViewImpl implements RootCarPresenter.MyView {
     SimplePanel contentPanel;
 
     @Inject
-    public RootCarView(Binder uiBinder) {
+    RootCarView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
     public void setInSlot(Object slot, IsWidget content) {
-        if (slot == RootCarPresenter.TYPE_SetTabBar) {
+        if (slot == RootCarPresenter.SLOT_TAB_BAR) {
             tabBarPanel.setWidget(content);
         } else if (slot == RootCarPresenter.TYPE_SetCarContent) {
             contentPanel.setWidget(content);

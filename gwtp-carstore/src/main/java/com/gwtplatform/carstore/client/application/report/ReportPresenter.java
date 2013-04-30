@@ -39,8 +39,10 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
     private final DispatchAsync dispatcher;
 
     @Inject
-    public ReportPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
-            final DispatchAsync dispatcher) {
+    ReportPresenter(EventBus eventBus,
+                           MyView view,
+                           MyProxy proxy,
+                           DispatchAsync dispatcher) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
@@ -62,6 +64,6 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 }
