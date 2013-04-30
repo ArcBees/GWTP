@@ -2,7 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.0//EN"
         "http://google-web-toolkit.googlecode.com/svn/tags/2.5.0/distro-source/core/src/gwt-module.dtd">
 <module rename-to='PhoneGap'>
-    <inherits name="com.gwtplatform.carstore.Phonegap" />
+    <inherits name="com.gwtplatform.carstore.PhoneGap" />
 
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule"/>

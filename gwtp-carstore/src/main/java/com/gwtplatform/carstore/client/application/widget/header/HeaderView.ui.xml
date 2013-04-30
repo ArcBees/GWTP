@@ -80,7 +80,7 @@
             </div>
 
             <div class="{style.floatLeft} {style.menuBarWrapper}">
-                <g:ValuePicker ui:field="menuBar"/>
+                <g:ValuePicker ui:field="menuBar" debugId="menubar"/>
             </div>
 
             <g:HTMLPanel ui:field="userOptions" styleName="{style.floatRight} {style.paddingTop}">
