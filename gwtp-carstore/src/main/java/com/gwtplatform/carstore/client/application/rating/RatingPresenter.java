@@ -77,7 +77,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     @Override
     public void onActionEvent(ActionBarEvent event) {
         if (event.getActionType() == ActionType.ADD && event.isTheSameToken(NameTokens.getRating())) {
-            placeManager.revealPlace(new PlaceRequest(NameTokens.getDetailRating()));
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getDetailRating()).build());
         }
     }
 

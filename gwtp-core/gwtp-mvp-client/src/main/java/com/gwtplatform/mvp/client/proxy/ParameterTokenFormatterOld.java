@@ -129,15 +129,13 @@ public final class ParameterTokenFormatterOld implements TokenFormatter {
     @Override
     public PlaceRequest toPlaceRequest(String placeToken)
             throws TokenFormatException {
-        PlaceRequest req = null;
-
         int split = placeToken.indexOf(paramSeparator);
         if (split == 0) {
             throw new TokenFormatException("Place history token is missing.");
         } else if (split == -1) {
-            req = new PlaceRequest(placeToken);
+            return new PlaceRequest.Builder().nameToken(placeToken).build();
         } else if (split >= 0) {
-            req = new PlaceRequest(placeToken.substring(0, split));
+            PlaceRequest.Builder reqBuilder = new PlaceRequest.Builder().nameToken(placeToken.substring(0, split));
             String paramsChunk = placeToken.substring(split + 1);
             String[] paramTokens = paramsChunk.split(paramSeparator);
             for (String paramToken : paramTokens) {
@@ -149,10 +147,11 @@ public final class ParameterTokenFormatterOld implements TokenFormatter {
                 String[] param = splitParamToken(paramToken);
                 String key = unescape(param[0]);
                 String value = unescape(param[1]);
-                req = req.with(key, value);
+                reqBuilder = reqBuilder.with(key, value);
             }
+            return reqBuilder.build();
         }
-        return req;
+        return null;
     }
 
     @Override

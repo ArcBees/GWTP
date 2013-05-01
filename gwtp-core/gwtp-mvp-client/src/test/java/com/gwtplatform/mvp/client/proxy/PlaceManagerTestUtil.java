@@ -29,7 +29,7 @@ import com.google.web.bindery.event.shared.EventBus;
  */
 class PlaceManagerTestUtil extends PlaceManagerImpl {
 
-    private final PlaceRequest defaultPlaceRequest = new PlaceRequest("defaultPlace");
+    private final PlaceRequest defaultPlaceRequest = new PlaceRequest.Builder().nameToken("defaultPlace").build();
     private final PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
 
     @Inject

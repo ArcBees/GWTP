@@ -59,7 +59,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
         when(carProxyFactory.create(carDto, carDto.getManufacturer().getName() + carDto.getModel())).thenReturn(proxy);
         when(proxy.getNameToken()).thenReturn("token");
 
-        PlaceRequest placeRequest = new PlaceRequest("token");
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("token").build();
 
         // When
         carsPresenter.onEdit(carDto);
@@ -71,7 +71,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onCreate(PlaceManager placeManager) {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest(NameTokens.newCar);
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.newCar).build();
 
         // When
         carsPresenter.onCreate();
