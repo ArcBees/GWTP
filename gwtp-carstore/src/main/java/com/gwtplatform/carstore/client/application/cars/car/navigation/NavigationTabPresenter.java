@@ -45,7 +45,7 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
         }
 
         if (index == 0 && elements.size() == 0) {
-            placeManager.revealPlace(new PlaceRequest(NameTokens.getCars()));
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getCars()).build());
         } else {
             onTabSelected(index);
         }
@@ -62,7 +62,7 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
 
     @Override
     public void onTabSelected(int index) {
-        placeManager.revealPlace(new PlaceRequest(elements.get(index).getToken()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(elements.get(index).getToken()).build());
     }
 
     @Override
