@@ -4,21 +4,21 @@
         <g:HTMLPanel>
             <div>
                 <g:InlineLabel>Model:</g:InlineLabel>
-                <g:TextBox ui:field="model"/>
+                <g:TextBox ui:field="model" debugId="car-model-input"/>
             </div>
 
             <div>
                 <g:InlineLabel>Manufacturer:</g:InlineLabel>
-                <g:ValueListBox ui:field="manufacturer"/>
+                <g:ValueListBox ui:field="manufacturer" debugId="car-manufacturer-input"/>
             </div>
 
             <div>
-                <c:CarPropertiesEditor ui:field="carProperties"/>
+                <c:CarPropertiesEditor ui:field="carProperties" debugId="car-properties-editor"/>
             </div>
 
             <div>
-                <g:Button ui:field="save">Save</g:Button>
-                <g:Button ui:field="close">Close</g:Button>
+                <g:Button ui:field="save" debugId="car-save">Save</g:Button>
+                <g:Button ui:field="close" debugId="car-close">Close</g:Button>
             </div>
         </g:HTMLPanel>
     </g:PopupPanel>

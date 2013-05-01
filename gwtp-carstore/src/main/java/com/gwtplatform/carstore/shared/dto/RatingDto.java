@@ -4,37 +4,37 @@ import com.gwtplatform.carstore.shared.domain.BaseEntity;
 
 public class RatingDto extends BaseEntity {
     private Integer rating;
-    private CarDto carDto;
+    private CarDto car;
 
     public RatingDto() {
     }
 
-    public RatingDto(CarDto carDto, Integer rating) {
-        this.carDto = carDto;
+    public RatingDto(CarDto car, Integer rating) {
+        this.car = car;
         this.rating = rating;
     }
 
     public CarDto getCar() {
-        return carDto;
+        return car;
     }
 
-    public void setCar(final CarDto carDto) {
-        this.carDto = carDto;
+    public void setCar(CarDto car) {
+        this.car = car;
     }
 
     public Integer getRating() {
         return rating;
     }
 
-    public void setRating(final Integer rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
     @Override
     public String toString() {
-        if (carDto != null && carDto.getManufacturer() != null) {
-            ManufacturerDto manufacturerDto = carDto.getManufacturer();
-            return manufacturerDto.getName() + "/" + carDto.getModel();
+        if (car != null && car.getManufacturer() != null) {
+            ManufacturerDto manufacturerDto = car.getManufacturer();
+            return manufacturerDto.getName() + "/" + car.getModel();
         }
 
         return super.toString();

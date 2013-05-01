@@ -16,15 +16,14 @@ import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPres
 import com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.DeleteManufacturerAction;
-import com.gwtplatform.carstore.shared.dispatch.GetManufacturersAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
-import com.gwtplatform.carstore.shared.dispatch.NoResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -59,21 +58,24 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
 
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
+    private final ManufacturerService manufacturerService;
     private final EditManufacturerPresenter editManufacturerPresenter;
 
     private ManufacturerDto editingManufacturer;
 
     @Inject
     ManufacturerPresenter(EventBus eventBus,
-                                 MyView view,
-                                 MyProxy proxy,
-                                 DispatchAsync dispatcher,
-                                 PlaceManager placeManager,
-                                 EditManufacturerPresenter editManufacturerPresenter) {
+                          MyView view,
+                          MyProxy proxy,
+                          DispatchAsync dispatcher,
+                          ManufacturerService manufacturerService,
+                          PlaceManager placeManager,
+                          EditManufacturerPresenter editManufacturerPresenter) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
+        this.manufacturerService = manufacturerService;
         this.editManufacturerPresenter = editManufacturerPresenter;
 
         getView().setUiHandlers(this);
@@ -108,12 +110,13 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onDelete(final ManufacturerDto manufacturerDto) {
-        dispatcher.execute(new DeleteManufacturerAction(manufacturerDto), new ErrorHandlerAsyncCallback<NoResults>(this) {
-            @Override
-            public void onSuccess(NoResults noResults) {
-                getView().removeManufacturer(manufacturerDto);
-            }
-        });
+        dispatcher.execute(manufacturerService.delete(manufacturerDto.getId()),
+                new ErrorHandlerAsyncCallback<NoResult>(this) {
+                    @Override
+                    public void onSuccess(NoResult noResult) {
+                        getView().removeManufacturer(manufacturerDto);
+                    }
+                });
     }
 
     @Override
@@ -121,12 +124,13 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        dispatcher.execute(new GetManufacturersAction(), new SafeAsyncCallback<GetResults<ManufacturerDto>>() {
-            @Override
-            public void onSuccess(GetResults<ManufacturerDto> result) {
-                getView().displayManufacturers(result.getResults());
-            }
-        });
+        dispatcher.execute(manufacturerService.getManufacturers(),
+                new AbstractAsyncCallback<GetResults<ManufacturerDto>>() {
+                    @Override
+                    public void onSuccess(GetResults<ManufacturerDto> result) {
+                        getView().displayManufacturers(result.getResults());
+                    }
+                });
     }
 
     @Override
