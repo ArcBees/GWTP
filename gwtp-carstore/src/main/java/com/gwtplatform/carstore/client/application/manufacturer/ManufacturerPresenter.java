@@ -82,14 +82,14 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy> implements
     @Override
     public void onActionEvent(ActionBarEvent event) {
         if (event.getActionType() == ActionType.ADD && event.isTheSameToken(NameTokens.getManufacturer())) {
-            placeManager.revealPlace(new PlaceRequest(NameTokens.getDetailManufacturer()));
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getDetailManufacturer()).build());
         }
     }
 
     @Override
     public void onDetail(ManufacturerDto manufacturerDto) {
-        PlaceRequest placeRequest = new PlaceRequest(NameTokens.getDetailManufacturer());
-        placeRequest = placeRequest.with("id", String.valueOf(manufacturerDto.getId()));
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.getDetailManufacturer()).
+                with("id", String.valueOf(manufacturerDto.getId())).build();
         placeManager.revealPlace(placeRequest);
     }
 
