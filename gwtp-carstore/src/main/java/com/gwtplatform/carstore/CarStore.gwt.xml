@@ -13,8 +13,6 @@
                                 value="com.gwtplatform.carstore.client.gin.MobileModule"/>
 
     <!-- Shared modules -->
-    <set-configuration-property name="gin.ginjector.modules"
-                                value="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule"/>
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="com.gwtplatform.carstore.client.gin.SharedModule"/>
 </module>

@@ -1,5 +1,5 @@
-<%@ page import="com.gwtplatform.carstore.shared.domain.Car" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.gwtplatform.carstore.shared.domain.Car" %>
 <%
     List<Car> carList = (List<Car>)request.getAttribute("cars");
 %>

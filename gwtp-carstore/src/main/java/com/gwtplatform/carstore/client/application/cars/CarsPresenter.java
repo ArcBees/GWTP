@@ -19,18 +19,16 @@ import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEven
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.DeleteCarAction;
-import com.gwtplatform.carstore.shared.dispatch.GetCarsAction;
-import com.gwtplatform.carstore.shared.dispatch.GetCarsCountAction;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
-import com.gwtplatform.carstore.shared.dispatch.NoResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.NumberDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -63,6 +61,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     }
 
     private final DispatchAsync dispatcher;
+    private final CarService carService;
     private final PlaceManager placeManager;
     private final CarProxyFactory carProxyFactory;
 
@@ -71,11 +70,13 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
                   MyView view,
                   MyProxy proxy,
                   DispatchAsync dispatcher,
+                  CarService carService,
                   PlaceManager placeManager,
                   CarProxyFactory carProxyFactory) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
+        this.carService = carService;
         this.placeManager = placeManager;
         this.carProxyFactory = carProxyFactory;
 
@@ -91,7 +92,8 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onEdit(CarDto carDto) {
-        CarPresenter.MyProxy proxy = carProxyFactory.create(carDto, carDto.getManufacturer().getName() + carDto.getModel());
+        CarPresenter.MyProxy proxy = carProxyFactory.create(carDto,
+                carDto.getManufacturer().getName() + carDto.getModel());
 
         placeManager.revealPlace(new Builder().nameToken(proxy.getNameToken()).build());
     }
@@ -103,7 +105,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void fetchData(final int offset, int limit) {
-        dispatcher.execute(new GetCarsAction(offset, limit), new SafeAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(offset, limit), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
             public void onSuccess(GetResults<CarDto> result) {
                 getView().displayCars(offset, result.getResults());
@@ -112,15 +114,16 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     }
 
     @Override
-    public void onDelete(final CarDto carDto) {
-        dispatcher.execute(new DeleteCarAction(carDto), new ErrorHandlerAsyncCallback<NoResults>(this) {
-            @Override
-            public void onSuccess(NoResults noResults) {
-                fetchDataForDisplay();
+    public void onDelete(CarDto carDto) {
+        dispatcher.execute(carService.delete(carDto.getId()),
+                new ErrorHandlerAsyncCallback<NoResult>(this) {
+                    @Override
+                    public void onSuccess(NoResult noResult) {
+                        fetchDataForDisplay();
 
-                getView().setCarsCount(getView().getCarDisplay().getRowCount() - 1);
-            }
-        });
+                        getView().setCarsCount(getView().getCarDisplay().getRowCount() - 1);
+                    }
+                });
     }
 
     @ProxyEvent
@@ -145,7 +148,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
         getView().initDataProvider();
 
-        dispatcher.execute(new GetCarsCountAction(), new SafeAsyncCallback<GetResult<NumberDto<Integer>>>() {
+        dispatcher.execute(carService.getCarsCount(), new AbstractAsyncCallback<GetResult<NumberDto<Integer>>>() {
             @Override
             public void onSuccess(GetResult<NumberDto<Integer>> result) {
                 getView().setCarsCount(result.getResult().getNumber());
