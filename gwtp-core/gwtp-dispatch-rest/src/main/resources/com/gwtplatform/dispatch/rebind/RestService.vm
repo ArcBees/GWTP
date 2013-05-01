@@ -1,0 +1,20 @@
+package ${package};
+
+import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+import ${serviceInterface.qualifiedSourceName};
+
+public class ${implName} implements ${serviceInterface.name} {
+#foreach ($action in ${actionBindings})
+#set($paramsDef = "")
+#set($paramsValues = "")
+#foreach ($param in ${action.getParameters()})
+#set($paramsDef = "${paramsDef}${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded(${action.getParameters()})")
+#set($paramsValues = "${paramsValues}${param.name}#commaIfNeeded(${action.getParameters()})")
+#end
+    @Override
+    public Action<${action.resultClass}> ${action.methodName}($paramsDef) {
+        return new ${action.actionClass}(${paramsValues});
+    }
+#end
+}

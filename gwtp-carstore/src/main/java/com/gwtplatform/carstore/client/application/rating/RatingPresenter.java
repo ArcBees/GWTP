@@ -15,14 +15,13 @@ import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent
 import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent.RatingAddedHandler;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
-import com.gwtplatform.carstore.client.util.SafeAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.DeleteRatingAction;
-import com.gwtplatform.carstore.shared.dispatch.GetRatingsAction;
+import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
-import com.gwtplatform.carstore.shared.dispatch.NoResults;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -54,6 +53,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     private final DispatchAsync dispatcher;
     private final EditRatingPresenter editRatingPresenter;
+    private final RatingService ratingService;
     private final PlaceManager placeManager;
 
     @Inject
@@ -61,11 +61,13 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
                     MyView view,
                     MyProxy proxy,
                     DispatchAsync dispatcher,
+                    RatingService ratingService,
                     EditRatingPresenter editRatingPresenter,
                     PlaceManager placeManager) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
+        this.ratingService = ratingService;
         this.placeManager = placeManager;
         this.editRatingPresenter = editRatingPresenter;
 
@@ -86,9 +88,9 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @Override
     public void onDelete(final RatingDto ratingDto) {
-        dispatcher.execute(new DeleteRatingAction(ratingDto), new SafeAsyncCallback<NoResults>() {
+        dispatcher.execute(ratingService.delete(ratingDto.getId()), new AbstractAsyncCallback<NoResult>() {
             @Override
-            public void onSuccess(NoResults result) {
+            public void onSuccess(NoResult result) {
                 getView().removeRating(ratingDto);
             }
         });
@@ -105,7 +107,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        dispatcher.execute(new GetRatingsAction(), new SafeAsyncCallback<GetResults<RatingDto>>() {
+        dispatcher.execute(ratingService.getRatings(), new AbstractAsyncCallback<GetResults<RatingDto>>() {
             @Override
             public void onSuccess(GetResults<RatingDto> result) {
                 getView().displayRatings(result.getResults());
