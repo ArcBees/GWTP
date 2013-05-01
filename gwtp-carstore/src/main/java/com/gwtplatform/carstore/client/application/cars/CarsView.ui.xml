@@ -16,13 +16,13 @@
                 <g:InlineLabel text="Cars"/>
             </h2>
             <div>
-                <g:Button ui:field="create" styleName="{resources.styles.addAction}"/>
+                <g:Button ui:field="create" debugId="carCreate" styleName="{resources.styles.addAction}"/>
             </div>
             <span style="display: block; clear: both;"/>
         </g:HTMLPanel>
 
         <div class="{style.tableWrapper}">
-            <cell:CellTable ui:field="carGrid" width="100%"/>
+            <cell:CellTable ui:field="carGrid" width="100%" debugId="cars"/>
         </div>
 
         <cell:SimplePager ui:field='pager'/>
