@@ -30,17 +30,6 @@ public class RatingColumnInitializer implements ColumnInitializer<RatingDto> {
         initRatingColumn(table);
     }
 
-    private void initRatingColumn(CellTable<RatingDto> table) {
-        Column<RatingDto, Number> ratingColumn = new Column<RatingDto, Number>(new NumberCell()) {
-            @Override
-            public Number getValue(RatingDto ratingDto) {
-                return ratingDto.getRating();
-            }
-        };
-
-        table.addColumn(ratingColumn, "Rating");
-    }
-
     private void initIdColumn(CellTable<RatingDto> table) {
         Column<RatingDto, Number> idColumn = new Column<RatingDto, Number>(new NumberCell()) {
             @Override
@@ -61,5 +50,16 @@ public class RatingColumnInitializer implements ColumnInitializer<RatingDto> {
         };
 
         table.addColumn(carColumn, "Car");
+    }
+
+    private void initRatingColumn(CellTable<RatingDto> table) {
+        Column<RatingDto, Number> ratingColumn = new Column<RatingDto, Number>(new NumberCell()) {
+            @Override
+            public Number getValue(RatingDto ratingDto) {
+                return ratingDto.getRating();
+            }
+        };
+
+        table.addColumn(ratingColumn, "Rating");
     }
 }
