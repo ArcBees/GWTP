@@ -38,6 +38,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
 import com.gwtplatform.carstore.client.application.rating.ui.RatingColumnInitializer;
+import com.gwtplatform.carstore.client.application.rating.ui.RatingColumnsDefinition;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
@@ -50,12 +51,12 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     @UiField(provided = true)
     CellTable<RatingDto> ratingGrid;
 
-    private final RatingColumnInitializer ratingColumnInitializer;
+    private final RatingColumnsDefinition ratingColumnInitializer;
     private final ListDataProvider<RatingDto> ratingDataProvider;
 
     @Inject
     RatingView(Binder uiBinder,
-                      RatingColumnInitializer ratingColumnInitializer) {
+               RatingColumnsDefinition ratingColumnInitializer) {
         this.ratingColumnInitializer = ratingColumnInitializer;
 
         initRatingGrid();
