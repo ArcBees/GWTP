@@ -373,15 +373,6 @@
                         <serverId>appengine-credentials</serverId>
                         <splitJars>true</splitJars>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <id>unpack</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>unpack</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <dependencies>
                         <!-- Google App Engine API -->
                         <dependency>
