@@ -56,6 +56,8 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     private static final String ONPREBOOTSTRAP = "new %s().onPreBootstrap();";
     private static final String SCHEDULE_DEFERRED_1 = "Scheduler.get().scheduleDeferred(new ScheduledCommand() {";
     private static final String SCHEDULE_DEFERRED_2 = "public void execute() {";
+    private static final String ONMODULE_LOAD = "public void onModuleLoad() {";
+    private static final String INIT = "init();";
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -203,5 +205,12 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
             sw.outdent();
             sw.println("}");
         }
+
+        sw.println(OVERRIDE);
+        sw.println(ONMODULE_LOAD);
+        sw.indent();
+        sw.println(INIT);
+        sw.outdent();
+        sw.println("}");
     }
 }
