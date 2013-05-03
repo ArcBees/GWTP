@@ -63,7 +63,7 @@ import com.google.gwt.http.client.URL;
  * </pre>
  * <p/>
  * If you want to use different symbols as separator, use the
- * {@link #ParameterTokenFormatter(String, String, String, String)} constructor.
+ * {@link #ParameterTokenFormatter(String, String, String)} constructor.
  *
  * @author Philippe Beaudoin
  * @author Yannis Gonianakis
@@ -106,8 +106,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
      * @param valueSeparator     The symbol used to separate the parameter name from its value. Must be
      *                           a 1-character string and can't be {@code %}.
      */
-    public ParameterTokenFormatter(String hierarchySeparator, String paramSeparator,
-            String valueSeparator) {
+    public ParameterTokenFormatter(String hierarchySeparator, String paramSeparator, String valueSeparator) {
         assert hierarchySeparator.length() == 1;
         assert paramSeparator.length() == 1;
         assert valueSeparator.length() == 1;
@@ -156,16 +155,15 @@ public class ParameterTokenFormatter implements TokenFormatter {
      */
     private PlaceRequest unescapedStringToPlaceRequest(String unescapedPlaceToken)
             throws TokenFormatException {
-        PlaceRequest req = null;
-
         int split = unescapedPlaceToken.indexOf(paramSeparator);
         if (split == 0) {
             throw new TokenFormatException("Place history token is missing.");
         } else if (split == -1) {
             // No parameters.
-            req = new PlaceRequest(customUnescape(unescapedPlaceToken));
+           return new PlaceRequest.Builder().nameToken(customUnescape(unescapedPlaceToken)).build();
         } else if (split >= 0) {
-            req = new PlaceRequest(customUnescape(unescapedPlaceToken.substring(0, split)));
+            PlaceRequest.Builder reqBuilder = new PlaceRequest.Builder().nameToken(customUnescape(unescapedPlaceToken
+                    .substring(0, split)));
             String paramsChunk = unescapedPlaceToken.substring(split + 1);
             String[] paramTokens = paramsChunk.split(paramSeparator);
             for (String paramToken : paramTokens) {
@@ -189,10 +187,11 @@ public class ParameterTokenFormatter implements TokenFormatter {
                 }
                 String key = customUnescape(param[0]);
                 String value = param.length == 2 ? customUnescape(param[1]) : "";
-                req = req.with(key, value);
+                reqBuilder = reqBuilder.with(key, value);
             }
+            return reqBuilder.build();
         }
-        return req;
+        return null;
     }
 
     @Override
@@ -258,7 +257,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
      * @return The escaped string.
      */
     String customEscape(String string) {
-        StringBuffer sbuf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         int len = string.length();
 
         char hierarchyChar = hierarchySeparator.charAt(0);
@@ -268,19 +267,19 @@ public class ParameterTokenFormatter implements TokenFormatter {
         for (int i = 0; i < len; i++) {
             char ch = string.charAt(i);
             if (ch == ESCAPE_CHARACTER) {
-                sbuf.append(ESCAPED_ESCAPE_CHAR);
+                builder.append(ESCAPED_ESCAPE_CHAR);
             } else if (ch == hierarchyChar) {
-                sbuf.append(ESCAPED_HIERARCHY_SEPARATOR);
+                builder.append(ESCAPED_HIERARCHY_SEPARATOR);
             } else if (ch == paramChar) {
-                sbuf.append(ESCAPED_PARAM_SEPARATOR);
+                builder.append(ESCAPED_PARAM_SEPARATOR);
             } else if (ch == valueChar) {
-                sbuf.append(ESCAPED_VALUE_SEPARATOR);
+                builder.append(ESCAPED_VALUE_SEPARATOR);
             } else {
-                sbuf.append(ch);
+                builder.append(ch);
             }
         }
 
-        return URL.encodeQueryString(sbuf.toString());
+        return URL.encodeQueryString(builder.toString());
     }
 
     /**
@@ -294,7 +293,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
      * @throws TokenFormatException if there is an error converting.
      */
     private String customUnescape(String string) throws TokenFormatException {
-        StringBuffer sbuf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         int len = string.length();
 
         char hierarchyNum = ESCAPED_HIERARCHY_SEPARATOR.charAt(1);
@@ -309,16 +308,16 @@ public class ParameterTokenFormatter implements TokenFormatter {
                 i++;
                 char ch2 = string.charAt(i);
                 if (ch2 == hierarchyNum) {
-                    sbuf.append(hierarchySeparator);
+                    builder.append(hierarchySeparator);
                 } else if (ch2 == paramNum) {
-                    sbuf.append(paramSeparator);
+                    builder.append(paramSeparator);
                 } else if (ch2 == valueNum) {
-                    sbuf.append(valueSeparator);
+                    builder.append(valueSeparator);
                 } else if (ch2 == escapeNum) {
-                    sbuf.append(ESCAPE_CHARACTER);
+                    builder.append(ESCAPE_CHARACTER);
                 }
             } else {
-                sbuf.append(ch);
+                builder.append(ch);
             }
             i++;
         }
@@ -328,8 +327,8 @@ public class ParameterTokenFormatter implements TokenFormatter {
                 throw new TokenFormatException("Last character of string being unescaped cannot be '" +
                         ESCAPE_CHARACTER + "'.");
             }
-            sbuf.append(ch);
+            builder.append(ch);
         }
-        return sbuf.toString();
+        return builder.toString();
     }
 }

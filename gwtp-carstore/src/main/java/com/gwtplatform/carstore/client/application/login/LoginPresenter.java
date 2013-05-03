@@ -51,7 +51,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     public static final String LOGIN_COOKIE_NAME = "LoggedInCookie";
 
     private static final Logger logger = Logger.getLogger(LoginPresenter.class.getName());
-
     private final PlaceManager placeManager;
     private final DispatchAsync dispatchAsync;
     private final SessionService sessionService;
@@ -116,23 +115,23 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 }
 
                 if (result.getActionType() == ActionType.VIA_COOKIE) {
-                    onLoginCallSuceededForCookie(result.getCurrentUserDto());
+                    onLoginCallSucceededForCookie(result.getCurrentUserDto());
                 } else {
-                    onLoginCallSuceeded(result.getCurrentUserDto());
+                    onLoginCallSucceeded(result.getCurrentUserDto());
                 }
             }
         });
     }
 
-    private void onLoginCallSuceededForCookie(CurrentUserDto currentUserDto) {
+    private void onLoginCallSucceededForCookie(CurrentUserDto currentUserDto) {
         getView().setLoginButtonEnabled(true);
 
         if (currentUserDto.isLoggedIn()) {
-            onLoginCallSuceeded(currentUserDto);
+            onLoginCallSucceeded(currentUserDto);
         }
     }
 
-    private void onLoginCallSuceeded(CurrentUserDto currentUserDto) {
+    private void onLoginCallSucceeded(CurrentUserDto currentUserDto) {
         if (currentUserDto.isLoggedIn()) {
             currentUser.fromCurrentUserDto(currentUserDto);
 
