@@ -1,19 +1,20 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
+import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.dispatch.shared.Result;
 
 public class LogInResult implements Result {
-    private ActionType actiontype;
-    private CurrentUserDto currentUserDto;
-    private String loggedInCookie;
+    ActionType actionType;
+    CurrentUserDto currentUserDto;
+    String loggedInCookie;
 
     protected LogInResult() {
         // Needed for serialization
     }
 
-    public LogInResult(ActionType actiontype, CurrentUserDto currentUserDto, String loggedInCookie) {
-        this.actiontype = actiontype;
+    public LogInResult(ActionType actionType, CurrentUserDto currentUserDto, String loggedInCookie) {
+        this.actionType = actionType;
         this.currentUserDto = currentUserDto;
         this.loggedInCookie = loggedInCookie;
     }
@@ -27,6 +28,6 @@ public class LogInResult implements Result {
     }
 
     public ActionType getActionType() {
-        return actiontype;
+        return actionType;
     }
 }
