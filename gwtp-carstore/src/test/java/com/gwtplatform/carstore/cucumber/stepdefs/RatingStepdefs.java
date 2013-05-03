@@ -2,11 +2,12 @@ package com.gwtplatform.carstore.cucumber.stepdefs;
 
 import javax.inject.Inject;
 
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-
 import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -22,10 +23,14 @@ public class RatingStepdefs {
         this.messageWidgetPage = messageWidgetPage;
     }
 
-    @When("^I fill the rating form$")
-    public void iFillTheRatingForm() {
+    @Given("^I click on the create rating button$")
+    public void iClickOnTheCreateRatingButton() {
         numberOfLines = ratingPage.getNumberOfLines();
         ratingPage.clickOnCreate();
+    }
+
+    @When("^I fill the rating form$")
+    public void iFillTheRatingForm() {
         ratingPage.fillForm();
     }
 
@@ -41,8 +46,8 @@ public class RatingStepdefs {
         ratingPage.deleteFirstRating();
     }
 
-    @Then("^It gets removed$")
-    public void itGetsRemoved() {
+    @Then("^The first rating gets removed$")
+    public void theFirstRatingGetsRemoved() {
         assertEquals(numberOfLines - 1, ratingPage.getNumberOfLines());
     }
 }

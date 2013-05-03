@@ -7,11 +7,11 @@ import com.gwtplatform.carstore.shared.domain.BaseEntity;
 
 public class ManufacturerDto extends BaseEntity {
     private String name;
-    private List<CarDto> carDtos;
+    private List<CarDto> cars;
 
     public ManufacturerDto() {
         this.name = "";
-        this.carDtos = new ArrayList<CarDto>();
+        this.cars = new ArrayList<CarDto>();
     }
 
     public ManufacturerDto(String name) {
@@ -31,10 +31,10 @@ public class ManufacturerDto extends BaseEntity {
     }
 
     public List<CarDto> getCars() {
-        return carDtos;
+        return cars;
     }
 
-    public void setCars(List<CarDto> carDtos) {
-        this.carDtos = carDtos;
+    public void setCars(List<CarDto> cars) {
+        this.cars = cars;
     }
 }
