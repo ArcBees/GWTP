@@ -11,7 +11,7 @@
 
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
-    <version>1.0-RC-4-SNAPSHOT</version>
+    <version>1.0-RC-3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GWT-Platform</name>
     <inceptionYear>2010</inceptionYear>
