@@ -84,7 +84,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
 
     @Override
     public void onGoBack(GoBackEvent event) {
-        placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getRating()).build());
     }
 
     @Override
@@ -102,7 +102,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy> implements
                     public void onSuccess(GetResult<RatingDto> result) {
                         DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
                                 MessageStyle.SUCCESS));
-                        placeManager.revealPlace(new PlaceRequest(NameTokens.getRating()));
+                        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getRating()).build());
                     }
                 });
     }
