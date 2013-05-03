@@ -116,7 +116,6 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
         });
 
         IdentityColumn<RatingDto> deleteColumn = new IdentityColumn<RatingDto>(deleteCell);
-        deleteColumn.setCellStyleNames("delete");
         ratingGrid.addColumn(deleteColumn, "Delete");
         ratingGrid.setColumnWidth(deleteColumn, 75, Style.Unit.PX);
     }
