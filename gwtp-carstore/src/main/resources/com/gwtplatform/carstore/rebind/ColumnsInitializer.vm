@@ -25,10 +25,9 @@ public class ${implName}Impl implements ${implName} {
                             return object.${type.method.getName()}();
                         }};
 
-        table.addColumn(column, messages.${type.method.getName()}());
+        table.addColumn(column, "${type.getColumn().headerName()}");
     }
 #end
-
 #foreach (${type} in ${columnsInitializerDefinitions.getColumns()})
 
     public ${type.getMethod().returnType.getQualifiedSourceName()} ${type.getMethod().getName()}() {
