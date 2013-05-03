@@ -26,16 +26,17 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.uibinder.rebind.MortalLogger;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
 public class RebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/carstore/rebind/velocity.properties";
 
-    private final Logger logger;
+    private final MortalLogger logger;
     private final GeneratorContext generatorContext;
 
-    public RebindModule(Logger logger, GeneratorContext generatorContext) {
+    public RebindModule(MortalLogger logger, GeneratorContext generatorContext) {
         super();
 
         this.logger = logger;
@@ -50,7 +51,7 @@ public class RebindModule extends AbstractModule {
     }
 
     @Provides
-    public Logger getLogger() {
+    public MortalLogger getLogger() {
         return logger;
     }
 
@@ -66,7 +67,7 @@ public class RebindModule extends AbstractModule {
 
     @Provides
     @Singleton
-    public VelocityEngine getVelocityEngine(@VelocityProperties String velocityProperties, Logger logger)
+    public VelocityEngine getVelocityEngine(@VelocityProperties String velocityProperties, MortalLogger logger)
             throws UnableToCompleteException {
 
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(velocityProperties);
