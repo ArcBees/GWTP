@@ -30,7 +30,7 @@ public class ${implName}Impl implements ${implName} {
 #end
 #foreach (${type} in ${columnsInitializerDefinitions.getColumns()})
 
-    public ${type.getMethod().returnType.getQualifiedSourceName()} ${type.getMethod().getName()}() {
+    public ${type.getMethod().getReturnType().getQualifiedSourceName()} ${type.getMethod().getName()}() {
         return null;
     }
 #end
