@@ -1,3 +1,4 @@
+#* @vtlmacrolibrary path="ColumnMacro.vm" *#
 #* @vtlvariable name="columnsInitializerDefinitions" type="com.gwtplatform.carstore.rebind.ColumnsInitializerDefinitions" *#
 package ${packageName};
 
@@ -9,29 +10,10 @@ import com.google.gwt.user.cellview.client.Column;
 public class ${implName}Impl implements ${implName} {
     @Override
     public void initializeColumns(CellTable<${columnsInitializerDefinitions.getDtoCanonicalName()}> table) {
-#foreach (${type} in ${columnsInitializerDefinitions.getColumns()})
-
-        init${type.getMethodCapitalizedName()}Column(table);
-#end
+        #callInitColumns(${columnsInitializerDefinitions})
     }
-#foreach (${type} in ${columnsInitializerDefinitions.getColumns()})
 
-    private void init${type.getMethodCapitalizedName()}Column(CellTable<${columnsInitializerDefinitions.getDtoCanonicalName()}> table) {
+    #initColumns(${columnsInitializerDefinitions})
 
-        Column<${columnsInitializerDefinitions.getDtoCanonicalName()}, ${type.getReturnCellCanonicalName()}> column
-                = new Column<${columnsInitializerDefinitions.getDtoCanonicalName()}, ${type.getReturnCellCanonicalName()}>(new ${type.getCellCanonicalName()}()) {
-                        @Override
-                        public ${type.getReturnCellCanonicalName()} getValue(${columnsInitializerDefinitions.getDtoCanonicalName()} object) {
-                            return object.${type.method.getName()}();
-                        }};
-
-        table.addColumn(column, "${type.getColumn().headerName()}");
-    }
-#end
-#foreach (${type} in ${columnsInitializerDefinitions.getColumns()})
-
-    public ${type.getMethod().getReturnType().getQualifiedSourceName()} ${type.getMethod().getName()}() {
-        return null;
-    }
-#end
+    #initEmptyMethods(${columnsInitializerDefinitions})
 }
