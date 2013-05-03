@@ -22,12 +22,12 @@ import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 @ColumnsDefinition(definitionFor = RatingDto.class)
 public interface RatingColumnsDefinition extends ColumnInitializer<RatingDto> {
-    @Column(cellType = NumberCell.class, cellReturnType = Long.class, headerName = "ID")
+    @Column(cellType = NumberCell.class, cellReturnType = Number.class, headerName = "ID")
     public String getId();
 
     @Column(cellType = TextCell.class, cellReturnType = String.class, headerName = "Car")
-    public String getCar();
+    public String toString();
 
-    @Column(cellType = TextCell.class, cellReturnType = String.class, headerName = "Rating")
+    @Column(cellType = NumberCell.class, cellReturnType = Number.class, headerName = "Rating")
     public String getRating();
 }
