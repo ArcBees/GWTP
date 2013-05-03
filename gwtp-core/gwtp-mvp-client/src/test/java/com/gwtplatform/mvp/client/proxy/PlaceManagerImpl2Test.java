@@ -81,8 +81,8 @@ public class PlaceManagerImpl2Test {
                 deferredCommandManager.addCommand(new Command() {
                     @Override
                     public void execute() {
-                        placeManager.updateHistory(new PlaceRequest("dummyNameToken").with("dummyParam",
-                                "dummyValue"), true);
+                        placeManager.updateHistory(new PlaceRequest.Builder().nameToken("dummyNameToken")
+                                .with("dummyParam", "dummyValue").build(), true);
                     }
                 });
                 ((PlaceRequestInternalEvent) args[0]).setHandled();
@@ -91,7 +91,7 @@ public class PlaceManagerImpl2Test {
         }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
 
         // When
-        placeManager.revealPlace(new PlaceRequest("dummyNameToken"));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken("dummyNameToken").build());
         deferredCommandManager.pump();
 
         // Then
@@ -113,7 +113,7 @@ public class PlaceManagerImpl2Test {
                 deferredCommandManager.addCommand(new Command() {
                     @Override
                     public void execute() {
-                        placeManager.updateHistory(new PlaceRequest("defaultPlace"), true);
+                        placeManager.updateHistory(new PlaceRequest.Builder().nameToken("defaultPlace").build(), true);
                     }
                 });
                 ((PlaceRequestInternalEvent) args[0]).setHandled();
@@ -143,7 +143,7 @@ public class PlaceManagerImpl2Test {
                 deferredCommandManager.addCommand(new Command() {
                     @Override
                     public void execute() {
-                        placeManager.updateHistory(new PlaceRequest("defaultPlace"), true);
+                        placeManager.updateHistory(new PlaceRequest.Builder().nameToken("defaultPlace").build(), true);
                     }
                 });
                 ((PlaceRequestInternalEvent) args[0]).setHandled();

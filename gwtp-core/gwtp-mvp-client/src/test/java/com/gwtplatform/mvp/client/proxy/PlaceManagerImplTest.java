@@ -125,11 +125,11 @@ public class PlaceManagerImplTest {
      */
     @TestEagerSingleton
     static class DummyPresenterRedirect extends Presenter<View, DummyProxyPlaceBasic> {
-        private final PlaceManager placeManager;
-
         public PlaceRequest preparedRequest;
         public int prepareFromRequestCalls;
         public int revealInParentCalls;
+
+        private final PlaceManager placeManager;
 
         @Inject
         public DummyPresenterRedirect(EventBus eventBus, DummyProxyPlaceBasic proxy,
@@ -143,7 +143,7 @@ public class PlaceManagerImplTest {
             super.prepareFromRequest(request);
             ++prepareFromRequestCalls;
             preparedRequest = request;
-            placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic"));
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken("dummyNameTokenBasic").build());
         }
 
         @Override
@@ -186,7 +186,7 @@ public class PlaceManagerImplTest {
         public void prepareFromRequest(PlaceRequest request) {
             super.prepareFromRequest(request);
             // This call is deferred by GWTP
-            placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic"), false);
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken("dummyNameTokenBasic").build(), false);
         }
 
         @Override
@@ -246,8 +246,8 @@ public class PlaceManagerImplTest {
         eventBus.addHandler(NavigationEvent.getType(), navigationHandler);
 
         // When
-        placeManager.revealPlace(new PlaceRequest("dummyNameTokenBasic").with("dummyParam",
-                "dummyValue"));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken("dummyNameTokenBasic").with("dummyParam",
+                "dummyValue").build());
         deferredCommandManager.pump();
 
         // Then
@@ -280,7 +280,7 @@ public class PlaceManagerImplTest {
     @Test
     public void placeManagerRevealPlaceRedirectInPrepareFromRequestNoHistory() {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest(DummyPresenterRedirectNoHistory.TOKEN);
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(DummyPresenterRedirectNoHistory.TOKEN).build();
 
         // When
         placeManager.revealPlace(placeRequest);
@@ -299,8 +299,8 @@ public class PlaceManagerImplTest {
             DummyPresenterRedirect presenter,
             DummyPresenterBasic otherPresenter) {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenRedirect").with("dummyParam",
-                "dummyValue");
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("dummyNameTokenRedirect").with("dummyParam",
+                "dummyValue").build();
 
         // When
         placeManager.revealPlace(placeRequest);
@@ -329,7 +329,8 @@ public class PlaceManagerImplTest {
             DummyPresenterRedirect presenter,
             DummyPresenterBasic otherPresenter) {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenRedirect").with("dummyParam", "dummyValue");
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("dummyNameTokenRedirect").with("dummyParam",
+                "dummyValue").build();
 
         // When
         placeManager.revealPlace(placeRequest);

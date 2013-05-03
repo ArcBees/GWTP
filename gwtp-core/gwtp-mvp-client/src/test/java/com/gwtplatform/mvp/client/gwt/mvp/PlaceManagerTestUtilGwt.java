@@ -34,7 +34,7 @@ public class PlaceManagerTestUtilGwt extends PlaceManagerImpl {
             final TokenFormatter tokenFormatter) {
         super(eventBus, tokenFormatter);
 
-        this.defaultPlaceRequest = new PlaceRequest("home");
+        this.defaultPlaceRequest = new PlaceRequest.Builder().nameToken("home").build();
     }
 
     @Override
