@@ -121,7 +121,7 @@ public class HeaderMobileView extends ViewWithUiHandlers<HeaderUiHandlers>
 
     @UiHandler("menuBar")
     void onMenuItemChanged(ValueChangeEvent<MenuItem> event) {
-        placeManager.revealPlace(new PlaceRequest(menuBar.getValue().getPlaceToken()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(menuBar.getValue().getPlaceToken()).build());
     }
 
     @UiHandler("home")
