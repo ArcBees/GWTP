@@ -270,9 +270,9 @@
         <github.username>SetAsParam</github.username>
         <github.password>SetAsParam</github.password>
     </properties>
-
+    
     <!-- TODO remove? -->
-    <repositories>
+    <!-- <repositories>
         <repository>
             <id>sonatype.snapshots</id>
             <name>Sonatype snapshot repository</name>
@@ -281,7 +281,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-    </repositories>
+    </repositories> -->
 
     <build>
         <pluginManagement>
@@ -423,6 +423,15 @@
                             <version>${gae.version}</version>
                         </dependency>
                     </dependencies>
+                    <executions>
+                        <execution>
+                          <id>unpack</id>
+                          <phase>validate</phase>
+                          <goals>
+                              <goal>unpack</goal>
+                          </goals>
+                          </execution>
+                    </executions>
                 </plugin>
 
                 <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven 
