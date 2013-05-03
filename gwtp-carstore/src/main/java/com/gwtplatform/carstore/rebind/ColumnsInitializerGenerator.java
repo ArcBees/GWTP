@@ -21,23 +21,21 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.uibinder.rebind.MortalLogger;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class ColumnsInitializerGenerator extends Generator {
-    private Logger logger;
-    private TypeOracle typeOracle;
+    private MortalLogger logger;
     private JClassType type;
     private Injector injector;
 
     @Override
-    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
-            throws UnableToCompleteException {
-        logger = new Logger(treeLogger);
-        typeOracle = generatorContext.getTypeOracle();
-        type = getType(typeName);
+    public String generate(TreeLogger treeLogger,
+                           GeneratorContext generatorContext,
+                           String typeName) throws UnableToCompleteException {
+        logger = new MortalLogger(treeLogger);
+        type = GeneratorUtil.getType(typeName, generatorContext.getTypeOracle(), logger);
 
         injector = Guice.createInjector(new RebindModule(logger, generatorContext));
 
@@ -51,17 +49,6 @@ public class ColumnsInitializerGenerator extends Generator {
             return velocityColumnsInitializerGenerator.generate(type);
         } catch (Exception e) {
             logger.die(e.getMessage());
-        }
-
-        return null;
-    }
-
-    // Duplicated from GeneratorUtil so that we don't create twice the injector if we don't need it.
-    private JClassType getType(String typeName) throws UnableToCompleteException {
-        try {
-            return typeOracle.getType(typeName);
-        } catch (NotFoundException e) {
-            logger.die("Cannot find " + typeName);
         }
 
         return null;

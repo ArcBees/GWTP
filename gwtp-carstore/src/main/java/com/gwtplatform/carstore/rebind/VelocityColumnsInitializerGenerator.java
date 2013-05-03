@@ -29,19 +29,18 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 
 public class VelocityColumnsInitializerGenerator extends AbstractVelocityGenerator {
     private static final String VELOCITY_TEMPLATE = "com/gwtplatform/carstore/rebind/ColumnsInitializer.vm";
+    private static final String SUFFIX = "Impl";
 
     @Inject
-    protected VelocityColumnsInitializerGenerator(
-            Provider<VelocityContext> velocityContextProvider,
-            VelocityEngine velocityEngine,
-            GeneratorUtil generatorUtil) {
+    protected VelocityColumnsInitializerGenerator(Provider<VelocityContext> velocityContextProvider,
+                                                  VelocityEngine velocityEngine,
+                                                  GeneratorUtil generatorUtil) {
         super(velocityContextProvider, velocityEngine, generatorUtil);
     }
 
     @Override
-    protected void populateVelocityContext(
-            VelocityContext velocityContext,
-            JClassType type) throws UnableToCompleteException {
+    protected void populateVelocityContext(VelocityContext velocityContext,
+                                           JClassType type) throws UnableToCompleteException {
         ColumnsInitializerDefinitions columnsInitializerDefinitions = ColumnsInitializerDefinitions.createFrom(type);
 
         velocityContext.put("columnsInitializerDefinitions", columnsInitializerDefinitions);
@@ -49,7 +48,7 @@ public class VelocityColumnsInitializerGenerator extends AbstractVelocityGenerat
 
     public String generate(JClassType type) throws Exception {
         String packageName = type.getPackage().getName();
-        String implName = type.getName() + "Impl";
+        String implName = type.getName() + SUFFIX;
 
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(packageName, implName);
         if (printWriter != null) {
