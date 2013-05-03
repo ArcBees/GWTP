@@ -86,7 +86,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
     @Override
     public void onActionEvent(ActionBarEvent event) {
         if (event.getActionType() == ActionType.ADD && event.isTheSameToken(NameTokens.getCars())) {
-            placeManager.revealPlace(new PlaceRequest(NameTokens.newCar));
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.newCar).build());
         }
     }
 
@@ -95,12 +95,12 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
         CarPresenter.MyProxy proxy = carProxyFactory.create(carDto,
                 carDto.getManufacturer().getName() + carDto.getModel());
 
-        placeManager.revealPlace(new PlaceRequest(proxy.getNameToken()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(proxy.getNameToken()).build());
     }
 
     @Override
     public void onCreate() {
-        placeManager.revealPlace(new PlaceRequest(NameTokens.newCar));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.newCar).build());
     }
 
     @Override

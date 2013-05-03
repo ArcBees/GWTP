@@ -113,27 +113,28 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 }
 
                 if (result.getActionType() == ActionType.VIA_COOKIE) {
-                    onLoginCallSuceededForCookie(result.getCurrentUserDto());
+                    onLoginCallSucceededForCookie(result.getCurrentUserDto());
                 } else {
-                    onLoginCallSuceeded(result.getCurrentUserDto());
+                    onLoginCallSucceeded(result.getCurrentUserDto());
                 }
             }
         });
     }
 
-    private void onLoginCallSuceededForCookie(CurrentUserDto currentUserDto) {
+    private void onLoginCallSucceededForCookie(CurrentUserDto currentUserDto) {
         getView().setLoginButtonEnabled(true);
 
         if (currentUserDto.isLoggedIn()) {
-            onLoginCallSuceeded(currentUserDto);
+            onLoginCallSucceeded(currentUserDto);
         }
     }
 
-    private void onLoginCallSuceeded(CurrentUserDto currentUserDto) {
+    private void onLoginCallSucceeded(CurrentUserDto currentUserDto) {
         if (currentUserDto.isLoggedIn()) {
             currentUser.fromCurrentUserDto(currentUserDto);
 
-            PlaceRequest homePlaceRequest = new PlaceRequest(NameTokens.getOnLoginDefaultPage());
+            PlaceRequest homePlaceRequest = new PlaceRequest.Builder().nameToken(NameTokens.getOnLoginDefaultPage()).
+                    build();
             placeManager.revealPlace(homePlaceRequest);
 
             UserLoginEvent.fire(this);
