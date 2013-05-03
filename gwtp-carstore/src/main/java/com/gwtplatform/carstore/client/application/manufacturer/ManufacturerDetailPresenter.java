@@ -131,7 +131,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
                     public void onSuccess(GetResult<ManufacturerDto> result) {
                         DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
                                 new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
-                        placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+                        placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
                     }
                 });
     }
@@ -166,7 +166,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
                     new ErrorHandlerAsyncCallback<NoResult>(this) {
                         @Override
                         public void onSuccess(NoResult noResult) {
-                            placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+                            placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
                         }
                     });
         }

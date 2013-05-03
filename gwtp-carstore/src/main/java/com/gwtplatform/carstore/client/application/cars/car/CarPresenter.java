@@ -89,7 +89,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
 
     @Override
     public void onGoBack(GoBackEvent event) {
-        placeManager.revealPlace(new PlaceRequest(NameTokens.getCars()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getCars()).build());
     }
 
     @Override
@@ -190,7 +190,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
 
             MyProxy proxy = carProxyFactory.create(newCar, newCar.getManufacturer().getName() + newCar.getModel());
 
-            placeManager.revealPlace(new PlaceRequest(proxy.getNameToken()));
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken(proxy.getNameToken()).build());
         }
     }
 
