@@ -138,7 +138,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
         currentUser.reset();
         getView().disableUserOptions();
 
-        PlaceRequest placeRequest = new PlaceRequest(defaultPlaceNameToken);
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(defaultPlaceNameToken).build();
         placeManager.revealPlace(placeRequest);
     }
 
