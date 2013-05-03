@@ -194,7 +194,7 @@ public class GatekeeperTest {
     @Test
     public void placeManagerRevealDefaultPlaceWhenGatekeeperCanNotReveal(DummyPresenterDefault defaultPresenter) {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithDenyGatekeeper");
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("dummyNameTokenWithDenyGatekeeper").build();
 
         // When
         placeManager.revealPlace(placeRequest);
@@ -218,7 +218,7 @@ public class GatekeeperTest {
     public void placeManagerRevealRequestPlaceWhenGatekeeperCanReveal(
             DummyPresenterWithGrantGatekeeper presenterWithGatekeeper) {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest("dummyNameTokenWithGrantGatekeeper");
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("dummyNameTokenWithGrantGatekeeper").build();
 
         // When
         placeManager.revealPlace(placeRequest);

@@ -102,7 +102,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
     @Override
     public void onGoBack(GoBackEvent event) {
-        placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getManufacturer()).build());
     }
 
     @Override
@@ -130,7 +130,8 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
                     public void onSuccess(GetResult<ManufacturerDto> result) {
                         DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
                                 new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
-                        placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+                        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getManufacturer()).
+                                build());
                     }
                 });
     }
@@ -165,7 +166,8 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
                     new ErrorHandlerAsyncCallback<NoResult>(this) {
                         @Override
                         public void onSuccess(NoResult noResult) {
-                            placeManager.revealPlace(new PlaceRequest(NameTokens.getManufacturer()));
+                            placeManager.revealPlace(new PlaceRequest.Builder().
+                                    nameToken(NameTokens.getManufacturer()).build());
                         }
                     });
         }
