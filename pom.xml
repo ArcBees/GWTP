@@ -6,7 +6,6 @@
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
-        <relativePath/>
     </parent>
 
     <groupId>com.gwtplatform</groupId>
@@ -366,9 +365,9 @@
                         <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
                         <serverId>appengine-credentials</serverId>
                         <splitJars>true</splitJars>
-                        <goalArguments>
-                            <argument>--enable_jar_splitting</argument>
-                        </goalArguments>
+                        <!--<goalArguments>-->
+                            <!--<argument>-enable_jar_splitting</argument>-->
+                        <!--</goalArguments>-->
                     </configuration>
                     <executions>
                         <execution>
