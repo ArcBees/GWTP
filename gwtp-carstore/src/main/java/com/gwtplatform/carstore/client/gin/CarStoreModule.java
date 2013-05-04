@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,17 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.gin;
+package com.gwtplatform.carstore.client.gin;
 
-import javax.inject.Singleton;
+import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import com.google.gwt.inject.client.AbstractGinModule;
-import com.gwtplatform.dispatch.client.PhoneGapDispatchAsync;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-
-public class PhoneGapDispatchAsyncModule extends AbstractGinModule {
+public class CarStoreModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        bind(DispatchAsync.class).to(PhoneGapDispatchAsync.class).in(Singleton.class);
+        install(new SharedModule());
+
+        bindConstant().annotatedWith(RestApplicationPath.class).to("/rest");
     }
 }

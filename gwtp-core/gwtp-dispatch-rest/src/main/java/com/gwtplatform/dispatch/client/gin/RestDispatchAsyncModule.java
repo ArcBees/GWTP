@@ -34,16 +34,9 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        protected String applicationPath = "";
-
         protected String xcsrfTokenHeaderName = "X-CSRF-Token";
 
         public Builder() {
-        }
-
-        public Builder applicationPath(String applicationPath) {
-            this.applicationPath = applicationPath;
-            return this;
         }
 
         public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
@@ -57,7 +50,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         }
     }
 
-    private String applicationPath;
     private String xcsrfTokenHeaderName;
 
     public RestDispatchAsyncModule() {
@@ -67,7 +59,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     private RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
-        applicationPath = builder.applicationPath;
         xcsrfTokenHeaderName = builder.xcsrfTokenHeaderName;
     }
 
@@ -75,7 +66,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configure() {
         super.configure();
 
-        bindConstant().annotatedWith(RestApplicationPath.class).to(applicationPath);
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
         bind(SerializerProvider.class).asEagerSingleton();
     }

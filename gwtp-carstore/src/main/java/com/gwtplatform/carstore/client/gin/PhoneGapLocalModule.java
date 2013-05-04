@@ -22,6 +22,6 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 public class PhoneGapLocalModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        bindConstant().annotatedWith(RemoteServerUrl.class).to("http://127.0.0.1:8888/");
+        bindConstant().annotatedWith(RemoteServerUrl.class).to("http://127.0.0.1:8888/rest");
     }
 }
