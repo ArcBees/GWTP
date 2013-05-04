@@ -29,6 +29,7 @@ import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
+import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
 import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
 
 class RestRequestBuilderFactory {
@@ -67,6 +68,7 @@ class RestRequestBuilderFactory {
         }
 
         requestBuilder.setHeader(CONTENT_TYPE, JSON_UTF8);
+        requestBuilder.setHeader(MODULE_BASE_HEADER, baseUrl);
 
         if (action.hasFormParams()) {
             requestBuilder.setRequestData(buildQueryString(action.getFormParams()));
