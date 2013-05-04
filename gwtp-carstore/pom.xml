@@ -140,7 +140,6 @@
             <plugin>
                 <groupId>net.kindleit</groupId>
                 <artifactId>maven-gae-plugin</artifactId>
-                <version>0.9.6</version>
                 <configuration>
                     <sdkDir>${gae.home}</sdkDir>
                     <appDir>${webappDirectory}</appDir>
