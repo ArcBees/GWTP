@@ -366,6 +366,14 @@
                     <groupId>net.kindleit</groupId>
                     <artifactId>maven-gae-plugin</artifactId>
                     <version>${maven-gae-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>net.kindleit</groupId>
+                            <artifactId>gae-runtime</artifactId>
+                            <version>${gae.version</version>
+                            <type>pom</type>
+                        </dependency>
+                    </dependencies>
                     <configuration>
                         <unpackVersion>${gae.version}</unpackVersion>
 
