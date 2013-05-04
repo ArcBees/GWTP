@@ -30,7 +30,7 @@ public class SharedModule extends AbstractPresenterModule {
     protected void configure() {
         install(new DefaultModule());
         install(new SecurityModule());
-        install(new RestDispatchAsyncModule.Builder().applicationPath("rest").build());
+        install(new RestDispatchAsyncModule.Builder().build());
 
         // DefaultPlaceManager Places
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.login);

@@ -54,7 +54,6 @@ public class DevBootStrapper {
     }
 
     private void deleteAllEntities() {
-        userDao.deleteAll();
         manufacturerDao.deleteAll();
         carDao.deleteAll();
         ratingDao.deleteAll();

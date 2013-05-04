@@ -16,13 +16,11 @@
 
 package com.gwtplatform.carstore.client.gin;
 
-import com.gwtplatform.dispatch.client.gin.PhoneGapDispatchAsyncModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class PhoneGapModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        install(new PhoneGapDispatchAsyncModule());
         install(new MobileModule());
         install(new SharedModule());
     }
