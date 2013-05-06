@@ -24,7 +24,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
-public class PhoneGapDispatchAsync extends DefaultDispatchAsync {
+public class PhoneGapDispatchAsync extends RpcDispatchAsync {
     private final String remoteServerUrl;
 
     @Inject
