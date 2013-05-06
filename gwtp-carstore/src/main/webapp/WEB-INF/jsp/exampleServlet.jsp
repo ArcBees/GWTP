@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.gwtplatform.carstore.shared.domain.Car" %>
+<%@ page import="com.gwtplatform.carstore.shared.dto.CarDto" %>
 <%
-    List<Car> carList = (List<Car>)request.getAttribute("cars");
+    List<CarDto> carList = (List<CarDto>)request.getAttribute("cars");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% for (Car car : carList) { %>
+                <% for (CarDto car : carList) { %>
                     <tr>
                         <td><%= car.getId() %></td>
                         <td><%= car.getManufacturer().getName() %></td>
