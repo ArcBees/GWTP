@@ -18,7 +18,7 @@ import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class RatingMobileView extends ViewWithUiHandlers<RatingUiHandlers> implements RatingPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, RatingMobileView> {
+    interface Binder extends UiBinder<Widget, RatingMobileView> {
     }
 
     @UiField(provided = true)
@@ -28,8 +28,9 @@ public class RatingMobileView extends ViewWithUiHandlers<RatingUiHandlers> imple
     private final SingleSelectionModel<RatingDto> selectionModel;
 
     @Inject
-    public RatingMobileView(Binder uiBinder, RatingCellFactory ratingCellFactory,
-            MobileDataListStyle mobileDataListStyle) {
+    RatingMobileView(Binder uiBinder,
+                     RatingCellFactory ratingCellFactory,
+                     MobileDataListStyle mobileDataListStyle) {
         ratingList = new CellList<RatingDto>(ratingCellFactory.create(setupRemoveAction()), mobileDataListStyle);
 
         initWidget(uiBinder.createAndBindUi(this));

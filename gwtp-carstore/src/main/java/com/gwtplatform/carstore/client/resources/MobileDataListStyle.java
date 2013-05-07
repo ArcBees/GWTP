@@ -7,6 +7,7 @@ public interface MobileDataListStyle extends CellList.Resources {
     ListStyle cellListStyle();
 
     interface ListStyle extends CellList.Style {
+        String removeButton();
     }
 }
 
