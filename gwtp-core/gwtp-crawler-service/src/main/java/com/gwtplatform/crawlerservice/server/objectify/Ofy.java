@@ -33,10 +33,10 @@ public class Ofy extends ObjectifyWrapper<Ofy, OfyFactory> {
     }
 
     public <T> T get(Key<T> key) {
-        return load().key(key).get();
+        return load().key(key).now();
     }
 
     public <T> T get(Class<T> clazz, long id) {
-        return load().type(clazz).id(id).get();
+        return load().type(clazz).id(id).now();
     }
 }
