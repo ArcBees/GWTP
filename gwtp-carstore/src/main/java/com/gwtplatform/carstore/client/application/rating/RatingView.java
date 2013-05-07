@@ -22,22 +22,18 @@ import javax.inject.Inject;
 
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.Cell;
-import com.google.gwt.cell.client.NumberCell;
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.IdentityColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
-import com.gwtplatform.carstore.client.application.rating.ui.RatingColumnInitializer;
 import com.gwtplatform.carstore.client.application.rating.ui.RatingColumnsDefinition;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -60,7 +56,7 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
         this.ratingColumnInitializer = ratingColumnInitializer;
 
         initRatingGrid();
-        
+
         initWidget(uiBinder.createAndBindUi(this));
 
         ratingDataProvider = new ListDataProvider<RatingDto>();
