@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datastore-indexes autoGenerate="true">
+    <datastore-index kind="UserSession" ancestor="false" source="manual">
+        <property name="cookie" direction="asc"/>
+        <property name="dateCreated" direction="asc"/>
+    </datastore-index>
+</datastore-indexes>

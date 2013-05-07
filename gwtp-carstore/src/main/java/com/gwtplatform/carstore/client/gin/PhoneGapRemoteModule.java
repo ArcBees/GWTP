@@ -16,13 +16,12 @@
 
 package com.gwtplatform.carstore.client.gin;
 
-import com.gwtplatform.dispatch.client.RemoteServerUrl;
+import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class PhoneGapRemoteModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        // TODO change to app engine 
-        bindConstant().annotatedWith(RemoteServerUrl.class).to("http://demos.arcbees.com/carsample-v5/");
+        bindConstant().annotatedWith(RestApplicationPath.class).to("http://gwtp-carstore.appspot.com/rest");
     }
 }

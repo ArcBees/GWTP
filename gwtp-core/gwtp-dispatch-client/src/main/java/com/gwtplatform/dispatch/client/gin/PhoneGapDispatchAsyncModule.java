@@ -19,22 +19,12 @@ package com.gwtplatform.dispatch.client.gin;
 import javax.inject.Singleton;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
-import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.PhoneGapDispatchAsync;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 public class PhoneGapDispatchAsyncModule extends AbstractGinModule {
     @Override
     protected void configure() {
-        bind(ExceptionHandler.class).to(DefaultExceptionHandler.class);
-        bind(SecurityCookieAccessor.class).to(DefaultSecurityCookieAccessor.class);
-        bind(ClientActionHandlerRegistry.class).to(DefaultClientActionHandlerRegistry.class).asEagerSingleton();
-
         bind(DispatchAsync.class).to(PhoneGapDispatchAsync.class).in(Singleton.class);
     }
 }
