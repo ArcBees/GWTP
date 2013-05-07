@@ -18,7 +18,8 @@ public class UserSessionDao extends BaseDao<UserSession> {
     private final UserDao userDao;
 
     @Inject
-    public UserSessionDao(Logger logger, UserDao userDao) {
+    UserSessionDao(Logger logger,
+                   UserDao userDao) {
         super(UserSession.class);
 
         this.logger = logger;
