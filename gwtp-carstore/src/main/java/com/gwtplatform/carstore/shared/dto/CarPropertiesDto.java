@@ -2,8 +2,6 @@ package com.gwtplatform.carstore.shared.dto;
 
 import java.util.Date;
 
-import com.gwtplatform.carstore.shared.domain.BaseEntity;
-
 public class CarPropertiesDto extends BaseEntity {
     private String someString;
     private Integer someNumber;
@@ -16,7 +14,9 @@ public class CarPropertiesDto extends BaseEntity {
         this.someDate = new Date();
     }
 
-    public CarPropertiesDto(String someString, Integer someNumber, Date someDate) {
+    public CarPropertiesDto(String someString,
+                            Integer someNumber,
+                            Date someDate) {
         this.someString = someString;
         this.someNumber = someNumber;
         this.someDate = someDate;

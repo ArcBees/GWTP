@@ -29,8 +29,12 @@ public class DevBootStrapper {
     private final CarPropertiesDao carPropertiesDao;
 
     @Inject
-    public DevBootStrapper(UserDao userDao, PasswordSecurity passwordSecurity,
-            final ManufacturerDao manufacturerDao, CarDao carDao, RatingDao ratingDao, CarPropertiesDao carPropertiesDao) {
+    DevBootStrapper(UserDao userDao,
+                           PasswordSecurity passwordSecurity,
+                           ManufacturerDao manufacturerDao,
+                           CarDao carDao,
+                           RatingDao ratingDao,
+                           CarPropertiesDao carPropertiesDao) {
         this.userDao = userDao;
         this.passwordSecurity = passwordSecurity;
         this.manufacturerDao = manufacturerDao;
