@@ -18,9 +18,11 @@ public class Authenticator {
     private final UserSessionDao userSessionDao;
 
     @Inject
-    public Authenticator(final UserDao userDao, final Provider<HttpSession> sessionProvider,
-            final PasswordSecurity passwordSecurity, final CurrentUserDtoProvider currentUserDtoProvider,
-            final UserSessionDao userSessionDao) {
+    Authenticator(UserDao userDao,
+                  Provider<HttpSession> sessionProvider,
+                  PasswordSecurity passwordSecurity,
+                  CurrentUserDtoProvider currentUserDtoProvider,
+                  UserSessionDao userSessionDao) {
         this.userDao = userDao;
         this.sessionProvider = sessionProvider;
         this.passwordSecurity = passwordSecurity;
@@ -28,14 +30,14 @@ public class Authenticator {
         this.userSessionDao = userSessionDao;
     }
 
-    public UserDto authenticateCredentials(final String username, final String password) {
+    public UserDto authenticateCredentials(String username, String password) {
         try {
             User user = userDao.findByUsername(username);
-            
+
             if (passwordSecurity.check(password, user.getHashPassword())) {
                 UserDto userDto = User.createDto(user);
                 persistHttpSessionCookie(userDto);
-                
+
                 return userDto;
             } else {
                 throw new AuthenticationException();
