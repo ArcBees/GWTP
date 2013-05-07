@@ -37,12 +37,13 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiHandlers,
-        CarAddedEvent.CarAddedHandler, ActionBarEvent.ActionBarHandler {
+public class CarsPresenter extends Presenter<MyView, MyProxy>
+        implements CarsUiHandlers, CarAddedEvent.CarAddedHandler, ActionBarEvent.ActionBarHandler {
+
     public interface MyView extends View, HasUiHandlers<CarsUiHandlers> {
         void initDataProvider();
 
@@ -65,14 +66,13 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
     private final CarProxyFactory carProxyFactory;
 
     @Inject
-    public CarsPresenter(
-            EventBus eventBus,
-            MyView view,
-            MyProxy proxy,
-            DispatchAsync dispatcher,
-            CarService carService,
-            PlaceManager placeManager,
-            CarProxyFactory carProxyFactory) {
+    CarsPresenter(EventBus eventBus,
+                  MyView view,
+                  MyProxy proxy,
+                  DispatchAsync dispatcher,
+                  CarService carService,
+                  PlaceManager placeManager,
+                  CarProxyFactory carProxyFactory) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
@@ -86,7 +86,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
     @Override
     public void onActionEvent(ActionBarEvent event) {
         if (event.getActionType() == ActionType.ADD && event.isTheSameToken(NameTokens.getCars())) {
-            placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.newCar).build());
+            placeManager.revealPlace(new Builder().nameToken(NameTokens.newCar).build());
         }
     }
 
@@ -95,12 +95,12 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
         CarPresenter.MyProxy proxy = carProxyFactory.create(carDto,
                 carDto.getManufacturer().getName() + carDto.getModel());
 
-        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(proxy.getNameToken()).build());
+        placeManager.revealPlace(new Builder().nameToken(proxy.getNameToken()).build());
     }
 
     @Override
     public void onCreate() {
-        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.newCar).build());
+        placeManager.revealPlace(new Builder().nameToken(NameTokens.newCar).build());
     }
 
     @Override
@@ -158,7 +158,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy> implements CarsUiH
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     private void fetchDataForDisplay() {

@@ -1,0 +1,19 @@
+#* @vtlmacrolibrary path="ColumnMacro.vm" *#
+#* @vtlvariable name="columnsInitializerDefinitions" type="com.gwtplatform.carstore.rebind.ColumnsInitializerDefinitions" *#
+package ${packageName};
+
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
+
+public class ${implName}Impl implements ${implName} {
+    @Override
+    public void initializeColumns(CellTable<${columnsInitializerDefinitions.getDtoCanonicalName()}> table) {
+        #callInitColumns(${columnsInitializerDefinitions})
+    }
+
+    #initColumns(${columnsInitializerDefinitions})
+
+    #initEmptyMethods(${columnsInitializerDefinitions})
+}

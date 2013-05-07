@@ -2,6 +2,7 @@
 
 <module>
     <inherits name="com.google.common.base.Base"/>
+    <inherits name="com.gwtplatform.common.ClientsCommon"/>
     <inherits name="com.gwtplatform.dispatch.Dispatch"/>
     <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
 
@@ -14,7 +15,6 @@
 
     <entry-point class='com.gwtplatform.dispatch.client.rest.RestDispatcherController'/>
 
-    <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
     <extend-configuration-property name="gin.ginjector.modules"
                                 value="com.gwtplatform.dispatch.client.rest.RestGinModule"/>
 
