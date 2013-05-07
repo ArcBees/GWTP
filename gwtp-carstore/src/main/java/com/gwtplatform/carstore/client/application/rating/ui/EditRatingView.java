@@ -21,10 +21,10 @@ import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.PopupViewWithUiHandlers;
 
 public class EditRatingView extends PopupViewWithUiHandlers<EditRatingUiHandlers> implements MyView, Editor<RatingDto> {
-    public interface Binder extends UiBinder<Widget, EditRatingView> {
+    interface Binder extends UiBinder<Widget, EditRatingView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<RatingDto, EditRatingView> {
+    interface Driver extends SimpleBeanEditorDriver<RatingDto, EditRatingView> {
     }
 
     @UiField
@@ -35,14 +35,16 @@ public class EditRatingView extends PopupViewWithUiHandlers<EditRatingUiHandlers
     private final Driver driver;
 
     @Inject
-    public EditRatingView(Binder uiBinder, Driver driver, EventBus eventBus) {
+    EditRatingView(Binder uiBinder,
+                   Driver driver,
+                   EventBus eventBus) {
         super(eventBus);
 
         car = new ValueListBox<CarDto>(new CarRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));
-        
+
         driver.initialize(this);
     }
 

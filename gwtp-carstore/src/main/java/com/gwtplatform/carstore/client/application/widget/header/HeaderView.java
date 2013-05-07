@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
 public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements HeaderPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, HeaderView> {
+    interface Binder extends UiBinder<Widget, HeaderView> {
     }
 
     @UiField
@@ -39,9 +39,9 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     private final PlaceManager placeManager;
 
     @Inject
-    public HeaderView(Binder uiBinder,
-            NavigationListStyle listResources,
-            PlaceManager placeManager) {
+    HeaderView(Binder uiBinder,
+               NavigationListStyle listResources,
+               PlaceManager placeManager) {
         this.placeManager = placeManager;
 
         CellList<MenuItem> placeList = new CellList<MenuItem>(new EnumCell<MenuItem>(), listResources);

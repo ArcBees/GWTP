@@ -19,10 +19,10 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class CarMobileView extends ViewWithUiHandlers<CarUiHandlers> implements MyView, Editor<CarDto> {
-    public interface Binder extends UiBinder<Widget, CarMobileView> {
+    interface Binder extends UiBinder<Widget, CarMobileView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<CarDto, CarMobileView> {
+    interface Driver extends SimpleBeanEditorDriver<CarDto, CarMobileView> {
     }
 
     @UiField
@@ -35,12 +35,13 @@ public class CarMobileView extends ViewWithUiHandlers<CarUiHandlers> implements 
     private final Driver driver;
 
     @Inject
-    public CarMobileView(Binder uiBinder, Driver driver) {
+    CarMobileView(Binder uiBinder,
+                  Driver driver) {
         manufacturer = new ValueListBox<ManufacturerDto>(new ManufacturerRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));
-        
+
         driver.initialize(this);
 
         model.getElement().setAttribute("placeholder", "Model");

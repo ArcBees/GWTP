@@ -39,7 +39,7 @@ import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements RatingPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, RatingView> {
+    interface Binder extends UiBinder<Widget, RatingView> {
     }
 
     @UiField

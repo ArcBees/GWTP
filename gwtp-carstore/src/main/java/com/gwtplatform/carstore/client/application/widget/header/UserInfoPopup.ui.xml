@@ -30,7 +30,8 @@
 
     <g:HTMLPanel styleName="{style.userInfoWrapper}">
         <div class="{style.welcomMessage}">
-            Hello, <g:InlineLabel ui:field="username"/>
+            Hello,
+            <g:InlineLabel ui:field="username"/>
         </div>
         <div class="{style.logoutWrapper}">
             <g:Button text="Logout" debugId="logout" ui:field="logout" styleName="{style.logoutButton}"/>

@@ -26,7 +26,7 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers> implements MyView {
-    public interface Binder extends UiBinder<Widget, ManufacturerView> {
+    interface Binder extends UiBinder<Widget, ManufacturerView> {
     }
 
     @UiField(provided = true)
@@ -35,9 +35,9 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
     private final ListDataProvider<ManufacturerDto> manufacturerDataProvider;
 
     @Inject
-    public ManufacturerView(Binder uiBinder) {
+    ManufacturerView(Binder uiBinder) {
         initManufacturerGrid();
-        
+
         initWidget(uiBinder.createAndBindUi(this));
 
         manufacturerDataProvider = new ListDataProvider<ManufacturerDto>();

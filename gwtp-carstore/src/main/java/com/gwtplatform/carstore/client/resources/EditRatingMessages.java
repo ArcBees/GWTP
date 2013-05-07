@@ -1,4 +1,4 @@
-package com.gwtplatform.carstore.client.application.rating.ui;
+package com.gwtplatform.carstore.client.resources;
 
 import com.google.gwt.i18n.client.Messages;
 

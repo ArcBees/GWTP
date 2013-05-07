@@ -16,7 +16,7 @@ import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView;
-import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerMessages;
+import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
