@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class RootCarView extends ViewImpl implements RootCarPresenter.MyView {
-    public interface Binder extends UiBinder<HTMLPanel, RootCarView> {
+    interface Binder extends UiBinder<HTMLPanel, RootCarView> {
     }
 
     @UiField
