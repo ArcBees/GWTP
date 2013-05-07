@@ -15,8 +15,7 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class ReportMobileView extends ViewImpl implements ReportPresenter.MyView {
-
-    public interface Binder extends UiBinder<Widget, ReportMobileView> {
+    interface Binder extends UiBinder<Widget, ReportMobileView> {
     }
 
     @UiField(provided = true)
@@ -25,7 +24,9 @@ public class ReportMobileView extends ViewImpl implements ReportPresenter.MyView
     private final ListDataProvider<ManufacturerRatingDto> ratingsProvider;
 
     @Inject
-    public ReportMobileView(final Binder uiBinder, final ReportCell reportCell, final MobileDataListStyle listStyle) {
+    ReportMobileView(Binder uiBinder,
+                     ReportCell reportCell,
+                     MobileDataListStyle listStyle) {
         reportList = new CellList<ManufacturerRatingDto>(reportCell, listStyle);
 
         initWidget(uiBinder.createAndBindUi(this));

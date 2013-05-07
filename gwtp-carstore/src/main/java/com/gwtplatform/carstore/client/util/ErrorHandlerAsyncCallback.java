@@ -13,7 +13,7 @@ import com.gwtplatform.dispatch.shared.Result;
 public abstract class ErrorHandlerAsyncCallback<R extends Result> implements AsyncCallback<R> {
     private final HasHandlers hasHandlers;
 
-    public ErrorHandlerAsyncCallback(final HasHandlers hasHandlers) {
+    public ErrorHandlerAsyncCallback(HasHandlers hasHandlers) {
         this.hasHandlers = hasHandlers;
     }
 

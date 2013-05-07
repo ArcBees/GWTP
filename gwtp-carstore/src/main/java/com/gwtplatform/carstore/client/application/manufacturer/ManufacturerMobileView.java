@@ -18,7 +18,7 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class ManufacturerMobileView extends ViewWithUiHandlers<ManufacturerUiHandlers> implements MyView {
-    public interface Binder extends UiBinder<Widget, ManufacturerMobileView> {
+    interface Binder extends UiBinder<Widget, ManufacturerMobileView> {
     }
 
     @UiField(provided = true)
@@ -28,8 +28,9 @@ public class ManufacturerMobileView extends ViewWithUiHandlers<ManufacturerUiHan
     private final SingleSelectionModel<ManufacturerDto> selectionModel;
 
     @Inject
-    public ManufacturerMobileView(Binder uiBinder,
-            ManufacturerCell manufacturerCell, MobileDataListStyle mobileDataListStyle) {
+    ManufacturerMobileView(Binder uiBinder,
+                           ManufacturerCell manufacturerCell,
+                           MobileDataListStyle mobileDataListStyle) {
         manufacturerList = new CellList<ManufacturerDto>(manufacturerCell, mobileDataListStyle);
 
         initWidget(uiBinder.createAndBindUi(this));

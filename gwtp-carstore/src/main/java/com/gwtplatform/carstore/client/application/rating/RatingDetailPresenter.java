@@ -14,7 +14,7 @@ import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
 import com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView;
-import com.gwtplatform.carstore.client.application.rating.ui.EditRatingMessages;
+import com.gwtplatform.carstore.client.resources.EditRatingMessages;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;

@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class LoginMobileView extends ViewWithUiHandlers<LoginUiHandlers> implements LoginPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, LoginMobileView> {
+    interface Binder extends UiBinder<Widget, LoginMobileView> {
     }
 
     @UiField
@@ -25,7 +25,7 @@ public class LoginMobileView extends ViewWithUiHandlers<LoginUiHandlers> impleme
     TextBox username;
 
     @Inject
-    public LoginMobileView(Binder uiBinder) {
+    LoginMobileView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
 
         username.getElement().setAttribute("placeholder", "Username");
