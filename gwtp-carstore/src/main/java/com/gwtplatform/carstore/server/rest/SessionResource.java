@@ -34,11 +34,10 @@ public class SessionResource {
     private Logger logger;
 
     @Inject
-    public SessionResource(
-            Logger logger,
-            Authenticator authenticator,
-            CurrentUserDtoProvider currentUserDtoProvider,
-            UserSessionDao userSessionDao) {
+    SessionResource(Logger logger,
+                    Authenticator authenticator,
+                    CurrentUserDtoProvider currentUserDtoProvider,
+                    UserSessionDao userSessionDao) {
         this.logger = logger;
         this.authenticator = authenticator;
         this.currentUserDtoProvider = currentUserDtoProvider;
@@ -53,6 +52,7 @@ public class SessionResource {
     @DELETE
     public NoResult logout() {
         authenticator.logout();
+
         return new NoResult();
     }
 

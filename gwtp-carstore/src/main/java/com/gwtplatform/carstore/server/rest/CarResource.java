@@ -39,7 +39,7 @@ public class CarResource {
 
     @GET
     public GetResults<CarDto> getCars(@DefaultValue(DEFAULT_OFFSET) @QueryParam(RestParameter.OFFSET) int offset,
-            @DefaultValue(DEFAULT_LIMIT) @QueryParam(RestParameter.LIMIT) int limit) {
+                                      @DefaultValue(DEFAULT_LIMIT) @QueryParam(RestParameter.LIMIT) int limit) {
         if (offset == INT_DEFAULT_OFFSET && limit == INT_DEFAULT_LIMIT) {
             return new GetResults<CarDto>(Car.createDto(carDao.getAll()));
         } else {
