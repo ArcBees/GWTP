@@ -21,8 +21,8 @@ import java.util.List;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.gwtplatform.carstore.client.application.rating.ui.Column;
-import com.gwtplatform.carstore.client.application.rating.ui.ColumnsDefinition;
+import com.gwtplatform.carstore.client.columninitializer.Column;
+import com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition;
 
 public class ColumnsInitializerDefinitions {
     private ColumnsDefinition columnsInitializer;
