@@ -30,24 +30,24 @@ public class DevBootStrapper {
 
     @Inject
     DevBootStrapper(UserDao userDao,
-                           PasswordSecurity passwordSecurity,
-                           ManufacturerDao manufacturerDao,
-                           CarDao carDao,
-                           RatingDao ratingDao,
-                           CarPropertiesDao carPropertiesDao) {
+                    PasswordSecurity passwordSecurity,
+                    ManufacturerDao manufacturerDao,
+                    CarDao carDao,
+                    RatingDao ratingDao,
+                    CarPropertiesDao carPropertiesDao) {
         this.userDao = userDao;
         this.passwordSecurity = passwordSecurity;
         this.manufacturerDao = manufacturerDao;
         this.carDao = carDao;
         this.ratingDao = ratingDao;
         this.carPropertiesDao = carPropertiesDao;
-        
+
         init();
     }
 
     public void init() {
         deleteAllEntities();
-        
+
         long userCount = userDao.countAll();
 
         if (userCount == 0) {
@@ -82,22 +82,22 @@ public class DevBootStrapper {
 
             CarPropertiesDto carPropertiesCivic = new CarPropertiesDto("Cat", 0, new Date());
             carPropertiesCivic = carPropertiesDao.put(carPropertiesCivic);
-            
+
             CarPropertiesDto carPropertiesAccord = new CarPropertiesDto("Fish", 1, new Date());
             carPropertiesAccord = carPropertiesDao.put(carPropertiesAccord);
-            
+
             CarPropertiesDto carPropertiesLancer = new CarPropertiesDto("Dog", 2, new Date());
             carPropertiesLancer = carPropertiesDao.put(carPropertiesLancer);
-            
+
             CarPropertiesDto carPropertiesMitsubishi = new CarPropertiesDto("Cow", 3, new Date());
             carPropertiesMitsubishi = carPropertiesDao.put(carPropertiesMitsubishi);
-            
+
             CarDto civic = new CarDto("Civic", honda, carPropertiesCivic);
             CarDto accord = new CarDto("Accord", honda, carPropertiesAccord);
             CarDto lancer = new CarDto("Lancer", mitsubishi, carPropertiesLancer);
             CarDto galant = new CarDto("Galant", mitsubishi, carPropertiesMitsubishi);
 
-            civic = Car.createDto(carDao.put(Car.create(civic))); 
+            civic = Car.createDto(carDao.put(Car.create(civic)));
             accord = Car.createDto(carDao.put(Car.create(accord)));
             lancer = Car.createDto(carDao.put(Car.create(lancer)));
             galant = Car.createDto(carDao.put(Car.create(galant)));
