@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.application.rating.ui;
+package com.gwtplatform.carstore.client.columninitializer;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

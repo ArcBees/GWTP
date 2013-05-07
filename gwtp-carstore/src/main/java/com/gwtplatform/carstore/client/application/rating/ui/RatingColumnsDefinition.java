@@ -18,6 +18,9 @@ package com.gwtplatform.carstore.client.application.rating.ui;
 
 import com.google.gwt.cell.client.NumberCell;
 import com.google.gwt.cell.client.TextCell;
+import com.gwtplatform.carstore.client.columninitializer.Column;
+import com.gwtplatform.carstore.client.columninitializer.ColumnInitializer;
+import com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 @ColumnsDefinition(definitionFor = RatingDto.class)
