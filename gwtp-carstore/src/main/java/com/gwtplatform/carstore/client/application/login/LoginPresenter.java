@@ -32,11 +32,13 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> implements
-        LoginUiHandlers {
+public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy>
+        implements LoginUiHandlers {
+
     public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
         void setLoginButtonEnabled(boolean enabled);
     }
@@ -56,14 +58,14 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     private final LoginMessages messages;
 
     @Inject
-    public LoginPresenter(
-            EventBus eventBus,
-            MyView view, MyProxy proxy,
-            PlaceManager placeManager,
-            DispatchAsync dispatchAsync,
-            SessionService sessionService,
-            CurrentUser currentUser,
-            LoginMessages messages) {
+    LoginPresenter(EventBus eventBus,
+                   MyView view,
+                   MyProxy proxy,
+                   PlaceManager placeManager,
+                   DispatchAsync dispatchAsync,
+                   SessionService sessionService,
+                   CurrentUser currentUser,
+                   LoginMessages messages) {
         super(eventBus, view, proxy);
 
         this.placeManager = placeManager;
@@ -83,7 +85,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     @Override
@@ -133,8 +135,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         if (currentUserDto.isLoggedIn()) {
             currentUser.fromCurrentUserDto(currentUserDto);
 
-            PlaceRequest homePlaceRequest = new PlaceRequest.Builder().nameToken(NameTokens.getOnLoginDefaultPage()).
-                    build();
+            PlaceRequest homePlaceRequest = new Builder().nameToken(NameTokens.getOnLoginDefaultPage()).build();
             placeManager.revealPlace(homePlaceRequest);
 
             UserLoginEvent.fire(this);

@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.core.client.EntryPoint;
+
 /**
  * ApplicationController will trigger the generation of your Ginjector. To activate the
  * generation you have to add one line to your module.gwt.xml file:
@@ -49,6 +51,6 @@ package com.gwtplatform.mvp.client;
  * <p/>
  * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
  */
-public interface ApplicationController {
+public interface ApplicationController extends EntryPoint {
     void init();
 }

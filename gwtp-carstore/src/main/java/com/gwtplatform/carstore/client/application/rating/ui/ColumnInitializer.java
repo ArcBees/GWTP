@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.carstore.client.application.rating.ui;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.cellview.client.CellTable;
 
-public class ClientEntryPoint implements EntryPoint {
-    public static final ApplicationController controller = GWT.create(ApplicationController.class);
-
-    @Override
-    public void onModuleLoad() {
-        controller.init();
-    }
+public interface ColumnInitializer<T> {
+    void initializeColumns(CellTable<T> table);
 }

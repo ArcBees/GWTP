@@ -36,11 +36,13 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> implements GoBackEvent.GoBackHandler,
-        ActionBarEvent.ActionBarHandler, ManufacturerDetailUiHandlers {
+public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
+        implements GoBackEvent.GoBackHandler, ActionBarEvent.ActionBarHandler, ManufacturerDetailUiHandlers {
+
     public interface MyView extends View, HasUiHandlers<ManufacturerDetailUiHandlers> {
         void edit(ManufacturerDto manufacturerDto);
 
@@ -62,14 +64,13 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
     private Boolean createNew;
 
     @Inject
-    public ManufacturerDetailPresenter(
-            EventBus eventBus,
-            MyView view,
-            MyProxy proxy,
-            DispatchAsync dispatcher,
-            ManufacturerService manufacturerService,
-            PlaceManager placeManager,
-            EditManufacturerMessages messages) {
+    ManufacturerDetailPresenter(EventBus eventBus,
+                                MyView view,
+                                MyProxy proxy,
+                                DispatchAsync dispatcher,
+                                ManufacturerService manufacturerService,
+                                PlaceManager placeManager,
+                                EditManufacturerMessages messages) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
@@ -102,7 +103,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
     @Override
     public void onGoBack(GoBackEvent event) {
-        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getManufacturer()).build());
+        placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
     }
 
     @Override
@@ -130,8 +131,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
                     public void onSuccess(GetResult<ManufacturerDto> result) {
                         DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
                                 new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
-                        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getManufacturer()).
-                                build());
+                        placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
                     }
                 });
     }
@@ -156,7 +156,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     private void deleteManufacturer() {
@@ -166,8 +166,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy> impl
                     new ErrorHandlerAsyncCallback<NoResult>(this) {
                         @Override
                         public void onSuccess(NoResult noResult) {
-                            placeManager.revealPlace(new PlaceRequest.Builder().
-                                    nameToken(NameTokens.getManufacturer()).build());
+                            placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
                         }
                     });
         }
