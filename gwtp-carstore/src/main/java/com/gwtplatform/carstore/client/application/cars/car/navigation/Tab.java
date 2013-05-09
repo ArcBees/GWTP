@@ -21,7 +21,8 @@ public class Tab extends Composite implements CloseTabEvent.HasCloseTabHandlers 
     @UiField
     InlineLabel closeButton;
 
-    public Tab(String name, boolean isClosable) {
+    public Tab(String name,
+               boolean isClosable) {
         initWidget(uiBinder.createAndBindUi(this));
 
         nameLabel.setText(name);

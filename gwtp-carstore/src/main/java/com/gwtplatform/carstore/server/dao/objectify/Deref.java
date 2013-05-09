@@ -25,7 +25,7 @@ public class Deref {
         if (reflist == null) {
             return null;
         }
-        
+
         return Lists.transform(reflist, (Func) Func.INSTANCE);
     }
 }

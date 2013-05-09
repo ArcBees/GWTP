@@ -17,7 +17,7 @@
 package com.gwtplatform.carstore.rebind;
 
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.gwtplatform.carstore.client.application.rating.ui.Column;
+import com.gwtplatform.carstore.client.columninitializer.Column;
 
 public class ColumnTuple {
     private JMethod method;

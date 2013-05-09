@@ -21,7 +21,7 @@ import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implements MyView {
-    public interface Binder extends UiBinder<Widget, CarsMobileView> {
+    interface Binder extends UiBinder<Widget, CarsMobileView> {
     }
 
     private static final int PAGE_SIZE = 20;
@@ -34,7 +34,9 @@ public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implement
     private SingleSelectionModel<CarDto> selectionModel;
 
     @Inject
-    public CarsMobileView(Binder uiBinder, CarCell carCell, MobileDataListStyle mobileDataListStyle) {
+    CarsMobileView(Binder uiBinder,
+                   CarCell carCell,
+                   MobileDataListStyle mobileDataListStyle) {
         pagerPanel = new ShowMorePagerPanel(PAGE_SIZE);
         carList = new CellList<CarDto>(carCell, mobileDataListStyle);
         selectionModel = new SingleSelectionModel<CarDto>();

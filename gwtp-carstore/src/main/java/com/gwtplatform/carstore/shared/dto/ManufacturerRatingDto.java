@@ -7,7 +7,8 @@ public class ManufacturerRatingDto implements Dto {
     protected ManufacturerRatingDto() {
     }
 
-    public ManufacturerRatingDto(String manufacturer, Double rating) {
+    public ManufacturerRatingDto(String manufacturer,
+                                 Double rating) {
         this.manufacturer = manufacturer;
         this.rating = rating;
     }
