@@ -7,14 +7,14 @@ import com.google.inject.Inject;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 
 public class CarCell extends AbstractCell<CarDto> {
-    public interface Renderer extends UiRenderer {
+    interface Renderer extends UiRenderer {
         void render(SafeHtmlBuilder sb, String name);
     }
 
     private final Renderer uiRenderer;
 
     @Inject
-    public CarCell(final Renderer uiRenderer) {
+    CarCell(Renderer uiRenderer) {
         this.uiRenderer = uiRenderer;
     }
 

@@ -25,7 +25,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
 public class HeaderMobileView extends ViewWithUiHandlers<HeaderUiHandlers>
         implements HeaderPresenter.MyView, UserInfoPopup.Handler {
-    public interface Binder extends UiBinder<Widget, HeaderMobileView> {
+    interface Binder extends UiBinder<Widget, HeaderMobileView> {
     }
 
     @UiField
@@ -49,8 +49,10 @@ public class HeaderMobileView extends ViewWithUiHandlers<HeaderUiHandlers>
     private final PlaceManager placeManager;
 
     @Inject
-    public HeaderMobileView(final Binder uiBinder, final MobileNavigationListStyle listResources,
-                            final PlaceManager placeManager, final UserInfoPopup userInfoPopup) {
+    HeaderMobileView(Binder uiBinder,
+                     MobileNavigationListStyle listResources,
+                     PlaceManager placeManager,
+                     UserInfoPopup userInfoPopup) {
         this.placeManager = placeManager;
         this.userInfoPopup = userInfoPopup;
 

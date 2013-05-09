@@ -16,6 +16,7 @@ import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.login.LoginPresenter;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
+import com.gwtplatform.carstore.client.resources.HeaderMessages;
 import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -27,9 +28,10 @@ import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
-public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> implements HeaderUiHandlers,
-        UserLoginEvent.UserLoginHandler, ChangeActionBarEvent.ChangeActionBarHandler,
+public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
+        implements HeaderUiHandlers, UserLoginEvent.UserLoginHandler, ChangeActionBarEvent.ChangeActionBarHandler,
         ActionBarVisibilityEvent.ActionBarVisibilityHandler {
+
     public interface MyView extends View, HasUiHandlers<HeaderUiHandlers> {
         void enableUserOptions(CurrentUser currentUser);
 
@@ -54,15 +56,14 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
     private final HeaderMessages messages;
 
     @Inject
-    public HeaderPresenter(
-            EventBus eventBus,
-            MyView view,
-            DispatchAsync dispatchAsync,
-            SessionService sessionService,
-            @DefaultPlace String defaultPlaceNameToken,
-            PlaceManager placeManager,
-            CurrentUser currentUser,
-            HeaderMessages messages) {
+    HeaderPresenter(EventBus eventBus,
+                    MyView view,
+                    DispatchAsync dispatchAsync,
+                    SessionService sessionService,
+                    @DefaultPlace String defaultPlaceNameToken,
+                    PlaceManager placeManager,
+                    CurrentUser currentUser,
+                    HeaderMessages messages) {
         super(eventBus, view);
 
         this.dispatchAsync = dispatchAsync;

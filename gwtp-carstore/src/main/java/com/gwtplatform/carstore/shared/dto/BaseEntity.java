@@ -1,7 +1,6 @@
-package com.gwtplatform.carstore.shared.domain;
+package com.gwtplatform.carstore.shared.dto;
 
 import com.googlecode.objectify.annotation.Id;
-import com.gwtplatform.carstore.shared.dto.Dto;
 
 public class BaseEntity implements Dto {
     @Id

@@ -10,6 +10,7 @@ import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
+import com.gwtplatform.carstore.client.resources.EditRatingMessages;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
@@ -37,13 +38,12 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     private final EditRatingMessages messages;
 
     @Inject
-    public EditRatingPresenter(
-            EventBus eventBus,
-            MyView view,
-            DispatchAsync dispatcher,
-            CarService carService,
-            RatingService ratingService,
-            EditRatingMessages messages) {
+    EditRatingPresenter(EventBus eventBus,
+                        MyView view,
+                        DispatchAsync dispatcher,
+                        CarService carService,
+                        RatingService ratingService,
+                        EditRatingMessages messages) {
         super(eventBus, view);
 
         this.dispatcher = dispatcher;

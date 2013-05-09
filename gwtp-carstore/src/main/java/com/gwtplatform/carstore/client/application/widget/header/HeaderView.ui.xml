@@ -85,7 +85,9 @@
 
             <g:HTMLPanel ui:field="userOptions" styleName="{style.floatRight} {style.paddingTop}">
                 <div class="{style.userInfo}">
-                    Hello <g:InlineLabel ui:field="name" styleName="{style.userName}"/> !
+                    Hello
+                    <g:InlineLabel ui:field="name" styleName="{style.userName}"/>
+                    !
                 </div>
 
                 <div class="{style.floatLeft}">
