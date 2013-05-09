@@ -16,13 +16,13 @@
                 <g:InlineLabel text="Manufacturers"/>
             </h2>
             <div>
-                <g:Button ui:field="create" styleName="{resources.styles.addAction}"/>
+                <g:Button ui:field="create" styleName="{resources.styles.addAction}" debugId="create-manufacturer"/>
             </div>
             <span style="display: block; clear: both;"/>
         </div>
 
         <div class="{style.tableWrapper}">
-            <cell:CellTable ui:field="manufacturerGrid" width="100%"/>
+            <cell:CellTable ui:field="manufacturerGrid" width="100%" debugId="manufacturers"/>
         </div>
     </g:HTMLPanel>
 </ui:UiBinder>
