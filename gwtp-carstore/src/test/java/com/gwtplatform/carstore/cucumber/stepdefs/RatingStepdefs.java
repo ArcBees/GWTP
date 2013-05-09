@@ -18,7 +18,7 @@ public class RatingStepdefs {
     private int numberOfLines;
 
     @Inject
-    public RatingStepdefs(RatingPage ratingPage, MessageWidgetPage messageWidgetPage) {
+    RatingStepdefs(RatingPage ratingPage, MessageWidgetPage messageWidgetPage) {
         this.ratingPage = ratingPage;
         this.messageWidgetPage = messageWidgetPage;
     }
