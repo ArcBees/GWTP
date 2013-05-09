@@ -1,7 +1,5 @@
 package com.gwtplatform.carstore.shared.dto;
 
-import com.gwtplatform.carstore.shared.domain.BaseEntity;
-
 public class UserDto extends BaseEntity {
     private String username;
     private String hashPassword;
@@ -13,7 +11,10 @@ public class UserDto extends BaseEntity {
         lastName = "";
     }
 
-    public UserDto(String username, String hashPassword, String firstName, String lastName) {
+    public UserDto(String username,
+                   String hashPassword,
+                   String firstName,
+                   String lastName) {
         this.username = username;
         this.hashPassword = hashPassword;
         this.firstName = firstName;
@@ -59,7 +60,7 @@ public class UserDto extends BaseEntity {
         s += "username=" + username + " ";
         s += "hasPassword=" + hashPassword + " ";
         s += "firstName=" + firstName + " ";
-        s += "lastName=" + lastName + " ";  
+        s += "lastName=" + lastName + " ";
         s += " User } ";
         return s;
     }

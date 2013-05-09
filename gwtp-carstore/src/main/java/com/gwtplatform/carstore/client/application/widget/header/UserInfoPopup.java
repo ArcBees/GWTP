@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.carstore.client.resources.AppResources;
 
 public class UserInfoPopup extends PopupPanel {
-    public interface Binder extends UiBinder<Widget, UserInfoPopup> {
+    interface Binder extends UiBinder<Widget, UserInfoPopup> {
     }
 
     public interface Handler {
@@ -25,7 +25,8 @@ public class UserInfoPopup extends PopupPanel {
     private Handler handler;
 
     @Inject
-    public UserInfoPopup(final Binder uiBinder, final AppResources appResources) {
+    UserInfoPopup(Binder uiBinder,
+                  AppResources appResources) {
         setWidget(uiBinder.createAndBindUi(this));
         setAutoHideEnabled(true);
         setStyleName(appResources.styles().gwtPopupPanel());
