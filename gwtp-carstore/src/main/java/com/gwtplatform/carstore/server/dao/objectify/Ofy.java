@@ -17,8 +17,8 @@ public class Ofy extends ObjectifyWrapper<Ofy, OfyFactory> {
         return load().type(clazz);
     }
 
-    public <T> T get(Key<T> key){
-        return load().key(key).get();
+    public <T> T get(Key<T> key) {
+        return load().key(key).now();
     }
 
     public <T> T get(Class<T> clazz, long id) {

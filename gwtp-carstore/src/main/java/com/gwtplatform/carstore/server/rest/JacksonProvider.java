@@ -20,8 +20,13 @@ import static org.codehaus.jackson.map.SerializationConfig.Feature;
 @Provider
 public class JacksonProvider extends JacksonJsonProvider {
     @Override
-    public void writeTo(Object value, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType,
-            MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException {
+    public void writeTo(Object value,
+                        Class<?> type,
+                        Type genericType,
+                        Annotation[] annotations,
+                        MediaType mediaType,
+                        MultivaluedMap<String, Object> httpHeaders,
+                        OutputStream entityStream) throws IOException {
         ObjectMapper mapper = locateMapper(type, mediaType);
 
         SerializationConfig newSerializerConfig = mapper.getSerializationConfig()

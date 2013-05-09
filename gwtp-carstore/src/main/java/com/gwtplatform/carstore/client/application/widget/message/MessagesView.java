@@ -10,7 +10,7 @@ import com.gwtplatform.carstore.client.application.widget.message.ui.MessageWidg
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class MessagesView extends ViewImpl implements MessagesPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, MessagesView> {
+    interface Binder extends UiBinder<Widget, MessagesView> {
     }
 
     @UiField
@@ -19,7 +19,8 @@ public class MessagesView extends ViewImpl implements MessagesPresenter.MyView {
     private final MessageWidgetFactory messageWidgetFactory;
 
     @Inject
-    public MessagesView(final Binder binder, final MessageWidgetFactory messageWidgetFactory) {
+    MessagesView(Binder binder,
+                 MessageWidgetFactory messageWidgetFactory) {
         this.messageWidgetFactory = messageWidgetFactory;
 
         initWidget(binder.createAndBindUi(this));

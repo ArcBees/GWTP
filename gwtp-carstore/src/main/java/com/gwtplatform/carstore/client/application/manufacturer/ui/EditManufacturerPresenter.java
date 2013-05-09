@@ -8,6 +8,7 @@ import com.gwtplatform.carstore.client.application.manufacturer.event.Manufactur
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
+import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
@@ -30,12 +31,11 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
     private ManufacturerDto manufacturerDto;
 
     @Inject
-    public EditManufacturerPresenter(
-            EventBus eventBus,
-            MyView view,
-            DispatchAsync dispatcher,
-            ManufacturerService manufacturerService,
-            EditManufacturerMessages messages) {
+    public EditManufacturerPresenter(EventBus eventBus,
+                                     MyView view,
+                                     DispatchAsync dispatcher,
+                                     ManufacturerService manufacturerService,
+                                     EditManufacturerMessages messages) {
         super(eventBus, view);
 
         this.dispatcher = dispatcher;

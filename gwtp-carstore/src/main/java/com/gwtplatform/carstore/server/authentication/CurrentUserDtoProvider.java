@@ -14,7 +14,8 @@ public class CurrentUserDtoProvider implements Provider<CurrentUserDto> {
     private final Provider<HttpSession> sessionProvider;
 
     @Inject
-    public CurrentUserDtoProvider(final UserDao userDao, final Provider<HttpSession> sessionProvider) {
+    CurrentUserDtoProvider(UserDao userDao,
+                           Provider<HttpSession> sessionProvider) {
         this.userDao = userDao;
         this.sessionProvider = sessionProvider;
     }
