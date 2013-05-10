@@ -6,4 +6,5 @@ public class ResourcesPath {
     public static final String RATING = "/ratings";
     public static final String SESSION = "/session";
     public static final String COUNT = "/count";
+    public static final String REPORT = "/report";
 }

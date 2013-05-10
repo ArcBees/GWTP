@@ -10,7 +10,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.gwtplatform.carstore.server.dao.ManufacturerDao;
+import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.domain.Manufacturer;
+import com.gwtplatform.carstore.server.dao.domain.Rating;
 import com.gwtplatform.carstore.server.service.ReportService;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
@@ -25,13 +27,16 @@ import com.gwtplatform.dispatch.shared.NoResult;
 @Produces(MediaType.APPLICATION_JSON)
 public class ManufacturerResource {
     private final ManufacturerDao manufacturerDao;
+    private final RatingDao ratingDao;
     private final ReportService reportService;
 
     @Inject
     ManufacturerResource(
             ManufacturerDao manufacturerDao,
+            RatingDao ratingDao,
             ReportService reportService) {
         this.manufacturerDao = manufacturerDao;
+        this.ratingDao = ratingDao;
         this.reportService = reportService;
     }
 
@@ -63,6 +68,7 @@ public class ManufacturerResource {
     @Path(ResourcesPath.RATING)
     @GET
     public GetResults<ManufacturerRatingDto> getAverageRatings() {
-        return new GetResults<ManufacturerRatingDto>(reportService.getAverageCarRatingByManufacturer());
+        return new GetResults<ManufacturerRatingDto>(reportService.getAverageCarRatings(
+                Rating.createDto(ratingDao.getAll())));
     }
 }
