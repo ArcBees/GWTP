@@ -24,7 +24,7 @@ public class CarsStepdefs {
     private String carModel;
 
     @Inject
-    public CarsStepdefs(
+    CarsStepdefs(
             CarsPage carsPage,
             EditCarsPage editCarsPage,
             MessageWidgetPage messageWidgetPage) {
