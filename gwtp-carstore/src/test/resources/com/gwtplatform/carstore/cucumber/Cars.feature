@@ -1,4 +1,4 @@
-Feature: Ratings
+Feature: Cars
 
   Background:
     Given I'm logged in
