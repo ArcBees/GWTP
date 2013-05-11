@@ -12,14 +12,14 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class NavigationTabView extends ViewWithUiHandlers<NavigationUiHandlers> implements
         NavigationTabPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, NavigationTabView> {
+    interface Binder extends UiBinder<Widget, NavigationTabView> {
     }
 
     @UiField
     TabBar tabBar;
 
     @Inject
-    public NavigationTabView(final Binder uiBinder) {
+    NavigationTabView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
