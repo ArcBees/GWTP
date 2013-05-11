@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
