@@ -26,7 +26,7 @@ public class BasicStepdefs {
     private final ApplicationPage applicationPage;
 
     @Inject
-    public BasicStepdefs(WebDriver webDriver,
+    BasicStepdefs(WebDriver webDriver,
             LoginPage loginPage,
             ApplicationPage applicationPage) {
         this.webDriver = webDriver;
@@ -56,6 +56,9 @@ public class BasicStepdefs {
         if (valid.equals("valid")) {
             loginPage.setUsername(VALID_USERNAME);
             loginPage.setPassword(VALID_PASSWORD);
+        } else if (valid.equals("semivalid")) {
+            loginPage.setUsername(VALID_USERNAME);
+            loginPage.setPassword(INVALID_PASSWORD);
         } else {
             loginPage.setUsername(INVALID_USERNAME);
             loginPage.setPassword(INVALID_PASSWORD);
