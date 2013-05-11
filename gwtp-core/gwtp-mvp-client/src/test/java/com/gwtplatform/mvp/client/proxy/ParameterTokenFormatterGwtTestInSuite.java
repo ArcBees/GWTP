@@ -28,9 +28,6 @@ import junit.framework.Assert;
 
 /**
  * Unit tests for {@link ParameterTokenFormatter}.
- *
- * @author Yannis Gonianakis
- * @author Philippe Beaudoin
  */
 public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 

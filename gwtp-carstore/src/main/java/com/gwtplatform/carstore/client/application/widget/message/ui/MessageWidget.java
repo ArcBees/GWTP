@@ -21,7 +21,7 @@ import com.gwtplatform.carstore.client.resources.AppResources;
 import static com.google.gwt.query.client.GQuery.$;
 
 public class MessageWidget extends Composite {
-    public interface Binder extends UiBinder<Widget, MessageWidget> {
+    interface Binder extends UiBinder<Widget, MessageWidget> {
     }
 
     @UiField
@@ -44,8 +44,8 @@ public class MessageWidget extends Composite {
 
     @Inject
     public MessageWidget(Binder binder,
-            AppResources appResources,
-            @Assisted Message message) {
+                         AppResources appResources,
+                         @Assisted Message message) {
         this.appResources = appResources;
         this.message = message;
 
@@ -78,14 +78,14 @@ public class MessageWidget extends Composite {
         messageLabel.setText(message.getMessage());
 
         switch (message.getStyle()) {
-        case SUCCESS:
-            messageBox.addStyleName(appResources.styles().success());
-            HTMLPanel.ensureDebugId(messageBox.getElement(), "successMessage");
-            break;
-        case ERROR:
-            messageBox.addStyleName(appResources.styles().error());
-            HTMLPanel.ensureDebugId(messageBox.getElement(), "errorMessage");
-            break;
+            case SUCCESS:
+                messageBox.addStyleName(appResources.styles().success());
+                HTMLPanel.ensureDebugId(messageBox.getElement(), "successMessage");
+                break;
+            case ERROR:
+                messageBox.addStyleName(appResources.styles().error());
+                HTMLPanel.ensureDebugId(messageBox.getElement(), "errorMessage");
+                break;
         }
     }
 

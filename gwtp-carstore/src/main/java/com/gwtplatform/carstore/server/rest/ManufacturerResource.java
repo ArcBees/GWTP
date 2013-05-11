@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.ManufacturerDao;
 import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.domain.Manufacturer;

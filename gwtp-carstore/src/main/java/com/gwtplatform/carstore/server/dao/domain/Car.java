@@ -8,7 +8,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.gwtplatform.carstore.server.dao.objectify.Deref;
-import com.gwtplatform.carstore.shared.domain.BaseEntity;
+import com.gwtplatform.carstore.shared.dto.BaseEntity;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 
 @Index
