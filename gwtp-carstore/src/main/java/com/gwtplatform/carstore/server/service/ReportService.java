@@ -1,11 +1,12 @@
 package com.gwtplatform.carstore.server.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import com.google.gwt.dev.util.collect.HashMap;
+
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
