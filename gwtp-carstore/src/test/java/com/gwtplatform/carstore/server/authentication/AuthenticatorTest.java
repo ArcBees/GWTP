@@ -113,11 +113,11 @@ public class AuthenticatorTest {
         // Given
         UserDto userDto = mock(UserDto.class);
         given(userDto.getId()).willReturn(0l);
-        
+
         CurrentUserDto currentUserDto = mock(CurrentUserDto.class);
         given(currentUserDto.getUser()).willReturn(userDto);
         given(currentUserDtoProvider.get()).willReturn(currentUserDto);
-        
+
         // When
         authenticator.logout();
 

@@ -42,8 +42,8 @@ public class BasicStepdefs {
 
     @Inject
     BasicStepdefs(WebDriver webDriver,
-            LoginPage loginPage,
-            ApplicationPage applicationPage) {
+                  LoginPage loginPage,
+                  ApplicationPage applicationPage) {
         this.webDriver = webDriver;
         this.loginPage = loginPage;
         this.applicationPage = applicationPage;
