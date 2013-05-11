@@ -1,3 +1,19 @@
+/**
+ * Copyright 2013 ArcBees Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package com.gwtplatform.carstore.client.application.rating;
 
 import java.util.List;
@@ -6,26 +22,24 @@ import javax.inject.Inject;
 
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.Cell;
-import com.google.gwt.cell.client.NumberCell;
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.IdentityColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.NoSelectionModel;
+import com.gwtplatform.carstore.client.application.rating.ui.RatingColumnsDefinition;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements RatingPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, RatingView> {
+    interface Binder extends UiBinder<Widget, RatingView> {
     }
 
     @UiField
@@ -33,12 +47,16 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     @UiField(provided = true)
     CellTable<RatingDto> ratingGrid;
 
+    private final RatingColumnsDefinition ratingColumnInitializer;
     private final ListDataProvider<RatingDto> ratingDataProvider;
 
     @Inject
-    public RatingView(final Binder uiBinder) {
+    RatingView(Binder uiBinder,
+               RatingColumnsDefinition ratingColumnInitializer) {
+        this.ratingColumnInitializer = ratingColumnInitializer;
+
         initRatingGrid();
-        
+
         initWidget(uiBinder.createAndBindUi(this));
 
         ratingDataProvider = new ListDataProvider<RatingDto>();
@@ -70,37 +88,8 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
         ratingGrid = new CellTable<RatingDto>();
         ratingGrid.setSelectionModel(new NoSelectionModel<RatingDto>());
 
-        initDataColumns();
+        ratingColumnInitializer.initializeColumns(ratingGrid);
         initActionColumns();
-    }
-
-    private void initDataColumns() {
-        Column<RatingDto, Number> idColumn = new Column<RatingDto, Number>(new NumberCell()) {
-            @Override
-            public Long getValue(RatingDto ratingDto) {
-                return ratingDto.getId();
-            }
-        };
-
-        Column<RatingDto, String> carColumn = new Column<RatingDto, String>(new TextCell()) {
-            @Override
-            public String getValue(RatingDto ratingDto) {
-                return ratingDto.toString();
-            }
-        };
-
-        Column<RatingDto, Number> ratingColumn = new Column<RatingDto, Number>(new NumberCell()) {
-            @Override
-            public Number getValue(RatingDto ratingDto) {
-                return ratingDto.getRating();
-            }
-        };
-
-        ratingGrid.addColumn(idColumn, "ID");
-        ratingGrid.addColumn(carColumn, "Car");
-        ratingGrid.addColumn(ratingColumn, "Rating");
-
-        ratingGrid.setColumnWidth(idColumn, 50, Style.Unit.PX);
     }
 
     private void initActionColumns() {

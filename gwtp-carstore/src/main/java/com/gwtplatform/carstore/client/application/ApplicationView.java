@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, ApplicationView> {
+    interface Binder extends UiBinder<Widget, ApplicationView> {
     }
 
     @UiField
@@ -24,17 +24,17 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     SimplePanel messages;
 
     @Inject
-    public ApplicationView(final Binder uiBinder) {
+    ApplicationView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
     public void setInSlot(Object slot, IsWidget content) {
-        if (slot == ApplicationPresenter.TYPE_SetMainContent) {
+        if (slot == ApplicationPresenter.SLOT_MAIN_CONTENT) {
             main.setWidget(content);
-        } else if (slot == ApplicationPresenter.TYPE_SetHeaderContent) {
+        } else if (slot == ApplicationPresenter.SLOT_HEADER_CONTENT) {
             header.setWidget(content);
-        } else if (slot == ApplicationPresenter.TYPE_SetMessagesContent) {
+        } else if (slot == ApplicationPresenter.SLOT_MESSAGES_CONTENT) {
             messages.setWidget(content);
         }
     }

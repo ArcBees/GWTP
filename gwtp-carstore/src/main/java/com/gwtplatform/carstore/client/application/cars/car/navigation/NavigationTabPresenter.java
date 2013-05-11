@@ -13,8 +13,9 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
-public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresenter.MyView> implements
-        NavigationTabEvent.NavigationTabHandler, NavigationUiHandlers {
+public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresenter.MyView>
+        implements NavigationTabEvent.NavigationTabHandler, NavigationUiHandlers {
+
     public interface MyView extends View, HasUiHandlers<NavigationUiHandlers> {
         void createTab(Widget tabElement);
 
@@ -27,11 +28,13 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
     private final PlaceManager placeManager;
 
     @Inject
-    public NavigationTabPresenter(EventBus eventBus, MyView view, PlaceManager placeManager) {
+    NavigationTabPresenter(EventBus eventBus,
+                           MyView view,
+                           PlaceManager placeManager) {
         super(eventBus, view);
-        
+
         this.placeManager = placeManager;
-        
+
         getView().setUiHandlers(this);
     }
 
@@ -45,7 +48,7 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
         }
 
         if (index == 0 && elements.size() == 0) {
-            placeManager.revealPlace(new PlaceRequest(NameTokens.getCars()));
+            placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.getCars()).build());
         } else {
             onTabSelected(index);
         }
@@ -62,7 +65,7 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
 
     @Override
     public void onTabSelected(int index) {
-        placeManager.revealPlace(new PlaceRequest(elements.get(index).getToken()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(elements.get(index).getToken()).build());
     }
 
     @Override

@@ -18,6 +18,7 @@ import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.resources.LoginMessages;
 import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
@@ -32,11 +33,13 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> implements
-        LoginUiHandlers {
+public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy>
+        implements LoginUiHandlers {
+
     public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
         void setLoginButtonEnabled(boolean enabled);
     }
@@ -56,14 +59,14 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     private final LoginMessages messages;
 
     @Inject
-    public LoginPresenter(
-            EventBus eventBus,
-            MyView view, MyProxy proxy,
-            PlaceManager placeManager,
-            DispatchAsync dispatchAsync,
-            SessionService sessionService,
-            CurrentUser currentUser,
-            LoginMessages messages) {
+    LoginPresenter(EventBus eventBus,
+                   MyView view,
+                   MyProxy proxy,
+                   PlaceManager placeManager,
+                   DispatchAsync dispatchAsync,
+                   SessionService sessionService,
+                   CurrentUser currentUser,
+                   LoginMessages messages) {
         super(eventBus, view, proxy);
 
         this.placeManager = placeManager;
@@ -83,7 +86,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     @Override
@@ -113,27 +116,27 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 }
 
                 if (result.getActionType() == ActionType.VIA_COOKIE) {
-                    onLoginCallSuceededForCookie(result.getCurrentUserDto());
+                    onLoginCallSucceededForCookie(result.getCurrentUserDto());
                 } else {
-                    onLoginCallSuceeded(result.getCurrentUserDto());
+                    onLoginCallSucceeded(result.getCurrentUserDto());
                 }
             }
         });
     }
 
-    private void onLoginCallSuceededForCookie(CurrentUserDto currentUserDto) {
+    private void onLoginCallSucceededForCookie(CurrentUserDto currentUserDto) {
         getView().setLoginButtonEnabled(true);
 
         if (currentUserDto.isLoggedIn()) {
-            onLoginCallSuceeded(currentUserDto);
+            onLoginCallSucceeded(currentUserDto);
         }
     }
 
-    private void onLoginCallSuceeded(CurrentUserDto currentUserDto) {
+    private void onLoginCallSucceeded(CurrentUserDto currentUserDto) {
         if (currentUserDto.isLoggedIn()) {
             currentUser.fromCurrentUserDto(currentUserDto);
 
-            PlaceRequest homePlaceRequest = new PlaceRequest(NameTokens.getOnLoginDefaultPage());
+            PlaceRequest homePlaceRequest = new Builder().nameToken(NameTokens.getOnLoginDefaultPage()).build();
             placeManager.revealPlace(homePlaceRequest);
 
             UserLoginEvent.fire(this);

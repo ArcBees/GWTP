@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
 public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements HeaderPresenter.MyView {
-    public interface Binder extends UiBinder<Widget, HeaderView> {
+    interface Binder extends UiBinder<Widget, HeaderView> {
     }
 
     @UiField
@@ -39,9 +39,9 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     private final PlaceManager placeManager;
 
     @Inject
-    public HeaderView(Binder uiBinder,
-            NavigationListStyle listResources,
-            PlaceManager placeManager) {
+    HeaderView(Binder uiBinder,
+               NavigationListStyle listResources,
+               PlaceManager placeManager) {
         this.placeManager = placeManager;
 
         CellList<MenuItem> placeList = new CellList<MenuItem>(new EnumCell<MenuItem>(), listResources);
@@ -51,11 +51,15 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
 
         menuBar.setAcceptableValues(Arrays.asList(MenuItem.values()));
         menuBar.setValue(MenuItem.MANUFACTURER);
+
+        menuBar.setVisible(false);
+        userOptions.setVisible(false);
     }
 
     @Override
     public void enableUserOptions(CurrentUser currentUser) {
         userOptions.setVisible(true);
+        menuBar.setVisible(true);
         UserDto userDto = currentUser.getUser();
         name.setText(userDto.getFirstName());
     }
@@ -63,6 +67,7 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     @Override
     public void disableUserOptions() {
         userOptions.setVisible(false);
+        menuBar.setVisible(false);
     }
 
     @Override
@@ -89,6 +94,6 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
 
     @UiHandler("menuBar")
     void onMenuItemChanged(ValueChangeEvent<MenuItem> event) {
-        placeManager.revealPlace(new PlaceRequest(menuBar.getValue().getPlaceToken()));
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(menuBar.getValue().getPlaceToken()).build());
     }
 }

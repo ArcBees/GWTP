@@ -9,7 +9,8 @@ public class CurrentUserDto implements Dto {
         // Needed for serialization
     }
 
-    public CurrentUserDto(Boolean loggedIn, UserDto user) {
+    public CurrentUserDto(Boolean loggedIn,
+                          UserDto user) {
         this.loggedIn = loggedIn;
         this.user = user;
     }

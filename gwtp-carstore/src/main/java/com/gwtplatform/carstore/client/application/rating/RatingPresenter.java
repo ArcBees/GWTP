@@ -30,12 +30,13 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPresenter.MyProxy> implements
-        RatingUiHandlers, RatingAddedHandler, ActionBarEvent.ActionBarHandler {
+public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPresenter.MyProxy>
+        implements RatingUiHandlers, RatingAddedHandler, ActionBarEvent.ActionBarHandler {
+
     public interface MyView extends View, HasUiHandlers<RatingUiHandlers> {
         void displayRatings(List<RatingDto> results);
 
@@ -56,14 +57,13 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     private final PlaceManager placeManager;
 
     @Inject
-    public RatingPresenter(
-            EventBus eventBus,
-            MyView view,
-            MyProxy proxy,
-            DispatchAsync dispatcher,
-            RatingService ratingService,
-            EditRatingPresenter editRatingPresenter,
-            PlaceManager placeManager) {
+    RatingPresenter(EventBus eventBus,
+                    MyView view,
+                    MyProxy proxy,
+                    DispatchAsync dispatcher,
+                    RatingService ratingService,
+                    EditRatingPresenter editRatingPresenter,
+                    PlaceManager placeManager) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
@@ -77,7 +77,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     @Override
     public void onActionEvent(ActionBarEvent event) {
         if (event.getActionType() == ActionType.ADD && event.isTheSameToken(NameTokens.getRating())) {
-            placeManager.revealPlace(new PlaceRequest(NameTokens.getDetailRating()));
+            placeManager.revealPlace(new Builder().nameToken(NameTokens.getDetailRating()).build());
         }
     }
 
@@ -94,6 +94,12 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
                 getView().removeRating(ratingDto);
             }
         });
+    }
+
+    @ProxyEvent
+    @Override
+    public void onRatingAdded(RatingAddedEvent event) {
+        getView().addRating(event.getRating());
     }
 
     @Override
@@ -116,12 +122,6 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.TYPE_SetMainContent, this);
-    }
-
-    @ProxyEvent
-    @Override
-    public void onRatingAdded(RatingAddedEvent event) {
-        getView().addRating(event.getRating());
+        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 }

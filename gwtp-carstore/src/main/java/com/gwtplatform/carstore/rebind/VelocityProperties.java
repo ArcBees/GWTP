@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.carstore.rebind;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class ClientEntryPoint implements EntryPoint {
-    public static final ApplicationController controller = GWT.create(ApplicationController.class);
+import com.google.inject.BindingAnnotation;
 
-    @Override
-    public void onModuleLoad() {
-        controller.init();
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface VelocityProperties {
 }

@@ -10,7 +10,7 @@ public class NotNullTranslator implements Translator {
 
     private final MatchResult matchResult;
 
-    public NotNullTranslator(final String message) {
+    public NotNullTranslator(String message) {
         matchResult = regExp.exec(message);
     }
 
