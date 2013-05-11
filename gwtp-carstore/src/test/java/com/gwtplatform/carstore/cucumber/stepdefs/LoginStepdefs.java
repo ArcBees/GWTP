@@ -33,8 +33,8 @@ public class LoginStepdefs {
 
     @Inject
     LoginStepdefs(HeaderWidgetPage headerWidgetPage,
-            LoginPage loginPage,
-            ApplicationPage applicationPage) {
+                  LoginPage loginPage,
+                  ApplicationPage applicationPage) {
         this.headerWidgetPage = headerWidgetPage;
         this.loginPage = loginPage;
         this.applicationPage = applicationPage;
