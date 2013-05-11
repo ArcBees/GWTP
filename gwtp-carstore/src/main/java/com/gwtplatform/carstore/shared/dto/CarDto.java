@@ -3,8 +3,6 @@ package com.gwtplatform.carstore.shared.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gwtplatform.carstore.shared.domain.BaseEntity;
-
 public class CarDto extends BaseEntity {
     private ManufacturerDto manufacturer;
     private String model;
@@ -17,7 +15,9 @@ public class CarDto extends BaseEntity {
         this.ratings = new ArrayList<RatingDto>();
     }
 
-    public CarDto(String model, ManufacturerDto manufacturer, CarPropertiesDto carProperties) {
+    public CarDto(String model,
+                  ManufacturerDto manufacturer,
+                  CarPropertiesDto carProperties) {
         this.model = model;
         this.manufacturer = manufacturer;
         this.carProperties = carProperties;

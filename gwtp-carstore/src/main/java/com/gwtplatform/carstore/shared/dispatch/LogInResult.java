@@ -13,7 +13,9 @@ public class LogInResult implements Result {
         // Needed for serialization
     }
 
-    public LogInResult(ActionType actionType, CurrentUserDto currentUserDto, String loggedInCookie) {
+    public LogInResult(ActionType actionType,
+                       CurrentUserDto currentUserDto,
+                       String loggedInCookie) {
         this.actionType = actionType;
         this.currentUserDto = currentUserDto;
         this.loggedInCookie = loggedInCookie;

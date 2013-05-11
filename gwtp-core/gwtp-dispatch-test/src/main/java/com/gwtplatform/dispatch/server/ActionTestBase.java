@@ -16,17 +16,14 @@
 
 package com.gwtplatform.dispatch.server;
 
+import org.junit.Assert;
+
 import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.ServiceException;
 import com.gwtplatform.dispatch.shared.action.TestAction;
 import com.gwtplatform.dispatch.shared.action.TestResult;
 
-import junit.framework.Assert;
-
-/**
- * @author Peter Simun
- */
 public class ActionTestBase {
 
     protected void testAction(Dispatch dispatch) throws ActionException, ServiceException {

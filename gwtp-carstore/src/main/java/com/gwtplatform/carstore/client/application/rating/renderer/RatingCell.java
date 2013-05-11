@@ -16,7 +16,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 public class RatingCell extends AbstractCell<RatingDto> {
-    public interface Renderer extends UiRenderer {
+    interface Renderer extends UiRenderer {
         void render(SafeHtmlBuilder sb, String name, String rating);
 
         void onBrowserEvent(RatingCell o, NativeEvent e, Element p, RatingDto n);
@@ -26,7 +26,8 @@ public class RatingCell extends AbstractCell<RatingDto> {
     private final Delegate<RatingDto> delegate;
 
     @Inject
-    public RatingCell(final Renderer uiRenderer, @Assisted Delegate<RatingDto> delegate) {
+    RatingCell(Renderer uiRenderer,
+               @Assisted Delegate<RatingDto> delegate) {
         super(BrowserEvents.CLICK);
 
         this.uiRenderer = uiRenderer;

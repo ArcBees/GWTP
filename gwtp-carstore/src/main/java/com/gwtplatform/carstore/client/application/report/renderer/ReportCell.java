@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 
 public class ReportCell extends AbstractCell<ManufacturerRatingDto> {
-    public interface Renderer extends UiRenderer {
+    interface Renderer extends UiRenderer {
         void render(SafeHtmlBuilder sb, String name, String average);
     }
 
@@ -16,7 +16,7 @@ public class ReportCell extends AbstractCell<ManufacturerRatingDto> {
     private final NumberFormat numberFormat;
 
     @Inject
-    public ReportCell(final Renderer uiRenderer) {
+    ReportCell(Renderer uiRenderer) {
         this.uiRenderer = uiRenderer;
         this.numberFormat = NumberFormat.getFormat("#,##0.0#");
     }

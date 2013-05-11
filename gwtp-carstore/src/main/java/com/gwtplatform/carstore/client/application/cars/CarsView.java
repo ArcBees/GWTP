@@ -29,8 +29,10 @@ import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyView {
-    public interface Binder extends UiBinder<Widget, CarsView> {
+    interface Binder extends UiBinder<Widget, CarsView> {
     }
+
+    private static final int PAGE_SIZE = 10;
 
     @UiField(provided = true)
     CellTable<CarDto> carGrid;
@@ -38,14 +40,12 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     @UiField(provided = true)
     SimplePager pager;
 
-    private static final int PAGE_SIZE = 10;
-    
     private AsyncDataProvider<CarDto> asyncDataProvider;
 
     @Inject
-    public CarsView(Binder uiBinder) {
+    CarsView(Binder uiBinder) {
         initCarGrid();
-        
+
         initWidget(uiBinder.createAndBindUi(this));
     }
 
