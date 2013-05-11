@@ -2,11 +2,11 @@ package com.gwtplatform.carstore.server.rest;
 
 import javax.inject.Singleton;
 
-import com.gwtplatform.dispatch.server.guice.HandlerModule;
+import com.google.inject.AbstractModule;
 
-public class RestModule extends HandlerModule {
+public class RestModule extends AbstractModule {
     @Override
-    protected void configureHandlers() {
+    protected void configure() {
         bind(CarResource.class);
         bind(ManufacturerResource.class);
         bind(SessionResource.class);

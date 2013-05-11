@@ -17,10 +17,10 @@ import com.gwtplatform.mvp.client.PopupViewWithUiHandlers;
 
 public class EditManufacturerView extends PopupViewWithUiHandlers<EditManufacturerUiHandlers> implements MyView,
         Editor<ManufacturerDto> {
-    public interface Binder extends UiBinder<Widget, EditManufacturerView> {
+    interface Binder extends UiBinder<Widget, EditManufacturerView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<ManufacturerDto, EditManufacturerView> {
+    interface Driver extends SimpleBeanEditorDriver<ManufacturerDto, EditManufacturerView> {
     }
 
     @UiField
@@ -29,13 +29,15 @@ public class EditManufacturerView extends PopupViewWithUiHandlers<EditManufactur
     private final Driver driver;
 
     @Inject
-    public EditManufacturerView(Binder uiBinder, Driver driver, EventBus eventBus) {
+    EditManufacturerView(Binder uiBinder,
+                         Driver driver,
+                         EventBus eventBus) {
         super(eventBus);
 
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));
-        
+
         driver.initialize(this);
     }
 

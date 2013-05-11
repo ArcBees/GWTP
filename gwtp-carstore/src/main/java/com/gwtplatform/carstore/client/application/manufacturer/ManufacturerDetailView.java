@@ -13,10 +13,10 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class ManufacturerDetailView extends ViewWithUiHandlers<ManufacturerDetailUiHandlers>
         implements ManufacturerDetailPresenter.MyView, Editor<ManufacturerDto> {
-    public interface Binder extends UiBinder<Widget, ManufacturerDetailView> {
+    interface Binder extends UiBinder<Widget, ManufacturerDetailView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<ManufacturerDto, ManufacturerDetailView> {
+    interface Driver extends SimpleBeanEditorDriver<ManufacturerDto, ManufacturerDetailView> {
     }
 
     @UiField
@@ -25,11 +25,12 @@ public class ManufacturerDetailView extends ViewWithUiHandlers<ManufacturerDetai
     private final Driver driver;
 
     @Inject
-    public ManufacturerDetailView(Binder uiBinder, Driver driver) {
+    ManufacturerDetailView(Binder uiBinder,
+                           Driver driver) {
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));
-        
+
         driver.initialize(this);
 
         name.getElement().setAttribute("placeholder", "Manufacturer name");

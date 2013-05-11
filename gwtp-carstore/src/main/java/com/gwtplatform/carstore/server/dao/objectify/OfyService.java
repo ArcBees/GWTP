@@ -10,10 +10,6 @@ import com.gwtplatform.carstore.server.dao.domain.Rating;
 import com.gwtplatform.carstore.server.dao.domain.User;
 import com.gwtplatform.carstore.server.dao.domain.UserSession;
 
-/**
- * For use of:
- * import static com.sceneverse.shozon.server.dao.objectify.OfyService.ofy;
- */
 public class OfyService {
     static {
         factory().register(Car.class);

@@ -14,19 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.application.rating.ui;
+package com.gwtplatform.carstore.client.columninitializer;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import com.google.gwt.user.cellview.client.CellTable;
 
-import com.google.inject.BindingAnnotation;
-
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-@BindingAnnotation
-@Target({TYPE})
-@Retention(RUNTIME)
-public @interface ColumnsDefinition {
-    Class<?> definitionFor();
+public interface ColumnInitializer<T> {
+    void initializeColumns(CellTable<T> table);
 }

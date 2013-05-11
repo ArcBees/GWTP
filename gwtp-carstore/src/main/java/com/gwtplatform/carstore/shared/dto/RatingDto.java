@@ -1,7 +1,5 @@
 package com.gwtplatform.carstore.shared.dto;
 
-import com.gwtplatform.carstore.shared.domain.BaseEntity;
-
 public class RatingDto extends BaseEntity {
     private Integer rating;
     private CarDto car;
@@ -9,7 +7,8 @@ public class RatingDto extends BaseEntity {
     public RatingDto() {
     }
 
-    public RatingDto(CarDto car, Integer rating) {
+    public RatingDto(CarDto car,
+                     Integer rating) {
         this.car = car;
         this.rating = rating;
     }

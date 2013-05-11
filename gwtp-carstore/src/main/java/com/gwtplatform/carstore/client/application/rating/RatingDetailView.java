@@ -18,10 +18,10 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class RatingDetailView extends ViewWithUiHandlers<RatingDetailUiHandlers>
         implements RatingDetailPresenter.MyView, Editor<RatingDto> {
-    public interface Binder extends UiBinder<Widget, RatingDetailView> {
+    interface Binder extends UiBinder<Widget, RatingDetailView> {
     }
 
-    public interface Driver extends SimpleBeanEditorDriver<RatingDto, RatingDetailView> {
+    interface Driver extends SimpleBeanEditorDriver<RatingDto, RatingDetailView> {
     }
 
     @UiField
@@ -32,12 +32,14 @@ public class RatingDetailView extends ViewWithUiHandlers<RatingDetailUiHandlers>
     private final Driver driver;
 
     @Inject
-    public RatingDetailView(Binder uiBinder, Driver driver) {
-        car = new ValueListBox<CarDto>(new CarRenderer());
+    public RatingDetailView(Binder uiBinder,
+                            Driver driver) {
         this.driver = driver;
 
+        car = new ValueListBox<CarDto>(new CarRenderer());
+
         initWidget(uiBinder.createAndBindUi(this));
-        
+
         driver.initialize(this);
 
         rating.getElement().setAttribute("placeholder", "Your rating");

@@ -14,8 +14,10 @@ public class CarProxyFactory {
     private final CarProxyImplFactory carProxyImplFactory;
 
     @Inject
-    public CarProxyFactory(Provider<CarPresenterProvider> carPresenterProvider, final PlaceManager placeManager,
-            final EventBus eventBus, final CarProxyImplFactory carProxyImplFactory) {
+    CarProxyFactory(Provider<CarPresenterProvider> carPresenterProvider,
+                    PlaceManager placeManager,
+                    EventBus eventBus,
+                    CarProxyImplFactory carProxyImplFactory) {
         this.carPresenterProvider = carPresenterProvider;
         this.placeManager = placeManager;
         this.eventBus = eventBus;

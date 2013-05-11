@@ -20,6 +20,7 @@ import com.gwtplatform.carstore.client.application.event.GoBackEvent;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.resources.CarMessages;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
@@ -38,8 +39,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
-public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implements CarUiHandlers,
-        NavigationTab, GoBackEvent.GoBackHandler, ActionBarEvent.ActionBarHandler {
+public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
+        implements CarUiHandlers, NavigationTab, GoBackEvent.GoBackHandler, ActionBarEvent.ActionBarHandler {
+
     public interface MyView extends View, HasUiHandlers<CarUiHandlers> {
         void edit(CarDto carDto);
 
@@ -63,17 +65,16 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy> implem
     private CarDto carDto;
 
     @Inject
-    public CarPresenter(
-            EventBus eventBus,
-            MyView view,
-            DispatchAsync dispatcher,
-            CarService carService,
-            ManufacturerService manufacturerService,
-            PlaceManager placeManager,
-            CarProxyFactory carProxyFactory,
-            CarMessages messages,
-            @Assisted MyProxy proxy,
-            @Assisted CarDto carDto) {
+    public CarPresenter(EventBus eventBus,
+                        MyView view,
+                        DispatchAsync dispatcher,
+                        CarService carService,
+                        ManufacturerService manufacturerService,
+                        PlaceManager placeManager,
+                        CarProxyFactory carProxyFactory,
+                        CarMessages messages,
+                        @Assisted MyProxy proxy,
+                        @Assisted CarDto carDto) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
