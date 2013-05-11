@@ -52,9 +52,7 @@ public class ReportService {
     }
 
     private class AveragingCounter {
-
         private double sum;
-
         private int count;
 
         AveragingCounter(double number) {
