@@ -4,7 +4,7 @@
 
     <ui:with field="resource" type="com.gwtplatform.carstore.client.resources.AppResources"/>
 
-    <g:HTMLPanel >
+    <g:HTMLPanel>
         <g:InlineLabel ui:field="nameLabel"/>
         <g:InlineLabel ui:field="closeButton" styleName="{resource.styles.closeButton}"/>
     </g:HTMLPanel>

@@ -1,5 +1,6 @@
-/*
+/**
  * Copyright 2013 ArcBees Inc.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
@@ -25,10 +26,6 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 public class ReportService {
-    @Inject
-    public ReportService() {
-    }
-
     public List<ManufacturerRatingDto> getAverageCarRatings(List<RatingDto> ratingDtos) {
         HashMap<String, AveragingCounter> averages = new HashMap<String, AveragingCounter>();
 
