@@ -1,3 +1,18 @@
+/*
+ * Copyright 2013 ArcBees Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package com.gwtplatform.carstore.server.rest;
 
 import javax.inject.Inject;
@@ -9,9 +24,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.ManufacturerDao;
+import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.domain.Manufacturer;
+import com.gwtplatform.carstore.server.dao.domain.Rating;
+import com.gwtplatform.carstore.server.service.ReportService;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
@@ -25,13 +42,16 @@ import com.gwtplatform.dispatch.shared.NoResult;
 @Produces(MediaType.APPLICATION_JSON)
 public class ManufacturerResource {
     private final ManufacturerDao manufacturerDao;
-    private final CarDao carDao;
+    private final RatingDao ratingDao;
+    private final ReportService reportService;
 
     @Inject
     ManufacturerResource(ManufacturerDao manufacturerDao,
-                         CarDao carDao) {
+                         RatingDao ratingDao,
+                         ReportService reportService) {
         this.manufacturerDao = manufacturerDao;
-        this.carDao = carDao;
+        this.ratingDao = ratingDao;
+        this.reportService = reportService;
     }
 
     @GET
@@ -62,6 +82,7 @@ public class ManufacturerResource {
     @Path(ResourcesPath.RATING)
     @GET
     public GetResults<ManufacturerRatingDto> getAverageRatings() {
-        return new GetResults<ManufacturerRatingDto>(carDao.getAverageCarRatingByManufacturer());
+        return new GetResults<ManufacturerRatingDto>(reportService.getAverageCarRatings(
+                Rating.createDto(ratingDao.getAll())));
     }
 }
