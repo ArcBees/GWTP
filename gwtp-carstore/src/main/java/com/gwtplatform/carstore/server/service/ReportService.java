@@ -25,10 +25,6 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 public class ReportService {
-    @Inject
-    public ReportService() {
-    }
-
     public List<ManufacturerRatingDto> getAverageCarRatings(List<RatingDto> ratingDtos) {
         HashMap<String, AveragingCounter> averages = new HashMap<String, AveragingCounter>();
 
@@ -52,9 +48,7 @@ public class ReportService {
     }
 
     private class AveragingCounter {
-
         private double sum;
-
         private int count;
 
         AveragingCounter(double number) {
