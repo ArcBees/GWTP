@@ -19,7 +19,7 @@
         </div>
 
         <div class="{style.tableWrapper}">
-            <cell:CellTable ui:field="reportGrid" width="100%"/>
+            <cell:CellTable ui:field="reportGrid" width="100%" debugId="reports"/>
         </div>
     </g:HTMLPanel>
 </ui:UiBinder>
