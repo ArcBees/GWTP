@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,7 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,14 +42,9 @@ import java.util.Set;
  * </ul>
  * The separators (';' and '=') can be modified in
  * {@link com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter}.
- *
- * @author David Peterson
- * @author Philippe Beaudoin
  */
 public class PlaceRequest {
-
     private final String nameToken;
-
     private final Map<String, String> params;
 
     /**
@@ -80,7 +75,7 @@ public class PlaceRequest {
      *
      * @param nameToken The name token for the request.
      * @deprecated Please use {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder#nameToken(String)}
-     * instead
+     *             instead
      */
     @Deprecated
     public PlaceRequest(String nameToken) {
@@ -98,7 +93,7 @@ public class PlaceRequest {
      * Builds a place request with the specified name token and with an existing parameter map.
      *
      * @param nameToken The name token for the request.
-     * @param params Existing parameter map.
+     * @param params    Existing parameter map.
      */
     private PlaceRequest(String nameToken, Map<String, String> params) {
         this.nameToken = nameToken;
@@ -206,7 +201,7 @@ public class PlaceRequest {
      * @param value The new parameter value.
      * @return The new place request instance.
      * @deprecated Please use {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder#with(String, String)}
-     * instead
+     *             instead
      */
     @Deprecated
     public PlaceRequest with(String name, String value) {
@@ -229,13 +224,12 @@ public class PlaceRequest {
      * (see {@link PlaceRequest#PlaceRequest()})
      */
     public static final class Builder {
-
         private String nameToken;
-
         private Map<String, String> params;
 
         public Builder nameToken(String nameToken) {
             this.nameToken = nameToken;
+
             return this;
         }
 
@@ -244,6 +238,7 @@ public class PlaceRequest {
             if (value != null) {
                 this.params.put(name, value);
             }
+
             return this;
         }
 
@@ -252,17 +247,18 @@ public class PlaceRequest {
             if (params != null) {
                 this.params.putAll(params);
             }
+
             return this;
         }
 
         private void lazyInitializeParamMap() {
             if (this.params == null) {
-                this.params = new HashMap<String, String>();
+                this.params = new LinkedHashMap<String, String>();
             }
         }
 
         public PlaceRequest build() {
             return new PlaceRequest(nameToken, params);
         }
-   }
+    }
 }
