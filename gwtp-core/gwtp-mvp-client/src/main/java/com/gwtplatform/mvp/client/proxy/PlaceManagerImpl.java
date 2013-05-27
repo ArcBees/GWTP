@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -31,26 +31,23 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
- * This is the default implementation of the {@link PlaceManager}.
+ * Default implementation to be extended of the {@link PlaceManager}.
  *
- * @author Philippe Beaudoin
- * @author Christian Goudreau
+ * @see DefaultPlaceManager
  */
-public abstract class PlaceManagerImpl implements PlaceManager,
-        ValueChangeHandler<String>, ClosingHandler {
-
+public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandler<String>, ClosingHandler {
     private final EventBus eventBus;
-    private String currentHistoryToken = "";
+    private final TokenFormatter tokenFormatter;
 
+    private String currentHistoryToken = "";
     private boolean internalError;
     private String onLeaveQuestion;
-    private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
-
-    private final TokenFormatter tokenFormatter;
+    private Command defferedNavigation;
 
     private HandlerRegistration windowClosingHandlerRegistration;
     private boolean locked;
-    private Command defferedNavigation;
+
+    private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
     public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
         this.eventBus = eventBus;
