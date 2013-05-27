@@ -296,8 +296,8 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     public void testToPlaceTokenShouldEscapeSeparators() {
         // Given
-        String expectedPlaceToken = "token;%5C1c%5C2=%5C2d;%5C1a%5C2=%5C2b%5C1";
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("token").with(";a=", "=b;").with(";c=", "=d")
+        String expectedPlaceToken = "token;%5C1c%5C2=%5C2d%5C1;%5C1a%5C2=%5C2b";
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("token").with(";c=", "=d;").with(";a=", "=b")
                 .build();
 
         // When
