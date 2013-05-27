@@ -28,13 +28,10 @@ public class RatingPage extends PageWithEditTable {
 
     @FindByDebugId("ratings")
     private WebElement ratings;
-
     @FindByDebugId("ratingCreate")
     private WebElement create;
-
     @FindByDebugId("ratingInput")
     private WebElement ratingInput;
-
     @FindByDebugId("ratingSave")
     @CacheLookup
     private WebElement save;
@@ -55,5 +52,9 @@ public class RatingPage extends PageWithEditTable {
 
     public int getNumberOfLines() {
         return getNumberOfLines(ratings);
+    }
+
+    public String getCellText(String colName, int row) {
+        return getCellText(ratings, colName, row);
     }
 }
