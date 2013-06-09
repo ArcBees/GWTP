@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Crawler Service - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-crawler-service</link>
-    <description>GWTP Crawler Service - Checkstyle report</description>
+    <title>GWTP Clients common - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common</link>
+    <description>GWTP Clients common - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2013 ArcBees</copyright>
     <item>
-      <title>File: 12,
+      <title>File: 5,
              Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.CachedPageTimeoutSec.java">com/gwtplatform/crawlerservice/server/CachedPageTimeoutSec.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.IndirectProvider.java">com/gwtplatform/common/client/IndirectProvider.java</a>
                 </td>
                 <td>
                   0
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.objectify.Ofy.java">com/gwtplatform/crawlerservice/server/objectify/Ofy.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitProvider.java">com/gwtplatform/common/client/CodeSplitProvider.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.service.CachedPageDao.java">com/gwtplatform/crawlerservice/server/service/CachedPageDao.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.StandardProvider.java">com/gwtplatform/common/client/StandardProvider.java</a>
                 </td>
                 <td>
                   0
@@ -71,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.ServiceKey.java">com/gwtplatform/crawlerservice/server/ServiceKey.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.ProviderBundle.java">com/gwtplatform/common/client/ProviderBundle.java</a>
                 </td>
                 <td>
                   0
@@ -85,105 +85,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.objectify.OfyService.java">com/gwtplatform/crawlerservice/server/objectify/OfyService.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.guice.CrawlServiceModule.java">com/gwtplatform/crawlerservice/server/guice/CrawlServiceModule.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.HtmlUnitTimeoutMillis.java">com/gwtplatform/crawlerservice/server/HtmlUnitTimeoutMillis.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.domain.CachedPage.java">com/gwtplatform/crawlerservice/server/domain/CachedPage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.service.ObjectifyDao.java">com/gwtplatform/crawlerservice/server/service/ObjectifyDao.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.objectify.OfyFactory.java">com/gwtplatform/crawlerservice/server/objectify/OfyFactory.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.CrawlServiceServlet.java">com/gwtplatform/crawlerservice/server/CrawlServiceServlet.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.domain.DatastoreObject.java">com/gwtplatform/crawlerservice/server/domain/DatastoreObject.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitBundleProvider.java">com/gwtplatform/common/client/CodeSplitBundleProvider.java</a>
                 </td>
                 <td>
                   0
