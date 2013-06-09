@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -365,9 +365,9 @@
                         <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
                         <serverId>appengine-credentials</serverId>
                         <splitJars>true</splitJars>
-                        <!--<goalArguments>-->
-                            <!--<argument>-enable_jar_splitting</argument>-->
-                        <!--</goalArguments>-->
+                        <!--<goalArguments> -->
+                        <!--<argument>-enable_jar_splitting</argument> -->
+                        <!--</goalArguments> -->
                     </configuration>
                     <executions>
                         <execution>
@@ -500,6 +500,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <!-- Work around for user agent https://github.com/github/maven-plugins/pull/37 -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.mylyn.github</groupId>
+                        <artifactId>org.eclipse.egit.github.core</artifactId>
+                        <version>2.0.3</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
