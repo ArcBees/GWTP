@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Dispatch Server Base - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-server</link>
-    <description>GWTP Dispatch Server Base - Checkstyle report</description>
+    <title>GWTP Clients common - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common</link>
+    <description>GWTP Clients common - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2013 ArcBees</copyright>
     <item>
-      <title>File: 23,
+      <title>File: 5,
              Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorMapImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.IndirectProvider.java">com/gwtplatform/common/client/IndirectProvider.java</a>
                 </td>
                 <td>
                   0
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionvalidator.AbstractDefaultActionValidator.java">com/gwtplatform/dispatch/server/actionvalidator/AbstractDefaultActionValidator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitProvider.java">com/gwtplatform/common/client/CodeSplitProvider.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/AbstractActionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.StandardProvider.java">com/gwtplatform/common/client/StandardProvider.java</a>
                 </td>
                 <td>
                   0
@@ -71,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorRegistry.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.ProviderBundle.java">com/gwtplatform/common/client/ProviderBundle.java</a>
                 </td>
                 <td>
                   0
@@ -85,259 +85,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.ActionResult.java">com/gwtplatform/dispatch/server/actionhandler/ActionResult.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/BatchActionHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.Dispatch.java">com/gwtplatform/dispatch/server/Dispatch.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl.java">com/gwtplatform/dispatch/server/AbstractDispatchServiceImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractRandomSecurityCookieFilter.java">com/gwtplatform/dispatch/server/AbstractRandomSecurityCookieFilter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/actionhandlervalidator/AbstractEagerActionHandlerValidatorRegistryImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorInstance.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.Utils.java">com/gwtplatform/dispatch/server/Utils.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry.java">com/gwtplatform/dispatch/server/actionhandlervalidator/EagerActionHandlerValidatorRegistry.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionvalidator.ActionValidator.java">com/gwtplatform/dispatch/server/actionvalidator/ActionValidator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.ExecutionContext.java">com/gwtplatform/dispatch/server/ExecutionContext.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractHttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/server/AbstractHttpSessionSecurityCookieFilter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorLinkerHelper.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.RequestProvider.java">com/gwtplatform/dispatch/server/RequestProvider.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractDispatchImpl.java">com/gwtplatform/dispatch/server/AbstractDispatchImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.ActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/ActionHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorClass.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorMap.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry.java">com/gwtplatform/dispatch/server/actionhandlervalidator/LazyActionHandlerValidatorRegistry.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitBundleProvider.java">com/gwtplatform/common/client/CodeSplitBundleProvider.java</a>
                 </td>
                 <td>
                   0
