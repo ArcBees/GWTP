@@ -262,7 +262,7 @@
         <jetty-plugin.version>8.1.0.v20120127</jetty-plugin.version>
 
         <!-- GitHub Sites -->
-        <github.version>0.7</github.version>
+        <github.version>0.8</github.version>
 
         <!-- Used for releasing to sonatype as command line parameter -->
         <gpg.passphrase>SetAsParam</gpg.passphrase>
@@ -461,7 +461,7 @@
                         ]]>
                     </header>
                 </configuration>
-                <executions>
+                <!-- <executions>
                     <execution>
                         <id>build-upload-javadocs</id>
                         <phase>site</phase>
@@ -469,7 +469,7 @@
                             <goal>aggregate</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions> -->
             </plugin>
 
             <!-- run 'mvn site' to upload -->
@@ -500,14 +500,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <!-- Work around for user agent https://github.com/github/maven-plugins/pull/37 -->
-                <dependencies>
-                    <dependency>
-                        <groupId>org.eclipse.mylyn.github</groupId>
-                        <artifactId>org.eclipse.egit.github.core</artifactId>
-                        <version>2.0.3</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
