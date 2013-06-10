@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Dispatch client - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-client</link>
-    <description>GWTP Dispatch client - Checkstyle report</description>
+    <title>GWTP Dispatch Server Base - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-server</link>
+    <description>GWTP Dispatch Server Base - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2013 ArcBees</copyright>
     <item>
-      <title>File: 28,
+      <title>File: 23,
              Errors: 0,
              Warnings: 0,
-             Infos: 4
+             Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.Cache.java">com/gwtplatform/dispatch/client/actionhandler/caching/Cache.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorMapImpl.java</a>
                 </td>
                 <td>
                   0
@@ -43,21 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.java">com/gwtplatform/dispatch/client/gin/DispatchAsyncModule.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.DefaultCacheImpl.java">com/gwtplatform/dispatch/client/actionhandler/caching/DefaultCacheImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionvalidator.AbstractDefaultActionValidator.java">com/gwtplatform/dispatch/server/actionvalidator/AbstractDefaultActionValidator.java</a>
                 </td>
                 <td>
                   0
@@ -71,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.GwtHttpDispatchRequest.java">com/gwtplatform/dispatch/client/GwtHttpDispatchRequest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/AbstractActionHandler.java</a>
                 </td>
                 <td>
                   0
@@ -85,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultExceptionHandler.java">com/gwtplatform/dispatch/client/DefaultExceptionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorRegistry.java</a>
                 </td>
                 <td>
                   0
@@ -99,7 +85,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler.java">com/gwtplatform/dispatch/client/actionhandler/caching/ActionCachingHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.ActionResult.java">com/gwtplatform/dispatch/server/actionhandler/ActionResult.java</a>
                 </td>
                 <td>
                   0
@@ -113,7 +99,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand.java">com/gwtplatform/dispatch/client/actionhandler/ExecuteCommand.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/BatchActionHandler.java</a>
                 </td>
                 <td>
                   0
@@ -127,7 +113,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry.java">com/gwtplatform/dispatch/client/actionhandler/DefaultClientActionHandlerRegistry.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.Dispatch.java">com/gwtplatform/dispatch/server/Dispatch.java</a>
                 </td>
                 <td>
                   0
@@ -141,7 +127,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor.java">com/gwtplatform/dispatch/client/DefaultSecurityCookieAccessor.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl.java">com/gwtplatform/dispatch/server/AbstractDispatchServiceImpl.java</a>
                 </td>
                 <td>
                   0
@@ -155,7 +141,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.java">com/gwtplatform/dispatch/client/gin/AbstractDispatchAsyncModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractRandomSecurityCookieFilter.java">com/gwtplatform/dispatch/server/AbstractRandomSecurityCookieFilter.java</a>
                 </td>
                 <td>
                   0
@@ -169,7 +155,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler.java">com/gwtplatform/dispatch/client/actionhandler/caching/AbstractCachingClientActionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/actionhandlervalidator/AbstractEagerActionHandlerValidatorRegistryImpl.java</a>
                 </td>
                 <td>
                   0
@@ -183,7 +169,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest.java">com/gwtplatform/dispatch/client/DefaultCallbackDispatchRequest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorInstance.java</a>
                 </td>
                 <td>
                   0
@@ -197,21 +183,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.gin.PhoneGapDispatchAsyncModule.java">com/gwtplatform/dispatch/client/gin/PhoneGapDispatchAsyncModule.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler.java">com/gwtplatform/dispatch/client/actionhandler/AbstractClientActionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.Utils.java">com/gwtplatform/dispatch/server/Utils.java</a>
                 </td>
                 <td>
                   0
@@ -225,7 +197,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.RpcDispatchAsync.java">com/gwtplatform/dispatch/client/RpcDispatchAsync.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry.java">com/gwtplatform/dispatch/server/actionhandlervalidator/EagerActionHandlerValidatorRegistry.java</a>
                 </td>
                 <td>
                   0
@@ -239,7 +211,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.RemoteServerUrl.java">com/gwtplatform/dispatch/client/RemoteServerUrl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionvalidator.ActionValidator.java">com/gwtplatform/dispatch/server/actionvalidator/ActionValidator.java</a>
                 </td>
                 <td>
                   0
@@ -253,7 +225,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException.java">com/gwtplatform/dispatch/client/actionhandler/ClientActionHandlerMismatchException.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.ExecutionContext.java">com/gwtplatform/dispatch/server/ExecutionContext.java</a>
                 </td>
                 <td>
                   0
@@ -267,7 +239,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultDispatchAsync.java">com/gwtplatform/dispatch/client/DefaultDispatchAsync.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractHttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/server/AbstractHttpSessionSecurityCookieFilter.java</a>
                 </td>
                 <td>
                   0
@@ -281,7 +253,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest.java">com/gwtplatform/dispatch/client/DelagatingCallbackDispatchRequest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorLinkerHelper.java</a>
                 </td>
                 <td>
                   0
@@ -295,7 +267,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.UndoCommand.java">com/gwtplatform/dispatch/client/actionhandler/UndoCommand.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.RequestProvider.java">com/gwtplatform/dispatch/server/RequestProvider.java</a>
                 </td>
                 <td>
                   0
@@ -309,21 +281,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.AbstractDispatchAsync.java">com/gwtplatform/dispatch/client/AbstractDispatchAsync.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.ExceptionHandler.java">com/gwtplatform/dispatch/client/ExceptionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.AbstractDispatchImpl.java">com/gwtplatform/dispatch/server/AbstractDispatchImpl.java</a>
                 </td>
                 <td>
                   0
@@ -337,21 +295,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.PhoneGapDispatchAsync.java">com/gwtplatform/dispatch/client/PhoneGapDispatchAsync.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler.java">com/gwtplatform/dispatch/client/actionhandler/ClientActionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.ActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/ActionHandler.java</a>
                 </td>
                 <td>
                   0
@@ -365,7 +309,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.DelegatingDispatchRequest.java">com/gwtplatform/dispatch/client/DelegatingDispatchRequest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorClass.java</a>
                 </td>
                 <td>
                   0
@@ -379,7 +323,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.CompletedDispatchRequest.java">com/gwtplatform/dispatch/client/CompletedDispatchRequest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap.java">com/gwtplatform/dispatch/server/actionhandlervalidator/ActionHandlerValidatorMap.java</a>
                 </td>
                 <td>
                   0
@@ -393,21 +337,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry.java">com/gwtplatform/dispatch/client/actionhandler/ClientActionHandlerRegistry.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-client/checkstyle.html#com.gwtplatform.dispatch.client.CallbackDispatchRequest.java">com/gwtplatform/dispatch/client/CallbackDispatchRequest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server/checkstyle.html#com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry.java">com/gwtplatform/dispatch/server/actionhandlervalidator/LazyActionHandlerValidatorRegistry.java</a>
                 </td>
                 <td>
                   0
