@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -10,7 +9,7 @@
 
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
-    <version>1.0-RC-4-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GWT-Platform</name>
     <inceptionYear>2010</inceptionYear>
@@ -262,7 +261,7 @@
         <jetty-plugin.version>8.1.0.v20120127</jetty-plugin.version>
 
         <!-- GitHub Sites -->
-        <github.version>0.7</github.version>
+        <github.version>0.8</github.version>
 
         <!-- Used for releasing to sonatype as command line parameter -->
         <gpg.passphrase>SetAsParam</gpg.passphrase>
@@ -365,9 +364,9 @@
                         <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
                         <serverId>appengine-credentials</serverId>
                         <splitJars>true</splitJars>
-                        <!--<goalArguments>-->
-                            <!--<argument>-enable_jar_splitting</argument>-->
-                        <!--</goalArguments>-->
+                        <!--<goalArguments> -->
+                        <!--<argument>-enable_jar_splitting</argument> -->
+                        <!--</goalArguments> -->
                     </configuration>
                     <executions>
                         <execution>
