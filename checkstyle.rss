@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Crawler - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-crawler</link>
-    <description>GWTP Crawler - Checkstyle report</description>
+    <title>GWTP Crawler Service - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-crawler-service</link>
+    <description>GWTP Crawler Service - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2013 ArcBees</copyright>
     <item>
-      <title>File: 3,
+      <title>File: 12,
              Errors: 0,
-             Warnings: 4,
+             Warnings: 0,
              Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-crawler/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,21 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler/checkstyle.html#com.gwtplatform.crawler.server.CrawlFilter.java">com/gwtplatform/crawler/server/CrawlFilter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  4
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler/checkstyle.html#com.gwtplatform.crawler.server.ServiceKey.java">com/gwtplatform/crawler/server/ServiceKey.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.CachedPageTimeoutSec.java">com/gwtplatform/crawlerservice/server/CachedPageTimeoutSec.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +43,147 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler/checkstyle.html#com.gwtplatform.crawler.server.ServiceUrl.java">com/gwtplatform/crawler/server/ServiceUrl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.objectify.Ofy.java">com/gwtplatform/crawlerservice/server/objectify/Ofy.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.service.CachedPageDao.java">com/gwtplatform/crawlerservice/server/service/CachedPageDao.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.ServiceKey.java">com/gwtplatform/crawlerservice/server/ServiceKey.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.objectify.OfyService.java">com/gwtplatform/crawlerservice/server/objectify/OfyService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.guice.CrawlServiceModule.java">com/gwtplatform/crawlerservice/server/guice/CrawlServiceModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.HtmlUnitTimeoutMillis.java">com/gwtplatform/crawlerservice/server/HtmlUnitTimeoutMillis.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.domain.CachedPage.java">com/gwtplatform/crawlerservice/server/domain/CachedPage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.objectify.OfyFactory.java">com/gwtplatform/crawlerservice/server/objectify/OfyFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.service.ObjectifyDao.java">com/gwtplatform/crawlerservice/server/service/ObjectifyDao.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.CrawlServiceServlet.java">com/gwtplatform/crawlerservice/server/CrawlServiceServlet.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-crawler-service/checkstyle.html#com.gwtplatform.crawlerservice.server.domain.DatastoreObject.java">com/gwtplatform/crawlerservice/server/domain/DatastoreObject.java</a>
                 </td>
                 <td>
                   0
