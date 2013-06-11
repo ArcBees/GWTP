@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>com.gwtplatform</groupId>
-        <artifactId>gwtp</artifactId>
+        <artifactId>gwtp-core</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
