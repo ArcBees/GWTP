@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Clients common - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common</link>
-    <description>GWTP Clients common - Checkstyle report</description>
+    <title>GWTP Annotation Processors - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-processors</link>
+    <description>GWTP Annotation Processors - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2013 ArcBees</copyright>
     <item>
-      <title>File: 5,
+      <title>File: 20,
              Errors: 0,
-             Warnings: 0,
+             Warnings: 3,
              Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.IndirectProvider.java">com/gwtplatform/common/client/IndirectProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/ClassGenerationHelper.java</a>
                 </td>
                 <td>
                   0
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitProvider.java">com/gwtplatform/common/client/CodeSplitProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.StandardProvider.java">com/gwtplatform/common/client/StandardProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDtoProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -71,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.ProviderBundle.java">com/gwtplatform/common/client/ProviderBundle.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Out.java">com/gwtplatform/dispatch/annotation/Out.java</a>
                 </td>
                 <td>
                   0
@@ -85,7 +85,217 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitBundleProvider.java">com/gwtplatform/common/client/CodeSplitBundleProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenDispatch.java">com/gwtplatform/dispatch/annotation/GenDispatch.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProxyProcessor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.In.java">com/gwtplatform/dispatch/annotation/In.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenDto.java">com/gwtplatform/dispatch/annotation/GenDto.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.GenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/GenerationHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ReflectionHelper.java">com/gwtplatform/dispatch/annotation/helper/ReflectionHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDispatchProcessor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenProxy.java">com/gwtplatform/dispatch/annotation/GenProxy.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Order.java">com/gwtplatform/dispatch/annotation/Order.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/InterfaceGenerationHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenEvent.java">com/gwtplatform/dispatch/annotation/GenEvent.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/BuilderGenerationHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxy.java">com/gwtplatform/dispatch/annotation/UseProxy.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxyName.java">com/gwtplatform/dispatch/annotation/UseProxyName.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Optional.java">com/gwtplatform/dispatch/annotation/Optional.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenEventProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenEventProcessor.java</a>
                 </td>
                 <td>
                   0
