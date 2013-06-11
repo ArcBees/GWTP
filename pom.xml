@@ -460,7 +460,7 @@
                         ]]>
                     </header>
                 </configuration>
-                <!-- <executions>
+                <executions>
                     <execution>
                         <id>build-upload-javadocs</id>
                         <phase>site</phase>
@@ -468,7 +468,7 @@
                             <goal>aggregate</goal>
                         </goals>
                     </execution>
-                </executions> -->
+                </executions>
             </plugin>
 
             <!-- run 'mvn site' to upload -->
