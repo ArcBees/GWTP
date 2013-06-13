@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./XCSRFHeaderName.html" title="com.gwtplatform.dispatch.client.rest.XCSRFHeaderName" alt="" coords="69,685,213,710"/>
+<area shape="rect" id="node1" href="./XCSRFHeaderName.html" title="&lt;TABLE&gt;" alt="" coords="59,673,224,721"/>
+<area shape="rect" id="node2_1" href="./SerializerProvider.html" title="com.gwtplatform.dispatch.client.rest.SerializerProvider" alt="" coords="79,602,204,643"/>
+<area shape="rect" id="node2" href="./SerializerProvider.html" title="&lt;TABLE&gt;" alt="" coords="68,597,215,649"/>
+<area shape="rect" id="node12_2" href="./AbstractSerializerProvider.html" title="com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider" alt="" coords="337,610,511,635"/>
+<area shape="rect" id="node12" href="./AbstractSerializerProvider.html" title="&lt;TABLE&gt;" alt="" coords="326,599,522,647"/>
+<area shape="rect" id="node3_3" href="./SerializerProvider.SerializerKey.html" title="com.gwtplatform.dispatch.client.rest.SerializerProvider.SerializerKey" alt="" coords="92,535,191,561"/>
+<area shape="rect" id="node3" href="./SerializerProvider.SerializerKey.html" title="&lt;TABLE&gt;" alt="" coords="81,524,201,572"/>
+<area shape="rect" id="node4_4" href="./Serializer.html" title="com.gwtplatform.dispatch.client.rest.Serializer" alt="" coords="91,453,191,494"/>
+<area shape="rect" id="node4" href="./Serializer.html" title="&lt;TABLE&gt;" alt="" coords="81,447,202,499"/>
+<area shape="rect" id="node10_5" href="./NoResultSerializer.html" title="com.gwtplatform.dispatch.client.rest.NoResultSerializer" alt="" coords="359,425,489,450"/>
+<area shape="rect" id="node10" href="./NoResultSerializer.html" title="&lt;TABLE&gt;" alt="" coords="348,413,500,461"/>
+<area shape="rect" id="node11_6" href="./JsonSerializer.html" title="com.gwtplatform.dispatch.client.rest.JsonSerializer" alt="" coords="360,497,488,522"/>
+<area shape="rect" id="node11" href="./JsonSerializer.html" title="&lt;TABLE&gt;" alt="" coords="349,485,499,533"/>
+<area shape="rect" id="node5_7" href="./SerializedType.html" title="com.gwtplatform.dispatch.client.rest.SerializedType" alt="" coords="87,377,196,418"/>
+<area shape="rect" id="node5" href="./SerializedType.html" title="&lt;TABLE&gt;" alt="" coords="76,371,207,423"/>
+<area shape="rect" id="node6_8" href="./RestResponseDeserializer.html" title="com.gwtplatform.dispatch.client.rest.RestResponseDeserializer" alt="" coords="53,310,230,335"/>
+<area shape="rect" id="node6" href="./RestResponseDeserializer.html" title="&lt;TABLE&gt;" alt="" coords="42,299,241,347"/>
+<area shape="rect" id="node7_9" href="./RestDispatcherController.html" title="com.gwtplatform.dispatch.client.rest.RestDispatcherController" alt="" coords="57,227,226,269"/>
+<area shape="rect" id="node7" href="./RestDispatcherController.html" title="&lt;TABLE&gt;" alt="" coords="46,222,237,274"/>
+<area shape="rect" id="node8_10" href="./RestDispatchAsync.html" title="com.gwtplatform.dispatch.client.rest.RestDispatchAsync" alt="" coords="73,161,209,186"/>
+<area shape="rect" id="node8" href="./RestDispatchAsync.html" title="&lt;TABLE&gt;" alt="" coords="63,149,220,197"/>
+<area shape="rect" id="node9_11" href="./RestApplicationPath.html" title="com.gwtplatform.dispatch.client.rest.RestApplicationPath" alt="" coords="71,89,211,114"/>
+<area shape="rect" id="node9" href="./RestApplicationPath.html" title="&lt;TABLE&gt;" alt="" coords="61,77,222,125"/>
+<area shape="rect" id="node13_12" href="./AbstractRestAction.html" title="com.gwtplatform.dispatch.client.rest.AbstractRestAction" alt="" coords="16,17,267,42"/>
+<area shape="rect" id="node13" href="./AbstractRestAction.html" title="&lt;TABLE&gt;" alt="" coords="5,5,277,53"/>
+</map>

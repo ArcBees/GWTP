@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SecurityModule.html" title="com.gwtplatform.carstore.client.security.SecurityModule" alt="" coords="33,161,145,186"/>
+<area shape="rect" id="node1" href="./SecurityModule.html" title="&lt;TABLE&gt;" alt="" coords="23,149,156,197"/>
+<area shape="rect" id="node2_1" href="./LoggedInGatekeeper.html" title="com.gwtplatform.carstore.client.security.LoggedInGatekeeper" alt="" coords="17,89,162,114"/>
+<area shape="rect" id="node2" href="./LoggedInGatekeeper.html" title="&lt;TABLE&gt;" alt="" coords="6,77,173,125"/>
+<area shape="rect" id="node3_2" href="./CurrentUser.html" title="com.gwtplatform.carstore.client.security.CurrentUser" alt="" coords="43,17,136,42"/>
+<area shape="rect" id="node3" href="./CurrentUser.html" title="&lt;TABLE&gt;" alt="" coords="32,5,147,53"/>
+</map>

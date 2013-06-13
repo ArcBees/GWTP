@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SessionService.html" title="com.gwtplatform.carstore.client.rest.SessionService" alt="" coords="32,238,144,279"/>
+<area shape="rect" id="node1" href="./SessionService.html" title="&lt;TABLE&gt;" alt="" coords="21,233,155,285"/>
+<area shape="rect" id="node2_1" href="./RatingService.html" title="com.gwtplatform.carstore.client.rest.RatingService" alt="" coords="37,162,139,203"/>
+<area shape="rect" id="node2" href="./RatingService.html" title="&lt;TABLE&gt;" alt="" coords="26,157,150,209"/>
+<area shape="rect" id="node3_2" href="./ManufacturerService.html" title="com.gwtplatform.carstore.client.rest.ManufacturerService" alt="" coords="17,86,159,127"/>
+<area shape="rect" id="node3" href="./ManufacturerService.html" title="&lt;TABLE&gt;" alt="" coords="6,81,170,133"/>
+<area shape="rect" id="node4_3" href="./CarService.html" title="com.gwtplatform.carstore.client.rest.CarService" alt="" coords="45,10,131,51"/>
+<area shape="rect" id="node4" href="./CarService.html" title="&lt;TABLE&gt;" alt="" coords="34,5,142,57"/>
+</map>

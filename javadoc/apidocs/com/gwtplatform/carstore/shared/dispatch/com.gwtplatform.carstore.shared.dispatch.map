@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./LogInResult.html" title="com.gwtplatform.carstore.shared.dispatch.LogInResult" alt="" coords="63,233,153,258"/>
+<area shape="rect" id="node1" href="./LogInResult.html" title="&lt;TABLE&gt;" alt="" coords="52,221,164,269"/>
+<area shape="rect" id="node2_1" href="./LogInRequest.html" title="com.gwtplatform.carstore.shared.dispatch.LogInRequest" alt="" coords="57,161,159,186"/>
+<area shape="rect" id="node2" href="./LogInRequest.html" title="&lt;TABLE&gt;" alt="" coords="46,149,170,197"/>
+<area shape="rect" id="node3_2" href="./GetResults.html" title="com.gwtplatform.carstore.shared.dispatch.GetResults" alt="" coords="16,89,200,114"/>
+<area shape="rect" id="node3" href="./GetResults.html" title="&lt;TABLE&gt;" alt="" coords="5,77,211,125"/>
+<area shape="rect" id="node4_3" href="./GetResult.html" title="com.gwtplatform.carstore.shared.dispatch.GetResult" alt="" coords="19,17,197,42"/>
+<area shape="rect" id="node4" href="./GetResult.html" title="&lt;TABLE&gt;" alt="" coords="9,5,207,53"/>
+</map>

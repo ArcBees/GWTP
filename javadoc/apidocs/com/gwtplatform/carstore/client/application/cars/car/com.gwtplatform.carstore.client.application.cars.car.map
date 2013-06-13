@@ -1,0 +1,36 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./RootCarView.html" title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" alt="" coords="240,838,339,863"/>
+<area shape="rect" id="node1" href="./RootCarView.html" title="&lt;TABLE&gt;" alt="" coords="229,827,349,875"/>
+<area shape="rect" id="node2_1" href="./RootCarPresenter.html" title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter" alt="" coords="27,763,155,789"/>
+<area shape="rect" id="node2" href="./RootCarPresenter.html" title="&lt;TABLE&gt;" alt="" coords="16,752,165,800"/>
+<area shape="rect" id="node3_2" href="./RootCarPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView" alt="" coords="47,830,134,871"/>
+<area shape="rect" id="node3" href="./RootCarPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="37,825,145,877"/>
+<area shape="rect" id="node4_3" href="./RootCarPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyProxy" alt="" coords="47,681,134,722"/>
+<area shape="rect" id="node4" href="./RootCarPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="37,675,145,727"/>
+<area shape="rect" id="node5_4" href="./CarView.html" title="com.gwtplatform.carstore.client.application.cars.car.CarView" alt="" coords="254,611,325,637"/>
+<area shape="rect" id="node5" href="./CarView.html" title="&lt;TABLE&gt;" alt="" coords="243,600,335,648"/>
+<area shape="rect" id="node6_5" href="./CarUiHandlers.html" title="com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers" alt="" coords="37,529,145,570"/>
+<area shape="rect" id="node6" href="./CarUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="26,523,155,575"/>
+<area shape="rect" id="node14_6" href="./CarPresenter.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" alt="" coords="239,537,339,562"/>
+<area shape="rect" id="node14" href="./CarPresenter.html" title="&lt;TABLE&gt;" alt="" coords="229,525,350,573"/>
+<area shape="rect" id="node7_7" href="./CarRenderer.html" title="com.gwtplatform.carstore.client.application.cars.car.CarRenderer" alt="" coords="42,462,139,487"/>
+<area shape="rect" id="node7" href="./CarRenderer.html" title="&lt;TABLE&gt;" alt="" coords="31,451,150,499"/>
+<area shape="rect" id="node8_8" href="./CarProxyImplFactory.html" title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImplFactory" alt="" coords="18,379,163,421"/>
+<area shape="rect" id="node8" href="./CarProxyImplFactory.html" title="&lt;TABLE&gt;" alt="" coords="7,374,174,426"/>
+<area shape="rect" id="node9_9" href="./CarProxyImpl.html" title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl" alt="" coords="239,311,340,337"/>
+<area shape="rect" id="node9" href="./CarProxyImpl.html" title="&lt;TABLE&gt;" alt="" coords="228,300,351,348"/>
+<area shape="rect" id="node10_10" href="./CarProxyImpl.WrappedProxy.html" title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy" alt="" coords="37,237,145,262"/>
+<area shape="rect" id="node10" href="./CarProxyImpl.WrappedProxy.html" title="&lt;TABLE&gt;" alt="" coords="26,225,155,273"/>
+<area shape="rect" id="node11_11" href="./CarProxyFactory.html" title="com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory" alt="" coords="31,165,151,190"/>
+<area shape="rect" id="node11" href="./CarProxyFactory.html" title="&lt;TABLE&gt;" alt="" coords="20,153,161,201"/>
+<area shape="rect" id="node12_12" href="./CarPresenterProvider.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenterProvider" alt="" coords="16,93,165,118"/>
+<area shape="rect" id="node12" href="./CarPresenterProvider.html" title="&lt;TABLE&gt;" alt="" coords="5,81,176,129"/>
+<area shape="rect" id="node13_13" href="./CarPresenterFactory.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenterFactory" alt="" coords="19,10,163,51"/>
+<area shape="rect" id="node13" href="./CarPresenterFactory.html" title="&lt;TABLE&gt;" alt="" coords="8,5,173,57"/>
+<area shape="rect" id="node15_14" href="./CarPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView" alt="" coords="47,605,134,646"/>
+<area shape="rect" id="node15" href="./CarPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="37,599,145,651"/>
+<area shape="rect" id="node17_15" href="./CarMobileView.html" title="com.gwtplatform.carstore.client.application.cars.car.CarMobileView" alt="" coords="235,683,344,709"/>
+<area shape="rect" id="node17" href="./CarMobileView.html" title="&lt;TABLE&gt;" alt="" coords="224,672,355,720"/>
+<area shape="rect" id="node16_16" href="./CarPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy" alt="" coords="47,303,134,345"/>
+<area shape="rect" id="node16" href="./CarPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="37,298,145,350"/>
+</map>

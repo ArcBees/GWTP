@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UserDto.html" title="com.gwtplatform.carstore.shared.dto.UserDto" alt="" coords="504,89,573,114"/>
+<area shape="rect" id="node1" href="./UserDto.html" title="&lt;TABLE&gt;" alt="" coords="493,77,584,125"/>
+<area shape="rect" id="node2_1" href="./RatingDto.html" title="com.gwtplatform.carstore.shared.dto.RatingDto" alt="" coords="499,161,579,186"/>
+<area shape="rect" id="node2" href="./RatingDto.html" title="&lt;TABLE&gt;" alt="" coords="488,149,589,197"/>
+<area shape="rect" id="node3_2" href="./NumberDto.html" title="com.gwtplatform.carstore.shared.dto.NumberDto" alt="" coords="195,17,408,42"/>
+<area shape="rect" id="node3" href="./NumberDto.html" title="&lt;TABLE&gt;" alt="" coords="184,5,419,53"/>
+<area shape="rect" id="node4_3" href="./ManufacturerRatingDto.html" title="com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto" alt="" coords="223,89,380,114"/>
+<area shape="rect" id="node4" href="./ManufacturerRatingDto.html" title="&lt;TABLE&gt;" alt="" coords="212,77,391,125"/>
+<area shape="rect" id="node5_4" href="./ManufacturerDto.html" title="com.gwtplatform.carstore.shared.dto.ManufacturerDto" alt="" coords="479,233,599,258"/>
+<area shape="rect" id="node5" href="./ManufacturerDto.html" title="&lt;TABLE&gt;" alt="" coords="468,221,609,269"/>
+<area shape="rect" id="node6_5" href="./Dto.html" title="com.gwtplatform.carstore.shared.dto.Dto" alt="" coords="27,117,114,158"/>
+<area shape="rect" id="node6" href="./Dto.html" title="&lt;TABLE&gt;" alt="" coords="17,111,125,163"/>
+<area shape="rect" id="node7_6" href="./CurrentUserDto.html" title="com.gwtplatform.carstore.shared.dto.CurrentUserDto" alt="" coords="245,161,358,186"/>
+<area shape="rect" id="node7" href="./CurrentUserDto.html" title="&lt;TABLE&gt;" alt="" coords="234,149,369,197"/>
+<area shape="rect" id="node10_7" href="./BaseEntity.html" title="com.gwtplatform.carstore.shared.dto.BaseEntity" alt="" coords="259,233,343,258"/>
+<area shape="rect" id="node10" href="./BaseEntity.html" title="&lt;TABLE&gt;" alt="" coords="249,221,354,269"/>
+<area shape="rect" id="node8_8" href="./CarPropertiesDto.html" title="com.gwtplatform.carstore.shared.dto.CarPropertiesDto" alt="" coords="477,305,600,330"/>
+<area shape="rect" id="node8" href="./CarPropertiesDto.html" title="&lt;TABLE&gt;" alt="" coords="467,293,611,341"/>
+<area shape="rect" id="node9_9" href="./CarDto.html" title="com.gwtplatform.carstore.shared.dto.CarDto" alt="" coords="507,377,570,402"/>
+<area shape="rect" id="node9" href="./CarDto.html" title="&lt;TABLE&gt;" alt="" coords="497,365,581,413"/>
+<area shape="rect" id="node11_10" href="./ActionType.html" title="com.gwtplatform.carstore.shared.dto.ActionType" alt="" coords="16,41,125,82"/>
+<area shape="rect" id="node11" href="./ActionType.html" title="&lt;TABLE&gt;" alt="" coords="5,35,136,87"/>
+</map>

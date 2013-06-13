@@ -1,0 +1,26 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Result.html" title="com.gwtplatform.dispatch.shared.Result" alt="" coords="187,297,274,338"/>
+<area shape="rect" id="node1" href="./Result.html" title="&lt;TABLE&gt;" alt="" coords="177,291,285,343"/>
+<area shape="rect" id="node2_1" href="./NoResult.html" title="com.gwtplatform.dispatch.shared.NoResult" alt="" coords="399,17,473,42"/>
+<area shape="rect" id="node2" href="./NoResult.html" title="&lt;TABLE&gt;" alt="" coords="388,5,484,53"/>
+<area shape="rect" id="node3_2" href="./MultipleResult.html" title="com.gwtplatform.dispatch.shared.MultipleResult" alt="" coords="372,89,500,114"/>
+<area shape="rect" id="node3" href="./MultipleResult.html" title="&lt;TABLE&gt;" alt="" coords="361,77,511,125"/>
+<area shape="rect" id="node4_3" href="./BatchResult.html" title="com.gwtplatform.dispatch.shared.BatchResult" alt="" coords="390,161,482,186"/>
+<area shape="rect" id="node4" href="./BatchResult.html" title="&lt;TABLE&gt;" alt="" coords="379,149,493,197"/>
+<area shape="rect" id="node5_4" href="./AbstractUpdateResult.html" title="com.gwtplatform.dispatch.shared.AbstractUpdateResult" alt="" coords="349,233,523,258"/>
+<area shape="rect" id="node5" href="./AbstractUpdateResult.html" title="&lt;TABLE&gt;" alt="" coords="339,221,533,269"/>
+<area shape="rect" id="node6_5" href="./AbstractSimpleResult.html" title="com.gwtplatform.dispatch.shared.AbstractSimpleResult" alt="" coords="351,305,521,330"/>
+<area shape="rect" id="node6" href="./AbstractSimpleResult.html" title="&lt;TABLE&gt;" alt="" coords="340,293,532,341"/>
+<area shape="rect" id="node7_6" href="./action/TestResult.html" title="com.gwtplatform.dispatch.shared.action.TestResult" alt="" coords="394,377,478,402"/>
+<area shape="rect" id="node7" href="./action/TestResult.html" title="&lt;TABLE&gt;" alt="" coords="383,365,489,413"/>
+<area shape="rect" id="node8_7" href="../../carstore/shared/dispatch/LogInResult.html" title="com.gwtplatform.carstore.shared.dispatch.LogInResult" alt="" coords="391,449,481,474"/>
+<area shape="rect" id="node8" href="../../carstore/shared/dispatch/LogInResult.html" title="&lt;TABLE&gt;" alt="" coords="380,437,492,485"/>
+<area shape="rect" id="node9_8" href="../../carstore/shared/dispatch/GetResults.html" title="com.gwtplatform.carstore.shared.dispatch.GetResults" alt="" coords="344,521,528,546"/>
+<area shape="rect" id="node9" href="../../carstore/shared/dispatch/GetResults.html" title="&lt;TABLE&gt;" alt="" coords="333,509,539,557"/>
+<area shape="rect" id="node10_9" href="../../carstore/shared/dispatch/GetResult.html" title="com.gwtplatform.carstore.shared.dispatch.GetResult" alt="" coords="347,593,525,618"/>
+<area shape="rect" id="node10" href="../../carstore/shared/dispatch/GetResult.html" title="&lt;TABLE&gt;" alt="" coords="337,581,535,629"/>
+<area shape="rect" id="node11_10" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html" title="com.google.gwt.user.client.rpc.IsSerializable" alt="" coords="17,258,117,299"/>
+<area shape="rect" id="node11" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html" title="&lt;TABLE&gt;" alt="" coords="6,253,127,305"/>
+<area shape="rect" id="node12_11" href="http://download.oracle.com/javase/6/docs/api/java/io/Serializable.html" title="java.io.Serializable" alt="" coords="22,334,111,375"/>
+<area shape="rect" id="node12" href="http://download.oracle.com/javase/6/docs/api/java/io/Serializable.html" title="&lt;TABLE&gt;" alt="" coords="11,329,122,381"/>
+</map>

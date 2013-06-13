@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../../../mvp/client/proxy/ProxyPlaceImpl.html" title="com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl" alt="" coords="17,17,303,42"/>
+<area shape="rect" id="node1" href="../../../../../mvp/client/proxy/ProxyPlaceImpl.html" title="&lt;TABLE&gt;" alt="" coords="6,5,314,53"/>
+<area shape="rect" id="node2_1" href="./CarProxyImpl.html" title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl" alt="" coords="373,54,475,79"/>
+<area shape="rect" id="node2" href="./CarProxyImpl.html" title="&lt;TABLE&gt;" alt="" coords="363,43,485,91"/>
+<area shape="rect" id="node3_2" href="./CarPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy" alt="" coords="117,83,203,125"/>
+<area shape="rect" id="node3" href="./CarPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="106,78,214,130"/>
+</map>

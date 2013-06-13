@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ServiceDefinitions.html" title="com.gwtplatform.dispatch.rebind.type.ServiceDefinitions" alt="" coords="38,305,165,330"/>
+<area shape="rect" id="node1" href="./ServiceDefinitions.html" title="&lt;TABLE&gt;" alt="" coords="27,293,175,341"/>
+<area shape="rect" id="node2_1" href="./SerializerDefinitions.html" title="com.gwtplatform.dispatch.rebind.type.SerializerDefinitions" alt="" coords="33,233,170,258"/>
+<area shape="rect" id="node2" href="./SerializerDefinitions.html" title="&lt;TABLE&gt;" alt="" coords="22,221,181,269"/>
+<area shape="rect" id="node3_2" href="./RegisterSerializerBinding.html" title="com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding" alt="" coords="17,161,186,186"/>
+<area shape="rect" id="node3" href="./RegisterSerializerBinding.html" title="&lt;TABLE&gt;" alt="" coords="6,149,197,197"/>
+<area shape="rect" id="node4_3" href="./MethodCall.html" title="com.gwtplatform.dispatch.rebind.type.MethodCall" alt="" coords="57,89,145,114"/>
+<area shape="rect" id="node4" href="./MethodCall.html" title="&lt;TABLE&gt;" alt="" coords="47,77,156,125"/>
+<area shape="rect" id="node5_4" href="./ActionBinding.html" title="com.gwtplatform.dispatch.rebind.type.ActionBinding" alt="" coords="51,17,152,42"/>
+<area shape="rect" id="node5" href="./ActionBinding.html" title="&lt;TABLE&gt;" alt="" coords="40,5,163,53"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./GenProxyProcessor.html" title="com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor" alt="" coords="201,17,341,42"/>
+<area shape="rect" id="node1" href="./GenProxyProcessor.html" title="&lt;TABLE&gt;" alt="" coords="190,5,351,53"/>
+<area shape="rect" id="node2_1" href="./GenProcessor.html" title="com.gwtplatform.dispatch.annotation.processor.GenProcessor" alt="" coords="17,125,122,150"/>
+<area shape="rect" id="node2" href="./GenProcessor.html" title="&lt;TABLE&gt;" alt="" coords="6,113,133,161"/>
+<area shape="rect" id="node3_2" href="./GenEventProcessor.html" title="com.gwtplatform.dispatch.annotation.processor.GenEventProcessor" alt="" coords="201,89,341,114"/>
+<area shape="rect" id="node3" href="./GenEventProcessor.html" title="&lt;TABLE&gt;" alt="" coords="190,77,351,125"/>
+<area shape="rect" id="node4_3" href="./GenDtoProcessor.html" title="com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor" alt="" coords="207,161,334,186"/>
+<area shape="rect" id="node4" href="./GenDtoProcessor.html" title="&lt;TABLE&gt;" alt="" coords="197,149,345,197"/>
+<area shape="rect" id="node5_4" href="./GenDispatchProcessor.html" title="com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor" alt="" coords="192,233,349,258"/>
+<area shape="rect" id="node5" href="./GenDispatchProcessor.html" title="&lt;TABLE&gt;" alt="" coords="181,221,360,269"/>
+</map>

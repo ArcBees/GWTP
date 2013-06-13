@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../../../mvp/client/Presenter.html" title="com.gwtplatform.mvp.client.Presenter" alt="" coords="17,17,362,42"/>
+<area shape="rect" id="node1" href="../../../../../mvp/client/Presenter.html" title="&lt;TABLE&gt;" alt="" coords="6,5,373,53"/>
+<area shape="rect" id="node3_1" href="./CarPresenter.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" alt="" coords="433,167,533,193"/>
+<area shape="rect" id="node3" href="./CarPresenter.html" title="&lt;TABLE&gt;" alt="" coords="422,156,543,204"/>
+<area shape="rect" id="node2_2" href="./CarUiHandlers.html" title="com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers" alt="" coords="135,83,243,125"/>
+<area shape="rect" id="node2" href="./CarUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="125,78,254,130"/>
+<area shape="rect" id="node4_3" href="./navigation/NavigationTab.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" alt="" coords="136,159,243,201"/>
+<area shape="rect" id="node4" href="./navigation/NavigationTab.html" title="&lt;TABLE&gt;" alt="" coords="125,154,253,206"/>
+<area shape="rect" id="node5_4" href="../../event/GoBackEvent.GoBackHandler.html" title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" alt="" coords="132,235,247,277"/>
+<area shape="rect" id="node5" href="../../event/GoBackEvent.GoBackHandler.html" title="&lt;TABLE&gt;" alt="" coords="121,230,257,282"/>
+<area shape="rect" id="node6_5" href="../../event/ActionBarEvent.ActionBarHandler.html" title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" alt="" coords="127,311,251,353"/>
+<area shape="rect" id="node6" href="../../event/ActionBarEvent.ActionBarHandler.html" title="&lt;TABLE&gt;" alt="" coords="117,306,262,358"/>
+</map>

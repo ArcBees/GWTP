@@ -1,0 +1,26 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./LazyActionHandlerValidatorRegistry.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry" alt="" coords="638,455,871,497"/>
+<area shape="rect" id="node1" href="./LazyActionHandlerValidatorRegistry.html" title="&lt;TABLE&gt;" alt="" coords="627,450,882,502"/>
+<area shape="rect" id="node2_1" href="./EagerActionHandlerValidatorRegistry.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry" alt="" coords="634,531,875,573"/>
+<area shape="rect" id="node2" href="./EagerActionHandlerValidatorRegistry.html" title="&lt;TABLE&gt;" alt="" coords="623,526,886,578"/>
+<area shape="rect" id="node12_2" href="./AbstractEagerActionHandlerValidatorRegistryImpl.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl" alt="" coords="1053,539,1368,565"/>
+<area shape="rect" id="node12" href="./AbstractEagerActionHandlerValidatorRegistryImpl.html" title="&lt;TABLE&gt;" alt="" coords="1043,528,1379,576"/>
+<area shape="rect" id="node3_3" href="./ActionHandlerValidatorRegistry.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry" alt="" coords="133,494,339,535"/>
+<area shape="rect" id="node3" href="./ActionHandlerValidatorRegistry.html" title="&lt;TABLE&gt;" alt="" coords="123,489,349,541"/>
+<area shape="rect" id="node4_4" href="./ActionHandlerValidatorMapImpl.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl" alt="" coords="526,389,983,414"/>
+<area shape="rect" id="node4" href="./ActionHandlerValidatorMapImpl.html" title="&lt;TABLE&gt;" alt="" coords="515,377,994,425"/>
+<area shape="rect" id="node5_5" href="./ActionHandlerValidatorMap.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap" alt="" coords="20,381,452,422"/>
+<area shape="rect" id="node5" href="./ActionHandlerValidatorMap.html" title="&lt;TABLE&gt;" alt="" coords="9,375,463,427"/>
+<area shape="rect" id="node6_6" href="./ActionHandlerValidatorLinkerHelper.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper" alt="" coords="120,314,352,339"/>
+<area shape="rect" id="node6" href="./ActionHandlerValidatorLinkerHelper.html" title="&lt;TABLE&gt;" alt="" coords="109,303,363,351"/>
+<area shape="rect" id="node7_7" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider" alt="" coords="185,231,287,273"/>
+<area shape="rect" id="node7" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.html" title="&lt;TABLE&gt;" alt="" coords="175,226,297,278"/>
+<area shape="rect" id="node8_8" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor" alt="" coords="161,155,311,197"/>
+<area shape="rect" id="node8" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html" title="&lt;TABLE&gt;" alt="" coords="151,150,321,202"/>
+<area shape="rect" id="node9_9" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" alt="" coords="653,163,857,189"/>
+<area shape="rect" id="node9" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html" title="&lt;TABLE&gt;" alt="" coords="642,152,867,200"/>
+<area shape="rect" id="node10_10" href="./ActionHandlerValidatorInstance.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance" alt="" coords="133,89,339,114"/>
+<area shape="rect" id="node10" href="./ActionHandlerValidatorInstance.html" title="&lt;TABLE&gt;" alt="" coords="122,77,350,125"/>
+<area shape="rect" id="node11_11" href="./ActionHandlerValidatorClass.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass" alt="" coords="16,17,456,42"/>
+<area shape="rect" id="node11" href="./ActionHandlerValidatorClass.html" title="&lt;TABLE&gt;" alt="" coords="5,5,467,53"/>
+</map>

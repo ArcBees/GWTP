@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../ApplicationPresenter.html" title="com.gwtplatform.carstore.client.application.ApplicationPresenter" alt="" coords="430,17,573,42"/>
+<area shape="rect" id="node1" href="../ApplicationPresenter.html" title="&lt;TABLE&gt;" alt="" coords="419,5,583,53"/>
+<area shape="rect" id="node2_1" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html" title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" alt="" coords="187,45,360,86"/>
+<area shape="rect" id="node2" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html" title="&lt;TABLE&gt;" alt="" coords="176,39,371,91"/>
+<area shape="rect" id="node3_2" href="../widget/header/HeaderPresenter.html" title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" alt="" coords="441,89,562,114"/>
+<area shape="rect" id="node3" href="../widget/header/HeaderPresenter.html" title="&lt;TABLE&gt;" alt="" coords="430,77,573,125"/>
+<area shape="rect" id="node4_3" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html" title="com.google.gwt.event.shared.EventHandler" alt="" coords="16,45,117,86"/>
+<area shape="rect" id="node4" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html" title="&lt;TABLE&gt;" alt="" coords="5,39,128,91"/>
+</map>

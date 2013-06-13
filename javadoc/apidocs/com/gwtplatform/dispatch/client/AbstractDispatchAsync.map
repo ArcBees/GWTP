@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../shared/DispatchAsync.html" title="com.gwtplatform.dispatch.shared.DispatchAsync" alt="" coords="17,45,125,86"/>
+<area shape="rect" id="node1" href="../shared/DispatchAsync.html" title="&lt;TABLE&gt;" alt="" coords="6,39,135,91"/>
+<area shape="rect" id="node3_1" href="./AbstractDispatchAsync.html" title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" alt="" coords="195,53,352,78"/>
+<area shape="rect" id="node3" href="./AbstractDispatchAsync.html" title="&lt;TABLE&gt;" alt="" coords="184,41,363,89"/>
+<area shape="rect" id="node2_2" href="./RpcDispatchAsync.html" title="com.gwtplatform.dispatch.client.RpcDispatchAsync" alt="" coords="423,17,555,42"/>
+<area shape="rect" id="node2" href="./RpcDispatchAsync.html" title="&lt;TABLE&gt;" alt="" coords="413,5,566,53"/>
+<area shape="rect" id="node4_3" href="./rest/RestDispatchAsync.html" title="com.gwtplatform.dispatch.client.rest.RestDispatchAsync" alt="" coords="421,89,557,114"/>
+<area shape="rect" id="node4" href="./rest/RestDispatchAsync.html" title="&lt;TABLE&gt;" alt="" coords="411,77,568,125"/>
+</map>

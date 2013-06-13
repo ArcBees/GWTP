@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ReflectionHelper.html" title="com.gwtplatform.dispatch.annotation.helper.ReflectionHelper" alt="" coords="19,125,138,150"/>
+<area shape="rect" id="node1" href="./ReflectionHelper.html" title="&lt;TABLE&gt;" alt="" coords="9,113,149,161"/>
+<area shape="rect" id="node2_1" href="./InterfaceGenerationHelper.html" title="com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper" alt="" coords="211,17,389,42"/>
+<area shape="rect" id="node2" href="./InterfaceGenerationHelper.html" title="&lt;TABLE&gt;" alt="" coords="201,5,399,53"/>
+<area shape="rect" id="node3_2" href="./GenerationHelper.html" title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" alt="" coords="16,53,141,78"/>
+<area shape="rect" id="node3" href="./GenerationHelper.html" title="&lt;TABLE&gt;" alt="" coords="5,41,152,89"/>
+<area shape="rect" id="node4_3" href="./ClassGenerationHelper.html" title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" alt="" coords="221,89,379,114"/>
+<area shape="rect" id="node4" href="./ClassGenerationHelper.html" title="&lt;TABLE&gt;" alt="" coords="210,77,390,125"/>
+<area shape="rect" id="node5_4" href="./BuilderGenerationHelper.html" title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" alt="" coords="459,89,626,114"/>
+<area shape="rect" id="node5" href="./BuilderGenerationHelper.html" title="&lt;TABLE&gt;" alt="" coords="449,77,637,125"/>
+</map>

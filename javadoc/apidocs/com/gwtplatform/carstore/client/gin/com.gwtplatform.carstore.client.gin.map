@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./TabletModule.html" title="com.gwtplatform.carstore.client.gin.TabletModule" alt="" coords="53,670,155,695"/>
+<area shape="rect" id="node1" href="./TabletModule.html" title="&lt;TABLE&gt;" alt="" coords="43,659,165,707"/>
+<area shape="rect" id="node2_1" href="./SharedModule.html" title="com.gwtplatform.carstore.client.gin.SharedModule" alt="" coords="51,598,157,623"/>
+<area shape="rect" id="node2" href="./SharedModule.html" title="&lt;TABLE&gt;" alt="" coords="40,587,168,635"/>
+<area shape="rect" id="node3_2" href="./ResourceLoader.html" title="com.gwtplatform.carstore.client.gin.ResourceLoader" alt="" coords="45,526,163,551"/>
+<area shape="rect" id="node3" href="./ResourceLoader.html" title="&lt;TABLE&gt;" alt="" coords="34,515,174,563"/>
+<area shape="rect" id="node4_3" href="./PhoneGapRemoteModule.html" title="com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule" alt="" coords="17,454,191,479"/>
+<area shape="rect" id="node4" href="./PhoneGapRemoteModule.html" title="&lt;TABLE&gt;" alt="" coords="6,443,202,491"/>
+<area shape="rect" id="node5_4" href="./PhoneGapModule.html" title="com.gwtplatform.carstore.client.gin.PhoneGapModule" alt="" coords="40,382,168,407"/>
+<area shape="rect" id="node5" href="./PhoneGapModule.html" title="&lt;TABLE&gt;" alt="" coords="29,371,179,419"/>
+<area shape="rect" id="node6_5" href="./PhoneGapLocalModule.html" title="com.gwtplatform.carstore.client.gin.PhoneGapLocalModule" alt="" coords="24,310,184,335"/>
+<area shape="rect" id="node6" href="./PhoneGapLocalModule.html" title="&lt;TABLE&gt;" alt="" coords="13,299,195,347"/>
+<area shape="rect" id="node7_6" href="./MyGinjector.html" title="com.gwtplatform.carstore.client.gin.MyGinjector" alt="" coords="59,227,149,269"/>
+<area shape="rect" id="node7" href="./MyGinjector.html" title="&lt;TABLE&gt;" alt="" coords="48,222,160,274"/>
+<area shape="rect" id="node8_7" href="./MobileModule.html" title="com.gwtplatform.carstore.client.gin.MobileModule" alt="" coords="53,161,155,186"/>
+<area shape="rect" id="node8" href="./MobileModule.html" title="&lt;TABLE&gt;" alt="" coords="42,149,166,197"/>
+<area shape="rect" id="node9_8" href="./DesktopModule.html" title="com.gwtplatform.carstore.client.gin.DesktopModule" alt="" coords="47,89,161,114"/>
+<area shape="rect" id="node9" href="./DesktopModule.html" title="&lt;TABLE&gt;" alt="" coords="37,77,171,125"/>
+<area shape="rect" id="node10_9" href="./CarStoreModule.html" title="com.gwtplatform.carstore.client.gin.CarStoreModule" alt="" coords="45,17,163,42"/>
+<area shape="rect" id="node10" href="./CarStoreModule.html" title="&lt;TABLE&gt;" alt="" coords="35,5,173,53"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./RequestProvider.html" title="com.gwtplatform.dispatch.server.RequestProvider" alt="" coords="16,45,136,86"/>
+<area shape="rect" id="node1" href="./RequestProvider.html" title="&lt;TABLE&gt;" alt="" coords="5,39,147,91"/>
+<area shape="rect" id="node2_1" href="./guice/request/DefaultRequestProvider.html" title="com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider" alt="" coords="206,17,367,42"/>
+<area shape="rect" id="node2" href="./guice/request/DefaultRequestProvider.html" title="&lt;TABLE&gt;" alt="" coords="195,5,378,53"/>
+<area shape="rect" id="node3_2" href="./spring/request/DefaultRequestProvider.html" title="com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider" alt="" coords="206,89,367,114"/>
+<area shape="rect" id="node3" href="./spring/request/DefaultRequestProvider.html" title="&lt;TABLE&gt;" alt="" coords="195,77,378,125"/>
+</map>

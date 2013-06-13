@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./GenerationHelper.html" title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" alt="" coords="16,17,141,42"/>
+<area shape="rect" id="node1" href="./GenerationHelper.html" title="&lt;TABLE&gt;" alt="" coords="5,5,152,53"/>
+<area shape="rect" id="node2_1" href="./ClassGenerationHelper.html" title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" alt="" coords="211,17,370,42"/>
+<area shape="rect" id="node2" href="./ClassGenerationHelper.html" title="&lt;TABLE&gt;" alt="" coords="201,5,381,53"/>
+<area shape="rect" id="node3_2" href="./BuilderGenerationHelper.html" title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" alt="" coords="441,17,607,42"/>
+<area shape="rect" id="node3" href="./BuilderGenerationHelper.html" title="&lt;TABLE&gt;" alt="" coords="430,5,618,53"/>
+</map>

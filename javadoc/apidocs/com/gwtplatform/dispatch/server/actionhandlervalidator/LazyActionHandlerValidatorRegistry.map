@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./LazyActionHandlerValidatorRegistry.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry" alt="" coords="291,45,525,86"/>
+<area shape="rect" id="node1" href="./LazyActionHandlerValidatorRegistry.html" title="&lt;TABLE&gt;" alt="" coords="281,39,535,91"/>
+<area shape="rect" id="node3_1" href="../guice/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html" title="com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" alt="" coords="595,17,853,42"/>
+<area shape="rect" id="node3" href="../guice/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html" title="&lt;TABLE&gt;" alt="" coords="584,5,864,53"/>
+<area shape="rect" id="node4_2" href="../spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html" title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" alt="" coords="595,89,853,114"/>
+<area shape="rect" id="node4" href="../spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html" title="&lt;TABLE&gt;" alt="" coords="584,77,864,125"/>
+<area shape="rect" id="node2_3" href="./ActionHandlerValidatorRegistry.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry" alt="" coords="16,45,221,86"/>
+<area shape="rect" id="node2" href="./ActionHandlerValidatorRegistry.html" title="&lt;TABLE&gt;" alt="" coords="5,39,232,91"/>
+</map>

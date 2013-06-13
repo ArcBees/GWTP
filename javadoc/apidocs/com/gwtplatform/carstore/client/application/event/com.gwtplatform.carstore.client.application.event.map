@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UserLoginEvent.html" title="com.gwtplatform.carstore.client.application.event.UserLoginEvent" alt="" coords="45,915,160,941"/>
+<area shape="rect" id="node1" href="./UserLoginEvent.html" title="&lt;TABLE&gt;" alt="" coords="35,904,171,952"/>
+<area shape="rect" id="node2_1" href="./UserLoginEvent.UserLoginHandler.html" title="com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler" alt="" coords="39,833,167,874"/>
+<area shape="rect" id="node2" href="./UserLoginEvent.UserLoginHandler.html" title="&lt;TABLE&gt;" alt="" coords="28,827,177,879"/>
+<area shape="rect" id="node3_2" href="./GoBackEvent.html" title="com.gwtplatform.carstore.client.application.event.GoBackEvent" alt="" coords="52,766,153,791"/>
+<area shape="rect" id="node3" href="./GoBackEvent.html" title="&lt;TABLE&gt;" alt="" coords="41,755,164,803"/>
+<area shape="rect" id="node4_3" href="./GoBackEvent.GoBackHandler.html" title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" alt="" coords="45,683,160,725"/>
+<area shape="rect" id="node4" href="./GoBackEvent.GoBackHandler.html" title="&lt;TABLE&gt;" alt="" coords="35,678,171,730"/>
+<area shape="rect" id="node5_4" href="./DisplayMessageEvent.html" title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent" alt="" coords="27,617,179,642"/>
+<area shape="rect" id="node5" href="./DisplayMessageEvent.html" title="&lt;TABLE&gt;" alt="" coords="16,605,189,653"/>
+<area shape="rect" id="node6_5" href="./DisplayMessageEvent.DisplayMessageHandler.html" title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler" alt="" coords="21,534,185,575"/>
+<area shape="rect" id="node6" href="./DisplayMessageEvent.DisplayMessageHandler.html" title="&lt;TABLE&gt;" alt="" coords="10,529,195,581"/>
+<area shape="rect" id="node7_6" href="./ChangeActionBarEvent.html" title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent" alt="" coords="23,467,182,493"/>
+<area shape="rect" id="node7" href="./ChangeActionBarEvent.html" title="&lt;TABLE&gt;" alt="" coords="13,456,193,504"/>
+<area shape="rect" id="node8_7" href="./ChangeActionBarEvent.ActionType.html" title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType" alt="" coords="48,385,157,426"/>
+<area shape="rect" id="node8" href="./ChangeActionBarEvent.ActionType.html" title="&lt;TABLE&gt;" alt="" coords="37,379,168,431"/>
+<area shape="rect" id="node9_8" href="./ChangeActionBarEvent.ChangeActionBarHandler.html" title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" alt="" coords="17,309,188,350"/>
+<area shape="rect" id="node9" href="./ChangeActionBarEvent.ChangeActionBarHandler.html" title="&lt;TABLE&gt;" alt="" coords="7,303,199,355"/>
+<area shape="rect" id="node10_9" href="./ActionBarVisibilityEvent.html" title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent" alt="" coords="23,242,183,267"/>
+<area shape="rect" id="node10" href="./ActionBarVisibilityEvent.html" title="&lt;TABLE&gt;" alt="" coords="12,231,193,279"/>
+<area shape="rect" id="node11_10" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html" title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" alt="" coords="16,159,189,201"/>
+<area shape="rect" id="node11" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html" title="&lt;TABLE&gt;" alt="" coords="5,154,200,206"/>
+<area shape="rect" id="node12_11" href="./ActionBarEvent.html" title="com.gwtplatform.carstore.client.application.event.ActionBarEvent" alt="" coords="47,93,159,118"/>
+<area shape="rect" id="node12" href="./ActionBarEvent.html" title="&lt;TABLE&gt;" alt="" coords="36,81,169,129"/>
+<area shape="rect" id="node13_12" href="./ActionBarEvent.ActionBarHandler.html" title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" alt="" coords="41,10,165,51"/>
+<area shape="rect" id="node13" href="./ActionBarEvent.ActionBarHandler.html" title="&lt;TABLE&gt;" alt="" coords="30,5,175,57"/>
+</map>

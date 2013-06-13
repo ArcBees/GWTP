@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UndoCommand.html" title="com.gwtplatform.dispatch.client.actionhandler.UndoCommand" alt="" coords="29,311,392,353"/>
+<area shape="rect" id="node1" href="./UndoCommand.html" title="&lt;TABLE&gt;" alt="" coords="19,306,403,358"/>
+<area shape="rect" id="node2_1" href="./ExecuteCommand.html" title="com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand" alt="" coords="21,235,401,277"/>
+<area shape="rect" id="node2" href="./ExecuteCommand.html" title="&lt;TABLE&gt;" alt="" coords="10,230,411,282"/>
+<area shape="rect" id="node3_2" href="./DefaultClientActionHandlerRegistry.html" title="com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry" alt="" coords="579,167,808,193"/>
+<area shape="rect" id="node3" href="./DefaultClientActionHandlerRegistry.html" title="&lt;TABLE&gt;" alt="" coords="568,156,819,204"/>
+<area shape="rect" id="node4_3" href="./ClientActionHandlerRegistry.html" title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry" alt="" coords="117,159,304,201"/>
+<area shape="rect" id="node4" href="./ClientActionHandlerRegistry.html" title="&lt;TABLE&gt;" alt="" coords="107,154,315,206"/>
+<area shape="rect" id="node5_4" href="./ClientActionHandlerMismatchException.html" title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException" alt="" coords="84,93,337,118"/>
+<area shape="rect" id="node5" href="./ClientActionHandlerMismatchException.html" title="&lt;TABLE&gt;" alt="" coords="73,81,348,129"/>
+<area shape="rect" id="node6_5" href="./ClientActionHandler.html" title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler" alt="" coords="17,10,405,51"/>
+<area shape="rect" id="node6" href="./ClientActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="6,5,415,57"/>
+<area shape="rect" id="node7_6" href="./AbstractClientActionHandler.html" title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" alt="" coords="475,18,911,43"/>
+<area shape="rect" id="node7" href="./AbstractClientActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="465,7,922,55"/>
+</map>

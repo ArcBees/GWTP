@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../mvp/client/Presenter.html" title="com.gwtplatform.mvp.client.Presenter" alt="" coords="17,17,362,42"/>
+<area shape="rect" id="node1" href="../../../mvp/client/Presenter.html" title="&lt;TABLE&gt;" alt="" coords="6,5,373,53"/>
+<area shape="rect" id="node2_1" href="./ApplicationPresenter.html" title="com.gwtplatform.carstore.client.application.ApplicationPresenter" alt="" coords="433,91,575,117"/>
+<area shape="rect" id="node2" href="./ApplicationPresenter.html" title="&lt;TABLE&gt;" alt="" coords="422,80,586,128"/>
+<area shape="rect" id="node3_2" href="./event/ChangeActionBarEvent.ChangeActionBarHandler.html" title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" alt="" coords="104,83,275,125"/>
+<area shape="rect" id="node3" href="./event/ChangeActionBarEvent.ChangeActionBarHandler.html" title="&lt;TABLE&gt;" alt="" coords="93,78,285,130"/>
+<area shape="rect" id="node4_3" href="./event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html" title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" alt="" coords="103,159,276,201"/>
+<area shape="rect" id="node4" href="./event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html" title="&lt;TABLE&gt;" alt="" coords="92,154,287,206"/>
+</map>

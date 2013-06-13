@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../AbstractClientActionHandler.html" title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" alt="" coords="17,17,453,42"/>
+<area shape="rect" id="node1" href="../AbstractClientActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="6,5,463,53"/>
+<area shape="rect" id="node3_1" href="./AbstractCachingClientActionHandler.html" title="com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler" alt="" coords="523,17,1008,42"/>
+<area shape="rect" id="node3" href="./AbstractCachingClientActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="512,5,1019,53"/>
+<area shape="rect" id="node2_2" href="./ActionCachingHandler.html" title="com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler" alt="" coords="1077,17,1480,42"/>
+<area shape="rect" id="node2" href="./ActionCachingHandler.html" title="&lt;TABLE&gt;" alt="" coords="1067,5,1491,53"/>
+</map>

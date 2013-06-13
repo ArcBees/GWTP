@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../Action.html" title="com.gwtplatform.dispatch.shared.Action" alt="" coords="17,10,191,51"/>
+<area shape="rect" id="node1" href="../Action.html" title="&lt;TABLE&gt;" alt="" coords="6,5,202,57"/>
+<area shape="rect" id="node3_1" href="./RestAction.html" title="com.gwtplatform.dispatch.shared.rest.RestAction" alt="" coords="262,10,463,51"/>
+<area shape="rect" id="node3" href="./RestAction.html" title="&lt;TABLE&gt;" alt="" coords="251,5,474,57"/>
+<area shape="rect" id="node2_2" href="../../client/rest/AbstractRestAction.html" title="com.gwtplatform.dispatch.client.rest.AbstractRestAction" alt="" coords="533,18,784,43"/>
+<area shape="rect" id="node2" href="../../client/rest/AbstractRestAction.html" title="&lt;TABLE&gt;" alt="" coords="523,7,795,55"/>
+</map>

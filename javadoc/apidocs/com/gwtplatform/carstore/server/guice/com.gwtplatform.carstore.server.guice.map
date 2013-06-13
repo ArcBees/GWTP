@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ServerModule.html" title="com.gwtplatform.carstore.server.guice.ServerModule" alt="" coords="67,233,170,258"/>
+<area shape="rect" id="node1" href="./ServerModule.html" title="&lt;TABLE&gt;" alt="" coords="57,221,181,269"/>
+<area shape="rect" id="node2_1" href="./GuiceServletConfig.html" title="com.gwtplatform.carstore.server.guice.GuiceServletConfig" alt="" coords="51,161,186,186"/>
+<area shape="rect" id="node2" href="./GuiceServletConfig.html" title="&lt;TABLE&gt;" alt="" coords="41,149,197,197"/>
+<area shape="rect" id="node3_2" href="./GuiceRestEasyFilterDispatcher.html" title="com.gwtplatform.carstore.server.guice.GuiceRestEasyFilterDispatcher" alt="" coords="16,89,221,114"/>
+<area shape="rect" id="node3" href="./GuiceRestEasyFilterDispatcher.html" title="&lt;TABLE&gt;" alt="" coords="5,77,232,125"/>
+<area shape="rect" id="node4_3" href="./DispatchServletModule.html" title="com.gwtplatform.carstore.server.guice.DispatchServletModule" alt="" coords="40,17,197,42"/>
+<area shape="rect" id="node4" href="./DispatchServletModule.html" title="&lt;TABLE&gt;" alt="" coords="29,5,208,53"/>
+</map>

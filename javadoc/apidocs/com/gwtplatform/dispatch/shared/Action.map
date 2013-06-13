@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UnsecuredActionImpl.html" title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" alt="" coords="432,17,696,42"/>
+<area shape="rect" id="node1" href="./UnsecuredActionImpl.html" title="&lt;TABLE&gt;" alt="" coords="421,5,707,53"/>
+<area shape="rect" id="node2_1" href="./BatchAction.html" title="com.gwtplatform.dispatch.shared.BatchAction" alt="" coords="519,89,609,114"/>
+<area shape="rect" id="node2" href="./BatchAction.html" title="&lt;TABLE&gt;" alt="" coords="508,77,620,125"/>
+<area shape="rect" id="node3_2" href="./ActionImpl.html" title="com.gwtplatform.dispatch.shared.ActionImpl" alt="" coords="464,161,664,186"/>
+<area shape="rect" id="node3" href="./ActionImpl.html" title="&lt;TABLE&gt;" alt="" coords="453,149,675,197"/>
+<area shape="rect" id="node4_3" href="./Action.html" title="com.gwtplatform.dispatch.shared.Action" alt="" coords="187,117,362,158"/>
+<area shape="rect" id="node4" href="./Action.html" title="&lt;TABLE&gt;" alt="" coords="177,111,373,163"/>
+<area shape="rect" id="node5_4" href="./rest/RestAction.html" title="com.gwtplatform.dispatch.shared.rest.RestAction" alt="" coords="463,227,665,269"/>
+<area shape="rect" id="node5" href="./rest/RestAction.html" title="&lt;TABLE&gt;" alt="" coords="453,222,675,274"/>
+<area shape="rect" id="node6_5" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html" title="com.google.gwt.user.client.rpc.IsSerializable" alt="" coords="17,117,117,158"/>
+<area shape="rect" id="node6" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html" title="&lt;TABLE&gt;" alt="" coords="6,111,127,163"/>
+</map>

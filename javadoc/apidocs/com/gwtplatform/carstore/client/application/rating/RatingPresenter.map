@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../../mvp/client/Presenter.html" title="com.gwtplatform.mvp.client.Presenter" alt="" coords="17,17,362,42"/>
+<area shape="rect" id="node1" href="../../../../mvp/client/Presenter.html" title="&lt;TABLE&gt;" alt="" coords="6,5,373,53"/>
+<area shape="rect" id="node5_1" href="./RatingPresenter.html" title="com.gwtplatform.carstore.client.application.rating.RatingPresenter" alt="" coords="433,130,549,155"/>
+<area shape="rect" id="node5" href="./RatingPresenter.html" title="&lt;TABLE&gt;" alt="" coords="422,119,559,167"/>
+<area shape="rect" id="node2_2" href="../event/ActionBarEvent.ActionBarHandler.html" title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" alt="" coords="127,83,251,125"/>
+<area shape="rect" id="node2" href="../event/ActionBarEvent.ActionBarHandler.html" title="&lt;TABLE&gt;" alt="" coords="117,78,262,130"/>
+<area shape="rect" id="node3_3" href="./event/RatingAddedEvent.RatingAddedHandler.html" title="com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent.RatingAddedHandler" alt="" coords="117,159,261,201"/>
+<area shape="rect" id="node3" href="./event/RatingAddedEvent.RatingAddedHandler.html" title="&lt;TABLE&gt;" alt="" coords="107,154,272,206"/>
+<area shape="rect" id="node4_4" href="./RatingUiHandlers.html" title="com.gwtplatform.carstore.client.application.rating.RatingUiHandlers" alt="" coords="127,235,251,277"/>
+<area shape="rect" id="node4" href="./RatingUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="117,230,262,282"/>
+</map>

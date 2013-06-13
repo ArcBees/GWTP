@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ServiceUrl.html" title="com.gwtplatform.crawler.server.ServiceUrl" alt="" coords="19,161,101,186"/>
+<area shape="rect" id="node1" href="./ServiceUrl.html" title="&lt;TABLE&gt;" alt="" coords="9,149,111,197"/>
+<area shape="rect" id="node2_1" href="./ServiceKey.html" title="com.gwtplatform.crawler.server.ServiceKey" alt="" coords="16,89,104,114"/>
+<area shape="rect" id="node2" href="./ServiceKey.html" title="&lt;TABLE&gt;" alt="" coords="5,77,115,125"/>
+<area shape="rect" id="node3_2" href="./CrawlFilter.html" title="com.gwtplatform.crawler.server.CrawlFilter" alt="" coords="18,17,102,42"/>
+<area shape="rect" id="node3" href="./CrawlFilter.html" title="&lt;TABLE&gt;" alt="" coords="7,5,113,53"/>
+</map>

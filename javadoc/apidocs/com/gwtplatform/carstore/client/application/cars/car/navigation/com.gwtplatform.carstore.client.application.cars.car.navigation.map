@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Tab.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.Tab" alt="" coords="301,545,344,570"/>
+<area shape="rect" id="node1" href="./Tab.html" title="&lt;TABLE&gt;" alt="" coords="287,533,359,581"/>
+<area shape="rect" id="node2_1" href="./NavigationUiHandlers.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers" alt="" coords="19,385,168,426"/>
+<area shape="rect" id="node2" href="./NavigationUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="8,379,179,431"/>
+<area shape="rect" id="node4_2" href="./NavigationTabPresenter.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" alt="" coords="241,431,405,457"/>
+<area shape="rect" id="node4" href="./NavigationTabPresenter.html" title="&lt;TABLE&gt;" alt="" coords="230,420,415,468"/>
+<area shape="rect" id="node3_3" href="./NavigationTabView.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView" alt="" coords="255,317,390,342"/>
+<area shape="rect" id="node3" href="./NavigationTabView.html" title="&lt;TABLE&gt;" alt="" coords="245,305,401,353"/>
+<area shape="rect" id="node5_4" href="./NavigationTabPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView" alt="" coords="50,309,137,350"/>
+<area shape="rect" id="node5" href="./NavigationTabPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="39,303,147,355"/>
+<area shape="rect" id="node6_5" href="./NavigationTabEvent.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent" alt="" coords="23,242,163,267"/>
+<area shape="rect" id="node6" href="./NavigationTabEvent.html" title="&lt;TABLE&gt;" alt="" coords="13,231,174,279"/>
+<area shape="rect" id="node7_6" href="./NavigationTabEvent.NavigationTabHandler.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler" alt="" coords="17,461,170,502"/>
+<area shape="rect" id="node7" href="./NavigationTabEvent.NavigationTabHandler.html" title="&lt;TABLE&gt;" alt="" coords="6,455,181,507"/>
+<area shape="rect" id="node8_7" href="./NavigationTab.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" alt="" coords="40,159,147,201"/>
+<area shape="rect" id="node8" href="./NavigationTab.html" title="&lt;TABLE&gt;" alt="" coords="29,154,157,206"/>
+<area shape="rect" id="node9_8" href="./CloseTabEvent.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent" alt="" coords="38,93,149,118"/>
+<area shape="rect" id="node9" href="./CloseTabEvent.html" title="&lt;TABLE&gt;" alt="" coords="27,81,159,129"/>
+<area shape="rect" id="node10_9" href="./CloseTabEvent.CloseTabHandler.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.CloseTabHandler" alt="" coords="31,10,155,51"/>
+<area shape="rect" id="node10" href="./CloseTabEvent.CloseTabHandler.html" title="&lt;TABLE&gt;" alt="" coords="21,5,166,57"/>
+<area shape="rect" id="node11_10" href="./CloseTabEvent.HasCloseTabHandlers.html" title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers" alt="" coords="16,537,171,578"/>
+<area shape="rect" id="node11" href="./CloseTabEvent.HasCloseTabHandlers.html" title="&lt;TABLE&gt;" alt="" coords="5,531,181,583"/>
+</map>

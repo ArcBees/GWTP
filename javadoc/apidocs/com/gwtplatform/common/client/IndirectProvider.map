@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./StandardProvider.html" title="com.gwtplatform.common.client.StandardProvider" alt="" coords="327,17,475,42"/>
+<area shape="rect" id="node1" href="./StandardProvider.html" title="&lt;TABLE&gt;" alt="" coords="317,5,486,53"/>
+<area shape="rect" id="node2_1" href="./IndirectProvider.html" title="com.gwtplatform.common.client.IndirectProvider" alt="" coords="17,81,154,122"/>
+<area shape="rect" id="node2" href="./IndirectProvider.html" title="&lt;TABLE&gt;" alt="" coords="6,75,165,127"/>
+<area shape="rect" id="node3_2" href="./CodeSplitProvider.html" title="com.gwtplatform.common.client.CodeSplitProvider" alt="" coords="326,89,477,114"/>
+<area shape="rect" id="node3" href="./CodeSplitProvider.html" title="&lt;TABLE&gt;" alt="" coords="315,77,487,125"/>
+<area shape="rect" id="node4_3" href="./CodeSplitBundleProvider.html" title="com.gwtplatform.common.client.CodeSplitBundleProvider" alt="" coords="224,161,579,186"/>
+<area shape="rect" id="node4" href="./CodeSplitBundleProvider.html" title="&lt;TABLE&gt;" alt="" coords="213,149,589,197"/>
+</map>

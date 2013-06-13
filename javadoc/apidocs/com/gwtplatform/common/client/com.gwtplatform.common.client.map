@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./StandardProvider.html" title="com.gwtplatform.common.client.StandardProvider" alt="" coords="327,19,475,45"/>
+<area shape="rect" id="node1" href="./StandardProvider.html" title="&lt;TABLE&gt;" alt="" coords="317,8,486,56"/>
+<area shape="rect" id="node2_1" href="./ProviderBundle.html" title="com.gwtplatform.common.client.ProviderBundle" alt="" coords="30,17,141,42"/>
+<area shape="rect" id="node2" href="./ProviderBundle.html" title="&lt;TABLE&gt;" alt="" coords="19,5,151,53"/>
+<area shape="rect" id="node3_2" href="./IndirectProvider.html" title="com.gwtplatform.common.client.IndirectProvider" alt="" coords="17,83,154,125"/>
+<area shape="rect" id="node3" href="./IndirectProvider.html" title="&lt;TABLE&gt;" alt="" coords="6,78,165,130"/>
+<area shape="rect" id="node4_3" href="./CodeSplitProvider.html" title="com.gwtplatform.common.client.CodeSplitProvider" alt="" coords="326,91,477,117"/>
+<area shape="rect" id="node4" href="./CodeSplitProvider.html" title="&lt;TABLE&gt;" alt="" coords="315,80,487,128"/>
+<area shape="rect" id="node5_4" href="./CodeSplitBundleProvider.html" title="com.gwtplatform.common.client.CodeSplitBundleProvider" alt="" coords="224,163,579,189"/>
+<area shape="rect" id="node5" href="./CodeSplitBundleProvider.html" title="&lt;TABLE&gt;" alt="" coords="213,152,589,200"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Translator.html" title="com.gwtplatform.carstore.client.util.exceptiontranslators.Translator" alt="" coords="17,45,103,86"/>
+<area shape="rect" id="node1" href="./Translator.html" title="&lt;TABLE&gt;" alt="" coords="6,39,114,91"/>
+<area shape="rect" id="node2_1" href="./NotNullTranslator.html" title="com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator" alt="" coords="174,17,298,42"/>
+<area shape="rect" id="node2" href="./NotNullTranslator.html" title="&lt;TABLE&gt;" alt="" coords="163,5,309,53"/>
+<area shape="rect" id="node3_2" href="./ForeignTranslator.html" title="com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator" alt="" coords="173,89,299,114"/>
+<area shape="rect" id="node3" href="./ForeignTranslator.html" title="&lt;TABLE&gt;" alt="" coords="163,77,309,125"/>
+</map>

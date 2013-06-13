@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./DispatchRequest.html" title="com.gwtplatform.dispatch.shared.DispatchRequest" alt="" coords="17,117,138,158"/>
+<area shape="rect" id="node1" href="./DispatchRequest.html" title="&lt;TABLE&gt;" alt="" coords="6,111,149,163"/>
+<area shape="rect" id="node2_1" href="../client/GwtHttpDispatchRequest.html" title="com.gwtplatform.dispatch.client.GwtHttpDispatchRequest" alt="" coords="222,17,391,42"/>
+<area shape="rect" id="node2" href="../client/GwtHttpDispatchRequest.html" title="&lt;TABLE&gt;" alt="" coords="211,5,402,53"/>
+<area shape="rect" id="node3_2" href="../client/DelegatingDispatchRequest.html" title="com.gwtplatform.dispatch.client.DelegatingDispatchRequest" alt="" coords="214,89,399,114"/>
+<area shape="rect" id="node3" href="../client/DelegatingDispatchRequest.html" title="&lt;TABLE&gt;" alt="" coords="203,77,410,125"/>
+<area shape="rect" id="node4_3" href="../client/CompletedDispatchRequest.html" title="com.gwtplatform.dispatch.client.CompletedDispatchRequest" alt="" coords="213,161,400,186"/>
+<area shape="rect" id="node4" href="../client/CompletedDispatchRequest.html" title="&lt;TABLE&gt;" alt="" coords="203,149,411,197"/>
+<area shape="rect" id="node5_4" href="../client/CallbackDispatchRequest.html" title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" alt="" coords="208,227,405,269"/>
+<area shape="rect" id="node5" href="../client/CallbackDispatchRequest.html" title="&lt;TABLE&gt;" alt="" coords="197,222,416,274"/>
+</map>

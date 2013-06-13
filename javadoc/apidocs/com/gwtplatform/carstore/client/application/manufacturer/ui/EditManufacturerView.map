@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../../../mvp/client/PopupViewWithUiHandlers.html" title="com.gwtplatform.mvp.client.PopupViewWithUiHandlers" alt="" coords="16,17,341,42"/>
+<area shape="rect" id="node1" href="../../../../../mvp/client/PopupViewWithUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="5,5,352,53"/>
+<area shape="rect" id="node2_1" href="./EditManufacturerView.html" title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView" alt="" coords="411,91,562,117"/>
+<area shape="rect" id="node2" href="./EditManufacturerView.html" title="&lt;TABLE&gt;" alt="" coords="401,80,573,128"/>
+<area shape="rect" id="node3_2" href="./EditManufacturerPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView" alt="" coords="135,83,222,125"/>
+<area shape="rect" id="node3" href="./EditManufacturerPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="125,78,233,130"/>
+<area shape="rect" id="node4_3" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html" title="com.google.gwt.editor.client.Editor" alt="" coords="135,159,222,201"/>
+<area shape="rect" id="node4" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html" title="&lt;TABLE&gt;" alt="" coords="125,154,233,206"/>
+</map>

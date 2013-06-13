@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider" alt="" coords="16,45,117,86"/>
+<area shape="rect" id="node1" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.html" title="&lt;TABLE&gt;" alt="" coords="5,39,128,91"/>
+<area shape="rect" id="node2_1" href="../guice/GuiceBeanProvider.html" title="com.gwtplatform.dispatch.server.guice.GuiceBeanProvider" alt="" coords="189,17,325,42"/>
+<area shape="rect" id="node2" href="../guice/GuiceBeanProvider.html" title="&lt;TABLE&gt;" alt="" coords="179,5,336,53"/>
+<area shape="rect" id="node3_2" href="../spring/SpringBeanProvider.html" title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider" alt="" coords="187,89,327,114"/>
+<area shape="rect" id="node3" href="../spring/SpringBeanProvider.html" title="&lt;TABLE&gt;" alt="" coords="177,77,338,125"/>
+</map>

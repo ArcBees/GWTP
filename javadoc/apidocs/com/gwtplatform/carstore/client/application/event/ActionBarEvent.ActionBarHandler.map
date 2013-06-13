@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../cars/car/CarPresenter.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" alt="" coords="427,17,527,42"/>
+<area shape="rect" id="node1" href="../cars/car/CarPresenter.html" title="&lt;TABLE&gt;" alt="" coords="417,5,538,53"/>
+<area shape="rect" id="node2_1" href="../cars/CarsPresenter.html" title="com.gwtplatform.carstore.client.application.cars.CarsPresenter" alt="" coords="424,89,531,114"/>
+<area shape="rect" id="node2" href="../cars/CarsPresenter.html" title="&lt;TABLE&gt;" alt="" coords="413,77,541,125"/>
+<area shape="rect" id="node3_2" href="./ActionBarEvent.ActionBarHandler.html" title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" alt="" coords="187,189,311,230"/>
+<area shape="rect" id="node3" href="./ActionBarEvent.ActionBarHandler.html" title="&lt;TABLE&gt;" alt="" coords="177,183,322,235"/>
+<area shape="rect" id="node4_3" href="../manufacturer/ManufacturerPresenter.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter" alt="" coords="399,161,555,186"/>
+<area shape="rect" id="node4" href="../manufacturer/ManufacturerPresenter.html" title="&lt;TABLE&gt;" alt="" coords="389,149,566,197"/>
+<area shape="rect" id="node5_4" href="../manufacturer/ManufacturerDetailPresenter.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter" alt="" coords="382,233,573,258"/>
+<area shape="rect" id="node5" href="../manufacturer/ManufacturerDetailPresenter.html" title="&lt;TABLE&gt;" alt="" coords="371,221,583,269"/>
+<area shape="rect" id="node6_5" href="../rating/RatingPresenter.html" title="com.gwtplatform.carstore.client.application.rating.RatingPresenter" alt="" coords="419,305,535,330"/>
+<area shape="rect" id="node6" href="../rating/RatingPresenter.html" title="&lt;TABLE&gt;" alt="" coords="409,293,546,341"/>
+<area shape="rect" id="node7_6" href="../rating/RatingDetailPresenter.html" title="com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter" alt="" coords="402,377,553,402"/>
+<area shape="rect" id="node7" href="../rating/RatingDetailPresenter.html" title="&lt;TABLE&gt;" alt="" coords="391,365,563,413"/>
+<area shape="rect" id="node8_7" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html" title="com.google.gwt.event.shared.EventHandler" alt="" coords="16,189,117,230"/>
+<area shape="rect" id="node8" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html" title="&lt;TABLE&gt;" alt="" coords="5,183,128,235"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./RootPresenter.html" title="com.gwtplatform.mvp.client.RootPresenter" alt="" coords="312,206,419,231"/>
+<area shape="rect" id="node1" href="./RootPresenter.html" title="&lt;TABLE&gt;" alt="" coords="301,195,429,243"/>
+<area shape="rect" id="node2_1" href="./PresenterWidget.html" title="com.gwtplatform.mvp.client.PresenterWidget" alt="" coords="16,17,243,42"/>
+<area shape="rect" id="node2" href="./PresenterWidget.html" title="&lt;TABLE&gt;" alt="" coords="5,5,253,53"/>
+<area shape="rect" id="node3_2" href="./proxy/RevealRootPopupContentHandler.html" title="com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler" alt="" coords="19,83,240,125"/>
+<area shape="rect" id="node3" href="./proxy/RevealRootPopupContentHandler.html" title="&lt;TABLE&gt;" alt="" coords="8,78,251,130"/>
+<area shape="rect" id="node4_3" href="./proxy/RevealRootLayoutContentHandler.html" title="com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler" alt="" coords="18,159,241,201"/>
+<area shape="rect" id="node4" href="./proxy/RevealRootLayoutContentHandler.html" title="&lt;TABLE&gt;" alt="" coords="7,154,251,206"/>
+<area shape="rect" id="node5_4" href="./proxy/RevealRootContentHandler.html" title="com.gwtplatform.mvp.client.proxy.RevealRootContentHandler" alt="" coords="38,235,221,277"/>
+<area shape="rect" id="node5" href="./proxy/RevealRootContentHandler.html" title="&lt;TABLE&gt;" alt="" coords="27,230,231,282"/>
+<area shape="rect" id="node6_5" href="./proxy/ResetPresentersHandler.html" title="com.gwtplatform.mvp.client.proxy.ResetPresentersHandler" alt="" coords="46,311,213,353"/>
+<area shape="rect" id="node6" href="./proxy/ResetPresentersHandler.html" title="&lt;TABLE&gt;" alt="" coords="35,306,223,358"/>
+<area shape="rect" id="node7_6" href="./proxy/LockInteractionHandler.html" title="com.gwtplatform.mvp.client.proxy.LockInteractionHandler" alt="" coords="51,387,208,429"/>
+<area shape="rect" id="node7" href="./proxy/LockInteractionHandler.html" title="&lt;TABLE&gt;" alt="" coords="40,382,219,434"/>
+</map>

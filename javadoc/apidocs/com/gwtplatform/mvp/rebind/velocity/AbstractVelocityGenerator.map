@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./AbstractVelocityGenerator.html" title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" alt="" coords="16,125,192,150"/>
+<area shape="rect" id="node1" href="./AbstractVelocityGenerator.html" title="&lt;TABLE&gt;" alt="" coords="5,113,203,161"/>
+<area shape="rect" id="node2_1" href="./ginjectors/GinjectorProviderGenerator.html" title="com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator" alt="" coords="297,17,479,42"/>
+<area shape="rect" id="node2" href="./ginjectors/GinjectorProviderGenerator.html" title="&lt;TABLE&gt;" alt="" coords="286,5,490,53"/>
+<area shape="rect" id="node3_2" href="./ginjectors/FormFactorGinjectorProviderGenerator.html" title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator" alt="" coords="262,89,514,114"/>
+<area shape="rect" id="node3" href="./ginjectors/FormFactorGinjectorProviderGenerator.html" title="&lt;TABLE&gt;" alt="" coords="251,77,525,125"/>
+<area shape="rect" id="node4_3" href="./ginjectors/FormFactorGinjectorGenerator.html" title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator" alt="" coords="287,161,489,186"/>
+<area shape="rect" id="node4" href="./ginjectors/FormFactorGinjectorGenerator.html" title="&lt;TABLE&gt;" alt="" coords="276,149,500,197"/>
+<area shape="rect" id="node5_4" href="./proxy/VelocityPlacetokenGenerator.html" title="com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator" alt="" coords="291,233,485,258"/>
+<area shape="rect" id="node5" href="./proxy/VelocityPlacetokenGenerator.html" title="&lt;TABLE&gt;" alt="" coords="281,221,495,269"/>
+</map>

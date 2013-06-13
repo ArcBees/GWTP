@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SecurityParameters.html" title="com.gwtplatform.carstore.server.authentication.SecurityParameters" alt="" coords="29,310,166,335"/>
+<area shape="rect" id="node1" href="./SecurityParameters.html" title="&lt;TABLE&gt;" alt="" coords="18,299,177,347"/>
+<area shape="rect" id="node2_1" href="./PasswordSecurity.html" title="com.gwtplatform.carstore.server.authentication.PasswordSecurity" alt="" coords="34,227,161,269"/>
+<area shape="rect" id="node2" href="./PasswordSecurity.html" title="&lt;TABLE&gt;" alt="" coords="23,222,171,274"/>
+<area shape="rect" id="node4_2" href="./BCryptPasswordSecurity.html" title="com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity" alt="" coords="248,235,416,261"/>
+<area shape="rect" id="node4" href="./BCryptPasswordSecurity.html" title="&lt;TABLE&gt;" alt="" coords="237,224,427,272"/>
+<area shape="rect" id="node3_3" href="./CurrentUserDtoProvider.html" title="com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider" alt="" coords="16,161,179,186"/>
+<area shape="rect" id="node3" href="./CurrentUserDtoProvider.html" title="&lt;TABLE&gt;" alt="" coords="5,149,189,197"/>
+<area shape="rect" id="node5_4" href="./Authenticator.html" title="com.gwtplatform.carstore.server.authentication.Authenticator" alt="" coords="48,89,147,114"/>
+<area shape="rect" id="node5" href="./Authenticator.html" title="&lt;TABLE&gt;" alt="" coords="37,77,157,125"/>
+<area shape="rect" id="node6_5" href="./AuthenticationException.html" title="com.gwtplatform.carstore.server.authentication.AuthenticationException" alt="" coords="16,17,179,42"/>
+<area shape="rect" id="node6" href="./AuthenticationException.html" title="&lt;TABLE&gt;" alt="" coords="5,5,189,53"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./RatingColumnsDefinition.html" title="com.gwtplatform.carstore.client.application.rating.ui.RatingColumnsDefinition" alt="" coords="17,162,183,203"/>
+<area shape="rect" id="node1" href="./RatingColumnsDefinition.html" title="&lt;TABLE&gt;" alt="" coords="6,157,194,209"/>
+<area shape="rect" id="node2_1" href="./EditRatingView.html" title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingView" alt="" coords="269,94,379,119"/>
+<area shape="rect" id="node2" href="./EditRatingView.html" title="&lt;TABLE&gt;" alt="" coords="258,83,390,131"/>
+<area shape="rect" id="node3_2" href="./EditRatingUiHandlers.html" title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers" alt="" coords="26,10,174,51"/>
+<area shape="rect" id="node3" href="./EditRatingUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="15,5,185,57"/>
+<area shape="rect" id="node4_3" href="./EditRatingPresenter.html" title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter" alt="" coords="254,18,394,43"/>
+<area shape="rect" id="node4" href="./EditRatingPresenter.html" title="&lt;TABLE&gt;" alt="" coords="243,7,405,55"/>
+<area shape="rect" id="node5_4" href="./EditRatingPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" alt="" coords="57,86,143,127"/>
+<area shape="rect" id="node5" href="./EditRatingPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="46,81,154,133"/>
+</map>

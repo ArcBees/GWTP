@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./RestService.html" title="com.gwtplatform.dispatch.shared.rest.RestService" alt="" coords="71,235,163,277"/>
+<area shape="rect" id="node1" href="./RestService.html" title="&lt;TABLE&gt;" alt="" coords="61,230,174,282"/>
+<area shape="rect" id="node2_1" href="./RestParameter.html" title="com.gwtplatform.dispatch.shared.rest.RestParameter" alt="" coords="63,169,172,194"/>
+<area shape="rect" id="node2" href="./RestParameter.html" title="&lt;TABLE&gt;" alt="" coords="52,157,183,205"/>
+<area shape="rect" id="node3_2" href="./RestAction.html" title="com.gwtplatform.dispatch.shared.rest.RestAction" alt="" coords="17,86,218,127"/>
+<area shape="rect" id="node3" href="./RestAction.html" title="&lt;TABLE&gt;" alt="" coords="6,81,229,133"/>
+<area shape="rect" id="node4_3" href="./HttpMethod.html" title="com.gwtplatform.dispatch.shared.rest.HttpMethod" alt="" coords="63,10,172,51"/>
+<area shape="rect" id="node4" href="./HttpMethod.html" title="&lt;TABLE&gt;" alt="" coords="52,5,183,57"/>
+</map>

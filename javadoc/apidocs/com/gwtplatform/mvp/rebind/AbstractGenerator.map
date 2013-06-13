@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ProviderBundleGenerator.html" title="com.gwtplatform.mvp.rebind.ProviderBundleGenerator" alt="" coords="381,17,552,42"/>
+<area shape="rect" id="node1" href="./ProviderBundleGenerator.html" title="&lt;TABLE&gt;" alt="" coords="371,5,563,53"/>
+<area shape="rect" id="node2_1" href="./GinjectorGenerator.html" title="com.gwtplatform.mvp.rebind.GinjectorGenerator" alt="" coords="400,89,533,114"/>
+<area shape="rect" id="node2" href="./GinjectorGenerator.html" title="&lt;TABLE&gt;" alt="" coords="389,77,544,125"/>
+<area shape="rect" id="node3_2" href="./ApplicationControllerGenerator.html" title="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator" alt="" coords="365,161,568,186"/>
+<area shape="rect" id="node3" href="./ApplicationControllerGenerator.html" title="&lt;TABLE&gt;" alt="" coords="355,149,579,197"/>
+<area shape="rect" id="node4_3" href="./AbstractGenerator.html" title="com.gwtplatform.mvp.rebind.AbstractGenerator" alt="" coords="166,89,295,114"/>
+<area shape="rect" id="node4" href="./AbstractGenerator.html" title="&lt;TABLE&gt;" alt="" coords="155,77,306,125"/>
+<area shape="rect" id="node5_4" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html" title="com.google.gwt.core.ext.Generator" alt="" coords="16,89,96,114"/>
+<area shape="rect" id="node5" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html" title="&lt;TABLE&gt;" alt="" coords="5,77,107,125"/>
+</map>

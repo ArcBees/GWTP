@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UserSession.html" title="com.gwtplatform.carstore.server.dao.domain.UserSession" alt="" coords="20,377,116,402"/>
+<area shape="rect" id="node1" href="./UserSession.html" title="&lt;TABLE&gt;" alt="" coords="9,365,127,413"/>
+<area shape="rect" id="node2_1" href="./User.html" title="com.gwtplatform.carstore.server.dao.domain.User" alt="" coords="44,305,92,330"/>
+<area shape="rect" id="node2" href="./User.html" title="&lt;TABLE&gt;" alt="" coords="32,293,104,341"/>
+<area shape="rect" id="node3_2" href="./Rating.html" title="com.gwtplatform.carstore.server.dao.domain.Rating" alt="" coords="39,233,97,258"/>
+<area shape="rect" id="node3" href="./Rating.html" title="&lt;TABLE&gt;" alt="" coords="28,221,108,269"/>
+<area shape="rect" id="node4_3" href="./Manufacturer.html" title="com.gwtplatform.carstore.server.dao.domain.Manufacturer" alt="" coords="19,161,117,186"/>
+<area shape="rect" id="node4" href="./Manufacturer.html" title="&lt;TABLE&gt;" alt="" coords="8,149,128,197"/>
+<area shape="rect" id="node5_4" href="./CarProperties.html" title="com.gwtplatform.carstore.server.dao.domain.CarProperties" alt="" coords="17,89,119,114"/>
+<area shape="rect" id="node5" href="./CarProperties.html" title="&lt;TABLE&gt;" alt="" coords="6,77,130,125"/>
+<area shape="rect" id="node6_5" href="./Car.html" title="com.gwtplatform.carstore.server.dao.domain.Car" alt="" coords="47,17,89,42"/>
+<area shape="rect" id="node6" href="./Car.html" title="&lt;TABLE&gt;" alt="" coords="32,5,104,53"/>
+</map>

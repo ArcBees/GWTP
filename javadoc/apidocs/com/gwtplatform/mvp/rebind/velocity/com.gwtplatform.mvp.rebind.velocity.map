@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./VelocityProperties.html" title="com.gwtplatform.mvp.rebind.velocity.VelocityProperties" alt="" coords="55,377,183,402"/>
+<area shape="rect" id="node1" href="./VelocityProperties.html" title="&lt;TABLE&gt;" alt="" coords="44,365,193,413"/>
+<area shape="rect" id="node2_1" href="./RebindModule.html" title="com.gwtplatform.mvp.rebind.velocity.RebindModule" alt="" coords="65,305,172,330"/>
+<area shape="rect" id="node2" href="./RebindModule.html" title="&lt;TABLE&gt;" alt="" coords="55,293,183,341"/>
+<area shape="rect" id="node3_2" href="./Logger.html" title="com.gwtplatform.mvp.rebind.velocity.Logger" alt="" coords="88,233,149,258"/>
+<area shape="rect" id="node3" href="./Logger.html" title="&lt;TABLE&gt;" alt="" coords="77,221,160,269"/>
+<area shape="rect" id="node4_3" href="./GeneratorUtil.html" title="com.gwtplatform.mvp.rebind.velocity.GeneratorUtil" alt="" coords="69,161,169,186"/>
+<area shape="rect" id="node4" href="./GeneratorUtil.html" title="&lt;TABLE&gt;" alt="" coords="58,149,179,197"/>
+<area shape="rect" id="node5_4" href="./GenerateFormFactorGinjectors.html" title="com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors" alt="" coords="17,89,221,114"/>
+<area shape="rect" id="node5" href="./GenerateFormFactorGinjectors.html" title="&lt;TABLE&gt;" alt="" coords="6,77,231,125"/>
+<area shape="rect" id="node6_5" href="./AbstractVelocityGenerator.html" title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" alt="" coords="31,17,207,42"/>
+<area shape="rect" id="node6" href="./AbstractVelocityGenerator.html" title="&lt;TABLE&gt;" alt="" coords="20,5,217,53"/>
+</map>

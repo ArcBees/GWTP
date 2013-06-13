@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../cars/car/CarPresenter.html" title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" alt="" coords="417,17,517,42"/>
+<area shape="rect" id="node1" href="../cars/car/CarPresenter.html" title="&lt;TABLE&gt;" alt="" coords="406,5,527,53"/>
+<area shape="rect" id="node2_1" href="./GoBackEvent.GoBackHandler.html" title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" alt="" coords="187,81,301,122"/>
+<area shape="rect" id="node2" href="./GoBackEvent.GoBackHandler.html" title="&lt;TABLE&gt;" alt="" coords="176,75,312,127"/>
+<area shape="rect" id="node3_2" href="../manufacturer/ManufacturerDetailPresenter.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter" alt="" coords="371,89,562,114"/>
+<area shape="rect" id="node3" href="../manufacturer/ManufacturerDetailPresenter.html" title="&lt;TABLE&gt;" alt="" coords="361,77,573,125"/>
+<area shape="rect" id="node4_3" href="../rating/RatingDetailPresenter.html" title="com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter" alt="" coords="391,161,542,186"/>
+<area shape="rect" id="node4" href="../rating/RatingDetailPresenter.html" title="&lt;TABLE&gt;" alt="" coords="381,149,553,197"/>
+<area shape="rect" id="node5_4" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html" title="com.google.gwt.event.shared.EventHandler" alt="" coords="16,81,117,122"/>
+<area shape="rect" id="node5" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html" title="&lt;TABLE&gt;" alt="" coords="5,75,128,127"/>
+</map>

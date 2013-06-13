@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Dispatch.html" title="com.gwtplatform.dispatch.server.Dispatch" alt="" coords="17,45,103,86"/>
+<area shape="rect" id="node1" href="./Dispatch.html" title="&lt;TABLE&gt;" alt="" coords="6,39,114,91"/>
+<area shape="rect" id="node2_1" href="./AbstractDispatchImpl.html" title="com.gwtplatform.dispatch.server.AbstractDispatchImpl" alt="" coords="173,53,320,78"/>
+<area shape="rect" id="node2" href="./AbstractDispatchImpl.html" title="&lt;TABLE&gt;" alt="" coords="163,41,331,89"/>
+<area shape="rect" id="node3_2" href="./guice/DispatchImpl.html" title="com.gwtplatform.dispatch.server.guice.DispatchImpl" alt="" coords="390,17,487,42"/>
+<area shape="rect" id="node3" href="./guice/DispatchImpl.html" title="&lt;TABLE&gt;" alt="" coords="379,5,498,53"/>
+<area shape="rect" id="node4_3" href="./spring/DispatchImpl.html" title="com.gwtplatform.dispatch.server.spring.DispatchImpl" alt="" coords="390,89,487,114"/>
+<area shape="rect" id="node4" href="./spring/DispatchImpl.html" title="&lt;TABLE&gt;" alt="" coords="379,77,498,125"/>
+</map>

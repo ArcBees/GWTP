@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ManufacturerView.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView" alt="" coords="317,541,445,566"/>
+<area shape="rect" id="node1" href="./ManufacturerView.html" title="&lt;TABLE&gt;" alt="" coords="307,529,456,577"/>
+<area shape="rect" id="node2_1" href="./ManufacturerUiHandlers.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers" alt="" coords="34,459,198,501"/>
+<area shape="rect" id="node2" href="./ManufacturerUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="23,454,209,506"/>
+<area shape="rect" id="node3_2" href="./ManufacturerPresenter.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter" alt="" coords="303,467,459,493"/>
+<area shape="rect" id="node3" href="./ManufacturerPresenter.html" title="&lt;TABLE&gt;" alt="" coords="293,456,470,504"/>
+<area shape="rect" id="node4_3" href="./ManufacturerPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView" alt="" coords="73,570,159,611"/>
+<area shape="rect" id="node4" href="./ManufacturerPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="62,565,170,617"/>
+<area shape="rect" id="node7_4" href="./ManufacturerMobileView.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileView" alt="" coords="298,613,465,638"/>
+<area shape="rect" id="node7" href="./ManufacturerMobileView.html" title="&lt;TABLE&gt;" alt="" coords="287,601,475,649"/>
+<area shape="rect" id="node5_5" href="./ManufacturerPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyProxy" alt="" coords="73,383,159,425"/>
+<area shape="rect" id="node5" href="./ManufacturerPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="62,378,170,430"/>
+<area shape="rect" id="node6_6" href="./ManufacturerModule.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule" alt="" coords="45,317,187,342"/>
+<area shape="rect" id="node6" href="./ManufacturerModule.html" title="&lt;TABLE&gt;" alt="" coords="34,305,198,353"/>
+<area shape="rect" id="node8_7" href="./ManufacturerMobileModule.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule" alt="" coords="25,245,207,270"/>
+<area shape="rect" id="node8" href="./ManufacturerMobileModule.html" title="&lt;TABLE&gt;" alt="" coords="15,233,217,281"/>
+<area shape="rect" id="node9_8" href="./ManufacturerDetailView.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView" alt="" coords="301,170,462,195"/>
+<area shape="rect" id="node9" href="./ManufacturerDetailView.html" title="&lt;TABLE&gt;" alt="" coords="290,159,473,207"/>
+<area shape="rect" id="node10_9" href="./ManufacturerDetailUiHandlers.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers" alt="" coords="17,86,215,127"/>
+<area shape="rect" id="node10" href="./ManufacturerDetailUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="6,81,226,133"/>
+<area shape="rect" id="node11_10" href="./ManufacturerDetailPresenter.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter" alt="" coords="286,94,477,119"/>
+<area shape="rect" id="node11" href="./ManufacturerDetailPresenter.html" title="&lt;TABLE&gt;" alt="" coords="275,83,487,131"/>
+<area shape="rect" id="node12_11" href="./ManufacturerDetailPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView" alt="" coords="73,162,159,203"/>
+<area shape="rect" id="node12" href="./ManufacturerDetailPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="62,157,170,209"/>
+<area shape="rect" id="node13_12" href="./ManufacturerDetailPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy" alt="" coords="73,10,159,51"/>
+<area shape="rect" id="node13" href="./ManufacturerDetailPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="62,5,170,57"/>
+</map>

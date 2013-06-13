@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./LoginView.html" title="com.gwtplatform.carstore.client.application.login.LoginView" alt="" coords="242,311,323,337"/>
+<area shape="rect" id="node1" href="./LoginView.html" title="&lt;TABLE&gt;" alt="" coords="231,300,334,348"/>
+<area shape="rect" id="node2_1" href="./LoginUiHandlers.html" title="com.gwtplatform.carstore.client.application.login.LoginUiHandlers" alt="" coords="25,231,143,273"/>
+<area shape="rect" id="node2" href="./LoginUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="14,226,154,278"/>
+<area shape="rect" id="node3_2" href="./LoginPresenter.html" title="com.gwtplatform.carstore.client.application.login.LoginPresenter" alt="" coords="227,239,338,265"/>
+<area shape="rect" id="node3" href="./LoginPresenter.html" title="&lt;TABLE&gt;" alt="" coords="217,228,349,276"/>
+<area shape="rect" id="node4_3" href="./LoginPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView" alt="" coords="41,342,127,383"/>
+<area shape="rect" id="node4" href="./LoginPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="30,337,138,389"/>
+<area shape="rect" id="node7_4" href="./LoginMobileView.html" title="com.gwtplatform.carstore.client.application.login.LoginMobileView" alt="" coords="222,383,343,409"/>
+<area shape="rect" id="node7" href="./LoginMobileView.html" title="&lt;TABLE&gt;" alt="" coords="211,372,354,420"/>
+<area shape="rect" id="node5_5" href="./LoginPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyProxy" alt="" coords="41,155,127,197"/>
+<area shape="rect" id="node5" href="./LoginPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="30,150,138,202"/>
+<area shape="rect" id="node6_6" href="./LoginModule.html" title="com.gwtplatform.carstore.client.application.login.LoginModule" alt="" coords="36,89,132,114"/>
+<area shape="rect" id="node6" href="./LoginModule.html" title="&lt;TABLE&gt;" alt="" coords="25,77,143,125"/>
+<area shape="rect" id="node8_7" href="./LoginMobileModule.html" title="com.gwtplatform.carstore.client.application.login.LoginMobileModule" alt="" coords="16,17,152,42"/>
+<area shape="rect" id="node8" href="./LoginMobileModule.html" title="&lt;TABLE&gt;" alt="" coords="5,5,163,53"/>
+</map>

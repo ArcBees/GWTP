@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../../../mvp/client/PresenterWidget.html" title="com.gwtplatform.mvp.client.PresenterWidget" alt="" coords="16,17,243,42"/>
+<area shape="rect" id="node1" href="../../../../../mvp/client/PresenterWidget.html" title="&lt;TABLE&gt;" alt="" coords="5,5,253,53"/>
+<area shape="rect" id="node3_1" href="./EditManufacturerPresenter.html" title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter" alt="" coords="313,54,493,79"/>
+<area shape="rect" id="node3" href="./EditManufacturerPresenter.html" title="&lt;TABLE&gt;" alt="" coords="302,43,503,91"/>
+<area shape="rect" id="node2_2" href="./EditManufacturerUiHandlers.html" title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers" alt="" coords="35,83,223,125"/>
+<area shape="rect" id="node2" href="./EditManufacturerUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="25,78,234,130"/>
+</map>

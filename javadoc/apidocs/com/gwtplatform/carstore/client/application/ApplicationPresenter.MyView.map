@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../mvp/client/View.html" title="com.gwtplatform.mvp.client.View" alt="" coords="17,45,103,86"/>
+<area shape="rect" id="node1" href="../../../mvp/client/View.html" title="&lt;TABLE&gt;" alt="" coords="6,39,114,91"/>
+<area shape="rect" id="node3_1" href="./ApplicationPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView" alt="" coords="174,45,261,86"/>
+<area shape="rect" id="node3" href="./ApplicationPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="163,39,271,91"/>
+<area shape="rect" id="node2_2" href="./ApplicationView.html" title="com.gwtplatform.carstore.client.application.ApplicationView" alt="" coords="351,17,465,42"/>
+<area shape="rect" id="node2" href="./ApplicationView.html" title="&lt;TABLE&gt;" alt="" coords="340,5,476,53"/>
+<area shape="rect" id="node4_3" href="./ApplicationMobileView.html" title="com.gwtplatform.carstore.client.application.ApplicationMobileView" alt="" coords="331,89,485,114"/>
+<area shape="rect" id="node4" href="./ApplicationMobileView.html" title="&lt;TABLE&gt;" alt="" coords="321,77,495,125"/>
+</map>

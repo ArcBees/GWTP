@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ReportView.html" title="com.gwtplatform.carstore.client.application.report.ReportView" alt="" coords="249,277,338,302"/>
+<area shape="rect" id="node1" href="./ReportView.html" title="&lt;TABLE&gt;" alt="" coords="238,265,349,313"/>
+<area shape="rect" id="node2_1" href="./ReportPresenter.html" title="com.gwtplatform.carstore.client.application.report.ReportPresenter" alt="" coords="29,238,147,263"/>
+<area shape="rect" id="node2" href="./ReportPresenter.html" title="&lt;TABLE&gt;" alt="" coords="19,227,157,275"/>
+<area shape="rect" id="node3_2" href="./ReportPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView" alt="" coords="45,305,131,346"/>
+<area shape="rect" id="node3" href="./ReportPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="34,299,142,351"/>
+<area shape="rect" id="node6_3" href="./ReportMobileView.html" title="com.gwtplatform.carstore.client.application.report.ReportMobileView" alt="" coords="229,349,357,374"/>
+<area shape="rect" id="node6" href="./ReportMobileView.html" title="&lt;TABLE&gt;" alt="" coords="219,337,368,385"/>
+<area shape="rect" id="node4_4" href="./ReportPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyProxy" alt="" coords="45,155,131,197"/>
+<area shape="rect" id="node4" href="./ReportPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="34,150,142,202"/>
+<area shape="rect" id="node5_5" href="./ReportModule.html" title="com.gwtplatform.carstore.client.application.report.ReportModule" alt="" coords="36,89,140,114"/>
+<area shape="rect" id="node5" href="./ReportModule.html" title="&lt;TABLE&gt;" alt="" coords="25,77,151,125"/>
+<area shape="rect" id="node7_6" href="./ReportMobileModule.html" title="com.gwtplatform.carstore.client.application.report.ReportMobileModule" alt="" coords="17,17,159,42"/>
+<area shape="rect" id="node7" href="./ReportMobileModule.html" title="&lt;TABLE&gt;" alt="" coords="6,5,170,53"/>
+</map>

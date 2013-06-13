@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./TestActionHandler.html" title="com.gwtplatform.dispatch.server.actionhandler.TestActionHandler" alt="" coords="917,55,1046,81"/>
+<area shape="rect" id="node1" href="./TestActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="906,44,1057,92"/>
+<area shape="rect" id="node2_1" href="./BatchActionHandler.html" title="com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler" alt="" coords="913,127,1050,153"/>
+<area shape="rect" id="node2" href="./BatchActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="902,116,1061,164"/>
+<area shape="rect" id="node3_2" href="./ActionResult.html" title="com.gwtplatform.dispatch.server.actionhandler.ActionResult" alt="" coords="21,17,366,42"/>
+<area shape="rect" id="node3" href="./ActionResult.html" title="&lt;TABLE&gt;" alt="" coords="10,5,377,53"/>
+<area shape="rect" id="node4_3" href="./ActionHandler.html" title="com.gwtplatform.dispatch.server.actionhandler.ActionHandler" alt="" coords="17,83,370,125"/>
+<area shape="rect" id="node4" href="./ActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="6,78,381,130"/>
+<area shape="rect" id="node5_4" href="./AbstractActionHandler.html" title="com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler" alt="" coords="440,91,843,117"/>
+<area shape="rect" id="node5" href="./AbstractActionHandler.html" title="&lt;TABLE&gt;" alt="" coords="429,80,853,128"/>
+</map>

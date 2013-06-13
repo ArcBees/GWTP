@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../../../../mvp/client/View.html" title="com.gwtplatform.mvp.client.View" alt="" coords="101,10,187,51"/>
+<area shape="rect" id="node1" href="../../../../mvp/client/View.html" title="&lt;TABLE&gt;" alt="" coords="90,5,198,57"/>
+<area shape="rect" id="node4_1" href="./CarsPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView" alt="" coords="342,49,429,90"/>
+<area shape="rect" id="node4" href="./CarsPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="331,43,439,95"/>
+<area shape="rect" id="node2_2" href="../../../../mvp/client/HasUiHandlers.html" title="com.gwtplatform.mvp.client.HasUiHandlers" alt="" coords="17,86,271,127"/>
+<area shape="rect" id="node2" href="../../../../mvp/client/HasUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="6,81,282,133"/>
+<area shape="rect" id="node3_3" href="./CarsView.html" title="com.gwtplatform.carstore.client.application.cars.CarsView" alt="" coords="519,21,596,46"/>
+<area shape="rect" id="node3" href="./CarsView.html" title="&lt;TABLE&gt;" alt="" coords="508,9,607,57"/>
+<area shape="rect" id="node5_4" href="./CarsMobileView.html" title="com.gwtplatform.carstore.client.application.cars.CarsMobileView" alt="" coords="499,93,615,118"/>
+<area shape="rect" id="node5" href="./CarsMobileView.html" title="&lt;TABLE&gt;" alt="" coords="489,81,626,129"/>
+</map>

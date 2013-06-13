@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ServiceKey.html" title="com.gwtplatform.crawlerservice.server.ServiceKey" alt="" coords="56,233,144,258"/>
+<area shape="rect" id="node1" href="./ServiceKey.html" title="&lt;TABLE&gt;" alt="" coords="45,221,155,269"/>
+<area shape="rect" id="node2_1" href="./HtmlUnitTimeoutMillis.html" title="com.gwtplatform.crawlerservice.server.HtmlUnitTimeoutMillis" alt="" coords="25,161,175,186"/>
+<area shape="rect" id="node2" href="./HtmlUnitTimeoutMillis.html" title="&lt;TABLE&gt;" alt="" coords="15,149,185,197"/>
+<area shape="rect" id="node3_2" href="./CrawlServiceServlet.html" title="com.gwtplatform.crawlerservice.server.CrawlServiceServlet" alt="" coords="30,89,170,114"/>
+<area shape="rect" id="node3" href="./CrawlServiceServlet.html" title="&lt;TABLE&gt;" alt="" coords="19,77,181,125"/>
+<area shape="rect" id="node4_3" href="./CachedPageTimeoutSec.html" title="com.gwtplatform.crawlerservice.server.CachedPageTimeoutSec" alt="" coords="16,17,184,42"/>
+<area shape="rect" id="node4" href="./CachedPageTimeoutSec.html" title="&lt;TABLE&gt;" alt="" coords="5,5,195,53"/>
+</map>

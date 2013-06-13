@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./NavigationListStyle.html" title="com.gwtplatform.carstore.client.resources.NavigationListStyle" alt="" coords="41,922,175,963"/>
+<area shape="rect" id="node1" href="./NavigationListStyle.html" title="&lt;TABLE&gt;" alt="" coords="31,917,185,969"/>
+<area shape="rect" id="node2_1" href="./NavigationListStyle.ListStyle.html" title="com.gwtplatform.carstore.client.resources.NavigationListStyle.ListStyle" alt="" coords="65,846,151,887"/>
+<area shape="rect" id="node2" href="./NavigationListStyle.ListStyle.html" title="&lt;TABLE&gt;" alt="" coords="54,841,162,893"/>
+<area shape="rect" id="node3_2" href="./MobileNavigationListStyle.html" title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle" alt="" coords="21,770,195,811"/>
+<area shape="rect" id="node3" href="./MobileNavigationListStyle.html" title="&lt;TABLE&gt;" alt="" coords="11,765,205,817"/>
+<area shape="rect" id="node4_3" href="./MobileNavigationListStyle.ListStyle.html" title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle" alt="" coords="65,694,151,735"/>
+<area shape="rect" id="node4" href="./MobileNavigationListStyle.ListStyle.html" title="&lt;TABLE&gt;" alt="" coords="54,689,162,741"/>
+<area shape="rect" id="node5_4" href="./MobileDataListStyle.html" title="com.gwtplatform.carstore.client.resources.MobileDataListStyle" alt="" coords="39,618,177,659"/>
+<area shape="rect" id="node5" href="./MobileDataListStyle.html" title="&lt;TABLE&gt;" alt="" coords="29,613,187,665"/>
+<area shape="rect" id="node6_5" href="./MobileDataListStyle.ListStyle.html" title="com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle" alt="" coords="65,542,151,583"/>
+<area shape="rect" id="node6" href="./MobileDataListStyle.ListStyle.html" title="&lt;TABLE&gt;" alt="" coords="54,537,162,589"/>
+<area shape="rect" id="node7_6" href="./LoginMessages.html" title="com.gwtplatform.carstore.client.resources.LoginMessages" alt="" coords="51,466,165,507"/>
+<area shape="rect" id="node7" href="./LoginMessages.html" title="&lt;TABLE&gt;" alt="" coords="41,461,175,513"/>
+<area shape="rect" id="node8_7" href="./HeaderMessages.html" title="com.gwtplatform.carstore.client.resources.HeaderMessages" alt="" coords="46,390,170,431"/>
+<area shape="rect" id="node8" href="./HeaderMessages.html" title="&lt;TABLE&gt;" alt="" coords="35,385,181,437"/>
+<area shape="rect" id="node9_8" href="./EditRatingMessages.html" title="com.gwtplatform.carstore.client.resources.EditRatingMessages" alt="" coords="37,314,179,355"/>
+<area shape="rect" id="node9" href="./EditRatingMessages.html" title="&lt;TABLE&gt;" alt="" coords="26,309,190,361"/>
+<area shape="rect" id="node10_9" href="./EditManufacturerMessages.html" title="com.gwtplatform.carstore.client.resources.EditManufacturerMessages" alt="" coords="17,238,199,279"/>
+<area shape="rect" id="node10" href="./EditManufacturerMessages.html" title="&lt;TABLE&gt;" alt="" coords="6,233,210,285"/>
+<area shape="rect" id="node11_10" href="./CarMessages.html" title="com.gwtplatform.carstore.client.resources.CarMessages" alt="" coords="57,162,159,203"/>
+<area shape="rect" id="node11" href="./CarMessages.html" title="&lt;TABLE&gt;" alt="" coords="46,157,170,209"/>
+<area shape="rect" id="node12_11" href="./AppResources.html" title="com.gwtplatform.carstore.client.resources.AppResources" alt="" coords="54,86,162,127"/>
+<area shape="rect" id="node12" href="./AppResources.html" title="&lt;TABLE&gt;" alt="" coords="43,81,173,133"/>
+<area shape="rect" id="node13_12" href="./AppResources.Styles.html" title="com.gwtplatform.carstore.client.resources.AppResources.Styles" alt="" coords="65,10,151,51"/>
+<area shape="rect" id="node13" href="./AppResources.Styles.html" title="&lt;TABLE&gt;" alt="" coords="54,5,162,57"/>
+</map>

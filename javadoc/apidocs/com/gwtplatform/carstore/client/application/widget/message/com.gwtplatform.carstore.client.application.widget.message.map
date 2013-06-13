@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./MessagesView.html" title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" alt="" coords="229,389,339,414"/>
+<area shape="rect" id="node1" href="./MessagesView.html" title="&lt;TABLE&gt;" alt="" coords="219,377,349,425"/>
+<area shape="rect" id="node2_1" href="./MessageStyle.html" title="com.gwtplatform.carstore.client.application.widget.message.MessageStyle" alt="" coords="33,305,143,346"/>
+<area shape="rect" id="node2" href="./MessageStyle.html" title="&lt;TABLE&gt;" alt="" coords="23,299,153,351"/>
+<area shape="rect" id="node3_2" href="./MessagesPresenter.html" title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" alt="" coords="19,238,157,263"/>
+<area shape="rect" id="node3" href="./MessagesPresenter.html" title="&lt;TABLE&gt;" alt="" coords="8,227,168,275"/>
+<area shape="rect" id="node4_3" href="./MessagesPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView" alt="" coords="45,381,131,422"/>
+<area shape="rect" id="node4" href="./MessagesPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="34,375,142,427"/>
+<area shape="rect" id="node5_4" href="./MessagesModule.html" title="com.gwtplatform.carstore.client.application.widget.message.MessagesModule" alt="" coords="26,166,150,191"/>
+<area shape="rect" id="node5" href="./MessagesModule.html" title="&lt;TABLE&gt;" alt="" coords="15,155,161,203"/>
+<area shape="rect" id="node6_5" href="./MessageCloseDelay.html" title="com.gwtplatform.carstore.client.application.widget.message.MessageCloseDelay" alt="" coords="17,83,159,125"/>
+<area shape="rect" id="node6" href="./MessageCloseDelay.html" title="&lt;TABLE&gt;" alt="" coords="6,78,170,130"/>
+<area shape="rect" id="node7_6" href="./Message.html" title="com.gwtplatform.carstore.client.application.widget.message.Message" alt="" coords="51,17,125,42"/>
+<area shape="rect" id="node7" href="./Message.html" title="&lt;TABLE&gt;" alt="" coords="40,5,136,53"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./CarsView.html" title="com.gwtplatform.carstore.client.application.cars.CarsView" alt="" coords="247,383,324,409"/>
+<area shape="rect" id="node1" href="./CarsView.html" title="&lt;TABLE&gt;" alt="" coords="236,372,335,420"/>
+<area shape="rect" id="node2_1" href="./CarsUiHandlers.html" title="com.gwtplatform.carstore.client.application.cars.CarsUiHandlers" alt="" coords="29,303,144,345"/>
+<area shape="rect" id="node2" href="./CarsUiHandlers.html" title="&lt;TABLE&gt;" alt="" coords="19,298,155,350"/>
+<area shape="rect" id="node3_2" href="./CarsPresenter.html" title="com.gwtplatform.carstore.client.application.cars.CarsPresenter" alt="" coords="232,311,339,337"/>
+<area shape="rect" id="node3" href="./CarsPresenter.html" title="&lt;TABLE&gt;" alt="" coords="221,300,349,348"/>
+<area shape="rect" id="node4_3" href="./CarsPresenter.MyView.html" title="com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView" alt="" coords="43,414,130,455"/>
+<area shape="rect" id="node4" href="./CarsPresenter.MyView.html" title="&lt;TABLE&gt;" alt="" coords="33,409,141,461"/>
+<area shape="rect" id="node7_4" href="./CarsMobileView.html" title="com.gwtplatform.carstore.client.application.cars.CarsMobileView" alt="" coords="227,455,343,481"/>
+<area shape="rect" id="node7" href="./CarsMobileView.html" title="&lt;TABLE&gt;" alt="" coords="217,444,354,492"/>
+<area shape="rect" id="node5_5" href="./CarsPresenter.MyProxy.html" title="com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyProxy" alt="" coords="43,227,130,269"/>
+<area shape="rect" id="node5" href="./CarsPresenter.MyProxy.html" title="&lt;TABLE&gt;" alt="" coords="33,222,141,274"/>
+<area shape="rect" id="node6_6" href="./CarsModule.html" title="com.gwtplatform.carstore.client.application.cars.CarsModule" alt="" coords="41,161,133,186"/>
+<area shape="rect" id="node6" href="./CarsModule.html" title="&lt;TABLE&gt;" alt="" coords="30,149,143,197"/>
+<area shape="rect" id="node8_7" href="./CarsMobileModule.html" title="com.gwtplatform.carstore.client.application.cars.CarsMobileModule" alt="" coords="21,89,152,114"/>
+<area shape="rect" id="node8" href="./CarsMobileModule.html" title="&lt;TABLE&gt;" alt="" coords="11,77,163,125"/>
+<area shape="rect" id="node9_8" href="./CarsDesktopModule.html" title="com.gwtplatform.carstore.client.application.cars.CarsDesktopModule" alt="" coords="16,17,157,42"/>
+<area shape="rect" id="node9" href="./CarsDesktopModule.html" title="&lt;TABLE&gt;" alt="" coords="5,5,168,53"/>
+</map>

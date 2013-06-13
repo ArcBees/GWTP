@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./View.html" title="com.gwtplatform.mvp.client.View" alt="" coords="17,10,103,51"/>
+<area shape="rect" id="node1" href="./View.html" title="&lt;TABLE&gt;" alt="" coords="6,5,114,57"/>
+<area shape="rect" id="node2_1" href="./TabView.html" title="com.gwtplatform.mvp.client.TabView" alt="" coords="174,49,261,90"/>
+<area shape="rect" id="node2" href="./TabView.html" title="&lt;TABLE&gt;" alt="" coords="163,43,271,95"/>
+<area shape="rect" id="node3_2" href="./TabPanel.html" title="com.gwtplatform.mvp.client.TabPanel" alt="" coords="17,86,103,127"/>
+<area shape="rect" id="node3" href="./TabPanel.html" title="&lt;TABLE&gt;" alt="" coords="6,81,114,133"/>
+</map>

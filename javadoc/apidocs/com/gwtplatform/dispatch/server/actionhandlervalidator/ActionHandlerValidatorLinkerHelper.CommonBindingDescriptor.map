@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor" alt="" coords="16,45,165,86"/>
+<area shape="rect" id="node1" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html" title="&lt;TABLE&gt;" alt="" coords="5,39,176,91"/>
+<area shape="rect" id="node2_1" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html" title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" alt="" coords="235,53,439,78"/>
+<area shape="rect" id="node2" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html" title="&lt;TABLE&gt;" alt="" coords="225,41,450,89"/>
+<area shape="rect" id="node3_2" href="../guice/GuiceBeanProvider.GuiceBindingDescriptorAdapter.html" title="com.gwtplatform.dispatch.server.guice.GuiceBeanProvider.GuiceBindingDescriptorAdapter" alt="" coords="511,17,742,42"/>
+<area shape="rect" id="node3" href="../guice/GuiceBeanProvider.GuiceBindingDescriptorAdapter.html" title="&lt;TABLE&gt;" alt="" coords="501,5,753,53"/>
+<area shape="rect" id="node4_3" href="../spring/SpringBeanProvider.SpringBindingDescriptorAdapter.html" title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter" alt="" coords="509,89,744,114"/>
+<area shape="rect" id="node4" href="../spring/SpringBeanProvider.SpringBindingDescriptorAdapter.html" title="&lt;TABLE&gt;" alt="" coords="499,77,755,125"/>
+</map>

@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SpringBeanProvider.html" title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider" alt="" coords="63,665,203,690"/>
+<area shape="rect" id="node1" href="./SpringBeanProvider.html" title="&lt;TABLE&gt;" alt="" coords="53,653,214,701"/>
+<area shape="rect" id="node2_1" href="./SpringBeanProvider.SpringBindingDescriptorAdapter.html" title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter" alt="" coords="16,593,251,618"/>
+<area shape="rect" id="node2" href="./SpringBeanProvider.SpringBindingDescriptorAdapter.html" title="&lt;TABLE&gt;" alt="" coords="5,581,261,629"/>
+<area shape="rect" id="node3_2" href="./SecureRandomSingleton.html" title="com.gwtplatform.dispatch.server.spring.SecureRandomSingleton" alt="" coords="49,521,217,546"/>
+<area shape="rect" id="node3" href="./SecureRandomSingleton.html" title="&lt;TABLE&gt;" alt="" coords="39,509,228,557"/>
+<area shape="rect" id="node4_3" href="./RandomSecurityCookieFilter.html" title="com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter" alt="" coords="39,449,228,474"/>
+<area shape="rect" id="node4" href="./RandomSecurityCookieFilter.html" title="&lt;TABLE&gt;" alt="" coords="28,437,239,485"/>
+<area shape="rect" id="node5_4" href="./LoggerFactoryBean.html" title="com.gwtplatform.dispatch.server.spring.LoggerFactoryBean" alt="" coords="65,377,202,402"/>
+<area shape="rect" id="node5" href="./LoggerFactoryBean.html" title="&lt;TABLE&gt;" alt="" coords="54,365,213,413"/>
+<area shape="rect" id="node6_5" href="./HttpSessionSecurityCookieFilter.html" title="com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter" alt="" coords="28,305,239,330"/>
+<area shape="rect" id="node6" href="./HttpSessionSecurityCookieFilter.html" title="&lt;TABLE&gt;" alt="" coords="17,293,249,341"/>
+<area shape="rect" id="node7_6" href="./HandlerModule.html" title="com.gwtplatform.dispatch.server.spring.HandlerModule" alt="" coords="78,233,189,258"/>
+<area shape="rect" id="node7" href="./HandlerModule.html" title="&lt;TABLE&gt;" alt="" coords="67,221,199,269"/>
+<area shape="rect" id="node8_7" href="./DispatchServiceImpl.html" title="com.gwtplatform.dispatch.server.spring.DispatchServiceImpl" alt="" coords="63,161,204,186"/>
+<area shape="rect" id="node8" href="./DispatchServiceImpl.html" title="&lt;TABLE&gt;" alt="" coords="52,149,215,197"/>
+<area shape="rect" id="node9_8" href="./DispatchModule.html" title="com.gwtplatform.dispatch.server.spring.DispatchModule" alt="" coords="75,89,191,114"/>
+<area shape="rect" id="node9" href="./DispatchModule.html" title="&lt;TABLE&gt;" alt="" coords="65,77,202,125"/>
+<area shape="rect" id="node10_9" href="./DispatchImpl.html" title="com.gwtplatform.dispatch.server.spring.DispatchImpl" alt="" coords="85,17,182,42"/>
+<area shape="rect" id="node10" href="./DispatchImpl.html" title="&lt;TABLE&gt;" alt="" coords="74,5,193,53"/>
+</map>

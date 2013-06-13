@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./RestService.html" title="com.gwtplatform.dispatch.shared.rest.RestService" alt="" coords="17,125,109,166"/>
+<area shape="rect" id="node1" href="./RestService.html" title="&lt;TABLE&gt;" alt="" coords="6,119,119,171"/>
+<area shape="rect" id="node2_1" href="../../../carstore/client/rest/SessionService.html" title="com.gwtplatform.carstore.client.rest.SessionService" alt="" coords="195,10,307,51"/>
+<area shape="rect" id="node2" href="../../../carstore/client/rest/SessionService.html" title="&lt;TABLE&gt;" alt="" coords="184,5,317,57"/>
+<area shape="rect" id="node3_2" href="../../../carstore/client/rest/RatingService.html" title="com.gwtplatform.carstore.client.rest.RatingService" alt="" coords="199,86,302,127"/>
+<area shape="rect" id="node3" href="../../../carstore/client/rest/RatingService.html" title="&lt;TABLE&gt;" alt="" coords="189,81,313,133"/>
+<area shape="rect" id="node4_3" href="../../../carstore/client/rest/ManufacturerService.html" title="com.gwtplatform.carstore.client.rest.ManufacturerService" alt="" coords="179,162,322,203"/>
+<area shape="rect" id="node4" href="../../../carstore/client/rest/ManufacturerService.html" title="&lt;TABLE&gt;" alt="" coords="169,157,333,209"/>
+<area shape="rect" id="node5_4" href="../../../carstore/client/rest/CarService.html" title="com.gwtplatform.carstore.client.rest.CarService" alt="" coords="207,238,294,279"/>
+<area shape="rect" id="node5" href="../../../carstore/client/rest/CarService.html" title="&lt;TABLE&gt;" alt="" coords="197,233,305,285"/>
+</map>

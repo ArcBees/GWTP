@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../shared/DispatchService.html" title="com.gwtplatform.dispatch.shared.DispatchService" alt="" coords="35,10,151,51"/>
+<area shape="rect" id="node1" href="../shared/DispatchService.html" title="&lt;TABLE&gt;" alt="" coords="25,5,162,57"/>
+<area shape="rect" id="node2_1" href="./AbstractDispatchServiceImpl.html" title="com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl" alt="" coords="241,55,431,81"/>
+<area shape="rect" id="node2" href="./AbstractDispatchServiceImpl.html" title="&lt;TABLE&gt;" alt="" coords="230,44,442,92"/>
+<area shape="rect" id="node3_2" href="./guice/DispatchServiceImpl.html" title="com.gwtplatform.dispatch.server.guice.DispatchServiceImpl" alt="" coords="501,19,643,45"/>
+<area shape="rect" id="node3" href="./guice/DispatchServiceImpl.html" title="&lt;TABLE&gt;" alt="" coords="491,8,653,56"/>
+<area shape="rect" id="node4_3" href="./spring/DispatchServiceImpl.html" title="com.gwtplatform.dispatch.server.spring.DispatchServiceImpl" alt="" coords="501,91,643,117"/>
+<area shape="rect" id="node4" href="./spring/DispatchServiceImpl.html" title="&lt;TABLE&gt;" alt="" coords="491,80,653,128"/>
+<area shape="rect" id="node5_4" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/server/rpc/RemoteServiceServlet.html" title="com.google.gwt.user.server.rpc.RemoteServiceServlet" alt="" coords="17,93,170,118"/>
+<area shape="rect" id="node5" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/server/rpc/RemoteServiceServlet.html" title="&lt;TABLE&gt;" alt="" coords="6,81,181,129"/>
+</map>
