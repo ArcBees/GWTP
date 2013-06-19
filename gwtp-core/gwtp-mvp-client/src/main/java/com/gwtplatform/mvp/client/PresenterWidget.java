@@ -105,6 +105,11 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  */
 public abstract class PresenterWidget<V extends View> extends
         HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
+
+    public interface FinishCallback<P extends PresenterWidget<? extends View>> {
+        void onFinish(P presenter);
+    }
+
     private static class HandlerInformation<H extends EventHandler> {
         private Type<H> type;
         private H eventHandler;
@@ -117,6 +122,8 @@ public abstract class PresenterWidget<V extends View> extends
 
     private final EventBus eventBus;
     private final V view;
+
+    private FinishCallback finishCallback;
 
     boolean visible;
 
@@ -520,6 +527,25 @@ public abstract class PresenterWidget<V extends View> extends
      * parent presenters, then on the children.
      */
     protected void onReveal() {
+    }
+
+    protected FinishCallback getFinishCallback() {
+        return finishCallback;
+    }
+
+    protected void setFinishCallback(FinishCallback finishCallback) {
+        this.finishCallback = finishCallback;
+    }
+
+    /**
+     * Lifecycle method that could optionally be called when the Presenter hides
+     */
+    protected void finish() {
+        if (finishCallback != null) {
+            finishCallback.onFinish(this);
+            finishCallback = null;
+        }
+        // Then hide or dispose the Presenter
     }
 
     /**
