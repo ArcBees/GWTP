@@ -22,33 +22,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * Use this callback if you need to retrieve the {@link Response} returned by the HTTP call.
  *
- * @see #getResponse()
+ * @see #setResponse()
  */
-public abstract class RestCallback<T> implements AsyncCallback<T> {
-    private Response response;
-
-    void setResponse(Response response) {
-        this.response = response;
-    }
-
+public interface RestCallback<T> extends AsyncCallback<T> {
     /**
-     * Retrieves the {@link Response} returned by the server.
+     * The {@link Response} received from the server. If the request did not reach the server, this method will not be
+     * called.
      *
-     * @return The {@link Response} returned by the HTTP call or {@code null} if the call failed before reaching the
-     *         server.
-     * @see #hasResponse()
+     * @param response The {@link Response} received from the server.
      */
-    public Response getResponse() {
-        return response;
-    }
-
-    /**
-     * Utility methods to verify if a {@link Response} object is available.
-     *
-     * @return {@code true} if a {@link Response} object is available, {@code false} otherwise.
-     * @see #getResponse() if a {@link Response} object is available.
-     */
-    public Boolean hasResponse() {
-        return response != null;
-    }
+    void setResponse(Response response);
 }
