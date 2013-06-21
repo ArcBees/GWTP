@@ -18,6 +18,7 @@ package com.gwtplatform.carstore.client.util;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.gwt.http.client.Response;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
@@ -27,7 +28,7 @@ import com.gwtplatform.carstore.client.util.exceptiontranslators.Translator;
 import com.gwtplatform.dispatch.client.rest.RestCallback;
 import com.gwtplatform.dispatch.shared.Result;
 
-public abstract class ErrorHandlerAsyncCallback<R extends Result> extends RestCallback<R> {
+public abstract class ErrorHandlerAsyncCallback<R extends Result> implements RestCallback<R> {
     private final HasHandlers hasHandlers;
 
     public ErrorHandlerAsyncCallback(HasHandlers hasHandlers) {
@@ -36,12 +37,13 @@ public abstract class ErrorHandlerAsyncCallback<R extends Result> extends RestCa
 
     @Override
     public void onFailure(Throwable caught) {
-        if (hasResponse()) {
-            GWT.log("HTTP " + getResponse().getStatusCode() + ": " + getResponse().getStatusText());
-        }
-
         Message message = new Message(translateCauses(caught), MessageStyle.ERROR);
         DisplayMessageEvent.fire(hasHandlers, message);
+    }
+
+    @Override
+    public void setResponse(Response response) {
+        GWT.log("HTTP " + response.getStatusCode() + ": " + response.getStatusText());
     }
 
     private String translateCauses(Throwable caught) {
