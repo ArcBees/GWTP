@@ -70,17 +70,14 @@ public class GenProxyProcessor extends GenProcessor {
             String proxyElementClassName = reflection.getClassName();
             String proxyElementPackage = reflection.getPackageName();
 
-            String preparedProxyElementClassName = proxyElementClassName;
-            String preparedProxyElementPackage = proxyElementPackage;
+            // Magic: By default proxies should be available for client and server side.
+            String preparedProxyElementClassName = proxyElementClassName.replace(".server", ".shared");
+            String preparedProxyElementPackage = proxyElementPackage.replace(".server", ".shared");
 
             if (targetPackage != null && !targetPackage.isEmpty()) {
                 // Prepare user defined proxy target package and do not replace server with shared.
                 preparedProxyElementClassName = targetPackage + "." + proxyElementSimpleName;
                 preparedProxyElementPackage = targetPackage;
-            } else {
-                // Magic: By default proxies should be available for client and server side.
-                preparedProxyElementClassName = proxyElementClassName.replace(".server", ".shared");
-                preparedProxyElementPackage = proxyElementPackage.replace(".server", ".shared");
             }
 
             String proxySimpleName = proxyElementSimpleName + "Proxy";
@@ -89,11 +86,6 @@ public class GenProxyProcessor extends GenProcessor {
             Writer sourceWriter = getEnvironment().getFiler().createSourceFile(proxyClassName,
                     proxyElement).openWriter();
             writer = new InterfaceGenerationHelper(sourceWriter);
-
-            Collection<VariableElement> allFields = reflection.getNonConstantFields();
-            Collection<VariableElement> setterFields = reflection.filterFields(allFields, filterSetter);
-            Collection<VariableElement> getterFields = reflection.filterFields(allFields, filterGetter);
-
             writer.generatePackageDeclaration(preparedProxyElementPackage);
 
             if (isEmbeddedType) {
@@ -104,12 +96,16 @@ public class GenProxyProcessor extends GenProcessor {
 
             writer.println();
 
+            Collection<VariableElement> allFields = reflection.getNonConstantFields();
+
             // Generate getters.
+            Collection<VariableElement> getterFields = reflection.filterFields(allFields, filterGetter);
             for (VariableElement getterField : getterFields) {
                 generateGetter(writer, getterField);
             }
 
             // Generate setters.
+            Collection<VariableElement> setterFields = reflection.filterFields(allFields, filterSetter);
             for (VariableElement setterField : setterFields) {
                 generateSetter(writer, setterField);
             }
@@ -166,9 +162,9 @@ public class GenProxyProcessor extends GenProcessor {
         UseProxy useProxyAnnotation = getterField.getAnnotation(UseProxy.class);
         UseProxyName useProxyNameAnnotation = getterField.getAnnotation(UseProxyName.class);
         if (useProxyAnnotation != null) {
-            writer.generateGetter(getterField.getSimpleName().toString(), getProxyTypeMirror(useProxyAnnotation)
-                    .toString());
-        } else if (useProxyAnnotation == null && useProxyNameAnnotation != null) {
+            writer.generateGetter(getterField.getSimpleName().toString(), getProxyTypeMirrorName(useProxyAnnotation,
+                    getterField.asType()));
+        } else if (useProxyNameAnnotation != null) {
             writer.generateGetter(getterField.getSimpleName().toString(), useProxyNameAnnotation.value());
         } else {
             writer.generateGetter(getterField);
@@ -180,9 +176,9 @@ public class GenProxyProcessor extends GenProcessor {
         UseProxy useProxyAnnotation = setterField.getAnnotation(UseProxy.class);
         UseProxyName useProxyNameAnnotation = setterField.getAnnotation(UseProxyName.class);
         if (useProxyAnnotation != null) {
-            writer.generateSetter(setterField.getSimpleName().toString(), getProxyTypeMirror(useProxyAnnotation)
-                    .toString());
-        } else if (useProxyAnnotation == null && useProxyNameAnnotation != null) {
+            writer.generateSetter(setterField.getSimpleName().toString(), getProxyTypeMirrorName(useProxyAnnotation,
+                    setterField.asType()));
+        } else if (useProxyNameAnnotation != null) {
             writer.generateSetter(setterField.getSimpleName().toString(), useProxyNameAnnotation.value());
         } else {
             writer.generateSetter(setterField);
@@ -190,23 +186,36 @@ public class GenProxyProcessor extends GenProcessor {
     }
 
     /**
-     * Workaround for MirroredTypeException (Attempt to access Class object for
-     * TypeMirror).
+     * Workaround for MirroredTypeException (Attempt to access Class object for TypeMirror).
      *
-     * @see http://goo.gl/7ee2R
+     * @see <a href="http://goo.gl/7ee2R">Getting class values from annotations in an annotationprocessor</a>
      */
-    protected final TypeMirror getProxyTypeMirror(UseProxy useProxyAnnotation) {
+    protected final String getProxyTypeMirrorName(UseProxy useProxyAnnotation, TypeMirror originalTypeMirror) {
         TypeMirror mirror = null;
         try {
             useProxyAnnotation.value();
         } catch (MirroredTypeException e) {
             mirror = e.getTypeMirror();
         }
-        return mirror;
+
+        return nestIntoCollectionIfNeccessary(mirror, originalTypeMirror);
+    }
+
+    private String nestIntoCollectionIfNeccessary(TypeMirror mirror, TypeMirror originalTypeMirror) {
+        String originalTypeDeclaration = originalTypeMirror.toString();
+        StringBuilder builder = new StringBuilder();
+        if (originalTypeDeclaration.startsWith("java.util.List<")) {
+            builder.append("java.util.List<").append(mirror.toString()).append(">");
+        } else if (originalTypeDeclaration.startsWith("java.util.Set<")) {
+            builder.append("java.util.Set<").append(mirror.toString()).append(">");
+        } else {
+            builder.append(mirror.toString());
+        }
+        return builder.toString();
     }
 
     /**
-     * @see #getTypeMirror(UseProxy)
+     * @see #getProxyTypeMirrorName(com.gwtplatform.dispatch.annotation.UseProxy, javax.lang.model.type.TypeMirror)
      */
     protected final TypeMirror getLocatorTypeMirror(GenProxy genProxyAnnotation) {
         TypeMirror mirror = null;
