@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.annotation;
 
+import java.util.Set;
+
 /**
  * For testing purposes only.
  *
@@ -34,4 +36,7 @@ public class Person {
 
     @UseProxy(DetailProxy.class)
     Detail detail;
+
+    @UseProxy(DetailProxy.class)
+    Set<Detail> details;
 }
