@@ -27,7 +27,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface RestCallback<T> extends AsyncCallback<T> {
     /**
      * The {@link Response} received from the server. If the request did not reach the server, this method will not be
-     * called.
+     * called. This method is called before {@link #onSuccess(Object)} and {@link #onFailure(Throwable)}.
      *
      * @param response The {@link Response} received from the server.
      */
