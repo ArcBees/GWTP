@@ -89,10 +89,12 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
         </dependency>
 
         <dependency>
@@ -111,10 +113,12 @@
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-servlet</artifactId>
+            <version>${guice.version}</version>
         </dependency>
 
         <!-- Objectify dependencies -->
@@ -126,6 +130,7 @@
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
+            <version>${persistence-api.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
