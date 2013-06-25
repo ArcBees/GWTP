@@ -31,7 +31,7 @@ public class RetrieveBar {
     String goodName;
 
     @Out(1)
-    com.gwtplatform.dispatch.annotation.Foo thing;
+    Foo thing;
 
     @Out(2)
     int meaningOfLife;
