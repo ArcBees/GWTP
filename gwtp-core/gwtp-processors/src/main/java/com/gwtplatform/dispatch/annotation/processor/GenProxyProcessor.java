@@ -19,6 +19,8 @@ package com.gwtplatform.dispatch.annotation.processor;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -152,9 +154,7 @@ public class GenProxyProcessor extends GenProcessor {
         );
         writer.println();
         writer.generateAnnotation("ProxyFor", proxyElementClassName + ".class");
-        writer.generateInterfaceHeader(proxySimpleName, reflection.getClassRepresenter().getModifiers(),
-                "ValueProxy"
-        );
+        writer.generateInterfaceHeader(proxySimpleName, reflection.getClassRepresenter().getModifiers(), "ValueProxy");
     }
 
     protected void generateGetter(InterfaceGenerationHelper writer, VariableElement getterField) {
@@ -198,20 +198,60 @@ public class GenProxyProcessor extends GenProcessor {
             mirror = e.getTypeMirror();
         }
 
-        return nestIntoCollectionIfNeccessary(mirror, originalTypeMirror);
+        return nestIntoCollectionIfNecessary(mirror, originalTypeMirror);
     }
 
-    private String nestIntoCollectionIfNeccessary(TypeMirror mirror, TypeMirror originalTypeMirror) {
+    private String nestIntoCollectionIfNecessary(TypeMirror mirror, TypeMirror originalTypeMirror) {
         String originalTypeDeclaration = originalTypeMirror.toString();
+
+        // Shortcut if no generics can be found in the type declaration
+        if (!(originalTypeDeclaration.contains("<") && originalTypeDeclaration.contains(">"))) {
+            return mirror.toString();
+        }
+
+        String collectionClassName = originalTypeDeclaration.substring(0, originalTypeDeclaration.indexOf("<"));
+        Class collectionClass = tryRetrieveCollectionClass(collectionClassName);
+
         StringBuilder builder = new StringBuilder();
-        if (originalTypeDeclaration.startsWith("java.util.List<")) {
-            builder.append("java.util.List<").append(mirror.toString()).append(">");
-        } else if (originalTypeDeclaration.startsWith("java.util.Set<")) {
-            builder.append("java.util.Set<").append(mirror.toString()).append(">");
+        if (collectionClass != null && (isAssignableToSet(collectionClass) || isAssignableToList(collectionClass))) {
+            builder.append(collectionClassName).append("<").append(mirror.toString()).append(">");
         } else {
             builder.append(mirror.toString());
         }
         return builder.toString();
+    }
+
+    private Class tryRetrieveCollectionClass(String collectionClassName) {
+        try {
+            return Class.forName(collectionClassName);
+        } catch (ClassNotFoundException e) {
+            printMessage("Potential collection class " + collectionClassName + " could not be found.");
+        }
+        return null;
+    }
+
+    private boolean isAssignableToSet(Class collectionClass) {
+        if (collectionClass.equals(Set.class)) {
+            return true;
+        }
+        for (Class interfaceClass : collectionClass.getInterfaces()) {
+            if (interfaceClass.equals(Set.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isAssignableToList(Class collectionClass) {
+        if (collectionClass.equals(List.class)) {
+            return true;
+        }
+        for (Class interfaceClass : collectionClass.getInterfaces()) {
+            if (interfaceClass.equals(List.class)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
