@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.annotation;
 
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.Test;
@@ -78,7 +78,7 @@ public class ProxyAnnotationProcessingTest {
     }
 
     @Test
-    public void shouldGenerateListProxy() throws NoSuchMethodException {
+    public void shouldGenerateArrayListProxy() throws NoSuchMethodException {
         // If the proxy exists and we can access the class element, the class type generation was successful.
         Class<?> proxyClass = EmployeeProxy.class;
 
@@ -87,14 +87,14 @@ public class ProxyAnnotationProcessingTest {
         assertNotNull(getDetailsMethod);
         Class<?> returnType = getDetailsMethod.getReturnType();
         assertNotNull(returnType);
-        assertTrue(returnType.isAssignableFrom(List.class));
+        assertTrue(returnType.isAssignableFrom(ArrayList.class));
 
-        Method setDetailsMethod = proxyClass.getMethod("setDetails", List.class);
+        Method setDetailsMethod = proxyClass.getMethod("setDetails", ArrayList.class);
         assertNotNull(setDetailsMethod);
         Class<?>[] parameterTypes = setDetailsMethod.getParameterTypes();
         assertNotNull(parameterTypes);
         assertThat(parameterTypes.length, equalTo(1));
-        assertTrue(parameterTypes[0].isAssignableFrom(List.class));
+        assertTrue(parameterTypes[0].isAssignableFrom(ArrayList.class));
     }
 
     @Test
