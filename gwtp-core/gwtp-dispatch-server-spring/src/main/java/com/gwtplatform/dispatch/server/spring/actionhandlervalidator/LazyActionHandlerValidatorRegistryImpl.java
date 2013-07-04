@@ -16,8 +16,8 @@
 
 package com.gwtplatform.dispatch.server.spring.actionhandlervalidator;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -46,10 +46,10 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
 
     public LazyActionHandlerValidatorRegistryImpl() {
-        actionHandlerValidatorClasses = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
+        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
                 Action<?>, ? extends Result>>();
-        actionHandlerValidatorInstances = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
-        validators = new HashMap<Class<? extends ActionValidator>, ActionValidator>();
+        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
+        validators = new ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator>();
     }
 
     @Override
