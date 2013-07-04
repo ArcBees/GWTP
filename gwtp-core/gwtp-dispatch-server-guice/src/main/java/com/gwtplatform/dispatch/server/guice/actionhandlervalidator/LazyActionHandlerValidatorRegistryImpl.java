@@ -16,13 +16,14 @@
 
 package com.gwtplatform.dispatch.server.guice.actionhandlervalidator;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.google.inject.Injector;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry;
@@ -50,10 +51,10 @@ public class LazyActionHandlerValidatorRegistryImpl implements
     @Inject
     LazyActionHandlerValidatorRegistryImpl(Injector injector) {
         this.injector = injector;
-        actionHandlerValidatorClasses = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
+        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
                 Action<?>, ? extends Result>>();
-        actionHandlerValidatorInstances = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
-        validators = new HashMap<Class<? extends ActionValidator>, ActionValidator>();
+        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
+        validators = new ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator>();
     }
 
     @Override
