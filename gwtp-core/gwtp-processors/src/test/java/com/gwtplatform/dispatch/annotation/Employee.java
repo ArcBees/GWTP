@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.annotation;
 
+import java.util.ArrayList;
+
 /**
  * For testing purposes only.
  *
@@ -32,6 +34,9 @@ public class Employee {
     private Long supervisorKey;
     private Long id;
     private Integer version;
+
+    @UseProxy(DetailProxy.class)
+    private ArrayList<Detail> details;
 
     @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.EmployeeProxy")
     private Employee supervisor;
