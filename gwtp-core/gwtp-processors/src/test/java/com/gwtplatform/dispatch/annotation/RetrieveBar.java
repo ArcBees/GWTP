@@ -16,22 +16,23 @@
 
 package com.gwtplatform.dispatch.annotation;
 
+import com.gwtplatform.dispatch.shared.Action;
+
 /**
  * For testing purposes only.
  *
- * @author Florian Sauter
+ * @author Brendan Doherty
  */
-@GenProxy
-public class Person {
-    int id;
+@GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
+        + "Blah", extraResultInterfaces = "com.gwtplatform.dispatch.annotation.HasThing<com.gwtplatform.dispatch" +
+        ".annotation.Foo>")
+public class RetrieveBar {
+    @In(1)
+    String goodName;
 
-    Long age;
+    @Out(1)
+    Foo thing;
 
-    float weight;
-
-    @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.AddressProxy")
-    Address addressDetail;
-
-    @UseProxy(DetailProxy.class)
-    Detail detail;
+    @Out(2)
+    int meaningOfLife;
 }
