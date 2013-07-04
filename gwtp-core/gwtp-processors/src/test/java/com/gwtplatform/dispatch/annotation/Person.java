@@ -16,23 +16,27 @@
 
 package com.gwtplatform.dispatch.annotation;
 
-import com.gwtplatform.dispatch.shared.Action;
+import java.util.Set;
 
 /**
  * For testing purposes only.
  *
- * @author Brendan Doherty
+ * @author Florian Sauter
  */
-@GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
-        + "Blah", extraResultInterfaces = "com.gwtplatform.dispatch.annotation.HasThing<com.gwtplatform.dispatch" +
-        ".annotation.Foo>")
-public class RetrieveBar {
-    @In(1)
-    String goodName;
+@GenProxy
+public class Person {
+    int id;
 
-    @Out(1)
-    com.gwtplatform.dispatch.annotation.Foo thing;
+    Long age;
 
-    @Out(2)
-    int meaningOfLife;
+    float weight;
+
+    @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.AddressProxy")
+    Address addressDetail;
+
+    @UseProxy(DetailProxy.class)
+    Detail detail;
+
+    @UseProxy(DetailProxy.class)
+    Set<Detail> details;
 }
