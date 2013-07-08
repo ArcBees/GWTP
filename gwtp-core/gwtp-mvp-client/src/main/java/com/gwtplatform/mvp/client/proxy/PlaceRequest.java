@@ -166,6 +166,17 @@ public class PlaceRequest {
         return 11 * (nameToken.hashCode() + (params == null ? 0 : params.hashCode()));
     }
 
+    @Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PlaceRequest(nameToken=");
+		builder.append(nameToken);
+		builder.append(", params=");
+		builder.append(params);
+		builder.append(")");
+		return builder.toString();
+	}
+
     /**
      * Checks if this place request has the same name token as the one passed in.
      *
@@ -179,7 +190,7 @@ public class PlaceRequest {
         return nameToken.equals(other.nameToken);
     }
 
-    /**
+	/**
      * Checks if this place request matches the name token passed.
      *
      * @param nameToken The name token to match.
