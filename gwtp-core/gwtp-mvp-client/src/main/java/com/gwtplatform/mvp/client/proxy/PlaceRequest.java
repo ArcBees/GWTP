@@ -167,15 +167,9 @@ public class PlaceRequest {
     }
 
     @Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PlaceRequest(nameToken=");
-		builder.append(nameToken);
-		builder.append(", params=");
-		builder.append(params);
-		builder.append(")");
-		return builder.toString();
-	}
+    public String toString() {
+        return "PlaceRequest(nameToken=" + nameToken + ", params=" + params + ")";
+    }
 
     /**
      * Checks if this place request has the same name token as the one passed in.
