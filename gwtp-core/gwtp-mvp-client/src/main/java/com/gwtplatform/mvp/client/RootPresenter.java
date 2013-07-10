@@ -76,15 +76,15 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         }
 
         @Override
-        public void setInSlot(Object slot, IsWidget content) {
+        public void setInSlot(final Object slot, final IsWidget content) {
             assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
             if (usingRootLayoutPanel) {
                 // TODO Next 3 lines are a dirty workaround for
                 // http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
-                RootPanel.get().clear();
+                getAppRootPanel().clear();
                 RootLayoutPanel.get().clear();
-                RootPanel.get().add(RootLayoutPanel.get());
+                getAppRootPanel().add(RootLayoutPanel.get());
                 if (content != null) {
                     RootLayoutPanel.get().add(content);
                 }
@@ -92,14 +92,25 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
                 // TODO Next 2 lines are a dirty workaround for
                 // http://code.google.com/p/google-web-toolkit/issues/detail?id=4737
                 RootLayoutPanel.get().clear();
-                RootPanel.get().clear();
+                getAppRootPanel().clear();
                 if (content != null) {
-                    RootPanel.get().add(content);
+                    getAppRootPanel().add(content);
                 }
             }
         }
 
-        private void setUsingRootLayoutPanel(boolean usingRootLayoutPanel) {
+        /**
+         * Return the RootPanel on which to add the content.
+         * <p />
+         * It returns the default RootPanel.
+         * It can be overriden to return another RootPanel to allow embeding the application.
+         * @return the RootPanel on which to add the content
+         */
+        protected RootPanel getAppRootPanel() {
+            return RootPanel.get();
+        }
+
+        private void setUsingRootLayoutPanel(final boolean usingRootLayoutPanel) {
             this.usingRootLayoutPanel = usingRootLayoutPanel;
         }
 
@@ -117,7 +128,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
             if (glass == null) {
                 glass = Document.get().createDivElement();
 
-                Style style = glass.getStyle();
+                final Style style = glass.getStyle();
                 style.setPosition(Position.ABSOLUTE);
                 style.setLeft(0, Unit.PX);
                 style.setTop(0, Unit.PX);
@@ -160,7 +171,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     }
 
     @Override
-    public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
+    public void onResetPresenters(final ResetPresentersEvent resetPresentersEvent) {
         if (!isResetting) {
             isResetting = true;
             internalReset();
@@ -175,6 +186,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         setInSlot(rootSlot, revealContentEvent.getContent());
     }
 
+    @Override
     public void onRevealRootLayoutContent(
             final RevealRootLayoutContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(true);
@@ -192,7 +204,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     }
 
     @Override
-    public void onLockInteraction(LockInteractionEvent lockInteractionEvent) {
+    public void onLockInteraction(final LockInteractionEvent lockInteractionEvent) {
         if (lockInteractionEvent.shouldLock()) {
             getView().lockScreen();
         } else {
