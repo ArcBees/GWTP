@@ -76,7 +76,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         }
 
         @Override
-        public void setInSlot(final Object slot, final IsWidget content) {
+        public void setInSlot(Object slot, IsWidget content) {
             assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
             if (usingRootLayoutPanel) {
@@ -128,7 +128,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
             if (glass == null) {
                 glass = Document.get().createDivElement();
 
-                final Style style = glass.getStyle();
+                Style style = glass.getStyle();
                 style.setPosition(Position.ABSOLUTE);
                 style.setLeft(0, Unit.PX);
                 style.setTop(0, Unit.PX);
@@ -171,7 +171,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     }
 
     @Override
-    public void onResetPresenters(final ResetPresentersEvent resetPresentersEvent) {
+    public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
         if (!isResetting) {
             isResetting = true;
             internalReset();
@@ -204,7 +204,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     }
 
     @Override
-    public void onLockInteraction(final LockInteractionEvent lockInteractionEvent) {
+    public void onLockInteraction(LockInteractionEvent lockInteractionEvent) {
         if (lockInteractionEvent.shouldLock()) {
             getView().lockScreen();
         } else {
