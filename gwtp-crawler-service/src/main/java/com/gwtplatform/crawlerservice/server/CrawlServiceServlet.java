@@ -23,6 +23,8 @@ import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Provider;
 import javax.inject.Singleton;
@@ -30,7 +32,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.inject.Inject;
 import com.googlecode.objectify.Key;
@@ -44,6 +49,15 @@ import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
 @Singleton
 public class CrawlServiceServlet extends HttpServlet {
 
+    private class SyncAllAjaxController extends NicelyResynchronizingAjaxController {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public boolean processSynchron(HtmlPage page, WebRequest request, boolean async) {
+            return true;
+        }
+    }
+
     private static final String CHAR_ENCODING = "UTF-8";
 
     private static final long serialVersionUID = -6129110224710383122L;
@@ -51,11 +65,15 @@ public class CrawlServiceServlet extends HttpServlet {
     @Inject(optional = true)
     @HtmlUnitTimeoutMillis
     private long timeoutMillis = 12000;
+    private long jsTimeoutMillis = 1000;
+    private long pageWaitMillis = 200;
+    private int maxLoopChecks = 2;
 
     @Inject(optional = true)
     @CachedPageTimeoutSec
     private long cachedPageTimeoutSec = 15 * 60;
 
+    private final Logger log;
     private final Provider<WebClient> webClientProvider;
 
     private final String key;
@@ -64,16 +82,17 @@ public class CrawlServiceServlet extends HttpServlet {
 
     @Inject
     CrawlServiceServlet(final Provider<WebClient> webClientProvider,
+            final Logger log,
             @ServiceKey String key,
             CachedPageDao cachedPageDao) {
         this.webClientProvider = webClientProvider;
+        this.log = log;
         this.key = key;
         this.cachedPageDao = cachedPageDao;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-
         PrintWriter out = null;
         try {
             resp.setCharacterEncoding(CHAR_ENCODING);
@@ -175,18 +194,41 @@ public class CrawlServiceServlet extends HttpServlet {
      * @throws IOException
      * @throws MalformedURLException
      */
-    private StringBuilder renderPage(String url) throws IOException,
-            MalformedURLException {
+    private StringBuilder renderPage(String url) throws IOException {
         WebClient webClient = webClientProvider.get();
 
-        webClient.setCssEnabled(false);
-        webClient.setJavaScriptTimeout(0);
-        webClient.setJavaScriptTimeout(0);
-        webClient.setThrowExceptionOnScriptError(false);
-        webClient.setThrowExceptionOnFailingStatusCode(false);
-        webClient.setJavaScriptEnabled(true);
+        webClient.getCache().clear();
+        webClient.getOptions().setCssEnabled(false);
+        webClient.getOptions().setJavaScriptEnabled(true);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setRedirectEnabled(false);
+        webClient.setAjaxController(new SyncAllAjaxController());
+        webClient.setCssErrorHandler(new SilentCssErrorHandler());
+
         HtmlPage page = webClient.getPage(url);
         webClient.getJavaScriptEngine().pumpEventLoop(timeoutMillis);
+
+        int waitForBackgroundJavaScript = webClient.waitForBackgroundJavaScript(jsTimeoutMillis);
+        int loopCount = 0;
+
+        while (waitForBackgroundJavaScript > 0 && loopCount < maxLoopChecks) {
+            ++loopCount;
+            waitForBackgroundJavaScript = webClient.waitForBackgroundJavaScript(jsTimeoutMillis);
+
+            if (waitForBackgroundJavaScript == 0) {
+                log.fine("HtmlUnit exits background javascript at loop counter " + loopCount);
+                break;
+            }
+
+            synchronized (page) {
+                log.fine("HtmlUnit waits for background javascript at loop counter " + loopCount);
+                try {
+                    page.wait(pageWaitMillis);
+                } catch (InterruptedException e) {
+                    log.log(Level.SEVERE, "HtmlUnit ERROR on page.wait at loop counter " + loopCount, e);
+                }
+            }
+        }
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<hr />\n");
@@ -197,6 +239,7 @@ public class CrawlServiceServlet extends HttpServlet {
 
         stringBuilder.append(page.asXml());
         webClient.closeAllWindows();
+
         return stringBuilder;
     }
 
