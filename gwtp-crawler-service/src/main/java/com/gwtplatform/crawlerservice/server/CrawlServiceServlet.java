@@ -18,7 +18,6 @@ package com.gwtplatform.crawlerservice.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
