@@ -51,9 +51,10 @@ public class LazyActionHandlerValidatorRegistryImpl implements
     @Inject
     LazyActionHandlerValidatorRegistryImpl(Injector injector) {
         this.injector = injector;
-        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
-                Action<?>, ? extends Result>>();
-        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
+        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>,
+                ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>>();
+        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>,
+                ActionHandlerValidatorInstance>();
         validators = new ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator>();
     }
 
@@ -105,8 +106,8 @@ public class LazyActionHandlerValidatorRegistryImpl implements
             Class<A> actionClass,
             ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
 
-        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get
-                (actionClass);
+        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get(
+                actionClass);
 
         if (oldActionHandlerValidatorClass == actionHandlerValidatorClass) {
             actionHandlerValidatorClasses.remove(actionClass);
