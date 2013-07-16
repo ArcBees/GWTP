@@ -81,10 +81,10 @@ public class CrawlServiceServlet extends HttpServlet {
     private final CachedPageDao cachedPageDao;
 
     @Inject
-    CrawlServiceServlet(final Provider<WebClient> webClientProvider,
-            final Logger log,
-            @ServiceKey String key,
-            CachedPageDao cachedPageDao) {
+    CrawlServiceServlet(Provider<WebClient> webClientProvider,
+                        Logger log,
+                        CachedPageDao cachedPageDao,
+                        @ServiceKey String key) {
         this.webClientProvider = webClientProvider;
         this.log = log;
         this.key = key;
@@ -147,9 +147,7 @@ public class CrawlServiceServlet extends HttpServlet {
      * @param out          The {@link PrintWriter} to write to, if needed.
      * @return {@code true} if the page needs to be fetched, {@code false} otherwise.
      */
-    private boolean needToFetchPage(CachedPage matchingPage,
-            Date currDate, PrintWriter out) {
-
+    private boolean needToFetchPage(CachedPage matchingPage, Date currDate, PrintWriter out) {
         if (matchingPage == null) {
             return true;
         }
@@ -252,8 +250,7 @@ public class CrawlServiceServlet extends HttpServlet {
      * @param currDate        The current date, to check for expiration.
      * @return The non-expired matching page if found, {@code null} otherwise.
      */
-    private CachedPage extractMatchingPage(Map<Key<CachedPage>, CachedPage> deprecatedPages,
-            Date currDate) {
+    private CachedPage extractMatchingPage(Map<Key<CachedPage>, CachedPage> deprecatedPages, Date currDate) {
         CachedPage matchingPage = findMostRecentPage(deprecatedPages);
 
         // Keep the matching page only if it has not expired
