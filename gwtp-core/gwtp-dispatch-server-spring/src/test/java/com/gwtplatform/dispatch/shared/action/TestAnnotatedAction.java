@@ -21,7 +21,6 @@ import com.gwtplatform.dispatch.shared.UnsecuredActionImpl;
 /**
  */
 public class TestAnnotatedAction extends UnsecuredActionImpl<TestResult> {
-
     private String testMessage;
 
     /**

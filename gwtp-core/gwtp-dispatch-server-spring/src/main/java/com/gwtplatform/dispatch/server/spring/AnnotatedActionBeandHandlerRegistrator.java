@@ -33,10 +33,8 @@ import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 /**
  * Annotation bean post processing to register ActionHadlers annotate
  * with {@link RegisterActionHandler}.
- *
  */
 public class AnnotatedActionBeandHandlerRegistrator implements BeanPostProcessor, Ordered {
-
     @Autowired
     protected ApplicationContext applicationContext;
 
