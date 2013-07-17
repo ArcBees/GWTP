@@ -86,6 +86,8 @@
                     <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
                     <appEngineVersion>${gae.version}</appEngineVersion>
                     <appEngineHome>${gae.home}</appEngineHome>
+                    <extraJvmArgs>-Xss2048k -Xmx1024M -XX:MaxPermSize=512m</extraJvmArgs>
+                    <localWorkers>2</localWorkers>
 
                     <runTarget>CarStore.html</runTarget>
                     <modules>
