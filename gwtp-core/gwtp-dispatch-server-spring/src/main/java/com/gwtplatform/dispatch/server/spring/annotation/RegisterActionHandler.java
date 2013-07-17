@@ -1,4 +1,5 @@
 /**
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -12,10 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.gwtplatform.dispatch.server.spring.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
@@ -25,7 +28,6 @@ import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValid
  * with  action {@link ActionHandler#getActionType()} and
  * validator {@link RegisterActionHandler#validator()}.
  *
- * @author David Ignjic
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
