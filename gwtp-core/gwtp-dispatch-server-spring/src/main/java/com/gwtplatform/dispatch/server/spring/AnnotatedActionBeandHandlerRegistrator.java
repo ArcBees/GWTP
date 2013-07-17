@@ -1,17 +1,19 @@
 /**
-*
-* Licensed under the Apache License, Version 2.0 (the "License"); you may not
-* use this file except in compliance with the License. You may obtain a copy of
-* the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-* License for the specific language governing permissions and limitations under
-* the License.
-*/
+ * Copyright 2013 ArcBees Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package com.gwtplatform.dispatch.server.spring;
 
 import org.springframework.beans.BeansException;
@@ -31,7 +33,6 @@ import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 /**
  * Annotation bean post processing to register ActionHadlers annotate
  * with {@link RegisterActionHandler}.
- * @author David Ignjic
  *
  */
 public class AnnotatedActionBeandHandlerRegistrator implements BeanPostProcessor, Ordered {
@@ -45,16 +46,17 @@ public class AnnotatedActionBeandHandlerRegistrator implements BeanPostProcessor
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) {
-        if ((bean instanceof ActionHandler<?, ?>)) {
+        if (bean instanceof ActionHandler<?, ?>) {
             ActionHandler<?, ?> actionHandler = (ActionHandler<?, ?>) bean;
             RegisterActionHandler registerHandler = bean.getClass().getAnnotation(RegisterActionHandler.class);
             if (registerHandler != null) {
-                ActionHandlerValidatorClass actionHandlerValidatorClass = new ActionHandlerValidatorClass(actionHandler.getClass(),
-                        registerHandler.validator());
-                SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl(actionHandler.getActionType(),
-                        actionHandlerValidatorClass));
+                ActionHandlerValidatorClass actionHandlerValidatorClass = new ActionHandlerValidatorClass(
+                        actionHandler.getClass(),registerHandler.validator());
+                SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl(
+                        actionHandler.getActionType(), actionHandlerValidatorClass));
                 if (actionHandlerValidatorRegistry instanceof LazyActionHandlerValidatorRegistry) {
-                    ((LazyActionHandlerValidatorRegistry) actionHandlerValidatorRegistry).addActionHandlerValidatorClass(actionHandler.getActionType(), actionHandlerValidatorClass);
+                    ((LazyActionHandlerValidatorRegistry) actionHandlerValidatorRegistry)
+                            .addActionHandlerValidatorClass(actionHandler.getActionType(), actionHandlerValidatorClass);
                 }
             }
         }

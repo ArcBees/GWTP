@@ -42,23 +42,24 @@ public class ActionModule extends HandlerModule {
         return new TestActionHandler();
     }
 
-    @Bean 
+    @Bean
     public AnnotatedActionBeandHandlerRegistrator getAnnotatedActionBeandHandlerRegistrator() {
         return new AnnotatedActionBeandHandlerRegistrator();
     }
+
     @Bean
     public TestAnnotatedActionHandler getTestAnnotatedActionHandler() {
         return new TestAnnotatedActionHandler();
     }
-    
+
     @Bean
     public ActionValidator getDefaultActionValidator() {
         return new DefaultActionValidator();
     }
 
-    
     protected void configureHandlers() {
         bindHandler(TestAction.class, TestActionHandler.class);
-        //bindHandler(TestAnnotatedAction.class, TestAnnotatedActionHandler.class);
+
+        // bindHandler(TestAnnotatedAction.class, TestAnnotatedActionHandler.class);
     }
 }

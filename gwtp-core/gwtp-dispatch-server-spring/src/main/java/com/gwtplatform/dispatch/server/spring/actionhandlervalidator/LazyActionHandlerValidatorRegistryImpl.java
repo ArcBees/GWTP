@@ -46,9 +46,10 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
 
     public LazyActionHandlerValidatorRegistryImpl() {
-        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
-                Action<?>, ? extends Result>>();
-        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
+        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>,
+                ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>>();
+        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>,
+                ActionHandlerValidatorInstance>();
         validators = new ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator>();
     }
 
@@ -96,8 +97,8 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     public <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(Class<A> actionClass,
             ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
 
-        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get
-                (actionClass);
+        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses
+                .get(actionClass);
 
         if (oldActionHandlerValidatorClass == actionHandlerValidatorClass) {
             actionHandlerValidatorClasses.remove(actionClass);

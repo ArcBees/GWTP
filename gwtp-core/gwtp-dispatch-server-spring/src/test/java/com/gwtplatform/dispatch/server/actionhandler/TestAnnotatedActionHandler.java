@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.server.actionhandler;
 
-import org.springframework.stereotype.Component;
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.server.spring.annotation.RegisterActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -24,7 +23,6 @@ import com.gwtplatform.dispatch.shared.action.TestAnnotatedAction;
 import com.gwtplatform.dispatch.shared.action.TestResult;
 
 /**
- * @author Peter Simun
  */
 @RegisterActionHandler
 public class TestAnnotatedActionHandler extends AbstractActionHandler<TestAnnotatedAction, TestResult> {
