@@ -57,11 +57,9 @@ public class SpringUtils {
             B instance) throws BeansException {
 
         if (applicationContext instanceof GenericApplicationContext) {
-            DefaultListableBeanFactory beanFactory = ((GenericApplicationContext) applicationContext)
-                    .getDefaultListableBeanFactory();
-            beanFactory.registerSingleton(
-                    new DefaultBeanNameGenerator().generateBeanName(createBeanDefinition(instance), beanFactory),
-                    instance);
+            ConfigurableListableBeanFactory beanFactory = ((GenericApplicationContext) applicationContext)
+                    .getBeanFactory();
+            beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance)), instance);
         } else if (applicationContext instanceof AbstractRefreshableWebApplicationContext) {
             ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableWebApplicationContext)
                     applicationContext).getBeanFactory();

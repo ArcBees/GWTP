@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
+import com.gwtplatform.dispatch.server.actionhandler.TestAnnotatedActionHandler;
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.server.spring.configuration.DefaultModule;
@@ -41,12 +42,23 @@ public class ActionModule extends HandlerModule {
         return new TestActionHandler();
     }
 
+    @Bean 
+    public AnnotatedActionBeandHandlerRegistrator getAnnotatedActionBeandHandlerRegistrator() {
+        return new AnnotatedActionBeandHandlerRegistrator();
+    }
+    @Bean
+    public TestAnnotatedActionHandler getTestAnnotatedActionHandler() {
+        return new TestAnnotatedActionHandler();
+    }
+    
     @Bean
     public ActionValidator getDefaultActionValidator() {
         return new DefaultActionValidator();
     }
 
+    
     protected void configureHandlers() {
         bindHandler(TestAction.class, TestActionHandler.class);
+        //bindHandler(TestAnnotatedAction.class, TestAnnotatedActionHandler.class);
     }
 }
