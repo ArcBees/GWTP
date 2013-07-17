@@ -26,11 +26,9 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.gwtplatform.dispatch.server.ActionTestBase;
 import com.gwtplatform.dispatch.server.Dispatch;
-import com.gwtplatform.dispatch.server.actionhandler.TestActionHandler;
 import com.gwtplatform.dispatch.server.actionhandler.TestAnnotatedActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.ServiceException;
-import com.gwtplatform.dispatch.shared.action.TestAction;
 import com.gwtplatform.dispatch.shared.action.TestAnnotatedAction;
 import com.gwtplatform.dispatch.shared.action.TestResult;
 

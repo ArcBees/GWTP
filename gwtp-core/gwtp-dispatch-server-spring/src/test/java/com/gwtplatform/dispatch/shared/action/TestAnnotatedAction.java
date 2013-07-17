@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.shared.action;
 import com.gwtplatform.dispatch.shared.UnsecuredActionImpl;
 
 /**
- * @author Peter Simun
  */
 public class TestAnnotatedAction extends UnsecuredActionImpl<TestResult> {
 
