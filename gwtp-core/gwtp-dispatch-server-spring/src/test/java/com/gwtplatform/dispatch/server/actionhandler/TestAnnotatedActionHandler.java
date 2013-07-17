@@ -26,7 +26,6 @@ import com.gwtplatform.dispatch.shared.action.TestResult;
  */
 @RegisterActionHandler
 public class TestAnnotatedActionHandler extends AbstractActionHandler<TestAnnotatedAction, TestResult> {
-
     public static final String MESSAGE = "This is annotated test message!";
 
     public TestAnnotatedActionHandler() {
