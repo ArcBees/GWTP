@@ -97,8 +97,8 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     public <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(Class<A> actionClass,
             ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
 
-        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses
-                .get(actionClass);
+        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get(
+                actionClass);
 
         if (oldActionHandlerValidatorClass == actionHandlerValidatorClass) {
             actionHandlerValidatorClasses.remove(actionClass);
