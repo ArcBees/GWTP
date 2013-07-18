@@ -34,7 +34,6 @@ import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.RequestProvider;
 
 /**
- * @author Peter Simun
  */
 @Component("dispatch")
 public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler,
@@ -42,10 +41,10 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
 
     private static final long serialVersionUID = 136176741488585959L;
 
-    private ServletContext servletContext;
-
     @Autowired(required = false)
     protected String securityCookieName;
+
+    private ServletContext servletContext;
 
     @Autowired
     public DispatchServiceImpl(final Logger logger, final Dispatch dispatch,
