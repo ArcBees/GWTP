@@ -143,7 +143,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         getEventBus().fireEventFromSource(event, this);
     }
 
-    String getBrowserHistoryToken() {
+    protected String getBrowserHistoryToken() {
         return History.getToken();
     }
 
@@ -298,7 +298,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         event.setMessage(onLeaveQuestion);
     }
 
-    void registerTowardsHistory() {
+    protected void registerTowardsHistory() {
         History.addValueChangeHandler(this);
     }
 
