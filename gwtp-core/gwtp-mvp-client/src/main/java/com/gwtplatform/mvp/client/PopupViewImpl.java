@@ -152,7 +152,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         elem.getStyle().clearTop();
 
         // the popup should be added to the dom in order to get correct values for offsetWidth/offsetHeight
-        if (!isShowing){
+        if (!isShowing) {
             popup.setVisible(false);
             popup.show();
         }
