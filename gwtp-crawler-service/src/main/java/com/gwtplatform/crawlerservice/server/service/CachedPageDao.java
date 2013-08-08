@@ -20,8 +20,6 @@ import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 
 /**
  * The DAO for a {@link CachedPage}.
- *
- * @author Philippe Beaudoin
  */
 public class CachedPageDao extends ObjectifyDao<CachedPage> {
 }
