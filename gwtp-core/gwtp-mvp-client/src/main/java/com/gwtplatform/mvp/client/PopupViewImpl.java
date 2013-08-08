@@ -135,22 +135,36 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
      * This method centers the popup panel, temporarily making it visible if
      * needed.
      */
-    private void doCenter() {
+    protected void doCenter() {
         // We can't use Element.center() method as it will show the popup
         // by default and not only centering it. This is resulting in onAttach()
         // being called twice when using setInSlot() or addToPopupSlot() in PresenterWidget
 
+        PopupPanel popup = asPopupPanel();
+        Element elem = popup.getElement();
+
+        boolean isShowing = popup.isShowing();
         // If left/top are set from a previous doCenter() call, and our content
         // has changed, we may get a bogus getOffsetWidth because our new content
         // is wrapping (giving a lower offset width) then it would without the
         // previous left. Clearing left/top to avoids this.
-        PopupPanel popup = asPopupPanel();
-        Element elem = popup.getElement();
         elem.getStyle().clearLeft();
         elem.getStyle().clearTop();
 
+        // the popup should be added to the dom in order to get correct values for offsetWidth/offsetHeight
+        if (!isShowing) {
+            popup.setVisible(false);
+            popup.show();
+        }
+
         int left = (Window.getClientWidth() - popup.getOffsetWidth()) >> 1;
         int top = (Window.getClientHeight() - popup.getOffsetHeight()) >> 1;
+
+        if (!isShowing) {
+            popup.hide();
+            popup.setVisible(true);
+        }
+
         popup.setPopupPosition(Math.max(Window.getScrollLeft() + left, 0), Math.max(
                 Window.getScrollTop() + top, 0));
     }
