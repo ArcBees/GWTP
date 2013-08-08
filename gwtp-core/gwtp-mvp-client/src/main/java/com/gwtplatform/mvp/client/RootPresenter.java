@@ -120,8 +120,9 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         }
 
         public void unlockScreen() {
-            ensureGlass();
-            Document.get().getBody().removeChild(glass);
+            if (glass != null) {
+                glass.removeFromParent();
+            }
         }
 
         public void ensureGlass() {
@@ -145,7 +146,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
 
     /**
      * Creates a proxy class for a presenter that can contain tabs.
-     * 
+     *
      * @param eventBus
      *            The event bus.
      */
