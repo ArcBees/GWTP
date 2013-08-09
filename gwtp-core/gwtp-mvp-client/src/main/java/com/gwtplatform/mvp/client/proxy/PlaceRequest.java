@@ -184,7 +184,7 @@ public class PlaceRequest {
         return nameToken.equals(other.nameToken);
     }
 
-   /**
+    /**
      * Checks if this place request matches the name token passed.
      *
      * @param nameToken The name token to match.
