@@ -166,6 +166,11 @@ public class PlaceRequest {
         return 11 * (nameToken.hashCode() + (params == null ? 0 : params.hashCode()));
     }
 
+    @Override
+    public String toString() {
+        return "PlaceRequest(nameToken=" + nameToken + ", params=" + params + ")";
+    }
+
     /**
      * Checks if this place request has the same name token as the one passed in.
      *
