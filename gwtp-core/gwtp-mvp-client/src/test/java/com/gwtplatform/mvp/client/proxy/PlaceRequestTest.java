@@ -86,7 +86,7 @@ public class PlaceRequestTest {
         assertNotNull(request);
         assertNotNull(request.toString());
         assertEquals("PlaceRequest(nameToken=nameToken, params={name1=value1, name2=value2})",
-        		request.toString());
+                request.toString());
     }
 }
 
