@@ -227,6 +227,17 @@ public class PlaceRequest {
         private String nameToken;
         private Map<String, String> params;
 
+        public Builder() {
+        }
+
+        /**
+         * 'Copy' constructor for initializing a new <code>Builder</code> with data from an existing request.
+         */
+        public Builder(PlaceRequest request) {
+            nameToken = request.nameToken;
+            params = request.params;
+        }
+
         public Builder nameToken(String nameToken) {
             this.nameToken = nameToken;
 
