@@ -75,4 +75,16 @@ public class PlaceRequestTest {
         assertEquals("value2", request.getParameter("name2", ""));
         assertEquals("value3", request.getParameter("name3", ""));
     }
+
+    @Test
+    public void shouldBuildRequestFromExistingRequest() {
+        // given
+        PlaceRequest request = new PlaceRequest.Builder().nameToken("nameToken").build();
+
+        // when
+        PlaceRequest copyOfRequest = new PlaceRequest.Builder(request).build();
+
+        // then
+        assertEquals(request, copyOfRequest);
+    }
 }
