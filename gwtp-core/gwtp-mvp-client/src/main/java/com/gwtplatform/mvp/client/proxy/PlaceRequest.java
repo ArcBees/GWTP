@@ -227,11 +227,27 @@ public class PlaceRequest {
         private String nameToken;
         private Map<String, String> params;
 
+        /**
+         * Constructor which will not initialize any internal variables; this should be done by calling either {@link
+         * #nameToken(String)}, {@link #with(String, String)} or {@link #with(java.util.Map)} method, e.g.
+         * <pre>
+         * <code>
+         * PlaceRequest request = new PlaceRequest.Builder().nameToken("nameToken").build();
+         * </code>
+         * </pre>
+         */
         public Builder() {
         }
 
         /**
-         * 'Copy' constructor for initializing a new <code>Builder</code> with data from an existing request.
+         * 'Copy' constructor for initializing a new {@link Builder} with data from an existing
+         * {@link com.gwtplatform.mvp.client.proxy.PlaceRequest}, e.g.
+         * <pre>
+         * <code>
+         * PlaceRequest request = placeManager.getCurrentPlaceRequest();
+         * PlaceRequest newRequest = new PlaceRequest.Builder(request).with("newParameter", "newValue").build();
+         * </code>
+         * </pre>
          */
         public Builder(PlaceRequest request) {
             nameToken = request.nameToken;
