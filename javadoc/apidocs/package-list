@@ -73,6 +73,7 @@ com.gwtplatform.dispatch.server.guice.request
 com.gwtplatform.dispatch.server.spring
 com.gwtplatform.dispatch.server.spring.actionhandlervalidator
 com.gwtplatform.dispatch.server.spring.actionvalidator
+com.gwtplatform.dispatch.server.spring.annotation
 com.gwtplatform.dispatch.server.spring.configuration
 com.gwtplatform.dispatch.server.spring.request
 com.gwtplatform.dispatch.server.spring.utils
