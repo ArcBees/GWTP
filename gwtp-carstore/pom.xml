@@ -25,7 +25,8 @@
         <gae.port>8888</gae.port>
         <gae.address>127.0.0.1</gae.address>
 
-        <resteasy.version>3.0-beta-4</resteasy.version>
+        <resteasy.version>3.0.2.Final</resteasy.version>
+        <arcbees.version>1.2-SNAPSHOT</arcbees.version>
     </properties>
 
     <build>
@@ -243,6 +244,11 @@
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>${persistence-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arcbees</groupId>
+            <artifactId>guicy-resteasy</artifactId>
+            <version>${arcbees.version}</version>
         </dependency>
 
         <!-- REST -->
