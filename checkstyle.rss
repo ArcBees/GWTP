@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Dispatch REST - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest</link>
-    <description>GWTP Dispatch REST - Checkstyle report</description>
+    <title>Testing class for gwtp-dispatch projects - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-test</link>
+    <description>Testing class for gwtp-dispatch projects - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2013 ArcBees</copyright>
     <item>
-      <title>File: 39,
+      <title>File: 4,
              Errors: 0,
-             Warnings: 1,
-             Infos: 33
+             Warnings: 0,
+             Infos: 1
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-test/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-test/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.RestDispatcherController.java">com/gwtplatform/dispatch/client/rest/RestDispatcherController.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-test/checkstyle.html#com.gwtplatform.dispatch.server.ActionTestBase.java">com/gwtplatform/dispatch/server/ActionTestBase.java</a>
                 </td>
                 <td>
                   1
@@ -43,35 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.RestActionGenerator.java">com/gwtplatform/dispatch/rebind/RestActionGenerator.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.type.MethodCall.java">com/gwtplatform/dispatch/rebind/type/MethodCall.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.SerializedType.java">com/gwtplatform/dispatch/client/rest/SerializedType.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-test/checkstyle.html#com.gwtplatform.dispatch.shared.action.TestResult.java">com/gwtplatform/dispatch/shared/action/TestResult.java</a>
                 </td>
                 <td>
                   0
@@ -85,133 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.SerializerProviderGenerator.java">com/gwtplatform/dispatch/rebind/SerializerProviderGenerator.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.SerializerProvider.java">com/gwtplatform/dispatch/client/rest/SerializerProvider.java</a>
-                </td>
-                <td>
-                  2
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.XCSRFHeaderName.java">com/gwtplatform/dispatch/client/rest/XCSRFHeaderName.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent.java">com/gwtplatform/dispatch/rebind/event/RegisterSerializerEvent.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.RestGinModuleGenerator.java">com/gwtplatform/dispatch/rebind/RestGinModuleGenerator.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.VelocityGenerator.java">com/gwtplatform/dispatch/rebind/VelocityGenerator.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.RestCallback.java">com/gwtplatform/dispatch/client/rest/RestCallback.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.type.ServiceDefinitions.java">com/gwtplatform/dispatch/rebind/type/ServiceDefinitions.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.RestRequestBuilderFactory.java">com/gwtplatform/dispatch/client/rest/RestRequestBuilderFactory.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.shared.rest.HttpMethod.java">com/gwtplatform/dispatch/shared/rest/HttpMethod.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-test/checkstyle.html#com.gwtplatform.dispatch.shared.action.TestAction.java">com/gwtplatform/dispatch/shared/action/TestAction.java</a>
                 </td>
                 <td>
                   0
@@ -225,346 +71,10 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider.java">com/gwtplatform/dispatch/client/rest/AbstractSerializerProvider.java</a>
-                </td>
-                <td>
-                  1
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-test/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.TestActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/TestActionHandler.java</a>
                 </td>
                 <td>
                   0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.VelocityProperties.java">com/gwtplatform/dispatch/rebind/VelocityProperties.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.NoResultSerializer.java">com/gwtplatform/dispatch/client/rest/NoResultSerializer.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.Logger.java">com/gwtplatform/dispatch/rebind/Logger.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.AbstractRestAction.java">com/gwtplatform/dispatch/client/rest/AbstractRestAction.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.java">com/gwtplatform/dispatch/client/gin/RestDispatchAsyncModule.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.shared.rest.RestService.java">com/gwtplatform/dispatch/shared/rest/RestService.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.RestResponseDeserializer.java">com/gwtplatform/dispatch/client/rest/RestResponseDeserializer.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.type.ActionBinding.java">com/gwtplatform/dispatch/rebind/type/ActionBinding.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.SerializerGenerator.java">com/gwtplatform/dispatch/rebind/SerializerGenerator.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.JsonSerializer.java">com/gwtplatform/dispatch/client/rest/JsonSerializer.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.GeneratorUtil.java">com/gwtplatform/dispatch/rebind/GeneratorUtil.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.event.ChildSerializer.java">com/gwtplatform/dispatch/rebind/event/ChildSerializer.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.Serializer.java">com/gwtplatform/dispatch/client/rest/Serializer.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.RestServiceGenerator.java">com/gwtplatform/dispatch/rebind/RestServiceGenerator.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.ResponseWrapper.java">com/gwtplatform/dispatch/client/rest/ResponseWrapper.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator.java">com/gwtplatform/dispatch/rebind/AbstractVelocityGenerator.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.RestApplicationPath.java">com/gwtplatform/dispatch/client/rest/RestApplicationPath.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.client.rest.RestDispatchAsync.java">com/gwtplatform/dispatch/client/rest/RestDispatchAsync.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.GeneratorFactory.java">com/gwtplatform/dispatch/rebind/GeneratorFactory.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.type.SerializerDefinitions.java">com/gwtplatform/dispatch/rebind/type/SerializerDefinitions.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.RebindModule.java">com/gwtplatform/dispatch/rebind/RebindModule.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding.java">com/gwtplatform/dispatch/rebind/type/RegisterSerializerBinding.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.shared.rest.RestAction.java">com/gwtplatform/dispatch/shared/rest/RestAction.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.shared.rest.RestParameter.java">com/gwtplatform/dispatch/shared/rest/RestParameter.java</a>
-                </td>
-                <td>
-                  1
                 </td>
                 <td>
                   0
