@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c327756 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
+	c327817 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPresenterModule </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/gin/AbstractPresenterModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportMobileModule
-	c328078 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportMobileModule.html">
+	c328123 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportMobileModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportMobileModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.report.ReportMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c327756:p -> c328078:p [dir=back,arrowtail=empty];
+	c327817:p -> c328123:p [dir=back,arrowtail=empty];
 }
 

@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.SimpleResult<T>
-	c66512 [label=<<table title="com.gwtplatform.dispatch.shared.SimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleResult.html">
+	c66515 [label=<<table title="com.gwtplatform.dispatch.shared.SimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimpleResult&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Result
-	c66516 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
+	c66520 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Result </td></tr>
@@ -30,8 +30,8 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./AbstractSimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.SimpleResult<T> extends com.gwtplatform.dispatch.shared.AbstractSimpleResult<T>
-	c66530:p -> c66512:p [dir=back,arrowtail=empty];
+	c66530:p -> c66515:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.shared.AbstractSimpleResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c66516:p -> c66530:p [dir=back,arrowtail=empty,style=dashed];
+	c66520:p -> c66530:p [dir=back,arrowtail=empty,style=dashed];
 }
 

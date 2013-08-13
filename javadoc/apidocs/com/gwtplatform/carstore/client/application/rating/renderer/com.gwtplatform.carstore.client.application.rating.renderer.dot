@@ -10,18 +10,18 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.carstore.client.application.rating.renderer.RatingCell
+	c50695 [label=<<table title="com.gwtplatform.carstore.client.application.rating.renderer.RatingCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingCell.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingCell </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RatingCell.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.renderer.RatingCellFactory
-	c37917 [label=<<table title="com.gwtplatform.carstore.client.application.rating.renderer.RatingCellFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingCellFactory.html">
+	c50696 [label=<<table title="com.gwtplatform.carstore.client.application.rating.renderer.RatingCellFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingCellFactory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RatingCellFactory </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RatingCellFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.renderer.RatingCell
-	c37918 [label=<<table title="com.gwtplatform.carstore.client.application.rating.renderer.RatingCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingCell.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingCell </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RatingCell.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

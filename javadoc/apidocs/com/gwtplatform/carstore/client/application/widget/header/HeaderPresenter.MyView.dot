@@ -10,46 +10,46 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.View
-	c213498 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/View.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> View </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c213518 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/HasUiHandlers.html">
+	c213560 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/HasUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/HasUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.View
+	c213563 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/View.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> View </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderView
-	c213862 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderView.html">
+	c213958 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HeaderView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HeaderView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView
+	c213959 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMobileView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HeaderMobileView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
-	c213865 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HeaderPresenter.MyView.html">
+	c213963 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HeaderPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HeaderPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView
-	c213866 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMobileView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HeaderMobileView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HeaderMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderView implements com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
-	c213865:p -> c213862:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView implements com.gwtplatform.mvp.client.View
-	c213498:p -> c213865:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c213518:p -> c213865:p [dir=back,arrowtail=empty,style=dashed];
+	c213963:p -> c213958:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView implements com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
-	c213865:p -> c213866:p [dir=back,arrowtail=empty,style=dashed];
+	c213963:p -> c213959:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView implements com.gwtplatform.mvp.client.View
+	c213563:p -> c213963:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c213560:p -> c213963:p [dir=back,arrowtail=empty,style=dashed];
 }
 

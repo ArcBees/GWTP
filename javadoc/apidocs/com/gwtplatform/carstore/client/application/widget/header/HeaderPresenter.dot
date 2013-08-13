@@ -11,54 +11,54 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c212906 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PresenterWidget.html">
+	c212963 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PresenterWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler
-	c213182 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/UserLoginEvent.UserLoginHandler.html">
+	c213341 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/UserLoginEvent.UserLoginHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UserLoginHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../event/UserLoginEvent.UserLoginHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c213189 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/ChangeActionBarEvent.ChangeActionBarHandler.html">
+	c213346 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/ChangeActionBarEvent.ChangeActionBarHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ChangeActionBarHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../event/ChangeActionBarEvent.ChangeActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c213191 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
+	c213350 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionBarVisibilityHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
+	c213358 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HeaderPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HeaderPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers
-	c213259 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderUiHandlers.html">
+	c213360 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HeaderUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HeaderUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
-	c213260 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HeaderPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HeaderPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView>
-	c212906:p -> c213260:p [dir=back,arrowtail=empty];
+	c212963:p -> c213358:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers
-	c213259:p -> c213260:p [dir=back,arrowtail=empty,style=dashed];
+	c213360:p -> c213358:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler
-	c213182:p -> c213260:p [dir=back,arrowtail=empty,style=dashed];
+	c213341:p -> c213358:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c213189:p -> c213260:p [dir=back,arrowtail=empty,style=dashed];
+	c213346:p -> c213358:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c213191:p -> c213260:p [dir=back,arrowtail=empty,style=dashed];
+	c213350:p -> c213358:p [dir=back,arrowtail=empty,style=dashed];
 }
 

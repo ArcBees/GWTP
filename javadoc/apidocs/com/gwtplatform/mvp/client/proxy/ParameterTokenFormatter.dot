@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter
+	c278778 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ParameterTokenFormatter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ParameterTokenFormatter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ParameterTokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c278814 [label=<<table title="com.gwtplatform.mvp.client.proxy.TokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TokenFormatter.html">
+	c278797 [label=<<table title="com.gwtplatform.mvp.client.proxy.TokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TokenFormatter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> TokenFormatter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter
-	c278847 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ParameterTokenFormatter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ParameterTokenFormatter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ParameterTokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter implements com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c278814:p -> c278847:p [dir=back,arrowtail=empty,style=dashed];
+	c278797:p -> c278778:p [dir=back,arrowtail=empty,style=dashed];
 }
 

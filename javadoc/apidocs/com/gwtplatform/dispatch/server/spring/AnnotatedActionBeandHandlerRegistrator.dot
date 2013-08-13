@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator
-	c83144 [label=<<table title="com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AnnotatedActionBeandHandlerRegistrator.html">
+	c83139 [label=<<table title="com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AnnotatedActionBeandHandlerRegistrator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AnnotatedActionBeandHandlerRegistrator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./AnnotatedActionBeandHandlerRegistrator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator implements org.springframework.beans.factory.config.BeanPostProcessor
-	c83426:p -> c83144:p [dir=back,arrowtail=empty,style=dashed];
+	c83426:p -> c83139:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator implements org.springframework.core.Ordered
-	c83427:p -> c83144:p [dir=back,arrowtail=empty,style=dashed];
+	c83427:p -> c83139:p [dir=back,arrowtail=empty,style=dashed];
 	// org.springframework.beans.factory.config.BeanPostProcessor
 	c83426 [label=<<table title="org.springframework.beans.factory.config.BeanPostProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/config/BeanPostProcessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

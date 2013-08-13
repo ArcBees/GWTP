@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c249188 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/gin/AbstractPresenterModule.html">
+	c249249 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/gin/AbstractPresenterModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPresenterModule </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/gin/AbstractPresenterModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesModule
-	c249524 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessagesModule.html">
+	c249623 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessagesModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MessagesModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c249188:p -> c249524:p [dir=back,arrowtail=empty];
+	c249249:p -> c249623:p [dir=back,arrowtail=empty];
 }
 

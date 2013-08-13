@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.DispatchService
-	c382604 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../dispatch/shared/DispatchService.html">
+	c382606 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../dispatch/shared/DispatchService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchService </td></tr>
 		</table></td></tr>
 		</table>>, URL="../dispatch/shared/DispatchService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.TestDispatchService
-	c382676 [label=<<table title="com.gwtplatform.tester.TestDispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchService.html">
+	c382677 [label=<<table title="com.gwtplatform.tester.TestDispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestDispatchService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TestDispatchService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.tester.TestDispatchService implements com.gwtplatform.dispatch.shared.DispatchService
-	c382604:p -> c382676:p [dir=back,arrowtail=empty,style=dashed];
+	c382606:p -> c382677:p [dir=back,arrowtail=empty,style=dashed];
 }
 

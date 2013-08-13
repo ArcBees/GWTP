@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ChangeTabEvent
-	c130728 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ChangeTabEvent.html">
+	c130776 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ChangeTabEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ChangeTabEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ChangeTabEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.ChangeTabEvent extends com.google.gwt.event.shared.GwtEvent<com.gwtplatform.mvp.client.ChangeTabHandler>
-	c131177:p -> c130728:p [dir=back,arrowtail=empty];
+	c131177:p -> c130776:p [dir=back,arrowtail=empty];
 	// com.google.gwt.event.shared.GwtEvent<H extends com.google.gwt.event.shared.EventHandler>
 	c131177 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c200930 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../AbstractVelocityGenerator.html">
+	c200806 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../AbstractVelocityGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator
-	c200931 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GinjectorProviderGenerator.html">
+	c200811 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GinjectorProviderGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GinjectorProviderGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GinjectorProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c200930:p -> c200931:p [dir=back,arrowtail=empty];
+	c200806:p -> c200811:p [dir=back,arrowtail=empty];
 }
 

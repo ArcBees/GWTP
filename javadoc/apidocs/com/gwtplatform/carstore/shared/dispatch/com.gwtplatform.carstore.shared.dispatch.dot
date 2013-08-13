@@ -11,28 +11,28 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.shared.dispatch.LogInResult
-	c54343 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.LogInResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LogInResult.html">
+	c34229 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.LogInResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LogInResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LogInResult </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LogInResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dispatch.LogInRequest
-	c54344 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.LogInRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LogInRequest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LogInRequest </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LogInRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dispatch.GetResults<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c54345 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResults" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GetResults.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GetResults&lt;T extends Dto&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GetResults.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dispatch.GetResult<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c54346 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GetResult.html">
+	c34230 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GetResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GetResult&lt;T extends Dto&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GetResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dispatch.GetResults<T extends com.gwtplatform.carstore.shared.dto.Dto>
+	c34231 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResults" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GetResults.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GetResults&lt;T extends Dto&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GetResults.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dispatch.LogInRequest
+	c34232 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.LogInRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LogInRequest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LogInRequest </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LogInRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

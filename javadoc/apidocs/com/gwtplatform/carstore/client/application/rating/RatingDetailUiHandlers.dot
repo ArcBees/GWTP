@@ -11,28 +11,28 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.UiHandlers
-	c315635 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/UiHandlers.html">
+	c315711 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/UiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/UiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.RatingDetailUiHandlers
-	c315974 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingDetailUiHandlers.html">
+	c316065 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingDetailUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RatingDetailUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RatingDetailUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter
-	c315975 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDetailPresenter.html">
+	c316066 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDetailPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RatingDetailPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RatingDetailPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.RatingDetailUiHandlers implements com.gwtplatform.mvp.client.UiHandlers
-	c315635:p -> c315974:p [dir=back,arrowtail=empty,style=dashed];
+	c315711:p -> c316065:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter implements com.gwtplatform.carstore.client.application.rating.RatingDetailUiHandlers
-	c315974:p -> c315975:p [dir=back,arrowtail=empty,style=dashed];
+	c316065:p -> c316066:p [dir=back,arrowtail=empty,style=dashed];
 }
 

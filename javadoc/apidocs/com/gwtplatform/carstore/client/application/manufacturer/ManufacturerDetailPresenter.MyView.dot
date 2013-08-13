@@ -10,38 +10,38 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.View
-	c235860 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/View.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> View </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c235880 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/HasUiHandlers.html">
+	c235922 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/HasUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/HasUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.View
+	c235925 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/View.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> View </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView
-	c236178 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailView.html">
+	c236201 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerDetailView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerDetailView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView
-	c236181 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerDetailPresenter.MyView.html">
+	c236206 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerDetailPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerDetailPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView
-	c236181:p -> c236178:p [dir=back,arrowtail=empty,style=dashed];
+	c236206:p -> c236201:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView implements com.gwtplatform.mvp.client.View
-	c235860:p -> c236181:p [dir=back,arrowtail=empty,style=dashed];
+	c235925:p -> c236206:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c235880:p -> c236181:p [dir=back,arrowtail=empty,style=dashed];
+	c235922:p -> c236206:p [dir=back,arrowtail=empty,style=dashed];
 }
 

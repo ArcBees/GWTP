@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c244920 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
+	c245017 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView
-	c245232 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerView.html">
+	c245260 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView
-	c245235 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.MyView.html">
+	c245265 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView extends com.gwtplatform.mvp.client.ViewWithUiHandlers<com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers>
-	c244920:p -> c245232:p [dir=back,arrowtail=empty];
+	c245017:p -> c245260:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView
-	c245235:p -> c245232:p [dir=back,arrowtail=empty,style=dashed];
+	c245265:p -> c245260:p [dir=back,arrowtail=empty,style=dashed];
 }
 

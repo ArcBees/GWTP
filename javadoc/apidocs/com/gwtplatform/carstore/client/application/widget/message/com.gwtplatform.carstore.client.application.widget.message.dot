@@ -10,52 +10,52 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.widget.message.MessagesView
-	c42170 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesView.html">
+	// com.gwtplatform.carstore.client.application.widget.message.Message
+	c53745 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.Message" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Message.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MessagesView </td></tr>
+<tr><td align="center" balign="center"> Message </td></tr>
 		</table></td></tr>
-		</table>>, URL="./MessagesView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Message.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessageStyle
-	c42171 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessageStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessageStyle.html">
+	c53746 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessageStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessageStyle.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> MessageStyle </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MessageStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter
-	c42172 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesPresenter.html">
+	c53747 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MessagesPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView
-	c42173 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesPresenter.MyView.html">
+	c53748 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MessagesPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.message.MessagesView
+	c53749 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MessagesView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MessagesView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesModule
-	c42174 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesModule.html">
+	c53750 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MessagesModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessageCloseDelay
-	c42175 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessageCloseDelay" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessageCloseDelay.html">
+	c53751 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessageCloseDelay" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessageCloseDelay.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> MessageCloseDelay </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MessageCloseDelay.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.message.Message
-	c42176 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.Message" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Message.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Message </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Message.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesView implements com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView
-	c42173:p -> c42170:p [dir=back,arrowtail=empty,style=dashed];
+	c53748:p -> c53749:p [dir=back,arrowtail=empty,style=dashed];
 }
 

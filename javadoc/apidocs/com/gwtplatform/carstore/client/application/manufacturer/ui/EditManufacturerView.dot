@@ -11,32 +11,32 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c174229 [label=<<table title="com.gwtplatform.mvp.client.PopupViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PopupViewWithUiHandlers.html">
+	c174286 [label=<<table title="com.gwtplatform.mvp.client.PopupViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PopupViewWithUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/PopupViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView
-	c174538 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditManufacturerView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> EditManufacturerView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditManufacturerView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView
-	c174541 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.MyView.html">
+	c174567 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditManufacturerPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView
+	c174569 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditManufacturerView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> EditManufacturerView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditManufacturerView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView extends com.gwtplatform.mvp.client.PopupViewWithUiHandlers<com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers>
-	c174229:p -> c174538:p [dir=back,arrowtail=empty];
+	c174286:p -> c174569:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView implements com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView
-	c174541:p -> c174538:p [dir=back,arrowtail=empty,style=dashed];
+	c174567:p -> c174569:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView implements com.google.gwt.editor.client.Editor<T>
-	c174693:p -> c174538:p [dir=back,arrowtail=empty,style=dashed];
+	c174692:p -> c174569:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.editor.client.Editor<T>
-	c174693 [label=<<table title="com.google.gwt.editor.client.Editor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html">
+	c174692 [label=<<table title="com.google.gwt.editor.client.Editor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Editor&lt;T&gt; </td></tr>

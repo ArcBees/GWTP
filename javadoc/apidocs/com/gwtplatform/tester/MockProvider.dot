@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.tester.MockProvider<T>
-	c256974 [label=<<table title="com.gwtplatform.tester.MockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MockProvider.html">
+	c256978 [label=<<table title="com.gwtplatform.tester.MockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MockProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MockProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MockProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.tester.MockProvider<T> implements com.google.inject.Provider<T>
-	c257488:p -> c256974:p [dir=back,arrowtail=empty,style=dashed];
+	c257487:p -> c256978:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.inject.Provider<T>
-	c257488 [label=<<table title="com.google.inject.Provider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html">
+	c257487 [label=<<table title="com.google.inject.Provider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Provider&lt;T&gt; </td></tr>

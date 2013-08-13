@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.guice.HandlerModule
-	c208235 [label=<<table title="com.gwtplatform.dispatch.server.guice.HandlerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HandlerModule.html">
+	c208231 [label=<<table title="com.gwtplatform.dispatch.server.guice.HandlerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HandlerModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> HandlerModule </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./HandlerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.guice.HandlerModule extends com.google.inject.AbstractModule
-	c208539:p -> c208235:p [dir=back,arrowtail=empty];
+	c208538:p -> c208231:p [dir=back,arrowtail=empty];
 	// com.google.inject.AbstractModule
-	c208539 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
+	c208538 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractModule </font></td></tr>
 		</table></td></tr>

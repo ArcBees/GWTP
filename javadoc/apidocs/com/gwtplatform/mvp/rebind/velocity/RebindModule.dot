@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.velocity.RebindModule
-	c323606 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RebindModule.html">
+	c323487 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RebindModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RebindModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RebindModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.velocity.RebindModule extends com.google.inject.AbstractModule
-	c323967:p -> c323606:p [dir=back,arrowtail=empty];
+	c323966:p -> c323487:p [dir=back,arrowtail=empty];
 	// com.google.inject.AbstractModule
-	c323967 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
+	c323966 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractModule </font></td></tr>
 		</table></td></tr>

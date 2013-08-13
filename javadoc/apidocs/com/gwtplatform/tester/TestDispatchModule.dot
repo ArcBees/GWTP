@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.tester.TestDispatchModule
-	c382072 [label=<<table title="com.gwtplatform.tester.TestDispatchModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchModule.html">
+	c382076 [label=<<table title="com.gwtplatform.tester.TestDispatchModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestDispatchModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TestDispatchModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.tester.TestDispatchModule extends com.google.inject.AbstractModule
-	c382588:p -> c382072:p [dir=back,arrowtail=empty];
+	c382587:p -> c382076:p [dir=back,arrowtail=empty];
 	// com.google.inject.AbstractModule
-	c382588 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
+	c382587 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractModule </font></td></tr>
 		</table></td></tr>

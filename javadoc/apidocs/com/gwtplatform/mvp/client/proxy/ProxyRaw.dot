@@ -11,25 +11,25 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.ProxyRaw
-	c307835 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyRaw" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyRaw.html">
+	c307784 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyRaw" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyRaw.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ProxyRaw </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyRaw.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.Proxy<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c307840 [label=<<table title="com.gwtplatform.mvp.client.proxy.Proxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Proxy.html">
+	c307836 [label=<<table title="com.gwtplatform.mvp.client.proxy.Proxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Proxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Proxy&lt;P extends Presenter&lt;?, ?&gt;&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Proxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.ProxyRaw implements com.google.gwt.event.shared.HasHandlers
-	c308257:p -> c307835:p [dir=back,arrowtail=empty,style=dashed];
+	c308256:p -> c307784:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.proxy.Proxy<P extends com.gwtplatform.mvp.client.Presenter<?, ?>> implements com.gwtplatform.mvp.client.proxy.ProxyRaw
-	c307835:p -> c307840:p [dir=back,arrowtail=empty,style=dashed];
+	c307784:p -> c307836:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.HasHandlers
-	c308257 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
+	c308256 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasHandlers </td></tr>

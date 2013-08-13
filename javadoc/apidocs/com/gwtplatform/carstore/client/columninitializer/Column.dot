@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.columninitializer.Column
-	c139542 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.Column" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Column.html">
+	c139485 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.Column" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Column.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Column </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./Column.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.columninitializer.Column implements java.lang.annotation.Annotation
-	c139640:p -> c139542:p [dir=back,arrowtail=empty,style=dashed];
+	c139639:p -> c139485:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c139640 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c139639 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

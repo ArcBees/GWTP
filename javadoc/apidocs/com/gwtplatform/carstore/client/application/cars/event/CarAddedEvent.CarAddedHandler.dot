@@ -11,22 +11,22 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.cars.CarsPresenter
-	c108005 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../CarsPresenter.html">
+	c108086 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../CarsPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarsPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../CarsPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler
-	c108013 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarAddedEvent.CarAddedHandler.html">
+	c108097 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarAddedEvent.CarAddedHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CarAddedHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarAddedEvent.CarAddedHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.CarsPresenter implements com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler
-	c108013:p -> c108005:p [dir=back,arrowtail=empty,style=dashed];
+	c108097:p -> c108086:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler implements com.google.gwt.event.shared.EventHandler
-	c108208:p -> c108013:p [dir=back,arrowtail=empty,style=dashed];
+	c108208:p -> c108097:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
 	c108208 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

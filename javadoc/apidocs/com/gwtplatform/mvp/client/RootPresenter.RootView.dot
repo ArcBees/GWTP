@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewImpl
-	c354312 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewImpl.html">
+	c354380 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.RootPresenter.RootView
-	c354322 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter.RootView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootPresenter.RootView.html">
+	c354394 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter.RootView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootPresenter.RootView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RootView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RootPresenter.RootView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.RootPresenter.RootView extends com.gwtplatform.mvp.client.ViewImpl
-	c354312:p -> c354322:p [dir=back,arrowtail=empty];
+	c354380:p -> c354394:p [dir=back,arrowtail=empty];
 }
 

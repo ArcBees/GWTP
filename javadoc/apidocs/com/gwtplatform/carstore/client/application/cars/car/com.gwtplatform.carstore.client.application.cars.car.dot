@@ -10,124 +10,124 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
-	c29363 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootCarView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter
-	c29364 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootCarPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootCarPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
-	c29365 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.MyView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MyView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootCarPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyProxy
-	c29366 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.MyProxy.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MyProxy </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootCarPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarView
-	c29367 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers
-	c29368 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarUiHandlers.html">
+	c45191 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CarUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarRenderer
-	c29369 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarRenderer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarRenderer </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarRenderer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImplFactory
-	c29370 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImplFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyImplFactory.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> CarProxyImplFactory </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarProxyImplFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl
-	c29371 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarProxyImpl </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarProxyImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy
-	c29372 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyImpl.WrappedProxy.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> WrappedProxy </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarProxyImpl.WrappedProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory
-	c29373 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyFactory.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarProxyFactory </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarProxyFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarPresenterProvider
-	c29374 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenterProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenterProvider.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarPresenterProvider </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarPresenterProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarPresenterFactory
-	c29375 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenterFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenterFactory.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> CarPresenterFactory </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarPresenterFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarPresenter
-	c29376 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.html">
+	c45192 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView
-	c29377 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.MyView.html">
+	c45193 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy
-	c29378 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.MyProxy.html">
+	c45194 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter
+	c45195 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootCarPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootCarPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
+	c45196 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.MyView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MyView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootCarPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyProxy
+	c45197 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.MyProxy.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MyProxy </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootCarPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImplFactory
+	c45198 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImplFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyImplFactory.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> CarProxyImplFactory </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarProxyImplFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
+	c45199 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootCarView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarPresenterProvider
+	c45200 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenterProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenterProvider.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarPresenterProvider </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarPresenterProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarMobileView
-	c29379 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarMobileView.html">
+	c45201 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarMobileView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarMobileView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.cars.car.RootCarView implements com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
-	c29365:p -> c29363:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.cars.car.CarView implements com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView
-	c29377:p -> c29367:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl implements com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy
-	c29378:p -> c29371:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.client.application.cars.car.CarPresenterFactory
+	c45202 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenterFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenterFactory.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> CarPresenterFactory </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarPresenterFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl
+	c45203 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarProxyImpl </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarProxyImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy
+	c45204 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyImpl.WrappedProxy.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> WrappedProxy </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarProxyImpl.WrappedProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarRenderer
+	c45205 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarRenderer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarRenderer </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarRenderer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarView
+	c45206 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory
+	c45207 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProxyFactory.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarProxyFactory </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarProxyFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.CarPresenter implements com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers
-	c29368:p -> c29376:p [dir=back,arrowtail=empty,style=dashed];
+	c45191:p -> c45192:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.cars.car.RootCarView implements com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
+	c45196:p -> c45199:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.CarMobileView implements com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView
-	c29377:p -> c29379:p [dir=back,arrowtail=empty,style=dashed];
+	c45193:p -> c45201:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl implements com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy
+	c45194:p -> c45203:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.cars.car.CarView implements com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView
+	c45193:p -> c45206:p [dir=back,arrowtail=empty,style=dashed];
 }
 

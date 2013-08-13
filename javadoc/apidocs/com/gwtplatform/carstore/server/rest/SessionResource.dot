@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.rest.SessionResource
-	c366856 [label=<<table title="com.gwtplatform.carstore.server.rest.SessionResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SessionResource.html">
+	c366653 [label=<<table title="com.gwtplatform.carstore.server.rest.SessionResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SessionResource.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SessionResource </td></tr>
 		</table></td></tr>

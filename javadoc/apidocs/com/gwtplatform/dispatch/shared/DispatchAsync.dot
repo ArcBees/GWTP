@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.DispatchAsync
-	c162018 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchAsync.html">
+	c162013 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchAsync </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c162041 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/AbstractDispatchAsync.html">
+	c162026 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/AbstractDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchAsync </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../client/AbstractDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.TestDispatchAsync
-	c162090 [label=<<table title="com.gwtplatform.tester.TestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../tester/TestDispatchAsync.html">
+	c162096 [label=<<table title="com.gwtplatform.tester.TestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../tester/TestDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestDispatchAsync </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../tester/TestDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.AbstractDispatchAsync implements com.gwtplatform.dispatch.shared.DispatchAsync
-	c162018:p -> c162041:p [dir=back,arrowtail=empty,style=dashed];
+	c162013:p -> c162026:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.tester.TestDispatchAsync implements com.gwtplatform.dispatch.shared.DispatchAsync
-	c162018:p -> c162090:p [dir=back,arrowtail=empty,style=dashed];
+	c162013:p -> c162096:p [dir=back,arrowtail=empty,style=dashed];
 }
 

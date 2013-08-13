@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.RequestProvider
-	c332488 [label=<<table title="com.gwtplatform.dispatch.server.RequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RequestProvider.html">
+	c332486 [label=<<table title="com.gwtplatform.dispatch.server.RequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RequestProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RequestProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RequestProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider
-	c332734 [label=<<table title="com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./guice/request/DefaultRequestProvider.html">
+	c332730 [label=<<table title="com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./guice/request/DefaultRequestProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultRequestProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./guice/request/DefaultRequestProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider
-	c332752 [label=<<table title="com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./spring/request/DefaultRequestProvider.html">
+	c332747 [label=<<table title="com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./spring/request/DefaultRequestProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultRequestProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./spring/request/DefaultRequestProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider implements com.gwtplatform.dispatch.server.RequestProvider
-	c332488:p -> c332734:p [dir=back,arrowtail=empty,style=dashed];
+	c332486:p -> c332730:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider implements com.gwtplatform.dispatch.server.RequestProvider
-	c332488:p -> c332752:p [dir=back,arrowtail=empty,style=dashed];
+	c332486:p -> c332747:p [dir=back,arrowtail=empty,style=dashed];
 }
 

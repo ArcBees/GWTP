@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c226794 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
+	c226891 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
-	c227099 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyView.html">
+	c227214 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LoginPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginMobileView
-	c227102 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginMobileView.html">
+	c227217 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginMobileView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoginMobileView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LoginMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.login.LoginMobileView extends com.gwtplatform.mvp.client.ViewWithUiHandlers<com.gwtplatform.carstore.client.application.login.LoginUiHandlers>
-	c226794:p -> c227102:p [dir=back,arrowtail=empty];
+	c226891:p -> c227217:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.login.LoginMobileView implements com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
-	c227099:p -> c227102:p [dir=back,arrowtail=empty,style=dashed];
+	c227214:p -> c227217:p [dir=back,arrowtail=empty,style=dashed];
 }
 

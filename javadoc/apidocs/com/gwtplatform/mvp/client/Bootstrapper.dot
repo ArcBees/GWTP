@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.DefaultBootstrapper
-	c102318 [label=<<table title="com.gwtplatform.mvp.client.DefaultBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultBootstrapper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultBootstrapper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultBootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.Bootstrapper
-	c102321 [label=<<table title="com.gwtplatform.mvp.client.Bootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Bootstrapper.html">
+	c102360 [label=<<table title="com.gwtplatform.mvp.client.Bootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Bootstrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Bootstrapper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Bootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.DefaultBootstrapper
+	c102366 [label=<<table title="com.gwtplatform.mvp.client.DefaultBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultBootstrapper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultBootstrapper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultBootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.DefaultBootstrapper implements com.gwtplatform.mvp.client.Bootstrapper
-	c102321:p -> c102318:p [dir=back,arrowtail=empty,style=dashed];
+	c102360:p -> c102366:p [dir=back,arrowtail=empty,style=dashed];
 }
 

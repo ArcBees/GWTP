@@ -11,28 +11,28 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c337287 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Action.html">
+	c337271 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Action.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Action&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../Action.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.AbstractRestAction<R extends com.gwtplatform.dispatch.shared.Result>
-	c337531 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractRestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../client/rest/AbstractRestAction.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractRestAction&lt;R extends Result&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="../../client/rest/AbstractRestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result>
-	c337553 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestAction.html">
+	c337539 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestAction.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RestAction&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.rest.AbstractRestAction<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result>
-	c337553:p -> c337531:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.dispatch.client.rest.AbstractRestAction<R extends com.gwtplatform.dispatch.shared.Result>
+	c337543 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractRestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../client/rest/AbstractRestAction.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractRestAction&lt;R extends Result&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="../../client/rest/AbstractRestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c337287:p -> c337553:p [dir=back,arrowtail=empty,style=dashed];
+	c337271:p -> c337539:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.rest.AbstractRestAction<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result>
+	c337539:p -> c337543:p [dir=back,arrowtail=empty,style=dashed];
 }
 

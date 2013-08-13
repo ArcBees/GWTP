@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl
-	c202660 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalyticsImpl.html">
+	c202722 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalyticsImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GoogleAnalyticsImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GoogleAnalyticsImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics
-	c202661 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GoogleAnalytics.html">
+	c202723 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GoogleAnalytics.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> GoogleAnalytics </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GoogleAnalytics.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl implements com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics
-	c202661:p -> c202660:p [dir=back,arrowtail=empty,style=dashed];
+	c202723:p -> c202722:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -10,85 +10,85 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.Tab
-	c29984 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Tab.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Tab </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers
-	c29985 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> NavigationUiHandlers </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView
-	c29986 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NavigationTabView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationTabView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter
-	c29987 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NavigationTabPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationTabPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView
-	c29988 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.MyView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MyView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationTabPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent
-	c29989 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabEvent.html">
+	c46417 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NavigationTabEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./NavigationTabEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
-	c29990 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabEvent.NavigationTabHandler.html">
+	c46418 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabEvent.NavigationTabHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> NavigationTabHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./NavigationTabEvent.NavigationTabHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab
-	c29991 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTab.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> NavigationTab </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationTab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent
-	c29992 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CloseTabEvent.html">
+	c46419 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CloseTabEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CloseTabEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CloseTabEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.CloseTabHandler
-	c29993 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.CloseTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CloseTabEvent.CloseTabHandler.html">
+	c46420 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.CloseTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CloseTabEvent.CloseTabHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CloseTabHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CloseTabEvent.CloseTabHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers
-	c29994 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CloseTabEvent.HasCloseTabHandlers.html">
+	c46421 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CloseTabEvent.HasCloseTabHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasCloseTabHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CloseTabEvent.HasCloseTabHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.cars.car.navigation.Tab implements com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers
-	c29994:p -> c29984:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers
+	c46422 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> NavigationUiHandlers </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView
+	c46423 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NavigationTabView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationTabView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter
+	c46424 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NavigationTabPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationTabPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView
+	c46425 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.MyView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MyView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationTabPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.Tab
+	c46426 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Tab.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Tab </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab
+	c46427 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTab.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> NavigationTab </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationTab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView
-	c29988:p -> c29986:p [dir=back,arrowtail=empty,style=dashed];
+	c46425:p -> c46423:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
-	c29990:p -> c29987:p [dir=back,arrowtail=empty,style=dashed];
+	c46418:p -> c46424:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers
-	c29985:p -> c29987:p [dir=back,arrowtail=empty,style=dashed];
+	c46422:p -> c46424:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.cars.car.navigation.Tab implements com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers
+	c46421:p -> c46426:p [dir=back,arrowtail=empty,style=dashed];
 }
 

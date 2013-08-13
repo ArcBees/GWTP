@@ -11,34 +11,34 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.objectify.OfyService
-	c51307 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.OfyService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OfyService.html">
+	c33010 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.OfyService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OfyService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OfyService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./OfyService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.objectify.OfyFactory
-	c51308 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.OfyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OfyFactory.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> OfyFactory </td></tr>
-		</table></td></tr>
-		</table>>, URL="./OfyFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.objectify.Ofy
-	c51309 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Ofy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Ofy.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Ofy </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Ofy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.objectify.Deref
-	c51310 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Deref" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Deref.html">
+	c33011 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Deref" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Deref.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Deref </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Deref.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.objectify.Deref.Func<T>
-	c51311 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Deref.Func" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Deref.Func.html">
+	c33012 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Deref.Func" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Deref.Func.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Func&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Deref.Func.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.objectify.OfyFactory
+	c33013 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.OfyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OfyFactory.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> OfyFactory </td></tr>
+		</table></td></tr>
+		</table>>, URL="./OfyFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.objectify.Ofy
+	c33014 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Ofy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Ofy.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Ofy </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Ofy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

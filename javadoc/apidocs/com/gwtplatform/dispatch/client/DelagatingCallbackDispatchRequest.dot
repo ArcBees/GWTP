@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest<R>
-	c156597 [label=<<table title="com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DelagatingCallbackDispatchRequest.html">
+	c156599 [label=<<table title="com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DelagatingCallbackDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DelagatingCallbackDispatchRequest&lt;R&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DelagatingCallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c156603 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CallbackDispatchRequest.html">
+	c156600 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CallbackDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CallbackDispatchRequest&lt;R&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest<R> implements com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c156603:p -> c156597:p [dir=back,arrowtail=empty,style=dashed];
+	c156600:p -> c156599:p [dir=back,arrowtail=empty,style=dashed];
 }
 

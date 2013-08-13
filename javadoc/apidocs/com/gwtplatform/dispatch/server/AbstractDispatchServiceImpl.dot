@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.DispatchService
-	c61680 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../shared/DispatchService.html">
+	c61683 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../shared/DispatchService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchService </td></tr>
@@ -24,13 +24,13 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./AbstractDispatchServiceImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
-	c61968 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchServiceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./guice/DispatchServiceImpl.html">
+	c61964 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchServiceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./guice/DispatchServiceImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchServiceImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./guice/DispatchServiceImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.DispatchServiceImpl
-	c61984 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchServiceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./spring/DispatchServiceImpl.html">
+	c61979 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchServiceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./spring/DispatchServiceImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchServiceImpl </td></tr>
 		</table></td></tr>
@@ -38,11 +38,11 @@ digraph G {
 	//com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl extends com.google.gwt.user.server.rpc.RemoteServiceServlet
 	c62271:p -> c61731:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl implements com.gwtplatform.dispatch.shared.DispatchService
-	c61680:p -> c61731:p [dir=back,arrowtail=empty,style=dashed];
+	c61683:p -> c61731:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.guice.DispatchServiceImpl extends com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl
-	c61731:p -> c61968:p [dir=back,arrowtail=empty];
+	c61731:p -> c61964:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.server.spring.DispatchServiceImpl extends com.gwtplatform.dispatch.server.AbstractDispatchServiceImpl
-	c61731:p -> c61984:p [dir=back,arrowtail=empty];
+	c61731:p -> c61979:p [dir=back,arrowtail=empty];
 	// com.google.gwt.user.server.rpc.RemoteServiceServlet
 	c62271 [label=<<table title="com.google.gwt.user.server.rpc.RemoteServiceServlet" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/server/rpc/RemoteServiceServlet.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

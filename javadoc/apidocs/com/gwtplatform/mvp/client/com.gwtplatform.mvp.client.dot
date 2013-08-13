@@ -10,288 +10,288 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c7975 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewWithUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.ViewImpl
-	c7976 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.View
-	c7977 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> View </td></tr>
-		</table></td></tr>
-		</table>>, URL="./View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.UiHandlers
-	c7978 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> UiHandlers </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.TabView
-	c7979 [label=<<table title="com.gwtplatform.mvp.client.TabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> TabView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./TabView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.TabPanel
-	c7980 [label=<<table title="com.gwtplatform.mvp.client.TabPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabPanel.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> TabPanel </td></tr>
-		</table></td></tr>
-		</table>>, URL="./TabPanel.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.TabDataBasic
-	c7981 [label=<<table title="com.gwtplatform.mvp.client.TabDataBasic" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabDataBasic.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TabDataBasic </td></tr>
-		</table></td></tr>
-		</table>>, URL="./TabDataBasic.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.TabData
-	c7982 [label=<<table title="com.gwtplatform.mvp.client.TabData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabData.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> TabData </td></tr>
-		</table></td></tr>
-		</table>>, URL="./TabData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.TabContainerPresenter<V extends com.gwtplatform.mvp.client.View & com.gwtplatform.mvp.client.TabPanel, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c7983 [label=<<table title="com.gwtplatform.mvp.client.TabContainerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabContainerPresenter.html">
+	c9850 [label=<<table title="com.gwtplatform.mvp.client.TabContainerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabContainerPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> TabContainerPresenter&lt;V extends View &amp; TabPanel, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./TabContainerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.Tab
-	c7984 [label=<<table title="com.gwtplatform.mvp.client.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Tab.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> Tab </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.RootPresenter
-	c7985 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.RootPresenter.RootView
-	c7986 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter.RootView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.RootView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootPresenter.RootView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.RequestTabsHandler
-	c7987 [label=<<table title="com.gwtplatform.mvp.client.RequestTabsHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RequestTabsHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> RequestTabsHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RequestTabsHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.RequestTabsEvent
-	c7988 [label=<<table title="com.gwtplatform.mvp.client.RequestTabsEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RequestTabsEvent.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RequestTabsEvent </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RequestTabsEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c7989 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c7990 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Presenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.Presenter.RevealType
-	c7991 [label=<<table title="com.gwtplatform.mvp.client.Presenter.RevealType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Presenter.RevealType.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
-<tr><td align="center" balign="center"> RevealType </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Presenter.RevealType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PreBootstrapper
-	c7992 [label=<<table title="com.gwtplatform.mvp.client.PreBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PreBootstrapper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> PreBootstrapper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PreBootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c7993 [label=<<table title="com.gwtplatform.mvp.client.PopupViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewWithUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PopupViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PopupViewImpl
-	c7994 [label=<<table title="com.gwtplatform.mvp.client.PopupViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewImpl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PopupViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PopupViewCloseHandler
-	c7995 [label=<<table title="com.gwtplatform.mvp.client.PopupViewCloseHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewCloseHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> PopupViewCloseHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PopupViewCloseHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PopupView
-	c7996 [label=<<table title="com.gwtplatform.mvp.client.PopupView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> PopupView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PopupView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c7997 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasUiHandlers.html">
+	c9851 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HasUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HasSlots
-	c7998 [label=<<table title="com.gwtplatform.mvp.client.HasSlots" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasSlots.html">
+	// com.gwtplatform.mvp.client.PopupView
+	c9852 [label=<<table title="com.gwtplatform.mvp.client.PopupView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HasSlots </td></tr>
+<tr><td align="center" balign="center"> PopupView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./HasSlots.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HasPopupSlot
-	c7999 [label=<<table title="com.gwtplatform.mvp.client.HasPopupSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasPopupSlot.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HasPopupSlot </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HasPopupSlot.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HasHandlerContainer
-	c8000 [label=<<table title="com.gwtplatform.mvp.client.HasHandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasHandlerContainer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HasHandlerContainer </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HasHandlerContainer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HasEventBus
-	c8001 [label=<<table title="com.gwtplatform.mvp.client.HasEventBus" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasEventBus.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HasEventBus </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HasEventBus.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HandlerContainerImpl
-	c8002 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainerImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HandlerContainerImpl </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HandlerContainerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PopupView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HandlerContainer
-	c8003 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainer.html">
+	c9853 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HandlerContainer </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HandlerContainer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.DelayedBindRegistry
-	c8004 [label=<<table title="com.gwtplatform.mvp.client.DelayedBindRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelayedBindRegistry.html">
+	// com.gwtplatform.mvp.client.View
+	c9854 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DelayedBindRegistry </td></tr>
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DelayedBindRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.DelayedBind
-	c8005 [label=<<table title="com.gwtplatform.mvp.client.DelayedBind" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelayedBind.html">
+	c9855 [label=<<table title="com.gwtplatform.mvp.client.DelayedBind" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelayedBind.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DelayedBind </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DelayedBind.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.DefaultBootstrapper
-	c8006 [label=<<table title="com.gwtplatform.mvp.client.DefaultBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultBootstrapper.html">
+	// com.gwtplatform.mvp.client.ViewImpl
+	c9856 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultBootstrapper </td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./DefaultBootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.ChangeTabHandler
-	c8007 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeTabHandler.html">
+		</table>>, URL="./ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.TabData
+	c9857 [label=<<table title="com.gwtplatform.mvp.client.TabData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ChangeTabHandler </td></tr>
+<tr><td align="center" balign="center"> TabData </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ChangeTabHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.ChangeTabEvent
-	c8008 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeTabEvent.html">
+		</table>>, URL="./TabData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
+	c9858 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ChangeTabEvent </td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./ChangeTabEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.Bootstrapper
-	c8009 [label=<<table title="com.gwtplatform.mvp.client.Bootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Bootstrapper.html">
+	c9859 [label=<<table title="com.gwtplatform.mvp.client.Bootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Bootstrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Bootstrapper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Bootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.DelayedBindRegistry
+	c9860 [label=<<table title="com.gwtplatform.mvp.client.DelayedBindRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelayedBindRegistry.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DelayedBindRegistry </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DelayedBindRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HasHandlerContainer
+	c9861 [label=<<table title="com.gwtplatform.mvp.client.HasHandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasHandlerContainer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HasHandlerContainer </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HasHandlerContainer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c9862 [label=<<table title="com.gwtplatform.mvp.client.PopupViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewWithUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./PopupViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.AutobindDisable
-	c8010 [label=<<table title="com.gwtplatform.mvp.client.AutobindDisable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AutobindDisable.html">
+	c9863 [label=<<table title="com.gwtplatform.mvp.client.AutobindDisable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AutobindDisable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AutobindDisable </td></tr>
 		</table></td></tr>
 		</table>>, URL="./AutobindDisable.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.TabDataBasic
+	c9864 [label=<<table title="com.gwtplatform.mvp.client.TabDataBasic" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabDataBasic.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TabDataBasic </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TabDataBasic.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.DefaultBootstrapper
+	c9865 [label=<<table title="com.gwtplatform.mvp.client.DefaultBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultBootstrapper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultBootstrapper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultBootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.UiHandlers
+	c9866 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> UiHandlers </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.ChangeTabEvent
+	c9867 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeTabEvent.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ChangeTabEvent </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ChangeTabEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.RequestTabsHandler
+	c9868 [label=<<table title="com.gwtplatform.mvp.client.RequestTabsHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RequestTabsHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> RequestTabsHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RequestTabsHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.RootPresenter
+	c9869 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.RootPresenter.RootView
+	c9870 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter.RootView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.RootView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootPresenter.RootView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PopupViewCloseHandler
+	c9871 [label=<<table title="com.gwtplatform.mvp.client.PopupViewCloseHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewCloseHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> PopupViewCloseHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PopupViewCloseHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.TabView
+	c9872 [label=<<table title="com.gwtplatform.mvp.client.TabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> TabView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TabView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PopupViewImpl
+	c9873 [label=<<table title="com.gwtplatform.mvp.client.PopupViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewImpl </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./PopupViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HandlerContainerImpl
+	c9874 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainerImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HandlerContainerImpl </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HandlerContainerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.ApplicationController
-	c8011 [label=<<table title="com.gwtplatform.mvp.client.ApplicationController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationController.html">
+	c9875 [label=<<table title="com.gwtplatform.mvp.client.ApplicationController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationController.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ApplicationController </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ApplicationController.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> extends com.gwtplatform.mvp.client.ViewImpl
-	c7976:p -> c7975:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c7997:p -> c7975:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.ViewImpl implements com.gwtplatform.mvp.client.View
-	c7977:p -> c7976:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.TabView implements com.gwtplatform.mvp.client.View
-	c7977:p -> c7979:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.TabView implements com.gwtplatform.mvp.client.TabPanel
-	c7980:p -> c7979:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.TabDataBasic implements com.gwtplatform.mvp.client.TabData
-	c7982:p -> c7981:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.mvp.client.RequestTabsEvent
+	c9876 [label=<<table title="com.gwtplatform.mvp.client.RequestTabsEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RequestTabsEvent.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RequestTabsEvent </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RequestTabsEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HasPopupSlot
+	c9877 [label=<<table title="com.gwtplatform.mvp.client.HasPopupSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasPopupSlot.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HasPopupSlot </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HasPopupSlot.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
+	c9878 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Presenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.Presenter.RevealType
+	c9879 [label=<<table title="com.gwtplatform.mvp.client.Presenter.RevealType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Presenter.RevealType.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
+<tr><td align="center" balign="center"> RevealType </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Presenter.RevealType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.TabPanel
+	c9880 [label=<<table title="com.gwtplatform.mvp.client.TabPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabPanel.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> TabPanel </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TabPanel.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.ChangeTabHandler
+	c9881 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeTabHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ChangeTabHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ChangeTabHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.Tab
+	c9882 [label=<<table title="com.gwtplatform.mvp.client.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Tab.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> Tab </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PreBootstrapper
+	c9883 [label=<<table title="com.gwtplatform.mvp.client.PreBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PreBootstrapper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> PreBootstrapper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PreBootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c9884 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewWithUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HasEventBus
+	c9885 [label=<<table title="com.gwtplatform.mvp.client.HasEventBus" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasEventBus.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HasEventBus </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HasEventBus.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HasSlots
+	c9886 [label=<<table title="com.gwtplatform.mvp.client.HasSlots" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasSlots.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HasSlots </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HasSlots.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.TabContainerPresenter<V extends com.gwtplatform.mvp.client.View & com.gwtplatform.mvp.client.TabPanel, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>> extends com.gwtplatform.mvp.client.Presenter<V, Proxy_>
-	c7990:p -> c7983:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.RootPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.mvp.client.RootPresenter.RootView>
-	c7989:p -> c7985:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.RootPresenter.RootView extends com.gwtplatform.mvp.client.ViewImpl
-	c7976:p -> c7986:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> extends com.gwtplatform.mvp.client.HandlerContainerImpl
-	c8002:p -> c7989:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasSlots
-	c7998:p -> c7989:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasPopupSlot
-	c7999:p -> c7989:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>> extends com.gwtplatform.mvp.client.PresenterWidget<V>
-	c7989:p -> c7990:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> extends com.gwtplatform.mvp.client.PopupViewImpl
-	c7994:p -> c7993:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c7997:p -> c7993:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.PopupViewImpl extends com.gwtplatform.mvp.client.ViewImpl
-	c7976:p -> c7994:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.PopupViewImpl implements com.gwtplatform.mvp.client.PopupView
-	c7996:p -> c7994:p [dir=back,arrowtail=empty,style=dashed];
+	c9878:p -> c9850:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.client.PopupView implements com.gwtplatform.mvp.client.View
-	c7977:p -> c7996:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.HandlerContainerImpl implements com.gwtplatform.mvp.client.HandlerContainer
-	c8003:p -> c8002:p [dir=back,arrowtail=empty,style=dashed];
+	c9854:p -> c9852:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.ViewImpl implements com.gwtplatform.mvp.client.View
+	c9854:p -> c9856:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> extends com.gwtplatform.mvp.client.HandlerContainerImpl
+	c9874:p -> c9858:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasSlots
+	c9886:p -> c9858:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasPopupSlot
+	c9877:p -> c9858:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> extends com.gwtplatform.mvp.client.PopupViewImpl
+	c9873:p -> c9862:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c9851:p -> c9862:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.TabDataBasic implements com.gwtplatform.mvp.client.TabData
+	c9857:p -> c9864:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.DefaultBootstrapper implements com.gwtplatform.mvp.client.Bootstrapper
-	c8009:p -> c8006:p [dir=back,arrowtail=empty,style=dashed];
+	c9859:p -> c9865:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.RootPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.mvp.client.RootPresenter.RootView>
+	c9858:p -> c9869:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.RootPresenter.RootView extends com.gwtplatform.mvp.client.ViewImpl
+	c9856:p -> c9870:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.TabView implements com.gwtplatform.mvp.client.View
+	c9854:p -> c9872:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.TabView implements com.gwtplatform.mvp.client.TabPanel
+	c9880:p -> c9872:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PopupViewImpl extends com.gwtplatform.mvp.client.ViewImpl
+	c9856:p -> c9873:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.PopupViewImpl implements com.gwtplatform.mvp.client.PopupView
+	c9852:p -> c9873:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.HandlerContainerImpl implements com.gwtplatform.mvp.client.HandlerContainer
+	c9853:p -> c9874:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>> extends com.gwtplatform.mvp.client.PresenterWidget<V>
+	c9858:p -> c9878:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> extends com.gwtplatform.mvp.client.ViewImpl
+	c9856:p -> c9884:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c9851:p -> c9884:p [dir=back,arrowtail=empty,style=dashed];
 }
 

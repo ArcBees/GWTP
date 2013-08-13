@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator
-	c12333 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityPlacetokenGenerator.html">
+	c7366 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityPlacetokenGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> VelocityPlacetokenGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./VelocityPlacetokenGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator.Factory
-	c12334 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator.Factory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityPlacetokenGenerator.Factory.html">
+	c7367 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator.Factory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityPlacetokenGenerator.Factory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Factory </td></tr>

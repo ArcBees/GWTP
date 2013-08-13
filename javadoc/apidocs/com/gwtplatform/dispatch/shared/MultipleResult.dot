@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.Result
-	c258105 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
+	c258108 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Result </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.MultipleResult<T>
-	c258107 [label=<<table title="com.gwtplatform.dispatch.shared.MultipleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MultipleResult.html">
+	c258110 [label=<<table title="com.gwtplatform.dispatch.shared.MultipleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MultipleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MultipleResult&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MultipleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.MultipleResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c258105:p -> c258107:p [dir=back,arrowtail=empty,style=dashed];
+	c258108:p -> c258110:p [dir=back,arrowtail=empty,style=dashed];
 }
 

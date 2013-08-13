@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.objectify.OfyFactory
-	c276196 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.OfyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OfyFactory.html">
+	c276020 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.OfyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OfyFactory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OfyFactory </td></tr>
 		</table></td></tr>
 		</table>>, URL="./OfyFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.objectify.OfyFactory extends com.googlecode.objectify.ObjectifyFactory
-	c276229:p -> c276196:p [dir=back,arrowtail=empty];
+	c276228:p -> c276020:p [dir=back,arrowtail=empty];
 	// com.googlecode.objectify.ObjectifyFactory
-	c276229 [label=<<table title="com.googlecode.objectify.ObjectifyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c276228 [label=<<table title="com.googlecode.objectify.ObjectifyFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ObjectifyFactory </td></tr>
 		</table></td></tr>

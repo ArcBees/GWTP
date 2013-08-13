@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.event.DisplayMessageEvent
-	c169064 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DisplayMessageEvent.html">
+	c169226 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DisplayMessageEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DisplayMessageEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DisplayMessageEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.event.DisplayMessageEvent extends com.google.gwt.event.shared.GwtEvent<com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler>
-	c169253:p -> c169064:p [dir=back,arrowtail=empty];
+	c169252:p -> c169226:p [dir=back,arrowtail=empty];
 	// com.google.gwt.event.shared.GwtEvent<H extends com.google.gwt.event.shared.EventHandler>
-	c169253 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
+	c169252 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GwtEvent&lt;H extends EventHandler&gt; </font></td></tr>
 		</table></td></tr>

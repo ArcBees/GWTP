@@ -10,38 +10,38 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.PopupView
-	c176046 [label=<<table title="com.gwtplatform.mvp.client.PopupView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PopupView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> PopupView </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../../../mvp/client/PopupView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c176047 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/HasUiHandlers.html">
+	c176089 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/HasUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/HasUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PopupView
+	c176090 [label=<<table title="com.gwtplatform.mvp.client.PopupView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PopupView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> PopupView </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../../../mvp/client/PopupView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingView
-	c176374 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingView.html">
+	c176469 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EditRatingView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditRatingView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
-	c176377 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditRatingPresenter.MyView.html">
+	c176471 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditRatingPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditRatingPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingView implements com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
-	c176377:p -> c176374:p [dir=back,arrowtail=empty,style=dashed];
+	c176471:p -> c176469:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView implements com.gwtplatform.mvp.client.PopupView
-	c176046:p -> c176377:p [dir=back,arrowtail=empty,style=dashed];
+	c176090:p -> c176471:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c176047:p -> c176377:p [dir=back,arrowtail=empty,style=dashed];
+	c176089:p -> c176471:p [dir=back,arrowtail=empty,style=dashed];
 }
 

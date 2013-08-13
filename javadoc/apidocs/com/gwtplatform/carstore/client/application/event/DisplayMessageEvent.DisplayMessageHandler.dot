@@ -11,24 +11,24 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler
-	c169670 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DisplayMessageEvent.DisplayMessageHandler.html">
+	c169832 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DisplayMessageEvent.DisplayMessageHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DisplayMessageHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DisplayMessageEvent.DisplayMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter
-	c169749 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/message/MessagesPresenter.html">
+	c169847 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/message/MessagesPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../widget/message/MessagesPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler implements com.google.gwt.event.shared.EventHandler
-	c169858:p -> c169670:p [dir=back,arrowtail=empty,style=dashed];
+	c169857:p -> c169832:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter implements com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler
-	c169670:p -> c169749:p [dir=back,arrowtail=empty,style=dashed];
+	c169832:p -> c169847:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c169858 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c169857 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>

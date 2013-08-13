@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.widget.message.Message
-	c246505 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.Message" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Message.html">
+	c246597 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.Message" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Message.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Message </td></tr>
 		</table></td></tr>

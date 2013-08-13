@@ -10,25 +10,25 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.RootPresenter
-	c221969 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../RootPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="../RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.LockInteractionHandler
-	c222045 [label=<<table title="com.gwtplatform.mvp.client.proxy.LockInteractionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LockInteractionHandler.html">
+	c222008 [label=<<table title="com.gwtplatform.mvp.client.proxy.LockInteractionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LockInteractionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> LockInteractionHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LockInteractionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.LockInteractionHandler
-	c222045:p -> c221969:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.mvp.client.RootPresenter
+	c222041 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../RootPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="../RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.LockInteractionHandler implements com.google.gwt.event.shared.EventHandler
-	c222441:p -> c222045:p [dir=back,arrowtail=empty,style=dashed];
+	c222440:p -> c222008:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.LockInteractionHandler
+	c222008:p -> c222041:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c222441 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c222440 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>

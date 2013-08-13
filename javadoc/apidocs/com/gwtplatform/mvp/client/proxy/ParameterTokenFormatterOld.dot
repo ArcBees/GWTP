@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c279418 [label=<<table title="com.gwtplatform.mvp.client.proxy.TokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TokenFormatter.html">
+	c279401 [label=<<table title="com.gwtplatform.mvp.client.proxy.TokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TokenFormatter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> TokenFormatter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld
-	c279450 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ParameterTokenFormatterOld.html">
+	c279419 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ParameterTokenFormatterOld.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ParameterTokenFormatterOld </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ParameterTokenFormatterOld.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld implements com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c279418:p -> c279450:p [dir=back,arrowtail=empty,style=dashed];
+	c279401:p -> c279419:p [dir=back,arrowtail=empty,style=dashed];
 }
 

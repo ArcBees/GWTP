@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent
-	c93921 [label=<<table title="com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AsyncCallSucceedEvent.html">
+	c93885 [label=<<table title="com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AsyncCallSucceedEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AsyncCallSucceedEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./AsyncCallSucceedEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent extends com.google.gwt.event.shared.GwtEvent<com.gwtplatform.mvp.client.proxy.AsyncCallSucceedHandler>
-	c94309:p -> c93921:p [dir=back,arrowtail=empty];
+	c94309:p -> c93885:p [dir=back,arrowtail=empty];
 	// com.google.gwt.event.shared.GwtEvent<H extends com.google.gwt.event.shared.EventHandler>
 	c94309 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

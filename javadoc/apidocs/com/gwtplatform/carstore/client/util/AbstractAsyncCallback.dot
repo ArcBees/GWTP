@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.util.AbstractAsyncCallback<T>
-	c57369 [label=<<table title="com.gwtplatform.carstore.client.util.AbstractAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractAsyncCallback.html">
+	c57283 [label=<<table title="com.gwtplatform.carstore.client.util.AbstractAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractAsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractAsyncCallback&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractAsyncCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.util.AbstractAsyncCallback<T> implements com.google.gwt.user.client.rpc.AsyncCallback<T>
-	c57434:p -> c57369:p [dir=back,arrowtail=empty,style=dashed];
+	c57434:p -> c57283:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.rpc.AsyncCallback<T>
 	c57434 [label=<<table title="com.google.gwt.user.client.rpc.AsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/AsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

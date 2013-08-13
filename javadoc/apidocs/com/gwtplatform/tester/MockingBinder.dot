@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.tester.MockingBinder<U, O>
-	c257580 [label=<<table title="com.gwtplatform.tester.MockingBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MockingBinder.html">
+	c257578 [label=<<table title="com.gwtplatform.tester.MockingBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MockingBinder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> MockingBinder&lt;U, O&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./MockingBinder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.tester.MockingBinder<U, O> implements com.google.gwt.uibinder.client.UiBinder<U, O>
-	c258093:p -> c257580:p [dir=back,arrowtail=empty,style=dashed];
+	c258092:p -> c257578:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.uibinder.client.UiBinder<U, O>
-	c258093 [label=<<table title="com.google.gwt.uibinder.client.UiBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/uibinder/client/UiBinder.html">
+	c258092 [label=<<table title="com.google.gwt.uibinder.client.UiBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/uibinder/client/UiBinder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UiBinder&lt;U, O&gt; </td></tr>

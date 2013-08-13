@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.domain.Manufacturer
-	c232072 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Manufacturer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Manufacturer.html">
+	c231896 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Manufacturer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Manufacturer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Manufacturer </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Manufacturer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c232104 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/BaseEntity.html">
+	c231920 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/BaseEntity.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseEntity </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../shared/dto/BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.domain.Manufacturer extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c232104:p -> c232072:p [dir=back,arrowtail=empty];
+	c231920:p -> c231896:p [dir=back,arrowtail=empty];
 }
 

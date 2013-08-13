@@ -10,17 +10,17 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.server.spring.utils.SpringUtils
-	c22675 [label=<<table title="com.gwtplatform.dispatch.server.spring.utils.SpringUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringUtils.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> SpringUtils </td></tr>
-		</table></td></tr>
-		</table>>, URL="./SpringUtils.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.utils.RequestProvider
-	c22676 [label=<<table title="com.gwtplatform.dispatch.server.spring.utils.RequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RequestProvider.html">
+	c22068 [label=<<table title="com.gwtplatform.dispatch.server.spring.utils.RequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RequestProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RequestProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RequestProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.spring.utils.SpringUtils
+	c22069 [label=<<table title="com.gwtplatform.dispatch.server.spring.utils.SpringUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringUtils.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> SpringUtils </td></tr>
+		</table></td></tr>
+		</table>>, URL="./SpringUtils.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

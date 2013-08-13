@@ -11,36 +11,36 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c88402 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/Presenter.html">
+	c88479 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter
-	c88628 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationPresenter.html">
+	c88798 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ApplicationPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c88684 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./event/ChangeActionBarEvent.ChangeActionBarHandler.html">
+	c88842 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./event/ChangeActionBarEvent.ChangeActionBarHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ChangeActionBarHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./event/ChangeActionBarEvent.ChangeActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c88686 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
+	c88846 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionBarVisibilityHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./event/ActionBarVisibilityEvent.ActionBarVisibilityHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ApplicationPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView, com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy>
-	c88402:p -> c88628:p [dir=back,arrowtail=empty];
+	c88479:p -> c88798:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.ApplicationPresenter implements com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c88684:p -> c88628:p [dir=back,arrowtail=empty,style=dashed];
+	c88842:p -> c88798:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.ApplicationPresenter implements com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c88686:p -> c88628:p [dir=back,arrowtail=empty,style=dashed];
+	c88846:p -> c88798:p [dir=back,arrowtail=empty,style=dashed];
 }
 

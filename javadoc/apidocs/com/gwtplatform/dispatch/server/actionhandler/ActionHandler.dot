@@ -18,12 +18,12 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./ActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c73229 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractActionHandler.html">
+	c73230 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.server.actionhandler.ActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c73228:p -> c73229:p [dir=back,arrowtail=empty,style=dashed];
+	c73228:p -> c73230:p [dir=back,arrowtail=empty,style=dashed];
 }
 

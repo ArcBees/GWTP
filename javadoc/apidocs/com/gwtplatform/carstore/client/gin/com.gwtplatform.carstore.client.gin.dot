@@ -10,66 +10,66 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.gin.TabletModule
-	c44600 [label=<<table title="com.gwtplatform.carstore.client.gin.TabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabletModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TabletModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./TabletModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.gin.SharedModule
-	c44601 [label=<<table title="com.gwtplatform.carstore.client.gin.SharedModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SharedModule.html">
+	c36059 [label=<<table title="com.gwtplatform.carstore.client.gin.SharedModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SharedModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SharedModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SharedModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.TabletModule
+	c36060 [label=<<table title="com.gwtplatform.carstore.client.gin.TabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabletModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TabletModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TabletModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.gin.ResourceLoader
-	c44602 [label=<<table title="com.gwtplatform.carstore.client.gin.ResourceLoader" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ResourceLoader.html">
+	c36061 [label=<<table title="com.gwtplatform.carstore.client.gin.ResourceLoader" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ResourceLoader.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ResourceLoader </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ResourceLoader.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule
-	c44603 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapRemoteModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PhoneGapRemoteModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PhoneGapRemoteModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.gin.PhoneGapModule
-	c44604 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapModule.html">
+	c36062 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PhoneGapModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PhoneGapModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.PhoneGapLocalModule
-	c44605 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapLocalModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapLocalModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PhoneGapLocalModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PhoneGapLocalModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.gin.MyGinjector
-	c44606 [label=<<table title="com.gwtplatform.carstore.client.gin.MyGinjector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MyGinjector.html">
+	c36063 [label=<<table title="com.gwtplatform.carstore.client.gin.MyGinjector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MyGinjector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyGinjector </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MyGinjector.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.MobileModule
-	c44607 [label=<<table title="com.gwtplatform.carstore.client.gin.MobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileModule.html">
+	// com.gwtplatform.carstore.client.gin.PhoneGapLocalModule
+	c36064 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapLocalModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapLocalModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MobileModule </td></tr>
+<tr><td align="center" balign="center"> PhoneGapLocalModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./MobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.DesktopModule
-	c44608 [label=<<table title="com.gwtplatform.carstore.client.gin.DesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DesktopModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DesktopModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PhoneGapLocalModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.gin.CarStoreModule
-	c44609 [label=<<table title="com.gwtplatform.carstore.client.gin.CarStoreModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarStoreModule.html">
+	c36065 [label=<<table title="com.gwtplatform.carstore.client.gin.CarStoreModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarStoreModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarStoreModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarStoreModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.MobileModule
+	c36066 [label=<<table title="com.gwtplatform.carstore.client.gin.MobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule
+	c36067 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapRemoteModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PhoneGapRemoteModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PhoneGapRemoteModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.DesktopModule
+	c36068 [label=<<table title="com.gwtplatform.carstore.client.gin.DesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DesktopModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DesktopModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

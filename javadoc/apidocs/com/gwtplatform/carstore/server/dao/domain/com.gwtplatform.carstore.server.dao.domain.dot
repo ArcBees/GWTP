@@ -10,41 +10,41 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.server.dao.domain.UserSession
-	c50697 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.UserSession" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserSession.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UserSession </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UserSession.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.domain.User
-	c50698 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.User" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./User.html">
+	c32400 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.User" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./User.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> User </td></tr>
 		</table></td></tr>
 		</table>>, URL="./User.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.domain.Car
+	c32401 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Car" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Car.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Car </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Car.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.domain.CarProperties
+	c32402 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.CarProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProperties.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarProperties </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarProperties.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.domain.UserSession
+	c32403 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.UserSession" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserSession.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UserSession </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UserSession.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.domain.Rating
-	c50699 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Rating" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Rating.html">
+	c32404 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Rating" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Rating.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Rating </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Rating.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.domain.Manufacturer
-	c50700 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Manufacturer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Manufacturer.html">
+	c32405 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Manufacturer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Manufacturer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Manufacturer </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Manufacturer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.domain.CarProperties
-	c50701 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.CarProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarProperties.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarProperties </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarProperties.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.domain.Car
-	c50702 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Car" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Car.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Car </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Car.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

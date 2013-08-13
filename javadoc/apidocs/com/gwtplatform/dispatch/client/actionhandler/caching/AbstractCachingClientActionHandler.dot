@@ -11,26 +11,26 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c57482 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../AbstractClientActionHandler.html">
+	c57483 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../AbstractClientActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../AbstractClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c57485 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionCachingHandler.html">
+	c57492 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionCachingHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionCachingHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionCachingHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c57486 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractCachingClientActionHandler.html">
+	c57493 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractCachingClientActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractCachingClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractCachingClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> extends com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler<A, R>
-	c57486:p -> c57485:p [dir=back,arrowtail=empty];
+	c57493:p -> c57492:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> extends com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A, R>
-	c57482:p -> c57486:p [dir=back,arrowtail=empty];
+	c57483:p -> c57493:p [dir=back,arrowtail=empty];
 }
 

@@ -10,25 +10,25 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter
-	c265741 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NavigationTabPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationTabPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
-	c265744 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabEvent.NavigationTabHandler.html">
+	c265863 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabEvent.NavigationTabHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> NavigationTabHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./NavigationTabEvent.NavigationTabHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
-	c265744:p -> c265741:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter
+	c265869 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NavigationTabPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationTabPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler implements com.google.gwt.event.shared.EventHandler
-	c265955:p -> c265744:p [dir=back,arrowtail=empty,style=dashed];
+	c265954:p -> c265863:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
+	c265863:p -> c265869:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c265955 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c265954 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>

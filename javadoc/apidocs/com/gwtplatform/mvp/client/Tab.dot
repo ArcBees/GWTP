@@ -11,16 +11,16 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Tab
-	c372449 [label=<<table title="com.gwtplatform.mvp.client.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Tab.html">
+	c372535 [label=<<table title="com.gwtplatform.mvp.client.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Tab.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Tab </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.Tab implements com.google.gwt.user.client.ui.HasText
-	c372922:p -> c372449:p [dir=back,arrowtail=empty,style=dashed];
+	c372921:p -> c372535:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.ui.HasText
-	c372922 [label=<<table title="com.google.gwt.user.client.ui.HasText" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/HasText.html">
+	c372921 [label=<<table title="com.google.gwt.user.client.ui.HasText" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/HasText.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasText </td></tr>

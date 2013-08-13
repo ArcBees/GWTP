@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.guice.ServerModule
-	c363829 [label=<<table title="com.gwtplatform.carstore.server.guice.ServerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ServerModule.html">
+	c363623 [label=<<table title="com.gwtplatform.carstore.server.guice.ServerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ServerModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ServerModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ServerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.guice.ServerModule extends com.google.inject.AbstractModule
-	c363857:p -> c363829:p [dir=back,arrowtail=empty];
+	c363856:p -> c363623:p [dir=back,arrowtail=empty];
 	// com.google.inject.AbstractModule
-	c363857 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
+	c363856 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractModule </font></td></tr>
 		</table></td></tr>

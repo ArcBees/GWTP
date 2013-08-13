@@ -11,20 +11,20 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.Proxy<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c89056 [label=<<table title="com.gwtplatform.mvp.client.proxy.Proxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/proxy/Proxy.html">
+	c89053 [label=<<table title="com.gwtplatform.mvp.client.proxy.Proxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/proxy/Proxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Proxy&lt;P extends Presenter&lt;?, ?&gt;&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../mvp/client/proxy/Proxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy
-	c89234 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationPresenter.MyProxy.html">
+	c89404 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ApplicationPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy implements com.gwtplatform.mvp.client.proxy.Proxy<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c89056:p -> c89234:p [dir=back,arrowtail=empty,style=dashed];
+	c89053:p -> c89404:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.BatchAction
-	c99768 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BatchAction.html">
+	c99754 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BatchAction.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BatchAction </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./BatchAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c99772 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
+	c99757 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Action&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Action.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.BatchAction implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c99772:p -> c99768:p [dir=back,arrowtail=empty,style=dashed];
+	c99757:p -> c99754:p [dir=back,arrowtail=empty,style=dashed];
 }
 

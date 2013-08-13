@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView
+	c395268 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMobileView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HeaderMobileView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler
-	c395169 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserInfoPopup.Handler.html">
+	c395270 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserInfoPopup.Handler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Handler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UserInfoPopup.Handler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView
-	c395175 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMobileView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HeaderMobileView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HeaderMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView implements com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler
-	c395169:p -> c395175:p [dir=back,arrowtail=empty,style=dashed];
+	c395270:p -> c395268:p [dir=back,arrowtail=empty,style=dashed];
 }
 

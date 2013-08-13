@@ -11,20 +11,20 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.rest.RestService
-	c367168 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../dispatch/shared/rest/RestService.html">
+	c367153 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../dispatch/shared/rest/RestService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RestService </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../dispatch/shared/rest/RestService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.rest.SessionService
-	c367412 [label=<<table title="com.gwtplatform.carstore.client.rest.SessionService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SessionService.html">
+	c367340 [label=<<table title="com.gwtplatform.carstore.client.rest.SessionService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SessionService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> SessionService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SessionService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.rest.SessionService implements com.gwtplatform.dispatch.shared.rest.RestService
-	c367168:p -> c367412:p [dir=back,arrowtail=empty,style=dashed];
+	c367153:p -> c367340:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.annotation.UseProxyName
-	c391984 [label=<<table title="com.gwtplatform.dispatch.annotation.UseProxyName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UseProxyName.html">
+	c391996 [label=<<table title="com.gwtplatform.dispatch.annotation.UseProxyName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UseProxyName.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> UseProxyName </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./UseProxyName.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.UseProxyName implements java.lang.annotation.Annotation
-	c392260:p -> c391984:p [dir=back,arrowtail=empty,style=dashed];
+	c392259:p -> c391996:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c392260 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c392259 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

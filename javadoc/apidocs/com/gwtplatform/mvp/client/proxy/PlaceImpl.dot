@@ -10,36 +10,36 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams
-	c284878 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceWithGatekeeperWithParams.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PlaceWithGatekeeperWithParams </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PlaceWithGatekeeperWithParams.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper
-	c284879 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceWithGatekeeper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PlaceWithGatekeeper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PlaceWithGatekeeper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.PlaceImpl
-	c284885 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceImpl.html">
+	c284825 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PlaceImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PlaceImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper
+	c284828 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceWithGatekeeper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PlaceWithGatekeeper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PlaceWithGatekeeper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.Place
-	c284886 [label=<<table title="com.gwtplatform.mvp.client.proxy.Place" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Place.html">
+	c284833 [label=<<table title="com.gwtplatform.mvp.client.proxy.Place" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Place.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Place </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Place.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams extends com.gwtplatform.mvp.client.proxy.PlaceImpl
-	c284885:p -> c284878:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper extends com.gwtplatform.mvp.client.proxy.PlaceImpl
-	c284885:p -> c284879:p [dir=back,arrowtail=empty];
+	// com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams
+	c284871 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceWithGatekeeperWithParams.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PlaceWithGatekeeperWithParams </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PlaceWithGatekeeperWithParams.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.PlaceImpl implements com.gwtplatform.mvp.client.proxy.Place
-	c284886:p -> c284885:p [dir=back,arrowtail=empty,style=dashed];
+	c284833:p -> c284825:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper extends com.gwtplatform.mvp.client.proxy.PlaceImpl
+	c284825:p -> c284828:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams extends com.gwtplatform.mvp.client.proxy.PlaceImpl
+	c284825:p -> c284871:p [dir=back,arrowtail=empty];
 }
 

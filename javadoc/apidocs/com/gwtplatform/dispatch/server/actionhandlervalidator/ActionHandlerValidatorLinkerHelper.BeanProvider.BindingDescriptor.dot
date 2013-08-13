@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor<B>
-	c76861 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html">
+	c76863 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> BindingDescriptor&lt;B&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor<B>
-	c76862 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html">
+	c76864 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CommonBindingDescriptor&lt;B&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor<B> implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor<B>
-	c76861:p -> c76862:p [dir=back,arrowtail=empty,style=dashed];
+	c76863:p -> c76864:p [dir=back,arrowtail=empty,style=dashed];
 }
 

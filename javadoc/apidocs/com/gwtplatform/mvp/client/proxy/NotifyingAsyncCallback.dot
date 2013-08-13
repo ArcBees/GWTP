@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback<T>
-	c272800 [label=<<table title="com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NotifyingAsyncCallback.html">
+	c272747 [label=<<table title="com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NotifyingAsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> NotifyingAsyncCallback&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./NotifyingAsyncCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback<T> implements com.google.gwt.user.client.rpc.AsyncCallback<T>
-	c273205:p -> c272800:p [dir=back,arrowtail=empty,style=dashed];
+	c273204:p -> c272747:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.rpc.AsyncCallback<T>
-	c273205 [label=<<table title="com.google.gwt.user.client.rpc.AsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/AsyncCallback.html">
+	c273204 [label=<<table title="com.google.gwt.user.client.rpc.AsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/AsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> AsyncCallback&lt;T&gt; </td></tr>

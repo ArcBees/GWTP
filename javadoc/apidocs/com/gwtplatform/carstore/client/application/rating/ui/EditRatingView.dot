@@ -11,32 +11,32 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.PopupViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c177251 [label=<<table title="com.gwtplatform.mvp.client.PopupViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PopupViewWithUiHandlers.html">
+	c177308 [label=<<table title="com.gwtplatform.mvp.client.PopupViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PopupViewWithUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/PopupViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingView
-	c177582 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditRatingView.html">
+	c177677 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditRatingView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EditRatingView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditRatingView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
-	c177585 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingPresenter.MyView.html">
+	c177679 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditRatingPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingView extends com.gwtplatform.mvp.client.PopupViewWithUiHandlers<com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers>
-	c177251:p -> c177582:p [dir=back,arrowtail=empty];
+	c177308:p -> c177677:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingView implements com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
-	c177585:p -> c177582:p [dir=back,arrowtail=empty,style=dashed];
+	c177679:p -> c177677:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingView implements com.google.gwt.editor.client.Editor<T>
-	c177715:p -> c177582:p [dir=back,arrowtail=empty,style=dashed];
+	c177714:p -> c177677:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.editor.client.Editor<T>
-	c177715 [label=<<table title="com.google.gwt.editor.client.Editor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html">
+	c177714 [label=<<table title="com.google.gwt.editor.client.Editor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Editor&lt;T&gt; </td></tr>

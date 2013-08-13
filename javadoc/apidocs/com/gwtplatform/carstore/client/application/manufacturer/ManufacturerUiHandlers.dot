@@ -11,28 +11,28 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.UiHandlers
-	c244319 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/UiHandlers.html">
+	c244395 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/UiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/UiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter
+	c244660 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers
-	c244629 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerUiHandlers.html">
+	c244666 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ManufacturerUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter
-	c244630 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers implements com.gwtplatform.mvp.client.UiHandlers
-	c244319:p -> c244629:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers
-	c244629:p -> c244630:p [dir=back,arrowtail=empty,style=dashed];
+	c244666:p -> c244660:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers implements com.gwtplatform.mvp.client.UiHandlers
+	c244395:p -> c244666:p [dir=back,arrowtail=empty,style=dashed];
 }
 

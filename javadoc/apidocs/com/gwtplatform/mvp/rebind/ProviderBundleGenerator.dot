@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.ProviderBundleGenerator
-	c298214 [label=<<table title="com.gwtplatform.mvp.rebind.ProviderBundleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProviderBundleGenerator.html">
+	c298082 [label=<<table title="com.gwtplatform.mvp.rebind.ProviderBundleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProviderBundleGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProviderBundleGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProviderBundleGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.AbstractGenerator
-	c298226 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
+	c298093 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGenerator </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.ProviderBundleGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c298226:p -> c298214:p [dir=back,arrowtail=empty];
+	c298093:p -> c298082:p [dir=back,arrowtail=empty];
 }
 

@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R extends com.gwtplatform.dispatch.shared.Result>
-	c47651 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ErrorHandlerAsyncCallback.html">
+	c39109 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ErrorHandlerAsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ErrorHandlerAsyncCallback&lt;R extends Result&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ErrorHandlerAsyncCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.util.AbstractAsyncCallback<T>
-	c47652 [label=<<table title="com.gwtplatform.carstore.client.util.AbstractAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractAsyncCallback.html">
+	c39110 [label=<<table title="com.gwtplatform.carstore.client.util.AbstractAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractAsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractAsyncCallback&lt;T&gt; </font></td></tr>
 		</table></td></tr>

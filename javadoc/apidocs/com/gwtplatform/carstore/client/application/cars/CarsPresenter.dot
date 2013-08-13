@@ -11,45 +11,45 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c125271 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
+	c125348 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.CarsPresenter
+	c125616 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarsPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarsPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarsPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.CarsUiHandlers
-	c125534 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarsUiHandlers.html">
+	c125623 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarsUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CarsUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarsUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.CarsPresenter
-	c125535 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarsPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarsPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarsPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler
-	c125543 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./event/CarAddedEvent.CarAddedHandler.html">
+	c125627 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./event/CarAddedEvent.CarAddedHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CarAddedHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./event/CarAddedEvent.CarAddedHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
-	c125557 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../event/ActionBarEvent.ActionBarHandler.html">
+	c125708 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../event/ActionBarEvent.ActionBarHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionBarHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="../event/ActionBarEvent.ActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.CarsPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView, com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyProxy>
-	c125271:p -> c125535:p [dir=back,arrowtail=empty];
+	c125348:p -> c125616:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.CarsPresenter implements com.gwtplatform.carstore.client.application.cars.CarsUiHandlers
-	c125534:p -> c125535:p [dir=back,arrowtail=empty,style=dashed];
+	c125623:p -> c125616:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.CarsPresenter implements com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler
-	c125543:p -> c125535:p [dir=back,arrowtail=empty,style=dashed];
+	c125627:p -> c125616:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.CarsPresenter implements com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
-	c125557:p -> c125535:p [dir=back,arrowtail=empty,style=dashed];
+	c125708:p -> c125616:p [dir=back,arrowtail=empty,style=dashed];
 }
 

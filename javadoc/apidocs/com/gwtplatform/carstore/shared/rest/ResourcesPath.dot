@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.shared.rest.ResourcesPath
-	c337262 [label=<<table title="com.gwtplatform.carstore.shared.rest.ResourcesPath" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ResourcesPath.html">
+	c337067 [label=<<table title="com.gwtplatform.carstore.shared.rest.ResourcesPath" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ResourcesPath.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ResourcesPath </td></tr>
 		</table></td></tr>

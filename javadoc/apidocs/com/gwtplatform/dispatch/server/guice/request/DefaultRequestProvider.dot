@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.RequestProvider
-	c154813 [label=<<table title="com.gwtplatform.dispatch.server.RequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../RequestProvider.html">
+	c154811 [label=<<table title="com.gwtplatform.dispatch.server.RequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../RequestProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RequestProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../RequestProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider
-	c155059 [label=<<table title="com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultRequestProvider.html">
+	c155055 [label=<<table title="com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultRequestProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultRequestProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DefaultRequestProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider implements com.gwtplatform.dispatch.server.RequestProvider
-	c154813:p -> c155059:p [dir=back,arrowtail=empty,style=dashed];
+	c154811:p -> c155055:p [dir=back,arrowtail=empty,style=dashed];
 }
 

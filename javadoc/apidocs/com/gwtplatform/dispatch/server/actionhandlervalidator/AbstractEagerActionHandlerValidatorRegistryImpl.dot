@@ -10,36 +10,36 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl
+	c62349 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractEagerActionHandlerValidatorRegistryImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractEagerActionHandlerValidatorRegistryImpl </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractEagerActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry
-	c62347 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EagerActionHandlerValidatorRegistry.html">
+	c62357 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EagerActionHandlerValidatorRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EagerActionHandlerValidatorRegistry </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EagerActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl
-	c62357 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractEagerActionHandlerValidatorRegistryImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractEagerActionHandlerValidatorRegistryImpl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractEagerActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl
-	c62567 [label=<<table title="com.gwtplatform.dispatch.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../guice/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.html">
+	c62580 [label=<<table title="com.gwtplatform.dispatch.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../guice/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EagerActionHandlerValidatorRegistryImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="../guice/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl
-	c62582 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.html">
+	c62600 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EagerActionHandlerValidatorRegistryImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="../spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl implements com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry
-	c62347:p -> c62357:p [dir=back,arrowtail=empty,style=dashed];
+	c62357:p -> c62349:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl extends com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl
-	c62357:p -> c62567:p [dir=back,arrowtail=empty];
+	c62349:p -> c62580:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl extends com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl
-	c62357:p -> c62582:p [dir=back,arrowtail=empty];
+	c62349:p -> c62600:p [dir=back,arrowtail=empty];
 }
 

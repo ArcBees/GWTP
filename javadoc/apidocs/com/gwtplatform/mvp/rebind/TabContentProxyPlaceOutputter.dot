@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter
-	c375561 [label=<<table title="com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TabContentProxyPlaceOutputter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TabContentProxyPlaceOutputter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./TabContentProxyPlaceOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c375564 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterBase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterBase.html">
+	c375439 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterBase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterBase.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ProxyOutputterBase </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyOutputterBase.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter
+	c375453 [label=<<table title="com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TabContentProxyPlaceOutputter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TabContentProxyPlaceOutputter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TabContentProxyPlaceOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c375564:p -> c375561:p [dir=back,arrowtail=empty];
+	c375439:p -> c375453:p [dir=back,arrowtail=empty];
 }
 

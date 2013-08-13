@@ -11,23 +11,23 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.google.gwt.uibinder.rebind.UiBinderGenerator
-	c386917 [label=<<table title="com.google.gwt.uibinder.rebind.UiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UiBinderGenerator.html">
+	c387069 [label=<<table title="com.google.gwt.uibinder.rebind.UiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UiBinderGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UiBinderGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UiBinderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.uibinder.rebind.GinUiBinderGenerator
-	c386918 [label=<<table title="com.google.gwt.uibinder.rebind.GinUiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinUiBinderGenerator.html">
+	c387071 [label=<<table title="com.google.gwt.uibinder.rebind.GinUiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinUiBinderGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GinUiBinderGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GinUiBinderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.google.gwt.uibinder.rebind.UiBinderGenerator extends com.google.gwt.core.ext.Generator
-	c387424:p -> c386917:p [dir=back,arrowtail=empty];
+	c387423:p -> c387069:p [dir=back,arrowtail=empty];
 	//com.google.gwt.uibinder.rebind.GinUiBinderGenerator extends com.google.gwt.uibinder.rebind.UiBinderGenerator
-	c386917:p -> c386918:p [dir=back,arrowtail=empty];
+	c387069:p -> c387071:p [dir=back,arrowtail=empty];
 	// com.google.gwt.core.ext.Generator
-	c387424 [label=<<table title="com.google.gwt.core.ext.Generator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html">
+	c387423 [label=<<table title="com.google.gwt.core.ext.Generator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Generator </font></td></tr>
 		</table></td></tr>

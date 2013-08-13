@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.server.dao.RatingDao
-	c313653 [label=<<table title="com.gwtplatform.carstore.server.dao.RatingDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingDao </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RatingDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.BaseDao<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c313657 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
+	c313474 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseDao&lt;T extends Dto&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BaseDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.RatingDao
+	c313475 [label=<<table title="com.gwtplatform.carstore.server.dao.RatingDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingDao </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RatingDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.RatingDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.Rating>
-	c313657:p -> c313653:p [dir=back,arrowtail=empty];
+	c313474:p -> c313475:p [dir=back,arrowtail=empty];
 }
 

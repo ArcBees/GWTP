@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor<B>
-	c370587 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../actionhandlervalidator/ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html">
+	c370588 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../actionhandlervalidator/ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CommonBindingDescriptor&lt;B&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../actionhandlervalidator/ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter<B>
-	c370819 [label=<<table title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SpringBeanProvider.SpringBindingDescriptorAdapter.html">
+	c370821 [label=<<table title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SpringBeanProvider.SpringBindingDescriptorAdapter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SpringBindingDescriptorAdapter&lt;B&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SpringBeanProvider.SpringBindingDescriptorAdapter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter<B> extends com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor<B>
-	c370587:p -> c370819:p [dir=back,arrowtail=empty];
+	c370588:p -> c370821:p [dir=back,arrowtail=empty];
 }
 

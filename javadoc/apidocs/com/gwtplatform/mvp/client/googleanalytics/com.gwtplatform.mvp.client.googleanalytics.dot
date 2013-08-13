@@ -10,26 +10,26 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker
-	c9223 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalyticsNavigationTracker.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GoogleAnalyticsNavigationTracker </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GoogleAnalyticsNavigationTracker.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl
-	c9224 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalyticsImpl.html">
+	c11098 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalyticsImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GoogleAnalyticsImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GoogleAnalyticsImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics
-	c9225 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalytics.html">
+	c11099 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalytics.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> GoogleAnalytics </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GoogleAnalytics.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker
+	c11100 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoogleAnalyticsNavigationTracker.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GoogleAnalyticsNavigationTracker </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GoogleAnalyticsNavigationTracker.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl implements com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics
-	c9225:p -> c9224:p [dir=back,arrowtail=empty,style=dashed];
+	c11099:p -> c11098:p [dir=back,arrowtail=empty,style=dashed];
 }
 
