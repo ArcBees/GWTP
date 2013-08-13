@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto
-	c242193 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerRatingDto.html">
+	c242370 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerRatingDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerRatingDto </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerRatingDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.Dto
-	c242197 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
+	c242372 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Dto </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Dto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto implements com.gwtplatform.carstore.shared.dto.Dto
-	c242197:p -> c242193:p [dir=back,arrowtail=empty,style=dashed];
+	c242372:p -> c242370:p [dir=back,arrowtail=empty,style=dashed];
 }
 

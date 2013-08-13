@@ -11,47 +11,47 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.rest.RestService
-	c344788 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestService.html">
+	c344803 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RestService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.rest.CarService
-	c344972 [label=<<table title="com.gwtplatform.carstore.client.rest.CarService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/CarService.html">
+	// com.gwtplatform.carstore.client.rest.SessionService
+	c345047 [label=<<table title="com.gwtplatform.carstore.client.rest.SessionService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/SessionService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> CarService </td></tr>
+<tr><td align="center" balign="center"> SessionService </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../carstore/client/rest/CarService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../carstore/client/rest/SessionService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.rest.RatingService
-	c344973 [label=<<table title="com.gwtplatform.carstore.client.rest.RatingService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/RatingService.html">
+	c345048 [label=<<table title="com.gwtplatform.carstore.client.rest.RatingService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/RatingService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RatingService </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/rest/RatingService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.rest.ManufacturerService
-	c344974 [label=<<table title="com.gwtplatform.carstore.client.rest.ManufacturerService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/ManufacturerService.html">
+	c345049 [label=<<table title="com.gwtplatform.carstore.client.rest.ManufacturerService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/ManufacturerService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ManufacturerService </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/rest/ManufacturerService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.rest.SessionService
-	c344975 [label=<<table title="com.gwtplatform.carstore.client.rest.SessionService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/SessionService.html">
+	// com.gwtplatform.carstore.client.rest.CarService
+	c345050 [label=<<table title="com.gwtplatform.carstore.client.rest.CarService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/rest/CarService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> SessionService </td></tr>
+<tr><td align="center" balign="center"> CarService </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../carstore/client/rest/SessionService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.rest.CarService implements com.gwtplatform.dispatch.shared.rest.RestService
-	c344788:p -> c344972:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.rest.RatingService implements com.gwtplatform.dispatch.shared.rest.RestService
-	c344788:p -> c344973:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.rest.ManufacturerService implements com.gwtplatform.dispatch.shared.rest.RestService
-	c344788:p -> c344974:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="../../../carstore/client/rest/CarService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.rest.SessionService implements com.gwtplatform.dispatch.shared.rest.RestService
-	c344788:p -> c344975:p [dir=back,arrowtail=empty,style=dashed];
+	c344803:p -> c345047:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.rest.RatingService implements com.gwtplatform.dispatch.shared.rest.RestService
+	c344803:p -> c345048:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.rest.ManufacturerService implements com.gwtplatform.dispatch.shared.rest.RestService
+	c344803:p -> c345049:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.rest.CarService implements com.gwtplatform.dispatch.shared.rest.RestService
+	c344803:p -> c345050:p [dir=back,arrowtail=empty,style=dashed];
 }
 

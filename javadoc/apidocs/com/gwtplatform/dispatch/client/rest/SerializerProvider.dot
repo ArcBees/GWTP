@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider
-	c361718 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSerializerProvider.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractSerializerProvider </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractSerializerProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.SerializerProvider
-	c361727 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SerializerProvider.html">
+	c361696 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SerializerProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> SerializerProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SerializerProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider
+	c361707 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSerializerProvider.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractSerializerProvider </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractSerializerProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider implements com.gwtplatform.dispatch.client.rest.SerializerProvider
-	c361727:p -> c361718:p [dir=back,arrowtail=empty,style=dashed];
+	c361696:p -> c361707:p [dir=back,arrowtail=empty,style=dashed];
 }
 

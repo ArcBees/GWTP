@@ -10,41 +10,41 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper
-	c24504 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./InterfaceGenerationHelper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> InterfaceGenerationHelper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./InterfaceGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper
-	c24505 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BuilderGenerationHelper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BuilderGenerationHelper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BuilderGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
-	c24506 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassGenerationHelper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ClassGenerationHelper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ClassGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.helper.ReflectionHelper
-	c24507 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ReflectionHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReflectionHelper.html">
+	c23895 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ReflectionHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReflectionHelper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReflectionHelper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReflectionHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper
+	c23896 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./InterfaceGenerationHelper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> InterfaceGenerationHelper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./InterfaceGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c24508 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenerationHelper.html">
+	c23897 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenerationHelper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GenerationHelper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
+	c23898 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassGenerationHelper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ClassGenerationHelper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ClassGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper
+	c23899 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BuilderGenerationHelper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BuilderGenerationHelper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BuilderGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c24508:p -> c24504:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
-	c24506:p -> c24505:p [dir=back,arrowtail=empty];
+	c23897:p -> c23896:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c24508:p -> c24506:p [dir=back,arrowtail=empty];
+	c23897:p -> c23898:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
+	c23898:p -> c23899:p [dir=back,arrowtail=empty];
 }
 

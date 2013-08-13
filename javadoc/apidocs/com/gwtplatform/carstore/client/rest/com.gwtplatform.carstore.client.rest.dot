@@ -10,33 +10,33 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.rest.CarService
-	c40322 [label=<<table title="com.gwtplatform.carstore.client.rest.CarService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarService.html">
+	// com.gwtplatform.carstore.client.rest.SessionService
+	c46436 [label=<<table title="com.gwtplatform.carstore.client.rest.SessionService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SessionService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> CarService </td></tr>
+<tr><td align="center" balign="center"> SessionService </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./SessionService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.rest.RatingService
-	c40323 [label=<<table title="com.gwtplatform.carstore.client.rest.RatingService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingService.html">
+	c46437 [label=<<table title="com.gwtplatform.carstore.client.rest.RatingService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RatingService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RatingService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.rest.ManufacturerService
-	c40324 [label=<<table title="com.gwtplatform.carstore.client.rest.ManufacturerService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerService.html">
+	c46438 [label=<<table title="com.gwtplatform.carstore.client.rest.ManufacturerService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ManufacturerService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.rest.SessionService
-	c40325 [label=<<table title="com.gwtplatform.carstore.client.rest.SessionService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SessionService.html">
+	// com.gwtplatform.carstore.client.rest.CarService
+	c46439 [label=<<table title="com.gwtplatform.carstore.client.rest.CarService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> SessionService </td></tr>
+<tr><td align="center" balign="center"> CarService </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SessionService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CarService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

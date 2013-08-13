@@ -11,14 +11,14 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ApplicationController
-	c84850 [label=<<table title="com.gwtplatform.mvp.client.ApplicationController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationController.html">
+	c84797 [label=<<table title="com.gwtplatform.mvp.client.ApplicationController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationController.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ApplicationController </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ApplicationController.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.ApplicationController implements com.google.gwt.core.client.EntryPoint
-	c85243:p -> c84850:p [dir=back,arrowtail=empty,style=dashed];
+	c85243:p -> c84797:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.core.client.EntryPoint
 	c85243 [label=<<table title="com.google.gwt.core.client.EntryPoint" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/client/EntryPoint.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

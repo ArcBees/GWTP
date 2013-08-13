@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c209942 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
+	c209885 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasPopupSlot
-	c209961 [label=<<table title="com.gwtplatform.mvp.client.HasPopupSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HasPopupSlot.html">
+	c209895 [label=<<table title="com.gwtplatform.mvp.client.HasPopupSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HasPopupSlot.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasPopupSlot </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HasPopupSlot.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasPopupSlot
-	c209961:p -> c209942:p [dir=back,arrowtail=empty,style=dashed];
+	c209895:p -> c209885:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -10,99 +10,99 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule
-	c40930 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileView
-	c40931 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerMobileView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerMobileView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView
-	c40932 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerView.html">
+	c34863 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers
-	c40933 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailUiHandlers.html">
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers
+	c34864 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ManufacturerDetailUiHandlers </td></tr>
+<tr><td align="center" balign="center"> ManufacturerUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ManufacturerDetailUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule
-	c40934 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView
-	c40935 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerDetailView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerDetailView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ManufacturerUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter
-	c40936 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.html">
+	c34865 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView
-	c40937 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.MyView.html">
+	c34866 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyProxy
-	c40938 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.MyProxy.html">
+	c34867 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule
+	c34868 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileView
+	c34869 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerMobileView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerMobileView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule
+	c34870 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView
+	c34871 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerDetailView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerDetailView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers
+	c34872 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ManufacturerDetailUiHandlers </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerDetailUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter
-	c40939 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailPresenter.html">
+	c34873 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerDetailPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerDetailPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView
-	c40940 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailPresenter.MyView.html">
+	c34874 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerDetailPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy
-	c40941 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailPresenter.MyProxy.html">
+	c34875 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerDetailPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers
-	c40942 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ManufacturerUiHandlers </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileView implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView
-	c40937:p -> c40931:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerView implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView
-	c40937:p -> c40932:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView
-	c40940:p -> c40935:p [dir=back,arrowtail=empty,style=dashed];
+	c34866:p -> c34863:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerUiHandlers
-	c40942:p -> c40936:p [dir=back,arrowtail=empty,style=dashed];
+	c34864:p -> c34865:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileView implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPresenter.MyView
+	c34866:p -> c34869:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailView implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView
+	c34874:p -> c34871:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers
-	c40933:p -> c40939:p [dir=back,arrowtail=empty,style=dashed];
+	c34872:p -> c34873:p [dir=back,arrowtail=empty,style=dashed];
 }
 

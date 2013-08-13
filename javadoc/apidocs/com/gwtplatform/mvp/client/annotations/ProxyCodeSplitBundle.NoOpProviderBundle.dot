@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.common.client.ProviderBundle
-	c300405 [label=<<table title="com.gwtplatform.common.client.ProviderBundle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../common/client/ProviderBundle.html">
+	c300404 [label=<<table title="com.gwtplatform.common.client.ProviderBundle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../common/client/ProviderBundle.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProviderBundle </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../common/client/ProviderBundle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle
-	c300634 [label=<<table title="com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyCodeSplitBundle.NoOpProviderBundle.html">
+	c300514 [label=<<table title="com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyCodeSplitBundle.NoOpProviderBundle.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NoOpProviderBundle </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyCodeSplitBundle.NoOpProviderBundle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle extends com.gwtplatform.common.client.ProviderBundle
-	c300405:p -> c300634:p [dir=back,arrowtail=empty];
+	c300404:p -> c300514:p [dir=back,arrowtail=empty];
 }
 

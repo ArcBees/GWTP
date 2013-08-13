@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup
-	c394659 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserInfoPopup.html">
+	c394558 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserInfoPopup.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserInfoPopup </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UserInfoPopup.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup extends com.google.gwt.user.client.ui.PopupPanel
-	c394681:p -> c394659:p [dir=back,arrowtail=empty];
+	c394682:p -> c394558:p [dir=back,arrowtail=empty];
 	// com.google.gwt.user.client.ui.PopupPanel
-	c394681 [label=<<table title="com.google.gwt.user.client.ui.PopupPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/PopupPanel.html">
+	c394682 [label=<<table title="com.google.gwt.user.client.ui.PopupPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/PopupPanel.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PopupPanel </td></tr>
 		</table></td></tr>

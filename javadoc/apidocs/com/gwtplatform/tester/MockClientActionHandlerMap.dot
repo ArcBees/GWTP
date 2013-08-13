@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.tester.MockClientActionHandlerMap
-	c255164 [label=<<table title="com.gwtplatform.tester.MockClientActionHandlerMap" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MockClientActionHandlerMap.html">
+	c255165 [label=<<table title="com.gwtplatform.tester.MockClientActionHandlerMap" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MockClientActionHandlerMap.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MockClientActionHandlerMap </td></tr>

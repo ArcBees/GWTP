@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c351382 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/Presenter.html">
+	c351306 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter
-	c351666 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootCarPresenter.html">
+	c351540 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootCarPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RootCarPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RootCarPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView, com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyProxy>
-	c351382:p -> c351666:p [dir=back,arrowtail=empty];
+	c351306:p -> c351540:p [dir=back,arrowtail=empty];
 }
 

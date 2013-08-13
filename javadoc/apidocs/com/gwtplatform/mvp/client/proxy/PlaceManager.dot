@@ -10,25 +10,25 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.mvp.client.proxy.PlaceManagerImpl
+	c285487 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManagerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceManagerImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PlaceManagerImpl </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./PlaceManagerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.PlaceManager
-	c285434 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceManager.html">
+	c285488 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> PlaceManager </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PlaceManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.proxy.PlaceManagerImpl
-	c285448 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManagerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceManagerImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PlaceManagerImpl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PlaceManagerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.proxy.PlaceManager implements com.google.gwt.event.shared.HasHandlers
-	c285897:p -> c285434:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.proxy.PlaceManagerImpl implements com.gwtplatform.mvp.client.proxy.PlaceManager
-	c285434:p -> c285448:p [dir=back,arrowtail=empty,style=dashed];
+	c285488:p -> c285487:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.proxy.PlaceManager implements com.google.gwt.event.shared.HasHandlers
+	c285898:p -> c285488:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.HasHandlers
-	c285897 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
+	c285898 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasHandlers </td></tr>

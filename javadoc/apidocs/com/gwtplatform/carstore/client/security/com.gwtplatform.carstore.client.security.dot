@@ -11,22 +11,22 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.security.SecurityModule
-	c36673 [label=<<table title="com.gwtplatform.carstore.client.security.SecurityModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityModule.html">
+	c47044 [label=<<table title="com.gwtplatform.carstore.client.security.SecurityModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecurityModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecurityModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.security.CurrentUser
-	c36674 [label=<<table title="com.gwtplatform.carstore.client.security.CurrentUser" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUser.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CurrentUser </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CurrentUser.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.security.LoggedInGatekeeper
-	c36675 [label=<<table title="com.gwtplatform.carstore.client.security.LoggedInGatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoggedInGatekeeper.html">
+	c47045 [label=<<table title="com.gwtplatform.carstore.client.security.LoggedInGatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoggedInGatekeeper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoggedInGatekeeper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LoggedInGatekeeper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.security.CurrentUser
+	c47046 [label=<<table title="com.gwtplatform.carstore.client.security.CurrentUser" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUser.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CurrentUser </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CurrentUser.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

@@ -10,49 +10,49 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.tester.AsyncMockProvider<T>
-	c6127 [label=<<table title="com.gwtplatform.tester.AsyncMockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AsyncMockProvider.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AsyncMockProvider&lt;T&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./AsyncMockProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.tester.MockHandlerModule
-	c6128 [label=<<table title="com.gwtplatform.tester.MockHandlerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockHandlerModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> MockHandlerModule </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./MockHandlerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.TestDispatchService
-	c6129 [label=<<table title="com.gwtplatform.tester.TestDispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestDispatchService.html">
+	c6127 [label=<<table title="com.gwtplatform.tester.TestDispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestDispatchService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestDispatchService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TestDispatchService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.tester.TestDispatchModule
+	c6128 [label=<<table title="com.gwtplatform.tester.TestDispatchModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestDispatchModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TestDispatchModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TestDispatchModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.tester.TestDispatchAsync
+	c6129 [label=<<table title="com.gwtplatform.tester.TestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestDispatchAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TestDispatchAsync </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TestDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.tester.MockProvider<T>
+	c6130 [label=<<table title="com.gwtplatform.tester.MockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockProvider.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MockProvider&lt;T&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MockProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.MockingBinder<U, O>
-	c6130 [label=<<table title="com.gwtplatform.tester.MockingBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockingBinder.html">
+	c6131 [label=<<table title="com.gwtplatform.tester.MockingBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockingBinder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> MockingBinder&lt;U, O&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./MockingBinder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.tester.DeferredCommandManager
-	c6131 [label=<<table title="com.gwtplatform.tester.DeferredCommandManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DeferredCommandManager.html">
+	// com.gwtplatform.tester.MockHandlerModule
+	c6132 [label=<<table title="com.gwtplatform.tester.MockHandlerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockHandlerModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DeferredCommandManager </td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> MockHandlerModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./DeferredCommandManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./MockHandlerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.MockFactory
-	c6132 [label=<<table title="com.gwtplatform.tester.MockFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockFactory.html">
+	c6133 [label=<<table title="com.gwtplatform.tester.MockFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockFactory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MockFactory </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MockFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.tester.TestDispatchModule
-	c6133 [label=<<table title="com.gwtplatform.tester.TestDispatchModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestDispatchModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TestDispatchModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./TestDispatchModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.MockClientActionHandlerMap
 	c6134 [label=<<table title="com.gwtplatform.tester.MockClientActionHandlerMap" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockClientActionHandlerMap.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
@@ -60,17 +60,17 @@ digraph G {
 <tr><td align="center" balign="center"> MockClientActionHandlerMap </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MockClientActionHandlerMap.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.tester.MockProvider<T>
-	c6135 [label=<<table title="com.gwtplatform.tester.MockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockProvider.html">
+	// com.gwtplatform.tester.DeferredCommandManager
+	c6135 [label=<<table title="com.gwtplatform.tester.DeferredCommandManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DeferredCommandManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MockProvider&lt;T&gt; </td></tr>
+<tr><td align="center" balign="center"> DeferredCommandManager </td></tr>
 		</table></td></tr>
-		</table>>, URL="./MockProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.tester.TestDispatchAsync
-	c6136 [label=<<table title="com.gwtplatform.tester.TestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestDispatchAsync.html">
+		</table>>, URL="./DeferredCommandManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.tester.AsyncMockProvider<T>
+	c6136 [label=<<table title="com.gwtplatform.tester.AsyncMockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AsyncMockProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TestDispatchAsync </td></tr>
+<tr><td align="center" balign="center"> AsyncMockProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AsyncMockProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

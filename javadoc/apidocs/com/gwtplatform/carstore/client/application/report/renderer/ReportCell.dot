@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.report.renderer.ReportCell
-	c327519 [label=<<table title="com.gwtplatform.carstore.client.application.report.renderer.ReportCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportCell.html">
+	c327466 [label=<<table title="com.gwtplatform.carstore.client.application.report.renderer.ReportCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportCell.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportCell </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportCell.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.report.renderer.ReportCell extends com.google.gwt.cell.client.AbstractCell<com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto>
-	c327593:p -> c327519:p [dir=back,arrowtail=empty];
+	c327594:p -> c327466:p [dir=back,arrowtail=empty];
 	// com.google.gwt.cell.client.AbstractCell<C>
-	c327593 [label=<<table title="com.google.gwt.cell.client.AbstractCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/cell/client/AbstractCell.html">
+	c327594 [label=<<table title="com.google.gwt.cell.client.AbstractCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/cell/client/AbstractCell.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractCell&lt;C&gt; </font></td></tr>
 		</table></td></tr>

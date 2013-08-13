@@ -11,213 +11,213 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractPresenterModule.html">
+	c64248 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractPresenterModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPresenterModule </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractPresenterModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.SharedModule
-	c64509 [label=<<table title="com.gwtplatform.carstore.client.gin.SharedModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/SharedModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> SharedModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/SharedModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.TabletModule
-	c64510 [label=<<table title="com.gwtplatform.carstore.client.gin.TabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/TabletModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TabletModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/TabletModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.PhoneGapModule
-	c64512 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/PhoneGapModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PhoneGapModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/PhoneGapModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.PhoneGapLocalModule
-	c64514 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapLocalModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/PhoneGapLocalModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PhoneGapLocalModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/PhoneGapLocalModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.CarStoreModule
-	c64515 [label=<<table title="com.gwtplatform.carstore.client.gin.CarStoreModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/CarStoreModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarStoreModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/CarStoreModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.MobileModule
-	c64516 [label=<<table title="com.gwtplatform.carstore.client.gin.MobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/MobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/MobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule
-	c64517 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/PhoneGapRemoteModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PhoneGapRemoteModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/PhoneGapRemoteModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.gin.DesktopModule
-	c64518 [label=<<table title="com.gwtplatform.carstore.client.gin.DesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/DesktopModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DesktopModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/gin/DesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule
-	c64548 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/manufacturer/ManufacturerModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/manufacturer/ManufacturerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule
-	c64552 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/manufacturer/ManufacturerMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/manufacturer/ManufacturerMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.CarsDesktopModule
-	c64574 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsDesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/cars/CarsDesktopModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarsDesktopModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/cars/CarsDesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.CarsModule
-	c64575 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/cars/CarsModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarsModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/cars/CarsModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.CarsMobileModule
-	c64577 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/cars/CarsMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarsMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/cars/CarsMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.report.ReportModule
-	c64614 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/report/ReportModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ReportModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/report/ReportModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.report.ReportMobileModule
-	c64616 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/report/ReportMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ReportMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/report/ReportMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.ApplicationDesktopModule
-	c64619 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationDesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/ApplicationDesktopModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ApplicationDesktopModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/ApplicationDesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationTabletModule
-	c64623 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationTabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/ApplicationTabletModule.html">
+	c64449 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationTabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/ApplicationTabletModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationTabletModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/application/ApplicationTabletModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationMobileModule
-	c64624 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/ApplicationMobileModule.html">
+	c64455 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/ApplicationMobileModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationMobileModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/application/ApplicationMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.ApplicationDesktopModule
+	c64456 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationDesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/ApplicationDesktopModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ApplicationDesktopModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/ApplicationDesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.CarsModule
+	c64491 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/cars/CarsModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarsModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/cars/CarsModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.CarsMobileModule
+	c64493 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/cars/CarsMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarsMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/cars/CarsMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.CarsDesktopModule
+	c64494 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsDesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/cars/CarsDesktopModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarsDesktopModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/cars/CarsDesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginModule
-	c64628 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/login/LoginModule.html">
+	c64516 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/login/LoginModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoginModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/application/login/LoginModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginMobileModule
-	c64632 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/login/LoginMobileModule.html">
+	c64518 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/login/LoginMobileModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoginMobileModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/application/login/LoginMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.RatingMobileModule
-	c64639 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/rating/RatingMobileModule.html">
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule
+	c64526 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/manufacturer/ManufacturerModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingMobileModule </td></tr>
+<tr><td align="center" balign="center"> ManufacturerModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/rating/RatingMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../carstore/client/application/manufacturer/ManufacturerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule
+	c64528 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/manufacturer/ManufacturerMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/manufacturer/ManufacturerMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.RatingModule
-	c64641 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/rating/RatingModule.html">
+	c64547 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/rating/RatingModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RatingModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/application/rating/RatingModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.rating.RatingMobileModule
+	c64549 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/rating/RatingMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/rating/RatingMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.report.ReportModule
+	c64568 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/report/ReportModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ReportModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/report/ReportModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.report.ReportMobileModule
+	c64570 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/report/ReportMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ReportMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/report/ReportMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesModule
-	c64684 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/widget/message/MessagesModule.html">
+	c64584 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/widget/message/MessagesModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/application/widget/message/MessagesModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.WidgetMobileModule
-	c64688 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/widget/WidgetMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> WidgetMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../carstore/client/application/widget/WidgetMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.WidgetModule
-	c64689 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/widget/WidgetModule.html">
+	c64589 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/widget/WidgetModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> WidgetModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/application/widget/WidgetModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.WidgetMobileModule
+	c64590 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/application/widget/WidgetMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> WidgetMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/application/widget/WidgetMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.TabletModule
+	c64594 [label=<<table title="com.gwtplatform.carstore.client.gin.TabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/TabletModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TabletModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/TabletModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.SharedModule
+	c64595 [label=<<table title="com.gwtplatform.carstore.client.gin.SharedModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/SharedModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> SharedModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/SharedModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule
+	c64597 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/PhoneGapRemoteModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PhoneGapRemoteModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/PhoneGapRemoteModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.PhoneGapModule
+	c64598 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/PhoneGapModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PhoneGapModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/PhoneGapModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.PhoneGapLocalModule
+	c64599 [label=<<table title="com.gwtplatform.carstore.client.gin.PhoneGapLocalModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/PhoneGapLocalModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PhoneGapLocalModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/PhoneGapLocalModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.MobileModule
+	c64601 [label=<<table title="com.gwtplatform.carstore.client.gin.MobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/MobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/MobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.DesktopModule
+	c64602 [label=<<table title="com.gwtplatform.carstore.client.gin.DesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/DesktopModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DesktopModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/DesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.gin.CarStoreModule
+	c64603 [label=<<table title="com.gwtplatform.carstore.client.gin.CarStoreModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/gin/CarStoreModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarStoreModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../carstore/client/gin/CarStoreModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.gin.AbstractPresenterModule extends com.google.gwt.inject.client.AbstractGinModule
-	c64691:p -> c64310:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.SharedModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64509:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.TabletModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64510:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.PhoneGapModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64512:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.PhoneGapLocalModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64514:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.CarStoreModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64515:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.MobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64516:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64517:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.gin.DesktopModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64518:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64548:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64552:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.cars.CarsDesktopModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64574:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.cars.CarsModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64575:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.cars.CarsMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64577:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.report.ReportModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64614:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.report.ReportMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64616:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.ApplicationDesktopModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64619:p [dir=back,arrowtail=empty];
+	c64691:p -> c64248:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.ApplicationTabletModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64623:p [dir=back,arrowtail=empty];
+	c64248:p -> c64449:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.ApplicationMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64624:p [dir=back,arrowtail=empty];
+	c64248:p -> c64455:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.ApplicationDesktopModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64456:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.cars.CarsModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64491:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.cars.CarsMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64493:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.cars.CarsDesktopModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64494:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.login.LoginModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64628:p [dir=back,arrowtail=empty];
+	c64248:p -> c64516:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.login.LoginMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64632:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.rating.RatingMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64639:p [dir=back,arrowtail=empty];
+	c64248:p -> c64518:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64526:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64528:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.rating.RatingModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64641:p [dir=back,arrowtail=empty];
+	c64248:p -> c64547:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.rating.RatingMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64549:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.report.ReportModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64568:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.report.ReportMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64570:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64684:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.widget.WidgetMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64688:p [dir=back,arrowtail=empty];
+	c64248:p -> c64584:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.widget.WidgetModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c64310:p -> c64689:p [dir=back,arrowtail=empty];
+	c64248:p -> c64589:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.widget.WidgetMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64590:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.TabletModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64594:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.SharedModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64595:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.PhoneGapRemoteModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64597:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.PhoneGapModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64598:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.PhoneGapLocalModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64599:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.MobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64601:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.DesktopModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64602:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.gin.CarStoreModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
+	c64248:p -> c64603:p [dir=back,arrowtail=empty];
 	// com.google.gwt.inject.client.AbstractGinModule
 	c64691 [label=<<table title="com.google.gwt.inject.client.AbstractGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

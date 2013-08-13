@@ -10,17 +10,17 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.widget.WidgetMobileModule
-	c54962 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./WidgetMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> WidgetMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./WidgetMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.WidgetModule
-	c54963 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./WidgetModule.html">
+	c43387 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./WidgetModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> WidgetModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./WidgetModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.WidgetMobileModule
+	c43388 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./WidgetMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> WidgetMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./WidgetMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

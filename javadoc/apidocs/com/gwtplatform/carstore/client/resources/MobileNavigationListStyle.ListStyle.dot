@@ -11,16 +11,16 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle
-	c254912 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MobileNavigationListStyle.ListStyle.html">
+	c254987 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MobileNavigationListStyle.ListStyle.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ListStyle </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MobileNavigationListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle implements com.google.gwt.user.cellview.client.CellList.Style
-	c255069:p -> c254912:p [dir=back,arrowtail=empty,style=dashed];
+	c255070:p -> c254987:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.cellview.client.CellList.Style
-	c255069 [label=<<table title="com.google.gwt.user.cellview.client.CellList.Style" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c255070 [label=<<table title="com.google.gwt.user.cellview.client.CellList.Style" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Style </td></tr>

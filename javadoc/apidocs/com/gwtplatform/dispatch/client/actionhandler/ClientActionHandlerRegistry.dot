@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry
-	c135457 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultClientActionHandlerRegistry.html">
+	c135452 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultClientActionHandlerRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultClientActionHandlerRegistry </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DefaultClientActionHandlerRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
-	c135460 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandlerRegistry.html">
+	c135453 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandlerRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ClientActionHandlerRegistry </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ClientActionHandlerRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry implements com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
-	c135460:p -> c135457:p [dir=back,arrowtail=empty,style=dashed];
+	c135453:p -> c135452:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -11,16 +11,16 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.resources.LoginMessages
-	c225905 [label=<<table title="com.gwtplatform.carstore.client.resources.LoginMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginMessages.html">
+	c225987 [label=<<table title="com.gwtplatform.carstore.client.resources.LoginMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginMessages.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> LoginMessages </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LoginMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.resources.LoginMessages implements com.google.gwt.i18n.client.Messages
-	c226066:p -> c225905:p [dir=back,arrowtail=empty,style=dashed];
+	c226067:p -> c225987:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.i18n.client.Messages
-	c226066 [label=<<table title="com.google.gwt.i18n.client.Messages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/i18n/client/Messages.html">
+	c226067 [label=<<table title="com.google.gwt.i18n.client.Messages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/i18n/client/Messages.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Messages </td></tr>

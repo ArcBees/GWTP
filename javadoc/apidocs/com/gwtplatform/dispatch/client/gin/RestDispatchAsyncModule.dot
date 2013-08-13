@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule
-	c340326 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestDispatchAsyncModule.html">
+	c340338 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestDispatchAsyncModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RestDispatchAsyncModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestDispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c340328 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.html">
+	c340343 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchAsyncModule </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractDispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c340328:p -> c340326:p [dir=back,arrowtail=empty];
+	c340343:p -> c340338:p [dir=back,arrowtail=empty];
 }
 

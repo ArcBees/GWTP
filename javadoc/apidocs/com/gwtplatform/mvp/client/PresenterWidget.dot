@@ -10,107 +10,107 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c296968 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PresenterWidget.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.RootPresenter
-	c296979 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.html">
+	c296907 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RootPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HandlerContainerImpl
-	c296984 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainerImpl.html">
+	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
+	c296911 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PresenterWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HandlerContainerImpl </td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./HandlerContainerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HasPopupSlot
-	c296987 [label=<<table title="com.gwtplatform.mvp.client.HasPopupSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasPopupSlot.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HasPopupSlot </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HasPopupSlot.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c296988 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Presenter.html">
+	c296912 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasSlots
-	c296996 [label=<<table title="com.gwtplatform.mvp.client.HasSlots" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasSlots.html">
+	c296920 [label=<<table title="com.gwtplatform.mvp.client.HasSlots" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasSlots.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasSlots </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HasSlots.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter
-	c297252 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.html">
+	// com.gwtplatform.mvp.client.HasPopupSlot
+	c296921 [label=<<table title="com.gwtplatform.mvp.client.HasPopupSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HasPopupSlot.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> EditManufacturerPresenter </td></tr>
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HasPopupSlot </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./HasPopupSlot.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HandlerContainerImpl
+	c296924 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainerImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HandlerContainerImpl </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HandlerContainerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter
-	c297293 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/cars/car/navigation/NavigationTabPresenter.html">
+	c297165 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/cars/car/navigation/NavigationTabPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NavigationTabPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/client/application/cars/car/navigation/NavigationTabPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter
+	c297226 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> EditManufacturerPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
-	c297342 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/rating/ui/EditRatingPresenter.html">
+	c297248 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/rating/ui/EditRatingPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EditRatingPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/client/application/rating/ui/EditRatingPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
-	c297363 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/widget/header/HeaderPresenter.html">
+	c297265 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/widget/header/HeaderPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HeaderPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/client/application/widget/header/HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter
-	c297368 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/widget/message/MessagesPresenter.html">
+	c297270 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/widget/message/MessagesPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/client/application/widget/message/MessagesPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> extends com.gwtplatform.mvp.client.HandlerContainerImpl
-	c296984:p -> c296968:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.google.gwt.event.shared.HasHandlers
-	c297378:p -> c296968:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasSlots
-	c296996:p -> c296968:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasPopupSlot
-	c296987:p -> c296968:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.google.gwt.user.client.ui.IsWidget
-	c297379:p -> c296968:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.RootPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.mvp.client.RootPresenter.RootView>
-	c296968:p -> c296979:p [dir=back,arrowtail=empty];
+	c296911:p -> c296907:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> extends com.gwtplatform.mvp.client.HandlerContainerImpl
+	c296924:p -> c296911:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.google.gwt.event.shared.HasHandlers
+	c297379:p -> c296911:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasSlots
+	c296920:p -> c296911:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.gwtplatform.mvp.client.HasPopupSlot
+	c296921:p -> c296911:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> implements com.google.gwt.user.client.ui.IsWidget
+	c297380:p -> c296911:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>> extends com.gwtplatform.mvp.client.PresenterWidget<V>
-	c296968:p -> c296988:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView>
-	c296968:p -> c297252:p [dir=back,arrowtail=empty];
+	c296911:p -> c296912:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView>
-	c296968:p -> c297293:p [dir=back,arrowtail=empty];
+	c296911:p -> c297165:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView>
+	c296911:p -> c297226:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView>
-	c296968:p -> c297342:p [dir=back,arrowtail=empty];
+	c296911:p -> c297248:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView>
-	c296968:p -> c297363:p [dir=back,arrowtail=empty];
+	c296911:p -> c297265:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView>
-	c296968:p -> c297368:p [dir=back,arrowtail=empty];
+	c296911:p -> c297270:p [dir=back,arrowtail=empty];
 	// com.google.gwt.event.shared.HasHandlers
-	c297378 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
+	c297379 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.user.client.ui.IsWidget
-	c297379 [label=<<table title="com.google.gwt.user.client.ui.IsWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/IsWidget.html">
+	c297380 [label=<<table title="com.google.gwt.user.client.ui.IsWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/IsWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IsWidget </td></tr>

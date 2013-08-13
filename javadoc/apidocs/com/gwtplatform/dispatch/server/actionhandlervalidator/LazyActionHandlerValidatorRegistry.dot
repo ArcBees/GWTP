@@ -11,36 +11,36 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry
-	c220102 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LazyActionHandlerValidatorRegistry.html">
+	c220097 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LazyActionHandlerValidatorRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> LazyActionHandlerValidatorRegistry </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LazyActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
-	c220108 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorRegistry.html">
+	c220099 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionHandlerValidatorRegistry </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl
-	c220329 [label=<<table title="com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../guice/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html">
+	c220317 [label=<<table title="com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../guice/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LazyActionHandlerValidatorRegistryImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="../guice/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl
-	c220349 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html">
+	c220332 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LazyActionHandlerValidatorRegistryImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="../spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
-	c220108:p -> c220102:p [dir=back,arrowtail=empty,style=dashed];
+	c220099:p -> c220097:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl implements com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry
-	c220102:p -> c220329:p [dir=back,arrowtail=empty,style=dashed];
+	c220097:p -> c220317:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl implements com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry
-	c220102:p -> c220349:p [dir=back,arrowtail=empty,style=dashed];
+	c220097:p -> c220332:p [dir=back,arrowtail=empty,style=dashed];
 }
 

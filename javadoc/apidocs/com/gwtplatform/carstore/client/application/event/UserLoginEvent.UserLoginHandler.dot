@@ -11,24 +11,24 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler
-	c396463 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserLoginEvent.UserLoginHandler.html">
+	c396304 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserLoginEvent.UserLoginHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UserLoginHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UserLoginEvent.UserLoginHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
-	c396480 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/header/HeaderPresenter.html">
+	c396382 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/header/HeaderPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HeaderPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../widget/header/HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler implements com.google.gwt.event.shared.EventHandler
-	c396495:p -> c396463:p [dir=back,arrowtail=empty,style=dashed];
+	c396496:p -> c396304:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler
-	c396463:p -> c396480:p [dir=back,arrowtail=empty,style=dashed];
+	c396304:p -> c396382:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c396495 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c396496 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>

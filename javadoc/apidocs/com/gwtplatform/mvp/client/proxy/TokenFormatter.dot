@@ -10,36 +10,36 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter
-	c385741 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ParameterTokenFormatter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ParameterTokenFormatter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ParameterTokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c385760 [label=<<table title="com.gwtplatform.mvp.client.proxy.TokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TokenFormatter.html">
+	c385777 [label=<<table title="com.gwtplatform.mvp.client.proxy.TokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TokenFormatter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> TokenFormatter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.RouteTokenFormatter
-	c385762 [label=<<table title="com.gwtplatform.mvp.client.proxy.RouteTokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RouteTokenFormatter.html">
+	c385783 [label=<<table title="com.gwtplatform.mvp.client.proxy.RouteTokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RouteTokenFormatter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RouteTokenFormatter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RouteTokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld
-	c385778 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ParameterTokenFormatterOld.html">
+	c385809 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ParameterTokenFormatterOld.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ParameterTokenFormatterOld </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ParameterTokenFormatterOld.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter implements com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c385760:p -> c385741:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter
+	c385810 [label=<<table title="com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ParameterTokenFormatter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ParameterTokenFormatter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ParameterTokenFormatter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.RouteTokenFormatter implements com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c385760:p -> c385762:p [dir=back,arrowtail=empty,style=dashed];
+	c385777:p -> c385783:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterOld implements com.gwtplatform.mvp.client.proxy.TokenFormatter
-	c385760:p -> c385778:p [dir=back,arrowtail=empty,style=dashed];
+	c385777:p -> c385809:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter implements com.gwtplatform.mvp.client.proxy.TokenFormatter
+	c385777:p -> c385810:p [dir=back,arrowtail=empty,style=dashed];
 }
 

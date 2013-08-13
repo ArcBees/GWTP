@@ -11,28 +11,28 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.UiHandlers
-	c214179 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/UiHandlers.html">
+	c214103 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/UiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/UiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
-	c214566 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HeaderPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers
-	c214568 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HeaderUiHandlers.html">
+	c214467 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HeaderUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HeaderUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HeaderUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers
-	c214568:p -> c214566:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
+	c214468 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HeaderPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers implements com.gwtplatform.mvp.client.UiHandlers
-	c214179:p -> c214568:p [dir=back,arrowtail=empty,style=dashed];
+	c214103:p -> c214467:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers
+	c214467:p -> c214468:p [dir=back,arrowtail=empty,style=dashed];
 }
 

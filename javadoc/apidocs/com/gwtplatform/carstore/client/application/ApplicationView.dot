@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewImpl
-	c90873 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/ViewImpl.html">
+	c90804 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/ViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../mvp/client/ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.ApplicationView
+	c91042 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ApplicationView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ApplicationView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView
-	c91215 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.MyView.html">
+	c91045 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ApplicationPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.ApplicationView
-	c91219 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ApplicationView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ApplicationView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ApplicationView extends com.gwtplatform.mvp.client.ViewImpl
-	c90873:p -> c91219:p [dir=back,arrowtail=empty];
+	c90804:p -> c91042:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.ApplicationView implements com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView
-	c91215:p -> c91219:p [dir=back,arrowtail=empty,style=dashed];
+	c91045:p -> c91042:p [dir=back,arrowtail=empty,style=dashed];
 }
 

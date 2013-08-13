@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.shared.NoResult
-	c268987 [label=<<table title="com.gwtplatform.dispatch.shared.NoResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NoResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NoResult </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NoResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Result
-	c268991 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
+	c268988 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Result </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.NoResult
+	c268989 [label=<<table title="com.gwtplatform.dispatch.shared.NoResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NoResult.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NoResult </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NoResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.NoResult implements com.gwtplatform.dispatch.shared.Result
-	c268991:p -> c268987:p [dir=back,arrowtail=empty,style=dashed];
+	c268988:p -> c268989:p [dir=back,arrowtail=empty,style=dashed];
 }
 

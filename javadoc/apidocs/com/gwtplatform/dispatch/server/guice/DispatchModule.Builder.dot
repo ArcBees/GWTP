@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.guice.DispatchModule.Builder
-	c165325 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchModule.Builder.html">
+	c165328 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchModule.Builder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Builder </td></tr>
 		</table></td></tr>

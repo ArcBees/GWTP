@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c338128 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.RestActionGenerator
-	c338131 [label=<<table title="com.gwtplatform.dispatch.rebind.RestActionGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestActionGenerator.html">
+	c338142 [label=<<table title="com.gwtplatform.dispatch.rebind.RestActionGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestActionGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RestActionGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestActionGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
+	c338147 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.rebind.RestActionGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c338128:p -> c338131:p [dir=back,arrowtail=empty];
+	c338147:p -> c338142:p [dir=back,arrowtail=empty];
 }
 

@@ -11,16 +11,16 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.rest.RestDispatcherController
-	c341774 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestDispatcherController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestDispatcherController.html">
+	c341754 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestDispatcherController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestDispatcherController.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RestDispatcherController </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestDispatcherController.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.rest.RestDispatcherController implements com.google.gwt.core.client.EntryPoint
-	c342097:p -> c341774:p [dir=back,arrowtail=empty,style=dashed];
+	c342098:p -> c341754:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.core.client.EntryPoint
-	c342097 [label=<<table title="com.google.gwt.core.client.EntryPoint" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/client/EntryPoint.html">
+	c342098 [label=<<table title="com.google.gwt.core.client.EntryPoint" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/client/EntryPoint.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EntryPoint </td></tr>

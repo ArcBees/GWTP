@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.DefaultExceptionHandler
-	c179557 [label=<<table title="com.gwtplatform.dispatch.client.DefaultExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultExceptionHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultExceptionHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultExceptionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.ExceptionHandler
-	c179562 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ExceptionHandler.html">
+	c179560 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ExceptionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ExceptionHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ExceptionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DefaultExceptionHandler
+	c179565 [label=<<table title="com.gwtplatform.dispatch.client.DefaultExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultExceptionHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultExceptionHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultExceptionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.DefaultExceptionHandler implements com.gwtplatform.dispatch.client.ExceptionHandler
-	c179562:p -> c179557:p [dir=back,arrowtail=empty,style=dashed];
+	c179560:p -> c179565:p [dir=back,arrowtail=empty,style=dashed];
 }
 

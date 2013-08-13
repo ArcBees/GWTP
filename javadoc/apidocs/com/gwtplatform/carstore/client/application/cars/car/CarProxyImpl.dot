@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c117437 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/proxy/ProxyPlaceImpl.html">
+	c117462 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/proxy/ProxyPlaceImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProxyPlaceImpl&lt;P extends Presenter&lt;?, ?&gt;&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/proxy/ProxyPlaceImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl
+	c117657 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarProxyImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarProxyImpl </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarProxyImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy
-	c117776 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.MyProxy.html">
+	c117664 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl
-	c117785 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarProxyImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarProxyImpl </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarProxyImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl extends com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl<com.gwtplatform.carstore.client.application.cars.car.CarPresenter>
-	c117437:p -> c117785:p [dir=back,arrowtail=empty];
+	c117462:p -> c117657:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl implements com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy
-	c117776:p -> c117785:p [dir=back,arrowtail=empty,style=dashed];
+	c117664:p -> c117657:p [dir=back,arrowtail=empty,style=dashed];
 }
 

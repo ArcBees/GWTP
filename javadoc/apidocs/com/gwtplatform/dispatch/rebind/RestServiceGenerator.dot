@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.rebind.RestServiceGenerator
-	c345377 [label=<<table title="com.gwtplatform.dispatch.rebind.RestServiceGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestServiceGenerator.html">
+	c345392 [label=<<table title="com.gwtplatform.dispatch.rebind.RestServiceGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestServiceGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RestServiceGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestServiceGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c345380 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+	c345399 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.rebind.RestServiceGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c345380:p -> c345377:p [dir=back,arrowtail=empty];
+	c345399:p -> c345392:p [dir=back,arrowtail=empty];
 }
 

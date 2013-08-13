@@ -11,31 +11,31 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper
-	c194378 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./InterfaceGenerationHelper.html">
+	c194375 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./InterfaceGenerationHelper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> InterfaceGenerationHelper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./InterfaceGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
-	c194380 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassGenerationHelper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ClassGenerationHelper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ClassGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c194382 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenerationHelper.html">
+	c194376 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenerationHelper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GenerationHelper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
+	c194377 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassGenerationHelper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ClassGenerationHelper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ClassGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c194382:p -> c194378:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c194382:p -> c194380:p [dir=back,arrowtail=empty];
+	c194376:p -> c194375:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.annotation.helper.GenerationHelper implements java.io.Closeable
-	c194639:p -> c194382:p [dir=back,arrowtail=empty,style=dashed];
+	c194640:p -> c194376:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.GenerationHelper
+	c194376:p -> c194377:p [dir=back,arrowtail=empty];
 	// java.io.Closeable
-	c194639 [label=<<table title="java.io.Closeable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/io/Closeable.html">
+	c194640 [label=<<table title="java.io.Closeable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/io/Closeable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Closeable </td></tr>

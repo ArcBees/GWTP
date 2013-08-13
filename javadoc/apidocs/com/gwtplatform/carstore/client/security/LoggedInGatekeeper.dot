@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.Gatekeeper
-	c223786 [label=<<table title="com.gwtplatform.mvp.client.proxy.Gatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/proxy/Gatekeeper.html">
+	c223863 [label=<<table title="com.gwtplatform.mvp.client.proxy.Gatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/proxy/Gatekeeper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Gatekeeper </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../mvp/client/proxy/Gatekeeper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.security.LoggedInGatekeeper
-	c224083 [label=<<table title="com.gwtplatform.carstore.client.security.LoggedInGatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoggedInGatekeeper.html">
+	c224186 [label=<<table title="com.gwtplatform.carstore.client.security.LoggedInGatekeeper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoggedInGatekeeper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoggedInGatekeeper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LoggedInGatekeeper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.security.LoggedInGatekeeper implements com.gwtplatform.mvp.client.proxy.Gatekeeper
-	c223786:p -> c224083:p [dir=back,arrowtail=empty,style=dashed];
+	c223863:p -> c224186:p [dir=back,arrowtail=empty,style=dashed];
 }
 

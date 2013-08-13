@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator
-	c183609 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ForeignTranslator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ForeignTranslator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ForeignTranslator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
-	c183611 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.Translator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Translator.html">
+	c183696 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.Translator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Translator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Translator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Translator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator
+	c183698 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ForeignTranslator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ForeignTranslator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ForeignTranslator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator implements com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
-	c183611:p -> c183609:p [dir=back,arrowtail=empty,style=dashed];
+	c183696:p -> c183698:p [dir=back,arrowtail=empty,style=dashed];
 }
 

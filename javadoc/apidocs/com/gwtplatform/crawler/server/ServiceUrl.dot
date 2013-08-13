@@ -17,9 +17,9 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./ServiceUrl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.crawler.server.ServiceUrl implements java.lang.annotation.Annotation
-	c366275:p -> c366020:p [dir=back,arrowtail=empty,style=dashed];
+	c366276:p -> c366020:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c366275 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c366276 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

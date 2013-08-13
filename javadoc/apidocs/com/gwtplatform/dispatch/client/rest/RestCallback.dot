@@ -11,24 +11,24 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.rest.RestCallback<T>
-	c339366 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestCallback.html">
+	c339339 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RestCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RestCallback&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R extends com.gwtplatform.dispatch.shared.Result>
-	c339528 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/util/ErrorHandlerAsyncCallback.html">
+	c339615 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../carstore/client/util/ErrorHandlerAsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ErrorHandlerAsyncCallback&lt;R extends Result&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../carstore/client/util/ErrorHandlerAsyncCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.rest.RestCallback<T> implements com.google.gwt.user.client.rpc.AsyncCallback<T>
-	c339680:p -> c339366:p [dir=back,arrowtail=empty,style=dashed];
+	c339681:p -> c339339:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.client.rest.RestCallback<T>
-	c339366:p -> c339528:p [dir=back,arrowtail=empty,style=dashed];
+	c339339:p -> c339615:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.rpc.AsyncCallback<T>
-	c339680 [label=<<table title="com.google.gwt.user.client.rpc.AsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/AsyncCallback.html">
+	c339681 [label=<<table title="com.google.gwt.user.client.rpc.AsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/AsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> AsyncCallback&lt;T&gt; </td></tr>

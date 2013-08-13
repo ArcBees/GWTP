@@ -11,20 +11,20 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.ProxyPlace<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c235277 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlace" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/proxy/ProxyPlace.html">
+	c235317 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlace" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/proxy/ProxyPlace.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ProxyPlace&lt;P extends Presenter&lt;?, ?&gt;&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/proxy/ProxyPlace.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy
-	c235603 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerDetailPresenter.MyProxy.html">
+	c235578 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerDetailPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerDetailPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy implements com.gwtplatform.mvp.client.proxy.ProxyPlace<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c235277:p -> c235603:p [dir=back,arrowtail=empty,style=dashed];
+	c235317:p -> c235578:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.ProxyOutputterFactory
-	c304744 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyOutputterFactory.html">
+	c304857 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyOutputterFactory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProxyOutputterFactory </td></tr>
 		</table></td></tr>

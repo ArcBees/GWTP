@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c361097 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.SerializerGenerator
-	c361098 [label=<<table title="com.gwtplatform.dispatch.rebind.SerializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SerializerGenerator.html">
+	c361108 [label=<<table title="com.gwtplatform.dispatch.rebind.SerializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SerializerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SerializerGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SerializerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
+	c361116 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.rebind.SerializerGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c361097:p -> c361098:p [dir=back,arrowtail=empty];
+	c361116:p -> c361108:p [dir=back,arrowtail=empty];
 }
 

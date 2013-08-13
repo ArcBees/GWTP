@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c238375 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
+	c238314 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPresenterModule </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/gin/AbstractPresenterModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule
-	c238617 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerMobileModule.html">
+	c238594 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerMobileModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerMobileModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c238375:p -> c238617:p [dir=back,arrowtail=empty];
+	c238314:p -> c238594:p [dir=back,arrowtail=empty];
 }
 

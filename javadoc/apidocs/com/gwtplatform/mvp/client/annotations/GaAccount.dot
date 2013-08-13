@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.annotations.GaAccount
-	c185805 [label=<<table title="com.gwtplatform.mvp.client.annotations.GaAccount" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GaAccount.html">
+	c185688 [label=<<table title="com.gwtplatform.mvp.client.annotations.GaAccount" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GaAccount.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GaAccount </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./GaAccount.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.annotations.GaAccount implements java.lang.annotation.Annotation
-	c186175:p -> c185805:p [dir=back,arrowtail=empty,style=dashed];
+	c186176:p -> c185688:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c186175 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c186176 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

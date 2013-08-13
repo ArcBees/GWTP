@@ -10,28 +10,28 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.rest.NoResultSerializer
-	c359910 [label=<<table title="com.gwtplatform.dispatch.client.rest.NoResultSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResultSerializer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NoResultSerializer </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NoResultSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c359913 [label=<<table title="com.gwtplatform.dispatch.client.rest.Serializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Serializer.html">
+	c359886 [label=<<table title="com.gwtplatform.dispatch.client.rest.Serializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Serializer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Serializer&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Serializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.NoResultSerializer
+	c359893 [label=<<table title="com.gwtplatform.dispatch.client.rest.NoResultSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResultSerializer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NoResultSerializer </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NoResultSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.JsonSerializer<T>
-	c359914 [label=<<table title="com.gwtplatform.dispatch.client.rest.JsonSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JsonSerializer.html">
+	c359894 [label=<<table title="com.gwtplatform.dispatch.client.rest.JsonSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JsonSerializer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> JsonSerializer&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./JsonSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.rest.NoResultSerializer implements com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c359913:p -> c359910:p [dir=back,arrowtail=empty,style=dashed];
+	c359886:p -> c359893:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.client.rest.JsonSerializer<T> implements com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c359913:p -> c359914:p [dir=back,arrowtail=empty,style=dashed];
+	c359886:p -> c359894:p [dir=back,arrowtail=empty,style=dashed];
 }
 

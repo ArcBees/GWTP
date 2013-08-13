@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c267383 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/ViewWithUiHandlers.html">
+	c267286 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/ViewWithUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../../mvp/client/ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView
-	c267681 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabView.html">
+	c267553 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NavigationTabView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./NavigationTabView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView
-	c267683 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.MyView.html">
+	c267555 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./NavigationTabPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView extends com.gwtplatform.mvp.client.ViewWithUiHandlers<com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers>
-	c267383:p -> c267681:p [dir=back,arrowtail=empty];
+	c267286:p -> c267553:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView
-	c267683:p -> c267681:p [dir=back,arrowtail=empty,style=dashed];
+	c267555:p -> c267553:p [dir=back,arrowtail=empty,style=dashed];
 }
 

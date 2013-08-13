@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.rest.RestCallback<T>
-	c178610 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../dispatch/client/rest/RestCallback.html">
+	c178583 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../dispatch/client/rest/RestCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RestCallback&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../dispatch/client/rest/RestCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R extends com.gwtplatform.dispatch.shared.Result>
-	c178772 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ErrorHandlerAsyncCallback.html">
+	c178859 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ErrorHandlerAsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ErrorHandlerAsyncCallback&lt;R extends Result&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ErrorHandlerAsyncCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.client.rest.RestCallback<T>
-	c178610:p -> c178772:p [dir=back,arrowtail=empty,style=dashed];
+	c178583:p -> c178859:p [dir=back,arrowtail=empty,style=dashed];
 }
 

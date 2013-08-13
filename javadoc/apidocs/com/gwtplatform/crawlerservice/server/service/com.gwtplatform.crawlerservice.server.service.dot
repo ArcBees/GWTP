@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.crawlerservice.server.service.CachedPageDao
-	c25720 [label=<<table title="com.gwtplatform.crawlerservice.server.service.CachedPageDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CachedPageDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CachedPageDao </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CachedPageDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.crawlerservice.server.service.ObjectifyDao<T>
-	c25721 [label=<<table title="com.gwtplatform.crawlerservice.server.service.ObjectifyDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ObjectifyDao.html">
+	c28144 [label=<<table title="com.gwtplatform.crawlerservice.server.service.ObjectifyDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ObjectifyDao.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ObjectifyDao&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ObjectifyDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.crawlerservice.server.service.CachedPageDao
+	c28145 [label=<<table title="com.gwtplatform.crawlerservice.server.service.CachedPageDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CachedPageDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CachedPageDao </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CachedPageDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.crawlerservice.server.service.CachedPageDao extends com.gwtplatform.crawlerservice.server.service.ObjectifyDao<com.gwtplatform.crawlerservice.server.domain.CachedPage>
-	c25721:p -> c25720:p [dir=back,arrowtail=empty];
+	c28144:p -> c28145:p [dir=back,arrowtail=empty];
 }
 

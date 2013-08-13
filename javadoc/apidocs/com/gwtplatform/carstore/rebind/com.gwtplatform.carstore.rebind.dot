@@ -11,54 +11,54 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.rebind.VelocityProperties
-	c28750 [label=<<table title="com.gwtplatform.carstore.rebind.VelocityProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityProperties.html">
+	c48864 [label=<<table title="com.gwtplatform.carstore.rebind.VelocityProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityProperties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> VelocityProperties </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./VelocityProperties.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.rebind.GeneratorUtil
-	c28751 [label=<<table title="com.gwtplatform.carstore.rebind.GeneratorUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorUtil.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GeneratorUtil </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GeneratorUtil.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator
-	c28752 [label=<<table title="com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityColumnsInitializerGenerator.html">
+	c48865 [label=<<table title="com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityColumnsInitializerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> VelocityColumnsInitializerGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./VelocityColumnsInitializerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.rebind.AbstractVelocityGenerator
-	c28753 [label=<<table title="com.gwtplatform.carstore.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+	// com.gwtplatform.carstore.rebind.RebindModule
+	c48866 [label=<<table title="com.gwtplatform.carstore.rebind.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RebindModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+<tr><td align="center" balign="center"> RebindModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./RebindModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.rebind.GeneratorUtil
+	c48867 [label=<<table title="com.gwtplatform.carstore.rebind.GeneratorUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorUtil.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GeneratorUtil </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GeneratorUtil.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.rebind.ColumnTuple
+	c48868 [label=<<table title="com.gwtplatform.carstore.rebind.ColumnTuple" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnTuple.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ColumnTuple </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ColumnTuple.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.rebind.ColumnsInitializerGenerator
-	c28754 [label=<<table title="com.gwtplatform.carstore.rebind.ColumnsInitializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsInitializerGenerator.html">
+	c48869 [label=<<table title="com.gwtplatform.carstore.rebind.ColumnsInitializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsInitializerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ColumnsInitializerGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ColumnsInitializerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.rebind.ColumnsInitializerDefinitions
-	c28755 [label=<<table title="com.gwtplatform.carstore.rebind.ColumnsInitializerDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsInitializerDefinitions.html">
+	c48870 [label=<<table title="com.gwtplatform.carstore.rebind.ColumnsInitializerDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsInitializerDefinitions.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ColumnsInitializerDefinitions </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ColumnsInitializerDefinitions.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.rebind.RebindModule
-	c28756 [label=<<table title="com.gwtplatform.carstore.rebind.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RebindModule.html">
+	// com.gwtplatform.carstore.rebind.AbstractVelocityGenerator
+	c48871 [label=<<table title="com.gwtplatform.carstore.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RebindModule </td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./RebindModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.rebind.ColumnTuple
-	c28757 [label=<<table title="com.gwtplatform.carstore.rebind.ColumnTuple" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnTuple.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ColumnTuple </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ColumnTuple.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator extends com.gwtplatform.carstore.rebind.AbstractVelocityGenerator
-	c28753:p -> c28752:p [dir=back,arrowtail=empty];
+	c48871:p -> c48865:p [dir=back,arrowtail=empty];
 }
 

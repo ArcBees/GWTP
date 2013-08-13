@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.annotation.GenProxy
-	c192559 [label=<<table title="com.gwtplatform.dispatch.annotation.GenProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenProxy.html">
+	c192557 [label=<<table title="com.gwtplatform.dispatch.annotation.GenProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenProxy </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.GenProxy implements java.lang.annotation.Annotation
-	c192826:p -> c192559:p [dir=back,arrowtail=empty,style=dashed];
+	c192827:p -> c192557:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c192826 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c192827 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

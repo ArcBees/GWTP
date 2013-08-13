@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.shared.dto.CarPropertiesDto
-	c115878 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarPropertiesDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarPropertiesDto.html">
+	c116060 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarPropertiesDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarPropertiesDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarPropertiesDto </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarPropertiesDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c115879 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
+	c116062 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseEntity </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.shared.dto.CarPropertiesDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c115879:p -> c115878:p [dir=back,arrowtail=empty];
+	c116062:p -> c116060:p [dir=back,arrowtail=empty];
 }
 

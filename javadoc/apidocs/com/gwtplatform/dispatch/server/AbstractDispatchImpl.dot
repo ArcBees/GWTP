@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.Dispatch
-	c61125 [label=<<table title="com.gwtplatform.dispatch.server.Dispatch" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dispatch.html">
+	c61124 [label=<<table title="com.gwtplatform.dispatch.server.Dispatch" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dispatch.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Dispatch </td></tr>
@@ -24,22 +24,22 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./AbstractDispatchImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.DispatchImpl
-	c61361 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./guice/DispatchImpl.html">
+	c61367 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./guice/DispatchImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./guice/DispatchImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.DispatchImpl
-	c61379 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./spring/DispatchImpl.html">
+	c61382 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./spring/DispatchImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./spring/DispatchImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.AbstractDispatchImpl implements com.gwtplatform.dispatch.server.Dispatch
-	c61125:p -> c61128:p [dir=back,arrowtail=empty,style=dashed];
+	c61124:p -> c61128:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.guice.DispatchImpl extends com.gwtplatform.dispatch.server.AbstractDispatchImpl
-	c61128:p -> c61361:p [dir=back,arrowtail=empty];
+	c61128:p -> c61367:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.server.spring.DispatchImpl extends com.gwtplatform.dispatch.server.AbstractDispatchImpl
-	c61128:p -> c61379:p [dir=back,arrowtail=empty];
+	c61128:p -> c61382:p [dir=back,arrowtail=empty];
 }
 

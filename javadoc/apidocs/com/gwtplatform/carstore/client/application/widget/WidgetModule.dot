@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c403970 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
+	c403909 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPresenterModule </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/gin/AbstractPresenterModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.WidgetModule
-	c404349 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./WidgetModule.html">
+	c404250 [label=<<table title="com.gwtplatform.carstore.client.application.widget.WidgetModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./WidgetModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> WidgetModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./WidgetModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.WidgetModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c403970:p -> c404349:p [dir=back,arrowtail=empty];
+	c403909:p -> c404250:p [dir=back,arrowtail=empty];
 }
 

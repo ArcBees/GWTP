@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.tester.AsyncMockProvider<T>
-	c95002 [label=<<table title="com.gwtplatform.tester.AsyncMockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AsyncMockProvider.html">
+	c95011 [label=<<table title="com.gwtplatform.tester.AsyncMockProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AsyncMockProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AsyncMockProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./AsyncMockProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.tester.AsyncMockProvider<T> implements com.google.gwt.inject.client.AsyncProvider<T>
-	c95519:p -> c95002:p [dir=back,arrowtail=empty,style=dashed];
+	c95519:p -> c95011:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.inject.client.AsyncProvider<T>
 	c95519 [label=<<table title="com.google.gwt.inject.client.AsyncProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

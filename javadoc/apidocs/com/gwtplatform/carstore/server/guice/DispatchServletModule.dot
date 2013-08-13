@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.guice.DispatchServletModule
-	c168415 [label=<<table title="com.gwtplatform.carstore.server.guice.DispatchServletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchServletModule.html">
+	c168622 [label=<<table title="com.gwtplatform.carstore.server.guice.DispatchServletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchServletModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchServletModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchServletModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.guice.DispatchServletModule extends com.google.inject.servlet.ServletModule
-	c168647:p -> c168415:p [dir=back,arrowtail=empty];
+	c168648:p -> c168622:p [dir=back,arrowtail=empty];
 	// com.google.inject.servlet.ServletModule
-	c168647 [label=<<table title="com.google.inject.servlet.ServletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/servlet/ServletModule.html">
+	c168648 [label=<<table title="com.google.inject.servlet.ServletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/servlet/ServletModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ServletModule </td></tr>
 		</table></td></tr>

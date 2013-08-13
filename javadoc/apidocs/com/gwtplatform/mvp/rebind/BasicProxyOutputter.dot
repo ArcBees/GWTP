@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c99246 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterBase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterBase.html">
+	c99370 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterBase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterBase.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ProxyOutputterBase </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyOutputterBase.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.BasicProxyOutputter
-	c99261 [label=<<table title="com.gwtplatform.mvp.rebind.BasicProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BasicProxyOutputter.html">
+	c99384 [label=<<table title="com.gwtplatform.mvp.rebind.BasicProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BasicProxyOutputter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BasicProxyOutputter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BasicProxyOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.BasicProxyOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c99246:p -> c99261:p [dir=back,arrowtail=empty];
+	c99370:p -> c99384:p [dir=back,arrowtail=empty];
 }
 

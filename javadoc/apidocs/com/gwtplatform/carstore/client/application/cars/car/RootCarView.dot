@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewImpl
-	c353172 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/ViewImpl.html">
+	c353104 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/ViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
+	c353351 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootCarView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootCarView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
-	c353479 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.MyView.html">
+	c353353 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RootCarPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
-	c353482 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootCarView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootCarView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.RootCarView extends com.gwtplatform.mvp.client.ViewImpl
-	c353172:p -> c353482:p [dir=back,arrowtail=empty];
+	c353104:p -> c353351:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.RootCarView implements com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
-	c353479:p -> c353482:p [dir=back,arrowtail=empty,style=dashed];
+	c353353:p -> c353351:p [dir=back,arrowtail=empty,style=dashed];
 }
 

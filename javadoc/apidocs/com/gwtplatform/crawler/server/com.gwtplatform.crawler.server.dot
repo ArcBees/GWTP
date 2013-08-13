@@ -10,18 +10,18 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.crawler.server.ServiceKey
-	c25113 [label=<<table title="com.gwtplatform.crawler.server.ServiceKey" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceKey.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ServiceKey </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./ServiceKey.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.crawler.server.ServiceUrl
-	c25114 [label=<<table title="com.gwtplatform.crawler.server.ServiceUrl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceUrl.html">
+	c25113 [label=<<table title="com.gwtplatform.crawler.server.ServiceUrl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceUrl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ServiceUrl </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ServiceUrl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.crawler.server.ServiceKey
+	c25114 [label=<<table title="com.gwtplatform.crawler.server.ServiceKey" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceKey.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ServiceKey </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./ServiceKey.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.crawler.server.CrawlFilter
 	c25115 [label=<<table title="com.gwtplatform.crawler.server.CrawlFilter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CrawlFilter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

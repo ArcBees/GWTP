@@ -10,53 +10,53 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.carstore.client.application.report.ReportView
+	c40342 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ReportView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ReportView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportPresenter
-	c47032 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.html">
+	c40343 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView
-	c47033 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.MyView.html">
+	c40344 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportPresenter.MyProxy
-	c47034 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.MyProxy.html">
+	c40345 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.report.ReportMobileView
-	c47035 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportMobileView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ReportMobileView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ReportMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportModule
-	c47036 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportModule.html">
+	c40346 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.report.ReportView
-	c47037 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportView.html">
+	// com.gwtplatform.carstore.client.application.report.ReportMobileView
+	c40347 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportMobileView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ReportView </td></tr>
+<tr><td align="center" balign="center"> ReportMobileView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ReportView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ReportMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportMobileModule
-	c47038 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportMobileModule.html">
+	c40348 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportMobileModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportMobileModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.report.ReportMobileView implements com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView
-	c47033:p -> c47035:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.report.ReportView implements com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView
-	c47033:p -> c47037:p [dir=back,arrowtail=empty,style=dashed];
+	c40344:p -> c40342:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.report.ReportMobileView implements com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView
+	c40344:p -> c40347:p [dir=back,arrowtail=empty,style=dashed];
 }
 

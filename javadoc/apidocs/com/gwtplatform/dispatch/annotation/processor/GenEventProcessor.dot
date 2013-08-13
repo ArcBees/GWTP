@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c191341 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProcessor.html">
+	c191358 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProcessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenProcessor </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.processor.GenEventProcessor
-	c191344 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenEventProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenEventProcessor.html">
+	c191359 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenEventProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenEventProcessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GenEventProcessor </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenEventProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.processor.GenEventProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c191341:p -> c191344:p [dir=back,arrowtail=empty];
+	c191358:p -> c191359:p [dir=back,arrowtail=empty];
 }
 

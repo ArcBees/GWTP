@@ -10,25 +10,25 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.mvp.client.RootPresenter
+	c335583 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../RootPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="../RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.ResetPresentersHandler
-	c335590 [label=<<table title="com.gwtplatform.mvp.client.proxy.ResetPresentersHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ResetPresentersHandler.html">
+	c335631 [label=<<table title="com.gwtplatform.mvp.client.proxy.ResetPresentersHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ResetPresentersHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ResetPresentersHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ResetPresentersHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.RootPresenter
-	c335655 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../RootPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="../RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.proxy.ResetPresentersHandler implements com.google.gwt.event.shared.EventHandler
-	c336054:p -> c335590:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.ResetPresentersHandler
-	c335590:p -> c335655:p [dir=back,arrowtail=empty,style=dashed];
+	c335631:p -> c335583:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.proxy.ResetPresentersHandler implements com.google.gwt.event.shared.EventHandler
+	c336055:p -> c335631:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c336054 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c336055 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>

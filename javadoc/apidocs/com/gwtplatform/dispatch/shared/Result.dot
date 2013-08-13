@@ -10,98 +10,98 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.shared.NoResult
-	c345734 [label=<<table title="com.gwtplatform.dispatch.shared.NoResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NoResult </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NoResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.BatchResult
-	c345737 [label=<<table title="com.gwtplatform.dispatch.shared.BatchResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BatchResult </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BatchResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Result
-	c345738 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Result.html">
+	c345735 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Result </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.NoResult
+	c345736 [label=<<table title="com.gwtplatform.dispatch.shared.NoResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResult.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NoResult </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NoResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.MultipleResult<T>
-	c345740 [label=<<table title="com.gwtplatform.dispatch.shared.MultipleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MultipleResult.html">
+	c345737 [label=<<table title="com.gwtplatform.dispatch.shared.MultipleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MultipleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MultipleResult&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MultipleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.BatchResult
+	c345742 [label=<<table title="com.gwtplatform.dispatch.shared.BatchResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchResult.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BatchResult </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BatchResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.AbstractUpdateResult<T>
-	c345743 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractUpdateResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractUpdateResult.html">
+	c345748 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractUpdateResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractUpdateResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractUpdateResult&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractUpdateResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.AbstractSimpleResult<T>
-	c345748 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractSimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSimpleResult.html">
+	c345749 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractSimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSimpleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractSimpleResult&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractSimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.action.TestResult
-	c346014 [label=<<table title="com.gwtplatform.dispatch.shared.action.TestResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./action/TestResult.html">
+	c346015 [label=<<table title="com.gwtplatform.dispatch.shared.action.TestResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./action/TestResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestResult </td></tr>
 		</table></td></tr>
 		</table>>, URL="./action/TestResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dispatch.LogInResult
-	c346127 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.LogInResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/shared/dispatch/LogInResult.html">
+	c346310 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.LogInResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/shared/dispatch/LogInResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LogInResult </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/shared/dispatch/LogInResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dispatch.GetResult<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c346128 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/shared/dispatch/GetResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GetResult&lt;T extends Dto&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../carstore/shared/dispatch/GetResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dispatch.GetResults<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c346129 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResults" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/shared/dispatch/GetResults.html">
+	c346312 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResults" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/shared/dispatch/GetResults.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GetResults&lt;T extends Dto&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/shared/dispatch/GetResults.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.shared.NoResult implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c345734:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.BatchResult implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c345737:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.shared.dispatch.GetResult<T extends com.gwtplatform.carstore.shared.dto.Dto>
+	c346313 [label=<<table title="com.gwtplatform.carstore.shared.dispatch.GetResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/shared/dispatch/GetResult.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GetResult&lt;T extends Dto&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../carstore/shared/dispatch/GetResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.Result implements com.google.gwt.user.client.rpc.IsSerializable
-	c346327:p -> c345738:p [dir=back,arrowtail=empty,style=dashed];
+	c346328:p -> c345735:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.Result implements java.io.Serializable
-	c346328:p -> c345738:p [dir=back,arrowtail=empty,style=dashed];
+	c346329:p -> c345735:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.NoResult implements com.gwtplatform.dispatch.shared.Result
+	c345735:p -> c345736:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.MultipleResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c345740:p [dir=back,arrowtail=empty,style=dashed];
+	c345735:p -> c345737:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.BatchResult implements com.gwtplatform.dispatch.shared.Result
+	c345735:p -> c345742:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.AbstractUpdateResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c345743:p [dir=back,arrowtail=empty,style=dashed];
+	c345735:p -> c345748:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.AbstractSimpleResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c345748:p [dir=back,arrowtail=empty,style=dashed];
+	c345735:p -> c345749:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.action.TestResult implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c346014:p [dir=back,arrowtail=empty,style=dashed];
+	c345735:p -> c346015:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.shared.dispatch.LogInResult implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c346127:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dispatch.GetResult<T extends com.gwtplatform.carstore.shared.dto.Dto> implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c346128:p [dir=back,arrowtail=empty,style=dashed];
+	c345735:p -> c346310:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.shared.dispatch.GetResults<T extends com.gwtplatform.carstore.shared.dto.Dto> implements com.gwtplatform.dispatch.shared.Result
-	c345738:p -> c346129:p [dir=back,arrowtail=empty,style=dashed];
+	c345735:p -> c346312:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.shared.dispatch.GetResult<T extends com.gwtplatform.carstore.shared.dto.Dto> implements com.gwtplatform.dispatch.shared.Result
+	c345735:p -> c346313:p [dir=back,arrowtail=empty,style=dashed];
 	// java.io.Serializable
-	c346328 [label=<<table title="java.io.Serializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/io/Serializable.html">
+	c346329 [label=<<table title="java.io.Serializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/io/Serializable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Serializable </td></tr>
 		</table></td></tr>
 		</table>>, URL="http://download.oracle.com/javase/6/docs/api/java/io/Serializable.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.user.client.rpc.IsSerializable
-	c346327 [label=<<table title="com.google.gwt.user.client.rpc.IsSerializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html">
+	c346328 [label=<<table title="com.google.gwt.user.client.rpc.IsSerializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IsSerializable </td></tr>

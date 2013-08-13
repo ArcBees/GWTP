@@ -10,41 +10,41 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer
+	c36085 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerRenderer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerRenderer </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerRenderer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView
+	c36086 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> EditManufacturerView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditManufacturerView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers
-	c42758 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerUiHandlers.html">
+	c36087 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EditManufacturerUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditManufacturerUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter
-	c42759 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.html">
+	c36088 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EditManufacturerPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditManufacturerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView
-	c42760 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.MyView.html">
+	c36089 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EditManufacturerPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer
-	c42761 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerRenderer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerRenderer </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerRenderer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView
-	c42762 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> EditManufacturerView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditManufacturerView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter implements com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers
-	c42758:p -> c42759:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerView implements com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView
-	c42760:p -> c42762:p [dir=back,arrowtail=empty,style=dashed];
+	c36089:p -> c36086:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter implements com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers
+	c36087:p -> c36088:p [dir=back,arrowtail=empty,style=dashed];
 }
 

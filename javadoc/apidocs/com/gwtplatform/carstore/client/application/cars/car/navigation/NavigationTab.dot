@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.cars.car.CarPresenter
-	c264636 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../CarPresenter.html">
+	c264525 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../CarPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../CarPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab
-	c264663 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTab.html">
+	c264536 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTab.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> NavigationTab </td></tr>
 		</table></td></tr>
 		</table>>, URL="./NavigationTab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.CarPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab
-	c264663:p -> c264636:p [dir=back,arrowtail=empty,style=dashed];
+	c264536:p -> c264525:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent
-	c44585 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarAddedEvent.html">
+	c31817 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarAddedEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarAddedEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarAddedEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler
-	c44586 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarAddedEvent.CarAddedHandler.html">
+	c31818 [label=<<table title="com.gwtplatform.carstore.client.application.cars.event.CarAddedEvent.CarAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarAddedEvent.CarAddedHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CarAddedHandler </td></tr>

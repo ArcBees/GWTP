@@ -10,41 +10,41 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors
-	c7972 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenerateFormFactorGinjectors.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GenerateFormFactorGinjectors </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GenerateFormFactorGinjectors.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.VelocityProperties
-	c7973 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.VelocityProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityProperties.html">
+	c11115 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.VelocityProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityProperties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> VelocityProperties </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./VelocityProperties.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.velocity.GeneratorUtil
-	c7974 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.GeneratorUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorUtil.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GeneratorUtil </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GeneratorUtil.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.velocity.Logger
-	c7975 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.Logger" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Logger.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Logger </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Logger.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c7976 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.RebindModule
-	c7977 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RebindModule.html">
+	c11116 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RebindModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RebindModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RebindModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.Logger
+	c11117 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.Logger" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Logger.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Logger </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Logger.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.GeneratorUtil
+	c11118 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.GeneratorUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorUtil.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GeneratorUtil </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GeneratorUtil.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors
+	c11119 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenerateFormFactorGinjectors.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GenerateFormFactorGinjectors </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GenerateFormFactorGinjectors.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
+	c11120 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

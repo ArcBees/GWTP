@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper
-	c103113 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BuilderGenerationHelper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BuilderGenerationHelper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BuilderGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
-	c103114 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassGenerationHelper.html">
+	c103110 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassGenerationHelper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ClassGenerationHelper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ClassGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper
+	c103111 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BuilderGenerationHelper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BuilderGenerationHelper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BuilderGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
-	c103114:p -> c103113:p [dir=back,arrowtail=empty];
+	c103110:p -> c103111:p [dir=back,arrowtail=empty];
 }
 

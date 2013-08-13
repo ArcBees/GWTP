@@ -11,26 +11,26 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder
-	c60499 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsyncModule.Builder.html">
+	c60510 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsyncModule.Builder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Builder </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c60501 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsyncModule.Builder.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Builder </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder
-	c60504 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.Builder.html">
+	c60513 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.Builder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Builder </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
+	c60515 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsyncModule.Builder.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Builder </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c60501:p -> c60499:p [dir=back,arrowtail=empty];
+	c60515:p -> c60510:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c60501:p -> c60504:p [dir=back,arrowtail=empty];
+	c60515:p -> c60513:p [dir=back,arrowtail=empty];
 }
 

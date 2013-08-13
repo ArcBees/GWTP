@@ -11,14 +11,14 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ChangeTabHandler
-	c131395 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ChangeTabHandler.html">
+	c131332 [label=<<table title="com.gwtplatform.mvp.client.ChangeTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ChangeTabHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ChangeTabHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ChangeTabHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.ChangeTabHandler implements com.google.gwt.event.shared.EventHandler
-	c131782:p -> c131395:p [dir=back,arrowtail=empty,style=dashed];
+	c131782:p -> c131332:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
 	c131782 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

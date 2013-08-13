@@ -11,44 +11,44 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.DispatchRequest
-	c165635 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchRequest.html">
+	c165643 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchRequest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.DelegatingDispatchRequest
-	c165655 [label=<<table title="com.gwtplatform.dispatch.client.DelegatingDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/DelegatingDispatchRequest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DelegatingDispatchRequest </td></tr>
-		</table></td></tr>
-		</table>>, URL="../client/DelegatingDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.GwtHttpDispatchRequest
-	c165657 [label=<<table title="com.gwtplatform.dispatch.client.GwtHttpDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/GwtHttpDispatchRequest.html">
+	c165656 [label=<<table title="com.gwtplatform.dispatch.client.GwtHttpDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/GwtHttpDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GwtHttpDispatchRequest </td></tr>
 		</table></td></tr>
 		</table>>, URL="../client/GwtHttpDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DelegatingDispatchRequest
+	c165659 [label=<<table title="com.gwtplatform.dispatch.client.DelegatingDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/DelegatingDispatchRequest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DelegatingDispatchRequest </td></tr>
+		</table></td></tr>
+		</table>>, URL="../client/DelegatingDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.CompletedDispatchRequest
+	c165665 [label=<<table title="com.gwtplatform.dispatch.client.CompletedDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/CompletedDispatchRequest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CompletedDispatchRequest </td></tr>
+		</table></td></tr>
+		</table>>, URL="../client/CompletedDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c165663 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/CallbackDispatchRequest.html">
+	c165666 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/CallbackDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CallbackDispatchRequest&lt;R&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../client/CallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.CompletedDispatchRequest
-	c165664 [label=<<table title="com.gwtplatform.dispatch.client.CompletedDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/CompletedDispatchRequest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CompletedDispatchRequest </td></tr>
-		</table></td></tr>
-		</table>>, URL="../client/CompletedDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.DelegatingDispatchRequest implements com.gwtplatform.dispatch.shared.DispatchRequest
-	c165635:p -> c165655:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.client.GwtHttpDispatchRequest implements com.gwtplatform.dispatch.shared.DispatchRequest
-	c165635:p -> c165657:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.client.CallbackDispatchRequest<R> implements com.gwtplatform.dispatch.shared.DispatchRequest
-	c165635:p -> c165663:p [dir=back,arrowtail=empty,style=dashed];
+	c165643:p -> c165656:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.DelegatingDispatchRequest implements com.gwtplatform.dispatch.shared.DispatchRequest
+	c165643:p -> c165659:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.client.CompletedDispatchRequest implements com.gwtplatform.dispatch.shared.DispatchRequest
-	c165635:p -> c165664:p [dir=back,arrowtail=empty,style=dashed];
+	c165643:p -> c165665:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.CallbackDispatchRequest<R> implements com.gwtplatform.dispatch.shared.DispatchRequest
+	c165643:p -> c165666:p [dir=back,arrowtail=empty,style=dashed];
 }
 

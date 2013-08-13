@@ -11,28 +11,28 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.View
-	c250424 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/View.html">
+	c250359 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.message.MessagesView
+	c250728 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MessagesView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MessagesView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView
-	c250829 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessagesPresenter.MyView.html">
+	c250731 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessagesPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MessagesPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.message.MessagesView
-	c250830 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MessagesView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MessagesView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView implements com.gwtplatform.mvp.client.View
-	c250424:p -> c250829:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesView implements com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView
-	c250829:p -> c250830:p [dir=back,arrowtail=empty,style=dashed];
+	c250731:p -> c250728:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView implements com.gwtplatform.mvp.client.View
+	c250359:p -> c250731:p [dir=back,arrowtail=empty,style=dashed];
 }
 

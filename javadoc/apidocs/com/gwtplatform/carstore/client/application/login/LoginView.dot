@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c230515 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
+	c230418 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginView
+	c230720 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LoginView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
-	c230838 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyView.html">
+	c230723 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LoginPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.login.LoginView
-	c230842 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LoginView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.login.LoginView extends com.gwtplatform.mvp.client.ViewWithUiHandlers<com.gwtplatform.carstore.client.application.login.LoginUiHandlers>
-	c230515:p -> c230842:p [dir=back,arrowtail=empty];
+	c230418:p -> c230720:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.login.LoginView implements com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
-	c230838:p -> c230842:p [dir=back,arrowtail=empty,style=dashed];
+	c230723:p -> c230720:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.report.renderer.ReportCell
-	c47643 [label=<<table title="com.gwtplatform.carstore.client.application.report.renderer.ReportCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportCell.html">
+	c39737 [label=<<table title="com.gwtplatform.carstore.client.application.report.renderer.ReportCell" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportCell.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportCell </td></tr>
 		</table></td></tr>

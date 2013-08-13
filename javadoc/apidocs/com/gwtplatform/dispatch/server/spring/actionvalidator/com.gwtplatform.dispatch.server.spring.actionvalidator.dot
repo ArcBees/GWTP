@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator
-	c19638 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultActionValidator.html">
+	c19640 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultActionValidator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultActionValidator </td></tr>
 		</table></td></tr>
