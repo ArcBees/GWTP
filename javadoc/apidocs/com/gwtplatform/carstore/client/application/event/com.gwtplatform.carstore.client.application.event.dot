@@ -11,89 +11,89 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.event.UserLoginEvent
-	c32423 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserLoginEvent.html">
+	c52516 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserLoginEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserLoginEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UserLoginEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler
-	c32424 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserLoginEvent.UserLoginHandler.html">
+	c52517 [label=<<table title="com.gwtplatform.carstore.client.application.event.UserLoginEvent.UserLoginHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserLoginEvent.UserLoginHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UserLoginHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UserLoginEvent.UserLoginHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.GoBackEvent
-	c32425 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoBackEvent.html">
+	// com.gwtplatform.carstore.client.application.event.ActionBarEvent
+	c52518 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GoBackEvent </td></tr>
+<tr><td align="center" balign="center"> ActionBarEvent </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GoBackEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler
-	c32426 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoBackEvent.GoBackHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> GoBackHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GoBackEvent.GoBackHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.DisplayMessageEvent
-	c32427 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DisplayMessageEvent.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DisplayMessageEvent </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DisplayMessageEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler
-	c32428 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DisplayMessageEvent.DisplayMessageHandler.html">
+		</table>>, URL="./ActionBarEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
+	c52519 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarEvent.ActionBarHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> DisplayMessageHandler </td></tr>
+<tr><td align="center" balign="center"> ActionBarHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DisplayMessageEvent.DisplayMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ActionBarEvent.ActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent
-	c32429 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeActionBarEvent.html">
+	c52520 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeActionBarEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ChangeActionBarEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ChangeActionBarEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType
-	c32430 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeActionBarEvent.ActionType.html">
+	c52521 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeActionBarEvent.ActionType.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionType </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ChangeActionBarEvent.ActionType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c32431 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeActionBarEvent.ChangeActionBarHandler.html">
+	c52522 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ChangeActionBarEvent.ChangeActionBarHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ChangeActionBarHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ChangeActionBarEvent.ChangeActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.event.DisplayMessageEvent
+	c52523 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DisplayMessageEvent.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DisplayMessageEvent </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DisplayMessageEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler
+	c52524 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DisplayMessageEvent.DisplayMessageHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> DisplayMessageHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DisplayMessageEvent.DisplayMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent
-	c32432 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarVisibilityEvent.html">
+	c52525 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarVisibilityEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionBarVisibilityEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionBarVisibilityEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c32433 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
+	c52526 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionBarVisibilityHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.ActionBarEvent
-	c32434 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarEvent.html">
+	// com.gwtplatform.carstore.client.application.event.GoBackEvent
+	c52527 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoBackEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionBarEvent </td></tr>
+<tr><td align="center" balign="center"> GoBackEvent </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ActionBarEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
-	c32435 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBarEvent.ActionBarHandler.html">
+		</table>>, URL="./GoBackEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler
+	c52528 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GoBackEvent.GoBackHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ActionBarHandler </td></tr>
+<tr><td align="center" balign="center"> GoBackHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ActionBarEvent.ActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GoBackEvent.GoBackHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

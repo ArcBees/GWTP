@@ -10,25 +10,25 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.Tab
-	c136398 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Tab.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Tab </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers
-	c136408 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CloseTabEvent.HasCloseTabHandlers.html">
+	c137738 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CloseTabEvent.HasCloseTabHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasCloseTabHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CloseTabEvent.HasCloseTabHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.cars.car.navigation.Tab implements com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers
-	c136408:p -> c136398:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.Tab
+	c137743 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Tab.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Tab </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers implements com.google.gwt.event.shared.HasHandlers
-	c136616:p -> c136408:p [dir=back,arrowtail=empty,style=dashed];
+	c137826:p -> c137738:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.cars.car.navigation.Tab implements com.gwtplatform.carstore.client.application.cars.car.navigation.CloseTabEvent.HasCloseTabHandlers
+	c137738:p -> c137743:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.HasHandlers
-	c136616 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
+	c137826 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasHandlers </td></tr>

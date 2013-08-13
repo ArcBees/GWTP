@@ -11,32 +11,32 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter
-	c128514 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ApplicationPresenter.html">
+	c129896 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ApplicationPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../ApplicationPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c128570 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ChangeActionBarEvent.ChangeActionBarHandler.html">
+	c129940 [label=<<table title="com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ChangeActionBarEvent.ChangeActionBarHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ChangeActionBarHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ChangeActionBarEvent.ChangeActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
-	c128641 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/header/HeaderPresenter.html">
+	c129952 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/header/HeaderPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HeaderPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="../widget/header/HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ApplicationPresenter implements com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c128570:p -> c128514:p [dir=back,arrowtail=empty,style=dashed];
+	c129940:p -> c129896:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler implements com.google.gwt.event.shared.EventHandler
-	c128756:p -> c128570:p [dir=back,arrowtail=empty,style=dashed];
+	c129967:p -> c129940:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ChangeActionBarHandler
-	c128570:p -> c128641:p [dir=back,arrowtail=empty,style=dashed];
+	c129940:p -> c129952:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c128756 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c129967 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>

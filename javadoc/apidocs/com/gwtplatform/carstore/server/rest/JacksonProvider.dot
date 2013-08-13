@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.rest.JacksonProvider
-	c218792 [label=<<table title="com.gwtplatform.carstore.server.rest.JacksonProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./JacksonProvider.html">
+	c219189 [label=<<table title="com.gwtplatform.carstore.server.rest.JacksonProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./JacksonProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JacksonProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./JacksonProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.rest.JacksonProvider extends org.codehaus.jackson.jaxrs.JacksonJsonProvider
-	c218816:p -> c218792:p [dir=back,arrowtail=empty];
+	c219418:p -> c219189:p [dir=back,arrowtail=empty];
 	// org.codehaus.jackson.jaxrs.JacksonJsonProvider
-	c218816 [label=<<table title="org.codehaus.jackson.jaxrs.JacksonJsonProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c219418 [label=<<table title="org.codehaus.jackson.jaxrs.JacksonJsonProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JacksonJsonProvider </td></tr>
 		</table></td></tr>

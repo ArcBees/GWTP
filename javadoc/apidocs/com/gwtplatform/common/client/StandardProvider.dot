@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.common.client.StandardProvider<T>
-	c369901 [label=<<table title="com.gwtplatform.common.client.StandardProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./StandardProvider.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> StandardProvider&lt;T&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./StandardProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.common.client.IndirectProvider<T>
-	c369903 [label=<<table title="com.gwtplatform.common.client.IndirectProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IndirectProvider.html">
+	c371713 [label=<<table title="com.gwtplatform.common.client.IndirectProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IndirectProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IndirectProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./IndirectProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.common.client.StandardProvider<T>
+	c371714 [label=<<table title="com.gwtplatform.common.client.StandardProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./StandardProvider.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> StandardProvider&lt;T&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./StandardProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.common.client.StandardProvider<T> implements com.gwtplatform.common.client.IndirectProvider<T>
-	c369903:p -> c369901:p [dir=back,arrowtail=empty,style=dashed];
+	c371713:p -> c371714:p [dir=back,arrowtail=empty,style=dashed];
 }
 

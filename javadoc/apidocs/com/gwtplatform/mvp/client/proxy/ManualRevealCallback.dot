@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.ManualRevealCallback<T>
-	c230524 [label=<<table title="com.gwtplatform.mvp.client.proxy.ManualRevealCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManualRevealCallback.html">
+	c231065 [label=<<table title="com.gwtplatform.mvp.client.proxy.ManualRevealCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManualRevealCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManualRevealCallback&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManualRevealCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.ManualRevealCallback<T> implements com.google.gwt.user.client.rpc.AsyncCallback<T>
-	c230901:p -> c230524:p [dir=back,arrowtail=empty,style=dashed];
+	c231503:p -> c231065:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.rpc.AsyncCallback<T>
-	c230901 [label=<<table title="com.google.gwt.user.client.rpc.AsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/AsyncCallback.html">
+	c231503 [label=<<table title="com.google.gwt.user.client.rpc.AsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/AsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> AsyncCallback&lt;T&gt; </td></tr>

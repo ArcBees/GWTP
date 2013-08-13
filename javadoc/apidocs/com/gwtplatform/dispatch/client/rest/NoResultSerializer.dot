@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.client.rest.NoResultSerializer
+	c269862 [label=<<table title="com.gwtplatform.dispatch.client.rest.NoResultSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NoResultSerializer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NoResultSerializer </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NoResultSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c269255 [label=<<table title="com.gwtplatform.dispatch.client.rest.Serializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Serializer.html">
+	c269865 [label=<<table title="com.gwtplatform.dispatch.client.rest.Serializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Serializer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Serializer&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Serializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.NoResultSerializer
-	c269261 [label=<<table title="com.gwtplatform.dispatch.client.rest.NoResultSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NoResultSerializer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NoResultSerializer </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NoResultSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.rest.NoResultSerializer implements com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c269255:p -> c269261:p [dir=back,arrowtail=empty,style=dashed];
+	c269865:p -> c269862:p [dir=back,arrowtail=empty,style=dashed];
 }
 

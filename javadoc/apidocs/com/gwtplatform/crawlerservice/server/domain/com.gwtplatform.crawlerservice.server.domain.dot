@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.crawlerservice.server.domain.DatastoreObject
-	c25721 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.DatastoreObject" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DatastoreObject.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DatastoreObject </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DatastoreObject.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.crawlerservice.server.domain.CachedPage
-	c25722 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.CachedPage" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CachedPage.html">
+	c27539 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.CachedPage" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CachedPage.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CachedPage </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CachedPage.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.crawlerservice.server.domain.DatastoreObject
+	c27540 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.DatastoreObject" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DatastoreObject.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DatastoreObject </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DatastoreObject.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.crawlerservice.server.domain.CachedPage extends com.gwtplatform.crawlerservice.server.domain.DatastoreObject
-	c25721:p -> c25722:p [dir=back,arrowtail=empty];
+	c27540:p -> c27539:p [dir=back,arrowtail=empty];
 }
 

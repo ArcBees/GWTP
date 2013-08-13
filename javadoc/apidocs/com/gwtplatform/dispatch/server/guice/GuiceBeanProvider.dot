@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider
-	c203198 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../actionhandlervalidator/ActionHandlerValidatorLinkerHelper.BeanProvider.html">
+	c204389 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../actionhandlervalidator/ActionHandlerValidatorLinkerHelper.BeanProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> BeanProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="../actionhandlervalidator/ActionHandlerValidatorLinkerHelper.BeanProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.GuiceBeanProvider
-	c203419 [label=<<table title="com.gwtplatform.dispatch.server.guice.GuiceBeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GuiceBeanProvider.html">
+	c204602 [label=<<table title="com.gwtplatform.dispatch.server.guice.GuiceBeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GuiceBeanProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GuiceBeanProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GuiceBeanProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.guice.GuiceBeanProvider implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider
-	c203198:p -> c203419:p [dir=back,arrowtail=empty,style=dashed];
+	c204389:p -> c204602:p [dir=back,arrowtail=empty,style=dashed];
 }
 

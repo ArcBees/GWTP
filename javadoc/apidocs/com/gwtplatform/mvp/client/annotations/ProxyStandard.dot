@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.annotations.ProxyStandard
-	c307783 [label=<<table title="com.gwtplatform.mvp.client.annotations.ProxyStandard" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyStandard.html">
+	c308503 [label=<<table title="com.gwtplatform.mvp.client.annotations.ProxyStandard" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyStandard.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ProxyStandard </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyStandard.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.annotations.ProxyStandard implements java.lang.annotation.Annotation
-	c308259:p -> c307783:p [dir=back,arrowtail=empty,style=dashed];
+	c308861:p -> c308503:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c308259 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c308861 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

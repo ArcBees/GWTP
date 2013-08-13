@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.AbstractDispatchImpl
-	c162689 [label=<<table title="com.gwtplatform.dispatch.server.AbstractDispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../AbstractDispatchImpl.html">
+	c163879 [label=<<table title="com.gwtplatform.dispatch.server.AbstractDispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../AbstractDispatchImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchImpl </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../AbstractDispatchImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.guice.DispatchImpl
-	c162927 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchImpl.html">
+	c164112 [label=<<table title="com.gwtplatform.dispatch.server.guice.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.guice.DispatchImpl extends com.gwtplatform.dispatch.server.AbstractDispatchImpl
-	c162689:p -> c162927:p [dir=back,arrowtail=empty];
+	c163879:p -> c164112:p [dir=back,arrowtail=empty];
 }
 

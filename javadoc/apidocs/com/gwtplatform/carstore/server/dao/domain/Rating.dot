@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.domain.Rating
-	c309429 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Rating" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Rating.html">
+	c309857 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Rating" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Rating.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Rating </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Rating.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c309463 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/BaseEntity.html">
+	c309882 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/BaseEntity.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseEntity </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../shared/dto/BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.domain.Rating extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c309463:p -> c309429:p [dir=back,arrowtail=empty];
+	c309882:p -> c309857:p [dir=back,arrowtail=empty];
 }
 

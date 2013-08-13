@@ -10,25 +10,25 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.RootPresenter
-	c346483 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../RootPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="../RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.RevealRootContentHandler
-	c346527 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RevealRootContentHandler.html">
+	c348274 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RevealRootContentHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RevealRootContentHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RevealRootContentHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.RevealRootContentHandler
-	c346527:p -> c346483:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.mvp.client.RootPresenter
+	c348348 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../RootPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="../RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.RevealRootContentHandler implements com.google.gwt.event.shared.EventHandler
-	c346935:p -> c346527:p [dir=back,arrowtail=empty,style=dashed];
+	c348747:p -> c348274:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.RevealRootContentHandler
+	c348274:p -> c348348:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c346935 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c348747 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>

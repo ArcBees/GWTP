@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback.State
-	c272823 [label=<<table title="com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback.State" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NotifyingAsyncCallback.State.html">
+	c273353 [label=<<table title="com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback.State" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NotifyingAsyncCallback.State.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> State </td></tr>

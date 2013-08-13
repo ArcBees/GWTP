@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException
-	c133658 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandlerMismatchException.html">
+	c134857 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandlerMismatchException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ClientActionHandlerMismatchException </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ClientActionHandlerMismatchException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException extends java.lang.RuntimeException
-	c134197:p -> c133658:p [dir=back,arrowtail=empty];
+	c135407:p -> c134857:p [dir=back,arrowtail=empty];
 	// java.lang.RuntimeException
-	c134197 [label=<<table title="java.lang.RuntimeException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/RuntimeException.html">
+	c135407 [label=<<table title="java.lang.RuntimeException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/RuntimeException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RuntimeException </td></tr>
 		</table></td></tr>

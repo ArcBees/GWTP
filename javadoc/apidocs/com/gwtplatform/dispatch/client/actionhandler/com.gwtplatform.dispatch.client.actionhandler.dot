@@ -10,55 +10,55 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
+	c2464 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractClientActionHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry
+	c2465 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultClientActionHandlerRegistry.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultClientActionHandlerRegistry </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultClientActionHandlerRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.UndoCommand<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c3685 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.UndoCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UndoCommand.html">
+	c2466 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.UndoCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UndoCommand.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UndoCommand&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UndoCommand.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c3686 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExecuteCommand.html">
+	c2467 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExecuteCommand.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ExecuteCommand&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ExecuteCommand.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry
-	c3687 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultClientActionHandlerRegistry.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultClientActionHandlerRegistry </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultClientActionHandlerRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
-	c3688 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientActionHandlerRegistry.html">
+	c2468 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientActionHandlerRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ClientActionHandlerRegistry </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ClientActionHandlerRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException
-	c3689 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientActionHandlerMismatchException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ClientActionHandlerMismatchException </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ClientActionHandlerMismatchException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c3690 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientActionHandler.html">
+	c2469 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c3691 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractClientActionHandler.html">
+	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException
+	c2470 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientActionHandlerMismatchException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
+<tr><td align="center" balign="center"> ClientActionHandlerMismatchException </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry implements com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
-	c3688:p -> c3687:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./ClientActionHandlerMismatchException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c3690:p -> c3691:p [dir=back,arrowtail=empty,style=dashed];
+	c2469:p -> c2464:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry implements com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
+	c2468:p -> c2465:p [dir=back,arrowtail=empty,style=dashed];
 }
 

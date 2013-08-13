@@ -11,13 +11,13 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent
-	c33652 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerAddedEvent.html">
+	c42152 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerAddedEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerAddedEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ManufacturerAddedEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent.ManufacturerAddedHandler
-	c33653 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent.ManufacturerAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerAddedEvent.ManufacturerAddedHandler.html">
+	c42153 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent.ManufacturerAddedHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerAddedEvent.ManufacturerAddedHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ManufacturerAddedHandler </td></tr>

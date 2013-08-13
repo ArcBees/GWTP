@@ -10,148 +10,148 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.rebind.TabInfoMethod
-	c12322 [label=<<table title="com.gwtplatform.mvp.rebind.TabInfoMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabInfoMethod.html">
+	// com.gwtplatform.mvp.rebind.PresenterDefinitions
+	c6741 [label=<<table title="com.gwtplatform.mvp.rebind.PresenterDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterDefinitions.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TabInfoMethod </td></tr>
+<tr><td align="center" balign="center"> PresenterDefinitions </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TabInfoMethod.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter
-	c12323 [label=<<table title="com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabContentProxyPlaceOutputter.html">
+		</table>>, URL="./PresenterDefinitions.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.ProviderBundleGenerator
+	c6742 [label=<<table title="com.gwtplatform.mvp.rebind.ProviderBundleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProviderBundleGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TabContentProxyPlaceOutputter </td></tr>
+<tr><td align="center" balign="center"> ProviderBundleGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TabContentProxyPlaceOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ProviderBundleGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.ProxyPlaceOutputter
-	c12324 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyPlaceOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyPlaceOutputter.html">
+	c6743 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyPlaceOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyPlaceOutputter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProxyPlaceOutputter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyPlaceOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.ProxyOutputterFactory
-	c12325 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterFactory.html">
+	// com.gwtplatform.mvp.rebind.ClassCollection
+	c6744 [label=<<table title="com.gwtplatform.mvp.rebind.ClassCollection" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassCollection.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProxyOutputterFactory </td></tr>
+<tr><td align="center" balign="center"> ClassCollection </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ProxyOutputterFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ClassCollection.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c12326 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterBase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterBase.html">
+	c6745 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterBase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterBase.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ProxyOutputterBase </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyOutputterBase.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.GinjectorGenerator
+	c6746 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GinjectorGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GinjectorGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.NonLeafTabContentProxyOutputter
+	c6747 [label=<<table title="com.gwtplatform.mvp.rebind.NonLeafTabContentProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NonLeafTabContentProxyOutputter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NonLeafTabContentProxyOutputter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NonLeafTabContentProxyOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.ProxyOutputter
-	c12327 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputter.html">
+	c6748 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ProxyOutputter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.ProxyGenerator
-	c12328 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyGenerator.html">
+	// com.gwtplatform.mvp.rebind.ApplicationControllerGenerator
+	c6749 [label=<<table title="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationControllerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProxyGenerator </td></tr>
+<tr><td align="center" balign="center"> ApplicationControllerGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ProxyGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.ProxyEventMethod
-	c12329 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyEventMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyEventMethod.html">
+		</table>>, URL="./ApplicationControllerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.GinjectorInspector
+	c6750 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorInspector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorInspector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProxyEventMethod </td></tr>
+<tr><td align="center" balign="center"> GinjectorInspector </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ProxyEventMethod.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.ProviderBundleGenerator
-	c12330 [label=<<table title="com.gwtplatform.mvp.rebind.ProviderBundleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProviderBundleGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProviderBundleGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ProviderBundleGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GinjectorInspector.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.PresenterTitleMethod
-	c12331 [label=<<table title="com.gwtplatform.mvp.rebind.PresenterTitleMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterTitleMethod.html">
+	c6751 [label=<<table title="com.gwtplatform.mvp.rebind.PresenterTitleMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterTitleMethod.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PresenterTitleMethod </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PresenterTitleMethod.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.PresenterInspector
-	c12332 [label=<<table title="com.gwtplatform.mvp.rebind.PresenterInspector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterInspector.html">
+	c6752 [label=<<table title="com.gwtplatform.mvp.rebind.PresenterInspector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterInspector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PresenterInspector </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PresenterInspector.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.PresenterDefinitions
-	c12333 [label=<<table title="com.gwtplatform.mvp.rebind.PresenterDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterDefinitions.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PresenterDefinitions </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PresenterDefinitions.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator
-	c12334 [label=<<table title="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceTokenRegistryGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PlaceTokenRegistryGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PlaceTokenRegistryGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.NonLeafTabContentProxyOutputter
-	c12335 [label=<<table title="com.gwtplatform.mvp.rebind.NonLeafTabContentProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NonLeafTabContentProxyOutputter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NonLeafTabContentProxyOutputter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NonLeafTabContentProxyOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.GinjectorInspector
-	c12336 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorInspector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorInspector.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GinjectorInspector </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GinjectorInspector.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.GinjectorGenerator
-	c12337 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GinjectorGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GinjectorGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.ClassInspector
-	c12338 [label=<<table title="com.gwtplatform.mvp.rebind.ClassInspector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassInspector.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ClassInspector </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ClassInspector.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.ClassCollection
-	c12339 [label=<<table title="com.gwtplatform.mvp.rebind.ClassCollection" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassCollection.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ClassCollection </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ClassCollection.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.BasicProxyOutputter
-	c12340 [label=<<table title="com.gwtplatform.mvp.rebind.BasicProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BasicProxyOutputter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BasicProxyOutputter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BasicProxyOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.ApplicationControllerGenerator
-	c12341 [label=<<table title="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationControllerGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ApplicationControllerGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ApplicationControllerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.AbstractGenerator
-	c12342 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
+	c6753 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGenerator </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c12326:p -> c12323:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.rebind.ProxyPlaceOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c12326:p -> c12324:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.rebind.ProxyOutputterBase implements com.gwtplatform.mvp.rebind.ProxyOutputter
-	c12327:p -> c12326:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.mvp.rebind.ProxyGenerator
+	c6754 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProxyGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProxyGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.ProxyEventMethod
+	c6755 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyEventMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyEventMethod.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProxyEventMethod </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProxyEventMethod.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.ProxyOutputterFactory
+	c6756 [label=<<table title="com.gwtplatform.mvp.rebind.ProxyOutputterFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyOutputterFactory.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProxyOutputterFactory </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProxyOutputterFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.TabInfoMethod
+	c6757 [label=<<table title="com.gwtplatform.mvp.rebind.TabInfoMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabInfoMethod.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TabInfoMethod </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TabInfoMethod.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.ClassInspector
+	c6758 [label=<<table title="com.gwtplatform.mvp.rebind.ClassInspector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClassInspector.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ClassInspector </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ClassInspector.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter
+	c6759 [label=<<table title="com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabContentProxyPlaceOutputter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> TabContentProxyPlaceOutputter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./TabContentProxyPlaceOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.BasicProxyOutputter
+	c6760 [label=<<table title="com.gwtplatform.mvp.rebind.BasicProxyOutputter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BasicProxyOutputter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BasicProxyOutputter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BasicProxyOutputter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator
+	c6761 [label=<<table title="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceTokenRegistryGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PlaceTokenRegistryGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PlaceTokenRegistryGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.ProviderBundleGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c12342:p -> c12330:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.rebind.NonLeafTabContentProxyOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c12326:p -> c12335:p [dir=back,arrowtail=empty];
+	c6753:p -> c6742:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.ProxyPlaceOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
+	c6745:p -> c6743:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.ProxyOutputterBase implements com.gwtplatform.mvp.rebind.ProxyOutputter
+	c6748:p -> c6745:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.rebind.GinjectorGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c12342:p -> c12337:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.rebind.BasicProxyOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
-	c12326:p -> c12340:p [dir=back,arrowtail=empty];
+	c6753:p -> c6746:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.NonLeafTabContentProxyOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
+	c6745:p -> c6747:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.rebind.ApplicationControllerGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c12342:p -> c12341:p [dir=back,arrowtail=empty];
+	c6753:p -> c6749:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
+	c6745:p -> c6759:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.BasicProxyOutputter extends com.gwtplatform.mvp.rebind.ProxyOutputterBase
+	c6745:p -> c6760:p [dir=back,arrowtail=empty];
 }
 

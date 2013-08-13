@@ -10,30 +10,30 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator
-	c13557 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorProviderGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GinjectorProviderGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GinjectorProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator
-	c13558 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FormFactorGinjectorProviderGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> FormFactorGinjectorProviderGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./FormFactorGinjectorProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator
-	c13559 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FormFactorGinjectorGenerator.html">
+	c8582 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FormFactorGinjectorGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FormFactorGinjectorGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FormFactorGinjectorGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory
-	c13560 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FormFactorGinjectorFactory.html">
+	c8583 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FormFactorGinjectorFactory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> FormFactorGinjectorFactory </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FormFactorGinjectorFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator
+	c8584 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FormFactorGinjectorProviderGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> FormFactorGinjectorProviderGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./FormFactorGinjectorProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator
+	c8585 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorProviderGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GinjectorProviderGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GinjectorProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

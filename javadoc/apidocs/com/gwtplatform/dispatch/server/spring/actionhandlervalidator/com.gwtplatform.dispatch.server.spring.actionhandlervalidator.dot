@@ -10,23 +10,23 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker
+	c22674 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinker.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ActionHandlerValidatorLinker </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionHandlerValidatorLinker.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl
-	c20864 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LazyActionHandlerValidatorRegistryImpl.html">
+	c22675 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LazyActionHandlerValidatorRegistryImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LazyActionHandlerValidatorRegistryImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LazyActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl
-	c20865 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EagerActionHandlerValidatorRegistryImpl.html">
+	c22676 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EagerActionHandlerValidatorRegistryImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EagerActionHandlerValidatorRegistryImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EagerActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker
-	c20866 [label=<<table title="com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinker.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionHandlerValidatorLinker </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ActionHandlerValidatorLinker.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

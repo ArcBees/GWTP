@@ -10,93 +10,100 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.client.rest.SerializedType
+	c15378 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializedType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializedType.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
+<tr><td align="center" balign="center"> SerializedType </td></tr>
+		</table></td></tr>
+		</table>>, URL="./SerializedType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider
+	c15379 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSerializerProvider.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractSerializerProvider </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractSerializerProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.XCSRFHeaderName
-	c14771 [label=<<table title="com.gwtplatform.dispatch.client.rest.XCSRFHeaderName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./XCSRFHeaderName.html">
+	c15380 [label=<<table title="com.gwtplatform.dispatch.client.rest.XCSRFHeaderName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./XCSRFHeaderName.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> XCSRFHeaderName </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./XCSRFHeaderName.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.AbstractRestAction<R extends com.gwtplatform.dispatch.shared.Result>
+	c15381 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractRestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractRestAction.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractRestAction&lt;R extends Result&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractRestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.RestDispatcherController
+	c15382 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestDispatcherController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatcherController.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> RestDispatcherController </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RestDispatcherController.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.NoResultSerializer
+	c15383 [label=<<table title="com.gwtplatform.dispatch.client.rest.NoResultSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResultSerializer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NoResultSerializer </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NoResultSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.RestDispatchAsync
+	c15384 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RestDispatchAsync </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RestDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.RestResponseDeserializer
+	c15385 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestResponseDeserializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestResponseDeserializer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RestResponseDeserializer </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RestResponseDeserializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.Serializer<T>
+	c15386 [label=<<table title="com.gwtplatform.dispatch.client.rest.Serializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Serializer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> Serializer&lt;T&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Serializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.rest.JsonSerializer<T>
+	c15387 [label=<<table title="com.gwtplatform.dispatch.client.rest.JsonSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JsonSerializer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> JsonSerializer&lt;T&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./JsonSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.SerializerProvider
-	c14772 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerProvider.html">
+	c15388 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> SerializerProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SerializerProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.SerializerProvider.SerializerKey
-	c14773 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializerProvider.SerializerKey" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerProvider.SerializerKey.html">
+	c15389 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializerProvider.SerializerKey" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerProvider.SerializerKey.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SerializerKey </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SerializerProvider.SerializerKey.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c14774 [label=<<table title="com.gwtplatform.dispatch.client.rest.Serializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Serializer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> Serializer&lt;T&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Serializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.SerializedType
-	c14775 [label=<<table title="com.gwtplatform.dispatch.client.rest.SerializedType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializedType.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
-<tr><td align="center" balign="center"> SerializedType </td></tr>
-		</table></td></tr>
-		</table>>, URL="./SerializedType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.RestResponseDeserializer
-	c14776 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestResponseDeserializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestResponseDeserializer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestResponseDeserializer </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestResponseDeserializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.RestDispatcherController
-	c14777 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestDispatcherController" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatcherController.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> RestDispatcherController </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestDispatcherController.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.RestDispatchAsync
-	c14778 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestDispatchAsync </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.rest.RestApplicationPath
-	c14779 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestApplicationPath" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestApplicationPath.html">
+	c15390 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestApplicationPath" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestApplicationPath.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> RestApplicationPath </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestApplicationPath.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.NoResultSerializer
-	c14780 [label=<<table title="com.gwtplatform.dispatch.client.rest.NoResultSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResultSerializer.html">
+	// com.gwtplatform.dispatch.client.rest.RestCallback<T>
+	c15391 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NoResultSerializer </td></tr>
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> RestCallback&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./NoResultSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.JsonSerializer<T>
-	c14781 [label=<<table title="com.gwtplatform.dispatch.client.rest.JsonSerializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JsonSerializer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> JsonSerializer&lt;T&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./JsonSerializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider
-	c14782 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSerializerProvider.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractSerializerProvider </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractSerializerProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.AbstractRestAction<R extends com.gwtplatform.dispatch.shared.Result>
-	c14783 [label=<<table title="com.gwtplatform.dispatch.client.rest.AbstractRestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractRestAction.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractRestAction&lt;R extends Result&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractRestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.rest.NoResultSerializer implements com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c14774:p -> c14780:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.client.rest.JsonSerializer<T> implements com.gwtplatform.dispatch.client.rest.Serializer<T>
-	c14774:p -> c14781:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./RestCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.rest.AbstractSerializerProvider implements com.gwtplatform.dispatch.client.rest.SerializerProvider
-	c14772:p -> c14782:p [dir=back,arrowtail=empty,style=dashed];
+	c15388:p -> c15379:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.rest.NoResultSerializer implements com.gwtplatform.dispatch.client.rest.Serializer<T>
+	c15386:p -> c15383:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.rest.JsonSerializer<T> implements com.gwtplatform.dispatch.client.rest.Serializer<T>
+	c15386:p -> c15387:p [dir=back,arrowtail=empty,style=dashed];
 }
 

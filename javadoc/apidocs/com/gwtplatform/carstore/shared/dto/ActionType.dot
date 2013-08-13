@@ -11,16 +11,16 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.shared.dto.ActionType
-	c81608 [label=<<table title="com.gwtplatform.carstore.shared.dto.ActionType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionType.html">
+	c82032 [label=<<table title="com.gwtplatform.carstore.shared.dto.ActionType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionType.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionType </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.shared.dto.ActionType implements com.google.gwt.user.client.rpc.IsSerializable
-	c81612:p -> c81608:p [dir=back,arrowtail=empty,style=dashed];
+	c82217:p -> c82032:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.rpc.IsSerializable
-	c81612 [label=<<table title="com.google.gwt.user.client.rpc.IsSerializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html">
+	c82217 [label=<<table title="com.google.gwt.user.client.rpc.IsSerializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IsSerializable </td></tr>

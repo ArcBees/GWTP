@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.ActionException
-	c71988 [label=<<table title="com.gwtplatform.dispatch.shared.ActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionException.html">
+	c72573 [label=<<table title="com.gwtplatform.dispatch.shared.ActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionException </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.ActionException extends java.lang.Exception
-	c72551:p -> c71988:p [dir=back,arrowtail=empty];
+	c73156:p -> c72573:p [dir=back,arrowtail=empty];
 	// java.lang.Exception
-	c72551 [label=<<table title="java.lang.Exception" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/Exception.html">
+	c73156 [label=<<table title="java.lang.Exception" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/Exception.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Exception </td></tr>
 		</table></td></tr>

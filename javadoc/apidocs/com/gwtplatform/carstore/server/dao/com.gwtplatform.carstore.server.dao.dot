@@ -10,59 +10,59 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.server.dao.UserSessionDao
-	c49481 [label=<<table title="com.gwtplatform.carstore.server.dao.UserSessionDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserSessionDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UserSessionDao </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UserSessionDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.UserDao
-	c49482 [label=<<table title="com.gwtplatform.carstore.server.dao.UserDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UserDao </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UserDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.RatingDao
-	c49483 [label=<<table title="com.gwtplatform.carstore.server.dao.RatingDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingDao </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RatingDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.ManufacturerDao
-	c49484 [label=<<table title="com.gwtplatform.carstore.server.dao.ManufacturerDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerDao </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.CarPropertiesDao
-	c49485 [label=<<table title="com.gwtplatform.carstore.server.dao.CarPropertiesDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPropertiesDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarPropertiesDao </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarPropertiesDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.CarDao
-	c49486 [label=<<table title="com.gwtplatform.carstore.server.dao.CarDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarDao.html">
+	c31789 [label=<<table title="com.gwtplatform.carstore.server.dao.CarDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarDao.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarDao </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.BaseDao<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c49487 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
+	c31790 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseDao&lt;T extends Dto&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BaseDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.server.dao.UserSessionDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.UserSession>
-	c49487:p -> c49481:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.server.dao.UserDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.User>
-	c49487:p -> c49482:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.server.dao.RatingDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.Rating>
-	c49487:p -> c49483:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.server.dao.ManufacturerDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.Manufacturer>
-	c49487:p -> c49484:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.server.dao.CarPropertiesDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.CarProperties>
-	c49487:p -> c49485:p [dir=back,arrowtail=empty];
+	// com.gwtplatform.carstore.server.dao.RatingDao
+	c31791 [label=<<table title="com.gwtplatform.carstore.server.dao.RatingDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingDao </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RatingDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.UserSessionDao
+	c31792 [label=<<table title="com.gwtplatform.carstore.server.dao.UserSessionDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserSessionDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UserSessionDao </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UserSessionDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.CarPropertiesDao
+	c31793 [label=<<table title="com.gwtplatform.carstore.server.dao.CarPropertiesDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPropertiesDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarPropertiesDao </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarPropertiesDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.UserDao
+	c31794 [label=<<table title="com.gwtplatform.carstore.server.dao.UserDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UserDao </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UserDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.ManufacturerDao
+	c31795 [label=<<table title="com.gwtplatform.carstore.server.dao.ManufacturerDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerDao </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.CarDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.Car>
-	c49487:p -> c49486:p [dir=back,arrowtail=empty];
+	c31790:p -> c31789:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.server.dao.RatingDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.Rating>
+	c31790:p -> c31791:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.server.dao.UserSessionDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.UserSession>
+	c31790:p -> c31792:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.server.dao.CarPropertiesDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.CarProperties>
+	c31790:p -> c31793:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.server.dao.UserDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.User>
+	c31790:p -> c31794:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.server.dao.ManufacturerDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.Manufacturer>
+	c31790:p -> c31795:p [dir=back,arrowtail=empty];
 }
 

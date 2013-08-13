@@ -10,96 +10,96 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.resources.NavigationListStyle
-	c45214 [label=<<table title="com.gwtplatform.carstore.client.resources.NavigationListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationListStyle.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> NavigationListStyle </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.NavigationListStyle.ListStyle
-	c45215 [label=<<table title="com.gwtplatform.carstore.client.resources.NavigationListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationListStyle.ListStyle.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ListStyle </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.MobileNavigationListStyle
-	c45216 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileNavigationListStyle.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MobileNavigationListStyle </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MobileNavigationListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle
-	c45217 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileNavigationListStyle.ListStyle.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ListStyle </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MobileNavigationListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.MobileDataListStyle
-	c45218 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileDataListStyle.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MobileDataListStyle </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MobileDataListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle
-	c45219 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileDataListStyle.ListStyle.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ListStyle </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MobileDataListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.LoginMessages
-	c45220 [label=<<table title="com.gwtplatform.carstore.client.resources.LoginMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginMessages.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> LoginMessages </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.HeaderMessages
-	c45221 [label=<<table title="com.gwtplatform.carstore.client.resources.HeaderMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMessages.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HeaderMessages </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HeaderMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.EditRatingMessages
-	c45222 [label=<<table title="com.gwtplatform.carstore.client.resources.EditRatingMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingMessages.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> EditRatingMessages </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditRatingMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.EditManufacturerMessages
-	c45223 [label=<<table title="com.gwtplatform.carstore.client.resources.EditManufacturerMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerMessages.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> EditManufacturerMessages </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditManufacturerMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.resources.CarMessages
-	c45224 [label=<<table title="com.gwtplatform.carstore.client.resources.CarMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarMessages.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> CarMessages </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.resources.AppResources
-	c45225 [label=<<table title="com.gwtplatform.carstore.client.resources.AppResources" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AppResources.html">
+	c37885 [label=<<table title="com.gwtplatform.carstore.client.resources.AppResources" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AppResources.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> AppResources </td></tr>
 		</table></td></tr>
 		</table>>, URL="./AppResources.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.resources.AppResources.Styles
-	c45226 [label=<<table title="com.gwtplatform.carstore.client.resources.AppResources.Styles" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AppResources.Styles.html">
+	c37886 [label=<<table title="com.gwtplatform.carstore.client.resources.AppResources.Styles" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AppResources.Styles.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Styles </td></tr>
 		</table></td></tr>
 		</table>>, URL="./AppResources.Styles.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.HeaderMessages
+	c37887 [label=<<table title="com.gwtplatform.carstore.client.resources.HeaderMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMessages.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HeaderMessages </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.NavigationListStyle
+	c37888 [label=<<table title="com.gwtplatform.carstore.client.resources.NavigationListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationListStyle.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> NavigationListStyle </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.NavigationListStyle.ListStyle
+	c37889 [label=<<table title="com.gwtplatform.carstore.client.resources.NavigationListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationListStyle.ListStyle.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ListStyle </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.MobileDataListStyle
+	c37890 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileDataListStyle.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MobileDataListStyle </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MobileDataListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle
+	c37891 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileDataListStyle.ListStyle.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ListStyle </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MobileDataListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.LoginMessages
+	c37892 [label=<<table title="com.gwtplatform.carstore.client.resources.LoginMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginMessages.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> LoginMessages </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.EditRatingMessages
+	c37893 [label=<<table title="com.gwtplatform.carstore.client.resources.EditRatingMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingMessages.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> EditRatingMessages </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditRatingMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.EditManufacturerMessages
+	c37894 [label=<<table title="com.gwtplatform.carstore.client.resources.EditManufacturerMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerMessages.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> EditManufacturerMessages </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditManufacturerMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.MobileNavigationListStyle
+	c37895 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileNavigationListStyle.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MobileNavigationListStyle </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MobileNavigationListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle
+	c37896 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileNavigationListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MobileNavigationListStyle.ListStyle.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ListStyle </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MobileNavigationListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.resources.CarMessages
+	c37897 [label=<<table title="com.gwtplatform.carstore.client.resources.CarMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarMessages.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> CarMessages </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

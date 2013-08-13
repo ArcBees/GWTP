@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.common.client.IndirectProvider<T>
-	c137223 [label=<<table title="com.gwtplatform.common.client.IndirectProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IndirectProvider.html">
+	c138431 [label=<<table title="com.gwtplatform.common.client.IndirectProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IndirectProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IndirectProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./IndirectProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.common.client.CodeSplitProvider<T>
-	c137224 [label=<<table title="com.gwtplatform.common.client.CodeSplitProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CodeSplitProvider.html">
+	c138433 [label=<<table title="com.gwtplatform.common.client.CodeSplitProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CodeSplitProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CodeSplitProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CodeSplitProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.common.client.CodeSplitProvider<T> implements com.gwtplatform.common.client.IndirectProvider<T>
-	c137223:p -> c137224:p [dir=back,arrowtail=empty,style=dashed];
+	c138431:p -> c138433:p [dir=back,arrowtail=empty,style=dashed];
 }
 

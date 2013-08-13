@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.authentication.Authenticator
-	c95468 [label=<<table title="com.gwtplatform.carstore.server.authentication.Authenticator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Authenticator.html">
+	c96524 [label=<<table title="com.gwtplatform.carstore.server.authentication.Authenticator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Authenticator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Authenticator </td></tr>
 		</table></td></tr>

@@ -11,31 +11,31 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.rest.RestService
-	c17219 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestService.html">
+	c14770 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RestService </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.rest.RestParameter
-	c17220 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestParameter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestParameter.html">
+	c14771 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestParameter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestParameter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RestParameter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RestParameter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result>
-	c17221 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestAction.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> RestAction&lt;R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.rest.HttpMethod
-	c17222 [label=<<table title="com.gwtplatform.dispatch.shared.rest.HttpMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpMethod.html">
+	c14772 [label=<<table title="com.gwtplatform.dispatch.shared.rest.HttpMethod" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpMethod.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> HttpMethod </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HttpMethod.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result>
+	c14773 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestAction.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> RestAction&lt;R extends Result&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

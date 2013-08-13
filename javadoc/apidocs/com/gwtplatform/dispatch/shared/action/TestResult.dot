@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.Result
-	c381411 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Result.html">
+	c383207 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Result </td></tr>
 		</table></td></tr>
 		</table>>, URL="../Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.action.TestResult
-	c381690 [label=<<table title="com.gwtplatform.dispatch.shared.action.TestResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestResult.html">
+	c383483 [label=<<table title="com.gwtplatform.dispatch.shared.action.TestResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestResult </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TestResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.action.TestResult implements com.gwtplatform.dispatch.shared.Result
-	c381411:p -> c381690:p [dir=back,arrowtail=empty,style=dashed];
+	c383207:p -> c383483:p [dir=back,arrowtail=empty,style=dashed];
 }
 

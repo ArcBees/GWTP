@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.CarDao
-	c108165 [label=<<table title="com.gwtplatform.carstore.server.dao.CarDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarDao.html">
+	c109195 [label=<<table title="com.gwtplatform.carstore.server.dao.CarDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarDao.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarDao </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.BaseDao<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c108166 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
+	c109196 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseDao&lt;T extends Dto&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BaseDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.CarDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.Car>
-	c108166:p -> c108165:p [dir=back,arrowtail=empty];
+	c109196:p -> c109195:p [dir=back,arrowtail=empty];
 }
 

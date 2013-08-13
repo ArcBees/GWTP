@@ -11,16 +11,16 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.HasEventBus
-	c208105 [label=<<table title="com.gwtplatform.mvp.client.HasEventBus" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HasEventBus.html">
+	c208760 [label=<<table title="com.gwtplatform.mvp.client.HasEventBus" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HasEventBus.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasEventBus </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HasEventBus.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.HasEventBus implements com.google.gwt.event.shared.HasHandlers
-	c208541:p -> c208105:p [dir=back,arrowtail=empty,style=dashed];
+	c209143:p -> c208760:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.HasHandlers
-	c208541 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
+	c209143 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasHandlers </td></tr>

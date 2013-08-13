@@ -11,28 +11,28 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.View
-	c350708 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/View.html">
+	c352566 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
-	c350933 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootCarView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
-	c350935 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootCarPresenter.MyView.html">
+	c352875 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootCarPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RootCarPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.cars.car.RootCarView implements com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
-	c350935:p -> c350933:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
+	c352878 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootCarView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootCarView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView implements com.gwtplatform.mvp.client.View
-	c350708:p -> c350935:p [dir=back,arrowtail=empty,style=dashed];
+	c352566:p -> c352875:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.cars.car.RootCarView implements com.gwtplatform.carstore.client.application.cars.car.RootCarPresenter.MyView
+	c352875:p -> c352878:p [dir=back,arrowtail=empty,style=dashed];
 }
 

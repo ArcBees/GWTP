@@ -11,54 +11,54 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c110180 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/Presenter.html">
+	c111448 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers
-	c110397 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarUiHandlers.html">
+	c111728 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CarUiHandlers </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarPresenter
-	c110405 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarPresenter.html">
+	c111729 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab
-	c110416 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./navigation/NavigationTab.html">
+	c111756 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./navigation/NavigationTab.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> NavigationTab </td></tr>
 		</table></td></tr>
 		</table>>, URL="./navigation/NavigationTab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler
-	c110436 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/GoBackEvent.GoBackHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> GoBackHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../event/GoBackEvent.GoBackHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
-	c110445 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/ActionBarEvent.ActionBarHandler.html">
+	c111808 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/ActionBarEvent.ActionBarHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionBarHandler </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../event/ActionBarEvent.ActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler
+	c111817 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../event/GoBackEvent.GoBackHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> GoBackHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../event/GoBackEvent.GoBackHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.CarPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyView, com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy>
-	c110180:p -> c110405:p [dir=back,arrowtail=empty];
+	c111448:p -> c111729:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.CarPresenter implements com.gwtplatform.carstore.client.application.cars.car.CarUiHandlers
-	c110397:p -> c110405:p [dir=back,arrowtail=empty,style=dashed];
+	c111728:p -> c111729:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.CarPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTab
-	c110416:p -> c110405:p [dir=back,arrowtail=empty,style=dashed];
+	c111756:p -> c111729:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.CarPresenter implements com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler
-	c110436:p -> c110405:p [dir=back,arrowtail=empty,style=dashed];
+	c111817:p -> c111729:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.CarPresenter implements com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
-	c110445:p -> c110405:p [dir=back,arrowtail=empty,style=dashed];
+	c111808:p -> c111729:p [dir=back,arrowtail=empty,style=dashed];
 }
 

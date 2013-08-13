@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c328356 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
+	c329620 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportPresenter
-	c328676 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportPresenter.html">
+	c329929 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportPresenter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ReportPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.report.ReportPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView, com.gwtplatform.carstore.client.application.report.ReportPresenter.MyProxy>
-	c328356:p -> c328676:p [dir=back,arrowtail=empty];
+	c329620:p -> c329929:p [dir=back,arrowtail=empty];
 }
 

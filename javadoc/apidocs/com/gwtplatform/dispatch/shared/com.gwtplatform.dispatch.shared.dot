@@ -10,159 +10,159 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.shared.BatchAction
+	c609 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchAction.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BatchAction </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./BatchAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.BatchAction.OnException
+	c610 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction.OnException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchAction.OnException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
+<tr><td align="center" balign="center"> OnException </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BatchAction.OnException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.UnsupportedActionException
-	c2441 [label=<<table title="com.gwtplatform.dispatch.shared.UnsupportedActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsupportedActionException.html">
+	c611 [label=<<table title="com.gwtplatform.dispatch.shared.UnsupportedActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsupportedActionException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UnsupportedActionException </td></tr>
 		</table></td></tr>
 		</table>>, URL="./UnsupportedActionException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
-	c2442 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsecuredActionImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UnsecuredActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.SimpleResult<T>
-	c2443 [label=<<table title="com.gwtplatform.dispatch.shared.SimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> SimpleResult&lt;T&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./SimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.ServiceException
-	c2444 [label=<<table title="com.gwtplatform.dispatch.shared.ServiceException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ServiceException </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ServiceException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.SecurityCookieAccessor
-	c2445 [label=<<table title="com.gwtplatform.dispatch.shared.SecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityCookieAccessor.html">
+	// com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
+	c612 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> SecurityCookieAccessor </td></tr>
+<tr><td align="center" balign="center"> Action&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SecurityCookieAccessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.SecurityCookie
-	c2446 [label=<<table title="com.gwtplatform.dispatch.shared.SecurityCookie" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityCookie.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> SecurityCookie </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./SecurityCookie.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.Result
-	c2447 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> Result </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.NoResult
-	c2448 [label=<<table title="com.gwtplatform.dispatch.shared.NoResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NoResult </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NoResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.MultipleResult<T>
-	c2449 [label=<<table title="com.gwtplatform.dispatch.shared.MultipleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MultipleResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MultipleResult&lt;T&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MultipleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.DispatchServiceAsync
-	c2450 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchServiceAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchServiceAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> DispatchServiceAsync </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DispatchServiceAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.DispatchService
-	c2451 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchService.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> DispatchService </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DispatchService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Action.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.DispatchRequest
-	c2452 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchRequest.html">
+	c613 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchRequest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.SimpleResult<T>
+	c614 [label=<<table title="com.gwtplatform.dispatch.shared.SimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleResult.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> SimpleResult&lt;T&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./SimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.NoResult
+	c615 [label=<<table title="com.gwtplatform.dispatch.shared.NoResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NoResult.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NoResult </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NoResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.SecurityCookie
+	c616 [label=<<table title="com.gwtplatform.dispatch.shared.SecurityCookie" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityCookie.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> SecurityCookie </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./SecurityCookie.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.DispatchAsync
-	c2453 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsync.html">
+	c617 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchAsync </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.BatchResult
-	c2454 [label=<<table title="com.gwtplatform.dispatch.shared.BatchResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchResult.html">
+	c618 [label=<<table title="com.gwtplatform.dispatch.shared.BatchResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BatchResult </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BatchResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.BatchAction
-	c2455 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchAction.html">
+	// com.gwtplatform.dispatch.shared.Result
+	c619 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BatchAction </font></td></tr>
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> Result </td></tr>
 		</table></td></tr>
-		</table>>, URL="./BatchAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.BatchAction.OnException
-	c2456 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction.OnException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchAction.OnException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
-<tr><td align="center" balign="center"> OnException </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BatchAction.OnException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.ActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
-	c2457 [label=<<table title="com.gwtplatform.dispatch.shared.ActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionImpl.html">
+	c620 [label=<<table title="com.gwtplatform.dispatch.shared.ActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionImpl&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.ActionException
-	c2458 [label=<<table title="com.gwtplatform.dispatch.shared.ActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionException.html">
+	// com.gwtplatform.dispatch.shared.MultipleResult<T>
+	c621 [label=<<table title="com.gwtplatform.dispatch.shared.MultipleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MultipleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionException </td></tr>
+<tr><td align="center" balign="center"> MultipleResult&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ActionException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c2459 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
+		</table>>, URL="./MultipleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.DispatchService
+	c622 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> Action&lt;R extends Result&gt; </td></tr>
+<tr><td align="center" balign="center"> DispatchService </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Action.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DispatchService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.SecurityCookieAccessor
+	c623 [label=<<table title="com.gwtplatform.dispatch.shared.SecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityCookieAccessor.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> SecurityCookieAccessor </td></tr>
+		</table></td></tr>
+		</table>>, URL="./SecurityCookieAccessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.AbstractUpdateResult<T>
-	c2460 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractUpdateResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractUpdateResult.html">
+	c624 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractUpdateResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractUpdateResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractUpdateResult&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractUpdateResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
+	c625 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsecuredActionImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UnsecuredActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.ActionException
+	c626 [label=<<table title="com.gwtplatform.dispatch.shared.ActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ActionException </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.DispatchServiceAsync
+	c627 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchServiceAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchServiceAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> DispatchServiceAsync </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DispatchServiceAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.ServiceException
+	c628 [label=<<table title="com.gwtplatform.dispatch.shared.ServiceException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ServiceException </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ServiceException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.AbstractSimpleResult<T>
-	c2461 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractSimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSimpleResult.html">
+	c629 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractSimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractSimpleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractSimpleResult&lt;T&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractSimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.shared.UnsupportedActionException extends com.gwtplatform.dispatch.shared.ServiceException
-	c2444:p -> c2441:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c2459:p -> c2442:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.SimpleResult<T> extends com.gwtplatform.dispatch.shared.AbstractSimpleResult<T>
-	c2461:p -> c2443:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.shared.NoResult implements com.gwtplatform.dispatch.shared.Result
-	c2447:p -> c2448:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.MultipleResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c2447:p -> c2449:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.BatchResult implements com.gwtplatform.dispatch.shared.Result
-	c2447:p -> c2454:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.BatchAction implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c2459:p -> c2455:p [dir=back,arrowtail=empty,style=dashed];
+	c612:p -> c609:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.UnsupportedActionException extends com.gwtplatform.dispatch.shared.ServiceException
+	c628:p -> c611:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.shared.SimpleResult<T> extends com.gwtplatform.dispatch.shared.AbstractSimpleResult<T>
+	c629:p -> c614:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.shared.NoResult implements com.gwtplatform.dispatch.shared.Result
+	c619:p -> c615:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.BatchResult implements com.gwtplatform.dispatch.shared.Result
+	c619:p -> c618:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.ActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c2459:p -> c2457:p [dir=back,arrowtail=empty,style=dashed];
+	c612:p -> c620:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.MultipleResult<T> implements com.gwtplatform.dispatch.shared.Result
+	c619:p -> c621:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.AbstractUpdateResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c2447:p -> c2460:p [dir=back,arrowtail=empty,style=dashed];
+	c619:p -> c624:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
+	c612:p -> c625:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.AbstractSimpleResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c2447:p -> c2461:p [dir=back,arrowtail=empty,style=dashed];
+	c619:p -> c629:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.security.SecurityModule
-	c356537 [label=<<table title="com.gwtplatform.carstore.client.security.SecurityModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecurityModule.html">
+	c358247 [label=<<table title="com.gwtplatform.carstore.client.security.SecurityModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecurityModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecurityModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecurityModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.security.SecurityModule extends com.google.gwt.inject.client.AbstractGinModule
-	c356607:p -> c356537:p [dir=back,arrowtail=empty];
+	c358419:p -> c358247:p [dir=back,arrowtail=empty];
 	// com.google.gwt.inject.client.AbstractGinModule
-	c356607 [label=<<table title="com.google.gwt.inject.client.AbstractGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-gin.googlecode.com/svn/trunk/javadoc/com/google/gwt/inject/client/AbstractGinModule.html">
+	c358419 [label=<<table title="com.google.gwt.inject.client.AbstractGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGinModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-gin.googlecode.com/svn/trunk/javadoc/com/google/gwt/inject/client/AbstractGinModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

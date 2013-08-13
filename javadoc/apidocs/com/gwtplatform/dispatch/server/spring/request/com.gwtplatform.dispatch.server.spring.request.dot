@@ -11,7 +11,7 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider
-	c23295 [label=<<table title="com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultRequestProvider.html">
+	c20858 [label=<<table title="com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultRequestProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultRequestProvider </td></tr>
 		</table></td></tr>

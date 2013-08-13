@@ -10,65 +10,65 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.annotation.UseProxyName
-	c609 [label=<<table title="com.gwtplatform.dispatch.annotation.UseProxyName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UseProxyName.html">
+	// com.gwtplatform.dispatch.annotation.GenDispatch
+	c23890 [label=<<table title="com.gwtplatform.dispatch.annotation.GenDispatch" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDispatch.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> UseProxyName </font></td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenDispatch </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./UseProxyName.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GenDispatch.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.Order
+	c23891 [label=<<table title="com.gwtplatform.dispatch.annotation.Order" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Order.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Order </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./Order.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.UseProxy
-	c610 [label=<<table title="com.gwtplatform.dispatch.annotation.UseProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UseProxy.html">
+	c23892 [label=<<table title="com.gwtplatform.dispatch.annotation.UseProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UseProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> UseProxy </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./UseProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.Out
-	c611 [label=<<table title="com.gwtplatform.dispatch.annotation.Out" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Out.html">
+	c23893 [label=<<table title="com.gwtplatform.dispatch.annotation.Out" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Out.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Out </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./Out.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.Order
-	c612 [label=<<table title="com.gwtplatform.dispatch.annotation.Order" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Order.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Order </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./Order.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.Optional
-	c613 [label=<<table title="com.gwtplatform.dispatch.annotation.Optional" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Optional.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Optional </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./Optional.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.In
-	c614 [label=<<table title="com.gwtplatform.dispatch.annotation.In" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./In.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> In </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./In.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.GenProxy
-	c615 [label=<<table title="com.gwtplatform.dispatch.annotation.GenProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProxy.html">
+	c23894 [label=<<table title="com.gwtplatform.dispatch.annotation.GenProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenProxy </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.GenEvent
-	c616 [label=<<table title="com.gwtplatform.dispatch.annotation.GenEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenEvent.html">
+	c23895 [label=<<table title="com.gwtplatform.dispatch.annotation.GenEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenEvent </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.Optional
+	c23896 [label=<<table title="com.gwtplatform.dispatch.annotation.Optional" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Optional.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Optional </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./Optional.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.GenDto
-	c617 [label=<<table title="com.gwtplatform.dispatch.annotation.GenDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDto.html">
+	c23897 [label=<<table title="com.gwtplatform.dispatch.annotation.GenDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenDto </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./GenDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.GenDispatch
-	c618 [label=<<table title="com.gwtplatform.dispatch.annotation.GenDispatch" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDispatch.html">
+	// com.gwtplatform.dispatch.annotation.UseProxyName
+	c23898 [label=<<table title="com.gwtplatform.dispatch.annotation.UseProxyName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UseProxyName.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenDispatch </font></td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> UseProxyName </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./GenDispatch.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UseProxyName.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.In
+	c23899 [label=<<table title="com.gwtplatform.dispatch.annotation.In" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./In.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> In </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./In.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

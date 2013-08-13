@@ -10,65 +10,71 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.server.spring.SpringBeanProvider
-	c22681 [label=<<table title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringBeanProvider.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> SpringBeanProvider </td></tr>
-		</table></td></tr>
-		</table>>, URL="./SpringBeanProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter<B>
-	c22682 [label=<<table title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringBeanProvider.SpringBindingDescriptorAdapter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> SpringBindingDescriptorAdapter&lt;B&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./SpringBeanProvider.SpringBindingDescriptorAdapter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.SecureRandomSingleton
-	c22683 [label=<<table title="com.gwtplatform.dispatch.server.spring.SecureRandomSingleton" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecureRandomSingleton.html">
+	c20243 [label=<<table title="com.gwtplatform.dispatch.server.spring.SecureRandomSingleton" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecureRandomSingleton.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecureRandomSingleton </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecureRandomSingleton.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter
-	c22684 [label=<<table title="com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RandomSecurityCookieFilter.html">
+	// com.gwtplatform.dispatch.server.spring.HandlerModule
+	c20244 [label=<<table title="com.gwtplatform.dispatch.server.spring.HandlerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RandomSecurityCookieFilter </td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> HandlerModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./RandomSecurityCookieFilter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./HandlerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.LoggerFactoryBean
-	c22685 [label=<<table title="com.gwtplatform.dispatch.server.spring.LoggerFactoryBean" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoggerFactoryBean.html">
+	c20245 [label=<<table title="com.gwtplatform.dispatch.server.spring.LoggerFactoryBean" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoggerFactoryBean.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoggerFactoryBean </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LoggerFactoryBean.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter
-	c22686 [label=<<table title="com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpSessionSecurityCookieFilter.html">
+	c20246 [label=<<table title="com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpSessionSecurityCookieFilter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HttpSessionSecurityCookieFilter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HttpSessionSecurityCookieFilter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.spring.HandlerModule
-	c22687 [label=<<table title="com.gwtplatform.dispatch.server.spring.HandlerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> HandlerModule </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./HandlerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.DispatchServiceImpl
-	c22688 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchServiceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchServiceImpl.html">
+	c20247 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchServiceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchServiceImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchServiceImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchServiceImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.spring.DispatchModule
-	c22689 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchModule.html">
+	// com.gwtplatform.dispatch.server.spring.SpringBeanProvider
+	c20248 [label=<<table title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringBeanProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DispatchModule </td></tr>
+<tr><td align="center" balign="center"> SpringBeanProvider </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DispatchModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./SpringBeanProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter<B>
+	c20249 [label=<<table title="com.gwtplatform.dispatch.server.spring.SpringBeanProvider.SpringBindingDescriptorAdapter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringBeanProvider.SpringBindingDescriptorAdapter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> SpringBindingDescriptorAdapter&lt;B&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./SpringBeanProvider.SpringBindingDescriptorAdapter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator
+	c20250 [label=<<table title="com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AnnotatedActionBeandHandlerRegistrator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> AnnotatedActionBeandHandlerRegistrator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./AnnotatedActionBeandHandlerRegistrator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.spring.DispatchImpl
-	c22690 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchImpl.html">
+	c20251 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DispatchImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter
+	c20252 [label=<<table title="com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RandomSecurityCookieFilter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RandomSecurityCookieFilter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RandomSecurityCookieFilter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.spring.DispatchModule
+	c20253 [label=<<table title="com.gwtplatform.dispatch.server.spring.DispatchModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DispatchModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DispatchModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

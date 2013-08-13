@@ -10,93 +10,93 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry
-	c6737 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LazyActionHandlerValidatorRegistry.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> LazyActionHandlerValidatorRegistry </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LazyActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry
-	c6738 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EagerActionHandlerValidatorRegistry.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> EagerActionHandlerValidatorRegistry </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EagerActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
-	c6739 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorRegistry.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ActionHandlerValidatorRegistry </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c6740 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorMapImpl.html">
+	c5511 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorMapImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionHandlerValidatorMapImpl&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorMapImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl
+	c5512 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractEagerActionHandlerValidatorRegistryImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractEagerActionHandlerValidatorRegistryImpl </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractEagerActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c6741 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorMap.html">
+	c5513 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorMap.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionHandlerValidatorMap&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorMap.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
+	c5514 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorClass.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ActionHandlerValidatorClass&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionHandlerValidatorClass.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry
+	c5515 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LazyActionHandlerValidatorRegistry.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> LazyActionHandlerValidatorRegistry </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LazyActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper
-	c6742 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.html">
+	c5516 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionHandlerValidatorLinkerHelper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorLinkerHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider
-	c6743 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.html">
+	c5517 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> BeanProvider </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorLinkerHelper.BeanProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor<B>
-	c6744 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html">
+	c5518 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> BindingDescriptor&lt;B&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor<B>
-	c6745 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html">
+	c5519 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CommonBindingDescriptor&lt;B&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry
+	c5520 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EagerActionHandlerValidatorRegistry.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> EagerActionHandlerValidatorRegistry </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EagerActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
+	c5521 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorRegistry.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ActionHandlerValidatorRegistry </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionHandlerValidatorRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance
-	c6746 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorInstance.html">
+	c5522 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorInstance" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorInstance.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionHandlerValidatorInstance </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorInstance.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c6747 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorClass.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionHandlerValidatorClass&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ActionHandlerValidatorClass.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl
-	c6748 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractEagerActionHandlerValidatorRegistryImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractEagerActionHandlerValidatorRegistryImpl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractEagerActionHandlerValidatorRegistryImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
-	c6739:p -> c6737:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
-	c6739:p -> c6738:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c6741:p -> c6740:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor<B> implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor<B>
-	c6744:p -> c6745:p [dir=back,arrowtail=empty,style=dashed];
+	c5513:p -> c5511:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl implements com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry
-	c6738:p -> c6748:p [dir=back,arrowtail=empty,style=dashed];
+	c5520:p -> c5512:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.server.actionhandlervalidator.LazyActionHandlerValidatorRegistry implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
+	c5521:p -> c5515:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor<B> implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider.BindingDescriptor<B>
+	c5518:p -> c5519:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.server.actionhandlervalidator.EagerActionHandlerValidatorRegistry implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry
+	c5521:p -> c5520:p [dir=back,arrowtail=empty,style=dashed];
 }
 

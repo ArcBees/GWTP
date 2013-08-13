@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.PlaceManagerImpl
-	c153150 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManagerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceManagerImpl.html">
+	c154302 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManagerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceManagerImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PlaceManagerImpl </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./PlaceManagerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.DefaultPlaceManager
-	c153171 [label=<<table title="com.gwtplatform.mvp.client.proxy.DefaultPlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultPlaceManager.html">
+	c154315 [label=<<table title="com.gwtplatform.mvp.client.proxy.DefaultPlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultPlaceManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultPlaceManager </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DefaultPlaceManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.DefaultPlaceManager extends com.gwtplatform.mvp.client.proxy.PlaceManagerImpl
-	c153150:p -> c153171:p [dir=back,arrowtail=empty];
+	c154302:p -> c154315:p [dir=back,arrowtail=empty];
 }
 

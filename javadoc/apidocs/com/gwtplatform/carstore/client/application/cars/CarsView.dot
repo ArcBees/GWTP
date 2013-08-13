@@ -11,27 +11,27 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c126481 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
+	c127770 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewWithUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.CarsView
-	c126737 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarsView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarsView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarsView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView
-	c126740 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarsPresenter.MyView.html">
+	c128033 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarsPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarsPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.CarsView
+	c128035 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarsView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarsView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarsView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.CarsView extends com.gwtplatform.mvp.client.ViewWithUiHandlers<com.gwtplatform.carstore.client.application.cars.CarsUiHandlers>
-	c126481:p -> c126737:p [dir=back,arrowtail=empty];
+	c127770:p -> c128035:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.CarsView implements com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView
-	c126740:p -> c126737:p [dir=back,arrowtail=empty,style=dashed];
+	c128033:p -> c128035:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder
-	c162074 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchAsyncModule.Builder.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Builder </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c162076 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.Builder.html">
+	c163252 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.Builder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Builder </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder
+	c163255 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DispatchAsyncModule.Builder.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Builder </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c162076:p -> c162074:p [dir=back,arrowtail=empty];
+	c163252:p -> c163255:p [dir=back,arrowtail=empty];
 }
 

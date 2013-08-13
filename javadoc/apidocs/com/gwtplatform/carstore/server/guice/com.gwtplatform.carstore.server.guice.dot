@@ -10,26 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.server.guice.ServerModule
-	c51916 [label=<<table title="com.gwtplatform.carstore.server.guice.ServerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServerModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ServerModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ServerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.guice.GuiceServletConfig
-	c51917 [label=<<table title="com.gwtplatform.carstore.server.guice.GuiceServletConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GuiceServletConfig.html">
+	c29967 [label=<<table title="com.gwtplatform.carstore.server.guice.GuiceServletConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GuiceServletConfig.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GuiceServletConfig </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GuiceServletConfig.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.guice.GuiceRestEasyFilterDispatcher
-	c51918 [label=<<table title="com.gwtplatform.carstore.server.guice.GuiceRestEasyFilterDispatcher" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GuiceRestEasyFilterDispatcher.html">
+	// com.gwtplatform.carstore.server.guice.ServerModule
+	c29968 [label=<<table title="com.gwtplatform.carstore.server.guice.ServerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServerModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GuiceRestEasyFilterDispatcher </td></tr>
+<tr><td align="center" balign="center"> ServerModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GuiceRestEasyFilterDispatcher.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ServerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.guice.DispatchServletModule
-	c51919 [label=<<table title="com.gwtplatform.carstore.server.guice.DispatchServletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchServletModule.html">
+	c29969 [label=<<table title="com.gwtplatform.carstore.server.guice.DispatchServletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchServletModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchServletModule </td></tr>
 		</table></td></tr>

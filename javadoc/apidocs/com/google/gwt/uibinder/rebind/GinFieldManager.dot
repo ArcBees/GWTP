@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.google.gwt.uibinder.rebind.GinFieldManager
-	c197175 [label=<<table title="com.google.gwt.uibinder.rebind.GinFieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GinFieldManager.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GinFieldManager </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GinFieldManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.uibinder.rebind.FieldManager
-	c197178 [label=<<table title="com.google.gwt.uibinder.rebind.FieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FieldManager.html">
+	c198517 [label=<<table title="com.google.gwt.uibinder.rebind.FieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FieldManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FieldManager </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FieldManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.google.gwt.uibinder.rebind.GinFieldManager
+	c198519 [label=<<table title="com.google.gwt.uibinder.rebind.GinFieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GinFieldManager.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GinFieldManager </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GinFieldManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.google.gwt.uibinder.rebind.GinFieldManager extends com.google.gwt.uibinder.rebind.FieldManager
-	c197178:p -> c197175:p [dir=back,arrowtail=empty];
+	c198517:p -> c198519:p [dir=back,arrowtail=empty];
 }
 

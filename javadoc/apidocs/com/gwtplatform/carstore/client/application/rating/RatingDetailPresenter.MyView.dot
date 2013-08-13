@@ -10,38 +10,38 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.View
-	c314447 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/View.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> View </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c314467 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/HasUiHandlers.html">
+	c315092 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/HasUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../mvp/client/HasUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.RatingDetailView
-	c314765 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDetailView.html">
+	// com.gwtplatform.mvp.client.View
+	c315095 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingDetailView </td></tr>
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RatingDetailView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView
-	c314768 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingDetailPresenter.MyView.html">
+	c315463 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingDetailPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RatingDetailPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.rating.RatingDetailView implements com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView
-	c314768:p -> c314765:p [dir=back,arrowtail=empty,style=dashed];
+	// com.gwtplatform.carstore.client.application.rating.RatingDetailView
+	c315465 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingDetailView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDetailView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingDetailView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RatingDetailView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView implements com.gwtplatform.mvp.client.View
-	c314447:p -> c314768:p [dir=back,arrowtail=empty,style=dashed];
+	c315095:p -> c315463:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c314467:p -> c314768:p [dir=back,arrowtail=empty,style=dashed];
+	c315092:p -> c315463:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.rating.RatingDetailView implements com.gwtplatform.carstore.client.application.rating.RatingDetailPresenter.MyView
+	c315463:p -> c315465:p [dir=back,arrowtail=empty,style=dashed];
 }
 

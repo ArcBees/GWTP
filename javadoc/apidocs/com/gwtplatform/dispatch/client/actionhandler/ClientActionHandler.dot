@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
+	c134247 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractClientActionHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c133055 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandler.html">
+	c134252 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c133056 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractClientActionHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c133055:p -> c133056:p [dir=back,arrowtail=empty,style=dashed];
+	c134252:p -> c134247:p [dir=back,arrowtail=empty,style=dashed];
 }
 

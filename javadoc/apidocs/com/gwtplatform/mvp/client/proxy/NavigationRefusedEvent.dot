@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.NavigationRefusedEvent
-	c262553 [label=<<table title="com.gwtplatform.mvp.client.proxy.NavigationRefusedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationRefusedEvent.html">
+	c263065 [label=<<table title="com.gwtplatform.mvp.client.proxy.NavigationRefusedEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationRefusedEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NavigationRefusedEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./NavigationRefusedEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.NavigationRefusedEvent extends com.google.gwt.event.shared.GwtEvent<com.gwtplatform.mvp.client.proxy.NavigationRefusedHandler>
-	c262933:p -> c262553:p [dir=back,arrowtail=empty];
+	c263535:p -> c263065:p [dir=back,arrowtail=empty];
 	// com.google.gwt.event.shared.GwtEvent<H extends com.google.gwt.event.shared.EventHandler>
-	c262933 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
+	c263535 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GwtEvent&lt;H extends EventHandler&gt; </font></td></tr>
 		</table></td></tr>

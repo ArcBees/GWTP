@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.DefaultModule
-	c151907 [label=<<table title="com.gwtplatform.mvp.client.gin.DefaultModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultModule.html">
+	c153162 [label=<<table title="com.gwtplatform.mvp.client.gin.DefaultModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultModule </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DefaultModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.gin.DefaultModule extends com.google.gwt.inject.client.AbstractGinModule
-	c152331:p -> c151907:p [dir=back,arrowtail=empty];
+	c153541:p -> c153162:p [dir=back,arrowtail=empty];
 	// com.google.gwt.inject.client.AbstractGinModule
-	c152331 [label=<<table title="com.google.gwt.inject.client.AbstractGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-gin.googlecode.com/svn/trunk/javadoc/com/google/gwt/inject/client/AbstractGinModule.html">
+	c153541 [label=<<table title="com.google.gwt.inject.client.AbstractGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGinModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-gin.googlecode.com/svn/trunk/javadoc/com/google/gwt/inject/client/AbstractGinModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

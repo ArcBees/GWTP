@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.annotations.ContentSlot
-	c142196 [label=<<table title="com.gwtplatform.mvp.client.annotations.ContentSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ContentSlot.html">
+	c143510 [label=<<table title="com.gwtplatform.mvp.client.annotations.ContentSlot" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ContentSlot.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ContentSlot </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ContentSlot.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.annotations.ContentSlot implements java.lang.annotation.Annotation
-	c142660:p -> c142196:p [dir=back,arrowtail=empty,style=dashed];
+	c143870:p -> c143510:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c142660 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c143870 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

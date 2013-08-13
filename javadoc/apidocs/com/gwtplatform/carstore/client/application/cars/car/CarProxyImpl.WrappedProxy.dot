@@ -11,18 +11,18 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.ProxyImpl<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c116878 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/proxy/ProxyImpl.html">
+	c118060 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/proxy/ProxyImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProxyImpl&lt;P extends Presenter&lt;?, ?&gt;&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../../../../mvp/client/proxy/ProxyImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy
-	c117050 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarProxyImpl.WrappedProxy.html">
+	c118390 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarProxyImpl.WrappedProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> WrappedProxy </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CarProxyImpl.WrappedProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.CarProxyImpl.WrappedProxy extends com.gwtplatform.mvp.client.proxy.ProxyImpl<com.gwtplatform.carstore.client.application.cars.car.CarPresenter>
-	c116878:p -> c117050:p [dir=back,arrowtail=empty];
+	c118060:p -> c118390:p [dir=back,arrowtail=empty];
 }
 

@@ -10,92 +10,92 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c400265 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewWithUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.ViewImpl
-	c400266 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ViewImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.View
-	c400267 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
+	c402125 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
 		</table>>, URL="./View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.ViewImpl
+	c402127 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ViewImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.RootPresenter.RootView
-	c400276 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter.RootView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.RootView.html">
+	c402141 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter.RootView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RootPresenter.RootView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RootView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RootPresenter.RootView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.PopupViewImpl
-	c400284 [label=<<table title="com.gwtplatform.mvp.client.PopupViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewImpl.html">
+	c402144 [label=<<table title="com.gwtplatform.mvp.client.PopupViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewImpl </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./PopupViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c402155 [label=<<table title="com.gwtplatform.mvp.client.ViewWithUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ViewWithUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewWithUiHandlers&lt;C extends UiHandlers&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./ViewWithUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
+	c402437 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/cars/car/RootCarView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RootCarView </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../carstore/client/application/cars/car/RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.report.ReportMobileView
+	c402461 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/report/ReportMobileView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ReportMobileView </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../carstore/client/application/report/ReportMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.report.ReportView
+	c402463 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/report/ReportView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ReportView </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../carstore/client/application/report/ReportView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationView
-	c400483 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/ApplicationView.html">
+	c402473 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/ApplicationView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationView </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/client/application/ApplicationView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationMobileView
-	c400488 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/ApplicationMobileView.html">
+	c402474 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/ApplicationMobileView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationMobileView </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/client/application/ApplicationMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.RootCarView
-	c400492 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.RootCarView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/cars/car/RootCarView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootCarView </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../carstore/client/application/cars/car/RootCarView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.report.ReportView
-	c400599 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/report/ReportView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ReportView </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../carstore/client/application/report/ReportView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.report.ReportMobileView
-	c400604 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/report/ReportMobileView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ReportMobileView </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../carstore/client/application/report/ReportMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesView
-	c400615 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/widget/message/MessagesView.html">
+	c402531 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/widget/message/MessagesView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesView </td></tr>
 		</table></td></tr>
 		</table>>, URL="../../carstore/client/application/widget/message/MessagesView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400265:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.client.ViewImpl implements com.gwtplatform.mvp.client.View
-	c400267:p -> c400266:p [dir=back,arrowtail=empty,style=dashed];
+	c402125:p -> c402127:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.RootPresenter.RootView extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400276:p [dir=back,arrowtail=empty];
+	c402127:p -> c402141:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.client.PopupViewImpl extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400284:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.ApplicationView extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400483:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.ApplicationMobileView extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400488:p [dir=back,arrowtail=empty];
+	c402127:p -> c402144:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.client.ViewWithUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers> extends com.gwtplatform.mvp.client.ViewImpl
+	c402127:p -> c402155:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.RootCarView extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400492:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.client.application.report.ReportView extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400599:p [dir=back,arrowtail=empty];
+	c402127:p -> c402437:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.report.ReportMobileView extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400604:p [dir=back,arrowtail=empty];
+	c402127:p -> c402461:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.report.ReportView extends com.gwtplatform.mvp.client.ViewImpl
+	c402127:p -> c402463:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.ApplicationView extends com.gwtplatform.mvp.client.ViewImpl
+	c402127:p -> c402473:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.client.application.ApplicationMobileView extends com.gwtplatform.mvp.client.ViewImpl
+	c402127:p -> c402474:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesView extends com.gwtplatform.mvp.client.ViewImpl
-	c400266:p -> c400615:p [dir=back,arrowtail=empty];
+	c402127:p -> c402531:p [dir=back,arrowtail=empty];
 }
 

@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.shared.dto.UserDto
-	c392246 [label=<<table title="com.gwtplatform.carstore.shared.dto.UserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UserDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UserDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c392255 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
+	c393884 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseEntity </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.UserDto
+	c393886 [label=<<table title="com.gwtplatform.carstore.shared.dto.UserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UserDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UserDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.shared.dto.UserDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c392255:p -> c392246:p [dir=back,arrowtail=empty];
+	c393884:p -> c393886:p [dir=back,arrowtail=empty];
 }
 

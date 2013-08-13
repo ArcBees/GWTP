@@ -11,19 +11,19 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c77480 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorMapImpl.html">
+	c78064 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandlerValidatorMapImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ActionHandlerValidatorMapImpl&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorMapImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c77481 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionHandlerValidatorMap.html">
+	c78066 [label=<<table title="com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionHandlerValidatorMap.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionHandlerValidatorMap&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ActionHandlerValidatorMap.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c77481:p -> c77480:p [dir=back,arrowtail=empty,style=dashed];
+	c78066:p -> c78064:p [dir=back,arrowtail=empty,style=dashed];
 }
 

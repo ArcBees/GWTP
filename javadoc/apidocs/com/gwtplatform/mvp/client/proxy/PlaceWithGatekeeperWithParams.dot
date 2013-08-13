@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams
-	c289131 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceWithGatekeeperWithParams.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PlaceWithGatekeeperWithParams </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PlaceWithGatekeeperWithParams.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.PlaceImpl
-	c289138 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceImpl.html">
+	c289661 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PlaceImpl </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PlaceImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams
+	c289707 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceWithGatekeeperWithParams.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PlaceWithGatekeeperWithParams </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PlaceWithGatekeeperWithParams.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams extends com.gwtplatform.mvp.client.proxy.PlaceImpl
-	c289138:p -> c289131:p [dir=back,arrowtail=empty];
+	c289661:p -> c289707:p [dir=back,arrowtail=empty];
 }
 

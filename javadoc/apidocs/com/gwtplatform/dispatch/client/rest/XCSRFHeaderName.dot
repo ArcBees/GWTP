@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.rest.XCSRFHeaderName
-	c402813 [label=<<table title="com.gwtplatform.dispatch.client.rest.XCSRFHeaderName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./XCSRFHeaderName.html">
+	c404630 [label=<<table title="com.gwtplatform.dispatch.client.rest.XCSRFHeaderName" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./XCSRFHeaderName.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> XCSRFHeaderName </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./XCSRFHeaderName.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.rest.XCSRFHeaderName implements java.lang.annotation.Annotation
-	c403143:p -> c402813:p [dir=back,arrowtail=empty,style=dashed];
+	c404955:p -> c404630:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c403143 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c404955 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>

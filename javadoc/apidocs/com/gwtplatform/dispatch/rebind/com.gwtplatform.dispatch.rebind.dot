@@ -11,87 +11,87 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.rebind.VelocityProperties
-	c15388 [label=<<table title="com.gwtplatform.dispatch.rebind.VelocityProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityProperties.html">
+	c12939 [label=<<table title="com.gwtplatform.dispatch.rebind.VelocityProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityProperties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> VelocityProperties </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./VelocityProperties.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.RestGinModuleGenerator
+	c12940 [label=<<table title="com.gwtplatform.dispatch.rebind.RestGinModuleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestGinModuleGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RestGinModuleGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RestGinModuleGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.GeneratorUtil
+	c12941 [label=<<table title="com.gwtplatform.dispatch.rebind.GeneratorUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorUtil.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GeneratorUtil </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GeneratorUtil.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.Logger
+	c12942 [label=<<table title="com.gwtplatform.dispatch.rebind.Logger" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Logger.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Logger </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Logger.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.RestServiceGenerator
+	c12943 [label=<<table title="com.gwtplatform.dispatch.rebind.RestServiceGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestServiceGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RestServiceGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RestServiceGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.VelocityGenerator
-	c15389 [label=<<table title="com.gwtplatform.dispatch.rebind.VelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityGenerator.html">
+	c12944 [label=<<table title="com.gwtplatform.dispatch.rebind.VelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./VelocityGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> VelocityGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./VelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.SerializerProviderGenerator
-	c15390 [label=<<table title="com.gwtplatform.dispatch.rebind.SerializerProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerProviderGenerator.html">
+	c12945 [label=<<table title="com.gwtplatform.dispatch.rebind.SerializerProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerProviderGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SerializerProviderGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SerializerProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
+	c12946 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.SerializerGenerator
-	c15391 [label=<<table title="com.gwtplatform.dispatch.rebind.SerializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerGenerator.html">
+	c12947 [label=<<table title="com.gwtplatform.dispatch.rebind.SerializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SerializerGenerator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SerializerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.RestServiceGenerator
-	c15392 [label=<<table title="com.gwtplatform.dispatch.rebind.RestServiceGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestServiceGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestServiceGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestServiceGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.RestGinModuleGenerator
-	c15393 [label=<<table title="com.gwtplatform.dispatch.rebind.RestGinModuleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestGinModuleGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestGinModuleGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestGinModuleGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.RestActionGenerator
-	c15394 [label=<<table title="com.gwtplatform.dispatch.rebind.RestActionGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestActionGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestActionGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestActionGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.RebindModule
-	c15395 [label=<<table title="com.gwtplatform.dispatch.rebind.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RebindModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RebindModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RebindModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.Logger
-	c15396 [label=<<table title="com.gwtplatform.dispatch.rebind.Logger" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Logger.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Logger </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Logger.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.GeneratorUtil
-	c15397 [label=<<table title="com.gwtplatform.dispatch.rebind.GeneratorUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorUtil.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GeneratorUtil </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GeneratorUtil.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.GeneratorFactory
-	c15398 [label=<<table title="com.gwtplatform.dispatch.rebind.GeneratorFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorFactory.html">
+	c12948 [label=<<table title="com.gwtplatform.dispatch.rebind.GeneratorFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GeneratorFactory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> GeneratorFactory </td></tr>
 		</table></td></tr>
 		</table>>, URL="./GeneratorFactory.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c15399 [label=<<table title="com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+	// com.gwtplatform.dispatch.rebind.RestActionGenerator
+	c12949 [label=<<table title="com.gwtplatform.dispatch.rebind.RestActionGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestActionGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+<tr><td align="center" balign="center"> RestActionGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.rebind.SerializerProviderGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c15399:p -> c15390:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.rebind.SerializerGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c15399:p -> c15391:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.rebind.RestServiceGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c15399:p -> c15392:p [dir=back,arrowtail=empty];
+		</table>>, URL="./RestActionGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.RebindModule
+	c12950 [label=<<table title="com.gwtplatform.dispatch.rebind.RebindModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RebindModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RebindModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RebindModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.rebind.RestGinModuleGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c15399:p -> c15393:p [dir=back,arrowtail=empty];
+	c12946:p -> c12940:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.rebind.RestServiceGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
+	c12946:p -> c12943:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.rebind.SerializerProviderGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
+	c12946:p -> c12945:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.rebind.SerializerGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
+	c12946:p -> c12947:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.rebind.RestActionGenerator extends com.gwtplatform.dispatch.rebind.AbstractVelocityGenerator
-	c15399:p -> c15394:p [dir=back,arrowtail=empty];
+	c12946:p -> c12949:p [dir=back,arrowtail=empty];
 }
 

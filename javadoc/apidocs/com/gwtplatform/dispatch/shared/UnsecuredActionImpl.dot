@@ -10,28 +10,28 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
-	c387451 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnsecuredActionImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UnsecuredActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c387468 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
+	c389245 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Action&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Action.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
+	c389258 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnsecuredActionImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UnsecuredActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.action.TestAction
-	c387736 [label=<<table title="com.gwtplatform.dispatch.shared.action.TestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./action/TestAction.html">
+	c389529 [label=<<table title="com.gwtplatform.dispatch.shared.action.TestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./action/TestAction.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestAction </td></tr>
 		</table></td></tr>
 		</table>>, URL="./action/TestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c387468:p -> c387451:p [dir=back,arrowtail=empty,style=dashed];
+	c389245:p -> c389258:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.dispatch.shared.action.TestAction extends com.gwtplatform.dispatch.shared.UnsecuredActionImpl<com.gwtplatform.dispatch.shared.action.TestResult>
-	c387451:p -> c387736:p [dir=back,arrowtail=empty];
+	c389258:p -> c389529:p [dir=back,arrowtail=empty];
 }
 

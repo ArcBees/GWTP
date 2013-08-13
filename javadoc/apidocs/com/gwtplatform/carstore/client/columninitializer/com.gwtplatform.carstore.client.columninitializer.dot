@@ -11,23 +11,23 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition
-	c43388 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsDefinition.html">
+	c38502 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsDefinition.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ColumnsDefinition </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./ColumnsDefinition.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.columninitializer.Column
+	c38503 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.Column" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Column.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Column </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./Column.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.columninitializer.ColumnInitializer<T>
-	c43389 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnInitializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnInitializer.html">
+	c38504 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnInitializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnInitializer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ColumnInitializer&lt;T&gt; </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ColumnInitializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.columninitializer.Column
-	c43390 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.Column" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Column.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Column </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./Column.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

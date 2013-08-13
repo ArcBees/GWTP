@@ -11,34 +11,34 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.rebind.type.ServiceDefinitions
-	c16610 [label=<<table title="com.gwtplatform.dispatch.rebind.type.ServiceDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceDefinitions.html">
+	c13555 [label=<<table title="com.gwtplatform.dispatch.rebind.type.ServiceDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceDefinitions.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ServiceDefinitions </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ServiceDefinitions.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.type.SerializerDefinitions
-	c16611 [label=<<table title="com.gwtplatform.dispatch.rebind.type.SerializerDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerDefinitions.html">
+	c13556 [label=<<table title="com.gwtplatform.dispatch.rebind.type.SerializerDefinitions" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SerializerDefinitions.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SerializerDefinitions </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SerializerDefinitions.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rebind.type.ActionBinding
+	c13557 [label=<<table title="com.gwtplatform.dispatch.rebind.type.ActionBinding" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBinding.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ActionBinding </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionBinding.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding
-	c16612 [label=<<table title="com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RegisterSerializerBinding.html">
+	c13558 [label=<<table title="com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RegisterSerializerBinding.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RegisterSerializerBinding </td></tr>
 		</table></td></tr>
 		</table>>, URL="./RegisterSerializerBinding.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.rebind.type.MethodCall
-	c16613 [label=<<table title="com.gwtplatform.dispatch.rebind.type.MethodCall" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MethodCall.html">
+	c13559 [label=<<table title="com.gwtplatform.dispatch.rebind.type.MethodCall" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MethodCall.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MethodCall </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MethodCall.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.rebind.type.ActionBinding
-	c16614 [label=<<table title="com.gwtplatform.dispatch.rebind.type.ActionBinding" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionBinding.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionBinding </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ActionBinding.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

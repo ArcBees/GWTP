@@ -11,15 +11,15 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.AsyncCallFailEvent
-	c90314 [label=<<table title="com.gwtplatform.mvp.client.proxy.AsyncCallFailEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AsyncCallFailEvent.html">
+	c91448 [label=<<table title="com.gwtplatform.mvp.client.proxy.AsyncCallFailEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AsyncCallFailEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AsyncCallFailEvent </td></tr>
 		</table></td></tr>
 		</table>>, URL="./AsyncCallFailEvent.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.AsyncCallFailEvent extends com.google.gwt.event.shared.GwtEvent<com.gwtplatform.mvp.client.proxy.AsyncCallFailHandler>
-	c90678:p -> c90314:p [dir=back,arrowtail=empty];
+	c91889:p -> c91448:p [dir=back,arrowtail=empty];
 	// com.google.gwt.event.shared.GwtEvent<H extends com.google.gwt.event.shared.EventHandler>
-	c90678 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
+	c91889 [label=<<table title="com.google.gwt.event.shared.GwtEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/GwtEvent.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GwtEvent&lt;H extends EventHandler&gt; </font></td></tr>
 		</table></td></tr>

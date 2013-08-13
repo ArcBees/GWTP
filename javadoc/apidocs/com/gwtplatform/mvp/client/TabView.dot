@@ -11,29 +11,29 @@ digraph G {
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.View
-	c377295 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
+	c379153 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
 		</table>>, URL="./View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.TabView
-	c377297 [label=<<table title="com.gwtplatform.mvp.client.TabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TabView.html">
+	c379171 [label=<<table title="com.gwtplatform.mvp.client.TabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TabView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> TabView </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TabView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.TabPanel
-	c377298 [label=<<table title="com.gwtplatform.mvp.client.TabPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabPanel.html">
+	c379179 [label=<<table title="com.gwtplatform.mvp.client.TabPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TabPanel.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> TabPanel </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TabPanel.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.TabView implements com.gwtplatform.mvp.client.View
-	c377295:p -> c377297:p [dir=back,arrowtail=empty,style=dashed];
+	c379153:p -> c379171:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.TabView implements com.gwtplatform.mvp.client.TabPanel
-	c377298:p -> c377297:p [dir=back,arrowtail=empty,style=dashed];
+	c379179:p -> c379171:p [dir=back,arrowtail=empty,style=dashed];
 }
 

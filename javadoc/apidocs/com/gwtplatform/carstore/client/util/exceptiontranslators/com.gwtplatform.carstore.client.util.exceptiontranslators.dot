@@ -10,28 +10,28 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator
+	c39715 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ForeignTranslator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ForeignTranslator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ForeignTranslator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator
+	c39716 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NotNullTranslator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NotNullTranslator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NotNullTranslator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
-	c47652 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.Translator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Translator.html">
+	c39717 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.Translator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Translator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Translator </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Translator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator
-	c47653 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NotNullTranslator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NotNullTranslator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NotNullTranslator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator
-	c47654 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ForeignTranslator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ForeignTranslator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ForeignTranslator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator implements com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
-	c47652:p -> c47653:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator implements com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
-	c47652:p -> c47654:p [dir=back,arrowtail=empty,style=dashed];
+	c39717:p -> c39715:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator implements com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
+	c39717:p -> c39716:p [dir=back,arrowtail=empty,style=dashed];
 }
 
