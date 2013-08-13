@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,14 +14,29 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.guice;
+package com.gwtplatform.dispatch.annotation;
 
-import com.arcbees.guicyresteasy.GuiceRestEasyFilterDispatcher;
-import com.google.inject.servlet.ServletModule;
+import java.util.Set;
 
-public class DispatchServletModule extends ServletModule {
-    @Override
-    public void configureServlets() {
-        filter("/rest/*").through(GuiceRestEasyFilterDispatcher.class);
-    }
+/**
+ * For testing purposes only.
+ *
+ * @author Florian Sauter
+ */
+@GenProxy
+public class Person {
+    int id;
+
+    Long age;
+
+    float weight;
+
+    @UseProxyName("com.gwtplatform.dispatch.annotation.proxy.AddressProxy")
+    Address addressDetail;
+
+    @UseProxy(DetailProxy.class)
+    Detail detail;
+
+    @UseProxy(DetailProxy.class)
+    Set<Detail> details;
 }

@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.context.ServletContextAware;
@@ -34,7 +35,6 @@ import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.RequestProvider;
 
 /**
- * @author Peter Simun
  */
 @Component("dispatch")
 public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler,
@@ -42,10 +42,10 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
 
     private static final long serialVersionUID = 136176741488585959L;
 
-    private ServletContext servletContext;
-
-    @Autowired(required = false)
+    @Value("${securityCookieName:JSESSIONID}")
     protected String securityCookieName;
+
+    private ServletContext servletContext;
 
     @Autowired
     public DispatchServiceImpl(final Logger logger, final Dispatch dispatch,
@@ -56,10 +56,6 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
     @Override
     public String getSecurityCookieName() {
         return securityCookieName;
-    }
-
-    public void setSecurityCookieName(String securityCookieName) {
-        this.securityCookieName = securityCookieName;
     }
 
     @Override

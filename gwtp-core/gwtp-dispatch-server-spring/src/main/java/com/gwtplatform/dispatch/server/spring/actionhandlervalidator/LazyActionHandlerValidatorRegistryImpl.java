@@ -16,8 +16,8 @@
 
 package com.gwtplatform.dispatch.server.spring.actionhandlervalidator;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -46,10 +46,11 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
 
     public LazyActionHandlerValidatorRegistryImpl() {
-        actionHandlerValidatorClasses = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends
-                Action<?>, ? extends Result>>();
-        actionHandlerValidatorInstances = new HashMap<Class<? extends Action<?>>, ActionHandlerValidatorInstance>();
-        validators = new HashMap<Class<? extends ActionValidator>, ActionValidator>();
+        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>,
+                ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>>();
+        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>,
+                ActionHandlerValidatorInstance>();
+        validators = new ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator>();
     }
 
     @Override
@@ -96,8 +97,8 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     public <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(Class<A> actionClass,
             ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
 
-        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get
-                (actionClass);
+        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get(
+                actionClass);
 
         if (oldActionHandlerValidatorClass == actionHandlerValidatorClass) {
             actionHandlerValidatorClasses.remove(actionClass);

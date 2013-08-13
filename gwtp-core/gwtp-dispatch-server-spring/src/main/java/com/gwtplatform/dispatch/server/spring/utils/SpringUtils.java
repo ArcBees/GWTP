@@ -21,7 +21,6 @@ import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.DefaultBeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
@@ -57,11 +56,9 @@ public class SpringUtils {
             B instance) throws BeansException {
 
         if (applicationContext instanceof GenericApplicationContext) {
-            DefaultListableBeanFactory beanFactory = ((GenericApplicationContext) applicationContext)
-                    .getDefaultListableBeanFactory();
-            beanFactory.registerSingleton(
-                    new DefaultBeanNameGenerator().generateBeanName(createBeanDefinition(instance), beanFactory),
-                    instance);
+            ConfigurableListableBeanFactory beanFactory = ((GenericApplicationContext) applicationContext)
+                    .getBeanFactory();
+            beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance)), instance);
         } else if (applicationContext instanceof AbstractRefreshableWebApplicationContext) {
             ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableWebApplicationContext)
                     applicationContext).getBeanFactory();

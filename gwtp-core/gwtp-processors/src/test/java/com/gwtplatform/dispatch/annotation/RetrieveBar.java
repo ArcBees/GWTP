@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,14 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.guice;
+package com.gwtplatform.dispatch.annotation;
 
-import com.arcbees.guicyresteasy.GuiceRestEasyFilterDispatcher;
-import com.google.inject.servlet.ServletModule;
+import com.gwtplatform.dispatch.shared.Action;
 
-public class DispatchServletModule extends ServletModule {
-    @Override
-    public void configureServlets() {
-        filter("/rest/*").through(GuiceRestEasyFilterDispatcher.class);
-    }
+/**
+ * For testing purposes only.
+ *
+ * @author Brendan Doherty
+ */
+@GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
+        + "Blah", extraResultInterfaces = "com.gwtplatform.dispatch.annotation.HasThing<com.gwtplatform.dispatch" +
+        ".annotation.Foo>")
+public class RetrieveBar {
+    @In(1)
+    String goodName;
+
+    @Out(1)
+    Foo thing;
+
+    @Out(2)
+    int meaningOfLife;
 }
