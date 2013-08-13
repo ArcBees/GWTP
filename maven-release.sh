@@ -20,14 +20,14 @@ fi
 echo "Started..."
 
 mvn clean deploy -Prelease -DskipTests
-
 mvn release:clean release:prepare --batch-mode -Dgpg.passphrase=$1
-
 mvn release:perform -Dgpg.passphrase=$1
 
-#TODO add nexus close and release goals
+#TODO add nexus close and release goals, for now goto https://oss.sonatype.org/index.html
 
-#TODO build javadoc
+# upload new javadoc
+mvn site
+
 
 echo "...Finished"
 
