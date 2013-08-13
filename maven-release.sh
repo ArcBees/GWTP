@@ -1,11 +1,18 @@
 #/bin/sh
 # maven release helper
-# to run this > 'sh maven-release.sh xxxgpg-passxxx'
+# notes: https://github.com/ArcBees/GWTP/issues/89
 
-echo "Started"
+if [ -z $1 ]; then
+    echo "Please provide the gpg password > sh maven-release.sh xxxgpg-passxxx";
+    exit
+fi
 
-#Be sure Java home is set to 1.7
-#export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+if [ -z $JAVA_HOME ]; then
+    echo "Please set JAVA_HOME > export JAVA_HOME=`/usr/libexec/java_home -v 1.7`";
+    exit
+fi
+
+echo "Started..."
 
 mvn clean deploy -Prelease -DskipTests
 
@@ -15,8 +22,7 @@ mvn release:perform -Dgpg.passphrase=$1
 
 #TODO add nexus close and release goals
 
-echo "Finished"
+#TODO build javadoc
 
-#TODO - this is in the works
-#https://github.com/ArcBees/GWTP/issues/89
+echo "...Finished"
 
