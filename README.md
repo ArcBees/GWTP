@@ -1,5 +1,6 @@
 ![GWTP] (http://i.imgur.com/LHvTZ.png "GWTP goo-teepee") *goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
+[![githalytics.com alpha](https://cruel-carlota.gopagoda.com/15d7ccab612aa40bb3af6b0cbcf4fc51 "githalytics.com")](http://githalytics.com/ArcBees/GWTP)
 
 ##Donation
 [![Donate](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SDCQSKDTWZYCQ)

@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.server.spring;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,11 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.gwtplatform.dispatch.server.ActionTestBase;
 import com.gwtplatform.dispatch.server.Dispatch;
+import com.gwtplatform.dispatch.server.actionhandler.TestAnnotatedActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.ServiceException;
+import com.gwtplatform.dispatch.shared.action.TestAnnotatedAction;
+import com.gwtplatform.dispatch.shared.action.TestResult;
 
 /**
  * @author Peter Simun
@@ -41,5 +45,12 @@ public class ActionSpringTest extends ActionTestBase {
     @Test
     public void testAction() throws ActionException, ServiceException {
         super.testAction(dispatchService);
+    }
+
+    @Test
+    public void testAction2() throws ActionException, ServiceException {
+        TestAnnotatedAction action = new TestAnnotatedAction(TestAnnotatedActionHandler.MESSAGE);
+        TestResult result = dispatchService.execute(action);
+        Assert.assertTrue("Invalid action result! Processing error occured", result.getResult());
     }
 }
