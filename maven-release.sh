@@ -26,6 +26,7 @@ mvn release:perform -Dgpg.passphrase=$1
 #TODO add nexus close and release goals, for now goto https://oss.sonatype.org/index.html
 
 # upload new javadoc
+mvn install
 mvn site
 
 
