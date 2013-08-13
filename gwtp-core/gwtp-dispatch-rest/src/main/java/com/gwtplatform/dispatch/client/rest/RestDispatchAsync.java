@@ -42,11 +42,11 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
     private final RestResponseDeserializer restResponseDeserializer;
 
     public RestDispatchAsync(ExceptionHandler exceptionHandler,
-            SecurityCookieAccessor securityCookieAccessor,
-            ClientActionHandlerRegistry clientActionHandlerRegistry,
-            SerializerProvider serializerProvider,
-            String applicationPath,
-            String securityHeaderName) {
+                             SecurityCookieAccessor securityCookieAccessor,
+                             ClientActionHandlerRegistry clientActionHandlerRegistry,
+                             SerializerProvider serializerProvider,
+                             String applicationPath,
+                             String securityHeaderName) {
         super(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry);
 
         requestBuilderFactory = new RestRequestBuilderFactory(serializerProvider, applicationPath, securityHeaderName);
@@ -55,13 +55,13 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
 
     @Override
     protected <A extends Action<R>, R extends Result> DispatchRequest doExecute(String securityCookie, A action,
-            final AsyncCallback<R> callback) {
+                                                                                final AsyncCallback<R> callback) {
         if (!(action instanceof RestAction)) {
             throw new IllegalArgumentException("RestDispatchAsync should be used with actions implementing " +
-                    "RestAction.");
+                                               "RestAction.");
         }
 
-        final RestAction<R> restAction = castRestAction(action);
+        RestAction<R> restAction = castRestAction(action);
 
         try {
             RequestBuilder requestBuilder = requestBuilderFactory.build(restAction, securityCookie);
@@ -79,14 +79,35 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
 
     @Override
     public <A extends Action<R>, R extends Result> DispatchRequest undo(A action, R result,
-            AsyncCallback<Void> callback) {
+                                                                        AsyncCallback<Void> callback) {
         throw new UnsupportedOperationException();
     }
 
     @Override
     protected <A extends Action<R>, R extends Result> DispatchRequest doUndo(String securityCookie, A action, R result,
-            AsyncCallback<Void> callback) {
+                                                                             AsyncCallback<Void> callback) {
         return null;
+    }
+
+    protected <A extends Action<R>, R extends Result> void onExecuteFailure(A action, Throwable caught,
+                                                                            Response response,
+                                                                            AsyncCallback<R> callback) {
+        setResponse(response, callback);
+
+        onExecuteFailure(action, caught, callback);
+    }
+
+    protected <A extends Action<R>, R extends Result> void onExecuteSuccess(A action, R result, Response response,
+                                                                            AsyncCallback<R> callback) {
+        setResponse(response, callback);
+
+        onExecuteSuccess(action, result, callback);
+    }
+
+    private <R extends Result> void setResponse(Response response, AsyncCallback<R> callback) {
+        if (callback instanceof RestCallback) {
+            ((RestCallback) callback).setResponse(response);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -95,16 +116,16 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
     }
 
     private <R extends Result> RequestCallback createRequestCallback(final RestAction<R> action,
-            final AsyncCallback<R> callback) {
+                                                                     final AsyncCallback<R> callback) {
         return new RequestCallback() {
             @Override
             public void onResponseReceived(Request request, Response response) {
                 try {
-                    R deserializedResponse = restResponseDeserializer.deserialize(action, response);
+                    R result = restResponseDeserializer.deserialize(action, response);
 
-                    onExecuteSuccess(action, deserializedResponse, callback);
+                    onExecuteSuccess(action, result, response, callback);
                 } catch (ActionException e) {
-                    onExecuteFailure(action, e, callback);
+                    onExecuteFailure(action, e, response, callback);
                 }
             }
 
