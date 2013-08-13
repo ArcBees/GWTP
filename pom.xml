@@ -462,12 +462,12 @@
                     </header>
                     <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
                     <docletArtifact>
-                      <groupId>org.umlgraph</groupId>
-                      <artifactId>umlgraph</artifactId>
-                      <version>5.6.6</version>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>umlgraph</artifactId>
+                        <version>5.6.6</version>
                     </docletArtifact>
                     <additionalparam>
-                      -horizontal
+                        -horizontal
                     </additionalparam>
                 </configuration>
                 <executions>
