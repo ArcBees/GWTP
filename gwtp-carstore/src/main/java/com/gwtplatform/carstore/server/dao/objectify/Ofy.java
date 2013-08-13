@@ -35,6 +35,6 @@ public class Ofy extends ObjectifyWrapper<Ofy, OfyFactory> {
     }
 
     public <T> T get(Class<T> clazz, long id) {
-        return load().type(clazz).id(id).get();
+        return load().type(clazz).id(id).now();
     }
 }
