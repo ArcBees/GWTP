@@ -1,6 +1,6 @@
 #/bin/sh
 # maven release helper
-# run link 'sh maven-release.sh xxxgpg-passxxx' replacing the 3 parameters
+# to run this > 'sh maven-release.sh xxxgpg-passxxx'
 
 echo "Started"
 
