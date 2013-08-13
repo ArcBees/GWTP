@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Dispatch Server, Spring implementation - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring</link>
-    <description>GWTP Dispatch Server, Spring implementation - Checkstyle report</description>
+    <title>GWTP Annotation Processors - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-processors</link>
+    <description>GWTP Annotation Processors - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2013 ArcBees</copyright>
     <item>
-      <title>File: 23,
+      <title>File: 36,
              Errors: 0,
-             Warnings: 0,
+             Warnings: 3,
              Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.utils.RequestProvider.java">com/gwtplatform/dispatch/server/spring/utils/RequestProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/ClassGenerationHelper.java</a>
                 </td>
                 <td>
                   0
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.annotation.RegisterActionHandler.java">com/gwtplatform/dispatch/server/spring/annotation/RegisterActionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.FooChanged.java">com/gwtplatform/dispatch/annotation/FooChanged.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter.java">com/gwtplatform/dispatch/server/spring/RandomSecurityCookieFilter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Out.java">com/gwtplatform/dispatch/annotation/Out.java</a>
                 </td>
                 <td>
                   0
@@ -71,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.shared.action.TestAnnotatedAction.java">com/gwtplatform/dispatch/shared/action/TestAnnotatedAction.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -85,7 +85,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.configuration.DefaultModule.java">com/gwtplatform/dispatch/server/spring/configuration/DefaultModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProxyProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -99,7 +99,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.SpringBeanProvider.java">com/gwtplatform/dispatch/server/spring/SpringBeanProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.DetailProxy.java">com/gwtplatform/dispatch/annotation/DetailProxy.java</a>
                 </td>
                 <td>
                   0
@@ -113,7 +113,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator.java">com/gwtplatform/dispatch/server/spring/AnnotatedActionBeandHandlerRegistrator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.In.java">com/gwtplatform/dispatch/annotation/In.java</a>
                 </td>
                 <td>
                   0
@@ -127,7 +127,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenDto.java">com/gwtplatform/dispatch/annotation/GenDto.java</a>
                 </td>
                 <td>
                   0
@@ -141,7 +141,21 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider.java">com/gwtplatform/dispatch/server/spring/request/DefaultRequestProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.GenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/GenerationHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDispatchProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -155,7 +169,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.LoggerFactoryBean.java">com/gwtplatform/dispatch/server/spring/LoggerFactoryBean.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenProxy.java">com/gwtplatform/dispatch/annotation/GenProxy.java</a>
                 </td>
                 <td>
                   0
@@ -169,7 +183,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.utils.SpringUtils.java">com/gwtplatform/dispatch/server/spring/utils/SpringUtils.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.ProxyAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/ProxyAnnotationProcessingTest.java</a>
                 </td>
                 <td>
                   0
@@ -183,7 +197,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.ActionSpringTest.java">com/gwtplatform/dispatch/server/spring/ActionSpringTest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Order.java">com/gwtplatform/dispatch/annotation/Order.java</a>
                 </td>
                 <td>
                   0
@@ -197,7 +211,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator.java">com/gwtplatform/dispatch/server/spring/actionvalidator/DefaultActionValidator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.RetrieveFoo.java">com/gwtplatform/dispatch/annotation/RetrieveFoo.java</a>
                 </td>
                 <td>
                   0
@@ -211,7 +225,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchServiceImpl.java">com/gwtplatform/dispatch/server/spring/DispatchServiceImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/BuilderGenerationHelper.java</a>
                 </td>
                 <td>
                   0
@@ -225,7 +239,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.ActionModule.java">com/gwtplatform/dispatch/server/spring/ActionModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenEvent.java">com/gwtplatform/dispatch/annotation/GenEvent.java</a>
                 </td>
                 <td>
                   0
@@ -239,7 +253,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchModule.java">com/gwtplatform/dispatch/server/spring/DispatchModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.RetrieveBar.java">com/gwtplatform/dispatch/annotation/RetrieveBar.java</a>
                 </td>
                 <td>
                   0
@@ -253,7 +267,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.EventAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/EventAnnotationProcessingTest.java</a>
                 </td>
                 <td>
                   0
@@ -267,7 +281,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/ActionHandlerValidatorLinker.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Address.java">com/gwtplatform/dispatch/annotation/Address.java</a>
                 </td>
                 <td>
                   0
@@ -281,7 +295,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/server/spring/HttpSessionSecurityCookieFilter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.PersonName.java">com/gwtplatform/dispatch/annotation/PersonName.java</a>
                 </td>
                 <td>
                   0
@@ -295,7 +309,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.actionhandler.TestAnnotatedActionHandler.java">com/gwtplatform/dispatch/server/actionhandler/TestAnnotatedActionHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenEventProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenEventProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -309,7 +323,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.SecureRandomSingleton.java">com/gwtplatform/dispatch/server/spring/SecureRandomSingleton.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.DispatchAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/DispatchAnnotationProcessingTest.java</a>
                 </td>
                 <td>
                   0
@@ -323,7 +337,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchImpl.java">com/gwtplatform/dispatch/server/spring/DispatchImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Person.java">com/gwtplatform/dispatch/annotation/Person.java</a>
                 </td>
                 <td>
                   0
@@ -337,7 +351,175 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.HandlerModule.java">com/gwtplatform/dispatch/server/spring/HandlerModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDtoProcessor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenDispatch.java">com/gwtplatform/dispatch/annotation/GenDispatch.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Foo.java">com/gwtplatform/dispatch/annotation/Foo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ReflectionHelper.java">com/gwtplatform/dispatch/annotation/helper/ReflectionHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.EmployeeLocator.java">com/gwtplatform/dispatch/annotation/EmployeeLocator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Employee.java">com/gwtplatform/dispatch/annotation/Employee.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/InterfaceGenerationHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxy.java">com/gwtplatform/dispatch/annotation/UseProxy.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Detail.java">com/gwtplatform/dispatch/annotation/Detail.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.HasThing.java">com/gwtplatform/dispatch/annotation/HasThing.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxyName.java">com/gwtplatform/dispatch/annotation/UseProxyName.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.DtoAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/DtoAnnotationProcessingTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Optional.java">com/gwtplatform/dispatch/annotation/Optional.java</a>
                 </td>
                 <td>
                   0
