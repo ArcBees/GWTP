@@ -1,22 +1,34 @@
 #/bin/sh
 # maven release helper
-# run link 'sh maven-release.sh gpg github.username github.password' replacing the 3 parameters
+# notes: https://github.com/ArcBees/GWTP/issues/89
 
-echo "Started"
+if [ -z $1 ]; then
+    echo "Please provide the gpg password > sh maven-release.sh xxxgpg-passxxx";
+    exit
+fi
 
-#TODO add to os enviroment, means I have to reboot and hadn't had time to do it.
-export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
+if [ -z $JAVA_HOME ]; then
+    echo "Please set JAVA_HOME > export JAVA_HOME=`/usr/libexec/java_home -v 1.7`";
+    exit
+fi
+
+if [ -z $MAVEN_OPTS ]; then
+    echo "Setting some MAVEN_OPTS > export MAVEN_OPTS='-Xmx512m -XX:MaxPermSize=128m'";
+    export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=128m"
+fi
+
+echo "Started..."
 
 mvn clean deploy -Prelease -DskipTests
-
-mvn release:clean release:prepare --batch-mode -Dgpg.passphrase=$1 -Dgithub.username=$2 -Dgithub.password=$3
-
+mvn release:clean release:prepare --batch-mode -Dgpg.passphrase=$1
 mvn release:perform -Dgpg.passphrase=$1
 
-#TODO add nexus close and release goals
+#TODO add nexus close and release goals, for now goto https://oss.sonatype.org/index.html
 
-echo "Finished"
+# upload new javadoc
+mvn install
+mvn site
 
-#TODO - this is in the works
-#https://github.com/ArcBees/GWTP/issues/89
+
+echo "...Finished"
 
