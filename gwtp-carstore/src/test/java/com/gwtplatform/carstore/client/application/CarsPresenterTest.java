@@ -38,8 +38,8 @@ import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.NoResult;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
@@ -99,13 +99,12 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onDelete(CarDto carDto, HasData<CarDto> hasCarData, Range range) {
         // Given we have DeleteCarAction
-        dispatcher.given(new TypeLiteral<Action<NoResult>>() {
+        dispatcher.given(new TypeLiteral<RestAction<NoResult>>() {
         }).willReturn(new NoResult());
 
         // And GetCarAction for fetching after delete
         GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
-        dispatcher.given(new TypeLiteral<Action<GetResults<CarDto>>>() {
-        }).willReturn(result);
+        dispatcher.given(new TypeLiteral<RestAction<GetResults<CarDto>>>() {}).willReturn(result);
 
         // And display is setup
         when(view.getCarDisplay()).thenReturn(hasCarData);
@@ -125,8 +124,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     public void onFetchData(ArrayList<CarDto> carDtos) {
         // Given
         GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
-        dispatcher.given(new TypeLiteral<Action<GetResults<CarDto>>>() {
-        }).willReturn(result);
+        dispatcher.given(new TypeLiteral<RestAction<GetResults<CarDto>>>() {}).willReturn(result);
 
         // When
         carsPresenter.fetchData(0, 1);
@@ -139,8 +137,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
         // Given
         GetResults<CarDto> result = new GetResults<CarDto>(carDtos);
-        dispatcher.given(new TypeLiteral<Action<GetResults<CarDto>>>() {
-        }).willReturn(result);
+        dispatcher.given(new TypeLiteral<RestAction<GetResults<CarDto>>>() {}).willReturn(result);
 
         // When
         carsPresenter.fetchData(0, 3);

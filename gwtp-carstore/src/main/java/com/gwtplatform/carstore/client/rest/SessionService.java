@@ -26,18 +26,18 @@ import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.NoResult;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestService;
 
 @Path(ResourcesPath.SESSION)
 public interface SessionService extends RestService {
     @DELETE
-    Action<NoResult> logout();
+    RestAction<NoResult> logout();
 
     @GET
-    Action<GetResult<CurrentUserDto>> getCurrentUser();
+    RestAction<GetResult<CurrentUserDto>> getCurrentUser();
 
     @POST
-    Action<LogInResult> login(LogInRequest logInRequest);
+    RestAction<LogInResult> login(LogInRequest logInRequest);
 }
