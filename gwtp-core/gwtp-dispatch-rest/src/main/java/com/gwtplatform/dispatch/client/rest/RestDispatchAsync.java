@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
+import javax.inject.Inject;
+
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
@@ -38,27 +40,30 @@ import com.gwtplatform.dispatch.shared.rest.RestAction;
  * TODO: Documentation.
  */
 public class RestDispatchAsync extends AbstractDispatchAsync {
+    private static final String ILLEGAL_ACTION_ARGUMENT = "RestDispatchAsync should be used with actions implementing" +
+                                                          " " +
+                                                          "RestAction.";
+
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
 
-    public RestDispatchAsync(ExceptionHandler exceptionHandler,
-                             SecurityCookieAccessor securityCookieAccessor,
+    @Inject
+    RestDispatchAsync(ExceptionHandler exceptionHandler,
                              ClientActionHandlerRegistry clientActionHandlerRegistry,
-                             SerializerProvider serializerProvider,
-                             String applicationPath,
-                             String securityHeaderName) {
+                             SecurityCookieAccessor securityCookieAccessor,
+                             RestRequestBuilderFactory requestBuilderFactory,
+                             RestResponseDeserializer responseDeserializer) {
         super(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry);
 
-        requestBuilderFactory = new RestRequestBuilderFactory(serializerProvider, applicationPath, securityHeaderName);
-        restResponseDeserializer = new RestResponseDeserializer(serializerProvider);
+        this.requestBuilderFactory = requestBuilderFactory;
+        this.restResponseDeserializer = responseDeserializer;
     }
 
     @Override
     protected <A extends Action<R>, R extends Result> DispatchRequest doExecute(String securityCookie, A action,
-                                                                                final AsyncCallback<R> callback) {
+                                                                                AsyncCallback<R> callback) {
         if (!(action instanceof RestAction)) {
-            throw new IllegalArgumentException("RestDispatchAsync should be used with actions implementing " +
-                                               "RestAction.");
+            throw new IllegalArgumentException(ILLEGAL_ACTION_ARGUMENT);
         }
 
         RestAction<R> restAction = castRestAction(action);

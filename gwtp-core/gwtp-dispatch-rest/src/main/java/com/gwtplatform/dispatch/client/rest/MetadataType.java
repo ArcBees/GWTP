@@ -16,10 +16,9 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import com.google.gwt.user.client.rpc.SerializationException;
-
-public interface Serializer<T> {
-    T deserialize(String value) throws SerializationException;
-
-    String serialize(T value) throws SerializationException;
+/**
+ * Indicates which part of the message the serialized type represents
+ */
+public enum MetadataType {
+    BODY_CLASS, RESPONSE_CLASS
 }

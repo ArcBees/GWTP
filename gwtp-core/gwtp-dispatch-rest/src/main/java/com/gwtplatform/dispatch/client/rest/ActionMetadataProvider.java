@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,32 +20,36 @@ import java.util.Arrays;
 
 import com.gwtplatform.dispatch.shared.Action;
 
-public interface SerializerProvider {
-    static class SerializerKey {
+public interface ActionMetadataProvider {
+    class MetadataKey {
         private final Class<? extends Action> actionClass;
-        private final SerializedType serializedType;
+        private final MetadataType metadataType;
 
-        SerializerKey(Class<? extends Action> actionClass, SerializedType serializedType) {
+        MetadataKey(Class<? extends Action> actionClass, MetadataType metadataType) {
             this.actionClass = actionClass;
-            this.serializedType = serializedType;
+            this.metadataType = metadataType;
+        }
+
+        public static MetadataKey create(Class<? extends Action> actionClass, MetadataType metadataType) {
+            return new MetadataKey(actionClass, metadataType);
         }
 
         @Override
         public int hashCode() {
-            return Arrays.hashCode(new Object[]{actionClass, serializedType});
+            return Arrays.hashCode(new Object[]{actionClass, metadataType});
         }
 
         @Override
         public boolean equals(Object o) {
-            if (o == null || !(o instanceof SerializerKey)) {
+            if (o == null || !(o instanceof MetadataKey)) {
                 return false;
             }
 
             if (this == o) {
                 return true;
             }
-            SerializerKey other = (SerializerKey) o;
-            return isEquals(actionClass, other.actionClass) && isEquals(serializedType, other.serializedType);
+            MetadataKey other = (MetadataKey) o;
+            return isEquals(actionClass, other.actionClass) && isEquals(metadataType, other.metadataType);
         }
 
         public boolean isEquals(Object a, Object b) {
@@ -53,6 +57,12 @@ public interface SerializerProvider {
         }
     }
 
-    <T> Serializer<T> getSerializer(Class<? extends Action> actionClass,
-            SerializedType serializedType);
+    /**
+     * Retrieve metadata for the given action and {@link MetadataType} pair.
+     *
+     * @param action       The action for which to retrieve metadata.
+     * @param metadataType The kind of metadata to retrieve.
+     * @return The stored value for the given parameters or <code>null</code> if there is no match.
+     */
+    Object getValue(Action<?> action, MetadataType metadataType);
 }

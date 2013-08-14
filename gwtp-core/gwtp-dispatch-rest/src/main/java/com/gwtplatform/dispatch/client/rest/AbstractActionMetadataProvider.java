@@ -21,19 +21,15 @@ import java.util.Map;
 
 import com.gwtplatform.dispatch.shared.Action;
 
-public abstract class AbstractSerializerProvider implements SerializerProvider {
-    // TODO: Use a more efficient way to store serializers
-    private final Map<SerializerKey, Serializer> serializers = new HashMap<SerializerKey, Serializer>();
+public abstract class AbstractActionMetadataProvider implements ActionMetadataProvider {
+    private final Map<MetadataKey, Object> metadata = new HashMap<MetadataKey, Object>();
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> Serializer<T> getSerializer(Class<? extends Action> actionClass,
-            SerializedType serializedType) {
-        return (Serializer<T>) serializers.get(new SerializerKey(actionClass, serializedType));
+    public Object getValue(Action<?> action, MetadataType metadataType) {
+        return metadata.get(MetadataKey.create(action.getClass(), metadataType));
     }
 
-    protected void registerSerializer(Class<? extends Action> actionClass, SerializedType serializedType,
-            Serializer<?> serializer) {
-        serializers.put(new SerializerKey(actionClass, serializedType), serializer);
+    protected void register(Class<? extends Action> actionClass, MetadataType metadataType, Object value) {
+        metadata.put(MetadataKey.create(actionClass, metadataType), value);
     }
 }

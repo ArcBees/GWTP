@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -43,7 +42,6 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
@@ -51,15 +49,20 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rebind.event.ChildSerializer;
-import com.gwtplatform.dispatch.rebind.event.RegisterSerializerEvent;
+import com.gwtplatform.dispatch.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rebind.type.MethodCall;
+import com.gwtplatform.dispatch.rebind.util.AnnotationValueResolver;
+import com.gwtplatform.dispatch.rebind.util.FormParamValueResolver;
+import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rebind.util.HeaderParamValueResolver;
+import com.gwtplatform.dispatch.rebind.util.PathParamValueResolver;
+import com.gwtplatform.dispatch.rebind.util.QueryParamValueResolver;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 
-import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
-import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
+import static com.gwtplatform.dispatch.client.rest.MetadataType.BODY_CLASS;
+import static com.gwtplatform.dispatch.client.rest.MetadataType.RESPONSE_CLASS;
 
 public class RestActionGenerator extends AbstractVelocityGenerator {
     private static class AnnotatedMethodParameter {
@@ -72,10 +75,6 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         }
     }
 
-    private interface AnnotationValueResolver<T extends Annotation> {
-        String resolve(T annotation);
-    }
-
     @SuppressWarnings("unchecked")
     private static final List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
             Arrays.asList(HeaderParam.class, QueryParam.class, PathParam.class, FormParam.class);
@@ -84,19 +83,19 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
     private static final String PATH_PARAM = "{%s}";
     private static final String PATH_PARAM_MISSING = "@PathParam(\"%1$s\") declared, but '%1$s' not found in %2$s.";
     private static final String MANY_REST_ANNOTATIONS = "'%s' parameter's '%s' is annotated with more than one REST " +
-            "annotations.";
+                                                        "annotations.";
     private static final String MANY_POTENTIAL_BODY = "%s has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "%s has both @FormParam and a body parameter. You must specify " +
-            "one or the other.";
+                                                      "one or the other.";
     private static final String ADD_HEADER_PARAM = "addHeaderParam";
     private static final String ADD_PATH_PARAM = "addPathParam";
     private static final String ADD_QUERY_PARAM = "addQueryParam";
     private static final String ADD_FORM_PARAM = "addFormParam";
     private static final String SET_BODY_PARAM = "setBodyParam";
 
+    private static final String CLASS_STATEMENT = "%s.class";
+
     private final EventBus eventBus;
-    private final GeneratorFactory generatorFactory;
-    private final Set<JClassType> registeredClasses;
     private final JMethod actionMethod;
     private final JType returnType;
     private final List<AnnotatedMethodParameter> pathParams = new ArrayList<AnnotatedMethodParameter>();
@@ -117,14 +116,10 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
             Provider<VelocityContext> velocityContextProvider,
             VelocityEngine velocityEngine,
             GeneratorUtil generatorUtil,
-            GeneratorFactory generatorFactory,
-            Set<JClassType> registeredClasses,
             @Assisted JMethod actionMethod) throws UnableToCompleteException {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
         this.eventBus = eventBus;
-        this.generatorFactory = generatorFactory;
-        this.registeredClasses = registeredClasses;
         this.actionMethod = actionMethod;
 
         returnType = actionMethod.getReturnType();
@@ -147,13 +142,14 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         if (printWriter != null) {
             mergeTemplate(printWriter, TEMPLATE, implName);
         } else {
-            getLogger().debug("Serializer already generated. Returning.");
+            getLogger().debug("Action already generated. Returning.");
         }
 
-        generateSerializers(resultType);
+        registerMetadata(resultType);
 
         return new ActionBinding(implName, actionMethod.getName(), resultType.getParameterizedQualifiedSourceName(),
-                actionMethod.getParameters());
+                actionMethod.getParameters()
+        );
     }
 
     @Override
@@ -186,7 +182,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
     }
 
     private List<MethodCall> getMethodCallsToAdd(List<AnnotatedMethodParameter> methodParameters,
-            String methodName) {
+                                                 String methodName) {
         List<MethodCall> methodCalls = new ArrayList<MethodCall>();
         for (AnnotatedMethodParameter methodParameter : methodParameters) {
             methodCalls.add(new MethodCall(methodName, methodParameter.fieldName, methodParameter.parameter));
@@ -194,50 +190,18 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         return methodCalls;
     }
 
-    private void generateSerializers(JClassType resultType) throws Exception {
+    private void registerMetadata(JClassType resultType) throws Exception {
         if (bodyParam != null) {
-            String bodySerializer = generateSerializer(bodyParam.getType().isClassOrInterface());
-            eventBus.post(new RegisterSerializerEvent(getQualifiedClassName(), BODY, bodySerializer));
+            String bodyClass = formatClassStatement(bodyParam.getType());
+            eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), BODY_CLASS, bodyClass));
         }
 
-        String responseSerializer = generateSerializer(resultType);
-        eventBus.post(new RegisterSerializerEvent(getQualifiedClassName(), RESPONSE, responseSerializer));
+        String resultClass = formatClassStatement(resultType);
+        eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), RESPONSE_CLASS, resultClass));
     }
 
-    private String generateSerializer(JClassType type) throws Exception {
-        SerializerGenerator generator = generatorFactory.createSerializerGenerator(type);
-        if (type.isParameterized() != null) {
-            generateParametersSerializers(type.isParameterized());
-        }
-        generateChildSerializersForType(type);
-        return generator.generate();
-    }
-
-    private void generateChildSerializersForType(JClassType type) throws Exception {
-        JField[] fields = type.getFields();
-        for (JField field : fields) {
-            if (!field.isFinal()) {
-                JType fieldType = field.getType();
-                if (fieldType.isParameterized() != null) {
-                    generateParametersSerializers(fieldType.isParameterized());
-                } else if (field.getType().isPrimitive() == null) {
-                    generateChildSerializer(field.getType().isClassOrInterface());
-                }
-            }
-        }
-    }
-
-    private void generateParametersSerializers(JParameterizedType parameterizedType) throws Exception {
-        for (JClassType param : parameterizedType.getTypeArgs()) {
-            generateChildSerializer(param);
-        }
-    }
-
-    private void generateChildSerializer(JClassType classType) throws Exception {
-        if (!registeredClasses.contains(classType) && classType.isEnum() == null) {
-            String serializer = generateSerializer(classType);
-            eventBus.post(new ChildSerializer(serializer));
-        }
+    private String formatClassStatement(JType type) {
+        return String.format(CLASS_STATEMENT, type.isClassOrInterface().getQualifiedSourceName());
     }
 
     private String getQualifiedClassName() {
@@ -255,8 +219,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
         StringBuilder classNameBuilder = new StringBuilder();
         classNameBuilder.append(actionMethod.getEnclosingType().getName())
-                .append("_")
-                .append(nameBuilder);
+                        .append("_")
+                        .append(nameBuilder);
 
         for (JType type : actionMethod.getErasedParameterTypes()) {
             classNameBuilder.append("_").append(type.getSimpleSourceName());
@@ -326,39 +290,17 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
     private void retrieveParameterConfig() throws UnableToCompleteException {
         JParameter[] parameters = actionMethod.getParameters();
 
-        buildParamList(parameters, HeaderParam.class, new AnnotationValueResolver<HeaderParam>() {
-            @Override
-            public String resolve(HeaderParam annotation) {
-                return annotation.value();
-            }
-        }, headerParams);
-
-        buildParamList(parameters, PathParam.class, new AnnotationValueResolver<PathParam>() {
-            @Override
-            public String resolve(PathParam annotation) {
-                return annotation.value();
-            }
-        }, pathParams);
-
-        buildParamList(parameters, QueryParam.class, new AnnotationValueResolver<QueryParam>() {
-            @Override
-            public String resolve(QueryParam annotation) {
-                return annotation.value();
-            }
-        }, queryParams);
-
-        buildParamList(parameters, FormParam.class, new AnnotationValueResolver<FormParam>() {
-            @Override
-            public String resolve(FormParam annotation) {
-                return annotation.value();
-            }
-        }, formParams);
+        buildParamList(parameters, HeaderParam.class, new HeaderParamValueResolver(), headerParams);
+        buildParamList(parameters, PathParam.class, new PathParamValueResolver(), pathParams);
+        buildParamList(parameters, QueryParam.class, new QueryParamValueResolver(), queryParams);
+        buildParamList(parameters, FormParam.class, new FormParamValueResolver(), formParams);
 
         buildPotentialBodyParams();
     }
 
     private <T extends Annotation> void buildParamList(JParameter[] parameters, Class<T> annotationClass,
-            AnnotationValueResolver<T> annotationValueResolver, List<AnnotatedMethodParameter> destination)
+                                                       AnnotationValueResolver<T> annotationValueResolver,
+                                                       List<AnnotatedMethodParameter> destination)
             throws UnableToCompleteException {
         List<Class<? extends Annotation>> restrictedAnnotations = getRestrictedAnnotations(annotationClass);
 
