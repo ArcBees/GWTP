@@ -43,7 +43,7 @@ import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -72,7 +72,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     public interface MyProxy extends ProxyPlace<RatingDetailPresenter> {
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final CarService carService;
     private final RatingService ratingService;
     private final EditRatingMessages messages;
@@ -82,7 +82,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     RatingDetailPresenter(EventBus eventBus,
                           MyView view,
                           MyProxy proxy,
-                          DispatchAsync dispatcher,
+                          RestDispatch dispatcher,
                           CarService carService,
                           RatingService ratingService,
                           EditRatingMessages messages,

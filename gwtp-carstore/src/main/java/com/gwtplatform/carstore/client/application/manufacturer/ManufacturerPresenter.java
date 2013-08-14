@@ -38,8 +38,8 @@ import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.NoResult;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -72,7 +72,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     public interface MyProxy extends ProxyPlace<ManufacturerPresenter> {
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final PlaceManager placeManager;
     private final ManufacturerService manufacturerService;
     private final EditManufacturerPresenter editManufacturerPresenter;
@@ -83,7 +83,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     ManufacturerPresenter(EventBus eventBus,
                           MyView view,
                           MyProxy proxy,
-                          DispatchAsync dispatcher,
+                          RestDispatch dispatcher,
                           ManufacturerService manufacturerService,
                           PlaceManager placeManager,
                           EditManufacturerPresenter editManufacturerPresenter) {

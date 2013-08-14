@@ -43,8 +43,8 @@ import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.NumberDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.NoResult;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -76,7 +76,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     public interface MyProxy extends ProxyPlace<CarsPresenter> {
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final CarService carService;
     private final PlaceManager placeManager;
     private final CarProxyFactory carProxyFactory;
@@ -85,7 +85,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     CarsPresenter(EventBus eventBus,
                   MyView view,
                   MyProxy proxy,
-                  DispatchAsync dispatcher,
+                  RestDispatch dispatcher,
                   CarService carService,
                   PlaceManager placeManager,
                   CarProxyFactory carProxyFactory) {

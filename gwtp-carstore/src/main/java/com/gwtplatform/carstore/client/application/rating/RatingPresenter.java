@@ -36,8 +36,8 @@ import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.NoResult;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -67,7 +67,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     public interface MyProxy extends ProxyPlace<RatingPresenter> {
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final EditRatingPresenter editRatingPresenter;
     private final RatingService ratingService;
     private final PlaceManager placeManager;
@@ -76,7 +76,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     RatingPresenter(EventBus eventBus,
                     MyView view,
                     MyProxy proxy,
-                    DispatchAsync dispatcher,
+                    RestDispatch dispatcher,
                     RatingService ratingService,
                     EditRatingPresenter editRatingPresenter,
                     PlaceManager placeManager) {
