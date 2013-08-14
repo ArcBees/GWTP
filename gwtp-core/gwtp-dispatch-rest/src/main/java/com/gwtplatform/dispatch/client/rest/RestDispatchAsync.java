@@ -41,8 +41,7 @@ import com.gwtplatform.dispatch.shared.rest.RestAction;
  */
 public class RestDispatchAsync extends AbstractDispatchAsync {
     private static final String ILLEGAL_ACTION_ARGUMENT = "RestDispatchAsync should be used with actions implementing" +
-                                                          " " +
-                                                          "RestAction.";
+                                                          " RestAction.";
 
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;

@@ -29,13 +29,17 @@ import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
 import com.gwtplatform.dispatch.shared.rest.RestService;
 
 public class ServiceDefinitions {
-    private Logger logger;
+    private static final String SERVICE_INTERFACE = RestService.class.getName();
+
     private final TypeOracle typeOracle;
-    private GeneratorUtil generatorUtil;
     private final List<JClassType> services = new ArrayList<JClassType>();
+    private final Logger logger;
+    private final GeneratorUtil generatorUtil;
 
     @Inject
-    public ServiceDefinitions(Logger logger, TypeOracle typeOracle, GeneratorUtil generatorUtil)
+    public ServiceDefinitions(Logger logger,
+                              TypeOracle typeOracle,
+                              GeneratorUtil generatorUtil)
             throws UnableToCompleteException {
         this.logger = logger;
         this.typeOracle = typeOracle;
@@ -49,10 +53,10 @@ public class ServiceDefinitions {
     }
 
     private void findAllServices() throws UnableToCompleteException {
-        JClassType serviceInterface = generatorUtil.getType(RestService.class.getName());
+        JClassType serviceInterface = generatorUtil.getType(SERVICE_INTERFACE);
 
         for (JClassType type : typeOracle.getTypes()) {
-            if (type.isAssignableTo(serviceInterface)) {
+            if (!SERVICE_INTERFACE.equals(type.getQualifiedSourceName()) && type.isAssignableTo(serviceInterface)) {
                 verifyIsInterface(type);
                 services.add(type);
             }
