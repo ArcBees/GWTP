@@ -24,53 +24,84 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.AbstractDispatchAsync;
+import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.client.rest.actionhandler.ClientRestActionHandler;
+import com.gwtplatform.dispatch.client.rest.actionhandler.ClientRestActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.shared.rest.RestCallback;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 
 /**
  * TODO: Documentation.
  */
-public class RestDispatchAsync extends AbstractDispatchAsync {
-    private static final String ILLEGAL_ACTION_ARGUMENT = "RestDispatchAsync should be used with actions implementing" +
-                                                          " " +
-                                                          "RestAction.";
-
+public class RestDispatchAsync implements RestDispatch {
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
+    private final ClientRestActionHandlerRegistry clientActionHandlerRegistry;
+    private final ExceptionHandler exceptionHandler;
+    private final SecurityCookieAccessor securityCookieAccessor;
 
     @Inject
     RestDispatchAsync(ExceptionHandler exceptionHandler,
-                             ClientActionHandlerRegistry clientActionHandlerRegistry,
-                             SecurityCookieAccessor securityCookieAccessor,
-                             RestRequestBuilderFactory requestBuilderFactory,
-                             RestResponseDeserializer responseDeserializer) {
-        super(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry);
-
+                      ClientRestActionHandlerRegistry clientActionHandlerRegistry,
+                      SecurityCookieAccessor securityCookieAccessor,
+                      RestRequestBuilderFactory requestBuilderFactory,
+                      RestResponseDeserializer responseDeserializer) {
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = responseDeserializer;
+        this.exceptionHandler = exceptionHandler;
+        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
+        this.securityCookieAccessor = securityCookieAccessor;
     }
 
     @Override
-    protected <A extends Action<R>, R extends Result> DispatchRequest doExecute(String securityCookie, A action,
-                                                                                AsyncCallback<R> callback) {
-        if (!(action instanceof RestAction)) {
-            throw new IllegalArgumentException(ILLEGAL_ACTION_ARGUMENT);
+    public <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback) {
+        String securityCookie = securityCookieAccessor.getCookieContent();
+
+        IndirectProvider<ClientRestActionHandler<?, ?>> clientActionHandlerProvider =
+                clientActionHandlerRegistry.find(action.getClass());
+
+        if (clientActionHandlerProvider != null) {
+            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
+            DelegatingAsyncCallback<A, R> delegatingCallback =
+                    new DelegatingAsyncCallback<A, R>(this, action, callback, dispatchRequest, securityCookie);
+
+            clientActionHandlerProvider.get(delegatingCallback);
+
+            return dispatchRequest;
+        } else {
+            return doExecute(securityCookie, action, callback);
+        }
+    }
+
+    protected <A extends RestAction<R>, R> void onExecuteSuccess(A action, R result, Response response,
+                                                                 AsyncCallback<R> callback) {
+        setResponse(response, callback);
+
+        callback.onSuccess(result);
+    }
+
+    protected <A extends RestAction<R>, R> void onExecuteFailure(A action, Throwable caught,
+                                                                 AsyncCallback<R> callback) {
+        if (exceptionHandler != null && exceptionHandler.onFailure(caught) == Status.STOP) {
+            return;
         }
 
-        RestAction<R> restAction = castRestAction(action);
+        callback.onFailure(caught);
+    }
 
+    <A extends RestAction<R>, R> DispatchRequest doExecute(String securityCookie, A action, AsyncCallback<R> callback) {
         try {
-            RequestBuilder requestBuilder = requestBuilderFactory.build(restAction, securityCookie);
-            requestBuilder.setCallback(createRequestCallback(restAction, callback));
+            RequestBuilder requestBuilder = requestBuilderFactory.build(action, securityCookie);
+            requestBuilder.setCallback(createRequestCallback(action, callback));
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
         } catch (RequestException e) {
@@ -82,46 +113,20 @@ public class RestDispatchAsync extends AbstractDispatchAsync {
         return new CompletedDispatchRequest();
     }
 
-    @Override
-    public <A extends Action<R>, R extends Result> DispatchRequest undo(A action, R result,
-                                                                        AsyncCallback<Void> callback) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    protected <A extends Action<R>, R extends Result> DispatchRequest doUndo(String securityCookie, A action, R result,
-                                                                             AsyncCallback<Void> callback) {
-        return null;
-    }
-
-    protected <A extends Action<R>, R extends Result> void onExecuteFailure(A action, Throwable caught,
-                                                                            Response response,
-                                                                            AsyncCallback<R> callback) {
+    private <A extends RestAction<R>, R> void onExecuteFailure(A action, Throwable caught, Response response,
+                                                               AsyncCallback<R> callback) {
         setResponse(response, callback);
 
         onExecuteFailure(action, caught, callback);
     }
 
-    protected <A extends Action<R>, R extends Result> void onExecuteSuccess(A action, R result, Response response,
-                                                                            AsyncCallback<R> callback) {
-        setResponse(response, callback);
-
-        onExecuteSuccess(action, result, callback);
-    }
-
-    private <R extends Result> void setResponse(Response response, AsyncCallback<R> callback) {
+    private <R> void setResponse(Response response, AsyncCallback<R> callback) {
         if (callback instanceof RestCallback) {
             ((RestCallback) callback).setResponse(response);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private <A extends Action<R>, R extends Result> RestAction<R> castRestAction(A action) {
-        return (RestAction<R>) action;
-    }
-
-    private <R extends Result> RequestCallback createRequestCallback(final RestAction<R> action,
-                                                                     final AsyncCallback<R> callback) {
+    private <R> RequestCallback createRequestCallback(final RestAction<R> action, final AsyncCallback<R> callback) {
         return new RequestCallback() {
             @Override
             public void onResponseReceived(Request request, Response response) {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <module>
-    <inherits name="com.google.common.base.Base"/>
     <inherits name="com.gwtplatform.common.ClientsCommon"/>
-    <inherits name="com.gwtplatform.dispatch.Dispatch"/>
-    <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
+    <inherits name="com.google.common.base.Base"/>
+    <inherits name="com.google.common.collect.Collect"/>
+    <inherits name="com.google.gwt.inject.Inject"/>
 
     <inherits name="com.google.gwt.http.HTTP"/>
     <inherits name="org.jboss.errai.common.ErraiCommon"/>

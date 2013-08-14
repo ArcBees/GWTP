@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,11 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.rest;
+package com.gwtplatform.dispatch.shared.rest;
 
-/**
- * Indicates which part of the message the serialized type represents
- */
-public enum MetadataType {
-    BODY_CLASS, RESPONSE_CLASS
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
+
+public interface RestDispatch {
+    /**
+     * This method is called client-side whenever a new action is executed.
+     */
+    <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback);
 }

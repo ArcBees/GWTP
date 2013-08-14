@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.rest;
+package com.gwtplatform.dispatch.shared.rest;
 
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -24,7 +24,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  * @see #setResponse()
  */
-public interface RestCallback<T> extends AsyncCallback<T> {
+public interface RestCallback<R> extends AsyncCallback<R> {
     /**
      * The {@link Response} received from the server. If the request did not reach the server, this method will not be
      * called. This method is called before {@link #onSuccess(Object)} and {@link #onFailure(Throwable)}.

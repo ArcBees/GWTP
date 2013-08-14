@@ -23,18 +23,27 @@ import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.client.rest.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.client.rest.RestResponseDeserializer;
 import com.gwtplatform.dispatch.client.rest.XCSRFHeaderName;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.client.rest.actionhandler.ClientRestActionHandlerRegistry;
+import com.gwtplatform.dispatch.client.rest.actionhandler.DefaultClientRestActionHandlerRegistry;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 
-/**
- * An implementation of {@link AbstractDispatchAsyncModule} that uses HTTP REST calls.
- * <p/>
- * Warning: This is still a work in progress and subject to many changes.
- */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        protected String xcsrfTokenHeaderName = "X-CSRF-Token";
+        private String xcsrfTokenHeaderName = "X-CSRF-Token";
+        private Class<? extends ClientRestActionHandlerRegistry> clientActionHandlerRegistryType =
+                DefaultClientRestActionHandlerRegistry.class;
 
-        public Builder() {
+        /**
+         * Specify an alternate client action handler registry.
+         *
+         * @param clientActionHandlerRegistryType
+         *         A {@link ClientRestActionHandlerRegistry} class.
+         * @return a {@link Builder} object.
+         */
+        public Builder clientActionHandlerRegistry(
+                Class<? extends ClientRestActionHandlerRegistry> clientActionHandlerRegistryType) {
+            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
+            return this;
         }
 
         public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
@@ -48,7 +57,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         }
     }
 
-    private String xcsrfTokenHeaderName;
+    private final String xcsrfTokenHeaderName;
+    private final Class<? extends ClientRestActionHandlerRegistry> clientActionHandlerRegistryType;
 
     public RestDispatchAsyncModule() {
         this(new Builder());
@@ -57,6 +67,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     private RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
+        clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
         xcsrfTokenHeaderName = builder.xcsrfTokenHeaderName;
     }
 
@@ -66,10 +77,11 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
 
+        bind(ClientRestActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
         bind(ActionMetadataProvider.class).asEagerSingleton();
         bind(RestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).in(Singleton.class);
 
-        bind(DispatchAsync.class).to(RestDispatchAsync.class).in(Singleton.class);
+        bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
 }
