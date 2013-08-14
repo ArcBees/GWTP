@@ -88,8 +88,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
     }
 
     @Override
-    protected void populateVelocityContext(VelocityContext velocityContext)
-            throws UnableToCompleteException {
+    protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
         velocityContext.put("metadata", registeredMetadata);
     }
 }
