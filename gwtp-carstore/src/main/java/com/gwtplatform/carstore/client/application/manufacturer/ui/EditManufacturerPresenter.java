@@ -29,7 +29,7 @@ import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -40,7 +40,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
         void edit(ManufacturerDto manufacturerDto);
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final ManufacturerService manufacturerService;
     private final EditManufacturerMessages messages;
 
@@ -49,7 +49,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
     @Inject
     public EditManufacturerPresenter(EventBus eventBus,
                                      MyView view,
-                                     DispatchAsync dispatcher,
+                                     RestDispatch dispatcher,
                                      ManufacturerService manufacturerService,
                                      EditManufacturerMessages messages) {
         super(eventBus, view);

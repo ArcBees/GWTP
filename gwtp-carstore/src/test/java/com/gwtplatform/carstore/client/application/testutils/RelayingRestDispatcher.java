@@ -23,10 +23,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.TypeLiteral;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 
 /**
  * Class used to replace a real implementation of the Dispatcher. When executing
@@ -37,11 +38,11 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @author Christian Goudreau
  */
-public class RelayingDispatcher implements DispatchAsync {
-    private Map<TypeLiteral<? extends Action<?>>, Result> registry =
-            new HashMap<TypeLiteral<? extends Action<?>>, Result>();
+public class RelayingRestDispatcher implements RestDispatch {
+    private Map<TypeLiteral<? extends RestAction<?>>, Object> registry =
+            new HashMap<TypeLiteral<? extends RestAction<?>>, Object>();
 
-    private TypeLiteral<? extends Action<?>> currentAction = null;
+    private TypeLiteral<? extends RestAction<?>> currentAction = null;
 
     /**
      * This method must be used at least once before being able to use relaying
@@ -52,9 +53,9 @@ public class RelayingDispatcher implements DispatchAsync {
      *            The {@link Action} type.
      * @param action
      *            The class definition of the {@link Action}.
-     * @return {@link RelayingDispatcher} instance.
+     * @return {@link RelayingRestDispatcher} instance.
      */
-    public <A extends Action<?>> RelayingDispatcher given(TypeLiteral<A> action) {
+    public <A extends RestAction<?>> RelayingRestDispatcher given(TypeLiteral<A> action) {
         registry.put(action, new NoResult());
 
         currentAction = action;
@@ -78,17 +79,10 @@ public class RelayingDispatcher implements DispatchAsync {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <A extends Action<R>, R extends Result> DispatchRequest execute(A action, AsyncCallback<R> callback) {
+    public <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback) {
         assert action instanceof ActionImpl;
 
         callback.onSuccess((R) registry.get(((ActionImpl) action).getTypeLiteral()));
-
-        return new CompletedDispatchRequest();
-    }
-
-    @Override
-    public <A extends Action<R>, R extends Result> DispatchRequest undo(A action, R result, AsyncCallback<Void> callback) {
-        callback.onSuccess(null);
 
         return new CompletedDispatchRequest();
     }

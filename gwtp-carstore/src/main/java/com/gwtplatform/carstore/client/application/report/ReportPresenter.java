@@ -32,7 +32,7 @@ import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -52,14 +52,14 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
     public interface MyProxy extends ProxyPlace<ReportPresenter> {
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final ManufacturerService manufacturerService;
 
     @Inject
     ReportPresenter(EventBus eventBus,
                     MyView view,
                     MyProxy proxy,
-                    DispatchAsync dispatcher,
+                    RestDispatch dispatcher,
                     ManufacturerService manufacturerService) {
         super(eventBus, view, proxy);
 

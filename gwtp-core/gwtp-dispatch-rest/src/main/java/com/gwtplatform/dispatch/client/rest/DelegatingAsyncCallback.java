@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.client.rest;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.rest.actionhandler.ClientRestActionHandler;
+import com.gwtplatform.dispatch.client.rest.actionhandler.ClientRestActionHandlerMismatchException;
 import com.gwtplatform.dispatch.client.rest.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
@@ -71,10 +72,13 @@ class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallba
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void delegateFailure(ClientRestActionHandler<?, ?> clientActionHandler) {
         dispatchRequest.cancel();
-//        callback.onFailure(
-//                new ClientRestActionHandlerMismatchException(action.getClass(), clientActionHandler.getActionType()));
+
+        Class<? extends RestAction<?>> requestedActionClass = (Class<? extends RestAction<?>>) action.getClass();
+        Class<?> supportedActionType = clientActionHandler.getActionType();
+        callback.onFailure(new ClientRestActionHandlerMismatchException(requestedActionClass, supportedActionType));
     }
 
     private void delegateExecute(ClientRestActionHandler<A, R> clientActionHandler) {
