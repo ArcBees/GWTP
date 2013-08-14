@@ -70,6 +70,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(RestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).in(Singleton.class);
 
-        bind(DispatchAsync.class).to(RestDispatchAsync.class).in(javax.inject.Singleton.class);
+        bind(DispatchAsync.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
 }
