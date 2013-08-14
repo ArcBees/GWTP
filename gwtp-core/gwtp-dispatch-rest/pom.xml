@@ -12,6 +12,10 @@
     <artifactId>gwtp-dispatch-rest</artifactId>
     <name>GWTP Dispatch REST</name>
 
+    <properties>
+        <slf4j-api.version>1.6.1</slf4j-api.version>
+    </properties>
+
     <build>
         <resources>
             <!-- Bundle sources with the jar, so they are visible to GWT's compiler -->
@@ -26,6 +30,18 @@
             </resource>
         </resources>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- When used with resteasy-jaxrs, slf4j-api clashes with errai-marshalling. -->
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
