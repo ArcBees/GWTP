@@ -37,6 +37,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.gwtplatform.dispatch.rebind.type.SerializerDefinitions;
+import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
 
 /**
  * TODO: Documentation.

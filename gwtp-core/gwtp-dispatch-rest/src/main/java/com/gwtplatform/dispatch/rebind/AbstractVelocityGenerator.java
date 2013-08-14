@@ -27,6 +27,7 @@ import com.google.common.base.Strings;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
 
 public abstract class AbstractVelocityGenerator {
     protected static final String SUFFIX = "Impl";

@@ -17,8 +17,6 @@
 package com.gwtplatform.dispatch.rebind;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import com.google.gwt.core.ext.Generator;
@@ -34,15 +32,12 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
-import com.gwtplatform.dispatch.rebind.type.RegisterSerializerBinding;
 import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
 
 public class VelocityGenerator extends Generator {
     private static final String SUFFIX = "Impl";
     private static final String SHARED = "shared";
     private static final String CLIENT = "client";
-
-    private final List<RegisterSerializerBinding> registeredSerializers = new ArrayList<RegisterSerializerBinding>();
 
     private String packageName;
     private String className;
@@ -51,38 +46,41 @@ public class VelocityGenerator extends Generator {
     private JClassType type;
     private Injector injector;
     private GeneratorFactory generatorFactory;
-    private SerializerProviderGenerator serializerProviderGenerator;
+    private ActionMetadataProviderGenerator actionMetadataProviderGenerator;
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
             throws UnableToCompleteException {
-        logger = new Logger(treeLogger);
-        typeOracle = generatorContext.getTypeOracle();
-        type = getType(typeName);
+        resetFields(treeLogger, generatorContext, typeName);
 
         PrintWriter printWriter = tryCreatePrintWriter(generatorContext);
         if (printWriter == null) {
             return typeName + SUFFIX;
         }
 
-        injector = Guice.createInjector(new RebindModule(logger, generatorContext));
-        serializerProviderGenerator = injector.getInstance(SerializerProviderGenerator.class);
-        generatorFactory = injector.getInstance(GeneratorFactory.class);
-
         registerPrimitiveTypes();
-        generateRestServices();
-        generateRestGinModule();
-        generateSerializerProvider();
-
-        ClassSourceFileComposerFactory composer = initComposer();
-        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
-        sourceWriter.indent();
-        sourceWriter.println("@Override");
-        sourceWriter.println("public void onModuleLoad() {}");
-        sourceWriter.outdent();
-        sourceWriter.commit(treeLogger);
+        generateClasses();
+        generateEntryPoint(treeLogger, generatorContext, printWriter);
 
         return typeName + SUFFIX;
+    }
+
+    private void resetFields(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
+            throws UnableToCompleteException {
+        logger = new Logger(treeLogger);
+        typeOracle = generatorContext.getTypeOracle();
+        type = getType(typeName);
+
+        injector = Guice.createInjector(new RebindModule(logger, generatorContext));
+        actionMetadataProviderGenerator = injector.getInstance(ActionMetadataProviderGenerator.class);
+        generatorFactory = injector.getInstance(GeneratorFactory.class);
+    }
+
+    private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
+        packageName = type.getPackage().getName().replace(SHARED, CLIENT);
+        className = type.getName() + SUFFIX;
+
+        return generatorContext.tryCreate(logger.getTreeLogger(), packageName, className);
     }
 
     private void registerPrimitiveTypes() throws UnableToCompleteException {
@@ -101,17 +99,20 @@ public class VelocityGenerator extends Generator {
         registeredClasses.add(getType(String.class.getName()));
     }
 
-    private void generateSerializerProvider() throws UnableToCompleteException {
-        serializerProviderGenerator.generate();
+    private JClassType getType(String typeName) throws UnableToCompleteException {
+        try {
+            return typeOracle.getType(typeName);
+        } catch (NotFoundException e) {
+            logger.die("Cannot find " + typeName);
+        }
+
+        return null;
     }
 
-    private void generateRestGinModule() throws UnableToCompleteException {
-        try {
-            RestGinModuleGenerator moduleGenerator = injector.getInstance(RestGinModuleGenerator.class);
-            moduleGenerator.generate();
-        } catch (Exception e) {
-            logger.die(e.getMessage());
-        }
+    private void generateClasses() throws UnableToCompleteException {
+        generateRestServices();
+        generateRestGinModule();
+        generateMetadataProvider();
     }
 
     private void generateRestServices() throws UnableToCompleteException {
@@ -127,21 +128,27 @@ public class VelocityGenerator extends Generator {
         }
     }
 
-    private JClassType getType(String typeName) throws UnableToCompleteException {
+    private void generateRestGinModule() throws UnableToCompleteException {
         try {
-            return typeOracle.getType(typeName);
-        } catch (NotFoundException e) {
-            logger.die("Cannot find " + typeName);
+            RestGinModuleGenerator moduleGenerator = injector.getInstance(RestGinModuleGenerator.class);
+            moduleGenerator.generate();
+        } catch (Exception e) {
+            logger.die(e.getMessage());
         }
-
-        return null;
     }
 
-    private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
-        packageName = type.getPackage().getName().replace(SHARED, CLIENT);
-        className = type.getName() + SUFFIX;
+    private void generateMetadataProvider() throws UnableToCompleteException {
+        actionMetadataProviderGenerator.generate();
+    }
 
-        return generatorContext.tryCreate(logger.getTreeLogger(), packageName, className);
+    private void generateEntryPoint(TreeLogger treeLogger, GeneratorContext generatorContext, PrintWriter printWriter) {
+        ClassSourceFileComposerFactory composer = initComposer();
+        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+        sourceWriter.indent();
+        sourceWriter.println("@Override");
+        sourceWriter.println("public void onModuleLoad() {}");
+        sourceWriter.outdent();
+        sourceWriter.commit(treeLogger);
     }
 
     private ClassSourceFileComposerFactory initComposer() {

@@ -20,30 +20,30 @@ import com.google.gwt.http.client.Header;
 import com.google.gwt.http.client.Response;
 
 class ResponseWrapper extends Response {
-    private final Response wrapped;
+    private final Response response;
 
-    ResponseWrapper(Response wrapped) {
-        this.wrapped = wrapped;
+    ResponseWrapper(Response response) {
+        this.response = response;
     }
 
     @Override
     public String getHeader(String header) {
-        return wrapped.getHeader(header);
+        return response.getHeader(header);
     }
 
     @Override
     public Header[] getHeaders() {
-        return wrapped.getHeaders();
+        return response.getHeaders();
     }
 
     @Override
     public String getHeadersAsString() {
-        return wrapped.getHeadersAsString();
+        return response.getHeadersAsString();
     }
 
     @Override
     public int getStatusCode() {
-        int statusCode = wrapped.getStatusCode();
+        int statusCode = response.getStatusCode();
 
         if (statusCode == 1223) {
             return 204;
@@ -54,11 +54,11 @@ class ResponseWrapper extends Response {
 
     @Override
     public String getStatusText() {
-        return wrapped.getStatusText();
+        return response.getStatusText();
     }
 
     @Override
     public String getText() {
-        return wrapped.getText();
+        return response.getText();
     }
 }

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rebind;
+package com.gwtplatform.dispatch.rebind.util;
 
 import java.io.PrintWriter;
 
@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.gwtplatform.dispatch.rebind.Logger;
 
 public class GeneratorUtil {
     private final TypeOracle typeOracle;
@@ -32,7 +33,9 @@ public class GeneratorUtil {
     private final GeneratorContext generatorContext;
 
     @Inject
-    public GeneratorUtil(TypeOracle typeOracle, Logger logger, GeneratorContext generatorContext) {
+    public GeneratorUtil(TypeOracle typeOracle,
+                         Logger logger,
+                         GeneratorContext generatorContext) {
         this.typeOracle = typeOracle;
         this.logger = logger;
         this.generatorContext = generatorContext;

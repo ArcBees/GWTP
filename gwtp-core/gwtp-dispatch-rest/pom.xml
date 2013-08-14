@@ -59,21 +59,18 @@
 
         <!-- Used for serialization-->
         <dependency>
-            <groupId>name.pehl</groupId>
-            <artifactId>piriti-user</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>name.pehl</groupId>
-            <artifactId>piriti-dev</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>name.pehl</groupId>
-            <artifactId>totoe</artifactId>
-            <version>0.4</version>
+            <groupId>org.jboss.errai</groupId>
+            <artifactId>errai-marshalling</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
+        </dependency>
+
+        <!-- Rebind dependency -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
         </dependency>
 
         <dependency>
