@@ -14,30 +14,30 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rebind.type;
+package com.gwtplatform.dispatch.rebind.event;
 
-import com.gwtplatform.dispatch.client.rest.SerializedType;
+import com.gwtplatform.dispatch.client.rest.MetadataType;
 
-public class RegisterSerializerBinding {
+public class RegisterMetadataEvent {
     private final String actionClass;
-    private final SerializedType serializedType;
-    private final String serializerClass;
+    private final MetadataType metadataType;
+    private final String metadata;
 
-    public RegisterSerializerBinding(String actionClass, SerializedType serializedType, String serializerClass) {
+    public RegisterMetadataEvent(String actionClass, MetadataType metadataType, String metadata) {
         this.actionClass = actionClass;
-        this.serializedType = serializedType;
-        this.serializerClass = serializerClass;
+        this.metadataType = metadataType;
+        this.metadata = metadata;
     }
 
     public String getActionClass() {
         return actionClass;
     }
 
-    public SerializedType getSerializedType() {
-        return serializedType;
+    public MetadataType getMetadataType() {
+        return metadataType;
     }
 
-    public String getSerializerClass() {
-        return serializerClass;
+    public String getMetadata() {
+        return metadata;
     }
 }

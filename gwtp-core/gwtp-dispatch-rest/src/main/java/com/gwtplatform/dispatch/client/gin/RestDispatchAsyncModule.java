@@ -16,16 +16,14 @@
 
 package com.gwtplatform.dispatch.client.gin;
 
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
+import javax.inject.Singleton;
+
+import com.gwtplatform.dispatch.client.rest.ActionMetadataProvider;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
-import com.gwtplatform.dispatch.client.rest.SerializerProvider;
+import com.gwtplatform.dispatch.client.rest.RestRequestBuilderFactory;
+import com.gwtplatform.dispatch.client.rest.RestResponseDeserializer;
 import com.gwtplatform.dispatch.client.rest.XCSRFHeaderName;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses HTTP REST calls.
@@ -67,19 +65,11 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         super.configure();
 
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
-        bind(SerializerProvider.class).asEagerSingleton();
-    }
 
-    @Provides
-    @Singleton
-    protected DispatchAsync provideDispatchAsync(SerializerProvider serializerProvider,
-            ExceptionHandler exceptionHandler,
-            ClientActionHandlerRegistry clientActionHandlerRegistry,
-            SecurityCookieAccessor securityCookieAccessor,
-            @RestApplicationPath String applicationPath,
-            @XCSRFHeaderName String headerName) {
+        bind(ActionMetadataProvider.class).asEagerSingleton();
+        bind(RestRequestBuilderFactory.class).in(Singleton.class);
+        bind(RestResponseDeserializer.class).in(Singleton.class);
 
-        return new RestDispatchAsync(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry,
-                serializerProvider, applicationPath, headerName);
+        bind(DispatchAsync.class).to(RestDispatchAsync.class).in(javax.inject.Singleton.class);
     }
 }

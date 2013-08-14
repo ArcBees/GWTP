@@ -27,6 +27,7 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
+import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
 
 public class RestGinModuleGenerator extends AbstractVelocityGenerator {
     private static final String PACKAGE = RestDispatchAsync.class.getPackage().getName();
