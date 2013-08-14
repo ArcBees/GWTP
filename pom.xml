@@ -9,7 +9,7 @@
 
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GWT-Platform</name>
     <inceptionYear>2010</inceptionYear>
@@ -240,7 +240,7 @@
         <jax-rs.version>1.1.1</jax-rs.version>
         <aopalliance.version>1.0</aopalliance.version>
         <cglib.version>2.2</cglib.version>
-        <gae.version>1.7.7.1</gae.version>
+        <gae.version>1.8.2</gae.version>
         <guice.version>3.0</guice.version>
         <javax.inject.version>1</javax.inject.version>
         <guava.version>14.0.1</guava.version>
@@ -460,6 +460,15 @@
                             <a href="https://github.com/ArcBees/GWTP" target="_blank">Back to GWTP Home</a>
                         ]]>
                     </header>
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <docletArtifact>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>umlgraph</artifactId>
+                        <version>5.6.6</version>
+                    </docletArtifact>
+                    <additionalparam>
+                        -horizontal
+                    </additionalparam>
                 </configuration>
                 <executions>
                     <execution>
