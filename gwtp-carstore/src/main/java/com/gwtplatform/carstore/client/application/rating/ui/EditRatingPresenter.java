@@ -35,7 +35,7 @@ import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -48,7 +48,7 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
         void setAllowedCars(List<CarDto> carDtos);
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final CarService carService;
     private final RatingService ratingService;
     private final EditRatingMessages messages;
@@ -56,7 +56,7 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     @Inject
     EditRatingPresenter(EventBus eventBus,
                         MyView view,
-                        DispatchAsync dispatcher,
+                        RestDispatch dispatcher,
                         CarService carService,
                         RatingService ratingService,
                         EditRatingMessages messages) {
