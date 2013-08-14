@@ -16,20 +16,24 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
+import javax.inject.Inject;
+
+import org.jboss.errai.marshalling.client.Marshalling;
+
 import com.google.gwt.http.client.Response;
-import com.google.gwt.user.client.rpc.SerializationException;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 
-import static com.gwtplatform.dispatch.client.rest.SerializedType.RESPONSE;
+import static com.gwtplatform.dispatch.client.rest.MetadataType.RESPONSE_CLASS;
 
 public class RestResponseDeserializer {
-    private final SerializerProvider serializerProvider;
+    private final ActionMetadataProvider metadataProvider;
 
-    public RestResponseDeserializer(SerializerProvider serializerProvider) {
-        this.serializerProvider = serializerProvider;
+    @Inject
+    RestResponseDeserializer(ActionMetadataProvider metadataProvider) {
+        this.metadataProvider = metadataProvider;
     }
 
     public <A extends RestAction<R>, R extends Result> R deserialize(A action, Response response)
@@ -48,16 +52,13 @@ public class RestResponseDeserializer {
     }
 
     private <R extends Result> R getDeserializedResponse(Action<R> action, Response response) throws ActionException {
-        try {
-            Serializer<R> serializer = serializerProvider.getSerializer(action.getClass(), RESPONSE);
+        @SuppressWarnings("unchecked")
+        Class<R> resultClass = (Class<R>) metadataProvider.getValue(action, RESPONSE_CLASS);
 
-            if (serializer == null) {
-                throw new ActionException("Unable to deserialize response. Serializer not found.");
-            }
-
-            return serializer.deserialize(response.getText());
-        } catch (SerializationException e) {
-            throw new ActionException("Unable to deserialize response.", e);
+        if (resultClass == null || !Marshalling.canHandle(resultClass)) {
+            throw new ActionException("Unable to deserialize response. No serializer found.");
+        } else {
+            return Marshalling.fromJSON(response.getText(), resultClass);
         }
     }
 }

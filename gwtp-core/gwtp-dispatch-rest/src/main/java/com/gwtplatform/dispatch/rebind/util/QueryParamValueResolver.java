@@ -14,16 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rebind.event;
+package com.gwtplatform.dispatch.rebind.util;
 
-public class ChildSerializer {
-    private String serializerClassName;
+import javax.ws.rs.QueryParam;
 
-    public ChildSerializer(String serializerClassName) {
-        this.serializerClassName = serializerClassName;
-    }
-
-    public String getSerializerClassName() {
-        return serializerClassName;
+public class QueryParamValueResolver implements AnnotationValueResolver<QueryParam> {
+    @Override
+    public String resolve(QueryParam annotation) {
+        return annotation.value();
     }
 }

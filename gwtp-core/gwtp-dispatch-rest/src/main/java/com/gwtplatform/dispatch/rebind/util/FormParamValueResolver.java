@@ -14,13 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rebind;
+package com.gwtplatform.dispatch.rebind.util;
 
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JMethod;
+import javax.ws.rs.FormParam;
 
-public interface GeneratorFactory {
-    RestServiceGenerator createServiceGenerator(JClassType service);
-
-    RestActionGenerator createActionGenerator(JMethod actionMethod);
+public class FormParamValueResolver implements AnnotationValueResolver<FormParam> {
+    @Override
+    public String resolve(FormParam annotation) {
+        return annotation.value();
+    }
 }
