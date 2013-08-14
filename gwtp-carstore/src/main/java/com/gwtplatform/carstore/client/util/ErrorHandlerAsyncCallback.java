@@ -25,7 +25,7 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.util.exceptiontranslators.ForeignTranslator;
 import com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator;
 import com.gwtplatform.carstore.client.util.exceptiontranslators.Translator;
-import com.gwtplatform.dispatch.client.rest.RestCallback;
+import com.gwtplatform.dispatch.shared.rest.RestCallback;
 import com.gwtplatform.dispatch.shared.Result;
 
 public abstract class ErrorHandlerAsyncCallback<R extends Result> implements RestCallback<R> {

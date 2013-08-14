@@ -58,11 +58,11 @@ import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
 import com.gwtplatform.dispatch.rebind.util.HeaderParamValueResolver;
 import com.gwtplatform.dispatch.rebind.util.PathParamValueResolver;
 import com.gwtplatform.dispatch.rebind.util.QueryParamValueResolver;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
 
-import static com.gwtplatform.dispatch.client.rest.MetadataType.BODY_CLASS;
-import static com.gwtplatform.dispatch.client.rest.MetadataType.RESPONSE_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.BODY_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.RESPONSE_CLASS;
 
 public class RestActionGenerator extends AbstractVelocityGenerator {
     private static class AnnotatedMethodParameter {
@@ -130,7 +130,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         JClassType resultType = getResultType();
 
         path = restServicePath;
-        retrieveConfigAnnonations();
+        retrieveConfigAnnotations();
         retrieveParameterConfig();
         retrieveBodyConfig();
 
@@ -233,7 +233,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         JClassType actionClass = null;
 
         try {
-            actionClass = getTypeOracle().getType(Action.class.getName());
+            actionClass = getTypeOracle().getType(RestAction.class.getName());
         } catch (NotFoundException e) {
             getLogger().die("Unable to find interface Action.");
         }
@@ -241,11 +241,11 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         JClassType returnClass = returnType.isClassOrInterface();
         if (!returnClass.isAssignableTo(actionClass)) {
             String typeName = returnClass.getQualifiedSourceName();
-            getLogger().die(typeName + " must implement Action.");
+            getLogger().die(typeName + " must implement RestAction.");
         }
     }
 
-    private void retrieveConfigAnnonations() throws UnableToCompleteException {
+    private void retrieveConfigAnnotations() throws UnableToCompleteException {
         retrieveHttpMethod();
 
         if (actionMethod.isAnnotationPresent(Path.class)) {

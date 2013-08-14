@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rebind.type;
 
 import com.google.common.base.Objects;
-import com.gwtplatform.dispatch.client.rest.MetadataType;
+import com.gwtplatform.dispatch.shared.rest.MetadataType;
 
 public class RegisterMetadataHolder {
     private final String actionClass;
