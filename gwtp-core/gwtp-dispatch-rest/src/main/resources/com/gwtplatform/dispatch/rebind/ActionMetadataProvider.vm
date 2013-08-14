@@ -1,5 +1,7 @@
 package com.gwtplatform.dispatch.client.rest;
 
+import com.gwtplatform.dispatch.shared.rest.MetadataType;
+
 public class ActionMetadataProviderImpl extends AbstractActionMetadataProvider {
     public ActionMetadataProviderImpl() {
 #foreach ($data in $metadata)
