@@ -16,6 +16,8 @@
 
 package com.gwtplatform.carstore.server.rest;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,13 +29,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.domain.Rating;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.NoResult;
 
 @Path(ResourcesPath.RATING)
 @Produces(MediaType.APPLICATION_JSON)
@@ -46,27 +45,25 @@ public class RatingResource {
     }
 
     @GET
-    public GetResults<RatingDto> getRatings() {
-        return new GetResults<RatingDto>(Rating.createDto(ratingDao.getAll()));
+    public List<RatingDto> getRatings() {
+        return Rating.createDto(ratingDao.getAll());
     }
 
     @Path(PathParameter.ID)
     @GET
-    public GetResult<RatingDto> get(@PathParam(RestParameter.ID) Long id) {
-        return new GetResult<RatingDto>(Rating.createDto(ratingDao.get(id)));
+    public RatingDto get(@PathParam(RestParameter.ID) Long id) {
+        return Rating.createDto(ratingDao.get(id));
     }
 
     @POST
-    public GetResult<RatingDto> saveOrCreate(RatingDto ratingDto) {
-        ratingDto = Rating.createDto(ratingDao.put(Rating.create(ratingDto)));
-
-        return new GetResult<RatingDto>(ratingDto);
+    public RatingDto saveOrCreate(RatingDto ratingDto) {
+        return Rating.createDto(ratingDao.put(Rating.create(ratingDto)));
     }
 
     @Path(PathParameter.ID)
     @DELETE
-    public NoResult delete(@PathParam(RestParameter.ID) Long id) {
+    public Void delete(@PathParam(RestParameter.ID) Long id) {
         ratingDao.delete(id);
-        return new NoResult();
+        return null;
     }
 }

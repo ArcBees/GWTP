@@ -79,6 +79,11 @@
             <artifactId>errai-marshalling</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.jboss.errai</groupId>
+            <artifactId>errai-jaxrs-client</artifactId>
+            <version>2.3.2.Final</version>
+        </dependency>
+        <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
         </dependency>
