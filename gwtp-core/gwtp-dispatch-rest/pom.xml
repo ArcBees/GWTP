@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -11,10 +12,6 @@
 
     <artifactId>gwtp-dispatch-rest</artifactId>
     <name>GWTP Dispatch REST</name>
-
-    <properties>
-        <slf4j-api.version>1.6.1</slf4j-api.version>
-    </properties>
 
     <build>
         <resources>
@@ -31,18 +28,6 @@
         </resources>
     </build>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <!-- When used with resteasy-jaxrs, slf4j-api clashes with errai-marshalling. -->
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j-api.version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -51,10 +36,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-client</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-shared</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
