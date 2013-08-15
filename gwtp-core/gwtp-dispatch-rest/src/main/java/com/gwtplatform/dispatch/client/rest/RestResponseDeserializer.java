@@ -25,7 +25,9 @@ import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.KEY_CLASS;
 import static com.gwtplatform.dispatch.shared.rest.MetadataType.RESPONSE_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.VALUE_CLASS;
 
 public class RestResponseDeserializer {
     private final ActionMetadataProvider metadataProvider;
@@ -49,17 +51,29 @@ public class RestResponseDeserializer {
         return (statusCode >= 200 && statusCode < 300) || statusCode == 304;
     }
 
-    @SuppressWarnings("NonJREEmulationClassesInClientCode")
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
         @SuppressWarnings("unchecked")
         Class<R> resultClass = (Class<R>) metadataProvider.getValue(action, RESPONSE_CLASS);
+        Class<?> keyClass = (Class<?>) metadataProvider.getValue(action, KEY_CLASS);
+        Class<?> valueClass = (Class<?>) metadataProvider.getValue(action, VALUE_CLASS);
+        R result = null;
 
-        if (resultClass == null || !Marshalling.canHandle(resultClass)) {
-            throw new ActionException("Unable to deserialize response. No serializer found.");
-        } else {
-            String json = JacksonTransformer.fromJackson(response.getText());
+        if (resultClass != Void.class) {
+            if (resultClass != null && Marshalling.canHandle(resultClass)) {
+                String json = JacksonTransformer.fromJackson(response.getText());
 
-            return Marshalling.fromJSON(json, resultClass);
+                if (valueClass != null) {
+                    result = Marshalling.fromJSON(json, resultClass, keyClass, valueClass);
+                } else if (keyClass != null) {
+                    result = Marshalling.fromJSON(json, resultClass, keyClass);
+                } else {
+                    result = Marshalling.fromJSON(json, resultClass);
+                }
+            } else {
+                throw new ActionException("Unable to deserialize response. No serializer found.");
+            }
         }
+
+        return result;
     }
 }
