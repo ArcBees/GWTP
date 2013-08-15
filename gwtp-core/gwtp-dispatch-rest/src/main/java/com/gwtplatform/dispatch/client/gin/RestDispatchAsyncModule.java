@@ -18,6 +18,9 @@ package com.gwtplatform.dispatch.client.gin;
 
 import javax.inject.Singleton;
 
+import org.jboss.errai.enterprise.client.jaxrs.api.RestClient;
+import org.jboss.errai.marshalling.client.Marshalling;
+
 import com.gwtplatform.dispatch.client.rest.ActionMetadataProvider;
 import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
 import com.gwtplatform.dispatch.client.rest.RestRequestBuilderFactory;

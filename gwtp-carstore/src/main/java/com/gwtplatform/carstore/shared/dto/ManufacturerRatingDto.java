@@ -16,11 +16,14 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
+import org.jboss.errai.common.client.api.annotations.Portable;
+
+@Portable
 public class ManufacturerRatingDto implements Dto {
     String manufacturer;
     Double rating;
 
-    protected ManufacturerRatingDto() {
+    public ManufacturerRatingDto() {
     }
 
     public ManufacturerRatingDto(String manufacturer,

@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.client.rest;
 
 import javax.inject.Inject;
 
+import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
 import org.jboss.errai.marshalling.client.Marshalling;
 
 import com.google.gwt.http.client.Response;
@@ -48,6 +49,7 @@ public class RestResponseDeserializer {
         return (statusCode >= 200 && statusCode < 300) || statusCode == 304;
     }
 
+    @SuppressWarnings("NonJREEmulationClassesInClientCode")
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
         @SuppressWarnings("unchecked")
         Class<R> resultClass = (Class<R>) metadataProvider.getValue(action, RESPONSE_CLASS);
@@ -55,7 +57,9 @@ public class RestResponseDeserializer {
         if (resultClass == null || !Marshalling.canHandle(resultClass)) {
             throw new ActionException("Unable to deserialize response. No serializer found.");
         } else {
-            return Marshalling.fromJSON(response.getText(), resultClass);
+            String json = JacksonTransformer.fromJackson(response.getText());
+
+            return Marshalling.fromJSON(json, resultClass);
         }
     }
 }

@@ -30,14 +30,12 @@ import com.gwtplatform.carstore.server.authentication.AuthenticationException;
 import com.gwtplatform.carstore.server.authentication.Authenticator;
 import com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider;
 import com.gwtplatform.carstore.server.dao.UserSessionDao;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
 import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.dispatch.shared.NoResult;
 
 @Path(ResourcesPath.SESSION)
 @Produces(MediaType.APPLICATION_JSON)
@@ -61,15 +59,15 @@ public class SessionResource {
     }
 
     @GET
-    public GetResult<CurrentUserDto> getCurrentUser() {
-        return new GetResult<CurrentUserDto>(currentUserDtoProvider.get());
+    public CurrentUserDto getCurrentUser() {
+        return currentUserDtoProvider.get();
     }
 
     @DELETE
-    public NoResult logout() {
+    public Void logout() {
         authenticator.logout();
 
-        return new NoResult();
+        return null;
     }
 
     @POST
