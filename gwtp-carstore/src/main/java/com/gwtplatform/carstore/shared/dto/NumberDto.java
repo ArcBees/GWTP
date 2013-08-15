@@ -19,8 +19,7 @@ package com.gwtplatform.carstore.shared.dto;
 public class NumberDto<T extends Number> implements Dto {
     private T number;
 
-    protected NumberDto() {
-        // Needed for serialization
+    public NumberDto() {
     }
 
     public NumberDto(T number) {

@@ -36,9 +36,7 @@ import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -107,7 +105,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     @Override
     public void onDetail(ManufacturerDto manufacturerDto) {
         PlaceRequest placeRequest = new Builder().nameToken(NameTokens.getDetailManufacturer())
-                .with("id", String.valueOf(manufacturerDto.getId())).build();
+                                                 .with("id", String.valueOf(manufacturerDto.getId())).build();
 
         placeManager.revealPlace(placeRequest);
     }
@@ -127,9 +125,9 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     @Override
     public void onDelete(final ManufacturerDto manufacturerDto) {
         dispatcher.execute(manufacturerService.delete(manufacturerDto.getId()),
-                new ErrorHandlerAsyncCallback<NoResult>(this) {
+                new ErrorHandlerAsyncCallback<Void>(this) {
                     @Override
-                    public void onSuccess(NoResult noResult) {
+                    public void onSuccess(Void nothing) {
                         getView().removeManufacturer(manufacturerDto);
                     }
                 });
@@ -140,13 +138,12 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        dispatcher.execute(manufacturerService.getManufacturers(),
-                new AbstractAsyncCallback<GetResults<ManufacturerDto>>() {
-                    @Override
-                    public void onSuccess(GetResults<ManufacturerDto> result) {
-                        getView().displayManufacturers(result.getResults());
-                    }
-                });
+        dispatcher.execute(manufacturerService.getManufacturers(), new AbstractAsyncCallback<List<ManufacturerDto>>() {
+            @Override
+            public void onSuccess(List<ManufacturerDto> manufacturers) {
+                getView().displayManufacturers(manufacturers);
+            }
+        });
     }
 
     @Override

@@ -16,6 +16,8 @@
 
 package com.gwtplatform.carstore.server.rest;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -29,14 +31,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.domain.Car;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.carstore.shared.dto.NumberDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.NoResult;
 
 @Path(ResourcesPath.CAR)
 @Produces(MediaType.APPLICATION_JSON)
@@ -54,32 +52,30 @@ public class CarResource {
     }
 
     @GET
-    public GetResults<CarDto> getCars(@DefaultValue(DEFAULT_OFFSET) @QueryParam(RestParameter.OFFSET) int offset,
-                                      @DefaultValue(DEFAULT_LIMIT) @QueryParam(RestParameter.LIMIT) int limit) {
+    public List<CarDto> getCars(@DefaultValue(DEFAULT_OFFSET) @QueryParam(RestParameter.OFFSET) int offset,
+                                @DefaultValue(DEFAULT_LIMIT) @QueryParam(RestParameter.LIMIT) int limit) {
         if (offset == INT_DEFAULT_OFFSET && limit == INT_DEFAULT_LIMIT) {
-            return new GetResults<CarDto>(Car.createDto(carDao.getAll()));
+            return Car.createDto(carDao.getAll());
         } else {
-            return new GetResults<CarDto>(Car.createDto(carDao.getSome(offset, limit)));
+            return Car.createDto(carDao.getSome(offset, limit));
         }
     }
 
     @GET
     @Path(ResourcesPath.COUNT)
-    public GetResult<NumberDto<Integer>> getCarsCount() {
-        return new GetResult<NumberDto<Integer>>(new NumberDto<Integer>(carDao.countAll()));
+    public Integer getCarsCount() {
+        return carDao.countAll();
     }
 
     @POST
-    public GetResult<CarDto> saveOrCreate(CarDto carDto) {
-        carDto = Car.createDto(carDao.put(Car.create(carDto)));
-
-        return new GetResult<CarDto>(carDto);
+    public CarDto saveOrCreate(CarDto carDto) {
+        return Car.createDto(carDao.put(Car.create(carDto)));
     }
 
     @Path(PathParameter.ID)
     @DELETE
-    public NoResult delete(@PathParam(RestParameter.ID) Long id) {
+    public Void delete(@PathParam(RestParameter.ID) Long id) {
         carDao.delete(id);
-        return new NoResult();
+        return null;
     }
 }
