@@ -20,8 +20,10 @@ import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -62,7 +64,9 @@ import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 
 import static com.gwtplatform.dispatch.shared.rest.MetadataType.BODY_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.KEY_CLASS;
 import static com.gwtplatform.dispatch.shared.rest.MetadataType.RESPONSE_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.VALUE_CLASS;
 
 public class RestActionGenerator extends AbstractVelocityGenerator {
     private static class AnnotatedMethodParameter {
@@ -96,6 +100,9 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
     private static final String CLASS_STATEMENT = "%s.class";
 
     private final EventBus eventBus;
+    private final JClassType collectionType;
+    private final JClassType mapType;
+
     private final JMethod actionMethod;
     private final JType returnType;
     private final List<AnnotatedMethodParameter> pathParams = new ArrayList<AnnotatedMethodParameter>();
@@ -123,6 +130,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         this.actionMethod = actionMethod;
 
         returnType = actionMethod.getReturnType();
+        collectionType = getGeneratorUtil().getType(Collection.class.getName());
+        mapType = getGeneratorUtil().getType(Map.class.getName());
     }
 
     public ActionBinding generate(String restServicePath) throws Exception {
@@ -198,6 +207,27 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
         String resultClass = formatClassStatement(resultType);
         eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), RESPONSE_CLASS, resultClass));
+
+        JParameterizedType parameterized = resultType.isParameterized();
+        if (parameterized != null) {
+            if (isCollection(resultType) || isMap(resultType)) {
+                String parameterClass = formatClassStatement(parameterized.getTypeArgs()[0]);
+                eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), KEY_CLASS, parameterClass));
+            }
+
+            if (isMap(resultType)) {
+                String parameterClass = formatClassStatement(parameterized.getTypeArgs()[1]);
+                eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), VALUE_CLASS, parameterClass));
+            }
+        }
+    }
+
+    private boolean isMap(JClassType resultType) {
+        return resultType.isAssignableTo(mapType);
+    }
+
+    private boolean isCollection(JClassType resultType) {
+        return resultType.isAssignableTo(collectionType);
     }
 
     private String formatClassStatement(JType type) {
