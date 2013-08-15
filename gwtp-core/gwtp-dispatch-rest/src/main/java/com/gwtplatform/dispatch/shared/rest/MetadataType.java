@@ -20,5 +20,5 @@ package com.gwtplatform.dispatch.shared.rest;
  * Indicates which part of the message the serialized type represents
  */
 public enum MetadataType {
-    BODY_CLASS, RESPONSE_CLASS
+    BODY_CLASS, KEY_CLASS, VALUE_CLASS, RESPONSE_CLASS
 }
