@@ -16,17 +16,16 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
+import org.jboss.errai.common.client.api.annotations.Portable;
+import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
 
+@Portable
 public class CurrentUserDto implements Dto {
     Boolean loggedIn;
     UserDto user;
 
-    protected CurrentUserDto() {
-        // Needed for serialization
-    }
-
-    public CurrentUserDto(Boolean loggedIn,
-                          UserDto user) {
+    public CurrentUserDto(@MapsTo("loggedIn") Boolean loggedIn,
+                          @MapsTo("user") UserDto user) {
         this.loggedIn = loggedIn;
         this.user = user;
     }

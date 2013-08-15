@@ -17,6 +17,7 @@
 package com.gwtplatform.carstore.client.application;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
@@ -35,7 +36,6 @@ import com.gwtplatform.carstore.client.application.testutils.PresenterTestModule
 import com.gwtplatform.carstore.client.application.testutils.PresenterWidgetTestBase;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.CarService;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.NoResult;
@@ -99,12 +99,11 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onDelete(CarDto carDto, HasData<CarDto> hasCarData, Range range) {
         // Given we have DeleteCarAction
-        dispatcher.given(new TypeLiteral<RestAction<NoResult>>() {
-        }).willReturn(new NoResult());
+        dispatcher.given(new TypeLiteral<RestAction<Void>>() {}).willReturn(null);
 
         // And GetCarAction for fetching after delete
-        GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
-        dispatcher.given(new TypeLiteral<RestAction<GetResults<CarDto>>>() {}).willReturn(result);
+        List<CarDto> result = new ArrayList<CarDto>();
+        dispatcher.given(new TypeLiteral<RestAction<List<CarDto>>>() {}).willReturn(result);
 
         // And display is setup
         when(view.getCarDisplay()).thenReturn(hasCarData);
@@ -123,8 +122,8 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onFetchData(ArrayList<CarDto> carDtos) {
         // Given
-        GetResults<CarDto> result = new GetResults<CarDto>(new ArrayList<CarDto>());
-        dispatcher.given(new TypeLiteral<RestAction<GetResults<CarDto>>>() {}).willReturn(result);
+        List<CarDto> result = new ArrayList<CarDto>();
+        dispatcher.given(new TypeLiteral<RestAction<CarDto>>() {}).willReturn(result);
 
         // When
         carsPresenter.fetchData(0, 1);
@@ -136,8 +135,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
         // Given
-        GetResults<CarDto> result = new GetResults<CarDto>(carDtos);
-        dispatcher.given(new TypeLiteral<RestAction<GetResults<CarDto>>>() {}).willReturn(result);
+        dispatcher.given(new TypeLiteral<RestAction<CarDto>>() {}).willReturn(carDtos);
 
         // When
         carsPresenter.fetchData(0, 3);
