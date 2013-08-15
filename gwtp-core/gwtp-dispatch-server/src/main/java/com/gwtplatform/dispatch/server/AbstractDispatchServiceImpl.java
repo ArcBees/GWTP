@@ -110,7 +110,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
 
     @Override
     public void undo(String cookieSentByRPC, Action<Result> action, Result result) throws ActionException,
-                                                                                          ServiceException {
+            ServiceException {
 
         if (action.isSecured() && !cookieMatch(cookieSentByRPC)) {
             String message = xsrfAttackMessage + " While undoing action: " + action.getClass().getName();
