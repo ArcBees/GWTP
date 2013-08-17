@@ -20,8 +20,8 @@ import org.jboss.errai.common.client.api.annotations.Portable;
 
 @Portable
 public class ManufacturerRatingDto implements Dto {
-    String manufacturer;
-    Double rating;
+    private String manufacturer;
+    private Double rating;
 
     public ManufacturerRatingDto() {
     }

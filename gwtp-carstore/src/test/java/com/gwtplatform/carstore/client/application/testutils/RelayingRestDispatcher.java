@@ -27,13 +27,11 @@ import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 
 /**
- * Class used to replace a real implementation of the Dispatcher. When executing
+ * Class used to replace a real implementation of the @{link RestDispatch}. When executing
  * a request for an action, a predefined result will be sent back immediately.
  * <p/>
  * To assign a result to an action, simply do:
  * <code>dispatcher.when({@link RestAction}).willReturn(<b>result</b>);</code>
- *
- * @author Christian Goudreau
  */
 public class RelayingRestDispatcher implements RestDispatch {
     private Map<TypeLiteral<? extends RestAction<?>>, Object> registry =
