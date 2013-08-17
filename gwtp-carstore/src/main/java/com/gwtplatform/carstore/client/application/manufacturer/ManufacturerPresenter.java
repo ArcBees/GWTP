@@ -105,7 +105,8 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     @Override
     public void onDetail(ManufacturerDto manufacturerDto) {
         PlaceRequest placeRequest = new Builder().nameToken(NameTokens.getDetailManufacturer())
-                                                 .with("id", String.valueOf(manufacturerDto.getId())).build();
+                                                 .with("id", String.valueOf(manufacturerDto.getId()))
+                                                 .build();
 
         placeManager.revealPlace(placeRequest);
     }
