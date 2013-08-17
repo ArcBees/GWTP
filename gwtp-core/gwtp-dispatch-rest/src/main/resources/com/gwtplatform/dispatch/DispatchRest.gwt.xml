@@ -18,6 +18,8 @@
 
     <entry-point class='com.gwtplatform.dispatch.client.rest.RestDispatcherController'/>
 
+    <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
+
     <extend-configuration-property name="gin.ginjector.modules"
             value="com.gwtplatform.dispatch.client.rest.RestGinModule"/>
 
