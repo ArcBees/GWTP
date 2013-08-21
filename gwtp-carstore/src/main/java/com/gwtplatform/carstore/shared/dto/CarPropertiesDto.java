@@ -18,6 +18,9 @@ package com.gwtplatform.carstore.shared.dto;
 
 import java.util.Date;
 
+import org.jboss.errai.common.client.api.annotations.Portable;
+
+@Portable
 public class CarPropertiesDto extends BaseEntity {
     private String someString;
     private Integer someNumber;

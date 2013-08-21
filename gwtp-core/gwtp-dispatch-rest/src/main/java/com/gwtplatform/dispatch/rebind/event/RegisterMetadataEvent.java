@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.rebind.event;
 
-import com.gwtplatform.dispatch.client.rest.MetadataType;
+import com.gwtplatform.dispatch.shared.rest.MetadataType;
 
 public class RegisterMetadataEvent {
     private final String actionClass;

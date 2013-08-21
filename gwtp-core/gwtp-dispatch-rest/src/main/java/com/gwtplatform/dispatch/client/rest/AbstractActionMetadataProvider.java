@@ -19,17 +19,18 @@ package com.gwtplatform.dispatch.client.rest;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.rest.MetadataType;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
 
 public abstract class AbstractActionMetadataProvider implements ActionMetadataProvider {
     private final Map<MetadataKey, Object> metadata = new HashMap<MetadataKey, Object>();
 
     @Override
-    public Object getValue(Action<?> action, MetadataType metadataType) {
+    public Object getValue(RestAction<?> action, MetadataType metadataType) {
         return metadata.get(MetadataKey.create(action.getClass(), metadataType));
     }
 
-    protected void register(Class<? extends Action> actionClass, MetadataType metadataType, Object value) {
+    protected void register(Class<? extends RestAction> actionClass, MetadataType metadataType, Object value) {
         metadata.put(MetadataKey.create(actionClass, metadataType), value);
     }
 }

@@ -16,15 +16,18 @@
 
 package com.gwtplatform.carstore.shared.dispatch;
 
+import org.jboss.errai.common.client.api.annotations.Portable;
+
 import com.gwtplatform.carstore.shared.dto.ActionType;
 
+@Portable
 public class LogInRequest {
-    ActionType actionType;
-    String username;
-    String password;
-    String loggedInCookie;
+    private ActionType actionType;
+    private String username;
+    private String password;
+    private String loggedInCookie;
 
-    protected LogInRequest() {
+    public LogInRequest() {
     }
 
     public LogInRequest(String username,
