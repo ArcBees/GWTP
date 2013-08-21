@@ -31,8 +31,6 @@ import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
@@ -82,23 +80,22 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        dispatcher.execute(ratingService.saveOrCreate(ratingDto),
-                new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
-                    @Override
-                    public void onSuccess(GetResult<RatingDto> result) {
-                        DisplayMessageEvent.fire(EditRatingPresenter.this, new Message(messages.ratingSaved(),
-                                MessageStyle.SUCCESS));
-                        RatingAddedEvent.fire(EditRatingPresenter.this, result.getResult());
-                        getView().hide();
-                    }
-                });
+        dispatcher.execute(ratingService.saveOrCreate(ratingDto), new ErrorHandlerAsyncCallback<RatingDto>(this) {
+            @Override
+            public void onSuccess(RatingDto savedRating) {
+                DisplayMessageEvent.fire(EditRatingPresenter.this, new Message(messages.ratingSaved(),
+                        MessageStyle.SUCCESS));
+                RatingAddedEvent.fire(EditRatingPresenter.this, savedRating);
+                getView().hide();
+            }
+        });
     }
 
     private void reveal() {
-        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
             @Override
-            public void onSuccess(GetResults<CarDto> result) {
-                onGetCarsSuccess(result.getResults());
+            public void onSuccess(List<CarDto> cars) {
+                onGetCarsSuccess(cars);
             }
         });
     }
