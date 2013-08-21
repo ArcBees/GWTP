@@ -21,6 +21,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
 import org.jboss.errai.marshalling.client.Marshalling;
 
 import com.google.common.collect.Maps;
@@ -135,7 +136,7 @@ public class RestRequestBuilderFactory {
         if (bodyClass == null || !Marshalling.canHandle(bodyClass)) {
             throw new ActionException("Unable to serialize request body. No serializer found.");
         } else {
-            return Marshalling.toJSON(object);
+            return JacksonTransformer.toJackson(Marshalling.toJSON(object));
         }
     }
 }
