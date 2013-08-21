@@ -72,9 +72,8 @@ public class ManufacturerResource {
 
     @Path(PathParameter.ID)
     @DELETE
-    public Void delete(@PathParam(RestParameter.ID) Long id) {
+    public void delete(@PathParam(RestParameter.ID) Long id) {
         manufacturerDao.delete(id);
-        return null;
     }
 
     @Path(ResourcesPath.RATING)
