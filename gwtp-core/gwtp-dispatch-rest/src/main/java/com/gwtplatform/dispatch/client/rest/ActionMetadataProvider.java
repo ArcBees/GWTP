@@ -42,19 +42,16 @@ public interface ActionMetadataProvider {
 
         @Override
         public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+
             if (o == null || !(o instanceof MetadataKey)) {
                 return false;
             }
 
-            if (this == o) {
-                return true;
-            }
             MetadataKey other = (MetadataKey) o;
-            return isEquals(actionClass, other.actionClass) && isEquals(metadataType, other.metadataType);
-        }
-
-        public boolean isEquals(Object a, Object b) {
-            return a == b || (a != null && a.equals(b));
+            return Objects.equal(actionClass, other.actionClass) && Objects.equal(metadataType, other.metadataType);
         }
     }
 
