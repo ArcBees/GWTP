@@ -32,6 +32,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
+import com.gwtplatform.dispatch.client.rest.AbstractRestDispatcherController;
 import com.gwtplatform.dispatch.rebind.type.ServiceDefinitions;
 
 public class VelocityGenerator extends Generator {
@@ -144,17 +145,13 @@ public class VelocityGenerator extends Generator {
     private void generateEntryPoint(TreeLogger treeLogger, GeneratorContext generatorContext, PrintWriter printWriter) {
         ClassSourceFileComposerFactory composer = initComposer();
         SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
-        sourceWriter.indent();
-        sourceWriter.println("@Override");
-        sourceWriter.println("public void onModuleLoad() {}");
-        sourceWriter.outdent();
         sourceWriter.commit(treeLogger);
     }
 
     private ClassSourceFileComposerFactory initComposer() {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, className);
         composer.addImport(type.getQualifiedSourceName());
-        composer.addImplementedInterface(type.getName());
+        composer.setSuperclass(AbstractRestDispatcherController.class.getName());
 
         return composer;
     }

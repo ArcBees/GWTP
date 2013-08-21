@@ -16,22 +16,21 @@
 
 package com.gwtplatform.carstore.shared.dispatch;
 
+import org.jboss.errai.common.client.api.annotations.Portable;
+import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
+
 import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
-import com.gwtplatform.dispatch.shared.Result;
 
-public class LogInResult implements Result {
-    ActionType actionType;
-    CurrentUserDto currentUserDto;
-    String loggedInCookie;
+@Portable
+public class LogInResult {
+    private ActionType actionType;
+    private CurrentUserDto currentUserDto;
+    private String loggedInCookie;
 
-    protected LogInResult() {
-        // Needed for serialization
-    }
-
-    public LogInResult(ActionType actionType,
-                       CurrentUserDto currentUserDto,
-                       String loggedInCookie) {
+    public LogInResult(@MapsTo("actionType") ActionType actionType,
+                       @MapsTo("currentUserDto") CurrentUserDto currentUserDto,
+                       @MapsTo("loggedInCookie") String loggedInCookie) {
         this.actionType = actionType;
         this.currentUserDto = currentUserDto;
         this.loggedInCookie = loggedInCookie;

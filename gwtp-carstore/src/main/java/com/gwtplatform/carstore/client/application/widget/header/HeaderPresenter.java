@@ -35,7 +35,6 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.HeaderMessages;
 import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -94,7 +93,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     @Override
     public void logout() {
-        dispatchAsync.execute(sessionService.logout(), new AsyncCallback<NoResult>() {
+        dispatchAsync.execute(sessionService.logout(), new AsyncCallback<Void>() {
             @Override
             public void onFailure(Throwable caught) {
                 DisplayMessageEvent.fire(HeaderPresenter.this, new Message(messages.errorLoggingOut(),
@@ -102,7 +101,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
             }
 
             @Override
-            public void onSuccess(NoResult result) {
+            public void onSuccess(Void nothing) {
                 onLogoutSuccess();
             }
         });

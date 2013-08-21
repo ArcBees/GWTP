@@ -253,7 +253,14 @@
             <dependency>
                 <groupId>org.jboss.errai</groupId>
                 <artifactId>errai-marshalling</artifactId>
-                <version>${errai-marshalling.version}</version>
+                <version>${errai.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.errai</groupId>
+                <artifactId>errai-jaxrs-client</artifactId>
+                <version>${errai.version}</version>
+                <scope>compile</scope>
             </dependency>
 
             <!-- Rebind dependencies -->

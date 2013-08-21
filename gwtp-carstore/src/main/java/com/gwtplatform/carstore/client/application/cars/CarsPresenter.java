@@ -39,11 +39,7 @@ import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.carstore.shared.dto.NumberDto;
-import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -65,7 +61,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
 
         void setCarsCount(Integer result);
 
-        void displayCars(int offset, List<CarDto> carDtos);
+        void displayCars(int offset, List<CarDto> cars);
 
         HasData<CarDto> getCarDisplay();
     }
@@ -121,25 +117,24 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void fetchData(final int offset, int limit) {
-        dispatcher.execute(carService.getCars(offset, limit), new AbstractAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(offset, limit), new AbstractAsyncCallback<List<CarDto>>() {
             @Override
-            public void onSuccess(GetResults<CarDto> result) {
-                getView().displayCars(offset, result.getResults());
+            public void onSuccess(List<CarDto> cars) {
+                getView().displayCars(offset, cars);
             }
         });
     }
 
     @Override
     public void onDelete(CarDto carDto) {
-        dispatcher.execute(carService.delete(carDto.getId()),
-                new ErrorHandlerAsyncCallback<NoResult>(this) {
-                    @Override
-                    public void onSuccess(NoResult noResult) {
-                        fetchDataForDisplay();
+        dispatcher.execute(carService.delete(carDto.getId()), new ErrorHandlerAsyncCallback<Void>(this) {
+            @Override
+            public void onSuccess(Void nothing) {
+                fetchDataForDisplay();
 
-                        getView().setCarsCount(getView().getCarDisplay().getRowCount() - 1);
-                    }
-                });
+                getView().setCarsCount(getView().getCarDisplay().getRowCount() - 1);
+            }
+        });
     }
 
     @ProxyEvent
@@ -164,10 +159,10 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
         getView().initDataProvider();
 
-        dispatcher.execute(carService.getCarsCount(), new AbstractAsyncCallback<GetResult<NumberDto<Integer>>>() {
+        dispatcher.execute(carService.getCarsCount(), new AbstractAsyncCallback<Integer>() {
             @Override
-            public void onSuccess(GetResult<NumberDto<Integer>> result) {
-                getView().setCarsCount(result.getResult().getNumber());
+            public void onSuccess(Integer result) {
+                getView().setCarsCount(result);
             }
         });
     }
