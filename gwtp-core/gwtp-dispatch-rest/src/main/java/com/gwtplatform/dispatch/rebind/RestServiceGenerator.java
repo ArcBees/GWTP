@@ -33,6 +33,7 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.dispatch.rebind.type.ActionBinding;
+import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
 
 public class RestServiceGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/RestService.vm";
@@ -66,7 +67,7 @@ public class RestServiceGenerator extends AbstractVelocityGenerator {
         if (printWriter != null) {
             mergeTemplate(printWriter, TEMPLATE, implName);
         } else {
-            getLogger().debug("Serializer already generated. Returning.");
+            getLogger().debug("Service already generated. Returning.");
         }
     }
 
@@ -76,8 +77,7 @@ public class RestServiceGenerator extends AbstractVelocityGenerator {
     }
 
     @Override
-    protected void populateVelocityContext(VelocityContext velocityContext)
-            throws UnableToCompleteException {
+    protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
         velocityContext.put("serviceInterface", service);
         velocityContext.put("actionBindings", actionBindings);
     }

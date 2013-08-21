@@ -21,6 +21,7 @@ import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
@@ -29,11 +30,28 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  */
 public class DispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
+        private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
+                DefaultClientActionHandlerRegistry.class;
+
+        /**
+         * Specify an alternate client action handler registry.
+         *
+         * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
+         * @return a {@link Builder} object.
+         */
+        public Builder clientActionHandlerRegistry(
+                Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
+            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
+            return this;
+        }
+
         @Override
         public DispatchAsyncModule build() {
             return new DispatchAsyncModule(this);
         }
     }
+
+    private final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
 
     public DispatchAsyncModule() {
         this(new Builder());
@@ -41,12 +59,22 @@ public class DispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     private DispatchAsyncModule(Builder builder) {
         super(builder);
+
+        this.clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
+    }
+
+    @Override
+    protected void configure() {
+        super.configure();
+
+        bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
     }
 
     @Provides
     @Singleton
-    protected  DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
-            SecurityCookieAccessor secureSessionAccessor, ClientActionHandlerRegistry registry) {
+    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
+                                                 SecurityCookieAccessor secureSessionAccessor,
+                                                 ClientActionHandlerRegistry registry) {
         return new RpcDispatchAsync(exceptionHandler, secureSessionAccessor, registry);
     }
 }
