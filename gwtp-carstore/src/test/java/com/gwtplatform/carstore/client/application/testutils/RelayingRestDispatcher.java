@@ -22,40 +22,34 @@ import java.util.Map;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.TypeLiteral;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.NoResult;
-import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 
 /**
- * Class used to replace a real implementation of the Dispatcher. When executing
+ * Class used to replace a real implementation of the @{link RestDispatch}. When executing
  * a request for an action, a predefined result will be sent back immediately.
- *
- * To assign a result to an action, simply do: dispatcher.when({@link Action}
- * ).willReturn({@link Result});
- *
- * @author Christian Goudreau
+ * <p/>
+ * To assign a result to an action, simply do:
+ * <code>dispatcher.when({@link RestAction}).willReturn(<b>result</b>);</code>
  */
-public class RelayingDispatcher implements DispatchAsync {
-    private Map<TypeLiteral<? extends Action<?>>, Result> registry =
-            new HashMap<TypeLiteral<? extends Action<?>>, Result>();
+public class RelayingRestDispatcher implements RestDispatch {
+    private Map<TypeLiteral<? extends RestAction<?>>, Object> registry =
+            new HashMap<TypeLiteral<? extends RestAction<?>>, Object>();
 
-    private TypeLiteral<? extends Action<?>> currentAction = null;
+    private TypeLiteral<? extends RestAction<?>> currentAction = null;
 
     /**
      * This method must be used at least once before being able to use relaying
      * dispatcher. It will create an entry inside the registry and wait that the
      * use assign a result to it.
      *
-     * @param <A>
-     *            The {@link Action} type.
-     * @param action
-     *            The class definition of the {@link Action}.
-     * @return {@link RelayingDispatcher} instance.
+     * @param <A>    The {@link com.gwtplatform.dispatch.shared.rest.RestAction} type.
+     * @param action The class definition of the {@link com.gwtplatform.dispatch.shared.rest.RestAction}.
+     * @return {@link RelayingRestDispatcher} instance.
      */
-    public <A extends Action<?>> RelayingDispatcher given(TypeLiteral<A> action) {
-        registry.put(action, new NoResult());
+    public <A extends RestAction<?>> RelayingRestDispatcher given(TypeLiteral<A> action) {
+        registry.put(action, null);
 
         currentAction = action;
 
@@ -64,31 +58,22 @@ public class RelayingDispatcher implements DispatchAsync {
 
     /**
      * Once you've called at least one time {@link #given(Class)}, then calling
-     * this function will assign a {@link Result} to the last {@link Action} you
+     * this function will assign a <b>result</b> to the last {@link com.gwtplatform.dispatch.shared.rest.RestAction} you
      * assigned.
      *
-     * @param <R>
-     *            The {@link Result} type.
-     * @param result
-     *            the {@link Result} to add inside the registry.
+     * @param <R>    The result type.
+     * @param result the result to add inside the registry.
      */
-    public <R extends Result> void willReturn(R result) {
+    public <R> void willReturn(R result) {
         registry.put(currentAction, result);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public <A extends Action<R>, R extends Result> DispatchRequest execute(A action, AsyncCallback<R> callback) {
+    public <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback) {
         assert action instanceof ActionImpl;
 
         callback.onSuccess((R) registry.get(((ActionImpl) action).getTypeLiteral()));
-
-        return new CompletedDispatchRequest();
-    }
-
-    @Override
-    public <A extends Action<R>, R extends Result> DispatchRequest undo(A action, R result, AsyncCallback<Void> callback) {
-        callback.onSuccess(null);
 
         return new CompletedDispatchRequest();
     }

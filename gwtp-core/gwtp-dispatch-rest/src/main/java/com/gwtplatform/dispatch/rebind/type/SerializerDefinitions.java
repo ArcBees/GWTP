@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.gwtplatform.dispatch.rebind.GeneratorUtil;
+import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
 import com.gwtplatform.dispatch.shared.Result;
 
 public class SerializerDefinitions {

@@ -14,16 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rebind.event;
+package com.gwtplatform.dispatch.rebind.util;
 
-public class ChildSerializer {
-    private String serializerClassName;
+import javax.ws.rs.FormParam;
 
-    public ChildSerializer(String serializerClassName) {
-        this.serializerClassName = serializerClassName;
-    }
-
-    public String getSerializerClassName() {
-        return serializerClassName;
+public class FormParamValueResolver implements AnnotationValueResolver<FormParam> {
+    @Override
+    public String resolve(FormParam annotation) {
+        return annotation.value();
     }
 }
