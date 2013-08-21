@@ -41,11 +41,8 @@ import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -131,10 +128,10 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     public void onSave(final CarDto carDto) {
-        dispatcher.execute(carService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
+        dispatcher.execute(carService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<CarDto>(this) {
             @Override
-            public void onSuccess(GetResult<CarDto> result) {
-                onCarSaved(carDto, result.getResult());
+            public void onSuccess(CarDto newCar) {
+                onCarSaved(carDto, newCar);
             }
         });
     }
@@ -166,13 +163,12 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     protected void onReveal() {
-        dispatcher.execute(manufacturerService.getManufacturers(),
-                new AbstractAsyncCallback<GetResults<ManufacturerDto>>() {
-                    @Override
-                    public void onSuccess(GetResults<ManufacturerDto> result) {
-                        onGetManufacturerSuccess(result.getResults());
-                    }
-                });
+        dispatcher.execute(manufacturerService.getManufacturers(), new AbstractAsyncCallback<List<ManufacturerDto>>() {
+            @Override
+            public void onSuccess(List<ManufacturerDto> manufacturers) {
+                onGetManufacturerSuccess(manufacturers);
+            }
+        });
 
         Boolean createNew = placeManager.getCurrentPlaceRequest().matchesNameToken(NameTokens.newCar);
         List<ActionType> actions;
@@ -214,13 +210,12 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     private void onDeleteCar() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + carDto.getModel() + "?");
         if (confirm) {
-            dispatcher.execute(carService.delete(carDto.getId()),
-                    new ErrorHandlerAsyncCallback<NoResult>(this) {
-                        @Override
-                        public void onSuccess(NoResult noResult) {
-                            NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);
-                        }
-                    });
+            dispatcher.execute(carService.delete(carDto.getId()), new ErrorHandlerAsyncCallback<Void>(this) {
+                @Override
+                public void onSuccess(Void nothing) {
+                    NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);
+                }
+            });
         }
     }
 }

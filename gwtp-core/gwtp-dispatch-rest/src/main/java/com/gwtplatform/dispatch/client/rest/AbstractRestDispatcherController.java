@@ -14,22 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.shared.dispatch;
+package com.gwtplatform.dispatch.client.rest;
 
-import com.gwtplatform.carstore.shared.dto.Dto;
-import com.gwtplatform.dispatch.shared.Result;
+import org.jboss.errai.marshalling.client.api.MarshallerFramework;
 
-public class GetResult<T extends Dto> implements Result {
-    T result;
-
-    protected GetResult() {
-    }
-
-    public GetResult(T result) {
-        this.result = result;
-    }
-
-    public T getResult() {
-        return result;
+public abstract class AbstractRestDispatcherController implements RestDispatcherController {
+    @Override
+    public void onModuleLoad() {
+        MarshallerFramework.initializeDefaultSessionProvider();
     }
 }

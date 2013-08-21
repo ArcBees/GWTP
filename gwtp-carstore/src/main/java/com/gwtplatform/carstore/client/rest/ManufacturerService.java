@@ -16,40 +16,39 @@
 
 package com.gwtplatform.carstore.client.rest;
 
+import java.util.List;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestService;
 
 @Path(ResourcesPath.MANUFACTURER)
 public interface ManufacturerService extends RestService {
     @GET
-    RestAction<GetResults<ManufacturerDto>> getManufacturers();
+    RestAction<List<ManufacturerDto>> getManufacturers();
 
     @GET
     @Path(PathParameter.ID)
-    RestAction<GetResult<ManufacturerDto>> get(@PathParam(RestParameter.ID) Long id);
+    RestAction<ManufacturerDto> get(@PathParam(RestParameter.ID) Long id);
 
     @POST
-    RestAction<GetResult<ManufacturerDto>> saveOrCreate(ManufacturerDto manufacturerDto);
+    RestAction<ManufacturerDto> saveOrCreate(ManufacturerDto manufacturerDto);
 
     @DELETE
     @Path(PathParameter.ID)
-    RestAction<NoResult> delete(@PathParam(RestParameter.ID) Long id);
+    RestAction<Void> delete(@PathParam(RestParameter.ID) Long id);
 
     @GET
     @Path(ResourcesPath.RATING)
-    RestAction<GetResults<ManufacturerRatingDto>> getAverageRatings();
+    RestAction<List<ManufacturerRatingDto>> getAverageRatings();
 }
