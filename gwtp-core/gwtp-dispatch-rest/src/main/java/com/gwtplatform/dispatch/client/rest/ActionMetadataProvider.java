@@ -16,8 +16,7 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.util.Arrays;
-
+import com.google.common.base.Objects;
 import com.gwtplatform.dispatch.shared.Action;
 
 public interface ActionMetadataProvider {
@@ -25,7 +24,8 @@ public interface ActionMetadataProvider {
         private final Class<? extends Action> actionClass;
         private final MetadataType metadataType;
 
-        MetadataKey(Class<? extends Action> actionClass, MetadataType metadataType) {
+        MetadataKey(Class<? extends Action> actionClass,
+                    MetadataType metadataType) {
             this.actionClass = actionClass;
             this.metadataType = metadataType;
         }
@@ -36,7 +36,7 @@ public interface ActionMetadataProvider {
 
         @Override
         public int hashCode() {
-            return Arrays.hashCode(new Object[]{actionClass, metadataType});
+            return Objects.hashCode(actionClass, metadataType);
         }
 
         @Override

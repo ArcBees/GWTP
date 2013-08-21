@@ -33,9 +33,9 @@ public class GeneratorUtil {
     private final GeneratorContext generatorContext;
 
     @Inject
-    public GeneratorUtil(TypeOracle typeOracle,
-                         Logger logger,
-                         GeneratorContext generatorContext) {
+    GeneratorUtil(TypeOracle typeOracle,
+                  Logger logger,
+                  GeneratorContext generatorContext) {
         this.typeOracle = typeOracle;
         this.logger = logger;
         this.generatorContext = generatorContext;

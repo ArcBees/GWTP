@@ -43,13 +43,12 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
     private final Set<RegisterMetadataHolder> registeredMetadata = new HashSet<RegisterMetadataHolder>();
 
     @Inject
-    public ActionMetadataProviderGenerator(
-            TypeOracle typeOracle,
-            Logger logger,
-            Provider<VelocityContext> velocityContextProvider,
-            VelocityEngine velocityEngine,
-            GeneratorUtil generatorUtil,
-            EventBus eventBus) {
+    ActionMetadataProviderGenerator(TypeOracle typeOracle,
+                                    Logger logger,
+                                    Provider<VelocityContext> velocityContextProvider,
+                                    VelocityEngine velocityEngine,
+                                    GeneratorUtil generatorUtil,
+                                    EventBus eventBus) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
         eventBus.register(this);
