@@ -37,9 +37,9 @@ public class ServiceDefinitions {
     private final GeneratorUtil generatorUtil;
 
     @Inject
-    public ServiceDefinitions(Logger logger,
-                              TypeOracle typeOracle,
-                              GeneratorUtil generatorUtil)
+    ServiceDefinitions(Logger logger,
+                       TypeOracle typeOracle,
+                       GeneratorUtil generatorUtil)
             throws UnableToCompleteException {
         this.logger = logger;
         this.typeOracle = typeOracle;
