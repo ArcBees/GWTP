@@ -17,7 +17,6 @@
 package com.gwtplatform.carstore.shared.dispatch;
 
 import org.jboss.errai.common.client.api.annotations.Portable;
-import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
 
 import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
@@ -28,9 +27,12 @@ public class LogInResult {
     private CurrentUserDto currentUserDto;
     private String loggedInCookie;
 
-    public LogInResult(@MapsTo("actionType") ActionType actionType,
-                       @MapsTo("currentUserDto") CurrentUserDto currentUserDto,
-                       @MapsTo("loggedInCookie") String loggedInCookie) {
+    public LogInResult() {
+    }
+
+    public LogInResult(ActionType actionType,
+                       CurrentUserDto currentUserDto,
+                       String loggedInCookie) {
         this.actionType = actionType;
         this.currentUserDto = currentUserDto;
         this.loggedInCookie = loggedInCookie;
