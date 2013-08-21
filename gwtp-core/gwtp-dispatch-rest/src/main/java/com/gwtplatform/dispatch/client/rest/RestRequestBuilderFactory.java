@@ -16,28 +16,29 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
+import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
+import org.jboss.errai.marshalling.client.Marshalling;
+
+import com.google.common.collect.Maps;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.safehtml.shared.UriUtils;
-import com.google.gwt.user.client.rpc.SerializationException;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
-import static com.gwtplatform.dispatch.client.rest.SerializedType.BODY;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.BODY_CLASS;
 
-class RestRequestBuilderFactory {
-    private static final Map<HttpMethod, RequestBuilder.Method> HTTP_METHODS =
-            new EnumMap<HttpMethod, RequestBuilder.Method>(HttpMethod.class);
+public class RestRequestBuilderFactory {
+    private static final Map<HttpMethod, RequestBuilder.Method> HTTP_METHODS = Maps.newEnumMap(HttpMethod.class);
     private static final String CONTENT_TYPE = "Content-Type";
-
-    public static final String JSON_UTF8 = "application/json; charset=utf-8";
+    private static final String JSON_UTF8 = "application/json; charset=utf-8";
 
     static {
         HTTP_METHODS.put(HttpMethod.GET, RequestBuilder.GET);
@@ -47,12 +48,15 @@ class RestRequestBuilderFactory {
         HTTP_METHODS.put(HttpMethod.HEAD, RequestBuilder.HEAD);
     }
 
-    private final SerializerProvider serializerProvider;
+    private final ActionMetadataProvider metadataProvider;
     private final String baseUrl;
     private final String securityHeaderName;
 
-    RestRequestBuilderFactory(SerializerProvider serializerProvider, String baseUrl, String securityHeaderName) {
-        this.serializerProvider = serializerProvider;
+    @Inject
+    RestRequestBuilderFactory(ActionMetadataProvider metadataProvider,
+                              @RestApplicationPath String baseUrl,
+                              @XCSRFHeaderName String securityHeaderName) {
+        this.metadataProvider = metadataProvider;
         this.baseUrl = baseUrl;
         this.securityHeaderName = securityHeaderName;
     }
@@ -90,7 +94,7 @@ class RestRequestBuilderFactory {
             queryString = "?" + queryString;
         }
 
-        String path = buildPath(restAction.getServiceName(), restAction.getPathParams());
+        String path = buildPath(restAction.getPath(), restAction.getPathParams());
 
         return baseUrl + path + queryString;
     }
@@ -110,9 +114,9 @@ class RestRequestBuilderFactory {
 
         for (RestParameter param : params) {
             queryString.append("&")
-                    .append(param.getName())
-                    .append("=")
-                    .append(encode(param));
+                       .append(param.getName())
+                       .append("=")
+                       .append(encode(param));
         }
 
         if (queryString.length() != 0) {
@@ -126,17 +130,13 @@ class RestRequestBuilderFactory {
         return UriUtils.encode(value.getStringValue());
     }
 
-    private String getSerializedValue(Action<?> action, Object object) throws ActionException {
-        try {
-            Serializer<Object> serializer = serializerProvider.getSerializer(action.getClass(), BODY);
+    private String getSerializedValue(RestAction<?> action, Object object) throws ActionException {
+        Class<?> bodyClass = (Class<?>) metadataProvider.getValue(action, BODY_CLASS);
 
-            if (serializer == null) {
-                throw new ActionException("Unable to serialize request body. Serializer not found.");
-            }
-
-            return serializer.serialize(object);
-        } catch (SerializationException e) {
-            throw new ActionException("Unable to serialize request body.", e);
+        if (bodyClass == null || !Marshalling.canHandle(bodyClass)) {
+            throw new ActionException("Unable to serialize request body. No serializer found.");
+        } else {
+            return JacksonTransformer.toJackson(Marshalling.toJSON(object));
         }
     }
 }

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <module>
-    <inherits name="com.google.common.base.Base"/>
     <inherits name="com.gwtplatform.common.ClientsCommon"/>
     <inherits name="com.gwtplatform.dispatch.Dispatch"/>
-    <inherits name='com.gwtplatform.dispatch.DispatchShared'/>
+    <inherits name="com.google.common.base.Base"/>
+    <inherits name="com.google.common.collect.Collect"/>
+    <inherits name="com.google.gwt.inject.Inject"/>
 
     <inherits name="com.google.gwt.http.HTTP"/>
-    <inherits name="name.pehl.piriti.json.JSON"/>
+    <inherits name="org.jboss.errai.common.ErraiCommon"/>
+    <inherits name="org.jboss.errai.marshalling.ErraiMarshalling"/>
+    <inherits name="org.jboss.errai.enterprise.Jaxrs"/>
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
@@ -15,8 +18,10 @@
 
     <entry-point class='com.gwtplatform.dispatch.client.rest.RestDispatcherController'/>
 
+    <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
+
     <extend-configuration-property name="gin.ginjector.modules"
-                                value="com.gwtplatform.dispatch.client.rest.RestGinModule"/>
+            value="com.gwtplatform.dispatch.client.rest.RestGinModule"/>
 
     <generate-with class="com.gwtplatform.dispatch.rebind.VelocityGenerator">
         <when-type-is class="com.gwtplatform.dispatch.client.rest.RestDispatcherController"/>
