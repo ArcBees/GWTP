@@ -210,6 +210,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
 
         JParameterizedType parameterized = resultType.isParameterized();
         if (parameterized != null) {
+            // TODO: Print warning if any of the parameter type are parameterized
+
             if (isCollection(resultType) || isMap(resultType)) {
                 String parameterClass = formatClassStatement(parameterized.getTypeArgs()[0]);
                 eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), KEY_CLASS, parameterClass));
