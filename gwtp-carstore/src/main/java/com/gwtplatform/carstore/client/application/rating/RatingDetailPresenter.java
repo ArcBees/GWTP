@@ -39,11 +39,9 @@ import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -72,7 +70,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     public interface MyProxy extends ProxyPlace<RatingDetailPresenter> {
     }
 
-    private final DispatchAsync dispatcher;
+    private final RestDispatch dispatcher;
     private final CarService carService;
     private final RatingService ratingService;
     private final EditRatingMessages messages;
@@ -82,7 +80,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     RatingDetailPresenter(EventBus eventBus,
                           MyView view,
                           MyProxy proxy,
-                          DispatchAsync dispatcher,
+                          RestDispatch dispatcher,
                           CarService carService,
                           RatingService ratingService,
                           EditRatingMessages messages,
@@ -112,15 +110,14 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        dispatcher.execute(ratingService.saveOrCreate(ratingDto),
-                new ErrorHandlerAsyncCallback<GetResult<RatingDto>>(this) {
-                    @Override
-                    public void onSuccess(GetResult<RatingDto> result) {
-                        DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
-                                MessageStyle.SUCCESS));
-                        placeManager.revealPlace(new Builder().nameToken(NameTokens.getRating()).build());
-                    }
-                });
+        dispatcher.execute(ratingService.saveOrCreate(ratingDto), new ErrorHandlerAsyncCallback<RatingDto>(this) {
+            @Override
+            public void onSuccess(RatingDto savedRating) {
+                DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
+                        MessageStyle.SUCCESS));
+                placeManager.revealPlace(new Builder().nameToken(NameTokens.getRating()).build());
+            }
+        });
     }
 
     @Override
@@ -134,10 +131,10 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
         List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
-        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<GetResults<CarDto>>() {
+        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
             @Override
-            public void onSuccess(GetResults<CarDto> result) {
-                onGetCarsSuccess(result.getResults());
+            public void onSuccess(List<CarDto> cars) {
+                onGetCarsSuccess(cars);
             }
         });
     }

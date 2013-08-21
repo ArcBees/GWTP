@@ -20,7 +20,6 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
@@ -61,13 +60,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @author Brendan Doherty
  */
 public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
-    private static Boolean alreadyBound = false;
-    private static Class<? extends AbstractDispatchAsyncModule> boundType;
-
-    protected final Class<? extends ExceptionHandler> exceptionHandlerType;
-    protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
-    protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
-
     /**
      * /**
      * A {@link AbstractDispatchAsyncModule} builder.
@@ -81,8 +73,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     public abstract static class Builder {
         protected Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
         protected Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
-        protected Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
-                DefaultClientActionHandlerRegistry.class;
 
         /**
          * Constructs {@link AbstractDispatchAsyncModule} builder.
@@ -113,19 +103,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         }
 
         /**
-         * Specify an alternate client action handler registry.
-         *
-         * @param clientActionHandlerRegistryType
-         *         A {@link ClientActionHandlerRegistry} class.
-         * @return a {@link Builder} object.
-         */
-        public Builder clientActionHandlerRegistry(
-                Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
-            return this;
-        }
-
-        /**
          * Build the {@link AbstractDispatchAsyncModule}.
          *
          * @return The built {@link AbstractDispatchAsyncModule}.
@@ -133,10 +110,15 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         public abstract AbstractDispatchAsyncModule build();
     }
 
+    private static Boolean alreadyBound = false;
+    private static Class<? extends AbstractDispatchAsyncModule> boundType;
+
+    protected final Class<? extends ExceptionHandler> exceptionHandlerType;
+    protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
+
     protected AbstractDispatchAsyncModule(Builder builder) {
         this.exceptionHandlerType = builder.exceptionHandlerType;
         this.sessionAccessorType = builder.sessionAccessorType;
-        this.clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
     }
 
     @Override
@@ -144,14 +126,13 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         if (alreadyBound) {
             if (!boundType.equals(getClass())) {
                 throw new RuntimeException("You are trying to use more than one DispatchAsync implementation. " +
-                        boundType.getName() + " was already installed.");
+                                           boundType.getName() + " was already installed.");
             }
         } else {
             alreadyBound = true;
             boundType = getClass();
             bind(ExceptionHandler.class).to(exceptionHandlerType);
             bind(SecurityCookieAccessor.class).to(sessionAccessorType);
-            bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
         }
     }
 }
