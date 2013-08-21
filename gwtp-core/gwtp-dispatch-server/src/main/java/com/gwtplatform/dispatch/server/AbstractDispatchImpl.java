@@ -163,9 +163,7 @@ public abstract class AbstractDispatchImpl implements Dispatch {
         } catch (Exception e) {
             String newMessage = "Service exception executing action \"" + action.getClass().getSimpleName() + "\", " +
                     "" + e.toString();
-            ServiceException rethrown = new ServiceException(newMessage);
-            rethrown.initCause(e);
-            throw rethrown;
+            throw new ServiceException(newMessage, e);
         }
     }
 
