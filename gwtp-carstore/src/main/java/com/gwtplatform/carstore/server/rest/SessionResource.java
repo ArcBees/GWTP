@@ -64,10 +64,8 @@ public class SessionResource {
     }
 
     @DELETE
-    public Void logout() {
+    public void logout() {
         authenticator.logout();
-
-        return null;
     }
 
     @POST

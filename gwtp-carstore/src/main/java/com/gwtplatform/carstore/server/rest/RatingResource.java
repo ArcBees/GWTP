@@ -62,8 +62,7 @@ public class RatingResource {
 
     @Path(PathParameter.ID)
     @DELETE
-    public Void delete(@PathParam(RestParameter.ID) Long id) {
+    public void delete(@PathParam(RestParameter.ID) Long id) {
         ratingDao.delete(id);
-        return null;
     }
 }
