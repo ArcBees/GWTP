@@ -40,9 +40,7 @@ import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -104,10 +102,10 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
         if (!createNew) {
             Long id = Long.parseLong(param);
-            dispatcher.execute(manufacturerService.get(id), new AbstractAsyncCallback<GetResult<ManufacturerDto>>() {
+            dispatcher.execute(manufacturerService.get(id), new AbstractAsyncCallback<ManufacturerDto>() {
                 @Override
-                public void onSuccess(GetResult<ManufacturerDto> result) {
-                    currentManufacturer = result.getResult();
+                public void onSuccess(ManufacturerDto manufacturer) {
+                    currentManufacturer = manufacturer;
                     getView().edit(currentManufacturer);
                 }
             });
@@ -142,9 +140,9 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
         dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
-                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
+                new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
-                    public void onSuccess(GetResult<ManufacturerDto> result) {
+                    public void onSuccess(ManufacturerDto savedManufacturerDto) {
                         DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
                                 new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
                         placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
@@ -179,9 +177,9 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
         Boolean confirm = Window.confirm("Are you sure you want to delete " + currentManufacturer.getName() + "?");
         if (confirm) {
             dispatcher.execute(manufacturerService.delete(currentManufacturer.getId()),
-                    new ErrorHandlerAsyncCallback<NoResult>(this) {
+                    new ErrorHandlerAsyncCallback<Void>(this) {
                         @Override
-                        public void onSuccess(NoResult noResult) {
+                        public void onSuccess(Void nothing) {
                             placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
                         }
                     });
