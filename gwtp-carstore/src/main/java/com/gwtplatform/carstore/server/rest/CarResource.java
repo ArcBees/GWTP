@@ -74,8 +74,7 @@ public class CarResource {
 
     @Path(PathParameter.ID)
     @DELETE
-    public Void delete(@PathParam(RestParameter.ID) Long id) {
+    public void delete(@PathParam(RestParameter.ID) Long id) {
         carDao.delete(id);
-        return null;
     }
 }
