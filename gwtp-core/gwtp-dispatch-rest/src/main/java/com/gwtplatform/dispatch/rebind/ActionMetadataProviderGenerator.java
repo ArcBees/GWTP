@@ -32,10 +32,10 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.client.rest.ActionMetadataProvider;
-import com.gwtplatform.dispatch.client.rest.MetadataType;
 import com.gwtplatform.dispatch.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rebind.type.RegisterMetadataHolder;
 import com.gwtplatform.dispatch.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.shared.rest.MetadataType;
 
 public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rebind/ActionMetadataProvider.vm";

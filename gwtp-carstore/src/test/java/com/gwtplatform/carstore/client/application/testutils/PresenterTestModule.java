@@ -19,21 +19,21 @@ package com.gwtplatform.carstore.client.application.testutils;
 import org.jukito.JukitoModule;
 import org.jukito.TestSingleton;
 
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.AutobindDisable;
 
 /**
  * Base module to use while testing presenters. {@link AutomockingModule} is
  * used. Your configuration module must extends this class.
- * 
+ *
  * @author Christian Goudreau
  */
 public abstract class PresenterTestModule extends JukitoModule {
     @Override
     protected void configureTest() {
-        bindNamedMock(DispatchAsync.class, "mock").in(TestSingleton.class);
-        bind(DispatchAsync.class).to(RelayingDispatcher.class);
-        bind(RelayingDispatcher.class).in(TestSingleton.class);
+        bindNamedMock(RestDispatch.class, "mock").in(TestSingleton.class);
+        bind(RestDispatch.class).to(RelayingRestDispatcher.class);
+        bind(RelayingRestDispatcher.class).in(TestSingleton.class);
 
         configurePresenterTest();
 

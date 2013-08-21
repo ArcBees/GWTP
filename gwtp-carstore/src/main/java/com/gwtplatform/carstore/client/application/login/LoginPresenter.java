@@ -41,7 +41,7 @@ import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
 import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -69,7 +69,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     private static final Logger logger = Logger.getLogger(LoginPresenter.class.getName());
     private final PlaceManager placeManager;
-    private final DispatchAsync dispatchAsync;
+    private final RestDispatch dispatchAsync;
     private final SessionService sessionService;
     private final CurrentUser currentUser;
     private final LoginMessages messages;
@@ -79,7 +79,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                    MyView view,
                    MyProxy proxy,
                    PlaceManager placeManager,
-                   DispatchAsync dispatchAsync,
+                   RestDispatch dispatchAsync,
                    SessionService sessionService,
                    CurrentUser currentUser,
                    LoginMessages messages) {

@@ -18,15 +18,16 @@ package com.gwtplatform.dispatch.client.rest;
 
 import javax.inject.Inject;
 
+import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
 import org.jboss.errai.marshalling.client.Marshalling;
 
 import com.google.gwt.http.client.Response;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 
-import static com.gwtplatform.dispatch.client.rest.MetadataType.RESPONSE_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.KEY_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.RESPONSE_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.VALUE_CLASS;
 
 public class RestResponseDeserializer {
     private final ActionMetadataProvider metadataProvider;
@@ -36,8 +37,7 @@ public class RestResponseDeserializer {
         this.metadataProvider = metadataProvider;
     }
 
-    public <A extends RestAction<R>, R extends Result> R deserialize(A action, Response response)
-            throws ActionException {
+    public <A extends RestAction<R>, R> R deserialize(A action, Response response) throws ActionException {
         if (isSuccessStatusCode(response)) {
             return getDeserializedResponse(action, response);
         } else {
@@ -51,14 +51,29 @@ public class RestResponseDeserializer {
         return (statusCode >= 200 && statusCode < 300) || statusCode == 304;
     }
 
-    private <R extends Result> R getDeserializedResponse(Action<R> action, Response response) throws ActionException {
+    private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
         @SuppressWarnings("unchecked")
         Class<R> resultClass = (Class<R>) metadataProvider.getValue(action, RESPONSE_CLASS);
+        Class<?> keyClass = (Class<?>) metadataProvider.getValue(action, KEY_CLASS);
+        Class<?> valueClass = (Class<?>) metadataProvider.getValue(action, VALUE_CLASS);
+        R result = null;
 
-        if (resultClass == null || !Marshalling.canHandle(resultClass)) {
-            throw new ActionException("Unable to deserialize response. No serializer found.");
-        } else {
-            return Marshalling.fromJSON(response.getText(), resultClass);
+        if (resultClass != Void.class) {
+            if (resultClass != null && Marshalling.canHandle(resultClass)) {
+                String json = JacksonTransformer.fromJackson(response.getText());
+
+                if (valueClass != null) {
+                    result = Marshalling.fromJSON(json, resultClass, keyClass, valueClass);
+                } else if (keyClass != null) {
+                    result = Marshalling.fromJSON(json, resultClass, keyClass);
+                } else {
+                    result = Marshalling.fromJSON(json, resultClass);
+                }
+            } else {
+                throw new ActionException("Unable to deserialize response. No serializer found.");
+            }
         }
+
+        return result;
     }
 }

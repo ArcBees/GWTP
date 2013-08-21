@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,22 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.shared.dispatch;
+package com.gwtplatform.dispatch.shared.rest;
 
-import com.gwtplatform.carstore.shared.dto.Dto;
-import com.gwtplatform.dispatch.shared.Result;
-
-public class GetResult<T extends Dto> implements Result {
-    T result;
-
-    protected GetResult() {
-    }
-
-    public GetResult(T result) {
-        this.result = result;
-    }
-
-    public T getResult() {
-        return result;
-    }
+/**
+ * Indicates which part of the message the serialized type represents
+ */
+public enum MetadataType {
+    BODY_CLASS, KEY_CLASS, VALUE_CLASS, RESPONSE_CLASS
 }
