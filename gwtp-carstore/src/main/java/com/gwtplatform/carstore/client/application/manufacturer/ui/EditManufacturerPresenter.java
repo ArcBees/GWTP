@@ -27,7 +27,6 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.shared.rest.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -83,12 +82,12 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
         dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
-                new ErrorHandlerAsyncCallback<GetResult<ManufacturerDto>>(this) {
+                new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
-                    public void onSuccess(GetResult<ManufacturerDto> result) {
+                    public void onSuccess(ManufacturerDto savedManufacturer) {
                         DisplayMessageEvent.fire(EditManufacturerPresenter.this,
                                 new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
-                        ManufacturerAddedEvent.fire(EditManufacturerPresenter.this, result.getResult());
+                        ManufacturerAddedEvent.fire(EditManufacturerPresenter.this, savedManufacturer);
 
                         getView().hide();
                     }
