@@ -16,30 +16,28 @@
 
 package com.gwtplatform.dispatch.client.rest;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
 import org.jboss.errai.marshalling.client.Marshalling;
 
+import com.google.common.collect.Maps;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.safehtml.shared.UriUtils;
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
-import static com.gwtplatform.dispatch.client.rest.MetadataType.BODY_CLASS;
+import static com.gwtplatform.dispatch.shared.rest.MetadataType.BODY_CLASS;
 
 public class RestRequestBuilderFactory {
-    private static final Map<HttpMethod, RequestBuilder.Method> HTTP_METHODS =
-            new EnumMap<HttpMethod, RequestBuilder.Method>(HttpMethod.class);
+    private static final Map<HttpMethod, RequestBuilder.Method> HTTP_METHODS = Maps.newEnumMap(HttpMethod.class);
     private static final String CONTENT_TYPE = "Content-Type";
-
     private static final String JSON_UTF8 = "application/json; charset=utf-8";
 
     static {
@@ -96,7 +94,7 @@ public class RestRequestBuilderFactory {
             queryString = "?" + queryString;
         }
 
-        String path = buildPath(restAction.getServiceName(), restAction.getPathParams());
+        String path = buildPath(restAction.getPath(), restAction.getPathParams());
 
         return baseUrl + path + queryString;
     }
@@ -132,13 +130,13 @@ public class RestRequestBuilderFactory {
         return UriUtils.encode(value.getStringValue());
     }
 
-    private String getSerializedValue(Action<?> action, Object object) throws ActionException {
+    private String getSerializedValue(RestAction<?> action, Object object) throws ActionException {
         Class<?> bodyClass = (Class<?>) metadataProvider.getValue(action, BODY_CLASS);
 
         if (bodyClass == null || !Marshalling.canHandle(bodyClass)) {
             throw new ActionException("Unable to serialize request body. No serializer found.");
         } else {
-            return Marshalling.toJSON(object);
+            return JacksonTransformer.toJackson(Marshalling.toJSON(object));
         }
     }
 }
