@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.client.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestParameter;
@@ -27,7 +26,7 @@ import com.gwtplatform.dispatch.shared.rest.RestParameter;
 /**
  * TODO: Documentation.
  */
-public abstract class AbstractRestAction<R extends Result> implements RestAction<R> {
+public abstract class AbstractRestAction<R> implements RestAction<R> {
     private HttpMethod httpMethod;
     private String rawServicePath;
 
@@ -52,13 +51,8 @@ public abstract class AbstractRestAction<R extends Result> implements RestAction
     }
 
     @Override
-    public String getServiceName() {
+    public String getPath() {
         return rawServicePath;
-    }
-
-    @Override
-    public boolean isSecured() {
-        return false;
     }
 
     @Override

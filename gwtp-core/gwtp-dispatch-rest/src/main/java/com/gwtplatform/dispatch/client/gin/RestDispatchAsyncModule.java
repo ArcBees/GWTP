@@ -16,27 +16,34 @@
 
 package com.gwtplatform.dispatch.client.gin;
 
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
-import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
-import com.gwtplatform.dispatch.client.rest.SerializerProvider;
-import com.gwtplatform.dispatch.client.rest.XCSRFHeaderName;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
+import javax.inject.Singleton;
 
-/**
- * An implementation of {@link AbstractDispatchAsyncModule} that uses HTTP REST calls.
- * <p/>
- * Warning: This is still a work in progress and subject to many changes.
- */
+import com.gwtplatform.dispatch.client.rest.ActionMetadataProvider;
+import com.gwtplatform.dispatch.client.rest.RestDispatchAsync;
+import com.gwtplatform.dispatch.client.rest.RestRequestBuilderFactory;
+import com.gwtplatform.dispatch.client.rest.RestResponseDeserializer;
+import com.gwtplatform.dispatch.client.rest.XCSRFHeaderName;
+import com.gwtplatform.dispatch.client.rest.actionhandler.ClientRestActionHandlerRegistry;
+import com.gwtplatform.dispatch.client.rest.actionhandler.DefaultClientRestActionHandlerRegistry;
+import com.gwtplatform.dispatch.shared.rest.RestDispatch;
+
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        protected String xcsrfTokenHeaderName = "X-CSRF-Token";
+        private String xcsrfTokenHeaderName = "X-CSRF-Token";
+        private Class<? extends ClientRestActionHandlerRegistry> clientActionHandlerRegistryType =
+                DefaultClientRestActionHandlerRegistry.class;
 
-        public Builder() {
+        /**
+         * Specify an alternate client action handler registry.
+         *
+         * @param clientActionHandlerRegistryType
+         *         A {@link ClientRestActionHandlerRegistry} class.
+         * @return a {@link Builder} object.
+         */
+        public Builder clientActionHandlerRegistry(
+                Class<? extends ClientRestActionHandlerRegistry> clientActionHandlerRegistryType) {
+            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
+            return this;
         }
 
         public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
@@ -50,7 +57,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         }
     }
 
-    private String xcsrfTokenHeaderName;
+    private final String xcsrfTokenHeaderName;
+    private final Class<? extends ClientRestActionHandlerRegistry> clientActionHandlerRegistryType;
 
     public RestDispatchAsyncModule() {
         this(new Builder());
@@ -59,6 +67,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     private RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
+        clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
         xcsrfTokenHeaderName = builder.xcsrfTokenHeaderName;
     }
 
@@ -67,19 +76,12 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         super.configure();
 
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
-        bind(SerializerProvider.class).asEagerSingleton();
-    }
 
-    @Provides
-    @Singleton
-    protected DispatchAsync provideDispatchAsync(SerializerProvider serializerProvider,
-            ExceptionHandler exceptionHandler,
-            ClientActionHandlerRegistry clientActionHandlerRegistry,
-            SecurityCookieAccessor securityCookieAccessor,
-            @RestApplicationPath String applicationPath,
-            @XCSRFHeaderName String headerName) {
+        bind(ClientRestActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
+        bind(ActionMetadataProvider.class).asEagerSingleton();
+        bind(RestRequestBuilderFactory.class).in(Singleton.class);
+        bind(RestResponseDeserializer.class).in(Singleton.class);
 
-        return new RestDispatchAsync(exceptionHandler, securityCookieAccessor, clientActionHandlerRegistry,
-                serializerProvider, applicationPath, headerName);
+        bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
 }

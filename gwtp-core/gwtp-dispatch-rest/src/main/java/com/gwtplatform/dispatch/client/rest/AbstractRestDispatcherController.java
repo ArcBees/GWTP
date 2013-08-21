@@ -14,24 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.shared.dto;
+package com.gwtplatform.dispatch.client.rest;
 
-public class NumberDto<T extends Number> implements Dto {
-    private T number;
+import org.jboss.errai.marshalling.client.api.MarshallerFramework;
 
-    protected NumberDto() {
-        // Needed for serialization
-    }
-
-    public NumberDto(T number) {
-        this.number = number;
-    }
-
-    public T getNumber() {
-        return number;
-    }
-
-    public void setNumber(T number) {
-        this.number = number;
+public abstract class AbstractRestDispatcherController implements RestDispatcherController {
+    @Override
+    public void onModuleLoad() {
+        MarshallerFramework.initializeDefaultSessionProvider();
     }
 }
