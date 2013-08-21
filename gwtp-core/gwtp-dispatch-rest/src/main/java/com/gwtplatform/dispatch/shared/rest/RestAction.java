@@ -18,10 +18,9 @@ package com.gwtplatform.dispatch.shared.rest;
 
 import java.util.List;
 
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+public interface RestAction<R> {
+    String getPath();
 
-public interface RestAction<R extends Result> extends Action<R> {
     HttpMethod getHttpMethod();
 
     List<RestParameter> getPathParams();
