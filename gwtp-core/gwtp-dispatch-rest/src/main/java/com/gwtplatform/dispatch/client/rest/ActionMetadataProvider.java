@@ -17,20 +17,21 @@
 package com.gwtplatform.dispatch.client.rest;
 
 import com.google.common.base.Objects;
-import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.shared.rest.MetadataType;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
 
 public interface ActionMetadataProvider {
     class MetadataKey {
-        private final Class<? extends Action> actionClass;
+        private final Class<? extends RestAction> actionClass;
         private final MetadataType metadataType;
 
-        MetadataKey(Class<? extends Action> actionClass,
+        MetadataKey(Class<? extends RestAction> actionClass,
                     MetadataType metadataType) {
             this.actionClass = actionClass;
             this.metadataType = metadataType;
         }
 
-        public static MetadataKey create(Class<? extends Action> actionClass, MetadataType metadataType) {
+        public static MetadataKey create(Class<? extends RestAction> actionClass, MetadataType metadataType) {
             return new MetadataKey(actionClass, metadataType);
         }
 
@@ -64,5 +65,5 @@ public interface ActionMetadataProvider {
      * @param metadataType The kind of metadata to retrieve.
      * @return The stored value for the given parameters or <code>null</code> if there is no match.
      */
-    Object getValue(Action<?> action, MetadataType metadataType);
+    Object getValue(RestAction<?> action, MetadataType metadataType);
 }

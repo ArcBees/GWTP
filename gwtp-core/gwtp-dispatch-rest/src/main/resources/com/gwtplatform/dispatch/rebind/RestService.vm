@@ -1,7 +1,7 @@
 package ${package};
 
-import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.rest.HttpMethod;
+import com.gwtplatform.dispatch.shared.rest.RestAction;
 import ${serviceInterface.qualifiedSourceName};
 
 public class ${implName} implements ${serviceInterface.name} {
@@ -13,7 +13,7 @@ public class ${implName} implements ${serviceInterface.name} {
 #set($paramsValues = "${paramsValues}${param.name}#commaIfNeeded(${action.getParameters()})")
 #end
     @Override
-    public Action<${action.resultClass}> ${action.methodName}($paramsDef) {
+    public RestAction<${action.resultClass}> ${action.methodName}($paramsDef) {
         return new ${action.actionClass}(${paramsValues});
     }
 #end
