@@ -46,21 +46,22 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
  */
 public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet implements DispatchService {
-
-    private static final String noSecurityCookieMessage = "You have to define a security cookie in order to use " +
-            "secured actions. See com.gwtplatform.dispatch.shared.SecurityCookie for details.";
-
     private static final long serialVersionUID = -4753225025940949024L;
+    private static final String noSecurityCookieMessage = "You have to define a security cookie in order to use " +
+                                                          "secured actions. See com.gwtplatform.dispatch.shared" +
+                                                          ".SecurityCookie for details.";
     private static final String xsrfAttackMessage = "Cookie provided by RPC doesn't match request cookie, " +
-            "aborting action, possible XSRF attack. (Maybe you forgot to set the security cookie?)";
+                                                    "aborting action, possible XSRF attack. (Maybe you forgot to set " +
+                                                    "the security cookie?)";
 
     protected final Dispatch dispatch;
     protected final Logger logger;
 
     protected RequestProvider requestProvider;
 
-    protected AbstractDispatchServiceImpl(final Logger logger, final Dispatch dispatch,
-            RequestProvider requestProvider) {
+    protected AbstractDispatchServiceImpl(Logger logger,
+                                          Dispatch dispatch,
+                                          RequestProvider requestProvider) {
         this.logger = logger;
         this.dispatch = dispatch;
         this.requestProvider = requestProvider;
@@ -84,28 +85,26 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
             return dispatch.execute(action);
         } catch (ActionException e) {
             if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, "Action exception while executing " + action.getClass().getName() + ": " +
-                        e.getMessage(), e);
+                String newMessage = "Action exception while executing " + action.getClass().getName() + ": " +
+                                    e.getMessage();
+                logger.log(Level.WARNING, newMessage, e);
             }
 
-            e.initCause(null);
-            throw e;
+            throw new ActionException(e.getMessage());
         } catch (ServiceException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Service exception while executing " + action.getClass().getName() + ": " +
-                        e.getMessage(), e);
+                                          e.getMessage(), e);
             }
 
-            e.initCause(null);
-            throw e;
+            throw new ServiceException(e.getMessage());
         } catch (RuntimeException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Unexpected exception while executing " + action.getClass().getName() + ": " +
-                        "" + e.getMessage(), e);
+                                          "" + e.getMessage(), e);
             }
 
-            e.initCause(null);
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -125,18 +124,15 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
         } catch (ActionException e) {
             logger.warning("Action exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
 
-            e.initCause(null);
-            throw e;
+            throw new ActionException(e.getMessage());
         } catch (ServiceException e) {
             logger.warning("Service exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
 
-            e.initCause(null);
-            throw e;
+            throw new ServiceException(e.getMessage());
         } catch (RuntimeException e) {
             logger.warning("Unexpected exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
 
-            e.initCause(null);
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -159,7 +155,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
 
         if (cookieSentByRPC == null) {
             logger.info("No cookie sent by client in RPC. (Did you forget to bind the security cookie client-side? Or" +
-                    " it could be an attack.)");
+                        " it could be an attack.)");
             return false;
         }
 
