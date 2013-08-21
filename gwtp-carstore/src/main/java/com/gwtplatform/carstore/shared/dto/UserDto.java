@@ -16,6 +16,9 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
+import org.jboss.errai.common.client.api.annotations.Portable;
+
+@Portable
 public class UserDto extends BaseEntity {
     private String username;
     private String hashPassword;

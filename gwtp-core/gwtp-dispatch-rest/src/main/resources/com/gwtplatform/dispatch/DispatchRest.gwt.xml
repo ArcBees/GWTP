@@ -10,12 +10,15 @@
     <inherits name="com.google.gwt.http.HTTP"/>
     <inherits name="org.jboss.errai.common.ErraiCommon"/>
     <inherits name="org.jboss.errai.marshalling.ErraiMarshalling"/>
+    <inherits name="org.jboss.errai.enterprise.Jaxrs"/>
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
     <source path='shared'/>
 
     <entry-point class='com.gwtplatform.dispatch.client.rest.RestDispatcherController'/>
+
+    <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
 
     <extend-configuration-property name="gin.ginjector.modules"
             value="com.gwtplatform.dispatch.client.rest.RestGinModule"/>

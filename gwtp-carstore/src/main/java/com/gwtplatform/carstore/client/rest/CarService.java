@@ -16,6 +16,8 @@
 
 package com.gwtplatform.carstore.client.rest;
 
+import java.util.List;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,34 +25,30 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.carstore.shared.dto.NumberDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.NoResult;
 import com.gwtplatform.dispatch.shared.rest.RestAction;
 import com.gwtplatform.dispatch.shared.rest.RestService;
 
 @Path(ResourcesPath.CAR)
 public interface CarService extends RestService {
     @GET
-    RestAction<GetResults<CarDto>> getCars();
+    RestAction<List<CarDto>> getCars();
 
     @GET
-    RestAction<GetResults<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
+    RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
                                            @QueryParam(RestParameter.LIMIT) int limit);
 
     @GET
     @Path(ResourcesPath.COUNT)
-    RestAction<GetResult<NumberDto<Integer>>> getCarsCount();
+    RestAction<Integer> getCarsCount();
 
     @POST
-    RestAction<GetResult<CarDto>> saveOrCreate(CarDto carDto);
+    RestAction<CarDto> saveOrCreate(CarDto carDto);
 
     @DELETE
     @Path(PathParameter.ID)
-    RestAction<NoResult> delete(@PathParam(RestParameter.ID) Long carId);
+    RestAction<Void> delete(@PathParam(RestParameter.ID) Long carId);
 }
