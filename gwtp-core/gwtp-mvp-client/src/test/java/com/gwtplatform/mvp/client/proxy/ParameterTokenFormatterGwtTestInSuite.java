@@ -21,10 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
+
 import com.google.gwt.http.client.URL;
 import com.google.gwt.junit.client.GWTTestCase;
-
-import junit.framework.Assert;
 
 /**
  * Unit tests for {@link ParameterTokenFormatter}.
