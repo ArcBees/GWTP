@@ -16,7 +16,7 @@
 
 package com.gwtplatform.tester;
 
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
+import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler;
 
 /**
  * This is the interface that define the map of {@link com.gwtplatform.dispatch.shared.Action} to

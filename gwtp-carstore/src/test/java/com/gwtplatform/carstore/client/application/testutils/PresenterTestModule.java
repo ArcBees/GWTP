@@ -19,7 +19,7 @@ package com.gwtplatform.carstore.client.application.testutils;
 import org.jukito.JukitoModule;
 import org.jukito.TestSingleton;
 
-import com.gwtplatform.dispatch.shared.rest.RestDispatch;
+import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.AutobindDisable;
 
 /**
