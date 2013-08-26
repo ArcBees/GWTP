@@ -25,7 +25,7 @@ import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public class CarServiceImpl implements CarService {
     @Override

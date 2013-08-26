@@ -92,12 +92,12 @@ import java.lang.annotation.Target;
  * <p/>
  * {@code isSecured} Specifies the value that the generated isSecured() method
  * should return. Defaults to true if not specified. See
- * {@link com.gwtplatform.dispatch.shared.Action} for more details.
+ * {@link com.gwtplatform.dispatch.rpc.shared.Action} for more details.
  * <p/>
  * {@code serviceName} Specifies the value that the generated getServiceName()
  * method should return. Defaults to Action.DEFAULT_SERVICE_NAME +
  * "YourClassName" if not specified. See
- * {@link com.gwtplatform.dispatch.shared.Action} for more details.
+ * {@link com.gwtplatform.dispatch.rpc.shared.Action} for more details.
  * <p/>
  * {@code extraActionInterfaces} A comma separated list of fully qualified
  * interfaces that the Action class will implement. Each of the
