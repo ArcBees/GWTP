@@ -26,6 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.gwtplatform.carstore.server.dao.ManufacturerDao;
 import com.gwtplatform.carstore.server.dao.RatingDao;
@@ -34,6 +35,7 @@ import com.gwtplatform.carstore.server.dao.domain.Rating;
 import com.gwtplatform.carstore.server.service.ReportService;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
@@ -55,30 +57,41 @@ public class ManufacturerResource {
     }
 
     @GET
-    public List<ManufacturerDto> getManufacturers() {
-        return Manufacturer.createDto(manufacturerDao.getAll());
+    public Response getManufacturers() {
+        List<ManufacturerDto> manufacturerDtos = Manufacturer.createDto(manufacturerDao.getAll());
+
+        return Response.ok(manufacturerDtos).build();
     }
 
     @Path(PathParameter.ID)
     @GET
-    public ManufacturerDto get(@PathParam(RestParameter.ID) Long id) {
-        return Manufacturer.createDto(manufacturerDao.get(id));
+    public Response get(@PathParam(RestParameter.ID) Long id) {
+        ManufacturerDto manufacturerDto = Manufacturer.createDto(manufacturerDao.get(id));
+
+        return Response.ok(manufacturerDto).build();
     }
 
     @POST
-    public ManufacturerDto saveOrCreate(ManufacturerDto manufacturerDto) {
-        return Manufacturer.createDto(manufacturerDao.put(Manufacturer.create(manufacturerDto)));
+    public Response saveOrCreate(ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer = manufacturerDao.put(Manufacturer.create(manufacturerDto));
+
+        return Response.ok(Manufacturer.createDto(manufacturer)).build();
     }
 
     @Path(PathParameter.ID)
     @DELETE
-    public void delete(@PathParam(RestParameter.ID) Long id) {
+    public Response delete(@PathParam(RestParameter.ID) Long id) {
         manufacturerDao.delete(id);
+
+        return Response.ok().build();
     }
 
     @Path(ResourcesPath.RATING)
     @GET
-    public List<ManufacturerRatingDto> getAverageRatings() {
-        return reportService.getAverageCarRatings(Rating.createDto(ratingDao.getAll()));
+    public Response getAverageRatings() {
+        List<RatingDto> ratingDtos = Rating.createDto(ratingDao.getAll());
+        List<ManufacturerRatingDto> averageCarRatings = reportService.getAverageCarRatings(ratingDtos);
+
+        return Response.ok(averageCarRatings).build();
     }
 }
