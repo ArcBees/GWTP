@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.inject.TypeLiteral;
-import com.gwtplatform.dispatch.shared.rest.HttpMethod;
-import com.gwtplatform.dispatch.shared.rest.RestAction;
-import com.gwtplatform.dispatch.shared.rest.RestParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 @SuppressWarnings("GwtInconsistentSerializableClass")
 public class ActionImpl<T> implements RestAction<T> {

@@ -18,7 +18,7 @@ package com.gwtplatform.carstore.client.gin;
 
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.security.SecurityModule;
-import com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule;
+import com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
