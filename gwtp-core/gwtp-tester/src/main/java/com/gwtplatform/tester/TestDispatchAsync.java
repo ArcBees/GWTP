@@ -25,16 +25,16 @@ import com.google.inject.Binding;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
-import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
-import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.DispatchService;
-import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.rpc.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.rpc.client.DelegatingDispatchRequest;
+import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler;
+import com.gwtplatform.dispatch.rpc.client.actionhandler.ExecuteCommand;
+import com.gwtplatform.dispatch.rpc.client.actionhandler.UndoCommand;
+import com.gwtplatform.dispatch.rpc.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.rpc.shared.DispatchService;
+import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
  * This class is an implementation of {@link DispatchAsync} for use with test
@@ -69,8 +69,8 @@ public class TestDispatchAsync implements DispatchAsync {
 
         clientActionHandlers = new HashMap<Class<?>, ClientActionHandler<?, ?>>();
 
-        List<Binding<MockClientActionHandlerMap>> bindings = injector.findBindingsByType(TypeLiteral.get
-                (MockClientActionHandlerMap.class));
+        List<Binding<MockClientActionHandlerMap>> bindings = injector.findBindingsByType(
+                TypeLiteral.get(MockClientActionHandlerMap.class));
         for (Binding<MockClientActionHandlerMap> binding : bindings) {
             MockClientActionHandlerMap mapping = binding.getProvider().get();
             clientActionHandlers.put(mapping.getActionClass(),

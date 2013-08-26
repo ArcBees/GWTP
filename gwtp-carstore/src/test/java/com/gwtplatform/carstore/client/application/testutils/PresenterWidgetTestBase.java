@@ -19,7 +19,7 @@ package com.gwtplatform.carstore.client.application.testutils;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 
 /**
  * Basic configuration for PresenterWidgetTest, you test must extends this

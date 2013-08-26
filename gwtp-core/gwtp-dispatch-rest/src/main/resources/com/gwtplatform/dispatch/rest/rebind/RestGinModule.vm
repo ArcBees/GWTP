@@ -1,0 +1,23 @@
+package ${package};
+
+import javax.inject.Singleton;
+
+import com.google.gwt.inject.client.AbstractGinModule;
+import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
+import com.gwtplatform.dispatch.rest.client.ActionMetadataProviderImpl;
+
+#foreach (${service} in ${serviceDefinitions.getServices()})
+import ${service.qualifiedSourceName};
+import ${service.qualifiedSourceName.replace("shared", "client")}${suffix};
+#end
+
+public class ${implName} extends AbstractGinModule {
+    @Override
+    protected void configure() {
+        bind(ActionMetadataProvider.class).to(ActionMetadataProviderImpl.class);
+
+#foreach (${service} in ${serviceDefinitions.getServices()})
+        bind(${service.name}.class).to(${service.name}${suffix}.class).in(Singleton.class);
+#end
+    }
+}
