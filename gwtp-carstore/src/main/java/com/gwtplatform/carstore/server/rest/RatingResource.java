@@ -26,6 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.domain.Rating;
@@ -45,24 +46,32 @@ public class RatingResource {
     }
 
     @GET
-    public List<RatingDto> getRatings() {
-        return Rating.createDto(ratingDao.getAll());
+    public Response getRatings() {
+        List<RatingDto> ratingDtos = Rating.createDto(ratingDao.getAll());
+
+        return Response.ok(ratingDtos).build();
     }
 
     @Path(PathParameter.ID)
     @GET
-    public RatingDto get(@PathParam(RestParameter.ID) Long id) {
-        return Rating.createDto(ratingDao.get(id));
+    public Response get(@PathParam(RestParameter.ID) Long id) {
+        RatingDto ratingDto = Rating.createDto(ratingDao.get(id));
+
+        return Response.ok(ratingDto).build();
     }
 
     @POST
-    public RatingDto saveOrCreate(RatingDto ratingDto) {
-        return Rating.createDto(ratingDao.put(Rating.create(ratingDto)));
+    public Response saveOrCreate(RatingDto ratingDto) {
+        Rating rating = ratingDao.put(Rating.create(ratingDto));
+
+        return Response.ok(Rating.createDto(rating)).build();
     }
 
     @Path(PathParameter.ID)
     @DELETE
-    public void delete(@PathParam(RestParameter.ID) Long id) {
+    public Response delete(@PathParam(RestParameter.ID) Long id) {
         ratingDao.delete(id);
+
+        return Response.ok().build();
     }
 }

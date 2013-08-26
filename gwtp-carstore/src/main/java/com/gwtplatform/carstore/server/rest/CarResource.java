@@ -28,6 +28,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.domain.Car;
@@ -52,29 +53,39 @@ public class CarResource {
     }
 
     @GET
-    public List<CarDto> getCars(@DefaultValue(DEFAULT_OFFSET) @QueryParam(RestParameter.OFFSET) int offset,
-                                @DefaultValue(DEFAULT_LIMIT) @QueryParam(RestParameter.LIMIT) int limit) {
+    public Response getCars(@DefaultValue(DEFAULT_OFFSET) @QueryParam(RestParameter.OFFSET) int offset,
+                            @DefaultValue(DEFAULT_LIMIT) @QueryParam(RestParameter.LIMIT) int limit) {
+        List<CarDto> cars;
+
         if (offset == INT_DEFAULT_OFFSET && limit == INT_DEFAULT_LIMIT) {
-            return Car.createDto(carDao.getAll());
+            cars = Car.createDto(carDao.getAll());
         } else {
-            return Car.createDto(carDao.getSome(offset, limit));
+            cars = Car.createDto(carDao.getSome(offset, limit));
         }
+
+        return Response.ok(cars).build();
     }
 
     @GET
     @Path(ResourcesPath.COUNT)
-    public Integer getCarsCount() {
-        return carDao.countAll();
+    public Response getCarsCount() {
+        Integer carsCount = carDao.countAll();
+
+        return Response.ok(carsCount).build();
     }
 
     @POST
-    public CarDto saveOrCreate(CarDto carDto) {
-        return Car.createDto(carDao.put(Car.create(carDto)));
+    public Response saveOrCreate(CarDto carDto) {
+        Car car = carDao.put(Car.create(carDto));
+
+        return Response.ok(Car.createDto(car)).build();
     }
 
     @Path(PathParameter.ID)
     @DELETE
-    public void delete(@PathParam(RestParameter.ID) Long id) {
+    public Response delete(@PathParam(RestParameter.ID) Long id) {
         carDao.delete(id);
+
+        return Response.ok().build();
     }
 }
