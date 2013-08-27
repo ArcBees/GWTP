@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,20 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.client;
 
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * An implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} that is used in conjunction with
- * {@link com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler ClientActionHandler}s.
+ * An implementation of {@link com.gwtplatform.dispatch.shared.DispatchRequest} that is used in conjunction with
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s.
  * <p/>
  * As the ClientActionHandler may be provided asynchronously, the
  * {@link ClientActionHandlerDispatchRequest} will initially not contain an
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest}.
- * Once the {@link com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler ClientActionHandler} is
+ * {@link com.gwtplatform.dispatch.shared.DispatchRequest}.
+ * Once the {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler} is
  * executed, this be populated with a {@link DelegatingDispatchRequest} by
- * calling {@link #setDelegate(com.gwtplatform.dispatch.rpc.shared.DispatchRequest)}.
+ * calling {@link #setDelegate(com.gwtplatform.dispatch.shared.DispatchRequest)}.
  *
  * @author Brendan Doherty
  */

@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * Instances of this interface will handle specific types of {@link com.gwtplatform.dispatch.rest.shared.RestAction}

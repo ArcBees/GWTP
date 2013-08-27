@@ -25,16 +25,16 @@ import com.google.inject.Binding;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
-import com.gwtplatform.dispatch.rpc.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.DelegatingDispatchRequest;
+import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * This class is an implementation of {@link DispatchAsync} for use with test

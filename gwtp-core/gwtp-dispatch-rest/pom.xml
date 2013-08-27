@@ -35,13 +35,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-rpc-client</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
-            <scope>compile</scope>
+            <artifactId>gwtp-dispatch-client-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>

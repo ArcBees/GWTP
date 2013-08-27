@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.rpc.server.actionhandler;
 
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * Instances of this interface will handle specific types of {@link Action}
@@ -46,8 +46,9 @@ public interface ActionHandler<A extends Action<R>, R extends Result> {
      * @param action  The action.
      * @param context The {@link ExecutionContext}.
      * @return The {@link Result}.
-     * @throws com.gwtplatform.dispatch.rpc.shared.ActionException if there is a problem performing the specified
-     *                         action.
+     * @throws com.gwtplatform.dispatch.rpc.shared.ActionException
+     *          if there is a problem performing the specified
+     *          action.
      */
     R execute(A action, ExecutionContext context) throws ActionException;
 

@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.rpc.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * The interface that {@link ClientActionHandler}s use to send the action to

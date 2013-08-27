@@ -24,10 +24,10 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerV
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
 import com.gwtplatform.dispatch.rpc.shared.UnsupportedActionException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * This is the server-side implementation of the {@link Dispatch} service with an arbitrary action type, for which the

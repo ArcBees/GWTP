@@ -22,7 +22,7 @@ import javax.inject.Singleton;
 import javax.servlet.http.HttpSession;
 
 import com.gwtplatform.dispatch.rpc.server.AbstractHttpSessionSecurityCookieFilter;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookie;
+import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
  * This filter will automatically inject a security cookie inside the request the first time the page is loaded. This

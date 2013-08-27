@@ -25,19 +25,19 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
+import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandler;
 import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
-import com.gwtplatform.dispatch.rpc.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.ExceptionHandler;
-import com.gwtplatform.dispatch.rpc.client.ExceptionHandler.Status;
-import com.gwtplatform.dispatch.rpc.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.shared.ActionException;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * TODO: Documentation.

@@ -24,7 +24,7 @@ import org.jboss.errai.marshalling.client.Marshalling;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 public class RestResponseDeserializer {
     private final ActionMetadataProvider metadataProvider;

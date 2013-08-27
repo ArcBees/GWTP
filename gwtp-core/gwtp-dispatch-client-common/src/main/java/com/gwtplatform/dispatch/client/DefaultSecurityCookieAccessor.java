@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,12 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.Cookies;
 import com.google.inject.Inject;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookie;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.shared.SecurityCookie;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This class provides access to the session id client side by looking into a

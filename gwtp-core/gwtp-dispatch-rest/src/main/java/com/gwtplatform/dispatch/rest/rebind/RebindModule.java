@@ -36,7 +36,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
-import com.gwtplatform.dispatch.rest.rebind.type.SerializerDefinitions;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
 /**
@@ -94,7 +93,6 @@ public class RebindModule extends AbstractModule {
     protected void configure() {
         bindConstant().annotatedWith(VelocityProperties.class).to(VELOCITY_PROPERTIES);
 
-        bind(SerializerDefinitions.class).in(Singleton.class);
         bind(GeneratorUtil.class).in(Singleton.class);
         bind(EventBus.class).in(Singleton.class);
 

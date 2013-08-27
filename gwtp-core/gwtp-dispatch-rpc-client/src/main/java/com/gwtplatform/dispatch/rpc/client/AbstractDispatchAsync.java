@@ -18,6 +18,8 @@ package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerMismatchException;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerRegistry;
@@ -25,9 +27,9 @@ import com.gwtplatform.dispatch.rpc.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
 import com.gwtplatform.dispatch.rpc.shared.Result;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 public abstract class AbstractDispatchAsync implements DispatchAsync {
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;
