@@ -11,13 +11,13 @@
         <version>1.0.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gwtp-dispatch-client-common</artifactId>
+    <artifactId>gwtp-dispatch-common-client</artifactId>
     <name>GWTP Dispatch, Common Client Files</name>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-shared-common</artifactId>
+            <artifactId>gwtp-dispatch-common-shared</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
