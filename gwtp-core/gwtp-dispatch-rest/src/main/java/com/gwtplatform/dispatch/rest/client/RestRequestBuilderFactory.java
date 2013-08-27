@@ -31,7 +31,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
 

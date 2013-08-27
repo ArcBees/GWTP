@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,18 +14,18 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.http.client.Request;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * An implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} that is an adapter for
- * {@link Request}.
+ * An implementation of {@link com.gwtplatform.dispatch.shared.DispatchRequest} that is an adapter for
+ * {@link com.google.gwt.http.client.Request}.
  * <p/>
  * If the code that requested the command to be executed chooses to cancel the
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} and the {@link Request} that has been passed is still
- * pending, it will be cancelled.
+ * {@link com.gwtplatform.dispatch.shared.DispatchRequest} and the {@link com.google.gwt.http.client.Request} that has
+ * been passed is still pending, it will be cancelled.
  *
  * @author Christian Goudreau
  * @author Brendan Doherty

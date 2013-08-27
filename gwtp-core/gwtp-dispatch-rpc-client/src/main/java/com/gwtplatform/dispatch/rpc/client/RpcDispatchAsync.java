@@ -19,13 +19,15 @@ package com.gwtplatform.dispatch.rpc.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This class is the default implementation of {@link DispatchAsync}, which is

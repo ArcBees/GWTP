@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * An implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} that should be used by
@@ -28,6 +28,5 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
  * @author Christian Goudreau
  */
 
-public interface CallbackDispatchRequest<R> extends AsyncCallback<R>,
-        DispatchRequest {
+public interface CallbackDispatchRequest<R> extends AsyncCallback<R>, DispatchRequest {
 }

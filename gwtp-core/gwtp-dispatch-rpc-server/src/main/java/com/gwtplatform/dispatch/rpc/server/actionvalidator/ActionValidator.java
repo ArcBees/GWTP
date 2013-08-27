@@ -17,8 +17,8 @@
 package com.gwtplatform.dispatch.rpc.server.actionvalidator;
 
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * Implementors must provide an implementation of this interface and provide it

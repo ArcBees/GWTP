@@ -19,10 +19,10 @@ package com.gwtplatform.dispatch.rpc.server;
 import org.junit.Assert;
 
 import com.gwtplatform.dispatch.rpc.server.actionhandler.TestActionHandler;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
 import com.gwtplatform.dispatch.rpc.shared.action.TestAction;
 import com.gwtplatform.dispatch.rpc.shared.action.TestResult;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 public class ActionTestBase {
 

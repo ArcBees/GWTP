@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * The base class of the synchronous dispatcher service. The server-side
@@ -52,8 +53,7 @@ public interface DispatchService extends RemoteService {
      *                          of a service error.
      * @see DispatchServiceAsync#execute
      */
-    Result execute(String cookieSentByRPC, Action<?> action)
-            throws ActionException, ServiceException;
+    Result execute(String cookieSentByRPC, Action<?> action) throws ActionException, ServiceException;
 
     /**
      * This method is called server-side whenever a previously executed action
@@ -71,6 +71,5 @@ public interface DispatchService extends RemoteService {
      *                          of a service error.
      * @see DispatchServiceAsync#undo
      */
-    void undo(String cookieSentByRPC, Action<Result> action, Result result)
-            throws ActionException, ServiceException;
+    void undo(String cookieSentByRPC, Action<Result> action, Result result) throws ActionException, ServiceException;
 }

@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * The asynchronous client-side dispatcher service with an arbitrary action

@@ -17,12 +17,12 @@
 package com.gwtplatform.dispatch.rest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandler;
 import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandlerMismatchException;
 import com.gwtplatform.dispatch.rest.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rpc.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallback<ClientRestActionHandler<?, ?>>,
         ExecuteCommand<A, R> {
