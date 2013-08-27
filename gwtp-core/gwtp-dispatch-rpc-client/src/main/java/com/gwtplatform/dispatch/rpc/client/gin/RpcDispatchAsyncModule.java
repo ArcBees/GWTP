@@ -18,12 +18,13 @@ package com.gwtplatform.dispatch.rpc.client.gin;
 
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.rpc.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * A default implementation of {@link AbstractDispatchAsyncModule} that uses GWT-RPC.
