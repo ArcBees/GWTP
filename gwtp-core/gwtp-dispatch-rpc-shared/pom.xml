@@ -51,12 +51,9 @@
             <artifactId>gwt-user</artifactId>
         </dependency>
 
-        <!-- Needed for @BindingAnnotation in SecurityCookie, can safely
-            be ignored when using Spring -->
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <optional>true</optional>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-shared-common</artifactId>
         </dependency>
     </dependencies>
 </project>

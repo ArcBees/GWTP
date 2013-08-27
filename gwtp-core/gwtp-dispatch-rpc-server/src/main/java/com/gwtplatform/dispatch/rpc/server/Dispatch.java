@@ -17,9 +17,9 @@
 package com.gwtplatform.dispatch.rpc.server;
 
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * The base class of the synchronous dispatcher service with an arbitrary action

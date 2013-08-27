@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import javax.inject.Singleton;
 
+import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
@@ -26,7 +27,6 @@ import com.gwtplatform.dispatch.rest.client.XCSRFHeaderName;
 import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.client.actionhandler.DefaultClientRestActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
-import com.gwtplatform.dispatch.rpc.client.gin.AbstractDispatchAsyncModule;
 
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {

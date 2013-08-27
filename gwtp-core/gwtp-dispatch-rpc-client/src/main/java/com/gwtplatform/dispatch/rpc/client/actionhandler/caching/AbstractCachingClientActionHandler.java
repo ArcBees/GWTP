@@ -20,16 +20,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.CallbackDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.DefaultCallbackDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.DelagatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.rpc.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * Abstract base class for client-side action handlers with caching support.

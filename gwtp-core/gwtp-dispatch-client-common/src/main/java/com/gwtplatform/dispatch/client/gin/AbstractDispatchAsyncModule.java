@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,21 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.gin;
+package com.gwtplatform.dispatch.client.gin;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.gwtplatform.dispatch.rpc.client.DefaultExceptionHandler;
-import com.gwtplatform.dispatch.rpc.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.rpc.client.ExceptionHandler;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
+import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This gin module provides provides access to the {@link DispatchAsync}
  * singleton, which is used to make remote procedure calls to the server. This
- * module requires an {@link com.gwtplatform.dispatch.rpc.client.ExceptionHandler} and a
- * {@link com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor}. By default, these will be bound to
- * {@link com.gwtplatform.dispatch.rpc.client.DefaultExceptionHandler} and
- * {@link com.gwtplatform.dispatch.rpc.client.DefaultSecurityCookieAccessor} respectively.
+ * module requires an {@link com.gwtplatform.dispatch.client.ExceptionHandler} and a
+ * {@link com.gwtplatform.dispatch.shared.SecurityCookieAccessor}. By default, these will be bound to
+ * {@link com.gwtplatform.dispatch.client.DefaultExceptionHandler} and
+ * {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor} respectively.
  * <p/>
  * If you want to prevent XSRF attack (you use secured
  * {@link com.gwtplatform.dispatch.rpc.shared.Action}s) the default
