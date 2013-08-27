@@ -11,7 +11,7 @@
         <version>1.0.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gwtp-dispatch-shared-common</artifactId>
+    <artifactId>gwtp-dispatch-common-shared</artifactId>
 
     <dependencies>
         <!-- Needed for @BindingAnnotation in SecurityCookie, can safely be ignored when using Spring -->

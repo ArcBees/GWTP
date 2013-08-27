@@ -16,8 +16,8 @@
     <modules>
         <module>gwtp-mvp-client</module>
         <module>gwtp-clients-common</module>
-        <module>gwtp-dispatch-client-common</module>
-        <module>gwtp-dispatch-shared-common</module>
+        <module>gwtp-dispatch-common-client</module>
+        <module>gwtp-dispatch-common-shared</module>
         <module>gwtp-dispatch-rest</module>
         <module>gwtp-dispatch-rpc-client</module>
         <module>gwtp-dispatch-rpc-shared</module>
@@ -123,12 +123,12 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>gwtp-dispatch-client-common</artifactId>
+                <artifactId>gwtp-dispatch-common-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>gwtp-dispatch-shared-common</artifactId>
+                <artifactId>gwtp-dispatch-common-shared</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
