@@ -14,26 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.actionhandler;
+package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The interface that {@link ClientRestActionHandler}s use to send the action to execute to the server over HTTP.
+ * The interface that {@link ClientActionHandler}s use to send the action to execute to the server.
  *
- * @param <A> The {@link com.gwtplatform.dispatch.rest.shared.RestAction} type.
+ * @param <A> The action type.
  * @param <R> The result type.
  */
-public interface ExecuteCommand<A extends RestAction<R>, R> {
+public interface ExecuteCommand<A, R> {
     /**
      * Execute an action.
      *
      * @param action         The action to execute.
      * @param resultCallback A callback that will be invoked once the action has been executed, successfully or not.
-     * @return A {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} representing the HTTP request, it
-     *         should never be {@code null}.
+     * @return A {@link DispatchRequest} representing the request, it should never be {@code null}.
      */
     DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
 }

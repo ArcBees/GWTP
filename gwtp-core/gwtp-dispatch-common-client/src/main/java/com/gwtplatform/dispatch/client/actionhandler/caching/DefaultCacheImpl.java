@@ -14,24 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.actionhandler.caching;
+package com.gwtplatform.dispatch.client.actionhandler.caching;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 /**
  * Default Implementation for {@link Cache}.
- *
- * @author Sunny Gupta
  */
 public class DefaultCacheImpl implements Cache {
-
-    private class CacheValue {
-
+    private static class CacheValue {
         private final Object value;
         private final long lastUpdateTime;
 
-        public CacheValue(final Object value) {
+        public CacheValue(Object value) {
             this.value = value;
             this.lastUpdateTime = new Date().getTime();
         }
@@ -45,15 +43,14 @@ public class DefaultCacheImpl implements Cache {
         }
     }
 
-    private HashMap<Object, CacheValue> map;
+    private Map<Object, CacheValue> map;
     private long autoExpireTimeInMs;
 
     /**
      * Initializes the cache with auto expiration OFF.
      */
     public DefaultCacheImpl() {
-        // Initialize map
-        this.map = new HashMap<Object, CacheValue>();
+        this.map = Maps.newHashMap();
         // By default, autoExpireTime is -1 so that objects never expire
         this.autoExpireTimeInMs = -1;
     }
@@ -64,8 +61,7 @@ public class DefaultCacheImpl implements Cache {
      * @param autoExpireTimeInMs Time in milliseconds after which entries in cache expire
      */
     public DefaultCacheImpl(long autoExpireTimeInMs) {
-        // Initialize map
-        this.map = new HashMap<Object, CacheValue>();
+        this.map = Maps.newHashMap();
         this.autoExpireTimeInMs = autoExpireTimeInMs;
     }
 
@@ -130,7 +126,6 @@ public class DefaultCacheImpl implements Cache {
         }
         CacheValue value = map.get(key);
 
-        // Check for null
         if (value != null) {
             return value.getLastUpateTime();
         } else {
@@ -147,5 +142,4 @@ public class DefaultCacheImpl implements Cache {
     public void setAutoExpireTimeInMs(long autoExpireTimeInMs) {
         this.autoExpireTimeInMs = autoExpireTimeInMs;
     }
-
 }

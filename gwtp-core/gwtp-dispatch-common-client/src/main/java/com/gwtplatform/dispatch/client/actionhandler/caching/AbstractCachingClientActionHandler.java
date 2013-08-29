@@ -14,21 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.actionhandler.caching;
+package com.gwtplatform.dispatch.client.actionhandler.caching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.CallbackDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.DefaultCallbackDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.DelagatingCallbackDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.AbstractClientActionHandler;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.ExecuteCommand;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.UndoCommand;
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
+import com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest;
+import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
+import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
@@ -37,42 +37,35 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * Supported features include:
  * </p>
  * <p>
- * 1. {@link #prefetch}/{@link #postfetch} perform the cache lookup and the
- * cache store. You can use this to customize the caching logic.
+ * 1. {@link #prefetch}/{@link #postfetch} perform the cache lookup and the cache store. You can use this to customize
+ * the caching logic.
  * </p>
  * <p>
- * 2. Automatic action queuing so that calls in quick succession result in a
- * single trip to the server.
+ * 2. Automatic action queuing so that calls in quick succession result in a single trip to the server.
  * </p>
  * <p>
  * 3. Flexibility of cache implementation to support custom caching
  * </p>
  *
- * @param <A> The type of the action extending {@link com.gwtplatform.dispatch.rpc.shared.Action}.
- * @param <R> The type of the result extending {@link com.gwtplatform.dispatch.rpc.shared.Result}.
- * @author Sunny Gupta
- * @author David M. Chandler
- * @author Christian Goudreau
+ * @param <A> The type of the action.
+ * @param <R> The type of the result.
  */
-public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R extends Result>
-        extends AbstractClientActionHandler<A, R> {
-
+public abstract class AbstractCachingClientActionHandler<A, R> extends AbstractClientActionHandler<A, R> {
     private final Cache cache;
 
-    // Holds callbacks, so that for multiple requests before the first returns (is
-    // served), we save round trips as well
-    private HashMap<A, ArrayList<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = new HashMap<A,
-            ArrayList<CallbackDispatchRequest<R>>>();
+    // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
+    private Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = Maps.newHashMap();
 
-    public AbstractCachingClientActionHandler(Class<A> actionType, Cache cache) {
+    public AbstractCachingClientActionHandler(Class<A> actionType,
+                                              Cache cache) {
         super(actionType);
         this.cache = cache;
     }
 
     public DispatchRequest execute(final A action,
-            final AsyncCallback<R> resultCallback, ExecuteCommand<A, R> executeCommand) {
+                                   final AsyncCallback<R> resultCallback, ExecuteCommand<A, R> executeCommand) {
         // First check if any pending callbacks for this action
-        ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
+        List<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
 
         if (pendingRequestCallbacks != null) {
             CallbackDispatchRequest<R> callbackDispatchRequest = new DefaultCallbackDispatchRequest<R>(resultCallback);
@@ -101,8 +94,8 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
                             resultCallback.onFailure(caught);
 
                             // Callback onFailure
-                            ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap
-                                    .remove(action);
+                            List<CallbackDispatchRequest<R>> pendingRequestCallbacks =
+                                    pendingRequestCallbackMap.remove(action);
                             for (CallbackDispatchRequest<R> pendingRequestCallback : pendingRequestCallbacks) {
                                 if (pendingRequestCallback.isPending()) {
                                     pendingRequestCallback.onFailure(caught);
@@ -117,8 +110,8 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
                             resultCallback.onSuccess(result);
 
                             // Callback onSuccess
-                            ArrayList<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap
-                                    .remove(action);
+                            List<CallbackDispatchRequest<R>> pendingRequestCallbacks =
+                                    pendingRequestCallbackMap.remove(action);
                             for (CallbackDispatchRequest<R> pendingRequestCallback : pendingRequestCallbacks) {
                                 if (pendingRequestCallback.isPending()) {
                                     pendingRequestCallback.onSuccess(result);
@@ -142,7 +135,7 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
 
     @Override
     public DispatchRequest undo(A action, R result, AsyncCallback<Void> callback,
-            UndoCommand<A, R> undoCommand) {
+                                UndoCommand<A, R> undoCommand) {
         // Remove the cached entry
         getCache().remove(action);
         // Undo the previous action
@@ -150,10 +143,9 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
     }
 
     /**
-     * Override this method to perform an action before the call is sent to the
-     * server. If the call returns a non-{@code null} result then the action is
-     * never executed on the server and the returned value is used. If the call
-     * returns {@code null} then the action is executed on the server.
+     * Override this method to perform an action before the call is sent to the server. If the call returns a
+     * non-{@code null} result then the action is never executed on the server and the returned value is used. If the
+     * call returns {@code null} then the action is executed on the server.
      * <p/>
      * You can use this method to fetch the {@code action} from the cache.
      *
@@ -163,17 +155,14 @@ public abstract class AbstractCachingClientActionHandler<A extends Action<R>, R 
     protected abstract R prefetch(A action);
 
     /**
-     * Override this method to perform an action after the call to the server
-     * returns successfully or not. If the call succeeded, the result will be
-     * passed, if it failed {@code null} will be passed in the {@code result}
-     * parameter.
+     * Override this method to perform an action after the call to the server returns successfully or not. If the call
+     * succeeded, the result will be passed, if it failed {@code null} will be passed in the {@code result} parameter.
      * <p/>
-     * You can use this method to add the result to cache, if it is {@code null}
-     * you should remove the {@code action} from the cache.
+     * You can use this method to add the result to cache, if it is {@code null} you should remove the {@code action}
+     * from the cache.
      *
      * @param action The action that just finished execution on the server.
-     * @param result The result after the server call, or {@code null} if the
-     *               server call failed.
+     * @param result The result after the server call, or {@code null} if the server call failed.
      */
     protected abstract void postfetch(A action, R result);
 

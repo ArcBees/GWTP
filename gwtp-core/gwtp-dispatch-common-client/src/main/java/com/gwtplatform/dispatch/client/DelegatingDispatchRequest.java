@@ -19,20 +19,15 @@ package com.gwtplatform.dispatch.client;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * An implementation of {@link com.gwtplatform.dispatch.shared.DispatchRequest} that is used in conjunction with
- * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler}s.
+ * An implementation of {@link DispatchRequest} that is used in conjunction with
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s.
  * <p/>
- * As the ClientActionHandler may be provided asynchronously, the
- * {@link ClientActionHandlerDispatchRequest} will initially not contain an
- * {@link com.gwtplatform.dispatch.shared.DispatchRequest}.
- * Once the {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler ClientActionHandler} is
- * executed, this be populated with a {@link DelegatingDispatchRequest} by
- * calling {@link #setDelegate(com.gwtplatform.dispatch.shared.DispatchRequest)}.
- *
- * @author Brendan Doherty
+ * As the ClientActionHandler may be provided asynchronously, the {@link ClientActionHandlerDispatchRequest} will
+ * initially not contain an {@link DispatchRequest}.
+ * Once the {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler} is executed, this be populated
+ * with a {@link DelegatingDispatchRequest} by calling {@link #setDelegate(DispatchRequest)}.
  */
 public class DelegatingDispatchRequest implements DispatchRequest {
-
     private boolean cancelled;
     private DispatchRequest delegate;
 
@@ -40,10 +35,9 @@ public class DelegatingDispatchRequest implements DispatchRequest {
     }
 
     /**
-     * Populates the {@link DelegatingDispatchRequest} object with a
-     * {@link DispatchRequest}. <p/> If the code that requested the command to be
-     * executed has already chosen to cancel the {@link DispatchRequest}, the
-     * {@link DispatchRequest} that has been passed will be immediately cancelled.
+     * Populates the {@link DelegatingDispatchRequest} object with a {@link DispatchRequest}. <p/>
+     * If the code that requested the command to be executed has already chosen to cancel the {@link DispatchRequest},
+     * the {@link DispatchRequest} that has been passed will be immediately cancelled.
      *
      * @param delegate The {@link DispatchRequest} object.
      */

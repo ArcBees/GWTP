@@ -18,6 +18,10 @@
             <artifactId>gwtp-dispatch-rpc-shared</artifactId>
         </dependency>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-common-client</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-dispatch-rpc-client</artifactId>
         </dependency>

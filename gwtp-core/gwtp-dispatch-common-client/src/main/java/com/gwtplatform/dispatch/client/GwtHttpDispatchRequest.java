@@ -20,18 +20,12 @@ import com.google.gwt.http.client.Request;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * An implementation of {@link com.gwtplatform.dispatch.shared.DispatchRequest} that is an adapter for
- * {@link com.google.gwt.http.client.Request}.
+ * An implementation of {@link DispatchRequest} that is an adapter for {@link Request}.
  * <p/>
- * If the code that requested the command to be executed chooses to cancel the
- * {@link com.gwtplatform.dispatch.shared.DispatchRequest} and the {@link com.google.gwt.http.client.Request} that has
- * been passed is still pending, it will be cancelled.
- *
- * @author Christian Goudreau
- * @author Brendan Doherty
+ * If the code that requested the command to be executed chooses to cancel the {@link DispatchRequest} and the
+ * {@link Request} that has been passed is still pending, it will be cancelled.
  */
 public class GwtHttpDispatchRequest implements DispatchRequest {
-
     private final Request request;
 
     public GwtHttpDispatchRequest(Request request) {

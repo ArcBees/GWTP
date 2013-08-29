@@ -14,19 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * An implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} that should be used by
- * {@link com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler ClientActionHandler}s
- * that make asynchronous calls.
+ * An implementation of {@link DispatchRequest} that should be used by
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls.
  *
  * @param <R> The type of the {@link AsyncCallback}.
- * @author Christian Goudreau
  */
-
 public interface CallbackDispatchRequest<R> extends AsyncCallback<R>, DispatchRequest {
 }
