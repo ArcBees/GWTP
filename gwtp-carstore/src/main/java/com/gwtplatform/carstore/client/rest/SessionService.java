@@ -25,8 +25,8 @@ import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.dispatch.shared.rest.RestAction;
-import com.gwtplatform.dispatch.shared.rest.RestService;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rest.shared.RestService;
 
 @Path(ResourcesPath.SESSION)
 public interface SessionService extends RestService {
