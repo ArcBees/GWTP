@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,31 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.actionhandler;
+package com.gwtplatform.dispatch.client.actionhandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The interface that {@link ClientActionHandler}s use to send the action to
- * undo to the server over gwt-rpc.
+ * The interface that {@link ClientActionHandler}s use to send the action to undo to the server.
  *
- * @param <A> The {@link Action} type.
- * @param <R> The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
- * @author Brendan Doherty
+ * @param <A> The action type.
+ * @param <R> The result type.
  */
-public interface UndoCommand<A extends Action<R>, R extends Result> {
+public interface UndoCommand<A, R> {
     /**
      * Undo an action.
      *
      * @param action   The action to undo.
      * @param result   The result of the action to undo.
-     * @param callback A callback that will be invoked once the action has been
-     *                 undone, successfully or not.
-     * @return A {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} object representing the gwt-rpc request,
-     *         it should never be {@code null}.
+     * @param callback A callback that will be invoked once the action has been undone, successfully or not.
+     * @return A {@link DispatchRequest} object representing the request, it should never be {@code null}.
      */
     DispatchRequest undo(A action, R result, AsyncCallback<Void> callback);
 }

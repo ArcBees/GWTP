@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.actionhandler.caching;
+package com.gwtplatform.dispatch.client.actionhandler.caching;
 
 /**
  * Interface for client side caching.

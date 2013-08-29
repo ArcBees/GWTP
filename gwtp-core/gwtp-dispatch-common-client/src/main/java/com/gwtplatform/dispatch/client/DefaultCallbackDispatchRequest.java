@@ -14,24 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * An implementation of {@link CallbackDispatchRequest} that should be used by
- * {@link com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler}s that
- * make asynchronous calls that do not return a {@link com.google.gwt.http.client.Request}.
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls that do not
+ * return a {@link com.google.gwt.http.client.Request}.
  * <p/>
  * {@link #isPending()} will return true until either {@link #onSuccess(Object)} or
  * {@link #onFailure} is called.
  * <p/>
- * Calling {@link #cancel()} will prevent the {@link #onSuccess(Object)} and
- * {@link #onFailure(Throwable)} from being forwarded to the code that requested the
- * action handler be executed/undone.
+ * Calling {@link #cancel()} will prevent the {@link #onSuccess(Object)} and {@link #onFailure(Throwable)} from being
+ * forwarded to the code that requested the action handler be executed/undone.
  *
  * @param <R> The type of the {@link AsyncCallback}.
- * @author Brendan Doherty
  */
 
 public class DefaultCallbackDispatchRequest<R> implements CallbackDispatchRequest<R> {

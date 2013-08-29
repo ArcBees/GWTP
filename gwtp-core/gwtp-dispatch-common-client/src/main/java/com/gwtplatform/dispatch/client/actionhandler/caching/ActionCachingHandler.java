@@ -14,34 +14,28 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.actionhandler.caching;
-
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
+package com.gwtplatform.dispatch.client.actionhandler.caching;
 
 /**
- * Default implementation of {@link AbstractCachingClientActionHandler}. It supports {@link Action} caching
+ * Default implementation of {@link AbstractCachingClientActionHandler}. It supports action caching
  * </p>
- * TODO Add support for timeout based auto-expiry of cached results?
  *
- * @param <A> The type of the action extending {@link Action}.
- * @param <R> The type of the result extending {@link com.gwtplatform.dispatch.rpc.shared.Result}.
- * @author Sunny Gupta
+ * @param <A> The type of the action.
+ * @param <R> The type of the result.
  */
-public class ActionCachingHandler<A extends Action<R>, R extends Result> extends
-        AbstractCachingClientActionHandler<A, R> {
+public class ActionCachingHandler<A, R> extends AbstractCachingClientActionHandler<A, R> {
+    // TODO Add support for timeout based auto-expiry of cached results?
 
-    public ActionCachingHandler(Class<A> actionType, Cache cache) {
+    public ActionCachingHandler(Class<A> actionType,
+                                Cache cache) {
         super(actionType, cache);
     }
 
     @Override
     protected void postfetch(A action, R result) {
-        // Check if null result
         if (result == null) {
             getCache().remove(action);
         } else {
-            // Cache
             getCache().put(action, result);
         }
     }
@@ -50,9 +44,8 @@ public class ActionCachingHandler<A extends Action<R>, R extends Result> extends
     @Override
     protected R prefetch(A action) {
         try {
-            // Check if Action available in Cache
-            Object value = super.getCache().get(action);
-            if (value != null && value instanceof Result) {
+            Object value = getCache().get(action);
+            if (value != null) {
                 return (R) value;
             } else {
                 return null;

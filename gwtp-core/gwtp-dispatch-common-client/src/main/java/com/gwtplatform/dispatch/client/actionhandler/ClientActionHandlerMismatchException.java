@@ -14,26 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.actionhandler;
-
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+package com.gwtplatform.dispatch.client.actionhandler;
 
 /**
- * This exception is throw as a side-effect of an error calling {@link DefaultClientRestActionHandlerRegistry#register}.
+ * This exception is throw as a side-effect of an error calling {@link DefaultClientActionHandlerRegistry#register}.
  * A provider was registered to provide an client-side action handler for an action, but this action was not the same
- * action as specified by {@link ClientRestActionHandler#getActionType()}.
+ * action as specified by {@link ClientActionHandler#getActionType()}.
  */
-public class ClientRestActionHandlerMismatchException extends RuntimeException {
-    private final Class<? extends RestAction<?>> requestedActionType;
+public class ClientActionHandlerMismatchException extends RuntimeException {
+    private final Class<?> requestedActionType;
     private final Class<?> supportedActionType;
 
-    public ClientRestActionHandlerMismatchException(Class<? extends RestAction<?>> requestedActionType,
-                                                    Class<?> supportedActionType) {
+    public ClientActionHandlerMismatchException(Class<?> requestedActionType,
+                                                Class<?> supportedActionType) {
         this.requestedActionType = requestedActionType;
         this.supportedActionType = supportedActionType;
     }
 
-    public Class<? extends RestAction<?>> getRequestedActionType() {
+    public Class<?> getRequestedActionType() {
         return this.requestedActionType;
     }
 
