@@ -17,14 +17,10 @@
 package com.gwtplatform.dispatch.client;
 
 /**
- * Implementations of this interface can be added to a
- * {com.gwtplatform.dispatch.shared.DispatchAsync @link DispatchAsync} implementation to intercept
- * exceptions which return from further up the chain.
- *
- * @author David Peterson
+ * Implementations of this interface can be added to a {@link com.gwtplatform.dispatch.shared.DispatchAsync}
+ * implementation to intercept exceptions which return from further up the chain.
  */
 public interface ExceptionHandler {
-
     /**
      * {@link ExceptionHandler}'s status enumeration.
      */
@@ -33,9 +29,8 @@ public interface ExceptionHandler {
     }
 
     /**
-     * This method is called when an exception occurs. Return {@link Status#STOP}
-     * to indicate that the exception has been handled and further processing
-     * should not occur. Return {@link Status#CONTINUE} to indicate that further
+     * This method is called when an exception occurs. Return {@link Status#STOP} to indicate that the exception has
+     * been handled and further processing should not occur. Return {@link Status#CONTINUE} to indicate that further
      * processing should occur.
      *
      * @param e The exception.

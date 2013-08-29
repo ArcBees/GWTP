@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,24 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.actionhandler;
-
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
+package com.gwtplatform.dispatch.client.actionhandler;
 
 /**
- * Simple abstract super-class for {@link ActionHandler} implementations that
- * forces the {@link Action} class to be passed in as a constructor to the
- * handler.
+ * Simple abstract super-class for {@link ClientActionHandler} implementations that forces the action class to be passed
+ * in as a constructor to the handler.
  *
- * @param <A> The {@link Action} type.
- * @param <R> The {@link Result} type.
- * @author David Peterson
- * @author Brendan Doherty
+ * @param <A> The action type.
+ * @param <R> The result type.
  */
-public abstract class AbstractClientActionHandler<A extends Action<R>, R extends Result>
-        implements ClientActionHandler<A, R> {
-
+public abstract class AbstractClientActionHandler<A, R> implements ClientActionHandler<A, R> {
     private final Class<A> actionType;
 
     protected AbstractClientActionHandler(Class<A> actionType) {

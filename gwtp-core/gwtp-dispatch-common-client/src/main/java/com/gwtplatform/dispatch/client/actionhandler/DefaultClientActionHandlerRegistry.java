@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.actionhandler;
+package com.gwtplatform.dispatch.client.actionhandler;
 
 import java.util.Map;
 
@@ -26,19 +26,17 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.common.client.ProviderBundle;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
- * The default implementation that {@link ClientRestActionHandlerRegistry} that if
- * bound will not load any client-side action handlers. </p>
- * To register client-side action handlers, extend this class and call {@link #register}
- * in the constructor.
+ * The default implementation that {@link ClientActionHandlerRegistry} that if bound will not load any client-side
+ * action handlers. </p>
+ * To register client-side action handlers, extend this class and call {@link #register} in the constructor.
  * <p/>
  * <h3><u>Example</u></h3>
  * <p/>
  * <pre>
  * <code>
- * public class MyActionHandlerRegistry extends DefaultClientRestActionHandlerRegistry {
+ * public class MyActionHandlerRegistry extends DefaultClientActionHandlerRegistry {
  *   {@literal}@Inject
  *   public DefaultClientRestActionHandlerRegistry(
  *       RetrieveFooClientActionHandler handler,
@@ -69,19 +67,19 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * </code>
  * </pre>
  */
-public class DefaultClientRestActionHandlerRegistry implements ClientRestActionHandlerRegistry {
-    private Map<Class<? extends RestAction<?>>, IndirectProvider<ClientRestActionHandler<?, ?>>> clientActionHandlers;
+public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRegistry {
+    private Map<Class<?>, IndirectProvider<ClientActionHandler<?, ?>>> clientActionHandlers;
 
     /**
      * Register a instance of a client-side action handler.
      *
-     * @param handler The {@link ClientRestActionHandler};
+     * @param handler The {@link ClientActionHandler};
      */
-    protected void register(final ClientRestActionHandler<?, ?> handler) {
+    protected void register(final ClientActionHandler<?, ?> handler) {
         register(handler.getActionType(),
-                new IndirectProvider<ClientRestActionHandler<?, ?>>() {
+                new IndirectProvider<ClientActionHandler<?, ?>>() {
                     @Override
-                    public void get(AsyncCallback<ClientRestActionHandler<?, ?>> callback) {
+                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
                         callback.onSuccess(handler);
                     }
                 });
@@ -90,16 +88,15 @@ public class DefaultClientRestActionHandlerRegistry implements ClientRestActionH
     /**
      * Register a {@link javax.inject.Provider} of a client-side action handler.
      *
-     * @param actionType      The type of {@link com.gwtplatform.dispatch.rpc.shared.Action} that the
-     *                        client-side action handler supports.
+     * @param actionType      The type of action that the client-side action handler supports.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
      */
-    protected void register(Class<? extends RestAction<?>> actionType,
-                            final Provider<? extends ClientRestActionHandler<?, ?>> handlerProvider) {
+    protected void register(Class<?> actionType,
+                            final Provider<? extends ClientActionHandler<?, ?>> handlerProvider) {
         register(actionType,
-                new IndirectProvider<ClientRestActionHandler<?, ?>>() {
+                new IndirectProvider<ClientActionHandler<?, ?>>() {
                     @Override
-                    public void get(AsyncCallback<ClientRestActionHandler<?, ?>> callback) {
+                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
                         callback.onSuccess(handlerProvider.get());
                     }
                 });
@@ -108,16 +105,15 @@ public class DefaultClientRestActionHandlerRegistry implements ClientRestActionH
     /**
      * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side action handler.
      *
-     * @param actionType      The type of {@link com.gwtplatform.dispatch.rpc.shared.Action} that the
-     *                        client-side action handler supports.
+     * @param actionType      The type of that the client-side action handler supports.
      * @param handlerProvider The {@link com.google.gwt.inject.client.AsyncProvider} of the handler.
      */
-    protected void register(Class<? extends RestAction<?>> actionType,
-                            final AsyncProvider<? extends ClientRestActionHandler<?, ?>> handlerProvider) {
+    protected void register(Class<?> actionType,
+                            final AsyncProvider<? extends ClientActionHandler<?, ?>> handlerProvider) {
         register(actionType,
-                new IndirectProvider<ClientRestActionHandler<?, ?>>() {
+                new IndirectProvider<ClientActionHandler<?, ?>>() {
                     @Override
-                    public void get(AsyncCallback<ClientRestActionHandler<?, ?>> callback) {
+                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
                         handlerProvider.get(callback);
                     }
                 });
@@ -126,14 +122,15 @@ public class DefaultClientRestActionHandlerRegistry implements ClientRestActionH
     /**
      * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
-     * @param actionType     The type of {@link RestAction} that the client-side action handler supports.
-     * @param bundleProvider The {@link Provider} of the {@link com.gwtplatform.common.client.ProviderBundle}.
+     * @param actionType     The type of that the client-side action handler supports.
+     * @param bundleProvider The {@link javax.inject.Provider} of the
+     *                       {@link com.gwtplatform.common.client.ProviderBundle}.
      * @param providerId     The id of the client-side action handler provider.
      */
-    protected <B extends ProviderBundle> void register(Class<? extends RestAction<?>> actionType,
+    protected <B extends ProviderBundle> void register(Class<?> actionType,
                                                        AsyncProvider<B> bundleProvider,
                                                        int providerId) {
-        register(actionType, new CodeSplitBundleProvider<ClientRestActionHandler<?, ?>, B>(bundleProvider, providerId));
+        register(actionType, new CodeSplitBundleProvider<ClientActionHandler<?, ?>, B>(bundleProvider, providerId));
     }
 
     /**
@@ -141,8 +138,8 @@ public class DefaultClientRestActionHandlerRegistry implements ClientRestActionH
      *
      * @param handlerProvider The {@link com.gwtplatform.common.client.IndirectProvider}.
      */
-    protected void register(Class<? extends RestAction<?>> actionType,
-                            IndirectProvider<ClientRestActionHandler<?, ?>> handlerProvider) {
+    protected void register(Class<?> actionType,
+                            IndirectProvider<ClientActionHandler<?, ?>> handlerProvider) {
         if (clientActionHandlers == null) {
             clientActionHandlers = Maps.newHashMap();
         }
@@ -151,7 +148,7 @@ public class DefaultClientRestActionHandlerRegistry implements ClientRestActionH
     }
 
     @Override
-    public <A extends RestAction<?>> IndirectProvider<ClientRestActionHandler<?, ?>> find(Class<A> actionClass) {
+    public <A> IndirectProvider<ClientActionHandler<?, ?>> find(Class<A> actionClass) {
         if (clientActionHandlers == null) {
             return null;
         } else {

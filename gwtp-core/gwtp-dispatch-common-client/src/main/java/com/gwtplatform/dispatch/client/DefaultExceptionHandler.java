@@ -17,13 +17,9 @@
 package com.gwtplatform.dispatch.client;
 
 /**
- * A default implementation of {@link ExceptionHandler} which does not do
- * anything.
- *
- * @author David Peterson
+ * A default implementation of {@link ExceptionHandler} which does not do anything.
  */
 public final class DefaultExceptionHandler implements ExceptionHandler {
-
     public DefaultExceptionHandler() {
     }
 

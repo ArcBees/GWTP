@@ -18,13 +18,13 @@ package com.gwtplatform.dispatch.rest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandler;
-import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandlerMismatchException;
-import com.gwtplatform.dispatch.rest.client.actionhandler.ExecuteCommand;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException;
+import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
-class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallback<ClientRestActionHandler<?, ?>>,
+class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallback<ClientActionHandler<?, ?>>,
         ExecuteCommand<A, R> {
     private final RestDispatchAsync restDispatchAsync;
     private final DelegatingDispatchRequest dispatchRequest;
@@ -46,14 +46,14 @@ class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallba
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onSuccess(ClientRestActionHandler<?, ?> clientActionHandler) {
+    public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
         if (clientActionHandler.getActionType() != action.getClass()) {
             delegateFailure(clientActionHandler);
             return;
         }
 
         if (dispatchRequest.isPending()) {
-            delegateExecute((ClientRestActionHandler<A, R>) clientActionHandler);
+            delegateExecute((ClientActionHandler<A, R>) clientActionHandler);
         }
     }
 
@@ -73,15 +73,15 @@ class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallba
     }
 
     @SuppressWarnings("unchecked")
-    private void delegateFailure(ClientRestActionHandler<?, ?> clientActionHandler) {
+    private void delegateFailure(ClientActionHandler<?, ?> clientActionHandler) {
         dispatchRequest.cancel();
 
         Class<? extends RestAction<?>> requestedActionClass = (Class<? extends RestAction<?>>) action.getClass();
         Class<?> supportedActionType = clientActionHandler.getActionType();
-        callback.onFailure(new ClientRestActionHandlerMismatchException(requestedActionClass, supportedActionType));
+        callback.onFailure(new ClientActionHandlerMismatchException(requestedActionClass, supportedActionType));
     }
 
-    private void delegateExecute(ClientRestActionHandler<A, R> clientActionHandler) {
+    private void delegateExecute(ClientActionHandler<A, R> clientActionHandler) {
         dispatchRequest.setDelegate(clientActionHandler.execute(action, callback, this));
     }
 }
