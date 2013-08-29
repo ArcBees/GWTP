@@ -24,7 +24,7 @@ package com.gwtplatform.dispatch.rpc.shared;
  *
  * An {@link Action} that uses the standard service name {@code "dispatch"}.
  * Actions inheriting from this are <b>not</b> secured against XSRF attacks, and
- * they will work even if you do not configure a {@link SecurityCookie}.
+ * they will work even if you do not configure a {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
  *
  * Use {@link UnsecuredActionImpl} for secured set to on by default.
  *
