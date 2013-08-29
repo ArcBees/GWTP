@@ -43,7 +43,8 @@ public interface DispatchService extends RemoteService {
      *
      * @param cookieSentByRPC This is the content of the security cookie accessed
      *                        on the client (in javascript), its goal is to prevent XSRF
-     *                        attacks. See {@link SecurityCookieAccessor} for more details.
+     *                        attacks. See {@link com.gwtplatform.dispatch.shared.SecurityCookieAccessor} for more
+     *                        details.
      * @param action          The {@link Action} to execute.
      * @return The {@link Result} of the action.
      * @throws ActionException  Thrown if the action could not be executed for
@@ -61,7 +62,8 @@ public interface DispatchService extends RemoteService {
      *
      * @param cookieSentByRPC This is the content of the security cookie accessed
      *                        on the client (in javascript), its goal is to prevent XSRF
-     *                        attacks. See {@link SecurityCookieAccessor} for more details.
+     *                        attacks. See {@link com.gwtplatform.dispatch.shared.SecurityCookieAccessor} for more
+     *                        details.
      * @param action          The {@link Action} to execute.
      * @param result          The {@link Result} of this action when it was executed.
      * @throws ActionException  Thrown if the action could not be undone for
