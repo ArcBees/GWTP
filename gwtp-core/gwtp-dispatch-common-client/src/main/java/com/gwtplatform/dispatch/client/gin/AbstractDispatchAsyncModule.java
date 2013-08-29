@@ -64,9 +64,9 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
      * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use
-     * {@link com.gwtplatform.dispatch.rpc.client.DefaultExceptionHandler},
-     * {@link com.gwtplatform.dispatch.rpc.client.DefaultSecurityCookieAccessor}, and
-     * {@link com.gwtplatform.dispatch.rpc.client.actionhandler.DefaultClientActionHandlerRegistry}.
+     * {@link com.gwtplatform.dispatch.client.DefaultExceptionHandler},
+     * {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor}, and
+     * {@link com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry}.
      *
      * @author Brendan Doherty
      */

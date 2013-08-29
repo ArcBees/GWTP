@@ -14,34 +14,31 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * An implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} that should be used by
- * {@link com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler ClientActionHandler}s
- * that make asynchronous calls that return a {@link com.google.gwt.http.client.Request Request}.
+ * An implementation of {@link DispatchRequest} that should be used by
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls that return a
+ * {@link com.google.gwt.http.client.Request Request}.
  * <p/>
- * This class also takes a {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest} and delegate work to this
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchRequest}.
+ * This class also takes a {@link DispatchRequest} and delegate work to this {@link DispatchRequest}.
  * <p/>
  * This class is used within
- * {@link com.gwtplatform.dispatch.rpc.client.actionhandler.caching.AbstractCachingClientActionHandler
- * AbstractCachingClientActionHandler}
- * to be able to store inside an HashMap {@link DefaultCallbackDispatchRequest} while keeping
+ * {@link com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler} to be able to store
+ * inside an HashMap {@link com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest} while keeping
  * {@link GwtHttpDispatchRequest} nature.
  *
  * @param <R> The type of the {@link AsyncCallback}.
- * @author Christian Goudreau
  */
 public class DelagatingCallbackDispatchRequest<R> implements CallbackDispatchRequest<R> {
     private final DispatchRequest request;
     private final AsyncCallback<R> callback;
 
     public DelagatingCallbackDispatchRequest(DispatchRequest request,
-            AsyncCallback<R> callback) {
+                                             AsyncCallback<R> callback) {
 
         this.request = request;
         this.callback = callback;

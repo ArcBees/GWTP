@@ -20,11 +20,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerMismatchException;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.ExecuteCommand;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.UndoCommand;
+import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
+import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
@@ -37,8 +38,8 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
     private final SecurityCookieAccessor securityCookieAccessor;
 
     public AbstractDispatchAsync(ExceptionHandler exceptionHandler,
-            SecurityCookieAccessor securityCookieAccessor,
-            ClientActionHandlerRegistry clientActionHandlerRegistry) {
+                                 SecurityCookieAccessor securityCookieAccessor,
+                                 ClientActionHandlerRegistry clientActionHandlerRegistry) {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
@@ -46,7 +47,7 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
 
     @Override
     public <A extends Action<R>, R extends Result> DispatchRequest execute(final A action,
-            final AsyncCallback<R> callback) {
+                                                                           final AsyncCallback<R> callback) {
         prepareExecute(action);
 
         final String securityCookie = securityCookieAccessor.getCookieContent();
@@ -59,7 +60,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
             clientActionHandlerProvider.get(new AsyncCallback<ClientActionHandler<?, ?>>() {
                 @Override
                 public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
-
                     if (clientActionHandler.getActionType() != action.getClass()) {
                         dispatchRequest.cancel();
                         callback.onFailure(new ClientActionHandlerMismatchException(
@@ -72,7 +72,7 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                                 action, callback, new ExecuteCommand<A, R>() {
                             @Override
                             public DispatchRequest execute(A action,
-                                    AsyncCallback<R> resultCallback) {
+                                                           AsyncCallback<R> resultCallback) {
                                 if (dispatchRequest.isPending()) {
                                     return doExecute(securityCookie, action, resultCallback);
                                 } else {
@@ -98,7 +98,7 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
 
     @Override
     public <A extends Action<R>, R extends Result> DispatchRequest undo(final A action, final R result,
-            final AsyncCallback<Void> callback) {
+                                                                        final AsyncCallback<Void> callback) {
         final String securityCookie = securityCookieAccessor.getCookieContent();
 
         final IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider = clientActionHandlerRegistry
@@ -120,10 +120,9 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                     if (dispatchRequest.isPending()) {
                         dispatchRequest.setDelegate(((ClientActionHandler<A, R>) clientActionHandler).undo(
                                 action, result, callback, new UndoCommand<A, R>() {
-
                             @Override
                             public DispatchRequest undo(A action, R result,
-                                    AsyncCallback<Void> callback) {
+                                                        AsyncCallback<Void> callback) {
                                 if (dispatchRequest.isPending()) {
                                     return doUndo(securityCookie, action, result, callback);
                                 } else {
@@ -148,10 +147,14 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
     }
 
     protected abstract <A extends Action<R>, R extends Result> DispatchRequest doExecute(String securityCookie,
-            final A action, final AsyncCallback<R> callback);
+                                                                                         final A action,
+                                                                                         final AsyncCallback<R>
+                                                                                                 callback);
 
     protected abstract <A extends Action<R>, R extends Result> DispatchRequest doUndo(String securityCookie,
-            final A action, R result, final AsyncCallback<Void> callback);
+                                                                                      final A action, R result,
+                                                                                      final AsyncCallback<Void>
+                                                                                              callback);
 
     protected ClientActionHandlerRegistry getClientActionHandlerRegistry() {
         return clientActionHandlerRegistry;
@@ -166,31 +169,26 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
     }
 
     protected <A extends Action<R>, R extends Result> void onExecuteFailure(A action, Throwable caught,
-            final AsyncCallback<R> callback) {
-        if (getExceptionHandler() != null
-                && getExceptionHandler().onFailure(caught) == ExceptionHandler.Status.STOP) {
-            return;
+                                                                            AsyncCallback<R> callback) {
+        if (getExceptionHandler() == null || getExceptionHandler().onFailure(caught) != Status.STOP) {
+            callback.onFailure(caught);
         }
-
-        callback.onFailure(caught);
     }
 
     protected <A extends Action<R>, R extends Result> void onExecuteSuccess(A action, R result,
-            final AsyncCallback<R> callback) {
+                                                                            AsyncCallback<R> callback) {
         callback.onSuccess(result);
     }
 
     protected <A extends Action<R>, R extends Result> void onUndoFailure(A action, Throwable caught,
-            final AsyncCallback<Void> callback) {
-        if (getExceptionHandler() != null
-                && getExceptionHandler().onFailure(caught) == ExceptionHandler.Status.STOP) {
-            return;
+                                                                         AsyncCallback<Void> callback) {
+        if (getExceptionHandler() == null || getExceptionHandler().onFailure(caught) != Status.STOP) {
+            callback.onFailure(caught);
         }
-        callback.onFailure(caught);
     }
 
     protected <A extends Action<R>, R extends Result> void onUndoSuccess(A action, Void voidResult,
-            final AsyncCallback<Void> callback) {
+                                                                         AsyncCallback<Void> callback) {
         callback.onSuccess(voidResult);
     }
 
