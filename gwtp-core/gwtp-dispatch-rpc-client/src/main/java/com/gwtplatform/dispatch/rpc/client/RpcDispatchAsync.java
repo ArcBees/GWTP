@@ -30,7 +30,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * This class is the default implementation of {@link DispatchAsync}, which is
+ * This class is the default implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}, which is
  * essentially the client-side access to the
  * {@link com.gwtplatform.dispatch.server.Dispatch} class on the server-side.
  */

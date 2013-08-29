@@ -20,58 +20,43 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * This gin module provides provides access to the {@link DispatchAsync}
- * singleton, which is used to make remote procedure calls to the server. This
- * module requires an {@link com.gwtplatform.dispatch.client.ExceptionHandler} and a
- * {@link com.gwtplatform.dispatch.shared.SecurityCookieAccessor}. By default, these will be bound to
- * {@link com.gwtplatform.dispatch.client.DefaultExceptionHandler} and
- * {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor} respectively.
+ * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server. This
+ * module requires an {@link ExceptionHandler}, a {@link DefaultClientActionHandlerRegistry} and a
+ * {@link SecurityCookieAccessor}. By default, these will be bound to {@link DefaultExceptionHandler},
+ * {@link DefaultClientActionHandlerRegistry} and {@link DefaultSecurityCookieAccessor} respectively.
  * <p/>
- * If you want to prevent XSRF attack (you use secured
- * {@link com.gwtplatform.dispatch.rpc.shared.Action}s) the default
- * {@link EmptySecurityCookieAccessor} could leave your application vulnerable
- * to XSRF attacks. For more details see <a href="http://code.google
- * .com/intl/fr/webtoolkit/articles/security_for_gwt_applications.html"
- * > this document</a>. For more security use {@link DispatchAsyncSecureModule}.
- * <p/>
- * If you don't need XSRF protection, you can use directly this module with your
- * {@link com.google.gwt.inject.client.Ginjector}, i.e.:
+ * Install the module in one of your {@link #configure()} methods:
  * <p/>
  * <pre>
- * {@literal @}GinModules( { {@link AbstractDispatchAsyncModule}.class, ... }
+ * install(new RestDispatchAsyncModule.Builder()
+ *         .exceptionHandler(MyExceptionHandler.class)
+ *         .clientActionHandlerRegistry(MyClientActionHandlerRegistry.class)
+ *         .build());
  * </pre>
- * For customization, skip the previous step and install the module in one of
- * your {@link #configure()} methods:
- * <p/>
- * <pre>
- * install(new DispatchAsyncModule.Builder().exceptionHandler(
- *     MyExceptionHandler.class).sessionAccessor(
- *     MySecurityCookieAccessor.class).build());
- * </pre>
- * You can pass {@code null} as any of the two parameter to fallback to the
- * default.
  *
- * @author David Peterson
- * @author Philippe Beaudoin
- * @author Brendan Doherty
+ * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule
+ * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule
  */
 public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     /**
-     * /**
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
      * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use
-     * {@link com.gwtplatform.dispatch.client.DefaultExceptionHandler},
-     * {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor}, and
-     * {@link com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry}.
+     * {@link DefaultExceptionHandler}, {@link DefaultClientActionHandlerRegistry} and
+     * {@link DefaultSecurityCookieAccessor}.
      *
-     * @author Brendan Doherty
+     * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder
+     * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.Builder
      */
     public abstract static class Builder {
         protected Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
+        protected Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
+                DefaultClientActionHandlerRegistry.class;
         protected Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
 
         /**
@@ -88,6 +73,19 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          */
         public Builder exceptionHandler(Class<? extends ExceptionHandler> exceptionHandlerType) {
             this.exceptionHandlerType = exceptionHandlerType;
+            return this;
+        }
+
+        /**
+         * Specify an alternate client action handler registry.
+         *
+         * @param clientActionHandlerRegistryType
+         *         A {@link ClientActionHandlerRegistry} class.
+         * @return a {@link Builder} object.
+         */
+        public Builder clientActionHandlerRegistry(
+                Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
+            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
             return this;
         }
 
@@ -114,15 +112,17 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     private static Class<? extends AbstractDispatchAsyncModule> boundType;
 
     protected final Class<? extends ExceptionHandler> exceptionHandlerType;
+    protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
     protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
 
     protected AbstractDispatchAsyncModule(Builder builder) {
-        this.exceptionHandlerType = builder.exceptionHandlerType;
-        this.sessionAccessorType = builder.sessionAccessorType;
+        clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
+        exceptionHandlerType = builder.exceptionHandlerType;
+        sessionAccessorType = builder.sessionAccessorType;
     }
 
     @Override
-    protected void configure() {
+    protected final void configure() {
         if (alreadyBound) {
             if (!boundType.equals(getClass())) {
                 throw new RuntimeException("You are trying to use more than one DispatchAsync implementation. " +
@@ -131,8 +131,19 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         } else {
             alreadyBound = true;
             boundType = getClass();
+
+            bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
             bind(ExceptionHandler.class).to(exceptionHandlerType);
             bind(SecurityCookieAccessor.class).to(sessionAccessorType);
+
+            configureDispatch();
         }
+    }
+
+    /**
+     * Override this method to perform additional bindings in your implementation of
+     * {@link AbstractDispatchAsyncModule}.
+     */
+    protected void configureDispatch() {
     }
 }

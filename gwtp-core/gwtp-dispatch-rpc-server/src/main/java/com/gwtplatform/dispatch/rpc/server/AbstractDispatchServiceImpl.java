@@ -145,7 +145,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
      *
      * @param cookieSentByRPC The content of the security cookie sent by RPC.
      * @return {@code true} if the cookies match, {@code false} otherwise.
-     * @throws ServiceException If you forgot to bind a {@link com.gwtplatform.dispatch.rpc.shared.SecurityCookie}.
+     * @throws ServiceException If you forgot to bind a {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
      */
     private boolean cookieMatch(String cookieSentByRPC) throws ServiceException {
 
