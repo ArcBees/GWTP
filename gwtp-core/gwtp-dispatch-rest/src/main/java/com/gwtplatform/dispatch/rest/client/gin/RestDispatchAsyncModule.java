@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import javax.inject.Singleton;
 
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
@@ -28,25 +26,29 @@ import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XCSRFHeaderName;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 
+/**
+ * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls.
+ * </p>
+ * This gin module provides provides access to the {@link RestDispatch} singleton, which is used to make calls to the
+ * server over HTTP. This module requires a {@link XCSRFHeaderName}. By default, this will be bound to
+ * {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.
+ */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
+    /**
+     * A {@link RestDispatchAsyncModule} builder.
+     * <p/>
+     * By default, this builder configures the {@link RestDispatchAsyncModule} to use
+     * {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.
+     */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        private String xcsrfTokenHeaderName = "X-CSRF-Token";
-        private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
-                DefaultClientActionHandlerRegistry.class;
+        private String xcsrfTokenHeaderName = DEFAULT_X_CSRF_NAME;
 
         /**
-         * Specify an alternate client action handler registry.
+         * Specify the X-CSRF header name.
          *
-         * @param clientActionHandlerRegistryType
-         *         A {@link ClientActionHandlerRegistry} class.
+         * @param xcsrfTokenHeaderName The X-CSRF header name..
          * @return a {@link Builder} object.
          */
-        public Builder clientActionHandlerRegistry(
-                Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
-            return this;
-        }
-
         public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
             this.xcsrfTokenHeaderName = xcsrfTokenHeaderName;
             return this;
@@ -58,8 +60,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         }
     }
 
+    public static final String DEFAULT_X_CSRF_NAME = "X-CSRF-Token";
+
     private final String xcsrfTokenHeaderName;
-    private final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
 
     public RestDispatchAsyncModule() {
         this(new Builder());
@@ -68,17 +71,13 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     private RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
-        clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
         xcsrfTokenHeaderName = builder.xcsrfTokenHeaderName;
     }
 
     @Override
-    protected void configure() {
-        super.configure();
-
+    protected void configureDispatch() {
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
 
-        bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
         bind(ActionMetadataProvider.class).asEagerSingleton();
         bind(RestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).in(Singleton.class);

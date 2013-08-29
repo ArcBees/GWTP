@@ -23,7 +23,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * {@link com.gwtplatform.dispatch.server.Dispatch}. It has a specific result
  * type which is returned if the action is successful. Your implementation
  * should override {@link #getServiceName} to return a default service url. If
- * you use a {@link SecurityCookie} to prevent XSRF attacks and you want this
+ * you use a {@link com.gwtplatform.dispatch.shared.SecurityCookie} to prevent XSRF attacks and you want this
  * action to be secured against such attacks (i.e. it's not meant to be an
  * anonymous action) then you should override {@link #isSecured()} to return
  * {@code true}.
@@ -51,7 +51,7 @@ public interface Action<R extends Result> extends IsSerializable {
 
     /**
      * Verifies if the action is secured. Secured actions perform a number of
-     * extra security checks, such as validating the {@link SecurityCookie} to
+     * extra security checks, such as validating the {@link com.gwtplatform.dispatch.shared.SecurityCookie} to
      * foil XSRF attacks.
      * <p/>
      * <b>Important!</b> Make sure your method returns a value that does not
