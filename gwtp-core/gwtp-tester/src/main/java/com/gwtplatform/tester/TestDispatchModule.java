@@ -18,12 +18,12 @@ package com.gwtplatform.tester;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
-import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.DispatchService;
-import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.rpc.client.DefaultExceptionHandler;
+import com.gwtplatform.dispatch.rpc.client.DefaultSecurityCookieAccessor;
+import com.gwtplatform.dispatch.rpc.client.ExceptionHandler;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.gwtplatform.dispatch.rpc.shared.DispatchService;
+import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
 
 /**
  * This class configures guice for use in test cases with a

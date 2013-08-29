@@ -38,7 +38,7 @@ import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.shared.rest.RestAction;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 

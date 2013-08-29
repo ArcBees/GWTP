@@ -29,8 +29,8 @@ import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.rest.RestAction;
-import com.gwtplatform.dispatch.shared.rest.RestService;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rest.shared.RestService;
 
 @Path(ResourcesPath.CAR)
 public interface CarService extends RestService {
