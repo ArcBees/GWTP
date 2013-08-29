@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.annotation;
 
-import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.Action;
 
 /**
  * For testing purposes only.
