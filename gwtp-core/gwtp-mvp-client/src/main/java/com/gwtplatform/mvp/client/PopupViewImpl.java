@@ -122,6 +122,11 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         asPopupPanel().show();
     }
 
+    @Override
+    public void finish() {
+        hide();
+    }
+
     /**
      * Retrieves this view as a {@link PopupPanel}. See {@link #asWidget()}.
      *

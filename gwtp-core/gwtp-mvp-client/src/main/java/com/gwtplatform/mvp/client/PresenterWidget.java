@@ -106,8 +106,8 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 public abstract class PresenterWidget<V extends View> extends
         HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
 
-    public interface FinishCallback<P extends PresenterWidget<? extends View>> {
-        void onFinish(P presenter);
+    public interface FinishCallback {
+        void onFinish(Bundle bundle);
     }
 
     private static class HandlerInformation<H extends EventHandler> {
@@ -124,6 +124,7 @@ public abstract class PresenterWidget<V extends View> extends
     private final V view;
 
     private FinishCallback finishCallback;
+    private Bundle bundle;
 
     boolean visible;
 
@@ -529,23 +530,40 @@ public abstract class PresenterWidget<V extends View> extends
     protected void onReveal() {
     }
 
+    protected void putInBundle(String key, Object value) {
+        ensureBundle().put(key, value);
+    }
+
+    protected void getFromBundle(String key) {
+        ensureBundle().get(key);
+    }
+    /*
     protected FinishCallback getFinishCallback() {
         return finishCallback;
     }
-
-    protected void setFinishCallback(FinishCallback finishCallback) {
+    */
+    public void setFinishCallback(FinishCallback finishCallback) {
         this.finishCallback = finishCallback;
+    }
+
+    protected void preFinish() {
+    }
+
+    protected void postFinish() {
     }
 
     /**
      * Lifecycle method that could optionally be called when the Presenter hides
      */
-    protected void finish() {
+    protected final void finish() {
+        preFinish();
         if (finishCallback != null) {
-            finishCallback.onFinish(this);
+            finishCallback.onFinish(bundle);
             finishCallback = null;
         }
-        // Then hide or dispose the Presenter
+        getView().finish();
+        postFinish();
+        bundle = null;
     }
 
     /**
@@ -700,5 +718,9 @@ public abstract class PresenterWidget<V extends View> extends
         }
 
         visibleHandlerRegistrations.clear();
+    }
+
+    private Bundle ensureBundle() {
+        return bundle = bundle == null ? new Bundle() : bundle;
     }
 }

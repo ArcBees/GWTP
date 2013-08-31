@@ -71,4 +71,6 @@ public interface View extends IsWidget {
      *                clear the slot entirely.
      */
     void setInSlot(Object slot, IsWidget content);
+
+    void finish();
 }

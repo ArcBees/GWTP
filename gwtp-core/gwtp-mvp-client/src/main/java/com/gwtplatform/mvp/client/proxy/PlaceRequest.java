@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.gwtplatform.mvp.client.PresenterWidget;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -46,6 +48,7 @@ import java.util.Set;
 public class PlaceRequest {
     private final String nameToken;
     private final Map<String, String> params;
+    private final PresenterWidget.FinishCallback finishCallback;
 
     /**
      * Builds a request without any name token and without parameters. You should
@@ -62,6 +65,7 @@ public class PlaceRequest {
         // parameter-less PlaceRequest and slightly more
         // costly to instantiate PlaceRequest with parameters.
         this.params = null;
+        this.finishCallback = null;
     }
 
     /**
@@ -87,6 +91,7 @@ public class PlaceRequest {
         // parameter-less PlaceRequest and slightly more
         // costly to instantiate PlaceRequest with parameters.
         this.params = null;
+        this.finishCallback = null;
     }
 
     /**
@@ -95,9 +100,10 @@ public class PlaceRequest {
      * @param nameToken The name token for the request.
      * @param params    Existing parameter map.
      */
-    private PlaceRequest(String nameToken, Map<String, String> params) {
+    private PlaceRequest(String nameToken, Map<String, String> params, PresenterWidget.FinishCallback finishCallback) {
         this.nameToken = nameToken;
         this.params = params;
+        this.finishCallback = finishCallback;
     }
 
     @Override
@@ -166,6 +172,10 @@ public class PlaceRequest {
         return 11 * (nameToken.hashCode() + (params == null ? 0 : params.hashCode()));
     }
 
+    public PresenterWidget.FinishCallback getFinishCallback() {
+        return finishCallback;
+    }
+
     /**
      * Checks if this place request has the same name token as the one passed in.
      *
@@ -226,6 +236,7 @@ public class PlaceRequest {
     public static final class Builder {
         private String nameToken;
         private Map<String, String> params;
+        private PresenterWidget.FinishCallback finishCallback;
 
         /**
          * Constructor which will not initialize any internal variables; this should be done by calling either {@link
@@ -278,6 +289,12 @@ public class PlaceRequest {
             return this;
         }
 
+        public Builder with(PresenterWidget.FinishCallback finishCallback) {
+            this.finishCallback = finishCallback;
+
+            return this;
+        }
+
         private void lazyInitializeParamMap() {
             if (this.params == null) {
                 this.params = new LinkedHashMap<String, String>();
@@ -285,7 +302,7 @@ public class PlaceRequest {
         }
 
         public PlaceRequest build() {
-            return new PlaceRequest(nameToken, params);
+            return new PlaceRequest(nameToken, params, finishCallback);
         }
     }
 }
