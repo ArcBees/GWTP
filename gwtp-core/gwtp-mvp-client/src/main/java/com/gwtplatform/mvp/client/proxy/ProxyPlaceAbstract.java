@@ -271,6 +271,8 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
                     @Override
                     public void execute() {
                         PlaceRequest originalRequest = placeManager.getCurrentPlaceRequest();
+                        // Automatically bind the FinishCallback passed within the PlaceRequest to the revealing
+                        // Presenter.
                         presenter.setFinishCallback(originalRequest.getFinishCallback());
                         presenter.prepareFromRequest(request);
                         if (originalRequest == placeManager.getCurrentPlaceRequest()) {

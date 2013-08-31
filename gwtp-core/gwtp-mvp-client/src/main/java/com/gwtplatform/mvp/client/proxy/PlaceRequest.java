@@ -126,6 +126,10 @@ public class PlaceRequest {
         return false;
     }
 
+    public PresenterWidget.FinishCallback getFinishCallback() {
+        return finishCallback;
+    }
+
     public String getNameToken() {
         return nameToken;
     }
@@ -170,10 +174,6 @@ public class PlaceRequest {
                     "Cannot compute hashcode of PlaceRequest with a null nameToken");
         }
         return 11 * (nameToken.hashCode() + (params == null ? 0 : params.hashCode()));
-    }
-
-    public PresenterWidget.FinishCallback getFinishCallback() {
-        return finishCallback;
     }
 
     /**
@@ -289,6 +289,12 @@ public class PlaceRequest {
             return this;
         }
 
+        /**
+         * Registers a finishCallback to be exexcuted on target {@link com.gwtplatform.mvp.client.Presenter}'s
+         * {@link com.gwtplatform.mvp.client.Presenter#finish()}.
+         * @param finishCallback
+         * @return
+         */
         public Builder with(PresenterWidget.FinishCallback finishCallback) {
             this.finishCallback = finishCallback;
 

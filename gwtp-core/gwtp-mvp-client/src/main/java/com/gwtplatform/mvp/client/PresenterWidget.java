@@ -345,6 +345,17 @@ public abstract class PresenterWidget<V extends View> extends
         getView().removeFromSlot(slot, content);
     }
 
+    /**
+     * Registers the FinishCallback that must be executed when Presenter's
+     * {@link #finish()} is called. This method is used by Proxy when revealing
+     * a place. Usually, this is used when another Presenter wants to execute
+     * some logic after the current Presenter finishes its cycle of use.
+     * @param finishCallback    callback to be executed on {@link #finish}
+     */
+    public void setFinishCallback(FinishCallback finishCallback) {
+        this.finishCallback = finishCallback;
+    }
+
     // TODO This should be final but needs to be overriden in {@link
     // TabContainerPresenter}
     // We should be able to do this once we switch to an event-based mechanism for
@@ -467,6 +478,14 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     /**
+     * Get some data from current Bundle
+     * @param key   String key
+     */
+    protected void getFromBundle(String key) {
+        ensureBundle().get(key);
+    }
+
+    /**
      * Lifecycle method called whenever this presenter is about to be
      * hidden.
      * <p/>
@@ -530,26 +549,24 @@ public abstract class PresenterWidget<V extends View> extends
     protected void onReveal() {
     }
 
-    protected void putInBundle(String key, Object value) {
-        ensureBundle().put(key, value);
-    }
-
-    protected void getFromBundle(String key) {
-        ensureBundle().get(key);
-    }
-    /*
-    protected FinishCallback getFinishCallback() {
-        return finishCallback;
-    }
-    */
-    public void setFinishCallback(FinishCallback finishCallback) {
-        this.finishCallback = finishCallback;
-    }
-
+    /**
+     * Called immediately after {@link #finish()} is triggered.
+     * <p/>
+     * You should override this method to perform any common logic that must be
+     * executed before current {@link FinishCallback} is called.
+     */
     protected void preFinish() {
     }
 
-    protected void postFinish() {
+    /**
+     * Put some data associated with the given key into current {@link Bundle}.
+     * The Bundle will be passed to the current {@link FinishCallback} if there's
+     * one registered in the current use cycle.
+     * @param key
+     * @param value
+     */
+    protected void putInBundle(String key, Object value) {
+        ensureBundle().put(key, value);
     }
 
     /**
@@ -562,7 +579,6 @@ public abstract class PresenterWidget<V extends View> extends
             finishCallback = null;
         }
         getView().finish();
-        postFinish();
         bundle = null;
     }
 
