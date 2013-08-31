@@ -575,7 +575,7 @@ public abstract class PresenterWidget<V extends View> extends
     protected final void finish() {
         preFinish();
         if (finishCallback != null) {
-            finishCallback.onFinish(bundle);
+            finishCallback.onFinish(ensureBundle());
             finishCallback = null;
         }
         getView().finish();

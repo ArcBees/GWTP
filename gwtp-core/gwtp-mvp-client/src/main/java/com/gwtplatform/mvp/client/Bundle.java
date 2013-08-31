@@ -1,6 +1,7 @@
 package com.gwtplatform.mvp.client;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Object that holds data to be transferred between {@link PresenterWidget}s
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 public class Bundle {
 
-    private final HashMap<String, Object> dataMap = new HashMap<String, Object>();
+    private HashMap<String, Object> dataMap;
 
     /**
      * Put some data associated with the given key.
@@ -20,7 +21,7 @@ public class Bundle {
      * @param value
      */
     public void put(String key, Object value) {
-        dataMap.put(key, value);
+        ensureDataMap().put(key, value);
     }
 
     /**
@@ -29,7 +30,11 @@ public class Bundle {
      * @param key
      * @return  data associated with the given key.
      */
-    public Object get(String key) {
-        return dataMap.get(key);
+    public <T> T get(String key) {
+        return dataMap == null ? null : (T) dataMap.get(key);
+    }
+
+    private Map<String, Object> ensureDataMap() {
+        return dataMap = dataMap == null ? new HashMap<String, Object>() : dataMap;
     }
 }
