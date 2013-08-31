@@ -478,7 +478,7 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     /**
-     * Get some data from current Bundle
+     * Get some data from current Bundle.
      * @param key   String key
      */
     protected void getFromBundle(String key) {
@@ -570,7 +570,7 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     /**
-     * Lifecycle method that could optionally be called when the Presenter hides
+     * Lifecycle method that could optionally be called when the Presenter hides.
      */
     protected final void finish() {
         preFinish();
