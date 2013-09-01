@@ -29,6 +29,23 @@ public class Bundle {
 
     private HashMap<String, Object> dataMap;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bundle)) return false;
+
+        Bundle bundle = (Bundle) o;
+
+        if (dataMap != null ? !dataMap.equals(bundle.dataMap) : bundle.dataMap != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return dataMap != null ? dataMap.hashCode() : 0;
+    }
+
     /**
      * Put some data associated with the given key.
      *
@@ -45,8 +62,8 @@ public class Bundle {
      * @param key
      * @return  data associated with the given key.
      */
-    public <T> T get(String key) {
-        return dataMap == null ? null : (T) dataMap.get(key);
+    public Object get(String key) {
+        return dataMap == null ? null : dataMap.get(key);
     }
 
     private Map<String, Object> ensureDataMap() {

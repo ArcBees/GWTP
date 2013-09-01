@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.gwtplatform.mvp.client.Bundle;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 import java.util.Collections;
@@ -48,7 +49,9 @@ import java.util.Set;
 public class PlaceRequest {
     private final String nameToken;
     private final Map<String, String> params;
+    private final Bundle bundle;
     private final PresenterWidget.FinishCallback finishCallback;
+
 
     /**
      * Builds a request without any name token and without parameters. You should
@@ -65,6 +68,7 @@ public class PlaceRequest {
         // parameter-less PlaceRequest and slightly more
         // costly to instantiate PlaceRequest with parameters.
         this.params = null;
+        this.bundle = null;
         this.finishCallback = null;
     }
 
@@ -91,6 +95,7 @@ public class PlaceRequest {
         // parameter-less PlaceRequest and slightly more
         // costly to instantiate PlaceRequest with parameters.
         this.params = null;
+        this.bundle = null;
         this.finishCallback = null;
     }
 
@@ -100,34 +105,31 @@ public class PlaceRequest {
      * @param nameToken The name token for the request.
      * @param params    Existing parameter map.
      */
-    private PlaceRequest(String nameToken, Map<String, String> params, PresenterWidget.FinishCallback finishCallback) {
+    private PlaceRequest(String nameToken, Map<String, String> params, Bundle bundle, PresenterWidget.FinishCallback finishCallback) {
         this.nameToken = nameToken;
         this.params = params;
+        this.bundle = bundle;
         this.finishCallback = finishCallback;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof PlaceRequest) {
-            PlaceRequest req = (PlaceRequest) obj;
-            if (nameToken == null || req.nameToken == null) {
-                return false;
-            }
-            if (!nameToken.equals(req.nameToken)) {
-                return false;
-            }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PlaceRequest)) return false;
 
-            if (params == null) {
-                return req.params == null;
-            } else {
-                return params.equals(req.params);
-            }
-        }
-        return false;
+        PlaceRequest that = (PlaceRequest) o;
+
+        if (nameToken != null ? !nameToken.equals(that.nameToken) : that.nameToken != null) return false;
+        if (params != null ? !params.equals(that.params) : that.params != null) return false;
+        if (bundle != null ? !bundle.equals(that.bundle) : that.bundle != null) return false;
+        if (finishCallback != null ? !finishCallback.equals(that.finishCallback) : that.finishCallback != null)
+            return false;
+
+        return true;
     }
 
-    public PresenterWidget.FinishCallback getFinishCallback() {
-        return finishCallback;
+    public Bundle getBundle() {
+        return bundle;
     }
 
     public String getNameToken() {
@@ -173,7 +175,11 @@ public class PlaceRequest {
             throw new RuntimeException(
                     "Cannot compute hashcode of PlaceRequest with a null nameToken");
         }
-        return 11 * (nameToken.hashCode() + (params == null ? 0 : params.hashCode()));
+        int result = nameToken != null ? nameToken.hashCode() : 0;
+        result = 31 * result + (params != null ? params.hashCode() : 0);
+        result = 31 * result + (bundle != null ? bundle.hashCode() : 0);
+        result = 31 * result + (finishCallback != null ? finishCallback.hashCode() : 0);
+        return result;
     }
 
     /**
@@ -226,6 +232,10 @@ public class PlaceRequest {
         return b.build();
     }
 
+    PresenterWidget.FinishCallback getFinishCallback() {
+        return finishCallback;
+    }
+
     /**
      * Class for constructing {@link com.gwtplatform.mvp.client.proxy.PlaceRequest}s. This class supports all currently
      * existing constructors and the {@link com.gwtplatform.mvp.client.proxy.PlaceRequest#with(String, String)} method.
@@ -236,6 +246,7 @@ public class PlaceRequest {
     public static final class Builder {
         private String nameToken;
         private Map<String, String> params;
+        private Bundle bundle;
         private PresenterWidget.FinishCallback finishCallback;
 
         /**
@@ -290,10 +301,21 @@ public class PlaceRequest {
         }
 
         /**
+         * Put a bundle to be passed through the request to the target {@link com.gwtplatform.mvp.client.Presenter}.
+         * @param bundle
+         * @return the builder
+         */
+        public Builder with(Bundle bundle) {
+            this.bundle = bundle;
+
+            return this;
+        }
+
+        /**
          * Registers a finishCallback to be exexcuted on target {@link com.gwtplatform.mvp.client.Presenter}'s
          * {@link com.gwtplatform.mvp.client.Presenter#finish()}.
          * @param finishCallback
-         * @return
+         * @return the builder
          */
         public Builder with(PresenterWidget.FinishCallback finishCallback) {
             this.finishCallback = finishCallback;
@@ -308,7 +330,7 @@ public class PlaceRequest {
         }
 
         public PlaceRequest build() {
-            return new PlaceRequest(nameToken, params, finishCallback);
+            return new PlaceRequest(nameToken, params, bundle, finishCallback);
         }
     }
 }
