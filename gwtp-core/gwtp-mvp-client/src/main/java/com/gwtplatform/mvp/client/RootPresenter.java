@@ -136,6 +136,8 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
                 style.setRight(0, Unit.PX);
                 style.setBottom(0, Unit.PX);
                 style.setZIndex(2147483647); // Maximum z-index
+	            style.setBackgroundColor("#FFFFFF");
+	            style.setOpacity(0);
             }
         }
     }
