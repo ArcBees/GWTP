@@ -169,6 +169,15 @@ public class PlaceRequest {
         }
     }
 
+    /**
+     * Checks if current PlaceRequest has a Bundle
+     *
+     * @return <code>true</code> if there is a bundle instantiated; <code>false</code> otherwise.
+     */
+    public boolean hasBundle() {
+        return bundle != null;
+    }
+
     @Override
     public int hashCode() {
         if (nameToken == null) {

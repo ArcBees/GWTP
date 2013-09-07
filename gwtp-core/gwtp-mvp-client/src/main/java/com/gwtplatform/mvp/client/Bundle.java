@@ -41,6 +41,17 @@ public class Bundle {
         return true;
     }
 
+    /**
+     * Checks if bundle has data associated with the given key.
+     *
+     * @param key
+     * @return  <code>true</code> if bundle contains some instantiated object related to the key;
+     *          <code>false</code> otherwise.
+     */
+    public boolean has(String key) {
+        return dataMap.get(key) != null;
+    }
+
     @Override
     public int hashCode() {
         return dataMap != null ? dataMap.hashCode() : 0;
@@ -52,8 +63,9 @@ public class Bundle {
      * @param key
      * @param value
      */
-    public void put(String key, Object value) {
+    public Bundle put(String key, Object value) {
         ensureDataMap().put(key, value);
+        return this;
     }
 
     /**
