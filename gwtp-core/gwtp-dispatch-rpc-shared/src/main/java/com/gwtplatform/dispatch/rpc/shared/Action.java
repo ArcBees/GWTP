@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * An action represents a command sent to the
@@ -34,7 +35,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * @param <R> The {@link Result} type.
  * @author David Peterson
  */
-public interface Action<R extends Result> extends IsSerializable {
+public interface Action<R extends Result> extends TypedAction<R>, IsSerializable {
 
     /**
      * The URL of the service used by default.
