@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -37,8 +36,6 @@ import com.gwtplatform.dispatch.annotation.UseProxyName;
 import com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper;
 import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
-import static javax.lang.model.SourceVersion.RELEASE_6;
-
 /**
  * Processes {@link GenProxy} annotations.
  * <p/>
@@ -47,7 +44,6 @@ import static javax.lang.model.SourceVersion.RELEASE_6;
  *
  * @author Florian Sauter
  */
-@SupportedSourceVersion(RELEASE_6)
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenProxy")
 public class GenProxyProcessor extends GenProcessor {
     @Override
