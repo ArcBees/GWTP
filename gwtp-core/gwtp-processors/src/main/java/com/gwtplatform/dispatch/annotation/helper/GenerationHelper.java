@@ -36,6 +36,14 @@ import javax.lang.model.type.TypeMirror;
  */
 public class GenerationHelper implements Closeable {
 
+    private int whitespaces;
+
+    private PrintWriter writer;
+
+    public GenerationHelper(Writer sourceWriter) {
+        initializeSourceWriter(sourceWriter);
+    }
+
     /**
      * Construct a single string from an array of strings, gluing them together
      * with the specified delimiter.
@@ -82,14 +90,6 @@ public class GenerationHelper implements Closeable {
             }
         }
         return result;
-    }
-
-    private int whitespaces;
-
-    private PrintWriter writer;
-
-    public GenerationHelper(Writer sourceWriter) {
-        initializeSourceWriter(sourceWriter);
     }
 
     @Override
