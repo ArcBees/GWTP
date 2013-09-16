@@ -21,7 +21,6 @@ import java.io.Writer;
 import java.util.Collection;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -29,8 +28,6 @@ import javax.lang.model.element.VariableElement;
 
 import com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper;
 import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
-
-import static javax.lang.model.SourceVersion.RELEASE_6;
 
 /**
  * Processes {@link GenDto} annotations.
@@ -42,7 +39,6 @@ import static javax.lang.model.SourceVersion.RELEASE_6;
  * @author Florian Sauter
  * @author Stephen Haberman (concept)
  */
-@SupportedSourceVersion(RELEASE_6)
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDto")
 public class GenDtoProcessor extends GenProcessor {
 
