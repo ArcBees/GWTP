@@ -22,6 +22,7 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
@@ -56,6 +57,11 @@ public abstract class GenProcessor extends AbstractProcessor {
      */
     public ProcessingEnvironment getEnvironment() {
         return environment;
+    }
+
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latest();
     }
 
     @Override
