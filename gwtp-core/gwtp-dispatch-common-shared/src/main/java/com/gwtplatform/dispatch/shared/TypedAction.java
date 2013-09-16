@@ -14,28 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.shared;
+package com.gwtplatform.dispatch.shared;
 
-import java.util.List;
-
-import com.gwtplatform.dispatch.shared.TypedAction;
-
-public interface RestAction<R> extends TypedAction<R> {
-    String getPath();
-
-    HttpMethod getHttpMethod();
-
-    List<RestParameter> getPathParams();
-
-    List<RestParameter> getQueryParams();
-
-    List<RestParameter> getFormParams();
-
-    List<RestParameter> getHeaderParams();
-
-    Object getBodyParam();
-
-    Boolean hasFormParams();
-
-    Boolean hasBodyParam();
+public interface TypedAction<R> {
 }

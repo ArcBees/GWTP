@@ -14,33 +14,32 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.TypedAction;
 
-class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallback<ClientActionHandler<?, ?>>,
+public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements AsyncCallback<ClientActionHandler<?, ?>>,
         ExecuteCommand<A, R> {
-    private final RestDispatchAsync restDispatchAsync;
-    private final DelegatingDispatchRequest dispatchRequest;
+    private final DispatchCall dispatcher;
     private final A action;
     private final AsyncCallback<R> callback;
+    private final DelegatingDispatchRequest dispatchRequest;
     private final String securityCookie;
 
-    DelegatingAsyncCallback(RestDispatchAsync restDispatchAsync,
+    public DelegatingAsyncCallback(DispatchCall dispatcher,
                             A action,
                             AsyncCallback<R> callback,
                             DelegatingDispatchRequest dispatchRequest,
                             String securityCookie) {
-        this.restDispatchAsync = restDispatchAsync;
-        this.dispatchRequest = dispatchRequest;
+        this.dispatcher = dispatcher;
         this.action = action;
         this.callback = callback;
+        this.dispatchRequest = dispatchRequest;
         this.securityCookie = securityCookie;
     }
 
@@ -60,25 +59,24 @@ class DelegatingAsyncCallback<A extends RestAction<R>, R> implements AsyncCallba
     @Override
     public void onFailure(Throwable caught) {
         dispatchRequest.cancel();
-        callback.onFailure(caught);
+
+        dispatcher.onExecuteFailure(caught);
     }
 
     @Override
     public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
         if (dispatchRequest.isPending()) {
-            return restDispatchAsync.doExecute(securityCookie, action, resultCallback);
+            return dispatcher.doExecute(securityCookie);
         } else {
             return null;
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void delegateFailure(ClientActionHandler<?, ?> clientActionHandler) {
-        dispatchRequest.cancel();
+        ClientActionHandlerMismatchException exception =
+                new ClientActionHandlerMismatchException(action.getClass(), clientActionHandler.getActionType());
 
-        Class<? extends RestAction<?>> requestedActionClass = (Class<? extends RestAction<?>>) action.getClass();
-        Class<?> supportedActionType = clientActionHandler.getActionType();
-        callback.onFailure(new ClientActionHandlerMismatchException(requestedActionClass, supportedActionType));
+        onFailure(exception);
     }
 
     private void delegateExecute(ClientActionHandler<A, R> clientActionHandler) {

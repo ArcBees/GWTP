@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.rest.rebind;
 
 import java.io.PrintWriter;
-import java.util.Set;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -30,8 +29,6 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.TypeLiteral;
 import com.gwtplatform.dispatch.rest.client.AbstractRestDispatcherController;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 
@@ -59,7 +56,6 @@ public class VelocityGenerator extends Generator {
             return typeName + SUFFIX;
         }
 
-        registerPrimitiveTypes();
         generateClasses();
         generateEntryPoint(treeLogger, generatorContext, printWriter);
 
@@ -82,22 +78,6 @@ public class VelocityGenerator extends Generator {
         className = type.getName() + SUFFIX;
 
         return generatorContext.tryCreate(logger.getTreeLogger(), packageName, className);
-    }
-
-    private void registerPrimitiveTypes() throws UnableToCompleteException {
-        Set<JClassType> registeredClasses = injector.getInstance(Key.get(new TypeLiteral<Set<JClassType>>() {
-        }));
-
-        registeredClasses.add(getType(Integer.class.getName()));
-        registeredClasses.add(getType(Boolean.class.getName()));
-        registeredClasses.add(getType(Character.class.getName()));
-        registeredClasses.add(getType(Byte.class.getName()));
-        registeredClasses.add(getType(Short.class.getName()));
-        registeredClasses.add(getType(Long.class.getName()));
-        registeredClasses.add(getType(Float.class.getName()));
-        registeredClasses.add(getType(Double.class.getName()));
-        registeredClasses.add(getType(Void.class.getName()));
-        registeredClasses.add(getType(String.class.getName()));
     }
 
     private JClassType getType(String typeName) throws UnableToCompleteException {
