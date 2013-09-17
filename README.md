@@ -80,7 +80,8 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * [Javadocs](http://arcbees.github.com/GWTP/javadoc/apidocs/index.html)
 
 ##Plugins
-* [Eclipse Plugin source](https://github.com/ArcBees/gwtp-eclipse-plugin)
+* [Eclipse Plugin](https://github.com/ArcBees/gwtp-eclipse-plugin) - Create project and presenters
+* [IntelliJ IDEA Plugin](https://github.com/ArcBees/gwtp-idea-plugin) - Create project and presenters
 
 ##Moving From 
 * While we move, you can find the documentation here: http://gwt-platform.googlecode.com
