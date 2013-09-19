@@ -277,7 +277,7 @@ public class PresenterInspector {
         classInspector.collectAnnotatedMethods(ProxyEvent.class, collectedMethods);
 
         for (JMethod method : collectedMethods) {
-            ProxyEventMethod proxyEventMethod = new ProxyEventMethod(logger, classCollection, this);
+            ProxyEventMethod proxyEventMethod = new ProxyEventMethod(oracle, logger, classCollection, this);
             proxyEventMethod.init(method);
             // Make sure that handler method name is not already used
             for (ProxyEventMethod previousMethod : proxyEventMethods) {
