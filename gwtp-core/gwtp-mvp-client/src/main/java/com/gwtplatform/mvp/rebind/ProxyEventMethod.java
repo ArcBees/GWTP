@@ -142,7 +142,10 @@ public class ProxyEventMethod {
                 // Class<T>
                 genericClass = (JGenericType) oracle.getType(Class.class.getName());
             } catch (NotFoundException e) {
-                throw new RuntimeException(e);
+                logger.log(TreeLogger.ERROR, getErrorPrefix(eventType.getName())
+                        + ", but the generation process failed due to the following exception.", e);
+                logger.log(TreeLogger.ERROR, "Try using @ProxyEvent without class parameters.");
+                throw new UnableToCompleteException();
             }
 
             getTypeMethod = eventType.findMethod("getType", new JType[]{genericClass});
@@ -197,12 +200,12 @@ public class ProxyEventMethod {
     }
 
     private String getErrorPrefix() {
-        String toRet = "In presenter " + presenterInspector.getPresenterClassName()
+        String toReturn = "In presenter " + presenterInspector.getPresenterClassName()
                 + ", method " + functionName + " annotated with @" + ProxyEvent.class.getSimpleName();
         if (classParameter != Null.class) {
-            toRet += ", signed with one class parameter,";
+            toReturn += ", signed with one class parameter,";
         }
-        return toRet;
+        return toReturn;
     }
 
     private String getErrorPrefix(String eventTypeName) {
