@@ -20,8 +20,6 @@ package com.gwtplatform.mvp.client.annotations;
  * The {@code Null} class is an uninstantiable placeholder class to hold a
  * reference to the {@code Class} object representing the Java keyword
  * null.
- *
- * @author Danilo Reinert
  */
 public final class Null {
 
