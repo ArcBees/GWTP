@@ -36,7 +36,6 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
  * Analytics results
  * 
  * @see the original {@link GoogleAnalyticsNavigationTracker} by Christian Goudrea for implementation details
- * @author Joseph Lust
  */
 public class GoogleAnalyticsRouteTokenNavigationTracker implements NavigationHandler {
     private final GoogleAnalytics analytics;
