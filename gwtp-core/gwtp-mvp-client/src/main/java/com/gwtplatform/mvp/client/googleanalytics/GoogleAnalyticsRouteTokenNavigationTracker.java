@@ -25,9 +25,10 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.GaAccount;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
 /**
- * Used to provide complete URL's in your Google Analytics results when {@link RouteTokenFormatter} 
+ * Used to provide complete URL's in your Google Analytics results when {@link RouteTokenFormatter}
  * is implemented. Replaces the route parameters in the name token with those supplied in the request
  * parameters. Route parameters missing in the request will remain unescaped. <br>
  * <br>
