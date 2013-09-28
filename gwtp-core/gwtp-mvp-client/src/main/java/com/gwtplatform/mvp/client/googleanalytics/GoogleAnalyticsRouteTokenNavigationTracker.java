@@ -25,7 +25,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.GaAccount;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
  * Used to provide complete URL's in your Google Analytics results when {@link RouteTokenFormatter}
@@ -33,17 +33,24 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
  * parameters. Route parameters missing in the request will remain unescaped. <br>
  * <br>
  * i.e. <code>/foo/{name}/bar/{number}</code> becomes <code>/foo/sam/bar/223</code> in Google
- * Analytics results
+ * Analytics results<br>
+ * <br>
+ * Note: All parameters will be added to the URL, including those which are <b>NOT</b> route parameters.
  * 
  * @see the original {@link GoogleAnalyticsNavigationTracker} by Christian Goudrea for implementation details
  */
 public class GoogleAnalyticsRouteTokenNavigationTracker implements NavigationHandler {
+
     private final GoogleAnalytics analytics;
+
+    private final PlaceManager placeManager;
 
     @Inject
     public GoogleAnalyticsRouteTokenNavigationTracker(@GaAccount final String gaAccount,
+            final PlaceManager placeManager,
             final EventBus eventBus, final GoogleAnalytics analytics) {
         this.analytics = analytics;
+        this.placeManager = placeManager;
 
         if (GWT.isScript()) {
             Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -59,26 +66,7 @@ public class GoogleAnalyticsRouteTokenNavigationTracker implements NavigationHan
 
     @Override
     public void onNavigation(NavigationEvent navigationEvent) {
-        final String pageName = replaceTokenEscapedParameters(navigationEvent.getRequest());
+        final String pageName = placeManager.buildHistoryToken(navigationEvent.getRequest());
         analytics.trackPageview(pageName);
-    }
-
-    /**
-    * Replace name token route parameters with matching parameters values from the request.
-    * 
-    * @param request navigation request
-    * @return name token with route parameters replaced with request parameters
-    */
-    private String replaceTokenEscapedParameters(final PlaceRequest request) {
-        String pageName = request.getNameToken();
-
-        // escape parameters if they have a value and exist in the name token
-        for (final String parameterName : request.getParameterNames()) {
-            final String paramValue = request.getParameter(parameterName, null);
-            if (paramValue != null) {
-                pageName = pageName.replace("{" + parameterName + "}", paramValue);
-            }
-        }
-        return pageName;
     }
 }
