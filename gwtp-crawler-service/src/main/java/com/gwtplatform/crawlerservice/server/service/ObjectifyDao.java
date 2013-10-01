@@ -22,9 +22,9 @@ import java.util.Map;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.LoadType;
 import com.googlecode.objectify.cmd.Query;
+import com.gwtplatform.crawlerservice.server.objectify.OfyService;
 
 /**
  * Generic DAO for use with Objectify.
@@ -116,7 +116,7 @@ public abstract class ObjectifyDao<T> {
 
     protected Objectify ofy() {
         if (lazyOfy == null) {
-            lazyOfy = ObjectifyService.ofy( );
+            lazyOfy = OfyService.ofy();
         }
         return lazyOfy;
     }
