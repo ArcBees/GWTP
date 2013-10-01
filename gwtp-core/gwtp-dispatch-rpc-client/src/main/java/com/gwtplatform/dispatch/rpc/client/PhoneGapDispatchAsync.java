@@ -25,7 +25,7 @@ import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
-public class PhoneGapDispatchAsync extends RpcDispatchAsync {
+public class PhoneGapDispatchAsync extends RpcDispatchAsyncStandalone {
     private final String remoteServerUrl;
 
     @Inject
