@@ -25,22 +25,19 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 
 public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements AsyncCallback<ClientActionHandler<?, ?>>,
         ExecuteCommand<A, R> {
-    private final DispatchCall dispatcher;
+    private final DispatchCall dispatchCall;
     private final A action;
     private final AsyncCallback<R> callback;
     private final DelegatingDispatchRequest dispatchRequest;
-    private final String securityCookie;
 
-    public DelegatingAsyncCallback(DispatchCall dispatcher,
-                            A action,
-                            AsyncCallback<R> callback,
-                            DelegatingDispatchRequest dispatchRequest,
-                            String securityCookie) {
-        this.dispatcher = dispatcher;
+    public DelegatingAsyncCallback(DispatchCall dispatchCall,
+                                   A action,
+                                   AsyncCallback<R> callback,
+                                   DelegatingDispatchRequest dispatchRequest) {
+        this.dispatchCall = dispatchCall;
         this.action = action;
         this.callback = callback;
         this.dispatchRequest = dispatchRequest;
-        this.securityCookie = securityCookie;
     }
 
     @SuppressWarnings("unchecked")
@@ -48,10 +45,7 @@ public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements Asy
     public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
         if (clientActionHandler.getActionType() != action.getClass()) {
             delegateFailure(clientActionHandler);
-            return;
-        }
-
-        if (dispatchRequest.isPending()) {
+        } else if (dispatchRequest.isPending()) {
             delegateExecute((ClientActionHandler<A, R>) clientActionHandler);
         }
     }
@@ -60,13 +54,13 @@ public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements Asy
     public void onFailure(Throwable caught) {
         dispatchRequest.cancel();
 
-        dispatcher.onExecuteFailure(caught);
+        dispatchCall.onExecuteFailure(caught);
     }
 
     @Override
     public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
         if (dispatchRequest.isPending()) {
-            return dispatcher.doExecute(securityCookie);
+            return dispatchCall.doExecute();
         } else {
             return null;
         }

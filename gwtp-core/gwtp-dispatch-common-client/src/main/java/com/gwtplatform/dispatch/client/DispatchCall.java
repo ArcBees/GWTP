@@ -16,15 +16,12 @@
 
 package com.gwtplatform.dispatch.client;
 
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.shared.TypedAction;
@@ -38,11 +35,11 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
 
-    public DispatchCall(A action,
-                        AsyncCallback<R> callback,
-                        ExceptionHandler exceptionHandler,
-                        ClientActionHandlerRegistry clientActionHandlerRegistry,
-                        SecurityCookieAccessor securityCookieAccessor) {
+    private String securityCookie;
+
+    public DispatchCall(ExceptionHandler exceptionHandler, ClientActionHandlerRegistry clientActionHandlerRegistry,
+                        SecurityCookieAccessor securityCookieAccessor, A action,
+                        AsyncCallback<R> callback) {
         this.action = action;
         this.callback = callback;
         this.exceptionHandler = exceptionHandler;
@@ -51,7 +48,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     }
 
     public DispatchRequest execute() {
-        String securityCookie = securityCookieAccessor.getCookieContent();
+        securityCookie = securityCookieAccessor.getCookieContent();
 
         IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
                 clientActionHandlerRegistry.find(action.getClass());
@@ -59,15 +56,17 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         if (clientActionHandlerProvider != null) {
             DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
             DelegatingAsyncCallback<A, R> delegatingCallback =
-                    new DelegatingAsyncCallback<A, R>(this, action, callback, dispatchRequest, securityCookie);
+                    new DelegatingAsyncCallback<A, R>(this, action, callback, dispatchRequest);
 
             clientActionHandlerProvider.get(delegatingCallback);
 
             return dispatchRequest;
         } else {
-            return doExecute(securityCookie);
+            return doExecute();
         }
     }
+
+    protected abstract DispatchRequest doExecute();
 
     protected A getAction() {
         return action;
@@ -89,22 +88,16 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         return securityCookieAccessor;
     }
 
-    protected DispatchRequest doExecute(String securityCookie) {
-        try {
-            RequestBuilder requestBuilder = buildRequest(securityCookie);
+    protected String getSecurityCookie() {
+        return securityCookie;
+    }
 
-            return new GwtHttpDispatchRequest(requestBuilder.send());
-        } catch (RequestException e) {
-            onExecuteFailure(e);
-        } catch (ActionException e) {
-            onExecuteFailure(e);
-        }
-
-        return new CompletedDispatchRequest();
+    protected void onExecuteSuccess(R result) {
+        callback.onSuccess(result);
     }
 
     protected void onExecuteSuccess(R result, Response response) {
-        callback.onSuccess(result);
+        onExecuteSuccess(result);
     }
 
     protected void onExecuteFailure(Throwable caught) {
@@ -118,6 +111,4 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     protected void onExecuteFailure(Throwable caught, Response response) {
         onExecuteFailure(caught);
     }
-
-    protected abstract RequestBuilder buildRequest(String securityCookie) throws ActionException;
 }
