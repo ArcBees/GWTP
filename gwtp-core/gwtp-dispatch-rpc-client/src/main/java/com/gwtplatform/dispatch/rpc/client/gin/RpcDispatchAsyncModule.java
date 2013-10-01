@@ -18,14 +18,11 @@ package com.gwtplatform.dispatch.rpc.client.gin;
 
 import javax.inject.Singleton;
 
-import com.google.inject.Provides;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
-import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsyncStandalone;
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses Remote Procedure Calls (RPC).
@@ -58,11 +55,10 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         super(builder);
     }
 
-    @Provides
-    @Singleton
-    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
-                                                 SecurityCookieAccessor secureSessionAccessor,
-                                                 ClientActionHandlerRegistry registry) {
-        return new RpcDispatchAsync(exceptionHandler, secureSessionAccessor, registry);
+    @Override
+    protected void configureDispatch() {
+        bind(RpcDispatchCallFactory.class).in(Singleton.class);
+
+        bind(RpcDispatchAsyncStandalone.class).in(Singleton.class);
     }
 }
