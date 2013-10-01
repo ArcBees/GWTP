@@ -19,14 +19,18 @@ package com.gwtplatform.dispatch.rest.client;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestCallback;
 import com.gwtplatform.dispatch.shared.ActionException;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
@@ -40,18 +44,25 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
                             RestResponseDeserializer restResponseDeserializer,
                             A action,
                             AsyncCallback<R> callback) {
-        super(action, callback, exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor);
+        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
     }
 
     @Override
-    protected RequestBuilder buildRequest(String securityCookie) throws ActionException {
-        RequestBuilder requestBuilder = requestBuilderFactory.build(getAction(), securityCookie);
-        requestBuilder.setCallback(createRequestCallback());
+    protected DispatchRequest doExecute() {
+        try {
+            RequestBuilder requestBuilder = buildRequest();
 
-        return requestBuilder;
+            return new GwtHttpDispatchRequest(requestBuilder.send());
+        } catch (RequestException e) {
+            onExecuteFailure(e);
+        } catch (ActionException e) {
+            onExecuteFailure(e);
+        }
+
+        return new CompletedDispatchRequest();
     }
 
     @Override
@@ -92,5 +103,12 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
                 onExecuteFailure(exception);
             }
         };
+    }
+
+    private RequestBuilder buildRequest() throws ActionException {
+        RequestBuilder requestBuilder = requestBuilderFactory.build(getAction(), getSecurityCookie());
+        requestBuilder.setCallback(createRequestCallback());
+
+        return requestBuilder;
     }
 }
