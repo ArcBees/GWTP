@@ -16,12 +16,10 @@
 
 package com.gwtplatform.crawlerservice.server.domain;
 
-import javax.persistence.Id;
+import com.googlecode.objectify.annotation.Id;
 
 /**
  * The base class of any object that can be stored in the datastore.
- *
- * @author Philippe Beaudoin
  */
 public class DatastoreObject {
     @Id
