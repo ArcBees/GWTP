@@ -3,10 +3,14 @@ This is a test bed for the GWTP features.
 
 Login password for the login feature is: admin/qwerty
 
-##Running all integration tests
+##Running Tests
+
+###Maven integration tests
+Running the tests using Maven
 `mvn clean verify -Pintegration-test`
 
-##Running integration tests from your IDE
+###IDE Integration tests
+Running tests using the IDE
 `mvn clean compile gwt:compile gae:run -Pintegration-test`
 
 ##Reference
