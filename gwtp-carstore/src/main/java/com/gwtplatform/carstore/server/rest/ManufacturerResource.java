@@ -16,6 +16,8 @@
 
 package com.gwtplatform.carstore.server.rest;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -34,6 +36,7 @@ import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
@@ -83,7 +86,10 @@ public class ManufacturerResource {
     @Path(ResourcesPath.RATING)
     @GET
     public GetResults<ManufacturerRatingDto> getAverageRatings() {
-        return new GetResults<ManufacturerRatingDto>(reportService.getAverageCarRatings(
-                Rating.createDto(ratingDao.getAll())));
+        List<Rating> ratings = ratingDao.getAll();
+        List<RatingDto> ratingDtos = Rating.createDto(ratings);
+        List<ManufacturerRatingDto> manufacturerRatingDtos = reportService.getAverageCarRatings(ratingDtos);
+
+        return new GetResults<ManufacturerRatingDto>(manufacturerRatingDtos);
     }
 }
