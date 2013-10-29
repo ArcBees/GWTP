@@ -20,8 +20,6 @@ import javax.inject.Inject;
 
 import com.gwtplatform.carstore.cucumber.application.ratings.RatingPage;
 import com.gwtplatform.carstore.cucumber.application.reports.ReportPage;
-import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -33,24 +31,23 @@ public class ReportStepDefs {
 
     private final RatingPage ratingPage;
     private final ReportPage reportPage;
-    private final MessageWidgetPage messageWidgetPage;
-    private int numberOfLines;
 
     @Inject
     ReportStepDefs(RatingPage ratingPage,
-                   ReportPage reportPage,
-                   MessageWidgetPage messageWidgetPage) {
+                   ReportPage reportPage) {
         this.ratingPage = ratingPage;
         this.reportPage = reportPage;
-        this.messageWidgetPage = messageWidgetPage;
     }
 
     @Given("^I compute rating average for all manufacturers$")
     public void I_compute_rating_average_for_all_manufacturers() {
-        numberOfLines = ratingPage.getNumberOfLines();
+        int numberOfLines = ratingPage.getNumberOfLines();
 
         for (int line = 1; line <= numberOfLines; line++) {
-            reportPage.addRating(ratingPage.getCellText(CAR_COL, line), ratingPage.getCellText(RATING_COL, line));
+            String car = ratingPage.getCellText(CAR_COL, line);
+            String rating = ratingPage.getCellText(RATING_COL, line);
+
+            reportPage.addRating(car, rating);
         }
     }
 
