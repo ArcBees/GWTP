@@ -47,13 +47,18 @@ public class ReportPage extends PageWithEditTable {
         for (int row = 1; row <= getNumberOfLines(reports); row++) {
             String manufacturer = getCellText(reports, MANUFACTURER_COL, row);
             Double average = Double.valueOf(getCellText(reports, RATING_COL, row));
+            Double referenceAverage = averages.get(manufacturer).average();
 
-            if (averages.get(manufacturer).average() != average) {
+            if (!almostEqual(average, referenceAverage, 0.001d)) {
                 match &= false;
             }
         }
 
         return match;
+    }
+
+    private boolean almostEqual(Double a, Double b, double epsilon) {
+        return Math.abs(a - b) < epsilon;
     }
 
     private class AveragingCounter {
