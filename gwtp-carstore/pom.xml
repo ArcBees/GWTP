@@ -328,7 +328,6 @@
     </dependencies>
 
     <profiles>
-        <!-- 'mvn gwt:compile jetty:run -Pintegration-test' - test run cucumber story from ide -->
         <profile>
             <id>integration-test</id>
             <build>
@@ -366,8 +365,6 @@
                         </configuration>
                     </plugin>
 
-                    <!-- Integration testing which runs clases *TestInt.java -->
-                    <!-- run 'mvn integration-test' -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>

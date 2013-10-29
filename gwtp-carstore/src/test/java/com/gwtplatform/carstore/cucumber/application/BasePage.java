@@ -23,6 +23,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -84,6 +85,16 @@ public class BasePage {
         webDriverWait().until(ExpectedConditions.stalenessOf(element));
     }
 
+    protected WebElement waitUntilElementIsClickable(By locator) {
+        moveToElementLocatedBy(locator);
+
+        return webDriverWait().until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    protected WebElement waitUntilPresenceOfElementLocated(By locator) {
+        return webDriverWait().until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
     protected WebElement waitUntilElementIsLoaded(final SearchContext parent, final By locator) {
         return webDriverWait().until(new ExpectedCondition<WebElement>() {
             @Override
@@ -91,6 +102,17 @@ public class BasePage {
                 return parent.findElement(locator);
             }
         });
+    }
+
+    private void moveToElementLocatedBy(By by) {
+        WebElement webElement = waitUntilPresenceOfElementLocated(by);
+        moveToElement(webElement);
+    }
+
+    private void moveToElement(WebElement webElement) {
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(webElement);
+        actions.perform();
     }
 
     private WebDriverWait webDriverWait() {
