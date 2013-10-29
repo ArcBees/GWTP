@@ -6,8 +6,8 @@ Login password for the login feature is: admin/qwerty
 ##Running Tests
 
 ###Prerequisites
-We use chromedriver for running integration tests. You'll need chromedriver on your path. For more info,
-see https://sites.google.com/a/chromium.org/chromedriver/
+We use chromedriver for running integration tests. You'll need chromedriver on your path.
+[Download it here.](https://sites.google.com/a/chromium.org/chromedriver/)
 
 ###Maven integration tests
 Running the tests using Maven
