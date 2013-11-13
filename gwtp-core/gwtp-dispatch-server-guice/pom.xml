@@ -34,6 +34,10 @@
             <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-dispatch-test</artifactId>
             <scope>test</scope>
-        </dependency>		
-	</dependencies>
+        </dependency>
+        <dependency>
+            <groupId>org.jukito</groupId>
+            <artifactId>jukito</artifactId>
+        </dependency>
+    </dependencies>
 </project>
