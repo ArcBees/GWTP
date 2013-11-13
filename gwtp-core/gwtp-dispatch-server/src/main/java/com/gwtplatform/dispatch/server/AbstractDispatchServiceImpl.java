@@ -90,7 +90,9 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
                 logger.log(Level.WARNING, newMessage, e);
             }
 
-            throw new ActionException(e.getMessage());
+            e.setStackTrace(new StackTraceElement[]{});
+
+            throw e;
         } catch (ServiceException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Service exception while executing " + action.getClass().getName() + ": " +
