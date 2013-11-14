@@ -90,6 +90,10 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
                 logger.log(Level.WARNING, newMessage, e);
             }
 
+            if (e.getCause() != null) {
+                e.getCause().setStackTrace(new StackTraceElement[]{});
+            }
+
             e.setStackTrace(new StackTraceElement[]{});
 
             throw e;
