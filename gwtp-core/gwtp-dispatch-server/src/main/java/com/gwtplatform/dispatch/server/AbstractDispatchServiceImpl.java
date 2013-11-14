@@ -48,15 +48,13 @@ import com.gwtplatform.dispatch.shared.ServiceException;
 public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet implements DispatchService {
     private static final long serialVersionUID = -4753225025940949024L;
     private static final String noSecurityCookieMessage = "You have to define a security cookie in order to use " +
-                                                          "secured actions. See com.gwtplatform.dispatch.shared" +
-                                                          ".SecurityCookie for details.";
+            "secured actions. See com.gwtplatform.dispatch.shared" +
+            ".SecurityCookie for details.";
     private static final String xsrfAttackMessage = "Cookie provided by RPC doesn't match request cookie, " +
-                                                    "aborting action, possible XSRF attack. (Maybe you forgot to set " +
-                                                    "the security cookie?)";
-
+            "aborting action, possible XSRF attack. (Maybe you forgot to set " +
+            "the security cookie?)";
     protected final Dispatch dispatch;
     protected final Logger logger;
-
     protected RequestProvider requestProvider;
 
     protected AbstractDispatchServiceImpl(Logger logger,
@@ -86,28 +84,24 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
         } catch (ActionException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 String newMessage = "Action exception while executing " + action.getClass().getName() + ": " +
-                                    e.getMessage();
+                        e.getMessage();
                 logger.log(Level.WARNING, newMessage, e);
             }
 
-            if (e.getCause() != null) {
-                e.getCause().setStackTrace(new StackTraceElement[]{});
-            }
-
-            e.setStackTrace(new StackTraceElement[]{});
+            removeStacktraces(e);
 
             throw e;
         } catch (ServiceException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Service exception while executing " + action.getClass().getName() + ": " +
-                                          e.getMessage(), e);
+                        e.getMessage(), e);
             }
 
             throw new ServiceException(e.getMessage());
         } catch (RuntimeException e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Unexpected exception while executing " + action.getClass().getName() + ": " +
-                                          "" + e.getMessage(), e);
+                        "" + e.getMessage(), e);
             }
 
             throw new ServiceException(e.getMessage());
@@ -183,5 +177,17 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
         }
 
         return cookieInRequest.equals(cookieSentByRPC);
+    }
+
+    /**
+     * Recursively removes all stacktraces from a Throwable and its cause
+     */
+    private void removeStacktraces(Throwable e) {
+        if (e == null) {
+            return;
+        }
+
+        e.setStackTrace(new StackTraceElement[]{});
+        removeStacktraces(e.getCause());
     }
 }
