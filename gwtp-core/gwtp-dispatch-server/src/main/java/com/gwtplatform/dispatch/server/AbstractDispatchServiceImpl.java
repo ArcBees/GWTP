@@ -69,6 +69,12 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
         return null;
     }
 
+    /**
+     * {@link ActionException} and {@link ServiceException} will have their stacktraces (and stacktraces of their
+     * causes) removed for security purposes.
+     *
+     * @see {@link DispatchService} for further API docs
+     */
     @Override
     public Result execute(String cookieSentByRPC, Action<?> action) throws ActionException, ServiceException {
 
