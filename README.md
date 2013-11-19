@@ -1,7 +1,15 @@
 ![GWTP] (http://i.imgur.com/LHvTZ.png "GWTP goo-teepee") *goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
 
-##Donation
+##Enterprise Support
+Get high quality support through ArcBees.
+
+<a href="https://gwtp.arcbees.com">Enterprise Support Features</a>
+<a href="https://gwtp.arcbees.com/#buyPro">Buy Enterprise Support</a>
+
+##Open Source Donation
+Help provide support to the dedicated contributors moving this project forward.
+
 [![Donate](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SDCQSKDTWZYCQ)
 
 ##Reference
