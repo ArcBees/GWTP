@@ -39,6 +39,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams;
+import com.gwtplatform.mvp.client.proxy.PlacesImpl;
+import com.gwtplatform.mvp.client.proxy.PlacesWithGatekeeper;
+import com.gwtplatform.mvp.client.proxy.PlacesWithGatekeeperWithParams;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
 import com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
@@ -64,10 +67,14 @@ public class ClassCollection {
     static final String gwtEventClassName = GwtEvent.class.getCanonicalName();
     static final String gwtEventTypeClassName = GwtEvent.Type.class.getCanonicalName();
     static final String placeImplClassName = PlaceImpl.class.getCanonicalName();
+    static final String placesImplClassName = PlacesImpl.class.getCanonicalName();
     static final String placeRequestClassName = PlaceRequest.class.getCanonicalName();
     static final String placeWithGatekeeperClassName = PlaceWithGatekeeper.class.getCanonicalName();
+    static final String placesWithGatekeeperClassName = PlacesWithGatekeeper.class.getCanonicalName();
     static final String placeWithGatekeeperWithParamsClassName =
             PlaceWithGatekeeperWithParams.class.getCanonicalName();
+    static final String placesWithGatekeeperWithParamsClassName =
+            PlacesWithGatekeeperWithParams.class.getCanonicalName();
     static final String providerClassName = Provider.class.getCanonicalName();
     static final String proxyImplClassName = ProxyImpl.class.getCanonicalName();
     static final String proxyPlaceImplClassName = ProxyPlaceImpl.class.getCanonicalName();

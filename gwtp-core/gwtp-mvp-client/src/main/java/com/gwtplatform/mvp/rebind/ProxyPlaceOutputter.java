@@ -42,6 +42,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     public static final String WRAPPED_CLASS_NAME = "WrappedProxy";
 
     private String nameToken;
+    private String[] nameTokens;
     private String getGatekeeperMethod;
     private String[] gatekeeperParams;
 
@@ -91,6 +92,16 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
         return nameToken;
     }
 
+    protected String createInitNameTokens() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"").append(nameToken).append('"');
+        for (String tmpNameToken : nameTokens) {
+            sb.append(",\"").append(tmpNameToken).append('"');
+        }
+        sb.append('}');
+        return sb.toString();
+    }
+
     public String getGatekeeperParamsString() {
         if (gatekeeperParams == null) {
             return "null";
@@ -135,6 +146,10 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
             throw new UnableToCompleteException();
         }
         nameToken = nameTokenAnnotation.value();
+
+        if (nameTokenAnnotation.others().length > 0) {
+            nameTokens = nameTokenAnnotation.others();
+        }
     }
 
     private void findGatekeeperMethod(JClassType proxyInterface)
@@ -212,6 +227,20 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
         }
     }
 
+    private String getPlacesInstantiationString() {
+        if (getGatekeeperMethod == null) {
+            return "new " + ClassCollection.placesImplClassName + "( nameTokens )";
+        } else {
+            if (gatekeeperParams == null) {
+                return "new " + ClassCollection.placesWithGatekeeperClassName
+                        + "( nameTokens, ginjector." + getGatekeeperMethod + "() )";
+            } else {
+                return "new " + ClassCollection.placesWithGatekeeperWithParamsClassName
+                        + "( nameTokens, ginjector." + getGatekeeperMethod + "(), gatekeeperParams )";
+            }
+        }
+    }
+
     /**
      * Writes the method {@code protected void getPlaceTitle(final GetPlaceTitleEvent event)} if
      * one is needed.
@@ -242,9 +271,15 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
                 + ".class);");
         writer.println("wrappedProxy.delayedBind( ginjector ); ");
         writer.println("setProxy(wrappedProxy); ");
-        writer.println("String nameToken = \"" + getNameToken() + "\"; ");
         writer.println("String[] gatekeeperParams = " + getGatekeeperParamsString() + ";");
-        writer.println("setPlace(" + getPlaceInstantiationString() + ");");
+
+        if (nameTokens != null) {
+            writer.println("String[] nameTokens = " + createInitNameTokens() + "; ");
+            writer.println("setPlace(" + getPlacesInstantiationString() + ");");
+        } else {
+            writer.println("String nameToken = \"" + getNameToken() + "\"; ");
+            writer.println("setPlace(" + getPlaceInstantiationString() + ");");
+        }
     }
 
     @Override

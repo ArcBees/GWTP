@@ -14,26 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+package com.gwtplatform.mvp.client.proxy;
 
 /**
- * This annotation is used on the declaration of a presenter's
- * {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace}
- * to specify the name token to use to access this presenter.
- *
  * @author Philippe Beaudoin
  */
-@Target(ElementType.TYPE)
-public @interface NameToken {
+public class PlacesWithGatekeeper extends PlacesImpl {
 
-    String value();
+    private final Gatekeeper gatekeeper;
 
-    /**
-     * 
-     * @return Other nameToken associated with proxy
-     */
-    String[] others() default {};
+    public PlacesWithGatekeeper(String[] nameToken, Gatekeeper gatekeeper) {
+        super(nameToken);
+        this.gatekeeper = gatekeeper;
+    }
+
+    @Override
+    public boolean canReveal() {
+        return gatekeeper.canReveal();
+    }
 }
