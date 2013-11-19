@@ -4,8 +4,8 @@ A complete model-view-presenter framework to simplify your next GWT project.
 ##Enterprise Support
 Get high quality support through ArcBees.
 
-<a href="https://gwtp.arcbees.com">Enterprise Support Features</a>
-<a href="https://gwtp.arcbees.com/#buyPro">Buy Enterprise Support</a>
+* <a href="https://gwtp.arcbees.com">Enterprise Support Features</a>
+* <a href="https://gwtp.arcbees.com/#buyPro">Buy Enterprise Support</a>
 
 ##Open Source Donation
 Help provide support to the dedicated contributors moving this project forward.
