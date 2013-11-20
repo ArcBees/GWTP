@@ -16,48 +16,56 @@
 
 package com.gwtplatform.dispatch.rpc.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
-    private static final DispatchServiceAsync realService = GWT.create(DispatchService.class);
+    private static class AsyncCallbackWrapper<R extends Result> implements AsyncCallback<R> {
+        private final AsyncCallback<?> wrapped;
 
+        AsyncCallbackWrapper(AsyncCallback<?> wrapped) {
+            this.wrapped = wrapped;
+        }
+
+        @Override
+        public void onFailure(Throwable caught) {
+            wrapped.onFailure(caught);
+        }
+
+        @Override
+        public void onSuccess(R result) {
+            wrapped.onSuccess(null);
+        }
+    }
+
+    private final DispatchServiceAsync dispatchService;
     private final R result;
 
-    RpcDispatchUndoCall(ExceptionHandler exceptionHandler,
+    RpcDispatchUndoCall(DispatchServiceAsync dispatchService,
+                        ExceptionHandler exceptionHandler,
                         ClientActionHandlerRegistry clientActionHandlerRegistry,
                         SecurityCookieAccessor securityCookieAccessor,
                         A action,
                         R result,
-                        final AsyncCallback<Void> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, new AsyncCallback<R>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                callback.onFailure(caught);
-            }
+                        AsyncCallback<Void> callback) {
+        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action,
+                new AsyncCallbackWrapper<R>(callback));
 
-            @Override
-            public void onSuccess(R result) {
-                callback.onSuccess(null);
-            }
-        });
-
+        this.dispatchService = dispatchService;
         this.result = result;
     }
 
     @Override
     protected DispatchRequest doExecute() {
-        return new GwtHttpDispatchRequest(realService.undo(getSecurityCookie(), getAction(), result,
+        return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(), getAction(), result,
                 new AsyncCallback<Void>() {
                     public void onFailure(Throwable caught) {
                         RpcDispatchUndoCall.this.onExecuteFailure(caught);
