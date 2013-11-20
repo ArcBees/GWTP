@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.
- *
+ * 
  * @author Philippe Beaudoin
  */
 public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilGwt.MyView,
@@ -43,7 +43,7 @@ public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilG
      * Presenter's proxy.
      */
     @ProxyStandard
-    @NameToken("admin")
+    @NameToken(value = "admin", others = { "selfService" })
     public interface MyProxy extends ProxyPlace<AdminPresenterTestUtilGwt> {
     }
 
@@ -52,4 +52,3 @@ public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilG
         super(eventBus, view, proxy, RevealType.Root);
     }
 }
-
