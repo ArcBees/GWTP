@@ -29,7 +29,12 @@ public class PlaceWithGatekeeperWithParams extends PlaceImpl {
 
     public PlaceWithGatekeeperWithParams(String nameToken, GatekeeperWithParams gatekeeper,
             String[] params) {
-        super(nameToken);
+        this(new String[] { nameToken }, gatekeeper,params);
+    }
+
+    public PlaceWithGatekeeperWithParams(String[] nameTokens, GatekeeperWithParams gatekeeper,
+            String[] params) {
+        super(nameTokens);
         this.gatekeeper = gatekeeper;
         this.params = params;
     }
