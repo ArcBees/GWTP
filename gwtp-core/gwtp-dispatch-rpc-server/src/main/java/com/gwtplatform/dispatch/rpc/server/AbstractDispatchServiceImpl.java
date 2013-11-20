@@ -40,10 +40,10 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * @author David Peterson
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see Dispatch
- * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchService
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet implements DispatchService {
 
