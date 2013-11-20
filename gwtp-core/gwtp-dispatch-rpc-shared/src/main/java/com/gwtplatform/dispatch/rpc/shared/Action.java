@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * An action represents a command sent to the
- * {@link com.gwtplatform.dispatch.server.Dispatch}. It has a specific result
+ * {@link com.gwtplatform.dispatch.rpc.server.Dispatch}. It has a specific result
  * type which is returned if the action is successful. Your implementation
  * should override {@link #getServiceName} to return a default service url. If
  * you use a {@link com.gwtplatform.dispatch.shared.SecurityCookie} to prevent XSRF attacks and you want this
