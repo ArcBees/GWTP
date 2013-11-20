@@ -31,16 +31,17 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 /**
  * This class is the default implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}, which is
  * essentially the client-side access to the
- * {@link com.gwtplatform.dispatch.server.Dispatch} class on the server-side.
+ * {@link com.gwtplatform.dispatch.rpc.server.Dispatch} class on the server-side.
  */
 public class RpcDispatchAsync implements DispatchAsync {
-    private static final DispatchServiceAsync realService = GWT.create(DispatchService.class);
-
+    private final DispatchServiceAsync realService;
     private final RpcDispatchCallFactory rpcDispatchCallFactory;
     private final String baseUrl;
 
     @Inject
-    RpcDispatchAsync(RpcDispatchCallFactory rpcDispatchCallFactory) {
+    RpcDispatchAsync(RpcDispatchCallFactory rpcDispatchCallFactory,
+                     DispatchServiceAsync dispatchService) {
+        this.realService = dispatchService;
         this.rpcDispatchCallFactory = rpcDispatchCallFactory;
 
         String entryPointUrl = ((ServiceDefTarget) realService).getServiceEntryPoint();

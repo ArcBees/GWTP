@@ -19,12 +19,24 @@ package com.gwtplatform.dispatch.rpc.client.gin;
 import javax.inject.Singleton;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.inject.Provides;
 import com.gwtplatform.dispatch.rpc.client.PhoneGapDispatchAsync;
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.gwtplatform.dispatch.rpc.shared.DispatchService;
+import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 
 public class PhoneGapDispatchAsyncModule extends AbstractGinModule {
     @Override
     protected void configure() {
+        bind(RpcDispatchCallFactory.class).in(Singleton.class);
+
         bind(DispatchAsync.class).to(PhoneGapDispatchAsync.class).in(Singleton.class);
+    }
+
+    @Provides
+    @Singleton
+    DispatchServiceAsync provideDispatchServiceAsync(DispatchService dispatchService) {
+        return (DispatchServiceAsync) dispatchService;
     }
 }
