@@ -16,33 +16,34 @@
 
 package com.gwtplatform.dispatch.rpc.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
-    private static final DispatchServiceAsync realService = GWT.create(DispatchService.class);
+    private final DispatchServiceAsync dispatchService;
 
-    RpcDispatchExecuteCall(ExceptionHandler exceptionHandler,
+    RpcDispatchExecuteCall(DispatchServiceAsync dispatchService,
+                           ExceptionHandler exceptionHandler,
                            ClientActionHandlerRegistry clientActionHandlerRegistry,
                            SecurityCookieAccessor securityCookieAccessor,
                            A action,
                            AsyncCallback<R> callback) {
         super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
+
+        this.dispatchService = dispatchService;
     }
 
     @Override
     protected DispatchRequest doExecute() {
-        return new GwtHttpDispatchRequest(realService.execute(getSecurityCookie(), getAction(),
+        return new GwtHttpDispatchRequest(dispatchService.execute(getSecurityCookie(), getAction(),
                 new AsyncCallback<Result>() {
                     public void onFailure(Throwable caught) {
                         RpcDispatchExecuteCall.this.onExecuteFailure(caught);
