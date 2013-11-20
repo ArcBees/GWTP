@@ -27,6 +27,8 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.gwt.xml</include>
+                    <include>**/*.vm</include>
+                    <include>**/*.properties</include>
                 </includes>
             </resource>
         </resources>
