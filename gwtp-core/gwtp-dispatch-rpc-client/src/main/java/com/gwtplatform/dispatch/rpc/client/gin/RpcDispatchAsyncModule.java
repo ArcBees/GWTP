@@ -20,7 +20,6 @@ import javax.inject.Singleton;
 
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
-import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsyncStandalone;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 
@@ -58,7 +57,5 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Override
     protected void configureDispatch() {
         bind(RpcDispatchCallFactory.class).in(Singleton.class);
-
-        bind(RpcDispatchAsyncStandalone.class).in(Singleton.class);
     }
 }
