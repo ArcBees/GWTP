@@ -38,6 +38,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry;
  * Generates an implementation of {@link PlaceTokenRegistry} based on GWTP's {@link NameToken} annotation.
  */
 public class PlaceTokenRegistryGenerator extends Generator {
+
     @Override
     public String generate(final TreeLogger treeLogger, GeneratorContext generatorContext, String requestedClass)
             throws UnableToCompleteException {
@@ -65,7 +66,9 @@ public class PlaceTokenRegistryGenerator extends Generator {
         for (JClassType type : generatorContext.getTypeOracle().getTypes()) {
             NameToken nameTokenAnnotation = type.getAnnotation(NameToken.class);
             if (nameTokenAnnotation != null) {
-                placeTokens.put(nameTokenAnnotation.value(), type);
+                for (String nameToken : nameTokenAnnotation.value()) {
+                    placeTokens.put(nameToken, type);
+                }
             }
         }
 

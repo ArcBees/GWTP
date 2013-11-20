@@ -17,12 +17,15 @@
 package com.gwtplatform.mvp.client.gwt.mvp;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
 /**
  * Integration test for various components of GWTP's MVP module.
- *
+ * 
  * @author Philippe Beaudoin
  */
 public class MvpGwtTestInSuite extends GWTTestCase {
@@ -50,4 +53,50 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         ginjector.getPlaceManager().revealCurrentPlace();
         assertEquals(1, InstantiationCounterTestUtilGwt.getCounter());
     }
+
+    /**
+     * Verify multiple name tokens.
+     */
+    public void testMultipleTokens() {
+        ginjector.getPlaceManager().revealDefaultPlace();
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+            @Override
+            public void execute() {
+                assertTrue(ginjector.getMainPresenter().get().isVisible());
+                ginjector.getPlaceManager().revealPlace(new PlaceRequest.Builder().nameToken("admin").build());
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+                    @Override
+                    public void execute() {
+                        assertFalse(ginjector.getMainPresenter().get().isVisible());
+                        assertTrue(ginjector.getAdminPresenter().get().isVisible());
+                        ginjector.getPlaceManager().revealDefaultPlace();
+                        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+                            @Override
+                            public void execute() {
+
+                                assertTrue(ginjector.getMainPresenter().get().isVisible());
+                                assertFalse(ginjector.getAdminPresenter().get().isVisible());
+                                ginjector.getPlaceManager().revealPlace(
+                                        new PlaceRequest.Builder().nameToken("selfService").build());
+                                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+                                    @Override
+                                    public void execute() {
+                                        assertFalse(ginjector.getMainPresenter().get().isVisible());
+                                        assertTrue(ginjector.getAdminPresenter().get().isVisible());
+                                        finishTest();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        delayTestFinish(1000);
+    }
+
 }
