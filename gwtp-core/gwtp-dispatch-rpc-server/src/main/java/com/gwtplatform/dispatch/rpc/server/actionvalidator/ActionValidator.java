@@ -38,7 +38,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public interface ActionValidator {
     /**
      * Validate whether or not that {@link com.gwtplatform.dispatch.rpc.shared.Action} can be executed at this time.
-     * You can also throw an {@link com.gwtplatform.dispatch.rpc.shared.ActionException} if you want to fine grain why
+     * You can also throw an {@link com.gwtplatform.dispatch.shared.ActionException} if you want to fine grain why
      * the validator failed.
      *
      * @param action The action that called this validator.

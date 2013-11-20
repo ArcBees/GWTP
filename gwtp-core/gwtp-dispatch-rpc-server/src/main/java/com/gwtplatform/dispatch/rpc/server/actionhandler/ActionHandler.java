@@ -46,7 +46,7 @@ public interface ActionHandler<A extends Action<R>, R extends Result> {
      * @param action  The action.
      * @param context The {@link ExecutionContext}.
      * @return The {@link Result}.
-     * @throws com.gwtplatform.dispatch.rpc.shared.ActionException
+     * @throws com.gwtplatform.dispatch.shared.ActionException
      *          if there is a problem performing the specified
      *          action.
      */

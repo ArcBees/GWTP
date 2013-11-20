@@ -39,7 +39,7 @@ public interface ExecutionContext {
      * @param <R>    The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
      * @param action The {@link com.gwtplatform.dispatch.rpc.shared.Action}.
      * @return The {@link com.gwtplatform.dispatch.rpc.shared.Result}.
-     * @throws com.gwtplatform.dispatch.rpc.shared.ActionException  if the action execution failed.
+     * @throws com.gwtplatform.dispatch.shared.ActionException  if the action execution failed.
      * @throws com.gwtplatform.dispatch.rpc.shared.ServiceException if the execution failed due to a service error.
      */
     <A extends Action<R>, R extends Result> R execute(A action)
