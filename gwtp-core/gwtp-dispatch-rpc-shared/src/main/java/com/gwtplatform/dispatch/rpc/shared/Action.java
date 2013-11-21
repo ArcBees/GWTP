@@ -33,7 +33,6 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * {@link UnsecuredActionImpl} instead.
  *
  * @param <R> The {@link Result} type.
- * @author David Peterson
  */
 public interface Action<R extends Result> extends TypedAction<R>, IsSerializable {
 

@@ -37,8 +37,10 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
 
     private String securityCookie;
 
-    public DispatchCall(ExceptionHandler exceptionHandler, ClientActionHandlerRegistry clientActionHandlerRegistry,
-                        SecurityCookieAccessor securityCookieAccessor, A action,
+    public DispatchCall(ExceptionHandler exceptionHandler,
+                        ClientActionHandlerRegistry clientActionHandlerRegistry,
+                        SecurityCookieAccessor securityCookieAccessor,
+                        A action,
                         AsyncCallback<R> callback) {
         this.action = action;
         this.callback = callback;

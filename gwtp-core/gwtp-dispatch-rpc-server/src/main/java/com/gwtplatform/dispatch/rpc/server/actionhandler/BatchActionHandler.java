@@ -30,8 +30,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * This handles {@link com.gwtplatform.dispatch.rpc.shared.BatchAction} requests, which are a set of multiple
  * actions that need to all be executed successfully in sequence for the whole
  * action to succeed.
- *
- * @author David Peterson
  */
 public class BatchActionHandler extends
         AbstractActionHandler<BatchAction, BatchResult> {

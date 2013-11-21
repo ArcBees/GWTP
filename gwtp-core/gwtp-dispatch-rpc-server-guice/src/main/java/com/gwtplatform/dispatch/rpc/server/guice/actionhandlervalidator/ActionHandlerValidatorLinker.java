@@ -28,8 +28,6 @@ import com.gwtplatform.dispatch.rpc.server.guice.GuiceBeanProvider;
  * and {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator ActionValidator}
  * instances with the default.
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry}
- *
- * @author Christian Goudreau
  */
 public class ActionHandlerValidatorLinker {
 
