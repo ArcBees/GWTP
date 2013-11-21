@@ -20,10 +20,13 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * This contains both the original {@link com.gwtplatform.dispatch.shared.Action} and the {@link com.gwtplatform.dispatch.shared.Result} of that
+ * This contains both the original {@link com.gwtplatform.dispatch.shared.Action} and the
+ * {@link com.gwtplatform.dispatch.shared.Result} of that
  * action. It also indicates if this action was executed (
- * {@link ActionHandler#execute(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.server.ExecutionContext)}) or undone (
- * {@link ActionHandler#undo(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.shared.Result, com.gwtplatform.dispatch.server.ExecutionContext)}).
+ * {@link ActionHandler#execute(com.gwtplatform.dispatch.shared.Action,
+ * com.gwtplatform.dispatch.server.ExecutionContext)}) or undone (
+ * {@link ActionHandler#undo(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.shared.Result,
+ * com.gwtplatform.dispatch.server.ExecutionContext)}).
  *
  * @param <A> The action type.
  * @param <R> The result type.
@@ -40,8 +43,10 @@ public class ActionResult<A extends Action<R>, R extends Result> {
     /**
      * Creates a new action/result pair. The {@code executed} field indicates if
      * this action was executed via
-     * {@link ActionHandler#execute(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
-     * {@link ActionHandler#undo(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.shared.Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
+     * {@link ActionHandler#execute(com.gwtplatform.dispatch.shared.Action,
+     * com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
+     * {@link ActionHandler#undo(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.shared.Result,
+     * com.gwtplatform.dispatch.server.ExecutionContext)}.
      *
      * @param action   The {@link com.gwtplatform.dispatch.shared.Action}.
      * @param result   The {@link com.gwtplatform.dispatch.shared.Result}.
@@ -64,8 +69,10 @@ public class ActionResult<A extends Action<R>, R extends Result> {
 
     /**
      * Checks wheter this action was executed via
-     * {@link ActionHandler#execute(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
-     * {@link ActionHandler#undo(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.shared.Result, com.gwtplatform.dispatch.server.ExecutionContext)}.
+     * {@link ActionHandler#execute(com.gwtplatform.dispatch.shared.Action,
+     * com.gwtplatform.dispatch.server.ExecutionContext)} or undone via
+     * {@link ActionHandler#undo(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.shared.Result,
+     * com.gwtplatform.dispatch.server.ExecutionContext)}.
      *
      * @return {@code true} if the action was executed, {@code false} if it was
      *         undoed.

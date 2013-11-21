@@ -28,8 +28,10 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * Base module that will bind {@link com.gwtplatform.dispatch.shared.Action}s to {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler}s and
- * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}s. Your own Guice modules should extend this class.
+ * Base module that will bind {@link com.gwtplatform.dispatch.shared.Action}s to
+ * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler}s and
+ * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}s. Your own Guice modules should extend this
+ * class.
  *
  * @author Christian Goudreau
  * @author David Peterson
@@ -61,7 +63,8 @@ public abstract class HandlerModule extends AbstractModule {
      * @param <A>          Type of {@link com.gwtplatform.dispatch.shared.Action}
      * @param <R>          Type of {@link com.gwtplatform.dispatch.shared.Result}
      * @param actionClass  Implementation of {@link com.gwtplatform.dispatch.shared.Action} to link and bind
-     * @param handlerClass Implementation of {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} to link and
+     * @param handlerClass Implementation of {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} to link
+     *                     and
      *                     bind
      */
     protected <A extends Action<R>, R extends Result> void bindHandler(
@@ -77,10 +80,10 @@ public abstract class HandlerModule extends AbstractModule {
      * @param <A>             Type of {@link com.gwtplatform.dispatch.shared.Action}
      * @param <R>             Type of {@link com.gwtplatform.dispatch.shared.Result}
      * @param actionClass     Implementation of {@link com.gwtplatform.dispatch.shared.Action} to link and bind
-     * @param handlerClass    Implementation of {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} to link and
-     *                        bind
-     * @param actionValidator Implementation of {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} to link
-     *                        and bind
+     * @param handlerClass    Implementation of {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} to
+     *                        link and bind
+     * @param actionValidator Implementation of {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}
+     *                        to link and bind
      */
     protected <A extends Action<R>, R extends Result> void bindHandler(
             Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass,

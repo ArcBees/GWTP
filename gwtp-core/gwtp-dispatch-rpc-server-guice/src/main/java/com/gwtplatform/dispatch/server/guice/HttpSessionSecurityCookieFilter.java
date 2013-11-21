@@ -26,7 +26,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
  * This filter will automatically inject a security cookie inside the request the first time the page is loaded. This
- * security cookie is based on the {@link javax.servlet.http.HttpSession} and will only work if the session is enabled. To setup this
+ * security cookie is based on the {@link javax.servlet.http.HttpSession} and will only work if the session is enabled.
+ * To setup this
  * filter, add the following line at before any other {@code serve} call in your own
  * {@link com.google.inject.servlet.ServletModule#configureServlets}:
  * <p/>
