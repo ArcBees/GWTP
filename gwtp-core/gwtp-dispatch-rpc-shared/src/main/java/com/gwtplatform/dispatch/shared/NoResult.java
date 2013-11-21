@@ -26,6 +26,8 @@ package com.gwtplatform.dispatch.shared;
  * recommended that the empty constructor is private or package-private.
  *
  * @author Christopher Viel
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.NoResult}.
  */
 @Deprecated
 public class NoResult implements Result {

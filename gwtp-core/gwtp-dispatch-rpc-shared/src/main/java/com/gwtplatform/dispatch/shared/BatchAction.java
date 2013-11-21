@@ -22,6 +22,8 @@ package com.gwtplatform.dispatch.shared;
  * in the constructor determine the outcome.
  *
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.BatchAction}.
  */
 @Deprecated
 public abstract class BatchAction implements Action<BatchResult> {

@@ -24,6 +24,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * A marker interface for {@link Action} results.
  *
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.ServiceException}.
  */
 @Deprecated
 public interface Result extends IsSerializable, Serializable {
