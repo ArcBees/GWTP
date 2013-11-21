@@ -35,8 +35,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
  * </pre>
  * <p/>
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
- *
- * @author Philippe Beaudoin
  */
 @Singleton
 public class HttpSessionSecurityCookieFilter extends AbstractHttpSessionSecurityCookieFilter {

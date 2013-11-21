@@ -31,9 +31,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * <p/>
  * You should think of annotating your validators with {@code @RequestScoped} or
  * {@code @Singleton}.
- *
- * @author David Peterson
- * @author Christian Goudreau
  */
 public interface ActionValidator {
     /**

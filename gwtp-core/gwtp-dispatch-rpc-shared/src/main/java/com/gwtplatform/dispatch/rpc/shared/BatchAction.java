@@ -20,8 +20,6 @@ package com.gwtplatform.dispatch.rpc.shared;
  * This provides a simple way to send multiple actions to be executed in
  * sequence. If any fail, the rules for the {@link OnException} value provided
  * in the constructor determine the outcome.
- *
- * @author David Peterson
  */
 public abstract class BatchAction implements Action<BatchResult> {
 

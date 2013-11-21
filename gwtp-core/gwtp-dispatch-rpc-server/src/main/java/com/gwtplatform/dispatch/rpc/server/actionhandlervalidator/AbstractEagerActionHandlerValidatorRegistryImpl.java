@@ -27,8 +27,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  * This is a eager-loading implementation of the registry. It will create action handlers and validators at startup. All
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler}
  * and {@link ActionValidator} implementations <b>must</b> have a public, default constructor.
- *
- * @author Christian Goudreau
  */
 public abstract class AbstractEagerActionHandlerValidatorRegistryImpl implements EagerActionHandlerValidatorRegistry {
 
