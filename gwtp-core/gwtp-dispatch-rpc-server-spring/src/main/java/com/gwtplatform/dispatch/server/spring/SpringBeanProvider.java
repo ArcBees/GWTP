@@ -30,6 +30,8 @@ import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 
 /**
  * @author Peter Simun
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.SpringBeanProvider}.
  */
 @Deprecated
 public class SpringBeanProvider implements BeanProvider {

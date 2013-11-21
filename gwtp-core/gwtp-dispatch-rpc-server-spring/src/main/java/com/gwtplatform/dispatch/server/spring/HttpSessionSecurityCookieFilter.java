@@ -25,6 +25,8 @@ import com.gwtplatform.dispatch.server.AbstractHttpSessionSecurityCookieFilter;
 
 /**
  * @author Peter Simun
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter}.
  */
 @Deprecated
 public class HttpSessionSecurityCookieFilter extends AbstractHttpSessionSecurityCookieFilter {
