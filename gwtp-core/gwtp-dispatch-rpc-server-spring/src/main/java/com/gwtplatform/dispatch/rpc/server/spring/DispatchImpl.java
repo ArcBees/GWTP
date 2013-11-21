@@ -21,9 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gwtplatform.dispatch.rpc.server.AbstractDispatchImpl;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 
-/**
- * @author Peter Simun
- */
 public class DispatchImpl extends AbstractDispatchImpl {
 
     @Autowired

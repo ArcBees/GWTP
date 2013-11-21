@@ -22,8 +22,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
  * Registry definition for {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator}.
- *
- * @author Christian Goudreau
  */
 public interface ActionHandlerValidatorRegistry {
     /**

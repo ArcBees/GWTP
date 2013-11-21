@@ -21,7 +21,6 @@ package com.gwtplatform.dispatch.rpc.shared;
  * and new value.
  *
  * @param <T> The value type.
- * @author David Peterson
  */
 public abstract class AbstractUpdateResult<T> implements Result {
 

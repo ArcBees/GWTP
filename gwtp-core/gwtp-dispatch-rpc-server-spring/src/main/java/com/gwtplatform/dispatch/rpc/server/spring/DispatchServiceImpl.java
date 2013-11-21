@@ -34,8 +34,6 @@ import com.gwtplatform.dispatch.rpc.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.server.Dispatch;
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 
-/**
- */
 @Component("dispatch")
 public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler,
         ServletContextAware {

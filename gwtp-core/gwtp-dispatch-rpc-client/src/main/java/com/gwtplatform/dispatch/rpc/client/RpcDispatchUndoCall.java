@@ -73,7 +73,6 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
 
                     @SuppressWarnings("unchecked")
                     public void onSuccess(Void nothing) {
-                        // Note: This cast is a dodgy hack to get around a GWT 1.6 async compiler issue
                         RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
                     }
                 }));

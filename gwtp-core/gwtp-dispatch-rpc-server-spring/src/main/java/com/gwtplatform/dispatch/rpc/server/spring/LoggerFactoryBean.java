@@ -20,9 +20,6 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.FactoryBean;
 
-/**
- *
- */
 public class LoggerFactoryBean implements FactoryBean<Logger> {
 
     private final Logger logger;
