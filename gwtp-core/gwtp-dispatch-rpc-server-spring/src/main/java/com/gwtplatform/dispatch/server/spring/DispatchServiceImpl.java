@@ -35,6 +35,7 @@ import com.gwtplatform.dispatch.server.Dispatch;
 import com.gwtplatform.dispatch.server.RequestProvider;
 
 /**
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.DispatchServiceImpl}.
  */
 @Deprecated
 @Component("dispatch")

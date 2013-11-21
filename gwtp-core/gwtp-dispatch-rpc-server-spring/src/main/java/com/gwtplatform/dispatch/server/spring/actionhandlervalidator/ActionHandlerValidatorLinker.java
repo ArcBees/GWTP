@@ -29,6 +29,9 @@ import com.gwtplatform.dispatch.server.spring.SpringBeanProvider;
  * {@link com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry}.
  *
  * @author Peter Simun (simun@seges.sk)
+ *
+ * @deprecated Please use
+ * {@link com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker}.
  */
 @Deprecated
 public class ActionHandlerValidatorLinker {

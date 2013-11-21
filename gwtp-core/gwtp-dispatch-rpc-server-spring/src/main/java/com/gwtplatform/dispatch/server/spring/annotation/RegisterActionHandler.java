@@ -26,6 +26,8 @@ import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValid
  * Annotation to put on handler to automatic register handler
  * with  action {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler#getActionType()} and
  * validator {@link RegisterActionHandler#validator()}.
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.annotation.RegisterActionHandler}.
  */
 @Deprecated
 @Retention(RetentionPolicy.RUNTIME)
