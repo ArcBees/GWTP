@@ -33,7 +33,8 @@ public interface ActionHandlerValidatorRegistry {
     void clearActionHandlerValidators();
 
     /**
-     * Searches the registry and returns the first {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} which
+     * Searches the registry and returns the first
+     * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} which
      * supports the specified {@link com.gwtplatform.dispatch.shared.Action} , or <code>null</code> if none is
      * available.
      *
@@ -46,7 +47,8 @@ public interface ActionHandlerValidatorRegistry {
             A action);
 
     /**
-     * Searches the registry for already bound {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} class and
+     * Searches the registry for already bound {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}
+     * class and
      * return the instance or <code>null</code> if none is available.
      *
      * @param actionValidatorClass The {@link com.gwtplatform.dispatch.shared.Action}
