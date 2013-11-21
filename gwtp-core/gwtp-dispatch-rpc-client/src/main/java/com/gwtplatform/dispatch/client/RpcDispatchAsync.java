@@ -31,6 +31,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * This class is the default implementation of {@link DispatchAsync}, which is
  * essentially the client-side access to the
  * {@link com.gwtplatform.dispatch.server.Dispatch} class on the server-side.
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync}.
  */
 @Deprecated
 public class RpcDispatchAsync extends AbstractDispatchAsync {

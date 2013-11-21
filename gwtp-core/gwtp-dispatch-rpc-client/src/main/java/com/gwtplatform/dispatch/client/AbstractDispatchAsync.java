@@ -29,6 +29,9 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * @deprecated This class will be removed.
+ */
 @Deprecated
 public abstract class AbstractDispatchAsync implements DispatchAsync {
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;

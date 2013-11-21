@@ -22,6 +22,9 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.client.PhoneGapDispatchAsync;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 
+/**
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.client.gin.PhoneGapDispatchAsyncModule}.
+ */
 @Deprecated
 public class PhoneGapDispatchAsyncModule extends AbstractGinModule {
     @Override

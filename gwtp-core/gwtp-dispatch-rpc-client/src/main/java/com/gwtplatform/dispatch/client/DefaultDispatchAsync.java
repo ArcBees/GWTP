@@ -21,7 +21,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * Present for backward compatibility. This class will disappear in the next releases.
- * @deprecated please use {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync} instead
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync}
  */
 @Deprecated
 public class DefaultDispatchAsync extends RpcDispatchAsync {
