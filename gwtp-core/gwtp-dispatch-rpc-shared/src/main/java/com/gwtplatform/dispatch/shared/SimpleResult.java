@@ -27,6 +27,8 @@ package com.gwtplatform.dispatch.shared;
  *
  * @param <T> The value type.
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.SimpleResult}.
  */
 @Deprecated
 public class SimpleResult<T> extends AbstractSimpleResult<T> {

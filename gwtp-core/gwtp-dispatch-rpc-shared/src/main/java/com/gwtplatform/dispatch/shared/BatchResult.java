@@ -29,6 +29,8 @@ import java.util.List;
  * value.
  *
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.BatchResult}.
  */
 @Deprecated
 public class BatchResult implements Result {

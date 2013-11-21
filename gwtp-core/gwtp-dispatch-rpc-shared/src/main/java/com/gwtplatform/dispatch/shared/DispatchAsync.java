@@ -36,6 +36,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * @see com.gwtplatform.dispatch.shared.DispatchService
  * @see com.gwtplatform.dispatch.shared.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  */
 @Deprecated
 public interface DispatchAsync {

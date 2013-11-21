@@ -18,6 +18,8 @@ package com.gwtplatform.dispatch.shared;
 
 /**
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.UnsupportedActionException}.
  */
 @Deprecated
 public class UnsupportedActionException extends ServiceException {

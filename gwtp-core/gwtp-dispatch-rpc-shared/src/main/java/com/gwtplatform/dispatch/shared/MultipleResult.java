@@ -29,6 +29,8 @@ import java.util.List;
  *
  * @param <T> The value type.
  * @author Christopher Viel
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.MultipleResult}.
  */
 @Deprecated
 public class MultipleResult<T> implements Result {
