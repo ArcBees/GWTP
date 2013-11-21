@@ -28,6 +28,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * This annotation is used to bind the remote server url to your phonegap application.
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.client.RemoteServerUrl}.
  */
 @Deprecated
 @BindingAnnotation
