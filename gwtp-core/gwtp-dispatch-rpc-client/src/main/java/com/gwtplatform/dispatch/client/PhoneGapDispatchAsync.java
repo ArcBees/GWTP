@@ -24,6 +24,9 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.client.PhoneGapDispatchAsync}.
+ */
 @Deprecated
 public class PhoneGapDispatchAsync extends RpcDispatchAsync {
     private final String remoteServerUrl;
