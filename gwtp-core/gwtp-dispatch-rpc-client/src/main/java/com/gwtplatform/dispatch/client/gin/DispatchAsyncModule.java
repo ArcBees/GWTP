@@ -26,6 +26,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * A default implementation of {@link AbstractDispatchAsyncModule} that uses GWT-RPC.
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule}.
  */
 @Deprecated
 public class DispatchAsyncModule extends AbstractDispatchAsyncModule {
