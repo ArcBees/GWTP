@@ -31,6 +31,8 @@ import com.gwtplatform.dispatch.shared.Result;
  * @param <A> The action type.
  * @param <R> The result type.
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionResult}.
  */
 @Deprecated
 public class ActionResult<A extends Action<R>, R extends Result> {

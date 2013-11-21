@@ -32,6 +32,8 @@ import com.gwtplatform.dispatch.shared.Result;
  * action to succeed.
  *
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionhandler.BatchActionHandler}.
  */
 @Deprecated
 public class BatchActionHandler extends
