@@ -30,6 +30,8 @@ import org.springframework.web.context.support.AbstractRefreshableWebApplication
 
 /**
  * @author Peter Simun
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils}.
  */
 @Deprecated
 public class SpringUtils {
