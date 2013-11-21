@@ -22,6 +22,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
+import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -37,8 +38,8 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
  * If you want to prevent XSRF attack (you use secured {@link com.gwtplatform.dispatch.rpc.shared.Action}s) the empty
  * {@link DefaultSecurityCookieAccessor} could leave your application vulnerable to XSRF attacks.
  * </p>
- * For more details see {@link http://code.google.com/intl/fr/webtoolkit/articles/security_for_gwt_applications.html
- * this document}.
+ *
+ * @see <a href="http://www.gwtproject.org/articles/security_for_gwt_applications.html">This document</a>.
  */
 public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
@@ -61,7 +62,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
-        bind(RpcDispatchCallFactory.class).in(Singleton.class);
+        bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
 
         bind(DispatchAsync.class).to(RpcDispatchAsync.class).in(Singleton.class);
     }
