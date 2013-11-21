@@ -29,6 +29,8 @@ import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValid
 
 /**
  * @author Peter Simun (simun@seges.sk)
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.GuiceBeanProvider}.
  */
 @Deprecated
 public class GuiceBeanProvider implements BeanProvider {

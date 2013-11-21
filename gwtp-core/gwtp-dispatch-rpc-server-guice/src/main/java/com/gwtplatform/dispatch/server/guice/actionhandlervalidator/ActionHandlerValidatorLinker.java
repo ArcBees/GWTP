@@ -30,6 +30,9 @@ import com.gwtplatform.dispatch.server.guice.GuiceBeanProvider;
  * {@link com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry}
  *
  * @author Christian Goudreau
+ *
+ * @deprecated Please use
+ * {@link com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker}.
  */
 @Deprecated
 public class ActionHandlerValidatorLinker {
