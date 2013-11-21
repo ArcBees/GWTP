@@ -33,6 +33,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  *
  * @param <R> The {@link Result} type.
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.Action}.
  */
 @Deprecated
 public interface Action<R extends Result> extends IsSerializable {

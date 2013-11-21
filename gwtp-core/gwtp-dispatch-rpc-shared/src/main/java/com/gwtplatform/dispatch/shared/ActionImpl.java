@@ -29,6 +29,8 @@ package com.gwtplatform.dispatch.shared;
  * Use {@link UnsecuredActionImpl} for secured set to off by default.
  *
  * @param <R> The {@link Result} type.
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.ActionImpl}.
  */
 @Deprecated
 public class ActionImpl<R extends Result> implements Action<R> {
