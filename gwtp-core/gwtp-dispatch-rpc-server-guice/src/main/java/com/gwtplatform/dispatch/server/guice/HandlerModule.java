@@ -35,6 +35,8 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @author Christian Goudreau
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.HandlerModule}.
  */
 @Deprecated
 public abstract class HandlerModule extends AbstractModule {

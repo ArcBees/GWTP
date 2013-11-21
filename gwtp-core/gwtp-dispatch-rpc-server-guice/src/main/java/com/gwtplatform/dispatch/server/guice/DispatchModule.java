@@ -40,6 +40,8 @@ import com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider;
  *
  * @author Christian Goudreau
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchModule}.
  */
 @Deprecated
 public class DispatchModule extends AbstractModule {

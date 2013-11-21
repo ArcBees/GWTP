@@ -22,6 +22,8 @@ import com.google.inject.Singleton;
 
 /**
  * @author Philippe Beaudoin
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.SecureRandomSingleton}.
  */
 @Deprecated
 @Singleton

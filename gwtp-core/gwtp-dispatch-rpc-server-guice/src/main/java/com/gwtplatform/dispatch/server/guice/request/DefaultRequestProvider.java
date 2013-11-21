@@ -25,6 +25,8 @@ import com.gwtplatform.dispatch.server.RequestProvider;
 
 /**
  * @author Peter Simun
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.request.DefaultRequestProvider}.
  */
 @Deprecated
 @Singleton
