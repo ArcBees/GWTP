@@ -55,5 +55,13 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-common-shared</artifactId>
         </dependency>
+
+        <!-- Needed for @BindingAnnotation in deprecated SecurityCookie. Remove when Security Cookie is removed from
+        this project -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 </project>
