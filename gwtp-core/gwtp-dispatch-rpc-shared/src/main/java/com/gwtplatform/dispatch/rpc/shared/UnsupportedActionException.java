@@ -16,9 +16,6 @@
 
 package com.gwtplatform.dispatch.rpc.shared;
 
-/**
- * @author David Peterson
- */
 public class UnsupportedActionException extends ServiceException {
 
     private static final long serialVersionUID = -3362561625013898012L;

@@ -51,7 +51,6 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
 
                     @SuppressWarnings("unchecked")
                     public void onSuccess(Result result) {
-                        // Note: This cast is a dodgy hack to get around a GWT 1.6 async compiler issue
                         RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
                     }
                 }));

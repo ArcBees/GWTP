@@ -24,9 +24,6 @@ package com.gwtplatform.dispatch.shared;
  * <p/>
  * Notice that the default implementation is {@link EmptySecurityCookieAccessor}
  * which does not prevent XSRF attacks.
- *
- * @author David Peterson
- * @author Philippe Beaudoin
  */
 public interface SecurityCookieAccessor {
     /**
