@@ -24,6 +24,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
  * @author Philippe Beaudoin
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.RandomSecurityCookieFilter}.
  */
 @Deprecated
 @Singleton
