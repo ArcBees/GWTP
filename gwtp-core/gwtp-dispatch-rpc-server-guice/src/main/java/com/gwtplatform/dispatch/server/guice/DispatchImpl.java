@@ -24,6 +24,8 @@ import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValid
 
 /**
  * @author Philippe Beaudoin
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl}.
  */
 @Deprecated
 @Singleton

@@ -43,6 +43,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
  * @see com.gwtplatform.dispatch.shared.DispatchService
  * @see com.gwtplatform.dispatch.shared.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl}.
  */
 @Deprecated
 @Singleton
