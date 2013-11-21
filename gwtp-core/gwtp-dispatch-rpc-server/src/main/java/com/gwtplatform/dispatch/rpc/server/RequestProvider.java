@@ -18,9 +18,6 @@ package com.gwtplatform.dispatch.rpc.server;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @author Philippe Beaudoin
- */
 public interface RequestProvider {
     HttpServletRequest getServletRequest();
 }

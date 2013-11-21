@@ -22,9 +22,6 @@ import javax.inject.Singleton;
 import com.gwtplatform.dispatch.rpc.server.AbstractRandomSecurityCookieFilter;
 import com.gwtplatform.dispatch.shared.SecurityCookie;
 
-/**
- * @author Philippe Beaudoin
- */
 @Singleton
 public class RandomSecurityCookieFilter extends AbstractRandomSecurityCookieFilter {
 

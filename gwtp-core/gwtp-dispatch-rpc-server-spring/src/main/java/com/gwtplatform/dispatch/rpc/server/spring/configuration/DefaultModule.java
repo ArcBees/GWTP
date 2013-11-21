@@ -23,9 +23,6 @@ import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 import com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter;
 import com.gwtplatform.dispatch.rpc.server.spring.request.DefaultRequestProvider;
 
-/**
- * @author Peter Simun
- */
 public class DefaultModule {
 
     private/* @Value("cookie") */ String securityCookieName;

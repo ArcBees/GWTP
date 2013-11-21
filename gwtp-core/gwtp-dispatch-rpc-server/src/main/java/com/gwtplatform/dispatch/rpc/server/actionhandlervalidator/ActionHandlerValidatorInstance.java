@@ -24,8 +24,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 /**
  * Convenience class to store {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler} and
  * {@link ActionValidator} instance definitions.
- *
- * @author Christian Goudreau
  */
 public class ActionHandlerValidatorInstance {
     private final ActionHandler<? extends Action<?>, ? extends Result> actionHandler;
