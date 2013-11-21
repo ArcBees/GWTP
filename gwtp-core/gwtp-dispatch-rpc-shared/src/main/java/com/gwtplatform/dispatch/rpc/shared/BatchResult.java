@@ -27,8 +27,6 @@ import java.util.List;
  * If the {@link BatchAction} was specified to have an {@link BatchAction.OnException} value
  * of {@link BatchAction.OnException#CONTINUE}, failed actions will have a <code>null</code>
  * value.
- *
- * @author David Peterson
  */
 public class BatchResult implements Result {
 

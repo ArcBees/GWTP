@@ -23,9 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 
-/**
- * @author Peter Simun
- */
 @Singleton
 public class DefaultRequestProvider implements RequestProvider {
 
