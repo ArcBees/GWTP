@@ -26,8 +26,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler}s,
  * and allows them to execute sub-actions. These actions can be automatically rolled back
  * if any part of the action handler fails.
- *
- * @author David Peterson
  */
 public interface ExecutionContext {
 

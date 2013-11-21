@@ -37,8 +37,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * In fact, this class wouldn't be needed, but we use it
  * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  *
- * @author Christian Goudreau
- * @author David Peterson
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see Dispatch
  * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
