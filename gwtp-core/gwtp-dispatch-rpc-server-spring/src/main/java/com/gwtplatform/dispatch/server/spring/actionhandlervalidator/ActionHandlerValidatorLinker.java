@@ -25,7 +25,8 @@ import com.gwtplatform.dispatch.server.spring.SpringBeanProvider;
 /**
  * This class links any registered {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler ActionHandler}
  * and {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator ActionValidator}
- * instances with the default {@link com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry}.
+ * instances with the default
+ * {@link com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry}.
  *
  * @author Peter Simun (simun@seges.sk)
  */

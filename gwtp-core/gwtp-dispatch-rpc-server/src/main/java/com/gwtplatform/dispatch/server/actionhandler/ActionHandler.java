@@ -60,7 +60,8 @@ public interface ActionHandler<A extends Action<R>, R extends Result> {
     /**
      * Undoes the specified action. If you want to build a compound action that
      * can rollback automatically upon failure, call
-     * {@link com.gwtplatform.dispatch.server.ExecutionContext#undo(com.gwtplatform.dispatch.shared.Action, com.gwtplatform.dispatch.shared.Result)}. See <a
+     * {@link com.gwtplatform.dispatch.server.ExecutionContext#undo(com.gwtplatform.dispatch.shared.Action,
+     * com.gwtplatform.dispatch.shared.Result)}. See <a
      * href="http://code.google.com/p/gwt-dispatch/wiki/CompoundActions" >here</a>
      * for details.
      *

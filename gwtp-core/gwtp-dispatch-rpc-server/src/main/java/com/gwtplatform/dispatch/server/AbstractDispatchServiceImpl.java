@@ -30,8 +30,8 @@ import com.gwtplatform.dispatch.shared.Result;
 import com.gwtplatform.dispatch.shared.ServiceException;
 
 /**
- * This is the server-side implementation of the {@link com.gwtplatform.dispatch.shared.DispatchService}, for which the client-side async service is
- * {@link com.gwtplatform.dispatch.shared.DispatchServiceAsync}.
+ * This is the server-side implementation of the {@link com.gwtplatform.dispatch.shared.DispatchService}, for which the
+ * client-side async service is {@link com.gwtplatform.dispatch.shared.DispatchServiceAsync}.
  * <p/>
  * This class is closely related to {@link AbstractDispatchImpl}, in theory the latter wouldn't be needed, but we use it
  * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.shared.DispatchAsync}.
@@ -71,7 +71,8 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
     }
 
     /**
-     * {@link com.gwtplatform.dispatch.shared.ActionException} and {@link com.gwtplatform.dispatch.shared.ServiceException} will have their stacktraces (and stacktraces of their
+     * {@link com.gwtplatform.dispatch.shared.ActionException} and
+     * {@link com.gwtplatform.dispatch.shared.ServiceException} will have their stacktraces (and stacktraces of their
      * causes) removed for security purposes.
      *
      * @see {@link com.gwtplatform.dispatch.shared.DispatchService} for further API docs
@@ -148,7 +149,8 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
      *
      * @param cookieSentByRPC The content of the security cookie sent by RPC.
      * @return {@code true} if the cookies match, {@code false} otherwise.
-     * @throws com.gwtplatform.dispatch.shared.ServiceException If you forgot to bind a {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
+     * @throws com.gwtplatform.dispatch.shared.ServiceException If you forgot to bind a
+     * {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
      */
     private boolean cookieMatch(String cookieSentByRPC) throws ServiceException {
 
@@ -187,7 +189,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
     }
 
     /**
-     * Recursively removes all stacktraces from a Throwable and its cause
+     * Recursively removes all stacktraces from a Throwable and its cause.
      */
     private void removeStacktraces(Throwable e) {
         if (e == null) {
