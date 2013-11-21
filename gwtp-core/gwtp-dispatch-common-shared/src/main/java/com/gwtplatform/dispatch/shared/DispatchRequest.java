@@ -19,8 +19,6 @@ package com.gwtplatform.dispatch.shared;
 /**
  * This interface provides a common base to give the ability to the client to
  * cancel a request or see if a request is still pending.
- *
- * @author Christian Goudreau
  */
 public interface DispatchRequest {
     void cancel();

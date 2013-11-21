@@ -32,7 +32,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
  *
  * @param <A> The type of the action extending {@link Action}.
  * @param <R> The type of the result extending {@link Result}.
- * @author David Peterson
  */
 public interface ActionHandler<A extends Action<R>, R extends Result> {
 
