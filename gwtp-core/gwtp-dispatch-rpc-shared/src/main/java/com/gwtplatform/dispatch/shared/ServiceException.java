@@ -21,6 +21,8 @@ package com.gwtplatform.dispatch.shared;
  * an action execution.
  *
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.ServiceException}.
  */
 @Deprecated
 public class ServiceException extends Exception {

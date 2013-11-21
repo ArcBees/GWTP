@@ -22,6 +22,8 @@ package com.gwtplatform.dispatch.shared;
  *
  * @param <T> The value type.
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.AbstractUpdateResult}.
  */
 @Deprecated
 public abstract class AbstractUpdateResult<T> implements Result {
