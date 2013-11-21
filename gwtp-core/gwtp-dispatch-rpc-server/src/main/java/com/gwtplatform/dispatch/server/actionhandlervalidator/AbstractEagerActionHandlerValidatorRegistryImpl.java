@@ -30,6 +30,9 @@ import com.gwtplatform.dispatch.shared.Result;
  * public, default constructor.
  *
  * @author Christian Goudreau
+ *
+ * @deprecated Please use
+ * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl}.
  */
 @Deprecated
 public abstract class AbstractEagerActionHandlerValidatorRegistryImpl implements EagerActionHandlerValidatorRegistry {

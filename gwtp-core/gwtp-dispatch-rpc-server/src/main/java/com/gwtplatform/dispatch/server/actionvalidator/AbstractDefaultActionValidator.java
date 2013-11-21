@@ -23,6 +23,8 @@ import com.gwtplatform.dispatch.shared.Result;
  * The default {@link ActionValidator} implementation. It'll accept every action.
  *
  * @author Christian Goudreau
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.AbstractDefaultActionValidator}.
  */
 @Deprecated
 public class AbstractDefaultActionValidator implements ActionValidator {

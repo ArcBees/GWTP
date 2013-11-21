@@ -25,6 +25,8 @@ import java.util.logging.Logger;
  * Collection of utility methods.
  *
  * @author Philippe Beaudoin
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.Utils}.
  */
 @Deprecated
 public class Utils {

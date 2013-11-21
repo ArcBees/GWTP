@@ -44,6 +44,8 @@ import javax.servlet.http.HttpServletResponse;
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
  *
  * @author Philippe Beaudoin
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.AbstractRandomSecurityCookieFilter}.
  */
 @Deprecated
 public abstract class AbstractRandomSecurityCookieFilter implements Filter {

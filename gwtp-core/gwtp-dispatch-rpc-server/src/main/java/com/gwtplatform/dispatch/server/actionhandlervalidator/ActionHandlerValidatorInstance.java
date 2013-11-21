@@ -26,6 +26,9 @@ import com.gwtplatform.dispatch.shared.Result;
  * instance definitions.
  *
  * @author Christian Goudreau
+ *
+ * @deprecated Please use
+ * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorInstance}.
  */
 @Deprecated
 public class ActionHandlerValidatorInstance {
