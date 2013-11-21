@@ -33,7 +33,8 @@ import com.gwtplatform.dispatch.shared.Result;
 /**
  * This is a lazy-loading implementation of the registry. It will only create
  * action handlers and validators when they are first used. All
- * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} and {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} implementations <b>must</b>
+ * {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} and
+ * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} implementations <b>must</b>
  * have a public, default constructor.
  *
  * @author Christian Goudreau

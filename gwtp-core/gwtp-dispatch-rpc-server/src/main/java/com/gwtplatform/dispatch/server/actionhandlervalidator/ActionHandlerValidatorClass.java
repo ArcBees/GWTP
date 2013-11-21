@@ -22,7 +22,8 @@ import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
- * Convenience class to store {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} and {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}
+ * Convenience class to store {@link com.gwtplatform.dispatch.server.actionhandler.ActionHandler} and
+ * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}
  * class definitions.
  *
  * @param <A> Type of associated {@link com.gwtplatform.dispatch.shared.Action}
