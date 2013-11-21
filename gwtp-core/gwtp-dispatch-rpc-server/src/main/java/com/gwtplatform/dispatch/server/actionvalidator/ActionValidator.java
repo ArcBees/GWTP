@@ -34,6 +34,8 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @author David Peterson
  * @author Christian Goudreau
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator}.
  */
 @Deprecated
 public interface ActionValidator {

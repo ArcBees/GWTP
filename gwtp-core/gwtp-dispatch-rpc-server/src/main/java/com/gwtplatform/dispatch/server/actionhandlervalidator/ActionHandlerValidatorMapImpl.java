@@ -26,6 +26,9 @@ import com.gwtplatform.dispatch.shared.Result;
  * @param <A> Type of {@link com.gwtplatform.dispatch.shared.Action}
  * @param <R> Type of {@link com.gwtplatform.dispatch.shared.Result}
  * @author David Paterson
+ *
+ * @deprecated Please use
+ * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorMapImpl}.
  */
 @Deprecated
 public class ActionHandlerValidatorMapImpl<A extends Action<R>, R extends Result> implements

@@ -45,6 +45,8 @@ import com.gwtplatform.dispatch.shared.UnsupportedActionException;
  * @see com.gwtplatform.dispatch.shared.DispatchService
  * @see com.gwtplatform.dispatch.shared.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.AbstractDispatchImpl}.
  */
 @Deprecated
 public abstract class AbstractDispatchImpl implements Dispatch {
