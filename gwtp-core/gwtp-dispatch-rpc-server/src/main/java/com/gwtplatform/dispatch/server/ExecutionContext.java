@@ -28,6 +28,8 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * if any part of the action handler fails.
  *
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.ExecutionContext}.
  */
 @Deprecated
 public interface ExecutionContext {

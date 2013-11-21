@@ -44,6 +44,8 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * @see com.gwtplatform.dispatch.shared.DispatchService
  * @see com.gwtplatform.dispatch.shared.DispatchServiceAsync
  * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.AbstractDispatchServiceImpl}.
  */
 @Deprecated
 public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet implements DispatchService {

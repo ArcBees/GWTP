@@ -42,6 +42,8 @@ import javax.servlet.http.HttpSession;
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
  *
  * @author Philippe Beaudoin
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.AbstractHttpSessionSecurityCookieFilter}.
  */
 @Deprecated
 public abstract class AbstractHttpSessionSecurityCookieFilter implements Filter {

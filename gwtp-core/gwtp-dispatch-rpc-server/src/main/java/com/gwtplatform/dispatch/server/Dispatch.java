@@ -34,6 +34,8 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  *
  * @author Christian Goudreau
  * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.Dispatch}.
  */
 @Deprecated
 public interface Dispatch {

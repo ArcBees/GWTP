@@ -25,6 +25,9 @@ import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 
 /**
  * @author Peter Simun (simun@seges.sk)
+ *
+ * @deprecated Please use
+ * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper}.
  */
 @Deprecated
 public class ActionHandlerValidatorLinkerHelper {
