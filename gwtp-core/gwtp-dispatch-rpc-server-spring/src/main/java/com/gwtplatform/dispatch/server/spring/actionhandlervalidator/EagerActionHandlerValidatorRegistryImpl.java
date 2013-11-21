@@ -20,6 +20,9 @@ import com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActio
 
 /**
  * @author Peter Simun
+ *
+ * @deprecated Please use
+ * {@link com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl}.
  */
 @Deprecated
 public class EagerActionHandlerValidatorRegistryImpl extends AbstractEagerActionHandlerValidatorRegistryImpl {

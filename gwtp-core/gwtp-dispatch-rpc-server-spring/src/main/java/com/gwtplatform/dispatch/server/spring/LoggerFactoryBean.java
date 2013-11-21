@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
- *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.LoggerFactoryBean}.
  */
 @Deprecated
 public class LoggerFactoryBean implements FactoryBean<Logger> {

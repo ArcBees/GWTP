@@ -33,6 +33,8 @@ import com.gwtplatform.dispatch.server.spring.utils.SpringUtils;
 /**
  * Annotation bean post processing to register ActionHadlers annotate
  * with {@link com.gwtplatform.dispatch.server.spring.annotation.RegisterActionHandler}.
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.AnnotatedActionBeandHandlerRegistrator}.
  */
 @Deprecated
 public class AnnotatedActionBeandHandlerRegistrator implements BeanPostProcessor, Ordered {
