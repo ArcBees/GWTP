@@ -109,7 +109,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
     @Override
     void initSubclass(JClassType proxyInterface)
             throws UnableToCompleteException {
-        findNameToken(proxyInterface);
+        findNameTokens(proxyInterface);
         findGatekeeperMethod(proxyInterface);
         findGatekeeperParams(proxyInterface);
         findTitle(proxyInterface);
@@ -124,7 +124,7 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
         }
     }
 
-    private void findNameToken(JClassType proxyInterface)
+    private void findNameTokens(JClassType proxyInterface)
             throws UnableToCompleteException {
         NameToken nameTokenAnnotation = proxyInterface.getAnnotation(NameToken.class);
         if (nameTokenAnnotation == null) {
@@ -135,6 +135,12 @@ public class ProxyPlaceOutputter extends ProxyOutputterBase {
             throw new UnableToCompleteException();
         }
         nameTokens = nameTokenAnnotation.value();
+        if (nameTokens.length == 0) {
+            logger.log(TreeLogger.ERROR,
+                    "The proxy for '" + presenterInspector.getPresenterClassName() + "' is annotated with '@"
+                            + NameToken.class.getSimpleName() + "', but has no name token specified.", null);
+            throw new UnableToCompleteException();
+        }
     }
 
     private void findGatekeeperMethod(JClassType proxyInterface)
