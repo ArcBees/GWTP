@@ -24,27 +24,25 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerV
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
 import com.gwtplatform.dispatch.rpc.shared.UnsupportedActionException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * This is the server-side implementation of the {@link Dispatch} service with an arbitrary action type, for which the
  * client-side async service is {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  * <p/>
- * This class is closely related to {@link com.gwtplatform.dispatch.server.guice.DispatchServiceImpl}.
+ * This class is closely related to {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl}.
  * In fact, this class wouldn't be needed, but we use it
  * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  *
- * @author Christian Goudreau
- * @author David Peterson
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see Dispatch
- * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchService
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public abstract class AbstractDispatchImpl implements Dispatch {
 

@@ -17,23 +17,20 @@
 package com.gwtplatform.dispatch.rpc.server;
 
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * The base class of the synchronous dispatcher service with an arbitrary action
  * type. The server-side implementation is
- * {@link com.gwtplatform.dispatch.server.guice.DispatchImpl} and the async
- * client-side version is {@link DispatchAsync}.
+ * {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl} and the async
+ * client-side version is {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  * <p/>
  * This class is closely related to
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchService}. In fact, this class
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
- *
- * @author Christian Goudreau
- * @author David Peterson
  */
 public interface Dispatch {
 
@@ -44,7 +41,7 @@ public interface Dispatch {
      * @param <R>    The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
      * @param action The {@link Action}.
      * @return The action's result.
-     * @throws com.gwtplatform.dispatch.rpc.shared.ActionException  if the action execution failed.
+     * @throws com.gwtplatform.dispatch.shared.ActionException  if the action execution failed.
      * @throws ServiceException if the execution failed due to a service error.
      */
     <A extends Action<R>, R extends Result> R execute(A action)

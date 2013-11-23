@@ -24,10 +24,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * This is the server-side implementation of the {@link DispatchService}, for which the client-side async service is
@@ -36,14 +36,12 @@ import com.gwtplatform.dispatch.rpc.shared.ServiceException;
  * This class is closely related to {@link AbstractDispatchImpl}, in theory the latter wouldn't be needed, but we use it
  * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  *
- * @author Christian Goudreau
- * @author David Peterson
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see Dispatch
- * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchService
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet implements DispatchService {
 
@@ -145,7 +143,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
      *
      * @param cookieSentByRPC The content of the security cookie sent by RPC.
      * @return {@code true} if the cookies match, {@code false} otherwise.
-     * @throws ServiceException If you forgot to bind a {@link com.gwtplatform.dispatch.rpc.shared.SecurityCookie}.
+     * @throws ServiceException If you forgot to bind a {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
      */
     private boolean cookieMatch(String cookieSentByRPC) throws ServiceException {
 

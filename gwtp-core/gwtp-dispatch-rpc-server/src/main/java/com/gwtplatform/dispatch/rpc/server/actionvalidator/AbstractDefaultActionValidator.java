@@ -21,8 +21,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
  * The default {@link ActionValidator} implementation. It'll accept every action.
- *
- * @author Christian Goudreau
  */
 public class AbstractDefaultActionValidator implements ActionValidator {
     @Override

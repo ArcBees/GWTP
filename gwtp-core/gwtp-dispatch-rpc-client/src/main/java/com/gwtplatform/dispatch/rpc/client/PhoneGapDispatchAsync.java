@@ -21,18 +21,16 @@ import javax.inject.Inject;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 
 public class PhoneGapDispatchAsync extends RpcDispatchAsync {
     private final String remoteServerUrl;
 
     @Inject
-    PhoneGapDispatchAsync(ExceptionHandler exceptionHandler,
-            SecurityCookieAccessor securityCookieAccessor,
-            ClientActionHandlerRegistry registry,
-            @RemoteServerUrl String remoteServerUrl) {
-        super(exceptionHandler, securityCookieAccessor, registry);
+    PhoneGapDispatchAsync(RpcDispatchCallFactory rpcDispatchCallFactory,
+                          DispatchServiceAsync dispatchService,
+                          @RemoteServerUrl String remoteServerUrl) {
+        super(rpcDispatchCallFactory, dispatchService);
 
         this.remoteServerUrl = remoteServerUrl;
     }

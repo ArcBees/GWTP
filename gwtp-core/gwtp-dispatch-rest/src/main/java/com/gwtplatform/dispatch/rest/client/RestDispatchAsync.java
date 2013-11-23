@@ -18,131 +18,26 @@ package com.gwtplatform.dispatch.rest.client;
 
 import javax.inject.Inject;
 
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.common.client.IndirectProvider;
-import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandler;
-import com.gwtplatform.dispatch.rest.client.actionhandler.ClientRestActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
-import com.gwtplatform.dispatch.rpc.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.rpc.client.ExceptionHandler;
-import com.gwtplatform.dispatch.rpc.client.ExceptionHandler.Status;
-import com.gwtplatform.dispatch.rpc.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * TODO: Documentation.
  */
 public class RestDispatchAsync implements RestDispatch {
-    private final RestRequestBuilderFactory requestBuilderFactory;
-    private final RestResponseDeserializer restResponseDeserializer;
-    private final ClientRestActionHandlerRegistry clientActionHandlerRegistry;
-    private final ExceptionHandler exceptionHandler;
-    private final SecurityCookieAccessor securityCookieAccessor;
+    private final RestDispatchCallFactory callFactory;
 
     @Inject
-    RestDispatchAsync(ExceptionHandler exceptionHandler,
-                      ClientRestActionHandlerRegistry clientActionHandlerRegistry,
-                      SecurityCookieAccessor securityCookieAccessor,
-                      RestRequestBuilderFactory requestBuilderFactory,
-                      RestResponseDeserializer responseDeserializer) {
-        this.requestBuilderFactory = requestBuilderFactory;
-        this.restResponseDeserializer = responseDeserializer;
-        this.exceptionHandler = exceptionHandler;
-        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
-        this.securityCookieAccessor = securityCookieAccessor;
+    RestDispatchAsync(RestDispatchCallFactory callFactory) {
+        this.callFactory = callFactory;
     }
 
     @Override
     public <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback) {
-        String securityCookie = securityCookieAccessor.getCookieContent();
+        RestDispatchCall<A, R> call = callFactory.create(action, callback);
 
-        IndirectProvider<ClientRestActionHandler<?, ?>> clientActionHandlerProvider =
-                clientActionHandlerRegistry.find(action.getClass());
-
-        if (clientActionHandlerProvider != null) {
-            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            DelegatingAsyncCallback<A, R> delegatingCallback =
-                    new DelegatingAsyncCallback<A, R>(this, action, callback, dispatchRequest, securityCookie);
-
-            clientActionHandlerProvider.get(delegatingCallback);
-
-            return dispatchRequest;
-        } else {
-            return doExecute(securityCookie, action, callback);
-        }
-    }
-
-    protected <A extends RestAction<R>, R> void onExecuteSuccess(A action, R result, Response response,
-                                                                 AsyncCallback<R> callback) {
-        setResponse(response, callback);
-
-        callback.onSuccess(result);
-    }
-
-    protected <A extends RestAction<R>, R> void onExecuteFailure(A action, Throwable caught,
-                                                                 AsyncCallback<R> callback) {
-        if (exceptionHandler != null && exceptionHandler.onFailure(caught) == Status.STOP) {
-            return;
-        }
-
-        callback.onFailure(caught);
-    }
-
-    <A extends RestAction<R>, R> DispatchRequest doExecute(String securityCookie, A action, AsyncCallback<R> callback) {
-        try {
-            RequestBuilder requestBuilder = requestBuilderFactory.build(action, securityCookie);
-            requestBuilder.setCallback(createRequestCallback(action, callback));
-
-            return new GwtHttpDispatchRequest(requestBuilder.send());
-        } catch (RequestException e) {
-            onExecuteFailure(action, e, callback);
-        } catch (ActionException e) {
-            onExecuteFailure(action, e, callback);
-        }
-
-        return new CompletedDispatchRequest();
-    }
-
-    private <A extends RestAction<R>, R> void onExecuteFailure(A action, Throwable caught, Response response,
-                                                               AsyncCallback<R> callback) {
-        setResponse(response, callback);
-
-        onExecuteFailure(action, caught, callback);
-    }
-
-    private <R> void setResponse(Response response, AsyncCallback<R> callback) {
-        if (callback instanceof RestCallback) {
-            ((RestCallback) callback).setResponse(response);
-        }
-    }
-
-    private <R> RequestCallback createRequestCallback(final RestAction<R> action, final AsyncCallback<R> callback) {
-        return new RequestCallback() {
-            @Override
-            public void onResponseReceived(Request request, Response response) {
-                try {
-                    R result = restResponseDeserializer.deserialize(action, response);
-
-                    onExecuteSuccess(action, result, response, callback);
-                } catch (ActionException e) {
-                    onExecuteFailure(action, e, response, callback);
-                }
-            }
-
-            @Override
-            public void onError(Request request, Throwable exception) {
-                onExecuteFailure(action, exception, callback);
-            }
-        };
+        return call.execute();
     }
 }

@@ -26,8 +26,6 @@ import com.gwtplatform.dispatch.rpc.server.spring.SpringBeanProvider;
  * This class links any registered {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler}
  * and {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator ActionValidator}
  * instances with the default {@link ActionHandlerValidatorRegistry}.
- *
- * @author Peter Simun (simun@seges.sk)
  */
 public class ActionHandlerValidatorLinker {
 

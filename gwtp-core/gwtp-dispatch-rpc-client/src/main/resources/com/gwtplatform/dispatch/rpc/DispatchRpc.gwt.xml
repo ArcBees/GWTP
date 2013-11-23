@@ -6,6 +6,7 @@
 
     <!-- Inherit shared modules -->
     <inherits name='com.gwtplatform.common.ClientsCommon'/>
+    <inherits name="com.gwtplatform.dispatch.DispatchCommonClient"/>
     <inherits name='com.gwtplatform.dispatch.rpc.DispatchRpcShared'/>
 
     <inherits name="com.google.gwt.inject.Inject"/>

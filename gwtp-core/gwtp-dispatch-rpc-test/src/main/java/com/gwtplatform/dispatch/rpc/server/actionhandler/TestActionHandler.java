@@ -17,9 +17,9 @@
 package com.gwtplatform.dispatch.rpc.server.actionhandler;
 
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.action.TestAction;
 import com.gwtplatform.dispatch.rpc.shared.action.TestResult;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * @author Peter Simun

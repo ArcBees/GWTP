@@ -29,15 +29,10 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerV
 
 import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
-/**
- * @author Peter Simun
- */
 public class SpringBeanProvider implements BeanProvider {
 
     /**
      * Adapter for tranforming Guice Binding into BeanProvider implementation.
-     *
-     * @author Peter Simun (simun@seges.sk)
      */
     public static class SpringBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
 
