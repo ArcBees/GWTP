@@ -20,6 +20,9 @@ import javax.inject.Singleton;
 
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
+import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
+import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
@@ -80,9 +83,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
 
         bind(ActionMetadataProvider.class).in(Singleton.class);
-        bind(RestDispatchCallFactory.class).in(Singleton.class);
-        bind(RestRequestBuilderFactory.class).in(Singleton.class);
-        bind(RestResponseDeserializer.class).in(Singleton.class);
+        bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
+        bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
+        bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
 
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
