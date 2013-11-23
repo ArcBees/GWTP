@@ -21,26 +21,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * The asynchronous client-side dispatcher service. The server-side
- * implementation is {@link com.gwtplatform.dispatch.server.guice.DispatchServiceImpl}
+ * implementation is {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl}
  * .
  * <p/>
- * This class is closely related to {@link DispatchAsync}, in theory the latter
+ * This class is closely related to {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}, in theory the latter
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
- * {@link com.gwtplatform.dispatch.client.DispatchAsync}.
+ * {@link com.gwtplatform.dispatch.rpc.client.DispatchAsync}.
  *
- * @author Philippe Beaudoin
  * @see com.gwtplatform.dispatch.client.DispatchAsync
- * @see com.gwtplatform.dispatch.server.Dispatch
- * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
- * @see DispatchService
+ * @see com.gwtplatform.dispatch.rpc.server.Dispatch
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
+ * @see com.gwtplatform.dispatch.rpc.shared.DispatchService
  * @see DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public interface DispatchServiceAsync {
     /**
      * This method is called client-side whenever a new action is executed.
      *
-     * @see DispatchService#execute
+     * @see com.gwtplatform.dispatch.rpc.shared.DispatchService#execute
      */
     Request execute(String cookieSentByRPC, Action<?> action,
             AsyncCallback<Result> callback);
@@ -49,7 +48,7 @@ public interface DispatchServiceAsync {
      * This method is called client-side whenever a previous executed action need
      * to be undone.
      *
-     * @see DispatchService#undo
+     * @see com.gwtplatform.dispatch.rpc.shared.DispatchService#undo
      */
     Request undo(String cookieSentByRPC, Action<?> action, Result result,
             AsyncCallback<Void> callback);

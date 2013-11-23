@@ -28,7 +28,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  *
  * @param <A> The action type.
  * @param <R> The result type.
- * @author David Peterson
  */
 public class ActionResult<A extends Action<R>, R extends Result> {
     private final A action;
