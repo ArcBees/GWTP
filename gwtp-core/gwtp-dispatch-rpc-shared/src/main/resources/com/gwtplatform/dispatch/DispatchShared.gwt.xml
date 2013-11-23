@@ -2,6 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN"
         "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
 
+<!-- Deprecated: Please inherit com.gwtplatform.dispatch.rpc.DispatchRpcShared instead -->
 <module>
-    <source path='shared'/>
+    <inherits name="com.gwtplatform.dispatch.rpc.DispatchRpcShared"/>
 </module>

@@ -27,15 +27,10 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerV
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper
         .CommonBindingDescriptor;
 
-/**
- * @author Peter Simun (simun@seges.sk)
- */
 public class GuiceBeanProvider implements BeanProvider {
 
     /**
      * Adapter for tranforming Guice Binding into BeanProvider implementation.
-     *
-     * @author Peter Simun (simun@seges.sk)
      */
     public static class GuiceBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
 

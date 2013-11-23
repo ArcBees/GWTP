@@ -37,9 +37,6 @@ import com.gwtplatform.dispatch.rpc.server.guice.request.DefaultRequestProvider;
  * {@link com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl} pass
  * the override values into the constructor for this module and ensure it is installed <b>before</b> any
  * {@link HandlerModule} instances.
- *
- * @author Christian Goudreau
- * @author David Peterson
  */
 public class DispatchModule extends AbstractModule {
     private Class<? extends Dispatch> dispatchClass;

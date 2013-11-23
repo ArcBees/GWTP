@@ -30,9 +30,6 @@ import com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.ActionH
 import com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl;
 import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
-/**
- * @author Peter Simun
- */
 public class DispatchModule {
 
     private final Class<? extends Dispatch> dispatchClass;

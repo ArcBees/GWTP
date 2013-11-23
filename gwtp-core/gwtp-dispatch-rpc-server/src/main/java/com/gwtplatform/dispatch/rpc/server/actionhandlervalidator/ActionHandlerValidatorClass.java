@@ -27,7 +27,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  *
  * @param <A> Type of associated {@link Action}
  * @param <R> Type of associated {@link Result}
- * @author Christian Goudreau
  */
 public class ActionHandlerValidatorClass<A extends Action<R>, R extends Result> {
     private final Class<? extends ActionHandler<A, R>> actionHandlerClass;

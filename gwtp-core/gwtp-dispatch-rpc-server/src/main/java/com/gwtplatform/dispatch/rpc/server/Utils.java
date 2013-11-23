@@ -23,8 +23,6 @@ import java.util.logging.Logger;
 
 /**
  * Collection of utility methods.
- *
- * @author Philippe Beaudoin
  */
 public class Utils {
 
