@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,11 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.shared;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+import java.io.Serializable;
 
-public interface RestDispatchCallFactory {
-    <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback);
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+/**
+ * A marker interface for {@link Action} results.
+ *
+ * @author David Peterson
+ *
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.ServiceException}.
+ */
+@Deprecated
+public interface Result extends IsSerializable, Serializable {
 }
