@@ -40,8 +40,6 @@ import javax.servlet.http.HttpSession;
  * </pre>
  * <p/>
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
- *
- * @author Philippe Beaudoin
  */
 public abstract class AbstractHttpSessionSecurityCookieFilter implements Filter {
 

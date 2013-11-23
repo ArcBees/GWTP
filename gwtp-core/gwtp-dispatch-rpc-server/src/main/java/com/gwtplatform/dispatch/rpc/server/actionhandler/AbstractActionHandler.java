@@ -27,7 +27,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  *
  * @param <A> The {@link Action} type.
  * @param <R> The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
- * @author David Peterson
  */
 public abstract class AbstractActionHandler<A extends Action<R>, R extends Result>
         implements ActionHandler<A, R> {

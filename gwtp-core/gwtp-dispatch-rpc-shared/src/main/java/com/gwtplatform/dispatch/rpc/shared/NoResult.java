@@ -24,8 +24,6 @@ package com.gwtplatform.dispatch.rpc.shared;
  * <b>Note:</b> Subclasses should provide both an empty constructor for
  * serialization and a constructor with a single value for normal use. It is
  * recommended that the empty constructor is private or package-private.
- *
- * @author Christopher Viel
  */
 public class NoResult implements Result {
     public NoResult() {

@@ -19,9 +19,6 @@ package com.gwtplatform.dispatch.rpc.server.actionhandlervalidator;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
-/**
- * @author Christian Goudreau
- */
 public interface LazyActionHandlerValidatorRegistry extends
         ActionHandlerValidatorRegistry {
     /**

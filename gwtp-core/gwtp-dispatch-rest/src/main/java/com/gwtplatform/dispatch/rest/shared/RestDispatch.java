@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 public interface RestDispatch {
     /**

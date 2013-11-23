@@ -16,65 +16,60 @@
 
 package com.gwtplatform.dispatch.rpc.client.gin;
 
+import javax.inject.Singleton;
+
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.rpc.client.ExceptionHandler;
+import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
+import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
+import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.rpc.client.actionhandler.DefaultClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookieAccessor;
+import com.gwtplatform.dispatch.rpc.shared.DispatchService;
+import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 
 /**
- * A default implementation of {@link AbstractDispatchAsyncModule} that uses GWT-RPC.
+ * An implementation of {@link AbstractDispatchAsyncModule} that uses Remote Procedure Calls (RPC).
+ * </p>
+ * This gin module provides provides access to the {@link DispatchAsync} singleton, which is used to make calls to the
+ * server over RPC.
+ * <p/>
+ * If you want to prevent XSRF attack (you use secured {@link com.gwtplatform.dispatch.rpc.shared.Action}s) the empty
+ * {@link DefaultSecurityCookieAccessor} could leave your application vulnerable to XSRF attacks.
+ * </p>
+ *
+ * @see <a href="http://www.gwtproject.org/articles/security_for_gwt_applications.html">This document</a>.
  */
 public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
+    /**
+     * A {@link RpcDispatchAsyncModule} builder.
+     */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
-                DefaultClientActionHandlerRegistry.class;
-
-        /**
-         * Specify an alternate client action handler registry.
-         *
-         * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
-         * @return a {@link Builder} object.
-         */
-        public Builder clientActionHandlerRegistry(
-                Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
-            return this;
-        }
-
         @Override
         public RpcDispatchAsyncModule build() {
             return new RpcDispatchAsyncModule(this);
         }
     }
 
-    private final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
-
     public RpcDispatchAsyncModule() {
         this(new Builder());
     }
 
-    private RpcDispatchAsyncModule(Builder builder) {
+    protected RpcDispatchAsyncModule(Builder builder) {
         super(builder);
-
-        this.clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
     }
 
     @Override
-    protected void configure() {
-        super.configure();
+    protected void configureDispatch() {
+        bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
 
-        bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
+        bind(DispatchAsync.class).to(RpcDispatchAsync.class).in(Singleton.class);
     }
 
     @Provides
     @Singleton
-    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
-                                                 SecurityCookieAccessor secureSessionAccessor,
-                                                 ClientActionHandlerRegistry registry) {
-        return new RpcDispatchAsync(exceptionHandler, secureSessionAccessor, registry);
+    DispatchServiceAsync provideDispatchServiceAsync() {
+        return GWT.create(DispatchService.class);
     }
 }

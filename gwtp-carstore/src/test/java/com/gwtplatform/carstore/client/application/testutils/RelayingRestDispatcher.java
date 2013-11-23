@@ -21,10 +21,10 @@ import java.util.Map;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.TypeLiteral;
-import com.gwtplatform.dispatch.rpc.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.rpc.shared.DispatchRequest;
+import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * Class used to replace a real implementation of the @{link RestDispatch}. When executing
