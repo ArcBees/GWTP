@@ -14,22 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server.domain;
+package com.gwtplatform.dispatch.server;
 
-import com.googlecode.objectify.annotation.Id;
+import com.gwtplatform.dispatch.shared.ActionException;
 
-/**
- * The base class of any object that can be stored in the datastore.
- */
-public class DatastoreObject {
-    @Id
-    private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+public class ActionExceptionThrownByHandler extends ActionException {
+    public ActionExceptionThrownByHandler(Throwable cause) {
+        super("", cause);
     }
 }
