@@ -16,36 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import javax.inject.Inject;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
-public class RestDispatchCallFactory {
-    private final ExceptionHandler exceptionHandler;
-    private final ClientActionHandlerRegistry clientActionHandlerRegistry;
-    private final SecurityCookieAccessor securityCookieAccessor;
-    private final RestRequestBuilderFactory requestBuilderFactory;
-    private final RestResponseDeserializer restResponseDeserializer;
-
-    @Inject
-    RestDispatchCallFactory(ExceptionHandler exceptionHandler,
-                            ClientActionHandlerRegistry clientActionHandlerRegistry,
-                            SecurityCookieAccessor securityCookieAccessor,
-                            RestRequestBuilderFactory requestBuilderFactory,
-                            RestResponseDeserializer restResponseDeserializer) {
-        this.exceptionHandler = exceptionHandler;
-        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
-        this.securityCookieAccessor = securityCookieAccessor;
-        this.requestBuilderFactory = requestBuilderFactory;
-        this.restResponseDeserializer = restResponseDeserializer;
-    }
-
-    public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<A, R>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
-                requestBuilderFactory, restResponseDeserializer, action, callback);
-    }
+public interface RestDispatchCallFactory {
+    <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback);
 }
