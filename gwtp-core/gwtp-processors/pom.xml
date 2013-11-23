@@ -52,7 +52,7 @@
         <!-- Test dependencies -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-shared</artifactId>
+            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

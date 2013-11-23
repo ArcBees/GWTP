@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,21 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server;
+package com.gwtplatform.dispatch.rpc.server;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorClass;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMap;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorMapImpl;
-import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
-import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
-import com.gwtplatform.dispatch.server.guice.DispatchImpl;
-import com.gwtplatform.dispatch.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker;
-import com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
+import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorClass;
+import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorMap;
+import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorMapImpl;
+import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
+import com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator;
+import com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl;
+import com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker;
+import com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl;
+import com.gwtplatform.dispatch.rpc.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.Result;
 
 public class ServiceModule extends AbstractModule {
     private final Class<? extends ActionValidator> actionValidator;
