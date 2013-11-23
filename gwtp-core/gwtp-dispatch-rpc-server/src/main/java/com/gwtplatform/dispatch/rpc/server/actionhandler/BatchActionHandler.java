@@ -20,18 +20,16 @@ import java.util.List;
 
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.BatchAction;
 import com.gwtplatform.dispatch.rpc.shared.BatchAction.OnException;
 import com.gwtplatform.dispatch.rpc.shared.BatchResult;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * This handles {@link com.gwtplatform.dispatch.rpc.shared.BatchAction} requests, which are a set of multiple
  * actions that need to all be executed successfully in sequence for the whole
  * action to succeed.
- *
- * @author David Peterson
  */
 public class BatchActionHandler extends
         AbstractActionHandler<BatchAction, BatchResult> {
@@ -67,7 +65,7 @@ public class BatchActionHandler extends
     }
 
     public void undo(BatchAction action, BatchResult result,
-            ExecutionContext context) throws ActionException {
+                     ExecutionContext context) throws ActionException {
         // No action necessary - the sub actions should automatically rollback
     }
 

@@ -28,7 +28,6 @@ import java.util.List;
  * recommended that the empty constructor is private or package-private.
  *
  * @param <T> The value type.
- * @author Christopher Viel
  */
 public class MultipleResult<T> implements Result {
     private List<T> value;

@@ -19,9 +19,6 @@ package com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator;
 import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl;
 
-/**
- * @author Peter Simun
- */
 @Singleton
 public class EagerActionHandlerValidatorRegistryImpl extends AbstractEagerActionHandlerValidatorRegistryImpl {
 }

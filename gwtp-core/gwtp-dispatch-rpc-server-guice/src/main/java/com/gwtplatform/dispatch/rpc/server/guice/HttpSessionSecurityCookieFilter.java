@@ -22,7 +22,7 @@ import javax.inject.Singleton;
 import javax.servlet.http.HttpSession;
 
 import com.gwtplatform.dispatch.rpc.server.AbstractHttpSessionSecurityCookieFilter;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookie;
+import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
  * This filter will automatically inject a security cookie inside the request the first time the page is loaded. This
@@ -35,8 +35,6 @@ import com.gwtplatform.dispatch.rpc.shared.SecurityCookie;
  * </pre>
  * <p/>
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
- *
- * @author Philippe Beaudoin
  */
 @Singleton
 public class HttpSessionSecurityCookieFilter extends AbstractHttpSessionSecurityCookieFilter {

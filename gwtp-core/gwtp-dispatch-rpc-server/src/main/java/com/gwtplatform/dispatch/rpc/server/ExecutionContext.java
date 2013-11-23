@@ -17,17 +17,15 @@
 package com.gwtplatform.dispatch.rpc.server;
 
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * ExecutionContext instances are passed to
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler}s,
  * and allows them to execute sub-actions. These actions can be automatically rolled back
  * if any part of the action handler fails.
- *
- * @author David Peterson
  */
 public interface ExecutionContext {
 
@@ -39,7 +37,7 @@ public interface ExecutionContext {
      * @param <R>    The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
      * @param action The {@link com.gwtplatform.dispatch.rpc.shared.Action}.
      * @return The {@link com.gwtplatform.dispatch.rpc.shared.Result}.
-     * @throws com.gwtplatform.dispatch.rpc.shared.ActionException  if the action execution failed.
+     * @throws com.gwtplatform.dispatch.shared.ActionException  if the action execution failed.
      * @throws com.gwtplatform.dispatch.rpc.shared.ServiceException if the execution failed due to a service error.
      */
     <A extends Action<R>, R extends Result> R execute(A action)

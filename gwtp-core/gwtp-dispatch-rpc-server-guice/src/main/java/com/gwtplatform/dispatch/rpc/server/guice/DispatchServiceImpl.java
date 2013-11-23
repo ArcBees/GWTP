@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.dispatch.rpc.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.server.Dispatch;
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
-import com.gwtplatform.dispatch.rpc.shared.SecurityCookie;
+import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
  * This is the server-side implementation of the {@link com.gwtplatform.dispatch.rpc.shared.DispatchService},
@@ -34,9 +34,6 @@ import com.gwtplatform.dispatch.rpc.shared.SecurityCookie;
  * This class is closely related to {@link DispatchImpl}, in theory the latter wouldn't be needed, but we use it to
  * workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  *
- * @author Christian Goudreau
- * @author David Peterson
- * @author Peter Simun
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see com.gwtplatform.dispatch.rpc.server.Dispatch
  * @see DispatchImpl

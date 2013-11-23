@@ -18,9 +18,9 @@ package com.gwtplatform.dispatch.rpc.server.actionhandler;
 
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.spring.annotation.RegisterActionHandler;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.action.TestAnnotatedAction;
 import com.gwtplatform.dispatch.rpc.shared.action.TestResult;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  */

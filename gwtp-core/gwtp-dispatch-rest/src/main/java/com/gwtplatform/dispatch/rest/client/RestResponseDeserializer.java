@@ -16,61 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import javax.inject.Inject;
-
-import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
-import org.jboss.errai.marshalling.client.Marshalling;
-
 import com.google.gwt.http.client.Response;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
+import com.gwtplatform.dispatch.shared.ActionException;
 
-public class RestResponseDeserializer {
-    private final ActionMetadataProvider metadataProvider;
-
-    @Inject
-    RestResponseDeserializer(ActionMetadataProvider metadataProvider) {
-        this.metadataProvider = metadataProvider;
-    }
-
-    public <A extends RestAction<R>, R> R deserialize(A action, Response response) throws ActionException {
-        if (isSuccessStatusCode(response)) {
-            return getDeserializedResponse(action, response);
-        } else {
-            throw new ActionException(response.getStatusText());
-        }
-    }
-
-    private boolean isSuccessStatusCode(Response response) {
-        int statusCode = response.getStatusCode();
-
-        return (statusCode >= 200 && statusCode < 300) || statusCode == 304;
-    }
-
-    private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
-        @SuppressWarnings("unchecked")
-        Class<R> resultClass = (Class<R>) metadataProvider.getValue(action, MetadataType.RESPONSE_CLASS);
-        Class<?> keyClass = (Class<?>) metadataProvider.getValue(action, MetadataType.KEY_CLASS);
-        Class<?> valueClass = (Class<?>) metadataProvider.getValue(action, MetadataType.VALUE_CLASS);
-        R result = null;
-
-        if (resultClass != Void.class) {
-            if (resultClass != null && Marshalling.canHandle(resultClass)) {
-                String json = JacksonTransformer.fromJackson(response.getText());
-
-                if (valueClass != null) {
-                    result = Marshalling.fromJSON(json, resultClass, keyClass, valueClass);
-                } else if (keyClass != null) {
-                    result = Marshalling.fromJSON(json, resultClass, keyClass);
-                } else {
-                    result = Marshalling.fromJSON(json, resultClass);
-                }
-            } else {
-                throw new ActionException("Unable to deserialize response. No serializer found.");
-            }
-        }
-
-        return result;
-    }
+public interface RestResponseDeserializer {
+    <A extends RestAction<R>, R> R deserialize(A action, Response response) throws ActionException;
 }
