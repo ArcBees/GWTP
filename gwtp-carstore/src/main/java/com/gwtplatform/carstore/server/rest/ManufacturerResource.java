@@ -89,7 +89,8 @@ public class ManufacturerResource {
     @Path(ResourcesPath.RATING)
     @GET
     public Response getAverageRatings() {
-        List<RatingDto> ratingDtos = Rating.createDto(ratingDao.getAll());
+        List<Rating> ratings = ratingDao.getAll();
+        List<RatingDto> ratingDtos = Rating.createDto(ratings);
         List<ManufacturerRatingDto> averageCarRatings = reportService.getAverageCarRatings(ratingDtos);
 
         return Response.ok(averageCarRatings).build();

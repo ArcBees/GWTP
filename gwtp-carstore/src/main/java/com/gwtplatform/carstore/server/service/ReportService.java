@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 
@@ -28,13 +30,15 @@ public class ReportService {
         HashMap<String, AveragingCounter> averages = new HashMap<String, AveragingCounter>();
 
         for (RatingDto ratingDto : ratingDtos) {
-            String manufacturer = ratingDto.getCar().getManufacturer().getName();
+            CarDto carDto = ratingDto.getCar();
+            ManufacturerDto manufacturer = carDto.getManufacturer();
+            String manufacturerName = manufacturer.getName();
             Double rating = Double.valueOf(ratingDto.getRating());
 
-            if (averages.containsKey(manufacturer)) {
-                averages.get(manufacturer).add(rating);
+            if (averages.containsKey(manufacturerName)) {
+                averages.get(manufacturerName).add(rating);
             } else {
-                averages.put(manufacturer, new AveragingCounter(rating));
+                averages.put(manufacturerName, new AveragingCounter(rating));
             }
         }
 
