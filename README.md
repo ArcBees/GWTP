@@ -1,8 +1,15 @@
 ![GWTP] (http://i.imgur.com/LHvTZ.png "GWTP goo-teepee") *goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
-[![githalytics.com alpha](https://cruel-carlota.gopagoda.com/15d7ccab612aa40bb3af6b0cbcf4fc51 "githalytics.com")](http://githalytics.com/ArcBees/GWTP)
 
-##Donation
+##Enterprise Support
+Get high quality support through ArcBees.
+
+* <a href="https://gwtp.arcbees.com">Enterprise Support Features</a>
+* <a href="https://gwtp.arcbees.com/#buyPro">Buy Enterprise Support</a>
+
+##Open Source Donation
+Help provide support to the dedicated contributors moving this project forward.
+
 [![Donate](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SDCQSKDTWZYCQ)
 
 ##Reference
@@ -24,10 +31,10 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * See the manual dependency download section in [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration) 
 
 ###Current Release
-1.0.1 - Released on 8/12/2013
+1.0.3 - Released on 11/15/2013
 
 ###Current Snapshot
-1.0.2-SNAPSHOT
+1.1-SNAPSHOT
 
 ###Archetypes
 * [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes)
@@ -80,7 +87,8 @@ A complete model-view-presenter framework to simplify your next GWT project.
 * [Javadocs](http://arcbees.github.com/GWTP/javadoc/apidocs/index.html)
 
 ##Plugins
-* [Eclipse Plugin source](https://github.com/ArcBees/gwtp-eclipse-plugin)
+* [Eclipse Plugin](https://github.com/ArcBees/gwtp-eclipse-plugin) - Create project and presenters
+* [IntelliJ IDEA Plugin](https://github.com/ArcBees/gwtp-idea-plugin) - Create project and presenters
 
 ##Moving From 
 * While we move, you can find the documentation here: http://gwt-platform.googlecode.com
@@ -92,3 +100,5 @@ A complete model-view-presenter framework to simplify your next GWT project.
 [![Arcbees.com](http://arcbees-ads.appspot.com/ad.png)](http://arcbees.com)
 
 [![IntelliJ](https://lh6.googleusercontent.com/--QIIJfKrjSk/UJJ6X-UohII/AAAAAAAAAVM/cOW7EjnH778/s800/banner_IDEA.png)](http://www.jetbrains.com/idea/index.html)
+
+[![githalytics.com alpha](https://cruel-carlota.gopagoda.com/15d7ccab612aa40bb3af6b0cbcf4fc51 "githalytics.com")](http://githalytics.com/ArcBees/GWTP)
