@@ -21,8 +21,6 @@ import com.gwtplatform.dispatch.rpc.server.actionvalidator.AbstractDefaultAction
 /**
  * The default {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator} spring implementation.
  * It's here just to define default action validator as a spring bean.
- *
- * @author Peter Simun
  */
 public class DefaultActionValidator extends AbstractDefaultActionValidator {
 }

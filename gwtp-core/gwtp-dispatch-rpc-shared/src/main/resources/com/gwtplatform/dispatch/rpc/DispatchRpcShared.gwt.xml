@@ -5,6 +5,7 @@
 <module>
     <!-- Inherit the core Web Toolkit stuff.                        -->
     <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.gwtplatform.dispatch.DispatchCommonShared"/>
 
     <!-- Specify the paths for translatable code                    -->
     <source path='shared'/>

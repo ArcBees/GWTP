@@ -17,10 +17,11 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * An action represents a command sent to the
- * {@link com.gwtplatform.dispatch.server.Dispatch}. It has a specific result
+ * {@link com.gwtplatform.dispatch.rpc.server.Dispatch}. It has a specific result
  * type which is returned if the action is successful. Your implementation
  * should override {@link #getServiceName} to return a default service url. If
  * you use a {@link com.gwtplatform.dispatch.shared.SecurityCookie} to prevent XSRF attacks and you want this
@@ -32,9 +33,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * {@link UnsecuredActionImpl} instead.
  *
  * @param <R> The {@link Result} type.
- * @author David Peterson
  */
-public interface Action<R extends Result> extends IsSerializable {
+public interface Action<R extends Result> extends TypedAction<R>, IsSerializable {
 
     /**
      * The URL of the service used by default.

@@ -22,9 +22,6 @@ import javax.inject.Singleton;
 import com.gwtplatform.dispatch.rpc.server.AbstractDispatchImpl;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 
-/**
- * @author Philippe Beaudoin
- */
 @Singleton
 public class DispatchImpl extends AbstractDispatchImpl {
 

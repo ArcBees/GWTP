@@ -17,21 +17,16 @@
 package com.gwtplatform.dispatch.rest.rebind;
 
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.Properties;
-import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 
 import javax.inject.Singleton;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -97,12 +92,5 @@ public class RebindModule extends AbstractModule {
         bind(EventBus.class).in(Singleton.class);
 
         install(new FactoryModuleBuilder().build(GeneratorFactory.class));
-    }
-
-    @Provides
-    @Singleton
-    Set<JClassType> getRegisteredClassTypes() {
-        ConcurrentMap<JClassType, Boolean> backingConcurrentMap = Maps.newConcurrentMap();
-        return Collections.newSetFromMap(backingConcurrentMap);
     }
 }

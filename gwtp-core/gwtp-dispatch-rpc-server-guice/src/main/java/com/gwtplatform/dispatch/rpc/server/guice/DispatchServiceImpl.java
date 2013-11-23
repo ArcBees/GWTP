@@ -34,9 +34,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
  * This class is closely related to {@link DispatchImpl}, in theory the latter wouldn't be needed, but we use it to
  * workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  *
- * @author Christian Goudreau
- * @author David Peterson
- * @author Peter Simun
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see com.gwtplatform.dispatch.rpc.server.Dispatch
  * @see DispatchImpl

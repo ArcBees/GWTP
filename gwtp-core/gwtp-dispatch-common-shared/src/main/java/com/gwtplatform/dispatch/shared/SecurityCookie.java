@@ -32,8 +32,6 @@ import com.google.inject.BindingAnnotation;
  * <p/>
  * See {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor} for
  * details.
- *
- * @author Philippe Beaudoin
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})

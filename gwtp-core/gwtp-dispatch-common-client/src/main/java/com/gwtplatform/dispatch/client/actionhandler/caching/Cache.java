@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 
 /**
  * Interface for client side caching.
- *
- * @author Sunny Gupta
  */
 public interface Cache {
     /**
