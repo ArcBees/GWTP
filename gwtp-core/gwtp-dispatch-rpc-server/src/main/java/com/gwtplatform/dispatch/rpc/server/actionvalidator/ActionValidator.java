@@ -17,8 +17,8 @@
 package com.gwtplatform.dispatch.rpc.server.actionvalidator;
 
 import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.ActionException;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * Implementors must provide an implementation of this interface and provide it
@@ -31,14 +31,11 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  * <p/>
  * You should think of annotating your validators with {@code @RequestScoped} or
  * {@code @Singleton}.
- *
- * @author David Peterson
- * @author Christian Goudreau
  */
 public interface ActionValidator {
     /**
      * Validate whether or not that {@link com.gwtplatform.dispatch.rpc.shared.Action} can be executed at this time.
-     * You can also throw an {@link com.gwtplatform.dispatch.rpc.shared.ActionException} if you want to fine grain why
+     * You can also throw an {@link com.gwtplatform.dispatch.shared.ActionException} if you want to fine grain why
      * the validator failed.
      *
      * @param action The action that called this validator.

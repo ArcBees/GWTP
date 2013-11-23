@@ -17,24 +17,24 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * The base class of the synchronous dispatcher service. The server-side
- * implementation is {@link com.gwtplatform.dispatch.server.guice.DispatchServiceImpl}
+ * implementation is {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl}
  * and the async client-side version is {@link DispatchServiceAsync}.
  * <p/>
  * This class is closely related to
- * {@link com.gwtplatform.dispatch.server.Dispatch}, in theory the latter
+ * {@link com.gwtplatform.dispatch.rpc.server.Dispatch}, in theory the latter
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
- * {@link com.gwtplatform.dispatch.client.DispatchAsync}.
+ * {@link com.gwtplatform.dispatch.rpc.client.DispatchAsync}.
  *
- * @author Philippe Beaudoin
- * @see com.gwtplatform.dispatch.client.DispatchAsync
- * @see com.gwtplatform.dispatch.server.Dispatch
- * @see com.gwtplatform.dispatch.server.guice.DispatchImpl
+ * @see com.gwtplatform.dispatch.rpc.client.DispatchAsync
+ * @see com.gwtplatform.dispatch.rpc.server.Dispatch
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
  * @see DispatchService
  * @see DispatchServiceAsync
- * @see com.gwtplatform.dispatch.server.guice.DispatchServiceImpl
+ * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public interface DispatchService extends RemoteService {
     /**
@@ -42,7 +42,8 @@ public interface DispatchService extends RemoteService {
      *
      * @param cookieSentByRPC This is the content of the security cookie accessed
      *                        on the client (in javascript), its goal is to prevent XSRF
-     *                        attacks. See {@link SecurityCookieAccessor} for more details.
+     *                        attacks. See {@link com.gwtplatform.dispatch.shared.SecurityCookieAccessor} for more
+     *                        details.
      * @param action          The {@link Action} to execute.
      * @return The {@link Result} of the action.
      * @throws ActionException  Thrown if the action could not be executed for
@@ -52,8 +53,7 @@ public interface DispatchService extends RemoteService {
      *                          of a service error.
      * @see DispatchServiceAsync#execute
      */
-    Result execute(String cookieSentByRPC, Action<?> action)
-            throws ActionException, ServiceException;
+    Result execute(String cookieSentByRPC, Action<?> action) throws ActionException, ServiceException;
 
     /**
      * This method is called server-side whenever a previously executed action
@@ -61,7 +61,8 @@ public interface DispatchService extends RemoteService {
      *
      * @param cookieSentByRPC This is the content of the security cookie accessed
      *                        on the client (in javascript), its goal is to prevent XSRF
-     *                        attacks. See {@link SecurityCookieAccessor} for more details.
+     *                        attacks. See {@link com.gwtplatform.dispatch.shared.SecurityCookieAccessor} for more
+     *                        details.
      * @param action          The {@link Action} to execute.
      * @param result          The {@link Result} of this action when it was executed.
      * @throws ActionException  Thrown if the action could not be undone for
@@ -71,6 +72,5 @@ public interface DispatchService extends RemoteService {
      *                          of a service error.
      * @see DispatchServiceAsync#undo
      */
-    void undo(String cookieSentByRPC, Action<Result> action, Result result)
-            throws ActionException, ServiceException;
+    void undo(String cookieSentByRPC, Action<Result> action, Result result) throws ActionException, ServiceException;
 }

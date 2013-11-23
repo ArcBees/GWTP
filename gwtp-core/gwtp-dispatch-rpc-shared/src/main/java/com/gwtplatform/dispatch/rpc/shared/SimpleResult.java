@@ -26,7 +26,6 @@ package com.gwtplatform.dispatch.rpc.shared;
  * recommended that the empty constructor is private or package-private.
  *
  * @param <T> The value type.
- * @author David Peterson
  */
 public class SimpleResult<T> extends AbstractSimpleResult<T> {
     SimpleResult() {

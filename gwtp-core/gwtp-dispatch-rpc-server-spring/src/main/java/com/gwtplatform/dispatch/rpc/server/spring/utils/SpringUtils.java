@@ -28,9 +28,6 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.AbstractRefreshableWebApplicationContext;
 
-/**
- * @author Peter Simun
- */
 public class SpringUtils {
 
     public static <B> B getOrCreate(ApplicationContext applicationContext,
