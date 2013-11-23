@@ -18,7 +18,9 @@ package com.gwtplatform.dispatch.rest.shared;
 
 import java.util.List;
 
-public interface RestAction<R> {
+import com.gwtplatform.dispatch.shared.TypedAction;
+
+public interface RestAction<R> extends TypedAction<R> {
     String getPath();
 
     HttpMethod getHttpMethod();

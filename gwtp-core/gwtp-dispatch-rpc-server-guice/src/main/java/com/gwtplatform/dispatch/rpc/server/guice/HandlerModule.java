@@ -31,9 +31,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  * Base module that will bind {@link com.gwtplatform.dispatch.rpc.shared.Action}s to
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler}s and
  * {@link ActionValidator}s. Your own Guice modules should extend this class.
- *
- * @author Christian Goudreau
- * @author David Peterson
  */
 public abstract class HandlerModule extends AbstractModule {
 
@@ -104,8 +101,4 @@ public abstract class HandlerModule extends AbstractModule {
      * security validation.
      */
     protected abstract void configureHandlers();
-
-    /**
-     * Override this method to
-     */
 }

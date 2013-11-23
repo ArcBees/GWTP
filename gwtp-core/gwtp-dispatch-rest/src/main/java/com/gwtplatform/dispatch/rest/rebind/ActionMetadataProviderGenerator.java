@@ -29,7 +29,6 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
@@ -55,8 +54,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
     }
 
     public void generate() throws UnableToCompleteException {
-        JClassType type = getGeneratorUtil().getType(ActionMetadataProvider.class.getName());
-        String implName = type.getName() + SUFFIX;
+        String implName = ActionMetadataProvider.class.getSimpleName() + SUFFIX;
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
         if (printWriter != null) {
             try {

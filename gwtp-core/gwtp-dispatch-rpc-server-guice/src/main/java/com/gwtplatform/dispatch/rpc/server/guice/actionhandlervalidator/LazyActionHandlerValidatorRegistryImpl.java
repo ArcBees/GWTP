@@ -35,8 +35,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  * action handlers and validators when they are first used. All
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler} and {@link ActionValidator} implementations
  * <b>must</b> have a public, default constructor.
- *
- * @author Christian Goudreau
  */
 @Singleton
 public class LazyActionHandlerValidatorRegistryImpl implements

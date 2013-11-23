@@ -19,7 +19,7 @@ package com.gwtplatform.carstore.client.application.testutils;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 
 /**
  * Basic configuration for PresenterWidgetTest, you test must extends this
@@ -34,5 +34,5 @@ public abstract class PresenterWidgetTestBase {
     public RelayingRestDispatcher dispatcher;
     @Inject
     @Named("mock")
-    public DispatchAsync mockDispatcher;
+    public RestDispatch mockDispatcher;
 }
