@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.server;
+package com.gwtplatform.dispatch.rpc.server;
 
 import javax.inject.Inject;
 
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
+import com.gwtplatform.dispatch.rpc.server.actionhandler.AbstractActionHandler;
+import com.gwtplatform.dispatch.rpc.shared.NoResult;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.dispatch.shared.NoResult;
 
 public class HandlerThatThrowsActionException extends AbstractActionHandler<SomeAction, NoResult> {
     @Inject
