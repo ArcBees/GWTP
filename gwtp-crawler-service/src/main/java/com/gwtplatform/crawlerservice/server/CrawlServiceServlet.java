@@ -36,14 +36,14 @@ import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.googlecode.objectify.Key;
 import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
 
 /**
- * Servlet that makes it possible to fetch an external page, renders it using HTMLUnit and returns
- * the HTML page.
+ * Servlet that makes it possible to fetch an external page, renders it using HTMLUnit and returns the HTML page.
  */
 @Singleton
 public class CrawlServiceServlet extends HttpServlet {
@@ -94,34 +94,22 @@ public class CrawlServiceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         PrintWriter out = null;
         try {
-            resp.setCharacterEncoding(CHAR_ENCODING);
-            resp.setHeader("Content-Type", "text/plain; charset=" + CHAR_ENCODING);
+            boolean keyValid = validateKey(req, resp);
 
-            out = resp.getWriter();
+            if (keyValid) {
+                out = resp.getWriter();
 
-            String receivedKey = URLDecoder.decode(req.getParameter("key"), CHAR_ENCODING);
-            if (!key.equals(receivedKey)) {
-                out.println("<h3>The service key received does not match the desired key.</h3>");
-            } else {
-                String url = URLDecoder.decode(req.getParameter("url"), CHAR_ENCODING);
+                String url = Strings.nullToEmpty(req.getParameter("url"));
+                url = URLDecoder.decode(url, CHAR_ENCODING);
 
-                List<Key<CachedPage>> keys = cachedPageDao.listKeysByProperty("url", url);
-                Map<Key<CachedPage>, CachedPage> deprecatedPages = cachedPageDao.get(keys);
-
-                Date currDate = new Date();
-
-                CachedPage matchingPage = extractMatchingPage(deprecatedPages, currDate);
-                cachedPageDao.deleteKeys(deprecatedPages.keySet());
-
-                if (needToFetchPage(matchingPage, currDate, out)) {
-                    CachedPage cachedPage = createPlaceholderPage(url, currDate);
-                    StringBuilder renderedHtml = renderPage(url);
-                    storeFetchedPage(cachedPage, renderedHtml);
-                    out.println(renderedHtml.toString());
+                if (!url.isEmpty()) {
+                    renderResponse(url, resp);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         } finally {
             if (out != null) {
                 out.close();
@@ -129,17 +117,62 @@ public class CrawlServiceServlet extends HttpServlet {
         }
     }
 
-    private void storeFetchedPage(CachedPage cachedPage,
-            StringBuilder stringBuilder) {
-        cachedPage.setContent(stringBuilder.toString());
+    private boolean validateKey(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        PrintWriter output = response.getWriter();
+        String receivedKey = request.getParameter("key");
+        boolean keyIsValid = false;
+
+        if (Strings.isNullOrEmpty(receivedKey)) {
+            output.println("No service key attached to the request.");
+        } else {
+            String decodedKey = URLDecoder.decode(receivedKey, CHAR_ENCODING);
+
+            if (!key.equals(decodedKey)) {
+                output.println("The service key received does not match the desired key.");
+            } else {
+                keyIsValid = true;
+            }
+        }
+
+        if (!keyIsValid) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        }
+
+        return keyIsValid;
+    }
+
+    private void renderResponse(String url, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+
+        response.setCharacterEncoding(CHAR_ENCODING);
+        response.setHeader("Content-Type", "text/plain; charset=" + CHAR_ENCODING);
+
+        List<Key<CachedPage>> keys = cachedPageDao.listKeysByProperty("url", url);
+        Map<Key<CachedPage>, CachedPage> deprecatedPages = cachedPageDao.get(keys);
+
+        Date currDate = new Date();
+
+        CachedPage matchingPage = extractMatchingPage(deprecatedPages, currDate);
+        cachedPageDao.deleteKeys(deprecatedPages.keySet());
+
+        if (needToFetchPage(matchingPage, currDate, out)) {
+            CachedPage cachedPage = createPlaceholderPage(url, currDate);
+            String renderedHtml = renderPage(url);
+            storeFetchedPage(cachedPage, renderedHtml);
+            out.println(renderedHtml);
+        }
+    }
+
+    private void storeFetchedPage(CachedPage cachedPage, String stringBuilder) {
+        cachedPage.setContent(stringBuilder);
         cachedPage.setFetchInProgress(false);
         cachedPageDao.put(cachedPage);
     }
 
     /**
-     * Checks if the page {@link matchingPage} needs to be fetched. If it does not need to be fetched,
-     * but a fetch is already in progress, then it prints out {@code FETCH_IN_PROGRESS} to the
-     * specified {@link PrintWriter}.
+     * Checks if the page {@link matchingPage} needs to be fetched. If it does not need to be fetched, but a fetch is
+     * already in progress, then it prints out {@code FETCH_IN_PROGRESS} to the specified {@link PrintWriter}.
      *
      * @param matchingPage The matching page, can be {@code null} if no page matches.
      * @param currDate     The current date.
@@ -183,15 +216,13 @@ public class CrawlServiceServlet extends HttpServlet {
     }
 
     /**
-     * Fetches the page at {@code url} and renders the page in a {@link StringBuilder}. The rendered
-     * page is prefixed with a message indicating this is a non-interactive version.
+     * Fetches the page at {@code url} and renders the page in a {@link StringBuilder}. The rendered page is prefixed
+     * with a message indicating this is a non-interactive version.
      *
      * @param url The URL of the page to render.
      * @return The rendered page, in a {@link StringBuilder}.
-     * @throws IOException
-     * @throws MalformedURLException
      */
-    private StringBuilder renderPage(String url) throws IOException {
+    private String renderPage(String url) throws IOException {
         WebClient webClient = webClientProvider.get();
 
         webClient.getCache().clear();
@@ -227,23 +258,14 @@ public class CrawlServiceServlet extends HttpServlet {
             }
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("<hr />\n");
-        stringBuilder.append("<center><h3>You are viewing a non-interactive page that is intended for the crawler.  ");
-        stringBuilder.append("You probably want to see this page: <a href=\"" + url + "\">" + url +
-                "</a></h3></center>\n");
-        stringBuilder.append("<hr />\n");
-
-        stringBuilder.append(page.asXml());
         webClient.closeAllWindows();
 
-        return stringBuilder;
+        return page.asXml();
     }
 
     /**
-     * Checks if there is a page from {@code deprecatedPages} that is not expired. If there is
-     * more than one, choose the most recent. If one is found it is removed from the
-     * {@code deprecatedPages} list.
+     * Checks if there is a page from {@code deprecatedPages} that is not expired. If there is more than one, choose the
+     * most recent. If one is found it is removed from the {@code deprecatedPages} list.
      *
      * @param deprecatedPages The list of pages that match the URL but that are expected to be.
      * @param currDate        The current date, to check for expiration.
@@ -254,8 +276,7 @@ public class CrawlServiceServlet extends HttpServlet {
 
         // Keep the matching page only if it has not expired
         if (matchingPage == null ||
-                currDate.getTime() >
-                        matchingPage.getFetchDate().getTime() + cachedPageTimeoutSec * 1000) {
+            currDate.getTime() > matchingPage.getFetchDate().getTime() + cachedPageTimeoutSec * 1000) {
             matchingPage = null;
         } else {
             deprecatedPages.remove(Key.create(CachedPage.class, matchingPage.getId()));
@@ -267,8 +288,7 @@ public class CrawlServiceServlet extends HttpServlet {
     private CachedPage findMostRecentPage(Map<Key<CachedPage>, CachedPage> pages) {
         CachedPage result = null;
         for (CachedPage page : pages.values()) {
-            if (result == null ||
-                    page.getFetchDate().after(result.getFetchDate())) {
+            if (result == null || page.getFetchDate().after(result.getFetchDate())) {
                 result = page;
             }
         }

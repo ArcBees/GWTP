@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.gwtplatform</groupId>
         <artifactId>gwtp-core</artifactId>
-        <version>1.1.0-snapshot</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>gwtp-processors</artifactId>
@@ -52,9 +52,8 @@
         <!-- Test dependencies -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
+            <artifactId>gwtp-dispatch-shared</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
