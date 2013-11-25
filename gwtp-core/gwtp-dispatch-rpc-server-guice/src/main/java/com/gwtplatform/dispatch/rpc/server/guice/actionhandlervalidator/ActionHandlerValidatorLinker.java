@@ -26,8 +26,7 @@ import com.gwtplatform.dispatch.rpc.server.guice.GuiceBeanProvider;
 /**
  * This class links any registered {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler}
  * and {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator ActionValidator}
- * instances with the default.
- * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry}
+ * instances with the default {@link ActionHandlerValidatorRegistry}.
  */
 public class ActionHandlerValidatorLinker {
 

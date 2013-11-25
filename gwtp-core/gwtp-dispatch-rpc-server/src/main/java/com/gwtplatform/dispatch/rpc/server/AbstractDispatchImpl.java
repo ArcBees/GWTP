@@ -34,8 +34,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * client-side async service is {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  * <p/>
  * This class is closely related to {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl}.
- * In fact, this class wouldn't be needed, but we use it
- * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
+ * In fact, this class wouldn't be needed, but we use it to workaround a GWT limitation described in
+ * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  *
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see Dispatch
@@ -133,8 +133,7 @@ public abstract class AbstractDispatchImpl implements Dispatch {
     }
 
     /**
-     * Every single action will be executed by this function and validated by the
-     * {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator}.
+     * Every single action will be executed by this function and validated by the {@link ActionValidator}.
      *
      * @param <A>    Type of associated {@link Action} type.
      * @param <R>    Type of associated {@link Result} type.

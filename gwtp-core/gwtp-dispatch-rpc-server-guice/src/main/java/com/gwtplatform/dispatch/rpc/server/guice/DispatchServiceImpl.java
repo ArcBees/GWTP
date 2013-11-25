@@ -28,8 +28,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
  * This is the server-side implementation of the {@link com.gwtplatform.dispatch.rpc.shared.DispatchService},
- * for which the client-side async service is
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync}.
+ * for which the client-side async service is {@link com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync}.
  * <p/>
  * This class is closely related to {@link DispatchImpl}, in theory the latter wouldn't be needed, but we use it to
  * workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
