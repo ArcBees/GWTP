@@ -23,6 +23,10 @@ import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 
+/**
+ * This class is an extension of {@link RpcDispatchAsync} and configures the right service entry point and request
+ * headers for Phone Gap applications.
+ */
 public class PhoneGapDispatchAsync extends RpcDispatchAsync {
     private final String remoteServerUrl;
 

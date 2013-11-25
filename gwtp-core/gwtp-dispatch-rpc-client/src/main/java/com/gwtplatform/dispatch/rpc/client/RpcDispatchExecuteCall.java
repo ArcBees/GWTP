@@ -27,6 +27,12 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * A class representing an execute call to be sent to the server using RPC.
+ *
+ * @param <A> the {@link Action} type.
+ * @param <R> the {@link Result} type for this action.
+ */
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
     private final DispatchServiceAsync dispatchService;
 
