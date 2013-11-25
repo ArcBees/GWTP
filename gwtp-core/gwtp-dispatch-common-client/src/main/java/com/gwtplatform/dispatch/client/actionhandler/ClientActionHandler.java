@@ -25,8 +25,8 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * When a call is executed, the {@link ClientActionHandler} that has been registered with the bound
  * {@link ClientActionHandlerRegistry} is called and
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} or
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically send the command over HTTP to the
- * server.
+ * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically send the command over
+ * HTTP to the server.
  * <p/>
  * Client Action Handlers provide a number of flexible options:
  * <ul>

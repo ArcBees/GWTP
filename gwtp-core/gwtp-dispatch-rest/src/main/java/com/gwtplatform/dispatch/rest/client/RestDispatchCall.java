@@ -95,13 +95,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         return new RequestCallback() {
             @Override
             public void onResponseReceived(Request request, Response response) {
-                try {
-                    R result = restResponseDeserializer.deserialize(getAction(), response);
-
-                    onExecuteSuccess(result, response);
-                } catch (ActionException e) {
-                    onExecuteFailure(e, response);
-                }
+                RestDispatchCall.this.onResponseReceived(response);
             }
 
             @Override
@@ -109,6 +103,18 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
                 onExecuteFailure(exception);
             }
         };
+    }
+
+    private void onResponseReceived(Response response) {
+        response = new ResponseWrapper(response);
+
+        try {
+            R result = restResponseDeserializer.deserialize(getAction(), response);
+
+            onExecuteSuccess(result, response);
+        } catch (ActionException e) {
+            onExecuteFailure(e, response);
+        }
     }
 
     private RequestBuilder buildRequest() throws ActionException {
