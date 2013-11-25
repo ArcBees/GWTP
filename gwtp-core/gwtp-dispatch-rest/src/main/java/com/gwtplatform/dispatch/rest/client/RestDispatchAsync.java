@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * TODO: Documentation.
+ * The default implementation for {@link RestDispatch}.
  */
 public class RestDispatchAsync implements RestDispatch {
     private final RestDispatchCallFactory callFactory;

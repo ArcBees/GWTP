@@ -24,6 +24,9 @@ import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * The default implementation for {@link RestDispatchCallFactory}.
+ */
 public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final ExceptionHandler exceptionHandler;
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;

@@ -20,6 +20,10 @@ import java.util.Collection;
 
 import com.google.common.base.Joiner;
 
+/**
+ * This class is used by {@link com.gwtplatform.dispatch.rest.client.AbstractRestAction} to associate a parameter name
+ * to a value.
+ */
 public class RestParameter {
     private String name;
     private String stringValue;
@@ -36,10 +40,16 @@ public class RestParameter {
         }
     }
 
+    /**
+     * @return the name of this parameter.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the value of this parameter, as a string.
+     */
     public String getStringValue() {
         return stringValue;
     }
