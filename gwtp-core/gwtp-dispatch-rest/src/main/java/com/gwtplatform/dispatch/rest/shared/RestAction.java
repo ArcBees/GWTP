@@ -24,11 +24,8 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * An action used by {@link RestDispatch}.
  * <p/>
  * You will usually want to let GWTP generate your actions by creating
- * {@link com.gwtplatform.dispatch.rest.shared.RestService}s. You can also create your actions manually, but you will
- * need to create your own versions of
- * {@link com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory RestRequestBuilderFactory} and
- * {@link com.gwtplatform.dispatch.rest.client.RestResponseDeserializer RestResponseDeserializer} to handle the
- * serialization of your {@link RestAction}s.
+ * {@link com.gwtplatform.dispatch.rest.shared.RestService}s as explained
+ * <a href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
  *
  * @param <R> the result type.
  */

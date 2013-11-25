@@ -39,8 +39,6 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADE
 
 /**
  * Default implementation for {@link RestRequestBuilderFactory}.
- * <p/>
- * It is possible to extending this class and make use of the extension points.
  */
 public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFactory {
     private static final Map<HttpMethod, Method> HTTP_METHODS = Maps.newEnumMap(HttpMethod.class);
