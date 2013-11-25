@@ -28,8 +28,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * Default implementation for {@link RestResponseDeserializer}.
- * <p/>
- * It is possible to extending this class and make use of the extension points.
  */
 public class DefaultRestResponseDeserializer implements RestResponseDeserializer {
     private final ActionMetadataProvider metadataProvider;
