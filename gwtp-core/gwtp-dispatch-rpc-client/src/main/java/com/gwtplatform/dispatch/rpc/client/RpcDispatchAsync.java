@@ -28,8 +28,8 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * This class is the default implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}, which is
- * essentially the client-side access to the
- * {@link com.gwtplatform.dispatch.rpc.server.Dispatch} class on the server-side.
+ * essentially the client-side access to the {@link com.gwtplatform.dispatch.rpc.server.Dispatch} class on the
+ * server-side.
  */
 public class RpcDispatchAsync implements DispatchAsync {
     private final DispatchServiceAsync realService;
