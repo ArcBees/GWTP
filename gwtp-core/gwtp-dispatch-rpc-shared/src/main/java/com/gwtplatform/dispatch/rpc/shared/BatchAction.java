@@ -17,27 +17,24 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 /**
- * This provides a simple way to send multiple actions to be executed in
- * sequence. If any fail, the rules for the {@link OnException} value provided
- * in the constructor determine the outcome.
+ * This provides a simple way to send multiple actions to be executed in sequence. If any fail, the rules for the
+ * {@link OnException} value provided in the constructor determine the outcome.
  */
 public abstract class BatchAction implements Action<BatchResult> {
-
     /**
-     * {@link BatchAction}'s OnException enumeration.
+     * {@link BatchAction}'s enumeration of possible outcomes when there is an exception.
      */
     public enum OnException {
         /**
-         * If specified, the batch will continue if an action fails. The matching
-         * {@link Result} in the {@link BatchResult#getResults()} will be
-         * <code>null</code>.
+         * If specified, the batch will continue if an action fails. The matching {@link Result} in the
+         * {@link BatchResult#getResults()} will be <code>null</code>.
          */
         CONTINUE,
         /**
-         * If specified, the batch will stop processing and roll back any executed
-         * actions from the batch, and throw the exception.
+         * If specified, the batch will stop processing and roll back any executed actions from the batch, and throw the
+         * exception.
          */
-        ROLLBACK;
+        ROLLBACK
     }
 
     private Action<?>[] actions;
@@ -45,9 +42,8 @@ public abstract class BatchAction implements Action<BatchResult> {
     private OnException onException;
 
     /**
-     * Constructs a new batch action, which will attempt to execute the provided
-     * list of actions in order. If there is a failure, it will follow the rules
-     * specified by <code>onException</code>.
+     * Constructs a new batch action, which will attempt to execute the provided list of actions in order. If there is a
+     * failure, it will follow the rules specified by <code>onException</code>.
      *
      * @param onException If there is an exception, specify the behaviour.
      * @param actions     The list of actions to execute.
