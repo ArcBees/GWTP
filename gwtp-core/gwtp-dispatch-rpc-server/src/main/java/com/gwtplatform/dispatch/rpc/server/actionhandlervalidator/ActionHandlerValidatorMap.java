@@ -20,20 +20,19 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * This is the interface that define the map of
- * {@link ActionHandlerValidatorInstance}.
+ * This is the interface that define the map of {@link ActionHandlerValidatorInstance}.
  *
  * @param <A> Type of the associated {@link Action}
- * @param <R> Type of the associated {@link com.gwtplatform.dispatch.rpc.shared.Result}
+ * @param <R> Type of the associated {@link Result}
  */
 public interface ActionHandlerValidatorMap<A extends Action<R>, R extends Result> {
     /**
-     * @return the {@link Action} class associated
+     * @return the {@link Action} class associated.
      */
     Class<A> getActionClass();
 
     /**
-     * @return the {@link ActionHandlerValidatorClass} class associated
+     * @return the {@link ActionHandlerValidatorClass} class associated.
      */
     ActionHandlerValidatorClass<A, R> getActionHandlerValidatorClass();
 }
