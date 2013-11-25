@@ -22,8 +22,7 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 public interface Cache {
     /**
      * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.
-     * If automatic expiration is used, this entry will be expired
-     * after {@link #getAutoExpireTimeInMs()} milliseconds.
+     * If automatic expiration is used, this entry will be expired after {@link #getAutoExpireTimeInMs()} milliseconds.
      *
      * @param key   The key for the entry to be cached
      * @param value The corresponding value
