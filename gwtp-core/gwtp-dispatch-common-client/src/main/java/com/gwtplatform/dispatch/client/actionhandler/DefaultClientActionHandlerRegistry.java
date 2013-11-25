@@ -29,7 +29,8 @@ import com.gwtplatform.common.client.ProviderBundle;
 
 /**
  * The default implementation that {@link ClientActionHandlerRegistry} that if bound will not load any client-side
- * action handlers. </p>
+ * action handlers.
+ * </p>
  * To register client-side action handlers, extend this class and call {@link #register} in the constructor.
  * <p/>
  * <h3><u>Example</u></h3>
