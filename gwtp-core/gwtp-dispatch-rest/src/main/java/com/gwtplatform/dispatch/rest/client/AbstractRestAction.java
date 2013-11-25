@@ -24,7 +24,8 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
- * TODO: Documentation.
+ * Provides a basic implementation of {@link RestAction} to inheritors. This is used by GWTP code-generator to create
+ * the actions defined by the {@link com.gwtplatform.dispatch.rest.shared.RestService} implementers.
  */
 public abstract class AbstractRestAction<R> implements RestAction<R> {
     private HttpMethod httpMethod;
