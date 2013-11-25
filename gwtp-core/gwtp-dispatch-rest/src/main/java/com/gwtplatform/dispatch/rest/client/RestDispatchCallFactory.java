@@ -21,10 +21,6 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
  * A factory used to create {@link com.gwtplatform.dispatch.client.DispatchCall} instances.
- * <p/>
- * You may want to create your own implementation where you will return your own
- * {@link com.gwtplatform.dispatch.client.DispatchCall DispatchCall} objects if you wish to make use of the extension
- * points available in {@link com.gwtplatform.dispatch.client.DispatchCall DispatchCall}.
  */
 public interface RestDispatchCallFactory {
     <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback);
