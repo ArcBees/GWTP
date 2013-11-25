@@ -20,13 +20,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The asynchronous client-side dispatcher service with an arbitrary action
- * type. The server-side implementation is
+ * The asynchronous client-side dispatcher service with an arbitrary action type. The server-side implementation is
  * {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl}.
  * <p/>
- * This class is closely related to {@link DispatchServiceAsync}. In theory this
- * class wouldn't be needed, but we use it to workaround a GWT limitation. In
- * fact, GWT currently can't correctly handle having generic method templates in
+ * This class is closely related to {@link DispatchServiceAsync}. In theory this class wouldn't be needed, but we use it
+ * to workaround a GWT limitation. In fact, GWT currently can't correctly handle having generic method templates in
  * method signatures (eg. <code>&lt;A&gt; A create( Class<A> type )</code>)
  *
  * @see DispatchAsync
@@ -37,7 +35,6 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public interface DispatchAsync {
-
     /**
      * This method is called client-side whenever a new action is executed.
      *
