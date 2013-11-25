@@ -23,6 +23,13 @@ import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
+/**
+ * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a
+ * {@link ClientActionHandler} to delegate the execution result.
+ *
+ * @param <A> the {@link TypedAction} type.
+ * @param <R> the result type for this action.
+ */
 public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements AsyncCallback<ClientActionHandler<?, ?>>,
         ExecuteCommand<A, R> {
     private final DispatchCall dispatchCall;

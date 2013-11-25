@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 
 /**
  * Default implementation of {@link AbstractCachingClientActionHandler}. It supports action caching
- * </p>
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.

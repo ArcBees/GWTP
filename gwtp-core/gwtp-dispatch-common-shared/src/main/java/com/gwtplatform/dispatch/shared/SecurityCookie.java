@@ -30,8 +30,7 @@ import com.google.inject.BindingAnnotation;
  * bindConstant().annotatedWith(SecurityCookie.class).to("MYCOOKIE");
  * </pre>
  * <p/>
- * See {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor} for
- * details.
+ * @see com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
