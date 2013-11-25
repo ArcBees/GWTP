@@ -33,6 +33,12 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * A class representing an execute call to be sent to the server over HTTP.
+ *
+ * @param <A> the {@link RestAction} type.
+ * @param <R> the result type for this action.
+ */
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;

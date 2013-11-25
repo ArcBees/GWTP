@@ -37,6 +37,11 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
 
+/**
+ * Default implementation for {@link RestRequestBuilderFactory}.
+ * <p/>
+ * It is possible to extending this class and make use of the extension points.
+ */
 public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFactory {
     private static final Map<HttpMethod, Method> HTTP_METHODS = Maps.newEnumMap(HttpMethod.class);
     private static final String CONTENT_TYPE = "Content-Type";
@@ -76,26 +81,71 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         return requestBuilder;
     }
 
+    /**
+     * Encodes the given {@link RestParameter} as a path parameter.
+     *
+     * @param value a {@link RestParameter} to encode.
+     * @return the encoded path parameter.
+     * @throws ActionException if an exception occurred while encoding the path parameter.
+     * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
+     */
     protected String encodePathParam(RestParameter value) throws ActionException {
         return encode(value);
     }
 
+    /**
+     * Encodes the given {@link RestParameter} as a query parameter.
+     *
+     * @param value a {@link RestParameter} to encode.
+     * @return the encoded query parameter.
+     * @throws ActionException if an exception occurred while encoding the query parameter.
+     * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
+     */
     protected String encodeQueryParam(RestParameter value) throws ActionException {
         return encode(value);
     }
 
+    /**
+     * Encodes the given {@link RestParameter} as a header parameter. The default implementation returns the string
+     * value directly without any encoding.
+     *
+     * @param value a {@link RestParameter} to encode.
+     * @return the encoded header parameter.
+     * @throws ActionException if an exception occurred while encoding the header parameter.
+     */
     protected String encodeHeaderParam(RestParameter value) throws ActionException {
         return value.getStringValue();
     }
 
+    /**
+     * Encodes a {@link RestParameter}. The default implementation will URL encode the string value.
+     *
+     * @param value a {@link RestParameter} to encode.
+     * @return the encoded parameter.
+     * @throws ActionException if an exception occurred while encoding the parameter.
+     * @see UriUtils#encode(String)
+     */
     protected String encode(RestParameter value) throws ActionException {
         return UriUtils.encode(value.getStringValue());
     }
 
+    /**
+     * Verify if the provided <code>bodyClass</code> can be serialized.
+     *
+     * @param bodyClass the {@link Class} to verify if it can be serialized.
+     * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
+     */
     protected boolean canSerialize(Class<?> bodyClass) {
         return !Marshalling.canHandle(bodyClass);
     }
 
+    /**
+     * Serialize the given object. We assume {@link #canSerialize(Class)} returns <code>true</code> or a runtime
+     * exception may be thrown.
+     *
+     * @param object the object to serialize.
+     * @return The serialized string.
+     */
     protected String serialize(Object object) {
         return JacksonTransformer.toJackson(Marshalling.toJSON(object));
     }

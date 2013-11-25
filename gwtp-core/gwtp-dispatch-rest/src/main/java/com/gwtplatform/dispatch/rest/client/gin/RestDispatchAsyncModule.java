@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.client.gin;
 import javax.inject.Singleton;
 
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
-import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
@@ -36,12 +35,15 @@ import com.gwtplatform.dispatch.rest.shared.RestDispatch;
  * This gin module provides provides access to the {@link RestDispatch} singleton, which is used to make calls to the
  * server over HTTP. This module requires a {@link XCSRFHeaderName}. By default, this will be bound to
  * {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.
+ * <p/>
+ * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath} to point
+ * to your server API root path.
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
      * A {@link RestDispatchAsyncModule} builder.
      * <p/>
-     * By default, this builder configures the {@link RestDispatchAsyncModule} to use
+     * By default, this builder configures the {@link XCSRFHeaderName} value to
      * {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.
      */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
@@ -50,7 +52,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         /**
          * Specify the X-CSRF header name.
          *
-         * @param xcsrfTokenHeaderName The X-CSRF header name..
+         * @param xcsrfTokenHeaderName The X-CSRF header name.
          * @return a {@link Builder} object.
          */
         public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
@@ -68,6 +70,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     private final String xcsrfTokenHeaderName;
 
+    /**
+     * Creates this module using the default values as specified by {@link Builder}.
+     */
     public RestDispatchAsyncModule() {
         this(new Builder());
     }
@@ -82,7 +87,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configureDispatch() {
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
 
-        bind(ActionMetadataProvider.class).in(Singleton.class);
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
