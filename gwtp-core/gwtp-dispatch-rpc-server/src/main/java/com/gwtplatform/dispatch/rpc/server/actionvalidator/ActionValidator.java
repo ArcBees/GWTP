@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 /**
  * Implementers must provide an implementation of this interface and provide it to the
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchService DispatchService} implementation so that it can check
- * whether or not the action can be executed. Doing so will often requiring session information, which can be done by
+ * whether or not the action can be executed. Doing so will often require session information, which can be done by
  * injecting a {@code Provider<HttpSession>} into the validator and calling {@code httpSessionProvider.get()} within the
  * {@link #isValid} method.
  * <p/>
