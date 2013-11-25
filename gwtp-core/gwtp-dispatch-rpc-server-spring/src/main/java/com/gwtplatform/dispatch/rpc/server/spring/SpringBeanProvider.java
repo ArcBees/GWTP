@@ -32,7 +32,7 @@ import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 public class SpringBeanProvider implements BeanProvider {
 
     /**
-     * Adapter for tranforming Guice Binding into BeanProvider implementation.
+     * Adapter for transforming Guice Binding into BeanProvider implementation.
      */
     public static class SpringBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
 
