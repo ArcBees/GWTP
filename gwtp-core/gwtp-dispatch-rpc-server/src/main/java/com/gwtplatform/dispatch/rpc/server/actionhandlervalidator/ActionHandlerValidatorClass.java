@@ -22,8 +22,7 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * Convenience class to store {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler} and
- * {@link ActionValidator} class definitions.
+ * Convenience class to store {@link ActionHandler} and {@link ActionValidator} class definitions.
  *
  * @param <A> Type of associated {@link Action}
  * @param <R> Type of associated {@link Result}

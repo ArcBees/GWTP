@@ -31,8 +31,7 @@ import com.gwtplatform.dispatch.rpc.server.spring.annotation.RegisterActionHandl
 import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
 /**
- * Annotation bean post processing to register ActionHadlers annotate
- * with {@link com.gwtplatform.dispatch.rpc.server.spring.annotation.RegisterActionHandler}.
+ * Annotation bean post processing to register {@link ActionHandler}s annotated with {@link RegisterActionHandler}.
  */
 public class AnnotatedActionBeandHandlerRegistrator implements BeanPostProcessor, Ordered {
     @Autowired
