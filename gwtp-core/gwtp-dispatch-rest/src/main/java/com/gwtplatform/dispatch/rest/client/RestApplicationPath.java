@@ -23,6 +23,9 @@ import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
 
+/**
+ * Binding annotation associated to the root path of your API end point.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @BindingAnnotation

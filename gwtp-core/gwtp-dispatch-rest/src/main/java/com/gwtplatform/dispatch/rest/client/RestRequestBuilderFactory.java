@@ -20,6 +20,19 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+/**
+ * Factory used to create {@link RequestBuilder} objects for a given {@link RestAction}.
+ */
 public interface RestRequestBuilderFactory {
+    /**
+     * Build a {@link RequestBuilder} object for the given action.
+     *
+     * @param action        the {@link RestAction} for which to build the request.
+     * @param securityToken the security token to add to the {@link RequestBuilder}. Usually the value bound to
+     *                      {@literal @}{@link XCSRFHeaderName}.
+     * @param <A>           the action type.
+     * @return a {@link RequestBuilder} object.
+     * @throws ActionException if an exception occured while creating the {@link RequestBuilder}.
+     */
     <A extends RestAction<?>> RequestBuilder build(A action, String securityToken) throws ActionException;
 }

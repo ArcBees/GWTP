@@ -20,6 +20,19 @@ import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+/**
+ * Deserializes a response for a given action.
+ */
 public interface RestResponseDeserializer {
+    /**
+     * Deserializes the provided <code>response</code> for the given <code>action</code>.
+     *
+     * @param action te action associated with the response to deserialize.
+     * @param response the response to deserialize.
+     * @param <A> the {@link RestAction} type.
+     * @param <R> the result type.
+     * @return the deserialized object.
+     * @throws ActionException if an exception occurred while deserializing the response.
+     */
     <A extends RestAction<R>, R> R deserialize(A action, Response response) throws ActionException;
 }

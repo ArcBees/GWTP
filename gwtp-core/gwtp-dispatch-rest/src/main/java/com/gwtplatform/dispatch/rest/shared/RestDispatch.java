@@ -19,9 +19,17 @@ package com.gwtplatform.dispatch.rest.shared;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
+/**
+ * An asynchronous dispatcher service with an arbitrary action type. The actions will be sent over HTTP using a
+ * REST architecture.
+ */
 public interface RestDispatch {
     /**
      * This method is called client-side whenever a new action is executed.
+     *
+     * @param action   the {@link RestAction} to execute.
+     * @param callback the {@link AsyncCallback} to call when the execution is done.
+     * @see com.gwtplatform.dispatch.rest.client.RestDispatchCall#execute()
      */
     <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback);
 }
