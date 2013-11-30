@@ -16,12 +16,11 @@
 
 package com.gwtplatform.carstore.shared.dispatch;
 
-import org.jboss.errai.common.client.api.annotations.Portable;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 
-@Portable
 public class LogInResult {
     private ActionType actionType;
     private CurrentUserDto currentUserDto;
@@ -30,9 +29,10 @@ public class LogInResult {
     public LogInResult() {
     }
 
-    public LogInResult(ActionType actionType,
-                       CurrentUserDto currentUserDto,
-                       String loggedInCookie) {
+    @JsonCreator
+    public LogInResult(@JsonProperty("actionType") ActionType actionType,
+                       @JsonProperty("currentUserDto") CurrentUserDto currentUserDto,
+                       @JsonProperty("loggedInCookie") String loggedInCookie) {
         this.actionType = actionType;
         this.currentUserDto = currentUserDto;
         this.loggedInCookie = loggedInCookie;

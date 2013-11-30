@@ -1,0 +1,8 @@
+package $package;
+
+import javax.inject.Singleton;
+
+import com.github.nmorel.gwtjackson.client.ObjectMapper;
+
+@Singleton
+public interface $implName extends ObjectMapper<$type> {}
