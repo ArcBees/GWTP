@@ -27,6 +27,8 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XCSRFHeaderName;
+import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
+import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 
 /**
@@ -90,6 +92,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
+
+        bind(Serialization.class).to(JsonSerialization.class);
 
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }

@@ -5,6 +5,8 @@ import javax.inject.Singleton;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProviderImpl;
+import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
+import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProviderImpl;
 
 #foreach (${service} in ${serviceDefinitions.getServices()})
 import ${service.qualifiedSourceName};
@@ -14,7 +16,8 @@ import ${service.qualifiedSourceName.replace("shared", "client")}${suffix};
 public class ${implName} extends AbstractGinModule {
     @Override
     protected void configure() {
-        bind(ActionMetadataProvider.class).to(ActionMetadataProviderImpl.class).in(Singleton.class);
+        bind(ActionMetadataProvider.class).to(ActionMetadataProviderImpl.class);
+        bind(JacksonMapperProvider.class).to(JacksonMapperProviderImpl.class).in(Singleton.class);
 
 #foreach (${service} in ${serviceDefinitions.getServices()})
         bind(${service.name}.class).to(${service.name}${suffix}.class).in(Singleton.class);

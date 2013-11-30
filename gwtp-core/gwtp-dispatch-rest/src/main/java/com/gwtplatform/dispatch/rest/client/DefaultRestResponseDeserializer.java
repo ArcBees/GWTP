@@ -18,10 +18,10 @@ package com.gwtplatform.dispatch.rest.client;
 
 import javax.inject.Inject;
 
-import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
-import org.jboss.errai.marshalling.client.Marshalling;
-
+import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
+import com.google.common.base.Strings;
 import com.google.gwt.http.client.Response;
+import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -31,10 +31,13 @@ import com.gwtplatform.dispatch.shared.ActionException;
  */
 public class DefaultRestResponseDeserializer implements RestResponseDeserializer {
     private final ActionMetadataProvider metadataProvider;
+    private final Serialization serialization;
 
     @Inject
-    DefaultRestResponseDeserializer(ActionMetadataProvider metadataProvider) {
+    DefaultRestResponseDeserializer(ActionMetadataProvider metadataProvider,
+                                    Serialization serialization) {
         this.metadataProvider = metadataProvider;
+        this.serialization = serialization;
     }
 
     @Override
@@ -49,65 +52,23 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
     /**
      * Verify if the provided <code>resultClass</code> can be deserialized.
      *
-     * @param resultClass the {@link Class} to verify if it can be deserialized.
-     * @param <R>         the result type.
+     * @param resultClass the parameterizedType to verify if it can be deserialized.
      * @return <code>true</code> if <code>resultClass</code> can be deserialized, <code>false</code> otherwise.
      */
-    protected <R> boolean canDeserialize(Class<R> resultClass) {
-        return Marshalling.canHandle(resultClass);
-    }
-
-    /**
-     * Cleanup a json string.
-     *
-     * @param json the dirty json that needs some cleanup.
-     * @return a cleaned up version of the json given as input.
-     */
-    protected String cleanupJson(String json) {
-        return JacksonTransformer.fromJackson(json);
+    protected boolean canDeserialize(String resultClass) {
+        return serialization.canDeserialize(resultClass);
     }
 
     /**
      * Deserializes the json as an object of the <code>resultClass</code> type.
      *
-     * @param resultClass the {@link Class} of the object once deserialized.
+     * @param resultClass the parameerized type of the object once deserialized.
      * @param json        The json to deserialize.
      * @param <R>         the type of the object once deserialized
      * @return The deserialized object.
      */
-    protected <R> R deserializeValue(Class<R> resultClass, String json) {
-        return Marshalling.fromJSON(json, resultClass);
-    }
-
-    /**
-     * Deserializes a json collection as an object of the <code>resultClass</code> type.
-     *
-     * @param resultClass the {@link Class} of the object once deserialized. Should be an instance of
-     *                    {@link java.util.Collection}.
-     * @param keyClass    the {@link Class} of the generic for this collection.
-     * @param json        The json to deserialize.
-     * @param <R>         the type of the object once deserialized. Should be an instance of
-     *                    {@link java.util.Collection}.
-     * @return The deserialized object.
-     */
-    protected <R> R deserializeCollection(Class<R> resultClass, Class<?> keyClass, String json) {
-        return Marshalling.fromJSON(json, resultClass, keyClass);
-    }
-
-    /**
-     * Deserializes a json map as an object of the <code>resultClass</code> type. Technically a json input is a map,
-     * but this is required if the response has to be converted to a map.
-     *
-     * @param resultClass the {@link Class} of the object once deserialized. Should be an instance of
-     *                    {@link java.util.Map}.
-     * @param keyClass    the {@link Class} of the generic for this map's key.
-     * @param valueClass  the {@link Class} of the generic for this map's value.
-     * @param json        The json to deserialize.
-     * @param <R>         the type of the object once deserialized. Should be an instance of {@link java.util.Map}.
-     * @return The deserialized object.
-     */
-    protected <R> R deserializeMap(Class<R> resultClass, Class<?> keyClass, Class<?> valueClass, String json) {
-        return Marshalling.fromJSON(json, resultClass, keyClass, valueClass);
+    protected <R> R deserializeValue(String resultClass, String json) {
+        return serialization.deserialize(json, resultClass);
     }
 
     private boolean isSuccessStatusCode(Response response) {
@@ -117,28 +78,18 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
     }
 
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
-        @SuppressWarnings("unchecked")
-        Class<R> resultClass = (Class<R>) metadataProvider.getValue(action, MetadataType.RESPONSE_CLASS);
-        Class<?> keyClass = (Class<?>) metadataProvider.getValue(action, MetadataType.KEY_CLASS);
-        Class<?> valueClass = (Class<?>) metadataProvider.getValue(action, MetadataType.VALUE_CLASS);
-        R result = null;
+        String resultType = (String) metadataProvider.getValue(action, MetadataType.RESPONSE_TYPE);
+        Exception cause = null;
 
-        if (resultClass != Void.class) {
-            if (resultClass != null && canDeserialize(resultClass)) {
-                String json = cleanupJson(response.getText());
-
-                if (valueClass != null) {
-                    result = deserializeMap(resultClass, keyClass, valueClass, json);
-                } else if (keyClass != null) {
-                    result = deserializeCollection(resultClass, keyClass, json);
-                } else {
-                    result = deserializeValue(resultClass, json);
-                }
-            } else {
-                throw new ActionException("Unable to deserialize response. No serializer found.");
+        if (!Strings.isNullOrEmpty(resultType) && canDeserialize(resultType)) {
+            try {
+                String json = response.getText();
+                return deserializeValue(resultType, json);
+            } catch (JsonMappingException e) {
+                cause = e;
             }
         }
 
-        return result;
+        throw new ActionException("Unable to deserialize response. No serializer found.", cause);
     }
 }
