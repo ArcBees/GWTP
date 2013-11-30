@@ -37,7 +37,7 @@ public class JsonSerialization implements Serialization {
 
     @Override
     public boolean canDeserialize(String type) {
-        return jacksonMapperProvider.hasMapper(type);
+        return VOID.equals(type) || jacksonMapperProvider.hasMapper(type);
     }
 
     @Override
