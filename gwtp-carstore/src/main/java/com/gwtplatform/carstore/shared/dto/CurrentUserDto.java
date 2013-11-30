@@ -16,9 +16,9 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
-import org.jboss.errai.common.client.api.annotations.Portable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Portable
 public class CurrentUserDto implements Dto {
     private Boolean loggedIn;
     private UserDto user;
@@ -26,8 +26,9 @@ public class CurrentUserDto implements Dto {
     public CurrentUserDto() {
     }
 
-    public CurrentUserDto(Boolean loggedIn,
-                          UserDto user) {
+    @JsonCreator
+    public CurrentUserDto(@JsonProperty("loggedIn") Boolean loggedIn,
+                          @JsonProperty("user") UserDto user) {
         this.loggedIn = loggedIn;
         this.user = user;
     }
