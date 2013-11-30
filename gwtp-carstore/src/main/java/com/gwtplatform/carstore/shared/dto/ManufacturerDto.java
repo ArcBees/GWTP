@@ -19,9 +19,6 @@ package com.gwtplatform.carstore.shared.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jboss.errai.common.client.api.annotations.Portable;
-
-@Portable
 public class ManufacturerDto extends BaseEntity {
     private String name;
     private List<CarDto> cars;

@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import org.jboss.errai.marshalling.client.api.MarshallerFramework;
-
 /**
  * Abstract implementation extended by the generated implementation of {@link RestDispatcherController}. This is used to
  * execute additional code that do not need to be generated.
@@ -25,6 +23,5 @@ import org.jboss.errai.marshalling.client.api.MarshallerFramework;
 public abstract class AbstractRestDispatcherController implements RestDispatcherController {
     @Override
     public void onModuleLoad() {
-        MarshallerFramework.initializeDefaultSessionProvider();
     }
 }
