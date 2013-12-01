@@ -50,25 +50,25 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
     }
 
     /**
-     * Verify if the provided <code>resultClass</code> can be deserialized.
+     * Verify if the provided <code>resultType</code> can be deserialized.
      *
-     * @param resultClass the parameterizedType to verify if it can be deserialized.
-     * @return <code>true</code> if <code>resultClass</code> can be deserialized, <code>false</code> otherwise.
+     * @param resultType the parameterized type to verify if it can be deserialized.
+     * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
-    protected boolean canDeserialize(String resultClass) {
-        return serialization.canDeserialize(resultClass);
+    protected boolean canDeserialize(String resultType) {
+        return serialization.canDeserialize(resultType);
     }
 
     /**
-     * Deserializes the json as an object of the <code>resultClass</code> type.
+     * Deserializes the json as an object of the <code>resultType</code> type.
      *
-     * @param resultClass the parameerized type of the object once deserialized.
-     * @param json        The json to deserialize.
-     * @param <R>         the type of the object once deserialized
+     * @param resultType the parameterized type of the object once deserialized.
+     * @param json       the json to deserialize.
+     * @param <R>        the type of the object once deserialized
      * @return The deserialized object.
      */
-    protected <R> R deserializeValue(String resultClass, String json) {
-        return serialization.deserialize(json, resultClass);
+    protected <R> R deserializeValue(String resultType, String json) {
+        return serialization.deserialize(json, resultType);
     }
 
     private boolean isSuccessStatusCode(Response response) {
@@ -79,17 +79,16 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
 
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
         String resultType = (String) metadataProvider.getValue(action, MetadataType.RESPONSE_TYPE);
-        Exception cause = null;
 
         if (!Strings.isNullOrEmpty(resultType) && canDeserialize(resultType)) {
             try {
                 String json = response.getText();
                 return deserializeValue(resultType, json);
             } catch (JsonMappingException e) {
-                cause = e;
+                throw new ActionException("Unable to deserialize response. An unexpected error occurred.", e);
             }
         }
 
-        throw new ActionException("Unable to deserialize response. No serializer found.", cause);
+        throw new ActionException("Unable to deserialize response. No serializer found.");
     }
 }
