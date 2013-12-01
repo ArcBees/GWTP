@@ -20,11 +20,9 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * This contains both the original {@link Action} and the {@link com.gwtplatform.dispatch.rpc.shared.Result} of that
- * action. It also indicates if this action was executed (
- * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.rpc.server.ExecutionContext)}) or undone (
- * {@link ActionHandler#undo(Action, com.gwtplatform.dispatch.rpc.shared.Result,
- * com.gwtplatform.dispatch.rpc.server.ExecutionContext)}).
+ * This contains both the original {@link Action} and the {@link Result} of that action. It also indicates if this
+ * action was executed ({@link ActionHandler#execute(Action, com.gwtplatform.dispatch.rpc.server.ExecutionContext)})
+ * or undone ({@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.rpc.server.ExecutionContext)}).
  *
  * @param <A> The action type.
  * @param <R> The result type.
@@ -37,15 +35,13 @@ public class ActionResult<A extends Action<R>, R extends Result> {
     private final R result;
 
     /**
-     * Creates a new action/result pair. The {@code executed} field indicates if
-     * this action was executed via
+     * Creates a new action/result pair. The {@code executed} field indicates if this action was executed via
      * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.rpc.server.ExecutionContext)} or undone via
      * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.rpc.server.ExecutionContext)}.
      *
      * @param action   The {@link Action}.
      * @param result   The {@link Result}.
-     * @param executed {@code true} if the action was executed, {@code false} if
-     *                 it was undoed.
+     * @param executed {@code true} if the action was executed, {@code false} if it was undoed.
      */
     public ActionResult(A action, R result, boolean executed) {
         this.action = action;
@@ -66,8 +62,7 @@ public class ActionResult<A extends Action<R>, R extends Result> {
      * {@link ActionHandler#execute(Action, com.gwtplatform.dispatch.rpc.server.ExecutionContext)} or undone via
      * {@link ActionHandler#undo(Action, Result, com.gwtplatform.dispatch.rpc.server.ExecutionContext)}.
      *
-     * @return {@code true} if the action was executed, {@code false} if it was
-     *         undoed.
+     * @return {@code true} if the action was executed, {@code false} if it was undoed.
      */
     public boolean isExecuted() {
         return executed;

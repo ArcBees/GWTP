@@ -20,17 +20,14 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * An action represents a command sent to the
- * {@link com.gwtplatform.dispatch.rpc.server.Dispatch}. It has a specific result
- * type which is returned if the action is successful. Your implementation
- * should override {@link #getServiceName} to return a default service url. If
- * you use a {@link com.gwtplatform.dispatch.shared.SecurityCookie} to prevent XSRF attacks and you want this
- * action to be secured against such attacks (i.e. it's not meant to be an
- * anonymous action) then you should override {@link #isSecured()} to return
- * {@code true}.
+ * An action represents a command sent to the {@link com.gwtplatform.dispatch.rpc.server.Dispatch}. It has a specific
+ * result type which is returned if the action is successful. Your implementation should override
+ * {@link #getServiceName} to return a default service url. If you use a
+ * {@link com.gwtplatform.dispatch.shared.SecurityCookie} to prevent XSRF attacks and you want this action to be secured
+ * against such attacks (i.e. it's not meant to be an anonymous action) then you should override {@link #isSecured()} to
+ * return {@code true}.
  * <p/>
- * You can usually inherit from {@link ActionImpl} or
- * {@link UnsecuredActionImpl} instead.
+ * You can usually inherit from {@link ActionImpl} or {@link UnsecuredActionImpl} instead.
  *
  * @param <R> The {@link Result} type.
  */
@@ -42,28 +39,23 @@ public interface Action<R extends Result> extends TypedAction<R>, IsSerializable
     String DEFAULT_SERVICE_NAME = "dispatch/";
 
     /**
-     * Access the name of the service, which will be used as the URL path to
-     * access the action.
+     * Access the name of the service, which will be used as the URL path to access the action.
      *
      * @return The service name.
      */
     String getServiceName();
 
     /**
-     * Verifies if the action is secured. Secured actions perform a number of
-     * extra security checks, such as validating the {@link com.gwtplatform.dispatch.shared.SecurityCookie} to
-     * foil XSRF attacks.
+     * Verifies if the action is secured. Secured actions perform a number of extra security checks, such as validating
+     * the {@link com.gwtplatform.dispatch.shared.SecurityCookie} to foil XSRF attacks.
      * <p/>
-     * <b>Important!</b> Make sure your method returns a value that does not
-     * depend on client-side information, otherwise it could be tampered with to
-     * turn a secure action into an insecure one. An example of a bad practice
-     * would be to store a {@code boolean secured} member and return that. Since
-     * this field is serialized, the user could change it on his side. A simple
-     * and good practice is simply to {@code return true;} or
+     * <b>Important!</b> Make sure your method returns a value that does not depend on client-side information,
+     * otherwise it could be tampered with to turn a secure action into an insecure one. An example of a bad practice
+     * would be to store a {@code boolean secured} member and return that. Since this field is serialized, the user
+     * could change it on his side. A simple and good practice is simply to {@code return true;} or
      * {@code return false;}.
      *
-     * @return {@code true} if the action should be secured against XSRF attacks,
-     *         {@code false} otherwise.
+     * @return {@code true} if the action should be secured against XSRF attacks, {@code false} otherwise.
      */
     boolean isSecured();
 }

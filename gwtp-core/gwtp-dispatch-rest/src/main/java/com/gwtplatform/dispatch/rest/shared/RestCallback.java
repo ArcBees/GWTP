@@ -20,9 +20,9 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * Use this callback if you need to retrieve the {@link Response} returned by the HTTP call.
+ * An {@link AsyncCallback} you can use if you need to retrieve the {@link Response} returned by the HTTP call.
  *
- * @see #setResponse()
+ * @see #setResponse(Response)
  */
 public interface RestCallback<R> extends AsyncCallback<R> {
     /**

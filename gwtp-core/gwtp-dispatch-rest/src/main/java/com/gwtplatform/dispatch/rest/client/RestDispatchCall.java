@@ -33,6 +33,12 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * A class representing an execute call to be sent to the server over HTTP.
+ *
+ * @param <A> the {@link RestAction} type.
+ * @param <R> the result type for this action.
+ */
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
@@ -89,13 +95,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         return new RequestCallback() {
             @Override
             public void onResponseReceived(Request request, Response response) {
-                try {
-                    R result = restResponseDeserializer.deserialize(getAction(), response);
-
-                    onExecuteSuccess(result, response);
-                } catch (ActionException e) {
-                    onExecuteFailure(e, response);
-                }
+                RestDispatchCall.this.onResponseReceived(response);
             }
 
             @Override
@@ -103,6 +103,18 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
                 onExecuteFailure(exception);
             }
         };
+    }
+
+    private void onResponseReceived(Response response) {
+        response = new ResponseWrapper(response);
+
+        try {
+            R result = restResponseDeserializer.deserialize(getAction(), response);
+
+            onExecuteSuccess(result, response);
+        } catch (ActionException e) {
+            onExecuteFailure(e, response);
+        }
     }
 
     private RequestBuilder buildRequest() throws ActionException {

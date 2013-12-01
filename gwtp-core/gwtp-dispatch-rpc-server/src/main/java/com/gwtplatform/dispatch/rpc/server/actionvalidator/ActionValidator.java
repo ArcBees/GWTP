@@ -21,26 +21,21 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
- * Implementors must provide an implementation of this interface and provide it
- * to the {@link com.gwtplatform.dispatch.rpc.shared.DispatchService DispatchService}
- * implementation so that it can check whether or
- * not the action can be executed. Doing so will often requiring session
- * information, which can be done by injecting a {@code Provider<HttpSession>}
- * into the validator and calling {@code httpSessionProvider.get()} within the
+ * Implementers must provide an implementation of this interface and provide it to the
+ * {@link com.gwtplatform.dispatch.rpc.shared.DispatchService DispatchService} implementation so that it can check
+ * whether or not the action can be executed. Doing so will often require session information, which can be done by
+ * injecting a {@code Provider<HttpSession>} into the validator and calling {@code httpSessionProvider.get()} within the
  * {@link #isValid} method.
  * <p/>
- * You should think of annotating your validators with {@code @RequestScoped} or
- * {@code @Singleton}.
+ * You should think of annotating your validators with {@code @RequestScoped} or {@code @Singleton}.
  */
 public interface ActionValidator {
     /**
-     * Validate whether or not that {@link com.gwtplatform.dispatch.rpc.shared.Action} can be executed at this time.
-     * You can also throw an {@link com.gwtplatform.dispatch.shared.ActionException} if you want to fine grain why
-     * the validator failed.
+     * Validate whether or not that {@link Action} can be executed at this time. You can also throw an
+     * {@link ActionException} if you want to fine grain why the validator failed.
      *
      * @param action The action that called this validator.
-     * @return {@code true} if the action can be executed, {@code false}
-     *         otherwise.
+     * @return {@code true} if the action can be executed, {@code false} otherwise.
      */
     boolean isValid(Action<? extends Result> action) throws ActionException;
 }

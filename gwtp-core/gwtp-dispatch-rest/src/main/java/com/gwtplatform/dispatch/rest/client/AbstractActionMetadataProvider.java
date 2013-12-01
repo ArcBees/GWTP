@@ -16,14 +16,18 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
+/**
+ * This class offers helper methods to help the generated implementation of {@link ActionMetadataProvider} register
+ * metadata in an {@link java.util.HashMap}
+ */
 public abstract class AbstractActionMetadataProvider implements ActionMetadataProvider {
-    private final Map<MetadataKey, Object> metadata = new HashMap<MetadataKey, Object>();
+    private final Map<MetadataKey, Object> metadata = Maps.newHashMap();
 
     @Override
     public Object getValue(RestAction<?> action, MetadataType metadataType) {

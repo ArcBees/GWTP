@@ -14,7 +14,7 @@ import ${service.qualifiedSourceName.replace("shared", "client")}${suffix};
 public class ${implName} extends AbstractGinModule {
     @Override
     protected void configure() {
-        bind(ActionMetadataProvider.class).to(ActionMetadataProviderImpl.class);
+        bind(ActionMetadataProvider.class).to(ActionMetadataProviderImpl.class).in(Singleton.class);
 
 #foreach (${service} in ${serviceDefinitions.getServices()})
         bind(${service.name}.class).to(${service.name}${suffix}.class).in(Singleton.class);

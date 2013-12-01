@@ -19,13 +19,10 @@ package com.gwtplatform.dispatch.rpc.shared;
 import java.util.List;
 
 /**
- * A common use-case is returning a list value from an action. This provides a
- * simple, type-safe class for such results.
+ * A common use-case is returning a list value from an action. This provides a simple, type-safe class for such results.
  * <p/>
- * <p/>
- * <b>Note:</b> Subclasses should provide both an empty constructor for
- * serialization and a constructor with a single value for normal use. It is
- * recommended that the empty constructor is private or package-private.
+ * <b>Note:</b> Subclasses should provide both an empty constructor for serialization and a constructor with a single
+ * value for normal use. It is recommended that the empty constructor is private or package-private.
  *
  * @param <T> The value type.
  */
