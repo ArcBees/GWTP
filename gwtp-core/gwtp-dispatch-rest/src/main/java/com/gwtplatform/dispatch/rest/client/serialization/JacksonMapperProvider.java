@@ -18,8 +18,17 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 
+/**
+ * Provides access to the gwt-jackson object mappers generated at the compilation.
+ */
 public interface JacksonMapperProvider {
+    /**
+     * @return {@code true} if there is a mapper for {@code type}.
+     */
     boolean hasMapper(String type);
 
+    /**
+     * @return the mapper for {@code type} or {@code null} if there is no mapper registered.
+     */
     <T> ObjectMapper<T> getMapper(String type);
 }

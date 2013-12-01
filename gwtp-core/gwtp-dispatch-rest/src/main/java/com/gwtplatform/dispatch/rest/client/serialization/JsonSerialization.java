@@ -20,6 +20,10 @@ import javax.inject.Inject;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 
+/**
+ * JSON implementation of {@link Serialization}. It acts as a facade to
+ * <a href="https://github.com/nmorel/gwt-jackson">gwt-jackson</a>.
+ */
 public class JsonSerialization implements Serialization {
     private static final String VOID = "java.lang.Void";
 
