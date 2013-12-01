@@ -23,6 +23,9 @@ import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
 
+/**
+ * Binding annotation used to bind a X-CSRF protection token.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @BindingAnnotation

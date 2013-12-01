@@ -17,8 +17,7 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 /**
- * This is thrown by services when there is a low-level problem while processing
- * an action execution.
+ * This is thrown by services when there is a low-level problem while processing an action execution.
  */
 public class ServiceException extends Exception {
 

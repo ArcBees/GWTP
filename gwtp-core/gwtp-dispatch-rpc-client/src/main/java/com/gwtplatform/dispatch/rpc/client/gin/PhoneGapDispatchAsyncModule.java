@@ -27,6 +27,10 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 
+/**
+ * This gin module provides provides access to a {@link DispatchAsync} singleton that will work when used in a Phone Gap
+ * application.
+ */
 public class PhoneGapDispatchAsyncModule extends AbstractGinModule {
     @Override
     protected void configure() {

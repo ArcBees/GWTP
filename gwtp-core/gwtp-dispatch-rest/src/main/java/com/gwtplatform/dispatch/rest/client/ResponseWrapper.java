@@ -19,6 +19,11 @@ package com.gwtplatform.dispatch.rest.client;
 import com.google.gwt.http.client.Header;
 import com.google.gwt.http.client.Response;
 
+/**
+ * This class is used to wrap a {@link Response} object and normalize fields value across browser.
+ *
+ * @see #getStatusCode()
+ */
 class ResponseWrapper extends Response {
     private final Response response;
 
@@ -41,12 +46,17 @@ class ResponseWrapper extends Response {
         return response.getHeadersAsString();
     }
 
+    /**
+     * Some IE versions will convert 204 NO_CONTENT to 1223. We normalize this behaviour and return 204 as it should be.
+     *
+     * @return the HTTP status code.
+     */
     @Override
     public int getStatusCode() {
         int statusCode = response.getStatusCode();
 
         if (statusCode == 1223) {
-            return 204;
+            return SC_NO_CONTENT;
         } else {
             return statusCode;
         }

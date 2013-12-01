@@ -20,22 +20,67 @@ import java.util.List;
 
 import com.gwtplatform.dispatch.shared.TypedAction;
 
+/**
+ * An action used by {@link RestDispatch}.
+ * <p/>
+ * You will usually want to let GWTP generate your actions by creating
+ * {@link com.gwtplatform.dispatch.rest.shared.RestService}s as explained
+ * <a href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
+ *
+ * @param <R> the result type.
+ */
 public interface RestAction<R> extends TypedAction<R> {
+    /**
+     * Returns the relative path for this action. It should not be prepended by the path annotated with
+     * {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath}.
+     *
+     * @return the relative path for this action.
+     */
     String getPath();
 
+    /**
+     * @return the {@link HttpMethod} used to send this action over HTTP.
+     */
     HttpMethod getHttpMethod();
 
+    /**
+     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.Path} parameters for this action.
+     */
     List<RestParameter> getPathParams();
 
+    /**
+     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.QueryParam} parameters for this action.
+     */
     List<RestParameter> getQueryParams();
 
+    /**
+     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.FormParam} parameters for this action.
+     *         {@link #getBodyParam()} should return {@code null}.
+     */
     List<RestParameter> getFormParams();
 
+    /**
+     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.HeaderParam} parameters for this action.
+     */
     List<RestParameter> getHeaderParams();
 
+    /**
+     * @return The object that will be serialized and used for the body of this action. {@link #getFormParams()} should
+     *         return an empty list.
+     */
     Object getBodyParam();
 
+    /**
+     * Verify if this action contains FORM parameters. {@link #hasBodyParam()} should return {@code false}.
+     *
+     * @return {@code true} if this method contains form parameters, otherwise {@code false}.
+     */
     Boolean hasFormParams();
 
+    /**
+     * Verify if this action a body object. {@link #hasFormParams()} should return {@code false}.
+     *
+     * @return {@code true} if this method contains body object, otherwise {@code false}.
+     */
     Boolean hasBodyParam();
 }

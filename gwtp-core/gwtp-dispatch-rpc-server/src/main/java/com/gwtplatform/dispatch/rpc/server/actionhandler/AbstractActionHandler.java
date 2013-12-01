@@ -20,13 +20,12 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * Simple abstract super-class for {@link ActionHandler} implementations that
- * forces the {@link Action} class to be passed in as a constructor to the
- * handler. It's arguable if this is any simpler than just implementing the
+ * Simple abstract super-class for {@link ActionHandler} implementations that forces the {@link Action} class to be
+ * passed in as a constructor to the handler. It's arguable if this is any simpler than just implementing the
  * {@link ActionHandler} and its {@link #getActionType()} directly.
  *
  * @param <A> The {@link Action} type.
- * @param <R> The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
+ * @param <R> The {@link Result} type.
  */
 public abstract class AbstractActionHandler<A extends Action<R>, R extends Result>
         implements ActionHandler<A, R> {

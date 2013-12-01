@@ -28,8 +28,8 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * <p/>
  * This class is used within
  * {@link com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler} to be able to store
- * inside an HashMap {@link com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest} while keeping
- * {@link GwtHttpDispatchRequest} nature.
+ * inside an {@link java.util.HashMap HashMap} {@link com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest}
+ * while keeping {@link GwtHttpDispatchRequest} nature.
  *
  * @param <R> The type of the {@link AsyncCallback}.
  */
