@@ -24,24 +24,21 @@ import com.gwtplatform.dispatch.shared.ActionException;
 /**
  * ExecutionContext instances are passed to
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler}s,
- * and allows them to execute sub-actions. These actions can be automatically rolled back
- * if any part of the action handler fails.
+ * and allows them to execute sub-actions. These actions can be automatically rolled back if any part of the action
+ * handler fails.
  */
 public interface ExecutionContext {
-
     /**
-     * Executes an action in the current context. If the surrounding execution
-     * fails, the action will be rolled back.
+     * Executes an action in the current context. If the surrounding execution fails, the action will be rolled back.
      *
-     * @param <A>    The {@link com.gwtplatform.dispatch.rpc.shared.Action} type.
-     * @param <R>    The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
-     * @param action The {@link com.gwtplatform.dispatch.rpc.shared.Action}.
-     * @return The {@link com.gwtplatform.dispatch.rpc.shared.Result}.
-     * @throws com.gwtplatform.dispatch.shared.ActionException  if the action execution failed.
-     * @throws com.gwtplatform.dispatch.rpc.shared.ServiceException if the execution failed due to a service error.
+     * @param <A>    The {@link Action} type.
+     * @param <R>    The {@link Result} type.
+     * @param action The {@link Action}.
+     * @return The {@link Result}.
+     * @throws ActionException  if the action execution failed.
+     * @throws ServiceException if the execution failed due to a service error.
      */
-    <A extends Action<R>, R extends Result> R execute(A action)
-            throws ActionException, ServiceException;
+    <A extends Action<R>, R extends Result> R execute(A action) throws ActionException, ServiceException;
 
     /**
      * Undoes an action in the current context. If the surrounding execution
@@ -53,6 +50,5 @@ public interface ExecutionContext {
      * @throws ActionException  if the action execution failed.
      * @throws ServiceException if the execution failed due to a service error.
      */
-    <A extends Action<R>, R extends Result> void undo(A action, R result)
-            throws ActionException, ServiceException;
+    <A extends Action<R>, R extends Result> void undo(A action, R result) throws ActionException, ServiceException;
 }

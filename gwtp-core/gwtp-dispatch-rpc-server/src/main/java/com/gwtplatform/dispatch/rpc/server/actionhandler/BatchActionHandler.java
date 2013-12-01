@@ -27,13 +27,10 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
- * This handles {@link com.gwtplatform.dispatch.rpc.shared.BatchAction} requests, which are a set of multiple
- * actions that need to all be executed successfully in sequence for the whole
- * action to succeed.
+ * This handles {@link BatchAction} requests, which are a set of multiple actions that need to all be executed
+ * successfully in sequence for the whole action to succeed.
  */
-public class BatchActionHandler extends
-        AbstractActionHandler<BatchAction, BatchResult> {
-
+public class BatchActionHandler extends AbstractActionHandler<BatchAction, BatchResult> {
     public BatchActionHandler() {
         super(BatchAction.class);
     }
@@ -68,5 +65,4 @@ public class BatchActionHandler extends
                      ExecutionContext context) throws ActionException {
         // No action necessary - the sub actions should automatically rollback
     }
-
 }

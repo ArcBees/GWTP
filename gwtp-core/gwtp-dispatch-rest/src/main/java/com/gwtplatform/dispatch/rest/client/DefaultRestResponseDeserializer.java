@@ -26,6 +26,9 @@ import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+/**
+ * Default implementation for {@link RestResponseDeserializer}.
+ */
 public class DefaultRestResponseDeserializer implements RestResponseDeserializer {
     private final ActionMetadataProvider metadataProvider;
 
@@ -43,22 +46,66 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
         }
     }
 
+    /**
+     * Verify if the provided <code>resultClass</code> can be deserialized.
+     *
+     * @param resultClass the {@link Class} to verify if it can be deserialized.
+     * @param <R>         the result type.
+     * @return <code>true</code> if <code>resultClass</code> can be deserialized, <code>false</code> otherwise.
+     */
     protected <R> boolean canDeserialize(Class<R> resultClass) {
         return Marshalling.canHandle(resultClass);
     }
 
+    /**
+     * Cleanup a json string.
+     *
+     * @param json the dirty json that needs some cleanup.
+     * @return a cleaned up version of the json given as input.
+     */
     protected String cleanupJson(String json) {
         return JacksonTransformer.fromJackson(json);
     }
 
+    /**
+     * Deserializes the json as an object of the <code>resultClass</code> type.
+     *
+     * @param resultClass the {@link Class} of the object once deserialized.
+     * @param json        The json to deserialize.
+     * @param <R>         the type of the object once deserialized
+     * @return The deserialized object.
+     */
     protected <R> R deserializeValue(Class<R> resultClass, String json) {
         return Marshalling.fromJSON(json, resultClass);
     }
 
+    /**
+     * Deserializes a json collection as an object of the <code>resultClass</code> type.
+     *
+     * @param resultClass the {@link Class} of the object once deserialized. Should be an instance of
+     *                    {@link java.util.Collection}.
+     * @param keyClass    the {@link Class} of the generic for this collection.
+     * @param json        The json to deserialize.
+     * @param <R>         the type of the object once deserialized. Should be an instance of
+     *                    {@link java.util.Collection}.
+     * @return The deserialized object.
+     */
     protected <R> R deserializeCollection(Class<R> resultClass, Class<?> keyClass, String json) {
         return Marshalling.fromJSON(json, resultClass, keyClass);
     }
 
+    /**
+     * Deserializes a json map as an object of the <code>resultClass</code> type. Technically a json input is a map,
+     * but this is required if the response has to be converted to a map.
+     *
+     * @param resultClass the {@link Class} of the object once deserialized. Should be an instance of
+     *                    {@link java.util.Map}.
+     * @param keyClass    the {@link Class} of the generic for this map's key.
+     * @param valueClass  the {@link Class} of the generic for this map's value.
+     * @param json        The json to deserialize.
+     * @param <R>         the type of the object once deserialized. Should be an instance of {@link java.util.Map}.
+     * @return The deserialized object.
+     */
     protected <R> R deserializeMap(Class<R> resultClass, Class<?> keyClass, Class<?> valueClass, String json) {
         return Marshalling.fromJSON(json, resultClass, keyClass, valueClass);
     }

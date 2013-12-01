@@ -19,22 +19,17 @@ package com.gwtplatform.dispatch.rpc.shared;
 import java.util.List;
 
 /**
- * Contains the list of {@link Result}s from successful actions in the
- * {@link BatchAction}. The order will match the order of the original
- * {@link Action}s listed in the {@link BatchAction}.
- * <p/>
+ * Contains the list of {@link Result}s from successful actions in the {@link BatchAction}. The order will match the
+ * order of the original {@link Action}s listed in the {@link BatchAction}.
  * <p/>
  * If the {@link BatchAction} was specified to have an {@link BatchAction.OnException} value
- * of {@link BatchAction.OnException#CONTINUE}, failed actions will have a <code>null</code>
- * value.
+ * of {@link BatchAction.OnException#CONTINUE}, failed actions will have a <code>null</code> value.
  */
 public class BatchResult implements Result {
-
     private List<Result> results;
 
     /**
-     * Creates a new result with the list of results from the batch action, in
-     * order.
+     * Creates a new result with the list of results from the batch action, in order.
      *
      * @param results The list of results.
      */

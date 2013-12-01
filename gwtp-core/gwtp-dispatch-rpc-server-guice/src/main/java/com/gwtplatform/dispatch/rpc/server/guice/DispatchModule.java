@@ -27,14 +27,12 @@ import com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.LazyActi
 import com.gwtplatform.dispatch.rpc.server.guice.request.DefaultRequestProvider;
 
 /**
- * This module will configure the implementation for the {@link Dispatch} and
- * {@link ActionHandlerValidatorRegistry} interfaces. Also every
+ * This module will configure the implementation for the {@link Dispatch} and {@link ActionHandlerValidatorRegistry}
+ * interfaces. Also every
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler} and
  * {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator ActionValidator} will be loaded lazily.
  * <p/>
- * <p/>
- * If you want to override the defaults ({@link DispatchImpl},
- * {@link com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl} pass
+ * If you want to override the defaults ({@link DispatchImpl}, {@link LazyActionHandlerValidatorRegistryImpl} pass
  * the override values into the constructor for this module and ensure it is installed <b>before</b> any
  * {@link HandlerModule} instances.
  */
@@ -45,8 +43,6 @@ public class DispatchModule extends AbstractModule {
 
     /**
      * A DispatchModule builder.
-     *
-     * @author Brendan Doherty
      */
     public static class Builder {
         private Class<? extends Dispatch> dispatchClass = DispatchImpl.class;
@@ -89,25 +85,8 @@ public class DispatchModule extends AbstractModule {
         this.requestProviderClass = builder.requestProviderClass;
     }
 
-    @Deprecated
-    // FIXME: Remove 0.6
-    public DispatchModule(Class<? extends Dispatch> dispatchClass) {
-        this((new Builder()).dispatch(dispatchClass));
-    }
-
-    @Deprecated
-    // FIXME: Remove 0.6
-    public DispatchModule(
-            Class<? extends Dispatch> dispatchClass,
-            Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass) {
-        this(
-                (new Builder()).dispatch(dispatchClass).actionHandlerValidatorRegistry(
-                        lazyActionHandlerValidatorRegistryClass));
-    }
-
     /**
-     * Override so that only one instance of this class will ever be installed in
-     * an {@link com.google.inject.Injector}.
+     * Override so that only one instance of this class will ever be installed in an {@link com.google.inject.Injector}.
      */
     @Override
     public boolean equals(Object obj) {
@@ -115,8 +94,7 @@ public class DispatchModule extends AbstractModule {
     }
 
     /**
-     * Override so that only one instance of this class will ever be installed in
-     * an {@link com.google.inject.Injector}.
+     * Override so that only one instance of this class will ever be installed in an {@link com.google.inject.Injector}.
      */
     @Override
     public int hashCode() {

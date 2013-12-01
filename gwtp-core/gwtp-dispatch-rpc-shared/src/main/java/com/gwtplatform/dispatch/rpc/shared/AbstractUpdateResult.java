@@ -17,8 +17,7 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 /**
- * Provides support for simple update response which contain both the old value
- * and new value.
+ * Provides support for simple update response which contain both the old value and new value.
  *
  * @param <T> The value type.
  */
@@ -34,8 +33,7 @@ public abstract class AbstractUpdateResult<T> implements Result {
     }
 
     /**
-     * For serialization support only. Subclasses should provide an package-local
-     * (aka default) empty constructor.
+     * For serialization support only. Subclasses should provide an package-local (aka default) empty constructor.
      */
     protected AbstractUpdateResult() {
     }

@@ -27,6 +27,12 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * A class representing an undo call to be sent to the server using RPC.
+ *
+ * @param <A> the {@link Action} type.
+ * @param <R> the {@link Result} type for this action.
+ */
 public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
     private static class AsyncCallbackWrapper<R extends Result> implements AsyncCallback<R> {
         private final AsyncCallback<?> wrapped;
