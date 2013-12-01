@@ -34,9 +34,9 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * <p/>
  * <pre>
  * install(new RestDispatchAsyncModule.Builder()
- *         .exceptionHandler(MyExceptionHandler.class)
- *         .clientActionHandlerRegistry(MyClientActionHandlerRegistry.class)
- *         .build());
+ *                 .exceptionHandler(MyExceptionHandler.class)
+ *                 .clientActionHandlerRegistry(MyClientActionHandlerRegistry.class)
+ *                 .build());
  * </pre>
  *
  * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule
@@ -79,8 +79,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         /**
          * Specify an alternate client action handler registry.
          *
-         * @param clientActionHandlerRegistryType
-         *         A {@link ClientActionHandlerRegistry} class.
+         * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
          * @return a {@link Builder} object.
          */
         public Builder clientActionHandlerRegistry(

@@ -28,9 +28,8 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * Base module that will bind {@link com.gwtplatform.dispatch.rpc.shared.Action}s to
- * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler}s and
- * {@link ActionValidator}s. Your own Guice modules should extend this class.
+ * Base module that will bind {@link Action}s to {@link ActionHandler}s and {@link ActionValidator}s.
+ * Your own Guice modules should extend this class.
  */
 public abstract class HandlerModule extends AbstractModule {
 
@@ -45,8 +44,7 @@ public abstract class HandlerModule extends AbstractModule {
     }
 
     /**
-     * Constructs a {@link HandlerModule} that uses the {@link DispatchModule}
-     * with a custom configuration.
+     * Constructs a {@link HandlerModule} that uses the {@link DispatchModule} with a custom configuration.
      *
      * @param dispatchModule The custom configured {@link DispatchModule}
      */
@@ -55,11 +53,10 @@ public abstract class HandlerModule extends AbstractModule {
     }
 
     /**
-     * @param <A>          Type of {@link com.gwtplatform.dispatch.rpc.shared.Action}
-     * @param <R>          Type of {@link com.gwtplatform.dispatch.rpc.shared.Result}
-     * @param actionClass  Implementation of {@link com.gwtplatform.dispatch.rpc.shared.Action} to link and bind
-     * @param handlerClass Implementation of {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler} to
-     *                     link and bind
+     * @param <A>          Type of {@link Action}
+     * @param <R>          Type of {@link Result}
+     * @param actionClass  Implementation of {@link Action} to link and bind
+     * @param handlerClass Implementation of {@link ActionHandler} to link and bind
      */
     protected <A extends Action<R>, R extends Result> void bindHandler(
             Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
@@ -74,10 +71,8 @@ public abstract class HandlerModule extends AbstractModule {
      * @param <A>             Type of {@link Action}
      * @param <R>             Type of {@link Result}
      * @param actionClass     Implementation of {@link Action} to link and bind
-     * @param handlerClass    Implementation of {@link ActionHandler} to link and
-     *                        bind
-     * @param actionValidator Implementation of {@link ActionValidator} to link
-     *                        and bind
+     * @param handlerClass    Implementation of {@link ActionHandler} to link and bind
+     * @param actionValidator Implementation of {@link ActionValidator} to link and bind
      */
     protected <A extends Action<R>, R extends Result> void bindHandler(
             Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass,
@@ -96,9 +91,8 @@ public abstract class HandlerModule extends AbstractModule {
     }
 
     /**
-     * Override this method to configure your handlers. Use calls to
-     * {@link #bindHandler} to register actions that do not need any specific
-     * security validation.
+     * Override this method to configure your handlers. Use calls to {@link #bindHandler} to register actions that do
+     * not need any specific security validation.
      */
     protected abstract void configureHandlers();
 }

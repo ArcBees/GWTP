@@ -26,6 +26,9 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+/**
+ * The default implementation for {@link RpcDispatchCallFactory}.
+ */
 public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
     private final DispatchServiceAsync dispatchService;
     private final ExceptionHandler exceptionHandler;

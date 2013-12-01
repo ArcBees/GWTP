@@ -19,24 +19,20 @@ package com.gwtplatform.dispatch.rpc.server.actionhandlervalidator;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
-public interface EagerActionHandlerValidatorRegistry extends
-        ActionHandlerValidatorRegistry {
+public interface EagerActionHandlerValidatorRegistry extends ActionHandlerValidatorRegistry {
     /**
      * @param <A>         Type of associated {@link Action}
      * @param <R>         Type of associated {@link Result}
      * @param actionClass The {@link Action} class
      */
-    <A extends Action<R>, R extends Result> void addActionHandlerValidator(
-            Class<A> actionClass,
+    <A extends Action<R>, R extends Result> void addActionHandlerValidator(Class<A> actionClass,
             ActionHandlerValidatorInstance actionHandlerValidatorInstance);
 
     /**
      * @param <A>         Type of associated {@link Action}
      * @param <R>         Type of associated {@link Result}
      * @param actionClass The {@link Action} class
-     * @return <code>true</code> if the handler was previously registered and was
-     *         successfully removed.
+     * @return <code>true</code> if the handler was previously registered and was successfully removed.
      */
-    <A extends Action<R>, R extends Result> boolean removeActionHandlerValidator(
-            Class<A> actionClass);
+    <A extends Action<R>, R extends Result> boolean removeActionHandlerValidator(Class<A> actionClass);
 }

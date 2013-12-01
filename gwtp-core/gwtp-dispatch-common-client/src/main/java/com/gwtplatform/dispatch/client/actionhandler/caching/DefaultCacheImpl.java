@@ -22,7 +22,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 /**
- * Default Implementation for {@link Cache}.
+ * Default Implementation for {@link Cache}, backed by an {@link java.util.HashMap}.
  */
 public class DefaultCacheImpl implements Cache {
     private static class CacheValue {

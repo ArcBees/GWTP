@@ -17,23 +17,19 @@
 package com.gwtplatform.dispatch.rpc.shared;
 
 /**
- * Default Action using the base path as dispatch/className.
- * The base abstract implementation is {@link Action}.
- *
- * {@link https://github.com/ArcBees/GWTP/wiki/RPC-Dispatch}
- *
- * An {@link Action} that uses the standard service name {@code "dispatch"}.
- * Actions inheriting from this are <b>not</b> secured against XSRF attacks, and
- * they will work even if you do not configure a {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
- *
- * Use {@link UnsecuredActionImpl} for secured set to on by default.
+ * Default Action using the base path as dispatch/className. The base abstract implementation is {@link Action}.
+ * <p/>
+ * An {@link Action} that uses the standard service name {@code "dispatch"}. Actions inheriting from this are <b>not</b>
+ * secured against XSRF attacks, and they will work even if you do not configure a
+ * {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
+ * <p/>
+ * Use {@link ActionImpl} for secured set to on by default.
  *
  * @param <R> The {@link Result} type.
  */
 public class UnsecuredActionImpl<R extends Result> implements Action<R> {
     /**
      * Default Action using the base path as dispatch/className.
-     * {@link https://github.com/ArcBees/GWTP/wiki/RPC-Dispatch}
      */
     @Override
     public String getServiceName() {
@@ -44,7 +40,6 @@ public class UnsecuredActionImpl<R extends Result> implements Action<R> {
 
     /**
      * Secure is off by default.
-     * {@link https://github.com/ArcBees/GWTP/wiki/Action-Validators}
      */
     @Override
     public boolean isSecured() {

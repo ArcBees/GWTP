@@ -22,30 +22,26 @@ import com.gwtplatform.dispatch.rpc.shared.ServiceException;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
- * The base class of the synchronous dispatcher service with an arbitrary action
- * type. The server-side implementation is
- * {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl} and the async
- * client-side version is {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
+ * The base class of the synchronous dispatcher service with an arbitrary action type. The server-side implementation is
+ * {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl} and the async client-side version is
+ * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  * <p/>
- * This class is closely related to
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchService}. In fact, this class
+ * This class is closely related to {@link com.gwtplatform.dispatch.rpc.shared.DispatchService}. In fact, this class
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  */
 public interface Dispatch {
-
     /**
      * Executes the specified action and returns the appropriate result.
      *
      * @param <A>    The {@link Action} type.
-     * @param <R>    The {@link com.gwtplatform.dispatch.rpc.shared.Result} type.
+     * @param <R>    The {@link Result} type.
      * @param action The {@link Action}.
      * @return The action's result.
-     * @throws com.gwtplatform.dispatch.shared.ActionException  if the action execution failed.
+     * @throws ActionException  if the action execution failed.
      * @throws ServiceException if the execution failed due to a service error.
      */
-    <A extends Action<R>, R extends Result> R execute(A action)
-            throws ActionException, ServiceException;
+    <A extends Action<R>, R extends Result> R execute(A action) throws ActionException, ServiceException;
 
     /**
      * Undoes a previously executed action.
@@ -57,6 +53,5 @@ public interface Dispatch {
      * @throws ActionException  if undoing the action failed.
      * @throws ServiceException if the execution failed due to a service error.
      */
-    <A extends Action<R>, R extends Result> void undo(A action, R result)
-            throws ActionException, ServiceException;
+    <A extends Action<R>, R extends Result> void undo(A action, R result) throws ActionException, ServiceException;
 }

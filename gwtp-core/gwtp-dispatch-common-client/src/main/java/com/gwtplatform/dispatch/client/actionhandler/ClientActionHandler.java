@@ -22,9 +22,10 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 /**
  * Instances of this interface will handle specific types of action classes on the client.
  * <p/>
- * When a command is executed (or undone), the {@link ClientActionHandler} that has been registered with the bound
+ * When a call is executed, the {@link ClientActionHandler} that has been registered with the bound
  * {@link ClientActionHandlerRegistry} is called and
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} does not automatically send the command over
+ * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} or
+ * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically send the command over
  * HTTP to the server.
  * <p/>
  * Client Action Handlers provide a number of flexible options:

@@ -17,7 +17,9 @@
 package com.gwtplatform.dispatch.rest.shared;
 
 /**
- * Indicates which part of the message the serialized type represents
+ * Used to associate some metadata to generated classes without cluttering the generated classes.
+ *
+ * @see com.gwtplatform.dispatch.rest.client.ActionMetadataProvider.MetadataKey
  */
 public enum MetadataType {
     BODY_CLASS, KEY_CLASS, VALUE_CLASS, RESPONSE_CLASS

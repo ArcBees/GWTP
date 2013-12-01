@@ -21,35 +21,30 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * Registry definition for {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator}.
+ * Registry definition for {@link ActionValidator}.
  */
 public interface ActionHandlerValidatorRegistry {
     /**
-     * Clears all registered {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator} from the
-     * registry.
+     * Clears all registered {@link ActionValidator} from the registry.
      */
     void clearActionHandlerValidators();
 
     /**
-     * Searches the registry and returns the
-     * {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator} which supports the specified
-     * {@link com.gwtplatform.dispatch.rpc.shared.Action} , or <code>null</code> if none is available.
+     * Searches the registry and returns the {@link ActionValidator} which supports the specified {@link Action},
+     * or <code>null</code> if none is available.
      *
-     * @param <A>    Type of associated {@link com.gwtplatform.dispatch.rpc.shared.Action}
-     * @param <R>    Type of associated {@link com.gwtplatform.dispatch.rpc.shared.Result}
-     * @param action The {@link com.gwtplatform.dispatch.rpc.shared.Action}
-     * @return The {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator}
+     * @param <A>    Type of associated {@link Action}
+     * @param <R>    Type of associated {@link Result}
+     * @param action The {@link Action}
+     * @return The {@link ActionValidator}
      */
-    <A extends Action<R>, R extends Result> ActionHandlerValidatorInstance findActionHandlerValidator(
-            A action);
+    <A extends Action<R>, R extends Result> ActionHandlerValidatorInstance findActionHandlerValidator(A action);
 
     /**
-     * Searches the registry for already bound
-     * {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator} class and return the instance or
+     * Searches the registry for already bound {@link ActionValidator} class and return the instance or
      * <code>null</code> if none is available.
      *
      * @param actionValidatorClass The {@link Action}
      */
-    ActionValidator findActionValidator(
-            Class<? extends ActionValidator> actionValidatorClass);
+    ActionValidator findActionValidator(Class<? extends ActionValidator> actionValidatorClass);
 }

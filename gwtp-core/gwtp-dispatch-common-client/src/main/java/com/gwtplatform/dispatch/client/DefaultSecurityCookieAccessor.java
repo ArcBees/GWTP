@@ -29,7 +29,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * cookie name.
  */
 public class DefaultSecurityCookieAccessor implements SecurityCookieAccessor {
-
     @Inject(optional = true)
     @SecurityCookie
     public String cookieName;

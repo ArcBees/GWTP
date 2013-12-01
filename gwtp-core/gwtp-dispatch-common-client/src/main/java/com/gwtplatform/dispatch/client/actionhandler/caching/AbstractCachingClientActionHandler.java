@@ -36,16 +36,18 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * <p>
  * Supported features include:
  * </p>
- * <p>
- * 1. {@link #prefetch}/{@link #postfetch} perform the cache lookup and the cache store. You can use this to customize
+ * <ol>
+ * <li>
+ * {@link #prefetch}/{@link #postfetch} perform the cache lookup and the cache store. You can use this to customize
  * the caching logic.
- * </p>
- * <p>
- * 2. Automatic action queuing so that calls in quick succession result in a single trip to the server.
- * </p>
- * <p>
- * 3. Flexibility of cache implementation to support custom caching
- * </p>
+ * </li>
+ * <li>
+ * Automatic action queuing so that calls in quick succession result in a single trip to the server.
+ * </li>
+ * <li>
+ * Flexibility of cache implementation to support custom caching
+ * </li>
+ * </ol>
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.
