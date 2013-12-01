@@ -214,16 +214,15 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
     private String getSerializedValue(RestAction<?> action, Object object) throws ActionException {
         String bodyType = (String) metadataProvider.getValue(action, MetadataType.BODY_TYPE);
-        Exception cause = null;
 
         if (bodyType != null && canSerialize(bodyType)) {
             try {
                 return serialize(object, bodyType);
             } catch (JsonMappingException e) {
-                cause = e;
+                throw new ActionException("Unable to serialize request body. An unexpected error occurred.", e);
             }
         }
 
-        throw new ActionException("Unable to serialize request body. No serializer found.", cause);
+        throw new ActionException("Unable to serialize request body. No serializer found.");
     }
 }

@@ -23,6 +23,10 @@ import javax.inject.Provider;
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.common.collect.Maps;
 
+/**
+ * Abstract class providing utility methods to reduce the code generation complexity of {@link JacksonMapperProvider}.
+ */
+@SuppressWarnings("UnusedDeclaration")
 public abstract class AbstractJacksonMapperProvider implements JacksonMapperProvider {
     private final Map<String, Provider<? extends ObjectMapper<?>>> objectMapperProviders = Maps.newHashMap();
 
