@@ -29,6 +29,7 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.gwtplatform.dispatch.rest.client.AbstractRestDispatcherController;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 
 public class VelocityGenerator extends Generator {
@@ -137,6 +138,7 @@ public class VelocityGenerator extends Generator {
     private ClassSourceFileComposerFactory initComposer() {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, className);
         composer.addImport(type.getQualifiedSourceName());
+        composer.setSuperclass(AbstractRestDispatcherController.class.getName());
 
         return composer;
     }
