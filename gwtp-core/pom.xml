@@ -263,16 +263,9 @@
 
             <!-- Serialization dependencies -->
             <dependency>
-                <groupId>org.jboss.errai</groupId>
-                <artifactId>errai-marshalling</artifactId>
-                <version>${errai.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.errai</groupId>
-                <artifactId>errai-jaxrs-client</artifactId>
-                <version>${errai.version}</version>
-                <scope>compile</scope>
+                <groupId>com.github.nmorel.gwtjackson</groupId>
+                <artifactId>gwt-jackson</artifactId>
+                <version>${gwt-jackson.version}</version>
             </dependency>
 
             <!-- Rebind dependencies -->
