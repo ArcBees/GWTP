@@ -67,6 +67,7 @@ public abstract class AbstractVelocityGenerator {
 
     protected void mergeTemplate(PrintWriter printWriter, String velocityTemplate, String implName) throws Exception {
         VelocityContext velocityContext = velocityContextProvider.get();
+        velocityContext.put("lf", "\n");
         velocityContext.put("implName", implName);
         velocityContext.put("package", getPackage());
 

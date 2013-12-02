@@ -16,6 +16,7 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.googlecode.objectify.annotation.Id;
 
 public class BaseEntity implements Dto {
@@ -68,6 +69,7 @@ public class BaseEntity implements Dto {
         this.id = id;
     }
 
+    @JsonIgnore
     public boolean isSaved() {
         return (id != null);
     }
