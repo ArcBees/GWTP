@@ -17,12 +17,12 @@
 package com.gwtplatform.tester;
 
 import com.google.inject.Inject;
-import com.gwtplatform.dispatch.server.Dispatch;
-import com.gwtplatform.dispatch.shared.Action;
+import com.gwtplatform.dispatch.rpc.server.Dispatch;
+import com.gwtplatform.dispatch.rpc.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.DispatchService;
+import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.rpc.shared.ServiceException;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.dispatch.shared.DispatchService;
-import com.gwtplatform.dispatch.shared.Result;
-import com.gwtplatform.dispatch.shared.ServiceException;
 
 /**
  * This class is an implementation of {@link DispatchService} for use with test

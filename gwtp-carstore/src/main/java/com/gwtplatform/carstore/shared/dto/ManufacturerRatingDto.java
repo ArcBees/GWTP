@@ -17,10 +17,10 @@
 package com.gwtplatform.carstore.shared.dto;
 
 public class ManufacturerRatingDto implements Dto {
-    String manufacturer;
-    Double rating;
+    private String manufacturer;
+    private Double rating;
 
-    protected ManufacturerRatingDto() {
+    public ManufacturerRatingDto() {
     }
 
     public ManufacturerRatingDto(String manufacturer,

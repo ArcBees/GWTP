@@ -16,7 +16,7 @@
 
 package com.gwtplatform.carstore.client.gin;
 
-import com.gwtplatform.dispatch.client.rest.RestApplicationPath;
+import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class CarStoreModule extends AbstractPresenterModule {

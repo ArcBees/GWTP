@@ -26,6 +26,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Out;
@@ -45,6 +46,7 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
  */
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDispatch")
 public class GenDispatchProcessor extends GenProcessor {
+    private static final String RPC_DISPATCH_PACKAGE = "com.gwtplatform.dispatch.rpc.shared";
 
     @Override
     public void process(Element dispatchElement) {
@@ -80,7 +82,7 @@ public class GenDispatchProcessor extends GenProcessor {
             requiredFields.removeAll(optionalFields);
 
             writer.generatePackageDeclaration(reflection.getPackageName());
-            writer.generateImports("com.gwtplatform.dispatch.shared.Action");
+            writer.generateImports(RPC_DISPATCH_PACKAGE + ".Action");
 
             String actionInterface = "Action<" + dispatchElementSimpleName + "Result>";
             writer.generateClassHeader(dispatchActionSimpleName, null,
@@ -146,9 +148,9 @@ public class GenDispatchProcessor extends GenProcessor {
 
             writer.generatePackageDeclaration(reflection.getPackageName());
             writer.generateImports(
-                    reflection.hasOptionalFields() ? "com.google.gwt.user.client.rpc.IsSerializable" : null,
+                    reflection.hasOptionalFields() ? IsSerializable.class.getName() : null,
                     null,
-                    "com.gwtplatform.dispatch.shared.Result"
+                    RPC_DISPATCH_PACKAGE + ".Result"
             );
 
             String resultInterface = "Result";
