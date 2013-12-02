@@ -50,6 +50,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator {
                                    EventBus eventBus,
                                    JacksonMapperGenerator jacksonMapperGenerator) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
+
         this.jacksonMapperGenerator = jacksonMapperGenerator;
 
         eventBus.register(this);
