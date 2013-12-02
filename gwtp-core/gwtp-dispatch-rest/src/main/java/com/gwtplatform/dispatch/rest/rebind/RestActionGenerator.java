@@ -20,10 +20,8 @@ import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -52,6 +50,7 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
+import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.MethodCall;
 import com.gwtplatform.dispatch.rest.rebind.util.AnnotationValueResolver;
@@ -61,12 +60,11 @@ import com.gwtplatform.dispatch.rest.rebind.util.HeaderParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.PathParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.QueryParamValueResolver;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_CLASS;
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.KEY_CLASS;
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.RESPONSE_CLASS;
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.VALUE_CLASS;
+import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_TYPE;
+import static com.gwtplatform.dispatch.rest.shared.MetadataType.RESPONSE_TYPE;
 
 public class RestActionGenerator extends AbstractVelocityGenerator {
     private static class AnnotatedMethodParameter {
@@ -97,11 +95,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
     private static final String ADD_FORM_PARAM = "addFormParam";
     private static final String SET_BODY_PARAM = "setBodyParam";
 
-    private static final String CLASS_STATEMENT = "%s.class";
-
     private final EventBus eventBus;
-    private final JClassType collectionType;
-    private final JClassType mapType;
 
     private final JMethod actionMethod;
     private final JType returnType;
@@ -130,8 +124,6 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         this.actionMethod = actionMethod;
 
         returnType = actionMethod.getReturnType();
-        collectionType = getGeneratorUtil().getType(Collection.class.getName());
-        mapType = getGeneratorUtil().getType(Map.class.getName());
     }
 
     public ActionBinding generate(String restServicePath) throws Exception {
@@ -154,11 +146,10 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
             getLogger().debug("Action already generated. Returning.");
         }
 
-        registerMetadata(resultType);
+        registerMetadata();
 
         return new ActionBinding(implName, actionMethod.getName(), resultType.getParameterizedQualifiedSourceName(),
-                actionMethod.getParameters()
-        );
+                actionMethod.getParameters());
     }
 
     @Override
@@ -199,41 +190,22 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         return methodCalls;
     }
 
-    private void registerMetadata(JClassType resultType) throws Exception {
+    private void registerMetadata() throws Exception {
         if (bodyParam != null) {
-            String bodyClass = formatClassStatement(bodyParam.getType());
-            eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), BODY_CLASS, bodyClass));
+            registerMetadatum(BODY_TYPE, bodyParam.getType());
         }
 
-        String resultClass = formatClassStatement(resultType);
-        eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), RESPONSE_CLASS, resultClass));
+        registerMetadatum(RESPONSE_TYPE, getResultType());
+    }
 
-        JParameterizedType parameterized = resultType.isParameterized();
-        if (parameterized != null) {
-            // TODO: Print warning if any of the parameter type are parameterized
+    private void registerMetadatum(MetadataType metadataType, JType type) {
+        String typeLiteral = "\"" + type.getParameterizedQualifiedSourceName() + "\"";
 
-            if (isCollection(resultType) || isMap(resultType)) {
-                String parameterClass = formatClassStatement(parameterized.getTypeArgs()[0]);
-                eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), KEY_CLASS, parameterClass));
-            }
+        eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), metadataType, typeLiteral));
 
-            if (isMap(resultType)) {
-                String parameterClass = formatClassStatement(parameterized.getTypeArgs()[1]);
-                eventBus.post(new RegisterMetadataEvent(getQualifiedClassName(), VALUE_CLASS, parameterClass));
-            }
+        if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName())) {
+            eventBus.post(new RegisterSerializableTypeEvent(type));
         }
-    }
-
-    private boolean isMap(JClassType resultType) {
-        return resultType.isAssignableTo(mapType);
-    }
-
-    private boolean isCollection(JClassType resultType) {
-        return resultType.isAssignableTo(collectionType);
-    }
-
-    private String formatClassStatement(JType type) {
-        return String.format(CLASS_STATEMENT, type.isClassOrInterface().getQualifiedSourceName());
     }
 
     private String getQualifiedClassName() {
