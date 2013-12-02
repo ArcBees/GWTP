@@ -16,48 +16,41 @@
 
 package com.gwtplatform.carstore.client.application.testutils;
 
+import java.util.List;
+
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.rest.CarService;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.carstore.shared.dto.NumberDto;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.NoResult;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public class CarServiceImpl implements CarService {
     @Override
-    public Action<GetResults<CarDto>> getCars() {
-        return new ActionImpl<GetResults<CarDto>>(new TypeLiteral<Action<GetResults<CarDto>>>() {
-        });
+    public RestAction<List<CarDto>> getCars() {
+        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
     }
 
     @Override
-    public Action<GetResults<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
-                                              @QueryParam(RestParameter.LIMIT) int limit) {
-        return new ActionImpl<GetResults<CarDto>>(new TypeLiteral<Action<GetResults<CarDto>>>() {
-        });
+    public RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
+                                            @QueryParam(RestParameter.LIMIT) int limit) {
+        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
     }
 
     @Override
-    public Action<GetResult<NumberDto<Integer>>> getCarsCount() {
-        return new ActionImpl<GetResult<NumberDto<Integer>>>(new TypeLiteral<Action<GetResult<NumberDto<Integer>>>>() {
-        });
+    public RestAction<Integer> getCarsCount() {
+        return new ActionImpl<Integer>(new TypeLiteral<RestAction<Integer>>() {});
     }
 
     @Override
-    public Action<GetResult<CarDto>> saveOrCreate(CarDto carDto) {
-        return new ActionImpl<GetResult<CarDto>>(new TypeLiteral<Action<GetResult<CarDto>>>() {
-        });
+    public RestAction<CarDto> saveOrCreate(CarDto carDto) {
+        return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
     }
 
     @Override
-    public Action<NoResult> delete(@PathParam(RestParameter.ID) Long carId) {
-        return new ActionImpl<NoResult>(new TypeLiteral<Action<NoResult>>() {
-        });
+    public RestAction<Void> delete(@PathParam(RestParameter.ID) Long carId) {
+        return new ActionImpl<Void>(new TypeLiteral<RestAction<Void>>() {});
     }
 }

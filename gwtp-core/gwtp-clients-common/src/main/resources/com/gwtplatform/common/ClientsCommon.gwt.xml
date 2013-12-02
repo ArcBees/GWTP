@@ -2,6 +2,7 @@
 <module>
     <!-- Inherit the core Web Toolkit stuff. -->
     <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.inject.Inject"/>
 
     <!-- comma separated list of gin modules, mandatory when using Ginjector generation -->
     <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>

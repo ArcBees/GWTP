@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module>
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.inject.Inject"/>
+
+    <inherits name="com.gwtplatform.dispatch.DispatchCommonShared"/>
+    <inherits name="com.gwtplatform.common.ClientsCommon"/>
+    <inherits name="com.google.common.collect.Collect"/>
+
+    <source path='client'/>
+</module>

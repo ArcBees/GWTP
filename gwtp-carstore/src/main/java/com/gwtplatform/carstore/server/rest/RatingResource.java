@@ -16,6 +16,8 @@
 
 package com.gwtplatform.carstore.server.rest;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,16 +26,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.gwtplatform.carstore.server.dao.RatingDao;
 import com.gwtplatform.carstore.server.dao.domain.Rating;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
-import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
-import com.gwtplatform.dispatch.shared.NoResult;
 
 @Path(ResourcesPath.RATING)
 @Produces(MediaType.APPLICATION_JSON)
@@ -46,27 +46,32 @@ public class RatingResource {
     }
 
     @GET
-    public GetResults<RatingDto> getRatings() {
-        return new GetResults<RatingDto>(Rating.createDto(ratingDao.getAll()));
+    public Response getRatings() {
+        List<RatingDto> ratingDtos = Rating.createDto(ratingDao.getAll());
+
+        return Response.ok(ratingDtos).build();
     }
 
     @Path(PathParameter.ID)
     @GET
-    public GetResult<RatingDto> get(@PathParam(RestParameter.ID) Long id) {
-        return new GetResult<RatingDto>(Rating.createDto(ratingDao.get(id)));
+    public Response get(@PathParam(RestParameter.ID) Long id) {
+        RatingDto ratingDto = Rating.createDto(ratingDao.get(id));
+
+        return Response.ok(ratingDto).build();
     }
 
     @POST
-    public GetResult<RatingDto> saveOrCreate(RatingDto ratingDto) {
-        ratingDto = Rating.createDto(ratingDao.put(Rating.create(ratingDto)));
+    public Response saveOrCreate(RatingDto ratingDto) {
+        Rating rating = ratingDao.put(Rating.create(ratingDto));
 
-        return new GetResult<RatingDto>(ratingDto);
+        return Response.ok(Rating.createDto(rating)).build();
     }
 
     @Path(PathParameter.ID)
     @DELETE
-    public NoResult delete(@PathParam(RestParameter.ID) Long id) {
+    public Response delete(@PathParam(RestParameter.ID) Long id) {
         ratingDao.delete(id);
-        return new NoResult();
+
+        return Response.ok().build();
     }
 }
