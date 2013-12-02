@@ -16,19 +16,22 @@
 
 package com.gwtplatform.carstore.shared.dispatch;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gwtplatform.carstore.shared.dto.ActionType;
 
 public class LogInRequest {
-    ActionType actionType;
-    String username;
-    String password;
-    String loggedInCookie;
+    private ActionType actionType;
+    private String username;
+    private String password;
+    private String loggedInCookie;
 
-    protected LogInRequest() {
+    public LogInRequest() {
     }
 
-    public LogInRequest(String username,
-                        String password) {
+    @JsonCreator
+    public LogInRequest(@JsonProperty("username") String username,
+                        @JsonProperty("password") String password) {
         actionType = ActionType.VIA_CREDENTIALS;
         this.password = password;
         this.username = username;

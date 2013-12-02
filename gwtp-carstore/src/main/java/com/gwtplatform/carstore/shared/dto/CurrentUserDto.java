@@ -16,17 +16,19 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CurrentUserDto implements Dto {
-    Boolean loggedIn;
-    UserDto user;
+    private Boolean loggedIn;
+    private UserDto user;
 
-    protected CurrentUserDto() {
-        // Needed for serialization
+    public CurrentUserDto() {
     }
 
-    public CurrentUserDto(Boolean loggedIn,
-                          UserDto user) {
+    @JsonCreator
+    public CurrentUserDto(@JsonProperty("loggedIn") Boolean loggedIn,
+                          @JsonProperty("user") UserDto user) {
         this.loggedIn = loggedIn;
         this.user = user;
     }

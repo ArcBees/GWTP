@@ -18,26 +18,25 @@ package com.gwtplatform.carstore.server.rest;
 
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import com.google.inject.Inject;
 import com.gwtplatform.carstore.server.authentication.AuthenticationException;
 import com.gwtplatform.carstore.server.authentication.Authenticator;
 import com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider;
 import com.gwtplatform.carstore.server.dao.UserSessionDao;
-import com.gwtplatform.carstore.shared.dispatch.GetResult;
 import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
 import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.dispatch.shared.NoResult;
 
 @Path(ResourcesPath.SESSION)
 @Produces(MediaType.APPLICATION_JSON)
@@ -61,19 +60,21 @@ public class SessionResource {
     }
 
     @GET
-    public GetResult<CurrentUserDto> getCurrentUser() {
-        return new GetResult<CurrentUserDto>(currentUserDtoProvider.get());
+    public Response getCurrentUser() {
+        CurrentUserDto currentUserDto = currentUserDtoProvider.get();
+
+        return Response.ok(currentUserDto).build();
     }
 
     @DELETE
-    public NoResult logout() {
+    public Response logout() {
         authenticator.logout();
 
-        return new NoResult();
+        return Response.ok().build();
     }
 
     @POST
-    public LogInResult login(LogInRequest action) {
+    public Response login(LogInRequest action) {
         UserDto userDto;
         isLoggedIn = true;
 
@@ -94,7 +95,8 @@ public class SessionResource {
         logger.info("Login: currentUserDto=" + currentUserDto);
         logger.info("Login: loggedInCookie=" + loggedInCookie);
 
-        return new LogInResult(action.getActionType(), currentUserDto, loggedInCookie);
+        LogInResult logInResult = new LogInResult(action.getActionType(), currentUserDto, loggedInCookie);
+        return Response.ok(logInResult).build();
     }
 
     private UserDto getUserFromCookie(String loggedInCookie) {

@@ -21,8 +21,8 @@ import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.DispatchService;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
