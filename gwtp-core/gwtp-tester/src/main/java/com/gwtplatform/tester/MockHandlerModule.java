@@ -20,9 +20,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.internal.UniqueAnnotations;
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
-import com.gwtplatform.dispatch.shared.Action;
-import com.gwtplatform.dispatch.shared.Result;
+import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
+import com.gwtplatform.dispatch.rpc.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
  * Module for use in test cases when creating a guice injector that needs to

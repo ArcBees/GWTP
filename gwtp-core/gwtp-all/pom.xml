@@ -30,27 +30,27 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-client</artifactId>
+            <artifactId>gwtp-dispatch-rpc-client</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-shared</artifactId>
+            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-server</artifactId>
+            <artifactId>gwtp-dispatch-rpc-server</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-server-guice</artifactId>
+            <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-server-spring</artifactId>
+            <artifactId>gwtp-dispatch-rpc-server-spring</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -66,11 +66,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-crawler</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-crawler-service</artifactId>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -129,31 +124,31 @@
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-client</artifactId>
+                    <artifactId>gwtp-dispatch-rpc-client</artifactId>
                     <version>${project.version}</version>
                     <classifier>sources</classifier>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-shared</artifactId>
+                    <artifactId>gwtp-dispatch-rpc-shared</artifactId>
                     <version>${project.version}</version>
                     <classifier>sources</classifier>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-server</artifactId>
+                    <artifactId>gwtp-dispatch-rpc-server</artifactId>
                     <version>${project.version}</version>
                     <classifier>sources</classifier>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-server-guice</artifactId>
+                    <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
                     <version>${project.version}</version>
                     <classifier>sources</classifier>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-server-spring</artifactId>
+                    <artifactId>gwtp-dispatch-rpc-server-spring</artifactId>
                     <version>${project.version}</version>
                     <classifier>sources</classifier>
                 </dependency>

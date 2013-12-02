@@ -16,22 +16,23 @@
 
 package com.gwtplatform.carstore.shared.dispatch;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
-import com.gwtplatform.dispatch.shared.Result;
 
-public class LogInResult implements Result {
-    ActionType actionType;
-    CurrentUserDto currentUserDto;
-    String loggedInCookie;
+public class LogInResult {
+    private ActionType actionType;
+    private CurrentUserDto currentUserDto;
+    private String loggedInCookie;
 
-    protected LogInResult() {
-        // Needed for serialization
+    public LogInResult() {
     }
 
-    public LogInResult(ActionType actionType,
-                       CurrentUserDto currentUserDto,
-                       String loggedInCookie) {
+    @JsonCreator
+    public LogInResult(@JsonProperty("actionType") ActionType actionType,
+                       @JsonProperty("currentUserDto") CurrentUserDto currentUserDto,
+                       @JsonProperty("loggedInCookie") String loggedInCookie) {
         this.actionType = actionType;
         this.currentUserDto = currentUserDto;
         this.loggedInCookie = loggedInCookie;

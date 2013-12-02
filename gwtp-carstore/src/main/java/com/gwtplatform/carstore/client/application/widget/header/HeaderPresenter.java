@@ -35,8 +35,7 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.HeaderMessages;
 import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.NoResult;
+import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
@@ -64,7 +63,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
 
-    private final DispatchAsync dispatchAsync;
+    private final RestDispatch dispatchAsync;
     private final SessionService sessionService;
     private final String defaultPlaceNameToken;
     private final PlaceManager placeManager;
@@ -74,7 +73,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
     @Inject
     HeaderPresenter(EventBus eventBus,
                     MyView view,
-                    DispatchAsync dispatchAsync,
+                    RestDispatch dispatchAsync,
                     SessionService sessionService,
                     @DefaultPlace String defaultPlaceNameToken,
                     PlaceManager placeManager,
@@ -94,7 +93,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     @Override
     public void logout() {
-        dispatchAsync.execute(sessionService.logout(), new AsyncCallback<NoResult>() {
+        dispatchAsync.execute(sessionService.logout(), new AsyncCallback<Void>() {
             @Override
             public void onFailure(Throwable caught) {
                 DisplayMessageEvent.fire(HeaderPresenter.this, new Message(messages.errorLoggingOut(),
@@ -102,7 +101,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
             }
 
             @Override
-            public void onSuccess(NoResult result) {
+            public void onSuccess(Void nothing) {
                 onLogoutSuccess();
             }
         });
