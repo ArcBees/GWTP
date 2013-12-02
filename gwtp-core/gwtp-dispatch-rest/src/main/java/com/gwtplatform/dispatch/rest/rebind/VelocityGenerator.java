@@ -45,6 +45,7 @@ public class VelocityGenerator extends Generator {
     private Injector injector;
     private GeneratorFactory generatorFactory;
     private ActionMetadataProviderGenerator actionMetadataProviderGenerator;
+    private JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -70,6 +71,7 @@ public class VelocityGenerator extends Generator {
 
         injector = Guice.createInjector(new RebindModule(logger, generatorContext));
         actionMetadataProviderGenerator = injector.getInstance(ActionMetadataProviderGenerator.class);
+        jacksonMapperProviderGenerator = injector.getInstance(JacksonMapperProviderGenerator.class);
         generatorFactory = injector.getInstance(GeneratorFactory.class);
     }
 
@@ -94,6 +96,7 @@ public class VelocityGenerator extends Generator {
         generateRestServices();
         generateRestGinModule();
         generateMetadataProvider();
+        generateJacksonMapperProvider();
     }
 
     private void generateRestServices() throws UnableToCompleteException {
@@ -120,6 +123,10 @@ public class VelocityGenerator extends Generator {
 
     private void generateMetadataProvider() throws UnableToCompleteException {
         actionMetadataProviderGenerator.generate();
+    }
+
+    private void generateJacksonMapperProvider() throws UnableToCompleteException {
+        jacksonMapperProviderGenerator.generate();
     }
 
     private void generateEntryPoint(TreeLogger treeLogger, GeneratorContext generatorContext, PrintWriter printWriter) {

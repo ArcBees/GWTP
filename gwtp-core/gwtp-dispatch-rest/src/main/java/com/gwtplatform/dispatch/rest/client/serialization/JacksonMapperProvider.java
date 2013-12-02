@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.shared;
+package com.gwtplatform.dispatch.rest.client.serialization;
+
+import com.github.nmorel.gwtjackson.client.ObjectMapper;
 
 /**
- * Used to associate some metadata to generated classes without cluttering the generated classes.
- *
- * @see com.gwtplatform.dispatch.rest.client.ActionMetadataProvider.MetadataKey
+ * Provides access to the gwt-jackson object mappers generated at the compilation.
  */
-public enum MetadataType {
-    BODY_TYPE, RESPONSE_TYPE
+public interface JacksonMapperProvider {
+    /**
+     * @return {@code true} if there is a mapper for {@code type}.
+     */
+    boolean hasMapper(String type);
+
+    /**
+     * @return the mapper for {@code type} or {@code null} if there is no mapper registered.
+     */
+    <T> ObjectMapper<T> getMapper(String type);
 }

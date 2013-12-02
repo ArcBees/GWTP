@@ -21,14 +21,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.jboss.errai.enterprise.client.jaxrs.JacksonTransformer;
-import org.jboss.errai.marshalling.client.Marshalling;
-
+import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.google.gwt.safehtml.shared.UriUtils;
+import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -54,14 +53,17 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private final ActionMetadataProvider metadataProvider;
+    private final Serialization serialization;
     private final String baseUrl;
     private final String securityHeaderName;
 
     @Inject
     DefaultRestRequestBuilderFactory(ActionMetadataProvider metadataProvider,
+                                     Serialization serialization,
                                      @RestApplicationPath String baseUrl,
                                      @XCSRFHeaderName String securityHeaderName) {
         this.metadataProvider = metadataProvider;
+        this.serialization = serialization;
         this.baseUrl = baseUrl;
         this.securityHeaderName = securityHeaderName;
     }
@@ -128,24 +130,25 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     /**
-     * Verify if the provided <code>bodyClass</code> can be serialized.
+     * Verify if the provided <code>bodyType</code> can be serialized.
      *
-     * @param bodyClass the {@link Class} to verify if it can be serialized.
-     * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
+     * @param bodyType the parameterized type to verify if it can be serialized.
+     * @return <code>true</code> if <code>bodyType</code> can be serialized, otherwise <code>false</code>.
      */
-    protected boolean canSerialize(Class<?> bodyClass) {
-        return !Marshalling.canHandle(bodyClass);
+    protected boolean canSerialize(String bodyType) {
+        return serialization.canSerialize(bodyType);
     }
 
     /**
-     * Serialize the given object. We assume {@link #canSerialize(Class)} returns <code>true</code> or a runtime
+     * Serialize the given object. We assume {@link #canSerialize(String)} returns <code>true</code> or a runtime
      * exception may be thrown.
      *
-     * @param object the object to serialize.
+     * @param object   the object to serialize.
+     * @param bodyType The parameterized type of the object to serialize.
      * @return The serialized string.
      */
-    protected String serialize(Object object) {
-        return JacksonTransformer.toJackson(Marshalling.toJSON(object));
+    protected String serialize(Object object, String bodyType) {
+        return serialization.serialize(object, bodyType);
     }
 
     private void buildHeaders(RequestBuilder requestBuilder, String securityToken, List<RestParameter> customHeaders)
@@ -210,12 +213,16 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private String getSerializedValue(RestAction<?> action, Object object) throws ActionException {
-        Class<?> bodyClass = (Class<?>) metadataProvider.getValue(action, MetadataType.BODY_CLASS);
+        String bodyType = (String) metadataProvider.getValue(action, MetadataType.BODY_TYPE);
 
-        if (bodyClass == null || canSerialize(bodyClass)) {
-            throw new ActionException("Unable to serialize request body. No serializer found.");
-        } else {
-            return serialize(object);
+        if (bodyType != null && canSerialize(bodyType)) {
+            try {
+                return serialize(object, bodyType);
+            } catch (JsonMappingException e) {
+                throw new ActionException("Unable to serialize request body. An unexpected error occurred.", e);
+            }
         }
+
+        throw new ActionException("Unable to serialize request body. No serializer found.");
     }
 }
