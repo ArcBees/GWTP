@@ -294,6 +294,7 @@
                                             <link href="http://google-gin.googlecode.com/svn/trunk/javadoc/"/>
                                             <link href="http://google-guice.googlecode.com/svn/trunk/javadoc/"/>
                                             <link href="http://aopalliance.sourceforge.net/doc/"/>
+                                            <link href="https://github.com/nmorel/gwt-jackson/wiki/"/>
                                         </javadoc>
                                         <jar destfile="${javadocArtifactFile}" basedir="${unpackedJavadocDir}"
                                                 includes="**/**"/>
