@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -20,22 +21,32 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-mvp-client</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-clients-common</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-rpc-client</artifactId>
+            <artifactId>gwtp-crawler</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
+            <artifactId>gwtp-dispatch-common-client</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-common-shared</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-rest</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-rpc-client</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -50,12 +61,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-rpc-server-spring</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-tester</artifactId>
+            <artifactId>gwtp-mvp-client</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -65,7 +81,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-crawler</artifactId>
+            <artifactId>gwtp-tester</artifactId>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -97,78 +113,96 @@
     </build>
 
     <profiles>
-        <!-- Use 'release' profile to attach to the build the
-        compound sources jar and the compound javadoc jar. -->
+        <!-- Use 'release' profile to attach to the build the compound sources jar and the compound javadoc jar. -->
         <profile>
             <id>release</id>
 
             <properties>
                 <unpackedDependenciesDir>${project.build.directory}/exploded-modules</unpackedDependenciesDir>
                 <unpackedJavadocDir>${project.build.directory}/apidocs</unpackedJavadocDir>
-                <javadocArtifactFile>${project.build.directory}/${project.build.finalName}-javadoc.jar</javadocArtifactFile>
+                <javadocArtifactFile>${project.build.directory}/${project.build.finalName}-javadoc.jar
+                </javadocArtifactFile>
             </properties>
 
             <!-- The sources for each module -->
             <dependencies>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-mvp-client</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-clients-common</artifactId>
-                    <version>${project.version}</version>
                     <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-rpc-client</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-rpc-shared</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-rpc-server</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-dispatch-rpc-server-spring</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-tester</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>gwtp-processors</artifactId>
-                    <version>${project.version}</version>
-                    <classifier>sources</classifier>
+                    <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-crawler</artifactId>
-                    <version>${project.version}</version>
                     <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-common-client</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-common-shared</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-rest</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-rpc-client</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-rpc-server</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-rpc-shared</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-dispatch-rpc-server-spring</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-mvp-client</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-processors</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>gwtp-tester</artifactId>
+                    <classifier>sources</classifier>
+                    <scope>compile</scope>
                 </dependency>
 
                 <!-- This is needed in order for the classes from gwt-dev that
@@ -241,7 +275,10 @@
                                 <phase>compile</phase>
                                 <configuration>
                                     <target>
-                                        <javadoc packagenames="com.gwtplatform.*" maxmemory="256m" sourcepath="${unpackedDependenciesDir}" defaultexcludes="yes" destdir="${unpackedJavadocDir}" version="true" use="true" windowtitle="${project.name} ${project.version} API.">
+                                        <javadoc packagenames="com.gwtplatform.*" maxmemory="256m"
+                                                sourcepath="${unpackedDependenciesDir}" defaultexcludes="yes"
+                                                destdir="${unpackedJavadocDir}" version="true" use="true"
+                                                windowtitle="${project.name} ${project.version} API.">
                                             <doctitle>
                                                 <![CDATA[<h1>${project.name} ${project.version} API</h1>]]>
                                             </doctitle>
@@ -250,15 +287,17 @@
                                                 <a href="${project.organization.url}">${project.organization.name}</a>.
                                                 All Rights Reserved.</i>]]>
                                             </bottom>
-                                            <classpath refid="maven.compile.classpath" />
-                                            <link href="http://download.oracle.com/javase/6/docs/api/" />
-                                            <link href="http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/" />
-                                            <link href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/" />
-                                            <link href="http://google-gin.googlecode.com/svn/trunk/javadoc/" />
-                                            <link href="http://google-guice.googlecode.com/svn/trunk/javadoc/" />
-                                            <link href="http://aopalliance.sourceforge.net/doc/" />
+                                            <classpath refid="maven.compile.classpath"/>
+                                            <link href="http://download.oracle.com/javase/6/docs/api/"/>
+                                            <link href="http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/"/>
+                                            <link href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/"/>
+                                            <link href="http://google-gin.googlecode.com/svn/trunk/javadoc/"/>
+                                            <link href="http://google-guice.googlecode.com/svn/trunk/javadoc/"/>
+                                            <link href="http://aopalliance.sourceforge.net/doc/"/>
+                                            <link href="https://github.com/nmorel/gwt-jackson/wiki/"/>
                                         </javadoc>
-                                        <jar destfile="${javadocArtifactFile}" basedir="${unpackedJavadocDir}" includes="**/**" />
+                                        <jar destfile="${javadocArtifactFile}" basedir="${unpackedJavadocDir}"
+                                                includes="**/**"/>
                                     </target>
                                 </configuration>
                                 <goals>

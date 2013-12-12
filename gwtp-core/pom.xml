@@ -119,6 +119,11 @@
             <!-- Dispatch -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>gwtp-dispatch-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-rpc-shared</artifactId>
                 <version>${project.version}</version>
             </dependency>
