@@ -129,78 +129,91 @@
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-clients-common</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-crawler</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-common-client</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-common-shared</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-rest</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-rpc-client</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-rpc-server</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-rpc-shared</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-dispatch-rpc-server-spring</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-mvp-client</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-processors</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>gwtp-tester</artifactId>
+                    <version>${project.version}</version>
                     <classifier>sources</classifier>
                     <scope>compile</scope>
                 </dependency>
