@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,9 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.gin.DefaultModule;
 
 /**
  * Implementation of {@link TokenFormatter} with support for route like place names.
@@ -73,20 +71,7 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
  * </p>
  */
 public class RouteTokenFormatter implements TokenFormatter {
-    /**
-     * Helper class which wraps calls to code which require a running GWT environment and make testing slow.
-     */
-    static class UrlUtils {
-        public String decodeQueryString(final String encodedUrlComponent) {
-            return URL.decodeQueryString(encodedUrlComponent);
-        }
-
-        public String encodeQueryString(final String decodedUrlComponent) {
-            return URL.encodeQueryString(decodedUrlComponent);
-        }
-    }
-
-    /**
+     /**
      * Helper class to store matches to routes in {@link #toPlaceRequest(String)}.
      */
     private class RouteMatch implements Comparable<RouteMatch> {

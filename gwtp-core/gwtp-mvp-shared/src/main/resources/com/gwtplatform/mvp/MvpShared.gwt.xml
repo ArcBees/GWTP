@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <!-- Specify the paths for translatable code                    -->
+    <source path='shared' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
+
+
+</module>

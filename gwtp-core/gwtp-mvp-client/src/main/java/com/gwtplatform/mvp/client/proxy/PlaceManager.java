@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * Place managers work as an intermediary between the GWT {@link com.google.gwt.user.client.History}

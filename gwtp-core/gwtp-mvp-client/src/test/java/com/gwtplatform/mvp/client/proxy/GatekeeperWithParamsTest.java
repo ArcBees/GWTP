@@ -36,6 +36,7 @@ import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.ProxyPlaceBase;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
 
 import static org.junit.Assert.assertEquals;
@@ -178,10 +179,12 @@ public class GatekeeperWithParamsTest {
         private static final String[] CURRENT_USER_ROLES = new String[]{"ROLE_USER"};
         private String role;
 
+        @Override
         public boolean canReveal() {
             return Arrays.asList(CURRENT_USER_ROLES).contains(this.role);
         }
 
+        @Override
         public GatekeeperWithParams withParams(String[] params) {
             if (params.length != 1) {
                 throw new IllegalArgumentException("Just one parameter is expected");
