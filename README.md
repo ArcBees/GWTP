@@ -26,10 +26,10 @@ Get high quality support through ArcBees.
 * See the manual dependency download section in [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration) 
 
 ###Current Release
-1.0.3 - Released on 11/15/2013
+1.1 - Released on 12/17/2013
 
 ###Current Snapshot
-1.1-SNAPSHOT
+1.2-SNAPSHOT
 
 ###Archetypes
 * [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes)
