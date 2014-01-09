@@ -83,6 +83,6 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator {
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
-        velocityContext.put("types" , registeredTypes);
+        velocityContext.put("types", registeredTypes);
     }
 }
