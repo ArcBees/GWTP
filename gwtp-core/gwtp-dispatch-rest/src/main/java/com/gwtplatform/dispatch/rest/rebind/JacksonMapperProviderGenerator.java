@@ -65,11 +65,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator {
         String implName = JacksonMapperProvider.class.getSimpleName() + SUFFIX;
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
         if (printWriter != null) {
-            try {
-                mergeTemplate(printWriter, TEMPLATE, implName);
-            } catch (Exception e) {
-                getLogger().die(e.getMessage());
-            }
+            mergeTemplate(printWriter, TEMPLATE, implName);
         } else {
             getLogger().debug("Jackson Mapper Provider already generated. Returning.");
         }
@@ -87,6 +83,6 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator {
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
-        velocityContext.put("types", registeredTypes);
+        velocityContext.put("types" , registeredTypes);
     }
 }
