@@ -25,6 +25,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -35,6 +36,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.HttpHeaders;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -52,7 +54,9 @@ import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
+import com.gwtplatform.dispatch.rest.rebind.type.FromParamMethodCall;
 import com.gwtplatform.dispatch.rest.rebind.type.MethodCall;
+import com.gwtplatform.dispatch.rest.rebind.type.NoParamMethodCall;
 import com.gwtplatform.dispatch.rest.rebind.util.AnnotationValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.FormParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
@@ -174,18 +178,28 @@ public class RestActionGenerator extends AbstractVelocityGenerator {
         methodCalls.addAll(getMethodCallsToAdd(queryParams, ADD_QUERY_PARAM));
         methodCalls.addAll(getMethodCallsToAdd(formParams, ADD_FORM_PARAM));
 
+        addContentTypeHeaderMethodCall(methodCalls);
+
         if (bodyParam != null) {
-            methodCalls.add(new MethodCall(SET_BODY_PARAM, null, bodyParam));
+            methodCalls.add(new FromParamMethodCall(SET_BODY_PARAM, null, bodyParam));
         }
 
         return methodCalls;
     }
 
-    private List<MethodCall> getMethodCallsToAdd(List<AnnotatedMethodParameter> methodParameters,
+    private void addContentTypeHeaderMethodCall(List<MethodCall> methodCalls) {
+        Consumes consumes = actionMethod.getAnnotation(Consumes.class);
+
+        if (consumes != null && consumes.value().length > 0) {
+            methodCalls.add(new NoParamMethodCall(ADD_HEADER_PARAM, HttpHeaders.CONTENT_TYPE, consumes.value()[0]));
+        }
+    }
+
+    private List<FromParamMethodCall> getMethodCallsToAdd(List<AnnotatedMethodParameter> methodParameters,
                                                  String methodName) {
-        List<MethodCall> methodCalls = new ArrayList<MethodCall>();
+        List<FromParamMethodCall> methodCalls = new ArrayList<FromParamMethodCall>();
         for (AnnotatedMethodParameter methodParameter : methodParameters) {
-            methodCalls.add(new MethodCall(methodName, methodParameter.fieldName, methodParameter.parameter));
+            methodCalls.add(new FromParamMethodCall(methodName, methodParameter.fieldName, methodParameter.parameter));
         }
         return methodCalls;
     }
