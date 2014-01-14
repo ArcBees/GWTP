@@ -4,7 +4,9 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import com.google.inject.TypeLiteral;
+#if (!$types.isEmpty())
 import com.gwtplatform.dispatch.rest.client.serialization.mappers.*;
+#end
 
 public class $implName extends AbstractJacksonMapperProvider {
 #set ($entries = $types.entrySet())
