@@ -16,7 +16,6 @@
 
 package com.gwtplatform.carstore.cucumber.application;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.openqa.selenium.By;
@@ -93,7 +92,6 @@ public class BasePage {
     protected WebElement waitUntilElementIsClickable(final WebElement parent,
                                                      final By locator) {
         final WebElement childElement = webDriverWait().until(new Function<WebDriver, WebElement>() {
-            @Nullable
             @Override
             public WebElement apply(WebDriver input) {
                 return parent.findElement(locator);
