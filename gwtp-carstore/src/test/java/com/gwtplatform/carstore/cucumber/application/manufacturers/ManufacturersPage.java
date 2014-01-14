@@ -20,24 +20,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.gwtplatform.carstore.cucumber.application.PageWithEditTable;
-import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
+import com.gwtplatform.carstore.cucumber.util.ByDebugId;
 
 public class ManufacturersPage extends PageWithEditTable {
-    @FindByDebugId("manufacturers")
-    private WebElement manufacturers;
-    @FindByDebugId("create-manufacturer")
-    private WebElement create;
-
     public void clickOnCreate() {
-        create.click();
+        getCreateButton().click();
     }
 
     public void deleteFirstManufacturer() {
-        deleteFirstRow(manufacturers);
+        deleteFirstRow(getManufacturersTable());
     }
 
     public int getNumberOfLines() {
-        return getNumberOfLines(manufacturers);
+        return getNumberOfLines(getManufacturersTable());
     }
 
     public void editFirstManufacturer() {
@@ -45,14 +40,22 @@ public class ManufacturersPage extends PageWithEditTable {
     }
 
     public String getFirstManufacturer() {
-        return getCellText(manufacturers, "Name", 1);
+        return getCellText(getManufacturersTable(), "Name", 1);
     }
 
     public String getLastManufacturer() {
-        return getCellText(manufacturers, "Name", getNumberOfLines());
+        return getCellText(getManufacturersTable(), "Name", getNumberOfLines());
     }
 
     private WebElement getFirstRowEdit() {
-        return waitUntilElementIsLoaded(manufacturers, By.cssSelector("tbody td:nth-last-child(2) button"));
+        return waitUntilElementIsLoaded(getManufacturersTable(), By.cssSelector("tbody td:nth-last-child(2) button"));
+    }
+
+    private WebElement getCreateButton() {
+        return waitUntilElementIsClickable(ByDebugId.id("create-manufacturer"));
+    }
+
+    private WebElement getManufacturersTable() {
+        return waitUntilElementIsVisible(ByDebugId.id("manufacturers"));
     }
 }
