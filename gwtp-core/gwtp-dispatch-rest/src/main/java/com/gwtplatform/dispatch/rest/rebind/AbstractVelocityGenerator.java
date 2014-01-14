@@ -23,9 +23,7 @@ import javax.inject.Provider;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.base.Strings;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
@@ -94,19 +92,10 @@ public abstract class AbstractVelocityGenerator {
 
     protected String normalizePath(String path) {
         String normalizedPath = path;
-        if (!path.isEmpty() && !path.startsWith("/")) {
+        if (!path.isEmpty() && !path.startsWith("/") && !path.startsWith("http://") && !path.startsWith("https://")) {
             normalizedPath = "/" + path;
         }
 
         return normalizedPath;
-    }
-
-    private String createName(JClassType type, String name, String suffix) {
-        String newName = name + suffix;
-        String alternativeName = type.getSimpleSourceName() + suffix;
-
-        newName = Strings.isNullOrEmpty(newName) ? alternativeName : newName;
-
-        return newName;
     }
 }
