@@ -103,9 +103,8 @@ public class BasePage {
         moveToElement(childElement);
 
         webDriverWait().until(new Function<WebDriver, Boolean>() {
-            @Nullable
             @Override
-            public Boolean apply(@Nullable WebDriver input) {
+            public Boolean apply(WebDriver input) {
                 return childElement.isEnabled();
             }
         });
