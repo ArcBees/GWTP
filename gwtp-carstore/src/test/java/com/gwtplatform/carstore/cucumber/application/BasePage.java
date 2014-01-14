@@ -16,6 +16,7 @@
 
 package com.gwtplatform.carstore.cucumber.application;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.openqa.selenium.By;
@@ -81,8 +82,35 @@ public class BasePage {
         webDriverWait().until(ExpectedConditions.visibilityOf(element));
     }
 
+    protected WebElement waitUntilElementIsVisible(By locator) {
+        return webDriverWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
     protected void waitUntilElementIsDetached(WebElement element) {
         webDriverWait().until(ExpectedConditions.stalenessOf(element));
+    }
+
+    protected WebElement waitUntilElementIsClickable(final WebElement parent,
+                                                     final By locator) {
+        final WebElement childElement = webDriverWait().until(new Function<WebDriver, WebElement>() {
+            @Nullable
+            @Override
+            public WebElement apply(WebDriver input) {
+                return parent.findElement(locator);
+            }
+        });
+
+        moveToElement(childElement);
+
+        webDriverWait().until(new Function<WebDriver, Boolean>() {
+            @Nullable
+            @Override
+            public Boolean apply(@Nullable WebDriver input) {
+                return childElement.isEnabled();
+            }
+        });
+
+        return childElement;
     }
 
     protected WebElement waitUntilElementIsClickable(By locator) {

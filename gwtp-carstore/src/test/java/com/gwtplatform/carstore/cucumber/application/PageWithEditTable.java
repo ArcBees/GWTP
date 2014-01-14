@@ -23,14 +23,14 @@ import org.openqa.selenium.WebElement;
 
 public class PageWithEditTable extends BasePage {
     protected void deleteFirstRow(WebElement table) {
-        WebElement delete = waitUntilElementIsLoaded(table, By.cssSelector("tbody td:last-child button"));
+        WebElement delete = waitUntilElementIsClickable(table, By.cssSelector("tbody td:last-child button"));
         chooseOkOnNextConfirm();
         delete.click();
         waitUntilElementIsDetached(delete);
     }
 
     protected void editFirstRow(WebElement table) {
-        WebElement edit = waitUntilElementIsLoaded(table, By.cssSelector("tbody td:nth-last-child(2) button"));
+        WebElement edit = waitUntilElementIsClickable(table, By.cssSelector("tbody td:nth-last-child(2) button"));
         edit.click();
         waitUntilElementIsDetached(edit);
     }

@@ -20,38 +20,42 @@ import org.openqa.selenium.WebElement;
 
 import com.gwtplatform.carstore.cucumber.application.PageWithEditTable;
 import com.gwtplatform.carstore.cucumber.util.ByDebugId;
-import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class RatingPage extends PageWithEditTable {
     private static final String A_VALID_RATING = "10";
 
-    @FindByDebugId("ratings")
-    private WebElement ratings;
-    @FindByDebugId("ratingCreate")
-    private WebElement create;
-    @FindByDebugId("ratingInput")
-    private WebElement ratingInput;
-
     public void clickOnCreate() {
-        create.click();
+        getCreateButton().click();
     }
 
     public void fillForm() {
-        ratingInput.sendKeys(A_VALID_RATING);
+        getRatingsInput().sendKeys(A_VALID_RATING);
         WebElement save = waitUntilElementIsClickable(ByDebugId.id("ratingSave"));
         save.click();
         waitUntilElementIsDetached(save);
     }
 
     public void deleteFirstRating() {
-        deleteFirstRow(ratings);
+        deleteFirstRow(getRatingsTable());
     }
 
     public int getNumberOfLines() {
-        return getNumberOfLines(ratings);
+        return getNumberOfLines(getRatingsTable());
     }
 
     public String getCellText(String colName, int row) {
-        return getCellText(ratings, colName, row);
+        return getCellText(getRatingsTable(), colName, row);
+    }
+
+    private WebElement getCreateButton() {
+        return waitUntilElementIsClickable(ByDebugId.id("ratingCreate"));
+    }
+
+    private WebElement getRatingsTable() {
+        return waitUntilElementIsVisible(ByDebugId.id("ratings"));
+    }
+
+    private WebElement getRatingsInput() {
+        return waitUntilElementIsVisible(ByDebugId.id("ratingInput"));
     }
 }
