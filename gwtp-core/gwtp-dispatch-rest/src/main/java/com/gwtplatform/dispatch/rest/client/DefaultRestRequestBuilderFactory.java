@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.common.base.Strings;
@@ -41,7 +43,6 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADE
  */
 public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFactory {
     private static final Map<HttpMethod, Method> HTTP_METHODS = Maps.newEnumMap(HttpMethod.class);
-    private static final String CONTENT_TYPE = "Content-Type";
     private static final String JSON_UTF8 = "application/json; charset=utf-8";
 
     static {
@@ -75,7 +76,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
         RequestBuilder requestBuilder = new RequestBuilder(httpMethod, url);
 
-        buildHeaders(requestBuilder, securityToken, action.getHeaderParams());
+        buildHeaders(requestBuilder, securityToken, action.getPath(), action.getHeaderParams());
         buildBody(requestBuilder, action);
 
         return requestBuilder;
@@ -151,10 +152,14 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         return serialization.serialize(object, bodyType);
     }
 
-    private void buildHeaders(RequestBuilder requestBuilder, String securityToken, List<RestParameter> customHeaders)
+    private void buildHeaders(RequestBuilder requestBuilder, String securityToken, String path,
+                              List<RestParameter> customHeaders)
             throws ActionException {
-        requestBuilder.setHeader(CONTENT_TYPE, JSON_UTF8);
-        requestBuilder.setHeader(MODULE_BASE_HEADER, baseUrl);
+        requestBuilder.setHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON);
+
+        if (!isAbsoluteUrl(path)) {
+            requestBuilder.setHeader(MODULE_BASE_HEADER, baseUrl);
+        }
 
         if (!Strings.isNullOrEmpty(securityToken)) {
             requestBuilder.setHeader(securityHeaderName, securityToken);
@@ -162,6 +167,10 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
         for (RestParameter param : customHeaders) {
             requestBuilder.setHeader(param.getName(), encodeHeaderParam(param));
+        }
+
+        if (requestBuilder.getHeader(HttpHeaders.CONTENT_TYPE) == null) {
+            requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, JSON_UTF8);
         }
     }
 
@@ -182,7 +191,15 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
         String path = buildPath(restAction.getPath(), restAction.getPathParams());
 
-        return baseUrl + path + queryString;
+        if (isAbsoluteUrl(path)) {
+            return path + queryString;
+        } else {
+            return baseUrl + path + queryString;
+        }
+    }
+
+    private boolean isAbsoluteUrl(String path) {
+        return path.startsWith("http://") || path.startsWith("https://");
     }
 
     private String buildPath(String rawPath, List<RestParameter> params) throws ActionException {
