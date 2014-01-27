@@ -19,7 +19,7 @@ Feature: Cars
     And I type Fit as the car model
     And I click to save the car
     And I click to close the car
-    Then I see a success message containing saved
+    Then I see a success message containing saved disappear
     Then The car table should show Honda / Fit as the first car
 
   Scenario: Delete a car
