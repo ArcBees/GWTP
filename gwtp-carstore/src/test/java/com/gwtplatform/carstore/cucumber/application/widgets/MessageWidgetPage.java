@@ -24,32 +24,31 @@ import org.openqa.selenium.WebElement;
 import com.google.common.base.Strings;
 import com.gwtplatform.carstore.cucumber.application.BasePage;
 import com.gwtplatform.carstore.cucumber.util.ByDebugId;
-import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class MessageWidgetPage extends BasePage {
-    @FindByDebugId("successMessage")
-    private WebElement successMessage;
-    @FindByDebugId("errorMessage")
-    private WebElement errorMessage;
-
     public Boolean hasSuccessMessage() {
         return hasSuccessMessage("");
     }
 
     public Boolean hasSuccessMessage(String message) {
-        return messageContains("successMessage", message) && messageIsVisible(successMessage);
+        return messageContains("successMessage", message) && messageIsVisible(getSuccessMessage());
     }
 
     public Boolean hasErrorMessage() {
-        return messageIsVisible(errorMessage);
+        return messageIsVisible(getErrorMessage());
     }
 
     public void hideSuccessMessage() {
-        hideMessage(successMessage);
+        hideMessage(getSuccessMessage());
     }
 
     public void hideErrorMessage() {
-        hideMessage(errorMessage);
+        hideMessage(getErrorMessage());
+    }
+
+    public void waitUntilSuccessMessageIsHidden(String message) {
+        messageContains("successMessage", message);
+        waitUntilElementIsDetached(getSuccessMessage());
     }
 
     private Boolean messageIsVisible(WebElement element) {
@@ -87,5 +86,13 @@ public class MessageWidgetPage extends BasePage {
         } catch (NoSuchElementException e) {
             return null;
         }
+    }
+
+    private WebElement getSuccessMessage() {
+        return waitUntilElementIsVisible(ByDebugId.id("successMessage"));
+    }
+
+    private WebElement getErrorMessage() {
+        return waitUntilElementIsVisible(ByDebugId.id("errorMessage"));
     }
 }
