@@ -30,17 +30,16 @@ public class JsonSerialization implements Serialization {
     private static final String VOID = "java.lang.Void";
 
     private final JacksonMapperProvider jacksonMapperProvider;
-    private final JsonSerializationContext serializationContext;
-    private final JsonDeserializationContext deserializationContext;
+    private final JsonSerializationContext.Builder serializationContext;
+    private final JsonDeserializationContext.Builder deserializationContext;
 
     @Inject
     JsonSerialization(JacksonMapperProvider jacksonMapperProvider) {
         this.jacksonMapperProvider = jacksonMapperProvider;
 
         deserializationContext = new JsonDeserializationContext.Builder()
-                .failOnUnknownProperties(false)
-                .build();
-        serializationContext = new JsonSerializationContext.Builder().build();
+                .failOnUnknownProperties(false);
+        serializationContext = new JsonSerializationContext.Builder();
     }
 
     @Override
@@ -60,7 +59,7 @@ public class JsonSerialization implements Serialization {
         }
 
         ObjectMapper<T> mapper = jacksonMapperProvider.getMapper(type);
-        return mapper.write(o, getSerializationContext());
+        return mapper.write(o, getSerializationContext().build());
     }
 
     @Override
@@ -70,14 +69,14 @@ public class JsonSerialization implements Serialization {
         }
 
         ObjectMapper<T> mapper = jacksonMapperProvider.getMapper(type);
-        return mapper.read(json, getDeserializationContext());
+        return mapper.read(json, getDeserializationContext().build());
     }
 
-    protected JsonSerializationContext getSerializationContext() {
+    protected JsonSerializationContext.Builder getSerializationContext() {
         return serializationContext;
     }
 
-    protected JsonDeserializationContext getDeserializationContext() {
+    protected JsonDeserializationContext.Builder getDeserializationContext() {
         return deserializationContext;
     }
 }
