@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class PageWithEditTable extends BasePage {
     protected void deleteFirstRow(WebElement table) {
@@ -42,7 +43,10 @@ public class PageWithEditTable extends BasePage {
     protected String getCellText(WebElement table, String columnName, int row) {
         int columnIndex = getColumnIndex(table, columnName);
 
-        return table.findElement(By.xpath("tbody[1]/tr[" + row + "]/td[" + columnIndex + "]")).getText();
+        WebElement element = table.findElement(By.xpath("tbody[1]/tr[" + row + "]/td[" + columnIndex + "]"));
+        moveToElement(element);
+
+        return element.getText();
     }
 
     protected int getColumnIndex(WebElement table, String columnName) {
@@ -50,6 +54,7 @@ public class PageWithEditTable extends BasePage {
 
         int index = 1;
         for (WebElement tableHeader : tableHeaders) {
+            moveToElement(tableHeader);
             if (columnName.equals(tableHeader.getText())) {
                 return index;
             }
@@ -57,5 +62,11 @@ public class PageWithEditTable extends BasePage {
         }
 
         return 0;
+    }
+
+    private void moveToElement(WebElement tableHeader) {
+        Actions action = new Actions(webDriver);
+        action.moveToElement(tableHeader);
+        action.build().perform();
     }
 }
