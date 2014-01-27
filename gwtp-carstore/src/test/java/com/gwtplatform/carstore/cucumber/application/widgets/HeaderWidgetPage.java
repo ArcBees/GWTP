@@ -20,22 +20,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.gwtplatform.carstore.cucumber.application.BasePage;
+import com.gwtplatform.carstore.cucumber.util.ByDebugId;
 import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class HeaderWidgetPage extends BasePage {
-    @FindByDebugId("logout")
-    private WebElement logout;
-
-    @FindByDebugId("menubar")
-    private WebElement menuBar;
-
     public void clickOnLogOut() {
-        waitUntilElementIsVisible(logout);
-        logout.click();
+        getLogoutButton().click();
     }
 
     public void navigateTo(String linkText) {
-        WebElement link = menuBar.findElement(By.xpath("//div[text()=\"" + linkText + "\"]"));
+        WebElement link = getMenuBar().findElement(By.xpath("//div[text()=\"" + linkText + "\"]"));
         link.click();
+    }
+
+    private WebElement getMenuBar() {
+        return waitUntilElementIsVisible(ByDebugId.id("menubar"));
+    }
+
+    private WebElement getLogoutButton() {
+        return waitUntilElementIsClickable(ByDebugId.id("logout"));
     }
 }
