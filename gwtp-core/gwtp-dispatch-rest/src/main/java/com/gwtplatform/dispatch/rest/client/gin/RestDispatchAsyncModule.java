@@ -35,8 +35,11 @@ import com.gwtplatform.dispatch.rest.shared.RestDispatch;
  * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls.
  * </p>
  * This gin module provides provides access to the {@link RestDispatch} singleton, which is used to make calls to the
- * server over HTTP. This module requires a {@link XCSRFHeaderName}. By default, this will be bound to
- * {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.
+ * server over HTTP. This module requires:
+ * <ul>
+ * <li>A {@link XCSRFHeaderName}. The default value is {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.</li>
+ * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
+ * </ul>
  * <p/>
  * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath} to point
  * to your server API root path.
@@ -50,6 +53,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
      */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         private String xcsrfTokenHeaderName = DEFAULT_X_CSRF_NAME;
+        private Class<? extends Serialization> serializationClass = JsonSerialization.class;
 
         /**
          * Specify the X-CSRF header name.
@@ -62,6 +66,18 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
             return this;
         }
 
+        /**
+         * Specify the serialization implementation to use.
+         * Default is {@link JsonSerialization}.
+         *
+         * @param serializationClass The {@link Serialization} implementation to use.
+         * @return a {@link Builder} object.
+         */
+        public Builder serialization(Class<? extends Serialization> serializationClass) {
+            this.serializationClass = serializationClass;
+            return this;
+        }
+
         @Override
         public RestDispatchAsyncModule build() {
             return new RestDispatchAsyncModule(this);
@@ -71,6 +87,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static final String DEFAULT_X_CSRF_NAME = "X-CSRF-Token";
 
     private final String xcsrfTokenHeaderName;
+    private final Class<? extends Serialization> serializationClass;
 
     /**
      * Creates this module using the default values as specified by {@link Builder}.
@@ -83,17 +100,18 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         super(builder);
 
         xcsrfTokenHeaderName = builder.xcsrfTokenHeaderName;
+        serializationClass = builder.serializationClass;
     }
 
     @Override
     protected void configureDispatch() {
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
 
+        bind(Serialization.class).to(serializationClass);
+
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
-
-        bind(Serialization.class).to(JsonSerialization.class);
 
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }

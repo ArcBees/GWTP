@@ -18,6 +18,8 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 
 import javax.inject.Inject;
 
+import com.github.nmorel.gwtjackson.client.JsonDeserializationContext;
+import com.github.nmorel.gwtjackson.client.JsonSerializationContext;
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 
 /**
@@ -28,10 +30,17 @@ public class JsonSerialization implements Serialization {
     private static final String VOID = "java.lang.Void";
 
     private final JacksonMapperProvider jacksonMapperProvider;
+    private final JsonSerializationContext serializationContext;
+    private final JsonDeserializationContext deserializationContext;
 
     @Inject
     JsonSerialization(JacksonMapperProvider jacksonMapperProvider) {
         this.jacksonMapperProvider = jacksonMapperProvider;
+
+        deserializationContext = new JsonDeserializationContext.Builder()
+                .failOnUnknownProperties(false)
+                .build();
+        serializationContext = new JsonSerializationContext.Builder().build();
     }
 
     @Override
@@ -51,7 +60,7 @@ public class JsonSerialization implements Serialization {
         }
 
         ObjectMapper<T> mapper = jacksonMapperProvider.getMapper(type);
-        return mapper.write(o);
+        return mapper.write(o, getSerializationContext());
     }
 
     @Override
@@ -61,6 +70,14 @@ public class JsonSerialization implements Serialization {
         }
 
         ObjectMapper<T> mapper = jacksonMapperProvider.getMapper(type);
-        return mapper.read(json);
+        return mapper.read(json, getDeserializationContext());
+    }
+
+    protected JsonSerializationContext getSerializationContext() {
+        return serializationContext;
+    }
+
+    protected JsonDeserializationContext getDeserializationContext() {
+        return deserializationContext;
     }
 }
