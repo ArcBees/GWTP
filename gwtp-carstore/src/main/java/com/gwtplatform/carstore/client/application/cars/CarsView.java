@@ -42,6 +42,7 @@ import com.google.gwt.view.client.NoSelectionModel;
 import com.google.gwt.view.client.Range;
 import com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView;
 import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyView {
@@ -122,7 +123,8 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
         Column<CarDto, String> manufacturerColumn = new Column<CarDto, String>(new TextCell()) {
             @Override
             public String getValue(CarDto carDto) {
-                return carDto.getManufacturer().getName();
+                ManufacturerDto manufacturer = carDto.getManufacturer();
+                return manufacturer == null ? "" : manufacturer.getName();
             }
         };
 

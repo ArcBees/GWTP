@@ -16,6 +16,31 @@
 
 package com.gwtplatform.dispatch.rest.rebind.type;
 
-public interface MethodCall {
-    boolean isFromParam();
+public class NoParamMethodCall implements MethodCall {
+    private final String methodName;
+    private final String fieldName;
+    private final String value;
+
+    public NoParamMethodCall(String methodName, String fieldName, String value) {
+        this.methodName = methodName;
+        this.fieldName = fieldName;
+        this.value = value;
+    }
+
+    @Override
+    public boolean isFromParam() {
+        return false;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
