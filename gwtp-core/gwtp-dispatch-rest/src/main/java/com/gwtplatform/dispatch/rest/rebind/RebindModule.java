@@ -34,7 +34,7 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
 /**
- * TODO: Documentation.
+ * Rest-Dispatch code generation module.
  */
 public class RebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rest/rebind/velocity.properties";
