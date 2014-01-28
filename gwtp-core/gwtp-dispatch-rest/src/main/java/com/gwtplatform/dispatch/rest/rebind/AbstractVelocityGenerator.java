@@ -65,7 +65,8 @@ public abstract class AbstractVelocityGenerator {
         return typeOracle;
     }
 
-    protected void mergeTemplate(PrintWriter printWriter, String velocityTemplate, String implName) throws Exception {
+    protected void mergeTemplate(PrintWriter printWriter, String velocityTemplate, String implName)
+            throws UnableToCompleteException {
         VelocityContext velocityContext = velocityContextProvider.get();
         velocityContext.put("lf", "\n");
         velocityContext.put("implName", implName);
