@@ -34,7 +34,7 @@ import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.resources.EditRatingMessages;
-import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
@@ -71,7 +71,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     }
 
     private final RestDispatch dispatcher;
-    private final CarService carService;
+    private final CarsService carsService;
     private final RatingService ratingService;
     private final EditRatingMessages messages;
     private final PlaceManager placeManager;
@@ -81,14 +81,14 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
                           MyView view,
                           MyProxy proxy,
                           RestDispatch dispatcher,
-                          CarService carService,
+                          CarsService carsService,
                           RatingService ratingService,
                           EditRatingMessages messages,
                           PlaceManager placeManager) {
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
-        this.carService = carService;
+        this.carsService = carsService;
         this.ratingService = ratingService;
         this.messages = messages;
         this.placeManager = placeManager;
@@ -131,7 +131,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
         List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
-        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
+        dispatcher.execute(carsService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
             @Override
             public void onSuccess(List<CarDto> cars) {
                 onGetCarsSuccess(cars);

@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.rest.rebind.type;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -32,7 +32,7 @@ public class ServiceDefinitions {
     private static final String SERVICE_INTERFACE = RestService.class.getName();
 
     private final TypeOracle typeOracle;
-    private final List<JClassType> services = new ArrayList<JClassType>();
+    private final List<JClassType> services = Lists.newArrayList();
     private final Logger logger;
     private final GeneratorUtil generatorUtil;
 
@@ -52,11 +52,15 @@ public class ServiceDefinitions {
         return services;
     }
 
-    private void findAllServices() throws UnableToCompleteException {
+    public boolean isService(JClassType type) throws UnableToCompleteException {
         JClassType serviceInterface = generatorUtil.getType(SERVICE_INTERFACE);
 
+        return !SERVICE_INTERFACE.equals(type.getQualifiedSourceName()) && type.isAssignableTo(serviceInterface);
+    }
+
+    private void findAllServices() throws UnableToCompleteException {
         for (JClassType type : typeOracle.getTypes()) {
-            if (!SERVICE_INTERFACE.equals(type.getQualifiedSourceName()) && type.isAssignableTo(serviceInterface)) {
+            if (isService(type)) {
                 verifyIsInterface(type);
                 services.add(type);
             }

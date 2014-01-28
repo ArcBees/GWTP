@@ -39,6 +39,10 @@ public final class Logger {
         internalLog(TreeLogger.WARN, String.format(message, params));
     }
 
+    public void error(String message, Object... params) {
+        internalLog(TreeLogger.ERROR, String.format(message, params));
+    }
+
     public TreeLogger getTreeLogger() {
         return treeLogger;
     }
@@ -48,7 +52,7 @@ public final class Logger {
      * {@link com.google.gwt.core.ext.UnableToCompleteException}
      */
     public void die(String message) throws UnableToCompleteException {
-        internalLog(TreeLogger.ERROR, message);
+        error(message);
         throw new UnableToCompleteException();
     }
 

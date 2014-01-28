@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,19 +16,20 @@
 
 package com.gwtplatform.dispatch.rest.rebind.type;
 
-public class ActionBinding extends ClassBinding {
-    private final String methodName;
-    private final String resultClass;
+import java.util.List;
 
-    public ActionBinding(String actionClass, String methodName, String resultClass) {
-        setImplName(actionClass);
+import com.google.gwt.core.ext.typeinfo.JParameter;
+
+public class ChildServiceBinding extends ServiceBinding {
+    private final String methodName;
+
+    public ChildServiceBinding(String serviceClass, String serviceInterface, String methodName,
+                               List<JParameter> parameters) {
+        super(serviceClass, serviceInterface);
+
+        setCtorParameters(parameters);
 
         this.methodName = methodName;
-        this.resultClass = resultClass;
-    }
-
-    public String getResultClass() {
-        return resultClass;
     }
 
     public String getMethodName() {

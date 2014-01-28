@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,41 +16,22 @@
 
 package com.gwtplatform.carstore.client.application.testutils;
 
-import java.util.List;
-
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
-
 import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.carstore.shared.rest.RestParameter;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public class CarServiceImpl implements CarService {
-    @Override
-    public RestAction<List<CarDto>> getCars() {
-        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
+    public CarServiceImpl(Long carId) {
     }
 
     @Override
-    public RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
-                                            @QueryParam(RestParameter.LIMIT) int limit) {
-        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
-    }
-
-    @Override
-    public RestAction<Integer> getCarsCount() {
-        return new ActionImpl<Integer>(new TypeLiteral<RestAction<Integer>>() {});
-    }
-
-    @Override
-    public RestAction<CarDto> saveOrCreate(CarDto carDto) {
+    public RestAction<CarDto> get() {
         return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
     }
 
     @Override
-    public RestAction<Void> delete(@PathParam(RestParameter.ID) Long carId) {
+    public RestAction<Void> delete() {
         return new ActionImpl<Void>(new TypeLiteral<RestAction<Void>>() {});
     }
 }
