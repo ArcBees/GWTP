@@ -103,22 +103,14 @@ public class VelocityGenerator extends Generator {
         ServiceDefinitions serviceDefinitions = injector.getInstance(ServiceDefinitions.class);
 
         for (JClassType service : serviceDefinitions.getServices()) {
-            try {
-                RestServiceGenerator serviceGenerator = generatorFactory.createServiceGenerator(service);
-                serviceGenerator.generate();
-            } catch (Exception e) {
-                logger.die(e.getMessage());
-            }
+            ServiceGenerator serviceGenerator = generatorFactory.createServiceGenerator(service);
+            serviceGenerator.generate();
         }
     }
 
     private void generateRestGinModule() throws UnableToCompleteException {
-        try {
-            RestGinModuleGenerator moduleGenerator = injector.getInstance(RestGinModuleGenerator.class);
-            moduleGenerator.generate();
-        } catch (Exception e) {
-            logger.die(e.getMessage());
-        }
+        GinModuleGenerator moduleGenerator = injector.getInstance(GinModuleGenerator.class);
+        moduleGenerator.generate();
     }
 
     private void generateMetadataProvider() throws UnableToCompleteException {

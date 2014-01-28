@@ -6,3 +6,20 @@
 #set($null = "null")
 #if($element)$value#else$null#end
 #end
+
+#macro(concatArguments $arguments1 $arguments2)
+#if( "$arguments1" != "" && "$arguments2" != "" )$argumentsFromService,
+$actionArguments#else$argumentsFromService$actionArguments#end
+#end
+
+#macro(generateMethodSignatureFromParameters $parameters)
+#foreach ($param in $parameters)
+$param.type.qualifiedSourceName $param.name#commaIfNeeded($parameters)
+#end
+#end
+
+#macro(generateArgumentsFromParameters $parameters)
+#foreach ($param in $parameters)
+$param.name#commaIfNeeded($parameters)
+#end
+#end

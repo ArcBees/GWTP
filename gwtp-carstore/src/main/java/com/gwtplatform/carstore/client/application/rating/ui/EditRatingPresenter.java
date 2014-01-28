@@ -27,7 +27,7 @@ import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.EditRatingMessages;
-import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
@@ -47,7 +47,7 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     }
 
     private final RestDispatch dispatcher;
-    private final CarService carService;
+    private final CarsService carsService;
     private final RatingService ratingService;
     private final EditRatingMessages messages;
 
@@ -55,13 +55,13 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     EditRatingPresenter(EventBus eventBus,
                         MyView view,
                         RestDispatch dispatcher,
-                        CarService carService,
+                        CarsService carsService,
                         RatingService ratingService,
                         EditRatingMessages messages) {
         super(eventBus, view);
 
         this.dispatcher = dispatcher;
-        this.carService = carService;
+        this.carsService = carsService;
         this.ratingService = ratingService;
         this.messages = messages;
 
@@ -92,7 +92,7 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     }
 
     private void reveal() {
-        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
+        dispatcher.execute(carsService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
             @Override
             public void onSuccess(List<CarDto> cars) {
                 onGetCarsSuccess(cars);
