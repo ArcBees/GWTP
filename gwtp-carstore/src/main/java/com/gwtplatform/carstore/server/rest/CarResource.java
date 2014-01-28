@@ -31,8 +31,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.gwtplatform.carstore.server.dao.CarDao;
+import com.gwtplatform.carstore.server.dao.CarPropertiesDao;
 import com.gwtplatform.carstore.server.dao.domain.Car;
 import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.dto.CarPropertiesDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
@@ -46,10 +48,13 @@ public class CarResource {
     private static final Integer INT_DEFAULT_OFFSET = Integer.valueOf(DEFAULT_OFFSET);
 
     private final CarDao carDao;
+    private final CarPropertiesDao carPropertiesDao;
 
     @Inject
-    CarResource(CarDao carDao) {
+    CarResource(CarDao carDao,
+                CarPropertiesDao carPropertiesDao) {
         this.carDao = carDao;
+        this.carPropertiesDao = carPropertiesDao;
     }
 
     @GET
@@ -76,6 +81,12 @@ public class CarResource {
 
     @POST
     public Response saveOrCreate(CarDto carDto) {
+        CarPropertiesDto carProperties = carDto.getCarProperties();
+        if (carProperties != null && !carProperties.isSaved()) {
+            carProperties = carPropertiesDao.put(carProperties);
+            carDto.setCarProperties(carProperties);
+        }
+
         Car car = carDao.put(Car.create(carDto));
 
         return Response.ok(Car.createDto(car)).build();

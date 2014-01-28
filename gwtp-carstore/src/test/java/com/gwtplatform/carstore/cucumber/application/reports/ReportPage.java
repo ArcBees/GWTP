@@ -21,14 +21,12 @@ import java.util.HashMap;
 import org.openqa.selenium.WebElement;
 
 import com.gwtplatform.carstore.cucumber.application.PageWithEditTable;
-import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
+import com.gwtplatform.carstore.cucumber.util.ByDebugId;
 
 public class ReportPage extends PageWithEditTable {
     private static final String MANUFACTURER_COL = "Manufacturer";
     private static final String RATING_COL = "Rating";
 
-    @FindByDebugId("reports")
-    private WebElement reports;
     private HashMap<String, AveragingCounter> averages = new HashMap<String, AveragingCounter>();
 
     public void addRating(String car, String rating) {
@@ -44,9 +42,9 @@ public class ReportPage extends PageWithEditTable {
     public boolean checkManufacturerAverages() {
         boolean match = true;
 
-        for (int row = 1; row <= getNumberOfLines(reports); row++) {
-            String manufacturer = getCellText(reports, MANUFACTURER_COL, row);
-            Double average = Double.valueOf(getCellText(reports, RATING_COL, row));
+        for (int row = 1; row <= getNumberOfLines(getReportsTable()); row++) {
+            String manufacturer = getCellText(getReportsTable(), MANUFACTURER_COL, row);
+            Double average = Double.valueOf(getCellText(getReportsTable(), RATING_COL, row));
             Double referenceAverage = averages.get(manufacturer).average();
 
             if (!almostEqual(average, referenceAverage, 0.001d)) {
@@ -55,6 +53,10 @@ public class ReportPage extends PageWithEditTable {
         }
 
         return match;
+    }
+
+    private WebElement getReportsTable() {
+        return waitUntilElementIsVisible(ByDebugId.id("reports"));
     }
 
     private boolean almostEqual(Double a, Double b, double epsilon) {

@@ -16,6 +16,8 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ManufacturerRatingDto implements Dto {
     private String manufacturer;
     private Double rating;
@@ -23,8 +25,8 @@ public class ManufacturerRatingDto implements Dto {
     public ManufacturerRatingDto() {
     }
 
-    public ManufacturerRatingDto(String manufacturer,
-                                 Double rating) {
+    public ManufacturerRatingDto(@JsonProperty("manufacturer") String manufacturer,
+                                 @JsonProperty("rating") Double rating) {
         this.manufacturer = manufacturer;
         this.rating = rating;
     }
