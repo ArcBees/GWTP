@@ -20,8 +20,10 @@ import javax.inject.Inject;
 
 import org.openqa.selenium.WebDriver;
 
+import com.google.common.base.Strings;
 import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
 import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
+import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
 import com.gwtplatform.carstore.cucumber.util.TestParameters;
 
 import cucumber.api.java.After;
@@ -40,14 +42,17 @@ public class BasicStepdefs {
     private final WebDriver webDriver;
     private final LoginPage loginPage;
     private final ApplicationPage applicationPage;
+    private final MessageWidgetPage messageWidgetPage;
 
     @Inject
     BasicStepdefs(WebDriver webDriver,
                   LoginPage loginPage,
-                  ApplicationPage applicationPage) {
+                  ApplicationPage applicationPage,
+                  MessageWidgetPage messageWidgetPage) {
         this.webDriver = webDriver;
         this.loginPage = loginPage;
         this.applicationPage = applicationPage;
+        this.messageWidgetPage = messageWidgetPage;
     }
 
     @After
@@ -91,8 +96,11 @@ public class BasicStepdefs {
         assertTrue(webDriver.getCurrentUrl().startsWith(url));
     }
 
-    @Then("^I see a success message containing (.*?)$")
-    public void I_see_a_success_message_containing(String message) {
+    @Then("^I see a success message containing (.*?)( disappear){0,1}$")
+    public void I_see_a_success_message_containing(String message, String disappear) {
         assertTrue(applicationPage.successMessageIsPresent(message));
+        if (Strings.nullToEmpty(disappear).equals(" disappear")) {
+            messageWidgetPage.waitUntilSuccessMessageIsHidden(message);
+        }
     }
 }
