@@ -224,7 +224,6 @@ public class ActionGenerator extends AbstractVelocityGenerator {
 
         eventBus.post(new RegisterMetadataEvent(getQualifiedImplName(), metadataType, typeLiteral));
 
-        // TODO: Convert primitives to boxed?
         if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() == null) {
             eventBus.post(new RegisterSerializableTypeEvent(type));
         }
