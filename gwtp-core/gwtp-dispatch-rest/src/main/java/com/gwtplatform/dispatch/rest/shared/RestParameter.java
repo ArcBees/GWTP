@@ -35,8 +35,10 @@ public class RestParameter {
         this.name = name;
         if (object instanceof Collection) {
             stringValue = Joiner.on(',').join((Collection) object);
-        } else {
+        } else if (object != null) {
             this.stringValue = object.toString();
+        } else {
+            stringValue = "";
         }
     }
 
