@@ -27,9 +27,9 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
-import com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry;
 import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
+import com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry;
 
 /**
  * Velocity powered generator of an {@link PlaceTokenRegistry}.

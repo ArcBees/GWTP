@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * This event is fired by the {@link PlaceManager} whenever a new place is

@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
-
-import java.util.Set;
+package com.gwtplatform.mvp.shared.proxy;
 
 /**
- * Provide information about all registered place tokens.
+ * @author Philippe Beaudoin
  */
-public interface PlaceTokenRegistry {
-    /**
-     * @return All registered place tokens.
-     */
-    Set<String> getAllPlaceTokens();
+public class TokenFormatException extends RuntimeException {
+    private static final long serialVersionUID = 3707135366220900675L;
+
+    public TokenFormatException() {
+    }
+
+    public TokenFormatException(String message) {
+        super(message);
+    }
+
+    public TokenFormatException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public TokenFormatException(Throwable cause) {
+        super(cause);
+    }
+
 }

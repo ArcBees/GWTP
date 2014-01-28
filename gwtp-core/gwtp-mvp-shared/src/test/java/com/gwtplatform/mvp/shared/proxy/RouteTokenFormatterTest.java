@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.List;
 import java.util.Map;
@@ -26,16 +26,15 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.proxy.RouteTokenFormatter.UrlUtils;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for {@link RouteTokenFormatter}.
@@ -50,7 +49,7 @@ public class RouteTokenFormatterTest {
         }
     }
 
-    static class UrlUtilsTestImpl extends RouteTokenFormatter.UrlUtils {
+    static class UrlUtilsTestImpl implements UrlUtils {
         @Override
         public String decodeQueryString(String encodedUrlComponent) {
             return encodedUrlComponent;

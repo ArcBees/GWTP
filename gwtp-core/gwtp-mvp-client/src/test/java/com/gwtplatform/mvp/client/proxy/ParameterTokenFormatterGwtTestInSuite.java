@@ -23,6 +23,8 @@ import java.util.Map;
 
 import com.google.gwt.http.client.URL;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.TokenFormatException;
 
 import junit.framework.Assert;
 

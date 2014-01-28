@@ -23,6 +23,9 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import com.google.gwt.http.client.URL;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.TokenFormatException;
+import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
  * Formats tokens from {@code String} values to {@link PlaceRequest} and

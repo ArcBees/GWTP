@@ -19,13 +19,13 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * A singleton presenter, the basic building block of the

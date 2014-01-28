@@ -13,28 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.gwtplatform.mvp.client.proxy;
 
+import com.google.gwt.http.client.URL;
+import com.gwtplatform.mvp.shared.proxy.UrlUtils;
+
 /**
- * @author Philippe Beaudoin
+ * Client implementation of UrlUtils.
+ * @author Richard Wallis (rdwallis@gmail.com)
+ *
  */
-public final class TokenFormatException extends RuntimeException {
-    private static final long serialVersionUID = 3707135366220900675L;
+public class ClientUrlUtils implements UrlUtils {
 
-    public TokenFormatException() {
+    @Override
+    public String decodeQueryString(String encodedUrlComponent) {
+       return URL.decode(encodedUrlComponent);
     }
 
-    public TokenFormatException(String message) {
-        super(message);
-    }
-
-    public TokenFormatException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public TokenFormatException(Throwable cause) {
-        super(cause);
+    @Override
+    public String encodeQueryString(String decodedUrlComponent) {
+       return URL.encode(decodedUrlComponent);
     }
 
 }
