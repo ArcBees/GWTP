@@ -19,11 +19,13 @@ package com.gwtplatform.dispatch.rest.rebind;
 import java.io.PrintWriter;
 
 import javax.inject.Provider;
+import javax.ws.rs.Path;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
@@ -79,6 +81,16 @@ public abstract class AbstractVelocityGenerator {
     protected abstract String getPackage();
 
     protected abstract void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException;
+
+    protected String extractPath(HasAnnotations type) {
+        String path = "";
+
+        if (type.isAnnotationPresent(Path.class)) {
+            path = normalizePath(type.getAnnotation(Path.class).value());
+        }
+
+        return path;
+    }
 
     protected String concatenatePath(String prefix, String suffix) {
         String normalizerPrefix = normalizePath(prefix);

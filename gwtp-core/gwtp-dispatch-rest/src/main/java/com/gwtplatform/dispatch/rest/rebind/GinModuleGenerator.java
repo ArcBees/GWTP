@@ -24,12 +24,13 @@ import javax.inject.Provider;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
-public class RestGinModuleGenerator extends AbstractVelocityGenerator {
+public class GinModuleGenerator extends AbstractVelocityGenerator {
     private static final String PACKAGE = RestDispatchAsync.class.getPackage().getName();
     private static final String DEFAULT_GIN_MODULE = "RestGinModule";
     private static final String VELOCITY_TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/RestGinModule.vm";
@@ -37,7 +38,7 @@ public class RestGinModuleGenerator extends AbstractVelocityGenerator {
     private final ServiceDefinitions serviceDefinitions;
 
     @Inject
-    public RestGinModuleGenerator(
+    public GinModuleGenerator(
             TypeOracle typeOracle,
             Logger logger,
             Provider<VelocityContext> velocityContextProvider,
@@ -49,7 +50,7 @@ public class RestGinModuleGenerator extends AbstractVelocityGenerator {
         this.serviceDefinitions = serviceDefinitions;
     }
 
-    public String generate() throws Exception {
+    public String generate() throws UnableToCompleteException {
         String implName = DEFAULT_GIN_MODULE;
 
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE, implName);

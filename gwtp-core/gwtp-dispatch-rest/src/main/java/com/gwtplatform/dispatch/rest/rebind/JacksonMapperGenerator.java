@@ -77,6 +77,11 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator {
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
-        velocityContext.put("type", type.getParameterizedQualifiedSourceName());
+        String importClause = type.getQualifiedSourceName();
+        String parameterizedSourceName = type.getParameterizedQualifiedSourceName()
+                                             .substring(importClause.lastIndexOf('.') + 1);
+
+        velocityContext.put("import", importClause);
+        velocityContext.put("type", parameterizedSourceName);
     }
 }
