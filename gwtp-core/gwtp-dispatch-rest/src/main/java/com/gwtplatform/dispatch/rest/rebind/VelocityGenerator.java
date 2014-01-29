@@ -129,8 +129,7 @@ public class VelocityGenerator extends Generator {
 
     private ClassSourceFileComposerFactory initComposer() {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, className);
-        composer.addImport(type.getQualifiedSourceName());
-        composer.setSuperclass(AbstractRestDispatcherController.class.getName());
+        composer.setSuperclass(AbstractRestDispatcherController.class.getSimpleName());
 
         return composer;
     }
