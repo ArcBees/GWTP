@@ -18,14 +18,37 @@ package com.gwtplatform.dispatch.rest.rebind.type;
 
 import java.util.List;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 
-public class ClassBinding {
+public class ResourceBinding {
+    private final String resourcePath;
+    private final String implPackage;
+    private final String implName;
     private String superTypeName;
-    private String implPackage;
-    private String implName;
     private List<JParameter> ctorParameters = Lists.newArrayList();
+
+    public ResourceBinding(
+            String resourcePath,
+            String implPackage,
+            String implName) {
+        this.resourcePath = Strings.nullToEmpty(resourcePath);
+        this.implName = implName;
+        this.implPackage = implPackage;
+    }
+
+    public String getResourcePath() {
+        return resourcePath;
+    }
+
+    public String getImplPackage() {
+        return implPackage;
+    }
+
+    public String getImplName() {
+        return implName;
+    }
 
     public String getSuperTypeName() {
         return superTypeName;
@@ -33,22 +56,6 @@ public class ClassBinding {
 
     public void setSuperTypeName(String superTypeName) {
         this.superTypeName = superTypeName;
-    }
-
-    public String getImplPackage() {
-        return implPackage;
-    }
-
-    public void setImplPackage(String implPackage) {
-        this.implPackage = implPackage;
-    }
-
-    public String getImplName() {
-        return implName;
-    }
-
-    public void setImplName(String implName) {
-        this.implName = implName;
     }
 
     public List<JParameter> getCtorParameters() {
