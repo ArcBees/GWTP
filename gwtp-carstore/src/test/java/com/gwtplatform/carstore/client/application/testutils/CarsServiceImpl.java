@@ -16,22 +16,41 @@
 
 package com.gwtplatform.carstore.client.application.testutils;
 
+import java.util.List;
+
+import javax.ws.rs.QueryParam;
+
 import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.shared.dto.CarDto;
+import com.gwtplatform.carstore.shared.rest.RestParameter;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-public class CarServiceImpl implements CarService {
-    public CarServiceImpl(Long carId) {
+public class CarsServiceImpl implements CarsService {
+    @Override
+    public RestAction<List<CarDto>> getCars() {
+        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
     }
 
     @Override
-    public RestAction<CarDto> get() {
+    public RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
+                                            @QueryParam(RestParameter.LIMIT) int limit) {
+        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
+    }
+
+    @Override
+    public RestAction<Integer> getCarsCount() {
+        return new ActionImpl<Integer>(new TypeLiteral<RestAction<Integer>>() {});
+    }
+
+    @Override
+    public RestAction<CarDto> saveOrCreate(CarDto carDto) {
         return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
     }
 
     @Override
-    public RestAction<Void> delete() {
-        return new ActionImpl<Void>(new TypeLiteral<RestAction<Void>>() {});
+    public CarService car(Long carId) {
+        return new CarServiceImpl(carId);
     }
 }
