@@ -42,14 +42,15 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     private final GeneratorFactory generatorFactory;
     private final JClassType service;
 
-    protected AbstractServiceGenerator(TypeOracle typeOracle,
-                                       Logger logger,
-                                       Provider<VelocityContext> velocityContextProvider,
-                                       VelocityEngine velocityEngine,
-                                       GeneratorUtil generatorUtil,
-                                       ServiceDefinitions serviceDefinitions,
-                                       GeneratorFactory generatorFactory,
-                                       JClassType service) {
+    protected AbstractServiceGenerator(
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            ServiceDefinitions serviceDefinitions,
+            GeneratorFactory generatorFactory,
+            JClassType service) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
         this.serviceDefinitions = serviceDefinitions;
@@ -61,8 +62,6 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     protected String getPackage() {
         return service.getPackage().getName().replace(SHARED_PACKAGE, CLIENT_PACKAGE);
     }
-
-    protected abstract String getPath();
 
     protected abstract ServiceBinding getServiceBinding();
 
@@ -94,11 +93,11 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
 
     protected void generateChildRestService(JMethod method) throws UnableToCompleteException {
         ChildServiceGenerator generator = generatorFactory.createChildServiceGenerator(method, getServiceBinding());
-        serviceBindings.add(generator.generate(getPath()));
+        serviceBindings.add(generator.generate());
     }
 
     protected void generateRestAction(JMethod method) throws UnableToCompleteException {
         ActionGenerator generator = generatorFactory.createActionGenerator(method, getServiceBinding());
-        actionBindings.add(generator.generate(getPath()));
+        actionBindings.add(generator.generate());
     }
 }

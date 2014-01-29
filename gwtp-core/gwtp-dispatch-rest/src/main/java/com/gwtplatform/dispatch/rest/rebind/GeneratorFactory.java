@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.gwtplatform.dispatch.rest.rebind.type.ClassBinding;
+import com.gwtplatform.dispatch.rest.rebind.type.ResourceBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 
 public interface GeneratorFactory {
@@ -26,5 +26,5 @@ public interface GeneratorFactory {
 
     ChildServiceGenerator createChildServiceGenerator(JMethod method, ServiceBinding parent);
 
-    ActionGenerator createActionGenerator(JMethod actionMethod, ClassBinding parent);
+    ActionGenerator createActionGenerator(JMethod actionMethod, ResourceBinding parent);
 }

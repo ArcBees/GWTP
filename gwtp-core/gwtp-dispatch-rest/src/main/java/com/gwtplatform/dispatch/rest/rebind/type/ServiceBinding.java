@@ -16,11 +16,15 @@
 
 package com.gwtplatform.dispatch.rest.rebind.type;
 
-public class ServiceBinding extends ClassBinding {
+public class ServiceBinding extends ResourceBinding {
     private final String serviceInterface;
 
-    public ServiceBinding(String serviceClass, String serviceInterface) {
-        setImplName(serviceClass);
+    public ServiceBinding(
+            String resourcePath,
+            String implPackage,
+            String serviceClass,
+            String serviceInterface) {
+        super(resourcePath, implPackage, serviceClass);
 
         this.serviceInterface = serviceInterface;
     }

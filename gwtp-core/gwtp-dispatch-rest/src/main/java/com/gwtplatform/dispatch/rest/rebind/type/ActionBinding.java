@@ -16,12 +16,24 @@
 
 package com.gwtplatform.dispatch.rest.rebind.type;
 
-public class ActionBinding extends ClassBinding {
+import java.util.List;
+
+import com.google.gwt.core.ext.typeinfo.JParameter;
+
+public class ActionBinding extends ResourceBinding {
     private final String methodName;
     private final String resultClass;
 
-    public ActionBinding(String actionClass, String methodName, String resultClass) {
-        setImplName(actionClass);
+    public ActionBinding(
+            String resourcePath,
+            String implPackage,
+            String actionClass,
+            String methodName,
+            String resultClass,
+            List<JParameter> parameters) {
+        super(resourcePath, implPackage, actionClass);
+
+        setCtorParameters(parameters);
 
         this.methodName = methodName;
         this.resultClass = resultClass;

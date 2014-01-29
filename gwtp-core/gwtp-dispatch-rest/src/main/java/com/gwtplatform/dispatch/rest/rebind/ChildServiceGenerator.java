@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import javax.ws.rs.Path;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -45,32 +44,32 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
     private final JMethod serviceMethod;
     private final ServiceBinding parent;
     private final JClassType service;
+    private final String path;
 
     private ServiceBinding serviceBinding;
-    private String path;
 
     @Inject
-    ChildServiceGenerator(TypeOracle typeOracle,
-                          Logger logger,
-                          Provider<VelocityContext> velocityContextProvider,
-                          VelocityEngine velocityEngine,
-                          GeneratorUtil generatorUtil,
-                          GeneratorFactory generatorFactory,
-                          ServiceDefinitions serviceDefinitions,
-                          @Assisted JMethod serviceMethod,
-                          @Assisted ServiceBinding parent) {
+    ChildServiceGenerator(
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            GeneratorFactory generatorFactory,
+            ServiceDefinitions serviceDefinitions,
+            @Assisted JMethod serviceMethod,
+            @Assisted ServiceBinding parent) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil, serviceDefinitions,
                 generatorFactory, serviceMethod.getReturnType().isInterface());
 
         this.serviceMethod = serviceMethod;
         this.parent = parent;
         this.parameters = Lists.newArrayList(parent.getCtorParameters());
+        path = concatenatePath(parent.getResourcePath(), extractPath(serviceMethod));
         service = serviceMethod.getReturnType().isInterface();
     }
 
-    public ServiceBinding generate(String baseRestPath) throws UnableToCompleteException {
-        parseBaseRestPath(baseRestPath);
-
+    public ServiceBinding generate() throws UnableToCompleteException {
         String implName = getSuperTypeName() + SUFFIX;
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
@@ -84,16 +83,12 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
     }
 
     @Override
-    protected String getPath() {
-        return path;
-    }
-
-    @Override
     protected ServiceBinding getServiceBinding() {
         if (serviceBinding == null) {
-            serviceBinding = new ChildServiceBinding(getSuperTypeName() + SUFFIX, service.getName(),
+            String implName = getSuperTypeName() + SUFFIX;
+
+            serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service.getName(),
                     serviceMethod.getName(), parameters);
-            serviceBinding.setImplPackage(getPackage());
             serviceBinding.setSuperTypeName(getSuperTypeName());
         }
 
@@ -105,14 +100,6 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         super.populateVelocityContext(velocityContext);
 
         velocityContext.put("ctorParams", parameters);
-    }
-
-    private void parseBaseRestPath(String basePath) {
-        if (serviceMethod.isAnnotationPresent(Path.class)) {
-            path = concatenatePath(basePath, serviceMethod.getAnnotation(Path.class).value());
-        } else {
-            path = basePath;
-        }
     }
 
     private String getSuperTypeName() {
