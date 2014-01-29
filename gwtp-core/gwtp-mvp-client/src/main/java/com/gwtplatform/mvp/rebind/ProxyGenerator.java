@@ -27,11 +27,8 @@ import com.google.gwt.core.ext.typeinfo.JPackage;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.gwtplatform.mvp.rebind.velocity.VersionInspector;
 
-/**
- * @author Philippe Beaudoin
- * @author Olivier Monaco
- */
 public class ProxyGenerator extends Generator {
 
     private ClassCollection classCollection;
@@ -42,6 +39,7 @@ public class ProxyGenerator extends Generator {
     @Override
     public String generate(TreeLogger logger, GeneratorContext ctx,
             String requestedClass) throws UnableToCompleteException {
+        VersionInspector.checkVersion(logger);
 
         // Initialize dependencies
         TypeOracle oracle = ctx.getTypeOracle();

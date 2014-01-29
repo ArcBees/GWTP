@@ -51,6 +51,8 @@ public class ProviderBundleGenerator extends AbstractGenerator {
         setTreeLogger(treeLogger);
         setPropertyOracle(generatorContext.getPropertyOracle());
 
+        checkLatestVersion();
+
         PrintWriter printWriter;
         printWriter = tryCreatePrintWriter(generatorContext);
 
