@@ -37,7 +37,7 @@ import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.resources.CarMessages;
-import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
@@ -68,7 +68,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     public interface MyProxy extends ProxyPlace<CarPresenter> {
     }
 
-    private final CarService carService;
+    private final CarsService carsService;
     private final ManufacturerService manufacturerService;
     private final CarMessages messages;
     private final RestDispatch dispatcher;
@@ -81,7 +81,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     public CarPresenter(EventBus eventBus,
                         MyView view,
                         RestDispatch dispatcher,
-                        CarService carService,
+                        CarsService carsService,
                         ManufacturerService manufacturerService,
                         PlaceManager placeManager,
                         CarProxyFactory carProxyFactory,
@@ -91,7 +91,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
         super(eventBus, view, proxy);
 
         this.dispatcher = dispatcher;
-        this.carService = carService;
+        this.carsService = carsService;
         this.manufacturerService = manufacturerService;
         this.messages = messages;
         this.placeManager = placeManager;
@@ -128,7 +128,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     public void onSave(final CarDto carDto) {
-        dispatcher.execute(carService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<CarDto>(this) {
+        dispatcher.execute(carsService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<CarDto>(this) {
             @Override
             public void onSuccess(CarDto newCar) {
                 onCarSaved(carDto, newCar);
@@ -210,7 +210,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     private void onDeleteCar() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + carDto.getModel() + "?");
         if (confirm) {
-            dispatcher.execute(carService.delete(carDto.getId()), new ErrorHandlerAsyncCallback<Void>(this) {
+            dispatcher.execute(carsService.car(carDto.getId()).delete(), new ErrorHandlerAsyncCallback<Void>(this) {
                 @Override
                 public void onSuccess(Void nothing) {
                     NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);

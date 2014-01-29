@@ -39,7 +39,7 @@ import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
 
-@Path(ResourcesPath.CAR)
+@Path(ResourcesPath.CARS)
 @Produces(MediaType.APPLICATION_JSON)
 public class CarResource {
     private static final String DEFAULT_LIMIT = "1000";

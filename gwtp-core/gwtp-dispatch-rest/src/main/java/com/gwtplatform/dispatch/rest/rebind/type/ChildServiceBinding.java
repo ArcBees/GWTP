@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,27 +20,20 @@ import java.util.List;
 
 import com.google.gwt.core.ext.typeinfo.JParameter;
 
-public class ActionBinding extends ResourceBinding {
+public class ChildServiceBinding extends ServiceBinding {
     private final String methodName;
-    private final String resultClass;
 
-    public ActionBinding(
-            String resourcePath,
-            String implPackage,
-            String actionClass,
-            String methodName,
-            String resultClass,
-            List<JParameter> parameters) {
-        super(resourcePath, implPackage, actionClass);
+    public ChildServiceBinding(String resourcePath,
+                               String implPackage,
+                               String serviceClass,
+                               String serviceInterface,
+                               String methodName,
+                               List<JParameter> parameters) {
+        super(resourcePath, implPackage, serviceClass, serviceInterface);
 
         setCtorParameters(parameters);
 
         this.methodName = methodName;
-        this.resultClass = resultClass;
-    }
-
-    public String getResultClass() {
-        return resultClass;
     }
 
     public String getMethodName() {

@@ -31,11 +31,11 @@ import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.application.cars.CarsPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.CarPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory;
-import com.gwtplatform.carstore.client.application.testutils.CarServiceImpl;
+import com.gwtplatform.carstore.client.application.testutils.CarsServiceImpl;
 import com.gwtplatform.carstore.client.application.testutils.PresenterTestModule;
 import com.gwtplatform.carstore.client.application.testutils.PresenterWidgetTestBase;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -53,7 +53,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
         @Override
         protected void configurePresenterTest() {
             forceMock(CarProxyFactory.class);
-            bind(CarService.class).to(CarServiceImpl.class).in(TestSingleton.class);
+            bind(CarsService.class).to(CarsServiceImpl.class).in(TestSingleton.class);
         }
     }
 

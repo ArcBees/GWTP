@@ -1,20 +1,49 @@
-package ${package};
+package $package;
 
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import ${serviceInterface.qualifiedSourceName};
+import $serviceInterface.qualifiedSourceName;
+#importResources($serviceBindings)
+#importResources($actionBindings)
 
-public class ${implName} implements ${serviceInterface.name} {
-#foreach ($action in ${actionBindings})
-#set($paramsDef = "")
-#set($paramsValues = "")
-#foreach ($param in ${action.getParameters()})
-#set($paramsDef = "${paramsDef}${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded(${action.getParameters()})")
-#set($paramsValues = "${paramsValues}${param.name}#commaIfNeeded(${action.getParameters()})")
+public class $implName implements $serviceInterface.name {
+#set($argumentsFromService = "")
+#set($ctorDef = "")
+#set($ctorAssignments = "")
+#foreach ($param in $ctorParams)
+    #set($argumentsFromService = "$argumentsFromService$param.name#commaIfNeeded($ctorParams)")
+    #set($ctorDef = "$ctorDef
+            $param.type.getParameterizedQualifiedSourceName() $param.name#commaIfNeeded($ctorParams)")
+    #set($ctorAssignments = "$ctorAssignments
+        this.$param.name = $param.name;")
+    private final $param.type.getParameterizedQualifiedSourceName() $param.name;
 #end
-    @Override
-    public RestAction<${action.resultClass}> ${action.methodName}($paramsDef) {
-        return new ${action.actionClass}(${paramsValues});
+
+    public ${implName}($ctorDef) {$ctorAssignments
     }
+
+#foreach ($action in $actionBindings)
+    #set($methodParams = $action.getCtorParameters())
+    #set($methodParams = $methodParams.subList($ctorParams.size(), $methodParams.size()))
+    #set($methodSignature = "#generateMethodSignatureFromParameters($methodParams)")
+    #set($actionArguments = "#generateArgumentsFromParameters($action.ctorParameters)")
+    @Override
+    public RestAction<$action.resultClass> ${action.methodName}($methodSignature) {
+        return new ${action.implName}($actionArguments);
+    }
+
+#end
+#foreach ($service in $serviceBindings)
+    #set($methodParams = $service.getCtorParameters())
+    #set($methodParams = $methodParams.subList($ctorParams.size(), $methodParams.size()))
+    #set($methodSignature = "#generateMethodSignatureFromParameters($methodParams)")
+    #set($serviceArguments = "#generateArgumentsFromParameters($service.ctorParameters)")
+    @Override
+    public $service.serviceInterface ${service.methodName}($methodSignature) {
+        return new ${service.implName}($serviceArguments);
+    }
+
 #end
 }
+
+
