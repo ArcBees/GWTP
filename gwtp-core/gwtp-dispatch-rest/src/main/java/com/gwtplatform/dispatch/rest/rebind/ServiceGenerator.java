@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import javax.ws.rs.Path;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -37,9 +36,9 @@ import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
 public class ServiceGenerator extends AbstractServiceGenerator {
     private final JClassType service;
+    private final String path;
 
     private ServiceBinding serviceBinding;
-    private String path;
 
     @Inject
     ServiceGenerator(TypeOracle typeOracle,
@@ -54,11 +53,10 @@ public class ServiceGenerator extends AbstractServiceGenerator {
                 generatorFactory, service);
 
         this.service = service;
+        path = extractPath(service);
     }
 
     public ServiceBinding generate() throws UnableToCompleteException {
-        parseBaseRestPath();
-
         String implName = service.getName() + SUFFIX;
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
@@ -72,11 +70,6 @@ public class ServiceGenerator extends AbstractServiceGenerator {
     }
 
     @Override
-    protected String getPath() {
-        return path;
-    }
-
-    @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
         super.populateVelocityContext(velocityContext);
 
@@ -86,8 +79,9 @@ public class ServiceGenerator extends AbstractServiceGenerator {
     @Override
     protected ServiceBinding getServiceBinding() {
         if (serviceBinding == null) {
-            serviceBinding = new ServiceBinding(service.getName() + SUFFIX, service.getName());
-            serviceBinding.setImplPackage(getPackage());
+            String implName = service.getName() + SUFFIX;
+
+            serviceBinding = new ServiceBinding(path, getPackage(), implName, service.getName());
             serviceBinding.setSuperTypeName(service.getName());
         }
 
@@ -98,13 +92,5 @@ public class ServiceGenerator extends AbstractServiceGenerator {
         generateMethods();
 
         mergeTemplate(printWriter, TEMPLATE, implName);
-    }
-
-    private void parseBaseRestPath() {
-        if (service.isAnnotationPresent(Path.class)) {
-            path = normalizePath(service.getAnnotation(Path.class).value());
-        } else {
-            path = "";
-        }
     }
 }
