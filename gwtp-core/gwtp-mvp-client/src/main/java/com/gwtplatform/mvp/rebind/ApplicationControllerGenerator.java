@@ -67,6 +67,8 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         setTreeLogger(treeLogger);
         setTypeClass(getType(typeName));
 
+        checkLatestVersion();
+
         PrintWriter printWriter = tryCreatePrintWriter(generatorContext, SUFFIX);
 
         if (printWriter == null) {
