@@ -3,6 +3,8 @@ package $package;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import $serviceInterface.qualifiedSourceName;
+#importResources($serviceBindings)
+#importResources($actionBindings)
 
 public class $implName implements $serviceInterface.name {
 #set($argumentsFromService = "")
@@ -11,10 +13,10 @@ public class $implName implements $serviceInterface.name {
 #foreach ($param in $ctorParams)
     #set($argumentsFromService = "$argumentsFromService$param.name#commaIfNeeded($ctorParams)")
     #set($ctorDef = "$ctorDef
-            $param.type.qualifiedSourceName $param.name#commaIfNeeded($ctorParams)")
+            $param.type.getParameterizedQualifiedSourceName() $param.name#commaIfNeeded($ctorParams)")
     #set($ctorAssignments = "$ctorAssignments
         this.$param.name = $param.name;")
-    private final $param.type.qualifiedSourceName $param.name;
+    private final $param.type.getParameterizedQualifiedSourceName() $param.name;
 #end
 
     public ${implName}($ctorDef) {$ctorAssignments
@@ -43,3 +45,5 @@ public class $implName implements $serviceInterface.name {
 
 #end
 }
+
+
