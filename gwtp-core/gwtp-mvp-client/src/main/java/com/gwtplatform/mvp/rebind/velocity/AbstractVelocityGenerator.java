@@ -40,8 +40,6 @@ public abstract class AbstractVelocityGenerator {
         this.velocityContextProvider = velocityContextProvider;
         this.velocityEngine = velocityEngine;
         this.generatorUtil = generatorUtil;
-
-        VersionInspector.checkVersion(generatorUtil.getLogger().getTreeLogger());
     }
 
     public GeneratorUtil getGeneratorUtil() {
