@@ -74,8 +74,4 @@ public class GeneratorUtil {
 
         return null;
     }
-
-    public Logger getLogger() {
-        return logger;
-    }
 }
