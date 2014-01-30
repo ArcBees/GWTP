@@ -185,7 +185,6 @@ public class VersionInspectorLinker extends Linker {
         // TODO: IntelliJ doesn't seem to create a MANIFEST.MF in debug, so version is null is null from IntellJ
 
         String version = getClass().getPackage().getImplementationVersion();
-        logger.warn(String.valueOf(version));
         return new DefaultArtifactVersion(version);
     }
 
