@@ -51,7 +51,7 @@ public class VersionInspectorLinker extends Linker {
     private static final String GROUP_ID = "com.gwtplatform";
     private static final String ARTIFACT = "gwtp-mvp-client";
     private static final String MAVEN_ARTIFACT_DETAILS =
-            "http://search.maven.org/#artifactdetails%%7C%s%%7C%s%%7C%s%%7Cjar";
+            "http://search.maven.org/#artifactdetails|%s|%s|%s|jar";
     private static final String API_SEARCH = "http://search.maven.org/solrsearch/select?wt=json&q=%s";
     private static final String API_QUERY = "g:\"%s\" AND a:\"%s\"";
     private static final Pattern LATEST_VERSION_PATTERN =
@@ -178,7 +178,7 @@ public class VersionInspectorLinker extends Linker {
         logger.warn("A new version available of %s is available!", ARTIFACT);
         logger.warn("Your version: " + currentVersion);
         logger.warn("Latest version: " + latestVersion);
-        logger.warn("See " + String.format(MAVEN_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion.toString()));
+        logger.warn("See " + MAVEN_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion.toString());
 
         logger.warn(hr);
     }
