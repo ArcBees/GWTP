@@ -6,6 +6,9 @@
     <!-- Inherit shared modules -->
     <inherits name='com.gwtplatform.common.ClientsCommon'/>
 
+    <define-linker name="verifyVersion" class="com.gwtplatform.mvp.rebind.linker.VersionInspectorLinker"/>
+    <add-linker name="verifyVersion"/>
+
     <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
         <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
     </generate-with>
