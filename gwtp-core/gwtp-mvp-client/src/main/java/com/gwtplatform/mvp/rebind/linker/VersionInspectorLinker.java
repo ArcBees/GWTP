@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.rebind.velocity;
+package com.gwtplatform.mvp.rebind.linker;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,12 +30,24 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.maven.artifact.versioning.ArtifactVersion;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+
+import com.google.gwt.core.ext.Linker;
+import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.core.ext.linker.LinkerOrder;
+import com.google.gwt.core.ext.linker.LinkerOrder.Order;
+import com.google.gwt.core.ext.linker.Shardable;
+import com.gwtplatform.mvp.rebind.velocity.Logger;
 
-import static com.google.gwt.core.ext.TreeLogger.Type.INFO;
-import static com.google.gwt.core.ext.TreeLogger.Type.WARN;
+import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
 
-public class VersionInspector {
+@Shardable
+@LinkerOrder(Order.POST)
+public class VersionInspectorLinker extends Linker {
     private static final String GROUP_ID = "com.gwtplatform";
     private static final String ARTIFACT = "gwtp-mvp-client";
     private static final String MAVEN_ARTIFACT_DETAILS =
@@ -47,49 +59,53 @@ public class VersionInspector {
     private static final Pattern RESPONSE_CONTENT_PATTERN =
             Pattern.compile("^[^{]*(\\{.*\\})$");
 
-    private static boolean versionChecked = false;
+    private Logger logger;
 
-    private final TreeLogger logger;
-
-    private VersionInspector(TreeLogger logger) {
-        this.logger = logger;
+    public VersionInspectorLinker() {
     }
 
-    public static void checkVersion(TreeLogger logger) {
-        if (!versionChecked) {
-            versionChecked = true;
-            new VersionInspector(logger).checkLatestVersion();
+    @Override
+    public String getDescription() {
+        return "Verify the availability of a more recent version of GWTP.";
+    }
+
+    @Override
+    public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts, boolean onePermutation)
+            throws UnableToCompleteException {
+        if (!onePermutation) {
+            this.logger = new Logger(logger);
+
+            checkLatestVersion();
         }
+
+        return artifacts;
     }
 
-    public void checkLatestVersion() {
+    private void checkLatestVersion() {
         try {
-            logger.log(INFO, "----- Checking version --------------");
+            logger.debug("----- Checking version --------------");
 
             String json = fetchArtifactJson();
-            String latestVersion = extractLatestVersion(json);
-            String currentVersion = getCurrentVersion();
+            ArtifactVersion latestVersion = extractLatestVersion(json);
+            ArtifactVersion currentVersion = getCurrentVersion();
 
-            logger.log(INFO, "Your version is: " + currentVersion);
-            logger.log(INFO, "Latest version is: " + latestVersion);
-
-            // TODO: Do something more robust (ie: 1.2-SNAPSHOT > 1.1.1, so it should not warn the dev)
-            if (!currentVersion.equals(latestVersion)) {
-                logger.log(WARN, "A new version available of " + ARTIFACT + " is available!");
-                logger.log(WARN, "See " + String.format(MAVEN_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion));
+            if (latestVersion.compareTo(currentVersion) > 0) {
+                warnVersion(latestVersion, currentVersion);
+            } else {
+                logger.debug("You are using the latest version!");
             }
 
-            logger.log(INFO, "----- Checking version: Success -----");
+            logger.debug("----- Checking version: Success -----");
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.log(INFO, "----- Checking version: Failure -----");
+            logger.getTreeLogger().log(DEBUG, "Exception caught", e);
+            logger.debug("----- Checking version: Failure -----");
         }
     }
 
     /**
      * Calls the maven API to retrieve data about a GWTP artifact.
-     * Note: We would use URL.openConnection, but because this code may be used in a GAE environment, this will cause
-     * fallback to the URLFetch Service. Using a socket bypasses this.
+     * Note: We would use URL.openConnection, but because this code may be used in a GAE environment with hosted mode,
+     * this will cause fallback to the URLFetch Service. Using a socket bypasses this.
      *
      * @return The resulting JSON
      */
@@ -98,7 +114,7 @@ public class VersionInspector {
         URL maven = new URL(String.format(API_SEARCH, query));
 
         Socket socket = new Socket(maven.getHost(), 80);
-        String json = "";
+        String json;
 
         try {
             PrintWriter output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
@@ -135,20 +151,35 @@ public class VersionInspector {
         return matcher.group(1);
     }
 
-    private String extractLatestVersion(String json) {
+    private ArtifactVersion extractLatestVersion(String json) {
         Matcher matcher = LATEST_VERSION_PATTERN.matcher(json);
         matcher.find();
 
-        return matcher.group(1);
+        String version = matcher.group(1);
+        return new DefaultArtifactVersion(version);
     }
 
-    private String getCurrentVersion() throws IOException {
+    private ArtifactVersion getCurrentVersion() throws IOException {
         // TODO: Explore feasibility to get it from MANIFEST.MF + getClass().getPackage().getImplementationVersion()
         Properties prop = new Properties();
         InputStream input = getClass().getResourceAsStream("/com/gwtplatform/mvp/gwtp-mvp-client.properties");
         prop.load(input);
         input.close();
 
-        return prop.getProperty("version");
+        String version = prop.getProperty("version");
+        return new DefaultArtifactVersion(version);
+    }
+
+    private void warnVersion(ArtifactVersion latestVersion, ArtifactVersion currentVersion) {
+        String hr = "------------------------------------------------------------";
+
+        logger.warn(hr);
+
+        logger.warn("A new version available of %s is available!", ARTIFACT);
+        logger.warn("Your version: " + currentVersion);
+        logger.warn("Latest version: " + latestVersion);
+        logger.warn("See " + String.format(MAVEN_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion.toString()));
+
+        logger.warn(hr);
     }
 }

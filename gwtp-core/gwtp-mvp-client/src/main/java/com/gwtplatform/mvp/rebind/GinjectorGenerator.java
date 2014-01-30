@@ -75,8 +75,6 @@ public class GinjectorGenerator extends AbstractGenerator {
         setTreeLogger(treeLogger);
         setPropertyOracle(generatorContext.getPropertyOracle());
 
-        checkLatestVersion();
-
         PrintWriter printWriter = tryCreatePrintWriter(generatorContext);
 
         if (printWriter == null) {
