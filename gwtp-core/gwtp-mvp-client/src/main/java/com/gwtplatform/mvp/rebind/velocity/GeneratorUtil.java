@@ -28,6 +28,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.gwtplatform.common.rebind.Logger;
 
 public class GeneratorUtil {
     private static final String CANNOT_FIND_PROPERTY = "Cannot find %s property in your module.gwt.xml file.";
