@@ -50,14 +50,19 @@ import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
 public class VersionInspectorLinker extends Linker {
     private static final String GROUP_ID = "com.gwtplatform";
     private static final String ARTIFACT = "gwtp-mvp-client";
-    private static final String MAVEN_ARTIFACT_DETAILS =
-            "http://search.maven.org/#artifactdetails|%s|%s|%s|jar";
     private static final String API_SEARCH = "http://search.maven.org/solrsearch/select?wt=json&q=%s";
     private static final String API_QUERY = "g:\"%s\" AND a:\"%s\"";
+
     private static final Pattern LATEST_VERSION_PATTERN =
             Pattern.compile("\"latestVersion\":\\s*\"([0-9](?:\\.[0-9])*)\"");
     private static final Pattern RESPONSE_CONTENT_PATTERN =
             Pattern.compile("^[^{]*(\\{.*\\})$");
+
+    private static final String HR = "------------------------------------------------------------";
+    private static final String NEW_VERSION_AVAILABLE = "A new version available of %s is available!";
+    private static final String SEE_ARTIFACT_DETAILS = "See http://search.maven.org/#artifactdetails|%s|%s|%s|jar";
+    private static final String YOUR_VERSION = "Your version: %s";
+    private static final String LATEST_VERSION = "Latest version: %s";
 
     private Logger logger;
 
@@ -171,15 +176,13 @@ public class VersionInspectorLinker extends Linker {
     }
 
     private void warnVersion(ArtifactVersion latestVersion, ArtifactVersion currentVersion) {
-        String hr = "------------------------------------------------------------";
+        logger.warn(HR);
 
-        logger.warn(hr);
+        logger.warn(NEW_VERSION_AVAILABLE, ARTIFACT);
+        logger.warn(YOUR_VERSION, currentVersion);
+        logger.warn(LATEST_VERSION, latestVersion);
+        logger.warn(SEE_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion.toString());
 
-        logger.warn("A new version available of %s is available!", ARTIFACT);
-        logger.warn("Your version: " + currentVersion);
-        logger.warn("Latest version: " + latestVersion);
-        logger.warn("See " + MAVEN_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion.toString());
-
-        logger.warn(hr);
+        logger.warn(HR);
     }
 }
