@@ -32,7 +32,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry;
 import com.gwtplatform.mvp.rebind.velocity.Logger;
 import com.gwtplatform.mvp.rebind.velocity.RebindModule;
-import com.gwtplatform.mvp.rebind.velocity.VersionInspector;
 import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
 
 /**
@@ -42,8 +41,6 @@ public class PlaceTokenRegistryGenerator extends Generator {
     @Override
     public String generate(final TreeLogger treeLogger, GeneratorContext generatorContext, String requestedClass)
             throws UnableToCompleteException {
-        VersionInspector.checkVersion(treeLogger);
-
         Map<String, JClassType> placeTokens = findPlaceTokens(generatorContext);
         checkPlaces(placeTokens);
 

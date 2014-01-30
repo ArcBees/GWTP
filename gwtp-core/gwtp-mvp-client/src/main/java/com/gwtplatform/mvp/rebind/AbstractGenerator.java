@@ -29,7 +29,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.mvp.rebind.velocity.VersionInspector;
 
 /**
  * Base generator.
@@ -126,9 +125,5 @@ public abstract class AbstractGenerator extends Generator {
 
     protected void closeDefinition(SourceWriter sourceWriter) {
         sourceWriter.commit(getTreeLogger());
-    }
-
-    protected void checkLatestVersion() {
-        VersionInspector.checkVersion(getTreeLogger());
     }
 }
