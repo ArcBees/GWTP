@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.rebind.linker;
+package com.gwtplatform.common.rebind;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,7 +26,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Properties;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,10 +38,10 @@ import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.Shardable;
-import com.gwtplatform.mvp.rebind.velocity.Logger;
 
 import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
 
@@ -52,6 +52,8 @@ public class VersionInspectorLinker extends Linker {
     private static final String ARTIFACT = "gwtp-mvp-client";
     private static final String API_SEARCH = "http://search.maven.org/solrsearch/select?wt=json&q=%s";
     private static final String API_QUERY = "g:\"%s\" AND a:\"%s\"";
+
+    private static final String PROPERTY_VERIFY_NEWER_VERSION = "verifyNewerVersion";
 
     private static final Pattern LATEST_VERSION_PATTERN =
             Pattern.compile("\"latestVersion\":\\s*\"([0-9](?:\\.[0-9])*)\"");
@@ -77,13 +79,28 @@ public class VersionInspectorLinker extends Linker {
     @Override
     public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts, boolean onePermutation)
             throws UnableToCompleteException {
-        if (!onePermutation) {
+        if (!onePermutation && canVerifyNewerVersion(context)) {
             this.logger = new Logger(logger);
 
             checkLatestVersion();
         }
 
         return artifacts;
+    }
+
+    private boolean canVerifyNewerVersion(LinkerContext context) {
+        boolean verifyNewerVersion = true;
+
+        for (ConfigurationProperty property : context.getConfigurationProperties()) {
+            if (PROPERTY_VERIFY_NEWER_VERSION.equals(property.getName())) {
+                List<String> values = property.getValues();
+                verifyNewerVersion = !(!values.isEmpty() && "false".equals(values.get(0)));
+
+                break;
+            }
+        }
+
+        return verifyNewerVersion;
     }
 
     private void checkLatestVersion() {
@@ -165,13 +182,10 @@ public class VersionInspectorLinker extends Linker {
     }
 
     private ArtifactVersion getCurrentVersion() throws IOException {
-        // TODO: Explore feasibility to get it from MANIFEST.MF + getClass().getPackage().getImplementationVersion()
-        Properties prop = new Properties();
-        InputStream input = getClass().getResourceAsStream("/com/gwtplatform/mvp/gwtp-mvp-client.properties");
-        prop.load(input);
-        input.close();
+        // TODO: IntelliJ doesn't seem to create a MANIFEST.MF in debug, so version is null is null from IntellJ
 
-        String version = prop.getProperty("version");
+        String version = getClass().getPackage().getImplementationVersion();
+        logger.warn(String.valueOf(version));
         return new DefaultArtifactVersion(version);
     }
 

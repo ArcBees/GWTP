@@ -28,9 +28,9 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.gwtplatform.common.rebind.Logger;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry;
-import com.gwtplatform.mvp.rebind.velocity.Logger;
 import com.gwtplatform.mvp.rebind.velocity.RebindModule;
 import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
 
