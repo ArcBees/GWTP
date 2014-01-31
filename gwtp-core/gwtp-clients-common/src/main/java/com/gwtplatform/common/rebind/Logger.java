@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.rebind.velocity;
+package com.gwtplatform.common.rebind;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
