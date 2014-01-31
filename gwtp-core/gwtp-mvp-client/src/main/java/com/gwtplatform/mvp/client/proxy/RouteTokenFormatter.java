@@ -223,13 +223,14 @@ public class RouteTokenFormatter implements TokenFormatter {
         for (String parameterName : placeRequest.getParameterNames()) {
             String parameterValue = placeRequest.getParameter(parameterName, null);
             if (parameterValue != null) {
+                String encodedParameterValue = urlUtils.encodeQueryString(parameterValue);
+
                 if (placeToken.contains("/{" + parameterName + "}")) {
                     // route parameter
-                    placeToken = placeToken.replace("{" + parameterName + "}", parameterValue);
+                    placeToken = placeToken.replace("{" + parameterName + "}", encodedParameterValue);
                 } else {
                     // query parameter
-                    queryString = queryString + querySeparator + parameterName + "="
-                                  + urlUtils.decodeQueryString(parameterValue);
+                    queryString += querySeparator + parameterName + "=" + encodedParameterValue;
                     querySeparator = "&";
                 }
             }
@@ -292,7 +293,7 @@ public class RouteTokenFormatter implements TokenFormatter {
             for (String keyValuePair : queryString.split("&")) {
                 String[] keyValue = keyValuePair.split("=", 2);
                 if (keyValue.length > 1) {
-                    result.put(keyValue[0], urlUtils.encodeQueryString(keyValue[1]));
+                    result.put(keyValue[0], urlUtils.decodeQueryString(keyValue[1]));
                 } else {
                     result.put(keyValue[0], "");
                 }
