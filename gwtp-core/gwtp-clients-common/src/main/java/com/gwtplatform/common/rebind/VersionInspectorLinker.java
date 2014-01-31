@@ -182,8 +182,6 @@ public class VersionInspectorLinker extends Linker {
     }
 
     private ArtifactVersion getCurrentVersion() throws IOException {
-        // TODO: IntelliJ doesn't seem to create a MANIFEST.MF in debug, so version is null is null from IntellJ
-
         String version = getClass().getPackage().getImplementationVersion();
         return new DefaultArtifactVersion(version);
     }
