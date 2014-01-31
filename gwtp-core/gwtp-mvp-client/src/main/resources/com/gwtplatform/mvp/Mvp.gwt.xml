@@ -50,7 +50,6 @@
 
     <!-- Generate the place token index -->
     <generate-with class="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator">
-        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry" />
+        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry"/>
     </generate-with>
-
 </module>
