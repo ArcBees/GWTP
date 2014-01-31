@@ -28,46 +28,37 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
 
 /**
  * Implementation of {@link TokenFormatter} with support for route like place names.
- * <p/>
  * <p>
  * Instead of wiring a hierarchy of several places bound to multiple presenters this implements a flat structure where
  * every history token is bound to a single presenter.
  * </p>
- * <p/>
  * <p>
  * Usage:
  * </p>
- * <p/>
  * <p>
  * Replace the default binding to {@link ParameterTokenFormatter} with {@link RouteTokenFormatter}. In case you use
  * GWTPs {@link DefaultModule}:
  * </p>
- * <p/>
  * <pre>
  * install(new DefaultModule(DefaultPlaceManager.class, RouteTokenFormatter.class));
  * </pre>
- * <p/>
  * <p>
  * Now all @NameToken's are treated as routes. Routes are expected to start with an '/' and can contain path parameters
  * as well as query parameters.
  * </p>
- * <p/>
  * <pre>
  *
  * @NameToken("/user/{userId}/privacy") // Token for PrivacyPresenter
  * @NameToken("/user/{userId}/privacy/profile") // Token for PrivacyProfilePresenter
  * @NameToken("/user/{userId}/privacy/photos") // Token for PrivacyPhotosPresenter
  * </pre>
- * <p/>
  * <p>
  * Static-parts of an route tie stronger than parameter-parts. This way following works:
  * </p>
- * <p/>
  * <pre>
  * @NameToken("/{vanityId}") // Token for VanityUrlPresenter
  * @NameToken("/privacy") // Token for PrivacyPresenter
  * </pre>
- * <p/>
  * <p>
  * Note: For the moment this is implemented on top of the hierarchical-place API to not an big structural changes prior
  * 1.0 release.
