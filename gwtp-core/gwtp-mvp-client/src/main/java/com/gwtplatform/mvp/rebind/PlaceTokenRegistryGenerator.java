@@ -77,9 +77,9 @@ public class PlaceTokenRegistryGenerator extends Generator {
      */
     private static void checkPlaces(final Map<String, JClassType> placeTokens) {
         for (Map.Entry<String, JClassType> entry : placeTokens.entrySet()) {
-            if (!entry.getKey().startsWith("/")) {
+            if (!entry.getKey().startsWith("/") && !entry.getKey().startsWith("!/")) {
                 throw new InvocationException("The token '" + entry.getKey() + "' of '"
-                        + entry.getValue().getQualifiedSourceName() + "' should start with a '/'!");
+                        + entry.getValue().getQualifiedSourceName() + "' should start with a '/' or '!/'!");
             }
         }
     }
