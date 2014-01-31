@@ -68,7 +68,7 @@ public class RouteTokenFormatterTest {
             return ImmutableSet.<String>builder().add("/user/{userId}/groups/{groupId}")
                     .add("/user/{userId}/albums/{albumId}").add("/user/{userId}/albums/staticAlbumId")
                     .add("/user/staticUserId/albums/{albumId}").add("/user/staticUserId/albums/staticAlbumId")
-                    .add("/{vanityId}").add("/privacy").add("/").build();
+                    .add("/{vanityId}").add("!/crawl/{vanityId}").add("/privacy").add("/").build();
         }
     }
 
@@ -157,6 +157,8 @@ public class RouteTokenFormatterTest {
         PlaceRequest placeRequest07 = tokenFormatter.toPlaceRequest("/user/0x42/albums/0xAFFE?start=0");
         PlaceRequest placeRequest08 = tokenFormatter.toPlaceRequest("/vanity?a=valueA&b=valueB");
         PlaceRequest placeRequest09 = tokenFormatter.toPlaceRequest("vanity?a=valueA&b=valueB");
+        PlaceRequest placeRequest10 = tokenFormatter.toPlaceRequest("!/crawl/vanity");
+        PlaceRequest placeRequest11 = tokenFormatter.toPlaceRequest("!/crawl/vanity?a=valueA&b=valueB");
 
         // Then
         assertEquals("/user/{userId}/albums/{albumId}", placeRequest01.getNameToken());
@@ -199,6 +201,16 @@ public class RouteTokenFormatterTest {
         assertEquals("vanity", placeRequest09.getParameter("vanityId", null));
         assertEquals("valueA", placeRequest09.getParameter("a", null));
         assertEquals("valueB", placeRequest09.getParameter("b", null));
+
+        assertEquals("!/crawl/{vanityId}", placeRequest10.getNameToken());
+        assertEquals(1, placeRequest10.getParameterNames().size());
+        assertEquals("vanity", placeRequest10.getParameter("vanityId", null));
+
+        assertEquals("!/crawl/{vanityId}", placeRequest11.getNameToken());
+        assertEquals(3, placeRequest11.getParameterNames().size());
+        assertEquals("vanity", placeRequest10.getParameter("vanityId", null));
+        assertEquals("valueA", placeRequest11.getParameter("a", null));
+        assertEquals("valueB", placeRequest11.getParameter("b", null));
     }
 
     @Test
