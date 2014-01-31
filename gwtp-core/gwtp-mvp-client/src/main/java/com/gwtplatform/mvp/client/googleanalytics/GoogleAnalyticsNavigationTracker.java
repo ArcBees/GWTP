@@ -37,8 +37,6 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  * bindConstant().annotatedWith(GaAccount.class).to("UA-12345678-1");</code>
  * <p/>
  * If you want to log custom events, see {@link GoogleAnalytics}.
- *
- * @author Christian Goudreau
  */
 public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
     private final String gaAccount;
@@ -47,11 +45,10 @@ public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
     private final GoogleAnalytics analytics;
 
     @Inject
-    GoogleAnalyticsNavigationTracker(
-            @GaAccount String gaAccount,
-            PlaceManager placeManager,
-            EventBus eventBus,
-            GoogleAnalytics analytics) {
+    GoogleAnalyticsNavigationTracker(@GaAccount String gaAccount,
+                                     PlaceManager placeManager,
+                                     EventBus eventBus,
+                                     GoogleAnalytics analytics) {
         this.gaAccount = gaAccount;
         this.placeManager = placeManager;
         this.eventBus = eventBus;
