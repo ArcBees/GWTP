@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.googleanalytics;
 
 import javax.inject.Inject;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.web.bindery.event.shared.EventBus;
@@ -54,14 +53,12 @@ public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
         this.eventBus = eventBus;
         this.analytics = analytics;
 
-        if (GWT.isScript()) {
-            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                @Override
-                public void execute() {
-                    init();
-                }
-            });
-        }
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                init();
+            }
+        });
     }
 
     private void init() {
