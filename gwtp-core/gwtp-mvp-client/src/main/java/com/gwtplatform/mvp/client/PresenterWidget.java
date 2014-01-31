@@ -105,6 +105,11 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  */
 public abstract class PresenterWidget<V extends View> extends
         HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
+
+    public interface FinishCallback {
+        void onFinish(Bundle bundle);
+    }
+
     private static class HandlerInformation<H extends EventHandler> {
         private Type<H> type;
         private H eventHandler;
@@ -117,6 +122,9 @@ public abstract class PresenterWidget<V extends View> extends
 
     private final EventBus eventBus;
     private final V view;
+
+    private FinishCallback finishCallback;
+    private Bundle bundle;
 
     boolean visible;
 
@@ -337,6 +345,17 @@ public abstract class PresenterWidget<V extends View> extends
         getView().removeFromSlot(slot, content);
     }
 
+    /**
+     * Registers the FinishCallback that must be executed when Presenter's
+     * {@link #finish()} is called. This method is used by Proxy when revealing
+     * a place. Usually, this is used when another Presenter wants to execute
+     * some logic after the current Presenter finishes its cycle of use.
+     * @param finishCallback    callback to be executed on {@link #finish}
+     */
+    public void setFinishCallback(FinishCallback finishCallback) {
+        this.finishCallback = finishCallback;
+    }
+
     // TODO This should be final but needs to be overriden in {@link
     // TabContainerPresenter}
     // We should be able to do this once we switch to an event-based mechanism for
@@ -459,6 +478,14 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     /**
+     * Get some data from current Bundle.
+     * @param key   String key
+     */
+    protected void getFromBundle(String key) {
+        ensureBundle().get(key);
+    }
+
+    /**
      * Lifecycle method called whenever this presenter is about to be
      * hidden.
      * <p/>
@@ -520,6 +547,39 @@ public abstract class PresenterWidget<V extends View> extends
      * parent presenters, then on the children.
      */
     protected void onReveal() {
+    }
+
+    /**
+     * Called immediately after {@link #finish()} is triggered.
+     * <p/>
+     * You should override this method to perform any common logic that must be
+     * executed before current {@link FinishCallback} is called.
+     */
+    protected void preFinish() {
+    }
+
+    /**
+     * Put some data associated with the given key into current {@link Bundle}.
+     * The Bundle will be passed to the current {@link FinishCallback} if there's
+     * one registered in the current use cycle.
+     * @param key
+     * @param value
+     */
+    protected void putInBundle(String key, Object value) {
+        ensureBundle().put(key, value);
+    }
+
+    /**
+     * Lifecycle method that could optionally be called when the Presenter hides.
+     */
+    protected final void finish() {
+        preFinish();
+        if (finishCallback != null) {
+            finishCallback.onFinish(ensureBundle());
+            finishCallback = null;
+        }
+        getView().finish();
+        bundle = null;
     }
 
     /**
@@ -674,5 +734,9 @@ public abstract class PresenterWidget<V extends View> extends
         }
 
         visibleHandlerRegistrations.clear();
+    }
+
+    private Bundle ensureBundle() {
+        return bundle = bundle == null ? new Bundle() : bundle;
     }
 }

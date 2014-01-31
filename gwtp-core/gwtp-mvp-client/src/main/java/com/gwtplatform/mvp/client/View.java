@@ -71,4 +71,10 @@ public interface View extends IsWidget {
      *                clear the slot entirely.
      */
     void setInSlot(Object slot, IsWidget content);
+
+    /**
+     * Finishes current view's presentation.
+     * Usually this method will hide or dispose current view.
+     */
+    void finish();
 }

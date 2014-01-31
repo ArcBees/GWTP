@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -49,6 +50,11 @@ public abstract class ViewImpl implements View {
     @Override
     public Widget asWidget() {
         return widget;
+    }
+
+    @Override
+    public void finish() {
+        History.back();
     }
 
     protected void initWidget(Widget widget) {
