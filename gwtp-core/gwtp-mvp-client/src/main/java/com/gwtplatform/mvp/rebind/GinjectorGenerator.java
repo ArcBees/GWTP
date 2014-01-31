@@ -35,6 +35,7 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.common.rebind.Logger;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
@@ -43,7 +44,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors;
-import com.gwtplatform.mvp.rebind.velocity.Logger;
 import com.gwtplatform.mvp.rebind.velocity.RebindModule;
 
 /**

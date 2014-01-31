@@ -29,6 +29,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
+import com.gwtplatform.common.rebind.Logger;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory;
 import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
 
