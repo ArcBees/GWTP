@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,27 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.client;
+
+import com.google.gwt.http.client.URL;
+import com.gwtplatform.mvp.shared.proxy.UrlUtils;
 
 /**
- * @author Philippe Beaudoin
+ * Helper implementation which wraps calls to code which require a running GWT environment and make testing slow.
  */
-public final class TokenFormatException extends RuntimeException {
-    private static final long serialVersionUID = 3707135366220900675L;
-
-    public TokenFormatException() {
+public class ClientUrlUtils implements UrlUtils {
+    public String decodeQueryString(String encodedUrlComponent) {
+        return URL.decodeQueryString(encodedUrlComponent);
     }
 
-    public TokenFormatException(String message) {
-        super(message);
+    public String encodeQueryString(String decodedUrlComponent) {
+        return URL.encodeQueryString(decodedUrlComponent);
     }
-
-    public TokenFormatException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public TokenFormatException(Throwable cause) {
-        super(cause);
-    }
-
 }

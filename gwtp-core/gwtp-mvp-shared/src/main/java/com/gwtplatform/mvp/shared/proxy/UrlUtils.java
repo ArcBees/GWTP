@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,19 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.mvp.shared.proxy;
 
-import com.google.gwt.event.shared.HasHandlers;
+public interface UrlUtils {
+    public String decodeQueryString(String encodedUrlComponent);
 
-/**
- * Marker interface that tell that an object is bound to an
- * {@link com.google.web.bindery.event.shared.EventBus}. Objects implementing this type
- * can be used as a source when firing an event on the event bus.
- * <p/>
- * {@link Deprecated} use directly {@link HasHandlers} instead.
- *
- * @author Christian Goudreau
- */
-@Deprecated
-public interface HasEventBus extends HasHandlers {
+    public String encodeQueryString(String decodedUrlComponent);
 }

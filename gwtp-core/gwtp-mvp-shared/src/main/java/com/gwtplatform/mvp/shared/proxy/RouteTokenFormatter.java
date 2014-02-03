@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,9 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import com.google.gwt.http.client.URL;
-import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.gin.DefaultModule;
+import javax.inject.Inject;
 
 /**
  * Implementation of {@link TokenFormatter} with support for route like place names.
@@ -37,7 +35,7 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
  * </p>
  * <p>
  * Replace the default binding to {@link ParameterTokenFormatter} with {@link RouteTokenFormatter}. In case you use
- * GWTPs {@link DefaultModule}:
+ * GWTPs {@link com.gwtplatform.mvp.client.gin.DefaultModule DefaultModule}:
  * </p>
  * <pre>
  * install(new DefaultModule(DefaultPlaceManager.class, RouteTokenFormatter.class));
@@ -47,17 +45,16 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
  * as well as query parameters.
  * </p>
  * <pre>
- *
- * @NameToken("/user/{userId}/privacy") // Token for PrivacyPresenter
- * @NameToken("/user/{userId}/privacy/profile") // Token for PrivacyProfilePresenter
- * @NameToken("/user/{userId}/privacy/photos") // Token for PrivacyPhotosPresenter
+ * {@code @NameToken("/user/{userId}/privacy") // Token for PrivacyPresenter}
+ * {@code @NameToken("/user/{userId}/privacy/profile") // Token for PrivacyProfilePresenter}
+ * {@code @NameToken("/user/{userId}/privacy/photos") // Token for PrivacyPhotosPresenter}
  * </pre>
  * <p>
  * Static-parts of an route tie stronger than parameter-parts. This way following works:
  * </p>
  * <pre>
- * @NameToken("/{vanityId}") // Token for VanityUrlPresenter
- * @NameToken("/privacy") // Token for PrivacyPresenter
+ * {@code @NameToken("/{vanityId}") // Token for VanityUrlPresenter}
+ * {@code @NameToken("/privacy") // Token for PrivacyPresenter}
  * </pre>
  * <p>
  * Note: For the moment this is implemented on top of the hierarchical-place API to not an big structural changes prior
@@ -65,19 +62,6 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
  * </p>
  */
 public class RouteTokenFormatter implements TokenFormatter {
-    /**
-     * Helper class which wraps calls to code which require a running GWT environment and make testing slow.
-     */
-    static class UrlUtils {
-        public String decodeQueryString(String encodedUrlComponent) {
-            return URL.decodeQueryString(encodedUrlComponent);
-        }
-
-        public String encodeQueryString(String decodedUrlComponent) {
-            return URL.encodeQueryString(decodedUrlComponent);
-        }
-    }
-
     /**
      * Helper class to store matches to routes in {@link #toPlaceRequest(String)}.
      */

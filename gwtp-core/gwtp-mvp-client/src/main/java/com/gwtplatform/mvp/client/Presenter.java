@@ -19,13 +19,13 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * A singleton presenter, the basic building block of the
@@ -70,10 +70,10 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
  * you can simply navigate to an hyperlink corresponding to this place's name token. The
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} offers a number of method for building
  * such hyperlinks. If you want to reveal it programatically, you should build a
- * {@link com.gwtplatform.mvp.client.proxy.PlaceRequest PlaceRequest} and call one of the
+ * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest PlaceRequest} and call one of the
  * following method:
  * <ul>
- * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealPlace(com.gwtplatform.mvp.client.proxy.PlaceRequest)
+ * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest)
  * PlaceManager.revealPlace(PlaceRequest)}</li>
  * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealRelativePlace(com.gwtplatform.mvp.client.proxy
  * .PlaceRequest) PlaceManager.revealRelativePlace(PlaceRequest)}</li>

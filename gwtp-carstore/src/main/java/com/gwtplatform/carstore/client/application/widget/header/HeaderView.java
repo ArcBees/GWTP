@@ -37,7 +37,7 @@ import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements HeaderPresenter.MyView {
     interface Binder extends UiBinder<Widget, HeaderView> {
