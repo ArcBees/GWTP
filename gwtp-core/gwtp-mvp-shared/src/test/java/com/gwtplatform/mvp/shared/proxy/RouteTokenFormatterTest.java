@@ -64,11 +64,17 @@ public class RouteTokenFormatterTest {
     static class PlaceTokenRegistryTestImpl implements PlaceTokenRegistry {
         @Override
         public Set<String> getAllPlaceTokens() {
-            return ImmutableSet.<String>builder().add("/user/{userId}/groups/{groupId}")
-                               .add("/user/{userId}/albums/{albumId}").add("/user/{userId}/albums/staticAlbumId")
-                               .add("/user/staticUserId/albums/{albumId}").add(
-                            "/user/staticUserId/albums/staticAlbumId")
-                               .add("/{vanityId}").add("!/crawl/{vanityId}").add("/privacy").add("/").build();
+            return ImmutableSet.<String>builder()
+                               .add("/user/{userId}/groups/{groupId}")
+                               .add("/user/{userId}/albums/{albumId}")
+                               .add("/user/{userId}/albums/staticAlbumId")
+                               .add("/user/staticUserId/albums/{albumId}")
+                               .add("/user/staticUserId/albums/staticAlbumId")
+                               .add("/{vanityId}")
+                               .add("!/crawl/{vanityId}")
+                               .add("/privacy")
+                               .add("/")
+                               .build();
         }
     }
 
@@ -78,8 +84,11 @@ public class RouteTokenFormatterTest {
     @Test
     public void testToPlaceTokenWithoutQueryString() {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("/user/{userId}/albums/{albumId}")
-                                                              .with("userId", "0x42").with("albumId", "0xAFFE").build();
+        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                .nameToken("/user/{userId}/albums/{albumId}")
+                .with("userId", "0x42")
+                .with("albumId", "0xAFFE")
+                .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE$";
         Map<String, String> expectedQueryParameters = null;
 
@@ -96,9 +105,12 @@ public class RouteTokenFormatterTest {
     @Test
     public void testToPlaceTokenWithOneQueryStringParameter() {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("/user/{userId}/albums/{albumId}")
-                                                              .with("userId", "0x42").with("albumId", "0xAFFE").with(
-                        "start", "0").build();
+        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                .nameToken("/user/{userId}/albums/{albumId}")
+                .with("userId", "0x42")
+                .with("albumId", "0xAFFE")
+                .with("start", "0")
+                .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE\\?\\w*=\\d*$";
         Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder().put("start", "0").build();
 
@@ -115,9 +127,13 @@ public class RouteTokenFormatterTest {
     @Test
     public void testToPlaceTokenWithSeveralQueryStringParameter() {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("/user/{userId}/albums/{albumId}")
-                                                              .with("userId", "0x42").with("albumId", "0xAFFE").with(
-                        "start", "15").with("limit", "20").build();
+        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                .nameToken("/user/{userId}/albums/{albumId}")
+                .with("userId", "0x42")
+                .with("albumId", "0xAFFE")
+                .with("start", "15")
+                .with("limit", "20")
+                .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE\\?\\w*=\\d*&\\w*=\\d*$";
         Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder().put("start", "15")
                                                                   .put("limit", "20").build();
