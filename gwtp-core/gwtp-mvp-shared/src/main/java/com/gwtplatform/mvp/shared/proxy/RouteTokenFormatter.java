@@ -182,9 +182,8 @@ public class RouteTokenFormatter implements TokenFormatter {
     private final PlaceTokenRegistry allRegisteredPlaceTokens;
 
     @Inject
-    RouteTokenFormatter(
-            UrlUtils urlUtils,
-            PlaceTokenRegistry tokenRegistry) {
+    RouteTokenFormatter(UrlUtils urlUtils,
+                        PlaceTokenRegistry tokenRegistry) {
         this.urlUtils = urlUtils;
         this.allRegisteredPlaceTokens = tokenRegistry;
     }
