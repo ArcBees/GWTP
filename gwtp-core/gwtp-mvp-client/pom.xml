@@ -42,6 +42,10 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-clients-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-mvp-shared</artifactId>
         </dependency>
         <dependency>
