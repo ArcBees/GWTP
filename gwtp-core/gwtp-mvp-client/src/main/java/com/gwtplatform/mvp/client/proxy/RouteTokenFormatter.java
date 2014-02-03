@@ -104,10 +104,9 @@ public class RouteTokenFormatter implements TokenFormatter {
          * @param staticMatches Number of static matches in this route.
          * @param parameters    Parsed parameters of this route.
          */
-        RouteMatch(
-                String route,
-                int staticMatches,
-                Map<String, String> parameters) {
+        RouteMatch(String route,
+                   int staticMatches,
+                   Map<String, String> parameters) {
             this.route = route;
             this.staticMatches = staticMatches;
             this.parameters = parameters;
