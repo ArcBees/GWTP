@@ -62,7 +62,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     DefaultRestRequestBuilderFactory(ActionMetadataProvider metadataProvider,
                                      Serialization serialization,
                                      @RestApplicationPath String baseUrl,
-                                     @XCSRFHeaderName String securityHeaderName) {
+                                     @XSRFHeaderName String securityHeaderName) {
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
         this.baseUrl = baseUrl;

@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
-import com.gwtplatform.dispatch.rest.client.XCSRFHeaderName;
+import com.gwtplatform.dispatch.rest.client.XSRFHeaderName;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
@@ -46,7 +46,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
      * <p/>
      * The possible configurations are:
      * <ul>
-     * <li>A {@link XCSRFHeaderName}. The default value is {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
+     * <li>A {@link com.gwtplatform.dispatch.rest.client.XSRFHeaderName}. The default value is {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
      * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
      * </ul>
      */
@@ -60,8 +60,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
          * @deprecated See {@link #xsrfTokenHeaderName(String)}
          */
         @Deprecated
-        public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
-            this.xsrfTokenHeaderName = xcsrfTokenHeaderName;
+        public Builder xcsrfTokenHeaderName(String xsrfTokenHeaderName) {
+            this.xsrfTokenHeaderName = xsrfTokenHeaderName;
             return this;
         }
 
@@ -115,7 +115,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
-        bindConstant().annotatedWith(XCSRFHeaderName.class).to(xsrfTokenHeaderName);
+        bindConstant().annotatedWith(XSRFHeaderName.class).to(xsrfTokenHeaderName);
 
         bind(Serialization.class).to(serializationClass);
 
