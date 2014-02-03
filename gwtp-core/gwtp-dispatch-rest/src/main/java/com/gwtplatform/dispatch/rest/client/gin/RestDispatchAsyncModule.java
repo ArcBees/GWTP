@@ -36,10 +36,6 @@ import com.gwtplatform.dispatch.rest.shared.RestDispatch;
  * </p>
  * This gin module provides provides access to the {@link RestDispatch} singleton, which is used to make calls to the
  * server over HTTP. This module requires:
- * <ul>
- * <li>A {@link XCSRFHeaderName}. The default value is {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.</li>
- * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
- * </ul>
  * <p/>
  * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath} to point
  * to your server API root path.
@@ -48,21 +44,35 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
      * A {@link RestDispatchAsyncModule} builder.
      * <p/>
-     * By default, this builder configures the {@link XCSRFHeaderName} value to
-     * {@link RestDispatchAsyncModule#DEFAULT_X_CSRF_NAME}.
+     * The possible configurations are:
+     * <ul>
+     * <li>A {@link XCSRFHeaderName}. The default value is {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
+     * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
+     * </ul>
      */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        private String xcsrfTokenHeaderName = DEFAULT_X_CSRF_NAME;
+        private String xsrfTokenHeaderName = DEFAULT_XSRF_NAME;
         private Class<? extends Serialization> serializationClass = JsonSerialization.class;
 
         /**
-         * Specify the X-CSRF header name.
+         * Specify the XSRF token header name.
          *
-         * @param xcsrfTokenHeaderName The X-CSRF header name.
+         * @deprecated See {@link #xsrfTokenHeaderName(String)}
+         */
+        @Deprecated
+        public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
+            this.xsrfTokenHeaderName = xcsrfTokenHeaderName;
+            return this;
+        }
+
+        /**
+         * Specify the XSRF token header name.
+         *
+         * @param xsrfTokenHeaderName The XSRF token header name.
          * @return a {@link Builder} object.
          */
-        public Builder xcsrfTokenHeaderName(String xcsrfTokenHeaderName) {
-            this.xcsrfTokenHeaderName = xcsrfTokenHeaderName;
+        public Builder xsrfTokenHeaderName(String xsrfTokenHeaderName) {
+            this.xsrfTokenHeaderName = xsrfTokenHeaderName;
             return this;
         }
 
@@ -84,9 +94,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         }
     }
 
-    public static final String DEFAULT_X_CSRF_NAME = "X-CSRF-Token";
+    public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
-    private final String xcsrfTokenHeaderName;
+    private final String xsrfTokenHeaderName;
     private final Class<? extends Serialization> serializationClass;
 
     /**
@@ -99,13 +109,13 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     private RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
-        xcsrfTokenHeaderName = builder.xcsrfTokenHeaderName;
+        xsrfTokenHeaderName = builder.xsrfTokenHeaderName;
         serializationClass = builder.serializationClass;
     }
 
     @Override
     protected void configureDispatch() {
-        bindConstant().annotatedWith(XCSRFHeaderName.class).to(xcsrfTokenHeaderName);
+        bindConstant().annotatedWith(XCSRFHeaderName.class).to(xsrfTokenHeaderName);
 
         bind(Serialization.class).to(serializationClass);
 
