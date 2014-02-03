@@ -142,8 +142,8 @@ public abstract class PresenterWidget<V extends View> extends
     private final List<PresenterWidget<? extends PopupView>> popupChildren =
             new ArrayList<PresenterWidget<? extends PopupView>>();
 
-    private final List<HandlerInformation<EventHandler>> visibleHandlers = new ArrayList<HandlerInformation
-            <EventHandler>>();
+    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
+            new ArrayList<HandlerInformation<? extends EventHandler>>();
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
 
     /**
@@ -178,14 +178,12 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
-    public final void addToPopupSlot(
-            final PresenterWidget<? extends PopupView> child) {
+    public void addToPopupSlot(PresenterWidget<? extends PopupView> child) {
         addToPopupSlot(child, true);
     }
 
     @Override
-    public final void addToPopupSlot(
-            final PresenterWidget<? extends PopupView> child, boolean center) {
+    public void addToPopupSlot(PresenterWidget<? extends PopupView> child, boolean center) {
         if (child == null) {
             return;
         }
@@ -199,7 +197,7 @@ public abstract class PresenterWidget<V extends View> extends
             }
         }
 
-        final PopupView popupView = child.getView();
+        PopupView popupView = child.getView();
         popupChildren.add(child);
 
         // Center if desired
@@ -237,7 +235,7 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
-    public final void addToSlot(Object slot, PresenterWidget<?> content) {
+    public void addToSlot(Object slot, PresenterWidget<?> content) {
         if (content == null) {
             return;
         }
@@ -261,7 +259,7 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
-    public final void clearSlot(Object slot) {
+    public void clearSlot(Object slot) {
         List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
         if (slotChildren != null) {
             // This presenter is visible, its time to call onHide
@@ -318,7 +316,7 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
-    public final void removeFromSlot(Object slot, PresenterWidget<?> content) {
+    public void removeFromSlot(Object slot, PresenterWidget<?> content) {
         if (content == null) {
             return;
         }
@@ -337,17 +335,13 @@ public abstract class PresenterWidget<V extends View> extends
         getView().removeFromSlot(slot, content);
     }
 
-    // TODO This should be final but needs to be overriden in {@link
-    // TabContainerPresenter}
-    // We should be able to do this once we switch to an event-based mechanism for
-    // highlighting tabs
     @Override
     public void setInSlot(Object slot, PresenterWidget<?> content) {
         setInSlot(slot, content, true);
     }
 
     @Override
-    public final void setInSlot(Object slot, PresenterWidget<?> content,
+    public void setInSlot(Object slot, PresenterWidget<?> content,
             boolean performReset) {
         if (content == null) {
             // Assumes the user wants to clear the slot content.
@@ -406,7 +400,7 @@ public abstract class PresenterWidget<V extends View> extends
      * @param handler The handler to register.
      * @return The {@link HandlerRegistration} you should use to unregister the handler.
      */
-    protected final <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
+    protected <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
         return getEventBus().addHandler(type, handler);
     }
 
@@ -422,7 +416,7 @@ public abstract class PresenterWidget<V extends View> extends
      * @param handler The handler to register.
      * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
      */
-    protected final <H extends EventHandler> void addRegisteredHandler(Type<H> type, H handler) {
+    protected <H extends EventHandler> void addRegisteredHandler(Type<H> type, H handler) {
         registerHandler(addHandler(type, handler));
     }
 
@@ -437,8 +431,8 @@ public abstract class PresenterWidget<V extends View> extends
      * @see #addRegisteredHandler(com.google.gwt.event.shared.GwtEvent.Type, com.google.gwt.event.shared.EventHandler)
      * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
      */
-    protected final <H extends EventHandler> void addVisibleHandler(Type<H> type, H handler) {
-        HandlerInformation handlerInformation = new HandlerInformation(type, handler);
+    protected <H extends EventHandler> void addVisibleHandler(Type<H> type, H handler) {
+        HandlerInformation<H> handlerInformation = new HandlerInformation<H>(type, handler);
         visibleHandlers.add(handlerInformation);
 
         if (visible) {
@@ -622,8 +616,7 @@ public abstract class PresenterWidget<V extends View> extends
      *
      * @param popupPresenter The {@link PresenterWidget} to monitor.
      */
-    private void monitorCloseEvent(
-            final PresenterWidget<? extends PopupView> popupPresenter) {
+    private void monitorCloseEvent(final PresenterWidget<? extends PopupView> popupPresenter) {
         PopupView popupView = popupPresenter.getView();
 
         popupView.setCloseHandler(new PopupViewCloseHandler() {
@@ -645,8 +638,7 @@ public abstract class PresenterWidget<V extends View> extends
     private void removePopupChildren(PresenterWidget<? extends PopupView> content) {
         int i;
         for (i = 0; i < popupChildren.size(); ++i) {
-            PresenterWidget<? extends PopupView> popupPresenter = popupChildren
-                    .get(i);
+            PresenterWidget<? extends PopupView> popupPresenter = popupChildren.get(i);
             if (popupPresenter == content) {
                 (popupPresenter.getView()).setCloseHandler(null);
                 break;
@@ -657,13 +649,13 @@ public abstract class PresenterWidget<V extends View> extends
         }
     }
 
-    private void registerVisibleHandler(HandlerInformation<EventHandler> handlerInformation) {
+    private <H extends EventHandler> void registerVisibleHandler(HandlerInformation<H> handlerInformation) {
         HandlerRegistration handlerRegistration = addHandler(handlerInformation.type, handlerInformation.eventHandler);
         visibleHandlerRegistrations.add(handlerRegistration);
     }
 
     private void registerVisibleHandlers() {
-        for (HandlerInformation<EventHandler> handlerInformation : visibleHandlers) {
+        for (HandlerInformation<? extends EventHandler> handlerInformation : visibleHandlers) {
             registerVisibleHandler(handlerInformation);
         }
     }
