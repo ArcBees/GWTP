@@ -37,9 +37,8 @@ public interface CarsService extends RestService {
     RestAction<List<CarDto>> getCars();
 
     @GET
-    RestAction<List<CarDto>> getCars(
-            @QueryParam(RestParameter.OFFSET) int offset,
-            @QueryParam(RestParameter.LIMIT) int limit);
+    RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
+                                     @QueryParam(RestParameter.LIMIT) int limit);
 
     @GET
     @Path(ResourcesPath.COUNT)

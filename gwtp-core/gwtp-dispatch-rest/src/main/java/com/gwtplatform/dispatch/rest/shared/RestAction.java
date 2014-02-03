@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.shared;
 
 import java.util.List;
 
+import com.gwtplatform.dispatch.shared.HasSecured;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
@@ -29,7 +30,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  *
  * @param <R> the result type.
  */
-public interface RestAction<R> extends TypedAction<R> {
+public interface RestAction<R> extends TypedAction<R>, HasSecured {
     /**
      * Returns the relative path for this action. It should not be prepended by the path annotated with
      * {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath}.
@@ -55,7 +56,7 @@ public interface RestAction<R> extends TypedAction<R> {
 
     /**
      * @return a {@link List} of the {@literal @}{@link javax.ws.rs.FormParam} parameters for this action.
-     *         {@link #getBodyParam()} should return {@code null}.
+     * {@link #getBodyParam()} should return {@code null}.
      */
     List<RestParameter> getFormParams();
 
@@ -66,7 +67,7 @@ public interface RestAction<R> extends TypedAction<R> {
 
     /**
      * @return The object that will be serialized and used for the body of this action. {@link #getFormParams()} should
-     *         return an empty list.
+     * return an empty list.
      */
     Object getBodyParam();
 
