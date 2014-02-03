@@ -42,7 +42,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-clients-common</artifactId>
+            <artifactId>gwtp-mvp-shared</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>

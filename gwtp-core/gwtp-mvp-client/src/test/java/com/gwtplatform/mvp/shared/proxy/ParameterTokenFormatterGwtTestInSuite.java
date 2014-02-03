@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,11 +23,10 @@ import java.util.Map;
 
 import com.google.gwt.http.client.URL;
 import com.google.gwt.junit.client.GWTTestCase;
-
-import junit.framework.Assert;
+import com.gwtplatform.mvp.client.ClientUrlUtils;
 
 /**
- * Unit tests for {@link ParameterTokenFormatter}.
+ * Unit tests for {@link com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter}.
  */
 public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
@@ -35,13 +34,13 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     @Override
     public String getModuleName() {
-        return "com.gwtplatform.mvp.MvpTest";
+        return "com.gwtplatform.mvp.MvpGwtTest";
     }
 
     @Override
     protected void gwtSetUp() throws Exception {
         super.gwtSetUp();
-        tokenFormatter = new ParameterTokenFormatter();
+        tokenFormatter = new ParameterTokenFormatter(new ClientUrlUtils());
     }
 
     //------------------------------------------
@@ -69,7 +68,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     public void testToPlaceRequestMissingNameToken() {
         try {
             tokenFormatter.toPlaceRequest(";key1=value1;key2=value2");
-            Assert.fail("TokenFormatException (Place history token is missing) was expected");
+            fail("TokenFormatException (Place history token is missing) was expected");
         } catch (TokenFormatException e) {
         }
     }
@@ -189,7 +188,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
         try {
             // When
             tokenFormatter.toPlaceRequest(placeToken);
-            Assert.fail("TokenFormatException (Bad parameter) was expected.");
+            fail("TokenFormatException (Bad parameter) was expected.");
         } catch (TokenFormatException e) {
             // Then
         }
@@ -203,7 +202,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
             try {
                 // When
                 tokenFormatter.toPlaceRequest(placeToken);
-                Assert.fail("TokenFormatException was expected for '" + placeToken + "'");
+                fail("TokenFormatException was expected for '" + placeToken + "'");
             } catch (Exception ex) {
                 // Then
             }
@@ -218,7 +217,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
             try {
                 // When
                 tokenFormatter.toPlaceRequest(placeToken);
-                Assert.fail("TokenFormatException was expected for '" + placeToken + "'");
+                fail("TokenFormatException was expected for '" + placeToken + "'");
             } catch (Exception ex) {
                 // Then
             }
@@ -383,7 +382,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
             try {
                 // When
                 tokenFormatter.toPlaceRequestHierarchy(historyToken);
-                Assert.fail("TokenFormatException was expected for '" + historyToken + "'");
+                fail("TokenFormatException was expected for '" + historyToken + "'");
             } catch (TokenFormatException e) {
                 // Then
             }
@@ -429,7 +428,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
         try {
             // When
             tokenFormatter.toPlaceRequestHierarchy(historyToken);
-            Assert.fail("TokenFormatException (Bad parameter) was expected");
+            fail("TokenFormatException (Bad parameter) was expected");
         } catch (TokenFormatException e) {
             // Then
         }
