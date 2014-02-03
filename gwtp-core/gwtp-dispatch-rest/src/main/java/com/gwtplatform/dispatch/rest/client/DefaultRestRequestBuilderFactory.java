@@ -55,28 +55,35 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
     private final ActionMetadataProvider metadataProvider;
     private final Serialization serialization;
+    private final RequestBuilderFactory requestBuilderFactory;
     private final String baseUrl;
     private final String securityHeaderName;
+    private final Integer requestTimeoutMs;
 
     @Inject
     DefaultRestRequestBuilderFactory(ActionMetadataProvider metadataProvider,
                                      Serialization serialization,
+                                     RequestBuilderFactory requestBuilderFactory,
                                      @RestApplicationPath String baseUrl,
-                                     @XCSRFHeaderName String securityHeaderName) {
+                                     @XCSRFHeaderName String securityHeaderName,
+                                     @RequestTimeout Integer requestTimeoutMs) {
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
+        this.requestBuilderFactory = requestBuilderFactory;
         this.baseUrl = baseUrl;
         this.securityHeaderName = securityHeaderName;
+        this.requestTimeoutMs = requestTimeoutMs;
     }
 
     @Override
     public <A extends RestAction<?>> RequestBuilder build(A action, String securityToken) throws ActionException {
         Method httpMethod = HTTP_METHODS.get(action.getHttpMethod());
         String url = buildUrl(action);
-
-        RequestBuilder requestBuilder = new RequestBuilder(httpMethod, url);
-
         String xsrfToken = action.isSecured() ? securityToken : "";
+
+        RequestBuilder requestBuilder = requestBuilderFactory.create(httpMethod, url);
+        requestBuilder.setTimeoutMillis(requestTimeoutMs);
+
         buildHeaders(requestBuilder, xsrfToken, action.getPath(), action.getHeaderParams());
         buildBody(requestBuilder, action);
 
@@ -154,8 +161,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private void buildHeaders(RequestBuilder requestBuilder, String xsrfToken, String path,
-                              List<RestParameter> customHeaders)
-            throws ActionException {
+                              List<RestParameter> customHeaders) throws ActionException {
         requestBuilder.setHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON);
 
         if (!isAbsoluteUrl(path)) {
