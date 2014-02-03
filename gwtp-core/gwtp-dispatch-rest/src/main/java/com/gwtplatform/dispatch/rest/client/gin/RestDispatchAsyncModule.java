@@ -18,10 +18,13 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import javax.inject.Singleton;
 
+import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
+import com.gwtplatform.dispatch.rest.client.RequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
@@ -53,6 +56,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         private String xsrfTokenHeaderName = DEFAULT_XSRF_NAME;
         private Class<? extends Serialization> serializationClass = JsonSerialization.class;
+        private int requestTimeoutMs = 0;
 
         /**
          * Specify the XSRF token header name.
@@ -69,7 +73,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
          * Specify the XSRF token header name.
          *
          * @param xsrfTokenHeaderName The XSRF token header name.
-         * @return a {@link Builder} object.
+         * @return this {@link Builder} object.
          */
         public Builder xsrfTokenHeaderName(String xsrfTokenHeaderName) {
             this.xsrfTokenHeaderName = xsrfTokenHeaderName;
@@ -81,10 +85,24 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
          * Default is {@link JsonSerialization}.
          *
          * @param serializationClass The {@link Serialization} implementation to use.
-         * @return a {@link Builder} object.
+         * @return this {@link Builder} object.
          */
         public Builder serialization(Class<? extends Serialization> serializationClass) {
             this.serializationClass = serializationClass;
+            return this;
+        }
+
+        /**
+         * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
+         * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
+         * will be called.
+         * Default is <code>0</code>: no timeout.
+         *
+         * @param timeoutMs The maximum time to wait, in milliseconds, or {@code 0} for no timeout.
+         * @return this {@link Builder} object.
+         */
+        public Builder requestTimeout(int timeoutMs) {
+            this.requestTimeoutMs = timeoutMs;
             return this;
         }
 
@@ -96,8 +114,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
-    private final String xsrfTokenHeaderName;
-    private final Class<? extends Serialization> serializationClass;
+    private final Builder builder;
 
     /**
      * Creates this module using the default values as specified by {@link Builder}.
@@ -109,20 +126,22 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     private RestDispatchAsyncModule(Builder builder) {
         super(builder);
 
-        xsrfTokenHeaderName = builder.xsrfTokenHeaderName;
-        serializationClass = builder.serializationClass;
+        this.builder = builder;
     }
 
     @Override
     protected void configureDispatch() {
-        bindConstant().annotatedWith(XCSRFHeaderName.class).to(xsrfTokenHeaderName);
+        bindConstant().annotatedWith(XCSRFHeaderName.class).to(builder.xsrfTokenHeaderName);
+        bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
 
-        bind(Serialization.class).to(serializationClass);
+        bind(Serialization.class).to(builder.serializationClass);
 
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
 
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
+
+        install(new GinFactoryModuleBuilder().build(RequestBuilderFactory.class));
     }
 }
