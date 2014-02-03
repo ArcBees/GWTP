@@ -76,7 +76,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
         RequestBuilder requestBuilder = new RequestBuilder(httpMethod, url);
 
-        buildHeaders(requestBuilder, securityToken, action.getPath(), action.getHeaderParams());
+        String xsrfToken = action.isSecured() ? securityToken : "";
+        buildHeaders(requestBuilder, xsrfToken, action.getPath(), action.getHeaderParams());
         buildBody(requestBuilder, action);
 
         return requestBuilder;
@@ -152,7 +153,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         return serialization.serialize(object, bodyType);
     }
 
-    private void buildHeaders(RequestBuilder requestBuilder, String securityToken, String path,
+    private void buildHeaders(RequestBuilder requestBuilder, String xsrfToken, String path,
                               List<RestParameter> customHeaders)
             throws ActionException {
         requestBuilder.setHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON);
@@ -161,8 +162,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             requestBuilder.setHeader(MODULE_BASE_HEADER, baseUrl);
         }
 
-        if (!Strings.isNullOrEmpty(securityToken)) {
-            requestBuilder.setHeader(securityHeaderName, securityToken);
+        if (!Strings.isNullOrEmpty(xsrfToken)) {
+            requestBuilder.setHeader(securityHeaderName, xsrfToken);
         }
 
         for (RestParameter param : customHeaders) {
