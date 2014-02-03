@@ -22,6 +22,8 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
  * This is a subtype of {@link com.gwtplatform.mvp.client.proxy.PlaceManagerImpl PlaceManagerImpl} that uses
@@ -34,8 +36,9 @@ import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
  * your Gin module.
  * <p/>
  * <i>Note: </i>The default, error and unauthorized places are revealed without updating the browser's URL (hence
- * the false value passed in {@link #revealPlace(PlaceRequest, boolean) revealPlace}). This will avoid stepping into
- * an infinite navigation loop if the user navigates back (using the browser's back button).
+ * the false value passed in {@link #revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest, boolean) revealPlace}).
+ * This will avoid stepping into an infinite navigation loop if the user navigates back (using the browser's back
+ * button).
  * <p/>
  * Here's an example of infinite navigation loop that we want to avoid:
  * <ol>

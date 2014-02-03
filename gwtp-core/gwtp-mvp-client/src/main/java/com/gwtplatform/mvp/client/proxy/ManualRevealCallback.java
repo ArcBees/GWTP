@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.Presenter;
 
 /**
  * This implementation of {@link AsyncCallback} can be used when fetching data
- * from the server within {@link Presenter#prepareFromRequest(PlaceRequest)} for
+ * from the server within {@link Presenter#prepareFromRequest(com.gwtplatform.mvp.shared.proxy.PlaceRequest)} for
  * a presenter that uses manual reveal (see {@link Presenter#useManualReveal()}.
  * <p/>
  * Use {@link #create(Presenter, AsyncCallback)} to attach that callback to your own.
