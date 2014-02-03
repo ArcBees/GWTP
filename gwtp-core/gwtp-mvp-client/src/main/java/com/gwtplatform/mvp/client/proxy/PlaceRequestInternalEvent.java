@@ -18,17 +18,18 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * This event is fired by the {@link PlaceManager} whenever a new place is
  * requested, either by history navigation or directly.
  * <p/>
  * <b>Important!</b> You should never fire that event directly. Instead, build a
- * {@link PlaceRequest} and pass it to one of the following methods:
+ * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} and pass it to one of the following methods:
  * <ul>
- * <li>{@link PlaceManager#revealPlace(PlaceRequest)}</li>
- * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest)}</li>
- * <li>{@link PlaceManager#revealRelativePlace(PlaceRequest, int)}</li>
+ * <li>{@link PlaceManager#revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest)}</li>
+ * <li>{@link PlaceManager#revealRelativePlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest, int)}</li>
  * </ul>
  *
  * @author David Peterson

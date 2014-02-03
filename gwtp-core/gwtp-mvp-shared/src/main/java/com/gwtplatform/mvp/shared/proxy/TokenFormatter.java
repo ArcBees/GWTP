@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.List;
 

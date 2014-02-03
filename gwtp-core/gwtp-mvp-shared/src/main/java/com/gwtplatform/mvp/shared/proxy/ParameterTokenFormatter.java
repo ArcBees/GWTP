@@ -14,15 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
-
-import com.google.gwt.http.client.URL;
 
 /**
  * Formats tokens from {@code String} values to {@link PlaceRequest} and {@link PlaceRequest}
@@ -82,6 +80,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
     protected static final String ESCAPED_VALUE_SEPARATOR = "\\2";
     protected static final String ESCAPED_ESCAPE_CHAR = "\\3";
 
+    private final UrlUtils urlUtils;
     private final String hierarchySeparator;
     private final String paramSeparator;
     private final String valueSeparator;
@@ -90,8 +89,8 @@ public class ParameterTokenFormatter implements TokenFormatter {
      * Builds a {@link ParameterTokenFormatter} using the default separators and escape character.
      */
     @Inject
-    public ParameterTokenFormatter() {
-        this(DEFAULT_HIERARCHY_SEPARATOR, DEFAULT_PARAM_SEPARATOR, DEFAULT_VALUE_SEPARATOR);
+    public ParameterTokenFormatter(UrlUtils urlUtils) {
+        this(urlUtils, DEFAULT_HIERARCHY_SEPARATOR, DEFAULT_PARAM_SEPARATOR, DEFAULT_VALUE_SEPARATOR);
     }
 
     /**
@@ -106,20 +105,24 @@ public class ParameterTokenFormatter implements TokenFormatter {
      * @param valueSeparator     The symbol used to separate the parameter name from its value. Must be
      *                           a 1-character string and can't be {@code %}.
      */
-    public ParameterTokenFormatter(String hierarchySeparator, String paramSeparator, String valueSeparator) {
+    public ParameterTokenFormatter(UrlUtils urlUtils,
+                                   String hierarchySeparator,
+                                   String paramSeparator,
+                                   String valueSeparator) {
         assert hierarchySeparator.length() == 1;
         assert paramSeparator.length() == 1;
         assert valueSeparator.length() == 1;
         assert !hierarchySeparator.equals(paramSeparator);
         assert !hierarchySeparator.equals(valueSeparator);
         assert !paramSeparator.equals(valueSeparator);
-        assert !valueSeparator.equals(URL.encodeQueryString(valueSeparator));
-        assert !hierarchySeparator.equals(URL.encodeQueryString(hierarchySeparator));
-        assert !paramSeparator.equals(URL.encodeQueryString(paramSeparator));
+        assert !valueSeparator.equals(urlUtils.encodeQueryString(valueSeparator));
+        assert !hierarchySeparator.equals(urlUtils.encodeQueryString(hierarchySeparator));
+        assert !paramSeparator.equals(urlUtils.encodeQueryString(paramSeparator));
         assert !hierarchySeparator.equals("%");
         assert !paramSeparator.equals("%");
         assert !valueSeparator.equals("%");
 
+        this.urlUtils = urlUtils;
         this.hierarchySeparator = hierarchySeparator;
         this.paramSeparator = paramSeparator;
         this.valueSeparator = valueSeparator;
@@ -142,7 +145,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
 
     @Override
     public PlaceRequest toPlaceRequest(String placeToken) throws TokenFormatException {
-        return unescapedStringToPlaceRequest(URL.decodeQueryString(placeToken));
+        return unescapedStringToPlaceRequest(urlUtils.decodeQueryString(placeToken));
     }
 
     /**
@@ -196,7 +199,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
 
     @Override
     public List<PlaceRequest> toPlaceRequestHierarchy(String historyToken) throws TokenFormatException {
-        String unescapedHistoryToken = URL.decodeQueryString(historyToken);
+        String unescapedHistoryToken = urlUtils.decodeQueryString(historyToken);
 
         int split = unescapedHistoryToken.indexOf(hierarchySeparator);
         List<PlaceRequest> result = new ArrayList<PlaceRequest>();
@@ -279,7 +282,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
             }
         }
 
-        return URL.encodeQueryString(builder.toString());
+        return urlUtils.encodeQueryString(builder.toString());
     }
 
     /**
