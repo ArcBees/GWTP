@@ -24,6 +24,8 @@ import java.util.TreeSet;
 
 import javax.inject.Inject;
 
+import com.gwtplatform.common.shared.UrlUtils;
+
 /**
  * Implementation of {@link TokenFormatter} with support for route like place names.
  * <p>

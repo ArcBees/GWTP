@@ -29,6 +29,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-clients-common</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <scope>provided</scope>

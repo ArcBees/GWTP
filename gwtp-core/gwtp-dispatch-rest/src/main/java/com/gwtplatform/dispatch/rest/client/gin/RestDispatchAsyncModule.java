@@ -18,12 +18,11 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import javax.inject.Singleton;
 
-import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
+import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
-import com.gwtplatform.dispatch.rest.client.RequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
@@ -131,17 +130,22 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
+        // Common
+        CommonGinModule.ensureInstalled(binder());
+
+        // Constants
         bindConstant().annotatedWith(XCSRFHeaderName.class).to(builder.xsrfTokenHeaderName);
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
 
-        bind(Serialization.class).to(builder.serializationClass);
-
+        // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
 
-        bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
+        // Serialization
+        bind(Serialization.class).to(builder.serializationClass).in(Singleton.class);
 
-        install(new GinFactoryModuleBuilder().build(RequestBuilderFactory.class));
+        // Entry Point
+        bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
 }

@@ -16,17 +16,18 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestBuilder.Method;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * A GIN factory to create RequestBuilder instances. Useful for verifying RequestBuilder calls from unit tests.
- *
- * @see RequestBuilder
+ * Used by test code to create an unsecured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
  */
-public interface RequestBuilderFactory {
-    /**
-     * @see RequestBuilder#RequestBuilder(Method, String)
-     */
-    RequestBuilder create(Method httpMethod, String url);
+public class UnsecuredRestAction extends ExposedRestAction<Void> {
+    public UnsecuredRestAction(HttpMethod httpMethod, String rawServicePath) {
+        super(httpMethod, rawServicePath);
+    }
+
+    @Override
+    public boolean isSecured() {
+        return false;
+    }
 }
