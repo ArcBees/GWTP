@@ -48,7 +48,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
      * <p/>
      * The possible configurations are:
      * <ul>
-     * <li>A {@link com.gwtplatform.dispatch.rest.client.XSRFHeaderName}. The default value is {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
+     * <li>A {@link com.gwtplatform.dispatch.rest.client.XSRFHeaderName}. The default value is
+     * {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
      * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
      * </ul>
      */
