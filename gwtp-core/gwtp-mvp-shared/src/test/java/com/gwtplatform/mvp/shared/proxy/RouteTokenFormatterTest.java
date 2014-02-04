@@ -30,6 +30,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
+import com.gwtplatform.common.shared.UrlUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -58,6 +59,16 @@ public class RouteTokenFormatterTest {
         @Override
         public String encodeQueryString(String decodedUrlComponent) {
             return decodedUrlComponent;
+        }
+
+        @Override
+        public String decodePathSegment(String encodedPathSegment) {
+            return encodedPathSegment;
+        }
+
+        @Override
+        public String encodePathSegment(String decodedPathSegment) {
+            return decodedPathSegment;
         }
     }
 

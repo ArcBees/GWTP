@@ -14,20 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.dispatch.rest.client;
 
-import com.google.gwt.http.client.URL;
-import com.gwtplatform.mvp.shared.proxy.UrlUtils;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestBuilder.Method;
 
 /**
- * Helper implementation which wraps calls to code which require a running GWT environment and make testing slow.
+ * A simple factory to create RequestBuilder instances. Useful for verifying RequestBuilder calls from unit tests.
+ *
+ * @see RequestBuilder
  */
-public class ClientUrlUtils implements UrlUtils {
-    public String decodeQueryString(String encodedUrlComponent) {
-        return URL.decodeQueryString(encodedUrlComponent);
-    }
-
-    public String encodeQueryString(String decodedUrlComponent) {
-        return URL.encodeQueryString(decodedUrlComponent);
+public class HttpRequestBuilderFactory {
+    /**
+     * @see RequestBuilder#RequestBuilder(Method, String)
+     */
+    public RequestBuilder create(Method httpMethod, String url) {
+        return new RequestBuilder(httpMethod, url);
     }
 }
