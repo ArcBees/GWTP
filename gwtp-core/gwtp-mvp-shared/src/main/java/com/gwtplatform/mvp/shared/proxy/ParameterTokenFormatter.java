@@ -22,6 +22,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.gwtplatform.common.shared.UrlUtils;
+
 /**
  * Formats tokens from {@code String} values to {@link PlaceRequest} and {@link PlaceRequest}
  * hierarchies and vice-versa. The default implementation
