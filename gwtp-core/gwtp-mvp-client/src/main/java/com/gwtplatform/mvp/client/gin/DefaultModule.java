@@ -90,7 +90,7 @@ public class DefaultModule extends AbstractGinModule {
 
     @Override
     protected void configure() {
-        CommonGinModule.ensureInstalled(binder());
+        install(new CommonGinModule());
 
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
         bind(TokenFormatter.class).to(tokenFormatterClass).in(Singleton.class);
