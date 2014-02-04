@@ -131,7 +131,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Override
     protected void configureDispatch() {
         // Common
-        CommonGinModule.ensureInstalled(binder());
+        install(new CommonGinModule());
 
         // Constants
         bindConstant().annotatedWith(XSRFHeaderName.class).to(builder.xsrfTokenHeaderName);
