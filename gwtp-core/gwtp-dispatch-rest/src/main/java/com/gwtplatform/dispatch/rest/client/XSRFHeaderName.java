@@ -29,5 +29,5 @@ import com.google.inject.BindingAnnotation;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @BindingAnnotation
-public @interface XCSRFHeaderName {
+public @interface XSRFHeaderName {
 }
