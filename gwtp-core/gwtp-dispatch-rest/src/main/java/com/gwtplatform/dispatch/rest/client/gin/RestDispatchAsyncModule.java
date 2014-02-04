@@ -53,77 +53,21 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
      * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
      * </ul>
      */
-    public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        private String xsrfTokenHeaderName = DEFAULT_XSRF_NAME;
-        private Class<? extends Serialization> serializationClass = JsonSerialization.class;
-        private int requestTimeoutMs = 0;
-
-        /**
-         * Specify the XSRF token header name.
-         *
-         * @deprecated See {@link #xsrfTokenHeaderName(String)}
-         */
-        @Deprecated
-        public Builder xcsrfTokenHeaderName(String xsrfTokenHeaderName) {
-            this.xsrfTokenHeaderName = xsrfTokenHeaderName;
-            return this;
-        }
-
-        /**
-         * Specify the XSRF token header name.
-         *
-         * @param xsrfTokenHeaderName The XSRF token header name.
-         * @return this {@link Builder} object.
-         */
-        public Builder xsrfTokenHeaderName(String xsrfTokenHeaderName) {
-            this.xsrfTokenHeaderName = xsrfTokenHeaderName;
-            return this;
-        }
-
-        /**
-         * Specify the serialization implementation to use.
-         * Default is {@link JsonSerialization}.
-         *
-         * @param serializationClass The {@link Serialization} implementation to use.
-         * @return this {@link Builder} object.
-         */
-        public Builder serialization(Class<? extends Serialization> serializationClass) {
-            this.serializationClass = serializationClass;
-            return this;
-        }
-
-        /**
-         * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
-         * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
-         * will be called.
-         * Default is <code>0</code>: no timeout.
-         *
-         * @param timeoutMs The maximum time to wait, in milliseconds, or {@code 0} for no timeout.
-         * @return this {@link Builder} object.
-         */
-        public Builder requestTimeout(int timeoutMs) {
-            this.requestTimeoutMs = timeoutMs;
-            return this;
-        }
-
-        @Override
-        public RestDispatchAsyncModule build() {
-            return new RestDispatchAsyncModule(this);
-        }
+    public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
 
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
-    private final Builder builder;
+    private final RestDispatchAsyncModuleBuilder builder;
 
     /**
-     * Creates this module using the default values as specified by {@link Builder}.
+     * Creates this module using the default values as specified by {@link RestDispatchAsyncModuleBuilder}.
      */
     public RestDispatchAsyncModule() {
-        this(new Builder());
+        this(new RestDispatchAsyncModuleBuilder());
     }
 
-    private RestDispatchAsyncModule(Builder builder) {
+    RestDispatchAsyncModule(RestDispatchAsyncModuleBuilder builder) {
         super(builder);
 
         this.builder = builder;
