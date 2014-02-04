@@ -50,7 +50,7 @@ public class DefaultRestRequestBuilderFactoryTest {
         @Override
         protected void configureTest() {
             bindConstant().annotatedWith(RestApplicationPath.class).to(APPLICATION_PATH);
-            bindConstant().annotatedWith(XCSRFHeaderName.class).to(XSRF_HEADER_NAME);
+            bindConstant().annotatedWith(XSRFHeaderName.class).to(XSRF_HEADER_NAME);
             bindConstant().annotatedWith(RequestTimeout.class).to(TIMEOUT);
 
             forceMock(HttpRequestBuilderFactory.class);
