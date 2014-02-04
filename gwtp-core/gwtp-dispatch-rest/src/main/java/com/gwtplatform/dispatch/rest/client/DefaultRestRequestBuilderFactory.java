@@ -28,7 +28,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
-import com.google.gwt.safehtml.shared.UriUtils;
+import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
@@ -55,7 +55,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
     private final ActionMetadataProvider metadataProvider;
     private final Serialization serialization;
-    private final RequestBuilderFactory requestBuilderFactory;
+    private final HttpRequestBuilderFactory httpRequestBuilderFactory;
+    private final UrlUtils urlUtils;
     private final String baseUrl;
     private final String securityHeaderName;
     private final Integer requestTimeoutMs;
@@ -63,13 +64,15 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     @Inject
     DefaultRestRequestBuilderFactory(ActionMetadataProvider metadataProvider,
                                      Serialization serialization,
-                                     RequestBuilderFactory requestBuilderFactory,
+                                     HttpRequestBuilderFactory httpRequestBuilderFactory,
+                                     UrlUtils urlUtils,
                                      @RestApplicationPath String baseUrl,
                                      @XCSRFHeaderName String securityHeaderName,
                                      @RequestTimeout Integer requestTimeoutMs) {
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
-        this.requestBuilderFactory = requestBuilderFactory;
+        this.httpRequestBuilderFactory = httpRequestBuilderFactory;
+        this.urlUtils = urlUtils;
         this.baseUrl = baseUrl;
         this.securityHeaderName = securityHeaderName;
         this.requestTimeoutMs = requestTimeoutMs;
@@ -81,7 +84,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         String url = buildUrl(action);
         String xsrfToken = action.isSecured() ? securityToken : "";
 
-        RequestBuilder requestBuilder = requestBuilderFactory.create(httpMethod, url);
+        RequestBuilder requestBuilder = httpRequestBuilderFactory.create(httpMethod, url);
         requestBuilder.setTimeoutMillis(requestTimeoutMs);
 
         buildHeaders(requestBuilder, xsrfToken, action.getPath(), action.getHeaderParams());
@@ -91,7 +94,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     /**
-     * Encodes the given {@link RestParameter} as a path parameter.
+     * Encodes the given {@link RestParameter} as a path parameter. The default implementation delegates to
+     * {@link UrlUtils#encodePathSegment(String)}.
      *
      * @param value a {@link RestParameter} to encode.
      * @return the encoded path parameter.
@@ -99,11 +103,12 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
      */
     protected String encodePathParam(RestParameter value) throws ActionException {
-        return encode(value);
+        return urlUtils.encodePathSegment(value.getStringValue());
     }
 
     /**
-     * Encodes the given {@link RestParameter} as a query parameter.
+     * Encodes the given {@link RestParameter} as a query parameter. The default implementation delegates to
+     * {@link UrlUtils#encodeQueryString(String)}.
      *
      * @param value a {@link RestParameter} to encode.
      * @return the encoded query parameter.
@@ -111,7 +116,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
      */
     protected String encodeQueryParam(RestParameter value) throws ActionException {
-        return encode(value);
+        return urlUtils.encodeQueryString(value.getStringValue());
     }
 
     /**
@@ -124,18 +129,6 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      */
     protected String encodeHeaderParam(RestParameter value) throws ActionException {
         return value.getStringValue();
-    }
-
-    /**
-     * Encodes a {@link RestParameter}. The default implementation will URL encode the string value.
-     *
-     * @param value a {@link RestParameter} to encode.
-     * @return the encoded parameter.
-     * @throws ActionException if an exception occurred while encoding the parameter.
-     * @see UriUtils#encode(String)
-     */
-    protected String encode(RestParameter value) throws ActionException {
-        return UriUtils.encode(value.getStringValue());
     }
 
     /**

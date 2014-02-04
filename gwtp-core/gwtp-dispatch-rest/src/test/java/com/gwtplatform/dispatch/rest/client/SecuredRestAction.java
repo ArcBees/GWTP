@@ -14,10 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.shared.proxy;
+package com.gwtplatform.dispatch.rest.client;
 
-public interface UrlUtils {
-    public String decodeQueryString(String encodedUrlComponent);
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
-    public String encodeQueryString(String decodedUrlComponent);
+/**
+ * Used by test code to create a secured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
+ */
+public class SecuredRestAction extends ExposedRestAction<Void> {
+    public SecuredRestAction(HttpMethod httpMethod, String rawServicePath) {
+        super(httpMethod, rawServicePath);
+    }
+
+    @Override
+    public boolean isSecured() {
+        return true;
+    }
 }
