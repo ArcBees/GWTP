@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.gwtplatform.mvp.client.gwt.mvp.MvpGwtTestInSuite;
-import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatterGwtTestInSuite;
+import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatterGwtTestInSuite;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -26,12 +26,10 @@ import junit.framework.TestCase;
 /**
  * All the GWT test cases of gwtp-mvp-client. Does not extend {@code GWTTestSuite} as it is
  * not compatible with gwt-maven-plugin. See {@link http://mojo.codehaus.org/gwt-maven-plugin/user-guide/testing.html}.
- *
- * @author Philippe Beaudoin
  */
-public class MvpGwtTestSuite extends TestCase {
+public class MvpClientGwtTestSuite extends TestCase {
     public static Test suite() {
-        GWTTestSuite suite = new GWTTestSuite("All the GWT test cases of gwtp-mvp-client.");
+        GWTTestSuite suite = new GWTTestSuite("All the GWT test cases of gwtp-mvp-client and gwtp-mvp-shared.");
         suite.addTestSuite(ParameterTokenFormatterGwtTestInSuite.class);
         suite.addTestSuite(MvpGwtTestInSuite.class);
         return suite;

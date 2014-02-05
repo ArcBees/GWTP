@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * This event is fired whenever the user wants to have access to the title of a
@@ -41,7 +42,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
      * {@link GetPlaceTitleEvent} for details.
      *
      * @param source  The source that fires this event ({@link HasHandlers}).
-     * @param request The {@link PlaceRequest} for which to obtain the title.
+     * @param request The {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} for which to obtain the title.
      * @param handler The {@link SetPlaceTitleHandler} that will be invoked when
      *                the title is obtained.
      */
