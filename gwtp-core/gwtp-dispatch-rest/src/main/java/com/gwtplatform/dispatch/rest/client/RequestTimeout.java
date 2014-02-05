@@ -14,20 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.dispatch.rest.client;
 
-import com.google.gwt.http.client.URL;
-import com.gwtplatform.mvp.shared.proxy.UrlUtils;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import com.google.inject.BindingAnnotation;
 
 /**
- * Helper implementation which wraps calls to code which require a running GWT environment and make testing slow.
+ * The timeout in milliseconds to use on for {@link com.google.gwt.http.client.RequestBuilder RequestBuilder}.
  */
-public class ClientUrlUtils implements UrlUtils {
-    public String decodeQueryString(String encodedUrlComponent) {
-        return URL.decodeQueryString(encodedUrlComponent);
-    }
-
-    public String encodeQueryString(String decodedUrlComponent) {
-        return URL.encodeQueryString(decodedUrlComponent);
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface RequestTimeout {
 }

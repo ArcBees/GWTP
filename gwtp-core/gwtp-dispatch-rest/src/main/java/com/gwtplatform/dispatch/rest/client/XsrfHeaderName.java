@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,15 +21,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.inject.BindingAnnotation;
+
 /**
- * Annotation used to disable the XSRF header on REST actions and services.
- * <ul>
- * <li>If used on a resource type or a sub-resource method, this will disable the XSRF header for all descendant
- * actions.</li>
- * <li>If used on an action method, this will disable the XSRF header for that action.</li>
- * </ul>
+ * Binding annotation used to bind a XSRF protection token.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
-public @interface NoXsrfHeader {
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface XsrfHeaderName {
 }
