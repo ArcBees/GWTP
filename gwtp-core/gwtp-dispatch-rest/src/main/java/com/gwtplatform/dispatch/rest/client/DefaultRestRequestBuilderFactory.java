@@ -67,7 +67,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
                                      HttpRequestBuilderFactory httpRequestBuilderFactory,
                                      UrlUtils urlUtils,
                                      @RestApplicationPath String baseUrl,
-                                     @XsrfHeaderNameRename String securityHeaderName,
+                                     @XsrfHeaderName String securityHeaderName,
                                      @RequestTimeout Integer requestTimeoutMs) {
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
