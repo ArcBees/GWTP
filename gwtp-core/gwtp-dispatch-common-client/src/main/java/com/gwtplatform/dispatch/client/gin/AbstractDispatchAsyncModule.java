@@ -43,6 +43,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule
  */
 public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
+    private final Builder builder;
+
     /**
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
@@ -110,14 +112,8 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     private static Boolean alreadyBound = false;
     private static Class<? extends AbstractDispatchAsyncModule> boundType;
 
-    protected final Class<? extends ExceptionHandler> exceptionHandlerType;
-    protected final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType;
-    protected final Class<? extends SecurityCookieAccessor> sessionAccessorType;
-
     protected AbstractDispatchAsyncModule(Builder builder) {
-        clientActionHandlerRegistryType = builder.clientActionHandlerRegistryType;
-        exceptionHandlerType = builder.exceptionHandlerType;
-        sessionAccessorType = builder.sessionAccessorType;
+        this.builder = builder;
     }
 
     @Override
@@ -131,9 +127,9 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
             alreadyBound = true;
             boundType = getClass();
 
-            bind(ClientActionHandlerRegistry.class).to(clientActionHandlerRegistryType).asEagerSingleton();
-            bind(ExceptionHandler.class).to(exceptionHandlerType);
-            bind(SecurityCookieAccessor.class).to(sessionAccessorType);
+            bind(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
+            bind(ExceptionHandler.class).to(builder.exceptionHandlerType);
+            bind(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
 
             configureDispatch();
         }
