@@ -16,13 +16,22 @@
 
 package com.gwtplatform.dispatch.rest.client.gin;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
+import com.gwtplatform.dispatch.rest.client.HeaderParams;
 import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
@@ -31,7 +40,14 @@ import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XSRFHeaderName;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter;
+import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter.ValueProvider;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.shared.RestParameter;
+
+import static com.google.inject.name.Names.named;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls.
@@ -56,7 +72,22 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
 
+    private static class StaticValueProvider implements ValueProvider {
+        private final String value;
+
+        StaticValueProvider(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String getValue(RestAction<?> action) {
+            return value;
+        }
+    }
+
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
+
+    private static final String GLOBAL_HEADERS = "GlobalHeaders";
 
     private final RestDispatchAsyncModuleBuilder builder;
 
@@ -78,9 +109,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // Common
         install(new CommonGinModule());
 
-        // Constants
+        // Constants / Configurations
         bindConstant().annotatedWith(XSRFHeaderName.class).to(builder.xsrfTokenHeaderName);
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
+        bindConstant().annotatedWith(named(GLOBAL_HEADERS)).to(encodeParameters(builder.globalHeaderParams));
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
@@ -92,5 +124,37 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
         // Entry Point
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
+    }
+
+    @Provides
+    @Singleton
+    @HeaderParams
+    Multimap<HttpMethod, AsyncRestParameter> getGlobalHeaders(@Named(GLOBAL_HEADERS) String headers) {
+        return decodeParameters(headers);
+    }
+
+    private String encodeParameters(Multimap<HttpMethod, RestParameter> parameters) {
+        return "{\"" + Joiner.on(",\"").withKeyValueSeparator("\":").join(parameters.asMap()) + "}";
+    }
+
+    private Multimap<HttpMethod, AsyncRestParameter> decodeParameters(String encodedParameters) {
+        Multimap<HttpMethod, AsyncRestParameter> parameters = HashMultimap.create();
+
+        JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
+        for (String method : json.keySet()) {
+            HttpMethod httpMethod = HttpMethod.valueOf(method);
+            JSONArray jsonParameters = json.get(method).isArray();
+
+            for (int i = 0; i < jsonParameters.size(); ++i) {
+                JSONObject jsonParameter = jsonParameters.get(i).isObject();
+                String key = jsonParameter.get("key").isString().stringValue();
+                String value = jsonParameter.get("value").isString().stringValue();
+                AsyncRestParameter parameter = new AsyncRestParameter(key, new StaticValueProvider(value));
+
+                parameters.put(httpMethod, parameter);
+            }
+        }
+
+        return parameters;
     }
 }
