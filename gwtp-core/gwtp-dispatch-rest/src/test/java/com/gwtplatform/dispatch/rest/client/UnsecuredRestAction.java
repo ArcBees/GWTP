@@ -16,20 +16,18 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * Annotation used to disable the XSRF header on REST actions and services.
- * <ul>
- * <li>If used on a resource type or a sub-resource method, this will disable the XSRF header for all descendant
- * actions.</li>
- * <li>If used on an action method, this will disable the XSRF header for that action.</li>
- * </ul>
+ * Used by test code to create an unsecured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
-public @interface NoXsrfHeader {
+public class UnsecuredRestAction extends ExposedRestAction<Void> {
+    public UnsecuredRestAction(HttpMethod httpMethod, String rawServicePath) {
+        super(httpMethod, rawServicePath);
+    }
+
+    @Override
+    public boolean isSecured() {
+        return false;
+    }
 }

@@ -23,7 +23,7 @@ import java.util.Map;
 
 import com.google.gwt.http.client.URL;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.gwtplatform.mvp.client.ClientUrlUtils;
+import com.gwtplatform.common.client.ClientUrlUtils;
 
 /**
  * Unit tests for {@link com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter}.
