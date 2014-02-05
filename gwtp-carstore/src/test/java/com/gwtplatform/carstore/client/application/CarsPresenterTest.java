@@ -40,7 +40,7 @@ import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;

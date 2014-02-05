@@ -17,9 +17,9 @@
 package com.gwtplatform.mvp.client.gin;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
+import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
  * Configures the basic classes for presenter.

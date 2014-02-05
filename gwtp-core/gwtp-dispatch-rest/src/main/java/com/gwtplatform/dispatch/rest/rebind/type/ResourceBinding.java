@@ -26,13 +26,14 @@ public class ResourceBinding {
     private final String resourcePath;
     private final String implPackage;
     private final String implName;
+
     private String superTypeName;
     private List<JParameter> ctorParameters = Lists.newArrayList();
+    private boolean secured = true;
 
-    public ResourceBinding(
-            String resourcePath,
-            String implPackage,
-            String implName) {
+    public ResourceBinding(String resourcePath,
+                           String implPackage,
+                           String implName) {
         this.resourcePath = Strings.nullToEmpty(resourcePath);
         this.implName = implName;
         this.implPackage = implPackage;
@@ -54,6 +55,10 @@ public class ResourceBinding {
         return superTypeName;
     }
 
+    public boolean isSecured() {
+        return secured;
+    }
+
     public void setSuperTypeName(String superTypeName) {
         this.superTypeName = superTypeName;
     }
@@ -64,5 +69,9 @@ public class ResourceBinding {
 
     public void setCtorParameters(List<JParameter> ctorParameters) {
         this.ctorParameters = ctorParameters;
+    }
+
+    public void setSecured(boolean secured) {
+        this.secured = secured;
     }
 }

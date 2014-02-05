@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * Place managers work as an intermediary between the GWT {@link com.google.gwt.user.client.History}
@@ -33,18 +34,19 @@ public interface PlaceManager extends HasHandlers {
 
     /**
      * Builds a string corresponding to the history token to reveal the specified
-     * {@link PlaceRequest}. This can be used with a {@link com.google.gwt.user.client.ui.Hyperlink}.
+     * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest}. This can be used with a
+     * {@link com.google.gwt.user.client.ui.Hyperlink}.
      * <p/>
      * Invoking this history token will discard all the place hierarchy, effectively revealing the
      * request as a top-level place. To keep the place hierarchy, see
-     * {@link #buildRelativeHistoryToken(PlaceRequest)},
-     * {@link #buildRelativeHistoryToken(PlaceRequest, int)} or
+     * {@link #buildRelativeHistoryToken(com.gwtplatform.mvp.shared.proxy.PlaceRequest)},
+     * {@link #buildRelativeHistoryToken(com.gwtplatform.mvp.shared.proxy.PlaceRequest, int)} or
      * {@link #buildRelativeHistoryToken(int)}.
      *
-     * @param request The {@link PlaceRequest} corresponding to the place for which to build a history
-     *                token.
+     * @param request The {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} corresponding to the place for which to
+     *                build a history token.
      * @return The history token.
-     * @see #revealPlace(PlaceRequest)
+     * @see #revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest)
      */
     String buildHistoryToken(PlaceRequest request);
 
