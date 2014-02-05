@@ -13,6 +13,7 @@
     <name>GWTP Core</name>
 
     <modules>
+        <module>gwtp-mvp-shared</module>
         <module>gwtp-mvp-client</module>
         <module>gwtp-clients-common</module>
         <module>gwtp-dispatch-common-client</module>
@@ -106,12 +107,12 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>gwtp-crawler-service</artifactId>
+                <artifactId>gwtp-clients-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>gwtp-clients-common</artifactId>
+                <artifactId>gwtp-mvp-shared</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
