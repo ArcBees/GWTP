@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * <p/>
  * 1) You can use it to annotate a static or non-static public method in your
  * presenter that returns a string (the title). This method can optionally
- * accept a {@link com.gwtplatform.mvp.client.proxy.PlaceRequest} parameter to
+ * accept a {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} parameter to
  * contain the place request for which the title is desired. It can also
  * optionally accept another parameter corresponding to your custom ginjector.
  * Using a static method is more efficient, as it doesn't force instantiation of
@@ -52,7 +52,7 @@ import java.lang.annotation.Target;
  * with the title for this place, or {@code null} if the place doesn't have a
  * title. This is useful if the title can only be accessed in an asynchronous
  * fashion, for example following a call to the server. As above, your method
- * can accept a {@link com.gwtplatform.mvp.client.proxy.PlaceRequest} parameter
+ * can accept a {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} parameter
  * and your custom ginjector. Example of use:
  * <p/>
  * <pre>

@@ -30,9 +30,9 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.gwtplatform.common.rebind.Logger;
 import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry;
 import com.gwtplatform.mvp.rebind.velocity.RebindModule;
 import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
+import com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry;
 
 /**
  * Generates an implementation of {@link PlaceTokenRegistry} based on GWTP's {@link NameToken} annotation.
@@ -77,9 +77,9 @@ public class PlaceTokenRegistryGenerator extends Generator {
      */
     private static void checkPlaces(final Map<String, JClassType> placeTokens) {
         for (Map.Entry<String, JClassType> entry : placeTokens.entrySet()) {
-            if (!entry.getKey().startsWith("/")) {
+            if (!entry.getKey().startsWith("/") && !entry.getKey().startsWith("!/")) {
                 throw new InvocationException("The token '" + entry.getKey() + "' of '"
-                        + entry.getValue().getQualifiedSourceName() + "' should start with a '/'!");
+                        + entry.getValue().getQualifiedSourceName() + "' should start with a '/' or '!/'!");
             }
         }
     }

@@ -106,14 +106,14 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     }
 
     private void onResponseReceived(Response response) {
-        response = new ResponseWrapper(response);
+        Response wrappedResponse = new ResponseWrapper(response);
 
         try {
-            R result = restResponseDeserializer.deserialize(getAction(), response);
+            R result = restResponseDeserializer.deserialize(getAction(), wrappedResponse);
 
-            onExecuteSuccess(result, response);
+            onExecuteSuccess(result, wrappedResponse);
         } catch (ActionException e) {
-            onExecuteFailure(e, response);
+            onExecuteFailure(e, wrappedResponse);
         }
     }
 

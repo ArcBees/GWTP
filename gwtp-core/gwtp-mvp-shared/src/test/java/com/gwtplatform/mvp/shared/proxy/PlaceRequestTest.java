@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,8 +28,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 /**
- * Simple unit tests for {@link com.gwtplatform.mvp.client.proxy.PlaceRequest}, including
- * {@link com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder} tests.
+ * Simple unit tests for {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest}, including
+ * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder} tests.
  */
 public class PlaceRequestTest {
     @Test
