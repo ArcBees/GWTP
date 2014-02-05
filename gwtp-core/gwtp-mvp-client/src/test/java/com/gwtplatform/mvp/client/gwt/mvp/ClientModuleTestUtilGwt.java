@@ -21,13 +21,13 @@ import javax.inject.Singleton;
 import com.google.inject.name.Names;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
-import com.gwtplatform.mvp.client.ClientUrlUtils;
+import com.gwtplatform.common.client.ClientUrlUtils;
+import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
-import com.gwtplatform.mvp.shared.proxy.UrlUtils;
 
 public class ClientModuleTestUtilGwt extends AbstractPresenterModule {
     @Override

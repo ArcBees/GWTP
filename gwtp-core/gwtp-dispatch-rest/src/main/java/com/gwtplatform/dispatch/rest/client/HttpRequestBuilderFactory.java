@@ -14,10 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.shared.proxy;
+package com.gwtplatform.dispatch.rest.client;
 
-public interface UrlUtils {
-    public String decodeQueryString(String encodedUrlComponent);
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestBuilder.Method;
 
-    public String encodeQueryString(String decodedUrlComponent);
+/**
+ * A simple factory to create RequestBuilder instances. Useful for verifying RequestBuilder calls from unit tests.
+ *
+ * @see RequestBuilder
+ */
+public class HttpRequestBuilderFactory {
+    /**
+     * @see RequestBuilder#RequestBuilder(Method, String)
+     */
+    public RequestBuilder create(Method httpMethod, String url) {
+        return new RequestBuilder(httpMethod, url);
+    }
 }

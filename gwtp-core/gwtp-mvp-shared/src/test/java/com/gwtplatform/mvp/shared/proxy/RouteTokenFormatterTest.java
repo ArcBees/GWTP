@@ -30,6 +30,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
+import com.gwtplatform.common.shared.UrlUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -58,6 +59,16 @@ public class RouteTokenFormatterTest {
         @Override
         public String encodeQueryString(String decodedUrlComponent) {
             return decodedUrlComponent;
+        }
+
+        @Override
+        public String decodePathSegment(String encodedPathSegment) {
+            return encodedPathSegment;
+        }
+
+        @Override
+        public String encodePathSegment(String decodedPathSegment) {
+            return decodedPathSegment;
         }
     }
 
@@ -135,8 +146,10 @@ public class RouteTokenFormatterTest {
                 .with("limit", "20")
                 .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE\\?\\w*=\\d*&\\w*=\\d*$";
-        Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder().put("start", "15")
-                                                                  .put("limit", "20").build();
+        Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder()
+                .put("start", "15")
+                .put("limit", "20")
+                .build();
 
         // When
         String placeToken = tokenFormatter.toPlaceToken(placeRequest);

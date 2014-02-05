@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,18 +16,18 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import com.google.inject.BindingAnnotation;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * Binding annotation used to bind a X-CSRF protection token.
+ * Used by test code to create a secured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
-@BindingAnnotation
-public @interface XCSRFHeaderName {
+public class SecuredRestAction extends ExposedRestAction<Void> {
+    public SecuredRestAction(HttpMethod httpMethod, String rawServicePath) {
+        super(httpMethod, rawServicePath);
+    }
+
+    @Override
+    public boolean isSecured() {
+        return true;
+    }
 }
