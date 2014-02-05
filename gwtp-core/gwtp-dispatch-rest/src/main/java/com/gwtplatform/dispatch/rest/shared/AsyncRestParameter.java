@@ -14,20 +14,28 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.shared;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public class AsyncRestParameter {
+    public static interface ValueProvider {
+        String getValue(RestAction<?> action);
+    }
 
-import com.google.inject.BindingAnnotation;
+    private final String key;
+    private final ValueProvider valueProvider;
 
-/**
- * The timeout in milliseconds to use on for {@link com.google.gwt.http.client.RequestBuilder RequestBuilder}.
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
-@BindingAnnotation
-public @interface RequestTimeout {
+    public AsyncRestParameter(
+            String key,
+            ValueProvider valueProvider) {
+        this.key = key;
+        this.valueProvider = valueProvider;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public ValueProvider getValueProvider() {
+        return valueProvider;
+    }
 }

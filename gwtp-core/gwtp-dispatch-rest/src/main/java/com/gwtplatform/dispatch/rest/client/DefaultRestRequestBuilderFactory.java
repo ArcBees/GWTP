@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +27,12 @@ import javax.ws.rs.core.MediaType;
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -57,6 +60,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final Serialization serialization;
     private final HttpRequestBuilderFactory httpRequestBuilderFactory;
     private final UrlUtils urlUtils;
+    private final Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams;
     private final String baseUrl;
     private final String securityHeaderName;
     private final Integer requestTimeoutMs;
@@ -66,6 +70,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
                                      Serialization serialization,
                                      HttpRequestBuilderFactory httpRequestBuilderFactory,
                                      UrlUtils urlUtils,
+                                     @HeaderParams Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams,
                                      @RestApplicationPath String baseUrl,
                                      @XSRFHeaderName String securityHeaderName,
                                      @RequestTimeout Integer requestTimeoutMs) {
@@ -73,6 +78,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         this.serialization = serialization;
         this.httpRequestBuilderFactory = httpRequestBuilderFactory;
         this.urlUtils = urlUtils;
+        this.globalHeaderParams = globalHeaderParams;
         this.baseUrl = baseUrl;
         this.securityHeaderName = securityHeaderName;
         this.requestTimeoutMs = requestTimeoutMs;
@@ -87,7 +93,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         RequestBuilder requestBuilder = httpRequestBuilderFactory.create(httpMethod, url);
         requestBuilder.setTimeoutMillis(requestTimeoutMs);
 
-        buildHeaders(requestBuilder, xsrfToken, action.getPath(), action.getHeaderParams());
+        buildHeaders(requestBuilder, xsrfToken, action);
         buildBody(requestBuilder, action);
 
         return requestBuilder;
@@ -97,38 +103,26 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * Encodes the given {@link RestParameter} as a path parameter. The default implementation delegates to
      * {@link UrlUtils#encodePathSegment(String)}.
      *
-     * @param value a {@link RestParameter} to encode.
+     * @param value the value to encode.
      * @return the encoded path parameter.
      * @throws ActionException if an exception occurred while encoding the path parameter.
      * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
      */
-    protected String encodePathParam(RestParameter value) throws ActionException {
-        return urlUtils.encodePathSegment(value.getStringValue());
+    protected String encodePathParam(String value) throws ActionException {
+        return urlUtils.encodePathSegment(value);
     }
 
     /**
      * Encodes the given {@link RestParameter} as a query parameter. The default implementation delegates to
      * {@link UrlUtils#encodeQueryString(String)}.
      *
-     * @param value a {@link RestParameter} to encode.
+     * @param value the value to encode.
      * @return the encoded query parameter.
      * @throws ActionException if an exception occurred while encoding the query parameter.
      * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
      */
-    protected String encodeQueryParam(RestParameter value) throws ActionException {
-        return urlUtils.encodeQueryString(value.getStringValue());
-    }
-
-    /**
-     * Encodes the given {@link RestParameter} as a header parameter. The default implementation returns the string
-     * value directly without any encoding.
-     *
-     * @param value a {@link RestParameter} to encode.
-     * @return the encoded header parameter.
-     * @throws ActionException if an exception occurred while encoding the header parameter.
-     */
-    protected String encodeHeaderParam(RestParameter value) throws ActionException {
-        return value.getStringValue();
+    protected String encodeQueryParam(String value) throws ActionException {
+        return urlUtils.encodeQueryString(value);
     }
 
     /**
@@ -153,9 +147,15 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         return serialization.serialize(object, bodyType);
     }
 
-    private void buildHeaders(RequestBuilder requestBuilder, String xsrfToken, String path,
-                              List<RestParameter> customHeaders) throws ActionException {
+    private void buildHeaders(RequestBuilder requestBuilder, String xsrfToken, RestAction<?> action)
+            throws ActionException {
+        String path = action.getPath();
+        List<RestParameter> actionParams = action.getHeaderParams();
+        Collection<AsyncRestParameter> applicableGlobalParams = globalHeaderParams.get(action.getHttpMethod());
+
+        // By setting the most generic headers first, we make sure they can be overridden by more specific ones
         requestBuilder.setHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON);
+        requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, JSON_UTF8);
 
         if (!isAbsoluteUrl(path)) {
             requestBuilder.setHeader(MODULE_BASE_HEADER, baseUrl);
@@ -165,12 +165,16 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             requestBuilder.setHeader(securityHeaderName, xsrfToken);
         }
 
-        for (RestParameter param : customHeaders) {
-            requestBuilder.setHeader(param.getName(), encodeHeaderParam(param));
+        for (AsyncRestParameter parameter : applicableGlobalParams) {
+            String value = parameter.getValueProvider().getValue(action);
+
+            if (value != null) {
+                requestBuilder.setHeader(parameter.getKey(), value);
+            }
         }
 
-        if (requestBuilder.getHeader(HttpHeaders.CONTENT_TYPE) == null) {
-            requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, JSON_UTF8);
+        for (RestParameter param : actionParams) {
+            requestBuilder.setHeader(param.getName(), param.getStringValue());
         }
     }
 
@@ -206,7 +210,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         String path = rawPath;
 
         for (RestParameter param : params) {
-            path = path.replace("{" + param.getName() + "}", encodePathParam(param));
+            String encodedParam = encodePathParam(param.getStringValue());
+            path = path.replace("{" + param.getName() + "}", encodedParam);
         }
 
         return path;
@@ -219,7 +224,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             queryString.append("&")
                        .append(param.getName())
                        .append("=")
-                       .append(encodeQueryParam(param));
+                       .append(encodeQueryParam(param.getStringValue()));
         }
 
         if (queryString.length() != 0) {
