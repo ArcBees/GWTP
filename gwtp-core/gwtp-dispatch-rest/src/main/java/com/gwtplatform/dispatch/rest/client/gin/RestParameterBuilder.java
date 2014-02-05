@@ -19,18 +19,22 @@ package com.gwtplatform.dispatch.rest.client.gin;
 import java.util.Arrays;
 import java.util.Set;
 
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 public class RestParameterBuilder {
     private final RestDispatchAsyncModuleBuilder moduleBuilder;
+    private final Multimap<HttpMethod, RestParameter> targetMap;
     private final String key;
     private final Set<HttpMethod> httpMethods = Sets.newEnumSet(Arrays.asList(HttpMethod.values()), HttpMethod.class);
 
     RestParameterBuilder(RestDispatchAsyncModuleBuilder moduleBuilder,
+                         Multimap<HttpMethod, RestParameter> targetMap,
                          String key) {
         this.moduleBuilder = moduleBuilder;
+        this.targetMap = targetMap;
         this.key = key;
     }
 
@@ -47,7 +51,7 @@ public class RestParameterBuilder {
         RestParameter parameter = new RestParameter(key, value);
 
         for (HttpMethod httpMethod : httpMethods) {
-            moduleBuilder.addGlobalHeaderParam(httpMethod, parameter);
+            targetMap.put(httpMethod, parameter);
         }
 
         return moduleBuilder;
