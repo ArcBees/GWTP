@@ -16,18 +16,20 @@
 
 package com.gwtplatform.mvp.client.gin;
 
+import javax.inject.Singleton;
+
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
+import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
-import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.RouteTokenFormatter;
-import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
+import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
+import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
  * Module with default GWTP bindings. You can
@@ -88,6 +90,8 @@ public class DefaultModule extends AbstractGinModule {
 
     @Override
     protected void configure() {
+        install(new CommonGinModule());
+
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
         bind(TokenFormatter.class).to(tokenFormatterClass).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();

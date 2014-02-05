@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+
 /**
  * @author Philippe Beaudoin
  */

@@ -18,13 +18,13 @@ package com.gwtplatform.mvp.client.googleanalytics;
 
 import javax.inject.Inject;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.GaAccount;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
  * This class let's you register every navigation event to a Google Analytics
@@ -36,31 +36,40 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
  * bindConstant().annotatedWith(GaAccount.class).to("UA-12345678-1");</code>
  * <p/>
  * If you want to log custom events, see {@link GoogleAnalytics}.
- *
- * @author Christian Goudreau
  */
 public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
+    private final String gaAccount;
+    private final PlaceManager placeManager;
+    private final EventBus eventBus;
     private final GoogleAnalytics analytics;
 
     @Inject
-    public GoogleAnalyticsNavigationTracker(@GaAccount final String gaAccount,
-            final EventBus eventBus, final GoogleAnalytics analytics) {
+    GoogleAnalyticsNavigationTracker(@GaAccount String gaAccount,
+                                     PlaceManager placeManager,
+                                     EventBus eventBus,
+                                     GoogleAnalytics analytics) {
+        this.gaAccount = gaAccount;
+        this.placeManager = placeManager;
+        this.eventBus = eventBus;
         this.analytics = analytics;
 
-        if (GWT.isScript()) {
-            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                @Override
-                public void execute() {
-                    analytics.init(gaAccount);
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                init();
+            }
+        });
+    }
 
-                    eventBus.addHandler(NavigationEvent.getType(), GoogleAnalyticsNavigationTracker.this);
-                }
-            });
-        }
+    private void init() {
+        analytics.init(gaAccount);
+
+        eventBus.addHandler(NavigationEvent.getType(), this);
     }
 
     @Override
     public void onNavigation(NavigationEvent navigationEvent) {
-        analytics.trackPageview(navigationEvent.getRequest().getNameToken());
+        String historyToken = placeManager.buildHistoryToken(navigationEvent.getRequest());
+        analytics.trackPageview(historyToken);
     }
 }

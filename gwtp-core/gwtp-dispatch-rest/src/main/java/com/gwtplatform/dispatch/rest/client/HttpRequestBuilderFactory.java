@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,18 +16,19 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import com.google.inject.BindingAnnotation;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestBuilder.Method;
 
 /**
- * Binding annotation used to bind a X-CSRF protection token.
+ * A simple factory to create RequestBuilder instances. Useful for verifying RequestBuilder calls from unit tests.
+ *
+ * @see RequestBuilder
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
-@BindingAnnotation
-public @interface XCSRFHeaderName {
+public class HttpRequestBuilderFactory {
+    /**
+     * @see RequestBuilder#RequestBuilder(Method, String)
+     */
+    public RequestBuilder create(Method httpMethod, String url) {
+        return new RequestBuilder(httpMethod, url);
+    }
 }

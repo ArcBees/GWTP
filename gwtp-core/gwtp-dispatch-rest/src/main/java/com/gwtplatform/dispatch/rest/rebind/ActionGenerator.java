@@ -51,6 +51,7 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
@@ -82,11 +83,8 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private static final List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
-            Arrays.asList(HeaderParam.class, QueryParam.class, PathParam.class, FormParam.class);
-
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/RestAction.vm";
+
     private static final String MANY_REST_ANNOTATIONS = "'%s' parameter's '%s' is annotated with more than one REST " +
                                                         "annotations.";
     private static final String MANY_POTENTIAL_BODY = "%s has more than one potential body parameter.";
@@ -98,11 +96,16 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private static final String ADD_FORM_PARAM = "addFormParam";
     private static final String SET_BODY_PARAM = "setBodyParam";
 
+    @SuppressWarnings("unchecked")
+    private static final List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
+            Arrays.asList(HeaderParam.class, QueryParam.class, PathParam.class, FormParam.class);
+
     private final EventBus eventBus;
 
     private final JMethod actionMethod;
     private final ResourceBinding parent;
     private final String path;
+    private final boolean secured;
     private final List<JParameter> parameters;
     private final List<AnnotatedMethodParameter> pathParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<AnnotatedMethodParameter> headerParams = new ArrayList<AnnotatedMethodParameter>();
@@ -114,22 +117,23 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private JParameter bodyParam;
 
     @Inject
-    ActionGenerator(
-            EventBus eventBus,
-            TypeOracle typeOracle,
-            Logger logger,
-            Provider<VelocityContext> velocityContextProvider,
-            VelocityEngine velocityEngine,
-            GeneratorUtil generatorUtil,
-            @Assisted JMethod actionMethod,
-            @Assisted ResourceBinding parent) {
+    ActionGenerator(EventBus eventBus,
+                    TypeOracle typeOracle,
+                    Logger logger,
+                    Provider<VelocityContext> velocityContextProvider,
+                    VelocityEngine velocityEngine,
+                    GeneratorUtil generatorUtil,
+                    @Assisted JMethod actionMethod,
+                    @Assisted ResourceBinding parent) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
         this.eventBus = eventBus;
         this.actionMethod = actionMethod;
         this.parent = parent;
-        parameters = Lists.newArrayList(parent.getCtorParameters());
+
         path = concatenatePath(parent.getResourcePath(), extractPath(actionMethod));
+        secured = parent.isSecured() && !actionMethod.isAnnotationPresent(NoXsrfHeader.class);
+        parameters = Lists.newArrayList(parent.getCtorParameters());
     }
 
     public ActionBinding generate() throws UnableToCompleteException {
@@ -154,6 +158,7 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         velocityContext.put("methodCalls", getMethodCallsToAdd());
         velocityContext.put("restPath", path);
         velocityContext.put("ctorParams", parameters);
+        velocityContext.put("secured", secured);
     }
 
     @Override
@@ -368,7 +373,11 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private ActionBinding createActionBinding(String implName) throws UnableToCompleteException {
         String resultClass = getResultType().getParameterizedQualifiedSourceName();
 
-        return new ActionBinding(path, getPackage(), implName, actionMethod.getName(), resultClass, parameters);
+        ActionBinding binding = new ActionBinding(path, getPackage(), implName, actionMethod.getName(), resultClass,
+                parameters);
+        binding.setSecured(secured);
+
+        return binding;
     }
 
     @SuppressWarnings("ConstantConditions")

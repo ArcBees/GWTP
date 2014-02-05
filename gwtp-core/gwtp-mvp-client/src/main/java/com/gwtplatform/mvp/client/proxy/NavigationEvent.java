@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * Event fired after navigation has occurred. It will not be fired if navigation is
@@ -27,7 +28,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * Instead of registering your presenter towards this event, consider overriding
  * {@link com.gwtplatform.mvp.client.PresenterWidget#onReset()}. From there
  * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the
- * {@link PlaceRequest}.
+ * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest}.
  *
  * @author Philippe Beaudoin
  * @see NavigationRefusedEvent
@@ -40,7 +41,7 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
      * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
      *
      * @param source  The source that fires this event ({@link HasHandlers}).
-     * @param request The {@link PlaceRequest} that was navigated to.
+     * @param request The {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} that was navigated to.
      */
     public static void fire(final HasHandlers source, PlaceRequest request) {
         source.fireEvent(new NavigationEvent(request));

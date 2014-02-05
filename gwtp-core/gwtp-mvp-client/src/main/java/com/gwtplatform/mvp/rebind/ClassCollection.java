@@ -36,7 +36,6 @@ import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceImpl;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
@@ -45,6 +44,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlaceImpl;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * Contains all the classes that are useful to various generators.
