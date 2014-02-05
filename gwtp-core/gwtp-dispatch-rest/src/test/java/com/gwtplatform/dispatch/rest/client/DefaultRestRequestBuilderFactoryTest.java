@@ -50,10 +50,11 @@ public class DefaultRestRequestBuilderFactoryTest {
         @Override
         protected void configureTest() {
             bindConstant().annotatedWith(RestApplicationPath.class).to(APPLICATION_PATH);
-            bindConstant().annotatedWith(XSRFHeaderName.class).to(XSRF_HEADER_NAME);
+            bindConstant().annotatedWith(XsrfHeaderNameRename.class).to(XSRF_HEADER_NAME);
             bindConstant().annotatedWith(RequestTimeout.class).to(TIMEOUT);
 
             forceMock(HttpRequestBuilderFactory.class);
+            forceMock(RequestBuilder.class);
         }
     }
 
@@ -77,13 +78,11 @@ public class DefaultRestRequestBuilderFactoryTest {
     private DefaultRestRequestBuilderFactory factory;
     @Inject
     private HttpRequestBuilderFactory httpRequestBuilderFactory;
-
+    @Inject
     private RequestBuilder requestBuilder;
 
     @Before
     public void setUp(HttpRequestBuilderFactory httpRequestBuilderFactory, UrlUtils urlUtils) {
-        requestBuilder = mock(RequestBuilder.class);
-
         given(httpRequestBuilderFactory.create(any(Method.class), anyString())).willReturn(requestBuilder);
 
         given(urlUtils.encodeQueryString(DECODED_VALUE_1)).willReturn(ENCODED_VALUE_1);
