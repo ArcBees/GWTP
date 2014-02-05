@@ -28,7 +28,7 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
-import com.gwtplatform.dispatch.rest.client.XsrfHeaderNameRename;
+import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
@@ -48,7 +48,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
      * <p/>
      * The possible configurations are:
      * <ul>
-     * <li>A {@link com.gwtplatform.dispatch.rest.client.XsrfHeaderNameRename}. The default value is
+     * <li>A {@link com.gwtplatform.dispatch.rest.client.XsrfHeaderName}. The default value is
      * {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
      * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
      * </ul>
@@ -135,7 +135,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         install(new CommonGinModule());
 
         // Constants
-        bindConstant().annotatedWith(XsrfHeaderNameRename.class).to(builder.xsrfTokenHeaderName);
+        bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.xsrfTokenHeaderName);
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
 
         // Workflow
