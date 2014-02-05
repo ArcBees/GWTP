@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,51 +22,42 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import com.google.gwt.http.client.URL;
-import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.gin.DefaultModule;
+import javax.inject.Inject;
+
+import com.gwtplatform.common.shared.UrlUtils;
 
 /**
  * Implementation of {@link TokenFormatter} with support for route like place names.
- *
  * <p>
  * Instead of wiring a hierarchy of several places bound to multiple presenters this implements a flat structure where
  * every history token is bound to a single presenter.
  * </p>
- *
  * <p>
  * Usage:
  * </p>
- *
  * <p>
  * Replace the default binding to {@link ParameterTokenFormatter} with {@link RouteTokenFormatter}. In case you use
- * GWTPs {@link DefaultModule}:
+ * GWTPs {@link com.gwtplatform.mvp.client.gin.DefaultModule DefaultModule}:
  * </p>
- *
  * <pre>
  * install(new DefaultModule(DefaultPlaceManager.class, RouteTokenFormatter.class));
  * </pre>
- *
  * <p>
  * Now all @NameToken's are treated as routes. Routes are expected to start with an '/' and can contain path parameters
  * as well as query parameters.
  * </p>
- *
  * <pre>
- * @NameToken("/user/{userId}/privacy")         // Token for PrivacyPresenter
- * @NameToken("/user/{userId}/privacy/profile") // Token for PrivacyProfilePresenter
- * @NameToken("/user/{userId}/privacy/photos")  // Token for PrivacyPhotosPresenter
+ * {@code @NameToken("/user/{userId}/privacy") // Token for PrivacyPresenter}
+ * {@code @NameToken("/user/{userId}/privacy/profile") // Token for PrivacyProfilePresenter}
+ * {@code @NameToken("/user/{userId}/privacy/photos") // Token for PrivacyPhotosPresenter}
  * </pre>
- *
  * <p>
  * Static-parts of an route tie stronger than parameter-parts. This way following works:
  * </p>
- *
  * <pre>
- * @NameToken("/{vanityId}") // Token for VanityUrlPresenter
- * @NameToken("/privacy")    // Token for PrivacyPresenter
+ * {@code @NameToken("/{vanityId}") // Token for VanityUrlPresenter}
+ * {@code @NameToken("/privacy") // Token for PrivacyPresenter}
  * </pre>
- *
  * <p>
  * Note: For the moment this is implemented on top of the hierarchical-place API to not an big structural changes prior
  * 1.0 release.
@@ -74,22 +65,9 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
  */
 public class RouteTokenFormatter implements TokenFormatter {
     /**
-     * Helper class which wraps calls to code which require a running GWT environment and make testing slow.
-     */
-    static class UrlUtils {
-        public String decodeQueryString(final String encodedUrlComponent) {
-            return URL.decodeQueryString(encodedUrlComponent);
-        }
-
-        public String encodeQueryString(final String decodedUrlComponent) {
-            return URL.encodeQueryString(decodedUrlComponent);
-        }
-    }
-
-    /**
      * Helper class to store matches to routes in {@link #toPlaceRequest(String)}.
      */
-    private class RouteMatch implements Comparable<RouteMatch> {
+    private static class RouteMatch implements Comparable<RouteMatch> {
         /**
          * Route/place-token associated to the match.
          */
@@ -108,11 +86,13 @@ public class RouteTokenFormatter implements TokenFormatter {
         /**
          * Construct a new {@link RouteMatch}.
          *
-         * @param route Place token associated to the match.
+         * @param route         Place token associated to the match.
          * @param staticMatches Number of static matches in this route.
-         * @param parameters Parsed parameters of this route.
+         * @param parameters    Parsed parameters of this route.
          */
-        RouteMatch(String route, int staticMatches, Map<String, String> parameters) {
+        RouteMatch(String route,
+                   int staticMatches,
+                   Map<String, String> parameters) {
             this.route = route;
             this.staticMatches = staticMatches;
             this.parameters = parameters;
@@ -133,7 +113,7 @@ public class RouteTokenFormatter implements TokenFormatter {
     private class RouteMatcher {
         /**
          * All matching routes of the place-token.
-         *
+         * <p/>
          * Sorted in ascending order by the number of static matches.
          */
         final TreeSet<RouteMatch> allMatches;
@@ -146,7 +126,7 @@ public class RouteTokenFormatter implements TokenFormatter {
          * @param placeToken The place-token.
          */
         RouteMatcher(String placeToken) {
-            assert placeToken.startsWith("/") : "Place-token should start with a '/'";
+            assert placeTokenIsValid(placeToken) : "Place-token should start with a '/' or '!/'";
             assert placeToken.indexOf('?') == -1 : "No Query string expected here";
 
             this.allMatches = new TreeSet<RouteMatch>();
@@ -174,7 +154,7 @@ public class RouteTokenFormatter implements TokenFormatter {
             }
 
             if (placeParts.length == 0) {
-                assert "/".equals(route);
+                assert routeIsEmpty(route);
                 return new RouteMatch(route, 0, null);
             }
 
@@ -193,14 +173,18 @@ public class RouteTokenFormatter implements TokenFormatter {
 
             return new RouteMatch(route, staticMatches, recordedParameters);
         }
+
+        private boolean routeIsEmpty(String route) {
+            return "/".equals(route) || "!/".equals(route);
+        }
     }
 
     private final UrlUtils urlUtils;
-
     private final PlaceTokenRegistry allRegisteredPlaceTokens;
 
     @Inject
-    public RouteTokenFormatter(UrlUtils urlUtils, PlaceTokenRegistry tokenRegistry) {
+    RouteTokenFormatter(UrlUtils urlUtils,
+                        PlaceTokenRegistry tokenRegistry) {
         this.urlUtils = urlUtils;
         this.allRegisteredPlaceTokens = tokenRegistry;
     }
@@ -209,19 +193,20 @@ public class RouteTokenFormatter implements TokenFormatter {
     public String toPlaceToken(PlaceRequest placeRequest) throws TokenFormatException {
         String placeToken = placeRequest.getNameToken();
         String queryString = "";
-        String querySeperator = "";
+        String querySeparator = "";
 
         for (String parameterName : placeRequest.getParameterNames()) {
             String parameterValue = placeRequest.getParameter(parameterName, null);
             if (parameterValue != null) {
+                String encodedParameterValue = urlUtils.encodeQueryString(parameterValue);
+
                 if (placeToken.contains("/{" + parameterName + "}")) {
                     // route parameter
-                    placeToken = placeToken.replace("{" + parameterName + "}", parameterValue);
+                    placeToken = placeToken.replace("{" + parameterName + "}", encodedParameterValue);
                 } else {
                     // query parameter
-                    queryString = queryString + querySeperator + parameterName + "="
-                            + urlUtils.decodeQueryString(parameterValue);
-                    querySeperator = "&";
+                    queryString += querySeparator + parameterName + "=" + encodedParameterValue;
+                    querySeparator = "&";
                 }
             }
         }
@@ -241,11 +226,11 @@ public class RouteTokenFormatter implements TokenFormatter {
     }
 
     @Override
-    public PlaceRequest toPlaceRequest(final String placeToken) throws TokenFormatException {
+    public PlaceRequest toPlaceRequest(String placeToken) throws TokenFormatException {
         /*
          * To support the native GWT history as well as HTML pushstate a slash is added when needed.
          */
-        if (!placeToken.startsWith("/")) {
+        if (!placeTokenIsValid(placeToken)) {
             return toPlaceRequest("/" + placeToken);
         }
 
@@ -254,7 +239,7 @@ public class RouteTokenFormatter implements TokenFormatter {
         String query = (split != -1) ? placeToken.substring(split + 1) : "";
 
         RouteMatcher matcher = new RouteMatcher(place);
-        RouteMatch match = (matcher.allMatches.size() > 0) ? matcher.allMatches.last() : new RouteMatch(place, 0, null);
+        RouteMatch match = (!matcher.allMatches.isEmpty()) ? matcher.allMatches.last() : new RouteMatch(place, 0, null);
 
         match.parameters = parseQueryString(query, match.parameters);
 
@@ -273,17 +258,17 @@ public class RouteTokenFormatter implements TokenFormatter {
      * Parse the given query-string and store all parameters into a map.
      *
      * @param queryString The query-string.
-     * @param into The map to use. If the given map is <code>null</code> a new map will be created.
+     * @param into        The map to use. If the given map is <code>null</code> a new map will be created.
      * @return A map containing all keys value pairs of the query-string.
      */
-    Map<String, String> parseQueryString(final String queryString, Map<String, String> into) {
+    Map<String, String> parseQueryString(String queryString, Map<String, String> into) {
         Map<String, String> result = (into != null) ? into : new HashMap<String, String>();
 
         if (queryString != null && !queryString.isEmpty()) {
             for (String keyValuePair : queryString.split("&")) {
                 String[] keyValue = keyValuePair.split("=", 2);
                 if (keyValue.length > 1) {
-                    result.put(keyValue[0], urlUtils.encodeQueryString(keyValue[1]));
+                    result.put(keyValue[0], urlUtils.decodeQueryString(keyValue[1]));
                 } else {
                     result.put(keyValue[0], "");
                 }
@@ -291,5 +276,9 @@ public class RouteTokenFormatter implements TokenFormatter {
         }
 
         return result;
+    }
+
+    private boolean placeTokenIsValid(String placeToken) {
+        return placeToken.startsWith("/") || placeToken.startsWith("!/");
     }
 }

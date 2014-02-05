@@ -5,6 +5,7 @@
 
     <!-- Inherit shared modules -->
     <inherits name='com.gwtplatform.common.ClientsCommon'/>
+    <inherits name='com.gwtplatform.mvp.MvpShared'/>
 
     <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
         <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
@@ -50,6 +51,6 @@
 
     <!-- Generate the place token index -->
     <generate-with class="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator">
-        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry"/>
+        <when-type-assignable class="com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry"/>
     </generate-with>
 </module>

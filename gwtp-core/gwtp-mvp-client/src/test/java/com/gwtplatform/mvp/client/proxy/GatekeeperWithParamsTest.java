@@ -36,6 +36,7 @@ import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.ProxyPlaceBase;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
 
 import static org.junit.Assert.assertEquals;

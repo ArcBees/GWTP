@@ -31,6 +31,7 @@ import org.mockito.stubbing.Answer;
 import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
 
 import static org.junit.Assert.assertEquals;
