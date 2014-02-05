@@ -56,7 +56,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         private String xsrfTokenHeaderName = DEFAULT_XSRF_NAME;
         private Class<? extends Serialization> serializationClass = JsonSerialization.class;
-        private int requestTimeoutMs = 0;
+        private int requestTimeoutMs;
 
         /**
          * Specify the XSRF token header name.
