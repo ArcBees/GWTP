@@ -34,6 +34,7 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.type.ChildServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
@@ -49,24 +50,23 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
     private ServiceBinding serviceBinding;
 
     @Inject
-    ChildServiceGenerator(
-            TypeOracle typeOracle,
-            Logger logger,
-            Provider<VelocityContext> velocityContextProvider,
-            VelocityEngine velocityEngine,
-            GeneratorUtil generatorUtil,
-            GeneratorFactory generatorFactory,
-            ServiceDefinitions serviceDefinitions,
-            @Assisted JMethod serviceMethod,
-            @Assisted ServiceBinding parent) {
+    ChildServiceGenerator(TypeOracle typeOracle,
+                          Logger logger,
+                          Provider<VelocityContext> velocityContextProvider,
+                          VelocityEngine velocityEngine,
+                          GeneratorUtil generatorUtil,
+                          GeneratorFactory generatorFactory,
+                          ServiceDefinitions serviceDefinitions,
+                          @Assisted JMethod serviceMethod,
+                          @Assisted ServiceBinding parent) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil, serviceDefinitions,
                 generatorFactory, serviceMethod.getReturnType().isInterface());
 
         this.serviceMethod = serviceMethod;
         this.parent = parent;
         this.parameters = Lists.newArrayList(parent.getCtorParameters());
-        path = concatenatePath(parent.getResourcePath(), extractPath(serviceMethod));
         service = serviceMethod.getReturnType().isInterface();
+        path = concatenatePath(parent.getResourcePath(), extractPath(serviceMethod));
     }
 
     public ServiceBinding generate() throws UnableToCompleteException {
@@ -90,6 +90,7 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
             serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service.getName(),
                     serviceMethod.getName(), parameters);
             serviceBinding.setSuperTypeName(getSuperTypeName());
+            serviceBinding.setSecured(isSecured());
         }
 
         return serviceBinding;
@@ -116,5 +117,11 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         generateMethods();
 
         mergeTemplate(printWriter, TEMPLATE, implName);
+    }
+
+    private boolean isSecured() {
+        return parent.isSecured()
+               && !serviceMethod.isAnnotationPresent(NoXsrfHeader.class)
+               && !service.isAnnotationPresent(NoXsrfHeader.class);
     }
 }
