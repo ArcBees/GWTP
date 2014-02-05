@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresenter.MyView>
         implements NavigationTabEvent.NavigationTabHandler, NavigationUiHandlers {

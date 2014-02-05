@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.shared.proxy;
 
 import java.util.List;
 import java.util.Map;
@@ -26,19 +26,19 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import com.google.inject.Inject;
+import com.gwtplatform.common.shared.UrlUtils;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.proxy.RouteTokenFormatter.UrlUtils;
-
 /**
- * Unit tests for {@link RouteTokenFormatter}.
+ * Unit tests for {@link com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter}.
  */
 @RunWith(JukitoRunner.class)
 public class RouteTokenFormatterTest {
@@ -50,7 +50,7 @@ public class RouteTokenFormatterTest {
         }
     }
 
-    static class UrlUtilsTestImpl extends RouteTokenFormatter.UrlUtils {
+    static class UrlUtilsTestImpl implements UrlUtils {
         @Override
         public String decodeQueryString(String encodedUrlComponent) {
             return encodedUrlComponent;
@@ -60,15 +60,32 @@ public class RouteTokenFormatterTest {
         public String encodeQueryString(String decodedUrlComponent) {
             return decodedUrlComponent;
         }
+
+        @Override
+        public String decodePathSegment(String encodedPathSegment) {
+            return encodedPathSegment;
+        }
+
+        @Override
+        public String encodePathSegment(String decodedPathSegment) {
+            return decodedPathSegment;
+        }
     }
 
     static class PlaceTokenRegistryTestImpl implements PlaceTokenRegistry {
         @Override
         public Set<String> getAllPlaceTokens() {
-            return ImmutableSet.<String>builder().add("/user/{userId}/groups/{groupId}")
-                    .add("/user/{userId}/albums/{albumId}").add("/user/{userId}/albums/staticAlbumId")
-                    .add("/user/staticUserId/albums/{albumId}").add("/user/staticUserId/albums/staticAlbumId")
-                    .add("/{vanityId}").add("!/crawl/{vanityId}").add("/privacy").add("/").build();
+            return ImmutableSet.<String>builder()
+                               .add("/user/{userId}/groups/{groupId}")
+                               .add("/user/{userId}/albums/{albumId}")
+                               .add("/user/{userId}/albums/staticAlbumId")
+                               .add("/user/staticUserId/albums/{albumId}")
+                               .add("/user/staticUserId/albums/staticAlbumId")
+                               .add("/{vanityId}")
+                               .add("!/crawl/{vanityId}")
+                               .add("/privacy")
+                               .add("/")
+                               .build();
         }
     }
 
@@ -78,8 +95,11 @@ public class RouteTokenFormatterTest {
     @Test
     public void testToPlaceTokenWithoutQueryString() {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("/user/{userId}/albums/{albumId}")
-                .with("userId", "0x42").with("albumId", "0xAFFE").build();
+        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                .nameToken("/user/{userId}/albums/{albumId}")
+                .with("userId", "0x42")
+                .with("albumId", "0xAFFE")
+                .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE$";
         Map<String, String> expectedQueryParameters = null;
 
@@ -96,8 +116,12 @@ public class RouteTokenFormatterTest {
     @Test
     public void testToPlaceTokenWithOneQueryStringParameter() {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("/user/{userId}/albums/{albumId}")
-                .with("userId", "0x42").with("albumId", "0xAFFE").with("start", "0").build();
+        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                .nameToken("/user/{userId}/albums/{albumId}")
+                .with("userId", "0x42")
+                .with("albumId", "0xAFFE")
+                .with("start", "0")
+                .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE\\?\\w*=\\d*$";
         Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder().put("start", "0").build();
 
@@ -114,11 +138,18 @@ public class RouteTokenFormatterTest {
     @Test
     public void testToPlaceTokenWithSeveralQueryStringParameter() {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("/user/{userId}/albums/{albumId}")
-                .with("userId", "0x42").with("albumId", "0xAFFE").with("start", "15").with("limit", "20").build();
+        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                .nameToken("/user/{userId}/albums/{albumId}")
+                .with("userId", "0x42")
+                .with("albumId", "0xAFFE")
+                .with("start", "15")
+                .with("limit", "20")
+                .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE\\?\\w*=\\d*&\\w*=\\d*$";
-        Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder().put("start", "15")
-                .put("limit", "20").build();
+        Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder()
+                .put("start", "15")
+                .put("limit", "20")
+                .build();
 
         // When
         String placeToken = tokenFormatter.toPlaceToken(placeRequest);

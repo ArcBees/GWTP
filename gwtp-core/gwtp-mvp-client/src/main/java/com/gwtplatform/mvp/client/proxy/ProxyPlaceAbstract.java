@@ -27,6 +27,7 @@ import com.gwtplatform.mvp.client.HandlerContainer;
 import com.gwtplatform.mvp.client.HandlerContainerImpl;
 import com.gwtplatform.mvp.client.HasHandlerContainer;
 import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
