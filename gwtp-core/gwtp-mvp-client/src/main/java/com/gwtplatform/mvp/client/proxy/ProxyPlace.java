@@ -30,7 +30,7 @@ public interface ProxyPlace<P extends Presenter<?, ?>> extends Proxy<P>, Place {
      * Manually reveals a presenter. Only use this method if your presenter is configured
      * to use manual reveal via {@link Presenter#useManualReveal()}. This method should be
      * called following one or more asynchronous server calls in
-     * {@link Presenter#prepareFromRequest(PlaceRequest)}.
+     * {@link Presenter#prepareFromRequest(com.gwtplatform.mvp.shared.proxy.PlaceRequest)}.
      * You should manually reveal your presenter exactly once, when all the data needed to use it is available.
      * <p/>
      * If you failed to fetch the data or cannot reveal the presenter you must call

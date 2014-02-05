@@ -80,4 +80,9 @@ public class ActionImpl<T> implements RestAction<T> {
     public TypeLiteral<RestAction<T>> getTypeLiteral() {
         return typeLiteral;
     }
+
+    @Override
+    public boolean isSecured() {
+        return false;
+    }
 }

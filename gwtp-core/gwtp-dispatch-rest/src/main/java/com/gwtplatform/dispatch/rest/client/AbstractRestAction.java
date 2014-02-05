@@ -38,12 +38,13 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
     private Object bodyParam;
 
-    protected AbstractRestAction(HttpMethod httpMethod, String rawServicePath) {
-        this.httpMethod = httpMethod;
-        this.rawServicePath = rawServicePath;
+    protected AbstractRestAction() {
     }
 
-    protected AbstractRestAction() {
+    protected AbstractRestAction(HttpMethod httpMethod,
+                                 String rawServicePath) {
+        this.httpMethod = httpMethod;
+        this.rawServicePath = rawServicePath;
     }
 
     @Override

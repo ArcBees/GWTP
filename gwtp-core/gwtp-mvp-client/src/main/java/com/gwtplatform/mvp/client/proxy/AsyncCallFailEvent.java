@@ -85,7 +85,7 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
     /**
      * Access the {@link Throwable} that was obtained when this asynchronous call failed.
      *
-     * @return The {@link PlaceRequest} or {@code null} if no place request is
+     * @return The {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} or {@code null} if no place request is
      *         known.
      */
     public Throwable getCaught() {
