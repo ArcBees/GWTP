@@ -26,6 +26,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.gwt.http.client.RequestBuilder;
@@ -61,6 +62,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final HttpRequestBuilderFactory httpRequestBuilderFactory;
     private final UrlUtils urlUtils;
     private final Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams;
+    private final Multimap<HttpMethod, AsyncRestParameter> globalQueryParams;
     private final String baseUrl;
     private final String securityHeaderName;
     private final Integer requestTimeoutMs;
@@ -70,7 +72,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
                                      Serialization serialization,
                                      HttpRequestBuilderFactory httpRequestBuilderFactory,
                                      UrlUtils urlUtils,
-                                     @HeaderParams Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams,
+                                     @GlobalHeaderParams Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams,
+                                     @GlobalQueryParams Multimap<HttpMethod, AsyncRestParameter> globalQueryParams,
                                      @RestApplicationPath String baseUrl,
                                      @XSRFHeaderName String securityHeaderName,
                                      @RequestTimeout Integer requestTimeoutMs) {
@@ -79,6 +82,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         this.httpRequestBuilderFactory = httpRequestBuilderFactory;
         this.urlUtils = urlUtils;
         this.globalHeaderParams = globalHeaderParams;
+        this.globalQueryParams = globalQueryParams;
         this.baseUrl = baseUrl;
         this.securityHeaderName = securityHeaderName;
         this.requestTimeoutMs = requestTimeoutMs;
@@ -186,20 +190,37 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         }
     }
 
-    private String buildUrl(RestAction<?> restAction) throws ActionException {
-        String queryString = buildQueryString(restAction.getQueryParams());
+    private String buildUrl(RestAction<?> action) throws ActionException {
+        List<RestParameter> queryParams = getGlobalQueryParamsForAction(action);
+        queryParams.addAll(action.getQueryParams());
 
+        String queryString = buildQueryString(queryParams);
         if (!queryString.isEmpty()) {
             queryString = "?" + queryString;
         }
 
-        String path = buildPath(restAction.getPath(), restAction.getPathParams());
+        String path = buildPath(action.getPath(), action.getPathParams());
 
-        if (isAbsoluteUrl(path)) {
-            return path + queryString;
-        } else {
-            return baseUrl + path + queryString;
+        String prefix = "";
+        if (!isAbsoluteUrl(path)) {
+            prefix = baseUrl;
         }
+
+        return prefix + path + queryString;
+    }
+
+    private List<RestParameter> getGlobalQueryParamsForAction(RestAction<?> action) {
+        List<RestParameter> queryParams = Lists.newArrayList();
+
+        for (AsyncRestParameter parameter : globalQueryParams.get(action.getHttpMethod())) {
+            String value = parameter.getValueProvider().getValue(action);
+
+            if (value != null) {
+                queryParams.add(new RestParameter(parameter.getKey(), value));
+            }
+        }
+
+        return queryParams;
     }
 
     private boolean isAbsoluteUrl(String path) {
