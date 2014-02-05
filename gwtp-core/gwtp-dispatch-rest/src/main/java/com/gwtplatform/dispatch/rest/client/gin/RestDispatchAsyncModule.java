@@ -31,7 +31,8 @@ import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
-import com.gwtplatform.dispatch.rest.client.HeaderParams;
+import com.gwtplatform.dispatch.rest.client.GlobalHeaderParams;
+import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
@@ -87,7 +88,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
-    private static final String GLOBAL_HEADERS = "GlobalHeaders";
+    private static final String GLOBAL_HEADER_PARAMS = "GlobalHeaders";
+    private static final String GLOBAL_QUERY_PARAMS = "GlobalQueries";
 
     private final RestDispatchAsyncModuleBuilder builder;
 
@@ -112,7 +114,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // Constants / Configurations
         bindConstant().annotatedWith(XSRFHeaderName.class).to(builder.xsrfTokenHeaderName);
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
-        bindConstant().annotatedWith(named(GLOBAL_HEADERS)).to(encodeParameters(builder.globalHeaderParams));
+        bindConstant().annotatedWith(named(GLOBAL_HEADER_PARAMS)).to(encodeParameters(builder.globalHeaderParams));
+        bindConstant().annotatedWith(named(GLOBAL_QUERY_PARAMS)).to(encodeParameters(builder.globalQueryParams));
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
@@ -128,9 +131,16 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Provides
     @Singleton
-    @HeaderParams
-    Multimap<HttpMethod, AsyncRestParameter> getGlobalHeaders(@Named(GLOBAL_HEADERS) String headers) {
-        return decodeParameters(headers);
+    @GlobalHeaderParams
+    Multimap<HttpMethod, AsyncRestParameter> getGlobalHeaderParams(@Named(GLOBAL_HEADER_PARAMS) String encodedParams) {
+        return decodeParameters(encodedParams);
+    }
+
+    @Provides
+    @Singleton
+    @GlobalQueryParams
+    Multimap<HttpMethod, AsyncRestParameter> getGlobalQueryParams(@Named(GLOBAL_QUERY_PARAMS) String encodedParams) {
+        return decodeParameters(encodedParams);
     }
 
     private String encodeParameters(Multimap<HttpMethod, RestParameter> parameters) {
