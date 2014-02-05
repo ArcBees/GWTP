@@ -146,8 +146,10 @@ public class RouteTokenFormatterTest {
                 .with("limit", "20")
                 .build();
         String expectedPlacePattern = "^\\/user\\/0x42\\/albums\\/0xAFFE\\?\\w*=\\d*&\\w*=\\d*$";
-        Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder().put("start", "15")
-                                                                  .put("limit", "20").build();
+        Map<String, String> expectedQueryParameters = ImmutableMap.<String, String>builder()
+                .put("start", "15")
+                .put("limit", "20")
+                .build();
 
         // When
         String placeToken = tokenFormatter.toPlaceToken(placeRequest);
