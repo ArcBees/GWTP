@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.client.gin;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
@@ -43,8 +43,8 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     String xsrfTokenHeaderName = RestDispatchAsyncModule.DEFAULT_XSRF_NAME;
     Class<? extends Serialization> serializationClass = JsonSerialization.class;
     int requestTimeoutMs = 0;
-    Multimap<HttpMethod, RestParameter> globalHeaderParams = HashMultimap.create();
-    Multimap<HttpMethod, RestParameter> globalQueryParams = HashMultimap.create();
+    Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
+    Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
 
     /**
      * Specify the XSRF token header name.
