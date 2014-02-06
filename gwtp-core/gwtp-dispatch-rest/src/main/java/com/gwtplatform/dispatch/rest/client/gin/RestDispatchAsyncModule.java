@@ -20,7 +20,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
@@ -73,10 +73,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
 
-    private static class StaticValueProvider implements ValueProvider {
+    public static class StaticValueProvider implements ValueProvider {
         private final String value;
 
-        StaticValueProvider(String value) {
+        public StaticValueProvider(String value) {
             this.value = value;
         }
 
@@ -148,7 +148,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     }
 
     private Multimap<HttpMethod, AsyncRestParameter> decodeParameters(String encodedParameters) {
-        Multimap<HttpMethod, AsyncRestParameter> parameters = HashMultimap.create();
+        Multimap<HttpMethod, AsyncRestParameter> parameters = LinkedHashMultimap.create();
 
         JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
         for (String method : json.keySet()) {
