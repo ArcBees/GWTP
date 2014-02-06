@@ -23,9 +23,11 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation used to disable the XSRF header on REST actions and services.
- * If used on a resource type, this will disable the XSRF header for all descendant actions.
- * If used on a sub-resource method, this will disable the XSRF header for all descendant actions.
- * If used on an action method, this will disable the XSRF header for that action.
+ * <ul>
+ * <li>If used on a resource type or a sub-resource method, this will disable the XSRF header for all descendant
+ * actions.</li>
+ * <li>If used on an action method, this will disable the XSRF header for that action.</li>
+ * </ul>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
