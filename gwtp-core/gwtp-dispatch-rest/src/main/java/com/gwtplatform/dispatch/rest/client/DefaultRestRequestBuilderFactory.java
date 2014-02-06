@@ -75,7 +75,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
                                      @GlobalHeaderParams Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams,
                                      @GlobalQueryParams Multimap<HttpMethod, AsyncRestParameter> globalQueryParams,
                                      @RestApplicationPath String baseUrl,
-                                     @XSRFHeaderName String securityHeaderName,
+                                     @XsrfHeaderName String securityHeaderName,
                                      @RequestTimeout Integer requestTimeoutMs) {
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
