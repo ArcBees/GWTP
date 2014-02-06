@@ -40,10 +40,6 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  * </ul>
  */
 public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.Builder {
-    enum ParameterType {
-        HEADER, QUERY
-    }
-
     String xsrfTokenHeaderName = RestDispatchAsyncModule.DEFAULT_XSRF_NAME;
     Class<? extends Serialization> serializationClass = JsonSerialization.class;
     int requestTimeoutMs = 0;
