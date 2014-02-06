@@ -16,31 +16,43 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import java.util.UUID;
+import java.util.Date;
 
 import javax.inject.Inject;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
+import org.jukito.TestSingleton;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
+import com.google.inject.Provides;
 import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.StaticValueProvider;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.endsWith;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.startsWith;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
+import static com.gwtplatform.dispatch.rest.shared.HttpMethod.POST;
 import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_TYPE;
 
 @RunWith(JukitoRunner.class)
@@ -55,6 +67,30 @@ public class DefaultRestRequestBuilderFactoryTest {
             forceMock(HttpRequestBuilderFactory.class);
             forceMock(RequestBuilder.class);
         }
+
+        @Provides
+        @TestSingleton
+        @GlobalHeaderParams
+        Multimap<HttpMethod, AsyncRestParameter> getHeaderParams() {
+            LinkedHashMultimap<HttpMethod, AsyncRestParameter> headers = LinkedHashMultimap.create();
+            headers.put(GET, new AsyncRestParameter(KEY_1, new StaticValueProvider(DECODED_VALUE_1)));
+            headers.put(GET, new AsyncRestParameter(KEY_2, new StaticValueProvider(DECODED_VALUE_2)));
+            headers.put(POST, new AsyncRestParameter(KEY_3, new StaticValueProvider(DECODED_VALUE_3)));
+
+            return headers;
+        }
+
+        @Provides
+        @TestSingleton
+        @GlobalQueryParams
+        Multimap<HttpMethod, AsyncRestParameter> getQueryParams() {
+            LinkedHashMultimap<HttpMethod, AsyncRestParameter> queries = LinkedHashMultimap.create();
+            queries.put(GET, new AsyncRestParameter(KEY_1, new StaticValueProvider(DECODED_VALUE_1)));
+            queries.put(GET, new AsyncRestParameter(KEY_2, new StaticValueProvider(DECODED_VALUE_2)));
+            queries.put(POST, new AsyncRestParameter(KEY_3, new StaticValueProvider(DECODED_VALUE_3)));
+
+            return queries;
+        }
     }
 
     private static final String APPLICATION_PATH = "/api";
@@ -63,6 +99,13 @@ public class DefaultRestRequestBuilderFactoryTest {
     private static final String XSRF_HEADER_NAME = "My-Header";
     private static final String SECURITY_TOKEN = "SecurityToken";
     private static final int TIMEOUT = 1000;
+
+    private static final String KEY_1 = "key1";
+    private static final String KEY_2 = "key2";
+    private static final String KEY_3 = "key3";
+
+    private static final String ACTION_KEY_1 = "action" + KEY_1;
+    private static final String ACTION_KEY_2 = "action" + KEY_2;
 
     private static final String DECODED_VALUE_1 = "Value1";
     private static final String ENCODED_VALUE_1 = "Value1";
@@ -98,7 +141,7 @@ public class DefaultRestRequestBuilderFactoryTest {
         factory.build(action, SECURITY_TOKEN);
 
         // Then
-        verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), eq(ABSOLUTE_PATH));
+        verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), startsWith(ABSOLUTE_PATH));
     }
 
     @Test
@@ -110,7 +153,7 @@ public class DefaultRestRequestBuilderFactoryTest {
         factory.build(action, SECURITY_TOKEN);
 
         // Then
-        verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), eq(APPLICATION_PATH + RELATIVE_PATH));
+        verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), startsWith(APPLICATION_PATH + RELATIVE_PATH));
     }
 
     @Test
@@ -186,7 +229,7 @@ public class DefaultRestRequestBuilderFactoryTest {
         // Given
         Object unserializedObject = new Object();
         String serializationKey = "meta";
-        String serializedValue = UUID.randomUUID().toString();
+        String serializedValue = new Date().toString();
 
         ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
         action.setBodyParam(unserializedObject);
@@ -200,5 +243,87 @@ public class DefaultRestRequestBuilderFactoryTest {
 
         // Then
         verify(requestBuilder).setRequestData(eq(serializedValue));
+    }
+
+    @Test
+    public void globalHeadersShouldBeSetForCorrespondingHttpMethod() throws ActionException {
+        // Given
+        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+
+        // When
+        factory.build(action, SECURITY_TOKEN);
+
+        // Then
+        verify(requestBuilder).setHeader(eq(KEY_1), eq(DECODED_VALUE_1));
+        verify(requestBuilder).setHeader(eq(KEY_2), eq(DECODED_VALUE_2));
+        verify(requestBuilder, never()).setHeader(eq(KEY_3), eq(DECODED_VALUE_3));
+    }
+
+    @Test
+    public void allActionHeadersShouldBeSet() throws ActionException {
+        // Given
+        RestAction<Void> action = createActionWithHeaderParams();
+
+        // When
+        factory.build(action, SECURITY_TOKEN);
+
+        // Then
+        verify(requestBuilder).setHeader(eq(ACTION_KEY_1), eq(DECODED_VALUE_1));
+        verify(requestBuilder).setHeader(eq(ACTION_KEY_2), eq(DECODED_VALUE_2));
+    }
+
+    @Test
+    public void actionHeadersShouldBeSetAfterGlobalHeaders() throws ActionException {
+        // Given
+        RestAction<Void> action = createActionWithHeaderParams();
+
+        // When
+        factory.build(action, SECURITY_TOKEN);
+
+        // Then
+        InOrder inOrder = inOrder(requestBuilder);
+        inOrder.verify(requestBuilder).setHeader(eq(KEY_1), anyString());
+        inOrder.verify(requestBuilder).setHeader(eq(KEY_2), anyString());
+        inOrder.verify(requestBuilder).setHeader(eq(ACTION_KEY_1), anyString());
+        inOrder.verify(requestBuilder).setHeader(eq(ACTION_KEY_2), anyString());
+    }
+
+    @Test
+    public void globalQueriesShouldBeSetForCorrespondingHttpMethod() throws ActionException {
+        // Given
+        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+
+        // When
+        factory.build(action, SECURITY_TOKEN);
+
+        // Then
+        String expectedUrl = String.format("?%s=%s&%s=%s", KEY_1, ENCODED_VALUE_1, KEY_2, ENCODED_VALUE_2);
+
+        verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), endsWith(expectedUrl));
+    }
+
+    @Test
+    public void allActionQueriesShouldBeSet() throws ActionException {
+        // Given
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        action.addQueryParam(ACTION_KEY_1, DECODED_VALUE_1);
+        action.addQueryParam(ACTION_KEY_2, DECODED_VALUE_2);
+
+        // When
+        factory.build(action, SECURITY_TOKEN);
+
+        // Then
+        String expectedUrl = String.format("?%s=%s&%s=%s&%s=%s&%s=%s", KEY_1, ENCODED_VALUE_1, KEY_2, ENCODED_VALUE_2,
+                ACTION_KEY_1, ENCODED_VALUE_1, ACTION_KEY_2, ENCODED_VALUE_2);
+
+        verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), endsWith(expectedUrl));
+    }
+
+    private RestAction<Void> createActionWithHeaderParams() {
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        action.addHeaderParam(ACTION_KEY_1, DECODED_VALUE_1);
+        action.addHeaderParam(ACTION_KEY_2, DECODED_VALUE_2);
+
+        return action;
     }
 }
