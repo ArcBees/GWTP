@@ -43,8 +43,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule
  */
 public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
-    private final Builder builder;
-
     /**
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
@@ -111,6 +109,8 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
 
     private static Boolean alreadyBound = false;
     private static Class<? extends AbstractDispatchAsyncModule> boundType;
+
+    private final Builder builder;
 
     protected AbstractDispatchAsyncModule(Builder builder) {
         this.builder = builder;

@@ -26,7 +26,7 @@ import com.gwtplatform.common.shared.UrlUtils;
  * You can safely install this module multiple times as the bindings will be performed only on the first install.
  */
 public class CommonGinModule extends AbstractGinModule {
-    private static boolean isInstalled = false;
+    private static boolean isInstalled;
 
     @Override
     protected void configure() {
