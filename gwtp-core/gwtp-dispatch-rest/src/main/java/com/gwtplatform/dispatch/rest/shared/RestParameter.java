@@ -55,4 +55,9 @@ public class RestParameter {
     public String getStringValue() {
         return stringValue;
     }
+
+    @Override
+    public String toString() {
+        return "{\"key\": \"" + name + "\", \"value\": \"" + stringValue + "\"}";
+    }
 }
