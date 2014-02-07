@@ -33,7 +33,6 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -61,8 +60,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final Serialization serialization;
     private final HttpRequestBuilderFactory httpRequestBuilderFactory;
     private final UrlUtils urlUtils;
-    private final Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams;
-    private final Multimap<HttpMethod, AsyncRestParameter> globalQueryParams;
+    private final Multimap<HttpMethod, RestParameter> globalHeaderParams;
+    private final Multimap<HttpMethod, RestParameter> globalQueryParams;
     private final String baseUrl;
     private final String securityHeaderName;
     private final Integer requestTimeoutMs;
@@ -72,8 +71,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
                                      Serialization serialization,
                                      HttpRequestBuilderFactory httpRequestBuilderFactory,
                                      UrlUtils urlUtils,
-                                     @GlobalHeaderParams Multimap<HttpMethod, AsyncRestParameter> globalHeaderParams,
-                                     @GlobalQueryParams Multimap<HttpMethod, AsyncRestParameter> globalQueryParams,
+                                     @GlobalHeaderParams Multimap<HttpMethod, RestParameter> globalHeaderParams,
+                                     @GlobalQueryParams Multimap<HttpMethod, RestParameter> globalQueryParams,
                                      @RestApplicationPath String baseUrl,
                                      @XsrfHeaderName String securityHeaderName,
                                      @RequestTimeout Integer requestTimeoutMs) {
@@ -155,7 +154,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             throws ActionException {
         String path = action.getPath();
         List<RestParameter> actionParams = action.getHeaderParams();
-        Collection<AsyncRestParameter> applicableGlobalParams = globalHeaderParams.get(action.getHttpMethod());
+        Collection<RestParameter> applicableGlobalParams = globalHeaderParams.get(action.getHttpMethod());
 
         // By setting the most generic headers first, we make sure they can be overridden by more specific ones
         requestBuilder.setHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON);
@@ -169,11 +168,11 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             requestBuilder.setHeader(securityHeaderName, xsrfToken);
         }
 
-        for (AsyncRestParameter parameter : applicableGlobalParams) {
-            String value = parameter.getValueProvider().getValue(action);
+        for (RestParameter parameter : applicableGlobalParams) {
+            String value = parameter.getStringValue();
 
             if (value != null) {
-                requestBuilder.setHeader(parameter.getKey(), value);
+                requestBuilder.setHeader(parameter.getName(), value);
             }
         }
 
@@ -212,11 +211,11 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private List<RestParameter> getGlobalQueryParamsForAction(RestAction<?> action) {
         List<RestParameter> queryParams = Lists.newArrayList();
 
-        for (AsyncRestParameter parameter : globalQueryParams.get(action.getHttpMethod())) {
-            String value = parameter.getValueProvider().getValue(action);
+        for (RestParameter parameter : globalQueryParams.get(action.getHttpMethod())) {
+            String value = parameter.getStringValue();
 
             if (value != null) {
-                queryParams.add(new RestParameter(parameter.getKey(), value));
+                queryParams.add(new RestParameter(parameter.getName(), value));
             }
         }
 

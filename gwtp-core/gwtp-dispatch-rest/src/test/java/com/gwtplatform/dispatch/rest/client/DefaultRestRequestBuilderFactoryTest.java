@@ -34,11 +34,10 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.google.inject.Provides;
 import com.gwtplatform.common.shared.UrlUtils;
-import com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.StaticValueProvider;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rest.shared.RestParameter;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import static org.mockito.BDDMockito.given;
@@ -71,11 +70,11 @@ public class DefaultRestRequestBuilderFactoryTest {
         @Provides
         @TestSingleton
         @GlobalHeaderParams
-        Multimap<HttpMethod, AsyncRestParameter> getHeaderParams() {
-            LinkedHashMultimap<HttpMethod, AsyncRestParameter> headers = LinkedHashMultimap.create();
-            headers.put(GET, new AsyncRestParameter(KEY_1, new StaticValueProvider(DECODED_VALUE_1)));
-            headers.put(GET, new AsyncRestParameter(KEY_2, new StaticValueProvider(DECODED_VALUE_2)));
-            headers.put(POST, new AsyncRestParameter(KEY_3, new StaticValueProvider(DECODED_VALUE_3)));
+        Multimap<HttpMethod, RestParameter> getHeaderParams() {
+            LinkedHashMultimap<HttpMethod, RestParameter> headers = LinkedHashMultimap.create();
+            headers.put(GET, new RestParameter(KEY_1, DECODED_VALUE_1));
+            headers.put(GET, new RestParameter(KEY_2, DECODED_VALUE_2));
+            headers.put(POST, new RestParameter(KEY_3, DECODED_VALUE_3));
 
             return headers;
         }
@@ -83,11 +82,11 @@ public class DefaultRestRequestBuilderFactoryTest {
         @Provides
         @TestSingleton
         @GlobalQueryParams
-        Multimap<HttpMethod, AsyncRestParameter> getQueryParams() {
-            LinkedHashMultimap<HttpMethod, AsyncRestParameter> queries = LinkedHashMultimap.create();
-            queries.put(GET, new AsyncRestParameter(KEY_1, new StaticValueProvider(DECODED_VALUE_1)));
-            queries.put(GET, new AsyncRestParameter(KEY_2, new StaticValueProvider(DECODED_VALUE_2)));
-            queries.put(POST, new AsyncRestParameter(KEY_3, new StaticValueProvider(DECODED_VALUE_3)));
+        Multimap<HttpMethod, RestParameter> getQueryParams() {
+            LinkedHashMultimap<HttpMethod, RestParameter> queries = LinkedHashMultimap.create();
+            queries.put(GET, new RestParameter(KEY_1, DECODED_VALUE_1));
+            queries.put(GET, new RestParameter(KEY_2, DECODED_VALUE_2));
+            queries.put(POST, new RestParameter(KEY_3, DECODED_VALUE_3));
 
             return queries;
         }
