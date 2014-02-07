@@ -31,7 +31,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  * <ul>
  * <li>All configuration methods listed by {@link AbstractDispatchAsyncModule.Builder}</li>
  * <li>{@link #xsrfTokenHeaderName(String) XSRF Token Header Name}:
- * A {@link com.gwtplatform.dispatch.rest.client.XSRFHeaderName}.
+ * A {@link com.gwtplatform.dispatch.rest.client.XsrfHeaderName}.
  * The default value is {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
  * <li>{@link #serialization(Class) Serialization Implementation}: A {@link Serialization} implementation.
  * The default is {@link JsonSerialization}.</li>
