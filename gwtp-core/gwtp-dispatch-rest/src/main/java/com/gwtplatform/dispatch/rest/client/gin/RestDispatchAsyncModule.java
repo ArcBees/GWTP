@@ -84,10 +84,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // Constants / Configurations
         // It's not possible to bind non-native type constants, so we must encode them at compile-time and decode them
         // at runtime (ie: Global Parameters)
-        bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.xsrfTokenHeaderName);
-        bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
-        bindConstant().annotatedWith(GlobalHeaderParams.class).to(encodeParameters(builder.globalHeaderParams));
-        bindConstant().annotatedWith(GlobalQueryParams.class).to(encodeParameters(builder.globalQueryParams));
+        bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.getXsrfTokenHeaderName());
+        bindConstant().annotatedWith(RequestTimeout.class).to(builder.getRequestTimeoutMs());
+        bindConstant().annotatedWith(GlobalHeaderParams.class).to(encodeParameters(builder.getGlobalHeaderParams()));
+        bindConstant().annotatedWith(GlobalQueryParams.class).to(encodeParameters(builder.getGlobalQueryParams()));
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
@@ -95,7 +95,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
 
         // Serialization
-        bind(Serialization.class).to(builder.serializationClass).in(Singleton.class);
+        bind(Serialization.class).to(builder.getSerializationClass()).in(Singleton.class);
 
         // Entry Point
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
