@@ -18,20 +18,30 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import javax.inject.Singleton;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
+import com.gwtplatform.dispatch.rest.client.GlobalHeaderParams;
+import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
-import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls.
@@ -44,86 +54,23 @@ import com.gwtplatform.dispatch.rest.shared.RestDispatch;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
-     * A {@link RestDispatchAsyncModule} builder.
-     * <p/>
-     * The possible configurations are:
-     * <ul>
-     * <li>A {@link com.gwtplatform.dispatch.rest.client.XsrfHeaderName}. The default value is
-     * {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
-     * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
-     * </ul>
+     * {@inheritDoc}
      */
-    public static class Builder extends AbstractDispatchAsyncModule.Builder {
-        private String xsrfTokenHeaderName = DEFAULT_XSRF_NAME;
-        private Class<? extends Serialization> serializationClass = JsonSerialization.class;
-        private int requestTimeoutMs;
-
-        /**
-         * Specify the XSRF token header name.
-         *
-         * @deprecated See {@link #xsrfTokenHeaderName(String)}
-         */
-        @Deprecated
-        public Builder xcsrfTokenHeaderName(String xsrfTokenHeaderName) {
-            this.xsrfTokenHeaderName = xsrfTokenHeaderName;
-            return this;
-        }
-
-        /**
-         * Specify the XSRF token header name.
-         *
-         * @param xsrfTokenHeaderName The XSRF token header name.
-         * @return this {@link Builder} object.
-         */
-        public Builder xsrfTokenHeaderName(String xsrfTokenHeaderName) {
-            this.xsrfTokenHeaderName = xsrfTokenHeaderName;
-            return this;
-        }
-
-        /**
-         * Specify the serialization implementation to use.
-         * Default is {@link JsonSerialization}.
-         *
-         * @param serializationClass The {@link Serialization} implementation to use.
-         * @return this {@link Builder} object.
-         */
-        public Builder serialization(Class<? extends Serialization> serializationClass) {
-            this.serializationClass = serializationClass;
-            return this;
-        }
-
-        /**
-         * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
-         * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
-         * will be called.
-         * Default is <code>0</code>: no timeout.
-         *
-         * @param timeoutMs The maximum time to wait, in milliseconds, or {@code 0} for no timeout.
-         * @return this {@link Builder} object.
-         */
-        public Builder requestTimeout(int timeoutMs) {
-            this.requestTimeoutMs = timeoutMs;
-            return this;
-        }
-
-        @Override
-        public RestDispatchAsyncModule build() {
-            return new RestDispatchAsyncModule(this);
-        }
+    public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
 
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
-    private final Builder builder;
+    private final RestDispatchAsyncModuleBuilder builder;
 
     /**
-     * Creates this module using the default values as specified by {@link Builder}.
+     * Creates this module using the default values as specified by {@link RestDispatchAsyncModuleBuilder}.
      */
     public RestDispatchAsyncModule() {
-        this(new Builder());
+        this(new RestDispatchAsyncModuleBuilder());
     }
 
-    private RestDispatchAsyncModule(Builder builder) {
+    RestDispatchAsyncModule(RestDispatchAsyncModuleBuilder builder) {
         super(builder);
 
         this.builder = builder;
@@ -134,9 +81,13 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // Common
         install(new CommonGinModule());
 
-        // Constants
-        bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.xsrfTokenHeaderName);
-        bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
+        // Constants / Configurations
+        // It's not possible to bind non-native type constants, so we must encode them at compile-time and decode them
+        // at runtime (ie: Global Parameters)
+        bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.getXsrfTokenHeaderName());
+        bindConstant().annotatedWith(RequestTimeout.class).to(builder.getRequestTimeoutMs());
+        bindConstant().annotatedWith(GlobalHeaderParams.class).to(encodeParameters(builder.getGlobalHeaderParams()));
+        bindConstant().annotatedWith(GlobalQueryParams.class).to(encodeParameters(builder.getGlobalQueryParams()));
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
@@ -144,9 +95,49 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
 
         // Serialization
-        bind(Serialization.class).to(builder.serializationClass).in(Singleton.class);
+        bind(Serialization.class).to(builder.getSerializationClass()).in(Singleton.class);
 
         // Entry Point
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
+    }
+
+    @Provides
+    @Singleton
+    @GlobalHeaderParams
+    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams String encodedParams) {
+        return decodeParameters(encodedParams);
+    }
+
+    @Provides
+    @Singleton
+    @GlobalQueryParams
+    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
+        return decodeParameters(encodedParams);
+    }
+
+    private String encodeParameters(Multimap<HttpMethod, RestParameter> parameters) {
+        // The output string will be a valid JSON object based on the Multimap content
+        return "{\"" + Joiner.on(",\"").withKeyValueSeparator("\":").join(parameters.asMap()) + "}";
+    }
+
+    private Multimap<HttpMethod, RestParameter> decodeParameters(String encodedParameters) {
+        Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
+
+        JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
+        for (String method : json.keySet()) {
+            HttpMethod httpMethod = HttpMethod.valueOf(method);
+            JSONArray jsonParameters = json.get(method).isArray();
+
+            for (int i = 0; i < jsonParameters.size(); ++i) {
+                JSONObject jsonParameter = jsonParameters.get(i).isObject();
+                String key = jsonParameter.get("key").isString().stringValue();
+                String value = jsonParameter.get("value").isString().stringValue();
+                RestParameter parameter = new RestParameter(key, value);
+
+                parameters.put(httpMethod, parameter);
+            }
+        }
+
+        return parameters;
     }
 }
