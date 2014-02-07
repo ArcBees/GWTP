@@ -4,14 +4,19 @@
         "http://users.tpg.com.au/ojburn/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-
     <!-- Suppress MagicNumberCheck for files under test -->
     <suppress checks="MagicNumberCheck" files=".*[/\\]test[/\\].*"/>
+
+    <!-- Suppress Javadoc for files under rebind and test -->
+    <suppress checks="JavadocMethod" files=".*[/\\]test[/\\].*"/>
+    <suppress checks="JavadocType" files=".*[/\\]test[/\\].*"/>
+
+    <suppress checks="JavadocMethod" files=".*[/\\]rebind[/\\].*"/>
+    <suppress checks="JavadocType" files=".*[/\\]rebind[/\\].*"/>
 
     <!-- Suppress files under target -->
     <suppress checks=".*" files=".*[/\\]target[/\\].*"/>
 
     <!-- Suppress files under com/google -->
     <suppress checks=".*" files="com[/\\]google[/\\]"/>
-
 </suppressions>
