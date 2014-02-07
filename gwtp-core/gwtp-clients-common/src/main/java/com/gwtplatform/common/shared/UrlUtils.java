@@ -16,12 +16,15 @@
 
 package com.gwtplatform.common.shared;
 
+/**
+ * Helper methods to encode and decode query and path components of an URL.
+ */
 public interface UrlUtils {
-    public String decodeQueryString(String encodedUrlComponent);
+    String decodeQueryString(String encodedUrlComponent);
 
-    public String encodeQueryString(String decodedUrlComponent);
+    String encodeQueryString(String decodedUrlComponent);
 
-    public String decodePathSegment(String encodedPathSegment);
+    String decodePathSegment(String encodedPathSegment);
 
-    public String encodePathSegment(String decodedPathSegment);
+    String encodePathSegment(String decodedPathSegment);
 }

@@ -44,7 +44,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Singleton
 public final class CrawlFilter implements Filter {
-
     private static final String CHAR_ENCODING = "UTF-8";
 
     /**
@@ -57,10 +56,22 @@ public final class CrawlFilter implements Filter {
      * Special URL token that gets passed from the crawler to the servlet filter.
      * This token is used in case there are not already existing query parameters.
      */
-    private static final String ESCAPED_FRAGMENT_FORMAT2 = "&"
-            + ESCAPED_FRAGMENT_FORMAT1;
+    private static final String ESCAPED_FRAGMENT_FORMAT2 = "&" + ESCAPED_FRAGMENT_FORMAT1;
     private static final int ESCAPED_FRAGMENT_LENGTH1 = ESCAPED_FRAGMENT_FORMAT1.length();
     private static final int ESCAPED_FRAGMENT_LENGTH2 = ESCAPED_FRAGMENT_FORMAT2.length();
+
+    private final String serviceUrl;
+    private final String key;
+    private final Logger log;
+
+    @Inject
+    public CrawlFilter(@ServiceUrl String serviceUrl,
+                       @ServiceKey String key,
+                       Logger log) {
+        this.serviceUrl = serviceUrl;
+        this.key = key;
+        this.log = log;
+    }
 
     /**
      * Maps from the query string that contains _escaped_fragment_ to one that
@@ -70,7 +81,7 @@ public final class CrawlFilter implements Filter {
      *
      * @param queryString
      * @return A modified query string followed by a hash fragment if applicable.
-     *         The non-modified query string otherwise.
+     * The non-modified query string otherwise.
      * @throws UnsupportedEncodingException
      */
     private static String rewriteQueryString(String queryString)
@@ -99,19 +110,6 @@ public final class CrawlFilter implements Filter {
         return queryString;
     }
 
-    private final String serviceUrl;
-    private final String key;
-    private final Logger log;
-
-    @Inject
-    public CrawlFilter(@ServiceUrl String serviceUrl,
-            @ServiceKey String key,
-            Logger log) {
-        this.serviceUrl = serviceUrl;
-        this.key = key;
-        this.log = log;
-    }
-
     /**
      * Destroys the filter configuration.
      */
@@ -124,7 +122,7 @@ public final class CrawlFilter implements Filter {
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain) throws IOException, ServletException {
+                         FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
@@ -135,7 +133,7 @@ public final class CrawlFilter implements Filter {
 
         // Does this request contain an _escaped_fragment_?
         if ((queryString != null)
-                && (queryString.contains(ESCAPED_FRAGMENT_FORMAT1))) {
+            && (queryString.contains(ESCAPED_FRAGMENT_FORMAT1))) {
             res.setHeader("Content-Type", "text/html; charset=" + CHAR_ENCODING);
 
             PrintWriter writer = res.getWriter();
@@ -154,7 +152,7 @@ public final class CrawlFilter implements Filter {
                 log.info("Crawl filter encountered escaped fragment, will open: " + pageName);
 
                 String serviceRequest = serviceUrl + "?key=" + URLEncoder.encode(key, CHAR_ENCODING)
-                        + "&url=" + URLEncoder.encode(pageName, CHAR_ENCODING);
+                                        + "&url=" + URLEncoder.encode(pageName, CHAR_ENCODING);
 
                 log.info("Full service request: " + serviceRequest);
 
@@ -203,5 +201,4 @@ public final class CrawlFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
-
 }
