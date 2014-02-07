@@ -40,11 +40,16 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  * </ul>
  */
 public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.Builder {
-    String xsrfTokenHeaderName = RestDispatchAsyncModule.DEFAULT_XSRF_NAME;
-    Class<? extends Serialization> serializationClass = JsonSerialization.class;
-    int requestTimeoutMs = 0;
-    Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
-    Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
+    private String xsrfTokenHeaderName = RestDispatchAsyncModule.DEFAULT_XSRF_NAME;
+    private Class<? extends Serialization> serializationClass = JsonSerialization.class;
+    private int requestTimeoutMs = 0;
+    private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
+    private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
+
+    @Override
+    public RestDispatchAsyncModule build() {
+        return new RestDispatchAsyncModule(this);
+    }
 
     /**
      * Specify the XSRF token header name.
@@ -102,8 +107,23 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return new RestParameterBuilder(this, globalQueryParams, key);
     }
 
-    @Override
-    public RestDispatchAsyncModule build() {
-        return new RestDispatchAsyncModule(this);
+    public String getXsrfTokenHeaderName() {
+        return xsrfTokenHeaderName;
+    }
+
+    public Class<? extends Serialization> getSerializationClass() {
+        return serializationClass;
+    }
+
+    public int getRequestTimeoutMs() {
+        return requestTimeoutMs;
+    }
+
+    public Multimap<HttpMethod, RestParameter> getGlobalHeaderParams() {
+        return globalHeaderParams;
+    }
+
+    public Multimap<HttpMethod, RestParameter> getGlobalQueryParams() {
+        return globalQueryParams;
     }
 }
