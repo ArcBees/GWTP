@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import javax.inject.Singleton;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gwt.json.client.JSONArray;
@@ -38,6 +37,7 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
+import com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
@@ -62,6 +62,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
     private final RestDispatchAsyncModuleBuilder builder;
+    private final MultimapJsonSerializer multimapJsonSerializer = new MultimapJsonSerializer();
 
     /**
      * Creates this module using the default values as specified by {@link RestDispatchAsyncModuleBuilder}.
@@ -86,8 +87,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // at runtime (ie: Global Parameters)
         bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.getXsrfTokenHeaderName());
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.getRequestTimeoutMs());
-        bindConstant().annotatedWith(GlobalHeaderParams.class).to(encodeParameters(builder.getGlobalHeaderParams()));
-        bindConstant().annotatedWith(GlobalQueryParams.class).to(encodeParameters(builder.getGlobalQueryParams()));
+        bindConstant().annotatedWith(GlobalHeaderParams.class)
+                .to(multimapJsonSerializer.serialize(builder.getGlobalHeaderParams()));
+        bindConstant().annotatedWith(GlobalQueryParams.class)
+                .to(multimapJsonSerializer.serialize(builder.getGlobalQueryParams()));
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
@@ -113,11 +116,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @GlobalQueryParams
     Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
         return decodeParameters(encodedParams);
-    }
-
-    private String encodeParameters(Multimap<HttpMethod, RestParameter> parameters) {
-        // The output string will be a valid JSON object based on the Multimap content
-        return "{\"" + Joiner.on(",\"").withKeyValueSeparator("\":").join(parameters.asMap()) + "}";
     }
 
     private Multimap<HttpMethod, RestParameter> decodeParameters(String encodedParameters) {
