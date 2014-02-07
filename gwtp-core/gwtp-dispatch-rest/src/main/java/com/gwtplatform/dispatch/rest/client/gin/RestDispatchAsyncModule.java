@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client.gin;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import com.google.common.base.Joiner;
@@ -39,16 +38,10 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
-import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter;
-import com.gwtplatform.dispatch.rest.shared.AsyncRestParameter.ValueProvider;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
-
-import static com.google.inject.name.Names.named;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls.
@@ -61,35 +54,12 @@ import static com.google.inject.name.Names.named;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
-     * A {@link RestDispatchAsyncModule} builder.
-     * <p/>
-     * The possible configurations are:
-     * <ul>
-     * <li>A {@link com.gwtplatform.dispatch.rest.client.XsrfHeaderName}. The default value is
-     * {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li>
-     * <li>A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
-     * </ul>
+     * {@inheritDoc}
      */
     public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
 
-    public static class StaticValueProvider implements ValueProvider {
-        private final String value;
-
-        public StaticValueProvider(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String getValue(RestAction<?> action) {
-            return value;
-        }
-    }
-
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
-
-    private static final String GLOBAL_HEADER_PARAMS = "GlobalHeaders";
-    private static final String GLOBAL_QUERY_PARAMS = "GlobalQueries";
 
     private final RestDispatchAsyncModuleBuilder builder;
 
@@ -112,10 +82,12 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         install(new CommonGinModule());
 
         // Constants / Configurations
+        // It's not possible to bind non-native type constants, so we must encode them at compile-time and decode them
+        // at runtime (ie: Global Parameters)
         bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.xsrfTokenHeaderName);
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.requestTimeoutMs);
-        bindConstant().annotatedWith(named(GLOBAL_HEADER_PARAMS)).to(encodeParameters(builder.globalHeaderParams));
-        bindConstant().annotatedWith(named(GLOBAL_QUERY_PARAMS)).to(encodeParameters(builder.globalQueryParams));
+        bindConstant().annotatedWith(GlobalHeaderParams.class).to(encodeParameters(builder.globalHeaderParams));
+        bindConstant().annotatedWith(GlobalQueryParams.class).to(encodeParameters(builder.globalQueryParams));
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
@@ -132,23 +104,24 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Provides
     @Singleton
     @GlobalHeaderParams
-    Multimap<HttpMethod, AsyncRestParameter> getGlobalHeaderParams(@Named(GLOBAL_HEADER_PARAMS) String encodedParams) {
+    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams String encodedParams) {
         return decodeParameters(encodedParams);
     }
 
     @Provides
     @Singleton
     @GlobalQueryParams
-    Multimap<HttpMethod, AsyncRestParameter> getGlobalQueryParams(@Named(GLOBAL_QUERY_PARAMS) String encodedParams) {
+    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
         return decodeParameters(encodedParams);
     }
 
     private String encodeParameters(Multimap<HttpMethod, RestParameter> parameters) {
+        // The output string will be a valid JSON object based on the Multimap content
         return "{\"" + Joiner.on(",\"").withKeyValueSeparator("\":").join(parameters.asMap()) + "}";
     }
 
-    private Multimap<HttpMethod, AsyncRestParameter> decodeParameters(String encodedParameters) {
-        Multimap<HttpMethod, AsyncRestParameter> parameters = LinkedHashMultimap.create();
+    private Multimap<HttpMethod, RestParameter> decodeParameters(String encodedParameters) {
+        Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
 
         JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
         for (String method : json.keySet()) {
@@ -159,7 +132,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
                 JSONObject jsonParameter = jsonParameters.get(i).isObject();
                 String key = jsonParameter.get("key").isString().stringValue();
                 String value = jsonParameter.get("value").isString().stringValue();
-                AsyncRestParameter parameter = new AsyncRestParameter(key, new StaticValueProvider(value));
+                RestParameter parameter = new RestParameter(key, value);
 
                 parameters.put(httpMethod, parameter);
             }
