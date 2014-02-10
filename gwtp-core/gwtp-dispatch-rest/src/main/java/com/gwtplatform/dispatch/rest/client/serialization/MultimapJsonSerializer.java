@@ -15,6 +15,8 @@ import com.google.common.collect.Multimap;
 /**
  * Serializes a {@link com.google.common.collect.Multimap} to valid JSON.
  * Uses {@link java.lang.Object#toString()} to serialize the value on non-native types.
+ * If you need a more rebust serializer, you should consider
+ * https://github.com/nmorel/gwt-jackson/tree/master/extensions/guava
  */
 public class MultimapJsonSerializer {
     public String serialize(Multimap<?, ?> parameters) {
