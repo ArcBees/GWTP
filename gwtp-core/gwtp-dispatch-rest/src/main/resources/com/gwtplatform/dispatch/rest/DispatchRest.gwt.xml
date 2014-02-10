@@ -11,7 +11,7 @@
     <inherits name="com.google.gwt.json.JSON"/>
     <inherits name="com.github.nmorel.gwtjackson.GwtJackson"/>
 
-    <!-- Specify the paths for translatable code                    -->
+    <!-- Specify the paths for translatable code -->
     <source path='client'/>
     <source path='shared'/>
 
