@@ -65,9 +65,9 @@ public final class CrawlFilter implements Filter {
     private final Logger log;
 
     @Inject
-    public CrawlFilter(@ServiceUrl String serviceUrl,
-                       @ServiceKey String key,
-                       Logger log) {
+    CrawlFilter(@ServiceUrl String serviceUrl,
+                @ServiceKey String key,
+                Logger log) {
         this.serviceUrl = serviceUrl;
         this.key = key;
         this.log = log;
