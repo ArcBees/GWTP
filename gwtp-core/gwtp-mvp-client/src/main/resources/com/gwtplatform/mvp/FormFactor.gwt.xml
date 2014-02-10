@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-    <define-property name="formfactor" values="desktop,tablet,mobile"/>
-    <property-provider name="formfactor">
+    <define-property name="gwtp.formfactor" values="desktop,tablet,mobile"/>
+    <property-provider name="gwtp.formfactor">
         <![CDATA[
         // Look for the formfactor as a url argument.
         var args = location.href;
@@ -41,12 +41,12 @@
     <!-- Tablet -->
     <replace-with class="com.gwtplatform.mvp.client.TabletGinjectorProvider">
         <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
-        <when-property-is name="formfactor" value="tablet"/>
+        <when-property-is name="gwtp.formfactor" value="tablet"/>
     </replace-with>
 
     <!-- Mobile -->
     <replace-with class="com.gwtplatform.mvp.client.MobileGinjectorProvider">
         <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
-        <when-property-is name="formfactor" value="mobile"/>
+        <when-property-is name="gwtp.formfactor" value="mobile"/>
     </replace-with>
 </module>
