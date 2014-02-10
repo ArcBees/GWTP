@@ -117,7 +117,11 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     private String encodeParameters(Multimap<HttpMethod, RestParameter> parameters) {
         // The output string will be a valid JSON object based on the Multimap content
-        return "{\"" + Joiner.on(",\"").withKeyValueSeparator("\":").join(parameters.asMap()) + "}";
+        if (parameters.isEmpty()) {
+            return "{}";
+        } else {
+            return "{\"" + Joiner.on(",\"").withKeyValueSeparator("\":").join(parameters.asMap()) + "}";
+        }
     }
 
     private Multimap<HttpMethod, RestParameter> decodeParameters(String encodedParameters) {
