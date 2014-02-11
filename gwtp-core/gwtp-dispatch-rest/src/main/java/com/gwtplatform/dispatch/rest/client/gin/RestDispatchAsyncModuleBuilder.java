@@ -42,7 +42,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
 public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.Builder {
     private String xsrfTokenHeaderName = RestDispatchAsyncModule.DEFAULT_XSRF_NAME;
     private Class<? extends Serialization> serializationClass = JsonSerialization.class;
-    private int requestTimeoutMs = 0;
+    private int requestTimeoutMs;
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
 
@@ -99,10 +99,22 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return this;
     }
 
+    /**
+     * Initiate the creation of a global header parameter that will be attached to all requests.
+     *
+     * @param key The key used for this parameter
+     * @return the parameter builder instance
+     */
     public RestParameterBuilder addGlobalHeaderParam(String key) {
         return new RestParameterBuilder(this, globalHeaderParams, key);
     }
 
+    /**
+     * Initiate the creation of a global query parameter that will be attached to all requests.
+     *
+     * @param key The key used for this parameter
+     * @return the parameter builder instance
+     */
     public RestParameterBuilder addGlobalQueryParam(String key) {
         return new RestParameterBuilder(this, globalQueryParams, key);
     }
