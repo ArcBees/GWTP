@@ -24,6 +24,9 @@ import com.google.common.collect.Sets;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
+/**
+ * Configure a global parameter to be sent with every HTTP requests.
+ */
 public class RestParameterBuilder {
     private final RestDispatchAsyncModuleBuilder moduleBuilder;
     private final Multimap<HttpMethod, RestParameter> targetMap;
@@ -38,6 +41,13 @@ public class RestParameterBuilder {
         this.key = key;
     }
 
+    /**
+     * Define with which {@link HttpMethod} the parameter will be added. If none are specified, it will defaults to all.
+     *
+     * @param httpMethod       an {@link HttpMethod} to link this parameter to.
+     * @param otherHttpMethods more {@link HttpMethod}s to link this parameter to.
+     * @return this builder instance.
+     */
     public RestParameterBuilder toHttpMethods(HttpMethod httpMethod, HttpMethod... otherHttpMethods) {
         httpMethods.clear();
 
@@ -47,6 +57,12 @@ public class RestParameterBuilder {
         return this;
     }
 
+    /**
+     * Define the value of this parameter.
+     *
+     * @param value The value for this parameter.
+     * @return The module builder instance.
+     */
     public RestDispatchAsyncModuleBuilder withValue(String value) {
         RestParameter parameter = new RestParameter(key, value);
 
