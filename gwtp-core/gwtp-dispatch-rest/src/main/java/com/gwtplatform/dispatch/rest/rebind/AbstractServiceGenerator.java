@@ -73,7 +73,7 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     }
 
     protected void generateMethods() throws UnableToCompleteException {
-        JMethod[] methods = service.getMethods();
+        JMethod[] methods = service.getInheritableMethods();
         if (methods != null) {
             for (JMethod method : methods) {
                 if (isRestService(method)) {
