@@ -16,9 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Provider;
 
@@ -26,7 +24,6 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
@@ -76,15 +73,14 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     }
 
     protected void generateMethods() throws UnableToCompleteException {
-        Set<JMethod> methods = Sets.newLinkedHashSet();
-
-        addMethods(methods, service.getMethods());
-        addMethods(methods, service.getInheritableMethods());
-        for (JMethod method : methods) {
-            if (isRestService(method)) {
-                generateChildRestService(method);
-            } else {
-                generateRestAction(method);
+        JMethod[] methods = service.getInheritableMethods();
+        if (methods != null) {
+            for (JMethod method : methods) {
+                if (isRestService(method)) {
+                    generateChildRestService(method);
+                } else {
+                    generateRestAction(method);
+                }
             }
         }
     }
@@ -103,11 +99,5 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     protected void generateRestAction(JMethod method) throws UnableToCompleteException {
         ActionGenerator generator = generatorFactory.createActionGenerator(method, getServiceBinding());
         actionBindings.add(generator.generate());
-    }
-
-    private void addMethods(Set<JMethod> methods, JMethod[] methodsToAdd) {
-        if (methodsToAdd != null) {
-            Collections.addAll(methods, methodsToAdd);
-        }
     }
 }
