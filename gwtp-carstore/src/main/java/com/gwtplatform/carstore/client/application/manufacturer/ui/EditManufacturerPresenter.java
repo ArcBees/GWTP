@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,11 +16,14 @@
 
 package com.gwtplatform.carstore.client.application.manufacturer.ui;
 
-import javax.inject.Inject;
-
+import org.turbogwt.mvp.databind.client.Binding;
+import org.turbogwt.mvp.databind.client.BindingImpl;
+import org.turbogwt.mvp.databind.client.DatabindView;
+import org.turbogwt.ext.gwtp.databind.client.PopupDatabindView;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent;
+import com.gwtplatform.carstore.client.application.manufacturer.properties.ManufacturerDtoProperties;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
@@ -29,21 +32,22 @@ import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
-import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
+
+import javax.inject.Inject;
+
 public class EditManufacturerPresenter extends PresenterWidget<MyView> implements EditManufacturerUiHandlers {
-    public interface MyView extends PopupView, HasUiHandlers<EditManufacturerUiHandlers> {
-        void edit(ManufacturerDto manufacturerDto);
+
+    public interface MyView extends PopupDatabindView<EditManufacturerUiHandlers> {
     }
 
     private final RestDispatch dispatcher;
     private final ManufacturerService manufacturerService;
     private final EditManufacturerMessages messages;
-
-    private ManufacturerDto manufacturerDto;
+    private final Binding<ManufacturerDto> binding;
 
     @Inject
     public EditManufacturerPresenter(EventBus eventBus,
@@ -56,13 +60,13 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
         this.dispatcher = dispatcher;
         this.manufacturerService = manufacturerService;
         this.messages = messages;
+        this.binding = new BindingImpl<ManufacturerDto>(view);
 
         getView().setUiHandlers(this);
     }
 
-    @Override
     public void createNew() {
-        manufacturerDto = new ManufacturerDto();
+        binding.setModel(new ManufacturerDto());
 
         reveal();
     }
@@ -72,16 +76,15 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
         getView().hide();
     }
 
-    @Override
     public void edit(ManufacturerDto manufacturerDto) {
-        this.manufacturerDto = manufacturerDto;
+        binding.setModel(manufacturerDto);
 
         reveal();
     }
 
     @Override
-    public void onSave(ManufacturerDto manufacturerDto) {
-        dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
+    public void onSave() {
+        dispatcher.execute(manufacturerService.saveOrCreate(binding.getModel()),
                 new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
                     public void onSuccess(ManufacturerDto savedManufacturer) {
@@ -94,9 +97,19 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
                 });
     }
 
-    private void reveal() {
-        getView().edit(manufacturerDto);
+    @Override
+    public void onValueChanged(String id, Object value) {
+        binding.onValueChanged(id, value);
+    }
 
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+        registerHandler(binding.bind("name", ManufacturerDtoProperties.NAME));
+    }
+
+    private void reveal() {
         RevealRootPopupContentEvent.fire(this, this);
     }
 }

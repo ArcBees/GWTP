@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,9 +16,8 @@
 
 package com.gwtplatform.carstore.client.application.manufacturer;
 
-import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.mvp.client.UiHandlers;
+import org.turbogwt.ext.gwtp.databind.client.DatabindUiHandlers;
 
-public interface ManufacturerDetailUiHandlers extends UiHandlers {
-    void onSave(ManufacturerDto manufacturerDto);
+public interface ManufacturerDetailUiHandlers extends DatabindUiHandlers {
+    void onSave();
 }

@@ -138,6 +138,18 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Turbo GWT -->
+        <dependency>
+            <groupId>org.turbogwt.ext</groupId>
+            <artifactId>turbogwt-gwtp</artifactId>
+            <version>${turbogwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.turbogwt.mvp</groupId>
+            <artifactId>turbogwt-databind</artifactId>
+            <version>${turbogwt.version}</version>
+        </dependency>
+
         <!-- GWTP -->
         <dependency>
             <groupId>${project.groupId}</groupId>
