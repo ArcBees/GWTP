@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -32,6 +32,7 @@ import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.GoBackEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView;
+import com.gwtplatform.carstore.client.application.manufacturer.properties.ManufacturerDtoProperties;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
@@ -42,9 +43,7 @@ import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
-import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
@@ -54,13 +53,14 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
+import org.turbogwt.ext.gwtp.databind.client.DatabindView;
+import org.turbogwt.mvp.databind.client.Binding;
+import org.turbogwt.mvp.databind.client.BindingImpl;
+
 public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
         implements GoBackEvent.GoBackHandler, ActionBarEvent.ActionBarHandler, ManufacturerDetailUiHandlers {
 
-    public interface MyView extends View, HasUiHandlers<ManufacturerDetailUiHandlers> {
-        void edit(ManufacturerDto manufacturerDto);
-
-        void getManufacturer();
+    public interface MyView extends DatabindView<ManufacturerDetailUiHandlers> {
     }
 
     @ProxyCodeSplit
@@ -73,8 +73,8 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     private final ManufacturerService manufacturerService;
     private final PlaceManager placeManager;
     private final EditManufacturerMessages messages;
+    private final Binding<ManufacturerDto> binding;
 
-    private ManufacturerDto currentManufacturer;
     private Boolean createNew;
 
     @Inject
@@ -91,6 +91,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
         this.manufacturerService = manufacturerService;
         this.placeManager = placeManager;
         this.messages = messages;
+        this.binding = new BindingImpl<ManufacturerDto>(view);
 
         getView().setUiHandlers(this);
     }
@@ -105,13 +106,11 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
             dispatcher.execute(manufacturerService.get(id), new AbstractAsyncCallback<ManufacturerDto>() {
                 @Override
                 public void onSuccess(ManufacturerDto manufacturer) {
-                    currentManufacturer = manufacturer;
-                    getView().edit(currentManufacturer);
+                    binding.setModel(manufacturer);
                 }
             });
         } else {
-            currentManufacturer = new ManufacturerDto();
-            getView().edit(currentManufacturer);
+            binding.setModel(new ManufacturerDto());
         }
     }
 
@@ -125,10 +124,12 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
         if (event.isTheSameToken(NameTokens.getDetailManufacturer())) {
             switch (event.getActionType()) {
                 case UPDATE:
-                    getView().getManufacturer();
+                    binding.flush();
+                    onSave();
                     break;
                 case DONE:
-                    getView().getManufacturer();
+                    binding.flush();
+                    onSave();
                     break;
                 case DELETE:
                     deleteManufacturer();
@@ -138,8 +139,13 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     }
 
     @Override
-    public void onSave(ManufacturerDto manufacturerDto) {
-        dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
+    public void onValueChanged(String id, Object value) {
+        binding.onValueChanged(id, value);
+    }
+
+    @Override
+    public void onSave() {
+        dispatcher.execute(manufacturerService.saveOrCreate(binding.getModel()),
                 new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
                     public void onSuccess(ManufacturerDto savedManufacturerDto) {
@@ -154,6 +160,8 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     protected void onBind() {
         addRegisteredHandler(GoBackEvent.getType(), this);
         addRegisteredHandler(ActionBarEvent.getType(), this);
+
+        registerHandler(binding.bind("name", ManufacturerDtoProperties.NAME));
     }
 
     @Override
@@ -174,9 +182,9 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     }
 
     private void deleteManufacturer() {
-        Boolean confirm = Window.confirm("Are you sure you want to delete " + currentManufacturer.getName() + "?");
+        Boolean confirm = Window.confirm("Are you sure you want to delete " + binding.getModel().getName() + "?");
         if (confirm) {
-            dispatcher.execute(manufacturerService.delete(currentManufacturer.getId()),
+            dispatcher.execute(manufacturerService.delete(binding.getModel().getId()),
                     new ErrorHandlerAsyncCallback<Void>(this) {
                         @Override
                         public void onSuccess(Void nothing) {
