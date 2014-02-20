@@ -32,6 +32,10 @@ import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
+/**
+ * @author Peter Simun
+ *
+ */
 public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandlerValidatorRegistry,
         ApplicationContextAware {
 

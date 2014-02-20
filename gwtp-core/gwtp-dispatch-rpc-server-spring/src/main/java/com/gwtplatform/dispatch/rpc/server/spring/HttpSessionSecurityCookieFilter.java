@@ -23,6 +23,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.gwtplatform.dispatch.rpc.server.AbstractHttpSessionSecurityCookieFilter;
 
+/**
+ * @author Peter Simun
+ *
+ */
 public class HttpSessionSecurityCookieFilter extends AbstractHttpSessionSecurityCookieFilter {
 
     public HttpSessionSecurityCookieFilter(String securityCookieName) {
