@@ -29,6 +29,10 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerV
 
 import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
+/**
+ * @author Peter Simun
+ *
+ */
 public class SpringBeanProvider implements BeanProvider {
 
     /**

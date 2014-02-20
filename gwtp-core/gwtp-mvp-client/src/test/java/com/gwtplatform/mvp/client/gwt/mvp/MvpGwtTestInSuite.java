@@ -21,7 +21,7 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * Integration test for various components of GWTP's MVP module.
@@ -30,13 +30,13 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
  */
 public class MvpGwtTestInSuite extends GWTTestCase {
 
+    GinjectorTestUtilGwt ginjector;
+    MainPresenterTestUtilGwt presenter;
+
     @Override
     public String getModuleName() {
         return "com.gwtplatform.mvp.MvpGwtTest";
     }
-
-    GinjectorTestUtilGwt ginjector;
-    MainPresenterTestUtilGwt presenter;
 
     @Override
     protected void gwtSetUp() throws Exception {
