@@ -16,5 +16,9 @@
 
 package com.gwtplatform.dispatch.rpc.server.spring.utils;
 
+/**
+ * @author Peter Simun
+ *
+ */
 public class RequestProvider {
 }

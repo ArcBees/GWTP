@@ -34,6 +34,12 @@ import com.gwtplatform.dispatch.rpc.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.server.Dispatch;
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 
+/**
+ * Dispatch request to the handler.
+ * 
+ * @author David Ignjic
+ *
+ */
 @Component("dispatch")
 public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler,
         ServletContextAware {
@@ -53,7 +59,7 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
 
     @Override
     public String getSecurityCookieName() {
-        return securityCookieName;
+        return this.securityCookieName;
     }
 
     @Override
@@ -69,7 +75,7 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
 
     @Override
     public ServletContext getServletContext() {
-        return servletContext;
+        return this.servletContext;
     }
 
 }
