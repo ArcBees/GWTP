@@ -23,6 +23,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 
+/**
+ * Request provider.
+ * 
+ * @author David Ignjic
+ *
+ */
 public class DefaultRequestProvider implements RequestProvider {
 
     public DefaultRequestProvider() {

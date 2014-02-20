@@ -29,6 +29,10 @@ import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
+/**
+ * @author Peter Simun
+ *
+ */
 @Import({DispatchModule.class})
 public abstract class HandlerModule {
 
