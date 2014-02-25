@@ -21,8 +21,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.inject.BindingAnnotation;
-
 /**
  * Annotation used to specify a date format pattern.
  * <p/>
@@ -33,7 +31,6 @@ import com.google.inject.BindingAnnotation;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-@BindingAnnotation
 public @interface DateFormat {
     /**
      * <a href="http://www.iso.org/iso/support/faqs/faqs_widely_used_standards/widely_used_standards_other/iso8601">
@@ -49,5 +46,5 @@ public @interface DateFormat {
      * <p/>
      * If not specified, {@link #DEFAULT} will be used.
      */
-    String pattern() default DEFAULT;
+    String value() default DEFAULT;
 }
