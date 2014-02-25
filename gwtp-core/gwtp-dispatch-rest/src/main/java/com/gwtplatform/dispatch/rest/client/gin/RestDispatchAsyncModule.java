@@ -26,6 +26,7 @@ import com.google.gwt.json.client.JSONParser;
 import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
+import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
@@ -87,6 +88,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // at runtime (ie: Global Parameters)
         bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.getXsrfTokenHeaderName());
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.getRequestTimeoutMs());
+        bindConstant().annotatedWith(DefaultDateFormat.class).to(builder.getDefaultDateFormat());
         bindConstant().annotatedWith(GlobalHeaderParams.class)
                 .to(multimapJsonSerializer.serialize(builder.getGlobalHeaderParams()));
         bindConstant().annotatedWith(GlobalQueryParams.class)
