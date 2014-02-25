@@ -24,10 +24,9 @@ import java.lang.annotation.Target;
 /**
  * Annotation used to specify a date format pattern.
  * <p/>
- * This annotation should only be put on {@link java.util.Date Date} parameters annotated with
+ * This annotation may be put on {@link java.util.Date Date} parameters annotated with
  * {@link javax.ws.rs.FormParam @FormParam}, {@link javax.ws.rs.QueryParam @QueryParam},
- * {@link javax.ws.rs.PathParam @PathParam} or {@link javax.ws.rs.HeaderParam @HeaderParam}. Failure to do so will
- * result in compilation errors.
+ * {@link javax.ws.rs.PathParam @PathParam} or {@link javax.ws.rs.HeaderParam @HeaderParam}.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)

@@ -21,6 +21,7 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,6 +52,7 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
@@ -71,9 +73,6 @@ import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_TYPE;
 import static com.gwtplatform.dispatch.rest.shared.MetadataType.RESPONSE_TYPE;
 
 public class ActionGenerator extends AbstractVelocityGenerator {
-
-    private static final String ESCAPED_STRING = "\"%s\"";
-
     private static class AnnotatedMethodParameter {
         private JParameter parameter;
         private String fieldName;
@@ -88,6 +87,8 @@ public class ActionGenerator extends AbstractVelocityGenerator {
 
     private static final String MANY_REST_ANNOTATIONS = "'%s' parameter's '%s' is annotated with more than one REST " +
             "annotations.";
+    private static final String DATE_FORMAT_NOT_DATE = "'%s' parameter's '%s' is annotated with @DateFormat but its " +
+            "type is not Date";
     private static final String MANY_POTENTIAL_BODY = "%s has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "%s has both @FormParam and a body parameter. You must specify " +
             "one or the other.";
@@ -96,6 +97,7 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private static final String ADD_QUERY_PARAM = "addQueryParam";
     private static final String ADD_FORM_PARAM = "addFormParam";
     private static final String SET_BODY_PARAM = "setBodyParam";
+    private static final String ESCAPED_STRING = "\"%s\"";
 
     @SuppressWarnings("unchecked")
     private static final List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
@@ -199,14 +201,22 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private List<MethodCall> getMethodCallsToAdd(List<AnnotatedMethodParameter> methodParameters, String methodName) {
         List<MethodCall> methodCalls = new ArrayList<MethodCall>();
         for (AnnotatedMethodParameter methodParameter : methodParameters) {
-            MethodCall methodCall = new MethodCall(
-                    methodName,
-                    String.format(ESCAPED_STRING, methodParameter.fieldName),
+            List<String> arguments = Lists.newArrayList(String.format(ESCAPED_STRING, methodParameter.fieldName),
                     methodParameter.parameter.getName());
-            methodCalls.add(methodCall);
+
+            maybeAddDateFormat(arguments, methodParameter);
+
+            methodCalls.add(new MethodCall(methodName, arguments.toArray(new String[arguments.size()])));
         }
 
         return methodCalls;
+    }
+
+    private void maybeAddDateFormat(List<String> args, AnnotatedMethodParameter methodParameter) {
+        if (methodParameter.parameter.isAnnotationPresent(DateFormat.class)) {
+            String dateFormat = methodParameter.parameter.getAnnotation(DateFormat.class).value();
+            args.add(String.format(ESCAPED_STRING, dateFormat));
+        }
     }
 
     private void addContentTypeHeaderMethodCall(List<MethodCall> methodCalls) {
@@ -322,13 +332,19 @@ public class ActionGenerator extends AbstractVelocityGenerator {
             if (parameterAnnotation != null) {
                 if (hasAnnotationFrom(parameter, restrictedAnnotations)) {
                     getLogger().die(String.format(MANY_REST_ANNOTATIONS, actionMethod.getName(), parameter.getName()));
-                    throw new UnableToCompleteException();
+                }
+                if (parameter.isAnnotationPresent(DateFormat.class) && !isDate(parameter)) {
+                    getLogger().die(String.format(DATE_FORMAT_NOT_DATE, actionMethod.getName(), parameter.getName()));
                 }
 
                 String value = annotationValueResolver.resolve(parameterAnnotation);
                 destination.add(new AnnotatedMethodParameter(parameter, value));
             }
         }
+    }
+
+    private boolean isDate(JParameter parameter) {
+        return Date.class.getCanonicalName().equals(parameter.getType().getQualifiedSourceName());
     }
 
     private List<Class<? extends Annotation>> getRestrictedAnnotations(Class<? extends Annotation> allowedAnnotation) {
