@@ -1,7 +1,7 @@
 #macro(generateMethodSignatureFromParameters $parameters)
 #foreach ($param in $parameters)
-        $param.type.getParameterizedQualifiedSourceName() $param.name#commaIfNeeded($parameters)
-#end
+
+            $param.type.getParameterizedQualifiedSourceName() $param.name#commaIfNeeded($parameters)#end
 #end
 #macro(generateArgumentsFromParameters $parameters)
 #foreach ($param in $parameters),
@@ -9,8 +9,10 @@
 #end
 package $package;
 
+#if($injectable)
 import javax.inject.Inject;
 
+#end
 import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -32,7 +34,9 @@ public class $implName implements $serviceInterface.name {
 #end
     private final String defaultDateFormat;
 
+#if($injectable)
     @Inject
+#end
     public ${implName}(
             @DefaultDateFormat String defaultDateFormat$ctorDef) {
         this.defaultDateFormat = defaultDateFormat;$ctorAssignments

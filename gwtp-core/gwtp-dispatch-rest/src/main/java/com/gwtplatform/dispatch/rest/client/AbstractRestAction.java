@@ -105,8 +105,12 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     }
 
     protected void addPathParam(String name, Date date) {
-        String value = formatDate(date);
-        addQueryParam(name, value);
+        addPathParam(name, date, defaultDateFormat);
+    }
+
+    protected void addPathParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addPathParam(name, value);
     }
 
     protected void addQueryParam(String name, Object value) {
@@ -114,7 +118,11 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     }
 
     protected void addQueryParam(String name, Date date) {
-        String value = formatDate(date);
+        addQueryParam(name, date, defaultDateFormat);
+    }
+
+    protected void addQueryParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
         addQueryParam(name, value);
     }
 
@@ -123,8 +131,12 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     }
 
     protected void addFormParam(String name, Date date) {
-        String value = formatDate(date);
-        addQueryParam(name, value);
+        addFormParam(name, date, defaultDateFormat);
+    }
+
+    protected void addFormParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addFormParam(name, value);
     }
 
     protected void addHeaderParam(String name, Object value) {
@@ -132,15 +144,19 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     }
 
     protected void addHeaderParam(String name, Date date) {
-        String value = formatDate(date);
-        addQueryParam(name, value);
+        addHeaderParam(name, date, defaultDateFormat);
+    }
+
+    protected void addHeaderParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addHeaderParam(name, value);
     }
 
     protected void setBodyParam(Object value) {
         bodyParam = value;
     }
 
-    private String formatDate(Date date) {
-        return DateTimeFormat.getFormat(defaultDateFormat).format(date);
+    private String formatDate(Date date, String pattern) {
+        return DateTimeFormat.getFormat(pattern).format(date);
     }
 }

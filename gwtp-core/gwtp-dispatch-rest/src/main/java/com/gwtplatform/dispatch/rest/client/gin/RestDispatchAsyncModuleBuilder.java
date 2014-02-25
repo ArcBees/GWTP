@@ -101,6 +101,15 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return this;
     }
 
+    /**
+     * Specify the pattern to use to format dates before they are sent to the end-point. The pattern must follow the
+     * rules defined by {@link com.google.gwt.i18n.shared.DateTimeFormat DateTimeFormat}.
+     * <p/>
+     * Default is {@link DateFormat#DEFAULT}.
+     *
+     * @param defaultDateFormat The pattern used to format dates.
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
     public RestDispatchAsyncModuleBuilder defaultDateFormat(String defaultDateFormat) {
         this.defaultDateFormat = defaultDateFormat;
         return this;
