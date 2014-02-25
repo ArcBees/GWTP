@@ -4,17 +4,19 @@ import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 public class ${implName} extends AbstractRestAction<${resultClass.parameterizedQualifiedSourceName}> {
-    public ${implName}(#foreach (${param} in ${ctorParams})${param.type.qualifiedSourceName} ${param.name}#commaIfNeeded($ctorParams)#end) {
-        super(HttpMethod.${httpMethod}, "${restPath}");
+    public ${implName}(
+            String defaultDateFormat#foreach (${param} in ${ctorParams}),
+            ${param.type.qualifiedSourceName} ${param.name}#end) {
+        super(HttpMethod.${httpMethod}, "${restPath}", defaultDateFormat);
 #foreach ($methodCall in $methodCalls)
 #if ($methodCall.fromParam)
-    #if ($methodCall.fieldName)
+#if ($methodCall.fieldName)
         ${methodCall.methodName}("${methodCall.fieldName}", ${methodCall.parameter.name});
-    #else
-        ${methodCall.methodName}(${methodCall.parameter.name});
-    #end
 #else
-    ${methodCall.methodName}("${methodCall.fieldName}", "${methodCall.value}");
+        ${methodCall.methodName}(${methodCall.parameter.name});
+#end
+#else
+        ${methodCall.methodName}("${methodCall.fieldName}", "${methodCall.value}");
 #end
 #end
     }

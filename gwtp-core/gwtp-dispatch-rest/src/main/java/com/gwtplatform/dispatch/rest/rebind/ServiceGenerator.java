@@ -74,6 +74,7 @@ public class ServiceGenerator extends AbstractServiceGenerator {
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
         super.populateVelocityContext(velocityContext);
 
+        velocityContext.put("injectable", true);
         velocityContext.put("ctorParams", new ArrayList<JParameter>());
     }
 
