@@ -1,5 +1,17 @@
+#macro(generateMethodSignatureFromParameters $parameters)
+#foreach ($param in $parameters)
+        $param.type.getParameterizedQualifiedSourceName() $param.name#commaIfNeeded($parameters)
+#end
+#end
+#macro(generateArgumentsFromParameters $parameters)
+#foreach ($param in $parameters),
+                $param.name#end
+#end
 package $package;
 
+import javax.inject.Inject;
+
+import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import $serviceInterface.qualifiedSourceName;
@@ -12,14 +24,18 @@ public class $implName implements $serviceInterface.name {
 #set($ctorAssignments = "")
 #foreach ($param in $ctorParams)
     #set($argumentsFromService = "$argumentsFromService$param.name#commaIfNeeded($ctorParams)")
-    #set($ctorDef = "$ctorDef
-            $param.type.getParameterizedQualifiedSourceName() $param.name#commaIfNeeded($ctorParams)")
+    #set($ctorDef = "$ctorDef,
+            $param.type.getParameterizedQualifiedSourceName() $param.name")
     #set($ctorAssignments = "$ctorAssignments
         this.$param.name = $param.name;")
     private final $param.type.getParameterizedQualifiedSourceName() $param.name;
 #end
+    private final String defaultDateFormat;
 
-    public ${implName}($ctorDef) {$ctorAssignments
+    @Inject
+    public ${implName}(
+            @DefaultDateFormat String defaultDateFormat$ctorDef) {
+        this.defaultDateFormat = defaultDateFormat;$ctorAssignments
     }
 
 #foreach ($action in $actionBindings)
@@ -29,7 +45,8 @@ public class $implName implements $serviceInterface.name {
     #set($actionArguments = "#generateArgumentsFromParameters($action.ctorParameters)")
     @Override
     public RestAction<$action.resultClass> ${action.methodName}($methodSignature) {
-        return new ${action.implName}($actionArguments);
+        return new ${action.implName}(
+                defaultDateFormat$actionArguments);
     }
 
 #end
@@ -40,7 +57,8 @@ public class $implName implements $serviceInterface.name {
     #set($serviceArguments = "#generateArgumentsFromParameters($service.ctorParameters)")
     @Override
     public $service.serviceInterface ${service.methodName}($methodSignature) {
-        return new ${service.implName}($serviceArguments);
+        return new ${service.implName}(
+                defaultDateFormat$serviceArguments);
     }
 
 #end

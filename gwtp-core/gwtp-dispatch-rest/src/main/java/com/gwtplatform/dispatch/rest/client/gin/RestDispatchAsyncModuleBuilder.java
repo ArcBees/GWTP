@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.client.gin;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
+import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -43,6 +44,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private String xsrfTokenHeaderName = RestDispatchAsyncModule.DEFAULT_XSRF_NAME;
     private Class<? extends Serialization> serializationClass = JsonSerialization.class;
     private int requestTimeoutMs;
+    private String defaultDateFormat = DateFormat.DEFAULT;
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
 
@@ -99,6 +101,11 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return this;
     }
 
+    public RestDispatchAsyncModuleBuilder defaultDateFormat(String defaultDateFormat) {
+        this.defaultDateFormat = defaultDateFormat;
+        return this;
+    }
+
     /**
      * Initiate the creation of a global header parameter that will be attached to all requests.
      *
@@ -129,6 +136,10 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
 
     public int getRequestTimeoutMs() {
         return requestTimeoutMs;
+    }
+
+    public String getDefaultDateFormat() {
+        return defaultDateFormat;
     }
 
     public Multimap<HttpMethod, RestParameter> getGlobalHeaderParams() {
