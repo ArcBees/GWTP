@@ -120,7 +120,8 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private JParameter bodyParam;
 
     @Inject
-    ActionGenerator(EventBus eventBus,
+    ActionGenerator(
+            EventBus eventBus,
             TypeOracle typeOracle,
             Logger logger,
             Provider<VelocityContext> velocityContextProvider,
@@ -321,8 +322,7 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     }
 
     private <T extends Annotation> void buildParamList(List<JParameter> parameters, Class<T> annotationClass,
-            AnnotationValueResolver<T> annotationValueResolver,
-            List<AnnotatedMethodParameter> destination)
+            AnnotationValueResolver<T> annotationValueResolver, List<AnnotatedMethodParameter> destination)
             throws UnableToCompleteException {
         List<Class<? extends Annotation>> restrictedAnnotations = getRestrictedAnnotations(annotationClass);
 
