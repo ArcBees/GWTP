@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
  */
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     public ExposedRestAction(HttpMethod httpMethod, String rawServicePath) {
-        super(httpMethod, rawServicePath);
+        super(httpMethod, rawServicePath, DateFormat.DEFAULT);
     }
 
     @Override
