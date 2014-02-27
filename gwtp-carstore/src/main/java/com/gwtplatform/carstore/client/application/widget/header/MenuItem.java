@@ -22,7 +22,8 @@ public enum MenuItem {
     MANUFACTURER("Manufacturers", NameTokens.manufacturer),
     CAR("Cars", NameTokens.cars),
     RATING("Ratings", NameTokens.rating),
-    REPORT("Reports", NameTokens.report);
+    REPORT("Reports", NameTokens.report),
+    STATS("Statistics", NameTokens.STATS);
 
     private String label;
     private String placeToken;

@@ -21,6 +21,7 @@ import com.gwtplatform.carstore.client.application.login.LoginMobileModule;
 import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobileModule;
 import com.gwtplatform.carstore.client.application.rating.RatingMobileModule;
 import com.gwtplatform.carstore.client.application.report.ReportMobileModule;
+import com.gwtplatform.carstore.client.application.stats.StatisticsModule;
 import com.gwtplatform.carstore.client.application.widget.WidgetMobileModule;
 import com.gwtplatform.carstore.client.application.widget.message.MessagesModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
@@ -37,6 +38,8 @@ public class ApplicationTabletModule extends AbstractPresenterModule {
 
         // TODO should we make a messaging module for mobile
         install(new MessagesModule());
+
+        install(new StatisticsModule());
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationMobileView.class,
                 ApplicationPresenter.MyProxy.class);
