@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,20 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.rest;
+package com.gwtplatform.carstore.client.application.stats;
 
-import javax.inject.Singleton;
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import com.google.inject.AbstractModule;
-
-public class RestModule extends AbstractModule {
+public class StatisticsModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        bind(CarResource.class);
-        bind(ManufacturerResource.class);
-        bind(SessionResource.class);
-        bind(RatingResource.class);
-        bind(StatisticsResource.class);
-        bind(JacksonProvider.class).in(Singleton.class);
+        bindPresenter(StatisticsPresenter.class, StatisticsPresenter.MyView.class, StatisticsView.class,
+                StatisticsPresenter.MyProxy.class);
     }
 }
