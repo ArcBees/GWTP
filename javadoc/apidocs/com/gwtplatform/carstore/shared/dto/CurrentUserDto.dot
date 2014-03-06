@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.shared.dto.CurrentUserDto
-	c146705 [label=<<table title="com.gwtplatform.carstore.shared.dto.CurrentUserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CurrentUserDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CurrentUserDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CurrentUserDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.Dto
-	c146712 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
+	c204799 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Dto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Dto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Dto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.CurrentUserDto
+	c204800 [label=<<table title="com.gwtplatform.carstore.shared.dto.CurrentUserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CurrentUserDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CurrentUserDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CurrentUserDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.shared.dto.CurrentUserDto implements com.gwtplatform.carstore.shared.dto.Dto
-	c146712:p -> c146705:p [dir=back,arrowtail=empty,style=dashed];
+	c204799:p -> c204800:p [dir=back,arrowtail=empty,style=dashed];
 }
 

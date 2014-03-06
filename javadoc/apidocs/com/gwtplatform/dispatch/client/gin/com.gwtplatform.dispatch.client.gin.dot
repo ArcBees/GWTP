@@ -5,60 +5,44 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule
-	c1853 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsyncModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestDispatchAsyncModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestDispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder
-	c1854 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsyncModule.Builder.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Builder </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c1855 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchAsyncModule </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c1856 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.Builder.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Builder </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.PhoneGapDispatchAsyncModule
-	c1857 [label=<<table title="com.gwtplatform.dispatch.client.gin.PhoneGapDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapDispatchAsyncModule.html">
+	c6664 [label=<<table title="com.gwtplatform.dispatch.client.gin.PhoneGapDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapDispatchAsyncModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PhoneGapDispatchAsyncModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./PhoneGapDispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PhoneGapDispatchAsyncModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.DispatchAsyncModule
-	c1858 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.html">
+	c6665 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchAsyncModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DispatchAsyncModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder
-	c1859 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.Builder.html">
+	c6666 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.Builder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Builder </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c1855:p -> c1853:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c1856:p -> c1854:p [dir=back,arrowtail=empty];
+		</table>>, URL="./DispatchAsyncModule.Builder.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
+	c6667 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractDispatchAsyncModule </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractDispatchAsyncModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
+	c6668 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsyncModule.Builder.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> Builder </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractDispatchAsyncModule.Builder.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.gin.DispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c1855:p -> c1858:p [dir=back,arrowtail=empty];
+	c6667:p -> c6665:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c1856:p -> c1859:p [dir=back,arrowtail=empty];
+	c6668:p -> c6666:p [dir=back,arrowtail=empty];
 }
 

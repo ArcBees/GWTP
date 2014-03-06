@@ -5,26 +5,26 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.ApplicationMobileView.Binder
-	c88200 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView.Binder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationMobileView.Binder.html">
+	c130691 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView.Binder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationMobileView.Binder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Binder </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationMobileView.Binder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationMobileView.Binder.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ApplicationMobileView.Binder implements com.google.gwt.uibinder.client.UiBinder<U, O>
-	c88264:p -> c88200:p [dir=back,arrowtail=empty,style=dashed];
+	c130932:p -> c130691:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.uibinder.client.UiBinder<U, O>
-	c88264 [label=<<table title="com.google.gwt.uibinder.client.UiBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/uibinder/client/UiBinder.html">
+	c130932 [label=<<table title="com.google.gwt.uibinder.client.UiBinder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/uibinder/client/UiBinder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UiBinder&lt;U, O&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/uibinder/client/UiBinder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/uibinder/client/UiBinder.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

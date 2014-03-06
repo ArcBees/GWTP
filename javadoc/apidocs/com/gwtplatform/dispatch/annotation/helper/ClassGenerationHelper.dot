@@ -5,32 +5,32 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper
-	c133335 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BuilderGenerationHelper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BuilderGenerationHelper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BuilderGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
-	c133336 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClassGenerationHelper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ClassGenerationHelper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ClassGenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c133338 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenerationHelper.html">
+	c186982 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.GenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenerationHelper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GenerationHelper </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GenerationHelper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
-	c133336:p -> c133335:p [dir=back,arrowtail=empty];
+		</table>>, URL="./GenerationHelper.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
+	c186983 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClassGenerationHelper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ClassGenerationHelper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ClassGenerationHelper.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper
+	c186984 [label=<<table title="com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BuilderGenerationHelper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BuilderGenerationHelper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BuilderGenerationHelper.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.GenerationHelper
-	c133338:p -> c133336:p [dir=back,arrowtail=empty];
+	c186982:p -> c186983:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper extends com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper
+	c186983:p -> c186984:p [dir=back,arrowtail=empty];
 }
 

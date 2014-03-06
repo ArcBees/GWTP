@@ -5,40 +5,40 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c355422 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchAsync </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.PhoneGapDispatchAsync
-	c355426 [label=<<table title="com.gwtplatform.dispatch.client.PhoneGapDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapDispatchAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PhoneGapDispatchAsync </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PhoneGapDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.DefaultDispatchAsync
-	c355428 [label=<<table title="com.gwtplatform.dispatch.client.DefaultDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultDispatchAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultDispatchAsync </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c355435 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RpcDispatchAsync.html">
+	c474010 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RpcDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RpcDispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RpcDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.PhoneGapDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c355435:p -> c355426:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.client.DefaultDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c355435:p -> c355428:p [dir=back,arrowtail=empty];
+		</table>>, URL="./RpcDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.PhoneGapDispatchAsync
+	c474012 [label=<<table title="com.gwtplatform.dispatch.client.PhoneGapDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapDispatchAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PhoneGapDispatchAsync </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PhoneGapDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DefaultDispatchAsync
+	c474013 [label=<<table title="com.gwtplatform.dispatch.client.DefaultDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultDispatchAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultDispatchAsync </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.AbstractDispatchAsync
+	c474014 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractDispatchAsync </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.RpcDispatchAsync extends com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c355422:p -> c355435:p [dir=back,arrowtail=empty];
+	c474014:p -> c474010:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.client.PhoneGapDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
+	c474010:p -> c474012:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.client.DefaultDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
+	c474010:p -> c474013:p [dir=back,arrowtail=empty];
 }
 

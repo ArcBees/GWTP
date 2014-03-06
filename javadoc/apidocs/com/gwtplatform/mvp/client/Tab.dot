@@ -5,26 +5,26 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Tab
-	c372535 [label=<<table title="com.gwtplatform.mvp.client.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Tab.html">
+	c499735 [label=<<table title="com.gwtplatform.mvp.client.Tab" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Tab.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Tab </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Tab.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Tab.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.Tab implements com.google.gwt.user.client.ui.HasText
-	c372921:p -> c372535:p [dir=back,arrowtail=empty,style=dashed];
+	c500268:p -> c499735:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.ui.HasText
-	c372921 [label=<<table title="com.google.gwt.user.client.ui.HasText" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/HasText.html">
+	c500268 [label=<<table title="com.google.gwt.user.client.ui.HasText" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/HasText.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasText </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/HasText.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/HasText.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

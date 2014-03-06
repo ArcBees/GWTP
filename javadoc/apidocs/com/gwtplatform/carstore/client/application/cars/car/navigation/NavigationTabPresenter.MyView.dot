@@ -5,43 +5,43 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c266746 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/HasUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../../../../mvp/client/HasUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.View
-	c266749 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/View.html">
+	c362239 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../../../mvp/client/View.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c362259 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/HasUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../../../../mvp/client/HasUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView
-	c267077 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabView.html">
+	c362560 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NavigationTabView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./NavigationTabView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./NavigationTabView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView
-	c267079 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabPresenter.MyView.html">
+	c362562 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./NavigationTabPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./NavigationTabPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabView implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView
-	c267079:p -> c267077:p [dir=back,arrowtail=empty,style=dashed];
+	c362562:p -> c362560:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView implements com.gwtplatform.mvp.client.View
-	c266749:p -> c267079:p [dir=back,arrowtail=empty,style=dashed];
+	c362239:p -> c362562:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c266746:p -> c267079:p [dir=back,arrowtail=empty,style=dashed];
+	c362259:p -> c362562:p [dir=back,arrowtail=empty,style=dashed];
 }
 

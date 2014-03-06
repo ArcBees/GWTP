@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c329620 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
+	c439039 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportPresenter
-	c329929 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportPresenter.html">
+	c439436 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ReportPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ReportPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.report.ReportPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView, com.gwtplatform.carstore.client.application.report.ReportPresenter.MyProxy>
-	c329620:p -> c329929:p [dir=back,arrowtail=empty];
+	c439039:p -> c439436:p [dir=back,arrowtail=empty];
 }
 

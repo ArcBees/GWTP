@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.DefaultExceptionHandler
-	c151756 [label=<<table title="com.gwtplatform.dispatch.client.DefaultExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultExceptionHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultExceptionHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultExceptionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.ExceptionHandler
-	c151761 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExceptionHandler.html">
+	c212195 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExceptionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ExceptionHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ExceptionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ExceptionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DefaultExceptionHandler
+	c212202 [label=<<table title="com.gwtplatform.dispatch.client.DefaultExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultExceptionHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultExceptionHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultExceptionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.DefaultExceptionHandler implements com.gwtplatform.dispatch.client.ExceptionHandler
-	c151761:p -> c151756:p [dir=back,arrowtail=empty,style=dashed];
+	c212195:p -> c212202:p [dir=back,arrowtail=empty,style=dashed];
 }
 

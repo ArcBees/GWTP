@@ -5,71 +5,71 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.ApplicationDesktopModule
-	c48853 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationDesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationDesktopModule.html">
+	// com.gwtplatform.carstore.client.application.ApplicationView
+	c52386 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ApplicationDesktopModule </td></tr>
+<tr><td align="center" balign="center"> ApplicationView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationDesktopModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationView.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.ApplicationTabletModule
+	c52387 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationTabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationTabletModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ApplicationTabletModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ApplicationTabletModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter
-	c48854 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.html">
+	c52388 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView
-	c48855 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.MyView.html">
+	c52389 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy
-	c48856 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.MyProxy.html">
+	c52390 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationPresenter.MyProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyProxy </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.ApplicationTabletModule
-	c48857 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationTabletModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationTabletModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ApplicationTabletModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ApplicationTabletModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.ApplicationMobileModule
-	c48858 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ApplicationMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ApplicationMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.ApplicationView
-	c48859 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ApplicationView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ApplicationView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationPresenter.MyProxy.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationMobileView
-	c48860 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationMobileView.html">
+	c52391 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationMobileView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationMobileView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationMobileView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.ApplicationMobileView.Binder
-	c48861 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView.Binder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationMobileView.Binder.html">
+	c52392 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileView.Binder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationMobileView.Binder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Binder </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationMobileView.Binder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationMobileView.Binder.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.ApplicationMobileModule
+	c52393 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ApplicationMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ApplicationMobileModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.ApplicationDesktopModule
+	c52394 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationDesktopModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationDesktopModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ApplicationDesktopModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ApplicationDesktopModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ApplicationView implements com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView
-	c48855:p -> c48859:p [dir=back,arrowtail=empty,style=dashed];
+	c52389:p -> c52386:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.ApplicationMobileView implements com.gwtplatform.carstore.client.application.ApplicationPresenter.MyView
-	c48855:p -> c48860:p [dir=back,arrowtail=empty,style=dashed];
+	c52389:p -> c52391:p [dir=back,arrowtail=empty,style=dashed];
 }
 

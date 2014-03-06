@@ -5,35 +5,35 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.proxy.ProxyRaw
-	c307784 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyRaw" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyRaw.html">
+	c411292 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyRaw" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyRaw.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ProxyRaw </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ProxyRaw.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ProxyRaw.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.Proxy<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c307836 [label=<<table title="com.gwtplatform.mvp.client.proxy.Proxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Proxy.html">
+	c411297 [label=<<table title="com.gwtplatform.mvp.client.proxy.Proxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Proxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Proxy&lt;P extends Presenter&lt;?, ?&gt;&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Proxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Proxy.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.ProxyRaw implements com.google.gwt.event.shared.HasHandlers
-	c308256:p -> c307784:p [dir=back,arrowtail=empty,style=dashed];
+	c411778:p -> c411292:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.proxy.Proxy<P extends com.gwtplatform.mvp.client.Presenter<?, ?>> implements com.gwtplatform.mvp.client.proxy.ProxyRaw
-	c307784:p -> c307836:p [dir=back,arrowtail=empty,style=dashed];
+	c411292:p -> c411297:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.HasHandlers
-	c308256 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
+	c411778 [label=<<table title="com.google.gwt.event.shared.HasHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/HasHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

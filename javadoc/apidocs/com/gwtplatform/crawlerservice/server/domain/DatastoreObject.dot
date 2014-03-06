@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.crawlerservice.server.domain.CachedPage
-	c147858 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.CachedPage" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CachedPage.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CachedPage </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CachedPage.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.crawlerservice.server.domain.DatastoreObject
-	c147859 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.DatastoreObject" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DatastoreObject.html">
+	c206018 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.DatastoreObject" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DatastoreObject.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DatastoreObject </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DatastoreObject.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DatastoreObject.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.crawlerservice.server.domain.CachedPage
+	c206019 [label=<<table title="com.gwtplatform.crawlerservice.server.domain.CachedPage" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CachedPage.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CachedPage </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CachedPage.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.crawlerservice.server.domain.CachedPage extends com.gwtplatform.crawlerservice.server.domain.DatastoreObject
-	c147859:p -> c147858:p [dir=back,arrowtail=empty];
+	c206018:p -> c206019:p [dir=back,arrowtail=empty];
 }
 

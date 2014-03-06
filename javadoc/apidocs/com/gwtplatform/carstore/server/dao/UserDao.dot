@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.server.dao.BaseDao<T extends com.gwtplatform.carstore.shared.dto.Dto>
-	c393245 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BaseDao&lt;T extends Dto&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BaseDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.UserDao
-	c393249 [label=<<table title="com.gwtplatform.carstore.server.dao.UserDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserDao.html">
+	c526551 [label=<<table title="com.gwtplatform.carstore.server.dao.UserDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserDao.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserDao </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UserDao.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UserDao.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.BaseDao<T extends com.gwtplatform.carstore.shared.dto.Dto>
+	c526556 [label=<<table title="com.gwtplatform.carstore.server.dao.BaseDao" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseDao.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BaseDao&lt;T extends Dto&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BaseDao.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.UserDao extends com.gwtplatform.carstore.server.dao.BaseDao<com.gwtplatform.carstore.server.dao.domain.User>
-	c393245:p -> c393249:p [dir=back,arrowtail=empty];
+	c526556:p -> c526551:p [dir=back,arrowtail=empty];
 }
 

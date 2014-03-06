@@ -5,42 +5,42 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.ApplicationPresenter
-	c71271 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ApplicationPresenter.html">
+	c106554 [label=<<table title="com.gwtplatform.carstore.client.application.ApplicationPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ApplicationPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="../ApplicationPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../ApplicationPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c71319 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
+	c106612 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionBarVisibilityHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ActionBarVisibilityEvent.ActionBarVisibilityHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
-	c71327 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/header/HeaderPresenter.html">
+	c106685 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/header/HeaderPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HeaderPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="../widget/header/HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../widget/header/HeaderPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ApplicationPresenter implements com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c71319:p -> c71271:p [dir=back,arrowtail=empty,style=dashed];
+	c106612:p -> c106554:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler implements com.google.gwt.event.shared.EventHandler
-	c71342:p -> c71319:p [dir=back,arrowtail=empty,style=dashed];
+	c106799:p -> c106612:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent.ActionBarVisibilityHandler
-	c71319:p -> c71327:p [dir=back,arrowtail=empty,style=dashed];
+	c106612:p -> c106685:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c71342 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c106799 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

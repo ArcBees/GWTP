@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.domain.UserSession
-	c396886 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.UserSession" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserSession.html">
+	c530951 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.UserSession" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UserSession.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserSession </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UserSession.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UserSession.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.Dto
-	c396917 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/Dto.html">
+	c530980 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/Dto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Dto </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../shared/dto/Dto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../shared/dto/Dto.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.domain.UserSession implements com.gwtplatform.carstore.shared.dto.Dto
-	c396917:p -> c396886:p [dir=back,arrowtail=empty,style=dashed];
+	c530980:p -> c530951:p [dir=back,arrowtail=empty,style=dashed];
 }
 

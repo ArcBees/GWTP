@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.annotations.ErrorPlace
-	c179164 [label=<<table title="com.gwtplatform.mvp.client.annotations.ErrorPlace" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ErrorPlace.html">
+	c249602 [label=<<table title="com.gwtplatform.mvp.client.annotations.ErrorPlace" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ErrorPlace.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ErrorPlace </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> ErrorPlace </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./ErrorPlace.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ErrorPlace.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.annotations.ErrorPlace implements java.lang.annotation.Annotation
-	c179528:p -> c179164:p [dir=back,arrowtail=empty,style=dashed];
+	c250149:p -> c249602:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.annotation.Annotation
-	c179528 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
+	c250149 [label=<<table title="java.lang.annotation.Annotation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Annotation </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Annotation.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

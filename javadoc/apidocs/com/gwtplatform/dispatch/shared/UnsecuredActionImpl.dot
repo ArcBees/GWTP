@@ -5,33 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
+	c520762 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnsecuredActionImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UnsecuredActionImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c389245 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
+	c520775 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Action.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Action&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Action.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
-	c389258 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnsecuredActionImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UnsecuredActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.action.TestAction
-	c389529 [label=<<table title="com.gwtplatform.dispatch.shared.action.TestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./action/TestAction.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TestAction </td></tr>
-		</table></td></tr>
-		</table>>, URL="./action/TestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Action.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c389245:p -> c389258:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.action.TestAction extends com.gwtplatform.dispatch.shared.UnsecuredActionImpl<com.gwtplatform.dispatch.shared.action.TestResult>
-	c389258:p -> c389529:p [dir=back,arrowtail=empty];
+	c520775:p -> c520762:p [dir=back,arrowtail=empty,style=dashed];
 }
 

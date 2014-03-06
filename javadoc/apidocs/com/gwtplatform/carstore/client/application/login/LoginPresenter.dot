@@ -5,33 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c228093 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
+	c313982 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.login.LoginPresenter
-	c228421 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LoginPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginUiHandlers
-	c228427 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginUiHandlers.html">
+	c314326 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> LoginUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./LoginUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./LoginUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginPresenter
+	c314327 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LoginPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LoginPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.login.LoginPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView, com.gwtplatform.carstore.client.application.login.LoginPresenter.MyProxy>
-	c228093:p -> c228421:p [dir=back,arrowtail=empty];
+	c313982:p -> c314327:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.login.LoginPresenter implements com.gwtplatform.carstore.client.application.login.LoginUiHandlers
-	c228427:p -> c228421:p [dir=back,arrowtail=empty,style=dashed];
+	c314326:p -> c314327:p [dir=back,arrowtail=empty,style=dashed];
 }
 

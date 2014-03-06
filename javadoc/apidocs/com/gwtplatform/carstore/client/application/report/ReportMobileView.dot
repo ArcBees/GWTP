@@ -5,33 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewImpl
-	c328390 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewImpl.html">
+	c437563 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/ViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> ViewImpl </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/ViewImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView
-	c328722 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.MyView.html">
+	c437975 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ReportPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ReportPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ReportPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.report.ReportMobileView
-	c328724 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportMobileView.html">
+	c437978 [label=<<table title="com.gwtplatform.carstore.client.application.report.ReportMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ReportMobileView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ReportMobileView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ReportMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ReportMobileView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.report.ReportMobileView extends com.gwtplatform.mvp.client.ViewImpl
-	c328390:p -> c328724:p [dir=back,arrowtail=empty];
+	c437563:p -> c437978:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.report.ReportMobileView implements com.gwtplatform.carstore.client.application.report.ReportPresenter.MyView
-	c328722:p -> c328724:p [dir=back,arrowtail=empty,style=dashed];
+	c437975:p -> c437978:p [dir=back,arrowtail=empty,style=dashed];
 }
 

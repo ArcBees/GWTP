@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.domain.CarProperties
-	c114644 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.CarProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarProperties.html">
+	c163081 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.CarProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarProperties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarProperties </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarProperties.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CarProperties.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c114671 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/BaseEntity.html">
+	c163110 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../shared/dto/BaseEntity.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> BaseEntity </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../shared/dto/BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../shared/dto/BaseEntity.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.domain.CarProperties extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c114671:p -> c114644:p [dir=back,arrowtail=empty];
+	c163110:p -> c163081:p [dir=back,arrowtail=empty];
 }
 

@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.guice.ServerModule
-	c363623 [label=<<table title="com.gwtplatform.carstore.server.guice.ServerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ServerModule.html">
+	c483423 [label=<<table title="com.gwtplatform.carstore.server.guice.ServerModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ServerModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ServerModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ServerModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ServerModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.guice.ServerModule extends com.google.inject.AbstractModule
-	c363856:p -> c363623:p [dir=back,arrowtail=empty];
+	c483449:p -> c483423:p [dir=back,arrowtail=empty];
 	// com.google.inject.AbstractModule
-	c363856 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
+	c483449 [label=<<table title="com.google.inject.AbstractModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractModule </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/AbstractModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

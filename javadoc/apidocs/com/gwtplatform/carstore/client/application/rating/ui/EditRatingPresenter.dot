@@ -5,33 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c175492 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PresenterWidget.html">
+	c245233 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/PresenterWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../../mvp/client/PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../../mvp/client/PresenterWidget.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers
-	c175864 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingUiHandlers.html">
+	c245625 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EditRatingUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./EditRatingUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./EditRatingUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
-	c175866 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditRatingPresenter.html">
+	c245626 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditRatingPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EditRatingPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="./EditRatingPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./EditRatingPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView>
-	c175492:p -> c175866:p [dir=back,arrowtail=empty];
+	c245233:p -> c245626:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter implements com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers
-	c175864:p -> c175866:p [dir=back,arrowtail=empty,style=dashed];
+	c245625:p -> c245626:p [dir=back,arrowtail=empty,style=dashed];
 }
 

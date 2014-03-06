@@ -5,115 +5,127 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c1234 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsync.html">
+	// com.gwtplatform.dispatch.client.RpcDispatchAsync
+	c5916 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RpcDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchAsync </font></td></tr>
+<tr><td align="center" balign="center"> RpcDispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest<R>
-	c1235 [label=<<table title="com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultCallbackDispatchRequest.html">
+		</table>>, URL="./RpcDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.RemoteServerUrl
+	c5917 [label=<<table title="com.gwtplatform.dispatch.client.RemoteServerUrl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RemoteServerUrl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultCallbackDispatchRequest&lt;R&gt; </td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> RemoteServerUrl </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./DefaultCallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.DefaultExceptionHandler
-	c1236 [label=<<table title="com.gwtplatform.dispatch.client.DefaultExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultExceptionHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultExceptionHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultExceptionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.DelegatingDispatchRequest
-	c1237 [label=<<table title="com.gwtplatform.dispatch.client.DelegatingDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelegatingDispatchRequest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DelegatingDispatchRequest </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DelegatingDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./RemoteServerUrl.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.PhoneGapDispatchAsync
-	c1238 [label=<<table title="com.gwtplatform.dispatch.client.PhoneGapDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapDispatchAsync.html">
+	c5918 [label=<<table title="com.gwtplatform.dispatch.client.PhoneGapDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PhoneGapDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PhoneGapDispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="./PhoneGapDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.GwtHttpDispatchRequest
-	c1239 [label=<<table title="com.gwtplatform.dispatch.client.GwtHttpDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GwtHttpDispatchRequest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GwtHttpDispatchRequest </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GwtHttpDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PhoneGapDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.DefaultDispatchAsync
-	c1240 [label=<<table title="com.gwtplatform.dispatch.client.DefaultDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultDispatchAsync.html">
+	c5919 [label=<<table title="com.gwtplatform.dispatch.client.DefaultDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultDispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DefaultDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DefaultDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.AbstractDispatchAsync
+	c5920 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractDispatchAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractDispatchAsync </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.GwtHttpDispatchRequest
+	c5921 [label=<<table title="com.gwtplatform.dispatch.client.GwtHttpDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GwtHttpDispatchRequest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GwtHttpDispatchRequest </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GwtHttpDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.ExceptionHandler
-	c1241 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExceptionHandler.html">
+	c5922 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExceptionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ExceptionHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ExceptionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ExceptionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.ExceptionHandler.Status
-	c1242 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler.Status" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExceptionHandler.Status.html">
+	c5923 [label=<<table title="com.gwtplatform.dispatch.client.ExceptionHandler.Status" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ExceptionHandler.Status.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> Status </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ExceptionHandler.Status.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor
-	c1243 [label=<<table title="com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultSecurityCookieAccessor.html">
+		</table>>, URL="./ExceptionHandler.Status.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DispatchCall<A extends com.gwtplatform.dispatch.shared.TypedAction<R>, R>
+	c5924 [label=<<table title="com.gwtplatform.dispatch.client.DispatchCall" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchCall.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultSecurityCookieAccessor </td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> DispatchCall&lt;A extends TypedAction&lt;R&gt;, R&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./DefaultSecurityCookieAccessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DispatchCall.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DelegatingDispatchRequest
+	c5925 [label=<<table title="com.gwtplatform.dispatch.client.DelegatingDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelegatingDispatchRequest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DelegatingDispatchRequest </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DelegatingDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DelegatingAsyncCallback<A extends com.gwtplatform.dispatch.shared.TypedAction<R>, R>
+	c5926 [label=<<table title="com.gwtplatform.dispatch.client.DelegatingAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelegatingAsyncCallback.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DelegatingAsyncCallback&lt;A extends TypedAction&lt;R&gt;, R&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DelegatingAsyncCallback.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest<R>
-	c1244 [label=<<table title="com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelagatingCallbackDispatchRequest.html">
+	c5927 [label=<<table title="com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DelagatingCallbackDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DelagatingCallbackDispatchRequest&lt;R&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DelagatingCallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DelagatingCallbackDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor
+	c5928 [label=<<table title="com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultSecurityCookieAccessor.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultSecurityCookieAccessor </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultSecurityCookieAccessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DefaultExceptionHandler
+	c5929 [label=<<table title="com.gwtplatform.dispatch.client.DefaultExceptionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultExceptionHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultExceptionHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultExceptionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest<R>
+	c5930 [label=<<table title="com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultCallbackDispatchRequest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultCallbackDispatchRequest&lt;R&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultCallbackDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.CompletedDispatchRequest
+	c5931 [label=<<table title="com.gwtplatform.dispatch.client.CompletedDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CompletedDispatchRequest.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CompletedDispatchRequest </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CompletedDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c1245 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CallbackDispatchRequest.html">
+	c5932 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CallbackDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CallbackDispatchRequest&lt;R&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.CompletedDispatchRequest
-	c1246 [label=<<table title="com.gwtplatform.dispatch.client.CompletedDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CompletedDispatchRequest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CompletedDispatchRequest </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CompletedDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c1247 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RpcDispatchAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RpcDispatchAsync </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RpcDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.RemoteServerUrl
-	c1248 [label=<<table title="com.gwtplatform.dispatch.client.RemoteServerUrl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RemoteServerUrl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> RemoteServerUrl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./RemoteServerUrl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest<R> implements com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c1245:p -> c1235:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.client.DefaultExceptionHandler implements com.gwtplatform.dispatch.client.ExceptionHandler
-	c1241:p -> c1236:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.client.PhoneGapDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c1247:p -> c1238:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.client.DefaultDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c1247:p -> c1240:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest<R> implements com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c1245:p -> c1244:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./CallbackDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.RpcDispatchAsync extends com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c1234:p -> c1247:p [dir=back,arrowtail=empty];
+	c5920:p -> c5916:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.client.PhoneGapDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
+	c5916:p -> c5918:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.client.DefaultDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
+	c5916:p -> c5919:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest<R> implements com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
+	c5932:p -> c5927:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.DefaultExceptionHandler implements com.gwtplatform.dispatch.client.ExceptionHandler
+	c5922:p -> c5929:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest<R> implements com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
+	c5932:p -> c5930:p [dir=back,arrowtail=empty,style=dashed];
 }
 

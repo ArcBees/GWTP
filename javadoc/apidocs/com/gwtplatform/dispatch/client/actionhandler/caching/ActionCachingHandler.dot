@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c72004 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionCachingHandler.html">
+	// com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler<A, R>
+	c107597 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ActionCachingHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionCachingHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
+<tr><td align="center" balign="center"> ActionCachingHandler&lt;A, R&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ActionCachingHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c72005 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractCachingClientActionHandler.html">
+		</table>>, URL="./ActionCachingHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler<A, R>
+	c107598 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractCachingClientActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractCachingClientActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractCachingClientActionHandler&lt;A, R&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractCachingClientActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> extends com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler<A, R>
-	c72005:p -> c72004:p [dir=back,arrowtail=empty];
+		</table>>, URL="./AbstractCachingClientActionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler<A, R> extends com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler<A, R>
+	c107598:p -> c107597:p [dir=back,arrowtail=empty];
 }
 

@@ -5,59 +5,50 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.shared.BatchAction
-	c68322 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchAction.html">
+	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
+	c103157 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsecuredActionImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BatchAction </font></td></tr>
+<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./BatchAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UnsecuredActionImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.BatchAction
+	c103167 [label=<<table title="com.gwtplatform.dispatch.shared.BatchAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchAction.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> BatchAction </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./BatchAction.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.shared.ActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
+	c103169 [label=<<table title="com.gwtplatform.dispatch.shared.ActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ActionImpl&lt;R extends Result&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c68325 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Action.html">
+	c103170 [label=<<table title="com.gwtplatform.dispatch.shared.Action" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Action.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Action&lt;R extends Result&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Action.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.ActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
-	c68333 [label=<<table title="com.gwtplatform.dispatch.shared.ActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionImpl&lt;R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result>
-	c68338 [label=<<table title="com.gwtplatform.dispatch.shared.UnsecuredActionImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsecuredActionImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UnsecuredActionImpl&lt;R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UnsecuredActionImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result>
-	c68593 [label=<<table title="com.gwtplatform.dispatch.shared.rest.RestAction" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./rest/RestAction.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> RestAction&lt;R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./rest/RestAction.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.shared.BatchAction implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c68325:p -> c68322:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result> implements com.google.gwt.user.client.rpc.IsSerializable
-	c68921:p -> c68325:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.ActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c68325:p -> c68333:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./Action.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.UnsecuredActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c68325:p -> c68338:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.dispatch.shared.rest.RestAction<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
-	c68325:p -> c68593:p [dir=back,arrowtail=empty,style=dashed];
+	c103170:p -> c103157:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.BatchAction implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
+	c103170:p -> c103167:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.ActionImpl<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result>
+	c103170:p -> c103169:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.dispatch.shared.Action<R extends com.gwtplatform.dispatch.shared.Result> implements com.google.gwt.user.client.rpc.IsSerializable
+	c103870:p -> c103170:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.rpc.IsSerializable
-	c68921 [label=<<table title="com.google.gwt.user.client.rpc.IsSerializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html">
+	c103870 [label=<<table title="com.google.gwt.user.client.rpc.IsSerializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IsSerializable </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

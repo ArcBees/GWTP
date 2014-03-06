@@ -5,56 +5,56 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c191945 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenProcessor.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenProcessor </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./GenProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor
-	c191946 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDtoProcessor.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GenDtoProcessor </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GenDtoProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor
-	c191947 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDispatchProcessor.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GenDispatchProcessor </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GenDispatchProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.annotation.processor.GenEventProcessor
-	c191948 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenEventProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenEventProcessor.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GenEventProcessor </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GenEventProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor
-	c191949 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProxyProcessor.html">
+	c265975 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProxyProcessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GenProxyProcessor </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GenProxyProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.annotation.processor.GenProcessor extends javax.annotation.processing.AbstractProcessor
-	c192221:p -> c191945:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c191945:p -> c191946:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c191945:p -> c191947:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.annotation.processor.GenEventProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c191945:p -> c191948:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c191945:p -> c191949:p [dir=back,arrowtail=empty];
-	// javax.annotation.processing.AbstractProcessor
-	c192221 [label=<<table title="javax.annotation.processing.AbstractProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/javax/annotation/processing/AbstractProcessor.html">
+		</table>>, URL="./GenProxyProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.processor.GenProcessor
+	c265976 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenProcessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractProcessor </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> GenProcessor </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://download.oracle.com/javase/6/docs/api/javax/annotation/processing/AbstractProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GenProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.processor.GenEventProcessor
+	c265977 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenEventProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenEventProcessor.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GenEventProcessor </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GenEventProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor
+	c265978 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDtoProcessor.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GenDtoProcessor </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GenDtoProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor
+	c265979 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenDispatchProcessor.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GenDispatchProcessor </td></tr>
+		</table></td></tr>
+		</table>>, URL="./GenDispatchProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
+	c265976:p -> c265975:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.annotation.processor.GenProcessor extends javax.annotation.processing.AbstractProcessor
+	c266240:p -> c265976:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.annotation.processor.GenEventProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
+	c265976:p -> c265977:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
+	c265976:p -> c265978:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
+	c265976:p -> c265979:p [dir=back,arrowtail=empty];
+	// javax.annotation.processing.AbstractProcessor
+	c266240 [label=<<table title="javax.annotation.processing.AbstractProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/javax/annotation/processing/AbstractProcessor.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractProcessor </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="http://download.oracle.com/javase/6/docs/api/javax/annotation/processing/AbstractProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

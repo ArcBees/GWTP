@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.DefaultDispatchAsync
-	c151156 [label=<<table title="com.gwtplatform.dispatch.client.DefaultDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultDispatchAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultDispatchAsync </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c151163 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RpcDispatchAsync.html">
+	c211458 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RpcDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RpcDispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RpcDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./RpcDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DefaultDispatchAsync
+	c211461 [label=<<table title="com.gwtplatform.dispatch.client.DefaultDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultDispatchAsync.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultDispatchAsync </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.DefaultDispatchAsync extends com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c151163:p -> c151156:p [dir=back,arrowtail=empty];
+	c211458:p -> c211461:p [dir=back,arrowtail=empty];
 }
 

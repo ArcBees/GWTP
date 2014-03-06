@@ -5,67 +5,67 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.login.LoginModule
-	c49466 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LoginModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.login.LoginPresenter
-	c49467 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LoginPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
-	c49468 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MyView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.login.LoginPresenter.MyProxy
-	c49469 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyProxy.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MyProxy </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginPresenter.MyProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.login.LoginMobileModule
-	c49470 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginMobileModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LoginMobileModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginMobileModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.login.LoginMobileView
-	c49471 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginMobileView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LoginMobileView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LoginMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginView
-	c49472 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginView.html">
+	c58297 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoginView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./LoginView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./LoginView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.login.LoginUiHandlers
-	c49473 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginUiHandlers.html">
+	c58298 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> LoginUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./LoginUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.login.LoginPresenter implements com.gwtplatform.carstore.client.application.login.LoginUiHandlers
-	c49473:p -> c49467:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.login.LoginMobileView implements com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
-	c49468:p -> c49471:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./LoginUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginPresenter
+	c58299 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LoginPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
+	c58300 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MyView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginPresenter.MyProxy
+	c58301 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginPresenter.MyProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginPresenter.MyProxy.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MyProxy </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginPresenter.MyProxy.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginModule
+	c58302 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LoginModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginMobileView
+	c58303 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginMobileView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LoginMobileView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginMobileView.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.login.LoginMobileModule
+	c58304 [label=<<table title="com.gwtplatform.carstore.client.application.login.LoginMobileModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LoginMobileModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LoginMobileModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LoginMobileModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.login.LoginView implements com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
-	c49468:p -> c49472:p [dir=back,arrowtail=empty,style=dashed];
+	c58300:p -> c58297:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.login.LoginPresenter implements com.gwtplatform.carstore.client.application.login.LoginUiHandlers
+	c58298:p -> c58299:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.login.LoginMobileView implements com.gwtplatform.carstore.client.application.login.LoginPresenter.MyView
+	c58300:p -> c58303:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.GinjectorGenerator
-	c199576 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GinjectorGenerator.html">
+	c274580 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GinjectorGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GinjectorGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GinjectorGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GinjectorGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.AbstractGenerator
-	c199583 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
+	c274585 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGenerator </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractGenerator </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.GinjectorGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c199583:p -> c199576:p [dir=back,arrowtail=empty];
+	c274585:p -> c274580:p [dir=back,arrowtail=empty];
 }
 

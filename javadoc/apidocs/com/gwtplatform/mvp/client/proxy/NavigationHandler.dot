@@ -5,34 +5,34 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker
+	c355690 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../googleanalytics/GoogleAnalyticsNavigationTracker.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> GoogleAnalyticsNavigationTracker </td></tr>
+		</table></td></tr>
+		</table>>, URL="../googleanalytics/GoogleAnalyticsNavigationTracker.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.NavigationHandler
-	c261299 [label=<<table title="com.gwtplatform.mvp.client.proxy.NavigationHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationHandler.html">
+	c355725 [label=<<table title="com.gwtplatform.mvp.client.proxy.NavigationHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> NavigationHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./NavigationHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker
-	c261344 [label=<<table title="com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../googleanalytics/GoogleAnalyticsNavigationTracker.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GoogleAnalyticsNavigationTracker </td></tr>
-		</table></td></tr>
-		</table>>, URL="../googleanalytics/GoogleAnalyticsNavigationTracker.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.proxy.NavigationHandler implements com.google.gwt.event.shared.EventHandler
-	c261720:p -> c261299:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./NavigationHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker implements com.gwtplatform.mvp.client.proxy.NavigationHandler
-	c261299:p -> c261344:p [dir=back,arrowtail=empty,style=dashed];
+	c355725:p -> c355690:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.proxy.NavigationHandler implements com.google.gwt.event.shared.EventHandler
+	c356193:p -> c355725:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c261720 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c356193 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

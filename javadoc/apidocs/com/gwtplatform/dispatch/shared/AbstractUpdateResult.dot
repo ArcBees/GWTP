@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.Result
-	c67124 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
+	c101698 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Result </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Result.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.AbstractUpdateResult<T>
-	c67129 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractUpdateResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractUpdateResult.html">
+	c101709 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractUpdateResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractUpdateResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractUpdateResult&lt;T&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractUpdateResult&lt;T&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractUpdateResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractUpdateResult.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.AbstractUpdateResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c67124:p -> c67129:p [dir=back,arrowtail=empty,style=dashed];
+	c101698:p -> c101709:p [dir=back,arrowtail=empty,style=dashed];
 }
 

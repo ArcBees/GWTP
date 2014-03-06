@@ -5,49 +5,49 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.authentication.SecurityParameters
-	c33619 [label=<<table title="com.gwtplatform.carstore.server.authentication.SecurityParameters" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityParameters.html">
+	c78168 [label=<<table title="com.gwtplatform.carstore.server.authentication.SecurityParameters" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecurityParameters.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecurityParameters </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SecurityParameters.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.authentication.Authenticator
-	c33620 [label=<<table title="com.gwtplatform.carstore.server.authentication.Authenticator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Authenticator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Authenticator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Authenticator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./SecurityParameters.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.authentication.PasswordSecurity
-	c33621 [label=<<table title="com.gwtplatform.carstore.server.authentication.PasswordSecurity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PasswordSecurity.html">
+	c78169 [label=<<table title="com.gwtplatform.carstore.server.authentication.PasswordSecurity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PasswordSecurity.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> PasswordSecurity </td></tr>
 		</table></td></tr>
-		</table>>, URL="./PasswordSecurity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity
-	c33622 [label=<<table title="com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BCryptPasswordSecurity.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BCryptPasswordSecurity </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BCryptPasswordSecurity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PasswordSecurity.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider
-	c33623 [label=<<table title="com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUserDtoProvider.html">
+	c78170 [label=<<table title="com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUserDtoProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CurrentUserDtoProvider </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CurrentUserDtoProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CurrentUserDtoProvider.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity
+	c78171 [label=<<table title="com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BCryptPasswordSecurity.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BCryptPasswordSecurity </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BCryptPasswordSecurity.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.authentication.Authenticator
+	c78172 [label=<<table title="com.gwtplatform.carstore.server.authentication.Authenticator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Authenticator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Authenticator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Authenticator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.authentication.AuthenticationException
-	c33624 [label=<<table title="com.gwtplatform.carstore.server.authentication.AuthenticationException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AuthenticationException.html">
+	c78173 [label=<<table title="com.gwtplatform.carstore.server.authentication.AuthenticationException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AuthenticationException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AuthenticationException </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AuthenticationException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AuthenticationException.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity implements com.gwtplatform.carstore.server.authentication.PasswordSecurity
-	c33621:p -> c33622:p [dir=back,arrowtail=empty,style=dashed];
+	c78169:p -> c78171:p [dir=back,arrowtail=empty,style=dashed];
 }
 

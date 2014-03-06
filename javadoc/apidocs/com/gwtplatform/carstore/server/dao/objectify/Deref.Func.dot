@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.objectify.Deref.Func<T>
-	c159978 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Deref.Func" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Deref.Func.html">
+	c225986 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Deref.Func" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Deref.Func.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Func&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Deref.Func.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Deref.Func.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.objectify.Deref.Func<T> implements com.google.common.base.Function<F, T>
-	c160187:p -> c159978:p [dir=back,arrowtail=empty,style=dashed];
+	c226014:p -> c225986:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.common.base.Function<F, T>
-	c160187 [label=<<table title="com.google.common.base.Function" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Function.html">
+	c226014 [label=<<table title="com.google.common.base.Function" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Function.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Function&lt;F, T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Function.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Function.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

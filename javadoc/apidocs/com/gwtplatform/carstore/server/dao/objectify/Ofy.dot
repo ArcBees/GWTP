@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.objectify.Ofy
-	c275414 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Ofy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Ofy.html">
+	c372255 [label=<<table title="com.gwtplatform.carstore.server.dao.objectify.Ofy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Ofy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Ofy </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Ofy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Ofy.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.objectify.Ofy extends com.googlecode.objectify.util.cmd.ObjectifyWrapper<com.gwtplatform.carstore.server.dao.objectify.Ofy, com.gwtplatform.carstore.server.dao.objectify.OfyFactory>
-	c275623:p -> c275414:p [dir=back,arrowtail=empty];
+	c372287:p -> c372255:p [dir=back,arrowtail=empty];
 	// com.googlecode.objectify.util.cmd.ObjectifyWrapper<W extends com.googlecode.objectify.util.cmd.ObjectifyWrapper<W, F>, F extends com.googlecode.objectify.ObjectifyFactory>
-	c275623 [label=<<table title="com.googlecode.objectify.util.cmd.ObjectifyWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c372287 [label=<<table title="com.googlecode.objectify.util.cmd.ObjectifyWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ObjectifyWrapper&lt;W extends ObjectifyWrapper&lt;W, F&gt;, F extends ObjectifyFactory&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider
-	c147297 [label=<<table title="com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CurrentUserDtoProvider.html">
+	c205490 [label=<<table title="com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CurrentUserDtoProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CurrentUserDtoProvider </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CurrentUserDtoProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CurrentUserDtoProvider.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider implements javax.inject.Provider<T>
-	c147499:p -> c147297:p [dir=back,arrowtail=empty,style=dashed];
+	c205539:p -> c205490:p [dir=back,arrowtail=empty,style=dashed];
 	// javax.inject.Provider<T>
-	c147499 [label=<<table title="javax.inject.Provider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c205539 [label=<<table title="javax.inject.Provider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Provider&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

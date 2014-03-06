@@ -5,17 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c180788 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ExecuteCommand.html">
+	// com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand<A, R>
+	c251670 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ExecuteCommand.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ExecuteCommand&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
+<tr><td align="center" balign="center"> ExecuteCommand&lt;A, R&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ExecuteCommand.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ExecuteCommand.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.DelegatingAsyncCallback<A extends com.gwtplatform.dispatch.shared.TypedAction<R>, R>
+	c251690 [label=<<table title="com.gwtplatform.dispatch.client.DelegatingAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../DelegatingAsyncCallback.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DelegatingAsyncCallback&lt;A extends TypedAction&lt;R&gt;, R&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="../DelegatingAsyncCallback.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.dispatch.client.DelegatingAsyncCallback<A extends com.gwtplatform.dispatch.shared.TypedAction<R>, R> implements com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand<A, R>
+	c251670:p -> c251690:p [dir=back,arrowtail=empty,style=dashed];
 }
 

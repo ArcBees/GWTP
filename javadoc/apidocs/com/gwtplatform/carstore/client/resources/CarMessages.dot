@@ -5,26 +5,26 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.resources.CarMessages
-	c110471 [label=<<table title="com.gwtplatform.carstore.client.resources.CarMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarMessages.html">
+	c157918 [label=<<table title="com.gwtplatform.carstore.client.resources.CarMessages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarMessages.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CarMessages </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarMessages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CarMessages.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.resources.CarMessages implements com.google.gwt.i18n.client.Messages
-	c110628:p -> c110471:p [dir=back,arrowtail=empty,style=dashed];
+	c157995:p -> c157918:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.i18n.client.Messages
-	c110628 [label=<<table title="com.google.gwt.i18n.client.Messages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/i18n/client/Messages.html">
+	c157995 [label=<<table title="com.google.gwt.i18n.client.Messages" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/i18n/client/Messages.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Messages </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/i18n/client/Messages.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/i18n/client/Messages.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

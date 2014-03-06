@@ -5,47 +5,39 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.server.actionhandler.TestActionHandler
-	c4902 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.TestActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestActionHandler.html">
+	// com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler
+	c12563 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TestActionHandler </td></tr>
+<tr><td align="center" balign="center"> BatchActionHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./BatchActionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.server.actionhandler.ActionResult<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
+	c12564 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.ActionResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionResult.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ActionResult&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionResult.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandler.ActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c4903 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.ActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandler.html">
+	c12565 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.ActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.actionhandler.ActionResult<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c4904 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.ActionResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionResult.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ActionResult&lt;A extends Action&lt;R&gt;, R extends Result&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ActionResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ActionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c4905 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractActionHandler.html">
+	c12566 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractActionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractActionHandler&lt;A extends Action&lt;R&gt;, R extends Result&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler
-	c4906 [label=<<table title="com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BatchActionHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BatchActionHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BatchActionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.server.actionhandler.TestActionHandler extends com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler<com.gwtplatform.dispatch.shared.action.TestAction, com.gwtplatform.dispatch.shared.action.TestResult>
-	c4905:p -> c4902:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.server.actionhandler.ActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
-	c4903:p -> c4905:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./AbstractActionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.server.actionhandler.BatchActionHandler extends com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler<com.gwtplatform.dispatch.shared.BatchAction, com.gwtplatform.dispatch.shared.BatchResult>
-	c4905:p -> c4906:p [dir=back,arrowtail=empty];
+	c12566:p -> c12563:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.server.actionhandler.ActionHandler<A extends com.gwtplatform.dispatch.shared.Action<R>, R extends com.gwtplatform.dispatch.shared.Result>
+	c12565:p -> c12566:p [dir=back,arrowtail=empty,style=dashed];
 }
 

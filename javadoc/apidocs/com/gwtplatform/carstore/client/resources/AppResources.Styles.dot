@@ -5,26 +5,26 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.resources.AppResources.Styles
-	c84470 [label=<<table title="com.gwtplatform.carstore.client.resources.AppResources.Styles" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AppResources.Styles.html">
+	c126469 [label=<<table title="com.gwtplatform.carstore.client.resources.AppResources.Styles" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AppResources.Styles.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Styles </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AppResources.Styles.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AppResources.Styles.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.resources.AppResources.Styles implements com.google.gwt.resources.client.CssResource
-	c84638:p -> c84470:p [dir=back,arrowtail=empty,style=dashed];
+	c126544:p -> c126469:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.resources.client.CssResource
-	c84638 [label=<<table title="com.google.gwt.resources.client.CssResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/resources/client/CssResource.html">
+	c126544 [label=<<table title="com.google.gwt.resources.client.CssResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/resources/client/CssResource.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CssResource </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/resources/client/CssResource.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/resources/client/CssResource.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

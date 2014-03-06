@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.ApplicationControllerGenerator
-	c85349 [label=<<table title="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationControllerGenerator.html">
+	c127575 [label=<<table title="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ApplicationControllerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationControllerGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationControllerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationControllerGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.AbstractGenerator
-	c85353 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
+	c127576 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGenerator </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractGenerator </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.ApplicationControllerGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c85353:p -> c85349:p [dir=back,arrowtail=empty];
+	c127576:p -> c127575:p [dir=back,arrowtail=empty];
 }
 

@@ -5,32 +5,32 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.UnsupportedActionException
-	c364468 [label=<<table title="com.gwtplatform.dispatch.shared.UnsupportedActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsupportedActionException.html">
+	c484929 [label=<<table title="com.gwtplatform.dispatch.shared.UnsupportedActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnsupportedActionException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UnsupportedActionException </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UnsupportedActionException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UnsupportedActionException.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.ServiceException
-	c364485 [label=<<table title="com.gwtplatform.dispatch.shared.ServiceException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ServiceException.html">
+	c484932 [label=<<table title="com.gwtplatform.dispatch.shared.ServiceException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ServiceException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ServiceException </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ServiceException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ServiceException.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.UnsupportedActionException extends com.gwtplatform.dispatch.shared.ServiceException
-	c364485:p -> c364468:p [dir=back,arrowtail=empty];
+	c484932:p -> c484929:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.shared.ServiceException extends java.lang.Exception
-	c365065:p -> c364485:p [dir=back,arrowtail=empty];
+	c485643:p -> c484932:p [dir=back,arrowtail=empty];
 	// java.lang.Exception
-	c365065 [label=<<table title="java.lang.Exception" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/Exception.html">
+	c485643 [label=<<table title="java.lang.Exception" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/6/docs/api/java/lang/Exception.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Exception </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://download.oracle.com/javase/6/docs/api/java/lang/Exception.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://download.oracle.com/javase/6/docs/api/java/lang/Exception.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

@@ -5,48 +5,48 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator
-	c67831 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/VelocityPlacetokenGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> VelocityPlacetokenGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./proxy/VelocityPlacetokenGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c67837 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractVelocityGenerator.html">
+	c102712 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractVelocityGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractVelocityGenerator </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator
-	c67839 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ginjectors/FormFactorGinjectorGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> FormFactorGinjectorGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ginjectors/FormFactorGinjectorGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator
-	c67841 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ginjectors/FormFactorGinjectorProviderGenerator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> FormFactorGinjectorProviderGenerator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ginjectors/FormFactorGinjectorProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractVelocityGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator
-	c67842 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ginjectors/GinjectorProviderGenerator.html">
+	c102713 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ginjectors/GinjectorProviderGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GinjectorProviderGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ginjectors/GinjectorProviderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c67837:p -> c67831:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c67837:p -> c67839:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c67837:p -> c67841:p [dir=back,arrowtail=empty];
+		</table>>, URL="./ginjectors/GinjectorProviderGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator
+	c102714 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ginjectors/FormFactorGinjectorProviderGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> FormFactorGinjectorProviderGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ginjectors/FormFactorGinjectorProviderGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator
+	c102715 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ginjectors/FormFactorGinjectorGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> FormFactorGinjectorGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ginjectors/FormFactorGinjectorGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator
+	c102717 [label=<<table title="com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/VelocityPlacetokenGenerator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> VelocityPlacetokenGenerator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./proxy/VelocityPlacetokenGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
-	c67837:p -> c67842:p [dir=back,arrowtail=empty];
+	c102712:p -> c102713:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
+	c102712:p -> c102714:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
+	c102712:p -> c102715:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator extends com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator
+	c102712:p -> c102717:p [dir=back,arrowtail=empty];
 }
 

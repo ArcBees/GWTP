@@ -5,96 +5,88 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.shared.dto.RatingDto
-	c35444 [label=<<table title="com.gwtplatform.carstore.shared.dto.RatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RatingDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.NumberDto<T extends java.lang.Number>
-	c35445 [label=<<table title="com.gwtplatform.carstore.shared.dto.NumberDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NumberDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NumberDto&lt;T extends Number&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NumberDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.ManufacturerDto
-	c35446 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.CurrentUserDto
-	c35447 [label=<<table title="com.gwtplatform.carstore.shared.dto.CurrentUserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUserDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CurrentUserDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CurrentUserDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.CarPropertiesDto
-	c35448 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarPropertiesDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPropertiesDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarPropertiesDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarPropertiesDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c35449 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BaseEntity </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto
-	c35450 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerRatingDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerRatingDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerRatingDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.UserDto
-	c35451 [label=<<table title="com.gwtplatform.carstore.shared.dto.UserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserDto.html">
+	c84785 [label=<<table title="com.gwtplatform.carstore.shared.dto.UserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserDto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UserDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.ActionType
-	c35452 [label=<<table title="com.gwtplatform.carstore.shared.dto.ActionType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionType.html">
+		</table>>, URL="./UserDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.RatingDto
+	c84786 [label=<<table title="com.gwtplatform.carstore.shared.dto.RatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
-<tr><td align="center" balign="center"> ActionType </td></tr>
+<tr><td align="center" balign="center"> RatingDto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ActionType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.CarDto
-	c35453 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarDto.html">
+		</table>>, URL="./RatingDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto
+	c84787 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerRatingDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarDto </td></tr>
+<tr><td align="center" balign="center"> ManufacturerRatingDto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ManufacturerRatingDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.ManufacturerDto
+	c84788 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.Dto
-	c35454 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
+	c84789 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Dto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Dto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.shared.dto.RatingDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c35449:p -> c35444:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.shared.dto.NumberDto<T extends java.lang.Number> implements com.gwtplatform.carstore.shared.dto.Dto
-	c35454:p -> c35445:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.ManufacturerDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c35449:p -> c35446:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.shared.dto.CurrentUserDto implements com.gwtplatform.carstore.shared.dto.Dto
-	c35454:p -> c35447:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.CarPropertiesDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c35449:p -> c35448:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.shared.dto.BaseEntity implements com.gwtplatform.carstore.shared.dto.Dto
-	c35454:p -> c35449:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto implements com.gwtplatform.carstore.shared.dto.Dto
-	c35454:p -> c35450:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./Dto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.CurrentUserDto
+	c84790 [label=<<table title="com.gwtplatform.carstore.shared.dto.CurrentUserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUserDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CurrentUserDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CurrentUserDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.CarPropertiesDto
+	c84791 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarPropertiesDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPropertiesDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarPropertiesDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarPropertiesDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.CarDto
+	c84792 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.BaseEntity
+	c84793 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BaseEntity </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BaseEntity.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.ActionType
+	c84794 [label=<<table title="com.gwtplatform.carstore.shared.dto.ActionType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ActionType.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
+<tr><td align="center" balign="center"> ActionType </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ActionType.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.shared.dto.UserDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c35449:p -> c35451:p [dir=back,arrowtail=empty];
+	c84793:p -> c84785:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.RatingDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c84793:p -> c84786:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto implements com.gwtplatform.carstore.shared.dto.Dto
+	c84789:p -> c84787:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.shared.dto.ManufacturerDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c84793:p -> c84788:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.CurrentUserDto implements com.gwtplatform.carstore.shared.dto.Dto
+	c84789:p -> c84790:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.shared.dto.CarPropertiesDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c84793:p -> c84791:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.shared.dto.CarDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c35449:p -> c35453:p [dir=back,arrowtail=empty];
+	c84793:p -> c84792:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.BaseEntity implements com.gwtplatform.carstore.shared.dto.Dto
+	c84789:p -> c84793:p [dir=back,arrowtail=empty,style=dashed];
 }
 

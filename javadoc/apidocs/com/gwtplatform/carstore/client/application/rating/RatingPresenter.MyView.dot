@@ -5,51 +5,51 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c320529 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/HasUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/HasUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.View
-	c320532 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/View.html">
+	c427326 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/View.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c427346 [label=<<table title="com.gwtplatform.mvp.client.HasUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/HasUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> HasUiHandlers&lt;C extends UiHandlers&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../../../mvp/client/HasUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.rating.RatingView
+	c427713 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RatingView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView
-	c320892 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingPresenter.MyView.html">
+	c427716 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RatingPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./RatingPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.RatingMobileView
-	c320895 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingMobileView.html">
+	c427719 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingMobileView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RatingMobileView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RatingMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.RatingView
-	c320897 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RatingView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView implements com.gwtplatform.mvp.client.View
-	c320532:p -> c320892:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
-	c320529:p -> c320892:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.rating.RatingMobileView implements com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView
-	c320892:p -> c320895:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./RatingMobileView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.RatingView implements com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView
-	c320892:p -> c320897:p [dir=back,arrowtail=empty,style=dashed];
+	c427716:p -> c427713:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView implements com.gwtplatform.mvp.client.View
+	c427326:p -> c427716:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView implements com.gwtplatform.mvp.client.HasUiHandlers<C extends com.gwtplatform.mvp.client.UiHandlers>
+	c427346:p -> c427716:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.rating.RatingMobileView implements com.gwtplatform.carstore.client.application.rating.RatingPresenter.MyView
+	c427716:p -> c427719:p [dir=back,arrowtail=empty,style=dashed];
 }
 

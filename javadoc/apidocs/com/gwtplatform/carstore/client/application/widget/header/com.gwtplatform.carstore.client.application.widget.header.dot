@@ -5,70 +5,70 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.widget.header.MenuItem
-	c53133 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.MenuItem" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MenuItem.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
-<tr><td align="center" balign="center"> MenuItem </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MenuItem.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderView
-	c53134 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HeaderView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HeaderView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView
-	c53135 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMobileView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HeaderMobileView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HeaderMobileView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup
-	c53136 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserInfoPopup.html">
+	c68597 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserInfoPopup.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserInfoPopup </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UserInfoPopup.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UserInfoPopup.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler
-	c53137 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserInfoPopup.Handler.html">
+	c68598 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserInfoPopup.Handler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Handler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UserInfoPopup.Handler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
-	c53138 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderPresenter.html">
+		</table>>, URL="./UserInfoPopup.Handler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.header.MenuItem
+	c68599 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.MenuItem" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MenuItem.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HeaderPresenter </td></tr>
+<tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
+<tr><td align="center" balign="center"> MenuItem </td></tr>
 		</table></td></tr>
-		</table>>, URL="./HeaderPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
-	c53139 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderPresenter.MyView.html">
+		</table>>, URL="./MenuItem.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderView
+	c68600 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MyView </td></tr>
+<tr><td align="center" balign="center"> HeaderView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./HeaderPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./HeaderView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers
-	c53140 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderUiHandlers.html">
+	c68601 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HeaderUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./HeaderUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./HeaderUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
+	c68602 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HeaderPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
+	c68603 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderPresenter.MyView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MyView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView
+	c68604 [label=<<table title="com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HeaderMobileView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HeaderMobileView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HeaderMobileView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderView implements com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
-	c53139:p -> c53134:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView implements com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
-	c53139:p -> c53135:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView implements com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler
-	c53137:p -> c53135:p [dir=back,arrowtail=empty,style=dashed];
+	c68603:p -> c68600:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter implements com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers
-	c53140:p -> c53138:p [dir=back,arrowtail=empty,style=dashed];
+	c68601:p -> c68602:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView implements com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter.MyView
+	c68603:p -> c68604:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView implements com.gwtplatform.carstore.client.application.widget.header.UserInfoPopup.Handler
+	c68598:p -> c68604:p [dir=back,arrowtail=empty,style=dashed];
 }
 

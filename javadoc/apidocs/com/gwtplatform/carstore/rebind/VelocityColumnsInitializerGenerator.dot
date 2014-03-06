@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator
-	c398671 [label=<<table title="com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./VelocityColumnsInitializerGenerator.html">
+	c533124 [label=<<table title="com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./VelocityColumnsInitializerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> VelocityColumnsInitializerGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./VelocityColumnsInitializerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./VelocityColumnsInitializerGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.rebind.AbstractVelocityGenerator
-	c398672 [label=<<table title="com.gwtplatform.carstore.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
+	c533130 [label=<<table title="com.gwtplatform.carstore.rebind.AbstractVelocityGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractVelocityGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractVelocityGenerator </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractVelocityGenerator </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractVelocityGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractVelocityGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.rebind.VelocityColumnsInitializerGenerator extends com.gwtplatform.carstore.rebind.AbstractVelocityGenerator
-	c398672:p -> c398671:p [dir=back,arrowtail=empty];
+	c533130:p -> c533124:p [dir=back,arrowtail=empty];
 }
 

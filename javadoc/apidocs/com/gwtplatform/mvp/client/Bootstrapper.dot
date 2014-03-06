@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.mvp.client.DefaultBootstrapper
+	c147973 [label=<<table title="com.gwtplatform.mvp.client.DefaultBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultBootstrapper.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultBootstrapper </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultBootstrapper.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.Bootstrapper
-	c102360 [label=<<table title="com.gwtplatform.mvp.client.Bootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Bootstrapper.html">
+	c147976 [label=<<table title="com.gwtplatform.mvp.client.Bootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Bootstrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Bootstrapper </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Bootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.DefaultBootstrapper
-	c102366 [label=<<table title="com.gwtplatform.mvp.client.DefaultBootstrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultBootstrapper.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultBootstrapper </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultBootstrapper.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Bootstrapper.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.DefaultBootstrapper implements com.gwtplatform.mvp.client.Bootstrapper
-	c102360:p -> c102366:p [dir=back,arrowtail=empty,style=dashed];
+	c147976:p -> c147973:p [dir=back,arrowtail=empty,style=dashed];
 }
 

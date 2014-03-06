@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.ui.ShowMorePagerPanel
-	c369295 [label=<<table title="com.gwtplatform.carstore.client.application.ui.ShowMorePagerPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ShowMorePagerPanel.html">
+	c491374 [label=<<table title="com.gwtplatform.carstore.client.application.ui.ShowMorePagerPanel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ShowMorePagerPanel.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ShowMorePagerPanel </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ShowMorePagerPanel.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ShowMorePagerPanel.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.ui.ShowMorePagerPanel extends com.google.gwt.user.cellview.client.AbstractPager
-	c369296:p -> c369295:p [dir=back,arrowtail=empty];
+	c491494:p -> c491374:p [dir=back,arrowtail=empty];
 	// com.google.gwt.user.cellview.client.AbstractPager
-	c369296 [label=<<table title="com.google.gwt.user.cellview.client.AbstractPager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/cellview/client/AbstractPager.html">
+	c491494 [label=<<table title="com.google.gwt.user.cellview.client.AbstractPager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/cellview/client/AbstractPager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPager </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractPager </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/cellview/client/AbstractPager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/cellview/client/AbstractPager.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

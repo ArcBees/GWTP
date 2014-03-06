@@ -5,34 +5,34 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.UiHandlers
-	c322356 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/UiHandlers.html">
+	c429520 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/UiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/UiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.RatingPresenter
-	c322703 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RatingPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/UiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.RatingUiHandlers
-	c322715 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingUiHandlers.html">
+	c429907 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RatingUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RatingUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RatingUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.application.rating.RatingPresenter implements com.gwtplatform.carstore.client.application.rating.RatingUiHandlers
-	c322715:p -> c322703:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./RatingUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.rating.RatingPresenter
+	c429908 [label=<<table title="com.gwtplatform.carstore.client.application.rating.RatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RatingPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.RatingUiHandlers implements com.gwtplatform.mvp.client.UiHandlers
-	c322356:p -> c322715:p [dir=back,arrowtail=empty,style=dashed];
+	c429520:p -> c429907:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.client.application.rating.RatingPresenter implements com.gwtplatform.carstore.client.application.rating.RatingUiHandlers
+	c429907:p -> c429908:p [dir=back,arrowtail=empty,style=dashed];
 }
 

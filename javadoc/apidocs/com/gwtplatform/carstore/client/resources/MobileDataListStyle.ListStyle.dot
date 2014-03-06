@@ -5,26 +5,26 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle
-	c253093 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MobileDataListStyle.ListStyle.html">
+	c345138 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MobileDataListStyle.ListStyle.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ListStyle </td></tr>
 		</table></td></tr>
-		</table>>, URL="./MobileDataListStyle.ListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./MobileDataListStyle.ListStyle.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.resources.MobileDataListStyle.ListStyle implements com.google.gwt.user.cellview.client.CellList.Style
-	c253255:p -> c253093:p [dir=back,arrowtail=empty,style=dashed];
+	c345219:p -> c345138:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.cellview.client.CellList.Style
-	c253255 [label=<<table title="com.google.gwt.user.cellview.client.CellList.Style" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c345219 [label=<<table title="com.google.gwt.user.cellview.client.CellList.Style" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Style </td></tr>
 		</table></td></tr>
-		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.proxy.ProxyPlaceAbstract<P extends com.gwtplatform.mvp.client.Presenter<?, ?>, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<P>>
-	c209329 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlaceAbstract" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/ProxyPlaceAbstract.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProxyPlaceAbstract&lt;P extends Presenter&lt;?, ?&gt;, Proxy_ extends Proxy&lt;P&gt;&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./proxy/ProxyPlaceAbstract.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HasHandlerContainer
-	c209341 [label=<<table title="com.gwtplatform.mvp.client.HasHandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HasHandlerContainer.html">
+	c286934 [label=<<table title="com.gwtplatform.mvp.client.HasHandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HasHandlerContainer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HasHandlerContainer </td></tr>
 		</table></td></tr>
-		</table>>, URL="./HasHandlerContainer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./HasHandlerContainer.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.proxy.ProxyPlaceAbstract<P extends com.gwtplatform.mvp.client.Presenter<?, ?>, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<P>>
+	c286967 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlaceAbstract" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/ProxyPlaceAbstract.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProxyPlaceAbstract&lt;P extends Presenter&lt;?, ?&gt;, Proxy_ extends Proxy&lt;P&gt;&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./proxy/ProxyPlaceAbstract.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.ProxyPlaceAbstract<P extends com.gwtplatform.mvp.client.Presenter<?, ?>, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<P>> implements com.gwtplatform.mvp.client.HasHandlerContainer
-	c209341:p -> c209329:p [dir=back,arrowtail=empty,style=dashed];
+	c286934:p -> c286967:p [dir=back,arrowtail=empty,style=dashed];
 }
 

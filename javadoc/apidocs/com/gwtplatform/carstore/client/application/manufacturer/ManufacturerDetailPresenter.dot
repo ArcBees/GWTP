@@ -5,51 +5,51 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.Presenter<V extends com.gwtplatform.mvp.client.View, Proxy_ extends com.gwtplatform.mvp.client.proxy.Proxy<?>>
-	c234741 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
+	c322027 [label=<<table title="com.gwtplatform.mvp.client.Presenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/Presenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> Presenter&lt;V extends View, Proxy_ extends Proxy&lt;?&gt;&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers
-	c234991 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ManufacturerDetailUiHandlers </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerDetailUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter
-	c234997 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerDetailPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerDetailPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerDetailPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
-	c235101 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../event/ActionBarEvent.ActionBarHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ActionBarHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="../event/ActionBarEvent.ActionBarHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/Presenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler
-	c235110 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../event/GoBackEvent.GoBackHandler.html">
+	c322360 [label=<<table title="com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../event/GoBackEvent.GoBackHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> GoBackHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="../event/GoBackEvent.GoBackHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../event/GoBackEvent.GoBackHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
+	c322369 [label=<<table title="com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../event/ActionBarEvent.ActionBarHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ActionBarHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="../event/ActionBarEvent.ActionBarHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers
+	c322389 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDetailUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ManufacturerDetailUiHandlers </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerDetailUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter
+	c322390 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerDetailPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerDetailPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerDetailPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter extends com.gwtplatform.mvp.client.Presenter<com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyView, com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter.MyProxy>
-	c234741:p -> c234997:p [dir=back,arrowtail=empty];
+	c322027:p -> c322390:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter implements com.gwtplatform.carstore.client.application.event.GoBackEvent.GoBackHandler
-	c235110:p -> c234997:p [dir=back,arrowtail=empty,style=dashed];
+	c322360:p -> c322390:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter implements com.gwtplatform.carstore.client.application.event.ActionBarEvent.ActionBarHandler
-	c235101:p -> c234997:p [dir=back,arrowtail=empty,style=dashed];
+	c322369:p -> c322390:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailPresenter implements com.gwtplatform.carstore.client.application.manufacturer.ManufacturerDetailUiHandlers
-	c234991:p -> c234997:p [dir=back,arrowtail=empty,style=dashed];
+	c322389:p -> c322390:p [dir=back,arrowtail=empty,style=dashed];
 }
 

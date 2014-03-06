@@ -5,52 +5,52 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.PopupView
-	c290317 [label=<<table title="com.gwtplatform.mvp.client.PopupView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PopupView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> PopupView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PopupView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.View
-	c290319 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
+	c390032 [label=<<table title="com.gwtplatform.mvp.client.View" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./View.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> View </td></tr>
 		</table></td></tr>
-		</table>>, URL="./View.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./View.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.PopupViewImpl
-	c290338 [label=<<table title="com.gwtplatform.mvp.client.PopupViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewImpl.html">
+	c390049 [label=<<table title="com.gwtplatform.mvp.client.PopupViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PopupViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PopupViewImpl </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> PopupViewImpl </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./PopupViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PopupViewImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PopupView
+	c390051 [label=<<table title="com.gwtplatform.mvp.client.PopupView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PopupView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> PopupView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PopupView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView
-	c290608 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.MyView.html">
+	c390416 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../carstore/client/application/manufacturer/ui/EditManufacturerPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
-	c290698 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/rating/ui/EditRatingPresenter.MyView.html">
+	c390438 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../carstore/client/application/rating/ui/EditRatingPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../carstore/client/application/rating/ui/EditRatingPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.PopupView implements com.gwtplatform.mvp.client.View
-	c290319:p -> c290317:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="../../carstore/client/application/rating/ui/EditRatingPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.PopupViewImpl implements com.gwtplatform.mvp.client.PopupView
-	c290317:p -> c290338:p [dir=back,arrowtail=empty,style=dashed];
+	c390051:p -> c390049:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.PopupView implements com.gwtplatform.mvp.client.View
+	c390032:p -> c390051:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter.MyView implements com.gwtplatform.mvp.client.PopupView
-	c290317:p -> c290608:p [dir=back,arrowtail=empty,style=dashed];
+	c390051:p -> c390416:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView implements com.gwtplatform.mvp.client.PopupView
-	c290317:p -> c290698:p [dir=back,arrowtail=empty,style=dashed];
+	c390051:p -> c390438:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -5,48 +5,48 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.rebind.ProviderBundleGenerator
-	c62975 [label=<<table title="com.gwtplatform.mvp.rebind.ProviderBundleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProviderBundleGenerator.html">
+	c95381 [label=<<table title="com.gwtplatform.mvp.rebind.ProviderBundleGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProviderBundleGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProviderBundleGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ProviderBundleGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ProviderBundleGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.GinjectorGenerator
-	c62979 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorGenerator.html">
+	c95388 [label=<<table title="com.gwtplatform.mvp.rebind.GinjectorGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinjectorGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GinjectorGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GinjectorGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GinjectorGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.ApplicationControllerGenerator
-	c62982 [label=<<table title="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationControllerGenerator.html">
+	c95392 [label=<<table title="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ApplicationControllerGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ApplicationControllerGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ApplicationControllerGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ApplicationControllerGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.rebind.AbstractGenerator
-	c62986 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractGenerator.html">
+	c95393 [label=<<table title="com.gwtplatform.mvp.rebind.AbstractGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGenerator </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractGenerator </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.rebind.ProviderBundleGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c62986:p -> c62975:p [dir=back,arrowtail=empty];
+	c95393:p -> c95381:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.rebind.GinjectorGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c62986:p -> c62979:p [dir=back,arrowtail=empty];
+	c95393:p -> c95388:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.rebind.ApplicationControllerGenerator extends com.gwtplatform.mvp.rebind.AbstractGenerator
-	c62986:p -> c62982:p [dir=back,arrowtail=empty];
+	c95393:p -> c95392:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.rebind.AbstractGenerator extends com.google.gwt.core.ext.Generator
-	c63481:p -> c62986:p [dir=back,arrowtail=empty];
+	c95825:p -> c95393:p [dir=back,arrowtail=empty];
 	// com.google.gwt.core.ext.Generator
-	c63481 [label=<<table title="com.google.gwt.core.ext.Generator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html">
+	c95825 [label=<<table title="com.google.gwt.core.ext.Generator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Generator </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> Generator </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/core/ext/Generator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

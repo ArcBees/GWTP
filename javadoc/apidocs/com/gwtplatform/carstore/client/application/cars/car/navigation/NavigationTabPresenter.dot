@@ -5,42 +5,42 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c266149 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/PresenterWidget.html">
+	c361520 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../../mvp/client/PresenterWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../../../mvp/client/PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
-	c266468 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabEvent.NavigationTabHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> NavigationTabHandler </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NavigationTabEvent.NavigationTabHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../../../mvp/client/PresenterWidget.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers
-	c266472 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationUiHandlers.html">
+	c361828 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> NavigationUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./NavigationUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./NavigationUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter
-	c266474 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabPresenter.html">
+	c361830 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NavigationTabPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NavigationTabPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="./NavigationTabPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./NavigationTabPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
+	c361833 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NavigationTabEvent.NavigationTabHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> NavigationTabHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NavigationTabEvent.NavigationTabHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter.MyView>
-	c266149:p -> c266474:p [dir=back,arrowtail=empty];
+	c361520:p -> c361830:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabEvent.NavigationTabHandler
-	c266468:p -> c266474:p [dir=back,arrowtail=empty,style=dashed];
+	c361833:p -> c361830:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter implements com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationUiHandlers
-	c266472:p -> c266474:p [dir=back,arrowtail=empty,style=dashed];
+	c361828:p -> c361830:p [dir=back,arrowtail=empty,style=dashed];
 }
 

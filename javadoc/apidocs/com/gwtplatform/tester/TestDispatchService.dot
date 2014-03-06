@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.shared.DispatchService
-	c382606 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../dispatch/shared/DispatchService.html">
+	// com.gwtplatform.dispatch.rpc.shared.DispatchService
+	c512015 [label=<<table title="com.gwtplatform.dispatch.rpc.shared.DispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../dispatch/rpc/shared/DispatchService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchService </td></tr>
 		</table></td></tr>
-		</table>>, URL="../dispatch/shared/DispatchService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../dispatch/rpc/shared/DispatchService.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.TestDispatchService
-	c382677 [label=<<table title="com.gwtplatform.tester.TestDispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchService.html">
+	c512121 [label=<<table title="com.gwtplatform.tester.TestDispatchService" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchService.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestDispatchService </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestDispatchService.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.tester.TestDispatchService implements com.gwtplatform.dispatch.shared.DispatchService
-	c382606:p -> c382677:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./TestDispatchService.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.tester.TestDispatchService implements com.gwtplatform.dispatch.rpc.shared.DispatchService
+	c512015:p -> c512121:p [dir=back,arrowtail=empty,style=dashed];
 }
 

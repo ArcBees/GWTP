@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.SecurityCookieAccessor
-	c357230 [label=<<table title="com.gwtplatform.dispatch.shared.SecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecurityCookieAccessor.html">
+	c479828 [label=<<table title="com.gwtplatform.dispatch.shared.SecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecurityCookieAccessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> SecurityCookieAccessor </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SecurityCookieAccessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./SecurityCookieAccessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor
-	c357246 [label=<<table title="com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/DefaultSecurityCookieAccessor.html">
+	c479873 [label=<<table title="com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../client/DefaultSecurityCookieAccessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultSecurityCookieAccessor </td></tr>
 		</table></td></tr>
-		</table>>, URL="../client/DefaultSecurityCookieAccessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../client/DefaultSecurityCookieAccessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor implements com.gwtplatform.dispatch.shared.SecurityCookieAccessor
-	c357230:p -> c357246:p [dir=back,arrowtail=empty,style=dashed];
+	c479828:p -> c479873:p [dir=back,arrowtail=empty,style=dashed];
 }
 

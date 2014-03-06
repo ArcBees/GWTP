@@ -5,47 +5,47 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers
-	c51907 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingUiHandlers.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> EditRatingUiHandlers </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditRatingUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingView
-	c51908 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> EditRatingView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditRatingView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
-	c51909 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> EditRatingPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditRatingPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
-	c51910 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingPresenter.MyView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> MyView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./EditRatingPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.rating.ui.RatingColumnsDefinition
-	c51911 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.RatingColumnsDefinition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingColumnsDefinition.html">
+	c64191 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.RatingColumnsDefinition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingColumnsDefinition.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RatingColumnsDefinition </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RatingColumnsDefinition.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./RatingColumnsDefinition.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingView
+	c64192 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> EditRatingView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditRatingView.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers
+	c64193 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingUiHandlers.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> EditRatingUiHandlers </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditRatingUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
+	c64194 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingPresenter.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> EditRatingPresenter </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditRatingPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
+	c64195 [label=<<table title="com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditRatingPresenter.MyView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> MyView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./EditRatingPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingView implements com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter.MyView
-	c51910:p -> c51908:p [dir=back,arrowtail=empty,style=dashed];
+	c64195:p -> c64192:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter implements com.gwtplatform.carstore.client.application.rating.ui.EditRatingUiHandlers
-	c51907:p -> c51909:p [dir=back,arrowtail=empty,style=dashed];
+	c64193:p -> c64194:p [dir=back,arrowtail=empty,style=dashed];
 }
 

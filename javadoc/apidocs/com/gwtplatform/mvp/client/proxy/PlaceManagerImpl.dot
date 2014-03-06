@@ -5,51 +5,51 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.mvp.client.proxy.PlaceManagerImpl
+	c384974 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManagerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceManagerImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> PlaceManagerImpl </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./PlaceManagerImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.PlaceManager
-	c286039 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceManager.html">
+	c384975 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> PlaceManager </td></tr>
 		</table></td></tr>
-		</table>>, URL="./PlaceManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.proxy.PlaceManagerImpl
-	c286053 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceManagerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PlaceManagerImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PlaceManagerImpl </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PlaceManagerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PlaceManager.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.DefaultPlaceManager
-	c286066 [label=<<table title="com.gwtplatform.mvp.client.proxy.DefaultPlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultPlaceManager.html">
+	c384993 [label=<<table title="com.gwtplatform.mvp.client.proxy.DefaultPlaceManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultPlaceManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultPlaceManager </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DefaultPlaceManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DefaultPlaceManager.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.PlaceManagerImpl implements com.gwtplatform.mvp.client.proxy.PlaceManager
-	c286039:p -> c286053:p [dir=back,arrowtail=empty,style=dashed];
+	c384975:p -> c384974:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.proxy.PlaceManagerImpl implements com.google.gwt.event.logical.shared.ValueChangeHandler<T>
-	c286502:p -> c286053:p [dir=back,arrowtail=empty,style=dashed];
+	c385452:p -> c384974:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.proxy.PlaceManagerImpl implements com.google.gwt.user.client.Window.ClosingHandler
-	c286503:p -> c286053:p [dir=back,arrowtail=empty,style=dashed];
+	c385453:p -> c384974:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.proxy.DefaultPlaceManager extends com.gwtplatform.mvp.client.proxy.PlaceManagerImpl
-	c286053:p -> c286066:p [dir=back,arrowtail=empty];
+	c384974:p -> c384993:p [dir=back,arrowtail=empty];
 	// com.google.gwt.event.logical.shared.ValueChangeHandler<T>
-	c286502 [label=<<table title="com.google.gwt.event.logical.shared.ValueChangeHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/logical/shared/ValueChangeHandler.html">
+	c385452 [label=<<table title="com.google.gwt.event.logical.shared.ValueChangeHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/logical/shared/ValueChangeHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ValueChangeHandler&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/logical/shared/ValueChangeHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/logical/shared/ValueChangeHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.user.client.Window.ClosingHandler
-	c286503 [label=<<table title="com.google.gwt.user.client.Window.ClosingHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c385453 [label=<<table title="com.google.gwt.user.client.Window.ClosingHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ClosingHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

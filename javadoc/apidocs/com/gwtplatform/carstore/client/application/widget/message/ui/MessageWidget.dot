@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.widget.message.ui.MessageWidget
-	c248417 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.ui.MessageWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessageWidget.html">
+	c338535 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.ui.MessageWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessageWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessageWidget </td></tr>
 		</table></td></tr>
-		</table>>, URL="./MessageWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./MessageWidget.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.message.ui.MessageWidget extends com.google.gwt.user.client.ui.Composite
-	c248421:p -> c248417:p [dir=back,arrowtail=empty];
+	c338638:p -> c338535:p [dir=back,arrowtail=empty];
 	// com.google.gwt.user.client.ui.Composite
-	c248421 [label=<<table title="com.google.gwt.user.client.ui.Composite" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html">
+	c338638 [label=<<table title="com.google.gwt.user.client.ui.Composite" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Composite </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> Composite </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

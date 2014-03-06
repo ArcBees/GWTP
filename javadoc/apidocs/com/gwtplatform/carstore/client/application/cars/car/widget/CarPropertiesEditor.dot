@@ -5,33 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.cars.car.widget.CarPropertiesEditor
-	c116578 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.widget.CarPropertiesEditor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarPropertiesEditor.html">
+	c165098 [label=<<table title="com.gwtplatform.carstore.client.application.cars.car.widget.CarPropertiesEditor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarPropertiesEditor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarPropertiesEditor </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarPropertiesEditor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CarPropertiesEditor.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.car.widget.CarPropertiesEditor extends com.google.gwt.user.client.ui.Composite
-	c116673:p -> c116578:p [dir=back,arrowtail=empty];
+	c165310:p -> c165098:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.cars.car.widget.CarPropertiesEditor implements com.google.gwt.editor.client.Editor<T>
-	c116674:p -> c116578:p [dir=back,arrowtail=empty,style=dashed];
+	c165311:p -> c165098:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.client.ui.Composite
-	c116673 [label=<<table title="com.google.gwt.user.client.ui.Composite" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html">
+	c165310 [label=<<table title="com.google.gwt.user.client.ui.Composite" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Composite </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> Composite </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/ui/Composite.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.editor.client.Editor<T>
-	c116674 [label=<<table title="com.google.gwt.editor.client.Editor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html">
+	c165311 [label=<<table title="com.google.gwt.editor.client.Editor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Editor&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/editor/client/Editor.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

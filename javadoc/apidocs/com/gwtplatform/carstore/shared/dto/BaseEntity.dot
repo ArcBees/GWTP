@@ -5,105 +5,105 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.domain.User
-	c98928 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.User" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/User.html">
+	c144062 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.User" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/User.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> User </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../server/dao/domain/User.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.domain.Car
-	c98929 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Car" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/Car.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Car </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../server/dao/domain/Car.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.dao.domain.CarProperties
-	c98930 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.CarProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/CarProperties.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarProperties </td></tr>
-		</table></td></tr>
-		</table>>, URL="../../server/dao/domain/CarProperties.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../server/dao/domain/User.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.domain.Rating
-	c98932 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Rating" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/Rating.html">
+	c144063 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Rating" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/Rating.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Rating </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../server/dao/domain/Rating.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../server/dao/domain/Rating.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.dao.domain.Manufacturer
-	c98933 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Manufacturer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/Manufacturer.html">
+	c144064 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Manufacturer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/Manufacturer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Manufacturer </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../server/dao/domain/Manufacturer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.RatingDto
-	c98952 [label=<<table title="com.gwtplatform.carstore.shared.dto.RatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDto.html">
+		</table>>, URL="../../server/dao/domain/Manufacturer.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.domain.CarProperties
+	c144065 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.CarProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/CarProperties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingDto </td></tr>
+<tr><td align="center" balign="center"> CarProperties </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RatingDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.ManufacturerDto
-	c98954 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDto.html">
+		</table>>, URL="../../server/dao/domain/CarProperties.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.dao.domain.Car
+	c144066 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.Car" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/Car.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerDto </td></tr>
+<tr><td align="center" balign="center"> Car </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ManufacturerDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.CarPropertiesDto
-	c98956 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarPropertiesDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPropertiesDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarPropertiesDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CarPropertiesDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BaseEntity.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BaseEntity </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../server/dao/domain/Car.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.UserDto
-	c98959 [label=<<table title="com.gwtplatform.carstore.shared.dto.UserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserDto.html">
+	c144086 [label=<<table title="com.gwtplatform.carstore.shared.dto.UserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UserDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserDto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UserDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.CarDto
-	c98961 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarDto.html">
+		</table>>, URL="./UserDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.RatingDto
+	c144087 [label=<<table title="com.gwtplatform.carstore.shared.dto.RatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CarDto </td></tr>
+<tr><td align="center" balign="center"> RatingDto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./RatingDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.ManufacturerDto
+	c144089 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.Dto
-	c98962 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
+	c144090 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Dto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Dto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Dto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Dto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.CarPropertiesDto
+	c144092 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarPropertiesDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarPropertiesDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarPropertiesDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarPropertiesDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.CarDto
+	c144093 [label=<<table title="com.gwtplatform.carstore.shared.dto.CarDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarDto.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CarDto </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CarDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.BaseEntity
+	c144094 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BaseEntity.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BaseEntity </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BaseEntity.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.dao.domain.User extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98928:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.server.dao.domain.Car extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98929:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.server.dao.domain.CarProperties extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98930:p [dir=back,arrowtail=empty];
+	c144094:p -> c144062:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.server.dao.domain.Rating extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98932:p [dir=back,arrowtail=empty];
+	c144094:p -> c144063:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.server.dao.domain.Manufacturer extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98933:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.shared.dto.RatingDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98952:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.shared.dto.ManufacturerDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98954:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.shared.dto.CarPropertiesDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98956:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.carstore.shared.dto.BaseEntity implements com.gwtplatform.carstore.shared.dto.Dto
-	c98962:p -> c98957:p [dir=back,arrowtail=empty,style=dashed];
+	c144094:p -> c144064:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.server.dao.domain.CarProperties extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c144094:p -> c144065:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.server.dao.domain.Car extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c144094:p -> c144066:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.shared.dto.UserDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98959:p [dir=back,arrowtail=empty];
+	c144094:p -> c144086:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.RatingDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c144094:p -> c144087:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.ManufacturerDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c144094:p -> c144089:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.CarPropertiesDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
+	c144094:p -> c144092:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.shared.dto.CarDto extends com.gwtplatform.carstore.shared.dto.BaseEntity
-	c98957:p -> c98961:p [dir=back,arrowtail=empty];
+	c144094:p -> c144093:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.carstore.shared.dto.BaseEntity implements com.gwtplatform.carstore.shared.dto.Dto
+	c144090:p -> c144094:p [dir=back,arrowtail=empty,style=dashed];
 }
 

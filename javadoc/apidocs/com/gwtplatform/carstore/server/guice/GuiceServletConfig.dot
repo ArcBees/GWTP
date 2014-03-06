@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.guice.GuiceServletConfig
-	c205886 [label=<<table title="com.gwtplatform.carstore.server.guice.GuiceServletConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GuiceServletConfig.html">
+	c283768 [label=<<table title="com.gwtplatform.carstore.server.guice.GuiceServletConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GuiceServletConfig.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GuiceServletConfig </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GuiceServletConfig.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GuiceServletConfig.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.server.guice.GuiceServletConfig extends com.google.inject.servlet.GuiceServletContextListener
-	c206121:p -> c205886:p [dir=back,arrowtail=empty];
+	c283794:p -> c283768:p [dir=back,arrowtail=empty];
 	// com.google.inject.servlet.GuiceServletContextListener
-	c206121 [label=<<table title="com.google.inject.servlet.GuiceServletContextListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/servlet/GuiceServletContextListener.html">
+	c283794 [label=<<table title="com.google.inject.servlet.GuiceServletContextListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/servlet/GuiceServletContextListener.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GuiceServletContextListener </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> GuiceServletContextListener </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/servlet/GuiceServletContextListener.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/servlet/GuiceServletContextListener.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

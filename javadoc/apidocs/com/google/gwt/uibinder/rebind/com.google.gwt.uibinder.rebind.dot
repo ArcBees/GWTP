@@ -5,52 +5,52 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.google.gwt.uibinder.rebind.FieldWriterOfInjectedType
-	c12329 [label=<<table title="com.google.gwt.uibinder.rebind.FieldWriterOfInjectedType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FieldWriterOfInjectedType.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> FieldWriterOfInjectedType </td></tr>
-		</table></td></tr>
-		</table>>, URL="./FieldWriterOfInjectedType.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.uibinder.rebind.UiBinderGenerator
-	c12330 [label=<<table title="com.google.gwt.uibinder.rebind.UiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UiBinderGenerator.html">
+	c15515 [label=<<table title="com.google.gwt.uibinder.rebind.UiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UiBinderGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UiBinderGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UiBinderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.google.gwt.uibinder.rebind.FieldManager
-	c12331 [label=<<table title="com.google.gwt.uibinder.rebind.FieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FieldManager.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> FieldManager </td></tr>
-		</table></td></tr>
-		</table>>, URL="./FieldManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UiBinderGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.uibinder.rebind.GinUiBinderGenerator
-	c12332 [label=<<table title="com.google.gwt.uibinder.rebind.GinUiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinUiBinderGenerator.html">
+	c15516 [label=<<table title="com.google.gwt.uibinder.rebind.GinUiBinderGenerator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinUiBinderGenerator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GinUiBinderGenerator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GinUiBinderGenerator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GinUiBinderGenerator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.google.gwt.uibinder.rebind.GinFieldManager
-	c12333 [label=<<table title="com.google.gwt.uibinder.rebind.GinFieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinFieldManager.html">
+	c15517 [label=<<table title="com.google.gwt.uibinder.rebind.GinFieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GinFieldManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GinFieldManager </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GinFieldManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.google.gwt.uibinder.rebind.FieldWriterOfInjectedType extends com.google.gwt.uibinder.rebind.FieldWriterOfExistingType
-	c12684:p -> c12329:p [dir=back,arrowtail=empty];
+		</table>>, URL="./GinFieldManager.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.google.gwt.uibinder.rebind.FieldWriterOfInjectedType
+	c15518 [label=<<table title="com.google.gwt.uibinder.rebind.FieldWriterOfInjectedType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FieldWriterOfInjectedType.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> FieldWriterOfInjectedType </td></tr>
+		</table></td></tr>
+		</table>>, URL="./FieldWriterOfInjectedType.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.google.gwt.uibinder.rebind.FieldManager
+	c15519 [label=<<table title="com.google.gwt.uibinder.rebind.FieldManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FieldManager.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> FieldManager </td></tr>
+		</table></td></tr>
+		</table>>, URL="./FieldManager.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.google.gwt.uibinder.rebind.GinUiBinderGenerator extends com.google.gwt.uibinder.rebind.UiBinderGenerator
-	c12330:p -> c12332:p [dir=back,arrowtail=empty];
+	c15515:p -> c15516:p [dir=back,arrowtail=empty];
 	//com.google.gwt.uibinder.rebind.GinFieldManager extends com.google.gwt.uibinder.rebind.FieldManager
-	c12331:p -> c12333:p [dir=back,arrowtail=empty];
+	c15519:p -> c15517:p [dir=back,arrowtail=empty];
+	//com.google.gwt.uibinder.rebind.FieldWriterOfInjectedType extends com.google.gwt.uibinder.rebind.FieldWriterOfExistingType
+	c16082:p -> c15518:p [dir=back,arrowtail=empty];
 	// com.google.gwt.uibinder.rebind.FieldWriterOfExistingType
-	c12684 [label=<<table title="com.google.gwt.uibinder.rebind.FieldWriterOfExistingType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c16082 [label=<<table title="com.google.gwt.uibinder.rebind.FieldWriterOfExistingType" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FieldWriterOfExistingType </td></tr>
 		</table></td></tr>
-		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

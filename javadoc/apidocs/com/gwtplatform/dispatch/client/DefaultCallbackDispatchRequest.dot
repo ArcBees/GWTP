@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest<R>
-	c149943 [label=<<table title="com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultCallbackDispatchRequest.html">
+	c209278 [label=<<table title="com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultCallbackDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultCallbackDispatchRequest&lt;R&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DefaultCallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DefaultCallbackDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c149953 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CallbackDispatchRequest.html">
+	c209280 [label=<<table title="com.gwtplatform.dispatch.client.CallbackDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CallbackDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> CallbackDispatchRequest&lt;R&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CallbackDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CallbackDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest<R> implements com.gwtplatform.dispatch.client.CallbackDispatchRequest<R>
-	c149953:p -> c149943:p [dir=back,arrowtail=empty,style=dashed];
+	c209280:p -> c209278:p [dir=back,arrowtail=empty,style=dashed];
 }
 

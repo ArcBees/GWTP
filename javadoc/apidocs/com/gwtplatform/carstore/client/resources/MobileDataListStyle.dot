@@ -5,26 +5,26 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.resources.MobileDataListStyle
-	c252487 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MobileDataListStyle.html">
+	c344405 [label=<<table title="com.gwtplatform.carstore.client.resources.MobileDataListStyle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MobileDataListStyle.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MobileDataListStyle </td></tr>
 		</table></td></tr>
-		</table>>, URL="./MobileDataListStyle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./MobileDataListStyle.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.resources.MobileDataListStyle implements com.google.gwt.user.cellview.client.CellList.Resources
-	c252650:p -> c252487:p [dir=back,arrowtail=empty,style=dashed];
+	c344487:p -> c344405:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.user.cellview.client.CellList.Resources
-	c252650 [label=<<table title="com.google.gwt.user.cellview.client.CellList.Resources" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c344487 [label=<<table title="com.google.gwt.user.cellview.client.CellList.Resources" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Resources </td></tr>
 		</table></td></tr>
-		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

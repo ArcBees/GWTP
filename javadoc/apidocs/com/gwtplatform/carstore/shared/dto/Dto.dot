@@ -5,66 +5,49 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.server.dao.domain.UserSession
-	c170248 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.UserSession" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/UserSession.html">
+	c239141 [label=<<table title="com.gwtplatform.carstore.server.dao.domain.UserSession" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../server/dao/domain/UserSession.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UserSession </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../server/dao/domain/UserSession.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.NumberDto<T extends java.lang.Number>
-	c170270 [label=<<table title="com.gwtplatform.carstore.shared.dto.NumberDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NumberDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NumberDto&lt;T extends Number&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NumberDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.CurrentUserDto
-	c170272 [label=<<table title="com.gwtplatform.carstore.shared.dto.CurrentUserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUserDto.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CurrentUserDto </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CurrentUserDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.shared.dto.BaseEntity
-	c170274 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> BaseEntity </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BaseEntity.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../server/dao/domain/UserSession.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto
-	c170275 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerRatingDto.html">
+	c239168 [label=<<table title="com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerRatingDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerRatingDto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ManufacturerRatingDto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ManufacturerRatingDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.shared.dto.Dto
-	c170279 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Dto.html">
+	c239170 [label=<<table title="com.gwtplatform.carstore.shared.dto.Dto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Dto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Dto </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Dto.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.server.dao.domain.UserSession implements com.gwtplatform.carstore.shared.dto.Dto
-	c170279:p -> c170248:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.NumberDto<T extends java.lang.Number> implements com.gwtplatform.carstore.shared.dto.Dto
-	c170279:p -> c170270:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.CurrentUserDto implements com.gwtplatform.carstore.shared.dto.Dto
-	c170279:p -> c170272:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.BaseEntity implements com.gwtplatform.carstore.shared.dto.Dto
-	c170279:p -> c170274:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto implements com.gwtplatform.carstore.shared.dto.Dto
-	c170279:p -> c170275:p [dir=back,arrowtail=empty,style=dashed];
-	//com.gwtplatform.carstore.shared.dto.Dto implements com.google.gwt.user.client.rpc.IsSerializable
-	c170462:p -> c170279:p [dir=back,arrowtail=empty,style=dashed];
-	// com.google.gwt.user.client.rpc.IsSerializable
-	c170462 [label=<<table title="com.google.gwt.user.client.rpc.IsSerializable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html">
+		</table>>, URL="./Dto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.CurrentUserDto
+	c239171 [label=<<table title="com.gwtplatform.carstore.shared.dto.CurrentUserDto" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CurrentUserDto.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> IsSerializable </td></tr>
+<tr><td align="center" balign="center"> CurrentUserDto </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/user/client/rpc/IsSerializable.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CurrentUserDto.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.shared.dto.BaseEntity
+	c239174 [label=<<table title="com.gwtplatform.carstore.shared.dto.BaseEntity" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseEntity.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> BaseEntity </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BaseEntity.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.carstore.server.dao.domain.UserSession implements com.gwtplatform.carstore.shared.dto.Dto
+	c239170:p -> c239141:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto implements com.gwtplatform.carstore.shared.dto.Dto
+	c239170:p -> c239168:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.shared.dto.CurrentUserDto implements com.gwtplatform.carstore.shared.dto.Dto
+	c239170:p -> c239171:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.carstore.shared.dto.BaseEntity implements com.gwtplatform.carstore.shared.dto.Dto
+	c239170:p -> c239174:p [dir=back,arrowtail=empty,style=dashed];
 }
 

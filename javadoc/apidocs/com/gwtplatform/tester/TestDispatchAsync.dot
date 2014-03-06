@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.shared.DispatchAsync
-	c381392 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../dispatch/shared/DispatchAsync.html">
+	// com.gwtplatform.dispatch.rpc.shared.DispatchAsync
+	c510553 [label=<<table title="com.gwtplatform.dispatch.rpc.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../dispatch/rpc/shared/DispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="../dispatch/shared/DispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../dispatch/rpc/shared/DispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.tester.TestDispatchAsync
-	c381475 [label=<<table title="com.gwtplatform.tester.TestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchAsync.html">
+	c510660 [label=<<table title="com.gwtplatform.tester.TestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestDispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.tester.TestDispatchAsync implements com.gwtplatform.dispatch.shared.DispatchAsync
-	c381392:p -> c381475:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./TestDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.tester.TestDispatchAsync implements com.gwtplatform.dispatch.rpc.shared.DispatchAsync
+	c510553:p -> c510660:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.rest.RestCallback<T>
-	c178610 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../dispatch/client/rest/RestCallback.html">
+	// com.gwtplatform.dispatch.rest.shared.RestCallback<R>
+	c249062 [label=<<table title="com.gwtplatform.dispatch.rest.shared.RestCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../dispatch/rest/shared/RestCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> RestCallback&lt;T&gt; </td></tr>
+<tr><td align="center" balign="center"> RestCallback&lt;R&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../dispatch/client/rest/RestCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R extends com.gwtplatform.dispatch.shared.Result>
-	c178772 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ErrorHandlerAsyncCallback.html">
+		</table>>, URL="../../../dispatch/rest/shared/RestCallback.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R>
+	c249354 [label=<<table title="com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ErrorHandlerAsyncCallback.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ErrorHandlerAsyncCallback&lt;R extends Result&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> ErrorHandlerAsyncCallback&lt;R&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./ErrorHandlerAsyncCallback.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R extends com.gwtplatform.dispatch.shared.Result> implements com.gwtplatform.dispatch.client.rest.RestCallback<T>
-	c178610:p -> c178772:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./ErrorHandlerAsyncCallback.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback<R> implements com.gwtplatform.dispatch.rest.shared.RestCallback<R>
+	c249062:p -> c249354:p [dir=back,arrowtail=empty,style=dashed];
 }
 

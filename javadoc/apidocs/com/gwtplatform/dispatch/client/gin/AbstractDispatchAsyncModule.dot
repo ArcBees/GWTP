@@ -5,40 +5,48 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule
-	c59892 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsyncModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestDispatchAsyncModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestDispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c59894 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsyncModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchAsyncModule </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.DispatchAsyncModule
-	c59897 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.html">
+	c91519 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DispatchAsyncModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DispatchAsyncModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c59894:p -> c59892:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule extends com.google.gwt.inject.client.AbstractGinModule
-	c60456:p -> c59894:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.client.gin.DispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
-	c59894:p -> c59897:p [dir=back,arrowtail=empty];
-	// com.google.gwt.inject.client.AbstractGinModule
-	c60456 [label=<<table title="com.google.gwt.inject.client.AbstractGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+		</table>>, URL="./DispatchAsyncModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
+	c91521 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsyncModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractGinModule </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractDispatchAsyncModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="null", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractDispatchAsyncModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule
+	c91530 [label=<<table title="com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../rpc/client/gin/RpcDispatchAsyncModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RpcDispatchAsyncModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../rpc/client/gin/RpcDispatchAsyncModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule
+	c91769 [label=<<table title="com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../rest/client/gin/RestDispatchAsyncModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RestDispatchAsyncModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../rest/client/gin/RestDispatchAsyncModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//com.gwtplatform.dispatch.client.gin.DispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
+	c91521:p -> c91519:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule extends com.google.gwt.inject.client.AbstractGinModule
+	c92165:p -> c91521:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
+	c91521:p -> c91530:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule
+	c91521:p -> c91769:p [dir=back,arrowtail=empty];
+	// com.google.gwt.inject.client.AbstractGinModule
+	c92165 [label=<<table title="com.google.gwt.inject.client.AbstractGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-gin.googlecode.com/svn/trunk/javadoc/com/google/gwt/inject/client/AbstractGinModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractGinModule </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="http://google-gin.googlecode.com/svn/trunk/javadoc/com/google/gwt/inject/client/AbstractGinModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

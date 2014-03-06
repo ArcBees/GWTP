@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.dispatch.client.actionhandler.caching.DefaultCacheImpl
+	c208529 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.DefaultCacheImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultCacheImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultCacheImpl </td></tr>
+		</table></td></tr>
+		</table>>, URL="./DefaultCacheImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.caching.Cache
-	c149367 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.Cache" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Cache.html">
+	c208530 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.Cache" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Cache.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Cache </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Cache.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.actionhandler.caching.DefaultCacheImpl
-	c149368 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.caching.DefaultCacheImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultCacheImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultCacheImpl </td></tr>
-		</table></td></tr>
-		</table>>, URL="./DefaultCacheImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Cache.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.actionhandler.caching.DefaultCacheImpl implements com.gwtplatform.dispatch.client.actionhandler.caching.Cache
-	c149367:p -> c149368:p [dir=back,arrowtail=empty,style=dashed];
+	c208530:p -> c208529:p [dir=back,arrowtail=empty,style=dashed];
 }
 

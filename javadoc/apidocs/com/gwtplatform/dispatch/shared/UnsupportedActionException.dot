@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.UnsupportedActionException
-	c389848 [label=<<table title="com.gwtplatform.dispatch.shared.UnsupportedActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnsupportedActionException.html">
+	c521492 [label=<<table title="com.gwtplatform.dispatch.shared.UnsupportedActionException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnsupportedActionException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UnsupportedActionException </td></tr>
 		</table></td></tr>
-		</table>>, URL="./UnsupportedActionException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./UnsupportedActionException.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.ServiceException
-	c389865 [label=<<table title="com.gwtplatform.dispatch.shared.ServiceException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceException.html">
+	c521495 [label=<<table title="com.gwtplatform.dispatch.shared.ServiceException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ServiceException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ServiceException </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ServiceException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ServiceException.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.UnsupportedActionException extends com.gwtplatform.dispatch.shared.ServiceException
-	c389865:p -> c389848:p [dir=back,arrowtail=empty];
+	c521495:p -> c521492:p [dir=back,arrowtail=empty];
 }
 

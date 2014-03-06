@@ -5,33 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.ViewImpl
-	c251030 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/ViewImpl.html">
+	c341753 [label=<<table title="com.gwtplatform.mvp.client.ViewImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/ViewImpl.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ViewImpl </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> ViewImpl </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../../mvp/client/ViewImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../../mvp/client/ViewImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.application.widget.message.MessagesView
+	c342183 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessagesView.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MessagesView </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MessagesView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView
-	c251433 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesPresenter.MyView.html">
+	c342186 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MessagesPresenter.MyView.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MyView </td></tr>
 		</table></td></tr>
-		</table>>, URL="./MessagesPresenter.MyView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.application.widget.message.MessagesView
-	c251434 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesView" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MessagesView.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MessagesView </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MessagesView.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./MessagesPresenter.MyView.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesView extends com.gwtplatform.mvp.client.ViewImpl
-	c251030:p -> c251434:p [dir=back,arrowtail=empty];
+	c341753:p -> c342183:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesView implements com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter.MyView
-	c251433:p -> c251434:p [dir=back,arrowtail=empty,style=dashed];
+	c342186:p -> c342183:p [dir=back,arrowtail=empty,style=dashed];
 }
 

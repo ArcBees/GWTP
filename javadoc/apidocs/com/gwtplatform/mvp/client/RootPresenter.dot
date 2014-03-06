@@ -5,69 +5,69 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.proxy.RevealRootContentHandler
-	c353715 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/RevealRootContentHandler.html">
+	// com.gwtplatform.mvp.client.RootPresenter
+	c471948 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> RevealRootContentHandler </td></tr>
+<tr><td align="center" balign="center"> RootPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="./proxy/RevealRootContentHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.proxy.ResetPresentersHandler
-	c353724 [label=<<table title="com.gwtplatform.mvp.client.proxy.ResetPresentersHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/ResetPresentersHandler.html">
+		</table>>, URL="./RootPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
+	c471952 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> ResetPresentersHandler </td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./proxy/ResetPresentersHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./PresenterWidget.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler
-	c353736 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/RevealRootPopupContentHandler.html">
+	c471984 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/RevealRootPopupContentHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RevealRootPopupContentHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./proxy/RevealRootPopupContentHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./proxy/RevealRootPopupContentHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler
-	c353748 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/RevealRootLayoutContentHandler.html">
+	c471986 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/RevealRootLayoutContentHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> RevealRootLayoutContentHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./proxy/RevealRootLayoutContentHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./proxy/RevealRootLayoutContentHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.proxy.RevealRootContentHandler
+	c471988 [label=<<table title="com.gwtplatform.mvp.client.proxy.RevealRootContentHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/RevealRootContentHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> RevealRootContentHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./proxy/RevealRootContentHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.proxy.ResetPresentersHandler
+	c471992 [label=<<table title="com.gwtplatform.mvp.client.proxy.ResetPresentersHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/ResetPresentersHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> ResetPresentersHandler </td></tr>
+		</table></td></tr>
+		</table>>, URL="./proxy/ResetPresentersHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.LockInteractionHandler
-	c353756 [label=<<table title="com.gwtplatform.mvp.client.proxy.LockInteractionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/LockInteractionHandler.html">
+	c472015 [label=<<table title="com.gwtplatform.mvp.client.proxy.LockInteractionHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./proxy/LockInteractionHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> LockInteractionHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./proxy/LockInteractionHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c353778 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.RootPresenter
-	c353789 [label=<<table title="com.gwtplatform.mvp.client.RootPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./RootPresenter.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RootPresenter </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RootPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./proxy/LockInteractionHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.RootPresenter extends com.gwtplatform.mvp.client.PresenterWidget<com.gwtplatform.mvp.client.RootPresenter.RootView>
-	c353778:p -> c353789:p [dir=back,arrowtail=empty];
+	c471952:p -> c471948:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.ResetPresentersHandler
-	c353724:p -> c353789:p [dir=back,arrowtail=empty,style=dashed];
+	c471992:p -> c471948:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.RevealRootContentHandler
-	c353715:p -> c353789:p [dir=back,arrowtail=empty,style=dashed];
+	c471988:p -> c471948:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler
-	c353748:p -> c353789:p [dir=back,arrowtail=empty,style=dashed];
+	c471986:p -> c471948:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler
-	c353736:p -> c353789:p [dir=back,arrowtail=empty,style=dashed];
+	c471984:p -> c471948:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.mvp.client.RootPresenter implements com.gwtplatform.mvp.client.proxy.LockInteractionHandler
-	c353756:p -> c353789:p [dir=back,arrowtail=empty,style=dashed];
+	c472015:p -> c471948:p [dir=back,arrowtail=empty,style=dashed];
 }
 

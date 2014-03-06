@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c190132 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProcessor.html">
+	c263782 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GenProcessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> GenProcessor </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> GenProcessor </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./GenProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GenProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor
-	c190133 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenDtoProcessor.html">
+	c263784 [label=<<table title="com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GenDtoProcessor.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GenDtoProcessor </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GenDtoProcessor.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GenDtoProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor extends com.gwtplatform.dispatch.annotation.processor.GenProcessor
-	c190132:p -> c190133:p [dir=back,arrowtail=empty];
+	c263782:p -> c263784:p [dir=back,arrowtail=empty];
 }
 

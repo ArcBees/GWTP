@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator
-	c272451 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NotNullTranslator.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NotNullTranslator </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NotNullTranslator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
-	c272452 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.Translator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Translator.html">
+	c369298 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.Translator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Translator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Translator </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Translator.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Translator.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator
+	c369299 [label=<<table title="com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NotNullTranslator.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> NotNullTranslator </td></tr>
+		</table></td></tr>
+		</table>>, URL="./NotNullTranslator.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.util.exceptiontranslators.NotNullTranslator implements com.gwtplatform.carstore.client.util.exceptiontranslators.Translator
-	c272452:p -> c272451:p [dir=back,arrowtail=empty,style=dashed];
+	c369298:p -> c369299:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -5,33 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
+	c285460 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./PresenterWidget.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.HandlerContainerImpl
+	c285472 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HandlerContainerImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> HandlerContainerImpl </td></tr>
+		</table></td></tr>
+		</table>>, URL="./HandlerContainerImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.HandlerContainer
-	c207519 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainer.html">
+	c285473 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HandlerContainer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> HandlerContainer </td></tr>
 		</table></td></tr>
-		</table>>, URL="./HandlerContainer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View>
-	c207524 [label=<<table title="com.gwtplatform.mvp.client.PresenterWidget" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PresenterWidget.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> PresenterWidget&lt;V extends View&gt; </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./PresenterWidget.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.HandlerContainerImpl
-	c207540 [label=<<table title="com.gwtplatform.mvp.client.HandlerContainerImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HandlerContainerImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HandlerContainerImpl </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HandlerContainerImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./HandlerContainer.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.PresenterWidget<V extends com.gwtplatform.mvp.client.View> extends com.gwtplatform.mvp.client.HandlerContainerImpl
-	c207540:p -> c207524:p [dir=back,arrowtail=empty];
+	c285472:p -> c285460:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.mvp.client.HandlerContainerImpl implements com.gwtplatform.mvp.client.HandlerContainer
-	c207519:p -> c207540:p [dir=back,arrowtail=empty,style=dashed];
+	c285473:p -> c285472:p [dir=back,arrowtail=empty,style=dashed];
 }
 

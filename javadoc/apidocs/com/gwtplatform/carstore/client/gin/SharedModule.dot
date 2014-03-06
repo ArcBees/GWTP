@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c368311 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/gin/AbstractPresenterModule.html">
+	c490259 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../mvp/client/gin/AbstractPresenterModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPresenterModule </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractPresenterModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../mvp/client/gin/AbstractPresenterModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../mvp/client/gin/AbstractPresenterModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.gin.SharedModule
-	c368510 [label=<<table title="com.gwtplatform.carstore.client.gin.SharedModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SharedModule.html">
+	c490667 [label=<<table title="com.gwtplatform.carstore.client.gin.SharedModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SharedModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SharedModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SharedModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./SharedModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.gin.SharedModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c368311:p -> c368510:p [dir=back,arrowtail=empty];
+	c490259:p -> c490667:p [dir=back,arrowtail=empty];
 }
 

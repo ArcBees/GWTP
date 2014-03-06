@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry
-	c135457 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultClientActionHandlerRegistry.html">
+	c189504 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultClientActionHandlerRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultClientActionHandlerRegistry </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DefaultClientActionHandlerRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DefaultClientActionHandlerRegistry.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
-	c135460 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandlerRegistry.html">
+	c189505 [label=<<table title="com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClientActionHandlerRegistry.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ClientActionHandlerRegistry </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ClientActionHandlerRegistry.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ClientActionHandlerRegistry.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry implements com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry
-	c135460:p -> c135457:p [dir=back,arrowtail=empty,style=dashed];
+	c189505:p -> c189504:p [dir=back,arrowtail=empty,style=dashed];
 }
 

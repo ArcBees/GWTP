@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer
-	c242860 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerRenderer.html">
+	c331898 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ManufacturerRenderer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ManufacturerRenderer </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ManufacturerRenderer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ManufacturerRenderer.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.ManufacturerRenderer extends com.google.gwt.text.shared.AbstractRenderer<com.gwtplatform.carstore.shared.dto.ManufacturerDto>
-	c242984:p -> c242860:p [dir=back,arrowtail=empty];
+	c332058:p -> c331898:p [dir=back,arrowtail=empty];
 	// com.google.gwt.text.shared.AbstractRenderer<T>
-	c242984 [label=<<table title="com.google.gwt.text.shared.AbstractRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/text/shared/AbstractRenderer.html">
+	c332058 [label=<<table title="com.google.gwt.text.shared.AbstractRenderer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/text/shared/AbstractRenderer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractRenderer&lt;T&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractRenderer&lt;T&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/text/shared/AbstractRenderer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/text/shared/AbstractRenderer.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

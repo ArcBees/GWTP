@@ -5,34 +5,34 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler
-	c169832 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DisplayMessageEvent.DisplayMessageHandler.html">
+	c238255 [label=<<table title="com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DisplayMessageEvent.DisplayMessageHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DisplayMessageHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DisplayMessageEvent.DisplayMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./DisplayMessageEvent.DisplayMessageHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter
-	c169847 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/message/MessagesPresenter.html">
+	c238338 [label=<<table title="com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../widget/message/MessagesPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MessagesPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="../widget/message/MessagesPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../widget/message/MessagesPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler implements com.google.gwt.event.shared.EventHandler
-	c169857:p -> c169832:p [dir=back,arrowtail=empty,style=dashed];
+	c238447:p -> c238255:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter implements com.gwtplatform.carstore.client.application.event.DisplayMessageEvent.DisplayMessageHandler
-	c169832:p -> c169847:p [dir=back,arrowtail=empty,style=dashed];
+	c238255:p -> c238338:p [dir=back,arrowtail=empty,style=dashed];
 	// com.google.gwt.event.shared.EventHandler
-	c169857 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
+	c238447 [label=<<table title="com.google.gwt.event.shared.EventHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EventHandler </td></tr>
 		</table></td></tr>
-		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/event/shared/EventHandler.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

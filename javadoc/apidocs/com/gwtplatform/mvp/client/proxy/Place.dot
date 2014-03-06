@@ -5,34 +5,34 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.mvp.client.proxy.PlaceImpl
-	c284221 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceImpl.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> PlaceImpl </td></tr>
-		</table></td></tr>
-		</table>>, URL="./PlaceImpl.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.mvp.client.proxy.Place
-	c284229 [label=<<table title="com.gwtplatform.mvp.client.proxy.Place" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Place.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> Place </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Place.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.mvp.client.proxy.ProxyPlace<P extends com.gwtplatform.mvp.client.Presenter<?, ?>>
-	c284231 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlace" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyPlace.html">
+	c382775 [label=<<table title="com.gwtplatform.mvp.client.proxy.ProxyPlace" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyPlace.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ProxyPlace&lt;P extends Presenter&lt;?, ?&gt;&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ProxyPlace.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.mvp.client.proxy.PlaceImpl implements com.gwtplatform.mvp.client.proxy.Place
-	c284229:p -> c284221:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./ProxyPlace.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.proxy.PlaceImpl
+	c382782 [label=<<table title="com.gwtplatform.mvp.client.proxy.PlaceImpl" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PlaceImpl.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> PlaceImpl </td></tr>
+		</table></td></tr>
+		</table>>, URL="./PlaceImpl.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.mvp.client.proxy.Place
+	c382783 [label=<<table title="com.gwtplatform.mvp.client.proxy.Place" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Place.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> Place </td></tr>
+		</table></td></tr>
+		</table>>, URL="./Place.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.mvp.client.proxy.ProxyPlace<P extends com.gwtplatform.mvp.client.Presenter<?, ?>> implements com.gwtplatform.mvp.client.proxy.Place
-	c284229:p -> c284231:p [dir=back,arrowtail=empty,style=dashed];
+	c382783:p -> c382775:p [dir=back,arrowtail=empty,style=dashed];
+	//com.gwtplatform.mvp.client.proxy.PlaceImpl implements com.gwtplatform.mvp.client.proxy.Place
+	c382783:p -> c382782:p [dir=back,arrowtail=empty,style=dashed];
 }
 

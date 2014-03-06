@@ -5,47 +5,59 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
+	// com.gwtplatform.common.client.StandardProvider<T>
+	c0 [label=<<table title="com.gwtplatform.common.client.StandardProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./StandardProvider.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> StandardProvider&lt;T&gt; </td></tr>
+		</table></td></tr>
+		</table>>, URL="./StandardProvider.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.common.client.ProviderBundle
+	c1 [label=<<table title="com.gwtplatform.common.client.ProviderBundle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProviderBundle.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProviderBundle </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProviderBundle.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.common.client.IndirectProvider<T>
-	c0 [label=<<table title="com.gwtplatform.common.client.IndirectProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IndirectProvider.html">
+	c2 [label=<<table title="com.gwtplatform.common.client.IndirectProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IndirectProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IndirectProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./IndirectProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.common.client.StandardProvider<T>
-	c1 [label=<<table title="com.gwtplatform.common.client.StandardProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./StandardProvider.html">
+		</table>>, URL="./IndirectProvider.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.common.client.CommonGinModule
+	c3 [label=<<table title="com.gwtplatform.common.client.CommonGinModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CommonGinModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> StandardProvider&lt;T&gt; </td></tr>
+<tr><td align="center" balign="center"> CommonGinModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./StandardProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CommonGinModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.common.client.CodeSplitProvider<T>
-	c2 [label=<<table title="com.gwtplatform.common.client.CodeSplitProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CodeSplitProvider.html">
+	c4 [label=<<table title="com.gwtplatform.common.client.CodeSplitProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CodeSplitProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CodeSplitProvider&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CodeSplitProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.common.client.ProviderBundle
-	c3 [label=<<table title="com.gwtplatform.common.client.ProviderBundle" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProviderBundle.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProviderBundle </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ProviderBundle.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CodeSplitProvider.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.common.client.CodeSplitBundleProvider<T, B extends com.gwtplatform.common.client.ProviderBundle>
-	c4 [label=<<table title="com.gwtplatform.common.client.CodeSplitBundleProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CodeSplitBundleProvider.html">
+	c5 [label=<<table title="com.gwtplatform.common.client.CodeSplitBundleProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CodeSplitBundleProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CodeSplitBundleProvider&lt;T, B extends ProviderBundle&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CodeSplitBundleProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CodeSplitBundleProvider.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.common.client.ClientUrlUtils
+	c6 [label=<<table title="com.gwtplatform.common.client.ClientUrlUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientUrlUtils.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ClientUrlUtils </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ClientUrlUtils.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.common.client.StandardProvider<T> implements com.gwtplatform.common.client.IndirectProvider<T>
-	c0:p -> c1:p [dir=back,arrowtail=empty,style=dashed];
+	c2:p -> c0:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.common.client.CodeSplitProvider<T> implements com.gwtplatform.common.client.IndirectProvider<T>
-	c0:p -> c2:p [dir=back,arrowtail=empty,style=dashed];
+	c2:p -> c4:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.common.client.CodeSplitBundleProvider<T, B extends com.gwtplatform.common.client.ProviderBundle> implements com.gwtplatform.common.client.IndirectProvider<T>
-	c0:p -> c4:p [dir=back,arrowtail=empty,style=dashed];
+	c2:p -> c5:p [dir=back,arrowtail=empty,style=dashed];
 }
 

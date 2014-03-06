@@ -5,41 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.DispatchAsync
-	c59260 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../shared/DispatchAsync.html">
+	c90728 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../shared/DispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="../shared/DispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c59273 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsync.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractDispatchAsync </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../shared/DispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.RpcDispatchAsync
-	c59286 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RpcDispatchAsync.html">
+	c90770 [label=<<table title="com.gwtplatform.dispatch.client.RpcDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RpcDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> RpcDispatchAsync </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RpcDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.rest.RestDispatchAsync
-	c59530 [label=<<table title="com.gwtplatform.dispatch.client.rest.RestDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./rest/RestDispatchAsync.html">
+		</table>>, URL="./RpcDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.AbstractDispatchAsync
+	c90774 [label=<<table title="com.gwtplatform.dispatch.client.AbstractDispatchAsync" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsync.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestDispatchAsync </td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractDispatchAsync </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./rest/RestDispatchAsync.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.AbstractDispatchAsync implements com.gwtplatform.dispatch.shared.DispatchAsync
-	c59260:p -> c59273:p [dir=back,arrowtail=empty,style=dashed];
+		</table>>, URL="./AbstractDispatchAsync.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.RpcDispatchAsync extends com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c59273:p -> c59286:p [dir=back,arrowtail=empty];
-	//com.gwtplatform.dispatch.client.rest.RestDispatchAsync extends com.gwtplatform.dispatch.client.AbstractDispatchAsync
-	c59273:p -> c59530:p [dir=back,arrowtail=empty];
+	c90774:p -> c90770:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.client.AbstractDispatchAsync implements com.gwtplatform.dispatch.shared.DispatchAsync
+	c90728:p -> c90774:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -5,25 +5,25 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.DispatchRequest
-	c206131 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../shared/DispatchRequest.html">
+	c283833 [label=<<table title="com.gwtplatform.dispatch.shared.DispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../shared/DispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> DispatchRequest </td></tr>
 		</table></td></tr>
-		</table>>, URL="../shared/DispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../shared/DispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.GwtHttpDispatchRequest
-	c206153 [label=<<table title="com.gwtplatform.dispatch.client.GwtHttpDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GwtHttpDispatchRequest.html">
+	c283868 [label=<<table title="com.gwtplatform.dispatch.client.GwtHttpDispatchRequest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GwtHttpDispatchRequest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GwtHttpDispatchRequest </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GwtHttpDispatchRequest.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./GwtHttpDispatchRequest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.GwtHttpDispatchRequest implements com.gwtplatform.dispatch.shared.DispatchRequest
-	c206131:p -> c206153:p [dir=back,arrowtail=empty,style=dashed];
+	c283833:p -> c283868:p [dir=back,arrowtail=empty,style=dashed];
 }
 

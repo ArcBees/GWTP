@@ -5,46 +5,52 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.carstore.server.rest.RatingResource
-	c31179 [label=<<table title="com.gwtplatform.carstore.server.rest.RatingResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingResource.html">
+	// com.gwtplatform.carstore.server.rest.StatisticsResource
+	c82582 [label=<<table title="com.gwtplatform.carstore.server.rest.StatisticsResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./StatisticsResource.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RatingResource </td></tr>
+<tr><td align="center" balign="center"> StatisticsResource </td></tr>
 		</table></td></tr>
-		</table>>, URL="./RatingResource.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.rest.RestModule
-	c31180 [label=<<table title="com.gwtplatform.carstore.server.rest.RestModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestModule.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> RestModule </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.server.rest.ManufacturerResource
-	c31181 [label=<<table title="com.gwtplatform.carstore.server.rest.ManufacturerResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerResource.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ManufacturerResource </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ManufacturerResource.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./StatisticsResource.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.rest.SessionResource
-	c31182 [label=<<table title="com.gwtplatform.carstore.server.rest.SessionResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SessionResource.html">
+	c82583 [label=<<table title="com.gwtplatform.carstore.server.rest.SessionResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SessionResource.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SessionResource </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SessionResource.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./SessionResource.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.rest.RestModule
+	c82584 [label=<<table title="com.gwtplatform.carstore.server.rest.RestModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestModule.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RestModule </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RestModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.rest.RatingResource
+	c82585 [label=<<table title="com.gwtplatform.carstore.server.rest.RatingResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RatingResource.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RatingResource </td></tr>
+		</table></td></tr>
+		</table>>, URL="./RatingResource.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.server.rest.ManufacturerResource
+	c82586 [label=<<table title="com.gwtplatform.carstore.server.rest.ManufacturerResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ManufacturerResource.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ManufacturerResource </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ManufacturerResource.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.rest.JacksonProvider
-	c31183 [label=<<table title="com.gwtplatform.carstore.server.rest.JacksonProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JacksonProvider.html">
+	c82587 [label=<<table title="com.gwtplatform.carstore.server.rest.JacksonProvider" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JacksonProvider.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JacksonProvider </td></tr>
 		</table></td></tr>
-		</table>>, URL="./JacksonProvider.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./JacksonProvider.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.server.rest.CarResource
-	c31184 [label=<<table title="com.gwtplatform.carstore.server.rest.CarResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarResource.html">
+	c82588 [label=<<table title="com.gwtplatform.carstore.server.rest.CarResource" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CarResource.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarResource </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarResource.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CarResource.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

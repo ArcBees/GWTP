@@ -5,24 +5,24 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c124753 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
+	c175045 [label=<<table title="com.gwtplatform.mvp.client.gin.AbstractPresenterModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../mvp/client/gin/AbstractPresenterModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractPresenterModule </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractPresenterModule </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../mvp/client/gin/AbstractPresenterModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../mvp/client/gin/AbstractPresenterModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.cars.CarsModule
-	c125018 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarsModule.html">
+	c175345 [label=<<table title="com.gwtplatform.carstore.client.application.cars.CarsModule" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CarsModule.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CarsModule </td></tr>
 		</table></td></tr>
-		</table>>, URL="./CarsModule.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./CarsModule.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.cars.CarsModule extends com.gwtplatform.mvp.client.gin.AbstractPresenterModule
-	c124753:p -> c125018:p [dir=back,arrowtail=empty];
+	c175045:p -> c175345:p [dir=back,arrowtail=empty];
 }
 

@@ -5,32 +5,40 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
-	// com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder
-	c60499 [label=<<table title="com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./RestDispatchAsyncModule.Builder.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Builder </td></tr>
-		</table></td></tr>
-		</table>>, URL="./RestDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c60501 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsyncModule.Builder.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Builder </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./AbstractDispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder
-	c60504 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.Builder.html">
+	c92253 [label=<<table title="com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DispatchAsyncModule.Builder.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Builder </td></tr>
 		</table></td></tr>
-		</table>>, URL="./DispatchAsyncModule.Builder.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.gwtplatform.dispatch.client.gin.RestDispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c60501:p -> c60499:p [dir=back,arrowtail=empty];
+		</table>>, URL="./DispatchAsyncModule.Builder.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
+	c92255 [label=<<table title="com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractDispatchAsyncModule.Builder.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> Builder </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./AbstractDispatchAsyncModule.Builder.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder
+	c92264 [label=<<table title="com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../rpc/client/gin/RpcDispatchAsyncModule.Builder.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> Builder </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../rpc/client/gin/RpcDispatchAsyncModule.Builder.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModuleBuilder
+	c92501 [label=<<table title="com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModuleBuilder" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../rest/client/gin/RestDispatchAsyncModuleBuilder.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> RestDispatchAsyncModuleBuilder </td></tr>
+		</table></td></tr>
+		</table>>, URL="../../rest/client/gin/RestDispatchAsyncModuleBuilder.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
-	c60501:p -> c60504:p [dir=back,arrowtail=empty];
+	c92255:p -> c92253:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
+	c92255:p -> c92264:p [dir=back,arrowtail=empty];
+	//com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModuleBuilder extends com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder
+	c92255:p -> c92501:p [dir=back,arrowtail=empty];
 }
 

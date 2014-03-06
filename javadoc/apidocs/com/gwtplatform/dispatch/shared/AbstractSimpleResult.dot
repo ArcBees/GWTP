@@ -5,33 +5,33 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.dispatch.shared.SimpleResult<T>
-	c66515 [label=<<table title="com.gwtplatform.dispatch.shared.SimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleResult.html">
+	c100965 [label=<<table title="com.gwtplatform.dispatch.shared.SimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimpleResult&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./SimpleResult.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.Result
-	c66520 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
+	c100967 [label=<<table title="com.gwtplatform.dispatch.shared.Result" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Result.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Result </td></tr>
 		</table></td></tr>
-		</table>>, URL="./Result.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./Result.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.dispatch.shared.AbstractSimpleResult<T>
-	c66530 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractSimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractSimpleResult.html">
+	c100979 [label=<<table title="com.gwtplatform.dispatch.shared.AbstractSimpleResult" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractSimpleResult.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> AbstractSimpleResult&lt;T&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> AbstractSimpleResult&lt;T&gt; </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./AbstractSimpleResult.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AbstractSimpleResult.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.dispatch.shared.SimpleResult<T> extends com.gwtplatform.dispatch.shared.AbstractSimpleResult<T>
-	c66530:p -> c66515:p [dir=back,arrowtail=empty];
+	c100979:p -> c100965:p [dir=back,arrowtail=empty];
 	//com.gwtplatform.dispatch.shared.AbstractSimpleResult<T> implements com.gwtplatform.dispatch.shared.Result
-	c66520:p -> c66530:p [dir=back,arrowtail=empty,style=dashed];
+	c100967:p -> c100979:p [dir=back,arrowtail=empty,style=dashed];
 }
 

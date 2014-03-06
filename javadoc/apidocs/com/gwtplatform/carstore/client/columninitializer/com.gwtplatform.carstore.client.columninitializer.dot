@@ -5,29 +5,29 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition
-	c38502 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsDefinition.html">
+	c71540 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnsDefinition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnsDefinition.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ColumnsDefinition </font></td></tr>
+<tr><td align="center" balign="center"><font face="arial italic"> ColumnsDefinition </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="./ColumnsDefinition.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.gwtplatform.carstore.client.columninitializer.Column
-	c38503 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.Column" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Column.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> Column </font></td></tr>
-		</table></td></tr>
-		</table>>, URL="./Column.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ColumnsDefinition.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.columninitializer.ColumnInitializer<T>
-	c38504 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnInitializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnInitializer.html">
+	c71541 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.ColumnInitializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ColumnInitializer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ColumnInitializer&lt;T&gt; </td></tr>
 		</table></td></tr>
-		</table>>, URL="./ColumnInitializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./ColumnInitializer.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.gwtplatform.carstore.client.columninitializer.Column
+	c71542 [label=<<table title="com.gwtplatform.carstore.client.columninitializer.Column" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Column.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> Column </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="./Column.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

@@ -5,34 +5,34 @@
 #
 
 digraph G {
-	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
-	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
+	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
 	rankdir=LR;
 	// com.gwtplatform.mvp.client.UiHandlers
-	c173686 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/UiHandlers.html">
+	c243027 [label=<<table title="com.gwtplatform.mvp.client.UiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../../../../mvp/client/UiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> UiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="../../../../../mvp/client/UiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="../../../../../mvp/client/UiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers
-	c173961 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditManufacturerUiHandlers.html">
+	c243408 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EditManufacturerUiHandlers.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> EditManufacturerUiHandlers </td></tr>
 		</table></td></tr>
-		</table>>, URL="./EditManufacturerUiHandlers.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./EditManufacturerUiHandlers.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter
-	c173962 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.html">
+	c243409 [label=<<table title="com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EditManufacturerPresenter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EditManufacturerPresenter </td></tr>
 		</table></td></tr>
-		</table>>, URL="./EditManufacturerPresenter.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./EditManufacturerPresenter.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers implements com.gwtplatform.mvp.client.UiHandlers
-	c173686:p -> c173961:p [dir=back,arrowtail=empty,style=dashed];
+	c243027:p -> c243408:p [dir=back,arrowtail=empty,style=dashed];
 	//com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter implements com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerUiHandlers
-	c173961:p -> c173962:p [dir=back,arrowtail=empty,style=dashed];
+	c243408:p -> c243409:p [dir=back,arrowtail=empty,style=dashed];
 }
 
