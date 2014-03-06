@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP MVP client - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-mvp-client</link>
-    <description>GWTP MVP client - Checkstyle report</description>
+    <title>GWTP REST-Dispatch - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest</link>
+    <description>GWTP REST-Dispatch - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 ArcBees</copyright>
     <item>
-      <title>File: 172,
+      <title>File: 72,
              Errors: 0,
-             Warnings: 40,
-             Infos: 2
+             Warnings: 1,
+             Infos: 1
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,21 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.ChangeTabEvent.java">com/gwtplatform/mvp/client/ChangeTabEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.RootPresenter.java">com/gwtplatform/mvp/client/RootPresenter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.NoXsrfHeader.java">com/gwtplatform/dispatch/rest/client/NoXsrfHeader.java</a>
                 </td>
                 <td>
                   0
@@ -57,21 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.RequestTabsEvent.java">com/gwtplatform/mvp/client/RequestTabsEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.NoGatekeeper.java">com/gwtplatform/mvp/client/annotations/NoGatekeeper.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestDispatch.java">com/gwtplatform/dispatch/rest/shared/RestDispatch.java</a>
                 </td>
                 <td>
                   0
@@ -85,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.TabInfoMethod.java">com/gwtplatform/mvp/rebind/TabInfoMethod.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ServiceBinding.java</a>
                 </td>
                 <td>
                   0
@@ -99,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler.java">com/gwtplatform/mvp/client/proxy/SetPlaceTitleHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/RestRequestBuilderFactory.java</a>
                 </td>
                 <td>
                   0
@@ -113,7 +85,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.DefaultPlaceManager.java">com/gwtplatform/mvp/client/proxy/DefaultPlaceManager.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModuleBuilder.java">com/gwtplatform/dispatch/rest/client/gin/RestDispatchAsyncModuleBuilder.java</a>
                 </td>
                 <td>
                   0
@@ -127,7 +99,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PresenterWidgetTest.java">com/gwtplatform/mvp/client/PresenterWidgetTest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchCall.java">com/gwtplatform/dispatch/rest/client/RestDispatchCall.java</a>
                 </td>
                 <td>
                   0
@@ -141,7 +113,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceManagerTestUtil.java">com/gwtplatform/mvp/client/proxy/PlaceManagerTestUtil.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/ServiceGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -155,7 +127,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HandlerContainerImplTest.java">com/gwtplatform/mvp/client/HandlerContainerImplTest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.JacksonMapperProviderGenerator.java">com/gwtplatform/dispatch/rest/rebind/JacksonMapperProviderGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -169,7 +141,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.DefaultGatekeeper.java">com/gwtplatform/mvp/client/annotations/DefaultGatekeeper.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatcherController.java">com/gwtplatform/dispatch/rest/client/RestDispatcherController.java</a>
                 </td>
                 <td>
                   0
@@ -183,7 +155,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.ContentSlot.java">com/gwtplatform/mvp/client/annotations/ContentSlot.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.MetadataType.java">com/gwtplatform/dispatch/rest/shared/MetadataType.java</a>
                 </td>
                 <td>
                   0
@@ -197,7 +169,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.PlaceManagerTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/PlaceManagerTestUtilGwt.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.GlobalQueryParams.java">com/gwtplatform/dispatch/rest/client/GlobalQueryParams.java</a>
                 </td>
                 <td>
                   0
@@ -211,7 +183,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncCallStartHandler.java">com/gwtplatform/mvp/client/proxy/AsyncCallStartHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ResourceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ResourceBinding.java</a>
                 </td>
                 <td>
                   0
@@ -225,7 +197,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.InjectedLabel.java">com/gwtplatform/mvp/client/gwt/mvp/InjectedLabel.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestCallback.java">com/gwtplatform/dispatch/rest/shared/RestCallback.java</a>
                 </td>
                 <td>
                   0
@@ -239,7 +211,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ProxyOutputterFactory.java">com/gwtplatform/mvp/rebind/ProxyOutputterFactory.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.SecuredRestAction.java">com/gwtplatform/dispatch/rest/client/SecuredRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -253,21 +225,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealContentEvent.java">com/gwtplatform/mvp/client/proxy/RevealContentEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ResetPresentersHandler.java">com/gwtplatform/mvp/client/proxy/ResetPresentersHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ActionGenerator.java">com/gwtplatform/dispatch/rest/rebind/ActionGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -281,7 +239,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncEventTest.java">com/gwtplatform/mvp/client/proxy/AsyncEventTest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.UnsecuredRestAction.java">com/gwtplatform/dispatch/rest/client/UnsecuredRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -295,7 +253,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.GinjectorGenerator.java">com/gwtplatform/mvp/rebind/GinjectorGenerator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ActionMetadataProviderGenerator.java">com/gwtplatform/dispatch/rest/rebind/ActionMetadataProviderGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -309,7 +267,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.DefaultPlace.java">com/gwtplatform/mvp/client/annotations/DefaultPlace.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.HttpMethod.java">com/gwtplatform/dispatch/rest/shared/HttpMethod.java</a>
                 </td>
                 <td>
                   0
@@ -323,21 +281,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.LockInteractionEvent.java">com/gwtplatform/mvp/client/proxy/LockInteractionEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler.java">com/gwtplatform/mvp/client/proxy/RevealRootPopupContentHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.HeaderParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/HeaderParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -351,7 +295,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.google.gwt.uibinder.rebind.GinFieldManager.java">com/google/gwt/uibinder/rebind/GinFieldManager.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.AbstractJacksonMapperProvider.java">com/gwtplatform/dispatch/rest/client/serialization/AbstractJacksonMapperProvider.java</a>
                 </td>
                 <td>
                   0
@@ -365,7 +309,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncEventPresenterTestUtil.java">com/gwtplatform/mvp/client/proxy/AsyncEventPresenterTestUtil.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.PathParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/PathParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -379,7 +323,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.TabInfo.java">com/gwtplatform/mvp/client/annotations/TabInfo.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.QueryParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/QueryParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -393,7 +337,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.NonLeafTabContentProxyOutputter.java">com/gwtplatform/mvp/rebind/NonLeafTabContentProxyOutputter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent.java">com/gwtplatform/dispatch/rest/rebind/event/RegisterMetadataEvent.java</a>
                 </td>
                 <td>
                   0
@@ -407,7 +351,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PreBootstrapper.java">com/gwtplatform/mvp/client/PreBootstrapper.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializerTest.java">com/gwtplatform/dispatch/rest/client/serialization/MultimapJsonSerializerTest.java</a>
                 </td>
                 <td>
                   0
@@ -421,7 +365,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.PresenterInspector.java">com/gwtplatform/mvp/rebind/PresenterInspector.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil.java">com/gwtplatform/dispatch/rest/rebind/util/GeneratorUtil.java</a>
                 </td>
                 <td>
                   0
@@ -435,7 +379,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceImpl.java">com/gwtplatform/mvp/client/proxy/PlaceImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestApplicationPath.java">com/gwtplatform/dispatch/rest/client/RestApplicationPath.java</a>
                 </td>
                 <td>
                   0
@@ -449,7 +393,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ResetPresentersEvent.java">com/gwtplatform/mvp/client/proxy/ResetPresentersEvent.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory.java">com/gwtplatform/dispatch/rest/client/RestDispatchCallFactory.java</a>
                 </td>
                 <td>
                   0
@@ -463,7 +407,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.NameToken.java">com/gwtplatform/mvp/client/annotations/NameToken.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.ResponseWrapper.java">com/gwtplatform/dispatch/rest/client/ResponseWrapper.java</a>
                 </td>
                 <td>
                   0
@@ -477,7 +421,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.ProxyCodeSplit.java">com/gwtplatform/mvp/client/annotations/ProxyCodeSplit.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.MethodCall.java">com/gwtplatform/dispatch/rest/rebind/type/MethodCall.java</a>
                 </td>
                 <td>
                   0
@@ -491,7 +435,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ProxyEventMethod.java">com/gwtplatform/mvp/rebind/ProxyEventMethod.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestParameter.java">com/gwtplatform/dispatch/rest/shared/RestParameter.java</a>
                 </td>
                 <td>
                   0
@@ -505,7 +449,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.TabData.java">com/gwtplatform/mvp/client/TabData.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer.java">com/gwtplatform/dispatch/rest/client/serialization/MultimapJsonSerializer.java</a>
                 </td>
                 <td>
                   0
@@ -519,7 +463,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.Title.java">com/gwtplatform/mvp/client/annotations/Title.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RequestTimeout.java">com/gwtplatform/dispatch/rest/client/RequestTimeout.java</a>
                 </td>
                 <td>
                   0
@@ -533,7 +477,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.java">com/gwtplatform/mvp/client/proxy/PlaceManagerImplTest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.AbstractServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/AbstractServiceGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -547,21 +491,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.GetPlaceTitleEvent.java">com/gwtplatform/mvp/client/proxy/GetPlaceTitleEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  4
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl.java">com/gwtplatform/mvp/client/proxy/ProxyPlaceImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.XsrfHeaderName.java">com/gwtplatform/dispatch/rest/client/XsrfHeaderName.java</a>
                 </td>
                 <td>
                   0
@@ -575,203 +505,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.GatekeeperWithParams.java">com/gwtplatform/mvp/client/proxy/GatekeeperWithParams.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.mvp.SubPresenterWidgetTestUtil.java">com/gwtplatform/mvp/client/mvp/SubPresenterWidgetTestUtil.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncCallSucceedHandler.java">com/gwtplatform/mvp/client/proxy/AsyncCallSucceedHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ClassInspector.java">com/gwtplatform/mvp/rebind/ClassInspector.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.GatekeeperWithParamsTest.java">com/gwtplatform/mvp/client/proxy/GatekeeperWithParamsTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealContentHandler.java">com/gwtplatform/mvp/client/proxy/RevealContentHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncCallSucceedEvent.java">com/gwtplatform/mvp/client/proxy/AsyncCallSucceedEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.GinjectorInspector.java">com/gwtplatform/mvp/rebind/GinjectorInspector.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.TabDataBasic.java">com/gwtplatform/mvp/client/TabDataBasic.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HasHandlerContainer.java">com/gwtplatform/mvp/client/HasHandlerContainer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.TabPanel.java">com/gwtplatform/mvp/client/TabPanel.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.UseGatekeeper.java">com/gwtplatform/mvp/client/annotations/UseGatekeeper.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.BasicProxyOutputter.java">com/gwtplatform/mvp/rebind/BasicProxyOutputter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.Gatekeeper.java">com/gwtplatform/mvp/client/proxy/Gatekeeper.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.Presenter.java">com/gwtplatform/mvp/client/Presenter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.java">com/gwtplatform/dispatch/rest/client/gin/RestDispatchAsyncModule.java</a>
                 </td>
                 <td>
                   1
@@ -785,7 +519,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator.java">com/gwtplatform/mvp/rebind/velocity/ginjectors/FormFactorGinjectorGenerator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.VelocityProperties.java">com/gwtplatform/dispatch/rest/rebind/VelocityProperties.java</a>
                 </td>
                 <td>
                   0
@@ -799,7 +533,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy.java">com/gwtplatform/mvp/client/proxy/NonLeafTabContentProxy.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions.java">com/gwtplatform/dispatch/rest/rebind/type/ServiceDefinitions.java</a>
                 </td>
                 <td>
                   0
@@ -813,7 +547,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.mvp.MainPresenterTestUtil.java">com/gwtplatform/mvp/client/mvp/MainPresenterTestUtil.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractRestAction.java">com/gwtplatform/dispatch/rest/client/AbstractRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -827,7 +561,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.google.gwt.uibinder.rebind.UiBinderGenerator.java">com/google/gwt/uibinder/rebind/UiBinderGenerator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory.java">com/gwtplatform/dispatch/rest/client/DefaultRestDispatchCallFactory.java</a>
                 </td>
                 <td>
                   0
@@ -841,7 +575,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator.java">com/gwtplatform/mvp/rebind/PlaceTokenRegistryGenerator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization.java">com/gwtplatform/dispatch/rest/client/serialization/JsonSerialization.java</a>
                 </td>
                 <td>
                   0
@@ -855,7 +589,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HasSlots.java">com/gwtplatform/mvp/client/HasSlots.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestService.java">com/gwtplatform/dispatch/rest/shared/RestService.java</a>
                 </td>
                 <td>
                   0
@@ -869,7 +603,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ProxyOutputterBase.java">com/gwtplatform/mvp/rebind/ProxyOutputterBase.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.GeneratorFactory.java">com/gwtplatform/dispatch/rest/rebind/GeneratorFactory.java</a>
                 </td>
                 <td>
                   0
@@ -883,7 +617,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.RequestTabsHandler.java">com/gwtplatform/mvp/client/RequestTabsHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.FormParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/FormParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -897,7 +631,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.GinjectorTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/GinjectorTestUtilGwt.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.AnnotationValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/AnnotationValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -911,7 +645,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.Place.java">com/gwtplatform/mvp/client/proxy/Place.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestResponseDeserializer.java">com/gwtplatform/dispatch/rest/client/RestResponseDeserializer.java</a>
                 </td>
                 <td>
                   0
@@ -925,7 +659,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator.java">com/gwtplatform/mvp/rebind/velocity/ginjectors/GinjectorProviderGenerator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractActionMetadataProvider.java">com/gwtplatform/dispatch/rest/client/AbstractActionMetadataProvider.java</a>
                 </td>
                 <td>
                   0
@@ -939,7 +673,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.GaAccount.java">com/gwtplatform/mvp/client/annotations/GaAccount.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider.java">com/gwtplatform/dispatch/rest/client/serialization/JacksonMapperProvider.java</a>
                 </td>
                 <td>
                   0
@@ -953,21 +687,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.NavigationEvent.java">com/gwtplatform/mvp/client/proxy/NavigationEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.DefaultBootstrapper.java">com/gwtplatform/mvp/client/DefaultBootstrapper.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent.java">com/gwtplatform/dispatch/rest/rebind/event/RegisterSerializableTypeEvent.java</a>
                 </td>
                 <td>
                   0
@@ -981,21 +701,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceRequestInternalEvent.java">com/gwtplatform/mvp/client/proxy/PlaceRequestInternalEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  5
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.AutobindDisable.java">com/gwtplatform/mvp/client/AutobindDisable.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.RebindModule.java">com/gwtplatform/dispatch/rest/rebind/RebindModule.java</a>
                 </td>
                 <td>
                   0
@@ -1009,21 +715,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker.java">com/gwtplatform/mvp/client/googleanalytics/GoogleAnalyticsNavigationTracker.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PresenterWidget.java">com/gwtplatform/mvp/client/PresenterWidget.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DateFormat.java">com/gwtplatform/dispatch/rest/client/DateFormat.java</a>
                 </td>
                 <td>
                   0
@@ -1037,7 +729,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator.java">com/gwtplatform/mvp/rebind/velocity/AbstractVelocityGenerator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.ActionMetadataProvider.java">com/gwtplatform/dispatch/rest/client/ActionMetadataProvider.java</a>
                 </td>
                 <td>
                   0
@@ -1051,7 +743,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.google.gwt.uibinder.rebind.GinUiBinderGenerator.java">com/google/gwt/uibinder/rebind/GinUiBinderGenerator.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchAsync.java">com/gwtplatform/dispatch/rest/client/RestDispatchAsync.java</a>
                 </td>
                 <td>
                   0
@@ -1065,7 +757,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ProxyRaw.java">com/gwtplatform/mvp/client/proxy/ProxyRaw.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.ExposedRestAction.java">com/gwtplatform/dispatch/rest/client/ExposedRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -1079,7 +771,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.NavigationRefusedHandler.java">com/gwtplatform/mvp/client/proxy/NavigationRefusedHandler.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.JacksonMapperGenerator.java">com/gwtplatform/dispatch/rest/rebind/JacksonMapperGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -1093,824 +785,12 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.MvpGwtTestInSuite.java">com/gwtplatform/mvp/client/gwt/mvp/MvpGwtTestInSuite.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultDateFormat.java">com/gwtplatform/dispatch/rest/client/DefaultDateFormat.java</a>
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  2
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.View.java">com/gwtplatform/mvp/client/View.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator.java">com/gwtplatform/mvp/rebind/velocity/proxy/VelocityPlacetokenGenerator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.ClientModuleTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/ClientModuleTestUtilGwt.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PopupViewImpl.java">com/gwtplatform/mvp/client/PopupViewImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ClassCollection.java">com/gwtplatform/mvp/rebind/ClassCollection.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.NavigationRefusedEvent.java">com/gwtplatform/mvp/client/proxy/NavigationRefusedEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.GeneratorUtil.java">com/gwtplatform/mvp/rebind/velocity/GeneratorUtil.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback.java">com/gwtplatform/mvp/client/proxy/NotifyingAsyncCallback.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ProxyOutputter.java">com/gwtplatform/mvp/rebind/ProxyOutputter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.ViewImpl.java">com/gwtplatform/mvp/client/ViewImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.google.gwt.uibinder.rebind.FieldManager.java">com/google/gwt/uibinder/rebind/FieldManager.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.AdminViewTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/AdminViewTestUtilGwt.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.MainViewTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/MainViewTestUtilGwt.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.google.gwt.uibinder.rebind.FieldWriterOfInjectedType.java">com/google/gwt/uibinder/rebind/FieldWriterOfInjectedType.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceManagerImpl2Test.java">com/gwtplatform/mvp/client/proxy/PlaceManagerImpl2Test.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ProviderBundleGenerator.java">com/gwtplatform/mvp/rebind/ProviderBundleGenerator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.ViewWithUiHandlers.java">com/gwtplatform/mvp/client/ViewWithUiHandlers.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PopupViewWithUiHandlers.java">com/gwtplatform/mvp/client/PopupViewWithUiHandlers.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentHandler.java">com/gwtplatform/mvp/client/proxy/RevealRootLayoutContentHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.mvp.MockInjectionTest.java">com/gwtplatform/mvp/client/mvp/MockInjectionTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.AdminPresenterTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/AdminPresenterTestUtilGwt.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.DelayedBind.java">com/gwtplatform/mvp/client/DelayedBind.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.mvp.RealInjectionTest.java">com/gwtplatform/mvp/client/mvp/RealInjectionTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.InstantiationCounterTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/InstantiationCounterTestUtilGwt.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncCallFailHandler.java">com/gwtplatform/mvp/client/proxy/AsyncCallFailHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.RequestTabs.java">com/gwtplatform/mvp/client/annotations/RequestTabs.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent.java">com/gwtplatform/mvp/client/proxy/RevealRootPopupContentEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  4
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.PresenterTitleMethod.java">com/gwtplatform/mvp/rebind/PresenterTitleMethod.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics.java">com/gwtplatform/mvp/client/googleanalytics/GoogleAnalytics.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HasPopupSlot.java">com/gwtplatform/mvp/client/HasPopupSlot.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceManagerImpl.java">com/gwtplatform/mvp/client/proxy/PlaceManagerImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.GetPlaceTitleHandler.java">com/gwtplatform/mvp/client/proxy/GetPlaceTitleHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams.java">com/gwtplatform/mvp/client/proxy/PlaceWithGatekeeperWithParams.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.MvpClientGwtTestSuite.java">com/gwtplatform/mvp/client/MvpClientGwtTestSuite.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gin.AbstractPresenterModule.java">com/gwtplatform/mvp/client/gin/AbstractPresenterModule.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.LockInteractionHandler.java">com/gwtplatform/mvp/client/proxy/LockInteractionHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ProxyPlace.java">com/gwtplatform/mvp/client/proxy/ProxyPlace.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.VelocityProperties.java">com/gwtplatform/mvp/rebind/velocity/VelocityProperties.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.ProxyStandard.java">com/gwtplatform/mvp/client/annotations/ProxyStandard.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HandlerContainerImpl2Test.java">com/gwtplatform/mvp/client/HandlerContainerImpl2Test.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.GatekeeperTest.java">com/gwtplatform/mvp/client/proxy/GatekeeperTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.java">com/gwtplatform/mvp/client/annotations/ProxyCodeSplitBundle.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ProxyImpl.java">com/gwtplatform/mvp/client/proxy/ProxyImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.NavigationHandler.java">com/gwtplatform/mvp/client/proxy/NavigationHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PresenterTest.java">com/gwtplatform/mvp/client/PresenterTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HasUiHandlers.java">com/gwtplatform/mvp/client/HasUiHandlers.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ManualRevealCallback.java">com/gwtplatform/mvp/client/proxy/ManualRevealCallback.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.AbstractGenerator.java">com/gwtplatform/mvp/rebind/AbstractGenerator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatterGwtTestInSuite.java">com/gwtplatform/mvp/shared/proxy/ParameterTokenFormatterGwtTestInSuite.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PopupViewCloseHandler.java">com/gwtplatform/mvp/client/PopupViewCloseHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncCallStartEvent.java">com/gwtplatform/mvp/client/proxy/AsyncCallStartEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.MainPresenterTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/MainPresenterTestUtilGwt.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.PopupView.java">com/gwtplatform/mvp/client/PopupView.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.ChangeTab.java">com/gwtplatform/mvp/client/annotations/ChangeTab.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors.java">com/gwtplatform/mvp/rebind/velocity/GenerateFormFactorGinjectors.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.DelayedBindRegistry.java">com/gwtplatform/mvp/client/DelayedBindRegistry.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceManagerWindowMethodsTestUtil.java">com/gwtplatform/mvp/client/proxy/PlaceManagerWindowMethodsTestUtil.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory.java">com/gwtplatform/mvp/rebind/velocity/ginjectors/FormFactorGinjectorFactory.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
                   0
                 </td>
                 <td>
@@ -1919,7 +799,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.TabContentProxy.java">com/gwtplatform/mvp/client/proxy/TabContentProxy.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestParameterBuilder.java">com/gwtplatform/dispatch/rest/client/gin/RestParameterBuilder.java</a>
                 </td>
                 <td>
                   0
@@ -1933,7 +813,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.GatekeeperParams.java">com/gwtplatform/mvp/client/annotations/GatekeeperParams.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.VelocityGenerator.java">com/gwtplatform/dispatch/rest/rebind/VelocityGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -1947,7 +827,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.UnauthorizedPlace.java">com/gwtplatform/mvp/client/annotations/UnauthorizedPlace.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.GlobalHeaderParams.java">com/gwtplatform/dispatch/rest/client/GlobalHeaderParams.java</a>
                 </td>
                 <td>
                   0
@@ -1961,7 +841,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.Bootstrapper.java">com/gwtplatform/mvp/client/Bootstrapper.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractRestDispatcherController.java">com/gwtplatform/dispatch/rest/client/AbstractRestDispatcherController.java</a>
                 </td>
                 <td>
                   0
@@ -1975,7 +855,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.ApplicationController.java">com/gwtplatform/mvp/client/ApplicationController.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer.java">com/gwtplatform/dispatch/rest/client/DefaultRestResponseDeserializer.java</a>
                 </td>
                 <td>
                   0
@@ -1989,7 +869,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.ProxyEvent.java">com/gwtplatform/mvp/client/annotations/ProxyEvent.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/DefaultRestRequestBuilderFactory.java</a>
                 </td>
                 <td>
                   0
@@ -2003,7 +883,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.RebindModule.java">com/gwtplatform/mvp/rebind/velocity/RebindModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.Serialization.java">com/gwtplatform/dispatch/rest/client/serialization/Serialization.java</a>
                 </td>
                 <td>
                   0
@@ -2017,7 +897,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gin.PresenterSetupModule.java">com/gwtplatform/mvp/client/gin/PresenterSetupModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.GinModuleGenerator.java">com/gwtplatform/dispatch/rest/rebind/GinModuleGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -2031,7 +911,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl.java">com/gwtplatform/mvp/client/googleanalytics/GoogleAnalyticsImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ChildServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/ChildServiceGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -2045,7 +925,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.Proxy.java">com/gwtplatform/mvp/client/proxy/Proxy.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ChildServiceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ChildServiceBinding.java</a>
                 </td>
                 <td>
                   0
@@ -2059,7 +939,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HandlerContainer.java">com/gwtplatform/mvp/client/HandlerContainer.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.RegisterMetadataHolder.java">com/gwtplatform/dispatch/rest/rebind/type/RegisterMetadataHolder.java</a>
                 </td>
                 <td>
                   0
@@ -2073,264 +953,12 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent.java">com/gwtplatform/mvp/client/proxy/RevealRootLayoutContentEvent.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.HttpRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/HttpRequestBuilderFactory.java</a>
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  2
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.ProxyPlaceAbstract.java">com/gwtplatform/mvp/client/proxy/ProxyPlaceAbstract.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.PresenterDefinitions.java">com/gwtplatform/mvp/rebind/PresenterDefinitions.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceManager.java">com/gwtplatform/mvp/client/proxy/PlaceManager.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.gin.DefaultModule.java">com/gwtplatform/mvp/client/gin/DefaultModule.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.TabContainerPresenter.java">com/gwtplatform/mvp/client/TabContainerPresenter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.TitleFunction.java">com/gwtplatform/mvp/client/annotations/TitleFunction.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper.java">com/gwtplatform/mvp/client/proxy/PlaceWithGatekeeper.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ProxyPlaceOutputter.java">com/gwtplatform/mvp/rebind/ProxyPlaceOutputter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealRootContentHandler.java">com/gwtplatform/mvp/client/proxy/RevealRootContentHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ProxyGenerator.java">com/gwtplatform/mvp/rebind/ProxyGenerator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.TabContentProxyPlaceImpl.java">com/gwtplatform/mvp/client/proxy/TabContentProxyPlaceImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator.java">com/gwtplatform/mvp/rebind/velocity/ginjectors/FormFactorGinjectorProviderGenerator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.TabContentProxyPlaceOutputter.java">com/gwtplatform/mvp/rebind/TabContentProxyPlaceOutputter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.ChangeTabHandler.java">com/gwtplatform/mvp/client/ChangeTabHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.PlaceRequestInternalHandler.java">com/gwtplatform/mvp/client/proxy/PlaceRequestInternalHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.rebind.ApplicationControllerGenerator.java">com/gwtplatform/mvp/rebind/ApplicationControllerGenerator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.HandlerContainerImpl.java">com/gwtplatform/mvp/client/HandlerContainerImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.TabView.java">com/gwtplatform/mvp/client/TabView.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
                   0
                 </td>
                 <td>
@@ -2339,7 +967,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.UiHandlers.java">com/gwtplatform/mvp/client/UiHandlers.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator.java">com/gwtplatform/dispatch/rest/rebind/AbstractVelocityGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -2352,28 +980,14 @@
                 </td>
               </tr>
                           <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.Tab.java">com/gwtplatform/mvp/client/Tab.java</a>
-                </td>
-                <td>
-                  0
-                </td>
                 <td>
-                  0
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.Logger.java">com/gwtplatform/dispatch/rest/rebind/Logger.java</a>
                 </td>
                 <td>
                   0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.AsyncCallFailEvent.java">com/gwtplatform/mvp/client/proxy/AsyncCallFailEvent.java</a>
                 </td>
                 <td>
                   0
-                </td>
-                <td>
-                  2
                 </td>
                 <td>
                   0
@@ -2381,7 +995,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.annotations.ErrorPlace.java">com/gwtplatform/mvp/client/annotations/ErrorPlace.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ActionBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ActionBinding.java</a>
                 </td>
                 <td>
                   0
@@ -2395,7 +1009,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl.java">com/gwtplatform/mvp/client/proxy/NonLeafTabContentProxyImpl.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactoryTest.java">com/gwtplatform/dispatch/rest/client/DefaultRestRequestBuilderFactoryTest.java</a>
                 </td>
                 <td>
                   0
@@ -2408,28 +1022,14 @@
                 </td>
               </tr>
                           <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.TabContentProxyPlace.java">com/gwtplatform/mvp/client/proxy/TabContentProxyPlace.java</a>
-                </td>
-                <td>
-                  0
-                </td>
                 <td>
-                  0
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestAction.java">com/gwtplatform/dispatch/rest/shared/RestAction.java</a>
                 </td>
                 <td>
                   0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client/checkstyle.html#com.gwtplatform.mvp.client.proxy.RevealRootContentEvent.java">com/gwtplatform/mvp/client/proxy/RevealRootContentEvent.java</a>
                 </td>
                 <td>
                   0
-                </td>
-                <td>
-                  2
                 </td>
                 <td>
                   0
