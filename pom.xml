@@ -196,7 +196,7 @@
     <distributionManagement>
         <site>
             <id>${project.artifactId}-site</id>
-            <url>file://${user.home}/gwtp-site</url>
+            <url>http://arcbees.github.io/GWTP/</url>
         </site>
     </distributionManagement>
 
@@ -495,6 +495,7 @@
                     <maxmemory>2048</maxmemory>
                     <failOnError>true</failOnError>
 
+                    <excludePackageNames>com.gwtplatform.carstore;com.gwtplatform.tester</excludePackageNames>
                     <reportOutputDirectory>${project.build.directory}/staging</reportOutputDirectory>
 
                     <links>
