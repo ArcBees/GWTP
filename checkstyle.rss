@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP MVP shared - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-mvp-shared</link>
-    <description>GWTP MVP shared - Checkstyle report</description>
+    <title>gwtp-dispatch-common-shared - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared</link>
+    <description>gwtp-dispatch-common-shared - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 ArcBees</copyright>
     <item>
-      <title>File: 8,
+      <title>File: 6,
              Errors: 0,
              Warnings: 0,
-             Infos: 1
+             Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/ParameterTokenFormatter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.HasSecured.java">com/gwtplatform/dispatch/shared/HasSecured.java</a>
                 </td>
                 <td>
                   0
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.SecurityCookieAccessor.java">com/gwtplatform/dispatch/shared/SecurityCookieAccessor.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatterTest.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatterTest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.ActionException.java">com/gwtplatform/dispatch/shared/ActionException.java</a>
                 </td>
                 <td>
                   0
@@ -71,21 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatException.java">com/gwtplatform/mvp/shared/proxy/TokenFormatException.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.SecurityCookie.java">com/gwtplatform/dispatch/shared/SecurityCookie.java</a>
                 </td>
                 <td>
                   0
@@ -99,7 +85,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatter.java">com/gwtplatform/mvp/shared/proxy/TokenFormatter.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.DispatchRequest.java">com/gwtplatform/dispatch/shared/DispatchRequest.java</a>
                 </td>
                 <td>
                   0
@@ -113,21 +99,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry.java">com/gwtplatform/mvp/shared/proxy/PlaceTokenRegistry.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequestTest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequestTest.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.TypedAction.java">com/gwtplatform/dispatch/shared/TypedAction.java</a>
                 </td>
                 <td>
                   0
