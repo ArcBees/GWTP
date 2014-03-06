@@ -89,6 +89,7 @@
             <email>viel.christopher@gmail.com</email>
             <organization>ArcBees</organization>
             <organizationUrl>http://arcbees.com</organizationUrl>
+            <timezone>-5</timezone>
             <roles>
                 <role>developer</role>
             </roles>
@@ -189,8 +190,15 @@
 
     <ciManagement>
         <system>Team City</system>
-        <url>http://teamcity.codebetter.com</url>
+        <url>http://teamcity.arcbees.com/project.html?projectId=GwtPlatformGwtp</url>
     </ciManagement>
+
+    <distributionManagement>
+        <site>
+            <id>${project.artifactId}-site</id>
+            <url>file://${user.home}/gwtp-site</url>
+        </site>
+    </distributionManagement>
 
     <mailingLists>
         <mailingList>
@@ -214,22 +222,26 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <gwt.style>OBF</gwt.style>
+        <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Maven -->
         <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
         <gwt-maven-plugin.version>2.5.1</gwt-maven-plugin.version>
         <lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
-        <maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
-        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-        <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
+        <maven-checkstyle-plugin.version>2.11</maven-checkstyle-plugin.version>
+        <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+        <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
         <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
         <maven-gae-plugin.version>0.9.6</maven-gae-plugin.version>
-        <maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
         <maven-war-plugin.version>2.2</maven-war-plugin.version>
         <maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
+        <maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
+        <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
+        <maven-site-plugin.version>3.3</maven-site-plugin.version>
 
         <!-- Client -->
         <gwt.version>2.5.1</gwt.version>
@@ -264,7 +276,7 @@
         <jetty-plugin.version>8.1.0.v20120127</jetty-plugin.version>
 
         <!-- GitHub Sites -->
-        <github.version>0.8</github.version>
+        <github.version>0.9</github.version>
 
         <!-- Used for releasing to sonatype as command line parameter -->
         <gpg.passphrase>SetAsParam</gpg.passphrase>
@@ -279,6 +291,7 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
+
                     <configuration>
                         <source>${target.jdk}</source>
                         <target>${target.jdk}</target>
@@ -300,6 +313,18 @@
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-project-info-reports-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven-dependency-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${maven-checkstyle-plugin.version}</version>
                     <configuration>
@@ -312,6 +337,7 @@
                         <linkXRef>false</linkXRef>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     </configuration>
+
                     <dependencies>
                         <dependency>
                             <groupId>com.gwtplatform</groupId>
@@ -319,6 +345,7 @@
                             <version>${project.version}</version>
                         </dependency>
                     </dependencies>
+
                     <executions>
                         <execution>
                             <id>validate</id>
@@ -334,6 +361,7 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${maven-source-plugin.version}</version>
+
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -349,6 +377,7 @@
                     <groupId>net.kindleit</groupId>
                     <artifactId>maven-gae-plugin</artifactId>
                     <version>${maven-gae-plugin.version}</version>
+
                     <configuration>
                         <unpackVersion>${gae.version}</unpackVersion>
 
@@ -359,6 +388,16 @@
                         <!--<argument>-enable_jar_splitting</argument> -->
                         <!--</goalArguments> -->
                     </configuration>
+
+                    <dependencies>
+                        <dependency>
+                            <groupId>net.kindleit</groupId>
+                            <artifactId>gae-runtime</artifactId>
+                            <version>${gae.version}</version>
+                            <type>pom</type>
+                        </dependency>
+                    </dependencies>
+
                     <executions>
                         <execution>
                             <id>unpack</id>
@@ -368,19 +407,12 @@
                             </goals>
                         </execution>
                     </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>net.kindleit</groupId>
-                            <artifactId>gae-runtime</artifactId>
-                            <version>${gae.version}</version>
-                            <type>pom</type>
-                        </dependency>
-                    </dependencies>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <inherited>true</inherited>
+
                     <configuration>
                         <archive>
                             <manifest>
@@ -433,16 +465,38 @@
                 </configuration>
             </plugin>
 
-            <!-- run 'mvn javadoc:aggregate' to generate -->
-            <!-- run 'mvn javadoc:aggregate -X' to debug -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+
+                <configuration>
+                    <skip>${maven-site-plugin.skip}</skip>
+                    <skipDeploy>true</skipDeploy>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>stage-site</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>stage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
+
                 <configuration>
                     <maxmemory>2048</maxmemory>
                     <failOnError>true</failOnError>
-                    <doctitle>GWT-Platform Javadocs</doctitle>
+
+                    <reportOutputDirectory>${project.build.directory}/staging</reportOutputDirectory>
+
                     <links>
                         <link>http://download.oracle.com/javase/6/docs/api/</link>
                         <link>http://google-web-toolkit.googlecode.com/svn/javadoc/latest/</link>
@@ -453,29 +507,21 @@
                         <link>https://developers.google.com/appengine/docs/java/javadoc/</link>
                         <link>http://docs.guava-libraries.googlecode.com/git/javadoc/</link>
                     </links>
-                    <outputDirectory>${project.build.directory}/javadoc</outputDirectory>
-                    <reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
+
                     <excludes>
                         <exclude>**/*.txt</exclude>
                     </excludes>
+
                     <header>
                         <![CDATA[
                             <a href="https://github.com/ArcBees/GWTP" target="_blank">Back to GWTP Home</a>
                         ]]>
                     </header>
-                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                    <docletArtifact>
-                        <groupId>org.umlgraph</groupId>
-                        <artifactId>umlgraph</artifactId>
-                        <version>5.6.6</version>
-                    </docletArtifact>
-                    <additionalparam>
-                        -horizontal
-                    </additionalparam>
                 </configuration>
+
                 <executions>
                     <execution>
-                        <id>build-upload-javadocs</id>
+                        <id>build-javadocs</id>
                         <phase>site</phase>
                         <goals>
                             <goal>aggregate</goal>
@@ -484,29 +530,36 @@
                 </executions>
             </plugin>
 
-            <!-- run 'mvn site' to upload -->
-            <!-- run 'mvn site -X' to debug and upload. -->
+            <!-- run 'mvn site' to generate -->
+            <!-- run 'mvn site-deploy -N' to upload -->
+            <!-- It's important to run both separately as deploy will create the same commit for each sub-module -->
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>${github.version}</version>
+
                 <configuration>
-                    <!-- <dryRun>true</dryRun> -->
                     <message>Creating site for ${project.version}</message>
+                    <force>true</force>
+                    <merge>true</merge>
+                    <outputDirectory>${project.build.directory}/staging</outputDirectory>
+
                     <!-- github > sets the ~/.m2/setting.xml server id profile -->
                     <server>github</server>
+
                     <excludes>
                         <exclude>*.DS_Store</exclude>
                         <exclude>*.sh</exclude>
                         <exclude>options</exclude>
                         <exclude>packages</exclude>
                     </excludes>
-                    <force>true</force>
-                    <merge>true</merge>
                 </configuration>
+
                 <executions>
                     <execution>
-                        <phase>site</phase>
+                        <id>deploy-gwtp-site</id>
+                        <phase>site-deploy</phase>
+
                         <goals>
                             <goal>site</goal>
                         </goals>
