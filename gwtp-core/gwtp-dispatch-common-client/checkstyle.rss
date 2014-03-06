@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>GWTP Dispatch, Common Client Files - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client</link>
+    <description>GWTP Dispatch, Common Client Files - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2010 - 2014 ArcBees</copyright>
+    <item>
+      <title>File: 23,
+             Errors: 0,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.Cache.java">com/gwtplatform/dispatch/client/actionhandler/caching/Cache.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException.java">com/gwtplatform/dispatch/client/actionhandler/ClientActionHandlerMismatchException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.DispatchCall.java">com/gwtplatform/dispatch/client/DispatchCall.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.DefaultCacheImpl.java">com/gwtplatform/dispatch/client/actionhandler/caching/DefaultCacheImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.GwtHttpDispatchRequest.java">com/gwtplatform/dispatch/client/GwtHttpDispatchRequest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest.java">com/gwtplatform/dispatch/client/DelagatingCallbackDispatchRequest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultExceptionHandler.java">com/gwtplatform/dispatch/client/DefaultExceptionHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.UndoCommand.java">com/gwtplatform/dispatch/client/actionhandler/UndoCommand.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.ActionCachingHandler.java">com/gwtplatform/dispatch/client/actionhandler/caching/ActionCachingHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.ExceptionHandler.java">com/gwtplatform/dispatch/client/ExceptionHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor.java">com/gwtplatform/dispatch/client/DefaultSecurityCookieAccessor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry.java">com/gwtplatform/dispatch/client/actionhandler/DefaultClientActionHandlerRegistry.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand.java">com/gwtplatform/dispatch/client/actionhandler/ExecuteCommand.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.DelegatingDispatchRequest.java">com/gwtplatform/dispatch/client/DelegatingDispatchRequest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler.java">com/gwtplatform/dispatch/client/actionhandler/ClientActionHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.java">com/gwtplatform/dispatch/client/gin/AbstractDispatchAsyncModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.CompletedDispatchRequest.java">com/gwtplatform/dispatch/client/CompletedDispatchRequest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.DelegatingAsyncCallback.java">com/gwtplatform/dispatch/client/DelegatingAsyncCallback.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry.java">com/gwtplatform/dispatch/client/actionhandler/ClientActionHandlerRegistry.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest.java">com/gwtplatform/dispatch/client/DefaultCallbackDispatchRequest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.caching.AbstractCachingClientActionHandler.java">com/gwtplatform/dispatch/client/actionhandler/caching/AbstractCachingClientActionHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.CallbackDispatchRequest.java">com/gwtplatform/dispatch/client/CallbackDispatchRequest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client/checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler.java">com/gwtplatform/dispatch/client/actionhandler/AbstractClientActionHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+

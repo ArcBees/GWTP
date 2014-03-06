@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>GWTP RPC-Dispatch Client - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client</link>
+    <description>GWTP RPC-Dispatch Client - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2010 - 2014 ArcBees</copyright>
+    <item>
+      <title>File: 16,
+             Errors: 0,
+             Warnings: 0,
+             Infos: 1
+      </title>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.client.RpcDispatchAsync.java">com/gwtplatform/dispatch/client/RpcDispatchAsync.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.client.RemoteServerUrl.java">com/gwtplatform/dispatch/client/RemoteServerUrl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.client.gin.DispatchAsyncModule.java">com/gwtplatform/dispatch/client/gin/DispatchAsyncModule.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.RemoteServerUrl.java">com/gwtplatform/dispatch/rpc/client/RemoteServerUrl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory.java">com/gwtplatform/dispatch/rpc/client/DefaultRpcDispatchCallFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.gin.PhoneGapDispatchAsyncModule.java">com/gwtplatform/dispatch/rpc/client/gin/PhoneGapDispatchAsyncModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync.java">com/gwtplatform/dispatch/rpc/client/RpcDispatchAsync.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.client.DefaultDispatchAsync.java">com/gwtplatform/dispatch/client/DefaultDispatchAsync.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.client.AbstractDispatchAsync.java">com/gwtplatform/dispatch/client/AbstractDispatchAsync.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.RpcDispatchExecuteCall.java">com/gwtplatform/dispatch/rpc/client/RpcDispatchExecuteCall.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.client.PhoneGapDispatchAsync.java">com/gwtplatform/dispatch/client/PhoneGapDispatchAsync.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.java">com/gwtplatform/dispatch/rpc/client/gin/RpcDispatchAsyncModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.RpcDispatchUndoCall.java">com/gwtplatform/dispatch/rpc/client/RpcDispatchUndoCall.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.client.gin.PhoneGapDispatchAsyncModule.java">com/gwtplatform/dispatch/client/gin/PhoneGapDispatchAsyncModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.PhoneGapDispatchAsync.java">com/gwtplatform/dispatch/rpc/client/PhoneGapDispatchAsync.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client/checkstyle.html#com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory.java">com/gwtplatform/dispatch/rpc/client/RpcDispatchCallFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+

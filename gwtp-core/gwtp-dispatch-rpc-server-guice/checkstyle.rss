@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>GWTP RPC-Dispatch Server, Guice implementation - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice</link>
+    <description>GWTP RPC-Dispatch Server, Guice implementation - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2010 - 2014 ArcBees</copyright>
+    <item>
+      <title>File: 35,
+             Errors: 0,
+             Warnings: 0,
+             Infos: 6
+      </title>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.GuiceBeanProvider.java">com/gwtplatform/dispatch/rpc/server/guice/GuiceBeanProvider.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider.java">com/gwtplatform/dispatch/server/guice/request/DefaultRequestProvider.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/rpc/server/guice/HttpSessionSecurityCookieFilter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl.java">com/gwtplatform/dispatch/rpc/server/guice/DispatchServiceImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.ActionExceptionThrownByHandler.java">com/gwtplatform/dispatch/rpc/server/ActionExceptionThrownByHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.request.DefaultRequestProvider.java">com/gwtplatform/dispatch/rpc/server/guice/request/DefaultRequestProvider.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/rpc/server/guice/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.RandomSecurityCookieFilter.java">com/gwtplatform/dispatch/server/guice/RandomSecurityCookieFilter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.DispatchModule.java">com/gwtplatform/dispatch/rpc/server/guice/DispatchModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/guice/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.HandlerModule.java">com/gwtplatform/dispatch/server/guice/HandlerModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.DispatchModule.java">com/gwtplatform/dispatch/server/guice/DispatchModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.HandlerModule.java">com/gwtplatform/dispatch/rpc/server/guice/HandlerModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker.java">com/gwtplatform/dispatch/server/guice/actionhandlervalidator/ActionHandlerValidatorLinker.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl.java">com/gwtplatform/dispatch/rpc/server/guice/DispatchImpl.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.ActionModule.java">com/gwtplatform/dispatch/rpc/server/guice/ActionModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker.java">com/gwtplatform/dispatch/rpc/server/guice/actionhandlervalidator/ActionHandlerValidatorLinker.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.DispatchImpl.java">com/gwtplatform/dispatch/server/guice/DispatchImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.ActionExceptionThrownByValidator.java">com/gwtplatform/dispatch/rpc/server/ActionExceptionThrownByValidator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.RandomSecurityCookieFilter.java">com/gwtplatform/dispatch/rpc/server/guice/RandomSecurityCookieFilter.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.ActionThrownByHandlerTest.java">com/gwtplatform/dispatch/rpc/server/ActionThrownByHandlerTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/server/guice/HttpSessionSecurityCookieFilter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.SomeAction.java">com/gwtplatform/dispatch/rpc/server/SomeAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.ActionValidatorThatThrows.java">com/gwtplatform/dispatch/rpc/server/ActionValidatorThatThrows.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.GuiceBeanProvider.java">com/gwtplatform/dispatch/server/guice/GuiceBeanProvider.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.actionvalidator.DefaultActionValidator.java">com/gwtplatform/dispatch/rpc/server/guice/actionvalidator/DefaultActionValidator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.ServiceModule.java">com/gwtplatform/dispatch/rpc/server/ServiceModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.HandlerThatThrowsActionException.java">com/gwtplatform/dispatch/rpc/server/HandlerThatThrowsActionException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.SecureRandomSingleton.java">com/gwtplatform/dispatch/server/guice/SecureRandomSingleton.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.actionvalidator.DefaultActionValidator.java">com/gwtplatform/dispatch/server/guice/actionvalidator/DefaultActionValidator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.ActionThrownByValidatorTest.java">com/gwtplatform/dispatch/rpc/server/ActionThrownByValidatorTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/rpc/server/guice/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.DispatchServiceImpl.java">com/gwtplatform/dispatch/server/guice/DispatchServiceImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/guice/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-guice/checkstyle.html#com.gwtplatform.dispatch.rpc.server.guice.SecureRandomSingleton.java">com/gwtplatform/dispatch/rpc/server/guice/SecureRandomSingleton.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
