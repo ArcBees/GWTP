@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>GWTP Clients common - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common</link>
-    <description>GWTP Clients common - Checkstyle report</description>
+    <title>GWTP MVP shared - Checkstyle report</title>
+    <link>http://gwtplatform.com/gwtp-core/gwtp-mvp-shared</link>
+    <description>GWTP MVP shared - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 ArcBees</copyright>
     <item>
-      <title>File: 10,
+      <title>File: 8,
              Errors: 0,
              Warnings: 0,
-             Infos: 0
+             Infos: 1
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html</link>
+            <link>http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.IndirectProvider.java">com/gwtplatform/common/client/IndirectProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/ParameterTokenFormatter.java</a>
                 </td>
                 <td>
                   0
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitProvider.java">com/gwtplatform/common/client/CodeSplitProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequest.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.rebind.VersionInspectorLinker.java">com/gwtplatform/common/rebind/VersionInspectorLinker.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatterTest.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatterTest.java</a>
                 </td>
                 <td>
                   0
@@ -71,7 +71,21 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.StandardProvider.java">com/gwtplatform/common/client/StandardProvider.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatException.java">com/gwtplatform/mvp/shared/proxy/TokenFormatException.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatter.java</a>
                 </td>
                 <td>
                   0
@@ -85,7 +99,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CommonGinModule.java">com/gwtplatform/common/client/CommonGinModule.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatter.java">com/gwtplatform/mvp/shared/proxy/TokenFormatter.java</a>
                 </td>
                 <td>
                   0
@@ -99,7 +113,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.ClientUrlUtils.java">com/gwtplatform/common/client/ClientUrlUtils.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry.java">com/gwtplatform/mvp/shared/proxy/PlaceTokenRegistry.java</a>
                 </td>
                 <td>
                   0
@@ -113,49 +127,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.shared.UrlUtils.java">com/gwtplatform/common/shared/UrlUtils.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.ProviderBundle.java">com/gwtplatform/common/client/ProviderBundle.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.client.CodeSplitBundleProvider.java">com/gwtplatform/common/client/CodeSplitBundleProvider.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-clients-common/checkstyle.html#com.gwtplatform.common.rebind.Logger.java">com/gwtplatform/common/rebind/Logger.java</a>
+                  <a href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared/checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequestTest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequestTest.java</a>
                 </td>
                 <td>
                   0
