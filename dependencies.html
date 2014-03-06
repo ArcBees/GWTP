@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>GWTP Tester - Project Dependencies</title>
+    <title>GWTP MVP client - Project Dependencies</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                GWTP Tester
+                GWTP MVP client
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2014-03-06</span>
                   &nbsp;| <span id="projectVersion">Version: 1.3-SNAPSHOT</span>
                       </div>
-            <div class="xright">                    <a href="./" title="GWTP Tester">GWTP Tester</a>
+            <div class="xright">                    <a href="./" title="GWTP MVP client">GWTP MVP client</a>
               
                     
       </div>
@@ -124,35 +124,23 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>com.google.inject</td>
-<td><a class="externalLink" href="http://code.google.com/p/google-guice/guice/">guice</a></td>
-<td>3.0</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="a">
 <td>com.gwtplatform</td>
-<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client">gwtp-dispatch-common-client</a></td>
-<td>1.3-20140306.151721-1</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
-<tr class="b">
-<td>com.gwtplatform</td>
-<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client">gwtp-dispatch-rpc-client</a></td>
-<td>1.3-20140306.151756-1</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-clients-common">gwtp-clients-common</a></td>
+<td>1.3-SNAPSHOT</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
 <tr class="a">
 <td>com.gwtplatform</td>
-<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server">gwtp-dispatch-rpc-server</a></td>
-<td>1.3-SNAPSHOT</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared">gwtp-mvp-shared</a></td>
+<td>1.3-20140306.151522-1</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
 <tr class="b">
-<td>com.gwtplatform</td>
-<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-shared">gwtp-dispatch-rpc-shared</a></td>
-<td>1.3-SNAPSHOT</td>
+<td>org.apache.velocity</td>
+<td><a class="externalLink" href="http://velocity.apache.org/engine/devel/">velocity</a></td>
+<td>1.7</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
 <div class="section">
 <h3>test<a name="test"></a></h3>
 <p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
@@ -164,11 +152,23 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>com.google.gwt</td>
-<td><a class="externalLink" href="http://code.google.com/webtoolkit/gwt-dev/">gwt-dev</a></td>
-<td>2.5.1</td>
+<td>com.google.guava</td>
+<td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava">guava</a></td>
+<td>16.0</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://code.google.com/webtoolkit/terms.html">Google Web Toolkit Terms</a></td></tr>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>com.gwtplatform</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client">gwtp-dispatch-rpc-client</a></td>
+<td>1.3-20140306.151756-1</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
+<tr class="b">
+<td>com.gwtplatform</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-tester">gwtp-tester</a></td>
+<td>1.3-SNAPSHOT</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
 <tr class="a">
 <td>junit</td>
 <td><a class="externalLink" href="http://junit.org">junit</a></td>
@@ -199,22 +199,40 @@
 <th>License</th></tr>
 <tr class="b">
 <td>com.google.gwt</td>
-<td><a class="externalLink" href="http://code.google.com/webtoolkit/gwt-user/">gwt-user</a></td>
+<td><a class="externalLink" href="http://code.google.com/webtoolkit/gwt-dev/">gwt-dev</a></td>
 <td>2.5.1</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://code.google.com/webtoolkit/terms.html">Google Web Toolkit Terms</a></td></tr>
 <tr class="a">
+<td>com.google.gwt</td>
+<td><a class="externalLink" href="http://code.google.com/webtoolkit/gwt-user/">gwt-user</a></td>
+<td>2.5.1</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://code.google.com/webtoolkit/terms.html">Google Web Toolkit Terms</a></td></tr>
+<tr class="b">
 <td>com.google.gwt.inject</td>
 <td><a class="externalLink" href="http://code.google.com/p/google-gin/">gin</a></td>
 <td>2.1.2</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td></tr>
+<tr class="a">
+<td>com.google.inject</td>
+<td><a class="externalLink" href="http://code.google.com/p/google-guice/guice/">guice</a></td>
+<td>3.0</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="b">
 <td>com.gwtplatform</td>
 <td><a class="externalLink" href="http://gwtplatform.com/gwtp-build-tools">gwtp-build-tools</a></td>
 <td>1.3-SNAPSHOT</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
+<tr class="a">
+<td>javax.inject</td>
+<td><a class="externalLink" href="http://code.google.com/p/atinject/">javax.inject</a></td>
+<td>1</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
 <div class="section">
 <h2>Project Transitive Dependencies<a name="Project_Transitive_Dependencies"></a></h2>
 <p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><a name="Project_Transitive_Dependencies_compile"></a>
@@ -229,54 +247,24 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>aopalliance</td>
-<td><a class="externalLink" href="http://aopalliance.sourceforge.net">aopalliance</a></td>
-<td>1.0</td>
+<td>commons-collections</td>
+<td><a class="externalLink" href="http://commons.apache.org/collections/">commons-collections</a></td>
+<td>3.2.1</td>
 <td>jar</td>
-<td>Public Domain</td></tr>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="a">
-<td>com.google.code.findbugs</td>
-<td><a class="externalLink" href="http://findbugs.sourceforge.net/">jsr305</a></td>
-<td>1.3.9</td>
+<td>commons-lang</td>
+<td><a class="externalLink" href="http://commons.apache.org/lang/">commons-lang</a></td>
+<td>2.4</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="b">
-<td>com.google.guava</td>
-<td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava">guava</a></td>
-<td>16.0</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="a">
-<td>com.google.guava</td>
-<td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-gwt">guava-gwt</a></td>
-<td>16.0</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="b">
-<td>com.gwtplatform</td>
-<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-clients-common">gwtp-clients-common</a></td>
-<td>1.3-SNAPSHOT</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
-<tr class="a">
-<td>com.gwtplatform</td>
-<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared">gwtp-dispatch-common-shared</a></td>
-<td>1.3-SNAPSHOT</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
-<tr class="b">
-<td>javax.inject</td>
-<td><a class="externalLink" href="http://code.google.com/p/atinject/">javax.inject</a></td>
-<td>1</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="a">
 <td>org.apache.maven</td>
 <td><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-artifact">maven-artifact</a></td>
 <td>3.1.1</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.codehaus.plexus</td>
 <td><a class="externalLink" href="http://plexus.codehaus.org/plexus-utils">plexus-utils</a></td>
 <td>3.0.15</td>
@@ -292,6 +280,42 @@
 <th>Version</th>
 <th>Type</th>
 <th>License</th></tr>
+<tr class="b">
+<td>com.google.code.findbugs</td>
+<td><a class="externalLink" href="http://findbugs.sourceforge.net/">jsr305</a></td>
+<td>1.3.9</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>com.google.guava</td>
+<td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-gwt">guava-gwt</a></td>
+<td>16.0</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="b">
+<td>com.gwtplatform</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client">gwtp-dispatch-common-client</a></td>
+<td>1.3-20140306.151721-1</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
+<tr class="a">
+<td>com.gwtplatform</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared">gwtp-dispatch-common-shared</a></td>
+<td>1.3-SNAPSHOT</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
+<tr class="b">
+<td>com.gwtplatform</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server">gwtp-dispatch-rpc-server</a></td>
+<td>1.3-SNAPSHOT</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
+<tr class="a">
+<td>com.gwtplatform</td>
+<td><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-shared">gwtp-dispatch-rpc-shared</a></td>
+<td>1.3-SNAPSHOT</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></td></tr>
 <tr class="b">
 <td>org.hamcrest</td>
 <td>hamcrest-core</td>
@@ -316,27 +340,34 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
+<td>aopalliance</td>
+<td><a class="externalLink" href="http://aopalliance.sourceforge.net">aopalliance</a></td>
+<td>1.0</td>
+<td>-</td>
+<td>jar</td>
+<td>Public Domain</td></tr>
+<tr class="a">
 <td>com.google.inject.extensions</td>
 <td><a class="externalLink" href="http://code.google.com/p/google-guice/extensions-parent/guice-assistedinject/">guice-assistedinject</a></td>
 <td>3.0</td>
 <td>-</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>javax.validation</td>
 <td>validation-api</td>
 <td>1.0.0.GA</td>
 <td>-</td>
 <td>jar</td>
 <td>license.txt</td></tr>
-<tr class="b">
+<tr class="a">
 <td>javax.validation</td>
 <td>validation-api</td>
 <td>1.0.0.GA</td>
 <td>sources</td>
 <td>jar</td>
 <td>license.txt</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.json</td>
 <td><a class="externalLink" href="http://www.json.org/java/index.html">json</a></td>
 <td>20090211</td>
@@ -365,46 +396,17 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>com.gwtplatform:gwtp-tester:jar:1.3-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>com.gwtplatform:gwtp-mvp-client:jar:1.3-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>GWTP Tester</th></tr>
+<th>GWTP MVP client</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
-<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-tester">http://gwtplatform.com/gwtp-core/gwtp-tester</a></p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-mvp-client">http://gwtplatform.com/gwtp-core/gwtp-mvp-client</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div>
 <ul>
-<li>com.gwtplatform:gwtp-dispatch-rpc-shared:jar:1.3-SNAPSHOT (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>GWTP RPC-Dispatch Shared</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
-<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-shared">http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-shared</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div>
-<ul>
-<li>com.gwtplatform:gwtp-dispatch-common-shared:jar:1.3-SNAPSHOT (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>gwtp-dispatch-common-shared</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
-<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared">http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li></ul></li>
-<li>com.gwtplatform:gwtp-dispatch-common-client:jar:1.3-SNAPSHOT (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>GWTP Dispatch, Common Client Files</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
-<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client">http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div>
-<ul>
-<li>com.gwtplatform:gwtp-clients-common:jar:1.3-SNAPSHOT (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
+<li>com.gwtplatform:gwtp-clients-common:jar:1.3-SNAPSHOT (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>GWTP Clients common</th></tr>
@@ -414,7 +416,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-clients-common">http://gwtplatform.com/gwtp-core/gwtp-clients-common</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div>
 <ul>
-<li>org.apache.maven:maven-artifact:jar:3.1.1 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<li>org.apache.maven:maven-artifact:jar:3.1.1 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Maven Artifact</th></tr>
@@ -430,7 +432,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-artifact">http://maven.apache.org/ref/3.1.1/maven-artifact</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.codehaus.plexus:plexus-utils:jar:3.0.15 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
+<li>org.codehaus.plexus:plexus-utils:jar:3.0.15 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Plexus Common Utilities</th></tr>
@@ -440,62 +442,16 @@
     more.</p>
 <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-utils">http://plexus.codehaus.org/plexus-utils</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
-<li>com.google.guava:guava-gwt:jar:16.0 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<li>com.gwtplatform:gwtp-mvp-shared:jar:1.3-SNAPSHOT (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>Guava GWT compatible libs</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>Guava is a suite of core and expanded libraries that include
-    utility classes, google's collections, io classes, and much
-    much more.
-
-    This project includes GWT-friendly sources.</p>
-<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-gwt">http://code.google.com/p/guava-libraries/guava-gwt</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
-<ul>
-<li>com.google.code.findbugs:jsr305:jar:1.3.9 (compile) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>FindBugs-jsr305</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>JSR305 Annotations for Findbugs</p>
-<p><b>URL: </b><a class="externalLink" href="http://findbugs.sourceforge.net/">http://findbugs.sourceforge.net/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>com.google.guava:guava:jar:16.0 (compile) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>Guava: Google Core Libraries for Java</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>Guava is a suite of core and expanded libraries that include
-    utility classes, google's collections, io classes, and much
-    much more.
-
-    Guava has only one code dependency - javax.annotation,
-    per the JSR-305 spec.</p>
-<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava">http://code.google.com/p/guava-libraries/guava</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
-<li>com.gwtplatform:gwtp-dispatch-rpc-client:jar:1.3-SNAPSHOT (compile) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>GWTP RPC-Dispatch Client</th></tr>
+<th>GWTP MVP shared</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
-<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client">http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client</a></p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-mvp-shared">http://gwtplatform.com/gwtp-core/gwtp-mvp-shared</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li>
-<li>com.gwtplatform:gwtp-dispatch-rpc-server:jar:1.3-SNAPSHOT (compile) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>GWTP RPC-Dispatch Server Common</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
-<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server">http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li>
-<li>com.google.gwt:gwt-user:jar:2.5.1 (provided) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
+<li>com.google.gwt:gwt-user:jar:2.5.1 (provided) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>gwt-user</th></tr>
@@ -505,7 +461,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://code.google.com/webtoolkit/gwt-user/">http://code.google.com/webtoolkit/gwt-user/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://code.google.com/webtoolkit/terms.html">Google Web Toolkit Terms</a></p></td></tr></table></div>
 <ul>
-<li>javax.validation:validation-api:jar:1.0.0.GA (provided) <img id="_img27" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep26', '_img27' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep26" style="display:none">
+<li>javax.validation:validation-api:jar:1.0.0.GA (provided) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Bean Validation API</th></tr>
@@ -513,7 +469,7 @@
 <td>
 <p><b>Description: </b>Bean Validation (JSR-303) API.</p>
 <p><b>Project License: </b><a href="license.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li>
-<li>javax.validation:validation-api:jar:sources:1.0.0.GA (provided) <img id="_img29" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep28', '_img29' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep28" style="display:none">
+<li>javax.validation:validation-api:jar:sources:1.0.0.GA (provided) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Bean Validation API</th></tr>
@@ -521,7 +477,7 @@
 <td>
 <p><b>Description: </b>Bean Validation (JSR-303) API.</p>
 <p><b>Project License: </b><a href="license.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.json:json:jar:20090211 (provided) <img id="_img31" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep30', '_img31' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep30" style="display:none">
+<li>org.json:json:jar:20090211 (provided) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JSON (JavaScript Object Notation)</th></tr>
@@ -536,35 +492,16 @@
     These properties make JSON an ideal data-interchange language.</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.json.org/java/index.html">http://www.json.org/java/index.html</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.json.org/license.html">provided without support or warranty</a></p></td></tr></table></div></li></ul></li>
-<li>com.google.inject:guice:jar:3.0 (compile) <img id="_img33" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep32', '_img33' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep32" style="display:none">
+<li>com.google.gwt:gwt-dev:jar:2.5.1 (provided) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>Google Guice - Core Library</th></tr>
+<th>gwt-dev</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>Guice is a lightweight dependency injection framework for Java 5 and above</p>
-<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/google-guice/guice/">http://code.google.com/p/google-guice/guice/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
-<ul>
-<li>javax.inject:javax.inject:jar:1 (compile) <img id="_img35" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep34', '_img35' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep34" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>javax.inject</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>The javax.inject API</p>
-<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/atinject/">http://code.google.com/p/atinject/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>aopalliance:aopalliance:jar:1.0 (compile) <img id="_img37" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep36', '_img37' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep36" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>AOP alliance</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>AOP Alliance</p>
-<p><b>URL: </b><a class="externalLink" href="http://aopalliance.sourceforge.net">http://aopalliance.sourceforge.net</a></p>
-<p><b>Project License: </b>Public Domain</p></td></tr></table></div></li></ul></li>
-<li>com.google.gwt.inject:gin:jar:2.1.2 (provided) <img id="_img39" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep38', '_img39' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep38" style="display:none">
+<p><b>Description: </b>Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/</p>
+<p><b>URL: </b><a class="externalLink" href="http://code.google.com/webtoolkit/gwt-dev/">http://code.google.com/webtoolkit/gwt-dev/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://code.google.com/webtoolkit/terms.html">Google Web Toolkit Terms</a></p></td></tr></table></div></li>
+<li>com.google.gwt.inject:gin:jar:2.1.2 (provided) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>GIN (GWT INjection)</th></tr>
@@ -574,7 +511,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/google-gin/">http://code.google.com/p/google-gin/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></p></td></tr></table></div>
 <ul>
-<li>com.google.inject.extensions:guice-assistedinject:jar:3.0 (provided) <img id="_img41" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep40', '_img41' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep40" style="display:none">
+<li>com.google.inject.extensions:guice-assistedinject:jar:3.0 (provided) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Google Guice - Extensions - AssistedInject</th></tr>
@@ -583,7 +520,150 @@
 <p><b>Description: </b>Guice is a lightweight dependency injection framework for Java 5 and above</p>
 <p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/google-guice/extensions-parent/guice-assistedinject/">http://code.google.com/p/google-guice/extensions-parent/guice-assistedinject/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
-<li>org.jukito:jukito:jar:1.3 (test) <img id="_img43" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep42', '_img43' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep42" style="display:none">
+<li>com.google.inject:guice:jar:3.0 (provided) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Google Guice - Core Library</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Guice is a lightweight dependency injection framework for Java 5 and above</p>
+<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/google-guice/guice/">http://code.google.com/p/google-guice/guice/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>aopalliance:aopalliance:jar:1.0 (provided) <img id="_img27" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep26', '_img27' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep26" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>AOP alliance</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>AOP Alliance</p>
+<p><b>URL: </b><a class="externalLink" href="http://aopalliance.sourceforge.net">http://aopalliance.sourceforge.net</a></p>
+<p><b>Project License: </b>Public Domain</p></td></tr></table></div></li></ul></li>
+<li>javax.inject:javax.inject:jar:1 (provided) <img id="_img29" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep28', '_img29' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep28" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>javax.inject</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>The javax.inject API</p>
+<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/atinject/">http://code.google.com/p/atinject/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>org.apache.velocity:velocity:jar:1.7 (compile) <img id="_img31" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep30', '_img31' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep30" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Apache Velocity</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Apache Velocity is a general purpose template engine.</p>
+<p><b>URL: </b><a class="externalLink" href="http://velocity.apache.org/engine/devel/">http://velocity.apache.org/engine/devel/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>commons-collections:commons-collections:jar:3.2.1 (compile) <img id="_img33" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep32', '_img33' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep32" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Commons Collections</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Types that extend and augment the Java Collections Framework.</p>
+<p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/collections/">http://commons.apache.org/collections/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>commons-lang:commons-lang:jar:2.4 (compile) <img id="_img35" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep34', '_img35' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep34" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Commons Lang</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Commons Lang, a package of Java utility classes for the
+        classes that are in java.lang's hierarchy, or are considered to be so
+        standard as to justify existence in java.lang.</p>
+<p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/lang/">http://commons.apache.org/lang/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
+<li>com.google.guava:guava:jar:16.0 (test) <img id="_img37" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep36', '_img37' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep36" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Guava: Google Core Libraries for Java</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Guava is a suite of core and expanded libraries that include
+    utility classes, google's collections, io classes, and much
+    much more.
+
+    Guava has only one code dependency - javax.annotation,
+    per the JSR-305 spec.</p>
+<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava">http://code.google.com/p/guava-libraries/guava</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>com.gwtplatform:gwtp-tester:jar:1.3-SNAPSHOT (test) <img id="_img39" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep38', '_img39' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep38" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>GWTP Tester</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-tester">http://gwtplatform.com/gwtp-core/gwtp-tester</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div>
+<ul>
+<li>com.gwtplatform:gwtp-dispatch-rpc-shared:jar:1.3-SNAPSHOT (test) <img id="_img41" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep40', '_img41' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep40" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>GWTP RPC-Dispatch Shared</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-shared">http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-shared</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div>
+<ul>
+<li>com.gwtplatform:gwtp-dispatch-common-shared:jar:1.3-SNAPSHOT (test) <img id="_img43" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep42', '_img43' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep42" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>gwtp-dispatch-common-shared</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared">http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li></ul></li>
+<li>com.gwtplatform:gwtp-dispatch-common-client:jar:1.3-SNAPSHOT (test) <img id="_img45" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep44', '_img45' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep44" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>GWTP Dispatch, Common Client Files</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client">http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-client</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div>
+<ul>
+<li>com.google.guava:guava-gwt:jar:16.0 (test) <img id="_img47" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep46', '_img47' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep46" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Guava GWT compatible libs</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Guava is a suite of core and expanded libraries that include
+    utility classes, google's collections, io classes, and much
+    much more.
+
+    This project includes GWT-friendly sources.</p>
+<p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-gwt">http://code.google.com/p/guava-libraries/guava-gwt</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>com.google.code.findbugs:jsr305:jar:1.3.9 (test) <img id="_img49" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep48', '_img49' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep48" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>FindBugs-jsr305</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>JSR305 Annotations for Findbugs</p>
+<p><b>URL: </b><a class="externalLink" href="http://findbugs.sourceforge.net/">http://findbugs.sourceforge.net/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
+<li>com.gwtplatform:gwtp-dispatch-rpc-server:jar:1.3-SNAPSHOT (test) <img id="_img51" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep50', '_img51' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep50" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>GWTP RPC-Dispatch Server Common</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server">http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li></ul></li>
+<li>org.jukito:jukito:jar:1.3 (test) <img id="_img53" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep52', '_img53' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep52" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>jukito</th></tr>
@@ -592,7 +672,7 @@
 <p><b>Description: </b>A testing framework with automocking base on JUnit, Guice and Mokito.</p>
 <p><b>URL: </b><a class="externalLink" href="http://jukito.org/jukito">http://jukito.org/jukito</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li>
-<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img45" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep44', '_img45' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep44" style="display:none">
+<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img55" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep54', '_img55' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep54" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Mockito</th></tr>
@@ -602,7 +682,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://www.mockito.org">http://www.mockito.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://code.google.com/p/mockito/wiki/License">The MIT License</a></p></td></tr></table></div>
 <ul>
-<li>org.hamcrest:hamcrest-core:jar:1.1 (test) <img id="_img47" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep46', '_img47' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep46" style="display:none">
+<li>org.hamcrest:hamcrest-core:jar:1.1 (test) <img id="_img57" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep56', '_img57' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep56" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Hamcrest Core</th></tr>
@@ -610,7 +690,7 @@
 <td>
 <p><b>Description: </b>There is currently no description associated with this project.</p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">BSD style</a></p></td></tr></table></div></li>
-<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img49" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep48', '_img49' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep48" style="display:none">
+<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img59" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep58', '_img59' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep58" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Objenesis</th></tr>
@@ -619,16 +699,16 @@
 <p><b>Description: </b>A library for instantiating Java objects</p>
 <p><b>URL: </b><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/index.html">http://objenesis.googlecode.com/svn/docs/index.html</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/license.html">MIT License</a></p></td></tr></table></div></li></ul></li>
-<li>com.google.gwt:gwt-dev:jar:2.5.1 (test) <img id="_img51" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep50', '_img51' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep50" style="display:none">
+<li>com.gwtplatform:gwtp-dispatch-rpc-client:jar:1.3-SNAPSHOT (test) <img id="_img61" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep60', '_img61' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep60" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>gwt-dev</th></tr>
+<th>GWTP RPC-Dispatch Client</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/</p>
-<p><b>URL: </b><a class="externalLink" href="http://code.google.com/webtoolkit/gwt-dev/">http://code.google.com/webtoolkit/gwt-dev/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://code.google.com/webtoolkit/terms.html">Google Web Toolkit Terms</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.11 (test) <img id="_img53" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep52', '_img53' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep52" style="display:none">
+<p><b>Description: </b>A complete model-view-presenter framework to simplify your next GWT project.</p>
+<p><b>URL: </b><a class="externalLink" href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client">http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-client</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li>
+<li>junit:junit:jar:4.11 (test) <img id="_img63" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep62', '_img63' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep62" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit</th></tr>
@@ -638,7 +718,7 @@
         It is used by the developer who implements unit tests in Java.</p>
 <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td></tr></table></div></li>
-<li>com.gwtplatform:gwtp-build-tools:jar:1.3-SNAPSHOT (provided) <img id="_img55" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep54', '_img55' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep54" style="display:none">
+<li>com.gwtplatform:gwtp-build-tools:jar:1.3-SNAPSHOT (provided) <img id="_img65" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep64', '_img65' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep64" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>GWTP Build Tools</th></tr>
@@ -651,14 +731,14 @@
 <h2>Licenses<a name="Licenses"></a></h2>
 <p><b>BSD style: </b>Hamcrest Core</p>
 <p><b>Public Domain: </b>AOP alliance</p>
-<p><b>Apache 2: </b>GWTP Build Tools, GWTP Clients common, GWTP Dispatch, Common Client Files, GWTP RPC-Dispatch Client, GWTP RPC-Dispatch Server Common, GWTP RPC-Dispatch Shared, GWTP Tester, gwtp-dispatch-common-shared, jukito</p>
+<p><b>Apache 2: </b>GWTP Build Tools, GWTP Clients common, GWTP Dispatch, Common Client Files, GWTP MVP client, GWTP MVP shared, GWTP RPC-Dispatch Client, GWTP RPC-Dispatch Server Common, GWTP RPC-Dispatch Shared, GWTP Tester, gwtp-dispatch-common-shared, jukito</p>
 <p><b>Google Web Toolkit Terms: </b>gwt-dev, gwt-user</p>
 <p><b>Apache License, Version 2.0: </b>Bean Validation API</p>
 <p><b>Apache License 2.0: </b>GIN (GWT INjection)</p>
 <p><b>provided without support or warranty: </b>JSON (JavaScript Object Notation)</p>
 <p><b>Common Public License Version 1.0: </b>JUnit</p>
 <p><b>MIT License: </b>Objenesis</p>
-<p><b>The Apache Software License, Version 2.0: </b>FindBugs-jsr305, Google Guice - Core Library, Google Guice - Extensions - AssistedInject, Guava GWT compatible libs, Guava: Google Core Libraries for Java, Maven Artifact, Plexus Common Utilities, javax.inject</p>
+<p><b>The Apache Software License, Version 2.0: </b>Apache Velocity, Commons Collections, Commons Lang, FindBugs-jsr305, Google Guice - Core Library, Google Guice - Extensions - AssistedInject, Guava GWT compatible libs, Guava: Google Core Libraries for Java, Maven Artifact, Plexus Common Utilities, javax.inject</p>
 <p><b>The MIT License: </b>Mockito</p></div><a name="Dependency_File_Details"></a>
 <div class="section">
 <h2>Dependency File Details<a name="Dependency_File_Details"></a></h2>
@@ -800,6 +880,38 @@
 <td>1.6</td>
 <td>debug</td></tr>
 <tr class="b">
+<td>gwtp-mvp-shared-1.3-SNAPSHOT.jar</td>
+<td>29.49 kB</td>
+<td>29</td>
+<td>10</td>
+<td>1</td>
+<td>1.6</td>
+<td>debug</td></tr>
+<tr class="a">
+<td>gwtp-tester-1.3-SNAPSHOT.jar</td>
+<td>14.43 kB</td>
+<td>24</td>
+<td>14</td>
+<td>1</td>
+<td>1.6</td>
+<td>debug</td></tr>
+<tr class="b">
+<td>commons-collections-3.2.1.jar</td>
+<td>561.90 kB</td>
+<td>482</td>
+<td>458</td>
+<td>12</td>
+<td>1.2</td>
+<td>debug</td></tr>
+<tr class="a">
+<td>commons-lang-2.4.jar</td>
+<td>255.67 kB</td>
+<td>148</td>
+<td>127</td>
+<td>9</td>
+<td>1.2</td>
+<td>debug</td></tr>
+<tr class="b">
 <td>javax.inject-1.jar</td>
 <td>2.44 kB</td>
 <td>8</td>
@@ -840,6 +952,14 @@
 <td>1.5</td>
 <td>debug</td></tr>
 <tr class="a">
+<td>velocity-1.7.jar</td>
+<td>438.97 kB</td>
+<td>306</td>
+<td>270</td>
+<td>25</td>
+<td>1.4</td>
+<td>debug</td></tr>
+<tr class="b">
 <td>plexus-utils-3.0.15.jar</td>
 <td>233.35 kB</td>
 <td>128</td>
@@ -847,7 +967,7 @@
 <td>9</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>hamcrest-core-1.1.jar</td>
 <td>74.85 kB</td>
 <td>54</td>
@@ -855,7 +975,7 @@
 <td>3</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>json-20090211.jar</td>
 <td>44.87 kB</td>
 <td>21</td>
@@ -863,7 +983,7 @@
 <td>1</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>jukito-1.3.jar</td>
 <td>40.73 kB</td>
 <td>41</td>
@@ -871,7 +991,7 @@
 <td>1</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>mockito-core-1.9.5.jar</td>
 <td>1.43 MB</td>
 <td>1,258</td>
@@ -879,7 +999,7 @@
 <td>64</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>objenesis-1.0.jar</td>
 <td>27.90 kB</td>
 <td>45</td>
@@ -887,7 +1007,7 @@
 <td>7</td>
 <td>1.3</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <th>Total</th>
 <th>Size</th>
 <th>Entries</th>
@@ -895,38 +1015,38 @@
 <th>Packages</th>
 <th>JDK Rev</th>
 <th>Debug</th></tr>
-<tr class="b">
-<td>27</td>
-<td>66.17 MB</td>
-<td>33,649</td>
-<td>22,377</td>
-<td>849</td>
+<tr class="a">
+<td>32</td>
+<td>67.44 MB</td>
+<td>34,638</td>
+<td>23,256</td>
+<td>897</td>
 <td>1.6</td>
-<td>24</td></tr>
-<tr class="a">
-<td>compile: 14</td>
-<td>compile: 4.16 MB</td>
-<td>compile: 3,421</td>
-<td>compile: 2,668</td>
-<td>compile: 80</td>
-<td>-</td>
-<td>compile: 13</td></tr>
+<td>29</td></tr>
 <tr class="b">
-<td>test: 6</td>
-<td>test: 34.09 MB</td>
-<td>test: 19,605</td>
-<td>test: 14,400</td>
-<td>test: 562</td>
+<td>compile: 7</td>
+<td>compile: 1.56 MB</td>
+<td>compile: 1,185</td>
+<td>compile: 1,011</td>
+<td>compile: 70</td>
 <td>-</td>
-<td>test: 6</td></tr>
+<td>compile: 7</td></tr>
 <tr class="a">
-<td>provided: 7</td>
-<td>provided: 27.92 MB</td>
-<td>provided: 10,623</td>
-<td>provided: 5,309</td>
-<td>provided: 207</td>
+<td>test: 14</td>
+<td>test: 4.99 MB</td>
+<td>test: 4,281</td>
+<td>test: 2,919</td>
+<td>test: 146</td>
 <td>-</td>
-<td>provided: 5</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
+<td>test: 14</td></tr>
+<tr class="b">
+<td>provided: 11</td>
+<td>provided: 60.89 MB</td>
+<td>provided: 29,172</td>
+<td>provided: 19,326</td>
+<td>provided: 681</td>
+<td>-</td>
+<td>provided: 8</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
 <div class="section">
 <h2>Dependency Repository Locations<a name="Dependency_Repository_Locations"></a></h2>
 <table border="0" class="bodyTable">
@@ -937,7 +1057,7 @@
 <th>Snapshot</th></tr>
 <tr class="b">
 <td>apache.snapshots</td>
-<td><a class="externalLink" href="http://repository.apache.org/snapshots">http://repository.apache.org/snapshots</a></td>
+<td><a class="externalLink" href="http://people.apache.org/repo/m2-snapshot-repository">http://people.apache.org/repo/m2-snapshot-repository</a></td>
 <td>-</td>
 <td>Yes</td></tr>
 <tr class="a">
@@ -1038,6 +1158,26 @@
 <td>-</td>
 <td>-</td></tr>
 <tr class="b">
+<td>com.gwtplatform:gwtp-mvp-shared:jar:1.3-SNAPSHOT</td>
+<td>-</td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/snapshots/com/gwtplatform/gwtp-mvp-shared/1.3-SNAPSHOT/gwtp-mvp-shared-1.3-20140306.151522-1.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/snapshots" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td></tr>
+<tr class="a">
+<td>com.gwtplatform:gwtp-tester:jar:1.3-SNAPSHOT</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
+<tr class="b">
+<td>commons-collections:commons-collections:jar:3.2.1</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
+<td>commons-lang:commons-lang:jar:2.4</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.4/commons-lang-2.4.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
 <td>javax.inject:javax.inject:jar:1</td>
 <td>-</td>
 <td>-</td>
@@ -1063,45 +1203,50 @@
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/3.1.1/maven-artifact-3.1.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
+<td>org.apache.velocity:velocity:jar:1.7</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/velocity/velocity/1.7/velocity-1.7.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
 <td>org.codehaus.plexus:plexus-utils:jar:3.0.15</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.15/plexus-utils-3.0.15.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.hamcrest:hamcrest-core:jar:1.1</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.json:json:jar:20090211</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/json/json/20090211/json-20090211.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.jukito:jukito:jar:1.3</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/jukito/jukito/1.3/jukito-1.3.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.mockito:mockito-core:jar:1.9.5</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/mockito/mockito-core/1.9.5/mockito-core-1.9.5.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.objenesis:objenesis:jar:1.0</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/objenesis/objenesis/1.0/objenesis-1.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <th>Total</th>
 <th>apache.snapshots</th>
 <th>sonatype-nexus-snapshots</th>
 <th>central</th></tr>
-<tr class="b">
-<td>27 (compile: 14, test: 6, provided: 7)</td>
+<tr class="a">
+<td>32 (compile: 7, test: 14, provided: 11)</td>
 <td>0</td>
-<td>2</td>
-<td>20</td></tr></table></div>
+<td>3</td>
+<td>23</td></tr></table></div>
       </div>
     </div>
     <div class="clear">
