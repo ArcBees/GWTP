@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -11,6 +12,10 @@
     <artifactId>gwtp-dispatch-rpc-test</artifactId>
     <name>Testing class for gwtp-dispatch-rpc projects</name>
     <description>This is only meant for internal testing and should never be used outside of GWTP.</description>
+
+    <properties>
+        <maven-site-plugin.skip>true</maven-site-plugin.skip>
+    </properties>
 
     <dependencies>
         <dependency>
