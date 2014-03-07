@@ -13,6 +13,8 @@
     <name>GWTP all (compound jar)</name>
 
     <properties>
+        <maven-site-plugin.skip>true</maven-site-plugin.skip>
+
         <maven-assembly-plugin.version>2.2</maven-assembly-plugin.version>
     </properties>
 
