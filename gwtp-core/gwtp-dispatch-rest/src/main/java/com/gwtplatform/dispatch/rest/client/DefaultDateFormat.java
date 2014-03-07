@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,20 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.rest;
+package com.gwtplatform.dispatch.rest.client;
 
-import javax.inject.Singleton;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.BindingAnnotation;
 
-public class RestModule extends AbstractModule {
-    @Override
-    protected void configure() {
-        bind(CarResource.class);
-        bind(ManufacturerResource.class);
-        bind(SessionResource.class);
-        bind(RatingResource.class);
-        bind(StatisticsResource.class);
-        bind(JacksonProvider.class).in(Singleton.class);
-    }
+/**
+ * Binding annotation used to inject the default pattern for formatting dates.
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface DefaultDateFormat {
 }
