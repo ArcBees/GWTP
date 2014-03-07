@@ -25,11 +25,8 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * Integration test for various components of GWTP's MVP module.
- * 
- * @author Philippe Beaudoin
  */
 public class MvpGwtTestInSuite extends GWTTestCase {
-
     GinjectorTestUtilGwt ginjector;
     MainPresenterTestUtilGwt presenter;
 
@@ -59,24 +56,23 @@ public class MvpGwtTestInSuite extends GWTTestCase {
      */
     public void testMultipleTokens() {
         ginjector.getPlaceManager().revealDefaultPlace();
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
                 assertTrue(ginjector.getMainPresenter().get().isVisible());
                 ginjector.getPlaceManager().revealPlace(new PlaceRequest.Builder().nameToken("admin").build());
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     @Override
                     public void execute() {
                         assertFalse(ginjector.getMainPresenter().get().isVisible());
                         assertTrue(ginjector.getAdminPresenter().get().isVisible());
                         ginjector.getPlaceManager().revealDefaultPlace();
-                        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
+                        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                             @Override
                             public void execute() {
-
                                 assertTrue(ginjector.getMainPresenter().get().isVisible());
                                 assertFalse(ginjector.getAdminPresenter().get().isVisible());
                                 ginjector.getPlaceManager().revealPlace(

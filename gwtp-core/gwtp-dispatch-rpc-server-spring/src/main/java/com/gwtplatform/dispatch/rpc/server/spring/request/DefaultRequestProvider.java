@@ -25,12 +25,8 @@ import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 
 /**
  * Request provider.
- * 
- * @author David Ignjic
- *
  */
 public class DefaultRequestProvider implements RequestProvider {
-
     public DefaultRequestProvider() {
     }
 
@@ -39,5 +35,4 @@ public class DefaultRequestProvider implements RequestProvider {
     public HttpServletRequest getServletRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
-
 }
