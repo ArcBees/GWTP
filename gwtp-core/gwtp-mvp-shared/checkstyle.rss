@@ -20,7 +20,7 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>GWTP MVP shared - Checkstyle report</title>
-    <link>https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared/</link>
+    <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared/</link>
     <description>GWTP MVP shared - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
@@ -30,9 +30,9 @@ under the License.
              Warnings: 0,
              Infos: 1
       </title>
-            <link>https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html</link>
+            <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html</link>
       <description>
-        <p>Click <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/ParameterTokenFormatter.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/ParameterTokenFormatter.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequest.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequest.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatterTest.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatterTest.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatterTest.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatterTest.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatException.java">com/gwtplatform/mvp/shared/proxy/TokenFormatException.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatException.java">com/gwtplatform/mvp/shared/proxy/TokenFormatException.java</a>
                 </td>
                 <td>
                   1
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatter.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter.java">com/gwtplatform/mvp/shared/proxy/RouteTokenFormatter.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatter.java">com/gwtplatform/mvp/shared/proxy/TokenFormatter.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.TokenFormatter.java">com/gwtplatform/mvp/shared/proxy/TokenFormatter.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry.java">com/gwtplatform/mvp/shared/proxy/PlaceTokenRegistry.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry.java">com/gwtplatform/mvp/shared/proxy/PlaceTokenRegistry.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequestTest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequestTest.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-shared//checkstyle.html#com.gwtplatform.mvp.shared.proxy.PlaceRequestTest.java">com/gwtplatform/mvp/shared/proxy/PlaceRequestTest.java</a>
                 </td>
                 <td>
                   0

@@ -20,7 +20,7 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>GWTP Crawler - Checkstyle report</title>
-    <link>https://gwtp.arcbees.com/gwtp-core/gwtp-crawler/</link>
+    <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-crawler/</link>
     <description>GWTP Crawler - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
@@ -30,9 +30,9 @@ under the License.
              Warnings: 0,
              Infos: 0
       </title>
-            <link>https://gwtp.arcbees.com/gwtp-core/gwtp-crawler//checkstyle.html</link>
+            <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-crawler//checkstyle.html</link>
       <description>
-        <p>Click <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-crawler//checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-crawler//checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-crawler//checkstyle.html#com.gwtplatform.crawler.server.CrawlFilter.java">com/gwtplatform/crawler/server/CrawlFilter.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-crawler//checkstyle.html#com.gwtplatform.crawler.server.CrawlFilter.java">com/gwtplatform/crawler/server/CrawlFilter.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-crawler//checkstyle.html#com.gwtplatform.crawler.server.ServiceKey.java">com/gwtplatform/crawler/server/ServiceKey.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-crawler//checkstyle.html#com.gwtplatform.crawler.server.ServiceKey.java">com/gwtplatform/crawler/server/ServiceKey.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-crawler//checkstyle.html#com.gwtplatform.crawler.server.ServiceUrl.java">com/gwtplatform/crawler/server/ServiceUrl.java</a>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-crawler//checkstyle.html#com.gwtplatform.crawler.server.ServiceUrl.java">com/gwtplatform/crawler/server/ServiceUrl.java</a>
                 </td>
                 <td>
                   0
