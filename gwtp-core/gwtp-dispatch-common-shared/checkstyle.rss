@@ -20,19 +20,19 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>gwtp-dispatch-common-shared - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared</link>
+    <link>https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared/</link>
     <description>gwtp-dispatch-common-shared - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2010 - 2014 ArcBees</copyright>
+    <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
       <title>File: 6,
              Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html</link>
+            <link>https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.HasSecured.java">com/gwtplatform/dispatch/shared/HasSecured.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html#com.gwtplatform.dispatch.shared.HasSecured.java">com/gwtplatform/dispatch/shared/HasSecured.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.SecurityCookieAccessor.java">com/gwtplatform/dispatch/shared/SecurityCookieAccessor.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html#com.gwtplatform.dispatch.shared.SecurityCookieAccessor.java">com/gwtplatform/dispatch/shared/SecurityCookieAccessor.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.ActionException.java">com/gwtplatform/dispatch/shared/ActionException.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html#com.gwtplatform.dispatch.shared.ActionException.java">com/gwtplatform/dispatch/shared/ActionException.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.SecurityCookie.java">com/gwtplatform/dispatch/shared/SecurityCookie.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html#com.gwtplatform.dispatch.shared.SecurityCookie.java">com/gwtplatform/dispatch/shared/SecurityCookie.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.DispatchRequest.java">com/gwtplatform/dispatch/shared/DispatchRequest.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html#com.gwtplatform.dispatch.shared.DispatchRequest.java">com/gwtplatform/dispatch/shared/DispatchRequest.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-common-shared/checkstyle.html#com.gwtplatform.dispatch.shared.TypedAction.java">com/gwtplatform/dispatch/shared/TypedAction.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-common-shared//checkstyle.html#com.gwtplatform.dispatch.shared.TypedAction.java">com/gwtplatform/dispatch/shared/TypedAction.java</a>
                 </td>
                 <td>
                   0

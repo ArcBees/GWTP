@@ -20,19 +20,19 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>GWTP REST-Dispatch - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest</link>
+    <link>https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest/</link>
     <description>GWTP REST-Dispatch - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2010 - 2014 ArcBees</copyright>
+    <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
       <title>File: 73,
              Errors: 0,
              Warnings: 1,
              Infos: 1
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html</link>
+            <link>https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.NoXsrfHeader.java">com/gwtplatform/dispatch/rest/client/NoXsrfHeader.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.NoXsrfHeader.java">com/gwtplatform/dispatch/rest/client/NoXsrfHeader.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestDispatch.java">com/gwtplatform/dispatch/rest/shared/RestDispatch.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestDispatch.java">com/gwtplatform/dispatch/rest/shared/RestDispatch.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ServiceBinding.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ServiceBinding.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/RestRequestBuilderFactory.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/RestRequestBuilderFactory.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModuleBuilder.java">com/gwtplatform/dispatch/rest/client/gin/RestDispatchAsyncModuleBuilder.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModuleBuilder.java">com/gwtplatform/dispatch/rest/client/gin/RestDispatchAsyncModuleBuilder.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchCall.java">com/gwtplatform/dispatch/rest/client/RestDispatchCall.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchCall.java">com/gwtplatform/dispatch/rest/client/RestDispatchCall.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/ServiceGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/ServiceGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.JacksonMapperProviderGenerator.java">com/gwtplatform/dispatch/rest/rebind/JacksonMapperProviderGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.JacksonMapperProviderGenerator.java">com/gwtplatform/dispatch/rest/rebind/JacksonMapperProviderGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +158,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatcherController.java">com/gwtplatform/dispatch/rest/client/RestDispatcherController.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatcherController.java">com/gwtplatform/dispatch/rest/client/RestDispatcherController.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.MetadataType.java">com/gwtplatform/dispatch/rest/shared/MetadataType.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.shared.MetadataType.java">com/gwtplatform/dispatch/rest/shared/MetadataType.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.GlobalQueryParams.java">com/gwtplatform/dispatch/rest/client/GlobalQueryParams.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.GlobalQueryParams.java">com/gwtplatform/dispatch/rest/client/GlobalQueryParams.java</a>
                 </td>
                 <td>
                   0
@@ -200,7 +200,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.velocity.properties">com/gwtplatform/dispatch/rest/rebind/velocity.properties</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.velocity.properties">com/gwtplatform/dispatch/rest/rebind/velocity.properties</a>
                 </td>
                 <td>
                   0
@@ -214,7 +214,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ResourceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ResourceBinding.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ResourceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ResourceBinding.java</a>
                 </td>
                 <td>
                   0
@@ -228,7 +228,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestCallback.java">com/gwtplatform/dispatch/rest/shared/RestCallback.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestCallback.java">com/gwtplatform/dispatch/rest/shared/RestCallback.java</a>
                 </td>
                 <td>
                   0
@@ -242,7 +242,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.SecuredRestAction.java">com/gwtplatform/dispatch/rest/client/SecuredRestAction.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.SecuredRestAction.java">com/gwtplatform/dispatch/rest/client/SecuredRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -256,7 +256,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ActionGenerator.java">com/gwtplatform/dispatch/rest/rebind/ActionGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ActionGenerator.java">com/gwtplatform/dispatch/rest/rebind/ActionGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -270,7 +270,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.UnsecuredRestAction.java">com/gwtplatform/dispatch/rest/client/UnsecuredRestAction.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.UnsecuredRestAction.java">com/gwtplatform/dispatch/rest/client/UnsecuredRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -284,7 +284,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ActionMetadataProviderGenerator.java">com/gwtplatform/dispatch/rest/rebind/ActionMetadataProviderGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ActionMetadataProviderGenerator.java">com/gwtplatform/dispatch/rest/rebind/ActionMetadataProviderGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -298,7 +298,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.HttpMethod.java">com/gwtplatform/dispatch/rest/shared/HttpMethod.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.shared.HttpMethod.java">com/gwtplatform/dispatch/rest/shared/HttpMethod.java</a>
                 </td>
                 <td>
                   0
@@ -312,7 +312,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.HeaderParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/HeaderParamValueResolver.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.HeaderParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/HeaderParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -326,7 +326,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.AbstractJacksonMapperProvider.java">com/gwtplatform/dispatch/rest/client/serialization/AbstractJacksonMapperProvider.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.AbstractJacksonMapperProvider.java">com/gwtplatform/dispatch/rest/client/serialization/AbstractJacksonMapperProvider.java</a>
                 </td>
                 <td>
                   0
@@ -340,7 +340,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.PathParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/PathParamValueResolver.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.PathParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/PathParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -354,7 +354,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.QueryParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/QueryParamValueResolver.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.QueryParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/QueryParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -368,7 +368,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent.java">com/gwtplatform/dispatch/rest/rebind/event/RegisterMetadataEvent.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent.java">com/gwtplatform/dispatch/rest/rebind/event/RegisterMetadataEvent.java</a>
                 </td>
                 <td>
                   0
@@ -382,7 +382,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializerTest.java">com/gwtplatform/dispatch/rest/client/serialization/MultimapJsonSerializerTest.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializerTest.java">com/gwtplatform/dispatch/rest/client/serialization/MultimapJsonSerializerTest.java</a>
                 </td>
                 <td>
                   0
@@ -396,7 +396,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil.java">com/gwtplatform/dispatch/rest/rebind/util/GeneratorUtil.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil.java">com/gwtplatform/dispatch/rest/rebind/util/GeneratorUtil.java</a>
                 </td>
                 <td>
                   0
@@ -410,7 +410,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestApplicationPath.java">com/gwtplatform/dispatch/rest/client/RestApplicationPath.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestApplicationPath.java">com/gwtplatform/dispatch/rest/client/RestApplicationPath.java</a>
                 </td>
                 <td>
                   0
@@ -424,7 +424,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory.java">com/gwtplatform/dispatch/rest/client/RestDispatchCallFactory.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory.java">com/gwtplatform/dispatch/rest/client/RestDispatchCallFactory.java</a>
                 </td>
                 <td>
                   0
@@ -438,7 +438,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.ResponseWrapper.java">com/gwtplatform/dispatch/rest/client/ResponseWrapper.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.ResponseWrapper.java">com/gwtplatform/dispatch/rest/client/ResponseWrapper.java</a>
                 </td>
                 <td>
                   0
@@ -452,7 +452,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.MethodCall.java">com/gwtplatform/dispatch/rest/rebind/type/MethodCall.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.MethodCall.java">com/gwtplatform/dispatch/rest/rebind/type/MethodCall.java</a>
                 </td>
                 <td>
                   0
@@ -466,7 +466,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestParameter.java">com/gwtplatform/dispatch/rest/shared/RestParameter.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestParameter.java">com/gwtplatform/dispatch/rest/shared/RestParameter.java</a>
                 </td>
                 <td>
                   0
@@ -480,7 +480,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer.java">com/gwtplatform/dispatch/rest/client/serialization/MultimapJsonSerializer.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer.java">com/gwtplatform/dispatch/rest/client/serialization/MultimapJsonSerializer.java</a>
                 </td>
                 <td>
                   0
@@ -494,7 +494,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RequestTimeout.java">com/gwtplatform/dispatch/rest/client/RequestTimeout.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RequestTimeout.java">com/gwtplatform/dispatch/rest/client/RequestTimeout.java</a>
                 </td>
                 <td>
                   0
@@ -508,7 +508,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.AbstractServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/AbstractServiceGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.AbstractServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/AbstractServiceGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -522,7 +522,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.XsrfHeaderName.java">com/gwtplatform/dispatch/rest/client/XsrfHeaderName.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.XsrfHeaderName.java">com/gwtplatform/dispatch/rest/client/XsrfHeaderName.java</a>
                 </td>
                 <td>
                   0
@@ -536,7 +536,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.java">com/gwtplatform/dispatch/rest/client/gin/RestDispatchAsyncModule.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.java">com/gwtplatform/dispatch/rest/client/gin/RestDispatchAsyncModule.java</a>
                 </td>
                 <td>
                   1
@@ -550,7 +550,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.VelocityProperties.java">com/gwtplatform/dispatch/rest/rebind/VelocityProperties.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.VelocityProperties.java">com/gwtplatform/dispatch/rest/rebind/VelocityProperties.java</a>
                 </td>
                 <td>
                   0
@@ -564,7 +564,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions.java">com/gwtplatform/dispatch/rest/rebind/type/ServiceDefinitions.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions.java">com/gwtplatform/dispatch/rest/rebind/type/ServiceDefinitions.java</a>
                 </td>
                 <td>
                   0
@@ -578,7 +578,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractRestAction.java">com/gwtplatform/dispatch/rest/client/AbstractRestAction.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractRestAction.java">com/gwtplatform/dispatch/rest/client/AbstractRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -592,7 +592,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory.java">com/gwtplatform/dispatch/rest/client/DefaultRestDispatchCallFactory.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory.java">com/gwtplatform/dispatch/rest/client/DefaultRestDispatchCallFactory.java</a>
                 </td>
                 <td>
                   0
@@ -606,7 +606,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization.java">com/gwtplatform/dispatch/rest/client/serialization/JsonSerialization.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization.java">com/gwtplatform/dispatch/rest/client/serialization/JsonSerialization.java</a>
                 </td>
                 <td>
                   0
@@ -620,7 +620,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestService.java">com/gwtplatform/dispatch/rest/shared/RestService.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestService.java">com/gwtplatform/dispatch/rest/shared/RestService.java</a>
                 </td>
                 <td>
                   0
@@ -634,7 +634,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.GeneratorFactory.java">com/gwtplatform/dispatch/rest/rebind/GeneratorFactory.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.GeneratorFactory.java">com/gwtplatform/dispatch/rest/rebind/GeneratorFactory.java</a>
                 </td>
                 <td>
                   0
@@ -648,7 +648,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.FormParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/FormParamValueResolver.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.FormParamValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/FormParamValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -662,7 +662,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.AnnotationValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/AnnotationValueResolver.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.util.AnnotationValueResolver.java">com/gwtplatform/dispatch/rest/rebind/util/AnnotationValueResolver.java</a>
                 </td>
                 <td>
                   0
@@ -676,7 +676,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestResponseDeserializer.java">com/gwtplatform/dispatch/rest/client/RestResponseDeserializer.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestResponseDeserializer.java">com/gwtplatform/dispatch/rest/client/RestResponseDeserializer.java</a>
                 </td>
                 <td>
                   0
@@ -690,7 +690,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractActionMetadataProvider.java">com/gwtplatform/dispatch/rest/client/AbstractActionMetadataProvider.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractActionMetadataProvider.java">com/gwtplatform/dispatch/rest/client/AbstractActionMetadataProvider.java</a>
                 </td>
                 <td>
                   0
@@ -704,7 +704,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider.java">com/gwtplatform/dispatch/rest/client/serialization/JacksonMapperProvider.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider.java">com/gwtplatform/dispatch/rest/client/serialization/JacksonMapperProvider.java</a>
                 </td>
                 <td>
                   0
@@ -718,7 +718,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent.java">com/gwtplatform/dispatch/rest/rebind/event/RegisterSerializableTypeEvent.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent.java">com/gwtplatform/dispatch/rest/rebind/event/RegisterSerializableTypeEvent.java</a>
                 </td>
                 <td>
                   0
@@ -732,7 +732,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.RebindModule.java">com/gwtplatform/dispatch/rest/rebind/RebindModule.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.RebindModule.java">com/gwtplatform/dispatch/rest/rebind/RebindModule.java</a>
                 </td>
                 <td>
                   0
@@ -746,7 +746,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DateFormat.java">com/gwtplatform/dispatch/rest/client/DateFormat.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.DateFormat.java">com/gwtplatform/dispatch/rest/client/DateFormat.java</a>
                 </td>
                 <td>
                   0
@@ -760,7 +760,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.ActionMetadataProvider.java">com/gwtplatform/dispatch/rest/client/ActionMetadataProvider.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.ActionMetadataProvider.java">com/gwtplatform/dispatch/rest/client/ActionMetadataProvider.java</a>
                 </td>
                 <td>
                   0
@@ -774,7 +774,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchAsync.java">com/gwtplatform/dispatch/rest/client/RestDispatchAsync.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestDispatchAsync.java">com/gwtplatform/dispatch/rest/client/RestDispatchAsync.java</a>
                 </td>
                 <td>
                   0
@@ -788,7 +788,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.ExposedRestAction.java">com/gwtplatform/dispatch/rest/client/ExposedRestAction.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.ExposedRestAction.java">com/gwtplatform/dispatch/rest/client/ExposedRestAction.java</a>
                 </td>
                 <td>
                   0
@@ -802,7 +802,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.JacksonMapperGenerator.java">com/gwtplatform/dispatch/rest/rebind/JacksonMapperGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.JacksonMapperGenerator.java">com/gwtplatform/dispatch/rest/rebind/JacksonMapperGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -816,7 +816,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultDateFormat.java">com/gwtplatform/dispatch/rest/client/DefaultDateFormat.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultDateFormat.java">com/gwtplatform/dispatch/rest/client/DefaultDateFormat.java</a>
                 </td>
                 <td>
                   0
@@ -830,7 +830,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestParameterBuilder.java">com/gwtplatform/dispatch/rest/client/gin/RestParameterBuilder.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.gin.RestParameterBuilder.java">com/gwtplatform/dispatch/rest/client/gin/RestParameterBuilder.java</a>
                 </td>
                 <td>
                   0
@@ -844,7 +844,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.VelocityGenerator.java">com/gwtplatform/dispatch/rest/rebind/VelocityGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.VelocityGenerator.java">com/gwtplatform/dispatch/rest/rebind/VelocityGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -858,7 +858,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.GlobalHeaderParams.java">com/gwtplatform/dispatch/rest/client/GlobalHeaderParams.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.GlobalHeaderParams.java">com/gwtplatform/dispatch/rest/client/GlobalHeaderParams.java</a>
                 </td>
                 <td>
                   0
@@ -872,7 +872,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractRestDispatcherController.java">com/gwtplatform/dispatch/rest/client/AbstractRestDispatcherController.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.AbstractRestDispatcherController.java">com/gwtplatform/dispatch/rest/client/AbstractRestDispatcherController.java</a>
                 </td>
                 <td>
                   0
@@ -886,7 +886,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer.java">com/gwtplatform/dispatch/rest/client/DefaultRestResponseDeserializer.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer.java">com/gwtplatform/dispatch/rest/client/DefaultRestResponseDeserializer.java</a>
                 </td>
                 <td>
                   0
@@ -900,7 +900,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/DefaultRestRequestBuilderFactory.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/DefaultRestRequestBuilderFactory.java</a>
                 </td>
                 <td>
                   0
@@ -914,7 +914,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.Serialization.java">com/gwtplatform/dispatch/rest/client/serialization/Serialization.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.serialization.Serialization.java">com/gwtplatform/dispatch/rest/client/serialization/Serialization.java</a>
                 </td>
                 <td>
                   0
@@ -928,7 +928,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.GinModuleGenerator.java">com/gwtplatform/dispatch/rest/rebind/GinModuleGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.GinModuleGenerator.java">com/gwtplatform/dispatch/rest/rebind/GinModuleGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -942,7 +942,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ChildServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/ChildServiceGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.ChildServiceGenerator.java">com/gwtplatform/dispatch/rest/rebind/ChildServiceGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -956,7 +956,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ChildServiceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ChildServiceBinding.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ChildServiceBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ChildServiceBinding.java</a>
                 </td>
                 <td>
                   0
@@ -970,7 +970,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.RegisterMetadataHolder.java">com/gwtplatform/dispatch/rest/rebind/type/RegisterMetadataHolder.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.RegisterMetadataHolder.java">com/gwtplatform/dispatch/rest/rebind/type/RegisterMetadataHolder.java</a>
                 </td>
                 <td>
                   0
@@ -984,7 +984,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.HttpRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/HttpRequestBuilderFactory.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.HttpRequestBuilderFactory.java">com/gwtplatform/dispatch/rest/client/HttpRequestBuilderFactory.java</a>
                 </td>
                 <td>
                   0
@@ -998,7 +998,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator.java">com/gwtplatform/dispatch/rest/rebind/AbstractVelocityGenerator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator.java">com/gwtplatform/dispatch/rest/rebind/AbstractVelocityGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -1012,7 +1012,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.Logger.java">com/gwtplatform/dispatch/rest/rebind/Logger.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.Logger.java">com/gwtplatform/dispatch/rest/rebind/Logger.java</a>
                 </td>
                 <td>
                   0
@@ -1026,7 +1026,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ActionBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ActionBinding.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.rebind.type.ActionBinding.java">com/gwtplatform/dispatch/rest/rebind/type/ActionBinding.java</a>
                 </td>
                 <td>
                   0
@@ -1040,7 +1040,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactoryTest.java">com/gwtplatform/dispatch/rest/client/DefaultRestRequestBuilderFactoryTest.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactoryTest.java">com/gwtplatform/dispatch/rest/client/DefaultRestRequestBuilderFactoryTest.java</a>
                 </td>
                 <td>
                   0
@@ -1054,7 +1054,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rest/checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestAction.java">com/gwtplatform/dispatch/rest/shared/RestAction.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.shared.RestAction.java">com/gwtplatform/dispatch/rest/shared/RestAction.java</a>
                 </td>
                 <td>
                   0

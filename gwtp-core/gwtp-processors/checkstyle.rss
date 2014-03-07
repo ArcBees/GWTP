@@ -20,19 +20,19 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>GWTP Annotation Processors - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-processors</link>
+    <link>https://gwtp.arcbees.com/gwtp-core/gwtp-processors/</link>
     <description>GWTP Annotation Processors - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2010 - 2014 ArcBees</copyright>
+    <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
       <title>File: 36,
              Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html</link>
+            <link>https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/ClassGenerationHelper.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ClassGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/ClassGenerationHelper.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.FooChanged.java">com/gwtplatform/dispatch/annotation/FooChanged.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.FooChanged.java">com/gwtplatform/dispatch/annotation/FooChanged.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Out.java">com/gwtplatform/dispatch/annotation/Out.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Out.java">com/gwtplatform/dispatch/annotation/Out.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProcessor.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProxyProcessor.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenProxyProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.DetailProxy.java">com/gwtplatform/dispatch/annotation/DetailProxy.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.DetailProxy.java">com/gwtplatform/dispatch/annotation/DetailProxy.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.In.java">com/gwtplatform/dispatch/annotation/In.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.In.java">com/gwtplatform/dispatch/annotation/In.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenDto.java">com/gwtplatform/dispatch/annotation/GenDto.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.GenDto.java">com/gwtplatform/dispatch/annotation/GenDto.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +158,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.GenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/GenerationHelper.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.helper.GenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/GenerationHelper.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDispatchProcessor.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDispatchProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenProxy.java">com/gwtplatform/dispatch/annotation/GenProxy.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.GenProxy.java">com/gwtplatform/dispatch/annotation/GenProxy.java</a>
                 </td>
                 <td>
                   0
@@ -200,7 +200,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.ProxyAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/ProxyAnnotationProcessingTest.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.ProxyAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/ProxyAnnotationProcessingTest.java</a>
                 </td>
                 <td>
                   0
@@ -214,7 +214,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Order.java">com/gwtplatform/dispatch/annotation/Order.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Order.java">com/gwtplatform/dispatch/annotation/Order.java</a>
                 </td>
                 <td>
                   0
@@ -228,7 +228,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.RetrieveFoo.java">com/gwtplatform/dispatch/annotation/RetrieveFoo.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.RetrieveFoo.java">com/gwtplatform/dispatch/annotation/RetrieveFoo.java</a>
                 </td>
                 <td>
                   0
@@ -242,7 +242,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/BuilderGenerationHelper.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.helper.BuilderGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/BuilderGenerationHelper.java</a>
                 </td>
                 <td>
                   0
@@ -256,7 +256,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenEvent.java">com/gwtplatform/dispatch/annotation/GenEvent.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.GenEvent.java">com/gwtplatform/dispatch/annotation/GenEvent.java</a>
                 </td>
                 <td>
                   0
@@ -270,7 +270,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.RetrieveBar.java">com/gwtplatform/dispatch/annotation/RetrieveBar.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.RetrieveBar.java">com/gwtplatform/dispatch/annotation/RetrieveBar.java</a>
                 </td>
                 <td>
                   0
@@ -284,7 +284,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.EventAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/EventAnnotationProcessingTest.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.EventAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/EventAnnotationProcessingTest.java</a>
                 </td>
                 <td>
                   0
@@ -298,7 +298,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Address.java">com/gwtplatform/dispatch/annotation/Address.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Address.java">com/gwtplatform/dispatch/annotation/Address.java</a>
                 </td>
                 <td>
                   0
@@ -312,7 +312,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.PersonName.java">com/gwtplatform/dispatch/annotation/PersonName.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.PersonName.java">com/gwtplatform/dispatch/annotation/PersonName.java</a>
                 </td>
                 <td>
                   0
@@ -326,7 +326,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenEventProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenEventProcessor.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenEventProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenEventProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -340,7 +340,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.DispatchAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/DispatchAnnotationProcessingTest.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.DispatchAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/DispatchAnnotationProcessingTest.java</a>
                 </td>
                 <td>
                   0
@@ -354,7 +354,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Person.java">com/gwtplatform/dispatch/annotation/Person.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Person.java">com/gwtplatform/dispatch/annotation/Person.java</a>
                 </td>
                 <td>
                   0
@@ -368,7 +368,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDtoProcessor.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor.java">com/gwtplatform/dispatch/annotation/processor/GenDtoProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -382,7 +382,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.GenDispatch.java">com/gwtplatform/dispatch/annotation/GenDispatch.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.GenDispatch.java">com/gwtplatform/dispatch/annotation/GenDispatch.java</a>
                 </td>
                 <td>
                   0
@@ -396,7 +396,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Foo.java">com/gwtplatform/dispatch/annotation/Foo.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Foo.java">com/gwtplatform/dispatch/annotation/Foo.java</a>
                 </td>
                 <td>
                   0
@@ -410,7 +410,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ReflectionHelper.java">com/gwtplatform/dispatch/annotation/helper/ReflectionHelper.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.helper.ReflectionHelper.java">com/gwtplatform/dispatch/annotation/helper/ReflectionHelper.java</a>
                 </td>
                 <td>
                   0
@@ -424,7 +424,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.EmployeeLocator.java">com/gwtplatform/dispatch/annotation/EmployeeLocator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.EmployeeLocator.java">com/gwtplatform/dispatch/annotation/EmployeeLocator.java</a>
                 </td>
                 <td>
                   0
@@ -438,7 +438,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Employee.java">com/gwtplatform/dispatch/annotation/Employee.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Employee.java">com/gwtplatform/dispatch/annotation/Employee.java</a>
                 </td>
                 <td>
                   0
@@ -452,7 +452,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/InterfaceGenerationHelper.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.helper.InterfaceGenerationHelper.java">com/gwtplatform/dispatch/annotation/helper/InterfaceGenerationHelper.java</a>
                 </td>
                 <td>
                   0
@@ -466,7 +466,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxy.java">com/gwtplatform/dispatch/annotation/UseProxy.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxy.java">com/gwtplatform/dispatch/annotation/UseProxy.java</a>
                 </td>
                 <td>
                   0
@@ -480,7 +480,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Detail.java">com/gwtplatform/dispatch/annotation/Detail.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Detail.java">com/gwtplatform/dispatch/annotation/Detail.java</a>
                 </td>
                 <td>
                   0
@@ -494,7 +494,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.HasThing.java">com/gwtplatform/dispatch/annotation/HasThing.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.HasThing.java">com/gwtplatform/dispatch/annotation/HasThing.java</a>
                 </td>
                 <td>
                   0
@@ -508,7 +508,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxyName.java">com/gwtplatform/dispatch/annotation/UseProxyName.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.UseProxyName.java">com/gwtplatform/dispatch/annotation/UseProxyName.java</a>
                 </td>
                 <td>
                   0
@@ -522,7 +522,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.DtoAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/DtoAnnotationProcessingTest.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.DtoAnnotationProcessingTest.java">com/gwtplatform/dispatch/annotation/DtoAnnotationProcessingTest.java</a>
                 </td>
                 <td>
                   0
@@ -536,7 +536,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-processors/checkstyle.html#com.gwtplatform.dispatch.annotation.Optional.java">com/gwtplatform/dispatch/annotation/Optional.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-processors//checkstyle.html#com.gwtplatform.dispatch.annotation.Optional.java">com/gwtplatform/dispatch/annotation/Optional.java</a>
                 </td>
                 <td>
                   0

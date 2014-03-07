@@ -20,19 +20,19 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>GWTP RPC-Dispatch Server, Spring implementation - Checkstyle report</title>
-    <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring</link>
+    <link>https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring/</link>
     <description>GWTP RPC-Dispatch Server, Spring implementation - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2010 - 2014 ArcBees</copyright>
+    <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
       <title>File: 42,
              Errors: 0,
              Warnings: 0,
-             Infos: 15
+             Infos: 10
       </title>
-            <link>http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html</link>
+            <link>https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.utils.RequestProvider.java">com/gwtplatform/dispatch/server/spring/utils/RequestProvider.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.utils.RequestProvider.java">com/gwtplatform/dispatch/server/spring/utils/RequestProvider.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker.java">com/gwtplatform/dispatch/rpc/server/spring/actionhandlervalidator/ActionHandlerValidatorLinker.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker.java">com/gwtplatform/dispatch/rpc/server/spring/actionhandlervalidator/ActionHandlerValidatorLinker.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.DispatchModule.java">com/gwtplatform/dispatch/rpc/server/spring/DispatchModule.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.DispatchModule.java">com/gwtplatform/dispatch/rpc/server/spring/DispatchModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils.java">com/gwtplatform/dispatch/rpc/server/spring/utils/SpringUtils.java</a>
                 </td>
                 <td>
                   1
@@ -88,7 +102,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils.java">com/gwtplatform/dispatch/rpc/server/spring/utils/SpringUtils.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.shared.action.TestAnnotatedAction.java">com/gwtplatform/dispatch/rpc/shared/action/TestAnnotatedAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/rpc/server/spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.java</a>
                 </td>
                 <td>
                   1
@@ -102,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.shared.action.TestAnnotatedAction.java">com/gwtplatform/dispatch/rpc/shared/action/TestAnnotatedAction.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.configuration.DefaultModule.java">com/gwtplatform/dispatch/server/spring/configuration/DefaultModule.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +144,119 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/rpc/server/spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.LoggerFactoryBean.java">com/gwtplatform/dispatch/server/spring/LoggerFactoryBean.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionvalidator.DefaultActionValidator.java">com/gwtplatform/dispatch/rpc/server/spring/actionvalidator/DefaultActionValidator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator.java">com/gwtplatform/dispatch/server/spring/actionvalidator/DefaultActionValidator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.DispatchServiceImpl.java">com/gwtplatform/dispatch/rpc/server/spring/DispatchServiceImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchModule.java">com/gwtplatform/dispatch/server/spring/DispatchModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.request.DefaultRequestProvider.java">com/gwtplatform/dispatch/rpc/server/spring/request/DefaultRequestProvider.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.configuration.DefaultModule.java">com/gwtplatform/dispatch/rpc/server/spring/configuration/DefaultModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.utils.RequestProvider.java">com/gwtplatform/dispatch/rpc/server/spring/utils/RequestProvider.java</a>
                 </td>
                 <td>
                   1
@@ -130,77 +270,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.configuration.DefaultModule.java">com/gwtplatform/dispatch/server/spring/configuration/DefaultModule.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.LoggerFactoryBean.java">com/gwtplatform/dispatch/server/spring/LoggerFactoryBean.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionvalidator.DefaultActionValidator.java">com/gwtplatform/dispatch/rpc/server/spring/actionvalidator/DefaultActionValidator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator.java">com/gwtplatform/dispatch/server/spring/actionvalidator/DefaultActionValidator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.DispatchServiceImpl.java">com/gwtplatform/dispatch/rpc/server/spring/DispatchServiceImpl.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/rpc/server/spring/HttpSessionSecurityCookieFilter.java</a>
                 </td>
                 <td>
                   1
@@ -214,7 +284,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchModule.java">com/gwtplatform/dispatch/server/spring/DispatchModule.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.annotation.RegisterActionHandler.java">com/gwtplatform/dispatch/rpc/server/spring/annotation/RegisterActionHandler.java</a>
                 </td>
                 <td>
                   0
@@ -228,7 +298,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.request.DefaultRequestProvider.java">com/gwtplatform/dispatch/rpc/server/spring/request/DefaultRequestProvider.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.annotation.RegisterActionHandler.java">com/gwtplatform/dispatch/server/spring/annotation/RegisterActionHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.LoggerFactoryBean.java">com/gwtplatform/dispatch/rpc/server/spring/LoggerFactoryBean.java</a>
                 </td>
                 <td>
                   1
@@ -242,7 +326,147 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.configuration.DefaultModule.java">com/gwtplatform/dispatch/rpc/server/spring/configuration/DefaultModule.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.AnnotatedActionBeandHandlerRegistrator.java">com/gwtplatform/dispatch/rpc/server/spring/AnnotatedActionBeandHandlerRegistrator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.ActionSpringTest.java">com/gwtplatform/dispatch/rpc/server/spring/ActionSpringTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter.java">com/gwtplatform/dispatch/server/spring/RandomSecurityCookieFilter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.actionhandler.TestAnnotatedActionHandler.java">com/gwtplatform/dispatch/rpc/server/actionhandler/TestAnnotatedActionHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.SpringBeanProvider.java">com/gwtplatform/dispatch/server/spring/SpringBeanProvider.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator.java">com/gwtplatform/dispatch/server/spring/AnnotatedActionBeandHandlerRegistrator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider.java">com/gwtplatform/dispatch/server/spring/request/DefaultRequestProvider.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.utils.SpringUtils.java">com/gwtplatform/dispatch/server/spring/utils/SpringUtils.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchServiceImpl.java">com/gwtplatform/dispatch/server/spring/DispatchServiceImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.DispatchImpl.java">com/gwtplatform/dispatch/rpc/server/spring/DispatchImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.SpringBeanProvider.java">com/gwtplatform/dispatch/rpc/server/spring/SpringBeanProvider.java</a>
                 </td>
                 <td>
                   1
@@ -256,7 +480,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.utils.RequestProvider.java">com/gwtplatform/dispatch/rpc/server/spring/utils/RequestProvider.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.RandomSecurityCookieFilter.java">com/gwtplatform/dispatch/rpc/server/spring/RandomSecurityCookieFilter.java</a>
                 </td>
                 <td>
                   1
@@ -270,7 +494,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/rpc/server/spring/HttpSessionSecurityCookieFilter.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.SecureRandomSingleton.java">com/gwtplatform/dispatch/rpc/server/spring/SecureRandomSingleton.java</a>
                 </td>
                 <td>
                   1
@@ -284,7 +522,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.annotation.RegisterActionHandler.java">com/gwtplatform/dispatch/rpc/server/spring/annotation/RegisterActionHandler.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/server/spring/HttpSessionSecurityCookieFilter.java</a>
                 </td>
                 <td>
                   0
@@ -298,7 +536,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.annotation.RegisterActionHandler.java">com/gwtplatform/dispatch/server/spring/annotation/RegisterActionHandler.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/ActionHandlerValidatorLinker.java</a>
                 </td>
                 <td>
                   0
@@ -312,7 +550,35 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.LoggerFactoryBean.java">com/gwtplatform/dispatch/rpc/server/spring/LoggerFactoryBean.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.SecureRandomSingleton.java">com/gwtplatform/dispatch/server/spring/SecureRandomSingleton.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchImpl.java">com/gwtplatform/dispatch/server/spring/DispatchImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/rpc/server/spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.java</a>
                 </td>
                 <td>
                   1
@@ -326,7 +592,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.AnnotatedActionBeandHandlerRegistrator.java">com/gwtplatform/dispatch/rpc/server/spring/AnnotatedActionBeandHandlerRegistrator.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.server.spring.HandlerModule.java">com/gwtplatform/dispatch/server/spring/HandlerModule.java</a>
                 </td>
                 <td>
                   0
@@ -340,119 +606,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.ActionSpringTest.java">com/gwtplatform/dispatch/rpc/server/spring/ActionSpringTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.RandomSecurityCookieFilter.java">com/gwtplatform/dispatch/server/spring/RandomSecurityCookieFilter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.actionhandler.TestAnnotatedActionHandler.java">com/gwtplatform/dispatch/rpc/server/actionhandler/TestAnnotatedActionHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.SpringBeanProvider.java">com/gwtplatform/dispatch/server/spring/SpringBeanProvider.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.AnnotatedActionBeandHandlerRegistrator.java">com/gwtplatform/dispatch/server/spring/AnnotatedActionBeandHandlerRegistrator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider.java">com/gwtplatform/dispatch/server/spring/request/DefaultRequestProvider.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.utils.SpringUtils.java">com/gwtplatform/dispatch/server/spring/utils/SpringUtils.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchServiceImpl.java">com/gwtplatform/dispatch/server/spring/DispatchServiceImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.DispatchImpl.java">com/gwtplatform/dispatch/rpc/server/spring/DispatchImpl.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.HandlerModule.java">com/gwtplatform/dispatch/rpc/server/spring/HandlerModule.java</a>
                 </td>
                 <td>
                   1
@@ -466,161 +620,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.SpringBeanProvider.java">com/gwtplatform/dispatch/rpc/server/spring/SpringBeanProvider.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.RandomSecurityCookieFilter.java">com/gwtplatform/dispatch/rpc/server/spring/RandomSecurityCookieFilter.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/LazyActionHandlerValidatorRegistryImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.SecureRandomSingleton.java">com/gwtplatform/dispatch/rpc/server/spring/SecureRandomSingleton.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/server/spring/HttpSessionSecurityCookieFilter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.actionhandlervalidator.ActionHandlerValidatorLinker.java">com/gwtplatform/dispatch/server/spring/actionhandlervalidator/ActionHandlerValidatorLinker.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.SecureRandomSingleton.java">com/gwtplatform/dispatch/server/spring/SecureRandomSingleton.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.DispatchImpl.java">com/gwtplatform/dispatch/server/spring/DispatchImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl.java">com/gwtplatform/dispatch/rpc/server/spring/actionhandlervalidator/EagerActionHandlerValidatorRegistryImpl.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.server.spring.HandlerModule.java">com/gwtplatform/dispatch/server/spring/HandlerModule.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.HandlerModule.java">com/gwtplatform/dispatch/rpc/server/spring/HandlerModule.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gwtplatform.com/gwtp-core/gwtp-dispatch-rpc-server-spring/checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.ActionModule.java">com/gwtplatform/dispatch/rpc/server/spring/ActionModule.java</a>
+                  <a href="https://gwtp.arcbees.com/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.ActionModule.java">com/gwtplatform/dispatch/rpc/server/spring/ActionModule.java</a>
                 </td>
                 <td>
                   0
