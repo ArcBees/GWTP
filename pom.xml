@@ -479,6 +479,7 @@
                         <id>stage-site</id>
                         <phase>site</phase>
                         <goals>
+                            <goal>attach-descriptor</goal>
                             <goal>stage</goal>
                         </goals>
                     </execution>
@@ -532,7 +533,8 @@
 
             <!-- run 'mvn site' to generate -->
             <!-- run 'mvn site-deploy -N' to upload -->
-            <!-- It's important to run both separately as deploy will create the same commit for each sub-module -->
+            <!-- It's important to run both separately as javadoc forks the project multiple times and cause multiple
+            commits to ghSite -->
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
