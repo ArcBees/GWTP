@@ -11,8 +11,4 @@
 
     <artifactId>gwtp-build-tools</artifactId>
     <name>GWTP Build Tools</name>
-
-    <properties>
-        <maven-site-plugin.skip>true</maven-site-plugin.skip>
-    </properties>
 </project>

@@ -13,10 +13,6 @@
     <name>Testing class for gwtp-dispatch-rpc projects</name>
     <description>This is only meant for internal testing and should never be used outside of GWTP.</description>
 
-    <properties>
-        <maven-site-plugin.skip>true</maven-site-plugin.skip>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
