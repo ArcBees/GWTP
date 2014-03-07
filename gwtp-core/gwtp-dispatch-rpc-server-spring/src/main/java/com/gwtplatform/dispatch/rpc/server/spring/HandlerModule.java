@@ -31,7 +31,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 
 @Import({DispatchModule.class})
 public abstract class HandlerModule {
-
     @Autowired
     protected ApplicationContext applicationContext;
 
