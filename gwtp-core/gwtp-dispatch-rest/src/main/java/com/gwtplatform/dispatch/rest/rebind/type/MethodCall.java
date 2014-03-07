@@ -16,6 +16,27 @@
 
 package com.gwtplatform.dispatch.rest.rebind.type;
 
-public interface MethodCall {
-    boolean isFromParam();
+import java.util.Collections;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+public class MethodCall {
+    private final String methodName;
+    private final List<String> args = Lists.newLinkedList();
+
+    public MethodCall(
+            String methodName,
+            String... args) {
+        this.methodName = methodName;
+        Collections.addAll(this.args, args);
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public List<String> getArgs() {
+        return args;
+    }
 }

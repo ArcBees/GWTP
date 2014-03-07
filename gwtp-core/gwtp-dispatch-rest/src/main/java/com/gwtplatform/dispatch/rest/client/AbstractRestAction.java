@@ -17,8 +17,10 @@
 package com.gwtplatform.dispatch.rest.client;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
@@ -30,6 +32,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  * @param <R> the result type
  */
 public abstract class AbstractRestAction<R> implements RestAction<R> {
+    private String defaultDateFormat = DateFormat.DEFAULT;
     private HttpMethod httpMethod;
     private String rawServicePath;
 
@@ -43,10 +46,13 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     protected AbstractRestAction() {
     }
 
-    protected AbstractRestAction(HttpMethod httpMethod,
-                                 String rawServicePath) {
+    protected AbstractRestAction(
+            HttpMethod httpMethod,
+            String rawServicePath,
+            String defaultDateFormat) {
         this.httpMethod = httpMethod;
         this.rawServicePath = rawServicePath;
+        this.defaultDateFormat = defaultDateFormat;
     }
 
     @Override
@@ -98,19 +104,59 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
         pathParams.add(new RestParameter(name, value));
     }
 
+    protected void addPathParam(String name, Date date) {
+        addPathParam(name, date, defaultDateFormat);
+    }
+
+    protected void addPathParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addPathParam(name, value);
+    }
+
     protected void addQueryParam(String name, Object value) {
         queryParams.add(new RestParameter(name, value));
+    }
+
+    protected void addQueryParam(String name, Date date) {
+        addQueryParam(name, date, defaultDateFormat);
+    }
+
+    protected void addQueryParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addQueryParam(name, value);
     }
 
     protected void addFormParam(String name, Object value) {
         formParams.add(new RestParameter(name, value));
     }
 
+    protected void addFormParam(String name, Date date) {
+        addFormParam(name, date, defaultDateFormat);
+    }
+
+    protected void addFormParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addFormParam(name, value);
+    }
+
     protected void addHeaderParam(String name, Object value) {
         headerParams.add(new RestParameter(name, value));
     }
 
+    protected void addHeaderParam(String name, Date date) {
+        addHeaderParam(name, date, defaultDateFormat);
+    }
+
+    protected void addHeaderParam(String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addHeaderParam(name, value);
+    }
+
     protected void setBodyParam(Object value) {
         bodyParam = value;
+    }
+
+    private String formatDate(Date date, String pattern) {
+        return DateTimeFormat.getFormat(pattern).format(date);
     }
 }
