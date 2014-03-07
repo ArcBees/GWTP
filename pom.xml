@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -14,7 +15,7 @@
     <name>GWT-Platform</name>
     <inceptionYear>2010</inceptionYear>
     <description>A complete model-view-presenter framework to simplify your next GWT project.</description>
-    <url>https://gwtp.arcbees.com/</url>
+    <url>http://arcbees.github.io/GWTP/</url>
 
     <licenses>
         <license>
@@ -489,6 +490,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
+                <inherited>false</inherited>
 
                 <configuration>
                     <maxmemory>2048</maxmemory>
@@ -521,8 +523,9 @@
 
                 <executions>
                     <execution>
-                        <id>build-javadocs</id>
+                        <id>build-javadoc</id>
                         <phase>site</phase>
+
                         <goals>
                             <goal>aggregate</goal>
                         </goals>
@@ -531,13 +534,13 @@
             </plugin>
 
             <!-- run 'mvn site' to generate -->
-            <!-- run 'mvn site-deploy -N' to upload -->
-            <!-- It's important to run both separately as javadoc forks the project multiple times and cause multiple
-            commits to ghSite -->
+            <!-- run 'mvn com.github.github:site-maven-plugin:0.9:site -N' to upload -->
+            <!-- It's important to run github separately because it would commit every time a module is built -->
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>${github.version}</version>
+                <inherited>false</inherited>
 
                 <configuration>
                     <message>Creating site for ${project.version}</message>
@@ -555,17 +558,6 @@
                         <exclude>packages</exclude>
                     </excludes>
                 </configuration>
-
-                <executions>
-                    <execution>
-                        <id>deploy-gwtp-site</id>
-                        <phase>site-deploy</phase>
-
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

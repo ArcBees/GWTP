@@ -11,10 +11,6 @@
     <artifactId>gwtp-tester</artifactId>
     <name>GWTP Tester</name>
 
-    <properties>
-        <maven-site-plugin.skip>true</maven-site-plugin.skip>
-    </properties>
-
     <dependencies>
         <!-- Compile Dependencies -->
         <dependency>
