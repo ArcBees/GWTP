@@ -16,17 +16,15 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import java.util.Arrays;
+
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
-/**
- * @author Philippe Beaudoin
- */
 public class PlaceImpl implements Place {
+    private final String[] nameTokens;
 
-    private final String nameToken;
-
-    public PlaceImpl(String nameToken) {
-        this.nameToken = nameToken;
+    public PlaceImpl(String... nameTokens) {
+        this.nameTokens = nameTokens;
     }
 
     @Override
@@ -36,8 +34,17 @@ public class PlaceImpl implements Place {
 
     @Override
     public final boolean equals(Object o) {
+        if (o instanceof PlaceImpl) {
+            PlaceImpl place = (PlaceImpl) o;
+            return Arrays.equals(nameTokens, place.nameTokens);
+        }
         if (o instanceof Place) {
             Place place = (Place) o;
+            for (String nameToken : nameTokens) {
+                if (nameToken.equals(place.getNameToken())) {
+                    return true;
+                }
+            }
             return getNameToken().equals(place.getNameToken());
         }
         return false;
@@ -45,22 +52,31 @@ public class PlaceImpl implements Place {
 
     @Override
     public String getNameToken() {
-        return nameToken;
+        return nameTokens[0];
+    }
+
+    public String[] getNameTokens() {
+        return nameTokens;
     }
 
     @Override
     public final int hashCode() {
-        return 17 * getNameToken().hashCode();
+        return 17 * Arrays.hashCode(nameTokens);
     }
 
     @Override
     public final boolean matchesRequest(PlaceRequest request) {
-        return request.matchesNameToken(getNameToken());
+        for (String nameToken : nameTokens) {
+            if (request.matchesNameToken(nameToken)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
     public final String toString() {
         return getNameToken();
     }
-
 }

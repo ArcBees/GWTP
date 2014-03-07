@@ -87,4 +87,21 @@ public class PlaceRequestTest {
         // then
         assertEquals(request, copyOfRequest);
     }
+
+    @Test
+    public void testToString() {
+        // given
+        PlaceRequest request = new PlaceRequest.Builder()
+                .nameToken("nameToken")
+                .with("name1", "value1")
+                .with("name2", "value2")
+                .build();
+
+        // when
+        String result = request.toString();
+
+        // then
+        assertNotNull(result);
+        assertEquals("PlaceRequest(nameToken=nameToken, params={name1=value1, name2=value2})", result);
+    }
 }

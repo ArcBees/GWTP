@@ -23,8 +23,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 
+/**
+ * Request provider.
+ */
 public class DefaultRequestProvider implements RequestProvider {
-
     public DefaultRequestProvider() {
     }
 
@@ -33,5 +35,4 @@ public class DefaultRequestProvider implements RequestProvider {
     public HttpServletRequest getServletRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
-
 }

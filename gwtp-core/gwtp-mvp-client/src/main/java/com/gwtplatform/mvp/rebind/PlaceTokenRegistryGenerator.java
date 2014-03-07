@@ -65,7 +65,9 @@ public class PlaceTokenRegistryGenerator extends Generator {
         for (JClassType type : generatorContext.getTypeOracle().getTypes()) {
             NameToken nameTokenAnnotation = type.getAnnotation(NameToken.class);
             if (nameTokenAnnotation != null) {
-                placeTokens.put(nameTokenAnnotation.value(), type);
+                for (String nameToken : nameTokenAnnotation.value()) {
+                    placeTokens.put(nameToken, type);
+                }
             }
         }
 
