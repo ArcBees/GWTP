@@ -17,19 +17,26 @@
 package com.gwtplatform.mvp.client.proxy;
 
 /**
- * Specialized {@link PlaceWithGatekeeper} which uses a {@link GatekeeperWithParams}
- * and an array of parameters to protect the {@link Place}.
- *
- * @author Juan Carlos González
+ * Specialized {@link PlaceWithGatekeeper} which uses a {@link GatekeeperWithParams} and an array of parameters to
+ * protect the {@link Place}.
  */
 public class PlaceWithGatekeeperWithParams extends PlaceImpl {
-
     private final GatekeeperWithParams gatekeeper;
     private final String[] params;
 
-    public PlaceWithGatekeeperWithParams(String nameToken, GatekeeperWithParams gatekeeper,
+    public PlaceWithGatekeeperWithParams(
+            String nameToken,
+            GatekeeperWithParams gatekeeper,
             String[] params) {
-        super(nameToken);
+        this(new String[] { nameToken }, gatekeeper, params);
+    }
+
+    public PlaceWithGatekeeperWithParams(
+            String[] nameTokens,
+            GatekeeperWithParams gatekeeper,
+            String[] params) {
+        super(nameTokens);
+
         this.gatekeeper = gatekeeper;
         this.params = params;
     }
