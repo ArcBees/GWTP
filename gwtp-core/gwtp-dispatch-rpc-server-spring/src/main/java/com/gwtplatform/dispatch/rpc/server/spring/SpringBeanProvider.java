@@ -30,12 +30,10 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerV
 import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
 public class SpringBeanProvider implements BeanProvider {
-
     /**
      * Adapter for transforming Guice Binding into BeanProvider implementation.
      */
     public static class SpringBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
-
         public SpringBindingDescriptorAdapter(Entry<String, B> binding) {
             super(binding.getValue(), binding.getKey());
         }
@@ -54,7 +52,6 @@ public class SpringBeanProvider implements BeanProvider {
 
     @Override
     public <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz) {
-
         List<BindingDescriptor<B>> result = new ArrayList<BindingDescriptor<B>>();
 
         Map<String, B> beansOfType = applicationContext.getBeansOfType(clazz);
