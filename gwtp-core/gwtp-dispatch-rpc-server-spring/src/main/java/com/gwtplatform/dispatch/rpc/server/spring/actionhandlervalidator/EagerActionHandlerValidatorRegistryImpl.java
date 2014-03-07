@@ -18,9 +18,5 @@ package com.gwtplatform.dispatch.rpc.server.spring.actionhandlervalidator;
 
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl;
 
-/**
- * @author Peter Simun
- *
- */
 public class EagerActionHandlerValidatorRegistryImpl extends AbstractEagerActionHandlerValidatorRegistryImpl {
 }

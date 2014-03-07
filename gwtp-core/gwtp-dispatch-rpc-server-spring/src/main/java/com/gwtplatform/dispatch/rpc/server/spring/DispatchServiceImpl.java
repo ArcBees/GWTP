@@ -36,14 +36,10 @@ import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 
 /**
  * Dispatch request to the handler.
- * 
- * @author David Ignjic
- *
  */
 @Component("dispatch")
 public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements HttpRequestHandler,
         ServletContextAware {
-
     private static final long serialVersionUID = 136176741488585959L;
 
     @Value("${securityCookieName:JSESSIONID}")
@@ -52,14 +48,13 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
     private ServletContext servletContext;
 
     @Autowired
-    public DispatchServiceImpl(final Logger logger, final Dispatch dispatch,
-            RequestProvider requestProvider) {
+    public DispatchServiceImpl(Logger logger, Dispatch dispatch, RequestProvider requestProvider) {
         super(logger, dispatch, requestProvider);
     }
 
     @Override
     public String getSecurityCookieName() {
-        return this.securityCookieName;
+        return securityCookieName;
     }
 
     @Override
@@ -69,13 +64,12 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
     }
 
     @Override
-    public void setServletContext(ServletContext arg0) {
-        this.servletContext = arg0;
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
     }
 
     @Override
     public ServletContext getServletContext() {
-        return this.servletContext;
+        return servletContext;
     }
-
 }
