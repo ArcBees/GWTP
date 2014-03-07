@@ -29,9 +29,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.AbstractRefreshableWebApplicationContext;
 
 public class SpringUtils {
-
-    public static <B> B getOrCreate(ApplicationContext applicationContext,
-            Class<B> clazz) throws BeansException {
+    public static <B> B getOrCreate(ApplicationContext applicationContext, Class<B> clazz) throws BeansException {
         try {
             return getInstance(applicationContext, clazz);
         } catch (BeansException ex) {
@@ -41,44 +39,38 @@ public class SpringUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <B> B instantiate(ApplicationContext applicationContext,
-            Class<B> clazz) throws BeansException {
-        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(
-                applicationContext);
-        return (B) beanFactory.createBean(clazz,
-                AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
+    public static <B> B instantiate(ApplicationContext applicationContext, Class<B> clazz) throws BeansException {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(applicationContext);
+        return (B) beanFactory.createBean(clazz, AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
     }
 
     public static <B> void registerBean(ApplicationContext applicationContext,
             B instance) throws BeansException {
 
         if (applicationContext instanceof GenericApplicationContext) {
-            ConfigurableListableBeanFactory beanFactory = ((GenericApplicationContext) applicationContext)
-                    .getBeanFactory();
+            ConfigurableListableBeanFactory beanFactory =
+                    ((GenericApplicationContext) applicationContext).getBeanFactory();
             beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance)), instance);
         } else if (applicationContext instanceof AbstractRefreshableWebApplicationContext) {
-            ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableWebApplicationContext)
-                    applicationContext).getBeanFactory();
+            ConfigurableListableBeanFactory beanFactory =
+                    ((AbstractRefreshableWebApplicationContext) applicationContext).getBeanFactory();
             beanFactory.registerSingleton(generateName(beanFactory, createBeanDefinition(instance)), instance);
         }
     }
 
-    public static <B> B getInstance(ApplicationContext applicationContext,
-            Class<B> clazz) throws BeansException {
-        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(
-                applicationContext);
+    public static <B> B getInstance(ApplicationContext applicationContext, Class<B> clazz) throws BeansException {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory(applicationContext);
         return beanFactory.getBean(clazz);
     }
 
     private static <B> RootBeanDefinition createBeanDefinition(B instance) {
-        RootBeanDefinition bd = new RootBeanDefinition(instance.getClass(),
-                AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR, false);
+        RootBeanDefinition bd = new RootBeanDefinition(instance.getClass(), AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR,
+                false);
         bd.setScope(BeanDefinition.SCOPE_SINGLETON);
         return bd;
     }
 
-    private static String generateName(ConfigurableListableBeanFactory registry,
-            RootBeanDefinition definition) {
+    private static String generateName(ConfigurableListableBeanFactory registry, RootBeanDefinition definition) {
         String generatedBeanName = definition.getBeanClassName();
         if (generatedBeanName == null) {
             if (definition.getParentName() != null) {
@@ -89,8 +81,8 @@ public class SpringUtils {
         }
         if (!StringUtils.hasText(generatedBeanName)) {
             throw new BeanDefinitionStoreException(
-                    "Unnamed bean definition specifies neither "
-                            + "'class' nor 'parent' nor 'factory-bean' - can't generate bean name");
+                    "Unnamed bean definition specifies neither 'class' nor 'parent' nor 'factory-bean' - can't " +
+                            "generate bean name");
         }
 
         String id = generatedBeanName;
