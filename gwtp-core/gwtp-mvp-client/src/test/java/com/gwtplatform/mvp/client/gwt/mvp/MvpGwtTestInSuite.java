@@ -22,6 +22,7 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 /**
  * Integration test for various components of GWTP's MVP module.
@@ -38,6 +39,7 @@ public class MvpGwtTestInSuite extends GWTTestCase {
     @Override
     protected void gwtSetUp() throws Exception {
         super.gwtSetUp();
+
         InstantiationCounterTestUtilGwt.resetCounter();
         ginjector = GWT.create(GinjectorTestUtilGwt.class);
         DelayedBindRegistry.bind(ginjector);
@@ -48,6 +50,7 @@ public class MvpGwtTestInSuite extends GWTTestCase {
      */
     public void testShouldCreateOnlyOneGinjector() {
         ginjector.getPlaceManager().revealCurrentPlace();
+
         assertEquals(1, InstantiationCounterTestUtilGwt.getCounter());
     }
 
@@ -61,38 +64,56 @@ public class MvpGwtTestInSuite extends GWTTestCase {
             @Override
             public void execute() {
                 assertTrue(ginjector.getMainPresenter().get().isVisible());
-                ginjector.getPlaceManager().revealPlace(new PlaceRequest.Builder().nameToken("admin").build());
+                assertFalse(ginjector.getAdminPresenter().get().isVisible());
 
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    @Override
-                    public void execute() {
-                        assertFalse(ginjector.getMainPresenter().get().isVisible());
-                        assertTrue(ginjector.getAdminPresenter().get().isVisible());
-                        ginjector.getPlaceManager().revealDefaultPlace();
-
-                        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                            @Override
-                            public void execute() {
-                                assertTrue(ginjector.getMainPresenter().get().isVisible());
-                                assertFalse(ginjector.getAdminPresenter().get().isVisible());
-                                ginjector.getPlaceManager().revealPlace(
-                                        new PlaceRequest.Builder().nameToken("selfService").build());
-                                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-
-                                    @Override
-                                    public void execute() {
-                                        assertFalse(ginjector.getMainPresenter().get().isVisible());
-                                        assertTrue(ginjector.getAdminPresenter().get().isVisible());
-                                        finishTest();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+                revealAdmin();
             }
         });
+
         delayTestFinish(1000);
     }
 
+    private void revealAdmin() {
+        PlaceRequest placeRequest = new Builder().nameToken("admin").build();
+        ginjector.getPlaceManager().revealPlace(placeRequest);
+
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                assertFalse(ginjector.getMainPresenter().get().isVisible());
+                assertTrue(ginjector.getAdminPresenter().get().isVisible());
+
+                revealDefaultPlace();
+            }
+        });
+    }
+
+    private void revealDefaultPlace() {
+        ginjector.getPlaceManager().revealDefaultPlace();
+
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                assertTrue(ginjector.getMainPresenter().get().isVisible());
+                assertFalse(ginjector.getAdminPresenter().get().isVisible());
+
+                revealSelfService();
+            }
+        });
+    }
+
+    private void revealSelfService() {
+        PlaceRequest placeRequest = new Builder().nameToken("selfService").build();
+        ginjector.getPlaceManager().revealPlace(placeRequest);
+
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                assertFalse(ginjector.getMainPresenter().get().isVisible());
+                assertTrue(ginjector.getAdminPresenter().get().isVisible());
+
+                finishTest();
+            }
+        });
+    }
 }
