@@ -18,7 +18,6 @@
         <gae.home>
             ${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
         </gae.home>
-        <maven-site-plugin.skip>true</maven-site-plugin.skip>
 
         <!-- gae maven plugin settings -->
         <gae.wait>false</gae.wait>
