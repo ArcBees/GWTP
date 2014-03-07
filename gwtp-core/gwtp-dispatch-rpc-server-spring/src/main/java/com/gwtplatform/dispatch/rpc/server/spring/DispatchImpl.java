@@ -23,12 +23,8 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerV
 
 /**
  * Dispatch implementation for spring.
- * 
- * @author David Ignjic
- *
  */
 public class DispatchImpl extends AbstractDispatchImpl {
-
     @Autowired
     public DispatchImpl(ActionHandlerValidatorRegistry actionHandlerValidatorRegistry) {
         super(actionHandlerValidatorRegistry);
