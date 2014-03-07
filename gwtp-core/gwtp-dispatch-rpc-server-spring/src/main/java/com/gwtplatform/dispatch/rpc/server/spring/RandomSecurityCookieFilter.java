@@ -21,6 +21,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.gwtplatform.dispatch.rpc.server.AbstractRandomSecurityCookieFilter;
 
+/**
+ * @author Peter Simun
+ *
+ */
 public class RandomSecurityCookieFilter extends AbstractRandomSecurityCookieFilter {
     @Autowired
     RandomSecurityCookieFilter(@Qualifier("SecurityCookie") String securityCookieName, SecureRandomSingleton random) {
