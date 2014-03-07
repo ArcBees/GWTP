@@ -17,27 +17,29 @@
 package com.gwtplatform.mvp.client.gwt.mvp;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 /**
  * Integration test for various components of GWTP's MVP module.
- *
- * @author Philippe Beaudoin
  */
 public class MvpGwtTestInSuite extends GWTTestCase {
+    GinjectorTestUtilGwt ginjector;
+    MainPresenterTestUtilGwt presenter;
 
     @Override
     public String getModuleName() {
         return "com.gwtplatform.mvp.MvpGwtTest";
     }
 
-    GinjectorTestUtilGwt ginjector;
-    MainPresenterTestUtilGwt presenter;
-
     @Override
     protected void gwtSetUp() throws Exception {
         super.gwtSetUp();
+
         InstantiationCounterTestUtilGwt.resetCounter();
         ginjector = GWT.create(GinjectorTestUtilGwt.class);
         DelayedBindRegistry.bind(ginjector);
@@ -48,6 +50,70 @@ public class MvpGwtTestInSuite extends GWTTestCase {
      */
     public void testShouldCreateOnlyOneGinjector() {
         ginjector.getPlaceManager().revealCurrentPlace();
+
         assertEquals(1, InstantiationCounterTestUtilGwt.getCounter());
+    }
+
+    /**
+     * Verify multiple name tokens.
+     */
+    public void testMultipleTokens() {
+        ginjector.getPlaceManager().revealDefaultPlace();
+
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                assertTrue(ginjector.getMainPresenter().get().isVisible());
+                assertFalse(ginjector.getAdminPresenter().get().isVisible());
+
+                revealAdmin();
+            }
+        });
+
+        delayTestFinish(1000);
+    }
+
+    private void revealAdmin() {
+        PlaceRequest placeRequest = new Builder().nameToken("admin").build();
+        ginjector.getPlaceManager().revealPlace(placeRequest);
+
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                assertFalse(ginjector.getMainPresenter().get().isVisible());
+                assertTrue(ginjector.getAdminPresenter().get().isVisible());
+
+                revealDefaultPlace();
+            }
+        });
+    }
+
+    private void revealDefaultPlace() {
+        ginjector.getPlaceManager().revealDefaultPlace();
+
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                assertTrue(ginjector.getMainPresenter().get().isVisible());
+                assertFalse(ginjector.getAdminPresenter().get().isVisible());
+
+                revealSelfService();
+            }
+        });
+    }
+
+    private void revealSelfService() {
+        PlaceRequest placeRequest = new Builder().nameToken("selfService").build();
+        ginjector.getPlaceManager().revealPlace(placeRequest);
+
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                assertFalse(ginjector.getMainPresenter().get().isVisible());
+                assertTrue(ginjector.getAdminPresenter().get().isVisible());
+
+                finishTest();
+            }
+        });
     }
 }
