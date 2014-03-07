@@ -25,6 +25,7 @@ public class NameTokens {
     public static final String cars = "cars";
     public static final String report = "report";
     public static final String newCar = "newCar";
+    public static final String STATS = "stats";
 
     public static String getOnLoginDefaultPage() {
         return manufacturer;

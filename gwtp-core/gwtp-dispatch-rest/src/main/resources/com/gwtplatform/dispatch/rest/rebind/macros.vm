@@ -12,18 +12,6 @@
 $actionArguments#else$argumentsFromService$actionArguments#end
 #end
 
-#macro(generateMethodSignatureFromParameters $parameters)
-#foreach ($param in $parameters)
-$param.type.getParameterizedQualifiedSourceName() $param.name#commaIfNeeded($parameters)
-#end
-#end
-
-#macro(generateArgumentsFromParameters $parameters)
-#foreach ($param in $parameters)
-$param.name#commaIfNeeded($parameters)
-#end
-#end
-
 #macro(importResources $bindings)
 #foreach ($binding in $bindings)
 import ${binding.getImplPackage()}.$binding.getImplName();
