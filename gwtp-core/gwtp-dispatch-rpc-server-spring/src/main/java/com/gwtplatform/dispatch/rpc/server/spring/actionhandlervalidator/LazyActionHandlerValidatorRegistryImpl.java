@@ -32,17 +32,12 @@ import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
-/**
- * @author Peter Simun
- *
- */
 public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandlerValidatorRegistry,
         ApplicationContextAware {
-
     private ApplicationContext applicationContext;
 
-    private final Map<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends Action<?>,
-                ? extends Result>> actionHandlerValidatorClasses;
+    private final Map<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>>
+            actionHandlerValidatorClasses;
     private final Map<Class<? extends Action<?>>, ActionHandlerValidatorInstance> actionHandlerValidatorInstances;
     private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
 
@@ -69,14 +64,12 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     @SuppressWarnings("unchecked")
     @Override
     public <A extends Action<R>, R extends Result> ActionHandlerValidatorInstance findActionHandlerValidator(A action) {
-
-        ActionHandlerValidatorInstance actionHandlerValidatorInstance = actionHandlerValidatorInstances.get(action
-                .getClass());
+        ActionHandlerValidatorInstance actionHandlerValidatorInstance =
+                actionHandlerValidatorInstances.get(action.getClass());
 
         if (actionHandlerValidatorInstance == null) {
             ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass =
-                    actionHandlerValidatorClasses.get(action
-                    .getClass());
+                    actionHandlerValidatorClasses.get(action.getClass());
             if (actionHandlerValidatorClass != null) {
                 actionHandlerValidatorInstance = createInstance(actionHandlerValidatorClass);
                 if (actionHandlerValidatorInstance != null) {
@@ -97,9 +90,8 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     @Override
     public <A extends Action<R>, R extends Result> void removeActionHandlerValidatorClass(Class<A> actionClass,
             ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
-
-        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass = actionHandlerValidatorClasses.get(
-                actionClass);
+        ActionHandlerValidatorClass<?, ?> oldActionHandlerValidatorClass =
+                actionHandlerValidatorClasses.get(actionClass);
 
         if (oldActionHandlerValidatorClass == actionHandlerValidatorClass) {
             actionHandlerValidatorClasses.remove(actionClass);
@@ -121,9 +113,8 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
         return false;
     }
 
-    private ActionHandlerValidatorInstance createInstance(ActionHandlerValidatorClass<? extends Action<?>,
-            ? extends Result> actionHandlerValidatorClass) {
-
+    private ActionHandlerValidatorInstance createInstance(
+            ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass) {
         ActionHandlerValidatorInstance actionHandlerValidatorInstance = null;
         ActionValidator actionValidator = findActionValidator(actionHandlerValidatorClass.getActionValidatorClass());
 

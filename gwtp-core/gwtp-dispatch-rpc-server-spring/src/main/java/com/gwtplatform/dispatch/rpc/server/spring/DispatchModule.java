@@ -32,12 +32,8 @@ import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
 /**
  * Dispatch module spring configuration.
- * 
- * @author David Ignjic
- *
  */
 public class DispatchModule {
-
     private final Class<? extends Dispatch> dispatchClass;
     private final Class<? extends ActionHandlerValidatorRegistry> lazyActionHandlerValidatorRegistryClass;
 
@@ -90,7 +86,6 @@ public class DispatchModule {
 
     @Bean
     public Dispatch getDispatch() {
-        Dispatch instance = SpringUtils.getOrCreate(context, dispatchClass);
-        return instance;
+        return SpringUtils.getOrCreate(context, dispatchClass);
     }
 }

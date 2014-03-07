@@ -16,13 +16,11 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import java.util.Arrays;
+
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
-/**
- * @author Philippe Beaudoin
- */
 public class PlaceImpl implements Place {
-
     private final String[] nameTokens;
 
     public PlaceImpl(String... nameTokens) {
@@ -38,7 +36,7 @@ public class PlaceImpl implements Place {
     public final boolean equals(Object o) {
         if (o instanceof PlaceImpl) {
             PlaceImpl place = (PlaceImpl) o;
-            return nameTokens.equals(place.nameTokens);
+            return Arrays.equals(nameTokens, place.nameTokens);
         }
         if (o instanceof Place) {
             Place place = (Place) o;
@@ -60,9 +58,10 @@ public class PlaceImpl implements Place {
     public String[] getNameTokens() {
         return nameTokens;
     }
+
     @Override
     public final int hashCode() {
-        return 17 * nameTokens.hashCode();
+        return 17 * Arrays.hashCode(nameTokens);
     }
 
     @Override
@@ -80,5 +79,4 @@ public class PlaceImpl implements Place {
     public final String toString() {
         return getNameToken();
     }
-
 }
