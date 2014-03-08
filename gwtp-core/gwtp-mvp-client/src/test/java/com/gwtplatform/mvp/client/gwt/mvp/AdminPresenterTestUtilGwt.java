@@ -43,7 +43,7 @@ public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilG
      * Presenter's proxy.
      */
     @ProxyStandard
-    @NameToken("admin")
+    @NameToken({"admin","selfService"})
     public interface MyProxy extends ProxyPlace<AdminPresenterTestUtilGwt> {
     }
 

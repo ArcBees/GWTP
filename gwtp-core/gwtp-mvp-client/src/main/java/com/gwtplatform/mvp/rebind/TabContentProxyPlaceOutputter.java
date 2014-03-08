@@ -55,7 +55,7 @@ public class TabContentProxyPlaceOutputter extends ProxyOutputterBase {
     @Override
     void initSubclass(JClassType proxyInterface) throws UnableToCompleteException {
         proxyPlaceOutputter.init(proxyInterface);
-        nonLeafTabContentProxyOutputter.setNameToken(proxyPlaceOutputter.getNameToken());
+        nonLeafTabContentProxyOutputter.setNameToken(proxyPlaceOutputter.getNameToken()[0]);
         nonLeafTabContentProxyOutputter.init(proxyInterface);
     }
 

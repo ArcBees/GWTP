@@ -21,6 +21,7 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,13 +52,12 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
+import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
-import com.gwtplatform.dispatch.rest.rebind.type.FromParamMethodCall;
 import com.gwtplatform.dispatch.rest.rebind.type.MethodCall;
-import com.gwtplatform.dispatch.rest.rebind.type.NoParamMethodCall;
 import com.gwtplatform.dispatch.rest.rebind.type.ResourceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.AnnotationValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.FormParamValueResolver;
@@ -86,15 +86,18 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/RestAction.vm";
 
     private static final String MANY_REST_ANNOTATIONS = "'%s' parameter's '%s' is annotated with more than one REST " +
-                                                        "annotations.";
+            "annotations.";
+    private static final String DATE_FORMAT_NOT_DATE = "'%s' parameter's '%s' is annotated with @DateFormat but its " +
+            "type is not Date";
     private static final String MANY_POTENTIAL_BODY = "%s has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "%s has both @FormParam and a body parameter. You must specify " +
-                                                      "one or the other.";
+            "one or the other.";
     private static final String ADD_HEADER_PARAM = "addHeaderParam";
     private static final String ADD_PATH_PARAM = "addPathParam";
     private static final String ADD_QUERY_PARAM = "addQueryParam";
     private static final String ADD_FORM_PARAM = "addFormParam";
     private static final String SET_BODY_PARAM = "setBodyParam";
+    private static final String ESCAPED_STRING = "\"%s\"";
 
     @SuppressWarnings("unchecked")
     private static final List<Class<? extends Annotation>> PARAM_ANNOTATIONS =
@@ -117,14 +120,15 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private JParameter bodyParam;
 
     @Inject
-    ActionGenerator(EventBus eventBus,
-                    TypeOracle typeOracle,
-                    Logger logger,
-                    Provider<VelocityContext> velocityContextProvider,
-                    VelocityEngine velocityEngine,
-                    GeneratorUtil generatorUtil,
-                    @Assisted JMethod actionMethod,
-                    @Assisted ResourceBinding parent) {
+    ActionGenerator(
+            EventBus eventBus,
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            @Assisted JMethod actionMethod,
+            @Assisted ResourceBinding parent) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
         this.eventBus = eventBus;
@@ -189,26 +193,42 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         addContentTypeHeaderMethodCall(methodCalls);
 
         if (bodyParam != null) {
-            methodCalls.add(new FromParamMethodCall(SET_BODY_PARAM, null, bodyParam));
+            methodCalls.add(new MethodCall(SET_BODY_PARAM, bodyParam.getName()));
         }
 
         return methodCalls;
     }
 
-    private List<FromParamMethodCall> getMethodCallsToAdd(List<AnnotatedMethodParameter> methodParameters,
-                                                          String methodName) {
-        List<FromParamMethodCall> methodCalls = new ArrayList<FromParamMethodCall>();
+    private List<MethodCall> getMethodCallsToAdd(List<AnnotatedMethodParameter> methodParameters, String methodName) {
+        List<MethodCall> methodCalls = new ArrayList<MethodCall>();
         for (AnnotatedMethodParameter methodParameter : methodParameters) {
-            methodCalls.add(new FromParamMethodCall(methodName, methodParameter.fieldName, methodParameter.parameter));
+            List<String> arguments = Lists.newArrayList(String.format(ESCAPED_STRING, methodParameter.fieldName),
+                    methodParameter.parameter.getName());
+
+            maybeAddDateFormat(arguments, methodParameter);
+
+            methodCalls.add(new MethodCall(methodName, arguments.toArray(new String[arguments.size()])));
         }
+
         return methodCalls;
+    }
+
+    private void maybeAddDateFormat(List<String> args, AnnotatedMethodParameter methodParameter) {
+        if (methodParameter.parameter.isAnnotationPresent(DateFormat.class)) {
+            String dateFormat = methodParameter.parameter.getAnnotation(DateFormat.class).value();
+            args.add(String.format(ESCAPED_STRING, dateFormat));
+        }
     }
 
     private void addContentTypeHeaderMethodCall(List<MethodCall> methodCalls) {
         Consumes consumes = actionMethod.getAnnotation(Consumes.class);
 
         if (consumes != null && consumes.value().length > 0) {
-            methodCalls.add(new NoParamMethodCall(ADD_HEADER_PARAM, HttpHeaders.CONTENT_TYPE, consumes.value()[0]));
+            MethodCall methodCall = new MethodCall(
+                    ADD_HEADER_PARAM,
+                    String.format(ESCAPED_STRING, HttpHeaders.CONTENT_TYPE),
+                    String.format(ESCAPED_STRING, consumes.value()[0]));
+            methodCalls.add(methodCall);
         }
     }
 
@@ -302,8 +322,7 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     }
 
     private <T extends Annotation> void buildParamList(List<JParameter> parameters, Class<T> annotationClass,
-                                                       AnnotationValueResolver<T> annotationValueResolver,
-                                                       List<AnnotatedMethodParameter> destination)
+            AnnotationValueResolver<T> annotationValueResolver, List<AnnotatedMethodParameter> destination)
             throws UnableToCompleteException {
         List<Class<? extends Annotation>> restrictedAnnotations = getRestrictedAnnotations(annotationClass);
 
@@ -313,13 +332,19 @@ public class ActionGenerator extends AbstractVelocityGenerator {
             if (parameterAnnotation != null) {
                 if (hasAnnotationFrom(parameter, restrictedAnnotations)) {
                     getLogger().die(String.format(MANY_REST_ANNOTATIONS, actionMethod.getName(), parameter.getName()));
-                    throw new UnableToCompleteException();
+                }
+                if (parameter.isAnnotationPresent(DateFormat.class) && !isDate(parameter)) {
+                    getLogger().die(String.format(DATE_FORMAT_NOT_DATE, actionMethod.getName(), parameter.getName()));
                 }
 
                 String value = annotationValueResolver.resolve(parameterAnnotation);
                 destination.add(new AnnotatedMethodParameter(parameter, value));
             }
         }
+    }
+
+    private boolean isDate(JParameter parameter) {
+        return Date.class.getCanonicalName().equals(parameter.getType().getQualifiedSourceName());
     }
 
     private List<Class<? extends Annotation>> getRestrictedAnnotations(Class<? extends Annotation> allowedAnnotation) {
