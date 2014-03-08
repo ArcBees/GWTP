@@ -100,6 +100,7 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
         super.populateVelocityContext(velocityContext);
 
+        velocityContext.put("injectable", false);
         velocityContext.put("ctorParams", parameters);
     }
 
