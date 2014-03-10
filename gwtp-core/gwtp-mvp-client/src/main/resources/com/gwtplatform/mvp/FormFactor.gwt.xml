@@ -1,42 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.0//EN"
+        "http://google-web-toolkit.googlecode.com/svn/tags/2.5.0/distro-source/core/src/gwt-module.dtd">
 <module>
+    <define-configuration-property name="gwtp.formFactorQueryParam" is-multi-valued="false"/>
+    <set-configuration-property name="gwtp.formFactorQueryParam" value="formfactor"/>
+
     <define-property name="gwtp.formfactor" values="desktop,tablet,mobile"/>
-    <property-provider name="gwtp.formfactor">
-        <![CDATA[
-        // Look for the formfactor as a url argument.
-        var args = location.href;
-        var start = args.indexOf("formfactor");
-        if (start >= 0) {
-          var value = args.substring(start);
-          var begin = value.indexOf("=") + 1;
-          var end = value.indexOf("&");
-          if (end == -1) {
-            end = value.indexOf("#");
-            if (end == -1) {
-              end = value.length;
-            }
-          }
-          return value.substring(begin, end);
-        }
-        // Detect form factor from user agent.
-        var mobileRe = /(iphone|ipod|mobile)/i;
-        var notMobileRe = /kindle/i
-        var tabletRe = /(android|ipad|tablet|kindle|silk|touch)/i;
-        var notTabletRe = /desktop/i
-
-        var ua = navigator.userAgent;   
-
-        if (ua.match(mobileRe) && !ua.match(notMobileRe)) {
-            return "mobile";
-        } else if (ua.match(tabletRe) && !ua.match(notTabletRe)) {
-            return "tablet";
-        } 
-        return "desktop";
-    ]]>
-    </property-provider>
+    <property-provider name="gwtp.formfactor"
+            generator="com.gwtplatform.mvp.rebind.linker.FormFactorPropertyGenerator"/>
 
     <!-- Form Factor Ginjectors -->
-    
+
     <!-- Tablet -->
     <replace-with class="com.gwtplatform.mvp.client.TabletGinjectorProvider">
         <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
