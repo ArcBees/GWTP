@@ -34,7 +34,7 @@ public class FormFactorPropertyGenerator implements PropertyProviderGenerator {
     private static final String DEFAULT_QUERY_PARAM_NAME = "formfactor";
     private static final String FORM_FACTOR_JS = "/com/gwtplatform/mvp/rebind/linker/formFactor.js";
 
-    private static final String OUTPUT = "{\n%s\nreturn findFormFactor('%s');\n}";
+    private static final String OUTPUT = "{\n%s\nreturn findFormFactor('%s', location, navigator);\n}";
 
     @Override
     public String generate(TreeLogger logger, SortedSet<String> possibleValues, String fallback,
