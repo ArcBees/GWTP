@@ -1,4 +1,7 @@
 function findFormFactorFromQuery(href, propertyName) {
+    if (propertyName == '') {
+        return undefined;
+    }
     var start = href.indexOf(propertyName);
     if (start >= 0) {
         var value = href.substring(start);
@@ -10,7 +13,10 @@ function findFormFactorFromQuery(href, propertyName) {
                 end = value.length;
             }
         }
-        return value.substring(begin, end);
+        value = value.substring(begin, end);
+        if (value != '') {
+            return value;
+        }
     }
 
     return undefined;
@@ -30,7 +36,7 @@ function findFormFactorFromUserAgent(userAgent) {
     return "desktop";
 }
 
-function findFormFactor(propertyName) {
+function findFormFactor(propertyName, location, navigator) {
     var formFactor = findFormFactorFromQuery(location.href, propertyName);
 
     if (formFactor == undefined) {
