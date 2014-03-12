@@ -1,5 +1,7 @@
 function findFormFactorFromQuery(href, propertyName) {
-    if (propertyName == '') { return undefined; }
+    if (propertyName == '') {
+        return undefined;
+    }
     var start = href.indexOf(propertyName);
     if (start >= 0) {
         var value = href.substring(start);
@@ -12,10 +14,7 @@ function findFormFactorFromQuery(href, propertyName) {
             }
         }
         value = value.substring(begin, end);
-        if (value == '') {
-            return undefined;
-        }
-        else {
+        if (value != '') {
             return value;
         }
     }
