@@ -1,27 +1,27 @@
+desktopUserAgents = ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1664.3 Safari/537.36",
+"Mozilla/5.0 (Macintosh; Intel Mac OS X 1083) AppleWebKit/537.36 (KHTML like Gecko) Chrome/28.0.1469.0 Safari/537.36"
+]
+
+tabletUserAgents = ["Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10",
+"Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"
+]
+
+mobileUserAgents = ["Mozilla/5.0 (iPod; U; CPU iPhone OS 3_1_1 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Mobile/7C145",
+"Mozilla/5.0 (iPod; U; CPU iPhone OS 2_2_1 like Mac OS X; en-us) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5H11a Safari/525.20"
+]
+
 describe 'finding from user agent', ->
   describe 'for a mobile device', ->
-    it 'should be mobile when userAgent is iphone', ->
-      expect(findFormFactorFromUserAgent('iphone')).toBe 'mobile'
-
-    it 'should be mobile when userAgent is ipod', ->
-      expect(findFormFactorFromUserAgent('ipod')).toBe 'mobile'
-
-    it 'should be mobile when userAgent is mobile', ->
-      expect(findFormFactorFromUserAgent('mobile')).toBe 'mobile'
-
+   (it 'should be mobile when userAgent is' + ua, ->
+      expect(findFormFactorFromUserAgent(ua)).toBe 'mobile') for ua in mobileUserAgents
+      
   describe 'for tablet', ->
-    it 'should be tablet when userAgent is android', ->
-      expect(findFormFactorFromUserAgent('android')).toBe 'tablet'
-
-    it 'should be tablet when userAgent is tablet', ->
-      expect(findFormFactorFromUserAgent('tablet')).toBe 'tablet'
-
-    it 'should be tablet when userAgent is ipad', ->
-      expect(findFormFactorFromUserAgent('ipad')).toBe 'tablet'
+    (it 'should be tablet when userAgent is' + ua, ->
+      expect(findFormFactorFromUserAgent(ua)).toBe 'tablet') for ua in tabletUserAgents
 
   describe 'for a desktop computer', ->
-    it 'should be desktop when userAgent is desktop', ->
-      expect(findFormFactorFromUserAgent('desktop')).toBe 'desktop'
+   (it 'should be desktop when userAgent is' + ua, ->
+      expect(findFormFactorFromUserAgent(ua)).toBe 'desktop') for ua in desktopUserAgents
 
 describe 'finding form factor from query parameter', ->
   it 'should return undefined when the property is not in the url', ->
