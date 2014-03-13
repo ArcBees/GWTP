@@ -24,13 +24,12 @@ function findFormFactorFromQuery(href, propertyName) {
 
 function findFormFactorFromUserAgent(userAgent) {
     var mobileRe = /(iphone|ipod|mobile)/i;
-    var notMobileRe = /kindle/i;
-    var tabletRe = /(android|ipad|tablet|kindle|silk|touch)/i;
-    var notTabletRe = /desktop/i;
+    var notMobileRe = /silk/i;
+    var tabletRe = /(android|ipad|tablet|kindle|silk)/i;
 
     if (userAgent.match(mobileRe) && !userAgent.match(notMobileRe)) {
         return "mobile";
-    } else if (userAgent.match(tabletRe) && !userAgent.match(notTabletRe)) {
+    } else if (userAgent.match(tabletRe)) {
         return "tablet";
     }
     return "desktop";
