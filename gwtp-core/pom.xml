@@ -47,6 +47,7 @@
                     <includes>**/*GwtTest.java,**/*GwtTestSuite.java</includes>
                     <mode>htmlunit</mode>
                     <testTimeOut>180</testTimeOut>
+                    <sourceLevel>${target.jdk}</sourceLevel>
                 </configuration>
                 <executions>
                     <execution>
