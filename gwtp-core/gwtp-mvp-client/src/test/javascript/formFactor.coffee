@@ -19,9 +19,6 @@ describe 'finding from user agent', ->
     it 'should be tablet when userAgent is ipad', ->
       expect(findFormFactorFromUserAgent('ipad')).toBe 'tablet'
 
-    it 'should be tablet when userAgent is silk', ->
-      expect(findFormFactorFromUserAgent('silk')).toBe 'tablet'
-
   describe 'for a desktop computer', ->
     it 'should be desktop when userAgent is desktop', ->
       expect(findFormFactorFromUserAgent('desktop')).toBe 'desktop'
