@@ -29,11 +29,15 @@ import java.lang.annotation.Target;
  * <p/>
  * Methods annotated by {@code @ProxyEvent} must return {@code void} and accept
  * a single parameter derived from {@link com.google.gwt.event.shared.GwtEvent GwtEvent}.
- * This event class must have a static {@code getType} method returning a type
- * derived from {@link com.google.gwt.event.shared.GwtEvent.Type Type}.
- *
- * @author Philippe Beaudoin
+ * This event class must have a static {@code getType} method, with optionally one
+ * Class&lt;?&gt; parameter, returning a type derived from
+ * {@link com.google.gwt.event.shared.GwtEvent.Type Type}.
+ * <p/>
+ * {@code @ProxyEvent} accepts one Class&lt;?&gt; parameter when resorting to generic
+ * event handling is necessary. In such cases, your getType static method must be signed
+ * with an unbound Class&lt;?&gt; parameter.
  */
 @Target(ElementType.METHOD)
 public @interface ProxyEvent {
+    Class<?> value() default Null.class;
 }
