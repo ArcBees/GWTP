@@ -52,3 +52,5 @@ describe 'finding form factor', ->
   navigator =
     userAgent: 'mobile'
   expect(findFormFactor('formFactor', location, navigator)).toBe 'mobile'
+  
+window.formfactorTestsHaveRun = true;
