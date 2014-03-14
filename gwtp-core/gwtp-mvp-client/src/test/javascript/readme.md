@@ -1,9 +1,13 @@
-uasorter is a java console program that helps sort useragents into desktop mobile and tablet.
+#User Agent Sorter
+
+User Agent Sorter is a java console program that helps sort useragents into desktop mobile and tablet.
 
 To run
 
+`
 cd uasorter
 mvn exec:java
+`
 
 You will see a list of category descriptions followed by a user agent string.
 
