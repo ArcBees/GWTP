@@ -26,7 +26,7 @@ public class UserAgentSorter {
 			out = new StringBuilder();
 			userAgent = getRandomUserAgent(getRandomFolder(out, folders));
 		}
-		System.out.println(out.toString());
+		System.out.print(out.toString());
 		System.out.println("User Agent: " + userAgent);
 		System.out.println("Bots are desktop browsers.");
 		System.out.println("Is the useragent a desktop, tablet or mobile browser? d t m?");
