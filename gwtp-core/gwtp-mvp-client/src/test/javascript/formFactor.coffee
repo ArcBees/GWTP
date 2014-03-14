@@ -1,27 +1,21 @@
 describe 'finding from user agent', ->
   describe 'for a mobile device', ->
-    it 'should be mobile when userAgent is iphone', ->
-      expect(findFormFactorFromUserAgent('iphone')).toBe 'mobile'
-
-    it 'should be mobile when userAgent is ipod', ->
-      expect(findFormFactorFromUserAgent('ipod')).toBe 'mobile'
-
-    it 'should be mobile when userAgent is mobile', ->
-      expect(findFormFactorFromUserAgent('mobile')).toBe 'mobile'
+    for userAgent in window.mobileUserAgents
+      do (userAgent) ->
+        it 'should be mobile when userAgent is ' + userAgent, ->
+          expect(findFormFactorFromUserAgent(userAgent)).toBe 'mobile'
 
   describe 'for tablet', ->
-    it 'should be tablet when userAgent is android', ->
-      expect(findFormFactorFromUserAgent('android')).toBe 'tablet'
-
-    it 'should be tablet when userAgent is tablet', ->
-      expect(findFormFactorFromUserAgent('tablet')).toBe 'tablet'
-
-    it 'should be tablet when userAgent is ipad', ->
-      expect(findFormFactorFromUserAgent('ipad')).toBe 'tablet'
+    for userAgent in window.tabletUserAgents
+      do (userAgent) ->
+        it 'should be tablet when userAgent is ' + userAgent, =>
+          expect(findFormFactorFromUserAgent(userAgent)).toBe 'tablet'
 
   describe 'for a desktop computer', ->
-    it 'should be desktop when userAgent is desktop', ->
-      expect(findFormFactorFromUserAgent('desktop')).toBe 'desktop'
+     for userAgent in window.desktopUserAgents
+       do (userAgent) ->
+        it 'should be desktop when userAgent is ' + userAgent, =>
+          expect(findFormFactorFromUserAgent(userAgent)).toBe 'desktop'
 
 describe 'finding form factor from query parameter', ->
   it 'should return undefined when the property is not in the url', ->
@@ -58,3 +52,5 @@ describe 'finding form factor', ->
   navigator =
     userAgent: 'mobile'
   expect(findFormFactor('formFactor', location, navigator)).toBe 'mobile'
+  
+window.formfactorTestsHaveRun = true;

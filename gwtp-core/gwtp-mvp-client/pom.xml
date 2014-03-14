@@ -26,6 +26,12 @@
                 </executions>
                 <configuration>
                     <jsSrcDir>src/main/resources</jsSrcDir>
+					<preloadSources>
+						<source>src/test/javascript/desktopUserAgents.coffee</source>
+						<source>src/test/javascript/mobileUserAgents.coffee</source>
+						<source>src/test/javascript/tabletUserAgents.coffee</source>
+						<source>src/main/resources/com/gwtplatform/mvp/rebind/linker/formFactor.js</source>
+					</preloadSources>
                 </configuration>
             </plugin>
         </plugins>
