@@ -34,11 +34,11 @@ public class UserAgentSorter {
 		final String answer = System.console().readLine().toLowerCase();
 
 		if (answer.startsWith("d")) {
-			addUserAgent(userAgent, "../desktopUserAgents.coffee");
+			addUserAgent(userAgent, "../desktopUserAgents.js");
 		} else if (answer.startsWith("t")) {
-			addUserAgent(userAgent, "../tabletUserAgents.coffee");
+			addUserAgent(userAgent, "../tabletUserAgents.js");
 		} else if (answer.startsWith("m")) {
-			addUserAgent(userAgent, "../mobileUserAgents.coffee");
+			addUserAgent(userAgent, "../mobileUserAgents.js");
 		} else {
 			System.out.println("That wasn't a valid answer");
 			return;
