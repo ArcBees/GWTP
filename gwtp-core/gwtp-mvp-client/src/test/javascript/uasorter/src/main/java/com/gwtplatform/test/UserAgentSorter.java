@@ -39,6 +39,9 @@ public class UserAgentSorter {
 			addUserAgent(userAgent, "../tabletUserAgents.coffee");
 		} else if (answer.startsWith("m")) {
 			addUserAgent(userAgent, "../mobileUserAgents.coffee");
+		} else {
+			System.out.println("That wasn't a valid answer");
+			return;
 		}
 
 		//overwrite found useragent with null
