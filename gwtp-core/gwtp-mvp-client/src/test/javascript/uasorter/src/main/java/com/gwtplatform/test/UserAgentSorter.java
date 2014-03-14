@@ -1,0 +1,101 @@
+package com.gwtplatform.test;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+public class UserAgentSorter {
+
+	public static void main(final String[] args) throws IOException {
+		System.out.println("Starting UserAgentSorter");
+		final String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../unsortedUserAgents.json"));
+		//System.out.println(unsortedUserAgentsJson);
+		final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
+
+		String userAgent = getRandomUserAgent(getRandomFolder(folders));
+		while (userAgent == null) {
+			userAgent = getRandomUserAgent(getRandomFolder(folders));
+		}
+		System.out.println("User Agent: " + userAgent);
+		System.out.println("Bots are desktop browsers.");
+		System.out.println("Is the useragent a desktop, tablet or mobile browser? d t m?");
+
+		final String answer = System.console().readLine().toLowerCase();
+
+		if (answer.startsWith("d")) {
+			addUserAgent(userAgent, "../desktopUserAgents.coffee");
+		} else if (answer.startsWith("t")) {
+			addUserAgent(userAgent, "../tabletUserAgents.coffee");
+		} else if (answer.startsWith("m")) {
+			addUserAgent(userAgent, "../mobileUserAgents.coffee");
+		}
+
+		//overwrite found useragent with null
+
+		FileUtils.writeStringToFile(new File("../unsortedUserAgents.json"), unsortedUserAgentsJson.replace("\"" + userAgent + "\"", "null"));
+
+	}
+
+	private static void addUserAgent(final String userAgent, final String fileName) throws IOException {
+		final String currentUserAgents = FileUtils.readFileToString(new File(fileName));
+		final String[] split = currentUserAgents.split("=");
+		final JsonArray existingUserAgents = new JsonParser().parse(split[1]).getAsJsonArray();
+		for (int i = 0; i < existingUserAgents.size(); i++) {
+			if (existingUserAgents.get(i).getAsString().equals(userAgent)) {
+				System.out.println("User Agent is already sorted.");
+				return;
+			}
+		}
+
+		System.out.println("Adding " + userAgent + " to " + fileName);
+
+		existingUserAgents.add(new JsonParser().parse("\"" + userAgent + "\""));
+
+		final Gson gs = new GsonBuilder().setPrettyPrinting().create();
+		final String newUserAgentsCoffee = split[0] + " = " + gs.toJson(existingUserAgents);
+
+		FileUtils.writeStringToFile(new File(fileName), newUserAgentsCoffee);
+
+	}
+
+	private static String getRandomUserAgent(final JsonObject folder) {
+		JsonElement userAgent = folder.get("useragent");
+		if (userAgent.isJsonArray()) {
+			userAgent = userAgent.getAsJsonArray().get((int) (Math.random() * (userAgent.getAsJsonArray().size() - 1)));
+		}
+		if (userAgent.getAsJsonObject().get("useragent").isJsonNull()) {
+			return null;
+		}
+		return userAgent.getAsJsonObject().get("useragent").getAsString();
+
+	}
+
+	private static JsonObject getRandomFolder(final JsonArray folders) {
+		final JsonElement randomFolder = folders.get((int) (Math.random() * (folders.size() - 1)));
+		return getRandomSubFolder(randomFolder.getAsJsonObject());
+	}
+
+	private static JsonObject getRandomSubFolder(final JsonObject folder) {
+		System.out.println("Description: " + folder.get("description"));
+		if (folder.has("folder")) {
+			if (Math.random() < 0.5 || !folder.has("useragent")) {
+				final JsonElement nextFolder = folder.get("folder");
+				if (nextFolder.isJsonArray()) {
+
+					return getRandomFolder(nextFolder.getAsJsonArray());
+				} else {
+					return getRandomSubFolder(nextFolder.getAsJsonObject());
+				}
+			}
+		}
+		return folder;
+	}
+}
