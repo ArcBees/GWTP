@@ -20,10 +20,13 @@ public class UserAgentSorter {
 		//System.out.println(unsortedUserAgentsJson);
 		final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
 
-		String userAgent = getRandomUserAgent(getRandomFolder(folders));
+		StringBuilder out = new StringBuilder();
+		String userAgent = getRandomUserAgent(getRandomFolder(out, folders));
 		while (userAgent == null) {
-			userAgent = getRandomUserAgent(getRandomFolder(folders));
+			out = new StringBuilder();
+			userAgent = getRandomUserAgent(getRandomFolder(out, folders));
 		}
+		System.out.println(out.toString());
 		System.out.println("User Agent: " + userAgent);
 		System.out.println("Bots are desktop browsers.");
 		System.out.println("Is the useragent a desktop, tablet or mobile browser? d t m?");
@@ -78,21 +81,20 @@ public class UserAgentSorter {
 
 	}
 
-	private static JsonObject getRandomFolder(final JsonArray folders) {
+	private static JsonObject getRandomFolder(final StringBuilder out, final JsonArray folders) {
 		final JsonElement randomFolder = folders.get((int) (Math.random() * (folders.size() - 1)));
-		return getRandomSubFolder(randomFolder.getAsJsonObject());
+		return getRandomSubFolder(out, randomFolder.getAsJsonObject());
 	}
 
-	private static JsonObject getRandomSubFolder(final JsonObject folder) {
-		System.out.println("Description: " + folder.get("description"));
+	private static JsonObject getRandomSubFolder(final StringBuilder out, final JsonObject folder) {
+		out.append("Description: " + folder.get("description") + "\n");
 		if (folder.has("folder")) {
 			if (Math.random() < 0.5 || !folder.has("useragent")) {
 				final JsonElement nextFolder = folder.get("folder");
 				if (nextFolder.isJsonArray()) {
-
-					return getRandomFolder(nextFolder.getAsJsonArray());
+					return getRandomFolder(out, nextFolder.getAsJsonArray());
 				} else {
-					return getRandomSubFolder(nextFolder.getAsJsonObject());
+					return getRandomSubFolder(out, nextFolder.getAsJsonObject());
 				}
 			}
 		}

@@ -2366,7 +2366,7 @@
           },
           {
             "description": "Msnbot 0.11 (beta version)",
-            "useragent": "msnbot/0.11 ( http://search.msn.com/msnbot.htm)"
+            "useragent": null
           },
           {
             "description": "Msnbot-Media 1.1",
