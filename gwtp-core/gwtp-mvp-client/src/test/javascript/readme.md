@@ -4,10 +4,10 @@ User Agent Sorter is a java console program that helps sort useragents into desk
 
 To run
 
-`
+```
 cd uasorter
 mvn exec:java
-`
+```
 
 You will see a list of category descriptions followed by a user agent string.
 
