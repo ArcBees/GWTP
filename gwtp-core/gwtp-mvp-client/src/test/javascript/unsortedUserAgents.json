@@ -64,7 +64,7 @@
             },
             {
               "description": "Firefox 3.5.6 (Vista)",
-              "useragent": "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 GTB5"
+              "useragent": null
             },
             {
               "description": "Firefox 3.6.8 (XP)",
@@ -72,7 +72,7 @@
             },
             {
               "description": "Firefox 4.01 (Win 7 32)",
-              "useragent": "Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"
+              "useragent": null
             },
             {
               "description": "Firefox 4.01 (Win 7 64)",
@@ -195,7 +195,7 @@
           },
           {
             "description": "Chrome 28.0.1469.0 (Win 7 - 64 bit)",
-            "useragent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/28.0.1469.0 Safari/537.36"
+            "useragent": null
           },
           {
             "description": "Chrome 28.0.1469.0 (Win 8 - 64 bit)",
@@ -207,7 +207,7 @@
           },
           {
             "description": "Firefox 12.0 (Win 7 32)",
-            "useragent": "Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20120403211507 Firefox/12.0"
+            "useragent": null
           },
           {
             "description": "Firefox 14.0.1 (Win Vista)",
@@ -240,7 +240,7 @@
           },
           {
             "description": "iTunes 9.0.2 (Windows)",
-            "useragent": "iTunes/9.0.2 (Windows; N)"
+            "useragent": null
           },
           {
             "description": "Konqueror 4.5 (Win XP - KDE native)",
@@ -411,11 +411,11 @@
             },
             {
               "description": "Chrome 14.0.835.186 (OS X 10_7_2 Intel)",
-              "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.186 Safari/535.1"
+              "useragent": null
             },
             {
               "description": "Chrome 15.0.874.54 (OS X 10_6_8 Intel)",
-              "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.54 Safari/535.2"
+              "useragent": null
             },
             {
               "description": "Chrome 16.0.912.36 (OS X 10_6_8 Intel)",
@@ -435,7 +435,7 @@
             },
             {
               "description": "Firefox 3.6 (OS X 10.6 Intel)",
-              "useragent": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2.14) Gecko/20110218 AlexaToolbar/alxf-2.0 Firefox/3.6.14"
+              "useragent": null
             },
             {
               "description": "Firefox 3.6 (OS X 10.5 PPC)",
@@ -447,7 +447,7 @@
             },
             {
               "description": "Firefox 5.0 (OS X 10.6 Intel)",
-              "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:5.0) Gecko/20100101 Firefox/5.0"
+              "useragent": null
             },
             {
               "description": "Firefox 9.0 (OS X 10.6 Intel)",
@@ -578,7 +578,7 @@
           },
           {
             "description": "Safari 533.20.27 (OS X 10_6_6 Intel)",
-            "useragent": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_6; en-us) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27"
+            "useragent": null
           },
           {
             "description": "Safari 534.20.8 (OS X 10_7 Intel)",
@@ -598,7 +598,7 @@
           },
           {
             "description": "SeaMonkey 2.7.1 (OS X 10.5 - Mozilla)",
-            "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 SeaMonkey/2.7.1"
+            "useragent": null
           },
           {
             "description": "Silk 1.0.13 (AppleWebKit533.16) 2.9 (Mac OS X 10_6_3)",
@@ -622,7 +622,7 @@
               },
               {
                 "description": "ELinks 0.12~pre5-4",
-                "useragent": "ELinks/0.12~pre5-4"
+                "useragent": null
               },
               {
                 "description": "Links 0.9.1",
@@ -919,7 +919,7 @@
           },
           {
             "description": "Iceweasel (Firefox) 19.0.2 (Debian 64)",
-            "useragent": "Mozilla/5.0 (X11; Linux x86_64; rv:19.0) Gecko/20100101 Firefox/19.0 Iceweasel/19.0.2"
+            "useragent": null
           },
           {
             "description": "Konqueror 4.3 - khtml (Slackware 13)",
@@ -1244,7 +1244,7 @@
               },
               {
                 "description": "Puffin 2.9174AT - Android - (AT=Android Tablet)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/2.9174AT"
+                "useragent": null
               },
               {
                 "description": "Puffin 3.9174IP - iOS 6_1 - (IP=iphone)",
@@ -1264,7 +1264,7 @@
               },
               {
                 "description": "Safari 533 - iPad - iOS 4_2_1)",
-                "useragent": "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"
+                "useragent": null
               },
               {
                 "description": "Safari 533.17.9 - iPhone - iOS 4_2_1",
@@ -1304,7 +1304,7 @@
                   },
                   {
                     "description": "(device unknown) - Android - Puffin 2.9174AT (AT=android tablet)",
-                    "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/2.9174AT"
+                    "useragent": null
                   },
                   {
                     "description": "Apple iPad - iOS - Puffin/3.9174IT (IT=ios tablet)",
@@ -1316,7 +1316,7 @@
                   },
                   {
                     "description": "Apple iPad 1 - iOS 4_2_1 - Safari 533",
-                    "useragent": "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"
+                    "useragent": null
                   },
                   {
                     "description": "Apple iPad 2 - iOS 4_3 - Safari 533",
@@ -1399,7 +1399,7 @@
                   },
                   {
                     "description": "iPad 1 - iOS 4_2_1 - Safari 533",
-                    "useragent": "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"
+                    "useragent": null
                   },
                   {
                     "description": "iPad 2 - iOS 4_3 - Safari 533",
@@ -2128,7 +2128,7 @@
                   },
                   {
                     "description": "iOS 4_2_1 - iPad - Safari 533",
-                    "useragent": "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"
+                    "useragent": null
                   },
                   {
                     "description": "iOS 4_2_1 - iPhone - Safari 533.17.9",
@@ -2306,7 +2306,7 @@
           },
           {
             "description": "FAST-WebCrawler 3.8",
-            "useragent": "FAST-WebCrawler/3.8 (crawler at trd dot overture dot com; http://www.alltheweb.com/help/webmaster/crawler)"
+            "useragent": null
           },
           {
             "description": "Google AdsBot 1.0",
@@ -2338,7 +2338,7 @@
           },
           {
             "description": "Googlebot-Mobile 2.1 (ID: SAMSUNG-SGH-E250)",
-            "useragent": "SAMSUNG-SGH-E250/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0 (compatible; Googlebot-Mobile/2.1;  http://www.google.com/bot.html)"
+            "useragent": null
           },
           {
             "description": "Googlebot-News",
@@ -2370,7 +2370,7 @@
           },
           {
             "description": "Msnbot-Media 1.1",
-            "useragent": "msnbot-media/1.1 ( http://search.msn.com/msnbot.htm)"
+            "useragent": null
           },
           {
             "description": "Yahoo Slurp",
@@ -2428,7 +2428,7 @@
               },
               {
                 "description": "SeaMonkey 2.7.2  - OS/2 Warp 4.5",
-                "useragent": "Mozilla/5.0 (OS/2; Warp 4.5; rv:10.0.12) Gecko/20130108 Firefox/10.0.12 SeaMonkey/2.7.2"
+                "useragent": null
               },
               {
                 "description": "Arora 0.11.0",
@@ -2540,7 +2540,7 @@
               },
               {
                 "description": "Peach 1.01",
-                "useragent": "Peach/1.01 (Ubuntu 8.04 LTS; U; en)"
+                "useragent": null
               },
               {
                 "description": "Python-urllib 2.5",
