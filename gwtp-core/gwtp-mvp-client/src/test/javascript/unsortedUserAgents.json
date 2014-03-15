@@ -48,7 +48,7 @@
             },
             {
               "description": "Chrome 16.0.912.36 (Win 7 64)",
-              "useragent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.36 Safari/535.7"
+              "useragent": null
             },
             {
               "description": "Firefox 3.0.2pre (Win XP 64)",
@@ -163,7 +163,7 @@
           },
           {
             "description": "Arora 0.8.0 - (Windows)",
-            "useragent": "Mozilla/5.0 (Windows; U; ; en-NZ) AppleWebKit/527  (KHTML, like Gecko, Safari/419.3) Arora/0.8.0"
+            "useragent": null
           },
           {
             "description": "Avant Browser - MSIE 7 (Win XP)",
@@ -187,7 +187,7 @@
           },
           {
             "description": "Chrome 20.0.1090.0 (Win 8)",
-            "useragent": "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6"
+            "useragent": null
           },
           {
             "description": "Chrome 22.0.1207.1 (Win 7 - 64 bit)",
@@ -215,7 +215,7 @@
           },
           {
             "description": "Firefox 15.0a1 (Win 7 64)",
-            "useragent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20120427 Firefox/15.0a1"
+            "useragent": null
           },
           {
             "description": "Firefox 16.0 (Win 8 64)",
@@ -287,7 +287,7 @@
           },
           {
             "description": "MSIE 8 - standard mode (Vista)",
-            "useragent": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)",
+            "useragent": null,
             "platform": "win32"
           },
           {
@@ -356,7 +356,7 @@
           },
           {
             "description": "Opera 12.00 (id as 9.8) (Win 7)",
-            "useragent": "Opera/9.80 (Windows NT 6.1; U; es-ES) Presto/2.9.181 Version/12.00"
+            "useragent": null
           },
           {
             "description": "Opera 12.14 (id as 9.8) (Win Vista)",
@@ -419,7 +419,7 @@
             },
             {
               "description": "Chrome 16.0.912.36 (OS X 10_6_8 Intel)",
-              "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.36 Safari/535.7"
+              "useragent": null
             },
             {
               "description": "Firefox 0.9 (OS X Mach)",
@@ -427,7 +427,7 @@
             },
             {
               "description": "Firefox 3.0.3 (OS X PPC)",
-              "useragent": "Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.5; en-US; rv:1.9.0.3) Gecko/2008092414 Firefox/3.0.3"
+              "useragent": null
             },
             {
               "description": "Firefox 3.5 (OS X 10.5 Intel)",
@@ -439,7 +439,7 @@
             },
             {
               "description": "Firefox 3.6 (OS X 10.5 PPC)",
-              "useragent": "Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.5; en-US; rv:1.9.2.15) Gecko/20110303 Firefox/3.6.15"
+              "useragent": null
             },
             {
               "description": "Firefox 4.0.1 (OS X 10.6 Intel)",
@@ -459,7 +459,7 @@
             },
             {
               "description": "Omniweb 563.15 (OS X PPC)",
-              "useragent": "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US) AppleWebKit/125.4 (KHTML, like Gecko, Safari) OmniWeb/v563.15"
+              "useragent": null
             },
             {
               "description": "Opera 9.0 (OS X PPC)",
@@ -566,7 +566,7 @@
           },
           {
             "description": "Opera 11.52 (id as 9.8) (OS X Intel)",
-            "useragent": "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52"
+            "useragent": null
           },
           {
             "description": "Safari 531.21.10 (OS X 10_6_2 Intel)",
@@ -835,7 +835,7 @@
         "useragent": [
           {
             "description": "Arora 0.11.1 - WebKit",
-            "useragent": "Mozilla/5.0 (X11; U; Linux; en-US) AppleWebKit/527  (KHTML, like Gecko, Safari/419.3) Arora/0.10.1"
+            "useragent": null
           },
           {
             "description": "Chrome 19.0.1084.9 (64 bit)",
@@ -923,7 +923,7 @@
           },
           {
             "description": "Konqueror 4.3 - khtml (Slackware 13)",
-            "useragent": "Mozilla/5.0 (compatible; Konqueror/4.2; Linux) KHTML/4.2.4 (like Gecko) Slackware/13.0"
+            "useragent": null
           },
           {
             "description": "Konqueror 4.3.1 - khtml (Fedora 11)",
@@ -955,7 +955,7 @@
           },
           {
             "description": "Mozilla 1.9.0 (Debian)",
-            "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.0.3) Gecko/2008092814 (Debian-3.0.1-1)"
+            "useragent": null
           },
           {
             "description": "Mozilla 1.9a3pre",
@@ -1076,11 +1076,11 @@
         "useragent": [
           {
             "description": "Arora/0.10.2 (BSD/Haiku)",
-            "useragent": "Mozilla/5.0 (Unknown; U; UNIX BSD/SYSV system; C -) AppleWebKit/527  (KHTML, like Gecko, Safari/419.3) Arora/0.10.2"
+            "useragent": null
           },
           {
             "description": "Chrome 19.0.1084.56 (FreeBSD 64)",
-            "useragent": "Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/536.5 (KHTML like Gecko) Chrome/19.0.1084.56 Safari/536.5"
+            "useragent": null
           },
           {
             "description": "Chrome 22.0.1229.79 (FreeBSD 64)",
@@ -1092,7 +1092,7 @@
           },
           {
             "description": "Epiphany 2.30.0 (FreeBSD)",
-            "useragent": "Mozilla/5.0 (X11; U; FreeBSD amd64; en-us) AppleWebKit/531.2  (KHTML, like Gecko) Safari/531.2  Epiphany/2.30.0"
+            "useragent": null
           },
           {
             "description": "Firefox 3.1b3 (SunOs)",
@@ -1104,7 +1104,7 @@
           },
           {
             "description": "Firefox 3.6.8 (FreeBSD)",
-            "useragent": "Mozilla/5.0 (X11; U; FreeBSD i386; de-CH; rv:1.9.2.8) Gecko/20100729 Firefox/3.6.8"
+            "useragent": null
           },
           {
             "description": "Firefox 5.0 (FreeBSD 64)",
@@ -1164,7 +1164,7 @@
               },
               {
                 "description": "IEMobile 7.0 (MSIE 7.0) - WinPhone OS 7.0 - Asus Galaxy",
-                "useragent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0) Asus;Galaxy6"
+                "useragent": null
               },
               {
                 "description": "IEMobile 7.5 (MSIE 9 - WP7.5)",
@@ -1180,7 +1180,7 @@
               },
               {
                 "description": "EudoraWeb 2.1 (PalmOS)",
-                "useragent": "Mozilla/1.22 (compatible; MSIE 5.01; PalmOS 3.0) EudoraWeb 2.1"
+                "useragent": null
               },
               {
                 "description": "Firefox 4.0.1 (Win CE)",
@@ -1240,7 +1240,7 @@
               },
               {
                 "description": "Puffin 2.9174AP - Android - (AP=Android Phone)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-gb) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/2.9174AP"
+                "useragent": null
               },
               {
                 "description": "Puffin 2.9174AT - Android - (AT=Android Tablet)",
@@ -1332,7 +1332,7 @@
                   },
                   {
                     "description": "HP Touchpad 1.0 - WebOS 3.0.2 - wOSBrowser 234.40.1",
-                    "useragent": "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.2; U; de-DE) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.40.1 Safari/534.6 TouchPad/1.0"
+                    "useragent": null
                   },
                   {
                     "description": "Kindle Fire - Android 4.0.3 - Silk 2.1 (AppleWebKit 535.19)",
@@ -1348,7 +1348,7 @@
                   },
                   {
                     "description": "Samsung Galaxy - Android 1.5 - Mobile Safari 525.20.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 1.5; de-de; Galaxy Build/CUPCAKE) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1"
+                    "useragent": null
                   },
                   {
                     "description": "Samsung Galaxy - Android 2.2 - Mobile Safari 533.1",
@@ -1360,7 +1360,7 @@
                   },
                   {
                     "description": "Samsung GT-P7100 - Android 3.0.1 - AppleWebKit 534.13",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 3.0.1; en-us; GT-P7100 Build/HRI83) AppleWebkit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13"
+                    "useragent": null
                   }
                 ]
               },
@@ -1549,7 +1549,7 @@
                 "useragent": [
                   {
                     "description": "Touchpad 1.0 - WebOS 3.0.2 - wOSBrowser 234.40.1",
-                    "useragent": "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.2; U; de-DE) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.40.1 Safari/534.6 TouchPad/1.0"
+                    "useragent": null
                   },
                   {
                     "description": "Pre3 - webOS 2.2.4 - wOSBrowser 221.56",
@@ -1562,7 +1562,7 @@
                 "useragent": [
                   {
                     "description": "6800 - WinCE - IEMobile 7.11 (MSIE 6.0) - Sprint",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.11) Sprint:PPC6800 "
+                    "useragent": null
                   },
                   {
                     "description": "6800 - WinCE - IEMobile 7.11 (MSIE 6.0) - Verizon",
@@ -1582,7 +1582,7 @@
                   },
                   {
                     "description": "Evo - Android 2.2 - Mobile Safari 533.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Sprint APA9292KT Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                    "useragent": null
                   },
                   {
                     "description": "Hero - Android 1.5 - Mobile Safari 525.20",
@@ -1623,7 +1623,7 @@
                 "useragent": [
                   {
                     "description": "Fusic LX550",
-                    "useragent": "LG-LX550 AU-MIC-LX550/2.0 MMP/2.0 Profile/MIDP-2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "Rumor2 LX265 - Polaris",
@@ -1682,7 +1682,7 @@
                   },
                   {
                     "description": "Milestone  Android 2.0.1 - Mobile Safari 530.17",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.0.1; de-de; Milestone Build/SHOLS_U2_01.14.0) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17"
+                    "useragent": null
                   },
                   {
                     "description": "Razr V9",
@@ -1814,7 +1814,7 @@
                   },
                   {
                     "description": "N93 - SymbianOS 9.1 - Safari 413",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.1; U; de) AppleWebKit/413 (KHTML, like Gecko) Safari/413"
+                    "useragent": null
                   },
                   {
                     "description": "N95 - SymbianOS 9.2 - Safari 413",
@@ -1856,7 +1856,7 @@
                   },
                   {
                     "description": "Galaxy - Android 1.5 - Mobile Safari 525.20.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 1.5; de-de; Galaxy Build/CUPCAKE) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1"
+                    "useragent": null
                   },
                   {
                     "description": "Galaxy - Android 2.2 - Mobile Safari 533.1",
@@ -1876,7 +1876,7 @@
                   },
                   {
                     "description": "GT-P7100 tablet - Android 3.0.1 - AppleWebKit 534.13",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 3.0.1; en-us; GT-P7100 Build/HRI83) AppleWebkit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13"
+                    "useragent": null
                   },
                   {
                     "description": "Jet",
@@ -1925,7 +1925,7 @@
                   },
                   {
                     "description": "K800 - Opera 9.8",
-                    "useragent": "Opera/9.80 (J2ME/MIDP; Opera Mini/5.0.16823/1428; U; en) Presto/2.2.0"
+                    "useragent": null
                   },
                   {
                     "description": "K800i",
@@ -2042,7 +2042,7 @@
                   },
                   {
                     "description": "Android 2.2 - HTC Evo - Mobile Safari 533.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Sprint APA9292KT Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                    "useragent": null
                   },
                   {
                     "description": "Android 2.2 - HTC Incredible - Safari 533.1",
@@ -2082,7 +2082,7 @@
                   },
                   {
                     "description": "Android 4.1.2 - Chrome 30.0",
-                    "useragent": "Mozilla/5.0 (Linux; Android 4.1.2; SHV-E250S Build/JZO54K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.82 Mobile Safari/537.36"
+                    "useragent": null
                   },
                   {
                     "description": "Android 4.2 - Firefox 19.0",
@@ -2188,7 +2188,7 @@
                   },
                   {
                     "description": "SymbianOS 9.4 - Nokia N97 - WicKed 7.1.12344",
-                    "useragent": "Mozilla/5.0 (SymbianOS 9.4; Series60/5.0 NokiaN97-1/10.0.012; Profile/MIDP-2.1 Configuration/CLDC-1.1; en-us) AppleWebKit/525 (KHTML, like Gecko) WicKed/7.1.12344"
+                    "useragent": null
                   },
                   {
                     "description": "SymbOS - Opera 10.00 Mobi",
@@ -2217,7 +2217,7 @@
                   },
                   {
                     "description": "Windows Phone OS 7.0 - Asus Galaxy - IEMobile 7.0 (MSIE 7.0)",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0) Asus;Galaxy6"
+                    "useragent": null
                   },
                   {
                     "description": "Windows Phone 7 - MSIE 7 - IEMobile 7.0",
@@ -2248,7 +2248,7 @@
               },
               {
                 "description": "Novarra-Vision 6.9",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.7) Gecko/20060909 Firefox/1.5.0.7 MG(Novarra-Vision/6.9)"
+                "useragent": null
               },
               {
                 "description": "ReqwirelessWeb 3.5",
@@ -2290,7 +2290,7 @@
         "useragent": [
           {
             "description": "Ask Jeeves/Teoma",
-            "useragent": "Mozilla/2.0 (compatible; Ask Jeeves/Teoma)"
+            "useragent": null
           },
           {
             "description": "Baiduspider ",
@@ -2322,7 +2322,7 @@
           },
           {
             "description": "Googlebot-Image 1.0",
-            "useragent": "Googlebot-Image/1.0"
+            "useragent": null
           },
           {
             "description": "Googlebot MediaPartners",
@@ -2358,7 +2358,7 @@
           },
           {
             "description": "Msnbot 1.0 (current version)",
-            "useragent": "msnbot/1.0 ( http://search.msn.com/msnbot.htm)"
+            "useragent": null
           },
           {
             "description": "Msnbot 1.1",
@@ -2394,7 +2394,7 @@
               },
               {
                 "description": "Gaisbot 3.0",
-                "useragent": "Gaisbot/3.0 (robot@gais.cs.ccu.edu.tw; http://gais.cs.ccu.edu.tw/robot.php)"
+                "useragent": null
               },
               {
                 "description": "Grub-Client",
@@ -2445,7 +2445,7 @@
             "useragent": [
               {
                 "description": "Download Demon",
-                "useragent": "Download Demon/3.5.0.11"
+                "useragent": null
               },
               {
                 "description": "Offline Explorer 2.5",
@@ -2490,7 +2490,7 @@
               },
               {
                 "description": "Google Feed Fetcher",
-                "useragent": "FeedFetcher-Google; ( http://www.google.com/feedfetcher.html)"
+                "useragent": null
               },
               {
                 "description": "Gregarius 0.5.2",
@@ -2536,7 +2536,7 @@
               },
               {
                 "description": "libwww-perl 5.820",
-                "useragent": "libwww-perl/5.820"
+                "useragent": null
               },
               {
                 "description": "Peach 1.01",
