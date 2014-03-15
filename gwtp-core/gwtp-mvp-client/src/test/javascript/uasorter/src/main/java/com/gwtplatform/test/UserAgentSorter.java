@@ -84,7 +84,7 @@ public class UserAgentSorter {
 		existingUserAgents.add(new JsonParser().parse("\"" + userAgent + "\""));
 
 		final Gson gs = new GsonBuilder().setPrettyPrinting().create();
-		final String newUserAgentsCoffee = split[0] + " = " + gs.toJson(existingUserAgents);
+		final String newUserAgentsCoffee = split[0] + "= " + gs.toJson(existingUserAgents);
 
 		FileUtils.writeStringToFile(new File(fileName), newUserAgentsCoffee);
 
