@@ -642,7 +642,7 @@
               },
               {
                 "description": "w3m 0.5.1",
-                "useragent": "w3m/0.5.1"
+                "useragent": null
               }
             ]
           },
@@ -1023,7 +1023,7 @@
               },
               {
                 "description": "w3m 0.5.1",
-                "useragent": "w3m/0.5.1"
+                "useragent": null
               }
             ]
           },
@@ -1296,7 +1296,7 @@
                   },
                   {
                     "description": "(device unknown) - Android 4.1 - AppleWebKit 534.30",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 4.1; en-us; sdk Build/MR1) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.1 Safari/534.30"
+                    "useragent": null
                   },
                   {
                     "description": "(device unknown) - Android 4.2 - Safari 535.19",
@@ -1407,7 +1407,7 @@
                   },
                   {
                     "description": "iPad 2 - iOS 5_0_1 - Safari 6533.18.5",
-                    "useragent": "Mozilla/5.0 (iPad; U; CPU iPad OS 5_0_1 like Mac OS X; en-us) AppleWebKit/535.1+ (KHTML like Gecko) Version/7.2.0.0 Safari/6533.18.5"
+                    "useragent": null
                   },
                   {
                     "description": "iPad - iOS 6_0 - Safari 6 (8536.25)",
@@ -1570,7 +1570,7 @@
                   },
                   {
                     "description": "Bahamas - Android 1.5 - Mobile Safari 525.20.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 1.5; en-us; htc_bahamas Build/CRB17) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1"
+                    "useragent": null
                   },
                   {
                     "description": "Desire - Android 2.1 - Mobile Safari 530.17",
@@ -1598,7 +1598,7 @@
                   },
                   {
                     "description": "Legend - Android 2.1 - Mobile Safari 530.17",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.1; en-us; HTC Legend Build/cupcake) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17"
+                    "useragent": null
                   },
                   {
                     "description": "Magic - Android 1.5 - Mobile Safari 525.20.1",
@@ -1730,7 +1730,7 @@
                   },
                   {
                     "description": "6230i",
-                    "useragent": "Nokia6230i/2.0 (03.80) Profile/MIDP-2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "6600 Smartphone - Symbian OS - Opera 6.20",
@@ -1746,7 +1746,7 @@
                   },
                   {
                     "description": "9500",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 5.0; Series80/2.0 Nokia9500/4.51 Profile/MIDP-2.0 Configuration/CLDC-1.1)"
+                    "useragent": null
                   },
                   {
                     "description": "C6-01 - Symbian 3 - Safari 525",
@@ -1758,11 +1758,11 @@
                   },
                   {
                     "description": "E50 - SymbianOS 9.1 - Safari 413 es50",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.1; U; en-us) AppleWebKit/413 (KHTML, like Gecko) Safari/413 es50"
+                    "useragent": null
                   },
                   {
                     "description": "E6-00 - SymbianOS 3 - Safari 533.4",
-                    "useragent": "Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaE6-00/021.002; Profile/MIDP-2.1 Configuration/CLDC-1.1) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.3.1.16 Mobile Safari/533.4 3gpp-gba"
+                    "useragent": null
                   },
                   {
                     "description": "E63 - SymbianOS 9.2 - UCWEB 8.8 (webkit)",
@@ -1774,11 +1774,11 @@
                   },
                   {
                     "description": "E7 - Symbian 3 - Safari 525",
-                    "useragent": "Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaE7-00/010.016; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Version/3.0 BrowserNG/7.2.7.3 3gpp-gba"
+                    "useragent": null
                   },
                   {
                     "description": "E70 - SymbianOS 9.1 - Safari 413 es70",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.1; U; en-us) AppleWebKit/413 (KHTML, like Gecko) Safari/413 es70"
+                    "useragent": null
                   },
                   {
                     "description": "E90 - SymbianOS 9.2 - Safari 413",
@@ -1790,15 +1790,15 @@
                   },
                   {
                     "description": "N70",
-                    "useragent": "NokiaN70-1/5.0609.2.0.1 Series60/2.8 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Link/6.3.1.13.0"
+                    "useragent": null
                   },
                   {
                     "description": "N73 - SymbianOS 9.1 - Safari 413",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.1; U; en-us) AppleWebKit/413 (KHTML, like Gecko) Safari/413"
+                    "useragent": null
                   },
                   {
                     "description": "N73 (Service)",
-                    "useragent": "NokiaN73-1/3.0649.0.0.1 Series60/3.0 Profile/MIDP2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "N8 - Symbian 3 - Safari 525",
@@ -1806,7 +1806,7 @@
                   },
                   {
                     "description": "N80 - SymbianOS 9.1 - Safari 413",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.1; U; en-us) AppleWebKit/413 (KHTML, like Gecko) Safari/413"
+                    "useragent": null
                   },
                   {
                     "description": "N9 - MeeGo - Safari 534.13",
@@ -1822,7 +1822,7 @@
                   },
                   {
                     "description": "N950 - MeeGo - Safari 534.13",
-                    "useragent": "Mozilla/5.0 (MeeGo; NokiaN950-00/00) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13"
+                    "useragent": null
                   },
                   {
                     "description": "N97 - SymbianOS 9.4 - WicKed 7.1.12344",
@@ -1843,7 +1843,7 @@
                   },
                   {
                     "description": "Treo 650 - PalmSource",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; PalmSource/hspr-H102; Blazer/4.0) 16;320x320"
+                    "useragent": null
                   }
                 ]
               },
@@ -1896,7 +1896,7 @@
                   },
                   {
                     "description": "Spica - Android 1.5 - Mobile Safari 525.20.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 1.5; fr-fr; GT-I5700 Build/CUPCAKE) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1"
+                    "useragent": null
                   },
                   {
                     "description": "X820",
@@ -1941,7 +1941,7 @@
                   },
                   {
                     "description": "S500i",
-                    "useragent": "SonyEricssonS500i/R6BC Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "Satio - Safari 525",
@@ -1973,19 +1973,19 @@
                   },
                   {
                     "description": "W810i",
-                    "useragent": "SonyEricssonW810i/R4EA Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Link/6.3.0.0.0"
+                    "useragent": null
                   },
                   {
                     "description": "W850i",
-                    "useragent": "SonyEricssonW850i/R1ED Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "W950i - Opera 8.60 - Symbian OS",
-                    "useragent": "SonyEricssonW950i/R100 Mozilla/4.0 (compatible; MSIE 6.0; Symbian OS; 323) Opera 8.60 [en-US]"
+                    "useragent": null
                   },
                   {
                     "description": "W995",
-                    "useragent": "SonyEricssonW995/R1EA Profile/MIDP-2.1 Configuration/CLDC-1.1 UNTRUSTED/1.0"
+                    "useragent": null
                   },
                   {
                     "description": "X10 - Android 1.6 - Safari 525.20.1",
@@ -2167,7 +2167,7 @@
                   },
                   {
                     "description": "PalmSource hspr-H102 - Palm Treo 650",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; PalmSource/hspr-H102; Blazer/4.0) 16;320x320"
+                    "useragent": null
                   }
                 ]
               },

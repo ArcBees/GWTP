@@ -97,7 +97,7 @@ public class UserAgentSorter {
 	private static String getRandomUserAgent(final JsonObject folder) {
 		JsonElement userAgent = folder.get("useragent");
 		if (userAgent.isJsonArray()) {
-			userAgent = userAgent.getAsJsonArray().get((int) (Math.random() * (userAgent.getAsJsonArray().size() - 1)));
+			userAgent = userAgent.getAsJsonArray().get((int) (Math.random() * (userAgent.getAsJsonArray().size())));
 		}
 		if (userAgent.getAsJsonObject().get("useragent").isJsonNull()) {
 			return null;

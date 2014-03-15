@@ -252,5 +252,6 @@ window.desktopUserAgents = [
   "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML like Gecko) Maxthon/4.0.0.2000 Chrome/22.0.1229.79 Safari/537.1",
   "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.1.17) Gecko/20110123 (like Firefox/3.x) SeaMonkey/2.0.12",
   "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:20.0) Gecko/20100101 Firefox/20.0",
-  "Midori/0.1.10 (X11; Linux i686; U; en-us) WebKit/(531).(2) "
+  "Midori/0.1.10 (X11; Linux i686; U; en-us) WebKit/(531).(2) ",
+  "w3m/0.5.1"
 ]
