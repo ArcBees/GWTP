@@ -20,5 +20,13 @@ window.desktopUserAgents = [
   "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Maxthon/3.0.8.2 Safari/533.1",
   "ELinks (0.4pre5; Linux 2.6.10-ac7 i686; 80x33)",
   "Mozilla/5.0 (X11; U; OpenBSD arm; en-us) AppleWebKit/531.2  (KHTML, like Gecko) Safari/531.2  Epiphany/2.30.0",
-  "Jigsaw/2.2.5 W3C_CSS_Validator_JFouffa/2.0"
+  "Jigsaw/2.2.5 W3C_CSS_Validator_JFouffa/2.0",
+  "Mozilla/5.0 (compatible; Konqueror/4.1; DragonFly) KHTML/4.1.4 (like Gecko)",
+  "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1",
+  "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/6.0)",
+  "iTunes/9.0.3 (Macintosh; U; Intel Mac OS X 10_6_2; en-ca)",
+  "Mozilla/5.0 (OS/2; Warp 4.5; rv:10.0.12) Gecko/20100101 Firefox/10.0.12",
+  "Googlebot-Video/1.0",
+  "Links (2.1pre15; FreeBSD 5.3-RELEASE i386; 196x84)",
+  "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_5; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.15 Safari/534.13"
 ]

@@ -51,7 +51,7 @@ public class UserAgentSorter {
 			} else if (answer.startsWith("m")) {
 				addUserAgent(userAgent, "../mobileUserAgents.js");
 			} else if (answer.startsWith("q")) {
-				System.out.println("Quiting, good bye");
+				System.out.println("Quitting, good bye");
 				return;
 			} else {
 				System.out.println("That wasn't a valid answer");

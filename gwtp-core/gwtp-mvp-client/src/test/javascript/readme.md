@@ -20,5 +20,5 @@ The user agent string will automatically be added to the test suite.
 You can make uasorter repeat by replacing <repeat> with the number of times you want to run the program below
 
 ```
-mvn exec:jave -Dexec.args="<repeat>"
+mvn exec:java -Dexec.args="<repeat>"
 ```
