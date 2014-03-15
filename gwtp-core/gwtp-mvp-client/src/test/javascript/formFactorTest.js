@@ -1,12 +1,15 @@
 try {
 
+  function testUserAgent(userAgent, formfactor) {
+    it("should be " + formfactor + " when userAgent is " + userAgent, function() {
+      expect(findFormFactorFromUserAgent(userAgent)).toBe(formfactor);
+    });
+  }
+
   function checkUserAgentArrayFormfactor (uaArray, formfactor) {
     describe("for a " + formfactor + " device", function() {
       for (var i = 0; i < uaArray.length; i++) {
-        var userAgent = uaArray[i];
-        it("should be " + formfactor + " when userAgent is " + userAgent, function() {
-          expect(findFormFactorFromUserAgent(userAgent)).toBe(formfactor);
-        });
+        testUserAgent(uaArray[i], formfactor);
       }
     });
   }

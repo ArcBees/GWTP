@@ -219,7 +219,7 @@
           },
           {
             "description": "Firefox 16.0 (Win 8 64)",
-            "useragent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0) Gecko/16.0 Firefox/16.0"
+            "useragent": null
           },
           {
             "description": "Firefox 19.0 (Win 8 32)",
@@ -231,7 +231,7 @@
           },
           {
             "description": "Firefox 21.0 (Win 7 32)",
-            "useragent": "Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20130401 Firefox/21.0"
+            "useragent": null
           },
           { "description": "Firefox 21.0.1 (Win 8 64)" },
           {
@@ -252,7 +252,7 @@
           },
           {
             "description": "Maxthon 3.0.8.2 (Webkit) (Vista)",
-            "useragent": "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Maxthon/3.0.8.2 Safari/533.1"
+            "useragent": null
           },
           {
             "description": "Maxthon 4.0.0.2000 (Webkit) (Win7 64 bit)",
@@ -312,7 +312,7 @@
           },
           {
             "description": "MSIE 10 - standard mode (Win 7 64)",
-            "useragent": "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)"
+            "useragent": null
           },
           {
             "description": "MSIE 10 - compat mode (Win 7 64)",
@@ -431,7 +431,7 @@
             },
             {
               "description": "Firefox 3.5 (OS X 10.5 Intel)",
-              "useragent": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1) Gecko/20090624 Firefox/3.5"
+              "useragent": null
             },
             {
               "description": "Firefox 3.6 (OS X 10.6 Intel)",
@@ -614,7 +614,7 @@
             "useragent": [
               {
                 "description": "Elinks 0.4pre5",
-                "useragent": "ELinks (0.4pre5; Linux 2.6.10-ac7 i686; 80x33)"
+                "useragent": null
               },
               {
                 "description": "ELinks 0.9.3 (Kanotix)",
@@ -630,7 +630,7 @@
               },
               {
                 "description": "Links 2.1",
-                "useragent": "Links (2.1pre15; Linux 2.4.26 i686; 158x61)"
+                "useragent": null
               },
               {
                 "description": "Links 2.3pre1",
@@ -883,7 +883,7 @@
           },
           {
             "description": "Firefox 19.0 (Slackware 13 32 bit)",
-            "useragent": "Mozilla/5.0 (X11; U; Linux i686; rv:19.0) Gecko/20100101 Slackware/13 Firefox/19.0"
+            "useragent": null
           },
           {
             "description": "Firefox 20.0 (Ubuntu 64 bit)",
@@ -1011,7 +1011,7 @@
             "useragent": [
               {
                 "description": "ELinks 0.4.3 (NetBSD)",
-                "useragent": "ELinks (0.4.3; NetBSD 3.0.2PATCH sparc64; 141x19)"
+                "useragent": null
               },
               {
                 "description": "Links 2.1 (FreeBSD)",
@@ -1019,7 +1019,7 @@
               },
               {
                 "description": "Links 2.8.7",
-                "useragent": "Lynx/2.8.7dev.4 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.8d"
+                "useragent": null
               },
               {
                 "description": "w3m 0.5.1",
@@ -1088,7 +1088,7 @@
           },
           {
             "description": "Epiphany 2.30.0 (OpenBSD)",
-            "useragent": "Mozilla/5.0 (X11; U; OpenBSD arm; en-us) AppleWebKit/531.2  (KHTML, like Gecko) Safari/531.2  Epiphany/2.30.0"
+            "useragent": null
           },
           {
             "description": "Epiphany 2.30.0 (FreeBSD)",
@@ -2148,7 +2148,7 @@
                 "description": "Linux",
                 "useragent": {
                   "description": "Linux - Fennec 2.0.1 (686 on x86_64)",
-                  "useragent": "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:2.0.1) Gecko/20100101 Firefox/4.0.1 Fennec/2.0.1"
+                  "useragent": null
                 }
               },
               {
@@ -2330,7 +2330,7 @@
           },
           {
             "description": "Googlebot-Mobile 2.1 (ID: DoCoMo/2.0)",
-            "useragent": "DoCoMo/2.0 N905i(c100;TB;W24H16) (compatible; Googlebot-Mobile/2.1;  http://www.google.com/bot.html)"
+            "useragent": null
           },
           {
             "description": "Googlebot-Mobile 2.1 (ID: iPhone)",
@@ -2398,7 +2398,7 @@
               },
               {
                 "description": "Grub-Client",
-                "useragent": "grub-client-1.5.3; (grub-client-1.5.3; Crawl your own stuff with http://grub.org)"
+                "useragent": null
               },
               {
                 "description": "gulperbot",
@@ -2411,7 +2411,7 @@
             "useragent": [
               {
                 "description": "Net Positive 2.1",
-                "useragent": "Mozilla/3.0 (compatible; NetPositive/2.1.1; BeOS)"
+                "useragent": null
               },
               {
                 "description": "SeaMonkey 1.5a",
@@ -2508,7 +2508,7 @@
               },
               {
                 "description": "Playstation 3 (1.10)",
-                "useragent": "Mozilla/5.0 (PLAYSTATION 3; 1.10)",
+                "useragent": null,
                 "appcodename": "Mozilla"
               },
               {
@@ -2557,7 +2557,7 @@
               },
               {
                 "description": "W3C CSS Validator",
-                "useragent": "Jigsaw/2.2.5 W3C_CSS_Validator_JFouffa/2.0",
+                "useragent": null,
                 "appcodename": "Jigsaw"
               },
               {
@@ -2591,7 +2591,7 @@
               },
               {
                 "description": "Grub-Client",
-                "useragent": "grub-client-1.5.3; (grub-client-1.5.3; Crawl your own stuff with http://grub.org)"
+                "useragent": null
               },
               {
                 "description": "iTunes 4.2 (OS X 10.2 PPC)",

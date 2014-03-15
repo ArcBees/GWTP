@@ -1,9 +1,24 @@
-window.desktopUserAgents      = [
+window.desktopUserAgents                      = [
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1664.3 Safari/537.36",
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 1083) AppleWebKit/537.36 (KHTML like Gecko) Chrome/28.0.1469.0 Safari/537.36",
   "Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/537.4 (KHTML like Gecko) Chrome/22.0.1229.79 Safari/537.4",
   "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:14.0) Gecko/20100101 Firefox/14.0.1",
   "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2",
   "msnbot/0.11 ( http://search.msn.com/msnbot.htm)",
-  "msnbot/1.1 ( http://search.msn.com/msnbot.htm)"
+  "msnbot/1.1 ( http://search.msn.com/msnbot.htm)",
+  "Mozilla/5.0 (X11; U; Linux i686; rv:19.0) Gecko/20100101 Slackware/13 Firefox/19.0",
+  "Lynx/2.8.7dev.4 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.8d",
+  "Mozilla/5.0 (PLAYSTATION 3; 1.10)",
+  "Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20130401 Firefox/21.0",
+  "Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0) Gecko/16.0 Firefox/16.0",
+  "Links (2.1pre15; Linux 2.4.26 i686; 158x61)",
+  "Mozilla/3.0 (compatible; NetPositive/2.1.1; BeOS)",
+  "grub-client-1.5.3; (grub-client-1.5.3; Crawl your own stuff with http://grub.org)",
+  "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1) Gecko/20090624 Firefox/3.5",
+  "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)",
+  "ELinks (0.4.3; NetBSD 3.0.2PATCH sparc64; 141x19)",
+  "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Maxthon/3.0.8.2 Safari/533.1",
+  "ELinks (0.4pre5; Linux 2.6.10-ac7 i686; 80x33)",
+  "Mozilla/5.0 (X11; U; OpenBSD arm; en-us) AppleWebKit/531.2  (KHTML, like Gecko) Safari/531.2  Epiphany/2.30.0",
+  "Jigsaw/2.2.5 W3C_CSS_Validator_JFouffa/2.0"
 ]

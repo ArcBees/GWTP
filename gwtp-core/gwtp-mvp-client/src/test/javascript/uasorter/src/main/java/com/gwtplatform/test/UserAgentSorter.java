@@ -16,37 +16,55 @@ public class UserAgentSorter {
 
 	public static void main(final String[] args) throws IOException {
 		System.out.println("Starting UserAgentSorter");
-		final String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../unsortedUserAgents.json"));
-		//System.out.println(unsortedUserAgentsJson);
-		final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
-
-		StringBuilder out = new StringBuilder();
-		String userAgent = getRandomUserAgent(getRandomFolder(out, folders));
-		while (userAgent == null) {
-			out = new StringBuilder();
-			userAgent = getRandomUserAgent(getRandomFolder(out, folders));
+		int repeat = 1;
+		if (args.length > 0) {
+			try {
+				repeat = Integer.valueOf(args[0]);
+			} catch (final NumberFormatException e) {
+				System.out.println("Could not interpret repeat paramater.");
+			}
 		}
-		System.out.print(out.toString());
-		System.out.println("User Agent: " + userAgent);
-		System.out.println("Bots are desktop browsers.");
-		System.out.println("Is the useragent a desktop, tablet or mobile browser? d t m?");
+		System.out.println("Running " + repeat + " times.");
+		System.out.println("----------------------------------------------\n");
+		for (int i = 0; i < repeat; i++) {
+			final String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../unsortedUserAgents.json"));
+			//System.out.println(unsortedUserAgentsJson);
+			final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
 
-		final String answer = System.console().readLine().toLowerCase();
+			StringBuilder out = new StringBuilder();
+			String userAgent = getRandomUserAgent(getRandomFolder(out, folders));
+			while (userAgent == null) {
+				out = new StringBuilder();
+				userAgent = getRandomUserAgent(getRandomFolder(out, folders));
+			}
+			System.out.print(out.toString());
+			System.out.println("User Agent: " + userAgent);
+			System.out.println("Bots and console programs are generally desktop browsers.  Be aware of mobile bots though.");
+			System.out.println("Is the useragent a desktop, tablet or mobile browser? d t m?");
 
-		if (answer.startsWith("d")) {
-			addUserAgent(userAgent, "../desktopUserAgents.js");
-		} else if (answer.startsWith("t")) {
-			addUserAgent(userAgent, "../tabletUserAgents.js");
-		} else if (answer.startsWith("m")) {
-			addUserAgent(userAgent, "../mobileUserAgents.js");
-		} else {
-			System.out.println("That wasn't a valid answer");
-			return;
+			final String answer = System.console().readLine().toLowerCase();
+
+			if (answer.startsWith("d")) {
+				addUserAgent(userAgent, "../desktopUserAgents.js");
+			} else if (answer.startsWith("t")) {
+				addUserAgent(userAgent, "../tabletUserAgents.js");
+			} else if (answer.startsWith("m")) {
+				addUserAgent(userAgent, "../mobileUserAgents.js");
+			} else if (answer.startsWith("q")) {
+				System.out.println("Quiting, good bye");
+				return;
+			} else {
+				System.out.println("That wasn't a valid answer");
+				break;
+			}
+
+			//overwrite found useragent with null
+
+			FileUtils.writeStringToFile(new File("../unsortedUserAgents.json"), unsortedUserAgentsJson.replace("\"" + userAgent + "\"", "null"));
+			System.out.println("----------------------------------------------");
+			System.out.println("Thank You: " + ((repeat - 1) - i) + " to go");
+			System.out.println("----------------------------------------------\n");
 		}
-
-		//overwrite found useragent with null
-
-		FileUtils.writeStringToFile(new File("../unsortedUserAgents.json"), unsortedUserAgentsJson.replace("\"" + userAgent + "\"", "null"));
 
 	}
 
