@@ -256,7 +256,7 @@
           },
           {
             "description": "Maxthon 4.0.0.2000 (Webkit) (Win7 64 bit)",
-            "useragent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML like Gecko) Maxthon/4.0.0.2000 Chrome/22.0.1229.79 Safari/537.1"
+            "useragent": null
           },
           {
             "description": "MSIE 6 (Win XP)",
@@ -380,7 +380,7 @@
           },
           {
             "description": "SeaMonkey (Mozilla) 2.0.12 (Win 7)",
-            "useragent": "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.1.17) Gecko/20110123 (like Firefox/3.x) SeaMonkey/2.0.12"
+            "useragent": null
           },
           {
             "description": "SeaMonkey (Mozilla) 2.7.1 (NT 5.2)",
@@ -887,7 +887,7 @@
           },
           {
             "description": "Firefox 20.0 (Ubuntu 64 bit)",
-            "useragent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:20.0) Gecko/20100101 Firefox/20.0"
+            "useragent": null
           },
           {
             "description": "Firefox 20.0 (32 bit)",
@@ -951,7 +951,7 @@
           },
           {
             "description": "Midori 0.1.10 (Webkit 531)",
-            "useragent": "Midori/0.1.10 (X11; Linux i686; U; en-us) WebKit/(531).(2) "
+            "useragent": null
           },
           {
             "description": "Mozilla 1.9.0 (Debian)",
@@ -1232,11 +1232,11 @@
               },
               {
                 "description": "Opera 10.61 Mini 5.1 (J2ME/MIDP)",
-                "useragent": "Opera/10.61 (J2ME/MIDP; Opera Mini/5.1.21219/19.999; en-US; rv:1.9.3a5) WebKit/534.5 Presto/2.6.30"
+                "useragent": null
               },
               {
                 "description": "Polaris 6.01",
-                "useragent": "POLARIS/6.01 (BREW 3.1.5; U; en-us; LG; LX265; POLARIS/6.01/WAP) MMP/2.0 profile/MIDP-2.1 Configuration/CLDC-1.1"
+                "useragent": null
               },
               {
                 "description": "Puffin 2.9174AP - Android - (AP=Android Phone)",
@@ -1248,11 +1248,11 @@
               },
               {
                 "description": "Puffin 3.9174IP - iOS 6_1 - (IP=iphone)",
-                "useragent": "Mozilla/5.0 (iPod; U; CPU iPhone OS 6_1 like Mac OS X; en-HK) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/3.9174IP Mobile "
+                "useragent": null
               },
               {
                 "description": "Puffin 3.9174IT -(says Linux) - (IT=iOS tablet)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-AU) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/3.9174IT "
+                "useragent": null
               },
               {
                 "description": "Puffin2.0.5603M - Linux - (M=mobile)",
@@ -1328,7 +1328,7 @@
                   },
                   {
                     "description": "Barnes & Noble Nook Color - (Masked: IDs as: OS_X 10_5_7) - Safari 530.17",
-                    "useragent": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7;en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17"
+                    "useragent": null
                   },
                   {
                     "description": "HP Touchpad 1.0 - WebOS 3.0.2 - wOSBrowser 234.40.1",
@@ -1336,11 +1336,11 @@
                   },
                   {
                     "description": "Kindle Fire - Android 4.0.3 - Silk 2.1 (AppleWebKit 535.19)",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.1 Mobile Safari/535.19 Silk-Accelerated=true"
+                    "useragent": null
                   },
                   {
                     "description": "Motorola Xoom - Android 3.0.1 - Mobile Safari 523.12",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/525.10  (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2"
+                    "useragent": null
                   },
                   {
                     "description": "RIM (Blackberry) Playbook - OS 2.1.0 - Safari 536.2+",
@@ -1352,7 +1352,7 @@
                   },
                   {
                     "description": "Samsung Galaxy - Android 2.2 - Mobile Safari 533.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.2; en-ca; GT-P1000M Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                    "useragent": null
                   },
                   {
                     "description": "Samsung Galaxy (Verizon) - Android 2.2 - Mobile Safari 533.1",
@@ -1374,12 +1374,12 @@
                   },
                   {
                     "description": "Kindle 3.0 - AppleWebKit 528.5 - Linux",
-                    "useragent": "Mozilla/5.0 (Linux U; en-US)  AppleWebKit/528.5  (KHTML, like Gecko, Safari/528.5 ) Version/4.0 Kindle/3.0 (screen 600x800; rotate)",
+                    "useragent": null,
                     "appcodename": "Mozilla"
                   },
                   {
                     "description": "Kindle Fire - Silk/2.1 (AppleWebKit 535.19) - Android",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.1 Mobile Safari/535.19 Silk-Accelerated=true"
+                    "useragent": null
                   }
                 ]
               },
@@ -1415,7 +1415,7 @@
                   },
                   {
                     "description": "iPhone - iOS 1.0 - Safari 419.3",
-                    "useragent": "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420  (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"
+                    "useragent": null
                   },
                   {
                     "description": "iPhone - iOS 2.0 - Safari 525.200",
@@ -1423,7 +1423,7 @@
                   },
                   {
                     "description": "iPhone - iOS 3.0 - Safari 528.16",
-                    "useragent": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
+                    "useragent": null,
                     "appcodename": "Mozilla",
                     "appname": "Netscape",
                     "appversion": "5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
@@ -1440,7 +1440,7 @@
                   },
                   {
                     "description": "iPhone - iOS 5_1_1 - Chrome (crios) 19.0.1084.60",
-                    "useragent": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; da-dk) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3"
+                    "useragent": null
                   },
                   {
                     "description": "iPhone - iOS 6 - UCWEB 8.8",
@@ -1470,7 +1470,7 @@
                   },
                   {
                     "description": "Nook Color - Android - IDs as: OS_X 10_5_7 - Safari 530.17",
-                    "useragent": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7;en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17"
+                    "useragent": null
                   },
                   {
                     "description": "Nook Tablet - Android 2.3.4 - Safari 533.1",
@@ -1487,11 +1487,11 @@
                   },
                   {
                     "description": "8300 Bold",
-                    "useragent": "BlackBerry8300/4.2.2 Profile/MIDP-2.0 Configuration/CLDC-1.1 VendorID/107 UP.Link/6.2.3.15.0"
+                    "useragent": null
                   },
                   {
                     "description": "8320 Curve",
-                    "useragent": "BlackBerry8320/4.2.2 Profile/MIDP-2.0 Configuration/CLDC-1.1 VendorID/100"
+                    "useragent": null
                   },
                   {
                     "description": "8330",
@@ -1499,7 +1499,7 @@
                   },
                   {
                     "description": "9000",
-                    "useragent": "BlackBerry9000/4.6.0.167 Profile/MIDP-2.0 Configuration/CLDC-1.1 VendorID/102"
+                    "useragent": null
                   },
                   {
                     "description": "9530 Storm",
@@ -1532,7 +1532,7 @@
                   },
                   {
                     "description": "Nexus One - Android 2.1 - Mobile Safari 530.17",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.1; en-us; Nexus One Build/ERD62) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17"
+                    "useragent": null
                   },
                   {
                     "description": "Nexus One - Android 2.2 - Mobile Safari 533.1",
@@ -1566,7 +1566,7 @@
                   },
                   {
                     "description": "6800 - WinCE - IEMobile 7.11 (MSIE 6.0) - Verizon",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.11) XV6800 "
+                    "useragent": null
                   },
                   {
                     "description": "Bahamas - Android 1.5 - Mobile Safari 525.20.1",
@@ -1578,7 +1578,7 @@
                   },
                   {
                     "description": "Dream - Android 1.5 - Mobile Safari 525",
-                    "useragent": "HTC_Dream Mozilla/5.0 (Linux; U; Android 1.5; en-ca; Build/CUPCAKE) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1"
+                    "useragent": null
                   },
                   {
                     "description": "Evo - Android 2.2 - Mobile Safari 533.1",
@@ -1594,7 +1594,7 @@
                   },
                   {
                     "description": "Incredible - Android 2.2 - Mobile Safari 533.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.2; en-us; ADR6300 Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                    "useragent": null
                   },
                   {
                     "description": "Legend - Android 2.1 - Mobile Safari 530.17",
@@ -1602,7 +1602,7 @@
                   },
                   {
                     "description": "Magic - Android 1.5 - Mobile Safari 525.20.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 1.5; de-de; HTC Magic Build/PLAT-RC33) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1 FirePHP/0.3"
+                    "useragent": null
                   },
                   {
                     "description": "Sensation - Android 4.0.3 - Mobile Safari 534.30",
@@ -1640,7 +1640,7 @@
                 "useragent": [
                   {
                     "description": "MDA Pro - Win CE",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 4.01; Windows CE; PPC; MDA Pro/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1)"
+                    "useragent": null
                   },
                   {
                     "description": "T-Mobile G1 - Android 1.0 - Mobile Safari 523.12.2",
@@ -1669,7 +1669,7 @@
                   },
                   {
                     "description": "L7",
-                    "useragent": "MOT-L7v/08.B7.5DR MIB/2.2.1 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Link/6.3.0.0.0"
+                    "useragent": null
                   },
                   {
                     "description": "Milestone - Android 2.0 - Mobile Safari 530.17",
@@ -1698,7 +1698,7 @@
                   },
                   {
                     "description": "Xoom - Android 3.0.1 - Mobile Safari 523.12",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/525.10  (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2"
+                    "useragent": null
                   }
                 ]
               },
@@ -1718,15 +1718,15 @@
                   },
                   {
                     "description": "5700 - SymbianOS 9.2 - Safari 413",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.2; U; Series60/3.1 Nokia5700/3.27; Profile/MIDP-2.0 Configuration/CLDC-1.1) AppleWebKit/413 (KHTML, like Gecko) Safari/413"
+                    "useragent": null
                   },
                   {
                     "description": "6120 Classic - SymbianOS 9.2 - Safari 413",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.2; U; Series60/3.1 Nokia6120c/3.70; Profile/MIDP-2.0 Configuration/CLDC-1.1) AppleWebKit/413 (KHTML, like Gecko) Safari/413"
+                    "useragent": null
                   },
                   {
                     "description": "6230",
-                    "useragent": "Nokia6230/2.0 (04.44) Profile/MIDP-2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "6230i",
@@ -1750,7 +1750,7 @@
                   },
                   {
                     "description": "C6-01 - Symbian 3 - Safari 525",
-                    "useragent": "Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaC6-01/011.010; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Version/3.0 BrowserNG/7.2.7.2 3gpp-gba"
+                    "useragent": null
                   },
                   {
                     "description": "C7 - Symbian 3 - Safari 525",
@@ -1770,7 +1770,7 @@
                   },
                   {
                     "description": "E65 - SymbianOS 9.1 - Safari 413 es65",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.1; U; en-us) AppleWebKit/413 (KHTML, like Gecko) Safari/413 es65"
+                    "useragent": null
                   },
                   {
                     "description": "E7 - Symbian 3 - Safari 525",
@@ -1826,7 +1826,7 @@
                   },
                   {
                     "description": "N97 - SymbianOS 9.4 - WicKed 7.1.12344",
-                    "useragent": "Mozilla/5.0 (SymbianOS/9.4; Series60/5.0 NokiaN97-1/10.0.012; Profile/MIDP-2.1 Configuration/CLDC-1.1; en-us) AppleWebKit/525 (KHTML, like Gecko) WicKed/7.1.12344"
+                    "useragent": null
                   },
                   {
                     "description": "X7 - Symbian 3 - Safari 533.4",
@@ -1860,7 +1860,7 @@
                   },
                   {
                     "description": "Galaxy - Android 2.2 - Mobile Safari 533.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.2; en-ca; GT-P1000M Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                    "useragent": null
                   },
                   {
                     "description": "Galaxy (Verizon) - Android 2.2 - Mobile Safari 533.1",
@@ -1880,7 +1880,7 @@
                   },
                   {
                     "description": "Jet",
-                    "useragent": "SAMSUNG-S8000/S8000XXIF3 SHP/VPP/R5 Jasmine/1.0 Nextreaming SMM-MMS/1.2.0 profile/MIDP-2.1 configuration/CLDC-1.1 FirePHP/0.3"
+                    "useragent": null
                   },
                   {
                     "description": "Moment - Android 1.5 - Mobile Safari 525.20.1",
@@ -1892,7 +1892,7 @@
                   },
                   {
                     "description": "SGH X210 (WML)",
-                    "useragent": "SEC-SGHX210/1.0 UP.Link/6.3.1.13.0"
+                    "useragent": null
                   },
                   {
                     "description": "Spica - Android 1.5 - Mobile Safari 525.20.1",
@@ -1949,7 +1949,7 @@
                   },
                   {
                     "description": "T68 (WML)",
-                    "useragent": "SonyEricssonT68/R201A"
+                    "useragent": null
                   },
                   {
                     "description": "T100 (WML)",
@@ -1969,7 +1969,7 @@
                   },
                   {
                     "description": "W660i",
-                    "useragent": "SonyEricssonW660i/R6AD Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "W810i",
@@ -1997,7 +1997,7 @@
                   },
                   {
                     "description": "Xperia X1 - Opera Mobi 9.5",
-                    "useragent": "Opera/9.5 (Microsoft Windows; PPC; Opera Mobi; U) SonyEricssonX1i/R2AA Profile/MIDP-2.0 Configuration/CLDC-1.1"
+                    "useragent": null
                   },
                   {
                     "description": "Z800i",
@@ -2022,7 +2022,7 @@
                 "useragent": [
                   {
                     "description": "Android 0.5 - Safari 419",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 0.5; en-us) AppleWebKit/522  (KHTML, like Gecko) Safari/419.3"
+                    "useragent": null
                   },
                   {
                     "description": "Android 1.1 - Mobile Safari 523",
@@ -2030,7 +2030,7 @@
                   },
                   {
                     "description": "Android 1.5 - HTC Dream - Mobile Safari 525",
-                    "useragent": "HTC_Dream Mozilla/5.0 (Linux; U; Android 1.5; en-ca; Build/CUPCAKE) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1"
+                    "useragent": null
                   },
                   {
                     "description": "Android 2.0 - Motorola Droid - Mobile Safari 530.17",
@@ -2038,7 +2038,7 @@
                   },
                   {
                     "description": "Android 2.1 - Nexus One - Safari 530.17",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.1; en-us; Nexus One Build/ERD62) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17"
+                    "useragent": null
                   },
                   {
                     "description": "Android 2.2 - HTC Evo - Mobile Safari 533.1",
@@ -2046,11 +2046,11 @@
                   },
                   {
                     "description": "Android 2.2 - HTC Incredible - Safari 533.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.2; en-us; ADR6300 Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                    "useragent": null
                   },
                   {
                     "description": "Android 2.2 - Samsung Galaxy - Mobile Safari 533.1",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 2.2; en-ca; GT-P1000M Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+                    "useragent": null
                   },
                   {
                     "description": "Android - Fennec 2.0.1 (arm)",
@@ -2062,7 +2062,7 @@
                   },
                   {
                     "description": "Android - 3.0.1 - Mobile Safari 523.12 - Motorola Xoom",
-                    "useragent": "Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/525.10  (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2"
+                    "useragent": null
                   },
                   {
                     "description": "Android 4.0.3 - Mobile Safari 534.30 - HTC Sensation",
@@ -2074,7 +2074,7 @@
                   },
                   {
                     "description": "Android 4.0.4 - Opera 12.00",
-                    "useragent": "Opera/9.80 (Android 4.0.4; Linux; Opera Mobi/ADR-1205181138; U; pl) Presto/2.10.254 Version/12.00"
+                    "useragent": null
                   },
                   {
                     "description": "Android - Fennec 10.0.1",
@@ -2086,7 +2086,7 @@
                   },
                   {
                     "description": "Android 4.2 - Firefox 19.0",
-                    "useragent": "Mozilla/5.0 (Android 4.2; rv:19.0) Gecko/20121129 Firefox/19.0"
+                    "useragent": null
                   },
                   {
                     "description": "Android 4.3 - AppleWebKit/536.23",
@@ -2103,7 +2103,7 @@
                 "useragent": [
                   {
                     "description": "iOS 1.0 - iPhone - Safari 419.3",
-                    "useragent": "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420  (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"
+                    "useragent": null
                   },
                   {
                     "description": "iOS 2.0 - iPhone - Safari 525.200",
@@ -2115,7 +2115,7 @@
                   },
                   {
                     "description": "iOS 3.0 - iPhone - Safari 528.16",
-                    "useragent": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
+                    "useragent": null,
                     "appcodename": "Mozilla",
                     "appname": "Netscape",
                     "appversion": "5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
@@ -2140,7 +2140,7 @@
                   },
                   {
                     "description": "iOS 5_1_1 - iPhone - Chrome (crios) 19.0.1084.60",
-                    "useragent": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; da-dk) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3"
+                    "useragent": null
                   }
                 ]
               },

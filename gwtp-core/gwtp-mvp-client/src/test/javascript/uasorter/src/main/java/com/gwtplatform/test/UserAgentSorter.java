@@ -34,6 +34,7 @@ public class UserAgentSorter {
 			StringBuilder out = new StringBuilder();
 			String userAgent = getRandomUserAgent(getRandomFolder(out, folders));
 			while (userAgent == null) {
+				System.out.println("Searching for user agent.");
 				out = new StringBuilder();
 				userAgent = getRandomUserAgent(getRandomFolder(out, folders));
 			}

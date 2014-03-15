@@ -247,5 +247,10 @@ window.desktopUserAgents = [
   "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0",
   "Mozilla/3.01Gold (Win95; I)",
   "Mozilla/5.0 (Windows NT 6.0; rv:14.0) Gecko/20100101 Firefox/14.0.1",
-  "Opera/9.20 (Macintosh; Intel Mac OS X; U; en)"
+  "Opera/9.20 (Macintosh; Intel Mac OS X; U; en)",
+  "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7;en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17",
+  "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML like Gecko) Maxthon/4.0.0.2000 Chrome/22.0.1229.79 Safari/537.1",
+  "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.1.17) Gecko/20110123 (like Firefox/3.x) SeaMonkey/2.0.12",
+  "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:20.0) Gecko/20100101 Firefox/20.0",
+  "Midori/0.1.10 (X11; Linux i686; U; en-us) WebKit/(531).(2) "
 ]
