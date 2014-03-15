@@ -71,7 +71,7 @@ public class UserAgentSorter {
 				System.out.println("Recovered from null pointer exception");
 				i -= 1;
 				errorCount += 1;
-				if (errorCount > 100) {
+				if (errorCount > 1000) {
 					System.out.println("Too many errors");
 					return;
 				}
