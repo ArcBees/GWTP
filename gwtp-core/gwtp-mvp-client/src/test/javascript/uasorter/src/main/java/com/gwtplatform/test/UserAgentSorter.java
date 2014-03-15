@@ -16,7 +16,9 @@ public class UserAgentSorter {
 
 	public static void main(final String[] args) throws IOException {
 		System.out.println("Starting UserAgentSorter");
+		int errorCount = 0;
 		int repeat = 1;
+
 		if (args.length > 0) {
 			try {
 				repeat = Integer.valueOf(args[0]);
@@ -26,8 +28,8 @@ public class UserAgentSorter {
 		}
 		System.out.println("Running " + repeat + " times.");
 		System.out.println("----------------------------------------------\n");
+		String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../unsortedUserAgents.json"));
 		for (int i = 0; i < repeat; i++) {
-			final String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../unsortedUserAgents.json"));
 			//System.out.println(unsortedUserAgentsJson);
 			final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
 			try {
@@ -60,14 +62,22 @@ public class UserAgentSorter {
 				}
 
 				//overwrite found useragent with null
-
-				FileUtils.writeStringToFile(new File("../unsortedUserAgents.json"), unsortedUserAgentsJson.replace("\"" + userAgent + "\"", "null"));
+				unsortedUserAgentsJson = unsortedUserAgentsJson.replace("\"" + userAgent + "\"", "null");
+				FileUtils.writeStringToFile(new File("../unsortedUserAgents.json"), unsortedUserAgentsJson);
 				System.out.println("----------------------------------------------");
 				System.out.println("Thank You: " + ((repeat - 1) - i) + " to go");
 				System.out.println("----------------------------------------------\n");
 			} catch (final NullPointerException e) {
+				System.out.println("Recovered from null pointer exception");
+				i -= 1;
+				errorCount += 1;
+				if (errorCount > 100) {
+					System.out.println("Too many errors");
+					return;
+				}
 				continue;
 			}
+
 		}
 
 	}
@@ -107,7 +117,7 @@ public class UserAgentSorter {
 	}
 
 	private static JsonObject getRandomFolder(final StringBuilder out, final JsonArray folders) {
-		final JsonElement randomFolder = folders.get((int) (Math.random() * (folders.size() - 1)));
+		final JsonElement randomFolder = folders.get((int) (Math.random() * (folders.size())));
 		return getRandomSubFolder(out, randomFolder.getAsJsonObject());
 	}
 
