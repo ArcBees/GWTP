@@ -651,11 +651,11 @@
             "useragent": [
               {
                 "description": "Chrome 4.0.237.0 (Debian)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/532.4 (KHTML, like Gecko) Chrome/4.0.237.0 Safari/532.4 Debian"
+                "useragent": null
               },
               {
                 "description": "Chrome 4.0.277.0",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/532.8 (KHTML, like Gecko) Chrome/4.0.277.0 Safari/532.8"
+                "useragent": null
               },
               {
                 "description": "Chrome 5.0.309.0",
@@ -663,7 +663,7 @@
               },
               {
                 "description": "Chrome 7.0.514 (64 bit)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.514.0 Safari/534.7"
+                "useragent": null
               },
               {
                 "description": "Chrome 9.1.0.0 (Ubuntu 64 bit)",
@@ -671,19 +671,19 @@
               },
               {
                 "description": "Chrome 10.0.613.0 (64 bit)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.15 (KHTML, like Gecko) Chrome/10.0.613.0 Safari/534.15"
+                "useragent": null
               },
               {
                 "description": "Chrome 10.0.613.0 (Ubuntu 32 bit)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.15 (KHTML, like Gecko) Ubuntu/10.10 Chromium/10.0.613.0 Chrome/10.0.613.0 Safari/534.15"
+                "useragent": null
               },
               {
                 "description": "Chrome 12.0.703.0 (Ubuntu 64 bit)",
-                "useragent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Ubuntu/10.10 Chromium/12.0.703.0 Chrome/12.0.703.0 Safari/534.24"
+                "useragent": null
               },
               {
                 "description": "Chrome 13.0.782.20 (64 bit)",
-                "useragent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.20 Safari/535.1"
+                "useragent": null
               },
               {
                 "description": "Chrome 13.0.782.41 (Slackware 13.37 64 bit)",
@@ -691,7 +691,7 @@
               },
               {
                 "description": "Chrome 14.0.825.0 (Ubuntu 11.04)",
-                "useragent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.825.0 Chrome/14.0.825.0 Safari/535.1"
+                "useragent": null
               },
               {
                 "description": "Chrome 15.0.874.120 (Ubuntu 11.10)",
@@ -699,39 +699,39 @@
               },
               {
                 "description": "Epiphany 1.2 - Gecko",
-                "useragent": "Mozilla/5.0 (X11; U; Linux; i686; en-US; rv:1.6) Gecko Epiphany/1.2.5"
+                "useragent": null
               },
               {
                 "description": "Epiphany 1.4 - Gecko (Ubuntu)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i586; en-US; rv:1.7.3) Gecko/20040924 Epiphany/1.4.4 (Ubuntu)"
+                "useragent": null
               },
               {
                 "description": "Firefox 0.8",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.6) Gecko/20040614 Firefox/0.8"
+                "useragent": null
               },
               {
                 "description": "Firefox 2.0.0.12 (Ubuntu 7.10)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; sv-SE; rv:1.8.1.12) Gecko/20080207 Ubuntu/7.10 (gutsy) Firefox/2.0.0.12"
+                "useragent": null
               },
               {
                 "description": "Firefox 3.0.12 - (Ubuntu karmic 9.10)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.11) Gecko/2009060309 Ubuntu/9.10 (karmic) Firefox/3.0.11"
+                "useragent": null
               },
               {
                 "description": "Firefox 3.5.2 - Shiretoko (Ubuntu 9.04)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.2) Gecko/20090803 Ubuntu/9.04 (jaunty) Shiretoko/3.5.2"
+                "useragent": null
               },
               {
                 "description": "Firefox 3.5.5",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.5) Gecko/20091107 Firefox/3.5.5"
+                "useragent": null
               },
               {
                 "description": "Firefox 3.5.3 (Mint 8)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3) Gecko/20091020 Linux Mint/8 (Helena) Firefox/3.5.3"
+                "useragent": null
               },
               {
                 "description": "Firefox 3.6.9 (Gentoo 64 bit)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.9) Gecko/20100915 Gentoo Firefox/3.6.9"
+                "useragent": null
               },
               {
                 "description": "Firefox 3.8 (Ubuntu/9.25)",
@@ -743,7 +743,7 @@
               },
               {
                 "description": "Firefox 4.0.1 (32 on 64 bit)",
-                "useragent": "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"
+                "useragent": null
               },
               {
                 "description": "Firefox 4.0.1 (32 bit)",
@@ -751,11 +751,11 @@
               },
               {
                 "description": "Firefox 4.0.1 (64 bit)",
-                "useragent": "Mozilla/5.0 (X11; Linux x86_64; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"
+                "useragent": null
               },
               {
                 "description": "Firefox 4.2a1pre (64 bit)",
-                "useragent": "Mozilla/5.0 (X11; Linux x86_64; rv:2.2a1pre) Gecko/20100101 Firefox/4.2a1pre"
+                "useragent": null
               },
               {
                 "description": "Firefox 5.0 (32 bit)",
@@ -763,7 +763,7 @@
               },
               {
                 "description": "Firefox 6.0 (32 bit)",
-                "useragent": "Mozilla/5.0 (X11; Linux i686; rv:6.0) Gecko/20100101 Firefox/6.0"
+                "useragent": null
               },
               {
                 "description": "Firefox 7.0a1 (64 bit)",
@@ -779,35 +779,35 @@
               },
               {
                 "description": "Galeon 1.3",
-                "useragent": "Mozilla/5.0 (X11; U; Linux; i686; en-US; rv:1.6) Gecko Galeon/1.3.14"
+                "useragent": null
               },
               {
                 "description": "Iceape (SeaMonkey) 1.1.9 (Debian)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux ppc; en-US; rv:1.8.1.13) Gecko/20080313 Iceape/1.1.9 (Debian-1.1.9-5)"
+                "useragent": null
               },
               {
                 "description": "Iceweasel (Firefox) 3.6.3 (Debian)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; pt-PT; rv:1.9.2.3) Gecko/20100402 Iceweasel/3.6.3 (like Firefox/3.6.3) GTB7.0"
+                "useragent": null
               },
               {
                 "description": "Iceweasel (Firefox) 5.0 (Debian 64)",
-                "useragent": "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 Iceweasel/5.0"
+                "useragent": null
               },
               {
                 "description": "Iceweasel (Firefox) 6.0a2 (Debian 32)",
-                "useragent": "Mozilla/5.0 (X11; Linux i686; rv:6.0a2) Gecko/20110615 Firefox/6.0a2 Iceweasel/6.0a2"
+                "useragent": null
               },
               {
                 "description": "Konqueror 3 rc4 - khtml",
-                "useragent": "Konqueror/3.0-rc4; (Konqueror/3.0-rc4; i686 Linux;;datecode)"
+                "useragent": null
               },
               {
                 "description": "Konqueror 3.3 - khtml (Gentoo)",
-                "useragent": "Mozilla/5.0 (compatible; Konqueror/3.3; Linux 2.6.8-gentoo-r3; X11;"
+                "useragent": null
               },
               {
                 "description": "Konqueror 3.5 - khtml (Debian)",
-                "useragent": "Mozilla/5.0 (compatible; Konqueror/3.5; Linux 2.6.30-7.dmz.1-liquorix-686; X11) KHTML/3.5.10 (like Gecko) (Debian package 4:3.5.10.dfsg.1-1 b1)"
+                "useragent": null
               },
               {
                 "description": "Konqueror 3.5.6 - khtml (Kubuntu)",
@@ -819,15 +819,15 @@
               },
               {
                 "description": "Mozilla 1.6 (Debian)",
-                "useragent": "Mozilla/5.0 (X11; U; Linux; i686; en-US; rv:1.6) Gecko Debian/1.6-7"
+                "useragent": null
               },
               {
                 "description": "Opera 7.23",
-                "useragent": "MSIE (MSIE 6.0; X11; Linux; i686) Opera 7.23"
+                "useragent": null
               },
               {
                 "description": "Swiftfox 2.0",
-                "useragent": "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1) Gecko/20061024 Firefox/2.0 (Swiftfox)"
+                "useragent": null
               }
             ]
           }
@@ -1036,7 +1036,7 @@
               },
               {
                 "description": "Chrome 5.0.359.0 (OpenBSD 32)",
-                "useragent": "Mozilla/5.0 (X11; U; OpenBSD i386; en-US) AppleWebKit/533.3 (KHTML, like Gecko) Chrome/5.0.359.0 Safari/533.3"
+                "useragent": null
               },
               {
                 "description": "Chrome 10.0.648.204 (FreeBSD 64)",
@@ -1056,7 +1056,7 @@
               },
               {
                 "description": "Konqueror 3.5.1 - khtml (SunOS)",
-                "useragent": "Mozilla/5.0 (compatible; Konqueror/3.5; SunOS) KHTML/3.5.1 (like Gecko)"
+                "useragent": null
               },
               {
                 "description": "Mozilla 1.7 (FreeBSD)",
@@ -1064,7 +1064,7 @@
               },
               {
                 "description": "Netscape 4.77 (Irix)",
-                "useragent": "Mozilla/4.77 [en] (X11; I; IRIX;64 6.5 IP30)"
+                "useragent": null
               },
               {
                 "description": "Netscape 4.8 (SunOS)",
@@ -2205,15 +2205,15 @@
                   },
                   {
                     "description": "Windows CE - MSIE 6 - IEMobile 7.11",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.11)"
+                    "useragent": null
                   },
                   {
                     "description": "Windows CE 5.2 - Sprint (HTC Titan) - IEMobile 7.11 (MSIE 6.0)",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.11) Sprint:PPC6800"
+                    "useragent": null
                   },
                   {
                     "description": "Windows CE - MSIE 6 - IEMobile 8.12",
-                    "useragent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 8.12; MSIEMobile6.0)"
+                    "useragent": null
                   },
                   {
                     "description": "Windows Phone OS 7.0 - Asus Galaxy - IEMobile 7.0 (MSIE 7.0)",
@@ -2274,7 +2274,7 @@
               },
               {
                 "description": "Nokia 6630",
-                "useragent": "Nokia6630/1.0 (2.3.129) SymbianOS/8.0 Series60/2.6 Profile/MIDP-2.0 Configuration/CLDC-1.1",
+                "useragent": null,
                 "appname": "Nokia",
                 "appversion": "1.0",
                 "platform": "Nokia",
@@ -2603,7 +2603,7 @@
               },
               {
                 "description": "winHTTP",
-                "useragent": "SearchExpress"
+                "useragent": null
               }
             ]
           }
