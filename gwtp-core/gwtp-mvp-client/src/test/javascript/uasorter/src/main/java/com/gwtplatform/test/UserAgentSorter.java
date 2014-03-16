@@ -33,17 +33,15 @@ public class UserAgentSorter {
 
         System.out.println("Running " + repeat + " times.");
         System.out.println("----------------------------------------------\n");
-        final String unsortedUserAgentsJson = getUnsortedUserAgents();
         final List<String> mobileUserAgents = getUserAgents("../mobileUserAgents.js");
         final List<String> tabletUserAgents = getUserAgents("../tabletUserAgents.js");
         final List<String> desktopUserAgents = getUserAgents("../desktopUserAgents.js");
-
+        final JsonArray folders = getUnsortedUserAgents().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
         for (int i = 0; i < repeat; i++) {
-            final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
             StringBuilder out = new StringBuilder();
             String userAgent = getRandomUserAgent(out, folders);
             int searchCount = 1000;
-            while (searchCount-- > 0 && (userAgent == null || userAgent.isEmpty() || mobileUserAgents.contains(userAgent) || tabletUserAgents.contains(userAgent) || desktopUserAgents.contains(userAgent))) {
+            while (searchCount-- > 0 && (userAgent.isEmpty() || mobileUserAgents.contains(userAgent) || tabletUserAgents.contains(userAgent) || desktopUserAgents.contains(userAgent))) {
                 out = new StringBuilder();
                 userAgent = getRandomUserAgent(out, folders);
             }
@@ -62,10 +60,13 @@ public class UserAgentSorter {
 
             if (answer.startsWith("d")) {
                 desktopUserAgents.add(userAgent);
+                saveUserAgents(desktopUserAgents, "../desktopUserAgents.js");
             } else if (answer.startsWith("t")) {
                 tabletUserAgents.add(userAgent);
+                saveUserAgents(tabletUserAgents, "../tabletUserAgents.js");
             } else if (answer.startsWith("m")) {
                 mobileUserAgents.add(userAgent);
+                saveUserAgents(mobileUserAgents, "../mobileUserAgents.js");
             } else if (answer.startsWith("q")) {
                 System.out.println("Quitting, good bye");
                 return;
@@ -73,10 +74,6 @@ public class UserAgentSorter {
                 System.out.println("That wasn't a valid answer");
                 continue;
             }
-
-            saveUserAgents(mobileUserAgents, "../mobileUserAgents.js");
-            saveUserAgents(tabletUserAgents, "../tabletUserAgents.js");
-            saveUserAgents(desktopUserAgents, "../desktopUserAgents.js");
 
             System.out.println("----------------------------------------------");
             System.out.println("Thank You: " + ((repeat - 1) - i) + " to go");
@@ -86,11 +83,11 @@ public class UserAgentSorter {
 
     }
 
-    private static String getUnsortedUserAgents() throws IOException {
+    private static JsonObject getUnsortedUserAgents() throws IOException {
         final String userAgentXml = FileUtils.readFileToString(new File("../useragentswitcher.xml"));
         try {
             final JSONObject xmlJSONObj = XML.toJSONObject(userAgentXml);
-            return xmlJSONObj.toString(4);
+            return new JsonParser().parse(xmlJSONObj.toString()).getAsJsonObject();
         } catch (final JSONException je) {
             System.out.println(je.toString());
             throw new RuntimeException("Could not convert xml to json");
@@ -112,9 +109,9 @@ public class UserAgentSorter {
         final String[] split = currentUserAgents.split("=");
 
         final Gson gs = new GsonBuilder().setPrettyPrinting().create();
-        final String newUserAgentsCoffee = split[0] + "= " + gs.toJson(userAgents);
+        final String newUserAgents = split[0] + "= " + gs.toJson(userAgents);
 
-        FileUtils.writeStringToFile(new File(fileName), newUserAgentsCoffee);
+        FileUtils.writeStringToFile(new File(fileName), newUserAgents);
 
     }
 
@@ -131,9 +128,6 @@ public class UserAgentSorter {
             userAgentObject = userAgent.getAsJsonObject();
         }
         out.append("Name: " + userAgentObject.get("description").getAsString() + "\n");
-        if (!userAgentObject.has("useragent") || userAgentObject.get("useragent").isJsonNull()) {
-            return null;
-        }
         return userAgentObject.get("useragent").getAsString();
 
     }
@@ -157,4 +151,5 @@ public class UserAgentSorter {
         }
         return folder;
     }
+
 }
