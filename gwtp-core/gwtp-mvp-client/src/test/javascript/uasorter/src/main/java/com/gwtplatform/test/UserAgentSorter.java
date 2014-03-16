@@ -2,8 +2,14 @@ package com.gwtplatform.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,103 +22,122 @@ public class UserAgentSorter {
 
     public static void main(final String[] args) throws IOException {
         System.out.println("Starting UserAgentSorter");
-        int errorCount = 0;
-        int repeat = 1;
 
-        if (args.length > 0) {
-            try {
-                repeat = Integer.valueOf(args[0]);
-            } catch (final NumberFormatException e) {
-                System.out.println("Could not interpret repeat paramater.");
-            }
+        System.out.println("How many useragents would you like to sort?");
+        int repeat = 1;
+        try {
+            repeat = Integer.valueOf(System.console().readLine());
+        } catch (final NumberFormatException e) {
+            System.out.println("Could not interpret repeat paramater.");
         }
+
         System.out.println("Running " + repeat + " times.");
         System.out.println("----------------------------------------------\n");
-        String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../unsortedUserAgents.json"));
+        final String unsortedUserAgentsJson = getUnsortedUserAgents();
+        final List<String> mobileUserAgents = getUserAgents("../mobileUserAgents.js");
+        final List<String> tabletUserAgents = getUserAgents("../tabletUserAgents.js");
+        final List<String> desktopUserAgents = getUserAgents("../desktopUserAgents.js");
+        saveUserAgents(mobileUserAgents, "../mobileUserAgents.js");
+        saveUserAgents(tabletUserAgents, "../tabletUserAgents.js");
+        saveUserAgents(desktopUserAgents, "../desktopUserAgents.js");
+
         for (int i = 0; i < repeat; i++) {
-            //System.out.println(unsortedUserAgentsJson);
             final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
-            try {
-                StringBuilder out = new StringBuilder();
-                String userAgent = getRandomUserAgent(getRandomFolder(out, folders));
-                while (userAgent == null) {
-                    out = new StringBuilder();
-                    userAgent = getRandomUserAgent(getRandomFolder(out, folders));
-                }
+            StringBuilder out = new StringBuilder();
+            String userAgent = getRandomUserAgent(out, folders);
+            int searchCount = 1000;
+            while (searchCount-- > 0 && (userAgent == null || userAgent.isEmpty() || mobileUserAgents.contains(userAgent) || tabletUserAgents.contains(userAgent) || desktopUserAgents.contains(userAgent))) {
+                out = new StringBuilder();
+                userAgent = getRandomUserAgent(out, folders);
+            }
 
-                System.out.print(out.toString());
-                System.out.println("User Agent: " + userAgent);
-                System.out.println("Bots and console programs are generally desktop browsers.  Be aware of mobile bots though.");
-                System.out.println("Is the useragent a desktop, tablet or mobile browser? d t m?");
-
-                final String answer = System.console().readLine().toLowerCase();
-
-                if (answer.startsWith("d")) {
-                    addUserAgent(userAgent, "../desktopUserAgents.js");
-                } else if (answer.startsWith("t")) {
-                    addUserAgent(userAgent, "../tabletUserAgents.js");
-                } else if (answer.startsWith("m")) {
-                    addUserAgent(userAgent, "../mobileUserAgents.js");
-                } else if (answer.startsWith("q")) {
-                    System.out.println("Quitting, good bye");
-                    return;
-                } else {
-                    System.out.println("That wasn't a valid answer");
-                    continue;
-                }
-
-                //overwrite found useragent with null
-                unsortedUserAgentsJson = unsortedUserAgentsJson.replace("\"" + userAgent + "\"", "null");
-                FileUtils.writeStringToFile(new File("../unsortedUserAgents.json"), unsortedUserAgentsJson);
-                System.out.println("----------------------------------------------");
-                System.out.println("Thank You: " + ((repeat - 1) - i) + " to go");
-                System.out.println("----------------------------------------------\n");
-            } catch (final NullPointerException e) {
-                System.out.println("Recovered from null pointer exception");
-                i -= 1;
-                errorCount += 1;
-                if (errorCount > 1000) {
-                    System.out.println("Too many errors");
-                    return;
-                }
+            if (searchCount <= 0) {
+                System.out.println(i + ": All the userAgents I found had already been sorted.");
                 continue;
             }
+
+            System.out.print(out.toString());
+            System.out.println("User Agent: " + userAgent);
+            System.out.println("Bots and console programs are generally desktop browsers.  Be aware of mobile bots though.");
+            System.out.println("Is the useragent a desktop, tablet or mobile browser? d t m?");
+
+            final String answer = System.console().readLine().toLowerCase();
+
+            if (answer.startsWith("d")) {
+                desktopUserAgents.add(userAgent);
+            } else if (answer.startsWith("t")) {
+                tabletUserAgents.add(userAgent);
+            } else if (answer.startsWith("m")) {
+                mobileUserAgents.add(userAgent);
+            } else if (answer.startsWith("q")) {
+                System.out.println("Quitting, good bye");
+                return;
+            } else {
+                System.out.println("That wasn't a valid answer");
+                continue;
+            }
+
+            saveUserAgents(mobileUserAgents, "../mobileUserAgents.js");
+            saveUserAgents(tabletUserAgents, "../tabletUserAgents.js");
+            saveUserAgents(desktopUserAgents, "../desktopUserAgents.js");
+
+            System.out.println("----------------------------------------------");
+            System.out.println("Thank You: " + ((repeat - 1) - i) + " to go");
+            System.out.println("----------------------------------------------\n");
 
         }
 
     }
 
-    private static void addUserAgent(final String userAgent, final String fileName) throws IOException {
+    private static String getUnsortedUserAgents() throws IOException {
+        final String userAgentXml = FileUtils.readFileToString(new File("../useragentswitcher.xml"));
+        try {
+            final JSONObject xmlJSONObj = XML.toJSONObject(userAgentXml);
+            return xmlJSONObj.toString(4);
+        } catch (final JSONException je) {
+            System.out.println(je.toString());
+            throw new RuntimeException("Could not convert xml to json");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<String> getUserAgents(final String fileName) throws IOException {
         final String currentUserAgents = FileUtils.readFileToString(new File(fileName));
         final String[] split = currentUserAgents.split("=");
-        final JsonArray existingUserAgents = new JsonParser().parse(split[1]).getAsJsonArray();
-        for (int i = 0; i < existingUserAgents.size(); i++) {
-            if (existingUserAgents.get(i).getAsString().equals(userAgent)) {
-                System.out.println("User Agent is already sorted.");
-                return;
-            }
-        }
+        final ArrayList<String> result = new ArrayList<String>();
+        return new Gson().fromJson(split[1], result.getClass());
+    }
 
-        System.out.println("Adding " + userAgent + " to " + fileName);
+    private static void saveUserAgents(final List<String> userAgents, final String fileName) throws IOException {
+        Collections.sort(userAgents);
 
-        existingUserAgents.add(new JsonParser().parse("\"" + userAgent + "\""));
+        final String currentUserAgents = FileUtils.readFileToString(new File(fileName));
+        final String[] split = currentUserAgents.split("=");
 
         final Gson gs = new GsonBuilder().setPrettyPrinting().create();
-        final String newUserAgentsCoffee = split[0] + "= " + gs.toJson(existingUserAgents);
+        final String newUserAgentsCoffee = split[0] + "= " + gs.toJson(userAgents);
 
         FileUtils.writeStringToFile(new File(fileName), newUserAgentsCoffee);
 
     }
 
-    private static String getRandomUserAgent(final JsonObject folder) {
-        JsonElement userAgent = folder.get("useragent");
+    private static String getRandomUserAgent(final StringBuilder out, final JsonArray folders) {
+        return getRandomUserAgent(out, getRandomFolder(out, folders));
+    }
+
+    private static String getRandomUserAgent(final StringBuilder out, final JsonObject folder) {
+        final JsonElement userAgent = folder.get("useragent");
+        JsonObject userAgentObject;
         if (userAgent.isJsonArray()) {
-            userAgent = userAgent.getAsJsonArray().get((int) (Math.random() * (userAgent.getAsJsonArray().size())));
+            userAgentObject = userAgent.getAsJsonArray().get((int) (Math.random() * (userAgent.getAsJsonArray().size()))).getAsJsonObject();
+        } else {
+            userAgentObject = userAgent.getAsJsonObject();
         }
-        if (userAgent.getAsJsonObject().get("useragent").isJsonNull()) {
+        out.append("Name: " + userAgentObject.get("description").getAsString() + "\n");
+        if (!userAgentObject.has("useragent") || userAgentObject.get("useragent").isJsonNull()) {
             return null;
         }
-        return userAgent.getAsJsonObject().get("useragent").getAsString();
+        return userAgentObject.get("useragent").getAsString();
 
     }
 
@@ -122,7 +147,7 @@ public class UserAgentSorter {
     }
 
     private static JsonObject getRandomSubFolder(final StringBuilder out, final JsonObject folder) {
-        out.append("Description: " + folder.get("description") + "\n");
+        out.append("Category: " + folder.get("description") + "\n");
         if (folder.has("folder")) {
             if (Math.random() < 0.5 || !folder.has("useragent")) {
                 final JsonElement nextFolder = folder.get("folder");
