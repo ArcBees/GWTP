@@ -27,7 +27,7 @@ function findFormFactorFromQuery(href, propertyName) {
 }
 
 function findFormFactorFromUserAgent(userAgent) {
-    var mobileRe = /(iPhone|iPod|Mobi|Mini|Fennec|HTC|j2me|J2ME|Symbian|Puffin|portalmmm|PSP|Palm|DoCoMo|webOS|MMP|MIDP|UCBrowser|WindowsCE|Novarra-Vision|BOLT|SonyEricsson|Android 0|UP\.Link|SEMC)/;
+    var mobileRe = /(iPhone|iPod|Mobi|Mini|Fennec|HTC|j2me|Symbian|Puffin|portalmmm|PSP|Palm|DoCoMo|webOS|MMP|MIDP|UCBrowser|WindowsCE|Novarra-Vision|BOLT|SonyEricsson|Android 0|UP\.Link|SEMC)/;
     var notMobileRe = /(Silk|iPad|GT-P1000M|Xoom|SCH-I800)/;
     var tabletRe = /(Android|iPad|ablet|Kindle|nook)/;
 
