@@ -15,7 +15,11 @@ function findFormFactorFromQuery(href, propertyName) {
         }
         value = value.substring(begin, end);
         if (value != '') {
-            return value;
+            if (["mobile","tablet","desktop"].indexOf(value) > -1) {
+                return value;
+            } else {
+                window.console && console.log(value + " is not a valid formfactor and has been ignored.");
+            }
         }
     }
 

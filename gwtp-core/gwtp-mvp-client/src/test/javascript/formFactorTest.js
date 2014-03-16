@@ -22,26 +22,35 @@ try {
   
   describe('finding form factor from query parameter', function() {
     it('should return undefined when the property is not in the url', function() {
-      return expect(findFormFactorFromQuery('/testurl#potato=mobile', 'formFactor')).toBe(void 0);
+      expect(findFormFactorFromQuery('/testurl#potato=mobile', 'formFactor')).toBeUndefined();
     });
     it('should return undefined when the property is an empty string', function() {
-      return expect(findFormFactorFromQuery('/', '')).toBe(void 0);
+      expect(findFormFactorFromQuery('/', '')).toBeUndefined();
     });
     it('should return undefined when the property is not provided', function() {
-      return expect(findFormFactorFromQuery('/')).toBe(void 0);
+      expect(findFormFactorFromQuery('/')).toBeUndefined();
     });
-    return describe('when a property is specified', function() {
-      it('should return the form factor specified by the property', function() {
-        return expect(findFormFactorFromQuery('/testurl#aProperty=aValue', 'aProperty')).toBe('aValue');
+    describe('when a property is specified', function() {
+      it('should return mobile when mobile is specified by the property', function() {
+        expect(findFormFactorFromQuery('/testurl#aProperty=mobile', 'aProperty')).toBe('mobile');
+      });
+      it('should return tablet when tablet is specified by the property', function() {
+        expect(findFormFactorFromQuery('/testurl#aProperty=tablet', 'aProperty')).toBe('tablet');
+      });
+      it('should return desktop when desktop is specified by the property', function() {
+        expect(findFormFactorFromQuery('/testurl#aProperty=desktop', 'aProperty')).toBe('desktop');
       });
       it('should return undefined when the value is not defined', function() {
-        return expect(findFormFactorFromQuery('testurl#aProperty=', 'aProperty')).toBe(void 0);
+        expect(findFormFactorFromQuery('testurl#aProperty=', 'aProperty')).toBeUndefined();
       });
       it('should mark the end of the value with the token #', function() {
-        return expect(findFormFactorFromQuery('testurl#aProperty=aValue#anotherValue', 'aProperty')).toBe('aValue');
+        expect(findFormFactorFromQuery('testurl#aProperty=mobile#anotherValue', 'aProperty')).toBe('mobile');
       });
-      return it('should mark the end of the value with the token &', function() {
-        return expect(findFormFactorFromQuery('testurl#aProperty=aValue&anotherValue', 'aProperty')).toBe('aValue');
+      it('should mark the end of the value with the token &', function() {
+        expect(findFormFactorFromQuery('testurl#aProperty=mobile&tablet', 'aProperty')).toBe('mobile');
+      });
+	  it('should return undefined when the value is not mobile, tablet or desktop', function() {
+        expect(findFormFactorFromQuery('testurl#aProperty=aValue', 'aProperty')).toBeUndefined();
       });
     });
   });
@@ -64,7 +73,7 @@ try {
   });
 
 } catch (e) {
-  describe("a syntax error in formFactorTest.js", function() {
+  describe("an error in formFactorTest.js", function() {
     it ("should cause the build to fail", function() {
       expect(true).toBeFalsy();
     });
