@@ -78,7 +78,6 @@ public class UserAgentSorter {
             System.out.println("----------------------------------------------");
             System.out.println("Thank You: " + ((repeat - 1) - i) + " to go");
             System.out.println("----------------------------------------------\n");
-
         }
 
     }
@@ -111,7 +110,6 @@ public class UserAgentSorter {
         final String newUserAgents = split[0] + "= " + gs.toJson(userAgents);
 
         FileUtils.writeStringToFile(new File(fileName), newUserAgents);
-
     }
 
     private static String getRandomUserAgent(final StringBuilder out, final JsonArray folders) {
@@ -128,7 +126,6 @@ public class UserAgentSorter {
         }
         out.append("Name: " + userAgentObject.get("description").getAsString() + "\n");
         return userAgentObject.get("useragent").getAsString();
-
     }
 
     private static JsonObject getRandomFolder(final StringBuilder out, final JsonArray folders) {
