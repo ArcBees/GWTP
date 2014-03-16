@@ -46,7 +46,7 @@ public class UserAgentSorter {
                 userAgent = getRandomUserAgent(out, folders);
             }
 
-            if (searchCount <= 0) {
+            if (searchCount < 0) {
                 System.out.println(i + ": All the user agents I found had already been sorted.");
                 continue;
             }
