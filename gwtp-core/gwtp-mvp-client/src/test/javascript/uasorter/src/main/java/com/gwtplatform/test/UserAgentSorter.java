@@ -98,8 +98,7 @@ public class UserAgentSorter {
     private static List<String> getUserAgents(final String fileName) throws IOException {
         final String currentUserAgents = FileUtils.readFileToString(new File(fileName));
         final String[] split = currentUserAgents.split("=");
-        final ArrayList<String> result = new ArrayList<String>();
-        return new Gson().fromJson(split[1], result.getClass());
+        return new Gson().fromJson(split[1], new ArrayList<String>().getClass());
     }
 
     private static void saveUserAgents(final List<String> userAgents, final String fileName) throws IOException {
