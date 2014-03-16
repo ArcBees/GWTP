@@ -15,7 +15,11 @@ function findFormFactorFromQuery(href, propertyName) {
         }
         value = value.substring(begin, end);
         if (value != '') {
-            return value;
+            if (["mobile","tablet","desktop"].indexOf(value) > -1) {
+                return value;
+            } else {
+                window.console && console.log(value + " is not a valid formfactor and has been ignored.");
+            }
         }
     }
 
@@ -23,9 +27,9 @@ function findFormFactorFromQuery(href, propertyName) {
 }
 
 function findFormFactorFromUserAgent(userAgent) {
-    var mobileRe = /(iphone|ipod|mobile)/i;
-    var notMobileRe = /silk/i;
-    var tabletRe = /(android|ipad|tablet|kindle)/i;
+    var mobileRe = /([mM]o[b\/]|Fen|Pu|[2ly]m|[bB]O|[UDSW]P|[yC]E|d 0|o[vd]a)/;
+    var notMobileRe = /(k-A|Pad|T-P|Xo|H-I)/;
+    var tabletRe = /(Pad|nd[rl]|k-A|[Bn]oo)/;
 
     if (userAgent.match(mobileRe) && !userAgent.match(notMobileRe)) {
         return "mobile";
