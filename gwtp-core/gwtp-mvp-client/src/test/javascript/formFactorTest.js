@@ -49,7 +49,7 @@ try {
       it('should mark the end of the value with the token &', function() {
         expect(findFormFactorFromQuery('testurl#aProperty=mobile&tablet', 'aProperty')).toBe('mobile');
       });
-	  it('should return undefined when the value is not mobile, tablet or desktop', function() {
+      it('should return undefined when the value is not mobile, tablet or desktop', function() {
         expect(findFormFactorFromQuery('testurl#aProperty=aValue', 'aProperty')).toBeUndefined();
       });
     });
