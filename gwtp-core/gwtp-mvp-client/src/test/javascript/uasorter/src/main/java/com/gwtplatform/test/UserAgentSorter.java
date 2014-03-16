@@ -37,9 +37,6 @@ public class UserAgentSorter {
         final List<String> mobileUserAgents = getUserAgents("../mobileUserAgents.js");
         final List<String> tabletUserAgents = getUserAgents("../tabletUserAgents.js");
         final List<String> desktopUserAgents = getUserAgents("../desktopUserAgents.js");
-        saveUserAgents(mobileUserAgents, "../mobileUserAgents.js");
-        saveUserAgents(tabletUserAgents, "../tabletUserAgents.js");
-        saveUserAgents(desktopUserAgents, "../desktopUserAgents.js");
 
         for (int i = 0; i < repeat; i++) {
             final JsonArray folders = new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
@@ -52,7 +49,7 @@ public class UserAgentSorter {
             }
 
             if (searchCount <= 0) {
-                System.out.println(i + ": All the userAgents I found had already been sorted.");
+                System.out.println(i + ": All the user agents I found had already been sorted.");
                 continue;
             }
 
