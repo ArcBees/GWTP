@@ -27,7 +27,6 @@ public class UasComUserAgentProvider implements UserAgentProvider {
     }
 
     public String getRandomUserAgent(final StringBuilder out) {
-
         return getRandomUserAgent(out, navigateTo(1, 2, 1, 0));
     }
 
