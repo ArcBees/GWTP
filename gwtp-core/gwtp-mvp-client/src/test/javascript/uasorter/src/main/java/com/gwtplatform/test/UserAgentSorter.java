@@ -83,7 +83,6 @@ public class UserAgentSorter {
             System.out.println("Thank You: " + ((repeat - 1) - i) + " to go");
             System.out.println("----------------------------------------------\n");
         }
-
     }
 
     private static String getRandomUserAgent(final StringBuilder out) {
