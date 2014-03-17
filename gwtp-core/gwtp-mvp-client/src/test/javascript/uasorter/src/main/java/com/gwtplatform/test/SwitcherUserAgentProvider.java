@@ -41,7 +41,7 @@ public class SwitcherUserAgentProvider implements UserAgentProvider {
         return getRandomUserAgent(out, getRandomFolder(out, folders));
     }
 
-    private static String getRandomUserAgent(final StringBuilder out, final JsonObject folder) {
+    private String getRandomUserAgent(final StringBuilder out, final JsonObject folder) {
         final JsonElement userAgent = folder.get("useragent");
         JsonObject userAgentObject;
         if (userAgent.isJsonArray()) {
@@ -53,12 +53,12 @@ public class SwitcherUserAgentProvider implements UserAgentProvider {
         return userAgentObject.get("useragent").getAsString();
     }
 
-    private static JsonObject getRandomFolder(final StringBuilder out, final JsonArray folders) {
+    private JsonObject getRandomFolder(final StringBuilder out, final JsonArray folders) {
         final JsonElement randomFolder = folders.get((int) (Math.random() * (folders.size())));
         return getRandomSubFolder(out, randomFolder.getAsJsonObject());
     }
 
-    private static JsonObject getRandomSubFolder(final StringBuilder out, final JsonObject folder) {
+    private JsonObject getRandomSubFolder(final StringBuilder out, final JsonObject folder) {
         out.append("Category: " + folder.get("description") + "\n");
         if (folder.has("folder")) {
             if (Math.random() < 0.5 || !folder.has("useragent")) {
