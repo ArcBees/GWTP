@@ -31,5 +31,15 @@ Once all user agents in the file have been sorted you will see the message:
 All the user agents I found had already been sorted
 ```
 
+---
 
+User Agent Sorter will also fetch useragents from uascom.json which was originally fetched from:
+http://www.useragentstring.com/pages/All/ and then converted to json.
 
+This file is a little flakey and User Agent Sorter may safely crash to desktop every now and then while using it.
+
+You can just restart the program when this happens or comment out the following line from UserAgentSorter.java to stop the crashes from occurring.
+
+```
+ userAgentProviders.add(new UasComUserAgentProvider());
+```
