@@ -19,13 +19,10 @@ public class UasComUserAgentProvider implements UserAgentProvider {
 
     public UasComUserAgentProvider() throws IOException {
         this.unsortedUserAgents = getUnsortedUserAgents();
-        //System.out.println("instant uascom");
     }
 
     private JsonObject getUnsortedUserAgents() throws IOException {
-        //System.out.println("Init Uascom");
         final String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../uascom.json"), "UTF-8");
-        //System.out.println("fetched unsorted Uascom");
         return new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject();
     }
 
@@ -40,7 +37,6 @@ public class UasComUserAgentProvider implements UserAgentProvider {
             node = node.get(branch).getAsJsonObject().get("content").getAsJsonArray();
         }
         return node;
-
     }
 
     private String getRandomUserAgent(final StringBuilder out, final JsonArray contentArray) {
@@ -68,7 +64,6 @@ public class UasComUserAgentProvider implements UserAgentProvider {
         final JsonArray liAry = forceElementToBeArray(ul.get("content"));
         final JsonObject a = liAry.get(random.nextInt(liAry.size())).getAsJsonObject();
         return a.get("content").getAsJsonObject().get("content").getAsJsonObject().get("text").getAsString();
-
     }
 
     private JsonArray forceElementToBeArray(final JsonElement jsonElement) {
@@ -89,6 +84,5 @@ public class UasComUserAgentProvider implements UserAgentProvider {
                 printHeaders(out, ary.get(i));
             }
         }
-
     }
 }

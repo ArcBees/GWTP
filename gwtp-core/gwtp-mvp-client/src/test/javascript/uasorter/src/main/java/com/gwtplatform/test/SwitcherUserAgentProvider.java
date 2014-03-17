@@ -19,7 +19,6 @@ public class SwitcherUserAgentProvider implements UserAgentProvider {
 
     public SwitcherUserAgentProvider() throws IOException {
         this.folders = getUnsortedUserAgents().get("useragentswitcher").getAsJsonObject().get("folder").getAsJsonArray();
-
     }
 
     public String getRandomUserAgent(final StringBuilder out) {
