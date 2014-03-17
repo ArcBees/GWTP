@@ -42,9 +42,6 @@ public class UasComUserAgentProvider implements UserAgentProvider {
         int agentStart = -1;
         for (int i = 0; i < contentArray.size(); i++) {
             final JsonObject content = contentArray.get(i).getAsJsonObject();
-            if (content.has("type") && content.get("type").getAsString().matches("h[1-3]")) {
-                //printHeaders(out, content.get("content"));
-            }
             if (content.has("type") && content.get("type").getAsString().equals("h4")) {
                 agentStart = i;
                 break;
