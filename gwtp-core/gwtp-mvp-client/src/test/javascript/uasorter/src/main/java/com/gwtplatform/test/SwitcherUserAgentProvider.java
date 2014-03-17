@@ -27,6 +27,7 @@ public class SwitcherUserAgentProvider implements UserAgentProvider {
     }
 
     private JsonObject getUnsortedUserAgents() throws IOException {
+        System.out.println("Init Switcher");
         final String userAgentXml = FileUtils.readFileToString(new File("../useragentswitcher.xml"));
         try {
             final JSONObject xmlJSONObj = XML.toJSONObject(userAgentXml);

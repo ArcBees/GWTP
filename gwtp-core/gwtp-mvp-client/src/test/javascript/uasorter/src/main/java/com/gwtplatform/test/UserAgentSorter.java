@@ -18,6 +18,7 @@ public class UserAgentSorter {
     static {
         try {
             userAgentProviders.add(new SwitcherUserAgentProvider());
+            userAgentProviders.add(new UasComUserAgentProvider());
         } catch (final IOException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -28,12 +29,12 @@ public class UserAgentSorter {
         System.out.println("Starting UserAgentSorter");
 
         System.out.println("How many useragents would you like to sort?");
-        int repeat = 1;
-        try {
+        final int repeat = 40;
+        /*try {
             repeat = Integer.valueOf(System.console().readLine());
         } catch (final NumberFormatException e) {
             System.out.println("Could not interpret repeat paramater.");
-        }
+        }*/
 
         System.out.println("Running " + repeat + " times.");
         System.out.println("----------------------------------------------\n");
