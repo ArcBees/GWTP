@@ -29,12 +29,12 @@ public class UserAgentSorter {
         System.out.println("Starting UserAgentSorter");
 
         System.out.println("How many useragents would you like to sort?");
-        final int repeat = 40;
-        /*try {
+        int repeat = 1;
+        try {
             repeat = Integer.valueOf(System.console().readLine());
         } catch (final NumberFormatException e) {
             System.out.println("Could not interpret repeat paramater.");
-        }*/
+        }
 
         System.out.println("Running " + repeat + " times.");
         System.out.println("----------------------------------------------\n");

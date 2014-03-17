@@ -19,13 +19,13 @@ public class UasComUserAgentProvider implements UserAgentProvider {
 
     public UasComUserAgentProvider() throws IOException {
         this.unsortedUserAgents = getUnsortedUserAgents();
-        System.out.println("instant uascom");
+        //System.out.println("instant uascom");
     }
 
     private JsonObject getUnsortedUserAgents() throws IOException {
-        System.out.println("Init Uascom");
+        //System.out.println("Init Uascom");
         final String unsortedUserAgentsJson = FileUtils.readFileToString(new File("../uascom.json"), "UTF-8");
-        System.out.println("fetched unsorted Uascom");
+        //System.out.println("fetched unsorted Uascom");
         return new JsonParser().parse(unsortedUserAgentsJson).getAsJsonObject();
     }
 

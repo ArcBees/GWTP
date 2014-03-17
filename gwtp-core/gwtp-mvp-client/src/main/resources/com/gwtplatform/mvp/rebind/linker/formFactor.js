@@ -27,7 +27,7 @@ function findFormFactorFromQuery(href, propertyName) {
 }
 
 function findFormFactorFromUserAgent(userAgent) {
-    var mobileRe = /([mM]o[b\/]|Pu|Fen|[2ly]m|[bB]O|[UDSW]P|[yC]E|d 0|[NV]o)/;
+    var mobileRe = /([mM]o[b\/]|Pu|Fen|[2ly]m|[bB]O|[iUDSW]P|[yC]E|d 0|[NV]o)/;
     var notMobileRe = /(k-A|Pad|T-P|Xo|H-I)/;
     var tabletRe = /(Pad|nd(r|le)|k-A|[Bn]oo)/;
 
