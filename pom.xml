@@ -262,7 +262,6 @@
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>3.2.3.RELEASE</spring.version>
         <velocity.version>1.7</velocity.version>
-        <maven-artifact.version>3.1.1</maven-artifact.version>
         <jbcrypt.version>0.3m</jbcrypt.version>
 
         <!-- Testing -->

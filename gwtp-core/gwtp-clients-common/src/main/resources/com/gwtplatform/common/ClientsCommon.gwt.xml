@@ -6,12 +6,6 @@
     <inherits name='com.google.gwt.user.User'/>
     <inherits name="com.google.gwt.inject.Inject"/>
 
-    <define-configuration-property name="verifyNewerVersion" is-multi-valued="false"/>
-    <set-configuration-property name="verifyNewerVersion" value="true"/>
-
-    <define-linker name="versionInspector" class="com.gwtplatform.common.rebind.VersionInspectorLinker"/>
-    <add-linker name="versionInspector"/>
-
     <!-- comma separated list of gin modules, mandatory when using Ginjector generation -->
     <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
 
