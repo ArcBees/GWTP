@@ -17,14 +17,9 @@
 package com.gwtplatform.dispatch.rest.shared;
 
 /**
- * Defines {@link RestAction}s to be used with {@link RestDispatch}. All interfaces extending {@link RestService} in
- * your classpath will get their implementation generated at compile-time, making it possible to inject them with GIN.
- * <p/>
- * See <a href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">this page</a> on how to
- * write your services.
- * <p/>
- * All methods defined here must return a {@link RestAction} and use
- * <a href="https://jax-rs-spec.java.net/nonav/2.0/apidocs/javax/ws/rs/package-summary.html">JAX-RS annotations</a>.
+ * @deprecated Services are generated based on the presence of a {@link javax.ws.rs.Path @Path} annotation. This
+ * interface should no longer be used and will eventually be deleted.
  */
+@Deprecated
 public interface RestService {
 }

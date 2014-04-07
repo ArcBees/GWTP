@@ -17,5 +17,5 @@
 package com.gwtplatform.carstore.shared.rest;
 
 public class PathParameter {
-    public static final String ID = "/{" + RestParameter.ID + "}";
+    public static final String PATH_ID = "/{" + RestParameter.ID + "}";
 }
