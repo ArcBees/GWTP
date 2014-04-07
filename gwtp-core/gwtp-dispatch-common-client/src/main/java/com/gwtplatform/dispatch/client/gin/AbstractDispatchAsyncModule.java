@@ -30,8 +30,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server.
- * This
- * module requires an {@link ExceptionHandler}, a {@link DefaultClientActionHandlerRegistry} and a
+ * This module requires an {@link ExceptionHandler}, a {@link DefaultClientActionHandlerRegistry} and a
  * {@link SecurityCookieAccessor}. By default, these will be bound to {@link DefaultExceptionHandler},
  * {@link DefaultClientActionHandlerRegistry} and {@link DefaultSecurityCookieAccessor} respectively.
  * <p/>

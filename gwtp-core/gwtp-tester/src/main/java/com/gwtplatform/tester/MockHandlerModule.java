@@ -96,8 +96,11 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  *           any(ClientDispatchRequest.class), any(ExecuteCommand.class));
  *
  * </pre>
+ *
+ * @author Brendan Doherty
  */
 public abstract class MockHandlerModule extends AbstractModule {
+
     private static class MockClientActionHandlerMapImpl<A extends Action<R>, R extends Result>
             implements MockClientActionHandlerMap {
 
@@ -188,9 +191,11 @@ public abstract class MockHandlerModule extends AbstractModule {
      * @param mockHandler Instance of the {@link ActionHandler} to execute
      *                    actions of type {@literal <A>}
      */
-    protected <A extends Action<R>, R extends Result, H extends AbstractClientActionHandler<A,R>>
-    void bindMockClientActionHandler(Class<A> actionClass, H mockHandler) {
-        bind(MockClientActionHandlerMap.class).annotatedWith(UniqueAnnotations.create())
-                .toInstance(new MockClientActionHandlerMapImpl<A, R>(actionClass, mockHandler));
+    protected <A extends Action<R>, R extends Result, H extends AbstractClientActionHandler<A,
+            R>> void bindMockClientActionHandler(
+            Class<A> actionClass, H mockHandler) {
+        bind(MockClientActionHandlerMap.class).annotatedWith(
+                UniqueAnnotations.create()).toInstance(
+                new MockClientActionHandlerMapImpl<A, R>(actionClass, mockHandler));
     }
 }
