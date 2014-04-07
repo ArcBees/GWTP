@@ -67,15 +67,16 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final Integer requestTimeoutMs;
 
     @Inject
-    DefaultRestRequestBuilderFactory(ActionMetadataProvider metadataProvider,
-                                     Serialization serialization,
-                                     HttpRequestBuilderFactory httpRequestBuilderFactory,
-                                     UrlUtils urlUtils,
-                                     @GlobalHeaderParams Multimap<HttpMethod, RestParameter> globalHeaderParams,
-                                     @GlobalQueryParams Multimap<HttpMethod, RestParameter> globalQueryParams,
-                                     @RestApplicationPath String baseUrl,
-                                     @XsrfHeaderName String securityHeaderName,
-                                     @RequestTimeout Integer requestTimeoutMs) {
+    DefaultRestRequestBuilderFactory(
+            ActionMetadataProvider metadataProvider,
+            Serialization serialization,
+            HttpRequestBuilderFactory httpRequestBuilderFactory,
+            UrlUtils urlUtils,
+            @GlobalHeaderParams Multimap<HttpMethod, RestParameter> globalHeaderParams,
+            @GlobalQueryParams Multimap<HttpMethod, RestParameter> globalQueryParams,
+            @RestApplicationPath String baseUrl,
+            @XsrfHeaderName String securityHeaderName,
+            @RequestTimeout Integer requestTimeoutMs) {
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
         this.httpRequestBuilderFactory = httpRequestBuilderFactory;
@@ -107,7 +108,9 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * {@link UrlUtils#encodePathSegment(String)}.
      *
      * @param value the value to encode.
+     *
      * @return the encoded path parameter.
+     *
      * @throws ActionException if an exception occurred while encoding the path parameter.
      * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
      */
@@ -120,7 +123,9 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * {@link UrlUtils#encodeQueryString(String)}.
      *
      * @param value the value to encode.
+     *
      * @return the encoded query parameter.
+     *
      * @throws ActionException if an exception occurred while encoding the query parameter.
      * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
      */
@@ -132,6 +137,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * Verify if the provided <code>bodyType</code> can be serialized.
      *
      * @param bodyType the parameterized type to verify if it can be serialized.
+     *
      * @return <code>true</code> if <code>bodyType</code> can be serialized, otherwise <code>false</code>.
      */
     protected boolean canSerialize(String bodyType) {
@@ -142,8 +148,9 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * Serialize the given object. We assume {@link #canSerialize(String)} returns <code>true</code> or a runtime
      * exception may be thrown.
      *
-     * @param object   the object to serialize.
+     * @param object the object to serialize.
      * @param bodyType The parameterized type of the object to serialize.
+     *
      * @return The serialized string.
      */
     protected String serialize(Object object, String bodyType) {
@@ -242,9 +249,9 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
 
         for (RestParameter param : params) {
             queryString.append("&")
-                       .append(param.getName())
-                       .append("=")
-                       .append(encodeQueryParam(param.getStringValue()));
+                    .append(param.getName())
+                    .append("=")
+                    .append(encodeQueryParam(param.getStringValue()));
         }
 
         if (queryString.length() != 0) {

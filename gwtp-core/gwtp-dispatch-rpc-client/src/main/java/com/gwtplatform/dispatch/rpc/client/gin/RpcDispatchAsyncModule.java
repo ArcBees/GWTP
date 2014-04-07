@@ -23,6 +23,7 @@ import com.google.inject.Provides;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
+import com.gwtplatform.dispatch.rpc.client.RpcBinding;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -55,8 +56,9 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new Builder());
     }
 
-    protected RpcDispatchAsyncModule(Builder builder) {
-        super(builder);
+    protected RpcDispatchAsyncModule(
+            Builder builder) {
+        super(builder, RpcBinding.class);
     }
 
     @Override

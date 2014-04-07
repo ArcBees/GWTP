@@ -43,13 +43,14 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
 
-    public RestDispatchCall(ExceptionHandler exceptionHandler,
-                            ClientActionHandlerRegistry clientActionHandlerRegistry,
-                            SecurityCookieAccessor securityCookieAccessor,
-                            RestRequestBuilderFactory requestBuilderFactory,
-                            RestResponseDeserializer restResponseDeserializer,
-                            A action,
-                            AsyncCallback<R> callback) {
+    public RestDispatchCall(
+            ExceptionHandler exceptionHandler,
+            ClientActionHandlerRegistry clientActionHandlerRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            RestRequestBuilderFactory requestBuilderFactory,
+            RestResponseDeserializer restResponseDeserializer,
+            A action,
+            AsyncCallback<R> callback) {
         super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;

@@ -36,10 +36,11 @@ public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
     private final SecurityCookieAccessor securityCookieAccessor;
 
     @Inject
-    DefaultRpcDispatchCallFactory(DispatchServiceAsync dispatchService,
-                                  ExceptionHandler exceptionHandler,
-                                  ClientActionHandlerRegistry clientActionHandlerRegistry,
-                                  SecurityCookieAccessor securityCookieAccessor) {
+    DefaultRpcDispatchCallFactory(
+            DispatchServiceAsync dispatchService,
+            @RpcBinding ExceptionHandler exceptionHandler,
+            @RpcBinding ClientActionHandlerRegistry clientActionHandlerRegistry,
+            @RpcBinding SecurityCookieAccessor securityCookieAccessor) {
         this.dispatchService = dispatchService;
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
@@ -48,15 +49,14 @@ public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
 
     @Override
     public <A extends Action<R>, R extends Result> RpcDispatchExecuteCall<A, R> create(A action,
-                                                                                       AsyncCallback<R> callback) {
+            AsyncCallback<R> callback) {
         return new RpcDispatchExecuteCall<A, R>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
                 securityCookieAccessor, action, callback);
     }
 
     @Override
     public <A extends Action<R>, R extends Result> RpcDispatchUndoCall<A, R> create(A action,
-                                                                                    R result,
-                                                                                    AsyncCallback<Void> callback) {
+            R result, AsyncCallback<Void> callback) {
         return new RpcDispatchUndoCall<A, R>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
                 securityCookieAccessor, action, result, callback);
     }

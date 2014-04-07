@@ -55,13 +55,14 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
     private final DispatchServiceAsync dispatchService;
     private final R result;
 
-    RpcDispatchUndoCall(DispatchServiceAsync dispatchService,
-                        ExceptionHandler exceptionHandler,
-                        ClientActionHandlerRegistry clientActionHandlerRegistry,
-                        SecurityCookieAccessor securityCookieAccessor,
-                        A action,
-                        R result,
-                        AsyncCallback<Void> callback) {
+    RpcDispatchUndoCall(
+            DispatchServiceAsync dispatchService,
+            ExceptionHandler exceptionHandler,
+            ClientActionHandlerRegistry clientActionHandlerRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            A action,
+            R result,
+            AsyncCallback<Void> callback) {
         super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action,
                 new AsyncCallbackWrapper<R>(callback));
 
@@ -81,6 +82,7 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
                     public void onSuccess(Void nothing) {
                         RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
                     }
-                }));
+                }
+        ));
     }
 }

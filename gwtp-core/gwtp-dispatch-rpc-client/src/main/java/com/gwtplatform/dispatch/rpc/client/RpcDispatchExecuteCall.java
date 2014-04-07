@@ -36,12 +36,13 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
     private final DispatchServiceAsync dispatchService;
 
-    RpcDispatchExecuteCall(DispatchServiceAsync dispatchService,
-                           ExceptionHandler exceptionHandler,
-                           ClientActionHandlerRegistry clientActionHandlerRegistry,
-                           SecurityCookieAccessor securityCookieAccessor,
-                           A action,
-                           AsyncCallback<R> callback) {
+    RpcDispatchExecuteCall(
+            DispatchServiceAsync dispatchService,
+            ExceptionHandler exceptionHandler,
+            ClientActionHandlerRegistry clientActionHandlerRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            A action,
+            AsyncCallback<R> callback) {
         super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
 
         this.dispatchService = dispatchService;
@@ -59,6 +60,7 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
                     public void onSuccess(Result result) {
                         RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
                     }
-                }));
+                }
+        ));
     }
 }
