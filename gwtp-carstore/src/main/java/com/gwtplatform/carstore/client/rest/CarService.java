@@ -21,9 +21,8 @@ import javax.ws.rs.GET;
 
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestService;
 
-public interface CarService extends RestService {
+public interface CarService {
     @GET
     RestAction<CarDto> get();
 

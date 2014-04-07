@@ -32,7 +32,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
-import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
 public class ServiceGenerator extends AbstractServiceGenerator {
@@ -42,16 +41,15 @@ public class ServiceGenerator extends AbstractServiceGenerator {
     private ServiceBinding serviceBinding;
 
     @Inject
-    ServiceGenerator(TypeOracle typeOracle,
-                     Logger logger,
-                     Provider<VelocityContext> velocityContextProvider,
-                     VelocityEngine velocityEngine,
-                     GeneratorUtil generatorUtil,
-                     ServiceDefinitions serviceDefinitions,
-                     GeneratorFactory generatorFactory,
-                     @Assisted JClassType service) {
-        super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil, serviceDefinitions,
-                generatorFactory, service);
+    ServiceGenerator(
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            GeneratorFactory generatorFactory,
+            @Assisted JClassType service) {
+        super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil, generatorFactory, service);
 
         this.service = service;
         path = extractPath(service);

@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.client;
 import com.google.gwt.core.client.EntryPoint;
 
 /**
- * This interface is used to initiate the generation of {@link com.gwtplatform.dispatch.rest.shared.RestService}s and
+ * This interface is used to initiate the generation of services and
  * {@link com.gwtplatform.dispatch.rest.shared.RestAction}s.
  * <p/>
  * Making it an {@link EntryPoint} makes sure GWT kicks off the generation as early as possible.

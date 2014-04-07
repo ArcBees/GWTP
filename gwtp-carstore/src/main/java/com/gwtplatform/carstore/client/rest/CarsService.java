@@ -25,28 +25,31 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.carstore.shared.rest.PathParameter;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.carstore.shared.rest.RestParameter;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestService;
 
-@Path(ResourcesPath.CARS)
+import static com.gwtplatform.carstore.shared.rest.PathParameter.PATH_ID;
+import static com.gwtplatform.carstore.shared.rest.ResourcesPath.CARS;
+import static com.gwtplatform.carstore.shared.rest.ResourcesPath.COUNT;
+import static com.gwtplatform.carstore.shared.rest.RestParameter.ID;
+import static com.gwtplatform.carstore.shared.rest.RestParameter.LIMIT;
+import static com.gwtplatform.carstore.shared.rest.RestParameter.OFFSET;
+
+@Path(CARS)
 public interface CarsService extends RestService {
     @GET
     RestAction<List<CarDto>> getCars();
 
     @GET
-    RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
-                                     @QueryParam(RestParameter.LIMIT) int limit);
+    RestAction<List<CarDto>> getCars(@QueryParam(OFFSET) int offset, @QueryParam(LIMIT) int limit);
 
     @GET
-    @Path(ResourcesPath.COUNT)
+    @Path(COUNT)
     RestAction<Integer> getCarsCount();
 
     @POST
     RestAction<CarDto> saveOrCreate(CarDto carDto);
 
-    @Path(PathParameter.ID)
-    CarService car(@PathParam(RestParameter.ID) Long carId);
+    @Path(PATH_ID)
+    CarService car(@PathParam(ID) Long carId);
 }

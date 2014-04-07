@@ -19,31 +19,26 @@ package com.gwtplatform.dispatch.rest.rebind.type;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind.Logger;
-import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
-import com.gwtplatform.dispatch.rest.shared.RestService;
 
 public class ServiceDefinitions {
-    private static final String SERVICE_INTERFACE = RestService.class.getName();
-
     private final TypeOracle typeOracle;
     private final List<JClassType> services = Lists.newArrayList();
     private final Logger logger;
-    private final GeneratorUtil generatorUtil;
 
     @Inject
-    ServiceDefinitions(Logger logger,
-                       TypeOracle typeOracle,
-                       GeneratorUtil generatorUtil)
+    ServiceDefinitions(
+            Logger logger,
+            TypeOracle typeOracle)
             throws UnableToCompleteException {
         this.logger = logger;
         this.typeOracle = typeOracle;
-        this.generatorUtil = generatorUtil;
 
         findAllServices();
     }
@@ -53,24 +48,27 @@ public class ServiceDefinitions {
     }
 
     public boolean isService(JClassType type) throws UnableToCompleteException {
-        JClassType serviceInterface = generatorUtil.getType(SERVICE_INTERFACE);
+        boolean isService = type.isAnnotationPresent(Path.class);
 
-        return !SERVICE_INTERFACE.equals(type.getQualifiedSourceName()) && type.isAssignableTo(serviceInterface);
+        if (isService) {
+            ensureIsInterface(type);
+        }
+
+        return isService;
+    }
+
+    private void ensureIsInterface(JClassType type) throws UnableToCompleteException {
+        if (type.isInterface() == null) {
+            String typeName = type.getQualifiedSourceName();
+            logger.die(typeName + " must be an interface.");
+        }
     }
 
     private void findAllServices() throws UnableToCompleteException {
         for (JClassType type : typeOracle.getTypes()) {
             if (isService(type)) {
-                verifyIsInterface(type);
                 services.add(type);
             }
-        }
-    }
-
-    private void verifyIsInterface(JClassType type) throws UnableToCompleteException {
-        if (type.isInterface() == null) {
-            String typeName = type.getQualifiedSourceName();
-            logger.die(typeName + " must be an interface.");
         }
     }
 }

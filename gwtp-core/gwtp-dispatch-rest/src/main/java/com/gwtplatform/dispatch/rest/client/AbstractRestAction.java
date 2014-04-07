@@ -27,7 +27,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
  * Provides a basic implementation of {@link RestAction} to inheritors. This is used by GWTP code-generator to create
- * the actions defined by the {@link com.gwtplatform.dispatch.rest.shared.RestService} implementers.
+ * the actions defined by the services.
  *
  * @param <R> the result type
  */
