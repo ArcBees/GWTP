@@ -63,7 +63,7 @@ public class ManufacturerResource {
         return Response.ok(manufacturerDtos).build();
     }
 
-    @Path(PathParameter.ID)
+    @Path(PathParameter.PATH_ID)
     @GET
     public Response get(@PathParam(RestParameter.ID) Long id) {
         ManufacturerDto manufacturerDto = Manufacturer.createDto(manufacturerDao.get(id));
@@ -78,7 +78,7 @@ public class ManufacturerResource {
         return Response.ok(Manufacturer.createDto(manufacturer)).build();
     }
 
-    @Path(PathParameter.ID)
+    @Path(PathParameter.PATH_ID)
     @DELETE
     public Response delete(@PathParam(RestParameter.ID) Long id) {
         manufacturerDao.delete(id);

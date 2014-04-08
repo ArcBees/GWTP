@@ -25,25 +25,25 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.carstore.shared.rest.PathParameter;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.carstore.shared.rest.RestParameter;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestService;
 
-@Path(ResourcesPath.RATING)
-public interface RatingService extends RestService {
+import static com.gwtplatform.carstore.shared.rest.PathParameter.PATH_ID;
+import static com.gwtplatform.carstore.shared.rest.ResourcesPath.RATING;
+import static com.gwtplatform.carstore.shared.rest.RestParameter.ID;
+
+@Path(RATING)
+public interface RatingService {
     @GET
     RestAction<List<RatingDto>> getRatings();
 
     @GET
-    @Path(PathParameter.ID)
-    RestAction<RatingDto> get(@PathParam(RestParameter.ID) Long id);
+    @Path(PATH_ID)
+    RestAction<RatingDto> get(@PathParam(ID) Long id);
 
     @POST
     RestAction<RatingDto> saveOrCreate(RatingDto RatingDto);
 
     @DELETE
-    @Path(PathParameter.ID)
-    RestAction<Void> delete(@PathParam(RestParameter.ID) Long id);
+    @Path(PATH_ID)
+    RestAction<Void> delete(@PathParam(ID) Long id);
 }

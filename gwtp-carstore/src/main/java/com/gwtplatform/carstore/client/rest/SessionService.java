@@ -24,12 +24,12 @@ import javax.ws.rs.Path;
 import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestService;
 
-@Path(ResourcesPath.SESSION)
-public interface SessionService extends RestService {
+import static com.gwtplatform.carstore.shared.rest.ResourcesPath.SESSION;
+
+@Path(SESSION)
+public interface SessionService {
     @DELETE
     RestAction<Void> logout();
 
