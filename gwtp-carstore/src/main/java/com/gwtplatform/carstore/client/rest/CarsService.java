@@ -26,7 +26,6 @@ import javax.ws.rs.QueryParam;
 
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestService;
 
 import static com.gwtplatform.carstore.shared.rest.PathParameter.PATH_ID;
 import static com.gwtplatform.carstore.shared.rest.ResourcesPath.CARS;
@@ -36,7 +35,7 @@ import static com.gwtplatform.carstore.shared.rest.RestParameter.LIMIT;
 import static com.gwtplatform.carstore.shared.rest.RestParameter.OFFSET;
 
 @Path(CARS)
-public interface CarsService extends RestService {
+public interface CarsService {
     @GET
     RestAction<List<CarDto>> getCars();
 
