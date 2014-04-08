@@ -15,7 +15,11 @@ function findFormFactorFromQuery(href, propertyName) {
         }
         value = value.substring(begin, end);
         if (value != '') {
-            return value;
+            if (["mobile","tablet","desktop"].indexOf(value) > -1) {
+                return value;
+            } else {
+                window.console && console.log(value + " is not a valid formfactor and has been ignored.");
+            }
         }
     }
 
@@ -23,9 +27,9 @@ function findFormFactorFromQuery(href, propertyName) {
 }
 
 function findFormFactorFromUserAgent(userAgent) {
-    var mobileRe = /(iphone|ipod|mobile)/i;
-    var notMobileRe = /silk/i;
-    var tabletRe = /(android|ipad|tablet|kindle)/i;
+    var mobileRe = /(Mobi|DoCoMo|Mini|Puffin|Fennec|j2me|Palm|portalmmm|Symbian ?OS|BOLT|webOS|UP\.(Link|Browser)|MIDP|PSP|WP|SonyEricsson|Windows ?CE|Android 0|Novarra-Vision|Nokia|Vodafone|uZardWeb)/;
+    var notMobileRe = /(Silk-Accelerated|Pad|GT-P1000M|Xoom|SCH-I800)/;
+    var tabletRe = /(Pad|Android|Kindle|Silk-Accelerated|nook|PlayBook)/;
 
     if (userAgent.match(mobileRe) && !userAgent.match(notMobileRe)) {
         return "mobile";
