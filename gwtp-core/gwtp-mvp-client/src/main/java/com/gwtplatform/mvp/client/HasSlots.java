@@ -24,7 +24,7 @@ package com.gwtplatform.mvp.client;
  * only {@link PresenterWidget}s, you will usually declare an {@link Object}
  * constant within your presenter class:
  * <pre>
- * public static final Object TYPE_RevealTopBarContent = new Object();
+ * public static final Object SLOT_RevealTopBarContent = new Object();
  * </pre>
  * For slots in which you want to insert {@link Presenter}s, you must
  * use a {@link com.google.gwt.event.shared.GwtEvent.Type Type&lt;RevealContentHandler&lt;?&gt;&gt;}
@@ -32,7 +32,7 @@ package com.gwtplatform.mvp.client;
  * {@link com.gwtplatform.mvp.client.annotations.ContentSlot ContentSlot}:
  * <pre>
  * {@literal @}ContentSlot
- * public static final Type&lt;RevealContentHandler&lt;?&gt;&gt; TYPE_RevealMainContent
+ * public static final Type&lt;RevealContentHandler&lt;?&gt;&gt; SLOT_RevealMainContent
  *   = new Type&lt;RevealContentHandler&lt;?&gt;&gt;();
  * </pre>
  */

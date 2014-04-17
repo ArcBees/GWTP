@@ -39,7 +39,7 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     }
 
     @ContentSlot
-    public static final GwtEvent.Type<RevealContentHandler<?>> TYPE_SetCarContent = new GwtEvent
+    public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_SetCarContent = new GwtEvent
             .Type<RevealContentHandler<?>>();
 
     public static final Object SLOT_TAB_BAR = new Object();
