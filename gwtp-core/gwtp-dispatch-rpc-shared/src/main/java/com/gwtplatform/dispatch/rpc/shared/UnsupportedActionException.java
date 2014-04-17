@@ -16,9 +16,7 @@
 
 package com.gwtplatform.dispatch.rpc.shared;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
-public class UnsupportedActionException extends ServiceException implements IsSerializable {
+public class UnsupportedActionException extends ServiceException {
 
     private static final long serialVersionUID = -3362561625013898012L;
 
