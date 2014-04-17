@@ -35,7 +35,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * For example:
  * <pre>
  * {@literal @}RequestTabs
- * public static final Type&lt;RequestTabsHandler&gt; TYPE_RequestTabs =
+ * public static final Type&lt;RequestTabsHandler&gt; SLOT_RequestTabs =
  *   new Type&lt;RequestTabsHandler&gt;();
  * </pre>
  * {@link Presenter} meant to appear within a {@link TabContainerPresenter} main

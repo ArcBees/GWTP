@@ -37,7 +37,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyView, MainPresenterTestUtil.MyProxy> {
 
     @ContentSlot
-    public static final Type<RevealContentHandler<?>> TYPE_SetMainContent = new Type<RevealContentHandler<?>>();
+    public static final Type<RevealContentHandler<?>> SLOT_SetMainContent = new Type<RevealContentHandler<?>>();
 
     /**
      * Presenter's view.
@@ -62,7 +62,7 @@ public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyVie
     }
 
     public void setSubPresenter() {
-        setInSlot(TYPE_SetMainContent, subPresenter);
+        setInSlot(SLOT_SetMainContent, subPresenter);
     }
 }
 

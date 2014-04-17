@@ -185,7 +185,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, RootCarPresenter.TYPE_SetCarContent, this);
+        RevealContentEvent.fire(this, RootCarPresenter.SLOT_SetCarContent, this);
     }
 
     private void onGetManufacturerSuccess(List<ManufacturerDto> manufacturerDtos) {
