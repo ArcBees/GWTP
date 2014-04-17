@@ -24,7 +24,7 @@ import com.googlecode.objectify.Ref;
 
 public class Deref {
     public static class Func<T> implements Function<Ref<T>, T> {
-        public static Func<Object> INSTANCE = new Func<Object>();
+        public static Func<Object> INSTANCE = new Func<>();
 
         @Override
         public T apply(Ref<T> ref) {

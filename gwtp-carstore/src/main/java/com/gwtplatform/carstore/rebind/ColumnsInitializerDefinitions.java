@@ -41,7 +41,7 @@ public class ColumnsInitializerDefinitions {
 
         columnsInitializerDefinitions.columnsInitializer = type.getAnnotation(ColumnsDefinition.class);
 
-        List<ColumnTuple> columns = new ArrayList<ColumnTuple>();
+        List<ColumnTuple> columns = new ArrayList<>();
         JMethod[] jMethods = type.getMethods();
         for (int i = 0; i < jMethods.length; i++) {
             JMethod method = jMethods[i];

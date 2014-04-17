@@ -60,8 +60,8 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
                PlaceManager placeManager) {
         this.placeManager = placeManager;
 
-        CellList<MenuItem> placeList = new CellList<MenuItem>(new EnumCell<MenuItem>(), listResources);
-        menuBar = new ValuePicker<MenuItem>(placeList);
+        CellList<MenuItem> placeList = new CellList<>(new EnumCell<MenuItem>(), listResources);
+        menuBar = new ValuePicker<>(placeList);
 
         initWidget(uiBinder.createAndBindUi(this));
 

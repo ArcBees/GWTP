@@ -39,7 +39,7 @@ public class ChangeActionBarEvent extends GwtEvent<ChangeActionBarEvent.ChangeAc
         source.fireEvent(new ChangeActionBarEvent(actions, tabsVisible));
     }
 
-    private static final Type<ChangeActionBarHandler> TYPE = new Type<ChangeActionBarHandler>();
+    private static final Type<ChangeActionBarHandler> TYPE = new Type<>();
 
     private List<ActionType> actions;
     private Boolean tabsVisible;

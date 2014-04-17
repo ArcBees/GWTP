@@ -43,11 +43,11 @@ public class ReportMobileView extends ViewImpl implements ReportPresenter.MyView
     ReportMobileView(Binder uiBinder,
                      ReportCell reportCell,
                      MobileDataListStyle listStyle) {
-        reportList = new CellList<ManufacturerRatingDto>(reportCell, listStyle);
+        reportList = new CellList<>(reportCell, listStyle);
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        ratingsProvider = new ListDataProvider<ManufacturerRatingDto>();
+        ratingsProvider = new ListDataProvider<>();
         ratingsProvider.addDataDisplay(reportList);
     }
 

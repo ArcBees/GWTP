@@ -56,7 +56,7 @@ public class EditRatingView extends PopupViewWithUiHandlers<EditRatingUiHandlers
                    EventBus eventBus) {
         super(eventBus);
 
-        car = new ValueListBox<CarDto>(new CarRenderer());
+        car = new ValueListBox<>(new CarRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));

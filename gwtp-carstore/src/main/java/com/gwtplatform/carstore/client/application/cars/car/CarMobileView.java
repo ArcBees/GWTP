@@ -53,7 +53,7 @@ public class CarMobileView extends ViewWithUiHandlers<CarUiHandlers> implements 
     @Inject
     CarMobileView(Binder uiBinder,
                   Driver driver) {
-        manufacturer = new ValueListBox<ManufacturerDto>(new ManufacturerRenderer());
+        manufacturer = new ValueListBox<>(new ManufacturerRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));

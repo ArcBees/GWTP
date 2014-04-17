@@ -74,11 +74,11 @@ public class BaseDao<T extends Dto> {
     }
 
     public List<T> getSubset(List<Long> ids) {
-        return new ArrayList<T>(ofy().query(clazz).ids(ids).values());
+        return new ArrayList<>(ofy().query(clazz).ids(ids).values());
     }
 
     public Map<Long, T> getSubsetMap(List<Long> ids) {
-        return new HashMap<Long, T>(ofy().query(clazz).ids(ids));
+        return new HashMap<>(ofy().query(clazz).ids(ids));
     }
 
     public void delete(T object) {

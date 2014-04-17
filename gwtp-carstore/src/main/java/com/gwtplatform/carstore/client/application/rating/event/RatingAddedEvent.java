@@ -35,7 +35,7 @@ public class RatingAddedEvent extends GwtEvent<RatingAddedHandler> {
         source.fireEvent(new RatingAddedEvent(ratingDto));
     }
 
-    private static final Type<RatingAddedHandler> TYPE = new Type<RatingAddedHandler>();
+    private static final Type<RatingAddedHandler> TYPE = new Type<>();
 
     private RatingDto ratingDto;
 

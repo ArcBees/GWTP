@@ -27,7 +27,7 @@ import com.gwtplatform.carstore.shared.dto.RatingDto;
 
 public class ReportService {
     public List<ManufacturerRatingDto> getAverageCarRatings(List<RatingDto> ratingDtos) {
-        HashMap<String, AveragingCounter> averages = new HashMap<String, AveragingCounter>();
+        HashMap<String, AveragingCounter> averages = new HashMap<>();
 
         for (RatingDto ratingDto : ratingDtos) {
             CarDto carDto = ratingDto.getCar();
@@ -42,7 +42,7 @@ public class ReportService {
             }
         }
 
-        List<ManufacturerRatingDto> results = new ArrayList<ManufacturerRatingDto>(averages.size());
+        List<ManufacturerRatingDto> results = new ArrayList<>(averages.size());
         for (String manufacturer : averages.keySet()) {
             results.add(new ManufacturerRatingDto(manufacturer, averages.get(manufacturer).average()));
         }
