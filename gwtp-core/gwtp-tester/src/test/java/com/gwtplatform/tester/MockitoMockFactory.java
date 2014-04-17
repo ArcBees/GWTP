@@ -20,8 +20,6 @@ import org.mockito.Mockito;
 
 /**
  * {@link MockFactory} that uses Mockito.
- *
- * @author Christian Goudreau
  */
 public class MockitoMockFactory implements MockFactory {
     @Override

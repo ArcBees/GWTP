@@ -35,9 +35,6 @@ package com.gwtplatform.mvp.client;
  * public static final Type&lt;RevealContentHandler&lt;?&gt;&gt; TYPE_RevealMainContent
  *   = new Type&lt;RevealContentHandler&lt;?&gt;&gt;();
  * </pre>
- *
- * @author Christian Goudreau
- * @author Philippe Beaudoin
  */
 public interface HasSlots {
     /**

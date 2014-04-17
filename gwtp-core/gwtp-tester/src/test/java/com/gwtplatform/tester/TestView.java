@@ -25,9 +25,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-/**
- * @author Christian Goudreau
- */
 public class TestView extends Composite {
     /**
      * {@link TestView}'s {@link UiBinder}.

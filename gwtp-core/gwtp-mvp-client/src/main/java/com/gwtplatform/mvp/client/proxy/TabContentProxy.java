@@ -29,7 +29,6 @@ import com.gwtplatform.mvp.client.TabData;
  * with a name token, use {@link NonLeafTabContentProxy} instead.
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
- * @author Philippe Beaudoin
  * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  */
 public interface TabContentProxy<P extends Presenter<?, ?>> extends Proxy<P> {

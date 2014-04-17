@@ -24,8 +24,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.gwtplatform.dispatch.server.RequestProvider;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.request.DefaultRequestProvider}.
  */
 @Deprecated

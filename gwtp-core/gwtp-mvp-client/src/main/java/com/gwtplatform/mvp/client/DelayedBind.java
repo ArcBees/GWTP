@@ -25,8 +25,6 @@ import com.google.gwt.inject.client.Ginjector;
  * {@link #delayedBind(Ginjector)}. Their constructor will typically register
  * themselves with the {@link DelayedBindRegistry}, which will take care of
  * calling {@code bind} on all the registered classes.
- *
- * @author Philippe Beaudoin
  */
 public interface DelayedBind {
     /**

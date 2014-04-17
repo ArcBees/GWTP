@@ -25,8 +25,6 @@ import com.gwtplatform.mvp.client.AutobindDisable;
 /**
  * Base module to use while testing presenters. {@link AutomockingModule} is
  * used. Your configuration module must extends this class.
- *
- * @author Christian Goudreau
  */
 public abstract class PresenterTestModule extends JukitoModule {
     @Override

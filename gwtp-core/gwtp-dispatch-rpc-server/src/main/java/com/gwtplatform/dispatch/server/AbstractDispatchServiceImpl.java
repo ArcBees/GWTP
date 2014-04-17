@@ -36,8 +36,6 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * This class is closely related to {@link AbstractDispatchImpl}, in theory the latter wouldn't be needed, but we use it
  * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.shared.DispatchAsync}.
  *
- * @author Christian Goudreau
- * @author David Peterson
  * @see com.gwtplatform.dispatch.shared.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl

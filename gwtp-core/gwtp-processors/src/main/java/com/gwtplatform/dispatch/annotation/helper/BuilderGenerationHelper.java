@@ -42,8 +42,6 @@ import javax.lang.model.element.VariableElement;
  * Has required fields and optional fields - Constructor for required fields + Builder.
  * Has optional fields - only Builder.
  *
- * @author Florian Sauter
- * @author Brendan Doherty
  * @see http://my.safaribooksonline.com/9780137150021/ch02lev1sec2
  */
 public class BuilderGenerationHelper extends ClassGenerationHelper {

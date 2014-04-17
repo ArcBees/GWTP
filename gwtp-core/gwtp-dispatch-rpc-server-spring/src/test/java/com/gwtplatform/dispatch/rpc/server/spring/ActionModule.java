@@ -27,9 +27,6 @@ import com.gwtplatform.dispatch.rpc.server.spring.actionvalidator.DefaultActionV
 import com.gwtplatform.dispatch.rpc.server.spring.configuration.DefaultModule;
 import com.gwtplatform.dispatch.rpc.shared.action.TestAction;
 
-/**
- * @author Peter Simun
- */
 @Configuration
 @Import({DefaultModule.class})
 public class ActionModule extends HandlerModule {

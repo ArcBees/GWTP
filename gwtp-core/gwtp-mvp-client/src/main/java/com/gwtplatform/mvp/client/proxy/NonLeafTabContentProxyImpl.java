@@ -27,7 +27,6 @@ import com.gwtplatform.mvp.client.TabData;
 
 /**
  * @param <T> The Presenter's type.
- * @author Philippe Beaudoin
  */
 public class NonLeafTabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
         implements NonLeafTabContentProxy<T> {

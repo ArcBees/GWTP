@@ -32,9 +32,6 @@ import com.gwtplatform.dispatch.rpc.shared.action.TestAnnotatedAction;
 import com.gwtplatform.dispatch.rpc.shared.action.TestResult;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-/**
- * @author Peter Simun
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = ActionModule.class)
 public class ActionSpringTest extends ActionTestBase {

@@ -25,8 +25,6 @@ import javax.lang.model.element.VariableElement;
 /**
  * {@link InterfaceGenerationHelper} is an internal class that provides common routines
  * only used by the annotation processors.
- *
- * @author Florian Sauter
  */
 public class InterfaceGenerationHelper extends GenerationHelper {
     public InterfaceGenerationHelper(Writer sourceWriter) {

@@ -29,7 +29,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * For more complex scenarios you can use {@link ProxyPlace#manualReveal(Presenter)}.
  *
  * @param <T> The type of the return value, see {@link AsyncCallback}.
- * @author Philippe Beaudoin
  */
 public class ManualRevealCallback<T> implements AsyncCallback<T> {
 

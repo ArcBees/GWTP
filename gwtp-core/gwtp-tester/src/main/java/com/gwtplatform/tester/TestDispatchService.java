@@ -27,8 +27,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
 /**
  * This class is an implementation of {@link DispatchService} for use with test
  * cases that configure guice using a {@link MockHandlerModule}.
- *
- * @author Brendan Doherty
  */
 
 public class TestDispatchService implements DispatchService {

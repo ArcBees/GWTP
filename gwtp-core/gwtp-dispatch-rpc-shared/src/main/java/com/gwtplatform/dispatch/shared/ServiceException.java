@@ -20,8 +20,6 @@ package com.gwtplatform.dispatch.shared;
  * This is thrown by services when there is a low-level problem while processing
  * an action execution.
  *
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.ServiceException}.
  */
 @Deprecated

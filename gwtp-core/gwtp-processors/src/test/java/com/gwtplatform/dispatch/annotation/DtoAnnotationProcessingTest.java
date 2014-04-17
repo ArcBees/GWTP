@@ -25,9 +25,6 @@ import static org.junit.Assert.assertFalse;
  * This test is being run by ant, but is not run in eclipse.
  * <p/>
  * TODO: Make a test suite with a couple of permutations (with/without Order, Optional, both...).
- *
- * @author Brendan Doherty
- * @author Florian Sauter
  */
 public class DtoAnnotationProcessingTest {
 

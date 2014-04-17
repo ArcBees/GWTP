@@ -16,9 +16,6 @@
 
 package com.gwtplatform.mvp.client;
 
-/**
- * @author Christian Goudreau
- */
 public interface HasPopupSlot {
 
     /**

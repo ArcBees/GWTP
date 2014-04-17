@@ -23,9 +23,6 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
-/**
- * @author Philippe Beaudoin
- */
 public abstract class AbstractPresenterModule extends AbstractGinModule {
 
     public AbstractPresenterModule() {

@@ -28,8 +28,6 @@ import java.util.List;
  * of {@link BatchAction.OnException#CONTINUE}, failed actions will have a <code>null</code>
  * value.
  *
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.BatchResult}.
  */
 @Deprecated

@@ -23,9 +23,6 @@ import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
-/**
- * @author Philippe Beaudoin
- */
 public class PlaceManagerTestUtilGwt extends PlaceManagerImpl {
     private final PlaceRequest defaultPlaceRequest;
 

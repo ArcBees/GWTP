@@ -22,8 +22,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.gwtplatform.dispatch.server.AbstractRandomSecurityCookieFilter;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.RandomSecurityCookieFilter}.
  */
 @Deprecated

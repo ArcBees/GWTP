@@ -20,8 +20,6 @@ package com.gwtplatform.mvp.client.proxy;
  * The interface for a handler that will be invoked when a place title is
  * available. For more information see
  * {@link PlaceManager#getTitle(int, SetPlaceTitleHandler)}.
- *
- * @author Philippe Beaudoin
  */
 public interface SetPlaceTitleHandler {
     /**

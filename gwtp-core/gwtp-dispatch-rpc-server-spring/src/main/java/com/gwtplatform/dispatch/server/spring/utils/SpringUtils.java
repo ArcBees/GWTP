@@ -29,8 +29,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.AbstractRefreshableWebApplicationContext;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils}.
  */
 @Deprecated

@@ -52,7 +52,6 @@ import com.google.gwt.uibinder.client.UiField;
  *
  * @param <U> Mock type returned by {@link UiBinder#createAndBindUi(Object)}.
  * @param <O> Owner type.
- * @author Christian Goudreau
  */
 public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
     private final Class<U> returnTypeClass;

@@ -31,8 +31,6 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * This is the test presenter.
- *
- * @author Philippe Beaudoin
  */
 public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyView, MainPresenterTestUtil.MyProxy> {
 

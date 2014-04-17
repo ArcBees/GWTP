@@ -83,8 +83,6 @@ import com.google.web.bindery.requestfactory.shared.Locator;
  * automatically replaces this with ".shared". To avoid this behaviour, set the
  * target package manual using {@link GenProxy#targetPackage()}.
  * </p>
- *
- * @author Florian Sauter
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.SOURCE)

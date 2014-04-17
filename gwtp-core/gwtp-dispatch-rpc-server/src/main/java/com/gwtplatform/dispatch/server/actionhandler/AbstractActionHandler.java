@@ -27,7 +27,6 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @param <A> The {@link com.gwtplatform.dispatch.shared.Action} type.
  * @param <R> The {@link com.gwtplatform.dispatch.shared.Result} type.
- * @author David Peterson
  *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionhandler.AbstractActionHandler}.
  */

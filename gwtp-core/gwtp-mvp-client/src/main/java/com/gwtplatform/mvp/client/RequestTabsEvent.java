@@ -22,8 +22,6 @@ import com.google.gwt.event.shared.HasHandlers;
 /**
  * This event is fired by the {@link TabContainerPresenter} to identify all
  * presenters that should display their tabs within it.
- *
- * @author Philippe Beaudoin
  */
 public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
 

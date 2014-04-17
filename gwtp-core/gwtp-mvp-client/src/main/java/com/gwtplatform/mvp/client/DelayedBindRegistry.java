@@ -27,8 +27,6 @@ import com.google.gwt.inject.client.Ginjector;
  * interface. These classes should be eager singletons and they should register
  * themselves with the {@link DelayedBindRegistry} in their constructor by
  * calling {@link #register(DelayedBind)}.
- *
- * @author Philippe Beaudoin
  */
 public final class DelayedBindRegistry {
 

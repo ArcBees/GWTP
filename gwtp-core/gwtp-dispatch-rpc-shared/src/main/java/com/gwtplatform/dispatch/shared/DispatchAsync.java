@@ -28,8 +28,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * fact, GWT currently can't correctly handle having generic method templates in
  * method signatures (eg. <code>&lt;A&gt; A create( Class<A> type )</code>)
  *
- * @author David Peterson
- * @author Philippe Beaudoin
  * @see com.gwtplatform.dispatch.shared.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl

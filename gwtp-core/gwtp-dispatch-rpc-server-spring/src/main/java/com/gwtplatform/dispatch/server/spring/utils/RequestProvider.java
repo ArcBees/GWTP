@@ -17,8 +17,6 @@
 package com.gwtplatform.dispatch.server.spring.utils;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.utils.RequestProvider}.
  */
 @Deprecated

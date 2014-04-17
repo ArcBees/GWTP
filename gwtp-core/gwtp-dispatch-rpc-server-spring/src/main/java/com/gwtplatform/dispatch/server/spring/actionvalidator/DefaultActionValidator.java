@@ -22,8 +22,6 @@ import com.gwtplatform.dispatch.server.actionvalidator.AbstractDefaultActionVali
  * The default {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} spring implementation.
  * It's here just to define default action validator as a spring bean.
  *
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.actionvalidator.DefaultActionValidator}.
  */
 @Deprecated

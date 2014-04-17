@@ -30,7 +30,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the
  * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest}.
  *
- * @author Philippe Beaudoin
  * @see NavigationRefusedEvent
  */
 public final class NavigationEvent extends GwtEvent<NavigationHandler> {

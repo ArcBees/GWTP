@@ -26,8 +26,6 @@ import com.google.gwt.user.rebind.SourceWriter;
 /**
  * A {@link ProxyOutputter} that is at once a {@link ProxyPlaceOutputter} and a
  * {@link NonLeafTabContentProxyOutputter}.
- *
- * @author Philippe Beaudoin
  */
 public class TabContentProxyPlaceOutputter extends ProxyOutputterBase {
 

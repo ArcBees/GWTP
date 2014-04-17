@@ -20,8 +20,6 @@ import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.AbstractEagerActionHandlerValidatorRegistryImpl;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use
  * {@link com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.EagerActionHandlerValidatorRegistryImpl}.
  */

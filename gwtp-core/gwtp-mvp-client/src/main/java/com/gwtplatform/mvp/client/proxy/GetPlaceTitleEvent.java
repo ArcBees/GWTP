@@ -27,8 +27,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * <b>Important!</b> You should never fire that event directly. Instead, use
  * {@link PlaceManager#getCurrentTitle(SetPlaceTitleHandler)} or
  * {@link PlaceManager#getTitle(int, SetPlaceTitleHandler)}.
- *
- * @author Philippe Beaudoin
  */
 public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
 

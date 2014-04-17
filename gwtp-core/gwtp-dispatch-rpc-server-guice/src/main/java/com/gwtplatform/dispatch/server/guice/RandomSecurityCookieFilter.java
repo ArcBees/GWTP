@@ -23,8 +23,6 @@ import com.gwtplatform.dispatch.server.AbstractRandomSecurityCookieFilter;
 import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
- * @author Philippe Beaudoin
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.RandomSecurityCookieFilter}.
  */
 @Deprecated

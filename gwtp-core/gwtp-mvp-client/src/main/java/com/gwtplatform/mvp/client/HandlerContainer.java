@@ -22,8 +22,6 @@ package com.gwtplatform.mvp.client;
  * will be automatically unregistered when the class is unbound.
  * <p/>
  * For details on the autobinding mechanism, see {@link HandlerContainerImpl}.
- *
- * @author Philippe Beaudoin
  */
 public interface HandlerContainer {
 

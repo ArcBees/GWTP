@@ -24,8 +24,6 @@ import com.google.gwt.user.client.ui.Label;
 
 /**
  * A dummy widget participating in dependency injection to test GinUiBinder.
- *
- * @author Philippe Beaudoin
  */
 public class InjectedLabel extends Composite {
 

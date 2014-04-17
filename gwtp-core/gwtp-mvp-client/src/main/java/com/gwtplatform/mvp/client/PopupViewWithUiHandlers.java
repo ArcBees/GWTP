@@ -27,8 +27,6 @@ import com.google.web.bindery.event.shared.EventBus;
  * since the {@link UiHandlers} are not yet set.
  *
  * @param <C> Your {@link UiHandlers} interface type.
- * @author Christian Goudreau
- * @author Philippe Beaudoin
  */
 public abstract class PopupViewWithUiHandlers<C extends UiHandlers> extends
         PopupViewImpl implements HasUiHandlers<C> {

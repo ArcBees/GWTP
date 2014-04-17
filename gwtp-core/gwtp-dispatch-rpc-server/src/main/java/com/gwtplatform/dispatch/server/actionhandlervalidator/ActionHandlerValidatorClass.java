@@ -28,7 +28,6 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @param <A> Type of associated {@link com.gwtplatform.dispatch.shared.Action}
  * @param <R> Type of associated {@link com.gwtplatform.dispatch.shared.Result}
- * @author Christian Goudreau
  *
  * @deprecated Please use
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorClass}.

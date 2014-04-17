@@ -27,7 +27,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * {@link IndirectProvider}.
  *
  * @param <T> The type of the provided object.
- * @author Philippe Beaudoin
  */
 public final class StandardProvider<T> implements IndirectProvider<T> {
 

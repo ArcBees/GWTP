@@ -28,8 +28,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 /**
  * This class configures guice for use in test cases with a
  * {@link MockHandlerModule}.
- *
- * @author Brendan Doherty
  */
 public class TestDispatchModule extends AbstractModule {
     @Override

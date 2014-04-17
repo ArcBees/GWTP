@@ -23,8 +23,6 @@ import com.gwtplatform.dispatch.server.actionvalidator.AbstractDefaultActionVali
  * The default {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} guice implementation.
  * It's here just to define default action validator as a Guice bean.
  *
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.actionvalidator.DefaultActionValidator}.
  */
 @Deprecated

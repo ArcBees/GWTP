@@ -28,8 +28,6 @@ import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValid
         .CommonBindingDescriptor;
 
 /**
- * @author Peter Simun (simun@seges.sk)
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.GuiceBeanProvider}.
  */
 @Deprecated
@@ -37,8 +35,6 @@ public class GuiceBeanProvider implements BeanProvider {
 
     /**
      * Adapter for tranforming Guice Binding into BeanProvider implementation.
-     *
-     * @author Peter Simun (simun@seges.sk)
      */
     public static class GuiceBindingDescriptorAdapter<B> extends CommonBindingDescriptor<B> {
 

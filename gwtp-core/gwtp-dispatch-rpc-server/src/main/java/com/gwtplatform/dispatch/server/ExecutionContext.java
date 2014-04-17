@@ -27,8 +27,6 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * and allows them to execute sub-actions. These actions can be automatically rolled back
  * if any part of the action handler fails.
  *
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.ExecutionContext}.
  */
 @Deprecated

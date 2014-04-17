@@ -43,9 +43,6 @@ package com.gwtplatform.mvp.client.proxy;
  * {@link com.gwtplatform.mvp.client.annotations.UseGatekeeper} annotation.
  * <p/>
  * You should usually bind your {@link Gatekeeper} as a singleton.
- *
- * @author Philippe Beaudoin
- * @author Olivier Monaco
  */
 public interface Gatekeeper {
     /**

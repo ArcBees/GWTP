@@ -23,8 +23,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * This is the unparameterized base interface for proxy. It is provided as a
  * work around since GIN/Guice cannot inject parameterized types. For most
  * purposes you should use {@link Proxy}.
- *
- * @author Philippe Beaudoin
  */
 public interface ProxyRaw extends HasHandlers {
 

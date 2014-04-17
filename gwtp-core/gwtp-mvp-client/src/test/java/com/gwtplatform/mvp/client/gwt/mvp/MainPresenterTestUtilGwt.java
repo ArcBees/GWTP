@@ -27,8 +27,6 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.
- *
- * @author Philippe Beaudoin
  */
 public class MainPresenterTestUtilGwt extends Presenter<MainPresenterTestUtilGwt.MyView,
         MainPresenterTestUtilGwt.MyProxy> {

@@ -32,7 +32,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * {@link UnsecuredActionImpl} instead.
  *
  * @param <R> The {@link Result} type.
- * @author David Peterson
  *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.Action}.
  */

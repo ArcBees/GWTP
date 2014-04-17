@@ -20,8 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * Handler for {@link AsyncCallSucceedEvent}.
- *
- * @author Philippe Beaudoin
  */
 public interface AsyncCallSucceedHandler extends EventHandler {
     void onAsyncCallSucceed(final AsyncCallSucceedEvent asyncCallSucceedEvent);

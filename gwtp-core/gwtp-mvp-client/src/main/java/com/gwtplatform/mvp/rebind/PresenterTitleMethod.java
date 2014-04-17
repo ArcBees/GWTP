@@ -27,8 +27,6 @@ import com.gwtplatform.mvp.client.annotations.TitleFunction;
 
 /**
  * Represents a method, in the presenter, that is responsible of returning the place title.
- *
- * @author Philippe Beaudoin
  */
 public class PresenterTitleMethod {
 

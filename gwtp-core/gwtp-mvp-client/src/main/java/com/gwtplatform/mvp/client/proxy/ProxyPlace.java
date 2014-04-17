@@ -22,7 +22,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * The interface of a {@link Proxy} that is also a {@link Place}.
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
- * @author Philippe Beaudoin
  */
 public interface ProxyPlace<P extends Presenter<?, ?>> extends Proxy<P>, Place {
 

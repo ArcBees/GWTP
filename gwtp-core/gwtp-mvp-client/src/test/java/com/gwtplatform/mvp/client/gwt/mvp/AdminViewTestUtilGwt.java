@@ -22,8 +22,6 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.
- *
- * @author Philippe Beaudoin
  */
 public class AdminViewTestUtilGwt extends ViewImpl implements AdminPresenterTestUtilGwt.MyView {
 

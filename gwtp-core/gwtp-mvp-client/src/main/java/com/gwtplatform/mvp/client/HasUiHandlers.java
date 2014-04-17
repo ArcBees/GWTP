@@ -22,7 +22,6 @@ package com.gwtplatform.mvp.client;
  * {@link #setUiHandlers(UiHandlers)} from your presenter constructor.
  *
  * @param <C> Your {@link UiHandlers} interface type.
- * @author Christian Goudreau
  */
 public interface HasUiHandlers<C extends UiHandlers> {
 

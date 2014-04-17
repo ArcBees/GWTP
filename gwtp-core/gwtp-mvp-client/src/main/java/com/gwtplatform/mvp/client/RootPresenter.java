@@ -49,8 +49,6 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * to set your presenter at the top level. The choice depends on whether your
  * presenter works as a {@link com.google.gwt.user.client.ui.Panel} or as a
  * {@link com.google.gwt.user.client.ui.LayoutPanel}.
- *
- * @author Philippe Beaudoin
  */
 public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         implements ResetPresentersHandler, RevealRootContentHandler,

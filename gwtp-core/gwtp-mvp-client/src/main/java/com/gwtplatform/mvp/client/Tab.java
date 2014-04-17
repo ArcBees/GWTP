@@ -23,8 +23,6 @@ import com.google.gwt.user.client.ui.Widget;
  * This interface represents a tab after it has been instantiated
  * as a {@link Widget}. The full description of a tab before it is
  * created is given by {@link TabData}.
- *
- * @author Philippe Beaudoin
  */
 public interface Tab extends HasText {
 

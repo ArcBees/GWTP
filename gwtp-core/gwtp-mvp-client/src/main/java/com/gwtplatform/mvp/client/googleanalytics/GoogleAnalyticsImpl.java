@@ -24,8 +24,6 @@ import com.google.gwt.user.client.Window;
 /**
  * Default {@link GoogleAnalytics} implementation that uses JSNI to
  * expose Google Analytics javascript methods.
- *
- * @author Christian Goudreau
  */
 public class GoogleAnalyticsImpl implements GoogleAnalytics {
     @Override

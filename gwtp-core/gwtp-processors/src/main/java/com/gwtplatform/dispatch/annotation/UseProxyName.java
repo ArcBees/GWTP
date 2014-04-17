@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
  * Annotation on domain (server-side) object fields specifying an EntityProxy
  * or ValueProxy class for the generation process.
  *
- * @author Florian Sauter
  * @see {@link GenProxy}
  */
 @Target({ElementType.FIELD})

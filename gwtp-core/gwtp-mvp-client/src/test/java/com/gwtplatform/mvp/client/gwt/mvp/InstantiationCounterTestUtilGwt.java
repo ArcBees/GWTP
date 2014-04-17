@@ -20,8 +20,6 @@ import javax.inject.Inject;
 
 /**
  * A class that counts the number of times a Ginjector was created.
- *
- * @author beaudoin
  */
 public class InstantiationCounterTestUtilGwt {
     private static int counter;

@@ -27,8 +27,6 @@ import com.gwtplatform.mvp.client.annotations.TabInfo;
 
 /**
  * Represents a static method, in the presenter, that returns tab information.
- *
- * @author Philippe Beaudoin
  */
 public class TabInfoMethod {
     private final TreeLogger logger;
