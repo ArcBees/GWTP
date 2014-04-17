@@ -34,7 +34,7 @@ public class ActionBarEvent extends GwtEvent<ActionBarEvent.ActionBarHandler> {
         source.fireEvent(new ActionBarEvent(actionType, sourceToken));
     }
 
-    private static final Type<ActionBarHandler> TYPE = new Type<ActionBarHandler>();
+    private static final Type<ActionBarHandler> TYPE = new Type<>();
 
     private final ActionType actionType;
     private final String sourceToken;

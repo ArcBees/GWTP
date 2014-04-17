@@ -54,8 +54,8 @@ public class CarsMobileView extends ViewWithUiHandlers<CarsUiHandlers> implement
                    CarCell carCell,
                    MobileDataListStyle mobileDataListStyle) {
         pagerPanel = new ShowMorePagerPanel(PAGE_SIZE);
-        carList = new CellList<CarDto>(carCell, mobileDataListStyle);
-        selectionModel = new SingleSelectionModel<CarDto>();
+        carList = new CellList<>(carCell, mobileDataListStyle);
+        selectionModel = new SingleSelectionModel<>();
 
         initWidget(uiBinder.createAndBindUi(this));
 

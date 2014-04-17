@@ -52,7 +52,7 @@ public class RatingDetailView extends ViewWithUiHandlers<RatingDetailUiHandlers>
                             Driver driver) {
         this.driver = driver;
 
-        car = new ValueListBox<CarDto>(new CarRenderer());
+        car = new ValueListBox<>(new CarRenderer());
 
         initWidget(uiBinder.createAndBindUi(this));
 

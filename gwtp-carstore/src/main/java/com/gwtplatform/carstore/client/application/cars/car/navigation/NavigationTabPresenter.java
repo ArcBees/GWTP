@@ -40,7 +40,7 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
         void selectTab(int index);
     }
 
-    private List<NavigationTab> elements = new LinkedList<NavigationTab>();
+    private List<NavigationTab> elements = new LinkedList<>();
     private final PlaceManager placeManager;
 
     @Inject

@@ -44,7 +44,7 @@ public class ReportView extends ViewImpl implements ReportPresenter.MyView {
 
     @Inject
     ReportView(Binder uiBinder) {
-        ratingsProvider = new ListDataProvider<ManufacturerRatingDto>();
+        ratingsProvider = new ListDataProvider<>();
 
         initCarGrid();
 
@@ -58,7 +58,7 @@ public class ReportView extends ViewImpl implements ReportPresenter.MyView {
     }
 
     private void initCarGrid() {
-        reportGrid = new CellTable<ManufacturerRatingDto>();
+        reportGrid = new CellTable<>();
         reportGrid.setSelectionModel(new NoSelectionModel<ManufacturerRatingDto>());
 
         ratingsProvider.addDataDisplay(reportGrid);

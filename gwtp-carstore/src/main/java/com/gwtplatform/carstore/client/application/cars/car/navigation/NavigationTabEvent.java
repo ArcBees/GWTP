@@ -47,7 +47,7 @@ public class NavigationTabEvent extends GwtEvent<NavigationTabEvent.NavigationTa
 
     public static Type<NavigationTabHandler> getType() {
         if (type == null) {
-            type = new Type<NavigationTabHandler>();
+            type = new Type<>();
         }
         return type;
     }

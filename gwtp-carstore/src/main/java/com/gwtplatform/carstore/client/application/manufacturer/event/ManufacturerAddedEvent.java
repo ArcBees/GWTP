@@ -35,7 +35,7 @@ public class ManufacturerAddedEvent extends GwtEvent<ManufacturerAddedHandler> {
         source.fireEvent(new ManufacturerAddedEvent(manufacturerDto));
     }
 
-    private static final Type<ManufacturerAddedHandler> TYPE = new Type<ManufacturerAddedHandler>();
+    private static final Type<ManufacturerAddedHandler> TYPE = new Type<>();
 
     private ManufacturerDto manufacturerDto;
 

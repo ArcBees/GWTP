@@ -55,7 +55,7 @@ public class CarView extends ViewWithUiHandlers<CarUiHandlers> implements MyView
     @Inject
     CarView(Binder uiBinder,
             Driver driver) {
-        manufacturer = new ValueListBox<ManufacturerDto>(new ManufacturerRenderer());
+        manufacturer = new ValueListBox<>(new ManufacturerRenderer());
         this.driver = driver;
 
         initWidget(uiBinder.createAndBindUi(this));

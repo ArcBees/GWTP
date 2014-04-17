@@ -35,7 +35,7 @@ public class Car extends BaseEntity {
             return null;
         }
 
-        List<CarDto> carsDto = new ArrayList<CarDto>();
+        List<CarDto> carsDto = new ArrayList<>();
         for (Car car : cars) {
             carsDto.add(createDto(car));
         }
@@ -62,7 +62,7 @@ public class Car extends BaseEntity {
             return null;
         }
 
-        List<Car> cars = new ArrayList<Car>();
+        List<Car> cars = new ArrayList<>();
         for (CarDto carDto : carDtos) {
             cars.add(create(carDto));
         }
