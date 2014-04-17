@@ -41,8 +41,6 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
  * <p/>
  * {@link GenProxyProcessor} should only ever be called by tool infrastructure.
  * See {@link javax.annotation.processing.Processor} for more details.
- *
- * @author Florian Sauter
  */
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenProxy")
 public class GenProxyProcessor extends GenProcessor {

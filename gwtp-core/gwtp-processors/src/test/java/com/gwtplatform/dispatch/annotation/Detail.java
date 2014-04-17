@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.annotation;
 
 /**
  * For testing purposes only.
- *
- * @author Florian Sauter
  */
 public class Detail {
 }

@@ -28,7 +28,6 @@ import com.google.gwt.user.client.rpc.RemoteService;
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
  * {@link com.gwtplatform.dispatch.client.DispatchAsync}.
  *
- * @author Philippe Beaudoin
  * @see com.gwtplatform.dispatch.client.DispatchAsync
  * @see com.gwtplatform.dispatch.server.Dispatch
  * @see com.gwtplatform.dispatch.server.guice.DispatchImpl

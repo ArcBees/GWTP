@@ -39,10 +39,6 @@ import com.gwtplatform.dispatch.annotation.Out;
 /**
  * {@link ReflectionHelper} is an internal class that provides common routines
  * only used by the annotation processors.
- *
- * @author Brendan Doherty
- * @author Florian Sauter
- * @author Stephen Haberman (concept)
  */
 @SuppressWarnings("unchecked")
 public class ReflectionHelper {

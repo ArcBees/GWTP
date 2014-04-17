@@ -32,9 +32,6 @@ import com.gwtplatform.dispatch.shared.ServiceException;
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
  * {@link com.gwtplatform.dispatch.shared.DispatchAsync}.
  *
- * @author Christian Goudreau
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.Dispatch}.
  */
 @Deprecated

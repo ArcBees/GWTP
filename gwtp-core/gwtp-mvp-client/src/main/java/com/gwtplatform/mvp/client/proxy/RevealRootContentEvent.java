@@ -28,7 +28,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * This type of content is usually meant to use the browser like a regular webpage, adding a vertical
  * scrollbar as the content overflow.
  *
- * @author Philippe Beaudoin
  * @see RevealContentEvent
  * @see RevealRootLayoutContentEvent
  * @see RevealRootPopupContentEvent

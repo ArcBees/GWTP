@@ -26,8 +26,6 @@ import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
  * This place manager overrides all the methods that use
  * GWT-dependent classes and can be used for testing without
  * having to rely on a {@code GWTTestCase}.
- *
- * @author Philippe Beaudoin
  */
 class PlaceManagerTestUtil extends PlaceManagerImpl {
 

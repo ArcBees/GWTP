@@ -23,7 +23,6 @@ import com.google.gwt.event.shared.HasHandlers;
  * Event fired when a user refuses to leave a page. See
  * {@link PlaceManager#setOnLeaveConfirmation}.
  *
- * @author Christian Goudreau
  * @see NavigationEvent
  */
 public final class NavigationRefusedEvent extends

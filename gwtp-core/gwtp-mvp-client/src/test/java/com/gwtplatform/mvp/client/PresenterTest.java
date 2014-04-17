@@ -32,8 +32,6 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for {@link Presenter}.
- *
- * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
 public class PresenterTest {

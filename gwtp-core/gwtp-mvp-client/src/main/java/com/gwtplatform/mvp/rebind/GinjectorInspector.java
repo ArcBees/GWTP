@@ -35,8 +35,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
  * This class is used to inspect the user-provided ginjector. This is typically useful to identify
  * 'get' methods that generate specific types.
  * You must call {@link #init} before any other method can be called.
- *
- * @author Philippe Beaudoin
  */
 public class GinjectorInspector {
     static final String GINJECTOR_INVALID_METHOD = "The %s has 2 methods returning the same type %s. This is invalid.";

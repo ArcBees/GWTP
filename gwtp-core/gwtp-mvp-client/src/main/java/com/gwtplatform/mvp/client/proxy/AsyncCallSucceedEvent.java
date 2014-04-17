@@ -24,7 +24,6 @@ import com.google.web.bindery.event.shared.EventBus;
  * Event fired after any asynchronous call to the server performed by GWTP MVP has succeeded.
  * Such asynchronous calls only occur when using code splitting.
  *
- * @author Philippe Beaudoin
  * @see AsyncCallSucceedHandler
  * @see AsyncCallStartEvent
  * @see AsyncCallFailEvent

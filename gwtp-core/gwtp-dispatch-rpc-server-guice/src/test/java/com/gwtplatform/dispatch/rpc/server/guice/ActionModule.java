@@ -19,9 +19,6 @@ package com.gwtplatform.dispatch.rpc.server.guice;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.TestActionHandler;
 import com.gwtplatform.dispatch.rpc.shared.action.TestAction;
 
-/**
- * @author Philippe Beaudoin
- */
 public class ActionModule extends HandlerModule {
 
     @Override

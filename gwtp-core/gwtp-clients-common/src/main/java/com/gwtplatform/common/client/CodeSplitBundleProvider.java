@@ -26,7 +26,6 @@ import com.google.inject.Provider;
  *
  * @param <T> The type of the provided object.
  * @param <B> The type of the {@link ProviderBundle} providing this object.
- * @author Philippe Beaudoin
  */
 public final class CodeSplitBundleProvider<T, B extends ProviderBundle>
         implements IndirectProvider<T> {

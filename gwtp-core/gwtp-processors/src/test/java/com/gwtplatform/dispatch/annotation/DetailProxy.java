@@ -21,8 +21,6 @@ import com.google.web.bindery.requestfactory.shared.ValueProxy;
 
 /**
  * For testing purposes only.
- *
- * @author Florian Sauter
  */
 @ProxyFor(Detail.class)
 public interface DetailProxy extends ValueProxy {

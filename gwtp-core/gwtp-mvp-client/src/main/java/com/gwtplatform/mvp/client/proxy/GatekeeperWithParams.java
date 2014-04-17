@@ -51,8 +51,6 @@ package com.gwtplatform.mvp.client.proxy;
  * annotation.
  * <p/>
  * You should usually bind your {@link GatekeeperWithParams} as a singleton.
- *
- * @author Juan Carlos González
  */
 public interface GatekeeperWithParams extends Gatekeeper {
 

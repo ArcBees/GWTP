@@ -37,9 +37,6 @@ import com.gwtplatform.dispatch.annotation.proxy.EmployeeProxy;
 /**
  * This test is being run by ant, but is not run in eclipse.
  * <p/>
- *
- * @author Brendan Doherty
- * @author Florian Sauter
  */
 public class ProxyAnnotationProcessingTest {
 

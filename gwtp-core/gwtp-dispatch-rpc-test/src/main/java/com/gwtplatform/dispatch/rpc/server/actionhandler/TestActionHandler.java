@@ -21,9 +21,6 @@ import com.gwtplatform.dispatch.rpc.shared.action.TestAction;
 import com.gwtplatform.dispatch.rpc.shared.action.TestResult;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-/**
- * @author Peter Simun
- */
 public class TestActionHandler extends AbstractActionHandler<TestAction, TestResult> {
 
     public static final String MESSAGE = "This is test message!";

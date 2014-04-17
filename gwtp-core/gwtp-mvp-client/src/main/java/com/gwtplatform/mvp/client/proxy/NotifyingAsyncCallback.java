@@ -33,7 +33,6 @@ import com.google.web.bindery.event.shared.EventBus;
  * </pre>
  *
  * @param <T> The type of the return value. See {@link AsyncCallback}.
- * @author Philippe Beaudoin
  */
 public abstract class NotifyingAsyncCallback<T> implements AsyncCallback<T> {
 

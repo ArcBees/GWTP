@@ -33,9 +33,6 @@ import com.gwtplatform.dispatch.shared.Result;
  * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator}s. Your own Guice modules should extend this
  * class.
  *
- * @author Christian Goudreau
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.HandlerModule}.
  */
 @Deprecated

@@ -31,8 +31,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * event loop before timing out. Use in your
  * {@link com.google.inject.AbstractModule} with a call to
  * {@code bindConstant().annotatedWith(HtmlUnitTimeout.class).to(10000)}.
- *
- * @author Philippe Beaudoin
  */
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})

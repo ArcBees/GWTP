@@ -64,10 +64,6 @@ import com.gwtplatform.common.shared.UrlUtils;
  * <p/>
  * If you want to use different symbols as separator, use the
  * {@link #ParameterTokenFormatter(String, String, String)} constructor.
- *
- * @author Philippe Beaudoin
- * @author Yannis Gonianakis
- * @author Daniel Colchete
  */
 public class ParameterTokenFormatter implements TokenFormatter {
 

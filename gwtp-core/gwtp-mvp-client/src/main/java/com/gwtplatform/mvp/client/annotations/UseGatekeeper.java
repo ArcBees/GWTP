@@ -26,9 +26,6 @@ import com.gwtplatform.mvp.client.proxy.Gatekeeper;
  * {@link com.gwtplatform.mvp.client.proxy.Place} associated with
  * your proxy. Your custom {@code Ginjector} must
  * have a method returning the {@link Gatekeeper} specified in this annotation.
- *
- * @author Olivier Monaco
- * @author Philippe Beaudoin
  */
 @Target(ElementType.TYPE)
 public @interface UseGatekeeper {

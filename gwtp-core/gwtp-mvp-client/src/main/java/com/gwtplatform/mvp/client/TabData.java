@@ -23,8 +23,6 @@ package com.gwtplatform.mvp.client;
  * more information, if desired. See
  * {@link com.gwtplatform.mvp.client.annotations.TabInfo}
  * for more details.
- *
- * @author Philippe Beaudoin
  */
 public interface TabData {
 

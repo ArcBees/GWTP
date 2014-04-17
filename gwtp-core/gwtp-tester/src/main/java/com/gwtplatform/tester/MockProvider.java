@@ -28,7 +28,6 @@ import com.google.inject.Provider;
  * {@link com.gwtplatform.tester.mockito.MockProvider MockProvider} instead.
  *
  * @param <T> The type of mock object provided
- * @author Brendan Doherty
  */
 public class MockProvider<T> implements Provider<T> {
     private T mock;

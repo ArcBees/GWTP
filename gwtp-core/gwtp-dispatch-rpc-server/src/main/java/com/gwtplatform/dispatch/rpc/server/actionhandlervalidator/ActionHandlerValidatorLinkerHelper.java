@@ -32,7 +32,6 @@ public class ActionHandlerValidatorLinkerHelper {
 
         /**
          * @param <B>
-         * @author Peter Simun (simun@seges.sk)
          */
         public interface BindingDescriptor<B> {
 

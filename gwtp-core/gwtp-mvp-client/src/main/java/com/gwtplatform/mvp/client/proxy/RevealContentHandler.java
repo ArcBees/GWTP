@@ -29,7 +29,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * the content appropriately in the presenter, and then reveal the presenter.
  *
  * @param <T> The Presenter's type.
- * @author Philippe Beaudoin
  */
 public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHandler {
 

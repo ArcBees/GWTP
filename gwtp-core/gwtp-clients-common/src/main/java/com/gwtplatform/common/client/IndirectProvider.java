@@ -27,7 +27,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * 61</a> for details.
  *
  * @param <T> The type of the provided object.
- * @author Philippe Beaudoin
  */
 public interface IndirectProvider<T> {
     /**

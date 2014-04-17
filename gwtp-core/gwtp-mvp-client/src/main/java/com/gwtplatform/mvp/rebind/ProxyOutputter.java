@@ -23,8 +23,6 @@ import com.google.gwt.user.rebind.SourceWriter;
 /**
  * Interface of classes that are able to output the code of a specific
  * type of proxy. Usually produced via {@link ProxyOutputterFactory}.
- *
- * @author Philippe Beaudoin
  */
 public interface ProxyOutputter {
 

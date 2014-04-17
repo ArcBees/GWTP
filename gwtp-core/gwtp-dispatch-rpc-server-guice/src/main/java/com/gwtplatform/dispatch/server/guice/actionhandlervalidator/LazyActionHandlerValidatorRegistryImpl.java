@@ -37,8 +37,6 @@ import com.gwtplatform.dispatch.shared.Result;
  * {@link com.gwtplatform.dispatch.server.actionvalidator.ActionValidator} implementations <b>must</b>
  * have a public, default constructor.
  *
- * @author Christian Goudreau
- *
  * @deprecated Please use
  * {@link com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.LazyActionHandlerValidatorRegistryImpl}.
  */

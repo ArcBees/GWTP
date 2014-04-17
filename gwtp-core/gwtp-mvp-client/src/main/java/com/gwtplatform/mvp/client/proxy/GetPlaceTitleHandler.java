@@ -18,9 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.EventHandler;
 
-/**
- * @author Philippe Beaudoin
- */
 public interface GetPlaceTitleHandler extends EventHandler {
     /**
      * Called when something has requested the name of a new place. Should be

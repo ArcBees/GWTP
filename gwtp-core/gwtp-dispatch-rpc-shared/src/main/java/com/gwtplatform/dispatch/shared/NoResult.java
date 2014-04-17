@@ -25,8 +25,6 @@ package com.gwtplatform.dispatch.shared;
  * serialization and a constructor with a single value for normal use. It is
  * recommended that the empty constructor is private or package-private.
  *
- * @author Christopher Viel
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.NoResult}.
  */
 @Deprecated

@@ -20,8 +20,6 @@ package com.gwtplatform.mvp.client;
  * Use this marker interface on classes that implement the controls required by
  * a {@link View} to communicate back with its {@link Presenter} or
  * {@link PresenterWidget}.
- *
- * @author Christian Goudreau
  */
 public interface UiHandlers {
 

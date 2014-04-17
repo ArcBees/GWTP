@@ -31,7 +31,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * MyProxy and be derived from this one.
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
- * @author Philippe Beaudoin
  */
 public interface Proxy<P extends Presenter<?, ?>> extends ProxyRaw {
 

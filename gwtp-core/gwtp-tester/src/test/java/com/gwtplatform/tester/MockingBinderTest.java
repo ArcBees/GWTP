@@ -30,9 +30,6 @@ import com.gwtplatform.tester.TestView.Binder;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 
-/**
- * @author Christian Goudreau
- */
 @RunWith(JukitoRunner.class)
 public class MockingBinderTest {
     /**

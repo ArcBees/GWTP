@@ -97,8 +97,6 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *   return new TabDataExt(msgs.adminTitle(), 1000, keeper);;
  * }
  * </pre>
- *
- * @author Philippe Beaudoin
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface TabInfo {

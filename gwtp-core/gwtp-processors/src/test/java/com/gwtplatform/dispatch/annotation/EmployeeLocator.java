@@ -20,8 +20,6 @@ import com.google.web.bindery.requestfactory.shared.Locator;
 
 /**
  * For testing purposes only.
- *
- * @author Florian Sauter
  */
 public class EmployeeLocator extends Locator<Employee, Long> {
     @Override

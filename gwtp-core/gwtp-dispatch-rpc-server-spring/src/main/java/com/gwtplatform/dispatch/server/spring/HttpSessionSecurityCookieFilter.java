@@ -24,8 +24,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.gwtplatform.dispatch.server.AbstractHttpSessionSecurityCookieFilter;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter}.
  */
 @Deprecated

@@ -39,10 +39,6 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
  * <p/>
  * {@link GenDispatchProcessor} should only ever be called by tool infrastructure. See
  * {@link javax.annotation.processing.Processor} for more details.
- *
- * @author Brendan Doherty
- * @author Florian Sauter
- * @author Stephen Haberman (concept)
  */
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDispatch")
 public class GenDispatchProcessor extends GenProcessor {

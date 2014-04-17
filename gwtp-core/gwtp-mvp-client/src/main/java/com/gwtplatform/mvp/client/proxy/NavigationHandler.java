@@ -20,8 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * Handler for {@link NavigationEvent}.
- *
- * @author Philippe Beaudoin
  */
 public interface NavigationHandler extends EventHandler {
     void onNavigation(final NavigationEvent navigationEvent);

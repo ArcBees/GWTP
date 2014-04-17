@@ -29,8 +29,6 @@ import com.gwtplatform.mvp.client.mvp.MainPresenterTestUtil;
  * This is the test presenter which implements {@link AsyncCallFailHandler},
  * {@link AsyncCallStartHandler} and {@link AsyncCallSucceedHandler} to capture
  * all events we want to test.
- *
- * @author bjoern.moritz
  */
 public class AsyncEventPresenterTestUtil extends
         Presenter<AsyncEventPresenterTestUtil.MyView, AsyncEventPresenterTestUtil.MyProxy> implements

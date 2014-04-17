@@ -34,10 +34,6 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
  * <p/>
  * {@link GenDtoProcessor} should only ever be called by tool infrastructure.
  * See {@link javax.annotation.processing.Processor} for more details.
- *
- * @author Brendan Doherty
- * @author Florian Sauter
- * @author Stephen Haberman (concept)
  */
 @SupportedAnnotationTypes("com.gwtplatform.dispatch.annotation.GenDto")
 public class GenDtoProcessor extends GenProcessor {

@@ -31,7 +31,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * event, the proxy <b>first</b> sets the content appropriately in the
  * presenter, and then reveals the presenter.
  *
- * @author Philippe Beaudoin
  * @see RevealRootContentEvent
  * @see RevealRootLayoutContentEvent
  * @see RevealRootPopupContentEvent

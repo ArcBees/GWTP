@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.annotation;
 
 /**
  * For testing purposes only.
- *
- * @author Brendan Doherty
  */
 public class Foo {
     private String name;

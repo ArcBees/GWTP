@@ -30,8 +30,6 @@ import javax.inject.Singleton;
  * basis using the {@link HandlerContainerImpl}'s constructors.
  * <p/>
  * Disabling automatic binding can be useful in unit tests, for example.
- *
- * @author Philippe Beaudoin
  */
 @Singleton
 public class AutobindDisable {

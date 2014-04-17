@@ -33,8 +33,6 @@ import com.gwtplatform.mvp.client.annotations.TabInfo;
 /**
  * Proxy outputter for a proxy corresponding to a presenter which is displayed within a
  * {@link com.gwtplatform.mvp.client.TabContainerPresenter TabContainerPresenter}.
- *
- * @author Philippe Beaudoin
  */
 public class NonLeafTabContentProxyOutputter extends ProxyOutputterBase {
 

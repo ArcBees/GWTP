@@ -19,8 +19,6 @@ package com.gwtplatform.mvp.client;
 /**
  * Classes of this type hold a list of {@link Tab}, from which
  * only one can be active at any time.
- *
- * @author Philippe Beaudoin
  */
 public interface TabPanel {
 

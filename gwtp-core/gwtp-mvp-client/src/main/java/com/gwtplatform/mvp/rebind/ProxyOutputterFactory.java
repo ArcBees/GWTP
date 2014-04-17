@@ -25,8 +25,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 /**
  * Factory used to instantiate the adequate {@link ProxyOutputter} given a
  * proxy interface.
- *
- * @author Philippe Beaudoin
  */
 public class ProxyOutputterFactory {
     private final TypeOracle oracle;

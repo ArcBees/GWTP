@@ -24,8 +24,6 @@ import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 /**
  * Basic configuration for PresenterWidgetTest, you test must extends this
  * class, or don't forget to inject everything inside your presenter's test.
- *
- * @author Christian Goudreau
  */
 public abstract class PresenterWidgetTestBase {
     @Inject

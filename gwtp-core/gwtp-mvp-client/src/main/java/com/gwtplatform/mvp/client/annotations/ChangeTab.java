@@ -25,8 +25,6 @@ import java.lang.annotation.Target;
  * This annotates a static field containing the type of the event fired when the
  * a child tab changes. <b>Important!</b> The corresponding type must be passed to the parent's
  * constructor.
- *
- * @author Philippe Beaudoin
  */
 @Target(ElementType.FIELD)
 public @interface ChangeTab {

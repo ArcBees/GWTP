@@ -31,8 +31,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * For example:
  * <pre>bindConstant().annotatedWith(ServiceUrl).to("http://mycrawlservice.com");
  * </pre>
- *
- * @author Philippe Beaudoin
  */
 
 @BindingAnnotation

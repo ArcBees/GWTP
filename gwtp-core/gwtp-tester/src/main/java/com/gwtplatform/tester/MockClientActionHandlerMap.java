@@ -21,8 +21,6 @@ import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
 /**
  * This is the interface that define the map of {@link com.gwtplatform.dispatch.shared.Action} to
  * {@link ClientActionHandler} for unit testing.
- *
- * @author Brendan Doherty
  */
 public interface MockClientActionHandlerMap {
 

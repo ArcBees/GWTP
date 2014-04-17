@@ -32,8 +32,6 @@ import com.gwtplatform.mvp.client.View;
 
 /**
  * Test behaviour when a mock {@link PresenterWidget} is injected.
- *
- * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
 public class MockInjectionTest {

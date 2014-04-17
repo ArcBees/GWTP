@@ -26,8 +26,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Bind this annotation to your Google Analytics account number.
- *
- * @author Christian Goudreau
  */
 @BindingAnnotation
 @Target(ElementType.PARAMETER)

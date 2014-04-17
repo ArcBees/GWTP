@@ -28,8 +28,6 @@ import com.google.gwt.user.client.Command;
  * <p/>
  * Use {@link #addCommand(Command)} to add deferred commands, then call
  * {@link #pump()} to process all the deferred commands.
- *
- * @author Philippe Beaudoin
  */
 public class DeferredCommandManager {
 

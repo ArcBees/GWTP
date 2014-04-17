@@ -45,8 +45,6 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  *
  * @param <V>      The specific type of the {@link View}. Must implement {@link TabPanel}.
  * @param <Proxy_> The specific type of the {@link Proxy}.
- * @author Philippe Beaudoin
- * @author Christian Goudreau
  */
 public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends Proxy<?>>
         extends Presenter<V, Proxy_> {

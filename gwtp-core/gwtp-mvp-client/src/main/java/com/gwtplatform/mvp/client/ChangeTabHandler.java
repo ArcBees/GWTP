@@ -18,9 +18,6 @@ package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.EventHandler;
 
-/**
- * @author Philippe Beaudoin
- */
 public interface ChangeTabHandler extends EventHandler {
 
     /**

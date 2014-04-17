@@ -45,8 +45,6 @@ import com.google.inject.Provider;
  *     providers[ID_Object2] = object2Provider;
  *   }
  * }</pre>
- *
- * @author Philippe Beaudoin
  */
 public class ProviderBundle {
 

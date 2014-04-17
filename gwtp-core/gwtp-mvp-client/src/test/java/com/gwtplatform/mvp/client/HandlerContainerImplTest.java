@@ -33,8 +33,6 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for {@link HandlerContainerImpl}.
- *
- * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
 public class HandlerContainerImplTest {

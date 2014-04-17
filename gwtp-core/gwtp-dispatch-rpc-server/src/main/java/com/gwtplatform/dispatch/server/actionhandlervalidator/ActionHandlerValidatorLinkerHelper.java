@@ -24,17 +24,11 @@ import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValid
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 
 /**
- * @author Peter Simun (simun@seges.sk)
- *
  * @deprecated Please use
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper}.
  */
 @Deprecated
 public class ActionHandlerValidatorLinkerHelper {
-
-    /**
-     * @author Peter Simun (simun@seges.sk)
-     */
     public interface BeanProvider {
 
         <B> B getInstance(Class<B> clazz);
@@ -43,7 +37,6 @@ public class ActionHandlerValidatorLinkerHelper {
 
         /**
          * @param <B>
-         * @author Peter Simun (simun@seges.sk)
          */
         public interface BindingDescriptor<B> {
 
@@ -56,8 +49,6 @@ public class ActionHandlerValidatorLinkerHelper {
     /**
      * BingingDescriptor implementation for the Guice/Spring. This allows us to obtain bindings from guice injector/or
      * from Spring application context
-     *
-     * @author Peter Simun (simun@seges.sk)
      */
     public static class CommonBindingDescriptor<B> implements BindingDescriptor<B> {
 

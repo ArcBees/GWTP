@@ -31,8 +31,6 @@ import java.lang.annotation.Target;
  * a single parameter derived from {@link com.google.gwt.event.shared.GwtEvent GwtEvent}.
  * This event class must have a static {@code getType} method returning a type
  * derived from {@link com.google.gwt.event.shared.GwtEvent.Type Type}.
- *
- * @author Philippe Beaudoin
  */
 @Target(ElementType.METHOD)
 public @interface ProxyEvent {

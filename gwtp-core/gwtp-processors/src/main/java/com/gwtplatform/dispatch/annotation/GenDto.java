@@ -73,10 +73,6 @@ import java.lang.annotation.Target;
  * Dto
  * <p/>
  * <p/>
- *
- * @author Brendan Doherty
- * @author Florian Sauter
- * @author Stephen Haberman (concept)
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

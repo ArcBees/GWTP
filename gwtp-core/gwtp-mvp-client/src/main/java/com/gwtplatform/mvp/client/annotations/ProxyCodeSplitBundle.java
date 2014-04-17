@@ -64,7 +64,6 @@ import com.gwtplatform.common.client.ProviderBundle;
  * }</pre>
  * <p/>
  *
- * @author Philippe Beaudoin
  * @see ProviderBundle
  * @see <a href="http://code.google.com/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code Splitting</a>
  */

@@ -36,7 +36,6 @@ import com.gwtplatform.mvp.client.TabData;
  * when this tab is selected.
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
- * @author Philippe Beaudoin
  * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  */
 public interface NonLeafTabContentProxy<P extends Presenter<?, ?>> extends TabContentProxy<P> {

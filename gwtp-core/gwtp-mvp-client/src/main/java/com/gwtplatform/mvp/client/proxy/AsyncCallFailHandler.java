@@ -20,8 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * Handler for {@link AsyncCallFailEvent}.
- *
- * @author Philippe Beaudoin
  */
 public interface AsyncCallFailHandler extends EventHandler {
     void onAsyncCallFail(final AsyncCallFailEvent asyncCallFailEvent);

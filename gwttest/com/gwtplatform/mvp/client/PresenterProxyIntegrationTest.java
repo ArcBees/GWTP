@@ -30,15 +30,9 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * <p/>
  * TODO: This doesn't work yet. See
  * http://code.google.com/p/gwt-platform/issues/detail?id=38
- *
- * @author Philippe Beaudoin
  */
 @Ignore
 public class PresenterProxyIntegrationTest extends GWTTestCase {
-
-    /**
-     * @author Philippe Beaudoin
-     */
     public static class MyPresenter extends
             Presenter<View, MyPresenter.MyProxy> {
 

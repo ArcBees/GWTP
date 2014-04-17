@@ -23,8 +23,6 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 /**
  * This event is fired whenever a tab contained in a {@link TabContainerPresenter} wants to change
  * its information.
- *
- * @author Philippe Beaudoin
  */
 public final class ChangeTabEvent extends GwtEvent<ChangeTabHandler> {
 

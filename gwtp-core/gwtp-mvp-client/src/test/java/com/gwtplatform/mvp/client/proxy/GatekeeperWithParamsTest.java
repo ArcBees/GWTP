@@ -44,8 +44,6 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for {@link GatekeeperWithParams}.
- *
- * @author Juan Carlos González
  */
 @RunWith(JukitoRunner.class)
 public class GatekeeperWithParamsTest {

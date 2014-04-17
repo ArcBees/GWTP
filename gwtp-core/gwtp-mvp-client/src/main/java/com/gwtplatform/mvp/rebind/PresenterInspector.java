@@ -38,8 +38,6 @@ import com.gwtplatform.mvp.client.annotations.TitleFunction;
 /**
  * A class used to inspect the presenter, the methods and inner interfaces it contains.
  * You must call {@link #init(JClassType)} before any other method can be called.
- *
- * @author Philippe Beaudoin
  */
 public class PresenterInspector {
 
