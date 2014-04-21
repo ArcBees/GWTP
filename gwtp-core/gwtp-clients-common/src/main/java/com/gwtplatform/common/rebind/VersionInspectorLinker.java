@@ -29,9 +29,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.maven.artifact.versioning.ArtifactVersion;
-import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
-
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -41,7 +38,6 @@ import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.Shardable;
-import com.google.gwt.http.client.Response;
 
 import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
 
@@ -57,8 +53,10 @@ public class VersionInspectorLinker extends Linker {
     private static final String VERSION_QUERY_PARAMETER = "version";
 
     private static final String PROPERTY_VERIFY_NEWER_VERSION = "verifyNewerVersion";
-    private static final Pattern LATEST_VERSION_PATTERN =
-            Pattern.compile("[^\\/,a-z][(\\d+)(.)]{1,5}$");
+
+    private static final Pattern VERSION_PATTERN = Pattern.compile("\"version\":\\s*\"([0-9](?:\\.[0-9])*)\"");
+    private static final Pattern LATEST_PATTERN = Pattern.compile("\"latest\":([a-z]{1,4})");
+    private static final Pattern RESPONSE_CONTENT_PATTERN = Pattern.compile("^[^{]*(\\{.*\\})$");
 
     private static final String HR = "------------------------------------------------------------";
     private static final String NEW_VERSION_AVAILABLE = "A new version available of %s is available!";
@@ -110,14 +108,14 @@ public class VersionInspectorLinker extends Linker {
         try {
             logger.debug("----- Checking version --------------");
 
-            ArtifactVersion currentVersion = getCurrentVersion();
-            String versionResponse = fetchArtifactVersion();
-            ArtifactVersion latestArtifactVersion = extractLatestVersion(versionResponse);
+            String currentVersion = getCurrentVersion();
+            String versionResponseJson = fetchArtifactVersion();
+            String latestArtifactVersion = extractVersion(versionResponseJson);
+            Boolean isLatest = extractIsLatest(versionResponseJson);
 
-            if (versionResponse.contains(String.valueOf(Response.SC_OK))) {
+            if (isLatest) {
                 logger.info("You are using the latest version!");
             } else {
-
                 warnVersion(latestArtifactVersion, currentVersion);
             }
 
@@ -167,30 +165,44 @@ public class VersionInspectorLinker extends Linker {
             response += inputLine;
         }
 
-        return response;
+        return extractResponseContent(response);
     }
 
-    private ArtifactVersion extractLatestVersion(String versionResponse) {
-        Matcher matcher = LATEST_VERSION_PATTERN.matcher(versionResponse);
+    private String extractResponseContent(String response) {
+        Matcher matcher = RESPONSE_CONTENT_PATTERN.matcher(response);
         matcher.find();
 
-        String version = matcher.group();
-        return new DefaultArtifactVersion(version);
+        return matcher.group(1);
     }
 
-    private ArtifactVersion getCurrentVersion() throws IOException {
+    private String extractVersion(String versionResponse) {
+        Matcher matcher = VERSION_PATTERN.matcher(versionResponse);
+        matcher.find();
+
+        String version = matcher.group(1);
+        return version;
+    }
+
+    private Boolean extractIsLatest(String versionResponse) {
+        Matcher matcher = LATEST_PATTERN.matcher(versionResponse);
+        matcher.find();
+
+        String isLatest = matcher.group(1);
+        return Boolean.valueOf(isLatest);
+    }
+
+    private String getCurrentVersion() throws IOException {
         currentVersionString = getClass().getPackage().getImplementationVersion();
-
-        return new DefaultArtifactVersion(currentVersionString);
+        return currentVersionString;
     }
 
-    private void warnVersion(ArtifactVersion latestVersion, ArtifactVersion currentVersion) {
+    private void warnVersion(String latestVersion, String currentVersion) {
         logger.warn(HR);
 
         logger.warn(NEW_VERSION_AVAILABLE, ARTIFACT);
         logger.warn(YOUR_VERSION, currentVersion);
         logger.warn(LATEST_VERSION, latestVersion);
-        logger.warn(SEE_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion.toString());
+        logger.warn(SEE_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion);
 
         logger.warn(HR);
     }

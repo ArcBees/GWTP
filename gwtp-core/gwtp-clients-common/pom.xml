@@ -47,10 +47,5 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-artifact</artifactId>
-            <version>${maven-artifact.version}</version>
-        </dependency>
     </dependencies>
 </project>

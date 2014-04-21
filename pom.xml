@@ -241,7 +241,6 @@
         <maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
         <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
         <maven-site-plugin.version>3.3</maven-site-plugin.version>
-        <maven-artifact.version>3.2.1</maven-artifact.version>
         <jasmine-maven-plugin.version>1.3.1.4</jasmine-maven-plugin.version>
 
         <!-- Client -->
