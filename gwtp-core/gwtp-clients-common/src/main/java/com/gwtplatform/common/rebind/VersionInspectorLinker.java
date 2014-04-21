@@ -26,6 +26,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.URL;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
@@ -55,6 +57,8 @@ public class VersionInspectorLinker extends Linker {
     private static final String VERSION_QUERY_PARAMETER = "version";
 
     private static final String PROPERTY_VERIFY_NEWER_VERSION = "verifyNewerVersion";
+    private static final Pattern LATEST_VERSION_PATTERN =
+            Pattern.compile("[^\\/,a-z][(\\d+)(.)]{1,5}$");
 
     private static final String HR = "------------------------------------------------------------";
     private static final String NEW_VERSION_AVAILABLE = "A new version available of %s is available!";
@@ -108,8 +112,7 @@ public class VersionInspectorLinker extends Linker {
 
             ArtifactVersion currentVersion = getCurrentVersion();
             String versionResponse = fetchArtifactVersion();
-            String latestVersion = versionResponse.split("close")[1];
-            ArtifactVersion latestArtifactVersion = extractLatestVersion(latestVersion);
+            ArtifactVersion latestArtifactVersion = extractLatestVersion(versionResponse);
 
             if (versionResponse.contains(String.valueOf(Response.SC_OK))) {
                 logger.info("You are using the latest version!");
@@ -167,7 +170,11 @@ public class VersionInspectorLinker extends Linker {
         return response;
     }
 
-    private ArtifactVersion extractLatestVersion(String version) {
+    private ArtifactVersion extractLatestVersion(String versionResponse) {
+        Matcher matcher = LATEST_VERSION_PATTERN.matcher(versionResponse);
+        matcher.find();
+
+        String version = matcher.group();
         return new DefaultArtifactVersion(version);
     }
 
