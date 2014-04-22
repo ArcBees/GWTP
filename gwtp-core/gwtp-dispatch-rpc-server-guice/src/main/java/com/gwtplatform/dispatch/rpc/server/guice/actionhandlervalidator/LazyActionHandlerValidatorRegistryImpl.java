@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Inject;
@@ -38,11 +37,12 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 @Singleton
 public class LazyActionHandlerValidatorRegistryImpl implements
         LazyActionHandlerValidatorRegistry {
-    private final Map<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends Action<?>,
-                ? extends Result>> actionHandlerValidatorClasses;
-    private final Map<Class<? extends Action<?>>, ActionHandlerValidatorInstance> actionHandlerValidatorInstances;
+    private final ConcurrentHashMap<Class<? extends Action<?>>, ActionHandlerValidatorClass<? extends Action<?>,
+            ? extends Result>> actionHandlerValidatorClasses;
+    private final ConcurrentHashMap<Class<? extends Action<?>>,
+            ActionHandlerValidatorInstance> actionHandlerValidatorInstances;
     private final Injector injector;
-    private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
+    private final ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator> validators;
 
     @Inject
     LazyActionHandlerValidatorRegistryImpl(Injector injector) {
@@ -58,7 +58,7 @@ public class LazyActionHandlerValidatorRegistryImpl implements
     public <A extends Action<R>, R extends Result> void addActionHandlerValidatorClass(
             Class<A> actionClass,
             ActionHandlerValidatorClass<A, R> actionHandlerValidatorClass) {
-        actionHandlerValidatorClasses.put(actionClass, actionHandlerValidatorClass);
+        actionHandlerValidatorClasses.putIfAbsent(actionClass, actionHandlerValidatorClass);
     }
 
     @Override
@@ -81,14 +81,14 @@ public class LazyActionHandlerValidatorRegistryImpl implements
             if (actionHandlerValidatorClass != null) {
                 actionHandlerValidatorInstance = createInstance(actionHandlerValidatorClass);
                 if (actionHandlerValidatorInstance != null) {
-                    actionHandlerValidatorInstances.put(
+                    actionHandlerValidatorInstances.putIfAbsent(
                             (Class<? extends Action<?>>) action.getClass(),
                             actionHandlerValidatorInstance);
                 }
             }
         }
 
-        return (ActionHandlerValidatorInstance) actionHandlerValidatorInstance;
+        return actionHandlerValidatorInstance;
     }
 
     @Override
@@ -129,7 +129,7 @@ public class LazyActionHandlerValidatorRegistryImpl implements
     private ActionHandlerValidatorInstance createInstance(
             ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass) {
 
-        ActionHandlerValidatorInstance actionHandlerValidatorInstance = null;
+        ActionHandlerValidatorInstance actionHandlerValidatorInstance;
         ActionValidator actionValidator = findActionValidator(actionHandlerValidatorClass.getActionValidatorClass());
 
         if (actionValidator == null) {
@@ -139,7 +139,7 @@ public class LazyActionHandlerValidatorRegistryImpl implements
                     actionValidator,
                     injector.getInstance(actionHandlerValidatorClass.getActionHandlerClass()));
 
-            validators.put(actionValidator.getClass(), actionValidator);
+            validators.putIfAbsent(actionValidator.getClass(), actionValidator);
         } else {
             actionHandlerValidatorInstance = new ActionHandlerValidatorInstance(
                     actionValidator,
