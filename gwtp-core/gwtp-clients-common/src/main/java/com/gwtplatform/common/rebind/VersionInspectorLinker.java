@@ -107,7 +107,6 @@ public class VersionInspectorLinker extends Linker {
     private void checkLatestVersion() {
         try {
             logger.debug("----- Checking version --------------");
-
             logger.debug("You can disable this check by adding this line to your GWT module:");
             logger.debug("<set-configuration-property name=\"verifyNewerVersion\" value=\"false\"/>");
 
