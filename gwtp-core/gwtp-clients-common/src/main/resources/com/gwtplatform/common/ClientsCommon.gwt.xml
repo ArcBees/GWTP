@@ -9,7 +9,7 @@
     <!-- comma separated list of gin modules, mandatory when using Ginjector generation -->
     <define-configuration-property name="gin.ginjector.modules" is-multi-valued="true"/>
 
-    <!-- Enable GWTP new version verification-->
+    <!-- Enable GWTP new version verification -->
     <define-configuration-property name="verifyNewerVersion" is-multi-valued="false"/>
     <set-configuration-property name="verifyNewerVersion" value="true"/>
 
