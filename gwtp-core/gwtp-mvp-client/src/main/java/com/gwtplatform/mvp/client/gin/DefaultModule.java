@@ -28,7 +28,6 @@ import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
-import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
@@ -40,6 +39,31 @@ public class DefaultModule extends AbstractGinModule {
     private final Class<? extends PlaceManager> placeManagerClass;
 
     private final Class<? extends TokenFormatter> tokenFormatterClass;
+
+    /**
+     * A DefaultModule builder.
+     */
+    public static class Builder {
+        private Class<? extends PlaceManager> placeManagerClass = DefaultPlaceManager.class;
+        private Class<? extends TokenFormatter> tokenFormatterClass = ParameterTokenFormatter.class;
+
+        public Builder() {
+        }
+
+        public Builder placeManager(Class<? extends PlaceManager> placeManagerClass) {
+            this.placeManagerClass = placeManagerClass;
+            return this;
+        }
+
+        public Builder tokenFormatter(Class<? extends TokenFormatter> tokenFormatterClass) {
+            this.tokenFormatterClass = tokenFormatterClass;
+            return this;
+        }
+
+        public DefaultModule build() {
+            return new DefaultModule(this);
+        }
+    }
 
     /**
      * When instantiating the module this way be sure to read
@@ -55,37 +79,12 @@ public class DefaultModule extends AbstractGinModule {
      *      PlaceManager wiki for more examples</a>
      */
     public DefaultModule() {
-        this(DefaultPlaceManager.class, ParameterTokenFormatter.class);
+        this(new Builder());
     }
 
-    /**
-     * Manually setup a PlaceManager. See {@link DefaultPlaceManager} for more
-     * details.<br/>
-     *
-     * @param placeManagerClass
-     *            {@link DefaultPlaceManager} @see <a
-     *            href="https://github.com/ArcBees/GWTP/wiki/PlaceManager">See
-     *            PlaceManager wiki for more examples</a>
-     */
-    public DefaultModule(Class<? extends PlaceManager> placeManagerClass) {
-        this(placeManagerClass, ParameterTokenFormatter.class);
-    }
-
-    /**
-     * Manually setup a {@link PlaceManager} and {@link TokenFormatter}.
-     *
-     * <p>
-     * See {@link DefaultPlaceManager}, {@link ParameterTokenFormatter} and {@link RouteTokenFormatter} for more
-     * details.
-     * </p>
-     *
-     * @param placeManagerClass   The {@link PlaceManager} implementation.
-     * @param tokenFormatterClass The {@link TokenFormatter} implementation.
-     */
-    public DefaultModule(Class<? extends PlaceManager> placeManagerClass,
-            Class<? extends TokenFormatter> tokenFormatterClass) {
-        this.placeManagerClass = placeManagerClass;
-        this.tokenFormatterClass = tokenFormatterClass;
+    private DefaultModule(Builder builder) {
+        this.placeManagerClass = builder.placeManagerClass;
+        this.tokenFormatterClass = builder.tokenFormatterClass;
     }
 
     @Override
