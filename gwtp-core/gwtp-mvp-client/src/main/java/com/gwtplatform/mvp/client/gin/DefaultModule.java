@@ -82,6 +82,38 @@ public class DefaultModule extends AbstractGinModule {
         this(new Builder());
     }
 
+    /**
+     * Manually setup a PlaceManager. See {@link DefaultPlaceManager} for more
+     * details.<br/>
+     *
+     * @param placeManagerClass
+     *            {@link DefaultPlaceManager} @see <a
+     *            href="https://github.com/ArcBees/GWTP/wiki/PlaceManager">See
+     *            PlaceManager wiki for more examples</a>
+     */
+    @Deprecated
+    public DefaultModule(Class<? extends PlaceManager> placeManagerClass) {
+        this(placeManagerClass, ParameterTokenFormatter.class);
+    }
+
+    /**
+     * Manually setup a {@link PlaceManager} and {@link TokenFormatter}.
+     *
+     * <p>
+     * See {@link DefaultPlaceManager}, {@link ParameterTokenFormatter} and {@link com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter} for more
+     * details.
+     * </p>
+     *
+     * @param placeManagerClass   The {@link PlaceManager} implementation.
+     * @param tokenFormatterClass The {@link TokenFormatter} implementation.
+     */
+    @Deprecated
+    public DefaultModule(Class<? extends PlaceManager> placeManagerClass,
+                         Class<? extends TokenFormatter> tokenFormatterClass) {
+        this.placeManagerClass = placeManagerClass;
+        this.tokenFormatterClass = tokenFormatterClass;
+    }
+
     private DefaultModule(Builder builder) {
         this.placeManagerClass = builder.placeManagerClass;
         this.tokenFormatterClass = builder.tokenFormatterClass;
