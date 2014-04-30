@@ -28,6 +28,7 @@ import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
+import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
@@ -90,6 +91,8 @@ public class DefaultModule extends AbstractGinModule {
      *            {@link DefaultPlaceManager} @see <a
      *            href="https://github.com/ArcBees/GWTP/wiki/PlaceManager">See
      *            PlaceManager wiki for more examples</a>
+     *
+     * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
      */
     @Deprecated
     public DefaultModule(Class<? extends PlaceManager> placeManagerClass) {
@@ -100,12 +103,14 @@ public class DefaultModule extends AbstractGinModule {
      * Manually setup a {@link PlaceManager} and {@link TokenFormatter}.
      *
      * <p>
-     * See {@link DefaultPlaceManager}, {@link ParameterTokenFormatter} and {@link com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter} for more
+     * See {@link DefaultPlaceManager}, {@link ParameterTokenFormatter} and {@link RouteTokenFormatter} for more
      * details.
      * </p>
      *
      * @param placeManagerClass   The {@link PlaceManager} implementation.
      * @param tokenFormatterClass The {@link TokenFormatter} implementation.
+     *
+     * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
      */
     @Deprecated
     public DefaultModule(Class<? extends PlaceManager> placeManagerClass,
