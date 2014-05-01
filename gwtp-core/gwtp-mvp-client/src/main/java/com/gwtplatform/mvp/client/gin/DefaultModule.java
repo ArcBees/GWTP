@@ -42,6 +42,31 @@ public class DefaultModule extends AbstractGinModule {
     private final Class<? extends TokenFormatter> tokenFormatterClass;
 
     /**
+     * A DefaultModule builder.
+     */
+    public static class Builder {
+        private Class<? extends PlaceManager> placeManagerClass = DefaultPlaceManager.class;
+        private Class<? extends TokenFormatter> tokenFormatterClass = ParameterTokenFormatter.class;
+
+        public Builder() {
+        }
+
+        public Builder placeManager(Class<? extends PlaceManager> placeManagerClass) {
+            this.placeManagerClass = placeManagerClass;
+            return this;
+        }
+
+        public Builder tokenFormatter(Class<? extends TokenFormatter> tokenFormatterClass) {
+            this.tokenFormatterClass = tokenFormatterClass;
+            return this;
+        }
+
+        public DefaultModule build() {
+            return new DefaultModule(this);
+        }
+    }
+
+    /**
      * When instantiating the module this way be sure to read
      * {@link DefaultPlaceManager}
      *
@@ -55,7 +80,7 @@ public class DefaultModule extends AbstractGinModule {
      *      PlaceManager wiki for more examples</a>
      */
     public DefaultModule() {
-        this(DefaultPlaceManager.class, ParameterTokenFormatter.class);
+        this(new Builder());
     }
 
     /**
@@ -66,7 +91,10 @@ public class DefaultModule extends AbstractGinModule {
      *            {@link DefaultPlaceManager} @see <a
      *            href="https://github.com/ArcBees/GWTP/wiki/PlaceManager">See
      *            PlaceManager wiki for more examples</a>
+     *
+     * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
      */
+    @Deprecated
     public DefaultModule(Class<? extends PlaceManager> placeManagerClass) {
         this(placeManagerClass, ParameterTokenFormatter.class);
     }
@@ -81,11 +109,19 @@ public class DefaultModule extends AbstractGinModule {
      *
      * @param placeManagerClass   The {@link PlaceManager} implementation.
      * @param tokenFormatterClass The {@link TokenFormatter} implementation.
+     *
+     * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
      */
+    @Deprecated
     public DefaultModule(Class<? extends PlaceManager> placeManagerClass,
-            Class<? extends TokenFormatter> tokenFormatterClass) {
+                         Class<? extends TokenFormatter> tokenFormatterClass) {
         this.placeManagerClass = placeManagerClass;
         this.tokenFormatterClass = tokenFormatterClass;
+    }
+
+    private DefaultModule(Builder builder) {
+        this.placeManagerClass = builder.placeManagerClass;
+        this.tokenFormatterClass = builder.tokenFormatterClass;
     }
 
     @Override
