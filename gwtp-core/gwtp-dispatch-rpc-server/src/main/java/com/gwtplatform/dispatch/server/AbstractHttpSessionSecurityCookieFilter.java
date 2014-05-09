@@ -41,7 +41,8 @@ import javax.servlet.http.HttpSession;
  * <p/>
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
  *
- * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.AbstractHttpSessionSecurityCookieFilter}.
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.AbstractRandomSecurityCookieFilter}.
+ * Using the JSESSIONID like this might let an XSS attacker hijack a session. See GitHub issue #484
  */
 @Deprecated
 public abstract class AbstractHttpSessionSecurityCookieFilter implements Filter {

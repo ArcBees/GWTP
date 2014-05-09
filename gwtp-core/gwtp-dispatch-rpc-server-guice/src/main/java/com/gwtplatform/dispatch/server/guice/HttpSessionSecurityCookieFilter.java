@@ -37,7 +37,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookie;
  * <p/>
  * You also have to use a {@code .jsp} file instead of a {@code .html} as your main GWT file.
  *
- * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.HttpSessionSecurityCookieFilter}.
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.RandomSecurityCookieFilter}.
+ * Using the JSESSIONID like this might let an XSS attacker hijack a session. See GitHub issue #484
  */
 @Deprecated
 @Singleton
