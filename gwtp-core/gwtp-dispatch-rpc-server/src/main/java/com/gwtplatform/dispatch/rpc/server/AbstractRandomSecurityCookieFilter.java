@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * This filter will automatically inject a security cookie inside the request the first time the page is loaded. This
- * security cookie is a simple randomly generated number. To setup this filter, add the following line 
+ * security cookie is a simple randomly generated number. To setup this filter, add the following line
  * before any other {@code serve} call in your own {@link com.google.inject.servlet.ServletModule#configureServlets}:
  * <p/>
  * <pre>
