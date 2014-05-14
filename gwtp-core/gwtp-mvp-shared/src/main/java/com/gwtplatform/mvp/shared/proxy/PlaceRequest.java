@@ -270,6 +270,9 @@ public class PlaceRequest {
             if (value != null) {
                 this.params.put(name, value);
             }
+            else {
+                this.params.remove(name);
+            }
 
             return this;
         }
