@@ -50,7 +50,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     private HandlerRegistration windowClosingHandlerRegistration;
     private boolean locked;
 
-    private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
+    private List<PlaceRequest> placeHierarchy = new ArrayList<>();
 
     public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
         this.eventBus = eventBus;
@@ -61,6 +61,17 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     @Override
     public String buildHistoryToken(PlaceRequest request) {
         return tokenFormatter.toPlaceToken(request);
+    }
+
+    @Override
+    public List<String> buildHistoryTokens(List<PlaceRequest> placeRequests) {
+        List<String> historyTokens = new ArrayList<>();
+
+        for (PlaceRequest placeRequest : placeRequests) {
+            historyTokens.add(tokenFormatter.toPlaceToken(placeRequest));
+        }
+
+        return historyTokens;
     }
 
     @Override
@@ -439,7 +450,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         if (question != null && onLeaveQuestion == null) {
             windowClosingHandlerRegistration = Window.addWindowClosingHandler(this);
         }
-        if (question == null && onLeaveQuestion != null) {
+        if (question == null) {
             windowClosingHandlerRegistration.removeHandler();
         }
         onLeaveQuestion = question;
@@ -457,7 +468,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
                     "Encountered repeated errors resulting in an infinite loop. Make sure all users have access "
                             + "to the pages revealed by revealErrorPlace and revealUnauthorizedPlace. (Note that the " +
                             "default "
-                            + "implementations call revealDefaultPlace)");
+                            + "implementations call revealDefaultPlace)"
+            );
         }
         internalError = true;
     }
@@ -519,18 +531,18 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         int size = placeHierarchy.size();
         if (level < 0) {
             if (-level >= size) {
-                return new ArrayList<PlaceRequest>();
+                return new ArrayList<>();
             } else {
-                return new ArrayList<PlaceRequest>(placeHierarchy.subList(0, size
+                return new ArrayList<>(placeHierarchy.subList(0, size
                         + level));
             }
         } else if (level > 0) {
             if (level >= size) {
-                return new ArrayList<PlaceRequest>(placeHierarchy);
+                return new ArrayList<>(placeHierarchy);
             } else {
-                return new ArrayList<PlaceRequest>(placeHierarchy.subList(0, level));
+                return new ArrayList<>(placeHierarchy.subList(0, level));
             }
         }
-        return new ArrayList<PlaceRequest>(placeHierarchy);
+        return new ArrayList<>(placeHierarchy);
     }
 }
