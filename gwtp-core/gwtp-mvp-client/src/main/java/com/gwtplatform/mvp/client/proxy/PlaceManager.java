@@ -47,6 +47,18 @@ public interface PlaceManager extends HasHandlers {
     String buildHistoryToken(PlaceRequest request);
 
     /**
+     * Builds a List of strings corresponding to the history tokens to reveal the specified
+     * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest}. This can be used with a
+     * {@link com.google.gwt.user.client.ui.Hyperlink}.
+     *
+     * @param placeRequests The List of {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} corresponding to the place for which to
+     *                      build a history token.
+     * @return The history token.
+     * @see #revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest)
+     */
+    List<String> buildHistoryTokens(List<PlaceRequest> placeRequests);
+
+    /**
      * Builds a string corresponding to the history token to reveal the specified place from the
      * current place hierarchy.
      * <p/>
