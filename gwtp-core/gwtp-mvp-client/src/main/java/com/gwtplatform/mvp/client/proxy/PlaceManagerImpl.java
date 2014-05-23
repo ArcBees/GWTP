@@ -67,7 +67,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     public List<String> buildHistoryTokens(List<PlaceRequest> placeRequests) {
         List<String> historyTokens = new ArrayList<>();
 
-        for(PlaceRequest placeRequest : placeRequests) {
+        for (PlaceRequest placeRequest : placeRequests) {
             historyTokens.add(tokenFormatter.toPlaceToken(placeRequest));
         }
 
@@ -468,7 +468,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
                     "Encountered repeated errors resulting in an infinite loop. Make sure all users have access "
                             + "to the pages revealed by revealErrorPlace and revealUnauthorizedPlace. (Note that the " +
                             "default "
-                            + "implementations call revealDefaultPlace)");
+                            + "implementations call revealDefaultPlace)"
+            );
         }
         internalError = true;
     }
