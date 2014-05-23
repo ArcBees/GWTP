@@ -40,6 +40,21 @@ public interface View extends IsWidget {
     void addToSlot(Object slot, IsWidget content);
 
     /**
+     * Requests the view to add content within a specific slot.
+     * <p/>
+     * Override the default implementation and manage all the slots of your view
+     * into which content can be added. You should also consider overriding
+     * {@link #removeFromSlot(Object, IsWidget)}.
+     * If the view doesn't know about this slot, it can silently ignore the request.
+     * <p/>
+     *
+     * @param slot    An opaque object indicating the slot to add into.
+     * @param content The content to add, a {@link IsWidget}.
+     * @param index The index at which you want to insert the widget
+     */
+    void addToSlot(Object slot, IsWidget content, int index);
+
+    /**
      * Requests the view to remove content from a specific slot.
      * <p/>
      * Override the default implementation and manage all the slots of your view
