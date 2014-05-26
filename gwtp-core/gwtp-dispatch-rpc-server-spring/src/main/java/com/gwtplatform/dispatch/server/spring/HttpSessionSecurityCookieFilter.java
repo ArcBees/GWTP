@@ -24,7 +24,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.gwtplatform.dispatch.server.AbstractHttpSessionSecurityCookieFilter;
 
 /**
- * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter}.
+ * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.RandomSecurityCookieFilter}.
+ * Using the JSESSIONID like this might let an XSS attacker hijack a session. See GitHub issue #484
  */
 @Deprecated
 public class HttpSessionSecurityCookieFilter extends AbstractHttpSessionSecurityCookieFilter {
