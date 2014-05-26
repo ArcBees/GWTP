@@ -29,9 +29,6 @@ import java.lang.annotation.Target;
  * <p/>
  * {@code value} Defines the order that fields should be specified in the
  * constructor of the generated action class.
- *
- * @author Brendan Doherty
- * @author Stephen Haberman (concept)
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

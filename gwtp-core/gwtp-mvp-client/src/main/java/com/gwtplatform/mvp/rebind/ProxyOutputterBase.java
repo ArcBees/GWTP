@@ -46,8 +46,6 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * The base class of any {@link ProxyOutputter} implementation.
- *
- * @author Philippe Beaudoin
  */
 public abstract class ProxyOutputterBase implements ProxyOutputter {
 

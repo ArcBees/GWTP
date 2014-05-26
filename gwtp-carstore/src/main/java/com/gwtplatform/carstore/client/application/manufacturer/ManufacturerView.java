@@ -56,7 +56,7 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        manufacturerDataProvider = new ListDataProvider<ManufacturerDto>();
+        manufacturerDataProvider = new ListDataProvider<>();
         manufacturerDataProvider.addDataDisplay(manufacturerGrid);
     }
 
@@ -91,7 +91,7 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
     }
 
     private void initManufacturerGrid() {
-        manufacturerGrid = new CellTable<ManufacturerDto>();
+        manufacturerGrid = new CellTable<>();
         manufacturerGrid.setSelectionModel(new NoSelectionModel<ManufacturerDto>());
 
         initDataColumns();
@@ -119,14 +119,14 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
     }
 
     private void initActionColumns() {
-        Cell<ManufacturerDto> editCell = new ActionCell<ManufacturerDto>("Edit", new Delegate<ManufacturerDto>() {
+        Cell<ManufacturerDto> editCell = new ActionCell<>("Edit", new Delegate<ManufacturerDto>() {
             @Override
             public void execute(ManufacturerDto manufacturerDto) {
                 getUiHandlers().onEdit(manufacturerDto);
             }
         });
 
-        Cell<ManufacturerDto> deleteCell = new ActionCell<ManufacturerDto>("Delete", new Delegate<ManufacturerDto>() {
+        Cell<ManufacturerDto> deleteCell = new ActionCell<>("Delete", new Delegate<ManufacturerDto>() {
             @Override
             public void execute(ManufacturerDto manufacturerDto) {
                 Boolean confirm = Window.confirm("Are you sure you want to delete " + manufacturerDto.getName() + "?");
@@ -137,8 +137,8 @@ public class ManufacturerView extends ViewWithUiHandlers<ManufacturerUiHandlers>
             }
         });
 
-        IdentityColumn<ManufacturerDto> editColumn = new IdentityColumn<ManufacturerDto>(editCell);
-        IdentityColumn<ManufacturerDto> deleteColumn = new IdentityColumn<ManufacturerDto>(deleteCell);
+        IdentityColumn<ManufacturerDto> editColumn = new IdentityColumn<>(editCell);
+        IdentityColumn<ManufacturerDto> deleteColumn = new IdentityColumn<>(deleteCell);
 
         manufacturerGrid.addColumn(editColumn, "Edit");
         manufacturerGrid.addColumn(deleteColumn, "Delete");

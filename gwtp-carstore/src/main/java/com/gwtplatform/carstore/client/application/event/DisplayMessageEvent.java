@@ -34,7 +34,7 @@ public class DisplayMessageEvent extends GwtEvent<DisplayMessageEvent.DisplayMes
         source.fireEvent(new DisplayMessageEvent(message));
     }
 
-    private static final Type<DisplayMessageHandler> TYPE = new Type<DisplayMessageHandler>();
+    private static final Type<DisplayMessageHandler> TYPE = new Type<>();
 
     private Message message;
 

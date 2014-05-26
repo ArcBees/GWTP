@@ -27,8 +27,6 @@ import com.google.gwt.event.shared.HasHandlers;
  * The default implementation or {@link com.gwtplatform.mvp.client.RootPresenter} causes
  * {@link com.gwtplatform.mvp.client.PresenterWidget#onReset()}
  * to be called, starting from the top level presenter and going down.
- *
- * @author Philippe Beaudoin
  */
 public final class ResetPresentersEvent extends
         GwtEvent<ResetPresentersHandler> {

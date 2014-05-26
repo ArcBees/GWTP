@@ -69,8 +69,6 @@ import java.lang.annotation.Target;
  *    }
  *  }
  * </pre>
- *
- * @author Philippe Beaudoin
  */
 @Target(ElementType.METHOD)
 public @interface TitleFunction {

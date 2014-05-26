@@ -25,7 +25,6 @@ import com.google.web.bindery.event.shared.EventBus;
  * Such asynchronous calls only occur when using code splitting. You can hook on this event
  * to display a "Loading..." message if desired.
  *
- * @author Philippe Beaudoin
  * @see AsyncCallStartHandler
  * @see AsyncCallSucceedEvent
  * @see AsyncCallFailEvent

@@ -21,8 +21,6 @@ package com.gwtplatform.dispatch.shared;
  * sequence. If any fail, the rules for the {@link OnException} value provided
  * in the constructor determine the outcome.
  *
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.BatchAction}.
  */
 @Deprecated

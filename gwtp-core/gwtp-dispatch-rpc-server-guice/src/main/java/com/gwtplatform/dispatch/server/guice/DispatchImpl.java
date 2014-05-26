@@ -23,8 +23,6 @@ import com.gwtplatform.dispatch.server.AbstractDispatchImpl;
 import com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 
 /**
- * @author Philippe Beaudoin
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl}.
  */
 @Deprecated

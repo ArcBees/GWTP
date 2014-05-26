@@ -33,7 +33,7 @@ public class UserLoginEvent extends GwtEvent<UserLoginEvent.UserLoginHandler> {
         source.fireEvent(new UserLoginEvent());
     }
 
-    private static final Type<UserLoginHandler> TYPE = new Type<UserLoginHandler>();
+    private static final Type<UserLoginHandler> TYPE = new Type<>();
 
     public UserLoginEvent() {
     }

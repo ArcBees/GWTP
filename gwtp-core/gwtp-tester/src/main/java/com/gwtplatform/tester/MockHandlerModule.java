@@ -96,8 +96,6 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  *           any(ClientDispatchRequest.class), any(ExecuteCommand.class));
  *
  * </pre>
- *
- * @author Brendan Doherty
  */
 public abstract class MockHandlerModule extends AbstractModule {
 

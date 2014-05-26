@@ -18,8 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 /**
  * GWT window and history related methods that can be mocked.
- *
- * @author Philippe Beaudoin
  */
 public interface PlaceManagerWindowMethodsTestUtil {
     void registerTowardsHistory();

@@ -20,8 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * Handler for {@link LockInteractionEvent}.
- *
- * @author Philippe Beaudoin
  */
 public interface LockInteractionHandler extends EventHandler {
     void onLockInteraction(

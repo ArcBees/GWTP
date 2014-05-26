@@ -30,7 +30,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * will be responsible for adding your own scrollbars as content overflow,
  * usually via {@link com.google.gwt.user.client.ui.ScrollPanel}.
  *
- * @author Philippe Beaudoin
  * @see RevealContentEvent
  * @see RevealRootContentEvent
  * @see RevealRootPopupContentEvent

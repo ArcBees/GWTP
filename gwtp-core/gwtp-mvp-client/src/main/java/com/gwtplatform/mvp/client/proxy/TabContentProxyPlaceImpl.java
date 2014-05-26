@@ -25,7 +25,6 @@ import com.gwtplatform.mvp.client.TabData;
  * {@link Place}.
  *
  * @param <T> The Presenter's type.
- * @author Philippe Beaudoin
  */
 public class TabContentProxyPlaceImpl<T extends Presenter<?, ?>> extends
         ProxyPlaceAbstract<T, TabContentProxy<T>> implements TabContentProxyPlace<T> {

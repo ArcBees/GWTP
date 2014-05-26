@@ -47,13 +47,13 @@ public class ManufacturerMobileView extends ViewWithUiHandlers<ManufacturerUiHan
     ManufacturerMobileView(Binder uiBinder,
                            ManufacturerCell manufacturerCell,
                            MobileDataListStyle mobileDataListStyle) {
-        manufacturerList = new CellList<ManufacturerDto>(manufacturerCell, mobileDataListStyle);
+        manufacturerList = new CellList<>(manufacturerCell, mobileDataListStyle);
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        manufacturerDataProvider = new ListDataProvider<ManufacturerDto>();
+        manufacturerDataProvider = new ListDataProvider<>();
         manufacturerDataProvider.addDataDisplay(manufacturerList);
-        selectionModel = new SingleSelectionModel<ManufacturerDto>();
+        selectionModel = new SingleSelectionModel<>();
         manufacturerList.setSelectionModel(selectionModel);
 
         selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {

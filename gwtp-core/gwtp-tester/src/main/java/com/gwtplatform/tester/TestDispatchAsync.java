@@ -39,8 +39,6 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 /**
  * This class is an implementation of {@link DispatchAsync} for use with test
  * cases that configure guice using a {@link MockHandlerModule}.
- *
- * @author Brendan Doherty
  */
 
 public class TestDispatchAsync implements DispatchAsync {

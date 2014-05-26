@@ -28,8 +28,6 @@ package com.gwtplatform.tester;
  *   }
  * }
  * </pre>
- *
- * @author Christian Goudreau
  */
 public interface MockFactory {
     <T> T mock(Class<T> classToMock);

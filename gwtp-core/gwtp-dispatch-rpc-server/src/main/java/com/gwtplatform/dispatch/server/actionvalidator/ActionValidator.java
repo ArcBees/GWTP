@@ -32,9 +32,6 @@ import com.gwtplatform.dispatch.shared.Result;
  * You should think of annotating your validators with {@code @RequestScoped} or
  * {@code @Singleton}.
  *
- * @author David Peterson
- * @author Christian Goudreau
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator}.
  */
 @Deprecated

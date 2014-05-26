@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.rebind;
 import java.util.List;
 
 import javax.inject.Provider;
+import javax.ws.rs.Path;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -30,15 +31,14 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
-import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator {
     protected static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/RestService.vm";
 
     private final List<ActionBinding> actionBindings = Lists.newArrayList();
     private final List<ServiceBinding> serviceBindings = Lists.newArrayList();
-    private final ServiceDefinitions serviceDefinitions;
     private final GeneratorFactory generatorFactory;
     private final JClassType service;
 
@@ -48,12 +48,10 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
             Provider<VelocityContext> velocityContextProvider,
             VelocityEngine velocityEngine,
             GeneratorUtil generatorUtil,
-            ServiceDefinitions serviceDefinitions,
             GeneratorFactory generatorFactory,
             JClassType service) {
         super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil);
 
-        this.serviceDefinitions = serviceDefinitions;
         this.generatorFactory = generatorFactory;
         this.service = service;
     }
@@ -76,19 +74,33 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
         JMethod[] methods = service.getInheritableMethods();
         if (methods != null) {
             for (JMethod method : methods) {
-                if (isRestService(method)) {
-                    generateChildRestService(method);
-                } else {
-                    generateRestAction(method);
-                }
+                generateMethodHierarchy(method);
             }
         }
     }
 
-    protected boolean isRestService(JMethod method) throws UnableToCompleteException {
+    protected void generateMethodHierarchy(JMethod method) throws UnableToCompleteException {
+        if (isAction(method)) {
+            generateRestAction(method);
+        } else if (isSubService(method)) {
+            generateChildRestService(method);
+        } else {
+            String methodName = method.getEnclosingType().getQualifiedSourceName() + "#" + method.getName() + "(...)";
+            getLogger().die(methodName + " should return either a RestAction<> or a Sub-Resource.");
+        }
+    }
+
+    protected boolean isAction(JMethod method) throws UnableToCompleteException {
+        JClassType actionClass = getTypeOracle().findType(RestAction.class.getName());
+        JClassType returnClass = method.getReturnType().isClassOrInterface();
+
+        return returnClass != null && returnClass.isAssignableTo(actionClass);
+    }
+
+    protected boolean isSubService(JMethod method) throws UnableToCompleteException {
         JClassType returnInterface = method.getReturnType().isInterface();
 
-        return returnInterface != null && serviceDefinitions.isService(returnInterface);
+        return returnInterface != null && method.isAnnotationPresent(Path.class);
     }
 
     protected void generateChildRestService(JMethod method) throws UnableToCompleteException {

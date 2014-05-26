@@ -38,11 +38,11 @@ public class CarProxyImpl extends ProxyPlaceImpl<CarPresenter> implements CarPre
     public static class WrappedProxy extends ProxyImpl<CarPresenter> {
         @Inject
         public WrappedProxy(Provider<CarPresenter> presenter) {
-            this.presenter = new StandardProvider<CarPresenter>(presenter);
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
-    private List<HandlerRegistration> handlers = new ArrayList<HandlerRegistration>();
+    private List<HandlerRegistration> handlers = new ArrayList<>();
 
     @Inject
     CarProxyImpl(@Assisted CarPresenterProvider carPresenterProvider,

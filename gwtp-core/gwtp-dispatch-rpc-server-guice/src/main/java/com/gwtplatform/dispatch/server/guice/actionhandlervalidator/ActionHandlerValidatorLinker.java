@@ -29,8 +29,6 @@ import com.gwtplatform.dispatch.server.guice.GuiceBeanProvider;
  * instances with the default.
  * {@link com.gwtplatform.dispatch.server.actionhandlervalidator.ActionHandlerValidatorRegistry}
  *
- * @author Christian Goudreau
- *
  * @deprecated Please use
  * {@link com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator.ActionHandlerValidatorLinker}.
  */

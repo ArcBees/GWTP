@@ -52,7 +52,7 @@ public class RatingResource {
         return Response.ok(ratingDtos).build();
     }
 
-    @Path(PathParameter.ID)
+    @Path(PathParameter.PATH_ID)
     @GET
     public Response get(@PathParam(RestParameter.ID) Long id) {
         RatingDto ratingDto = Rating.createDto(ratingDao.get(id));
@@ -67,7 +67,7 @@ public class RatingResource {
         return Response.ok(Rating.createDto(rating)).build();
     }
 
-    @Path(PathParameter.ID)
+    @Path(PathParameter.PATH_ID)
     @DELETE
     public Response delete(@PathParam(RestParameter.ID) Long id) {
         ratingDao.delete(id);

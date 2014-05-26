@@ -29,6 +29,6 @@ public class CarDao extends BaseDao<Car> {
 
     public List<ManufacturerRatingDto> getAverageCarRatingByManufacturer() {
         // TODO: Not implemented yet
-        return new ArrayList<ManufacturerRatingDto>();
+        return new ArrayList<>();
     }
 }

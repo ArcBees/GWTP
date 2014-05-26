@@ -33,7 +33,6 @@ import com.gwtplatform.mvp.client.Presenter;
  * </pre>
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
- * @author Philippe Beaudoin
  * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  */
 public interface TabContentProxyPlace<P extends Presenter<?, ?>> extends

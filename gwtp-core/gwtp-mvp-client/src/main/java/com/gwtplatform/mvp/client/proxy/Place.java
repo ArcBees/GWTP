@@ -27,8 +27,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * current settings, such as a particular ID value, or other unique indicators
  * that will allow a user to track back to that location later, either via a
  * browser bookmark, or by clicking the 'back' button.
- *
- * @author Philippe Beaudoin
  */
 public interface Place {
 

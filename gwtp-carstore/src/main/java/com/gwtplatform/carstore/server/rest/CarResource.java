@@ -92,7 +92,7 @@ public class CarResource {
         return Response.ok(Car.createDto(car)).build();
     }
 
-    @Path(PathParameter.ID)
+    @Path(PathParameter.PATH_ID)
     @DELETE
     public Response delete(@PathParam(RestParameter.ID) Long id) {
         carDao.delete(id);

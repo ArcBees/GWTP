@@ -59,7 +59,7 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        ratingDataProvider = new ListDataProvider<RatingDto>();
+        ratingDataProvider = new ListDataProvider<>();
         ratingDataProvider.addDataDisplay(ratingGrid);
     }
 
@@ -85,7 +85,7 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     }
 
     private void initRatingGrid() {
-        ratingGrid = new CellTable<RatingDto>();
+        ratingGrid = new CellTable<>();
         ratingGrid.setSelectionModel(new NoSelectionModel<RatingDto>());
 
         ratingColumnInitializer.initializeColumns(ratingGrid);
@@ -93,7 +93,7 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
     }
 
     private void initActionColumns() {
-        Cell<RatingDto> deleteCell = new ActionCell<RatingDto>("Delete", new ActionCell.Delegate<RatingDto>() {
+        Cell<RatingDto> deleteCell = new ActionCell<>("Delete", new ActionCell.Delegate<RatingDto>() {
             @Override
             public void execute(RatingDto ratingDto) {
                 Boolean confirm = Window.confirm("Are you sure you want to delete" + ratingDto.toString() + "?");
@@ -104,7 +104,7 @@ public class RatingView extends ViewWithUiHandlers<RatingUiHandlers> implements 
             }
         });
 
-        IdentityColumn<RatingDto> deleteColumn = new IdentityColumn<RatingDto>(deleteCell);
+        IdentityColumn<RatingDto> deleteColumn = new IdentityColumn<>(deleteCell);
         ratingGrid.addColumn(deleteColumn, "Delete");
         ratingGrid.setColumnWidth(deleteColumn, 75, Style.Unit.PX);
     }

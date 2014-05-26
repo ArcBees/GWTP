@@ -59,7 +59,7 @@ public class Rating extends BaseEntity {
             return null;
         }
 
-        List<RatingDto> ratingsDto = new ArrayList<RatingDto>();
+        List<RatingDto> ratingsDto = new ArrayList<>();
         for (Rating rating : ratings) {
             ratingsDto.add(createDto(rating));
         }

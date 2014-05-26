@@ -37,8 +37,6 @@ import javax.tools.Diagnostic.Kind;
  * annotated in the current environment with one of the given annotations. You
  * can get access these elements using the method
  * {@link #process(Element annotatedElement)}.
- *
- * @author Florian Sauter
  */
 public abstract class GenProcessor extends AbstractProcessor {
 

@@ -30,8 +30,6 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
  * injection with Guice/GIN can use the automatic binding mechanism. See
  * {@link HandlerContainerImpl#HandlerContainerImpl()} and {@link #HandlerContainerImpl(boolean)}
  * for more details.
- *
- * @author Philippe Beaudoin
  */
 public class HandlerContainerImpl implements HandlerContainer {
 

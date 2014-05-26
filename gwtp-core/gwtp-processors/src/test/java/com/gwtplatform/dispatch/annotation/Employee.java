@@ -20,8 +20,6 @@ import java.util.ArrayList;
 
 /**
  * For testing purposes only.
- *
- * @author Florian Sauter
  */
 @GenProxy(
         targetPackage = "com.gwtplatform.dispatch.annotation.proxy",

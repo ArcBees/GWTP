@@ -24,8 +24,6 @@ import java.lang.annotation.Target;
  * used when retrieving a place title through
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#getCurrentTitle}. For
  * more control see {@link TitleFunction}.
- *
- * @author Philippe Beaudoin
  */
 @Target(ElementType.TYPE)
 public @interface Title {

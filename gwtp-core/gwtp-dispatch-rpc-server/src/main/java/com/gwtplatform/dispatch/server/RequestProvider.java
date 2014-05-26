@@ -19,8 +19,6 @@ package com.gwtplatform.dispatch.server;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Philippe Beaudoin
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.RequestProvider}.
  */
 @Deprecated

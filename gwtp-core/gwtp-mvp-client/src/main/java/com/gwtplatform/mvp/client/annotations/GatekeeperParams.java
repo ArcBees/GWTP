@@ -26,8 +26,6 @@ import java.lang.annotation.Target;
  * with your proxy. Your custom {@code Ginjector} must have a
  * method returning the {@link GatekeeperWithParams} specified
  * in this annotation.
- *
- * @author Juan Carlos González
  */
 @Target(ElementType.TYPE)
 public @interface GatekeeperParams {

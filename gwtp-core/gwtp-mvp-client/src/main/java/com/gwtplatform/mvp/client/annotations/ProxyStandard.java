@@ -32,7 +32,6 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  *
- * @author Philippe Beaudoin
  * @see <a href="http://code.google.com/webtoolkit/doc/latest/DevGuideCodeSplitting.html">Code Splitting</a>
  */
 @Target(ElementType.TYPE)

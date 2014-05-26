@@ -32,8 +32,6 @@ import com.google.gwt.core.ext.typeinfo.JType;
 
 /**
  * A helper class that can be used to inspect a class for methods having specific signatures.
- *
- * @author Philippe Beaudoin
  */
 public class ClassInspector {
 

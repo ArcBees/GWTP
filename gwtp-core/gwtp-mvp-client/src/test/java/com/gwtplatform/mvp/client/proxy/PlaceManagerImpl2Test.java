@@ -43,8 +43,6 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for {@link PlaceManagerImpl}.
- *
- * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
 public class PlaceManagerImpl2Test {

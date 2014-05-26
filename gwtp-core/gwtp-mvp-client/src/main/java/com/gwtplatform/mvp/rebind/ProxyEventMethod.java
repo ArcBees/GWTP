@@ -28,8 +28,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 
 /**
  * Represents a method, in the presenter, that is responsible of handling an event.
- *
- * @author Philippe Beaudoin
  */
 public class ProxyEventMethod {
 

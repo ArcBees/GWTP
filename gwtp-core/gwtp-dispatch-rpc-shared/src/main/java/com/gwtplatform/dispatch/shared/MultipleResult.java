@@ -28,7 +28,6 @@ import java.util.List;
  * recommended that the empty constructor is private or package-private.
  *
  * @param <T> The value type.
- * @author Christopher Viel
  *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.shared.MultipleResult}.
  */

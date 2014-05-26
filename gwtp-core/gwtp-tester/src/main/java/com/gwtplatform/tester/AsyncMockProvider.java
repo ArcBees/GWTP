@@ -29,7 +29,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * {@link com.gwtplatform.tester.mockito.AsyncMockProvider AsyncMockProvider} instead.
  *
  * @param <T> The type of mock object provided
- * @author Brendan Doherty
  */
 public class AsyncMockProvider<T> implements AsyncProvider<T> {
 

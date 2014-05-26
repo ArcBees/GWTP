@@ -26,7 +26,6 @@ import com.gwtplatform.mvp.client.Presenter;
 
 /**
  * @param <P> The presenter's type.
- * @author Philippe Beaudoin
  */
 public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 

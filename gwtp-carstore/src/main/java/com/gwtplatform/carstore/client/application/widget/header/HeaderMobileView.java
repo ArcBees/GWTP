@@ -72,8 +72,8 @@ public class HeaderMobileView extends ViewWithUiHandlers<HeaderUiHandlers>
         this.placeManager = placeManager;
         this.userInfoPopup = userInfoPopup;
 
-        CellList<MenuItem> placeList = new CellList<MenuItem>(new EnumCell<MenuItem>(), listResources);
-        menuBar = new ValuePicker<MenuItem>(placeList);
+        CellList<MenuItem> placeList = new CellList<>(new EnumCell<MenuItem>(), listResources);
+        menuBar = new ValuePicker<>(placeList);
 
         initWidget(uiBinder.createAndBindUi(this));
 

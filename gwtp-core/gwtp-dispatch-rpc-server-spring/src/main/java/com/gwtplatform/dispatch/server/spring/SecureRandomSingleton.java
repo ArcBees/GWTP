@@ -21,8 +21,6 @@ import java.security.SecureRandom;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.SecureRandomSingleton}.
  */
 @Component

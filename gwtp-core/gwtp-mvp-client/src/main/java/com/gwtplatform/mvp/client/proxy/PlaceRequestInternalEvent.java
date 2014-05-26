@@ -31,9 +31,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * <li>{@link PlaceManager#revealRelativePlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest)}</li>
  * <li>{@link PlaceManager#revealRelativePlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest, int)}</li>
  * </ul>
- *
- * @author David Peterson
- * @author Philippe Beaudoin
  */
 class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 

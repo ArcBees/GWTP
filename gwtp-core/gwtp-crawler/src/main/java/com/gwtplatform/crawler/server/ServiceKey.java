@@ -31,8 +31,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * {@link CrawlServiceServlet}. For example:
  * <pre>bindConstant().annotatedWith(ServiceKey.class).to("123456");
  * </pre>
- *
- * @author Philippe Beaudoin
  */
 
 @BindingAnnotation

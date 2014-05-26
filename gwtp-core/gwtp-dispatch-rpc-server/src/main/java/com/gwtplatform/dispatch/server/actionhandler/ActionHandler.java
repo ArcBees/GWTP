@@ -32,7 +32,6 @@ import com.gwtplatform.dispatch.shared.Result;
  *
  * @param <A> The type of the action extending {@link com.gwtplatform.dispatch.shared.Action}.
  * @param <R> The type of the result extending {@link com.gwtplatform.dispatch.shared.Result}.
- * @author David Peterson
  *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler}.
  */

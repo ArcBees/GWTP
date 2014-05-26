@@ -25,8 +25,6 @@ import com.google.gwt.user.rebind.SourceWriter;
 
 /**
  * Proxy outputter for a basic, non-place, non-tab-container proxy.
- *
- * @author Philippe Beaudoin
  */
 public class BasicProxyOutputter extends ProxyOutputterBase {
 

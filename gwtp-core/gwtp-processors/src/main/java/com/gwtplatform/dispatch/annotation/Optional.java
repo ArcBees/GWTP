@@ -47,8 +47,6 @@ import java.lang.annotation.Target;
  * <p>
  * See the above annotations for specific behaviors with optional fields.
  * </p>
- *
- * @author Florian Sauter
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

@@ -20,8 +20,6 @@ package com.gwtplatform.mvp.client;
  * The interface for {@link View} classes that is meant to be displayed as a
  * popup, like a GWT {@link com.google.gwt.user.client.ui.PopupPanel} or a
  * {@link com.google.gwt.user.client.ui.DialogBox}.
- *
- * @author Philippe Beaudoin
  */
 public interface PopupView extends View {
 

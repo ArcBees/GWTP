@@ -18,9 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.EventHandler;
 
-/**
- * @author Philippe Beaudoin
- */
 public interface ResetPresentersHandler extends EventHandler {
 
     void onResetPresenters(final ResetPresentersEvent resetPresentersEvent);

@@ -24,8 +24,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 /**
  * An action used by {@link RestDispatch}.
  * <p/>
- * You will usually want to let GWTP generate your actions by creating
- * {@link com.gwtplatform.dispatch.rest.shared.RestService}s as explained
+ * You will usually want to let GWTP generate your actions by creating services as explained
  * <a href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
  *
  * @param <R> the result type.

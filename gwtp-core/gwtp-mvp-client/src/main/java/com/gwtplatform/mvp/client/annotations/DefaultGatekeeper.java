@@ -24,8 +24,6 @@ import java.lang.annotation.Target;
  * {@link com.gwtplatform.mvp.client.proxy.Gatekeeper}-derived class. This class
  * will be used to provide places for proxies that are not annotated with the
  * {@link UseGatekeeper} annotation.
- *
- * @author Philippe Beaudoin
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface DefaultGatekeeper {

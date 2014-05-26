@@ -19,8 +19,6 @@ package com.gwtplatform.mvp.client;
 /**
  * The basic type of {@link TabData}, with just enough information to create
  * a basic {@link Tab}.
- *
- * @author Philippe Beaudoin
  */
 public class TabDataBasic implements TabData {
 

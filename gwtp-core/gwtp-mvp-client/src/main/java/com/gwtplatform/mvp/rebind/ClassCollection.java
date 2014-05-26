@@ -49,8 +49,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 /**
  * Contains all the classes that are useful to various generators.
  * This class contains no getters, fields are accessed directly.
- *
- * @author Philippe Beaudoin
  */
 public class ClassCollection {
 

@@ -24,8 +24,6 @@ import com.gwtplatform.dispatch.server.spring.HttpSessionSecurityCookieFilter;
 import com.gwtplatform.dispatch.server.spring.request.DefaultRequestProvider;
 
 /**
- * @author Peter Simun
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.spring.configuration.DefaultModule}.
  */
 @Deprecated

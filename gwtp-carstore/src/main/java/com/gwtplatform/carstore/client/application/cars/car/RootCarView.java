@@ -43,7 +43,7 @@ public class RootCarView extends ViewImpl implements RootCarPresenter.MyView {
     public void setInSlot(Object slot, IsWidget content) {
         if (slot == RootCarPresenter.SLOT_TAB_BAR) {
             tabBarPanel.setWidget(content);
-        } else if (slot == RootCarPresenter.TYPE_SetCarContent) {
+        } else if (slot == RootCarPresenter.SLOT_SetCarContent) {
             contentPanel.setWidget(content);
         }
     }

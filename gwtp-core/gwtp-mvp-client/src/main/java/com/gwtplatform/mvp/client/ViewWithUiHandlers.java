@@ -25,8 +25,6 @@ package com.gwtplatform.mvp.client;
  * since the {@link UiHandlers} are not yet set.
  *
  * @param <C> Your {@link UiHandlers} interface type.
- * @author Christian Goudreau
- * @author Philippe Beaudoin
  */
 public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
         implements HasUiHandlers<C> {

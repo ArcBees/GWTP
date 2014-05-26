@@ -22,9 +22,6 @@ import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
-/**
- * @author Philippe Beaudoin
- */
 @GinModules({ClientModuleTestUtilGwt.class})
 public interface GinjectorTestUtilGwt extends Ginjector {
     Provider<MainPresenterTestUtilGwt> getMainPresenter();

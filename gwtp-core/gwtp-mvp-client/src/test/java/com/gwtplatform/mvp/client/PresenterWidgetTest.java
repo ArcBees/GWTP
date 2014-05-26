@@ -42,8 +42,6 @@ import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for {@link PresenterWidget}.
- *
- * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
 public class PresenterWidgetTest {

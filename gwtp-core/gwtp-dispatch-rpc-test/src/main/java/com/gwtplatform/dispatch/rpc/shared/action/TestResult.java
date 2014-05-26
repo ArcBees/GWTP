@@ -18,9 +18,6 @@ package com.gwtplatform.dispatch.rpc.shared.action;
 
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
-/**
- * @author Peter Simun
- */
 public class TestResult implements Result {
 
     private Boolean result;

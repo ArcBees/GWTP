@@ -20,8 +20,6 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 
 /**
  * For testing purposes only.
- *
- * @author Brendan Doherty
  */
 @GenDispatch(isSecure = false, serviceName = Action.DEFAULT_SERVICE_NAME
         + "Blah", extraResultInterfaces = "com.gwtplatform.dispatch.annotation.HasThing<com.gwtplatform.dispatch" +

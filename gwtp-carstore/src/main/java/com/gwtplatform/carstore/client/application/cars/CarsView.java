@@ -101,7 +101,7 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     private void initCarGrid() {
-        carGrid = new CellTable<CarDto>();
+        carGrid = new CellTable<>();
         carGrid.setSelectionModel(new NoSelectionModel<CarDto>());
 
         pager = new SimplePager(SimplePager.TextLocation.CENTER);
@@ -142,14 +142,14 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     private void initActionColumns() {
-        Cell<CarDto> editCell = new ActionCell<CarDto>("Edit", new Delegate<CarDto>() {
+        Cell<CarDto> editCell = new ActionCell<>("Edit", new Delegate<CarDto>() {
             @Override
             public void execute(CarDto carDto) {
                 getUiHandlers().onEdit(carDto);
             }
         });
 
-        Cell<CarDto> deleteCell = new ActionCell<CarDto>("Delete", new Delegate<CarDto>() {
+        Cell<CarDto> deleteCell = new ActionCell<>("Delete", new Delegate<CarDto>() {
             @Override
             public void execute(CarDto carDto) {
                 Boolean confirm = Window.confirm("Are you sure you want to delete " + carDto.getModel() + "?");
@@ -160,8 +160,8 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
             }
         });
 
-        IdentityColumn<CarDto> editColumn = new IdentityColumn<CarDto>(editCell);
-        IdentityColumn<CarDto> deleteColumn = new IdentityColumn<CarDto>(deleteCell);
+        IdentityColumn<CarDto> editColumn = new IdentityColumn<>(editCell);
+        IdentityColumn<CarDto> deleteColumn = new IdentityColumn<>(deleteCell);
 
         carGrid.addColumn(editColumn, "Edit");
         carGrid.addColumn(deleteColumn, "Delete");

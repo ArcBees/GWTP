@@ -62,7 +62,7 @@ public class Manufacturer extends BaseEntity {
             return null;
         }
 
-        List<Car> rcars = new ArrayList<Car>();
+        List<Car> rcars = new ArrayList<>();
         for (Ref<Car> car : cars) {
             rcars.add(Deref.deref(car));
         }
@@ -76,7 +76,7 @@ public class Manufacturer extends BaseEntity {
         } else {
             for (Car car : cars) {
                 if (this.cars == null) {
-                    this.cars = new HashSet<Ref<Car>>();
+                    this.cars = new HashSet<>();
                 }
                 this.cars.add(Ref.create(car));
             }
@@ -88,7 +88,7 @@ public class Manufacturer extends BaseEntity {
             return null;
         }
 
-        List<ManufacturerDto> manufacturerDto = new ArrayList<ManufacturerDto>();
+        List<ManufacturerDto> manufacturerDto = new ArrayList<>();
         for (Manufacturer manufacturer : manufacturers) {
             manufacturerDto.add(createDto(manufacturer));
         }

@@ -24,9 +24,6 @@ import com.google.inject.Provides;
 import com.google.inject.servlet.ServletModule;
 import com.gwtplatform.crawlerservice.server.CrawlServiceServlet;
 
-/**
- * @author Philippe Beaudoin
- */
 public class CrawlServiceModule extends ServletModule {
 
     @Override

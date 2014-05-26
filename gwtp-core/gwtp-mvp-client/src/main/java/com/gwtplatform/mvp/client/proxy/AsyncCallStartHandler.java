@@ -20,8 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * Handler for {@link AsyncCallStartEvent}.
- *
- * @author Philippe Beaudoin
  */
 public interface AsyncCallStartHandler extends EventHandler {
     void onAsyncCallStart(final AsyncCallStartEvent asyncCallStartEvent);

@@ -121,10 +121,6 @@ import java.lang.annotation.Target;
  *  ...
  * </code>
  * </pre>
- *
- * @author Brendan Doherty
- * @author Florian Sauter
- * @author Stephen Haberman (concept)
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.SOURCE)

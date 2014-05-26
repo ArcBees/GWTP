@@ -39,7 +39,7 @@ public class CarAddedEvent extends GwtEvent<CarAddedHandler> {
         source.fireEvent(new CarAddedEvent(carDto, isNew));
     }
 
-    private static final Type<CarAddedHandler> TYPE = new Type<CarAddedHandler>();
+    private static final Type<CarAddedHandler> TYPE = new Type<>();
 
     private final CarDto carDto;
     private final Boolean isNew;

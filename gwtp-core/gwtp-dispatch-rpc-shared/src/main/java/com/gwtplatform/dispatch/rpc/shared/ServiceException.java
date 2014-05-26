@@ -16,10 +16,12 @@
 
 package com.gwtplatform.dispatch.rpc.shared;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * This is thrown by services when there is a low-level problem while processing an action execution.
  */
-public class ServiceException extends Exception {
+public class ServiceException extends Exception implements IsSerializable {
 
     private static final long serialVersionUID = 3975903306855473017L;
 

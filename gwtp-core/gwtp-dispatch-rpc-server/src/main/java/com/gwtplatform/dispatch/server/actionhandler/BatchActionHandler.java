@@ -31,8 +31,6 @@ import com.gwtplatform.dispatch.shared.Result;
  * actions that need to all be executed successfully in sequence for the whole
  * action to succeed.
  *
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.actionhandler.BatchActionHandler}.
  */
 @Deprecated

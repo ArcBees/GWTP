@@ -27,8 +27,6 @@ import com.google.gwt.event.shared.HasHandlers;
  * This event is typically fired by the {@link PlaceManager} whenever a navigation operation
  * starts or stops. It is handled by the default {@link com.gwtplatform.mvp.client.RootPresenter} implementation.
  * Override {@link com.gwtplatform.mvp.client.RootPresenter#lockInteraction(boolean)} to customize the behaviour.
- *
- * @author Philippe Beaudoin
  */
 public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
 

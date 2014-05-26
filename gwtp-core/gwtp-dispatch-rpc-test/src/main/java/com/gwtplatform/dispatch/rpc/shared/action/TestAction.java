@@ -18,9 +18,6 @@ package com.gwtplatform.dispatch.rpc.shared.action;
 
 import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 
-/**
- * @author Peter Simun
- */
 public class TestAction extends UnsecuredActionImpl<TestResult> {
 
     private String testMessage;

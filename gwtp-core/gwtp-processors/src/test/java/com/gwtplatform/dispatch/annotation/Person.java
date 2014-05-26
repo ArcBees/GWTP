@@ -20,8 +20,6 @@ import java.util.Set;
 
 /**
  * For testing purposes only.
- *
- * @author Florian Sauter
  */
 @GenProxy
 public class Person {

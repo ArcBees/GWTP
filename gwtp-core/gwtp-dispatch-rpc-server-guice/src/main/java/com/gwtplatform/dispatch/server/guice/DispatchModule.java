@@ -38,9 +38,6 @@ import com.gwtplatform.dispatch.server.guice.request.DefaultRequestProvider;
  * the constructor for this module and ensure it is installed <b>before</b> any
  * {@link HandlerModule} instances.
  *
- * @author Christian Goudreau
- * @author David Peterson
- *
  * @deprecated Please use {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchModule}.
  */
 @Deprecated
@@ -49,11 +46,6 @@ public class DispatchModule extends AbstractModule {
     private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
     private Class<? extends RequestProvider> requestProviderClass;
 
-    /**
-     * A DispatchModule builder.
-     *
-     * @author Brendan Doherty
-     */
     public static class Builder {
         private Class<? extends Dispatch> dispatchClass = DispatchImpl.class;
         private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass =

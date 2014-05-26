@@ -24,8 +24,6 @@ import com.gwtplatform.mvp.client.View;
 
 /**
  * This is the test presenter.
- *
- * @author Philippe Beaudoin
  */
 public class SubPresenterWidgetTestUtil extends PresenterWidget<SubPresenterWidgetTestUtil.MyView> {
 

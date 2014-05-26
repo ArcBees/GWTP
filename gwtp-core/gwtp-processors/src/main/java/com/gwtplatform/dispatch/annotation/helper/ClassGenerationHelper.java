@@ -28,10 +28,6 @@ import javax.lang.model.type.TypeMirror;
 /**
  * {@link ClassGenerationHelper} is an internal class that provides common routines
  * only used by the annotation processors.
- *
- * @author Brendan Doherty
- * @author Florian Sauter
- * @author Stephen Haberman (concept)
  */
 public class ClassGenerationHelper extends GenerationHelper {
 

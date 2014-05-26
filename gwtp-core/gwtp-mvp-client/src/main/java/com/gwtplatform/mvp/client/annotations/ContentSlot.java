@@ -26,8 +26,6 @@ import java.lang.annotation.Target;
  * this event, a child presenter is inserted in the presenter's view. You should
  * make sure the view handles event of this type in its
  * {@link com.gwtplatform.mvp.client.View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method.
- *
- * @author Philippe Beaudoin
  */
 @Target(ElementType.FIELD)
 public @interface ContentSlot {

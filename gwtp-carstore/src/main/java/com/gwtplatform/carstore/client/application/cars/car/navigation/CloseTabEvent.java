@@ -29,7 +29,7 @@ public class CloseTabEvent extends GwtEvent<CloseTabEvent.CloseTabHandler> {
         com.google.web.bindery.event.shared.HandlerRegistration addCloseTabHandler(CloseTabHandler handler);
     }
 
-    private static Type<CloseTabHandler> TYPE = new Type<CloseTabHandler>();
+    private static Type<CloseTabHandler> TYPE = new Type<>();
 
     public static void fire(HasHandlers source) {
         if (TYPE != null) {

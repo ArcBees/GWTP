@@ -29,10 +29,6 @@ import javax.lang.model.type.TypeMirror;
 /**
  * {@link GenerationHelper} is an internal class that provides common routines
  * only used by the annotation processors.
- *
- * @author Brendan Doherty
- * @author Florian Sauter
- * @author Stephen Haberman (concept)
  */
 public class GenerationHelper implements Closeable {
 

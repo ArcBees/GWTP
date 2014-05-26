@@ -27,8 +27,6 @@ import static org.junit.Assert.assertFalse;
 
 /**
  * Unit tests for {@link HandlerContainerImpl}.
- *
- * @author Philippe Beaudoin
  */
 @RunWith(JukitoRunner.class)
 public class HandlerContainerImpl2Test {

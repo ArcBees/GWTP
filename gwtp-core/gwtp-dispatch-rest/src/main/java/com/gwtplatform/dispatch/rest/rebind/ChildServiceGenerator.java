@@ -37,7 +37,6 @@ import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.type.ChildServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
-import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 
 public class ChildServiceGenerator extends AbstractServiceGenerator {
@@ -50,17 +49,17 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
     private ServiceBinding serviceBinding;
 
     @Inject
-    ChildServiceGenerator(TypeOracle typeOracle,
-                          Logger logger,
-                          Provider<VelocityContext> velocityContextProvider,
-                          VelocityEngine velocityEngine,
-                          GeneratorUtil generatorUtil,
-                          GeneratorFactory generatorFactory,
-                          ServiceDefinitions serviceDefinitions,
-                          @Assisted JMethod serviceMethod,
-                          @Assisted ServiceBinding parent) {
-        super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil, serviceDefinitions,
-                generatorFactory, serviceMethod.getReturnType().isInterface());
+    ChildServiceGenerator(
+            TypeOracle typeOracle,
+            Logger logger,
+            Provider<VelocityContext> velocityContextProvider,
+            VelocityEngine velocityEngine,
+            GeneratorUtil generatorUtil,
+            GeneratorFactory generatorFactory,
+            @Assisted JMethod serviceMethod,
+            @Assisted ServiceBinding parent) {
+        super(typeOracle, logger, velocityContextProvider, velocityEngine, generatorUtil, generatorFactory,
+                serviceMethod.getReturnType().isInterface());
 
         this.serviceMethod = serviceMethod;
         this.parent = parent;
@@ -122,7 +121,7 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
 
     private boolean isSecured() {
         return parent.isSecured()
-               && !serviceMethod.isAnnotationPresent(NoXsrfHeader.class)
-               && !service.isAnnotationPresent(NoXsrfHeader.class);
+                && !serviceMethod.isAnnotationPresent(NoXsrfHeader.class)
+                && !service.isAnnotationPresent(NoXsrfHeader.class);
     }
 }
