@@ -55,11 +55,6 @@ Get high quality support through ArcBees.
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-basic-spring">Source</a></td>
   </tr>
   <tr>
-    <th>Hierarchical Places</th>
-    <td><a href="http://gwtp-sample-hplace.appspot.com">AppEngine Demo</a></td>
-    <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-hplace">Source</a></td>
-  </tr>
-  <tr>
     <th>Mobile</th>
     <td><a href="http://gwtp-sample-mobile.appspot.com">AppEngine Demo</a></td>
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-mobile">Source</a></td>
