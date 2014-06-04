@@ -104,4 +104,38 @@ public class PlaceRequestTest {
         assertNotNull(result);
         assertEquals("PlaceRequest(nameToken=nameToken, params={name1=value1, name2=value2})", result);
     }
+
+    @Test
+    public void builderFromPlaceRequestShouldNotShareParams() {
+        // given
+        PlaceRequest request = new PlaceRequest.Builder()
+                .nameToken("nameToken")
+                .with("name1", "value1")
+                .with("name2", "value2")
+                .build();
+        PlaceRequest.Builder copyBuilder = new PlaceRequest.Builder(request);
+
+        // when
+        copyBuilder.with("name3", "value3").build();
+
+        // then
+        assertNull(request.getParameter("name3", null));
+    }
+
+    @Test
+    public void builderWithoutDoesRemoveParam() {
+        // given
+        PlaceRequest request = new PlaceRequest.Builder()
+                .nameToken("nameToken")
+                .with("name1", "value1")
+                .with("name2", "value2")
+                .build();
+        PlaceRequest.Builder copyBuilder = new PlaceRequest.Builder(request);
+
+        // when
+        PlaceRequest copy = copyBuilder.without("name2").build();
+
+        // then
+        assertNull(copy.getParameter("name2", null));
+    }
 }

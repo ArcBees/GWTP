@@ -256,7 +256,7 @@ public class PlaceRequest {
          */
         public Builder(PlaceRequest request) {
             nameToken = request.nameToken;
-            params = request.params;
+            with(request.params);
         }
 
         public Builder nameToken(String nameToken) {
@@ -275,9 +275,17 @@ public class PlaceRequest {
         }
 
         public Builder with(Map<String, String> params) {
-            lazyInitializeParamMap();
             if (params != null) {
+                lazyInitializeParamMap();
                 this.params.putAll(params);
+            }
+
+            return this;
+        }
+
+        public Builder without(String name) {
+            if (params != null) {
+                params.remove(name);
             }
 
             return this;
