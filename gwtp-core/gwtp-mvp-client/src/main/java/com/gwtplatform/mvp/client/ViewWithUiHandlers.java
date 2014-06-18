@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  * @param <C> Your {@link UiHandlers} interface type.
  */
 public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
-implements HasUiHandlers<C> {
+ implements HasUiHandlers<C> {
 
     private static final Logger logger = Logger.getLogger(ViewWithUiHandlers.class.getName());
     private C uiHandlers;
