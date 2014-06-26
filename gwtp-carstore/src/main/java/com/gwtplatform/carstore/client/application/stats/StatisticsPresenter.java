@@ -27,12 +27,14 @@ import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyP
 import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyView;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.StatisticsService;
+import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements StatisticsUiHandlers {
@@ -42,6 +44,7 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
 
     @NameToken(NameTokens.STATS)
     @ProxyStandard
+    @UseGatekeeper(LoggedInGatekeeper.class)
     interface MyProxy extends ProxyPlace<StatisticsPresenter> {
     }
 
