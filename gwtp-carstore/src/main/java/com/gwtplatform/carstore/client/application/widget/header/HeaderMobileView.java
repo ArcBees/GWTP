@@ -121,6 +121,11 @@ public class HeaderMobileView extends ViewWithUiHandlers<HeaderUiHandlers>
     }
 
     @Override
+    public void setMenuItem(MenuItem menuItem) {
+        menuBar.setValue(menuItem);
+    }
+
+    @Override
     public void enableUserOptions(CurrentUser currentUser) {
         menu.setVisible(true);
         UserDto userDto = currentUser.getUser();

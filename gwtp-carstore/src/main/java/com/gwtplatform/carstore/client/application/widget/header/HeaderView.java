@@ -102,6 +102,11 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     public void showActionButton(ChangeActionBarEvent.ActionType actionType) {
     }
 
+    @Override
+    public void setMenuItem(MenuItem menuItem) {
+        menuBar.setValue(menuItem);
+    }
+
     @UiHandler("logout")
     @SuppressWarnings("unused")
     void onLogoutClicked(ClickEvent event) {

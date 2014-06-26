@@ -40,5 +40,13 @@ public enum MenuItem {
     public String toString() {
         return label;
     }
+
+    public static MenuItem fromNameToken(String nameToken) {
+        for (MenuItem item : MenuItem.values()) {
+            if (item.placeToken.equals(nameToken))
+                return item;
+        }
+        return MANUFACTURER;
+    }
 }
 

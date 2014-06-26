@@ -59,6 +59,8 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
         void hideActionButtons();
 
         void showActionButton(ActionType actionType);
+
+        void setMenuItem(MenuItem menuItem);
     }
 
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
@@ -110,6 +112,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
     @Override
     public void onLogin(UserLoginEvent event) {
         getView().enableUserOptions(currentUser);
+        getView().setMenuItem(MenuItem.fromNameToken(getCurrentNameToken()));
     }
 
     @Override
@@ -128,7 +131,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     @Override
     public void onAction(ActionType actionType) {
-        String sourceToken = placeManager.getCurrentPlaceRequest().getNameToken();
+        String sourceToken = getCurrentNameToken();
         ActionBarEvent.fire(this, actionType, sourceToken);
     }
 
@@ -162,5 +165,9 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
         Cookies.removeCookie(LoginPresenter.LOGIN_COOKIE_NAME);
 
         logger.info("HeaderPresenter.resetLoggedInCookie(): The cookie was removed from client.");
+    }
+
+    private String getCurrentNameToken() {
+        return placeManager.getCurrentPlaceRequest().getNameToken();
     }
 }
