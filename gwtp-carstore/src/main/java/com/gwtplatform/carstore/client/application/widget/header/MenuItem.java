@@ -42,11 +42,15 @@ public enum MenuItem {
     }
 
     public static MenuItem fromNameToken(String nameToken) {
-        for (MenuItem item : MenuItem.values()) {
-            if (item.nameToken.equals(nameToken))
-                return item;
+        MenuItem item = MANUFACTURER;
+        for (MenuItem currentItem : MenuItem.values()) {
+            if (currentItem.nameToken.equals(nameToken)) {
+                item = currentItem;
+                break;
+            }
         }
-        return MANUFACTURER;
+
+        return item;
     }
 }
 
