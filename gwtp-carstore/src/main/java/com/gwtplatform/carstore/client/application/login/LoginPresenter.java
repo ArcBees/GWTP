@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
@@ -152,14 +153,27 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         if (currentUserDto.isLoggedIn()) {
             currentUser.fromCurrentUserDto(currentUserDto);
 
-            PlaceRequest homePlaceRequest = new Builder().nameToken(NameTokens.getOnLoginDefaultPage()).build();
-            placeManager.revealPlace(homePlaceRequest);
+            redirectToLoggedOnPage();
 
             UserLoginEvent.fire(this);
             DisplayMessageEvent.fire(this, new Message(messages.onSuccessfulLogin(), MessageStyle.SUCCESS));
         } else {
             DisplayMessageEvent.fire(this, new Message(messages.invalidEmailOrPassword(), MessageStyle.ERROR));
         }
+    }
+
+    private void redirectToLoggedOnPage() {
+        if (isOnLoginPage()) {
+            PlaceRequest homePlaceRequest = new Builder().nameToken(NameTokens.getOnLoginDefaultPage()).build();
+            placeManager.revealPlace(homePlaceRequest);
+        } else {
+            placeManager.revealCurrentPlace();
+        }
+    }
+
+    private Boolean isOnLoginPage() {
+        String href = Window.Location.getHref();
+        return !href.contains("#") || href.endsWith(NameTokens.login);
     }
 
     private void setLoggedInCookie(String value) {
