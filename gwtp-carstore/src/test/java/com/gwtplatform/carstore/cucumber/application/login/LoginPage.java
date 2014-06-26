@@ -48,4 +48,11 @@ public class LoginPage extends BasePage {
     public Boolean isOnLoginPage() {
         return webDriver.getCurrentUrl().contains("#" + NameTokens.login);
     }
+
+    public void waitForRedirection() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+    }
 }

@@ -51,6 +51,12 @@ public class LoginStepdefs {
         assertTrue(applicationPage.waitUntilDomIsLoaded("manufacturer"));
     }
 
+    @Then("^I'm connected on the (\\S+) page$")
+    public void ImConnectedOnThePage(String nameToken) {
+        loginPage.waitForRedirection();
+        assertTrue(applicationPage.waitUntilDomIsLoaded(nameToken));
+    }
+
     @Then("^I'm disconnected$")
     public void iAmDisconnected() {
         loginPage.isOnLoginPage();

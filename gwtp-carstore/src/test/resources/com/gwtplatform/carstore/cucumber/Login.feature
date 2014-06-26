@@ -5,6 +5,11 @@ Feature: Login
     When I enter valid credential
     Then I'm connected
 
+  Scenario: Successful connection
+    Given I navigate to the rating page
+    When I enter valid credential
+    Then I'm connected on the rating page
+
   Scenario: Refused connection
     Given I navigate to the login page
     When I enter invalid credential
