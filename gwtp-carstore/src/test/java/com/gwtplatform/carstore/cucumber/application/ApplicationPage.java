@@ -53,7 +53,7 @@ public class ApplicationPage extends BasePage {
         MenuItem menuItem = getMenuItem(page);
         if (menuItem != null) {
             headerWidgetPage.navigateTo(page);
-            waitUntilDomIsLoaded(menuItem.getPlaceToken());
+            waitUntilDomIsLoaded(menuItem.getNameToken());
         } else {
             getUrl(TestParameters.BASE_URL + "#" + page);
         }

@@ -115,6 +115,6 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
 
     @UiHandler("menuBar")
     void onMenuItemChanged(ValueChangeEvent<MenuItem> event) {
-        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(menuBar.getValue().getPlaceToken()).build());
+        placeManager.revealPlace(new PlaceRequest.Builder().nameToken(menuBar.getValue().getNameToken()).build());
     }
 }

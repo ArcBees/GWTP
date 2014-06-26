@@ -26,15 +26,15 @@ public enum MenuItem {
     STATS("Statistics", NameTokens.STATS);
 
     private String label;
-    private String placeToken;
+    private String nameToken;
 
-    private MenuItem(String label, String placeToken) {
+    private MenuItem(String label, String nameToken) {
         this.label = label;
-        this.placeToken = placeToken;
+        this.nameToken = nameToken;
     }
 
-    public String getPlaceToken() {
-        return placeToken;
+    public String getNameToken() {
+        return nameToken;
     }
 
     public String toString() {
@@ -43,7 +43,7 @@ public enum MenuItem {
 
     public static MenuItem fromNameToken(String nameToken) {
         for (MenuItem item : MenuItem.values()) {
-            if (item.placeToken.equals(nameToken))
+            if (item.nameToken.equals(nameToken))
                 return item;
         }
         return MANUFACTURER;
