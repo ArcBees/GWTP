@@ -33,6 +33,10 @@ public class HeaderWidgetPage extends BasePage {
         link.click();
     }
 
+    public void waitUntilLogoutIsClickable() {
+        getLogoutButton();
+    }
+
     private WebElement getMenuBar() {
         return waitUntilElementIsVisible(ByDebugId.id("menubar"));
     }

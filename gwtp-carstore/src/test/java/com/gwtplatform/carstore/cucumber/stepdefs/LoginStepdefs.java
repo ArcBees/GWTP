@@ -53,7 +53,7 @@ public class LoginStepdefs {
 
     @Then("^I'm connected on the (\\S+) page$")
     public void ImConnectedOnThePage(String nameToken) {
-        loginPage.waitForRedirection();
+        loginPage.waitUntilLoggedIn();
         assertTrue(applicationPage.waitUntilDomIsLoaded(nameToken));
     }
 
