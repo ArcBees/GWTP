@@ -1,4 +1,5 @@
 ![GWTP] (http://i.imgur.com/4ENEHCM.png "GWTP goo-teepee")
+
 *goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
 
