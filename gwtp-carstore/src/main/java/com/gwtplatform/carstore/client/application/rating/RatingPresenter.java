@@ -32,7 +32,6 @@ import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.RatingService;
-import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
@@ -42,7 +41,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
-import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
@@ -61,7 +59,6 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @ProxyCodeSplit
     @NameToken(NameTokens.rating)
-    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<RatingPresenter> {
     }
 

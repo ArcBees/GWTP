@@ -46,6 +46,7 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -62,6 +63,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     @ProxyStandard
     @NameToken(NameTokens.login)
+    @NoGatekeeper
     public interface MyProxy extends ProxyPlace<LoginPresenter> {
     }
 
