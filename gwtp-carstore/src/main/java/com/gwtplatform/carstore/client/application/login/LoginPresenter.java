@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
@@ -172,8 +172,9 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     }
 
     private Boolean isOnLoginPage() {
-        String href = Window.Location.getHref();
-        return !href.contains("#") || href.endsWith(NameTokens.login);
+        String token = History.getToken();
+
+        return token.equals("") || token.equals(NameTokens.login);
     }
 
     private void setLoggedInCookie(String value) {
