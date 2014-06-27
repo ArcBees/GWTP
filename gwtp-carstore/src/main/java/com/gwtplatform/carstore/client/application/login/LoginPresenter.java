@@ -68,6 +68,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     public static final String LOGIN_COOKIE_NAME = "LoggedInCookie";
 
+    private static final String REDIRECT_PARAMETER_NAME = "redirectTo";
+
     private static final Logger logger = Logger.getLogger(LoginPresenter.class.getName());
     private final PlaceManager placeManager;
     private final RestDispatch dispatchAsync;
@@ -112,6 +114,11 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
         if (!Strings.isNullOrEmpty(getLoggedInCookie())) {
             tryLoggingInWithCookieFirst();
+        }
+
+        if (!currentUser.isLoggedIn() && !isOnLoginPage()) {
+            PlaceRequest p = new Builder().nameToken(NameTokens.login).with(REDIRECT_PARAMETER_NAME, getHistoryToken()).build();
+            placeManager.revealPlace(p);
         }
     }
 
@@ -163,18 +170,20 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     }
 
     private void redirectToLoggedOnPage() {
-        if (isOnLoginPage()) {
-            PlaceRequest homePlaceRequest = new Builder().nameToken(NameTokens.getOnLoginDefaultPage()).build();
-            placeManager.revealPlace(homePlaceRequest);
-        } else {
-            placeManager.revealCurrentPlace();
-        }
+        String token = placeManager.getCurrentPlaceRequest().getParameter(REDIRECT_PARAMETER_NAME, NameTokens.getOnLoginDefaultPage());
+        PlaceRequest placeRequest = new Builder().nameToken(token).build();
+
+        placeManager.revealPlace(placeRequest);
     }
 
     private Boolean isOnLoginPage() {
-        String token = History.getToken();
+        String token = getHistoryToken();
 
         return token.equals("") || token.equals(NameTokens.login);
+    }
+
+    private String getHistoryToken() {
+        return History.getToken();
     }
 
     private void setLoggedInCookie(String value) {
