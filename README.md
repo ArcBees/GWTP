@@ -92,5 +92,3 @@ Get high quality support through ArcBees.
 [![Arcbees.com](http://arcbees-ads.appspot.com/ad.png)](http://arcbees.com)
 
 [![IntelliJ](https://lh6.googleusercontent.com/--QIIJfKrjSk/UJJ6X-UohII/AAAAAAAAAVM/cOW7EjnH778/s800/banner_IDEA.png)](http://www.jetbrains.com/idea/index.html)
-
-[![githalytics.com alpha](https://cruel-carlota.gopagoda.com/15d7ccab612aa40bb3af6b0cbcf4fc51 "githalytics.com")](http://githalytics.com/ArcBees/GWTP)
