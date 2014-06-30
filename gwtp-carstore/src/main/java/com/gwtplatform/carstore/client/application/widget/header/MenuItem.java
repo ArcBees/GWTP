@@ -16,6 +16,10 @@
 
 package com.gwtplatform.carstore.client.application.widget.header;
 
+import java.util.Arrays;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.gwtplatform.carstore.client.place.NameTokens;
 
 public enum MenuItem {
@@ -41,16 +45,18 @@ public enum MenuItem {
         return label;
     }
 
-    public static MenuItem fromNameToken(String nameToken) {
-        MenuItem item = MANUFACTURER;
-        for (MenuItem currentItem : MenuItem.values()) {
-            if (currentItem.nameToken.equals(nameToken)) {
-                item = currentItem;
-                break;
-            }
-        }
+    public static MenuItem fromNameToken(final String nameToken) {
+        return Iterables.tryFind(MenuItem.iterableValues(), new Predicate<MenuItem>() {
+                    @Override
+                    public boolean apply(MenuItem menuItem) {
+                        return nameToken.equals(menuItem.nameToken);
+                    }
+                })
+                .or(MenuItem.MANUFACTURER);
+    }
 
-        return item;
+    private static Iterable<MenuItem> iterableValues() {
+        return Arrays.asList(MenuItem.values());
     }
 }
 

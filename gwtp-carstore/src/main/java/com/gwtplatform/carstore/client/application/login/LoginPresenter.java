@@ -35,6 +35,7 @@ import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.place.ParameterTokens;
 import com.gwtplatform.carstore.client.resources.LoginMessages;
 import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
@@ -67,8 +68,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     }
 
     public static final String LOGIN_COOKIE_NAME = "LoggedInCookie";
-
-    private static final String REDIRECT_PARAMETER_NAME = "redirectTo";
 
     private static final Logger logger = Logger.getLogger(LoginPresenter.class.getName());
     private final PlaceManager placeManager;
@@ -117,7 +116,10 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         }
 
         if (!currentUser.isLoggedIn() && !isOnLoginPage()) {
-            PlaceRequest p = new Builder().nameToken(NameTokens.login).with(REDIRECT_PARAMETER_NAME, getHistoryToken()).build();
+            PlaceRequest p = new Builder()
+                    .nameToken(NameTokens.login)
+                    .with(ParameterTokens.REDIRECT, getHistoryToken())
+                    .build();
             placeManager.revealPlace(p);
         }
     }
@@ -170,7 +172,9 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     }
 
     private void redirectToLoggedOnPage() {
-        String token = placeManager.getCurrentPlaceRequest().getParameter(REDIRECT_PARAMETER_NAME, NameTokens.getOnLoginDefaultPage());
+        String token = placeManager
+                .getCurrentPlaceRequest()
+                .getParameter(ParameterTokens.REDIRECT, NameTokens.getOnLoginDefaultPage());
         PlaceRequest placeRequest = new Builder().nameToken(token).build();
 
         placeManager.revealPlace(placeRequest);
