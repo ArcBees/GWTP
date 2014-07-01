@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.logging.Logger;
+
 /**
  * Base class for a {@link View} that implements the {@link HasUiHandlers}
  * interface. You should always call {@link #setUiHandlers(UiHandlers)} from your
@@ -28,6 +30,8 @@ package com.gwtplatform.mvp.client;
  */
 public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
         implements HasUiHandlers<C> {
+
+    private static final Logger logger = Logger.getLogger(ViewWithUiHandlers.class.getName());
     private C uiHandlers;
 
     /**
@@ -39,11 +43,14 @@ public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
      * @return The {@link UiHandlers}, or {@code null} if they are not yet set.
      */
     protected C getUiHandlers() {
+        if (uiHandlers == null) {
+            logger.severe("uiHandlers are not set.  Did you call getUiHandlers() from your view's constructor?");
+        }
         return uiHandlers;
     }
 
     @Override
-    public void setUiHandlers(C uiHandlers) {
+    public void setUiHandlers(final C uiHandlers) {
         this.uiHandlers = uiHandlers;
     }
 }
