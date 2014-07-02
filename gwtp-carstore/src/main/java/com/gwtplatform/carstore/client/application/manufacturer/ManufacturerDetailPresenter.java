@@ -37,7 +37,6 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
-import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
@@ -47,7 +46,6 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
@@ -65,7 +63,6 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
     @ProxyCodeSplit
     @NameToken(NameTokens.DETAIL_MANUFACTURER)
-    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<ManufacturerDetailPresenter> {
     }
 

@@ -36,7 +36,6 @@ import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.CarsService;
-import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -47,7 +46,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
-import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
@@ -68,7 +66,6 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
 
     @ProxyCodeSplit
     @NameToken(NameTokens.CARS)
-    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<CarsPresenter> {
     }
 
