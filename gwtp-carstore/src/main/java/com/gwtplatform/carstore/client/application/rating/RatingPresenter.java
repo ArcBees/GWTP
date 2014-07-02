@@ -60,7 +60,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.rating)
+    @NameToken(NameTokens.RATING)
     @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<RatingPresenter> {
     }

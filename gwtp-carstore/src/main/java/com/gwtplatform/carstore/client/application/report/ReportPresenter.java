@@ -46,7 +46,7 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.report)
+    @NameToken(NameTokens.REPORT)
     @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<ReportPresenter> {
     }

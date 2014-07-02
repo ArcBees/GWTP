@@ -65,7 +65,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.detailRating)
+    @NameToken(NameTokens.DETAIL_RATING)
     @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<RatingDetailPresenter> {
     }

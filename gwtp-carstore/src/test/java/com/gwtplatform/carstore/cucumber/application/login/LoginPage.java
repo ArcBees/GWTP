@@ -55,7 +55,7 @@ public class LoginPage extends BasePage {
     }
 
     public Boolean isOnLoginPage() {
-        return webDriver.getCurrentUrl().contains("#" + NameTokens.login);
+        return webDriver.getCurrentUrl().contains("#" + NameTokens.LOGIN);
     }
 
     public void waitUntilLoggedIn() {

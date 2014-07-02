@@ -63,7 +63,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     }
 
     @ProxyStandard
-    @NameToken(NameTokens.login)
+    @NameToken(NameTokens.LOGIN)
     public interface MyProxy extends ProxyPlace<LoginPresenter> {
     }
 
@@ -117,7 +117,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
         if (!currentUser.isLoggedIn() && !isOnLoginPage()) {
             PlaceRequest p = new Builder()
-                    .nameToken(NameTokens.login)
+                    .nameToken(NameTokens.LOGIN)
                     .with(ParameterTokens.REDIRECT, getHistoryToken())
                     .build();
             placeManager.revealPlace(p);
@@ -183,7 +183,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     private Boolean isOnLoginPage() {
         String token = getHistoryToken();
 
-        return token.equals("") || token.equals(NameTokens.login);
+        return token.equals("") || token.equals(NameTokens.LOGIN);
     }
 
     private String getHistoryToken() {

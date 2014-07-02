@@ -17,41 +17,41 @@
 package com.gwtplatform.carstore.client.place;
 
 public class NameTokens {
-    public static final String login = "login";
-    public static final String manufacturer = "manufacturer";
-    public static final String detailManufacturer = "detailManufacturer";
-    public static final String rating = "rating";
-    public static final String detailRating = "detailRating";
-    public static final String cars = "cars";
-    public static final String report = "report";
-    public static final String newCar = "newCar";
+    public static final String LOGIN = "login";
+    public static final String MANUFACTURER = "manufacturer";
+    public static final String DETAIL_MANUFACTURER = "detailManufacturer";
+    public static final String RATING = "rating";
+    public static final String DETAIL_RATING = "detailRating";
+    public static final String CARS = "cars";
+    public static final String REPORT = "report";
+    public static final String NEW_CAR = "newCar";
     public static final String STATS = "stats";
 
     public static String getOnLoginDefaultPage() {
-        return manufacturer;
+        return MANUFACTURER;
     }
 
     public static String getManufacturer() {
-        return manufacturer;
+        return MANUFACTURER;
     }
 
     public static String getDetailManufacturer() {
-        return detailManufacturer;
+        return DETAIL_MANUFACTURER;
     }
 
     public static String getRating() {
-        return rating;
+        return RATING;
     }
 
     public static String getDetailRating() {
-        return detailRating;
+        return DETAIL_RATING;
     }
 
     public static String getCars() {
-        return cars;
+        return CARS;
     }
 
     public static String getReport() {
-        return report;
+        return REPORT;
     }
 }

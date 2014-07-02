@@ -64,7 +64,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.detailManufacturer)
+    @NameToken(NameTokens.DETAIL_MANUFACTURER)
     @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<ManufacturerDetailPresenter> {
     }

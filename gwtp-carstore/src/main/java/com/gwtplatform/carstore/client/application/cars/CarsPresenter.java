@@ -67,7 +67,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.cars)
+    @NameToken(NameTokens.CARS)
     @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<CarsPresenter> {
     }
@@ -98,7 +98,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     @Override
     public void onActionEvent(ActionBarEvent event) {
         if (event.getActionType() == ActionType.ADD && event.isTheSameToken(NameTokens.getCars())) {
-            placeManager.revealPlace(new Builder().nameToken(NameTokens.newCar).build());
+            placeManager.revealPlace(new Builder().nameToken(NameTokens.NEW_CAR).build());
         }
     }
 
@@ -112,7 +112,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onCreate() {
-        placeManager.revealPlace(new Builder().nameToken(NameTokens.newCar).build());
+        placeManager.revealPlace(new Builder().nameToken(NameTokens.NEW_CAR).build());
     }
 
     @Override
@@ -150,7 +150,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     @Override
     protected void onBind() {
         addRegisteredHandler(ActionBarEvent.getType(), this);
-        carProxyFactory.create(new CarDto(), NameTokens.newCar);
+        carProxyFactory.create(new CarDto(), NameTokens.NEW_CAR);
     }
 
     @Override

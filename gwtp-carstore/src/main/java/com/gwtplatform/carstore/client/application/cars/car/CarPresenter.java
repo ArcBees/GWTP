@@ -108,7 +108,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     public void onActionEvent(ActionBarEvent event) {
-        if (event.isTheSameToken(NameTokens.newCar)) {
+        if (event.isTheSameToken(NameTokens.NEW_CAR)) {
             if (event.getActionType() == ActionType.DONE) {
                 getView().getCar();
             }
@@ -170,7 +170,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
             }
         });
 
-        Boolean createNew = placeManager.getCurrentPlaceRequest().matchesNameToken(NameTokens.newCar);
+        Boolean createNew = placeManager.getCurrentPlaceRequest().matchesNameToken(NameTokens.NEW_CAR);
         List<ActionType> actions;
         if (createNew) {
             actions = Arrays.asList(ActionType.DONE);
