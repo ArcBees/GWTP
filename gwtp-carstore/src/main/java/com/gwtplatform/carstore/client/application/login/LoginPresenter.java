@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
@@ -109,14 +108,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         if (!Strings.isNullOrEmpty(getLoggedInCookie())) {
             tryLoggingInWithCookieFirst();
         }
-
-        if (!currentUser.isLoggedIn() && !isOnLoginPage()) {
-            PlaceRequest p = new Builder()
-                    .nameToken(NameTokens.LOGIN)
-                    .with(ParameterTokens.REDIRECT, getHistoryToken())
-                    .build();
-            placeManager.revealPlace(p);
-        }
     }
 
     private void callServerLoginAction(LogInRequest loginRequest) {
@@ -173,16 +164,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         PlaceRequest placeRequest = new Builder().nameToken(token).build();
 
         placeManager.revealPlace(placeRequest);
-    }
-
-    private Boolean isOnLoginPage() {
-        String token = getHistoryToken();
-
-        return token.equals("") || token.equals(NameTokens.LOGIN);
-    }
-
-    private String getHistoryToken() {
-        return History.getToken();
     }
 
     private void setLoggedInCookie(String value) {
