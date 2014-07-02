@@ -48,7 +48,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
@@ -82,7 +81,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
                           RatingService ratingService,
                           EditRatingMessages messages,
                           PlaceManager placeManager) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.dispatcher = dispatcher;
         this.carsService = carsService;
@@ -134,11 +133,6 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
                 onGetCarsSuccess(cars);
             }
         });
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     private void onGetCarsSuccess(List<CarDto> carDtos) {

@@ -25,7 +25,7 @@ public class ManufacturerDto extends BaseEntity {
 
     public ManufacturerDto() {
         this.name = "";
-        this.cars = new ArrayList<CarDto>();
+        this.cars = new ArrayList<>();
     }
 
     public ManufacturerDto(String name) {

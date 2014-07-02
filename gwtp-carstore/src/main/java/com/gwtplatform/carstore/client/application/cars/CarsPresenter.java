@@ -48,7 +48,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 public class CarsPresenter extends Presenter<MyView, MyProxy>
@@ -82,7 +81,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
                   CarsService carsService,
                   PlaceManager placeManager,
                   CarProxyFactory carProxyFactory) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.dispatcher = dispatcher;
         this.carsService = carsService;
@@ -162,11 +161,6 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
                 getView().setCarsCount(result);
             }
         });
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     private void fetchDataForDisplay() {

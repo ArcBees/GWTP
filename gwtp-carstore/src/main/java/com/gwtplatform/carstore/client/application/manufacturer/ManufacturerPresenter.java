@@ -45,7 +45,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
@@ -82,7 +81,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
                           ManufacturerService manufacturerService,
                           PlaceManager placeManager,
                           EditManufacturerPresenter editManufacturerPresenter) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
@@ -147,11 +146,6 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     @Override
     protected void onBind() {
         addRegisteredHandler(ActionBarEvent.getType(), this);
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     @ProxyEvent

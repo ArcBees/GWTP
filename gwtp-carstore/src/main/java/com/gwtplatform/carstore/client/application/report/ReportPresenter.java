@@ -36,7 +36,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPresenter.MyProxy> {
     public interface MyView extends View {
@@ -57,7 +56,7 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
                     MyProxy proxy,
                     RestDispatch dispatcher,
                     ManufacturerService manufacturerService) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.dispatcher = dispatcher;
         this.manufacturerService = manufacturerService;
@@ -75,10 +74,5 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
                         getView().displayReport(manufacturerRatings);
                     }
                 });
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 }
