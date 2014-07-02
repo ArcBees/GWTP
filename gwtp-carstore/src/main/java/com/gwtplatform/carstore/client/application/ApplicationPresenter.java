@@ -29,7 +29,6 @@ import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy>
         implements ChangeActionBarEvent.ChangeActionBarHandler, ActionBarVisibilityEvent.ActionBarVisibilityHandler {
@@ -59,7 +58,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
                          MyProxy proxy,
                          HeaderPresenter headerPresenter,
                          MessagesPresenter messagesPresenter) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, RevealType.RootLayout);
 
         this.headerPresenter = headerPresenter;
         this.messagesPresenter = messagesPresenter;
@@ -73,11 +72,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @Override
     public void onChangeActionBar(ChangeActionBarEvent event) {
         getView().adjustLayout(event.getTabsVisible());
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealRootLayoutContentEvent.fire(this, this);
     }
 
     @Override

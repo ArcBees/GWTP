@@ -20,7 +20,6 @@ import javax.inject.Inject;
 
 import org.openqa.selenium.TimeoutException;
 
-import com.gwtplatform.carstore.client.application.widget.header.MenuItem;
 import com.gwtplatform.carstore.cucumber.application.widgets.HeaderWidgetPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
 import com.gwtplatform.carstore.cucumber.util.TestParameters;

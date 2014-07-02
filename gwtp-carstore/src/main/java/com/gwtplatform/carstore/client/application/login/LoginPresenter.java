@@ -28,7 +28,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
@@ -51,7 +50,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
@@ -85,7 +83,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                    SessionService sessionService,
                    CurrentUser currentUser,
                    LoginMessages messages) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, RevealType.RootLayout);
 
         this.placeManager = placeManager;
         this.dispatchAsync = dispatchAsync;
@@ -100,11 +98,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     public void login(String username, String password) {
         LogInRequest loginRequest = new LogInRequest(username, password);
         callServerLoginAction(loginRequest);
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     @Override
