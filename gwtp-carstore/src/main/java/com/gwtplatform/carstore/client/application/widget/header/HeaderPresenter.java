@@ -37,7 +37,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
         implements HeaderUiHandlers, UserLoginEvent.UserLoginHandler, NavigationHandler {
@@ -47,7 +46,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
         void disableUserOptions();
 
-        void setActive(String nameToken);
+        void setMenuItemActive(String nameToken);
     }
 
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
@@ -74,7 +73,6 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
         this.currentUser = currentUser;
         this.messages = messages;
 
-        eventBus.addHandler(NavigationEvent.getType(), this);
         getView().setUiHandlers(this);
     }
 
@@ -101,16 +99,16 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     @Override
     public void onNavigation(NavigationEvent navigationEvent) {
-        getView().setActive(navigationEvent.getRequest().getNameToken());
+        getView().setMenuItemActive(navigationEvent.getRequest().getNameToken());
     }
 
     @Override
     protected void onBind() {
         addRegisteredHandler(UserLoginEvent.getType(), this);
+        addRegisteredHandler(NavigationEvent.getType(), this);
 
-        if (currentUser.isLoggedIn()) {
-            getView().enableUserOptions(currentUser);
-        }
+        getView().enableUserOptions(currentUser);
+        getView().setMenuItemActive(placeManager.getCurrentPlaceRequest().getNameToken());
     }
 
     private void onLogoutSuccess() {
