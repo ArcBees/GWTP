@@ -47,7 +47,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
         void disableUserOptions();
 
-        void onNavigation(PlaceRequest request);
+        void setActive(String nameToken);
     }
 
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
@@ -74,6 +74,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
         this.currentUser = currentUser;
         this.messages = messages;
 
+        eventBus.addHandler(NavigationEvent.getType(), this);
         getView().setUiHandlers(this);
     }
 
@@ -100,7 +101,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     @Override
     public void onNavigation(NavigationEvent navigationEvent) {
-        getView().onNavigation(navigationEvent.getRequest());
+        getView().setActive(navigationEvent.getRequest().getNameToken());
     }
 
     @Override

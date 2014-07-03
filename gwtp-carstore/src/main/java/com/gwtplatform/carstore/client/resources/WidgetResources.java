@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.gin;
+package com.gwtplatform.carstore.client.resources;
 
-import com.google.inject.Inject;
-import com.gwtplatform.carstore.client.resources.AppResources;
-import com.gwtplatform.carstore.client.resources.WidgetResources;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 
-public class ResourceLoader {
-    @Inject
-    public ResourceLoader(AppResources resources, WidgetResources widgetResources) {
-        resources.styles().ensureInjected();
-        widgetResources.header().ensureInjected();
+public interface WidgetResources extends ClientBundle {
+    public interface Header extends CssResource {
+        String menuActive();
     }
+
+    @Source("header.css")
+    public Header header();
 }

@@ -80,7 +80,7 @@
                 <g:Label text="CarStore"/>
             </div>
 
-            <div class="{style.floatLeft} {style.menuBarWrapper}">
+            <div class="{style.floatLeft} {style.menuBarWrapper}" ui:field="menubar">
                 <a href="#{MANUFACTURER}">Manufacturers</a>
                 <a href="#{CARS}">Cars</a>
                 <a href="#{RATING}">Ratings</a>

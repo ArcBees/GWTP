@@ -16,6 +16,7 @@
 
 package com.gwtplatform.carstore.client.application.widget.header;
 
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -25,10 +26,12 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.gwtplatform.carstore.client.resources.WidgetResources;
 import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.carstore.shared.dto.UserDto;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+
+import static com.google.gwt.query.client.GQuery.$;
 
 public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements HeaderPresenter.MyView {
     interface Binder extends UiBinder<Widget, HeaderView> {
@@ -40,9 +43,15 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     Button logout;
     @UiField
     HTMLPanel userOptions;
+    @UiField
+    DivElement menubar;
+
+    private final WidgetResources widgetRes;
 
     @Inject
-    HeaderView(Binder uiBinder) {
+    HeaderView(Binder uiBinder, WidgetResources widgetResources) {
+        this.widgetRes = widgetResources;
+
         initWidget(uiBinder.createAndBindUi(this));
 
         userOptions.setVisible(false);
@@ -61,7 +70,9 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     }
 
     @Override
-    public void onNavigation(PlaceRequest request) {
+    public void setActive(String nameToken) {
+        $("a", menubar).toggleClass(widgetRes.header().menuActive(), false);
+        $("a[href*=\"" + nameToken + "\"]", menubar).toggleClass(widgetRes.header().menuActive(), true);
 
     }
 
