@@ -25,8 +25,7 @@
         <gae.port>8888</gae.port>
         <gae.address>127.0.0.1</gae.address>
 
-        <slf4j-api.version>1.7.5</slf4j-api.version>
-        <resteasy.version>3.0.2.Final</resteasy.version>
+        <resteasy.version>3.0.8.Final</resteasy.version>
         <arcbees.version>1.1.1</arcbees.version>
     </properties>
 
@@ -125,17 +124,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j-api.version}</version>
-                <scope>compile</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- GWTP -->
