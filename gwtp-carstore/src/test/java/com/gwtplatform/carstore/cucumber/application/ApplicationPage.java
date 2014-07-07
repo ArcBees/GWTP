@@ -20,7 +20,6 @@ import javax.inject.Inject;
 
 import org.openqa.selenium.TimeoutException;
 
-import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.cucumber.application.widgets.HeaderWidgetPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
 import com.gwtplatform.carstore.cucumber.util.TestParameters;
@@ -49,13 +48,13 @@ public class ApplicationPage extends BasePage {
         }
     }
 
-    public void navigateTo(String page) {
-        if (page.equals(NameTokens.LOGIN)) {
-            getUrl(TestParameters.BASE_URL + "#" + page);
-        } else {
-            headerWidgetPage.navigateTo(page);
-            waitUntilDomIsLoaded(page);
-        }
+    public void navigateToWithMenu(String page) {
+        headerWidgetPage.navigateTo(page);
+        waitUntilDomIsLoaded(page);
+    }
+
+    public void navigateToNotLoggedIn(String page) {
+        getUrl(TestParameters.BASE_URL + "#" + page);
     }
 
     public boolean successMessageIsPresent(String message) {

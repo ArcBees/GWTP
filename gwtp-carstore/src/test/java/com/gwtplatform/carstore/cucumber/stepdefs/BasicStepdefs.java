@@ -21,11 +21,11 @@ import javax.inject.Inject;
 import org.openqa.selenium.WebDriver;
 
 import com.google.common.base.Strings;
+import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.cucumber.application.ApplicationPage;
 import com.gwtplatform.carstore.cucumber.application.login.LoginPage;
 import com.gwtplatform.carstore.cucumber.application.widgets.MessageWidgetPage;
 import com.gwtplatform.carstore.cucumber.util.TestParameters;
-
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -62,7 +62,16 @@ public class BasicStepdefs {
 
     @Given("^I navigate to the (\\S+) page$")
     public void iNavigateTo(String nameToken) {
-        applicationPage.navigateTo(nameToken);
+        if (nameToken.equals(NameTokens.LOGIN)) {
+            applicationPage.navigateToNotLoggedIn(nameToken);
+        } else {
+            applicationPage.navigateToWithMenu(nameToken);
+        }
+    }
+
+    @Given("^I try to navigate to the (\\S+) page while not logged in$")
+    public void iTryToNavigateTo(String nameToken) {
+        applicationPage.navigateToNotLoggedIn(nameToken);
     }
 
     @Given("^I'm logged in$")
