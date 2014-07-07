@@ -44,7 +44,7 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     @UiField
     HTMLPanel userOptions;
     @UiField
-    DivElement menubar;
+    HTMLPanel menubar;
 
     private final WidgetResources widgetRes;
 

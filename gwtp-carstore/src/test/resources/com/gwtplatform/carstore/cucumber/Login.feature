@@ -6,8 +6,9 @@ Feature: Login
     Then I'm connected
 
   Scenario: Successful connection
-    Given I navigate to the rating page
-    When I enter valid credential
+    Given I try to navigate to the rating page while not logged in
+    When I click on the link to the login page
+    And I enter valid credential
     Then I'm connected on the rating page
 
   Scenario: Refused connection

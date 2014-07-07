@@ -21,7 +21,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gwtplatform.carstore.cucumber.application.BasePage;
 import com.gwtplatform.carstore.cucumber.util.ByDebugId;
-import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class HeaderWidgetPage extends BasePage {
     public void clickOnLogOut() {
@@ -29,7 +28,7 @@ public class HeaderWidgetPage extends BasePage {
     }
 
     public void navigateTo(String linkText) {
-        WebElement link = getMenuBar().findElement(By.xpath("//div[text()=\"" + linkText + "\"]"));
+        WebElement link = getMenuBar().findElement(By.xpath("//a[contains(@href,'" + linkText + "')]"));
         link.click();
     }
 

@@ -80,13 +80,13 @@
                 <g:Label text="CarStore"/>
             </div>
 
-            <div class="{style.floatLeft} {style.menuBarWrapper}" ui:field="menubar">
+            <g:HTMLPanel styleName="{style.floatLeft} {style.menuBarWrapper}" ui:field="menubar" debugId="menubar">
                 <a href="#{MANUFACTURER}">Manufacturers</a>
                 <a href="#{CARS}">Cars</a>
                 <a href="#{RATING}">Ratings</a>
                 <a href="#{REPORT}">Reports</a>
                 <a href="#{STATS}">Statistics</a>
-            </div>
+            </g:HTMLPanel>
 
             <g:HTMLPanel ui:field="userOptions" styleName="{style.floatRight} {style.paddingTop}">
                 <div class="{style.userInfo}">
