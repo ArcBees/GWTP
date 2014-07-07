@@ -31,15 +31,14 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 public class UnauthorizedPresenter extends Presenter<UnauthorizedPresenter.MyView, UnauthorizedPresenter.MyProxy> {
-
-    public interface MyView extends View {
+    interface MyView extends View {
         void setLinkToLogin(String link);
     }
 
     @ProxyStandard
     @NameToken(NameTokens.UNAUTHORIZED)
     @NoGatekeeper
-    public interface MyProxy extends ProxyPlace<UnauthorizedPresenter> {
+    interface MyProxy extends ProxyPlace<UnauthorizedPresenter> {
     }
 
     private final TokenFormatter tokenFormatter;
