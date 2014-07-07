@@ -62,7 +62,7 @@ public class BasicStepdefs {
 
     @Given("^I navigate to the (\\S+) page$")
     public void iNavigateTo(String nameToken) {
-        if (nameToken.equals(NameTokens.LOGIN)) {
+        if (NameTokens.LOGIN.equals(nameToken)) {
             applicationPage.navigateToNotLoggedIn(nameToken);
         } else {
             applicationPage.navigateToWithMenu(nameToken);
