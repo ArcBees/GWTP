@@ -2,7 +2,7 @@ Feature: Ratings
 
   Background:
     Given I'm logged in
-    And I navigate to the Ratings page
+    And I navigate to the rating page
 
   Scenario: Add a rating
     When I click on the create rating button
