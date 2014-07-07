@@ -56,14 +56,14 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy>
         implements LoginUiHandlers {
 
-    public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
+    interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
         void setLoginButtonEnabled(boolean enabled);
     }
 
     @ProxyStandard
     @NameToken(NameTokens.LOGIN)
     @NoGatekeeper
-    public interface MyProxy extends ProxyPlace<LoginPresenter> {
+    interface MyProxy extends ProxyPlace<LoginPresenter> {
     }
 
     public static final String LOGIN_COOKIE_NAME = "LoggedInCookie";

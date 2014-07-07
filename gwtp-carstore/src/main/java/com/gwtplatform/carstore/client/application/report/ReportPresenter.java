@@ -38,13 +38,13 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPresenter.MyProxy> {
-    public interface MyView extends View {
+    interface MyView extends View {
         void displayReport(List<ManufacturerRatingDto> manufacturerRatings);
     }
 
     @ProxyCodeSplit
     @NameToken(NameTokens.REPORT)
-    public interface MyProxy extends ProxyPlace<ReportPresenter> {
+    interface MyProxy extends ProxyPlace<ReportPresenter> {
     }
 
     private final RestDispatch dispatcher;

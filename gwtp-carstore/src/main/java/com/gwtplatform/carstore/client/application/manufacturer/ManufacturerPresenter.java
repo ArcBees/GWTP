@@ -51,7 +51,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
         implements ManufacturerUiHandlers, ActionBarEvent.ActionBarHandler {
 
-    public interface MyView extends View, HasUiHandlers<ManufacturerUiHandlers> {
+    interface MyView extends View, HasUiHandlers<ManufacturerUiHandlers> {
         void addManufacturer(ManufacturerDto manufacturerDto);
 
         void displayManufacturers(List<ManufacturerDto> manufacturerDtos);
@@ -63,7 +63,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
 
     @ProxyCodeSplit
     @NameToken(NameTokens.MANUFACTURER)
-    public interface MyProxy extends ProxyPlace<ManufacturerPresenter> {
+    interface MyProxy extends ProxyPlace<ManufacturerPresenter> {
     }
 
     private final RestDispatch dispatcher;

@@ -54,7 +54,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
         implements GoBackEvent.GoBackHandler, ActionBarEvent.ActionBarHandler, ManufacturerDetailUiHandlers {
 
-    public interface MyView extends View, HasUiHandlers<ManufacturerDetailUiHandlers> {
+    interface MyView extends View, HasUiHandlers<ManufacturerDetailUiHandlers> {
         void edit(ManufacturerDto manufacturerDto);
 
         void getManufacturer();
@@ -62,7 +62,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
     @ProxyCodeSplit
     @NameToken(NameTokens.DETAIL_MANUFACTURER)
-    public interface MyProxy extends ProxyPlace<ManufacturerDetailPresenter> {
+    interface MyProxy extends ProxyPlace<ManufacturerDetailPresenter> {
     }
 
     private final RestDispatch dispatcher;

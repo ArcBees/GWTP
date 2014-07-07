@@ -48,7 +48,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPresenter.MyProxy>
         implements RatingUiHandlers, RatingAddedHandler, ActionBarEvent.ActionBarHandler {
 
-    public interface MyView extends View, HasUiHandlers<RatingUiHandlers> {
+    interface MyView extends View, HasUiHandlers<RatingUiHandlers> {
         void displayRatings(List<RatingDto> results);
 
         void removeRating(RatingDto ratingDto);
@@ -58,7 +58,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @ProxyCodeSplit
     @NameToken(NameTokens.RATING)
-    public interface MyProxy extends ProxyPlace<RatingPresenter> {
+    interface MyProxy extends ProxyPlace<RatingPresenter> {
     }
 
     private final RestDispatch dispatcher;
