@@ -22,7 +22,8 @@ import com.gwtplatform.carstore.client.resources.WidgetResources;
 
 public class ResourceLoader {
     @Inject
-    public ResourceLoader(AppResources resources, WidgetResources widgetResources) {
+    ResourceLoader(AppResources resources,
+                          WidgetResources widgetResources) {
         resources.styles().ensureInjected();
         widgetResources.header().ensureInjected();
     }

@@ -71,8 +71,8 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
 
     @Override
     public void setMenuItemActive(String nameToken) {
-        $("a", menubar).toggleClass(widgetRes.header().menuActive(), false);
-        $("a[href*=\"" + nameToken + "\"]", menubar).toggleClass(widgetRes.header().menuActive(), true);
+        $("a", menubar).removeClass(widgetRes.header().menuActive());
+        $("a[href*=\"" + nameToken + "\"]", menubar).addClass(widgetRes.header().menuActive());
     }
 
     @UiHandler("logout")
