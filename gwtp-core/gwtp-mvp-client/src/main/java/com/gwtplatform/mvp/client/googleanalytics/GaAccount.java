@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.annotations;
+package com.gwtplatform.mvp.client.googleanalytics;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

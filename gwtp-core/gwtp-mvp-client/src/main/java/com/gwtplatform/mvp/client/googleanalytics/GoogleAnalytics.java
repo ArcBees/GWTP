@@ -41,13 +41,6 @@ package com.gwtplatform.mvp.client.googleanalytics;
 public interface GoogleAnalytics {
 
     /**
-     * Initializes the script for Google Analytics for a specific userAccount.
-     *
-     * @param userAccount The Google Analytics account. (i.e. {@code UA-12345678-1})
-     */
-    void init(String userAccount);
-
-    /**
      * Given that you already have initialized your default Google account with
      * {@link #init(String)}, this function will add a new account on which you'll
      * be able to track events and pages.
