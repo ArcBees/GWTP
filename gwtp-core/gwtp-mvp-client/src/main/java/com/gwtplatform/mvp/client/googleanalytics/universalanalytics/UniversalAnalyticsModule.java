@@ -68,8 +68,9 @@ public class UniversalAnalyticsModule extends AbstractGinModule {
     protected void configure() {
         bindConstant().annotatedWith(GaAccount.class).to(userAccount);
         bindConstant().annotatedWith(Names.named("uaAutoCreate")).to(autoCreate);
+        bind(UniversalAnalyticsImpl.class).asEagerSingleton();
         bind(GoogleAnalytics.class).to(UniversalAnalyticsImpl.class);
-        bind(UniversalAnalytics.class).to(UniversalAnalyticsImpl.class).asEagerSingleton();
+        bind(UniversalAnalytics.class).to(UniversalAnalyticsImpl.class);
 
         if (trackNavigationEvents) {
             bind(GoogleAnalyticsNavigationTracker.class).asEagerSingleton();

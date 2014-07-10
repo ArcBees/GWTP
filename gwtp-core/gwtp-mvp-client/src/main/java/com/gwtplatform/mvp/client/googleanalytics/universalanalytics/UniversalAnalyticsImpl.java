@@ -79,7 +79,10 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
     }-*/;
 
     private native void nativeCall(JSONArray params) /*-{
-         $wnd.__ua.apply($wnd, params);
+         if ($wnd.console) {
+             $wnd.console.log("uaNative: "+ params);
+         }
+         $wnd.__ua.apply($wnd.__ua, params);
     }-*/;
 
     @Override
