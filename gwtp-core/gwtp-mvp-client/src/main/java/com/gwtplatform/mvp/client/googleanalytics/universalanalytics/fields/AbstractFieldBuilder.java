@@ -15,6 +15,8 @@
  */
 package com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONValue;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HasFields;
@@ -23,40 +25,34 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public abstract class AbstractFieldBuilder implements HasFields {
     private final JSONObject jsonObject;
-    private final OptionsCallback callback;
 
-    AbstractFieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback callback) {
+    AbstractFieldBuilder(final JSONObject jsonObject) {
         this.jsonObject = jsonObject;
-        this.callback = callback;
     }
 
     AbstractFieldBuilder(final OptionsCallback callback) {
-        this(new JSONObject(), callback);
+        this(new JSONObject());
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+            @Override
+            public void execute() {
+                callback.onCallback(build());
+            }
+        });
+    }
+
+    public void addHitCallback(final HitCallback callback) {
+        addHitCallback(jsonObject, callback);
     }
 
     private native void addHitCallback(JSONObject jsonObject, HitCallback callback) /*-{
         jsonObject.hitCallback = function() {
             callback.@com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitCallback::onCallback()();
         }
-
     }-*/;
 
     JSONObject build() {
         return jsonObject;
-    }
-
-    OptionsCallback getCallback() {
-        return callback;
-    }
-
-    public void go() {
-        callback.onCallback(build());
-    };
-
-    public void go(final HitCallback callback) {
-        addHitCallback(jsonObject, callback);
-        this.callback.onCallback(build());
     }
 
     @Override

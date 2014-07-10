@@ -18,14 +18,12 @@ package com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class EventFieldBuilder extends FieldBuilder {
     EventFieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback optionsCallback,
             final String category,
             final String action) {
-        super(jsonObject, optionsCallback);
+        super(jsonObject);
         put("eventCategory", new JSONString(category));
         put("eventAction", new JSONString(action));
     }

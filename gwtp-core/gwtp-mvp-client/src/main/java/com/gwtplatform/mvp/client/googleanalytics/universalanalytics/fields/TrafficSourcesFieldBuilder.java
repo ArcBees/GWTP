@@ -17,12 +17,10 @@ package com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields;
 
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class TrafficSourcesFieldBuilder extends FieldBuilder {
-    TrafficSourcesFieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback optionsCallback) {
-        super(jsonObject, optionsCallback);
+    TrafficSourcesFieldBuilder(final JSONObject jsonObject) {
+        super(jsonObject);
     }
 
     /**

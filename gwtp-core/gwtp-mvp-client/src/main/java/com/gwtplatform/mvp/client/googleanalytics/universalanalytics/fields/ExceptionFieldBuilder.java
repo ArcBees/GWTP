@@ -18,12 +18,10 @@ package com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields;
 import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class ExceptionFieldBuilder extends FieldBuilder {
-    ExceptionFieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback optionsCallback) {
-        super(jsonObject, optionsCallback);
+    ExceptionFieldBuilder(final JSONObject jsonObject) {
+        super(jsonObject);
     }
 
     /**

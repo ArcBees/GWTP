@@ -17,15 +17,13 @@ package com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields;
 
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class SocialNetworkFieldBuilder extends FieldBuilder {
     SocialNetworkFieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback optionsCallback,
             final String socialNetwork,
             final String socialAction,
             final String socialTarget) {
-        super(jsonObject, optionsCallback);
+        super(jsonObject);
         put("socialNetwork", new JSONString(socialNetwork));
         put("socialAction", new JSONString(socialAction));
         put("socialTarget", new JSONString(socialTarget));

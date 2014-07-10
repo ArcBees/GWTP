@@ -19,9 +19,8 @@ import com.google.gwt.json.client.JSONObject;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class FieldBuilder extends AbstractFieldBuilder {
-    FieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback optionsCallback) {
-        super(jsonObject, optionsCallback);
+    FieldBuilder(final JSONObject jsonObject) {
+        super(jsonObject);
     }
 
     public FieldBuilder(final OptionsCallback optionsCallback) {
@@ -29,59 +28,59 @@ public class FieldBuilder extends AbstractFieldBuilder {
     }
 
     public AppTrackingFieldBuilder appTracking() {
-        return new AppTrackingFieldBuilder(build(), getCallback());
+        return new AppTrackingFieldBuilder(build());
     }
 
     public ContentFieldBuilder content() {
-        return new ContentFieldBuilder(build(), getCallback());
+        return new ContentFieldBuilder(build());
     }
 
     public ContentExperimentsFieldBuilder contentExpirements() {
-        return new ContentExperimentsFieldBuilder(build(), getCallback());
+        return new ContentExperimentsFieldBuilder(build());
     }
 
     public CreateOnlyFieldBuilder createOnlyFields() {
-        return new CreateOnlyFieldBuilder(build(), getCallback());
+        return new CreateOnlyFieldBuilder(build());
     }
 
     public CustomDimensionsFieldBuilder customDimensions() {
-        return new CustomDimensionsFieldBuilder(build(), getCallback());
+        return new CustomDimensionsFieldBuilder(build());
     }
 
     public EventFieldBuilder event(final String category, final String action) {
-        return new EventFieldBuilder(build(), getCallback(), category, action);
+        return new EventFieldBuilder(build(), category, action);
     }
 
     public ExceptionFieldBuilder exception() {
-        return new ExceptionFieldBuilder(build(), getCallback());
+        return new ExceptionFieldBuilder(build());
     }
 
     public GeneralFieldBuilder general() {
-        return new GeneralFieldBuilder(build(), getCallback());
+        return new GeneralFieldBuilder(build());
     }
 
     public HitFieldBuilder hit() {
-        return new HitFieldBuilder(build(), getCallback());
+        return new HitFieldBuilder(build());
     }
 
     public SessionFieldBuilder session() {
-        return new SessionFieldBuilder(build(), getCallback());
+        return new SessionFieldBuilder(build());
     }
 
     public SocialNetworkFieldBuilder socialNetwork(final String socialNetwork, final String socialAction,
             final String socialTarget) {
-        return new SocialNetworkFieldBuilder(build(), getCallback(), socialNetwork, socialAction, socialTarget);
+        return new SocialNetworkFieldBuilder(build(), socialNetwork, socialAction, socialTarget);
     }
 
     public SystemInfoFieldBuilder systemInfo() {
-        return new SystemInfoFieldBuilder(build(), getCallback());
+        return new SystemInfoFieldBuilder(build());
     }
 
     public TrafficSourcesFieldBuilder trafficSources() {
-        return new TrafficSourcesFieldBuilder(build(), getCallback());
+        return new TrafficSourcesFieldBuilder(build());
     }
 
     public UserTimingFieldBuilder userTiming() {
-        return new UserTimingFieldBuilder(build(), getCallback());
+        return new UserTimingFieldBuilder(build());
     }
 }

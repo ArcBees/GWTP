@@ -39,13 +39,13 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
         init();
         this.userAccount = userAccount;
         if (autoCreate) {
-            create().go();
+            create();
         }
     }
 
     @Override
     public void addAccount(final String trackerName, final String userAccount) {
-        create(userAccount).name(trackerName).go();
+        create(userAccount).name(trackerName);
     }
 
     private void call(final JSONValue... params) {
@@ -177,31 +177,31 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
 
     @Override
     public void trackEventWithTracker(final String trackerName, final String category, final String action) {
-        sendEvent(trackerName, category, action).go();
+        sendEvent(trackerName, category, action);
     }
 
     @Override
     public void trackEventWithTracker(final String trackerName, final String category, final String action,
             final String optLabel) {
-        sendEvent(trackerName, category, action).eventLabel(optLabel).go();
+        sendEvent(trackerName, category, action).eventLabel(optLabel);
     }
 
     @Override
     public void trackEventWithTracker(final String trackerName, final String category, final String action,
             final String optLabel, final int optValue) {
-        sendEvent(trackerName, category, action).eventLabel(optLabel).eventValue(optValue).go();
+        sendEvent(trackerName, category, action).eventLabel(optLabel).eventValue(optValue);
     }
 
     @Override
     public void trackEventWithTracker(final String trackerName, final String category, final String action,
             final String optLabel, final int optValue, final boolean optNonInteraction) {
         sendEvent(trackerName, category, action).eventLabel(optLabel).eventValue(optValue).hit()
-        .nonInteractionHit(optNonInteraction).go();
+                .nonInteractionHit(optNonInteraction);
     }
 
     @Override
     public void trackPageview() {
-        sendPageView().go();
+        sendPageView();
     }
 
     @Override
@@ -212,6 +212,6 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
     @Override
     public void trackPageview(final String trackerName, final String pageName) {
         final String pName = pageName.startsWith("/") ? pageName : "/" + pageName;
-        sendPageView(trackerName).documentPath(pName).go();
+        sendPageView(trackerName).documentPath(pName);
     }
 }

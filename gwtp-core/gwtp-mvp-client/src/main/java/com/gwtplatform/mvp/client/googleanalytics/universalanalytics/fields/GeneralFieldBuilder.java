@@ -17,12 +17,10 @@ package com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields;
 
 import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONObject;
-import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class GeneralFieldBuilder extends FieldBuilder {
-    GeneralFieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback optionsCallback) {
-        super(jsonObject, optionsCallback);
+    GeneralFieldBuilder(final JSONObject jsonObject) {
+        super(jsonObject);
     }
 
     /**

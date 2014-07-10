@@ -29,16 +29,16 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields.User
 public interface UniversalAnalytics extends GoogleAnalytics {
     /**
      * Create a new tracker using the user id bound to GaAccount.<br>
-     * Example: create().go();<br>
-     * create().name("My Tracker").go() //create a custom named tracker
+     * Example: create();<br>
+     * create().name("My Tracker") //create a custom named tracker
      * 
      */
     CreateOnlyFieldBuilder create();
 
     /**
      * Create a new tracker using a supplied user id.<br>
-     * Example: create("UA-XXXXXXX-X").go();<br>
-     * create("UA-XXXXXXX-X").name("My Tracker").go() //create a custom named tracker
+     * Example: create("UA-XXXXXXX-X");<br>
+     * create("UA-XXXXXXX-X").name("My Tracker") //create a custom named tracker
      * 
      */
     CreateOnlyFieldBuilder create(String userAccount);
@@ -47,7 +47,7 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * send a specific HitType.
      * @param hitType
      * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#hit
-     * Example: send(HitType.PAGE_VIEW).go();
+     * Example: send(HitType.PAGE_VIEW);
      */
     FieldBuilder send(HitType hitType);
 
@@ -56,7 +56,7 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * @param trackerName the name of the tracker
      * @param hitType
      * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#hit
-     * Example: send(HitType.PAGE_VIEW).go();
+     * Example: send(HitType.PAGE_VIEW);
      */
     FieldBuilder send(String trackerName, HitType hitType);
 
@@ -65,7 +65,7 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * @param category  the event category
      * @param action the event action<br>
      * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#events
-     * Example: sendEvent("button", "click").go();
+     * Example: sendEvent("button", "click");
      */
     EventFieldBuilder sendEvent(String category, String action);
 
@@ -75,22 +75,22 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * @param category  the event category
      * @param action the event action<br>
      * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#events
-     * Example: sendEvent("button", "click").go();
+     * Example: sendEvent("button", "click");
      */
     EventFieldBuilder sendEvent(String trackerName, String category, String action);
 
     /**
      * send a pageview to a specific tracker
-     * Example: sendPageView().go();<br>
-     * sendPageView().documentPath("/foo").go(); //send a pageview for /foo
+     * Example: sendPageView();<br>
+     * sendPageView().documentPath("/foo"); //send a pageview for /foo
      */
     ContentFieldBuilder sendPageView();
 
     /**
      * send a pageview to a specific tracker
      * @param trackerName the name of the tracker
-     * Example: sendPageView().go();<br>
-     * sendPageView().documentPath("/foo").go(); //send a pageview for /foo
+     * Example: sendPageView();<br>
+     * sendPageView().documentPath("/foo"); //send a pageview for /foo
      */
     ContentFieldBuilder sendPageView(String trackerName);
 
@@ -102,7 +102,7 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * @param socialNetwork the social network
      * @param socialAction the action taken
      * @param socialTarget the target of the action
-     * Example: sendSocial("facebook", "like", "http://www.example.com").go();<br>
+     * Example: sendSocial("facebook", "like", "http://www.example.com");<br>
      */
     SocialNetworkFieldBuilder sendSocial(String trackerName, String socialNetwork, String socialAction,
             String socialTarget);
@@ -110,7 +110,7 @@ public interface UniversalAnalytics extends GoogleAnalytics {
     /**
      * send user timing information to a specific tracker
      * this is use to analyze page speed.
-     * Example: sendTiming().go();<br>
+     * Example: sendTiming();<br>
      */
     UserTimingFieldBuilder sendTiming();
 
@@ -118,13 +118,13 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * send user timing information to a specific tracker
      * this is use to analyze page speed.
      * @param trackerName the name of the tracker
-     * Example: sendTiming().go();<br>
+     * Example: sendTiming();<br>
      */
     UserTimingFieldBuilder sendTiming(String trackerName);
 
     /**
      * set options for all subsequent calls.
-     * Example: setGlobalSettings().general().anonymizeIp(true).go(); //anonymize ip addresses<br>
+     * Example: setGlobalSettings().general().anonymizeIp(true); //anonymize ip addresses<br>
      */
     FieldBuilder setGlobalSettings();
 }

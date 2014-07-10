@@ -19,12 +19,10 @@ import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class CreateOnlyFieldBuilder extends FieldBuilder {
-    CreateOnlyFieldBuilder(final JSONObject jsonObject,
-            final OptionsCallback optionsCallback) {
-        super(jsonObject, optionsCallback);
+    CreateOnlyFieldBuilder(final JSONObject jsonObject) {
+        super(jsonObject);
     }
 
     /**
