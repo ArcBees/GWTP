@@ -23,32 +23,109 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields.Fiel
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields.SocialNetworkFieldBuilder;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields.UserTimingFieldBuilder;
 
+/**
+ * Support for universal Analytics see: https://github.com/ArcBees/GWTP/wiki/Universal-Analytics
+ */
 public interface UniversalAnalytics extends GoogleAnalytics {
 
+    /**
+     * Create a new tracker using the user id bound to GaAccount.<br>
+     * Example: create().go();<br>
+     * create().name("My Tracker").go() //create a custom named tracker
+     * 
+     */
     CreateOnlyFieldBuilder create();
 
+    /**
+     * Create a new tracker using a supplied user id.<br>
+     * Example: create("UA-XXXXXXX-X").go();<br>
+     * create("UA-XXXXXXX-X").name("My Tracker").go() //create a custom named tracker
+     * 
+     */
     CreateOnlyFieldBuilder create(String userAccount);
 
+    /**
+     * send a specific HitType.
+     * @param hitType
+     * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#hit
+     * Example: send(HitType.PAGE_VIEW).go();
+     */
     FieldBuilder send(HitType hitType);
 
+    /**
+     * send a specific HitType to a specific tracker.
+     * @param trackerName the name of the tracker
+     * @param hitType
+     * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#hit
+     * Example: send(HitType.PAGE_VIEW).go();
+     */
     FieldBuilder send(String trackerName, HitType hitType);
 
+    /**
+     * send an event
+     * @param category  the event category
+     * @param action the event action<br>
+     * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#events
+     * Example: sendEvent("button", "click").go();
+     */
     EventFieldBuilder sendEvent(String category, String action);
 
+    /**
+     * send an event to a specific tracker
+     * @param trackerName the name of the tracker
+     * @param category  the event category
+     * @param action the event action<br>
+     * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#events
+     * Example: sendEvent("button", "click").go();
+     */
     EventFieldBuilder sendEvent(String trackerName, String category, String action);
 
+    /**
+     * send a pageview to a specific tracker
+     * Example: sendPageView().go();<br>
+     * sendPageView().documentPath("/foo").go(); //send a pageview for /foo
+     */
     ContentFieldBuilder sendPageView();
 
+    /**
+     * send a pageview to a specific tracker
+     * @param trackerName the name of the tracker
+     * Example: sendPageView().go();<br>
+     * sendPageView().documentPath("/foo").go(); //send a pageview for /foo
+     */
     ContentFieldBuilder sendPageView(String trackerName);
 
     SocialNetworkFieldBuilder sendSocial(String socialNetwork, String socialAction, String socialTarget);
 
+    /**
+     * send a social event to a specific tracker
+     * @param trackerName the name of the tracker
+     * @param socialNetwork the social network
+     * @param socialAction the action taken
+     * @param socialTarget the target of the action
+     * Example: sendSocial("facebook", "like", "http://www.example.com").go();<br>
+     */
     SocialNetworkFieldBuilder sendSocial(String trackerName, String socialNetwork, String socialAction,
             String socialTarget);
 
+    /**
+     * send user timing information to a specific tracker
+     * this is use to analyze page speed.
+     * Example: sendTiming().go();<br>
+     */
     UserTimingFieldBuilder sendTiming();
 
+    /**
+     * send user timing information to a specific tracker
+     * this is use to analyze page speed.
+     * @param trackerName the name of the tracker
+     * Example: sendTiming().go();<br>
+     */
     UserTimingFieldBuilder sendTiming(String trackerName);
 
+    /**
+     * set options for all subsequent calls.
+     * Example: setGlobalSettings().general().anonymizeIp(true).go(); //anonymize ip addresses<br>
+     */
     FieldBuilder setGlobalSettings();
 }
