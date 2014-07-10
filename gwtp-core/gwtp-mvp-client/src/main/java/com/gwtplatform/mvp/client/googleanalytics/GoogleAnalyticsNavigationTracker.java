@@ -39,7 +39,8 @@ public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
     private final GoogleAnalytics analytics;
 
     @Inject
-    GoogleAnalyticsNavigationTracker(final PlaceManager placeManager, final EventBus eventBus,
+    GoogleAnalyticsNavigationTracker(final PlaceManager placeManager,
+            final EventBus eventBus,
             final GoogleAnalytics analytics) {
         this.placeManager = placeManager;
         this.analytics = analytics;
