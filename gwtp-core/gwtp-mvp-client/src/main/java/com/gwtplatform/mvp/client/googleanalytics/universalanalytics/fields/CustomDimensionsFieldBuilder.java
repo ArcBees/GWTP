@@ -22,7 +22,7 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class CustomDimensionsFieldBuilder extends FieldBuilder {
 
-    CustomDimensionsFieldBuilder(final JSONObject jsonObject, 
+    CustomDimensionsFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }

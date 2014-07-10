@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class ContentFieldBuilder extends FieldBuilder {
 
-    ContentFieldBuilder(final JSONObject jsonObject, 
+    ContentFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }

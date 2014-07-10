@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class CreateOnlyFieldBuilder extends FieldBuilder {
 
-    CreateOnlyFieldBuilder(final JSONObject jsonObject, 
+    CreateOnlyFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }

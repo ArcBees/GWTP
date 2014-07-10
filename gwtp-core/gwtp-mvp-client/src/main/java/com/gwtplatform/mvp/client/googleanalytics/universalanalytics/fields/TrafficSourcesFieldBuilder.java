@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class TrafficSourcesFieldBuilder extends FieldBuilder {
 
-    TrafficSourcesFieldBuilder(final JSONObject jsonObject, 
+    TrafficSourcesFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }

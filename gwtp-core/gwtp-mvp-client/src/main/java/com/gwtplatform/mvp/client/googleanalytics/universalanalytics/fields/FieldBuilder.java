@@ -20,7 +20,7 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class FieldBuilder extends AbstractFieldBuilder {
 
-    FieldBuilder(final JSONObject jsonObject, 
+    FieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }

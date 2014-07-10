@@ -22,7 +22,7 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class ExceptionFieldBuilder extends FieldBuilder {
 
-    ExceptionFieldBuilder(final JSONObject jsonObject, 
+    ExceptionFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }

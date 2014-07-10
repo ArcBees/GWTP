@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class SessionFieldBuilder extends FieldBuilder {
 
-    SessionFieldBuilder(final JSONObject jsonObject, 
+    SessionFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }
