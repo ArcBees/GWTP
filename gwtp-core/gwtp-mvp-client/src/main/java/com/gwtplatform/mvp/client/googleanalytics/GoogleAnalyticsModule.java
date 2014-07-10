@@ -20,7 +20,6 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 
 public class GoogleAnalyticsModule extends AbstractGinModule {
-
     public static class Builder {
         private final String userAccount;
         private boolean trackNavigationEvents = true;
