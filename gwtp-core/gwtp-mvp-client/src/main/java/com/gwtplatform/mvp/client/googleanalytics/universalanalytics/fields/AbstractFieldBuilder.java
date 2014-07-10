@@ -22,7 +22,6 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitCallback
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public abstract class AbstractFieldBuilder implements HasFields {
-
     private final JSONObject jsonObject;
     private final OptionsCallback callback;
 
@@ -64,5 +63,4 @@ public abstract class AbstractFieldBuilder implements HasFields {
     public void put(final String fieldName, final JSONValue value) {
         jsonObject.put(fieldName, value);
     }
-
 }

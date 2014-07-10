@@ -20,7 +20,6 @@ import com.google.gwt.json.client.JSONObject;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class GeneralFieldBuilder extends FieldBuilder {
-
     GeneralFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -46,5 +45,4 @@ public class GeneralFieldBuilder extends FieldBuilder {
         put("forceSSL", JSONBoolean.getInstance(forceSSL));
         return this;
     }
-
 }

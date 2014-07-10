@@ -18,7 +18,5 @@ package com.gwtplatform.mvp.client.googleanalytics.universalanalytics;
 import com.google.gwt.json.client.JSONObject;
 
 public interface OptionsCallback {
-
     void onCallback(JSONObject options);
-
 }

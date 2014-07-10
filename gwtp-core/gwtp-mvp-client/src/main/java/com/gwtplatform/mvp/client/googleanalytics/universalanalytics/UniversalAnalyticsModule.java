@@ -22,7 +22,6 @@ import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker;
 
 public class UniversalAnalyticsModule extends AbstractGinModule {
-
     public static class Builder {
         private final String userAccount;
         private boolean trackNavigationEvents = true;
@@ -77,5 +76,4 @@ public class UniversalAnalyticsModule extends AbstractGinModule {
             bind(GoogleAnalyticsNavigationTracker.class).asEagerSingleton();
         }
     }
-
 }

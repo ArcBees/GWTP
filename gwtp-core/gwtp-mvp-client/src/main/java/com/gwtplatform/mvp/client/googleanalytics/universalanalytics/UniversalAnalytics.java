@@ -27,7 +27,6 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields.User
  * Support for universal Analytics see: https://github.com/ArcBees/GWTP/wiki/Universal-Analytics
  */
 public interface UniversalAnalytics extends GoogleAnalytics {
-
     /**
      * Create a new tracker using the user id bound to GaAccount.<br>
      * Example: create().go();<br>

@@ -20,7 +20,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class SessionFieldBuilder extends FieldBuilder {
-
     SessionFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -41,5 +40,4 @@ public class SessionFieldBuilder extends FieldBuilder {
         put("sessionControl", new JSONString("start"));
         return this;
     }
-
 }

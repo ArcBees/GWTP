@@ -21,7 +21,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class ExceptionFieldBuilder extends FieldBuilder {
-
     ExceptionFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -49,5 +48,4 @@ public class ExceptionFieldBuilder extends FieldBuilder {
         put("exFatal", JSONBoolean.getInstance(fatal));
         return this;
     }
-
 }

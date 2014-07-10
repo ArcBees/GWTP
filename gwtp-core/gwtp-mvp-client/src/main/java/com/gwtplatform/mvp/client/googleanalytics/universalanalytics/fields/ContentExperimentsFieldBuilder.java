@@ -20,7 +20,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class ContentExperimentsFieldBuilder extends FieldBuilder {
-
     ContentExperimentsFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -51,5 +50,4 @@ public class ContentExperimentsFieldBuilder extends FieldBuilder {
         put("expId", new JSONString(experimentVariant));
         return this;
     }
-
 }

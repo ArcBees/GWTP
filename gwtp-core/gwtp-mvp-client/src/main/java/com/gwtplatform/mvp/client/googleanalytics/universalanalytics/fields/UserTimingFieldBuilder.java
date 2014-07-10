@@ -21,7 +21,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class UserTimingFieldBuilder extends FieldBuilder {
-
     UserTimingFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -74,5 +73,4 @@ public class UserTimingFieldBuilder extends FieldBuilder {
         put("timingVar", new JSONString(timingVar));
         return this;
     }
-
 }

@@ -22,7 +22,6 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitType;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class HitFieldBuilder extends FieldBuilder {
-
     HitFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -46,5 +45,4 @@ public class HitFieldBuilder extends FieldBuilder {
         put("nonInteraction", JSONBoolean.getInstance(nonInteraction));
         return this;
     }
-
 }

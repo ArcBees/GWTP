@@ -18,7 +18,5 @@ package com.gwtplatform.mvp.client.googleanalytics.universalanalytics;
 import com.google.gwt.json.client.JSONValue;
 
 public interface HasFields {
-
     void put(String fieldName, JSONValue value);
-
 }

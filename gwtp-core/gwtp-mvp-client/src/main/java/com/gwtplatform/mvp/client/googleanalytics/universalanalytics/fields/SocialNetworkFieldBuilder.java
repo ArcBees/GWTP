@@ -20,7 +20,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class SocialNetworkFieldBuilder extends FieldBuilder {
-
     SocialNetworkFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback,
             final String socialNetwork,
@@ -31,5 +30,4 @@ public class SocialNetworkFieldBuilder extends FieldBuilder {
         put("socialAction", new JSONString(socialAction));
         put("socialTarget", new JSONString(socialTarget));
     }
-
 }

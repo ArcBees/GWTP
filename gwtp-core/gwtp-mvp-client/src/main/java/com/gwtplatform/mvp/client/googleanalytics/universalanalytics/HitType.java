@@ -34,5 +34,4 @@ public enum HitType {
     public String getFieldName() {
         return fieldName;
     }
-
 }

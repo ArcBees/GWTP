@@ -21,7 +21,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class SystemInfoFieldBuilder extends FieldBuilder {
-
     SystemInfoFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -107,5 +106,4 @@ public class SystemInfoFieldBuilder extends FieldBuilder {
         put("viewportSize", new JSONString(viewportSize));
         return this;
     }
-
 }

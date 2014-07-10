@@ -20,7 +20,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class ContentFieldBuilder extends FieldBuilder {
-
     ContentFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -95,5 +94,5 @@ public class ContentFieldBuilder extends FieldBuilder {
         put("screenName", new JSONString(screenName));
         return this;
     }
-
 }
+

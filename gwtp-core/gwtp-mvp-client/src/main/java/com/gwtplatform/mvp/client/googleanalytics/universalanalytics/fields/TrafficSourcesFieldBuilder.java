@@ -20,7 +20,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class TrafficSourcesFieldBuilder extends FieldBuilder {
-
     TrafficSourcesFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
@@ -99,5 +98,4 @@ public class TrafficSourcesFieldBuilder extends FieldBuilder {
         put("referrer", new JSONString(documentReferrer));
         return this;
     }
-
 }

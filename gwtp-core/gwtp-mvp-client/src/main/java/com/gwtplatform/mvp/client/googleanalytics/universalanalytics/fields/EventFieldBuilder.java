@@ -21,7 +21,6 @@ import com.google.gwt.json.client.JSONString;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class EventFieldBuilder extends FieldBuilder {
-
     EventFieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback,
             final String category,
@@ -52,5 +51,4 @@ public class EventFieldBuilder extends FieldBuilder {
         put("eventValue", new JSONNumber(eventValue));
         return this;
     }
-
 }

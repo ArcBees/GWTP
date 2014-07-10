@@ -19,7 +19,6 @@ import com.google.gwt.json.client.JSONObject;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
 public class FieldBuilder extends AbstractFieldBuilder {
-
     FieldBuilder(final JSONObject jsonObject,
             final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);

@@ -31,7 +31,6 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields.Soci
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.fields.UserTimingFieldBuilder;
 
 public class UniversalAnalyticsImpl implements UniversalAnalytics {
-
     private final String userAccount;
 
     @Inject
@@ -218,5 +217,4 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
         final String pName = pageName.startsWith("/") ? pageName : "/" + pageName;
         sendPageView(trackerName).documentPath(pName).go();
     }
-
 }

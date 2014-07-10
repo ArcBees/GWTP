@@ -16,7 +16,5 @@
 package com.gwtplatform.mvp.client.googleanalytics.universalanalytics;
 
 public interface HitCallback {
-
     void onCallback();
-
 }
