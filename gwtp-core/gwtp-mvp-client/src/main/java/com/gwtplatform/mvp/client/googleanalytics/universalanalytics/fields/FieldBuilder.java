@@ -35,7 +35,7 @@ public class FieldBuilder extends AbstractFieldBuilder {
         return new ContentFieldBuilder(build());
     }
 
-    public ContentExperimentsFieldBuilder contentExpirements() {
+    public ContentExperimentsFieldBuilder contentExperiments() {
         return new ContentExperimentsFieldBuilder(build());
     }
 
