@@ -32,8 +32,8 @@ public class UniversalAnalyticsModule extends AbstractGinModule {
         }
 
         /**
-         * Set this to false if you want to create the universal analytics tracker with extra option.
-         * You can manually create the tracker by calling analytics.create().options().go() from your bootstrapper;
+         * Set this to false if you want to create the universal analytics tracker with custom options.
+         * You can manually create the tracker by calling analytics.create() from your bootstrapper;
          * @param autoCreate
          * @return
          */
