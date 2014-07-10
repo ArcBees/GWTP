@@ -80,11 +80,8 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
     }-*/;
 
     private native void nativeCall(JavaScriptObject params) /*-{
-                                                            if ($wnd.console) {
-                                                            $wnd.console.log("uaNative: "+ params);
-                                                            }
-                                                            $wnd.__ua.apply(null, params);
-                                                            }-*/;
+        $wnd.__ua.apply(null, params);
+    }-*/;
 
     @Override
     public FieldBuilder send(final HitType hitType) {
