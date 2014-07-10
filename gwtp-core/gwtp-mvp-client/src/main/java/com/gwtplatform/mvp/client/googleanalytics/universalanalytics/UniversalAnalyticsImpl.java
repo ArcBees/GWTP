@@ -15,6 +15,7 @@
  */
 package com.gwtplatform.mvp.client.googleanalytics.universalanalytics;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
@@ -52,7 +53,7 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
         for (final JSONValue p:params) {
             aryParams.set(aryParams.size(), p);
         }
-        nativeCall(aryParams);
+        nativeCall(aryParams.getJavaScriptObject());
     }
 
     @Override
@@ -78,12 +79,12 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
         })($wnd,$doc,'script','//www.google-analytics.com/analytics.js','__ua');
     }-*/;
 
-    private native void nativeCall(JSONArray params) /*-{
-         if ($wnd.console) {
-             $wnd.console.log("uaNative: "+ params);
-         }
-         $wnd.__ua.apply(null, params);
-    }-*/;
+    private native void nativeCall(JavaScriptObject params) /*-{
+                                                            if ($wnd.console) {
+                                                            $wnd.console.log("uaNative: "+ params);
+                                                            }
+                                                            $wnd.__ua.apply(null, params);
+                                                            }-*/;
 
     @Override
     public FieldBuilder send(final HitType hitType) {
