@@ -35,6 +35,13 @@ public abstract class AbstractFieldBuilder implements HasFields {
         this(new JSONObject(), callback);
     }
 
+    private native void addHitCallback(JSONObject jsonObject, HitCallback callback) /*-{
+        jsonObject.hitCallback = function() {
+            callback.@com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitCallback::onCallback()();
+        }
+
+    }-*/;
+
     JSONObject build() {
         return jsonObject;
     }
@@ -45,18 +52,12 @@ public abstract class AbstractFieldBuilder implements HasFields {
 
     public void go() {
         callback.onCallback(build());
-    }
-
-    public void go(final HitCallback callback) {
-        go(jsonObject, callback);
     };
 
-    private native void go(JSONObject jsonObject, HitCallback callback) /*-{
-        jsonObject.hitCallback = function() {
-            callback.@com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitCallback::onCallback()();
-        }
-
-    }-*/;
+    public void go(final HitCallback callback) {
+        addHitCallback(jsonObject, callback);
+        this.callback.onCallback(build());
+    }
 
     @Override
     public void put(final String fieldName, final JSONValue value) {
