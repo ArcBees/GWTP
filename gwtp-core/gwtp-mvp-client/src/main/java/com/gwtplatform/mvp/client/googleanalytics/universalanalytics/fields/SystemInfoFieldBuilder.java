@@ -22,7 +22,8 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class SystemInfoFieldBuilder extends FieldBuilder {
 
-    SystemInfoFieldBuilder(final JSONObject jsonObject, final OptionsCallback optionsCallback) {
+    SystemInfoFieldBuilder(final JSONObject jsonObject, 
+            final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }
 

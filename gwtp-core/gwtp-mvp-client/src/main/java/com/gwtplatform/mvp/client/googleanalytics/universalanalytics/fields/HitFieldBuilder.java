@@ -23,7 +23,8 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class HitFieldBuilder extends FieldBuilder {
 
-    HitFieldBuilder(final JSONObject jsonObject, final OptionsCallback optionsCallback) {
+    HitFieldBuilder(final JSONObject jsonObject, 
+            final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }
 

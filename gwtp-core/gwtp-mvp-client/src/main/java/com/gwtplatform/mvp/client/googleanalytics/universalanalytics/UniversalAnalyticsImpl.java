@@ -35,7 +35,8 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
     private final String userAccount;
 
     @Inject
-    UniversalAnalyticsImpl(@GaAccount final String userAccount, @Named("uaAutoCreate") final boolean autoCreate) {
+    UniversalAnalyticsImpl(@GaAccount final String userAccount, 
+            @Named("uaAutoCreate") final boolean autoCreate) {
         init();
         this.userAccount = userAccount;
         if (autoCreate) {

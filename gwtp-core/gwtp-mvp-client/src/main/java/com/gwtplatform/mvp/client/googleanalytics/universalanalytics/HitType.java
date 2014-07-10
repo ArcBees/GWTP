@@ -16,8 +16,14 @@
 package com.gwtplatform.mvp.client.googleanalytics.universalanalytics;
 
 public enum HitType {
-    PAGE_VIEW("pageview"), SCREEN_VIEW("screenview"), EVENT("event"), TRANSACTION("transaction"), ITEM("item"), SOCIAL(
-            "social"), EXCEPTION("exception"), TIMING("timing");
+    PAGE_VIEW("pageview"), 
+    SCREEN_VIEW("screenview"), 
+    EVENT("event"), 
+    TRANSACTION("transaction"), 
+    ITEM("item"), 
+    SOCIAL("social"), 
+    EXCEPTION("exception"), 
+    TIMING("timing");
 
     private final String fieldName;
 

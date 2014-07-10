@@ -21,8 +21,11 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class SocialNetworkFieldBuilder extends FieldBuilder {
 
-    SocialNetworkFieldBuilder(final JSONObject jsonObject, final OptionsCallback optionsCallback,
-            final String socialNetwork, final String socialAction, final String socialTarget) {
+    SocialNetworkFieldBuilder(final JSONObject jsonObject, 
+            final OptionsCallback optionsCallback,
+            final String socialNetwork, 
+            final String socialAction, 
+            final String socialTarget) {
         super(jsonObject, optionsCallback);
         put("socialNetwork", new JSONString(socialNetwork));
         put("socialAction", new JSONString(socialAction));

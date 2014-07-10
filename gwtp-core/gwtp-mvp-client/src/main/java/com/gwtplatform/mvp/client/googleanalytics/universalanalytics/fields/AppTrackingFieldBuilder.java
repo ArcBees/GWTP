@@ -21,7 +21,8 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class AppTrackingFieldBuilder extends FieldBuilder {
 
-    AppTrackingFieldBuilder(final JSONObject jsonObject, final OptionsCallback optionsCallback) {
+    AppTrackingFieldBuilder(final JSONObject jsonObject, 
+            final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }
 

@@ -22,7 +22,9 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class EventFieldBuilder extends FieldBuilder {
 
-    EventFieldBuilder(final JSONObject jsonObject, final OptionsCallback optionsCallback, final String category,
+    EventFieldBuilder(final JSONObject jsonObject, 
+            final OptionsCallback optionsCallback, 
+            final String category,
             final String action) {
         super(jsonObject, optionsCallback);
         put("eventCategory", new JSONString(category));

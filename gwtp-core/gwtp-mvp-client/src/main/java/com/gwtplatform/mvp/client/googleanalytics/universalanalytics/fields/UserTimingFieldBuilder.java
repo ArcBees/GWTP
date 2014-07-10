@@ -22,7 +22,8 @@ import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCall
 
 public class UserTimingFieldBuilder extends FieldBuilder {
 
-    UserTimingFieldBuilder(final JSONObject jsonObject, final OptionsCallback optionsCallback) {
+    UserTimingFieldBuilder(final JSONObject jsonObject, 
+            final OptionsCallback optionsCallback) {
         super(jsonObject, optionsCallback);
     }
 

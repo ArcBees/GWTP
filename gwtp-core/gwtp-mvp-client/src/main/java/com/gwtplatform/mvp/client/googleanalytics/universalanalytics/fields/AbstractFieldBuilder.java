@@ -26,7 +26,8 @@ public abstract class AbstractFieldBuilder implements HasFields {
     private final JSONObject jsonObject;
     private final OptionsCallback callback;
 
-    AbstractFieldBuilder(final JSONObject jsonObject, final OptionsCallback callback) {
+    AbstractFieldBuilder(final JSONObject jsonObject, 
+            final OptionsCallback callback) {
         this.jsonObject = jsonObject;
         this.callback = callback;
     }

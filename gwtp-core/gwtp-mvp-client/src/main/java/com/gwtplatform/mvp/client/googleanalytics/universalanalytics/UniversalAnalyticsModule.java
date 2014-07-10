@@ -57,7 +57,8 @@ public class UniversalAnalyticsModule extends AbstractGinModule {
     private final String userAccount;
     private boolean autoCreate;
 
-    private UniversalAnalyticsModule(final String userAccount, final boolean trackNavigationEvents,
+    private UniversalAnalyticsModule(final String userAccount, 
+            final boolean trackNavigationEvents,
             final boolean autoCreate) {
         this.userAccount = userAccount;
         this.trackNavigationEvents = trackNavigationEvents;
