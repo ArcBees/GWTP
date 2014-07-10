@@ -15,6 +15,7 @@
  */
 package com.gwtplatform.mvp.client.googleanalytics.universalanalytics;
 
+import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONValue;
@@ -46,6 +47,14 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
         create(userAccount).name(trackerName).go();
     }
 
+    private void call(final JSONValue... params) {
+        final JSONArray aryParams = new JSONArray();
+        for (final JSONValue p:params) {
+            aryParams.set(aryParams.size(), p);
+        }
+        nativeCall(aryParams);
+    }
+
     @Override
     public CreateOnlyFieldBuilder create() {
         return create(userAccount);
@@ -57,7 +66,7 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
 
             @Override
             public void onCallback(final JSONObject options) {
-                nativeCall(new JSONString("create"), new JSONString(userAccount), options);
+                call(new JSONString("create"), new JSONString(userAccount), options);
             }
         }).createOnlyFields();
     }
@@ -69,7 +78,7 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
         })($wnd,$doc,'script','//www.google-analytics.com/analytics.js','__ua');
     }-*/;
 
-    private native void nativeCall(JSONValue... params) /*-{
+    private native void nativeCall(JSONArray params) /*-{
          $wnd.__ua.apply($wnd, params);
     }-*/;
 
@@ -84,7 +93,7 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
 
             @Override
             public void onCallback(final JSONObject options) {
-                nativeCall(new JSONString(trackerName == null ? "send" : trackerName + ".send"),
+                call(new JSONString(trackerName == null ? "send" : trackerName + ".send"),
                         new JSONString(hitType.getFieldName()), options);
             }
         });
@@ -138,7 +147,7 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
 
             @Override
             public void onCallback(final JSONObject options) {
-                nativeCall(new JSONString("set"), options);
+                call(new JSONString("set"), options);
             }
 
         });
