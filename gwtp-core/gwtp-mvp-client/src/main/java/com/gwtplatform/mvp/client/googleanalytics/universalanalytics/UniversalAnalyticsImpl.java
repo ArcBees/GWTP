@@ -82,7 +82,7 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
          if ($wnd.console) {
              $wnd.console.log("uaNative: "+ params);
          }
-         $wnd.__ua.apply($wnd.__ua, params);
+         $wnd.__ua.apply(null, params);
     }-*/;
 
     @Override
