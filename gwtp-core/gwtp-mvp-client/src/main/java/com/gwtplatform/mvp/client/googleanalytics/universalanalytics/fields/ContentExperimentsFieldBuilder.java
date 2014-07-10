@@ -45,7 +45,7 @@ public class ContentExperimentsFieldBuilder extends FieldBuilder {
      * Example Value: 1
      */
     public ContentExperimentsFieldBuilder experimentVariant(final String experimentVariant) {
-        put("expId", new JSONString(experimentVariant));
+        put("expVar", new JSONString(experimentVariant));
         return this;
     }
 }
