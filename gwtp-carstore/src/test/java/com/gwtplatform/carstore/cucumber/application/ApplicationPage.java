@@ -48,27 +48,16 @@ public class ApplicationPage extends BasePage {
         }
     }
 
-    public void navigateTo(String page) {
-        MenuItem menuItem = getMenuItem(page);
-        if (menuItem != null) {
-            headerWidgetPage.navigateTo(page);
-            waitUntilDomIsLoaded(menuItem.getNameToken());
-        } else {
-            getUrl(TestParameters.BASE_URL + "#" + page);
-        }
+    public void navigateToWithMenu(String page) {
+        headerWidgetPage.navigateTo(page);
+        waitUntilDomIsLoaded(page);
+    }
+
+    public void navigateToNotLoggedIn(String page) {
+        getUrl(TestParameters.BASE_URL + "#" + page);
     }
 
     public boolean successMessageIsPresent(String message) {
         return messageWidgetPage.hasSuccessMessage(message);
-    }
-
-    private MenuItem getMenuItem(String page) {
-        for (MenuItem menuItem : MenuItem.values()) {
-            if (menuItem.toString().equals(page)) {
-                return menuItem;
-            }
-        }
-
-        return null;
     }
 }

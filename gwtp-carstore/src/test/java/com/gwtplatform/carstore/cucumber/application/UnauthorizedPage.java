@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,17 +14,18 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.gin;
+package com.gwtplatform.carstore.cucumber.application;
 
-import com.google.inject.Inject;
-import com.gwtplatform.carstore.client.resources.AppResources;
-import com.gwtplatform.carstore.client.resources.WidgetResources;
+import org.openqa.selenium.WebElement;
 
-public class ResourceLoader {
-    @Inject
-    ResourceLoader(AppResources resources,
-                          WidgetResources widgetResources) {
-        resources.styles().ensureInjected();
-        widgetResources.header().ensureInjected();
+import com.gwtplatform.carstore.cucumber.util.ByDebugId;
+
+public class UnauthorizedPage extends BasePage {
+    public void clickOnLink() {
+        getLinkToLogin().click();
+    }
+
+    private WebElement getLinkToLogin() {
+        return waitUntilElementIsClickable(ByDebugId.id("linkToLogin"));
     }
 }

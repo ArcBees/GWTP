@@ -49,7 +49,6 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
@@ -88,7 +87,7 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
                         CarMessages messages,
                         @Assisted MyProxy proxy,
                         @Assisted CarDto carDto) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, RootCarPresenter.SLOT_SetCarContent);
 
         this.dispatcher = dispatcher;
         this.carsService = carsService;
@@ -181,11 +180,6 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
         }
 
         NavigationTabEvent.fireReveal(this, this);
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, RootCarPresenter.SLOT_SetCarContent, this);
     }
 
     private void onGetManufacturerSuccess(List<ManufacturerDto> manufacturerDtos) {

@@ -17,6 +17,7 @@
 package com.gwtplatform.carstore.client.place;
 
 public class NameTokens {
+    public static final String UNAUTHORIZED = "unauthorized";
     public static final String LOGIN = "login";
     public static final String MANUFACTURER = "manufacturer";
     public static final String DETAIL_MANUFACTURER = "detailManufacturer";

@@ -33,14 +33,14 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy>
         implements ChangeActionBarEvent.ChangeActionBarHandler, ActionBarVisibilityEvent.ActionBarVisibilityHandler {
 
-    public interface MyView extends View {
+    interface MyView extends View {
         void adjustActionBar(Boolean actionBarVisible);
 
         void adjustLayout(Boolean tabsVisible);
     }
 
     @ProxyStandard
-    public interface MyProxy extends Proxy<ApplicationPresenter> {
+    interface MyProxy extends Proxy<ApplicationPresenter> {
     }
 
     @ContentSlot

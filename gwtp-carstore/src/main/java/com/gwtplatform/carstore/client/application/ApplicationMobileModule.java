@@ -29,6 +29,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 public class ApplicationMobileModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
+        install(new UnauthorizedModule());
         install(new LoginMobileModule());
         install(new ManufacturerMobileModule());
         install(new CarsMobileModule());

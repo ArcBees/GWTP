@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
@@ -57,14 +56,14 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy>
         implements LoginUiHandlers {
 
-    public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
+    interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
         void setLoginButtonEnabled(boolean enabled);
     }
 
     @ProxyStandard
     @NameToken(NameTokens.LOGIN)
     @NoGatekeeper
-    public interface MyProxy extends ProxyPlace<LoginPresenter> {
+    interface MyProxy extends ProxyPlace<LoginPresenter> {
     }
 
     public static final String LOGIN_COOKIE_NAME = "LoggedInCookie";
@@ -108,14 +107,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
         if (!Strings.isNullOrEmpty(getLoggedInCookie())) {
             tryLoggingInWithCookieFirst();
-        }
-
-        if (!currentUser.isLoggedIn() && !isOnLoginPage()) {
-            PlaceRequest p = new Builder()
-                    .nameToken(NameTokens.LOGIN)
-                    .with(ParameterTokens.REDIRECT, getHistoryToken())
-                    .build();
-            placeManager.revealPlace(p);
         }
     }
 
@@ -173,16 +164,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         PlaceRequest placeRequest = new Builder().nameToken(token).build();
 
         placeManager.revealPlace(placeRequest);
-    }
-
-    private Boolean isOnLoginPage() {
-        String token = getHistoryToken();
-
-        return token.equals("") || token.equals(NameTokens.LOGIN);
-    }
-
-    private String getHistoryToken() {
-        return History.getToken();
     }
 
     private void setLoggedInCookie(String value) {

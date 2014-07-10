@@ -35,7 +35,7 @@ public class SharedModule extends AbstractPresenterModule {
         // DefaultPlaceManager Places
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.LOGIN);
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.LOGIN);
-        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.LOGIN);
+        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.UNAUTHORIZED);
 
         // Load and inject CSS resources
         bind(ResourceLoader.class).asEagerSingleton();
