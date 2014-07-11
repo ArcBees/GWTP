@@ -42,6 +42,14 @@ public interface UniversalAnalytics extends GoogleAnalytics {
     CreateOnlyFieldBuilder create(String userAccount);
 
     /**
+     * Enable an analytics plugin.  This must be called immediately after create();
+     * If you are using plugins you should probably turn off autoCreate when building the
+     * UniversalAnalyticsModule and create your tracker manually in your bootstrapper.
+     * @param plugin
+     */
+    void enablePlugin(AnalyticsPlugin plugin);
+
+    /**
      * send a specific HitType.
      * @param hitType
      * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#hit

@@ -72,6 +72,11 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
         }).createOnlyFields();
     }
 
+    @Override
+    public void enablePlugin(final AnalyticsPlugin plugin) {
+        call(new JSONString("require"), new JSONString(plugin.getFieldName()));
+    }
+
     private native void init()/*-{
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -196,7 +201,7 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
     public void trackEventWithTracker(final String trackerName, final String category, final String action,
             final String optLabel, final int optValue, final boolean optNonInteraction) {
         sendEvent(trackerName, category, action).eventLabel(optLabel).eventValue(optValue).hit()
-                .nonInteractionHit(optNonInteraction);
+        .nonInteractionHit(optNonInteraction);
     }
 
     @Override
