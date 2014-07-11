@@ -15,6 +15,36 @@
  */
 package com.gwtplatform.mvp.client.googleanalytics.universalanalytics;
 
-public interface HitCallback {
-    void onCallback();
+import java.util.logging.Logger;
+
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
+
+public abstract class HitCallback {
+    private static final Logger logger = Logger.getLogger(HitCallback.class.getName());
+
+    private boolean hasRun;
+
+    public HitCallback() {
+        // ensures the HitCallback always fires even if analytics is blocked from running
+        Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+
+            @Override
+            public boolean execute() {
+                if (!hasRun) {
+                    logger.warning("Analytics HitCallback has not fired after 300ms. Firing manually.");
+                    callback();
+                }
+                return false;
+            }
+
+        }, 300);
+    }
+
+    void callback() {
+        hasRun = true;
+        onCallback();
+    }
+
+    abstract void onCallback();
 }

@@ -46,7 +46,7 @@ public abstract class AbstractFieldBuilder {
 
     private native void addHitCallback(JSONObject jsonObject, HitCallback callback) /*-{
         jsonObject.hitCallback = function() {
-            callback.@com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitCallback::onCallback()();
+            callback.@com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitCallback::callback()();
         }
     }-*/;
 
