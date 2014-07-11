@@ -46,5 +46,5 @@ public abstract class HitCallback {
         onCallback();
     }
 
-    abstract void onCallback();
+    protected abstract void onCallback();
 }
