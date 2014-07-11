@@ -80,7 +80,8 @@ public class FieldBuilder extends AbstractFieldBuilder {
         return new TrafficSourcesFieldBuilder(build());
     }
 
-    public UserTimingFieldBuilder userTiming() {
-        return new UserTimingFieldBuilder(build());
+    public UserTimingFieldBuilder userTiming(final String timingCategory,
+            final String timingVar, final int timingValue) {
+        return new UserTimingFieldBuilder(build(), timingCategory, timingVar, timingValue);
     }
 }

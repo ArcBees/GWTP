@@ -20,20 +20,12 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 
 public class UserTimingFieldBuilder extends FieldBuilder {
-    UserTimingFieldBuilder(final JSONObject jsonObject) {
+    UserTimingFieldBuilder(final JSONObject jsonObject, final String timingCategory, final String timingVar,
+            final int timingValue) {
         super(jsonObject);
-    }
-
-    /**
-     * Optional.
-     * Specifies the user timing category.
-     * @param timingCategory<br>
-     * Default: none<br>
-     * Example Value: category
-     */
-    public UserTimingFieldBuilder timingCategory(final String timingCategory) {
         put("timingCategory", new JSONString(timingCategory));
-        return this;
+        put("timingVar", new JSONString(timingVar));
+        put("timingValue", new JSONNumber(timingValue));
     }
 
     /**
@@ -45,30 +37,6 @@ public class UserTimingFieldBuilder extends FieldBuilder {
      */
     public UserTimingFieldBuilder timingLabel(final String timingLabel) {
         put("timingLabel", new JSONString(timingLabel));
-        return this;
-    }
-
-    /**
-     * Optional.
-     * Specifies the user timing value. The value is in milliseconds.
-     * @param timingValue<br>
-     * Default: none<br>
-     * Example Value: 123
-     */
-    public UserTimingFieldBuilder timingValue(final int timingValue) {
-        put("timingValue", new JSONNumber(timingValue));
-        return this;
-    }
-
-    /**
-     * Optional.
-     * Specifies the user timing variable.
-     * @param timingVar<br>
-     * Default: none<br>
-     * Example Value: lookup
-     */
-    public UserTimingFieldBuilder timingVariableName(final String timingVar) {
-        put("timingVar", new JSONString(timingVar));
         return this;
     }
 }

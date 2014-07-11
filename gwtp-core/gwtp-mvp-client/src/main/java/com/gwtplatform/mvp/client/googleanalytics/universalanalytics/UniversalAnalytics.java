@@ -121,19 +121,26 @@ public interface UniversalAnalytics extends GoogleAnalytics {
             String socialTarget);
 
     /**
-     * send user timing information to a specific tracker.
+     * send user timing information to the default tracker.
      * this is use to analyze page speed.
-     * Example: sendTiming();<br>
+     * @param timingCategory - a category used to group related timing data
+     * @param timingVar - a string to identify the variable being recorded
+     * @param timingValue - the number of milliseconds of elapsed time.
+     * Example: sendTiming("jQuery", "Load Library", 20);<br>
      */
-    UserTimingFieldBuilder sendTiming();
+    UserTimingFieldBuilder sendTiming(final String timingCategory, final String timingVar, final int timingValue);
 
     /**
      * send user timing information to a specific tracker.
      * this is use to analyze page speed.
-     * @param trackerName the name of the tracker
-     * Example: sendTiming();<br>
+     * @param trackerName - the name of the tracker
+     * @param timingCategory - a category used to group related timing data
+     * @param timingVar - a string to identify the variable being recorded
+     * @param timingValue - the number of milliseconds of elapsed time.
+     * Example: sendTiming("jQuery", "Load Library", 20);<br>
      */
-    UserTimingFieldBuilder sendTiming(String trackerName);
+    UserTimingFieldBuilder sendTiming(String trackerName, final String timingCategory, final String timingVar,
+            final int timingValue);
 
     /**
      * set options for all subsequent calls.

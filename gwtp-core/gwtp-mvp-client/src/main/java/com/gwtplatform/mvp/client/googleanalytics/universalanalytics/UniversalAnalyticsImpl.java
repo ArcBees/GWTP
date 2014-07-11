@@ -138,13 +138,15 @@ public class UniversalAnalyticsImpl implements UniversalAnalytics {
     }
 
     @Override
-    public UserTimingFieldBuilder sendTiming() {
-        return sendTiming(null);
+    public UserTimingFieldBuilder sendTiming(final String timingCategory,
+            final String timingVar, final int timingValue) {
+        return sendTiming(null, timingCategory, timingVar, timingValue);
     }
 
     @Override
-    public UserTimingFieldBuilder sendTiming(final String trackerName) {
-        return send(trackerName, HitType.TIMING).userTiming();
+    public UserTimingFieldBuilder sendTiming(final String trackerName, final String timingCategory,
+            final String timingVar, final int timingValue) {
+        return send(trackerName, HitType.TIMING).userTiming(timingCategory, timingVar, timingValue);
     }
 
     @Override
