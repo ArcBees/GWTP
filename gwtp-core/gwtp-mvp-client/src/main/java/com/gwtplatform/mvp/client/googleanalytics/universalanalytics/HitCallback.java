@@ -42,8 +42,10 @@ public abstract class HitCallback {
     }
 
     void callback() {
-        hasRun = true;
-        onCallback();
+        if (!hasRun) {
+            hasRun = true;
+            onCallback();
+        }
     }
 
     protected abstract void onCallback();
