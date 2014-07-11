@@ -31,7 +31,6 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * Create a new tracker using the user id bound to GaAccount.<br>
      * Example: create();<br>
      * create().name("My Tracker") //create a custom named tracker
-     * 
      */
     CreateOnlyFieldBuilder create();
 
@@ -39,7 +38,6 @@ public interface UniversalAnalytics extends GoogleAnalytics {
      * Create a new tracker using a supplied user id.<br>
      * Example: create("UA-XXXXXXX-X");<br>
      * create("UA-XXXXXXX-X").name("My Tracker") //create a custom named tracker
-     * 
      */
     CreateOnlyFieldBuilder create(String userAccount);
 
@@ -61,7 +59,7 @@ public interface UniversalAnalytics extends GoogleAnalytics {
     FieldBuilder send(String trackerName, HitType hitType);
 
     /**
-     * send an event
+     * send an event.
      * @param category  the event category
      * @param action the event action<br>
      * see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#events
@@ -70,7 +68,7 @@ public interface UniversalAnalytics extends GoogleAnalytics {
     EventFieldBuilder sendEvent(String category, String action);
 
     /**
-     * send an event to a specific tracker
+     * send an event to a specific tracker.
      * @param trackerName the name of the tracker
      * @param category  the event category
      * @param action the event action<br>
@@ -80,24 +78,31 @@ public interface UniversalAnalytics extends GoogleAnalytics {
     EventFieldBuilder sendEvent(String trackerName, String category, String action);
 
     /**
-     * send a pageview to a specific tracker
+     * send a pageview to a specific tracker.
      * Example: sendPageView();<br>
      * sendPageView().documentPath("/foo"); //send a pageview for /foo
      */
     ContentFieldBuilder sendPageView();
 
     /**
-     * send a pageview to a specific tracker
+     * send a pageview to a specific tracker.
      * @param trackerName the name of the tracker
      * Example: sendPageView();<br>
      * sendPageView().documentPath("/foo"); //send a pageview for /foo
      */
     ContentFieldBuilder sendPageView(String trackerName);
 
+    /**
+     * send a social event.
+     * @param socialNetwork the social network
+     * @param socialAction the action taken
+     * @param socialTarget the target of the action
+     * Example: sendSocial("facebook", "like", "http://www.example.com");<br>
+     */
     SocialNetworkFieldBuilder sendSocial(String socialNetwork, String socialAction, String socialTarget);
 
     /**
-     * send a social event to a specific tracker
+     * send a social event to a specific tracker.
      * @param trackerName the name of the tracker
      * @param socialNetwork the social network
      * @param socialAction the action taken
@@ -108,14 +113,14 @@ public interface UniversalAnalytics extends GoogleAnalytics {
             String socialTarget);
 
     /**
-     * send user timing information to a specific tracker
+     * send user timing information to a specific tracker.
      * this is use to analyze page speed.
      * Example: sendTiming();<br>
      */
     UserTimingFieldBuilder sendTiming();
 
     /**
-     * send user timing information to a specific tracker
+     * send user timing information to a specific tracker.
      * this is use to analyze page speed.
      * @param trackerName the name of the tracker
      * Example: sendTiming();<br>
