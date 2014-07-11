@@ -19,11 +19,10 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONValue;
-import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HasFields;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.HitCallback;
 import com.gwtplatform.mvp.client.googleanalytics.universalanalytics.OptionsCallback;
 
-public abstract class AbstractFieldBuilder implements HasFields {
+public abstract class AbstractFieldBuilder {
     private final JSONObject jsonObject;
 
     AbstractFieldBuilder(final JSONObject jsonObject) {
@@ -55,7 +54,6 @@ public abstract class AbstractFieldBuilder implements HasFields {
         return jsonObject;
     }
 
-    @Override
     public void put(final String fieldName, final JSONValue value) {
         jsonObject.put(fieldName, value);
     }
