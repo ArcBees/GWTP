@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,6 +24,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
@@ -48,9 +49,10 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
                             SecurityCookieAccessor securityCookieAccessor,
                             RestRequestBuilderFactory requestBuilderFactory,
                             RestResponseDeserializer restResponseDeserializer,
+                            DispatchHooks dispatchHooks,
                             A action,
                             AsyncCallback<R> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
+        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, dispatchHooks, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
@@ -58,13 +60,13 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
     @Override
     protected DispatchRequest doExecute() {
+        super.doExecute();
+
         try {
             RequestBuilder requestBuilder = buildRequest();
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
-        } catch (RequestException e) {
-            onExecuteFailure(e);
-        } catch (ActionException e) {
+        } catch (RequestException | ActionException e) {
             onExecuteFailure(e);
         }
 

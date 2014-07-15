@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -45,12 +45,14 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
+    private final DispatchHooks dispatchHooks;
 
     private String securityCookie;
 
     public DispatchCall(ExceptionHandler exceptionHandler,
                         ClientActionHandlerRegistry clientActionHandlerRegistry,
                         SecurityCookieAccessor securityCookieAccessor,
+                        DispatchHooks dispatchHooks,
                         A action,
                         AsyncCallback<R> callback) {
         this.action = action;
@@ -58,6 +60,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
+        this.dispatchHooks = dispatchHooks;
     }
 
     /**
@@ -92,7 +95,11 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      *
      * @return a {@link DispatchRequest} object.
      */
-    protected abstract DispatchRequest doExecute();
+    protected DispatchRequest doExecute() {
+        dispatchHooks.onExecute();
+
+        return new CompletedDispatchRequest();
+    }
 
     /**
      * Returns the {@link TypedAction} wrapped by this {@link DispatchCall}.
@@ -155,6 +162,8 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      */
     protected void onExecuteSuccess(R result) {
         callback.onSuccess(result);
+
+        dispatchHooks.onSuccess();
     }
 
     /**
@@ -178,6 +187,8 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         }
 
         callback.onFailure(caught);
+
+        dispatchHooks.onFailure();
     }
 
     /**

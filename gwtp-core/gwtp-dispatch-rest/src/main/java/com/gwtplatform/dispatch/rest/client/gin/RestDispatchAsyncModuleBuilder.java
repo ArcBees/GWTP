@@ -18,6 +18,8 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.gwtplatform.dispatch.client.DefaultDispatchHooks;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
@@ -47,6 +49,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private String defaultDateFormat = DateFormat.DEFAULT;
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
+    private Class<? extends DispatchHooks> dispatchHooks = DefaultDispatchHooks.class;
 
     @Override
     public RestDispatchAsyncModule build() {
@@ -135,6 +138,18 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return new RestParameterBuilder(this, globalQueryParams, key);
     }
 
+    /**
+     * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
+     * Default is {@link com.gwtplatform.dispatch.client.DefaultDispatchHooks}
+     *
+     * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
+    public RestDispatchAsyncModuleBuilder dispatchHooks(Class<? extends DispatchHooks> dispatchHooks) {
+        this.dispatchHooks = dispatchHooks;
+        return this;
+    }
+
     public String getXsrfTokenHeaderName() {
         return xsrfTokenHeaderName;
     }
@@ -157,5 +172,9 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
 
     public Multimap<HttpMethod, RestParameter> getGlobalQueryParams() {
         return globalQueryParams;
+    }
+
+    public Class<? extends DispatchHooks> getDispatchHooks() {
+        return dispatchHooks;
     }
 }
