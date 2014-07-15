@@ -22,18 +22,19 @@ import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerMobi
 import com.gwtplatform.carstore.client.application.rating.RatingMobileModule;
 import com.gwtplatform.carstore.client.application.report.ReportMobileModule;
 import com.gwtplatform.carstore.client.application.stats.StatisticsModule;
-import com.gwtplatform.carstore.client.application.widget.WidgetMobileModule;
+import com.gwtplatform.carstore.client.application.widget.WidgetModule;
 import com.gwtplatform.carstore.client.application.widget.message.MessagesModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class ApplicationMobileModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
+        install(new UnauthorizedModule());
         install(new LoginMobileModule());
         install(new ManufacturerMobileModule());
         install(new CarsMobileModule());
         install(new RatingMobileModule());
-        install(new WidgetMobileModule());
+        install(new WidgetModule());
         install(new ReportMobileModule());
 
         // TODO should we make a messaging module for mobile

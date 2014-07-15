@@ -43,13 +43,12 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPresenter.MyProxy>
         implements RatingUiHandlers, RatingAddedHandler, ActionBarEvent.ActionBarHandler {
 
-    public interface MyView extends View, HasUiHandlers<RatingUiHandlers> {
+    interface MyView extends View, HasUiHandlers<RatingUiHandlers> {
         void displayRatings(List<RatingDto> results);
 
         void removeRating(RatingDto ratingDto);
@@ -58,8 +57,8 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.rating)
-    public interface MyProxy extends ProxyPlace<RatingPresenter> {
+    @NameToken(NameTokens.RATING)
+    interface MyProxy extends ProxyPlace<RatingPresenter> {
     }
 
     private final RestDispatch dispatcher;
@@ -75,7 +74,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
                     RatingService ratingService,
                     EditRatingPresenter editRatingPresenter,
                     PlaceManager placeManager) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.dispatcher = dispatcher;
         this.ratingService = ratingService;
@@ -129,10 +128,5 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     @Override
     protected void onBind() {
         addRegisteredHandler(ActionBarEvent.getType(), this);
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 }

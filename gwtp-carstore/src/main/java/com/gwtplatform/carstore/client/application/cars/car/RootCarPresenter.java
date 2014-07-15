@@ -27,7 +27,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCarPresenter.MyProxy> {
@@ -40,7 +39,7 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
 
     @ContentSlot
     public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_SetCarContent = new GwtEvent
-            .Type<RevealContentHandler<?>>();
+            .Type<>();
 
     public static final Object SLOT_TAB_BAR = new Object();
 
@@ -51,7 +50,7 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
                      MyView view,
                      MyProxy proxy,
                      NavigationTabPresenter navigationTabPresenter) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.navigationTabPresenter = navigationTabPresenter;
     }
@@ -61,10 +60,5 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
         super.onBind();
 
         setInSlot(SLOT_TAB_BAR, navigationTabPresenter);
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 }

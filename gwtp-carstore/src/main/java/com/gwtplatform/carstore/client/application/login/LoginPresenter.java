@@ -27,13 +27,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
 import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.place.ParameterTokens;
 import com.gwtplatform.carstore.client.resources.LoginMessages;
 import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
@@ -50,21 +50,20 @@ import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy>
         implements LoginUiHandlers {
 
-    public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
+    interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
         void setLoginButtonEnabled(boolean enabled);
     }
 
     @ProxyStandard
-    @NameToken(NameTokens.login)
+    @NameToken(NameTokens.LOGIN)
     @NoGatekeeper
-    public interface MyProxy extends ProxyPlace<LoginPresenter> {
+    interface MyProxy extends ProxyPlace<LoginPresenter> {
     }
 
     public static final String LOGIN_COOKIE_NAME = "LoggedInCookie";
@@ -85,7 +84,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                    SessionService sessionService,
                    CurrentUser currentUser,
                    LoginMessages messages) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, RevealType.RootLayout);
 
         this.placeManager = placeManager;
         this.dispatchAsync = dispatchAsync;
@@ -100,11 +99,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     public void login(String username, String password) {
         LogInRequest loginRequest = new LogInRequest(username, password);
         callServerLoginAction(loginRequest);
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     @Override
@@ -154,14 +148,22 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         if (currentUserDto.isLoggedIn()) {
             currentUser.fromCurrentUserDto(currentUserDto);
 
-            PlaceRequest homePlaceRequest = new Builder().nameToken(NameTokens.getOnLoginDefaultPage()).build();
-            placeManager.revealPlace(homePlaceRequest);
+            redirectToLoggedOnPage();
 
             UserLoginEvent.fire(this);
             DisplayMessageEvent.fire(this, new Message(messages.onSuccessfulLogin(), MessageStyle.SUCCESS));
         } else {
             DisplayMessageEvent.fire(this, new Message(messages.invalidEmailOrPassword(), MessageStyle.ERROR));
         }
+    }
+
+    private void redirectToLoggedOnPage() {
+        String token = placeManager
+                .getCurrentPlaceRequest()
+                .getParameter(ParameterTokens.REDIRECT, NameTokens.getOnLoginDefaultPage());
+        PlaceRequest placeRequest = new Builder().nameToken(token).build();
+
+        placeManager.revealPlace(placeRequest);
     }
 
     private void setLoggedInCookie(String value) {

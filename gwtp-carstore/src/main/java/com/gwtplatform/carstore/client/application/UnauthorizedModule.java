@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,19 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.application.widget;
+package com.gwtplatform.carstore.client.application;
 
-import com.gwtplatform.carstore.client.application.widget.header.HeaderMobileView;
-import com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter;
-import com.gwtplatform.carstore.client.application.widget.header.HeaderUiHandlers;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-public class WidgetMobileModule extends AbstractPresenterModule {
+public class UnauthorizedModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        bindSingletonPresenterWidget(HeaderPresenter.class, HeaderPresenter.MyView.class,
-                HeaderMobileView.class);
-
-        bind(HeaderUiHandlers.class).to(HeaderPresenter.class);
+        bindPresenter(UnauthorizedPresenter.class, UnauthorizedPresenter.MyView.class, UnauthorizedView.class,
+                UnauthorizedPresenter.MyProxy.class);
     }
 }
