@@ -23,8 +23,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.mvp.client.RootPresenter;
-import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
-import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
@@ -37,10 +35,6 @@ import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
  * binding the different classes to their default implementation.
  */
 public class DefaultModule extends AbstractGinModule {
-    private final Class<? extends PlaceManager> placeManagerClass;
-
-    private final Class<? extends TokenFormatter> tokenFormatterClass;
-
     /**
      * A DefaultModule builder.
      */
@@ -51,20 +45,24 @@ public class DefaultModule extends AbstractGinModule {
         public Builder() {
         }
 
-        public Builder placeManager(Class<? extends PlaceManager> placeManagerClass) {
+        public DefaultModule build() {
+            return new DefaultModule(this);
+        }
+
+        public Builder placeManager(final Class<? extends PlaceManager> placeManagerClass) {
             this.placeManagerClass = placeManagerClass;
             return this;
         }
 
-        public Builder tokenFormatter(Class<? extends TokenFormatter> tokenFormatterClass) {
+        public Builder tokenFormatter(final Class<? extends TokenFormatter> tokenFormatterClass) {
             this.tokenFormatterClass = tokenFormatterClass;
             return this;
         }
-
-        public DefaultModule build() {
-            return new DefaultModule(this);
-        }
     }
+
+    private final Class<? extends PlaceManager> placeManagerClass;
+
+    private final Class<? extends TokenFormatter> tokenFormatterClass;
 
     /**
      * When instantiating the module this way be sure to read
@@ -83,6 +81,11 @@ public class DefaultModule extends AbstractGinModule {
         this(new Builder());
     }
 
+    private DefaultModule(final Builder builder) {
+        this.placeManagerClass = builder.placeManagerClass;
+        this.tokenFormatterClass = builder.tokenFormatterClass;
+    }
+
     /**
      * Manually setup a PlaceManager. See {@link DefaultPlaceManager} for more
      * details.<br/>
@@ -95,7 +98,7 @@ public class DefaultModule extends AbstractGinModule {
      * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
      */
     @Deprecated
-    public DefaultModule(Class<? extends PlaceManager> placeManagerClass) {
+    public DefaultModule(final Class<? extends PlaceManager> placeManagerClass) {
         this(placeManagerClass, ParameterTokenFormatter.class);
     }
 
@@ -113,15 +116,10 @@ public class DefaultModule extends AbstractGinModule {
      * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
      */
     @Deprecated
-    public DefaultModule(Class<? extends PlaceManager> placeManagerClass,
-                         Class<? extends TokenFormatter> tokenFormatterClass) {
+    public DefaultModule(final Class<? extends PlaceManager> placeManagerClass,
+            final Class<? extends TokenFormatter> tokenFormatterClass) {
         this.placeManagerClass = placeManagerClass;
         this.tokenFormatterClass = tokenFormatterClass;
-    }
-
-    private DefaultModule(Builder builder) {
-        this.placeManagerClass = builder.placeManagerClass;
-        this.tokenFormatterClass = builder.tokenFormatterClass;
     }
 
     @Override
@@ -131,7 +129,6 @@ public class DefaultModule extends AbstractGinModule {
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
         bind(TokenFormatter.class).to(tokenFormatterClass).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();
-        bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(Singleton.class);
         bind(PlaceManager.class).to(placeManagerClass).in(Singleton.class);
     }
 }

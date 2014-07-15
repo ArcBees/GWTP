@@ -20,14 +20,20 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.user.client.Window;
+import com.google.inject.Inject;
 
 /**
  * Default {@link GoogleAnalytics} implementation that uses JSNI to
  * expose Google Analytics javascript methods.
  */
 public class GoogleAnalyticsImpl implements GoogleAnalytics {
-    @Override
-    public void init(String userAccount) {
+
+    @Inject
+    GoogleAnalyticsImpl(@GaAccount String userAccount) {
+        init(userAccount);
+    }
+
+    private void init(String userAccount) {
         Element firstScript = Document.get().getElementsByTagName("script").getItem(
                 0);
 

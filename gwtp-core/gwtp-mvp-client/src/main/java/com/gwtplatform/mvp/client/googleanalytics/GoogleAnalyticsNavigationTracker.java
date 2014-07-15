@@ -18,10 +18,7 @@ package com.gwtplatform.mvp.client.googleanalytics;
 
 import javax.inject.Inject;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.annotations.GaAccount;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -38,38 +35,21 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  * If you want to log custom events, see {@link GoogleAnalytics}.
  */
 public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
-    private final String gaAccount;
     private final PlaceManager placeManager;
-    private final EventBus eventBus;
     private final GoogleAnalytics analytics;
 
     @Inject
-    GoogleAnalyticsNavigationTracker(@GaAccount String gaAccount,
-                                     PlaceManager placeManager,
-                                     EventBus eventBus,
-                                     GoogleAnalytics analytics) {
-        this.gaAccount = gaAccount;
+    GoogleAnalyticsNavigationTracker(final PlaceManager placeManager,
+            final EventBus eventBus,
+            final GoogleAnalytics analytics) {
         this.placeManager = placeManager;
-        this.eventBus = eventBus;
         this.analytics = analytics;
-
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                init();
-            }
-        });
-    }
-
-    private void init() {
-        analytics.init(gaAccount);
-
         eventBus.addHandler(NavigationEvent.getType(), this);
     }
 
     @Override
-    public void onNavigation(NavigationEvent navigationEvent) {
-        String historyToken = placeManager.buildHistoryToken(navigationEvent.getRequest());
+    public void onNavigation(final NavigationEvent navigationEvent) {
+        final String historyToken = placeManager.buildHistoryToken(navigationEvent.getRequest());
         analytics.trackPageview(historyToken);
     }
 }
