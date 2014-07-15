@@ -16,6 +16,13 @@
 
 package com.gwtplatform.dispatch.client;
 
+/**
+ * Hooks to be executed on every {@link com.gwtplatform.dispatch.client.DispatchCall}.
+ *
+ * {@link DispatchHooks#onExecute()} will be called just before any action is attempted.
+ * {@link DispatchHooks#onSuccess()} will be called when any action succeeds.
+ * {@link DispatchHooks#onFailure()} will be called when any action fails.
+ */
 public interface DispatchHooks {
     void onSuccess();
 
