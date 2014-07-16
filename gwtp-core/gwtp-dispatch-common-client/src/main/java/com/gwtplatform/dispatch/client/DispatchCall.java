@@ -1,17 +1,10 @@
 /**
- * Copyright 2013 ArcBees Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * Copyright (c) 2014 by ArcBees Inc., All rights reserved.
+ * This source code, and resulting software, is the confidential and proprietary information
+ * ("Proprietary Information") and is the intellectual property ("Intellectual Property")
+ * of ArcBees Inc. ("The Company"). You shall not disclose such Proprietary Information and
+ * shall use it only in accordance with the terms and conditions of any and all license
+ * agreements you have entered into with The Company.
  */
 
 package com.gwtplatform.dispatch.client;
@@ -72,6 +65,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      * @return a {@link DispatchRequest} object.
      */
     public DispatchRequest execute() {
+        dispatchHooks.onExecute();
         securityCookie = securityCookieAccessor.getCookieContent();
 
         IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
@@ -95,11 +89,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      *
      * @return a {@link DispatchRequest} object.
      */
-    protected DispatchRequest doExecute() {
-        dispatchHooks.onExecute();
-
-        return new CompletedDispatchRequest();
-    }
+    protected abstract DispatchRequest doExecute();
 
     /**
      * Returns the {@link TypedAction} wrapped by this {@link DispatchCall}.
