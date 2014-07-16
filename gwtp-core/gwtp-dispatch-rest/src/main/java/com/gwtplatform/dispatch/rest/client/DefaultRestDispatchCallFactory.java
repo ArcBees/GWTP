@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.client;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -33,23 +34,26 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final SecurityCookieAccessor securityCookieAccessor;
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
+    private final DispatchHooks dispatchHooks;
 
     @Inject
     DefaultRestDispatchCallFactory(ExceptionHandler exceptionHandler,
                                    ClientActionHandlerRegistry clientActionHandlerRegistry,
                                    SecurityCookieAccessor securityCookieAccessor,
                                    RestRequestBuilderFactory requestBuilderFactory,
-                                   RestResponseDeserializer restResponseDeserializer) {
+                                   RestResponseDeserializer restResponseDeserializer,
+                                   DispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
+        this.dispatchHooks = dispatchHooks;
     }
 
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<A, R>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
-                requestBuilderFactory, restResponseDeserializer, action, callback);
+        return new RestDispatchCall<>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
+                requestBuilderFactory, restResponseDeserializer, dispatchHooks, action, callback);
     }
 }

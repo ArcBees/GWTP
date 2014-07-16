@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
@@ -59,10 +60,11 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
                         ExceptionHandler exceptionHandler,
                         ClientActionHandlerRegistry clientActionHandlerRegistry,
                         SecurityCookieAccessor securityCookieAccessor,
+                        DispatchHooks dispatchHooks,
                         A action,
                         R result,
                         AsyncCallback<Void> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action,
+        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, dispatchHooks, action,
                 new AsyncCallbackWrapper<R>(callback));
 
         this.dispatchService = dispatchService;

@@ -25,6 +25,7 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
@@ -93,6 +94,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
                 .to(multimapJsonSerializer.serialize(builder.getGlobalHeaderParams()));
         bindConstant().annotatedWith(GlobalQueryParams.class)
                 .to(multimapJsonSerializer.serialize(builder.getGlobalQueryParams()));
+        bind(DispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
