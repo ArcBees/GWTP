@@ -106,6 +106,20 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
 
+    @Provides
+    @Singleton
+    @GlobalHeaderParams
+    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams final String encodedParams) {
+        return decodeParameters(encodedParams);
+    }
+
+    @Provides
+    @Singleton
+    @GlobalQueryParams
+    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams final String encodedParams) {
+        return decodeParameters(encodedParams);
+    }
+
     private Multimap<HttpMethod, RestParameter> decodeParameters(final String encodedParameters) {
         final Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
 
@@ -125,19 +139,5 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         }
 
         return parameters;
-    }
-
-    @Provides
-    @Singleton
-    @GlobalHeaderParams
-    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams final String encodedParams) {
-        return decodeParameters(encodedParams);
-    }
-
-    @Provides
-    @Singleton
-    @GlobalQueryParams
-    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams final String encodedParams) {
-        return decodeParameters(encodedParams);
     }
 }
