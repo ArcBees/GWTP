@@ -112,10 +112,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
             return this;
         }
 
-        public Class<? extends DispatchHooks> getDispatchHooks() {
-            return dispatchHooks;
-        }
-
         /**
          * Specify an alternate session accessor.
          *
@@ -151,7 +147,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
             bind(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
             bind(ExceptionHandler.class).to(builder.exceptionHandlerType);
             bind(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
-            bind(DispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+            bind(DispatchHooks.class).to(builder.dispatchHooks).in(Singleton.class);
 
             configureDispatch();
         }
