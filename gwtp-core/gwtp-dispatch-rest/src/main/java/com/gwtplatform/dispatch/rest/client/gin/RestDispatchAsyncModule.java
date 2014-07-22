@@ -25,7 +25,6 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
@@ -73,7 +72,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new RestDispatchAsyncModuleBuilder());
     }
 
-    RestDispatchAsyncModule(RestDispatchAsyncModuleBuilder builder) {
+    RestDispatchAsyncModule(final RestDispatchAsyncModuleBuilder builder) {
         super(builder);
 
         this.builder = builder;
@@ -94,7 +93,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
                 .to(multimapJsonSerializer.serialize(builder.getGlobalHeaderParams()));
         bindConstant().annotatedWith(GlobalQueryParams.class)
                 .to(multimapJsonSerializer.serialize(builder.getGlobalQueryParams()));
-        bind(DispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
@@ -111,30 +109,30 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Provides
     @Singleton
     @GlobalHeaderParams
-    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams String encodedParams) {
+    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams final String encodedParams) {
         return decodeParameters(encodedParams);
     }
 
     @Provides
     @Singleton
     @GlobalQueryParams
-    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
+    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams final String encodedParams) {
         return decodeParameters(encodedParams);
     }
 
-    private Multimap<HttpMethod, RestParameter> decodeParameters(String encodedParameters) {
-        Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
+    private Multimap<HttpMethod, RestParameter> decodeParameters(final String encodedParameters) {
+        final Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
 
-        JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
-        for (String method : json.keySet()) {
-            HttpMethod httpMethod = HttpMethod.valueOf(method);
-            JSONArray jsonParameters = json.get(method).isArray();
+        final JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
+        for (final String method : json.keySet()) {
+            final HttpMethod httpMethod = HttpMethod.valueOf(method);
+            final JSONArray jsonParameters = json.get(method).isArray();
 
             for (int i = 0; i < jsonParameters.size(); ++i) {
-                JSONObject jsonParameter = jsonParameters.get(i).isObject();
-                String key = jsonParameter.get("key").isString().stringValue();
-                String value = jsonParameter.get("value").isString().stringValue();
-                RestParameter parameter = new RestParameter(key, value);
+                final JSONObject jsonParameter = jsonParameters.get(i).isObject();
+                final String key = jsonParameter.get("key").isString().stringValue();
+                final String value = jsonParameter.get("value").isString().stringValue();
+                final RestParameter parameter = new RestParameter(key, value);
 
                 parameters.put(httpMethod, parameter);
             }
