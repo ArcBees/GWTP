@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -242,6 +242,7 @@
         <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
         <maven-site-plugin.version>3.3</maven-site-plugin.version>
         <jasmine-maven-plugin.version>1.3.1.4</jasmine-maven-plugin.version>
+        <maven-bundle-plugin.version>2.4.0</maven-bundle-plugin.version>
 
         <!-- Client -->
         <gwt.version>2.6.1</gwt.version> <!-- when you update the gwt version please also update the dtds in all gwt.xml files -->
@@ -427,11 +428,18 @@
                     <artifactId>jasmine-maven-plugin</artifactId>
                     <version>${jasmine-maven-plugin.version}</version>
                 </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${maven-bundle-plugin.version}</version>
+                    <extensions>true</extensions>
+                </plugin>
             </plugins>
         </pluginManagement>
 
         <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in
-            a sub module, will override the top level parent pom's definition -->
+        a sub module, will override the top level parent pom's definition -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
