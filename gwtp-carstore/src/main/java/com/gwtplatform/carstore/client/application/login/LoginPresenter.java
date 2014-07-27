@@ -35,13 +35,12 @@ import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.resources.LoginMessages;
-import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
+import com.gwtplatform.carstore.shared.dispatch.ActionType;
+import com.gwtplatform.carstore.shared.dispatch.LogInAction;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
-import com.gwtplatform.carstore.shared.dto.ActionType;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -70,9 +69,9 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     public static final String LOGIN_COOKIE_NAME = "LoggedInCookie";
 
     private static final Logger logger = Logger.getLogger(LoginPresenter.class.getName());
+
     private final PlaceManager placeManager;
-    private final RestDispatch dispatchAsync;
-    private final SessionService sessionService;
+    private final DispatchAsync dispatcher;
     private final CurrentUser currentUser;
     private final LoginMessages messages;
 
@@ -81,15 +80,13 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                    MyView view,
                    MyProxy proxy,
                    PlaceManager placeManager,
-                   RestDispatch dispatchAsync,
-                   SessionService sessionService,
+                   DispatchAsync dispatcher,
                    CurrentUser currentUser,
                    LoginMessages messages) {
         super(eventBus, view, proxy);
 
         this.placeManager = placeManager;
-        this.dispatchAsync = dispatchAsync;
-        this.sessionService = sessionService;
+        this.dispatcher = dispatcher;
         this.currentUser = currentUser;
         this.messages = messages;
 
@@ -98,8 +95,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     @Override
     public void login(String username, String password) {
-        LogInRequest loginRequest = new LogInRequest(username, password);
-        callServerLoginAction(loginRequest);
+        LogInAction logInAction = new LogInAction(username, password);
+        callServerLoginAction(logInAction);
     }
 
     @Override
@@ -116,8 +113,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         }
     }
 
-    private void callServerLoginAction(LogInRequest loginRequest) {
-        dispatchAsync.execute(sessionService.login(loginRequest), new AsyncCallback<LogInResult>() {
+    private void callServerLoginAction(LogInAction logInAction) {
+        dispatcher.execute(logInAction, new AsyncCallback<LogInResult>() {
             @Override
             public void onFailure(Throwable e) {
                 DisplayMessageEvent.fire(LoginPresenter.this, new Message(messages.unableToContactServer(),
@@ -188,8 +185,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     private void tryLoggingInWithCookieFirst() {
         getView().setLoginButtonEnabled(false);
-        LogInRequest loginRequest = new LogInRequest(getLoggedInCookie());
-        callServerLoginAction(loginRequest);
+        LogInAction logInAction = new LogInAction(getLoggedInCookie());
+        callServerLoginAction(logInAction);
     }
 
     private String getLoggedInCookie() {

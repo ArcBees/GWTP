@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,11 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.shared.dto;
+package com.gwtplatform.carstore.shared.dispatch;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum ActionType implements IsSerializable {
     VIA_CREDENTIALS,
-    VIA_COOKIE
+    ActionType, VIA_COOKIE
 }

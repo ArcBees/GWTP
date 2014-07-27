@@ -17,13 +17,13 @@
 package com.gwtplatform.carstore.server.dao.objectify;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.cmd.LoadType;
-import com.googlecode.objectify.util.cmd.ObjectifyWrapper;
+import com.googlecode.objectify.impl.ObjectifyImpl;
 
-public class Ofy extends ObjectifyWrapper<Ofy, OfyFactory> {
-    public Ofy(Objectify base) {
-        super(base);
+public class Ofy extends ObjectifyImpl<Ofy> {
+    public Ofy(ObjectifyFactory factory) {
+        super(factory);
     }
 
     public <T> LoadType<T> query(Class<T> clazz) {

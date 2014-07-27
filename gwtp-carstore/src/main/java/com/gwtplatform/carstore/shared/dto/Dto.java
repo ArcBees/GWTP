@@ -16,5 +16,7 @@
 
 package com.gwtplatform.carstore.shared.dto;
 
-public interface Dto {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public interface Dto extends IsSerializable {
 }

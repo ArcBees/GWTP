@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,30 +16,31 @@
 
 package com.gwtplatform.carstore.shared.dispatch;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gwtplatform.carstore.shared.dto.ActionType;
+import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 
-public class LogInRequest {
+public class LogInAction extends ActionImpl<LogInResult> {
     private ActionType actionType;
     private String username;
     private String password;
     private String loggedInCookie;
 
-    public LogInRequest() {
+    protected LogInAction() {
     }
 
-    @JsonCreator
-    public LogInRequest(@JsonProperty("username") String username,
-                        @JsonProperty("password") String password) {
+    public LogInAction(String username, String password) {
         actionType = ActionType.VIA_CREDENTIALS;
         this.password = password;
         this.username = username;
     }
 
-    public LogInRequest(String loggedInCookie) {
+    public LogInAction(String loggedInCookie) {
         actionType = ActionType.VIA_COOKIE;
         this.loggedInCookie = loggedInCookie;
+    }
+
+    @Override
+    public boolean isSecured() {
+        return false;
     }
 
     public ActionType getActionType() {

@@ -16,7 +16,6 @@
 
 package com.gwtplatform.carstore.server.dao.objectify;
 
-import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.gwtplatform.carstore.server.dao.domain.Car;
@@ -28,6 +27,7 @@ import com.gwtplatform.carstore.server.dao.domain.UserSession;
 
 public class OfyService {
     static {
+        ObjectifyService.setFactory(new OfyFactory());
         factory().register(Car.class);
         factory().register(CarProperties.class);
         factory().register(Manufacturer.class);
@@ -36,8 +36,8 @@ public class OfyService {
         factory().register(UserSession.class);
     }
 
-    public static Objectify ofy() {
-        return ObjectifyService.ofy();
+    public static Ofy ofy() {
+        return (Ofy) ObjectifyService.ofy();
     }
 
     public static ObjectifyFactory factory() {
