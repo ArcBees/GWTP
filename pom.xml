@@ -224,6 +224,7 @@
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Maven -->
+        <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
         <gwt-maven-plugin.version>2.6.1</gwt-maven-plugin.version>
         <maven-checkstyle-plugin.version>2.12.1</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -240,7 +241,7 @@
         <jasmine-maven-plugin.version>1.3.1.5</jasmine-maven-plugin.version>
 
         <!-- Client -->
-        <gwt.version>2.6.1</gwt.version>
+        <gwt.version>2.6.1</gwt.version> <!-- when you update the gwt version please also update the dtds in all gwt.xml files -->
         <gin.version>2.1.2</gin.version>
         <gwtquery.version>1.4.2</gwtquery.version>
         <gwt-jackson.version>0.5.0</gwt-jackson.version>

@@ -18,8 +18,10 @@ package com.gwtplatform.carstore.cucumber.application.login;
 
 import org.openqa.selenium.WebElement;
 
+import com.google.inject.Inject;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.cucumber.application.BasePage;
+import com.gwtplatform.carstore.cucumber.application.widgets.HeaderWidgetPage;
 import com.gwtplatform.carstore.cucumber.util.FindByDebugId;
 
 public class LoginPage extends BasePage {
@@ -29,6 +31,13 @@ public class LoginPage extends BasePage {
     private WebElement password;
     @FindByDebugId("login")
     private WebElement login;
+
+    private final HeaderWidgetPage headerWidgetPage;
+
+    @Inject
+    LoginPage(HeaderWidgetPage headerWidgetPage) {
+        this.headerWidgetPage = headerWidgetPage;
+    }
 
     public void setUsername(String username) {
         waitUntilElementIsVisible(this.username);
@@ -46,6 +55,10 @@ public class LoginPage extends BasePage {
     }
 
     public Boolean isOnLoginPage() {
-        return webDriver.getCurrentUrl().contains("#" + NameTokens.login);
+        return webDriver.getCurrentUrl().contains("#" + NameTokens.LOGIN);
+    }
+
+    public void waitUntilLoggedIn() {
+        headerWidgetPage.waitUntilLogoutIsClickable();
     }
 }

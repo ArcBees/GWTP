@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,10 +14,18 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.application.widget.header;
+package com.gwtplatform.dispatch.client;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+public class DefaultDispatchHooks implements DispatchHooks {
+    @Override
+    public void onSuccess() {
+    }
 
-public interface HeaderUiHandlers extends UiHandlers {
-    void logout();
+    @Override
+    public void onExecute() {
+    }
+
+    @Override
+    public void onFailure() {
+    }
 }

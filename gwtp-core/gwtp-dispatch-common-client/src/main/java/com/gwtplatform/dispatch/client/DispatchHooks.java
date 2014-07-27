@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,10 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.application.widget.header;
+package com.gwtplatform.dispatch.client;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+/**
+ * Hooks to be executed on every {@link com.gwtplatform.dispatch.client.DispatchCall}.
+ *
+ * {@link DispatchHooks#onExecute()} will be called just before any action is attempted.
+ * {@link DispatchHooks#onSuccess()} will be called when any action succeeds.
+ * {@link DispatchHooks#onFailure()} will be called when any action fails.
+ */
+public interface DispatchHooks {
+    void onSuccess();
 
-public interface HeaderUiHandlers extends UiHandlers {
-    void logout();
+    void onExecute();
+
+    void onFailure();
 }

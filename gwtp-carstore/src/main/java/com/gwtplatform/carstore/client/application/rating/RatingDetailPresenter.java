@@ -48,13 +48,12 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
         implements RatingDetailUiHandlers, ActionBarEvent.ActionBarHandler, GoBackEvent.GoBackHandler {
 
-    public interface MyView extends View, HasUiHandlers<RatingDetailUiHandlers> {
+    interface MyView extends View, HasUiHandlers<RatingDetailUiHandlers> {
         void edit(RatingDto ratingDto);
 
         void setAllowedCars(List<CarDto> carDtos);
@@ -63,8 +62,8 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.detailRating)
-    public interface MyProxy extends ProxyPlace<RatingDetailPresenter> {
+    @NameToken(NameTokens.DETAIL_RATING)
+    interface MyProxy extends ProxyPlace<RatingDetailPresenter> {
     }
 
     private final RestDispatch dispatcher;
@@ -82,7 +81,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
                           RatingService ratingService,
                           EditRatingMessages messages,
                           PlaceManager placeManager) {
-        super(eventBus, view, proxy);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.dispatcher = dispatcher;
         this.carsService = carsService;
@@ -134,11 +133,6 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
                 onGetCarsSuccess(cars);
             }
         });
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealContentEvent.fire(this, ApplicationPresenter.SLOT_MAIN_CONTENT, this);
     }
 
     private void onGetCarsSuccess(List<CarDto> carDtos) {

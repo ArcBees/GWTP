@@ -86,7 +86,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onCreate(PlaceManager placeManager) {
         // Given
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.newCar).build();
+        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.NEW_CAR).build();
 
         // When
         carsPresenter.onCreate();
@@ -101,7 +101,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
         dispatcher.given(new TypeLiteral<RestAction<Void>>() {}).willReturn(null);
 
         // And GetCarAction for fetching after delete
-        List<CarDto> result = new ArrayList<CarDto>();
+        List<CarDto> result = new ArrayList<>();
         dispatcher.given(new TypeLiteral<RestAction<List<CarDto>>>() {}).willReturn(result);
 
         // And display is setup
@@ -121,7 +121,7 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onFetchData(ArrayList<CarDto> carDtos) {
         // Given
-        List<CarDto> result = new ArrayList<CarDto>();
+        List<CarDto> result = new ArrayList<>();
         dispatcher.given(new TypeLiteral<RestAction<List<CarDto>>>() {}).willReturn(result);
 
         // When

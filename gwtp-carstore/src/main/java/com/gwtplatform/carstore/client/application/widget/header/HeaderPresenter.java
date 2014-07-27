@@ -22,12 +22,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.carstore.client.application.event.ActionBarEvent;
-import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent;
-import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
-import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
-import com.gwtplatform.carstore.client.application.event.GoBackEvent;
 import com.gwtplatform.carstore.client.application.event.UserLoginEvent;
 import com.gwtplatform.carstore.client.application.login.LoginPresenter;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
@@ -39,33 +34,25 @@ import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.DefaultPlace;
+import com.gwtplatform.mvp.client.proxy.NavigationEvent;
+import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
-        implements HeaderUiHandlers, UserLoginEvent.UserLoginHandler, ChangeActionBarEvent.ChangeActionBarHandler,
-        ActionBarVisibilityEvent.ActionBarVisibilityHandler {
+        implements HeaderUiHandlers, UserLoginEvent.UserLoginHandler, NavigationHandler {
 
     public interface MyView extends View, HasUiHandlers<HeaderUiHandlers> {
         void enableUserOptions(CurrentUser currentUser);
 
         void disableUserOptions();
 
-        void showActionBar(Boolean visible);
-
-        void initActionBar(Boolean tabsVisible);
-
-        void hideActionButtons();
-
-        void showActionButton(ActionType actionType);
+        void setMenuItemActive(String nameToken);
     }
 
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
 
     private final RestDispatch dispatchAsync;
     private final SessionService sessionService;
-    private final String defaultPlaceNameToken;
     private final PlaceManager placeManager;
     private final CurrentUser currentUser;
     private final HeaderMessages messages;
@@ -75,7 +62,6 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
                     MyView view,
                     RestDispatch dispatchAsync,
                     SessionService sessionService,
-                    @DefaultPlace String defaultPlaceNameToken,
                     PlaceManager placeManager,
                     CurrentUser currentUser,
                     HeaderMessages messages) {
@@ -83,7 +69,6 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
         this.dispatchAsync = dispatchAsync;
         this.sessionService = sessionService;
-        this.defaultPlaceNameToken = defaultPlaceNameToken;
         this.placeManager = placeManager;
         this.currentUser = currentUser;
         this.messages = messages;
@@ -113,39 +98,17 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
     }
 
     @Override
-    public void onActionBarVisible(ActionBarVisibilityEvent event) {
-        getView().showActionBar(event.isVisible());
-    }
-
-    @Override
-    public void onChangeActionBar(ChangeActionBarEvent event) {
-        getView().initActionBar(event.getTabsVisible());
-        getView().hideActionButtons();
-        for (ActionType actionType : event.getActions()) {
-            getView().showActionButton(actionType);
-        }
-    }
-
-    @Override
-    public void onAction(ActionType actionType) {
-        String sourceToken = placeManager.getCurrentPlaceRequest().getNameToken();
-        ActionBarEvent.fire(this, actionType, sourceToken);
-    }
-
-    @Override
-    public void onGoBack() {
-        GoBackEvent.fire(this);
+    public void onNavigation(NavigationEvent navigationEvent) {
+        getView().setMenuItemActive(navigationEvent.getRequest().getNameToken());
     }
 
     @Override
     protected void onBind() {
         addRegisteredHandler(UserLoginEvent.getType(), this);
-        addRegisteredHandler(ActionBarVisibilityEvent.getType(), this);
-        addRegisteredHandler(ChangeActionBarEvent.getType(), this);
+        addRegisteredHandler(NavigationEvent.getType(), this);
 
-        if (currentUser.isLoggedIn()) {
-            getView().enableUserOptions(currentUser);
-        }
+        getView().enableUserOptions(currentUser);
+        getView().setMenuItemActive(placeManager.getCurrentPlaceRequest().getNameToken());
     }
 
     private void onLogoutSuccess() {
@@ -154,8 +117,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
         currentUser.reset();
         getView().disableUserOptions();
 
-        PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(defaultPlaceNameToken).build();
-        placeManager.revealPlace(placeRequest);
+        placeManager.revealDefaultPlace();
     }
 
     private void resetLoggedInCookie() {

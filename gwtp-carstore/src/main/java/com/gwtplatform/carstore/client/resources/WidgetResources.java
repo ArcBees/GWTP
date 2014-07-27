@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,10 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.application.widget.header;
+package com.gwtplatform.carstore.client.resources;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 
-public interface HeaderUiHandlers extends UiHandlers {
-    void logout();
+public interface WidgetResources extends ClientBundle {
+    public interface Header extends CssResource {
+        String menuActive();
+    }
+
+    @Source("header.css")
+    public Header header();
 }

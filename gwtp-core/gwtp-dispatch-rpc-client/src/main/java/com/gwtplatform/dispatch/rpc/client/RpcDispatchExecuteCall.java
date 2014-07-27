@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
@@ -36,14 +37,14 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
     private final DispatchServiceAsync dispatchService;
 
-    RpcDispatchExecuteCall(
-            DispatchServiceAsync dispatchService,
-            ExceptionHandler exceptionHandler,
-            ClientActionHandlerRegistry clientActionHandlerRegistry,
-            SecurityCookieAccessor securityCookieAccessor,
-            A action,
-            AsyncCallback<R> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
+    RpcDispatchExecuteCall(DispatchServiceAsync dispatchService,
+                           ExceptionHandler exceptionHandler,
+                           ClientActionHandlerRegistry clientActionHandlerRegistry,
+                           SecurityCookieAccessor securityCookieAccessor,
+                           DispatchHooks dispatchHooks,
+                           A action,
+                           AsyncCallback<R> callback) {
+        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, dispatchHooks, action, callback);
 
         this.dispatchService = dispatchService;
     }
