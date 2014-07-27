@@ -33,7 +33,7 @@ public class GoBackEvent extends GwtEvent<GoBackEvent.GoBackHandler> {
         source.fireEvent(new GoBackEvent());
     }
 
-    private static final Type<GoBackHandler> TYPE = new Type<GoBackHandler>();
+    private static final Type<GoBackHandler> TYPE = new Type<>();
 
     public GoBackEvent() {
     }

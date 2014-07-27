@@ -18,11 +18,15 @@ package com.gwtplatform.dispatch.client.gin;
 
 import java.lang.annotation.Annotation;
 
+import javax.inject.Singleton;
+
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinAnnotatedBindingBuilder;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
+import com.gwtplatform.dispatch.client.DefaultDispatchHooks;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
@@ -58,10 +62,11 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
      * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.Builder
      */
     public abstract static class Builder {
-        protected Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
-        protected Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
+        private Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
+        private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
                 DefaultClientActionHandlerRegistry.class;
-        protected Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
+        private Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
+        private Class<? extends DispatchHooks> dispatchHooks = DefaultDispatchHooks.class;
 
         /**
          * Constructs {@link AbstractDispatchAsyncModule} builder.
@@ -70,16 +75,11 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         }
 
         /**
-         * Specify an alternative exception handler.
+         * Build the {@link AbstractDispatchAsyncModule}.
          *
-         * @param exceptionHandlerType The {@link ExceptionHandler} class.
-         *
-         * @return a {@link Builder} object.
+         * @return The built {@link AbstractDispatchAsyncModule}.
          */
-        public Builder exceptionHandler(Class<? extends ExceptionHandler> exceptionHandlerType) {
-            this.exceptionHandlerType = exceptionHandlerType;
-            return this;
-        }
+        public abstract AbstractDispatchAsyncModule build();
 
         /**
          * Specify an alternate client action handler registry.
@@ -89,8 +89,31 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @return a {@link Builder} object.
          */
         public Builder clientActionHandlerRegistry(
-                Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
+                final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
             this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
+            return this;
+        }
+
+        /**
+         * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
+         * Default is {@link com.gwtplatform.dispatch.client.DefaultDispatchHooks}
+         *
+         * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
+         * @return this {@link Builder} object.
+         */
+        public Builder dispatchHooks(final Class<? extends DispatchHooks> dispatchHooks) {
+            this.dispatchHooks = dispatchHooks;
+            return this;
+        }
+
+        /**
+         * Specify an alternative exception handler.
+         *
+         * @param exceptionHandlerType The {@link ExceptionHandler} class.
+         * @return a {@link Builder} object.
+         */
+        public Builder exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
+            this.exceptionHandlerType = exceptionHandlerType;
             return this;
         }
 
@@ -98,20 +121,12 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * Specify an alternate session accessor.
          *
          * @param sessionAccessorType The {@link SecurityCookieAccessor} class.
-         *
          * @return a {@link Builder} object.
          */
-        public Builder sessionAccessor(Class<? extends SecurityCookieAccessor> sessionAccessorType) {
+        public Builder sessionAccessor(final Class<? extends SecurityCookieAccessor> sessionAccessorType) {
             this.sessionAccessorType = sessionAccessorType;
             return this;
         }
-
-        /**
-         * Build the {@link AbstractDispatchAsyncModule}.
-         *
-         * @return The built {@link AbstractDispatchAsyncModule}.
-         */
-        public abstract AbstractDispatchAsyncModule build();
     }
 
     private final Builder builder;
@@ -129,6 +144,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         bindAnnotated(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
         bindAnnotated(ExceptionHandler.class).to(builder.exceptionHandlerType);
         bindAnnotated(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
+        bindAnnotated(DispatchHooks.class).to(builder.dispatchHooks).in(Singleton.class);
 
         configureDispatch();
     }

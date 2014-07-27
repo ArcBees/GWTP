@@ -48,57 +48,29 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
 
+    /**
+     * Initiate the creation of a global header parameter that will be attached to all requests.
+     *
+     * @param key The key used for this parameter
+     * @return the parameter builder instance
+     */
+    public RestParameterBuilder addGlobalHeaderParam(final String key) {
+        return new RestParameterBuilder(this, globalHeaderParams, key);
+    }
+
+    /**
+     * Initiate the creation of a global query parameter that will be attached to all requests.
+     *
+     * @param key The key used for this parameter
+     * @return the parameter builder instance
+     */
+    public RestParameterBuilder addGlobalQueryParam(final String key) {
+        return new RestParameterBuilder(this, globalQueryParams, key);
+    }
+
     @Override
     public RestDispatchAsyncModule build() {
         return new RestDispatchAsyncModule(this);
-    }
-
-    /**
-     * Specify the XSRF token header name.
-     *
-     * @deprecated See {@link #xsrfTokenHeaderName(String)}
-     */
-    @Deprecated
-    public RestDispatchAsyncModuleBuilder xcsrfTokenHeaderName(String xsrfTokenHeaderName) {
-        this.xsrfTokenHeaderName = xsrfTokenHeaderName;
-        return this;
-    }
-
-    /**
-     * Specify the XSRF token header name.
-     *
-     * @param xsrfTokenHeaderName The XSRF token header name.
-     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
-     */
-    public RestDispatchAsyncModuleBuilder xsrfTokenHeaderName(String xsrfTokenHeaderName) {
-        this.xsrfTokenHeaderName = xsrfTokenHeaderName;
-        return this;
-    }
-
-    /**
-     * Specify the serialization implementation to use.
-     * Default is {@link JsonSerialization}.
-     *
-     * @param serializationClass The {@link Serialization} implementation to use.
-     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
-     */
-    public RestDispatchAsyncModuleBuilder serialization(Class<? extends Serialization> serializationClass) {
-        this.serializationClass = serializationClass;
-        return this;
-    }
-
-    /**
-     * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
-     * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
-     * will be called.
-     * Default is <code>0</code>: no timeout.
-     *
-     * @param timeoutMs The maximum time to wait, in milliseconds, or {@code 0} for no timeout.
-     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
-     */
-    public RestDispatchAsyncModuleBuilder requestTimeout(int timeoutMs) {
-        this.requestTimeoutMs = timeoutMs;
-        return this;
     }
 
     /**
@@ -110,41 +82,9 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @param defaultDateFormat The pattern used to format dates.
      * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
      */
-    public RestDispatchAsyncModuleBuilder defaultDateFormat(String defaultDateFormat) {
+    public RestDispatchAsyncModuleBuilder defaultDateFormat(final String defaultDateFormat) {
         this.defaultDateFormat = defaultDateFormat;
         return this;
-    }
-
-    /**
-     * Initiate the creation of a global header parameter that will be attached to all requests.
-     *
-     * @param key The key used for this parameter
-     * @return the parameter builder instance
-     */
-    public RestParameterBuilder addGlobalHeaderParam(String key) {
-        return new RestParameterBuilder(this, globalHeaderParams, key);
-    }
-
-    /**
-     * Initiate the creation of a global query parameter that will be attached to all requests.
-     *
-     * @param key The key used for this parameter
-     * @return the parameter builder instance
-     */
-    public RestParameterBuilder addGlobalQueryParam(String key) {
-        return new RestParameterBuilder(this, globalQueryParams, key);
-    }
-
-    public String getXsrfTokenHeaderName() {
-        return xsrfTokenHeaderName;
-    }
-
-    public Class<? extends Serialization> getSerializationClass() {
-        return serializationClass;
-    }
-
-    public int getRequestTimeoutMs() {
-        return requestTimeoutMs;
     }
 
     public String getDefaultDateFormat() {
@@ -158,4 +98,65 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     public Multimap<HttpMethod, RestParameter> getGlobalQueryParams() {
         return globalQueryParams;
     }
+
+    public int getRequestTimeoutMs() {
+        return requestTimeoutMs;
+    }
+
+    public Class<? extends Serialization> getSerializationClass() {
+        return serializationClass;
+    }
+
+    public String getXsrfTokenHeaderName() {
+        return xsrfTokenHeaderName;
+    }
+
+    /**
+     * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
+     * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
+     * will be called.
+     * Default is <code>0</code>: no timeout.
+     *
+     * @param timeoutMs The maximum time to wait, in milliseconds, or {@code 0} for no timeout.
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
+    public RestDispatchAsyncModuleBuilder requestTimeout(final int timeoutMs) {
+        this.requestTimeoutMs = timeoutMs;
+        return this;
+    }
+
+    /**
+     * Specify the serialization implementation to use.
+     * Default is {@link JsonSerialization}.
+     *
+     * @param serializationClass The {@link Serialization} implementation to use.
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
+    public RestDispatchAsyncModuleBuilder serialization(final Class<? extends Serialization> serializationClass) {
+        this.serializationClass = serializationClass;
+        return this;
+    }
+
+    /**
+     * Specify the XSRF token header name.
+     *
+     * @deprecated See {@link #xsrfTokenHeaderName(String)}
+     */
+    @Deprecated
+    public RestDispatchAsyncModuleBuilder xcsrfTokenHeaderName(final String xsrfTokenHeaderName) {
+        this.xsrfTokenHeaderName = xsrfTokenHeaderName;
+        return this;
+    }
+
+    /**
+     * Specify the XSRF token header name.
+     *
+     * @param xsrfTokenHeaderName The XSRF token header name.
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
+    public RestDispatchAsyncModuleBuilder xsrfTokenHeaderName(final String xsrfTokenHeaderName) {
+        this.xsrfTokenHeaderName = xsrfTokenHeaderName;
+        return this;
+    }
+
 }

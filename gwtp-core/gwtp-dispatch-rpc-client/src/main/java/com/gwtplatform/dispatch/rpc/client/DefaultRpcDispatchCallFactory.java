@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rpc.client;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
@@ -34,30 +35,33 @@ public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
     private final ExceptionHandler exceptionHandler;
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final SecurityCookieAccessor securityCookieAccessor;
+    private final DispatchHooks dispatchHooks;
 
     @Inject
-    DefaultRpcDispatchCallFactory(
-            DispatchServiceAsync dispatchService,
-            @RpcBinding ExceptionHandler exceptionHandler,
-            @RpcBinding ClientActionHandlerRegistry clientActionHandlerRegistry,
-            @RpcBinding SecurityCookieAccessor securityCookieAccessor) {
+    DefaultRpcDispatchCallFactory(DispatchServiceAsync dispatchService,
+                                  ExceptionHandler exceptionHandler,
+                                  ClientActionHandlerRegistry clientActionHandlerRegistry,
+                                  SecurityCookieAccessor securityCookieAccessor,
+                                  DispatchHooks dispatchHooks) {
         this.dispatchService = dispatchService;
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
+        this.dispatchHooks = dispatchHooks;
     }
 
     @Override
     public <A extends Action<R>, R extends Result> RpcDispatchExecuteCall<A, R> create(A action,
-            AsyncCallback<R> callback) {
-        return new RpcDispatchExecuteCall<A, R>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
-                securityCookieAccessor, action, callback);
+                                                                                       AsyncCallback<R> callback) {
+        return new RpcDispatchExecuteCall<>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
+                securityCookieAccessor, dispatchHooks, action, callback);
     }
 
     @Override
     public <A extends Action<R>, R extends Result> RpcDispatchUndoCall<A, R> create(A action,
-            R result, AsyncCallback<Void> callback) {
-        return new RpcDispatchUndoCall<A, R>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
-                securityCookieAccessor, action, result, callback);
+                                                                                    R result,
+                                                                                    AsyncCallback<Void> callback) {
+        return new RpcDispatchUndoCall<>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
+                securityCookieAccessor, dispatchHooks, action, result, callback);
     }
 }

@@ -29,6 +29,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 public class ApplicationDesktopModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
+        install(new UnauthorizedModule());
         install(new LoginModule());
         install(new ManufacturerModule());
         install(new CarsDesktopModule());

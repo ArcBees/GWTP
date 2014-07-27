@@ -24,6 +24,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
@@ -43,15 +44,15 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
 
-    public RestDispatchCall(
-            ExceptionHandler exceptionHandler,
-            ClientActionHandlerRegistry clientActionHandlerRegistry,
-            SecurityCookieAccessor securityCookieAccessor,
-            RestRequestBuilderFactory requestBuilderFactory,
-            RestResponseDeserializer restResponseDeserializer,
-            A action,
-            AsyncCallback<R> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
+    public RestDispatchCall(ExceptionHandler exceptionHandler,
+                            ClientActionHandlerRegistry clientActionHandlerRegistry,
+                            SecurityCookieAccessor securityCookieAccessor,
+                            RestRequestBuilderFactory requestBuilderFactory,
+                            RestResponseDeserializer restResponseDeserializer,
+                            DispatchHooks dispatchHooks,
+                            A action,
+                            AsyncCallback<R> callback) {
+        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, dispatchHooks, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
@@ -63,9 +64,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             RequestBuilder requestBuilder = buildRequest();
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
-        } catch (RequestException e) {
-            onExecuteFailure(e);
-        } catch (ActionException e) {
+        } catch (RequestException | ActionException e) {
             onExecuteFailure(e);
         }
 

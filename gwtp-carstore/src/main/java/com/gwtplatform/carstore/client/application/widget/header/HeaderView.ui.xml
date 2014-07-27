@@ -1,8 +1,9 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
+    <ui:import field="com.gwtplatform.carstore.client.place.NameTokens.*"/>
+
     <ui:with field="resource" type="com.gwtplatform.carstore.client.resources.AppResources"/>
-    <ui:with field="tokens" type="com.gwtplatform.carstore.client.place.NameTokens"/>
 
     <ui:style>
         .header {
@@ -79,9 +80,13 @@
                 <g:Label text="CarStore"/>
             </div>
 
-            <div class="{style.floatLeft} {style.menuBarWrapper}">
-                <g:ValuePicker ui:field="menuBar" debugId="menubar"/>
-            </div>
+            <g:HTMLPanel styleName="{style.floatLeft} {style.menuBarWrapper}" ui:field="menubar" debugId="menubar">
+                <a href="#{MANUFACTURER}">Manufacturers</a>
+                <a href="#{CARS}">Cars</a>
+                <a href="#{RATING}">Ratings</a>
+                <a href="#{REPORT}">Reports</a>
+                <a href="#{STATS}">Statistics</a>
+            </g:HTMLPanel>
 
             <g:HTMLPanel ui:field="userOptions" styleName="{style.floatRight} {style.paddingTop}">
                 <div class="{style.userInfo}">
