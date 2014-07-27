@@ -16,6 +16,9 @@
 
 package com.gwtplatform.mvp.shared.proxy;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -52,23 +55,43 @@ public class RouteTokenFormatterTest {
 
     static class UrlUtilsTestImpl implements UrlUtils {
         @Override
-        public String decodeQueryString(String encodedUrlComponent) {
-            return encodedUrlComponent;
+        public String decodePathSegment(final String encodedPathSegment) {
+            try {
+                return URLDecoder.decode(encodedPathSegment, "UTF-8");
+            } catch (final UnsupportedEncodingException e) {
+                // THIS won't happen
+                return null;
+            }
         }
 
         @Override
-        public String encodeQueryString(String decodedUrlComponent) {
-            return decodedUrlComponent;
+        public String decodeQueryString(final String encodedUrlComponent) {
+            try {
+                return URLDecoder.decode(encodedUrlComponent, "UTF-8");
+            } catch (final UnsupportedEncodingException e) {
+                // THIS won't happen
+                return null;
+            }
         }
 
         @Override
-        public String decodePathSegment(String encodedPathSegment) {
-            return encodedPathSegment;
+        public String encodePathSegment(final String decodedPathSegment) {
+            try {
+                return URLEncoder.encode(decodedPathSegment, "UTF-8");
+            } catch (final UnsupportedEncodingException e) {
+                // THIS won't happen
+                return null;
+            }
         }
 
         @Override
-        public String encodePathSegment(String decodedPathSegment) {
-            return decodedPathSegment;
+        public String encodeQueryString(final String decodedUrlComponent) {
+            try {
+                return URLEncoder.encode(decodedUrlComponent, "UTF-8");
+            } catch (final UnsupportedEncodingException e) {
+                // THIS won't happen
+                return null;
+            }
         }
     }
 
@@ -111,6 +134,28 @@ public class RouteTokenFormatterTest {
         // Then
         assertTrue(placeToken.matches(expectedPlacePattern));
         assertEquals(expectedQueryParameters, queryParameters);
+    }
+
+    @Test
+    public void testToPlaceTokenWithEmbeddedUrlUnsafeParam() {
+        // Given
+        final PlaceRequest placeRequest = new PlaceRequest.Builder()
+        .nameToken("/user/{userId}/albums/{albumId}")
+        .with("userId", "Two Words")
+        .with("albumId", "Then Three Words")
+        .build();
+        final String expectedPlacePattern = "/user/Two+Words/albums/Then+Three+Words";
+
+        // When
+        final String placeToken = tokenFormatter.toPlaceToken(placeRequest);
+
+        // Then
+        assertTrue(placeToken.equals(expectedPlacePattern));
+
+        // And in reverse
+        final PlaceRequest placeRequest1 = tokenFormatter.toPlaceRequest(placeToken);
+
+        assertEquals(placeRequest1.getParameter("userId", ""), "Two Words");
     }
 
     @Test

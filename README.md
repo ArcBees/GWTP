@@ -1,4 +1,6 @@
-![GWTP] (http://i.imgur.com/LHvTZ.png "GWTP goo-teepee") *goo-teepee*
+![GWTP] (http://i.imgur.com/4ENEHCM.png "GWTP goo-teepee")
+
+*goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
 
 Wanna help? [![Stories in Ready](https://badge.waffle.io/arcbees/gwtp.png?label=ready&title=Ready)](https://waffle.io/arcbees/gwtp)
@@ -55,11 +57,6 @@ Get high quality support through ArcBees.
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-basic-spring">Source</a></td>
   </tr>
   <tr>
-    <th>Hierarchical Places</th>
-    <td><a href="http://gwtp-sample-hplace.appspot.com">AppEngine Demo</a></td>
-    <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-hplace">Source</a></td>
-  </tr>
-  <tr>
     <th>Mobile</th>
     <td><a href="http://gwtp-sample-mobile.appspot.com">AppEngine Demo</a></td>
     <td><a href="https://github.com/ArcBees/GWTP-Samples/tree/master/gwtp-samples/gwtp-sample-mobile">Source</a></td>
@@ -97,5 +94,3 @@ Get high quality support through ArcBees.
 [![Arcbees.com](http://arcbees-ads.appspot.com/ad.png)](http://arcbees.com)
 
 [![IntelliJ](https://lh6.googleusercontent.com/--QIIJfKrjSk/UJJ6X-UohII/AAAAAAAAAVM/cOW7EjnH778/s800/banner_IDEA.png)](http://www.jetbrains.com/idea/index.html)
-
-[![githalytics.com alpha](https://cruel-carlota.gopagoda.com/15d7ccab612aa40bb3af6b0cbcf4fc51 "githalytics.com")](http://githalytics.com/ArcBees/GWTP)

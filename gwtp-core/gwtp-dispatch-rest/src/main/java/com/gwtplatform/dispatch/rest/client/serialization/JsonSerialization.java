@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import com.github.nmorel.gwtjackson.client.JsonDeserializationContext;
 import com.github.nmorel.gwtjackson.client.JsonSerializationContext;
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
+import com.google.common.base.Strings;
 
 /**
  * JSON implementation of {@link Serialization}. It acts as a facade to
@@ -54,7 +55,7 @@ public class JsonSerialization implements Serialization {
 
     @Override
     public <T> String serialize(T o, String type) {
-        if (VOID.equals(type)) {
+        if (VOID.equals(type) || o == null) {
             return null;
         }
 
@@ -64,7 +65,7 @@ public class JsonSerialization implements Serialization {
 
     @Override
     public <T> T deserialize(String json, String type) {
-        if (VOID.equals(type)) {
+        if (VOID.equals(type) || Strings.isNullOrEmpty(json)) {
             return null;
         }
 

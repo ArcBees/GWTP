@@ -40,8 +40,8 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
         void setResult(String result);
     }
 
-    @NameToken(NameTokens.STATS)
     @ProxyStandard
+    @NameToken(NameTokens.STATS)
     interface MyProxy extends ProxyPlace<StatisticsPresenter> {
     }
 

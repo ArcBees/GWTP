@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeSet;
 
 import javax.inject.Inject;
@@ -241,9 +242,19 @@ public class RouteTokenFormatter implements TokenFormatter {
         RouteMatcher matcher = new RouteMatcher(place);
         RouteMatch match = (!matcher.allMatches.isEmpty()) ? matcher.allMatches.last() : new RouteMatch(place, 0, null);
 
+        match.parameters = decodeEmbeddedParams(match.parameters);
         match.parameters = parseQueryString(query, match.parameters);
 
         return new PlaceRequest.Builder().nameToken(match.route).with(match.parameters).build();
+    }
+
+    private Map<String, String> decodeEmbeddedParams(Map<String, String> parameters) {
+        if (parameters != null) {
+            for (Entry<String, String> entry: parameters.entrySet()) {
+                 entry.setValue(urlUtils.decodeQueryString(entry.getValue()));
+            }
+        }
+        return parameters;
     }
 
     @Override
