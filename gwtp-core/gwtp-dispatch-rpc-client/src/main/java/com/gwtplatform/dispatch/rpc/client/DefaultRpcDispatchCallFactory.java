@@ -53,7 +53,7 @@ public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
     @Override
     public <A extends Action<R>, R extends Result> RpcDispatchExecuteCall<A, R> create(A action,
                                                                                        AsyncCallback<R> callback) {
-        return new RpcDispatchExecuteCall<>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
+        return new RpcDispatchExecuteCall<A, R>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
                 securityCookieAccessor, dispatchHooks, action, callback);
     }
 
@@ -61,7 +61,7 @@ public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
     public <A extends Action<R>, R extends Result> RpcDispatchUndoCall<A, R> create(A action,
                                                                                     R result,
                                                                                     AsyncCallback<Void> callback) {
-        return new RpcDispatchUndoCall<>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
+        return new RpcDispatchUndoCall<A, R>(dispatchService, exceptionHandler, clientActionHandlerRegistry,
                 securityCookieAccessor, dispatchHooks, action, result, callback);
     }
 }

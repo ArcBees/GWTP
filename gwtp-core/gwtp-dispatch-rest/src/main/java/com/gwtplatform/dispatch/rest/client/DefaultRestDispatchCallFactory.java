@@ -53,7 +53,7 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
 
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
+        return new RestDispatchCall<A, R>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
                 requestBuilderFactory, restResponseDeserializer, dispatchHooks, action, callback);
     }
 }
