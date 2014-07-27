@@ -129,6 +129,8 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         }
     }
 
+    private static boolean alreadyBound = false;
+
     private final Builder builder;
     private final Class<? extends Annotation> annotationClass;
 
@@ -144,7 +146,11 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         bindAnnotated(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
         bindAnnotated(ExceptionHandler.class).to(builder.exceptionHandlerType);
         bindAnnotated(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
-        bindAnnotated(DispatchHooks.class).to(builder.dispatchHooks).in(Singleton.class);
+
+        if (!alreadyBound) {
+            bind(DispatchHooks.class).to(builder.dispatchHooks).in(Singleton.class);
+            alreadyBound = true;
+        }
 
         configureDispatch();
     }
