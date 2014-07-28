@@ -20,7 +20,7 @@ import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 public class LogInResult implements Result {
-    private ActionType actiontype;
+    private ActionType actionType;
     private CurrentUserDto currentUserDto;
     private String loggedInCookie;
 
@@ -28,8 +28,8 @@ public class LogInResult implements Result {
         // Needed for serialization
     }
 
-    public LogInResult(ActionType actiontype, CurrentUserDto currentUserDto, String loggedInCookie) {
-        this.actiontype = actiontype;
+    public LogInResult(ActionType actionType, CurrentUserDto currentUserDto, String loggedInCookie) {
+        this.actionType = actionType;
         this.currentUserDto = currentUserDto;
         this.loggedInCookie = loggedInCookie;
     }
@@ -43,6 +43,6 @@ public class LogInResult implements Result {
     }
 
     public ActionType getActionType() {
-        return actiontype;
+        return actionType;
     }
 }
