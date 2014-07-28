@@ -88,10 +88,10 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          *
          * @return a {@link Builder} object.
          */
-        public Builder clientActionHandlerRegistry(
+        public <T extends Builder> T clientActionHandlerRegistry(
                 final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
             this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
-            return this;
+            return (T) this;
         }
 
         /**
@@ -101,9 +101,9 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
          * @return this {@link Builder} object.
          */
-        public Builder dispatchHooks(final Class<? extends DispatchHooks> dispatchHooks) {
+        public <T extends Builder> T dispatchHooks(final Class<? extends DispatchHooks> dispatchHooks) {
             this.dispatchHooks = dispatchHooks;
-            return this;
+            return (T) this;
         }
 
         /**
@@ -112,9 +112,9 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @param exceptionHandlerType The {@link ExceptionHandler} class.
          * @return a {@link Builder} object.
          */
-        public Builder exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
+        public <T extends Builder> T exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
             this.exceptionHandlerType = exceptionHandlerType;
-            return this;
+            return (T) this;
         }
 
         /**
@@ -123,9 +123,10 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @param sessionAccessorType The {@link SecurityCookieAccessor} class.
          * @return a {@link Builder} object.
          */
-        public Builder sessionAccessor(final Class<? extends SecurityCookieAccessor> sessionAccessorType) {
+        public <T extends Builder> T sessionAccessor(
+                final Class<? extends SecurityCookieAccessor> sessionAccessorType) {
             this.sessionAccessorType = sessionAccessorType;
-            return this;
+            return (T) this;
         }
     }
 
