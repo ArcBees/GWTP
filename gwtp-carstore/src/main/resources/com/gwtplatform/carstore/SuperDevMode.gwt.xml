@@ -4,6 +4,5 @@
 <module rename-to='CarStore'>
     <inherits name="com.gwtplatform.carstore.Debug"/>
 
-    <set-configuration-property name="devModeRedirectEnabled" value="true" />
     <add-linker name="xsiframe" />
 </module>

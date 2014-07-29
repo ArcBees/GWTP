@@ -22,22 +22,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import com.google.common.collect.Lists;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.LoadType;
 import com.gwtplatform.carstore.server.dao.objectify.Ofy;
-import com.gwtplatform.carstore.server.dao.objectify.OfyFactory;
+import com.gwtplatform.carstore.server.dao.objectify.OfyService;
 import com.gwtplatform.carstore.shared.dto.Dto;
 
 public class BaseDao<T extends Dto> {
     private final Class<T> clazz;
-
-    @Inject
-    OfyFactory ofyFactory;
-
-    private Ofy lazyOfy;
 
     protected BaseDao(final Class<T> clazz) {
         this.clazz = clazz;
@@ -93,7 +86,7 @@ public class BaseDao<T extends Dto> {
     public void delete(List<T> objects) {
         ofy().delete().entities(objects);
     }
-    
+
     public void deleteAll() {
         List<T> entities = getAll();
         ofy().delete().entities(entities);
@@ -102,20 +95,17 @@ public class BaseDao<T extends Dto> {
     public List<T> get(List<Key<T>> keys) {
         return Lists.newArrayList(ofy().load().keys(keys).values());
     }
-    
+
     public int countAll() {
         return ofy().load().type(clazz).count();
     }
-    
+
     public List<T> getSome(Integer offset, Integer limit) {
         return ofy().query(clazz).offset(offset).limit(limit).list();
     }
 
     protected Ofy ofy() {
-        if (lazyOfy == null) {
-            lazyOfy = ofyFactory.begin();
-        }
-        return lazyOfy;
+        return OfyService.ofy();
     }
 
     protected LoadType<T> query() {

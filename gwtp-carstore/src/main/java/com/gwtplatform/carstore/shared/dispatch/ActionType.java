@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.shared.dto;
+package com.gwtplatform.carstore.shared.dispatch;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

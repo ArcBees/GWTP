@@ -66,6 +66,7 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void extractYear(final Date date) {
         getView().setResult("");
 

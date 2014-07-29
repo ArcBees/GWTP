@@ -18,11 +18,8 @@ package com.gwtplatform.carstore.client.rest;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import com.gwtplatform.carstore.shared.dispatch.LogInRequest;
-import com.gwtplatform.carstore.shared.dispatch.LogInResult;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
@@ -35,7 +32,4 @@ public interface SessionService {
 
     @GET
     RestAction<CurrentUserDto> getCurrentUser();
-
-    @POST
-    RestAction<LogInResult> login(LogInRequest logInRequest);
 }
