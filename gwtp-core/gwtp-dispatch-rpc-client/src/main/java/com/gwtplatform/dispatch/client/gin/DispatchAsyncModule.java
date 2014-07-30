@@ -43,7 +43,7 @@ public class DispatchAsyncModule extends AbstractDispatchAsyncModule {
     }
 
     private DispatchAsyncModule(Builder builder) {
-        super(builder);
+        super(builder, null);
     }
 
     @Provides

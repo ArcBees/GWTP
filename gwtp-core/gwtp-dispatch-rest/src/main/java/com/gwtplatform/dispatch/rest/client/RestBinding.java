@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,14 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.dao.objectify;
+package com.gwtplatform.dispatch.rest.client;
 
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class OfyFactory extends ObjectifyFactory {
-    @Override
-    public Objectify begin() {
-        return new Ofy(this);
-    }
+import com.google.inject.BindingAnnotation;
+
+/**
+ * Annotation used to inject implementations specific to dispatch-rest of shared components.
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface RestBinding {
 }

@@ -64,7 +64,9 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             RequestBuilder requestBuilder = buildRequest();
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
-        } catch (RequestException | ActionException e) {
+        } catch (RequestException e) {
+            onExecuteFailure(e);
+        } catch (ActionException e) {
             onExecuteFailure(e);
         }
 

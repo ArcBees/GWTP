@@ -83,6 +83,7 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
                     public void onSuccess(Void nothing) {
                         RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
                     }
-                }));
+                }
+        ));
     }
 }

@@ -34,8 +34,9 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
     private final Serialization serialization;
 
     @Inject
-    DefaultRestResponseDeserializer(ActionMetadataProvider metadataProvider,
-                                    Serialization serialization) {
+    DefaultRestResponseDeserializer(
+            ActionMetadataProvider metadataProvider,
+            Serialization serialization) {
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
     }
@@ -53,6 +54,7 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
      * Verify if the provided <code>resultType</code> can be deserialized.
      *
      * @param resultType the parameterized type to verify if it can be deserialized.
+     *
      * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
     protected boolean canDeserialize(String resultType) {
@@ -63,8 +65,9 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
      * Deserializes the json as an object of the <code>resultType</code> type.
      *
      * @param resultType the parameterized type of the object once deserialized.
-     * @param json       the json to deserialize.
-     * @param <R>        the type of the object once deserialized
+     * @param json the json to deserialize.
+     * @param <R> the type of the object once deserialized
+     *
      * @return The deserialized object.
      */
     protected <R> R deserializeValue(String resultType, String json) {

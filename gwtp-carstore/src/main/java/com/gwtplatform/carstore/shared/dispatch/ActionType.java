@@ -14,17 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.guice;
+package com.gwtplatform.carstore.shared.dispatch;
 
-import com.arcbees.guicyresteasy.GuiceRestEasyFilterDispatcher;
-import com.google.inject.servlet.ServletModule;
-import com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl;
-import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class DispatchServletModule extends ServletModule {
-    @Override
-    public void configureServlets() {
-        filter("/rest/*").through(GuiceRestEasyFilterDispatcher.class);
-        serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(DispatchServiceImpl.class);
-    }
+public enum ActionType implements IsSerializable {
+    VIA_CREDENTIALS,
+    VIA_COOKIE
 }

@@ -16,9 +16,13 @@
 
 package com.gwtplatform.dispatch.client.gin;
 
+import java.lang.annotation.Annotation;
+
 import javax.inject.Singleton;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.gwt.inject.client.binder.GinAnnotatedBindingBuilder;
+import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
 import com.gwtplatform.dispatch.client.DefaultDispatchHooks;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
@@ -29,8 +33,8 @@ import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerR
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server. This
- * module requires an {@link ExceptionHandler}, a {@link DefaultClientActionHandlerRegistry} and a
+ * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server.
+ * This module requires an {@link ExceptionHandler}, a {@link DefaultClientActionHandlerRegistry} and a
  * {@link SecurityCookieAccessor}. By default, these will be bound to {@link DefaultExceptionHandler},
  * {@link DefaultClientActionHandlerRegistry} and {@link DefaultSecurityCookieAccessor} respectively.
  * <p/>
@@ -81,12 +85,13 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * Specify an alternate client action handler registry.
          *
          * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
+         *
          * @return a {@link Builder} object.
          */
-        public Builder clientActionHandlerRegistry(
+        public <T extends Builder> T clientActionHandlerRegistry(
                 final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
             this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
-            return this;
+            return (T) this;
         }
 
         /**
@@ -96,9 +101,9 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
          * @return this {@link Builder} object.
          */
-        public Builder dispatchHooks(final Class<? extends DispatchHooks> dispatchHooks) {
+        public <T extends Builder> T dispatchHooks(final Class<? extends DispatchHooks> dispatchHooks) {
             this.dispatchHooks = dispatchHooks;
-            return this;
+            return (T) this;
         }
 
         /**
@@ -107,9 +112,9 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @param exceptionHandlerType The {@link ExceptionHandler} class.
          * @return a {@link Builder} object.
          */
-        public Builder exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
+        public <T extends Builder> T exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
             this.exceptionHandlerType = exceptionHandlerType;
-            return this;
+            return (T) this;
         }
 
         /**
@@ -118,39 +123,31 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @param sessionAccessorType The {@link SecurityCookieAccessor} class.
          * @return a {@link Builder} object.
          */
-        public Builder sessionAccessor(final Class<? extends SecurityCookieAccessor> sessionAccessorType) {
+        public <T extends Builder> T sessionAccessor(
+                final Class<? extends SecurityCookieAccessor> sessionAccessorType) {
             this.sessionAccessorType = sessionAccessorType;
-            return this;
+            return (T) this;
         }
     }
 
-    private static Boolean alreadyBound = false;
-    private static Class<? extends AbstractDispatchAsyncModule> boundType;
-
     private final Builder builder;
+    private final Class<? extends Annotation> annotationClass;
 
-    protected AbstractDispatchAsyncModule(final Builder builder) {
+    protected AbstractDispatchAsyncModule(
+            Builder builder,
+            Class<? extends Annotation> annotationClass) {
         this.builder = builder;
+        this.annotationClass = annotationClass;
     }
 
     @Override
     protected final void configure() {
-        if (alreadyBound) {
-            if (!boundType.equals(getClass())) {
-                throw new RuntimeException("You are trying to use more than one DispatchAsync implementation. " +
-                        boundType.getName() + " was already installed.");
-            }
-        } else {
-            alreadyBound = true;
-            boundType = getClass();
+        bindAnnotated(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
+        bindAnnotated(ExceptionHandler.class).to(builder.exceptionHandlerType);
+        bindAnnotated(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
+        bindAnnotated(DispatchHooks.class).to(builder.dispatchHooks).in(Singleton.class);
 
-            bind(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
-            bind(ExceptionHandler.class).to(builder.exceptionHandlerType);
-            bind(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
-            bind(DispatchHooks.class).to(builder.dispatchHooks).in(Singleton.class);
-
-            configureDispatch();
-        }
+        configureDispatch();
     }
 
     /**
@@ -158,5 +155,15 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
      * {@link AbstractDispatchAsyncModule}.
      */
     protected void configureDispatch() {
+    }
+
+    private <T> GinLinkedBindingBuilder<T> bindAnnotated(Class<T> clazz) {
+        GinAnnotatedBindingBuilder<T> binding = bind(clazz);
+
+        if (annotationClass != null) {
+            return binding.annotatedWith(annotationClass);
+        }
+
+        return binding;
     }
 }

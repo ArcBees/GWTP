@@ -33,6 +33,7 @@ import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.GlobalHeaderParams;
 import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.RequestTimeout;
+import com.gwtplatform.dispatch.rest.client.RestBinding;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
@@ -72,8 +73,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new RestDispatchAsyncModuleBuilder());
     }
 
-    RestDispatchAsyncModule(final RestDispatchAsyncModuleBuilder builder) {
-        super(builder);
+    RestDispatchAsyncModule(RestDispatchAsyncModuleBuilder builder) {
+        super(builder, RestBinding.class);
 
         this.builder = builder;
     }

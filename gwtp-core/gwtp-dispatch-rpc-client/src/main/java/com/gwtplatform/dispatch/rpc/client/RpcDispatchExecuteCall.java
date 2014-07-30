@@ -61,6 +61,7 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
                     public void onSuccess(Result result) {
                         RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
                     }
-                }));
+                }
+        ));
     }
 }

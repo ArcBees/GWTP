@@ -13,6 +13,7 @@
     <inherits name="com.google.gwt.query.Query"/>
     <inherits name="com.google.common.collect.Collect"/>
     <inherits name="com.googlecode.objectify.Objectify"/>
+    <inherits name="com.gwtplatform.dispatch.rpc.DispatchRpc"/>
 
     <extend-configuration-property name="gin.ginjector.extensions"
                                    value="com.gwtplatform.carstore.client.gin.MyGinjector"/>

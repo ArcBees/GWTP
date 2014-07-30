@@ -37,12 +37,12 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final DispatchHooks dispatchHooks;
 
     @Inject
-    DefaultRestDispatchCallFactory(ExceptionHandler exceptionHandler,
-                                   ClientActionHandlerRegistry clientActionHandlerRegistry,
-                                   SecurityCookieAccessor securityCookieAccessor,
+    DefaultRestDispatchCallFactory(@RestBinding ExceptionHandler exceptionHandler,
+                                   @RestBinding ClientActionHandlerRegistry clientActionHandlerRegistry,
+                                   @RestBinding SecurityCookieAccessor securityCookieAccessor,
                                    RestRequestBuilderFactory requestBuilderFactory,
                                    RestResponseDeserializer restResponseDeserializer,
-                                   DispatchHooks dispatchHooks) {
+                                   @RestBinding DispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
@@ -53,7 +53,7 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
 
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
+        return new RestDispatchCall<A, R>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
                 requestBuilderFactory, restResponseDeserializer, dispatchHooks, action, callback);
     }
 }
