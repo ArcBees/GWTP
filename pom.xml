@@ -508,7 +508,7 @@
                     <maxmemory>2048</maxmemory>
                     <failOnError>true</failOnError>
 
-                    <excludePackageNames>com.gwtplatform.carstore;com.gwtplatform.tester</excludePackageNames>
+                    <excludePackageNames>com.gwtplatform.carstore</excludePackageNames>
                     <reportOutputDirectory>${project.build.directory}/staging</reportOutputDirectory>
 
                     <links>
