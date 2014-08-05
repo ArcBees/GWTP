@@ -232,12 +232,12 @@
         <maven-gae-plugin.version>0.9.6</maven-gae-plugin.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
-        <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+        <maven-source-plugin.version>2.3</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.17</maven-failsafe-plugin.version>
         <maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
         <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
-        <maven-site-plugin.version>3.3</maven-site-plugin.version>
+        <maven-site-plugin.version>3.4</maven-site-plugin.version>
         <jasmine-maven-plugin.version>1.3.1.5</jasmine-maven-plugin.version>
         <versions-maven-plugin.version>2.1</versions-maven-plugin.version>
 
@@ -430,16 +430,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${target.jdk}</source>
-                    <target>${target.jdk}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
 
                 <configuration>
@@ -448,12 +438,13 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>${versions-maven-plugin.version}</version>
                 <configuration>
-                    <rulesUri>https://raw.githubusercontent.com/rdwallis/ArcBees-tools/vrules/resources/versions-ruleset.xml?2</rulesUri>
+                    <rulesUri>https://raw.githubusercontent.com/rdwallis/ArcBees-tools/vrules/resources/versions-ruleset.xml?3</rulesUri>
                 </configuration>
             </plugin>
 

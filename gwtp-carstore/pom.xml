@@ -28,9 +28,9 @@
 
         <slf4j-api.version>1.7.7</slf4j-api.version>
         <resteasy.version>3.0.8.Final</resteasy.version>
-        <arcbees.version>1.1.1</arcbees.version>
+        <arcbees.version>1.2</arcbees.version>
 
-        <objectify-gwt.version>1.0</objectify-gwt.version>
+        <objectify-gwt.version>1.2</objectify-gwt.version>
     </properties>
 
     <build>
