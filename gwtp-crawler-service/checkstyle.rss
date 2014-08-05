@@ -28,7 +28,7 @@ under the License.
       <title>File: 10,
              Errors: 0,
              Warnings: 0,
-             Infos: 0
+             Infos: 1
       </title>
             <link>http://arcbees.github.io/GWTP/gwtp-crawler-service//checkstyle.html</link>
       <description>
@@ -105,7 +105,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-crawler-service//checkstyle.html#com.gwtplatform.crawlerservice.server.guice.CrawlServiceModule.java">com/gwtplatform/crawlerservice/server/guice/CrawlServiceModule.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0

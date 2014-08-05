@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
-      <title>File: 16,
+      <title>File: 17,
              Errors: 0,
              Warnings: 0,
              Infos: 1
@@ -187,6 +187,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-client//checkstyle.html#com.gwtplatform.dispatch.client.PhoneGapDispatchAsync.java">com/gwtplatform/dispatch/client/PhoneGapDispatchAsync.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-client//checkstyle.html#com.gwtplatform.dispatch.rpc.client.RpcBinding.java">com/gwtplatform/dispatch/rpc/client/RpcBinding.java</a>
                 </td>
                 <td>
                   0

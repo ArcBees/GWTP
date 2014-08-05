@@ -25,10 +25,10 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
-      <title>File: 173,
+      <title>File: 174,
              Errors: 0,
              Warnings: 38,
-             Infos: 4
+             Infos: 10
       </title>
             <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html</link>
       <description>
@@ -287,7 +287,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.proxy.ResetPresentersHandler.java">com/gwtplatform/mvp/client/proxy/ResetPresentersHandler.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -903,7 +903,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.RequestTabsHandler.java">com/gwtplatform/mvp/client/RequestTabsHandler.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -957,6 +957,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.annotations.GaAccount.java">com/gwtplatform/mvp/client/annotations/GaAccount.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.rebind.linker.FormFactorPropertyGenerator.java">com/gwtplatform/mvp/rebind/linker/FormFactorPropertyGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -1547,7 +1561,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.HasPopupSlot.java">com/gwtplatform/mvp/client/HasPopupSlot.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -1575,7 +1589,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.proxy.GetPlaceTitleHandler.java">com/gwtplatform/mvp/client/proxy/GetPlaceTitleHandler.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -1617,7 +1631,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.gin.AbstractPresenterModule.java">com/gwtplatform/mvp/client/gin/AbstractPresenterModule.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -2303,7 +2317,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.ChangeTabHandler.java">com/gwtplatform/mvp/client/ChangeTabHandler.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0

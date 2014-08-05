@@ -28,7 +28,7 @@ under the License.
       <title>File: 4,
              Errors: 0,
              Warnings: 0,
-             Infos: 1
+             Infos: 4
       </title>
             <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-test//checkstyle.html</link>
       <description>
@@ -63,7 +63,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-test//checkstyle.html#com.gwtplatform.dispatch.rpc.shared.action.TestAction.java">com/gwtplatform/dispatch/rpc/shared/action/TestAction.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -77,7 +77,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-test//checkstyle.html#com.gwtplatform.dispatch.rpc.shared.action.TestResult.java">com/gwtplatform/dispatch/rpc/shared/action/TestResult.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -91,7 +91,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-test//checkstyle.html#com.gwtplatform.dispatch.rpc.server.actionhandler.TestActionHandler.java">com/gwtplatform/dispatch/rpc/server/actionhandler/TestActionHandler.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0

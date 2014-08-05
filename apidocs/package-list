@@ -64,7 +64,9 @@ com.gwtplatform.mvp.client.gin
 com.gwtplatform.mvp.client.googleanalytics
 com.gwtplatform.mvp.client.proxy
 com.gwtplatform.mvp.rebind
+com.gwtplatform.mvp.rebind.linker
 com.gwtplatform.mvp.rebind.velocity
 com.gwtplatform.mvp.rebind.velocity.ginjectors
 com.gwtplatform.mvp.rebind.velocity.proxy
 com.gwtplatform.mvp.shared.proxy
+com.gwtplatform.tester

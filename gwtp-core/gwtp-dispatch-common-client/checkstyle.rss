@@ -25,10 +25,10 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
-      <title>File: 23,
+      <title>File: 25,
              Errors: 0,
              Warnings: 0,
-             Infos: 0
+             Infos: 1
       </title>
             <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-common-client//checkstyle.html</link>
       <description>
@@ -299,6 +299,34 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-common-client//checkstyle.html#com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry.java">com/gwtplatform/dispatch/client/actionhandler/ClientActionHandlerRegistry.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-common-client//checkstyle.html#com.gwtplatform.dispatch.client.DefaultDispatchHooks.java">com/gwtplatform/dispatch/client/DefaultDispatchHooks.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-common-client//checkstyle.html#com.gwtplatform.dispatch.client.DispatchHooks.java">com/gwtplatform/dispatch/client/DispatchHooks.java</a>
                 </td>
                 <td>
                   0

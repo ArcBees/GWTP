@@ -28,7 +28,7 @@ under the License.
       <title>File: 35,
              Errors: 0,
              Warnings: 0,
-             Infos: 6
+             Infos: 7
       </title>
             <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-server-guice//checkstyle.html</link>
       <description>
@@ -203,7 +203,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-server-guice//checkstyle.html#com.gwtplatform.dispatch.server.guice.DispatchModule.java">com/gwtplatform/dispatch/server/guice/DispatchModule.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0

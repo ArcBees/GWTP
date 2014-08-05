@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
-      <title>File: 73,
+      <title>File: 74,
              Errors: 0,
              Warnings: 1,
              Infos: 1
@@ -887,6 +887,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer.java">com/gwtplatform/dispatch/rest/client/DefaultRestResponseDeserializer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rest//checkstyle.html#com.gwtplatform.dispatch.rest.client.RestBinding.java">com/gwtplatform/dispatch/rest/client/RestBinding.java</a>
                 </td>
                 <td>
                   0

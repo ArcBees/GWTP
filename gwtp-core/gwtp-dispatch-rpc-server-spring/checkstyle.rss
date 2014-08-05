@@ -28,7 +28,7 @@ under the License.
       <title>File: 42,
              Errors: 0,
              Warnings: 0,
-             Infos: 10
+             Infos: 9
       </title>
             <link>http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html</link>
       <description>
@@ -273,7 +273,7 @@ under the License.
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-dispatch-rpc-server-spring//checkstyle.html#com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter.java">com/gwtplatform/dispatch/rpc/server/spring/HttpSessionSecurityCookieFilter.java</a>
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
