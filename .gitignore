@@ -12,3 +12,4 @@ META-INF
 .checkstyle
 chromedriver.log
 .errai/
+*.versionsBackup
