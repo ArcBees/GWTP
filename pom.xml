@@ -448,7 +448,7 @@
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>${versions-maven-plugin.version}</version>
                 <configuration>
-                    <rulesUri>https://raw.githubusercontent.com/rdwallis/ArcBees-tools/vrules/resources/versions-ruleset.xml?3</rulesUri>
+                    <rulesUri>https://raw.githubusercontent.com/ArcBees/ArcBees-tools/master/resources/versions-ruleset.xml</rulesUri>
                 </configuration>
             </plugin>
 
