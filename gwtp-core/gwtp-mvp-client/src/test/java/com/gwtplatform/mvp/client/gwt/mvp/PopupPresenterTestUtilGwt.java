@@ -36,4 +36,3 @@ public class PopupPresenterTestUtilGwt extends PresenterWidget<PopupPresenterTes
         getView().setCloseHandler(closeHandler);
     }
 }
-
