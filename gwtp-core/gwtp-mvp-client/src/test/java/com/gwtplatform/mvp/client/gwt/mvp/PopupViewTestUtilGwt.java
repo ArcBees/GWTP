@@ -26,7 +26,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupViewImpl;
 
 public class PopupViewTestUtilGwt extends PopupViewImpl implements PopupPresenterTestUtilGwt.MyView {
-
     public interface Binder extends UiBinder<Widget, PopupViewTestUtilGwt> {
     }
 

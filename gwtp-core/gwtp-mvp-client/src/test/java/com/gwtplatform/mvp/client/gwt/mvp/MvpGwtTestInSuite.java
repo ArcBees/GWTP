@@ -57,7 +57,7 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         assertEquals(1, InstantiationCounterTestUtilGwt.getCounter());
     }
 
-    public void testPopupViewCloseHandlerCalledWhenClosed() {
+    public void testPopupViewCloseHandlerNotCalledWhenShown() {
         delayTestFinish(1000);
         runTest(new ScheduledCommand() {
             @Override
