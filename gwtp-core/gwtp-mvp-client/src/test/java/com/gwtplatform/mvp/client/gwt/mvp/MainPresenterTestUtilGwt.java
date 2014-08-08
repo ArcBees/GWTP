@@ -17,8 +17,10 @@
 package com.gwtplatform.mvp.client.gwt.mvp;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.PopupViewCloseHandler;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -28,26 +30,33 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 /**
  * A test presenter meant to be run in a GWTTestCase.
  */
-public class MainPresenterTestUtilGwt extends Presenter<MainPresenterTestUtilGwt.MyView,
-        MainPresenterTestUtilGwt.MyProxy> {
+public class MainPresenterTestUtilGwt
+        extends Presenter<MainPresenterTestUtilGwt.MyView, MainPresenterTestUtilGwt.MyProxy> {
 
-    /**
-     * Presenter's view.
-     */
-    public interface MyView extends View {
+    interface MyView extends View {
     }
 
-    /**
-     * Presenter's proxy.
-     */
     @ProxyStandard
     @NameToken("home")
-    public interface MyProxy extends ProxyPlace<MainPresenterTestUtilGwt> {
+    interface MyProxy extends ProxyPlace<MainPresenterTestUtilGwt> {
     }
 
+    private final Provider<PopupPresenterTestUtilGwt> popupPresenterProvider;
+
     @Inject
-    public MainPresenterTestUtilGwt(final EventBus eventBus, final MyView view, final MyProxy proxy) {
+    MainPresenterTestUtilGwt(EventBus eventBus,
+                             MyView view,
+                             MyProxy proxy,
+                             Provider<PopupPresenterTestUtilGwt> popupPresenterProvider) {
         super(eventBus, view, proxy, RevealType.Root);
+
+        this.popupPresenterProvider = popupPresenterProvider;
+    }
+
+    public void showPopup(PopupViewCloseHandler closeHandler) {
+        PopupPresenterTestUtilGwt popup = popupPresenterProvider.get();
+        popup.setCloseHandler(closeHandler);
+        addToPopupSlot(popup);
     }
 }
 
