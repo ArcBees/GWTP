@@ -1,16 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <version>9</version>
     </parent>
 
     <groupId>com.gwtplatform</groupId>
     <artifactId>gwtp</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GWT-Platform</name>
     <inceptionYear>2010</inceptionYear>
@@ -182,7 +181,8 @@
     </contributors>
 
     <scm>
-        <connection>scm:git:git://github.com/ArcBees/GWTP.git</connection>
+        <connection>scm:git:git@github.com:ArcBees/GWTP.git</connection>
+        <developerConnection>scm:git:git@github.com:ArcBees/GWTP.git</developerConnection>
         <url>https://github.com/ArcBees/GWTP</url>
     </scm>
 
@@ -505,13 +505,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
-                <inherited>false</inherited>
+                <inherited>true</inherited>
 
                 <configuration>
                     <maxmemory>2048</maxmemory>
                     <failOnError>true</failOnError>
 
-                    <excludePackageNames>com.gwtplatform.carstore;com.gwtplatform.tester</excludePackageNames>
+                    <excludePackageNames>com.gwtplatform.carstore</excludePackageNames>
                     <reportOutputDirectory>${project.build.directory}/staging</reportOutputDirectory>
 
                     <links>
