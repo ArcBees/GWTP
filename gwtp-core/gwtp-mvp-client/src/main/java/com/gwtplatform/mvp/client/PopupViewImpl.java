@@ -161,11 +161,16 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         int top = (Window.getClientHeight() - popup.getOffsetHeight()) >> 1;
 
         if (!isShowing) {
-            popup.hide();
+            hidePopup(asPopupPanel());
             popup.setVisible(true);
         }
 
         popup.setPopupPosition(Math.max(Window.getScrollLeft() + left, 0), Math.max(
                 Window.getScrollTop() + top, 0));
     }
+
+    private native void hidePopup(PopupPanel popupPanel) /*-{
+        var resizeAnimation = popupPanel.@com.google.gwt.user.client.ui.PopupPanel::resizeAnimation;
+        resizeAnimation.@com.google.gwt.user.client.ui.PopupPanel.ResizeAnimation::setState(ZZ)(false, false);
+    }-*/;
 }
