@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
+import java.util.Date;
+
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
@@ -50,5 +52,11 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     @Override
     public void addHeaderParam(String name, Object value) {
         super.addHeaderParam(name, value);
+    }
+
+    @Override
+    protected String formatDate(Date date, String pattern) {
+        // Don't call real method because it relies on JSNI
+        return date == null ? null : date.toString();
     }
 }
