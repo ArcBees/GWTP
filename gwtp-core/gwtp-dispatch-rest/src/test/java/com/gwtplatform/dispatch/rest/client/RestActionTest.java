@@ -58,7 +58,7 @@ public class RestActionTest {
         action.addHeaderParam(PARAM_NAME_2, PARAM_VALUE_2);
 
         // Then
-        verifyOnlyExpextedParamsArePresent(action.getHeaderParams());
+        verifyOnlyExpectedParamsArePresent(action.getHeaderParams());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class RestActionTest {
         action.addFormParam(PARAM_NAME_2, PARAM_VALUE_2);
 
         // Then
-        verifyOnlyExpextedParamsArePresent(action.getFormParams());
+        verifyOnlyExpectedParamsArePresent(action.getFormParams());
     }
 
     @Test
@@ -96,10 +96,10 @@ public class RestActionTest {
         action.addQueryParam(PARAM_NAME_2, PARAM_VALUE_2);
 
         // Then
-        verifyOnlyExpextedParamsArePresent(action.getQueryParams());
+        verifyOnlyExpectedParamsArePresent(action.getQueryParams());
     }
 
-    private void verifyOnlyExpextedParamsArePresent(List<RestParameter> params) {
+    private void verifyOnlyExpectedParamsArePresent(List<RestParameter> params) {
         assertThat(params)
                 .hasSize(2)
                 .extracting("name", "stringValue")
