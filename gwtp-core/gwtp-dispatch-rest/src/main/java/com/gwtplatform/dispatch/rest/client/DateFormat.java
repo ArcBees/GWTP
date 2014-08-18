@@ -37,7 +37,7 @@ public @interface DateFormat {
      * <p/>
      * Example: {@code 2014-02-25T10:59:26.046-05:00}
      */
-    public final String DEFAULT = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ";
+    final String DEFAULT = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ";
 
     /**
      * The formatting pattern to use for parsing the date. The pattern must follow the rules defined by
