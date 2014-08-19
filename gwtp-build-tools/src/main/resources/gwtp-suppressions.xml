@@ -4,8 +4,9 @@
         "http://users.tpg.com.au/ojburn/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-    <!-- Suppress MagicNumberCheck for files under test -->
+    <!-- Suppress MagicNumberCheck and MethodName for files under test -->
     <suppress checks="MagicNumberCheck" files=".*[/\\]test[/\\].*"/>
+    <suppress checks="MethodName" files=".*[/\\]test[/\\].*"/>
 
     <!-- Suppress Javadoc for files under rebind and test -->
     <suppress checks="JavadocMethod" files=".*[/\\]test[/\\].*"/>

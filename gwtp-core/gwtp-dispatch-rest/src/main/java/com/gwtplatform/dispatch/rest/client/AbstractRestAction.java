@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -32,26 +33,35 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  * @param <R> the result type
  */
 public abstract class AbstractRestAction<R> implements RestAction<R> {
-    private String defaultDateFormat = DateFormat.DEFAULT;
+    private String defaultDateFormat;
     private HttpMethod httpMethod;
     private String rawServicePath;
 
-    private List<RestParameter> pathParams = new ArrayList<RestParameter>();
-    private List<RestParameter> headerParams = new ArrayList<RestParameter>();
-    private List<RestParameter> queryParams = new ArrayList<RestParameter>();
-    private List<RestParameter> formParams = new ArrayList<RestParameter>();
+    private List<RestParameter> pathParams;
+    private List<RestParameter> headerParams;
+    private List<RestParameter> queryParams;
+    private List<RestParameter> formParams;
 
     private Object bodyParam;
 
     protected AbstractRestAction() {
+        defaultDateFormat = DateFormat.DEFAULT;
+
+        pathParams = new ArrayList<RestParameter>();
+        headerParams = new ArrayList<RestParameter>();
+        queryParams = new ArrayList<RestParameter>();
+        formParams = new ArrayList<RestParameter>();
     }
 
     protected AbstractRestAction(
             HttpMethod httpMethod,
             String rawServicePath,
             String defaultDateFormat) {
+        this();
+
         this.httpMethod = httpMethod;
         this.rawServicePath = rawServicePath;
+        this.defaultDateFormat = DateFormat.DEFAULT;
         this.defaultDateFormat = defaultDateFormat;
     }
 
@@ -101,62 +111,79 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     }
 
     protected void addPathParam(String name, Object value) {
-        pathParams.add(new RestParameter(name, value));
+        addParam(pathParams, name, value);
     }
 
     protected void addPathParam(String name, Date date) {
-        addPathParam(name, date, defaultDateFormat);
+        addDateParam(pathParams, name, date);
     }
 
     protected void addPathParam(String name, Date date, String pattern) {
-        String value = formatDate(date, pattern);
-        addPathParam(name, value);
+        addDateParam(pathParams, name, date, pattern);
     }
 
     protected void addQueryParam(String name, Object value) {
-        queryParams.add(new RestParameter(name, value));
+        addParam(queryParams, name, value);
     }
 
     protected void addQueryParam(String name, Date date) {
-        addQueryParam(name, date, defaultDateFormat);
+        addDateParam(queryParams, name, date);
     }
 
     protected void addQueryParam(String name, Date date, String pattern) {
-        String value = formatDate(date, pattern);
-        addQueryParam(name, value);
+        addDateParam(queryParams, name, date, pattern);
     }
 
     protected void addFormParam(String name, Object value) {
-        formParams.add(new RestParameter(name, value));
+        addParam(formParams, name, value);
     }
 
     protected void addFormParam(String name, Date date) {
-        addFormParam(name, date, defaultDateFormat);
+        addDateParam(formParams, name, date);
     }
 
     protected void addFormParam(String name, Date date, String pattern) {
-        String value = formatDate(date, pattern);
-        addFormParam(name, value);
+        addDateParam(formParams, name, date, pattern);
     }
 
     protected void addHeaderParam(String name, Object value) {
-        headerParams.add(new RestParameter(name, value));
+        addParam(headerParams, name, value);
     }
 
     protected void addHeaderParam(String name, Date date) {
-        addHeaderParam(name, date, defaultDateFormat);
+        addDateParam(headerParams, name, date);
     }
 
     protected void addHeaderParam(String name, Date date, String pattern) {
-        String value = formatDate(date, pattern);
-        addHeaderParam(name, value);
+        addDateParam(headerParams, name, date, pattern);
     }
 
     protected void setBodyParam(Object value) {
         bodyParam = value;
     }
 
-    private String formatDate(Date date, String pattern) {
-        return DateTimeFormat.getFormat(pattern).format(date);
+    @VisibleForTesting
+    protected String formatDate(Date date, String pattern) {
+        if (date == null) {
+            return null;
+        } else {
+            return DateTimeFormat.getFormat(pattern).format(date);
+        }
+    }
+
+    private void addDateParam(List<RestParameter> target, String name, Date date) {
+        String value = formatDate(date, defaultDateFormat);
+        addParam(target, name, value);
+    }
+
+    private void addDateParam(List<RestParameter> target, String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addParam(target, name, value);
+    }
+
+    private void addParam(List<RestParameter> target, String name, Object value) {
+        if (value != null) {
+            target.add(new RestParameter(name, value));
+        }
     }
 }
