@@ -39,11 +39,13 @@ import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.Shardable;
 
-import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
+import static com.google.gwt.core.ext.TreeLogger.Type.ERROR;
 
 @Shardable
 @LinkerOrder(Order.POST)
 public class VersionInspectorLinker extends Linker {
+    private static final int CHECK_TIMEOUT_MS = 5000;
+
     private static final String GROUP_ID = "com.gwtplatform";
     private static final String ARTIFACT = "gwtp-mvp-client";
     private static final String API_SEARCH = "http://arcbees-stats-service.appspot.com/version%s";
@@ -123,7 +125,7 @@ public class VersionInspectorLinker extends Linker {
 
             logger.debug("----- Checking version: Success -----");
         } catch (Exception e) {
-            logger.getTreeLogger().log(DEBUG, "Exception caught", e);
+            logger.getTreeLogger().log(ERROR, "Exception caught", e);
             logger.debug("----- Checking version: Failure -----");
         }
     }
@@ -140,6 +142,8 @@ public class VersionInspectorLinker extends Linker {
         URL maven = new URL(String.format(API_SEARCH, queryString.toString()));
 
         Socket socket = new Socket(maven.getHost(), 80);
+        socket.setSoTimeout(CHECK_TIMEOUT_MS);
+
         String response;
 
         try {
