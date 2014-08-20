@@ -37,8 +37,10 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
+import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
 
+import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
 import static com.google.gwt.core.ext.TreeLogger.Type.ERROR;
 
 @Shardable
@@ -46,10 +48,22 @@ import static com.google.gwt.core.ext.TreeLogger.Type.ERROR;
 public class VersionInspectorLinker extends Linker {
     private static final int CHECK_TIMEOUT_MS = 5000;
 
-    private static final String GROUP_ID = "com.gwtplatform";
-    private static final String ARTIFACT = "gwtp-mvp-client";
-    private static final String API_SEARCH = "http://arcbees-stats-service.appspot.com/version%s";
+    private static final String MVP_EXIST_CLASS = "com.gwtplatform.mvp.client.gin.DefaultModule";
+    private static final String MVP_GROUP_ID = "com.gwtplatform";
+    private static final String MVP_ARTIFACT = "gwtp-mvp-client";
+    private static final Dependency MVP = new DependencyImpl(MVP_EXIST_CLASS, MVP_GROUP_ID, MVP_ARTIFACT);
 
+    private static final String RPC_EXIST_CLASS = "com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule";
+    private static final String RPC_GROUP_ID = "com.gwtplatform";
+    private static final String RPC_ARTIFACT = "gwtp-dispatch-rpc-client";
+    private static final Dependency DISPATCH_RPC = new DependencyImpl(RPC_EXIST_CLASS, RPC_GROUP_ID, RPC_ARTIFACT);
+
+    private static final String REST_EXIST_CLASS = "com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule";
+    private static final String REST_GROUP_ID = "com.gwtplatform";
+    private static final String REST_ARTIFACT = "gwtp-dispatch-rest";
+    private static final Dependency DISPATCH_REST = new DependencyImpl(REST_EXIST_CLASS, REST_GROUP_ID, REST_ARTIFACT);
+
+    private static final String API_SEARCH = "http://arcbees-stats-service.appspot.com/version";
     private static final String GROUP_QUERY_PARAMETER = "groupid";
     private static final String ARTIFACT_QUERY_PARAMETER = "artifactid";
     private static final String VERSION_QUERY_PARAMETER = "version";
@@ -61,14 +75,12 @@ public class VersionInspectorLinker extends Linker {
     private static final Pattern RESPONSE_CONTENT_PATTERN = Pattern.compile("^[^{]*(\\{.*\\})$");
 
     private static final String HR = "------------------------------------------------------------";
-    private static final String NEW_VERSION_AVAILABLE = "A new version available of %s is available!";
+    private static final String NEW_VERSION_AVAILABLE = "A new version of %s is available!";
     private static final String SEE_ARTIFACT_DETAILS = "See http://search.maven.org/#artifactdetails|%s|%s|%s|jar";
     private static final String YOUR_VERSION = "Your version: %s";
     private static final String LATEST_VERSION = "Latest version: %s";
 
     private Logger logger;
-    private String currentVersionString;
-    private StringBuffer queryString;
 
     public VersionInspectorLinker() {
     }
@@ -81,14 +93,24 @@ public class VersionInspectorLinker extends Linker {
     @Override
     public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts, boolean onePermutation)
             throws UnableToCompleteException {
-        if (!onePermutation && canVerifyNewerVersion(context)) {
-            this.logger = new Logger(logger);
-            queryString = new StringBuffer();
-
-            checkLatestVersion();
+        if (!onePermutation && !isSuperDevMode(context) && canVerifyNewerVersion(context)) {
+            checkLatestVersions(logger);
         }
 
         return artifacts;
+    }
+
+    private boolean isSuperDevMode(LinkerContext context) {
+        boolean isSdm = false;
+
+        for (SelectionProperty property : context.getProperties()) {
+            if ("superdevmode".equals(property.getName())) {
+                isSdm = "on".equals(property.tryGetValue());
+                break;
+            }
+        }
+
+        return isSdm;
     }
 
     private boolean canVerifyNewerVersion(LinkerContext context) {
@@ -106,27 +128,40 @@ public class VersionInspectorLinker extends Linker {
         return verifyNewerVersion;
     }
 
-    private void checkLatestVersion() {
-        try {
-            logger.debug("----- Checking version --------------");
+    private void checkLatestVersions(TreeLogger logger) {
+        checkLatestVersionIfPresent(logger, MVP);
+        checkLatestVersionIfPresent(logger, DISPATCH_RPC);
+        checkLatestVersionIfPresent(logger, DISPATCH_REST);
+    }
+
+    private void checkLatestVersionIfPresent(TreeLogger baseLogger, Dependency dependency) {
+        if (dependency.isPresent()) {
+            String artifactId = dependency.getArtifactId();
+            logger = new Logger(baseLogger.branch(DEBUG, "Checking version information for " + artifactId));
             logger.debug("You can disable this check by adding this line to your GWT module:");
             logger.debug("<set-configuration-property name=\"verifyNewerVersion\" value=\"false\"/>");
 
-            String currentVersion = getCurrentVersion();
-            String versionResponseJson = fetchArtifactVersion();
-            String latestArtifactVersion = extractVersion(versionResponseJson);
-            Boolean isLatest = extractIsLatest(versionResponseJson);
+            checkLatestVersion(dependency);
+        }
+    }
+
+    private void checkLatestVersion(Dependency dependency) {
+        try {
+            String groupId = dependency.getGroupId();
+            String artifactId = dependency.getArtifactId();
+            String currentVersion = dependency.getVersion();
+
+            String json = fetchArtifactVersion(groupId, artifactId, currentVersion);
+            String latestVersion = extractVersion(json);
+            Boolean isLatest = extractIsLatest(json);
 
             if (isLatest) {
-                logger.info("You are using the latest version!");
+                logger.info("You are using the latest version of " + artifactId + "!");
             } else {
-                warnVersion(latestArtifactVersion, currentVersion);
+                warnVersion(groupId, artifactId, latestVersion, currentVersion);
             }
-
-            logger.debug("----- Checking version: Success -----");
         } catch (Exception e) {
             logger.getTreeLogger().log(ERROR, "Exception caught", e);
-            logger.debug("----- Checking version: Failure -----");
         }
     }
 
@@ -137,9 +172,8 @@ public class VersionInspectorLinker extends Linker {
      *
      * @return The resulting plain text response
      */
-    private String fetchArtifactVersion() throws IOException {
-        buildQueryParameters();
-        URL maven = new URL(String.format(API_SEARCH, queryString.toString()));
+    private String fetchArtifactVersion(String groupId, String artifactId, String version) throws IOException {
+        URL maven = new URL(buildUrl(groupId, artifactId, version));
 
         Socket socket = new Socket(maven.getHost(), 80);
         socket.setSoTimeout(CHECK_TIMEOUT_MS);
@@ -176,54 +210,50 @@ public class VersionInspectorLinker extends Linker {
 
     private String extractResponseContent(String response) {
         Matcher matcher = RESPONSE_CONTENT_PATTERN.matcher(response);
-        matcher.find();
 
-        return matcher.group(1);
+        return matcher.find() ? matcher.group(1) : "";
     }
 
     private String extractVersion(String versionResponse) {
         Matcher matcher = VERSION_PATTERN.matcher(versionResponse);
-        matcher.find();
 
-        String version = matcher.group(1);
-        return version;
+        return matcher.find() ? matcher.group(1) : "";
     }
 
     private Boolean extractIsLatest(String versionResponse) {
         Matcher matcher = LATEST_PATTERN.matcher(versionResponse);
-        matcher.find();
 
-        String isLatest = matcher.group(1);
-        return Boolean.valueOf(isLatest);
+        return matcher.find() && Boolean.valueOf(matcher.group(1));
     }
 
-    private String getCurrentVersion() throws IOException {
-        currentVersionString = getClass().getPackage().getImplementationVersion();
-        return currentVersionString;
-    }
-
-    private void warnVersion(String latestVersion, String currentVersion) {
+    private void warnVersion(String groupId, String artifactId, String latestVersion, String currentVersion) {
         logger.warn(HR);
 
-        logger.warn(NEW_VERSION_AVAILABLE, ARTIFACT);
+        logger.warn(NEW_VERSION_AVAILABLE, artifactId);
         logger.warn(YOUR_VERSION, currentVersion);
         logger.warn(LATEST_VERSION, latestVersion);
-        logger.warn(SEE_ARTIFACT_DETAILS, GROUP_ID, ARTIFACT, latestVersion);
+        logger.warn(SEE_ARTIFACT_DETAILS, groupId, artifactId, latestVersion);
 
         logger.warn(HR);
     }
 
-    private void buildQueryParameters() {
-        appendParameter(GROUP_QUERY_PARAMETER, GROUP_ID);
-        appendParameter(ARTIFACT_QUERY_PARAMETER, ARTIFACT);
-        appendParameter(VERSION_QUERY_PARAMETER, currentVersionString);
+    private String buildUrl(String groupId, String artifactId, String version) {
+        StringBuilder queryString = new StringBuilder();
+
+        appendParameter(queryString, GROUP_QUERY_PARAMETER, groupId);
+        appendParameter(queryString, ARTIFACT_QUERY_PARAMETER, artifactId);
+        appendParameter(queryString, VERSION_QUERY_PARAMETER, version);
+
+        queryString.insert(0, API_SEARCH);
+
+        return queryString.toString();
     }
 
-    private void appendParameter(String key, String value) {
-        if (queryString.toString().isEmpty()) {
-            queryString.append("?").append(key).append("=").append(value);
+    private void appendParameter(StringBuilder stringBuilder, String key, String value) {
+        if (stringBuilder.length() == 0) {
+            stringBuilder.append("?").append(key).append("=").append(value);
         } else {
-            queryString.append("&").append(key).append("=").append(value);
+            stringBuilder.append("&").append(key).append("=").append(value);
         }
     }
 }
