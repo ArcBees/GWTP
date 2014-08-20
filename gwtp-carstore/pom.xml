@@ -338,6 +338,20 @@
 
     <profiles>
         <profile>
+            <id>sdm</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>gwt-maven-plugin</artifactId>
+                        <configuration>
+                            <module>com.gwtplatform.carstore.SuperDevMode</module>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>integration-test</id>
             <build>
                 <plugins>

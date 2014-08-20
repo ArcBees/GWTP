@@ -37,6 +37,7 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
+import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
 
 import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
@@ -92,11 +93,24 @@ public class VersionInspectorLinker extends Linker {
     @Override
     public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts, boolean onePermutation)
             throws UnableToCompleteException {
-        if (!onePermutation && canVerifyNewerVersion(context)) {
+        if (!onePermutation && !isSuperDevMode(context) && canVerifyNewerVersion(context)) {
             checkLatestVersions(logger);
         }
 
         return artifacts;
+    }
+
+    private boolean isSuperDevMode(LinkerContext context) {
+        boolean isSdm = false;
+
+        for (SelectionProperty property : context.getProperties()) {
+            if ("superdevmode".equals(property.getName())) {
+                isSdm = "on".equals(property.tryGetValue());
+                break;
+            }
+        }
+
+        return isSdm;
     }
 
     private boolean canVerifyNewerVersion(LinkerContext context) {
