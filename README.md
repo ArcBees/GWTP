@@ -33,7 +33,7 @@ Get high quality support through ArcBees.
 1.3 - Released on 04 August 2014
 
 ###Current Snapshot
-1.4-SNAPSHOT
+1.3-SNAPSHOT
 
 ###Archetypes
 * [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes)
