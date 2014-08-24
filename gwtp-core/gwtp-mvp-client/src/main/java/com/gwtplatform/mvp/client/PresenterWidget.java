@@ -183,11 +183,10 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
             return;
         }
         child.markAsPopup();
-        final PopupView popupView = child.getView();
 
         // Center if desired
         if (center) {
-            popupView.center();
+            child.getView().center();
         }
 
         addToSlot(POPUP_SLOT, child);
