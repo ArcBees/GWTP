@@ -182,7 +182,6 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         if (child == null) {
             return;
         }
-        child.markAsPopup();
 
         // Center if desired
         if (center) {
@@ -198,6 +197,8 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
             return;
         }
 
+        content.setIsPopup(slot == POPUP_SLOT);
+
         content.reparent(this);
 
         List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
@@ -208,13 +209,13 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
             slotChildren.add(content);
             activeChildren.put(slot, slotChildren);
         }
-        if (slot != POPUP_SLOT) {
+        if (!content.isPopup()) {
             getView().addToSlot(slot, content);
         }
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
-            if (!content.isVisible() || !content.isPopup) {
+            if (!content.isVisible() || !content.isPopup()) {
                 content.internalReveal();
             }
         }
@@ -574,10 +575,6 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         return isPopup;
     }
 
-    private void markAsPopup() {
-        isPopup = true;
-    }
-
     /**
      * Monitors the specified popup presenter so that we know when it
      * is closing. This allows us to make sure it doesn't receive
@@ -608,6 +605,10 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         for (final HandlerInformation<? extends EventHandler> handlerInformation : visibleHandlers) {
             registerVisibleHandler(handlerInformation);
         }
+    }
+
+    private void setIsPopup(final boolean popup) {
+        this.isPopup = popup;
     }
 
     private void unregisterVisibleHandlers() {
