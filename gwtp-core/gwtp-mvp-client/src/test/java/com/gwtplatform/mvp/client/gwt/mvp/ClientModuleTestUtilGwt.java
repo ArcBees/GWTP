@@ -46,6 +46,9 @@ public class ClientModuleTestUtilGwt extends AbstractPresenterModule {
         bindPresenter(AdminPresenterTestUtilGwt.class, AdminPresenterTestUtilGwt.MyView.class,
                 AdminViewTestUtilGwt.class, AdminPresenterTestUtilGwt.MyProxy.class);
 
+        bindSingletonPresenterWidget(PopupPresenterTestUtilGwt.class, PopupPresenterTestUtilGwt.MyView.class,
+                PopupViewTestUtilGwt.class);
+
         // For testing
         bind(InstantiationCounterTestUtilGwt.class).asEagerSingleton();
         bindConstant().annotatedWith(Names.named("notice")).to("Hello");

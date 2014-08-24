@@ -19,8 +19,10 @@ package com.gwtplatform.mvp.client.gwt.mvp;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
+import com.gwtplatform.mvp.client.PopupViewCloseHandler;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
@@ -43,6 +45,7 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         InstantiationCounterTestUtilGwt.resetCounter();
         ginjector = GWT.create(GinjectorTestUtilGwt.class);
         DelayedBindRegistry.bind(ginjector);
+        presenter = ginjector.getMainPresenter().get();
     }
 
     /**
@@ -52,6 +55,42 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         ginjector.getPlaceManager().revealCurrentPlace();
 
         assertEquals(1, InstantiationCounterTestUtilGwt.getCounter());
+    }
+
+    public void testPopupViewCloseHandlerNotCalledWhenShown() {
+        delayTestFinish(1000);
+        runTest(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                PopupPresenterTestUtilGwt popupPresenter = ginjector.getPopupPresenter().get();
+                popupPresenter.asWidget().addAttachHandler(new AttachEvent.Handler() {
+                    @Override
+                    public void onAttachOrDetach(AttachEvent event) {
+                        if (event.isAttached()) {
+                            finishTest();
+                        } else {
+                            fail();
+                        }
+                    }
+                });
+
+                ginjector.getPlaceManager().revealDefaultPlace();
+
+                final PopupViewCloseHandler closeHandler = new PopupViewCloseHandler() {
+                    @Override
+                    public void onClose() {
+                        fail();
+                    }
+                };
+
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                    @Override
+                    public void execute() {
+                        presenter.showPopup(closeHandler);
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -115,5 +154,9 @@ public class MvpGwtTestInSuite extends GWTTestCase {
                 finishTest();
             }
         });
+    }
+
+    private void runTest(ScheduledCommand test) {
+        Scheduler.get().scheduleDeferred(test);
     }
 }

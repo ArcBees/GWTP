@@ -28,6 +28,8 @@ public interface GinjectorTestUtilGwt extends Ginjector {
 
     Provider<AdminPresenterTestUtilGwt> getAdminPresenter();
 
+    Provider<PopupPresenterTestUtilGwt> getPopupPresenter();
+
     EventBus getEventBus();
 
     PlaceManager getPlaceManager();
