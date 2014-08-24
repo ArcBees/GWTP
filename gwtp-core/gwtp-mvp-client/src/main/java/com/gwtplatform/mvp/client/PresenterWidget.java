@@ -589,9 +589,6 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
             @Override
             public void onClose() {
                 removeFromPopupSlot(popupPresenter);
-                if (isVisible()) {
-                    popupPresenter.internalHide();
-                }
             }
         });
     }
