@@ -144,9 +144,9 @@ LockInteractionHandler {
         }
     }
 
-    private Set<PresenterWidget<? extends PopupView>> rootPopups = new HashSet<PresenterWidget<? extends PopupView>>();
-
     private static final Object rootSlot = new Object();
+
+    private Set<PresenterWidget<? extends PopupView>> rootPopups = new HashSet<PresenterWidget<? extends PopupView>>();
 
     private boolean isResetting;
 
