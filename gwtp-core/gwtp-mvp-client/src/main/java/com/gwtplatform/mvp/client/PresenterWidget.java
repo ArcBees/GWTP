@@ -215,7 +215,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
-            if (!content.isVisible() || !content.isPopup()) {
+            if (!content.isVisible()) {
                 content.internalReveal();
             }
         }
