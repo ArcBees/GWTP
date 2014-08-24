@@ -104,29 +104,32 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * @param <V> The {@link View} type.
  */
 public abstract class PresenterWidget<V extends View> extends
-        HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
+HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
     private static class HandlerInformation<H extends EventHandler> {
         private Type<H> type;
         private H eventHandler;
 
-        private HandlerInformation(Type<H> type, H eventHandler) {
+        private HandlerInformation(final Type<H> type, final H eventHandler) {
             this.type = type;
             this.eventHandler = eventHandler;
         }
     }
 
-    private final EventBus eventBus;
-    private final V view;
+    private static final Object POPUP_SLOT = new Object();
 
     boolean visible;
+
+    private final EventBus eventBus;
+    private final V view;
+    private boolean isPopup;
 
     /**
      * This map makes it possible to keep a list of all the active children in
      * every slot managed by this {@link PresenterWidget}. A slot is identified by an
      * opaque object. A single slot can have many children.
      */
-    private final Map<Object, List<PresenterWidget<?>>> activeChildren =
-            new HashMap<Object, List<PresenterWidget<?>>>();
+    private final Map<Object, List<PresenterWidget<?>>>
+    activeChildren = new HashMap<Object, List<PresenterWidget<?>>>();
 
     /**
      * The parent presenter, in order to make sure this widget is only ever in one
@@ -134,16 +137,9 @@ public abstract class PresenterWidget<V extends View> extends
      */
     private PresenterWidget<?> currentParentPresenter;
 
-    /**
-     * This list tracks all the active children in popup slots managed by this
-     * {@link PresenterWidget}. A slot is identified by an opaque object. A
-     * single slot can have many children.
-     */
-    private final List<PresenterWidget<? extends PopupView>> popupChildren =
-            new ArrayList<PresenterWidget<? extends PopupView>>();
-
     private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
             new ArrayList<HandlerInformation<? extends EventHandler>>();
+
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
 
     /**
@@ -157,13 +153,12 @@ public abstract class PresenterWidget<V extends View> extends
      * @param eventBus The {@link EventBus}.
      * @param view     The {@link View}.
      */
-    public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
+    public PresenterWidget(final boolean autoBind, final EventBus eventBus, final V view) {
         super(autoBind);
 
         this.eventBus = eventBus;
         this.view = view;
     }
-
     /**
      * Creates a {@link PresenterWidget} that uses automatic binding. This will
      * only work when instantiating this object using Guice/GIN dependency injection.
@@ -173,69 +168,33 @@ public abstract class PresenterWidget<V extends View> extends
      * @param eventBus The {@link EventBus}.
      * @param view     The {@link View}.
      */
-    public PresenterWidget(EventBus eventBus, V view) {
+    public PresenterWidget(final EventBus eventBus, final V view) {
         this(true, eventBus, view);
     }
 
     @Override
-    public void addToPopupSlot(PresenterWidget<? extends PopupView> child) {
+    public void addToPopupSlot(final PresenterWidget<? extends PopupView> child) {
         addToPopupSlot(child, true);
     }
 
     @Override
-    public void addToPopupSlot(PresenterWidget<? extends PopupView> child, boolean center) {
+    public void addToPopupSlot(final PresenterWidget<? extends PopupView> child, final boolean center) {
         if (child == null) {
             return;
         }
-
-        child.reparent(this);
-
-        // Do nothing if the content is already added
-        for (PresenterWidget<?> popupPresenter : popupChildren) {
-            if (popupPresenter == child) {
-                return;
-            }
-        }
-
-        PopupView popupView = child.getView();
-        popupChildren.add(child);
+        child.markAsPopup();
+        final PopupView popupView = child.getView();
 
         // Center if desired
         if (center) {
             popupView.center();
         }
 
-        // Display the popup content
-        if (isVisible()) {
-            popupView.show();
-            // This presenter is visible, its time to call onReveal
-            // on the newly added child (and recursively on this child children)
-            monitorCloseEvent(child);
-            if (!child.isVisible()) {
-                child.internalReveal();
-            }
-        }
+        addToSlot(POPUP_SLOT, child);
     }
 
     @Override
-    public void removeFromPopupSlot(PresenterWidget<? extends PopupView> child) {
-        if (child == null) {
-            return;
-        }
-
-        if (popupChildren.contains(child)) {
-            child.getView().hide();
-            if (child.isVisible()) {
-                child.internalHide();
-            }
-            popupChildren.remove(child);
-        }
-
-        child.reparent(null);
-    }
-
-    @Override
-    public void addToSlot(Object slot, PresenterWidget<?> content) {
+    public void addToSlot(final Object slot, final PresenterWidget<?> content) {
         if (content == null) {
             return;
         }
@@ -250,22 +209,31 @@ public abstract class PresenterWidget<V extends View> extends
             slotChildren.add(content);
             activeChildren.put(slot, slotChildren);
         }
-        getView().addToSlot(slot, content);
+        if (slot != POPUP_SLOT) {
+            getView().addToSlot(slot, content);
+        }
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
-            content.internalReveal();
+            if (!content.isVisible() || !content.isPopup) {
+                content.internalReveal();
+            }
         }
     }
 
     @Override
-    public void clearSlot(Object slot) {
-        List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
+    public Widget asWidget() {
+        return getView() == null ? null : getView().asWidget();
+    }
+
+    @Override
+    public void clearSlot(final Object slot) {
+        final List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
         if (slotChildren != null) {
             // This presenter is visible, its time to call onHide
             // on the children to be removed (and recursively on their children)
             if (isVisible()) {
-                for (PresenterWidget<?> activeChild : slotChildren) {
+                for (final PresenterWidget<?> activeChild : slotChildren) {
                     activeChild.internalHide();
                 }
             }
@@ -275,7 +243,7 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
-    public void fireEvent(GwtEvent<?> event) {
+    public void fireEvent(final GwtEvent<?> event) {
         getEventBus().fireEventFromSource(event, this);
     }
 
@@ -286,11 +254,6 @@ public abstract class PresenterWidget<V extends View> extends
      */
     public V getView() {
         return view;
-    }
-
-    @Override
-    public Widget asWidget() {
-        return getView() == null ? null : getView().asWidget();
     }
 
     /**
@@ -316,14 +279,19 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
-    public void removeFromSlot(Object slot, PresenterWidget<?> content) {
+    public void removeFromPopupSlot(final PresenterWidget<? extends PopupView> child) {
+        removeFromSlot(POPUP_SLOT, child);
+    }
+
+    @Override
+    public void removeFromSlot(final Object slot, final PresenterWidget<?> content) {
         if (content == null) {
             return;
         }
 
         content.reparent(null);
 
-        List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
+        final List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
         if (slotChildren != null) {
             // This presenter is visible, its time to call onHide
             // on the child to be removed (and recursively on itschildren)
@@ -336,13 +304,13 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> content) {
+    public void setInSlot(final Object slot, final PresenterWidget<?> content) {
         setInSlot(slot, content, true);
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> content,
-            boolean performReset) {
+    public void setInSlot(final Object slot, final PresenterWidget<?> content,
+            final boolean performReset) {
         if (content == null) {
             // Assumes the user wants to clear the slot content.
             clearSlot(slot);
@@ -362,7 +330,7 @@ public abstract class PresenterWidget<V extends View> extends
             if (isVisible()) {
                 // We are visible, make sure the content that we're removing
                 // is being notified as hidden
-                for (PresenterWidget<?> activeChild : slotChildren) {
+                for (final PresenterWidget<?> activeChild : slotChildren) {
                     activeChild.internalHide();
                 }
             }
@@ -400,7 +368,7 @@ public abstract class PresenterWidget<V extends View> extends
      * @param handler The handler to register.
      * @return The {@link HandlerRegistration} you should use to unregister the handler.
      */
-    protected <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
+    protected <H extends EventHandler> HandlerRegistration addHandler(final Type<H> type, final H handler) {
         return getEventBus().addHandler(type, handler);
     }
 
@@ -416,7 +384,7 @@ public abstract class PresenterWidget<V extends View> extends
      * @param handler The handler to register.
      * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
      */
-    protected <H extends EventHandler> void addRegisteredHandler(Type<H> type, H handler) {
+    protected <H extends EventHandler> void addRegisteredHandler(final Type<H> type, final H handler) {
         registerHandler(addHandler(type, handler));
     }
 
@@ -431,8 +399,8 @@ public abstract class PresenterWidget<V extends View> extends
      * @see #addRegisteredHandler(com.google.gwt.event.shared.GwtEvent.Type, com.google.gwt.event.shared.EventHandler)
      * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
      */
-    protected <H extends EventHandler> void addVisibleHandler(Type<H> type, H handler) {
-        HandlerInformation<H> handlerInformation = new HandlerInformation<H>(type, handler);
+    protected <H extends EventHandler> void addVisibleHandler(final Type<H> type, final H handler) {
+        final HandlerInformation<H> handlerInformation = new HandlerInformation<H>(type, handler);
         visibleHandlers.add(handlerInformation);
 
         if (visible) {
@@ -522,15 +490,15 @@ public abstract class PresenterWidget<V extends View> extends
      */
     void internalHide() {
         assert isVisible() : "internalHide() called on a hidden presenter!";
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
-            for (PresenterWidget<?> activeChild : slotChildren) {
+        for (final List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+            for (final PresenterWidget<?> activeChild : slotChildren) {
                 activeChild.internalHide();
             }
         }
-        for (PresenterWidget<? extends PopupView> popupPresenter : popupChildren) {
-            popupPresenter.getView().setCloseHandler(null);
-            popupPresenter.internalHide();
-            popupPresenter.getView().hide();
+
+        if (isPopup()) {
+            ((PopupView) this.getView()).setCloseHandler(null);
+            ((PopupView) this.getView()).hide();
         }
 
         unregisterVisibleHandlers();
@@ -538,6 +506,19 @@ public abstract class PresenterWidget<V extends View> extends
         visible = false;
 
         onHide();
+    }
+
+    /**
+     * Internal method called to reset a presenter. Instead of using that method,
+     * fire a {@link ResetPresentersEvent} to perform a reset manually.
+     */
+    void internalReset() {
+        onReset();
+        for (final List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+            for (final PresenterWidget<?> activeChild : slotChildren) {
+                activeChild.internalReset();
+            }
+        }
     }
 
     /**
@@ -550,17 +531,15 @@ public abstract class PresenterWidget<V extends View> extends
         onReveal();
         visible = true;
 
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
-            for (PresenterWidget<?> activeChild : slotChildren) {
+        for (final List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+            for (final PresenterWidget<?> activeChild : slotChildren) {
                 activeChild.internalReveal();
             }
         }
-        for (PresenterWidget<? extends PopupView> popupPresenter : popupChildren) {
-            // This presenter is visible, its time to call onReveal
-            // on the newly added child (and recursively on this child children)
-            popupPresenter.getView().show();
-            monitorCloseEvent(popupPresenter);
-            popupPresenter.internalReveal();
+
+        if (isPopup()) {
+            ((PopupView) getView()).show();
+            currentParentPresenter.monitorCloseEvent((PresenterWidget<? extends PopupView>) this);
         }
 
         registerVisibleHandlers();
@@ -572,7 +551,7 @@ public abstract class PresenterWidget<V extends View> extends
      *
      * @param newParent The new parent {@link PresenterWidget}.
      */
-    void reparent(PresenterWidget<?> newParent) {
+    void reparent(final PresenterWidget<?> newParent) {
         if (currentParentPresenter != null && currentParentPresenter != newParent) {
             currentParentPresenter.detach(this);
         }
@@ -581,32 +560,23 @@ public abstract class PresenterWidget<V extends View> extends
     }
 
     /**
-     * Internal method called to reset a presenter. Instead of using that method,
-     * fire a {@link ResetPresentersEvent} to perform a reset manually.
-     */
-    void internalReset() {
-        onReset();
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
-            for (PresenterWidget<?> activeChild : slotChildren) {
-                activeChild.internalReset();
-            }
-        }
-        for (PresenterWidget<?> popupPresenter : popupChildren) {
-            popupPresenter.internalReset();
-        }
-    }
-
-    /**
      * Called by a child {@link PresenterWidget} when it wants to detach itself
      * from this parent.
      *
      * @param childPresenter The {@link PresenterWidget}. It should be a child of this presenter.
      */
-    private void detach(PresenterWidget<?> childPresenter) {
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+    private void detach(final PresenterWidget<?> childPresenter) {
+        for (final List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
             slotChildren.remove(childPresenter);
         }
-        popupChildren.remove(childPresenter);
+    }
+
+    private boolean isPopup() {
+        return isPopup;
+    }
+
+    private void markAsPopup() {
+        isPopup = true;
     }
 
     /**
@@ -617,7 +587,7 @@ public abstract class PresenterWidget<V extends View> extends
      * @param popupPresenter The {@link PresenterWidget} to monitor.
      */
     private void monitorCloseEvent(final PresenterWidget<? extends PopupView> popupPresenter) {
-        PopupView popupView = popupPresenter.getView();
+        final PopupView popupView = popupPresenter.getView();
 
         popupView.setCloseHandler(new PopupViewCloseHandler() {
             @Override
@@ -625,43 +595,24 @@ public abstract class PresenterWidget<V extends View> extends
                 if (isVisible()) {
                     popupPresenter.internalHide();
                 }
-                removePopupChildren(popupPresenter);
             }
         });
     }
 
-    /**
-     * Go through the popup children and remove the specified one.
-     *
-     * @param content The {@link PresenterWidget} added as a popup which we want to remove.
-     */
-    private void removePopupChildren(PresenterWidget<? extends PopupView> content) {
-        int i;
-        for (i = 0; i < popupChildren.size(); ++i) {
-            PresenterWidget<? extends PopupView> popupPresenter = popupChildren.get(i);
-            if (popupPresenter == content) {
-                (popupPresenter.getView()).setCloseHandler(null);
-                break;
-            }
-        }
-        if (i < popupChildren.size()) {
-            popupChildren.remove(i);
-        }
-    }
-
-    private <H extends EventHandler> void registerVisibleHandler(HandlerInformation<H> handlerInformation) {
-        HandlerRegistration handlerRegistration = addHandler(handlerInformation.type, handlerInformation.eventHandler);
+    private <H extends EventHandler> void registerVisibleHandler(final HandlerInformation<H> handlerInformation) {
+        final HandlerRegistration handlerRegistration =
+                addHandler(handlerInformation.type, handlerInformation.eventHandler);
         visibleHandlerRegistrations.add(handlerRegistration);
     }
 
     private void registerVisibleHandlers() {
-        for (HandlerInformation<? extends EventHandler> handlerInformation : visibleHandlers) {
+        for (final HandlerInformation<? extends EventHandler> handlerInformation : visibleHandlers) {
             registerVisibleHandler(handlerInformation);
         }
     }
 
     private void unregisterVisibleHandlers() {
-        for (HandlerRegistration handlerRegistration : visibleHandlerRegistrations) {
+        for (final HandlerRegistration handlerRegistration : visibleHandlerRegistrations) {
             handlerRegistration.removeHandler();
         }
 
