@@ -588,6 +588,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         popupView.setCloseHandler(new PopupViewCloseHandler() {
             @Override
             public void onClose() {
+                removeFromPopupSlot(popupPresenter);
                 if (isVisible()) {
                     popupPresenter.internalHide();
                 }
