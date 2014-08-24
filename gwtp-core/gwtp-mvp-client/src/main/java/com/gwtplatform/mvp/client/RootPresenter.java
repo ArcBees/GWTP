@@ -16,6 +16,10 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import javax.inject.Inject;
 
 import com.google.gwt.dom.client.Document;
@@ -51,9 +55,9 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * {@link com.google.gwt.user.client.ui.LayoutPanel}.
  */
 public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
-        implements ResetPresentersHandler, RevealRootContentHandler,
-        RevealRootLayoutContentHandler, RevealRootPopupContentHandler,
-        LockInteractionHandler {
+implements ResetPresentersHandler, RevealRootContentHandler,
+RevealRootLayoutContentHandler, RevealRootPopupContentHandler,
+LockInteractionHandler {
 
     /**
      * {@link RootPresenter}'s view.
@@ -70,11 +74,32 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         @Override
         public Widget asWidget() {
             assert false : "Root view has no widget, you should never call asWidget()";
-            return null;
+        return null;
+        }
+
+        public void ensureGlass() {
+            if (glass == null) {
+                glass = Document.get().createDivElement();
+
+                final Style style = glass.getStyle();
+                style.setPosition(Position.ABSOLUTE);
+                style.setLeft(0, Unit.PX);
+                style.setTop(0, Unit.PX);
+                style.setRight(0, Unit.PX);
+                style.setBottom(0, Unit.PX);
+                style.setZIndex(2147483647); // Maximum z-index
+                style.setBackgroundColor("#FFFFFF");
+                style.setOpacity(0);
+            }
+        }
+
+        public void lockScreen() {
+            ensureGlass();
+            Document.get().getBody().appendChild(glass);
         }
 
         @Override
-        public void setInSlot(Object slot, IsWidget content) {
+        public void setInSlot(final Object slot, final IsWidget content) {
             assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
             if (usingRootLayoutPanel) {
@@ -97,6 +122,12 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
             }
         }
 
+        public void unlockScreen() {
+            if (glass != null) {
+                glass.removeFromParent();
+            }
+        }
+
         /**
          * Return the RootPanel on which to add the content.
          * <p />
@@ -111,34 +142,9 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         private void setUsingRootLayoutPanel(final boolean usingRootLayoutPanel) {
             this.usingRootLayoutPanel = usingRootLayoutPanel;
         }
-
-        public void lockScreen() {
-            ensureGlass();
-            Document.get().getBody().appendChild(glass);
-        }
-
-        public void unlockScreen() {
-            if (glass != null) {
-                glass.removeFromParent();
-            }
-        }
-
-        public void ensureGlass() {
-            if (glass == null) {
-                glass = Document.get().createDivElement();
-
-                Style style = glass.getStyle();
-                style.setPosition(Position.ABSOLUTE);
-                style.setLeft(0, Unit.PX);
-                style.setTop(0, Unit.PX);
-                style.setRight(0, Unit.PX);
-                style.setBottom(0, Unit.PX);
-                style.setZIndex(2147483647); // Maximum z-index
-                style.setBackgroundColor("#FFFFFF");
-                style.setOpacity(0);
-            }
-        }
     }
+
+    private Set<PresenterWidget<? extends PopupView>> rootPopups = new HashSet<PresenterWidget<? extends PopupView>>();
 
     private static final Object rootSlot = new Object();
 
@@ -157,6 +163,48 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     }
 
     @Override
+    public void onLockInteraction(final LockInteractionEvent lockInteractionEvent) {
+        if (lockInteractionEvent.shouldLock()) {
+            getView().lockScreen();
+        } else {
+            getView().unlockScreen();
+        }
+    }
+
+    @Override
+    public void onResetPresenters(final ResetPresentersEvent resetPresentersEvent) {
+        if (!isResetting) {
+            isResetting = true;
+            internalReset();
+            isResetting = false;
+        }
+    }
+
+    @Override
+    public void onRevealRootContent(
+            final RevealRootContentEvent revealContentEvent) {
+        getView().setUsingRootLayoutPanel(false);
+        setInSlot(rootSlot, revealContentEvent.getContent());
+        resetPopupPresenters();
+    }
+
+    @Override
+    public void onRevealRootLayoutContent(
+            final RevealRootLayoutContentEvent revealContentEvent) {
+        getView().setUsingRootLayoutPanel(true);
+        setInSlot(rootSlot, revealContentEvent.getContent());
+        resetPopupPresenters();
+    }
+
+    @Override
+    public void onRevealRootPopupContent(
+            final RevealRootPopupContentEvent revealContentEvent) {
+        addToPopupSlot(revealContentEvent.getContent(), revealContentEvent.isCentered());
+        rootPopups.add(revealContentEvent.getContent());
+        cleanRootPopups();
+    }
+
+    @Override
     protected void onBind() {
         super.onBind();
 
@@ -171,45 +219,19 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         addRegisteredHandler(LockInteractionEvent.getType(), this);
     }
 
-    @Override
-    public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
-        if (!isResetting) {
-            isResetting = true;
-            internalReset();
-            isResetting = false;
+    private void cleanRootPopups() {
+        final Iterator<PresenterWidget<? extends PopupView>> it = rootPopups.iterator();
+        while (it.hasNext()) {
+            if (!it.next().isVisible()) {
+                it.remove();
+            }
         }
     }
 
-    @Override
-    public void onRevealRootContent(
-            final RevealRootContentEvent revealContentEvent) {
-        getView().setUsingRootLayoutPanel(false);
-        setInSlot(rootSlot, revealContentEvent.getContent());
-    }
-
-    @Override
-    public void onRevealRootLayoutContent(
-            final RevealRootLayoutContentEvent revealContentEvent) {
-        getView().setUsingRootLayoutPanel(true);
-        setInSlot(rootSlot, revealContentEvent.getContent());
-    }
-
-    @Override
-    public void onRevealRootPopupContent(
-            final RevealRootPopupContentEvent revealContentEvent) {
-        if (revealContentEvent.isCentered()) {
-            addToPopupSlot(revealContentEvent.getContent());
-        } else {
-            addToPopupSlot(revealContentEvent.getContent(), false);
-        }
-    }
-
-    @Override
-    public void onLockInteraction(LockInteractionEvent lockInteractionEvent) {
-        if (lockInteractionEvent.shouldLock()) {
-            getView().lockScreen();
-        } else {
-            getView().unlockScreen();
+    private void resetPopupPresenters() {
+        cleanRootPopups();
+        for (final PresenterWidget<? extends PopupView> popup: rootPopups) {
+            popup.getView().show();
         }
     }
 
