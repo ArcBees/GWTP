@@ -38,7 +38,6 @@ import com.gwtplatform.mvp.client.view.PopupPositioner.PopupPosition;
  * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.IsWidget)}.
  */
 public abstract class PopupViewImpl extends ViewImpl implements PopupView {
-
     private HandlerRegistration autoHideHandler;
 
     private HandlerRegistration closeHandlerRegistration;
@@ -124,7 +123,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             @Override
             public void setPosition(final int offsetWidth, final int offsetHeight) {
                 final PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
-                setPosition(popupPosition.getLeft(), popupPosition.getTop());
+                PopupViewImpl.this.setPosition(popupPosition.getLeft(), popupPosition.getTop());
             }
         });
     }
