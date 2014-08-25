@@ -47,7 +47,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     private HandlerRegistration closeHandlerRegistration;
     private final EventBus eventBus;
 
-    private final PopupPositioner positioner;
+    private PopupPositioner positioner;
 
     /**
      * By default the popup will position itself in the center of the window.
@@ -64,11 +64,24 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
      * @see
      * {@link com.gwtplatform.mvp.client.view.CenterPopupPositioner},
      * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
-     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner}
      */
     protected PopupViewImpl(EventBus eventBus, PopupPositioner positioner) {
         this.eventBus = eventBus;
-        this.positioner = positioner;
+        setPopupPositioner(positioner);
+    }
+
+    @Override
+    public void center() {
+        doCenter();
+        // We center again in a deferred command to solve a bug in IE where newly
+        // created window are sometimes not centered.
+        Scheduler.get().scheduleDeferred(new Command() {
+            @Override
+            public void execute() {
+                doCenter();
+            }
+        });
     }
 
     @Override
@@ -115,6 +128,11 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     @Override
+    public void setPopupPositioner(PopupPositioner popupPositioner) {
+        this.positioner = popupPositioner;
+    }
+
+    @Override
     public void setPosition(int left, int top) {
         asPopupPanel().setPopupPosition(left, top);
     }
@@ -143,19 +161,6 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
      */
     protected PopupPanel asPopupPanel() {
         return (PopupPanel) asWidget();
-    }
-
-    @Override
-    public void center() {
-        doCenter();
-        // We center again in a deferred command to solve a bug in IE where newly
-        // created window are sometimes not centered.
-        Scheduler.get().scheduleDeferred(new Command() {
-            @Override
-            public void execute() {
-                doCenter();
-            }
-        });
     }
 
     /**
@@ -197,7 +202,8 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     private native void hidePopup(PopupPanel popupPanel) /*-{
-        var resizeAnimation = popupPanel.@com.google.gwt.user.client.ui.PopupPanel::resizeAnimation;
-        resizeAnimation.@com.google.gwt.user.client.ui.PopupPanel.ResizeAnimation::setState(ZZ)(false, false);
+          var resizeAnimation = popupPanel.@com.google.gwt.user.client.ui.PopupPanel::resizeAnimation;
+          resizeAnimation.@com.google.gwt.user.client.ui.PopupPanel.ResizeAnimation::setState(ZZ)(false, false);
     }-*/;
+
 }

@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.gwtplatform.mvp.client.view.PopupPositioner;
+
 /**
  * The interface for {@link View} classes that is meant to be displayed as a
  * popup, like a GWT {@link com.google.gwt.user.client.ui.PopupPanel} or a
@@ -65,6 +67,16 @@ public interface PopupView extends View {
      * Will position the popup before showing it.
      */
     void showAndReposition();
+
+    /**
+     * Set the PopupPositioner which will position this popup when it's presenter is revealed.
+     * @param positioner The {@link PopupPositioner} will automatically position the popup onReveal();
+     * @see
+     * {@link com.gwtplatform.mvp.client.view.CenterPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner}
+     */
+    void setPopupPositioner(PopupPositioner popupPositioner);
 
     /**
      * Reposition the {@link PopupView} within the browser's client area. This
