@@ -16,7 +16,6 @@
 package com.gwtplatform.mvp.client.view;
 
 public abstract class PopupPositioner {
-
     public class PopupPosition {
         private final int top;
         private final int left;
@@ -32,6 +31,11 @@ public abstract class PopupPositioner {
 
         public int getTop() {
             return top;
+        }
+
+        @Override
+        public String toString() {
+            return "PopupPosition [top=" + top + ", left=" + left + "]";
         }
     }
 
