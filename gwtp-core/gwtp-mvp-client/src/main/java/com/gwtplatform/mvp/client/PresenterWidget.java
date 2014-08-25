@@ -505,7 +505,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
                 activeChild.internalReset();
             }
         }
-        if (isPopup()) {
+        if (isPopup() && isVisible()) {
             ((PopupView) getView()).show();
             currentParentPresenter.monitorCloseEvent((PresenterWidget<? extends PopupView>) this);
         }
