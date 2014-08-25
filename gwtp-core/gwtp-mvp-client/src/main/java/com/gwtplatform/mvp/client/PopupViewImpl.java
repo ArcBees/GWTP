@@ -43,14 +43,14 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     private HandlerRegistration closeHandlerRegistration;
     private final EventBus eventBus;
 
-    private PopupPositioner positioner;
+    private final PopupPositioner positioner;
 
     /**
      * By default the popup will position itself in the center of the window.
      * To use a different positioner use {@link #PopupViewImpl(EventBus, PopupPosition)} instead.
      * @param eventBus The {@link EventBus}.
      */
-    public PopupViewImpl(final EventBus eventBus) {
+    public PopupViewImpl(EventBus eventBus) {
         this(eventBus, new CenterPopupPositioner());
     }
 
@@ -62,7 +62,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
      * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
      * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner},
      */
-    protected PopupViewImpl(final EventBus eventBus, final PopupPositioner positioner) {
+    protected PopupViewImpl(EventBus eventBus, PopupPositioner positioner) {
         this.eventBus = eventBus;
         this.positioner = positioner;
     }
@@ -73,7 +73,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     @Override
-    public void setAutoHideOnNavigationEventEnabled(final boolean autoHide) {
+    public void setAutoHideOnNavigationEventEnabled(boolean autoHide) {
         if (autoHide) {
             if (autoHideHandler != null) {
                 return;
@@ -81,7 +81,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             autoHideHandler = eventBus.addHandler(NavigationEvent.getType(),
                     new NavigationHandler() {
                 @Override
-                public void onNavigation(final NavigationEvent navigationEvent) {
+                public void onNavigation(NavigationEvent navigationEvent) {
                     hide();
                 }
             });
@@ -103,11 +103,16 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             closeHandlerRegistration = asPopupPanel().addCloseHandler(
                     new CloseHandler<PopupPanel>() {
                         @Override
-                        public void onClose(final CloseEvent<PopupPanel> event) {
+                        public void onClose(CloseEvent<PopupPanel> event) {
                             popupViewCloseHandler.onClose();
                         }
                     });
         }
+    }
+
+    @Override
+    public void setPosition(int left, int top) {
+        asPopupPanel().setPopupPosition(left, top);
     }
 
     @Override
@@ -120,8 +125,8 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
 
             @Override
-            public void setPosition(final int offsetWidth, final int offsetHeight) {
-                final PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
+            public void setPosition(int offsetWidth, int offsetHeight) {
+                PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
                 asPopupPanel().setPopupPosition(popupPosition.getLeft(), popupPosition.getTop());
             }
         });
@@ -135,5 +140,4 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     protected PopupPanel asPopupPanel() {
         return (PopupPanel) asWidget();
     }
-
 }

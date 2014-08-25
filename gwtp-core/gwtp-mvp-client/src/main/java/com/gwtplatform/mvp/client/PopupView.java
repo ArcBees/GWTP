@@ -38,7 +38,7 @@ public interface PopupView extends View {
      * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#setOnLeaveConfirmation(String)}
      * .
      */
-    void setAutoHideOnNavigationEventEnabled(final boolean autoHide);
+    void setAutoHideOnNavigationEventEnabled(boolean autoHide);
 
     /**
      * Identifies which {@link PopupViewCloseHandler} should be called when this
@@ -47,7 +47,7 @@ public interface PopupView extends View {
      * @param popupViewCloseHandler The {@link PopupViewCloseHandler} or
      *                              {@code null} to unregister any handlers.
      */
-    void setCloseHandler(final PopupViewCloseHandler popupViewCloseHandler);
+    void setCloseHandler(PopupViewCloseHandler popupViewCloseHandler);
 
     /**
      * <b>Important!</b> Do not call this directly, instead use
@@ -65,4 +65,16 @@ public interface PopupView extends View {
      * Will position the popup before showing it.
      */
     void showAndReposition();
+
+    /**
+     * Reposition the {@link PopupView} within the browser's client area. This
+     * method should not change the view visibility: if it was hidden (resp.
+     * visible) it remains hidden (resp. visible).
+     *
+     * @param left The left position of the top-left corner (in pixels).
+     * @param top  The top position of the top-left corner (in pixels).
+     * @deprecated use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
+     */
+    @Deprecated
+    void setPosition(int left, int top);
 }

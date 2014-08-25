@@ -77,7 +77,7 @@ LockInteractionHandler {
             if (glass == null) {
                 glass = Document.get().createDivElement();
 
-                final Style style = glass.getStyle();
+                Style style = glass.getStyle();
                 style.setPosition(Position.ABSOLUTE);
                 style.setLeft(0, Unit.PX);
                 style.setTop(0, Unit.PX);
@@ -95,7 +95,7 @@ LockInteractionHandler {
         }
 
         @Override
-        public void setInSlot(final Object slot, final IsWidget content) {
+        public void setInSlot(Object slot, IsWidget content) {
             assert slot == rootSlot : "Unknown slot used in the root proxy.";
 
             if (usingRootLayoutPanel) {
@@ -135,7 +135,7 @@ LockInteractionHandler {
             return RootPanel.get();
         }
 
-        private void setUsingRootLayoutPanel(final boolean usingRootLayoutPanel) {
+        private void setUsingRootLayoutPanel(boolean usingRootLayoutPanel) {
             this.usingRootLayoutPanel = usingRootLayoutPanel;
         }
     }
@@ -151,13 +151,13 @@ LockInteractionHandler {
      *            The event bus.
      */
     @Inject
-    public RootPresenter(final EventBus eventBus, final RootView view) {
+    public RootPresenter(EventBus eventBus, RootView view) {
         super(eventBus, view);
         visible = true;
     }
 
     @Override
-    public void onLockInteraction(final LockInteractionEvent lockInteractionEvent) {
+    public void onLockInteraction(LockInteractionEvent lockInteractionEvent) {
         if (lockInteractionEvent.shouldLock()) {
             getView().lockScreen();
         } else {
@@ -166,7 +166,7 @@ LockInteractionHandler {
     }
 
     @Override
-    public void onResetPresenters(final ResetPresentersEvent resetPresentersEvent) {
+    public void onResetPresenters(ResetPresentersEvent resetPresentersEvent) {
         if (!isResetting) {
             isResetting = true;
             internalReset();
@@ -176,21 +176,21 @@ LockInteractionHandler {
 
     @Override
     public void onRevealRootContent(
-            final RevealRootContentEvent revealContentEvent) {
+            RevealRootContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(false);
         setInSlot(rootSlot, revealContentEvent.getContent());
     }
 
     @Override
     public void onRevealRootLayoutContent(
-            final RevealRootLayoutContentEvent revealContentEvent) {
+            RevealRootLayoutContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(true);
         setInSlot(rootSlot, revealContentEvent.getContent());
     }
 
     @Override
     public void onRevealRootPopupContent(
-            final RevealRootPopupContentEvent revealContentEvent) {
+            RevealRootPopupContentEvent revealContentEvent) {
         addToPopupSlot(revealContentEvent.getContent());
     }
 
