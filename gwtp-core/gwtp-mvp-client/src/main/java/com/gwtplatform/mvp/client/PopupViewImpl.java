@@ -46,16 +46,25 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     private PopupPositioner positioner;
 
     /**
-     * The {@link PopupViewImpl} class uses the {@link EventBus} to listen to
-     * {@link NavigationEvent} in order to automatically close when this event is
-     * fired, if desired. See
-     * {@link #setAutoHideOnNavigationEventEnabled(boolean)} for details.
-     *
+     * By default the popup will position itself in the center of the window.
+     * To use a different positioner use {@link #PopupViewImpl(EventBus, PopupPosition)} instead.
      * @param eventBus The {@link EventBus}.
      */
-    protected PopupViewImpl(final EventBus eventBus) {
+    public PopupViewImpl(final EventBus eventBus) {
+        this(eventBus, new CenterPopupPositioner());
+    }
+
+    /**
+     * @param eventBus The {@link EventBus}.
+     * @param positioner The {@link PopupPositioner} used to position the popup onReveal();
+     * @see
+     * {@link com.gwtplatform.mvp.client.view.CenterPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner},
+     */
+    protected PopupViewImpl(final EventBus eventBus, final PopupPositioner positioner) {
         this.eventBus = eventBus;
-        setPopupPositioner(new CenterPopupPositioner());
+        this.positioner = positioner;
     }
 
     @Override
@@ -102,16 +111,6 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     @Override
-    public void setPopupPositioner(final PopupPositioner positioner) {
-        this.positioner = positioner;
-    }
-
-    @Override
-    public void setPosition(final int left, final int top) {
-        asPopupPanel().setPopupPosition(left, top);
-    }
-
-    @Override
     public void show() {
         asPopupPanel().show();
     }
@@ -123,7 +122,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             @Override
             public void setPosition(final int offsetWidth, final int offsetHeight) {
                 final PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
-                PopupViewImpl.this.setPosition(popupPosition.getLeft(), popupPosition.getTop());
+                asPopupPanel().setPopupPosition(popupPosition.getLeft(), popupPosition.getTop());
             }
         });
     }
