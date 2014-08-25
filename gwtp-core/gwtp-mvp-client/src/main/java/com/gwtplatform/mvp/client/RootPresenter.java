@@ -16,10 +16,6 @@
 
 package com.gwtplatform.mvp.client;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import javax.inject.Inject;
 
 import com.google.gwt.dom.client.Document;
@@ -146,8 +142,6 @@ LockInteractionHandler {
 
     private static final Object rootSlot = new Object();
 
-    private Set<PresenterWidget<? extends PopupView>> rootPopups = new HashSet<PresenterWidget<? extends PopupView>>();
-
     private boolean isResetting;
 
     /**
@@ -185,7 +179,6 @@ LockInteractionHandler {
             final RevealRootContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(false);
         setInSlot(rootSlot, revealContentEvent.getContent());
-        resetPopupPresenters();
     }
 
     @Override
@@ -193,15 +186,12 @@ LockInteractionHandler {
             final RevealRootLayoutContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(true);
         setInSlot(rootSlot, revealContentEvent.getContent());
-        resetPopupPresenters();
     }
 
     @Override
     public void onRevealRootPopupContent(
             final RevealRootPopupContentEvent revealContentEvent) {
         addToPopupSlot(revealContentEvent.getContent());
-        rootPopups.add(revealContentEvent.getContent());
-        cleanRootPopups();
     }
 
     @Override
@@ -218,21 +208,4 @@ LockInteractionHandler {
 
         addRegisteredHandler(LockInteractionEvent.getType(), this);
     }
-
-    private void cleanRootPopups() {
-        final Iterator<PresenterWidget<? extends PopupView>> it = rootPopups.iterator();
-        while (it.hasNext()) {
-            if (!it.next().isVisible()) {
-                it.remove();
-            }
-        }
-    }
-
-    private void resetPopupPresenters() {
-        cleanRootPopups();
-        for (final PresenterWidget<? extends PopupView> popup: rootPopups) {
-            popup.getView().show();
-        }
-    }
-
 }
