@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.gwtplatform.mvp.client.view.PopupPositioner;
-
 /**
  * The interface for {@link View} classes that is meant to be displayed as a
  * popup, like a GWT {@link com.google.gwt.user.client.ui.PopupPanel} or a
@@ -52,16 +50,6 @@ public interface PopupView extends View {
     void setCloseHandler(final PopupViewCloseHandler popupViewCloseHandler);
 
     /**
-     * Reposition the {@link PopupView} within the browser's client area. This
-     * method should not change the view visibility: if it was hidden (resp.
-     * visible) it remains hidden (resp. visible).
-     *
-     * @param left The left position of the top-left corner (in pixels).
-     * @param top  The top position of the top-left corner (in pixels).
-     */
-    void setPosition(final int left, final int top);
-
-    /**
      * <b>Important!</b> Do not call this directly, instead use
      * {@link PresenterWidget#addToPopupSlot(PresenterWidget)} passing this
      * view's {@link PresenterWidget}.
@@ -72,16 +60,9 @@ public interface PopupView extends View {
     void show();
 
     /**
-     * Sets the popup positioner that will determine where to position the popup onReset();
-     * @param positioner
-     */
-    void setPopupPositioner(final PopupPositioner positioner);
-
-    /**
      * You don't need to call this directly it is automatically
      * called during onReveal().
      * Will position the popup before showing it.
      */
     void showAndReposition();
-
 }
