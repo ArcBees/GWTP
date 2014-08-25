@@ -199,13 +199,9 @@ LockInteractionHandler {
         super.onBind();
 
         addRegisteredHandler(ResetPresentersEvent.getType(), this);
-
         addRegisteredHandler(RevealRootContentEvent.getType(), this);
-
         addRegisteredHandler(RevealRootLayoutContentEvent.getType(), this);
-
         addRegisteredHandler(RevealRootPopupContentEvent.getType(), this);
-
         addRegisteredHandler(LockInteractionEvent.getType(), this);
     }
 }
