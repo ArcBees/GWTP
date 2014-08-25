@@ -16,8 +16,12 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PopupPanel.PositionCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -140,4 +144,60 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     protected PopupPanel asPopupPanel() {
         return (PopupPanel) asWidget();
     }
+
+    @Override
+    public void center() {
+        doCenter();
+        // We center again in a deferred command to solve a bug in IE where newly
+        // created window are sometimes not centered.
+        Scheduler.get().scheduleDeferred(new Command() {
+            @Override
+            public void execute() {
+                doCenter();
+            }
+        });
+    }
+
+    /**
+     * This method centers the popup panel, temporarily making it visible if
+     * needed.
+     */
+    protected void doCenter() {
+        // We can't use Element.center() method as it will show the popup
+        // by default and not only centering it. This is resulting in onAttach()
+        // being called twice when using setInSlot() or addToPopupSlot() in PresenterWidget
+
+        PopupPanel popup = asPopupPanel();
+        Element elem = popup.getElement();
+
+        boolean isShowing = popup.isShowing();
+        // If left/top are set from a previous doCenter() call, and our content
+        // has changed, we may get a bogus getOffsetWidth because our new content
+        // is wrapping (giving a lower offset width) then it would without the
+        // previous left. Clearing left/top to avoids this.
+        elem.getStyle().clearLeft();
+        elem.getStyle().clearTop();
+
+        // the popup should be added to the dom in order to get correct values for offsetWidth/offsetHeight
+        if (!isShowing) {
+            popup.setVisible(false);
+            popup.show();
+        }
+
+        int left = (Window.getClientWidth() - popup.getOffsetWidth()) >> 1;
+        int top = (Window.getClientHeight() - popup.getOffsetHeight()) >> 1;
+
+        if (!isShowing) {
+            hidePopup(asPopupPanel());
+            popup.setVisible(true);
+        }
+
+        popup.setPopupPosition(Math.max(Window.getScrollLeft() + left, 0), Math.max(
+                Window.getScrollTop() + top, 0));
+    }
+
+    private native void hidePopup(PopupPanel popupPanel) /*-{
+        var resizeAnimation = popupPanel.@com.google.gwt.user.client.ui.PopupPanel::resizeAnimation;
+        resizeAnimation.@com.google.gwt.user.client.ui.PopupPanel.ResizeAnimation::setState(ZZ)(false, false);
+    }-*/;
 }

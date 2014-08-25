@@ -77,4 +77,14 @@ public interface PopupView extends View {
      */
     @Deprecated
     void setPosition(int left, int top);
+
+    /**
+     * Make sure the {@link PopupView} is centered in the browser's client area.
+     * This method should not change the view visibility: if it was hidden (resp.
+     * visible) it remains hidden (resp. visible).
+     * @deprecated use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
+     */
+    @Deprecated
+    void center();
+
 }
