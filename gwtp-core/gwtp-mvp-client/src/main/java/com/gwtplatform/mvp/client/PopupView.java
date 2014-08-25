@@ -78,7 +78,8 @@ public interface PopupView extends View {
     void setPopupPositioner(final PopupPositioner positioner);
 
     /**
-     * Called during onReset().
+     * You don't need to call this directly it is automatically
+     * called during onReveal().
      * Will position the popup before showing it.
      */
     void showAndReposition();
