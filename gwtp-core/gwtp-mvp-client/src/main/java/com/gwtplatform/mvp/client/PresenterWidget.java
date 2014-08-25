@@ -174,20 +174,6 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
 
     @Override
     public void addToPopupSlot(final PresenterWidget<? extends PopupView> child) {
-        addToPopupSlot(child, true);
-    }
-
-    @Override
-    public void addToPopupSlot(final PresenterWidget<? extends PopupView> child, final boolean center) {
-        if (child == null) {
-            return;
-        }
-
-        // Center if desired
-        if (center) {
-            child.getView().center();
-        }
-
         addToSlot(POPUP_SLOT, child);
     }
 
@@ -519,6 +505,10 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
                 activeChild.internalReset();
             }
         }
+        if (isPopup()) {
+            ((PopupView) getView()).show();
+            currentParentPresenter.monitorCloseEvent((PresenterWidget<? extends PopupView>) this);
+        }
     }
 
     /**
@@ -538,8 +528,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         }
 
         if (isPopup()) {
-            ((PopupView) getView()).show();
-            currentParentPresenter.monitorCloseEvent((PresenterWidget<? extends PopupView>) this);
+            ((PopupView) getView()).showAndReposition();
         }
 
         registerVisibleHandlers();

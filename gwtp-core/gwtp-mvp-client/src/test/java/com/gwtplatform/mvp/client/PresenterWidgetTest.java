@@ -57,14 +57,61 @@ public class PresenterWidgetTest {
         }
     }
 
+    @TestSingleton
+    static class PresenterWidgetA extends PresenterWidgetSpy<View> {
+        @Inject
+        PresenterWidgetA(final EventBus eventBus, @Named("A") final View view) {
+            super(eventBus, view);
+        }
+    }
+
+    @TestSingleton
+    static class PresenterWidgetB extends PresenterWidgetSpy<View> {
+        @Inject
+        PresenterWidgetB(final EventBus eventBus, @Named("B") final View view) {
+            super(eventBus, view);
+        }
+    }
+
+    @TestSingleton
+    static class PresenterWidgetC extends PresenterWidgetSpy<View> {
+        @Inject
+        PresenterWidgetC(final EventBus eventBus, @Named("C") final View view) {
+            super(eventBus, view);
+        }
+    }
+
+    @TestSingleton
+    static class PresenterWidgetD extends PresenterWidget<View> {
+        @Inject
+        PresenterWidgetD(@Named("EventBusA") final EventBus eventBus, @Named("A") final PopupView view) {
+            super(eventBus, view);
+        }
+    }
+
+    @TestSingleton
+    static class PresenterWidgetPopupB extends PresenterWidgetSpy<PopupView> {
+        @Inject
+        PresenterWidgetPopupB(final EventBus eventBus, @Named("PopupB") final PopupView view) {
+            super(eventBus, view);
+        }
+    }
+
+    @TestSingleton
+    static class PresenterWidgetPopupC extends PresenterWidgetSpy<PopupView> {
+        @Inject
+        PresenterWidgetPopupC(final EventBus eventBus, @Named("PopupC") final PopupView view) {
+            super(eventBus, view);
+        }
+    }
+
     // Simple subclasses of PresenterWidget
-    abstract static class PresenterWidgetSpy<V extends View> extends
-            PresenterWidget<V> {
+    abstract static class PresenterWidgetSpy<V extends View> extends PresenterWidget<V> {
         public int onHideMethodCalled;
         public int onResetMethodCalled;
         public int onRevealMethodCalled;
 
-        PresenterWidgetSpy(EventBus eventBus, V view) {
+        PresenterWidgetSpy(final EventBus eventBus, final V view) {
             super(eventBus, view);
         }
 
@@ -87,93 +134,20 @@ public class PresenterWidgetTest {
         }
     }
 
-    @TestSingleton
-    static class PresenterWidgetA extends PresenterWidgetSpy<View> {
-        @Inject
-        PresenterWidgetA(EventBus eventBus, @Named("A") View view) {
-            super(eventBus, view);
-        }
-    }
-
-    @TestSingleton
-    static class PresenterWidgetB extends PresenterWidgetSpy<View> {
-        @Inject
-        PresenterWidgetB(EventBus eventBus, @Named("B") View view) {
-            super(eventBus, view);
-        }
-    }
-
-    @TestSingleton
-    static class PresenterWidgetC extends PresenterWidgetSpy<View> {
-        @Inject
-        PresenterWidgetC(EventBus eventBus, @Named("C") View view) {
-            super(eventBus, view);
-        }
-    }
-
-    @TestSingleton
-    static class PresenterWidgetPopupB extends PresenterWidgetSpy<PopupView> {
-        @Inject
-        PresenterWidgetPopupB(EventBus eventBus, @Named("PopupB") PopupView view) {
-            super(eventBus, view);
-        }
-    }
-
-    @TestSingleton
-    static class PresenterWidgetPopupC extends PresenterWidgetSpy<PopupView> {
-        @Inject
-        PresenterWidgetPopupC(EventBus eventBus, @Named("PopupC") PopupView view) {
-            super(eventBus, view);
-        }
-    }
-
-    @TestSingleton
-    static class PresenterWidgetD extends PresenterWidget<View> {
-        @Inject
-        PresenterWidgetD(@Named("EventBusA") EventBus eventBus, @Named("A") PopupView view) {
-            super(eventBus, view);
-        }
-    }
-
-    @Inject
-    @Named("A")
-    Widget widgetA;
-    @Inject
-    @Named("B")
-    Widget widgetB;
-    @Inject
-    @Named("C")
-    Widget widgetC;
-    @Inject
-    @Named("PopupB")
-    Widget widgetPopupB;
-    @Inject
-    @Named("PopupC")
-    Widget widgetPopupC;
-    @Inject
-    @Named("A")
-    View viewA;
-    @Inject
-    @Named("B")
-    View viewB;
-    @Inject
-    @Named("C")
-    View viewC;
-    @Inject
-    @Named("PopupB")
-    PopupView popupViewB;
-    @Inject
-    @Named("PopupC")
-    PopupView popupViewC;
-    @Inject
-    @Named("EventBusA")
-    EventBus eventBusA;
-    @Inject
-    GwtEvent.Type<EventHandler> typeA;
-    @Inject
-    EventHandler handlerA;
-    @Inject
-    HandlerRegistration registrationA;
+    @Inject @Named("A") Widget widgetA;
+    @Inject @Named("B") Widget widgetB;
+    @Inject @Named("C") Widget widgetC;
+    @Inject @Named("PopupB") Widget widgetPopupB;
+    @Inject @Named("PopupC") Widget widgetPopupC;
+    @Inject @Named("A") View viewA;
+    @Inject @Named("B") View viewB;
+    @Inject @Named("C") View viewC;
+    @Inject @Named("PopupB") PopupView popupViewB;
+    @Inject @Named("PopupC") PopupView popupViewC;
+    @Inject @Named("EventBusA") EventBus eventBusA;
+    @Inject GwtEvent.Type<EventHandler> typeA;
+    @Inject EventHandler handlerA;
+    @Inject HandlerRegistration registrationA;
 
     @Before
     public void arrange() {
@@ -186,8 +160,7 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void onRevealMakesPresenterWidgetVisible(
-            PresenterWidgetA presenterWidget) {
+    public void onRevealMakesPresenterWidgetVisible(final PresenterWidgetA presenterWidget) {
         // When
         presenterWidget.internalReveal();
 
@@ -196,8 +169,7 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void presenterWidgetIsInitiallyNotVisible(
-            PresenterWidgetA presenterWidget) {
+    public void presenterWidgetIsInitiallyNotVisible(final PresenterWidgetA presenterWidget) {
         // Then
         assertEquals(0, presenterWidget.onRevealMethodCalled);
         assertEquals(0, presenterWidget.onHideMethodCalled);
@@ -205,147 +177,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testAddCenteredPopupOnInitiallyInvisiblePresenter(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetPopupB popupContentB,
-            PresenterWidgetPopupC popupContentC) {
-
-        // Given
-        // presenterWidget is NOT visible
-        assertFalse(presenterWidgetA.isVisible());
-
-        // When
-        presenterWidgetA.addToPopupSlot(popupContentB);
-        presenterWidgetA.addToPopupSlot(popupContentC);
-
-        // Then
-        verify(popupContentB.getView(), times(0)).show();
-        verify(popupContentC.getView(), times(0)).show();
-        verify(popupContentB.getView(), times(0)).hide();
-        verify(popupContentC.getView(), times(0)).hide();
-        verify(popupContentB.getView()).center();
-        verify(popupContentC.getView()).center();
-
-        assertEquals(0, popupContentB.onRevealMethodCalled);
-        assertEquals(0, popupContentC.onRevealMethodCalled);
-
-        // and When
-        presenterWidgetA.internalReveal();
-
-        // Then
-        assertEquals(1, popupContentB.onRevealMethodCalled);
-        assertEquals(1, popupContentC.onRevealMethodCalled);
-        verify(popupContentB.getView()).show();
-        verify(popupContentC.getView()).show();
-
-        // and When
-        presenterWidgetA.internalHide();
-
-        // Then
-        assertEquals(1, popupContentB.onRevealMethodCalled);
-        assertEquals(1, popupContentC.onRevealMethodCalled);
-        assertEquals(1, popupContentB.onHideMethodCalled);
-        assertEquals(1, popupContentC.onHideMethodCalled);
-        verify(popupContentB.getView()).show();
-        verify(popupContentC.getView()).show();
-        verify(popupContentB.getView()).hide();
-        verify(popupContentC.getView()).hide();
-    }
-
-    @Test
-    public void testAddCenteredPopupOnInitiallyVisiblePresenter(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetPopupB popupContentB,
-            PresenterWidgetPopupC popupContentC) {
-
-        // Given
-        presenterWidgetA.internalReveal();
-
-        // When
-        presenterWidgetA.addToPopupSlot(popupContentB);
-        presenterWidgetA.addToPopupSlot(popupContentC);
-
-        // Then
-        verify(popupContentB.getView()).show();
-        verify(popupContentC.getView()).show();
-        verify(popupContentB.getView()).center();
-        verify(popupContentC.getView()).center();
-
-        assertEquals(1, popupContentB.onRevealMethodCalled);
-        assertEquals(1, popupContentC.onRevealMethodCalled);
-        assertTrue(popupContentB.isVisible());
-        assertTrue(popupContentC.isVisible());
-
-        // and then When
-        presenterWidgetA.internalHide();
-
-        // Then
-        assertEquals(1, popupContentB.onRevealMethodCalled);
-        assertEquals(1, popupContentC.onRevealMethodCalled);
-        assertEquals(1, popupContentB.onHideMethodCalled);
-        assertEquals(1, popupContentC.onHideMethodCalled);
-        verify(popupContentB.getView()).show();
-        verify(popupContentC.getView()).show();
-        verify(popupContentB.getView()).hide();
-        verify(popupContentC.getView()).hide();
-
-        // and then When
-        presenterWidgetA.internalReveal();
-
-        // Then
-        assertEquals(2, popupContentB.onRevealMethodCalled);
-        assertEquals(2, popupContentC.onRevealMethodCalled);
-        assertEquals(1, popupContentB.onHideMethodCalled);
-        assertEquals(1, popupContentC.onHideMethodCalled);
-        verify(popupContentB.getView(), times(2)).show();
-        verify(popupContentC.getView(), times(2)).show();
-    }
-
-    @Test
-    public void testAddAndRemoveVisibleHandler(PresenterWidgetD presenterWidgetD) {
-
-        // Given
-        assertFalse(presenterWidgetD.isVisible());
-        presenterWidgetD.addVisibleHandler(typeA, handlerA);
-
-        // when
-        presenterWidgetD.internalReveal();
-
-        // Then
-        verify(eventBusA).addHandler(typeA, handlerA);
-
-        // and then When
-        presenterWidgetD.internalHide();
-
-        // Then
-        verify(registrationA).removeHandler();
-    }
-
-    @Test
-    public void testAddVisibleHandlerOnVisiblePresenter(PresenterWidgetD presenterWidgetD) {
-
-        // Given
-        assertFalse(presenterWidgetD.isVisible());
-        // and
-        presenterWidgetD.internalReveal();
-
-        // when
-        presenterWidgetD.addVisibleHandler(typeA, handlerA);
-
-        // Then
-        verify(eventBusA).addHandler(typeA, handlerA);
-
-        // and then When
-        presenterWidgetD.internalHide();
-
-        // Then
-        verify(registrationA).removeHandler();
-    }
-
-    @Test
     public void shouldHidePopupWhenPopupPresenterRemoved(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetPopupB popupContentB) {
+            final PresenterWidgetA presenterWidgetA, final PresenterWidgetPopupB popupContentB) {
 
         // Given
         presenterWidgetA.internalReveal();
@@ -354,8 +187,8 @@ public class PresenterWidgetTest {
         presenterWidgetA.addToPopupSlot(popupContentB);
 
         // Then
-        verify(popupContentB.getView()).show();
-        verify(popupContentB.getView()).center();
+        verify(popupContentB.getView()).showAndReposition();
+
         assertEquals(1, popupContentB.onRevealMethodCalled);
         assertTrue(popupContentB.isVisible());
 
@@ -368,18 +201,79 @@ public class PresenterWidgetTest {
         assertFalse(popupContentB.isVisible());
     }
 
+    @Test
+    public void testAddAndRemoveVisibleHandler(final PresenterWidgetD presenterWidgetD) {
+
+        // Given
+        assertFalse(presenterWidgetD.isVisible());
+        presenterWidgetD.addVisibleHandler(typeA, handlerA);
+
+        // when
+        presenterWidgetD.internalReveal();
+
+        // Then
+        verify(eventBusA).addHandler(typeA, handlerA);
+
+        // and then When
+        presenterWidgetD.internalHide();
+
+        // Then
+        verify(registrationA).removeHandler();
+    }
+
+    @Test
+    public void testAddPopupOnInitiallyInvisiblePresenter(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetPopupB popupContentB, final PresenterWidgetPopupC popupContentC) {
+        // Given
+        // presenterWidget is NOT visible
+        assertFalse(presenterWidgetA.isVisible());
+
+        // When
+        presenterWidgetA.addToPopupSlot(popupContentB);
+        presenterWidgetA.addToPopupSlot(popupContentC);
+
+        // Then
+        verify(popupContentB.getView(), times(0)).showAndReposition();
+        verify(popupContentC.getView(), times(0)).showAndReposition();
+        verify(popupContentB.getView(), times(0)).hide();
+        verify(popupContentC.getView(), times(0)).hide();
+
+        assertEquals(0, popupContentB.onRevealMethodCalled);
+        assertEquals(0, popupContentC.onRevealMethodCalled);
+
+        // and then When
+        presenterWidgetA.internalReveal();
+
+        // Then
+        assertEquals(1, popupContentB.onRevealMethodCalled);
+        assertEquals(1, popupContentC.onRevealMethodCalled);
+        verify(popupContentB.getView()).showAndReposition();
+        verify(popupContentC.getView()).showAndReposition();
+
+        // and then When
+        presenterWidgetA.internalHide();
+
+        // Then
+        assertEquals(1, popupContentB.onRevealMethodCalled);
+        assertEquals(1, popupContentC.onRevealMethodCalled);
+        assertEquals(1, popupContentB.onHideMethodCalled);
+        assertEquals(1, popupContentC.onHideMethodCalled);
+        verify(popupContentB.getView()).showAndReposition();
+        verify(popupContentC.getView()).showAndReposition();
+        verify(popupContentB.getView()).hide();
+        verify(popupContentC.getView()).hide();
+    }
+
     // TODO Make sure the calls happen in the right order
     // parent then child for onReveal and onReset
     // child then parent for onHide
 
     @Test
-    public void testAddToSlotToSlot(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB,
-            PresenterWidgetC contentC) {
+    public void testAddToSlotToSlot(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB, final PresenterWidgetC contentC) {
 
         // Given
-        Object slotBC = new Object();
+        final Object slotBC = new Object();
         presenterWidgetA.internalReveal();
 
         // When
@@ -404,59 +298,30 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testAddUncenteredPopupOnInitiallyInvisiblePresenter(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetPopupB popupContentB,
-            PresenterWidgetPopupC popupContentC) {
+    public void testAddVisibleHandlerOnVisiblePresenter(final PresenterWidgetD presenterWidgetD) {
+
         // Given
-        // presenterWidget is NOT visible
-        assertFalse(presenterWidgetA.isVisible());
+        assertFalse(presenterWidgetD.isVisible());
+        // and
+        presenterWidgetD.internalReveal();
 
-        // When
-        presenterWidgetA.addToPopupSlot(popupContentB, false);
-        presenterWidgetA.addToPopupSlot(popupContentC, false);
+        // when
+        presenterWidgetD.addVisibleHandler(typeA, handlerA);
 
         // Then
-        verify(popupContentB.getView(), times(0)).show();
-        verify(popupContentC.getView(), times(0)).show();
-        verify(popupContentB.getView(), times(0)).hide();
-        verify(popupContentC.getView(), times(0)).hide();
-
-        assertEquals(0, popupContentB.onRevealMethodCalled);
-        assertEquals(0, popupContentC.onRevealMethodCalled);
+        verify(eventBusA).addHandler(typeA, handlerA);
 
         // and then When
-        presenterWidgetA.internalReveal();
+        presenterWidgetD.internalHide();
 
         // Then
-        assertEquals(1, popupContentB.onRevealMethodCalled);
-        assertEquals(1, popupContentC.onRevealMethodCalled);
-        verify(popupContentB.getView()).show();
-        verify(popupContentC.getView()).show();
-
-        // and then When
-        presenterWidgetA.internalHide();
-
-        // Then
-        assertEquals(1, popupContentB.onRevealMethodCalled);
-        assertEquals(1, popupContentC.onRevealMethodCalled);
-        assertEquals(1, popupContentB.onHideMethodCalled);
-        assertEquals(1, popupContentC.onHideMethodCalled);
-        verify(popupContentB.getView()).show();
-        verify(popupContentC.getView()).show();
-        verify(popupContentB.getView()).hide();
-        verify(popupContentC.getView()).hide();
-
-        verify(popupContentB.getView(), times(0)).center();
-        verify(popupContentC.getView(), times(0)).center();
+        verify(registrationA).removeHandler();
     }
 
     @Test
-    public void testClearContentInSlot(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB) {
+    public void testClearContentInSlot(final PresenterWidgetA presenterWidgetA, final PresenterWidgetB contentB) {
         // Given
-        Object slotB = new Object();
+        final Object slotB = new Object();
         presenterWidgetA.internalReveal();
         presenterWidgetA.setInSlot(slotB, contentB);
 
@@ -476,12 +341,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testRemoveFromSlotFromSlot(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB,
-            PresenterWidgetC contentC) {
+    public void testRemoveFromSlotFromSlot(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB, final PresenterWidgetC contentC) {
         // Given
-        Object slotBC = new Object();
+        final Object slotBC = new Object();
         presenterWidgetA.internalReveal();
         presenterWidgetA.addToSlot(slotBC, contentB);
         presenterWidgetA.addToSlot(slotBC, contentC);
@@ -497,14 +360,12 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter1(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB,
-            PresenterWidgetC contentCinB) {
+    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter1(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB, final PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
+        final Object slotB = new Object();
+        final Object slotC = new Object();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
@@ -537,14 +398,12 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter2(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB,
-            PresenterWidgetC contentCinB) {
+    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter2(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB, final PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
+        final Object slotB = new Object();
+        final Object slotC = new Object();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
@@ -580,14 +439,12 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotHierarchyInEmptySlotOnInitiallyVisiblePresenter(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB,
-            PresenterWidgetC contentCinB) {
+    public void testSetInSlotHierarchyInEmptySlotOnInitiallyVisiblePresenter(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB, final PresenterWidgetC contentCinB) {
 
         // Given
-        Object slotB = new Object();
-        Object slotC = new Object();
+        final Object slotB = new Object();
+        final Object slotC = new Object();
         presenterWidgetA.internalReveal();
 
         // When
@@ -613,14 +470,12 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotInEmptySlotOnInitiallyInvisiblePresenter(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB,
-            PresenterWidgetC contentC) {
+    public void testSetInSlotInEmptySlotOnInitiallyInvisiblePresenter(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB, final PresenterWidgetC contentC) {
         // Given
         // slot is empty in presenterWidget, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
+        final Object slotB = new Object();
+        final Object slotC = new Object();
         assertFalse(presenterWidgetA.isVisible());
 
         // When
@@ -652,13 +507,11 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotInEmptySlotOnInitiallyVisiblePresenter(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB,
-            PresenterWidgetC contentC) {
+    public void testSetInSlotInEmptySlotOnInitiallyVisiblePresenter(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB, final PresenterWidgetC contentC) {
         // Given
-        Object slotB = new Object();
-        Object slotC = new Object();
+        final Object slotB = new Object();
+        final Object slotC = new Object();
         presenterWidgetA.internalReveal();
 
         // When
@@ -683,11 +536,9 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetNullContentInSlot(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB) {
+    public void testSetNullContentInSlot(final PresenterWidgetA presenterWidgetA, final PresenterWidgetB contentB) {
         // Given
-        Object slotB = new Object();
+        final Object slotB = new Object();
         presenterWidgetA.internalReveal();
         presenterWidgetA.setInSlot(slotB, contentB);
 
@@ -707,10 +558,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPopupToAnotherPresenter1(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB,
-            PresenterWidgetPopupC popupContentC) {
+    public void testSwitchPopupToAnotherPresenter1(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB presenterWidgetB, final PresenterWidgetPopupC popupContentC) {
         // Given
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
@@ -725,10 +574,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPopupToAnotherPresenter2(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB,
-            PresenterWidgetPopupC popupContentC) {
+    public void testSwitchPopupToAnotherPresenter2(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB presenterWidgetB, final PresenterWidgetPopupC popupContentC) {
         // Given
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
@@ -744,13 +591,11 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPresenterWidgetToAnotherPresenter1(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB,
-            PresenterWidgetC contentC) {
+    public void testSwitchPresenterWidgetToAnotherPresenter1(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB presenterWidgetB, final PresenterWidgetC contentC) {
         // Given
-        Object slotCinA = new Object();
-        Object slotCinB = new Object();
+        final Object slotCinA = new Object();
+        final Object slotCinB = new Object();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 
@@ -764,13 +609,11 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPresenterWidgetToAnotherPresenter2(
-            PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB,
-            PresenterWidgetC contentC) {
+    public void testSwitchPresenterWidgetToAnotherPresenter2(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB presenterWidgetB, final PresenterWidgetC contentC) {
         // Given
-        Object slotCinA = new Object();
-        Object slotCinB = new Object();
+        final Object slotCinA = new Object();
+        final Object slotCinB = new Object();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 
@@ -783,5 +626,4 @@ public class PresenterWidgetTest {
         // Then
         assertTrue(contentC.isVisible());
     }
-
 }

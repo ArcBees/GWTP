@@ -199,7 +199,7 @@ LockInteractionHandler {
     @Override
     public void onRevealRootPopupContent(
             final RevealRootPopupContentEvent revealContentEvent) {
-        addToPopupSlot(revealContentEvent.getContent(), revealContentEvent.isCentered());
+        addToPopupSlot(revealContentEvent.getContent());
         rootPopups.add(revealContentEvent.getContent());
         cleanRootPopups();
     }

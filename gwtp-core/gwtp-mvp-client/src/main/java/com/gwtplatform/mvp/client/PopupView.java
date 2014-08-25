@@ -16,20 +16,14 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.gwtplatform.mvp.client.view.PopupPositioner;
+
 /**
  * The interface for {@link View} classes that is meant to be displayed as a
  * popup, like a GWT {@link com.google.gwt.user.client.ui.PopupPanel} or a
  * {@link com.google.gwt.user.client.ui.DialogBox}.
  */
 public interface PopupView extends View {
-
-    /**
-     * Make sure the {@link PopupView} is centered in the browser's client area.
-     * This method should not change the view visibility: if it was hidden (resp.
-     * visible) it remains hidden (resp. visible).
-     */
-    void center();
-
     /**
      * Make sure the {@link PopupView} is hidden. You can call this method
      * directly.
@@ -46,7 +40,7 @@ public interface PopupView extends View {
      * {@link com.gwtplatform.mvp.client.proxy.PlaceManager#setOnLeaveConfirmation(String)}
      * .
      */
-    void setAutoHideOnNavigationEventEnabled(boolean autoHide);
+    void setAutoHideOnNavigationEventEnabled(final boolean autoHide);
 
     /**
      * Identifies which {@link PopupViewCloseHandler} should be called when this
@@ -55,7 +49,7 @@ public interface PopupView extends View {
      * @param popupViewCloseHandler The {@link PopupViewCloseHandler} or
      *                              {@code null} to unregister any handlers.
      */
-    void setCloseHandler(PopupViewCloseHandler popupViewCloseHandler);
+    void setCloseHandler(final PopupViewCloseHandler popupViewCloseHandler);
 
     /**
      * Reposition the {@link PopupView} within the browser's client area. This
@@ -65,7 +59,7 @@ public interface PopupView extends View {
      * @param left The left position of the top-left corner (in pixels).
      * @param top  The top position of the top-left corner (in pixels).
      */
-    void setPosition(int left, int top);
+    void setPosition(final int left, final int top);
 
     /**
      * <b>Important!</b> Do not call this directly, instead use
@@ -73,7 +67,20 @@ public interface PopupView extends View {
      * view's {@link PresenterWidget}.
      * <p/>
      * Make sure the {@link PopupView} is visible.
+     * Will not reposition the popup before showing it.
      */
     void show();
+
+    /**
+     * Sets the popup positioner that will determine where to position the popup onReset();
+     * @param positioner
+     */
+    void setPopupPositioner(final PopupPositioner positioner);
+
+    /**
+     * Called during onReset().
+     * Will position the popup before showing it.
+     */
+    void showAndReposition();
 
 }

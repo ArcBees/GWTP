@@ -16,17 +16,17 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.PopupPanel.PositionCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
+import com.gwtplatform.mvp.client.view.CenterPopupPositioner;
+import com.gwtplatform.mvp.client.view.PopupPositioner;
+import com.gwtplatform.mvp.client.view.PopupPositioner.PopupPosition;
 
 /**
  * A simple implementation of {@link PopupView} that can be used when the widget
@@ -44,6 +44,8 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     private HandlerRegistration closeHandlerRegistration;
     private final EventBus eventBus;
 
+    private PopupPositioner positioner;
+
     /**
      * The {@link PopupViewImpl} class uses the {@link EventBus} to listen to
      * {@link NavigationEvent} in order to automatically close when this event is
@@ -52,21 +54,9 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
      *
      * @param eventBus The {@link EventBus}.
      */
-    protected PopupViewImpl(EventBus eventBus) {
+    protected PopupViewImpl(final EventBus eventBus) {
         this.eventBus = eventBus;
-    }
-
-    @Override
-    public void center() {
-        doCenter();
-        // We center again in a deferred command to solve a bug in IE where newly
-        // created window are sometimes not centered.
-        Scheduler.get().scheduleDeferred(new Command() {
-            @Override
-            public void execute() {
-                doCenter();
-            }
-        });
+        setPopupPositioner(new CenterPopupPositioner());
     }
 
     @Override
@@ -75,18 +65,18 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     @Override
-    public void setAutoHideOnNavigationEventEnabled(boolean autoHide) {
+    public void setAutoHideOnNavigationEventEnabled(final boolean autoHide) {
         if (autoHide) {
             if (autoHideHandler != null) {
                 return;
             }
             autoHideHandler = eventBus.addHandler(NavigationEvent.getType(),
                     new NavigationHandler() {
-                        @Override
-                        public void onNavigation(NavigationEvent navigationEvent) {
-                            hide();
-                        }
-                    });
+                @Override
+                public void onNavigation(final NavigationEvent navigationEvent) {
+                    hide();
+                }
+            });
         } else {
             if (autoHideHandler != null) {
                 autoHideHandler.removeHandler();
@@ -105,7 +95,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             closeHandlerRegistration = asPopupPanel().addCloseHandler(
                     new CloseHandler<PopupPanel>() {
                         @Override
-                        public void onClose(CloseEvent<PopupPanel> event) {
+                        public void onClose(final CloseEvent<PopupPanel> event) {
                             popupViewCloseHandler.onClose();
                         }
                     });
@@ -113,13 +103,30 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     @Override
-    public void setPosition(int left, int top) {
+    public void setPopupPositioner(final PopupPositioner positioner) {
+        this.positioner = positioner;
+    }
+
+    @Override
+    public void setPosition(final int left, final int top) {
         asPopupPanel().setPopupPosition(left, top);
     }
 
     @Override
     public void show() {
         asPopupPanel().show();
+    }
+
+    @Override
+    public void showAndReposition() {
+        asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
+
+            @Override
+            public void setPosition(final int offsetWidth, final int offsetHeight) {
+                final PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
+                setPosition(popupPosition.getLeft(), popupPosition.getTop());
+            }
+        });
     }
 
     /**
@@ -131,46 +138,4 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         return (PopupPanel) asWidget();
     }
 
-    /**
-     * This method centers the popup panel, temporarily making it visible if
-     * needed.
-     */
-    protected void doCenter() {
-        // We can't use Element.center() method as it will show the popup
-        // by default and not only centering it. This is resulting in onAttach()
-        // being called twice when using setInSlot() or addToPopupSlot() in PresenterWidget
-
-        PopupPanel popup = asPopupPanel();
-        Element elem = popup.getElement();
-
-        boolean isShowing = popup.isShowing();
-        // If left/top are set from a previous doCenter() call, and our content
-        // has changed, we may get a bogus getOffsetWidth because our new content
-        // is wrapping (giving a lower offset width) then it would without the
-        // previous left. Clearing left/top to avoids this.
-        elem.getStyle().clearLeft();
-        elem.getStyle().clearTop();
-
-        // the popup should be added to the dom in order to get correct values for offsetWidth/offsetHeight
-        if (!isShowing) {
-            popup.setVisible(false);
-            popup.show();
-        }
-
-        int left = (Window.getClientWidth() - popup.getOffsetWidth()) >> 1;
-        int top = (Window.getClientHeight() - popup.getOffsetHeight()) >> 1;
-
-        if (!isShowing) {
-            hidePopup(asPopupPanel());
-            popup.setVisible(true);
-        }
-
-        popup.setPopupPosition(Math.max(Window.getScrollLeft() + left, 0), Math.max(
-                Window.getScrollTop() + top, 0));
-    }
-
-    private native void hidePopup(PopupPanel popupPanel) /*-{
-        var resizeAnimation = popupPanel.@com.google.gwt.user.client.ui.PopupPanel::resizeAnimation;
-        resizeAnimation.@com.google.gwt.user.client.ui.PopupPanel.ResizeAnimation::setState(ZZ)(false, false);
-    }-*/;
 }
