@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
-      <title>File: 10,
+      <title>File: 12,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -131,6 +131,34 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-clients-common//checkstyle.html#com.gwtplatform.common.shared.UrlUtils.java">com/gwtplatform/common/shared/UrlUtils.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-clients-common//checkstyle.html#com.gwtplatform.common.rebind.DependencyImpl.java">com/gwtplatform/common/rebind/DependencyImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-clients-common//checkstyle.html#com.gwtplatform.common.rebind.Dependency.java">com/gwtplatform/common/rebind/Dependency.java</a>
                 </td>
                 <td>
                   0

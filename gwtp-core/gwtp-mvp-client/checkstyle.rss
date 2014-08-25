@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2010 - 2014 Arcbees</copyright>
     <item>
-      <title>File: 174,
+      <title>File: 176,
              Errors: 0,
              Warnings: 38,
              Infos: 10
@@ -942,6 +942,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.PopupPresenterTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/PopupPresenterTestUtilGwt.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator.java">com/gwtplatform/mvp/rebind/velocity/ginjectors/GinjectorProviderGenerator.java</a>
                 </td>
                 <td>
@@ -1531,6 +1545,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.rebind.PresenterTitleMethod.java">com/gwtplatform/mvp/rebind/PresenterTitleMethod.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://arcbees.github.io/GWTP/gwtp-core/gwtp-mvp-client//checkstyle.html#com.gwtplatform.mvp.client.gwt.mvp.PopupViewTestUtilGwt.java">com/gwtplatform/mvp/client/gwt/mvp/PopupViewTestUtilGwt.java</a>
                 </td>
                 <td>
                   0
