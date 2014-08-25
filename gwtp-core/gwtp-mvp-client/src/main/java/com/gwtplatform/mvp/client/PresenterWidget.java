@@ -197,6 +197,8 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         }
         if (!content.isPopup()) {
             getView().addToSlot(slot, content);
+        } else {
+            monitorCloseEvent((PresenterWidget<? extends PopupView>) content);
         }
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
@@ -507,7 +509,6 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         }
         if (isPopup() && isVisible()) {
             ((PopupView) getView()).show();
-            currentParentPresenter.monitorCloseEvent((PresenterWidget<? extends PopupView>) this);
         }
     }
 
