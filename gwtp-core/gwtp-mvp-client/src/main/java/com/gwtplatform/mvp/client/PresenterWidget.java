@@ -178,6 +178,11 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
     }
 
     @Override
+    public void addToPopupSlot(PresenterWidget<? extends PopupView> child, boolean center) {
+        addToPopupSlot(child);
+    }
+
+    @Override
     public void addToSlot(Object slot, PresenterWidget<?> content) {
         if (content == null) {
             return;
@@ -605,4 +610,5 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
 
         visibleHandlerRegistrations.clear();
     }
+
 }
