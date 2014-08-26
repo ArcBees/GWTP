@@ -330,7 +330,9 @@ HasPopupSlot, IsWidget {
             }
             slotChildren.remove(content);
         }
-        getView().removeFromSlot(slot, content);
+        if (!content.isPopup()) {
+            getView().removeFromSlot(slot, content);
+        }
     }
 
     @Override
