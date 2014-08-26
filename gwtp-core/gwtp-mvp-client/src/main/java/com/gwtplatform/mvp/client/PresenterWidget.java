@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -271,6 +272,19 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         return visible;
     }
 
+    /**
+     * Removes this presenter from its parent.
+     * You must ensure that the presenter has a parent before calling this method.
+     */
+    public void removeFromParentSlot() {
+        assert currentParentPresenter != null : "Tried to remove a presenter that has no parent from its parent";
+        for (Entry<Object, List<PresenterWidget<?>>> entry: currentParentPresenter.activeChildren.entrySet()) {
+            if (entry.getValue().contains(this)) {
+                currentParentPresenter.removeFromSlot(entry.getKey(), this);
+            }
+        }
+    }
+
     @Override
     public void removeFromPopupSlot(PresenterWidget<? extends PopupView> child) {
         removeFromSlot(POPUP_SLOT, child);
@@ -484,7 +498,9 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         assert isVisible() : "internalHide() called on a hidden presenter!";
         for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
             for (PresenterWidget<?> activeChild : slotChildren) {
-                activeChild.internalHide();
+                if (activeChild.isVisible()) {
+                    activeChild.internalHide();
+                }
             }
         }
 
