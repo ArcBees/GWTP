@@ -281,6 +281,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         for (Entry<Object, List<PresenterWidget<?>>> entry: currentParentPresenter.activeChildren.entrySet()) {
             if (entry.getValue().contains(this)) {
                 currentParentPresenter.removeFromSlot(entry.getKey(), this);
+                return;
             }
         }
     }
