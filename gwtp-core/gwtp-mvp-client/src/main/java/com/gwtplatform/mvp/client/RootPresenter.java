@@ -70,7 +70,7 @@ LockInteractionHandler {
         @Override
         public Widget asWidget() {
             assert false : "Root view has no widget, you should never call asWidget()";
-            return null;
+        return null;
         }
 
         public void ensureGlass() {
@@ -92,6 +92,11 @@ LockInteractionHandler {
         public void lockScreen() {
             ensureGlass();
             Document.get().getBody().appendChild(glass);
+        }
+
+        @Override
+        public void removeFromSlot(Object slot, IsWidget content) {
+            setInSlot(slot, null);
         }
 
         @Override
