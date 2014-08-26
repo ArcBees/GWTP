@@ -90,6 +90,22 @@ public class PresenterWidgetTest {
     }
 
     @TestSingleton
+    static class PresenterWidgetE extends PresenterWidgetSpy<View> {
+        @Inject
+        PresenterWidgetE(final EventBus eventBus, @Named("E") final View view) {
+            super(eventBus, view);
+        }
+    }
+
+    @TestSingleton
+    static class PresenterWidgetF extends PresenterWidgetSpy<View> {
+        @Inject
+        PresenterWidgetF(final EventBus eventBus, @Named("F") final View view) {
+            super(eventBus, view);
+        }
+    }
+
+    @TestSingleton
     static class PresenterWidgetPopupB extends PresenterWidgetSpy<PopupView> {
         @Inject
         PresenterWidgetPopupB(final EventBus eventBus, @Named("PopupB") final PopupView view) {
@@ -338,6 +354,23 @@ public class PresenterWidgetTest {
 
         // Then
         assertEquals(1, contentB.onHideMethodCalled);
+    }
+
+    @Test
+    public void testPresenterWidgetCannotBeInMultipleSlots(final PresenterWidgetA presenterWidgetA,
+            final PresenterWidgetB contentB) {
+        // Given
+        final Object slotA = new Object();
+        final Object slotB = new Object();
+        presenterWidgetA.internalReveal();
+
+        // When
+        presenterWidgetA.setInSlot(slotA, contentB);
+        presenterWidgetA.setInSlot(slotB, contentB);
+        presenterWidgetA.internalHide();
+
+        // Then
+        assertTrue(contentB.isVisible());
     }
 
     @Test
