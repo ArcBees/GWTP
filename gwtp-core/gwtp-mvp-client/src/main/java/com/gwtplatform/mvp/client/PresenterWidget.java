@@ -247,7 +247,7 @@ HasPopupSlot, IsWidget {
      */
     @Override
     public final boolean equals(Object obj) {
-        return obj != null && obj == this;
+        return super.equals(obj);
     }
 
     @Override
