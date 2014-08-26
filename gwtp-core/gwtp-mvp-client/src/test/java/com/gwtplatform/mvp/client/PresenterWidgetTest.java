@@ -367,6 +367,8 @@ public class PresenterWidgetTest {
         // When
         presenterWidgetA.setInSlot(slotA, contentB);
         presenterWidgetA.setInSlot(slotB, contentB);
+        presenterWidgetA.clearSlot(slotB);
+        contentB.internalReveal();
         presenterWidgetA.internalHide();
 
         // Then
