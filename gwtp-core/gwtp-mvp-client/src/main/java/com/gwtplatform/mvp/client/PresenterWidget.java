@@ -18,9 +18,11 @@ package com.gwtplatform.mvp.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -104,8 +106,8 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  *
  * @param <V> The {@link View} type.
  */
-public abstract class PresenterWidget<V extends View> extends
-HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
+public abstract class PresenterWidget<V extends View> extends HandlerContainerImpl implements HasHandlers, HasSlots,
+HasPopupSlot, IsWidget {
     private static class HandlerInformation<H extends EventHandler> {
         private final Type<H> type;
         private final H eventHandler;
@@ -124,13 +126,16 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
     private V view;
     private boolean isPopup;
 
+    // Would be better to use Random.nextInt() but that's gwt specific and breaks our tests.
+    private final int hashCode = (int) (Math.random() * Integer.MAX_VALUE);
+
     /**
      * This map makes it possible to keep a list of all the active children in
      * every slot managed by this {@link PresenterWidget}. A slot is identified by an
      * opaque object. A single slot can have many children.
      */
-    private final Map<Object, List<PresenterWidget<?>>>
-    activeChildren = new HashMap<Object, List<PresenterWidget<?>>>();
+    private final Map<Object, Set<PresenterWidget<?>>> activeChildren
+    = new HashMap<Object, Set<PresenterWidget<?>>>();
 
     /**
      * The parent presenter, in order to make sure this widget is only ever in one
@@ -138,8 +143,8 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
      */
     private PresenterWidget<?> currentParentPresenter;
 
-    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
-            new ArrayList<HandlerInformation<? extends EventHandler>>();
+    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers
+    = new ArrayList<HandlerInformation<? extends EventHandler>>();
 
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
 
@@ -160,6 +165,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         this.eventBus = eventBus;
         this.view = view;
     }
+
     /**
      * Creates a {@link PresenterWidget} that uses automatic binding. This will
      * only work when instantiating this object using Guice/GIN dependency injection.
@@ -193,11 +199,11 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
 
         content.reparent(this);
 
-        List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
+        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
         if (slotChildren != null) {
             slotChildren.add(content);
         } else {
-            slotChildren = new ArrayList<PresenterWidget<?>>(1);
+            slotChildren = new HashSet<PresenterWidget<?>>(1);
             slotChildren.add(content);
             activeChildren.put(slot, slotChildren);
         }
@@ -222,7 +228,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
 
     @Override
     public void clearSlot(Object slot) {
-        List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
+        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
         if (slotChildren != null) {
             // This presenter is visible, its time to call onHide
             // on the children to be removed (and recursively on their children)
@@ -234,6 +240,17 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
             slotChildren.clear();
         }
         getView().setInSlot(slot, null);
+    }
+
+    /**
+     * PresenterWidgets may only be equal to the same instance.
+     * To ensure this contract you may not override this method.
+     * @param obj - the object to compare
+     * @return whether the obj is the same instance as this presenter.
+     */
+    @Override
+    public final boolean equals(Object obj) {
+        return obj != null && obj == this;
     }
 
     @Override
@@ -261,6 +278,11 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         return asWidget();
     }
 
+    @Override
+    public int hashCode() {
+        return hashCode;
+    }
+
     /**
      * Verifies if the presenter is currently visible on the screen. A presenter
      * should be visible if it successfully revealed itself and was not hidden
@@ -278,7 +300,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
      */
     public void removeFromParentSlot() {
         assert currentParentPresenter != null : "Tried to remove a presenter that has no parent from its parent";
-        for (Entry<Object, List<PresenterWidget<?>>> entry: currentParentPresenter.activeChildren.entrySet()) {
+        for (Entry<Object, Set<PresenterWidget<?>>> entry : currentParentPresenter.activeChildren.entrySet()) {
             if (entry.getValue().contains(this)) {
                 currentParentPresenter.removeFromSlot(entry.getKey(), this);
                 return;
@@ -299,7 +321,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
 
         content.reparent(null);
 
-        List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
+        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
         if (slotChildren != null) {
             // This presenter is visible, its time to call onHide
             // on the child to be removed (and recursively on itschildren)
@@ -326,10 +348,10 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
 
         content.reparent(this);
 
-        List<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
+        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
 
         if (slotChildren != null) {
-            if (slotChildren.size() == 1 && slotChildren.get(0) == content) {
+            if (slotChildren.size() == 1 && slotChildren.contains(content)) {
                 // The slot contains the right content, nothing to do
                 return;
             }
@@ -344,7 +366,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
             slotChildren.clear();
             slotChildren.add(content);
         } else {
-            slotChildren = new ArrayList<PresenterWidget<?>>(1);
+            slotChildren = new HashSet<PresenterWidget<?>>(1);
             slotChildren.add(content);
             activeChildren.put(slot, slotChildren);
         }
@@ -497,7 +519,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
      */
     void internalHide() {
         assert isVisible() : "internalHide() called on a hidden presenter!";
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
             for (PresenterWidget<?> activeChild : slotChildren) {
                 if (activeChild.isVisible()) {
                     activeChild.internalHide();
@@ -523,7 +545,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
      */
     void internalReset() {
         onReset();
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
             for (PresenterWidget<?> activeChild : slotChildren) {
                 activeChild.internalReset();
             }
@@ -543,7 +565,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
         onReveal();
         visible = true;
 
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
             for (PresenterWidget<?> activeChild : slotChildren) {
                 activeChild.internalReveal();
             }
@@ -577,7 +599,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
      * @param childPresenter The {@link PresenterWidget}. It should be a child of this presenter.
      */
     private void detach(PresenterWidget<?> childPresenter) {
-        for (List<PresenterWidget<?>> slotChildren : activeChildren.values()) {
+        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
             slotChildren.remove(childPresenter);
         }
     }
@@ -605,8 +627,7 @@ HandlerContainerImpl implements HasHandlers, HasSlots, HasPopupSlot, IsWidget {
     }
 
     private <H extends EventHandler> void registerVisibleHandler(HandlerInformation<H> handlerInformation) {
-        HandlerRegistration handlerRegistration =
-                addHandler(handlerInformation.type, handlerInformation.eventHandler);
+        HandlerRegistration handlerRegistration = addHandler(handlerInformation.type, handlerInformation.eventHandler);
         visibleHandlerRegistrations.add(handlerRegistration);
     }
 
