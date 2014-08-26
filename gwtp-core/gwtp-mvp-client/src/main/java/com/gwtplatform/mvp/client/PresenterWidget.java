@@ -126,9 +126,6 @@ HasPopupSlot, IsWidget {
     private V view;
     private boolean isPopup;
 
-    // Would be better to use Random.nextInt() but that's gwt specific and breaks our tests.
-    private final int hashCode = (int) (Math.random() * Integer.MAX_VALUE);
-
     /**
      * This map makes it possible to keep a list of all the active children in
      * every slot managed by this {@link PresenterWidget}. A slot is identified by an
@@ -279,8 +276,8 @@ HasPopupSlot, IsWidget {
     }
 
     @Override
-    public int hashCode() {
-        return hashCode;
+    public final int hashCode() {
+        return super.hashCode();
     }
 
     /**
