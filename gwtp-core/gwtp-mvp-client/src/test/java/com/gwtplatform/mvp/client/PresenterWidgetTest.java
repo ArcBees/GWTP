@@ -194,7 +194,8 @@ public class PresenterWidgetTest {
 
     @Test
     public void shouldHidePopupWhenPopupPresenterRemoved(
-            PresenterWidgetA presenterWidgetA, PresenterWidgetPopupB popupContentB) {
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetPopupB popupContentB) {
 
         // Given
         presenterWidgetA.internalReveal();
@@ -239,7 +240,8 @@ public class PresenterWidgetTest {
 
     @Test
     public void testAddPopupOnInitiallyInvisiblePresenter(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetPopupB popupContentB, PresenterWidgetPopupC popupContentC) {
+            PresenterWidgetPopupB popupContentB,
+            PresenterWidgetPopupC popupContentC) {
         // Given
         // presenterWidget is NOT visible
         assertFalse(presenterWidgetA.isVisible());
@@ -286,7 +288,8 @@ public class PresenterWidgetTest {
 
     @Test
     public void testAddToSlotToSlot(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB, PresenterWidgetC contentC) {
+            PresenterWidgetB contentB,
+            PresenterWidgetC contentC) {
 
         // Given
         Object slotBC = new Object();
@@ -335,7 +338,9 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testClearContentInSlot(PresenterWidgetA presenterWidgetA, PresenterWidgetB contentB) {
+    public void testClearContentInSlot(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB) {
         // Given
         Object slotB = new Object();
         presenterWidgetA.internalReveal();
@@ -357,7 +362,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testPresenterWidgetCannotBeInMultipleSlots(PresenterWidgetA presenterWidgetA,
+    public void testPresenterWidgetCannotBeInMultipleSlots(
+            PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
         Object slotA = new Object();
@@ -376,8 +382,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testRemoveFromSlotFromSlot(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB, PresenterWidgetC contentC) {
+    public void testRemoveFromSlotFromSlot(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB,
+            PresenterWidgetC contentC) {
         // Given
         Object slotBC = new Object();
         presenterWidgetA.internalReveal();
@@ -395,8 +403,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter1(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB, PresenterWidgetC contentCinB) {
+    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter1(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB,
+            PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
         Object slotB = new Object();
@@ -433,8 +443,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter2(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB, PresenterWidgetC contentCinB) {
+    public void testSetInSlotHierarchyInEmptySlotOnInitiallyInvisiblePresenter2(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB,
+            PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
         Object slotB = new Object();
@@ -474,8 +486,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotHierarchyInEmptySlotOnInitiallyVisiblePresenter(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB, PresenterWidgetC contentCinB) {
+    public void testSetInSlotHierarchyInEmptySlotOnInitiallyVisiblePresenter(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB,
+            PresenterWidgetC contentCinB) {
 
         // Given
         Object slotB = new Object();
@@ -505,8 +519,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotInEmptySlotOnInitiallyInvisiblePresenter(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB, PresenterWidgetC contentC) {
+    public void testSetInSlotInEmptySlotOnInitiallyInvisiblePresenter(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB,
+            PresenterWidgetC contentC) {
         // Given
         // slot is empty in presenterWidget, and it is NOT visible
         Object slotB = new Object();
@@ -542,8 +558,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetInSlotInEmptySlotOnInitiallyVisiblePresenter(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB contentB, PresenterWidgetC contentC) {
+    public void testSetInSlotInEmptySlotOnInitiallyVisiblePresenter(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB,
+            PresenterWidgetC contentC) {
         // Given
         Object slotB = new Object();
         Object slotC = new Object();
@@ -593,8 +611,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPopupToAnotherPresenter1(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB, PresenterWidgetPopupC popupContentC) {
+    public void testSwitchPopupToAnotherPresenter1(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB presenterWidgetB,
+            PresenterWidgetPopupC popupContentC) {
         // Given
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
@@ -609,8 +629,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPopupToAnotherPresenter2(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB, PresenterWidgetPopupC popupContentC) {
+    public void testSwitchPopupToAnotherPresenter2(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB presenterWidgetB,
+            PresenterWidgetPopupC popupContentC) {
         // Given
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
@@ -626,8 +648,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPresenterWidgetToAnotherPresenter1(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB, PresenterWidgetC contentC) {
+    public void testSwitchPresenterWidgetToAnotherPresenter1(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB presenterWidgetB,
+            PresenterWidgetC contentC) {
         // Given
         Object slotCinA = new Object();
         Object slotCinB = new Object();
@@ -644,8 +668,10 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSwitchPresenterWidgetToAnotherPresenter2(PresenterWidgetA presenterWidgetA,
-            PresenterWidgetB presenterWidgetB, PresenterWidgetC contentC) {
+    public void testSwitchPresenterWidgetToAnotherPresenter2(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB presenterWidgetB,
+            PresenterWidgetC contentC) {
         // Given
         Object slotCinA = new Object();
         Object slotCinB = new Object();
