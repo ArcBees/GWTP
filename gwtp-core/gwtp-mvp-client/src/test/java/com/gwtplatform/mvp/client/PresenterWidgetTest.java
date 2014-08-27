@@ -150,20 +150,45 @@ public class PresenterWidgetTest {
         }
     }
 
-    @Inject @Named("A") Widget widgetA;
-    @Inject @Named("B") Widget widgetB;
-    @Inject @Named("C") Widget widgetC;
-    @Inject @Named("PopupB") Widget widgetPopupB;
-    @Inject @Named("PopupC") Widget widgetPopupC;
-    @Inject @Named("A") View viewA;
-    @Inject @Named("B") View viewB;
-    @Inject @Named("C") View viewC;
-    @Inject @Named("PopupB") PopupView popupViewB;
-    @Inject @Named("PopupC") PopupView popupViewC;
-    @Inject @Named("EventBusA") EventBus eventBusA;
-    @Inject GwtEvent.Type<EventHandler> typeA;
-    @Inject EventHandler handlerA;
-    @Inject HandlerRegistration registrationA;
+    @Inject
+    @Named("A")
+    Widget widgetA;
+    @Inject
+    @Named("B")
+    Widget widgetB;
+    @Inject
+    @Named("C")
+    Widget widgetC;
+    @Inject
+    @Named("PopupB")
+    Widget widgetPopupB;
+    @Inject
+    @Named("PopupC")
+    Widget widgetPopupC;
+    @Inject
+    @Named("A")
+    View viewA;
+    @Inject
+    @Named("B")
+    View viewB;
+    @Inject
+    @Named("C")
+    View viewC;
+    @Inject
+    @Named("PopupB")
+    PopupView popupViewB;
+    @Inject
+    @Named("PopupC")
+    PopupView popupViewC;
+    @Inject
+    @Named("EventBusA")
+    EventBus eventBusA;
+    @Inject
+    GwtEvent.Type<EventHandler> typeA;
+    @Inject
+    EventHandler handlerA;
+    @Inject
+    HandlerRegistration registrationA;
 
     @Before
     public void arrange() {
