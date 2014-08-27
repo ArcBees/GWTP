@@ -141,7 +141,9 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      */
     public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
         super(autoBind);
-
+        if (view == null) {
+            throw new IllegalArgumentException("view cannot be null");
+        }
         this.eventBus = eventBus;
         this.view = view;
     }
@@ -193,7 +195,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
     @Override
     public Widget asWidget() {
-        return getView() == null ? null : getView().asWidget();
+        return getView().asWidget();
     }
 
     @Override
