@@ -17,10 +17,10 @@ package com.gwtplatform.mvp.client.view;
 
 public abstract class PopupPositioner {
     public class PopupPosition {
-        private final int top;
-        private final int left;
+        private int top;
+        private int left;
 
-        PopupPosition(final int left, final int top) {
+        PopupPosition(int left, int top) {
             this.left = left;
             this.top = top;
         }
@@ -39,5 +39,5 @@ public abstract class PopupPositioner {
         }
     }
 
-    public abstract PopupPosition getPopupPosition(final int popupWidth, final int popupHeight);
+    public abstract PopupPosition getPopupPosition(int popupWidth, int popupHeight);
 }
