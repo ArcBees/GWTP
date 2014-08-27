@@ -582,5 +582,4 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
         visibleHandlerRegistrations.clear();
     }
-
 }
