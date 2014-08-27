@@ -17,11 +17,9 @@
 package com.gwtplatform.mvp.client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.gwt.event.shared.EventHandler;
@@ -124,24 +122,24 @@ HasPopupSlot, IsWidget {
 
     private EventBus eventBus;
     private V view;
-    private boolean isPopup;
 
     /**
      * This map makes it possible to keep a list of all the active children in
      * every slot managed by this {@link PresenterWidget}. A slot is identified by an
      * opaque object. A single slot can have many children.
      */
-    private final Map<Object, Set<PresenterWidget<?>>> activeChildren
-    = new HashMap<Object, Set<PresenterWidget<?>>>();
+    private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
 
     /**
      * The parent presenter, in order to make sure this widget is only ever in one
      * parent.
      */
-    private PresenterWidget<?> currentParentPresenter;
+    private PresenterWidget<?> parent;
 
-    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers
-    = new ArrayList<HandlerInformation<? extends EventHandler>>();
+    private Object slot;
+
+    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
+            new ArrayList<HandlerInformation<? extends EventHandler>>();
 
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
 
@@ -187,34 +185,23 @@ HasPopupSlot, IsWidget {
     }
 
     @Override
-    public void addToSlot(Object slot, PresenterWidget<?> content) {
-        if (content == null) {
+    public void addToSlot(Object slot, PresenterWidget<?> child) {
+        if (child == null || (child.slot == slot && child.parent == this)) {
             return;
         }
 
-        content.setIsPopup(slot == POPUP_SLOT);
+        child.reparent(this);
+        child.slot = slot;
 
-        content.reparent(this);
-
-        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
-        if (slotChildren != null) {
-            slotChildren.add(content);
+        if (!child.isPopup()) {
+            getView().addToSlot(slot, child);
         } else {
-            slotChildren = new HashSet<PresenterWidget<?>>(1);
-            slotChildren.add(content);
-            activeChildren.put(slot, slotChildren);
-        }
-        if (!content.isPopup()) {
-            getView().addToSlot(slot, content);
-        } else {
-            monitorCloseEvent((PresenterWidget<? extends PopupView>) content);
+            monitorCloseEvent((PresenterWidget<? extends PopupView>) child);
         }
         if (isVisible()) {
             // This presenter is visible, its time to call onReveal
             // on the newly added child (and recursively on this child children)
-            if (!content.isVisible()) {
-                content.internalReveal();
-            }
+            child.internalReveal();
         }
     }
 
@@ -225,16 +212,13 @@ HasPopupSlot, IsWidget {
 
     @Override
     public void clearSlot(Object slot) {
-        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
-        if (slotChildren != null) {
-            // This presenter is visible, its time to call onHide
-            // on the children to be removed (and recursively on their children)
-            if (isVisible()) {
-                for (PresenterWidget<?> activeChild : slotChildren) {
-                    activeChild.internalHide();
-                }
+        Iterator<PresenterWidget<?>> it = children.iterator();
+        while (it.hasNext()) {
+            PresenterWidget<?> child = it.next();
+            if (child.slot == slot) {
+                child.internalHide();
+                it.remove();
             }
-            slotChildren.clear();
         }
         getView().setInSlot(slot, null);
     }
@@ -296,13 +280,8 @@ HasPopupSlot, IsWidget {
      * You must ensure that the presenter has a parent before calling this method.
      */
     public void removeFromParentSlot() {
-        assert currentParentPresenter != null : "Tried to remove a presenter that has no parent from its parent";
-        for (Entry<Object, Set<PresenterWidget<?>>> entry : currentParentPresenter.activeChildren.entrySet()) {
-            if (entry.getValue().contains(this)) {
-                currentParentPresenter.removeFromSlot(entry.getKey(), this);
-                return;
-            }
-        }
+        assert parent != null : "Tried to remove a presenter that has no parent from its parent";
+        parent.removeFromSlot(slot, this);
     }
 
     @Override
@@ -311,73 +290,51 @@ HasPopupSlot, IsWidget {
     }
 
     @Override
-    public void removeFromSlot(Object slot, PresenterWidget<?> content) {
-        if (content == null) {
+    public void removeFromSlot(Object slot, PresenterWidget<?> child) {
+        if (child == null || child.slot != slot) {
             return;
         }
 
-        content.reparent(null);
+        child.internalHide();
+        if (!child.isPopup()) {
+            getView().removeFromSlot(slot, child);
+        }
 
-        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
-        if (slotChildren != null) {
-            // This presenter is visible, its time to call onHide
-            // on the child to be removed (and recursively on itschildren)
-            if (isVisible()) {
-                content.internalHide();
-            }
-            slotChildren.remove(content);
-        }
-        if (!content.isPopup()) {
-            getView().removeFromSlot(slot, content);
-        }
+        child.reparent(null);
+        child.slot = null;
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> content) {
-        setInSlot(slot, content, true);
+    public void setInSlot(Object slot, PresenterWidget<?> child) {
+        setInSlot(slot, child, true);
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset) {
-        if (content == null) {
+    public void setInSlot(Object slot, PresenterWidget<?> child, boolean performReset) {
+        if (child == null) {
             // Assumes the user wants to clear the slot content.
             clearSlot(slot);
             return;
         }
 
-        content.reparent(this);
+        child.reparent(this);
+        child.slot = slot;
 
-        Set<PresenterWidget<?>> slotChildren = activeChildren.get(slot);
-
-        if (slotChildren != null) {
-            if (slotChildren.size() == 1 && slotChildren.contains(content)) {
-                // The slot contains the right content, nothing to do
-                return;
+        Iterator<PresenterWidget<?>> it = children.iterator();
+        while (it.hasNext()) {
+            PresenterWidget<?> nextChild = it.next();
+            if (nextChild != child && nextChild.slot == slot) {
+                it.remove();
+                nextChild.slot = null;
+                nextChild.parent = null;
+                nextChild.internalHide();
             }
-
-            if (isVisible()) {
-                // We are visible, make sure the content that we're removing
-                // is being notified as hidden
-                for (PresenterWidget<?> activeChild : slotChildren) {
-                    activeChild.internalHide();
-                }
-            }
-            slotChildren.clear();
-            slotChildren.add(content);
-        } else {
-            slotChildren = new HashSet<PresenterWidget<?>>(1);
-            slotChildren.add(content);
-            activeChildren.put(slot, slotChildren);
         }
 
         // Set the content in the view
-        getView().setInSlot(slot, content);
+        getView().setInSlot(slot, child);
         if (isVisible()) {
-            // This presenter is visible, its time to call onReveal
-            // on the newly added child (and recursively on this child children)
-            if (!content.isVisible()) {
-                content.internalReveal();
-            }
+            child.internalReveal();
             if (performReset) {
                 // And to reset everything if needed
                 ResetPresentersEvent.fire(this);
@@ -517,13 +474,11 @@ HasPopupSlot, IsWidget {
      * See {@link PresenterWidget} for ways to hide a presenter.
      */
     void internalHide() {
-        assert isVisible() : "internalHide() called on a hidden presenter!";
-        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
-            for (PresenterWidget<?> activeChild : slotChildren) {
-                if (activeChild.isVisible()) {
-                    activeChild.internalHide();
-                }
-            }
+        if (!isVisible()) {
+            return;
+        }
+        for (PresenterWidget<?> child : children) {
+            child.internalHide();
         }
 
         if (isPopup()) {
@@ -543,13 +498,14 @@ HasPopupSlot, IsWidget {
      * fire a {@link ResetPresentersEvent} to perform a reset manually.
      */
     void internalReset() {
-        onReset();
-        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
-            for (PresenterWidget<?> activeChild : slotChildren) {
-                activeChild.internalReset();
-            }
+        if (isVisible()) {
+            return;
         }
-        if (isPopup() && isVisible()) {
+        onReset();
+        for (PresenterWidget<?> child : children) {
+            child.internalReset();
+        }
+        if (isPopup()) {
             ((PopupView) getView()).show();
         }
     }
@@ -560,14 +516,14 @@ HasPopupSlot, IsWidget {
      * presenter.
      */
     void internalReveal() {
-        assert !isVisible() : "internalReveal() called on a visible presenter!";
+        if (isVisible()) {
+            return;
+        }
         onReveal();
         visible = true;
 
-        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
-            for (PresenterWidget<?> activeChild : slotChildren) {
-                activeChild.internalReveal();
-            }
+        for (PresenterWidget<?> child : children) {
+            child.internalReveal();
         }
 
         if (isPopup()) {
@@ -584,27 +540,19 @@ HasPopupSlot, IsWidget {
      * @param newParent The new parent {@link PresenterWidget}.
      */
     void reparent(PresenterWidget<?> newParent) {
-        if (currentParentPresenter != null && currentParentPresenter != newParent) {
-            currentParentPresenter.detach(this);
-        }
-
-        currentParentPresenter = newParent;
-    }
-
-    /**
-     * Called by a child {@link PresenterWidget} when it wants to detach itself
-     * from this parent.
-     *
-     * @param childPresenter The {@link PresenterWidget}. It should be a child of this presenter.
-     */
-    private void detach(PresenterWidget<?> childPresenter) {
-        for (Set<PresenterWidget<?>> slotChildren : activeChildren.values()) {
-            slotChildren.remove(childPresenter);
+        if (parent != newParent) {
+            if (parent != null) {
+                parent.children.remove(this);
+            }
+            if (newParent != null) {
+                newParent.children.add(this);
+            }
+            parent = newParent;
         }
     }
 
     private boolean isPopup() {
-        return isPopup;
+        return slot == POPUP_SLOT;
     }
 
     /**
@@ -634,10 +582,6 @@ HasPopupSlot, IsWidget {
         for (HandlerInformation<? extends EventHandler> handlerInformation : visibleHandlers) {
             registerVisibleHandler(handlerInformation);
         }
-    }
-
-    private void setIsPopup(boolean popup) {
-        this.isPopup = popup;
     }
 
     private void unregisterVisibleHandlers() {
