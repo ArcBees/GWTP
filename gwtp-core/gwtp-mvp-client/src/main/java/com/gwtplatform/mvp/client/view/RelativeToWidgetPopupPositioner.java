@@ -37,7 +37,6 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
      * Positions the popup, called after the offset width and height of the popup
      * are known.
      *
-     * @param relativeObject the ui object to position relative to
      * @param offsetWidth the drop down's offset width
      * @param offsetHeight the drop down's offset height
      */
