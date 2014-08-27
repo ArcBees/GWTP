@@ -18,6 +18,9 @@ package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PopupPanel.PositionCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -65,6 +68,17 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     protected PopupViewImpl(EventBus eventBus, PopupPositioner positioner) {
         this.eventBus = eventBus;
         setPopupPositioner(positioner);
+        if (repositionOnWindowResize()) {
+            Window.addResizeHandler(new ResizeHandler() {
+
+                @Override
+                public void onResize(ResizeEvent event) {
+                    if (asPopupPanel().isShowing()) {
+                        showAndReposition();
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -135,6 +149,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
     @Override
     public void showAndReposition() {
+        onReposition();
         asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
 
             @Override
@@ -154,4 +169,21 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         return (PopupPanel) asWidget();
     }
 
+    /**
+     * Override this method to add custom logic that runs before the popup is repositioned.
+     * By default the popup will be repositioned on resize and this method will be called.
+     * So you can add any resize logic here as well.
+     */
+    protected void onReposition() {
+    }
+
+    /**
+     * By default PopupViews will reposition themselves when the window is resized.
+     * If you don't want the popup to be repositioned or want to handle the resize yourself
+     * overide this method to return false.
+     * @return whether to reposition on resize.
+     */
+    protected boolean repositionOnWindowResize() {
+        return true;
+    }
 }
