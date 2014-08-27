@@ -217,6 +217,8 @@ HasPopupSlot, IsWidget {
             PresenterWidget<?> child = it.next();
             if (child.slot == slot) {
                 child.internalHide();
+                child.parent = null;
+                child.slot = null;
                 it.remove();
             }
         }
