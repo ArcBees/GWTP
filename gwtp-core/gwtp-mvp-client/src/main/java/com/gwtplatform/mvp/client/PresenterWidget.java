@@ -171,7 +171,11 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
     @Override
     public void addToSlot(Object slot, PresenterWidget<?> child) {
-        if (child == null || (child.slot == slot && child.parent == this)) {
+        if (child == null) {
+            throw new IllegalArgumentException("Can't add null to a slot");
+        }
+
+        if (child.slot == slot && child.parent == this) {
             return;
         }
 
