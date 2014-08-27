@@ -381,7 +381,7 @@ HasPopupSlot, IsWidget {
      *
      * @return The EventBus associated with that presenter.
      */
-    protected EventBus getEventBus() {
+    protected final EventBus getEventBus() {
         return eventBus;
     }
 
