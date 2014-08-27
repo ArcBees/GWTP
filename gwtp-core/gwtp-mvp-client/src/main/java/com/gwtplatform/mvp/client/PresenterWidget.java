@@ -500,7 +500,7 @@ HasPopupSlot, IsWidget {
      * fire a {@link ResetPresentersEvent} to perform a reset manually.
      */
     void internalReset() {
-        if (isVisible()) {
+        if (!isVisible()) {
             return;
         }
         onReset();
