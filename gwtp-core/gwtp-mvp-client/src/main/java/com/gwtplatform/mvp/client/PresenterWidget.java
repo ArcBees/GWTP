@@ -190,8 +190,7 @@ HasPopupSlot, IsWidget {
             return;
         }
 
-        child.reparent(this);
-        child.slot = slot;
+        adoptChild(slot, child);
 
         if (!child.isPopup()) {
             getView().addToSlot(slot, child);
@@ -297,13 +296,11 @@ HasPopupSlot, IsWidget {
             return;
         }
 
-        child.internalHide();
         if (!child.isPopup()) {
             getView().removeFromSlot(slot, child);
         }
 
-        child.reparent(null);
-        child.slot = null;
+        child.orphan();
     }
 
     @Override
@@ -319,17 +316,14 @@ HasPopupSlot, IsWidget {
             return;
         }
 
-        child.reparent(this);
-        child.slot = slot;
+        adoptChild(slot, child);
 
         Iterator<PresenterWidget<?>> it = children.iterator();
         while (it.hasNext()) {
             PresenterWidget<?> nextChild = it.next();
             if (nextChild != child && nextChild.slot == slot) {
                 it.remove();
-                nextChild.slot = null;
-                nextChild.parent = null;
-                nextChild.internalHide();
+                nextChild.orphan();
             }
         }
 
@@ -536,21 +530,19 @@ HasPopupSlot, IsWidget {
     }
 
     /**
-     * Detaches this presenter from its current parent and attaches it
-     * to a new parent.
-     *
-     * @param newParent The new parent {@link PresenterWidget}.
+     * Make a child a child of this presenter.
+     * @param slot
+     * @param child
      */
-    void reparent(PresenterWidget<?> newParent) {
-        if (parent != newParent) {
-            if (parent != null) {
-                parent.children.remove(this);
+    private void adoptChild(Object slot, PresenterWidget<?> child) {
+        if (child.parent != this) {
+            if (child.parent != null) {
+                child.parent.children.remove(child);
             }
-            if (newParent != null) {
-                newParent.children.add(this);
-            }
-            parent = newParent;
+            child.parent = this;
+            children.add(child);
         }
+        child.slot = slot;
     }
 
     private boolean isPopup() {
@@ -573,6 +565,18 @@ HasPopupSlot, IsWidget {
                 removeFromPopupSlot(popupPresenter);
             }
         });
+    }
+
+    /**
+     * Disconnects a child from it's parent.
+     */
+    private void orphan() {
+        if (parent != null) {
+            internalHide();
+            parent.children.remove(this);
+            parent = null;
+        }
+        slot = null;
     }
 
     private <H extends EventHandler> void registerVisibleHandler(HandlerInformation<H> handlerInformation) {
