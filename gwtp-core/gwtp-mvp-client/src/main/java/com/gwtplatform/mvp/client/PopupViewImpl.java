@@ -70,7 +70,6 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         setPopupPositioner(positioner);
         if (repositionOnWindowResize()) {
             Window.addResizeHandler(new ResizeHandler() {
-
                 @Override
                 public void onResize(ResizeEvent event) {
                     if (asPopupPanel().isShowing()) {
