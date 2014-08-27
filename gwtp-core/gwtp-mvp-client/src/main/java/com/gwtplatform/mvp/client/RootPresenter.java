@@ -51,9 +51,9 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentHandler;
  * {@link com.google.gwt.user.client.ui.LayoutPanel}.
  */
 public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
-implements ResetPresentersHandler, RevealRootContentHandler,
-RevealRootLayoutContentHandler, RevealRootPopupContentHandler,
-LockInteractionHandler {
+        implements ResetPresentersHandler, RevealRootContentHandler,
+        RevealRootLayoutContentHandler, RevealRootPopupContentHandler,
+        LockInteractionHandler {
 
     /**
      * {@link RootPresenter}'s view.
