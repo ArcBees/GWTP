@@ -40,5 +40,4 @@ public abstract class PopupPositioner {
     }
 
     public abstract PopupPosition getPopupPosition(final int popupWidth, final int popupHeight);
-
 }
