@@ -70,7 +70,7 @@ LockInteractionHandler {
         @Override
         public Widget asWidget() {
             assert false : "Root view has no widget, you should never call asWidget()";
-        return null;
+            return null;
         }
 
         public void ensureGlass() {
