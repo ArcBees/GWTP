@@ -105,7 +105,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * @param <V> The {@link View} type.
  */
 public abstract class PresenterWidget<V extends View> extends HandlerContainerImpl implements HasHandlers, HasSlots,
-HasPopupSlot, IsWidget {
+        HasPopupSlot, IsWidget {
     private static class HandlerInformation<H extends EventHandler> {
         private final Type<H> type;
         private final H eventHandler;
@@ -122,13 +122,10 @@ HasPopupSlot, IsWidget {
     private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
             new ArrayList<HandlerInformation<? extends EventHandler>>();
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
-
     private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
 
     boolean visible;
-
     private PresenterWidget<?> parent;
-
     private Object slot;
 
     /**
