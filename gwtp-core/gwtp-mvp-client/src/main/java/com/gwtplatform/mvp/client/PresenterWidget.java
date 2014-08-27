@@ -204,8 +204,8 @@ HasPopupSlot, IsWidget {
         while (it.hasNext()) {
             PresenterWidget<?> child = it.next();
             if (child.slot == slot) {
-                child.orphan(false);
                 it.remove();
+                child.orphan();
             }
         }
         getView().setInSlot(slot, null);
@@ -552,24 +552,13 @@ HasPopupSlot, IsWidget {
     }
 
     /**
-     * Disconnects a child from its parent.
+     * Disconnects a child from its parent
      */
     private void orphan() {
-        orphan(true);
-    }
-
-    /**
-     * Disconnects a child from its parent
-     * @param removeFromSet - set to false if you're calling this during iteration.
-     */
-    private void orphan(boolean removeFromSet) {
         if (parent != null) {
             internalHide();
 
-            // so that we can orphan a child during iteration.
-            if (removeFromSet) {
-                parent.children.remove(this);
-            }
+            parent.children.remove(this);
             parent = null;
         }
         slot = null;
