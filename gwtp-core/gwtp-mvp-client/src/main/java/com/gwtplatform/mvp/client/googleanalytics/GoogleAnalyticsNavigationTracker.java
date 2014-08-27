@@ -36,7 +36,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  * bindConstant().annotatedWith(GaAccount.class).to("UA-12345678-1");</code>
  * <p/>
  * If you want to log custom events, see {@link GoogleAnalytics}.
+ * @deprecated use https://github.com/ArcBees/universal-analytics instead.
  */
+@Deprecated
 public class GoogleAnalyticsNavigationTracker implements NavigationHandler {
     private final String gaAccount;
     private final PlaceManager placeManager;
