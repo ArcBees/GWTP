@@ -41,7 +41,6 @@ import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
 
 import static com.google.gwt.core.ext.TreeLogger.Type.DEBUG;
-import static com.google.gwt.core.ext.TreeLogger.Type.ERROR;
 
 @Shardable
 @LinkerOrder(Order.POST)
@@ -93,7 +92,7 @@ public class VersionInspectorLinker extends Linker {
     @Override
     public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts, boolean onePermutation)
             throws UnableToCompleteException {
-        if (!onePermutation && !isSuperDevMode(context) && canVerifyNewerVersion(context)) {
+        if (!onePermutation && !isSuperDevMode(context) && !isTest(context) && canVerifyNewerVersion(context)) {
             checkLatestVersions(logger);
         }
 
@@ -111,6 +110,22 @@ public class VersionInspectorLinker extends Linker {
         }
 
         return isSdm;
+    }
+
+    private boolean isTest(LinkerContext context) {
+        boolean isTest = false;
+
+        for (ConfigurationProperty property : context.getConfigurationProperties()) {
+            String name = property.getName();
+            List<String> values = property.getValues();
+
+            if ("junit.moduleName".equals(name) && !values.isEmpty() && !values.get(0).isEmpty()) {
+                isTest = true;
+                break;
+            }
+        }
+
+        return isTest;
     }
 
     private boolean canVerifyNewerVersion(LinkerContext context) {
@@ -161,7 +176,7 @@ public class VersionInspectorLinker extends Linker {
                 warnVersion(groupId, artifactId, latestVersion, currentVersion);
             }
         } catch (Exception e) {
-            logger.getTreeLogger().log(ERROR, "Exception caught", e);
+            logger.getTreeLogger().log(DEBUG, "Exception caught", e);
         }
     }
 
