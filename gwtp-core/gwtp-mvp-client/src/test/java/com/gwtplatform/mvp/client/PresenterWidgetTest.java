@@ -589,7 +589,9 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testSetNullContentInSlot(PresenterWidgetA presenterWidgetA, PresenterWidgetB contentB) {
+    public void testSetNullContentInSlot(
+            PresenterWidgetA presenterWidgetA,
+            PresenterWidgetB contentB) {
         // Given
         Object slotB = new Object();
         presenterWidgetA.internalReveal();
