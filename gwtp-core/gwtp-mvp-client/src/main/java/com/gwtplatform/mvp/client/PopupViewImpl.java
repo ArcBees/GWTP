@@ -151,7 +151,6 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     public void showAndReposition() {
         onReposition();
         asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
-
             @Override
             public void setPosition(int offsetWidth, int offsetHeight) {
                 PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
