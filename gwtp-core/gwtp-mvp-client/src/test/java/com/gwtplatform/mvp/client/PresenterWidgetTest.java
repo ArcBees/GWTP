@@ -176,7 +176,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void onRevealMakesPresenterWidgetVisible(PresenterWidgetA presenterWidget) {
+    public void onRevealMakesPresenterWidgetVisible(
+            PresenterWidgetA presenterWidget) {
         // When
         presenterWidget.internalReveal();
 
@@ -185,7 +186,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void presenterWidgetIsInitiallyNotVisible(PresenterWidgetA presenterWidget) {
+    public void presenterWidgetIsInitiallyNotVisible(
+            PresenterWidgetA presenterWidget) {
         // Then
         assertEquals(0, presenterWidget.onRevealMethodCalled);
         assertEquals(0, presenterWidget.onHideMethodCalled);
@@ -219,7 +221,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testAddAndRemoveVisibleHandler(PresenterWidgetD presenterWidgetD) {
+    public void testAddAndRemoveVisibleHandler(
+            PresenterWidgetD presenterWidgetD) {
 
         // Given
         assertFalse(presenterWidgetD.isVisible());
@@ -239,7 +242,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testAddPopupOnInitiallyInvisiblePresenter(PresenterWidgetA presenterWidgetA,
+    public void testAddPopupOnInitiallyInvisiblePresenter(
+            PresenterWidgetA presenterWidgetA,
             PresenterWidgetPopupB popupContentB,
             PresenterWidgetPopupC popupContentC) {
         // Given
@@ -287,7 +291,8 @@ public class PresenterWidgetTest {
     // child then parent for onHide
 
     @Test
-    public void testAddToSlotToSlot(PresenterWidgetA presenterWidgetA,
+    public void testAddToSlotToSlot(
+            PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB,
             PresenterWidgetC contentC) {
 
@@ -317,7 +322,8 @@ public class PresenterWidgetTest {
     }
 
     @Test
-    public void testAddVisibleHandlerOnVisiblePresenter(PresenterWidgetD presenterWidgetD) {
+    public void testAddVisibleHandlerOnVisiblePresenter(
+            PresenterWidgetD presenterWidgetD) {
 
         // Given
         assertFalse(presenterWidgetD.isVisible());
