@@ -116,23 +116,20 @@ HasPopupSlot, IsWidget {
         }
     }
 
-    private static Object POPUP_SLOT = new Object();
-
-    boolean visible;
-
-    private EventBus eventBus;
-    private V view;
+    private static final Object POPUP_SLOT = new Object();
+    private final EventBus eventBus;
+    private final V view;
+    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
+            new ArrayList<HandlerInformation<? extends EventHandler>>();
+    private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
 
     private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
+
+    boolean visible;
 
     private PresenterWidget<?> parent;
 
     private Object slot;
-
-    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
-            new ArrayList<HandlerInformation<? extends EventHandler>>();
-
-    private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
 
     /**
      * Creates a {@link PresenterWidget} that is not necessarily using automatic
