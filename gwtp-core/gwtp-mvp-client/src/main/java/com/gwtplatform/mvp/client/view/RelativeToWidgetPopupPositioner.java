@@ -158,5 +158,4 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
         }
         return new PopupPosition(left, top);
     }
-
 }
