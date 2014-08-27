@@ -552,7 +552,7 @@ HasPopupSlot, IsWidget {
     }
 
     /**
-     * Disconnects a child from its parent
+     * Disconnects a child from its parent.
      */
     private void orphan() {
         if (parent != null) {
