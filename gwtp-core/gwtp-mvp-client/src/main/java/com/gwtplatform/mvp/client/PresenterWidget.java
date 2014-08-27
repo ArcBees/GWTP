@@ -123,17 +123,8 @@ HasPopupSlot, IsWidget {
     private EventBus eventBus;
     private V view;
 
-    /**
-     * This map makes it possible to keep a list of all the active children in
-     * every slot managed by this {@link PresenterWidget}. A slot is identified by an
-     * opaque object. A single slot can have many children.
-     */
     private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
 
-    /**
-     * The parent presenter, in order to make sure this widget is only ever in one
-     * parent.
-     */
     private PresenterWidget<?> parent;
 
     private Object slot;
@@ -198,8 +189,6 @@ HasPopupSlot, IsWidget {
             monitorCloseEvent((PresenterWidget<? extends PopupView>) child);
         }
         if (isVisible()) {
-            // This presenter is visible, its time to call onReveal
-            // on the newly added child (and recursively on this child children)
             child.internalReveal();
         }
     }
@@ -309,7 +298,6 @@ HasPopupSlot, IsWidget {
     @Override
     public void setInSlot(Object slot, PresenterWidget<?> child, boolean performReset) {
         if (child == null) {
-            // Assumes the user wants to clear the slot content.
             clearSlot(slot);
             return;
         }
@@ -325,12 +313,10 @@ HasPopupSlot, IsWidget {
             }
         }
 
-        // Set the content in the view
         getView().setInSlot(slot, child);
         if (isVisible()) {
             child.internalReveal();
             if (performReset) {
-                // And to reset everything if needed
                 ResetPresentersEvent.fire(this);
             }
         }
@@ -566,12 +552,16 @@ HasPopupSlot, IsWidget {
     }
 
     /**
-     * Disconnects a child from it's parent.
+     * Disconnects a child from its parent.
      */
     private void orphan() {
         orphan(true);
     }
 
+    /**
+     * Disconnects a child from its parent
+     * @param removeFromSet - set to false if you're calling this during iteration.
+     */
     private void orphan(boolean removeFromSet) {
         if (parent != null) {
             internalHide();
