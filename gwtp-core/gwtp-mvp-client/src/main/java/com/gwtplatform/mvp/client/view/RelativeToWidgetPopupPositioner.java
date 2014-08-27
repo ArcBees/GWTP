@@ -25,9 +25,9 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
-    private final IsWidget widget;
+    private IsWidget widget;
 
-    public RelativeToWidgetPopupPositioner(final IsWidget widget) {
+    public RelativeToWidgetPopupPositioner(IsWidget widget) {
         super();
         this.widget = widget;
     }
@@ -41,23 +41,23 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
      * @param offsetHeight the drop down's offset height
      */
     @Override
-    public PopupPosition getPopupPosition(final int offsetWidth, final int offsetHeight) {
-        final Widget relativeObject = widget.asWidget();
+    public PopupPosition getPopupPosition(int offsetWidth, int offsetHeight) {
+        Widget relativeObject = widget.asWidget();
 
         // Calculate left position for the popup. The computation for
         // the left position is bidi-sensitive.
 
-        final int textBoxOffsetWidth = relativeObject.getOffsetWidth();
+        int textBoxOffsetWidth = relativeObject.getOffsetWidth();
 
         // Compute the difference between the popup's width and the
         // textbox's width
-        final int offsetWidthDiff = offsetWidth - textBoxOffsetWidth;
+        int offsetWidthDiff = offsetWidth - textBoxOffsetWidth;
 
         int left;
 
         if (LocaleInfo.getCurrentLocale().isRTL()) { // RTL case
 
-            final int textBoxAbsoluteLeft = relativeObject.getAbsoluteLeft();
+            int textBoxAbsoluteLeft = relativeObject.getAbsoluteLeft();
 
             // Right-align the popup. Note that this computation is
             // valid in the case where offsetWidthDiff is negative.
@@ -70,19 +70,19 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
                 // Make sure scrolling is taken into account, since
                 // box.getAbsoluteLeft() takes scrolling into account.
-                final int windowRight = Window.getClientWidth() + Window.getScrollLeft();
-                final int windowLeft = Window.getScrollLeft();
+                int windowRight = Window.getClientWidth() + Window.getScrollLeft();
+                int windowLeft = Window.getScrollLeft();
 
                 // Compute the left value for the right edge of the textbox
-                final int textBoxLeftValForRightEdge = textBoxAbsoluteLeft + textBoxOffsetWidth;
+                int textBoxLeftValForRightEdge = textBoxAbsoluteLeft + textBoxOffsetWidth;
 
                 // Distance from the right edge of the text box to the right edge
                 // of the window
-                final int distanceToWindowRight = windowRight - textBoxLeftValForRightEdge;
+                int distanceToWindowRight = windowRight - textBoxLeftValForRightEdge;
 
                 // Distance from the right edge of the text box to the left edge of the
                 // window
-                final int distanceFromWindowLeft = textBoxLeftValForRightEdge - windowLeft;
+                int distanceFromWindowLeft = textBoxLeftValForRightEdge - windowLeft;
 
                 // If there is not enough space for the overflow of the popup's
                 // width to the right of the text box and there IS enough space for the
@@ -105,16 +105,16 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
             if (offsetWidthDiff > 0) {
                 // Make sure scrolling is taken into account, since
                 // box.getAbsoluteLeft() takes scrolling into account.
-                final int windowRight = Window.getClientWidth() + Window.getScrollLeft();
-                final int windowLeft = Window.getScrollLeft();
+                int windowRight = Window.getClientWidth() + Window.getScrollLeft();
+                int windowLeft = Window.getScrollLeft();
 
                 // Distance from the left edge of the text box to the right edge
                 // of the window
-                final int distanceToWindowRight = windowRight - left;
+                int distanceToWindowRight = windowRight - left;
 
                 // Distance from the left edge of the text box to the left edge of the
                 // window
-                final int distanceFromWindowLeft = left - windowLeft;
+                int distanceFromWindowLeft = left - windowLeft;
 
                 // If there is not enough space for the overflow of the popup's
                 // width to the right of hte text box, and there IS enough space for the
@@ -134,16 +134,16 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
         // Make sure scrolling is taken into account, since
         // box.getAbsoluteTop() takes scrolling into account.
-        final int windowTop = Window.getScrollTop();
-        final int windowBottom = Window.getScrollTop() + Window.getClientHeight();
+        int windowTop = Window.getScrollTop();
+        int windowBottom = Window.getScrollTop() + Window.getClientHeight();
 
         // Distance from the top edge of the window to the top edge of the
         // text box
-        final int distanceFromWindowTop = top - windowTop;
+        int distanceFromWindowTop = top - windowTop;
 
         // Distance from the bottom edge of the window to the bottom edge of
         // the text box
-        final int distanceToWindowBottom = windowBottom - (top + relativeObject.getOffsetHeight());
+        int distanceToWindowBottom = windowBottom - (top + relativeObject.getOffsetHeight());
 
         // If there is not enough space for the popup's height below the text
         // box and there IS enough space for the popup's height above the text
