@@ -16,7 +16,13 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.user.client.ui.HasOneWidget;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.gwtplatform.mvp.client.presenter.ManySlot;
+import com.gwtplatform.mvp.client.presenter.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.SingleSlot;
 
 /**
  * The interface for view classes that handles all the UI-related code for a
@@ -71,4 +77,12 @@ public interface View extends IsWidget {
      *                clear the slot entirely.
      */
     void setInSlot(Object slot, IsWidget content);
+
+    <T extends HasOneWidget> void registerSlot(SingleSlot<?> slot, T container);
+
+    <T extends HasWidgets> void registerSlot(SingleSlot<?> slot, T container);
+
+    <T extends HasWidgets> void registerSlot(ManySlot<?> slot, T container);
+
+    <T extends HasWidgets & InsertPanel.ForIsWidget> void registerSlot(OrderedSlot<?> slot, T container);
 }
