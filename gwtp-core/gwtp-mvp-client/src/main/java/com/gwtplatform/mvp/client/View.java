@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
@@ -23,6 +24,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.gwtplatform.mvp.client.presenter.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.SingleSlot;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * The interface for view classes that handles all the UI-related code for a
@@ -77,6 +79,10 @@ public interface View extends IsWidget {
      *                clear the slot entirely.
      */
     void setInSlot(Object slot, IsWidget content);
+
+    <T extends HasOneWidget> void registerSlot(Type<RevealContentHandler<?>> slot, T container);
+
+    <T extends HasWidgets> void registerSlot(Type<RevealContentHandler<?>> slot, T container);
 
     <T extends HasOneWidget> void registerSlot(SingleSlot<?> slot, T container);
 

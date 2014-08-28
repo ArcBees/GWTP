@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.client;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
@@ -28,6 +29,7 @@ import com.gwtplatform.mvp.client.presenter.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.SingleSlot;
 import com.gwtplatform.mvp.client.presenter.Slot;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * A simple implementation of {@link View} that simply disregard every call to
@@ -43,8 +45,8 @@ import com.gwtplatform.mvp.client.presenter.Slot;
  */
 public abstract class ViewImpl implements View {
     private Widget widget;
-    private final Map<Slot<?>, HasOneWidget> singleSlots = new HashMap<Slot<?>, HasOneWidget>();
-    private final Map<Slot<?>, HasWidgets> multiSlots = new HashMap<Slot<?>, HasWidgets>();
+    private final Map<Object, HasOneWidget> singleSlots = new HashMap<Object, HasOneWidget>();
+    private final Map<Object, HasWidgets> multiSlots = new HashMap<Object, HasWidgets>();
     private final Map<Slot<?>, HasWidgets> orderedSlots = new HashMap<Slot<?>, HasWidgets>();
 
     @Override
@@ -123,4 +125,13 @@ public abstract class ViewImpl implements View {
         orderedSlots.put(slot, container);
     }
 
+    @Override
+    public <T extends HasOneWidget> void registerSlot(Type<RevealContentHandler<?>> slot, T container) {
+        singleSlots.put(slot, container);
+    }
+
+    @Override
+    public <T extends HasWidgets> void registerSlot(Type<RevealContentHandler<?>> slot, T container) {
+        multiSlots.put(slot, container);
+    }
 }
