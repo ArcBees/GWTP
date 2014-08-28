@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -81,6 +82,10 @@ public interface View extends IsWidget {
     void registerSlot(Type<RevealContentHandler<?>> slot, HasWidgets.ForIsWidget container);
 
     void registerSlot(Slot<?> slot, HasWidgets.ForIsWidget container);
+
+    void registerHasOneWidgetSlot(Slot<?> slot, HasOneWidget container);
+
+    void registerHasOneWidgetSlot(Type<RevealContentHandler<?>> slot, HasOneWidget container);
 
     <T extends HasWidgets.ForIsWidget & InsertPanel.ForIsWidget> void registerSlot(OrderedSlot<?> slot, T container);
 }

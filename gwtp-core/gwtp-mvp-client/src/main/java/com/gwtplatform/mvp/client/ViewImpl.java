@@ -128,4 +128,14 @@ public abstract class ViewImpl implements View {
             multiSlots.put(slot, container);
         }
     }
+
+    @Override
+    public void registerHasOneWidgetSlot(Slot<?> slot, HasOneWidget container) {
+        singleSlots.put(slot, container);
+    }
+
+    @Override
+    public void registerHasOneWidgetSlot(Type<RevealContentHandler<?>> slot, HasOneWidget container) {
+        singleSlots.put(slot, container);
+    }
 }
