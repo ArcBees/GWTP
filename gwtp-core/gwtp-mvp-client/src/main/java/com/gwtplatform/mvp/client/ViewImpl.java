@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.presenter.ManySlot;
+import com.gwtplatform.mvp.client.presenter.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.SingleSlot;
 import com.gwtplatform.mvp.client.presenter.Slot;
@@ -114,7 +114,7 @@ public abstract class ViewImpl implements View {
     }
 
     @Override
-    public <T extends HasWidgets> void registerSlot(ManySlot<?> slot, T container) {
+    public <T extends HasWidgets> void registerSlot(MultiSlot<?> slot, T container) {
         multiSlots.put(slot, container);
     }
 

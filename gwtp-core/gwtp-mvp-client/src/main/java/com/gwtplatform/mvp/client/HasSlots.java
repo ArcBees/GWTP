@@ -16,6 +16,11 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.Set;
+
+import com.gwtplatform.mvp.client.presenter.AbstractMultiSlot;
+import com.gwtplatform.mvp.client.presenter.Slot;
+
 /**
  * Interface of objects containing slots in which {@link PresenterWidget} can
  * be inserted.
@@ -98,6 +103,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will clear the slot.
      */
+    @Deprecated
     void setInSlot(Object slot, PresenterWidget<?> content);
 
     /**
@@ -118,5 +124,16 @@ public interface HasSlots {
      *                     after the content has been added and this presenter is visible, pass
      *                     {@code false} otherwise.
      */
+    @Deprecated
     void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset);
+
+    <T extends PresenterWidget<?>> void addToSlot(T content, AbstractMultiSlot<T> slot);
+
+    <T extends PresenterWidget<?>> void removeFromSlot(T content, Slot<T> slot);
+
+    <T extends PresenterWidget<?>> void setInSlot(T content, Slot<T> slot);
+
+    <T extends PresenterWidget<?>> void setInSlot(T content, Slot<T> slot, boolean performReset);
+
+    <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot);
 }

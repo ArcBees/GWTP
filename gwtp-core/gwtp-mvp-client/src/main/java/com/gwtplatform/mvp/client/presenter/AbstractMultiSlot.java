@@ -17,5 +17,5 @@ package com.gwtplatform.mvp.client.presenter;
 
 import com.gwtplatform.mvp.client.PresenterWidget;
 
-public class OrderedSlot<T extends PresenterWidget<?> & Comparable<T>> extends AbstractMultiSlot<T> {
+public abstract class AbstractMultiSlot<T extends PresenterWidget<?>> extends Slot<T> {
 }

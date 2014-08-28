@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.presenter.AbstractMultiSlot;
 import com.gwtplatform.mvp.client.presenter.Slot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
@@ -331,7 +332,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * @param slot
      * @return the children of the slot
      */
-    public <T extends PresenterWidget<?>> Set<T> getChildrenFromSlot(Slot<T> slot) {
+    public <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot) {
         Set<T> result = new HashSet<T>();
         for (PresenterWidget<?> child: children) {
             if (child.slot == slot) {
@@ -600,5 +601,25 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         }
 
         visibleHandlerRegistrations.clear();
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void addToSlot(T content, AbstractMultiSlot<T> slot) {
+        addToSlot(slot, content);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void removeFromSlot(T content, Slot<T> slot) {
+        removeFromSlot(slot, content);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void setInSlot(T content, Slot<T> slot) {
+        setInSlot(content, slot, true);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void setInSlot(T content, Slot<T> slot, boolean performReset) {
+        setInSlot(slot, content, performReset);
     }
 }

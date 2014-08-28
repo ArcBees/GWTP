@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.gwtplatform.mvp.client.presenter.ManySlot;
+import com.gwtplatform.mvp.client.presenter.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.SingleSlot;
 
@@ -82,7 +82,7 @@ public interface View extends IsWidget {
 
     <T extends HasWidgets> void registerSlot(SingleSlot<?> slot, T container);
 
-    <T extends HasWidgets> void registerSlot(ManySlot<?> slot, T container);
+    <T extends HasWidgets> void registerSlot(MultiSlot<?> slot, T container);
 
     <T extends HasWidgets & InsertPanel.ForIsWidget> void registerSlot(OrderedSlot<?> slot, T container);
 }
