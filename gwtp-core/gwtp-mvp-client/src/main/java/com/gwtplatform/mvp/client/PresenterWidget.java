@@ -173,6 +173,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
+    @Deprecated
     public void addToSlot(Object slot, PresenterWidget<?> child) {
         if (child == null) {
             throw new IllegalArgumentException("Can't add null to a slot");
@@ -282,6 +283,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
+    @Deprecated
     public void removeFromSlot(Object slot, PresenterWidget<?> child) {
         if (child == null || child.slot != slot) {
             return;
@@ -295,11 +297,13 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
+    @Deprecated
     public void setInSlot(Object slot, PresenterWidget<?> child) {
         setInSlot(slot, child, true);
     }
 
     @Override
+    @Deprecated
     public void setInSlot(Object slot, PresenterWidget<?> child, boolean performReset) {
         if (child == null) {
             clearSlot(slot);
