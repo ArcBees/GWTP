@@ -17,13 +17,11 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.gwtplatform.mvp.client.presenter.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.OrderedSlot;
-import com.gwtplatform.mvp.client.presenter.SingleSlot;
+import com.gwtplatform.mvp.client.presenter.Slot;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
@@ -80,15 +78,9 @@ public interface View extends IsWidget {
      */
     void setInSlot(Object slot, IsWidget content);
 
-    <T extends HasOneWidget> void registerSlot(Type<RevealContentHandler<?>> slot, T container);
+    void registerSlot(Type<RevealContentHandler<?>> slot, HasWidgets.ForIsWidget container);
 
-    <T extends HasWidgets> void registerSlot(Type<RevealContentHandler<?>> slot, T container);
+    void registerSlot(Slot<?> slot, HasWidgets.ForIsWidget container);
 
-    <T extends HasOneWidget> void registerSlot(SingleSlot<?> slot, T container);
-
-    <T extends HasWidgets> void registerSlot(SingleSlot<?> slot, T container);
-
-    <T extends HasWidgets> void registerSlot(MultiSlot<?> slot, T container);
-
-    <T extends HasWidgets & InsertPanel.ForIsWidget> void registerSlot(OrderedSlot<?> slot, T container);
+    <T extends HasWidgets.ForIsWidget & InsertPanel.ForIsWidget> void registerSlot(OrderedSlot<?> slot, T container);
 }
