@@ -265,10 +265,13 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
     /**
      * Removes this presenter from its parent.
-     * You must ensure that the presenter has a parent before calling this method.
+     * If this presenter has no parent, this method does nothing.
      */
     public void removeFromParentSlot() {
-        assert parent != null : "Tried to remove a presenter that has no parent from its parent";
+        if (parent == null) {
+            return;
+        }
+
         parent.removeFromSlot(slot, this);
     }
 
