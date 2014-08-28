@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.presenter.Slot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
 /**
@@ -323,6 +324,21 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
                 ResetPresentersEvent.fire(this);
             }
         }
+    }
+
+    /**
+     * Get the children of a slot.
+     * @param slot
+     * @return the children of the slot
+     */
+    public <T extends PresenterWidget<?>> Set<T> getChildrenFromSlot(Slot<T> slot) {
+        Set<T> result = new HashSet<T>();
+        for (PresenterWidget<?> child: children) {
+            if (child.slot == slot) {
+                result.add((T) child);
+            }
+        }
+        return result;
     }
 
     /**
