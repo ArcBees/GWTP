@@ -58,6 +58,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not add anything.
      */
+    @Deprecated
     void addToSlot(Object slot, PresenterWidget<?> content);
 
     /**
@@ -72,6 +73,7 @@ public interface HasSlots {
      *
      * @param slot An opaque object identifying which slot to clear.
      */
+    @Deprecated
     void clearSlot(Object slot);
 
     /**
@@ -88,6 +90,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not remove anything.
      */
+    @Deprecated
     void removeFromSlot(Object slot, PresenterWidget<?> content);
 
     /**
