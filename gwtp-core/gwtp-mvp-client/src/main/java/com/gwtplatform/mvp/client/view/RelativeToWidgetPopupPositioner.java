@@ -24,7 +24,6 @@ import com.google.gwt.user.client.ui.Widget;
  *  Positions the popup relative to a widget.
  */
 public class RelativeToWidgetPopupPositioner extends PopupPositioner {
-
     private IsWidget widget;
 
     public RelativeToWidgetPopupPositioner(IsWidget widget) {
