@@ -56,13 +56,21 @@ public abstract class ViewImpl implements View {
         } else if (orderedSlots.containsKey(slot)) {
             InsertPanel.ForIsWidget container = (InsertPanel.ForIsWidget) orderedSlots.get(slot);
             Comparable w = (Comparable) content;
-            int i;
-            for (i = 0; i < container.getWidgetCount(); i++) {
-                if (w.compareTo(container.getWidget(i)) >= 0) {
+            int min = 0;
+            int max = container.getWidgetCount();
+            while (min < max) {
+                int mid = min + ((max - min) / 2);
+                int compare = w.compareTo(container.getWidget(mid));
+                if (compare == 0) {
+                    max = mid;
                     break;
+                } else if (compare > 0) {
+                    min = mid + 1;
+                } else {
+                    max = mid;
                 }
             }
-            container.insert(content, i);
+            container.insert(content, max);
         }
     }
 
