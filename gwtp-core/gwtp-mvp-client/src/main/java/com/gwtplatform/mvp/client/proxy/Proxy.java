@@ -33,7 +33,7 @@ import com.gwtplatform.mvp.client.Presenter;
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
  */
-public interface Proxy<P extends GenericPresenter<?, ?, ?, ?, ?>> extends ProxyRaw {
+public interface Proxy<P extends GenericPresenter<?, ?, ?>> extends ProxyRaw {
 
     /**
      * Makes it possible to access the {@link EventBus} object associated with

@@ -27,8 +27,8 @@ import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.presenter.OrderedSlot;
-import com.gwtplatform.mvp.client.presenter.RevealContentHandler;
 import com.gwtplatform.mvp.client.presenter.Slot;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * A simple implementation of {@link View} that simply disregard every call to

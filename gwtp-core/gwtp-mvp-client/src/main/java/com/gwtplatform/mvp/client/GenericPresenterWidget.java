@@ -311,16 +311,16 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
 
     @Override
     public void setInSlot(S slot, GenericPresenterWidget<S,?> child, boolean performReset) {
-       internalSetInSlot(slot, child, performReset);
+       rawSetInSlot(slot, child, performReset);
     }
 
-    protected final void internalSetInSlot(Object slot, GenericPresenterWidget<S,?> child, boolean performReset) {
+    public final void rawSetInSlot(Object slot, GenericPresenterWidget<?,?> child, boolean performReset) {
         if (child == null) {
             internalClearSlot(slot);
             return;
         }
 
-        adoptChild(slot, child);
+        adoptChild(slot, (GenericPresenterWidget<S, ?>) child);
 
         Iterator<GenericPresenterWidget<S,?>> it = children.iterator();
         while (it.hasNext()) {

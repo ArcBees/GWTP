@@ -19,8 +19,8 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.root.IRevealType;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
@@ -131,7 +131,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 @Singleton
 @Deprecated
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
-        GenericPresenter<RevealContentHandler<?>, Presenter.RevealType, Object, V, Proxy_> {
+        GenericPresenter<Object, V, Proxy_> {
     /**
      * The RevealType define which event will be fired in the default {@link #revealInParent()}.
      * <p/>
@@ -140,10 +140,25 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * RootPopup will fire a {@link RevealRootPopupContentEvent}.
      */
     @Deprecated
-    public enum RevealType {
+    public enum RevealType implements IRevealType {
         Root,
         RootLayout,
-        RootPopup
+        RootPopup;
+
+        @Override
+        public boolean isRoot() {
+            return this == Root;
+        }
+
+        @Override
+        public boolean isRootLayout() {
+            return this == RootLayout;
+        }
+
+        @Override
+        public boolean isRootPopup() {
+            return this == RootPopup;
+        }
     }
 
     public Presenter(boolean autoBind, EventBus eventBus, V view, Proxy_ proxy) {
@@ -168,32 +183,5 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
 
     public Presenter(EventBus eventBus, V view, Proxy_ proxy) {
         super(eventBus, view, proxy);
-    }
-
-    /**
-     * Requests that the presenter reveal itself in its parent presenter.
-     * You can override this method to either fire a
-     * {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent},
-     * a {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent}
-     * or a {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}.
-     */
-    protected void revealInParent() {
-        if (getRevealType() != null) {
-            switch (getRevealType()) {
-            case Root:
-                RevealRootContentEvent.fire(this, this);
-                break;
-
-            case RootLayout:
-                RevealRootLayoutContentEvent.fire(this, this);
-                break;
-
-            case RootPopup:
-                RevealRootPopupContentEvent.fire(this, (GenericPresenterWidget<Object, PopupView>) this);
-                break;
-            }
-        } else {
-            RevealContentEvent.fire(this, getSlot(), this);
-        }
     }
 }

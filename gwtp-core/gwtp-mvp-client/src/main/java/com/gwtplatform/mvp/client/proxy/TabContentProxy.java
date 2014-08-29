@@ -32,7 +32,7 @@ import com.gwtplatform.mvp.client.TabData;
  * @param <P> The type of the {@link Presenter} associated with this proxy.
  * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  */
-public interface TabContentProxy<P extends GenericPresenter<?, ?, ?, ?, ?>> extends Proxy<P> {
+public interface TabContentProxy<P extends GenericPresenter<?, ?, ?>> extends Proxy<P> {
     /**
      * Retrieves the {@link TabData} that should be used to create this tab.
      *

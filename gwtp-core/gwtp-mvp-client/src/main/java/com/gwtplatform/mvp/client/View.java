@@ -22,8 +22,8 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.gwtplatform.mvp.client.presenter.OrderedSlot;
-import com.gwtplatform.mvp.client.presenter.RevealContentHandler;
 import com.gwtplatform.mvp.client.presenter.Slot;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * The interface for view classes that handles all the UI-related code for a

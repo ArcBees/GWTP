@@ -15,6 +15,7 @@
  */
 package com.gwtplatform.mvp.client.presenter.root;
 
+import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
@@ -25,8 +26,23 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
  * RootLayout will fire a {@link RevealRootLayoutContentEvent}.
  * RootPopup will fire a {@link RevealRootPopupContentEvent}.
  */
-public enum RevealType {
+public enum RevealType implements IRevealType {
     Root,
     RootLayout,
-    RootPopup
+    RootPopup;
+
+    @Override
+    public boolean isRoot() {
+        return this == Root;
+    }
+
+    @Override
+    public boolean isRootLayout() {
+        return this == RootLayout;
+    }
+
+    @Override
+    public boolean isRootPopup() {
+        return this == RootPopup;
+    }
 }

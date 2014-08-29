@@ -24,11 +24,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.GenericPresenter;
-import com.gwtplatform.mvp.client.GenericPresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.presenter.root.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.presenter.root.RevealType;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * A singleton presenter, the basic building block of the
@@ -134,16 +133,12 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  */
 @Singleton
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
-        GenericPresenter<RevealContentHandler<?>, RevealType, AbstractSlot<?>, V, Proxy_> implements HasSlots {
-
+        GenericPresenter<AbstractSlot<?>, V, Proxy_> implements HasSlots {
     public Presenter(boolean autoBind, EventBus eventBus, V view, Proxy_ proxy) {
         super(autoBind, eventBus, view, proxy);
     }
 
-    public Presenter(
-            EventBus eventBus,
-            V view, Proxy_ proxy,
-            RevealType revealType,
+    public Presenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType,
             Type<RevealContentHandler<?>> slot) {
         super(eventBus, view, proxy, revealType, slot);
     }
@@ -160,21 +155,6 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
         super(eventBus, view, proxy);
     }
 
-    /**
-     * Requests that the presenter reveal itself in its parent presenter.
-     * You can override this method to either fire a
-     * {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent},
-     * a {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent}
-     * or a {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}.
-     */
-    protected void revealInParent() {
-        if (getRevealType() != null) {
-            fireEvent(new RevealRootContentEvent(getRevealType(), this));
-        } else {
-            fireEvent(new RevealContentEvent(getSlot(), this));
-        }
-    }
-
     @Override
     public <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot) {
         return unsafeGetChildren(slot);
@@ -183,10 +163,5 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     @Override
     public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
         return new TreeSet<T>(unsafeGetChildren(slot));
-    }
-
-    @Override
-    public void setInSlot(Type<RevealContentHandler<?>> slot, GenericPresenterWidget<AbstractSlot<?>, ?> content) {
-        internalSetInSlot(slot, content,true);
     }
 }

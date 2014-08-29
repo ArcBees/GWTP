@@ -183,14 +183,14 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     public void onRevealRootContent(
             RevealRootContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(false);
-        setInSlot(rootSlot, revealContentEvent.getContent());
+        rawSetInSlot(rootSlot, revealContentEvent.getContent(), true);
     }
 
     @Override
     public void onRevealRootLayoutContent(
             RevealRootLayoutContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(true);
-        setInSlot(rootSlot, revealContentEvent.getContent());
+        rawSetInSlot(rootSlot, revealContentEvent.getContent(), true);
     }
 
     @Override

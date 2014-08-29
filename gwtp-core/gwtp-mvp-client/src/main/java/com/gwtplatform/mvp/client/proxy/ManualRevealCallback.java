@@ -33,7 +33,7 @@ import com.gwtplatform.mvp.client.Presenter;
  */
 public class ManualRevealCallback<T> implements AsyncCallback<T> {
 
-    private final GenericPresenter<?, ?, ?, ?, ? extends ProxyPlace<?>> presenter;
+    private final GenericPresenter<?, ?, ? extends ProxyPlace<?>> presenter;
     private final AsyncCallback<T> callback;
 
     /**
@@ -42,7 +42,7 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
      * @param presenter The presenter that will be revealed upon successful completion of this callback.
      * @see #ManualRevealCallback(Presenter, AsyncCallback)
      */
-    public static <T> ManualRevealCallback<T> create(GenericPresenter<?, ?, ?, ?, ? extends ProxyPlace<?>> presenter,
+    public static <T> ManualRevealCallback<T> create(GenericPresenter<?, ?, ? extends ProxyPlace<?>> presenter,
             AsyncCallback<T> callback) {
         return new ManualRevealCallback<T>(presenter, callback);
     }
@@ -53,12 +53,12 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
      * @param presenter The presenter that will be revealed upon successful completion of this callback.
      * @see #ManualRevealCallback(Presenter, AsyncCallback)
      */
-    public ManualRevealCallback(GenericPresenter<?, ?, ?, ?, ? extends ProxyPlace<?>> presenter) {
+    public ManualRevealCallback(GenericPresenter<?, ?, ? extends ProxyPlace<?>> presenter) {
         this.presenter = presenter;
         this.callback = null;
     }
 
-    ManualRevealCallback(GenericPresenter<?, ?, ?, ?, ? extends ProxyPlace<?>> presenter, AsyncCallback<T> callback) {
+    ManualRevealCallback(GenericPresenter<?, ?, ? extends ProxyPlace<?>> presenter, AsyncCallback<T> callback) {
         this.presenter = presenter;
         this.callback = callback;
     }

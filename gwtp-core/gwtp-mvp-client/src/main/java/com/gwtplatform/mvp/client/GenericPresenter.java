@@ -16,11 +16,16 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.root.IRevealType;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
+import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
@@ -127,14 +132,14 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  */
 @Singleton
 public abstract class GenericPresenter
-        <RevealContentHandler extends EventHandler, RevealType, S, V extends View, Proxy_ extends Proxy<?>>
+        <S, V extends View, Proxy_ extends Proxy<?>>
         extends GenericPresenterWidget<S,V> {
     /**
      * The light-weight {@link Proxy} around this presenter.
      */
     private final Proxy_ proxy;
-    private RevealType revealType;
-    private GwtEvent.Type<RevealContentHandler> containgSlot;
+    private IRevealType revealType;
+    private GwtEvent.Type<RevealContentHandler<?>> containgSlot;
 
     /**
      * Creates a {@link GenericPresenter} that is not necessarily using automatic
@@ -178,7 +183,7 @@ public abstract class GenericPresenter
      * @param proxy      The {@link Proxy}.
      * @param revealType The {@link RevealType}.
      */
-    public GenericPresenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType) {
+    public GenericPresenter(EventBus eventBus, V view, Proxy_ proxy, IRevealType revealType) {
         this(eventBus, view, proxy, revealType, null);
     }
 
@@ -194,7 +199,7 @@ public abstract class GenericPresenter
      * @param slot     The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and
      *                 {@see RevealContentHandler}.
      */
-    public GenericPresenter(EventBus eventBus, V view, Proxy_ proxy, GwtEvent.Type<RevealContentHandler> slot) {
+    public GenericPresenter(EventBus eventBus, V view, Proxy_ proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
         this(eventBus, view, proxy, null, slot);
     }
 
@@ -211,8 +216,8 @@ public abstract class GenericPresenter
      * @param slot       The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
      *                   and {@see RevealContentHandler}.
      */
-    public GenericPresenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType,
-            GwtEvent.Type<RevealContentHandler> slot) {
+    public GenericPresenter(EventBus eventBus, V view, Proxy_ proxy, IRevealType revealType,
+            GwtEvent.Type<RevealContentHandler<?>> slot) {
         super(eventBus, view);
         this.proxy = proxy;
         this.revealType = revealType;
@@ -259,8 +264,6 @@ public abstract class GenericPresenter
         }
         revealInParent();
     }
-
-    protected abstract void revealInParent();
 
     /**
      * Returns the {@link Proxy} attached to this presenter.
@@ -320,21 +323,21 @@ public abstract class GenericPresenter
     }
 
     /**
-     * Returns the {@link RevealType} of this presenter.
+     * Returns the {@link IRevealType} of this presenter.
      *
-     * @return The {@link RevealType}.
+     * @return The {@link IRevealType}.
      */
-    protected RevealType getRevealType() {
+    protected IRevealType getRevealType() {
         return revealType;
     }
 
     /**
-     * Set the {@link RevealType} of this presenter.
+     * Set the {@link IRevealType} of this presenter.
      * If the parent type is not null, the slot will be ignored in {@link #revealInParent()}.
      *
-     * @param revealType The {@link RevealType}.
+     * @param revealType The {@link IRevealType}.
      */
-    protected void setRevealType(RevealType revealType) {
+    protected void setRevealType(IRevealType revealType) {
         this.revealType = revealType;
     }
 
@@ -344,7 +347,7 @@ public abstract class GenericPresenter
      * @return The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see
      *         RevealContentHandler}.
      */
-    protected GwtEvent.Type<RevealContentHandler> getSlot() {
+    protected GwtEvent.Type<RevealContentHandler<?>> getSlot() {
         return containgSlot;
     }
 
@@ -355,7 +358,28 @@ public abstract class GenericPresenter
      * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and
      *             {@see RevealContentHandler}.
      */
-    protected void setSlot(GwtEvent.Type<RevealContentHandler> slot) {
+    protected void setSlot(GwtEvent.Type<RevealContentHandler<?>> slot) {
         this.containgSlot = slot;
+    }
+
+    /**
+     * Requests that the presenter reveal itself in its parent presenter.
+     * You can override this method to either fire a
+     * {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent},
+     * a {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent}
+     * or a {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}.
+     */
+    protected void revealInParent() {
+        if (getRevealType() != null) {
+            if (getRevealType().isRoot()) {
+                RevealRootContentEvent.fire(this, this);
+            } else if (getRevealType().isRootLayout()) {
+                RevealRootLayoutContentEvent.fire(this, this);
+            } else if (getRevealType().isRootPopup()) {
+                RevealRootPopupContentEvent.fire(this, (GenericPresenterWidget<Object, PopupView>) this);
+            }
+        } else {
+            RevealContentEvent.fire(this, getSlot(), this);
+        }
     }
 }

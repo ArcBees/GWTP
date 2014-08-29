@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,17 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+package com.gwtplatform.mvp.client.presenter.root;
 
-package com.gwtplatform.mvp.client.proxy;
-
-import com.gwtplatform.mvp.client.GenericPresenter;
-
-/**
- * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
- * See {@link ProxyPlaceAbstract} for more details.
- *
- * @param <P> Type of the associated {@link Presenter}.
- */
-public class ProxyPlaceImpl<P extends GenericPresenter<?, ?, ?>> extends
-        ProxyPlaceAbstract<P, Proxy<P>> {
+public interface IRevealType {
+    boolean isRoot();
+    boolean isRootLayout();
+    boolean isRootPopup();
 }

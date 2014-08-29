@@ -40,6 +40,6 @@ public interface ProxyRaw extends HasHandlers {
      * @param callback The callback in which the {@link Presenter} will be passed
      *                 as a parameter.
      */
-    void getRawPresenter(NotifyingAsyncCallback<GenericPresenter<?, ?, ?, ?, ?>> callback);
+    void getRawPresenter(NotifyingAsyncCallback<GenericPresenter<?, ?, ?>> callback);
 
 }
