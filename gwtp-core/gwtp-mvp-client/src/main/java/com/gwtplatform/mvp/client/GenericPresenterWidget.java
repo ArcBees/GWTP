@@ -129,7 +129,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
 
     boolean visible;
     private GenericPresenterWidget<S, ?> parent;
-    private S slot;
+    private Object slot;
 
     /**
      * Creates a {@link GenericPresenterWidget} that is not necessarily using automatic
@@ -203,6 +203,10 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
 
     @Override
     public void clearSlot(S slot) {
+        internalClearSlot(slot);
+    }
+
+    private void internalClearSlot(Object slot) {
         Iterator<GenericPresenterWidget<S,?>> it = children.iterator();
         while (it.hasNext()) {
             GenericPresenterWidget<S, ?> child = it.next();
@@ -275,7 +279,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
             return;
         }
 
-        parent.removeFromSlot(slot, this);
+        parent.internalRemoveFromSlot(slot, this);
     }
 
     @Override
@@ -285,6 +289,10 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
 
     @Override
     public void removeFromSlot(S slot, GenericPresenterWidget<S,?> child) {
+        internalRemoveFromSlot(slot, child);
+    }
+
+    private void internalRemoveFromSlot(Object slot, GenericPresenterWidget<S,?> child) {
         if (child == null || child.slot != slot) {
             return;
         }
@@ -303,8 +311,12 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
 
     @Override
     public void setInSlot(S slot, GenericPresenterWidget<S,?> child, boolean performReset) {
+       internalSetInSlot(slot, child, performReset);
+    }
+
+    protected final void internalSetInSlot(Object slot, GenericPresenterWidget<S,?> child, boolean performReset) {
         if (child == null) {
-            clearSlot(slot);
+            internalClearSlot(slot);
             return;
         }
 
@@ -524,7 +536,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
      * @param slot
      * @param child
      */
-    private void adoptChild(S slot, GenericPresenterWidget<S,?> child) {
+    private void adoptChild(Object slot, GenericPresenterWidget<S,?> child) {
         if (child.parent != this) {
             if (child.parent != null) {
                 child.parent.children.remove(child);

@@ -14,17 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.mvp.client.presenter;
+
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.GenericPresenter;
+import com.gwtplatform.mvp.client.GenericPresenterWidget;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.presenter.root.RevealRootContentEvent;
+import com.gwtplatform.mvp.client.presenter.root.RevealType;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 /**
  * A singleton presenter, the basic building block of the
@@ -129,22 +133,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
  * @param <Proxy_> The {@link Proxy} type.
  */
 @Singleton
-@Deprecated
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
-        GenericPresenter<RevealContentHandler<?>, Presenter.RevealType, Object, V, Proxy_> {
-    /**
-     * The RevealType define which event will be fired in the default {@link #revealInParent()}.
-     * <p/>
-     * Root will fire a {@link RevealRootContentEvent}.
-     * RootLayout will fire a {@link RevealRootLayoutContentEvent}.
-     * RootPopup will fire a {@link RevealRootPopupContentEvent}.
-     */
-    @Deprecated
-    public enum RevealType {
-        Root,
-        RootLayout,
-        RootPopup
-    }
+        GenericPresenter<RevealContentHandler<?>, RevealType, AbstractSlot<?>, V, Proxy_> implements HasSlots {
 
     public Presenter(boolean autoBind, EventBus eventBus, V view, Proxy_ proxy) {
         super(autoBind, eventBus, view, proxy);
@@ -179,21 +169,24 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      */
     protected void revealInParent() {
         if (getRevealType() != null) {
-            switch (getRevealType()) {
-            case Root:
-                RevealRootContentEvent.fire(this, this);
-                break;
-
-            case RootLayout:
-                RevealRootLayoutContentEvent.fire(this, this);
-                break;
-
-            case RootPopup:
-                RevealRootPopupContentEvent.fire(this, (GenericPresenterWidget<Object, PopupView>) this);
-                break;
-            }
+            fireEvent(new RevealRootContentEvent(getRevealType(), this));
         } else {
-            RevealContentEvent.fire(this, getSlot(), this);
+            fireEvent(new RevealContentEvent(getSlot(), this));
         }
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot) {
+        return unsafeGetChildren(slot);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
+        return new TreeSet<T>(unsafeGetChildren(slot));
+    }
+
+    @Override
+    public void setInSlot(Type<RevealContentHandler<?>> slot, GenericPresenterWidget<AbstractSlot<?>, ?> content) {
+        internalSetInSlot(slot, content,true);
     }
 }

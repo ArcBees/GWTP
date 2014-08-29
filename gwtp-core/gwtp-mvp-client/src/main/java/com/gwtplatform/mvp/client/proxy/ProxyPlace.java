@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.client.GenericPresenter;
  *
  * @param <P> The type of the {@link Presenter} associated with this proxy.
  */
-public interface ProxyPlace<P extends GenericPresenter<?, ?, ?, ?>> extends Proxy<P>, Place {
+public interface ProxyPlace<P extends GenericPresenter<?, ?, ?, ?, ?>> extends Proxy<P>, Place {
 
     /**
      * Manually reveals a presenter. Only use this method if your presenter is configured
@@ -44,7 +44,7 @@ public interface ProxyPlace<P extends GenericPresenter<?, ?, ?, ?>> extends Prox
      * @see Presenter#useManualReveal()
      * @see #manualRevealFailed()
      */
-    void manualReveal(GenericPresenter<?, ?, ?, ?> presenter);
+    void manualReveal(GenericPresenter<?, ?, ?, ?, ?> presenter);
 
     /**
      * Cancels manually revealing a presenter. Only use this method if your presenter is configured

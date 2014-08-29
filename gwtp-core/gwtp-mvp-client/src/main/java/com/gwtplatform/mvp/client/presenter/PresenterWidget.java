@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.GenericPresenterWidget;
 import com.gwtplatform.mvp.client.PopupView;
@@ -116,6 +117,11 @@ public abstract class PresenterWidget<V extends View> extends GenericPresenterWi
     @Override
     public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
         return new TreeSet<T>(unsafeGetChildren(slot));
+    }
+
+    @Override
+    public void setInSlot(Type<RevealContentHandler<?>> slot, GenericPresenterWidget<AbstractSlot<?>, ?> content) {
+        internalSetInSlot(slot, content,true);
     }
 }
 

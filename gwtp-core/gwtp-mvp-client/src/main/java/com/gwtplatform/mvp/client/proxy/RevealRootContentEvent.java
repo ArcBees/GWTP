@@ -32,6 +32,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * @see RevealRootLayoutContentEvent
  * @see RevealRootPopupContentEvent
  */
+@Deprecated
 public final class RevealRootContentEvent extends
         GwtEvent<RevealRootContentHandler> {
 
