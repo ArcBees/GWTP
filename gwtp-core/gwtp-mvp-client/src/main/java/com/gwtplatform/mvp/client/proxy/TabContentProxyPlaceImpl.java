@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.GenericPresenter;
 import com.gwtplatform.mvp.client.Tab;
 import com.gwtplatform.mvp.client.TabData;
 
@@ -26,7 +26,7 @@ import com.gwtplatform.mvp.client.TabData;
  *
  * @param <T> The Presenter's type.
  */
-public class TabContentProxyPlaceImpl<T extends Presenter<?, ?>> extends
+public class TabContentProxyPlaceImpl<T extends GenericPresenter<?, ?, ?, ?>> extends
         ProxyPlaceAbstract<T, TabContentProxy<T>> implements TabContentProxyPlace<T> {
 
     public TabContentProxyPlaceImpl() {

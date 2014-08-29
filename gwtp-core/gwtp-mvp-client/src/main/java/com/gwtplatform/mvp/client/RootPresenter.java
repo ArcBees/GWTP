@@ -73,6 +73,32 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
             return null;
         }
 
+        public void ensureGlass() {
+            if (glass == null) {
+                glass = Document.get().createDivElement();
+
+                Style style = glass.getStyle();
+                style.setPosition(Position.ABSOLUTE);
+                style.setLeft(0, Unit.PX);
+                style.setTop(0, Unit.PX);
+                style.setRight(0, Unit.PX);
+                style.setBottom(0, Unit.PX);
+                style.setZIndex(2147483647); // Maximum z-index
+                style.setBackgroundColor("#FFFFFF");
+                style.setOpacity(0);
+            }
+        }
+
+        public void lockScreen() {
+            ensureGlass();
+            Document.get().getBody().appendChild(glass);
+        }
+
+        @Override
+        public void removeFromSlot(Object slot, IsWidget content) {
+            setInSlot(slot, null);
+        }
+
         @Override
         public void setInSlot(Object slot, IsWidget content) {
             assert slot == rootSlot : "Unknown slot used in the root proxy.";
@@ -97,6 +123,12 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
             }
         }
 
+        public void unlockScreen() {
+            if (glass != null) {
+                glass.removeFromParent();
+            }
+        }
+
         /**
          * Return the RootPanel on which to add the content.
          * <p />
@@ -108,35 +140,8 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
             return RootPanel.get();
         }
 
-        private void setUsingRootLayoutPanel(final boolean usingRootLayoutPanel) {
+        private void setUsingRootLayoutPanel(boolean usingRootLayoutPanel) {
             this.usingRootLayoutPanel = usingRootLayoutPanel;
-        }
-
-        public void lockScreen() {
-            ensureGlass();
-            Document.get().getBody().appendChild(glass);
-        }
-
-        public void unlockScreen() {
-            if (glass != null) {
-                glass.removeFromParent();
-            }
-        }
-
-        public void ensureGlass() {
-            if (glass == null) {
-                glass = Document.get().createDivElement();
-
-                Style style = glass.getStyle();
-                style.setPosition(Position.ABSOLUTE);
-                style.setLeft(0, Unit.PX);
-                style.setTop(0, Unit.PX);
-                style.setRight(0, Unit.PX);
-                style.setBottom(0, Unit.PX);
-                style.setZIndex(2147483647); // Maximum z-index
-                style.setBackgroundColor("#FFFFFF");
-                style.setOpacity(0);
-            }
         }
     }
 
@@ -151,24 +156,18 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
      *            The event bus.
      */
     @Inject
-    public RootPresenter(final EventBus eventBus, final RootView view) {
+    public RootPresenter(EventBus eventBus, RootView view) {
         super(eventBus, view);
         visible = true;
     }
 
     @Override
-    protected void onBind() {
-        super.onBind();
-
-        addRegisteredHandler(ResetPresentersEvent.getType(), this);
-
-        addRegisteredHandler(RevealRootContentEvent.getType(), this);
-
-        addRegisteredHandler(RevealRootLayoutContentEvent.getType(), this);
-
-        addRegisteredHandler(RevealRootPopupContentEvent.getType(), this);
-
-        addRegisteredHandler(LockInteractionEvent.getType(), this);
+    public void onLockInteraction(LockInteractionEvent lockInteractionEvent) {
+        if (lockInteractionEvent.shouldLock()) {
+            getView().lockScreen();
+        } else {
+            getView().unlockScreen();
+        }
     }
 
     @Override
@@ -182,35 +181,32 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
 
     @Override
     public void onRevealRootContent(
-            final RevealRootContentEvent revealContentEvent) {
+            RevealRootContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(false);
-        setInSlot(rootSlot, revealContentEvent.getContent());
+        rawSetInSlot(rootSlot, revealContentEvent.getContent(), true);
     }
 
     @Override
     public void onRevealRootLayoutContent(
-            final RevealRootLayoutContentEvent revealContentEvent) {
+            RevealRootLayoutContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(true);
-        setInSlot(rootSlot, revealContentEvent.getContent());
+        rawSetInSlot(rootSlot, revealContentEvent.getContent(), true);
     }
 
     @Override
     public void onRevealRootPopupContent(
-            final RevealRootPopupContentEvent revealContentEvent) {
-        if (revealContentEvent.isCentered()) {
-            addToPopupSlot(revealContentEvent.getContent());
-        } else {
-            addToPopupSlot(revealContentEvent.getContent(), false);
-        }
+            RevealRootPopupContentEvent revealContentEvent) {
+        addToPopupSlot((GenericPresenterWidget<Object, Object, ? extends PopupView>) revealContentEvent.getContent());
     }
 
     @Override
-    public void onLockInteraction(LockInteractionEvent lockInteractionEvent) {
-        if (lockInteractionEvent.shouldLock()) {
-            getView().lockScreen();
-        } else {
-            getView().unlockScreen();
-        }
-    }
+    protected void onBind() {
+        super.onBind();
 
+        addRegisteredHandler(ResetPresentersEvent.getType(), this);
+        addRegisteredHandler(RevealRootContentEvent.getType(), this);
+        addRegisteredHandler(RevealRootLayoutContentEvent.getType(), this);
+        addRegisteredHandler(RevealRootPopupContentEvent.getType(), this);
+        addRegisteredHandler(LockInteractionEvent.getType(), this);
+    }
 }

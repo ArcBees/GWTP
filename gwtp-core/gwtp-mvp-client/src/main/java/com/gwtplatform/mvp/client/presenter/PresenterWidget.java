@@ -14,9 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.mvp.client.presenter;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.GenericPresenterWidget;
+import com.gwtplatform.mvp.client.PopupView;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 
 /**
  * A presenter that does not have to be a singleton. Pages from your
@@ -90,14 +104,33 @@ import com.google.web.bindery.event.shared.EventBus;
  *
  * @param <V> The {@link View} type.
  */
-@Deprecated
-public abstract class PresenterWidget<V extends View> extends GenericPresenterWidget<Object, Object, V> {
+public abstract class PresenterWidget<V extends View> extends GenericPresenterWidget<AbstractSlot<?>,MultiSlot<?>, V>
+    implements HasSlots {
     public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
         super(autoBind, eventBus, view);
     }
 
     public PresenterWidget(EventBus eventBus, V view) {
         super(eventBus, view);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot) {
+        return unsafeGetChildren(slot);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
+        return new TreeSet<T>(unsafeGetChildren(slot));
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> T getSlotChild(SingleSlot<T> slot) {
+        Iterator<T> it = unsafeGetChildren(slot).iterator();
+        if (it.hasNext()) {
+            return it.next();
+        }
+        return null;
     }
 }
 

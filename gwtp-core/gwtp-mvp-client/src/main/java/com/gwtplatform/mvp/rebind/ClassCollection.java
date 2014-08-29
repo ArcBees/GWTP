@@ -28,7 +28,7 @@ import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 import com.gwtplatform.mvp.client.ChangeTabHandler;
 import com.gwtplatform.mvp.client.DelayedBind;
-import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.GenericPresenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabData;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
@@ -55,7 +55,7 @@ public class ClassCollection {
     static final String asyncProviderClassName = AsyncProvider.class.getCanonicalName();
     static final String baseGinjectorClassName = Ginjector.class.getCanonicalName();
     static final String basePlaceClassName = Place.class.getCanonicalName();
-    static final String basePresenterClassName = Presenter.class.getCanonicalName();
+    static final String basePresenterClassName = GenericPresenter.class.getCanonicalName();
     static final String delayedBindClassName = DelayedBind.class.getCanonicalName();
     static final String eventHandlerClassName = EventHandler.class.getCanonicalName();
     static final String gatekeeperClassName = Gatekeeper.class.getCanonicalName();

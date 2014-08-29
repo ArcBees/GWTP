@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,17 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-package com.gwtplatform.mvp.client.proxy;
-
-import com.gwtplatform.mvp.client.GenericPresenter;
+package com.gwtplatform.mvp.client.view;
 
 /**
- * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
- * See {@link ProxyPlaceAbstract} for more details.
- *
- * @param <P> Type of the associated {@link Presenter}.
+ *  Positions the popup at the left and top coordinates.
  */
-public class ProxyPlaceImpl<P extends GenericPresenter<?, ?, ?, ?>> extends
-        ProxyPlaceAbstract<P, Proxy<P>> {
+public class TopLeftPopupPositioner extends PopupPositioner {
+    private int left;
+    private int top;
+
+    public TopLeftPopupPositioner(int left, int top) {
+        super();
+        this.left = left;
+        this.top = top;
+    }
+
+    @Override
+    public PopupPosition getPopupPosition(int popupWidth, int popupHeight) {
+        return new PopupPosition(left, top);
+    }
 }

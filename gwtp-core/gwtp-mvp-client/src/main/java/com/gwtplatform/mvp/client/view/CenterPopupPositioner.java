@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,17 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+package com.gwtplatform.mvp.client.view;
 
-package com.gwtplatform.mvp.client.proxy;
-
-import com.gwtplatform.mvp.client.GenericPresenter;
+import com.google.gwt.user.client.Window;
 
 /**
- * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
- * See {@link ProxyPlaceAbstract} for more details.
- *
- * @param <P> Type of the associated {@link Presenter}.
+ * Positions the popup in the center of the screen
  */
-public class ProxyPlaceImpl<P extends GenericPresenter<?, ?, ?, ?>> extends
-        ProxyPlaceAbstract<P, Proxy<P>> {
+public class CenterPopupPositioner extends PopupPositioner {
+    @Override
+    public PopupPosition getPopupPosition(int popupWidth, int popupHeight) {
+        int left = (Window.getClientWidth() - popupWidth) / 2;
+        int top = (Window.getClientHeight() - popupHeight) / 2;
+        return new PopupPosition(left, top);
+    }
 }

@@ -36,7 +36,7 @@ package com.gwtplatform.mvp.client;
  *   = new Type&lt;RevealContentHandler&lt;?&gt;&gt;();
  * </pre>
  */
-public interface HasSlots {
+public interface HasSlots<S, M> {
     /**
      * This method adds some content in a specific slot of the {@link Presenter}.
      * The attached {@link View} should manage this slot when its
@@ -53,7 +53,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not add anything.
      */
-    void addToSlot(Object slot, PresenterWidget<?> content);
+    void addToSlot(M slot, GenericPresenterWidget<S, M, ?> content);
 
     /**
      * This method clears the content in a specific slot. No
@@ -67,7 +67,7 @@ public interface HasSlots {
      *
      * @param slot An opaque object identifying which slot to clear.
      */
-    void clearSlot(Object slot);
+    void clearSlot(S slot);
 
     /**
      * This method removes some content in a specific slot of the
@@ -83,7 +83,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not remove anything.
      */
-    void removeFromSlot(Object slot, PresenterWidget<?> content);
+    void removeFromSlot(S slot, GenericPresenterWidget<S, M, ?> content);
 
     /**
      * This method sets some content in a specific slot of the {@link Presenter}.
@@ -98,7 +98,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will clear the slot.
      */
-    void setInSlot(Object slot, PresenterWidget<?> content);
+    void setInSlot(S slot, GenericPresenterWidget<S, M, ?> content);
 
     /**
      * This method sets some content in a specific slot of the {@link Presenter}.
@@ -118,5 +118,5 @@ public interface HasSlots {
      *                     after the content has been added and this presenter is visible, pass
      *                     {@code false} otherwise.
      */
-    void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset);
+    void setInSlot(S slot, GenericPresenterWidget<S, M, ?> content, boolean performReset);
 }

@@ -14,17 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.mvp.client.presenter;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.presenter.root.IRevealType;
+import com.gwtplatform.mvp.client.GenericPresenter;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.presenter.root.RevealType;
+import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 /**
  * A singleton presenter, the basic building block of the
@@ -129,46 +138,13 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
  * @param <Proxy_> The {@link Proxy} type.
  */
 @Singleton
-@Deprecated
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
-        GenericPresenter<Object, Object, V, Proxy_> {
-    /**
-     * The RevealType define which event will be fired in the default {@link #revealInParent()}.
-     * <p/>
-     * Root will fire a {@link RevealRootContentEvent}.
-     * RootLayout will fire a {@link RevealRootLayoutContentEvent}.
-     * RootPopup will fire a {@link RevealRootPopupContentEvent}.
-     */
-    @Deprecated
-    public enum RevealType implements IRevealType {
-        Root,
-        RootLayout,
-        RootPopup;
-
-        @Override
-        public boolean isRoot() {
-            return this == Root;
-        }
-
-        @Override
-        public boolean isRootLayout() {
-            return this == RootLayout;
-        }
-
-        @Override
-        public boolean isRootPopup() {
-            return this == RootPopup;
-        }
-    }
-
+        GenericPresenter<AbstractSlot<?>, MultiSlot<?>, V, Proxy_> implements HasSlots {
     public Presenter(boolean autoBind, EventBus eventBus, V view, Proxy_ proxy) {
         super(autoBind, eventBus, view, proxy);
     }
 
-    public Presenter(
-            EventBus eventBus,
-            V view, Proxy_ proxy,
-            RevealType revealType,
+    public Presenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType,
             Type<RevealContentHandler<?>> slot) {
         super(eventBus, view, proxy, revealType, slot);
     }
@@ -183,5 +159,24 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
 
     public Presenter(EventBus eventBus, V view, Proxy_ proxy) {
         super(eventBus, view, proxy);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot) {
+        return unsafeGetChildren(slot);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
+        return new TreeSet<T>(unsafeGetChildren(slot));
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> T getSlotChild(SingleSlot<T> slot) {
+        Iterator<T> it = unsafeGetChildren(slot).iterator();
+        if (it.hasNext()) {
+            return it.next();
+        }
+        return null;
     }
 }

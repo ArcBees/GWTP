@@ -16,8 +16,20 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.ui.HasOneWidget;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.HasWidgets.ForIsWidget;
+import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * A simple implementation of {@link View} that simply disregard every call to
@@ -33,17 +45,64 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class ViewImpl implements View {
     private Widget widget;
+    private final Map<Object, HasOneWidget> singleSlots = new HashMap<Object, HasOneWidget>();
+    private final Map<Object, HasWidgets.ForIsWidget> multiSlots = new HashMap<Object, HasWidgets.ForIsWidget>();
+    private final Map<OrderedSlot<?>, HasWidgets.ForIsWidget>
+        orderedSlots = new HashMap<OrderedSlot<?>, HasWidgets.ForIsWidget>();
 
     @Override
     public void addToSlot(Object slot, IsWidget content) {
+        if (multiSlots.containsKey(slot)) {
+            multiSlots.get(slot).add(content);
+        } else if (orderedSlots.containsKey(slot)) {
+            InsertPanel.ForIsWidget container = (InsertPanel.ForIsWidget) orderedSlots.get(slot);
+            Comparable w = (Comparable) content;
+            int min = 0;
+            int max = container.getWidgetCount();
+            while (min < max) {
+                int mid = min + ((max - min) / 2);
+                int compare = w.compareTo(container.getWidget(mid));
+                if (compare == 0) {
+                    max = mid;
+                    break;
+                } else if (compare > 0) {
+                    min = mid + 1;
+                } else {
+                    max = mid;
+                }
+            }
+            container.insert(content, max);
+        }
     }
 
     @Override
     public void removeFromSlot(Object slot, IsWidget content) {
+        if (singleSlots.containsKey(slot)) {
+            if (singleSlots.get(slot).getWidget() == content.asWidget()) {
+                singleSlots.get(slot).setWidget(null);
+            }
+        } else if (multiSlots.containsKey(slot)) {
+            multiSlots.get(slot).remove(content);
+        } else if (orderedSlots.containsKey(slot)) {
+            orderedSlots.get(slot).remove(content);
+        }
     }
 
     @Override
     public void setInSlot(Object slot, IsWidget content) {
+        if (singleSlots.containsKey(slot)) {
+            singleSlots.get(slot).setWidget(content);
+        } else if (multiSlots.containsKey(slot)) {
+            multiSlots.get(slot).clear();
+            if (content != null) {
+                multiSlots.get(slot).add(content);
+            }
+        } else if (orderedSlots.containsKey(slot)) {
+            orderedSlots.get(slot).clear();
+            if (content != null) {
+                orderedSlots.get(slot).add(content);
+            }
+        }
     }
 
     @Override
@@ -53,5 +112,49 @@ public abstract class ViewImpl implements View {
 
     protected void initWidget(Widget widget) {
         this.widget = widget;
+    }
+
+    @Override
+    public void registerSlot(Slot<?> slot, HasWidgets.ForIsWidget container) {
+        registerUnorderedSlot(slot, container);
+    }
+
+    @Override
+    public <T extends HasWidgets.ForIsWidget & InsertPanel.ForIsWidget> void registerSlot(OrderedSlot<?> slot,
+            T container) {
+        orderedSlots.put(slot, container);
+    }
+
+    @Override
+    public void registerSlot(Type<RevealContentHandler<?>> slot, ForIsWidget container) {
+        registerUnorderedSlot(slot, container);
+    }
+
+    private void registerUnorderedSlot(Object slot, ForIsWidget container) {
+        if (container instanceof HasOneWidget) {
+            singleSlots.put(slot, (HasOneWidget) container);
+        } else {
+            multiSlots.put(slot, container);
+        }
+    }
+
+    @Override
+    public void registerHasOneWidgetSlot(Slot<?> slot, HasOneWidget container) {
+        singleSlots.put(slot, container);
+    }
+
+    @Override
+    public void registerHasOneWidgetSlot(Type<RevealContentHandler<?>> slot, HasOneWidget container) {
+        singleSlots.put(slot, container);
+    }
+
+    @Override
+    public void registerSlot(SingleSlot<?> slot, ForIsWidget container) {
+        registerUnorderedSlot(slot, container);
+    }
+
+    @Override
+    public void registerHasOneWidgetSlot(SingleSlot<?> slot, HasOneWidget container) {
+        singleSlots.put(slot, container);
     }
 }
