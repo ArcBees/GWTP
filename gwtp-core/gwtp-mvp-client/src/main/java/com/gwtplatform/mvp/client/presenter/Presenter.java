@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client.presenter;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -26,6 +27,11 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.GenericPresenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.root.RevealType;
+import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
@@ -133,7 +139,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  */
 @Singleton
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
-        GenericPresenter<AbstractSlot<?>, V, Proxy_> implements HasSlots {
+        GenericPresenter<AbstractSlot<?>, MultiSlot<?>, V, Proxy_> implements HasSlots {
     public Presenter(boolean autoBind, EventBus eventBus, V view, Proxy_ proxy) {
         super(autoBind, eventBus, view, proxy);
     }
@@ -163,5 +169,14 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     @Override
     public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
         return new TreeSet<T>(unsafeGetChildren(slot));
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> T getSlotChild(SingleSlot<T> slot) {
+        Iterator<T> it = unsafeGetChildren(slot).iterator();
+        if (it.hasNext()) {
+            return it.next();
+        }
+        return null;
     }
 }

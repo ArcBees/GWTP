@@ -30,9 +30,9 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
-import com.gwtplatform.mvp.client.presenter.AbstractSlot;
 import com.gwtplatform.mvp.client.presenter.PresenterWidget;
-import com.gwtplatform.mvp.client.presenter.Slot;
+import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
 /**
@@ -107,8 +107,8 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  *
  * @param <V> The {@link View} type.
  */
-public abstract class GenericPresenterWidget<S, V extends View> extends HandlerContainerImpl implements HasHandlers,
-        HasSlots<S>, HasPopupSlot<S>, IsWidget {
+public abstract class GenericPresenterWidget<S, M, V extends View>
+    extends HandlerContainerImpl implements HasHandlers, HasSlots<S, M>, HasPopupSlot<S, M>, IsWidget {
     private static class HandlerInformation<H extends EventHandler> {
         private final Type<H> type;
         private final H eventHandler;
@@ -125,10 +125,10 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
     private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
             new ArrayList<HandlerInformation<? extends EventHandler>>();
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
-    private final Set<GenericPresenterWidget<S, ?>> children = new HashSet<GenericPresenterWidget<S, ?>>();
+    private final Set<GenericPresenterWidget<S, M, ?>> children = new HashSet<GenericPresenterWidget<S, M, ?>>();
 
     boolean visible;
-    private GenericPresenterWidget<S, ?> parent;
+    private GenericPresenterWidget<S, M, ?> parent;
     private Object slot;
 
     /**
@@ -165,17 +165,17 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
     }
 
     @Override
-    public void addToPopupSlot(GenericPresenterWidget<S, ? extends PopupView> child) {
-        addToSlot((S) POPUP_SLOT, child);
+    public void addToPopupSlot(GenericPresenterWidget<S, M, ? extends PopupView> child) {
+        addToSlot((M) POPUP_SLOT, child);
     }
 
     @Override
-    public void addToPopupSlot(GenericPresenterWidget<S, ? extends PopupView> child, boolean center) {
+    public void addToPopupSlot(GenericPresenterWidget<S, M, ? extends PopupView> child, boolean center) {
         addToPopupSlot(child);
     }
 
     @Override
-    public void addToSlot(S slot, GenericPresenterWidget<S, ?> child) {
+    public void addToSlot(M slot, GenericPresenterWidget<S, M, ?> child) {
         if (child == null) {
             throw new IllegalArgumentException("Can't add null to a slot");
         }
@@ -189,7 +189,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
         if (!child.isPopup()) {
             getView().addToSlot(slot, child);
         } else {
-            monitorCloseEvent((GenericPresenterWidget<S, ? extends PopupView>) child);
+            monitorCloseEvent((GenericPresenterWidget<S, M, ? extends PopupView>) child);
         }
         if (isVisible()) {
             child.internalReveal();
@@ -207,9 +207,9 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
     }
 
     private void internalClearSlot(Object slot) {
-        Iterator<GenericPresenterWidget<S,?>> it = children.iterator();
+        Iterator<GenericPresenterWidget<S, M,?>> it = children.iterator();
         while (it.hasNext()) {
-            GenericPresenterWidget<S, ?> child = it.next();
+            GenericPresenterWidget<S, M, ?> child = it.next();
             if (child.slot == slot) {
                 it.remove();
                 child.orphan();
@@ -283,16 +283,16 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
     }
 
     @Override
-    public void removeFromPopupSlot(GenericPresenterWidget<S,? extends PopupView> child) {
+    public void removeFromPopupSlot(GenericPresenterWidget<S, M,? extends PopupView> child) {
         removeFromSlot((S) POPUP_SLOT, child);
     }
 
     @Override
-    public void removeFromSlot(S slot, GenericPresenterWidget<S,?> child) {
+    public void removeFromSlot(S slot, GenericPresenterWidget<S, M,?> child) {
         internalRemoveFromSlot(slot, child);
     }
 
-    private void internalRemoveFromSlot(Object slot, GenericPresenterWidget<S,?> child) {
+    private void internalRemoveFromSlot(Object slot, GenericPresenterWidget<S, M,?> child) {
         if (child == null || child.slot != slot) {
             return;
         }
@@ -305,26 +305,26 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
     }
 
     @Override
-    public void setInSlot(S slot, GenericPresenterWidget<S, ?> child) {
+    public void setInSlot(S slot, GenericPresenterWidget<S, M, ?> child) {
         setInSlot(slot, child, true);
     }
 
     @Override
-    public void setInSlot(S slot, GenericPresenterWidget<S,?> child, boolean performReset) {
+    public void setInSlot(S slot, GenericPresenterWidget<S, M,?> child, boolean performReset) {
        rawSetInSlot(slot, child, performReset);
     }
 
-    public final void rawSetInSlot(Object slot, GenericPresenterWidget<?,?> child, boolean performReset) {
+    public final void rawSetInSlot(Object slot, GenericPresenterWidget<?,?,?> child, boolean performReset) {
         if (child == null) {
             internalClearSlot(slot);
             return;
         }
 
-        adoptChild(slot, (GenericPresenterWidget<S, ?>) child);
+        adoptChild(slot, (GenericPresenterWidget<S, M, ?>) child);
 
-        Iterator<GenericPresenterWidget<S,?>> it = children.iterator();
+        Iterator<GenericPresenterWidget<S,M,?>> it = children.iterator();
         while (it.hasNext()) {
-            GenericPresenterWidget<S,?> nextChild = it.next();
+            GenericPresenterWidget<S,M,?> nextChild = it.next();
             if (nextChild != child && nextChild.slot == slot) {
                 it.remove();
                 nextChild.orphan();
@@ -475,7 +475,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
         if (!isVisible()) {
             return;
         }
-        for (GenericPresenterWidget<S,?> child : children) {
+        for (GenericPresenterWidget<S,M,?> child : children) {
             child.internalHide();
         }
 
@@ -500,7 +500,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
             return;
         }
         onReset();
-        for (GenericPresenterWidget<S,?> child : children) {
+        for (GenericPresenterWidget<S,M,?> child : children) {
             child.internalReset();
         }
         if (isPopup()) {
@@ -520,7 +520,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
         onReveal();
         visible = true;
 
-        for (GenericPresenterWidget<S,?> child : children) {
+        for (GenericPresenterWidget<S,M,?> child : children) {
             child.internalReveal();
         }
 
@@ -536,7 +536,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
      * @param slot
      * @param child
      */
-    private void adoptChild(Object slot, GenericPresenterWidget<S,?> child) {
+    private void adoptChild(Object slot, GenericPresenterWidget<S,M,?> child) {
         if (child.parent != this) {
             if (child.parent != null) {
                 child.parent.children.remove(child);
@@ -558,7 +558,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
      *
      * @param popupPresenter The {@link PresenterWidget} to monitor.
      */
-    private void monitorCloseEvent(final GenericPresenterWidget<S,? extends PopupView> popupPresenter) {
+    private void monitorCloseEvent(final GenericPresenterWidget<S,M,? extends PopupView> popupPresenter) {
         PopupView popupView = popupPresenter.getView();
 
         popupView.setCloseHandler(new PopupViewCloseHandler() {
@@ -608,7 +608,7 @@ public abstract class GenericPresenterWidget<S, V extends View> extends HandlerC
     protected final <T extends com.gwtplatform.mvp.client.presenter.PresenterWidget<?>> Set<T>
         unsafeGetChildren(AbstractSlot<T> slot) {
         Set<T> result = new HashSet<T>();
-        for (GenericPresenterWidget<S, ?> child: children) {
+        for (GenericPresenterWidget<S,M, ?> child: children) {
             if (child.slot == slot) {
                 result.add((T) child);
             }

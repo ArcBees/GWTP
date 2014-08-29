@@ -38,16 +38,16 @@ public final class RevealRootPopupContentEvent extends
         GwtEvent<RevealRootPopupContentHandler> {
 
     private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
-    private final GenericPresenterWidget<Object, ? extends PopupView> content;
+    private final GenericPresenterWidget<?, ?, ? extends PopupView> content;
 
     public RevealRootPopupContentEvent(
-           GenericPresenterWidget<Object, ? extends PopupView> content) {
+           GenericPresenterWidget<?, ?, ? extends PopupView> content) {
         this.content = content;
     }
 
     @Deprecated
     public RevealRootPopupContentEvent(
-           GenericPresenterWidget<Object, ? extends PopupView> content, boolean center) {
+           GenericPresenterWidget<?, ?, ? extends PopupView> content, boolean center) {
         this(content);
     }
 
@@ -62,7 +62,7 @@ public final class RevealRootPopupContentEvent extends
      *            wants to set itself as root content.
      */
     public static void fire(final HasHandlers source,
-            final GenericPresenterWidget<Object, ? extends PopupView> content) {
+            final GenericPresenterWidget<?, ?, ? extends PopupView> content) {
         source.fireEvent(new RevealRootPopupContentEvent(content));
     }
 
@@ -80,7 +80,7 @@ public final class RevealRootPopupContentEvent extends
      */
     @Deprecated
     public static void fire(final HasHandlers source,
-            final GenericPresenterWidget<Object, ? extends PopupView> content,
+            final GenericPresenterWidget<?, ?, ? extends PopupView> content,
             final boolean center) {
         fire(source, content);
     }
@@ -94,7 +94,7 @@ public final class RevealRootPopupContentEvent extends
         return getType();
     }
 
-    public GenericPresenterWidget<Object, ? extends PopupView> getContent() {
+    public GenericPresenterWidget<?, ?, ? extends PopupView> getContent() {
         return content;
     }
 

@@ -26,8 +26,9 @@ import com.google.gwt.user.client.ui.HasWidgets.ForIsWidget;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.presenter.OrderedSlot;
-import com.gwtplatform.mvp.client.presenter.Slot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
@@ -144,6 +145,16 @@ public abstract class ViewImpl implements View {
 
     @Override
     public void registerHasOneWidgetSlot(Type<RevealContentHandler<?>> slot, HasOneWidget container) {
+        singleSlots.put(slot, container);
+    }
+
+    @Override
+    public void registerSlot(SingleSlot<?> slot, ForIsWidget container) {
+        registerUnorderedSlot(slot, container);
+    }
+
+    @Override
+    public void registerHasOneWidgetSlot(SingleSlot<?> slot, HasOneWidget container) {
         singleSlots.put(slot, container);
     }
 }

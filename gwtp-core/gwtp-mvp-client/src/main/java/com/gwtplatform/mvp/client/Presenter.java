@@ -131,7 +131,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 @Singleton
 @Deprecated
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
-        GenericPresenter<Object, V, Proxy_> {
+        GenericPresenter<Object, Object, V, Proxy_> {
     /**
      * The RevealType define which event will be fired in the default {@link #revealInParent()}.
      * <p/>

@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.GenericPresenter;
 /**
  * @param <P> The presenter's type.
  */
-public class ProxyImpl<P extends GenericPresenter<?, ?, ?>> implements Proxy<P> {
+public class ProxyImpl<P extends GenericPresenter<?, ?, ?, ?>> implements Proxy<P> {
 
     protected IndirectProvider<P> presenter;
     protected EventBus eventBus;
@@ -47,7 +47,7 @@ public class ProxyImpl<P extends GenericPresenter<?, ?, ?>> implements Proxy<P> 
 
     @SuppressWarnings("unchecked")
     @Override
-    public void getRawPresenter(NotifyingAsyncCallback<GenericPresenter<?, ?, ?>> callback) {
+    public void getRawPresenter(NotifyingAsyncCallback<GenericPresenter<?, ?, ?, ?>> callback) {
         callback.prepare();
         presenter.get((AsyncCallback<P>) callback);
         callback.checkLoading();

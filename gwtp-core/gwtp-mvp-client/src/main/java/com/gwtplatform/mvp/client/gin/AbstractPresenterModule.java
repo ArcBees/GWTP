@@ -46,8 +46,8 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface, which will lead to an
      *                      automatically generated proxy classes.
      */
-    protected <P extends GenericPresenter<?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenter(
-            Class<P> presenter, Class<? extends P> presenterImpl, Class<Proxy_> proxy) {
+    protected <P extends GenericPresenter<?, ?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenter(Class<P> presenter,
+            Class<? extends P> presenterImpl, Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
         bind(proxy).asEagerSingleton();
         bind(presenter).to(presenterImpl);
@@ -67,9 +67,9 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface, which will lead to an
      *                      automatically generated proxy classes.
      */
-    protected <P extends GenericPresenter<?, ?, ?>, V extends View, Proxy_ extends Proxy<P>> void bindPresenter(
-            Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view,
-            Class<? extends V> viewImpl, Class<Proxy_> proxy) {
+    protected <P extends GenericPresenter<?, ?, ?, ?>, V extends View, Proxy_ extends Proxy<P>> void bindPresenter(
+            Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view, Class<? extends V> viewImpl,
+            Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
         bind(viewImpl).in(Singleton.class);
         bind(proxy).asEagerSingleton();
@@ -94,7 +94,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface, which will lead to an
      *                      automatically generated proxy classes.
      */
-    protected <P extends GenericPresenter<?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenter(
+    protected <P extends GenericPresenter<?, ?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenter(
             Class<P> presenterImpl, Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
         bind(proxy).asEagerSingleton();
@@ -113,9 +113,8 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface, which will lead to an
      *                      automatically generated proxy classes.
      */
-    protected <P extends GenericPresenter<?, ?, ?>, V extends View, Proxy_ extends Proxy<P>> void bindPresenter(
-            Class<P> presenterImpl, Class<V> view, Class<? extends V> viewImpl,
-            Class<Proxy_> proxy) {
+    protected <P extends GenericPresenter<?, ?, ?, ?>, V extends View, Proxy_ extends Proxy<P>> void bindPresenter(
+            Class<P> presenterImpl, Class<V> view, Class<? extends V> viewImpl, Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
         bind(viewImpl).in(Singleton.class);
         bind(proxy).asEagerSingleton();
@@ -141,9 +140,11 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface.
      * @param proxyImpl     The {@link Proxy} implementation (a singleton).
      */
-    protected <P extends GenericPresenter<?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenterCustomProxy(
-            Class<P> presenter, Class<? extends P> presenterImpl,
-            Class<Proxy_> proxy, Class<? extends Proxy_> proxyImpl) {
+    protected <P extends GenericPresenter<?, ?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenterCustomProxy(
+            Class<P> presenter,
+            Class<? extends P> presenterImpl,
+            Class<Proxy_> proxy,
+            Class<? extends Proxy_> proxyImpl) {
         bind(presenterImpl).in(Singleton.class);
         bind(proxyImpl).asEagerSingleton();
         bind(presenter).to(presenterImpl);
@@ -164,11 +165,14 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface.
      * @param proxyImpl     The {@link Proxy} implementation (a singleton).
      */
-    protected <P extends GenericPresenter<?, ?, ?>, V extends View, Proxy_ extends Proxy<P>>
-        void bindPresenterCustomProxy(
-            Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view,
-            Class<? extends V> viewImpl, Class<Proxy_> proxy,
-            Class<? extends Proxy_> proxyImpl) {
+    protected <P extends GenericPresenter<?, ?, ?, ?>, V extends View, Proxy_ extends Proxy<P>>
+            void bindPresenterCustomProxy(
+                    Class<P> presenter,
+                    Class<? extends P> presenterImpl,
+                    Class<V> view,
+                    Class<? extends V> viewImpl,
+                    Class<Proxy_> proxy,
+                    Class<? extends Proxy_> proxyImpl) {
         bind(presenterImpl).in(Singleton.class);
         bind(viewImpl).in(Singleton.class);
         bind(proxyImpl).asEagerSingleton();
@@ -195,9 +199,8 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface.
      * @param proxyImpl     The {@link Proxy} implementation (a singleton).
      */
-    protected <P extends GenericPresenter<?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenterCustomProxy(
-            Class<P> presenterImpl, Class<Proxy_> proxy,
-            Class<? extends Proxy_> proxyImpl) {
+    protected <P extends GenericPresenter<?, ?, ?, ?>, Proxy_ extends Proxy<P>> void bindPresenterCustomProxy(
+            Class<P> presenterImpl, Class<Proxy_> proxy, Class<? extends Proxy_> proxyImpl) {
         bind(presenterImpl).in(Singleton.class);
         bind(proxyImpl).asEagerSingleton();
         bind(proxy).to(proxyImpl);
@@ -216,10 +219,13 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param proxy         The {@link Proxy} interface.
      * @param proxyImpl     The {@link Proxy} implementation (a singleton).
      */
-    protected <P extends GenericPresenter<?, ?, ?>, V extends View, Proxy_ extends Proxy<P>>
-        void bindPresenterCustomProxy(
-            Class<P> presenterImpl, Class<V> view, Class<? extends V> viewImpl,
-            Class<Proxy_> proxy, Class<? extends Proxy_> proxyImpl) {
+    protected <P extends GenericPresenter<?, ?, ?, ?>, V extends View, Proxy_ extends Proxy<P>>
+            void bindPresenterCustomProxy(
+                    Class<P> presenterImpl,
+                    Class<V> view,
+                    Class<? extends V> viewImpl,
+                    Class<Proxy_> proxy,
+                    Class<? extends Proxy_> proxyImpl) {
         bind(presenterImpl).in(Singleton.class);
         bind(viewImpl).in(Singleton.class);
         bind(proxyImpl).asEagerSingleton();
@@ -239,9 +245,8 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (NOT a singleton).
      */
-    protected <P extends GenericPresenterWidget<?,?>, V extends View> void bindPresenterWidget(
-            Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view,
-            Class<? extends V> viewImpl) {
+    protected <P extends GenericPresenterWidget<?, ?, ?>, V extends View> void bindPresenterWidget(Class<P> presenter,
+            Class<? extends P> presenterImpl, Class<V> view, Class<? extends V> viewImpl) {
         bind(presenter).to(presenterImpl);
         bind(view).to(viewImpl);
     }
@@ -257,7 +262,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (NOT a singleton).
      */
-    protected <P extends GenericPresenterWidget<?, ?>, V extends View> void bindPresenterWidget(
+    protected <P extends GenericPresenterWidget<?, ?, ?>, V extends View> void bindPresenterWidget(
             Class<P> presenterImpl, Class<V> view, Class<? extends V> viewImpl) {
         bind(presenterImpl);
         bind(view).to(viewImpl);
@@ -278,8 +283,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param viewFactoryImpl      The implementation of the {@link View} factory.
      */
     protected <P, V> void bindPresenterWidgetFactory(Class<P> presenterFactory,
-            Class<? extends P> presenterFactoryImpl, Class<V> viewFactory,
-            Class<? extends V> viewFactoryImpl) {
+            Class<? extends P> presenterFactoryImpl, Class<V> viewFactory, Class<? extends V> viewFactoryImpl) {
         bind(presenterFactory).to(presenterFactoryImpl).in(Singleton.class);
         bind(viewFactory).to(viewFactoryImpl).in(Singleton.class);
     }
@@ -301,8 +305,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view     The {@link View} interface.
      * @param viewImpl The {@link View} implementation (not a singleton).
      */
-    protected <V extends View> void bindSharedView(Class<V> view,
-            Class<? extends V> viewImpl) {
+    protected <V extends View> void bindSharedView(Class<V> view, Class<? extends V> viewImpl) {
         bind(view).to(viewImpl);
     }
 
@@ -327,9 +330,8 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (a singleton).
      */
-    protected <P extends GenericPresenterWidget<?,?>, V extends View> void bindSingletonPresenterWidget(
-            Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view,
-            Class<? extends V> viewImpl) {
+    protected <P extends GenericPresenterWidget<?, ?, ?>, V extends View> void bindSingletonPresenterWidget(
+            Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view, Class<? extends V> viewImpl) {
         bind(presenter).to(presenterImpl).in(Singleton.class);
         bind(view).to(viewImpl).in(Singleton.class);
     }
@@ -354,7 +356,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (a singleton).
      */
-    protected <P extends GenericPresenterWidget<?,?>, V extends View> void bindSingletonPresenterWidget(
+    protected <P extends GenericPresenterWidget<?, ?, ?>, V extends View> void bindSingletonPresenterWidget(
             Class<P> presenterImpl, Class<V> view, Class<? extends V> viewImpl) {
         bind(presenterImpl).in(Singleton.class);
         bind(view).to(viewImpl).in(Singleton.class);

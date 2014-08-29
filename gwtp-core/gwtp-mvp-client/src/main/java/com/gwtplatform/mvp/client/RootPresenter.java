@@ -196,7 +196,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     @Override
     public void onRevealRootPopupContent(
             RevealRootPopupContentEvent revealContentEvent) {
-        addToPopupSlot(revealContentEvent.getContent());
+        addToPopupSlot((GenericPresenterWidget<Object, Object, ? extends PopupView>) revealContentEvent.getContent());
     }
 
     @Override

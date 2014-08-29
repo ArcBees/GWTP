@@ -29,7 +29,7 @@ import com.gwtplatform.mvp.client.TabData;
 /**
  * @param <T> The Presenter's type.
  */
-public class NonLeafTabContentProxyImpl<T extends GenericPresenter<?, ?, ?>> extends ProxyImpl<T>
+public class NonLeafTabContentProxyImpl<T extends GenericPresenter<?, ?, ?, ?>> extends ProxyImpl<T>
         implements NonLeafTabContentProxy<T> {
 
     protected TabData tabData;

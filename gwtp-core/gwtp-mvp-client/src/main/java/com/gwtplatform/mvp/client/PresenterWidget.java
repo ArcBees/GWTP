@@ -91,7 +91,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * @param <V> The {@link View} type.
  */
 @Deprecated
-public abstract class PresenterWidget<V extends View> extends GenericPresenterWidget<Object, V> {
+public abstract class PresenterWidget<V extends View> extends GenericPresenterWidget<Object, Object, V> {
     public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
         super(autoBind, eventBus, view);
     }

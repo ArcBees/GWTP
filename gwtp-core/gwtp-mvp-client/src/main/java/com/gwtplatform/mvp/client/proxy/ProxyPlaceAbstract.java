@@ -38,7 +38,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * @param <P>      The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
  */
-public class ProxyPlaceAbstract<P extends GenericPresenter<?, ?, ?>, Proxy_ extends Proxy<P>>
+public class ProxyPlaceAbstract<P extends GenericPresenter<?, ?, ?, ?>, Proxy_ extends Proxy<P>>
         implements ProxyPlace<P>, HasHandlerContainer {
     /**
      * Hides {@link com.gwtplatform.mvp.client.HandlerContainer#bind()} and
@@ -120,7 +120,7 @@ public class ProxyPlaceAbstract<P extends GenericPresenter<?, ?, ?>, Proxy_ exte
     }
 
     @Override
-    public void getRawPresenter(NotifyingAsyncCallback<GenericPresenter<?, ?, ?>> callback) {
+    public void getRawPresenter(NotifyingAsyncCallback<GenericPresenter<?, ?, ?, ?>> callback) {
         proxy.getRawPresenter(callback);
     }
 
@@ -296,7 +296,7 @@ public class ProxyPlaceAbstract<P extends GenericPresenter<?, ?, ?>, Proxy_ exte
     }
 
     @Override
-    public void manualReveal(GenericPresenter<?, ?, ?> presenter) {
+    public void manualReveal(GenericPresenter<?, ?, ?, ?> presenter) {
         // Reveal only if there are no pending navigation requests
         if (!placeManager.hasPendingNavigation()) {
             if (!presenter.isVisible()) {

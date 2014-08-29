@@ -13,9 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.gwtplatform.mvp.client.presenter;
+package com.gwtplatform.mvp.client.presenter.slots;
 
 import com.gwtplatform.mvp.client.GenericPresenterWidget;
 
-public class Slot<T extends GenericPresenterWidget<AbstractSlot<?>, ?>> extends AbstractSlot<T> {
+public abstract class MultiSlot<T extends GenericPresenterWidget<? extends AbstractSlot<?>, MultiSlot<?>, ?>> extends
+        AbstractSlot<T> {
 }

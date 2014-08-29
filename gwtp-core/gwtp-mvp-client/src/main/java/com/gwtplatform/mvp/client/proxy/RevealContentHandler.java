@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.GenericPresenter;
  *
  * @param <T> The Presenter's type.
  */
-public class RevealContentHandler<T extends GenericPresenter<?, ?, ?>> implements EventHandler {
+public class RevealContentHandler<T extends GenericPresenter<?, ?, ?, ?>> implements EventHandler {
 
     private final EventBus eventBus;
     private final ProxyImpl<T> proxy;

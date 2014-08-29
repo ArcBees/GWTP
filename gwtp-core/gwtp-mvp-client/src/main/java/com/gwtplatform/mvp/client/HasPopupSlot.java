@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client;
 
-public interface HasPopupSlot<S> {
+public interface HasPopupSlot<S, M> {
 
     /**
      * This method sets some popup content within the {@link Presenter} and
@@ -31,7 +31,7 @@ public interface HasPopupSlot<S> {
      * @param child The popup child, a {@link PresenterWidget}.
      * @see #addToPopupSlot(PresenterWidget)
      */
-    void addToPopupSlot(final GenericPresenterWidget<S,? extends PopupView> child);
+    void addToPopupSlot(final GenericPresenterWidget<S, M, ? extends PopupView> child);
 
     /**
      * This method removes popup content within the {@link Presenter}. The view
@@ -41,7 +41,7 @@ public interface HasPopupSlot<S> {
      *              previously been added using {@link #addToPopupSlot(PresenterWidget)}
      *              or {@link #addToPopupSlot(PresenterWidget, boolean)}
      */
-    void removeFromPopupSlot(final GenericPresenterWidget<S,? extends PopupView> child);
+    void removeFromPopupSlot(final GenericPresenterWidget<S, M,? extends PopupView> child);
 
     /**
      * This method sets some popup content within the {@link Presenter}. The view
@@ -59,5 +59,5 @@ public interface HasPopupSlot<S> {
      * @deprecated - Use {@link #addToPopupSlot(PresenterWidget)} instead. Center no longer as any affect.
      */
     @Deprecated
-    void addToPopupSlot(final GenericPresenterWidget<S,? extends PopupView> child, boolean center);
+    void addToPopupSlot(final GenericPresenterWidget<S, M, ? extends PopupView> child, boolean center);
 }

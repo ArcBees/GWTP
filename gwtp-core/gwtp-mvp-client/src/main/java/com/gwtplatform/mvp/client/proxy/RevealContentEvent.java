@@ -48,15 +48,15 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
      * @param content The {@link Presenter} that wants to set itself as content in his parent.
      */
     public static void fire(final HasHandlers source, final Type<RevealContentHandler<?>> type,
-            final GenericPresenter<?, ?, ?> content) {
+            final GenericPresenter<?, ?, ?, ?> content) {
         source.fireEvent(new RevealContentEvent(type, content));
     }
 
-    private final GenericPresenter<?, ?, ?> content;
+    private final GenericPresenter<?, ?, ?, ?> content;
 
     private final Type<RevealContentHandler<?>> type;
 
-    public RevealContentEvent(Type<RevealContentHandler<?>> type, GenericPresenter<?, ?, ?> content) {
+    public RevealContentEvent(Type<RevealContentHandler<?>> type, GenericPresenter<?, ?, ?, ?> content) {
         this.type = type;
         this.content = content;
     }
@@ -66,7 +66,7 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
         return type;
     }
 
-    public GenericPresenter<?, ?, ?> getContent() {
+    public GenericPresenter<?, ?, ?, ?> getContent() {
         return content;
     }
 

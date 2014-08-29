@@ -132,8 +132,8 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  */
 @Singleton
 public abstract class GenericPresenter
-        <S, V extends View, Proxy_ extends Proxy<?>>
-        extends GenericPresenterWidget<S,V> {
+        <S, M extends S, V extends View, Proxy_ extends Proxy<?>>
+        extends GenericPresenterWidget<S, M,V> {
     /**
      * The light-weight {@link Proxy} around this presenter.
      */
@@ -376,7 +376,7 @@ public abstract class GenericPresenter
             } else if (getRevealType().isRootLayout()) {
                 RevealRootLayoutContentEvent.fire(this, this);
             } else if (getRevealType().isRootPopup()) {
-                RevealRootPopupContentEvent.fire(this, (GenericPresenterWidget<Object, PopupView>) this);
+                RevealRootPopupContentEvent.fire(this, (GenericPresenterWidget<?, ?, PopupView>) this);
             }
         } else {
             RevealContentEvent.fire(this, getSlot(), this);

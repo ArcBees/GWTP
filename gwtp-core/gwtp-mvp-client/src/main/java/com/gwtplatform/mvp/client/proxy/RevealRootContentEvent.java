@@ -45,7 +45,7 @@ public final class RevealRootContentEvent extends
      * @param source  The source that fires this event ({@link HasHandlers}).
      * @param content The {@link Presenter} that wants to set itself as root content.
      */
-    public static void fire(final HasHandlers source, final GenericPresenter<?, ?, ?> content) {
+    public static void fire(final HasHandlers source, final GenericPresenter<?, ?, ?, ?> content) {
         source.fireEvent(new RevealRootContentEvent(content));
     }
 
@@ -53,9 +53,9 @@ public final class RevealRootContentEvent extends
         return TYPE;
     }
 
-    private final GenericPresenter<?, ?, ?> content;
+    private final GenericPresenter<?, ?, ?, ?> content;
 
-    public RevealRootContentEvent(GenericPresenter<?, ?, ?> content) {
+    public RevealRootContentEvent(GenericPresenter<?, ?, ?, ?> content) {
         this.content = content;
     }
 
@@ -64,7 +64,7 @@ public final class RevealRootContentEvent extends
         return getType();
     }
 
-    public GenericPresenter<?, ?, ?> getContent() {
+    public GenericPresenter<?, ?, ?, ?> getContent() {
         return content;
     }
 
