@@ -77,7 +77,7 @@ public abstract class ViewImpl implements View {
     @Override
     public void removeFromSlot(Object slot, IsWidget content) {
         if (singleSlots.containsKey(slot)) {
-            if (singleSlots.get(slot).getWidget() == content) {
+            if (singleSlots.get(slot).getWidget() == content.asWidget()) {
                 singleSlots.get(slot).setWidget(null);
             }
         } else if (multiSlots.containsKey(slot)) {
