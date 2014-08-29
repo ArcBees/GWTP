@@ -209,7 +209,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> content) {
+    public void setInSlot(Object slot, GenericPresenterWidget<Object, ?> content) {
         super.setInSlot(slot, content);
 
         // TODO: Consider switching this to an event bus based mechanism where the

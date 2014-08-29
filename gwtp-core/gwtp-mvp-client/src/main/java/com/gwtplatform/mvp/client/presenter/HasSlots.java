@@ -15,5 +15,15 @@
  */
 package com.gwtplatform.mvp.client.presenter;
 
-public class Slot<T extends PresenterWidget<?>> extends AbstractSlot<T> {
+import java.util.Set;
+import java.util.SortedSet;
+
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.gwtplatform.mvp.client.GenericPresenterWidget;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+
+public interface HasSlots extends com.gwtplatform.mvp.client.HasSlots<AbstractSlot<?>> {
+    <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot);
+    <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot);
+    void setInSlot(Type<RevealContentHandler<?>> slot, GenericPresenterWidget<?,?> content);
 }

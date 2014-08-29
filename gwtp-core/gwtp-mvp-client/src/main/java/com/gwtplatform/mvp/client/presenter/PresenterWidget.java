@@ -14,9 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client;
+package com.gwtplatform.mvp.client.presenter;
+
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.GenericPresenterWidget;
+import com.gwtplatform.mvp.client.PopupView;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
 
 /**
  * A presenter that does not have to be a singleton. Pages from your
@@ -90,14 +98,24 @@ import com.google.web.bindery.event.shared.EventBus;
  *
  * @param <V> The {@link View} type.
  */
-@Deprecated
-public abstract class PresenterWidget<V extends View> extends GenericPresenterWidget<Object, V> {
+public abstract class PresenterWidget<V extends View> extends GenericPresenterWidget<AbstractSlot<?>, V>
+    implements HasSlots {
     public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
         super(autoBind, eventBus, view);
     }
 
     public PresenterWidget(EventBus eventBus, V view) {
         super(eventBus, view);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot) {
+        return unsafeGetChildren(slot);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
+        return new TreeSet<T>(unsafeGetChildren(slot));
     }
 }
 

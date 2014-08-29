@@ -30,6 +30,7 @@ import com.gwtplatform.mvp.client.Presenter;
  *
  * @param <T> The Presenter's type.
  */
+@Deprecated
 public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHandler {
 
     private final EventBus eventBus;

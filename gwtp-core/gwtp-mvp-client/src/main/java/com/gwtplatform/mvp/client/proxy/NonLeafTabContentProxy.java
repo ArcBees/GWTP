@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
+import com.gwtplatform.mvp.client.GenericPresenter;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.TabData;
 
@@ -38,7 +39,7 @@ import com.gwtplatform.mvp.client.TabData;
  * @param <P> The type of the {@link Presenter} associated with this proxy.
  * @see com.gwtplatform.mvp.client.annotations.TabInfo TabInfo
  */
-public interface NonLeafTabContentProxy<P extends Presenter<?, ?>> extends TabContentProxy<P> {
+public interface NonLeafTabContentProxy<P extends GenericPresenter<?, ?, ?, ?>> extends TabContentProxy<P> {
 
     /**
      * Changes the data and target history token associated with this tab. This will automatically

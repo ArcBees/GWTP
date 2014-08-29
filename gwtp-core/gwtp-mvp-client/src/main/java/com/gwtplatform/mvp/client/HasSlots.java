@@ -16,10 +16,6 @@
 
 package com.gwtplatform.mvp.client;
 
-import java.util.Set;
-
-import com.gwtplatform.mvp.client.presenter.AbstractSlot;
-
 /**
  * Interface of objects containing slots in which {@link PresenterWidget} can
  * be inserted.
@@ -40,7 +36,7 @@ import com.gwtplatform.mvp.client.presenter.AbstractSlot;
  *   = new Type&lt;RevealContentHandler&lt;?&gt;&gt;();
  * </pre>
  */
-public interface HasSlots {
+public interface HasSlots<S> {
     /**
      * This method adds some content in a specific slot of the {@link Presenter}.
      * The attached {@link View} should manage this slot when its
@@ -57,8 +53,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not add anything.
      */
-    @Deprecated
-    void addToSlot(Object slot, PresenterWidget<?> content);
+    void addToSlot(S slot, GenericPresenterWidget<S,?> content);
 
     /**
      * This method clears the content in a specific slot. No
@@ -72,8 +67,7 @@ public interface HasSlots {
      *
      * @param slot An opaque object identifying which slot to clear.
      */
-    @Deprecated
-    void clearSlot(Object slot);
+    void clearSlot(S slot);
 
     /**
      * This method removes some content in a specific slot of the
@@ -89,8 +83,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not remove anything.
      */
-    @Deprecated
-    void removeFromSlot(Object slot, PresenterWidget<?> content);
+    void removeFromSlot(S slot, GenericPresenterWidget<S,?> content);
 
     /**
      * This method sets some content in a specific slot of the {@link Presenter}.
@@ -105,8 +98,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will clear the slot.
      */
-    @Deprecated
-    void setInSlot(Object slot, PresenterWidget<?> content);
+    void setInSlot(S slot, GenericPresenterWidget<S,?> content);
 
     /**
      * This method sets some content in a specific slot of the {@link Presenter}.
@@ -126,16 +118,5 @@ public interface HasSlots {
      *                     after the content has been added and this presenter is visible, pass
      *                     {@code false} otherwise.
      */
-    @Deprecated
-    void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset);
-
-    <T extends PresenterWidget<?>> void addToSlot(T content, AbstractSlot<T> slot);
-
-    <T extends PresenterWidget<?>> void removeFromSlot(T content, AbstractSlot<T> slot);
-
-    <T extends PresenterWidget<?>> void setInSlot(T content, AbstractSlot<T> slot);
-
-    <T extends PresenterWidget<?>> void setInSlot(T content, AbstractSlot<T> slot, boolean performReset);
-
-    <T extends PresenterWidget<?>> Set<T> getSlotsChildren(AbstractSlot<T> slot);
+    void setInSlot(S slot, GenericPresenterWidget<S,?> content, boolean performReset);
 }

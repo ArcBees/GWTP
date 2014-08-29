@@ -18,6 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+import com.gwtplatform.mvp.client.GenericPresenterWidget;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
@@ -37,16 +38,16 @@ public final class RevealRootPopupContentEvent extends
         GwtEvent<RevealRootPopupContentHandler> {
 
     private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
-    private final PresenterWidget<? extends PopupView> content;
+    private final GenericPresenterWidget<Object, ? extends PopupView> content;
 
     public RevealRootPopupContentEvent(
-            PresenterWidget<? extends PopupView> content) {
+           GenericPresenterWidget<Object, ? extends PopupView> content) {
         this.content = content;
     }
 
     @Deprecated
     public RevealRootPopupContentEvent(
-            PresenterWidget<? extends PopupView> content, boolean center) {
+           GenericPresenterWidget<Object, ? extends PopupView> content, boolean center) {
         this(content);
     }
 
@@ -61,7 +62,7 @@ public final class RevealRootPopupContentEvent extends
      *            wants to set itself as root content.
      */
     public static void fire(final HasHandlers source,
-            final PresenterWidget<? extends PopupView> content) {
+            final GenericPresenterWidget<Object, ? extends PopupView> content) {
         source.fireEvent(new RevealRootPopupContentEvent(content));
     }
 
@@ -79,7 +80,7 @@ public final class RevealRootPopupContentEvent extends
      */
     @Deprecated
     public static void fire(final HasHandlers source,
-            final PresenterWidget<? extends PopupView> content,
+            final GenericPresenterWidget<Object, ? extends PopupView> content,
             final boolean center) {
         fire(source, content);
     }
@@ -93,7 +94,7 @@ public final class RevealRootPopupContentEvent extends
         return getType();
     }
 
-    public PresenterWidget<? extends PopupView> getContent() {
+    public GenericPresenterWidget<Object, ? extends PopupView> getContent() {
         return content;
     }
 

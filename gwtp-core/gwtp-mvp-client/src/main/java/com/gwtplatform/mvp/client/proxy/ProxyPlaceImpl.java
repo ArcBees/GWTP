@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.GenericPresenter;
 
 /**
  * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
@@ -24,6 +24,6 @@ import com.gwtplatform.mvp.client.Presenter;
  *
  * @param <P> Type of the associated {@link Presenter}.
  */
-public class ProxyPlaceImpl<P extends Presenter<?, ?>> extends
+public class ProxyPlaceImpl<P extends GenericPresenter<?, ?, ?, ?>> extends
         ProxyPlaceAbstract<P, Proxy<P>> {
 }
