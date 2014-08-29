@@ -19,8 +19,7 @@ package com.gwtplatform.mvp.client.gin;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.GenericPresenter;
-import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.GenericPresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
@@ -240,7 +239,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (NOT a singleton).
      */
-    protected <P extends PresenterWidget<?>, V extends View> void bindPresenterWidget(
+    protected <P extends GenericPresenterWidget<?,?>, V extends View> void bindPresenterWidget(
             Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view,
             Class<? extends V> viewImpl) {
         bind(presenter).to(presenterImpl);
@@ -258,7 +257,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (NOT a singleton).
      */
-    protected <P extends PresenterWidget<?>, V extends View> void bindPresenterWidget(
+    protected <P extends GenericPresenterWidget<?, ?>, V extends View> void bindPresenterWidget(
             Class<P> presenterImpl, Class<V> view, Class<? extends V> viewImpl) {
         bind(presenterImpl);
         bind(view).to(viewImpl);
@@ -328,7 +327,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (a singleton).
      */
-    protected <P extends PresenterWidget<?>, V extends View> void bindSingletonPresenterWidget(
+    protected <P extends GenericPresenterWidget<?,?>, V extends View> void bindSingletonPresenterWidget(
             Class<P> presenter, Class<? extends P> presenterImpl, Class<V> view,
             Class<? extends V> viewImpl) {
         bind(presenter).to(presenterImpl).in(Singleton.class);
@@ -355,7 +354,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      * @param view          The {@link View} interface.
      * @param viewImpl      The {@link View} implementation (a singleton).
      */
-    protected <P extends PresenterWidget<?>, V extends View> void bindSingletonPresenterWidget(
+    protected <P extends GenericPresenterWidget<?,?>, V extends View> void bindSingletonPresenterWidget(
             Class<P> presenterImpl, Class<V> view, Class<? extends V> viewImpl) {
         bind(presenterImpl).in(Singleton.class);
         bind(view).to(viewImpl).in(Singleton.class);
