@@ -19,7 +19,7 @@ package com.gwtplatform.carstore.client.application.widget.message;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.event.DisplayMessageEvent;
-import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.presenter.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 public class MessagesPresenter extends PresenterWidget<MessagesPresenter.MyView>

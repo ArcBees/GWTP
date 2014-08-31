@@ -23,7 +23,9 @@ import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEven
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
 import com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter;
 import com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter;
-import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.presenter.Presenter;
+import com.gwtplatform.mvp.client.presenter.root.RevealType;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -42,12 +44,12 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @ProxyStandard
     interface MyProxy extends Proxy<ApplicationPresenter> {
     }
-
+    
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_MAIN_CONTENT = new Type<>();
 
-    public static final Object SLOT_MESSAGES_CONTENT = new Object();
-    public static final Object SLOT_HEADER_CONTENT = new Object();
+    public static final Slot SLOT_MESSAGES_CONTENT = new Slot();
+    public static final Slot SLOT_HEADER_CONTENT = new Slot();
 
     private final HeaderPresenter headerPresenter;
     private final MessagesPresenter messagesPresenter;

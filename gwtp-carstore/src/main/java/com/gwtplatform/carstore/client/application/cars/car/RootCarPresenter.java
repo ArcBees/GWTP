@@ -22,7 +22,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter;
-import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.presenter.Presenter;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -41,7 +42,7 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_SetCarContent = new GwtEvent
             .Type<>();
 
-    public static final Object SLOT_TAB_BAR = new Object();
+    public static final Slot SLOT_TAB_BAR = new Slot();
 
     private final NavigationTabPresenter navigationTabPresenter;
 

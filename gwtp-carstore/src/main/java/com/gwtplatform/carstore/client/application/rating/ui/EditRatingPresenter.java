@@ -36,7 +36,7 @@ import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
-import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.presenter.PresenterWidget;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class EditRatingPresenter extends PresenterWidget<MyView> implements EditRatingUiHandlers {

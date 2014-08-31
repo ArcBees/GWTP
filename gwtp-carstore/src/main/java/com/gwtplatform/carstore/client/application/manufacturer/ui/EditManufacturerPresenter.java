@@ -31,7 +31,7 @@ import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
-import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.presenter.PresenterWidget;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class EditManufacturerPresenter extends PresenterWidget<MyView> implements EditManufacturerUiHandlers {
