@@ -30,8 +30,8 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
-import com.gwtplatform.mvp.client.presenter.PresenterWidget;
 import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
@@ -605,8 +605,9 @@ public abstract class GenericPresenterWidget<S, M, V extends View>
      * Don't call this method.
      * This is a helper method used internally by GWTP.
      */
-    protected final <T extends com.gwtplatform.mvp.client.presenter.PresenterWidget<?>> Set<T>
-        unsafeGetChildren(AbstractSlot<T> slot) {
+    protected final
+        <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>> Set<T>
+        unsafeGetChildren(Class<? extends AbstractSlot<T>> slot) {
         Set<T> result = new HashSet<T>();
         for (GenericPresenterWidget<S,M, ?> child: children) {
             if (child.slot == slot) {

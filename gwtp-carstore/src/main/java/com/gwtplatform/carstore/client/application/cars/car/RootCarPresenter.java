@@ -23,6 +23,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter;
 import com.gwtplatform.mvp.client.presenter.Presenter;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
@@ -42,8 +43,10 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_SetCarContent = new GwtEvent
             .Type<>();
 
-    public static final Slot SLOT_TAB_BAR = new Slot();
-
+    static class SLOT_TAB_BAR extends SingleSlot<NavigationTabPresenter> {
+       
+    }
+    
     private final NavigationTabPresenter navigationTabPresenter;
 
     @Inject
@@ -60,6 +63,6 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     protected void onBind() {
         super.onBind();
 
-        setInSlot(SLOT_TAB_BAR, navigationTabPresenter);
+        setInSlot(SLOT_TAB_BAR.class, navigationTabPresenter);
     }
 }

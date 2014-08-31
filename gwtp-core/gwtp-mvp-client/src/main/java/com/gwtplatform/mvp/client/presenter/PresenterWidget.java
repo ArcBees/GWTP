@@ -104,7 +104,8 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
  *
  * @param <V> The {@link View} type.
  */
-public abstract class PresenterWidget<V extends View> extends GenericPresenterWidget<AbstractSlot<?>,MultiSlot<?>, V>
+public abstract class PresenterWidget<V extends View>
+    extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>,Class<? extends MultiSlot<?>>, V>
     implements HasSlots {
     public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
         super(autoBind, eventBus, view);
@@ -115,17 +116,25 @@ public abstract class PresenterWidget<V extends View> extends GenericPresenterWi
     }
 
     @Override
-    public <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot) {
-        return unsafeGetChildren(slot);
-    }
-
-    @Override
-    public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot) {
+    public
+        <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>
+        & Comparable<T>>
+        SortedSet<T> getOrderedSlotChildren(
+            Class<? extends OrderedSlot<T>> slot) {
         return new TreeSet<T>(unsafeGetChildren(slot));
     }
 
     @Override
-    public <T extends PresenterWidget<?>> T getSlotChild(SingleSlot<T> slot) {
+    public <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>>
+        Set<T> getSlotChildren(
+            Class<? extends Slot<T>> slot) {
+        return unsafeGetChildren(slot);
+    }
+
+    @Override
+    public <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>>
+        T getSlotChild(
+            Class<? extends SingleSlot<T>> slot) {
         Iterator<T> it = unsafeGetChildren(slot).iterator();
         if (it.hasNext()) {
             return it.next();

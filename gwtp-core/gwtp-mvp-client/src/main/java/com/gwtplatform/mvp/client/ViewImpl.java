@@ -26,9 +26,8 @@ import com.google.gwt.user.client.ui.HasWidgets.ForIsWidget;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
-import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
-import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
@@ -47,8 +46,8 @@ public abstract class ViewImpl implements View {
     private Widget widget;
     private final Map<Object, HasOneWidget> singleSlots = new HashMap<Object, HasOneWidget>();
     private final Map<Object, HasWidgets.ForIsWidget> multiSlots = new HashMap<Object, HasWidgets.ForIsWidget>();
-    private final Map<OrderedSlot<?>, HasWidgets.ForIsWidget>
-        orderedSlots = new HashMap<OrderedSlot<?>, HasWidgets.ForIsWidget>();
+    private final Map<Object, HasWidgets.ForIsWidget>
+        orderedSlots = new HashMap<Object, HasWidgets.ForIsWidget>();
 
     @Override
     public void addToSlot(Object slot, IsWidget content) {
@@ -115,17 +114,6 @@ public abstract class ViewImpl implements View {
     }
 
     @Override
-    public void registerSlot(Slot<?> slot, HasWidgets.ForIsWidget container) {
-        registerUnorderedSlot(slot, container);
-    }
-
-    @Override
-    public <T extends HasWidgets.ForIsWidget & InsertPanel.ForIsWidget> void registerSlot(OrderedSlot<?> slot,
-            T container) {
-        orderedSlots.put(slot, container);
-    }
-
-    @Override
     public void registerSlot(Type<RevealContentHandler<?>> slot, ForIsWidget container) {
         registerUnorderedSlot(slot, container);
     }
@@ -139,7 +127,12 @@ public abstract class ViewImpl implements View {
     }
 
     @Override
-    public void registerHasOneWidgetSlot(Slot<?> slot, HasOneWidget container) {
+    public void registerSlot(Class<? extends AbstractSlot<?>> slot, ForIsWidget container) {
+        registerUnorderedSlot(slot, container);
+    }
+
+    @Override
+    public void registerHasOneWidgetSlot(Class<? extends AbstractSlot<?>> slot, HasOneWidget container) {
         singleSlots.put(slot, container);
     }
 
@@ -149,12 +142,8 @@ public abstract class ViewImpl implements View {
     }
 
     @Override
-    public void registerSlot(SingleSlot<?> slot, ForIsWidget container) {
-        registerUnorderedSlot(slot, container);
-    }
-
-    @Override
-    public void registerHasOneWidgetSlot(SingleSlot<?> slot, HasOneWidget container) {
-        singleSlots.put(slot, container);
+    public <T extends ForIsWidget & com.google.gwt.user.client.ui.InsertPanel.ForIsWidget> void registerOrderedSlot(
+            Class<? extends OrderedSlot<?>> slot, T container) {
+        orderedSlots.put(slot, container);
     }
 }

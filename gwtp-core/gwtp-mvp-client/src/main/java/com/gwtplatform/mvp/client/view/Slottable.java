@@ -13,11 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.gwtplatform.mvp.client.presenter.slots;
+package com.gwtplatform.mvp.client.view;
 
-import com.gwtplatform.mvp.client.GenericPresenterWidget;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
-public class OrderedSlot<T extends GenericPresenterWidget<
-    Class<? extends AbstractSlot<?>>,
-            Class<? extends MultiSlot<?>>, ?> & Comparable<T>> extends MultiSlot<T> {
+import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+@Target({ElementType.FIELD, ElementType.TYPE})
+public @interface Slottable {
+    Class<? extends AbstractSlot<?>> value();
+    String field();
 }

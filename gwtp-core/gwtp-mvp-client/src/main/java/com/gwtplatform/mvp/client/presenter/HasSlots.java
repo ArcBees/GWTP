@@ -18,14 +18,22 @@ package com.gwtplatform.mvp.client.presenter;
 import java.util.Set;
 import java.util.SortedSet;
 
+import com.gwtplatform.mvp.client.GenericPresenterWidget;
 import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
 import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 
-public interface HasSlots extends com.gwtplatform.mvp.client.HasSlots<AbstractSlot<?>, MultiSlot<?>> {
-    <T extends PresenterWidget<?>> Set<T> getSlotsChildren(Slot<T> slot);
-    <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getSlotsChildren(OrderedSlot<T> slot);
-    <T extends PresenterWidget<?>> T getSlotChild(SingleSlot<T> slot);
+public interface HasSlots
+        extends com.gwtplatform.mvp.client.HasSlots<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>> {
+
+    <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>>
+        Set<T> getSlotChildren(Class<? extends Slot<T>> slot);
+
+    <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>
+    & Comparable<T>> SortedSet<T> getOrderedSlotChildren(Class<? extends OrderedSlot<T>> slot);
+
+    <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>>
+    T getSlotChild(Class<? extends SingleSlot<T>> slot);
 }
