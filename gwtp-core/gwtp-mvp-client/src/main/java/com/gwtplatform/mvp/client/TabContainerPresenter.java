@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.slots.ISlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
@@ -49,7 +50,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ extends Proxy<?>>
         extends Presenter<V, Proxy_> {
     private final Type<RequestTabsHandler> requestTabsEventType;
-    private final Object tabContentSlot;
+    private final Class<? extends ISlot<?>> tabContentSlot;
 
     /**
      * Creates a {@link TabContainerPresenter} that uses automatic binding. This will
@@ -67,7 +68,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      * @param revealType           The {@link RevealType}.
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Class<? extends ISlot<?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
             Type<ChangeTabHandler> changeTabType, RevealType revealType) {
         this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, revealType, null);
     }
@@ -90,7 +91,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      *                             and {@see RevealContentHandler}.
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Class<? extends ISlot<?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
             Type<ChangeTabHandler> changeTabType, GwtEvent.Type<RevealContentHandler<?>> slot) {
         this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, null, slot);
     }
@@ -114,7 +115,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      *                             and {@see RevealContentHandler}.
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Class<? extends ISlot<?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
             Type<ChangeTabHandler> changeTabType, RevealType revealType, Type<RevealContentHandler<?>> slot) {
         super(eventBus, view, proxy, revealType, slot);
         this.tabContentSlot = tabContentSlot;
@@ -147,7 +148,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      *                             identify all the displayed tabs.
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
+            Class<? extends ISlot<?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType) {
         this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, null);
     }
 
@@ -168,7 +169,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      * @param revealType           The {@link RevealType}.
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Class<? extends ISlot<?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
             RevealType revealType) {
         this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, revealType, null);
     }
@@ -192,7 +193,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      *                             and {@see RevealContentHandler}.
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
-            Object tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
+            Class<? extends ISlot<?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
             GwtEvent.Type<RevealContentHandler<?>> slot) {
         this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, slot);
     }
@@ -209,8 +210,8 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
     }
 
     @Override
-    public void setInSlot(Object slot, GenericPresenterWidget<Object, Object, ?> content) {
-        super.setInSlot(slot, content);
+    public <T extends PresenterWidget<?>> void setInSlot(Class<? extends ISlot<T>> slot, T child) {
+        super.setInSlot(slot, child);
 
         // TODO: Consider switching this to an event bus based mechanism where the
         // child presenter fires an event when it is revealed and the parent highlights the tab.
@@ -218,7 +219,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
         // If we're setting a presenter attached to an actual slot, then highlight the tab
         if (slot == tabContentSlot) {
             try {
-                Presenter<?, ?> presenter = (Presenter<?, ?>) content;
+                Presenter<?, ?> presenter = (Presenter<?, ?>) child;
                 TabContentProxy<?> proxy = (TabContentProxy<?>) presenter.getProxy();
                 getView().setActiveTab(proxy.getTab());
             } catch (Exception e) {

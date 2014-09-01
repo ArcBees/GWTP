@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.LockInteractionHandler;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -101,7 +102,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
 
         @Override
         public void setInSlot(Object slot, IsWidget content) {
-            assert slot == rootSlot : "Unknown slot used in the root proxy.";
+            assert slot == ROOT_SLOT.class : "Unknown slot used in the root proxy.";
 
             if (usingRootLayoutPanel) {
                 // TODO Next 3 lines are a dirty workaround for
@@ -145,7 +146,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         }
     }
 
-    private static final Object rootSlot = new Object();
+    private static class ROOT_SLOT extends SingleSlot<PresenterWidget<?>> { };
 
     private boolean isResetting;
 
@@ -183,20 +184,20 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
     public void onRevealRootContent(
             RevealRootContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(false);
-        rawSetInSlot(rootSlot, revealContentEvent.getContent(), true);
+        setInSlot(ROOT_SLOT.class, revealContentEvent.getContent(), true);
     }
 
     @Override
     public void onRevealRootLayoutContent(
             RevealRootLayoutContentEvent revealContentEvent) {
         getView().setUsingRootLayoutPanel(true);
-        rawSetInSlot(rootSlot, revealContentEvent.getContent(), true);
+        setInSlot(ROOT_SLOT.class, revealContentEvent.getContent(), true);
     }
 
     @Override
     public void onRevealRootPopupContent(
             RevealRootPopupContentEvent revealContentEvent) {
-        addToPopupSlot((GenericPresenterWidget<Object, Object, ? extends PopupView>) revealContentEvent.getContent());
+        addToPopupSlot((PresenterWidget<? extends PopupView>) revealContentEvent.getContent());
     }
 
     @Override

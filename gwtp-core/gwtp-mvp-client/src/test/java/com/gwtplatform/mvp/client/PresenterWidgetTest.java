@@ -32,6 +32,7 @@ import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -190,6 +191,9 @@ public class PresenterWidgetTest {
     @Inject
     HandlerRegistration registrationA;
 
+    private static class SLOT_1 extends Slot<PresenterWidget<?>> { };
+    private static class SLOT_2 extends Slot<PresenterWidget<?>> { };
+
     @Before
     public void arrange() {
         when(viewA.asWidget()).thenReturn(widgetA);
@@ -322,25 +326,24 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentC) {
 
         // Given
-        Object slotBC = new Object();
         presenterWidgetA.internalReveal();
 
         // When
-        presenterWidgetA.addToSlot(slotBC, contentB);
-        presenterWidgetA.addToSlot(slotBC, contentC);
+        presenterWidgetA.addToSlot(SLOT_1.class, contentB);
+        presenterWidgetA.addToSlot(SLOT_1.class, contentC);
 
         // Then
-        verify(viewA).addToSlot(slotBC, contentB);
-        verify(viewA).addToSlot(slotBC, contentC);
+        verify(viewA).addToSlot(SLOT_1.class, contentB);
+        verify(viewA).addToSlot(SLOT_1.class, contentC);
 
         assertEquals(1, contentB.onRevealMethodCalled);
         assertEquals(1, contentC.onRevealMethodCalled);
 
         // and When
-        presenterWidgetA.clearSlot(slotBC);
+        presenterWidgetA.clearSlot(SLOT_1.class);
 
         // Then
-        verify(viewA).setInSlot(slotBC, null);
+        verify(viewA).setInSlot(SLOT_1.class, null);
 
         assertEquals(1, contentB.onHideMethodCalled);
         assertEquals(1, contentC.onHideMethodCalled);
@@ -373,15 +376,14 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Object slotB = new Object();
         presenterWidgetA.internalReveal();
-        presenterWidgetA.setInSlot(slotB, contentB);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentB);
 
         // When
-        presenterWidgetA.clearSlot(slotB);
+        presenterWidgetA.clearSlot(SLOT_1.class);
 
         // Then
-        verify(viewA).setInSlot(slotB, null);
+        verify(viewA).setInSlot(SLOT_1.class, null);
 
         assertEquals(1, contentB.onHideMethodCalled);
 
@@ -397,19 +399,17 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Object slotA = new Object();
-        Object slotB = new Object();
         presenterWidgetA.internalReveal();
 
         // When
-        presenterWidgetA.setInSlot(slotA, contentB);
-        presenterWidgetA.setInSlot(slotB, contentB);
-        presenterWidgetA.clearSlot(slotB);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentB);
+        presenterWidgetA.setInSlot(SLOT_2.class, contentB);
+        presenterWidgetA.clearSlot(SLOT_1.class);
         contentB.internalReveal();
         presenterWidgetA.internalHide();
 
         // Then
-        assertTrue(contentB.isVisible());
+        assertTrue(!contentB.isVisible());
     }
 
     @Test
@@ -418,16 +418,15 @@ public class PresenterWidgetTest {
             PresenterWidgetB contentB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotBC = new Object();
         presenterWidgetA.internalReveal();
-        presenterWidgetA.addToSlot(slotBC, contentB);
-        presenterWidgetA.addToSlot(slotBC, contentC);
+        presenterWidgetA.addToSlot(SLOT_1.class, contentB);
+        presenterWidgetA.addToSlot(SLOT_1.class, contentC);
 
         // When
-        presenterWidgetA.removeFromSlot(slotBC, contentB);
+        presenterWidgetA.removeFromSlot(SLOT_1.class, contentB);
 
         // Then
-        verify(viewA).removeFromSlot(slotBC, contentB);
+        verify(viewA).removeFromSlot(SLOT_1.class, contentB);
 
         assertEquals(1, contentB.onHideMethodCalled);
         assertEquals(0, contentC.onHideMethodCalled);
@@ -440,18 +439,16 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
         // When
-        presenterWidgetA.setInSlot(slotB, contentB);
-        contentB.setInSlot(slotC, contentCinB);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentB);
+        contentB.setInSlot(SLOT_2.class, contentCinB);
 
         // Then
-        verify(viewA).setInSlot(slotB, contentB);
-        verify(viewB).setInSlot(slotC, contentCinB);
+        verify(viewA).setInSlot(SLOT_1.class, contentB);
+        verify(viewB).setInSlot(SLOT_2.class, contentCinB);
 
         assertEquals(0, contentB.onRevealMethodCalled);
         assertEquals(0, contentCinB.onRevealMethodCalled);
@@ -480,23 +477,21 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
         // When
-        contentB.setInSlot(slotC, contentCinB);
+        contentB.setInSlot(SLOT_1.class, contentCinB);
 
         // Then
-        verify(viewB).setInSlot(slotC, contentCinB);
+        verify(viewB).setInSlot(SLOT_1.class, contentCinB);
         assertEquals(0, contentCinB.onRevealMethodCalled);
 
         // and then When
-        presenterWidgetA.setInSlot(slotB, contentB);
+        presenterWidgetA.setInSlot(SLOT_2.class, contentB);
 
         // Then
-        verify(viewA).setInSlot(slotB, contentB);
+        verify(viewA).setInSlot(SLOT_2.class, contentB);
         assertEquals(0, contentB.onRevealMethodCalled);
 
         // and then When
@@ -523,17 +518,15 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
 
         // Given
-        Object slotB = new Object();
-        Object slotC = new Object();
         presenterWidgetA.internalReveal();
 
         // When
-        presenterWidgetA.setInSlot(slotB, contentB);
-        contentB.setInSlot(slotC, contentCinB);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentB);
+        contentB.setInSlot(SLOT_2.class, contentCinB);
 
         // Then
-        verify(viewA).setInSlot(slotB, contentB);
-        verify(viewB).setInSlot(slotC, contentCinB);
+        verify(viewA).setInSlot(SLOT_1.class, contentB);
+        verify(viewB).setInSlot(SLOT_2.class, contentCinB);
 
         // Then
         assertEquals(1, contentB.onRevealMethodCalled);
@@ -556,17 +549,15 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentC) {
         // Given
         // slot is empty in presenterWidget, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
         assertFalse(presenterWidgetA.isVisible());
 
         // When
-        presenterWidgetA.setInSlot(slotB, contentB);
-        presenterWidgetA.setInSlot(slotC, contentC);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentB);
+        presenterWidgetA.setInSlot(SLOT_2.class, contentC);
 
         // Then
-        verify(viewA).setInSlot(slotB, contentB);
-        verify(viewA).setInSlot(slotC, contentC);
+        verify(viewA).setInSlot(SLOT_1.class, contentB);
+        verify(viewA).setInSlot(SLOT_2.class, contentC);
 
         assertEquals(0, contentB.onRevealMethodCalled);
         assertEquals(0, contentC.onRevealMethodCalled);
@@ -594,17 +585,15 @@ public class PresenterWidgetTest {
             PresenterWidgetB contentB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotB = new Object();
-        Object slotC = new Object();
         presenterWidgetA.internalReveal();
 
         // When
-        presenterWidgetA.setInSlot(slotB, contentB);
-        presenterWidgetA.setInSlot(slotC, contentC);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentB);
+        presenterWidgetA.setInSlot(SLOT_2.class, contentC);
 
         // Then
-        verify(viewA).setInSlot(slotB, contentB);
-        verify(viewA).setInSlot(slotC, contentC);
+        verify(viewA).setInSlot(SLOT_1.class, contentB);
+        verify(viewA).setInSlot(SLOT_2.class, contentC);
 
         assertEquals(1, contentB.onRevealMethodCalled);
         assertEquals(1, contentC.onRevealMethodCalled);
@@ -624,15 +613,14 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Object slotB = new Object();
         presenterWidgetA.internalReveal();
-        presenterWidgetA.setInSlot(slotB, contentB);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentB);
 
         // When
-        presenterWidgetA.setInSlot(slotB, null);
+        presenterWidgetA.setInSlot(SLOT_1.class, null);
 
         // Then
-        verify(viewA).setInSlot(slotB, null);
+        verify(viewA).setInSlot(SLOT_1.class, null);
 
         assertEquals(1, contentB.onHideMethodCalled);
 
@@ -686,14 +674,12 @@ public class PresenterWidgetTest {
             PresenterWidgetB presenterWidgetB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotCinA = new Object();
-        Object slotCinB = new Object();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 
         // When
-        presenterWidgetA.setInSlot(slotCinA, contentC);
-        presenterWidgetB.setInSlot(slotCinB, contentC);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentC);
+        presenterWidgetB.setInSlot(SLOT_2.class, contentC);
         presenterWidgetB.internalHide();
 
         // Then
@@ -706,16 +692,14 @@ public class PresenterWidgetTest {
             PresenterWidgetB presenterWidgetB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotCinA = new Object();
-        Object slotCinB = new Object();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 
         // When
-        presenterWidgetA.setInSlot(slotCinA, contentC);
-        presenterWidgetB.setInSlot(slotCinB, contentC);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentC);
+        presenterWidgetB.setInSlot(SLOT_2.class, contentC);
         presenterWidgetB.internalHide();
-        presenterWidgetA.setInSlot(slotCinA, contentC);
+        presenterWidgetA.setInSlot(SLOT_1.class, contentC);
 
         // Then
         assertTrue(contentC.isVisible());

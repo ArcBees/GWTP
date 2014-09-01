@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ISlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
@@ -92,7 +92,7 @@ public interface View extends IsWidget {
      * @param slot - the slot
      * @param container - the container must implement HasWidgets.ForIsWidget.
      */
-    void registerSlot(Class<? extends AbstractSlot<?>> slot, HasWidgets.ForIsWidget container);
+    void registerSlot(Class<? extends ISlot<?>> slot, HasWidgets.ForIsWidget container);
 
     /**
      * This is a helper method to allow slots to be linked to HasOneWidget fields.
@@ -100,7 +100,7 @@ public interface View extends IsWidget {
      * @param slot - the slot
      * @param container - the HasOneWidget container.
      */
-    void registerHasOneWidgetSlot(Class<? extends AbstractSlot<?>> slot, HasOneWidget container);
+    void registerHasOneWidgetSlot(Class<? extends ISlot<?>> slot, HasOneWidget container);
 
     /**
      * Legacy method for dealing with @ContentSlot slots.

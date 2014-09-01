@@ -22,7 +22,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter;
-import com.gwtplatform.mvp.client.presenter.Presenter;
+import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.View;

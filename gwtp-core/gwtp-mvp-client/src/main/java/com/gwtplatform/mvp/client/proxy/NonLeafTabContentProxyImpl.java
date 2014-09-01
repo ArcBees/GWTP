@@ -19,7 +19,6 @@ package com.gwtplatform.mvp.client.proxy;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.gwtplatform.mvp.client.ChangeTabEvent;
 import com.gwtplatform.mvp.client.ChangeTabHandler;
-import com.gwtplatform.mvp.client.GenericPresenter;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsEvent;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
@@ -29,7 +28,7 @@ import com.gwtplatform.mvp.client.TabData;
 /**
  * @param <T> The Presenter's type.
  */
-public class NonLeafTabContentProxyImpl<T extends GenericPresenter<?, ?, ?, ?>> extends ProxyImpl<T>
+public class NonLeafTabContentProxyImpl<T extends Presenter<?, ?>> extends ProxyImpl<T>
         implements NonLeafTabContentProxy<T> {
 
     protected TabData tabData;

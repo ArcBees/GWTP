@@ -20,7 +20,7 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.GenericPresenter;
+import com.gwtplatform.mvp.client.Presenter;
 
 /**
  * This is the handler class for {@link RevealContentEvent}. It should be used
@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.GenericPresenter;
  *
  * @param <T> The Presenter's type.
  */
-public class RevealContentHandler<T extends GenericPresenter<?, ?, ?, ?>> implements EventHandler {
+public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHandler {
 
     private final EventBus eventBus;
     private final ProxyImpl<T> proxy;

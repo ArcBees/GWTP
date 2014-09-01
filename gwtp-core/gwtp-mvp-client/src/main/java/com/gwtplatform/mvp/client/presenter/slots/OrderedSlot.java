@@ -15,7 +15,7 @@
  */
 package com.gwtplatform.mvp.client.presenter.slots;
 
-import com.gwtplatform.mvp.client.GenericPresenterWidget;
+import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
  * A slot for an ordered presenter.
@@ -23,7 +23,5 @@ import com.gwtplatform.mvp.client.GenericPresenterWidget;
  * be automatically placed in order in the view.
  * @param <T> - The type of presenter, must extend comparable.
  */
-public class OrderedSlot<T extends GenericPresenterWidget<
-    Class<? extends AbstractSlot<?>>,
-            Class<? extends MultiSlot<?>>, ?> & Comparable<T>> extends MultiSlot<T> {
+public class OrderedSlot<T extends PresenterWidget<?> & Comparable<T>> implements MultiSlot<T> {
 }

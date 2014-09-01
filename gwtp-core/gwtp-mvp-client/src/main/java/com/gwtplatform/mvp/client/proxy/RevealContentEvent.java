@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-import com.gwtplatform.mvp.client.GenericPresenter;
+import com.gwtplatform.mvp.client.Presenter;
 
 /**
  * This event is fired by a {@link com.gwtplatform.mvp.client.Presenter} that desires to reveal itself
@@ -48,15 +48,15 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
      * @param content The {@link Presenter} that wants to set itself as content in his parent.
      */
     public static void fire(final HasHandlers source, final Type<RevealContentHandler<?>> type,
-            final GenericPresenter<?, ?, ?, ?> content) {
+            final Presenter<?, ?> content) {
         source.fireEvent(new RevealContentEvent(type, content));
     }
 
-    private final GenericPresenter<?, ?, ?, ?> content;
+    private final Presenter<?, ?> content;
 
     private final Type<RevealContentHandler<?>> type;
 
-    public RevealContentEvent(Type<RevealContentHandler<?>> type, GenericPresenter<?, ?, ?, ?> content) {
+    public RevealContentEvent(Type<RevealContentHandler<?>> type, Presenter<?, ?> content) {
         this.type = type;
         this.content = content;
     }
@@ -66,7 +66,7 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
         return type;
     }
 
-    public GenericPresenter<?, ?, ?, ?> getContent() {
+    public Presenter<?, ?> getContent() {
         return content;
     }
 

@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-import com.gwtplatform.mvp.client.GenericPresenter;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
@@ -45,7 +44,7 @@ public final class RevealRootContentEvent extends
      * @param source  The source that fires this event ({@link HasHandlers}).
      * @param content The {@link Presenter} that wants to set itself as root content.
      */
-    public static void fire(final HasHandlers source, final GenericPresenter<?, ?, ?, ?> content) {
+    public static void fire(final HasHandlers source, final Presenter<?, ?> content) {
         source.fireEvent(new RevealRootContentEvent(content));
     }
 
@@ -53,9 +52,9 @@ public final class RevealRootContentEvent extends
         return TYPE;
     }
 
-    private final GenericPresenter<?, ?, ?, ?> content;
+    private final Presenter<?, ?> content;
 
-    public RevealRootContentEvent(GenericPresenter<?, ?, ?, ?> content) {
+    public RevealRootContentEvent(Presenter<?, ?> content) {
         this.content = content;
     }
 
@@ -64,7 +63,7 @@ public final class RevealRootContentEvent extends
         return getType();
     }
 
-    public GenericPresenter<?, ?, ?, ?> getContent() {
+    public Presenter<?, ?> getContent() {
         return content;
     }
 

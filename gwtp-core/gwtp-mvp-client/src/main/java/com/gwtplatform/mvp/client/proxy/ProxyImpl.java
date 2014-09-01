@@ -22,12 +22,12 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.common.client.IndirectProvider;
-import com.gwtplatform.mvp.client.GenericPresenter;
+import com.gwtplatform.mvp.client.Presenter;
 
 /**
  * @param <P> The presenter's type.
  */
-public class ProxyImpl<P extends GenericPresenter<?, ?, ?, ?>> implements Proxy<P> {
+public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
     protected IndirectProvider<P> presenter;
     protected EventBus eventBus;
@@ -47,7 +47,7 @@ public class ProxyImpl<P extends GenericPresenter<?, ?, ?, ?>> implements Proxy<
 
     @SuppressWarnings("unchecked")
     @Override
-    public void getRawPresenter(NotifyingAsyncCallback<GenericPresenter<?, ?, ?, ?>> callback) {
+    public void getRawPresenter(NotifyingAsyncCallback<Presenter<?, ?>> callback) {
         callback.prepare();
         presenter.get((AsyncCallback<P>) callback);
         callback.checkLoading();

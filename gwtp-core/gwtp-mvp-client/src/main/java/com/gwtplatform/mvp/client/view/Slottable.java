@@ -18,9 +18,9 @@ package com.gwtplatform.mvp.client.view;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ISlot;
 @Target({ElementType.FIELD, ElementType.TYPE})
 public @interface Slottable {
-    Class<? extends AbstractSlot<?>> value();
+    Class<? extends ISlot<?>> value();
     String field();
 }

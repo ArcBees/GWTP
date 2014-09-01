@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.HasWidgets.ForIsWidget;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.presenter.slots.AbstractSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ISlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
@@ -124,12 +124,12 @@ public abstract class ViewImpl implements View {
     }
 
     @Override
-    public void registerSlot(Class<? extends AbstractSlot<?>> slot, ForIsWidget container) {
+    public void registerSlot(Class<? extends ISlot<?>> slot, ForIsWidget container) {
         registerUnorderedSlot(slot, container);
     }
 
     @Override
-    public void registerHasOneWidgetSlot(Class<? extends AbstractSlot<?>> slot, HasOneWidget container) {
+    public void registerHasOneWidgetSlot(Class<? extends ISlot<?>> slot, HasOneWidget container) {
         singleSlots.put(slot, container);
     }
 
