@@ -16,7 +16,10 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -48,29 +51,23 @@ public abstract class ViewImpl implements View {
     private final Map<Object, HasWidgets.ForIsWidget> multiSlots = new HashMap<Object, HasWidgets.ForIsWidget>();
     private final Map<Object, HasWidgets.ForIsWidget>
         orderedSlots = new HashMap<Object, HasWidgets.ForIsWidget>();
+    private final Map<Object, List<Comparable<Comparable<?>>>>
+    orderedSlotComparators = new HashMap<Object, List<Comparable<Comparable<?>>>>();
 
     @Override
     public void addToSlot(Object slot, IsWidget content) {
         if (multiSlots.containsKey(slot)) {
             multiSlots.get(slot).add(content);
         } else if (orderedSlots.containsKey(slot)) {
-            InsertPanel.ForIsWidget container = (InsertPanel.ForIsWidget) orderedSlots.get(slot);
-            Comparable w = (Comparable) content;
-            int min = 0;
-            int max = container.getWidgetCount();
-            while (min < max) {
-                int mid = min + ((max - min) / 2);
-                int compare = w.compareTo(container.getWidget(mid));
-                if (compare == 0) {
-                    max = mid;
-                    break;
-                } else if (compare > 0) {
-                    min = mid + 1;
-                } else {
-                    max = mid;
-                }
+            if (!orderedSlotComparators.containsKey(slot)) {
+                orderedSlotComparators.put(slot, new ArrayList<Comparable<Comparable<?>>>());
             }
-            container.insert(content, max);
+            orderedSlotComparators.get(slot).add((Comparable<Comparable<?>>) content);
+            Collections.sort(orderedSlotComparators.get(slot));
+            int index = Collections.binarySearch(orderedSlotComparators.get(slot),
+                    (Comparable<Comparable<?>>) content);
+            InsertPanel.ForIsWidget container = (InsertPanel.ForIsWidget) orderedSlots.get(slot);
+            container.insert(content, index);
         }
     }
 
