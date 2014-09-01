@@ -47,8 +47,8 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
      *                and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
      * @param content The {@link Presenter} that wants to set itself as content in his parent.
      */
-    public static void fire(final HasHandlers source, final Type<RevealContentHandler<?>> type,
-            final Presenter<?, ?> content) {
+    public static void fire(final HasHandlers source,
+            final Type<RevealContentHandler<?>> type, final Presenter<?, ?> content) {
         source.fireEvent(new RevealContentEvent(type, content));
     }
 
@@ -56,7 +56,8 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
 
     private final Type<RevealContentHandler<?>> type;
 
-    public RevealContentEvent(Type<RevealContentHandler<?>> type, Presenter<?, ?> content) {
+    public RevealContentEvent(Type<RevealContentHandler<?>> type,
+            Presenter<?, ?> content) {
         this.type = type;
         this.content = content;
     }

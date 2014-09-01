@@ -63,7 +63,7 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
                     public void execute() {
                         presenter.forceReveal();
                         presenter.rawSetInSlot(revealContentEvent.getAssociatedType(),
-                         revealContentEvent.getContent(), true);
+                                revealContentEvent.getContent(), true);
                     }
                 });
             }

@@ -37,18 +37,6 @@ public final class RevealRootPopupContentEvent extends
         GwtEvent<RevealRootPopupContentHandler> {
 
     private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
-    private final PresenterWidget<? extends PopupView> content;
-
-    public RevealRootPopupContentEvent(
-           PresenterWidget<? extends PopupView> content) {
-        this.content = content;
-    }
-
-    @Deprecated
-    public RevealRootPopupContentEvent(
-           PresenterWidget<? extends PopupView> content, boolean center) {
-        this(content);
-    }
 
     /**
      * Fires a {@link RevealRootPopupContentEvent} into a source that has access
@@ -62,7 +50,7 @@ public final class RevealRootPopupContentEvent extends
      */
     public static void fire(final HasHandlers source,
             final PresenterWidget<? extends PopupView> content) {
-        source.fireEvent(new RevealRootPopupContentEvent(content));
+        fire(source, content, true);
     }
 
     /**
@@ -75,17 +63,32 @@ public final class RevealRootPopupContentEvent extends
      *            The {@link PresenterWidget} with a {@link PopupView} that
      *            wants to set itself as root content.
      * @param center
-     *            Does nothing.
+     *            Pass true to center the popup, otherwise its position will not
+     *            be adjusted.
      */
-    @Deprecated
     public static void fire(final HasHandlers source,
             final PresenterWidget<? extends PopupView> content,
             final boolean center) {
-        fire(source, content);
+        source.fireEvent(new RevealRootPopupContentEvent(content, center));
     }
 
     public static Type<RevealRootPopupContentHandler> getType() {
         return TYPE;
+    }
+
+    private final PresenterWidget<? extends PopupView> content;
+
+    private final boolean center;
+
+    public RevealRootPopupContentEvent(
+            PresenterWidget<? extends PopupView> content) {
+        this(content, true);
+    }
+
+    public RevealRootPopupContentEvent(
+            PresenterWidget<? extends PopupView> content, boolean center) {
+        this.content = content;
+        this.center = center;
     }
 
     @Override
@@ -97,9 +100,8 @@ public final class RevealRootPopupContentEvent extends
         return content;
     }
 
-    @Deprecated
     public boolean isCentered() {
-        return true;
+        return center;
     }
 
     @Override
