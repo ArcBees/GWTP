@@ -17,6 +17,11 @@ package com.gwtplatform.mvp.client.presenter.slots;
 
 import com.gwtplatform.mvp.client.GenericPresenterWidget;
 
+/**
+ * A slot that can take one or many presenters.
+ *
+ * @param <T> - The type of presenter this slot can take.
+ */
 public class Slot<T extends GenericPresenterWidget
 <Class<? extends AbstractSlot<?>>,
 Class<? extends MultiSlot<?>>, ?>>  extends MultiSlot<T> {

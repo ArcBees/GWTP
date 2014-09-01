@@ -79,14 +79,43 @@ public interface View extends IsWidget {
      */
     void setInSlot(Object slot, IsWidget content);
 
+    /**
+     * Legacy method for dealing with @ContentSlot slots.
+     * Pass in a slot and any widget that implements HasWidgets.ForIsWidget.
+     * @param slot - the content slot
+     * @param container - the container must implement HasWidgets.ForIsWidget.
+     */
     void registerSlot(Type<RevealContentHandler<?>> slot, HasWidgets.ForIsWidget container);
 
+    /**
+     * Link a slot to a container
+     * @param slot - the slot
+     * @param container - the container must implement HasWidgets.ForIsWidget.
+     */
     void registerSlot(Class<? extends AbstractSlot<?>> slot, HasWidgets.ForIsWidget container);
 
+    /**
+     * This is a helper method to allow slots to be linked to HasOneWidget fields.
+     * It is exactly equivalent to calling registerSlot();
+     * @param slot - the slot
+     * @param container - the HasOneWidget container.
+     */
     void registerHasOneWidgetSlot(Class<? extends AbstractSlot<?>> slot, HasOneWidget container);
 
+    /**
+     * Legacy method for dealing with @ContentSlot slots.
+     * It is exactly equivalent to calling registerSlot();
+     * @param slot - the content slot
+     * @param container - the HasOneWidget container.
+     */
     void registerHasOneWidgetSlot(Type<RevealContentHandler<?>> slot, HasOneWidget container);
 
+    /**
+     * Link an ordered slot to an indexed container.
+     * The children of the slot will be automatically placed in order.
+     * @param slot - an ordered slot.
+     * @param container - a widget that implements InsertPanel.ForIsWidget & HasWidgets.ForIsWidget.
+     */
     <T extends HasWidgets.ForIsWidget & InsertPanel.ForIsWidget> void
         registerOrderedSlot(Class<? extends OrderedSlot<?>> slot, T container);
 }

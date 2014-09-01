@@ -28,12 +28,27 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
 public interface HasSlots
         extends com.gwtplatform.mvp.client.HasSlots<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>> {
 
+    /**
+     * Gets the current children of the slot.
+     * @param slot - the slot
+     * @return the children of this slot.
+     */
     <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>>
         Set<T> getSlotChildren(Class<? extends Slot<T>> slot);
 
+    /**
+     * Gets the children of an ordered slot in order.
+     * @param slot - the slot
+     * @return the children of the slot in a sorted set.
+     */
     <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>
     & Comparable<T>> SortedSet<T> getOrderedSlotChildren(Class<? extends OrderedSlot<T>> slot);
 
+    /**
+     * Gets the child of a SingleSlot.
+     * @param slot - the slot
+     * @return the child of the slot or null if the slot is empty.
+     */
     <T extends GenericPresenterWidget<Class<? extends AbstractSlot<?>>, Class<? extends MultiSlot<?>>, ?>>
     T getSlotChild(Class<? extends SingleSlot<T>> slot);
 }
