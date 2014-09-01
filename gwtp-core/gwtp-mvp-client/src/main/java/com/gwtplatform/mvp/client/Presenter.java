@@ -130,18 +130,11 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * @param <Proxy_> The {@link Proxy} type.
  */
 @Singleton
-public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends PresenterWidget<V> {
-    /**
-     * The RevealType define which event will be fired in the default {@link #revealInParent()}.
-     * <p/>
-     * Root will fire a {@link RevealRootContentEvent}.
-     * RootLayout will fire a {@link RevealRootLayoutContentEvent}.
-     * RootPopup will fire a {@link RevealRootPopupContentEvent}.
-     */
+public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>>
+        extends PresenterWidget<V> {
+
     public enum RevealType {
-        Root,
-        RootLayout,
-        RootPopup
+        Root, RootLayout, RootPopup;
     }
 
     /**
@@ -380,22 +373,23 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * or a {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}.
      */
     protected void revealInParent() {
-        if (revealType != null) {
-            switch (revealType) {
-                case Root:
-                    RevealRootContentEvent.fire(this, this);
-                    break;
-
-                case RootLayout:
-                    RevealRootLayoutContentEvent.fire(this, this);
-                    break;
-
-                case RootPopup:
-                    RevealRootPopupContentEvent.fire(this, (PresenterWidget<PopupView>) this);
-                    break;
+        if (getRevealType() != null) {
+            switch (getRevealType()) {
+            case Root:
+                RevealRootContentEvent.fire(this, this);
+                break;
+            case RootLayout:
+                RevealRootLayoutContentEvent.fire(this, this);
+                break;
+            case RootPopup:
+                RevealRootPopupContentEvent.fire(this, (PresenterWidget<PopupView>) this);
+                break;
+            default:
+                assert false : "Unknown Reveal Type: " + getRevealType();
+                break;
             }
         } else {
-            RevealContentEvent.fire(this, slot, this);
+            RevealContentEvent.fire(this, getSlot(), this);
         }
     }
 }

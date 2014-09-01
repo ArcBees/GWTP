@@ -60,7 +60,7 @@ public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyVie
     }
 
     public void setSubPresenter() {
-        setInSlot(SLOT_SetMainContent, subPresenter);
+        rawSetInSlot(SLOT_SetMainContent, subPresenter, true);
     }
 }
 

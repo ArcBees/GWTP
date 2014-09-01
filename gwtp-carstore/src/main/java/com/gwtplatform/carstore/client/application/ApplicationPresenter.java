@@ -27,6 +27,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
@@ -42,12 +43,15 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @ProxyStandard
     interface MyProxy extends Proxy<ApplicationPresenter> {
     }
-
+    
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_MAIN_CONTENT = new Type<>();
-
-    public static final Object SLOT_MESSAGES_CONTENT = new Object();
-    public static final Object SLOT_HEADER_CONTENT = new Object();
+    
+    static class SLOT_MESSAGES_CONTENT extends SingleSlot<MessagesPresenter> {
+    }
+    
+    static class SLOT_HEADER_CONTENT extends SingleSlot<HeaderPresenter> {
+    }
 
     private final HeaderPresenter headerPresenter;
     private final MessagesPresenter messagesPresenter;
@@ -76,8 +80,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
     @Override
     protected void onBind() {
-        setInSlot(SLOT_HEADER_CONTENT, headerPresenter);
-        setInSlot(SLOT_MESSAGES_CONTENT, messagesPresenter);
+        setInSlot(SLOT_HEADER_CONTENT.class, headerPresenter);
+        setInSlot(SLOT_MESSAGES_CONTENT.class, messagesPresenter);
 
         addRegisteredHandler(ChangeActionBarEvent.getType(), this);
         addRegisteredHandler(ActionBarVisibilityEvent.getType(), this);

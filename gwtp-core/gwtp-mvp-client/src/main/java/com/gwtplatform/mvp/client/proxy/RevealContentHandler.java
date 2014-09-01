@@ -62,8 +62,8 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
                     @Override
                     public void execute() {
                         presenter.forceReveal();
-                        presenter.setInSlot(revealContentEvent.getAssociatedType(),
-                                revealContentEvent.getContent());
+                        presenter.rawSetInSlot(revealContentEvent.getAssociatedType(),
+                                revealContentEvent.getContent(), true);
                     }
                 });
             }

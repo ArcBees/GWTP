@@ -55,9 +55,9 @@ public class ApplicationMobileView extends ViewImpl implements ApplicationPresen
     public void setInSlot(Object slot, IsWidget content) {
         if (slot == ApplicationPresenter.SLOT_MAIN_CONTENT) {
             main.setWidget(content);
-        } else if (slot == ApplicationPresenter.SLOT_HEADER_CONTENT) {
+        } else if (slot == ApplicationPresenter.SLOT_HEADER_CONTENT.class) {
             header.setWidget(content);
-        } else if (slot == ApplicationPresenter.SLOT_MESSAGES_CONTENT) {
+        } else if (slot == ApplicationPresenter.SLOT_MESSAGES_CONTENT.class) {
             messages.setWidget(content);
         }
     }
