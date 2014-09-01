@@ -141,9 +141,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      */
     public PresenterWidget(boolean autoBind, EventBus eventBus, V view) {
         super(autoBind);
-        if (view == null) {
-            throw new IllegalArgumentException("view cannot be null");
-        }
+
+        assert view != null : "presenter view cannot be null";
         this.eventBus = eventBus;
         this.view = view;
     }
@@ -173,9 +172,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
     @Override
     public void addToSlot(Object slot, PresenterWidget<?> child) {
-        if (child == null) {
-            throw new IllegalArgumentException("Can't add null to a slot");
-        }
+        assert child != null : "cannot add null to a slot";
 
         if (child.slot == slot && child.parent == this) {
             return;
@@ -183,10 +180,10 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
         adoptChild(slot, child);
 
-        if (!child.isPopup()) {
-            getView().addToSlot(slot, child);
-        } else {
+        if (child.isPopup()) {
             monitorCloseEvent((PresenterWidget<? extends PopupView>) child);
+        } else {
+            getView().addToSlot(slot, child);
         }
         if (isVisible()) {
             child.internalReveal();
