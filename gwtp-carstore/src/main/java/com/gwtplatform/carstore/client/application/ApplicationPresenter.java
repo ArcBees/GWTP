@@ -16,7 +16,6 @@
 
 package com.gwtplatform.carstore.client.application;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEvent;
@@ -27,8 +26,9 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.TypeSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy>
         implements ChangeActionBarEvent.ChangeActionBarHandler, ActionBarVisibilityEvent.ActionBarVisibilityHandler {
@@ -44,10 +44,10 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     }
 
     @ContentSlot
-    public static final Type<RevealContentHandler<?>> SLOT_MAIN_CONTENT = new Type<>();
+    public static final TypeSlot<Presenter<?,?>> SLOT_MAIN_CONTENT = new TypeSlot<>();
 
-    public static final Object SLOT_MESSAGES_CONTENT = new Object();
-    public static final Object SLOT_HEADER_CONTENT = new Object();
+    public static final SingleSlot<MessagesPresenter> SLOT_MESSAGES_CONTENT = new SingleSlot<MessagesPresenter>();
+    public static final SingleSlot<HeaderPresenter> SLOT_HEADER_CONTENT = new SingleSlot<HeaderPresenter>();
 
     private final HeaderPresenter headerPresenter;
     private final MessagesPresenter messagesPresenter;
