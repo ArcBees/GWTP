@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.client.proxy;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.presenter.slots.TypeSlot;
 
 /**
  * This event is fired by a {@link com.gwtplatform.mvp.client.Presenter} that desires to reveal itself
@@ -35,7 +36,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * @see RevealRootLayoutContentEvent
  * @see RevealRootPopupContentEvent
  */
-public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> {
+public final class RevealContentEvent<T extends Presenter<?,?>> extends GwtEvent<RevealContentHandler<?>> {
 
     /**
      * Fires a {@link RevealContentEvent} with a specific {@link com.google.gwt.event.shared.GwtEvent.Type}
@@ -47,27 +48,26 @@ public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> 
      *                and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
      * @param content The {@link Presenter} that wants to set itself as content in his parent.
      */
-    public static void fire(final HasHandlers source,
-            final Type<RevealContentHandler<?>> type, final Presenter<?, ?> content) {
-        source.fireEvent(new RevealContentEvent(type, content));
+    public static <T extends Presenter<?,?>> void fire(final HasHandlers source,
+            final TypeSlot<T> slot, final T content) {
+        source.fireEvent(new RevealContentEvent<T>(slot, content));
     }
 
-    private final Presenter<?, ?> content;
+    private final T content;
 
-    private final Type<RevealContentHandler<?>> type;
+    private final TypeSlot<T> type;
 
-    public RevealContentEvent(Type<RevealContentHandler<?>> type,
-            Presenter<?, ?> content) {
+    public RevealContentEvent(TypeSlot<T> type,T content) {
         this.type = type;
         this.content = content;
     }
 
     @Override
-    public Type<RevealContentHandler<?>> getAssociatedType() {
+    public TypeSlot<T> getAssociatedType() {
         return type;
     }
 
-    public Presenter<?, ?> getContent() {
+    public T getContent() {
         return content;
     }
 
