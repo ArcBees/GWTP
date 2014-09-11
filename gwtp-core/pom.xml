@@ -25,10 +25,6 @@
         <module>gwtp-dispatch-rpc-server-guice</module>
         <module>gwtp-dispatch-rpc-server-spring</module>
         <module>gwtp-dispatch-rpc-test</module>
-        <module>gwtp-tester</module>
-        <module>gwtp-processors</module>
-        <module>gwtp-crawler</module>
-        <module>gwtp-all</module>
     </modules>
 
     <build>
@@ -90,8 +86,8 @@
             <artifactId>junit</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-build-tools</artifactId>
+            <groupId>com.arcbees</groupId>
+            <artifactId>checkstyle</artifactId>
         </dependency>
     </dependencies>
 

@@ -1,4 +1,0 @@
-com.gwtplatform.dispatch.annotation.processor.GenDtoProcessor
-com.gwtplatform.dispatch.annotation.processor.GenEventProcessor
-com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor
-com.gwtplatform.dispatch.annotation.processor.GenProxyProcessor

@@ -214,9 +214,7 @@
     </mailingLists>
 
     <modules>
-        <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
-        <module>gwtp-crawler-service</module>
         <module>gwtp-carstore</module>
     </modules>
 
@@ -280,6 +278,9 @@
         <!-- GitHub Sites -->
         <github.version>0.9</github.version>
 
+        <!-- Checkstyle -->
+        <checkstyle.version>1.0-SNAPSHOT</checkstyle.version>
+
         <!-- Used for releasing to sonatype as command line parameter -->
         <gpg.passphrase>SetAsParam</gpg.passphrase>
         <github.username>SetAsParam</github.username>
@@ -330,10 +331,9 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${maven-checkstyle-plugin.version}</version>
                     <configuration>
-                        <configLocation>/gwtp-checkstyle.xml</configLocation>
-                        <suppressionsLocation>/gwtp-suppressions.xml</suppressionsLocation>
-                        <propertiesLocation>/gwtp-checkstyle.properties</propertiesLocation>
-                        <propertyExpansion>basedir=${basedir}</propertyExpansion>
+                        <configLocation>/checkstyle.xml</configLocation>
+                        <suppressionsLocation>/suppressions.xml</suppressionsLocation>
+                        <cacheFile>target/checkstyle-cachefile</cacheFile>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>true</failsOnError>
                         <linkXRef>false</linkXRef>
@@ -342,9 +342,9 @@
 
                     <dependencies>
                         <dependency>
-                            <groupId>com.gwtplatform</groupId>
-                            <artifactId>gwtp-build-tools</artifactId>
-                            <version>${project.version}</version>
+                            <groupId>com.arcbees</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${checkstyle.version}</version>
                         </dependency>
                     </dependencies>
 
@@ -587,9 +587,9 @@
         <dependencies>
             <!-- This dependency is required by maven-checkstyle-plugin. -->
             <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>gwtp-build-tools</artifactId>
-                <version>${project.version}</version>
+                <groupId>com.arcbees</groupId>
+                <artifactId>checkstyle</artifactId>
+                <version>${checkstyle.version}</version>
                 <scope>provided</scope>
                 <optional>true</optional>
             </dependency>
