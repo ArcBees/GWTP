@@ -23,12 +23,9 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.mvp.client.RootPresenter;
-import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
-import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
-import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
@@ -69,7 +66,7 @@ public class DefaultModule extends AbstractGinModule {
     /**
      * When instantiating the module this way be sure to read
      * {@link DefaultPlaceManager}
-     *
+     * <p/>
      * <b>Important!</b> If you use this class, don't forget to bind
      * {@link com.gwtplatform.mvp.client.annotations.DefaultPlace DefaultPlace},
      * {@link com.gwtplatform.mvp.client.annotations.ErrorPlace ErrorPlace} and
@@ -77,46 +74,10 @@ public class DefaultModule extends AbstractGinModule {
      * UnauthorizedPlace} to Presenter name tokens in your Gin module.<br/>
      *
      * @see <a href="https://github.com/ArcBees/GWTP/wiki/PlaceManager">See
-     *      PlaceManager wiki for more examples</a>
+     * PlaceManager wiki for more examples</a>
      */
     public DefaultModule() {
         this(new Builder());
-    }
-
-    /**
-     * Manually setup a PlaceManager. See {@link DefaultPlaceManager} for more
-     * details.<br/>
-     *
-     * @param placeManagerClass
-     *            {@link DefaultPlaceManager} @see <a
-     *            href="https://github.com/ArcBees/GWTP/wiki/PlaceManager">See
-     *            PlaceManager wiki for more examples</a>
-     *
-     * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
-     */
-    @Deprecated
-    public DefaultModule(Class<? extends PlaceManager> placeManagerClass) {
-        this(placeManagerClass, ParameterTokenFormatter.class);
-    }
-
-    /**
-     * Manually setup a {@link PlaceManager} and {@link TokenFormatter}.
-     *
-     * <p>
-     * See {@link DefaultPlaceManager}, {@link ParameterTokenFormatter} and {@link RouteTokenFormatter} for more
-     * details.
-     * </p>
-     *
-     * @param placeManagerClass   The {@link PlaceManager} implementation.
-     * @param tokenFormatterClass The {@link TokenFormatter} implementation.
-     *
-     * @deprecated Please use the {@link com.gwtplatform.mvp.client.gin.DefaultModule.Builder}.
-     */
-    @Deprecated
-    public DefaultModule(Class<? extends PlaceManager> placeManagerClass,
-                         Class<? extends TokenFormatter> tokenFormatterClass) {
-        this.placeManagerClass = placeManagerClass;
-        this.tokenFormatterClass = tokenFormatterClass;
     }
 
     private DefaultModule(Builder builder) {
@@ -131,7 +92,6 @@ public class DefaultModule extends AbstractGinModule {
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
         bind(TokenFormatter.class).to(tokenFormatterClass).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();
-        bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(Singleton.class);
         bind(PlaceManager.class).to(placeManagerClass).in(Singleton.class);
     }
 }

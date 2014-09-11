@@ -22,7 +22,7 @@ import java.util.List;
 import com.google.gwt.user.client.Command;
 
 /**
- * This class mimicks GWT's {@link com.google.gwt.user.client.DeferredCommand}
+ * This class mimicks GWT's {@link com.google.gwt.core.client.Scheduler.ScheduledCommand}
  * but it can be used in test cases without having to rely on a
  * {@link com.google.gwt.junit.client.GWTTestCase}.
  * <p/>
