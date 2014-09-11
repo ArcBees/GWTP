@@ -93,7 +93,7 @@ public class PresenterInspector {
         findGetPresenterMethodName();
 
         classInspector.collectStaticAnnotatedFields(classCollection.typeClass,
-                classCollection.revealContentHandlerClass, ContentSlot.class, contentSlots);
+                null, ContentSlot.class, contentSlots);
 
         return true;
     }

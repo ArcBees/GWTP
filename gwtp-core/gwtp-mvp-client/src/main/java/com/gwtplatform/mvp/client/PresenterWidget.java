@@ -21,6 +21,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -30,6 +32,13 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.presenter.slots.ISingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ISlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.PopupSlot;
+import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
 /**
@@ -116,17 +125,20 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         }
     }
 
-    private static final Object POPUP_SLOT = new Object();
+    private static final PopupSlot<PresenterWidget<? extends PopupView>>
+            POPUP_SLOT = new PopupSlot<PresenterWidget<? extends PopupView>>();
     private final EventBus eventBus;
     private final V view;
-    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
-            new ArrayList<HandlerInformation<? extends EventHandler>>();
+    private final List<HandlerInformation<? extends EventHandler>>
+            visibleHandlers = new ArrayList<HandlerInformation<? extends EventHandler>>();
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
     private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
 
     boolean visible;
-    private PresenterWidget<?> parent;
-    private Object slot;
+    // Package-private because in JDK 7 you can no longer access private members of the same type.
+    // http://bugs.java.com/view_bug.do?bug_id=6904536
+    PresenterWidget<?> parent;
+    ISlot<?> slot;
 
     /**
      * Creates a {@link PresenterWidget} that is not necessarily using automatic
@@ -171,7 +183,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
-    public void addToSlot(Object slot, PresenterWidget<?> child) {
+    public <T extends PresenterWidget<?>> void addToSlot(MultiSlot<T> slot, T child) {
         assert child != null : "cannot add null to a slot";
 
         if (child.slot == slot && child.parent == this) {
@@ -196,7 +208,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
-    public void clearSlot(Object slot) {
+    public void clearSlot(RemovableSlot<?> slot) {
         Iterator<PresenterWidget<?>> it = children.iterator();
         while (it.hasNext()) {
             PresenterWidget<?> child = it.next();
@@ -269,7 +281,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
             return;
         }
 
-        parent.removeFromSlot(slot, this);
+        parent.rawRemoveFromSlot(slot, (PresenterWidget<?>) this);
     }
 
     @Override
@@ -278,7 +290,14 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
-    public void removeFromSlot(Object slot, PresenterWidget<?> child) {
+    public <T extends PresenterWidget<?>> void removeFromSlot(RemovableSlot<T> slot, T child) {
+        rawRemoveFromSlot(slot, child);
+    }
+
+    private void rawRemoveFromSlot(ISlot<?> slot, PresenterWidget<?> child) {
+        if (!slot.isRemovable()) {
+            throw new IllegalArgumentException("Cannont remove a child from a permanent slot");
+        }
         if (child == null || child.slot != slot) {
             return;
         }
@@ -291,14 +310,17 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> child) {
+    public <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child) {
         setInSlot(slot, child, true);
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> child, boolean performReset) {
+    public <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child, boolean performReset) {
         if (child == null) {
-            clearSlot(slot);
+            if (!slot.isRemovable()) {
+                throw new IllegalArgumentException("Cannont set a permanent slot to null");
+            }
+            clearSlot((RemovableSlot<?>) slot);
             return;
         }
 
@@ -308,6 +330,10 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         while (it.hasNext()) {
             PresenterWidget<?> nextChild = it.next();
             if (nextChild != child && nextChild.slot == slot) {
+                if (!slot.isRemovable()) {
+                    throw new IllegalArgumentException("Cannont add a new presenter to a PermanentSlot"
+                            + " that already has a child");
+                }
                 it.remove();
                 nextChild.orphan();
             }
@@ -320,6 +346,22 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
                 ResetPresentersEvent.fire(this);
             }
         }
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> T getChild(ISingleSlot<T> slot) {
+        Iterator<T> it = getSlotChildren(slot).iterator();
+        return it.hasNext() ? it.next() : null;
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> Set<T> getChildren(Slot<T> slot) {
+        return getSlotChildren(slot);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getChildren(OrderedSlot<T> slot) {
+        return new TreeSet<T>(getSlotChildren(slot));
     }
 
     /**
@@ -518,9 +560,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * @param slot
      * @param child
      */
-    private void adoptChild(Object slot, PresenterWidget<?> child) {
+    private <T extends PresenterWidget<?>> void adoptChild(ISlot<T> slot, PresenterWidget<?> child) {
         if (child.parent != this) {
             if (child.parent != null) {
+                if (!child.slot.isRemovable()) {
+                    throw new IllegalArgumentException("Cannont move a child of a permanent slot to another slot");
+                }
                 child.parent.children.remove(child);
             }
             child.parent = this;
@@ -529,8 +574,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         child.slot = slot;
     }
 
-    private boolean isPopup() {
-        return slot == POPUP_SLOT;
+    boolean isPopup() {
+        return slot != null && slot.isPopup();
     }
 
     /**
@@ -581,5 +626,15 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         }
 
         visibleHandlerRegistrations.clear();
+    }
+
+    private <T extends PresenterWidget<?>> Set<T> getSlotChildren(ISlot<T> slot) {
+        Set<T> result = new HashSet<T>();
+        for (PresenterWidget<?> child : children) {
+            if (child.slot == slot) {
+                result.add((T) child);
+            }
+        }
+        return result;
     }
 }
