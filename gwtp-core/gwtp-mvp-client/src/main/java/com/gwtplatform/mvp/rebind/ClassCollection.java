@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.DelayedBind;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabData;
-import com.gwtplatform.mvp.client.presenter.slots.TypeSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ContentSlot;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl;
@@ -80,7 +80,7 @@ public class ClassCollection {
             NonLeafTabContentProxyImpl.class.getCanonicalName();
     static final String tabContentProxyPlaceImplClassName =
             TabContentProxyPlaceImpl.class.getCanonicalName();
-    static final String typeClassName = TypeSlot.class.getCanonicalName();
+    static final String typeClassName = ContentSlot.class.getCanonicalName();
     static final String tabDataClassName = TabData.class.getCanonicalName();
     final JGenericType asyncProviderClass;
     final JClassType baseGinjectorClass;

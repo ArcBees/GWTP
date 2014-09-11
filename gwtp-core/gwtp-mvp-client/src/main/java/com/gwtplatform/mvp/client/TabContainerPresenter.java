@@ -18,8 +18,8 @@ package com.gwtplatform.mvp.client;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.slots.ContentSlot;
 import com.gwtplatform.mvp.client.presenter.slots.ISlot;
-import com.gwtplatform.mvp.client.presenter.slots.TypeSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 
@@ -91,7 +91,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
             ISlot<? extends Presenter<?, ?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-            Type<ChangeTabHandler> changeTabType, TypeSlot<Presenter<?,?>> slot) {
+            Type<ChangeTabHandler> changeTabType, ContentSlot<Presenter<?,?>> slot) {
         this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, changeTabType, null, slot);
     }
 
@@ -115,7 +115,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
             ISlot<? extends Presenter<?, ?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-            Type<ChangeTabHandler> changeTabType, RevealType revealType, TypeSlot<Presenter<?,?>> slot) {
+            Type<ChangeTabHandler> changeTabType, RevealType revealType, ContentSlot<Presenter<?,?>> slot) {
         super(eventBus, view, proxy, revealType, slot);
         this.tabContentSlot = tabContentSlot;
         this.requestTabsEventType = requestTabsEventType;
@@ -193,7 +193,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
      */
     public TabContainerPresenter(EventBus eventBus, V view, Proxy_ proxy,
             ISlot<? extends Presenter<?, ?>> tabContentSlot, Type<RequestTabsHandler> requestTabsEventType,
-                   TypeSlot<Presenter<?,?>> slot) {
+                   ContentSlot<Presenter<?,?>> slot) {
         this(eventBus, view, proxy, tabContentSlot, requestTabsEventType, null, null, slot);
     }
 

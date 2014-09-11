@@ -24,10 +24,9 @@ import com.gwtplatform.carstore.client.application.widget.header.HeaderPresenter
 import com.gwtplatform.carstore.client.application.widget.message.MessagesPresenter;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.presenter.slots.ContentSlot;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
-import com.gwtplatform.mvp.client.presenter.slots.TypeSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy>
@@ -43,8 +42,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     interface MyProxy extends Proxy<ApplicationPresenter> {
     }
 
-    @ContentSlot
-    public static final TypeSlot<Presenter<?,?>> SLOT_MAIN_CONTENT = new TypeSlot<>();
+    public static final ContentSlot<Presenter<?,?>> SLOT_MAIN_CONTENT = new ContentSlot<>();
 
     public static final SingleSlot<MessagesPresenter> SLOT_MESSAGES_CONTENT = new SingleSlot<MessagesPresenter>();
     public static final SingleSlot<HeaderPresenter> SLOT_HEADER_CONTENT = new SingleSlot<HeaderPresenter>();

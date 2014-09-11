@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client.proxy;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.presenter.slots.TypeSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ContentSlot;
 
 /**
  * This event is fired by a {@link com.gwtplatform.mvp.client.Presenter} that desires to reveal itself
@@ -49,21 +49,21 @@ public final class RevealContentEvent<T extends Presenter<?,?>> extends GwtEvent
      * @param content The {@link Presenter} that wants to set itself as content in his parent.
      */
     public static <T extends Presenter<?,?>> void fire(final HasHandlers source,
-            final TypeSlot<T> slot, final T content) {
+            final ContentSlot<T> slot, final T content) {
         source.fireEvent(new RevealContentEvent<T>(slot, content));
     }
 
     private final T content;
 
-    private final TypeSlot<T> type;
+    private final ContentSlot<T> type;
 
-    public RevealContentEvent(TypeSlot<T> type,T content) {
+    public RevealContentEvent(ContentSlot<T> type,T content) {
         this.type = type;
         this.content = content;
     }
 
     @Override
-    public TypeSlot<T> getAssociatedType() {
+    public ContentSlot<T> getAssociatedType() {
         return type;
     }
 

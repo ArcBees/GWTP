@@ -19,7 +19,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
-public class TypeSlot<T extends Presenter<?,?>> extends GwtEvent.Type<RevealContentHandler<?>>
+public class ContentSlot<T extends Presenter<?,?>> extends GwtEvent.Type<RevealContentHandler<?>>
     implements ISingleSlot<T> {
     @Override
     public boolean isPopup() {
