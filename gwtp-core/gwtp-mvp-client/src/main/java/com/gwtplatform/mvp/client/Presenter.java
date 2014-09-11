@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client;
 
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.presenter.slots.TypeSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ContentSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
@@ -148,7 +148,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      */
     private final Proxy_ proxy;
     private RevealType revealType;
-    private TypeSlot<Presenter<?,?>> contentSlot;
+    private ContentSlot<Presenter<?,?>> contentSlot;
 
     /**
      * Creates a {@link Presenter} that is not necessarily using automatic
@@ -208,7 +208,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * @param slot     The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and
      *                 {@see RevealContentHandler}.
      */
-    public Presenter(EventBus eventBus, V view, Proxy_ proxy, TypeSlot<Presenter<?,?>> slot) {
+    public Presenter(EventBus eventBus, V view, Proxy_ proxy, ContentSlot<Presenter<?,?>> slot) {
         this(eventBus, view, proxy, null, slot);
     }
 
@@ -226,7 +226,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      *                   and {@see RevealContentHandler}.
      */
     public Presenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType,
-            TypeSlot<Presenter<?,?>> slot) {
+            ContentSlot<Presenter<?,?>> slot) {
         super(eventBus, view);
         this.proxy = proxy;
         this.revealType = revealType;
@@ -356,7 +356,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * @return The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see
      *         RevealContentHandler}.
      */
-    protected TypeSlot<Presenter<?,?>> getSlot() {
+    protected ContentSlot<Presenter<?,?>> getSlot() {
         return contentSlot;
     }
 
@@ -367,7 +367,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and
      *             {@see RevealContentHandler}.
      */
-    protected void setSlot(TypeSlot<Presenter<?,?>> slot) {
+    protected void setSlot(ContentSlot<Presenter<?,?>> slot) {
         this.contentSlot = slot;
     }
 
