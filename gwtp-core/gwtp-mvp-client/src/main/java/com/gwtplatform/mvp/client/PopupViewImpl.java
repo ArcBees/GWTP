@@ -16,17 +16,20 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.user.client.Command;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.PopupPanel.PositionCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
+import com.gwtplatform.mvp.client.view.CenterPopupPositioner;
+import com.gwtplatform.mvp.client.view.PopupPositioner;
+import com.gwtplatform.mvp.client.view.PopupPositioner.PopupPosition;
 
 /**
  * A simple implementation of {@link PopupView} that can be used when the widget
@@ -38,35 +41,51 @@ import com.gwtplatform.mvp.client.proxy.NavigationHandler;
  * {@link #removeFromSlot(Object, com.google.gwt.user.client.ui.IsWidget)}.
  */
 public abstract class PopupViewImpl extends ViewImpl implements PopupView {
-
     private HandlerRegistration autoHideHandler;
 
     private HandlerRegistration closeHandlerRegistration;
     private final EventBus eventBus;
 
+    private PopupPositioner positioner;
+
     /**
-     * The {@link PopupViewImpl} class uses the {@link EventBus} to listen to
-     * {@link NavigationEvent} in order to automatically close when this event is
-     * fired, if desired. See
-     * {@link #setAutoHideOnNavigationEventEnabled(boolean)} for details.
-     *
+     * By default the popup will position itself in the center of the window.
+     * To use a different positioner use {@link #PopupViewImpl(EventBus, PopupPosition)} instead.
      * @param eventBus The {@link EventBus}.
      */
-    protected PopupViewImpl(EventBus eventBus) {
+    public PopupViewImpl(EventBus eventBus) {
+        this(eventBus, new CenterPopupPositioner());
+    }
+
+    /**
+     * @param eventBus The {@link EventBus}.
+     * @param positioner The {@link PopupPositioner} used to position the popup onReveal();
+     * @see
+     * {@link com.gwtplatform.mvp.client.view.CenterPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner}
+     */
+    protected PopupViewImpl(EventBus eventBus, PopupPositioner positioner) {
         this.eventBus = eventBus;
+        setPopupPositioner(positioner);
+        if (repositionOnWindowResize()) {
+            Window.addResizeHandler(new ResizeHandler() {
+                @Override
+                public void onResize(ResizeEvent event) {
+                    if (asPopupPanel().isShowing()) {
+                        showAndReposition();
+                    }
+                }
+            });
+        }
     }
 
     @Override
     public void center() {
-        doCenter();
-        // We center again in a deferred command to solve a bug in IE where newly
-        // created window are sometimes not centered.
-        Scheduler.get().scheduleDeferred(new Command() {
-            @Override
-            public void execute() {
-                doCenter();
-            }
-        });
+        // no op this method is here for legacy compatibility.
+        // since by default the popup positioner centers the popup only
+        // popups using a non default positioner would be affected by this method.
+        // And if you're using popup positioners you won't be calling this method.
     }
 
     @Override
@@ -82,11 +101,11 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             }
             autoHideHandler = eventBus.addHandler(NavigationEvent.getType(),
                     new NavigationHandler() {
-                        @Override
-                        public void onNavigation(NavigationEvent navigationEvent) {
-                            hide();
-                        }
-                    });
+                @Override
+                public void onNavigation(NavigationEvent navigationEvent) {
+                    hide();
+                }
+            });
         } else {
             if (autoHideHandler != null) {
                 autoHideHandler.removeHandler();
@@ -113,6 +132,11 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     @Override
+    public void setPopupPositioner(PopupPositioner popupPositioner) {
+        this.positioner = popupPositioner;
+    }
+
+    @Override
     public void setPosition(int left, int top) {
         asPopupPanel().setPopupPosition(left, top);
     }
@@ -120,6 +144,18 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     @Override
     public void show() {
         asPopupPanel().show();
+    }
+
+    @Override
+    public void showAndReposition() {
+        onReposition();
+        asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
+            @Override
+            public void setPosition(int offsetWidth, int offsetHeight) {
+                PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
+                asPopupPanel().setPopupPosition(popupPosition.getLeft(), popupPosition.getTop());
+            }
+        });
     }
 
     /**
@@ -132,40 +168,20 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     }
 
     /**
-     * This method centers the popup panel, temporarily making it visible if
-     * needed.
+     * Override this method to add custom logic that runs before the popup is repositioned.
+     * By default the popup will be repositioned on resize and this method will be called.
+     * So you can add any resize logic here as well.
      */
-    protected void doCenter() {
-        // We can't use Element.center() method as it will show the popup
-        // by default and not only centering it. This is resulting in onAttach()
-        // being called twice when using setInSlot() or addToPopupSlot() in PresenterWidget
+    protected void onReposition() {
+    }
 
-        PopupPanel popup = asPopupPanel();
-        Element elem = popup.getElement();
-
-        boolean isShowing = popup.isShowing();
-        // If left/top are set from a previous doCenter() call, and our content
-        // has changed, we may get a bogus getOffsetWidth because our new content
-        // is wrapping (giving a lower offset width) then it would without the
-        // previous left. Clearing left/top to avoids this.
-        elem.getStyle().clearLeft();
-        elem.getStyle().clearTop();
-
-        // the popup should be added to the dom in order to get correct values for offsetWidth/offsetHeight
-        if (!isShowing) {
-            popup.setVisible(false);
-            popup.show();
-        }
-
-        int left = (Window.getClientWidth() - popup.getOffsetWidth()) >> 1;
-        int top = (Window.getClientHeight() - popup.getOffsetHeight()) >> 1;
-
-        if (!isShowing) {
-            popup.hide();
-            popup.setVisible(true);
-        }
-
-        popup.setPopupPosition(Math.max(Window.getScrollLeft() + left, 0), Math.max(
-                Window.getScrollTop() + top, 0));
+    /**
+     * By default PopupViews will reposition themselves when the window is resized.
+     * If you don't want the popup to be repositioned or want to handle the resize yourself
+     * overide this method to return false.
+     * @return whether to reposition on resize.
+     */
+    protected boolean repositionOnWindowResize() {
+        return true;
     }
 }
