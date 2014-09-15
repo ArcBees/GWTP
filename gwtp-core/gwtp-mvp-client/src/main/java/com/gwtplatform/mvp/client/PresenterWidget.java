@@ -135,6 +135,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
 
     boolean visible;
+
     // Package-private because in JDK 7 you can no longer access private members of the same type.
     // http://bugs.java.com/view_bug.do?bug_id=6904536
     PresenterWidget<?> parent;
