@@ -16,20 +16,14 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.gwtplatform.mvp.client.view.PopupPositioner;
+
 /**
  * The interface for {@link View} classes that is meant to be displayed as a
  * popup, like a GWT {@link com.google.gwt.user.client.ui.PopupPanel} or a
  * {@link com.google.gwt.user.client.ui.DialogBox}.
  */
 public interface PopupView extends View {
-
-    /**
-     * Make sure the {@link PopupView} is centered in the browser's client area.
-     * This method should not change the view visibility: if it was hidden (resp.
-     * visible) it remains hidden (resp. visible).
-     */
-    void center();
-
     /**
      * Make sure the {@link PopupView} is hidden. You can call this method
      * directly.
@@ -58,22 +52,49 @@ public interface PopupView extends View {
     void setCloseHandler(PopupViewCloseHandler popupViewCloseHandler);
 
     /**
+     * <b>Important!</b> Do not call this directly, instead use
+     * {@link PresenterWidget#addToPopupSlot(PresenterWidget)} passing this
+     * view's {@link PresenterWidget}.
+     * <p/>
+     * Make sure the {@link PopupView} is visible.
+     * Will not reposition the popup before showing it.
+     */
+    void show();
+
+    /**
+     * You don't need to call this directly it is automatically
+     * called during onReveal().
+     * Will position the popup before showing it.
+     */
+    void showAndReposition();
+
+    /**
+     * Set the PopupPositioner which will position this popup when it's presenter is revealed.
+     * @param positioner The {@link PopupPositioner} will automatically position the popup onReveal();
+     * @see
+     * {@link com.gwtplatform.mvp.client.view.CenterPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
+     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner}
+     */
+    void setPopupPositioner(PopupPositioner popupPositioner);
+
+    /**
      * Reposition the {@link PopupView} within the browser's client area. This
      * method should not change the view visibility: if it was hidden (resp.
      * visible) it remains hidden (resp. visible).
      *
      * @param left The left position of the top-left corner (in pixels).
      * @param top  The top position of the top-left corner (in pixels).
+     * @deprecated use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
      */
+    @Deprecated
     void setPosition(int left, int top);
 
     /**
-     * <b>Important!</b> Do not call this directly, instead use
-     * {@link PresenterWidget#addToPopupSlot(PresenterWidget)} passing this
-     * view's {@link PresenterWidget}.
-     * <p/>
-     * Make sure the {@link PopupView} is visible.
+     * This method does nothing.
+     * @deprecated use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
      */
-    void show();
+    @Deprecated
+    void center();
 
 }
