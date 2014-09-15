@@ -188,9 +188,4 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     protected boolean repositionOnWindowResize() {
         return true;
     }
-
-    private native void hidePopup(PopupPanel popupPanel) /*-{
-        var resizeAnimation = popupPanel.@com.google.gwt.user.client.ui.PopupPanel::resizeAnimation;
-        resizeAnimation.@com.google.gwt.user.client.ui.PopupPanel.ResizeAnimation::setState(ZZ)(false, false);
-    }-*/;
 }

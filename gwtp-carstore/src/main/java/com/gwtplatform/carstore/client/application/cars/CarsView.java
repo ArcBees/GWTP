@@ -95,7 +95,6 @@ public class CarsView extends ViewWithUiHandlers<CarsUiHandlers> implements MyVi
     }
 
     @UiHandler("create")
-    @SuppressWarnings("unused")
     void onCreateClicked(ClickEvent ignored) {
         getUiHandlers().onCreate();
     }
