@@ -132,7 +132,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     // http://bugs.java.com/view_bug.do?bug_id=6904536
     PresenterWidget<?> parent;
     ISlot<?> slot;
-
     boolean visible;
 
     private final EventBus eventBus;
