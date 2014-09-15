@@ -18,16 +18,15 @@ package com.gwtplatform.carstore.client.application.cars.car;
 
 import javax.inject.Inject;
 
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.presenter.slots.ContentSlot;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCarPresenter.MyProxy> {
     public interface MyView extends View {
@@ -37,11 +36,9 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     public interface MyProxy extends Proxy<RootCarPresenter> {
     }
 
-    @ContentSlot
-    public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_SetCarContent = new GwtEvent
-            .Type<>();
+    public static final ContentSlot<Presenter<?,?>> SLOT_SetCarContent = new ContentSlot<>();
 
-    public static final Object SLOT_TAB_BAR = new Object();
+    public static final SingleSlot<NavigationTabPresenter> SLOT_TAB_BAR = new SingleSlot<NavigationTabPresenter>();
 
     private final NavigationTabPresenter navigationTabPresenter;
 
