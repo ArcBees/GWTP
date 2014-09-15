@@ -16,6 +16,16 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.Set;
+import java.util.SortedSet;
+
+import com.gwtplatform.mvp.client.presenter.slots.ISingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.ISlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
+
 /**
  * Interface of objects containing slots in which {@link PresenterWidget} can
  * be inserted.
@@ -53,7 +63,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not add anything.
      */
-    void addToSlot(Object slot, PresenterWidget<?> content);
+    <T extends PresenterWidget<?>> void addToSlot(MultiSlot<T> slot, T child);
 
     /**
      * This method clears the content in a specific slot. No
@@ -67,7 +77,7 @@ public interface HasSlots {
      *
      * @param slot An opaque object identifying which slot to clear.
      */
-    void clearSlot(Object slot);
+    void clearSlot(RemovableSlot<?> slot);
 
     /**
      * This method removes some content in a specific slot of the
@@ -83,7 +93,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will not remove anything.
      */
-    void removeFromSlot(Object slot, PresenterWidget<?> content);
+    <T extends PresenterWidget<?>> void removeFromSlot(RemovableSlot<T> slot, T child);
 
     /**
      * This method sets some content in a specific slot of the {@link Presenter}.
@@ -98,7 +108,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will clear the slot.
      */
-    void setInSlot(Object slot, PresenterWidget<?> content);
+    <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child);
 
     /**
      * This method sets some content in a specific slot of the {@link Presenter}.
@@ -118,5 +128,26 @@ public interface HasSlots {
      *                     after the content has been added and this presenter is visible, pass
      *                     {@code false} otherwise.
      */
-    void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset);
+    <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child, boolean performReset);
+
+    /**
+     * Get the child of SingleSlot
+     * @param slot - the slot
+     * @return the child of the slot or null if the slot is empty.
+     */
+    <T extends PresenterWidget<?>> T getChild(ISingleSlot<T> slot);
+
+    /**
+     * Get the children of a slot.
+     * @param slot - the slot
+     * @return the children of the slot.
+     */
+    <T extends PresenterWidget<?>> Set<T> getChildren(Slot<T> slot);
+
+    /**
+     * Get the children of an ordered slot.
+     * @param slot - an ordered slot
+     * @return the children of the slot in a sorted set.
+     */
+    <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getChildren(OrderedSlot<T> slot);
 }
