@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.LockInteractionHandler;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -145,7 +146,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         }
     }
 
-    private static final Object rootSlot = new Object();
+    private static final SingleSlot<Presenter<?,?>> rootSlot = new SingleSlot<Presenter<?,?>> ();
 
     private boolean isResetting;
 

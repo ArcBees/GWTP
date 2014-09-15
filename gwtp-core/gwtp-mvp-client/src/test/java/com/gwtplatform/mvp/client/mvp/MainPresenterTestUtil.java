@@ -19,23 +19,20 @@ package com.gwtplatform.mvp.client.mvp;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * This is the test presenter.
  */
 public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyView, MainPresenterTestUtil.MyProxy> {
 
-    @ContentSlot
-    public static final Type<RevealContentHandler<?>> SLOT_SetMainContent = new Type<RevealContentHandler<?>>();
+    public static final SingleSlot<PresenterWidget<?>> SLOT_SetMainContent = new SingleSlot<PresenterWidget<?>>();
 
     /**
      * Presenter's view.
