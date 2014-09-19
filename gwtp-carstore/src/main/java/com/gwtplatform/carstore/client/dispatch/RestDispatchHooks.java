@@ -23,6 +23,6 @@ public class RestDispatchHooks implements com.gwtplatform.dispatch.rest.client.R
     @Override
     public void onFailure(RestAction action, Response response, Throwable caught) {
         logger.log(Level.INFO, "Failed to executed " + action.getPath() + ", result: "
-            + response.getStatusText() + " " + response.getText());
+            + response.getStatusText() + " " + response.getText() + " " + caught.getMessage());
     }
 }

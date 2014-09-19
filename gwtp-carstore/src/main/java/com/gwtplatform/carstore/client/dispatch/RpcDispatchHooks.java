@@ -1,28 +1,27 @@
 package com.gwtplatform.carstore.client.dispatch;
 
-import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.client.DispatchHooks;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rpc.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.Result;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RpcDispatchHooks implements com.gwtplatform.dispatch.rest.client.RestDispatchHooks {
+public class RpcDispatchHooks implements com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks {
     private static final Logger logger = Logger.getLogger(DispatchHooks.class.getName());
 
     @Override
-    public void onExecute(RestAction action) {
-        logger.log(Level.INFO, "Executing rest dispatch " + action.getPath() + " resource action");
+    public void onExecute(Action action) {
+        logger.log(Level.INFO, "Executing rest dispatch " + action.getServiceName() + " resource action");
     }
 
     @Override
-    public void onSuccess(RestAction action, Response response, Object result) {
-        logger.log(Level.INFO, "Successfully executed " + action.getPath() + ", result: " + response.getText());
+    public void onSuccess(Action action, Result result) {
+        logger.log(Level.INFO, "Successfully executed " + action.getServiceName());
     }
 
     @Override
-    public void onFailure(RestAction action, Response response, Throwable caught) {
-        logger.log(Level.INFO, "Failed to executed " + action.getPath() + ", result: "
-            + response.getStatusText() + " " + response.getText());
+    public void onFailure(Action action, Throwable caught) {
+        logger.log(Level.INFO, "Failed to executed " + action.getServiceName() + " " + caught.getMessage());
     }
 }
