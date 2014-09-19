@@ -23,7 +23,6 @@ import javax.inject.Singleton;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinAnnotatedBindingBuilder;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
-import com.gwtplatform.dispatch.client.DefaultDispatchHooks;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.DispatchHooks;
@@ -66,7 +65,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
                 DefaultClientActionHandlerRegistry.class;
         private Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
-        private Class<? extends DispatchHooks> dispatchHooks = DefaultDispatchHooks.class;
 
         /**
          * Constructs {@link AbstractDispatchAsyncModule} builder.
@@ -91,18 +89,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         public <T extends Builder> T clientActionHandlerRegistry(
                 final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
             this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
-            return (T) this;
-        }
-
-        /**
-         * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
-         * Default is {@link com.gwtplatform.dispatch.client.DefaultDispatchHooks}
-         *
-         * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
-         * @return this {@link Builder} object.
-         */
-        public <T extends Builder> T dispatchHooks(final Class<? extends DispatchHooks> dispatchHooks) {
-            this.dispatchHooks = dispatchHooks;
             return (T) this;
         }
 
@@ -145,7 +131,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         bindAnnotated(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
         bindAnnotated(ExceptionHandler.class).to(builder.exceptionHandlerType);
         bindAnnotated(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
-        bindAnnotated(DispatchHooks.class).to(builder.dispatchHooks).in(Singleton.class);
 
         configureDispatch();
     }

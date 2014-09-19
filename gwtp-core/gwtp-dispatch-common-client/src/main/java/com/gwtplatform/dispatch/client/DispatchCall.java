@@ -45,14 +45,12 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
-    private final DispatchHooks dispatchHooks;
 
     private String securityCookie;
 
     public DispatchCall(ExceptionHandler exceptionHandler,
                         ClientActionHandlerRegistry clientActionHandlerRegistry,
                         SecurityCookieAccessor securityCookieAccessor,
-                        DispatchHooks dispatchHooks,
                         A action,
                         AsyncCallback<R> callback) {
         this.action = action;
@@ -60,7 +58,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
-        this.dispatchHooks = dispatchHooks;
     }
 
     /**
@@ -72,7 +69,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      * @return a {@link DispatchRequest} object.
      */
     public DispatchRequest execute() {
-        dispatchHooks.onExecute();
         securityCookie = securityCookieAccessor.getCookieContent();
 
         IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
@@ -159,8 +155,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      */
     protected void onExecuteSuccess(R result) {
         callback.onSuccess(result);
-
-        dispatchHooks.onSuccess();
     }
 
     /**
@@ -184,8 +178,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         }
 
         callback.onFailure(caught);
-
-        dispatchHooks.onFailure();
     }
 
     /**

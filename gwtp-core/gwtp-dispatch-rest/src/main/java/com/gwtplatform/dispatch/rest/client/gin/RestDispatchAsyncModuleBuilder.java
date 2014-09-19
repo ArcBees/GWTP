@@ -18,8 +18,11 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DateFormat;
+import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -47,6 +50,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private String defaultDateFormat = DateFormat.DEFAULT;
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
+    private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
 
     /**
      * Initiate the creation of a global header parameter that will be attached to all requests.
@@ -111,6 +115,10 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return xsrfTokenHeaderName;
     }
 
+    public Class<? extends DispatchHooks> getDispatchHooks() {
+        return dispatchHooks;
+    }
+
     /**
      * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
      * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
@@ -156,6 +164,18 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      */
     public RestDispatchAsyncModuleBuilder xsrfTokenHeaderName(final String xsrfTokenHeaderName) {
         this.xsrfTokenHeaderName = xsrfTokenHeaderName;
+        return this;
+    }
+
+    /**
+     * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
+     * Default is {@link com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks}
+     *
+     * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
+     * @return this {@link RestDispatchAsyncModuleBuilder} object.
+     */
+    public RestDispatchAsyncModuleBuilder dispatchHooks(final Class<? extends RestDispatchHooks> dispatchHooks) {
+        this.dispatchHooks = dispatchHooks;
         return this;
     }
 

@@ -16,14 +16,13 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import javax.inject.Inject;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
+
+import javax.inject.Inject;
 
 /**
  * The default implementation for {@link RestDispatchCallFactory}.
@@ -34,7 +33,7 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final SecurityCookieAccessor securityCookieAccessor;
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
-    private final DispatchHooks dispatchHooks;
+    private final RestDispatchHooks dispatchHooks;
 
     @Inject
     DefaultRestDispatchCallFactory(@RestBinding ExceptionHandler exceptionHandler,
@@ -42,7 +41,7 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
                                    @RestBinding SecurityCookieAccessor securityCookieAccessor,
                                    RestRequestBuilderFactory requestBuilderFactory,
                                    RestResponseDeserializer restResponseDeserializer,
-                                   @RestBinding DispatchHooks dispatchHooks) {
+                                   @RestBinding RestDispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
