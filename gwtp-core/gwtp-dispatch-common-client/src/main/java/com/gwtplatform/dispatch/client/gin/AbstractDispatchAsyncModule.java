@@ -18,14 +18,11 @@ package com.gwtplatform.dispatch.client.gin;
 
 import java.lang.annotation.Annotation;
 
-import javax.inject.Singleton;
-
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinAnnotatedBindingBuilder;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
@@ -142,7 +139,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     protected void configureDispatch() {
     }
 
-    private <T> GinLinkedBindingBuilder<T> bindAnnotated(Class<T> clazz) {
+    protected <T> GinLinkedBindingBuilder<T> bindAnnotated(Class<T> clazz) {
         GinAnnotatedBindingBuilder<T> binding = bind(clazz);
 
         if (annotationClass != null) {

@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.rpc.client.gin;
 
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchHooks;
@@ -30,8 +30,6 @@ import com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
-
-import javax.inject.Singleton;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses Remote Procedure Calls (RPC).
@@ -56,7 +54,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
             return new RpcDispatchAsyncModule(this);
         }
 
-        public Class<? extends DispatchHooks> getDispatchHooks() {
+        public Class<? extends RpcDispatchHooks> getDispatchHooks() {
             return dispatchHooks;
         }
 
@@ -88,11 +86,11 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
+        bindAnnotated(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+
         bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
 
         bind(DispatchAsync.class).to(RpcDispatchAsync.class).in(Singleton.class);
-
-        bind(DispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
     }
 
     @Provides

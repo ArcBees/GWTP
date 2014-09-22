@@ -17,12 +17,11 @@
 package com.gwtplatform.dispatch.rest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
-
-import javax.inject.Inject;
 
 /**
  * The default implementation for {@link RestDispatchCallFactory}.

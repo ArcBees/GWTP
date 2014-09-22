@@ -22,8 +22,8 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import com.gwtplatform.common.client.CommonGinModule;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
@@ -35,6 +35,7 @@ import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestBinding;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
@@ -43,8 +44,6 @@ import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
-
-import javax.inject.Singleton;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls.
@@ -57,7 +56,7 @@ import javax.inject.Singleton;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
@@ -82,6 +81,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
+        // Dispatch Hooks
+        bindAnnotated(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+
         // Common
         install(new CommonGinModule());
 
@@ -95,8 +97,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
                 .to(multimapJsonSerializer.serialize(builder.getGlobalHeaderParams()));
         bindConstant().annotatedWith(GlobalQueryParams.class)
                 .to(multimapJsonSerializer.serialize(builder.getGlobalQueryParams()));
-
-        bind(DispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);

@@ -23,14 +23,14 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 /**
  * Hooks to be executed on every {@link com.gwtplatform.dispatch.client.DispatchCall}.
  *
- * {@link RpcDispatchHooks#onExecute(Action)} will be called just before any action is attempted.<br>
- * {@link RpcDispatchHooks#onSuccess(Action, Object)} will be called when any action succeeds.<br>
- * {@link RpcDispatchHooks#onFailure(Action , Throwable)} will be called when any action fails.
+ * {@link RpcDispatchHooks#onExecute(Action, boolean)} will be called just before any action is attempted.<br>
+ * {@link RpcDispatchHooks#onSuccess(Action, Result, boolean)} will be called when any action succeeds.<br>
+ * {@link RpcDispatchHooks#onFailure(Action , Throwable, boolean)} will be called when any action fails.
  */
 public interface RpcDispatchHooks extends DispatchHooks {
-    void onExecute(Action action);
+    void onExecute(Action action, boolean undo);
 
-    void onSuccess(Action action, Result result);
+    void onSuccess(Action action, Result result, boolean undo);
 
-    void onFailure(Action action, Throwable caught);
+    void onFailure(Action action, Throwable caught, boolean undo);
 }

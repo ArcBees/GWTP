@@ -52,21 +52,21 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
 
     @Override
     protected DispatchRequest doExecute() {
-        dispatchHooks.onExecute(getAction());
+        dispatchHooks.onExecute(getAction(), false);
 
         return new GwtHttpDispatchRequest(dispatchService.execute(getSecurityCookie(), getAction(),
                 new AsyncCallback<Result>() {
                     public void onFailure(Throwable caught) {
                         RpcDispatchExecuteCall.this.onExecuteFailure(caught);
 
-                        dispatchHooks.onFailure(getAction(), caught);
+                        dispatchHooks.onFailure(getAction(), caught, false);
                     }
 
                     @SuppressWarnings("unchecked")
                     public void onSuccess(Result result) {
                         RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
 
-                        dispatchHooks.onSuccess(getAction(), result);
+                        dispatchHooks.onSuccess(getAction(), result, false);
                     }
                 }
         ));

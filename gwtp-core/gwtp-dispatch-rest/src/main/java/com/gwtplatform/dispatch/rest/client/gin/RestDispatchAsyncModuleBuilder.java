@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
@@ -115,7 +114,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return xsrfTokenHeaderName;
     }
 
-    public Class<? extends DispatchHooks> getDispatchHooks() {
+    public Class<? extends RestDispatchHooks> getDispatchHooks() {
         return dispatchHooks;
     }
 
