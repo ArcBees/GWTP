@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rpc.client;
 
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
@@ -27,7 +26,7 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  * {@link RpcDispatchHooks#onSuccess(Action, Result, boolean)} will be called when any action succeeds.<br>
  * {@link RpcDispatchHooks#onFailure(Action , Throwable, boolean)} will be called when any action fails.
  */
-public interface RpcDispatchHooks extends DispatchHooks {
+public interface RpcDispatchHooks {
     void onExecute(Action action, boolean undo);
 
     void onSuccess(Action action, Result result, boolean undo);

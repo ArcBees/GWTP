@@ -40,7 +40,7 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
                                    @RestBinding SecurityCookieAccessor securityCookieAccessor,
                                    RestRequestBuilderFactory requestBuilderFactory,
                                    RestResponseDeserializer restResponseDeserializer,
-                                   @RestBinding RestDispatchHooks dispatchHooks) {
+                                   RestDispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;

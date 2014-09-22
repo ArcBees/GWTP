@@ -42,7 +42,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
-
     private final RestDispatchHooks dispatchHooks;
 
     public RestDispatchCall(ExceptionHandler exceptionHandler,
@@ -57,7 +56,6 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
-
         this.dispatchHooks = dispatchHooks;
     }
 

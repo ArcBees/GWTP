@@ -86,7 +86,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
-        bindAnnotated(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+        bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
 
         bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
 

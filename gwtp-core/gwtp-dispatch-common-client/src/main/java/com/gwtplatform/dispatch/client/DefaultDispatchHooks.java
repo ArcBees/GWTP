@@ -19,5 +19,5 @@ package com.gwtplatform.dispatch.client;
 /**
  * Hooks to be executed on every {@link DispatchCall}.
  */
-public class DefaultDispatchHooks implements DispatchHooks {
+public class DefaultDispatchHooks {
 }

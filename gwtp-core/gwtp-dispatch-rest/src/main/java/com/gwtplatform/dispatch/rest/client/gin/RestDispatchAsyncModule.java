@@ -82,7 +82,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Override
     protected void configureDispatch() {
         // Dispatch Hooks
-        bindAnnotated(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
 
         // Common
         install(new CommonGinModule());

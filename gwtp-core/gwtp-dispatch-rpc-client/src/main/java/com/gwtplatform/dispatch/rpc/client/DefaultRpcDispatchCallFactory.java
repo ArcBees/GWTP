@@ -40,7 +40,7 @@ public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
                                   @RpcBinding ExceptionHandler exceptionHandler,
                                   @RpcBinding ClientActionHandlerRegistry clientActionHandlerRegistry,
                                   @RpcBinding SecurityCookieAccessor securityCookieAccessor,
-                                  @RpcBinding RpcDispatchHooks dispatchHooks) {
+                                  RpcDispatchHooks dispatchHooks) {
         this.dispatchService = dispatchService;
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;

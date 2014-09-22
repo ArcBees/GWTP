@@ -139,7 +139,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     protected void configureDispatch() {
     }
 
-    protected <T> GinLinkedBindingBuilder<T> bindAnnotated(Class<T> clazz) {
+    private <T> GinLinkedBindingBuilder<T> bindAnnotated(Class<T> clazz) {
         GinAnnotatedBindingBuilder<T> binding = bind(clazz);
 
         if (annotationClass != null) {

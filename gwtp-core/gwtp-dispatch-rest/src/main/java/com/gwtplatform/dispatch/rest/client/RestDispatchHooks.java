@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.rest.client;
 
 import com.google.gwt.http.client.Response;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
@@ -27,7 +26,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * {@link RestDispatchHooks#onSuccess(RestAction, Response, Object)} will be called when any action succeeds.<br>
  * {@link RestDispatchHooks#onFailure(RestAction, Response, Throwable)} will be called when any action fails.
  */
-public interface RestDispatchHooks extends DispatchHooks {
+public interface RestDispatchHooks {
     void onExecute(RestAction action);
 
     void onSuccess(RestAction action, Response response, Object result);
