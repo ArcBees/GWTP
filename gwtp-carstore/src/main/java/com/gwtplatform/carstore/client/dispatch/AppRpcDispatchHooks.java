@@ -16,14 +16,15 @@
 
 package com.gwtplatform.carstore.client.dispatch;
 
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RpcDispatchHooks implements com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks {
-    private static final Logger logger = Logger.getLogger(RpcDispatchHooks.class.getName());
+public class AppRpcDispatchHooks implements RpcDispatchHooks {
+    private static final Logger logger = Logger.getLogger(AppRpcDispatchHooks.class.getName());
 
     @Override
     public void onExecute(Action action, boolean undo) {

@@ -17,13 +17,14 @@
 package com.gwtplatform.carstore.client.dispatch;
 
 import com.google.gwt.http.client.Response;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RestDispatchHooks implements com.gwtplatform.dispatch.rest.client.RestDispatchHooks {
-    private static final Logger logger = Logger.getLogger(RestDispatchHooks.class.getName());
+public class AppRestDispatchHooks implements RestDispatchHooks {
+    private static final Logger logger = Logger.getLogger(AppRestDispatchHooks.class.getName());
 
     @Override
     public void onExecute(RestAction action) {
