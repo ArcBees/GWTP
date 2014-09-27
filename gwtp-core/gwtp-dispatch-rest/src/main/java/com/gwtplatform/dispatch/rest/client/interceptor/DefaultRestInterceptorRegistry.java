@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.actionhandler;
+package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import java.util.Map;
 
@@ -28,7 +28,7 @@ import com.gwtplatform.common.client.ProviderBundle;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
- * The rest implementation of {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry}
+ * The rest implementation of {@link com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry}
  * that if bound will not load any client-side action handlers.
  * </p>
  * To register client-side action handlers, extend this class and call {@link #register} in the constructor.
@@ -69,36 +69,38 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * </code>
  * </pre>
  */
-public class DefaultRestActionHandlerRegistry implements RestActionHandlerRegistry {
-    private Map<RestHandlerIndex, IndirectProvider<RestActionHandler>> restActionHandlers;
+public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
+    private Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors;
 
     /**
      * Register a instance of a client-side action handler.
      *
-     * @param handler The {@link RestActionHandler};
+     * @param interceptor The {@link RestInterceptor};
      */
-    protected void register(final RestActionHandler handler) {
-        register(handler.getIndex(),
-                new IndirectProvider<RestActionHandler>() {
-                    @Override
-                    public void get(AsyncCallback<RestActionHandler> callback) {
-                        callback.onSuccess(handler);
-                    }
-                });
+    protected void register(final RestInterceptor interceptor) {
+        for (InterceptorContext context : interceptor.getInterceptorContexts()) {
+            register(context,
+                    new IndirectProvider<RestInterceptor>() {
+                        @Override
+                        public void get(AsyncCallback<RestInterceptor> callback) {
+                            callback.onSuccess(interceptor);
+                        }
+                    });
+        }
     }
 
     /**
      * Register a {@link javax.inject.Provider} of a client-side action handler.
      *
-     * @param index          The {@link RestHandlerIndex} for the rest action handler.
+     * @param context         The {@link InterceptorContext} for the rest action handler.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
      */
-    protected void register(RestHandlerIndex index,
-                            final Provider<RestActionHandler> handlerProvider) {
-        register(index,
-                new IndirectProvider<RestActionHandler>() {
+    protected void register(InterceptorContext context,
+                            final Provider<RestInterceptor> handlerProvider) {
+        register(context,
+                new IndirectProvider<RestInterceptor>() {
                     @Override
-                    public void get(AsyncCallback<RestActionHandler> callback) {
+                    public void get(AsyncCallback<RestInterceptor> callback) {
                         callback.onSuccess(handlerProvider.get());
                     }
                 });
@@ -107,15 +109,15 @@ public class DefaultRestActionHandlerRegistry implements RestActionHandlerRegist
     /**
      * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side action handler.
      *
-     * @param index           The {@link RestHandlerIndex} for the rest action handler.
+     * @param context         The {@link InterceptorContext} for the rest action handler.
      * @param handlerProvider The {@link com.google.gwt.inject.client.AsyncProvider} of the handler.
      */
-    protected void register(RestHandlerIndex index,
-                            final AsyncProvider<RestActionHandler> handlerProvider) {
-        register(index,
-                new IndirectProvider<RestActionHandler>() {
+    protected void register(InterceptorContext context,
+                            final AsyncProvider<RestInterceptor> handlerProvider) {
+        register(context,
+                new IndirectProvider<RestInterceptor>() {
                     @Override
-                    public void get(AsyncCallback<RestActionHandler> callback) {
+                    public void get(AsyncCallback<RestInterceptor> callback) {
                         handlerProvider.get(callback);
                     }
                 });
@@ -124,37 +126,61 @@ public class DefaultRestActionHandlerRegistry implements RestActionHandlerRegist
     /**
      * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
-     * @param index          The {@link RestHandlerIndex} for the rest action handler.
+     * @param context        The {@link InterceptorContext} for the rest action handler.
      * @param bundleProvider The {@link javax.inject.Provider} of the
      *                       {@link com.gwtplatform.common.client.ProviderBundle}.
      * @param providerId     The id of the client-side action handler provider.
      */
-    protected <B extends ProviderBundle> void register(RestHandlerIndex index,
+    protected <B extends ProviderBundle> void register(InterceptorContext context,
                                                        AsyncProvider<B> bundleProvider,
                                                        int providerId) {
-        register(index, new CodeSplitBundleProvider<RestActionHandler, B>(bundleProvider, providerId));
+        register(context, new CodeSplitBundleProvider<RestInterceptor, B>(bundleProvider, providerId));
     }
 
     /**
      * Register an {@link com.gwtplatform.common.client.IndirectProvider} of a client-side action handler.
      *
+     * @param context         The {@link InterceptorContext} for the rest action handler.
      * @param handlerProvider The {@link com.gwtplatform.common.client.IndirectProvider}.
      */
-    protected void register(RestHandlerIndex index,
-                            IndirectProvider<RestActionHandler> handlerProvider) {
-        if (restActionHandlers == null) {
-            restActionHandlers = Maps.newHashMap();
+    protected void register(InterceptorContext context,
+                            IndirectProvider<RestInterceptor> handlerProvider) {
+        if (interceptors == null) {
+            interceptors = Maps.newHashMap();
         }
 
-        restActionHandlers.put(index, handlerProvider);
+        if (containsContext(context)) {
+            throw new DuplicateInterceptorContextException(context.getPath(), context.getHttpMethod(),
+                    context.getQueryCount());
+        }
+        interceptors.put(context, handlerProvider);
+    }
+
+    protected boolean containsContext(InterceptorContext context) {
+        for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry : interceptors.entrySet()) {
+            if (entry.getKey().equals(context)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public <A> IndirectProvider<RestActionHandler> find(A action) {
-        if (restActionHandlers != null && action instanceof RestAction) {
+    public <A> IndirectProvider<RestInterceptor> find(A action) {
+        if (interceptors != null && action instanceof RestAction) {
             RestAction restAction = (RestAction) action;
-            return restActionHandlers.get(new RestHandlerIndex(restAction.getPath(),
-                restAction.getHttpMethod(), restAction.getQueryParams().size()));
+            IndirectProvider<RestInterceptor> provider = null;
+
+            InterceptorContext subjectContext = InterceptorContext.newContext(restAction);
+            for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry
+                    : interceptors.entrySet()) {
+                InterceptorContext context = entry.getKey();
+
+                if (context.equals(subjectContext)) {
+                    provider = entry.getValue();
+                }
+            }
+            return provider;
         } else {
             return null;
         }

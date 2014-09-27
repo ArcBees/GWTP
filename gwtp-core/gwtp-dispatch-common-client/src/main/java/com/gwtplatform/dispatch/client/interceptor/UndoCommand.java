@@ -14,20 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The interface that {@link ClientActionHandler}s use to send the action to undo to the server.
- *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.UndoCommand}
+ * The interface that {@link RpcInterceptor}s use to send the action to undo to the server.
  *
  * @param <A> The action type.
  * @param <R> The result type.
  */
-@Deprecated
 public interface UndoCommand<A, R> {
     /**
      * Undo an action.
@@ -35,7 +32,8 @@ public interface UndoCommand<A, R> {
      * @param action   The action to undo.
      * @param result   The result of the action to undo.
      * @param callback A callback that will be invoked once the action has been undone, successfully or not.
-     * @return A {@link DispatchRequest} object representing the request, it should never be {@code null}.
+     * @return A {@link com.gwtplatform.dispatch.shared.DispatchRequest} object representing the request,
+     *           it should never be {@code null}.
      */
     DispatchRequest undo(A action, R result, AsyncCallback<Void> callback);
 }

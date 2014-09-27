@@ -17,21 +17,23 @@
 package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerMismatchException;
-import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
+import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.client.interceptor.Interceptor;
+import com.gwtplatform.dispatch.client.interceptor.InterceptorMismatchException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a
- * {@link ClientActionHandler} to delegate the execution result.
+ * {@link com.gwtplatform.dispatch.client.interceptor.Interceptor} implementations to delegate the
+ * execution result.
  *
  * @param <A> the {@link TypedAction} type.
  * @param <R> the result type for this action.
+ * @param <T> the interceptor type used.
  */
-public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements AsyncCallback<ClientActionHandler<?, ?>>,
-        ExecuteCommand<A, R> {
+public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T extends Interceptor> implements
+        AsyncCallback<T>, ExecuteCommand<A, R> {
     private final DispatchCall dispatchCall;
     private final A action;
     private final AsyncCallback<R> callback;
@@ -47,13 +49,12 @@ public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements Asy
         this.dispatchRequest = dispatchRequest;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void onSuccess(ClientActionHandler<?, ?> clientActionHandler) {
-        if (clientActionHandler.getActionType() != action.getClass()) {
-            delegateFailure(clientActionHandler);
-        } else if (dispatchRequest.isPending()) {
-            delegateExecute((ClientActionHandler<A, R>) clientActionHandler);
+    public void onSuccess(T interceptor) {
+        if (interceptor.canExecute(getAction())) {
+            delegateFailure(interceptor);
+        } else if (getDispatchRequest().isPending()) {
+            delegateExecute(interceptor);
         }
     }
 
@@ -73,14 +74,23 @@ public class DelegatingAsyncCallback<A extends TypedAction<R>, R> implements Asy
         }
     }
 
-    private void delegateFailure(ClientActionHandler<?, ?> clientActionHandler) {
-        ClientActionHandlerMismatchException exception =
-                new ClientActionHandlerMismatchException(action.getClass(), clientActionHandler.getActionType());
+    protected void delegateFailure(Interceptor interceptor) {
+        InterceptorMismatchException exception =
+                new InterceptorMismatchException(action.getClass(), interceptor.getActionType());
 
         onFailure(exception);
     }
 
-    private void delegateExecute(ClientActionHandler<A, R> clientActionHandler) {
-        dispatchRequest.setDelegate(clientActionHandler.execute(action, callback, this));
+    @SuppressWarnings("unchecked")
+    protected void delegateExecute(Interceptor interceptor) {
+        dispatchRequest.setDelegate(interceptor.execute(action, callback, this));
+    }
+
+    public DelegatingDispatchRequest getDispatchRequest() {
+        return dispatchRequest;
+    }
+
+    public TypedAction getAction() {
+        return action;
     }
 }

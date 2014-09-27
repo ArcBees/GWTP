@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,17 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.actionhandler;
-
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+package com.gwtplatform.dispatch.client.interceptor;
 
 /**
- * Simple abstract super-class for {@link com.gwtplatform.dispatch.rest.client.actionhandler.RestActionHandler}
- * implementations that forces the action class to be passed in as a constructor to the handler.
+ * Abstract base interceptor.
+ *
+ * @param <A> action class.
+ * @param <R> result class.
  */
-public abstract class AbstractRestActionHandler implements RestActionHandler {
+public abstract class AbstractInterceptor<A, R> implements Interceptor<A, R> {
 
-    public Class<RestAction> getActionType() {
-        return RestAction.class;
+    private final Class<A> actionType;
+
+    protected AbstractInterceptor(Class<A> actionType) {
+        this.actionType = actionType;
+    }
+
+    @Override
+    public Class<A> getActionType() {
+        return actionType;
     }
 }

@@ -18,10 +18,7 @@ package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.shared.TypedAction;
@@ -32,7 +29,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * <p/>
  * This class will perform the work shared by all dispatch modules. It will delegate exceptions to the bound
  * {@code ExceptionHandler}. It will provide access to the security cookie through the bound
- * {@link SecurityCookieAccessor}. It will also delegate calls to the bound {@link ClientActionHandlerRegistry}.
+ * {@link SecurityCookieAccessor}.
  * <p/>
  * It also provides a couple extension points for implementations.
  *
@@ -42,49 +39,30 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final A action;
     private final AsyncCallback<R> callback;
-    private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
 
     private String securityCookie;
 
     public DispatchCall(ExceptionHandler exceptionHandler,
-                        ClientActionHandlerRegistry clientActionHandlerRegistry,
                         SecurityCookieAccessor securityCookieAccessor,
                         A action,
                         AsyncCallback<R> callback) {
         this.action = action;
         this.callback = callback;
         this.exceptionHandler = exceptionHandler;
-        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
     }
 
     /**
-     * Call this method to execute the {@link TypedAction action} wrapped by this instance. If the action is registered
-     * by the {@link ClientActionHandlerRegistry}, it will delegate the call it.
-     * <p/>
-     * Implementations should consider overriding {@link #doExecute()} to perform additional work.
+     * Call this method to execute the {@link TypedAction action} wrapped by this instance.
      *
      * @return a {@link DispatchRequest} object.
      */
     public DispatchRequest execute() {
         securityCookie = securityCookieAccessor.getCookieContent();
 
-        IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
-                clientActionHandlerRegistry.find(action);
-
-        if (clientActionHandlerProvider != null) {
-            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            DelegatingAsyncCallback<A, R> delegatingCallback =
-                    new DelegatingAsyncCallback<A, R>(this, action, callback, dispatchRequest);
-
-            clientActionHandlerProvider.get(delegatingCallback);
-
-            return dispatchRequest;
-        } else {
-            return doExecute();
-        }
+        return doExecute();
     }
 
     /**
@@ -110,15 +88,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      */
     protected AsyncCallback<R> getCallback() {
         return callback;
-    }
-
-    /**
-     * Returns the bound {@link ClientActionHandlerRegistry}.
-     *
-     * @return the bound {@link ClientActionHandlerRegistry}.
-     */
-    protected ClientActionHandlerRegistry getClientActionHandlerRegistry() {
-        return clientActionHandlerRegistry;
     }
 
     /**

@@ -22,8 +22,8 @@ import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
-import com.gwtplatform.dispatch.rest.client.actionhandler.DefaultRestActionHandlerRegistry;
-import com.gwtplatform.dispatch.rest.client.actionhandler.RestActionHandlerRegistry;
+import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRegistry;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -52,8 +52,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
     private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
-    private Class<? extends RestActionHandlerRegistry> actionHandlerRegistryType =
-        DefaultRestActionHandlerRegistry.class;
+    private Class<? extends RestInterceptorRegistry> interceptorRegistry = DefaultRestInterceptorRegistry.class;
 
     /**
      * Initiate the creation of a global header parameter that will be attached to all requests.
@@ -122,8 +121,8 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return dispatchHooks;
     }
 
-    public Class<? extends RestActionHandlerRegistry> getActionHandlerRegistryType() {
-        return actionHandlerRegistryType;
+    public Class<? extends RestInterceptorRegistry> getInterceptorRegistry() {
+        return interceptorRegistry;
     }
 
     /**
@@ -187,15 +186,15 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     }
 
     /**
-     * Specify an alternate client action handler registry.
+     * Specify an alternate REST interceptor registry.
      *
-     * @param actionHandlerRegistryType A {@link RestActionHandlerRegistry} class.
+     * @param interceptorRegistry A {@link RestInterceptorRegistry} class.
      *
      * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
      */
-    public RestDispatchAsyncModuleBuilder clientActionHandlerRegistry(
-            final Class<? extends RestActionHandlerRegistry> actionHandlerRegistryType) {
-        this.actionHandlerRegistryType = actionHandlerRegistryType;
+    public RestDispatchAsyncModuleBuilder interceptorRegistry(
+            final Class<? extends RestInterceptorRegistry> interceptorRegistry) {
+        this.interceptorRegistry = interceptorRegistry;
         return this;
     }
 

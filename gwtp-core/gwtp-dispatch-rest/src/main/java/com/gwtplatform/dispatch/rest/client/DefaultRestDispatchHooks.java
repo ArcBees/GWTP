@@ -19,6 +19,9 @@ package com.gwtplatform.dispatch.rest.client;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
+/**
+ * Default REST dispatch hooks.
+ */
 public class DefaultRestDispatchHooks implements RestDispatchHooks {
     @Override
     public void onExecute(RestAction action) {

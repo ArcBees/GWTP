@@ -20,12 +20,12 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * An implementation of {@link DispatchRequest} that is used in conjunction with
- * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s.
+ * {@link com.gwtplatform.dispatch.client.interceptor.Interceptor}s.
  * <p/>
- * As the ClientActionHandler may be provided asynchronously, the {@link ClientActionHandlerDispatchRequest} will
- * initially not contain an {@link DispatchRequest}.
- * Once the {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler} is executed, this be populated
- * with a {@link DelegatingDispatchRequest} by calling {@link #setDelegate(DispatchRequest)}.
+ * As the {@link com.gwtplatform.dispatch.client.interceptor.Interceptor} implementation may be provided
+ * asynchronously, the {@link RpcInterceptorDispatchRequest} will initially not contain an {@link DispatchRequest}.
+ * Once the {@link com.gwtplatform.dispatch.client.interceptor.Interceptor} is executed, this be
+ * populated with a {@link DelegatingDispatchRequest} by calling {@link #setDelegate(DispatchRequest)}.
  */
 public class DelegatingDispatchRequest implements DispatchRequest {
     private boolean cancelled;

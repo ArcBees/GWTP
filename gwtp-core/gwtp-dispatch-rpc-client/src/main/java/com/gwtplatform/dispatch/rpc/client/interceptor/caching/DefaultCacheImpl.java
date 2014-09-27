@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler.caching;
+package com.gwtplatform.dispatch.rpc.client.interceptor.caching;
 
 import java.util.Date;
 import java.util.Map;
@@ -23,10 +23,7 @@ import com.google.common.collect.Maps;
 
 /**
  * Default Implementation for {@link Cache}, backed by an {@link java.util.HashMap}.
- *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.DefaultCacheImpl}
  */
-@Deprecated
 public class DefaultCacheImpl implements Cache {
     private static class CacheValue {
         private final Object value;

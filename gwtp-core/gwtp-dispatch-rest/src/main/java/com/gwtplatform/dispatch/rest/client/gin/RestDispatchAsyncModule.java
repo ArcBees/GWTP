@@ -40,7 +40,7 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
-import com.gwtplatform.dispatch.rest.client.actionhandler.RestActionHandlerRegistry;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -83,12 +83,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
-        // Dispatch Hooks
-        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
-
-        // Client Action Handler
-        bind(RestActionHandlerRegistry.class).to(builder.getActionHandlerRegistryType()).asEagerSingleton();
-
         // Common
         install(new CommonGinModule());
 
@@ -113,6 +107,12 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
         // Entry Point
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
+
+        // Dispatch Hooks
+        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).asEagerSingleton();
+
+        // Interceptor Registry
+        bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).asEagerSingleton();
     }
 
     @Provides

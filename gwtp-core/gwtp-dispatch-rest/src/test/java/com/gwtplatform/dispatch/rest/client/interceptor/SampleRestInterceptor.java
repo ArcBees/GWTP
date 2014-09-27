@@ -14,32 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.actionhandler;
+package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Provider;
-import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
-import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
+import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
-public class SampleClientActionHandler extends AbstractClientActionHandler<RestAction, Object> {
+public class SampleRestInterceptor extends AbstractRestInterceptor {
 
-    public SampleClientActionHandler() {
-        super(RestAction.class);
+    public SampleRestInterceptor(InterceptorContext index) {
+        super(index);
     }
 
     @Override
     public DispatchRequest execute(RestAction action, AsyncCallback<Object> resultCallback,
-            ExecuteCommand<RestAction, Object> executeCommand) {
-        return null;
-    }
-
-    @Override
-    public DispatchRequest undo(RestAction action, Object result, AsyncCallback<Void> callback,
-            UndoCommand<RestAction, Object> undoCommand) {
+           ExecuteCommand<RestAction, Object> executeCommand) {
         return null;
     }
 }

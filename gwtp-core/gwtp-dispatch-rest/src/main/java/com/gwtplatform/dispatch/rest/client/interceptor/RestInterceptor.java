@@ -14,16 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.actionhandler;
+package com.gwtplatform.dispatch.rest.client.interceptor;
 
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
+import com.gwtplatform.dispatch.client.interceptor.Interceptor;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
  * Instances of this interface will handle specific types of action classes on the client.
  * <p/>
- * When a call is executed, the {@link ClientActionHandler} that has been registered with the bound
- * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry} is called and
+ * When a call is executed, the {@link Interceptor} that has been registered with the bound
+ * {@link com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry} is called and
  * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically send the command over
  * HTTP to the server.
  * <p/>
@@ -32,17 +32,17 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * <li>The action can be modified before sending the action to the server.</li>
  * <li>A result can be returned without contacting the server.</li>
  * <li>The result can be modified or processed after it is returned from the server.</li>
- * <li>The {@link ClientActionHandler} can take over and communicate directly with the server, possibly using a
+ * <li>The {@link Interceptor} can take over and communicate directly with the server, possibly using a
  * different mechanism.</li>
  * </ul>
  * <p/>
  * <b>Important!</b> If your action handler makes asynchronous calls, be careful with your use of fields as a second
  * call your handler could be made while it is waiting for the asynchronous call to return.
  */
-public interface RestActionHandler extends ClientActionHandler<RestAction, Object> {
+public interface RestInterceptor extends Interceptor<RestAction, Object> {
 
     /**
-     * Get rest action handlers mapping index.
+     * Get rest interceptor contexts.
      */
-    RestHandlerIndex getIndex();
+    InterceptorContext[] getInterceptorContexts();
 }

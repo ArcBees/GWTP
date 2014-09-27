@@ -24,15 +24,12 @@ import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
 import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
-import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server.
- * This module requires an {@link ExceptionHandler}, a {@link DefaultClientActionHandlerRegistry} and a
- * {@link SecurityCookieAccessor}. By default, these will be bound to {@link DefaultExceptionHandler},
- * {@link DefaultClientActionHandlerRegistry} and {@link DefaultSecurityCookieAccessor} respectively.
+ * This module requires an {@link ExceptionHandler} and a {@link SecurityCookieAccessor}. By default,
+ * these will be bound to {@link DefaultExceptionHandler}, {@link DefaultSecurityCookieAccessor} respectively.
  * <p/>
  * Install the module in one of your {@link #configure()} methods:
  * <p/>
@@ -51,8 +48,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
      * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use
-     * {@link DefaultExceptionHandler}, {@link DefaultClientActionHandlerRegistry} and
-     * {@link DefaultSecurityCookieAccessor}.
+     * {@link DefaultExceptionHandler} and {@link DefaultSecurityCookieAccessor}.
      *
      * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder
      * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.Builder
@@ -129,7 +125,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
         if (annotationClass != null) {
             return binding.annotatedWith(annotationClass);
         }
-
         return binding;
     }
 }

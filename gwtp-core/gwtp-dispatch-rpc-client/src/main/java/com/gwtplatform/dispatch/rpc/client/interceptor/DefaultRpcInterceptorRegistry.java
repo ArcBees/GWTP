@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.rpc.client.interceptor;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.common.client.ProviderBundle;
 
 /**
- * The default implementation that {@link ClientActionHandlerRegistry} that if bound will not load any client-side
+ * The default implementation that {@link RpcInterceptorRegistry} that if bound will not load any client-side
  * action handlers.
  * </p>
  * To register client-side action handlers, extend this class and call {@link #register} in the constructor.
@@ -66,23 +66,20 @@ import com.gwtplatform.common.client.ProviderBundle;
  * }
  * </code>
  * </pre>
- *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry}
  */
-@Deprecated
-public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRegistry {
-    private Map<Class<?>, IndirectProvider<ClientActionHandler<?, ?>>> clientActionHandlers;
+public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
+    private Map<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>> interceptors;
 
     /**
      * Register a instance of a client-side action handler.
      *
-     * @param handler The {@link ClientActionHandler};
+     * @param handler The {@link RpcInterceptor};
      */
-    protected void register(final ClientActionHandler<?, ?> handler) {
+    protected void register(final RpcInterceptor<?, ?> handler) {
         register(handler.getActionType(),
-                new IndirectProvider<ClientActionHandler<?, ?>>() {
+                new IndirectProvider<RpcInterceptor<?, ?>>() {
                     @Override
-                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+                    public void get(AsyncCallback<RpcInterceptor<?, ?>> callback) {
                         callback.onSuccess(handler);
                     }
                 });
@@ -95,11 +92,11 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
      */
     protected void register(Class<?> actionType,
-                            final Provider<? extends ClientActionHandler<?, ?>> handlerProvider) {
+                            final Provider<? extends RpcInterceptor<?, ?>> handlerProvider) {
         register(actionType,
-                new IndirectProvider<ClientActionHandler<?, ?>>() {
+                new IndirectProvider<RpcInterceptor<?, ?>>() {
                     @Override
-                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+                    public void get(AsyncCallback<RpcInterceptor<?, ?>> callback) {
                         callback.onSuccess(handlerProvider.get());
                     }
                 });
@@ -112,11 +109,11 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
      * @param handlerProvider The {@link com.google.gwt.inject.client.AsyncProvider} of the handler.
      */
     protected void register(Class<?> actionType,
-                            final AsyncProvider<? extends ClientActionHandler<?, ?>> handlerProvider) {
+                            final AsyncProvider<? extends RpcInterceptor<?, ?>> handlerProvider) {
         register(actionType,
-                new IndirectProvider<ClientActionHandler<?, ?>>() {
+                new IndirectProvider<RpcInterceptor<?, ?>>() {
                     @Override
-                    public void get(AsyncCallback<ClientActionHandler<?, ?>> callback) {
+                    public void get(AsyncCallback<RpcInterceptor<?, ?>> callback) {
                         handlerProvider.get(callback);
                     }
                 });
@@ -133,7 +130,7 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
     protected <B extends ProviderBundle> void register(Class<?> actionType,
                                                        AsyncProvider<B> bundleProvider,
                                                        int providerId) {
-        register(actionType, new CodeSplitBundleProvider<ClientActionHandler<?, ?>, B>(bundleProvider, providerId));
+        register(actionType, new CodeSplitBundleProvider<RpcInterceptor<?, ?>, B>(bundleProvider, providerId));
     }
 
     /**
@@ -142,29 +139,20 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
      * @param handlerProvider The {@link com.gwtplatform.common.client.IndirectProvider}.
      */
     protected void register(Class<?> actionType,
-                            IndirectProvider<ClientActionHandler<?, ?>> handlerProvider) {
-        if (clientActionHandlers == null) {
-            clientActionHandlers = Maps.newHashMap();
+                            IndirectProvider<RpcInterceptor<?, ?>> handlerProvider) {
+        if (interceptors == null) {
+            interceptors = Maps.newHashMap();
         }
 
-        clientActionHandlers.put(actionType, handlerProvider);
+        interceptors.put(actionType, handlerProvider);
     }
 
     @Override
-    public <A> IndirectProvider<ClientActionHandler<?, ?>> find(Class<A> actionClass) {
-        if (clientActionHandlers == null) {
+    public <A> IndirectProvider<RpcInterceptor<?, ?>> find(A action) {
+        if (interceptors == null) {
             return null;
         } else {
-            return clientActionHandlers.get(actionClass);
-        }
-    }
-
-    @Override
-    public <A> IndirectProvider<ClientActionHandler<?, ?>> find(A action) {
-        if (clientActionHandlers == null) {
-            return null;
-        } else {
-            return clientActionHandlers.get(action.getClass());
+            return interceptors.get(action.getClass());
         }
     }
 }

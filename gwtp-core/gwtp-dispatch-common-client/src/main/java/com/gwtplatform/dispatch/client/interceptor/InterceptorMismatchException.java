@@ -14,22 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.client.interceptor;
 
 /**
- * This exception is thrown as a side-effect of an error calling {@link DefaultClientActionHandlerRegistry#register}.
+ * This exception is thrown as a side-effect of an error when registering a delegating callback.
  * A provider was registered to provide a client-side action handler for an action, but this action was not the same
- * action as specified by {@link ClientActionHandler#getActionType()}.
- *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorMismatchException}
+ * action as specified by {@link Interceptor#getActionType()}.
  */
-@Deprecated
-public class ClientActionHandlerMismatchException extends RuntimeException {
+public class InterceptorMismatchException extends RuntimeException {
     private final Class<?> requestedActionType;
     private final Class<?> supportedActionType;
 
-    public ClientActionHandlerMismatchException(Class<?> requestedActionType,
-                                                Class<?> supportedActionType) {
+    private InterceptorMismatchException() {
+        this.requestedActionType = null;
+        this.supportedActionType = null;
+    }
+
+    public InterceptorMismatchException(Class<?> requestedActionType,
+                                        Class<?> supportedActionType) {
         this.requestedActionType = requestedActionType;
         this.supportedActionType = supportedActionType;
     }

@@ -14,26 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.rpc.client.interceptor;
+
+import com.gwtplatform.dispatch.client.interceptor.AbstractInterceptor;
+import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * Simple abstract super-class for {@link ClientActionHandler} implementations that forces the action class to be passed
+ * Simple abstract super-class for {@link RpcInterceptor} implementations that forces the action class to be passed
  * in as a constructor to the handler.
- *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.AbstractRpcInterceptor}
  *
  * @param <A> The action type.
  * @param <R> The result type.
  */
-@Deprecated
-public abstract class AbstractClientActionHandler<A, R> implements ClientActionHandler<A, R> {
-    private final Class<A> actionType;
-
-    protected AbstractClientActionHandler(Class<A> actionType) {
-        this.actionType = actionType;
+public abstract class AbstractRpcInterceptor<A, R> extends AbstractInterceptor<A, R> implements RpcInterceptor<A, R> {
+    protected AbstractRpcInterceptor(Class<A> actionType) {
+        super(actionType);
     }
 
-    public Class<A> getActionType() {
-        return actionType;
+    @Override
+    public boolean canExecute(TypedAction action) {
+        return getActionType() != action.getClass();
     }
 }
