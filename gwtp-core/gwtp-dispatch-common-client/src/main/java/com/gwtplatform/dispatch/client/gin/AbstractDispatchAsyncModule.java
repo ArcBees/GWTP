@@ -59,8 +59,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
      */
     public abstract static class Builder {
         private Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
-        private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
-                DefaultClientActionHandlerRegistry.class;
         private Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
 
         /**
@@ -75,19 +73,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @return The built {@link AbstractDispatchAsyncModule}.
          */
         public abstract AbstractDispatchAsyncModule build();
-
-        /**
-         * Specify an alternate client action handler registry.
-         *
-         * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
-         *
-         * @return a {@link Builder} object.
-         */
-        public <T extends Builder> T clientActionHandlerRegistry(
-                final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
-            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
-            return (T) this;
-        }
 
         /**
          * Specify an alternative exception handler.
@@ -125,7 +110,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
 
     @Override
     protected final void configure() {
-        bindAnnotated(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
         bindAnnotated(ExceptionHandler.class).to(builder.exceptionHandlerType);
         bindAnnotated(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
 

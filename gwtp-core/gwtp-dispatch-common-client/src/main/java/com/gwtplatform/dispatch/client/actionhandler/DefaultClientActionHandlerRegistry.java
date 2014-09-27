@@ -18,11 +18,10 @@ package com.gwtplatform.dispatch.client.actionhandler;
 
 import java.util.Map;
 
-import javax.inject.Provider;
-
 import com.google.common.collect.Maps;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Provider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.common.client.ProviderBundle;
@@ -154,6 +153,15 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
             return null;
         } else {
             return clientActionHandlers.get(actionClass);
+        }
+    }
+
+    @Override
+    public <A> IndirectProvider<ClientActionHandler<?, ?>> find(A action) {
+        if (clientActionHandlers == null) {
+            return null;
+        } else {
+            return clientActionHandlers.get(action.getClass());
         }
     }
 }

@@ -25,9 +25,8 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 public class ActionCachingHandler<A, R> extends AbstractCachingClientActionHandler<A, R> {
     // TODO Add support for timeout based auto-expiry of cached results?
 
-    public ActionCachingHandler(Class<A> actionType,
-                                Cache cache) {
-        super(actionType, cache);
+    public ActionCachingHandler(A action, Cache cache) {
+        super(action, cache);
     }
 
     @Override

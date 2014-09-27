@@ -22,6 +22,8 @@ import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
+import com.gwtplatform.dispatch.rest.client.actionhandler.DefaultRestActionHandlerRegistry;
+import com.gwtplatform.dispatch.rest.client.actionhandler.RestActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -50,6 +52,8 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
     private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
+    private Class<? extends RestActionHandlerRegistry> actionHandlerRegistryType =
+        DefaultRestActionHandlerRegistry.class;
 
     /**
      * Initiate the creation of a global header parameter that will be attached to all requests.
@@ -118,6 +122,10 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return dispatchHooks;
     }
 
+    public Class<? extends RestActionHandlerRegistry> getActionHandlerRegistryType() {
+        return actionHandlerRegistryType;
+    }
+
     /**
      * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
      * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
@@ -167,14 +175,27 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     }
 
     /**
-     * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
+     * Supply your own implementation of {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks}.
      * Default is {@link com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks}
      *
-     * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
+     * @param dispatchHooks The {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks} implementation.
      * @return this {@link RestDispatchAsyncModuleBuilder} object.
      */
     public RestDispatchAsyncModuleBuilder dispatchHooks(final Class<? extends RestDispatchHooks> dispatchHooks) {
         this.dispatchHooks = dispatchHooks;
+        return this;
+    }
+
+    /**
+     * Specify an alternate client action handler registry.
+     *
+     * @param actionHandlerRegistryType A {@link RestActionHandlerRegistry} class.
+     *
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
+    public RestDispatchAsyncModuleBuilder clientActionHandlerRegistry(
+            final Class<? extends RestActionHandlerRegistry> actionHandlerRegistryType) {
+        this.actionHandlerRegistryType = actionHandlerRegistryType;
         return this;
     }
 

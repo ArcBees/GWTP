@@ -58,9 +58,8 @@ public abstract class AbstractCachingClientActionHandler<A, R> extends AbstractC
     // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
     private Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = Maps.newHashMap();
 
-    public AbstractCachingClientActionHandler(Class<A> actionType,
-                                              Cache cache) {
-        super(actionType);
+    public AbstractCachingClientActionHandler(A action, Cache cache) {
+        super(action);
         this.cache = cache;
     }
 

@@ -78,8 +78,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new Builder());
     }
 
-    protected RpcDispatchAsyncModule(
-            Builder builder) {
+    protected RpcDispatchAsyncModule( Builder builder) {
         super(builder, RpcBinding.class);
 
         this.builder = builder;
