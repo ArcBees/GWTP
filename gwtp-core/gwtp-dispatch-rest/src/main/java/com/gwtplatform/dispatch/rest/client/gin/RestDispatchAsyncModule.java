@@ -16,13 +16,14 @@
 
 package com.gwtplatform.dispatch.rest.client.gin;
 
+import javax.inject.Singleton;
+
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;

@@ -16,9 +16,10 @@
 
 package com.gwtplatform.dispatch.rpc.client.gin;
 
+import javax.inject.Singleton;
+
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
