@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.dispatch;
+package com.gwtplatform.carstore.client.dispatch.rest;
 
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;

@@ -22,11 +22,15 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptedAsyncCallback;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptor;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestCallback;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -42,31 +46,50 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
+    private final RestInterceptorRegistry interceptorRegistry;
     private final RestDispatchHooks dispatchHooks;
 
-    public RestDispatchCall(ExceptionHandler exceptionHandler,
-                            ClientActionHandlerRegistry clientActionHandlerRegistry,
-                            SecurityCookieAccessor securityCookieAccessor,
-                            RestRequestBuilderFactory requestBuilderFactory,
-                            RestResponseDeserializer restResponseDeserializer,
-                            RestDispatchHooks dispatchHooks,
-                            A action,
-                            AsyncCallback<R> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
+    public RestDispatchCall(
+            ExceptionHandler exceptionHandler,
+            RestInterceptorRegistry interceptorRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            RestRequestBuilderFactory requestBuilderFactory,
+            RestResponseDeserializer restResponseDeserializer,
+            RestDispatchHooks dispatchHooks,
+            A action,
+            AsyncCallback<R> callback) {
+        super(exceptionHandler, securityCookieAccessor, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
+        this.interceptorRegistry = interceptorRegistry;
         this.dispatchHooks = dispatchHooks;
     }
 
     @Override
     public DispatchRequest execute() {
-        dispatchHooks.onExecute(getAction());
-        return super.execute();
+        A action = getAction();
+        dispatchHooks.onExecute(action);
+
+        IndirectProvider<RestInterceptor> interceptorProvider = interceptorRegistry.find(action);
+
+        // Attempt to intercept the dispatch request
+        if (interceptorProvider != null) {
+            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
+            RestInterceptedAsyncCallback<A, R> delegatingCallback =
+                    new RestInterceptedAsyncCallback<A, R>(this, action, getCallback(), dispatchRequest);
+
+            interceptorProvider.get(delegatingCallback);
+
+            return dispatchRequest;
+        } else {
+            // Execute the request as given
+            return processCall();
+        }
     }
 
     @Override
-    protected DispatchRequest doExecute() {
+    protected DispatchRequest processCall() {
         try {
             RequestBuilder requestBuilder = buildRequest();
 
@@ -76,7 +99,6 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         } catch (ActionException e) {
             onExecuteFailure(e);
         }
-
         return new CompletedDispatchRequest();
     }
 

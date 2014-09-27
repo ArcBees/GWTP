@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.dispatch;
+package com.gwtplatform.carstore.client.dispatch.rpc;
 
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks;
 import com.gwtplatform.dispatch.rpc.shared.Action;

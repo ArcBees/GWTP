@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler.caching;
+package com.gwtplatform.dispatch.rpc.client.interceptor.caching;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +26,21 @@ import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.DelegatingCallbackDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
-import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
+import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.rpc.client.interceptor.AbstractRpcInterceptor;
+import com.gwtplatform.dispatch.rpc.client.interceptor.UndoCommand;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
+import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * Abstract base class for client-side action handlers with caching support.
+ * Abstract base class for client-side interceptors with caching support.
  * <p>
  * Supported features include:
  * </p>
  * <ol>
  * <li>
- * {@link #prefetch}/{@link #postfetch} perform the cache lookup and the cache store. You can use this to customize
- * the caching logic.
+ * {@link #prefetch}/{@link #postfetch} perform the cache lookup and the cache store. You can use this
+ * to customize the caching logic.
  * </li>
  * <li>
  * Automatic action queuing so that calls in quick succession result in a single trip to the server.
@@ -48,30 +49,30 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * Flexibility of cache implementation to support custom caching
  * </li>
  * </ol>
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.AbstractCachingRpcInterceptor}
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.
  */
-@Deprecated
-public abstract class AbstractCachingClientActionHandler<A, R> extends AbstractClientActionHandler<A, R> {
+public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInterceptor<A, R> {
     private final Cache cache;
 
     // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
     private Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = Maps.newHashMap();
 
-    public AbstractCachingClientActionHandler(Class<A> actionType, Cache cache) {
+    public AbstractCachingRpcInterceptor(Class<A> actionType, Cache cache) {
         super(actionType);
         this.cache = cache;
     }
 
     public DispatchRequest execute(final A action,
-                                   final AsyncCallback<R> resultCallback, ExecuteCommand<A, R> executeCommand) {
+                                   final AsyncCallback<R> resultCallback,
+                                   ExecuteCommand<A, R> executeCommand) {
         // First check if any pending callbacks for this action
         List<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
 
         if (pendingRequestCallbacks != null) {
-            CallbackDispatchRequest<R> callbackDispatchRequest = new DefaultCallbackDispatchRequest<R>(resultCallback);
+            CallbackDispatchRequest<R> callbackDispatchRequest =
+                    new DefaultCallbackDispatchRequest<R>(resultCallback);
 
             // Add callback to pending list and return
             pendingRequestCallbacks.add(callbackDispatchRequest);
@@ -176,4 +177,8 @@ public abstract class AbstractCachingClientActionHandler<A, R> extends AbstractC
         return cache;
     }
 
+    @Override
+    public boolean canExecute(TypedAction action) {
+        return action.getClass().equals(getActionType());
+    }
 }

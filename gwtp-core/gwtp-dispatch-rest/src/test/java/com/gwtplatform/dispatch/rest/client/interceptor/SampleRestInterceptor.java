@@ -14,24 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.interceptor;
 
-import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
-/**
- * Default REST dispatch hooks.
- */
-public class DefaultRestDispatchHooks implements RestDispatchHooks {
-    @Override
-    public void onExecute(RestAction action) {
+public class SampleRestInterceptor extends AbstractRestInterceptor {
+    public SampleRestInterceptor(InterceptorContext index) {
+        super(index);
     }
 
     @Override
-    public void onSuccess(RestAction action, Response response, Object result) {
-    }
-
-    @Override
-    public void onFailure(RestAction action, Response response, Throwable caught) {
+    public DispatchRequest execute(RestAction action, AsyncCallback<Object> resultCallback,
+           ExecuteCommand<RestAction, Object> executeCommand) {
+        return null;
     }
 }

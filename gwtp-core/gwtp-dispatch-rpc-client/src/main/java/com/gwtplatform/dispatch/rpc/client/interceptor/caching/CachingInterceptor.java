@@ -14,21 +14,18 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler.caching;
+package com.gwtplatform.dispatch.rpc.client.interceptor.caching;
 
 /**
- * Default implementation of {@link AbstractCachingClientActionHandler}. It supports action caching
- *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.CachingInterceptor}
+ * Default implementation of {@link AbstractCachingRpcInterceptor}. It supports action caching
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.
  */
-@Deprecated
-public class ActionCachingHandler<A, R> extends AbstractCachingClientActionHandler<A, R> {
+public class CachingInterceptor<A, R> extends AbstractCachingRpcInterceptor<A, R> {
     // TODO Add support for timeout based auto-expiry of cached results?
 
-    public ActionCachingHandler(Class<A> actionType, Cache cache) {
+    public CachingInterceptor(Class<A> actionType, Cache cache) {
         super(actionType, cache);
     }
 

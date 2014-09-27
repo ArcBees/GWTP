@@ -23,7 +23,10 @@ import com.gwtplatform.common.client.IndirectProvider;
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} or
  * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find client-side action
  * handlers.
+ *
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry}
  */
+@Deprecated
 public interface ClientActionHandlerRegistry {
     /**
      * Gets the client-side action handler that supports the specific action.
