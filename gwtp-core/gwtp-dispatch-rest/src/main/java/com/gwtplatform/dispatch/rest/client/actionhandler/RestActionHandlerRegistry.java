@@ -14,32 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.rest.client.actionhandler;
 
 import com.gwtplatform.common.client.IndirectProvider;
 
 /**
  * Implementations of this interface will be used by
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} or
  * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find client-side action
  * handlers.
  */
-public interface ClientActionHandlerRegistry {
-    /**
-     * Gets the client-side action handler that supports the specific action.
-     *
-     * @return The the client-side action handler, or {@code null} if no appropriate client-side action handler could be
-     * found.
-     * @deprecated use {@link ClientActionHandlerRegistry#find(Object)}} instead.
-     */
-    @Deprecated
-    <A> IndirectProvider<ClientActionHandler<?, ?>> find(Class<A> actionClass);
-
+public interface RestActionHandlerRegistry {
     /**
      * Gets the client-side action handler that supports the specific action.
      *
      * @return The the client-side action handler, or {@code null} if no appropriate client-side action handler could be
      * found.
      */
-    <A> IndirectProvider<ClientActionHandler<?, ?>> find(A action);
+    <A> IndirectProvider<RestActionHandler> find(A action);
 }

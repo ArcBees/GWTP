@@ -76,7 +76,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         securityCookie = securityCookieAccessor.getCookieContent();
 
         IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
-                clientActionHandlerRegistry.find(action.getClass());
+                clientActionHandlerRegistry.find(action);
 
         if (clientActionHandlerProvider != null) {
             DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();

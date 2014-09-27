@@ -39,6 +39,7 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
+import com.gwtplatform.dispatch.rest.client.actionhandler.RestActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -56,7 +57,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
@@ -81,6 +82,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
+        // Client Action Handler
+        bind(RestActionHandlerRegistry.class).to(builder.getActionHandlerRegistryType()).asEagerSingleton();
+
         // Common
         install(new CommonGinModule());
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,21 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.rest.client.actionhandler;
+
+import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
- * Default dispatch hooks.
+ * Simple abstract super-class for {@link com.gwtplatform.dispatch.rest.client.actionhandler.RestActionHandler}
+ * implementations that forces the action class to be passed in as a constructor to the handler.
  */
-public class DefaultDispatchHooks implements DispatchHooks {
-    @Override
-    public void onSuccess() {
-    }
+public abstract class AbstractRestActionHandler implements RestActionHandler {
 
-    @Override
-    public void onExecute() {
-    }
-
-    @Override
-    public void onFailure() {
+    public Class<RestAction> getActionType() {
+        return RestAction.class;
     }
 }
