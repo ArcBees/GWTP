@@ -27,8 +27,8 @@ import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
-import com.gwtplatform.dispatch.rpc.client.interceptor.UndoCommand;
 import com.gwtplatform.dispatch.rpc.client.interceptor.AbstractRpcInterceptor;
+import com.gwtplatform.dispatch.rpc.client.interceptor.UndoCommand;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
