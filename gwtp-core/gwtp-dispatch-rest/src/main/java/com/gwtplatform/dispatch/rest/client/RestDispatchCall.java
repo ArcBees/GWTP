@@ -66,12 +66,12 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     }
 
     @Override
-    protected DispatchRequest doExecute() {
+    public DispatchRequest execute() {
         final A action = getAction();
         dispatchHooks.onExecute(action);
 
         IndirectProvider<RestInterceptor> interceptorProvider =
-            interceptorRegistry.find(action);
+                interceptorRegistry.find(action);
 
         if (interceptorProvider != null) {
             DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
@@ -82,17 +82,21 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
             return dispatchRequest;
         } else {
-            try {
-                RequestBuilder requestBuilder = buildRequest();
-
-                return new GwtHttpDispatchRequest(requestBuilder.send());
-            } catch (RequestException e) {
-                onExecuteFailure(e);
-            } catch (ActionException e) {
-                onExecuteFailure(e);
-            }
+            return doExecute();
         }
+    }
 
+    @Override
+    protected DispatchRequest doExecute() {
+        try {
+            RequestBuilder requestBuilder = buildRequest();
+
+            return new GwtHttpDispatchRequest(requestBuilder.send());
+        } catch (RequestException e) {
+            onExecuteFailure(e);
+        } catch (ActionException e) {
+            onExecuteFailure(e);
+        }
         return new CompletedDispatchRequest();
     }
 

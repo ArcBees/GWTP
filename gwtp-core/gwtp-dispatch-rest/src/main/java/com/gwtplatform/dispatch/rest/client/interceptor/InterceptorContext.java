@@ -32,14 +32,18 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  */
 public class InterceptorContext {
 
+    // Template definitions
     private RestAction<?> template;
 
+    // Manual definitions
     private String path;
     private HttpMethod httpMethod;
     private int queryCount;
 
+    // Check Properties
     private boolean transcendent;
     private boolean anyHttpMethod;
+    private boolean anyQueryCount;
 
     private InterceptorContext() { }
 
@@ -67,9 +71,22 @@ public class InterceptorContext {
      * @param anyHttpMethod Allow any HTTP httpMethod when checking.
      */
     public InterceptorContext(RestAction<?> template, boolean transcendent, boolean anyHttpMethod) {
+        this(template, transcendent, anyHttpMethod, false);
+    }
+
+    /**
+     * Providing the action template that will define the context properties.
+     * @param template RestAction with the context properties required.
+     * @param transcendent Use a transcendent strategy on the path, e.g. /path will be detected using /path/2.
+     * @param anyHttpMethod Allow any HTTP httpMethod when checking.
+     * @param anyQueryCount Allow any query param count.
+     */
+    public InterceptorContext(RestAction<?> template, boolean transcendent, boolean anyHttpMethod,
+                              boolean anyQueryCount) {
         this.template = template;
         this.transcendent = transcendent;
         this.anyHttpMethod = anyHttpMethod;
+        this.anyQueryCount = anyQueryCount;
     }
 
     /**
@@ -88,13 +105,16 @@ public class InterceptorContext {
         if (httpMethod == null) {
             anyHttpMethod = true;
         }
+        if (queryCount < 0) {
+            anyQueryCount = true;
+        }
     }
 
-    public static InterceptorContext newContext(RestAction action) {
+    public static InterceptorContext newContext(RestAction<?> action) {
         return new InterceptorContext(action);
     }
 
-    protected boolean canIntercept(RestAction action) {
+    protected boolean canIntercept(RestAction<?> action) {
         // Required check types
         if (useTemplate()) {
             path = template.getPath();
@@ -110,19 +130,21 @@ public class InterceptorContext {
         } else {
             // Http Method Check
             if (!isAnyHttpMethod()) {
-                if (action.getHttpMethod().equals(httpMethod)) {
+                if (!action.getHttpMethod().equals(httpMethod)) {
                     return false;
                 }
             }
 
             // Query Parameters
-            List<RestParameter> queryParams = template.getQueryParams();
-            if (action.getQueryParams().size() != queryCount) {
-                return false;
-            } else if (useTemplate()) {
-                // We can do some thorough checking with templates
-                if (!action.getQueryParams().equals(template.getQueryParams())) {
+            if (!anyQueryCount) {
+                List<RestParameter> queryParams = action.getQueryParams();
+                if (queryParams.size() != queryCount) {
                     return false;
+                } else if (useTemplate()) {
+                    // We can do some thorough checking with templates
+                    if (!queryParams.equals(template.getQueryParams())) {
+                        return false;
+                    }
                 }
             }
         }

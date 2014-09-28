@@ -24,11 +24,6 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
  * An exposed RestAction implementation.
  */
 class InterceptRestAction extends AbstractRestAction<Object> {
-    @Override
-    public boolean isSecured() {
-        return false;
-    }
-
     protected InterceptRestAction(HttpMethod httpMethod,
                                   String rawServicePath,
                                   int queryCount) {
@@ -38,5 +33,10 @@ class InterceptRestAction extends AbstractRestAction<Object> {
         for (int i = 0; i < queryCount; i++) {
             addQueryParam("param" + i, "value" + i);
         }
+    }
+
+    @Override
+    public boolean isSecured() {
+        return false;
     }
 }

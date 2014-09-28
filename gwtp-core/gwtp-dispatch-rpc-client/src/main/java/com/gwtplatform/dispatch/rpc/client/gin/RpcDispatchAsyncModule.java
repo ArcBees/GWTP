@@ -109,7 +109,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
         bind(DispatchAsync.class).to(RpcDispatchAsync.class).in(Singleton.class);
 
-        bind(RpcInterceptorRegistry.class).to(builder.getInterceptorRegistry()).asEagerSingleton();
+        bind(RpcInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
 
         bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
     }

@@ -14,17 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client.interceptor;
+package com.gwtplatform.carstore.client.dispatch.rpc;
 
-import com.gwtplatform.common.client.IndirectProvider;
-import com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry;
+import javax.inject.Inject;
 
-/**
- * Implementations of this interface will be used by
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} implementation to find
- * client-side action handlers.
- */
-public interface RpcInterceptorRegistry extends InterceptorRegistry {
+import com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry;
 
-    <A> IndirectProvider<RpcInterceptor<?, ?>> find(A actionClass);
+public class RpcInterceptorRegistry extends DefaultRpcInterceptorRegistry {
+
+    @Inject
+    RpcInterceptorRegistry(LogInInterceptor logInInterceptor) {
+        register(logInInterceptor);
+    }
 }

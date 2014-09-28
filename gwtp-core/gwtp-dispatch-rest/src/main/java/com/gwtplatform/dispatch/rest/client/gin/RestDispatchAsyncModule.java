@@ -109,10 +109,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
 
         // Dispatch Hooks
-        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).asEagerSingleton();
+        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
 
         // Interceptor Registry
-        bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).asEagerSingleton();
+        bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
     }
 
     @Provides

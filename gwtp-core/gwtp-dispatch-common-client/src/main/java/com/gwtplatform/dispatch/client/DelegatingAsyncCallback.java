@@ -51,7 +51,7 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
 
     @Override
     public void onSuccess(T interceptor) {
-        if (interceptor.canExecute(getAction())) {
+        if (!interceptor.canExecute(getAction())) {
             delegateFailure(interceptor);
         } else if (getDispatchRequest().isPending()) {
             delegateExecute(interceptor);

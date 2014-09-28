@@ -74,26 +74,31 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
     }
 
     @Override
-    protected DispatchRequest doExecute() {
+    public DispatchRequest execute() {
         dispatchHooks.onExecute(getAction(), true);
 
-        // TODO: Are undo calls interceptable?
+        // TODO: are undo calls interceptable?
 
-        return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(), getAction(), result,
-                new AsyncCallback<Void>() {
-                    public void onFailure(Throwable caught) {
-                        RpcDispatchUndoCall.this.onExecuteFailure(caught);
+        return doExecute();
+    }
 
-                        dispatchHooks.onFailure(getAction(), caught, true);
-                    }
+    @Override
+    protected DispatchRequest doExecute() {
+        return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(),
+            getAction(), result, new AsyncCallback<Void>() {
+                public void onFailure(Throwable caught) {
+                    RpcDispatchUndoCall.this.onExecuteFailure(caught);
 
-                    @SuppressWarnings("unchecked")
-                    public void onSuccess(Void nothing) {
-                        RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
-
-                        dispatchHooks.onSuccess(getAction(), result, true);
-                    }
+                    dispatchHooks.onFailure(getAction(), caught, true);
                 }
+
+                @SuppressWarnings("unchecked")
+                public void onSuccess(Void nothing) {
+                    RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
+
+                    dispatchHooks.onSuccess(getAction(), result, true);
+                }
+            }
         ));
     }
 }

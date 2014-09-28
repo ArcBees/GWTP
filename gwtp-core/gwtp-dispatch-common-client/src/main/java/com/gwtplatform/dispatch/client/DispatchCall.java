@@ -52,6 +52,8 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         this.callback = callback;
         this.exceptionHandler = exceptionHandler;
         this.securityCookieAccessor = securityCookieAccessor;
+
+        prepareCall();
     }
 
     /**
@@ -59,10 +61,13 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      *
      * @return a {@link DispatchRequest} object.
      */
-    public DispatchRequest execute() {
-        securityCookie = securityCookieAccessor.getCookieContent();
+    public abstract DispatchRequest execute();
 
-        return doExecute();
+    /**
+     * Prepare execution prerequisites.
+     */
+    public void prepareCall() {
+        securityCookie = securityCookieAccessor.getCookieContent();
     }
 
     /**
