@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.interceptor;
+package com.gwtplatform.dispatch.rpc.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;

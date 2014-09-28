@@ -21,15 +21,15 @@ import com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry;
 
 /**
  * Implementations of this interface will be used by
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find client-side action
- * handlers.
+ * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find
+ * client-side interceptor.
  */
 public interface RestInterceptorRegistry extends InterceptorRegistry {
     /**
      * Gets the client-side interceptor that supports the specific action.
      *
-     * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor could be
-     * found.
+     * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor
+     * could be found.
      */
     <A> IndirectProvider<RestInterceptor> find(A action);
 }

@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.rpc.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.interceptor.Interceptor;
-import com.gwtplatform.dispatch.client.interceptor.UndoCommand;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
@@ -29,7 +28,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} does not automatically
  * send the command over HTTP to the server.
  * <p/>
- * Client Action Handlers provide a number of flexible options:
+ * Interceptors provide a number of flexible options:
  * <ul>
  * <li>The action can be modified before sending the action to the server.</li>
  * <li>A result can be returned without contacting the server.</li>
@@ -38,11 +37,10 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * different mechanism.</li>
  * </ul>
  * <p/>
+ * <b>Important!</b> If your interceptor makes asynchronous calls, be careful with your use of fields as
+ * a second call your interceptor could be made while it is waiting for the asynchronous call to return.
  * <p/>
- * <b>Important!</b> If your action handler makes asynchronous calls, be careful with your use of fields as
- * a second call your handler could be made while it is waiting for the asynchronous call to return.
- * <p/>
- * <h3>Caching Client Action Handler Example</h3>
+ * <h3>Caching Interceptor Example</h3>
  * <p/>
  * <pre>
  * <code>
@@ -52,25 +50,25 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  *   &lt;A extends Action&lt;R&gt;, R&gt; void put(A action, R result);
  * }
  *
- * // Client action handler that injects the cache
- * public class RetrieveFooClientActionHandler
- *     extends AbstractCachingClientActionHandler&lt;RetrieveFooAction, RetrieveFooResult&gt; {
+ * // Interceptor that injects the cache
+ * public class RetrieveFooInterceptor
+ *     extends AbstractCachingInterceptor&lt;RetrieveFooAction, RetrieveFooResult&gt; {
  *   {@literal}@Inject
- *   RetrieveFooClientActionHandler(Cache cache) {
+ *   RetrieveFooInterceptor(Cache cache) {
  *     super(RetrieveFooAction.class, cache);
  *   }
  * }
  *
- * // abstract client action handler that:
+ * // abstract interceptor that:
  * // - first checks cache and returns result immediately if found in cache
  * // - executes command on server
  * // - saves result to cache before returning it
- * public abstract class AbstractCachingClientActionHandler&lt;A extends Action&lt;R&gt;, R&gt;
- *     extends AbstractClientActionHandler&lt;A, R&gt; {
+ * public abstract class AbstractCachingInterceptor&lt;A extends Action&lt;R&gt;, R&gt;
+ *     extends AbstractInterceptor&lt;A, R&gt; {
  *
  *   private final Cache cache;
  *
- *   public AbstractCachingClientActionHandler(Class&lt;A&gt; actionType, Cache cache) {
+ *   public AbstractCachingInterceptor(Class&lt;A&gt; actionType, Cache cache) {
  *     super(actionType);
  *     this.cache = cache;
  *   }
@@ -110,8 +108,8 @@ public interface RpcInterceptor<A, R> extends Interceptor<A, R> {
     /**
      * Undoes the specified action if supported.
      * <p/>
-     * If the handler makes asynchronous calls, it is recommended that you confirm that this request has not been
-     * cancelled after returning by calling
+     * If the interceptor makes asynchronous calls, it is recommended that you confirm that this request has
+     * not been cancelled after returning by calling
      * {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isPending()} against the request parameter.
      *
      * @param action      The action to undo.
@@ -119,7 +117,7 @@ public interface RpcInterceptor<A, R> extends Interceptor<A, R> {
      * @param callback    The callback to use to indicate when the action has been undone. Unless the request is
      *                    cancelled, you must invoke {@link AsyncCallback#onSuccess} on this callback when you have
      *                    successfully undone the action. If any failure occurs call {@link AsyncCallback#onFailure}.
-     * @param undoCommand Call {@link com.gwtplatform.dispatch.client.interceptor.UndoCommand#undo(Object, Object,
+     * @param undoCommand Call {@link UndoCommand#undo(Object, Object,
      *                    com.google.gwt.user.client.rpc.AsyncCallback)} on this object to send the action over to
      *                    the server via gwt-rpc. As a parameter you can pass {@code callback} or your custom
      *                    {@link AsyncCallback} if you want to perform any processing following the undo.

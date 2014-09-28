@@ -17,21 +17,13 @@
 package com.gwtplatform.carstore.client.dispatch.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.shared.dispatch.LogInAction;
 import com.gwtplatform.carstore.shared.dispatch.LogInResult;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
-import com.gwtplatform.dispatch.client.interceptor.UndoCommand;
-import com.gwtplatform.dispatch.rest.client.interceptor.AbstractRestInterceptor;
-import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext;
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rpc.client.interceptor.UndoCommand;
 import com.gwtplatform.dispatch.rpc.client.interceptor.AbstractRpcInterceptor;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-
-import javax.inject.Inject;
 
 public class LogInInterceptor extends AbstractRpcInterceptor<LogInAction, LogInResult> {
 

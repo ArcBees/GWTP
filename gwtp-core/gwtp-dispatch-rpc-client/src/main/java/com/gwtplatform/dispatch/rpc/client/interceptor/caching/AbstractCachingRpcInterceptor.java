@@ -27,20 +27,20 @@ import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
-import com.gwtplatform.dispatch.client.interceptor.UndoCommand;
+import com.gwtplatform.dispatch.rpc.client.interceptor.UndoCommand;
 import com.gwtplatform.dispatch.rpc.client.interceptor.AbstractRpcInterceptor;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * Abstract base class for client-side action handlers with caching support.
+ * Abstract base class for client-side interceptors with caching support.
  * <p>
  * Supported features include:
  * </p>
  * <ol>
  * <li>
- * {@link #prefetch}/{@link #postfetch} perform the cache lookup and the cache store. You can use this to customize
- * the caching logic.
+ * {@link #prefetch}/{@link #postfetch} perform the cache lookup and the cache store. You can use this
+ * to customize the caching logic.
  * </li>
  * <li>
  * Automatic action queuing so that calls in quick succession result in a single trip to the server.

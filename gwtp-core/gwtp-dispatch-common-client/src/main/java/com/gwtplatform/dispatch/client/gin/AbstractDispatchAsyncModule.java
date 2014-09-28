@@ -36,7 +36,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * <pre>
  * install(new RestDispatchAsyncModule.Builder()
  *                 .exceptionHandler(MyExceptionHandler.class)
- *                 .clientActionHandlerRegistry(MyClientActionHandlerRegistry.class)
+ *                 .sessionAccessor(MySessionAccessor.class)
  *                 .build());
  * </pre>
  *

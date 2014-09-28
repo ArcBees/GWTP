@@ -25,8 +25,8 @@ public interface InterceptorRegistry {
     /**
      * Gets the client-side interceptor that supports the specific action.
      *
-     * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor could be
-     * found.
+     * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor
+     * could be found.
      */
     <A> IndirectProvider<? extends Interceptor<?, ?>> find(A action);
 }

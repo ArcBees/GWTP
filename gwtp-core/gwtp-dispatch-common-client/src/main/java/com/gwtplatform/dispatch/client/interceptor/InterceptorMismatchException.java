@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.client.interceptor;
 
 /**
  * This exception is thrown as a side-effect of an error when registering a delegating callback.
- * A provider was registered to provide a client-side action handler for an action, but this action was not the same
- * action as specified by {@link Interceptor#getActionType()}.
+ * A provider was registered to provide a client-side interceptor for an action, but this action
+ * was not the same action as specified by {@link Interceptor#getActionType()}.
  */
 public class InterceptorMismatchException extends RuntimeException {
     private final Class<?> requestedActionType;

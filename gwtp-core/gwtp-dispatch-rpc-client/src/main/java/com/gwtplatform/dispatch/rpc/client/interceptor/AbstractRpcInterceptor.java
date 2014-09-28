@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * Simple abstract super-class for {@link RpcInterceptor} implementations that forces the action class to be passed
- * in as a constructor to the handler.
+ * in as a constructor to the interceptor.
  *
  * @param <A> The action type.
  * @param <R> The result type.

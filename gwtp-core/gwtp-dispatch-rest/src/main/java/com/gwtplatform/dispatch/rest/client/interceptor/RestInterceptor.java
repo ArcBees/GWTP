@@ -24,10 +24,10 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * <p/>
  * When a call is executed, the {@link Interceptor} that has been registered with the bound
  * {@link com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry} is called and
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically send the command over
- * HTTP to the server.
+ * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically
+ * send the command over HTTP to the server.
  * <p/>
- * Client Action Handlers provide a number of flexible options:
+ * Rest Interceptors provide a number of flexible options:
  * <ul>
  * <li>The action can be modified before sending the action to the server.</li>
  * <li>A result can be returned without contacting the server.</li>
@@ -36,8 +36,25 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * different mechanism.</li>
  * </ul>
  * <p/>
- * <b>Important!</b> If your action handler makes asynchronous calls, be careful with your use of fields as a second
- * call your handler could be made while it is waiting for the asynchronous call to return.
+ * <b>Important!</b> If your interceptor makes asynchronous calls, be careful with your use of fields as a second
+ * call your interceptor could be made while it is waiting for the asynchronous call to return.
+ * <p/>
+ * <b>Example:</b>
+ * <pre>
+ *   public AddItemInterceptor extends AbstractRestInterceptor {
+ *      public AddItemInterceptor() {
+ *          super(new InterceptorContext("/items", HttpMethod.POST, -1, false));
+ *      }
+ *
+ *      {@literal @}Override
+ *      public DispatchRequest execute(RestAction action, AsyncCallback{@literal <}Object{@literal >} resultCallback,
+ *              final ExecuteCommand<RestAction, Object> executeCommand) {
+ *          // process stuff here!
+ *          executeCommand.execute(action, resultCallback);
+ *          return new CompletedDispatchRequest();
+ *      }
+ *   }
+ * </pre>
  */
 public interface RestInterceptor extends Interceptor<RestAction, Object> {
 

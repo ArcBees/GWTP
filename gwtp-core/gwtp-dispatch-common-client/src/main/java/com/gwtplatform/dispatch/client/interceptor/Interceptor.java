@@ -30,7 +30,7 @@ public interface Interceptor<A, R> {
     /**
      * Handles the specified action.
      * <p/>
-     * If the handler makes asynchronous calls, it is recommended that you confirm that this request has not been
+     * If the interceptor makes asynchronous calls, it is recommended that you confirm that this request has not been
      * cancelled after returning by calling
      * {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isPending()} against the request parameter.
      *
@@ -56,6 +56,7 @@ public interface Interceptor<A, R> {
 
     /**
      * Ensures this intercepted call can be executed.
+     *
      * @param action the action to test against.
      * @return true if this action can be executed, false if not.
      */

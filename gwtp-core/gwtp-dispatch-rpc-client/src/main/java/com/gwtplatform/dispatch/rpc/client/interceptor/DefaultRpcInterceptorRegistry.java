@@ -28,40 +28,40 @@ import com.gwtplatform.common.client.ProviderBundle;
 
 /**
  * The default implementation that {@link RpcInterceptorRegistry} that if bound will not load any client-side
- * action handlers.
+ * interceptors.
  * </p>
- * To register client-side action handlers, extend this class and call {@link #register} in the constructor.
+ * To register client-side interceptors, extend this class and call {@link #register} in the constructor.
  * <p/>
  * <h3><u>Example</u></h3>
  * <p/>
  * <pre>
  * <code>
- * public class MyActionHandlerRegistry extends DefaultClientActionHandlerRegistry {
+ * public class MyRpcInterceptorRegistry extends DefaultClientInterceptorRegistry {
  *   {@literal}@Inject
- *   public DefaultClientRestActionHandlerRegistry(
- *       RetrieveFooClientActionHandler handler,
- *       Provider&lt;ListFooClientActionHandler&gt; provider,
- *       AsyncProvider&lt;UpdateFooClientActionHandler&gt; asyncProvider,
+ *   public MyRpcInterceptorRegistry(
+ *       RetrieveFooClientInterceptor interceptor,
+ *       Provider&lt;ListFooClientInterceptor&gt; provider,
+ *       AsyncProvider&lt;UpdateFooClientInterceptor&gt; asyncProvider,
  *       AsyncProvider&lt;CreateFooBundle&gt; fooCreateBundle) {
  *
- *     register(handler);
+ *     register(interceptor);
  *     register(ListFooClientAction.class, provider);
  *     register(UpdateFooClientAction.class, asyncProvider);
- *     register(CreateFooClientAction.class, fooCreateBundle, CreateFooBundle.ID_CreateFooClientActionHandler);
+ *     register(CreateFooClientAction.class, fooCreateBundle, CreateFooBundle.ID_CreateFooClientInterceptor);
  * }
  *
- * // Provider Bundle that will try to combine the presenter and client action handler into the same split point.
+ * // Provider Bundle that will try to combine the presenter and client action interceptor into the same split point.
  * public class CreateFooBundle extends ProviderBundle {
  *   public static final int ID_CreateFooPresenter = 0;
- *   public static final int ID_CreateFooClientActionHandler = 1;
+ *   public static final int ID_CreateFooClientInterceptor = 1;
  *
  *   {@literal}@Inject
  *   public CreateFooBundle(
  *       Provider&lt;CreateFooPresenterImpl&gt; presenter,
- *       Provider&lt;CreateFooClientActionHandler&gt; clientActionHandler) {
+ *       Provider&lt;CreateFooClientInterceptor&gt; clientInterceptor) {
  *     super(2);
  *     providers[ID_CreateFooPresenter] = presenter;
- *     providers[ID_CreateFooClientActionHandler] = clientActionHandler;
+ *     providers[ID_CreateFooClientInterceptor] = clientInterceptor;
  *   }
  * }
  * </code>
@@ -71,7 +71,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     private Map<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>> interceptors;
 
     /**
-     * Register a instance of a client-side action handler.
+     * Register a instance of a client-side interceptor.
      *
      * @param handler The {@link RpcInterceptor};
      */
@@ -86,9 +86,9 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     }
 
     /**
-     * Register a {@link javax.inject.Provider} of a client-side action handler.
+     * Register a {@link javax.inject.Provider} of a client-side interceptor.
      *
-     * @param actionType      The type of action that the client-side action handler supports.
+     * @param actionType      The type of action that the client-side interceptor supports.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
      */
     protected void register(Class<?> actionType,
@@ -103,9 +103,9 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     }
 
     /**
-     * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side action handler.
+     * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side interceptor.
      *
-     * @param actionType      The type of that the client-side action handler supports.
+     * @param actionType      The type of that the client-side interceptor supports.
      * @param handlerProvider The {@link com.google.gwt.inject.client.AsyncProvider} of the handler.
      */
     protected void register(Class<?> actionType,
@@ -120,12 +120,12 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     }
 
     /**
-     * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
+     * Register a client-side interceptor that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
-     * @param actionType     The type of that the client-side action handler supports.
+     * @param actionType     The type of that the client-side interceptor supports.
      * @param bundleProvider The {@link javax.inject.Provider} of the
      *                       {@link com.gwtplatform.common.client.ProviderBundle}.
-     * @param providerId     The id of the client-side action handler provider.
+     * @param providerId     The id of the client-side interceptor provider.
      */
     protected <B extends ProviderBundle> void register(Class<?> actionType,
                                                        AsyncProvider<B> bundleProvider,
@@ -134,7 +134,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     }
 
     /**
-     * Register an {@link com.gwtplatform.common.client.IndirectProvider} of a client-side action handler.
+     * Register an {@link com.gwtplatform.common.client.IndirectProvider} of a client-side interceptor.
      *
      * @param handlerProvider The {@link com.gwtplatform.common.client.IndirectProvider}.
      */

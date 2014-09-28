@@ -22,7 +22,7 @@ import com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry;
 /**
  * Implementations of this interface will be used by
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} implementation to find
- * client-side action handlers.
+ * client-side interceptors.
  */
 public interface RpcInterceptorRegistry extends InterceptorRegistry {
 

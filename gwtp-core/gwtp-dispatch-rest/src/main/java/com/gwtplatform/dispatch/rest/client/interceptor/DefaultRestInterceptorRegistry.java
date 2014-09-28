@@ -29,41 +29,39 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
  * The rest implementation of {@link com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry}
- * that if bound will not load any client-side action handlers.
+ * that if bound will not load any client-side interceptors.
  * </p>
- * To register client-side action handlers, extend this class and call {@link #register} in the constructor.
- * <p/>
+ * To register client-side interceptors, extend this class and call {@link #register} in the constructor.
  * <h3><u>Example</u></h3>
- * <p/>
  * <pre>
  * <code>
- * public class MyRestActionHandlerRegistry extends RestActionHandlerRegistry {
+ * public class MyRestInterceptorRegistry extends RestInterceptorRegistry {
  *   {@literal}@Inject
- *   public MyActionHandlerRegistry(
- *       RetrieveFooRestActionHandler handler,
- *       Provider&lt;ListItemsRestActionHandler&gt; provider,
- *       AsyncProvider&lt;UpdateItemRestActionHandler&gt; asyncProvider,
+ *   public MyRestInterceptorRegistry(
+ *       RetrieveFooRestInterceptor interceptor,
+ *       Provider&lt;ListItemsRestInterceptor&gt; provider,
+ *       AsyncProvider&lt;UpdateItemRestInterceptor&gt; asyncProvider,
  *       AsyncProvider&lt;CreateItemBundle&gt; fooCreateBundle) {
  *
- *     register(handler);
- *     register(new RestHandlerIndex("/items", HttpMethod.GET), provider);
- *     register(new RestHandlerIndex("/items", HttpMethod.PUT), asyncProvider);
- *     register(new RestHandlerIndex("/items", HttpMethod.POST), itemsBundle,
- *       ItemsBundle.ID_CreateItemRestActionHandler);
+ *     register(interceptor);
+ *     register(new InterceptorContext("/items", HttpMethod.GET, -1), provider);
+ *     register(new InterceptorContext("/items", HttpMethod.PUT, -1), asyncProvider);
+ *     register(new InterceptorContext("/items", HttpMethod.POST, -1), itemsBundle,
+ *       ItemsBundle.ID_CreateItemRestInterceptor);
  * }
  *
- * // Provider Bundle that will try to combine the presenter and client action handler into the same split point.
+ * // Provider Bundle that will try to combine the presenter and client interceptor into the same split point.
  * public class ItemsBundle extends ProviderBundle {
  *   public static final int ID_CreateItemPresenter = 0;
- *   public static final int ID_CreateItemRestActionHandler = 1;
+ *   public static final int ID_CreateItemRestInterceptor = 1;
  *
  *   {@literal}@Inject
  *   public ItemsBundle(
  *       Provider&lt;CreateItemPresenterImpl&gt; presenter,
- *       Provider&lt;CreateItemRestActionHandler&gt; restActionHandler) {
+ *       Provider&lt;CreateItemRestInterceptor&gt; restInterceptor) {
  *     super(2);
  *     providers[ID_CreateItemPresenter] = presenter;
- *     providers[ID_CreateItemRestActionHandler] = restActionHandler;
+ *     providers[ID_CreateItemRestInterceptor] = restInterceptor;
  *   }
  * }
  * </code>
@@ -73,7 +71,7 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     private Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors;
 
     /**
-     * Register a instance of a client-side action handler.
+     * Register a instance of a client-side interceptor.
      *
      * @param interceptor The {@link RestInterceptor};
      */
@@ -90,9 +88,9 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     }
 
     /**
-     * Register a {@link javax.inject.Provider} of a client-side action handler.
+     * Register a {@link javax.inject.Provider} of a client-side interceptor.
      *
-     * @param context         The {@link InterceptorContext} for the rest action handler.
+     * @param context         The {@link InterceptorContext} for the rest interceptor.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
      */
     protected void register(InterceptorContext context,
@@ -107,9 +105,9 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     }
 
     /**
-     * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side action handler.
+     * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side interceptor.
      *
-     * @param context         The {@link InterceptorContext} for the rest action handler.
+     * @param context         The {@link InterceptorContext} for the rest interceptor.
      * @param handlerProvider The {@link com.google.gwt.inject.client.AsyncProvider} of the handler.
      */
     protected void register(InterceptorContext context,
@@ -124,12 +122,12 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     }
 
     /**
-     * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
+     * Register a client-side interceptor that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
-     * @param context        The {@link InterceptorContext} for the rest action handler.
+     * @param context        The {@link InterceptorContext} for the rest interceptor.
      * @param bundleProvider The {@link javax.inject.Provider} of the
      *                       {@link com.gwtplatform.common.client.ProviderBundle}.
-     * @param providerId     The id of the client-side action handler provider.
+     * @param providerId     The id of the client-side interceptor provider.
      */
     protected <B extends ProviderBundle> void register(InterceptorContext context,
                                                        AsyncProvider<B> bundleProvider,
@@ -138,9 +136,9 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     }
 
     /**
-     * Register an {@link com.gwtplatform.common.client.IndirectProvider} of a client-side action handler.
+     * Register an {@link com.gwtplatform.common.client.IndirectProvider} of a client-side interceptor.
      *
-     * @param context         The {@link InterceptorContext} for the rest action handler.
+     * @param context         The {@link InterceptorContext} for the rest interceptor.
      * @param handlerProvider The {@link com.gwtplatform.common.client.IndirectProvider}.
      */
     protected void register(InterceptorContext context,
