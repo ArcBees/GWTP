@@ -22,16 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.presenter.slots.ISingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
-import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * A simple implementation of {@link View} that simply disregard every call to
@@ -115,16 +113,7 @@ public abstract class ViewImpl implements View {
      * @param slot - the slot
      * @param container - the container must implement HasWidgets.ForIsWidget.
      */
-    protected void bindSlot(GwtEvent.Type<RevealContentHandler<?>> slot, HasWidgets container) {
-        internalBindSlot(slot, container);
-    }
-
-    /**
-     * Link a slot to a container
-     * @param slot - the slot
-     * @param container - the container must implement HasWidgets.ForIsWidget.
-     */
-    protected void bindSlot(SingleSlot<?> slot, HasWidgets container) {
+    protected void bindSlot(ISingleSlot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
     }
 
