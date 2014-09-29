@@ -86,8 +86,8 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         if (serviceBinding == null) {
             String implName = getSuperTypeName() + SUFFIX;
 
-            serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service.getName(),
-                    serviceMethod.getName(), parameters);
+            serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service, serviceMethod.getName(),
+                    parameters);
             serviceBinding.setSuperTypeName(getSuperTypeName());
             serviceBinding.setSecured(isSecured());
         }

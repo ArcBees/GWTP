@@ -19,6 +19,10 @@ package com.gwtplatform.dispatch.rest.client;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
+/**
+ * No-op implementation of {@link RestDispatchHooks}. Extend this implementation if you don't need to implement all
+ * methods from {@link RestDispatchHooks}.
+ */
 public class DefaultRestDispatchHooks implements RestDispatchHooks {
     @Override
     public void onExecute(RestAction action) {

@@ -34,7 +34,7 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
     private final Serialization serialization;
 
     @Inject
-    DefaultRestResponseDeserializer(
+    protected DefaultRestResponseDeserializer(
             ActionMetadataProvider metadataProvider,
             Serialization serialization) {
         this.metadataProvider = metadataProvider;

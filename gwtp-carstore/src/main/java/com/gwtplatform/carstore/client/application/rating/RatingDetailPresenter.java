@@ -40,7 +40,7 @@ import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -66,26 +66,24 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     interface MyProxy extends ProxyPlace<RatingDetailPresenter> {
     }
 
-    private final RestDispatch dispatcher;
-    private final CarsService carsService;
-    private final RatingService ratingService;
+    private final ResourceDelegate<CarsService> carsServiceDelegate;
+    private final ResourceDelegate<RatingService> ratingServiceDelegate;
     private final EditRatingMessages messages;
     private final PlaceManager placeManager;
 
     @Inject
-    RatingDetailPresenter(EventBus eventBus,
-                          MyView view,
-                          MyProxy proxy,
-                          RestDispatch dispatcher,
-                          CarsService carsService,
-                          RatingService ratingService,
-                          EditRatingMessages messages,
-                          PlaceManager placeManager) {
+    RatingDetailPresenter(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            ResourceDelegate<CarsService> carsServiceDelegate,
+            ResourceDelegate<RatingService> ratingServiceDelegate,
+            EditRatingMessages messages,
+            PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.dispatcher = dispatcher;
-        this.carsService = carsService;
-        this.ratingService = ratingService;
+        this.carsServiceDelegate = carsServiceDelegate;
+        this.ratingServiceDelegate = ratingServiceDelegate;
         this.messages = messages;
         this.placeManager = placeManager;
 
@@ -106,14 +104,16 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        dispatcher.execute(ratingService.saveOrCreate(ratingDto), new ErrorHandlerAsyncCallback<RatingDto>(this) {
-            @Override
-            public void onSuccess(RatingDto savedRating) {
-                DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
-                        MessageStyle.SUCCESS));
-                placeManager.revealPlace(new Builder().nameToken(NameTokens.getRating()).build());
-            }
-        });
+        ratingServiceDelegate
+                .withCallback(new ErrorHandlerAsyncCallback<RatingDto>(this) {
+                    @Override
+                    public void onSuccess(RatingDto savedRating) {
+                        DisplayMessageEvent.fire(RatingDetailPresenter.this, new Message(messages.ratingSaved(),
+                                MessageStyle.SUCCESS));
+                        placeManager.revealPlace(new Builder().nameToken(NameTokens.getRating()).build());
+                    }
+                })
+                .saveOrCreate(ratingDto);
     }
 
     @Override
@@ -127,12 +127,14 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
         List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
-        dispatcher.execute(carsService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
-            @Override
-            public void onSuccess(List<CarDto> cars) {
-                onGetCarsSuccess(cars);
-            }
-        });
+        carsServiceDelegate
+                .withCallback(new AbstractAsyncCallback<List<CarDto>>() {
+                    @Override
+                    public void onSuccess(List<CarDto> cars) {
+                        onGetCarsSuccess(cars);
+                    }
+                })
+                .getCars();
     }
 
     private void onGetCarsSuccess(List<CarDto> carDtos) {
