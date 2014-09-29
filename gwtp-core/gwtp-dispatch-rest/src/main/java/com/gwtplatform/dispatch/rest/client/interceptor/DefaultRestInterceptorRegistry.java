@@ -147,6 +147,10 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
             interceptors = Maps.newHashMap();
         }
 
+        // TODO: perhaps we could have the ability to add multiple contexts with a stack-like interceptor chain.
+        // E.g. We want to intercept all '/items/*' calls with one interceptor, but then on another interceptor
+        // we want to intercept all '/user/{id} calls. Requiring us to pass the result of each interception along
+        // the stack chain.
         if (containsContext(context)) {
             throw new DuplicateInterceptorContextException(context.getPath(), context.getHttpMethod(),
                     context.getQueryCount());
