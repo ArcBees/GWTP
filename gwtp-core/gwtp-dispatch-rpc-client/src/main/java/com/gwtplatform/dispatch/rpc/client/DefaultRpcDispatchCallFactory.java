@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rpc.client;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
@@ -35,14 +34,14 @@ public class DefaultRpcDispatchCallFactory implements RpcDispatchCallFactory {
     private final ExceptionHandler exceptionHandler;
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final SecurityCookieAccessor securityCookieAccessor;
-    private final DispatchHooks dispatchHooks;
+    private final RpcDispatchHooks dispatchHooks;
 
     @Inject
     DefaultRpcDispatchCallFactory(DispatchServiceAsync dispatchService,
                                   @RpcBinding ExceptionHandler exceptionHandler,
                                   @RpcBinding ClientActionHandlerRegistry clientActionHandlerRegistry,
                                   @RpcBinding SecurityCookieAccessor securityCookieAccessor,
-                                  @RpcBinding DispatchHooks dispatchHooks) {
+                                  RpcDispatchHooks dispatchHooks) {
         this.dispatchService = dispatchService;
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;

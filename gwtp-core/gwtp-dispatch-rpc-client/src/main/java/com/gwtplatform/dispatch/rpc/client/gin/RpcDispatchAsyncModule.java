@@ -23,9 +23,11 @@ import com.google.inject.Provides;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
+import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchHooks;
 import com.gwtplatform.dispatch.rpc.client.RpcBinding;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
@@ -46,11 +48,31 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
      * A {@link RpcDispatchAsyncModule} builder.
      */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
+        private Class<? extends RpcDispatchHooks> dispatchHooks = DefaultRpcDispatchHooks.class;
+
         @Override
         public RpcDispatchAsyncModule build() {
             return new RpcDispatchAsyncModule(this);
         }
+
+        public Class<? extends RpcDispatchHooks> getDispatchHooks() {
+            return dispatchHooks;
+        }
+
+        /**
+         * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
+         * Default is {@link com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchHooks}
+         *
+         * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
+         * @return this {@link RpcDispatchAsyncModule.Builder} object.
+         */
+        public Builder dispatchHooks(final Class<? extends RpcDispatchHooks> dispatchHooks) {
+            this.dispatchHooks = dispatchHooks;
+            return this;
+        }
     }
+
+    private final Builder builder;
 
     public RpcDispatchAsyncModule() {
         this(new Builder());
@@ -59,10 +81,14 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected RpcDispatchAsyncModule(
             Builder builder) {
         super(builder, RpcBinding.class);
+
+        this.builder = builder;
     }
 
     @Override
     protected void configureDispatch() {
+        bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+
         bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
 
         bind(DispatchAsync.class).to(RpcDispatchAsync.class).in(Singleton.class);

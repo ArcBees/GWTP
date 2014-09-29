@@ -36,6 +36,7 @@ import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestBinding;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
@@ -56,7 +57,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
@@ -81,6 +82,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
+        // Dispatch Hooks
+        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+
         // Common
         install(new CommonGinModule());
 

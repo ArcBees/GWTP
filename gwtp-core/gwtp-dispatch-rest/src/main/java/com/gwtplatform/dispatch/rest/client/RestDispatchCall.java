@@ -24,7 +24,6 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
-import com.gwtplatform.dispatch.client.DispatchHooks;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
@@ -43,19 +42,27 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
+    private final RestDispatchHooks dispatchHooks;
 
     public RestDispatchCall(ExceptionHandler exceptionHandler,
                             ClientActionHandlerRegistry clientActionHandlerRegistry,
                             SecurityCookieAccessor securityCookieAccessor,
                             RestRequestBuilderFactory requestBuilderFactory,
                             RestResponseDeserializer restResponseDeserializer,
-                            DispatchHooks dispatchHooks,
+                            RestDispatchHooks dispatchHooks,
                             A action,
                             AsyncCallback<R> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, dispatchHooks, action, callback);
+        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
+        this.dispatchHooks = dispatchHooks;
+    }
+
+    @Override
+    public DispatchRequest execute() {
+        dispatchHooks.onExecute(getAction());
+        return super.execute();
     }
 
     @Override
@@ -78,6 +85,8 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         assignResponse(response);
 
         super.onExecuteSuccess(result, response);
+
+        dispatchHooks.onSuccess(getAction(), response, result);
     }
 
     @Override
@@ -85,6 +94,8 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         assignResponse(response);
 
         super.onExecuteFailure(caught, response);
+
+        dispatchHooks.onFailure(getAction(), response, caught);
     }
 
     private void assignResponse(Response response) {

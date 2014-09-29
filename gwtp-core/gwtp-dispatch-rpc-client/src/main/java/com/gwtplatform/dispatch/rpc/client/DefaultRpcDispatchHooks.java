@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,19 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.rpc.client;
 
-/**
- * Hooks to be executed on every {@link com.gwtplatform.dispatch.client.DispatchCall}.
- *
- * {@link DispatchHooks#onExecute()} will be called just before any action is attempted.
- * {@link DispatchHooks#onSuccess()} will be called when any action succeeds.
- * {@link DispatchHooks#onFailure()} will be called when any action fails.
- */
-public interface DispatchHooks {
-    void onSuccess();
+import com.gwtplatform.dispatch.rpc.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.Result;
 
-    void onExecute();
+public class DefaultRpcDispatchHooks implements RpcDispatchHooks {
+    @Override
+    public void onExecute(Action action, boolean undo) {
+    }
 
-    void onFailure();
+    @Override
+    public void onSuccess(Action action, Result result, boolean undo) {
+    }
+
+    @Override
+    public void onFailure(Action action, Throwable caught, boolean undo) {
+    }
 }
