@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind.type;
 
 import java.util.List;
 
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 
 public class ChildServiceBinding extends ServiceBinding {
@@ -27,11 +28,10 @@ public class ChildServiceBinding extends ServiceBinding {
             String resourcePath,
             String implPackage,
             String implName,
-            String interfacePackage,
-            String interfaceName,
+            JClassType service,
             String methodName,
             List<JParameter> parameters) {
-        super(resourcePath, implPackage, implName, interfacePackage, interfaceName);
+        super(resourcePath, implPackage, implName, service);
 
         setCtorParameters(parameters);
 

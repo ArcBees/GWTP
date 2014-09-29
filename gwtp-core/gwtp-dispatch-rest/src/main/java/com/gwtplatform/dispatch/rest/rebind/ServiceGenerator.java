@@ -81,7 +81,7 @@ public class ServiceGenerator extends AbstractServiceGenerator {
         if (serviceBinding == null) {
             String implName = service.getName() + SUFFIX;
 
-            serviceBinding = new ServiceBinding(path, getPackage(), implName, service.getPackage().getName(), service.getName());
+            serviceBinding = new ServiceBinding(path, getPackage(), implName, service);
             serviceBinding.setSuperTypeName(service.getName());
             serviceBinding.setSecured(!service.isAnnotationPresent(NoXsrfHeader.class));
         }

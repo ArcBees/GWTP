@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.rebind.type;
 
+import com.google.gwt.core.ext.typeinfo.JClassType;
+
 public class ServiceBinding extends ResourceBinding {
     private final String interfacePackage;
     private final String serviceInterface;
@@ -24,12 +26,11 @@ public class ServiceBinding extends ResourceBinding {
             String resourcePath,
             String implPackage,
             String implName,
-            String interfacePackage,
-            String interfaceName) {
+            JClassType service) {
         super(resourcePath, implPackage, implName);
-        this.interfacePackage = interfacePackage;
 
-        this.serviceInterface = interfaceName;
+        this.interfacePackage = service.getPackage().getName();
+        this.serviceInterface = service.getName();
     }
 
     public String getInterfacePackage() {
