@@ -113,7 +113,6 @@ public abstract class ViewImpl implements View {
      * @param slot - the slot
      * @param container - the container must implement HasWidgets.ForIsWidget.
      */
-
     protected void bindSlot(ISingleSlot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
     }
