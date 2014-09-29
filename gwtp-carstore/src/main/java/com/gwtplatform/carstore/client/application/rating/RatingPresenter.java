@@ -34,7 +34,7 @@ import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -61,23 +61,20 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     interface MyProxy extends ProxyPlace<RatingPresenter> {
     }
 
-    private final RestDispatch dispatcher;
     private final EditRatingPresenter editRatingPresenter;
-    private final RatingService ratingService;
+    private final ResourceDelegate<RatingService> ratingServiceDelegate;
     private final PlaceManager placeManager;
 
     @Inject
     RatingPresenter(EventBus eventBus,
-                    MyView view,
-                    MyProxy proxy,
-                    RestDispatch dispatcher,
-                    RatingService ratingService,
-                    EditRatingPresenter editRatingPresenter,
-                    PlaceManager placeManager) {
+            MyView view,
+            MyProxy proxy,
+            EditRatingPresenter editRatingPresenter,
+            ResourceDelegate<RatingService> ratingServiceDelegate,
+            PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.dispatcher = dispatcher;
-        this.ratingService = ratingService;
+        this.ratingServiceDelegate = ratingServiceDelegate;
         this.placeManager = placeManager;
         this.editRatingPresenter = editRatingPresenter;
 
@@ -98,12 +95,14 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @Override
     public void onDelete(final RatingDto ratingDto) {
-        dispatcher.execute(ratingService.delete(ratingDto.getId()), new AbstractAsyncCallback<Void>() {
-            @Override
-            public void onSuccess(Void nothing) {
-                getView().removeRating(ratingDto);
-            }
-        });
+        ratingServiceDelegate
+                .withCallback(new AbstractAsyncCallback<Void>() {
+                    @Override
+                    public void onSuccess(Void nothing) {
+                        getView().removeRating(ratingDto);
+                    }
+                })
+                .delete(ratingDto.getId());
     }
 
     @ProxyEvent
@@ -117,12 +116,14 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        dispatcher.execute(ratingService.getRatings(), new AbstractAsyncCallback<List<RatingDto>>() {
-            @Override
-            public void onSuccess(List<RatingDto> ratings) {
-                getView().displayRatings(ratings);
-            }
-        });
+        ratingServiceDelegate
+                .withCallback(new AbstractAsyncCallback<List<RatingDto>>() {
+                    @Override
+                    public void onSuccess(List<RatingDto> ratings) {
+                        getView().displayRatings(ratings);
+                    }
+                })
+                .getRatings();
     }
 
     @Override

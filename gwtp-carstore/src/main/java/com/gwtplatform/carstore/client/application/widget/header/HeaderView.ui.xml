@@ -81,11 +81,11 @@
             </div>
 
             <g:HTMLPanel styleName="{style.floatLeft} {style.menuBarWrapper}" ui:field="menubar" debugId="menubar">
-                <a href="#{MANUFACTURER}">Manufacturers</a>
-                <a href="#{CARS}">Cars</a>
-                <a href="#{RATING}">Ratings</a>
-                <a href="#{REPORT}">Reports</a>
-                <a href="#{STATS}">Statistics</a>
+                <g:InlineHyperlink targetHistoryToken="{MANUFACTURER}">Manufacturers</g:InlineHyperlink>
+                <g:InlineHyperlink targetHistoryToken="{CARS}">Cars</g:InlineHyperlink>
+                <g:InlineHyperlink targetHistoryToken="{RATING}">Ratings</g:InlineHyperlink>
+                <g:InlineHyperlink targetHistoryToken="{REPORT}">Reports</g:InlineHyperlink>
+                <g:InlineHyperlink targetHistoryToken="{STATS}">Statistics</g:InlineHyperlink>
             </g:HTMLPanel>
 
             <g:HTMLPanel ui:field="userOptions" styleName="{style.floatRight} {style.paddingTop}">

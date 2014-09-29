@@ -30,7 +30,7 @@ import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -47,19 +47,17 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
     interface MyProxy extends ProxyPlace<ReportPresenter> {
     }
 
-    private final RestDispatch dispatcher;
-    private final ManufacturerService manufacturerService;
+    private final ResourceDelegate<ManufacturerService> manufacturerServiceDelegate;
 
     @Inject
-    ReportPresenter(EventBus eventBus,
-                    MyView view,
-                    MyProxy proxy,
-                    RestDispatch dispatcher,
-                    ManufacturerService manufacturerService) {
+    ReportPresenter(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            ResourceDelegate<ManufacturerService> manufacturerServiceDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.dispatcher = dispatcher;
-        this.manufacturerService = manufacturerService;
+        this.manufacturerServiceDelegate = manufacturerServiceDelegate;
     }
 
     @Override
@@ -67,12 +65,13 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, new ArrayList<ActionType>(), true);
 
-        dispatcher.execute(manufacturerService.getAverageRatings(),
-                new AbstractAsyncCallback<List<ManufacturerRatingDto>>() {
+        manufacturerServiceDelegate
+                .withCallback(new AbstractAsyncCallback<List<ManufacturerRatingDto>>() {
                     @Override
                     public void onSuccess(List<ManufacturerRatingDto> manufacturerRatings) {
                         getView().displayReport(manufacturerRatings);
                     }
-                });
+                })
+                .getAverageRatings();
     }
 }

@@ -43,6 +43,7 @@ import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -67,8 +68,8 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     public interface MyProxy extends ProxyPlace<CarPresenter> {
     }
 
-    private final CarsService carsService;
-    private final ManufacturerService manufacturerService;
+    private final ResourceDelegate<CarsService> carsServiceDelegate;
+    private final ResourceDelegate<ManufacturerService> manufacturerServiceDelegate;
     private final CarMessages messages;
     private final RestDispatch dispatcher;
     private final PlaceManager placeManager;
@@ -77,21 +78,22 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     private CarDto carDto;
 
     @Inject
-    public CarPresenter(EventBus eventBus,
-                        MyView view,
-                        RestDispatch dispatcher,
-                        CarsService carsService,
-                        ManufacturerService manufacturerService,
-                        PlaceManager placeManager,
-                        CarProxyFactory carProxyFactory,
-                        CarMessages messages,
-                        @Assisted MyProxy proxy,
-                        @Assisted CarDto carDto) {
+    CarPresenter(
+            EventBus eventBus,
+            MyView view,
+            RestDispatch dispatcher,
+            ResourceDelegate<CarsService> carsServiceDelegate,
+            ResourceDelegate<ManufacturerService> manufacturerServiceDelegate,
+            PlaceManager placeManager,
+            CarProxyFactory carProxyFactory,
+            CarMessages messages,
+            @Assisted MyProxy proxy,
+            @Assisted CarDto carDto) {
         super(eventBus, view, proxy, RootCarPresenter.SLOT_SetCarContent);
 
         this.dispatcher = dispatcher;
-        this.carsService = carsService;
-        this.manufacturerService = manufacturerService;
+        this.carsServiceDelegate = carsServiceDelegate;
+        this.manufacturerServiceDelegate = manufacturerServiceDelegate;
         this.messages = messages;
         this.placeManager = placeManager;
         this.carProxyFactory = carProxyFactory;
@@ -127,12 +129,14 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     public void onSave(final CarDto carDto) {
-        dispatcher.execute(carsService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<CarDto>(this) {
-            @Override
-            public void onSuccess(CarDto newCar) {
-                onCarSaved(carDto, newCar);
-            }
-        });
+        carsServiceDelegate
+                .withCallback(new ErrorHandlerAsyncCallback<CarDto>(this) {
+                    @Override
+                    public void onSuccess(CarDto newCar) {
+                        onCarSaved(carDto, newCar);
+                    }
+                })
+                .saveOrCreate(carDto);
     }
 
     @Override
@@ -162,12 +166,14 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     protected void onReveal() {
-        dispatcher.execute(manufacturerService.getManufacturers(), new AbstractAsyncCallback<List<ManufacturerDto>>() {
-            @Override
-            public void onSuccess(List<ManufacturerDto> manufacturers) {
-                onGetManufacturerSuccess(manufacturers);
-            }
-        });
+        manufacturerServiceDelegate
+                .withCallback(new AbstractAsyncCallback<List<ManufacturerDto>>() {
+                    @Override
+                    public void onSuccess(List<ManufacturerDto> manufacturers) {
+                        onGetManufacturerSuccess(manufacturers);
+                    }
+                })
+                .getManufacturers();
 
         Boolean createNew = placeManager.getCurrentPlaceRequest().matchesNameToken(NameTokens.NEW_CAR);
         List<ActionType> actions;
@@ -204,12 +210,15 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     private void onDeleteCar() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + carDto.getModel() + "?");
         if (confirm) {
-            dispatcher.execute(carsService.car(carDto.getId()).delete(), new ErrorHandlerAsyncCallback<Void>(this) {
-                @Override
-                public void onSuccess(Void nothing) {
-                    NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);
-                }
-            });
+            carsServiceDelegate
+                    .withCallback(new ErrorHandlerAsyncCallback<Void>(this) {
+                        @Override
+                        public void onSuccess(Void nothing) {
+                            NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);
+                        }
+                    })
+                    .car(carDto.getId())
+                    .delete();
         }
     }
 }

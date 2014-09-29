@@ -23,13 +23,15 @@ import com.google.gwt.core.ext.typeinfo.JParameter;
 public class ChildServiceBinding extends ServiceBinding {
     private final String methodName;
 
-    public ChildServiceBinding(String resourcePath,
-                               String implPackage,
-                               String serviceClass,
-                               String serviceInterface,
-                               String methodName,
-                               List<JParameter> parameters) {
-        super(resourcePath, implPackage, serviceClass, serviceInterface);
+    public ChildServiceBinding(
+            String resourcePath,
+            String implPackage,
+            String implName,
+            String interfacePackage,
+            String interfaceName,
+            String methodName,
+            List<JParameter> parameters) {
+        super(resourcePath, implPackage, implName, interfacePackage, interfaceName);
 
         setCtorParameters(parameters);
 

@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Provider;
@@ -54,6 +55,14 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
 
         this.generatorFactory = generatorFactory;
         this.service = service;
+    }
+
+    @Override
+    protected void mergeTemplate(PrintWriter printWriter, String velocityTemplate, String implName)
+            throws UnableToCompleteException {
+        super.mergeTemplate(printWriter, velocityTemplate, implName);
+
+        generateDelegate();
     }
 
     @Override
@@ -111,5 +120,12 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     protected void generateRestAction(JMethod method) throws UnableToCompleteException {
         ActionGenerator generator = generatorFactory.createActionGenerator(method, getServiceBinding());
         actionBindings.add(generator.generate());
+    }
+
+    private void generateDelegate() throws UnableToCompleteException {
+        ResourceDelegateGenerator generator =
+                generatorFactory.createResourceDelegateGenerator(getServiceBinding(), actionBindings, serviceBindings);
+
+        generator.generate();
     }
 }

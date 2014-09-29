@@ -30,7 +30,8 @@ public class RestDispatchAsync implements RestDispatch {
     private final RestDispatchCallFactory callFactory;
 
     @Inject
-    RestDispatchAsync(RestDispatchCallFactory callFactory) {
+    protected RestDispatchAsync(
+            RestDispatchCallFactory callFactory) {
         this.callFactory = callFactory;
     }
 

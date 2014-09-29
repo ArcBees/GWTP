@@ -30,7 +30,7 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.HeaderMessages;
 import com.gwtplatform.carstore.client.rest.SessionService;
 import com.gwtplatform.carstore.client.security.CurrentUser;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
@@ -51,24 +51,22 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
 
-    private final RestDispatch dispatchAsync;
-    private final SessionService sessionService;
+    private final ResourceDelegate<SessionService> sessionServiceDelegate;
     private final PlaceManager placeManager;
     private final CurrentUser currentUser;
     private final HeaderMessages messages;
 
     @Inject
-    HeaderPresenter(EventBus eventBus,
-                    MyView view,
-                    RestDispatch dispatchAsync,
-                    SessionService sessionService,
-                    PlaceManager placeManager,
-                    CurrentUser currentUser,
-                    HeaderMessages messages) {
+    HeaderPresenter(
+            EventBus eventBus,
+            MyView view,
+            ResourceDelegate<SessionService> sessionServiceDelegate,
+            PlaceManager placeManager,
+            CurrentUser currentUser,
+            HeaderMessages messages) {
         super(eventBus, view);
+        this.sessionServiceDelegate = sessionServiceDelegate;
 
-        this.dispatchAsync = dispatchAsync;
-        this.sessionService = sessionService;
         this.placeManager = placeManager;
         this.currentUser = currentUser;
         this.messages = messages;
@@ -78,18 +76,20 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     @Override
     public void logout() {
-        dispatchAsync.execute(sessionService.logout(), new AsyncCallback<Void>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                DisplayMessageEvent.fire(HeaderPresenter.this, new Message(messages.errorLoggingOut(),
-                        MessageStyle.ERROR));
-            }
+        sessionServiceDelegate
+                .withCallback(new AsyncCallback<Void>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        DisplayMessageEvent.fire(HeaderPresenter.this, new Message(messages.errorLoggingOut(),
+                                MessageStyle.ERROR));
+                    }
 
-            @Override
-            public void onSuccess(Void nothing) {
-                onLogoutSuccess();
-            }
-        });
+                    @Override
+                    public void onSuccess(Void nothing) {
+                        onLogoutSuccess();
+                    }
+                })
+                .logout();
     }
 
     @Override

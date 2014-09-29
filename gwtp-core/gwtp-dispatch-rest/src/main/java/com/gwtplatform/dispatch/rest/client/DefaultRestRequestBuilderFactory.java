@@ -67,7 +67,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final Integer requestTimeoutMs;
 
     @Inject
-    DefaultRestRequestBuilderFactory(
+    protected DefaultRestRequestBuilderFactory(
             ActionMetadataProvider metadataProvider,
             Serialization serialization,
             HttpRequestBuilderFactory httpRequestBuilderFactory,
