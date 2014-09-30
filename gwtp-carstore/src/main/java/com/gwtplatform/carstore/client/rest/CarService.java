@@ -20,12 +20,11 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public interface CarService {
     @GET
-    RestAction<CarDto> get();
+    CarDto get();
 
     @DELETE
-    RestAction<Void> delete();
+    void delete();
 }

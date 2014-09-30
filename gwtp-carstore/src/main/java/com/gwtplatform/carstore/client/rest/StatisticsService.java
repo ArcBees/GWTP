@@ -23,7 +23,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import com.gwtplatform.dispatch.rest.client.DateFormat;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static com.gwtplatform.carstore.shared.rest.ResourcesPath.STATS;
 import static com.gwtplatform.carstore.shared.rest.RestParameter.DATE;
@@ -32,5 +31,5 @@ import static com.gwtplatform.carstore.shared.rest.RestParameter.DATE_FORMAT;
 @Path(STATS)
 public interface StatisticsService {
     @GET
-    RestAction<Integer> extractYearFromDate(@QueryParam(DATE) @DateFormat(DATE_FORMAT) Date date);
+    Integer extractYearFromDate(@QueryParam(DATE) @DateFormat(DATE_FORMAT) Date date);
 }

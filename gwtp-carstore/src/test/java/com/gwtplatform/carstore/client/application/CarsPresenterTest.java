@@ -17,32 +17,38 @@
 package com.gwtplatform.carstore.client.application;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import javax.inject.Inject;
 
 import org.jukito.JukitoRunner;
-import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import org.mockito.stubbing.Stubber;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
-import com.google.inject.Inject;
-import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.application.cars.CarsPresenter;
-import com.gwtplatform.carstore.client.application.cars.car.CarPresenter;
+import com.gwtplatform.carstore.client.application.cars.CarsPresenter.MyView;
+import com.gwtplatform.carstore.client.application.cars.car.CarPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory;
-import com.gwtplatform.carstore.client.application.testutils.CarsServiceImpl;
 import com.gwtplatform.carstore.client.application.testutils.PresenterTestModule;
 import com.gwtplatform.carstore.client.application.testutils.PresenterWidgetTestBase;
 import com.gwtplatform.carstore.client.place.NameTokens;
+import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -53,18 +59,23 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
         @Override
         protected void configurePresenterTest() {
             forceMock(CarProxyFactory.class);
-            bind(CarsService.class).to(CarsServiceImpl.class).in(TestSingleton.class);
         }
     }
 
     @Inject
     CarsPresenter carsPresenter;
     @Inject
-    CarsPresenter.MyView view;
+    MyView view;
+    @Inject
+    MyProxy proxy;
     @Inject
     CarProxyFactory carProxyFactory;
     @Inject
-    CarPresenter.MyProxy proxy;
+    ResourceDelegate<CarsService> carsResourceDelegate;
+    @Inject
+    CarsService carsService;
+    @Inject
+    CarService carService;
 
     @Test
     public void onEditCar(PlaceManager placeManager, ManufacturerDto manufacturerDto) {
@@ -96,13 +107,44 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     }
 
     @Test
-    public void onDelete(CarDto carDto, HasData<CarDto> hasCarData, Range range) {
-        // Given we have DeleteCarAction
-        dispatcher.given(new TypeLiteral<RestAction<Void>>() {}).willReturn(null);
+    public void onFetchData(ArrayList<CarDto> carDtos) {
+        // Given
+        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsService);
+        callSuccessWith(callback, carDtos).when(carsService).getCars(0, 1);
 
-        // And GetCarAction for fetching after delete
-        List<CarDto> result = new ArrayList<>();
-        dispatcher.given(new TypeLiteral<RestAction<List<CarDto>>>() {}).willReturn(result);
+        // When
+        carsPresenter.fetchData(0, 1);
+
+        // Then
+        verify(view).displayCars(0, carDtos);
+    }
+
+    @Test
+    public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
+        // Given
+        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsService);
+        callSuccessWith(callback, carDtos).when(carsService).getCars(0, 3);
+
+        // When
+        carsPresenter.fetchData(0, 3);
+
+        // Then
+        verify(view).displayCars(0, carDtos);
+    }
+
+    @Test
+    public void onDelete(CarDto carDto, HasData<CarDto> hasCarData, Range range) {
+        // Given
+        carDto.setId(3L);
+
+        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsService);
+
+        // Given we delete the car
+        given(carsService.car(carDto.getId())).willReturn(carService);
+        callSuccessWith(callback).when(carService).delete();
+
+        // Given we fetch the cars after delete
+        callSuccessWith(callback, new ArrayList<>()).when(carsService).getCars();
 
         // And display is setup
         when(view.getCarDisplay()).thenReturn(hasCarData);
@@ -118,28 +160,26 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
         verify(view).setCarsCount(-1);
     }
 
-    @Test
-    public void onFetchData(ArrayList<CarDto> carDtos) {
-        // Given
-        List<CarDto> result = new ArrayList<>();
-        dispatcher.given(new TypeLiteral<RestAction<List<CarDto>>>() {}).willReturn(result);
+    private <R> ArgumentCaptor<AsyncCallback> captureResourceDelegateCallback(ResourceDelegate<R> delegate,
+            R resource) {
+        ArgumentCaptor<AsyncCallback> callbackCaptor = ArgumentCaptor.forClass(AsyncCallback.class);
+        given(delegate.withCallback(callbackCaptor.capture())).willReturn(resource);
 
-        // When
-        carsPresenter.fetchData(0, 1);
-
-        // Then
-        verify(view).displayCars(0, carDtos);
+        return callbackCaptor;
     }
 
-    @Test
-    public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
-        // Given
-        dispatcher.given(new TypeLiteral<RestAction<List<CarDto>>>() {}).willReturn(carDtos);
+    private Stubber callSuccessWith(final ArgumentCaptor<AsyncCallback> callbackCaptor) {
+        return callSuccessWith(callbackCaptor, null);
+    }
 
-        // When
-        carsPresenter.fetchData(0, 3);
-
-        // Then
-        verify(view).displayCars(0, carDtos);
+    @SuppressWarnings("unchecked")
+    private Stubber callSuccessWith(final ArgumentCaptor<AsyncCallback> callbackCaptor, final Object result) {
+        return doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                callbackCaptor.getValue().onSuccess(result);
+                return null;
+            }
+        });
     }
 }

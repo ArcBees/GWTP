@@ -27,7 +27,6 @@ import javax.ws.rs.PathParam;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static com.gwtplatform.carstore.shared.rest.PathParameter.PATH_ID;
 import static com.gwtplatform.carstore.shared.rest.ResourcesPath.MANUFACTURER;
@@ -36,20 +35,20 @@ import static com.gwtplatform.carstore.shared.rest.RestParameter.ID;
 @Path(MANUFACTURER)
 public interface ManufacturerService {
     @GET
-    RestAction<List<ManufacturerDto>> getManufacturers();
+    List<ManufacturerDto> getManufacturers();
 
     @GET
     @Path(PATH_ID)
-    RestAction<ManufacturerDto> get(@PathParam(ID) Long id);
+    ManufacturerDto get(@PathParam(ID) Long id);
 
     @POST
-    RestAction<ManufacturerDto> saveOrCreate(ManufacturerDto manufacturerDto);
+    ManufacturerDto saveOrCreate(ManufacturerDto manufacturerDto);
 
     @DELETE
     @Path(PATH_ID)
-    RestAction<Void> delete(@PathParam(ID) Long id);
+    void delete(@PathParam(ID) Long id);
 
     @GET
     @Path(ResourcesPath.RATING)
-    RestAction<List<ManufacturerRatingDto>> getAverageRatings();
+    List<ManufacturerRatingDto> getAverageRatings();
 }

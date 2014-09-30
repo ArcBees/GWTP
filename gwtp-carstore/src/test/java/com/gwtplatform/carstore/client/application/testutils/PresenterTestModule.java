@@ -17,9 +17,7 @@
 package com.gwtplatform.carstore.client.application.testutils;
 
 import org.jukito.JukitoModule;
-import org.jukito.TestSingleton;
 
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.AutobindDisable;
 
 /**
@@ -29,10 +27,6 @@ import com.gwtplatform.mvp.client.AutobindDisable;
 public abstract class PresenterTestModule extends JukitoModule {
     @Override
     protected void configureTest() {
-        bindNamedMock(RestDispatch.class, "mock").in(TestSingleton.class);
-        bind(RestDispatch.class).to(RelayingRestDispatcher.class);
-        bind(RelayingRestDispatcher.class).in(TestSingleton.class);
-
         configurePresenterTest();
 
         bind(AutobindDisable.class).toInstance(new AutobindDisable(true));

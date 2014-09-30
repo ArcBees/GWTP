@@ -47,11 +47,29 @@ public class $implName implements $serviceInterface.name {
     #set($methodParams = $methodParams.subList($ctorParams.size(), $methodParams.size()))
     #set($methodSignature = "#generateMethodSignatureFromParameters($methodParams)")
     #set($actionArguments = "#generateArgumentsFromParameters($action.ctorParameters)")
+#if($action.isRestAction())
     @Override
     public RestAction<$action.resultClass> ${action.methodName}($methodSignature) {
         return new ${action.implName}(
                 defaultDateFormat$actionArguments);
     }
+#else
+    @Override
+    public #if($action.resultPrimitive)$action.resultPrimitive#else$action.resultClass#end ${action.methodName}($methodSignature) {
+#if($action.resultPrimitive)
+#if("$action.getResultPrimitive().getSimpleSourceName()" != "void")
+        return $action.getResultPrimitive().getUninitializedFieldExpression();
+#end
+#else
+        return null;
+#end
+    }
+
+    public RestAction<$action.resultClass> ${action.methodName}\$action($methodSignature) {
+        return new ${action.implName}(
+                defaultDateFormat$actionArguments);
+    }
+#end
 
 #end
 #foreach ($service in $serviceBindings)

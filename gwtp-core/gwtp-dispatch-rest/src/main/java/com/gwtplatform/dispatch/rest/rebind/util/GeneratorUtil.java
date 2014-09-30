@@ -23,8 +23,10 @@ import javax.inject.Inject;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.core.ext.typeinfo.TypeOracleException;
 import com.gwtplatform.dispatch.rest.rebind.Logger;
 
 public class GeneratorUtil {
@@ -33,9 +35,10 @@ public class GeneratorUtil {
     private final GeneratorContext generatorContext;
 
     @Inject
-    GeneratorUtil(TypeOracle typeOracle,
-                  Logger logger,
-                  GeneratorContext generatorContext) {
+    GeneratorUtil(
+            TypeOracle typeOracle,
+            Logger logger,
+            GeneratorContext generatorContext) {
         this.typeOracle = typeOracle;
         this.logger = logger;
         this.generatorContext = generatorContext;
@@ -49,6 +52,15 @@ public class GeneratorUtil {
         }
 
         return null;
+    }
+
+    public JClassType convertPrimitiveToBoxed(JPrimitiveType primitive) throws UnableToCompleteException {
+        try {
+            return typeOracle.parse(primitive.getQualifiedBoxedSourceName()).isClass();
+        } catch (TypeOracleException e) {
+            logger.die("Unable to convert '" + primitive + "' to boxed type.");
+            return null;
+        }
     }
 
     public void closeDefinition(PrintWriter printWriter) {

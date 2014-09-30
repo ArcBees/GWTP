@@ -21,15 +21,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static com.gwtplatform.carstore.shared.rest.ResourcesPath.SESSION;
 
 @Path(SESSION)
 public interface SessionService {
     @DELETE
-    RestAction<Void> logout();
+    void logout();
 
     @GET
-    RestAction<CurrentUserDto> getCurrentUser();
+    CurrentUserDto getCurrentUser();
 }

@@ -37,17 +37,18 @@ import static com.gwtplatform.carstore.shared.rest.RestParameter.OFFSET;
 @Path(CARS)
 public interface CarsService {
     @GET
-    RestAction<List<CarDto>> getCars();
+    List<CarDto> getCars();
 
+    // This method is intentionally left out as a RestAction to ensure it's properly handled.
     @GET
     RestAction<List<CarDto>> getCars(@QueryParam(OFFSET) int offset, @QueryParam(LIMIT) int limit);
 
     @GET
     @Path(COUNT)
-    RestAction<Integer> getCarsCount();
+    int getCarsCount();
 
     @POST
-    RestAction<CarDto> saveOrCreate(CarDto carDto);
+    CarDto saveOrCreate(CarDto carDto);
 
     @Path(PATH_ID)
     CarService car(@PathParam(ID) Long carId);
