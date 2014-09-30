@@ -18,17 +18,16 @@ package com.gwtplatform.dispatch.rest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * Delegate used to build and call HTTP resources. You can inject this interface instead of injecting your resource
  * interface and {@link RestDispatch} to simplify your code. Note that if your resource interfaces don't return {@link
- * RestAction} but the result type directly, you will need to inject a {@link ResourceDelegate} to use your resource.
+ * com.gwtplatform.dispatch.rest.shared.RestAction RestAction&lt;?&gt;}s but the result type directly, you will need to
+ * inject a {@link ResourceDelegate} to use your resource.
  * <p/>
- * This delegate will not send the HTTP request until you call a method, that is not a sub-resource, from the
- * underlying
+ * This delegate will not send the HTTP request until you call a method, that is not a sub-resource, from the underlying
  * resource. The underlying resource is returned when either {@link #withoutCallback()} or {@link
  * #withCallback(AsyncCallback)} are called.
  * <p/>

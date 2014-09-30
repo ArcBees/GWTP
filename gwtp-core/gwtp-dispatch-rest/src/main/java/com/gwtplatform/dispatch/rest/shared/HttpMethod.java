@@ -20,5 +20,9 @@ package com.gwtplatform.dispatch.rest.shared;
  * Represents the HTTP methods supported by the {@link RestDispatch}.
  */
 public enum HttpMethod {
-    GET, POST, PUT, DELETE, HEAD
+    GET,
+    POST,
+    PUT,
+    DELETE,
+    HEAD;
 }

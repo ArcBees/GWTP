@@ -19,6 +19,7 @@ import com.gwtplatform.dispatch.rest.client.AbstractResourceDelegate;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import ${service.interfacePackage}.$serviceInterface;
+import ${service.implPackage}.$service.implName;
 
 public class $implName extends AbstractResourceDelegate<$serviceInterface> implements $serviceInterface {
     private final $serviceInterface resource;
@@ -51,12 +52,32 @@ public class $implName extends AbstractResourceDelegate<$serviceInterface> imple
     #set($methodParams = $methodParams.subList($service.getCtorParameters().size(), $methodParams.size()))
     #set($methodSignature = "#generateParameters($methodParams)")
     #set($actionArguments = "#generateArguments($methodParams)")
+    #if($action.isRestAction())
+        #set($returnType = "RestAction<$action.resultClass>")
+    #elseif($action.resultPrimitive)
+        #set($returnType = "$action.getResultPrimitive().getSimpleSourceName()")
+    #else
+        #set($returnType = "$action.resultClass")
+    #end
     @Override
-    public RestAction<$action.resultClass> ${action.methodName}($methodSignature) {
-        RestAction<$action.resultClass> action = resource.${action.methodName}($actionArguments);
+    public $returnType ${action.methodName}($methodSignature) {
+        RestAction<$action.resultClass> action =
+#if($action.isRestAction())
+                resource.${action.methodName}($actionArguments);
+#else
+                (($service.implName) resource).${action.methodName}\$action($actionArguments);
+#end
         execute(action);
 
+#if($action.isRestAction())
         return action;
+#elseif($action.resultPrimitive)
+#if("$action.getResultPrimitive().getSimpleSourceName()" != "void")
+        return $action.getResultPrimitive().getUninitializedFieldExpression();
+#end
+#else
+        return null;
+#end
     }
 
 #end
