@@ -26,7 +26,6 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class RestInterceptorRegistryTest {
@@ -111,8 +110,7 @@ public class RestInterceptorRegistryTest {
         try {
             interceptorRegistry.register(new SampleRestInterceptor(context));
             fail();
-        }
-        catch(DuplicateInterceptorContextException e) {
+        } catch (DuplicateInterceptorContextException e) {
             // Then
             assertEquals(1, interceptorRegistry.getRegistryCount());
         }
