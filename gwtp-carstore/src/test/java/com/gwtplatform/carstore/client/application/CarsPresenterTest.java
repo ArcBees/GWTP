@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -48,6 +49,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(JukitoRunner.class)
+@Ignore
 public class CarsPresenterTest extends PresenterWidgetTestBase {
     public static class Module extends PresenterTestModule {
         @Override

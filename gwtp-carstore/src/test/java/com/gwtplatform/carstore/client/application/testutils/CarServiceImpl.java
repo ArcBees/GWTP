@@ -16,22 +16,21 @@
 
 package com.gwtplatform.carstore.client.application.testutils;
 
-import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public class CarServiceImpl implements CarService {
     public CarServiceImpl(Long carId) {
     }
 
     @Override
-    public RestAction<CarDto> get() {
-        return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
+    public CarDto get() {
+        return null;
+//        return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
     }
 
     @Override
-    public RestAction<Void> delete() {
-        return new ActionImpl<Void>(new TypeLiteral<RestAction<Void>>() {});
+    public void delete() {
+//        return new ActionImpl<Void>(new TypeLiteral<RestAction<Void>>() {});
     }
 }

@@ -19,10 +19,14 @@ package com.gwtplatform.dispatch.rest.rebind.type;
 import java.util.List;
 
 import com.google.gwt.core.ext.typeinfo.JParameter;
+import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 
 public class ActionBinding extends ResourceBinding {
     private final String methodName;
     private final String resultClass;
+
+    private boolean isRestAction;
+    private JPrimitiveType resultPrimitive;
 
     public ActionBinding(
             String resourcePath,
@@ -45,5 +49,21 @@ public class ActionBinding extends ResourceBinding {
 
     public String getMethodName() {
         return methodName;
+    }
+
+    public void setRestAction(boolean restAction) {
+        this.isRestAction = restAction;
+    }
+
+    public boolean isRestAction() {
+        return isRestAction;
+    }
+
+    public JPrimitiveType getResultPrimitive() {
+        return resultPrimitive;
+    }
+
+    public void setResultPrimitive(JPrimitiveType resultPrimitive) {
+        this.resultPrimitive = resultPrimitive;
     }
 }

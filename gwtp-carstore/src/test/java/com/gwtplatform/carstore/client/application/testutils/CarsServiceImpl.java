@@ -29,8 +29,9 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public class CarsServiceImpl implements CarsService {
     @Override
-    public RestAction<List<CarDto>> getCars() {
-        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
+    public List<CarDto> getCars() {
+        return null;
+//        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
     }
 
     @Override
@@ -40,13 +41,15 @@ public class CarsServiceImpl implements CarsService {
     }
 
     @Override
-    public RestAction<Integer> getCarsCount() {
-        return new ActionImpl<Integer>(new TypeLiteral<RestAction<Integer>>() {});
+    public int getCarsCount() {
+        return 0;
+//        return new ActionImpl<Integer>(new TypeLiteral<RestAction<Integer>>() {});
     }
 
     @Override
-    public RestAction<CarDto> saveOrCreate(CarDto carDto) {
-        return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
+    public CarDto saveOrCreate(CarDto carDto) {
+        return null;
+//        return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
     }
 
     @Override
