@@ -442,7 +442,7 @@ public abstract class PresenterWidget<V extends View> extends
 
    /**
      * Registers a handler so that it is automatically removed when
-     * {@link #unHide()} is called. This provides an easy way to track event
+     * {@link #onHide()} is called. This provides an easy way to track event
      * handler registrations.
      *
      * @param handlerRegistration The registration of handler to track.
