@@ -39,6 +39,7 @@ public interface CarsService {
     @GET
     List<CarDto> getCars();
 
+    // This method is intentionally left out as a RestAction to ensure it's properly handled.
     @GET
     RestAction<List<CarDto>> getCars(@QueryParam(OFFSET) int offset, @QueryParam(LIMIT) int limit);
 
