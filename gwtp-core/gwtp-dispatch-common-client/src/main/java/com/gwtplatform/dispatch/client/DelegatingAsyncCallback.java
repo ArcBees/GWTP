@@ -34,12 +34,12 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  */
 public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T extends Interceptor> implements
         AsyncCallback<T>, ExecuteCommand<A, R> {
-    private final DispatchCall dispatchCall;
+    private final DispatchCall<A, R> dispatchCall;
     private final A action;
     private final AsyncCallback<R> callback;
     private final DelegatingDispatchRequest dispatchRequest;
 
-    public DelegatingAsyncCallback(DispatchCall dispatchCall,
+    public DelegatingAsyncCallback(DispatchCall<A, R> dispatchCall,
                                    A action,
                                    AsyncCallback<R> callback,
                                    DelegatingDispatchRequest dispatchRequest) {
@@ -68,7 +68,7 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
     @Override
     public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
         if (dispatchRequest.isPending()) {
-            return dispatchCall.doExecute();
+            return dispatchCall.doExecute(resultCallback);
         } else {
             return null;
         }

@@ -38,7 +38,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  */
 public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final A action;
-    private final AsyncCallback<R> callback;
+    private AsyncCallback<R> callback;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
 
@@ -76,6 +76,18 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      * @return a {@link DispatchRequest} object.
      */
     protected abstract DispatchRequest doExecute();
+
+    /**
+     * Execute the call overriding the existing callback. Used by
+     * {@link com.gwtplatform.dispatch.client.DelegatingAsyncCallback}.
+     *
+     * @param callback overriding callback.
+     * @return a {@link DispatchRequest} object.
+     */
+    protected DispatchRequest doExecute(AsyncCallback<R> callback) {
+        this.callback = callback;
+        return doExecute();
+    }
 
     /**
      * Returns the {@link TypedAction} wrapped by this {@link DispatchCall}.
