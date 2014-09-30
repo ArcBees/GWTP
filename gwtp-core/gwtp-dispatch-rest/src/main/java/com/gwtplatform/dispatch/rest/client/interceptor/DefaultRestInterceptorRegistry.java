@@ -170,6 +170,10 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
         return false;
     }
 
+    protected int getRegistryCount() {
+        return interceptors.size();
+    }
+
     @Override
     public <A> IndirectProvider<RestInterceptor> find(A action) {
         if (interceptors != null && action instanceof RestAction) {

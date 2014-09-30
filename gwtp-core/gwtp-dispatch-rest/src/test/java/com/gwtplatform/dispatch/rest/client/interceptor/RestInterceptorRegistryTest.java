@@ -23,7 +23,11 @@ import com.gwtplatform.dispatch.rest.client.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class RestInterceptorRegistryTest {
     private static final String PATH_1 = "/path_1";
@@ -45,37 +49,72 @@ public class RestInterceptorRegistryTest {
 
     @Test
      public void register_interceptor() {
+        // Given
+        InterceptorContext context = new InterceptorContext(PATH_1, HttpMethod.GET, 0, false);
+
         // When
-        InterceptorContext index = new InterceptorContext(PATH_1, HttpMethod.GET, 0, false);
-        interceptorRegistry.register(new SampleRestInterceptor(index));
+        interceptorRegistry.register(new SampleRestInterceptor(context));
 
         // Then
-        assertTrue(interceptorRegistry.find(action) != null);
+        assertNotNull(interceptorRegistry.find(action));
     }
 
     @Test
     public void register_interceptor_multipleparams() {
-        // When
+        // Given
         action.addQueryParam(PARAM_NAME_1, PARAM_VALUE_1);
         action.addQueryParam(PARAM_NAME_2, PARAM_VALUE_2);
 
-        InterceptorContext index = new InterceptorContext(PATH_1, HttpMethod.GET, 2, false);
-        interceptorRegistry.register(new SampleRestInterceptor(index));
+        InterceptorContext context = new InterceptorContext(PATH_1, HttpMethod.GET, 2, false);
+
+        // When
+        interceptorRegistry.register(new SampleRestInterceptor(context));
 
         // Then
-        assertTrue(interceptorRegistry.find(action) != null);
+        assertNotNull(interceptorRegistry.find(action));
     }
 
     @Test
     public void register_interceptor_multipleparams_invalid() {
-        // When
+        // Given
         action.addQueryParam(PARAM_NAME_1, PARAM_VALUE_1);
         action.addQueryParam(PARAM_NAME_2, PARAM_VALUE_2);
 
-        InterceptorContext index = new InterceptorContext(PATH_1, HttpMethod.GET, 1, false);
-        interceptorRegistry.register(new SampleRestInterceptor(index));
+        InterceptorContext context = new InterceptorContext(PATH_1, HttpMethod.GET, 1, false);
+
+        // When
+        interceptorRegistry.register(new SampleRestInterceptor(context));
 
         // Then
-        assertTrue(interceptorRegistry.find(action) == null);
+        assertNull(interceptorRegistry.find(action));
+    }
+
+    @Test
+    public void register_interceptor_nohttpmethod() {
+        // Given
+        InterceptorContext context = new InterceptorContext(PATH_1, null, 0, false);
+
+        // When
+        interceptorRegistry.register(new SampleRestInterceptor(context));
+
+        // Then
+        assertNotNull(interceptorRegistry.find(action));
+    }
+
+    @Test
+    public void register_interceptor_duplicate() {
+        // Given
+        InterceptorContext context = new InterceptorContext(PATH_1, null, 0, true);
+
+        // When
+        interceptorRegistry.register(new SampleRestInterceptor(context));
+        try {
+            interceptorRegistry.register(new SampleRestInterceptor(context));
+            fail();
+        }
+        catch(DuplicateInterceptorContextException e) {
+            // Then
+            assertEquals(1, interceptorRegistry.getRegistryCount());
+        }
     }
 }
