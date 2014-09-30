@@ -22,6 +22,11 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
+/**
+ * Common code used by generated implementations of {@link ResourceDelegate}.
+ *
+ * @param <T> The resource used by this delegate.
+ */
 public abstract class AbstractResourceDelegate<T> implements ResourceDelegate<T>, Cloneable {
     private static final AsyncCallback<Object> NO_OP_CALLBACK = new AsyncCallback<Object>() {
         @Override
