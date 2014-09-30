@@ -123,28 +123,32 @@ public class InterceptorContext {
         }
 
         // Path Check
-        if (isTranscendent() && !action.getPath().startsWith(path)) {
-            return false;
-        } else if (!action.getPath().equals(path)) {
-            return false;
-        } else {
-            // Http Method Check
-            if (!isAnyHttpMethod()) {
-                if (!action.getHttpMethod().equals(httpMethod)) {
-                    return false;
-                }
+        if (isTranscendent()) {
+            if (!action.getPath().startsWith(path)) {
+                return false;
             }
+        } else {
+            if (!action.getPath().equals(path)) {
+                return false;
+            }
+        }
 
-            // Query Parameters
-            if (!anyQueryCount) {
-                List<RestParameter> queryParams = action.getQueryParams();
-                if (queryParams.size() != queryCount) {
+        // Http Method Check
+        if (!isAnyHttpMethod()) {
+            if (!action.getHttpMethod().equals(httpMethod)) {
+                return false;
+            }
+        }
+
+        // Query Parameters
+        if (!anyQueryCount) {
+            List<RestParameter> queryParams = action.getQueryParams();
+            if (queryParams.size() != queryCount) {
+                return false;
+            } else if (useTemplate()) {
+                // We can do some thorough checking with templates
+                if (!queryParams.equals(template.getQueryParams())) {
                     return false;
-                } else if (useTemplate()) {
-                    // We can do some thorough checking with templates
-                    if (!queryParams.equals(template.getQueryParams())) {
-                        return false;
-                    }
                 }
             }
         }
