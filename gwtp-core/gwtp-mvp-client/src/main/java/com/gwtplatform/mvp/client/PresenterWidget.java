@@ -169,6 +169,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         addToPopupSlot(child);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void addToSlot(Object slot, PresenterWidget<?> child) {
         assert child != null : "cannot add null to a slot";
@@ -201,7 +202,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     private void internalClearSlot(Object slot, PresenterWidget<?> dontRemove) {
-        Set<PresenterWidget<?>> orphanSet = new HashSet<PresenterWidget<?>>();
         // use new set to prevent concurrent modification
         for (PresenterWidget<?> child: new HashSet<PresenterWidget<?>>(children)) {
             if (child.slot == slot && !child.equals(dontRemove)) {
