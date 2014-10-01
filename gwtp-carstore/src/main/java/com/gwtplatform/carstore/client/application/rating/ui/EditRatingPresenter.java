@@ -27,8 +27,8 @@ import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.EditRatingMessages;
-import com.gwtplatform.carstore.client.rest.CarsService;
-import com.gwtplatform.carstore.client.rest.RatingService;
+import com.gwtplatform.carstore.shared.api.CarsResource;
+import com.gwtplatform.carstore.shared.api.RatingResource;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -46,16 +46,16 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
         void setAllowedCars(List<CarDto> carDtos);
     }
 
-    private final ResourceDelegate<CarsService> carsServiceDelegate;
-    private final ResourceDelegate<RatingService> ratingServiceDelegate;
+    private final ResourceDelegate<CarsResource> carsServiceDelegate;
+    private final ResourceDelegate<RatingResource> ratingServiceDelegate;
     private final EditRatingMessages messages;
 
     @Inject
     EditRatingPresenter(
             EventBus eventBus,
             MyView view,
-            ResourceDelegate<CarsService> carsServiceDelegate,
-            ResourceDelegate<RatingService> ratingServiceDelegate,
+            ResourceDelegate<CarsResource> carsServiceDelegate,
+            ResourceDelegate<RatingResource> ratingServiceDelegate,
             EditRatingMessages messages) {
         super(eventBus, view);
 

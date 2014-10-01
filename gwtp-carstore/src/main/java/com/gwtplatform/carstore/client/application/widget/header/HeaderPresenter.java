@@ -28,7 +28,7 @@ import com.gwtplatform.carstore.client.application.login.LoginPresenter;
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.HeaderMessages;
-import com.gwtplatform.carstore.client.rest.SessionService;
+import com.gwtplatform.carstore.shared.api.SessionResource;
 import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -51,7 +51,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
 
     private static final Logger logger = Logger.getLogger(HeaderPresenter.class.getName());
 
-    private final ResourceDelegate<SessionService> sessionServiceDelegate;
+    private final ResourceDelegate<SessionResource> sessionServiceDelegate;
     private final PlaceManager placeManager;
     private final CurrentUser currentUser;
     private final HeaderMessages messages;
@@ -60,7 +60,7 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView>
     HeaderPresenter(
             EventBus eventBus,
             MyView view,
-            ResourceDelegate<SessionService> sessionServiceDelegate,
+            ResourceDelegate<SessionResource> sessionServiceDelegate,
             PlaceManager placeManager,
             CurrentUser currentUser,
             HeaderMessages messages) {

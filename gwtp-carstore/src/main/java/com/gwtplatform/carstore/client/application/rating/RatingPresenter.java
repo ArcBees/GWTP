@@ -31,7 +31,7 @@ import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent
 import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent.RatingAddedHandler;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.RatingService;
+import com.gwtplatform.carstore.shared.api.RatingResource;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
@@ -62,7 +62,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     }
 
     private final EditRatingPresenter editRatingPresenter;
-    private final ResourceDelegate<RatingService> ratingServiceDelegate;
+    private final ResourceDelegate<RatingResource> ratingServiceDelegate;
     private final PlaceManager placeManager;
 
     @Inject
@@ -70,7 +70,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
             MyView view,
             MyProxy proxy,
             EditRatingPresenter editRatingPresenter,
-            ResourceDelegate<RatingService> ratingServiceDelegate,
+            ResourceDelegate<RatingResource> ratingServiceDelegate,
             PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 

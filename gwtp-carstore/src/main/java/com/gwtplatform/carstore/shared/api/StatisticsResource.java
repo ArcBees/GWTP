@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.rest;
+package com.gwtplatform.carstore.shared.api;
 
 import java.util.Date;
 
@@ -23,13 +23,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static com.gwtplatform.carstore.shared.rest.ResourcesPath.STATS;
-import static com.gwtplatform.carstore.shared.rest.RestParameter.DATE;
-import static com.gwtplatform.carstore.shared.rest.RestParameter.DATE_FORMAT;
+import static com.gwtplatform.carstore.shared.api.ApiPaths.STATS;
+import static com.gwtplatform.carstore.shared.api.ApiParameters.DATE;
+import static com.gwtplatform.carstore.shared.api.ApiParameters.DATE_FORMAT;
 
 @Path(STATS)
-public interface StatisticsService {
+public interface StatisticsResource {
+    // This method is intentionally left out as a RestAction to ensure it's properly handled.
     @GET
-    Integer extractYearFromDate(@QueryParam(DATE) @DateFormat(DATE_FORMAT) Date date);
+    RestAction<Integer> extractYearFromDate(@QueryParam(DATE) @DateFormat(DATE_FORMAT) Date date);
 }

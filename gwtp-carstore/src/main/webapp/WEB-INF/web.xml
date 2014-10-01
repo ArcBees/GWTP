@@ -36,6 +36,6 @@
 
     <context-param>
         <param-name>resteasy.servlet.mapping.prefix</param-name>
-        <param-value>/rest</param-value>
+        <param-value>/api</param-value>
     </context-param>
 </web-app>

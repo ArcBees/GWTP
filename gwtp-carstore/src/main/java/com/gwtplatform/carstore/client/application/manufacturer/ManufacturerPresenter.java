@@ -32,7 +32,7 @@ import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPres
 import com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
@@ -67,7 +67,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     }
 
     private final PlaceManager placeManager;
-    private final ResourceDelegate<ManufacturerService> manufacturerServiceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate;
     private final EditManufacturerPresenter editManufacturerPresenter;
 
     private ManufacturerDto editingManufacturer;
@@ -78,7 +78,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
             MyView view,
             MyProxy proxy,
             PlaceManager placeManager,
-            ResourceDelegate<ManufacturerService> manufacturerServiceDelegate,
+            ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate,
             EditManufacturerPresenter editManufacturerPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 

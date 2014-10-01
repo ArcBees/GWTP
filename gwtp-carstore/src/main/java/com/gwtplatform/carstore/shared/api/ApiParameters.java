@@ -14,8 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.shared.rest;
+package com.gwtplatform.carstore.shared.api;
 
-public class PathParameter {
-    public static final String PATH_ID = "/{" + RestParameter.ID + "}";
+public class ApiParameters {
+    public static final String ID = "id";
+    public static final String LIMIT = "limit";
+    public static final String OFFSET = "offset";
+    public static final String DATE = "date";
+    public static final String DATE_FORMAT = "MM-yyyy-dd";
 }

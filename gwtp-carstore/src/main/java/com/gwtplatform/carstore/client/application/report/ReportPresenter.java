@@ -27,7 +27,7 @@ import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEven
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
@@ -47,14 +47,14 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
     interface MyProxy extends ProxyPlace<ReportPresenter> {
     }
 
-    private final ResourceDelegate<ManufacturerService> manufacturerServiceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate;
 
     @Inject
     ReportPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<ManufacturerService> manufacturerServiceDelegate) {
+            ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.manufacturerServiceDelegate = manufacturerServiceDelegate;

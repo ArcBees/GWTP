@@ -22,6 +22,12 @@
                     <include>**/*.java</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.gwt.xml</include>
+                </includes>
+            </resource>
         </resources>
     </build>
 

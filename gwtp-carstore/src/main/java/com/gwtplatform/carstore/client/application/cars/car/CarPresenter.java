@@ -37,8 +37,8 @@ import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.resources.CarMessages;
-import com.gwtplatform.carstore.client.rest.CarsService;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
+import com.gwtplatform.carstore.shared.api.CarsResource;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
 import com.gwtplatform.carstore.shared.dto.CarDto;
@@ -68,8 +68,8 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     public interface MyProxy extends ProxyPlace<CarPresenter> {
     }
 
-    private final ResourceDelegate<CarsService> carsServiceDelegate;
-    private final ResourceDelegate<ManufacturerService> manufacturerServiceDelegate;
+    private final ResourceDelegate<CarsResource> carsServiceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate;
     private final CarMessages messages;
     private final RestDispatch dispatcher;
     private final PlaceManager placeManager;
@@ -82,8 +82,8 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
             EventBus eventBus,
             MyView view,
             RestDispatch dispatcher,
-            ResourceDelegate<CarsService> carsServiceDelegate,
-            ResourceDelegate<ManufacturerService> manufacturerServiceDelegate,
+            ResourceDelegate<CarsResource> carsServiceDelegate,
+            ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate,
             PlaceManager placeManager,
             CarProxyFactory carProxyFactory,
             CarMessages messages,

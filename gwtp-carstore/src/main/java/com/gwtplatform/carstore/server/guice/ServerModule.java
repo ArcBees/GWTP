@@ -20,15 +20,15 @@ import javax.inject.Singleton;
 
 import com.google.inject.AbstractModule;
 import com.gwtplatform.carstore.server.DevBootStrapper;
+import com.gwtplatform.carstore.server.api.ApiModule;
 import com.gwtplatform.carstore.server.authentication.BCryptPasswordSecurity;
 import com.gwtplatform.carstore.server.authentication.PasswordSecurity;
 import com.gwtplatform.carstore.server.dispatch.DispatchModule;
-import com.gwtplatform.carstore.server.rest.RestModule;
 
 public class ServerModule extends AbstractModule {
     @Override
     protected void configure() {
-        install(new RestModule());
+        install(new ApiModule());
         install(new DispatchModule());
 
         bind(PasswordSecurity.class).to(BCryptPasswordSecurity.class).in(Singleton.class);
