@@ -14,45 +14,34 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.rest;
+package com.gwtplatform.carstore.server.api;
 
 import javax.inject.Inject;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import com.gwtplatform.carstore.server.authentication.Authenticator;
 import com.gwtplatform.carstore.server.authentication.CurrentUserDtoProvider;
+import com.gwtplatform.carstore.shared.api.SessionResource;
 import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
 
-@Path(ResourcesPath.SESSION)
-@Produces(MediaType.APPLICATION_JSON)
-public class SessionResource {
+public class SessionResourceImpl implements SessionResource {
     private final Authenticator authenticator;
     private final CurrentUserDtoProvider currentUserDtoProvider;
 
     @Inject
-    SessionResource(Authenticator authenticator,
-                    CurrentUserDtoProvider currentUserDtoProvider) {
+    SessionResourceImpl(
+            Authenticator authenticator,
+            CurrentUserDtoProvider currentUserDtoProvider) {
         this.authenticator = authenticator;
         this.currentUserDtoProvider = currentUserDtoProvider;
     }
 
-    @GET
-    public Response getCurrentUser() {
-        CurrentUserDto currentUserDto = currentUserDtoProvider.get();
-
-        return Response.ok(currentUserDto).build();
+    @Override
+    public CurrentUserDto getCurrentUser() {
+        return currentUserDtoProvider.get();
     }
 
-    @DELETE
-    public Response logout() {
+    @Override
+    public void logout() {
         authenticator.logout();
-
-        return Response.ok().build();
     }
 }

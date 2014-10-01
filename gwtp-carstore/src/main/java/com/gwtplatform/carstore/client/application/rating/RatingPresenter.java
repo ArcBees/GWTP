@@ -31,8 +31,8 @@ import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent
 import com.gwtplatform.carstore.client.application.rating.event.RatingAddedEvent.RatingAddedHandler;
 import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
+import com.gwtplatform.carstore.shared.api.RatingResource;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -62,7 +62,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     }
 
     private final EditRatingPresenter editRatingPresenter;
-    private final ResourceDelegate<RatingService> ratingServiceDelegate;
+    private final ResourceDelegate<RatingResource> ratingDelegate;
     private final PlaceManager placeManager;
 
     @Inject
@@ -70,11 +70,11 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
             MyView view,
             MyProxy proxy,
             EditRatingPresenter editRatingPresenter,
-            ResourceDelegate<RatingService> ratingServiceDelegate,
+            ResourceDelegate<RatingResource> ratingDelegate,
             PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.ratingServiceDelegate = ratingServiceDelegate;
+        this.ratingDelegate = ratingDelegate;
         this.placeManager = placeManager;
         this.editRatingPresenter = editRatingPresenter;
 
@@ -95,7 +95,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @Override
     public void onDelete(final RatingDto ratingDto) {
-        ratingServiceDelegate
+        ratingDelegate
                 .withCallback(new AbstractAsyncCallback<Void>() {
                     @Override
                     public void onSuccess(Void nothing) {
@@ -116,7 +116,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        ratingServiceDelegate
+        ratingDelegate
                 .withCallback(new AbstractAsyncCallback<List<RatingDto>>() {
                     @Override
                     public void onSuccess(List<RatingDto> ratings) {

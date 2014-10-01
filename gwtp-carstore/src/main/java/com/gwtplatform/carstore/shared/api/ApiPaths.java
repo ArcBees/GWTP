@@ -14,21 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.rest;
+package com.gwtplatform.carstore.shared.api;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+public class ApiPaths {
+    public static final String ROOT = "/api";
 
-import com.gwtplatform.carstore.shared.dto.CurrentUserDto;
+    public static final String CARS = "/cars";
+    public static final String MANUFACTURER = "/manufacturers";
+    public static final String RATING = "/ratings";
+    public static final String SESSION = "/session";
+    public static final String COUNT = "/count";
+    public static final String STATS = "/stats";
 
-import static com.gwtplatform.carstore.shared.rest.ResourcesPath.SESSION;
-
-@Path(SESSION)
-public interface SessionService {
-    @DELETE
-    void logout();
-
-    @GET
-    CurrentUserDto getCurrentUser();
+    public static final String PATH_ID = "/{" + ApiParameters.ID + "}";
 }

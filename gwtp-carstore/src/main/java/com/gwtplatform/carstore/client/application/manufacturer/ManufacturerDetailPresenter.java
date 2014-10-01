@@ -36,9 +36,9 @@ import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -65,7 +65,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     interface MyProxy extends ProxyPlace<ManufacturerDetailPresenter> {
     }
 
-    private final ResourceDelegate<ManufacturerService> manufacturerServiceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final PlaceManager placeManager;
     private final EditManufacturerMessages messages;
 
@@ -77,12 +77,12 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<ManufacturerService> manufacturerServiceDelegate,
+            ResourceDelegate<ManufacturersResource> manufacturersDelegate,
             PlaceManager placeManager,
             EditManufacturerMessages messages) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.manufacturerServiceDelegate = manufacturerServiceDelegate;
+        this.manufacturersDelegate = manufacturersDelegate;
         this.placeManager = placeManager;
         this.messages = messages;
 
@@ -96,7 +96,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
         if (!createNew) {
             Long id = Long.parseLong(param);
-            manufacturerServiceDelegate
+            manufacturersDelegate
                     .withCallback(new AbstractAsyncCallback<ManufacturerDto>() {
                         @Override
                         public void onSuccess(ManufacturerDto manufacturer) {
@@ -135,7 +135,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        manufacturerServiceDelegate
+        manufacturersDelegate
 
                 .withCallback(new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
@@ -169,7 +169,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     private void deleteManufacturer() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + currentManufacturer.getName() + "?");
         if (confirm) {
-            manufacturerServiceDelegate
+            manufacturersDelegate
                     .withCallback(new ErrorHandlerAsyncCallback<Void>(this) {
                         @Override
                         public void onSuccess(Void nothing) {

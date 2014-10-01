@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,20 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.rest;
+package com.gwtplatform.carstore.shared.api;
 
-import javax.inject.Singleton;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-import com.google.inject.AbstractModule;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
-public class RestModule extends AbstractModule {
-    @Override
-    protected void configure() {
-        bind(CarResource.class);
-        bind(ManufacturerResource.class);
-        bind(SessionResource.class);
-        bind(RatingResource.class);
-        bind(StatisticsResource.class);
-        bind(JacksonProvider.class).in(Singleton.class);
-    }
+@Produces(MediaType.APPLICATION_JSON)
+public interface CarResource {
+    @GET
+    CarDto get();
+
+    @DELETE
+    void delete();
 }
