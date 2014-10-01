@@ -32,9 +32,9 @@ import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPres
 import com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;

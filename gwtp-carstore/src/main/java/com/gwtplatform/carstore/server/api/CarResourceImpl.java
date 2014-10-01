@@ -21,8 +21,8 @@ import javax.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.domain.Car;
-import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.api.CarResource;
+import com.gwtplatform.carstore.shared.dto.CarDto;
 
 public class CarResourceImpl implements CarResource {
     private final CarDao carDao;
