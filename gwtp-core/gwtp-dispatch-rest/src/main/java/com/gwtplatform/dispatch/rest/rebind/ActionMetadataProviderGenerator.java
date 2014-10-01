@@ -31,10 +31,10 @@ import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
+import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.RegisterMetadataHolder;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
 
 public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/ActionMetadataProvider.vm";

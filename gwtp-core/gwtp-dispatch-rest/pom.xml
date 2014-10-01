@@ -42,6 +42,10 @@
             <artifactId>gwtp-dispatch-common-client</artifactId>
         </dependency>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-rest-shared</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
@@ -67,12 +71,6 @@
         <dependency>
             <groupId>com.github.nmorel.gwtjackson</groupId>
             <artifactId>gwt-jackson</artifactId>
-        </dependency>
-
-        <!-- JAS-RS -->
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
         </dependency>
 
         <!-- Rebind dependency -->

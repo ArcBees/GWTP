@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.client;
 
 import java.util.Date;
 
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**

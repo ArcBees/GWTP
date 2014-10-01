@@ -29,7 +29,7 @@ public interface RestRequestBuilderFactory {
      *
      * @param action        the {@link RestAction} for which to build the request.
      * @param securityToken the security token to add to the {@link RequestBuilder}. Usually the value bound to
-     *                      {@literal @}{@link XsrfHeaderName}.
+     *                      {@link @XsrfHeaderName}.
      * @param <A>           the action type.
      * @return a {@link RequestBuilder} object.
      * @throws ActionException if an exception occured while creating the {@link RequestBuilder}.

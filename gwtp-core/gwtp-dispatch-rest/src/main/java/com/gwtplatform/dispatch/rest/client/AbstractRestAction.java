@@ -22,6 +22,7 @@ import java.util.List;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
