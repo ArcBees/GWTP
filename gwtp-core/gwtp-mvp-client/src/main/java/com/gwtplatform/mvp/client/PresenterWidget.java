@@ -296,9 +296,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     private void rawRemoveFromSlot(ISlot<?> slot, PresenterWidget<?> child) {
-        if (!slot.isRemovable()) {
-            throw new IllegalArgumentException("Cannont remove a child from a permanent slot");
-        }
         if (child == null || child.slot != slot) {
             return;
         }
@@ -318,9 +315,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     @Override
     public <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child, boolean performReset) {
         if (child == null) {
-            if (!slot.isRemovable()) {
-                throw new IllegalArgumentException("Cannont set a permanent slot to null");
-            }
             clearSlot((RemovableSlot<?>) slot);
             return;
         }
@@ -606,6 +600,9 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * Disconnects a child from its parent.
      */
     private void orphan() {
+        if (slot != null && !slot.isRemovable()) {
+            throw new IllegalArgumentException("Cannont remove a child from a permanent slot");
+        }
         if (parent != null) {
             internalHide();
 
