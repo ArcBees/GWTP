@@ -47,17 +47,17 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
     interface MyProxy extends ProxyPlace<ReportPresenter> {
     }
 
-    private final ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
 
     @Inject
     ReportPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate) {
+            ResourceDelegate<ManufacturersResource> manufacturersDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.manufacturerServiceDelegate = manufacturerServiceDelegate;
+        this.manufacturersDelegate = manufacturersDelegate;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ReportPresenter extends Presenter<ReportPresenter.MyView, ReportPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, new ArrayList<ActionType>(), true);
 
-        manufacturerServiceDelegate
+        manufacturersDelegate
                 .withCallback(new AbstractAsyncCallback<List<ManufacturerRatingDto>>() {
                     @Override
                     public void onSuccess(List<ManufacturerRatingDto> manufacturerRatings) {

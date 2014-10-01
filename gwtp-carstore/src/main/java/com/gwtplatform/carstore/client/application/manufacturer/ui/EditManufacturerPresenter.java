@@ -39,7 +39,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
         void edit(ManufacturerDto manufacturerDto);
     }
 
-    private final ResourceDelegate<ManufacturersResource> manufacturerResourceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final EditManufacturerMessages messages;
 
     private ManufacturerDto manufacturerDto;
@@ -52,7 +52,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
             EditManufacturerMessages messages) {
         super(eventBus, view);
 
-        this.manufacturerResourceDelegate = manufacturerResourceDelegate;
+        this.manufacturersDelegate = manufacturerResourceDelegate;
         this.messages = messages;
 
         getView().setUiHandlers(this);
@@ -79,7 +79,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        manufacturerResourceDelegate
+        manufacturersDelegate
                 .withCallback(new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
                     public void onSuccess(ManufacturerDto savedManufacturer) {

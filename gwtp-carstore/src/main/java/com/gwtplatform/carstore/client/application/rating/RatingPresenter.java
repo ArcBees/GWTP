@@ -62,7 +62,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
     }
 
     private final EditRatingPresenter editRatingPresenter;
-    private final ResourceDelegate<RatingResource> ratingServiceDelegate;
+    private final ResourceDelegate<RatingResource> ratingDelegate;
     private final PlaceManager placeManager;
 
     @Inject
@@ -70,11 +70,11 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
             MyView view,
             MyProxy proxy,
             EditRatingPresenter editRatingPresenter,
-            ResourceDelegate<RatingResource> ratingServiceDelegate,
+            ResourceDelegate<RatingResource> ratingDelegate,
             PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.ratingServiceDelegate = ratingServiceDelegate;
+        this.ratingDelegate = ratingDelegate;
         this.placeManager = placeManager;
         this.editRatingPresenter = editRatingPresenter;
 
@@ -95,7 +95,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
 
     @Override
     public void onDelete(final RatingDto ratingDto) {
-        ratingServiceDelegate
+        ratingDelegate
                 .withCallback(new AbstractAsyncCallback<Void>() {
                     @Override
                     public void onSuccess(Void nothing) {
@@ -116,7 +116,7 @@ public class RatingPresenter extends Presenter<RatingPresenter.MyView, RatingPre
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        ratingServiceDelegate
+        ratingDelegate
                 .withCallback(new AbstractAsyncCallback<List<RatingDto>>() {
                     @Override
                     public void onSuccess(List<RatingDto> ratings) {

@@ -65,7 +65,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     interface MyProxy extends ProxyPlace<ManufacturerDetailPresenter> {
     }
 
-    private final ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final PlaceManager placeManager;
     private final EditManufacturerMessages messages;
 
@@ -77,12 +77,12 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate,
+            ResourceDelegate<ManufacturersResource> manufacturersDelegate,
             PlaceManager placeManager,
             EditManufacturerMessages messages) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.manufacturerServiceDelegate = manufacturerServiceDelegate;
+        this.manufacturersDelegate = manufacturersDelegate;
         this.placeManager = placeManager;
         this.messages = messages;
 
@@ -96,7 +96,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
         if (!createNew) {
             Long id = Long.parseLong(param);
-            manufacturerServiceDelegate
+            manufacturersDelegate
                     .withCallback(new AbstractAsyncCallback<ManufacturerDto>() {
                         @Override
                         public void onSuccess(ManufacturerDto manufacturer) {
@@ -135,7 +135,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        manufacturerServiceDelegate
+        manufacturersDelegate
 
                 .withCallback(new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
@@ -169,7 +169,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     private void deleteManufacturer() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + currentManufacturer.getName() + "?");
         if (confirm) {
-            manufacturerServiceDelegate
+            manufacturersDelegate
                     .withCallback(new ErrorHandlerAsyncCallback<Void>(this) {
                         @Override
                         public void onSuccess(Void nothing) {

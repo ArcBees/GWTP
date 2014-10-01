@@ -47,17 +47,17 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
 
     private static final String FAILED = "Failed";
 
-    private final ResourceDelegate<StatisticsResource> statisticsServiceDelegate;
+    private final ResourceDelegate<StatisticsResource> statisticsDelegate;
 
     @Inject
     StatisticsPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<StatisticsResource> statisticsServiceDelegate) {
+            ResourceDelegate<StatisticsResource> statisticsDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.statisticsServiceDelegate = statisticsServiceDelegate;
+        this.statisticsDelegate = statisticsDelegate;
 
         getView().setUiHandlers(this);
     }
@@ -67,7 +67,7 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
     public void extractYear(final Date date) {
         getView().setResult("");
 
-        statisticsServiceDelegate
+        statisticsDelegate
                 .withCallback(new AsyncCallback<Integer>() {
                     @Override
                     public void onFailure(Throwable caught) {

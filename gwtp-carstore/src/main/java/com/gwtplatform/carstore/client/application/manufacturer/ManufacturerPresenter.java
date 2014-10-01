@@ -67,7 +67,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     }
 
     private final PlaceManager placeManager;
-    private final ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final EditManufacturerPresenter editManufacturerPresenter;
 
     private ManufacturerDto editingManufacturer;
@@ -78,12 +78,12 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
             MyView view,
             MyProxy proxy,
             PlaceManager placeManager,
-            ResourceDelegate<ManufacturersResource> manufacturerServiceDelegate,
+            ResourceDelegate<ManufacturersResource> manufacturersDelegate,
             EditManufacturerPresenter editManufacturerPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
         this.placeManager = placeManager;
-        this.manufacturerServiceDelegate = manufacturerServiceDelegate;
+        this.manufacturersDelegate = manufacturersDelegate;
         this.editManufacturerPresenter = editManufacturerPresenter;
 
         getView().setUiHandlers(this);
@@ -119,7 +119,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onDelete(final ManufacturerDto manufacturerDto) {
-        manufacturerServiceDelegate
+        manufacturersDelegate
                 .withCallback(new ErrorHandlerAsyncCallback<Void>(this) {
                     @Override
                     public void onSuccess(Void nothing) {
@@ -134,7 +134,7 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        manufacturerServiceDelegate
+        manufacturersDelegate
                 .withCallback(new AbstractAsyncCallback<List<ManufacturerDto>>() {
                     @Override
                     public void onSuccess(List<ManufacturerDto> manufacturers) {

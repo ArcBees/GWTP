@@ -66,8 +66,8 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
     interface MyProxy extends ProxyPlace<RatingDetailPresenter> {
     }
 
-    private final ResourceDelegate<CarsResource> carsServiceDelegate;
-    private final ResourceDelegate<RatingResource> ratingServiceDelegate;
+    private final ResourceDelegate<CarsResource> carsDelegate;
+    private final ResourceDelegate<RatingResource> ratingDelegate;
     private final EditRatingMessages messages;
     private final PlaceManager placeManager;
 
@@ -76,14 +76,14 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<CarsResource> carsServiceDelegate,
-            ResourceDelegate<RatingResource> ratingServiceDelegate,
+            ResourceDelegate<CarsResource> carsDelegate,
+            ResourceDelegate<RatingResource> ratingDelegate,
             EditRatingMessages messages,
             PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.carsServiceDelegate = carsServiceDelegate;
-        this.ratingServiceDelegate = ratingServiceDelegate;
+        this.carsDelegate = carsDelegate;
+        this.ratingDelegate = ratingDelegate;
         this.messages = messages;
         this.placeManager = placeManager;
 
@@ -104,7 +104,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        ratingServiceDelegate
+        ratingDelegate
                 .withCallback(new ErrorHandlerAsyncCallback<RatingDto>(this) {
                     @Override
                     public void onSuccess(RatingDto savedRating) {
@@ -127,7 +127,7 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
         List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
-        carsServiceDelegate
+        carsDelegate
                 .withCallback(new AbstractAsyncCallback<List<CarDto>>() {
                     @Override
                     public void onSuccess(List<CarDto> cars) {
