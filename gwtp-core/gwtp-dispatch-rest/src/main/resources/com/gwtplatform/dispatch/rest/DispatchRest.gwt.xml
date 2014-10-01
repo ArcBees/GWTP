@@ -3,6 +3,7 @@
         "https://raw.githubusercontent.com/gwtproject/gwt/2.6.1/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="com.gwtplatform.common.ClientsCommon"/>
+    <inherits name="com.gwtplatform.dispatch.rest.DispatchRestShared"/>
     <inherits name="com.gwtplatform.dispatch.DispatchCommonClient"/>
     <inherits name="com.google.common.base.Base"/>
     <inherits name="com.google.common.collect.Collect"/>
@@ -14,7 +15,6 @@
 
     <!-- Specify the paths for translatable code -->
     <source path='client'/>
-    <source path='shared'/>
 
     <entry-point class='com.gwtplatform.dispatch.rest.client.RestDispatcherController'/>
 

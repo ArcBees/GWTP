@@ -20,7 +20,6 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**

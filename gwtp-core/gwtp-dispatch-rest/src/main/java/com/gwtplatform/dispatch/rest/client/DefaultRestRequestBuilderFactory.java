@@ -34,7 +34,6 @@ import com.google.gwt.http.client.RequestBuilder.Method;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -112,7 +111,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * @return the encoded path parameter.
      *
      * @throws ActionException if an exception occurred while encoding the path parameter.
-     * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
+     * @see #encode(RestParameter)
      */
     protected String encodePathParam(String value) throws ActionException {
         return urlUtils.encodePathSegment(value);
@@ -127,7 +126,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
      * @return the encoded query parameter.
      *
      * @throws ActionException if an exception occurred while encoding the query parameter.
-     * @see #encode(com.gwtplatform.dispatch.rest.shared.RestParameter)
+     * @see #encode(RestParameter)
      */
     protected String encodeQueryParam(String value) throws ActionException {
         return urlUtils.encodeQueryString(value);

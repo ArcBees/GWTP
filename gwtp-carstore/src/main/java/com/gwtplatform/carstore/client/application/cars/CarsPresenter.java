@@ -37,9 +37,9 @@ import com.gwtplatform.carstore.client.application.event.ActionBarVisibilityEven
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent;
 import com.gwtplatform.carstore.client.application.event.ChangeActionBarEvent.ActionType;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.CarsResource;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -69,7 +69,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
     public interface MyProxy extends ProxyPlace<CarsPresenter> {
     }
 
-    private final ResourceDelegate<CarsService> carsDelegate;
+    private final ResourceDelegate<CarsResource> carsDelegate;
     private final PlaceManager placeManager;
     private final CarProxyFactory carProxyFactory;
 
@@ -78,7 +78,7 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<CarsService> carsDelegate,
+            ResourceDelegate<CarsResource> carsDelegate,
             PlaceManager placeManager,
             CarProxyFactory carProxyFactory) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);

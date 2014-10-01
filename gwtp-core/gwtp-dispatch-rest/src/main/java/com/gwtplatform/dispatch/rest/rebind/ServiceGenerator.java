@@ -30,9 +30,9 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class ServiceGenerator extends AbstractServiceGenerator {
     private final JClassType service;

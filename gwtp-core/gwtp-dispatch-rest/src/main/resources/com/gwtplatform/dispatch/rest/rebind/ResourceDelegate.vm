@@ -16,10 +16,11 @@ import javax.inject.Inject;
 #end
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rest.client.AbstractResourceDelegate;
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import ${service.interfacePackage}.$serviceInterface;
 import ${service.implPackage}.$service.implName;
+#importResources($resources)
 
 public class $implName extends AbstractResourceDelegate<$serviceInterface> implements $serviceInterface {
     private final $serviceInterface resource;

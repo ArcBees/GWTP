@@ -34,6 +34,7 @@ import com.gwtplatform.dispatch.rest.client.GlobalHeaderParams;
 import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestBinding;
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
@@ -43,7 +44,6 @@ import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**

@@ -27,10 +27,10 @@ import com.gwtplatform.carstore.client.application.rating.ui.EditRatingPresenter
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.EditRatingMessages;
-import com.gwtplatform.carstore.client.rest.CarsService;
-import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.CarsResource;
+import com.gwtplatform.carstore.shared.api.RatingResource;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
@@ -46,21 +46,21 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
         void setAllowedCars(List<CarDto> carDtos);
     }
 
-    private final ResourceDelegate<CarsService> carsServiceDelegate;
-    private final ResourceDelegate<RatingService> ratingServiceDelegate;
+    private final ResourceDelegate<CarsResource> carsDelegate;
+    private final ResourceDelegate<RatingResource> ratingDelegate;
     private final EditRatingMessages messages;
 
     @Inject
     EditRatingPresenter(
             EventBus eventBus,
             MyView view,
-            ResourceDelegate<CarsService> carsServiceDelegate,
-            ResourceDelegate<RatingService> ratingServiceDelegate,
+            ResourceDelegate<CarsResource> carsDelegate,
+            ResourceDelegate<RatingResource> ratingDelegate,
             EditRatingMessages messages) {
         super(eventBus, view);
 
-        this.carsServiceDelegate = carsServiceDelegate;
-        this.ratingServiceDelegate = ratingServiceDelegate;
+        this.carsDelegate = carsDelegate;
+        this.ratingDelegate = ratingDelegate;
         this.messages = messages;
 
         getView().setUiHandlers(this);
@@ -78,7 +78,7 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
 
     @Override
     public void onSave(RatingDto ratingDto) {
-        ratingServiceDelegate
+        ratingDelegate
                 .withCallback(new ErrorHandlerAsyncCallback<RatingDto>(this) {
                     @Override
                     public void onSuccess(RatingDto savedRating) {
@@ -92,7 +92,7 @@ public class EditRatingPresenter extends PresenterWidget<MyView> implements Edit
     }
 
     private void reveal() {
-        carsServiceDelegate
+        carsDelegate
                 .withCallback(new AbstractAsyncCallback<List<CarDto>>() {
                     @Override
                     public void onSuccess(List<CarDto> cars) {
