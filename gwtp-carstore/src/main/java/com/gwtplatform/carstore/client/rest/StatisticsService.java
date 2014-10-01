@@ -22,7 +22,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
-import com.gwtplatform.dispatch.rest.client.DateFormat;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 
 import static com.gwtplatform.carstore.shared.rest.ResourcesPath.STATS;
 import static com.gwtplatform.carstore.shared.rest.RestParameter.DATE;

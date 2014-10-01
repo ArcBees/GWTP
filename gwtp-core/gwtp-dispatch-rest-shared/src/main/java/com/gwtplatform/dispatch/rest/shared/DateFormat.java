@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.shared;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

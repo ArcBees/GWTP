@@ -21,7 +21,7 @@ import java.lang.annotation.Annotation;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.shared.RestDispatch}.
+ * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
  */
 public enum SupportedHttpActions {
     GET(HttpMethod.GET, javax.ws.rs.GET.class),

@@ -17,16 +17,15 @@
 package com.gwtplatform.dispatch.rest.client;
 
 import com.google.common.base.Objects;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
  * An implementation of this class is generated at compile-time to provide additional information about generated
- * {@link RestAction}s. Possible metadata is enumerated in {@link MetadataType}.
+ * {@link com.gwtplatform.dispatch.rest.shared.RestAction}s. Possible metadata is enumerated in {@link MetadataType}.
  */
 public interface ActionMetadataProvider {
     /**
-     * A key composed of {@link RestAction} and a {@link MetadataType}.
+     * A key composed of {@link com.gwtplatform.dispatch.rest.shared.RestAction} and a {@link MetadataType}.
      */
     class MetadataKey {
         private final Class<? extends RestAction> actionClass;

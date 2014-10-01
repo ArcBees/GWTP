@@ -18,11 +18,9 @@ package com.gwtplatform.dispatch.rest.shared;
 
 import java.util.Collection;
 
-import com.google.common.base.Joiner;
-
 /**
- * This class is used by {@link com.gwtplatform.dispatch.rest.client.AbstractRestAction} to associate a parameter name
- * to a value.
+ * This class is used by {@link com.gwtplatform.dispatch.rest.client.AbstractRestAction AbstractRestAction} to associate
+ * a parameter name to a value.
  */
 public class RestParameter {
     private String name;
@@ -31,10 +29,21 @@ public class RestParameter {
     RestParameter() {
     }
 
-    public RestParameter(String name, Object object) {
+    public RestParameter(
+            String name,
+            Object object) {
         this.name = name;
+
         if (object instanceof Collection) {
-            stringValue = Joiner.on(',').join((Collection) object);
+            StringBuilder stringBuilder = new StringBuilder();
+            String separator = "";
+
+            for (Object element : ((Collection) object)) {
+                stringBuilder.append(element).append(separator);
+                separator = ",";
+            }
+
+            stringValue = stringBuilder.toString();
         } else if (object != null) {
             this.stringValue = object.toString();
         } else {

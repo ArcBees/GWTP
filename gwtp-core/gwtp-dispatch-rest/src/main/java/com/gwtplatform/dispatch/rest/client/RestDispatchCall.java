@@ -28,7 +28,6 @@ import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestCallback;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
@@ -36,7 +35,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 /**
  * A class representing an execute call to be sent to the server over HTTP.
  *
- * @param <A> the {@link RestAction} type.
+ * @param <A> the {@link com.gwtplatform.dispatch.rest.shared.RestAction} type.
  * @param <R> the result type for this action.
  */
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
