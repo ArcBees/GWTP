@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.rest;
+package com.gwtplatform.carstore.server.api;
 
 import java.io.IOException;
 import java.io.OutputStream;

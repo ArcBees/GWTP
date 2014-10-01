@@ -16,6 +16,7 @@
 
 package com.gwtplatform.carstore.client.gin;
 
+import com.gwtplatform.carstore.shared.api.ApiPaths;
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
@@ -24,6 +25,6 @@ public class CarStoreModule extends AbstractPresenterModule {
     protected void configure() {
         install(new SharedModule());
 
-        bindConstant().annotatedWith(RestApplicationPath.class).to("/rest");
+        bindConstant().annotatedWith(RestApplicationPath.class).to(ApiPaths.ROOT);
     }
 }

@@ -26,7 +26,7 @@ import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyView;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.StatisticsService;
+import com.gwtplatform.carstore.shared.api.StatisticsResource;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -47,17 +47,17 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
 
     private static final String FAILED = "Failed";
 
-    private final ResourceDelegate<StatisticsService> statisticsServiceDelegate;
+    private final ResourceDelegate<StatisticsResource> statisticsDelegate;
 
     @Inject
     StatisticsPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<StatisticsService> statisticsServiceDelegate) {
+            ResourceDelegate<StatisticsResource> statisticsDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.statisticsServiceDelegate = statisticsServiceDelegate;
+        this.statisticsDelegate = statisticsDelegate;
 
         getView().setUiHandlers(this);
     }
@@ -67,7 +67,7 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
     public void extractYear(final Date date) {
         getView().setResult("");
 
-        statisticsServiceDelegate
+        statisticsDelegate
                 .withCallback(new AsyncCallback<Integer>() {
                     @Override
                     public void onFailure(Throwable caught) {

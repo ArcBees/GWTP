@@ -14,17 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.rest;
+package com.gwtplatform.carstore.server.api;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
+import com.gwtplatform.carstore.shared.api.CarResource;
 
-import com.gwtplatform.carstore.shared.dto.CarDto;
-
-public interface CarService {
-    @GET
-    CarDto get();
-
-    @DELETE
-    void delete();
+public interface ResourcesFactory {
+    CarResource createCarResource(Long carId);
 }

@@ -25,8 +25,8 @@ import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufactu
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -39,7 +39,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
         void edit(ManufacturerDto manufacturerDto);
     }
 
-    private final ResourceDelegate<ManufacturerService> manufacturerResourceDelegate;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final EditManufacturerMessages messages;
 
     private ManufacturerDto manufacturerDto;
@@ -48,11 +48,11 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
     public EditManufacturerPresenter(
             EventBus eventBus,
             MyView view,
-            ResourceDelegate<ManufacturerService> manufacturerResourceDelegate,
+            ResourceDelegate<ManufacturersResource> manufacturerResourceDelegate,
             EditManufacturerMessages messages) {
         super(eventBus, view);
 
-        this.manufacturerResourceDelegate = manufacturerResourceDelegate;
+        this.manufacturersDelegate = manufacturerResourceDelegate;
         this.messages = messages;
 
         getView().setUiHandlers(this);
@@ -79,7 +79,7 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        manufacturerResourceDelegate
+        manufacturersDelegate
                 .withCallback(new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
                     public void onSuccess(ManufacturerDto savedManufacturer) {

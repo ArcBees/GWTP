@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.server.rest;
+package com.gwtplatform.carstore.server.api;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,15 +28,15 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
 import com.google.common.base.Strings;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.carstore.shared.rest.RestParameter;
+import com.gwtplatform.carstore.shared.api.ApiParameters;
+import com.gwtplatform.carstore.shared.api.ApiPaths;
 
-@Path(ResourcesPath.STATS)
-public class StatisticsResource {
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat(RestParameter.DATE_FORMAT);
+@Path(ApiPaths.STATS)
+public class StatisticsResourceImpl {
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat(ApiParameters.DATE_FORMAT);
 
     @GET
-    public Response extractYearFromDate(@QueryParam(RestParameter.DATE) String date) {
+    public Response extractYearFromDate(@QueryParam(ApiParameters.DATE) String date) {
         ResponseBuilder responseBuilder;
 
         if (Strings.isNullOrEmpty(date)) {

@@ -14,34 +14,40 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.rest;
+package com.gwtplatform.carstore.shared.api;
 
 import java.util.List;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import com.gwtplatform.carstore.shared.dto.CarDto;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static com.gwtplatform.carstore.shared.rest.PathParameter.PATH_ID;
-import static com.gwtplatform.carstore.shared.rest.ResourcesPath.CARS;
-import static com.gwtplatform.carstore.shared.rest.ResourcesPath.COUNT;
-import static com.gwtplatform.carstore.shared.rest.RestParameter.ID;
-import static com.gwtplatform.carstore.shared.rest.RestParameter.LIMIT;
-import static com.gwtplatform.carstore.shared.rest.RestParameter.OFFSET;
+import static com.gwtplatform.carstore.shared.api.ApiPaths.PATH_ID;
+import static com.gwtplatform.carstore.shared.api.ApiPaths.CARS;
+import static com.gwtplatform.carstore.shared.api.ApiPaths.COUNT;
+import static com.gwtplatform.carstore.shared.api.ApiParameters.ID;
+import static com.gwtplatform.carstore.shared.api.ApiParameters.LIMIT;
+import static com.gwtplatform.carstore.shared.api.ApiParameters.OFFSET;
 
 @Path(CARS)
-public interface CarsService {
+@Produces(MediaType.APPLICATION_JSON)
+public interface CarsResource {
+    String DEFAULT_LIMIT = "1000";
+    String DEFAULT_OFFSET = "0";
+
     @GET
     List<CarDto> getCars();
 
-    // This method is intentionally left out as a RestAction to ensure it's properly handled.
     @GET
-    RestAction<List<CarDto>> getCars(@QueryParam(OFFSET) int offset, @QueryParam(LIMIT) int limit);
+    List<CarDto> getCars(@DefaultValue(DEFAULT_OFFSET) @QueryParam(OFFSET) int offset,
+            @DefaultValue(DEFAULT_LIMIT) @QueryParam(LIMIT) int limit);
 
     @GET
     @Path(COUNT)
@@ -51,5 +57,5 @@ public interface CarsService {
     CarDto saveOrCreate(CarDto carDto);
 
     @Path(PATH_ID)
-    CarService car(@PathParam(ID) Long carId);
+    CarResource car(@PathParam(ID) Long carId);
 }

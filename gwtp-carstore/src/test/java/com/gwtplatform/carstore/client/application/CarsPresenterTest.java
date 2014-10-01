@@ -38,8 +38,8 @@ import com.gwtplatform.carstore.client.application.cars.car.CarProxyFactory;
 import com.gwtplatform.carstore.client.application.testutils.PresenterTestModule;
 import com.gwtplatform.carstore.client.application.testutils.PresenterWidgetTestBase;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.CarService;
-import com.gwtplatform.carstore.client.rest.CarsService;
+import com.gwtplatform.carstore.shared.api.CarResource;
+import com.gwtplatform.carstore.shared.api.CarsResource;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
@@ -71,11 +71,11 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Inject
     CarProxyFactory carProxyFactory;
     @Inject
-    ResourceDelegate<CarsService> carsResourceDelegate;
+    ResourceDelegate<CarsResource> carsResourceDelegate;
     @Inject
-    CarsService carsService;
+    CarsResource carsResource;
     @Inject
-    CarService carService;
+    CarResource carResource;
 
     @Test
     public void onEditCar(PlaceManager placeManager, ManufacturerDto manufacturerDto) {
@@ -109,8 +109,8 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onFetchData(ArrayList<CarDto> carDtos) {
         // Given
-        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsService);
-        callSuccessWith(callback, carDtos).when(carsService).getCars(0, 1);
+        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsResource);
+        callSuccessWith(callback, carDtos).when(carsResource).getCars(0, 1);
 
         // When
         carsPresenter.fetchData(0, 1);
@@ -122,8 +122,8 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
         // Given
-        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsService);
-        callSuccessWith(callback, carDtos).when(carsService).getCars(0, 3);
+        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsResource);
+        callSuccessWith(callback, carDtos).when(carsResource).getCars(0, 3);
 
         // When
         carsPresenter.fetchData(0, 3);
@@ -137,14 +137,14 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
         // Given
         carDto.setId(3L);
 
-        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsService);
+        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsResource);
 
         // Given we delete the car
-        given(carsService.car(carDto.getId())).willReturn(carService);
-        callSuccessWith(callback).when(carService).delete();
+        given(carsResource.car(carDto.getId())).willReturn(carResource);
+        callSuccessWith(callback).when(carResource).delete();
 
         // Given we fetch the cars after delete
-        callSuccessWith(callback, new ArrayList<>()).when(carsService).getCars();
+        callSuccessWith(callback, new ArrayList<>()).when(carsResource).getCars();
 
         // And display is setup
         when(view.getCarDisplay()).thenReturn(hasCarData);

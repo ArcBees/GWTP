@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.carstore.client.rest;
+package com.gwtplatform.carstore.shared.api;
 
 import java.util.List;
 
@@ -23,32 +23,29 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.carstore.shared.dto.ManufacturerRatingDto;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
+import com.gwtplatform.carstore.shared.dto.RatingDto;
 
-import static com.gwtplatform.carstore.shared.rest.PathParameter.PATH_ID;
-import static com.gwtplatform.carstore.shared.rest.ResourcesPath.MANUFACTURER;
-import static com.gwtplatform.carstore.shared.rest.RestParameter.ID;
+import static com.gwtplatform.carstore.shared.api.ApiPaths.PATH_ID;
+import static com.gwtplatform.carstore.shared.api.ApiPaths.RATING;
+import static com.gwtplatform.carstore.shared.api.ApiParameters.ID;
 
-@Path(MANUFACTURER)
-public interface ManufacturerService {
+@Path(RATING)
+@Produces(MediaType.APPLICATION_JSON)
+public interface RatingResource {
     @GET
-    List<ManufacturerDto> getManufacturers();
+    List<RatingDto> getRatings();
 
     @GET
     @Path(PATH_ID)
-    ManufacturerDto get(@PathParam(ID) Long id);
+    RatingDto get(@PathParam(ID) Long id);
 
     @POST
-    ManufacturerDto saveOrCreate(ManufacturerDto manufacturerDto);
+    RatingDto saveOrCreate(RatingDto RatingDto);
 
     @DELETE
     @Path(PATH_ID)
     void delete(@PathParam(ID) Long id);
-
-    @GET
-    @Path(ResourcesPath.RATING)
-    List<ManufacturerRatingDto> getAverageRatings();
 }

@@ -18,7 +18,7 @@ package com.gwtplatform.carstore.client.application.cars.car;
 
 import javax.inject.Inject;
 
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.cars.car.navigation.NavigationTabPresenter;
@@ -38,8 +38,7 @@ public class RootCarPresenter extends Presenter<RootCarPresenter.MyView, RootCar
     }
 
     @ContentSlot
-    public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_SetCarContent = new GwtEvent
-            .Type<>();
+    public static final Type<RevealContentHandler<?>> SLOT_SetCarContent = new Type<>();
 
     public static final Object SLOT_TAB_BAR = new Object();
 
