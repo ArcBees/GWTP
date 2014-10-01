@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.shared;
+package com.gwtplatform.dispatch.rest.client;
 
 /**
  * Used to associate some metadata to generated classes without cluttering the generated classes.

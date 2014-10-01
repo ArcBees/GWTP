@@ -47,8 +47,7 @@ import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rest.client.DateFormat;
-import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
+import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
@@ -60,12 +59,13 @@ import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 import com.gwtplatform.dispatch.rest.rebind.util.HeaderParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.PathParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.QueryParamValueResolver;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
+import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_TYPE;
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.RESPONSE_TYPE;
+import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
+import static com.gwtplatform.dispatch.rest.client.MetadataType.RESPONSE_TYPE;
 
 public class ActionGenerator extends AbstractVelocityGenerator {
     private static class AnnotatedMethodParameter {

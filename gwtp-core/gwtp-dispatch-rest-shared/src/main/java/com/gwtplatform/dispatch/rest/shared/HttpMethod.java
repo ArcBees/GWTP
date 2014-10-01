@@ -17,9 +17,12 @@
 package com.gwtplatform.dispatch.rest.shared;
 
 /**
- * @deprecated Services are generated based on the presence of a {@link javax.ws.rs.Path @Path} annotation. This
- * interface should no longer be used and will eventually be deleted.
+ * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
  */
-@Deprecated
-public interface RestService {
+public enum HttpMethod {
+    GET,
+    POST,
+    PUT,
+    DELETE,
+    HEAD;
 }

@@ -22,45 +22,45 @@ import com.gwtplatform.dispatch.shared.HasSecured;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * An action used by {@link RestDispatch}.
+ * An action used by {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
  * <p/>
- * You will usually want to let GWTP generate your actions by creating services as explained
- * <a href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
+ * You will usually want to let GWTP generate your actions by creating services as explained <a
+ * href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
  *
  * @param <R> the result type.
  */
 public interface RestAction<R> extends TypedAction<R>, HasSecured {
     /**
-     * Returns the relative path for this action. It should not be prepended by the path annotated with
-     * {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath}.
+     * Returns the relative path for this action. It should not be prepended by the path annotated with {@link
+     * com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}.
      *
      * @return the relative path for this action.
      */
     String getPath();
 
     /**
-     * @return the {@link HttpMethod} used to send this action over HTTP.
+     * @return the {@link com.gwtplatform.dispatch.rest.client.HttpMethod} used to send this action over HTTP.
      */
     HttpMethod getHttpMethod();
 
     /**
-     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.Path} parameters for this action.
+     * @return a {@link List} of the {@link javax.ws.rs.Path @Path} parameters for this action.
      */
     List<RestParameter> getPathParams();
 
     /**
-     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.QueryParam} parameters for this action.
+     * @return a {@link List} of the {@link javax.ws.rs.QueryParam @QueryParam} parameters for this action.
      */
     List<RestParameter> getQueryParams();
 
     /**
-     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.FormParam} parameters for this action.
-     * {@link #getBodyParam()} should return {@code null}.
+     * @return a {@link List} of the {@link javax.ws.rs.FormParam @FormParam} parameters for this action. {@link
+     * #getBodyParam()} should return {@code null}.
      */
     List<RestParameter> getFormParams();
 
     /**
-     * @return a {@link List} of the {@literal @}{@link javax.ws.rs.HeaderParam} parameters for this action.
+     * @return a {@link List} of the {@link javax.ws.rs.HeaderParam @HeaderParam} parameters for this action.
      */
     List<RestParameter> getHeaderParams();
 

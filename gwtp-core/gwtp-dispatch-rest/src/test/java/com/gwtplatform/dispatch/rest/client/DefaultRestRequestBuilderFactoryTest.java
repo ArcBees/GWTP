@@ -50,9 +50,9 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.POST;
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_TYPE;
 
 @RunWith(JukitoRunner.class)
 public class DefaultRestRequestBuilderFactoryTest {
