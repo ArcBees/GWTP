@@ -600,7 +600,10 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * Disconnects a child from its parent.
      */
     private void orphan() {
-        if (slot != null && !slot.isRemovable()) {
+        if (slot == null) {
+            return;
+        }
+        if (!slot.isRemovable()) {
             throw new IllegalArgumentException("Cannont remove a child from a permanent slot");
         }
         if (parent != null) {
