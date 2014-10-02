@@ -282,6 +282,13 @@
             <artifactId>resteasy-guice</artifactId>
             <version>${resteasy.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>${jax-rs.version}</version>
+            <!-- Provided because RestEasy has its own implementation -->
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Selenium Testing -->
         <dependency>

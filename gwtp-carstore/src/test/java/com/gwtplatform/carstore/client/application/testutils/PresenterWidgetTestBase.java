@@ -16,14 +16,17 @@
 
 package com.gwtplatform.carstore.client.application.testutils;
 
-import com.google.inject.Inject;
-import com.google.web.bindery.event.shared.EventBus;
+import org.junit.Before;
+
+import com.gwtplatform.dispatch.rest.test.DelegateTestUtils;
 
 /**
- * Basic configuration for PresenterWidgetTest, you test must extends this
- * class, or don't forget to inject everything inside your presenter's test.
+ * Basic configuration for PresenterWidgetTest, you test must extends this class, or don't forget to inject everything
+ * inside your presenter's test.
  */
 public abstract class PresenterWidgetTestBase {
-    @Inject
-    public EventBus eventBus;
+    @Before
+    public void initUtils() {
+        DelegateTestUtils.init();
+    }
 }
