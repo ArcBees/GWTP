@@ -27,7 +27,7 @@
         <gae.address>127.0.0.1</gae.address>
 
         <slf4j-api.version>1.7.7</slf4j-api.version>
-        <resteasy.version>3.0.8.Final</resteasy.version>
+        <resteasy.version>3.0.9.Final</resteasy.version>
         <arcbees.version>1.2</arcbees.version>
 
         <objectify-gwt.version>1.2</objectify-gwt.version>
