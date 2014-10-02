@@ -23,12 +23,7 @@ import javax.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.mockito.stubbing.Stubber;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
 import com.gwtplatform.carstore.client.application.cars.CarsPresenter;
@@ -48,10 +43,10 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
+import static com.gwtplatform.dispatch.rest.test.DelegateTestUtils.givenDelegate;
 
 @RunWith(JukitoRunner.class)
 public class CarsPresenterTest extends PresenterWidgetTestBase {
@@ -71,19 +66,15 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Inject
     CarProxyFactory carProxyFactory;
     @Inject
-    ResourceDelegate<CarsResource> carsResourceDelegate;
-    @Inject
-    CarsResource carsResource;
-    @Inject
-    CarResource carResource;
+    ResourceDelegate<CarsResource> carsDelegate;
 
     @Test
     public void onEditCar(PlaceManager placeManager, ManufacturerDto manufacturerDto) {
         // Given
         CarDto carDto = mock(CarDto.class);
-        when(carDto.getManufacturer()).thenReturn(manufacturerDto);
-        when(carProxyFactory.create(carDto, carDto.getManufacturer().getName() + carDto.getModel())).thenReturn(proxy);
-        when(proxy.getNameToken()).thenReturn("token");
+        given(carDto.getManufacturer()).willReturn(manufacturerDto);
+        given(carProxyFactory.create(carDto, carDto.getManufacturer().getName() + carDto.getModel())).willReturn(proxy);
+        given(proxy.getNameToken()).willReturn("token");
 
         PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken("token").build();
 
@@ -109,8 +100,9 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onFetchData(ArrayList<CarDto> carDtos) {
         // Given
-        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsResource);
-        callSuccessWith(callback, carDtos).when(carsResource).getCars(0, 1);
+        givenDelegate(carsDelegate).useResource(CarsResource.class)
+                .and().succeed().withResult(carDtos)
+                .when().getCars(0, 1);
 
         // When
         carsPresenter.fetchData(0, 1);
@@ -122,8 +114,8 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     @Test
     public void onFetchDataThreeCars(ArrayList<CarDto> carDtos) {
         // Given
-        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsResource);
-        callSuccessWith(callback, carDtos).when(carsResource).getCars(0, 3);
+        givenDelegate(carsDelegate).useResource(CarsResource.class)
+                .and().succeed().withResult(carDtos).when().getCars(0, 3);
 
         // When
         carsPresenter.fetchData(0, 3);
@@ -133,53 +125,34 @@ public class CarsPresenterTest extends PresenterWidgetTestBase {
     }
 
     @Test
-    public void onDelete(CarDto carDto, HasData<CarDto> hasCarData, Range range) {
+    public void onDelete(HasData<CarDto> hasCarData, Range range, CarsResource carsResource, CarResource carResource) {
         // Given
+        CarDto carDto = new CarDto();
         carDto.setId(3L);
 
-        ArgumentCaptor<AsyncCallback> callback = captureResourceDelegateCallback(carsResourceDelegate, carsResource);
-
-        // Given we delete the car
         given(carsResource.car(carDto.getId())).willReturn(carResource);
-        callSuccessWith(callback).when(carResource).delete();
 
-        // Given we fetch the cars after delete
-        callSuccessWith(callback, new ArrayList<>()).when(carsResource).getCars();
+        // We delete the car
+        givenDelegate(carsDelegate).useResource(carsResource)
+                .and().succeed()
+                .when(carResource).delete();
+
+        // We fetch the cars after delete
+        givenDelegate(carsDelegate)
+                .succeed().withResult(new ArrayList<>())
+                .when().getCars();
 
         // And display is setup
-        when(view.getCarDisplay()).thenReturn(hasCarData);
+        given(view.getCarDisplay()).willReturn(hasCarData);
 
         // And range is setup
         HasData<CarDto> display = view.getCarDisplay();
-        when(display.getVisibleRange()).thenReturn(range);
+        given(display.getVisibleRange()).willReturn(range);
 
         // When
         carsPresenter.onDelete(carDto);
 
         // Then
         verify(view).setCarsCount(-1);
-    }
-
-    private <R> ArgumentCaptor<AsyncCallback> captureResourceDelegateCallback(ResourceDelegate<R> delegate,
-            R resource) {
-        ArgumentCaptor<AsyncCallback> callbackCaptor = ArgumentCaptor.forClass(AsyncCallback.class);
-        given(delegate.withCallback(callbackCaptor.capture())).willReturn(resource);
-
-        return callbackCaptor;
-    }
-
-    private Stubber callSuccessWith(final ArgumentCaptor<AsyncCallback> callbackCaptor) {
-        return callSuccessWith(callbackCaptor, null);
-    }
-
-    @SuppressWarnings("unchecked")
-    private Stubber callSuccessWith(final ArgumentCaptor<AsyncCallback> callbackCaptor, final Object result) {
-        return doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                callbackCaptor.getValue().onSuccess(result);
-                return null;
-            }
-        });
     }
 }
