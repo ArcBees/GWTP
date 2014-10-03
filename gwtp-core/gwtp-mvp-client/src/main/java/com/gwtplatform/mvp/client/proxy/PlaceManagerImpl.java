@@ -44,7 +44,7 @@ import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandler<String>, ClosingHandler {
     private final EventBus eventBus;
     private final TokenFormatter tokenFormatter;
-    private static final Historian historian = GWT.create(DefaultHistorian.class);
+    private final Historian historian;
 
     private String currentHistoryToken = "";
     private boolean internalError;
@@ -57,8 +57,13 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
     public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
+        this(eventBus, tokenFormatter, (Historian) GWT.create(DefaultHistorian.class));
+    }
+
+    public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter, Historian historian) {
         this.eventBus = eventBus;
         this.tokenFormatter = tokenFormatter;
+        this.historian = historian;
         registerTowardsHistory();
     }
 
@@ -314,7 +319,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
     @Override
     public void revealCurrentPlace() {
-        this.handleTokenChange(historian.getToken());
+        handleTokenChange(historian.getToken());
     }
 
     @Override
