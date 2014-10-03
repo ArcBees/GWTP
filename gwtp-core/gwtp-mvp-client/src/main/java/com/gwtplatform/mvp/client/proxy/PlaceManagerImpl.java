@@ -19,9 +19,12 @@ package com.gwtplatform.mvp.client.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.place.shared.PlaceHistoryHandler.DefaultHistorian;
+import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -41,6 +44,7 @@ import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandler<String>, ClosingHandler {
     private final EventBus eventBus;
     private final TokenFormatter tokenFormatter;
+    private static final Historian historian = GWT.create(DefaultHistorian.class);
 
     private String currentHistoryToken = "";
     private boolean internalError;
@@ -147,7 +151,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     String getBrowserHistoryToken() {
-        return History.getToken();
+        return historian.getToken();
     }
 
     @Override
@@ -244,12 +248,16 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
      * Handles change events from {@link History}.
      */
     @Override
-    public void onValueChange(final ValueChangeEvent<String> event) {
+    public void onValueChange(ValueChangeEvent<String> event) {
+        handleTokenChange(event.getValue());
+    }
+
+    private void handleTokenChange(final String historyToken) {
         if (locked) {
             defferedNavigation = new Command() {
                 @Override
                 public void execute() {
-                    onValueChange(event);
+                    handleTokenChange(historyToken);
                 }
             };
             return;
@@ -257,7 +265,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         if (!getLock()) {
             return;
         }
-        String historyToken = event.getValue();
         try {
             if (historyToken.trim().equals("")) {
                 unlock();
@@ -302,12 +309,12 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     void registerTowardsHistory() {
-        History.addValueChangeHandler(this);
+        historian.addValueChangeHandler(this);
     }
 
     @Override
     public void revealCurrentPlace() {
-        History.fireCurrentHistoryState();
+        this.handleTokenChange(historian.getToken());
     }
 
     @Override
@@ -428,7 +435,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     void setBrowserHistoryToken(String historyToken, boolean issueEvent) {
-        History.newItem(historyToken, issueEvent);
+        historian.newItem(historyToken, issueEvent);
     }
 
     @Override
