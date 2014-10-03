@@ -193,6 +193,11 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             requestBuilder.setRequestData(buildQueryString(action.getFormParams()));
         } else if (action.hasBodyParam()) {
             requestBuilder.setRequestData(getSerializedValue(action, action.getBodyParam()));
+        } else {
+            // Fixes an issue for all IE versions (IE 11 is the latest at this time). If request data is not explicitly
+            // set to 'null', the JS 'undefined' will be sent as the request body on IE. Other browsers don't send
+            // undefined bodies.
+            requestBuilder.setRequestData(null);
         }
     }
 
