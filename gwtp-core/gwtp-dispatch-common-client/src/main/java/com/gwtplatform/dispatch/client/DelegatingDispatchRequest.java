@@ -23,9 +23,10 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * {@link com.gwtplatform.dispatch.client.interceptor.Interceptor}s.
  * <p/>
  * As the {@link com.gwtplatform.dispatch.client.interceptor.Interceptor} implementation may be provided
- * asynchronously, the {@link RpcInterceptorDispatchRequest} will initially not contain an {@link DispatchRequest}.
- * Once the {@link com.gwtplatform.dispatch.client.interceptor.Interceptor} is executed, this be
- * populated with a {@link DelegatingDispatchRequest} by calling {@link #setDelegate(DispatchRequest)}.
+ * asynchronously, the {@link com.gwtplatform.dispatch.client.DelegatingAsyncCallback} will initially not
+ * contain a {@link DispatchRequest}. Once the {@link com.gwtplatform.dispatch.client.interceptor.Interceptor}
+ * is executed, this will be populated with a {@link DelegatingDispatchRequest} by calling
+ * {@link #setDelegate(DispatchRequest)}.
  */
 public class DelegatingDispatchRequest implements DispatchRequest {
     private boolean cancelled;

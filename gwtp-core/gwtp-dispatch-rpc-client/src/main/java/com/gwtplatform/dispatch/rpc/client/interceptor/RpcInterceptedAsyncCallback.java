@@ -32,7 +32,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  */
 public class RpcInterceptedAsyncCallback<A extends TypedAction<R>, R> extends DelegatingAsyncCallback<A, R,
         RpcInterceptor<?, ?>> {
-    public RpcInterceptedAsyncCallback(DispatchCall dispatchCall,
+    public RpcInterceptedAsyncCallback(DispatchCall<A, R> dispatchCall,
                                        A action,
                                        AsyncCallback<R> callback,
                                        DelegatingDispatchRequest dispatchRequest) {

@@ -31,15 +31,13 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 public class CarDeleteInterceptor extends AbstractRestInterceptor {
 
-    @Inject
-    CarDeleteInterceptor(CarsService carsService) {
+    CarDeleteInterceptor() {
         super(new InterceptorContext(ResourcesPath.CARS, HttpMethod.DELETE, -1, true));
     }
 
     @Override
     public DispatchRequest execute(RestAction action, AsyncCallback<Object> resultCallback,
             ExecuteCommand<RestAction, Object> executeCommand) {
-        executeCommand.execute(action, resultCallback);
-        return new CompletedDispatchRequest();
+        return executeCommand.execute(action, resultCallback);
     }
 }

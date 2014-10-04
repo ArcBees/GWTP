@@ -61,6 +61,8 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
         final A action = getAction();
         dispatchHooks.onExecute(action, false);
 
+        setupSecurityCookie();
+
         IndirectProvider<RpcInterceptor<?, ?>> interceptorIndirectProvider =
                 interceptorRegistry.find(action);
 

@@ -193,7 +193,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
      */
     public RestDispatchAsyncModuleBuilder interceptorRegistry(
-            final Class<? extends RestInterceptorRegistry> interceptorRegistry) {
+            Class<? extends RestInterceptorRegistry> interceptorRegistry) {
         this.interceptorRegistry = interceptorRegistry;
         return this;
     }

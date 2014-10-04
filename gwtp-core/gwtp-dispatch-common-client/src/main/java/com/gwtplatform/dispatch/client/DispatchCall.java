@@ -52,11 +52,10 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         this.callback = callback;
         this.exceptionHandler = exceptionHandler;
         this.securityCookieAccessor = securityCookieAccessor;
-
-        prepareCall();
     }
 
     /**
+     * Execution entry point.
      * Call this method to execute the {@link TypedAction action} wrapped by this instance.
      *
      * @return a {@link DispatchRequest} object.
@@ -64,13 +63,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     public abstract DispatchRequest execute();
 
     /**
-     * Prepare execution prerequisites.
-     */
-    public void prepareCall() {
-        securityCookie = securityCookieAccessor.getCookieContent();
-    }
-
-    /**
+     * Direct execution of a dispatch call without intercepting.
      * Implementations must override this method to perform additional work when {@link #execute()} is called.
      *
      * @return a {@link DispatchRequest} object.
@@ -87,6 +80,13 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     protected DispatchRequest doExecute(AsyncCallback<R> callback) {
         this.callback = callback;
         return doExecute();
+    }
+
+    /**
+     * Setup the calls security cookie.
+     */
+    protected void setupSecurityCookie() {
+        securityCookie = securityCookieAccessor.getCookieContent();
     }
 
     /**

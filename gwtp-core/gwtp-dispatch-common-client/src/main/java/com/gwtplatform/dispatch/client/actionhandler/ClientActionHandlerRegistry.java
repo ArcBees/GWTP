@@ -33,16 +33,6 @@ public interface ClientActionHandlerRegistry {
      *
      * @return The the client-side action handler, or {@code null} if no appropriate client-side action handler could be
      * found.
-     * @deprecated use {@link ClientActionHandlerRegistry#find(Object)}} instead.
      */
-    @Deprecated
     <A> IndirectProvider<ClientActionHandler<?, ?>> find(Class<A> actionClass);
-
-    /**
-     * Gets the client-side action handler that supports the specific action.
-     *
-     * @return The the client-side action handler, or {@code null} if no appropriate client-side action handler could be
-     * found.
-     */
-    <A> IndirectProvider<ClientActionHandler<?, ?>> find(A action);
 }

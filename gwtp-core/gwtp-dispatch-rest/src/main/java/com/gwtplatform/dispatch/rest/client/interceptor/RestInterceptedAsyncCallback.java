@@ -32,7 +32,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  */
 public class RestInterceptedAsyncCallback<A extends TypedAction<R>, R> extends DelegatingAsyncCallback<A, R,
         RestInterceptor> {
-    public RestInterceptedAsyncCallback(DispatchCall dispatchCall,
+    public RestInterceptedAsyncCallback(DispatchCall<A, R> dispatchCall,
                                         A action,
                                         AsyncCallback<R> callback,
                                         DelegatingDispatchRequest dispatchRequest) {

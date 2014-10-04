@@ -86,11 +86,11 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
         dispatchRequest.setDelegate(interceptor.execute(action, callback, this));
     }
 
-    public DelegatingDispatchRequest getDispatchRequest() {
+    protected DelegatingDispatchRequest getDispatchRequest() {
         return dispatchRequest;
     }
 
-    public TypedAction getAction() {
+    protected TypedAction getAction() {
         return action;
     }
 }

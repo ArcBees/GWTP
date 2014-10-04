@@ -158,13 +158,4 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
             return clientActionHandlers.get(actionClass);
         }
     }
-
-    @Override
-    public <A> IndirectProvider<ClientActionHandler<?, ?>> find(A action) {
-        if (clientActionHandlers == null) {
-            return null;
-        } else {
-            return clientActionHandlers.get(action.getClass());
-        }
-    }
 }

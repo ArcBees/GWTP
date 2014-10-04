@@ -77,6 +77,8 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
     public DispatchRequest execute() {
         dispatchHooks.onExecute(getAction(), true);
 
+        setupSecurityCookie();
+
         // TODO: are undo calls interceptable?
 
         return doExecute();

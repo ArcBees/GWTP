@@ -34,14 +34,12 @@ public class LogInInterceptor extends AbstractRpcInterceptor<LogInAction, LogInR
     @Override
     public DispatchRequest undo(LogInAction action, LogInResult result, AsyncCallback<Void> callback,
             UndoCommand<LogInAction, LogInResult> undoCommand) {
-        undoCommand.undo(action, result, callback);
-        return new CompletedDispatchRequest();
+        return undoCommand.undo(action, result, callback);
     }
 
     @Override
     public DispatchRequest execute(LogInAction action, AsyncCallback<LogInResult> resultCallback,
             ExecuteCommand<LogInAction, LogInResult> executeCommand) {
-        executeCommand.execute(action, resultCallback);
-        return new CompletedDispatchRequest();
+        return executeCommand.execute(action, resultCallback);
     }
 }

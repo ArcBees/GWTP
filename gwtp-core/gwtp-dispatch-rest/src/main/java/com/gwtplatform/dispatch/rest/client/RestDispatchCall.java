@@ -70,9 +70,12 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         final A action = getAction();
         dispatchHooks.onExecute(action);
 
+        setupSecurityCookie();
+
         IndirectProvider<RestInterceptor> interceptorProvider =
                 interceptorRegistry.find(action);
 
+        // Attempt to intercept the dispatch request
         if (interceptorProvider != null) {
             DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
             RestInterceptedAsyncCallback<A, R> delegatingCallback = new RestInterceptedAsyncCallback<A, R>(
@@ -82,6 +85,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
             return dispatchRequest;
         } else {
+            // Execute the request as given
             return doExecute();
         }
     }
