@@ -8,6 +8,7 @@
     <!-- Inherit shared modules -->
     <inherits name='com.gwtplatform.common.ClientsCommon'/>
     <inherits name='com.gwtplatform.mvp.MvpShared'/>
+    <inherits name='com.google.gwt.place.Place'/>
 
     <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
         <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>

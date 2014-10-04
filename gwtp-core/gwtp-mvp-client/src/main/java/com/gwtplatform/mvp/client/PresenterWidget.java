@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -170,6 +169,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         addToPopupSlot(child);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void addToSlot(Object slot, PresenterWidget<?> child) {
         assert child != null : "cannot add null to a slot";
@@ -197,15 +197,17 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
     @Override
     public void clearSlot(Object slot) {
-        Iterator<PresenterWidget<?>> it = children.iterator();
-        while (it.hasNext()) {
-            PresenterWidget<?> child = it.next();
-            if (child.slot == slot) {
-                it.remove();
+        internalClearSlot(slot, null);
+        getView().setInSlot(slot, null);
+    }
+
+    private void internalClearSlot(Object slot, PresenterWidget<?> dontRemove) {
+        // use new set to prevent concurrent modification
+        for (PresenterWidget<?> child: new HashSet<PresenterWidget<?>>(children)) {
+            if (child.slot == slot && !child.equals(dontRemove)) {
                 child.orphan();
             }
         }
-        getView().setInSlot(slot, null);
     }
 
     /**
@@ -304,14 +306,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
         adoptChild(slot, child);
 
-        Iterator<PresenterWidget<?>> it = children.iterator();
-        while (it.hasNext()) {
-            PresenterWidget<?> nextChild = it.next();
-            if (nextChild != child && nextChild.slot == slot) {
-                it.remove();
-                nextChild.orphan();
-            }
-        }
+        internalClearSlot(slot, child);
 
         getView().setInSlot(slot, child);
         if (isVisible()) {
@@ -482,7 +477,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
             return;
         }
         onReset();
-        for (PresenterWidget<?> child : children) {
+        // use new set to prevent concurrent modification
+        for (PresenterWidget<?> child: new HashSet<PresenterWidget<?>>(children)) {
             child.internalReset();
         }
         if (isPopup()) {
@@ -502,7 +498,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         onReveal();
         visible = true;
 
-        for (PresenterWidget<?> child : children) {
+        // use new set to prevent concurrent modification
+        for (PresenterWidget<?> child: new HashSet<PresenterWidget<?>>(children)) {
             child.internalReveal();
         }
 
