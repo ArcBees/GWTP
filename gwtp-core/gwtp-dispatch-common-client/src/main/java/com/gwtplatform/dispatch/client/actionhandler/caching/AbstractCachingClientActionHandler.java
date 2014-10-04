@@ -25,7 +25,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
-import com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest;
+import com.gwtplatform.dispatch.client.DelegatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
@@ -126,7 +126,7 @@ public abstract class AbstractCachingClientActionHandler<A, R> extends AbstractC
             // Add pending callback
             ArrayList<CallbackDispatchRequest<R>> resultRequestCallbacks = new ArrayList<CallbackDispatchRequest<R>>();
 
-            CallbackDispatchRequest<R> callbackDispatchRequest = new DelagatingCallbackDispatchRequest<R>(request,
+            CallbackDispatchRequest<R> callbackDispatchRequest = new DelegatingCallbackDispatchRequest<R>(request,
                     resultCallback);
             resultRequestCallbacks.add(callbackDispatchRequest);
 

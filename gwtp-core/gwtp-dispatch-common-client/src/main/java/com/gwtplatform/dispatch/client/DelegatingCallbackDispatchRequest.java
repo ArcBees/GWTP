@@ -33,11 +33,11 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  *
  * @param <R> The type of the {@link AsyncCallback}.
  */
-public class DelagatingCallbackDispatchRequest<R> implements CallbackDispatchRequest<R> {
+public class DelegatingCallbackDispatchRequest<R> implements CallbackDispatchRequest<R> {
     private final DispatchRequest request;
     private final AsyncCallback<R> callback;
 
-    public DelagatingCallbackDispatchRequest(DispatchRequest request,
+    public DelegatingCallbackDispatchRequest(DispatchRequest request,
                                              AsyncCallback<R> callback) {
 
         this.request = request;
