@@ -20,7 +20,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
@@ -54,43 +54,53 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
 
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
+    private final RpcInterceptorRegistry interceptorRegistry;
     private final R result;
 
     RpcDispatchUndoCall(DispatchServiceAsync dispatchService,
                         ExceptionHandler exceptionHandler,
-                        ClientActionHandlerRegistry clientActionHandlerRegistry,
+                        RpcInterceptorRegistry interceptorRegistry,
                         SecurityCookieAccessor securityCookieAccessor,
                         RpcDispatchHooks dispatchHooks,
                         A action,
                         R result,
                         AsyncCallback<Void> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action,
-                new AsyncCallbackWrapper<R>(callback));
+        super(exceptionHandler, securityCookieAccessor, action, new AsyncCallbackWrapper<R>(callback));
 
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
+        this.interceptorRegistry = interceptorRegistry;
         this.result = result;
     }
 
     @Override
-    protected DispatchRequest doExecute() {
+    public DispatchRequest execute() {
         dispatchHooks.onExecute(getAction(), true);
 
-        return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(), getAction(), result,
-                new AsyncCallback<Void>() {
-                    public void onFailure(Throwable caught) {
-                        RpcDispatchUndoCall.this.onExecuteFailure(caught);
+        setupSecurityCookie();
 
-                        dispatchHooks.onFailure(getAction(), caught, true);
-                    }
+        // TODO: are undo calls interceptable?
 
-                    @SuppressWarnings("unchecked")
-                    public void onSuccess(Void nothing) {
-                        RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
+        return doExecute();
+    }
 
-                        dispatchHooks.onSuccess(getAction(), result, true);
-                    }
+    @Override
+    protected DispatchRequest doExecute() {
+        return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(),
+            getAction(), result, new AsyncCallback<Void>() {
+                public void onFailure(Throwable caught) {
+                    RpcDispatchUndoCall.this.onExecuteFailure(caught);
+
+                    dispatchHooks.onFailure(getAction(), caught, true);
                 }
+
+                @SuppressWarnings("unchecked")
+                public void onSuccess(Void nothing) {
+                    RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
+
+                    dispatchHooks.onSuccess(getAction(), result, true);
+                }
+            }
         ));
     }
 }

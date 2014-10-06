@@ -17,10 +17,14 @@
 package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptedAsyncCallback;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptor;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
@@ -36,39 +40,62 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
+    private final RpcInterceptorRegistry interceptorRegistry;
 
     RpcDispatchExecuteCall(DispatchServiceAsync dispatchService,
                            ExceptionHandler exceptionHandler,
-                           ClientActionHandlerRegistry clientActionHandlerRegistry,
+                           RpcInterceptorRegistry interceptorRegistry,
                            SecurityCookieAccessor securityCookieAccessor,
                            RpcDispatchHooks dispatchHooks,
                            A action,
                            AsyncCallback<R> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
+        super(exceptionHandler, securityCookieAccessor, action, callback);
 
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
+        this.interceptorRegistry = interceptorRegistry;
+    }
+
+    @Override
+    public DispatchRequest execute() {
+        final A action = getAction();
+        dispatchHooks.onExecute(action, false);
+
+        setupSecurityCookie();
+
+        IndirectProvider<RpcInterceptor<?, ?>> interceptorIndirectProvider =
+                interceptorRegistry.find(action);
+
+        if (interceptorIndirectProvider != null) {
+            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
+            RpcInterceptedAsyncCallback<A, R> delegatingCallback = new RpcInterceptedAsyncCallback<A, R>(
+                    this, action, getCallback(), dispatchRequest);
+
+            interceptorIndirectProvider.get(delegatingCallback);
+
+            return dispatchRequest;
+        } else {
+            return doExecute();
+        }
     }
 
     @Override
     protected DispatchRequest doExecute() {
-        dispatchHooks.onExecute(getAction(), false);
-
         return new GwtHttpDispatchRequest(dispatchService.execute(getSecurityCookie(), getAction(),
-                new AsyncCallback<Result>() {
-                    public void onFailure(Throwable caught) {
-                        RpcDispatchExecuteCall.this.onExecuteFailure(caught);
+            new AsyncCallback<Result>() {
+                public void onFailure(Throwable caught) {
+                    RpcDispatchExecuteCall.this.onExecuteFailure(caught);
 
-                        dispatchHooks.onFailure(getAction(), caught, false);
-                    }
-
-                    @SuppressWarnings("unchecked")
-                    public void onSuccess(Result result) {
-                        RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
-
-                        dispatchHooks.onSuccess(getAction(), result, false);
-                    }
+                    dispatchHooks.onFailure(getAction(), caught, false);
                 }
+
+                @SuppressWarnings("unchecked")
+                public void onSuccess(Result result) {
+                    RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
+
+                    dispatchHooks.onSuccess(getAction(), result, false);
+                }
+            }
         ));
     }
 }

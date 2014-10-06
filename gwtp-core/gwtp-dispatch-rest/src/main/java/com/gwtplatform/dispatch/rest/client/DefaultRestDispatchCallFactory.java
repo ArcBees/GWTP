@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
@@ -29,7 +29,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  */
 public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final ExceptionHandler exceptionHandler;
-    private final ClientActionHandlerRegistry clientActionHandlerRegistry;
+    private final RestInterceptorRegistry interceptorRegistry;
     private final SecurityCookieAccessor securityCookieAccessor;
     private final RestRequestBuilderFactory requestBuilderFactory;
     private final RestResponseDeserializer restResponseDeserializer;
@@ -37,13 +37,13 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
 
     @Inject
     DefaultRestDispatchCallFactory(@RestBinding ExceptionHandler exceptionHandler,
-                                   @RestBinding ClientActionHandlerRegistry clientActionHandlerRegistry,
                                    @RestBinding SecurityCookieAccessor securityCookieAccessor,
+                                   RestInterceptorRegistry interceptorRegistry,
                                    RestRequestBuilderFactory requestBuilderFactory,
                                    RestResponseDeserializer restResponseDeserializer,
                                    RestDispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
-        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
+        this.interceptorRegistry = interceptorRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
         this.requestBuilderFactory = requestBuilderFactory;
         this.restResponseDeserializer = restResponseDeserializer;
@@ -52,7 +52,7 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
 
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<A, R>(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor,
+        return new RestDispatchCall<A, R>(exceptionHandler, interceptorRegistry, securityCookieAccessor,
                 requestBuilderFactory, restResponseDeserializer, dispatchHooks, action, callback);
     }
 }

@@ -14,24 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.carstore.client.dispatch.rpc;
 
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
+import javax.inject.Inject;
 
-/**
- * Default RPC dispatch hooks.
- */
-public class DefaultRpcDispatchHooks implements RpcDispatchHooks {
-    @Override
-    public void onExecute(Action action, boolean undo) {
-    }
+import com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry;
 
-    @Override
-    public void onSuccess(Action action, Result result, boolean undo) {
-    }
+public class RpcInterceptorRegistry extends DefaultRpcInterceptorRegistry {
 
-    @Override
-    public void onFailure(Action action, Throwable caught, boolean undo) {
+    @Inject
+    RpcInterceptorRegistry(LogInInterceptor logInInterceptor) {
+        register(logInInterceptor);
     }
 }

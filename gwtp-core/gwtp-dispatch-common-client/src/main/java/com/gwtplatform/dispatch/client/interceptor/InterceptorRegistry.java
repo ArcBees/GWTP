@@ -14,24 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.client.interceptor;
 
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.common.client.IndirectProvider;
 
 /**
- * Default RPC dispatch hooks.
+ * Base interface for interceptor registry implementations.
  */
-public class DefaultRpcDispatchHooks implements RpcDispatchHooks {
-    @Override
-    public void onExecute(Action action, boolean undo) {
-    }
-
-    @Override
-    public void onSuccess(Action action, Result result, boolean undo) {
-    }
-
-    @Override
-    public void onFailure(Action action, Throwable caught, boolean undo) {
-    }
+public interface InterceptorRegistry {
+    /**
+     * Gets the client-side interceptor that supports the specific action.
+     *
+     * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor
+     * could be found.
+     */
+    <A> IndirectProvider<? extends Interceptor<?, ?>> find(A action);
 }

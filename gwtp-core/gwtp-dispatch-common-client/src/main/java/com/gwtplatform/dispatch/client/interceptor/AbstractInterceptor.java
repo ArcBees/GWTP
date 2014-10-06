@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,24 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
-
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
+package com.gwtplatform.dispatch.client.interceptor;
 
 /**
- * Default RPC dispatch hooks.
+ * Abstract base interceptor.
+ *
+ * @param <A> action class.
+ * @param <R> result class.
  */
-public class DefaultRpcDispatchHooks implements RpcDispatchHooks {
-    @Override
-    public void onExecute(Action action, boolean undo) {
+public abstract class AbstractInterceptor<A, R> implements Interceptor<A, R> {
+
+    private final Class<A> actionType;
+
+    protected AbstractInterceptor(Class<A> actionType) {
+        this.actionType = actionType;
     }
 
     @Override
-    public void onSuccess(Action action, Result result, boolean undo) {
-    }
-
-    @Override
-    public void onFailure(Action action, Throwable caught, boolean undo) {
+    public Class<A> getActionType() {
+        return actionType;
     }
 }

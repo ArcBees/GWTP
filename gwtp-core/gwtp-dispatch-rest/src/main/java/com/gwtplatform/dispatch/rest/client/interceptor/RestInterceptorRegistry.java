@@ -14,25 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry;
 
 /**
  * Implementations of this interface will be used by
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} or
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find client-side action
- * handlers.
- *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry}
+ * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find
+ * client-side interceptor.
  */
-@Deprecated
-public interface ClientActionHandlerRegistry {
+public interface RestInterceptorRegistry extends InterceptorRegistry {
     /**
-     * Gets the client-side action handler that supports the specific action.
+     * Gets the client-side interceptor that supports the specific action.
      *
-     * @return The the client-side action handler, or {@code null} if no appropriate client-side action handler could be
-     * found.
+     * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor
+     * could be found.
      */
-    <A> IndirectProvider<ClientActionHandler<?, ?>> find(Class<A> actionClass);
+    <A> IndirectProvider<RestInterceptor> find(A action);
 }
