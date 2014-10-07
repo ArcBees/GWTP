@@ -42,13 +42,14 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
     private final RpcDispatchHooks dispatchHooks;
     private final RpcInterceptorRegistry interceptorRegistry;
 
-    RpcDispatchExecuteCall(DispatchServiceAsync dispatchService,
-                           ExceptionHandler exceptionHandler,
-                           RpcInterceptorRegistry interceptorRegistry,
-                           SecurityCookieAccessor securityCookieAccessor,
-                           RpcDispatchHooks dispatchHooks,
-                           A action,
-                           AsyncCallback<R> callback) {
+    RpcDispatchExecuteCall(
+            DispatchServiceAsync dispatchService,
+            ExceptionHandler exceptionHandler,
+            RpcInterceptorRegistry interceptorRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            RpcDispatchHooks dispatchHooks,
+            A action,
+            AsyncCallback<R> callback) {
         super(exceptionHandler, securityCookieAccessor, action, callback);
 
         this.dispatchService = dispatchService;
@@ -58,13 +59,10 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
 
     @Override
     public DispatchRequest execute() {
-        final A action = getAction();
+        A action = getAction();
         dispatchHooks.onExecute(action, false);
 
-        setupSecurityCookie();
-
-        IndirectProvider<RpcInterceptor<?, ?>> interceptorIndirectProvider =
-                interceptorRegistry.find(action);
+        IndirectProvider<RpcInterceptor<?, ?>> interceptorIndirectProvider = interceptorRegistry.find(action);
 
         if (interceptorIndirectProvider != null) {
             DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
@@ -75,27 +73,27 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
 
             return dispatchRequest;
         } else {
-            return doExecute();
+            return processCall();
         }
     }
 
     @Override
-    protected DispatchRequest doExecute() {
+    protected DispatchRequest processCall() {
         return new GwtHttpDispatchRequest(dispatchService.execute(getSecurityCookie(), getAction(),
-            new AsyncCallback<Result>() {
-                public void onFailure(Throwable caught) {
-                    RpcDispatchExecuteCall.this.onExecuteFailure(caught);
+                new AsyncCallback<Result>() {
+                    public void onFailure(Throwable caught) {
+                        RpcDispatchExecuteCall.this.onExecuteFailure(caught);
 
-                    dispatchHooks.onFailure(getAction(), caught, false);
+                        dispatchHooks.onFailure(getAction(), caught, false);
+                    }
+
+                    @SuppressWarnings("unchecked")
+                    public void onSuccess(Result result) {
+                        RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
+
+                        dispatchHooks.onSuccess(getAction(), result, false);
+                    }
                 }
-
-                @SuppressWarnings("unchecked")
-                public void onSuccess(Result result) {
-                    RpcDispatchExecuteCall.this.onExecuteSuccess((R) result);
-
-                    dispatchHooks.onSuccess(getAction(), result, false);
-                }
-            }
         ));
     }
 }

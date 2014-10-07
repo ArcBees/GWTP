@@ -38,7 +38,8 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
     private final AsyncCallback<R> callback;
     private final DelegatingDispatchRequest dispatchRequest;
 
-    public DelegatingAsyncCallback(DispatchCall<A, R> dispatchCall,
+    public DelegatingAsyncCallback(
+            DispatchCall<A, R> dispatchCall,
             A action,
             AsyncCallback<R> callback,
             DelegatingDispatchRequest dispatchRequest) {
@@ -67,7 +68,7 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
     @Override
     public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
         if (dispatchRequest.isPending()) {
-            return dispatchCall.doExecute(resultCallback);
+            return dispatchCall.processCall(resultCallback);
         } else {
             return null;
         }

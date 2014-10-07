@@ -41,7 +41,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final SecurityCookieAccessor securityCookieAccessor;
 
     private AsyncCallback<R> callback;
-    private String securityCookie;
 
     public DispatchCall(
             ExceptionHandler exceptionHandler,
@@ -67,7 +66,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      *
      * @return a {@link DispatchRequest} object.
      */
-    protected abstract DispatchRequest doExecute();
+    protected abstract DispatchRequest processCall();
 
     /**
      * Execute the call overriding the existing callback. Used by {@link DelegatingAsyncCallback}.
@@ -76,16 +75,9 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      *
      * @return a {@link DispatchRequest} object.
      */
-    protected DispatchRequest doExecute(AsyncCallback<R> callback) {
+    protected DispatchRequest processCall(AsyncCallback<R> callback) {
         this.callback = callback;
-        return doExecute();
-    }
-
-    /**
-     * Setup the calls security cookie.
-     */
-    protected void setupSecurityCookie() {
-        securityCookie = securityCookieAccessor.getCookieContent();
+        return processCall();
     }
 
     /**
@@ -130,7 +122,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      * @return the current security cookie.
      */
     protected String getSecurityCookie() {
-        return securityCookie;
+        return securityCookieAccessor.getCookieContent();
     }
 
     /**

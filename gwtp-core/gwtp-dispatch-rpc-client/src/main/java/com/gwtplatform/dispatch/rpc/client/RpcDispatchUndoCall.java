@@ -57,14 +57,15 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
     private final RpcInterceptorRegistry interceptorRegistry;
     private final R result;
 
-    RpcDispatchUndoCall(DispatchServiceAsync dispatchService,
-                        ExceptionHandler exceptionHandler,
-                        RpcInterceptorRegistry interceptorRegistry,
-                        SecurityCookieAccessor securityCookieAccessor,
-                        RpcDispatchHooks dispatchHooks,
-                        A action,
-                        R result,
-                        AsyncCallback<Void> callback) {
+    RpcDispatchUndoCall(
+            DispatchServiceAsync dispatchService,
+            ExceptionHandler exceptionHandler,
+            RpcInterceptorRegistry interceptorRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            RpcDispatchHooks dispatchHooks,
+            A action,
+            R result,
+            AsyncCallback<Void> callback) {
         super(exceptionHandler, securityCookieAccessor, action, new AsyncCallbackWrapper<R>(callback));
 
         this.dispatchService = dispatchService;
@@ -77,30 +78,28 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
     public DispatchRequest execute() {
         dispatchHooks.onExecute(getAction(), true);
 
-        setupSecurityCookie();
-
         // TODO: are undo calls interceptable?
 
-        return doExecute();
+        return processCall();
     }
 
     @Override
-    protected DispatchRequest doExecute() {
-        return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(),
-            getAction(), result, new AsyncCallback<Void>() {
-                public void onFailure(Throwable caught) {
-                    RpcDispatchUndoCall.this.onExecuteFailure(caught);
+    protected DispatchRequest processCall() {
+        return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(), getAction(), result,
+                new AsyncCallback<Void>() {
+                    public void onFailure(Throwable caught) {
+                        RpcDispatchUndoCall.this.onExecuteFailure(caught);
 
-                    dispatchHooks.onFailure(getAction(), caught, true);
+                        dispatchHooks.onFailure(getAction(), caught, true);
+                    }
+
+                    @SuppressWarnings("unchecked")
+                    public void onSuccess(Void nothing) {
+                        RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
+
+                        dispatchHooks.onSuccess(getAction(), result, true);
+                    }
                 }
-
-                @SuppressWarnings("unchecked")
-                public void onSuccess(Void nothing) {
-                    RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
-
-                    dispatchHooks.onSuccess(getAction(), result, true);
-                }
-            }
         ));
     }
 }
