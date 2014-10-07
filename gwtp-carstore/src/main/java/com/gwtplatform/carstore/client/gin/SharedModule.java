@@ -16,8 +16,10 @@
 
 package com.gwtplatform.carstore.client.gin;
 
-import com.gwtplatform.carstore.client.dispatch.AppRestDispatchHooks;
-import com.gwtplatform.carstore.client.dispatch.AppRpcDispatchHooks;
+import com.gwtplatform.carstore.client.dispatch.rest.AppRestDispatchHooks;
+import com.gwtplatform.carstore.client.dispatch.rest.RestInterceptorRegistry;
+import com.gwtplatform.carstore.client.dispatch.rpc.AppRpcDispatchHooks;
+import com.gwtplatform.carstore.client.dispatch.rpc.RpcInterceptorRegistry;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.security.SecurityModule;
 import com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule;
@@ -36,10 +38,12 @@ public class SharedModule extends AbstractPresenterModule {
 
         install(new RestDispatchAsyncModule.Builder()
             .dispatchHooks(AppRestDispatchHooks.class)
+            .interceptorRegistry(RestInterceptorRegistry.class)
             .build());
 
         install(new RpcDispatchAsyncModule.Builder()
             .dispatchHooks(AppRpcDispatchHooks.class)
+            .interceptorRegistry(RpcInterceptorRegistry.class)
             .build());
 
         // DefaultPlaceManager Places

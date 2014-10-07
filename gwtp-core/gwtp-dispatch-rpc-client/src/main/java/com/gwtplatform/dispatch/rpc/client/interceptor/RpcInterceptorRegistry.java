@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,24 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.client;
+package com.gwtplatform.dispatch.rpc.client.interceptor;
 
-import com.gwtplatform.dispatch.rpc.shared.Action;
-import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry;
 
 /**
- * Default RPC dispatch hooks.
+ * Implementations of this interface will be used by
+ * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} implementation to find
+ * client-side interceptors.
  */
-public class DefaultRpcDispatchHooks implements RpcDispatchHooks {
-    @Override
-    public void onExecute(Action action, boolean undo) {
-    }
+public interface RpcInterceptorRegistry extends InterceptorRegistry {
 
-    @Override
-    public void onSuccess(Action action, Result result, boolean undo) {
-    }
-
-    @Override
-    public void onFailure(Action action, Throwable caught, boolean undo) {
-    }
+    <A> IndirectProvider<RpcInterceptor<?, ?>> find(A actionClass);
 }

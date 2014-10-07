@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,27 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.rpc.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The interface that {@link ClientActionHandler}s use to send the action to execute to the server.
- *
- * @deprecated use {@link com.gwtplatform.dispatch.client.interceptor.ExecuteCommand}
+ * The interface that {@link RpcInterceptor}s use to send the action to undo to the server.
  *
  * @param <A> The action type.
  * @param <R> The result type.
  */
-@Deprecated
-public interface ExecuteCommand<A, R> {
+public interface UndoCommand<A, R> {
     /**
-     * Execute an action.
+     * Undo an action.
      *
-     * @param action         The action to execute.
-     * @param resultCallback A callback that will be invoked once the action has been executed, successfully or not.
-     * @return A {@link DispatchRequest} representing the request, it should never be {@code null}.
+     * @param action   The action to undo.
+     * @param result   The result of the action to undo.
+     * @param callback A callback that will be invoked once the action has been undone, successfully or not.
+     * @return A {@link com.gwtplatform.dispatch.shared.DispatchRequest} object representing the request,
+     *           it should never be {@code null}.
      */
-    DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
+    DispatchRequest undo(A action, R result, AsyncCallback<Void> callback);
 }

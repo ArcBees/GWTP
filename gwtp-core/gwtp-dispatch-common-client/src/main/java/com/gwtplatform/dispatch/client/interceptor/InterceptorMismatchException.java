@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,22 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.actionhandler;
+package com.gwtplatform.dispatch.client.interceptor;
 
 /**
- * This exception is thrown as a side-effect of an error calling {@link DefaultClientActionHandlerRegistry#register}.
- * A provider was registered to provide a client-side action handler for an action, but this action was not the same
- * action as specified by {@link ClientActionHandler#getActionType()}.
- *
- * @deprecated use {@link com.gwtplatform.dispatch.client.interceptor.InterceptorMismatchException}
+ * This exception is thrown as a side-effect of an error when registering a delegating callback.
+ * A provider was registered to provide a client-side interceptor for an action, but this action
+ * was not the same action as specified by {@link Interceptor#getActionType()}.
  */
-@Deprecated
-public class ClientActionHandlerMismatchException extends RuntimeException {
+public class InterceptorMismatchException extends RuntimeException {
     private final Class<?> requestedActionType;
     private final Class<?> supportedActionType;
 
-    public ClientActionHandlerMismatchException(Class<?> requestedActionType,
-                                                Class<?> supportedActionType) {
+    private InterceptorMismatchException() {
+        this.requestedActionType = null;
+        this.supportedActionType = null;
+    }
+
+    public InterceptorMismatchException(Class<?> requestedActionType,
+                                        Class<?> supportedActionType) {
         this.requestedActionType = requestedActionType;
         this.supportedActionType = supportedActionType;
     }

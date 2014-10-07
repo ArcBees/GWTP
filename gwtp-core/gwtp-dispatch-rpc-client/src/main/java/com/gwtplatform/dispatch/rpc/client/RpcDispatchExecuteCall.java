@@ -17,10 +17,14 @@
 package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptedAsyncCallback;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptor;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
@@ -36,24 +40,45 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
+    private final RpcInterceptorRegistry interceptorRegistry;
 
-    RpcDispatchExecuteCall(DispatchServiceAsync dispatchService,
-                           ExceptionHandler exceptionHandler,
-                           ClientActionHandlerRegistry clientActionHandlerRegistry,
-                           SecurityCookieAccessor securityCookieAccessor,
-                           RpcDispatchHooks dispatchHooks,
-                           A action,
-                           AsyncCallback<R> callback) {
-        super(exceptionHandler, clientActionHandlerRegistry, securityCookieAccessor, action, callback);
+    RpcDispatchExecuteCall(
+            DispatchServiceAsync dispatchService,
+            ExceptionHandler exceptionHandler,
+            RpcInterceptorRegistry interceptorRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            RpcDispatchHooks dispatchHooks,
+            A action,
+            AsyncCallback<R> callback) {
+        super(exceptionHandler, securityCookieAccessor, action, callback);
 
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
+        this.interceptorRegistry = interceptorRegistry;
     }
 
     @Override
-    protected DispatchRequest doExecute() {
-        dispatchHooks.onExecute(getAction(), false);
+    public DispatchRequest execute() {
+        A action = getAction();
+        dispatchHooks.onExecute(action, false);
 
+        IndirectProvider<RpcInterceptor<?, ?>> interceptorIndirectProvider = interceptorRegistry.find(action);
+
+        if (interceptorIndirectProvider != null) {
+            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
+            RpcInterceptedAsyncCallback<A, R> delegatingCallback = new RpcInterceptedAsyncCallback<A, R>(
+                    this, action, getCallback(), dispatchRequest);
+
+            interceptorIndirectProvider.get(delegatingCallback);
+
+            return dispatchRequest;
+        } else {
+            return processCall();
+        }
+    }
+
+    @Override
+    protected DispatchRequest processCall() {
         return new GwtHttpDispatchRequest(dispatchService.execute(getSecurityCookie(), getAction(),
                 new AsyncCallback<Result>() {
                     public void onFailure(Throwable caught) {
