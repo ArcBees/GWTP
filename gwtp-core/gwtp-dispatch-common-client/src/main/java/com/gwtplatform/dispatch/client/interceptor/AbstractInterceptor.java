@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,6 @@ package com.gwtplatform.dispatch.client.interceptor;
  * @param <R> result class.
  */
 public abstract class AbstractInterceptor<A, R> implements Interceptor<A, R> {
-
     private final Class<A> actionType;
 
     protected AbstractInterceptor(Class<A> actionType) {

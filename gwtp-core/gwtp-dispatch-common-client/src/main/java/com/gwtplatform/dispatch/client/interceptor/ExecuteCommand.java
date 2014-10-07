@@ -20,8 +20,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The interface that {@link com.gwtplatform.dispatch.client.interceptor.Interceptor}s
- * use to send the action to execute to the server.
+ * The interface that {@link com.gwtplatform.dispatch.client.interceptor.Interceptor Interceptor}s use to send the
+ * action to execute to the server.
  *
  * @param <A> The action type.
  * @param <R> The result type.
@@ -30,11 +30,10 @@ public interface ExecuteCommand<A, R> {
     /**
      * Execute an action.
      *
-     * @param action         The action to execute.
-     * @param resultCallback A callback that will be invoked once the action has been executed,
-     *                       successfully or not.
-     * @return A {@link com.gwtplatform.dispatch.shared.DispatchRequest} representing the request,
-     * it should never be {@code null}.
+     * @param action The action to execute.
+     * @param resultCallback A callback that will be invoked once the action has been executed, successfully or not.
+     *
+     * @return A {@link DispatchRequest} representing the request, it should never be {@code null}.
      */
     DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
 }

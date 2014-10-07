@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -68,7 +68,28 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * </pre>
  */
 public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
-    private Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors;
+    private final Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors = Maps.newHashMap();
+
+    @Override
+    public <A> IndirectProvider<RestInterceptor> find(A action) {
+        if (!interceptors.isEmpty() && action instanceof RestAction) {
+            RestAction restAction = (RestAction) action;
+            IndirectProvider<RestInterceptor> provider = null;
+
+            InterceptorContext subjectContext = InterceptorContext.newContext(restAction);
+            for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry
+                    : interceptors.entrySet()) {
+                InterceptorContext context = entry.getKey();
+
+                if (context.equals(subjectContext)) {
+                    provider = entry.getValue();
+                }
+            }
+            return provider;
+        } else {
+            return null;
+        }
+    }
 
     /**
      * Register a instance of a client-side interceptor.
@@ -143,10 +164,6 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
      */
     protected void register(InterceptorContext context,
                             IndirectProvider<RestInterceptor> handlerProvider) {
-        if (interceptors == null) {
-            interceptors = Maps.newHashMap();
-        }
-
         // TODO: perhaps we could have the ability to add multiple contexts with a stack-like interceptor chain.
         // E.g. We want to intercept all '/items/*' calls with one interceptor, but then on another interceptor
         // we want to intercept all '/user/{id} calls. Requiring us to pass the result of each interception along
@@ -172,26 +189,5 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
 
     protected int getRegistryCount() {
         return interceptors.size();
-    }
-
-    @Override
-    public <A> IndirectProvider<RestInterceptor> find(A action) {
-        if (interceptors != null && action instanceof RestAction) {
-            RestAction restAction = (RestAction) action;
-            IndirectProvider<RestInterceptor> provider = null;
-
-            InterceptorContext subjectContext = InterceptorContext.newContext(restAction);
-            for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry
-                    : interceptors.entrySet()) {
-                InterceptorContext context = entry.getKey();
-
-                if (context.equals(subjectContext)) {
-                    provider = entry.getValue();
-                }
-            }
-            return provider;
-        } else {
-            return null;
-        }
     }
 }

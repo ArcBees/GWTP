@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,19 +23,20 @@ import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * {@code AsyncCallback} implementation wrapping another {@link com.google.gwt.user.client.rpc.AsyncCallback}
- * object used by a {@link com.gwtplatform.dispatch.client.interceptor.Interceptor} implementations to delegate
- * the execution result.
+ * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a {@link
+ * com.gwtplatform.dispatch.client.interceptor.Interceptor Interceptor} implementations to delegate the execution
+ * result.
  *
- * @param <A> the {@link com.gwtplatform.dispatch.shared.TypedAction} type.
+ * @param <A> the {@link TypedAction} type.
  * @param <R> the result type for this action.
  */
-public class RestInterceptedAsyncCallback<A extends TypedAction<R>, R> extends DelegatingAsyncCallback<A, R,
-        RestInterceptor> {
-    public RestInterceptedAsyncCallback(DispatchCall<A, R> dispatchCall,
-                                        A action,
-                                        AsyncCallback<R> callback,
-                                        DelegatingDispatchRequest dispatchRequest) {
+public class RestInterceptedAsyncCallback<A extends TypedAction<R>, R>
+        extends DelegatingAsyncCallback<A, R, RestInterceptor> {
+    public RestInterceptedAsyncCallback(
+            DispatchCall<A, R> dispatchCall,
+            A action,
+            AsyncCallback<R> callback,
+            DelegatingDispatchRequest dispatchRequest) {
         super(dispatchCall, action, callback, dispatchRequest);
     }
 }

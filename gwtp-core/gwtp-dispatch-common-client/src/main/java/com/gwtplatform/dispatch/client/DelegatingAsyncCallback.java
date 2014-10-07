@@ -24,25 +24,25 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a
- * {@link com.gwtplatform.dispatch.client.interceptor.Interceptor} implementations to delegate the
- * execution result.
+ * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a {@link Interceptor}
+ * implementations to delegate the execution result.
  *
  * @param <A> the {@link TypedAction} type.
  * @param <R> the result type for this action.
  * @param <T> the interceptor type used.
  */
-public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T extends Interceptor> implements
-        AsyncCallback<T>, ExecuteCommand<A, R> {
+public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T extends Interceptor>
+        implements AsyncCallback<T>, ExecuteCommand<A, R> {
     private final DispatchCall<A, R> dispatchCall;
     private final A action;
     private final AsyncCallback<R> callback;
     private final DelegatingDispatchRequest dispatchRequest;
 
-    public DelegatingAsyncCallback(DispatchCall<A, R> dispatchCall,
-                                   A action,
-                                   AsyncCallback<R> callback,
-                                   DelegatingDispatchRequest dispatchRequest) {
+    public DelegatingAsyncCallback(
+            DispatchCall<A, R> dispatchCall,
+            A action,
+            AsyncCallback<R> callback,
+            DelegatingDispatchRequest dispatchRequest) {
         this.dispatchCall = dispatchCall;
         this.action = action;
         this.callback = callback;
@@ -68,7 +68,7 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
     @Override
     public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
         if (dispatchRequest.isPending()) {
-            return dispatchCall.doExecute(resultCallback);
+            return dispatchCall.processCall(resultCallback);
         } else {
             return null;
         }

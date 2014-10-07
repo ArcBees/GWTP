@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,15 +19,17 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * This exception is thrown when multiple {@link com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext}
- * are attempting to be registered. There can only be one InterceptorContext registered per REST interceptor.
+ * This exception is thrown when multiple {@link com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext
+ * InterceptorContext} are attempting to be registered. There can only be one InterceptorContext registered per REST
+ * interceptor.
  */
 public class DuplicateInterceptorContextException extends RuntimeException {
     private String path;
     private HttpMethod httpMethod;
     private int queryParams;
 
-    private DuplicateInterceptorContextException() { }
+    private DuplicateInterceptorContextException() {
+    }
 
     public DuplicateInterceptorContextException(String path, HttpMethod httpMethod, int queryParams) {
         this.path = path;
@@ -50,9 +52,8 @@ public class DuplicateInterceptorContextException extends RuntimeException {
     @Override
     public String toString() {
         return getClass().getName() +
-               " [path=" + this.path + "," +
-               " httpMethod" + httpMethod + "," +
-               " queryParams" + queryParams + "]";
+                " [path=" + this.path + "," +
+                " httpMethod" + httpMethod + "," +
+                " queryParams" + queryParams + "]";
     }
-
 }

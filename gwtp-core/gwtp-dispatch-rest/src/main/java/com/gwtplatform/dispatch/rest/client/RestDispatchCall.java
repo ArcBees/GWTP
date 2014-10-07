@@ -49,14 +49,15 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     private final RestInterceptorRegistry interceptorRegistry;
     private final RestDispatchHooks dispatchHooks;
 
-    public RestDispatchCall(ExceptionHandler exceptionHandler,
-                            RestInterceptorRegistry interceptorRegistry,
-                            SecurityCookieAccessor securityCookieAccessor,
-                            RestRequestBuilderFactory requestBuilderFactory,
-                            RestResponseDeserializer restResponseDeserializer,
-                            RestDispatchHooks dispatchHooks,
-                            A action,
-                            AsyncCallback<R> callback) {
+    public RestDispatchCall(
+            ExceptionHandler exceptionHandler,
+            RestInterceptorRegistry interceptorRegistry,
+            SecurityCookieAccessor securityCookieAccessor,
+            RestRequestBuilderFactory requestBuilderFactory,
+            RestResponseDeserializer restResponseDeserializer,
+            RestDispatchHooks dispatchHooks,
+            A action,
+            AsyncCallback<R> callback) {
         super(exceptionHandler, securityCookieAccessor, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;
@@ -67,31 +68,28 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
     @Override
     public DispatchRequest execute() {
-        final A action = getAction();
+        A action = getAction();
         dispatchHooks.onExecute(action);
 
-        setupSecurityCookie();
-
-        IndirectProvider<RestInterceptor> interceptorProvider =
-                interceptorRegistry.find(action);
+        IndirectProvider<RestInterceptor> interceptorProvider = interceptorRegistry.find(action);
 
         // Attempt to intercept the dispatch request
         if (interceptorProvider != null) {
             DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            RestInterceptedAsyncCallback<A, R> delegatingCallback = new RestInterceptedAsyncCallback<A, R>(
-                    this, action, getCallback(), dispatchRequest);
+            RestInterceptedAsyncCallback<A, R> delegatingCallback =
+                    new RestInterceptedAsyncCallback<A, R>(this, action, getCallback(), dispatchRequest);
 
             interceptorProvider.get(delegatingCallback);
 
             return dispatchRequest;
         } else {
             // Execute the request as given
-            return doExecute();
+            return processCall();
         }
     }
 
     @Override
-    protected DispatchRequest doExecute() {
+    protected DispatchRequest processCall() {
         try {
             RequestBuilder requestBuilder = buildRequest();
 

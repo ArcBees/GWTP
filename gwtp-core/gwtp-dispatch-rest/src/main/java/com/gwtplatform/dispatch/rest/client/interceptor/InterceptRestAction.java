@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.rest.client.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * An exposed RestAction implementation.
+ * An exposed RestAction implementation used internally to compare similar contexts.
  */
 class InterceptRestAction extends AbstractRestAction<Object> {
     protected InterceptRestAction(HttpMethod httpMethod,
