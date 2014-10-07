@@ -22,8 +22,9 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 public class SampleRestInterceptor extends AbstractRestInterceptor {
-    public SampleRestInterceptor(InterceptorContext index) {
-        super(index);
+
+    public SampleRestInterceptor(InterceptorContext context) {
+        super(context);
     }
 
     @Override
