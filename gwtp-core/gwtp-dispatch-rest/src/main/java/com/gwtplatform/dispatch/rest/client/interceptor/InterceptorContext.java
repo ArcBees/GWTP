@@ -31,92 +31,150 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  * </pre>
  */
 public class InterceptorContext {
-    // Template definitions
-    private RestAction<?> template;
-
-    // Manual definitions
-    private String path;
-    private HttpMethod httpMethod;
-    private int queryCount;
-
-    // Check Properties
-    private boolean transcendent;
-    private boolean anyHttpMethod;
-    private boolean anyQueryCount;
-
     /**
-     * Providing the action template that will define the context properties.
-     * @param template RestAction with the context properties required.
+     * {@link InterceptorContext} Builder
      */
-    public InterceptorContext(RestAction<?> template) {
-        this(template, false);
-    }
+    public static class Builder {
+        // Template definitions
+        private RestAction<?> template;
 
-    /**
-     * Providing the action template that will define the context properties.
-     * @param template RestAction with the context properties required.
-     * @param transcendent Use a transcendent strategy on the path, e.g. /path will be detected using /path/2.
-     */
-    public InterceptorContext(RestAction<?> template, boolean transcendent) {
-        this(template, transcendent, false);
-    }
+        // Manual definitions
+        private String path;
+        private HttpMethod httpMethod;
+        private int queryCount;
 
-    /**
-     * Providing the action template that will define the context properties.
-     * @param template RestAction with the context properties required.
-     * @param transcendent Use a transcendent strategy on the path, e.g. /path will be detected using /path/2.
-     * @param anyHttpMethod Allow any HTTP httpMethod when checking.
-     */
-    public InterceptorContext(RestAction<?> template, boolean transcendent, boolean anyHttpMethod) {
-        this(template, transcendent, anyHttpMethod, false);
-    }
+        // Check Properties
+        private boolean transcendent;
+        private boolean anyHttpMethod;
+        private boolean anyQueryCount;
 
-    /**
-     * Providing the action template that will define the context properties.
-     * @param template RestAction with the context properties required.
-     * @param transcendent Use a transcendent strategy on the path, e.g. /path will be detected using /path/2.
-     * @param anyHttpMethod Allow any HTTP httpMethod when checking.
-     * @param anyQueryCount Allow any query param count.
-     */
-    public InterceptorContext(RestAction<?> template, boolean transcendent, boolean anyHttpMethod,
-                              boolean anyQueryCount) {
-        this.template = template;
-        this.transcendent = transcendent;
-        this.anyHttpMethod = anyHttpMethod;
-        this.anyQueryCount = anyQueryCount;
-    }
-
-    /**
-     * Provide a specialized context definition.
-     * @param path The actions resource path.
-     * @param httpMethod The {@link HttpMethod} of the resource (use null for all httpMethod types).
-     * @param queryCount The number of queries defined in the resource (-1 to ignore this property).
-     * @param transcendent Use a transcendent strategy on the path, e.g. /path will be detected using /path/2.
-     */
-    public InterceptorContext(String path, HttpMethod httpMethod, int queryCount, boolean transcendent) {
-        this.path = path;
-        this.httpMethod = httpMethod;
-        this.queryCount = queryCount;
-        this.transcendent = transcendent;
-
-        if (httpMethod == null) {
-            anyHttpMethod = true;
+        /**
+         * Constructs {@link InterceptorContext} builder.
+         */
+        public Builder() {
         }
-        if (queryCount < 0) {
-            anyQueryCount = true;
+
+        /**
+         * Constructs {@link InterceptorContext} builder.
+         *
+         * @param transcendent Use a transcendent strategy on the path,
+         *                     e.g. /path will be detected using /path/2.
+         */
+        public Builder(boolean transcendent) {
+            this(transcendent, false, false);
+        }
+
+        /**
+         * Constructs {@link InterceptorContext} builder.
+         *
+         * @param transcendent Use a transcendent strategy on the path,
+         *                     e.g. /path will be detected using /path/2.
+         * @param anyHttpMethod Allow any HTTP httpMethod when checking.
+         */
+        public Builder(boolean transcendent, boolean anyHttpMethod) {
+            this(transcendent, anyHttpMethod, false);
+        }
+
+        /**
+         * Constructs {@link InterceptorContext} builder.
+         *
+         * @param transcendent Use a transcendent strategy on the path,
+         *                     e.g. /path will be detected using /path/2.
+         * @param anyHttpMethod Allow any HTTP httpMethod when checking.
+         * @param anyQueryCount Allow any query param count.
+         */
+        public Builder(boolean transcendent, boolean anyHttpMethod,
+                       boolean anyQueryCount) {
+            this.transcendent = transcendent;
+            this.anyHttpMethod = anyHttpMethod;
+            this.anyQueryCount = anyQueryCount;
+        }
+
+        /**
+         * Provide a template {@link RestAction}.
+         * @param template the {@link RestAction} used as a template.
+         * @return this {@link Builder} object.
+         */
+        public Builder template(RestAction<?> template) {
+            this.template = template;
+            return this;
+        }
+
+        /**
+         * Explicitly provide a REST path string.
+         * @param path the rest path.
+         * @return this {@link Builder} object.
+         */
+        public Builder path(String path) {
+            this.path = path;
+            return this;
+        }
+
+        /**
+         * Explicitly provide an HttpMethod.
+         * @param httpMethod the REST {@link HttpMethod}.
+         * @return this {@link Builder} object.
+         */
+        public Builder httpMethod(HttpMethod httpMethod) {
+            this.httpMethod = httpMethod;
+            return this;
+        }
+
+        /**
+         * Explicitly provide a query count.
+         * @param queryCount the query count.
+         * @return this {@link Builder} object.
+         */
+        public Builder queryCount(int queryCount) {
+            this.queryCount = queryCount;
+            return this;
+        }
+
+        /**
+         * Build the {@link InterceptorContext}.
+         * @return built context.
+         */
+        public InterceptorContext build() {
+            return new InterceptorContext(this);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = template != null ? template.hashCode() : 0;
+            result = 31 * result + (path != null ? path.hashCode() : 0);
+            result = 31 * result + (httpMethod != null ? httpMethod.hashCode() : 0);
+            result = 31 * result + queryCount;
+            result = 31 * result + (transcendent ? 1 : 0);
+            result = 31 * result + (anyHttpMethod ? 1 : 0);
+            result = 31 * result + (anyQueryCount ? 1 : 0);
+            return result;
         }
     }
 
-    public static InterceptorContext newContext(RestAction<?> action) {
-        return new InterceptorContext(action);
+    private Builder builder;
+
+    protected InterceptorContext(Builder builder) {
+        assert builder != null;
+        this.builder = builder;
+
+        if (builder.httpMethod == null) {
+            builder.anyHttpMethod = true;
+        }
+        if (builder.queryCount < 0) {
+            builder.anyQueryCount = true;
+        }
     }
 
     protected boolean canIntercept(RestAction<?> action) {
+        String path = builder.path;
+        HttpMethod httpMethod = builder.httpMethod;
+        int queryCount = builder.queryCount;
+
         // Required check types
         if (useTemplate()) {
-            path = template.getPath();
-            httpMethod = template.getHttpMethod();
-            queryCount = template.getQueryParams().size();
+            path = builder.template.getPath();
+            httpMethod = builder.template.getHttpMethod();
+            queryCount = builder.template.getQueryParams().size();
         }
 
         // Path Check
@@ -124,10 +182,8 @@ public class InterceptorContext {
             if (!action.getPath().startsWith(path)) {
                 return false;
             }
-        } else {
-            if (!action.getPath().equals(path)) {
-                return false;
-            }
+        } else if (!action.getPath().equals(path)) {
+            return false;
         }
 
         // Http Method Check
@@ -138,13 +194,13 @@ public class InterceptorContext {
         }
 
         // Query Parameters
-        if (!anyQueryCount) {
+        if (!builder.anyQueryCount) {
             List<RestParameter> queryParams = action.getQueryParams();
             if (queryParams.size() != queryCount) {
                 return false;
             } else if (useTemplate()) {
                 // We can do some thorough checking with templates
-                if (!queryParams.equals(template.getQueryParams())) {
+                if (!queryParams.equals(builder.template.getQueryParams())) {
                     return false;
                 }
             }
@@ -153,31 +209,31 @@ public class InterceptorContext {
     }
 
     private boolean useTemplate() {
-        return template != null;
+        return builder.template != null;
     }
 
     private boolean isAnyHttpMethod() {
-        return anyHttpMethod;
+        return builder.anyHttpMethod;
     }
 
     public String getPath() {
-        return path;
+        return builder.path;
     }
 
     public HttpMethod getHttpMethod() {
-        return httpMethod;
+        return builder.httpMethod;
     }
 
     public int getQueryCount() {
-        return queryCount;
+        return builder.queryCount;
     }
 
     public RestAction getTemplate() {
-        return template;
+        return builder.template;
     }
 
     public boolean isTranscendent() {
-        return transcendent;
+        return builder.transcendent;
     }
 
     @Override
@@ -197,9 +253,6 @@ public class InterceptorContext {
 
     @Override
     public int hashCode() {
-        int result = path != null ? path.hashCode() : 0;
-        result = 31 * result + (httpMethod != null ? httpMethod.hashCode() : 0);
-        result = 31 * result + queryCount;
-        return result;
+        return builder.hashCode();
     }
 }

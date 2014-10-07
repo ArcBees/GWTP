@@ -72,11 +72,13 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
 
     @Override
     public <A> IndirectProvider<RestInterceptor> find(A action) {
-        if (!interceptors.isEmpty() && action instanceof RestAction) {
-            RestAction restAction = (RestAction) action;
+        if (interceptors != null && action instanceof RestAction) {
             IndirectProvider<RestInterceptor> provider = null;
 
-            InterceptorContext subjectContext = InterceptorContext.newContext(restAction);
+            InterceptorContext subjectContext = new InterceptorContext.Builder()
+                    .template((RestAction) action)
+                    .build();
+
             for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry
                     : interceptors.entrySet()) {
                 InterceptorContext context = entry.getKey();

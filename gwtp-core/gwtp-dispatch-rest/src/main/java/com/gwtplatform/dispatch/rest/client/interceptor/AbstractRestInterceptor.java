@@ -42,8 +42,9 @@ public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAc
     @Override
     public boolean canExecute(TypedAction action) {
         if (action instanceof RestAction) {
-            RestAction restAction = (RestAction) action;
-            InterceptorContext subjectContext = InterceptorContext.newContext(restAction);
+            InterceptorContext subjectContext = new InterceptorContext.Builder()
+                .template((RestAction) action)
+                .build();
 
             for (InterceptorContext context : interceptorContexts) {
                 // Must have at least one supporting context
