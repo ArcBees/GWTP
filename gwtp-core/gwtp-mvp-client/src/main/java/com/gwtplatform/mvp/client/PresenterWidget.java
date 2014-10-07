@@ -368,6 +368,17 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         }
     }
 
+   /**
+     * Registers a handler so that it is automatically removed when
+     * {@link #onHide()} is called. This provides an easy way to track event
+     * handler registrations.
+     *
+     * @param handlerRegistration The registration of handler to track.
+     */
+    protected void registerVisibleHandler(HandlerRegistration handlerRegistration) {
+        visibleHandlerRegistrations.add(handlerRegistration);
+    }
+
     /**
      * Access the {@link EventBus} object associated with that presenter.
      * You should not usually use this method to interact with the event bus.
