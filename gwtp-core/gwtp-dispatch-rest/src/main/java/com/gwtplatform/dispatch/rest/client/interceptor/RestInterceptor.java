@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * Instances of this interface will handle specific types of action classes on the client.
  * <p/>
  * When a call is executed, the {@link Interceptor} that has been registered with the bound
- * {@link com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry} is called and
+ * {@link com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry InterceptorRegistry} is called and
  * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically
  * send the command over HTTP to the server.
  * <p/>
@@ -48,16 +48,14 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  *
  *      {@literal @}Override
  *      public DispatchRequest execute(RestAction action, AsyncCallback{@literal <}Object{@literal >} resultCallback,
- *              final ExecuteCommand<RestAction, Object> executeCommand) {
+ *              ExecuteCommand<RestAction, Object> executeCommand) {
  *          // process stuff here!
- *          executeCommand.execute(action, resultCallback);
- *          return new CompletedDispatchRequest();
+ *          return executeCommand.execute(action, resultCallback);
  *      }
  *   }
  * </pre>
  */
 public interface RestInterceptor extends Interceptor<RestAction, Object> {
-
     /**
      * Get rest interceptor contexts.
      */

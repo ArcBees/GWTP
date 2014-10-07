@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -28,9 +28,8 @@ import com.gwtplatform.common.client.ProviderBundle;
 
 /**
  * The default implementation that {@link RpcInterceptorRegistry} that if bound will not load any client-side
- * interceptors.
- * </p>
- * To register client-side interceptors, extend this class and call {@link #register} in the constructor.
+ * interceptors. </p> To register client-side interceptors, extend this class and call {@link #register} in the
+ * constructor.
  * <p/>
  * <h3><u>Example</u></h3>
  * <p/>
@@ -68,7 +67,12 @@ import com.gwtplatform.common.client.ProviderBundle;
  * </pre>
  */
 public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
-    private Map<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>> interceptors;
+    private final Map<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>> interceptors = Maps.newHashMap();
+
+    @Override
+    public <A> IndirectProvider<RpcInterceptor<?, ?>> find(A action) {
+        return interceptors.get(action.getClass());
+    }
 
     /**
      * Register a instance of a client-side interceptor.
@@ -88,11 +92,11 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     /**
      * Register a {@link javax.inject.Provider} of a client-side interceptor.
      *
-     * @param actionType      The type of action that the client-side interceptor supports.
+     * @param actionType The type of action that the client-side interceptor supports.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
      */
     protected void register(Class<?> actionType,
-                            final Provider<? extends RpcInterceptor<?, ?>> handlerProvider) {
+            final Provider<? extends RpcInterceptor<?, ?>> handlerProvider) {
         register(actionType,
                 new IndirectProvider<RpcInterceptor<?, ?>>() {
                     @Override
@@ -105,11 +109,11 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     /**
      * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side interceptor.
      *
-     * @param actionType      The type of that the client-side interceptor supports.
+     * @param actionType The type of that the client-side interceptor supports.
      * @param handlerProvider The {@link com.google.gwt.inject.client.AsyncProvider} of the handler.
      */
     protected void register(Class<?> actionType,
-                            final AsyncProvider<? extends RpcInterceptor<?, ?>> handlerProvider) {
+            final AsyncProvider<? extends RpcInterceptor<?, ?>> handlerProvider) {
         register(actionType,
                 new IndirectProvider<RpcInterceptor<?, ?>>() {
                     @Override
@@ -122,14 +126,14 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     /**
      * Register a client-side interceptor that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
-     * @param actionType     The type of that the client-side interceptor supports.
-     * @param bundleProvider The {@link javax.inject.Provider} of the
-     *                       {@link com.gwtplatform.common.client.ProviderBundle}.
-     * @param providerId     The id of the client-side interceptor provider.
+     * @param actionType The type of that the client-side interceptor supports.
+     * @param bundleProvider The {@link javax.inject.Provider} of the {@link com.gwtplatform.common.client
+     * .ProviderBundle}.
+     * @param providerId The id of the client-side interceptor provider.
      */
     protected <B extends ProviderBundle> void register(Class<?> actionType,
-                                                       AsyncProvider<B> bundleProvider,
-                                                       int providerId) {
+            AsyncProvider<B> bundleProvider,
+            int providerId) {
         register(actionType, new CodeSplitBundleProvider<RpcInterceptor<?, ?>, B>(bundleProvider, providerId));
     }
 
@@ -139,20 +143,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
      * @param handlerProvider The {@link com.gwtplatform.common.client.IndirectProvider}.
      */
     protected void register(Class<?> actionType,
-                            IndirectProvider<RpcInterceptor<?, ?>> handlerProvider) {
-        if (interceptors == null) {
-            interceptors = Maps.newHashMap();
-        }
-
+            IndirectProvider<RpcInterceptor<?, ?>> handlerProvider) {
         interceptors.put(actionType, handlerProvider);
-    }
-
-    @Override
-    public <A> IndirectProvider<RpcInterceptor<?, ?>> find(A action) {
-        if (interceptors == null) {
-            return null;
-        } else {
-            return interceptors.get(action.getClass());
-        }
     }
 }

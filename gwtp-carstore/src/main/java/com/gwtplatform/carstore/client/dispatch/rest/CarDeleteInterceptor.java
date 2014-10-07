@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,12 +16,8 @@
 
 package com.gwtplatform.carstore.client.dispatch.rest;
 
-import javax.inject.Inject;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.carstore.client.rest.CarsService;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
-import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.client.interceptor.AbstractRestInterceptor;
 import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext;
@@ -30,7 +26,6 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 public class CarDeleteInterceptor extends AbstractRestInterceptor {
-
     CarDeleteInterceptor() {
         super(new InterceptorContext(ResourcesPath.CARS, HttpMethod.DELETE, -1, true));
     }

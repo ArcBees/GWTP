@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -31,7 +31,6 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  * </pre>
  */
 public class InterceptorContext {
-
     // Template definitions
     private RestAction<?> template;
 
@@ -44,8 +43,6 @@ public class InterceptorContext {
     private boolean transcendent;
     private boolean anyHttpMethod;
     private boolean anyQueryCount;
-
-    private InterceptorContext() { }
 
     /**
      * Providing the action template that will define the context properties.
@@ -189,12 +186,11 @@ public class InterceptorContext {
         if (o == null || getClass() != o.getClass()) { return false; }
 
         InterceptorContext that = (InterceptorContext) o;
-        RestAction action = null;
+        RestAction action;
         if (that.useTemplate()) {
             action = that.getTemplate();
         } else {
-            action = new InterceptRestAction(that.getHttpMethod(), that.getPath(),
-                that.getQueryCount());
+            action = new InterceptRestAction(that.getHttpMethod(), that.getPath(), that.getQueryCount());
         }
         return canIntercept(action);
     }
