@@ -75,9 +75,8 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
         if (interceptors != null && action instanceof RestAction) {
             IndirectProvider<RestInterceptor> provider = null;
 
-            InterceptorContext subjectContext = new InterceptorContext.Builder()
-                    .template((RestAction) action)
-                    .build();
+            InterceptorContext subjectContext = new InterceptorContext
+                    .Builder((RestAction) action).build();
 
             for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry
                     : interceptors.entrySet()) {

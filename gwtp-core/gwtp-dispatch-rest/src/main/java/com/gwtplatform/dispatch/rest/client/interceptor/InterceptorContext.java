@@ -32,7 +32,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  */
 public class InterceptorContext {
     /**
-     * {@link InterceptorContext} Builder
+     * {@link InterceptorContext} Builder.
      */
     public static class Builder {
         // Template definitions
@@ -57,47 +57,10 @@ public class InterceptorContext {
         /**
          * Constructs {@link InterceptorContext} builder.
          *
-         * @param transcendent Use a transcendent strategy on the path,
-         *                     e.g. /path will be detected using /path/2.
-         */
-        public Builder(boolean transcendent) {
-            this(transcendent, false, false);
-        }
-
-        /**
-         * Constructs {@link InterceptorContext} builder.
-         *
-         * @param transcendent Use a transcendent strategy on the path,
-         *                     e.g. /path will be detected using /path/2.
-         * @param anyHttpMethod Allow any HTTP httpMethod when checking.
-         */
-        public Builder(boolean transcendent, boolean anyHttpMethod) {
-            this(transcendent, anyHttpMethod, false);
-        }
-
-        /**
-         * Constructs {@link InterceptorContext} builder.
-         *
-         * @param transcendent Use a transcendent strategy on the path,
-         *                     e.g. /path will be detected using /path/2.
-         * @param anyHttpMethod Allow any HTTP httpMethod when checking.
-         * @param anyQueryCount Allow any query param count.
-         */
-        public Builder(boolean transcendent, boolean anyHttpMethod,
-                       boolean anyQueryCount) {
-            this.transcendent = transcendent;
-            this.anyHttpMethod = anyHttpMethod;
-            this.anyQueryCount = anyQueryCount;
-        }
-
-        /**
-         * Provide a template {@link RestAction}.
          * @param template the {@link RestAction} used as a template.
-         * @return this {@link Builder} object.
          */
-        public Builder template(RestAction<?> template) {
+        public Builder(RestAction<?> template) {
             this.template = template;
-            return this;
         }
 
         /**
@@ -127,6 +90,37 @@ public class InterceptorContext {
          */
         public Builder queryCount(int queryCount) {
             this.queryCount = queryCount;
+            return this;
+        }
+
+        /**
+         * Allow for transcendent context mapping.
+         * @param transcendent Use a transcendent strategy on the path,
+         *                     e.g. /path will be detected using /path/2.
+         * @return this {@link Builder} object.
+         */
+        public Builder transcendent(boolean transcendent) {
+            this.transcendent = transcendent;
+            return this;
+        }
+
+        /**
+         * Any {@link HttpMethod} for context mapping.
+         * @param anyHttpMethod Allow any HTTP httpMethod when checking.
+         * @return this {@link Builder} object.
+         */
+        public Builder anyHttpMethod(boolean anyHttpMethod) {
+            this.anyHttpMethod = anyHttpMethod;
+            return this;
+        }
+
+        /**
+         * Any query count for context mapping.
+         * @param anyQueryCount true allows any query param count.
+         * @return this {@link Builder} object.
+         */
+        public Builder anyQueryCount(boolean anyQueryCount) {
+            this.anyHttpMethod = anyHttpMethod;
             return this;
         }
 

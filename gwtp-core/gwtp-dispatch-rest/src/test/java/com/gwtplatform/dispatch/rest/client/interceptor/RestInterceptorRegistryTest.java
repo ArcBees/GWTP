@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
-import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext.Builder;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.gwtplatform.dispatch.rest.client.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.SecuredRestAction;
+import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext.Builder;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 import static org.junit.Assert.assertEquals;
@@ -117,8 +117,9 @@ public class RestInterceptorRegistryTest {
     @Test
     public void register_interceptor_duplicate() {
         // Given
-        InterceptorContext context = new Builder(true)
+        InterceptorContext context = new Builder()
             .path(PATH_1)
+            .transcendent(true)
             .build();
 
         // When
