@@ -20,7 +20,7 @@ public abstract class PopupPositioner {
         private int top;
         private int left;
 
-        PopupPosition(int left, int top) {
+        public PopupPosition(int left, int top) {
             this.left = left;
             this.top = top;
         }
