@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.client;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**

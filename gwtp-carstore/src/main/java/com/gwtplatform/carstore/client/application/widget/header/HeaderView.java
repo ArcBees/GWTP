@@ -16,7 +16,6 @@
 
 package com.gwtplatform.carstore.client.application.widget.header;
 
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

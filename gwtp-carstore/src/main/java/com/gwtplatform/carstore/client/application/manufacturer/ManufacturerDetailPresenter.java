@@ -36,11 +36,11 @@ import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -65,8 +65,7 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     interface MyProxy extends ProxyPlace<ManufacturerDetailPresenter> {
     }
 
-    private final RestDispatch dispatcher;
-    private final ManufacturerService manufacturerService;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final PlaceManager placeManager;
     private final EditManufacturerMessages messages;
 
@@ -74,17 +73,16 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     private Boolean createNew;
 
     @Inject
-    ManufacturerDetailPresenter(EventBus eventBus,
-                                MyView view,
-                                MyProxy proxy,
-                                RestDispatch dispatcher,
-                                ManufacturerService manufacturerService,
-                                PlaceManager placeManager,
-                                EditManufacturerMessages messages) {
+    ManufacturerDetailPresenter(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            ResourceDelegate<ManufacturersResource> manufacturersDelegate,
+            PlaceManager placeManager,
+            EditManufacturerMessages messages) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.dispatcher = dispatcher;
-        this.manufacturerService = manufacturerService;
+        this.manufacturersDelegate = manufacturersDelegate;
         this.placeManager = placeManager;
         this.messages = messages;
 
@@ -98,13 +96,15 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
         if (!createNew) {
             Long id = Long.parseLong(param);
-            dispatcher.execute(manufacturerService.get(id), new AbstractAsyncCallback<ManufacturerDto>() {
-                @Override
-                public void onSuccess(ManufacturerDto manufacturer) {
-                    currentManufacturer = manufacturer;
-                    getView().edit(currentManufacturer);
-                }
-            });
+            manufacturersDelegate
+                    .withCallback(new AbstractAsyncCallback<ManufacturerDto>() {
+                        @Override
+                        public void onSuccess(ManufacturerDto manufacturer) {
+                            currentManufacturer = manufacturer;
+                            getView().edit(currentManufacturer);
+                        }
+                    })
+                    .get(id);
         } else {
             currentManufacturer = new ManufacturerDto();
             getView().edit(currentManufacturer);
@@ -135,15 +135,17 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
-                new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
+        manufacturersDelegate
+
+                .withCallback(new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
                     public void onSuccess(ManufacturerDto savedManufacturerDto) {
                         DisplayMessageEvent.fire(ManufacturerDetailPresenter.this,
                                 new Message(messages.manufacturerSaved(), MessageStyle.SUCCESS));
                         placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
                     }
-                });
+                })
+                .saveOrCreate(manufacturerDto);
     }
 
     @Override
@@ -167,13 +169,14 @@ public class ManufacturerDetailPresenter extends Presenter<MyView, MyProxy>
     private void deleteManufacturer() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + currentManufacturer.getName() + "?");
         if (confirm) {
-            dispatcher.execute(manufacturerService.delete(currentManufacturer.getId()),
-                    new ErrorHandlerAsyncCallback<Void>(this) {
+            manufacturersDelegate
+                    .withCallback(new ErrorHandlerAsyncCallback<Void>(this) {
                         @Override
                         public void onSuccess(Void nothing) {
                             placeManager.revealPlace(new Builder().nameToken(NameTokens.getManufacturer()).build());
                         }
-                    });
+                    })
+                    .delete(currentManufacturer.getId());
         }
     }
 }

@@ -29,7 +29,7 @@ public interface RestResponseDeserializer {
      *
      * @param action te action associated with the response to deserialize.
      * @param response the response to deserialize.
-     * @param <A> the {@link RestAction} type.
+     * @param <A> the {@link com.gwtplatform.dispatch.rest.shared.RestAction} type.
      * @param <R> the result type.
      * @return the deserialized object.
      * @throws ActionException if an exception occurred while deserializing the response.

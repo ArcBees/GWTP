@@ -25,10 +25,10 @@ import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufactu
 import com.gwtplatform.carstore.client.application.widget.message.Message;
 import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.EditManufacturerMessages;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -39,22 +39,20 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
         void edit(ManufacturerDto manufacturerDto);
     }
 
-    private final RestDispatch dispatcher;
-    private final ManufacturerService manufacturerService;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final EditManufacturerMessages messages;
 
     private ManufacturerDto manufacturerDto;
 
     @Inject
-    public EditManufacturerPresenter(EventBus eventBus,
-                                     MyView view,
-                                     RestDispatch dispatcher,
-                                     ManufacturerService manufacturerService,
-                                     EditManufacturerMessages messages) {
+    public EditManufacturerPresenter(
+            EventBus eventBus,
+            MyView view,
+            ResourceDelegate<ManufacturersResource> manufacturerResourceDelegate,
+            EditManufacturerMessages messages) {
         super(eventBus, view);
 
-        this.dispatcher = dispatcher;
-        this.manufacturerService = manufacturerService;
+        this.manufacturersDelegate = manufacturerResourceDelegate;
         this.messages = messages;
 
         getView().setUiHandlers(this);
@@ -81,8 +79,8 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
     @Override
     public void onSave(ManufacturerDto manufacturerDto) {
-        dispatcher.execute(manufacturerService.saveOrCreate(manufacturerDto),
-                new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
+        manufacturersDelegate
+                .withCallback(new ErrorHandlerAsyncCallback<ManufacturerDto>(this) {
                     @Override
                     public void onSuccess(ManufacturerDto savedManufacturer) {
                         DisplayMessageEvent.fire(EditManufacturerPresenter.this,
@@ -91,7 +89,8 @@ public class EditManufacturerPresenter extends PresenterWidget<MyView> implement
 
                         getView().hide();
                     }
-                });
+                })
+                .saveOrCreate(manufacturerDto);
     }
 
     private void reveal() {
