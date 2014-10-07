@@ -32,11 +32,11 @@ import com.gwtplatform.carstore.client.application.manufacturer.ManufacturerPres
 import com.gwtplatform.carstore.client.application.manufacturer.event.ManufacturerAddedEvent;
 import com.gwtplatform.carstore.client.application.manufacturer.ui.EditManufacturerPresenter;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -66,26 +66,24 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     interface MyProxy extends ProxyPlace<ManufacturerPresenter> {
     }
 
-    private final RestDispatch dispatcher;
     private final PlaceManager placeManager;
-    private final ManufacturerService manufacturerService;
+    private final ResourceDelegate<ManufacturersResource> manufacturersDelegate;
     private final EditManufacturerPresenter editManufacturerPresenter;
 
     private ManufacturerDto editingManufacturer;
 
     @Inject
-    ManufacturerPresenter(EventBus eventBus,
-                          MyView view,
-                          MyProxy proxy,
-                          RestDispatch dispatcher,
-                          ManufacturerService manufacturerService,
-                          PlaceManager placeManager,
-                          EditManufacturerPresenter editManufacturerPresenter) {
+    ManufacturerPresenter(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            PlaceManager placeManager,
+            ResourceDelegate<ManufacturersResource> manufacturersDelegate,
+            EditManufacturerPresenter editManufacturerPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.dispatcher = dispatcher;
         this.placeManager = placeManager;
-        this.manufacturerService = manufacturerService;
+        this.manufacturersDelegate = manufacturersDelegate;
         this.editManufacturerPresenter = editManufacturerPresenter;
 
         getView().setUiHandlers(this);
@@ -101,8 +99,8 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
     @Override
     public void onDetail(ManufacturerDto manufacturerDto) {
         PlaceRequest placeRequest = new Builder().nameToken(NameTokens.getDetailManufacturer())
-                                                 .with("id", String.valueOf(manufacturerDto.getId()))
-                                                 .build();
+                .with("id", String.valueOf(manufacturerDto.getId()))
+                .build();
 
         placeManager.revealPlace(placeRequest);
     }
@@ -121,13 +119,14 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void onDelete(final ManufacturerDto manufacturerDto) {
-        dispatcher.execute(manufacturerService.delete(manufacturerDto.getId()),
-                new ErrorHandlerAsyncCallback<Void>(this) {
+        manufacturersDelegate
+                .withCallback(new ErrorHandlerAsyncCallback<Void>(this) {
                     @Override
                     public void onSuccess(Void nothing) {
                         getView().removeManufacturer(manufacturerDto);
                     }
-                });
+                })
+                .delete(manufacturerDto.getId());
     }
 
     @Override
@@ -135,12 +134,14 @@ public class ManufacturerPresenter extends Presenter<MyView, MyProxy>
         ActionBarVisibilityEvent.fire(this, true);
         ChangeActionBarEvent.fire(this, Arrays.asList(ActionType.ADD), true);
 
-        dispatcher.execute(manufacturerService.getManufacturers(), new AbstractAsyncCallback<List<ManufacturerDto>>() {
-            @Override
-            public void onSuccess(List<ManufacturerDto> manufacturers) {
-                getView().displayManufacturers(manufacturers);
-            }
-        });
+        manufacturersDelegate
+                .withCallback(new AbstractAsyncCallback<List<ManufacturerDto>>() {
+                    @Override
+                    public void onSuccess(List<ManufacturerDto> manufacturers) {
+                        getView().displayManufacturers(manufacturers);
+                    }
+                })
+                .getManufacturers();
     }
 
     @Override

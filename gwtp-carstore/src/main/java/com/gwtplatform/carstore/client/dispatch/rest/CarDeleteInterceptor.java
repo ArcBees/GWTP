@@ -17,7 +17,7 @@
 package com.gwtplatform.carstore.client.dispatch.rest;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.carstore.shared.rest.ResourcesPath;
+import com.gwtplatform.carstore.shared.api.ApiPaths;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.client.interceptor.AbstractRestInterceptor;
 import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext;
@@ -28,7 +28,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 public class CarDeleteInterceptor extends AbstractRestInterceptor {
     CarDeleteInterceptor() {
         super(new InterceptorContext.Builder()
-            .path(ResourcesPath.CARS)
+            .path(ApiPaths.CARS)
             .httpMethod(HttpMethod.DELETE)
             .transcendent(true)
             .build());

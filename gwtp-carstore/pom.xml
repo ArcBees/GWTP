@@ -27,7 +27,7 @@
         <gae.address>127.0.0.1</gae.address>
 
         <slf4j-api.version>1.7.7</slf4j-api.version>
-        <resteasy.version>3.0.8.Final</resteasy.version>
+        <resteasy.version>3.0.9.Final</resteasy.version>
         <arcbees.version>1.2</arcbees.version>
 
         <objectify-gwt.version>1.2</objectify-gwt.version>
@@ -148,6 +148,12 @@
             <artifactId>gwtp-dispatch-rest</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-dispatch-rest-shared</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -275,6 +281,13 @@
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-guice</artifactId>
             <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>${jax-rs.version}</version>
+            <!-- Provided because RestEasy has its own implementation -->
+            <scope>provided</scope>
         </dependency>
 
         <!-- Selenium Testing -->

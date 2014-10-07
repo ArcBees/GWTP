@@ -36,12 +36,13 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final RestDispatchHooks dispatchHooks;
 
     @Inject
-    DefaultRestDispatchCallFactory(@RestBinding ExceptionHandler exceptionHandler,
-                                   @RestBinding SecurityCookieAccessor securityCookieAccessor,
-                                   RestInterceptorRegistry interceptorRegistry,
-                                   RestRequestBuilderFactory requestBuilderFactory,
-                                   RestResponseDeserializer restResponseDeserializer,
-                                   RestDispatchHooks dispatchHooks) {
+    DefaultRestDispatchCallFactory(
+            @RestBinding ExceptionHandler exceptionHandler,
+            @RestBinding SecurityCookieAccessor securityCookieAccessor,
+            RestInterceptorRegistry interceptorRegistry,
+            RestRequestBuilderFactory requestBuilderFactory,
+            RestResponseDeserializer restResponseDeserializer,
+            RestDispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
         this.interceptorRegistry = interceptorRegistry;
         this.securityCookieAccessor = securityCookieAccessor;

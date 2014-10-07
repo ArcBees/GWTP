@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
-import com.gwtplatform.dispatch.rest.client.DateFormat;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**

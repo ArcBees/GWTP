@@ -34,10 +34,10 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.type.ChildServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class ChildServiceGenerator extends AbstractServiceGenerator {
     private final List<JParameter> parameters;
@@ -86,8 +86,8 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         if (serviceBinding == null) {
             String implName = getSuperTypeName() + SUFFIX;
 
-            serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service.getName(),
-                    serviceMethod.getName(), parameters);
+            serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service, serviceMethod.getName(),
+                    parameters);
             serviceBinding.setSuperTypeName(getSuperTypeName());
             serviceBinding.setSecured(isSecured());
         }

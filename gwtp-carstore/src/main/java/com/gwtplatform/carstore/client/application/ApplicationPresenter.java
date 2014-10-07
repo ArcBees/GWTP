@@ -53,11 +53,12 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     private final MessagesPresenter messagesPresenter;
 
     @Inject
-    ApplicationPresenter(EventBus eventBus,
-                         MyView view,
-                         MyProxy proxy,
-                         HeaderPresenter headerPresenter,
-                         MessagesPresenter messagesPresenter) {
+    ApplicationPresenter(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            HeaderPresenter headerPresenter,
+            MessagesPresenter messagesPresenter) {
         super(eventBus, view, proxy, RevealType.RootLayout);
 
         this.headerPresenter = headerPresenter;

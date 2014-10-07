@@ -27,13 +27,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.HEAD;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.HttpHeaders;
@@ -48,12 +43,11 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
+import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rest.client.DateFormat;
-import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
+import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
@@ -65,12 +59,13 @@ import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
 import com.gwtplatform.dispatch.rest.rebind.util.HeaderParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.PathParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind.util.QueryParamValueResolver;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
+import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_TYPE;
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.RESPONSE_TYPE;
+import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
+import static com.gwtplatform.dispatch.rest.client.MetadataType.RESPONSE_TYPE;
 
 public class ActionGenerator extends AbstractVelocityGenerator {
     private static class AnnotatedMethodParameter {
@@ -116,6 +111,9 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private final List<AnnotatedMethodParameter> formParams = new ArrayList<AnnotatedMethodParameter>();
     private final List<JParameter> potentialBodyParams = new ArrayList<JParameter>();
 
+    private boolean returnsAction;
+    private JClassType resultClass;
+    private JPrimitiveType resultPrimitive;
     private HttpMethod httpMethod;
     private JParameter bodyParam;
 
@@ -157,7 +155,7 @@ public class ActionGenerator extends AbstractVelocityGenerator {
 
     @Override
     protected void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException {
-        velocityContext.put("resultClass", getResultType());
+        velocityContext.put("resultClass", resultClass);
         velocityContext.put("httpMethod", httpMethod);
         velocityContext.put("methodCalls", getMethodCallsToAdd());
         velocityContext.put("restPath", path);
@@ -232,22 +230,12 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         }
     }
 
-    private void doGenerate(String implName, PrintWriter printWriter) throws UnableToCompleteException {
-        verifyIsAction();
-
-        retrieveHttpMethod();
-        retrieveParameterConfig();
-        retrieveBodyConfig();
-
-        mergeTemplate(printWriter, TEMPLATE, implName);
-    }
-
     private void registerMetadata() throws UnableToCompleteException {
         if (bodyParam != null) {
             registerMetadatum(BODY_TYPE, bodyParam.getType());
         }
 
-        registerMetadatum(RESPONSE_TYPE, getResultType());
+        registerMetadatum(RESPONSE_TYPE, resultClass);
     }
 
     private void registerMetadatum(MetadataType metadataType, JType type) {
@@ -260,47 +248,70 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         }
     }
 
-    private void verifyIsAction() throws UnableToCompleteException {
-        JClassType actionClass = null;
+    private void doGenerate(String implName, PrintWriter printWriter) throws UnableToCompleteException {
+        verifyReturnType();
 
-        try {
-            actionClass = getTypeOracle().getType(RestAction.class.getName());
-        } catch (NotFoundException e) {
-            getLogger().die("Unable to find interface Action.");
+        retrieveHttpMethod();
+        retrieveParameterConfig();
+        retrieveBodyConfig();
+
+        mergeTemplate(printWriter, TEMPLATE, implName);
+    }
+
+    private void verifyReturnType() throws UnableToCompleteException {
+        JClassType actionClass = getGeneratorUtil().getType(RestAction.class.getName());
+        JClassType returnInterface = getReturnType().isInterface();
+
+        returnsAction = returnInterface != null && returnInterface.isAssignableTo(actionClass);
+        resultPrimitive = getReturnType().isPrimitive();
+        resultClass = parseResultType();
+    }
+
+    private JClassType parseResultType() throws UnableToCompleteException {
+        JClassType resultType;
+
+        if (returnsAction) {
+            resultType = parseActionResultType();
+        } else {
+            resultType = parseRawResultType();
         }
 
-        JClassType returnClass = getReturnType().isClassOrInterface();
-        if (!returnClass.isAssignableTo(actionClass)) {
-            String typeName = returnClass.getQualifiedSourceName();
-            getLogger().die(typeName + " must implement RestAction.");
+        return resultType;
+    }
+
+    private JClassType parseActionResultType() throws UnableToCompleteException {
+        JClassType resultType = null;
+        JParameterizedType parameterized = getReturnType().isParameterized();
+
+        if (parameterized == null || parameterized.getTypeArgs().length != 1) {
+            getLogger().die("RestAction must specify a result type argument.");
+        } else {
+            resultType = parameterized.getTypeArgs()[0];
         }
+
+        return resultType;
+    }
+
+    private JClassType parseRawResultType() throws UnableToCompleteException {
+        JClassType resultType;
+
+        if (resultPrimitive != null) {
+            resultType = getGeneratorUtil().convertPrimitiveToBoxed(resultPrimitive);
+        } else {
+            resultType = getReturnType().isClassOrInterface();
+        }
+
+        return resultType;
     }
 
     private void retrieveHttpMethod() throws UnableToCompleteException {
         Boolean moreThanOneAnnotation = false;
 
-        if (actionMethod.isAnnotationPresent(GET.class)) {
-            httpMethod = HttpMethod.GET;
-        }
-
-        if (actionMethod.isAnnotationPresent(POST.class)) {
-            moreThanOneAnnotation = httpMethod != null;
-            httpMethod = HttpMethod.POST;
-        }
-
-        if (actionMethod.isAnnotationPresent(PUT.class)) {
-            moreThanOneAnnotation = moreThanOneAnnotation || httpMethod != null;
-            httpMethod = HttpMethod.PUT;
-        }
-
-        if (actionMethod.isAnnotationPresent(DELETE.class)) {
-            moreThanOneAnnotation = moreThanOneAnnotation || httpMethod != null;
-            httpMethod = HttpMethod.DELETE;
-        }
-
-        if (actionMethod.isAnnotationPresent(HEAD.class)) {
-            moreThanOneAnnotation = moreThanOneAnnotation || httpMethod != null;
-            httpMethod = HttpMethod.HEAD;
+        for (SupportedHttpActions method : SupportedHttpActions.values()) {
+            if (actionMethod.isAnnotationPresent(method.getAnnotationClass())) {
+                moreThanOneAnnotation = moreThanOneAnnotation || httpMethod != null;
+                httpMethod = method.getHttpMethod();
+            }
         }
 
         if (httpMethod == null) {
@@ -385,36 +396,33 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         }
 
         if (potentialBodyParams.size() > 1) {
-            getLogger().die(String.format(MANY_POTENTIAL_BODY, actionMethod.getName()));
+            getLogger().die(String.format(MANY_POTENTIAL_BODY, getMethodName()));
         }
 
         if (!formParams.isEmpty()) {
-            getLogger().die(String.format(FORM_AND_BODY_PARAM, actionMethod.getName()));
+            getLogger().die(String.format(FORM_AND_BODY_PARAM, getMethodName()));
         }
 
         bodyParam = potentialBodyParams.get(0);
     }
 
     private ActionBinding createActionBinding(String implName) throws UnableToCompleteException {
-        String resultClass = getResultType().getParameterizedQualifiedSourceName();
+        String resultClassName = resultClass.getParameterizedQualifiedSourceName();
 
-        ActionBinding binding = new ActionBinding(path, getPackage(), implName, actionMethod.getName(), resultClass,
-                parameters);
+        ActionBinding binding =
+                new ActionBinding(path, getPackage(), implName, getMethodName(), resultClassName, parameters);
         binding.setSecured(secured);
+        binding.setRestAction(returnsAction);
+        binding.setResultPrimitive(resultPrimitive);
 
         return binding;
     }
 
-    @SuppressWarnings("ConstantConditions")
-    private JClassType getResultType() throws UnableToCompleteException {
-        JParameterizedType parameterized = getReturnType().isParameterized();
-        if (parameterized == null || parameterized.getTypeArgs().length != 1) {
-            getLogger().die("The action must specify a result type argument.");
-        }
-        return parameterized.getTypeArgs()[0];
-    }
-
     private JType getReturnType() {
         return actionMethod.getReturnType();
+    }
+
+    private String getMethodName() {
+        return actionMethod.getName();
     }
 }

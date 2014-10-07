@@ -26,8 +26,8 @@ import com.gwtplatform.carstore.client.application.ApplicationPresenter;
 import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyProxy;
 import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyView;
 import com.gwtplatform.carstore.client.place.NameTokens;
-import com.gwtplatform.carstore.client.rest.StatisticsService;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
+import com.gwtplatform.carstore.shared.api.StatisticsResource;
+import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -47,20 +47,17 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
 
     private static final String FAILED = "Failed";
 
-    private final RestDispatch dispatcher;
-    private final StatisticsService statisticsService;
+    private final ResourceDelegate<StatisticsResource> statisticsDelegate;
 
     @Inject
     StatisticsPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            RestDispatch dispatcher,
-            StatisticsService statisticsService) {
+            ResourceDelegate<StatisticsResource> statisticsDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN_CONTENT);
 
-        this.dispatcher = dispatcher;
-        this.statisticsService = statisticsService;
+        this.statisticsDelegate = statisticsDelegate;
 
         getView().setUiHandlers(this);
     }
@@ -70,21 +67,23 @@ public class StatisticsPresenter extends Presenter<MyView, MyProxy> implements S
     public void extractYear(final Date date) {
         getView().setResult("");
 
-        dispatcher.execute(statisticsService.extractYearFromDate(date), new AsyncCallback<Integer>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                getView().setResult(FAILED);
-            }
+        statisticsDelegate
+                .withCallback(new AsyncCallback<Integer>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        getView().setResult(FAILED);
+                    }
 
-            @Override
-            public void onSuccess(Integer year) {
-                int expectedYear = 1900 + date.getYear();
-                if (year == expectedYear) {
-                    getView().setResult(year.toString());
-                } else {
-                    getView().setResult(FAILED);
-                }
-            }
-        });
+                    @Override
+                    public void onSuccess(Integer year) {
+                        int expectedYear = 1900 + date.getYear();
+                        if (year == expectedYear) {
+                            getView().setResult(year.toString());
+                        } else {
+                            getView().setResult(FAILED);
+                        }
+                    }
+                })
+                .extractYearFromDate(date);
     }
 }

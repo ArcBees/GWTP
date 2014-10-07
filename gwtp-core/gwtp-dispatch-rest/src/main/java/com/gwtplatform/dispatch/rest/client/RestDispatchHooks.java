@@ -21,10 +21,10 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
  * Hooks to be executed on every {@link com.gwtplatform.dispatch.client.DispatchCall}.
- *
- * {@link RestDispatchHooks#onExecute(RestAction)} will be called just before any action is attempted.<br>
- * {@link RestDispatchHooks#onSuccess(RestAction, Response, Object)} will be called when any action succeeds.<br>
- * {@link RestDispatchHooks#onFailure(RestAction, Response, Throwable)} will be called when any action fails.
+ * <p/>
+ * {@link #onExecute(RestAction)} will be called just before any action is attempted.<br>
+ * {@link #onSuccess(RestAction, Response, Object)} will be called when any action succeeds.<br>
+ * {@link #onFailure(RestAction, Response, Throwable)} will be called when any action fails.
  */
 public interface RestDispatchHooks {
     void onExecute(RestAction action);
