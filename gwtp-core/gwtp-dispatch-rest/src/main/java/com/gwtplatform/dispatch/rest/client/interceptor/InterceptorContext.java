@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
- * Index class used for the Rest Action Handler mappings.<br>
+ * Context class used for the Rest Interceptor mappings.<br>
  * <pre>
  *     new InterceptorContext("/items", HttpMethod.GET, 2);
  * or:
