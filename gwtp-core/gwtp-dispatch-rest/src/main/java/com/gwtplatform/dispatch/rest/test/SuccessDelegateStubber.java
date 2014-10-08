@@ -24,7 +24,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  * @param <R> a resource type.
  */
-public class SuccessDelegateStubber<R> extends AbstractDelegateStubber<R, SuccessDelegateStubber> {
+public class SuccessDelegateStubber<R> extends AbstractDelegateStubber<R, SuccessDelegateStubber<R>> {
     private Object result;
 
     SuccessDelegateStubber(DelegateMocking<R> delegateMocking) {
