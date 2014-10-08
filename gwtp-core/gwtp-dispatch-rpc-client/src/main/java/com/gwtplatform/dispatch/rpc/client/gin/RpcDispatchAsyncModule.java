@@ -21,6 +21,8 @@ import javax.inject.Singleton;
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
+import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchHooks;
@@ -28,6 +30,8 @@ import com.gwtplatform.dispatch.rpc.client.RpcBinding;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks;
+import com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry;
+import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
@@ -49,6 +53,11 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
      */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         private Class<? extends RpcDispatchHooks> dispatchHooks = DefaultRpcDispatchHooks.class;
+        private Class<? extends RpcInterceptorRegistry> interceptorRegistry = DefaultRpcInterceptorRegistry.class;
+
+        @Deprecated
+        private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
+                DefaultClientActionHandlerRegistry.class;
 
         @Override
         public RpcDispatchAsyncModule build() {
@@ -59,15 +68,47 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
             return dispatchHooks;
         }
 
+        public Class<? extends RpcInterceptorRegistry> getInterceptorRegistry() {
+            return interceptorRegistry;
+        }
+
         /**
-         * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
+         * Supply your own implementation of {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks}.
          * Default is {@link com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchHooks}
          *
-         * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
+         * @param dispatchHooks The {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks} implementation.
          * @return this {@link RpcDispatchAsyncModule.Builder} object.
          */
         public Builder dispatchHooks(final Class<? extends RpcDispatchHooks> dispatchHooks) {
             this.dispatchHooks = dispatchHooks;
+            return this;
+        }
+
+        /**
+         * Specify an alternate RPC interceptor registry.
+         *
+         * @param interceptorRegistry A {@link RpcInterceptorRegistry} class.
+         *
+         * @return this {@link RpcDispatchAsyncModule.Builder builder} object.
+         */
+        public Builder interceptorRegistry(final Class<? extends RpcInterceptorRegistry> interceptorRegistry) {
+            this.interceptorRegistry = interceptorRegistry;
+            return this;
+        }
+
+        /**
+         * Specify an alternate client action handler registry.
+         *
+         * @param clientActionHandlerRegistryType A {@link ClientActionHandlerRegistry} class.
+         *
+         * @deprecated use {@link Builder#interceptorRegistry}
+         *
+         * @return a {@link Builder} object.
+         */
+        @Deprecated
+        public Builder clientActionHandlerRegistry(
+                final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
+            this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
             return this;
         }
     }
@@ -78,8 +119,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new Builder());
     }
 
-    protected RpcDispatchAsyncModule(
-            Builder builder) {
+    protected RpcDispatchAsyncModule(Builder builder) {
         super(builder, RpcBinding.class);
 
         this.builder = builder;
@@ -87,11 +127,15 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     @Override
     protected void configureDispatch() {
-        bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+        bind(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
 
         bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
 
         bind(DispatchAsync.class).to(RpcDispatchAsync.class).in(Singleton.class);
+
+        bind(RpcInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
+
+        bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
     }
 
     @Provides

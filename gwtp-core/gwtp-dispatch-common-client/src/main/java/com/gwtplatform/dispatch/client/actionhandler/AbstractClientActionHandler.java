@@ -20,9 +20,12 @@ package com.gwtplatform.dispatch.client.actionhandler;
  * Simple abstract super-class for {@link ClientActionHandler} implementations that forces the action class to be passed
  * in as a constructor to the handler.
  *
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.AbstractRpcInterceptor}
+ *
  * @param <A> The action type.
  * @param <R> The result type.
  */
+@Deprecated
 public abstract class AbstractClientActionHandler<A, R> implements ClientActionHandler<A, R> {
     private final Class<A> actionType;
 

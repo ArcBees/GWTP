@@ -18,21 +18,17 @@ package com.gwtplatform.dispatch.client;
 
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.shared.RestDispatch} or
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
+ * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.shared.RestDispatch
+ * RestDispatch} or {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync}.
  * <p/>
- * This class will perform the work shared by all dispatch modules. It will delegate exceptions to the bound
- * {@code ExceptionHandler}. It will provide access to the security cookie through the bound
- * {@link SecurityCookieAccessor}. It will also delegate calls to the bound {@link ClientActionHandlerRegistry}.
+ * This class will perform the work shared by all dispatch modules. It will delegate exceptions to the bound {@link
+ * ExceptionHandler}. It will provide access to the security cookie through the bound {@link SecurityCookieAccessor}.
  * <p/>
  * It also provides a couple extension points for implementations.
  *
@@ -41,58 +37,48 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  */
 public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final A action;
-    private final AsyncCallback<R> callback;
-    private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
 
-    private String securityCookie;
+    private AsyncCallback<R> callback;
 
-    public DispatchCall(ExceptionHandler exceptionHandler,
-                        ClientActionHandlerRegistry clientActionHandlerRegistry,
-                        SecurityCookieAccessor securityCookieAccessor,
-                        A action,
-                        AsyncCallback<R> callback) {
+    public DispatchCall(
+            ExceptionHandler exceptionHandler,
+            SecurityCookieAccessor securityCookieAccessor,
+            A action,
+            AsyncCallback<R> callback) {
         this.action = action;
         this.callback = callback;
         this.exceptionHandler = exceptionHandler;
-        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
     }
 
     /**
-     * Call this method to execute the {@link TypedAction action} wrapped by this instance. If the action is registered
-     * by the {@link ClientActionHandlerRegistry}, it will delegate the call it.
-     * <p/>
-     * Implementations should consider overriding {@link #doExecute()} to perform additional work.
+     * Execution entry point. Call this method to execute the {@link TypedAction action} wrapped by this instance.
      *
      * @return a {@link DispatchRequest} object.
      */
-    public DispatchRequest execute() {
-        securityCookie = securityCookieAccessor.getCookieContent();
-
-        IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
-                clientActionHandlerRegistry.find(action.getClass());
-
-        if (clientActionHandlerProvider != null) {
-            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            DelegatingAsyncCallback<A, R> delegatingCallback =
-                    new DelegatingAsyncCallback<A, R>(this, action, callback, dispatchRequest);
-
-            clientActionHandlerProvider.get(delegatingCallback);
-
-            return dispatchRequest;
-        } else {
-            return doExecute();
-        }
-    }
+    public abstract DispatchRequest execute();
 
     /**
-     * Implementations must override this method to perform additional work when {@link #execute()} is called.
+     * Direct execution of a dispatch call without intercepting. Implementations must override this method to perform
+     * additional work when {@link #execute()} is called.
      *
      * @return a {@link DispatchRequest} object.
      */
-    protected abstract DispatchRequest doExecute();
+    protected abstract DispatchRequest processCall();
+
+    /**
+     * Execute the call overriding the existing callback. Used by {@link DelegatingAsyncCallback}.
+     *
+     * @param callback overriding callback.
+     *
+     * @return a {@link DispatchRequest} object.
+     */
+    protected DispatchRequest processCall(AsyncCallback<R> callback) {
+        this.callback = callback;
+        return processCall();
+    }
 
     /**
      * Returns the {@link TypedAction} wrapped by this {@link DispatchCall}.
@@ -110,15 +96,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      */
     protected AsyncCallback<R> getCallback() {
         return callback;
-    }
-
-    /**
-     * Returns the bound {@link ClientActionHandlerRegistry}.
-     *
-     * @return the bound {@link ClientActionHandlerRegistry}.
-     */
-    protected ClientActionHandlerRegistry getClientActionHandlerRegistry() {
-        return clientActionHandlerRegistry;
     }
 
     /**
@@ -145,7 +122,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      * @return the current security cookie.
      */
     protected String getSecurityCookie() {
-        return securityCookie;
+        return securityCookieAccessor.getCookieContent();
     }
 
     /**
@@ -160,7 +137,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     /**
      * Override this method to perform additional work when the action execution succeeded.
      *
-     * @param result   the action result.
+     * @param result the action result.
      * @param response the action {@link Response}.
      */
     protected void onExecuteSuccess(R result, Response response) {
@@ -183,7 +160,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     /**
      * Override this method to perform additional work when the action execution failed.
      *
-     * @param caught   the caught {@link Throwable}.
+     * @param caught the caught {@link Throwable}.
      * @param response the failure {@link Response}.
      */
     protected void onExecuteFailure(Throwable caught, Response response) {

@@ -21,6 +21,8 @@ import com.google.common.collect.Multimap;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
+import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRegistry;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
@@ -50,6 +52,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
     private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
+    private Class<? extends RestInterceptorRegistry> interceptorRegistry = DefaultRestInterceptorRegistry.class;
 
     /**
      * Initiate the creation of a global header parameter that will be attached to all requests.
@@ -118,6 +121,10 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return dispatchHooks;
     }
 
+    public Class<? extends RestInterceptorRegistry> getInterceptorRegistry() {
+        return interceptorRegistry;
+    }
+
     /**
      * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
      * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
@@ -167,14 +174,27 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     }
 
     /**
-     * Supply your own implementation of {@link com.gwtplatform.dispatch.client.DispatchHooks}.
+     * Supply your own implementation of {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks}.
      * Default is {@link com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks}
      *
-     * @param dispatchHooks The {@link com.gwtplatform.dispatch.client.DispatchHooks} implementation.
+     * @param dispatchHooks The {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks} implementation.
      * @return this {@link RestDispatchAsyncModuleBuilder} object.
      */
     public RestDispatchAsyncModuleBuilder dispatchHooks(Class<? extends RestDispatchHooks> dispatchHooks) {
         this.dispatchHooks = dispatchHooks;
+        return this;
+    }
+
+    /**
+     * Specify an alternate REST interceptor registry.
+     *
+     * @param interceptorRegistry A {@link RestInterceptorRegistry} class.
+     *
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
+    public RestDispatchAsyncModuleBuilder interceptorRegistry(
+            Class<? extends RestInterceptorRegistry> interceptorRegistry) {
+        this.interceptorRegistry = interceptorRegistry;
         return this;
     }
 }
