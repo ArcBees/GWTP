@@ -17,9 +17,14 @@
 package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.common.client.IndirectProvider;
+import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
+import com.gwtplatform.dispatch.client.OldDelegatingAsyncCallback;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
+import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
@@ -55,11 +60,13 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
     private final RpcInterceptorRegistry interceptorRegistry;
+    private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final R result;
 
     RpcDispatchUndoCall(
             DispatchServiceAsync dispatchService,
             ExceptionHandler exceptionHandler,
+            ClientActionHandlerRegistry clientActionHandlerRegistry,
             RpcInterceptorRegistry interceptorRegistry,
             SecurityCookieAccessor securityCookieAccessor,
             RpcDispatchHooks dispatchHooks,
@@ -71,6 +78,7 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
         this.interceptorRegistry = interceptorRegistry;
+        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.result = result;
     }
 
@@ -80,7 +88,14 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
 
         // TODO: are undo calls interceptable?
 
-        return processCall();
+        // Maintaining support for client action handlers
+        // Client action handlers were being processed even in an undo
+        DispatchRequest dispatchRequest = findClientActionHandlerRequest();
+        if (dispatchRequest == null) {
+            return processCall();
+        } else {
+            return dispatchRequest;
+        }
     }
 
     @Override
@@ -101,5 +116,25 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
                     }
                 }
         ));
+    }
+
+    @Deprecated
+    private DispatchRequest findClientActionHandlerRequest() {
+        DispatchRequest request = null;
+
+        A action = getAction();
+        IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
+                clientActionHandlerRegistry.find(action.getClass());
+
+        if (clientActionHandlerProvider != null) {
+            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
+            OldDelegatingAsyncCallback<A, R> delegatingCallback =
+                    new OldDelegatingAsyncCallback<A, R>(this, action, getCallback(), dispatchRequest);
+
+            clientActionHandlerProvider.get(delegatingCallback);
+
+            request = dispatchRequest;
+        }
+        return request;
     }
 }
