@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.view.PopupPositioner;
 
 /**
  * Base class for a {@link PopupView} that implements the {@link HasUiHandlers}
@@ -40,8 +41,20 @@ public abstract class PopupViewWithUiHandlers<C extends UiHandlers> extends
      *
      * @param eventBus The {@link EventBus}.
      */
-    protected PopupViewWithUiHandlers(EventBus eventBus) {
+    public PopupViewWithUiHandlers(EventBus eventBus) {
         super(eventBus);
+    }
+
+    /**
+     * @param eventBus The {@link EventBus}.
+     * @param positioner The {@link PopupPositioner} used to position the popup onReveal();
+     *
+     * @see com.gwtplatform.mvp.client.view.CenterPopupPositioner
+     * @see com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner
+     * @see com.gwtplatform.mvp.client.view.TopLeftPopupPositioner
+     */
+    protected PopupViewWithUiHandlers(EventBus eventBus, PopupPositioner positioner) {
+        super(eventBus, positioner);
     }
 
     /**

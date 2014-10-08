@@ -60,10 +60,10 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     /**
      * @param eventBus The {@link EventBus}.
      * @param positioner The {@link PopupPositioner} used to position the popup onReveal();
-     * @see
-     * {@link com.gwtplatform.mvp.client.view.CenterPopupPositioner},
-     * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
-     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner}
+     *
+     * @see com.gwtplatform.mvp.client.view.CenterPopupPositioner
+     * @see com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner
+     * @see com.gwtplatform.mvp.client.view.TopLeftPopupPositioner
      */
     protected PopupViewImpl(EventBus eventBus, PopupPositioner positioner) {
         this.eventBus = eventBus;
