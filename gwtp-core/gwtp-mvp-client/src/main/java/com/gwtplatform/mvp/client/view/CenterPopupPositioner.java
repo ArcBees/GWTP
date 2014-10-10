@@ -23,8 +23,8 @@ import com.google.gwt.user.client.Window;
 public class CenterPopupPositioner extends PopupPositioner {
     @Override
     public PopupPosition getPopupPosition(int popupWidth, int popupHeight) {
-        int left = (Window.getClientWidth() - popupWidth) / 2;
-        int top = (Window.getClientHeight() - popupHeight) / 2;
+        int left = ((Window.getClientWidth() - popupWidth) / 2) + Window.getScrollLeft();
+        int top = ((Window.getClientHeight() - popupHeight) / 2) + Window.getScrollTop();
         return new PopupPosition(left, top);
     }
 }
