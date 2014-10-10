@@ -180,9 +180,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
         adoptChild(slot, child);
 
-        if (child.isPopup()) {
-            monitorCloseEvent((PresenterWidget<? extends PopupView>) child);
-        } else {
+        if (!child.isPopup()) {
             getView().addToSlot(slot, child);
         }
         if (isVisible()) {
@@ -515,6 +513,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         }
 
         if (isPopup()) {
+            monitorCloseEvent((PresenterWidget<? extends PopupView>) this);
             ((PopupView) getView()).showAndReposition();
         }
 
@@ -554,7 +553,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         popupView.setCloseHandler(new PopupViewCloseHandler() {
             @Override
             public void onClose() {
-                removeFromPopupSlot(popupPresenter);
+                popupPresenter.removeFromParentSlot();
             }
         });
     }

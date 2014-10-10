@@ -122,7 +122,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     @Override
     public void setCloseHandler(final PopupViewCloseHandler popupViewCloseHandler) {
         this.popupViewCloseHandler = popupViewCloseHandler;
-        if (closeHandlerRegistration != null) {
+        if (closeHandlerRegistration == null) {
             closeHandlerRegistration = asPopupPanel().addCloseHandler(new CloseHandler<PopupPanel>() {
 
                 @Override
