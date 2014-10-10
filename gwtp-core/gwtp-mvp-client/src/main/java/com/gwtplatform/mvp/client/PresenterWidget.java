@@ -323,7 +323,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
         internalClearSlot(slot, child);
 
-        getView().setInSlot(slot, child);
+        if (child.isPopup()) {
+            monitorCloseEvent((PresenterWidget<? extends PopupView>) child);
+        } else {
+            getView().setInSlot(slot, child);
+        }
+
         if (isVisible()) {
             child.internalReveal();
             if (performReset) {
