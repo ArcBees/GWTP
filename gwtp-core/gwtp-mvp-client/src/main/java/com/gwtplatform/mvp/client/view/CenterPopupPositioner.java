@@ -23,8 +23,26 @@ import com.google.gwt.user.client.Window;
 public class CenterPopupPositioner extends PopupPositioner {
     @Override
     public PopupPosition getPopupPosition(int popupWidth, int popupHeight) {
-        int left = ((Window.getClientWidth() - popupWidth) / 2) + Window.getScrollLeft();
-        int top = ((Window.getClientHeight() - popupHeight) / 2) + Window.getScrollTop();
-        return new PopupPosition(left, top);
+        return new PopupPosition(getLeft(popupWidth), getTop(popupHeight));
+    }
+
+    /**
+     * By default this method centers the popup horizontally.
+     * You can override this method to change the horizontal position of the popup.
+     * @param popupWidth
+     * @return the left position of the popup
+     */
+    protected int getLeft(int popupWidth) {
+        return ((Window.getClientWidth() - popupWidth) / 2) + Window.getScrollLeft();
+    }
+
+    /**
+     * By default this method centers the popup vertically.
+     * You can override this method to change the vertical position of the popup.
+     * @param popupHeight
+     * @return the top position of the popup.
+     */
+    protected int getTop(int popupHeight) {
+        return ((Window.getClientHeight() - popupHeight) / 2) + Window.getScrollTop();
     }
 }
