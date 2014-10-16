@@ -135,23 +135,19 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
     }
 
     protected int getLtrLeft(int popupWidth) {
-        if (canFitOnLeftEdge(popupWidth)) {
-            return widget.getAbsoluteLeft();
-        } else if (canFitOnRightEdge(popupWidth) || clipToWindow) {
-            return Math.max(0, getRightEdge(popupWidth));
-        } else {
-            return widget.getAbsoluteLeft();
+        int left = widget.getAbsoluteLeft();
+        if (!canFitOnLeftEdge(popupWidth) && (canFitOnRightEdge(popupWidth) || clipToWindow)) {
+            left = Math.max(0, getRightEdge(popupWidth));
         }
+        return left;
     }
 
     protected int getRtlLeft(int popupWidth) {
-        if (canFitOnRightEdge(popupWidth)) {
-            return getRightEdge(popupWidth);
-        } else if (canFitOnLeftEdge(popupWidth) || !clipToWindow) {
-            return widget.getAbsoluteLeft();
-        } else {
-            return Math.max(0,  getRightEdge(popupWidth));
+        int left = Math.max(0,  getRightEdge(popupWidth));
+        if (!canFitOnRightEdge(popupWidth) && (canFitOnLeftEdge(popupWidth) || !clipToWindow)) {
+            left = widget.getAbsoluteLeft();
         }
+        return left;
     }
 
     private int getRightEdge(int popupWidth) {
