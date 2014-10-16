@@ -160,7 +160,6 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
     }
 
     private boolean canFitOnRightEdge(int popupWidth) {
-        int rightEdge = widget.getAbsoluteLeft() + widget.getOffsetWidth();
-        return popupWidth < rightEdge - Window.getScrollLeft();
+        return getRightEdge(popupWidth) >= Window.getScrollLeft();
     }
 }
