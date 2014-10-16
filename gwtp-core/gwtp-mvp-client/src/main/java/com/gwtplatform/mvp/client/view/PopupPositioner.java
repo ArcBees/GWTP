@@ -32,12 +32,13 @@ public abstract class PopupPositioner {
         public int getTop() {
             return top;
         }
-
-        @Override
-        public String toString() {
-            return "PopupPosition [top=" + top + ", left=" + left + "]";
-        }
     }
 
-    public abstract PopupPosition getPopupPosition(int popupWidth, int popupHeight);
+    public PopupPosition getPopupPosition(int popupWidth, int popupHeight) {
+        return new PopupPosition(getLeft(popupWidth), getTop(popupHeight));
+    }
+
+    protected abstract int getLeft(int popupWidth);
+
+    protected abstract int getTop(int popupHeight);
 }

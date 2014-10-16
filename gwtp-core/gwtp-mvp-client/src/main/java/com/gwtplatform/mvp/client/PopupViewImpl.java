@@ -44,6 +44,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     private HandlerRegistration autoHideHandler;
 
     private HandlerRegistration closeHandlerRegistration;
+    private PopupViewCloseHandler popupViewCloseHandler;
     private final EventBus eventBus;
 
     private PopupPositioner positioner;
@@ -91,6 +92,11 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     @Override
     public void hide() {
         asPopupPanel().hide();
+
+        // events will not fire call closeHandler manually.
+        if (popupViewCloseHandler != null) {
+            popupViewCloseHandler.onClose();
+        }
     }
 
     @Override
@@ -115,19 +121,17 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
     @Override
     public void setCloseHandler(final PopupViewCloseHandler popupViewCloseHandler) {
-        if (closeHandlerRegistration != null) {
-            closeHandlerRegistration.removeHandler();
-        }
-        if (popupViewCloseHandler == null) {
-            closeHandlerRegistration = null;
-        } else {
-            closeHandlerRegistration = asPopupPanel().addCloseHandler(
-                    new CloseHandler<PopupPanel>() {
-                        @Override
-                        public void onClose(CloseEvent<PopupPanel> event) {
-                            popupViewCloseHandler.onClose();
-                        }
-                    });
+        this.popupViewCloseHandler = popupViewCloseHandler;
+        if (closeHandlerRegistration == null) {
+            closeHandlerRegistration = asPopupPanel().addCloseHandler(new CloseHandler<PopupPanel>() {
+
+                @Override
+                public void onClose(CloseEvent<PopupPanel> event) {
+                    if (PopupViewImpl.this.popupViewCloseHandler != null) {
+                        PopupViewImpl.this.popupViewCloseHandler.onClose();
+                    }
+                }
+            });
         }
     }
 
