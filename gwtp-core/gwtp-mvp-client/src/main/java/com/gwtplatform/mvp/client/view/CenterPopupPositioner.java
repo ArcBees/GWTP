@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client.view;
 import com.google.gwt.user.client.Window;
 
 /**
- * Positions the popup in the center of the screen
+ * Positions the popup in the center of the screen.
  */
 public class CenterPopupPositioner extends PopupPositioner {
     @Override

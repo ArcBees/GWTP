@@ -29,11 +29,40 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
     /**
      * @param widget - the widget relative to which the popup will be shown.
-     * By default the popup will be clipped to left edge of the screen if there
-     * is not enough space for it.
-     * call {@link #RelativeToWidgetPopupPositioner(IsWidget, boolean)} if you
-     * want the popup to always be shown relative to the widget and the
-     * page to be expanded if there is no space.
+     * 
+     * If there is enough space to the right, the left edge of the popup will be positioned flush with
+     * the left edge of the widget.<p>
+     * <pre>
+     *     --------
+     *     |widget|
+     *     -------------
+     *     |popup panel|
+     *     -------------
+     * </pre>
+     *
+     * Otherwise if there is enough space on the left the right edge of the popup will be positioned
+     * flush with the right edge of the widget.<p>
+     * <pre>
+     *          --------
+     *          |widget|
+     *     -------------
+     *     |popup panel|
+     *     -------------
+     * </pre>
+     * 
+     * If there is not enough space to the left or the right and clipToWindow is on. The popup will be
+     * positioned on the left edge of the screen.<p>
+     * <pre>
+     *      |   --------
+     *      |   |widget|
+     *      |-------------
+     *      ||popup panel|
+     *      |-------------
+     * </pre>
+     * 
+     * If you would prefer the popupPanel to always be flush with the widget call
+     * {@link #RelativeToWidgetPopupPositioner(IsWidget, boolean)}
+     * and set clipToWindow to false
      */
     public RelativeToWidgetPopupPositioner(IsWidget widget) {
         this(widget, true);
@@ -41,68 +70,47 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
     /**
      * @param widget - the widget relative to which the popup will be shown.
-     * @param clipToWindow - set to true and the popup will be positioned on the left edge
-     * of the screen if it cannot fit.
+     * 
+     * If there is enough space to the right, the left edge of the popup will be positioned flush with
+     * the left edge of the widget.<p>
+     * <pre>
+     *     --------
+     *     |widget|
+     *     -------------
+     *     |popup panel|
+     *     -------------
+     * </pre>
+     *
+     * Otherwise if there is enough space on the left the right edge of the popup will be positioned
+     * flush with the right edge of the widget.<p>
+     * <pre>
+     *          --------
+     *          |widget|
+     *     -------------
+     *     |popup panel|
+     *     -------------
+     * </pre>
+     * 
+     * If there is not enough space to the left or the right and clipToWindow is on. The popup will be
+     * positioned on the left edge of the screen.<p>
+     * <pre>
+     *      |   --------
+     *      |   |widget|
+     *      |-------------
+     *      ||popup panel|
+     *      |-------------
+     * </pre>
+     * 
+     * Set clipToWindow to false to always position the popup flush to an edge of the widget and expand
+     * the screen when it will not fit.
      */
     public RelativeToWidgetPopupPositioner(IsWidget widget, boolean clipToWindow) {
         this.widget = widget.asWidget();
         this.clipToWindow = clipToWindow;
     }
 
-    /**
-     * Positions the popup, called after the offset width and height of the popup
-     * are known.
-     *
-     * @param offsetWidth the drop down's offset width
-     * @param offsetHeight the drop down's offset height
-     */
     @Override
-    public PopupPosition getPopupPosition(int offsetWidth, int offsetHeight) {
-        int offsetWidthDiff = offsetWidth - widget.getOffsetWidth();
-        int left;
-
-        if (LocaleInfo.getCurrentLocale().isRTL()) { // RTL case
-
-            left = widget.getAbsoluteLeft() - offsetWidthDiff;
-
-            if (offsetWidthDiff > 0) {
-                int windowRight = Window.getClientWidth() + Window.getScrollLeft();
-                int windowLeft = Window.getScrollLeft();
-
-                int rightEdge = widget.getAbsoluteLeft() + widget.getOffsetWidth();
-
-                int distanceToWindowRight = windowRight - rightEdge;
-                int distanceFromWindowLeft = rightEdge - windowLeft;
-
-                if (distanceFromWindowLeft < offsetWidth &&
-                        (clipToWindow || distanceToWindowRight >= offsetWidthDiff)) {
-                     left = widget.getAbsoluteLeft();
-                     if (clipToWindow) {
-                         left = Math.min(windowRight - offsetWidth, left);
-                         left = Math.max(0, left);
-                     }
-                }
-            }
-        } else {
-           left = widget.getAbsoluteLeft();
-
-            if (offsetWidthDiff > 0) {
-                int windowRight = Window.getClientWidth() + Window.getScrollLeft();
-                int windowLeft = Window.getScrollLeft();
-
-                int distanceToWindowRight = windowRight - left;
-                int distanceFromWindowLeft = left - windowLeft;
-
-                if (distanceToWindowRight < offsetWidth &&
-                        (clipToWindow || distanceFromWindowLeft >= offsetWidthDiff)) {
-                    left -= offsetWidthDiff;
-                    if (clipToWindow) {
-                        left = Math.max(0, left);
-                    }
-                }
-            }
-        }
-
+    protected int getTop(int popupHeight) {
         int top = widget.getAbsoluteTop();
 
         int windowTop = Window.getScrollTop();
@@ -112,11 +120,62 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
         int distanceToWindowBottom = windowBottom - (top + widget.getOffsetHeight());
 
-        if (distanceToWindowBottom < offsetHeight && distanceFromWindowTop >= offsetHeight) {
-            top -= offsetHeight;
+        if (distanceToWindowBottom < popupHeight && distanceFromWindowTop >= popupHeight) {
+            top -= popupHeight;
         } else {
             top += widget.getOffsetHeight();
         }
-        return new PopupPosition(left, top);
+        return top;
+    }
+
+    @Override
+    protected int getLeft(int popupWidth) {
+        return LocaleInfo.getCurrentLocale().isRTL() ? getRtlLeft(popupWidth) : getLtrLeft(popupWidth);
+    }
+
+    protected int getLtrLeft(int popupWidth) {
+        int offsetWidthDiff = popupWidth - widget.getOffsetWidth();
+        int left = widget.getAbsoluteLeft();
+
+        if (offsetWidthDiff > 0) {
+            int windowRight = Window.getClientWidth() + Window.getScrollLeft();
+            int windowLeft = Window.getScrollLeft();
+
+            int distanceToWindowRight = windowRight - left;
+            int distanceFromWindowLeft = left - windowLeft;
+
+            if (distanceToWindowRight < popupWidth && (clipToWindow || distanceFromWindowLeft >= offsetWidthDiff)) {
+                left -= offsetWidthDiff;
+                if (clipToWindow) {
+                    left = Math.max(0, left);
+                }
+            }
+        }
+
+        return left;
+    }
+
+    protected int getRtlLeft(int popupWidth) {
+        int offsetWidthDiff = popupWidth - widget.getOffsetWidth();
+        int left = widget.getAbsoluteLeft() - offsetWidthDiff;
+
+        if (offsetWidthDiff > 0) {
+            int windowRight = Window.getClientWidth() + Window.getScrollLeft();
+            int windowLeft = Window.getScrollLeft();
+
+            int rightEdge = widget.getAbsoluteLeft() + widget.getOffsetWidth();
+
+            int distanceToWindowRight = windowRight - rightEdge;
+            int distanceFromWindowLeft = rightEdge - windowLeft;
+
+            if (distanceFromWindowLeft < popupWidth && (clipToWindow || distanceToWindowRight >= offsetWidthDiff)) {
+                left = widget.getAbsoluteLeft();
+                if (clipToWindow) {
+                    left = Math.min(windowRight - popupWidth, left);
+                    left = Math.max(0, left);
+                }
+            }
+        }
+        return left;
     }
 }

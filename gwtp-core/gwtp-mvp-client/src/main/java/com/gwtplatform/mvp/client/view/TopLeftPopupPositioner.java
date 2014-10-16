@@ -29,7 +29,12 @@ public class TopLeftPopupPositioner extends PopupPositioner {
     }
 
     @Override
-    public PopupPosition getPopupPosition(int popupWidth, int popupHeight) {
-        return new PopupPosition(left, top);
+    protected int getLeft(int popupWidth) {
+       return left;
+    }
+
+    @Override
+    protected int getTop(int popupHeight) {
+        return top;
     }
 }
