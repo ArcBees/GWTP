@@ -21,11 +21,6 @@ import com.google.gwt.user.client.Window;
  * Positions the popup in the center of the screen.
  */
 public class CenterPopupPositioner extends PopupPositioner {
-    @Override
-    public PopupPosition getPopupPosition(int popupWidth, int popupHeight) {
-        return new PopupPosition(getLeft(popupWidth), getTop(popupHeight));
-    }
-
     /**
      * By default this method centers the popup horizontally.
      * You can override this method to change the horizontal position of the popup.
