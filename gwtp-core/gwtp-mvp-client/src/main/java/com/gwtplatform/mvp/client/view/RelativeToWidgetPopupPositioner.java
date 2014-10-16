@@ -70,6 +70,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
     /**
      * @param widget - the widget relative to which the popup will be shown.
+     * @param clipToWindow - set to false to always position the popup flush to an edge of the window.
      * 
      * If there is enough space to the right, the left edge of the popup will be positioned flush with
      * the left edge of the widget.<p>
@@ -134,48 +135,36 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
     }
 
     protected int getLtrLeft(int popupWidth) {
-        int offsetWidthDiff = popupWidth - widget.getOffsetWidth();
-        int left = widget.getAbsoluteLeft();
-
-        if (offsetWidthDiff > 0) {
-            int windowRight = Window.getClientWidth() + Window.getScrollLeft();
-            int windowLeft = Window.getScrollLeft();
-
-            int distanceToWindowRight = windowRight - left;
-            int distanceFromWindowLeft = left - windowLeft;
-
-            if (distanceToWindowRight < popupWidth && (clipToWindow || distanceFromWindowLeft >= offsetWidthDiff)) {
-                left -= offsetWidthDiff;
-                if (clipToWindow) {
-                    left = Math.max(0, left);
-                }
-            }
+        if (canFitOnLeftEdge(popupWidth)) {
+            return widget.getAbsoluteLeft();
+        } else if (canFitOnRightEdge(popupWidth) || clipToWindow) {
+            return Math.max(0, getRightEdge(popupWidth));
+        } else {
+            return widget.getAbsoluteLeft();
         }
-
-        return left;
     }
 
     protected int getRtlLeft(int popupWidth) {
-        int offsetWidthDiff = popupWidth - widget.getOffsetWidth();
-        int left = widget.getAbsoluteLeft() - offsetWidthDiff;
-
-        if (offsetWidthDiff > 0) {
-            int windowRight = Window.getClientWidth() + Window.getScrollLeft();
-            int windowLeft = Window.getScrollLeft();
-
-            int rightEdge = widget.getAbsoluteLeft() + widget.getOffsetWidth();
-
-            int distanceToWindowRight = windowRight - rightEdge;
-            int distanceFromWindowLeft = rightEdge - windowLeft;
-
-            if (distanceFromWindowLeft < popupWidth && (clipToWindow || distanceToWindowRight >= offsetWidthDiff)) {
-                left = widget.getAbsoluteLeft();
-                if (clipToWindow) {
-                    left = Math.min(windowRight - popupWidth, left);
-                    left = Math.max(0, left);
-                }
-            }
+        if (canFitOnRightEdge(popupWidth)) {
+            return getRightEdge(popupWidth);
+        } else if (canFitOnLeftEdge(popupWidth) || !clipToWindow) {
+            return widget.getAbsoluteLeft();
+        } else {
+            return Math.max(0,  getRightEdge(popupWidth));
         }
-        return left;
+    }
+
+    private int getRightEdge(int popupWidth) {
+        return widget.getAbsoluteLeft() + widget.getOffsetWidth() - popupWidth;
+    }
+
+    private boolean canFitOnLeftEdge(int popupWidth) {
+        int windowRight = Window.getClientWidth() + Window.getScrollLeft();
+        return windowRight - popupWidth > widget.getAbsoluteLeft();
+    }
+
+    private boolean canFitOnRightEdge(int popupWidth) {
+        int rightEdge = widget.getAbsoluteLeft() + widget.getOffsetWidth();
+        return popupWidth < rightEdge - Window.getScrollLeft();
     }
 }
