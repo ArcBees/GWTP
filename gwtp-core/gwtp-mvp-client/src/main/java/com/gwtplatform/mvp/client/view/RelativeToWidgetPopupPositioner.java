@@ -70,7 +70,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
     /**
      * @param widget - the widget relative to which the popup will be shown.
-     * @param clipToWindow - set to false to always position the popup flush to an edge of the window.
+     * @param clipToWindow - set to false to always position the popup flush to an edge of the widget.
      * 
      * If there is enough space to the right, the left edge of the popup will be positioned flush with
      * the left edge of the widget.<p>
