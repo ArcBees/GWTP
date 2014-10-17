@@ -116,6 +116,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     private static final Object POPUP_SLOT = new Object();
+
     boolean visible;
 
     private final EventBus eventBus;
