@@ -116,6 +116,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     private static final Object POPUP_SLOT = new Object();
+    boolean visible;
+
     private final EventBus eventBus;
     private final V view;
     private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
@@ -123,7 +125,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
     private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
 
-    boolean visible;
     private PresenterWidget<?> parent;
     private Object slot;
 
@@ -169,7 +170,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         addToPopupSlot(child);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void addToSlot(Object slot, PresenterWidget<?> child) {
         assert child != null : "cannot add null to a slot";
@@ -326,6 +326,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * @param handler The handler to register.
      * @return The {@link HandlerRegistration} you should use to unregister the handler.
      */
+    @Deprecated
     protected <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
         return getEventBus().addHandler(type, handler);
     }
@@ -343,7 +344,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * @see #addHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)
      */
     protected <H extends EventHandler> void addRegisteredHandler(Type<H> type, H handler) {
-        registerHandler(addHandler(type, handler));
+        registerHandler(getEventBus().addHandler(type, handler));
     }
 
     /**
@@ -500,6 +501,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * See {@link PresenterWidget} and {@link Presenter} for ways to reveal a
      * presenter.
      */
+    @SuppressWarnings("unchecked")
     void internalReveal() {
         if (isVisible()) {
             return;
