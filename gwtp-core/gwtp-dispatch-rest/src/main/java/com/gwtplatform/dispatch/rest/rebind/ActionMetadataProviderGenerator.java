@@ -61,6 +61,8 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
                 mergeTemplate(printWriter, TEMPLATE, implName);
             } catch (Exception e) {
                 getLogger().die(e.getMessage());
+            } finally {
+                printWriter.close();
             }
         } else {
             getLogger().debug("Action metadata provider already generated. Returning.");

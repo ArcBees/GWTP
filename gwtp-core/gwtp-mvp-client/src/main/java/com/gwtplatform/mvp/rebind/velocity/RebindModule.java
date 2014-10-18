@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.rebind.velocity;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -77,13 +78,22 @@ public class RebindModule extends AbstractModule {
     public VelocityEngine getVelocityEngine(@VelocityProperties String velocityProperties, Logger logger)
             throws UnableToCompleteException {
 
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(velocityProperties);
+        InputStream inputStream = null; 
         Properties properties = new Properties();
         try {
+            inputStream = this.getClass().getClassLoader().getResourceAsStream(velocityProperties);
             properties.load(inputStream);
             return new VelocityEngine(properties);
         } catch (Exception e) {
             logger.die("Cannot load velocity properties from " + velocityProperties);
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    logger.die("Cannot load velocity properties from " + velocityProperties);
+                }
+            }
         }
 
         return null;
