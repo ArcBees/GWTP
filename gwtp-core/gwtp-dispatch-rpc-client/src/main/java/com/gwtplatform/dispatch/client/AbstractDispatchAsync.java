@@ -65,7 +65,7 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                     if (clientActionHandler.getActionType() != action.getClass()) {
                         dispatchRequest.cancel();
                         callback.onFailure(new ClientActionHandlerMismatchException(
-                                (Class<? extends Action<?>>) action.getClass(), clientActionHandler.getActionType()));
+                                 action.getClass(), clientActionHandler.getActionType()));
                         return;
                     }
 
@@ -115,7 +115,7 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                     if (clientActionHandler.getActionType() != action.getClass()) {
                         dispatchRequest.cancel();
                         callback.onFailure(new ClientActionHandlerMismatchException(
-                                (Class<? extends Action<?>>) action.getClass(), clientActionHandler.getActionType()));
+                                action.getClass(), clientActionHandler.getActionType()));
                         return;
                     }
 
