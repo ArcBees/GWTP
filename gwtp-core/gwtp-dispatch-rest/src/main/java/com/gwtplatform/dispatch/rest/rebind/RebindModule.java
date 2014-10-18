@@ -68,10 +68,9 @@ public class RebindModule extends AbstractModule {
     @Singleton
     public VelocityEngine getVelocityEngine(@VelocityProperties String velocityProperties, Logger logger)
             throws UnableToCompleteException {
-        
+
         try {
             InputStream inputStream = null;
-            
             Properties properties = new Properties();
             try {
                 inputStream = this.getClass().getClassLoader().getResourceAsStream(velocityProperties);
