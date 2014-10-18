@@ -88,7 +88,7 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
 
             closeDefinition(sw);
 
-        return getPackageName() + "." + getClassName();
+            return getPackageName() + "." + getClassName();
         } finally {
             printWriter.close();
         }
