@@ -24,6 +24,6 @@ package com.gwtplatform.dispatch.rpc.shared;
  * value for normal use. It is recommended that the empty constructor is private or package-private.
  */
 public class NoResult implements Result {
-    public NoResult() {
-    }
+    private static final long serialVersionUID = 1L;
+
 }

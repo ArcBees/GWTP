@@ -27,6 +27,8 @@ import java.util.List;
  * @param <T> The value type.
  */
 public class MultipleResult<T> implements Result {
+    private static final long serialVersionUID = 1L;
+
     private List<T> value;
 
     public MultipleResult(List<T> value) {

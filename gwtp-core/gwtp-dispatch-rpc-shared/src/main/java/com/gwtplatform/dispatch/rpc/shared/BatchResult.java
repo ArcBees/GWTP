@@ -26,6 +26,8 @@ import java.util.List;
  * of {@link BatchAction.OnException#CONTINUE}, failed actions will have a <code>null</code> value.
  */
 public class BatchResult implements Result {
+    private static final long serialVersionUID = 1L;
+
     private List<Result> results;
 
     /**

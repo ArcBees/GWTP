@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rpc.shared.action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 public class TestResult implements Result {
+    private static final long serialVersionUID = 1L;
 
     private Boolean result;
 

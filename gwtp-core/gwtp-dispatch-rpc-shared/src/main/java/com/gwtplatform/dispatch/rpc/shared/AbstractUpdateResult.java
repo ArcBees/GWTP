@@ -22,6 +22,7 @@ package com.gwtplatform.dispatch.rpc.shared;
  * @param <T> The value type.
  */
 public abstract class AbstractUpdateResult<T> implements Result {
+    private static final long serialVersionUID = 1L;
 
     private T newValue;
 
