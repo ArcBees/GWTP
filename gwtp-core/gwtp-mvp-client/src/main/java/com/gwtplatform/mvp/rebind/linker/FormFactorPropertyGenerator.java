@@ -34,7 +34,7 @@ public class FormFactorPropertyGenerator implements PropertyProviderGenerator {
     private static final String DEFAULT_QUERY_PARAM_NAME = "formfactor";
     private static final String FORM_FACTOR_JS = "/com/gwtplatform/mvp/rebind/linker/formFactor.js";
 
-    private static final String OUTPUT = "{\n%s\nreturn findFormFactor('%s', location, navigator);\n}";
+    private static final String OUTPUT = "{%n%s%nreturn findFormFactor('%s', location, navigator);%n}";
 
     @Override
     public String generate(TreeLogger logger, SortedSet<String> possibleValues, String fallback,
@@ -69,17 +69,19 @@ public class FormFactorPropertyGenerator implements PropertyProviderGenerator {
         StringBuilder code = new StringBuilder();
         URL formFactorJs = getClass().getResource(FORM_FACTOR_JS);
         InputStream stream = null;
-
+        BufferedReader reader = null;
         try {
             stream = formFactorJs.openStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+            reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
 
             String line;
             while ((line = reader.readLine()) != null) {
                 code.append(line).append('\n');
             }
         } finally {
-            if (stream != null) {
+            if (reader != null) {
+                reader.close();
+            } else if (stream != null) {
                 stream.close();
             }
         }
