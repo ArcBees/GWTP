@@ -24,14 +24,14 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  */
 public class DefaultRpcDispatchHooks implements RpcDispatchHooks {
     @Override
-    public void onExecute(Action action, boolean undo) {
+    public <R extends Result> void onExecute(Action<R> action, boolean undo) {
     }
 
     @Override
-    public void onSuccess(Action action, Result result, boolean undo) {
+    public <R extends Result> void onSuccess(Action<R> action, R result, boolean undo) {
     }
 
     @Override
-    public void onFailure(Action action, Throwable caught, boolean undo) {
+    public <R extends Result> void onFailure(Action<R> action, Throwable caught, boolean undo) {
     }
 }

@@ -38,7 +38,7 @@ public class RestParameter {
             StringBuilder stringBuilder = new StringBuilder();
             String separator = "";
 
-            for (Object element : ((Collection) object)) {
+            for (Object element : (Collection<?>) object) {
                 stringBuilder.append(element).append(separator);
                 separator = ",";
             }
@@ -72,8 +72,12 @@ public class RestParameter {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         RestParameter that = (RestParameter) o;
 
