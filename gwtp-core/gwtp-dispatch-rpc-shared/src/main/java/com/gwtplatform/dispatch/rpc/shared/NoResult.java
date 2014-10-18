@@ -25,5 +25,4 @@ package com.gwtplatform.dispatch.rpc.shared;
  */
 public class NoResult implements Result {
     private static final long serialVersionUID = 1L;
-
 }
