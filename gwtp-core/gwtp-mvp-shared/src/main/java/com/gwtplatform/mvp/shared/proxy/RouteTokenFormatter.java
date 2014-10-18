@@ -193,7 +193,7 @@ public class RouteTokenFormatter implements TokenFormatter {
     @Override
     public String toPlaceToken(PlaceRequest placeRequest) throws TokenFormatException {
         String placeToken = placeRequest.getNameToken();
-        String queryString = "";
+        StringBuilder queryStringBuilder = new StringBuilder();
         String querySeparator = "";
 
         for (String parameterName : placeRequest.getParameterNames()) {
@@ -206,13 +206,15 @@ public class RouteTokenFormatter implements TokenFormatter {
                     placeToken = placeToken.replace("{" + parameterName + "}", encodedParameterValue);
                 } else {
                     // query parameter
-                    queryString += querySeparator + parameterName + "=" + encodedParameterValue;
+                    queryStringBuilder.append(querySeparator).append(parameterName).append("=")
+                        .append(encodedParameterValue);
                     querySeparator = "&";
                 }
             }
         }
 
-        if (!"".equals(queryString)) {
+        String queryString = queryStringBuilder.toString();
+        if (!queryString.isEmpty()) {
             placeToken = placeToken + "?" + queryString;
         }
 

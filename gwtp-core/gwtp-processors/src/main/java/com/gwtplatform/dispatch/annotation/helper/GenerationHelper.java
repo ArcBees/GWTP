@@ -177,21 +177,20 @@ public class GenerationHelper implements Closeable {
      * </code></pre>
      */
     public String generateFieldList(Collection<VariableElement> fieldElements, boolean withType, boolean leadingComma) {
-        String fieldList = "";
+        StringBuilder fieldList = new StringBuilder();
         if (fieldElements != null && fieldElements.size() > 0) {
             int i = 0;
             for (VariableElement fieldElement : fieldElements) {
                 if (leadingComma || i++ > 0) {
-                    fieldList += ", ";
+                    fieldList.append(", ");
                 }
                 if (withType) {
-                    fieldList += fieldElement.asType().toString();
-                    fieldList += " ";
+                    fieldList.append(fieldElement.asType().toString()).append(" ");
                 }
-                fieldList += fieldElement.getSimpleName();
+                fieldList.append(fieldElement.getSimpleName());
             }
         }
-        return fieldList;
+        return fieldList.toString();
     }
 
     public void generateFooter() {
@@ -438,11 +437,11 @@ public class GenerationHelper implements Closeable {
     }
 
     protected String manufactureIndentation() {
-        String space = "";
+        StringBuilder space = new StringBuilder();
         for (int i = 0; i < whitespaces; i++) {
-            space += " ";
+            space.append(" ");
         }
-        return space;
+        return space.toString();
     }
 
     private void initializeSourceWriter(Writer sourceWriter) {

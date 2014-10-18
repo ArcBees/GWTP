@@ -16,7 +16,7 @@
 package com.gwtplatform.mvp.client.view;
 
 public abstract class PopupPositioner {
-    public class PopupPosition {
+    public static class PopupPosition {
         private int top;
         private int left;
 

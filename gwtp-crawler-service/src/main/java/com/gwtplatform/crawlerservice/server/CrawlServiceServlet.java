@@ -49,7 +49,7 @@ import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
 @Singleton
 public class CrawlServiceServlet extends HttpServlet {
 
-    private class SyncAllAjaxController extends NicelyResynchronizingAjaxController {
+    private static class SyncAllAjaxController extends NicelyResynchronizingAjaxController {
         private static final long serialVersionUID = 1L;
 
         @Override

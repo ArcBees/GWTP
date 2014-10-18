@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Provider;
 
@@ -215,10 +216,10 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     private void writeBundleGetters(SourceWriter sourceWriter, Map<String, List<JClassType>> bundles,
             GeneratorContext generatorContext) throws UnableToCompleteException {
-        for (String bundle : bundles.keySet()) {
-            providerBundleGenerator.setPresenters(bundles.get(bundle));
+        for (Entry<String, List<JClassType>> entry : bundles.entrySet()) {
+            providerBundleGenerator.setPresenters(entry.getValue());
             providerBundleGenerator.setPackageName(getPackageName());
-            String bundleName = providerBundleGenerator.generate(getTreeLogger(), generatorContext, bundle);
+            String bundleName = providerBundleGenerator.generate(getTreeLogger(), generatorContext, entry.getKey());
             sourceWriter.println();
             sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, AsyncProvider.class.getSimpleName(), bundleName,
                     getSimpleNameFromTypeName(bundleName)));
