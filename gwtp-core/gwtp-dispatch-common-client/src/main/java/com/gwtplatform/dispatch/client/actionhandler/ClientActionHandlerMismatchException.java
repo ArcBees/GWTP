@@ -25,6 +25,8 @@ package com.gwtplatform.dispatch.client.actionhandler;
  */
 @Deprecated
 public class ClientActionHandlerMismatchException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
     private final Class<?> requestedActionType;
     private final Class<?> supportedActionType;
 

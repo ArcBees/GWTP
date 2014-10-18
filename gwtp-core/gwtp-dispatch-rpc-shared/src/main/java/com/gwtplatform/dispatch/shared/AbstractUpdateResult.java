@@ -26,6 +26,7 @@ package com.gwtplatform.dispatch.shared;
  */
 @Deprecated
 public abstract class AbstractUpdateResult<T> implements Result {
+    private static final long serialVersionUID = 1L;
 
     private T newValue;
 

@@ -102,6 +102,8 @@ public class AsyncEventPresenterTestUtil extends
     }
 
     static class MyResult implements Result {
+        private static final long serialVersionUID = 1L;
+
         private MyResult() {
         }
     }
