@@ -27,9 +27,9 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
  * {@link RpcDispatchHooks#onFailure(Action , Throwable, boolean)} will be called when any action fails.
  */
 public interface RpcDispatchHooks {
-    void onExecute(Action action, boolean undo);
+    <R extends Result> void onExecute(Action<R> action, boolean undo);
 
-    void onSuccess(Action action, Result result, boolean undo);
+    <R extends Result> void onSuccess(Action<R> action, R result, boolean undo);
 
-    void onFailure(Action action, Throwable caught, boolean undo);
+    <R extends Result> void onFailure(Action<R> action, Throwable caught, boolean undo);
 }
