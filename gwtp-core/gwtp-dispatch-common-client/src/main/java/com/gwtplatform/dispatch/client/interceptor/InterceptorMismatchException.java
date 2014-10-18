@@ -22,9 +22,12 @@ package com.gwtplatform.dispatch.client.interceptor;
  * was not the same action as specified by {@link Interceptor#getActionType()}.
  */
 public class InterceptorMismatchException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
     private final Class<?> requestedActionType;
     private final Class<?> supportedActionType;
 
+    @SuppressWarnings("unused")
     private InterceptorMismatchException() {
         this.requestedActionType = null;
         this.supportedActionType = null;
