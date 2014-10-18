@@ -143,9 +143,12 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
         if (printWriter != null) {
-            doGenerate(implName, printWriter);
-
-            registerMetadata();
+            try {
+                doGenerate(implName, printWriter);
+                registerMetadata();
+            } finally {
+                printWriter.close();
+            }
         } else {
             getLogger().debug("Action already generated. Returning.");
         }

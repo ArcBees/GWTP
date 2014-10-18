@@ -80,25 +80,28 @@ public class GinjectorGenerator extends AbstractGenerator {
         if (printWriter == null) {
             return typeName;
         }
+        try {
+            PresenterDefinitions presenterDefinitions = new PresenterDefinitions();
+            findAllPresenters(presenterDefinitions);
 
-        PresenterDefinitions presenterDefinitions = new PresenterDefinitions();
-        findAllPresenters(presenterDefinitions);
+            ClassSourceFileComposerFactory composer = initComposer();
+            writeMandatoryGetterImports(composer);
+            writePresenterImports(composer, presenterDefinitions);
 
-        ClassSourceFileComposerFactory composer = initComposer();
-        writeMandatoryGetterImports(composer);
-        writePresenterImports(composer, presenterDefinitions);
+            SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+            writeMandatoryGetter(sourceWriter);
+            writePresentersGetter(sourceWriter, presenterDefinitions);
+            writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
 
-        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
-        writeMandatoryGetter(sourceWriter);
-        writePresentersGetter(sourceWriter, presenterDefinitions);
-        writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
+            Injector injector = Guice.createInjector(new RebindModule(new Logger(treeLogger), generatorContext));
+            writeFormFactors(injector);
 
-        Injector injector = Guice.createInjector(new RebindModule(new Logger(treeLogger), generatorContext));
-        writeFormFactors(injector);
-
-        closeDefinition(sourceWriter);
+            closeDefinition(sourceWriter);
 
         return DEFAULT_FQ_NAME;
+        } finally {
+            printWriter.close();
+        }
     }
 
     private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {

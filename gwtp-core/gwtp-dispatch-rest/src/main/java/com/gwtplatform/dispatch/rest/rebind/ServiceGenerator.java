@@ -60,7 +60,11 @@ public class ServiceGenerator extends AbstractServiceGenerator {
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
         if (printWriter != null) {
-            doGenerate(implName, printWriter);
+            try {
+                doGenerate(implName, printWriter);
+            } finally {
+                printWriter.close();
+            }
         } else {
             getLogger().debug("Service already generated. Returning.");
         }
