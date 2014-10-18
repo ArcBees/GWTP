@@ -24,10 +24,13 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
  * interceptor.
  */
 public class DuplicateInterceptorContextException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
     private String path;
     private HttpMethod httpMethod;
     private int queryParams;
 
+    @SuppressWarnings("unused")
     private DuplicateInterceptorContextException() {
     }
 

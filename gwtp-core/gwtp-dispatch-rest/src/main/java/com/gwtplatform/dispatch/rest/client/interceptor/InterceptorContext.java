@@ -120,7 +120,7 @@ public class InterceptorContext {
          * @return this {@link Builder} object.
          */
         public Builder anyQueryCount(boolean anyQueryCount) {
-            this.anyHttpMethod = anyHttpMethod;
+            this.anyQueryCount = anyQueryCount;
             return this;
         }
 
