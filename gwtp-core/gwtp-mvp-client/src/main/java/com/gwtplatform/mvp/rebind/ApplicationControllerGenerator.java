@@ -72,22 +72,26 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
         if (printWriter == null) {
             return typeName + SUFFIX;
         }
+        try {
 
-        JClassType preBootstrapper = getPreBootstrapper();
+            JClassType preBootstrapper = getPreBootstrapper();
 
-        ClassSourceFileComposerFactory composer = initComposer(preBootstrapper);
-        SourceWriter sw = composer.createSourceWriter(generatorContext, printWriter);
+            ClassSourceFileComposerFactory composer = initComposer(preBootstrapper);
+            SourceWriter sw = composer.createSourceWriter(generatorContext, printWriter);
 
-        JClassType bootstrapper = getBootstrapper();
+            JClassType bootstrapper = getBootstrapper();
 
-        String ginjectorName = new GinjectorGenerator(bootstrapper).generate(getTreeLogger(),
-                generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME);
+            String ginjectorName = new GinjectorGenerator(bootstrapper).generate(getTreeLogger(),
+                    generatorContext, GinjectorGenerator.DEFAULT_FQ_NAME);
 
-        writeInit(sw, ginjectorName, preBootstrapper, bootstrapper);
+            writeInit(sw, ginjectorName, preBootstrapper, bootstrapper);
 
-        closeDefinition(sw);
+            closeDefinition(sw);
 
         return getPackageName() + "." + getClassName();
+        } finally {
+            printWriter.close();
+        }
     }
 
     private ClassSourceFileComposerFactory initComposer(JClassType preBootstrapper) {

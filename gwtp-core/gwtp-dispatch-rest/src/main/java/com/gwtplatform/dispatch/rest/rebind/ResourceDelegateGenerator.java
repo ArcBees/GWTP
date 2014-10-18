@@ -64,7 +64,11 @@ public class ResourceDelegateGenerator extends AbstractVelocityGenerator {
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
         if (printWriter != null) {
-            mergeTemplate(printWriter, TEMPLATE, implName);
+            try {
+                mergeTemplate(printWriter, TEMPLATE, implName);
+            } finally {
+                printWriter.close();
+            }
         }
     }
 

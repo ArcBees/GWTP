@@ -132,8 +132,12 @@ public class UiBinderGenerator extends Generator {
         PrintWriter printWriter = writers.tryToMakePrintWriterFor(implName);
 
         if (printWriter != null) {
-            generateOnce(interfaceType, implName, printWriter, logger, oracle,
+            try {
+                generateOnce(interfaceType, implName, printWriter, logger, oracle,
                     resourceOracle, genCtx.getPropertyOracle(), writers, designTime);
+            } finally {
+                printWriter.close();
+            }
         }
         return packageName + "." + implName;
     }

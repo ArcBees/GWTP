@@ -58,16 +58,20 @@ public class ProviderBundleGenerator extends AbstractGenerator {
             return typeName;
         }
 
-        ClassSourceFileComposerFactory composer = initComposer();
-        writePresenterImports(composer, presenters);
+        try {
+            ClassSourceFileComposerFactory composer = initComposer();
+            writePresenterImports(composer, presenters);
 
-        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
-        writeStaticFields(sourceWriter, presenters);
-        writeConstructor(sourceWriter, presenters);
+            SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+            writeStaticFields(sourceWriter, presenters);
+            writeConstructor(sourceWriter, presenters);
 
-        closeDefinition(sourceWriter);
+            closeDefinition(sourceWriter);
 
-        return getPackageName() + "." + getClassName();
+            return getPackageName() + "." + getClassName();
+        } finally {
+            printWriter.close();
+        }
     }
 
     private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {

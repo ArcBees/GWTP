@@ -73,7 +73,11 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
 
         if (printWriter != null) {
-            doGenerate(implName, printWriter);
+            try {
+                doGenerate(implName, printWriter);
+            } finally {
+                printWriter.close();
+            }
         } else {
             getLogger().debug("Sub-service already generated. Returning.");
         }

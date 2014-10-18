@@ -49,6 +49,7 @@ public class GenDtoProcessor extends GenProcessor {
 
             printMessage("Generating '" + dtoClassName + "' from '" + dtoElementSimpleName + "'.");
 
+            @SuppressWarnings("resource")
             Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dtoClassName, dtoElement).openWriter();
             writer = new BuilderGenerationHelper(sourceWriter);
 

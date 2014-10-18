@@ -55,7 +55,11 @@ public class GinModuleGenerator extends AbstractVelocityGenerator {
 
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE, implName);
         if (printWriter != null) {
-            mergeTemplate(printWriter, VELOCITY_TEMPLATE, implName);
+            try {
+                mergeTemplate(printWriter, VELOCITY_TEMPLATE, implName);
+            } finally {
+                printWriter.close();
+            }
         }
 
         return PACKAGE + "." + implName;
