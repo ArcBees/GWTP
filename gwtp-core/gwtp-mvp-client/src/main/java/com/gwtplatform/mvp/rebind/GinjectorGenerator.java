@@ -99,7 +99,7 @@ public class GinjectorGenerator extends AbstractGenerator {
 
             closeDefinition(sourceWriter);
 
-        return DEFAULT_FQ_NAME;
+            return DEFAULT_FQ_NAME;
         } finally {
             printWriter.close();
         }
