@@ -67,7 +67,7 @@ public abstract class AbstractResourceDelegate<T> implements ResourceDelegate<T>
         return delegate.asResource();
     }
 
-    @SuppressWarnings({"unchecked", "RedundantCast"})
+    @SuppressWarnings({"unchecked"})
     protected <R> void execute(RestAction<R> action) {
         DispatchRequest dispatchRequest = dispatcher.execute(action, (AsyncCallback<R>) callback);
 
