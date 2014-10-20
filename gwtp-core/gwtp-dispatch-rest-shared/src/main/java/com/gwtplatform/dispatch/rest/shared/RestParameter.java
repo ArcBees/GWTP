@@ -38,8 +38,8 @@ public class RestParameter {
             StringBuilder stringBuilder = new StringBuilder();
             String separator = "";
 
-            for (Object element : ((Collection) object)) {
-                stringBuilder.append(element).append(separator);
+            for (Object element : (Collection<?>) object) {
+                stringBuilder.append(separator).append(element);
                 separator = ",";
             }
 
