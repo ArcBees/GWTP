@@ -51,15 +51,12 @@ import java.util.List;
 public class UiBinderGenerator extends Generator {
 
     private static final String BINDER_URI = "urn:ui:com.google.gwt.uibinder";
-
+    private static boolean gaveLazyBuildersWarning;
+    private static boolean gaveSafeHtmlWarning;
+    private static final String LAZY_WIDGET_BUILDERS_PROPERTY = "UiBinder.useLazyWidgetBuilders";
     private static final String TEMPLATE_SUFFIX = ".ui.xml";
 
     private static final String XSS_SAFE_CONFIG_PROPERTY = "UiBinder.useSafeHtmlTemplates";
-    private static final String LAZY_WIDGET_BUILDERS_PROPERTY = "UiBinder.useLazyWidgetBuilders";
-
-    private static boolean gaveSafeHtmlWarning;
-    private static boolean gaveLazyBuildersWarning;
-
     /**
      * Given a UiBinder interface, return the path to its ui.xml file, suitable
      * for any classloader to find it as a resource.
@@ -107,8 +104,6 @@ public class UiBinderGenerator extends Generator {
     public String generate(TreeLogger logger, GeneratorContext genCtx,
             String fqInterfaceName) throws UnableToCompleteException {
         TypeOracle oracle = genCtx.getTypeOracle();
-        ResourceOracle resourceOracle = genCtx.getResourcesOracle();
-
         JClassType interfaceType;
         try {
             interfaceType = oracle.getType(fqInterfaceName);
@@ -132,12 +127,8 @@ public class UiBinderGenerator extends Generator {
         PrintWriter printWriter = writers.tryToMakePrintWriterFor(implName);
 
         if (printWriter != null) {
-            try {
-                generateOnce(interfaceType, implName, printWriter, logger, oracle,
-                    resourceOracle, genCtx.getPropertyOracle(), writers, designTime);
-            } finally {
-                printWriter.close();
-            }
+            generateOnce(interfaceType, implName, printWriter, logger, oracle,
+                    genCtx.getResourcesOracle(), genCtx.getPropertyOracle(), writers, designTime);
         }
         return packageName + "." + implName;
     }
@@ -174,7 +165,7 @@ public class UiBinderGenerator extends Generator {
     private void generateOnce(JClassType interfaceType, String implName,
             PrintWriter binderPrintWriter, TreeLogger treeLogger, TypeOracle oracle,
             ResourceOracle resourceOracle, PropertyOracle propertyOracle,
-            PrintWriterManager writerManager,  DesignTimeUtils designTime)
+            PrintWriterManager writerManager, DesignTimeUtils designTime)
             throws UnableToCompleteException {
 
         MortalLogger logger = new MortalLogger(treeLogger);
@@ -188,11 +179,18 @@ public class UiBinderGenerator extends Generator {
         FieldManager fieldManager = getFieldManager(oracle, logger, propertyOracle, useLazyWidgetBuilders);
         // END MODIFICATION
 
-        UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName,
-                templatePath, oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
-                useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI);
+        UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName, templatePath,
+                oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
+                useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI,
+                resourceOracle);
 
-        Document doc = getW3cDoc(logger, designTime, resourceOracle, templatePath);
+        Resource resource = getTemplateResource(logger, templatePath, resourceOracle);
+        // Ensure that generated uibinder source is modified at least as often as synthesized .cssmap
+        // resources, otherwise it would be possible to synthesize a modified .cssmap resource but fail
+        // to retrigger the InlineClientBundleGenerator that processes it.
+        binderPrintWriter.println("// .ui.xml template last modified: " + resource.getLastModified());
+
+        Document doc = getW3cDoc(logger, designTime, resourceOracle, templatePath, resource);
         designTime.rememberPathForElements(doc);
 
         uiBinderWriter.parseDocument(doc, binderPrintWriter);
@@ -208,14 +206,8 @@ public class UiBinderGenerator extends Generator {
     }
 
     private Document getW3cDoc(MortalLogger logger, DesignTimeUtils designTime,
-            ResourceOracle resourceOracle, String templatePath)
+            ResourceOracle resourceOracle, String templatePath, Resource resource)
             throws UnableToCompleteException {
-
-        Resource resource = resourceOracle.getResourceMap().get(templatePath);
-        if (null == resource) {
-            logger.die("Unable to find resource: " + templatePath);
-        }
-
         Document doc = null;
         try {
             String content = designTime.getTemplateContent(templatePath);
@@ -234,11 +226,20 @@ public class UiBinderGenerator extends Generator {
         return doc;
     }
 
+    private Resource getTemplateResource(MortalLogger logger, String templatePath,
+            ResourceOracle resourceOracle) throws UnableToCompleteException {
+        Resource resource = resourceOracle.getResource(templatePath);
+        if (null == resource) {
+            logger.die("Unable to find resource: " + templatePath);
+        }
+        return resource;
+    }
+
     private Boolean useLazyWidgetBuilders(MortalLogger logger, PropertyOracle propertyOracle) {
         Boolean rtn = extractConfigProperty(logger, propertyOracle, LAZY_WIDGET_BUILDERS_PROPERTY, true);
         if (!gaveLazyBuildersWarning && !rtn) {
             logger.warn("Configuration property %s is false. Deprecated code generation is in play. " +
-                    "This property will soon become a no-op.",
+                            "This property will soon become a no-op.",
                     LAZY_WIDGET_BUILDERS_PROPERTY);
             gaveLazyBuildersWarning = true;
         }
@@ -251,8 +252,8 @@ public class UiBinderGenerator extends Generator {
 
         if (!gaveSafeHtmlWarning && !rtn) {
             logger.warn("Configuration property %s is false! UiBinder SafeHtml integration is off, "
-                    + "leaving your users more vulnerable to cross-site scripting attacks. This property " +
-                    "will soon become a no-op, and SafeHtml integration will always be on.",
+                            + "leaving your users more vulnerable to cross-site scripting attacks. This property " +
+                            "will soon become a no-op, and SafeHtml integration will always be on.",
                     XSS_SAFE_CONFIG_PROPERTY);
             gaveSafeHtmlWarning = true;
         }
