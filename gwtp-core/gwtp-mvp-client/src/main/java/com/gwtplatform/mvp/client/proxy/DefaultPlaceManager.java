@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client.proxy;
 import javax.inject.Inject;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.place.shared.PlaceHistoryHandler.DefaultHistorian;
+import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
@@ -62,7 +62,7 @@ public class DefaultPlaceManager extends PlaceManagerImpl {
             @UnauthorizedPlace String unauthorizedPlaceNameToken) {
         this(eventBus, tokenFormatter, defaultPlaceNameToken,
                 errorPlaceNameToken, unauthorizedPlaceNameToken,
-                (DefaultHistorian) GWT.create(DefaultHistorian.class));
+                (Historian) GWT.create(Historian.class));
     }
 
     @Inject
@@ -71,7 +71,7 @@ public class DefaultPlaceManager extends PlaceManagerImpl {
                                @DefaultPlace String defaultPlaceNameToken,
                                @ErrorPlace String errorPlaceNameToken,
                                @UnauthorizedPlace String unauthorizedPlaceNameToken,
-                               DefaultHistorian historian) {
+                               Historian historian) {
         super(eventBus, tokenFormatter, historian);
 
         defaultPlaceRequest = new PlaceRequest.Builder().nameToken(defaultPlaceNameToken).build();
