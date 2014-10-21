@@ -23,7 +23,6 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.place.shared.PlaceHistoryHandler.DefaultHistorian;
 import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
@@ -58,7 +57,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
     @Deprecated
     public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
-        this(eventBus, tokenFormatter, (Historian) GWT.create(DefaultHistorian.class));
+        this(eventBus, tokenFormatter, (Historian) GWT.create(Historian.class));
     }
 
     public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter, Historian historian) {
