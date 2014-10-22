@@ -56,4 +56,8 @@
     <generate-with class="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator">
         <when-type-assignable class="com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry"/>
     </generate-with>
+    
+    <replace-with class="com.google.gwt.place.shared.PlaceHistoryHandler.DefaultHistorian">
+        <when-type-assignable class="com.google.gwt.place.shared.PlaceHistoryHandler.Historian" />
+    </replace-with>
 </module>
