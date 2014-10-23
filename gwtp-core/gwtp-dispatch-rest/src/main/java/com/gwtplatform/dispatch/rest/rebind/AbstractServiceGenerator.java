@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Provider;
@@ -57,11 +56,13 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    protected void mergeTemplate(PrintWriter printWriter, String velocityTemplate, String implName)
+    protected boolean mergeTemplate(String velocityTemplate, String implName)
             throws UnableToCompleteException {
-        super.mergeTemplate(printWriter, velocityTemplate, implName);
-
-        generateDelegate();
+        if (super.mergeTemplate(velocityTemplate, implName)) {
+            generateDelegate();
+            return true;
+        }
+        return false;
     }
 
     @Override

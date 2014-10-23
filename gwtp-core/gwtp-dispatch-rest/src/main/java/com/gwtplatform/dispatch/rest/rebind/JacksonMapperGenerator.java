@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
-
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -55,20 +53,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator {
         implName = implName.replaceAll("[ ,<>\\.\\?]", "_");
         implName += "Mapper";
 
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-
-        if (printWriter != null) {
-            try {
-                mergeTemplate(printWriter, TEMPLATE, implName);
-            } catch (Exception e) {
-                getLogger().die(e.getMessage());
-            } finally {
-                printWriter.close();
-            }
-        } else {
-            getLogger().debug("Jackson Mapper already generated. Returning.");
-        }
-
+        mergeTemplate(TEMPLATE, implName);
         return implName;
     }
 

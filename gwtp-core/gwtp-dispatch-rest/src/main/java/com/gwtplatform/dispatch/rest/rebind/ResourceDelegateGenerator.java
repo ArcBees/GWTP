@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,15 +60,7 @@ public class ResourceDelegateGenerator extends AbstractVelocityGenerator {
 
     public void generate() throws UnableToCompleteException {
         String implName = serviceBinding.getServiceInterface() + SUFFIX;
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-
-        if (printWriter != null) {
-            try {
-                mergeTemplate(printWriter, TEMPLATE, implName);
-            } finally {
-                printWriter.close();
-            }
-        }
+        mergeTemplate(TEMPLATE, implName);
     }
 
     @Override
