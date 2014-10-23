@@ -65,17 +65,33 @@ public abstract class AbstractVelocityGenerator {
         return typeOracle;
     }
 
-    protected void mergeTemplate(PrintWriter printWriter, String velocityTemplate, String implName)
+    /**
+     * @param velocityTemplate
+     * @param implName
+     * @return false if the template was not merged;
+     * @throws UnableToCompleteException
+     */
+    protected boolean mergeTemplate(String velocityTemplate, String implName)
             throws UnableToCompleteException {
-        VelocityContext velocityContext = velocityContextProvider.get();
-        velocityContext.put("lf", "\n");
-        velocityContext.put("implName", implName);
-        velocityContext.put("package", getPackage());
+        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
+        if (printWriter != null) {
+            try {
+                VelocityContext velocityContext = velocityContextProvider.get();
+                velocityContext.put("lf", "\n");
+                velocityContext.put("implName", implName);
+                velocityContext.put("package", getPackage());
 
-        populateVelocityContext(velocityContext);
+                populateVelocityContext(velocityContext);
 
-        velocityEngine.mergeTemplate(velocityTemplate, "UTF-8", velocityContext, printWriter);
-        generatorUtil.closeDefinition(printWriter);
+                velocityEngine.mergeTemplate(velocityTemplate, "UTF-8", velocityContext, printWriter);
+                generatorUtil.closeDefinition(printWriter);
+            } finally {
+                printWriter.close();
+            }
+            return true;
+        }
+        getLogger().debug(implName + "already generated. Returning.");
+        return false;
     }
 
     protected abstract String getPackage();

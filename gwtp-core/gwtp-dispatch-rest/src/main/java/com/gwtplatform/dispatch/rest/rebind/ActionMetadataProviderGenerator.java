@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,18 +54,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
 
     public void generate() throws UnableToCompleteException {
         String implName = ActionMetadataProvider.class.getSimpleName() + SUFFIX;
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-        if (printWriter != null) {
-            try {
-                mergeTemplate(printWriter, TEMPLATE, implName);
-            } catch (Exception e) {
-                getLogger().die(e.getMessage());
-            } finally {
-                printWriter.close();
-            }
-        } else {
-            getLogger().debug("Action metadata provider already generated. Returning.");
-        }
+        mergeTemplate(TEMPLATE, implName);
     }
 
     @Subscribe
