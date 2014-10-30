@@ -20,16 +20,13 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A simple implementation of {@link View} that simply disregard every call to
- * {@link #setInSlot(Object, IsWidget)}, {@link #addToSlot(Object, IsWidget)}, and
- * {@link #removeFromSlot(Object, IsWidget)}.
+ * A simple implementation of {@link View} that simply disregard every call to {@link #setInSlot(Object, IsWidget)},
+ * {@link #addToSlot(Object, IsWidget)}, and {@link #removeFromSlot(Object, IsWidget)}.
  * <p/>
- * Feel free not to inherit from this if you need another base class (such as
- * {@link com.google.gwt.user.client.ui.Composite}), but you will have to define
- * the above methods.
+ * Feel free not to inherit from this if you need another base class (such as {@link
+ * com.google.gwt.user.client.ui.Composite Composite}), but you will have to define the above methods.
  * <p/>
- * * <b>Important</b> call {@link #initWidget(Widget)} in your {@link com.gwtplatform.mvp.client.View}'s
- * constructor.
+ * * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link View}'s constructor.
  */
 public abstract class ViewImpl implements View {
     private Widget widget;
@@ -51,7 +48,11 @@ public abstract class ViewImpl implements View {
         return widget;
     }
 
-    protected void initWidget(Widget widget) {
-        this.widget = widget;
+    protected void initWidget(IsWidget widget) {
+        if (widget == null) {
+            throw new NullPointerException("Widget cannot be null.");
+        }
+
+        this.widget = widget.asWidget();
     }
 }
