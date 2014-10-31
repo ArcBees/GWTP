@@ -120,7 +120,7 @@ public class InterceptorContext {
          * @return this {@link Builder} object.
          */
         public Builder anyQueryCount(boolean anyQueryCount) {
-            this.anyHttpMethod = anyHttpMethod;
+            this.anyQueryCount = anyQueryCount;
             return this;
         }
 
@@ -232,8 +232,12 @@ public class InterceptorContext {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         InterceptorContext that = (InterceptorContext) o;
         RestAction action;

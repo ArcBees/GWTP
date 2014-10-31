@@ -32,6 +32,7 @@ import java.util.List;
  */
 @Deprecated
 public class BatchResult implements Result {
+    private static final long serialVersionUID = 1L;
 
     private List<Result> results;
 

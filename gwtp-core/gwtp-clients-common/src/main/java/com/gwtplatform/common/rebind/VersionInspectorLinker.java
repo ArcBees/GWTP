@@ -196,7 +196,8 @@ public class VersionInspectorLinker extends Linker {
         String response;
 
         try {
-            PrintWriter output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+            PrintWriter output = new PrintWriter(new BufferedWriter(
+                    new OutputStreamWriter(socket.getOutputStream(), "UTF-8")));
             output.println("GET " + maven.getFile() + " HTTP/1.1");
             output.println("Host: " + maven.getHost());
             output.println("Connection: close");
@@ -212,15 +213,15 @@ public class VersionInspectorLinker extends Linker {
     }
 
     private String readText(InputStream stream) throws IOException {
-        String response = "";
-        BufferedReader input = new BufferedReader(new InputStreamReader(stream));
+        BufferedReader input = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
 
+        StringBuilder response = new StringBuilder();
         String inputLine;
         while ((inputLine = input.readLine()) != null) {
-            response += inputLine;
+            response.append(inputLine);
         }
 
-        return extractResponseContent(response);
+        return extractResponseContent(response.toString());
     }
 
     private String extractResponseContent(String response) {

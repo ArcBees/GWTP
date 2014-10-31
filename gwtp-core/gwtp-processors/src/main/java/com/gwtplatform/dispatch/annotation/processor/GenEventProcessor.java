@@ -47,6 +47,8 @@ public class GenEventProcessor extends GenProcessor {
             String eventElementSimpleName = reflection.getSimpleClassName();
             String eventSimpleName = eventElementSimpleName + "Event";
             String eventClassName = reflection.getClassName() + "Event";
+
+            @SuppressWarnings("resource")
             Writer sourceWriter = getEnvironment().getFiler().createSourceFile(eventClassName,
                     eventElement).openWriter();
             writer = new BuilderGenerationHelper(sourceWriter);

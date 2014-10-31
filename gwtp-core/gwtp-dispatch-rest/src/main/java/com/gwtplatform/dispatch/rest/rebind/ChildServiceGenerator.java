@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -70,14 +69,7 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
 
     public ServiceBinding generate() throws UnableToCompleteException {
         String implName = getSuperTypeName() + SUFFIX;
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-
-        if (printWriter != null) {
-            doGenerate(implName, printWriter);
-        } else {
-            getLogger().debug("Sub-service already generated. Returning.");
-        }
-
+        doGenerate(implName);
         return getServiceBinding();
     }
 
@@ -111,12 +103,12 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         return parent.getSuperTypeName() + "_" + methodIndex + "_" + service.getName();
     }
 
-    private void doGenerate(String implName, PrintWriter printWriter) throws UnableToCompleteException {
+    private boolean doGenerate(String implName) throws UnableToCompleteException {
         Collections.addAll(parameters, serviceMethod.getParameters());
 
         generateMethods();
 
-        mergeTemplate(printWriter, TEMPLATE, implName);
+        return mergeTemplate(TEMPLATE, implName);
     }
 
     private boolean isSecured() {

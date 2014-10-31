@@ -62,7 +62,6 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
         this.httpMethod = httpMethod;
         this.rawServicePath = rawServicePath;
-        this.defaultDateFormat = DateFormat.DEFAULT;
         this.defaultDateFormat = defaultDateFormat;
     }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,14 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rpc.server;
+package com.gwtplatform.crawlerservice.server;
 
-import com.gwtplatform.dispatch.shared.ActionException;
-
-public class ActionExceptionThrownByValidator extends ActionException {
+public class InvalidKeyException extends Exception {
     private static final long serialVersionUID = 1L;
 
-    public ActionExceptionThrownByValidator(Throwable cause) {
-        super("", cause);
+    public InvalidKeyException(String message) {
+        super(message);
     }
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.gwt.http.client.URL;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -336,12 +337,12 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
         // Given
         ArrayList<String> testPlaceTokens = new ArrayList<String>();
 
-        for (String key : params.keySet()) {
+        for (Entry<String, String> entry : params.entrySet()) {
             // Escape separators
             String placeToken = "token;"
-                    + tokenFormatter.customEscape(key)
+                    + tokenFormatter.customEscape(entry.getKey())
                     + "="
-                    + tokenFormatter.customEscape(params.get(key));
+                    + tokenFormatter.customEscape(entry.getValue());
 
             testPlaceTokens.add(placeToken);
         }

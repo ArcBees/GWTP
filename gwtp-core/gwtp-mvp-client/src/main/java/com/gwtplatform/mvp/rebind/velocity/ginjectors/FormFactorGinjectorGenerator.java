@@ -57,7 +57,11 @@ public class FormFactorGinjectorGenerator extends AbstractVelocityGenerator {
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE, implName);
 
         if (printWriter != null) {
-            mergeTemplate(printWriter, velocityTemplate);
+            try {
+                mergeTemplate(printWriter, velocityTemplate);
+            } finally {
+                printWriter.close();
+            }
         }
 
         return PACKAGE + "." + implName;

@@ -57,10 +57,14 @@ public class VelocityGenerator extends Generator {
             return typeName + SUFFIX;
         }
 
-        generateClasses();
-        generateEntryPoint(treeLogger, generatorContext, printWriter);
+        try {
+            generateClasses();
+            generateEntryPoint(treeLogger, generatorContext, printWriter);
 
-        return typeName + SUFFIX;
+            return typeName + SUFFIX;
+        } finally {
+            printWriter.close();
+        }
     }
 
     private void resetFields(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)

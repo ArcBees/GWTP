@@ -16,8 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -140,16 +140,9 @@ public class ActionGenerator extends AbstractVelocityGenerator {
 
     public ActionBinding generate() throws UnableToCompleteException {
         String implName = getSuperTypeName() + SUFFIX;
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-
-        if (printWriter != null) {
-            doGenerate(implName, printWriter);
-
+        if (doGenerate(implName)) {
             registerMetadata();
-        } else {
-            getLogger().debug("Action already generated. Returning.");
         }
-
         return createActionBinding(implName);
     }
 
@@ -248,14 +241,14 @@ public class ActionGenerator extends AbstractVelocityGenerator {
         }
     }
 
-    private void doGenerate(String implName, PrintWriter printWriter) throws UnableToCompleteException {
+    private boolean doGenerate(String implName) throws UnableToCompleteException {
         verifyReturnType();
 
         retrieveHttpMethod();
         retrieveParameterConfig();
         retrieveBodyConfig();
 
-        mergeTemplate(printWriter, TEMPLATE, implName);
+        return mergeTemplate(TEMPLATE, implName);
     }
 
     private void verifyReturnType() throws UnableToCompleteException {

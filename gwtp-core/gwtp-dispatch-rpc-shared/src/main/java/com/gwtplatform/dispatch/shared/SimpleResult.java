@@ -31,6 +31,8 @@ package com.gwtplatform.dispatch.shared;
  */
 @Deprecated
 public class SimpleResult<T> extends AbstractSimpleResult<T> {
+    private static final long serialVersionUID = 1L;
+
     SimpleResult() {
     }
 

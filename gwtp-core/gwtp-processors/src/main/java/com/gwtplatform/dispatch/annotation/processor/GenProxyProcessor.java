@@ -79,6 +79,7 @@ public class GenProxyProcessor extends GenProcessor {
             String proxySimpleName = proxyElementSimpleName + "Proxy";
             String proxyClassName = preparedProxyElementClassName + "Proxy";
 
+            @SuppressWarnings("resource")
             Writer sourceWriter = getEnvironment().getFiler().createSourceFile(proxyClassName,
                     proxyElement).openWriter();
             writer = new InterfaceGenerationHelper(sourceWriter);

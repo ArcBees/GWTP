@@ -41,11 +41,11 @@ public class CachedPage extends DatastoreObject {
     }
 
     public void setFetchDate(Date fetchDate) {
-        this.fetchDate = fetchDate;
+        this.fetchDate = new Date(fetchDate.getTime());
     }
 
     public Date getFetchDate() {
-        return fetchDate;
+        return new Date(fetchDate.getTime());
     }
 
     public void setFetchInProgress(boolean fetchInProgress) {

@@ -94,7 +94,7 @@ public class LazyActionHandlerValidatorRegistryImpl implements
             }
         }
 
-        return (ActionHandlerValidatorInstance) actionHandlerValidatorInstance;
+        return actionHandlerValidatorInstance;
     }
 
     @Override

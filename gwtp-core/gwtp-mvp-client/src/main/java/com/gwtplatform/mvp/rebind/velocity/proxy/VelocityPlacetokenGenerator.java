@@ -61,7 +61,11 @@ public class VelocityPlacetokenGenerator extends AbstractVelocityGenerator {
     public String generate() throws Exception {
         PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE_NAME, SIMPLE_NAME);
         if (printWriter != null) {
-            mergeTemplate(printWriter, TEMPLATE);
+            try {
+                mergeTemplate(printWriter, TEMPLATE);
+            } finally {
+                printWriter.close();
+            }
         }
 
         return FULL_NAME;

@@ -33,6 +33,8 @@ import java.util.List;
  */
 @Deprecated
 public class MultipleResult<T> implements Result {
+    private static final long serialVersionUID = 1L;
+
     private List<T> value;
 
     public MultipleResult(List<T> value) {

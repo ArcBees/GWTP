@@ -108,9 +108,8 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
                         dispatchHooks.onFailure(getAction(), caught, true);
                     }
 
-                    @SuppressWarnings("unchecked")
                     public void onSuccess(Void nothing) {
-                        RpcDispatchUndoCall.this.onExecuteSuccess((R) result);
+                        RpcDispatchUndoCall.this.onExecuteSuccess(result);
 
                         dispatchHooks.onSuccess(getAction(), result, true);
                     }

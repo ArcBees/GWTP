@@ -40,14 +40,14 @@ public interface DispatchServiceAsync {
      *
      * @see com.gwtplatform.dispatch.rpc.shared.DispatchService#execute
      */
-    Request execute(String cookieSentByRPC, Action<?> action,
-            AsyncCallback<Result> callback);
+    <R extends Result> Request execute(String cookieSentByRPC, Action<R> action,
+            AsyncCallback<R> callback);
 
     /**
      * This method is called client-side whenever a previous executed action need to be undone.
      *
      * @see com.gwtplatform.dispatch.rpc.shared.DispatchService#undo
      */
-    Request undo(String cookieSentByRPC, Action<?> action, Result result,
+    <R extends Result> Request undo(String cookieSentByRPC, Action<R> action, R result,
             AsyncCallback<Void> callback);
 }
