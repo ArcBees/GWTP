@@ -40,7 +40,7 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
         void selectTab(int index);
     }
 
-    private List<NavigationTab> elements = new LinkedList<>();
+    private final List<NavigationTab> elements;
     private final PlaceManager placeManager;
 
     @Inject
@@ -49,6 +49,7 @@ public class NavigationTabPresenter extends PresenterWidget<NavigationTabPresent
                            PlaceManager placeManager) {
         super(eventBus, view);
 
+        elements = new LinkedList<>();
         this.placeManager = placeManager;
 
         getView().setUiHandlers(this);

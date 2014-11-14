@@ -20,7 +20,6 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
@@ -30,7 +29,8 @@ public class RestDispatchAsync implements RestDispatch {
     private final RestDispatchCallFactory callFactory;
 
     @Inject
-    RestDispatchAsync(RestDispatchCallFactory callFactory) {
+    protected RestDispatchAsync(
+            RestDispatchCallFactory callFactory) {
         this.callFactory = callFactory;
     }
 

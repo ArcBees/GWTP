@@ -18,6 +18,7 @@ package com.gwtplatform.crawlerservice.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +49,7 @@ import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
 @Singleton
 public class CrawlServiceServlet extends HttpServlet {
 
-    private class SyncAllAjaxController extends NicelyResynchronizingAjaxController {
+    private static class SyncAllAjaxController extends NicelyResynchronizingAjaxController {
         private static final long serialVersionUID = 1L;
 
         @Override
@@ -91,25 +92,39 @@ public class CrawlServiceServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out = null;
         try {
-            boolean keyValid = validateKey(req, resp);
+            out = response.getWriter();
+            validateKey(request);
 
-            if (keyValid) {
-                out = resp.getWriter();
-
-                String url = Strings.nullToEmpty(req.getParameter("url"));
+            String url = request.getParameter("url");
+            if (!Strings.isNullOrEmpty(url)) {
                 url = URLDecoder.decode(url, CHAR_ENCODING);
+                response.setCharacterEncoding(CHAR_ENCODING);
+                response.setHeader("Content-Type", "text/plain; charset=" + CHAR_ENCODING);
 
-                if (!url.isEmpty()) {
-                    renderResponse(url, resp);
+                List<Key<CachedPage>> keys = cachedPageDao.listKeysByProperty("url", url);
+                Map<Key<CachedPage>, CachedPage> deprecatedPages = cachedPageDao.get(keys);
+
+                Date currDate = new Date();
+
+                CachedPage matchingPage = extractMatchingPage(deprecatedPages, currDate);
+                cachedPageDao.deleteKeys(deprecatedPages.keySet());
+
+                if (needToFetchPage(matchingPage, currDate, out)) {
+                    CachedPage cachedPage = createPlaceholderPage(url, currDate);
+                    String renderedHtml = renderPage(url);
+                    storeFetchedPage(cachedPage, renderedHtml);
+                    out.println(renderedHtml);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } catch (InvalidKeyException invalidKeyException) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            out.println(invalidKeyException.getMessage());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         } finally {
             if (out != null) {
                 out.close();
@@ -117,50 +132,18 @@ public class CrawlServiceServlet extends HttpServlet {
         }
     }
 
-    private boolean validateKey(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        PrintWriter output = response.getWriter();
+    private void validateKey(HttpServletRequest request)
+            throws InvalidKeyException, UnsupportedEncodingException {
         String receivedKey = request.getParameter("key");
-        boolean keyIsValid = false;
 
         if (Strings.isNullOrEmpty(receivedKey)) {
-            output.println("No service key attached to the request.");
+            throw new InvalidKeyException("No service key attached to the request.");
         } else {
             String decodedKey = URLDecoder.decode(receivedKey, CHAR_ENCODING);
 
             if (!key.equals(decodedKey)) {
-                output.println("The service key received does not match the desired key.");
-            } else {
-                keyIsValid = true;
+                throw new InvalidKeyException("The service key received does not match the desired key.");
             }
-        }
-
-        if (!keyIsValid) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        }
-
-        return keyIsValid;
-    }
-
-    private void renderResponse(String url, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-
-        response.setCharacterEncoding(CHAR_ENCODING);
-        response.setHeader("Content-Type", "text/plain; charset=" + CHAR_ENCODING);
-
-        List<Key<CachedPage>> keys = cachedPageDao.listKeysByProperty("url", url);
-        Map<Key<CachedPage>, CachedPage> deprecatedPages = cachedPageDao.get(keys);
-
-        Date currDate = new Date();
-
-        CachedPage matchingPage = extractMatchingPage(deprecatedPages, currDate);
-        cachedPageDao.deleteKeys(deprecatedPages.keySet());
-
-        if (needToFetchPage(matchingPage, currDate, out)) {
-            CachedPage cachedPage = createPlaceholderPage(url, currDate);
-            String renderedHtml = renderPage(url);
-            storeFetchedPage(cachedPage, renderedHtml);
-            out.println(renderedHtml);
         }
     }
 

@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -34,10 +33,10 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.type.ChildServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class ChildServiceGenerator extends AbstractServiceGenerator {
     private final List<JParameter> parameters;
@@ -70,14 +69,7 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
 
     public ServiceBinding generate() throws UnableToCompleteException {
         String implName = getSuperTypeName() + SUFFIX;
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-
-        if (printWriter != null) {
-            doGenerate(implName, printWriter);
-        } else {
-            getLogger().debug("Sub-service already generated. Returning.");
-        }
-
+        doGenerate(implName);
         return getServiceBinding();
     }
 
@@ -86,8 +78,8 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         if (serviceBinding == null) {
             String implName = getSuperTypeName() + SUFFIX;
 
-            serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service.getName(),
-                    serviceMethod.getName(), parameters);
+            serviceBinding = new ChildServiceBinding(path, getPackage(), implName, service, serviceMethod.getName(),
+                    parameters);
             serviceBinding.setSuperTypeName(getSuperTypeName());
             serviceBinding.setSecured(isSecured());
         }
@@ -111,12 +103,12 @@ public class ChildServiceGenerator extends AbstractServiceGenerator {
         return parent.getSuperTypeName() + "_" + methodIndex + "_" + service.getName();
     }
 
-    private void doGenerate(String implName, PrintWriter printWriter) throws UnableToCompleteException {
+    private boolean doGenerate(String implName) throws UnableToCompleteException {
         Collections.addAll(parameters, serviceMethod.getParameters());
 
         generateMethods();
 
-        mergeTemplate(printWriter, TEMPLATE, implName);
+        return mergeTemplate(TEMPLATE, implName);
     }
 
     private boolean isSecured() {

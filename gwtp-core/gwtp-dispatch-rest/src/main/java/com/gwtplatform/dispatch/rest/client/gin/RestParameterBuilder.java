@@ -33,19 +33,22 @@ public class RestParameterBuilder {
     private final String key;
     private final Set<HttpMethod> httpMethods = Sets.newEnumSet(Arrays.asList(HttpMethod.values()), HttpMethod.class);
 
-    RestParameterBuilder(RestDispatchAsyncModuleBuilder moduleBuilder,
-                         Multimap<HttpMethod, RestParameter> targetMap,
-                         String key) {
+    RestParameterBuilder(
+            RestDispatchAsyncModuleBuilder moduleBuilder,
+            Multimap<HttpMethod, RestParameter> targetMap,
+            String key) {
         this.moduleBuilder = moduleBuilder;
         this.targetMap = targetMap;
         this.key = key;
     }
 
     /**
-     * Define with which {@link HttpMethod} the parameter will be added. If none are specified, it will defaults to all.
+     * Define with which {@link HttpMethod} the parameter will be added. If none are specified, it will defaults to
+     * all.
      *
-     * @param httpMethod       an {@link HttpMethod} to link this parameter to.
+     * @param httpMethod an {@link HttpMethod} to link this parameter to.
      * @param otherHttpMethods more {@link HttpMethod}s to link this parameter to.
+     *
      * @return this builder instance.
      */
     public RestParameterBuilder toHttpMethods(HttpMethod httpMethod, HttpMethod... otherHttpMethods) {
@@ -61,6 +64,7 @@ public class RestParameterBuilder {
      * Define the value of this parameter.
      *
      * @param value The value for this parameter.
+     *
      * @return The module builder instance.
      */
     public RestDispatchAsyncModuleBuilder withValue(String value) {

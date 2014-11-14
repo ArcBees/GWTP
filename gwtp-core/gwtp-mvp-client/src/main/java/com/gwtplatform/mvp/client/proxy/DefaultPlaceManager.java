@@ -18,6 +18,8 @@ package com.gwtplatform.mvp.client.proxy;
 
 import javax.inject.Inject;
 
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
@@ -52,13 +54,25 @@ public class DefaultPlaceManager extends PlaceManagerImpl {
     private final PlaceRequest errorPlaceRequest;
     private final PlaceRequest unauthorizedPlaceRequest;
 
+    @Deprecated
+    public DefaultPlaceManager(EventBus eventBus,
+            TokenFormatter tokenFormatter,
+            @DefaultPlace String defaultPlaceNameToken,
+            @ErrorPlace String errorPlaceNameToken,
+            @UnauthorizedPlace String unauthorizedPlaceNameToken) {
+        this(eventBus, tokenFormatter, defaultPlaceNameToken,
+                errorPlaceNameToken, unauthorizedPlaceNameToken,
+                (Historian) GWT.create(Historian.class));
+    }
+
     @Inject
     public DefaultPlaceManager(EventBus eventBus,
                                TokenFormatter tokenFormatter,
                                @DefaultPlace String defaultPlaceNameToken,
                                @ErrorPlace String errorPlaceNameToken,
-                               @UnauthorizedPlace String unauthorizedPlaceNameToken) {
-        super(eventBus, tokenFormatter);
+                               @UnauthorizedPlace String unauthorizedPlaceNameToken,
+                               Historian historian) {
+        super(eventBus, tokenFormatter, historian);
 
         defaultPlaceRequest = new PlaceRequest.Builder().nameToken(defaultPlaceNameToken).build();
         errorPlaceRequest = new PlaceRequest.Builder().nameToken(errorPlaceNameToken).build();

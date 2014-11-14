@@ -164,7 +164,7 @@ public final class CrawlFilter implements Filter {
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                         connection.setConnectTimeout(10000);
                         connection.setReadTimeout(10000);
-                        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
                         String line;
                         line = reader.readLine();
                         if (!"FETCH_IN_PROGRESS".equals(line)) {

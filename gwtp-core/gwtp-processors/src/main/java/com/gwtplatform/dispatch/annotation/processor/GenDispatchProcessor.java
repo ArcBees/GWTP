@@ -66,6 +66,7 @@ public class GenDispatchProcessor extends GenProcessor {
 
             printMessage("Generating '" + dispatchActionClassName + "' from '" + dispatchElementSimpleName + "'.");
 
+            @SuppressWarnings("resource")
             Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchActionClassName,
                     dispatchElement).openWriter();
             writer = new BuilderGenerationHelper(sourceWriter);
@@ -131,6 +132,7 @@ public class GenDispatchProcessor extends GenProcessor {
 
             printMessage("Generating '" + dispatchResultClassName + "' from '" + dispatchElementSimpleName + "'.");
 
+            @SuppressWarnings("resource")
             Writer sourceWriter = getEnvironment().getFiler().createSourceFile(dispatchResultClassName,
                     dispatchElement).openWriter();
             writer = new BuilderGenerationHelper(sourceWriter);

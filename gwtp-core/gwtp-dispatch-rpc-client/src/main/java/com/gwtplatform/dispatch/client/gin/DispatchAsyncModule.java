@@ -31,6 +31,9 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  */
 @Deprecated
 public class DispatchAsyncModule extends AbstractDispatchAsyncModule {
+    /**
+     * Default builder.
+     */
     public static class Builder extends AbstractDispatchAsyncModule.Builder {
         @Override
         public DispatchAsyncModule build() {

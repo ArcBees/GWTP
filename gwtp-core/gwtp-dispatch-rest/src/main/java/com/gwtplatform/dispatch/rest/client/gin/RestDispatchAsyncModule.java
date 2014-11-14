@@ -34,15 +34,17 @@ import com.gwtplatform.dispatch.rest.client.GlobalHeaderParams;
 import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.RestBinding;
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
 import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
@@ -56,7 +58,7 @@ import com.gwtplatform.dispatch.rest.shared.RestParameter;
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     public static class Builder extends RestDispatchAsyncModuleBuilder {
     }
@@ -90,15 +92,23 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.getXsrfTokenHeaderName());
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.getRequestTimeoutMs());
         bindConstant().annotatedWith(DefaultDateFormat.class).to(builder.getDefaultDateFormat());
-        bindConstant().annotatedWith(GlobalHeaderParams.class)
-                .to(multimapJsonSerializer.serialize(builder.getGlobalHeaderParams()));
-        bindConstant().annotatedWith(GlobalQueryParams.class)
-                .to(multimapJsonSerializer.serialize(builder.getGlobalQueryParams()));
+
+        String globalHeaderParams = multimapJsonSerializer.serialize(builder.getGlobalHeaderParams());
+        bindConstant().annotatedWith(GlobalHeaderParams.class).to(globalHeaderParams);
+
+        String globalQueryParams = multimapJsonSerializer.serialize(builder.getGlobalQueryParams());
+        bindConstant().annotatedWith(GlobalQueryParams.class).to(globalQueryParams);
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
+
+        // Hooks
+        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+
+        // Interceptor Registry
+        bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
 
         // Serialization
         bind(Serialization.class).to(builder.getSerializationClass()).in(Singleton.class);
@@ -110,30 +120,30 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Provides
     @Singleton
     @GlobalHeaderParams
-    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams final String encodedParams) {
+    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams String encodedParams) {
         return decodeParameters(encodedParams);
     }
 
     @Provides
     @Singleton
     @GlobalQueryParams
-    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams final String encodedParams) {
+    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
         return decodeParameters(encodedParams);
     }
 
-    private Multimap<HttpMethod, RestParameter> decodeParameters(final String encodedParameters) {
-        final Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
+    private Multimap<HttpMethod, RestParameter> decodeParameters(String encodedParameters) {
+        Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
 
-        final JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
-        for (final String method : json.keySet()) {
-            final HttpMethod httpMethod = HttpMethod.valueOf(method);
-            final JSONArray jsonParameters = json.get(method).isArray();
+        JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
+        for (String method : json.keySet()) {
+            HttpMethod httpMethod = HttpMethod.valueOf(method);
+            JSONArray jsonParameters = json.get(method).isArray();
 
             for (int i = 0; i < jsonParameters.size(); ++i) {
-                final JSONObject jsonParameter = jsonParameters.get(i).isObject();
-                final String key = jsonParameter.get("key").isString().stringValue();
-                final String value = jsonParameter.get("value").isString().stringValue();
-                final RestParameter parameter = new RestParameter(key, value);
+                JSONObject jsonParameter = jsonParameters.get(i).isObject();
+                String key = jsonParameter.get("key").isString().stringValue();
+                String value = jsonParameter.get("value").isString().stringValue();
+                RestParameter parameter = new RestParameter(key, value);
 
                 parameters.put(httpMethod, parameter);
             }

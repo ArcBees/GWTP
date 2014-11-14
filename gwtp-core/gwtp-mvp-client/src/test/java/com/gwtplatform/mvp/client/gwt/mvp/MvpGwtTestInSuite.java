@@ -93,6 +93,26 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         });
     }
 
+    public void testPopupViewCloseHandlerIsCalledWhenHidden() {
+        delayTestFinish(1000);
+        runTest(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                PopupPresenterTestUtilGwt popupPresenter = ginjector.getPopupPresenter().get();
+
+                final PopupViewCloseHandler closeHandler = new PopupViewCloseHandler() {
+                    @Override
+                    public void onClose() {
+                        finishTest();
+                    }
+                };
+
+                popupPresenter.getView().setCloseHandler(closeHandler);
+                popupPresenter.getView().hide();
+             }
+        });
+    }
+
     /**
      * Verify multiple name tokens.
      */

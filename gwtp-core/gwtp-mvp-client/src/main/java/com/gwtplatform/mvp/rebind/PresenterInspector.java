@@ -26,7 +26,6 @@ import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
@@ -92,8 +91,9 @@ public class PresenterInspector {
 
         findGetPresenterMethodName();
 
-        classInspector.collectStaticAnnotatedFields(classCollection.typeClass,
-                classCollection.revealContentHandlerClass, ContentSlot.class, contentSlots);
+        /*classInspector.collectStaticAnnotatedFields(classCollection.typeClass,
+                null, ContentSlot.class, contentSlots);*/
+        classInspector.collectStaticFields(classCollection.typeClass, contentSlots);
 
         return true;
     }

@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -30,9 +29,9 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.inject.assistedinject.Assisted;
-import com.gwtplatform.dispatch.rest.client.NoXsrfHeader;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class ServiceGenerator extends AbstractServiceGenerator {
     private final JClassType service;
@@ -57,14 +56,7 @@ public class ServiceGenerator extends AbstractServiceGenerator {
 
     public ServiceBinding generate() throws UnableToCompleteException {
         String implName = service.getName() + SUFFIX;
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-
-        if (printWriter != null) {
-            doGenerate(implName, printWriter);
-        } else {
-            getLogger().debug("Service already generated. Returning.");
-        }
-
+        doGenerate(implName);
         return getServiceBinding();
     }
 
@@ -81,7 +73,7 @@ public class ServiceGenerator extends AbstractServiceGenerator {
         if (serviceBinding == null) {
             String implName = service.getName() + SUFFIX;
 
-            serviceBinding = new ServiceBinding(path, getPackage(), implName, service.getName());
+            serviceBinding = new ServiceBinding(path, getPackage(), implName, service);
             serviceBinding.setSuperTypeName(service.getName());
             serviceBinding.setSecured(!service.isAnnotationPresent(NoXsrfHeader.class));
         }
@@ -89,9 +81,9 @@ public class ServiceGenerator extends AbstractServiceGenerator {
         return serviceBinding;
     }
 
-    private void doGenerate(String implName, PrintWriter printWriter) throws UnableToCompleteException {
+    private boolean doGenerate(String implName) throws UnableToCompleteException {
         generateMethods();
 
-        mergeTemplate(printWriter, TEMPLATE, implName);
+        return mergeTemplate(TEMPLATE, implName);
     }
 }

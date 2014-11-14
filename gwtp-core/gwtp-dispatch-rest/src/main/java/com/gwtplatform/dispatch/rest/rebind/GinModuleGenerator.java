@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
-
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -52,12 +50,7 @@ public class GinModuleGenerator extends AbstractVelocityGenerator {
 
     public String generate() throws UnableToCompleteException {
         String implName = DEFAULT_GIN_MODULE;
-
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(PACKAGE, implName);
-        if (printWriter != null) {
-            mergeTemplate(printWriter, VELOCITY_TEMPLATE, implName);
-        }
-
+        mergeTemplate(VELOCITY_TEMPLATE, implName);
         return PACKAGE + "." + implName;
     }
 

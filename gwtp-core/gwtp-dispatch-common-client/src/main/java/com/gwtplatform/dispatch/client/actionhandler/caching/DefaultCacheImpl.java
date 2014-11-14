@@ -23,7 +23,10 @@ import com.google.common.collect.Maps;
 
 /**
  * Default Implementation for {@link Cache}, backed by an {@link java.util.HashMap}.
+ *
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.DefaultCacheImpl}
  */
+@Deprecated
 public class DefaultCacheImpl implements Cache {
     private static class CacheValue {
         private final Object value;
@@ -38,7 +41,7 @@ public class DefaultCacheImpl implements Cache {
             return this.value;
         }
 
-        public long getLastUpateTime() {
+        public long getLastUpdateTime() {
             return this.lastUpdateTime;
         }
     }
@@ -86,7 +89,7 @@ public class DefaultCacheImpl implements Cache {
         if (this.autoExpireTimeInMs >= 0) {
             // Check if expired
             long now = new Date().getTime();
-            if (cacheValue.getLastUpateTime() + this.autoExpireTimeInMs < now) {
+            if (cacheValue.getLastUpdateTime() + this.autoExpireTimeInMs < now) {
                 // Expired, remove
                 remove(key);
                 return null;
@@ -127,7 +130,7 @@ public class DefaultCacheImpl implements Cache {
         CacheValue value = map.get(key);
 
         if (value != null) {
-            return value.getLastUpateTime();
+            return value.getLastUpdateTime();
         } else {
             return -1;
         }

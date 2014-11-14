@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Provider;
 
@@ -80,25 +81,28 @@ public class GinjectorGenerator extends AbstractGenerator {
         if (printWriter == null) {
             return typeName;
         }
+        try {
+            PresenterDefinitions presenterDefinitions = new PresenterDefinitions();
+            findAllPresenters(presenterDefinitions);
 
-        PresenterDefinitions presenterDefinitions = new PresenterDefinitions();
-        findAllPresenters(presenterDefinitions);
+            ClassSourceFileComposerFactory composer = initComposer();
+            writeMandatoryGetterImports(composer);
+            writePresenterImports(composer, presenterDefinitions);
 
-        ClassSourceFileComposerFactory composer = initComposer();
-        writeMandatoryGetterImports(composer);
-        writePresenterImports(composer, presenterDefinitions);
+            SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
+            writeMandatoryGetter(sourceWriter);
+            writePresentersGetter(sourceWriter, presenterDefinitions);
+            writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
 
-        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
-        writeMandatoryGetter(sourceWriter);
-        writePresentersGetter(sourceWriter, presenterDefinitions);
-        writeBundleGetters(sourceWriter, presenterDefinitions.getCodeSplitBundlePresenters(), generatorContext);
+            Injector injector = Guice.createInjector(new RebindModule(new Logger(treeLogger), generatorContext));
+            writeFormFactors(injector);
 
-        Injector injector = Guice.createInjector(new RebindModule(new Logger(treeLogger), generatorContext));
-        writeFormFactors(injector);
+            closeDefinition(sourceWriter);
 
-        closeDefinition(sourceWriter);
-
-        return DEFAULT_FQ_NAME;
+            return DEFAULT_FQ_NAME;
+        } finally {
+            printWriter.close();
+        }
     }
 
     private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
@@ -212,10 +216,10 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     private void writeBundleGetters(SourceWriter sourceWriter, Map<String, List<JClassType>> bundles,
             GeneratorContext generatorContext) throws UnableToCompleteException {
-        for (String bundle : bundles.keySet()) {
-            providerBundleGenerator.setPresenters(bundles.get(bundle));
+        for (Entry<String, List<JClassType>> entry : bundles.entrySet()) {
+            providerBundleGenerator.setPresenters(entry.getValue());
             providerBundleGenerator.setPackageName(getPackageName());
-            String bundleName = providerBundleGenerator.generate(getTreeLogger(), generatorContext, bundle);
+            String bundleName = providerBundleGenerator.generate(getTreeLogger(), generatorContext, entry.getKey());
             sourceWriter.println();
             sourceWriter.println(String.format(GETTER_PROVIDER_METHOD, AsyncProvider.class.getSimpleName(), bundleName,
                     getSimpleNameFromTypeName(bundleName)));

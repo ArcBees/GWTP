@@ -22,7 +22,6 @@ import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.common.base.Strings;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
@@ -34,7 +33,7 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
     private final Serialization serialization;
 
     @Inject
-    DefaultRestResponseDeserializer(
+    protected DefaultRestResponseDeserializer(
             ActionMetadataProvider metadataProvider,
             Serialization serialization) {
         this.metadataProvider = metadataProvider;

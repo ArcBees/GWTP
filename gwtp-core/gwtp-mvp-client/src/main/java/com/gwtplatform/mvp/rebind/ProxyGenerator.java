@@ -81,24 +81,28 @@ public class ProxyGenerator extends Generator {
             return generatedClassName;
         }
 
-        ProxyOutputter proxyOutputter = proxyOutputterFactory.create(proxyInterface);
+        try {
+            ProxyOutputter proxyOutputter = proxyOutputterFactory.create(proxyInterface);
 
-        // Start composing the class
-        ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(
-                packageName, implClassName);
-        proxyOutputter.initComposerFactory(composerFactory);
+            // Start composing the class
+            ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(
+                    packageName, implClassName);
+            proxyOutputter.initComposerFactory(composerFactory);
 
-        // Get a source writer
-        SourceWriter writer = composerFactory.createSourceWriter(ctx, printWriter);
+            // Get a source writer
+            SourceWriter writer = composerFactory.createSourceWriter(ctx, printWriter);
 
-        proxyOutputter.writeFields(writer);
-        proxyOutputter.writeInnerClasses(writer);
-        proxyOutputter.writeConstructor(writer, implClassName, true);
-        proxyOutputter.writeMethods(writer);
+            proxyOutputter.writeFields(writer);
+            proxyOutputter.writeInnerClasses(writer);
+            proxyOutputter.writeConstructor(writer, implClassName, true);
+            proxyOutputter.writeMethods(writer);
 
-        writer.commit(logger);
+            writer.commit(logger);
 
-        return generatedClassName;
+            return generatedClassName;
+        } finally {
+            printWriter.close();
+        }
     }
 
 }

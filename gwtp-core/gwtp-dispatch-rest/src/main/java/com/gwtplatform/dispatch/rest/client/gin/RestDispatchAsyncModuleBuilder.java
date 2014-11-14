@@ -19,9 +19,13 @@ package com.gwtplatform.dispatch.rest.client.gin;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
-import com.gwtplatform.dispatch.rest.client.DateFormat;
+import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
+import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRegistry;
+import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
@@ -47,6 +51,8 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private String defaultDateFormat = DateFormat.DEFAULT;
     private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
     private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
+    private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
+    private Class<? extends RestInterceptorRegistry> interceptorRegistry = DefaultRestInterceptorRegistry.class;
 
     /**
      * Initiate the creation of a global header parameter that will be attached to all requests.
@@ -54,7 +60,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @param key The key used for this parameter
      * @return the parameter builder instance
      */
-    public RestParameterBuilder addGlobalHeaderParam(final String key) {
+    public RestParameterBuilder addGlobalHeaderParam(String key) {
         return new RestParameterBuilder(this, globalHeaderParams, key);
     }
 
@@ -64,7 +70,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @param key The key used for this parameter
      * @return the parameter builder instance
      */
-    public RestParameterBuilder addGlobalQueryParam(final String key) {
+    public RestParameterBuilder addGlobalQueryParam(String key) {
         return new RestParameterBuilder(this, globalQueryParams, key);
     }
 
@@ -82,7 +88,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @param defaultDateFormat The pattern used to format dates.
      * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
      */
-    public RestDispatchAsyncModuleBuilder defaultDateFormat(final String defaultDateFormat) {
+    public RestDispatchAsyncModuleBuilder defaultDateFormat(String defaultDateFormat) {
         this.defaultDateFormat = defaultDateFormat;
         return this;
     }
@@ -111,6 +117,14 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return xsrfTokenHeaderName;
     }
 
+    public Class<? extends RestDispatchHooks> getDispatchHooks() {
+        return dispatchHooks;
+    }
+
+    public Class<? extends RestInterceptorRegistry> getInterceptorRegistry() {
+        return interceptorRegistry;
+    }
+
     /**
      * Specify the number of milliseconds to wait for a request to complete. If the timeout is reached,
      * {@link com.google.gwt.user.client.rpc.AsyncCallback#onFailure(Throwable) AsyncCallback#onFailure(Throwable)}
@@ -120,7 +134,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @param timeoutMs The maximum time to wait, in milliseconds, or {@code 0} for no timeout.
      * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
      */
-    public RestDispatchAsyncModuleBuilder requestTimeout(final int timeoutMs) {
+    public RestDispatchAsyncModuleBuilder requestTimeout(int timeoutMs) {
         this.requestTimeoutMs = timeoutMs;
         return this;
     }
@@ -132,7 +146,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @param serializationClass The {@link Serialization} implementation to use.
      * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
      */
-    public RestDispatchAsyncModuleBuilder serialization(final Class<? extends Serialization> serializationClass) {
+    public RestDispatchAsyncModuleBuilder serialization(Class<? extends Serialization> serializationClass) {
         this.serializationClass = serializationClass;
         return this;
     }
@@ -143,7 +157,7 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @deprecated See {@link #xsrfTokenHeaderName(String)}
      */
     @Deprecated
-    public RestDispatchAsyncModuleBuilder xcsrfTokenHeaderName(final String xsrfTokenHeaderName) {
+    public RestDispatchAsyncModuleBuilder xcsrfTokenHeaderName(String xsrfTokenHeaderName) {
         this.xsrfTokenHeaderName = xsrfTokenHeaderName;
         return this;
     }
@@ -154,9 +168,33 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
      * @param xsrfTokenHeaderName The XSRF token header name.
      * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
      */
-    public RestDispatchAsyncModuleBuilder xsrfTokenHeaderName(final String xsrfTokenHeaderName) {
+    public RestDispatchAsyncModuleBuilder xsrfTokenHeaderName(String xsrfTokenHeaderName) {
         this.xsrfTokenHeaderName = xsrfTokenHeaderName;
         return this;
     }
 
+    /**
+     * Supply your own implementation of {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks}.
+     * Default is {@link com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks}
+     *
+     * @param dispatchHooks The {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks} implementation.
+     * @return this {@link RestDispatchAsyncModuleBuilder} object.
+     */
+    public RestDispatchAsyncModuleBuilder dispatchHooks(Class<? extends RestDispatchHooks> dispatchHooks) {
+        this.dispatchHooks = dispatchHooks;
+        return this;
+    }
+
+    /**
+     * Specify an alternate REST interceptor registry.
+     *
+     * @param interceptorRegistry A {@link RestInterceptorRegistry} class.
+     *
+     * @return this {@link RestDispatchAsyncModuleBuilder builder} object.
+     */
+    public RestDispatchAsyncModuleBuilder interceptorRegistry(
+            Class<? extends RestInterceptorRegistry> interceptorRegistry) {
+        this.interceptorRegistry = interceptorRegistry;
+        return this;
+    }
 }

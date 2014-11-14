@@ -25,7 +25,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
-import com.gwtplatform.dispatch.client.DelagatingCallbackDispatchRequest;
+import com.gwtplatform.dispatch.client.DelegatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
 import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
@@ -48,18 +48,19 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * Flexibility of cache implementation to support custom caching
  * </li>
  * </ol>
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.AbstractCachingRpcInterceptor}
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.
  */
+@Deprecated
 public abstract class AbstractCachingClientActionHandler<A, R> extends AbstractClientActionHandler<A, R> {
     private final Cache cache;
 
     // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
     private Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = Maps.newHashMap();
 
-    public AbstractCachingClientActionHandler(Class<A> actionType,
-                                              Cache cache) {
+    public AbstractCachingClientActionHandler(Class<A> actionType, Cache cache) {
         super(actionType);
         this.cache = cache;
     }
@@ -125,7 +126,7 @@ public abstract class AbstractCachingClientActionHandler<A, R> extends AbstractC
             // Add pending callback
             ArrayList<CallbackDispatchRequest<R>> resultRequestCallbacks = new ArrayList<CallbackDispatchRequest<R>>();
 
-            CallbackDispatchRequest<R> callbackDispatchRequest = new DelagatingCallbackDispatchRequest<R>(request,
+            CallbackDispatchRequest<R> callbackDispatchRequest = new DelegatingCallbackDispatchRequest<R>(request,
                     resultCallback);
             resultRequestCallbacks.add(callbackDispatchRequest);
 

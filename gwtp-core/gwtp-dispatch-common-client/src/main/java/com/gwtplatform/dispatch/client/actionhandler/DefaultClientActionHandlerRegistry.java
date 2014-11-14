@@ -18,11 +18,10 @@ package com.gwtplatform.dispatch.client.actionhandler;
 
 import java.util.Map;
 
-import javax.inject.Provider;
-
 import com.google.common.collect.Maps;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Provider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.common.client.ProviderBundle;
@@ -67,7 +66,10 @@ import com.gwtplatform.common.client.ProviderBundle;
  * }
  * </code>
  * </pre>
+ *
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry}
  */
+@Deprecated
 public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRegistry {
     private Map<Class<?>, IndirectProvider<ClientActionHandler<?, ?>>> clientActionHandlers;
 

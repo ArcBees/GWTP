@@ -18,7 +18,10 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 
 /**
  * Interface for client side caching.
+ *
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.Cache}
  */
+@Deprecated
 public interface Cache {
     /**
      * Puts the key-value pair in the cache. If an entry with key already exists, it is overwritten.

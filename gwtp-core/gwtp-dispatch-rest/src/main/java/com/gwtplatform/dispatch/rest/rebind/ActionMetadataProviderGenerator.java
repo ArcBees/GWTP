@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,10 +30,10 @@ import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
+import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.type.RegisterMetadataHolder;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
-import com.gwtplatform.dispatch.rest.shared.MetadataType;
 
 public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/ActionMetadataProvider.vm";
@@ -55,16 +54,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator {
 
     public void generate() throws UnableToCompleteException {
         String implName = ActionMetadataProvider.class.getSimpleName() + SUFFIX;
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-        if (printWriter != null) {
-            try {
-                mergeTemplate(printWriter, TEMPLATE, implName);
-            } catch (Exception e) {
-                getLogger().die(e.getMessage());
-            }
-        } else {
-            getLogger().debug("Action metadata provider already generated. Returning.");
-        }
+        mergeTemplate(TEMPLATE, implName);
     }
 
     @Subscribe

@@ -26,6 +26,8 @@ package com.gwtplatform.dispatch.rpc.shared;
  * @param <T> The value type.
  */
 public class SimpleResult<T> extends AbstractSimpleResult<T> {
+    private static final long serialVersionUID = 1L;
+
     SimpleResult() {
     }
 

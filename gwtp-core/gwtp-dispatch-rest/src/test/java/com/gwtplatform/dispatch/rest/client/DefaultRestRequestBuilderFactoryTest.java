@@ -45,14 +45,16 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.endsWith;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isNull;
 import static org.mockito.Matchers.startsWith;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
+import static com.gwtplatform.dispatch.rest.shared.HttpMethod.DELETE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.POST;
-import static com.gwtplatform.dispatch.rest.shared.MetadataType.BODY_TYPE;
 
 @RunWith(JukitoRunner.class)
 public class DefaultRestRequestBuilderFactoryTest {
@@ -129,6 +131,18 @@ public class DefaultRestRequestBuilderFactoryTest {
         given(urlUtils.encodeQueryString(DECODED_VALUE_1)).willReturn(ENCODED_VALUE_1);
         given(urlUtils.encodeQueryString(DECODED_VALUE_2)).willReturn(ENCODED_VALUE_2);
         given(urlUtils.encodeQueryString(DECODED_VALUE_3)).willReturn(ENCODED_VALUE_3);
+    }
+
+    @Test
+    public void build_noFormParamsNoBody_setsExplicitNullAsRequestData() throws ActionException {
+        // Given
+        RestAction<Void> action = new UnsecuredRestAction(DELETE, RELATIVE_PATH);
+
+        // When
+        factory.build(action, SECURITY_TOKEN);
+
+        // Then
+        verify(requestBuilder).setRequestData(isNull(String.class));
     }
 
     @Test
@@ -216,14 +230,14 @@ public class DefaultRestRequestBuilderFactoryTest {
 
         // Then
         String expectedRequestData = "Key1=" + ENCODED_VALUE_1
-                                     + "&Key2=" + ENCODED_VALUE_2
-                                     + "&Key3=" + ENCODED_VALUE_3;
+                + "&Key2=" + ENCODED_VALUE_2
+                + "&Key3=" + ENCODED_VALUE_3;
         verify(requestBuilder).setRequestData(eq(expectedRequestData));
     }
 
     @Test
     public void requestDataShouldBeSerializedStringWhenActionHasBody(Serialization serialization,
-                                                                     ActionMetadataProvider metadataProvider)
+            ActionMetadataProvider metadataProvider)
             throws ActionException {
         // Given
         Object unserializedObject = new Object();

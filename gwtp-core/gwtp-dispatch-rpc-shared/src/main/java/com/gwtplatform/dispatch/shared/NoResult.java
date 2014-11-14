@@ -29,6 +29,5 @@ package com.gwtplatform.dispatch.shared;
  */
 @Deprecated
 public class NoResult implements Result {
-    public NoResult() {
-    }
+    private static final long serialVersionUID = 1L;
 }

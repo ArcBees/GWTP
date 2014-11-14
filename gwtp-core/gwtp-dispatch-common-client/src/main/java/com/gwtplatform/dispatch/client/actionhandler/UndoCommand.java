@@ -22,9 +22,12 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 /**
  * The interface that {@link ClientActionHandler}s use to send the action to undo to the server.
  *
+ * @deprecated use {@link com.gwtplatform.dispatch.client.interceptor.UndoCommand}
+ *
  * @param <A> The action type.
  * @param <R> The result type.
  */
+@Deprecated
 public interface UndoCommand<A, R> {
     /**
      * Undo an action.

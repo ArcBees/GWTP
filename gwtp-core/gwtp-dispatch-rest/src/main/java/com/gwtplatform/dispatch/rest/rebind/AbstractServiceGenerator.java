@@ -32,7 +32,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator {
     protected static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/RestService.vm";
@@ -54,6 +53,16 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
 
         this.generatorFactory = generatorFactory;
         this.service = service;
+    }
+
+    @Override
+    protected boolean mergeTemplate(String velocityTemplate, String implName)
+            throws UnableToCompleteException {
+        if (super.mergeTemplate(velocityTemplate, implName)) {
+            generateDelegate();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -80,27 +89,27 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     }
 
     protected void generateMethodHierarchy(JMethod method) throws UnableToCompleteException {
-        if (isAction(method)) {
-            generateRestAction(method);
-        } else if (isSubService(method)) {
+        if (isSubService(method)) {
             generateChildRestService(method);
         } else {
-            String methodName = method.getEnclosingType().getQualifiedSourceName() + "#" + method.getName() + "(...)";
-            getLogger().die(methodName + " should return either a RestAction<> or a Sub-Resource.");
+            generateRestAction(method);
         }
     }
 
-    protected boolean isAction(JMethod method) throws UnableToCompleteException {
-        JClassType actionClass = getTypeOracle().findType(RestAction.class.getName());
-        JClassType returnClass = method.getReturnType().isClassOrInterface();
-
-        return returnClass != null && returnClass.isAssignableTo(actionClass);
+    protected boolean isSubService(JMethod method) throws UnableToCompleteException {
+        return method.getReturnType().isInterface() != null
+                && method.isAnnotationPresent(Path.class)
+                && !isAnyHttpActionAnnotationPresent(method);
     }
 
-    protected boolean isSubService(JMethod method) throws UnableToCompleteException {
-        JClassType returnInterface = method.getReturnType().isInterface();
+    private boolean isAnyHttpActionAnnotationPresent(JMethod method) {
+        for (SupportedHttpActions action : SupportedHttpActions.values()) {
+            if (method.isAnnotationPresent(action.getAnnotationClass())) {
+                return true;
+            }
+        }
 
-        return returnInterface != null && method.isAnnotationPresent(Path.class);
+        return false;
     }
 
     protected void generateChildRestService(JMethod method) throws UnableToCompleteException {
@@ -111,5 +120,12 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     protected void generateRestAction(JMethod method) throws UnableToCompleteException {
         ActionGenerator generator = generatorFactory.createActionGenerator(method, getServiceBinding());
         actionBindings.add(generator.generate());
+    }
+
+    private void generateDelegate() throws UnableToCompleteException {
+        ResourceDelegateGenerator generator =
+                generatorFactory.createResourceDelegateGenerator(getServiceBinding(), actionBindings, serviceBindings);
+
+        generator.generate();
     }
 }
