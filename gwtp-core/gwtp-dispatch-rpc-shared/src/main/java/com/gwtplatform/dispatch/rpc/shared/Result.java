@@ -21,7 +21,17 @@ import java.io.Serializable;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
- * A marker interface for {@link Action} results.
+ * A marker interface for {@link Action} results.<p>
+ * 
+ * Result is used instead of Serializable to prevent
+ * the RPC mechanism from generating a serializer for all classes
+ * that implement Serializable.
+ * 
+ * @see
+ * {@link SimpleResult}<br>
+ * {@link MultipleResult}<br>
+ * {@link NoResult}<br>
+ * 
  */
 public interface Result extends IsSerializable, Serializable {
 }
