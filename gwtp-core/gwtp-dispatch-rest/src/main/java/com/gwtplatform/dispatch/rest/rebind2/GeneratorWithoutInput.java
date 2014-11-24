@@ -14,10 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.entrypoint;
+package com.gwtplatform.dispatch.rest.rebind2;
 
-import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
-import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
+import com.google.gwt.core.ext.UnableToCompleteException;
 
-public interface EntryPointGenerator extends HasWeight, GeneratorWithInput<String> {
+public interface GeneratorWithoutInput {
+    String generate() throws UnableToCompleteException;
+
+    boolean canGenerate() throws UnableToCompleteException;
 }

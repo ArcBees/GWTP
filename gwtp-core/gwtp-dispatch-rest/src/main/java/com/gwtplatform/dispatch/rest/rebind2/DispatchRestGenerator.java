@@ -21,6 +21,9 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.IncrementalGenerator;
+import com.google.gwt.core.ext.RebindMode;
+import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.inject.Guice;
@@ -28,10 +31,13 @@ import com.google.inject.Injector;
 import com.google.inject.Stage;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModuleGenerator;
-import com.gwtplatform.dispatch.rest.rebind2.utils.Generators;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
-public class DispatchRestGenerator extends com.google.gwt.core.ext.Generator {
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstWeightedGeneratorForInput;
+
+public class DispatchRestGenerator extends IncrementalGenerator {
+    private static final int VERSION = 14;
+
     private final Logger logger;
     private final Set<EntryPointGenerator> entryPointGenerators;
     private final GinModuleGenerator ginModuleGenerator;
@@ -56,26 +62,40 @@ public class DispatchRestGenerator extends com.google.gwt.core.ext.Generator {
     }
 
     @Override
-    public String generate(TreeLogger logger, GeneratorContext context, String typeName)
+    public long getVersionId() {
+        return VERSION;
+    }
+
+    @Override
+    public RebindResult generateIncrementally(TreeLogger logger, GeneratorContext context, String typeName)
             throws UnableToCompleteException {
         Injector injector = Guice.createInjector(Stage.PRODUCTION, new DispatchRestRebindModule(logger, context));
         DispatchRestGenerator generator = injector.getInstance(DispatchRestGenerator.class);
+        String resultType = generator.generate(typeName);
 
-        return generator.generate(typeName);
+        return new RebindResult(RebindMode.USE_ALL_NEW_WITH_NO_CACHING, resultType);
     }
 
+    /**
+     * Do the actual generation of Rest-Dispatch compatible code. This should only be called on an instance that has
+     * been created through DI.
+     */
     private String generate(String typeName) throws UnableToCompleteException {
-        EntryPointGenerator entryPointGenerator = getGeneratorForType(entryPointGenerators, typeName);
+        EntryPointGenerator entryPointGenerator
+                = getFirstWeightedGeneratorForInput(logger, entryPointGenerators, typeName);
 
         // TODO: Generate services, actions, serializers
 
-        ginModuleGenerator.generate();
+        generateGinModule();
 
         return entryPointGenerator.generate(typeName);
     }
 
-    private <T extends Generator> T getGeneratorForType(Set<T> generators, String typeName)
-            throws UnableToCompleteException {
-        return Generators.getGeneratorForType(logger, generators, typeName);
+    private void generateGinModule() throws UnableToCompleteException {
+        if (!ginModuleGenerator.canGenerate()) {
+            logger.die("Unable to generate Gin Module. See previous log entries.");
+        } else {
+            ginModuleGenerator.generate();
+        }
     }
 }

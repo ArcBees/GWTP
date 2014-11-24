@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.gin;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,7 +45,7 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
     }
 
     @Override
-    public boolean canGenerate(String typeName) {
+    public boolean canGenerate() {
         try {
             loadGinModuleProperty();
         } catch (UnableToCompleteException e) {
@@ -55,13 +56,15 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
         return true;
     }
 
-    public String generate() throws UnableToCompleteException {
-        return generate(getFullyQualifiedName());
-    }
-
     @Override
-    protected void beforeGenerate(String typeName) throws UnableToCompleteException {
-        loadGinModuleProperty();
+    public String generate() throws UnableToCompleteException {
+        PrintWriter printWriter = tryCreate(getPackageName(), getImplName());
+        if (printWriter != null) {
+            mergeTemplate(printWriter);
+            getContext().commit(getLogger(), printWriter);
+        }
+
+        return getFullyQualifiedName();
     }
 
     @Override

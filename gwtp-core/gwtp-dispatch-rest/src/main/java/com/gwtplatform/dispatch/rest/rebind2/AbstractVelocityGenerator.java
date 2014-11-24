@@ -41,27 +41,6 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
         this.velocityEngine = velocityEngine;
     }
 
-    @Override
-    public String generate(String typeName) throws UnableToCompleteException {
-        beforeGenerate(typeName);
-
-        PrintWriter printWriter = tryCreate(getPackageName(), getImplName());
-        if (printWriter != null) {
-            mergeTemplate(printWriter);
-            getContext().commit(getLogger(), printWriter);
-        }
-
-        afterGenerate(typeName);
-
-        return getFullyQualifiedName();
-    }
-
-    protected void beforeGenerate(String typeName) throws UnableToCompleteException {
-    }
-
-    protected void afterGenerate(String typeName) throws UnableToCompleteException {
-    }
-
     protected void mergeTemplate(PrintWriter printWriter) throws UnableToCompleteException {
         VelocityContext velocityContext = new VelocityContext(createTemplateVariables());
         velocityContext.put("lf", "\n");

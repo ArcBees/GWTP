@@ -16,9 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.gin;
 
-import com.google.gwt.core.ext.UnableToCompleteException;
-import com.gwtplatform.dispatch.rest.rebind2.Generator;
+import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithoutInput;
 
-public interface GinModuleGenerator extends Generator {
-    String generate() throws UnableToCompleteException;
+public interface GinModuleGenerator extends GeneratorWithoutInput {
 }

@@ -23,12 +23,14 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.gwtplatform.dispatch.rest.rebind2.Generator;
+import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
+import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithoutInput;
+import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
 
 public class Generators {
-    private static final Comparator<Generator> COMPARATOR = new Comparator<Generator>() {
+    private static final Comparator<HasWeight> COMPARATOR = new Comparator<HasWeight>() {
         @Override
-        public int compare(Generator o1, Generator o2) {
+        public int compare(HasWeight o1, HasWeight o2) {
             return o1.getWeight() - o2.getWeight();
         }
     };
@@ -38,27 +40,54 @@ public class Generators {
      *
      * @throws UnableToCompleteException If no generators are found.
      */
-    public static <T extends Generator> T getGeneratorForType(Logger logger, Collection<T> generators, String typeName)
-            throws UnableToCompleteException {
+    public static <T extends HasWeight & GeneratorWithInput<I>, I> T getFirstWeightedGeneratorForInput(Logger logger,
+            Collection<T> generators, I input) throws UnableToCompleteException {
         List<T> sortedGenerators = sortGenerators(generators);
 
-        for (T generator : sortedGenerators) {
+        return getFirstGeneratorForInput(logger, sortedGenerators, input);
+    }
+
+    public static <T extends GeneratorWithInput<I>, I> T getFirstGeneratorForInput(Logger logger,
+            Collection<T> generators, I input) throws UnableToCompleteException {
+        for (T generator : generators) {
             try {
-                if (generator.canGenerate(typeName)) {
+                if (generator.canGenerate(input)) {
                     return generator;
                 }
             } catch (UnableToCompleteException e) {
-                logger.warn("Unexpected error while find a generator for '%s'", e, typeName);
+                logger.warn("Unexpected exception", e);
             }
         }
 
-        return logger.die("Unable to find an appropriate generator for '%s'", typeName);
+        return logger.die("Unable to find an appropriate generator for '%s'", input);
+    }
+
+    public static <T extends HasWeight & GeneratorWithoutInput> T getFirstWeightedGenerator(Logger logger,
+            Collection<T> generators) throws UnableToCompleteException {
+        List<T> sortedGenerators = sortGenerators(generators);
+
+        return getFirstGenerator(logger, sortedGenerators);
+    }
+
+    public static <T extends GeneratorWithoutInput> T getFirstGenerator(Logger logger, Collection<T> generators)
+            throws UnableToCompleteException {
+        for (T generator : generators) {
+            try {
+                if (generator.canGenerate()) {
+                    return generator;
+                }
+            } catch (UnableToCompleteException e) {
+                logger.warn("Unexpected exception", e);
+            }
+        }
+
+        return logger.die("");
     }
 
     /**
      * Sort the provided generators by weight without modifying the original collection.
      */
-    private static <T extends Generator> List<T> sortGenerators(Collection<T> generators) {
+    private static <T extends HasWeight> List<T> sortGenerators(Collection<T> generators) {
         List<T> sortedGenerators = Lists.newArrayList(generators);
         Collections.sort(sortedGenerators, COMPARATOR);
 

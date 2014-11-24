@@ -16,14 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.rebind2;
 
-import com.google.gwt.core.ext.UnableToCompleteException;
-
-public interface Generator {
+public interface HasWeight {
     int DEFAULT_WEIGHT = 75;
 
     byte getWeight();
-
-    boolean canGenerate(String typeName) throws UnableToCompleteException;
-
-    String generate(String typeName) throws UnableToCompleteException;
 }
