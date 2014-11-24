@@ -2,12 +2,8 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
         "https://raw.githubusercontent.com/gwtproject/gwt/2.7.0/distro-source/core/src/gwt-module.dtd">
 <module>
-    <inherits name="com.gwtplatform.common.ClientsCommon"/>
-    <inherits name="com.gwtplatform.dispatch.rest.DispatchRestShared"/>
     <inherits name="com.gwtplatform.dispatch.DispatchCommonClient"/>
-    <inherits name="com.google.common.base.Base"/>
-    <inherits name="com.google.common.collect.Collect"/>
-    <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name="com.gwtplatform.dispatch.rest.DispatchRestShared"/>
 
     <inherits name="com.google.gwt.http.HTTP"/>
     <inherits name="com.google.gwt.json.JSON"/>
@@ -16,14 +12,14 @@
     <!-- Specify the paths for translatable code -->
     <source path='client'/>
 
-    <entry-point class='com.gwtplatform.dispatch.rest.client.RestDispatcherController'/>
+    <entry-point class="com.gwtplatform.dispatch.rest.client.DispatchRestController"/>
 
     <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
 
     <extend-configuration-property name="gin.ginjector.modules"
             value="com.gwtplatform.dispatch.rest.client.RestGinModule"/>
 
-    <generate-with class="com.gwtplatform.dispatch.rest.rebind.VelocityGenerator">
-        <when-type-is class="com.gwtplatform.dispatch.rest.client.RestDispatcherController"/>
+    <generate-with class="com.gwtplatform.dispatch.rest.rebind.DispatchRestGenerator">
+        <when-type-is class="com.gwtplatform.dispatch.rest.client.DispatchRestController"/>
     </generate-with>
 </module>

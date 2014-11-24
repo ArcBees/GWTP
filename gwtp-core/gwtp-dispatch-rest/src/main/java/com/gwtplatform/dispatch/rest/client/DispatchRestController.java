@@ -24,5 +24,5 @@ import com.google.gwt.core.client.EntryPoint;
  * <p/>
  * Making it an {@link EntryPoint} makes sure GWT kicks off the generation as early as possible.
  */
-public interface RestDispatcherController extends EntryPoint {
+public interface DispatchRestController extends EntryPoint {
 }

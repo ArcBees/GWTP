@@ -29,10 +29,11 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.gwtplatform.dispatch.rest.client.AbstractRestDispatcherController;
+import com.gwtplatform.dispatch.rest.client.AbstractDispatchRestController;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 
-public class VelocityGenerator extends Generator {
+public class DispatchRestGenerator extends Generator {
+    private static final int VERSION = 14;
     private static final String SUFFIX = "Impl";
     private static final String SHARED = "shared";
     private static final String CLIENT = "client";
@@ -48,23 +49,21 @@ public class VelocityGenerator extends Generator {
     private JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
 
     @Override
-    public String generate(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
+    public String generate(TreeLogger logger, GeneratorContext context, String typeName)
             throws UnableToCompleteException {
-        resetFields(treeLogger, generatorContext, typeName);
+        resetFields(logger, context, typeName);
 
-        PrintWriter printWriter = tryCreatePrintWriter(generatorContext);
+        PrintWriter printWriter = tryCreatePrintWriter(context);
+        String resultType = typeName + SUFFIX;
+
         if (printWriter == null) {
-            return typeName + SUFFIX;
+            return resultType;
         }
 
-        try {
-            generateClasses();
-            generateEntryPoint(treeLogger, generatorContext, printWriter);
+        generateClasses();
+        generateEntryPoint(logger, context, printWriter);
 
-            return typeName + SUFFIX;
-        } finally {
-            printWriter.close();
-        }
+        return resultType;
     }
 
     private void resetFields(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
@@ -97,13 +96,13 @@ public class VelocityGenerator extends Generator {
     }
 
     private void generateClasses() throws UnableToCompleteException {
-        generateRestServices();
-        generateRestGinModule();
+        generateResources();
+        generateGinModule();
         generateMetadataProvider();
         generateJacksonMapperProvider();
     }
 
-    private void generateRestServices() throws UnableToCompleteException {
+    private void generateResources() throws UnableToCompleteException {
         ServiceDefinitions serviceDefinitions = injector.getInstance(ServiceDefinitions.class);
 
         for (JClassType service : serviceDefinitions.getServices()) {
@@ -112,7 +111,7 @@ public class VelocityGenerator extends Generator {
         }
     }
 
-    private void generateRestGinModule() throws UnableToCompleteException {
+    private void generateGinModule() throws UnableToCompleteException {
         GinModuleGenerator moduleGenerator = injector.getInstance(GinModuleGenerator.class);
         moduleGenerator.generate();
     }
@@ -133,7 +132,7 @@ public class VelocityGenerator extends Generator {
 
     private ClassSourceFileComposerFactory initComposer() {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, className);
-        composer.setSuperclass(AbstractRestDispatcherController.class.getSimpleName());
+        composer.setSuperclass(AbstractDispatchRestController.class.getSimpleName());
 
         return composer;
     }

@@ -17,26 +17,25 @@
 package com.gwtplatform.dispatch.client.interceptor;
 
 /**
- * This exception is thrown as a side-effect of an error when registering a delegating callback.
- * A provider was registered to provide a client-side interceptor for an action, but this action
- * was not the same action as specified by {@link Interceptor#getActionType()}.
+ * This exception is thrown as a side-effect of an error when registering a delegating callback. A provider was
+ * registered to provide a client-side interceptor for an action, but this action was not the same action as specified
+ * by {@link Interceptor#getActionType()}.
  */
 public class InterceptorMismatchException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private final Class<?> requestedActionType;
-    private final Class<?> supportedActionType;
+    private Class<?> requestedActionType;
+    private Class<?> supportedActionType;
+
+    public InterceptorMismatchException(
+            Class<?> requestedActionType,
+            Class<?> supportedActionType) {
+        this.requestedActionType = requestedActionType;
+        this.supportedActionType = supportedActionType;
+    }
 
     @SuppressWarnings("unused")
     private InterceptorMismatchException() {
-        this.requestedActionType = null;
-        this.supportedActionType = null;
-    }
-
-    public InterceptorMismatchException(Class<?> requestedActionType,
-                                        Class<?> supportedActionType) {
-        this.requestedActionType = requestedActionType;
-        this.supportedActionType = supportedActionType;
     }
 
     public Class<?> getRequestedActionType() {
@@ -53,5 +52,4 @@ public class InterceptorMismatchException extends RuntimeException {
                " [requestedActionType=" + this.requestedActionType +
                ", supportedActionType=" + this.supportedActionType + "]";
     }
-
 }

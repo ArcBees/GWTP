@@ -17,10 +17,10 @@
 package com.gwtplatform.dispatch.rest.client;
 
 /**
- * Abstract implementation extended by the generated implementation of {@link RestDispatcherController}. Additional code
+ * Abstract implementation extended by the generated implementation of {@link DispatchRestController}. Additional code
  * that do not need to be generated.
  */
-public abstract class AbstractRestDispatcherController implements RestDispatcherController {
+public abstract class AbstractDispatchRestController implements DispatchRestController {
     @Override
     public void onModuleLoad() {
     }
