@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.rebind2.gin;
 
-import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.gwtplatform.dispatch.rest.rebind2.Generator;
 
-/**
- * This interface is used to initiate the generation of services and
- * {@link com.gwtplatform.dispatch.rest.shared.RestAction}s.
- * <p/>
- * Making it an {@link EntryPoint} makes sure GWT kicks off the generation as early as possible.
- */
-public interface DispatchRestController extends EntryPoint {
+public interface GinModuleGenerator extends Generator {
+    String generate() throws UnableToCompleteException;
 }

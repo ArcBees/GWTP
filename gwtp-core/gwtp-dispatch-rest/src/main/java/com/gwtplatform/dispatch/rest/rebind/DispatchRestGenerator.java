@@ -29,11 +29,10 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.gwtplatform.dispatch.rest.client.AbstractDispatchRestController;
+import com.gwtplatform.dispatch.rest.client.AbstractDispatchRestEntryPoint;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
 
 public class DispatchRestGenerator extends Generator {
-    private static final int VERSION = 14;
     private static final String SUFFIX = "Impl";
     private static final String SHARED = "shared";
     private static final String CLIENT = "client";
@@ -132,7 +131,7 @@ public class DispatchRestGenerator extends Generator {
 
     private ClassSourceFileComposerFactory initComposer() {
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, className);
-        composer.setSuperclass(AbstractDispatchRestController.class.getSimpleName());
+        composer.setSuperclass(AbstractDispatchRestEntryPoint.class.getSimpleName());
 
         return composer;
     }
