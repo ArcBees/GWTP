@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,124 +16,139 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
-import com.google.gwt.core.ext.Generator;
+import javax.inject.Inject;
+
+import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
-import com.google.gwt.user.rebind.SourceWriter;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.gwtplatform.dispatch.rest.client.AbstractDispatchRestController;
-import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
+import com.gwtplatform.dispatch.rest.rebind.entrypoint.EntryPointGenerator;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionContext;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionGenerator;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionPoint;
+import com.gwtplatform.dispatch.rest.rebind.gin.GinModuleGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
+import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
+import com.gwtplatform.dispatch.rest.rebind.resource.ResourceGenerator;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
-public class DispatchRestGenerator extends Generator {
-    private static final int VERSION = 14;
-    private static final String SUFFIX = "Impl";
-    private static final String SHARED = "shared";
-    private static final String CLIENT = "client";
+import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
+import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGeneratorWithoutInput;
 
-    private String packageName;
-    private String className;
-    private Logger logger;
-    private TypeOracle typeOracle;
-    private JClassType type;
-    private Injector injector;
-    private GeneratorFactory generatorFactory;
-    private ActionMetadataProviderGenerator actionMetadataProviderGenerator;
-    private JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
+public class DispatchRestGenerator extends AbstractGenerator implements GeneratorWithInput<String, ExtensionContext> {
+    private final Set<ExtensionGenerator> extensionGenerators;
+    private final Set<EntryPointGenerator> entryPointGenerators;
+    private final Set<ResourceGenerator> resourceGenerators;
+    private final Set<GinModuleGenerator> ginModuleGenerators;
+    private final List<ClassDefinition> extensionDefinitions;
+
+    private List<ResourceDefinition> resourceDefinitions;
+    private ClassDefinition ginModuleDefinition;
+    private ClassDefinition entryPointDefinition;
+
+    @Inject
+    DispatchRestGenerator(
+            Logger logger,
+            GeneratorContext context,
+            Set<ExtensionGenerator> extensionGenerators,
+            Set<EntryPointGenerator> entryPointGenerators,
+            Set<ResourceGenerator> resourceGenerators,
+            Set<GinModuleGenerator> ginModuleGenerators) {
+        super(logger, context);
+
+        this.extensionGenerators = extensionGenerators;
+        this.entryPointGenerators = entryPointGenerators;
+        this.resourceGenerators = resourceGenerators;
+        this.ginModuleGenerators = ginModuleGenerators;
+        this.extensionDefinitions = Lists.newArrayList();
+    }
 
     @Override
-    public String generate(TreeLogger logger, GeneratorContext context, String typeName)
-            throws UnableToCompleteException {
-        resetFields(logger, context, typeName);
-
-        PrintWriter printWriter = tryCreatePrintWriter(context);
-        String resultType = typeName + SUFFIX;
-
-        if (printWriter == null) {
-            return resultType;
-        }
-
-        generateClasses();
-        generateEntryPoint(logger, context, printWriter);
-
-        return resultType;
+    public boolean canGenerate(String typeName) {
+        return findType(typeName) != null;
     }
 
-    private void resetFields(TreeLogger treeLogger, GeneratorContext generatorContext, String typeName)
-            throws UnableToCompleteException {
-        logger = new Logger(treeLogger);
-        typeOracle = generatorContext.getTypeOracle();
-        type = getType(typeName);
+    @Override
+    public ExtensionContext generate(String typeName) throws UnableToCompleteException {
+        executeExtensions(ExtensionPoint.BEFORE_EVERYTHING);
 
-        injector = Guice.createInjector(new RebindModule(logger, generatorContext));
-        actionMetadataProviderGenerator = injector.getInstance(ActionMetadataProviderGenerator.class);
-        jacksonMapperProviderGenerator = injector.getInstance(JacksonMapperProviderGenerator.class);
-        generatorFactory = injector.getInstance(GeneratorFactory.class);
-    }
-
-    private PrintWriter tryCreatePrintWriter(GeneratorContext generatorContext) throws UnableToCompleteException {
-        packageName = type.getPackage().getName().replace(SHARED, CLIENT);
-        className = type.getName() + SUFFIX;
-
-        return generatorContext.tryCreate(logger.getTreeLogger(), packageName, className);
-    }
-
-    private JClassType getType(String typeName) throws UnableToCompleteException {
-        try {
-            return typeOracle.getType(typeName);
-        } catch (NotFoundException e) {
-            logger.die("Cannot find " + typeName);
-        }
-
-        return null;
-    }
-
-    private void generateClasses() throws UnableToCompleteException {
         generateResources();
+        executeExtensions(ExtensionPoint.AFTER_RESOURCES);
+
+        executeExtensions(ExtensionPoint.BEFORE_GIN);
         generateGinModule();
-        generateMetadataProvider();
-        generateJacksonMapperProvider();
+        executeExtensions(ExtensionPoint.AFTER_GIN);
+
+        generateEntryPoint(typeName);
+
+        executeExtensions(ExtensionPoint.AFTER_EVERYTHING);
+
+        return createExtensionContext(null);
     }
 
     private void generateResources() throws UnableToCompleteException {
-        ServiceDefinitions serviceDefinitions = injector.getInstance(ServiceDefinitions.class);
+        resourceDefinitions = Lists.newArrayList();
+        for (JClassType type : getContext().getTypeOracle().getTypes()) {
+            maybeGenerateResource(type);
+        }
+    }
 
-        for (JClassType service : serviceDefinitions.getServices()) {
-            ServiceGenerator serviceGenerator = generatorFactory.createServiceGenerator(service);
-            serviceGenerator.generate();
+    private void maybeGenerateResource(JClassType type) throws UnableToCompleteException {
+        ResourceContext resourceContext = new ResourceContext(type);
+        ResourceGenerator generator = findGenerator(resourceGenerators, resourceContext);
+
+        if (generator != null) {
+            ResourceDefinition resourceDefinition = generator.generate(resourceContext);
+            resourceDefinitions.add(resourceDefinition);
         }
     }
 
     private void generateGinModule() throws UnableToCompleteException {
-        GinModuleGenerator moduleGenerator = injector.getInstance(GinModuleGenerator.class);
-        moduleGenerator.generate();
+        GinModuleGenerator generator = findGeneratorWithoutInput(ginModuleGenerators);
+
+        if (generator != null) {
+            ginModuleDefinition = generator.generate();
+        } else {
+            getLogger().die("No gin module generators was found.");
+        }
     }
 
-    private void generateMetadataProvider() throws UnableToCompleteException {
-        actionMetadataProviderGenerator.generate();
+    private void generateEntryPoint(String typeName) throws UnableToCompleteException {
+        EntryPointGenerator generator = findGenerator(entryPointGenerators, typeName);
+
+        if (generator != null) {
+            entryPointDefinition = generator.generate(typeName);
+        } else {
+            getLogger().die("No entry point generators was found.");
+        }
     }
 
-    private void generateJacksonMapperProvider() throws UnableToCompleteException {
-        jacksonMapperProviderGenerator.generate();
+    private void executeExtensions(ExtensionPoint extensionPoint) {
+        ExtensionContext extensionContext = createExtensionContext(extensionPoint);
+
+        for (ExtensionGenerator generator : extensionGenerators) {
+            maybeExecuteExtension(extensionContext, generator);
+        }
     }
 
-    private void generateEntryPoint(TreeLogger treeLogger, GeneratorContext generatorContext, PrintWriter printWriter) {
-        ClassSourceFileComposerFactory composer = initComposer();
-        SourceWriter sourceWriter = composer.createSourceWriter(generatorContext, printWriter);
-        sourceWriter.commit(treeLogger);
+    private void maybeExecuteExtension(ExtensionContext extensionContext, ExtensionGenerator generator) {
+        if (generator.canGenerate(extensionContext)) {
+            try {
+                Collection<ClassDefinition> definitions = generator.generate(extensionContext);
+                extensionDefinitions.addAll(definitions);
+            } catch (UnableToCompleteException e) {
+                getLogger().error("Unexpected exception executing extension.", e);
+            }
+        }
     }
 
-    private ClassSourceFileComposerFactory initComposer() {
-        ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, className);
-        composer.setSuperclass(AbstractDispatchRestController.class.getSimpleName());
-
-        return composer;
+    private ExtensionContext createExtensionContext(ExtensionPoint extensionPoint) {
+        return new ExtensionContext(extensionPoint, extensionDefinitions, resourceDefinitions, ginModuleDefinition,
+                entryPointDefinition);
     }
 }

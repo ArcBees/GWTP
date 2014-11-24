@@ -1,0 +1,4 @@
+    @Override
+    public $resourceType ${methodName}(#generateMethodSignature($parameters)) {
+        return new ${subResource.className}(defaultDateFormat#generateAppendedCallSignature($subResourceParameters));
+    }

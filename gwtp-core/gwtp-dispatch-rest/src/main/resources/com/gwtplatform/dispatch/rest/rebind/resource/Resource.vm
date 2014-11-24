@@ -1,0 +1,22 @@
+package $package;
+
+import javax.inject.Inject;
+
+import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
+#foreach ($import in $imports)
+import $import;
+#end
+
+public class $impl implements $resourceType {
+    private final String defaultDateFormat;
+
+    @Inject
+    ${impl}(
+            @DefaultDateFormat String defaultDateFormat) {
+        this.defaultDateFormat = defaultDateFormat;
+    }
+
+#foreach ($method in $methods)
+$method.output
+#end
+}
