@@ -27,7 +27,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.gwtplatform</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-clients-common</artifactId>
         </dependency>
 

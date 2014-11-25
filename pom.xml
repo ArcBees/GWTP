@@ -342,7 +342,7 @@
 
                     <dependencies>
                         <dependency>
-                            <groupId>com.gwtplatform</groupId>
+                            <groupId>${project.groupId}</groupId>
                             <artifactId>gwtp-build-tools</artifactId>
                             <version>${project.version}</version>
                         </dependency>
