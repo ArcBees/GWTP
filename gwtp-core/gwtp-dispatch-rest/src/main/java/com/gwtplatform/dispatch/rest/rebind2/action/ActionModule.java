@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.shared;
+package com.gwtplatform.dispatch.rest.rebind2.action;
 
-/**
- * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
- */
-public enum HttpMethod {
-    GET,
-    POST,
-    PUT,
-    DELETE,
-    HEAD
+import com.google.inject.AbstractModule;
+
+import static com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule.addResourceMethodGenerator;
+
+public class ActionModule extends AbstractModule {
+    @Override
+    protected void configure() {
+        bind(ActionGenerator.class).to(DefaultActionGenerator.class);
+
+        addResourceMethodGenerator(binder(), ActionMethodGenerator.class);
+    }
 }

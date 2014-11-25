@@ -31,6 +31,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.gwtplatform.dispatch.rest.rebind2.action.ActionModule;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointModule;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModule;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule;
@@ -51,6 +52,7 @@ public class DispatchRestRebindModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        install(new ActionModule());
         install(new EntryPointModule());
         install(new GinModule());
         install(new ResourceModule());

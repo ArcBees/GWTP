@@ -1,0 +1,16 @@
+package $package;
+
+import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+
+public class $impl extends AbstractRestAction<$result> {
+    public ${impl}(
+            String defaultDateFormat) {
+        super(HttpMethod.$httpVerb, "$path", defaultDateFormat);
+    }
+
+    @Override
+    public boolean isSecured() {
+        return $secured;
+    }
+}

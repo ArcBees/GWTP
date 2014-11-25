@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.rebind2.resource;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
 import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 
-public interface ResourceGenerator extends HasWeight, GeneratorWithInput<JClassType> {
+public interface ResourceGenerator extends HasWeight, GeneratorWithInput<JClassType, ClassDefinition> {
 }

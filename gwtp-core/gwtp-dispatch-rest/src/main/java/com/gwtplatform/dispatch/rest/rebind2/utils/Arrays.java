@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.shared;
+package com.gwtplatform.dispatch.rest.rebind2.utils;
 
-/**
- * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
- */
-public enum HttpMethod {
-    GET,
-    POST,
-    PUT,
-    DELETE,
-    HEAD
+import java.util.Collections;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+public class Arrays {
+    public static <T> List<T> asList(T[] array) {
+        List<T> list = Lists.newArrayList();
+
+        if (array != null) {
+            Collections.addAll(list, array);
+        }
+
+        return list;
+    }
 }

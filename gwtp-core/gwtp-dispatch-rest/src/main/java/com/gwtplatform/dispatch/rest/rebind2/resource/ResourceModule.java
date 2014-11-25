@@ -27,6 +27,13 @@ public class ResourceModule extends AbstractModule {
         multibinder.addBinding().to(generatorClass);
     }
 
+    public static void addResourceMethodGenerator(Binder binder,
+            Class<? extends ResourceMethodGenerator> generatorClass) {
+        Multibinder<ResourceMethodGenerator> multibinder =
+                Multibinder.newSetBinder(binder, ResourceMethodGenerator.class);
+        multibinder.addBinding().to(generatorClass);
+    }
+
     @Override
     protected void configure() {
         addResourceGenerator(binder(), DefaultResourceGenerator.class);

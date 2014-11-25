@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind2;
 
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
@@ -46,14 +47,13 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
         return getContext().tryCreate(getLogger(), getPackageName(), getImplName());
     }
 
-    protected void mergeTemplate(PrintWriter printWriter) throws UnableToCompleteException {
+    protected void mergeTemplate(Writer writer) throws UnableToCompleteException {
         VelocityContext velocityContext = new VelocityContext(createTemplateVariables());
         velocityContext.put("lf", "\n");
         velocityContext.put("impl", getImplName());
         velocityContext.put("package", getPackageName());
 
-        boolean success = velocityEngine.mergeTemplate(getTemplate(), ENCODING, velocityContext, printWriter);
-
+        boolean success = velocityEngine.mergeTemplate(getTemplate(), ENCODING, velocityContext, writer);
         if (!success) {
             getLogger().die("An error occured while generating '%s'. See previous entries for details.",
                     getClassDefinition());

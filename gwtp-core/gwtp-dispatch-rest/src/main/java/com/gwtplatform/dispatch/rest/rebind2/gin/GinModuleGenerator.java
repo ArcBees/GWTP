@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind2.gin;
 
 import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithoutInput;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 
-public interface GinModuleGenerator extends GeneratorWithoutInput {
+public interface GinModuleGenerator extends GeneratorWithoutInput<ClassDefinition> {
 }

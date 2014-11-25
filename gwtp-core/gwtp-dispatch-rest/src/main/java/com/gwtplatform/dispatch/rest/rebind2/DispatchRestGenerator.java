@@ -39,7 +39,7 @@ import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findFirstGeneratorByWeightAndInput;
 import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstGeneratorByWeightAndInput;
 
-public class DispatchRestGenerator extends IncrementalGenerator implements GeneratorWithInput<String> {
+public class DispatchRestGenerator extends IncrementalGenerator implements GeneratorWithInput<String, ClassDefinition> {
     private static final int VERSION = 14;
 
     private final Logger logger;

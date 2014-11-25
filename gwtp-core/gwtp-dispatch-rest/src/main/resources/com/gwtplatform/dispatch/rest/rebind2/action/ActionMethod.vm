@@ -1,0 +1,4 @@
+    @Override
+    $methodDeclaration {
+        return new ${action.className}(defaultDateFormat);
+    }

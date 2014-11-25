@@ -22,7 +22,8 @@ public class ClassDefinition {
     private final String packageName;
     private final String className;
 
-    public ClassDefinition(JClassType classType) {
+    public ClassDefinition(
+            JClassType classType) {
         this(classType.getPackage().getName(), classType.getSimpleSourceName());
     }
 
