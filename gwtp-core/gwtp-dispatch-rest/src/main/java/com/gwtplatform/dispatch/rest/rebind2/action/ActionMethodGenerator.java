@@ -34,8 +34,8 @@ import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
 import com.gwtplatform.dispatch.rest.rebind2.Parameter;
-import com.gwtplatform.dispatch.rest.rebind2.SupportedHttpAnnotations;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodGenerator;
@@ -168,7 +168,7 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
     private boolean hasExactlyOneHttpVerb() {
         int annotationsCount = 0;
 
-        for (SupportedHttpAnnotations annotation : SupportedHttpAnnotations.values()) {
+        for (HttpVerbs annotation : HttpVerbs.values()) {
             if (context.getMethod().isAnnotationPresent(annotation.getAnnotationClass())) {
                 annotationsCount += 1;
             }

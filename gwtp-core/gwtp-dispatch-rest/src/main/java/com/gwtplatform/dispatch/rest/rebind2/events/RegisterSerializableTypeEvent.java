@@ -14,26 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.utils;
+package com.gwtplatform.dispatch.rest.rebind2.events;
 
-import java.util.Collections;
-import java.util.List;
+import com.google.gwt.core.ext.typeinfo.JType;
 
-import com.google.common.collect.Lists;
+public class RegisterSerializableTypeEvent {
+    private final JType type;
 
-public class Arrays {
-    /**
-     * Server the same purposes as Java's {@link java.util.Arrays Arrays}, except it is null-safe.
-     * <p/>
-     * Reason: Some introspection methods used by the generators return null arrays.
-     */
-    public static <T> List<T> asList(T... array) {
-        List<T> list = Lists.newArrayList();
+    public RegisterSerializableTypeEvent(
+            JType type) {
+        this.type = type;
+    }
 
-        if (array != null) {
-            Collections.addAll(list, array);
-        }
-
-        return list;
+    public JType getType() {
+        return type;
     }
 }

@@ -18,33 +18,37 @@ package com.gwtplatform.dispatch.rest.rebind2;
 
 import java.lang.annotation.Annotation;
 
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
-/**
- * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
- */
-public enum SupportedHttpAnnotations {
-    GET(HttpMethod.GET, javax.ws.rs.GET.class),
-    POST(HttpMethod.POST, javax.ws.rs.POST.class),
-    PUT(HttpMethod.PUT, javax.ws.rs.PUT.class),
-    DELETE(HttpMethod.DELETE, javax.ws.rs.DELETE.class),
-    HEAD(HttpMethod.HEAD, javax.ws.rs.HEAD.class);
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 
-    private final HttpMethod verb;
+public enum HttpParameterType {
+    HEADER(HeaderParam.class),
+    PATH(PathParam.class),
+    QUERY(QueryParam.class),
+    FORM(FormParam.class);
+
     private final Class<? extends Annotation> annotationClass;
 
-    SupportedHttpAnnotations(
-            HttpMethod verb,
+    HttpParameterType(
             Class<? extends Annotation> annotationClass) {
-        this.verb = verb;
         this.annotationClass = annotationClass;
-    }
-
-    public HttpMethod getVerb() {
-        return verb;
     }
 
     public Class<? extends Annotation> getAnnotationClass() {
         return annotationClass;
+    }
+
+    public static boolean isHttpParameter(HasAnnotations hasAnnotations) {
+        for (HttpParameterType type : values()) {
+            if (hasAnnotations.isAnnotationPresent(type.getAnnotationClass())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

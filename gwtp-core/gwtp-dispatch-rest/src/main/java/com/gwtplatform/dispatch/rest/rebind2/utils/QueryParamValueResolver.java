@@ -14,13 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.util;
+package com.gwtplatform.dispatch.rest.rebind2.utils;
 
-import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
-public class PathParamValueResolver implements AnnotationValueResolver<PathParam> {
+public class QueryParamValueResolver implements AnnotationValueResolver<QueryParam> {
     @Override
-    public String resolve(PathParam annotation) {
+    public String resolve(QueryParam annotation) {
         return annotation.value();
     }
 }

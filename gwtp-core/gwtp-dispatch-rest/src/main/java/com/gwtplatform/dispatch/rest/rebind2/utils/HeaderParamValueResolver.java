@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.util;
+package com.gwtplatform.dispatch.rest.rebind2.utils;
 
 import javax.ws.rs.HeaderParam;
 

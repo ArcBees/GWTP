@@ -17,68 +17,127 @@
 package com.gwtplatform.dispatch.rest.rebind2.action;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 
 import org.apache.velocity.app.VelocityEngine;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JParameter;
+import com.google.gwt.core.ext.typeinfo.JType;
+import com.gwtplatform.dispatch.rest.client.MetadataType;
+import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
+import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
-import com.gwtplatform.dispatch.rest.rebind2.SupportedHttpAnnotations;
+import com.gwtplatform.dispatch.rest.rebind2.HttpParameter;
+import com.gwtplatform.dispatch.rest.rebind2.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
+import com.gwtplatform.dispatch.rest.rebind2.Parameter;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
+import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind2.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
+import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
+import static com.gwtplatform.dispatch.rest.client.MetadataType.RESPONSE_TYPE;
+import static com.gwtplatform.dispatch.rest.rebind2.HttpParameterType.FORM;
+import static com.gwtplatform.dispatch.rest.rebind2.HttpParameterType.isHttpParameter;
+
 public class DefaultActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/action/Action.vm";
+    private static final String MANY_POTENTIAL_BODY = "`%s#%s` has more than one potential body parameter.";
+    private static final String FORM_AND_BODY_PARAM = "`%s#%s` has both @FormParam and a body parameter. "
+            + "You must specify one or the other.";
+
+    private final EventBus eventBus;
+    private final HttpParameterFactory httpParameterFactory;
 
     private ActionContext context;
     private JMethod method;
+    private ActionDefinition actionDefinition;
     private String packageName;
     private String className;
-    private HttpMethod httpVerb;
-    private String path;
-    private boolean secured;
+    private JClassType resultType;
+    private Parameter bodyParameter;
+    private List<HttpParameter> httpParameters;
+    private String contentType;
 
     @Inject
     DefaultActionGenerator(
             Logger logger,
             GeneratorContext context,
-            VelocityEngine velocityEngine) {
+            VelocityEngine velocityEngine,
+            EventBus eventBus,
+            HttpParameterFactory httpParameterFactory) {
         super(logger, context, velocityEngine);
+
+        this.eventBus = eventBus;
+        this.httpParameterFactory = httpParameterFactory;
     }
 
     @Override
-    public boolean canGenerate(ActionContext context) throws UnableToCompleteException {
-        // TODO: reuse code from ActionMethodGenerator + verify the param annotations
-        return true;
+    public boolean canGenerate(ActionContext context) {
+        this.context = context;
+        int potentialBodyParametersCount = 0;
+        boolean formParamDetected = false;
+        boolean canGenerate = true;
+
+        List<JParameter> parameters = Arrays.asList(context.getMethodContext().getMethod().getParameters());
+        for (JParameter parameter : parameters) {
+            boolean isValidHttpParam = httpParameterFactory.validate(parameter);
+
+            formParamDetected |= parameter.isAnnotationPresent(FORM.getAnnotationClass());
+            if (!isValidHttpParam && !isHttpParameter(parameter)) {
+                ++potentialBodyParametersCount;
+            }
+        }
+
+        if (potentialBodyParametersCount > 1) {
+            canGenerate = false;
+            error(MANY_POTENTIAL_BODY);
+        }
+        if (potentialBodyParametersCount >= 1 && formParamDetected) {
+            canGenerate = false;
+            error(FORM_AND_BODY_PARAM);
+        }
+
+        return canGenerate;
     }
 
     @Override
     public ActionDefinition generate(ActionContext context) throws UnableToCompleteException {
-        // TODO: Input should include parent's Path, Secured, ClassDefinition, Ctor Params (sub-resource)
+        // TODO: Input should include parent's Ctor Params (sub-resource)
 
         this.context = context;
         this.method = context.getMethodContext().getMethod();
 
         resolveClassName();
-        resolveHttpVerb();
-        resolvePath();
-        resolveSecured();
+        HttpMethod verb = resolveHttpVerb();
+        String path = resolvePath();
+        boolean secured = resolveSecured();
+        resolveResultType();
+        filterParameters();
+        resolveContentType();
 
-        ActionDefinition actionDefinition = new ActionDefinition(packageName, className);
+        actionDefinition = new ActionDefinition(packageName, className, verb, path, secured);
 
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
             mergeTemplate(printWriter);
             getContext().commit(getLogger(), printWriter);
+
+            registerMetadata();
         }
 
         return actionDefinition;
@@ -88,11 +147,16 @@ public class DefaultActionGenerator extends AbstractVelocityGenerator implements
     protected Map<String, Object> createTemplateVariables() {
         Map<String, Object> variables = Maps.newHashMap();
         String result = method.getReturnType().isParameterized().getTypeArgs()[0].getParameterizedQualifiedSourceName();
+        String bodyParameterName = bodyParameter != null ? bodyParameter.getVariableName() : null;
+
         variables.put("result", result);
-        variables.put("secured", secured);
-        variables.put("httpVerb", httpVerb);
-        variables.put("path", path);
+        variables.put("secured", actionDefinition.isSecured());
+        variables.put("httpVerb", actionDefinition.getVerb());
+        variables.put("path", actionDefinition.getPath());
+        variables.put("bodyParameterName", bodyParameterName);
         variables.put("parameters", context.getMethodDefinition().getParameters());
+        variables.put("httpParameters", httpParameters);
+        variables.put("contentType", contentType);
 
         return variables;
     }
@@ -130,23 +194,87 @@ public class DefaultActionGenerator extends AbstractVelocityGenerator implements
         return String.format("%s_%d_%s", resourceClassName, methodIndex, method.getName());
     }
 
-    private void resolveHttpVerb() throws UnableToCompleteException {
+    private HttpMethod resolveHttpVerb() throws UnableToCompleteException {
+        HttpMethod verb = null;
+
         // Should always resolve to a verb, as has already been verified
-        for (SupportedHttpAnnotations annotation : SupportedHttpAnnotations.values()) {
+        for (HttpVerbs annotation : HttpVerbs.values()) {
             if (method.isAnnotationPresent(annotation.getAnnotationClass())) {
-                httpVerb = annotation.getVerb();
+                verb = annotation.getVerb();
+            }
+        }
+
+        return verb;
+    }
+
+    private String resolvePath() {
+        return PathResolver.resolve(context.getMethodContext().getResourceDefinition().getPath(), method);
+    }
+
+    private boolean resolveSecured() {
+        ResourceMethodContext methodContext = context.getMethodContext();
+
+        return methodContext.getResourceDefinition().isSecured()
+                && !method.isAnnotationPresent(NoXsrfHeader.class);
+    }
+
+    private void resolveResultType() {
+        resultType = method.getReturnType().isParameterized().getTypeArgs()[0];
+    }
+
+    private void filterParameters() throws UnableToCompleteException {
+        List<Parameter> parameters = context.getMethodDefinition().getParameters();
+        httpParameters = Lists.newArrayList();
+        bodyParameter = null;
+
+        for (Parameter parameter : parameters) {
+            JParameter jParameter = parameter.getParameter();
+
+            if (httpParameterFactory.validate(jParameter)) {
+                HttpParameter httpParameter = httpParameterFactory.create(jParameter);
+                httpParameters.add(httpParameter);
+            } else {
+                // We already verified we have only one in #canGenerate()
+                assert bodyParameter == null;
+                bodyParameter = parameter;
             }
         }
     }
 
-    private void resolvePath() {
-        path = PathResolver.resolve(context.getMethodContext().getResourceDefinition().getPath(), method);
+    private void resolveContentType() {
+        Consumes consumes = method.getAnnotation(Consumes.class);
+
+        if (consumes != null && consumes.value().length > 0) {
+            contentType = consumes.value()[0];
+        } else {
+            contentType = null;
+        }
     }
 
-    private void resolveSecured() {
-        ResourceMethodContext methodContext = context.getMethodContext();
+    // TODO: Revisit when rewriting serialization generators
+    private void registerMetadata() throws UnableToCompleteException {
+        if (bodyParameter != null) {
+            registerMetadatum(BODY_TYPE, bodyParameter.getParameter().getType());
+        }
 
-        secured = methodContext.getResourceDefinition().isSecured();
-        secured &= !methodContext.getMethod().isAnnotationPresent(NoXsrfHeader.class);
+        registerMetadatum(RESPONSE_TYPE, resultType);
+    }
+
+    private void registerMetadatum(MetadataType metadataType, JType type) {
+        String typeLiteral = "\"" + type.getParameterizedQualifiedSourceName() + "\"";
+
+        eventBus.post(new RegisterMetadataEvent(getClassDefinition().toString(), metadataType, typeLiteral));
+
+        if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() == null) {
+            eventBus.post(new RegisterSerializableTypeEvent(type));
+        }
+    }
+
+    private void error(String message) {
+        method = context.getMethodContext().getMethod();
+        String typeName = method.getEnclosingType().getQualifiedSourceName();
+        String methodName = method.getName();
+
+        getLogger().error(String.format(message, typeName, methodName));
     }
 }

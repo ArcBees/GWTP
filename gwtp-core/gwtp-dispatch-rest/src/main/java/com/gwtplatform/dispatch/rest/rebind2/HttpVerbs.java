@@ -14,37 +14,37 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.action;
+package com.gwtplatform.dispatch.rest.rebind2;
 
-import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
+import java.lang.annotation.Annotation;
+
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
-public class ActionDefinition extends ClassDefinition {
-    private final HttpMethod verb;
-    private final String path;
-    private final boolean secured;
+/**
+ * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
+ */
+public enum HttpVerbs {
+    GET(HttpMethod.GET, javax.ws.rs.GET.class),
+    POST(HttpMethod.POST, javax.ws.rs.POST.class),
+    PUT(HttpMethod.PUT, javax.ws.rs.PUT.class),
+    DELETE(HttpMethod.DELETE, javax.ws.rs.DELETE.class),
+    HEAD(HttpMethod.HEAD, javax.ws.rs.HEAD.class);
 
-    public ActionDefinition(
-            String packageName,
-            String className,
+    private final HttpMethod verb;
+    private final Class<? extends Annotation> annotationClass;
+
+    HttpVerbs(
             HttpMethod verb,
-            String path,
-            boolean secured) {
-        super(packageName, className);
+            Class<? extends Annotation> annotationClass) {
         this.verb = verb;
-        this.path = path;
-        this.secured = secured;
+        this.annotationClass = annotationClass;
     }
 
     public HttpMethod getVerb() {
         return verb;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public boolean isSecured() {
-        return secured;
+    public Class<? extends Annotation> getAnnotationClass() {
+        return annotationClass;
     }
 }
