@@ -7,6 +7,10 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.client.AbstractActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
+#foreach ($binding in $bindings)
+import $binding.definition;
+import $binding.implementation;
+#end
 
 public class $impl extends AbstractGinModule {
     public static class Tmp1 extends AbstractActionMetadataProvider {}
@@ -26,5 +30,8 @@ public class $impl extends AbstractGinModule {
     protected void configure() {
         bind(ActionMetadataProvider.class).to(Tmp1.class).in(Singleton.class);
         bind(JacksonMapperProvider.class).to(Tmp2.class).in(Singleton.class);
+#foreach ($binding in $bindings)
+        bind(${binding.definition.className}.class).to(${binding.implementation.className}.class)#if($binding.isSingleton()).in(Singleton.class)#end;
+#end
     }
 }

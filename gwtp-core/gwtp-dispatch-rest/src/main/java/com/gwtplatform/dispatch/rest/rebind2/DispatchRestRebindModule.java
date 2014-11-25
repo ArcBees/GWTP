@@ -33,8 +33,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointModule;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModule;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
-import com.gwtplatform.dispatch.rest.rebind2.utils.VelocityProperties;
 
 public class DispatchRestRebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rest/rebind/velocity.properties";
@@ -53,6 +53,7 @@ public class DispatchRestRebindModule extends AbstractModule {
     protected void configure() {
         install(new EntryPointModule());
         install(new GinModule());
+        install(new ResourceModule());
 
         bind(GeneratorContext.class).toInstance(context);
 

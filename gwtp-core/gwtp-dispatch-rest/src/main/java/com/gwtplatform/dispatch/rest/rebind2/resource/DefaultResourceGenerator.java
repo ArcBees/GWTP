@@ -14,76 +14,98 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.gin;
+package com.gwtplatform.dispatch.rest.rebind2.resource;
 
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
-import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterGinBindingEvent;
 import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
-public class DefaultGinModuleGenerator extends AbstractVelocityGenerator implements GinModuleGenerator {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/gin/GinModule.vm";
-    private static final String GIN_MODULE_PROPERTY = "gwtp.dispatch.rest.ginmodule";
+public class DefaultResourceGenerator extends AbstractVelocityGenerator implements ResourceGenerator {
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/resource/Resource.vm";
+
+    private final EventBus eventBus;
 
     private String packageName;
     private String implName;
-    private List<RegisterGinBindingEvent> bindings;
+    private String resourceType;
+    private List<String> imports;
+    private JClassType classType;
 
     @Inject
-    DefaultGinModuleGenerator(
+    DefaultResourceGenerator(
             Logger logger,
             GeneratorContext context,
             EventBus eventBus,
             VelocityEngine velocityEngine) {
         super(logger, context, velocityEngine);
 
-        bindings = Lists.newArrayList();
-
-        eventBus.register(this);
+        this.eventBus = eventBus;
     }
 
     @Override
-    public boolean canGenerate() {
-        loadGinModuleProperty();
-
-        return !implName.isEmpty();
+    public boolean canGenerate(JClassType classType) throws UnableToCompleteException {
+        return classType.isInterface() != null && classType.isAnnotationPresent(Path.class);
     }
 
     @Override
-    public ClassDefinition generate() throws UnableToCompleteException {
+    public ClassDefinition generate(JClassType classType) throws UnableToCompleteException {
+        this.classType = classType;
+        resourceType = classType.getSimpleSourceName();
+        packageName = classType.getPackage().getName();
+        implName = resourceType + IMPL;
+
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
+            imports = Lists.newArrayList(classType.getQualifiedSourceName());
+
             mergeTemplate(printWriter);
             getContext().commit(getLogger(), printWriter);
+
+            registerResourceBinding();
         }
 
         return getClassDefinition();
     }
 
-    @Subscribe
-    public void onGinBindingRegistered(RegisterGinBindingEvent event) {
-        bindings.add(event);
+    private void registerResourceBinding() {
+        RegisterGinBindingEvent event =
+                new RegisterGinBindingEvent(new ClassDefinition(classType), getClassDefinition(), true);
+        eventBus.post(event);
     }
 
     @Override
     protected Map<String, Object> createTemplateVariables() {
         Map<String, Object> variables = Maps.newHashMap();
-        variables.put("bindings", bindings);
+        variables.put("imports", imports);
+        variables.put("resourceType", resourceType);
+
+        // TODO: Stub to make compile work
+        List<String> methodDefs = Lists.newArrayList();
+        JMethod[] methods = classType.getInheritableMethods();
+        if (methods != null) {
+            for (JMethod method : methods) {
+                methodDefs.add(method.getReadableDeclaration(false, true, true, true, true) + " { return null; }");
+            }
+        }
+        variables.put("methods", methodDefs);
+        // end
 
         return variables;
     }
@@ -101,32 +123,5 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
     @Override
     protected String getImplName() {
         return implName;
-    }
-
-    private void loadGinModuleProperty() {
-        try {
-            List<String> ginModuleValues =
-                    getContext().getPropertyOracle().getConfigurationProperty(GIN_MODULE_PROPERTY).getValues();
-            if (ginModuleValues.isEmpty()) {
-                logGinModulePropertyNotFound();
-            } else {
-                String ginModuleName = ginModuleValues.get(0);
-
-                if (ginModuleName.isEmpty()) {
-                    logGinModulePropertyNotFound();
-                } else {
-                    int lastDotIndex = ginModuleName.lastIndexOf('.');
-                    packageName = ginModuleName.substring(0, lastDotIndex);
-                    implName = ginModuleName.substring(lastDotIndex + 1);
-                }
-            }
-        } catch (BadPropertyValueException e) {
-            logGinModulePropertyNotFound();
-        }
-    }
-
-    private void logGinModulePropertyNotFound() {
-        getLogger().error("Unable to read the Gin Module name."
-                + "Make sure the configuration property '%s' is properly set in your GWT configuration.");
     }
 }

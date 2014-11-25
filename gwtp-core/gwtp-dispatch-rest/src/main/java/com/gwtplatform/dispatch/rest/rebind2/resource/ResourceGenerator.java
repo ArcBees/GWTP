@@ -14,17 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.utils;
+package com.gwtplatform.dispatch.rest.rebind2.resource;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
+import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
 
-import com.google.inject.BindingAnnotation;
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
-@BindingAnnotation
-public @interface VelocityProperties {
+public interface ResourceGenerator extends HasWeight, GeneratorWithInput<JClassType> {
 }

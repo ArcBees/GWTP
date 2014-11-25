@@ -26,6 +26,8 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
 public abstract class AbstractGenerator implements HasWeight {
+    protected static final String IMPL = "Impl";
+
     private final Logger logger;
     private final GeneratorContext context;
 

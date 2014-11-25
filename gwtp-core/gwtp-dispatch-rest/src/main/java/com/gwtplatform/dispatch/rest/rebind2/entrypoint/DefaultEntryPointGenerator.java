@@ -28,11 +28,10 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.dispatch.rest.client.AbstractDispatchRestEntryPoint;
 import com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
 public class DefaultEntryPointGenerator extends AbstractGenerator implements EntryPointGenerator {
-    private static final String IMPL = "Impl";
-
     private String packageName;
     private String className;
     private PrintWriter printWriter;
@@ -52,7 +51,7 @@ public class DefaultEntryPointGenerator extends AbstractGenerator implements Ent
     }
 
     @Override
-    public String generate(String typeName) throws UnableToCompleteException {
+    public ClassDefinition generate(String typeName) throws UnableToCompleteException {
         JClassType type = getType(typeName);
         packageName = type.getPackage().getName();
         className = type.getName() + IMPL;
@@ -62,7 +61,7 @@ public class DefaultEntryPointGenerator extends AbstractGenerator implements Ent
             generateFile();
         }
 
-        return packageName + "." + className;
+        return new ClassDefinition(packageName, className);
     }
 
     private void generateFile() {

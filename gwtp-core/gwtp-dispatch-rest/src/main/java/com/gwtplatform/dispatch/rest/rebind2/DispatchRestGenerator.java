@@ -26,38 +26,51 @@ import com.google.gwt.core.ext.RebindMode;
 import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Stage;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModuleGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
-import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstWeightedGeneratorForInput;
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findFirstGeneratorByWeightAndInput;
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstGeneratorByWeightAndInput;
 
-public class DispatchRestGenerator extends IncrementalGenerator {
+public class DispatchRestGenerator extends IncrementalGenerator implements GeneratorWithInput<String> {
     private static final int VERSION = 14;
 
     private final Logger logger;
+    private final GeneratorContext context;
     private final Set<EntryPointGenerator> entryPointGenerators;
+    private final Set<ResourceGenerator> resourceGenerators;
     private final GinModuleGenerator ginModuleGenerator;
 
     /**
      * This constructor is used by GWT to create the generator.
      */
+    @SuppressWarnings("UnusedDeclaration")
     public DispatchRestGenerator() {
         logger = null;
+        context = null;
         entryPointGenerators = null;
+        resourceGenerators = null;
         ginModuleGenerator = null;
     }
 
     @Inject
     DispatchRestGenerator(
             Logger logger,
+            GeneratorContext context,
             Set<EntryPointGenerator> entryPointGenerators,
+            Set<ResourceGenerator> resourceGenerators,
             GinModuleGenerator ginModuleGenerator) {
         this.logger = logger;
+        this.context = context;
         this.entryPointGenerators = entryPointGenerators;
+        this.resourceGenerators = resourceGenerators;
         this.ginModuleGenerator = ginModuleGenerator;
     }
 
@@ -71,24 +84,40 @@ public class DispatchRestGenerator extends IncrementalGenerator {
             throws UnableToCompleteException {
         Injector injector = Guice.createInjector(Stage.PRODUCTION, new DispatchRestRebindModule(logger, context));
         DispatchRestGenerator generator = injector.getInstance(DispatchRestGenerator.class);
-        String resultType = generator.generate(typeName);
+        ClassDefinition result = generator.generate(typeName);
 
-        return new RebindResult(RebindMode.USE_ALL_NEW_WITH_NO_CACHING, resultType);
+        return new RebindResult(RebindMode.USE_ALL_NEW_WITH_NO_CACHING, result.toString());
     }
 
-    /**
-     * Do the actual generation of Rest-Dispatch compatible code. This should only be called on an instance that has
-     * been created through DI.
-     */
-    private String generate(String typeName) throws UnableToCompleteException {
+    @Override
+    public boolean canGenerate(String typeName) throws UnableToCompleteException {
+        return context.getTypeOracle().findType(typeName) != null;
+    }
+
+    @Override
+    public ClassDefinition generate(String typeName) throws UnableToCompleteException {
         EntryPointGenerator entryPointGenerator
-                = getFirstWeightedGeneratorForInput(logger, entryPointGenerators, typeName);
+                = getFirstGeneratorByWeightAndInput(logger, entryPointGenerators, typeName);
 
-        // TODO: Generate services, actions, serializers
-
+        // TODO: Generate actions, serializers
+        generateResources();
         generateGinModule();
 
         return entryPointGenerator.generate(typeName);
+    }
+
+    private void generateResources() throws UnableToCompleteException {
+        for (JClassType type : context.getTypeOracle().getTypes()) {
+            maybeGenerateResource(type);
+        }
+    }
+
+    private void maybeGenerateResource(JClassType type) throws UnableToCompleteException {
+        ResourceGenerator generator = findFirstGeneratorByWeightAndInput(logger, resourceGenerators, type);
+
+        if (generator != null) {
+            generator.generate(type);
+        }
     }
 
     private void generateGinModule() throws UnableToCompleteException {

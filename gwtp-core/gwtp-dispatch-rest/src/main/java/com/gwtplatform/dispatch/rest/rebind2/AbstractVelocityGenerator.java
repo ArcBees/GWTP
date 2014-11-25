@@ -25,6 +25,7 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.common.collect.Maps;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
 public abstract class AbstractVelocityGenerator extends AbstractGenerator {
@@ -41,6 +42,10 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
         this.velocityEngine = velocityEngine;
     }
 
+    protected PrintWriter tryCreate() throws UnableToCompleteException {
+        return getContext().tryCreate(getLogger(), getPackageName(), getImplName());
+    }
+
     protected void mergeTemplate(PrintWriter printWriter) throws UnableToCompleteException {
         VelocityContext velocityContext = new VelocityContext(createTemplateVariables());
         velocityContext.put("lf", "\n");
@@ -51,7 +56,7 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
 
         if (!success) {
             getLogger().die("An error occured while generating '%s'. See previous entries for details.",
-                    getFullyQualifiedName());
+                    getClassDefinition());
         }
     }
 
@@ -59,8 +64,8 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
         return Maps.newHashMap();
     }
 
-    protected String getFullyQualifiedName() {
-        return getPackageName() + "." + getImplName();
+    protected ClassDefinition getClassDefinition() {
+        return new ClassDefinition(getPackageName(), getImplName());
     }
 
     protected abstract String getTemplate();

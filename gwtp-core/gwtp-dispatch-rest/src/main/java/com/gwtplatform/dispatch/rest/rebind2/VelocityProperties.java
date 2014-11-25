@@ -16,11 +16,15 @@
 
 package com.gwtplatform.dispatch.rest.rebind2;
 
-import com.google.gwt.core.ext.UnableToCompleteException;
-import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface GeneratorWithoutInput {
-    ClassDefinition generate() throws UnableToCompleteException;
+import com.google.inject.BindingAnnotation;
 
-    boolean canGenerate() throws UnableToCompleteException;
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface VelocityProperties {
 }

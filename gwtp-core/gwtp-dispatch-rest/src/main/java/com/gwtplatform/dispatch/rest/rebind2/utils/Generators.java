@@ -40,15 +40,33 @@ public class Generators {
      *
      * @throws UnableToCompleteException If no generators are found.
      */
-    public static <T extends HasWeight & GeneratorWithInput<I>, I> T getFirstWeightedGeneratorForInput(Logger logger,
+    public static <T extends HasWeight & GeneratorWithInput<I>, I> T getFirstGeneratorByWeightAndInput(Logger logger,
             Collection<T> generators, I input) throws UnableToCompleteException {
         List<T> sortedGenerators = sortGenerators(generators);
 
-        return getFirstGeneratorForInput(logger, sortedGenerators, input);
+        return getFirstGeneratorByInput(logger, sortedGenerators, input);
     }
 
-    public static <T extends GeneratorWithInput<I>, I> T getFirstGeneratorForInput(Logger logger,
+    public static <T extends HasWeight & GeneratorWithInput<I>, I> T findFirstGeneratorByWeightAndInput(Logger logger,
+            Collection<T> generators, I input) {
+        List<T> sortedGenerators = sortGenerators(generators);
+
+        return findFirstGeneratorByInput(logger, sortedGenerators, input);
+    }
+
+    public static <T extends GeneratorWithInput<I>, I> T getFirstGeneratorByInput(Logger logger,
             Collection<T> generators, I input) throws UnableToCompleteException {
+        T generator = findFirstGeneratorByInput(logger, generators, input);
+
+        if (generator != null) {
+            return generator;
+        }
+
+        return logger.die("Unable to find an appropriate generator for '%s'", input);
+    }
+
+    public static <T extends GeneratorWithInput<I>, I> T findFirstGeneratorByInput(Logger logger,
+            Collection<T> generators, I input) {
         for (T generator : generators) {
             try {
                 if (generator.canGenerate(input)) {
@@ -59,10 +77,10 @@ public class Generators {
             }
         }
 
-        return logger.die("Unable to find an appropriate generator for '%s'", input);
+        return null;
     }
 
-    public static <T extends HasWeight & GeneratorWithoutInput> T getFirstWeightedGenerator(Logger logger,
+    public static <T extends HasWeight & GeneratorWithoutInput> T getFirstGeneratorByWeight(Logger logger,
             Collection<T> generators) throws UnableToCompleteException {
         List<T> sortedGenerators = sortGenerators(generators);
 
