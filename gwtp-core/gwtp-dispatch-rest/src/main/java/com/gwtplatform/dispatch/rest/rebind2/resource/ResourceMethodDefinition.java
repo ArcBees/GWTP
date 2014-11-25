@@ -16,31 +16,52 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.resource;
 
+import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.gwtplatform.dispatch.rest.rebind2.Parameter;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 
-// TODO: Include any ClassDefinition generated along
 public class ResourceMethodDefinition {
     private final JMethod method;
-    private final String output;
+    private final List<Parameter> parameters;
     private final Set<String> imports;
+
+    private String output;
 
     public ResourceMethodDefinition(
             JMethod method,
-            Set<String> imports,
-            String output) {
+            List<Parameter> parameters) {
         this.method = method;
-        this.imports = imports;
-        this.output = output;
+        this.parameters = parameters;
+        this.imports = Sets.newTreeSet();
     }
 
     public JMethod getMethod() {
         return method;
     }
 
+    public List<Parameter> getParameters() {
+        return Lists.newArrayList(parameters);
+    }
+
+    public void addImport(ClassDefinition actionDefinition) {
+        addImport(actionDefinition.toString());
+    }
+
+    public void addImport(String qualifiedClassName) {
+        imports.add(qualifiedClassName);
+    }
+
     public Set<String> getImports() {
-        return imports;
+        return Sets.newTreeSet(imports);
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
     }
 
     public String getOutput() {

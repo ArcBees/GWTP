@@ -17,25 +17,29 @@
 package com.gwtplatform.dispatch.rest.rebind2.action;
 
 import java.io.StringWriter;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.Parameter;
 import com.gwtplatform.dispatch.rest.rebind2.SupportedHttpAnnotations;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodGenerator;
-import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
@@ -44,8 +48,8 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
 
     private final ActionGenerator actionGenerator;
 
-    private JMethod method;
-    private ClassDefinition actionDefinition;
+    private ResourceMethodContext context;
+    private ActionMethodDefinition methodDefinition;
 
     @Inject
     ActionMethodGenerator(
@@ -59,38 +63,44 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
     }
 
     @Override
-    public boolean canGenerate(JMethod method) throws UnableToCompleteException {
-        this.method = method;
-        JType returnType = method.getReturnType();
+    public boolean canGenerate(ResourceMethodContext context) throws UnableToCompleteException {
+        this.context = context;
+        JType returnType = context.getMethod().getReturnType();
+        ActionContext actionContext = new ActionContext(context, null);
 
         return returnType != null
                 && isValidRestAction(returnType)
                 && hasExactlyOneHttpVerb()
-                && actionGenerator.canGenerate(method);
+                && actionGenerator.canGenerate(actionContext);
     }
 
     @Override
-    public ResourceMethodDefinition generate(JMethod method) throws UnableToCompleteException {
-        this.method = method;
-        this.actionDefinition = actionGenerator.generate(method);
+    public ResourceMethodDefinition generate(ResourceMethodContext context) throws UnableToCompleteException {
+        this.context = context;
 
-        Set<String> imports = Sets.newHashSet(actionDefinition.toString());
-        StringWriter writer = new StringWriter();
+        // TODO: Carry parameters from the resource context (sub-resources)
+        List<Parameter> parameters = resolveParameters();
 
-        // TODO: Add the defaultDateFormat parameter
-        // TODO: Carry parameter from the method
-        // TODO: Carry parameter from the context (sub-resources)
+        methodDefinition = new ActionMethodDefinition(context.getMethod(), parameters);
+        methodDefinition.addImport(RestAction.class.getName());
 
-        mergeTemplate(writer);
+        generateAction();
+        generateMethod();
 
-        return new ResourceMethodDefinition(method, imports, writer.toString());
+        return methodDefinition;
     }
 
     @Override
     protected Map<String, Object> createTemplateVariables() {
         Map<String, Object> variables = Maps.newHashMap();
-        variables.put("methodDeclaration", method.getReadableDeclaration(false, true, true, true, true));
-        variables.put("action", actionDefinition);
+        JMethod method = context.getMethod();
+        String resultType =
+                method.getReturnType().isParameterized().getTypeArgs()[0].getParameterizedQualifiedSourceName();
+
+        variables.put("resultType", resultType);
+        variables.put("methodName", method.getName());
+        variables.put("parameters", methodDefinition.getParameters());
+        variables.put("action", methodDefinition.getActionDefinitions().get(0));
 
         return variables;
     }
@@ -102,12 +112,41 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
 
     @Override
     protected String getPackageName() {
-        return method.getEnclosingType().getPackage().getName();
+        return context.getMethod().getEnclosingType().getPackage().getName();
     }
 
     @Override
     protected String getImplName() {
+        JMethod method = context.getMethod();
         return method.getEnclosingType().getSimpleSourceName() + "#" + method.getName();
+    }
+
+    private List<Parameter> resolveParameters() {
+        List<JParameter> jParameters = Arrays.asList(context.getMethod().getParameters());
+
+        return Lists.transform(jParameters, new Function<JParameter, Parameter>() {
+            @Override
+            public Parameter apply(JParameter jParameter) {
+                return new Parameter(jParameter);
+            }
+        });
+    }
+
+    private void generateAction() throws UnableToCompleteException {
+        // TODO: Implement chain-of-command on action generators
+
+        ActionContext actionContext = new ActionContext(context, methodDefinition);
+
+        ActionDefinition actionDefinition = actionGenerator.generate(actionContext);
+        methodDefinition.addAction(actionDefinition);
+    }
+
+    private void generateMethod() throws UnableToCompleteException {
+        StringWriter writer = new StringWriter();
+
+        mergeTemplate(writer);
+
+        methodDefinition.setOutput(writer.toString());
     }
 
     private boolean isValidRestAction(JType type) throws UnableToCompleteException {
@@ -130,7 +169,7 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
         int annotationsCount = 0;
 
         for (SupportedHttpAnnotations annotation : SupportedHttpAnnotations.values()) {
-            if (method.isAnnotationPresent(annotation.getAnnotationClass())) {
+            if (context.getMethod().isAnnotationPresent(annotation.getAnnotationClass())) {
                 annotationsCount += 1;
             }
         }
@@ -153,6 +192,7 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
     }
 
     private void warn(String message) {
+        JMethod method = context.getMethod();
         getLogger().warn(message, method.getEnclosingType().getQualifiedSourceName(), method.getName());
     }
 }

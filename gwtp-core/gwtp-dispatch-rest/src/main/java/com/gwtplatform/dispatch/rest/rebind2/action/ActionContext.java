@@ -16,7 +16,24 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.action;
 
-import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
 
-public interface ActionGenerator extends GeneratorWithInput<ActionContext, ActionDefinition> {
+public class ActionContext {
+    private final ResourceMethodContext methodContext;
+    private final ActionMethodDefinition methodDefinition;
+
+    public ActionContext(
+            ResourceMethodContext methodContext,
+            ActionMethodDefinition methodDefinition) {
+        this.methodContext = methodContext;
+        this.methodDefinition = methodDefinition;
+    }
+
+    public ResourceMethodContext getMethodContext() {
+        return methodContext;
+    }
+
+    public ActionMethodDefinition getMethodDefinition() {
+        return methodDefinition;
+    }
 }

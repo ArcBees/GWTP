@@ -30,18 +30,22 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.SupportedHttpAnnotations;
-import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
+import com.gwtplatform.dispatch.rest.rebind2.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class DefaultActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/action/Action.vm";
 
+    private ActionContext context;
     private JMethod method;
     private String packageName;
     private String className;
-    private String result;
     private HttpMethod httpVerb;
+    private String path;
+    private boolean secured;
 
     @Inject
     DefaultActionGenerator(
@@ -52,20 +56,24 @@ public class DefaultActionGenerator extends AbstractVelocityGenerator implements
     }
 
     @Override
-    public boolean canGenerate(JMethod method) throws UnableToCompleteException {
+    public boolean canGenerate(ActionContext context) throws UnableToCompleteException {
         // TODO: reuse code from ActionMethodGenerator + verify the param annotations
         return true;
     }
 
     @Override
-    public ClassDefinition generate(JMethod method) throws UnableToCompleteException {
+    public ActionDefinition generate(ActionContext context) throws UnableToCompleteException {
         // TODO: Input should include parent's Path, Secured, ClassDefinition, Ctor Params (sub-resource)
 
-        this.method = method;
-        this.packageName = method.getEnclosingType().getPackage().getName();
-        this.className = generateTypeName();
-        this.result = method.getReturnType().isParameterized().getTypeArgs()[0].getParameterizedQualifiedSourceName();
-        this.httpVerb = resolveHttpVerb();
+        this.context = context;
+        this.method = context.getMethodContext().getMethod();
+
+        resolveClassName();
+        resolveHttpVerb();
+        resolvePath();
+        resolveSecured();
+
+        ActionDefinition actionDefinition = new ActionDefinition(packageName, className);
 
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
@@ -73,16 +81,18 @@ public class DefaultActionGenerator extends AbstractVelocityGenerator implements
             getContext().commit(getLogger(), printWriter);
         }
 
-        return getClassDefinition();
+        return actionDefinition;
     }
 
     @Override
     protected Map<String, Object> createTemplateVariables() {
         Map<String, Object> variables = Maps.newHashMap();
+        String result = method.getReturnType().isParameterized().getTypeArgs()[0].getParameterizedQualifiedSourceName();
         variables.put("result", result);
-        variables.put("secured", false);
+        variables.put("secured", secured);
         variables.put("httpVerb", httpVerb);
-        variables.put("path", "");
+        variables.put("path", path);
+        variables.put("parameters", context.getMethodDefinition().getParameters());
 
         return variables;
     }
@@ -102,23 +112,41 @@ public class DefaultActionGenerator extends AbstractVelocityGenerator implements
         return className;
     }
 
-    private HttpMethod resolveHttpVerb() throws UnableToCompleteException {
-        for (SupportedHttpAnnotations annotation : SupportedHttpAnnotations.values()) {
-            if (method.isAnnotationPresent(annotation.getAnnotationClass())) {
-                return annotation.getVerb();
-            }
-        }
+    private void resolveClassName() {
+        this.packageName = generatePackageName();
+        this.className = generateTypeName();
+    }
 
-        // Should never happen since this has been verified at this point
-        return null;
+    private String generatePackageName() {
+        return context.getMethodContext().getResourceDefinition().getPackageName();
     }
 
     private String generateTypeName() {
         // The service may define overloads, in which case the method name is not unique.
         // The method index will ensure the generated class uniqueness.
-        int methodIndex = Arrays.asList(method.getEnclosingType().getMethods()).indexOf(method);
+        int methodIndex = Arrays.asList(method.getEnclosingType().getInheritableMethods()).indexOf(method);
 
-        // TODO: Prefix with `parentTypeName_`
-        return "Action_" + methodIndex + "_" + method.getName();
+        String resourceClassName = context.getMethodContext().getResourceDefinition().getClassName();
+        return String.format("%s_%d_%s", resourceClassName, methodIndex, method.getName());
+    }
+
+    private void resolveHttpVerb() throws UnableToCompleteException {
+        // Should always resolve to a verb, as has already been verified
+        for (SupportedHttpAnnotations annotation : SupportedHttpAnnotations.values()) {
+            if (method.isAnnotationPresent(annotation.getAnnotationClass())) {
+                httpVerb = annotation.getVerb();
+            }
+        }
+    }
+
+    private void resolvePath() {
+        path = PathResolver.resolve(context.getMethodContext().getResourceDefinition().getPath(), method);
+    }
+
+    private void resolveSecured() {
+        ResourceMethodContext methodContext = context.getMethodContext();
+
+        secured = methodContext.getResourceDefinition().isSecured();
+        secured &= !methodContext.getMethod().isAnnotationPresent(NoXsrfHeader.class);
     }
 }

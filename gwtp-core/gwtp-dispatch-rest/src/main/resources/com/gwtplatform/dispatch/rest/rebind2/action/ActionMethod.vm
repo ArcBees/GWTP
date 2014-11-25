@@ -1,4 +1,7 @@
     @Override
-    $methodDeclaration {
-        return new ${action.className}(defaultDateFormat);
+    public RestAction<$resultType> ${methodName}(#foreach ($param in $parameters)
+
+            $param.qualifiedSourceName $param.variableName#commaIfNeeded($parameters)#end) {
+        return new ${action.className}(defaultDateFormat#foreach ($param in $parameters),
+                $param.variableName#end);
     }

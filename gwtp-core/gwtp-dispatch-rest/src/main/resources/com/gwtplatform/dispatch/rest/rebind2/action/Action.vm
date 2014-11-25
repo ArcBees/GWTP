@@ -5,7 +5,8 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 public class $impl extends AbstractRestAction<$result> {
     public ${impl}(
-            String defaultDateFormat) {
+            String defaultDateFormat#foreach ($param in $parameters),
+            $param.qualifiedSourceName $param.variableName#end) {
         super(HttpMethod.$httpVerb, "$path", defaultDateFormat);
     }
 

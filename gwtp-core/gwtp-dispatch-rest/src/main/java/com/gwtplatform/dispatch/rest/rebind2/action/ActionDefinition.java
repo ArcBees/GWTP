@@ -14,11 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.resource;
+package com.gwtplatform.dispatch.rest.rebind2.action;
 
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
-import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 
-public interface ResourceGenerator extends HasWeight, GeneratorWithInput<JClassType, ResourceDefinition> {
+public class ActionDefinition extends ClassDefinition {
+    public ActionDefinition(
+            String packageName,
+            String className) {
+        super(packageName, className);
+    }
 }
