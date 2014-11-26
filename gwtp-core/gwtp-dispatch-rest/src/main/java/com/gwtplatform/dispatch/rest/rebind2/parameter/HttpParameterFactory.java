@@ -26,11 +26,7 @@ import javax.ws.rs.QueryParam;
 
 import com.google.gwt.core.ext.typeinfo.JAbstractMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
-import com.gwtplatform.dispatch.rest.rebind2.utils.FormParamValueResolver;
-import com.gwtplatform.dispatch.rest.rebind2.utils.HeaderParamValueResolver;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
-import com.gwtplatform.dispatch.rest.rebind2.utils.PathParamValueResolver;
-import com.gwtplatform.dispatch.rest.rebind2.utils.QueryParamValueResolver;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 
 public class HttpParameterFactory {

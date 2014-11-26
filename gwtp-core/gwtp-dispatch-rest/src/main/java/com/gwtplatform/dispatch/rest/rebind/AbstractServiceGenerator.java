@@ -32,6 +32,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
 
 public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator {
     protected static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/RestService.vm";
@@ -103,8 +104,8 @@ public abstract class AbstractServiceGenerator extends AbstractVelocityGenerator
     }
 
     private boolean isAnyHttpActionAnnotationPresent(JMethod method) {
-        for (SupportedHttpActions action : SupportedHttpActions.values()) {
-            if (method.isAnnotationPresent(action.getAnnotationClass())) {
+        for (HttpVerbs verb : HttpVerbs.values()) {
+            if (method.isAnnotationPresent(verb.getAnnotationClass())) {
                 return true;
             }
         }

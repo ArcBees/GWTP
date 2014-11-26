@@ -14,10 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.utils;
+package com.gwtplatform.dispatch.rest.rebind2.parameter;
 
-import java.lang.annotation.Annotation;
+import javax.ws.rs.HeaderParam;
 
-public interface AnnotationValueResolver<T extends Annotation> {
-    String resolve(T annotation);
+public class HeaderParamValueResolver implements HttpParamValueResolver<HeaderParam> {
+    @Override
+    public String resolve(HeaderParam annotation) {
+        return annotation.value();
+    }
 }

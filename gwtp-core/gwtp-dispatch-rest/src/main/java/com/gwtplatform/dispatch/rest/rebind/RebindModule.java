@@ -32,6 +32,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.rebind2.VelocityProperties;
 
 /**
  * Rest-Dispatch code generation module.

@@ -52,13 +52,14 @@ import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.MethodCall;
 import com.gwtplatform.dispatch.rest.rebind.type.ResourceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterSerializableTypeEvent;
-import com.gwtplatform.dispatch.rest.rebind2.utils.AnnotationValueResolver;
-import com.gwtplatform.dispatch.rest.rebind2.utils.FormParamValueResolver;
-import com.gwtplatform.dispatch.rest.rebind2.utils.HeaderParamValueResolver;
-import com.gwtplatform.dispatch.rest.rebind2.utils.PathParamValueResolver;
-import com.gwtplatform.dispatch.rest.rebind2.utils.QueryParamValueResolver;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.FormParamValueResolver;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.HeaderParamValueResolver;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParamValueResolver;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.PathParamValueResolver;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.QueryParamValueResolver;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
@@ -300,10 +301,10 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private void retrieveHttpMethod() throws UnableToCompleteException {
         Boolean moreThanOneAnnotation = false;
 
-        for (SupportedHttpActions method : SupportedHttpActions.values()) {
-            if (actionMethod.isAnnotationPresent(method.getAnnotationClass())) {
+        for (HttpVerbs verb : HttpVerbs.values()) {
+            if (actionMethod.isAnnotationPresent(verb.getAnnotationClass())) {
                 moreThanOneAnnotation = moreThanOneAnnotation || httpMethod != null;
-                httpMethod = method.getHttpMethod();
+                httpMethod = verb.getVerb();
             }
         }
 
@@ -326,7 +327,7 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     }
 
     private <T extends Annotation> void buildParamList(List<JParameter> parameters, Class<T> annotationClass,
-            AnnotationValueResolver<T> annotationValueResolver, List<AnnotatedMethodParameter> destination)
+            HttpParamValueResolver<T> annotationValueResolver, List<AnnotatedMethodParameter> destination)
             throws UnableToCompleteException {
         List<Class<? extends Annotation>> restrictedAnnotations = getRestrictedAnnotations(annotationClass);
 

@@ -14,17 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind;
+package com.gwtplatform.dispatch.rest.rebind2.parameter;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.ws.rs.QueryParam;
 
-import com.google.inject.BindingAnnotation;
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@BindingAnnotation
-public @interface VelocityProperties {
+public class QueryParamValueResolver implements HttpParamValueResolver<QueryParam> {
+    @Override
+    public String resolve(QueryParam annotation) {
+        return annotation.value();
+    }
 }

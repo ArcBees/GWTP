@@ -14,13 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.utils;
+package com.gwtplatform.dispatch.rest.rebind2.parameter;
 
-import javax.ws.rs.FormParam;
+import java.lang.annotation.Annotation;
 
-public class FormParamValueResolver implements AnnotationValueResolver<FormParam> {
-    @Override
-    public String resolve(FormParam annotation) {
-        return annotation.value();
-    }
+public interface HttpParamValueResolver<T extends Annotation> {
+    String resolve(T annotation);
 }
