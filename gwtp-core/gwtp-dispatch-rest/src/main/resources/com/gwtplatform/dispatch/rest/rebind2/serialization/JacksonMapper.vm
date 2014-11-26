@@ -7,4 +7,4 @@ import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import $import;
 
 @Singleton
-public interface $implName extends ObjectMapper<$type> {}
+public interface $impl extends ObjectMapper<$type> {}

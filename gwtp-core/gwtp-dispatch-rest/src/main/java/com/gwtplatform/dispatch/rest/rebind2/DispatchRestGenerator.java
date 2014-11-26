@@ -33,6 +33,8 @@ import com.google.inject.Stage;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModuleGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.serialization.ActionMetadataProviderGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.serialization.JacksonMapperProviderGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
@@ -46,6 +48,8 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
     private final GeneratorContext context;
     private final Set<EntryPointGenerator> entryPointGenerators;
     private final Set<ResourceGenerator> resourceGenerators;
+    private final ActionMetadataProviderGenerator actionMetadataProviderGenerator;
+    private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
     private final GinModuleGenerator ginModuleGenerator;
 
     /**
@@ -57,6 +61,8 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
         context = null;
         entryPointGenerators = null;
         resourceGenerators = null;
+        actionMetadataProviderGenerator = null;
+        jacksonMapperProviderGenerator = null;
         ginModuleGenerator = null;
     }
 
@@ -66,11 +72,15 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
             GeneratorContext context,
             Set<EntryPointGenerator> entryPointGenerators,
             Set<ResourceGenerator> resourceGenerators,
+            ActionMetadataProviderGenerator actionMetadataProviderGenerator,
+            JacksonMapperProviderGenerator jacksonMapperProviderGenerator,
             GinModuleGenerator ginModuleGenerator) {
         this.logger = logger;
         this.context = context;
         this.entryPointGenerators = entryPointGenerators;
         this.resourceGenerators = resourceGenerators;
+        this.actionMetadataProviderGenerator = actionMetadataProviderGenerator;
+        this.jacksonMapperProviderGenerator = jacksonMapperProviderGenerator;
         this.ginModuleGenerator = ginModuleGenerator;
     }
 
@@ -99,8 +109,9 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
         EntryPointGenerator entryPointGenerator
                 = getFirstGeneratorByWeightAndInput(logger, entryPointGenerators, typeName);
 
-        // TODO: Generate actions, serializers
         generateResources();
+        generateMetadataProvider();
+        generateJacksonMapperProvider();
         generateGinModule();
 
         return entryPointGenerator.generate(typeName);
@@ -117,6 +128,22 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
 
         if (generator != null) {
             generator.generate(type);
+        }
+    }
+
+    private void generateMetadataProvider() throws UnableToCompleteException {
+        if (!actionMetadataProviderGenerator.canGenerate()) {
+            logger.die("Unable to generate metadata provider. See previous log entries.");
+        } else {
+            actionMetadataProviderGenerator.generate();
+        }
+    }
+
+    private void generateJacksonMapperProvider() throws UnableToCompleteException {
+        if (!jacksonMapperProviderGenerator.canGenerate()) {
+            logger.die("Unable to generate jackson mapper provider. See previous log entries.");
+        } else {
+            jacksonMapperProviderGenerator.generate();
         }
     }
 

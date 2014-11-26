@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,10 +23,7 @@ public class RegisterMetadataEvent {
     private final MetadataType metadataType;
     private final String metadata;
 
-    public RegisterMetadataEvent(
-            String actionClass,
-            MetadataType metadataType,
-            String metadata) {
+    public RegisterMetadataEvent(String actionClass, MetadataType metadataType, String metadata) {
         this.actionClass = actionClass;
         this.metadataType = metadataType;
         this.metadata = metadata;

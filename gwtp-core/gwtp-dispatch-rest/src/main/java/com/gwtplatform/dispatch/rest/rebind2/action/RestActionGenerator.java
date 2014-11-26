@@ -35,13 +35,13 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.MetadataType;
-import com.gwtplatform.dispatch.rest.rebind.event.RegisterMetadataEvent;
-import com.gwtplatform.dispatch.rest.rebind.event.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.HttpParameter;
 import com.gwtplatform.dispatch.rest.rebind2.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
 import com.gwtplatform.dispatch.rest.rebind2.Parameter;
+import com.gwtplatform.dispatch.rest.rebind2.events.RegisterMetadataEvent;
+import com.gwtplatform.dispatch.rest.rebind2.events.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
@@ -54,7 +54,7 @@ import static com.gwtplatform.dispatch.rest.client.MetadataType.RESPONSE_TYPE;
 import static com.gwtplatform.dispatch.rest.rebind2.HttpParameterType.FORM;
 import static com.gwtplatform.dispatch.rest.rebind2.HttpParameterType.isHttpParameter;
 
-public class DefaultActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
+public class RestActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/action/Action.vm";
     private static final String MANY_POTENTIAL_BODY = "`%s#%s` has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "`%s#%s` has both @FormParam and a body parameter. "
@@ -74,7 +74,7 @@ public class DefaultActionGenerator extends AbstractVelocityGenerator implements
     private String contentType;
 
     @Inject
-    DefaultActionGenerator(
+    RestActionGenerator(
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine,

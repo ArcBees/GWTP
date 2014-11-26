@@ -36,6 +36,6 @@ public class ResourceModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        addResourceGenerator(binder(), DefaultResourceGenerator.class);
+        addResourceGenerator(binder(), TopLevelResourceGenerator.class);
     }
 }

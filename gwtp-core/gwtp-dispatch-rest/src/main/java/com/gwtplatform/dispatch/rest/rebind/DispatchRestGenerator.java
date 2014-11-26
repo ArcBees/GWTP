@@ -31,6 +31,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.gwtplatform.dispatch.rest.client.AbstractDispatchRestEntryPoint;
 import com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions;
+import com.gwtplatform.dispatch.rest.rebind2.serialization.ActionMetadataProviderGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.serialization.JacksonMapperProviderGenerator;
 
 public class DispatchRestGenerator extends Generator {
     private static final String SUFFIX = "Impl";

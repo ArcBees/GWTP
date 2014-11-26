@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.type;
+package com.gwtplatform.dispatch.rest.rebind2.serialization;
 
 import com.google.common.base.Objects;
 import com.gwtplatform.dispatch.rest.client.MetadataType;

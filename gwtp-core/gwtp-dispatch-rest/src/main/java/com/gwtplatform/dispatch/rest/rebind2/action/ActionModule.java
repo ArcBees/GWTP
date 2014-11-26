@@ -23,7 +23,7 @@ import static com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule.addR
 public class ActionModule extends AbstractModule {
     @Override
     protected void configure() {
-        bind(ActionGenerator.class).to(DefaultActionGenerator.class);
+        bind(ActionGenerator.class).to(RestActionGenerator.class);
 
         addResourceMethodGenerator(binder(), ActionMethodGenerator.class);
     }

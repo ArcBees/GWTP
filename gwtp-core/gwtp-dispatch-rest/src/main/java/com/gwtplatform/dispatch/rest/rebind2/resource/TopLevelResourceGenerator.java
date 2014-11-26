@@ -43,7 +43,7 @@ import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstGeneratorByWeightAndInput;
 
-public class DefaultResourceGenerator extends AbstractVelocityGenerator implements ResourceGenerator {
+public class TopLevelResourceGenerator extends AbstractVelocityGenerator implements ResourceGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/resource/Resource.vm";
 
     private final EventBus eventBus;
@@ -59,7 +59,7 @@ public class DefaultResourceGenerator extends AbstractVelocityGenerator implemen
     private ResourceDefinition resourceDefinition;
 
     @Inject
-    DefaultResourceGenerator(
+    TopLevelResourceGenerator(
             Logger logger,
             GeneratorContext context,
             EventBus eventBus,
