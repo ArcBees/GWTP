@@ -14,7 +14,7 @@
     <dependencies>
         <!-- Compile Dependencies -->
         <dependency>
-            <groupId>com.gwtplatform</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-rpc-shared</artifactId>
         </dependency>
         <dependency>
@@ -22,11 +22,11 @@
             <artifactId>gwtp-dispatch-common-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.gwtplatform</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-rpc-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.gwtplatform</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-rpc-server</artifactId>
         </dependency>
         <dependency>
