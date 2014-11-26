@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2;
+package com.gwtplatform.dispatch.rest.rebind2.parameter;
 
 import java.lang.annotation.Annotation;
 

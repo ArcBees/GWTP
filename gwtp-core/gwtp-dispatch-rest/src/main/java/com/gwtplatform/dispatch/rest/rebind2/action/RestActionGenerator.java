@@ -36,12 +36,12 @@ import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
-import com.gwtplatform.dispatch.rest.rebind2.HttpParameter;
-import com.gwtplatform.dispatch.rest.rebind2.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
 import com.gwtplatform.dispatch.rest.rebind2.Parameter;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterSerializableTypeEvent;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParameter;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
@@ -51,8 +51,8 @@ import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
 import static com.gwtplatform.dispatch.rest.client.MetadataType.RESPONSE_TYPE;
-import static com.gwtplatform.dispatch.rest.rebind2.HttpParameterType.FORM;
-import static com.gwtplatform.dispatch.rest.rebind2.HttpParameterType.isHttpParameter;
+import static com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParameterType.FORM;
+import static com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParameterType.isHttpParameter;
 
 public class RestActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/action/Action.vm";
@@ -68,10 +68,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     private ActionDefinition actionDefinition;
     private String packageName;
     private String className;
-    private JClassType resultType;
-    private Parameter bodyParameter;
     private List<HttpParameter> httpParameters;
-    private String contentType;
+    private Parameter bodyParameter;
 
     @Inject
     RestActionGenerator(
@@ -126,11 +124,12 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         HttpMethod verb = resolveHttpVerb();
         String path = resolvePath();
         boolean secured = resolveSecured();
-        resolveResultType();
+        JClassType resultType = resolveResultType();
+        String contentType = resolveContentType();
         filterParameters();
-        resolveContentType();
 
-        actionDefinition = new ActionDefinition(packageName, className, verb, path, secured);
+        actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, contentType,
+                resultType, httpParameters, bodyParameter);
 
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
@@ -146,17 +145,18 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     @Override
     protected Map<String, Object> createTemplateVariables() {
         Map<String, Object> variables = Maps.newHashMap();
-        String result = method.getReturnType().isParameterized().getTypeArgs()[0].getParameterizedQualifiedSourceName();
-        String bodyParameterName = bodyParameter != null ? bodyParameter.getVariableName() : null;
+        String resultTypeName = actionDefinition.getResultType().getParameterizedQualifiedSourceName();
+        String bodyParameterName =
+                actionDefinition.hasBody() ? actionDefinition.getBodyParameter().getVariableName() : null;
 
-        variables.put("result", result);
+        variables.put("result", resultTypeName);
         variables.put("secured", actionDefinition.isSecured());
         variables.put("httpVerb", actionDefinition.getVerb());
         variables.put("path", actionDefinition.getPath());
         variables.put("bodyParameterName", bodyParameterName);
         variables.put("parameters", context.getMethodDefinition().getParameters());
-        variables.put("httpParameters", httpParameters);
-        variables.put("contentType", contentType);
+        variables.put("httpParameters", actionDefinition.getHttpParameters());
+        variables.put("contentType", actionDefinition.getContentType());
 
         return variables;
     }
@@ -218,8 +218,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
                 && !method.isAnnotationPresent(NoXsrfHeader.class);
     }
 
-    private void resolveResultType() {
-        resultType = method.getReturnType().isParameterized().getTypeArgs()[0];
+    private JClassType resolveResultType() {
+        return method.getReturnType().isParameterized().getTypeArgs()[0];
     }
 
     private void filterParameters() throws UnableToCompleteException {
@@ -241,14 +241,17 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         }
     }
 
-    private void resolveContentType() {
+    private String resolveContentType() {
         Consumes consumes = method.getAnnotation(Consumes.class);
+        String contentType;
 
         if (consumes != null && consumes.value().length > 0) {
             contentType = consumes.value()[0];
         } else {
             contentType = null;
         }
+
+        return contentType;
     }
 
     // TODO: Revisit when rewriting serialization generators
@@ -257,7 +260,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
             registerMetadatum(BODY_TYPE, bodyParameter.getParameter().getType());
         }
 
-        registerMetadatum(RESPONSE_TYPE, resultType);
+        registerMetadatum(RESPONSE_TYPE, actionDefinition.getResultType());
     }
 
     private void registerMetadatum(MetadataType metadataType, JType type) {

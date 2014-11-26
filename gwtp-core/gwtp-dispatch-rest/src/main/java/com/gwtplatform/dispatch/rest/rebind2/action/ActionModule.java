@@ -17,14 +17,21 @@
 package com.gwtplatform.dispatch.rest.rebind2.action;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Binder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import com.google.inject.multibindings.Multibinder;
 
 import static com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule.addResourceMethodGenerator;
 
 public class ActionModule extends AbstractModule {
+    public static LinkedBindingBuilder<ActionGenerator> addActionGenerator(Binder binder) {
+        return Multibinder.newSetBinder(binder, ActionGenerator.class).addBinding();
+    }
+
     @Override
     protected void configure() {
-        bind(ActionGenerator.class).to(RestActionGenerator.class);
+        addActionGenerator(binder()).to(RestActionGenerator.class);
 
-        addResourceMethodGenerator(binder(), ActionMethodGenerator.class);
+        addResourceMethodGenerator(binder()).to(ActionMethodGenerator.class);
     }
 }

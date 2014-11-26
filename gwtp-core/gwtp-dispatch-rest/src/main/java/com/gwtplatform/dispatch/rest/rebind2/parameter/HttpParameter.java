@@ -14,10 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2;
+package com.gwtplatform.dispatch.rest.rebind2.parameter;
 
 import com.google.common.base.Optional;
 import com.google.gwt.core.ext.typeinfo.JParameter;
+import com.gwtplatform.dispatch.rest.rebind2.Parameter;
 
 public class HttpParameter extends Parameter {
     private final HttpParameterType type;

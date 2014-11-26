@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.rebind2.action;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -43,10 +44,13 @@ import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findFirstGeneratorByInput;
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstGeneratorByWeightAndInput;
+
 public class ActionMethodGenerator extends AbstractVelocityGenerator implements ResourceMethodGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/action/ActionMethod.vm";
 
-    private final ActionGenerator actionGenerator;
+    private final Set<ActionGenerator> actionGenerators;
 
     private ResourceMethodContext context;
     private ActionMethodDefinition methodDefinition;
@@ -55,23 +59,31 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
     ActionMethodGenerator(
             Logger logger,
             GeneratorContext context,
-            ActionGenerator actionGenerator,
+            Set<ActionGenerator> actionGenerators,
             VelocityEngine velocityEngine) {
         super(logger, context, velocityEngine);
 
-        this.actionGenerator = actionGenerator;
+        this.actionGenerators = actionGenerators;
     }
 
     @Override
     public boolean canGenerate(ResourceMethodContext context) throws UnableToCompleteException {
         this.context = context;
         JType returnType = context.getMethod().getReturnType();
-        ActionContext actionContext = new ActionContext(context, null);
 
-        return returnType != null
+        boolean canGenerate = returnType != null
                 && isValidRestAction(returnType)
-                && hasExactlyOneHttpVerb()
-                && actionGenerator.canGenerate(actionContext);
+                && hasExactlyOneHttpVerb();
+
+        // Make sure we have at least one action generator suited for the work
+        if (canGenerate) {
+            ActionContext actionContext = new ActionContext(context, null);
+            ActionGenerator actionGenerator = findFirstGeneratorByInput(getLogger(), actionGenerators, actionContext);
+
+            canGenerate = actionGenerator != null;
+        }
+
+        return canGenerate;
     }
 
     @Override
@@ -133,12 +145,11 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
     }
 
     private void generateAction() throws UnableToCompleteException {
-        // TODO: Implement chain-of-command on action generators
-
         ActionContext actionContext = new ActionContext(context, methodDefinition);
+        ActionGenerator generator = getFirstGeneratorByWeightAndInput(getLogger(), actionGenerators, actionContext);
+        ActionDefinition definition = generator.generate(actionContext);
 
-        ActionDefinition actionDefinition = actionGenerator.generate(actionContext);
-        methodDefinition.addAction(actionDefinition);
+        methodDefinition.addAction(definition);
     }
 
     private void generateMethod() throws UnableToCompleteException {

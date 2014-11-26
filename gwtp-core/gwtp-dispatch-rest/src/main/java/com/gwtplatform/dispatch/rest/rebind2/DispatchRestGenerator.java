@@ -109,6 +109,8 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
         EntryPointGenerator entryPointGenerator
                 = getFirstGeneratorByWeightAndInput(logger, entryPointGenerators, typeName);
 
+        // TODO: Store the returned definitions, so it's possible to run "enhancer".
+        // Maybe allow them to run before everything. After resources. Before GIN. After GIN.
         generateResources();
         generateMetadataProvider();
         generateJacksonMapperProvider();

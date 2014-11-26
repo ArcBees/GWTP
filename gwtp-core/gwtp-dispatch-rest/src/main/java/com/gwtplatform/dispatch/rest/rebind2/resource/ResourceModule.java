@@ -18,24 +18,20 @@ package com.gwtplatform.dispatch.rest.rebind2.resource;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
+import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.multibindings.Multibinder;
 
 public class ResourceModule extends AbstractModule {
-    public static void addResourceGenerator(Binder binder,
-            Class<? extends ResourceGenerator> generatorClass) {
-        Multibinder<ResourceGenerator> multibinder = Multibinder.newSetBinder(binder, ResourceGenerator.class);
-        multibinder.addBinding().to(generatorClass);
+    public static LinkedBindingBuilder<ResourceGenerator> addResourceGenerator(Binder binder) {
+        return Multibinder.newSetBinder(binder, ResourceGenerator.class).addBinding();
     }
 
-    public static void addResourceMethodGenerator(Binder binder,
-            Class<? extends ResourceMethodGenerator> generatorClass) {
-        Multibinder<ResourceMethodGenerator> multibinder =
-                Multibinder.newSetBinder(binder, ResourceMethodGenerator.class);
-        multibinder.addBinding().to(generatorClass);
+    public static LinkedBindingBuilder<ResourceMethodGenerator> addResourceMethodGenerator(Binder binder) {
+        return Multibinder.newSetBinder(binder, ResourceMethodGenerator.class).addBinding();
     }
 
     @Override
     protected void configure() {
-        addResourceGenerator(binder(), TopLevelResourceGenerator.class);
+        addResourceGenerator(binder()).to(TopLevelResourceGenerator.class);
     }
 }

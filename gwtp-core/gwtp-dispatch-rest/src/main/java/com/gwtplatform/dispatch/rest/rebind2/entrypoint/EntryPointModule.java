@@ -18,17 +18,16 @@ package com.gwtplatform.dispatch.rest.rebind2.entrypoint;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
+import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.multibindings.Multibinder;
 
 public class EntryPointModule extends AbstractModule {
-    public static void addEntryPointGenerator(Binder binder,
-            Class<? extends EntryPointGenerator> generatorClass) {
-        Multibinder<EntryPointGenerator> multibinder = Multibinder.newSetBinder(binder, EntryPointGenerator.class);
-        multibinder.addBinding().to(generatorClass);
+    public static LinkedBindingBuilder<EntryPointGenerator> addEntryPointGenerator(Binder binder) {
+        return Multibinder.newSetBinder(binder, EntryPointGenerator.class).addBinding();
     }
 
     @Override
     protected void configure() {
-        addEntryPointGenerator(binder(), DefaultEntryPointGenerator.class);
+        addEntryPointGenerator(binder()).to(DefaultEntryPointGenerator.class);
     }
 }

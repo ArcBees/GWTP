@@ -16,6 +16,12 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.action;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.gwtplatform.dispatch.rest.rebind2.Parameter;
+import com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParameter;
 import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
@@ -23,17 +29,30 @@ public class ActionDefinition extends ClassDefinition {
     private final HttpMethod verb;
     private final String path;
     private final boolean secured;
+    private final String contentType;
+    private final JClassType resultType;
+    private final List<HttpParameter> httpParameters;
+    private final Parameter bodyParameter;
 
     public ActionDefinition(
             String packageName,
             String className,
             HttpMethod verb,
             String path,
-            boolean secured) {
+            boolean secured,
+            String contentType,
+            JClassType resultType,
+            List<HttpParameter> httpParameters,
+            Parameter bodyParameter) {
         super(packageName, className);
+
         this.verb = verb;
         this.path = path;
         this.secured = secured;
+        this.contentType = contentType;
+        this.resultType = resultType;
+        this.httpParameters = httpParameters;
+        this.bodyParameter = bodyParameter;
     }
 
     public HttpMethod getVerb() {
@@ -46,5 +65,25 @@ public class ActionDefinition extends ClassDefinition {
 
     public boolean isSecured() {
         return secured;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public JClassType getResultType() {
+        return resultType;
+    }
+
+    public List<HttpParameter> getHttpParameters() {
+        return Lists.newArrayList(httpParameters);
+    }
+
+    public Parameter getBodyParameter() {
+        return bodyParameter;
+    }
+
+    public boolean hasBody() {
+        return bodyParameter != null;
     }
 }
