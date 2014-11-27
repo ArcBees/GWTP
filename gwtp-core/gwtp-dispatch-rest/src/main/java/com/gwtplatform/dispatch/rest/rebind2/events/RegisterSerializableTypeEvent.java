@@ -16,13 +16,20 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.events;
 
+import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.typeinfo.JType;
 
 public class RegisterSerializableTypeEvent {
     private final JType type;
 
-    public RegisterSerializableTypeEvent(JType type) {
+    RegisterSerializableTypeEvent(
+            JType type) {
         this.type = type;
+    }
+
+    public static void post(EventBus eventBus, JType type) {
+        RegisterSerializableTypeEvent event = new RegisterSerializableTypeEvent(type);
+        eventBus.post(event);
     }
 
     public JType getType() {

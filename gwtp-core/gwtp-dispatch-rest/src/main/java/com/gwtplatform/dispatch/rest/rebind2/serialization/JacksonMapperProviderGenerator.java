@@ -113,6 +113,6 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
         ClassDefinition definition = new ClassDefinition(getType(JacksonMapperProvider.class));
         ClassDefinition implementation = getClassDefinition();
 
-        eventBus.post(new RegisterGinBindingEvent(definition, implementation, true));
+        RegisterGinBindingEvent.postSingleton(eventBus, definition, implementation);
     }
 }

@@ -115,6 +115,6 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
         ClassDefinition definition = new ClassDefinition(getType(ActionMetadataProvider.class));
         ClassDefinition implementation = getClassDefinition();
 
-        eventBus.post(new RegisterGinBindingEvent(definition, implementation, true));
+        RegisterGinBindingEvent.postSingleton(eventBus, definition, implementation);
     }
 }

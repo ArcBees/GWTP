@@ -235,10 +235,10 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private void registerMetadatum(MetadataType metadataType, JType type) {
         String typeLiteral = "\"" + type.getParameterizedQualifiedSourceName() + "\"";
 
-        eventBus.post(new RegisterMetadataEvent(getQualifiedImplName(), metadataType, typeLiteral));
+        RegisterMetadataEvent.post(eventBus, getQualifiedImplName(), metadataType, typeLiteral);
 
         if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() == null) {
-            eventBus.post(new RegisterSerializableTypeEvent(type));
+            RegisterSerializableTypeEvent.post(eventBus, type);
         }
     }
 

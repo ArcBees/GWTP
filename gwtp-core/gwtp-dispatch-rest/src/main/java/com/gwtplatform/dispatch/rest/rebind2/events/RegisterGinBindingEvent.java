@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.events;
 
+import com.google.common.eventbus.EventBus;
 import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 
 public class RegisterGinBindingEvent {
@@ -23,19 +24,23 @@ public class RegisterGinBindingEvent {
     private final ClassDefinition implementation;
     private final boolean isSingleton;
 
-    public RegisterGinBindingEvent(
-            ClassDefinition definition,
-            ClassDefinition implementation) {
-        this(definition, implementation, false);
-    }
-
-    public RegisterGinBindingEvent(
+    RegisterGinBindingEvent(
             ClassDefinition definition,
             ClassDefinition implementation,
             boolean isSingleton) {
         this.definition = definition;
         this.implementation = implementation;
         this.isSingleton = isSingleton;
+    }
+
+    public static void post(EventBus eventBus, ClassDefinition definition, ClassDefinition implementation) {
+        RegisterGinBindingEvent event = new RegisterGinBindingEvent(definition, implementation, false);
+        eventBus.post(event);
+    }
+
+    public static void postSingleton(EventBus eventBus, ClassDefinition definition, ClassDefinition implementation) {
+        RegisterGinBindingEvent event = new RegisterGinBindingEvent(definition, implementation, false);
+        eventBus.post(event);
     }
 
     public ClassDefinition getDefinition() {

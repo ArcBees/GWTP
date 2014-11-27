@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.events;
 
+import com.google.common.eventbus.EventBus;
 import com.gwtplatform.dispatch.rest.client.MetadataType;
 
 public class RegisterMetadataEvent {
@@ -23,10 +24,18 @@ public class RegisterMetadataEvent {
     private final MetadataType metadataType;
     private final String metadata;
 
-    public RegisterMetadataEvent(String actionClass, MetadataType metadataType, String metadata) {
+    RegisterMetadataEvent(
+            String actionClass,
+            MetadataType metadataType,
+            String metadata) {
         this.actionClass = actionClass;
         this.metadataType = metadataType;
         this.metadata = metadata;
+    }
+
+    public static void post(EventBus eventBus, String actionClass, MetadataType metadataType, String metadata) {
+        RegisterMetadataEvent event = new RegisterMetadataEvent(actionClass, metadataType, metadata);
+        eventBus.post(event);
     }
 
     public String getActionClass() {

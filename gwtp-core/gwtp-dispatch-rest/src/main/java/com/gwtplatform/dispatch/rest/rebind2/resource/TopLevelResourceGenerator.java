@@ -17,8 +17,6 @@
 package com.gwtplatform.dispatch.rest.rebind2.resource;
 
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -26,37 +24,20 @@ import javax.ws.rs.Path;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterGinBindingEvent;
-import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind2.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
-import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findGenerator;
-import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getGenerator;
-
-public class TopLevelResourceGenerator extends AbstractVelocityGenerator implements ResourceGenerator {
+public class TopLevelResourceGenerator extends AbstractResourceGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/resource/Resource.vm";
 
     private final EventBus eventBus;
-    private final Set<ResourceMethodGenerator> resourceMethodGenerators;
 
-    private ResourceContext context;
-    private JClassType resourceType;
-    private String resourceTypeName;
-    private String packageName;
-    private String implName;
-    private String path;
-    private boolean secured;
-    private Set<String> imports;
     private ResourceDefinition resourceDefinition;
 
     @Inject
@@ -66,52 +47,25 @@ public class TopLevelResourceGenerator extends AbstractVelocityGenerator impleme
             EventBus eventBus,
             VelocityEngine velocityEngine,
             Set<ResourceMethodGenerator> resourceMethodGenerators) {
-        super(logger, context, velocityEngine);
+        super(logger, context, velocityEngine, resourceMethodGenerators);
 
         this.eventBus = eventBus;
-        this.resourceMethodGenerators = resourceMethodGenerators;
     }
 
     @Override
     public boolean canGenerate(ResourceContext context) throws UnableToCompleteException {
         setContext(context);
 
-        return resourceType.isInterface() != null
-                && resourceType.isAnnotationPresent(Path.class)
-                && canGenerateAllMethods();
+        return getResourceType().isInterface() != null
+                && getResourceType().isAnnotationPresent(Path.class)
+                && super.canGenerate(context);
     }
 
     @Override
     public ResourceDefinition generate(ResourceContext context) throws UnableToCompleteException {
-        setContext(context);
+        resourceDefinition = null;
 
-        resolveImplName();
-        resolvePath();
-        resolveSecured();
-
-        resourceDefinition = new ResourceDefinition(resourceType, packageName, implName, path, secured);
-
-        PrintWriter printWriter = tryCreate();
-        if (printWriter != null) {
-            imports = Sets.newTreeSet();
-            imports.add(resourceType.getQualifiedSourceName());
-
-            generateMethods();
-
-            mergeTemplate(printWriter);
-            getContext().commit(getLogger(), printWriter);
-
-            registerResourceBinding();
-        }
-
-        return resourceDefinition;
-    }
-
-    @Override
-    protected void populateTemplateVariables(Map<String, Object> variables) {
-        variables.put("imports", imports);
-        variables.put("resourceType", resourceTypeName);
-        variables.put("methods", resourceDefinition.getMethodDefinitions());
+        return super.generate(context);
     }
 
     @Override
@@ -120,74 +74,39 @@ public class TopLevelResourceGenerator extends AbstractVelocityGenerator impleme
     }
 
     @Override
-    protected String getPackageName() {
-        return packageName;
+    protected String getImplName() {
+        return getResourceType().getSimpleSourceName() + IMPL;
     }
 
     @Override
-    protected String getImplName() {
-        return implName;
-    }
+    protected ResourceDefinition getResourceDefinition() {
+        if (resourceDefinition == null) {
+            String path = resolvePath();
+            boolean secured = resolveSecured();
 
-    private void setContext(ResourceContext context) {
-        this.context = context;
-        this.resourceType = context.getResourceType();
-    }
-
-    private void resolveImplName() {
-        this.resourceTypeName = resourceType.getSimpleSourceName();
-        this.packageName = resourceType.getPackage().getName();
-        this.implName = resourceTypeName + IMPL;
-    }
-
-    private void resolvePath() {
-        path = PathResolver.resolve(resourceType);
-    }
-
-    private void resolveSecured() {
-        secured = !resourceType.isAnnotationPresent(NoXsrfHeader.class);
-    }
-
-    private void generateMethods() throws UnableToCompleteException {
-        List<JMethod> methods = Arrays.asList(resourceType.getInheritableMethods());
-
-        for (JMethod method : methods) {
-            generateMethod(method);
+            resourceDefinition =
+                    new ResourceDefinition(getResourceType(), getPackageName(), getImplName(), path, secured);
         }
+
+        return resourceDefinition;
     }
 
-    private void generateMethod(JMethod method) throws UnableToCompleteException {
-        ResourceMethodContext methodContext = new ResourceMethodContext(resourceDefinition, context, method);
-        ResourceMethodGenerator generator =
-                getGenerator(getLogger(), resourceMethodGenerators, methodContext);
-        ResourceMethodDefinition methodDefinition = generator.generate(methodContext);
+    @Override
+    protected void commit(PrintWriter printWriter) {
+        super.commit(printWriter);
 
-        resourceDefinition.addMethodDefinition(methodDefinition);
-        imports.addAll(methodDefinition.getImports());
+        registerResourceBinding();
+    }
+
+    private String resolvePath() {
+        return PathResolver.resolve(getResourceType());
+    }
+
+    private boolean resolveSecured() {
+        return !getResourceType().isAnnotationPresent(NoXsrfHeader.class);
     }
 
     private void registerResourceBinding() {
-        RegisterGinBindingEvent event =
-                new RegisterGinBindingEvent(new ClassDefinition(resourceType), getClassDefinition(), true);
-        eventBus.post(event);
-    }
-
-    private boolean canGenerateAllMethods() {
-        List<JMethod> methods = Arrays.asList(resourceType.getInheritableMethods());
-        boolean canGenerate = true;
-
-        for (JMethod method : methods) {
-            ResourceMethodContext methodContext = new ResourceMethodContext(null, context, method);
-            ResourceMethodGenerator generator =
-                    findGenerator(getLogger(), resourceMethodGenerators, methodContext);
-
-            if (generator == null) {
-                canGenerate = false;
-                getLogger().debug("Cannot find a resource method generator for `%s#%s`.",
-                        context.getResourceType().getQualifiedSourceName(), method.getName());
-            }
-        }
-
-        return canGenerate;
+        RegisterGinBindingEvent.postSingleton(eventBus, new ClassDefinition(getResourceType()), getClassDefinition());
     }
 }

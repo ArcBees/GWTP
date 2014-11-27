@@ -75,7 +75,11 @@ public abstract class AbstractGenerator implements HasPriority {
         }
     }
 
-    protected PrintWriter tryCreate(String packageName, String className) throws UnableToCompleteException {
+    protected PrintWriter tryCreate(String packageName, String className) {
         return getContext().tryCreate(getLogger(), packageName, className);
+    }
+
+    protected void commit(PrintWriter printWriter) {
+        getContext().commit(getLogger(), printWriter);
     }
 }
